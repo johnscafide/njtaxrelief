@@ -51,6 +51,48 @@ function togglePAS(element) {
     }
 }
 
+// Persistent Lead Magnet Logic
+document.addEventListener("DOMContentLoaded", function() {
+    // Check if they've already seen it this session
+    if (!sessionStorage.getItem('rebateModalSeen')) {
+        setTimeout(() => {
+            showRebateModal();
+            sessionStorage.setItem('rebateModalSeen', 'true');
+        }, 3000); // Shows after 3 seconds
+    } else {
+        // If they already saw it/minimized it, show the sticky link
+        document.getElementById('sticky-rebate-link').style.display = 'inline-flex';
+    }
+});
+
+function showRebateModal() {
+    document.getElementById('rebate-modal').style.display = 'flex';
+    document.getElementById('sticky-rebate-link').style.display = 'none';
+}
+
+function minimizeRebateModal() {
+    document.getElementById('rebate-modal').style.display = 'none';
+    document.getElementById('sticky-rebate-link').style.display = 'inline-flex';
+}
+
+function downloadChecklist() {
+    const email = document.getElementById('modal-email').value;
+    if (email) {
+        // Trigger EmailJS to notify you of a new lead
+        emailjs.send("service_gptqbyx", "template_q1kaure", {
+            email: email,
+            topic: "Checklist Download"
+        });
+        
+        // Open the PDF
+        window.open('NJ_Tax_Relief_Checklist.pdf', '_blank');
+        minimizeRebateModal();
+    } else {
+        alert("Please enter your email to receive the checklist.");
+    }
+}
+
+
 // --- FAQ Accordion Logic ---
 function toggleFAQ(element) {
     const faqItem = element.parentElement;
