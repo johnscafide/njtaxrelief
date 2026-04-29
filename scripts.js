@@ -32,6 +32,40 @@ function submitLead() {
         });
 }
 
+// --- News Strip Auto-Rotation ---
+document.addEventListener("DOMContentLoaded", function() {
+    const newsItems = document.querySelectorAll('.news-item');
+    let currentIndex = 0;
+
+    if (newsItems.length > 1) {
+        // Initially hide all but the first item
+        newsItems.forEach((item, index) => {
+            if (index !== 0) item.style.display = 'none';
+        });
+
+        setInterval(() => {
+            // Fade out current item
+            newsItems[currentIndex].style.opacity = '0';
+            
+            setTimeout(() => {
+                newsItems[currentIndex].style.display = 'none';
+                
+                // Move to next item
+                currentIndex = (currentIndex + 1) % newsItems.length;
+                
+                // Show and fade in next item
+                newsItems[currentIndex].style.display = 'flex';
+                newsItems[currentIndex].style.opacity = '0';
+                
+                // Trigger reflow for transition
+                newsItems[currentIndex].offsetHeight; 
+                newsItems[currentIndex].style.transition = 'opacity 0.5s ease';
+                newsItems[currentIndex].style.opacity = '1';
+            }, 500); // Half-second for the fade-out
+        }, 4000); // Rotate every 4 seconds
+    }
+});
+
 // --- PAS-1 Walkthrough Accordion Logic ---
 function togglePAS(element) {
     // Find the parent item
