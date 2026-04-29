@@ -47,4 +47,23 @@
     btn.classList.add('active-choice');
     document.getElementById(`next${currentStep}`).disabled = false;
   }
+
+function calcStayNJ() {
+  const tax = parseFloat(document.getElementById('staynj-tax').value) || 0;
+  const income = parseFloat(document.getElementById('staynj-income').value) || 0;
+  const resultDiv = document.getElementById('staynj-result');
+  
+  if (tax > 0 && income <= 500000) {
+    // Stay NJ is 50% of taxes, capped at $6,500
+    let credit = Math.min((tax * 0.5), 6500);
+    document.getElementById('staynj-amount').innerText = `$${credit.toLocaleString()}`;
+    resultDiv.style.display = 'block';
+  } else if (income > 500000) {
+    document.getElementById('staynj-amount').innerText = "Ineligible";
+    document.getElementById('staynj-label').innerText = "Income exceeds $500k limit";
+    resultDiv.style.display = 'block';
+  }
+}
+
+
 </script>
