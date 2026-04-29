@@ -178,6 +178,8 @@
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">NJPropertyTax<span>Relief</span>.com</a>
     <div class="nav-links">
+      <a href="javascript:void(0)" id="sticky-rebate-link" class="nav-cta urgency-link" style="display:none; background:var(--gold); color:var(--navy-dark);" onclick="showRebateModal()">
+    <i class="fas fa-exclamation-circle"></i> Don't Forget Your Rebate!</a>
       <a href="anchor-program.html">ANCHOR</a>
       <a href="pas-1-guide.html">PAS-1 Help</a>
       <a href="senior-programs.html">Seniors</a>
@@ -747,6 +749,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <script src="scripts.js"></script>
+
+<div id="rebate-modal" class="subtle-modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-file-download"></i> Get the 2026 Filing Checklist</h3>
+        <p>Ensure you have every document ready before the Nov 2nd deadline. Don't let a missing paper delay your $1,500+ rebate.</p>
+        <div class="modal-form">
+            <input type="email" id="modal-email" placeholder="Enter your email">
+            <button onclick="downloadChecklist()">Get My Checklist →</button>
+        </div>
+        <p class="minimize-note" onclick="minimizeRebateModal()">Minimize & stay in top bar</p>
+    </div>
+</div>
   
 </body>
 </html>
