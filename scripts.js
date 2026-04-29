@@ -32,6 +32,18 @@ function submitLead() {
         });
 }
 
+function toggleMobileMenu() {
+    const navLinks = document.getElementById('navLinks');
+    navLinks.classList.toggle('active');
+}
+
+// Automatically close menu when a link is clicked
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('navLinks').classList.remove('active');
+    });
+});
+
 // --- News Strip Auto-Rotation ---
 document.addEventListener("DOMContentLoaded", function() {
     const newsItems = document.querySelectorAll('.news-item');
