@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- MAIN PAGE -->
+  <!-- HOMEPAGE -->
   <url>
     <loc>https://njpropertytaxrelief.com/</loc>
     <lastmod>2026-04-29</lastmod>
@@ -10,92 +9,104 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- ANCHOR PROGRAM SECTION -->
+  <!-- DEDICATED PROGRAM PAGES — highest priority after homepage -->
+  <url>
+    <loc>https://njpropertytaxrelief.com/anchor-program.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://njpropertytaxrelief.com/pas-1-guide.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://njpropertytaxrelief.com/senior-programs.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://njpropertytaxrelief.com/veterans.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://njpropertytaxrelief.com/property-tax-appeal.html</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- HOMEPAGE ANCHOR SECTIONS -->
   <url>
     <loc>https://njpropertytaxrelief.com/#anchor</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
-  <!-- ANCHOR ELIGIBILITY CALCULATOR -->
   <url>
     <loc>https://njpropertytaxrelief.com/#calc</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
-  <!-- PAS-1 GUIDE -->
   <url>
     <loc>https://njpropertytaxrelief.com/#pas1guide</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
   </url>
 
-  <!-- SENIOR PROGRAMS -->
   <url>
     <loc>https://njpropertytaxrelief.com/#seniors</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
 
-  <!-- VETERANS -->
   <url>
     <loc>https://njpropertytaxrelief.com/#veterans</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- PROPERTY TAX APPEAL -->
   <url>
     <loc>https://njpropertytaxrelief.com/#appeal</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- MORTGAGE CALCULATOR -->
   <url>
     <loc>https://njpropertytaxrelief.com/#tools</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.5</priority>
   </url>
 
-  <!-- HOME VALUE ESTIMATOR -->
-  <url>
-    <loc>https://njpropertytaxrelief.com/#homeworth</loc>
-    <lastmod>2026-04-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- HOME SEARCH -->
-  <url>
-    <loc>https://njpropertytaxrelief.com/#search</loc>
-    <lastmod>2026-04-29</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- FAQ -->
   <url>
     <loc>https://njpropertytaxrelief.com/#faq</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
 
-  <!-- CONTACT -->
   <url>
     <loc>https://njpropertytaxrelief.com/#contact</loc>
     <lastmod>2026-04-29</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
 
 </urlset>
