@@ -52,14 +52,22 @@
 <nav>
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">NJPropertyTax<span>Relief</span>.com</a>
-    <div class="nav-links">
+    
+    <div class="mobile-menu-icon" onclick="toggleMobileMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="javascript:void(0)" id="sticky-rebate-link" class="nav-cta urgency-link" style="display:none; background:var(--red); color:white;" onclick="showRebateModal()">
+        <i class="fas fa-exclamation-circle"></i>&ensp;Don't Forget Your Rebate!
+      </a>
       <a href="anchor-program.html">ANCHOR</a>
       <a href="pas-1-guide.html">PAS-1 Help</a>
       <a href="senior-programs.html">Seniors</a>
-      <a href="veterans.html" style="border-bottom-color:var(--gold);color:#fff;">Veterans</a>
+      <a href="veterans.html">Veterans</a>
       <a href="property-tax-appeal.html">Tax Appeal</a>
-      <a href="index.html#tools">Calculators</a>
-      <a href="index.html#contact" class="nav-cta">Talk to an Expert</a>
+      <a href="#tools">Calculators</a>
+      <a href="#contact" class="nav-cta">Talk to an Expert</a>
     </div>
   </div>
 </nav>
