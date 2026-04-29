@@ -411,6 +411,19 @@ footer { background: var(--navy-dark); color: #7090b0; padding: 40px 24px; font-
    OTHER
    ======= */
 
+.news-items {
+    display: flex;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.news-item {
+    transition: opacity 0.5s ease;
+    width: 100%; /* Ensures only one shows at a time */
+    white-space: nowrap; 
+}
+
 .subtle-modal {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(10, 24, 55, 0.85); display: none; align-items: center; justify-content: center; z-index: 10000;
