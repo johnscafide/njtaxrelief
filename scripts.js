@@ -32,6 +32,42 @@ function submitLead() {
         });
 }
 
+// --- PAS-1 Walkthrough Accordion Logic ---
+function togglePAS(element) {
+    // Find the parent item
+    const item = element.parentElement;
+    
+    // Check if it's already active
+    const isActive = item.classList.contains('active');
+    
+    // Close all other open items (optional, but cleaner)
+    document.querySelectorAll('.pas-acc-item').forEach(acc => {
+        acc.classList.remove('active');
+    });
+    
+    // If it wasn't active, open it
+    if (!isActive) {
+        item.classList.add('active');
+    }
+}
+
+// --- FAQ Accordion Logic ---
+function toggleFAQ(element) {
+    const faqItem = element.parentElement;
+    const isActive = faqItem.classList.contains('active');
+    
+    // Close all other FAQs
+    document.querySelectorAll('.faq-item').forEach(faq => {
+        faq.classList.remove('active');
+    });
+    
+    // Toggle current
+    if (!isActive) {
+        faqItem.classList.add('active');
+    }
+}
+
+
 // --- ANCHOR Calculator Logic ---
 let currentStep = 1;
 
