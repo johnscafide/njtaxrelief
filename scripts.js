@@ -1,4 +1,3 @@
-<script>
   (function() {
     // Initialize EmailJS with your Public Key
     emailjs.init("u262kw5AoJcBI342V"); 
@@ -64,6 +63,3 @@ function calcStayNJ() {
     resultDiv.style.display = 'block';
   }
 }
-
-
-</script>
