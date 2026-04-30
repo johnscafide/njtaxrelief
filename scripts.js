@@ -56,19 +56,36 @@ function submitLead() {
 /* ============================================================
    MOBILE MENU
    ============================================================ */
-function toggleMobileMenu() {
-  var navLinks = document.getElementById('navLinks');
-  if (navLinks) navLinks.classList.toggle('active');
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.querySelectorAll('.nav-links a').forEach(function (link) {
-    link.addEventListener('click', function () {
-      var navLinks = document.getElementById('navLinks');
-      if (navLinks) navLinks.classList.remove('active');
-    });
-  });
+// 1. LOAD NAV AUTOMATICALLY
+document.addEventListener("DOMContentLoaded", function() {
+    const navElement = document.getElementById('main-nav');
+    if (navElement) {
+        fetch('nav.html')
+            .then(response => response.text())
+            .then(data => {
+                navElement.innerHTML = data;
+                // Re-initialize mobile menu listener after loading
+                initNavLogic();
+            });
+    }
 });
+
+function initNavLogic() {
+    // Re-link mobile toggle
+    window.toggleMobileMenu = function() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('active');
+    };
+
+    // Toggle Mega Menu on Mobile (Click instead of Hover)
+    const megaTrigger = document.querySelector('.mega-trigger');
+    if (window.innerWidth <= 992 && megaTrigger) {
+        megaTrigger.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+}
 
 /* ============================================================
    NEWS STRIP AUTO-ROTATION
