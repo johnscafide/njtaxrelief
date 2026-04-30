@@ -1765,6 +1765,25 @@
 
 </div>
 
+<div id="rebate-popup" class="floating-popup">
+    <div class="popup-content">
+        <button class="popup-close" onclick="minimizePopup()"><i class="fas fa-times"></i></button>
+        <div class="popup-header">
+            <i class="fas fa-file-pdf"></i>
+            <h4>2026 Filing Checklist</h4>
+        </div>
+        <p>Don't miss the <strong>Nov 2nd</strong> deadline. Get the exact list of docs you need for your $1,500+ rebate.</p>
+        <div class="popup-form">
+            <input type="email" id="popup-email" placeholder="Enter your email">
+            <button onclick="handleChecklistDownload()">Download PDF <i class="fas fa-download"></i></button>
+        </div>
+    </div>
+</div>
+
+<div id="popup-minimized" class="minimized-tab" onclick="restorePopup()">
+    <i class="fas fa-file-invoice-dollar"></i> Get 2026 Checklist
+</div>
+
   
 
 </body>
