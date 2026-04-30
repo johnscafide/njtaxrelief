@@ -28,6 +28,31 @@
 body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
 h1, h2, h3, h4 { font-family: 'Open Sans', sans-serif; font-weight: 700; }
 
+/* Desktop View */
+.calc-container {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+    align-items: start;
+}
+
+/* Mobile View (Screens smaller than 992px) */
+@media (max-width: 992px) {
+    .calc-container {
+        grid-template-columns: 1fr; /* Stacks columns vertically */
+        gap: 20px;
+    }
+
+    .calc-wrap {
+        max-width: 100%; /* Ensures calculator takes full width */
+    }
+
+    .calc-sidebar {
+        width: 100%; /* Ensures sidebar takes full width */
+        order: 2;    /* Moves sidebar below the calculator */
+    }
+}
+
 /* MEGA MENU BASE */
 .mega-dropdown { position: static; } /* Required for full-width content */
 
