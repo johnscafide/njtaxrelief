@@ -681,6 +681,81 @@ footer { background: var(--navy-dark); color: #7090b0; padding: 40px 24px; font-
     100% { transform: scale(1); }
 }
 
+/* FLOATING POPUP */
+.floating-popup {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 340px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(10, 24, 55, 0.2);
+    z-index: 9999;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.popup-content { padding: 24px; position: relative; }
+
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 16px;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+.popup-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.popup-header i { font-size: 24px; color: var(--gold); }
+.popup-header h4 { font-family: 'Playfair Display', serif; margin: 0; color: var(--navy); font-size: 18px; }
+
+.popup-content p { font-size: 13px; line-height: 1.5; color: var(--text); margin-bottom: 16px; }
+
+.popup-form { display: flex; flex-direction: column; gap: 10px; }
+.popup-form input {
+    padding: 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.popup-form button {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.popup-form button:hover { background: var(--navy-dark); }
+
+/* MINIMIZED TAB */
+.minimized-tab {
+    position: fixed;
+    bottom: 0;
+    right: 50px;
+    background: var(--gold);
+    color: var(--navy-dark);
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+    z-index: 9998;
+    display: none; /* Shown via JS */
+}
+
+@media (max-width: 768px) {
+    .floating-popup { width: calc(100% - 40px); bottom: 20px; right: 20px; }
+}
+
 
 /* ============================================================
    RESPONSIVE — MOBILE
