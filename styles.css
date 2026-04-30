@@ -28,7 +28,7 @@
 body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); font-size: 16px; line-height: 1.6; }
 h1, h2, h3, h4 { font-family: 'Open Sans', sans-serif; font-weight: 700; }
 
-/* Desktop View */
+/* --- Calculator Responsive Grid --- */
 .calc-container {
     display: grid;
     grid-template-columns: 1fr 320px;
@@ -36,23 +36,44 @@ h1, h2, h3, h4 { font-family: 'Open Sans', sans-serif; font-weight: 700; }
     align-items: start;
 }
 
+.calc-wrap {
+    max-width: 680px;
+    margin: 0;
+}
+
+.calc-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Sidebar Internal Styling */
+.sidebar-agent-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+.sidebar-agent-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
+.sidebar-agent-name { font-weight: 700; color: var(--navy-dark); font-size: 15px; }
+.sidebar-agent-title { font-size: 12px; color: var(--text-muted); }
+.sidebar-quote { font-size: 13px; line-height: 1.6; color: var(--text); margin-bottom: 15px; }
+.sidebar-btn { display: block; text-align: center; font-size: 13px; padding: 10px; }
+.sidebar-highlights-title { font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 12px; font-size: 16px; }
+.sidebar-list { font-size: 13px; list-style: none; padding: 0; }
+.sidebar-list li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+
 /* Mobile View (Screens smaller than 992px) */
 @media (max-width: 992px) {
     .calc-container {
-        grid-template-columns: 1fr; /* Stacks columns vertically */
-        gap: 20px;
+        grid-template-columns: 1fr;
+        gap: 30px;
     }
-
+    
     .calc-wrap {
-        max-width: 100%; /* Ensures calculator takes full width */
+        max-width: 100%;
     }
-
+    
     .calc-sidebar {
-        width: 100%; /* Ensures sidebar takes full width */
-        order: 2;    /* Moves sidebar below the calculator */
+        order: 2; /* Moves sidebar below the calculator */
+        width: 100%;
     }
 }
-
 /* MEGA MENU BASE */
 .mega-dropdown { position: static; } /* Required for full-width content */
 
