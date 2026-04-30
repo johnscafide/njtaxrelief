@@ -717,154 +717,114 @@
 
 
 
-<!-- ANCHOR CALCULATOR -->
-
 <section class="section" id="calc">
-
   <div class="section-inner">
-
     <div class="section-label">Eligibility Checker</div>
-
     <h2 class="section-title">ANCHOR Benefit Estimator</h2>
-
     <p class="section-subtitle">Answer 5 quick questions and find out what you're owed. Takes about 90 seconds.</p>
 
-    <div style="max-width:680px;">
-
-      <div class="calc-wrap">
-
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start;">
+      
+      <div class="calc-wrap" style="max-width: 680px; margin: 0;">
         <div class="calc-header">
-
           <h3><i class="fas fa-calculator" style="margin-right:10px;"></i>ANCHOR Benefit Estimator</h3>
-
           <p>Estimate only — actual eligibility determined by the NJ Division of Taxation.</p>
-
         </div>
-
         <div class="calc-body">
-
           <div class="progress-bar"><div class="progress-fill" id="progress" style="width:16%"></div></div>
-
+          
           <div class="calc-step active" id="step1">
-
             <div class="step-question">Do you own or rent your home?</div>
-
             <div class="step-hint">This determines which ANCHOR benefit track applies to you.</div>
-
             <div class="choice-grid">
-
               <button class="choice-btn" onclick="selectChoice('tenure','own',this)"><span class="choice-label"><i class="fas fa-house" style="margin-right:6px;color:var(--navy);"></i>I Own</span><span class="choice-sub">I hold title or have a mortgage</span></button>
-
               <button class="choice-btn" onclick="selectChoice('tenure','rent',this)"><span class="choice-label"><i class="fas fa-building" style="margin-right:6px;color:var(--navy);"></i>I Rent</span><span class="choice-sub">I pay rent to a landlord</span></button>
-
             </div>
-
             <div class="calc-nav"><div></div><button class="btn-next" id="next1" disabled onclick="nextStep(1)">Next →</button></div>
-
           </div>
 
           <div class="calc-step" id="step2">
-
             <div class="step-question">Was this your primary NJ residence on October 1 of the benefit year?</div>
-
             <div class="step-hint">Your main home — not a vacation home or investment property.</div>
-
             <div class="choice-grid">
-
               <button class="choice-btn" onclick="selectChoice('primary','yes',this)"><span class="choice-label">Yes — my main NJ home</span></button>
-
               <button class="choice-btn" onclick="selectChoice('primary','no',this)"><span class="choice-label">No — second home or had moved</span></button>
-
             </div>
-
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(2)">← Back</button><button class="btn-next" id="next2" disabled onclick="nextStep(2)">Next →</button></div>
-
           </div>
 
           <div class="calc-step" id="step3">
-
             <div class="step-question">What was your approximate gross income for the benefit year?</div>
-
             <div class="step-hint">All sources: wages, Social Security, retirement, investments — combined.</div>
-
             <div class="choice-grid">
-
               <button class="choice-btn" onclick="selectChoice('income','low',this)"><span class="choice-label">Under $150,000</span></button>
-
               <button class="choice-btn" id="income-mid-btn" onclick="selectChoice('income','mid',this)"><span class="choice-label">$150,001–$250,000</span><span class="choice-sub">Homeowners only</span></button>
-
               <button class="choice-btn" onclick="selectChoice('income','high',this)"><span class="choice-label">Over $250,000</span></button>
-
             </div>
-
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(3)">← Back</button><button class="btn-next" id="next3" disabled onclick="nextStep(3)">Next →</button></div>
-
           </div>
 
           <div class="calc-step" id="step4">
-
             <div class="step-question">Were you 65 or older during the benefit year?</div>
-
             <div class="step-hint">Renters 65+ get a higher benefit ($700 vs $450).</div>
-
             <div class="choice-grid">
-
               <button class="choice-btn" onclick="selectChoice('age','yes',this)"><span class="choice-label">Yes, 65 or older</span></button>
-
               <button class="choice-btn" onclick="selectChoice('age','no',this)"><span class="choice-label">No, under 65</span></button>
-
             </div>
-
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(4)">← Back</button><button class="btn-next" id="next4" disabled onclick="nextStep(4)">Next →</button></div>
-
           </div>
 
           <div class="calc-step" id="step5">
-
             <div class="step-question">Are your property taxes current (or on a payment plan)?</div>
-
             <div class="step-hint">More than 12 months delinquent may disqualify homeowners.</div>
-
             <div class="choice-grid">
-
               <button class="choice-btn" onclick="selectChoice('taxes','yes',this)"><span class="choice-label">Yes, current</span><span class="choice-sub">Or on a payment plan</span></button>
-
               <button class="choice-btn" onclick="selectChoice('taxes','no',this)"><span class="choice-label">Unsure / Past Due</span></button>
-
             </div>
-
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(5)">← Back</button><button class="btn-next" id="next5" disabled onclick="nextStep(5)">Next →</button></div>
-
           </div>
 
           <div class="calc-step" id="step6">
-
             <div class="step-question">Almost done — where should we send your results?</div>
-
             <div class="step-hint">We'll include local deadlines and next steps.</div>
-
             <div class="form-group"><label>Your Name</label><input type="text" id="lead-name" placeholder="First and last name"></div>
-
             <div class="form-group"><label>Email Address</label><input type="email" id="lead-email" placeholder="your@email.com"></div>
-
             <div class="form-group"><label>Phone (optional)</label><input type="tel" id="lead-phone" placeholder="(xxx) xxx-xxxx"></div>
-
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(6)">← Back</button><button class="btn-next" onclick="submitCalcLead()">See My Benefit →</button></div>
-
           </div>
 
           <div class="calc-step" id="step7"><div id="result-content"></div></div>
-
         </div>
-
       </div>
 
+      <aside class="calc-sidebar" style="display: flex; flex-direction: column; gap: 20px;">
+        <div class="prog-card-new" style="padding: 24px; border-radius: 12px; background: var(--info-bg); border: 1px solid var(--border);">
+          <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+            <img src="johnprofile.jpg" alt="John Scafide" style="width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover;">
+            <div>
+              <div style="font-weight: 700; color: var(--navy-dark); font-size: 15px;">John Scafide</div>
+              <div style="font-size: 12px; color: var(--text-muted);">15+ Year Tax Pro</div>
+            </div>
+          </div>
+          <p style="font-size: 13px; line-height: 1.6; color: var(--text); margin-bottom: 15px;">
+            "I've helped hundreds of South Jersey neighbors claim their rebates. If you get stuck on an income question, just reach out."
+          </p>
+          <a href="#contact" class="btn-outline" style="display: block; text-align: center; font-size: 13px; padding: 10px;">Ask a Free Question</a>
+        </div>
+
+        <div class="prog-card-new gold" style="padding: 20px; border-radius: 12px; background: #fff;">
+          <h4 style="font-family: 'Playfair Display', serif; color: var(--navy); margin-bottom: 12px; font-size: 16px;">Rebate Highlights</h4>
+          <ul class="lead-points" style="font-size: 13px; list-style: none; padding: 0;">
+            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--green); margin-right: 8px;"></i> <strong>$1,500</strong> for homeowners</li>
+            <li style="margin-bottom: 8px;"><i class="fas fa-check" style="color: var(--green); margin-right: 8px;"></i> <strong>$700</strong> for senior renters</li>
+            <li><i class="fas fa-check" style="color: var(--green); margin-right: 8px;"></i> <strong>$20</strong> expert filing help</li>
+          </ul>
+        </div>
+      </aside>
+
     </div>
-
   </div>
-
 </section>
-
 
 
 <!-- STAY NJ CALCULATOR -->
