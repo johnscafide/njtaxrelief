@@ -12,6 +12,49 @@
   emailjs.init({ publicKey: 'u262kw5AoJcBI342V' });
 })();
 
+// Show popup after 4 seconds
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(function() {
+        if (!sessionStorage.getItem('checklistClosed')) {
+            document.getElementById('rebate-popup').style.display = 'block';
+        } else {
+            document.getElementById('popup-minimized').style.display = 'block';
+        }
+    }, 4000);
+});
+
+function minimizePopup() {
+    document.getElementById('rebate-popup').style.display = 'none';
+    document.getElementById('popup-minimized').style.display = 'block';
+    sessionStorage.setItem('checklistClosed', 'true');
+}
+
+function restorePopup() {
+    document.getElementById('rebate-popup').style.display = 'block';
+    document.getElementById('popup-minimized').style.display = 'none';
+}
+
+function handleChecklistDownload() {
+    const email = document.getElementById('popup-email').value.trim();
+    if (!email) {
+        alert("Please enter your email to receive the checklist.");
+        return;
+    }
+
+    // Send to your EmailJS (Keep your existing service IDs)
+    emailjs.send('service_gptqbyx', 'template_q1kaure', {
+        email: email,
+        topic: 'Checklist Download Request',
+        name: 'New Lead'
+    });
+
+    // Trigger Download
+    window.open('NJ_Tax_Relief_Checklist.pdf', '_blank');
+    
+    // Auto-minimize after download
+    minimizePopup();
+}
+
 /* ============================================================
    CONTACT FORM SUBMISSION
    ============================================================ */
