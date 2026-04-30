@@ -12,6 +12,30 @@
   emailjs.init({ publicKey: 'u262kw5AoJcBI342V' });
 })();
 
+function handleAuditRequest() {
+    const address = document.getElementById('audit-address').value.trim();
+    const name = document.getElementById('audit-name').value.trim();
+    const email = document.getElementById('audit-email').value.trim();
+
+    if (!address || !email) {
+        alert("Please provide the property address and your email.");
+        return;
+    }
+
+    // Send to EmailJS
+    emailjs.send('service_gptqbyx', 'template_q1kaure', {
+        name: name,
+        email: email,
+        topic: 'Tax-Optimized Listing Audit Request',
+        town: address
+    }).then(() => {
+        alert("Success! John or Heather will begin your audit and reach out within 24 hours.");
+        document.getElementById('audit-address').value = "";
+        document.getElementById('audit-name').value = "";
+        document.getElementById('audit-email').value = "";
+    });
+}
+
 // Show popup after 4 seconds
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
