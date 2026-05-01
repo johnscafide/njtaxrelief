@@ -954,6 +954,66 @@ function calcMortgage() {
 }
 
 
+/* --- APPEAL QUIZ LOGIC --- */
+let quizData = { sales: '', reval: '', errors: '', recent: '' };
+
+function quizSelect(key, val, step) {
+    quizData[key] = val;
+    quizNext(step);
+}
+
+function quizNext(currentStep) {
+    document.getElementById(`q-step${currentStep}`).classList.remove('active');
+    document.getElementById(`q-step${currentStep + 1}`).classList.add('active');
+    document.getElementById('quiz-progress').style.width = ((currentStep + 1) * 20) + '%';
+}
+
+function quizPrev(currentStep) {
+    document.getElementById(`q-step${currentStep}`).classList.remove('active');
+    document.getElementById(`q-step${currentStep - 1}`).classList.add('active');
+    document.getElementById('quiz-progress').style.width = ((currentStep - 1) * 20) + '%';
+}
+
+function submitQuiz() {
+    const addr = document.getElementById('quiz-addr').value;
+    const email = document.getElementById('quiz-email').value;
+
+    if (!addr || !email) {
+        alert("Please provide an address and email to receive your report.");
+        return;
+    }
+
+    // Calculate Score (Simple Logic)
+    let score = 0;
+    if (quizData.sales === 'yes') score += 40;
+    if (quizData.reval === 'yes') score += 30;
+    if (quizData.errors === 'yes') score += 20;
+    if (quizData.recent === 'no') score += 10;
+
+    // Render Result
+    const resultDiv = document.getElementById('q-step5');
+    resultDiv.classList.remove('active');
+    
+    const finalDiv = document.getElementById('q-result');
+    finalDiv.classList.add('active');
+
+    let rating = score > 60 ? "HIGH" : score > 30 ? "MODERATE" : "LOW";
+    let color = score > 60 ? "var(--green)" : "var(--gold)";
+
+    document.getElementById('quiz-result-render').innerHTML = `
+        <h2 style="color:${color}; font-size:48px;">${score}%</h2>
+        <h3>${rating} Probability</h3>
+        <p style="margin: 20px 0;">Based on your inputs, you have a ${rating.toLowerCase()} chance of a successful tax appeal.</p>
+        <div class="prog-card-new gold" style="text-align:left;">
+            <strong>Next Steps:</strong> John will pull the live MLS comparables for <strong>${addr}</strong> and email them to you shortly to verify this score.
+        </div>
+        <a href="index.html" class="btn-outline" style="margin-top:20px; display:inline-block;">Back to Home</a>
+    `;
+
+    // Here you would trigger your EmailJS send for the lead
+    console.log("Quiz Lead:", { addr, email, score, quizData });
+}
+
 
 /* ============================================================
 
