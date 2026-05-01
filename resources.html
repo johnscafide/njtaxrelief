@@ -73,10 +73,13 @@
   </div>
 </div>
 
-<div style="margin-bottom: 40px; position: relative; max-width: 600px;">
-    <i class="fas fa-search" style="position: absolute; left: 15px; top: 15px; color: var(--navy); opacity: 0.5;"></i>
+<div class="search-wrapper">
+    <i class="fas fa-search"></i>
     <input type="text" id="townSearch" onkeyup="filterTowns()" placeholder="Search by town or zip code...">
 </div>
+
+<div id="townDirectory">
+    </div>
 
 <div class="services-gateway-grid" id="townDirectory">
     <p>Loading South Jersey town data...</p>
