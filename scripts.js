@@ -901,15 +901,13 @@ function resetCalc() {
 
 }
 
-/* --- MORTGAGE CALCULATOR LOGIC --- */
+/* --- MORTGAGE CALCULATOR LOGIC (SILENT VALIDATION) --- */
 function calcMortgage() {
-    // 1. Get Elements safely
     const priceEl = document.getElementById('m-price');
     const downEl = document.getElementById('m-down');
     const rateEl = document.getElementById('m-rate');
     const termEl = document.getElementById('m-term');
     
-    // 2. Output Elements
     const monthlyDisplay = document.getElementById('m-monthly');
     const principalDisplay = document.getElementById('m-principal');
     const interestDisplay = document.getElementById('m-interest');
@@ -919,44 +917,41 @@ function calcMortgage() {
     const resultBox = document.getElementById('mort-top-result');
     const breakdown = document.getElementById('mort-breakdown');
 
-    // 3. Validation
-    if (!priceEl || !rateEl || !monthlyDisplay) {
-        console.error("Mortgage elements missing from page.");
-        return;
-    }
-
+    // Get values
     const price = parseFloat(priceEl.value) || 0;
     const downPct = parseFloat(downEl.value) || 0;
     const rate = parseFloat(rateEl.value) || 0;
     const term = parseInt(termEl.value) || 30;
 
-    if (price <= 0 || rate <= 0) {
-        alert("Please enter a valid home price and interest rate.");
-        return;
+    // SILENT CHECK: Only run the math if we have a price and a rate.
+    // This stops the error messages while the user is still typing.
+    if (price > 0 && rate > 0) {
+        const principal = price * (1 - (downPct / 100));
+        const monthlyRate = (rate / 100) / 12;
+        const numberOfPayments = term * 12;
+
+        const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+        
+        const totalPaid = monthlyPayment * numberOfPayments;
+        const totalInterest = totalPaid - principal;
+
+        // Update Text
+        if (monthlyDisplay) monthlyDisplay.innerText = '$' + Math.round(monthlyPayment).toLocaleString();
+        if (principalDisplay) principalDisplay.innerText = '$' + Math.round(principal).toLocaleString();
+        if (interestDisplay) interestDisplay.innerText = '$' + Math.round(totalInterest).toLocaleString();
+        if (totalDisplay) totalDisplay.innerText = '$' + Math.round(totalPaid).toLocaleString();
+
+        // Reveal the sidebar results
+        if (emptyState) emptyState.style.display = 'none';
+        if (resultBox) resultBox.style.display = 'block';
+        if (breakdown) breakdown.style.display = 'block';
+    } else {
+        // If they clear the boxes, go back to the empty state silently
+        if (emptyState) emptyState.style.display = 'block';
+        if (resultBox) resultBox.style.display = 'none';
+        if (breakdown) breakdown.style.display = 'none';
     }
-
-    // 4. Calculations
-    const principal = price * (1 - (downPct / 100));
-    const monthlyRate = (rate / 100) / 12;
-    const numberOfPayments = term * 12;
-
-    const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
-    
-    const totalPaid = monthlyPayment * numberOfPayments;
-    const totalInterest = totalPaid - principal;
-
-    // 5. Update UI
-    monthlyDisplay.innerText = '$' + Math.round(monthlyPayment).toLocaleString();
-    if (principalDisplay) principalDisplay.innerText = '$' + Math.round(principal).toLocaleString();
-    if (interestDisplay) interestDisplay.innerText = '$' + Math.round(totalInterest).toLocaleString();
-    if (totalDisplay) totalDisplay.innerText = '$' + Math.round(totalPaid).toLocaleString();
-
-    // 6. Toggle Visibility
-    if (emptyState) emptyState.style.display = 'none';
-    if (resultBox) resultBox.style.display = 'block';
-    if (breakdown) breakdown.style.display = 'block';
 }
-
 
 
 
