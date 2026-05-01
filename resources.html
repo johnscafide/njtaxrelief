@@ -72,6 +72,64 @@
   </div>
 </div>
 
+<section class="section section-alt">
+    <div class="section-inner">
+        <span class="section-label">Local Data</span>
+        <h2 class="section-title">South Jersey Town Directory</h2>
+        <p class="section-subtitle">Quick access to municipal tax offices and local rates. Type your town to filter.</p>
+
+        <div style="margin-bottom: 40px; position: relative; max-width: 600px;">
+            <i class="fas fa-search" style="position: absolute; left: 15px; top: 15px; color: var(--navy); opacity: 0.5;"></i>
+            <input type="text" id="townSearch" onkeyup="filterTowns()" placeholder="Search by town (e.g. Sicklerville, Cherry Hill...)" 
+                   style="width: 100%; padding: 15px 15px 15px 45px; border: 2px solid var(--border); border-radius: 30px; font-size: 16px; outline: none; transition: border-color 0.3s;">
+        </div>
+
+        <div class="services-gateway-grid" id="townDirectory">
+            
+            <div class="gateway-card blue town-card" data-town="winslow sicklerville">
+                <div class="gateway-title">Winslow Township</div>
+                <div class="gateway-desc">
+                    <p><strong>Primary Zip:</strong> 08081 (Sicklerville)</p>
+                    <p><strong>Tax Office:</strong> 125 S. Route 73</p>
+                    <p><strong>Phone:</strong> (609) 567-0700</p>
+                </div>
+                <a href="https://www.winslowtownship.com" target="_blank" class="gateway-cta">Official Town Site <i class="fas fa-external-link-alt"></i></a>
+            </div>
+
+            <div class="gateway-card blue town-card" data-town="washington township sewell">
+                <div class="gateway-title">Washington Twp</div>
+                <div class="gateway-desc">
+                    <p><strong>Primary Zip:</strong> 08080 (Sewell)</p>
+                    <p><strong>Tax Office:</strong> 523 Egg Harbor Rd</p>
+                    <p><strong>Phone:</strong> (856) 589-0520</p>
+                </div>
+                <a href="https://www.townshipnj.com" target="_blank" class="gateway-cta">Official Town Site <i class="fas fa-external-link-alt"></i></a>
+            </div>
+
+            <div class="gateway-card blue town-card" data-town="gloucester township blackwood snyder">
+                <div class="gateway-title">Gloucester Twp</div>
+                <div class="gateway-desc">
+                    <p><strong>Primary Zip:</strong> 08012 (Blackwood)</p>
+                    <p><strong>Tax Office:</strong> 1261 Chews Landing Rd</p>
+                    <p><strong>Phone:</strong> (856) 228-4000</p>
+                </div>
+                <a href="https://glotwp.com" target="_blank" class="gateway-cta">Official Town Site <i class="fas fa-external-link-alt"></i></a>
+            </div>
+
+            <div class="gateway-card blue town-card" data-town="cherry hill">
+                <div class="gateway-title">Cherry Hill</div>
+                <div class="gateway-desc">
+                    <p><strong>Primary Zip:</strong> 08003, 08034</p>
+                    <p><strong>Tax Office:</strong> 820 Mercer Street</p>
+                    <p><strong>Phone:</strong> (856) 488-7880</p>
+                </div>
+                <a href="https://www.chnj.gov" target="_blank" class="gateway-cta">Official Town Site <i class="fas fa-external-link-alt"></i></a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <div class="alphabet-nav">
     <a href="#A" class="letter-link">A</a>
     <a href="#B" class="letter-link">B</a>
