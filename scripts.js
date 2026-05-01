@@ -903,22 +903,39 @@ function resetCalc() {
 
 /* --- MORTGAGE CALCULATOR LOGIC --- */
 function calcMortgage() {
-    const price = parseFloat(document.getElementById('m-price').value) || 0;
-    const downPct = parseFloat(document.getElementById('m-down').value) || 0;
-    const rate = parseFloat(document.getElementById('m-rate').value) || 0;
-    const term = parseInt(document.getElementById('m-term').value) || 30;
-
-    const empty = document.getElementById('mort-empty-state');
-    const result = document.getElementById('mort-top-result');
+    // 1. Get Elements safely
+    const priceEl = document.getElementById('m-price');
+    const downEl = document.getElementById('m-down');
+    const rateEl = document.getElementById('m-rate');
+    const termEl = document.getElementById('m-term');
+    
+    // 2. Output Elements
+    const monthlyDisplay = document.getElementById('m-monthly');
+    const principalDisplay = document.getElementById('m-principal');
+    const interestDisplay = document.getElementById('m-interest');
+    const totalDisplay = document.getElementById('m-total');
+    
+    const emptyState = document.getElementById('mort-empty-state');
+    const resultBox = document.getElementById('mort-top-result');
     const breakdown = document.getElementById('mort-breakdown');
 
-    if (price <= 0 || rate <= 0) {
-        if (empty) empty.style.display = 'block';
-        if (result) result.style.display = 'none';
-        if (breakdown) breakdown.style.display = 'none';
+    // 3. Validation
+    if (!priceEl || !rateEl || !monthlyDisplay) {
+        console.error("Mortgage elements missing from page.");
         return;
     }
 
+    const price = parseFloat(priceEl.value) || 0;
+    const downPct = parseFloat(downEl.value) || 0;
+    const rate = parseFloat(rateEl.value) || 0;
+    const term = parseInt(termEl.value) || 30;
+
+    if (price <= 0 || rate <= 0) {
+        alert("Please enter a valid home price and interest rate.");
+        return;
+    }
+
+    // 4. Calculations
     const principal = price * (1 - (downPct / 100));
     const monthlyRate = (rate / 100) / 12;
     const numberOfPayments = term * 12;
@@ -928,14 +945,15 @@ function calcMortgage() {
     const totalPaid = monthlyPayment * numberOfPayments;
     const totalInterest = totalPaid - principal;
 
-    // Update UI
-    document.getElementById('m-monthly').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
-    document.getElementById('m-principal').textContent = '$' + Math.round(principal).toLocaleString();
-    document.getElementById('m-interest').textContent = '$' + Math.round(totalInterest).toLocaleString();
-    document.getElementById('m-total').textContent = '$' + Math.round(totalPaid).toLocaleString();
+    // 5. Update UI
+    monthlyDisplay.innerText = '$' + Math.round(monthlyPayment).toLocaleString();
+    if (principalDisplay) principalDisplay.innerText = '$' + Math.round(principal).toLocaleString();
+    if (interestDisplay) interestDisplay.innerText = '$' + Math.round(totalInterest).toLocaleString();
+    if (totalDisplay) totalDisplay.innerText = '$' + Math.round(totalPaid).toLocaleString();
 
-    if (empty) empty.style.display = 'none';
-    if (result) result.style.display = 'block';
+    // 6. Toggle Visibility
+    if (emptyState) emptyState.style.display = 'none';
+    if (resultBox) resultBox.style.display = 'block';
     if (breakdown) breakdown.style.display = 'block';
 }
 
@@ -1033,60 +1051,6 @@ if (document.getElementById('dynamic-sitemap')) {
 }
 
 
-
-/* ============================================================
-
-   MORTGAGE CALCULATOR
-
-   ============================================================ */
-
-function calcMortgage() {
-
-  var price = parseFloat(document.getElementById('m-price').value) || 0;
-
-  var down  = parseFloat(document.getElementById('m-down').value)  || 20;
-
-  var rate  = parseFloat(document.getElementById('m-rate').value)  || 0;
-
-  var term  = parseInt(document.getElementById('m-term').value)    || 30;
-
-  if (!price || !rate) return;
-
-
-
-  var principal = price * (1 - down / 100);
-
-  var mr  = rate / 100 / 12;
-
-  var n   = term * 12;
-
-  var monthly  = principal * (mr * Math.pow(1 + mr, n)) / (Math.pow(1 + mr, n) - 1);
-
-  var total    = monthly * n;
-
-  var interest = total - principal;
-
-
-
-  document.getElementById('m-monthly').textContent   = '$' + Math.round(monthly).toLocaleString();
-
-  document.getElementById('m-principal').textContent  = '$' + Math.round(principal).toLocaleString();
-
-  document.getElementById('m-total').textContent     = '$' + Math.round(total).toLocaleString();
-
-  document.getElementById('m-interest').textContent  = '$' + Math.round(interest).toLocaleString();
-
-  document.getElementById('m-int-pct').textContent   = Math.round((interest / price) * 100) + '% of purchase price';
-
-
-
-  document.getElementById('mort-empty-state').style.display = 'none';
-
-  document.getElementById('mort-top-result').style.display  = 'block';
-
-  document.getElementById('mort-breakdown').style.display   = 'block';
-
-}
 
 
 
