@@ -4,61 +4,57 @@
 .topbar a {
     text-decoration: none;
 }
-/* --- SEARCH BAR POLISH --- */
+/* --- CENTERED TOWN DIRECTORY & SEARCH --- */
+.town-section-container {
+    max-width: 1100px; /* Aligns with your hero content */
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
 .search-wrapper {
-    max-width: 500px;
-    margin: 30px auto 50px 0; /* Aligns left with some bottom breathing room */
+    max-width: 600px;
+    margin: 0 auto 50px auto; /* Centers the search bar */
     position: relative;
 }
 
 #townSearch {
     width: 100%;
-    padding: 15px 20px 15px 45px;
+    padding: 16px 20px 16px 50px;
     border: 2px solid #e2e8f0;
-    border-radius: 50px; /* Makes it pill-shaped like a modern app */
+    border-radius: 50px;
     font-size: 16px;
     outline: none;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 #townSearch:focus {
     border-color: var(--gold);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-.search-wrapper i {
-    position: absolute;
-    left: 18px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--navy);
-    font-size: 18px;
-}
-
-/* --- TOWN DIRECTORY GRID --- */
+/* Updated Directory Grid */
 #townDirectory {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    margin-bottom: 60px;
+    justify-content: center; /* Centers the cards if there are only a few */
 }
 
 .town-card {
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    padding: 30px 20px 20px 20px !important;
-    position: relative;
+    background: #fdfdfd;
+    border: 1px solid #eef2f6;
+    border-radius: 15px;
+    padding: 40px 25px 25px 25px !important;
+    text-align: center; /* Centers text inside the card */
     display: flex;
     flex-direction: column;
-    min-height: 250px;
-    transition: transform 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .town-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--gold);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(26, 58, 107, 0.1);
 }
 
 /* Reval Badge Fix */
