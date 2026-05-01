@@ -1005,12 +1005,23 @@ function calcStayNJ() {
 
 }
 
-/* --- TOWN DIRECTORY SEARCH --- */
+/* --- TOWN DIRECTORY LOADER & SEARCH --- */
+function loadTowns() {
+    const directory = document.getElementById('townDirectory');
+    if (!directory) return;
+
+    fetch('towns.html')
+        .then(response => response.text())
+        .then(data => {
+            directory.innerHTML = data;
+        })
+        .catch(err => console.error('Error loading towns:', err));
+}
+
 function filterTowns() {
     const input = document.getElementById('townSearch');
     const filter = input.value.toLowerCase();
-    const directory = document.getElementById('townDirectory');
-    const cards = directory.getElementsByClassName('town-card');
+    const cards = document.getElementsByClassName('town-card');
 
     for (let i = 0; i < cards.length; i++) {
         const townData = cards[i].getAttribute('data-town');
@@ -1021,6 +1032,9 @@ function filterTowns() {
         }
     }
 }
+
+// Call loadTowns on page load
+document.addEventListener("DOMContentLoaded", loadTowns);
 
 /* --- DYNAMIC SITEMAP GENERATOR --- */
 function generateDynamicSitemap() {
