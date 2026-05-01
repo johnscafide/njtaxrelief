@@ -986,156 +986,36 @@
 
 <!-- TOOLS -->
 
-<section class="section section-alt" id="tools">
-
+<section class="section section-alt" id="re-tools">
   <div class="section-inner">
+    <div class="section-label">Real Estate Services</div>
+    <h2 class="section-title">Beyond Tax Relief</h2>
+    <p class="section-subtitle">Property taxes are only one piece of the puzzle. Use our professional tools to manage your home's value and financing.</p>
+    
+    <div class="start-here">
+      <a href="home-value.html" class="start-card">
+        <div class="start-icon"><i class="fas fa-chart-line"></i></div>
+        <div class="start-title">What's My Home Worth?</div>
+        <div class="start-desc">Get an instant valuation based on live South Jersey MLS data.</div>
+        <span class="start-cta">Get My Value <i class="fas fa-arrow-right"></i></span>
+      </a>
 
-    <div class="section-label">Homebuyer Tools</div>
+      <a href="mortgage-calculator.html" class="start-card">
+        <div class="start-icon"><i class="fas fa-calculator"></i></div>
+        <div class="start-title">Mortgage Calculator</div>
+        <div class="start-desc">Estimate monthly payments including taxes and interest.</div>
+        <span class="start-cta">Calculate Now <i class="fas fa-arrow-right"></i></span>
+      </a>
 
-    <h2 class="section-title">Mortgage Calculator</h2>
-
-    <p class="section-subtitle">Estimate your monthly payment and total cost of ownership for any South Jersey home.</p>
-
-    <div class="tools-grid">
-
-      <div class="mort-input-card">
-
-        <div class="mort-inputs">
-
-          <div class="mort-field" style="grid-column:1/-1;"><label>Home Price</label><input type="number" id="m-price" placeholder="350000" oninput="calcMortgage()" min="0"></div>
-
-          <div class="mort-field"><label>Down Payment (%)</label><input type="number" id="m-down" placeholder="20" oninput="calcMortgage()" min="0" max="100"></div>
-
-          <div class="mort-field"><label>Interest Rate (%)</label><input type="number" id="m-rate" placeholder="6.75" step="0.01" oninput="calcMortgage()" min="0"></div>
-
-          <div class="mort-field" style="grid-column:1/-1;"><label>Loan Term</label>
-
-            <select id="m-term" onchange="calcMortgage()">
-
-              <option value="30">30 Year Fixed</option>
-
-              <option value="20">20 Year Fixed</option>
-
-              <option value="15">15 Year Fixed</option>
-
-              <option value="10">10 Year Fixed</option>
-
-            </select>
-
-          </div>
-
-        </div>
-
-        <button class="mort-calc-btn" onclick="calcMortgage()">Calculate Payment</button>
-
-        <div class="info-box" style="margin-top:16px;font-size:13px;">Principal and interest only. Taxes, insurance, and HOA are separate. <a href="#contact" style="color:var(--navy);font-weight:600;">Ask for a full cost breakdown →</a></div>
-
-      </div>
-
-      <div class="mort-output-card">
-
-        <div class="mort-output-top">
-
-          <div id="mort-empty-state" class="mort-empty-state"><i class="fas fa-house-chimney"></i><p>Enter your home price and loan details to see your estimated payment.</p></div>
-
-          <div id="mort-top-result" style="display:none;">
-
-            <div class="mort-output-label">Estimated Monthly Payment</div>
-
-            <div class="mort-output-num" id="m-monthly">$0</div>
-
-            <div class="mort-output-sub">principal &amp; interest / month</div>
-
-          </div>
-
-        </div>
-
-        <div class="mort-breakdown" id="mort-breakdown" style="display:none;">
-
-          <div class="mort-row"><span class="mlabel"><i class="fas fa-dollar-sign"></i>Loan Amount</span><span class="mvalue" id="m-principal">—</span></div>
-
-          <div class="mort-row"><span class="mlabel"><i class="fas fa-calendar"></i>Total Paid Over Life</span><span class="mvalue" id="m-total">—</span></div>
-
-          <div class="mort-row"><span class="mlabel"><i class="fas fa-chart-line"></i>Total Interest</span><span class="mvalue" id="m-interest">—</span></div>
-
-          <div class="mort-row"><span class="mlabel"><i class="fas fa-percent"></i>Interest as % of Price</span><span class="mvalue highlight" id="m-int-pct">—</span></div>
-
-        </div>
-
-      </div>
-
+      <a href="search-homes.html" class="start-card">
+        <div class="start-icon"><i class="fas fa-search-location"></i></div>
+        <div class="start-title">Search NJ Homes</div>
+        <div class="start-desc">Browse current listings in Camden, Gloucester, and Burlington.</div>
+        <span class="start-cta">Start Searching <i class="fas fa-arrow-right"></i></span>
+      </a>
     </div>
-
   </div>
-
 </section>
-
-
-
-<!-- HOME WORTH -->
-
-<section class="section" id="homeworth">
-
-  <div class="section-inner">
-
-    <div class="section-label">Seller Tools</div>
-
-    <h2 class="section-title">What's My South Jersey Home Worth?</h2>
-
-    <p class="section-subtitle">Useful for tax appeals, estate planning, or if you're considering selling. Powered by live MLS data.</p>
-
-    <div class="widget-card">
-
-      <div class="widget-card-header">
-
-        <h3><i class="fas fa-house-circle-check" style="margin-right:10px;"></i>Instant Home Value Estimator</h3>
-
-        <p>Enter your address below — updated from real MLS data.</p>
-
-      </div>
-
-      <iframe style="width:100%;height:200px;border:none;display:block;" src="https://johnscafide.opuselitesj.com/sellembed.php" allowtransparency="true" frameBorder="0" loading="lazy"></iframe>
-
-    </div>
-
-    <div class="info-box" style="margin-top:14px;">Want a full comparable sales analysis? <a href="#contact" style="color:var(--navy);font-weight:600;">Request a free CMA from our team →</a></div>
-
-  </div>
-
-</section>
-
-
-
-<!-- HOME SEARCH -->
-
-<section class="section section-alt" id="search">
-
-  <div class="section-inner">
-
-    <div class="section-label">Home Search</div>
-
-    <h2 class="section-title">Search South Jersey Homes for Sale</h2>
-
-    <p class="section-subtitle">Real-time MLS listings — Camden County, Gloucester County, and surrounding communities.</p>
-
-    <div class="widget-card">
-
-      <div class="widget-card-header">
-
-        <h3><i class="fas fa-magnifying-glass-location" style="margin-right:10px;"></i>South Jersey MLS Home Search</h3>
-
-        <p>Search by town, price, beds, and more.</p>
-
-      </div>
-
-      <iframe style="width:100%;height:340px;border:none;display:block;" src="https://johnscafide.opuselitesj.com/wide.php" allowtransparency="true" frameBorder="0" loading="lazy"></iframe>
-
-    </div>
-
-  </div>
-
-</section>
-
 
 
 <!-- TIKTOK -->
