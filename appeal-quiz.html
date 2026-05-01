@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Appeal Probability Quiz | The Tax Watchdog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<div class="hero" style="padding: 60px 24px;">
+  <div class="hero-inner">
+    <h1>Appeal <span>Probability Quiz</span></h1>
+    <p>Find out in 60 seconds if you have a strong case to lower your South Jersey property taxes.</p>
+  </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        <div class="calc-container" style="max-width: 800px; margin: 0 auto;">
+            <div class="calc-wrap">
+                <div class="calc-header">
+                    <h3><i class="fas fa-gavel" style="margin-right:10px;"></i> Case Analyzer</h3>
+                    <p>Answer these 5 questions to see your estimated success rate.</p>
+                </div>
+                
+                <div class="calc-body" id="quiz-container">
+                    <div class="progress-bar"><div class="progress-fill" id="quiz-progress" style="width:20%"></div></div>
+
+                    <div class="calc-step active" id="q-step1">
+                        <div class="step-question">Have similar homes in your neighborhood sold for LESS than your assessed value recently?</div>
+                        <div class="choice-grid">
+                            <button class="choice-btn" onclick="quizSelect('sales', 'yes', 1)">Yes, definitely</button>
+                            <button class="choice-btn" onclick="quizSelect('sales', 'no', 1)">No or Unsure</button>
+                        </div>
+                    </div>
+
+                    <div class="calc-step" id="q-step2">
+                        <div class="step-question">Has your town undergone a "Revaluation" in the last 1-2 years?</div>
+                        <div class="choice-grid">
+                            <button class="choice-btn" onclick="quizSelect('reval', 'yes', 2)">Yes (e.g. Winslow, GT)</button>
+                            <button class="choice-btn" onclick="quizSelect('reval', 'no', 2)">No / More than 3 years ago</button>
+                        </div>
+                        <button class="btn-back" onclick="quizPrev(2)">Back</button>
+                    </div>
+
+                    <div class="calc-step" id="q-step3">
+                        <div class="step-question">Are there errors on your property record card? (e.g. wrong square footage, bath count)</div>
+                        <div class="choice-grid">
+                            <button class="choice-btn" onclick="quizSelect('errors', 'yes', 3)">Yes, I found errors</button>
+                            <button class="choice-btn" onclick="quizSelect('errors', 'no', 3)">No errors / Looks right</button>
+                        </div>
+                        <button class="btn-back" onclick="quizPrev(3)">Back</button>
+                    </div>
+
+                    <div class="calc-step" id="q-step4">
+                        <div class="step-question">Have you appealed your taxes in the last 3 years?</div>
+                        <div class="choice-grid">
+                            <button class="choice-btn" onclick="quizSelect('recent', 'no', 4)">No, it's been a while</button>
+                            <button class="choice-btn" onclick="quizSelect('recent', 'yes', 4)">Yes, I appealed recently</button>
+                        </div>
+                        <button class="btn-back" onclick="quizPrev(4)">Back</button>
+                    </div>
+
+                    <div class="calc-step" id="q-step5">
+                        <div class="step-question">Where should we send your Probability Score & Free Comp Report?</div>
+                        <div class="form-group"><label>Address of Property</label><input type="text" id="quiz-addr" placeholder="Street, Town"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="quiz-email" placeholder="your@email.com"></div>
+                        <button class="btn-primary" style="width:100%;" onclick="submitQuiz()">Get My Results →</button>
+                    </div>
+
+                    <div class="calc-step" id="q-result">
+                        <div id="quiz-result-render" style="text-align:center;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer id="main-footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
