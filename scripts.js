@@ -1005,8 +1005,9 @@ function calcStayNJ() {
 
 }
 
-/* --- TOWN DIRECTORY LOADER & SEARCH --- */
-function loadTowns() {
+/* --- TOWN DIRECTORY LOGIC --- */
+
+function loadTownDirectory() {
     const directory = document.getElementById('townDirectory');
     if (!directory) return;
 
@@ -1015,7 +1016,10 @@ function loadTowns() {
         .then(data => {
             directory.innerHTML = data;
         })
-        .catch(err => console.error('Error loading towns:', err));
+        .catch(err => {
+            console.error('Error loading towns:', err);
+            directory.innerHTML = "<p>Could not load town data. Please refresh.</p>";
+        });
 }
 
 function filterTowns() {
@@ -1023,18 +1027,19 @@ function filterTowns() {
     const filter = input.value.toLowerCase();
     const cards = document.getElementsByClassName('town-card');
 
-    for (let i = 0; i < cards.length; i++) {
-        const townData = cards[i].getAttribute('data-town');
-        if (townData.toLowerCase().indexOf(filter) > -1) {
-            cards[i].style.display = "";
+    // Loop through all cards and hide those that don't match the search
+    Array.from(cards).forEach(card => {
+        const townData = card.getAttribute('data-town') || "";
+        if (townData.toLowerCase().includes(filter)) {
+            card.style.display = "flex"; // Show as flex to keep card layout
         } else {
-            cards[i].style.display = "none";
+            card.style.display = "none";
         }
-    }
+    });
 }
 
-// Call loadTowns on page load
-document.addEventListener("DOMContentLoaded", loadTowns);
+// Initialize on page load
+document.addEventListener("DOMContentLoaded", loadTownDirectory);
 
 /* --- DYNAMIC SITEMAP GENERATOR --- */
 function generateDynamicSitemap() {
