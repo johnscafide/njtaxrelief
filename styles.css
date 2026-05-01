@@ -4,60 +4,77 @@
 .topbar a {
     text-decoration: none;
 }
-/* ============================================================
-   TOWN DIRECTORY & SEARCH STYLES
-   ============================================================ */
-
-/* The Container for the search input */
+/* --- SEARCH BAR POLISH --- */
 .search-wrapper {
-    margin: 40px 0;
-    position: relative;
     max-width: 500px;
+    margin: 30px auto 50px 0; /* Aligns left with some bottom breathing room */
+    position: relative;
 }
 
 #townSearch {
     width: 100%;
-    padding: 14px 20px 14px 45px; /* Extra left padding for the icon */
-    border: 2px solid var(--border);
-    border-radius: 30px;
+    padding: 15px 20px 15px 45px;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px; /* Makes it pill-shaped like a modern app */
     font-size: 16px;
-    background: #fff;
     outline: none;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
 }
 
 #townSearch:focus {
     border-color: var(--gold);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* The Search Icon inside the box */
 .search-wrapper i {
     position: absolute;
     left: 18px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--navy);
-    z-index: 5;
+    font-size: 18px;
 }
 
-/* The Grid for the Towns */
+/* --- TOWN DIRECTORY GRID --- */
 #townDirectory {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    margin-bottom: 50px;
-    align-items: stretch; /* Keeps cards same height */
+    gap: 30px;
+    margin-bottom: 60px;
 }
 
-/* Town Card Specifics */
 .town-card {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 30px 20px 20px 20px !important;
     position: relative;
-    padding-top: 50px !important; /* Space for the Red Reval Badge */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 280px;
+    min-height: 250px;
+    transition: transform 0.2s;
+}
+
+.town-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--gold);
+}
+
+/* Reval Badge Fix */
+.reval-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ff4d4d;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 12px 12px 0 0;
 }
 
 .reval-badge {
