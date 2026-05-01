@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Jersey Mortgage Calculator | The Tax Watchdog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<div class="hero" style="padding: 60px 24px;">
+  <div class="hero-inner">
+    <h1>Mortgage <span>Calculator</span></h1>
+    <p>Estimate your monthly payments and see how New Jersey property taxes affect your buying power.</p>
+  </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        <div class="calc-container">
+            
+            <div class="mort-input-card">
+                <div class="mort-inputs" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="mort-field" style="grid-column: 1/-1;">
+                        <label>Home Purchase Price ($)</label>
+                        <input type="number" id="m-price" placeholder="400000" oninput="calcMortgage()">
+                    </div>
+                    <div class="mort-field">
+                        <label>Down Payment (%)</label>
+                        <input type="number" id="m-down" placeholder="20" oninput="calcMortgage()">
+                    </div>
+                    <div class="mort-field">
+                        <label>Interest Rate (%)</label>
+                        <input type="number" id="m-rate" placeholder="6.5" step="0.01" oninput="calcMortgage()">
+                    </div>
+                    <div class="mort-field" style="grid-column: 1/-1;">
+                        <label>Loan Term</label>
+                        <select id="m-term" onchange="calcMortgage()" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border);">
+                            <option value="30">30 Year Fixed</option>
+                            <option value="15">15 Year Fixed</option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-primary" style="width:100%; margin-top:20px;" onclick="calcMortgage()">Calculate My Payment</button>
+            </div>
+
+            <div class="mort-output-card">
+                <div class="mort-output-top" style="background: var(--navy-dark); padding: 30px; text-align: center; color: #fff; border-radius: 10px 10px 0 0;">
+                    <div id="mort-empty-state">
+                        <i class="fas fa-calculator" style="font-size: 40px; color: var(--gold); margin-bottom: 15px;"></i>
+                        <p>Enter your details to calculate.</p>
+                    </div>
+                    <div id="mort-top-result" style="display:none;">
+                        <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: #c0cfdf;">Estimated Monthly P&I</div>
+                        <div id="m-monthly" style="font-size: 48px; font-weight: 700; color: #fff; margin: 10px 0;">$0</div>
+                        <div style="font-size: 12px; color: #8aaac8;">*Principal & Interest only</div>
+                    </div>
+                </div>
+                <div class="mort-breakdown" id="mort-breakdown" style="display:none; padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <span>Loan Amount:</span> <strong id="m-principal"></strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                        <span>Total Interest:</span> <strong id="m-interest"></strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; padding: 12px 0;">
+                        <span>Total Payments:</span> <strong id="m-total"></strong>
+                    </div>
+                    
+                    <div class="warning-box" style="margin-top:20px; font-size:13px;">
+                        <i class="fas fa-triangle-exclamation"></i> <strong>Watchdog Tip:</strong> NJ property taxes typically add <strong>$500–$1,200+</strong> to this monthly total. <a href="#contact" style="color:var(--navy); font-weight:700;">Ask John for a tax-adjusted estimate →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer id="main-footer"></footer>
+<script src="scripts.js"></script>
+</body>
+</html>
