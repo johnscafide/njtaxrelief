@@ -17,52 +17,48 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: 'Source Sans 3', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; width: 100%; }
 
-/* --- Responsive Layout Containers --- */
-.calc-container {
-    display: grid;
-    grid-template-columns: 1fr 320px;
-    gap: 40px;
-    align-items: start;
-    width: 100%;
-}
-
+/* --- RESPONSIVE LAYOUT CONTAINERS --- */
+.calc-container { display: grid; grid-template-columns: 1fr 320px; gap: 40px; align-items: start; width: 100%; }
 .calc-wrap { max-width: 680px; width: 100%; }
 .calc-sidebar { display: flex; flex-direction: column; gap: 20px; width: 100%; }
 
-/* --- Sidebar Internal Styling --- */
+/* --- SIDEBAR COMPONENTS --- */
 .sidebar-agent-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
 .sidebar-agent-img { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--gold); object-fit: cover; }
 .sidebar-agent-name { font-weight: 700; color: var(--navy-dark); font-size: 15px; }
+.sidebar-quote { font-size: 13px; line-height: 1.5; color: var(--text-muted); font-style: italic; }
 
-/* --- Floating Elements --- */
-.floating-popup {
-    position: fixed; bottom: 30px; right: 30px; width: 340px;
-    background: #fff; border-radius: 12px; z-index: 9999;
-    box-shadow: 0 15px 35px rgba(10, 24, 55, 0.2); border: 1px solid var(--border);
-}
+/* --- FLOATING ELEMENTS --- */
+.floating-popup { position: fixed; bottom: 30px; right: 30px; width: 340px; background: #fff; border-radius: 12px; z-index: 9999; box-shadow: 0 15px 35px rgba(0,0,0,0.2); border: 1px solid var(--border); display: none; }
+.popup-content { padding: 24px; position: relative; }
+.minimized-tab { position: fixed; bottom: 0; right: 50px; background: var(--gold); color: var(--navy-dark); padding: 10px 20px; border-radius: 8px 8px 0 0; font-weight: 700; z-index: 9998; cursor: pointer; display: none; }
 
-.minimized-tab {
-    position: fixed; bottom: 0; right: 50px; background: var(--gold);
-    color: var(--navy-dark); padding: 10px 20px; border-radius: 8px 8px 0 0;
-    font-weight: 700; z-index: 9998; cursor: pointer; display: none;
-}
-
-/* --- Global Section Styles --- */
+/* --- CORE UI ELEMENTS --- */
 .section { padding: 64px 24px; width: 100%; }
 .section-inner { max-width: 1100px; margin: 0 auto; width: 100%; }
+.btn-primary { background: var(--gold); color: var(--navy-dark); padding: 12px 24px; border-radius: 6px; font-weight: 700; cursor: pointer; border: none; text-decoration: none; display: inline-block; }
+.btn-outline { background: transparent; border: 2px solid var(--navy); color: var(--navy); padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; }
 
-/* --- MOBILE RESPONSIVE (CRITICAL FIX) --- */
+/* --- CALCULATOR UI --- */
+.calc-step { display: none; }
+.calc-step.active { display: block; }
+.progress-bar { height: 6px; background: #eee; border-radius: 3px; margin-bottom: 20px; }
+.progress-fill { height: 100%; background: var(--gold); transition: width 0.3s; }
+.choice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin: 20px 0; }
+.choice-btn { padding: 15px; border: 1px solid var(--border); border-radius: 8px; cursor: pointer; background: #fff; text-align: left; }
+.choice-btn.selected { border-color: var(--navy); background: var(--info-bg); }
+
+/* --- MOBILE RESPONSIVE FIXES --- */
 @media (max-width: 992px) {
-    .calc-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
+    .calc-container { grid-template-columns: 1fr; gap: 30px; }
     .calc-sidebar { order: 2; }
     .hero h1 { font-size: 32px; }
     .floating-popup { width: calc(100% - 40px); bottom: 20px; right: 20px; }
+    .minimized-tab { right: 20px; }
+    .choice-grid { grid-template-columns: 1fr; }
 }
 
-@media (max-width: 768px) {
-    .section { padding: 40px 16px; }
-    .minimized-tab { right: 20px; }
-}
+/* --- FAQ & ACCORDIONS --- */
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-answer { display: none; padding: 15px 0; }
+.faq-item.open .faq-answer { display: block; }
