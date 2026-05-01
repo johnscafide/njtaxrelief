@@ -4,6 +4,21 @@
 .topbar a {
     text-decoration: none;
 }
+#townSearch:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 8px rgba(26, 58, 107, 0.15);
+}
+
+.town-card {
+    text-align: left !important;
+    align-items: flex-start !important;
+    padding: 25px !important;
+}
+
+.town-card .gateway-desc p {
+    margin-bottom: 5px;
+    font-size: 13px;
+}
 #backToTop {
   display: none; /* Hidden by default */
   position: fixed;
