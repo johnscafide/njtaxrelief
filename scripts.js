@@ -240,6 +240,16 @@ function submitLead() {
 
 }
 
+function toggleFAQ(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Close all other FAQs first
+    document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+    // If it wasn't open, open it
+    if (!isOpen) {
+        item.classList.add('open');
+    }
+}
 
 
 /* ============================================================
