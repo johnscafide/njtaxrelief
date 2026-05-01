@@ -1005,8 +1005,7 @@ function calcStayNJ() {
 
 }
 
-/* --- TOWN DIRECTORY LOGIC --- */
-
+/* --- TOWN DIRECTORY CONTROLLER --- */
 function loadTownDirectory() {
     const directory = document.getElementById('townDirectory');
     if (!directory) return;
@@ -1017,28 +1016,28 @@ function loadTownDirectory() {
             directory.innerHTML = data;
         })
         .catch(err => {
-            console.error('Error loading towns:', err);
-            directory.innerHTML = "<p>Could not load town data. Please refresh.</p>";
+            console.error('Directory Error:', err);
+            directory.innerHTML = "<p>Directory temporarily unavailable.</p>";
         });
 }
 
 function filterTowns() {
     const input = document.getElementById('townSearch');
     const filter = input.value.toLowerCase();
-    const cards = document.getElementsByClassName('town-card');
+    // Search within the dynamic directory
+    const cards = document.querySelectorAll('#townDirectory .town-card');
 
-    // Loop through all cards and hide those that don't match the search
-    Array.from(cards).forEach(card => {
-        const townData = card.getAttribute('data-town') || "";
-        if (townData.toLowerCase().includes(filter)) {
-            card.style.display = "flex"; // Show as flex to keep card layout
+    cards.forEach(card => {
+        const text = card.getAttribute('data-town') || "";
+        if (text.toLowerCase().includes(filter)) {
+            card.style.display = "flex";
         } else {
             card.style.display = "none";
         }
     });
 }
 
-// Initialize on page load
+// Call on load
 document.addEventListener("DOMContentLoaded", loadTownDirectory);
 
 /* --- DYNAMIC SITEMAP GENERATOR --- */
