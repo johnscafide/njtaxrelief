@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NJ Tax Relief Glossary & FAQ | The Tax Watchdog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<div class="hero" style="padding: 60px 24px;">
+  <div class="hero-inner">
+    <h1>Tax Relief <span>Dictionary & FAQ</span></h1>
+    <p>The definitive guide to New Jersey property tax terminology and frequently asked questions.</p>
+  </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        <span class="section-label">Terminology</span>
+        <h2 class="section-title">NJ Property Tax Glossary</h2>
+        <p class="section-subtitle">Clear definitions for complex local tax programs.</p>
+
+        <div class="calc-container" style="grid-template-columns: 1fr;">
+            <div class="prog-card-new">
+                <dl style="display: grid; gap: 25px;">
+                    <div>
+                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">ANCHOR Program</dt>
+                        <dd style="color:var(--text-muted); margin-top:5px;">Affordable New Jersey Communities for Homeowners and Renters. A property tax relief program that replaced the Homestead Benefit, providing credits to eligible NJ residents.</dd>
+                    </div>
+                    <div>
+                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Base Year</dt>
+                        <dd style="color:var(--text-muted); margin-top:5px;">The specific tax year used to determine the "frozen" tax amount for the Senior Freeze (PTR) program. This is typically the year you first became eligible.</dd>
+                    </div>
+                    <div>
+                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Stay NJ</dt>
+                        <dd style="color:var(--text-muted); margin-top:5px;">A new tax credit program (starting 2026) designed to cut property taxes in half for many New Jersey seniors, capped at $6,500.</dd>
+                    </div>
+                    <div>
+                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Senior Freeze (PTR)</dt>
+                        <dd style="color:var(--text-muted); margin-top:5px;">Formally known as the Property Tax Reimbursement. It reimburses eligible senior citizens and disabled persons for property tax increases on their principal residence.</dd>
+                    </div>
+                    <div>
+                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Abatement (Residential)</dt>
+                        <dd style="color:var(--text-muted); margin-top:5px;">A temporary reduction or elimination of property taxes, often granted for 5 years following specific home improvements in designated New Jersey areas.</dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section-alt">
+    <div class="section-inner" itemscope itemtype="https://schema.org/FAQPage">
+        <span class="section-label">Questions & Answers</span>
+        <h2 class="section-title">Commonly Asked Questions</h2>
+        
+        <div class="calc-sidebar" style="max-width: 800px; margin: 0 auto;">
+            
+            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h3 itemprop="name" style="font-size:1.1rem;">Can I receive both ANCHOR and Senior Freeze?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
+                    <p itemprop="text">Yes. Eligible residents can receive both the ANCHOR benefit and the Senior Freeze (PTR) reimbursement. They are separate programs with different applications.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h3 itemprop="name" style="font-size:1.1rem;">What is the income limit for the 2026 ANCHOR program?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
+                    <p itemprop="text">For homeowners, the income limit is generally $250,000. For renters, the income limit is $150,000. These figures are based on the specific tax year being filed.</p>
+                </div>
+            </div>
+
+            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
+                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h3 itemprop="name" style="font-size:1.1rem;">Do I need to file every year?</h3>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
+                    <p itemprop="text">Yes. Both the ANCHOR and Senior Freeze programs require annual filings to confirm your continued eligibility and current income status.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer id="main-footer"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
