@@ -185,6 +185,24 @@ function injectFooter() {
 // Start the injection process
 injectFooter();
 
+// Back to Top Logic
+window.onscroll = function() { scrollFunction() };
+
+function scrollFunction() {
+  const btn = document.getElementById("backToTop");
+  if (btn) {
+    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+      btn.style.display = "block";
+    } else {
+      btn.style.display = "none";
+    }
+  }
+}
+
+function scrollToTop() {
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
 /* ============================================================
 
    CONTACT FORM SUBMISSION
