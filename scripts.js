@@ -316,12 +316,18 @@ function initNavLogic() {
     // Re-link mobile toggle
 
     window.toggleMobileMenu = function() {
-
-        const navLinks = document.getElementById('navLinks');
-
+    const navLinks = document.getElementById('navLinks');
+    if (navLinks) {
         navLinks.classList.toggle('active');
-
-    };
+        
+        // Prevent background scrolling when menu is open
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }
+};
 
 
 
