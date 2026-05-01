@@ -935,6 +935,46 @@ function calcStayNJ() {
 
 }
 
+/* --- DYNAMIC SITEMAP GENERATOR --- */
+function generateDynamicSitemap() {
+    const sitemapContainer = document.getElementById('dynamic-sitemap');
+    if (!sitemapContainer) return;
+
+    fetch('nav.html')
+        .then(response => response.text())
+        .then(navHtml => {
+            // Create a temporary element to parse the HTML string
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = navHtml;
+
+            // Get all links from the navigation
+            const navLinks = tempDiv.querySelectorAll('a');
+            let sitemapHtml = '<div class="prog-card-new"><ul class="sidebar-list" style="columns: 2; column-gap: 40px; line-height: 2.5;">';
+
+            navLinks.forEach(link => {
+                // Skip the logo and the mobile toggle
+                if (link.classList.contains('nav-logo') || link.classList.contains('mobile-menu-icon')) return;
+
+                const href = link.getAttribute('href');
+                const text = link.textContent.trim();
+                
+                sitemapHtml += `<li><a href="${href}" style="color:var(--navy); font-weight:600; text-decoration:none;"><i class="fas fa-chevron-right" style="font-size:10px; margin-right:8px; color:var(--gold);"></i>${text}</a></li>`;
+            });
+
+            sitemapHtml += '</ul></div>';
+            sitemapContainer.innerHTML = sitemapHtml;
+        })
+        .catch(err => {
+            console.error('Sitemap Sync Error:', err);
+            sitemapContainer.innerHTML = '<p>Error syncing sitemap. Please try again later.</p>';
+        });
+}
+
+// Run only if we are on the sitemap page
+if (document.getElementById('dynamic-sitemap')) {
+    generateDynamicSitemap();
+}
+
 
 
 /* ============================================================
