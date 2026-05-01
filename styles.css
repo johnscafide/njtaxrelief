@@ -4,40 +4,75 @@
 .topbar a {
     text-decoration: none;
 }
-/* --- TOWN DIRECTORY POLISH --- */
+/* ============================================================
+   TOWN DIRECTORY & SEARCH STYLES
+   ============================================================ */
+
+/* The Container for the search input */
+.search-wrapper {
+    margin: 40px 0;
+    position: relative;
+    max-width: 500px;
+}
+
 #townSearch {
-    margin: 20px 0 40px 0;
-    display: block;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    width: 100%;
+    padding: 14px 20px 14px 45px; /* Extra left padding for the icon */
+    border: 2px solid var(--border);
+    border-radius: 30px;
+    font-size: 16px;
+    background: #fff;
+    outline: none;
+    transition: all 0.3s ease;
 }
 
-.services-gateway-grid#townDirectory {
+#townSearch:focus {
+    border-color: var(--gold);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* The Search Icon inside the box */
+.search-wrapper i {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--navy);
+    z-index: 5;
+}
+
+/* The Grid for the Towns */
+#townDirectory {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    align-items: stretch;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    margin-bottom: 50px;
+    align-items: stretch; /* Keeps cards same height */
 }
 
+/* Town Card Specifics */
 .town-card {
-    height: 100%; /* Ensures all cards in a row are the same height */
+    position: relative;
+    padding-top: 50px !important; /* Space for the Red Reval Badge */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 30px 20px !important;
+    min-height: 280px;
 }
 
 .reval-badge {
-    border-radius: 8px 8px 0 0; /* Smoother look on the card */
-}
-.btn-appeal-small {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #ff4d4d;
+    color: white;
     font-size: 11px;
     font-weight: 700;
-    background: var(--navy);
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    text-decoration: none;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
 }
 #backToTop {
   display: none; /* Hidden by default */
