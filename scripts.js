@@ -130,6 +130,18 @@ function handleChecklistDownload() {
 
     }
 
+/* --- FOOTER LOADER --- */
+document.addEventListener("DOMContentLoaded", function() {
+    const footerElement = document.getElementById('main-footer');
+    if (footerElement) {
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                footerElement.innerHTML = data;
+            });
+    }
+});
+
 
 
     // Send to your EmailJS (Keep your existing service IDs)
