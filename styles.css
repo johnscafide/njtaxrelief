@@ -4,6 +4,75 @@
 .topbar a {
     text-decoration: none;
 }
+
+/* --- QUIZ PROMO RIBBON --- */
+.quiz-ribbon {
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 15px 20px;
+    border-bottom: 3px solid var(--gold);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 100;
+}
+
+.quiz-ribbon-content {
+    max-width: 1100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    text-align: center;
+}
+
+.quiz-badge {
+    background: var(--gold);
+    color: var(--navy-dark);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.quiz-ribbon p {
+    font-size: 15px;
+    margin: 0;
+}
+
+.quiz-btn {
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.quiz-btn:hover {
+    background: var(--gold);
+    color: var(--navy-dark);
+}
+
+/* Mobile Tweak */
+@media (max-width: 768px) {
+    .quiz-ribbon-content {
+        gap: 12px;
+    }
+    .quiz-ribbon p {
+        font-size: 14px;
+        width: 100%;
+    }
+}
+
 /* --- CENTERED TOWN DIRECTORY & SEARCH --- */
 .town-section-container {
     max-width: 1100px; /* Aligns with your hero content */
