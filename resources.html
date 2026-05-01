@@ -3,9 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJ Tax Relief Glossary & FAQ | The Tax Watchdog</title>
+    <title>NJ Property Tax Glossary | The Tax Watchdog</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Glossary Specific Layout */
+        .alphabet-nav {
+            position: sticky;
+            top: 70px; /* Sits right under your main nav */
+            background: #fff;
+            padding: 15px 0;
+            border-bottom: 2px solid var(--gold);
+            z-index: 990;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .letter-link {
+            text-decoration: none;
+            color: var(--navy);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: 0.2s;
+        }
+        .letter-link:hover { background: var(--info-bg); }
+        
+        .glossary-section { margin-top: 40px; }
+        .letter-group { margin-bottom: 60px; scroll-margin-top: 130px; }
+        .letter-heading { 
+            font-size: 32px; 
+            color: var(--gold); 
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 20px;
+            font-family: 'Playfair Display', serif;
+        }
+        .glossary-item { margin-bottom: 30px; }
+        .glossary-term { 
+            font-weight: 700; 
+            color: var(--navy); 
+            font-size: 1.2rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+        .gov-link { 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            color: var(--gold); 
+            text-decoration: none; 
+            border: 1px solid var(--gold);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .gov-link:hover { background: var(--gold); color: #fff; }
+    </style>
 </head>
 <body>
 
@@ -13,80 +67,103 @@
 
 <div class="hero" style="padding: 60px 24px;">
   <div class="hero-inner">
-    <h1>Tax Relief <span>Dictionary & FAQ</span></h1>
-    <p>The definitive guide to New Jersey property tax terminology and frequently asked questions.</p>
+    <h1>NJ Property Tax <span>Terminology</span></h1>
+    <p>A comprehensive directory of definitions and official state resources for South Jersey residents.</p>
   </div>
+</div>
+
+<div class="alphabet-nav">
+    <a href="#A" class="letter-link">A</a>
+    <a href="#B" class="letter-link">B</a>
+    <a href="#C" class="letter-link">C</a>
+    <a href="#D" class="letter-link">D</a>
+    <a href="#E" class="letter-link">E</a>
+    <a href="#F" class="letter-link">F</a>
+    <a href="#G" class="letter-link">G</a>
+    <a href="#I" class="letter-link">I</a>
+    <a href="#P" class="letter-link">P</a>
+    <a href="#S" class="letter-link">S</a>
+    <a href="#T" class="letter-link">T</a>
+    <a href="#V" class="letter-link">V</a>
 </div>
 
 <section class="section">
     <div class="section-inner">
-        <span class="section-label">Terminology</span>
-        <h2 class="section-title">NJ Property Tax Glossary</h2>
-        <p class="section-subtitle">Clear definitions for complex local tax programs.</p>
+        <div class="glossary-section">
 
-        <div class="calc-container" style="grid-template-columns: 1fr;">
-            <div class="prog-card-new">
-                <dl style="display: grid; gap: 25px;">
-                    <div>
-                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">ANCHOR Program</dt>
-                        <dd style="color:var(--text-muted); margin-top:5px;">Affordable New Jersey Communities for Homeowners and Renters. A property tax relief program that replaced the Homestead Benefit, providing credits to eligible NJ residents.</dd>
-                    </div>
-                    <div>
-                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Base Year</dt>
-                        <dd style="color:var(--text-muted); margin-top:5px;">The specific tax year used to determine the "frozen" tax amount for the Senior Freeze (PTR) program. This is typically the year you first became eligible.</dd>
-                    </div>
-                    <div>
-                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Stay NJ</dt>
-                        <dd style="color:var(--text-muted); margin-top:5px;">A new tax credit program (starting 2026) designed to cut property taxes in half for many New Jersey seniors, capped at $6,500.</dd>
-                    </div>
-                    <div>
-                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Senior Freeze (PTR)</dt>
-                        <dd style="color:var(--text-muted); margin-top:5px;">Formally known as the Property Tax Reimbursement. It reimburses eligible senior citizens and disabled persons for property tax increases on their principal residence.</dd>
-                    </div>
-                    <div>
-                        <dt style="font-weight:700; color:var(--navy); font-size:1.2rem;">Abatement (Residential)</dt>
-                        <dd style="color:var(--text-muted); margin-top:5px;">A temporary reduction or elimination of property taxes, often granted for 5 years following specific home improvements in designated New Jersey areas.</dd>
-                    </div>
-                </dl>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-alt">
-    <div class="section-inner" itemscope itemtype="https://schema.org/FAQPage">
-        <span class="section-label">Questions & Answers</span>
-        <h2 class="section-title">Commonly Asked Questions</h2>
-        
-        <div class="calc-sidebar" style="max-width: 800px; margin: 0 auto;">
-            
-            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
-                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <h3 itemprop="name" style="font-size:1.1rem;">Can I receive both ANCHOR and Senior Freeze?</h3>
-                    <i class="fas fa-chevron-down"></i>
+            <div id="A" class="letter-group">
+                <h2 class="letter-heading">A</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Abatement (Residential) <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-abatement.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">A program that allows homeowners to renovate their property without an immediate increase in taxes. Common in South Jersey for 5-year periods on qualified improvements.</p>
                 </div>
-                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
-                    <p itemprop="text">Yes. Eligible residents can receive both the ANCHOR benefit and the Senior Freeze (PTR) reimbursement. They are separate programs with different applications.</p>
+                <div class="glossary-item">
+                    <div class="glossary-term">ANCHOR Program <a href="https://www.nj.gov/treasury/taxation/anchor/index.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">Affordable New Jersey Communities for Homeowners and Renters. Replaced the Homestead Benefit for state-wide tax relief.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Assessment</div>
+                    <p class="section-subtitle" style="margin-bottom:0;">The value placed on a property by the municipal tax assessor for the purpose of apportioning the local tax burden.</p>
                 </div>
             </div>
 
-            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
-                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <h3 itemprop="name" style="font-size:1.1rem;">What is the income limit for the 2026 ANCHOR program?</h3>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
-                    <p itemprop="text">For homeowners, the income limit is generally $250,000. For renters, the income limit is $150,000. These figures are based on the specific tax year being filed.</p>
+            <div id="B" class="letter-group">
+                <h2 class="letter-heading">B</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Base Year <a href="https://www.nj.gov/treasury/taxation/ptr/eligibility.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">For the Senior Freeze (PTR), the year you first met the eligibility requirements. Your reimbursement is calculated based on increases from this specific year.</p>
                 </div>
             </div>
 
-            <div class="faq-item" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question">
-                <div class="faq-question" onclick="toggleFAQ(this)" style="cursor:pointer; padding: 20px; background:#fff; border:1px solid var(--border); border-radius:8px; display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <h3 itemprop="name" style="font-size:1.1rem;">Do I need to file every year?</h3>
-                    <i class="fas fa-chevron-down"></i>
+            <div id="C" class="letter-group">
+                <h2 class="letter-heading">C</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Chapter 123 (Appeal Rule) <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">The legal formula used by the County Board of Taxation to determine if a property's assessment is "out of bounds" compared to its true market value.</p>
                 </div>
-                <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer" style="padding:0 20px 20px 20px;">
-                    <p itemprop="text">Yes. Both the ANCHOR and Senior Freeze programs require annual filings to confirm your continued eligibility and current income status.</p>
+            </div>
+
+            <div id="E" class="letter-group">
+                <h2 class="letter-heading">E</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Equalization Table</div>
+                    <p class="section-subtitle" style="margin-bottom:0;">A table prepared by the county to ensure that property assessments are uniform across different municipalities with different assessment ratios.</p>
+                </div>
+            </div>
+
+            <div id="F" class="letter-group">
+                <h2 class="letter-heading">F</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Farmland Assessment <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-farmland.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">A reduced tax assessment for land actively devoted to agricultural or horticultural use (minimum 5 acres).</p>
+                </div>
+            </div>
+
+            <div id="P" class="letter-group">
+                <h2 class="letter-heading">P</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">PAS-1 Form <a href="https://propertytaxrelief.nj.gov" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">The unified application for New Jersey seniors and disabled persons to apply for ANCHOR, Senior Freeze, and Stay NJ in one submission.</p>
+                </div>
+            </div>
+
+            <div id="S" class="letter-group">
+                <h2 class="letter-heading">S</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Senior Freeze (PTR) <a href="https://www.nj.gov/treasury/taxation/ptr/" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">The Property Tax Reimbursement program that "freezes" taxes for seniors by refunding the difference between current taxes and their base year taxes.</p>
+                </div>
+                <div class="glossary-item">
+                    <div class="glossary-term">Stay NJ Act <a href="https://www.nj.gov/treasury/taxation/staynj.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">New legislation providing a 50% property tax credit (capped at $6,500) for eligible seniors starting in 2026.</p>
+                </div>
+            </div>
+
+            <div id="V" class="letter-group">
+                <h2 class="letter-heading">V</h2>
+                <div class="glossary-item">
+                    <div class="glossary-term">Veteran Deduction <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-vets.shtml" target="_blank" class="gov-link">Official Site</a></div>
+                    <p class="section-subtitle" style="margin-bottom:0;">An annual $250 property tax deduction for qualified veterans and their surviving spouses.</p>
                 </div>
             </div>
 
@@ -95,8 +172,6 @@
 </section>
 
 <footer id="main-footer"></footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>
