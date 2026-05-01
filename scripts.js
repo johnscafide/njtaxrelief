@@ -1005,6 +1005,23 @@ function calcStayNJ() {
 
 }
 
+/* --- TOWN DIRECTORY SEARCH --- */
+function filterTowns() {
+    const input = document.getElementById('townSearch');
+    const filter = input.value.toLowerCase();
+    const directory = document.getElementById('townDirectory');
+    const cards = directory.getElementsByClassName('town-card');
+
+    for (let i = 0; i < cards.length; i++) {
+        const townData = cards[i].getAttribute('data-town');
+        if (townData.toLowerCase().indexOf(filter) > -1) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+
 /* --- DYNAMIC SITEMAP GENERATOR --- */
 function generateDynamicSitemap() {
     const sitemapContainer = document.getElementById('dynamic-sitemap');
