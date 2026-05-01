@@ -130,17 +130,28 @@ function handleChecklistDownload() {
 
     }
 
-/* --- FOOTER LOADER --- */
-document.addEventListener("DOMContentLoaded", function() {
+/* --- IMPROVED FOOTER LOADER --- */
+const loadFooter = () => {
     const footerElement = document.getElementById('main-footer');
     if (footerElement) {
         fetch('footer.html')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) throw new Error('Footer file not found');
+                return response.text();
+            })
             .then(data => {
                 footerElement.innerHTML = data;
-            });
+            })
+            .catch(err => console.warn('Footer Load Error:', err));
     }
-});
+};
+
+// Run on load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFooter);
+} else {
+    loadFooter();
+}
 
 
 
