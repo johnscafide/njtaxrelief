@@ -130,29 +130,6 @@ function handleChecklistDownload() {
 
     }
 
-/* --- IMPROVED FOOTER LOADER --- */
-const loadFooter = () => {
-    const footerElement = document.getElementById('main-footer');
-    if (footerElement) {
-        fetch('footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer file not found');
-                return response.text();
-            })
-            .then(data => {
-                footerElement.innerHTML = data;
-            })
-            .catch(err => console.warn('Footer Load Error:', err));
-    }
-};
-
-// Run on load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadFooter);
-} else {
-    loadFooter();
-}
-
 
 
     // Send to your EmailJS (Keep your existing service IDs)
@@ -181,7 +158,32 @@ if (document.readyState === 'loading') {
 
 }
 
+/* --- BULLETPROOF FOOTER LOADER --- */
+function injectFooter() {
+    const footerPlaceholder = document.getElementById('main-footer');
+    
+    if (footerPlaceholder) {
+        // We use a timestamp to bypass browser cache: footer.html?v=123
+        fetch('footer.html?v=' + new Date().getTime())
+            .then(response => {
+                if (!response.ok) throw new Error('Footer file not found');
+                return response.text();
+            })
+            .then(data => {
+                footerPlaceholder.innerHTML = data;
+                console.log('Footer injected successfully.');
+            })
+            .catch(err => {
+                console.error('Footer Fetch Error:', err);
+            });
+    } else {
+        // If the element isn't found yet, try again in 100ms
+        setTimeout(injectFooter, 100);
+    }
+}
 
+// Start the injection process
+injectFooter();
 
 /* ============================================================
 
