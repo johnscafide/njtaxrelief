@@ -901,6 +901,45 @@ function resetCalc() {
 
 }
 
+/* --- MORTGAGE CALCULATOR LOGIC --- */
+function calcMortgage() {
+    const price = parseFloat(document.getElementById('m-price').value) || 0;
+    const downPct = parseFloat(document.getElementById('m-down').value) || 0;
+    const rate = parseFloat(document.getElementById('m-rate').value) || 0;
+    const term = parseInt(document.getElementById('m-term').value) || 30;
+
+    const empty = document.getElementById('mort-empty-state');
+    const result = document.getElementById('mort-top-result');
+    const breakdown = document.getElementById('mort-breakdown');
+
+    if (price <= 0 || rate <= 0) {
+        if (empty) empty.style.display = 'block';
+        if (result) result.style.display = 'none';
+        if (breakdown) breakdown.style.display = 'none';
+        return;
+    }
+
+    const principal = price * (1 - (downPct / 100));
+    const monthlyRate = (rate / 100) / 12;
+    const numberOfPayments = term * 12;
+
+    const monthlyPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+    
+    const totalPaid = monthlyPayment * numberOfPayments;
+    const totalInterest = totalPaid - principal;
+
+    // Update UI
+    document.getElementById('m-monthly').textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+    document.getElementById('m-principal').textContent = '$' + Math.round(principal).toLocaleString();
+    document.getElementById('m-interest').textContent = '$' + Math.round(totalInterest).toLocaleString();
+    document.getElementById('m-total').textContent = '$' + Math.round(totalPaid).toLocaleString();
+
+    if (empty) empty.style.display = 'none';
+    if (result) result.style.display = 'block';
+    if (breakdown) breakdown.style.display = 'block';
+}
+
+
 
 
 /* ============================================================
