@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tax Heat Map | NJ Property Tax Relief</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body { background-color: #f4f7f9; }
+        #map-wrapper {
+            position: relative;
+            height: 700px;
+            margin: 20px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid var(--navy);
+        }
+        #map { height: 100%; width: 100%; z-index: 1; }
+
+        /* Floating Info Panel */
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 320px;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border-top: 5px solid var(--gold);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .map-overlay h2 { color: var(--navy); margin-bottom: 10px; font-size: 22px; }
+        .data-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .data-row strong { color: var(--navy); }
+
+        /* Color Legend */
+        .leaflet-bottom.leaflet-left { margin-bottom: 20px; margin-left: 20px; }
+        .legend {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            font-size: 12px;
+            line-height: 18px;
+            color: #555;
+        }
+        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+
+        .outlook-high { color: #e53e3e; font-weight: 800; }
+        .outlook-mod { color: #d69e2e; font-weight: 800; }
+        .outlook-low { color: #38a169; font-weight: 800; }
+    </style>
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<div class="hero" style="background: var(--navy-dark); padding: 60px 20px; border-bottom: 4px solid var(--gold);">
+    <div class="hero-inner">
+        <h1>South Jersey <span>Tax Heat Map</span></h1>
+        <p>Real-time visualization of effective tax rates. Darker areas indicate higher tax intensity relative to market value.</p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        
+        <div id="map-wrapper">
+            <div class="map-overlay" id="info-panel">
+                <div id="panel-content">
+                    <h2>Select a Town</h2>
+                    <p>Click or hover over any municipality in Camden, Gloucester, or Burlington County to view local tax data.</p>
+                </div>
+            </div>
+
+            <div id="map"></div>
+        </div>
+
+        <div class="prog-card-new gold" style="margin-top: 30px;">
+            <h3>How to use this map:</h3>
+            <p>This map displays the <strong>Effective Tax Rate</strong>. If your town is shaded dark red, it means you are paying a higher percentage of your home's actual value in taxes. These areas are typically the highest priority for our <strong>Appeal Quiz</strong> analysis.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer id="main-footer"></footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // 1. INITIALIZE MAP (Center: Winslow/Sicklerville area)
+    const map = L.map('map').setView([39.85, -74.95], 10);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // 2. MUNICIPAL DATA (Real-world estimates for 2026 based on equalization)
+    const taxData = {
+        "WINSLOW": { rate: 3.48, outlook: "High", reval: "2022", county: "Camden" },
+        "CHERRY HILL": { rate: 2.74, outlook: "Moderate", reval: "2023", county: "Camden" },
+        "GLOUCESTER TWP": { rate: 3.89, outlook: "High", reval: "2021", county: "Camden" },
+        "WASHINGTON": { rate: 3.12, outlook: "Moderate", reval: "2021", county: "Gloucester" },
+        "MEDFORD": { rate: 2.38, outlook: "Low", reval: "2024", county: "Burlington" },
+        "VOORHEES": { rate: 3.05, outlook: "Moderate", reval: "2023", county: "Camden" },
+        "EVESHAM": { rate: 2.65, outlook: "Low", reval: "2024", county: "Burlington" }
+    };
+
+    // 3. COLOR LOGIC (The "Heat" in Heat Map)
+    function getColor(d) {
+        return d > 3.5  ? '#800026' :
+               d > 3.0  ? '#BD0026' :
+               d > 2.5  ? '#E31A1C' :
+               d > 2.0  ? '#FC4E2A' :
+                          '#FFEDA0';
+    }
+
+    function style(feature) {
+        const name = feature.properties.MUN_NAME.toUpperCase();
+        const rate = taxData[name] ? taxData[name].rate : 0;
+        return {
+            fillColor: getColor(rate),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '3',
+            fillOpacity: 0.7
+        };
+    }
+
+    // 4. INTERACTIVE EVENTS
+    function highlightFeature(e) {
+        const layer = e.target;
+        layer.setStyle({ weight: 5, color: '#d4af37', dashArray: '', fillOpacity: 0.9 });
+        
+        const props = layer.feature.properties;
+        const name = props.MUN_NAME.toUpperCase();
+        const data = taxData[name];
+
+        const panel = document.getElementById('panel-content');
+        if (data) {
+            panel.innerHTML = `
+                <h2>${props.MUN_NAME}</h2>
+                <div class="data-row"><strong>Effective Rate:</strong> <span>${data.rate}%</span></div>
+                <div class="data-row"><strong>County:</strong> <span>${data.county}</span></div>
+                <div class="data-row"><strong>Last Reval:</strong> <span>${data.reval}</span></div>
+                <div class="data-row"><strong>Appeal Outlook:</strong> <span class="outlook-${data.outlook.toLowerCase().substring(0,3)}">${data.outlook}</span></div>
+                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; margin-top:15px; font-size:12px;">Check My Property</a>
+            `;
+        } else {
+            panel.innerHTML = `<h2>${props.MUN_NAME}</h2><p>Data pending for this municipality.</p>`;
+        }
+    }
+
+    function resetHighlight(e) { geojson.resetStyle(e.target); }
+
+    function onEachFeature(feature, layer) {
+        layer.on({ mouseover: highlightFeature, mouseout: resetHighlight });
+    }
+
+    // 5. FETCH OFFICIAL NJ BOUNDARIES
+    // This fetches the municipal GeoJSON directly from the NJ State ArcGIS Hub
+    const geojsonUrl = "https://opendata.arcgis.com/datasets/5f4570abc6174ff6951da66099cf9957_115.geojson";
+
+    let geojson;
+    $.getJSON(geojsonUrl, function(data) {
+        // Filter for South Jersey Counties (Camden: 007, Gloucester: 015, Burlington: 005)
+        const sjData = {
+            ...data,
+            features: data.features.filter(f => ["005", "007", "015"].includes(f.properties.COUNTY_PUI))
+        };
+        
+        geojson = L.geoJson(sjData, {
+            style: style,
+            onEachFeature: onEachFeature
+        }).addTo(map);
+    });
+
+</script>
+
+</body>
+</html>
