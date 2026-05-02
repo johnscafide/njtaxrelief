@@ -241,51 +241,71 @@
 
 <!-- FAQ -->
 <section class="section" id="faq">
-  <div class="preview-col"> 
-      <!-- ============================================================
-           STEP 2 — Copy this entire <div class="video-card-tiktok">
-           block and paste it onto senior-programs.html, near the top
-           of the page (under your headline, above the program list).
-           ============================================================ -->
-      <div class="video-card-tiktok">
-        <a href="https://www.tiktok.com/@thetaxwatchdog/video/7591627007230741791"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="video-thumb-link"
-           aria-label="Watch on TikTok: Major Update for NJ Seniors 65+">
-          <img src="tiktok-anchor-update.jpg"
-               alt="Major Update News for NJ Seniors 65+"
-               class="video-thumb-img"
-               loading="lazy">
-          <div class="video-play-overlay">
-            <div class="video-play-btn">
-              <i class="fas fa-play"></i>
-            </div>
-          </div>
-          <div class="video-tiktok-badge">
-            <i class="fas fa-play" style="font-size:9px;"></i> Watch on TikTok
-          </div>
-        </a>
-        <div class="video-card-caption">
-          <strong>Major Update for NJ Seniors 65+</strong>
-          <span>Quick breakdown of the latest ANCHOR and Stay NJ news</span>
-        </div>
-      </div>
-      <!-- END card 1 -->
- 
-    </div>
   <div class="section-inner">
     <div class="section-label">Common Questions</div>
     <h2 class="section-title">Senior Program FAQ</h2>
-    <div style="max-width:780px;">
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Does the Senior Freeze actually stop my taxes from going up? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">No — your actual tax bill still goes up each year. What the Senior Freeze does is reimburse you for the increase above your base year amount. So your bill goes up, but the State sends you a check for the difference. Your net out-of-pocket stays close to your base year level.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">When did Stay NJ start paying out? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Stay NJ payments began in February 2026 for the 2024 benefit year applications. The program was signed into law in 2023 but took time to implement. Payments now go out quarterly — February, May, August, and November — via direct deposit or check.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">My spouse passed away. Do I still qualify? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Surviving spouses may still qualify for Stay NJ if they are at least 55 years old and meet the other requirements. For Senior Freeze and ANCHOR, contact the hotline at 1-888-238-1233 to understand how benefits transfer in your specific situation.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">I just turned 65 this year — when can I first apply? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">You can apply via the PAS-1 for the benefit year in which you turned 65. This is also important because this first year establishes your "base year" for the Senior Freeze — locking in the lower tax amount as your baseline. Apply as soon as you're eligible to lock in the lowest possible base year.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Is Stay NJ taxable income? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">The NJ Division of Taxation has not classified Stay NJ credits as taxable income for NJ state tax purposes. However, federal tax treatment of state benefits can be complex. Consult a tax professional regarding your specific federal filing situation.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What if I missed the PAS-1 deadline? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">The NJ Division of Taxation sometimes accepts late applications with a written explanation. Call 1-888-238-1233 immediately if you've missed a deadline — do not assume you've lost the benefit. In some cases, late applications are processed. For future years, mark November 2 on your calendar now.</div></div>
-    </div>
-  </div>
+ 
+    <!-- Two-column wrapper: FAQ left, video right (stacks on mobile) -->
+    <div class="faq-with-video">
+ 
+      <!-- LEFT COLUMN: FAQ list -->
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">Does the Senior Freeze actually stop my taxes from going up? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">No — your actual tax bill still goes up each year. What the Senior Freeze does is reimburse you for the increase above your base year amount. So your bill goes up, but the State sends you a check for the difference. Your net out-of-pocket stays close to your base year level.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">When did Stay NJ start paying out? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Stay NJ payments began in February 2026 for the 2024 benefit year applications. The program was signed into law in 2023 but took time to implement. Payments now go out quarterly — February, May, August, and November — via direct deposit or check.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">My spouse passed away. Do I still qualify? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Surviving spouses may still qualify for Stay NJ if they are at least 55 years old and meet the other requirements. For Senior Freeze and ANCHOR, contact the hotline at 1-888-238-1233 to understand how benefits transfer in your specific situation.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">I just turned 65 this year — when can I first apply? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">You can apply via the PAS-1 for the benefit year in which you turned 65. This is also important because this first year establishes your "base year" for the Senior Freeze — locking in the lower tax amount as your baseline. Apply as soon as you're eligible to lock in the lowest possible base year.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">Is Stay NJ taxable income? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">The NJ Division of Taxation has not classified Stay NJ credits as taxable income for NJ state tax purposes. However, federal tax treatment of state benefits can be complex. Consult a tax professional regarding your specific federal filing situation.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">What if I missed the PAS-1 deadline? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">The NJ Division of Taxation sometimes accepts late applications with a written explanation. Call 1-888-238-1233 immediately if you've missed a deadline — do not assume you've lost the benefit. In some cases, late applications are processed. For future years, mark November 2 on your calendar now.</div>
+        </div>
+      </div>
+ 
+      <!-- RIGHT COLUMN: TikTok video card -->
+      <aside class="faq-video-side">
+        <div class="video-card-tiktok">
+          <a href="https://www.tiktok.com/@thetaxwatchdog/video/7591627007230741791"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="video-thumb-link"
+             aria-label="Watch on TikTok: Major Update for NJ Seniors 65+">
+            <img src="tiktok-anchor-update.jpg"
+                 alt="Major Update News for NJ Seniors 65+"
+                 class="video-thumb-img"
+                 loading="lazy">
+            <div class="video-play-overlay">
+              <div class="video-play-btn">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-tiktok-badge">
+              <i class="fas fa-play" style="font-size:9px;"></i> Watch on TikTok
+            </div>
+          </a>
+          <div class="video-card-caption">
+            <strong>Major Update for NJ Seniors 65+</strong>
+            <span>Quick breakdown of the latest ANCHOR and Stay NJ news</span>
+          </div>
+        </div>
+      </aside>
+ 
+    </div><!-- /.faq-with-video -->
+  </div><!-- /.section-inner -->
 </section>
 
 <!-- RELATED + CONTACT -->
