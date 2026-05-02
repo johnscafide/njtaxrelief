@@ -914,88 +914,99 @@
   window.filterTowns = filterTowns;
   window.scrollToTop = scrollToTop;
 
-/* --- DASHBOARD & APIFY INTEGRATION --- */
+/* --- PROPERTY DASHBOARD LOGIC --- */
 const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
 const ACTOR_ID = 'maxcopell/zillow-scraper';
 
-// 1. LOAD SAVED PROPERTIES ON PAGE LOAD
+// 1. LOAD SAVED PROPERTIES ON PAGE REFRESH
 document.addEventListener("DOMContentLoaded", () => {
-    const saved = JSON.parse(localStorage.getItem('myWatchlist')) || [];
+    const savedProperties = JSON.parse(localStorage.getItem('watchdogList')) || [];
     const list = document.getElementById('watchlist-items');
     
-    saved.forEach(prop => {
-        renderProperty(prop, list);
+    // Clear the "Demo" hardcoded items if you want a clean slate
+    // list.innerHTML = ''; 
+
+    savedProperties.forEach(prop => {
+        renderPropertyCard(prop);
     });
 });
 
 async function addPropertyToWatchlist() {
-    const address = document.getElementById('prop-input').value;
-    if (!address) return;
+    const addr = document.getElementById('prop-input').value;
+    if(!addr) return;
 
+    // UI: Add loading state
     const list = document.getElementById('watchlist-items');
-    const tempId = 'prop-' + Date.now();
-    
-    // Add "Loading" item visually
-    const loadingItem = `<div class="watch-item" id="${tempId}"><div class="watch-info"><span class="watch-addr">${address}</span><span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching...</span></div></div>`;
+    const tempId = 'id-' + Date.now();
+    const loadingItem = `
+        <div class="watch-item" id="${tempId}">
+            <div class="watch-info">
+                <span class="watch-addr">${addr}</span>
+                <span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</span>
+            </div>
+        </div>`;
     list.insertAdjacentHTML('afterbegin', loadingItem);
     
+    // Close form and clear input
     document.getElementById('prop-input').value = "";
     document.getElementById('add-prop-form').style.display = 'none';
 
     try {
-        // Trigger Actor
-        const runResponse = await fetch(`https://api.apify.com/v2/acts/${ACTOR_ID}/runs?token=${APIFY_TOKEN}`, {
+        // TRIGGER APIFY
+        const runRes = await fetch(`https://api.apify.com/v2/acts/${ACTOR_ID}/runs?token=${APIFY_TOKEN}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                "searchQuery": address, // Adjusted for maxcopell's input schema
-                "maxResults": 1
-            })
+            body: JSON.stringify({ "searchQuery": addr, "maxResults": 1 })
         });
-        const runData = await runResponse.json();
-        pollResults(runData.data.id, tempId, address);
-    } catch (e) {
-        document.getElementById(tempId).innerText = "Error connecting to Apify.";
+        const runData = await runRes.json();
+        const runId = runData.data.id;
+
+        // Start polling for the result
+        pollApifyResult(runId, tempId, addr);
+    } catch (err) {
+        console.error("Fetch Error:", err);
+        document.getElementById(tempId).innerHTML = "Connection Error.";
     }
 }
 
-async function pollResults(runId, elementId, address) {
-    const response = await fetch(`https://api.apify.com/v2/actor-runs/${runId}?token=${APIFY_TOKEN}`);
-    const data = await response.json();
+async function pollApifyResult(runId, elementId, addr) {
+    const res = await fetch(`https://api.apify.com/v2/actor-runs/${runId}?token=${APIFY_TOKEN}`);
+    const data = await res.json();
 
     if (data.data.status === 'SUCCEEDED') {
-        const itemRes = await fetch(`https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=${APIFY_TOKEN}`);
-        const items = await itemRes.json();
-        
+        // Get the data from the dataset
+        const datasetRes = await fetch(`https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=${APIFY_TOKEN}`);
+        const items = await datasetRes.json();
+
         if (items.length > 0) {
             const p = items[0];
             const cleanProp = {
                 id: elementId,
-                address: address,
-                price: p.price || p.zestimate || "Contact Agent",
+                address: addr,
+                price: p.price || p.zestimate || "N/A",
                 city: p.address?.city || "NJ",
-                trend: (Math.random() * 3).toFixed(1), // Demo trend
+                trend: (Math.random() * 4).toFixed(1), // Demo trend
                 isUp: Math.random() > 0.4
             };
-            
-            // SAVE TO LOCALSTORAGE
-            saveProperty(cleanProp);
-            
-            // UPDATE UI
-            const el = document.getElementById(elementId);
-            renderProperty(cleanProp, null, el);
+
+            // Save to LocalStorage and Update UI
+            saveToStorage(cleanProp);
+            updatePropertyUI(elementId, cleanProp);
         } else {
-            document.getElementById(elementId).innerText = "No data found for this address.";
+            document.getElementById(elementId).innerHTML = "No Zillow data found.";
         }
     } else if (['FAILED', 'ABORTED', 'TIMED-OUT'].includes(data.data.status)) {
-        document.getElementById(elementId).innerText = "Search failed.";
+        document.getElementById(elementId).innerHTML = "Search failed.";
     } else {
-        setTimeout(() => pollResults(runId, elementId, address), 3000);
+        // Still running, check again in 3 seconds
+        setTimeout(() => pollApifyResult(runId, elementId, addr), 3000);
     }
 }
 
-function renderProperty(prop, list, existingEl = null) {
-    const html = `
+function updatePropertyUI(elementId, prop) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+    el.innerHTML = `
         <div class="watch-info">
             <span class="watch-addr">${prop.address}</span>
             <span class="watch-meta">${prop.city}</span>
@@ -1007,22 +1018,32 @@ function renderProperty(prop, list, existingEl = null) {
             </div>
         </div>
     `;
-    
-    if (existingEl) {
-        existingEl.innerHTML = html;
-    } else {
-        const item = document.createElement('div');
-        item.className = 'watch-item';
-        item.id = prop.id;
-        item.innerHTML = html;
-        list.appendChild(item);
-    }
 }
 
-function saveProperty(prop) {
-    let saved = JSON.parse(localStorage.getItem('myWatchlist')) || [];
-    saved.push(prop);
-    localStorage.setItem('myWatchlist', JSON.stringify(saved));
+function renderPropertyCard(prop) {
+    const list = document.getElementById('watchlist-items');
+    const item = document.createElement('div');
+    item.className = 'watch-item';
+    item.id = prop.id;
+    item.innerHTML = `
+        <div class="watch-info">
+            <span class="watch-addr">${prop.address}</span>
+            <span class="watch-meta">${prop.city}</span>
+        </div>
+        <div class="watch-stats">
+            <div class="watch-price">${typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price}</div>
+            <div class="watch-trend ${prop.isUp ? 'up' : 'down'}">
+                <i class="fas fa-caret-${prop.isUp ? 'up' : 'down'}"></i> ${prop.trend}%
+            </div>
+        </div>
+    `;
+    list.appendChild(item);
+}
+
+function saveToStorage(prop) {
+    let current = JSON.parse(localStorage.getItem('watchdogList')) || [];
+    current.push(prop);
+    localStorage.setItem('watchdogList', JSON.stringify(current));
 }
 
 })();
