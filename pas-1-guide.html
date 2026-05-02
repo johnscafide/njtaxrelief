@@ -361,15 +361,91 @@
   <div class="section-inner">
     <div class="section-label">Common Questions</div>
     <h2 class="section-title">PAS-1 FAQ</h2>
-    <div style="max-width:780px;">
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What's the difference between PAS-1 and ANC-1? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">The PAS-1 is for seniors 65+ and disabled homeowners — it covers ANCHOR, Stay NJ, and Senior Freeze in one form. The ANC-1 is for everyone else under 65 — it only covers ANCHOR. File the right form or your benefits may be delayed. When in doubt, call 1-888-238-1233.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Do I need to include proof of my property taxes? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">No. As of the new PAS-1 combined application, proof of property taxes paid is no longer required. The old PTR-1A and PTR-2A verification forms have been eliminated. Just enter the amounts from your tax bills on the form itself.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">I'm a returning Senior Freeze filer — is the form different for me? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Your base year tax amount may already be pre-printed on Line 14 of your form. Do NOT change this pre-printed amount — it's your established baseline. First-time filers will leave this blank and the Division of Taxation will set the base year after processing your first approved application.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What if I made a mistake on my application? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Call the hotline at 1-888-238-1233 as soon as you notice the error. For minor corrections, they can often note it in the system. For significant errors, you may need to file an amended or supplemental application. Do not wait — address errors as quickly as possible, especially as you approach the November 2 deadline.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What is ID.me and do I need it? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">ID.me is an identity verification service used by the NJ Division of Taxation for online PAS-1 filings. You'll create a free account and verify your identity using a government ID and selfie. If you're uncomfortable with this process, file the paper form by mail instead — no ID.me required for paper filers.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">I split time between NJ and Florida. Which state do I file in? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">NJ requires that the property be your "principal residence" — where you spend the most time, where you're registered to vote, where your driver's license is registered. Many NJ-Florida "snowbirds" still qualify for NJ property tax relief if NJ remains their primary legal residence. When in doubt, call 1-888-238-1233 to discuss your specific situation.</div></div>
-    </div>
-  </div>
+ 
+    <!-- Two-column wrapper: FAQ left, video right (stacks on mobile) -->
+    <div class="faq-with-video">
+ 
+      <!-- LEFT COLUMN: FAQ list -->
+      <div class="faq-list">
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">What's the difference between PAS-1 and ANC-1? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">The PAS-1 is for seniors 65+ and disabled homeowners — it covers ANCHOR, Stay NJ, and Senior Freeze in one form. The ANC-1 is for everyone else under 65 — it only covers ANCHOR. File the right form or your benefits may be delayed. When in doubt, call 1-888-238-1233.</div>
+        </div>
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">Do I need to include proof of my property taxes? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">No. As of the new PAS-1 combined application, proof of property taxes paid is no longer required. The old PTR-1A and PTR-2A verification forms have been eliminated. Just enter the amounts from your tax bills on the form itself.</div>
+        </div>
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">I'm a returning Senior Freeze filer — is the form different for me? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Your base year tax amount may already be pre-printed on Line 14 of your form. Do NOT change this pre-printed amount — it's your established baseline. First-time filers will leave this blank and the Division of Taxation will set the base year after processing your first approved application.</div>
+        </div>
+ 
+        <!-- ============================================================
+             NEW QUESTION #1 — Order of operations
+             ============================================================ -->
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">Should I file my 2025 NJ income tax return before or after the PAS-1? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">File your NJ income tax return first, then the PAS-1. The Division of Taxation specifically recommends this order, and as a tax preparer I can tell you why: the PAS-1 pulls income figures from your return, and filing them out of order is one of the most common reasons applications get held up or kicked back for additional information. The one exception is if you don't normally file a NJ income tax return at all (some seniors on fixed Social Security income don't have to) — in that case, go straight to the PAS-1. If you're not sure whether you need to file a NJ return, that's something I can help you sort out.</div>
+        </div>
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">What if I made a mistake on my application? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Call the hotline at 1-888-238-1233 as soon as you notice the error. For minor corrections, they can often note it in the system. For significant errors, you may need to file an amended or supplemental application. Do not wait — address errors as quickly as possible, especially as you approach the November 2 deadline.</div>
+        </div>
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">What is ID.me and do I need it? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">ID.me is an identity verification service used by the NJ Division of Taxation for online PAS-1 filings. You'll create a free account and verify your identity using a government ID and selfie. If you're uncomfortable with this process, file the paper form by mail instead — no ID.me required for paper filers.</div>
+        </div>
+ 
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">I split time between NJ and Florida. Which state do I file in? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">NJ requires that the property be your "principal residence" — where you spend the most time, where you're registered to vote, where your driver's license is registered. Many NJ-Florida "snowbirds" still qualify for NJ property tax relief if NJ remains their primary legal residence. When in doubt, call 1-888-238-1233 to discuss your specific situation.</div>
+        </div>
+ 
+        <!-- ============================================================
+             NEW QUESTION #2 — Selling your home mid-year
+             ============================================================ -->
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">I sold my NJ home in 2025 — can I still file the PAS-1? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Possibly yes, depending on the timing. Each program has its own ownership rules: ANCHOR looks at whether the home was your primary residence on October 1 of the benefit year; Senior Freeze and Stay NJ require owner-occupier status during the relevant tax year. If you sold late in 2025 (say October, November, or December), you may still qualify for that year's benefits even if you're now in another state or in a new home. As a NJ Realtor I work with seniors on these timing situations all the time — closing dates can make or break that final year of relief, and it's worth running the numbers before you sign. Give me a call before your next move and we'll map it out.</div>
+        </div>
+ 
+      </div><!-- /.faq-list -->
+ 
+      <!-- RIGHT COLUMN: TikTok video card -->
+      <aside class="faq-video-side">
+        <div class="video-card-tiktok">
+          <a href="https://www.tiktok.com/@thetaxwatchdog/video/7604855848703200542"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="video-thumb-link"
+             aria-label="Watch on TikTok: NJ Property Tax Relief programs explained">
+            <img src="tiktok-pas1-programs.jpg"
+                 alt="NJ Property Tax Relief - New Tax Programs for 65 and Older"
+                 class="video-thumb-img"
+                 loading="lazy">
+            <div class="video-play-overlay">
+              <div class="video-play-btn">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+            <div class="video-tiktok-badge">
+              <i class="fas fa-play" style="font-size:9px;"></i> Watch on TikTok
+            </div>
+          </a>
+          <div class="video-card-caption">
+            <strong>NJ Senior Tax Relief Programs</strong>
+            <span>What you need to know before filing the PAS-1</span>
+          </div>
+        </div>
+      </aside>
+ 
+    </div><!-- /.faq-with-video -->
+  </div><!-- /.section-inner -->
 </section>
 
 <div class="lead-section" id="contact">
