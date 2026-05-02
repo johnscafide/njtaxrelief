@@ -7,27 +7,15 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.11.0/proj4.js"></script>
     <style>
-        /* TIGHTENED INTERFACE CSS */
         #map-container { height: 750px; border-radius: 12px; overflow: hidden; border: 2px solid var(--navy); position: relative; margin-top: 20px; }
         #map { height: 100%; background: #f8fafc; }
-        
         .map-card { 
             position: absolute; top: 20px; right: 20px; z-index: 1000; 
             width: 300px; background: white; padding: 25px; border-radius: 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-top: 5px solid var(--gold); 
         }
-
-        .legend {
-            background: white; padding: 12px; line-height: 18px; color: #333;
-            border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; }
-
-        /* Status Colors */
-        .status-critical { color: #800026; font-weight: 800; }
-        .status-high { color: #bd0026; font-weight: 800; }
-        .status-mod { color: #e31a1c; font-weight: 800; }
     </style>
 </head>
 <body>
@@ -37,7 +25,7 @@
 <div class="hero" style="background: var(--navy-dark); padding: 50px 20px; border-bottom: 5px solid var(--gold);">
     <div class="hero-inner">
         <h1>New Jersey <span>Master Tax Map</span></h1>
-        <p>Interactive visualization of all 564 municipalities. Data sourced from the 2025 TEV and 2026 Ratables.</p>
+        <p>Visualizing 2026 Effective Tax Rates & Ratios across all 564 municipalities.</p>
     </div>
 </div>
 
@@ -46,7 +34,7 @@
         <div id="map-container">
             <div class="map-card" id="map-info">
                 <h2 id="muni-name" style="margin-bottom:10px; color:var(--navy);">Explore NJ</h2>
-                <div id="muni-data">Hover over any municipality to see 2026 Effective Tax Rates and Equalization Ratios.</div>
+                <div id="muni-data">Hover over any municipality to see 2026 data.</div>
             </div>
             <div id="map"></div>
         </div>
@@ -60,69 +48,53 @@
 <script src="scripts.js"></script>
 
 <script>
-    // COLOR SCALING FOR 564 TOWNS
-    function getHeatColor(r) {
-        if (!r || r === 0) return '#cbd5e1';
-        // Precise 2026 Thresholds
-        return r > 3.7 ? '#800026' : // Critical (Top 5% of NJ)
-               r > 3.2 ? '#bd0026' : // High
-               r > 2.6 ? '#e31a1c' : // Moderate
-               r > 2.0 ? '#fc4e2a' : // Low-Moderate
-                         '#fed976';  // Target/Low
-    }
+    // Define the projection conversion (3857 to 4326)
+    const firstProjection = "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs";
+    const secondProjection = "+proj=longlat +datum=WGS84 +no_defs";
 
-    // UPDATED HOVER FOR DETAILED INSIGHTS
-    function onHover(e) {
-        const layer = e.target;
-        layer.setStyle({ weight: 3, color: '#d4af37', fillOpacity: 0.9 });
-        
-        const code = layer.feature.properties.MUN_CODE || layer.feature.properties.SSN;
-        const info = masterTaxData[code];
-        const dataDiv = document.getElementById('muni-data');
-
-        if (info) {
-            document.getElementById('muni-name').innerText = info.name;
-            dataDiv.innerHTML = `
-                <div class="data-row"><strong>Effective Rate:</strong> <span>${info.effectiveRate}%</span></div>
-                <div class="data-row"><strong>State Ratio:</strong> <span>${info.ratio}%</span></div>
-                <div class="data-row"><strong>Appeal Status:</strong> <span class="status-${info.status.toLowerCase()}">${info.status}</span></div>
-                <hr style="margin:10px 0; border:0; border-top:1px solid #eee;">
-                <p style="font-size:11px; color:#666;">*Effective rate is calculated as (Nominal Rate × Ratio).</p>
-                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; margin-top:15px; font-size:12px;">Check My Property</a>
-            `;
-        }
-    }
-    
     const map = L.map('map').setView([40.05, -74.4], 8);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
     let masterTaxData = {};
     let geojson;
 
-    // HEATMAP COLOR LOGIC
     function getHeatColor(r) {
         if (!r || r === 0) return '#cbd5e1';
         return r > 3.5 ? '#800026' : r > 3.0 ? '#bd0026' : r > 2.5 ? '#e31a1c' : r > 2.0 ? '#fc4e2a' : '#fed976';
     }
 
-    // 1. FETCH THE DATA PAGE FIRST
     async function initMap() {
         try {
-            const dataResponse = await fetch('tax-data.json'); // This points to your data file
+            const dataResponse = await fetch('tax-data.json');
             masterTaxData = await dataResponse.json();
             loadBoundaries();
         } catch (err) {
             console.error("Data Load Error:", err);
-            document.getElementById('muni-data').innerText = "Error loading tax data file.";
         }
     }
 
-    // 2. LOAD GEOJSON AND APPLY DATA
     function loadBoundaries() {
-        // Points to your uploaded NJ Boundary GeoJSON
         fetch('Municipal_Boundaries_of_NJ.geojson')
             .then(res => res.json())
             .then(data => {
+                // Check if data needs coordinate conversion
+                if (data.features[0].geometry.coordinates[0][0][0] > 180) {
+                    console.log("Detected EPSG:3857 - Converting to Lat/Long...");
+                    data.features.forEach(feature => {
+                        if (feature.geometry.type === "Polygon") {
+                            feature.geometry.coordinates = feature.geometry.coordinates.map(ring => 
+                                ring.map(coord => proj4(firstProjection, secondProjection, coord))
+                            );
+                        } else if (feature.geometry.type === "MultiPolygon") {
+                            feature.geometry.coordinates = feature.geometry.coordinates.map(polygon => 
+                                polygon.map(ring => 
+                                    ring.map(coord => proj4(firstProjection, secondProjection, coord))
+                                )
+                            );
+                        }
+                    });
+                }
+
                 geojson = L.geoJson(data, {
                     style: style,
                     onEachFeature: (f, l) => { l.on({ mouseover: onHover, mouseout: offHover }); }
@@ -143,25 +115,20 @@
     function onHover(e) {
         const layer = e.target;
         layer.setStyle({ weight: 3, color: '#d4af37', fillOpacity: 0.9 });
-        
         const code = layer.feature.properties.MUN_CODE || layer.feature.properties.SSN;
         const info = masterTaxData[code];
         const name = layer.feature.properties.MUN_LABEL || layer.feature.properties.MUN;
         
-        const panel = document.getElementById('muni-name');
-        const dataDiv = document.getElementById('muni-data');
-
         if (info) {
-            panel.innerText = info.name;
-            dataDiv.innerHTML = `
-                <div style="margin-bottom:10px;"><strong>Effective Rate:</strong> ${info.effectiveRate}%</div>
-                <div style="margin-bottom:10px;"><strong>Equalization Ratio:</strong> ${info.ratio}%</div>
-                <div style="margin-bottom:15px;"><strong>Outlook:</strong> <span class="status-${info.status.toLowerCase()}">${info.status}</span></div>
-                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; font-size:12px;">Run Appeal Analysis</a>
+            document.getElementById('muni-name').innerText = info.name;
+            document.getElementById('muni-data').innerHTML = `
+                <div><strong>Effective Rate:</strong> ${info.effectiveRate}%</div>
+                <div><strong>Equalization Ratio:</strong> ${info.ratio}%</div>
+                <div><strong>Outlook:</strong> ${info.status}</div>
             `;
         } else {
-            panel.innerText = name;
-            dataDiv.innerHTML = "Assessment data pending for this district.";
+            document.getElementById('muni-name').innerText = name;
+            document.getElementById('muni-data').innerHTML = "Data pending for this district.";
         }
     }
 
@@ -169,6 +136,5 @@
 
     initMap();
 </script>
-    
 </body>
 </html>
