@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Jersey Tax Heat Map | NJ Property Tax Relief</title>
+    <title>NJ Tax Heat Map | South Jersey Expert Guide</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -16,7 +16,7 @@
             border: 2px solid var(--navy);
             position: relative;
         }
-        #map { height: 100%; background: #f8fafc; }
+        #map { height: 100%; background: #f1f5f9; }
         
         .map-card {
             position: absolute;
@@ -24,7 +24,7 @@
             right: 20px;
             z-index: 1000;
             width: 280px;
-            background: white;
+            background: rgba(255, 255, 255, 0.98);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
@@ -35,7 +35,7 @@
             background: white;
             padding: 10px;
             line-height: 18px;
-            color: #555;
+            color: #333;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
         }
@@ -46,10 +46,10 @@
 
 <nav id="main-nav"></nav>
 
-<div class="hero" style="background: var(--navy-dark); padding: 50px 20px; border-bottom: 5px solid var(--gold);">
+<div class="hero" style="background: var(--navy-dark); padding: 40px 20px; border-bottom: 5px solid var(--gold);">
     <div class="hero-inner">
         <h1>South Jersey <span>Tax Heat Map</span></h1>
-        <p>A visual breakdown of effective tax rates. Darker shades represent higher tax intensity.</p>
+        <p>A visual breakdown of 2026 effective tax rates for Camden, Gloucester, and Burlington counties.</p>
     </div>
 </div>
 
@@ -74,43 +74,52 @@
 <script>
     const map = L.map('map').setView([39.85, -74.9], 10);
 
-    // Using CartoDB light tiles for a clean professional look
+    // Using a clean, professional base map (CartoDB Light)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // 2026 Effective Tax Data (Equalized)
+    // 2026 Tax Data (Add any missing towns to this list)
     const stats = {
         "WINSLOW": { rate: 3.48, outlook: "High", county: "Camden" },
-        "WINSLOW TWP": { rate: 3.48, outlook: "High", county: "Camden" },
         "SICKLERVILLE": { rate: 3.45, outlook: "High", county: "Camden" },
         "CHERRY HILL": { rate: 2.74, outlook: "Moderate", county: "Camden" },
-        "GLOUCESTER TWP": { rate: 3.89, outlook: "Critical", county: "Camden" },
+        "GLOUCESTER": { rate: 3.89, outlook: "Critical", county: "Camden" },
         "VOORHEES": { rate: 3.05, outlook: "Moderate", county: "Camden" },
         "MEDFORD": { rate: 2.38, outlook: "Low", county: "Burlington" },
         "EVESHAM": { rate: 2.65, outlook: "Low", county: "Burlington" },
         "MOUNT LAUREL": { rate: 2.45, outlook: "Low", county: "Burlington" },
         "WASHINGTON": { rate: 3.12, outlook: "Moderate", county: "Gloucester" },
-        "WASHINGTON TWP": { rate: 3.12, outlook: "Moderate", county: "Gloucester" }
+        "DEPTFORD": { rate: 3.10, outlook: "Moderate", county: "Gloucester" },
+        "MONROE": { rate: 3.35, outlook: "High", county: "Gloucester" }
     };
 
     function getHeatColor(r) {
-        return r > 3.5  ? '#800026' :
-               r > 3.0  ? '#bd0026' :
-               r > 2.5  ? '#e31a1c' :
-               r > 2.0  ? '#fc4e2a' :
-                          '#fed976';
+        if (r === 0) return '#cbd5e1'; // Grey for no data
+        return r > 3.5  ? '#800026' : // Dark Red
+               r > 3.0  ? '#bd0026' : // Red
+               r > 2.5  ? '#e31a1c' : // Orange-Red
+               r > 2.0  ? '#fc4e2a' : // Orange
+                          '#fed976';  // Yellow
+    }
+
+    // Clean names to ensure matches (removes TWP, TOWNSHIP, etc)
+    function cleanName(n) {
+        if (!n) return "";
+        return n.toUpperCase()
+                .replace(" TOWNSHIP", "")
+                .replace(" TWP", "")
+                .trim();
     }
 
     function style(feature) {
-        // Robust property matching for different GeoJSON schemas
-        const rawName = feature.properties.name || feature.properties.MUN_NAME || feature.properties.MUN || "";
-        const name = rawName.toUpperCase().replace(" TOWNSHIP", "").replace(" TWP", "").trim();
+        // Try all common NJ GeoJSON property names
+        const rawName = feature.properties.MUN_NAME || feature.properties.name || feature.properties.MUN || "";
+        const name = cleanName(rawName);
         
-        // Match against our stats object
-        const data = stats[name] || stats[name + " TWP"] || stats[name + " TOWNSHIP"];
+        const data = stats[name];
         const rate = data ? data.rate : 0;
 
         return {
-            fillColor: rate > 0 ? getHeatColor(rate) : '#cbd5e1', // Fallback to grey if no data
+            fillColor: getHeatColor(rate),
             weight: 1.5,
             opacity: 1,
             color: 'white',
@@ -120,18 +129,20 @@
 
     function onHover(e) {
         const layer = e.target;
-        layer.setStyle({ weight: 3, color: '#d4af37', fillOpacity: 0.9 });
+        layer.setStyle({ weight: 4, color: '#d4af37', fillOpacity: 0.9 });
         
-        const rawName = layer.feature.properties.name || layer.feature.properties.MUN_NAME || "";
-        const name = rawName.toUpperCase().replace(" TOWNSHIP", "").replace(" TWP", "").trim();
-        const data = stats[name] || stats[name + " TWP"] || stats[name + " TOWNSHIP"];
+        const rawName = layer.feature.properties.MUN_NAME || layer.feature.properties.name || "";
+        const name = cleanName(rawName);
+        const data = stats[name];
         
+        const infoDiv = document.getElementById('map-info');
         if (data) {
             document.getElementById('muni-name').innerText = rawName;
             document.getElementById('muni-data').innerHTML = `
                 <p><strong>Effective Rate:</strong> ${data.rate}%</p>
-                <p><strong>Outlook:</strong> <span class="quiz-badge">${data.outlook}</span></p>
-                <a href="appeal-quiz.html" class="btn-primary" style="display:block; margin-top:10px; font-size:12px; text-align:center;">Run Analysis</a>
+                <p><strong>Outlook:</strong> <span class="quiz-badge" style="background:${getHeatColor(data.rate)}; color:white;">${data.outlook}</span></p>
+                <p><strong>County:</strong> ${data.county}</p>
+                <a href="appeal-quiz.html" class="btn-primary" style="display:block; margin-top:15px; font-size:12px; text-align:center;">Run Analysis</a>
             `;
         } else {
             document.getElementById('muni-name').innerText = rawName;
@@ -142,7 +153,7 @@
     function offHover(e) { geojson.resetStyle(e.target); }
 
     let geojson;
-    // Using a reliable NJ GeoJSON source
+    // Loading a more consistent GeoJSON source for NJ boundaries
     fetch('https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/new-jersey.geojson')
         .then(res => res.json())
         .then(data => {
@@ -150,8 +161,15 @@
                 style: style,
                 onEachFeature: (f, l) => { l.on({ mouseover: onHover, mouseout: offHover }); }
             }).addTo(map);
+        })
+        .catch(err => {
+            console.error("Map Load Error:", err);
+            document.getElementById('map').innerHTML = "<p style='padding:20px;'>Map failed to load. Please check your internet connection.</p>";
         });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
