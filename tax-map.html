@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Tax Heat Map | NJ Property Tax Relief</title>
+    <title>South Jersey Tax Heat Map | NJ Property Tax Relief</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        #map-container { height: 750px; margin: 20px auto; border-radius: 12px; overflow: hidden; border: 2px solid var(--navy); position: relative; }
+        #map-container { height: 700px; margin: 20px auto; border-radius: 12px; overflow: hidden; border: 2px solid var(--navy); position: relative; }
         #map { height: 100%; background: #f8fafc; }
-        .map-card { position: absolute; top: 20px; right: 20px; z-index: 1000; width: 280px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-top: 4px solid var(--gold); }
+        .map-card { position: absolute; top: 20px; right: 20px; z-index: 1000; width: 280px; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-top: 5px solid var(--gold); }
         .legend { background: white; padding: 15px; line-height: 18px; color: #333; border-radius: 5px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
         .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; }
-        .outlook-critical { color: #800026; font-weight: bold; }
-        .outlook-high { color: #bd0026; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -24,7 +22,7 @@
 <div class="hero" style="background: var(--navy-dark); padding: 50px 20px; border-bottom: 5px solid var(--gold);">
     <div class="hero-inner">
         <h1>South Jersey <span>Tax Heat Map</span></h1>
-        <p>A visual breakdown of 2026 effective tax rates. Darker shades indicate higher tax burdens relative to property value.</p>
+        <p>A visual breakdown of average effective tax rates by county. Darker shades indicate higher tax intensity relative to market value.</p>
     </div>
 </div>
 
@@ -32,8 +30,8 @@
     <div class="section-inner">
         <div id="map-container">
             <div class="map-card" id="map-info">
-                <h3 id="muni-name">Select a Town</h3>
-                <div id="muni-data">Hover over the map to see local data.</div>
+                <h3 id="county-name">Select a County</h3>
+                <div id="county-data">Hover over the map to see regional tax data.</div>
             </div>
             <div id="map"></div>
         </div>
@@ -47,81 +45,90 @@
 <script src="scripts.js"></script>
 
 <script>
-    const map = L.map('map').setView([39.85, -74.9], 10);
+    const map = L.map('map').setView([39.85, -74.8], 9);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // 2026 DATA - Standardized Names
-    const stats = {
-        "WINSLOW": { rate: 3.48, outlook: "High", county: "Camden" },
-        "CHERRY HILL": { rate: 2.74, outlook: "Moderate", county: "Camden" },
-        "GLOUCESTER": { rate: 3.89, outlook: "Critical", county: "Camden" },
-        "VOORHEES": { rate: 3.05, outlook: "Moderate", county: "Camden" },
-        "MEDFORD": { rate: 2.38, outlook: "Low", county: "Burlington" },
-        "EVESHAM": { rate: 2.65, outlook: "Low", county: "Burlington" },
-        "MOUNT LAUREL": { rate: 2.45, outlook: "Low", county: "Burlington" },
-        "WASHINGTON": { rate: 3.12, outlook: "Moderate", county: "Gloucester" },
-        "SICKLERVILLE": { rate: 3.45, outlook: "High", county: "Camden" }
+    // 2026 Average Effective Tax Rates by County
+    const countyStats = {
+        "CAMDEN": { avgRate: 3.42, outlook: "High", towns: "37" },
+        "GLOUCESTER": { avgRate: 3.15, outlook: "Moderate", towns: "24" },
+        "BURLINGTON": { avgRate: 2.48, outlook: "Low", towns: "40" }
     };
 
     function getHeatColor(r) {
-        return r > 3.5 ? '#800026' : r > 3.0 ? '#bd0026' : r > 2.5 ? '#e31a1c' : r > 2.0 ? '#fc4e2a' : '#fed976';
-    }
-
-    function cleanName(n) {
-        if(!n) return "";
-        return n.toUpperCase().replace(" TOWNSHIP", "").replace(" TWP", "").trim();
+        return r > 3.0 ? '#800026' : 
+               r > 2.8 ? '#bd0026' : 
+               r > 2.5 ? '#e31a1c' : 
+               r > 2.2 ? '#fc4e2a' : '#fed976';
     }
 
     function style(feature) {
-        const name = cleanName(feature.properties.name || feature.properties.MUN_NAME || "");
-        const data = stats[name];
-        const rate = data ? data.rate : 0;
+        // NJ Official County files usually use 'COUNTY' or 'NAME'
+        const name = (feature.properties.COUNTY || feature.properties.NAME || "").toUpperCase();
+        const data = countyStats[name];
+        const rate = data ? data.avgRate : 0;
         return {
             fillColor: rate > 0 ? getHeatColor(rate) : '#cbd5e1',
-            weight: 1,
+            weight: 2,
             opacity: 1,
             color: 'white',
-            fillOpacity: 0.8
+            fillOpacity: 0.7
         };
     }
 
     function onHover(e) {
         const layer = e.target;
-        layer.setStyle({ weight: 4, color: '#d4af37', fillOpacity: 0.9 });
-        const name = cleanName(layer.feature.properties.name || layer.feature.properties.MUN_NAME || "");
-        const data = stats[name];
-        const dispName = layer.feature.properties.name || layer.feature.properties.MUN_NAME;
+        layer.setStyle({ weight: 5, color: '#d4af37', fillOpacity: 0.85 });
+        
+        const name = (layer.feature.properties.COUNTY || layer.feature.properties.NAME || "").toUpperCase();
+        const data = countyStats[name];
         
         if (data) {
-            document.getElementById('muni-name').innerText = dispName;
-            document.getElementById('muni-data').innerHTML = `
-                <p><strong>Effective Rate:</strong> ${data.rate}%</p>
-                <p><strong>Outlook:</strong> <span class="outlook-${data.outlook.toLowerCase()}">${data.outlook}</span></p>
-                <a href="appeal-quiz.html" class="btn-primary" style="display:block; margin-top:10px; font-size:12px; text-align:center;">Run Analysis</a>
+            document.getElementById('county-name').innerText = name + " COUNTY";
+            document.getElementById('county-data').innerHTML = `
+                <p style="margin-bottom:8px;"><strong>Avg Effective Rate:</strong> ${data.avgRate}%</p>
+                <p style="margin-bottom:15px;"><strong>Regional Outlook:</strong> <span class="quiz-badge" style="background:${getHeatColor(data.avgRate)}; color:white;">${data.outlook}</span></p>
+                <p style="font-size:13px; color:#666;">Monitoring ${data.towns} municipalities in this region.</p>
+                <a href="property-tax-appeal.html" class="btn-primary" style="display:block; margin-top:15px; font-size:12px; text-align:center;">View Town Directory</a>
             `;
-        } else {
-            document.getElementById('muni-name').innerText = dispName;
-            document.getElementById('muni-data').innerHTML = "Data pending for this area.";
         }
     }
 
     function offHover(e) { geojson.resetStyle(e.target); }
 
     let geojson;
-    // Using a more reliable, CORS-friendly GeoJSON source
-    fetch('https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/new-jersey.geojson')
+    // LOADING YOUR UPLOADED FILE
+    fetch('NJ_Counties_3857_3761882870795826402.geojson')
         .then(res => res.json())
         .then(data => {
-            geojson = L.geoJson(data, {
+            // Filter to only show your core market counties
+            const targetCounties = ["CAMDEN", "GLOUCESTER", "BURLINGTON"];
+            const filteredData = {
+                ...data,
+                features: data.features.filter(f => {
+                    const name = (f.properties.COUNTY || f.properties.NAME || "").toUpperCase();
+                    return targetCounties.includes(name);
+                })
+            };
+
+            geojson = L.geoJson(filteredData, {
                 style: style,
-                onEachFeature: (f, l) => { l.on({ mouseover: onHover, mouseout: offHover }); }
+                onEachFeature: (f, l) => {
+                    l.on({ mouseover: onHover, mouseout: offHover });
+                }
             }).addTo(map);
+            
+            // Adjust map view to the filtered counties
+            map.fitBounds(geojson.getBounds());
         })
         .catch(err => {
-            console.error("Map Fetch Error:", err);
-            document.getElementById('map').innerHTML = "<p style='padding:20px;'>Error loading municipal boundaries. Check your connection or try a different browser.</p>";
+            console.error("GeoJSON Load Error:", err);
+            document.getElementById('map').innerHTML = "<p style='padding:20px;'>Error: Ensure the GeoJSON file is in your root directory.</p>";
         });
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
