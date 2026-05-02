@@ -121,6 +121,47 @@
       }
     }
 
+/* ============================================================
+   FAQ + VIDEO TWO-COLUMN LAYOUT
+   Desktop: FAQ on left, video on right
+   Mobile (under 900px): FAQ on top, video below, centered
+   ============================================================ */
+.faq-with-video {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.faq-with-video .faq-list {
+  flex: 1 1 auto;
+  max-width: 780px;
+}
+
+.faq-with-video .faq-video-side {
+  flex: 0 0 320px;
+}
+
+/* Cancel the card's centering margin when it's in the sidebar */
+.faq-with-video .faq-video-side .video-card-tiktok {
+  margin: 0;
+  max-width: 100%;
+}
+
+/* Mobile: stack vertically, center the video below FAQ */
+@media (max-width: 900px) {
+  .faq-with-video {
+    flex-direction: column;
+  }
+  .faq-with-video .faq-video-side {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  .faq-with-video .faq-video-side .video-card-tiktok {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+}
+
 /* --- QUIZ PROMO RIBBON FIX --- */
 .quiz-ribbon {
     background: #0a1837; /* Navy match */
