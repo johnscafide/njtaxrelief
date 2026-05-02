@@ -121,5 +121,66 @@
 
     initMap();
 </script>
+
+<script>
+    // 1. Initialize Map centered on New Jersey
+    const map = L.map('map').setView([40.05, -74.4], 8);
+    
+    // 2. Add Base Tiles (Using CartoDB for clean look)
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; Carto'
+    }).addTo(map);
+
+    let masterTaxData = {};
+
+    async function initMap() {
+        console.log("Starting Map Initialization...");
+        try {
+            // Load Tax Data
+            const taxRes = await fetch('tax-data.json');
+            if (!taxRes.ok) throw new Error("Could not find tax-data.json");
+            masterTaxData = await taxRes.json();
+            console.log("Tax Data Loaded Successfully");
+
+            // Load Boundaries
+            const geoRes = await fetch('Municipal_Boundaries_of_NJ.json');
+            if (!geoRes.ok) throw new Error("Could not find Municipal_Boundaries_of_NJ.json");
+            const geoData = await geoRes.json();
+            console.log("Boundary Data Loaded Successfully");
+
+            L.geoJson(geoData, {
+                style: function(feature) {
+                    const code = feature.properties.MUN_CODE || feature.properties.SSN;
+                    const info = masterTaxData[code];
+                    const rate = info ? info.effectiveRate : 0;
+                    return {
+                        fillColor: rate > 3.5 ? '#800026' : rate > 3.0 ? '#bd0026' : rate > 2.5 ? '#e31a1c' : rate > 2.0 ? '#fc4e2a' : '#fed976',
+                        weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7
+                    };
+                },
+                onEachFeature: function(feature, layer) {
+                    layer.on({
+                        mouseover: (e) => {
+                            const code = feature.properties.MUN_CODE;
+                            const info = masterTaxData[code];
+                            document.getElementById('muni-name').innerText = info ? info.name : feature.properties.MUN_LABEL;
+                            document.getElementById('muni-data').innerHTML = info ? 
+                                `Rate: ${info.effectiveRate}%<br>Ratio: ${info.ratio}%` : "No data found.";
+                        }
+                    });
+                }
+            }).addTo(map);
+
+            console.log("Map Layers Added!");
+
+        } catch (err) {
+            console.error("FATAL ERROR:", err.message);
+            document.getElementById('muni-data').innerHTML = `<b style="color:red;">Error: ${err.message}</b><br>Make sure you are running this on a local server or uploaded to your hosting.`;
+        }
+    }
+
+    initMap();
+</script>
+    
 </body>
 </html>
