@@ -5,6 +5,69 @@
     text-decoration: none;
 }
 
+/* --- DASHBOARD STYLES --- */
+.dashboard-bg { background-color: #f1f5f9; }
+
+.dashboard-header {
+    background: var(--navy-dark);
+    color: #fff;
+    padding: 40px 0;
+    border-bottom: 4px solid var(--gold);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: -30px; /* Pulls cards up into the header slightly */
+}
+
+.dash-card {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.stat-card { text-align: center; }
+.stat-header { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+.stat-value { font-size: 36px; font-weight: 800; margin: 10px 0; color: var(--navy); }
+.stat-desc { font-size: 13px; margin-bottom: 15px; }
+
+/* SOCIAL BUTTON FIXES */
+.social-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background: #fff;
+    gap: 10px;
+}
+
+.social-btn.google i { color: #DB4437; }
+.social-btn.facebook { background: #1877F2; color: #fff; border: none; }
+
+.comp-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+}
+
+/* Timeline */
+.timeline { list-style: none; padding: 0; margin-top: 20px; }
+.timeline li { border-left: 2px solid #e2e8f0; padding-left: 20px; position: relative; padding-bottom: 20px; }
+.timeline li.active { border-left-color: var(--gold); }
+.timeline li::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: #e2e8f0; }
+.timeline li.active::before { background: var(--gold); }
+
+
 /* ============================================================
        TIKTOK VIDEO CARD COMPONENT
        Used on senior-programs.html and pas-1-guide.html
