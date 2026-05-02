@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NJ Tax Heat Map | The Tax Watchdog</title>
+    <title>Master NJ Tax Map | The Tax Watchdog</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -12,10 +12,12 @@
         #map { height: 100%; background: #f8fafc; }
         .map-card { 
             position: absolute; top: 20px; right: 20px; z-index: 1000; 
-            width: 300px; background: white; padding: 25px; border-radius: 8px; 
+            width: 300px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.2); border-top: 5px solid var(--gold); 
         }
-        .status-critical { color: #800026; font-weight: bold; }
+        .status-critical { color: #800026; font-weight: 800; }
+        .status-high { color: #bd0026; font-weight: 800; }
+        .status-low { color: #22c55e; font-weight: 800; }
     </style>
 </head>
 <body>
@@ -25,7 +27,7 @@
 <div class="hero" style="background: var(--navy-dark); padding: 50px 20px; border-bottom: 5px solid var(--gold);">
     <div class="hero-inner">
         <h1>New Jersey <span>Master Tax Map</span></h1>
-        <p>Interactive visualization of all 564 municipalities. Sourced from 2025 TEV & 2026 Ratables.</p>
+        <p>Visualizing effective tax rates across all 564 municipalities.</p>
     </div>
 </div>
 
@@ -34,7 +36,7 @@
         <div id="map-container">
             <div class="map-card" id="map-info">
                 <h2 id="muni-name" style="margin-bottom:10px; color:var(--navy);">Explore NJ</h2>
-                <div id="muni-data">Hover over any municipality to see 2026 effective tax rates.</div>
+                <div id="muni-data">Hover over any municipality to see 2026 data.</div>
             </div>
             <div id="map"></div>
         </div>
@@ -49,50 +51,61 @@
 
 <script>
     const map = L.map('map').setView([40.05, -74.4], 8);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+    
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap &copy; CartoDB'
+    }).addTo(map);
 
     let masterTaxData = {};
     let geojson;
 
     function getHeatColor(r) {
         if (!r || r === 0) return '#cbd5e1';
-        return r > 3.5 ? '#800026' : r > 3.0 ? '#bd0026' : r > 2.5 ? '#e31a1c' : r > 2.2 ? '#fc4e2a' : '#fed976';
+        return r > 3.5 ? '#800026' : 
+               r > 3.0 ? '#bd0026' : 
+               r > 2.5 ? '#e31a1c' : 
+               r > 2.0 ? '#fc4e2a' : '#fed976';
     }
 
     async function initMap() {
         try {
-            // Load your data file
+            // 1. Fetch your tax data from the JSON file we built
             const dataResponse = await fetch('tax-data.json');
             masterTaxData = await dataResponse.json();
             
-            // USE A SIMPLIFIED CLOUD-HOSTED NJ BOUNDARY FILE (FASTEST)
+            // 2. Fetch lightweight GeoJSON from the optimized CDN
             const boundaryUrl = "https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/new-jersey.geojson";
             
-            fetch(boundaryUrl)
-                .then(res => res.json())
-                .then(data => {
-                    geojson = L.geoJson(data, {
-                        style: style,
-                        onEachFeature: (f, l) => { l.on({ mouseover: onHover, mouseout: offHover }); }
-                    }).addTo(map);
-                });
+            const geoResponse = await fetch(boundaryUrl);
+            const geoData = await geoResponse.json();
+
+            geojson = L.geoJson(geoData, {
+                style: style,
+                onEachFeature: (f, l) => {
+                    l.on({
+                        mouseover: onHover,
+                        mouseout: offHover
+                    });
+                }
+            }).addTo(map);
+
         } catch (err) {
             console.error("Initialization Error:", err);
+            document.getElementById('muni-data').innerText = "Unable to load map data. Please check connection.";
         }
     }
 
     function style(feature) {
-        // This CDN file uses feature.properties.name (Proper Case)
-        // We will match it by making it UPPERCASE to match your tax-data keys
-        const name = (feature.properties.name || "").toUpperCase()
+        // The CDN file uses 'name' (e.g. "Winslow Township")
+        const rawName = (feature.properties.name || "").toUpperCase()
                         .replace(" TOWNSHIP", "")
                         .replace(" TWP", "")
                         .trim();
         
-        // Find match in our 500+ town list
         let rate = 0;
+        // Find match in our data object by name
         for (let code in masterTaxData) {
-            if (masterTaxData[code].name.includes(name)) {
+            if (masterTaxData[code].name.includes(rawName)) {
                 rate = masterTaxData[code].effectiveRate;
                 break;
             }
@@ -100,7 +113,10 @@
 
         return {
             fillColor: getHeatColor(rate),
-            weight: 1, opacity: 1, color: 'white', fillOpacity: 0.7
+            weight: 1,
+            opacity: 1,
+            color: 'white',
+            fillOpacity: 0.7
         };
     }
 
@@ -127,11 +143,15 @@
                 <div style="margin-bottom:8px;"><strong>Effective Rate:</strong> ${info.effectiveRate}%</div>
                 <div style="margin-bottom:8px;"><strong>Equalization Ratio:</strong> ${info.ratio}%</div>
                 <div><strong>Outlook:</strong> <span class="status-${info.status.toLowerCase()}">${info.status}</span></div>
+                <hr style="margin:15px 0; border:0; border-top:1px solid #eee;">
+                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; font-size:12px;">Run Appeal Analysis</a>
             `;
         }
     }
 
-    function offHover(e) { geojson.resetStyle(e.target); }
+    function offHover(e) {
+        geojson.resetStyle(e.target);
+    }
 
     initMap();
 </script>
