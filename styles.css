@@ -5,6 +5,122 @@
     text-decoration: none;
 }
 
+/* ============================================================
+       TIKTOK VIDEO CARD COMPONENT
+       Used on senior-programs.html and pas-1-guide.html
+       Clickable thumbnail that opens the TikTok in a new tab.
+       ============================================================ */
+ 
+    .video-card-tiktok {
+      max-width: 320px;
+      margin: 28px auto;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+ 
+    .video-card-tiktok:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+    }
+ 
+    .video-thumb-link {
+      display: block;
+      position: relative;
+      text-decoration: none;
+      aspect-ratio: 9 / 16;       /* matches TikTok vertical format */
+      overflow: hidden;
+      background: #000;
+    }
+ 
+    .video-thumb-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease, filter 0.25s ease;
+    }
+ 
+    .video-card-tiktok:hover .video-thumb-img {
+      transform: scale(1.04);
+      filter: brightness(0.82);
+    }
+ 
+    .video-play-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+ 
+    .video-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      transition: transform 0.25s ease;
+    }
+ 
+    .video-card-tiktok:hover .video-play-btn {
+      transform: scale(1.1);
+    }
+ 
+    .video-play-btn i {
+      font-size: 28px;
+      color: var(--navy, #0a2540);
+      margin-left: 5px;            /* nudges play triangle to optical center */
+    }
+ 
+    .video-tiktok-badge {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+ 
+    .video-card-caption {
+      padding: 14px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+ 
+    .video-card-caption strong {
+      color: var(--navy, #0a2540);
+      font-size: 15px;
+      line-height: 1.3;
+    }
+ 
+    .video-card-caption span {
+      color: var(--text-muted, #6b7280);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+ 
+    /* On mobile, let the card breathe to full width but cap it. */
+    @media (max-width: 600px) {
+      .video-card-tiktok {
+        max-width: 92%;
+      }
+    }
+
 /* --- QUIZ PROMO RIBBON FIX --- */
 .quiz-ribbon {
     background: #0a1837; /* Navy match */
