@@ -3,82 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Property Dashboard | The Tax Watchdog</title>
+    <title>Property Dashboard | NJ Property Tax Relief</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Dashboard-Specific UI Overrides */
+        body { background-color: #f4f7f9; }
+        
+        .dash-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Robinhood-Style Watchlist (The Legend) */
+        .watchlist-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            border: 1px solid var(--border);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .watchlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .add-prop-btn {
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-prop-btn:hover { background: var(--gold); transform: scale(1.1); }
+
+        .watch-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f9f9f9;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .watch-item:hover { background: #fcfcfc; padding-left: 5px; }
+
+        .watch-addr { font-weight: 700; font-size: 14px; color: var(--navy); display: block; }
+        .watch-meta { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+        
+        .watch-stats { text-align: right; }
+        .watch-price { font-weight: 800; font-size: 15px; color: var(--navy); }
+        .watch-trend { font-size: 12px; font-weight: 600; margin-top: 2px; }
+        .watch-trend.up { color: var(--green); }
+        .watch-trend.down { color: #ff4d4d; }
+
+        /* Main Content Cards */
+        .main-dash-content { display: flex; flex-direction: column; gap: 25px; }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .mini-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .mini-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        .mini-value { font-size: 28px; font-weight: 800; margin: 10px 0; color: var(--navy); }
+
+        @media (max-width: 992px) {
+            .dash-layout { grid-template-columns: 1fr; margin-top: 20px; }
+            .watchlist-card { position: static; order: 2; }
+        }
+    </style>
 </head>
-<body class="dashboard-bg">
+<body>
 
 <nav id="main-nav"></nav>
 
-<div class="dashboard-header">
-    <div class="section-inner">
-        <h1>Welcome Back, <span id="user-name">Member</span></h1>
-        <p><i class="fas fa-map-marker-alt"></i> Monitoring Property: <strong id="user-address">Winslow Township, NJ</strong></p>
-    </div>
+<div class="hero" style="padding: 80px 24px; background: var(--navy-dark); border-bottom: 4px solid var(--gold);">
+  <div class="hero-inner">
+    <h1 style="color:#fff;">Member <span>Dashboard</span></h1>
+    <p style="color: rgba(255,255,255,0.8);">Real-time property monitoring and tax relief tracking.</p>
+  </div>
 </div>
 
 <section class="section">
     <div class="section-inner">
-        <div class="dashboard-grid">
+        
+        <div class="dash-layout">
             
-            <div class="dash-card stat-card">
-                <div class="stat-header">Appeal Probability</div>
-                <div class="stat-value" style="color: var(--green);">85%</div>
-                <div class="stat-desc">High Priority Case</div>
-                <a href="appeal-quiz.html" class="stat-link">Recalculate Score →</a>
-            </div>
-
-            <div class="dash-card stat-card">
-                <div class="stat-header">Next Deadline</div>
-                <div class="stat-value">April 1</div>
-                <div class="stat-desc">County Appeal Deadline</div>
-                <button class="stat-btn-alt" onclick="syncCalendar()"><i class="fab fa-google"></i> Sync to Calendar</button>
-            </div>
-
-            <div class="dash-card stat-card">
-                <div class="stat-header">Est. Savings</div>
-                <div class="stat-value">$1,240</div>
-                <div class="stat-desc">Potential Annual Refund</div>
-                <a href="contact.html" class="stat-link">Start Filing →</a>
-            </div>
-
-            <div class="dash-card wide-card">
-                <h3><i class="fas fa-bell"></i> Watchdog Alerts</h3>
-                <ul class="timeline">
-                    <li class="active">
-                        <span class="date">May 1, 2026</span>
-                        <strong>Stay NJ Deadline</strong>
-                        <p>Verify your senior credit application is submitted for the 2026 cycle.</p>
-                    </li>
-                    <li>
-                        <span class="date">Oct 2026</span>
-                        <strong>ANCHOR Mailing</strong>
-                        <p>State will begin mailing confirmation letters for the next benefit cycle.</p>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="dash-card">
-                <h3><i class="fas fa-chart-line"></i> Local Market Watch</h3>
-                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Recent sales in your neighborhood (Winslow/Sicklerville):</p>
-                <div class="comp-item">
-                    <span>123 Blue Anchor Rd</span>
-                    <strong>$415,000</strong>
+            <div class="main-dash-content">
+                
+                <div class="stats-row">
+                    <div class="mini-card">
+                        <div class="mini-label">Overall Probability</div>
+                        <div class="mini-value" style="color: var(--green);">82%</div>
+                        <span class="quiz-badge">High Success</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-label">Total Est. Savings</div>
+                        <div class="mini-value">$2,150</div>
+                        <span style="font-size:11px; color:var(--text-muted);">Annual potential</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-label">Next Deadline</div>
+                        <div class="mini-value" style="font-size: 22px;">May 1st</div>
+                        <button class="btn-outline" style="padding: 5px 10px; font-size: 10px;" onclick="syncCalendar()">Sync Google Cal</button>
+                    </div>
                 </div>
-                <div class="comp-item">
-                    <span>45 Dalton Place</span>
-                    <strong>$389,000</strong>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom:20px;"><i class="fas fa-bullhorn" style="color:var(--gold);"></i> Watchdog Market Feed</h3>
+                    <div class="timeline">
+                        <li class="active">
+                            <span class="date">May 1, 2026</span>
+                            <strong>Stay NJ Application Portal Open</strong>
+                            <p>Verify your income requirements for the 2026 senior tax credit. John has updated the PAS-1 checklist in your resources.</p>
+                        </li>
+                        <li>
+                            <span class="date">Oct 15, 2026</span>
+                            <strong>ANCHOR Benefit Confirmation</strong>
+                            <p>Expected date for the next round of state confirmation letters.</p>
+                        </li>
+                    </div>
                 </div>
-                <button class="btn-outline" style="width: 100%; margin-top: 15px;">View More Comps</button>
+
+                <div class="prog-card-new gold">
+                    <h3>Quick Town Lookup</h3>
+                    <p>Access tax collector info for any municipality in your portfolio.</p>
+                    <a href="resources.html" class="btn-primary" style="margin-top:15px; display:inline-block;">Search Town Directory</a>
+                </div>
             </div>
+
+            <aside class="watchlist-card">
+                <div class="watchlist-header">
+                    <h3 style="font-size: 18px; color: var(--navy);"><i class="fas fa-list-ul"></i> My Properties</h3>
+                    <button class="add-prop-btn" onclick="openAddProperty()"><i class="fas fa-plus"></i></button>
+                </div>
+
+                <div id="add-prop-form" style="display:none; background:#f8fafc; padding:15px; border-radius:8px; margin-bottom:20px;">
+                    <input type="text" id="prop-input" placeholder="Address..." style="width:100%; padding:10px; border-radius:5px; border:1px solid #ddd; margin-bottom:10px;">
+                    <button class="btn-primary" style="width:100%; font-size:12px;" onclick="addPropertyToWatchlist()">Monitor Property</button>
+                </div>
+
+                <div id="watchlist-items">
+                    <div class="watch-item">
+                        <div class="watch-info">
+                            <span style="font-size:9px; background:var(--navy); color:#fff; padding:2px 5px; border-radius:3px; text-transform:uppercase;">Primary</span>
+                            <span class="watch-addr">11 Dalton Place</span>
+                            <span class="watch-meta">Sicklerville, NJ</span>
+                        </div>
+                        <div class="watch-stats">
+                            <div class="watch-price">$350,000</div>
+                            <div class="watch-trend up"><i class="fas fa-caret-up"></i> 2.4%</div>
+                        </div>
+                    </div>
+
+                    <div class="watch-item">
+                        <div class="watch-info">
+                            <span class="watch-addr">45 Blue Anchor Rd</span>
+                            <span class="watch-meta">Winslow, NJ</span>
+                        </div>
+                        <div class="watch-stats">
+                            <div class="watch-price">$412,000</div>
+                            <div class="watch-trend down"><i class="fas fa-caret-down"></i> 0.8%</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
 
         </div>
     </div>
 </section>
 
 <footer id="main-footer"></footer>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="scripts.js"></script>
+
+<script>
+    /* DASHBOARD INTERACTIVE FUNCTIONS */
+    function openAddProperty() {
+        const form = document.getElementById('add-prop-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function addPropertyToWatchlist() {
+        const addr = document.getElementById('prop-input').value;
+        if(!addr) return;
+
+        const list = document.getElementById('watchlist-items');
+        const newItem = `
+            <div class="watch-item" style="animation: fadeIn 0.5s;">
+                <div class="watch-info">
+                    <span class="watch-addr">${addr}</span>
+                    <span class="watch-meta">PENDING DATA...</span>
+                </div>
+                <div class="watch-stats">
+                    <div class="watch-price">---</div>
+                    <div class="watch-trend">FETCHING</div>
+                </div>
+            </div>
+        `;
+        list.insertAdjacentHTML('afterbegin', newItem);
+        document.getElementById('prop-input').value = "";
+        document.getElementById('add-prop-form').style.display = 'none';
+    }
+</script>
+
 </body>
 </html>
