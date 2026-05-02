@@ -6,73 +6,119 @@
     <title>2026 NJ Property Tax Deadlines | South Jersey Calendar</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .timeline-container { position: relative; max-width: 900px; margin: 40px auto; padding: 20px; }
+        .timeline-line { position: absolute; left: 50%; width: 2px; height: 100%; background: #e2e8f0; transform: translateX(-50%); }
+        .timeline-item { margin-bottom: 40px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
+        .timeline-content { width: 45%; padding: 20px; background: #fff; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); position: relative; }
+        .timeline-dot { width: 16px; height: 16px; background: var(--gold); border-radius: 50%; position: absolute; left: 50%; transform: translateX(-50%); z-index: 2; border: 3px solid #fff; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .date-label { font-weight: 800; color: var(--navy); display: block; margin-bottom: 5px; }
+        @media (max-width: 768px) {
+            .timeline-line { left: 20px; }
+            .timeline-dot { left: 20px; }
+            .timeline-content { width: calc(100% - 60px); margin-left: 60px; }
+            .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <span><i class="fas fa-landmark" style="margin-right:6px;"></i>NJ Property Tax Relief Resource Guide — South Jersey</span>
-    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">Official NJ Treasury <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
-  </div>
-</div>
-
 <nav id="main-nav"></nav>
 
-<div class="hero" style="background: linear-gradient(rgba(10,24,55,0.85),rgba(10,24,55,0.85)), url('https://images.unsplash.com/photo-1506784919141-937849f8a70b?w=1600&q=80') center/cover;">
+<div class="hero" style="background: var(--navy-dark); padding: 80px 20px;">
   <div class="hero-inner">
-    <div class="hero-badge">Never Miss a Rebate</div>
-    <h1>The 2026 NJ Property <span>Tax Calendar</span></h1>
-    <p>Important deadlines for Camden, Gloucester, and Burlington County residents. Missing one date could cost you thousands in missed rebates.</p>
+    <div class="hero-badge" style="background: var(--gold); color: var(--navy);">2026 Master Schedule</div>
+    <h1>NJ Property <span>Tax Deadlines</span></h1>
+    <p>The state has consolidated ANCHOR, Senior Freeze, and Stay NJ into one application (PAS-1). Use this calendar to track your payments and your rebates.</p>
     <div class="hero-actions">
-      <a href="https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief" class="btn-primary"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Book PAS-1 Filing Help</a>
+        <button class="btn-primary" onclick="syncCalendar()"><i class="fab fa-google"></i> Sync to My Calendar</button>
     </div>
   </div>
 </div>
 
 <section class="section">
-  <div class="section-inner">
-    <div class="section-label">Payment Schedule</div>
-    <h2 class="section-title">When Property Taxes Are Due</h2>
-    <p class="section-subtitle">Property taxes are billed annually but paid in four installments. Most NJ towns offer a 10-day grace period.</p>
-    <div class="facts-grid">
-      <div class="fact-card"><div class="fact-num">Feb 1</div><div class="fact-label">1st Quarter Due<br>(Grace ends Feb 10)</div></div>
-      <div class="fact-card"><div class="fact-num">May 1</div><div class="fact-label">2nd Quarter Due<br>(Grace ends May 11)</div></div>
-      <div class="fact-card"><div class="fact-num">Aug 1</div><div class="fact-label">3rd Quarter Due<br>(Grace ends Aug 10)</div></div>
-      <div class="fact-card"><div class="fact-num">Nov 1</div><div class="fact-label">4th Quarter Due<br>(Grace ends Nov 10)</div></div>
+    <div class="section-inner">
+        <div class="section-label">Payment Schedule</div>
+        <h2 class="section-title">Standard Quarterly Due Dates</h2>
+        <div class="facts-grid">
+            <div class="fact-card">
+                <div class="fact-num">Feb 1</div>
+                <p><strong>1st Quarter</strong><br>Grace Period ends Feb 10</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-num">May 1</div>
+                <p><strong>2nd Quarter</strong><br>Grace Period ends May 11</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-num">Aug 1</div>
+                <p><strong>3rd Quarter</strong><br>Grace Period ends Aug 10</p>
+            </div>
+            <div class="fact-card">
+                <div class="fact-num">Nov 1</div>
+                <p><strong>4th Quarter</strong><br>Grace Period ends Nov 10</p>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <section class="section section-alt">
-  <div class="section-inner">
-    <div class="section-label">Critical Deadlines</div>
-    <h2 class="section-title">2026 Filing & Appeal Dates</h2>
-    <div class="programs-grid-new">
-      <div class="prog-card-new green">
-        <div class="prog-card-name">Jan 15: Burl/Glouc Appeals</div>
-        <div class="prog-card-desc">Deadline for Burlington and Gloucester County property tax appeals. Applications must be received by 4:00 PM.</div>
-      </div>
-      <div class="prog-card-new purple">
-        <div class="prog-card-name">Apr 1: Camden Appeals</div>
-        <div class="prog-card-desc">Deadline for Camden County and most other NJ municipalities. Failing to file on time bars your right to appeal.</div>
-      </div>
-      <div class="prog-card-new gold">
-        <div class="prog-card-name">Aug 1: Farmland Assessment</div>
-        <div class="prog-card-desc">Final day to file Farmland Assessment applications with your local municipal assessor.</div>
-      </div>
-      <div class="prog-card-new">
-        <div class="prog-card-name">Nov 2: PAS-1 & ANCHOR</div>
-        <div class="prog-card-desc">The absolute final deadline for all 2026 senior and homeowner relief programs. No exceptions.</div>
-      </div>
+    <div class="section-inner">
+        <div class="section-label">Filing & Rebates</div>
+        <h2 class="section-title">2026 Critical Filing Windows</h2>
+        
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date-label">January 15</span>
+                    <strong>Burlington/Gloucester Appeals</strong>
+                    <p>Final day to file traditional tax appeals in BurlCo and GloucCo.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date-label">April 1</span>
+                    <strong>Camden County Appeals</strong>
+                    <p>Deadline for Camden County and most of NJ. Note: Towns under revaluation may extend to May 1.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date-label">July 15</span>
+                    <strong>Senior Freeze Payments Start</strong>
+                    <p>First wave of checks for residents who filed their PAS-1 early (before May 1).</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <span class="date-label">September</span>
+                    <strong>ANCHOR Rebate Distribution</strong>
+                    <p>State begins issuing ANCHOR benefits to eligible homeowners and renters.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content" style="border: 2px solid var(--gold);">
+                    <span class="date-label" style="color: #e53e3e;">November 2</span>
+                    <strong>PAS-1 Final Deadline</strong>
+                    <p>The absolute last day to apply for 2026 ANCHOR, Senior Freeze, and Stay NJ.</p>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- FOOTER -->
 <footer id="main-footer"></footer>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="scripts.js"></script>
 </body>
 </html>
