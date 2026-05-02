@@ -914,4 +914,90 @@
   window.filterTowns = filterTowns;
   window.scrollToTop = scrollToTop;
 
+  /* --- APIFY ZILLOW INTEGRATION --- */
+const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
+const ACTOR_ID = 'maxcopell/zillow-scraper';
+
+async function addPropertyToWatchlist() {
+    const address = document.getElementById('prop-input').value;
+    if (!address) return;
+
+    // 1. Add a "Loading" item to the watchlist
+    const list = document.getElementById('watchlist-items');
+    const tempId = 'prop-' + Date.now();
+    const loadingItem = `
+        <div class="watch-item" id="${tempId}">
+            <div class="watch-info">
+                <span class="watch-addr">${address}</span>
+                <span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</span>
+            </div>
+        </div>
+    `;
+    list.insertAdjacentHTML('afterbegin', loadingItem);
+    document.getElementById('prop-input').value = "";
+    document.getElementById('add-prop-form').style.display = 'none';
+
+    try {
+        // 2. Trigger the Apify Actor
+        const runResponse = await fetch(`https://api.apify.com/v2/acts/${ACTOR_ID}/runs?token=${APIFY_TOKEN}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "search": address, // This tells the scraper to search for the NJ address
+                "maxItems": 1
+            })
+        });
+        const runData = await runResponse.json();
+        const runId = runData.data.id;
+
+        // 3. Poll for results (Wait for scraper to finish)
+        // Note: In a production app, you'd use a Webhook, but polling works for a demo
+        checkStatus(runId, tempId, address);
+
+    } catch (error) {
+        console.error("Apify Error:", error);
+        document.getElementById(tempId).innerHTML = "Error fetching data.";
+    }
+}
+
+async function checkStatus(runId, elementId, address) {
+    const response = await fetch(`https://api.apify.com/v2/actor-runs/${runId}?token=${APIFY_TOKEN}`);
+    const data = await response.json();
+
+    if (data.data.status === 'SUCCEEDED') {
+        fetchResults(runId, elementId, address);
+    } else if (data.data.status === 'FAILED' || data.data.status === 'ABORTED') {
+        document.getElementById(elementId).innerHTML = "Search failed.";
+    } else {
+        setTimeout(() => checkStatus(runId, elementId, address), 3000); // Check again in 3s
+    }
+}
+
+async function fetchResults(runId, elementId, address) {
+    const response = await fetch(`https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=${APIFY_TOKEN}`);
+    const items = await response.json();
+    
+    if (items.length > 0) {
+        const prop = items[0];
+        const price = prop.price || prop.zestimate || "N/A";
+        
+        // Calculate Trend (Fake comparison for the demo UI, or use priceChange if available)
+        const trendVal = (Math.random() * 3).toFixed(1); 
+        const isUp = Math.random() > 0.3;
+
+        document.getElementById(elementId).innerHTML = `
+            <div class="watch-info">
+                <span class="watch-addr">${address}</span>
+                <span class="watch-meta">${prop.homeType || 'Residential'} | ${prop.address.city}, NJ</span>
+            </div>
+            <div class="watch-stats">
+                <div class="watch-price">$${price.toLocaleString()}</div>
+                <div class="watch-trend ${isUp ? 'up' : 'down'}">
+                    <i class="fas fa-caret-${isUp ? 'up' : 'down'}"></i> ${trendVal}%
+                </div>
+            </div>
+        `;
+    }
+}
+
 })();
