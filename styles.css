@@ -5,54 +5,6 @@
     text-decoration: none;
 }
 
-/* --- CALENDAR TIGHTENING --- */
-.countdown-strip {
-    background: #e53e3e;
-    color: white;
-    padding: 10px 0;
-    text-align: center;
-    font-weight: 800;
-    font-size: 18px;
-    letter-spacing: 1px;
-}
-
-#countdown-timer { font-family: monospace; font-size: 22px; margin-right: 10px; }
-
-.calendar-grid-container {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 40px;
-    margin-top: 30px;
-}
-
-.mini-due-card {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding: 12px;
-    background: #f8fafc;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    border-left: 4px solid var(--navy);
-}
-
-.mini-due-card span { font-weight: 800; color: var(--navy); min-width: 50px; }
-
-.timeline-entry {
-    display: flex;
-    gap: 20px;
-    padding: 20px 0;
-    border-bottom: 1px solid #e2e8f0;
-}
-
-.t-date { font-weight: 800; color: var(--gold); font-size: 18px; min-width: 80px; }
-.t-info h4 { margin-bottom: 5px; color: var(--navy); }
-.timeline-entry.critical { border-left: 4px solid #e53e3e; padding-left: 20px; background: #fff5f5; }
-
-@media (max-width: 768px) {
-    .calendar-grid-container { grid-template-columns: 1fr; }
-}
-
 /* --- DASHBOARD STYLES --- */
 .dashboard-bg { background-color: #f1f5f9; }
 
