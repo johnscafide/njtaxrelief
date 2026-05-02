@@ -18,6 +18,32 @@
   </div>
 </div>
 
+<section class="section section-alt">
+    <div class="section-inner">
+        <div class="prog-card-new gold" style="display: flex; align-items: center; gap: 30px; padding: 40px;">
+            <div style="flex: 1;">
+                <span class="quiz-badge">Member Exclusive</span>
+                <h2 style="margin: 15px 0;">Unlock Your Property Dashboard</h2>
+                <p>Connect your account to save your tax history, track local revaluations, and get automatic deadline alerts synced to your calendar.</p>
+                
+                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="social-btn google" onclick="handleAuth('google')">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Reference_Icon.svg" width="18" style="margin-right:10px;">
+                        Sync with Google
+                    </button>
+                    <button class="social-btn facebook" onclick="handleAuth('facebook')">
+                        <i class="fab fa-facebook" style="margin-right:10px; font-size:18px;"></i>
+                        Sync with Facebook
+                    </button>
+                </div>
+            </div>
+            <div class="hide-mobile" style="flex: 0 0 250px; text-align: center;">
+                <i class="fas fa-shield-check" style="font-size: 120px; color: var(--navy); opacity: 0.1;"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="section">
     <div class="section-inner">
         <div class="calc-container" style="max-width: 800px; margin: 0 auto;">
@@ -76,32 +102,6 @@
                         <div id="quiz-result-render" style="text-align:center;"></div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="section section-alt">
-    <div class="section-inner">
-        <div class="prog-card-new gold" style="display: flex; align-items: center; gap: 30px; padding: 40px;">
-            <div style="flex: 1;">
-                <span class="quiz-badge">Member Exclusive</span>
-                <h2 style="margin: 15px 0;">Unlock Your Property Dashboard</h2>
-                <p>Connect your account to save your tax history, track local revaluations, and get automatic deadline alerts synced to your calendar.</p>
-                
-                <div style="margin-top: 25px; display: flex; gap: 15px; flex-wrap: wrap;">
-                    <button class="social-btn google" onclick="handleAuth('google')">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Reference_Icon.svg" width="18" style="margin-right:10px;">
-                        Sync with Google
-                    </button>
-                    <button class="social-btn facebook" onclick="handleAuth('facebook')">
-                        <i class="fab fa-facebook" style="margin-right:10px; font-size:18px;"></i>
-                        Sync with Facebook
-                    </button>
-                </div>
-            </div>
-            <div class="hide-mobile" style="flex: 0 0 250px; text-align: center;">
-                <i class="fas fa-shield-check" style="font-size: 120px; color: var(--navy); opacity: 0.1;"></i>
             </div>
         </div>
     </div>
