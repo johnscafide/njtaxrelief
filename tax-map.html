@@ -60,6 +60,39 @@
 <script src="scripts.js"></script>
 
 <script>
+    // COLOR SCALING FOR 564 TOWNS
+    function getHeatColor(r) {
+        if (!r || r === 0) return '#cbd5e1';
+        // Precise 2026 Thresholds
+        return r > 3.7 ? '#800026' : // Critical (Top 5% of NJ)
+               r > 3.2 ? '#bd0026' : // High
+               r > 2.6 ? '#e31a1c' : // Moderate
+               r > 2.0 ? '#fc4e2a' : // Low-Moderate
+                         '#fed976';  // Target/Low
+    }
+
+    // UPDATED HOVER FOR DETAILED INSIGHTS
+    function onHover(e) {
+        const layer = e.target;
+        layer.setStyle({ weight: 3, color: '#d4af37', fillOpacity: 0.9 });
+        
+        const code = layer.feature.properties.MUN_CODE || layer.feature.properties.SSN;
+        const info = masterTaxData[code];
+        const dataDiv = document.getElementById('muni-data');
+
+        if (info) {
+            document.getElementById('muni-name').innerText = info.name;
+            dataDiv.innerHTML = `
+                <div class="data-row"><strong>Effective Rate:</strong> <span>${info.effectiveRate}%</span></div>
+                <div class="data-row"><strong>State Ratio:</strong> <span>${info.ratio}%</span></div>
+                <div class="data-row"><strong>Appeal Status:</strong> <span class="status-${info.status.toLowerCase()}">${info.status}</span></div>
+                <hr style="margin:10px 0; border:0; border-top:1px solid #eee;">
+                <p style="font-size:11px; color:#666;">*Effective rate is calculated as (Nominal Rate × Ratio).</p>
+                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; margin-top:15px; font-size:12px;">Check My Property</a>
+            `;
+        }
+    }
+    
     const map = L.map('map').setView([40.05, -74.4], 8);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
@@ -136,9 +169,6 @@
 
     initMap();
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script src="scripts.js"></script>
     
 </body>
 </html>
