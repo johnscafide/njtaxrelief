@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Property Dashboard | The Tax Watchdog</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="dashboard-bg">
+
+<nav id="main-nav"></nav>
+
+<div class="dashboard-header">
+    <div class="section-inner">
+        <h1>Welcome Back, <span id="user-name">Member</span></h1>
+        <p><i class="fas fa-map-marker-alt"></i> Monitoring Property: <strong id="user-address">Winslow Township, NJ</strong></p>
+    </div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        <div class="dashboard-grid">
+            
+            <div class="dash-card stat-card">
+                <div class="stat-header">Appeal Probability</div>
+                <div class="stat-value" style="color: var(--green);">85%</div>
+                <div class="stat-desc">High Priority Case</div>
+                <a href="appeal-quiz.html" class="stat-link">Recalculate Score →</a>
+            </div>
+
+            <div class="dash-card stat-card">
+                <div class="stat-header">Next Deadline</div>
+                <div class="stat-value">April 1</div>
+                <div class="stat-desc">County Appeal Deadline</div>
+                <button class="stat-btn-alt" onclick="syncCalendar()"><i class="fab fa-google"></i> Sync to Calendar</button>
+            </div>
+
+            <div class="dash-card stat-card">
+                <div class="stat-header">Est. Savings</div>
+                <div class="stat-value">$1,240</div>
+                <div class="stat-desc">Potential Annual Refund</div>
+                <a href="contact.html" class="stat-link">Start Filing →</a>
+            </div>
+
+            <div class="dash-card wide-card">
+                <h3><i class="fas fa-bell"></i> Watchdog Alerts</h3>
+                <ul class="timeline">
+                    <li class="active">
+                        <span class="date">May 1, 2026</span>
+                        <strong>Stay NJ Deadline</strong>
+                        <p>Verify your senior credit application is submitted for the 2026 cycle.</p>
+                    </li>
+                    <li>
+                        <span class="date">Oct 2026</span>
+                        <strong>ANCHOR Mailing</strong>
+                        <p>State will begin mailing confirmation letters for the next benefit cycle.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="dash-card">
+                <h3><i class="fas fa-chart-line"></i> Local Market Watch</h3>
+                <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 15px;">Recent sales in your neighborhood (Winslow/Sicklerville):</p>
+                <div class="comp-item">
+                    <span>123 Blue Anchor Rd</span>
+                    <strong>$415,000</strong>
+                </div>
+                <div class="comp-item">
+                    <span>45 Dalton Place</span>
+                    <strong>$389,000</strong>
+                </div>
+                <button class="btn-outline" style="width: 100%; margin-top: 15px;">View More Comps</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<footer id="main-footer"></footer>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
+</body>
+</html>
