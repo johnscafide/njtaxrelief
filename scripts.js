@@ -1046,24 +1046,4 @@ function saveToStorage(prop) {
     localStorage.setItem('watchdogList', JSON.stringify(current));
 }
 
-function startPAS1Countdown() {
-    const deadline = new Date("November 2, 2026 23:59:59").getTime();
-    
-    setInterval(() => {
-        const now = new Date().getTime();
-        const diff = deadline - now;
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        
-        const timerEl = document.getElementById("countdown-timer");
-        if (timerEl) {
-            timerEl.innerHTML = `${days}d ${hours}h ${minutes}m`;
-        }
-    }, 60000); // Updates every minute
-}
-
-document.addEventListener("DOMContentLoaded", startPAS1Countdown);
-
 })();
