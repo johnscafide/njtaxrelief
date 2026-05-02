@@ -3,185 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>South Jersey Heat Map | NJ Property Tax Relief</title>
+    <title>NJ Tax Heat Map | South Jersey Expert Guide</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        body { background-color: #f8fafc; }
         #map-container {
-            height: 750px;
+            height: 700px;
             margin: 20px auto;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            border: 3px solid var(--navy);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            border: 2px solid var(--navy);
             position: relative;
         }
-        #map { height: 100%; width: 100%; z-index: 1; }
-
-        /* Floating Stats Panel */
-        .info-panel {
+        #map { height: 100%; background: #f1f5f9; }
+        
+        .map-card {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 1000;
-            width: 300px;
+            width: 280px;
             background: white;
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 6px solid var(--gold);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-top: 4px solid var(--gold);
         }
-
-        .info-panel h2 { color: var(--navy); margin-bottom: 5px; font-size: 20px; }
-        .info-panel h4 { color: var(--text-muted); margin-bottom: 15px; font-size: 12px; text-transform: uppercase; }
-
-        .stat-line { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        .stat-line strong { color: var(--navy); }
 
         .legend {
             background: white;
-            padding: 15px;
-            border-radius: 8px;
-            line-height: 20px;
+            padding: 10px;
+            line-height: 18px;
+            color: #555;
+            border-radius: 5px;
             box-shadow: 0 0 15px rgba(0,0,0,0.1);
-            font-size: 12px;
         }
-        .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.8; border-radius: 2px; }
+        .legend i { width: 16px; height: 16px; float: left; margin-right: 8px; opacity: 0.8; }
     </style>
 </head>
 <body>
 
 <nav id="main-nav"></nav>
 
-<div class="hero" style="background: var(--navy-dark); padding: 50px 20px; border-bottom: 5px solid var(--gold);">
+<div class="hero" style="background: var(--navy-dark); padding: 40px 20px;">
     <div class="hero-inner">
         <h1>South Jersey <span>Tax Heat Map</span></h1>
-        <p>Interactive visualization of effective tax rates. Darker shades represent higher tax intensity relative to property value.</p>
+        <p>A visual breakdown of 2026 effective tax rates for Camden, Gloucester, and Burlington counties.</p>
     </div>
 </div>
 
 <section class="section">
     <div class="section-inner">
-        
         <div id="map-container">
-            <div class="info-panel" id="stat-panel">
-                <div id="panel-init">
-                    <h2>Select a Town</h2>
-                    <p style="font-size: 13px;">Hover over any municipality in Camden, Gloucester, or Burlington to see the real-time tax outlook.</p>
-                </div>
+            <div class="map-card" id="map-info">
+                <h3 id="muni-name">Select a Town</h3>
+                <div id="muni-data">Hover over the map to see local data.</div>
             </div>
             <div id="map"></div>
         </div>
-
     </div>
 </section>
 
 <footer id="main-footer"></footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-    const map = L.map('map').setView([39.85, -74.95], 10);
+    const map = L.map('map').setView([39.85, -74.9], 10);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '©OpenStreetMap ©CartoDB'
-    }).addTo(map);
+    // Using a clean, professional base map
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
 
-    // REAL 2025/2026 EFFECTIVE TAX RATE DATA
-    const sjTaxData = {
-        "WINSLOW": { rate: 3.48, status: "High", county: "Camden", reval: 2022 },
-        "CHERRY HILL": { rate: 2.74, status: "Moderate", county: "Camden", reval: 2023 },
-        "GLOUCESTER TWP": { rate: 3.89, status: "Critical", county: "Camden", reval: 2021 },
-        "WASHINGTON": { rate: 3.12, status: "Moderate", county: "Gloucester", reval: 2021 },
-        "MEDFORD": { rate: 2.38, status: "Low", county: "Burlington", reval: 2024 },
-        "VOORHEES": { rate: 3.05, status: "Moderate", county: "Camden", reval: 2023 },
-        "EVESHAM": { rate: 2.65, status: "Low", county: "Burlington", reval: 2024 },
-        "SICKLERVILLE": { rate: 3.45, status: "High", county: "Camden", reval: 2022 },
-        "MOUNT LAUREL": { rate: 2.45, status: "Low", county: "Burlington", reval: 2024 }
+    // 2026 Tax Data (Add more towns as needed)
+    const stats = {
+        "WINSLOW": { rate: 3.48, outlook: "High", county: "Camden" },
+        "SICKLERVILLE": { rate: 3.45, outlook: "High", county: "Camden" },
+        "CHERRY HILL": { rate: 2.74, outlook: "Moderate", county: "Camden" },
+        "GLOUCESTER TWP": { rate: 3.89, outlook: "Critical", county: "Camden" },
+        "VOORHEES": { rate: 3.05, outlook: "Moderate", county: "Camden" },
+        "MEDFORD": { rate: 2.38, outlook: "Low", county: "Burlington" },
+        "EVESHAM": { rate: 2.65, outlook: "Low", county: "Burlington" },
+        "MOUNT LAUREL": { rate: 2.45, outlook: "Low", county: "Burlington" },
+        "WASHINGTON": { rate: 3.12, outlook: "Moderate", county: "Gloucester" }
     };
 
-    // HEATMAP COLOR SCALE
     function getHeatColor(r) {
-        return r > 3.5  ? '#800026' : // Dark Red (Critical)
-               r > 3.0  ? '#BD0026' : // Red (High)
-               r > 2.5  ? '#E31A1C' : // Orange-Red (Moderate)
-               r > 2.0  ? '#FC4E2A' : // Orange (Fair)
-                          '#FED976';  // Yellow (Low)
+        return r > 3.5  ? '#800026' :
+               r > 3.0  ? '#bd0026' :
+               r > 2.5  ? '#e31a1c' :
+               r > 2.0  ? '#fc4e2a' :
+                          '#fed976';
     }
 
     function style(feature) {
-        const name = feature.properties.MUN_NAME.toUpperCase();
-        const data = sjTaxData[name] || { rate: 0 };
+        // NJ GeoJSON usually stores name in 'MUN' or 'MUN_NAME'
+        const name = (feature.properties.MUN_NAME || feature.properties.MUN || "").toUpperCase();
+        const rate = stats[name] ? stats[name].rate : 0;
         return {
-            fillColor: getHeatColor(data.rate),
-            weight: 1.5,
+            fillColor: rate > 0 ? getHeatColor(rate) : '#cbd5e1',
+            weight: 1,
             opacity: 1,
             color: 'white',
-            dashArray: '2',
             fillOpacity: 0.8
         };
     }
 
     function onHover(e) {
         const layer = e.target;
-        layer.setStyle({ weight: 4, color: '#d4af37', dashArray: '', fillOpacity: 0.9 });
+        layer.setStyle({ weight: 3, color: '#d4af37', fillOpacity: 0.9 });
         
-        const name = layer.feature.properties.MUN_NAME.toUpperCase();
-        const data = sjTaxData[name];
-        const panel = document.getElementById('stat-panel');
-
+        const name = (layer.feature.properties.MUN_NAME || layer.feature.properties.MUN || "").toUpperCase();
+        const data = stats[name];
+        
         if (data) {
-            panel.innerHTML = `
-                <h2>${layer.feature.properties.MUN_NAME}</h2>
-                <h4>${data.county} County</h4>
-                <div class="stat-line"><strong>Effective Rate:</strong> <span>${data.rate}%</span></div>
-                <div class="stat-line"><strong>Appeal Outlook:</strong> <span style="color:${getHeatColor(data.rate)}; font-weight:800;">${data.status}</span></div>
-                <div class="stat-line"><strong>Last Reval:</strong> <span>${data.reval}</span></div>
-                <a href="appeal-quiz.html" class="btn-primary" style="display:block; text-align:center; margin-top:20px; font-size:12px;">Run Appeal Analysis</a>
+            document.getElementById('muni-name').innerText = name;
+            document.getElementById('muni-data').innerHTML = `
+                <p><strong>Effective Rate:</strong> ${data.rate}%</p>
+                <p><strong>Outlook:</strong> <span class="quiz-badge">${data.outlook}</span></p>
+                <a href="appeal-quiz.html" class="btn-primary" style="display:block; margin-top:10px; font-size:12px; text-align:center;">Run Analysis</a>
             `;
         }
     }
 
     function offHover(e) { geojson.resetStyle(e.target); }
 
-    // FETCH OFFICIAL NJ MUNICIPAL BOUNDARIES
-    const boundaryUrl = "https://opendata.arcgis.com/datasets/5f4570abc6174ff6951da66099cf9957_115.geojson";
-
+    // FETCHING THE DATA
+    // We use a curated NJ boundaries file to ensure high performance
     let geojson;
-    $.getJSON(boundaryUrl, function(data) {
-        // Filter only Camden(007), Gloucester(015), and Burlington(005)
-        const filtered = {
-            ...data,
-            features: data.features.filter(f => ["005", "007", "015"].includes(f.properties.COUNTY_PUI))
-        };
-        
-        geojson = L.geoJson(filtered, {
-            style: style,
-            onEachFeature: function(feature, layer) {
-                layer.on({ mouseover: onHover, mouseout: offHover });
-            }
-        }).addTo(map);
-    });
-
-    // ADD LEGEND
-    const legend = L.control({position: 'bottomleft'});
-    legend.onAdd = function (map) {
-        const div = L.DomUtil.create('div', 'legend'),
-              grades = [0, 2.0, 2.5, 3.0, 3.5];
-        div.innerHTML += '<strong>Effective Rate %</strong><br>';
-        for (var i = 0; i < grades.length; i++) {
-            div.innerHTML += '<i style="background:' + getHeatColor(grades[i] + 0.1) + '"></i> ' +
-                grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-        return div;
-    };
-    legend.addTo(map);
+    fetch('https://raw.githubusercontent.com/codeforamerica/click_that_hood/master/public/data/new-jersey.geojson')
+        .then(res => res.json())
+        .then(data => {
+            geojson = L.geoJson(data, {
+                style: style,
+                onEachFeature: (f, l) => { l.on({ mouseover: onHover, mouseout: offHover }); }
+            }).addTo(map);
+        });
 </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="scripts.js"></script>
 
 </body>
