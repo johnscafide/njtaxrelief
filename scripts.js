@@ -726,8 +726,18 @@
 
     const rc = $('result-content');
     if (rc) rc.innerHTML = result;
-    $('step7').classList.add('active');
-    document.querySelectorAll('.calc-step:not(#step7)').forEach(function (s) { s.classList.remove('active'); });
+
+    // Hide all steps first, then reveal step7
+    document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
+    const s7 = $('step7');
+    if (s7) {
+      s7.classList.add('active');
+      s7.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      console.error('step7 element not found — check your calculator HTML');
+      if (rc) rc.style.display = 'block';
+    }
+
     const bar = $('progress');
     if (bar) bar.style.width = '100%';
   }
