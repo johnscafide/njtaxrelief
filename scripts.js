@@ -11,7 +11,7 @@
  *   3.  EmailJS Setup
  *   4.  Page Init (single DOMContentLoaded)
  *   5.  Navigation & Footer Loaders
- *   6.  Mobile Menu
+ *   6.  Mobile Menu & Mega Menu
  *   7.  News Strip Rotation
  *   8.  Popups & Lead Magnets
  *   9.  Forms (Contact, Audit)
@@ -20,7 +20,7 @@
  *   12. ANCHOR Eligibility Calculator
  *   13. Stay NJ Calculator
  *   14. Mortgage Calculator
- *   15. Appeal Quiz
+ *   15. Appeal Calculator & Quiz
  *   16. Town Directory
  *   17. Dynamic Sitemap
  *   18. Back to Top
@@ -187,15 +187,21 @@
   }
 
   // ============================================================
-  // 6. MOBILE MENU
-  // Hooks up after nav.html loads. Includes proper iOS scroll lock.
-  // Re-binds the mega menu click handler on resize.
+  // 6. MOBILE MENU & MEGA MENU
+  // FIX: Added bindMegaMenuDesktop() for .nav-item.has-mega pattern
+  // used by the new dropdown nav. The old bindMegaMenu() stays for
+  // the legacy .mega-trigger mobile accordion. Both run on init.
   // ============================================================
   function initNavLogic() {
     bindMegaMenu();
-    window.addEventListener('resize', bindMegaMenu);
+    bindMegaMenuDesktop();
+    window.addEventListener('resize', function () {
+      bindMegaMenu();
+      bindMegaMenuDesktop();
+    });
   }
 
+  // Legacy mobile accordion (.mega-trigger pattern)
   function bindMegaMenu() {
     const triggers = document.querySelectorAll('.mega-trigger');
     if (!triggers.length) return;
@@ -213,7 +219,62 @@
     });
   }
 
+  // New desktop mega menu (.nav-item.has-mega click-to-open pattern)
+  function bindMegaMenuDesktop() {
+    const items = document.querySelectorAll('.nav-item.has-mega');
+    if (!items.length) return;
+    items.forEach(function (item) {
+      if (item.dataset.megaBound === '1') return;
+      item.dataset.megaBound = '1';
+      const btn = item.querySelector('.nav-link-btn');
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const isOpen = item.classList.contains('open');
+        // Close all other open panels first
+        document.querySelectorAll('.nav-item.has-mega').forEach(function (i) {
+          i.classList.remove('open');
+          const b = i.querySelector('.nav-link-btn');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { item.classList.remove('open'); btn.focus(); }
+      });
+    });
+    // Click outside closes all panels
+    document.removeEventListener('click', closeMegaOnOutsideClick);
+    document.addEventListener('click', closeMegaOnOutsideClick);
+    // Clicks inside a panel don't bubble up and close it
+    document.querySelectorAll('.mega-panel').forEach(function (p) {
+      p.addEventListener('click', function (e) { e.stopPropagation(); });
+    });
+  }
+
+  function closeMegaOnOutsideClick() {
+    document.querySelectorAll('.nav-item.has-mega').forEach(function (i) {
+      i.classList.remove('open');
+      const b = i.querySelector('.nav-link-btn');
+      if (b) b.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   function toggleMobileMenu() {
+    // New nav: hamburger drawer
+    const drawer = $('mobileDrawer');
+    const burger = document.querySelector('.nav-hamburger');
+    if (drawer) {
+      const isOpen = drawer.classList.contains('open');
+      drawer.classList.toggle('open');
+      if (burger) burger.classList.toggle('open');
+      isOpen ? unlockBodyScroll() : lockBodyScroll();
+      return;
+    }
+    // Legacy nav: navLinks toggle
     const navLinks = $('navLinks');
     if (!navLinks) return;
     navLinks.classList.toggle('active');
@@ -452,226 +513,234 @@
 
   // ============================================================
   // 12. ANCHOR ELIGIBILITY CALCULATOR
+  // FIX: answers & currentStep were never declared — added here.
   // 6-step quiz with branching logic. State lives in `answers`.
   // Result HTML is built in showResult(); rejections go through noQualify().
   // ============================================================
-  
- 
-// Update real estate interest checkbox based on own vs rent
-function updateREInterest(tenure) {
-  var textEl = document.getElementById('re-interest-text');
-  var subEl  = document.getElementById('re-interest-sub');
-  var cb     = document.getElementById('re-interest');
-  if (!textEl || !subEl) return;
-  if (cb) cb.checked = false;
-  if (tenure === 'own') {
-    textEl.textContent = "I\u2019m curious what my home is worth right now.";
-    subEl.textContent  = "Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.";
-  } else {
-    textEl.textContent = "I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.";
-    subEl.textContent  = "Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.";
+
+  // FIX: These were missing — every calculator function was throwing
+  // "answers is not defined" on every click.
+  let answers = {};
+  let currentStep = 1;
+
+  // Updates the real estate interest checkbox text based on own vs rent.
+  function updateREInterest(tenure) {
+    const textEl = $('re-interest-text');
+    const subEl  = $('re-interest-sub');
+    const cb     = $('re-interest');
+    if (!textEl || !subEl) return;
+    if (cb) cb.checked = false;
+    if (tenure === 'own') {
+      textEl.textContent = "I\u2019m curious what my home is worth right now.";
+      subEl.textContent  = "Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.";
+    } else {
+      textEl.textContent = "I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.";
+      subEl.textContent  = "Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.";
+    }
   }
-}
- 
-function selectChoice(key, val, btn) {
-  answers[key] = val;
-  btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
-    b.classList.remove('selected');
-    b.classList.remove('active-choice');
-  });
-  btn.classList.add('selected');
-  btn.classList.add('active-choice');
-  var nb = document.getElementById('next' + currentStep);
-  if (nb) nb.disabled = false;
-  if (key === 'tenure') {
-    var mid = document.getElementById('income-mid-btn');
-    if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
-    updateREInterest(val);
+
+  function selectChoice(key, val, btn) {
+    answers[key] = val;
+    btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
+      b.classList.remove('selected');
+      b.classList.remove('active-choice');
+    });
+    btn.classList.add('selected');
+    btn.classList.add('active-choice');
+    const nb = $('next' + currentStep);
+    if (nb) nb.disabled = false;
+    if (key === 'tenure') {
+      const mid = $('income-mid-btn');
+      if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
+      updateREInterest(val);
+    }
   }
-}
- 
-function nextStep(step) {
-  var n = step + 1;
-  if (step === 3 && answers.tenure === 'own') n = 5;
-  if (step === 4 && answers.tenure === 'rent') n = 6;
-  if (step === 5) n = 6;
-  document.getElementById('step' + step).classList.remove('active');
-  currentStep = n;
-  var nextEl = document.getElementById('step' + n);
-  if (nextEl) nextEl.classList.add('active');
-  var bar = document.getElementById('progress');
-  if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
-}
- 
-function prevStep(step) {
-  var p = step - 1;
-  if (step === 5 && answers.tenure === 'own') p = 3;
-  if (step === 6 && answers.tenure === 'rent') p = 4;
-  document.getElementById('step' + step).classList.remove('active');
-  currentStep = p;
-  var prevEl = document.getElementById('step' + p);
-  if (prevEl) prevEl.classList.add('active');
-  var bar = document.getElementById('progress');
-  if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
-}
- 
-function submitCalcLead() {
-  var nameEl     = document.getElementById('lead-name');
-  var emailEl    = document.getElementById('lead-email');
-  var phoneEl    = document.getElementById('lead-phone');
-  var reInterest = document.getElementById('re-interest');
- 
-  var name  = nameEl  ? nameEl.value.trim()  : '';
-  var email = emailEl ? emailEl.value.trim() : '';
-  var phone = phoneEl ? phoneEl.value.trim() : '';
-  var reYes = reInterest ? reInterest.checked : false;
- 
-  var benefit = answers.tenure === 'own'
-    ? (answers.income === 'low' ? '$1,500' : '$1,000')
-    : (answers.age === 'yes'   ? '$700'   : '$450');
- 
-  var reLine = '';
-  if (reYes) {
-    reLine = answers.tenure === 'own'
-      ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
-      : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
+
+  function nextStep(step) {
+    let n = step + 1;
+    if (step === 3 && answers.tenure === 'own') n = 5;
+    if (step === 4 && answers.tenure === 'rent') n = 6;
+    if (step === 5) n = 6;
+    $('step' + step).classList.remove('active');
+    currentStep = n;
+    const nextEl = $('step' + n);
+    if (nextEl) nextEl.classList.add('active');
+    const bar = $('progress');
+    if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
   }
- 
-  if (name && email) {
-    emailjs.send('service_gptqbyx', 'template_q1kaure', {
-      name:  name,
-      email: email,
-      phone: phone || 'Not provided',
-      topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
-      town:  'Not provided'
-    }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
+
+  function prevStep(step) {
+    let p = step - 1;
+    if (step === 5 && answers.tenure === 'own') p = 3;
+    if (step === 6 && answers.tenure === 'rent') p = 4;
+    $('step' + step).classList.remove('active');
+    currentStep = p;
+    const prevEl = $('step' + p);
+    if (prevEl) prevEl.classList.add('active');
+    const bar = $('progress');
+    if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
   }
- 
-  showResult(reYes);
-}
- 
-function showResult(reYes) {
-  var result = '';
- 
-  if (answers.primary === 'no') {
-    result = noQualify(
-      'Your property was not your NJ primary residence on October 1 of the benefit year.',
-      ['Primary residence on Oct 1 is required',
-       'Vacation homes and investment properties do not qualify']
-    );
-  } else if (answers.income === 'high') {
-    result = noQualify('Income exceeds ANCHOR program limits.',
-      ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
-    );
-  } else if (answers.tenure === 'rent' && answers.income === 'mid') {
-    result = noQualify(
-      'The $150,001\u2013$250,000 income bracket is for homeowners only.',
-      ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
-    );
-  } else if (answers.taxes === 'no' && answers.tenure === 'own') {
-    result =
-      '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
-      '<div class="result-label" style="color:#5a4000;">' +
-      '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
-      '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
-      '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
-      '<div class="result-actions">' +
-      '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
-      '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-      'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-      'color:var(--navy);font-weight:600;">Start Over</button>' +
-      '</div></div>';
-  } else {
-    var amount = answers.tenure === 'own'
+
+  // FIX: Was calling emailjs.send() directly — now routes through
+  // sendLead() for consistent error handling like every other form.
+  function submitCalcLead() {
+    const nameEl     = $('lead-name');
+    const emailEl    = $('lead-email');
+    const phoneEl    = $('lead-phone');
+    const reInterest = $('re-interest');
+
+    const name  = nameEl  ? nameEl.value.trim()  : '';
+    const email = emailEl ? emailEl.value.trim() : '';
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const reYes = reInterest ? reInterest.checked : false;
+
+    const benefit = answers.tenure === 'own'
       ? (answers.income === 'low' ? '$1,500' : '$1,000')
       : (answers.age === 'yes'   ? '$700'   : '$450');
-    var label = answers.tenure === 'own'
-      ? 'Estimated ANCHOR Homeowner Benefit'
-      : 'Estimated ANCHOR Renter Benefit';
-    var seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
-      ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
- 
-    // Real estate follow-up — only if they checked the box
-    var reBlock = '';
+
+    let reLine = '';
     if (reYes) {
-      var reTitle = answers.tenure === 'own'
-        ? 'We\u2019ll reach out with your free home value estimate'
-        : 'We\u2019ll reach out to talk through the buying process';
-      var reBody = answers.tenure === 'own'
-        ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
-        : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
-      reBlock =
-        '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
-        'border-radius:8px;padding:14px 16px;text-align:left;">' +
-        '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
-        '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
-        '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
-        '</div>';
+      reLine = answers.tenure === 'own'
+        ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
+        : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
     }
- 
-    result =
-      '<div class="result-box">' +
-      '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
-      'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
-      '<div class="result-amount">' + amount + '</div>' +
-      '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
-      '<ul class="qualify-checks"><li>Income is within program limits</li>' +
-      '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
-      '<p class="result-note">Estimate only. Apply at ' +
-      '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
-      ' \u00b7 Seniors 65+: use the ' +
-      '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
-      '<br>Questions? <strong>1-888-238-1233</strong></p>' +
-      reBlock +
-      '<div class="result-actions" style="margin-top:18px;">' +
-      '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
-      '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-      'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-      'color:var(--navy);font-weight:600;">Start Over</button>' +
+
+    if (name && email) {
+      sendLead({
+        name:  name,
+        email: email,
+        phone: phone || 'Not provided',
+        topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
+        town:  'Not provided'
+      }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
+    }
+
+    showResult(reYes);
+  }
+
+  function showResult(reYes) {
+    let result = '';
+
+    if (answers.primary === 'no') {
+      result = noQualify(
+        'Your property was not your NJ primary residence on October 1 of the benefit year.',
+        ['Primary residence on Oct 1 is required',
+         'Vacation homes and investment properties do not qualify']
+      );
+    } else if (answers.income === 'high') {
+      result = noQualify('Income exceeds ANCHOR program limits.',
+        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
+      );
+    } else if (answers.tenure === 'rent' && answers.income === 'mid') {
+      result = noQualify(
+        'The $150,001\u2013$250,000 income bracket is for homeowners only.',
+        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
+      );
+    } else if (answers.taxes === 'no' && answers.tenure === 'own') {
+      result =
+        '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
+        '<div class="result-label" style="color:#5a4000;">' +
+        '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
+        '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
+        '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
+        '<div class="result-actions">' +
+        '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
+        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+        'color:var(--navy);font-weight:600;">Start Over</button>' +
+        '</div></div>';
+    } else {
+      const amount = answers.tenure === 'own'
+        ? (answers.income === 'low' ? '$1,500' : '$1,000')
+        : (answers.age === 'yes'   ? '$700'   : '$450');
+      const label = answers.tenure === 'own'
+        ? 'Estimated ANCHOR Homeowner Benefit'
+        : 'Estimated ANCHOR Renter Benefit';
+      const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
+        ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
+
+      // Real estate follow-up block — only shown if they checked the box
+      let reBlock = '';
+      if (reYes) {
+        const reTitle = answers.tenure === 'own'
+          ? 'We\u2019ll reach out with your free home value estimate'
+          : 'We\u2019ll reach out to talk through the buying process';
+        const reBody = answers.tenure === 'own'
+          ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
+          : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+        reBlock =
+          '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
+          'border-radius:8px;padding:14px 16px;text-align:left;">' +
+          '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
+          '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
+          '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
+          '</div>';
+      }
+
+      result =
+        '<div class="result-box">' +
+        '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
+        'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
+        '<div class="result-amount">' + amount + '</div>' +
+        '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
+        '<ul class="qualify-checks"><li>Income is within program limits</li>' +
+        '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
+        '<p class="result-note">Estimate only. Apply at ' +
+        '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
+        ' \u00b7 Seniors 65+: use the ' +
+        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
+        '<br>Questions? <strong>1-888-238-1233</strong></p>' +
+        reBlock +
+        '<div class="result-actions" style="margin-top:18px;">' +
+        '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
+        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+        'color:var(--navy);font-weight:600;">Start Over</button>' +
+        '</div></div>';
+    }
+
+    const rc = $('result-content');
+    if (rc) rc.innerHTML = result;
+    $('step7').classList.add('active');
+    document.querySelectorAll('.calc-step:not(#step7)').forEach(function (s) { s.classList.remove('active'); });
+    const bar = $('progress');
+    if (bar) bar.style.width = '100%';
+  }
+
+  function noQualify(reason, points) {
+    return '<div class="result-box no-qualify">' +
+      '<div class="result-label" style="color:var(--red);">' +
+      '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
+      '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
+      '<ul class="qualify-checks no">' +
+      points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
+      '</ul>' +
+      '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>1-888-238-1233</strong></p>' +
+      '<div class="result-actions">' +
+      '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
+      '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
+      'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
+      'font-size:14px;">See Senior Programs</a>' +
       '</div></div>';
   }
- 
-  var rc = document.getElementById('result-content');
-  if (rc) rc.innerHTML = result;
-  document.getElementById('step7').classList.add('active');
-  document.querySelectorAll('.calc-step:not(#step7)').forEach(function (s) { s.classList.remove('active'); });
-  var bar = document.getElementById('progress');
-  if (bar) bar.style.width = '100%';
-}
- 
-function noQualify(reason, points) {
-  return '<div class="result-box no-qualify">' +
-    '<div class="result-label" style="color:var(--red);">' +
-    '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
-    '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
-    '<ul class="qualify-checks no">' +
-    points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
-    '</ul>' +
-    '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>1-888-238-1233</strong></p>' +
-    '<div class="result-actions">' +
-    '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
-    '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
-    'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
-    'font-size:14px;">See Senior Programs</a>' +
-    '</div></div>';
-}
- 
-function resetCalc() {
-  answers = {};
-  currentStep = 1;
-  document.querySelectorAll('.choice-btn').forEach(function (b) {
-    b.classList.remove('selected');
-    b.classList.remove('active-choice');
-  });
-  document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
-  document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
-  var s1 = document.getElementById('step1');
-  if (s1) s1.classList.add('active');
-  var bar = document.getElementById('progress');
-  if (bar) bar.style.width = '16%';
-  var cb = document.getElementById('re-interest');
-  if (cb) cb.checked = false;
-}
+
+  function resetCalc() {
+    answers = {};
+    currentStep = 1;
+    document.querySelectorAll('.choice-btn').forEach(function (b) {
+      b.classList.remove('selected');
+      b.classList.remove('active-choice');
+    });
+    document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
+    document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
+    const s1 = $('step1');
+    if (s1) s1.classList.add('active');
+    const bar = $('progress');
+    if (bar) bar.style.width = '16%';
+    const cb = $('re-interest');
+    if (cb) cb.checked = false;
+  }
+
   // ============================================================
   // 13. STAY NJ CALCULATOR
   // Estimates 50% of property tax up to $6,500/year cap.
@@ -702,58 +771,89 @@ function resetCalc() {
 
   // ============================================================
   // 14. MORTGAGE CALCULATOR
-  // FIXED: Now strips commas/$ from inputs so "$350,000" works.
+  // FIX: Now strips commas/$ from inputs so "$350,000" works.
+  // FIX: Now updates m-int-pct (interest as % of purchase price).
   // Stays silent (no error popups) until both price and rate are entered.
   // ============================================================
   function calcMortgage() {
     const priceEl = $('m-price');
-    const downEl = $('m-down');
-    const rateEl = $('m-rate');
-    const termEl = $('m-term');
+    const downEl  = $('m-down');
+    const rateEl  = $('m-rate');
+    const termEl  = $('m-term');
 
-    const price = parseNum(priceEl ? priceEl.value : 0);
-    const downPct = parseNum(downEl ? downEl.value : 0);
-    const rate = parseNum(rateEl ? rateEl.value : 0);
-    const term = parseInt(termEl ? termEl.value : 30, 10) || 30;
+    const price   = parseNum(priceEl ? priceEl.value : 0);
+    const downPct = parseNum(downEl  ? downEl.value  : 0);
+    const rate    = parseNum(rateEl  ? rateEl.value  : 0);
+    const term    = parseInt(termEl  ? termEl.value  : 30, 10) || 30;
 
-    const monthlyDisplay = $('m-monthly');
-    const principalDisplay = $('m-principal');
-    const interestDisplay = $('m-interest');
-    const totalDisplay = $('m-total');
     const emptyState = $('mort-empty-state');
-    const resultBox = $('mort-top-result');
-    const breakdown = $('mort-breakdown');
+    const resultBox  = $('mort-top-result');
+    const breakdown  = $('mort-breakdown');
 
     if (price > 0 && rate > 0) {
-      const principal = price * (1 - (downPct / 100));
-      const monthlyRate = (rate / 100) / 12;
-      const numPayments = term * 12;
-      const monthly = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
-                      (Math.pow(1 + monthlyRate, numPayments) - 1);
-      const totalPaid = monthly * numPayments;
+      const principal    = price * (1 - (downPct / 100));
+      const monthlyRate  = (rate / 100) / 12;
+      const numPayments  = term * 12;
+      const monthly      = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                           (Math.pow(1 + monthlyRate, numPayments) - 1);
+      const totalPaid    = monthly * numPayments;
       const totalInterest = totalPaid - principal;
+      const intPct       = Math.round((totalInterest / price) * 100);
 
-      if (monthlyDisplay) monthlyDisplay.innerText = '$' + Math.round(monthly).toLocaleString();
-      if (principalDisplay) principalDisplay.innerText = '$' + Math.round(principal).toLocaleString();
-      if (interestDisplay) interestDisplay.innerText = '$' + Math.round(totalInterest).toLocaleString();
-      if (totalDisplay) totalDisplay.innerText = '$' + Math.round(totalPaid).toLocaleString();
+      if ($('m-monthly'))   $('m-monthly').textContent   = '$' + Math.round(monthly).toLocaleString();
+      if ($('m-principal')) $('m-principal').textContent = '$' + Math.round(principal).toLocaleString();
+      if ($('m-interest'))  $('m-interest').textContent  = '$' + Math.round(totalInterest).toLocaleString();
+      if ($('m-total'))     $('m-total').textContent     = '$' + Math.round(totalPaid).toLocaleString();
+      if ($('m-int-pct'))   $('m-int-pct').textContent   = intPct + '% of purchase price'; // FIX: was missing
 
       if (emptyState) emptyState.style.display = 'none';
-      if (resultBox) resultBox.style.display = 'block';
-      if (breakdown) breakdown.style.display = 'block';
+      if (resultBox)  resultBox.style.display  = 'block';
+      if (breakdown)  breakdown.style.display  = 'block';
     } else {
       if (emptyState) emptyState.style.display = 'block';
-      if (resultBox) resultBox.style.display = 'none';
-      if (breakdown) breakdown.style.display = 'none';
+      if (resultBox)  resultBox.style.display  = 'none';
+      if (breakdown)  breakdown.style.display  = 'none';
     }
   }
 
   // ============================================================
-  // 15. APPEAL QUIZ
-  // 4 yes/no questions to score appeal probability.
-  // FIXED: Was only console.logging the lead. Now actually
-  // sends through EmailJS so leads stop getting lost.
+  // 15. APPEAL CALCULATOR & QUIZ
+  // FIX: Added calcRatio() — was used on property-tax-appeal.html
+  // but never defined. Also added to public API at bottom.
   // ============================================================
+
+  // Equalization ratio calculator (property-tax-appeal.html)
+  function calcRatio() {
+    const assessed = parseNum($('r-assessed') ? $('r-assessed').value : 0);
+    const ratio    = parseNum($('r-ratio')    ? $('r-ratio').value    : 0);
+    const market   = parseNum($('r-market')   ? $('r-market').value   : 0);
+    const res      = $('ratio-result');
+    if (!assessed || !ratio || !market) { if (res) res.style.display = 'none'; return; }
+
+    const implied = assessed / (ratio / 100);
+    const diff    = implied - market;
+
+    if ($('r-implied')) $('r-implied').textContent = '$' + Math.round(implied).toLocaleString();
+    if ($('r-your'))    $('r-your').textContent    = '$' + Math.round(market).toLocaleString();
+    if ($('r-diff')) {
+      $('r-diff').textContent = (diff >= 0 ? '+' : '') + '$' + Math.round(Math.abs(diff)).toLocaleString();
+      $('r-diff').style.color = diff > 0 ? '#f0d87a' : '#7ec8a0';
+    }
+
+    let verdict = '';
+    if (diff > 15000) {
+      verdict = '<strong style="color:#f0d87a;">You may be over-assessed.</strong> Your implied market value is $' +
+        Math.round(diff).toLocaleString() + ' higher than your estimate. Request a free comp report to validate before filing.';
+    } else if (diff > 0) {
+      verdict = '<strong style="color:#f0d87a;">Marginal over-assessment.</strong> There may be a case here depending on the comps. Request a free comp report.';
+    } else {
+      verdict = '<strong style="color:#7ec8a0;">May not be over-assessed</strong> based on your estimate. Actual comparable sales could still tell a different story.';
+    }
+    if ($('r-verdict')) $('r-verdict').innerHTML = verdict;
+    if (res) res.style.display = 'block';
+  }
+
+  // Appeal probability quiz
   let quizData = { sales: '', reval: '', errors: '', recent: '' };
 
   function quizSelect(key, val, step) {
@@ -780,10 +880,10 @@ function resetCalc() {
   }
 
   function submitQuiz() {
-    const addrEl = $('quiz-addr');
+    const addrEl  = $('quiz-addr');
     const emailEl = $('quiz-email');
-    const addr = addrEl ? addrEl.value.trim() : '';
-    const email = emailEl ? emailEl.value.trim() : '';
+    const addr    = addrEl  ? addrEl.value.trim()  : '';
+    const email   = emailEl ? emailEl.value.trim() : '';
 
     if (!addr || !email) {
       alert('Please provide an address and email to receive your report.');
@@ -791,17 +891,17 @@ function resetCalc() {
     }
 
     let score = 0;
-    if (quizData.sales === 'yes') score += 40;
-    if (quizData.reval === 'yes') score += 30;
+    if (quizData.sales  === 'yes') score += 40;
+    if (quizData.reval  === 'yes') score += 30;
     if (quizData.errors === 'yes') score += 20;
-    if (quizData.recent === 'no') score += 10;
+    if (quizData.recent === 'no')  score += 10;
 
     const rating = score > 60 ? 'HIGH' : score > 30 ? 'MODERATE' : 'LOW';
-    const color = score > 60 ? 'var(--green)' : 'var(--gold)';
+    const color  = score > 60 ? 'var(--green)' : 'var(--gold)';
 
-    const step5 = $('q-step5');
-    if (step5) step5.classList.remove('active');
+    const step5    = $('q-step5');
     const finalDiv = $('q-result');
+    if (step5)    step5.classList.remove('active');
     if (finalDiv) finalDiv.classList.add('active');
 
     const renderEl = $('quiz-result-render');
@@ -817,7 +917,6 @@ function resetCalc() {
         '<a href="index.html" class="btn-outline" style="margin-top:20px; display:inline-block;">Back to Home</a>';
     }
 
-    // Actually send the lead now (was missing in original).
     sendLead({
       name: 'Appeal Quiz Lead',
       email: email,
@@ -914,14 +1013,14 @@ function resetCalc() {
   window.toggleMobileMenu = toggleMobileMenu;
 
   // Forms / lead magnets
-  window.handleAuditRequest = handleAuditRequest;
+  window.handleAuditRequest      = handleAuditRequest;
   window.handleChecklistDownload = handleChecklistDownload;
-  window.minimizePopup = minimizePopup;
-  window.restorePopup = restorePopup;
-  window.submitLead = submitLead;
-  window.showRebateModal = showRebateModal;
-  window.minimizeRebateModal = minimizeRebateModal;
-  window.downloadChecklist = downloadChecklist;
+  window.minimizePopup           = minimizePopup;
+  window.restorePopup            = restorePopup;
+  window.submitLead              = submitLead;
+  window.showRebateModal         = showRebateModal;
+  window.minimizeRebateModal     = minimizeRebateModal;
+  window.downloadChecklist       = downloadChecklist;
 
   // Accordions / tabs
   window.toggleFAQ = toggleFAQ;
@@ -929,38 +1028,39 @@ function resetCalc() {
   window.switchTab = switchTab;
 
   // ANCHOR calculator
-  window.selectChoice = selectChoice;
-  window.nextStep = nextStep;
-  window.prevStep = prevStep;
+  window.selectChoice   = selectChoice;
+  window.nextStep       = nextStep;
+  window.prevStep       = prevStep;
   window.submitCalcLead = submitCalcLead;
-  window.resetCalc = resetCalc;
+  window.resetCalc      = resetCalc;
 
   // Other calculators
   window.calcMortgage = calcMortgage;
-  window.calcStayNJ = calcStayNJ;
+  window.calcStayNJ   = calcStayNJ;
+  window.calcRatio    = calcRatio;   // FIX: was missing
 
   // Appeal quiz
-  window.quizSelect = quizSelect;
-  window.quizNext = quizNext;
-  window.quizPrev = quizPrev;
-  window.submitQuiz = submitQuiz;
+  window.quizSelect  = quizSelect;
+  window.quizNext    = quizNext;
+  window.quizPrev    = quizPrev;
+  window.submitQuiz  = submitQuiz;
 
   // Towns / utility
   window.filterTowns = filterTowns;
   window.scrollToTop = scrollToTop;
 
+  // Property dashboard
+  window.addPropertyToWatchlist = addPropertyToWatchlist; // FIX: was missing
+
 /* --- PROPERTY DASHBOARD LOGIC --- */
 const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
 const ACTOR_ID = 'maxcopell/zillow-scraper';
 
-// 1. LOAD SAVED PROPERTIES ON PAGE REFRESH
+// Load saved properties on page refresh
 document.addEventListener("DOMContentLoaded", () => {
     const savedProperties = JSON.parse(localStorage.getItem('watchdogList')) || [];
     const list = document.getElementById('watchlist-items');
-    
-    // Clear the "Demo" hardcoded items if you want a clean slate
-    // list.innerHTML = ''; 
-
+    if (!list) return;
     savedProperties.forEach(prop => {
         renderPropertyCard(prop);
     });
@@ -970,7 +1070,6 @@ async function addPropertyToWatchlist() {
     const addr = document.getElementById('prop-input').value;
     if(!addr) return;
 
-    // UI: Add loading state
     const list = document.getElementById('watchlist-items');
     const tempId = 'id-' + Date.now();
     const loadingItem = `
@@ -982,12 +1081,10 @@ async function addPropertyToWatchlist() {
         </div>`;
     list.insertAdjacentHTML('afterbegin', loadingItem);
     
-    // Close form and clear input
     document.getElementById('prop-input').value = "";
     document.getElementById('add-prop-form').style.display = 'none';
 
     try {
-        // TRIGGER APIFY
         const runRes = await fetch(`https://api.apify.com/v2/acts/${ACTOR_ID}/runs?token=${APIFY_TOKEN}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -995,8 +1092,6 @@ async function addPropertyToWatchlist() {
         });
         const runData = await runRes.json();
         const runId = runData.data.id;
-
-        // Start polling for the result
         pollApifyResult(runId, tempId, addr);
     } catch (err) {
         console.error("Fetch Error:", err);
@@ -1009,7 +1104,6 @@ async function pollApifyResult(runId, elementId, addr) {
     const data = await res.json();
 
     if (data.data.status === 'SUCCEEDED') {
-        // Get the data from the dataset
         const datasetRes = await fetch(`https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=${APIFY_TOKEN}`);
         const items = await datasetRes.json();
 
@@ -1020,11 +1114,9 @@ async function pollApifyResult(runId, elementId, addr) {
                 address: addr,
                 price: p.price || p.zestimate || "N/A",
                 city: p.address?.city || "NJ",
-                trend: (Math.random() * 4).toFixed(1), // Demo trend
+                trend: (Math.random() * 4).toFixed(1),
                 isUp: Math.random() > 0.4
             };
-
-            // Save to LocalStorage and Update UI
             saveToStorage(cleanProp);
             updatePropertyUI(elementId, cleanProp);
         } else {
@@ -1033,7 +1125,6 @@ async function pollApifyResult(runId, elementId, addr) {
     } else if (['FAILED', 'ABORTED', 'TIMED-OUT'].includes(data.data.status)) {
         document.getElementById(elementId).innerHTML = "Search failed.";
     } else {
-        // Still running, check again in 3 seconds
         setTimeout(() => pollApifyResult(runId, elementId, addr), 3000);
     }
 }
@@ -1057,6 +1148,7 @@ function updatePropertyUI(elementId, prop) {
 
 function renderPropertyCard(prop) {
     const list = document.getElementById('watchlist-items');
+    if (!list) return;
     const item = document.createElement('div');
     item.className = 'watch-item';
     item.id = prop.id;
