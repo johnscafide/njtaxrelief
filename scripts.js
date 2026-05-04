@@ -455,188 +455,223 @@
   // 6-step quiz with branching logic. State lives in `answers`.
   // Result HTML is built in showResult(); rejections go through noQualify().
   // ============================================================
-  let answers = {};
-  let currentStep = 1;
-
-  function selectChoice(key, val, btn) {
-    answers[key] = val;
-    btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
-    });
-    btn.classList.add('selected');
-    btn.classList.add('active-choice');
-
-    const nb = $('next' + currentStep);
-    if (nb) nb.disabled = false;
-
-    if (key === 'tenure') {
-      const mid = $('income-mid-btn');
-      if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
-    }
+  
+ 
+// Update real estate interest checkbox based on own vs rent
+function updateREInterest(tenure) {
+  var textEl = document.getElementById('re-interest-text');
+  var subEl  = document.getElementById('re-interest-sub');
+  var cb     = document.getElementById('re-interest');
+  if (!textEl || !subEl) return;
+  if (cb) cb.checked = false;
+  if (tenure === 'own') {
+    textEl.textContent = "I\u2019m curious what my home is worth right now.";
+    subEl.textContent  = "Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.";
+  } else {
+    textEl.textContent = "I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.";
+    subEl.textContent  = "Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.";
   }
-
-  function nextStep(step) {
-    let n = step + 1;
-    if (step === 3 && answers.tenure === 'own') n = 5;
-    if (step === 4 && answers.tenure === 'rent') n = 6;
-    if (step === 5) n = 6;
-
-    const cur = $('step' + step);
-    const nxt = $('step' + n);
-    if (cur) cur.classList.remove('active');
-    currentStep = n;
-    if (nxt) nxt.classList.add('active');
-
-    const bar = $('progress');
-    if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
+}
+ 
+function selectChoice(key, val, btn) {
+  answers[key] = val;
+  btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
+    b.classList.remove('selected');
+    b.classList.remove('active-choice');
+  });
+  btn.classList.add('selected');
+  btn.classList.add('active-choice');
+  var nb = document.getElementById('next' + currentStep);
+  if (nb) nb.disabled = false;
+  if (key === 'tenure') {
+    var mid = document.getElementById('income-mid-btn');
+    if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
+    updateREInterest(val);
   }
-
-  function prevStep(step) {
-    let p = step - 1;
-    if (step === 5 && answers.tenure === 'own') p = 3;
-    if (step === 6 && answers.tenure === 'rent') p = 4;
-
-    const cur = $('step' + step);
-    const prv = $('step' + p);
-    if (cur) cur.classList.remove('active');
-    currentStep = p;
-    if (prv) prv.classList.add('active');
-
-    const bar = $('progress');
-    if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
+}
+ 
+function nextStep(step) {
+  var n = step + 1;
+  if (step === 3 && answers.tenure === 'own') n = 5;
+  if (step === 4 && answers.tenure === 'rent') n = 6;
+  if (step === 5) n = 6;
+  document.getElementById('step' + step).classList.remove('active');
+  currentStep = n;
+  var nextEl = document.getElementById('step' + n);
+  if (nextEl) nextEl.classList.add('active');
+  var bar = document.getElementById('progress');
+  if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
+}
+ 
+function prevStep(step) {
+  var p = step - 1;
+  if (step === 5 && answers.tenure === 'own') p = 3;
+  if (step === 6 && answers.tenure === 'rent') p = 4;
+  document.getElementById('step' + step).classList.remove('active');
+  currentStep = p;
+  var prevEl = document.getElementById('step' + p);
+  if (prevEl) prevEl.classList.add('active');
+  var bar = document.getElementById('progress');
+  if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
+}
+ 
+function submitCalcLead() {
+  var nameEl     = document.getElementById('lead-name');
+  var emailEl    = document.getElementById('lead-email');
+  var phoneEl    = document.getElementById('lead-phone');
+  var reInterest = document.getElementById('re-interest');
+ 
+  var name  = nameEl  ? nameEl.value.trim()  : '';
+  var email = emailEl ? emailEl.value.trim() : '';
+  var phone = phoneEl ? phoneEl.value.trim() : '';
+  var reYes = reInterest ? reInterest.checked : false;
+ 
+  var benefit = answers.tenure === 'own'
+    ? (answers.income === 'low' ? '$1,500' : '$1,000')
+    : (answers.age === 'yes'   ? '$700'   : '$450');
+ 
+  var reLine = '';
+  if (reYes) {
+    reLine = answers.tenure === 'own'
+      ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
+      : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
   }
-
-  function submitCalcLead() {
-    const nameEl = $('lead-name');
-    const emailEl = $('lead-email');
-    const phoneEl = $('lead-phone');
-
-    const name = nameEl ? nameEl.value.trim() : '';
-    const email = emailEl ? emailEl.value.trim() : '';
-    const phone = phoneEl ? phoneEl.value.trim() : '';
-
-    if (name && email) {
-      const benefit = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age === 'yes' ? '$700' : '$450');
-
-      sendLead({
-        name: name,
-        email: email,
-        phone: phone || 'Not provided',
-        topic: 'ANCHOR Calculator \u2014 estimated benefit: ' + benefit
-      }).catch(function (e) { console.warn('Calc lead error:', e); });
-    }
-
-    showResult();
+ 
+  if (name && email) {
+    emailjs.send('service_gptqbyx', 'template_q1kaure', {
+      name:  name,
+      email: email,
+      phone: phone || 'Not provided',
+      topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
+      town:  'Not provided'
+    }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
   }
-
-  function showResult() {
-    let result = '';
-
-    if (answers.primary === 'no') {
-      result = noQualify(
-        'Your property was not your NJ primary residence on October 1 of the benefit year.',
-        ['Primary residence on Oct 1 is required',
-         'Vacation homes and investment properties do not qualify']
-      );
-    } else if (answers.income === 'high') {
-      result = noQualify('Income exceeds ANCHOR program limits.',
-        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
-      );
-    } else if (answers.tenure === 'rent' && answers.income === 'mid') {
-      result = noQualify(
-        'The $150,001\u2013$250,000 income bracket is for homeowners only.',
-        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
-      );
-    } else if (answers.taxes === 'no' && answers.tenure === 'own') {
-      result =
-        '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
-        '<div class="result-label" style="color:#5a4000;">' +
-        '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
-        '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
-        '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
-        '<div class="result-actions">' +
-        '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call ' + CONFIG.contactHotline + '</a>' +
-        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-        'color:var(--navy);font-weight:600;">Start Over</button>' +
-        '</div></div>';
-    } else {
-      const amount = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age === 'yes' ? '$700' : '$450');
-      const label = answers.tenure === 'own'
-        ? 'Estimated ANCHOR Homeowner Benefit'
-        : 'Estimated ANCHOR Renter Benefit';
-      const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
-        ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
-
-      result =
-        '<div class="result-box">' +
-        '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
-        'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
-        '<div class="result-amount">' + amount + '</div>' +
-        '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
-        '<ul class="qualify-checks"><li>Income is within program limits</li>' +
-        '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
-        '<p class="result-note">Estimate only. Apply at ' +
-        '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
-        ' \u00b7 Seniors 65+: use the ' +
-        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
-        '<br>Questions? <strong>' + CONFIG.contactHotline + '</strong></p>' +
-        '<div class="result-actions">' +
-        '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
-        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-        'color:var(--navy);font-weight:600;">Start Over</button>' +
-        '</div></div>';
-    }
-
-    const rc = $('result-content');
-    if (rc) rc.innerHTML = result;
-
-    const step7 = $('step7');
-    if (step7) step7.classList.add('active');
-    document.querySelectorAll('.calc-step:not(#step7)').forEach(function (s) { s.classList.remove('active'); });
-
-    const bar = $('progress');
-    if (bar) bar.style.width = '100%';
-  }
-
-  function noQualify(reason, points) {
-    return '<div class="result-box no-qualify">' +
-      '<div class="result-label" style="color:var(--red);">' +
-      '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
-      '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
-      '<ul class="qualify-checks no">' +
-      points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
-      '</ul>' +
-      '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>' + CONFIG.contactHotline + '</strong></p>' +
+ 
+  showResult(reYes);
+}
+ 
+function showResult(reYes) {
+  var result = '';
+ 
+  if (answers.primary === 'no') {
+    result = noQualify(
+      'Your property was not your NJ primary residence on October 1 of the benefit year.',
+      ['Primary residence on Oct 1 is required',
+       'Vacation homes and investment properties do not qualify']
+    );
+  } else if (answers.income === 'high') {
+    result = noQualify('Income exceeds ANCHOR program limits.',
+      ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
+    );
+  } else if (answers.tenure === 'rent' && answers.income === 'mid') {
+    result = noQualify(
+      'The $150,001\u2013$250,000 income bracket is for homeowners only.',
+      ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
+    );
+  } else if (answers.taxes === 'no' && answers.tenure === 'own') {
+    result =
+      '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
+      '<div class="result-label" style="color:#5a4000;">' +
+      '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
+      '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
+      '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
       '<div class="result-actions">' +
-      '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
-      '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
-      'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
-      'font-size:14px;">See Senior Programs</a>' +
+      '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
+      '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+      'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+      'color:var(--navy);font-weight:600;">Start Over</button>' +
+      '</div></div>';
+  } else {
+    var amount = answers.tenure === 'own'
+      ? (answers.income === 'low' ? '$1,500' : '$1,000')
+      : (answers.age === 'yes'   ? '$700'   : '$450');
+    var label = answers.tenure === 'own'
+      ? 'Estimated ANCHOR Homeowner Benefit'
+      : 'Estimated ANCHOR Renter Benefit';
+    var seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
+      ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
+ 
+    // Real estate follow-up — only if they checked the box
+    var reBlock = '';
+    if (reYes) {
+      var reTitle = answers.tenure === 'own'
+        ? 'We\u2019ll reach out with your free home value estimate'
+        : 'We\u2019ll reach out to talk through the buying process';
+      var reBody = answers.tenure === 'own'
+        ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
+        : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+      reBlock =
+        '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
+        'border-radius:8px;padding:14px 16px;text-align:left;">' +
+        '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
+        '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
+        '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
+        '</div>';
+    }
+ 
+    result =
+      '<div class="result-box">' +
+      '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
+      'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
+      '<div class="result-amount">' + amount + '</div>' +
+      '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
+      '<ul class="qualify-checks"><li>Income is within program limits</li>' +
+      '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
+      '<p class="result-note">Estimate only. Apply at ' +
+      '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
+      ' \u00b7 Seniors 65+: use the ' +
+      '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
+      '<br>Questions? <strong>1-888-238-1233</strong></p>' +
+      reBlock +
+      '<div class="result-actions" style="margin-top:18px;">' +
+      '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
+      '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+      'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+      'color:var(--navy);font-weight:600;">Start Over</button>' +
       '</div></div>';
   }
-
-  function resetCalc() {
-    answers = {};
-    currentStep = 1;
-    document.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
-    });
-    document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
-    document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
-    const s1 = $('step1');
-    if (s1) s1.classList.add('active');
-    const bar = $('progress');
-    if (bar) bar.style.width = '16%';
-  }
-
+ 
+  var rc = document.getElementById('result-content');
+  if (rc) rc.innerHTML = result;
+  document.getElementById('step7').classList.add('active');
+  document.querySelectorAll('.calc-step:not(#step7)').forEach(function (s) { s.classList.remove('active'); });
+  var bar = document.getElementById('progress');
+  if (bar) bar.style.width = '100%';
+}
+ 
+function noQualify(reason, points) {
+  return '<div class="result-box no-qualify">' +
+    '<div class="result-label" style="color:var(--red);">' +
+    '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
+    '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
+    '<ul class="qualify-checks no">' +
+    points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
+    '</ul>' +
+    '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>1-888-238-1233</strong></p>' +
+    '<div class="result-actions">' +
+    '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
+    '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
+    'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
+    'font-size:14px;">See Senior Programs</a>' +
+    '</div></div>';
+}
+ 
+function resetCalc() {
+  answers = {};
+  currentStep = 1;
+  document.querySelectorAll('.choice-btn').forEach(function (b) {
+    b.classList.remove('selected');
+    b.classList.remove('active-choice');
+  });
+  document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
+  document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
+  var s1 = document.getElementById('step1');
+  if (s1) s1.classList.add('active');
+  var bar = document.getElementById('progress');
+  if (bar) bar.style.width = '16%';
+  var cb = document.getElementById('re-interest');
+  if (cb) cb.checked = false;
+}
   // ============================================================
   // 13. STAY NJ CALCULATOR
   // Estimates 50% of property tax up to $6,500/year cap.
