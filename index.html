@@ -823,7 +823,7 @@
     <input type="tel" id="lead-phone" placeholder="(xxx) xxx-xxxx">
   </div>
  
-  <!-- Real estate interest — shown dynamically based on tenure answer -->
+  <!-- Real estate interest checkbox — text updates dynamically based on step 1 answer -->
   <div id="re-interest-box" style="background:var(--info-bg);border:1px solid #c0d0e8;border-radius:8px;padding:14px 16px;margin-bottom:4px;">
     <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-weight:normal;">
       <input type="checkbox" id="re-interest" style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--navy);">
@@ -832,7 +832,20 @@
         <span id="re-interest-sub" style="font-size:13px;color:var(--text-muted);"></span>
       </span>
     </label>
+ 
+    <!-- Address field — hidden until checkbox is checked -->
+    <div id="re-address-wrap" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid #c0d0e8;">
+      <label id="re-address-label" style="font-size:13px;font-weight:600;color:var(--navy-dark);display:block;margin-bottom:6px;">Your home address</label>
+      <input
+        type="text"
+        id="lead-address"
+        placeholder="123 Main St, Cherry Hill, NJ 08002"
+        style="width:100%;padding:10px 12px;border:1.5px solid #c0d0e8;border-radius:6px;font-size:14px;font-family:inherit;background:#fff;box-sizing:border-box;"
+      >
+      <p style="font-size:12px;color:var(--text-muted);margin:6px 0 0;">Used only to pull comparable sales for your free estimate — never shared.</p>
+    </div>
   </div>
+ 
   <p style="font-size:12px;color:var(--text-muted);margin-bottom:18px;padding-left:2px;">No pressure. Checking this just lets John or Heather know you're open to a conversation.</p>
  
   <div class="calc-nav">
@@ -840,38 +853,6 @@
     <button class="btn-next" onclick="submitCalcLead()">See My Benefit →</button>
   </div>
 </div>
-
-          <div class="calc-step" id="step7"><div id="result-content"></div></div>
-        </div>
-      </div>
-
-      <aside class="calc-sidebar">
-        <div class="prog-card-new">
-          <div class="sidebar-agent-header">
-            <img src="johnprofile.jpg" alt="John Scafide" class="sidebar-agent-img">
-            <div>
-              <div class="sidebar-agent-name">John Scafide</div>
-              <div class="sidebar-agent-title">15+ Year Tax Pro</div>
-            </div>
-          </div>
-          <p class="sidebar-quote">
-            "I've helped hundreds of South Jersey neighbors claim their rebates. If you get stuck on an income question, just reach out."
-          </p>
-          <a href="#contact" class="btn-outline sidebar-btn">Ask a Free Question</a>
-        </div>
-
-        <div class="prog-card-new gold">
-          <h4 class="sidebar-highlights-title">Rebate Highlights</h4>
-          <ul class="lead-points sidebar-list">
-            <li><i class="fas fa-check"></i> <strong>$1,500</strong> for homeowners</li>
-            <li><i class="fas fa-check"></i> <strong>$700</strong> for senior renters</li>
-            <li><i class="fas fa-check"></i> <strong>$20</strong> expert filing help</li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
-  </div>
 </section>
 
 <!-- STAY NJ CALCULATOR -->
