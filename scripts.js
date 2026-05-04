@@ -512,101 +512,107 @@
   }
 
   // ============================================================
-  // 12. ANCHOR ELIGIBILITY CALCULATOR
-  // FIX: answers & currentStep were never declared — added here.
-  // 6-step quiz with branching logic. State lives in `answers`.
-  // Result HTML is built in showResult(); rejections go through noQualify().
-  // ============================================================
+// 12. ANCHOR ELIGIBILITY CALCULATOR
+// Includes logic for own vs rent branching and result rendering.
+// ============================================================
 
-  // FIX: These were missing — every calculator function was throwing
-  // "answers is not defined" on every click.
-  let answers = {};
-  let currentStep = 1;
+let answers = {};
+let currentStep = 1;
 
-  // Updates the real estate interest checkbox text based on own vs rent.
-  function updateREInterest(tenure) {
+// Updates the real estate interest checkbox text based on own vs rent choice
+function updateREInterest(tenure) {
     const textEl  = $('re-interest-text');
     const subEl   = $('re-interest-sub');
     const cb      = $('re-interest');
     const addrLbl = $('re-address-label');
     const addrBox = $('re-address-wrap');
     const addrEl  = $('lead-address');
+    
     if (!textEl || !subEl) return;
 
-    // Reset on tenure switch
+    // Reset fields on tenure switch
     if (cb) cb.checked = false;
     if (addrBox) addrBox.style.display = 'none';
     if (addrEl)  addrEl.value = '';
 
     if (tenure === 'own') {
-      textEl.textContent = 'I\u2019m curious what my home is worth right now.';
-      subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
-      if (addrLbl) addrLbl.textContent = 'Your home address';
+        textEl.textContent = 'I’m curious what my home is worth right now.';
+        subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
+        if (addrLbl) addrLbl.textContent = 'Your home address';
     } else {
-      textEl.textContent = 'I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.';
-      subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
-      if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
+        textEl.textContent = 'I’m interested in buying a home — I’m tired of renting.';
+        subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
+        if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
     }
 
     // Wire checkbox to show/hide address field
     if (cb) {
-      cb.onchange = function () {
-        if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
-        if (!this.checked && addrEl) addrEl.value = '';
-      };
+        cb.onchange = function () {
+            if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
+            if (!this.checked && addrEl) addrEl.value = '';
+        };
     }
-  }
+}
 
-  function selectChoice(key, val, btn) {
+function selectChoice(key, val, btn) {
     answers[key] = val;
     btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
+        b.classList.remove('selected');
+        b.classList.remove('active-choice');
     });
     btn.classList.add('selected');
     btn.classList.add('active-choice');
+    
     const nb = $('next' + currentStep);
     if (nb) nb.disabled = false;
+    
     if (key === 'tenure') {
-      const mid = $('income-mid-btn');
-      if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
-      updateREInterest(val);
+        const mid = $('income-mid-btn');
+        if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
+        updateREInterest(val);
     }
-  }
+}
 
-  function nextStep(step) {
+function nextStep(step) {
     let n = step + 1;
+    // Branching logic
     if (step === 3 && answers.tenure === 'own') n = 5;
     if (step === 4 && answers.tenure === 'rent') n = 6;
     if (step === 5) n = 6;
-    $('step' + step).classList.remove('active');
+    
+    const currentEl = $('step' + step);
+    if (currentEl) currentEl.classList.remove('active');
+    
     currentStep = n;
     const nextEl = $('step' + n);
     if (nextEl) nextEl.classList.add('active');
+    
     const bar = $('progress');
     if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
-  }
+}
 
-  function prevStep(step) {
+function prevStep(step) {
     let p = step - 1;
     if (step === 5 && answers.tenure === 'own') p = 3;
     if (step === 6 && answers.tenure === 'rent') p = 4;
-    $('step' + step).classList.remove('active');
+    
+    const currentEl = $('step' + step);
+    if (currentEl) currentEl.classList.remove('active');
+    
     currentStep = p;
     const prevEl = $('step' + p);
     if (prevEl) prevEl.classList.add('active');
+    
     const bar = $('progress');
     if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
-  }
+}
 
-  // FIX: Was calling emailjs.send() directly — now routes through
-  // sendLead() for consistent error handling like every other form.
-  function submitCalcLead() {
-    const nameEl     = $('lead-name');
-    const emailEl    = $('lead-email');
-    const phoneEl    = $('lead-phone');
-    const addrEl     = $('lead-address');
-    const reInterest = $('re-interest');
+function submitCalcLead() {
+    const nameEl      = $('lead-name');
+    const emailEl     = $('lead-email');
+    const phoneEl     = $('lead-phone');
+    const addrEl      = $('lead-address');
+    const reInterest  = $('re-interest');
 
     const name  = nameEl  ? nameEl.value.trim()  : '';
     const email = emailEl ? emailEl.value.trim() : '';
@@ -615,167 +621,109 @@
     const reYes = reInterest ? reInterest.checked : false;
 
     const benefit = answers.tenure === 'own'
-      ? (answers.income === 'low' ? '$1,500' : '$1,000')
-      : (answers.age === 'yes'   ? '$700'   : '$450');
+        ? (answers.income === 'low' ? '$1,500' : '$1,000')
+        : (answers.age === 'yes'   ? '$700'   : '$450');
 
     let reLine = '';
     if (reYes) {
-      reLine = answers.tenure === 'own'
-        ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
-        : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
-      if (addr) reLine += ' | Address: ' + addr;
+        reLine = answers.tenure === 'own'
+            ? ' | ★ WANTS HOME VALUE ESTIMATE'
+            : ' | ★ INTERESTED IN BUYING';
+        if (addr) reLine += ' | Address: ' + addr;
     }
 
     if (name && email) {
-      sendLead({
-        name:  name,
-        email: email,
-        phone: phone || 'Not provided',
-        topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
-        town:  addr || 'Not provided'
-      }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
+        sendLead({
+            name:  name,
+            email: email,
+            phone: phone || 'Not provided',
+            topic: 'ANCHOR Calculator — est. benefit: ' + benefit + reLine,
+            town:  addr || 'Not provided'
+        }).catch(function (e) { console.warn('EmailJS calc lead failed:', e); });
     }
 
     showResult(reYes, addr);
-  }
+}
 
-  function showResult(reYes, addr) {
+function showResult(reYes, addr) {
     let result = '';
 
     if (answers.primary === 'no') {
-        result = noQualify(
-            'Your property was not your NJ primary residence on October 1 of the benefit year.',
-            ['Primary residence on Oct 1 is required',
-             'Vacation homes and investment properties do not qualify']
-        );
+        result = noQualify('Not primary residence on Oct 1.', ['Primary residence is required.']);
     } else if (answers.income === 'high') {
-        result = noQualify('Income exceeds ANCHOR program limits.',
-            ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
-        );
+        result = noQualify('Income exceeds limits.', ['Homeowner limit: $250K', 'Renter limit: $150K']);
     } else if (answers.tenure === 'rent' && answers.income === 'mid') {
-        result = noQualify(
-            'The $150,001\u2013$250,000 income bracket is for homeowners only.',
-            ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
-        );
+        result = noQualify('Income limit reached.', ['Renter limit is $150,000.']);
     } else if (answers.taxes === 'no' && answers.tenure === 'own') {
-        result =
-            '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
-            '<div class="result-label" style="color:#5a4000;">' +
-            '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
-            '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
-            '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
-            '<div class="result-actions">' +
-            '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
-            '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-            'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-            'color:var(--navy);font-weight:600;">Start Over</button>' +
-            '</div></div>';
+        result = '<div class="result-box"><h4>Delinquency Issue</h4><p>Contact the hotline at 1-888-238-1233.</p></div>';
     } else {
-        const amount = answers.tenure === 'own'
-            ? (answers.income === 'low' ? '$1,500' : '$1,000')
-            : (answers.age === 'yes'   ? '$700'   : '$450');
-        const label = answers.tenure === 'own'
-            ? 'Estimated ANCHOR Homeowner Benefit'
-            : 'Estimated ANCHOR Renter Benefit';
-        const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
-            ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
-
-        // Real estate follow-up block
+        const amount = answers.tenure === 'own' ? (answers.income === 'low' ? '$1,500' : '$1,000') : (answers.age === 'yes' ? '$700' : '$450');
+        const label = answers.tenure === 'own' ? 'Estimated ANCHOR Homeowner Benefit' : 'Estimated ANCHOR Renter Benefit';
+        
         let reBlock = '';
         if (reYes) {
-            const reTitle = answers.tenure === 'own'
-                ? 'We\u2019ll reach out with your free home value estimate'
-                : 'We\u2019ll reach out to talk through the buying process';
-            const reBody = answers.tenure === 'own'
-                ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
-                : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
-            const addrLine = addr
-                ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
-                : '';
-            reBlock =
-                '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
-                'border-radius:8px;padding:14px 16px;text-align:left;">' +
-                '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
-                '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
-                '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
-                addrLine +
-                '</div>';
+            reBlock = `<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;border-radius:8px;padding:14px;text-align:left;">
+                        <div style="font-weight:700;font-size:14px;color:var(--navy-dark);"><i class="fas fa-star" style="color:var(--gold);"></i> Follow-up Requested</div>
+                        <p style="font-size:13px;margin:5px 0 0;">John or Heather will follow up shortly regarding your real estate interest.</p>
+                       </div>`;
         }
 
-        result =
-            '<div class="result-box">' +
-            '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
-            'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
-            '<div class="result-amount">' + amount + '</div>' +
-            '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
-            '<ul class="qualify-checks"><li>Income is within program limits</li>' +
-            '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
-            '<p class="result-note">Estimate only. Apply at ' +
-            '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
-            ' \u00b7 Seniors 65+: use the ' +
-            '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
-            '<br>Questions? <strong>1-888-238-1233</strong></p>' +
-            reBlock +
-            '<div class="result-actions" style="margin-top:18px;">' +
-            '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
-            '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-            'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-            'color:var(--navy);font-weight:600;">Start Over</button>' +
-            '</div></div>';
+        result = `
+            <div class="result-box" style="display: block !important; text-align: center;">
+                <div class="result-label" style="font-size: 18px; font-weight: 700; color: var(--navy);"><i class="fas fa-circle-check" style="color:var(--green);"></i> You likely qualify!</div>
+                <div class="result-amount" style="font-size: 52px; font-weight: 800; color: var(--navy); margin: 15px 0;">${amount}</div>
+                <p style="font-weight: 600;">${label}</p>
+                <ul class="qualify-checks" style="text-align: left; font-size: 14px;">
+                    <li>Income is within program limits</li>
+                    <li>This was your primary residence on Oct 1</li>
+                </ul>
+                ${reBlock}
+                <div class="result-actions" style="margin-top: 20px;">
+                    <a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now at NJ.gov</a>
+                    <button onclick="resetCalc()" style="background:none; border:1px solid var(--navy); border-radius:6px; padding:10px 20px; cursor:pointer; color:var(--navy); font-weight:600; margin-left:10px;">Start Over</button>
+                </div>
+            </div>`;
     }
 
     const rc = $('result-content');
-    if (rc) {
-        rc.innerHTML = result;
-        // Force the content itself to be visible
-        rc.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
-    }
+    if (rc) rc.innerHTML = result;
 
-    // Hide all steps first
-    document.querySelectorAll('.calc-step').forEach(function (s) {
+    // HIDE ALL STEPS
+    document.querySelectorAll('.calc-step').forEach(s => {
         s.classList.remove('active');
         s.style.display = 'none';
     });
 
-    // Ensure Step 7 (the results container) is shown
+    // FORCE STEP 7 (RESULTS) VISIBLE
     const s7 = $('step7');
     if (s7) {
         s7.classList.add('active');
-        s7.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
+        s7.style.setProperty('display', 'block', 'important');
+        s7.style.setProperty('visibility', 'visible', 'important');
+        s7.style.setProperty('opacity', '1', 'important');
     }
 
     const bar = $('progress');
     if (bar) bar.style.width = '100%';
 }
 
-  function resetCalc() {
+function resetCalc() {
     answers = {};
     currentStep = 1;
-    document.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
-    });
-    document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
-    // Clear both class and inline style so CSS takes back over
-    document.querySelectorAll('.calc-step').forEach(function (s) {
-      s.classList.remove('active');
-      s.style.display = '';
+    document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected', 'active-choice'));
+    document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
+    document.querySelectorAll('.calc-step').forEach(s => {
+        s.classList.remove('active');
+        s.style.display = '';
     });
     const s1 = $('step1');
     if (s1) {
-      s1.classList.add('active');
-      s1.style.display = 'block';
+        s1.classList.add('active');
+        s1.style.display = 'block';
     }
     const bar = $('progress');
     if (bar) bar.style.width = '16%';
-    const cb = $('re-interest');
-    if (cb) cb.checked = false;
-    const addrBox = $('re-address-wrap');
-    const addrEl  = $('lead-address');
-    if (addrBox) addrBox.style.display = 'none';
-    if (addrEl)  addrEl.value = '';
-  }
-
+}
   // ============================================================
   // 13. STAY NJ CALCULATOR
   // Estimates 50% of property tax up to $6,500/year cap.
