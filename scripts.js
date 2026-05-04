@@ -727,15 +727,23 @@
     const rc = $('result-content');
     if (rc) rc.innerHTML = result;
 
-    // Hide all steps first, then reveal step7
-    document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
+    // Hide all steps, then force step7 visible with inline style
+    // (belt-and-suspenders: class toggle + inline display so CSS can't override)
+    document.querySelectorAll('.calc-step').forEach(function (s) {
+      s.classList.remove('active');
+      s.style.display = 'none';
+    });
     const s7 = $('step7');
     if (s7) {
       s7.classList.add('active');
-      s7.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    } else {
-      console.error('step7 element not found — check your calculator HTML');
-      if (rc) rc.style.display = 'block';
+      s7.style.display = 'block';
+      s7.style.opacity = '1';
+      s7.style.visibility = 'visible';
+    }
+    if (rc) {
+      rc.style.display = 'block';
+      rc.style.opacity = '1';
+      rc.style.visibility = 'visible';
     }
 
     const bar = $('progress');
@@ -767,9 +775,16 @@
       b.classList.remove('active-choice');
     });
     document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
-    document.querySelectorAll('.calc-step').forEach(function (s) { s.classList.remove('active'); });
+    // Clear both class and inline style so CSS takes back over
+    document.querySelectorAll('.calc-step').forEach(function (s) {
+      s.classList.remove('active');
+      s.style.display = '';
+    });
     const s1 = $('step1');
-    if (s1) s1.classList.add('active');
+    if (s1) {
+      s1.classList.add('active');
+      s1.style.display = 'block';
+    }
     const bar = $('progress');
     if (bar) bar.style.width = '16%';
     const cb = $('re-interest');
