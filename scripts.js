@@ -708,22 +708,42 @@ function showResult(reYes, addr) {
 }
 
 function resetCalc() {
+    // 1. Clear the data
     answers = {};
     currentStep = 1;
-    document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected', 'active-choice'));
-    document.querySelectorAll('.btn-next').forEach(b => b.disabled = true);
+
+    // 2. Clear all button selections
+    document.querySelectorAll('.choice-btn').forEach(b => {
+        b.classList.remove('selected', 'active-choice');
+    });
+
+    // 3. Disable all next buttons until fresh choices are made
+    document.querySelectorAll('.btn-next').forEach(b => {
+        b.disabled = true;
+    });
+
+    // 4. THE FIX: Hide EVERY step explicitly and remove active classes
     document.querySelectorAll('.calc-step').forEach(s => {
         s.classList.remove('active');
-        s.style.display = '';
+        s.style.display = 'none'; // Force hide
+        s.style.visibility = 'hidden';
+        s.style.opacity = '0';
     });
+
+    // 5. Show only Step 1
     const s1 = $('step1');
     if (s1) {
         s1.classList.add('active');
-        s1.style.display = 'block';
+        s1.style.display = 'block'; // Force show
+        s1.style.visibility = 'visible';
+        s1.style.opacity = '1';
     }
+
+    // 6. Reset the progress bar
     const bar = $('progress');
     if (bar) bar.style.width = '16%';
 }
+  
   // ============================================================
   // 13. STAY NJ CALCULATOR
   // Estimates 50% of property tax up to $6,500/year cap.
