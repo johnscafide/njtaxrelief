@@ -525,17 +525,35 @@
 
   // Updates the real estate interest checkbox text based on own vs rent.
   function updateREInterest(tenure) {
-    const textEl = $('re-interest-text');
-    const subEl  = $('re-interest-sub');
-    const cb     = $('re-interest');
+    const textEl  = $('re-interest-text');
+    const subEl   = $('re-interest-sub');
+    const cb      = $('re-interest');
+    const addrLbl = $('re-address-label');
+    const addrBox = $('re-address-wrap');
+    const addrEl  = $('lead-address');
     if (!textEl || !subEl) return;
+
+    // Reset on tenure switch
     if (cb) cb.checked = false;
+    if (addrBox) addrBox.style.display = 'none';
+    if (addrEl)  addrEl.value = '';
+
     if (tenure === 'own') {
-      textEl.textContent = "I\u2019m curious what my home is worth right now.";
-      subEl.textContent  = "Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.";
+      textEl.textContent = 'I\u2019m curious what my home is worth right now.';
+      subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
+      if (addrLbl) addrLbl.textContent = 'Your home address';
     } else {
-      textEl.textContent = "I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.";
-      subEl.textContent  = "Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.";
+      textEl.textContent = 'I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.';
+      subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
+      if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
+    }
+
+    // Wire checkbox to show/hide address field
+    if (cb) {
+      cb.onchange = function () {
+        if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
+        if (!this.checked && addrEl) addrEl.value = '';
+      };
     }
   }
 
@@ -587,11 +605,13 @@
     const nameEl     = $('lead-name');
     const emailEl    = $('lead-email');
     const phoneEl    = $('lead-phone');
+    const addrEl     = $('lead-address');
     const reInterest = $('re-interest');
 
     const name  = nameEl  ? nameEl.value.trim()  : '';
     const email = emailEl ? emailEl.value.trim() : '';
     const phone = phoneEl ? phoneEl.value.trim() : '';
+    const addr  = addrEl  ? addrEl.value.trim()  : '';
     const reYes = reInterest ? reInterest.checked : false;
 
     const benefit = answers.tenure === 'own'
@@ -603,6 +623,7 @@
       reLine = answers.tenure === 'own'
         ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
         : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
+      if (addr) reLine += ' | Address: ' + addr;
     }
 
     if (name && email) {
@@ -611,14 +632,14 @@
         email: email,
         phone: phone || 'Not provided',
         topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
-        town:  'Not provided'
+        town:  addr || 'Not provided'
       }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
     }
 
-    showResult(reYes);
+    showResult(reYes, addr);
   }
 
-  function showResult(reYes) {
+  function showResult(reYes, addr) {
     let result = '';
 
     if (answers.primary === 'no') {
@@ -668,12 +689,16 @@
         const reBody = answers.tenure === 'own'
           ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
           : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+        const addrLine = addr
+          ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
+          : '';
         reBlock =
           '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
           'border-radius:8px;padding:14px 16px;text-align:left;">' +
           '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
           '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
           '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
+          addrLine +
           '</div>';
       }
 
@@ -739,6 +764,10 @@
     if (bar) bar.style.width = '16%';
     const cb = $('re-interest');
     if (cb) cb.checked = false;
+    const addrBox = $('re-address-wrap');
+    const addrEl  = $('lead-address');
+    if (addrBox) addrBox.style.display = 'none';
+    if (addrEl)  addrEl.value = '';
   }
 
   // ============================================================
