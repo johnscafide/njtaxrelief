@@ -643,129 +643,110 @@
     let result = '';
 
     if (answers.primary === 'no') {
-      result = noQualify(
-        'Your property was not your NJ primary residence on October 1 of the benefit year.',
-        ['Primary residence on Oct 1 is required',
-         'Vacation homes and investment properties do not qualify']
-      );
+        result = noQualify(
+            'Your property was not your NJ primary residence on October 1 of the benefit year.',
+            ['Primary residence on Oct 1 is required',
+             'Vacation homes and investment properties do not qualify']
+        );
     } else if (answers.income === 'high') {
-      result = noQualify('Income exceeds ANCHOR program limits.',
-        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
-      );
+        result = noQualify('Income exceeds ANCHOR program limits.',
+            ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
+        );
     } else if (answers.tenure === 'rent' && answers.income === 'mid') {
-      result = noQualify(
-        'The $150,001\u2013$250,000 income bracket is for homeowners only.',
-        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
-      );
+        result = noQualify(
+            'The $150,001\u2013$250,000 income bracket is for homeowners only.',
+            ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
+        );
     } else if (answers.taxes === 'no' && answers.tenure === 'own') {
-      result =
-        '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
-        '<div class="result-label" style="color:#5a4000;">' +
-        '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
-        '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
-        '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
-        '<div class="result-actions">' +
-        '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
-        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-        'color:var(--navy);font-weight:600;">Start Over</button>' +
-        '</div></div>';
+        result =
+            '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
+            '<div class="result-label" style="color:#5a4000;">' +
+            '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
+            '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
+            '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
+            '<div class="result-actions">' +
+            '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
+            '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+            'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+            'color:var(--navy);font-weight:600;">Start Over</button>' +
+            '</div></div>';
     } else {
-      const amount = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age === 'yes'   ? '$700'   : '$450');
-      const label = answers.tenure === 'own'
-        ? 'Estimated ANCHOR Homeowner Benefit'
-        : 'Estimated ANCHOR Renter Benefit';
-      const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
-        ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
+        const amount = answers.tenure === 'own'
+            ? (answers.income === 'low' ? '$1,500' : '$1,000')
+            : (answers.age === 'yes'   ? '$700'   : '$450');
+        const label = answers.tenure === 'own'
+            ? 'Estimated ANCHOR Homeowner Benefit'
+            : 'Estimated ANCHOR Renter Benefit';
+        const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
+            ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
 
-      // Real estate follow-up block — only shown if they checked the box
-      let reBlock = '';
-      if (reYes) {
-        const reTitle = answers.tenure === 'own'
-          ? 'We\u2019ll reach out with your free home value estimate'
-          : 'We\u2019ll reach out to talk through the buying process';
-        const reBody = answers.tenure === 'own'
-          ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
-          : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
-        const addrLine = addr
-          ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
-          : '';
-        reBlock =
-          '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
-          'border-radius:8px;padding:14px 16px;text-align:left;">' +
-          '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
-          '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
-          '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
-          addrLine +
-          '</div>';
-      }
+        // Real estate follow-up block
+        let reBlock = '';
+        if (reYes) {
+            const reTitle = answers.tenure === 'own'
+                ? 'We\u2019ll reach out with your free home value estimate'
+                : 'We\u2019ll reach out to talk through the buying process';
+            const reBody = answers.tenure === 'own'
+                ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
+                : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+            const addrLine = addr
+                ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
+                : '';
+            reBlock =
+                '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
+                'border-radius:8px;padding:14px 16px;text-align:left;">' +
+                '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
+                '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
+                '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
+                addrLine +
+                '</div>';
+        }
 
-      result =
-        '<div class="result-box">' +
-        '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
-        'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
-        '<div class="result-amount">' + amount + '</div>' +
-        '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
-        '<ul class="qualify-checks"><li>Income is within program limits</li>' +
-        '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
-        '<p class="result-note">Estimate only. Apply at ' +
-        '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
-        ' \u00b7 Seniors 65+: use the ' +
-        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
-        '<br>Questions? <strong>1-888-238-1233</strong></p>' +
-        reBlock +
-        '<div class="result-actions" style="margin-top:18px;">' +
-        '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
-        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
-        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
-        'color:var(--navy);font-weight:600;">Start Over</button>' +
-        '</div></div>';
+        result =
+            '<div class="result-box">' +
+            '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
+            'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
+            '<div class="result-amount">' + amount + '</div>' +
+            '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
+            '<ul class="qualify-checks"><li>Income is within program limits</li>' +
+            '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
+            '<p class="result-note">Estimate only. Apply at ' +
+            '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
+            ' \u00b7 Seniors 65+: use the ' +
+            '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
+            '<br>Questions? <strong>1-888-238-1233</strong></p>' +
+            reBlock +
+            '<div class="result-actions" style="margin-top:18px;">' +
+            '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
+            '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+            'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+            'color:var(--navy);font-weight:600;">Start Over</button>' +
+            '</div></div>';
     }
 
     const rc = $('result-content');
-    if (rc) rc.innerHTML = result;
+    if (rc) {
+        rc.innerHTML = result;
+        // Force the content itself to be visible
+        rc.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
+    }
 
-    // Hide all steps, then force step7 visible with inline style
-    // (belt-and-suspenders: class toggle + inline display so CSS can't override)
+    // Hide all steps first
     document.querySelectorAll('.calc-step').forEach(function (s) {
-      s.classList.remove('active');
-      s.style.display = 'none';
+        s.classList.remove('active');
+        s.style.display = 'none';
     });
+
+    // Ensure Step 7 (the results container) is shown
     const s7 = $('step7');
     if (s7) {
-      s7.classList.add('active');
-      s7.style.display = 'block';
-      s7.style.opacity = '1';
-      s7.style.visibility = 'visible';
-    }
-    if (rc) {
-      rc.style.display = 'block';
-      rc.style.opacity = '1';
-      rc.style.visibility = 'visible';
+        s7.classList.add('active');
+        s7.setAttribute('style', 'display: block !important; opacity: 1 !important; visibility: visible !important;');
     }
 
     const bar = $('progress');
     if (bar) bar.style.width = '100%';
-  }
-
-  function noQualify(reason, points) {
-    return '<div class="result-box no-qualify">' +
-      '<div class="result-label" style="color:var(--red);">' +
-      '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
-      '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
-      '<ul class="qualify-checks no">' +
-      points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
-      '</ul>' +
-      '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>1-888-238-1233</strong></p>' +
-      '<div class="result-actions">' +
-      '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
-      '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
-      'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
-      'font-size:14px;">See Senior Programs</a>' +
-      '</div></div>';
-  }
+}
 
   function resetCalc() {
     answers = {};
