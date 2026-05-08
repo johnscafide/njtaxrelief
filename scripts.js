@@ -331,8 +331,14 @@
   // ----- Active modal: #rebate-modal -----
   function initRebatePopup() {
     if (sessionStorage.getItem('rebateModalSeen')) {
+      // Returning visitor this session — show minimized with glow & shake
       const link = $('sticky-rebate-link');
-      if (link) link.style.display = 'inline-flex';
+      if (link) {
+        link.style.display = 'inline-flex';
+        injectRebateAnimCSS();
+        requestAnimationFrame(function () { link.classList.add('rebate-visible'); });
+        startRebateShakeLoop(link);
+      }
       return;
     }
     setTimeout(function () {
@@ -341,18 +347,82 @@
     }, CONFIG.popupDelays.rebateModal);
   }
 
+  // ── Rebate modal animation state ─────────────────────────
+  let _rebateAnimInjected = false;
+  let _rebateShakeTimer   = null;
+
+  function injectRebateAnimCSS() {
+    if (_rebateAnimInjected) return;
+    _rebateAnimInjected = true;
+    const style = document.createElement('style');
+    style.textContent = [
+      '@keyframes rebateGlow {',
+      '  0%,100% { box-shadow:0 0 0 0 rgba(184,151,42,0); }',
+      '  50%     { box-shadow:0 0 14px 5px rgba(184,151,42,0.6); }',
+      '}',
+      '@keyframes rebateShake {',
+      '  0%,100% { transform:translateX(0) rotate(0deg); }',
+      '  15%     { transform:translateX(-5px) rotate(-2deg); }',
+      '  30%     { transform:translateX(5px) rotate(2deg); }',
+      '  45%     { transform:translateX(-4px) rotate(-1deg); }',
+      '  60%     { transform:translateX(4px) rotate(1deg); }',
+      '  75%     { transform:translateX(-3px) rotate(-0.5deg); }',
+      '  90%     { transform:translateX(3px); }',
+      '}',
+      '#sticky-rebate-link.rebate-visible {',
+      '  animation: rebateGlow 2.4s ease-in-out infinite;',
+      '}',
+      '#sticky-rebate-link.rebate-shake {',
+      '  animation: rebateShake 0.65s ease-in-out !important;',
+      '}'
+    ].join('\n');
+    document.head.appendChild(style);
+  }
+
+  function startRebateShakeLoop(link) {
+    if (_rebateShakeTimer) { clearInterval(_rebateShakeTimer); _rebateShakeTimer = null; }
+    function doShake() {
+      if (!link || link.style.display === 'none') return;
+      link.classList.remove('rebate-shake');
+      void link.offsetWidth; // force reflow so animation restarts
+      link.classList.add('rebate-shake');
+      setTimeout(function () { link.classList.remove('rebate-shake'); }, 700);
+    }
+    // First shake after 20 seconds, then every 2.5 minutes
+    const firstTimer = setTimeout(function () {
+      doShake();
+      _rebateShakeTimer = setInterval(doShake, 150 * 1000);
+    }, 20 * 1000);
+    // Store firstTimer so we can cancel it if re-opened
+    link._firstShakeTimer = firstTimer;
+  }
+
   function showRebateModal() {
     const modal = $('rebate-modal');
-    const link = $('sticky-rebate-link');
+    const link  = $('sticky-rebate-link');
     if (modal) modal.style.display = 'flex';
-    if (link) link.style.display = 'none';
+    if (link) {
+      link.style.display = 'none';
+      link.classList.remove('rebate-visible', 'rebate-shake');
+    }
+    // Cancel shake loop when modal is open
+    if (_rebateShakeTimer)  { clearInterval(_rebateShakeTimer); _rebateShakeTimer = null; }
+    if (link && link._firstShakeTimer) { clearTimeout(link._firstShakeTimer); }
   }
 
   function minimizeRebateModal() {
     const modal = $('rebate-modal');
-    const link = $('sticky-rebate-link');
+    const link  = $('sticky-rebate-link');
     if (modal) modal.style.display = 'none';
-    if (link) link.style.display = 'inline-flex';
+    if (link) {
+      link.style.display = 'inline-flex';
+      injectRebateAnimCSS();
+      // Small delay so display paints before animation class is added
+      requestAnimationFrame(function () {
+        link.classList.add('rebate-visible');
+      });
+      startRebateShakeLoop(link);
+    }
   }
 
   function downloadChecklist() {
