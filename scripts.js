@@ -356,25 +356,95 @@
     _rebateAnimInjected = true;
     const style = document.createElement('style');
     style.textContent = [
+
+      /* ── Keyframes ─────────────────────────────────────── */
       '@keyframes rebateGlow {',
-      '  0%,100% { box-shadow:0 0 0 0 rgba(184,151,42,0); }',
-      '  50%     { box-shadow:0 0 14px 5px rgba(184,151,42,0.6); }',
+      '  0%,100% { box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 0 0 rgba(184,151,42,0); }',
+      '  50%     { box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 18px 6px rgba(184,151,42,0.65); }',
       '}',
       '@keyframes rebateShake {',
-      '  0%,100% { transform:translateX(0) rotate(0deg); }',
-      '  15%     { transform:translateX(-5px) rotate(-2deg); }',
-      '  30%     { transform:translateX(5px) rotate(2deg); }',
-      '  45%     { transform:translateX(-4px) rotate(-1deg); }',
-      '  60%     { transform:translateX(4px) rotate(1deg); }',
-      '  75%     { transform:translateX(-3px) rotate(-0.5deg); }',
-      '  90%     { transform:translateX(3px); }',
+      '  0%,100% { transform: translateX(0) rotate(0deg); }',
+      '  15%     { transform: translateX(-6px) rotate(-2.5deg); }',
+      '  30%     { transform: translateX(6px) rotate(2.5deg); }',
+      '  45%     { transform: translateX(-5px) rotate(-1.5deg); }',
+      '  60%     { transform: translateX(5px) rotate(1.5deg); }',
+      '  75%     { transform: translateX(-3px) rotate(-0.5deg); }',
+      '  90%     { transform: translateX(3px); }',
       '}',
+
+      /* ── Base: fixed to bottom of viewport ─────────────── */
+      '#sticky-rebate-link {',
+      '  position: fixed !important;',
+      '  bottom: 24px !important;',
+      '  left: 24px !important;',
+      '  right: auto !important;',
+      '  top: auto !important;',
+      '  z-index: 9997 !important;',
+      '  display: none;',                   /* JS controls display */
+      '  align-items: center !important;',
+      '  gap: 10px !important;',
+      '  background: #b8192a !important;',  /* rich red — stands out */
+      '  color: #fff !important;',
+      '  font-family: "Source Sans 3", sans-serif !important;',
+      '  font-size: 14px !important;',
+      '  font-weight: 700 !important;',
+      '  padding: 13px 22px !important;',
+      '  border-radius: 50px !important;',
+      '  text-decoration: none !important;',
+      '  white-space: nowrap !important;',
+      '  cursor: pointer !important;',
+      '  box-shadow: 0 4px 24px rgba(0,0,0,0.35) !important;',
+      '  transition: transform 0.15s, background 0.15s !important;',
+      '  /* keep it above the Stripe/chat widgets */',
+      '}',
+      '#sticky-rebate-link:hover {',
+      '  background: #d42030 !important;',
+      '  transform: translateY(-2px) !important;',
+      '}',
+      '#sticky-rebate-link i {',
+      '  font-size: 16px !important;',
+      '  flex-shrink: 0 !important;',
+      '}',
+
+      /* ── Glow + shake classes ───────────────────────────── */
       '#sticky-rebate-link.rebate-visible {',
-      '  animation: rebateGlow 2.4s ease-in-out infinite;',
+      '  animation: rebateGlow 2.4s ease-in-out infinite !important;',
       '}',
       '#sticky-rebate-link.rebate-shake {',
       '  animation: rebateShake 0.65s ease-in-out !important;',
+      '}',
+
+      /* ── Mobile: full-width bottom bar ──────────────────── */
+      '@media (max-width: 680px) {',
+      '  #sticky-rebate-link {',
+      '    left: 0 !important;',
+      '    right: 0 !important;',
+      '    bottom: 0 !important;',
+      '    border-radius: 0 !important;',
+      '    width: 100% !important;',
+      '    box-sizing: border-box !important;',
+      '    justify-content: center !important;',
+      '    padding: 15px 20px !important;',
+      '    font-size: 15px !important;',
+      '    gap: 10px !important;',
+      '  }',
+      '}',
+
+      /* ── Also fix modal position on mobile ──────────────── */
+      '@media (max-width: 680px) {',
+      '  #rebate-modal {',
+      '    bottom: 0 !important;',
+      '    right: 0 !important;',
+      '    left: 0 !important;',
+      '    max-width: 100% !important;',
+      '    width: 100% !important;',
+      '    border-radius: 0 !important;',
+      '  }',
+      '  #rebate-modal > div {',
+      '    border-radius: 0 !important;',
+      '  }',
       '}'
+
     ].join('\n');
     document.head.appendChild(style);
   }
