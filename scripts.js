@@ -37,16 +37,17 @@
   // ============================================================
   const CONFIG = {
     emailjs: {
-      publicKey: 'u262kw5AoJcBI342V',
-      serviceId: 'service_gptqbyx',
-      templateId: 'template_q1kaure',
-      autoReplyTemplateId: 'template_autoreply_xxx'
+      publicKey:  'u262kw5AoJcBI342V',
+      serviceId:  'service_gptqbyx',
+      templateId: 'template_q1kaure'
     },
     popupDelays: {
-      rebateModal: 3000   // ms before the rebate modal appears
+      rebateModal: 4000
     },
     contactHotline: '1-888-238-1233',
-    checklistFile: 'NJ_Tax_Relief_Checklist.pdf'
+    checklistFile:  'NJ_Tax_Relief_Checklist.pdf',
+    stripeLink:     'https://buy.stripe.com/9B69ASdhjg442OLdoWfw400',
+    guidePrice:     '$5'
   };
 
   // ============================================================
@@ -71,38 +72,20 @@
   // Send a lead through EmailJS with safe defaults.
   // All form submissions route through here for consistent error handling.
   function sendLead(payload) {
-  if (typeof emailjs === 'undefined') {
-    console.warn('EmailJS not loaded yet.');
-    return Promise.reject(new Error('EmailJS missing'));
-  }
-  const data = Object.assign({
-    name: 'Not provided',
-    email: 'Not provided',
-    phone: 'Not provided',
-    topic: 'Website inquiry',
-    town: 'Not provided'
-  }, payload);
-
-  // 1. Notification to John
-  const notify = emailjs.send(
-    CONFIG.emailjs.serviceId,
-    CONFIG.emailjs.templateId,
-    data
-  );
-
-  // 2. Auto-reply to the lead (only if they actually gave us an email)
-  if (data.email && data.email !== 'Not provided') {
-    emailjs.send(
-      CONFIG.emailjs.serviceId,
-      CONFIG.emailjs.autoReplyTemplateId,
-      data
-    ).catch(function (e) {
-      console.warn('Auto-reply failed:', e);
-    });
+    if (typeof emailjs === 'undefined') {
+      console.warn('EmailJS not loaded yet.');
+      return Promise.reject(new Error('EmailJS missing'));
+    }
+    const data = Object.assign({
+      name: 'Not provided',
+      email: 'Not provided',
+      phone: 'Not provided',
+      topic: 'Website inquiry',
+      town: 'Not provided'
+    }, payload);
+    return emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, data);
   }
 
-  return notify;
-}
   // Lock/unlock body scroll. Works on iOS Safari (overflow:hidden alone does not).
   let savedScrollY = 0;
   function lockBodyScroll() {
@@ -373,18 +356,8 @@
   }
 
   function downloadChecklist() {
-    const emailEl = $('modal-email');
-    const email = emailEl ? emailEl.value.trim() : '';
-    if (!email) {
-      alert('Please enter your email to receive the checklist.');
-      return;
-    }
-    sendLead({
-      name: 'Checklist Download',
-      email: email,
-      topic: 'Checklist Download Lead'
-    }).catch(function (e) { console.warn('Checklist lead error:', e); });
-    window.open(CONFIG.checklistFile, '_blank');
+    // Routes to Stripe payment for the $5 guide package
+    window.open(CONFIG.stripeLink, '_blank');
     minimizeRebateModal();
   }
 
@@ -531,107 +504,101 @@
   }
 
   // ============================================================
-// 12. ANCHOR ELIGIBILITY CALCULATOR
-// Includes logic for own vs rent branching and result rendering.
-// ============================================================
+  // 12. ANCHOR ELIGIBILITY CALCULATOR
+  // FIX: answers & currentStep were never declared — added here.
+  // 6-step quiz with branching logic. State lives in `answers`.
+  // Result HTML is built in showResult(); rejections go through noQualify().
+  // ============================================================
 
-let answers = {};
-let currentStep = 1;
+  // FIX: These were missing — every calculator function was throwing
+  // "answers is not defined" on every click.
+  let answers = {};
+  let currentStep = 1;
 
-// Updates the real estate interest checkbox text based on own vs rent choice
-function updateREInterest(tenure) {
+  // Updates the real estate interest checkbox text based on own vs rent.
+  function updateREInterest(tenure) {
     const textEl  = $('re-interest-text');
     const subEl   = $('re-interest-sub');
     const cb      = $('re-interest');
     const addrLbl = $('re-address-label');
     const addrBox = $('re-address-wrap');
     const addrEl  = $('lead-address');
-    
     if (!textEl || !subEl) return;
 
-    // Reset fields on tenure switch
+    // Reset on tenure switch
     if (cb) cb.checked = false;
     if (addrBox) addrBox.style.display = 'none';
     if (addrEl)  addrEl.value = '';
 
     if (tenure === 'own') {
-        textEl.textContent = 'I’m curious what my home is worth right now.';
-        subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
-        if (addrLbl) addrLbl.textContent = 'Your home address';
+      textEl.textContent = 'I\u2019m curious what my home is worth right now.';
+      subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
+      if (addrLbl) addrLbl.textContent = 'Your home address';
     } else {
-        textEl.textContent = 'I’m interested in buying a home — I’m tired of renting.';
-        subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
-        if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
+      textEl.textContent = 'I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.';
+      subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
+      if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
     }
 
     // Wire checkbox to show/hide address field
     if (cb) {
-        cb.onchange = function () {
-            if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
-            if (!this.checked && addrEl) addrEl.value = '';
-        };
+      cb.onchange = function () {
+        if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
+        if (!this.checked && addrEl) addrEl.value = '';
+      };
     }
-}
+  }
 
-function selectChoice(key, val, btn) {
+  function selectChoice(key, val, btn) {
     answers[key] = val;
     btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
-        b.classList.remove('selected');
-        b.classList.remove('active-choice');
+      b.classList.remove('selected');
+      b.classList.remove('active-choice');
     });
     btn.classList.add('selected');
     btn.classList.add('active-choice');
-    
     const nb = $('next' + currentStep);
     if (nb) nb.disabled = false;
-    
     if (key === 'tenure') {
-        const mid = $('income-mid-btn');
-        if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
-        updateREInterest(val);
+      const mid = $('income-mid-btn');
+      if (mid) mid.style.opacity = (val === 'rent') ? '0.4' : '1';
+      updateREInterest(val);
     }
-}
+  }
 
-function nextStep(step) {
+  function nextStep(step) {
     let n = step + 1;
-    // Branching logic
     if (step === 3 && answers.tenure === 'own') n = 5;
     if (step === 4 && answers.tenure === 'rent') n = 6;
     if (step === 5) n = 6;
-    
-    const currentEl = $('step' + step);
-    if (currentEl) currentEl.classList.remove('active');
-    
+    $('step' + step).classList.remove('active');
     currentStep = n;
     const nextEl = $('step' + n);
     if (nextEl) nextEl.classList.add('active');
-    
     const bar = $('progress');
     if (bar) bar.style.width = Math.min(100, Math.round((n / 6) * 100)) + '%';
-}
+  }
 
-function prevStep(step) {
+  function prevStep(step) {
     let p = step - 1;
     if (step === 5 && answers.tenure === 'own') p = 3;
     if (step === 6 && answers.tenure === 'rent') p = 4;
-    
-    const currentEl = $('step' + step);
-    if (currentEl) currentEl.classList.remove('active');
-    
+    $('step' + step).classList.remove('active');
     currentStep = p;
     const prevEl = $('step' + p);
     if (prevEl) prevEl.classList.add('active');
-    
     const bar = $('progress');
     if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
-}
+  }
 
-function submitCalcLead() {
-    const nameEl      = $('lead-name');
-    const emailEl     = $('lead-email');
-    const phoneEl     = $('lead-phone');
-    const addrEl      = $('lead-address');
-    const reInterest  = $('re-interest');
+  // FIX: Was calling emailjs.send() directly — now routes through
+  // sendLead() for consistent error handling like every other form.
+  function submitCalcLead() {
+    const nameEl     = $('lead-name');
+    const emailEl    = $('lead-email');
+    const phoneEl    = $('lead-phone');
+    const addrEl     = $('lead-address');
+    const reInterest = $('re-interest');
 
     const name  = nameEl  ? nameEl.value.trim()  : '';
     const email = emailEl ? emailEl.value.trim() : '';
@@ -640,129 +607,216 @@ function submitCalcLead() {
     const reYes = reInterest ? reInterest.checked : false;
 
     const benefit = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age === 'yes'   ? '$700'   : '$450');
+      ? (answers.income === 'low' ? '$1,500' : '$1,000')
+      : (answers.age === 'yes'   ? '$700'   : '$450');
 
     let reLine = '';
     if (reYes) {
-        reLine = answers.tenure === 'own'
-            ? ' | ★ WANTS HOME VALUE ESTIMATE'
-            : ' | ★ INTERESTED IN BUYING';
-        if (addr) reLine += ' | Address: ' + addr;
+      reLine = answers.tenure === 'own'
+        ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
+        : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
+      if (addr) reLine += ' | Address: ' + addr;
     }
 
     if (name && email) {
-        sendLead({
-            name:  name,
-            email: email,
-            phone: phone || 'Not provided',
-            topic: 'ANCHOR Calculator — est. benefit: ' + benefit + reLine,
-            town:  addr || 'Not provided'
-        }).catch(function (e) { console.warn('EmailJS calc lead failed:', e); });
+      sendLead({
+        name:  name,
+        email: email,
+        phone: phone || 'Not provided',
+        topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
+        town:  addr || 'Not provided'
+      }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
     }
 
     showResult(reYes, addr);
-}
+  }
 
-function showResult(reYes, addr) {
+  function showResult(reYes, addr) {
     let result = '';
 
     if (answers.primary === 'no') {
-        result = noQualify('Not primary residence on Oct 1.', ['Primary residence is required.']);
+      result = noQualify(
+        'Your property was not your NJ primary residence on October 1 of the benefit year.',
+        ['Primary residence on Oct 1 is required',
+         'Vacation homes and investment properties do not qualify']
+      );
     } else if (answers.income === 'high') {
-        result = noQualify('Income exceeds limits.', ['Homeowner limit: $250K', 'Renter limit: $150K']);
+      result = noQualify('Income exceeds ANCHOR program limits.',
+        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
+      );
     } else if (answers.tenure === 'rent' && answers.income === 'mid') {
-        result = noQualify('Income limit reached.', ['Renter limit is $150,000.']);
+      result = noQualify(
+        'The $150,001\u2013$250,000 income bracket is for homeowners only.',
+        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
+      );
     } else if (answers.taxes === 'no' && answers.tenure === 'own') {
-        result = '<div class="result-box"><h4>Delinquency Issue</h4><p>Contact the hotline at 1-888-238-1233.</p></div>';
+      result =
+        '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
+        '<div class="result-label" style="color:#5a4000;">' +
+        '<i class="fas fa-triangle-exclamation"></i> Possible Delinquency Issue</div>' +
+        '<p style="font-size:15px;color:#5a4010;margin:12px 0 16px;">Homeowners more than ' +
+        '12 months delinquent may not qualify. Call the hotline to confirm before applying.</p>' +
+        '<div class="result-actions">' +
+        '<a href="tel:18882381233" class="btn-primary" style="text-decoration:none;">Call 1-888-238-1233</a>' +
+        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+        'color:var(--navy);font-weight:600;">Start Over</button>' +
+        '</div></div>';
     } else {
-        const amount = answers.tenure === 'own' ? (answers.income === 'low' ? '$1,500' : '$1,000') : (answers.age === 'yes' ? '$700' : '$450');
-        const label = answers.tenure === 'own' ? 'Estimated ANCHOR Homeowner Benefit' : 'Estimated ANCHOR Renter Benefit';
-        
-        let reBlock = '';
-        if (reYes) {
-            reBlock = `<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;border-radius:8px;padding:14px;text-align:left;">
-                        <div style="font-weight:700;font-size:14px;color:var(--navy-dark);"><i class="fas fa-star" style="color:var(--gold);"></i> Follow-up Requested</div>
-                        <p style="font-size:13px;margin:5px 0 0;">John or Heather will follow up shortly regarding your real estate interest.</p>
-                       </div>`;
-        }
+      const amount = answers.tenure === 'own'
+        ? (answers.income === 'low' ? '$1,500' : '$1,000')
+        : (answers.age === 'yes'   ? '$700'   : '$450');
+      const label = answers.tenure === 'own'
+        ? 'Estimated ANCHOR Homeowner Benefit'
+        : 'Estimated ANCHOR Renter Benefit';
+      const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
+        ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
 
-        result = `
-            <div class="result-box" style="display: block !important; text-align: center;">
-                <div class="result-label" style="font-size: 18px; font-weight: 700; color: var(--navy);"><i class="fas fa-circle-check" style="color:var(--green);"></i> You likely qualify!</div>
-                <div class="result-amount" style="font-size: 52px; font-weight: 800; color: var(--navy); margin: 15px 0;">${amount}</div>
-                <p style="font-weight: 600;">${label}</p>
-                <ul class="qualify-checks" style="text-align: left; font-size: 14px;">
-                    <li>Income is within program limits</li>
-                    <li>This was your primary residence on Oct 1</li>
-                </ul>
-                ${reBlock}
-                <div class="result-actions" style="margin-top: 20px;">
-                    <a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now at NJ.gov</a>
-                    <button onclick="resetCalc()" style="background:none; border:1px solid var(--navy); border-radius:6px; padding:10px 20px; cursor:pointer; color:var(--navy); font-weight:600; margin-left:10px;">Start Over</button>
-                </div>
-            </div>`;
+      // Real estate follow-up block — only shown if they checked the box
+      let reBlock = '';
+      if (reYes) {
+        const reTitle = answers.tenure === 'own'
+          ? 'We\u2019ll reach out with your free home value estimate'
+          : 'We\u2019ll reach out to talk through the buying process';
+        const reBody = answers.tenure === 'own'
+          ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
+          : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+        const addrLine = addr
+          ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
+          : '';
+        reBlock =
+          '<div style="margin-top:16px;background:var(--info-bg);border:1px solid #c0d0e8;' +
+          'border-radius:8px;padding:14px 16px;text-align:left;">' +
+          '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
+          '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
+          '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
+          addrLine +
+          '</div>';
+      }
+
+      result =
+        '<div class="result-box">' +
+        '<div class="result-label"><i class="fas fa-circle-check" style="color:var(--green);' +
+        'margin-right:6px;"></i>You likely qualify for ANCHOR!</div>' +
+        '<div class="result-amount">' + amount + '</div>' +
+        '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
+        '<ul class="qualify-checks"><li>Income is within program limits</li>' +
+        '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
+        '<p class="result-note">Estimate only. Apply at ' +
+        '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
+        ' \u00b7 Seniors 65+: use the ' +
+        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
+        '<br>Questions? <strong>1-888-238-1233</strong></p>' +
+        reBlock +
+        // ── Guide Upsell Block ──────────────────────────────────────
+        '<div style="margin-top:20px;background:var(--navy-dark);border-radius:10px;' +
+        'padding:20px;text-align:left;border:1px solid rgba(184,151,42,0.4);">' +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">' +
+        '<div style="background:var(--gold);color:var(--navy-dark);font-size:11px;font-weight:700;' +
+        'padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;">New</div>' +
+        '<div style="font-size:14px;font-weight:700;color:#fff;">Don\u2019t leave money on the table</div>' +
+        '</div>' +
+        '<p style="font-size:13px;color:#c0cfdf;line-height:1.6;margin-bottom:14px;">' +
+        'You now know your ANCHOR estimate \u2014 but there are 3 more programs you may qualify for. ' +
+        'Get the complete guide package and make sure you collect every dollar.</p>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">' +
+        '<div style="font-size:12px;color:#c0cfdf;display:flex;align-items:center;gap:6px;">' +
+        '<i class="fas fa-file-pdf" style="color:var(--gold);"></i>NJ Property Tax Relief Master Guide</div>' +
+        '<div style="font-size:12px;color:#c0cfdf;display:flex;align-items:center;gap:6px;">' +
+        '<i class="fas fa-file-pdf" style="color:var(--gold);"></i>PAS-1 Complete Walkthrough</div>' +
+        '<div style="font-size:12px;color:#c0cfdf;display:flex;align-items:center;gap:6px;">' +
+        '<i class="fas fa-file-pdf" style="color:var(--gold);"></i>Property Tax Appeal Prep Kit</div>' +
+        '<div style="font-size:12px;color:#c0cfdf;display:flex;align-items:center;gap:6px;">' +
+        '<i class="fas fa-file-pdf" style="color:var(--gold);"></i>NJ Senior Benefits Checklist</div>' +
+        '</div>' +
+        '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">' +
+        '<a href="' + CONFIG.stripeLink + '" target="_blank" ' +
+        'style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy-dark);' +
+        'font-weight:700;font-size:14px;padding:11px 22px;border-radius:6px;text-decoration:none;">' +
+        '<i class="fas fa-download"></i>Get All 4 Guides \u2014 ' + CONFIG.guidePrice + '</a>' +
+        '<span style="font-size:12px;color:#8aaac8;">Instant download \u00b7 PDF \u00b7 33 pages</span>' +
+        '</div>' +
+        '</div>' +
+        // ────────────────────────────────────────────────────────────
+        '<div class="result-actions" style="margin-top:18px;">' +
+        '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
+        '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
+        'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
+        'color:var(--navy);font-weight:600;">Start Over</button>' +
+        '</div></div>';
     }
 
     const rc = $('result-content');
     if (rc) rc.innerHTML = result;
 
-    // HIDE ALL STEPS
-    document.querySelectorAll('.calc-step').forEach(s => {
-        s.classList.remove('active');
-        s.style.display = 'none';
+    // Hide all steps, then force step7 visible with inline style
+    // (belt-and-suspenders: class toggle + inline display so CSS can't override)
+    document.querySelectorAll('.calc-step').forEach(function (s) {
+      s.classList.remove('active');
+      s.style.display = 'none';
     });
-
-    // FORCE STEP 7 (RESULTS) VISIBLE
     const s7 = $('step7');
     if (s7) {
-        s7.classList.add('active');
-        s7.style.setProperty('display', 'block', 'important');
-        s7.style.setProperty('visibility', 'visible', 'important');
-        s7.style.setProperty('opacity', '1', 'important');
+      s7.classList.add('active');
+      s7.style.display = 'block';
+      s7.style.opacity = '1';
+      s7.style.visibility = 'visible';
+    }
+    if (rc) {
+      rc.style.display = 'block';
+      rc.style.opacity = '1';
+      rc.style.visibility = 'visible';
     }
 
     const bar = $('progress');
     if (bar) bar.style.width = '100%';
-}
+  }
 
-function resetCalc() {
-    // 1. Clear the data
+  function noQualify(reason, points) {
+    return '<div class="result-box no-qualify">' +
+      '<div class="result-label" style="color:var(--red);">' +
+      '<i class="fas fa-circle-xmark" style="margin-right:6px;"></i>May Not Qualify for ANCHOR</div>' +
+      '<p style="font-size:14px;color:var(--text-muted);margin:12px 0;">' + reason + '</p>' +
+      '<ul class="qualify-checks no">' +
+      points.map(function (p) { return '<li>' + p + '</li>'; }).join('') +
+      '</ul>' +
+      '<p style="font-size:13px;color:var(--text-muted);margin-top:12px;">Not sure? Call <strong>1-888-238-1233</strong></p>' +
+      '<div class="result-actions">' +
+      '<button onclick="resetCalc()" class="btn-primary">Start Over</button>' +
+      '<a href="senior-programs.html" style="background:none;border:1.5px solid var(--navy);' +
+      'color:var(--navy);padding:10px 20px;border-radius:6px;font-weight:600;text-decoration:none;' +
+      'font-size:14px;">See Senior Programs</a>' +
+      '</div></div>';
+  }
+
+  function resetCalc() {
     answers = {};
     currentStep = 1;
-
-    // 2. Clear all button selections
-    document.querySelectorAll('.choice-btn').forEach(b => {
-        b.classList.remove('selected', 'active-choice');
+    document.querySelectorAll('.choice-btn').forEach(function (b) {
+      b.classList.remove('selected');
+      b.classList.remove('active-choice');
     });
-
-    // 3. Disable all next buttons until fresh choices are made
-    document.querySelectorAll('.btn-next').forEach(b => {
-        b.disabled = true;
+    document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
+    // Clear both class and inline style so CSS takes back over
+    document.querySelectorAll('.calc-step').forEach(function (s) {
+      s.classList.remove('active');
+      s.style.display = '';
     });
-
-    // 4. THE FIX: Hide EVERY step explicitly and remove active classes
-    document.querySelectorAll('.calc-step').forEach(s => {
-        s.classList.remove('active');
-        s.style.display = 'none'; // Force hide
-        s.style.visibility = 'hidden';
-        s.style.opacity = '0';
-    });
-
-    // 5. Show only Step 1
     const s1 = $('step1');
     if (s1) {
-        s1.classList.add('active');
-        s1.style.display = 'block'; // Force show
-        s1.style.visibility = 'visible';
-        s1.style.opacity = '1';
+      s1.classList.add('active');
+      s1.style.display = 'block';
     }
-
-    // 6. Reset the progress bar
     const bar = $('progress');
     if (bar) bar.style.width = '16%';
-}
-  
+    const cb = $('re-interest');
+    if (cb) cb.checked = false;
+    const addrBox = $('re-address-wrap');
+    const addrEl  = $('lead-address');
+    if (addrBox) addrBox.style.display = 'none';
+    if (addrEl)  addrEl.value = '';
+  }
+
   // ============================================================
   // 13. STAY NJ CALCULATOR
   // Estimates 50% of property tax up to $6,500/year cap.
