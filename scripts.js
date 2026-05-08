@@ -71,20 +71,38 @@
   // Send a lead through EmailJS with safe defaults.
   // All form submissions route through here for consistent error handling.
   function sendLead(payload) {
-    if (typeof emailjs === 'undefined') {
-      console.warn('EmailJS not loaded yet.');
-      return Promise.reject(new Error('EmailJS missing'));
-    }
-    const data = Object.assign({
-      name: 'Not provided',
-      email: 'Not provided',
-      phone: 'Not provided',
-      topic: 'Website inquiry',
-      town: 'Not provided'
-    }, payload);
-    return emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, data);
+  if (typeof emailjs === 'undefined') {
+    console.warn('EmailJS not loaded yet.');
+    return Promise.reject(new Error('EmailJS missing'));
+  }
+  const data = Object.assign({
+    name: 'Not provided',
+    email: 'Not provided',
+    phone: 'Not provided',
+    topic: 'Website inquiry',
+    town: 'Not provided'
+  }, payload);
+
+  // 1. Notification to John
+  const notify = emailjs.send(
+    CONFIG.emailjs.serviceId,
+    CONFIG.emailjs.templateId,
+    data
+  );
+
+  // 2. Auto-reply to the lead (only if they actually gave us an email)
+  if (data.email && data.email !== 'Not provided') {
+    emailjs.send(
+      CONFIG.emailjs.serviceId,
+      CONFIG.emailjs.autoReplyTemplateId,
+      data
+    ).catch(function (e) {
+      console.warn('Auto-reply failed:', e);
+    });
   }
 
+  return notify;
+}
   // Lock/unlock body scroll. Works on iOS Safari (overflow:hidden alone does not).
   let savedScrollY = 0;
   function lockBodyScroll() {
