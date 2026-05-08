@@ -39,7 +39,8 @@
     emailjs: {
       publicKey: 'u262kw5AoJcBI342V',
       serviceId: 'service_gptqbyx',
-      templateId: 'template_q1kaure'
+      templateId: 'template_q1kaure',
+      autoReplyTemplateId: 'template_autoreply_xxx'
     },
     popupDelays: {
       rebateModal: 3000   // ms before the rebate modal appears
