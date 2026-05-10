@@ -1480,12 +1480,26 @@
 
 
 
+<!-- ============================================================
+     ANCHOR Benefit Estimator section for index.html
+     Replaces the existing <section id="calc">...</section> block.
+     
+     CHANGES FROM ORIGINAL:
+     1. Address field is now always visible (was hidden inside the
+        real estate interest checkbox, which is why most leads came
+        in without addresses).
+     2. Address input has autocomplete="off" so the browser's native
+        autofill doesn't compete with Google Places.
+     3. Real estate interest checkbox kept as a soft opt-in but no
+        longer gates the address capture.
+     4. Empty re-interest-text/sub spans now have default copy.
+     ============================================================ -->
 <section class="section" id="calc">
   <div class="section-inner">
     <div class="section-label">Eligibility Checker</div>
     <h2 class="section-title">ANCHOR Benefit Estimator</h2>
     <p class="section-subtitle">Answer 5 quick questions and find out what you're owed. Takes about 90 seconds.</p>
-
+ 
     <div class="calc-container">
       <div class="calc-wrap">
         <div class="calc-header">
@@ -1494,7 +1508,8 @@
         </div>
         <div class="calc-body">
           <div class="progress-bar"><div class="progress-fill" id="progress" style="width:16%"></div></div>
-          
+ 
+          <!-- ===== STEP 1 — Own or rent ===== -->
           <div class="calc-step active" id="step1">
             <div class="step-question">Do you own or rent your home?</div>
             <div class="step-hint">This determines which ANCHOR benefit track applies to you.</div>
@@ -1504,7 +1519,8 @@
             </div>
             <div class="calc-nav"><div></div><button class="btn-next" id="next1" disabled onclick="nextStep(1)">Next →</button></div>
           </div>
-
+ 
+          <!-- ===== STEP 2 — Primary residence ===== -->
           <div class="calc-step" id="step2">
             <div class="step-question">Was this your primary NJ residence on October 1 of the benefit year?</div>
             <div class="step-hint">Your main home — not a vacation home or investment property.</div>
@@ -1514,7 +1530,8 @@
             </div>
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(2)">← Back</button><button class="btn-next" id="next2" disabled onclick="nextStep(2)">Next →</button></div>
           </div>
-
+ 
+          <!-- ===== STEP 3 — Income ===== -->
           <div class="calc-step" id="step3">
             <div class="step-question">What was your approximate gross income for the benefit year?</div>
             <div class="step-hint">All sources: wages, Social Security, retirement, investments — combined.</div>
@@ -1525,7 +1542,8 @@
             </div>
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(3)">← Back</button><button class="btn-next" id="next3" disabled onclick="nextStep(3)">Next →</button></div>
           </div>
-
+ 
+          <!-- ===== STEP 4 — Age ===== -->
           <div class="calc-step" id="step4">
             <div class="step-question">Were you 65 or older during the benefit year?</div>
             <div class="step-hint">Renters 65+ get a higher benefit ($700 vs $450).</div>
@@ -1535,7 +1553,8 @@
             </div>
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(4)">← Back</button><button class="btn-next" id="next4" disabled onclick="nextStep(4)">Next →</button></div>
           </div>
-
+ 
+          <!-- ===== STEP 5 — Tax status ===== -->
           <div class="calc-step" id="step5">
             <div class="step-question">Are your property taxes current (or on a payment plan)?</div>
             <div class="step-hint">More than 12 months delinquent may disqualify homeowners.</div>
@@ -1545,49 +1564,71 @@
             </div>
             <div class="calc-nav"><button class="btn-back" onclick="prevStep(5)">← Back</button><button class="btn-next" id="next5" disabled onclick="nextStep(5)">Next →</button></div>
           </div>
-
+ 
+          <!-- ===== STEP 6 — Lead capture (REWRITTEN) ===== -->
           <div class="calc-step" id="step6">
             <div class="step-question">Almost done — where should we send your results?</div>
             <div class="step-hint">We'll include your local deadlines and next steps.</div>
-            
+ 
             <div class="form-group">
               <label>Your Name</label>
               <input type="text" id="lead-name" placeholder="First and last name">
             </div>
+ 
             <div class="form-group">
               <label>Email Address</label>
               <input type="email" id="lead-email" placeholder="your@email.com">
             </div>
+ 
             <div class="form-group">
               <label>Phone (optional)</label>
               <input type="tel" id="lead-phone" placeholder="(xxx) xxx-xxxx">
             </div>
-
-            <div id="re-interest-box" style="background:var(--info-bg);border:1px solid #c0d0e8;border-radius:8px;padding:14px 16px;margin-bottom:4px;">
-              <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-weight:normal;">
-                <input type="checkbox" id="re-interest" style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--navy);">
-                <span>
-                  <span id="re-interest-text" style="font-size:14px;color:var(--text);font-weight:600;display:block;margin-bottom:3px;"></span>
-                  <span id="re-interest-sub" style="font-size:13px;color:var(--text-muted);"></span>
-                </span>
-              </label>
-              <div id="re-address-wrap" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid #c0d0e8;">
-                <label id="re-address-label" style="font-size:13px;font-weight:600;color:var(--navy-dark);display:block;margin-bottom:6px;">Your address</label>
-                <input type="text" id="lead-address" placeholder="123 Main St, Sicklerville, NJ" style="width:100%;padding:10px;border:1px solid #ddd;border-radius:6px;">
+ 
+            <!-- Address field — Google Places will autocomplete this -->
+            <div class="form-group">
+              <label>Property Address</label>
+              <input
+                type="text"
+                id="lead-address"
+                placeholder="Start typing your address..."
+                autocomplete="off">
+              <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">
+                Pick from the dropdown so we have your full address (city, state, zip).
               </div>
             </div>
-
+ 
+            <!-- Soft real estate upsell (no longer gates the address) -->
+            <div id="re-interest-box" style="background:var(--info-bg);border:1px solid #c0d0e8;border-radius:8px;padding:14px 16px;margin:8px 0 4px 0;">
+              <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-weight:normal;margin:0;">
+                <input type="checkbox" id="re-interest" style="width:18px;height:18px;margin-top:2px;flex-shrink:0;accent-color:var(--navy);">
+                <span>
+                  <span id="re-interest-text" style="font-size:14px;color:var(--text);font-weight:600;display:block;margin-bottom:3px;">
+                    I'd also like to talk about my home
+                  </span>
+                  <span id="re-interest-sub" style="font-size:13px;color:var(--text-muted);">
+                    John is a licensed NJ Realtor and can help with valuations, buying, or selling — no pressure either way.
+                  </span>
+                </span>
+              </label>
+            </div>
+ 
             <div class="calc-nav">
               <button class="btn-back" onclick="prevStep(6)">← Back</button>
               <button class="btn-next" onclick="submitCalcLead()">See My Benefit →</button>
             </div>
           </div>
-
+ 
+          <!-- ===== STEP 7 — Result ===== -->
           <div class="calc-step" id="step7" style="display:none; visibility: hidden; opacity: 0;">
             <div id="result-content"></div>
           </div>
-
-        </div> </div> </div> </div> </section>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 <!-- STAY NJ CALCULATOR -->
