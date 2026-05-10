@@ -1268,6 +1268,55 @@
   // Property dashboard
   window.addPropertyToWatchlist = addPropertyToWatchlist; // FIX: was missing
 
+// ============================================================
+// GOOGLE PLACES AUTOCOMPLETE
+// Attaches to any address fields on the page so users get
+// real, validated addresses with city, state, and zip.
+// Called automatically by Google's Maps script via the
+// `callback=initAddressAutocomplete` parameter.
+// ============================================================
+function initAddressAutocomplete() {
+  if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
+    return;
+  }
+
+  // Add any address input IDs here. Safe to list IDs that don't exist on the current page.
+  const addressFieldIds = [
+    'audit-address',  // Tax audit request form
+    'quiz-addr',      // Appeal quiz address
+    'cf-town'         // Contact form town/address
+  ];
+
+  addressFieldIds.forEach(function (id) {
+    const input = document.getElementById(id);
+    if (!input || input.dataset.autocompleted === '1') return;
+    input.dataset.autocompleted = '1';
+
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      types: ['address'],
+      componentRestrictions: { country: 'us' },
+      fields: ['address_components', 'formatted_address']
+    });
+
+    autocomplete.addListener('place_changed', function () {
+      const place = autocomplete.getPlace();
+      if (place && place.formatted_address) {
+        // Replace whatever the user typed with the cleaned, full address
+        input.value = place.formatted_address;
+      }
+    });
+
+    // Stop the Enter key from submitting the form when the user is
+    // just trying to pick an autocomplete suggestion
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        const dropdown = document.querySelector('.pac-container:not(:empty)');
+        if (dropdown) e.preventDefault();
+      }
+    });
+  });
+}
+
 /* --- PROPERTY DASHBOARD LOGIC --- */
 const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
 const ACTOR_ID = 'maxcopell/zillow-scraper';
