@@ -1438,4 +1438,6 @@ function saveToStorage(prop) {
     localStorage.setItem('watchdogList', JSON.stringify(current));
 }
 
+window.initAddressAutocomplete = initAddressAutocomplete;
+  
 })();
