@@ -734,42 +734,37 @@
   // FIX: Was calling emailjs.send() directly — now routes through
   // sendLead() for consistent error handling like every other form.
   function submitCalcLead() {
-    const nameEl     = $('lead-name');
-    const emailEl    = $('lead-email');
-    const phoneEl    = $('lead-phone');
-    const addrEl     = $('lead-address');
-    const reInterest = $('re-interest');
+  const nameEl = $('lead-name');
+  const emailEl = $('lead-email');
+  const phoneEl = $('lead-phone');
+  const addrEl = $('lead-address');
+  const reInterestEl = $('re-interest');
 
-    const name  = nameEl  ? nameEl.value.trim()  : '';
-    const email = emailEl ? emailEl.value.trim() : '';
-    const phone = phoneEl ? phoneEl.value.trim() : '';
-    const addr  = addrEl  ? addrEl.value.trim()  : '';
-    const reYes = reInterest ? reInterest.checked : false;
+  const name = nameEl ? nameEl.value.trim() : '';
+  const email = emailEl ? emailEl.value.trim() : '';
+  const phone = phoneEl ? phoneEl.value.trim() : '';
+  const address = addrEl ? addrEl.value.trim() : '';
+  const reInterested = reInterestEl ? reInterestEl.checked : false;
 
+  if (name && email) {
     const benefit = answers.tenure === 'own'
       ? (answers.income === 'low' ? '$1,500' : '$1,000')
-      : (answers.age === 'yes'   ? '$700'   : '$450');
+      : (answers.age === 'yes' ? '$700' : '$450');
 
-    let reLine = '';
-    if (reYes) {
-      reLine = answers.tenure === 'own'
-        ? ' | \u2605 WANTS HOME VALUE ESTIMATE (interested in selling)'
-        : ' | \u2605 INTERESTED IN BUYING (tired of renting)';
-      if (addr) reLine += ' | Address: ' + addr;
-    }
+    let topic = 'ANCHOR Calculator \u2014 estimated benefit: ' + benefit;
+    if (reInterested) topic += ' \u2014 ALSO interested in real estate help';
 
-    if (name && email) {
-      sendLead({
-        name:  name,
-        email: email,
-        phone: phone || 'Not provided',
-        topic: 'ANCHOR Calculator \u2014 est. benefit: ' + benefit + reLine,
-        town:  addr || 'Not provided'
-      }).catch(function (e) { console.warn('EmailJS calc lead:', e); });
-    }
-
-    showResult(reYes, addr);
+    sendLead({
+      name: name,
+      email: email,
+      phone: phone || 'Not provided',
+      topic: topic,
+      town: address || 'Not provided'
+    }).catch(function (e) { console.warn('Calc lead error:', e); });
   }
+
+  showResult();
+}
 
   function showResult(reYes, addr) {
     let result = '';
@@ -1282,10 +1277,11 @@ function initAddressAutocomplete() {
 
   // Add any address input IDs here. Safe to list IDs that don't exist on the current page.
   const addressFieldIds = [
-    'audit-address',  // Tax audit request form
-    'quiz-addr',      // Appeal quiz address
-    'cf-town'         // Contact form town/address
-  ];
+  'audit-address',  // Tax audit request form
+  'quiz-addr',      // Appeal quiz address
+  'cf-town',        // Contact form town/address
+  'lead-address'    // ANCHOR calculator address
+];
 
   addressFieldIds.forEach(function (id) {
     const input = document.getElementById(id);
