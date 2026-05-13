@@ -267,8 +267,9 @@ function fmt(t){
 async function callGemini(msg){
   history.push({role:'user',parts:[{text:msg}]});
   const res = await fetch(
-    'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' + GEMINI_KEY,
-    { method:'POST', headers:{'Content-Type':'application/json'},
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent',
+    { method:'POST',
+      headers:{'Content-Type':'application/json','X-goog-api-key':GEMINI_KEY},
       body: JSON.stringify({
         system_instruction:{parts:[{text:SYSTEM}]},
         contents: history,
@@ -276,7 +277,11 @@ async function callGemini(msg){
       })
     }
   );
-  if(!res.ok) throw new Error(res.status);
+  if(!res.ok){
+    const errText = await res.text();
+    console.error('Gemini API error:', res.status, errText);
+    throw new Error(res.status);
+  }
   const data = await res.json();
   const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't pull that up. Try again in a second!";
   history.push({role:'model',parts:[{text:reply}]});
