@@ -367,6 +367,346 @@
         </div>
       </div>
     </div>
+    <section id="njtax-chat-section">
+  <div class="njtax-chat-wrap">
+ 
+    <!-- HEADER -->
+    <div class="njtax-header">
+      <div class="njtax-header-left">
+        <div class="njtax-avatar">
+          🏛️
+          <div class="njtax-online-dot"></div>
+        </div>
+        <div>
+          <div class="njtax-header-name">NJ Tax Relief Assistant</div>
+          <div class="njtax-header-sub">Powered by AI · South Jersey specialist</div>
+        </div>
+      </div>
+      <div class="njtax-header-badge">Free to use</div>
+    </div>
+ 
+    <!-- MESSAGES -->
+    <div class="njtax-messages" id="njtax-messages">
+      <div class="njtax-msg-bot">
+        <div class="njtax-msg-bot-avatar">🏛️</div>
+        <div class="njtax-bubble-bot">
+          Hey! I'm your NJ property tax guide. I can help you figure out if you qualify for <strong>ANCHOR</strong>, <strong>Stay NJ</strong>, <strong>Senior Freeze</strong>, veterans exemptions, and more.<br><br>
+          What's on your mind? 👇
+        </div>
+      </div>
+    </div>
+ 
+    <!-- STARTER QUESTIONS -->
+    <div class="njtax-starters" id="njtax-starters">
+      <button class="njtax-starter-btn" onclick="njtaxAskStarter(this)">Do I qualify for ANCHOR?</button>
+      <button class="njtax-starter-btn" onclick="njtaxAskStarter(this)">What is Stay NJ?</button>
+      <button class="njtax-starter-btn" onclick="njtaxAskStarter(this)">How do I file PAS-1?</button>
+      <button class="njtax-starter-btn" onclick="njtaxAskStarter(this)">Can renters get relief?</button>
+      <button class="njtax-starter-btn" onclick="njtaxAskStarter(this)">Veterans exemptions?</button>
+    </div>
+ 
+    <!-- INPUT BAR -->
+    <div class="njtax-input-bar">
+      <input
+        class="njtax-input"
+        id="njtax-input"
+        type="text"
+        placeholder="Ask about ANCHOR, Stay NJ, PAS-1…"
+        maxlength="300"
+        onkeydown="if(event.key==='Enter')njtaxSend()"
+        autocomplete="off"
+      />
+      <button class="njtax-send-btn" onclick="njtaxSend()" aria-label="Send">
+        <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+ 
+    <!-- RATE LIMIT BANNER (shown when limit hit) -->
+    <div class="njtax-limit-banner" id="njtax-limit-banner">
+      You've asked a lot of great questions! For more help, <a href="pas-1-guide.html">browse our free guides</a> or <a href="#contact">contact John directly</a>.
+    </div>
+ 
+    <!-- FOOTER NOTE -->
+    <div class="njtax-footer-note">
+      AI responses are for general guidance only. Always verify with <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">NJ Treasury</a> or <a href="#contact">ask John directly</a>.
+    </div>
+ 
+  </div>
+</section>
+ 
+ 
+<script>
+(function() {
+ 
+  // ── CONFIG — change these ──────────────────────────────────
+  const GEMINI_API_KEY = 'YOUR_GEMINI_API_KEY';
+  const MAX_QUESTIONS  = 5;   // questions before rate limit message
+  const UPSELL_AFTER   = 3;   // show guide upsell card after N questions
+  // ──────────────────────────────────────────────────────────
+ 
+  const SYSTEM_PROMPT = `You are a friendly, knowledgeable New Jersey property tax relief assistant for njpropertytaxrelief.com, a site run by John Scafide, a licensed NJ real estate agent (#2079591) and 15+ year tax professional based in South Jersey.
+ 
+Your ONLY job is to answer questions about NJ property tax relief programs and related real estate topics covered on this site. Do not answer anything outside this scope. If asked something unrelated, politely redirect.
+ 
+KEY PROGRAMS YOU KNOW:
+ 
+ANCHOR PROGRAM:
+- Replaced the old Homestead Benefit
+- Homeowners income ≤ $150,000: $1,500 benefit
+- Homeowners income $150,001–$250,000: $1,000 benefit
+- Renters income ≤ $150,000 (under 65): $450 benefit
+- Renters income ≤ $150,000 (65+): $700 benefit
+- Must have been primary NJ residence on October 1 of the benefit year
+- Homeowners: must have paid property taxes; renters: must have paid rent
+- Income over $250,000 (homeowners) or $150,000 (renters) = not eligible
+- Apply at anchor.nj.gov or call 1-888-238-1233
+- Non-seniors (under 65): ANCHOR auto-confirmation letters mail in August; file separately
+- Seniors 65+: file via PAS-1 combined form
+ 
+STAY NJ PROGRAM:
+- For homeowners age 65 or older
+- Income limit: $500,000 (very generous — most seniors qualify)
+- Credit = 50% of annual property tax bill, up to $6,500/year
+- Payments are quarterly: February, May, August, November
+- Quarterly payments began February 2026
+- Apply via PAS-1 combined form (covers Stay NJ, ANCHOR, and Senior Freeze in one)
+- PAS-1 deadline: November 2, 2026
+ 
+SENIOR FREEZE (Property Tax Reimbursement / PTR):
+- For homeowners age 65+ or receiving Social Security Disability / Railroad Retirement disability
+- Income limit: $172,475
+- Reimburses you for every dollar your taxes increase above your "base year" amount
+- Locks in your tax rate from the year you first qualified
+- Apply via PAS-1 combined form
+- PAS-1 deadline: November 2, 2026
+ 
+PAS-1 FORM:
+- Combined application for seniors 65+
+- Covers ANCHOR + Stay NJ + Senior Freeze — one form for all three
+- Filing deadline: November 2, 2026
+- John Scafide offers PAS-1 filing help for a flat $20 fee
+- Payment options: Venmo, Zelle, credit card, debit card, or cash
+- Book at: bit.ly/4u3Ohm5
+ 
+VETERANS BENEFITS:
+- $250 annual property tax deduction for eligible veterans (honorable discharge, active duty)
+- 100% disabled veterans may qualify for a full property tax exemption ($0 owed)
+- Surviving spouses of eligible veterans may maintain the deduction or exemption
+- Apply through your local tax assessor's office
+ 
+PROPERTY TAX APPEALS:
+- Any NJ homeowner can appeal their property assessment every year
+- If your home is assessed higher than market value, you may owe too much in taxes
+- Deadline: April 1 in most NJ counties
+- A licensed real estate agent can pull free MLS comparable sales to support your case
+- John Scafide can provide free comparable sales (comps) for South Jersey homeowners
+- File the appeal with your county tax board
+ 
+JOHN SCAFIDE / THIS WEBSITE:
+- Licensed NJ Real Estate Agent, license #2079591
+- 15+ years of tax preparation experience
+- Based in South Jersey (Camden, Gloucester, Salem county area)
+- Services: PAS-1 filing help ($20), property tax appeal comps (free), real estate buying/selling
+- Contact: john@johnscafide.com | 856-404-1098
+- Website: njpropertytaxrelief.com
+- TikTok: @thetaxwatchdog
+ 
+KEY DATES AND NUMBERS TO REMEMBER:
+- PAS-1 deadline: November 2, 2026
+- ANCHOR residency date: October 1 of benefit year
+- Appeal deadline: April 1 (most counties)
+- Senior Freeze income limit: $172,475
+- ANCHOR homeowner income limit: $250,000
+- Stay NJ income limit: $500,000
+- Max ANCHOR homeowner benefit: $1,500
+- Max Stay NJ credit: $6,500/year
+ 
+TONE RULES:
+- Be warm, friendly, and conversational — like talking to a knowledgeable neighbor
+- Keep answers clear and concise — 2 to 4 short paragraphs max
+- Use plain English, not government jargon
+- When someone might qualify for multiple programs, mention all of them
+- When relevant, mention that John can help with PAS-1 for $20 or provide free comps
+- Never mention H&R Block
+- Do not answer questions outside NJ property tax relief and related real estate topics
+- If asked something off-topic, say: "That's a bit outside my lane! I'm only set up to help with NJ property tax relief. Is there anything about ANCHOR, Stay NJ, Senior Freeze, or your property taxes I can help with?"
+- Use simple formatting: short paragraphs, occasional bold for key numbers, no bullet-point walls`;
+ 
+  let messageCount = 0;
+  let conversationHistory = [];
+  let startersHidden = false;
+ 
+  const messagesEl = document.getElementById('njtax-messages');
+  const inputEl    = document.getElementById('njtax-input');
+  const startersEl = document.getElementById('njtax-starters');
+  const limitEl    = document.getElementById('njtax-limit-banner');
+ 
+  function scrollBottom() {
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+  }
+ 
+  function hideStarters() {
+    if (!startersHidden) {
+      startersEl.style.display = 'none';
+      startersHidden = true;
+    }
+  }
+ 
+  function addUserBubble(text) {
+    const div = document.createElement('div');
+    div.className = 'njtax-msg-user';
+    div.innerHTML = `<div class="njtax-bubble-user">${escHtml(text)}</div>`;
+    messagesEl.appendChild(div);
+    scrollBottom();
+  }
+ 
+  function addBotBubble(html) {
+    const wrap = document.createElement('div');
+    wrap.className = 'njtax-msg-bot';
+    wrap.innerHTML = `
+      <div class="njtax-msg-bot-avatar">🏛️</div>
+      <div class="njtax-bubble-bot">${html}</div>`;
+    messagesEl.appendChild(wrap);
+    scrollBottom();
+    return wrap;
+  }
+ 
+  function addTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'njtax-typing';
+    wrap.id = 'njtax-typing';
+    wrap.innerHTML = `
+      <div class="njtax-msg-bot-avatar">🏛️</div>
+      <div class="njtax-typing-dots">
+        <span></span><span></span><span></span>
+      </div>`;
+    messagesEl.appendChild(wrap);
+    scrollBottom();
+  }
+ 
+  function removeTyping() {
+    const t = document.getElementById('njtax-typing');
+    if (t) t.remove();
+  }
+ 
+  function addUpsellCard() {
+    const card = document.createElement('div');
+    card.className = 'njtax-upsell';
+    card.innerHTML = `
+      <div class="njtax-upsell-title">📚 Want to go deeper?</div>
+      Here are some free guides that might help:
+      <div class="njtax-upsell-links">
+        <a href="pas-1-guide.html"><span class="njtax-arrow">→</span> PAS-1 Step-by-Step Filing Guide</a>
+        <a href="anchor-program.html"><span class="njtax-arrow">→</span> ANCHOR Program Full Guide</a>
+        <a href="senior-programs.html"><span class="njtax-arrow">→</span> Stay NJ &amp; Senior Freeze Guide</a>
+        <a href="tax-appeals.html"><span class="njtax-arrow">→</span> Property Tax Appeal Guide</a>
+      </div>`;
+    messagesEl.appendChild(card);
+    scrollBottom();
+  }
+ 
+  function escHtml(str) {
+    return str
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+ 
+  // Basic markdown-lite: **bold**, line breaks
+  function formatResponse(text) {
+    return text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n\n/g, '<br><br>')
+      .replace(/\n/g, '<br>');
+  }
+ 
+  async function sendToGemini(userMessage) {
+    conversationHistory.push({ role: 'user', parts: [{ text: userMessage }] });
+ 
+    const body = {
+      system_instruction: { parts: [{ text: SYSTEM_PROMPT }] },
+      contents: conversationHistory,
+      generationConfig: {
+        maxOutputTokens: 350,
+        temperature: 0.7
+      }
+    };
+ 
+    const res = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${AIzaSyC-L9Zgwam114O2BmaO1rdBMXDiDhz6B5A}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }
+    );
+ 
+    if (!res.ok) throw new Error('API error ' + res.status);
+ 
+    const data = await res.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't get a response. Try again in a moment.";
+ 
+    conversationHistory.push({ role: 'model', parts: [{ text: reply }] });
+    return reply;
+  }
+ 
+  async function njtaxSend(text) {
+    const message = (text || inputEl.value).trim();
+    if (!message) return;
+ 
+    // Rate limit check
+    if (messageCount >= MAX_QUESTIONS) {
+      limitEl.style.display = 'block';
+      inputEl.disabled = true;
+      return;
+    }
+ 
+    inputEl.value = '';
+    hideStarters();
+    addUserBubble(message);
+    addTyping();
+    inputEl.disabled = true;
+    messageCount++;
+ 
+    try {
+      const reply = await sendToGemini(message);
+      removeTyping();
+      addBotBubble(formatResponse(reply));
+ 
+      // Upsell after N questions
+      if (messageCount === UPSELL_AFTER) {
+        setTimeout(addUpsellCard, 600);
+      }
+ 
+      // Final limit message
+      if (messageCount >= MAX_QUESTIONS) {
+        setTimeout(() => { limitEl.style.display = 'block'; }, 400);
+        inputEl.placeholder = 'Question limit reached — see guides above';
+      }
+ 
+    } catch (err) {
+      removeTyping();
+      addBotBubble("Hmm, something went wrong on my end. Try again in a moment, or <a href='#contact'>reach out to John directly</a>.");
+    } finally {
+      if (messageCount < MAX_QUESTIONS) {
+        inputEl.disabled = false;
+        inputEl.focus();
+      }
+    }
+ 
+    scrollBottom();
+  }
+ 
+  // Expose globally so inline onclick works
+  window.njtaxSend = njtaxSend;
+ 
+  window.njtaxAskStarter = function(btn) {
+    njtaxSend(btn.textContent);
+  };
+ 
+})();
+</script>
     <!-- NEWS STRIP -->
     <div class="news-strip">
       <div class="news-strip-inner">
