@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;background:#f8f7f4;font-family:'Source Sans 3',system-ui,sans-serif;font-size:15px;color:#1a2d4a}
+
+.wrap{display:flex;flex-direction:column;height:100vh;background:#fff;border-radius:0;overflow:hidden}
+
+/* HEADER */
+.hdr{background:#1a3a6b;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.hdr-left{display:flex;align-items:center;gap:11px}
+.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#b8972a,#e6c355);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;position:relative}
+.online{position:absolute;bottom:1px;right:1px;width:9px;height:9px;border-radius:50%;background:#4caf80;border:2px solid #1a3a6b}
+.hdr-name{font-family:'Playfair Display',Georgia,serif;font-size:15px;font-weight:700;color:#fff;line-height:1.2}
+.hdr-sub{font-size:11px;color:#a0b8cc;margin-top:1px}
+.badge{background:rgba(184,151,42,0.2);border:1px solid rgba(184,151,42,0.4);border-radius:20px;padding:3px 11px;font-size:11px;font-weight:600;color:#e6c355;white-space:nowrap}
+
+/* MESSAGES */
+.msgs{flex:1;overflow-y:auto;padding:16px 14px;display:flex;flex-direction:column;gap:12px;background:#f8f7f4;scroll-behavior:smooth}
+.msgs::-webkit-scrollbar{width:3px}
+.msgs::-webkit-scrollbar-thumb{background:#c8d4e0;border-radius:3px}
+
+.bot-row{display:flex;align-items:flex-end;gap:7px}
+.bot-av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#b8972a,#e6c355);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-bottom:2px}
+.bot-bub{background:#fff;border:1px solid #e2ddd6;border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:13.5px;color:#1a2d4a;line-height:1.65;max-width:84%;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.bot-bub a{color:#1a3a6b;font-weight:600;text-underline-offset:2px}
+.bot-bub strong{color:#0f2347}
+
+.user-row{display:flex;justify-content:flex-end}
+.user-bub{background:#1a3a6b;border-radius:16px 16px 4px 16px;padding:10px 14px;font-size:13.5px;color:#fff;line-height:1.65;max-width:76%}
+
+/* TYPING */
+.typing-row{display:flex;align-items:flex-end;gap:7px}
+.dots{background:#fff;border:1px solid #e2ddd6;border-radius:16px 16px 16px 4px;padding:11px 14px;display:flex;gap:5px;align-items:center;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.dots span{width:6px;height:6px;border-radius:50%;background:#b8972a;display:inline-block;animation:bounce 1.2s infinite}
+.dots span:nth-child(2){animation-delay:.2s}
+.dots span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-5px);opacity:1}}
+
+/* UPSELL */
+.upsell{background:#eef3fb;border:1px solid #c8d8ea;border-left:3px solid #1a3a6b;border-radius:0 10px 10px 0;padding:11px 13px;font-size:13px;color:#1a2d4a}
+.upsell-title{font-weight:600;color:#1a3a6b;margin-bottom:6px;font-size:13px}
+.upsell-links{display:flex;flex-direction:column;gap:5px;margin-top:5px}
+.upsell-links a{font-size:13px;color:#1a3a6b;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:4px}
+.upsell-links a:hover{text-decoration:underline}
+
+/* STARTERS */
+.starters{padding:0 14px 12px;display:flex;flex-wrap:wrap;gap:7px;background:#f8f7f4;flex-shrink:0}
+.s-btn{background:#fff;border:1px solid #d0cdc5;border-radius:20px;padding:6px 12px;font-size:12.5px;color:#1a3a6b;font-family:'Source Sans 3',system-ui,sans-serif;font-weight:500;cursor:pointer;transition:all .15s;white-space:nowrap}
+.s-btn:hover{background:#1a3a6b;color:#fff;border-color:#1a3a6b}
+
+/* INPUT */
+.input-bar{display:flex;align-items:center;gap:9px;padding:12px 14px;background:#fff;border-top:1px solid #e8e4dd;flex-shrink:0}
+.inp{flex:1;border:1.5px solid #d0cdc5;border-radius:22px;padding:9px 15px;font-size:13.5px;font-family:'Source Sans 3',system-ui,sans-serif;color:#1a2d4a;background:#f8f7f4;outline:none;transition:border-color .15s;min-width:0}
+.inp:focus{border-color:#1a3a6b;background:#fff}
+.inp::placeholder{color:#96a0ae}
+.inp:disabled{opacity:.5;cursor:not-allowed}
+.send{width:38px;height:38px;border-radius:50%;background:#1a3a6b;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,transform .1s}
+.send:hover{background:#0f2347}
+.send:active{transform:scale(.93)}
+.send svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* LIMIT BANNER */
+.limit{display:none;background:#fff7e6;border-top:1px solid #fcd68a;padding:10px 14px;font-size:12.5px;color:#7a5c00;text-align:center;flex-shrink:0}
+.limit a{color:#1a3a6b;font-weight:600}
+
+/* FOOTER */
+.foot{text-align:center;font-size:11px;color:#96a0ae;padding:6px 14px 10px;background:#fff;flex-shrink:0}
+.foot a{color:#1a3a6b;text-decoration:none;font-weight:600}
+
+@media(max-width:480px){
+  .msgs{padding:12px 10px}
+  .bot-bub,.user-bub{font-size:13px;max-width:91%}
+  .badge{display:none}
+  .starters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:8px}
+  .starters::-webkit-scrollbar{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div class="hdr-left">
+      <div class="avatar">🏛️<div class="online"></div></div>
+      <div>
+        <div class="hdr-name">NJ Tax Relief Assistant</div>
+        <div class="hdr-sub">Powered by AI · South Jersey specialist</div>
+      </div>
+    </div>
+    <div class="badge">Free to use</div>
+  </div>
+
+  <div class="msgs" id="msgs">
+    <div class="bot-row">
+      <div class="bot-av">🏛️</div>
+      <div class="bot-bub">Hey! I'm your NJ property tax guide. I can help you figure out if you qualify for <strong>ANCHOR</strong>, <strong>Stay NJ</strong>, <strong>Senior Freeze</strong>, veterans exemptions, and more.<br><br>What's on your mind? 👇</div>
+    </div>
+  </div>
+
+  <div class="starters" id="starters">
+    <button class="s-btn" onclick="askStarter(this)">Do I qualify for ANCHOR?</button>
+    <button class="s-btn" onclick="askStarter(this)">What is Stay NJ?</button>
+    <button class="s-btn" onclick="askStarter(this)">How do I file PAS-1?</button>
+    <button class="s-btn" onclick="askStarter(this)">Can renters get relief?</button>
+    <button class="s-btn" onclick="askStarter(this)">Veterans exemptions?</button>
+  </div>
+
+  <div class="input-bar">
+    <input class="inp" id="inp" type="text" placeholder="Ask about ANCHOR, Stay NJ, PAS-1…" maxlength="300" onkeydown="if(event.key==='Enter')send()" autocomplete="off">
+    <button class="send" onclick="send()" aria-label="Send">
+      <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+
+  <div class="limit" id="limit">
+    You've asked a lot of great questions! For more help, <a href="pas-1-guide.html" target="_parent">browse our free guides</a> or <a href="#contact" target="_parent">contact John directly</a>.
+  </div>
+
+  <div class="foot">
+    AI responses are for general guidance only. Always verify with <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">NJ Treasury</a> or <a href="#contact" target="_parent">ask John directly</a>.
+  </div>
+
+</div>
+<script>
+const GEMINI_KEY   = 'YOUR_GEMINI_API_KEY';
+const MAX_Q        = 5;
+const UPSELL_AFTER = 3;
+
+const SYSTEM = `You are a friendly, knowledgeable New Jersey property tax relief assistant for njpropertytaxrelief.com, run by John Scafide — a licensed NJ real estate agent (#2079591) and 15+ year tax professional based in South Jersey.
+
+Your ONLY job is to answer questions about NJ property tax relief programs and related real estate topics covered on this site. Do not answer anything outside this scope. If asked something unrelated, politely redirect.
+
+KEY PROGRAMS:
+
+ANCHOR PROGRAM:
+- Replaced the old Homestead Benefit
+- Homeowners income ≤ $150,000: $1,500 benefit
+- Homeowners income $150,001–$250,000: $1,000 benefit
+- Renters income ≤ $150,000 (under 65): $450 benefit
+- Renters income ≤ $150,000 (65+): $700 benefit
+- Must be primary NJ residence on October 1 of the benefit year
+- Income over $250,000 (homeowners) or $150,000 (renters) = not eligible
+- Seniors 65+ apply via PAS-1 form; non-seniors apply separately at anchor.nj.gov
+
+STAY NJ:
+- Homeowners age 65+ only
+- Income limit: $500,000
+- Credit = 50% of annual property tax bill, up to $6,500/year
+- Quarterly payments: February, May, August, November
+- Apply via PAS-1 form
+
+SENIOR FREEZE (PTR):
+- Age 65+ or Social Security/Railroad Retirement disability recipients
+- Income limit: $172,475
+- Reimburses every dollar taxes increase above your base year
+- Apply via PAS-1 form
+
+PAS-1 FORM:
+- One combined form covering ANCHOR + Stay NJ + Senior Freeze for seniors
+- Deadline: November 2, 2026
+- John Scafide offers PAS-1 help for a flat $20 fee
+- Payment: Venmo, Zelle, credit, debit, or cash
+- Book at: bit.ly/4u3Ohm5
+
+VETERANS:
+- $250 annual deduction for eligible veterans (honorable discharge)
+- 100% disabled veterans may qualify for full exemption ($0 owed)
+- Surviving spouses may maintain the benefit
+- Apply through local tax assessor
+
+PROPERTY TAX APPEALS:
+- Any NJ homeowner can appeal their assessment every year
+- Deadline: April 1 in most NJ counties
+- John can provide free MLS comparable sales for South Jersey homeowners to support appeals
+- File with your county tax board
+
+JOHN SCAFIDE:
+- Licensed NJ Real Estate Agent #2079591
+- 15+ years tax experience
+- South Jersey specialist (Camden, Gloucester, Salem counties)
+- Services: PAS-1 help ($20 flat), free appeal comps, real estate buying/selling
+- Contact: john@johnscafide.com | 856-404-1098
+- TikTok: @thetaxwatchdog
+
+KEY NUMBERS:
+- PAS-1 deadline: November 2, 2026
+- ANCHOR residency date: October 1
+- Appeal deadline: April 1 (most counties)
+- Senior Freeze income limit: $172,475
+- ANCHOR homeowner income limit: $250,000
+- Stay NJ income limit: $500,000
+- Max ANCHOR benefit: $1,500 (homeowner)
+- Max Stay NJ credit: $6,500/year
+
+TONE:
+- Warm, friendly, conversational — like a knowledgeable neighbor
+- Keep answers to 2–4 short paragraphs max
+- Plain English, no government jargon
+- Mention multiple programs when someone may qualify for several
+- When relevant, mention John can help with PAS-1 for $20 or provide free comps
+- NEVER mention H&R Block
+- If asked anything off-topic: "That's a bit outside my lane! I'm only set up to help with NJ property tax relief. Is there anything about ANCHOR, Stay NJ, Senior Freeze, or your property taxes I can help with?"
+- Use short paragraphs, occasional bold for key numbers — no bullet walls`;
+
+let count = 0;
+let history = [];
+let startersGone = false;
+
+const msgsEl   = document.getElementById('msgs');
+const inpEl    = document.getElementById('inp');
+const startEl  = document.getElementById('starters');
+const limitEl  = document.getElementById('limit');
+
+function scrollBot(){ msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+function hideStarters(){
+  if(!startersGone){ startEl.style.display='none'; startersGone=true; }
+}
+
+function addUser(text){
+  const d=document.createElement('div');
+  d.className='user-row';
+  d.innerHTML=`<div class="user-bub">${esc(text)}</div>`;
+  msgsEl.appendChild(d); scrollBot();
+}
+
+function addBot(html){
+  const d=document.createElement('div');
+  d.className='bot-row';
+  d.innerHTML=`<div class="bot-av">🏛️</div><div class="bot-bub">${html}</div>`;
+  msgsEl.appendChild(d); scrollBot();
+}
+
+function showTyping(){
+  const d=document.createElement('div');
+  d.className='typing-row'; d.id='typing';
+  d.innerHTML=`<div class="bot-av">🏛️</div><div class="dots"><span></span><span></span><span></span></div>`;
+  msgsEl.appendChild(d); scrollBot();
+}
+
+function hideTyping(){ const t=document.getElementById('typing'); if(t)t.remove(); }
+
+function addUpsell(){
+  const d=document.createElement('div');
+  d.className='upsell';
+  d.innerHTML=`<div class="upsell-title">📚 Want to go deeper?</div>Here are some free guides that might help:<div class="upsell-links">
+    <a href="pas-1-guide.html" target="_parent"><span>→</span> PAS-1 Step-by-Step Filing Guide</a>
+    <a href="anchor-program.html" target="_parent"><span>→</span> ANCHOR Program Full Guide</a>
+    <a href="senior-programs.html" target="_parent"><span>→</span> Stay NJ &amp; Senior Freeze Guide</a>
+    <a href="tax-appeals.html" target="_parent"><span>→</span> Property Tax Appeal Guide</a>
+  </div>`;
+  msgsEl.appendChild(d); scrollBot();
+}
+
+function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+function fmt(t){
+  return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+}
+
+async function callGemini(msg){
+  history.push({role:'user',parts:[{text:msg}]});
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`,
+    { method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        system_instruction:{parts:[{text:SYSTEM}]},
+        contents: history,
+        generationConfig:{maxOutputTokens:350,temperature:0.7}
+      })
+    }
+  );
+  if(!res.ok) throw new Error(res.status);
+  const data = await res.json();
+  const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't pull that up. Try again in a second!";
+  history.push({role:'model',parts:[{text:reply}]});
+  return reply;
+}
+
+async function send(text){
+  const msg = (text||inpEl.value).trim();
+  if(!msg) return;
+  if(count >= MAX_Q){ limitEl.style.display='block'; return; }
+
+  inpEl.value='';
+  hideStarters();
+  addUser(msg);
+  showTyping();
+  inpEl.disabled=true;
+  count++;
+
+  try {
+    const reply = await callGemini(msg);
+    hideTyping();
+    addBot(fmt(reply));
+    if(count === UPSELL_AFTER) setTimeout(addUpsell, 500);
+    if(count >= MAX_Q){
+      setTimeout(()=>{ limitEl.style.display='block'; },400);
+      inpEl.placeholder='Question limit reached — see guides above';
+    }
+  } catch(e){
+    hideTyping();
+    addBot("Hmm, something went wrong on my end. Try again in a moment, or <a href='#contact' target='_parent'>reach out to John directly</a>.");
+  } finally {
+    if(count < MAX_Q){ inpEl.disabled=false; inpEl.focus(); }
+  }
+  scrollBot();
+}
+
+function askStarter(btn){ send(btn.textContent); }
+</script>
+</body>
+</html>
