@@ -27,7 +27,7 @@ html,body{width:100%;height:100%;background:#f8f7f4;font-family:'Source Sans 3',
 
 .bot-row{display:flex;align-items:flex-end;gap:7px}
 .bot-av{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#b8972a,#e6c355);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-bottom:2px}
-.bot-bub{background:#fff;border:1px solid #e2ddd6;border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:13.5px;color:#1a2d4a;line-height:1.65;max-width:84%;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
+.bot-bub{background:#fff;border:1px solid #e2ddd6;border-radius:16px 16px 16px 4px;padding:10px 14px;font-size:13.5px;color:#1a2d4a;line-height:1.65;max-width:90%;box-shadow:0 1px 3px rgba(0,0,0,0.06)}
 .bot-bub a{color:#1a3a6b;font-weight:600;text-underline-offset:2px}
 .bot-bub strong{color:#0f2347}
 
@@ -273,7 +273,7 @@ async function callGemini(msg){
       body: JSON.stringify({
         system_instruction:{parts:[{text:SYSTEM}]},
         contents: history,
-        generationConfig:{maxOutputTokens:350,temperature:0.7}
+        generationConfig:{maxOutputTokens:800,temperature:0.7}
       })
     }
   );
