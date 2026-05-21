@@ -1285,7 +1285,7 @@ function submitContact() {
   btn.textContent = 'Submitted!';
   document.getElementById('contact-success').style.display = 'block';
   if (typeof emailjs !== 'undefined' && emailjs.send) {
-    emailjs.send('service_gptqbyx', 'template_q1kaure', {
+    emailjs.send('service_gptqbyx', 'template_contact', {
       name: name, email: email,
       phone: document.getElementById('cf-phone').value,
       topic: topic
