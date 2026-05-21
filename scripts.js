@@ -39,7 +39,7 @@
     emailjs: {
       publicKey:    'u262kw5AoJcBI342V',
       serviceId:    'service_gptqbyx',
-      templateId:   'template_q1kaure',   // default contact form
+      templateId:   'template_contact',   // default contact form
       templateAudit: 'template_audit',    // tax-optimized listing audit form
       templateComps: 'template_comps'     // free MLS comps request form
     },
