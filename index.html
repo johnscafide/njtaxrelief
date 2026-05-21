@@ -1235,7 +1235,7 @@ function submitAudit() {
   document.getElementById('audit-success').style.display = 'block';
   // EmailJS hook — wire up in scripts.js using your existing emailjs config
   if (typeof emailjs !== 'undefined' && emailjs.send) {
-    emailjs.send('service_gptqbyx', 'template_audit', {
+    emailjs.send('service_lym8x0p', 'template_audit', {
       name: name, email: email, address: addr,
       timeline: document.getElementById('audit-timeline').value
     });
@@ -1253,7 +1253,7 @@ function submitComps() {
   btn.textContent = 'Submitted!';
   document.getElementById('comps-success').style.display = 'block';
   if (typeof emailjs !== 'undefined' && emailjs.send) {
-    emailjs.send('service_gptqbyx', 'template_comps', {
+    emailjs.send('service_lym8x0p', 'template_comps', {
       name: name, email: email, address: addr,
       county: document.getElementById('comps-county').value,
       taxbill: document.getElementById('comps-taxbill').value
@@ -1285,7 +1285,7 @@ function submitContact() {
   btn.textContent = 'Submitted!';
   document.getElementById('contact-success').style.display = 'block';
   if (typeof emailjs !== 'undefined' && emailjs.send) {
-    emailjs.send('service_gptqbyx', 'template_q1kaure', {
+    emailjs.send('service_lym8x0p', 'template_q1kaure', {
       name: name, email: email,
       phone: document.getElementById('cf-phone').value,
       topic: topic
