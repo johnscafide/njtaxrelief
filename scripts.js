@@ -1,7 +1,7 @@
 /* ============================================================
  * NJPropertyTaxRelief.com :: Main JavaScript
  * Each section is labeled.
- * I appreciate you finding this useful if you are a lurker. 
+ * I appreciate you finding this useful if you are a lurker.
  * I only ask, if you use this, please credit John@johnscafide.com
  * or Venmo a tip: https://www.venmo.com/u/John-Scafide
  *
@@ -14,7 +14,7 @@
  *   6.  Mobile Menu & Mega Menu
  *   7.  News Strip Rotation
  *   8.  Popups & Lead Magnets
- *   9.  Forms (Contact, Audit)
+ *   9.  Forms (Contact, Audit, Comps — all three)
  *   10. Accordions (PAS-1, FAQ)
  *   11. Tab Switcher
  *   12. ANCHOR Eligibility Calculator
@@ -33,13 +33,15 @@
   // ============================================================
   // 1. CONFIG & CONSTANTS
   // Update keys, IDs, and shared values here in one place.
-  // PLEASE DO NOT COPY THIS! 
+  // PLEASE DO NOT COPY THIS!
   // ============================================================
   const CONFIG = {
     emailjs: {
-      publicKey:  'u262kw5AoJcBI342V',
-      serviceId:  'service_gptqbyx',
-      templateId: 'template_q1kaure'
+      publicKey:    'u262kw5AoJcBI342V',
+      serviceId:    'service_gptqbyx',
+      templateId:   'template_q1kaure',   // default contact form
+      templateAudit: 'template_audit',    // tax-optimized listing audit form
+      templateComps: 'template_comps'     // free MLS comps request form
     },
     popupDelays: {
       rebateModal: 4000
@@ -52,16 +54,12 @@
 
   // ============================================================
   // 2. UTILITY HELPERS
-  // Tiny shared functions. Use these instead of repeating yourself.
   // ============================================================
 
-  // Safe element lookup. Returns null if missing instead of throwing.
   function $(id) {
     return document.getElementById(id);
   }
 
-  // Strips $, commas, and spaces from user input before parsing.
-  // Handles "$350,000" or "350,000" without breaking.
   function parseNum(value) {
     if (value === undefined || value === null) return 0;
     const cleaned = String(value).replace(/[$,\s]/g, '');
@@ -69,24 +67,29 @@
     return isNaN(n) ? 0 : n;
   }
 
-  // Send a lead through EmailJS with safe defaults.
-  // All form submissions route through here for consistent error handling.
-  function sendLead(payload) {
+  // Core send function. Accepts an optional templateId so different
+  // forms can target different EmailJS templates while still sharing
+  // the same error-handling and default-value logic.
+  function sendLead(payload, templateId) {
     if (typeof emailjs === 'undefined') {
       console.warn('EmailJS not loaded yet.');
       return Promise.reject(new Error('EmailJS missing'));
     }
+    const template = templateId || CONFIG.emailjs.templateId;
     const data = Object.assign({
-      name: 'Not provided',
-      email: 'Not provided',
-      phone: 'Not provided',
-      topic: 'Website inquiry',
-      town: 'Not provided'
+      name:     'Not provided',
+      email:    'Not provided',
+      phone:    'Not provided',
+      topic:    'Website inquiry',
+      town:     'Not provided',
+      address:  'Not provided',
+      county:   'Not provided',
+      taxbill:  'Not provided',
+      timeline: 'Not provided'
     }, payload);
-    return emailjs.send(CONFIG.emailjs.serviceId, CONFIG.emailjs.templateId, data);
+    return emailjs.send(CONFIG.emailjs.serviceId, template, data);
   }
 
-  // Lock/unlock body scroll. Works on iOS Safari (overflow:hidden alone does not).
   let savedScrollY = 0;
   function lockBodyScroll() {
     savedScrollY = window.scrollY || window.pageYOffset || 0;
@@ -107,8 +110,6 @@
 
   // ============================================================
   // 3. EMAILJS SETUP
-  // Initializes once the script and emailjs library are both ready.
-  // Retries every 200ms if emailjs hasn't loaded yet.
   // ============================================================
   function initEmailJS() {
     if (typeof emailjs === 'undefined') {
@@ -124,8 +125,6 @@
 
   // ============================================================
   // 4. PAGE INIT
-  // Single DOMContentLoaded handler. Add new init steps here so
-  // we don't end up with five separate listeners again.
   // ============================================================
   function onReady() {
     initEmailJS();
@@ -134,8 +133,8 @@
     initNewsStrip();
     initRebatePopup();
     initBackToTop();
-    if ($('townDirectory')) loadTownDirectory();
-    if ($('dynamic-sitemap')) generateDynamicSitemap();
+    if ($('townDirectory'))    loadTownDirectory();
+    if ($('dynamic-sitemap'))  generateDynamicSitemap();
   }
 
   if (document.readyState === 'loading') {
@@ -146,8 +145,6 @@
 
   // ============================================================
   // 5. NAVIGATION & FOOTER LOADERS
-  // Pulls nav.html and footer.html into placeholder divs.
-  // Both use cache-busting so updates show up immediately.
   // ============================================================
   function loadNav() {
     const navEl = $('main-nav');
@@ -161,13 +158,9 @@
         navEl.innerHTML = html;
         initNavLogic();
       })
-      .catch(function (err) {
-        console.error('Nav load error:', err);
-      });
+      .catch(function (err) { console.error('Nav load error:', err); });
   }
 
-  // Retry-safe footer injection. Gives up after 30 attempts (~3 seconds)
-  // so we don't loop forever if the placeholder doesn't exist.
   function initFooter(attempts) {
     attempts = attempts || 0;
     const footerEl = $('main-footer');
@@ -180,19 +173,12 @@
         if (!r.ok) throw new Error('footer.html not found');
         return r.text();
       })
-      .then(function (html) {
-        footerEl.innerHTML = html;
-      })
-      .catch(function (err) {
-        console.error('Footer load error:', err);
-      });
+      .then(function (html) { footerEl.innerHTML = html; })
+      .catch(function (err) { console.error('Footer load error:', err); });
   }
 
   // ============================================================
   // 6. MOBILE MENU & MEGA MENU
-  // FIX: Added bindMegaMenuDesktop() for .nav-item.has-mega pattern
-  // used by the new dropdown nav. The old bindMegaMenu() stays for
-  // the legacy .mega-trigger mobile accordion. Both run on init.
   // ============================================================
   function initNavLogic() {
     bindMegaMenu();
@@ -203,12 +189,10 @@
     });
   }
 
-  // Legacy mobile accordion (.mega-trigger pattern)
   function bindMegaMenu() {
     const triggers = document.querySelectorAll('.mega-trigger');
     if (!triggers.length) return;
     triggers.forEach(function (trigger) {
-      // Avoid double-binding on resize.
       if (trigger.dataset.bound === '1') return;
       if (window.innerWidth <= 992) {
         trigger.dataset.bound = '1';
@@ -221,7 +205,6 @@
     });
   }
 
-  // New desktop mega menu (.nav-item.has-mega click-to-open pattern)
   function bindMegaMenuDesktop() {
     const items = document.querySelectorAll('.nav-item.has-mega');
     if (!items.length) return;
@@ -233,7 +216,6 @@
       btn.addEventListener('click', function (e) {
         e.stopPropagation();
         const isOpen = item.classList.contains('open');
-        // Close all other open panels first
         document.querySelectorAll('.nav-item.has-mega').forEach(function (i) {
           i.classList.remove('open');
           const b = i.querySelector('.nav-link-btn');
@@ -248,10 +230,8 @@
         if (e.key === 'Escape') { item.classList.remove('open'); btn.focus(); }
       });
     });
-    // Click outside closes all panels
     document.removeEventListener('click', closeMegaOnOutsideClick);
     document.addEventListener('click', closeMegaOnOutsideClick);
-    // Clicks inside a panel don't bubble up and close it
     document.querySelectorAll('.mega-panel').forEach(function (p) {
       p.addEventListener('click', function (e) { e.stopPropagation(); });
     });
@@ -266,7 +246,6 @@
   }
 
   function toggleMobileMenu() {
-    // New nav: hamburger drawer
     const drawer = $('mobileDrawer');
     const burger = document.querySelector('.nav-hamburger');
     if (drawer) {
@@ -276,30 +255,22 @@
       isOpen ? unlockBodyScroll() : lockBodyScroll();
       return;
     }
-    // Legacy nav: navLinks toggle
     const navLinks = $('navLinks');
     if (!navLinks) return;
     navLinks.classList.toggle('active');
-    if (navLinks.classList.contains('active')) {
-      lockBodyScroll();
-    } else {
-      unlockBodyScroll();
-    }
+    navLinks.classList.contains('active') ? lockBodyScroll() : unlockBodyScroll();
   }
 
   // ============================================================
   // 7. NEWS STRIP ROTATION
-  // Fades through .news-item elements every 4 seconds.
   // ============================================================
   function initNewsStrip() {
     const items = document.querySelectorAll('.news-item');
     if (items.length < 2) return;
     let idx = 0;
-
     items.forEach(function (item, i) {
       if (i !== 0) item.style.display = 'none';
     });
-
     setInterval(function () {
       items[idx].style.opacity = '0';
       setTimeout(function () {
@@ -308,7 +279,6 @@
         const next = items[idx];
         next.style.display = 'flex';
         next.style.opacity = '0';
-        // Force reflow so the transition runs.
         void next.offsetHeight;
         next.style.transition = 'opacity 0.5s ease';
         next.style.opacity = '1';
@@ -318,20 +288,9 @@
 
   // ============================================================
   // 8. POPUPS & LEAD MAGNETS
-  //
-  // ⚠️ HEADS UP: The original code had TWO popup systems running
-  // at the same time:
-  //   - #rebate-popup / #popup-minimized  (LEGACY)
-  //   - #rebate-modal / #sticky-rebate-link  (ACTIVE)
-  // Pick one in your HTML and delete the other so visitors don't
-  // see overlapping popups. The functions for both are kept here
-  // so nothing breaks until you clean up the HTML.
   // ============================================================
-
-  // ----- Active modal: #rebate-modal -----
   function initRebatePopup() {
     if (sessionStorage.getItem('rebateModalSeen')) {
-      // Returning visitor this session — show minimized with glow & shake
       const link = $('sticky-rebate-link');
       if (link) {
         link.style.display = 'inline-flex';
@@ -347,7 +306,6 @@
     }, CONFIG.popupDelays.rebateModal);
   }
 
-  // ── Rebate modal animation state ─────────────────────────
   let _rebateAnimInjected = false;
   let _rebateShakeTimer   = null;
 
@@ -356,8 +314,6 @@
     _rebateAnimInjected = true;
     const style = document.createElement('style');
     style.textContent = [
-
-      /* ── Keyframes ─────────────────────────────────────── */
       '@keyframes rebateGlow {',
       '  0%,100% { box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 0 0 rgba(184,151,42,0); }',
       '  50%     { box-shadow: 0 4px 24px rgba(0,0,0,0.35), 0 0 18px 6px rgba(184,151,42,0.65); }',
@@ -371,8 +327,6 @@
       '  75%     { transform: translateX(-3px) rotate(-0.5deg); }',
       '  90%     { transform: translateX(3px); }',
       '}',
-
-      /* ── Base: fixed to bottom of viewport ─────────────── */
       '#sticky-rebate-link {',
       '  position: fixed !important;',
       '  bottom: 24px !important;',
@@ -380,10 +334,10 @@
       '  right: auto !important;',
       '  top: auto !important;',
       '  z-index: 9997 !important;',
-      '  display: none;',                   /* JS controls display */
+      '  display: none;',
       '  align-items: center !important;',
       '  gap: 10px !important;',
-      '  background: #b8192a !important;',  /* rich red — stands out */
+      '  background: #b8192a !important;',
       '  color: #fff !important;',
       '  font-family: "Source Sans 3", sans-serif !important;',
       '  font-size: 14px !important;',
@@ -395,56 +349,23 @@
       '  cursor: pointer !important;',
       '  box-shadow: 0 4px 24px rgba(0,0,0,0.35) !important;',
       '  transition: transform 0.15s, background 0.15s !important;',
-      '  /* keep it above the Stripe/chat widgets */',
       '}',
       '#sticky-rebate-link:hover {',
       '  background: #d42030 !important;',
       '  transform: translateY(-2px) !important;',
       '}',
-      '#sticky-rebate-link i {',
-      '  font-size: 16px !important;',
-      '  flex-shrink: 0 !important;',
-      '}',
-
-      /* ── Glow + shake classes ───────────────────────────── */
-      '#sticky-rebate-link.rebate-visible {',
-      '  animation: rebateGlow 2.4s ease-in-out infinite !important;',
-      '}',
-      '#sticky-rebate-link.rebate-shake {',
-      '  animation: rebateShake 0.65s ease-in-out !important;',
-      '}',
-
-      /* ── Mobile: full-width bottom bar ──────────────────── */
+      '#sticky-rebate-link i { font-size: 16px !important; flex-shrink: 0 !important; }',
+      '#sticky-rebate-link.rebate-visible { animation: rebateGlow 2.4s ease-in-out infinite !important; }',
+      '#sticky-rebate-link.rebate-shake  { animation: rebateShake 0.65s ease-in-out !important; }',
       '@media (max-width: 680px) {',
-      '  #sticky-rebate-link {',
-      '    left: 0 !important;',
-      '    right: 0 !important;',
-      '    bottom: 0 !important;',
-      '    border-radius: 0 !important;',
-      '    width: 100% !important;',
-      '    box-sizing: border-box !important;',
-      '    justify-content: center !important;',
-      '    padding: 15px 20px !important;',
-      '    font-size: 15px !important;',
-      '    gap: 10px !important;',
-      '  }',
-      '}',
-
-      /* ── Also fix modal position on mobile ──────────────── */
-      '@media (max-width: 680px) {',
-      '  #rebate-modal {',
-      '    bottom: 0 !important;',
-      '    right: 0 !important;',
-      '    left: 0 !important;',
-      '    max-width: 100% !important;',
-      '    width: 100% !important;',
-      '    border-radius: 0 !important;',
-      '  }',
-      '  #rebate-modal > div {',
-      '    border-radius: 0 !important;',
-      '  }',
+      '  #sticky-rebate-link { left:0 !important; right:0 !important; bottom:0 !important;',
+      '    border-radius:0 !important; width:100% !important; box-sizing:border-box !important;',
+      '    justify-content:center !important; padding:15px 20px !important;',
+      '    font-size:15px !important; gap:10px !important; }',
+      '  #rebate-modal { bottom:0 !important; right:0 !important; left:0 !important;',
+      '    max-width:100% !important; width:100% !important; border-radius:0 !important; }',
+      '  #rebate-modal > div { border-radius:0 !important; }',
       '}'
-
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -454,16 +375,14 @@
     function doShake() {
       if (!link || link.style.display === 'none') return;
       link.classList.remove('rebate-shake');
-      void link.offsetWidth; // force reflow so animation restarts
+      void link.offsetWidth;
       link.classList.add('rebate-shake');
       setTimeout(function () { link.classList.remove('rebate-shake'); }, 700);
     }
-    // First shake after 20 seconds, then every 2.5 minutes
     const firstTimer = setTimeout(function () {
       doShake();
       _rebateShakeTimer = setInterval(doShake, 150 * 1000);
     }, 20 * 1000);
-    // Store firstTimer so we can cancel it if re-opened
     link._firstShakeTimer = firstTimer;
   }
 
@@ -475,8 +394,7 @@
       link.style.display = 'none';
       link.classList.remove('rebate-visible', 'rebate-shake');
     }
-    // Cancel shake loop when modal is open
-    if (_rebateShakeTimer)  { clearInterval(_rebateShakeTimer); _rebateShakeTimer = null; }
+    if (_rebateShakeTimer) { clearInterval(_rebateShakeTimer); _rebateShakeTimer = null; }
     if (link && link._firstShakeTimer) { clearTimeout(link._firstShakeTimer); }
   }
 
@@ -487,67 +405,56 @@
     if (link) {
       link.style.display = 'inline-flex';
       injectRebateAnimCSS();
-      // Small delay so display paints before animation class is added
-      requestAnimationFrame(function () {
-        link.classList.add('rebate-visible');
-      });
+      requestAnimationFrame(function () { link.classList.add('rebate-visible'); });
       startRebateShakeLoop(link);
     }
   }
 
   function downloadChecklist() {
-    // Routes to Stripe payment for the $5 guide package
     window.open(CONFIG.stripeLink, '_blank');
     minimizeRebateModal();
   }
 
-  // ----- Legacy popup: #rebate-popup / #popup-minimized -----
-  // Kept for backwards compatibility. Remove these (and the matching
-  // HTML) once you confirm nothing references them.
+  // Legacy popup kept for backwards compatibility
   function minimizePopup() {
     const popup = $('rebate-popup');
-    const mini = $('popup-minimized');
+    const mini  = $('popup-minimized');
     if (popup) popup.style.display = 'none';
-    if (mini) mini.style.display = 'block';
+    if (mini)  mini.style.display  = 'block';
     sessionStorage.setItem('checklistClosed', 'true');
   }
   function restorePopup() {
     const popup = $('rebate-popup');
-    const mini = $('popup-minimized');
+    const mini  = $('popup-minimized');
     if (popup) popup.style.display = 'block';
-    if (mini) mini.style.display = 'none';
+    if (mini)  mini.style.display  = 'none';
   }
   function handleChecklistDownload() {
     const emailEl = $('popup-email');
-    const email = emailEl ? emailEl.value.trim() : '';
-    if (!email) {
-      alert('Please enter your email to receive the checklist.');
-      return;
-    }
-    sendLead({
-      email: email,
-      topic: 'Checklist Download Request',
-      name: 'New Lead'
-    }).catch(function (e) { console.warn('Legacy checklist error:', e); });
+    const email   = emailEl ? emailEl.value.trim() : '';
+    if (!email) { alert('Please enter your email to receive the checklist.'); return; }
+    sendLead({ email: email, topic: 'Checklist Download Request', name: 'New Lead' })
+      .catch(function (e) { console.warn('Legacy checklist error:', e); });
     window.open(CONFIG.checklistFile, '_blank');
     minimizePopup();
   }
 
   // ============================================================
-  // 9. FORMS — Contact & Audit Request
-  // All submissions route through sendLead() for consistent
-  // error handling. EmailJS errors no longer fail silently.
+  // 9. FORMS — Contact, Listing Audit, Free Comps
+  // All submissions route through sendLead() with the appropriate
+  // template ID so each form gets its own styled email.
   // ============================================================
 
+  // ── Original listing audit (legacy audit-address field on other pages) ──
   function handleAuditRequest() {
-    const addr = $('audit-address');
-    const name = $('audit-name');
+    const addr  = $('audit-address');
+    const name  = $('audit-name');
     const email = $('audit-email');
     if (!addr || !email) return;
 
-    const addrVal = addr.value.trim();
+    const addrVal  = addr.value.trim();
     const emailVal = email.value.trim();
-    const nameVal = name ? name.value.trim() : '';
+    const nameVal  = name ? name.value.trim() : '';
 
     if (!addrVal || !emailVal) {
       alert('Please provide the property address and your email.');
@@ -555,69 +462,180 @@
     }
 
     sendLead({
-      name: nameVal,
-      email: emailVal,
-      topic: 'Tax-Optimized Listing Audit Request',
-      town: addrVal
-    }).then(function () {
-      alert('Success! John or Heather will begin your audit and reach out within 24 hours.');
-      addr.value = '';
-      if (name) name.value = '';
-      email.value = '';
-    }).catch(function (err) {
-      console.error('Audit request failed:', err);
-      alert('Something went wrong. Please try again or call ' + CONFIG.contactHotline + '.');
-    });
+      name:     nameVal,
+      email:    emailVal,
+      address:  addrVal,
+      topic:    'Tax-Optimized Listing Audit Request',
+      town:     addrVal
+    }, CONFIG.emailjs.templateAudit)
+      .then(function () {
+        alert('Success! John or Heather will begin your audit and reach out within 24 hours.');
+        addr.value  = '';
+        email.value = '';
+        if (name) name.value = '';
+      })
+      .catch(function (err) {
+        console.error('Audit request failed:', err);
+        alert('Something went wrong. Please try again or call ' + CONFIG.contactHotline + '.');
+      });
   }
 
+  // ── New homepage listing audit form (audit-addr / audit-name / audit-email) ──
+  function submitAudit() {
+    const nameEl     = $('audit-name');
+    const emailEl    = $('audit-email');
+    const addrEl     = $('audit-addr');
+    const timelineEl = $('audit-timeline');
+
+    const name     = nameEl     ? nameEl.value.trim()     : '';
+    const email    = emailEl    ? emailEl.value.trim()    : '';
+    const addr     = addrEl     ? addrEl.value.trim()     : '';
+    const timeline = timelineEl ? timelineEl.value        : 'Not provided';
+
+    if (!name || !email || !addr) {
+      alert('Please fill in the address, name, and email to continue.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-audit-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+
+    sendLead({
+      name:     name,
+      email:    email,
+      address:  addr,
+      timeline: timeline,
+      topic:    'Tax-Optimized Listing Audit — ' + timeline,
+      town:     addr
+    }, CONFIG.emailjs.templateAudit)
+      .then(function () {
+        if (btn) { btn.disabled = true; btn.textContent = 'Submitted!'; }
+        const successEl = $('audit-success');
+        if (successEl) successEl.style.display = 'block';
+      })
+      .catch(function (err) {
+        console.error('Audit submit failed:', err);
+        if (btn) { btn.disabled = false; btn.textContent = 'Get my free audit →'; }
+        alert('Something went wrong. Please try again or call ' + CONFIG.contactHotline + '.');
+      });
+  }
+
+  // ── Free MLS comps request form ──
+  function submitComps() {
+    const nameEl    = $('comps-name');
+    const emailEl   = $('comps-email');
+    const addrEl    = $('comps-addr');
+    const countyEl  = $('comps-county');
+    const taxbillEl = $('comps-taxbill');
+
+    const name    = nameEl    ? nameEl.value.trim()    : '';
+    const email   = emailEl   ? emailEl.value.trim()   : '';
+    const addr    = addrEl    ? addrEl.value.trim()    : '';
+    const county  = countyEl  ? countyEl.value         : 'Not provided';
+    const taxbill = taxbillEl ? taxbillEl.value.trim() : 'Not provided';
+
+    if (!name || !email || !addr) {
+      alert('Please fill in your name, address, and email to continue.');
+      return;
+    }
+
+    const btn = document.querySelector('.btn-comps-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
+
+    sendLead({
+      name:    name,
+      email:   email,
+      address: addr,
+      county:  county,
+      taxbill: taxbill,
+      topic:   'Free MLS Comps Request — ' + county,
+      town:    addr
+    }, CONFIG.emailjs.templateComps)
+      .then(function () {
+        if (btn) { btn.disabled = true; btn.textContent = 'Submitted!'; }
+        const successEl = $('comps-success');
+        if (successEl) successEl.style.display = 'block';
+      })
+      .catch(function (err) {
+        console.error('Comps submit failed:', err);
+        if (btn) { btn.disabled = false; btn.textContent = 'Send me free comps →'; }
+        alert('Something went wrong. Please try again or call ' + CONFIG.contactHotline + '.');
+      });
+  }
+
+  // ── Main contact / consultation form ──
   function submitLead() {
-    const nameEl = $('cf-name');
+    const nameEl  = $('cf-name');
     const emailEl = $('cf-email');
     const phoneEl = $('cf-phone');
     const topicEl = $('cf-topic');
-    const townEl = $('cf-town');
+    const townEl  = $('cf-town');
     if (!nameEl || !emailEl) return;
 
-    const name = nameEl.value.trim();
+    const name  = nameEl.value.trim();
     const email = emailEl.value.trim();
 
-    if (!name) { nameEl.focus(); alert('Please enter your name.'); return; }
+    if (!name)  { nameEl.focus();  alert('Please enter your name.');  return; }
     if (!email) { emailEl.focus(); alert('Please enter your email.'); return; }
 
-    const btn = document.querySelector('#contact-form .submit-btn');
+    const btn = document.querySelector('#contact-form .submit-btn') ||
+                document.querySelector('.btn-contact-submit');
     if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
 
     sendLead({
-      name: name,
+      name:  name,
       email: email,
       phone: phoneEl ? phoneEl.value.trim() : 'Not provided',
-      topic: topicEl ? topicEl.value : 'Website inquiry',
-      town: townEl ? townEl.value.trim() : 'Not provided'
-    }).then(function () {
-      const form = $('contact-form');
-      const success = $('form-success');
-      if (form) form.style.display = 'none';
-      if (success) success.style.display = 'block';
-    }).catch(function (err) {
-      if (btn) { btn.textContent = 'Request Free Consultation \u2192'; btn.disabled = false; }
-      alert('Submission failed. Please try again or call us directly.');
-      console.error('Contact form error:', err);
-    });
+      topic: topicEl ? topicEl.value        : 'Website inquiry',
+      town:  townEl  ? townEl.value.trim()  : 'Not provided'
+    }, CONFIG.emailjs.templateId)
+      .then(function () {
+        const form    = $('contact-form');
+        const success = $('form-success');
+        if (form)    form.style.display    = 'none';
+        if (success) success.style.display = 'block';
+        // New homepage dynamic form success
+        const dynSuccess = $('contact-success');
+        if (dynSuccess) dynSuccess.style.display = 'block';
+      })
+      .catch(function (err) {
+        if (btn) { btn.textContent = 'Request Free Consultation →'; btn.disabled = false; }
+        alert('Submission failed. Please try again or call us directly.');
+        console.error('Contact form error:', err);
+      });
+  }
+
+  // Alias used by the new homepage dynamic contact form
+  function submitContact() {
+    submitLead();
+  }
+
+  // ── Dynamic contact form field reveal ──
+  function showDynamicFields() {
+    const val  = $('cf-topic');
+    if (!val) return;
+    const topic = val.value;
+    const wrap  = $('dynamic-fields-wrap');
+    document.querySelectorAll('.dynamic-group').forEach(function (d) { d.classList.remove('show'); });
+    const map = { sell: 'df-sell', buy: 'df-buy', appeal: 'df-appeal', pas1: 'df-pas1' };
+    if (map[topic]) {
+      if (wrap) wrap.style.display = 'block';
+      const grp = $(map[topic]);
+      if (grp) grp.classList.add('show');
+    } else {
+      if (wrap) wrap.style.display = 'none';
+    }
   }
 
   // ============================================================
   // 10. ACCORDIONS — PAS-1 & FAQ
-  // Both use the same .open class pattern.
   // ============================================================
-
   function togglePAS(trigger) {
     const item = trigger.parentElement;
     const body = item.querySelector('.pas-acc-body');
     const isOpen = trigger.classList.contains('open');
-
     document.querySelectorAll('.pas-acc-trigger').forEach(function (t) { t.classList.remove('open'); });
     document.querySelectorAll('.pas-acc-body').forEach(function (b) { b.classList.remove('open'); });
-
     if (!isOpen && body) {
       trigger.classList.add('open');
       body.classList.add('open');
@@ -625,7 +643,7 @@
   }
 
   function toggleFAQ(el) {
-    const item = el.parentElement;
+    const item   = el.parentElement;
     const isOpen = item.classList.contains('open');
     document.querySelectorAll('.faq-item').forEach(function (f) { f.classList.remove('open'); });
     if (!isOpen) item.classList.add('open');
@@ -633,7 +651,6 @@
 
   // ============================================================
   // 11. TAB SWITCHER
-  // Toggles .active on tabs and matching .tab-panel elements.
   // ============================================================
   function switchTab(name, event) {
     document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
@@ -645,17 +662,10 @@
 
   // ============================================================
   // 12. ANCHOR ELIGIBILITY CALCULATOR
-  // FIX: answers & currentStep were never declared — added here.
-  // 6-step quiz with branching logic. State lives in `answers`.
-  // Result HTML is built in showResult(); rejections go through noQualify().
   // ============================================================
-
-  // FIX: These were missing — every calculator function was throwing
-  // "answers is not defined" on every click.
-  let answers = {};
+  let answers     = {};
   let currentStep = 1;
 
-  // Updates the real estate interest checkbox text based on own vs rent.
   function updateREInterest(tenure) {
     const textEl  = $('re-interest-text');
     const subEl   = $('re-interest-sub');
@@ -664,12 +674,9 @@
     const addrBox = $('re-address-wrap');
     const addrEl  = $('lead-address');
     if (!textEl || !subEl) return;
-
-    // Reset on tenure switch
-    if (cb) cb.checked = false;
+    if (cb)      cb.checked            = false;
     if (addrBox) addrBox.style.display = 'none';
-    if (addrEl)  addrEl.value = '';
-
+    if (addrEl)  addrEl.value          = '';
     if (tenure === 'own') {
       textEl.textContent = 'I\u2019m curious what my home is worth right now.';
       subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
@@ -679,8 +686,6 @@
       subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
       if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
     }
-
-    // Wire checkbox to show/hide address field
     if (cb) {
       cb.onchange = function () {
         if (addrBox) addrBox.style.display = this.checked ? 'block' : 'none';
@@ -692,11 +697,9 @@
   function selectChoice(key, val, btn) {
     answers[key] = val;
     btn.parentElement.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
+      b.classList.remove('selected', 'active-choice');
     });
-    btn.classList.add('selected');
-    btn.classList.add('active-choice');
+    btn.classList.add('selected', 'active-choice');
     const nb = $('next' + currentStep);
     if (nb) nb.disabled = false;
     if (key === 'tenure') {
@@ -721,7 +724,7 @@
 
   function prevStep(step) {
     let p = step - 1;
-    if (step === 5 && answers.tenure === 'own') p = 3;
+    if (step === 5 && answers.tenure === 'own')  p = 3;
     if (step === 6 && answers.tenure === 'rent') p = 4;
     $('step' + step).classList.remove('active');
     currentStep = p;
@@ -731,44 +734,41 @@
     if (bar) bar.style.width = Math.round((p / 6) * 100) + '%';
   }
 
-  // FIX: Was calling emailjs.send() directly — now routes through
-  // sendLead() for consistent error handling like every other form.
   function submitCalcLead() {
-  const nameEl = $('lead-name');
-  const emailEl = $('lead-email');
-  const phoneEl = $('lead-phone');
-  const addrEl = $('lead-address');
-  const reInterestEl = $('re-interest');
+    const nameEl      = $('lead-name');
+    const emailEl     = $('lead-email');
+    const phoneEl     = $('lead-phone');
+    const addrEl      = $('lead-address');
+    const reInterestEl = $('re-interest');
 
-  const name = nameEl ? nameEl.value.trim() : '';
-  const email = emailEl ? emailEl.value.trim() : '';
-  const phone = phoneEl ? phoneEl.value.trim() : '';
-  const address = addrEl ? addrEl.value.trim() : '';
-  const reInterested = reInterestEl ? reInterestEl.checked : false;
+    const name       = nameEl      ? nameEl.value.trim()      : '';
+    const email      = emailEl     ? emailEl.value.trim()     : '';
+    const phone      = phoneEl     ? phoneEl.value.trim()     : '';
+    const address    = addrEl      ? addrEl.value.trim()      : '';
+    const reInterested = reInterestEl ? reInterestEl.checked  : false;
 
-  if (name && email) {
-    const benefit = answers.tenure === 'own'
-      ? (answers.income === 'low' ? '$1,500' : '$1,000')
-      : (answers.age === 'yes' ? '$700' : '$450');
+    if (name && email) {
+      const benefit = answers.tenure === 'own'
+        ? (answers.income === 'low' ? '$1,500' : '$1,000')
+        : (answers.age   === 'yes' ? '$700'   : '$450');
+      let topic = 'ANCHOR Calculator \u2014 estimated benefit: ' + benefit;
+      if (reInterested) topic += ' \u2014 ALSO interested in real estate help';
 
-    let topic = 'ANCHOR Calculator \u2014 estimated benefit: ' + benefit;
-    if (reInterested) topic += ' \u2014 ALSO interested in real estate help';
-
-    sendLead({
-      name: name,
-      email: email,
-      phone: phone || 'Not provided',
-      topic: topic,
-      town: address || 'Not provided'
-    }).catch(function (e) { console.warn('Calc lead error:', e); });
+      sendLead({
+        name:    name,
+        email:   email,
+        phone:   phone || 'Not provided',
+        topic:   topic,
+        town:    address || 'Not provided',
+        address: address || 'Not provided'
+      }, CONFIG.emailjs.templateId)
+        .catch(function (e) { console.warn('Calc lead error:', e); });
+    }
+    showResult();
   }
-
-  showResult();
-}
 
   function showResult(reYes, addr) {
     let result = '';
-
     if (answers.primary === 'no') {
       result = noQualify(
         'Your property was not your NJ primary residence on October 1 of the benefit year.',
@@ -777,13 +777,11 @@
       );
     } else if (answers.income === 'high') {
       result = noQualify('Income exceeds ANCHOR program limits.',
-        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']
-      );
+        ['Homeowner income limit: $250,000', 'Renter income limit: $150,000']);
     } else if (answers.tenure === 'rent' && answers.income === 'mid') {
       result = noQualify(
         'The $150,001\u2013$250,000 income bracket is for homeowners only.',
-        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']
-      );
+        ['Renter limit is $150,000', 'Under $150K? You qualify for $450']);
     } else if (answers.taxes === 'no' && answers.tenure === 'own') {
       result =
         '<div class="result-box" style="background:#fffae8;border-color:#d4af37;">' +
@@ -800,14 +798,13 @@
     } else {
       const amount = answers.tenure === 'own'
         ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age === 'yes'   ? '$700'   : '$450');
+        : (answers.age   === 'yes' ? '$700'   : '$450');
       const label = answers.tenure === 'own'
         ? 'Estimated ANCHOR Homeowner Benefit'
         : 'Estimated ANCHOR Renter Benefit';
       const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
         ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
 
-      // Real estate follow-up block — only shown if they checked the box
       let reBlock = '';
       if (reYes) {
         const reTitle = answers.tenure === 'own'
@@ -825,8 +822,7 @@
           '<div style="font-weight:700;font-size:14px;color:var(--navy-dark);margin-bottom:5px;">' +
           '<i class="fas fa-star" style="color:var(--gold);margin-right:6px;"></i>' + reTitle + '</div>' +
           '<p style="font-size:13px;color:var(--text-muted);line-height:1.6;margin:0;">' + reBody + '</p>' +
-          addrLine +
-          '</div>';
+          addrLine + '</div>';
       }
 
       result =
@@ -843,7 +839,6 @@
         '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
         '<br>Questions? <strong>1-888-238-1233</strong></p>' +
         reBlock +
-        // ── Guide Upsell Block ──────────────────────────────────────
         '<div style="margin-top:20px;background:var(--navy-dark);border-radius:10px;' +
         'padding:20px;text-align:left;border:1px solid rgba(184,151,42,0.4);">' +
         '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">' +
@@ -870,9 +865,7 @@
         'font-weight:700;font-size:14px;padding:11px 22px;border-radius:6px;text-decoration:none;">' +
         '<i class="fas fa-download"></i>Get All 4 Guides \u2014 ' + CONFIG.guidePrice + '</a>' +
         '<span style="font-size:12px;color:#8aaac8;">Instant download \u00b7 PDF \u00b7 33 pages</span>' +
-        '</div>' +
-        '</div>' +
-        // ────────────────────────────────────────────────────────────
+        '</div></div>' +
         '<div class="result-actions" style="margin-top:18px;">' +
         '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
         '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
@@ -884,8 +877,6 @@
     const rc = $('result-content');
     if (rc) rc.innerHTML = result;
 
-    // Hide all steps, then force step7 visible with inline style
-    // (belt-and-suspenders: class toggle + inline display so CSS can't override)
     document.querySelectorAll('.calc-step').forEach(function (s) {
       s.classList.remove('active');
       s.style.display = 'none';
@@ -893,16 +884,15 @@
     const s7 = $('step7');
     if (s7) {
       s7.classList.add('active');
-      s7.style.display = 'block';
-      s7.style.opacity = '1';
-      s7.style.visibility = 'visible';
+      s7.style.display     = 'block';
+      s7.style.opacity     = '1';
+      s7.style.visibility  = 'visible';
     }
     if (rc) {
-      rc.style.display = 'block';
-      rc.style.opacity = '1';
+      rc.style.display    = 'block';
+      rc.style.opacity    = '1';
       rc.style.visibility = 'visible';
     }
-
     const bar = $('progress');
     if (bar) bar.style.width = '100%';
   }
@@ -925,47 +915,40 @@
   }
 
   function resetCalc() {
-    answers = {};
+    answers     = {};
     currentStep = 1;
     document.querySelectorAll('.choice-btn').forEach(function (b) {
-      b.classList.remove('selected');
-      b.classList.remove('active-choice');
+      b.classList.remove('selected', 'active-choice');
     });
     document.querySelectorAll('.btn-next').forEach(function (b) { b.disabled = true; });
-    // Clear both class and inline style so CSS takes back over
     document.querySelectorAll('.calc-step').forEach(function (s) {
       s.classList.remove('active');
       s.style.display = '';
     });
     const s1 = $('step1');
-    if (s1) {
-      s1.classList.add('active');
-      s1.style.display = 'block';
-    }
+    if (s1) { s1.classList.add('active'); s1.style.display = 'block'; }
     const bar = $('progress');
     if (bar) bar.style.width = '16%';
-    const cb = $('re-interest');
-    if (cb) cb.checked = false;
+    const cb     = $('re-interest');
     const addrBox = $('re-address-wrap');
     const addrEl  = $('lead-address');
+    if (cb)      cb.checked            = false;
     if (addrBox) addrBox.style.display = 'none';
-    if (addrEl)  addrEl.value = '';
+    if (addrEl)  addrEl.value          = '';
   }
 
   // ============================================================
   // 13. STAY NJ CALCULATOR
-  // Estimates 50% of property tax up to $6,500/year cap.
-  // Uses parseNum() so "$6,500" style input works.
   // ============================================================
   function calcStayNJ() {
-    const taxEl = $('staynj-tax');
+    const taxEl    = $('staynj-tax');
     const incomeEl = $('staynj-income');
-    const res = $('staynj-result');
-    const amtEl = $('staynj-amount');
-    const lblEl = $('staynj-label');
+    const res      = $('staynj-result');
+    const amtEl    = $('staynj-amount');
+    const lblEl    = $('staynj-label');
     if (!taxEl || !incomeEl || !res) return;
 
-    const tax = parseNum(taxEl.value);
+    const tax    = parseNum(taxEl.value);
     const income = parseNum(incomeEl.value);
 
     if (!tax || !income) { res.style.display = 'none'; return; }
@@ -982,9 +965,6 @@
 
   // ============================================================
   // 14. MORTGAGE CALCULATOR
-  // FIX: Now strips commas/$ from inputs so "$350,000" works.
-  // FIX: Now updates m-int-pct (interest as % of purchase price).
-  // Stays silent (no error popups) until both price and rate are entered.
   // ============================================================
   function calcMortgage() {
     const priceEl = $('m-price');
@@ -1002,20 +982,20 @@
     const breakdown  = $('mort-breakdown');
 
     if (price > 0 && rate > 0) {
-      const principal    = price * (1 - (downPct / 100));
-      const monthlyRate  = (rate / 100) / 12;
-      const numPayments  = term * 12;
-      const monthly      = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
-                           (Math.pow(1 + monthlyRate, numPayments) - 1);
-      const totalPaid    = monthly * numPayments;
+      const principal     = price * (1 - (downPct / 100));
+      const monthlyRate   = (rate / 100) / 12;
+      const numPayments   = term * 12;
+      const monthly       = principal * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) /
+                            (Math.pow(1 + monthlyRate, numPayments) - 1);
+      const totalPaid     = monthly * numPayments;
       const totalInterest = totalPaid - principal;
-      const intPct       = Math.round((totalInterest / price) * 100);
+      const intPct        = Math.round((totalInterest / price) * 100);
 
       if ($('m-monthly'))   $('m-monthly').textContent   = '$' + Math.round(monthly).toLocaleString();
       if ($('m-principal')) $('m-principal').textContent = '$' + Math.round(principal).toLocaleString();
       if ($('m-interest'))  $('m-interest').textContent  = '$' + Math.round(totalInterest).toLocaleString();
       if ($('m-total'))     $('m-total').textContent     = '$' + Math.round(totalPaid).toLocaleString();
-      if ($('m-int-pct'))   $('m-int-pct').textContent   = intPct + '% of purchase price'; // FIX: was missing
+      if ($('m-int-pct'))   $('m-int-pct').textContent   = intPct + '% of purchase price';
 
       if (emptyState) emptyState.style.display = 'none';
       if (resultBox)  resultBox.style.display  = 'block';
@@ -1029,11 +1009,7 @@
 
   // ============================================================
   // 15. APPEAL CALCULATOR & QUIZ
-  // FIX: Added calcRatio() — was used on property-tax-appeal.html
-  // but never defined. Also added to public API at bottom.
   // ============================================================
-
-  // Equalization ratio calculator (property-tax-appeal.html)
   function calcRatio() {
     const assessed = parseNum($('r-assessed') ? $('r-assessed').value : 0);
     const ratio    = parseNum($('r-ratio')    ? $('r-ratio').value    : 0);
@@ -1064,7 +1040,6 @@
     if (res) res.style.display = 'block';
   }
 
-  // Appeal probability quiz
   let quizData = { sales: '', reval: '', errors: '', recent: '' };
 
   function quizSelect(key, val, step) {
@@ -1129,16 +1104,17 @@
     }
 
     sendLead({
-      name: 'Appeal Quiz Lead',
-      email: email,
-      topic: 'Tax Appeal Quiz \u2014 score: ' + score + '% (' + rating + ')',
-      town: addr
-    }).catch(function (e) { console.warn('Quiz lead error:', e); });
+      name:    'Appeal Quiz Lead',
+      email:   email,
+      topic:   'Tax Appeal Quiz \u2014 score: ' + score + '% (' + rating + ')',
+      town:    addr,
+      address: addr
+    }, CONFIG.emailjs.templateId)
+      .catch(function (e) { console.warn('Quiz lead error:', e); });
   }
 
   // ============================================================
   // 16. TOWN DIRECTORY
-  // Loads towns.html into a placeholder, then filters via input.
   // ============================================================
   function loadTownDirectory() {
     const directory = $('townDirectory');
@@ -1167,7 +1143,6 @@
 
   // ============================================================
   // 17. DYNAMIC SITEMAP
-  // Builds a sitemap by reading links from nav.html.
   // ============================================================
   function generateDynamicSitemap() {
     const container = $('dynamic-sitemap');
@@ -1175,17 +1150,17 @@
     fetch('nav.html?v=' + Date.now())
       .then(function (r) { return r.text(); })
       .then(function (navHtml) {
-        const tmp = document.createElement('div');
+        const tmp   = document.createElement('div');
         tmp.innerHTML = navHtml;
         const links = tmp.querySelectorAll('a');
-        let html = '<div class="prog-card-new"><ul class="sidebar-list" style="columns: 2; column-gap: 40px; line-height: 2.5;">';
+        let html = '<div class="prog-card-new"><ul class="sidebar-list" style="columns:2;column-gap:40px;line-height:2.5;">';
         links.forEach(function (link) {
           if (link.classList.contains('nav-logo') || link.classList.contains('mobile-menu-icon')) return;
           const href = link.getAttribute('href');
           const text = (link.textContent || '').trim();
           if (!href || !text) return;
-          html += '<li><a href="' + href + '" style="color:var(--navy); font-weight:600; text-decoration:none;">' +
-                  '<i class="fas fa-chevron-right" style="font-size:10px; margin-right:8px; color:var(--gold);"></i>' +
+          html += '<li><a href="' + href + '" style="color:var(--navy);font-weight:600;text-decoration:none;">' +
+                  '<i class="fas fa-chevron-right" style="font-size:10px;margin-right:8px;color:var(--gold);"></i>' +
                   text + '</a></li>';
         });
         html += '</ul></div>';
@@ -1199,12 +1174,10 @@
 
   // ============================================================
   // 18. BACK TO TOP
-  // Shows after 500px of scroll. Smooth-scrolls back to top.
-  // Uses addEventListener so it doesn't clobber other scroll handlers.
   // ============================================================
   function initBackToTop() {
     window.addEventListener('scroll', function () {
-      const btn = $('backToTop');
+      const btn     = $('backToTop');
       if (!btn) return;
       const scrolled = document.body.scrollTop || document.documentElement.scrollTop;
       btn.style.display = (scrolled > 500) ? 'block' : 'none';
@@ -1217,26 +1190,27 @@
 
   // ============================================================
   // 19. PUBLIC API
-  // Functions called from inline HTML (onclick="...") need to be
-  // attached to window. If you add a new function the HTML calls,
-  // add it here too.
   // ============================================================
-  window.toggleMobileMenu = toggleMobileMenu;
+  window.toggleMobileMenu        = toggleMobileMenu;
 
-  // Forms / lead magnets
-  window.handleAuditRequest      = handleAuditRequest;
+  // Forms
+  window.handleAuditRequest      = handleAuditRequest;   // legacy audit page
+  window.submitAudit             = submitAudit;           // new homepage audit form
+  window.submitComps             = submitComps;           // new homepage comps form
+  window.submitContact           = submitContact;         // new homepage contact form
+  window.submitLead              = submitLead;            // legacy contact form
+  window.showDynamicFields       = showDynamicFields;     // topic-based field reveal
   window.handleChecklistDownload = handleChecklistDownload;
   window.minimizePopup           = minimizePopup;
   window.restorePopup            = restorePopup;
-  window.submitLead              = submitLead;
   window.showRebateModal         = showRebateModal;
   window.minimizeRebateModal     = minimizeRebateModal;
   window.downloadChecklist       = downloadChecklist;
 
   // Accordions / tabs
-  window.toggleFAQ = toggleFAQ;
-  window.togglePAS = togglePAS;
-  window.switchTab = switchTab;
+  window.toggleFAQ  = toggleFAQ;
+  window.togglePAS  = togglePAS;
+  window.switchTab  = switchTab;
 
   // ANCHOR calculator
   window.selectChoice   = selectChoice;
@@ -1248,192 +1222,188 @@
   // Other calculators
   window.calcMortgage = calcMortgage;
   window.calcStayNJ   = calcStayNJ;
-  window.calcRatio    = calcRatio;   // FIX: was missing
+  window.calcRatio    = calcRatio;
 
   // Appeal quiz
-  window.quizSelect  = quizSelect;
-  window.quizNext    = quizNext;
-  window.quizPrev    = quizPrev;
-  window.submitQuiz  = submitQuiz;
+  window.quizSelect = quizSelect;
+  window.quizNext   = quizNext;
+  window.quizPrev   = quizPrev;
+  window.submitQuiz = submitQuiz;
 
   // Towns / utility
   window.filterTowns = filterTowns;
   window.scrollToTop = scrollToTop;
 
   // Property dashboard
-  window.addPropertyToWatchlist = addPropertyToWatchlist; // FIX: was missing
+  window.addPropertyToWatchlist = addPropertyToWatchlist;
 
-// ============================================================
-// GOOGLE PLACES AUTOCOMPLETE
-// Attaches to any address fields on the page so users get
-// real, validated addresses with city, state, and zip.
-// Called automatically by Google's Maps script via the
-// `callback=initAddressAutocomplete` parameter.
-// ============================================================
-function initAddressAutocomplete() {
-  if (typeof google === 'undefined' || !google.maps || !google.maps.places) {
-    return;
+  // ============================================================
+  // GOOGLE PLACES AUTOCOMPLETE
+  // Called automatically by Google Maps script via callback param.
+  // Add any new address field IDs to addressFieldIds below.
+  // ============================================================
+  function initAddressAutocomplete() {
+    if (typeof google === 'undefined' || !google.maps || !google.maps.places) return;
+
+    const addressFieldIds = [
+      'audit-address',   // legacy audit form (other pages)
+      'audit-addr',      // new homepage listing audit form
+      'comps-addr',      // new homepage comps form
+      'quiz-addr',       // appeal quiz
+      'cf-town',         // legacy contact form
+      'lead-address',    // ANCHOR calculator
+      'a-lead-address',  // new combined ANCHOR calculator
+      'df-sell-addr',    // dynamic contact — sell
+      'df-appeal-addr'   // dynamic contact — appeal
+    ];
+
+    addressFieldIds.forEach(function (id) {
+      const input = document.getElementById(id);
+      if (!input || input.dataset.autocompleted === '1') return;
+      input.dataset.autocompleted = '1';
+
+      const autocomplete = new google.maps.places.Autocomplete(input, {
+        types: ['address'],
+        componentRestrictions: { country: 'us' },
+        fields: ['address_components', 'formatted_address']
+      });
+
+      autocomplete.addListener('place_changed', function () {
+        const place = autocomplete.getPlace();
+        if (place && place.formatted_address) {
+          input.value = place.formatted_address;
+        }
+      });
+
+      input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          const dropdown = document.querySelector('.pac-container:not(:empty)');
+          if (dropdown) e.preventDefault();
+        }
+      });
+    });
   }
 
-  // Add any address input IDs here. Safe to list IDs that don't exist on the current page.
-  const addressFieldIds = [
-  'audit-address',  // Tax audit request form
-  'quiz-addr',      // Appeal quiz address
-  'cf-town',        // Contact form town/address
-  'lead-address'    // ANCHOR calculator address
-];
+  window.initAddressAutocomplete = initAddressAutocomplete;
 
-  addressFieldIds.forEach(function (id) {
-    const input = document.getElementById(id);
-    if (!input || input.dataset.autocompleted === '1') return;
-    input.dataset.autocompleted = '1';
+  // ============================================================
+  // PROPERTY DASHBOARD
+  // ============================================================
+  const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
+  const ACTOR_ID    = 'maxcopell/zillow-scraper';
 
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      types: ['address'],
-      componentRestrictions: { country: 'us' },
-      fields: ['address_components', 'formatted_address']
-    });
-
-    autocomplete.addListener('place_changed', function () {
-      const place = autocomplete.getPlace();
-      if (place && place.formatted_address) {
-        // Replace whatever the user typed with the cleaned, full address
-        input.value = place.formatted_address;
-      }
-    });
-
-    // Stop the Enter key from submitting the form when the user is
-    // just trying to pick an autocomplete suggestion
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        const dropdown = document.querySelector('.pac-container:not(:empty)');
-        if (dropdown) e.preventDefault();
-      }
-    });
-  });
-}
-
-/* --- PROPERTY DASHBOARD LOGIC --- */
-const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
-const ACTOR_ID = 'maxcopell/zillow-scraper';
-
-// Load saved properties on page refresh
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener('DOMContentLoaded', function () {
     const savedProperties = JSON.parse(localStorage.getItem('watchdogList')) || [];
-    const list = document.getElementById('watchlist-items');
+    const list = $('watchlist-items');
     if (!list) return;
-    savedProperties.forEach(prop => {
-        renderPropertyCard(prop);
-    });
-});
+    savedProperties.forEach(function (prop) { renderPropertyCard(prop); });
+  });
 
-async function addPropertyToWatchlist() {
-    const addr = document.getElementById('prop-input').value;
-    if(!addr) return;
+  async function addPropertyToWatchlist() {
+    const addrInput = $('prop-input');
+    const addr = addrInput ? addrInput.value : '';
+    if (!addr) return;
 
-    const list = document.getElementById('watchlist-items');
+    const list   = $('watchlist-items');
     const tempId = 'id-' + Date.now();
-    const loadingItem = `
-        <div class="watch-item" id="${tempId}">
-            <div class="watch-info">
-                <span class="watch-addr">${addr}</span>
-                <span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</span>
-            </div>
-        </div>`;
-    list.insertAdjacentHTML('afterbegin', loadingItem);
-    
-    document.getElementById('prop-input').value = "";
-    document.getElementById('add-prop-form').style.display = 'none';
+    const loadingItem =
+      '<div class="watch-item" id="' + tempId + '">' +
+      '<div class="watch-info">' +
+      '<span class="watch-addr">' + addr + '</span>' +
+      '<span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</span>' +
+      '</div></div>';
+    if (list) list.insertAdjacentHTML('afterbegin', loadingItem);
+
+    if (addrInput) addrInput.value = '';
+    const addForm = $('add-prop-form');
+    if (addForm) addForm.style.display = 'none';
 
     try {
-        const runRes = await fetch(`https://api.apify.com/v2/acts/${ACTOR_ID}/runs?token=${APIFY_TOKEN}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ "searchQuery": addr, "maxResults": 1 })
-        });
-        const runData = await runRes.json();
-        const runId = runData.data.id;
-        pollApifyResult(runId, tempId, addr);
+      const runRes = await fetch(
+        'https://api.apify.com/v2/acts/' + ACTOR_ID + '/runs?token=' + APIFY_TOKEN,
+        { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ searchQuery: addr, maxResults: 1 }) }
+      );
+      const runData = await runRes.json();
+      pollApifyResult(runData.data.id, tempId, addr);
     } catch (err) {
-        console.error("Fetch Error:", err);
-        document.getElementById(tempId).innerHTML = "Connection Error.";
+      console.error('Fetch Error:', err);
+      const el = $(tempId);
+      if (el) el.innerHTML = 'Connection Error.';
     }
-}
+  }
 
-async function pollApifyResult(runId, elementId, addr) {
-    const res = await fetch(`https://api.apify.com/v2/actor-runs/${runId}?token=${APIFY_TOKEN}`);
+  async function pollApifyResult(runId, elementId, addr) {
+    const res  = await fetch('https://api.apify.com/v2/actor-runs/' + runId + '?token=' + APIFY_TOKEN);
     const data = await res.json();
 
     if (data.data.status === 'SUCCEEDED') {
-        const datasetRes = await fetch(`https://api.apify.com/v2/actor-runs/${runId}/dataset/items?token=${APIFY_TOKEN}`);
-        const items = await datasetRes.json();
-
-        if (items.length > 0) {
-            const p = items[0];
-            const cleanProp = {
-                id: elementId,
-                address: addr,
-                price: p.price || p.zestimate || "N/A",
-                city: p.address?.city || "NJ",
-                trend: (Math.random() * 4).toFixed(1),
-                isUp: Math.random() > 0.4
-            };
-            saveToStorage(cleanProp);
-            updatePropertyUI(elementId, cleanProp);
-        } else {
-            document.getElementById(elementId).innerHTML = "No Zillow data found.";
-        }
+      const datasetRes = await fetch(
+        'https://api.apify.com/v2/actor-runs/' + runId + '/dataset/items?token=' + APIFY_TOKEN
+      );
+      const items = await datasetRes.json();
+      if (items.length > 0) {
+        const p = items[0];
+        const cleanProp = {
+          id:      elementId,
+          address: addr,
+          price:   p.price || p.zestimate || 'N/A',
+          city:    (p.address && p.address.city) ? p.address.city : 'NJ',
+          trend:   (Math.random() * 4).toFixed(1),
+          isUp:    Math.random() > 0.4
+        };
+        saveToStorage(cleanProp);
+        updatePropertyUI(elementId, cleanProp);
+      } else {
+        const el = $(elementId);
+        if (el) el.innerHTML = 'No Zillow data found.';
+      }
     } else if (['FAILED', 'ABORTED', 'TIMED-OUT'].includes(data.data.status)) {
-        document.getElementById(elementId).innerHTML = "Search failed.";
+      const el = $(elementId);
+      if (el) el.innerHTML = 'Search failed.';
     } else {
-        setTimeout(() => pollApifyResult(runId, elementId, addr), 3000);
+      setTimeout(function () { pollApifyResult(runId, elementId, addr); }, 3000);
     }
-}
+  }
 
-function updatePropertyUI(elementId, prop) {
-    const el = document.getElementById(elementId);
+  function updatePropertyUI(elementId, prop) {
+    const el = $(elementId);
     if (!el) return;
-    el.innerHTML = `
-        <div class="watch-info">
-            <span class="watch-addr">${prop.address}</span>
-            <span class="watch-meta">${prop.city}</span>
-        </div>
-        <div class="watch-stats">
-            <div class="watch-price">${typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price}</div>
-            <div class="watch-trend ${prop.isUp ? 'up' : 'down'}">
-                <i class="fas fa-caret-${prop.isUp ? 'up' : 'down'}"></i> ${prop.trend}%
-            </div>
-        </div>
-    `;
-}
+    el.innerHTML =
+      '<div class="watch-info">' +
+      '<span class="watch-addr">' + prop.address + '</span>' +
+      '<span class="watch-meta">' + prop.city + '</span>' +
+      '</div>' +
+      '<div class="watch-stats">' +
+      '<div class="watch-price">' + (typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price) + '</div>' +
+      '<div class="watch-trend ' + (prop.isUp ? 'up' : 'down') + '">' +
+      '<i class="fas fa-caret-' + (prop.isUp ? 'up' : 'down') + '"></i> ' + prop.trend + '%' +
+      '</div></div>';
+  }
 
-function renderPropertyCard(prop) {
-    const list = document.getElementById('watchlist-items');
+  function renderPropertyCard(prop) {
+    const list = $('watchlist-items');
     if (!list) return;
     const item = document.createElement('div');
     item.className = 'watch-item';
-    item.id = prop.id;
-    item.innerHTML = `
-        <div class="watch-info">
-            <span class="watch-addr">${prop.address}</span>
-            <span class="watch-meta">${prop.city}</span>
-        </div>
-        <div class="watch-stats">
-            <div class="watch-price">${typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price}</div>
-            <div class="watch-trend ${prop.isUp ? 'up' : 'down'}">
-                <i class="fas fa-caret-${prop.isUp ? 'up' : 'down'}"></i> ${prop.trend}%
-            </div>
-        </div>
-    `;
+    item.id        = prop.id;
+    item.innerHTML =
+      '<div class="watch-info">' +
+      '<span class="watch-addr">' + prop.address + '</span>' +
+      '<span class="watch-meta">' + prop.city + '</span>' +
+      '</div>' +
+      '<div class="watch-stats">' +
+      '<div class="watch-price">' + (typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price) + '</div>' +
+      '<div class="watch-trend ' + (prop.isUp ? 'up' : 'down') + '">' +
+      '<i class="fas fa-caret-' + (prop.isUp ? 'up' : 'down') + '"></i> ' + prop.trend + '%' +
+      '</div></div>';
     list.appendChild(item);
-}
+  }
 
-function saveToStorage(prop) {
-    let current = JSON.parse(localStorage.getItem('watchdogList')) || [];
+  function saveToStorage(prop) {
+    const current = JSON.parse(localStorage.getItem('watchdogList')) || [];
     current.push(prop);
     localStorage.setItem('watchdogList', JSON.stringify(current));
-}
+  }
 
-window.initAddressAutocomplete = initAddressAutocomplete;
-  
 })();
