@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ANCHOR Benefit Estimator | NJ Property Tax Relief</title>
-<meta name="description" content="Find out how much you qualify for under the NJ ANCHOR program. Free 90-second estimator. Homeowners up to $1,500. Renters up to $700. South Jersey specialist.">
+<title>ANCHOR &amp; Stay NJ Calculator | NJ Property Tax Relief</title>
+<meta name="description" content="Free NJ property tax relief calculators. ANCHOR: homeowners up to $1,500, renters up to $700. Stay NJ: seniors 65+ up to $6,500. South Jersey specialist John Scafide.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://njpropertytaxrelief.com/anchor-estimator.html">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -12,1053 +12,691 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 /* ============================================================
-   ANCHOR ESTIMATOR PAGE — standalone styles
-   Supplements styles.css without overriding global nav/footer
+   ANCHOR + STAY NJ ESTIMATOR PAGE
 ============================================================ */
-.est-page {
-  background: #f4f5f7;
-  min-height: 100vh;
-}
+.est-page { background:#f4f5f7; min-height:100vh; }
 
-/* ── HERO BAND ───────────────────────────────────────────── */
+/* HERO */
 .est-hero {
-  background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 60%, #1e4a80 100%);
+  background: linear-gradient(135deg,#0e2248 0%,#1a3a6b 60%,#1e4a80 100%);
   padding: 60px 24px 80px;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 .est-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  pointer-events: none;
+  content:'';
+  position:absolute;
+  inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none;
 }
-.est-hero-inner {
-  max-width: 680px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
+.est-hero-inner { max-width:680px; margin:0 auto; position:relative; z-index:1; }
 .est-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(184,151,42,0.2);
-  border: 1px solid rgba(184,151,42,0.4);
-  border-radius: 30px;
-  padding: 5px 16px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: #e6c355;
-  margin-bottom: 20px;
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(184,151,42,0.2); border:1px solid rgba(184,151,42,0.4);
+  border-radius:30px; padding:5px 16px;
+  font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:#e6c355; margin-bottom:20px;
 }
 .est-h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(30px, 5vw, 48px);
-  font-weight: 700;
-  color: #fff;
-  line-height: 1.15;
-  margin-bottom: 16px;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(28px,5vw,46px); font-weight:700;
+  color:#fff; line-height:1.15; margin-bottom:14px;
 }
-.est-h1 span { color: #e6c355; }
-.est-sub {
-  font-size: 17px;
-  color: #b0c8e0;
-  line-height: 1.6;
-  margin-bottom: 36px;
-  max-width: 540px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Benefit pills */
-.est-pills {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 10px;
-}
+.est-h1 span { color:#e6c355; }
+.est-sub { font-size:17px; color:#b0c8e0; line-height:1.6; margin-bottom:32px; max-width:540px; margin-left:auto; margin-right:auto; }
+.est-pills { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
 .est-pill {
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 40px;
-  padding: 8px 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #d0e0f0;
+  background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+  border-radius:40px; padding:8px 18px;
+  display:flex; align-items:center; gap:8px; font-size:14px; color:#d0e0f0;
 }
-.est-pill strong { color: #fff; font-size: 16px; }
+.est-pill strong { color:#fff; font-size:16px; }
 .est-pill-icon {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(184,151,42,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  color: #e6c355;
-  flex-shrink: 0;
+  width:28px; height:28px; border-radius:50%;
+  background:rgba(184,151,42,0.25);
+  display:flex; align-items:center; justify-content:center;
+  font-size:13px; color:#e6c355; flex-shrink:0;
 }
 
-/* ── CALCULATOR CARD ─────────────────────────────────────── */
-.est-card-wrap {
-  max-width: 720px;
-  margin: -40px auto 60px;
-  padding: 0 20px;
-  position: relative;
-  z-index: 10;
-}
-.est-card {
-  background: #fff;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(14,34,72,0.18);
-  overflow: hidden;
-}
+/* CARD WRAP */
+.est-card-wrap { max-width:720px; margin:-40px auto 60px; padding:0 20px; position:relative; z-index:10; }
+.est-card { background:#fff; border-radius:20px; box-shadow:0 20px 60px rgba(14,34,72,0.18); overflow:hidden; }
 
-/* Card header */
-.est-card-hdr {
-  background: #fff;
-  border-bottom: 1px solid #e8eaf0;
-  padding: 22px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+/* TABS */
+.est-tabs { display:grid; grid-template-columns:1fr 1fr; border-bottom:2px solid #e8eaf0; }
+.est-tab {
+  background:#fff; border:none; padding:18px 20px 16px;
+  cursor:pointer; text-align:left; font-family:'Source Sans 3',system-ui,sans-serif;
+  display:flex; flex-direction:column; gap:3px;
+  border-bottom:3px solid transparent; margin-bottom:-2px;
+  transition:background 0.15s, border-color 0.15s;
 }
-.est-card-hdr-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.est-card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #eaf0fb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: #1a3a6b;
-  flex-shrink: 0;
-}
-.est-card-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 18px;
-  font-weight: 700;
-  color: #0e2248;
-  line-height: 1.2;
-}
-.est-card-sub {
-  font-size: 12px;
-  color: #5a6070;
-  margin-top: 2px;
-}
-.est-time-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  color: #5a6070;
-  background: #f4f5f7;
-  border-radius: 20px;
-  padding: 5px 12px;
-  white-space: nowrap;
-}
+.est-tab:first-child { border-right:1px solid #e8eaf0; }
+.est-tab i { font-size:16px; color:#5a6070; margin-bottom:4px; }
+.est-tab span { font-size:15px; font-weight:700; color:#0e2248; font-family:'Playfair Display',Georgia,serif; }
+.est-tab small { font-size:11px; color:#5a6070; }
+.est-tab:hover { background:#f9fafe; }
+.est-tab.active { border-bottom-color:#1a3a6b; background:#f9fafe; }
+.est-tab.active i { color:#1a3a6b; }
+.est-tab.active span { color:#1a3a6b; }
+.est-tab.staynj-tab.active { border-bottom-color:#1e6b3a; }
+.est-tab.staynj-tab.active i { color:#1e6b3a; }
+.est-tab.staynj-tab.active span { color:#1e6b3a; }
 
-/* Progress bar */
-.est-progress-wrap {
-  height: 4px;
-  background: #eaf0fb;
-}
+/* PANELS */
+.est-panel { display:none; }
+.est-panel.active { display:block; }
+
+/* PROGRESS */
+.est-progress-wrap { height:4px; background:#eaf0fb; }
 .est-progress-bar {
-  height: 4px;
-  background: linear-gradient(90deg, #1a3a6b, #b8972a);
-  border-radius: 0 2px 2px 0;
-  transition: width 0.4s ease;
-  width: 14%;
+  height:4px;
+  background:linear-gradient(90deg,#1a3a6b,#b8972a);
+  border-radius:0 2px 2px 0;
+  transition:width 0.4s ease;
+  width:14%;
 }
-
-/* Step counter */
 .est-step-counter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 28px 0;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 28px 0;
 }
-.est-step-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #5a6070;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.est-step-dots {
-  display: flex;
-  gap: 6px;
-}
-.est-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #d8dce8;
-  transition: background 0.2s, transform 0.2s;
-}
-.est-dot.active {
-  background: #1a3a6b;
-  transform: scale(1.25);
-}
-.est-dot.done {
-  background: #b8972a;
-}
+.est-step-label { font-size:12px; font-weight:600; color:#5a6070; text-transform:uppercase; letter-spacing:1px; }
+.est-step-dots { display:flex; gap:6px; }
+.est-dot { width:8px; height:8px; border-radius:50%; background:#d8dce8; transition:background 0.2s,transform 0.2s; }
+.est-dot.active { background:#1a3a6b; transform:scale(1.25); }
+.est-dot.done { background:#b8972a; }
 
-/* Steps */
-.est-step {
-  display: none;
-  padding: 28px 28px 24px;
-  animation: fadeSlide 0.25s ease;
-}
-.est-step.active { display: block; }
-@keyframes fadeSlide {
-  from { opacity: 0; transform: translateX(16px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
+/* STEPS */
+.est-step { display:none; padding:28px 28px 24px; animation:fadeSlide 0.25s ease; }
+.est-step.active { display:block; }
+@keyframes fadeSlide { from{opacity:0;transform:translateX(16px)} to{opacity:1;transform:translateX(0)} }
+.est-q { font-family:'Playfair Display',Georgia,serif; font-size:clamp(18px,3vw,22px); font-weight:700; color:#0e2248; margin-bottom:6px; line-height:1.3; }
+.est-hint { font-size:13px; color:#5a6070; margin-bottom:22px; line-height:1.5; }
 
-.est-q {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(18px, 3vw, 22px);
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 6px;
-  line-height: 1.3;
-}
-.est-hint {
-  font-size: 13px;
-  color: #5a6070;
-  margin-bottom: 22px;
-  line-height: 1.5;
-}
-
-/* Choice buttons */
-.est-choices {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-.est-choices.one-col { grid-template-columns: 1fr; }
-.est-choices.three-col { grid-template-columns: 1fr 1fr 1fr; }
-
+/* CHOICES */
+.est-choices { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+.est-choices.three-col { grid-template-columns:1fr 1fr 1fr; }
 .est-choice {
-  border: 2px solid #d8dce8;
-  border-radius: 14px;
-  padding: 16px 14px;
-  background: #fff;
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.15s;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  position: relative;
-  overflow: hidden;
+  border:2px solid #d8dce8; border-radius:14px; padding:16px 14px;
+  background:#fff; cursor:pointer; text-align:left;
+  transition:all 0.15s; font-family:'Source Sans 3',system-ui,sans-serif;
+  position:relative; overflow:hidden;
 }
 .est-choice::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: #1a3a6b;
-  transform: scaleX(0);
-  transition: transform 0.2s;
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:#1a3a6b; transform:scaleX(0); transition:transform 0.2s;
 }
-.est-choice:hover {
-  border-color: #1a3a6b;
-  background: #f5f8ff;
-  box-shadow: 0 4px 16px rgba(26,58,107,0.1);
-}
-.est-choice:hover::before { transform: scaleX(1); }
-.est-choice.selected {
-  border-color: #1a3a6b;
-  background: #eaf0fb;
-  box-shadow: 0 4px 16px rgba(26,58,107,0.12);
-}
-.est-choice.selected::before { transform: scaleX(1); }
+.est-choice:hover { border-color:#1a3a6b; background:#f5f8ff; box-shadow:0 4px 16px rgba(26,58,107,0.1); }
+.est-choice:hover::before { transform:scaleX(1); }
+.est-choice.selected { border-color:#1a3a6b; background:#eaf0fb; box-shadow:0 4px 16px rgba(26,58,107,0.12); }
+.est-choice.selected::before { transform:scaleX(1); }
 .est-choice-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
-  background: #eaf0fb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-  color: #1a3a6b;
-  margin-bottom: 10px;
+  width:36px; height:36px; border-radius:9px;
+  background:#eaf0fb; display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:#1a3a6b; margin-bottom:10px;
 }
-.est-choice.selected .est-choice-icon {
-  background: #1a3a6b;
-  color: #fff;
-}
-.est-choice-label {
-  font-size: 15px;
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 3px;
-}
-.est-choice-sub {
-  font-size: 12px;
-  color: #5a6070;
-  line-height: 1.4;
-}
+.est-choice.selected .est-choice-icon { background:#1a3a6b; color:#fff; }
+.est-choice-label { font-size:15px; font-weight:700; color:#0e2248; margin-bottom:3px; }
+.est-choice-sub { font-size:12px; color:#5a6070; line-height:1.4; }
 .est-check {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #1a3a6b;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 10px;
+  position:absolute; top:12px; right:12px; width:20px; height:20px;
+  border-radius:50%; background:#1a3a6b;
+  display:none; align-items:center; justify-content:center;
+  color:#fff; font-size:10px;
 }
-.est-choice.selected .est-check { display: flex; }
+.est-choice.selected .est-check { display:flex; }
 
-/* Nav buttons */
-.est-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 4px;
-}
+/* NAV BUTTONS */
+.est-nav { display:flex; justify-content:space-between; align-items:center; padding-top:4px; }
 .est-btn-back {
-  background: none;
-  border: 1.5px solid #d8dce8;
-  border-radius: 8px;
-  padding: 10px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #5a6070;
-  cursor: pointer;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  background:none; border:1.5px solid #d8dce8; border-radius:8px;
+  padding:10px 18px; font-size:14px; font-weight:600; color:#5a6070;
+  cursor:pointer; font-family:'Source Sans 3',system-ui,sans-serif;
+  transition:all 0.15s; display:flex; align-items:center; gap:6px;
 }
-.est-btn-back:hover { border-color: #1a3a6b; color: #1a3a6b; }
+.est-btn-back:hover { border-color:#1a3a6b; color:#1a3a6b; }
 .est-btn-next {
-  background: #1a3a6b;
-  border: none;
-  border-radius: 8px;
-  padding: 11px 24px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-  cursor: pointer;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  transition: background 0.15s, transform 0.1s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
+  background:#1a3a6b; border:none; border-radius:8px;
+  padding:11px 24px; font-size:14px; font-weight:700; color:#fff;
+  cursor:pointer; font-family:'Source Sans 3',system-ui,sans-serif;
+  transition:background 0.15s,transform 0.1s;
+  display:flex; align-items:center; gap:8px; margin-left:auto;
 }
-.est-btn-next:hover { background: #0e2248; }
-.est-btn-next:active { transform: scale(0.97); }
-.est-btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
-.est-btn-next.gold {
-  background: #b8972a;
-}
-.est-btn-next.gold:hover { background: #9a7e22; }
+.est-btn-next:hover { background:#0e2248; }
+.est-btn-next:active { transform:scale(0.97); }
+.est-btn-next:disabled { opacity:0.4; cursor:not-allowed; }
+.est-btn-next.gold { background:#b8972a; }
+.est-btn-next.gold:hover { background:#9a7e22; }
 
-/* ── LEAD CAPTURE STEP ──────────────────────────────────── */
+/* LEAD FORM */
 .est-lead-wrap {
-  background: #f9fafe;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  border: 1px solid #e8eaf0;
+  background:#f9fafe; border-radius:12px;
+  padding:20px; margin-bottom:20px; border:1px solid #e8eaf0;
 }
-.est-lead-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 16px;
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 4px;
-}
-.est-lead-sub {
-  font-size: 13px;
-  color: #5a6070;
-  margin-bottom: 16px;
-}
-.est-field-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 12px;
-}
-.est-field-row.full { grid-template-columns: 1fr; }
-.est-field {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.est-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #0e2248;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
+.est-lead-title { font-family:'Playfair Display',Georgia,serif; font-size:16px; font-weight:700; color:#0e2248; margin-bottom:4px; }
+.est-lead-sub { font-size:13px; color:#5a6070; margin-bottom:16px; }
+.est-field-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.est-field { display:flex; flex-direction:column; gap:5px; }
+.est-label { font-size:12px; font-weight:700; color:#0e2248; text-transform:uppercase; letter-spacing:0.5px; }
 .est-input {
-  border: 1.5px solid #d8dce8;
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 14px;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  color: #1a1a2e;
-  background: #fff;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-  width: 100%;
+  border:1.5px solid #d8dce8; border-radius:8px;
+  padding:10px 14px; font-size:14px; font-family:'Source Sans 3',system-ui,sans-serif;
+  color:#1a1a2e; background:#fff; outline:none;
+  transition:border-color 0.15s,box-shadow 0.15s; width:100%;
 }
-.est-input:focus {
-  border-color: #1a3a6b;
-  box-shadow: 0 0 0 3px rgba(26,58,107,0.08);
-}
-.est-input::placeholder { color: #aab0c0; }
-.est-required { color: #c0392b; }
+.est-input:focus { border-color:#1a3a6b; box-shadow:0 0 0 3px rgba(26,58,107,0.08); }
+.est-input::placeholder { color:#aab0c0; }
+.est-required { color:#c0392b; }
+.est-re-box { background:#eaf0fb; border:1px solid #c0d0e8; border-radius:10px; padding:14px 16px; margin-top:4px; }
+.est-re-label { display:flex; align-items:flex-start; gap:12px; cursor:pointer; }
+.est-re-label input[type="checkbox"] { width:18px; height:18px; margin-top:2px; flex-shrink:0; accent-color:#1a3a6b; cursor:pointer; }
+.est-re-text-title { font-size:14px; font-weight:700; color:#0e2248; margin-bottom:3px; }
+.est-re-text-sub { font-size:13px; color:#5a6070; line-height:1.5; }
 
-/* RE interest checkbox */
-.est-re-box {
-  background: #eaf0fb;
-  border: 1px solid #c0d0e8;
-  border-radius: 10px;
-  padding: 14px 16px;
-  margin-top: 4px;
-}
-.est-re-label {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  cursor: pointer;
-}
-.est-re-label input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-top: 2px;
-  flex-shrink: 0;
-  accent-color: #1a3a6b;
-  cursor: pointer;
-}
-.est-re-text-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 3px;
-}
-.est-re-text-sub {
-  font-size: 13px;
-  color: #5a6070;
-  line-height: 1.5;
-}
-
-/* ── RESULT STEP ─────────────────────────────────────────── */
-.est-result {
-  padding: 28px;
-}
-
-/* Qualify result */
-.est-result-qualify {
-  text-align: center;
-  padding-bottom: 8px;
-}
+/* RESULT */
+.est-result { padding:28px; }
+.est-result-qualify { text-align:center; padding-bottom:8px; }
 .est-result-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #e8f5ed;
-  border: 1px solid #a8d5b8;
-  border-radius: 30px;
-  padding: 6px 18px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #1e6b3a;
-  margin-bottom: 16px;
+  display:inline-flex; align-items:center; gap:8px;
+  background:#e8f5ed; border:1px solid #a8d5b8; border-radius:30px;
+  padding:6px 18px; font-size:13px; font-weight:700; color:#1e6b3a; margin-bottom:16px;
 }
-.est-result-badge.warn {
-  background: #fff7e6;
-  border-color: #fcd68a;
-  color: #7a5c00;
-}
-.est-result-badge.no {
-  background: #fef2f2;
-  border-color: #fca5a5;
-  color: #b91c1c;
-}
+.est-result-badge.warn { background:#fff7e6; border-color:#fcd68a; color:#7a5c00; }
+.est-result-badge.no { background:#fef2f2; border-color:#fca5a5; color:#b91c1c; }
 .est-result-amount {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(52px, 10vw, 80px);
-  font-weight: 700;
-  color: #1a3a6b;
-  line-height: 1;
-  margin-bottom: 8px;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(52px,10vw,80px); font-weight:700;
+  color:#1a3a6b; line-height:1; margin-bottom:8px;
 }
-.est-result-label {
-  font-size: 16px;
-  font-weight: 600;
-  color: #0e2248;
-  margin-bottom: 20px;
-}
-.est-qualify-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: left;
-  max-width: 380px;
-  margin: 0 auto 24px;
-}
-.est-qualify-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #1a1a2e;
-}
-.est-qualify-check {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #1e6b3a;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  color: #fff;
-  flex-shrink: 0;
-}
-.est-result-note {
-  font-size: 12px;
-  color: #5a6070;
-  background: #f4f5f7;
-  border-radius: 8px;
-  padding: 10px 14px;
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-.est-result-note a {
-  color: #1a3a6b;
-  font-weight: 600;
-}
+.est-result-label { font-size:16px; font-weight:600; color:#0e2248; margin-bottom:20px; }
+.est-qualify-list { list-style:none; display:flex; flex-direction:column; gap:8px; text-align:left; max-width:380px; margin:0 auto 24px; }
+.est-qualify-list li { display:flex; align-items:center; gap:10px; font-size:14px; color:#1a1a2e; }
+.est-qualify-check { width:20px; height:20px; border-radius:50%; background:#1e6b3a; display:flex; align-items:center; justify-content:center; font-size:10px; color:#fff; flex-shrink:0; }
+.est-result-note { font-size:12px; color:#5a6070; background:#f4f5f7; border-radius:8px; padding:10px 14px; margin-bottom:24px; line-height:1.6; }
+.est-result-note a { color:#1a3a6b; font-weight:600; }
+.est-re-result { background:#eaf0fb; border:1px solid #c0d0e8; border-radius:12px; padding:16px 18px; text-align:left; margin-bottom:20px; }
+.est-re-result-title { font-size:14px; font-weight:700; color:#0e2248; margin-bottom:6px; display:flex; align-items:center; gap:8px; }
+.est-re-result-title i { color:#b8972a; }
+.est-re-result p { font-size:13px; color:#5a6070; line-height:1.6; margin:0; }
+.est-upsell { background:#0e2248; border-radius:14px; padding:22px 22px 18px; text-align:left; margin-bottom:20px; border:1px solid rgba(184,151,42,0.3); }
+.est-upsell-top { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+.est-upsell-new { background:#b8972a; color:#fff; font-size:10px; font-weight:700; padding:3px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; }
+.est-upsell-headline { font-size:14px; font-weight:700; color:#fff; }
+.est-upsell p { font-size:13px; color:#b0c8e0; line-height:1.6; margin-bottom:14px; }
+.est-upsell-guides { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:16px; }
+.est-upsell-guide { display:flex; align-items:center; gap:7px; font-size:12px; color:#b0c8e0; }
+.est-upsell-guide i { color:#b8972a; }
+.est-upsell-cta { display:inline-flex; align-items:center; gap:8px; background:#b8972a; color:#fff; font-size:14px; font-weight:700; padding:11px 22px; border-radius:8px; text-decoration:none; transition:background 0.15s; }
+.est-upsell-cta:hover { background:#9a7e22; }
+.est-result-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:20px; }
+.est-btn-apply { display:inline-flex; align-items:center; gap:8px; background:#1a3a6b; color:#fff; font-size:14px; font-weight:700; padding:11px 22px; border-radius:8px; text-decoration:none; font-family:'Source Sans 3',system-ui,sans-serif; transition:background 0.15s; }
+.est-btn-apply:hover { background:#0e2248; }
+.est-btn-reset { background:none; border:1.5px solid #d8dce8; border-radius:8px; padding:11px 22px; font-size:14px; font-weight:600; color:#5a6070; cursor:pointer; font-family:'Source Sans 3',system-ui,sans-serif; transition:all 0.15s; }
+.est-btn-reset:hover { border-color:#1a3a6b; color:#1a3a6b; }
+.est-no-qualify { text-align:center; padding:8px 0; }
+.est-no-qualify-title { font-family:'Playfair Display',Georgia,serif; font-size:20px; font-weight:700; color:#0e2248; margin-bottom:10px; }
+.est-no-qualify p { font-size:14px; color:#5a6070; line-height:1.65; margin-bottom:16px; max-width:440px; margin-left:auto; margin-right:auto; }
+.est-no-qualify-list { list-style:none; text-align:left; max-width:360px; margin:0 auto 24px; display:flex; flex-direction:column; gap:8px; }
+.est-no-qualify-list li { display:flex; align-items:center; gap:10px; font-size:14px; color:#1a1a2e; }
+.est-x { width:20px; height:20px; border-radius:50%; background:#b91c1c; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; flex-shrink:0; }
 
-/* RE followup card */
-.est-re-result {
-  background: #eaf0fb;
-  border: 1px solid #c0d0e8;
-  border-radius: 12px;
-  padding: 16px 18px;
-  text-align: left;
-  margin-bottom: 20px;
+/* ── STAY NJ PANEL ───────────────────────────────────────── */
+.sn-panel { padding:28px; }
+.sn-intro { margin-bottom:24px; }
+.sn-intro-badge {
+  display:inline-flex; align-items:center; gap:7px;
+  background:#e8f5ed; border:1px solid #a8d5b8; border-radius:30px;
+  padding:5px 14px; font-size:12px; font-weight:700; color:#1e6b3a;
+  margin-bottom:12px;
 }
-.est-re-result-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.est-re-result-title i { color: #b8972a; }
-.est-re-result p {
-  font-size: 13px;
-  color: #5a6070;
-  line-height: 1.6;
-  margin: 0;
-}
+.sn-intro h3 { font-family:'Playfair Display',Georgia,serif; font-size:22px; font-weight:700; color:#0e2248; margin-bottom:8px; }
+.sn-intro p { font-size:14px; color:#5a6070; line-height:1.6; }
 
-/* Upsell block */
-.est-upsell {
-  background: #0e2248;
-  border-radius: 14px;
-  padding: 22px 22px 18px;
-  text-align: left;
-  margin-bottom: 20px;
-  border: 1px solid rgba(184,151,42,0.3);
+.sn-inputs { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+.sn-field { display:flex; flex-direction:column; gap:6px; }
+.sn-label { font-size:12px; font-weight:700; color:#0e2248; text-transform:uppercase; letter-spacing:0.5px; }
+.sn-input-wrap { position:relative; }
+.sn-input-wrap .sn-prefix {
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  font-size:15px; font-weight:600; color:#5a6070; pointer-events:none;
 }
-.est-upsell-top {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+.sn-input {
+  width:100%; border:1.5px solid #d8dce8; border-radius:10px;
+  padding:12px 14px 12px 28px; font-size:16px; font-weight:600;
+  font-family:'Source Sans 3',system-ui,sans-serif; color:#0e2248;
+  background:#f9fafe; outline:none; transition:border-color 0.15s,box-shadow 0.15s;
 }
-.est-upsell-new {
-  background: #b8972a;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 20px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.est-upsell-headline {
-  font-size: 14px;
-  font-weight: 700;
-  color: #fff;
-}
-.est-upsell p {
-  font-size: 13px;
-  color: #b0c8e0;
-  line-height: 1.6;
-  margin-bottom: 14px;
-}
-.est-upsell-guides {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 16px;
-}
-.est-upsell-guide {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  color: #b0c8e0;
-}
-.est-upsell-guide i { color: #b8972a; }
-.est-upsell-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #b8972a;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 11px 22px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background 0.15s;
-}
-.est-upsell-cta:hover { background: #9a7e22; }
+.sn-input:focus { border-color:#1e6b3a; box-shadow:0 0 0 3px rgba(30,107,58,0.08); background:#fff; }
+.sn-input::placeholder { color:#aab0c0; font-weight:400; }
 
-/* Result actions */
-.est-result-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 20px;
-}
-.est-btn-apply {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #1a3a6b;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 11px 22px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  transition: background 0.15s;
-}
-.est-btn-apply:hover { background: #0e2248; }
-.est-btn-reset {
-  background: none;
-  border: 1.5px solid #d8dce8;
-  border-radius: 8px;
-  padding: 11px 22px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #5a6070;
-  cursor: pointer;
-  font-family: 'Source Sans 3', system-ui, sans-serif;
-  transition: all 0.15s;
-}
-.est-btn-reset:hover { border-color: #1a3a6b; color: #1a3a6b; }
+/* Result display */
+.sn-result { display:none; }
+.sn-result.visible { display:block; }
+.sn-result-cards { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
+.sn-result-card { background:#fff; border:1px solid #e8eaf0; border-radius:14px; padding:18px 14px; text-align:center; }
+.sn-result-card.primary { background:#0e2248; border-color:transparent; }
+.sn-result-card-label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:#5a6070; margin-bottom:8px; }
+.sn-result-card.primary .sn-result-card-label { color:#8aaac8; }
+.sn-result-card-num { font-family:'Playfair Display',Georgia,serif; font-size:28px; font-weight:700; color:#1a3a6b; line-height:1.1; }
+.sn-result-card.primary .sn-result-card-num { color:#e6c355; font-size:32px; }
+.sn-result-card-sub { font-size:11px; color:#5a6070; margin-top:4px; }
+.sn-result-card.primary .sn-result-card-sub { color:#8aaac8; }
 
-/* No qualify */
-.est-no-qualify {
-  text-align: center;
-  padding: 8px 0;
-}
-.est-no-qualify-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 20px;
-  font-weight: 700;
-  color: #0e2248;
-  margin-bottom: 10px;
-}
-.est-no-qualify p {
-  font-size: 14px;
-  color: #5a6070;
-  line-height: 1.65;
-  margin-bottom: 16px;
-  max-width: 440px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.est-no-qualify-list {
-  list-style: none;
-  text-align: left;
-  max-width: 360px;
-  margin: 0 auto 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.est-no-qualify-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14px;
-  color: #1a1a2e;
-}
-.est-x {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #b91c1c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 9px;
-  color: #fff;
-  flex-shrink: 0;
-}
+/* Breakdown bar */
+.sn-breakdown { background:#f9fafe; border:1px solid #e8eaf0; border-radius:12px; padding:16px 18px; margin-bottom:20px; }
+.sn-breakdown-title { font-size:12px; font-weight:700; color:#0e2248; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:12px; }
+.sn-bar-wrap { height:10px; background:#e8eaf0; border-radius:10px; overflow:hidden; margin-bottom:8px; }
+.sn-bar-fill { height:100%; background:linear-gradient(90deg,#1e6b3a,#4caf80); border-radius:10px; transition:width 0.4s ease; }
+.sn-bar-labels { display:flex; justify-content:space-between; font-size:12px; }
+.sn-bar-credit { color:#1e6b3a; font-weight:700; }
+.sn-bar-remain { color:#5a6070; }
 
-/* ── TRUST BAR ───────────────────────────────────────────── */
-.est-trust {
-  background: #fff;
-  border-top: 1px solid #e8eaf0;
-  padding: 16px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.est-trust-item {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12px;
-  color: #5a6070;
-}
-.est-trust-item i { color: #1a3a6b; font-size: 13px; }
+/* Rules */
+.sn-rules { list-style:none; display:flex; flex-direction:column; gap:8px; margin-bottom:20px; }
+.sn-rule { display:flex; align-items:center; gap:10px; font-size:13px; color:#1a1a2e; }
+.sn-rule-check { width:18px; height:18px; border-radius:50%; background:#1e6b3a; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; flex-shrink:0; }
 
-/* ── CONTEXT SECTION BELOW CARD ─────────────────────────── */
-.est-context {
-  max-width: 720px;
-  margin: 0 auto 60px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 14px;
-}
-.est-ctx-card {
-  background: #fff;
-  border-radius: 14px;
-  border: 1px solid #e8eaf0;
-  padding: 20px 18px;
-  text-align: center;
-}
-.est-ctx-num {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a3a6b;
-  margin-bottom: 4px;
-}
-.est-ctx-label {
-  font-size: 12px;
-  color: #5a6070;
-  line-height: 1.4;
-}
+/* Ineligible */
+.sn-ineligible { background:#fef2f2; border:1px solid #fca5a5; border-radius:12px; padding:16px 18px; text-align:center; margin-bottom:20px; }
+.sn-ineligible p { font-size:14px; color:#b91c1c; font-weight:600; margin:0; }
+.sn-ineligible small { font-size:12px; color:#5a6070; display:block; margin-top:4px; }
 
-/* ── RESPONSIVE ──────────────────────────────────────────── */
-@media (max-width: 600px) {
-  .est-hero { padding: 40px 16px 70px; }
-  .est-card-hdr { padding: 16px 18px; }
-  .est-step { padding: 20px 18px 18px; }
-  .est-result { padding: 20px 18px; }
-  .est-choices { grid-template-columns: 1fr; }
-  .est-choices.three-col { grid-template-columns: 1fr; }
-  .est-field-row { grid-template-columns: 1fr; }
-  .est-context { grid-template-columns: 1fr; }
-  .est-trust { gap: 14px; }
-  .est-upsell-guides { grid-template-columns: 1fr; }
-  .est-time-badge { display: none; }
-  .est-pills { gap: 7px; }
-  .est-pill { font-size: 13px; padding: 6px 14px; }
+/* Lead capture for Stay NJ */
+.sn-lead { background:#eaf0fb; border:1px solid #c0d0e8; border-radius:12px; padding:18px; margin-bottom:20px; }
+.sn-lead-title { font-family:'Playfair Display',Georgia,serif; font-size:16px; font-weight:700; color:#0e2248; margin-bottom:4px; }
+.sn-lead-sub { font-size:13px; color:#5a6070; margin-bottom:14px; }
+.sn-lead-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+.sn-lead-sent { text-align:center; padding:12px; font-size:14px; color:#1e6b3a; font-weight:600; display:none; }
+.sn-lead-sent.visible { display:block; }
+.sn-btn-book { display:inline-flex; align-items:center; gap:8px; background:#1e6b3a; color:#fff; font-size:14px; font-weight:700; padding:11px 22px; border-radius:8px; text-decoration:none; transition:background 0.15s; }
+.sn-btn-book:hover { background:#155530; }
+.sn-btn-outline { display:inline-flex; align-items:center; gap:8px; background:none; border:1.5px solid #1e6b3a; color:#1e6b3a; font-size:14px; font-weight:700; padding:10px 20px; border-radius:8px; text-decoration:none; transition:all 0.15s; cursor:pointer; font-family:'Source Sans 3',system-ui,sans-serif; }
+.sn-btn-outline:hover { background:#e8f5ed; }
+
+/* TRUST BAR */
+.est-trust { background:#fff; border-top:1px solid #e8eaf0; padding:14px 28px; display:flex; align-items:center; justify-content:center; gap:24px; flex-wrap:wrap; }
+.est-trust-item { display:flex; align-items:center; gap:7px; font-size:12px; color:#5a6070; }
+.est-trust-item i { color:#1a3a6b; font-size:13px; }
+
+/* CONTEXT */
+.est-context { max-width:720px; margin:0 auto 60px; padding:0 20px; display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+.est-ctx-card { background:#fff; border-radius:14px; border:1px solid #e8eaf0; padding:20px 18px; text-align:center; }
+.est-ctx-num { font-family:'Playfair Display',Georgia,serif; font-size:28px; font-weight:700; color:#1a3a6b; margin-bottom:4px; }
+.est-ctx-label { font-size:12px; color:#5a6070; line-height:1.4; }
+
+/* RESPONSIVE */
+@media (max-width:600px){
+  .est-hero { padding:40px 16px 70px; }
+  .est-tab span { font-size:13px; }
+  .est-tab small { display:none; }
+  .est-step { padding:18px 16px 16px; }
+  .est-choices { grid-template-columns:1fr; }
+  .est-choices.three-col { grid-template-columns:1fr; }
+  .est-field-row { grid-template-columns:1fr; }
+  .sn-inputs { grid-template-columns:1fr; }
+  .sn-result-cards { grid-template-columns:1fr; }
+  .sn-lead-grid { grid-template-columns:1fr; }
+  .est-context { grid-template-columns:1fr; }
+  .est-upsell-guides { grid-template-columns:1fr; }
+  .est-trust { gap:12px; }
 }
 </style>
 </head>
 <body class="est-page">
 
-<!-- NAV loaded by scripts.js -->
 <nav id="main-nav"></nav>
 
-<!-- ── HERO ─────────────────────────────────────────────── -->
+<!-- HERO -->
 <div class="est-hero">
   <div class="est-hero-inner">
-    <div class="est-eyebrow">
-      <i class="fas fa-calculator"></i>
-      Free Eligibility Check
-    </div>
-    <h1 class="est-h1">How Much Is Your<br><span>ANCHOR Benefit?</span></h1>
-    <p class="est-sub">Answer 5 quick questions and find out exactly what you're owed. Takes about 90 seconds. No account needed.</p>
+    <div class="est-eyebrow"><i class="fas fa-calculator"></i>Free NJ Tax Relief Calculators</div>
+    <h1 class="est-h1">Find Out What You're<br><span>Owed in Tax Relief</span></h1>
+    <p class="est-sub">Two free tools ... one for ANCHOR (all homeowners &amp; renters) and one for Stay NJ (seniors 65+). Takes about 90 seconds each.</p>
     <div class="est-pills">
-      <div class="est-pill">
-        <div class="est-pill-icon"><i class="fas fa-house"></i></div>
-        Homeowners <strong>up to $1,500</strong>
-      </div>
-      <div class="est-pill">
-        <div class="est-pill-icon"><i class="fas fa-building"></i></div>
-        Renters <strong>up to $700</strong>
-      </div>
-      <div class="est-pill">
-        <div class="est-pill-icon"><i class="fas fa-calendar"></i></div>
-        Deadline <strong>Nov 2, 2026</strong>
-      </div>
+      <div class="est-pill"><div class="est-pill-icon"><i class="fas fa-house"></i></div>ANCHOR <strong>up to $1,500</strong></div>
+      <div class="est-pill"><div class="est-pill-icon"><i class="fas fa-leaf"></i></div>Stay NJ <strong>up to $6,500</strong></div>
+      <div class="est-pill"><div class="est-pill-icon"><i class="fas fa-calendar"></i></div>PAS-1 deadline <strong>Nov 2</strong></div>
     </div>
   </div>
 </div>
 
-<!-- ── CALCULATOR CARD ─────────────────────────────────── -->
+<!-- CARD -->
 <div class="est-card-wrap">
   <div class="est-card">
 
-    <!-- Card header -->
-    <div class="est-card-hdr">
-      <div class="est-card-hdr-left">
-        <div class="est-card-icon"><i class="fas fa-calculator"></i></div>
-        <div>
-          <div class="est-card-title">ANCHOR Benefit Estimator</div>
-          <div class="est-card-sub">Estimate only — actual eligibility determined by NJ Division of Taxation</div>
-        </div>
-      </div>
-      <div class="est-time-badge">
-        <i class="fas fa-clock"></i> ~90 seconds
-      </div>
+    <!-- TABS -->
+    <div class="est-tabs">
+      <button class="est-tab active" id="tab-anchor" onclick="switchTab('anchor')">
+        <i class="fas fa-house"></i>
+        <span>ANCHOR Estimator</span>
+        <small>All Homeowners &amp; Renters</small>
+      </button>
+      <button class="est-tab staynj-tab" id="tab-staynj" onclick="switchTab('staynj')">
+        <i class="fas fa-leaf"></i>
+        <span>Stay NJ Calculator</span>
+        <small>Age 65+ Only</small>
+      </button>
     </div>
 
-    <!-- Progress bar -->
-    <div class="est-progress-wrap">
-      <div class="est-progress-bar" id="est-progress"></div>
-    </div>
+    <!-- ══════════════════════════════════════════════════════
+         ANCHOR PANEL
+    ══════════════════════════════════════════════════════ -->
+    <div class="est-panel active" id="panel-anchor">
 
-    <!-- Step counter / dots -->
-    <div class="est-step-counter">
-      <div class="est-step-label" id="est-step-label">Step 1 of 6</div>
-      <div class="est-step-dots">
-        <div class="est-dot active" id="dot-1"></div>
-        <div class="est-dot" id="dot-2"></div>
-        <div class="est-dot" id="dot-3"></div>
-        <div class="est-dot" id="dot-4"></div>
-        <div class="est-dot" id="dot-5"></div>
-        <div class="est-dot" id="dot-6"></div>
-      </div>
-    </div>
+      <div class="est-progress-wrap"><div class="est-progress-bar" id="est-progress"></div></div>
 
-    <!-- ── STEP 1 — Own or Rent ── -->
-    <div class="est-step active" id="est-step1">
-      <div class="est-q">Do you own or rent your home?</div>
-      <div class="est-hint">This determines which ANCHOR benefit track applies to you.</div>
-      <div class="est-choices">
-        <button class="est-choice" data-key="tenure" data-val="own" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-house"></i></div>
-          <div class="est-choice-label">I Own</div>
-          <div class="est-choice-sub">I hold title or have a mortgage</div>
-        </button>
-        <button class="est-choice" data-key="tenure" data-val="rent" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-building"></i></div>
-          <div class="est-choice-label">I Rent</div>
-          <div class="est-choice-sub">I pay rent to a landlord</div>
-        </button>
-      </div>
-      <div class="est-nav">
-        <div></div>
-        <button class="est-btn-next" id="next1" disabled onclick="estNext(1)">
-          Next <i class="fas fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-
-    <!-- ── STEP 2 — Primary Residence ── -->
-    <div class="est-step" id="est-step2">
-      <div class="est-q">Was this your primary NJ residence on October 1 of the benefit year?</div>
-      <div class="est-hint">Your main home — not a vacation property or investment property.</div>
-      <div class="est-choices">
-        <button class="est-choice" data-key="primary" data-val="yes" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-circle-check"></i></div>
-          <div class="est-choice-label">Yes — my main home</div>
-          <div class="est-choice-sub">I lived here on October 1</div>
-        </button>
-        <button class="est-choice" data-key="primary" data-val="no" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-circle-xmark"></i></div>
-          <div class="est-choice-label">No — second home or moved</div>
-          <div class="est-choice-sub">Vacation home, investment, or relocated</div>
-        </button>
-      </div>
-      <div class="est-nav">
-        <button class="est-btn-back" onclick="estBack(2)"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="est-btn-next" id="next2" disabled onclick="estNext(2)">Next <i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- ── STEP 3 — Income ── -->
-    <div class="est-step" id="est-step3">
-      <div class="est-q">What was your approximate gross income for the benefit year?</div>
-      <div class="est-hint">All sources combined: wages, Social Security, retirement, investments.</div>
-      <div class="est-choices three-col">
-        <button class="est-choice" data-key="income" data-val="low" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
-          <div class="est-choice-label">Under $150,000</div>
-          <div class="est-choice-sub">Best benefit amount</div>
-        </button>
-        <button class="est-choice" data-key="income" data-val="mid" id="est-mid-btn" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
-          <div class="est-choice-label">$150,001–$250,000</div>
-          <div class="est-choice-sub">Homeowners only</div>
-        </button>
-        <button class="est-choice" data-key="income" data-val="high" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
-          <div class="est-choice-label">Over $250,000</div>
-          <div class="est-choice-sub">May not qualify</div>
-        </button>
-      </div>
-      <div class="est-nav">
-        <button class="est-btn-back" onclick="estBack(3)"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="est-btn-next" id="next3" disabled onclick="estNext(3)">Next <i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- ── STEP 4 — Age ── -->
-    <div class="est-step" id="est-step4">
-      <div class="est-q">Were you 65 or older during the benefit year?</div>
-      <div class="est-hint">Renters 65+ receive a higher benefit ($700 vs $450). Seniors also use the PAS-1 form.</div>
-      <div class="est-choices">
-        <button class="est-choice" data-key="age" data-val="yes" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-user"></i></div>
-          <div class="est-choice-label">Yes, 65 or older</div>
-          <div class="est-choice-sub">Higher renter benefit + PAS-1 eligible</div>
-        </button>
-        <button class="est-choice" data-key="age" data-val="no" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-user"></i></div>
-          <div class="est-choice-label">No, under 65</div>
-          <div class="est-choice-sub">Apply at anchor.nj.gov directly</div>
-        </button>
-      </div>
-      <div class="est-nav">
-        <button class="est-btn-back" onclick="estBack(4)"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="est-btn-next" id="next4" disabled onclick="estNext(4)">Next <i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- ── STEP 5 — Taxes Current ── -->
-    <div class="est-step" id="est-step5">
-      <div class="est-q">Are your property taxes current or on a payment plan?</div>
-      <div class="est-hint">More than 12 months delinquent may disqualify homeowners. Renters skip this.</div>
-      <div class="est-choices">
-        <button class="est-choice" data-key="taxes" data-val="yes" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-circle-check"></i></div>
-          <div class="est-choice-label">Yes, current</div>
-          <div class="est-choice-sub">Or on a payment plan</div>
-        </button>
-        <button class="est-choice" data-key="taxes" data-val="no" onclick="estSelect(this)">
-          <div class="est-check"><i class="fas fa-check"></i></div>
-          <div class="est-choice-icon"><i class="fas fa-triangle-exclamation"></i></div>
-          <div class="est-choice-label">Unsure / Past Due</div>
-          <div class="est-choice-sub">May still qualify — let's check</div>
-        </button>
-      </div>
-      <div class="est-nav">
-        <button class="est-btn-back" onclick="estBack(5)"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="est-btn-next" id="next5" disabled onclick="estNext(5)">Next <i class="fas fa-arrow-right"></i></button>
-      </div>
-    </div>
-
-    <!-- ── STEP 6 — Lead Capture ── -->
-    <div class="est-step" id="est-step6">
-      <div class="est-q">Almost done — where should we send your results?</div>
-      <div class="est-hint">We'll include your estimated benefit, key deadlines, and next steps.</div>
-
-      <div class="est-lead-wrap">
-        <div class="est-lead-title">Your Information</div>
-        <div class="est-lead-sub">Required to see your personalized result.</div>
-        <div class="est-field-row">
-          <div class="est-field">
-            <label class="est-label">Full Name <span class="est-required">*</span></label>
-            <input class="est-input" id="est-name" type="text" placeholder="First and last name" autocomplete="name">
-          </div>
-          <div class="est-field">
-            <label class="est-label">Email <span class="est-required">*</span></label>
-            <input class="est-input" id="est-email" type="email" placeholder="your@email.com" autocomplete="email">
-          </div>
-        </div>
-        <div class="est-field-row">
-          <div class="est-field">
-            <label class="est-label">Phone <span style="color:#5a6070;font-weight:400;">(optional)</span></label>
-            <input class="est-input" id="est-phone" type="tel" placeholder="(xxx) xxx-xxxx" autocomplete="tel">
-          </div>
-          <div class="est-field">
-            <label class="est-label">Property Address <span class="est-required">*</span></label>
-            <input class="est-input" id="est-address" type="text" placeholder="Street address, city, NJ" autocomplete="street-address">
-          </div>
+      <div class="est-step-counter">
+        <div class="est-step-label" id="est-step-label">Step 1 of 6</div>
+        <div class="est-step-dots">
+          <div class="est-dot active" id="dot-1"></div>
+          <div class="est-dot" id="dot-2"></div>
+          <div class="est-dot" id="dot-3"></div>
+          <div class="est-dot" id="dot-4"></div>
+          <div class="est-dot" id="dot-5"></div>
+          <div class="est-dot" id="dot-6"></div>
         </div>
       </div>
 
-      <div class="est-re-box" id="est-re-box">
-        <label class="est-re-label">
-          <input type="checkbox" id="est-re-interest">
-          <div>
-            <div class="est-re-text-title" id="est-re-title">I'd also like to know what my home is worth</div>
-            <div class="est-re-text-sub" id="est-re-sub">John is a licensed NJ Realtor and can send you a free home valuation — no pressure, no obligation.</div>
+      <!-- Step 1 -->
+      <div class="est-step active" id="est-step1">
+        <div class="est-q">Do you own or rent your home?</div>
+        <div class="est-hint">This determines which ANCHOR benefit track applies to you.</div>
+        <div class="est-choices">
+          <button class="est-choice" data-key="tenure" data-val="own" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-house"></i></div>
+            <div class="est-choice-label">I Own</div>
+            <div class="est-choice-sub">I hold title or have a mortgage</div>
+          </button>
+          <button class="est-choice" data-key="tenure" data-val="rent" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-building"></i></div>
+            <div class="est-choice-label">I Rent</div>
+            <div class="est-choice-sub">I pay rent to a landlord</div>
+          </button>
+        </div>
+        <div class="est-nav"><div></div><button class="est-btn-next" id="next1" disabled onclick="estNext(1)">Next <i class="fas fa-arrow-right"></i></button></div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="est-step" id="est-step2">
+        <div class="est-q">Was this your primary NJ residence on October 1 of the benefit year?</div>
+        <div class="est-hint">Your main home ... not a vacation property or investment property.</div>
+        <div class="est-choices">
+          <button class="est-choice" data-key="primary" data-val="yes" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-circle-check"></i></div>
+            <div class="est-choice-label">Yes ... my main home</div>
+            <div class="est-choice-sub">I lived here on October 1</div>
+          </button>
+          <button class="est-choice" data-key="primary" data-val="no" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-circle-xmark"></i></div>
+            <div class="est-choice-label">No ... second home or moved</div>
+            <div class="est-choice-sub">Vacation, investment, or relocated</div>
+          </button>
+        </div>
+        <div class="est-nav">
+          <button class="est-btn-back" onclick="estBack(2)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="est-btn-next" id="next2" disabled onclick="estNext(2)">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="est-step" id="est-step3">
+        <div class="est-q">What was your approximate gross income for the benefit year?</div>
+        <div class="est-hint">All sources combined: wages, Social Security, retirement, investments.</div>
+        <div class="est-choices three-col">
+          <button class="est-choice" data-key="income" data-val="low" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="est-choice-label">Under $150,000</div>
+            <div class="est-choice-sub">Best benefit amount</div>
+          </button>
+          <button class="est-choice" data-key="income" data-val="mid" id="est-mid-btn" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="est-choice-label">$150,001–$250,000</div>
+            <div class="est-choice-sub">Homeowners only</div>
+          </button>
+          <button class="est-choice" data-key="income" data-val="high" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="est-choice-label">Over $250,000</div>
+            <div class="est-choice-sub">May not qualify</div>
+          </button>
+        </div>
+        <div class="est-nav">
+          <button class="est-btn-back" onclick="estBack(3)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="est-btn-next" id="next3" disabled onclick="estNext(3)">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="est-step" id="est-step4">
+        <div class="est-q">Were you 65 or older during the benefit year?</div>
+        <div class="est-hint">Renters 65+ get a higher benefit ($700 vs $450). Seniors use the PAS-1 form.</div>
+        <div class="est-choices">
+          <button class="est-choice" data-key="age" data-val="yes" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-user"></i></div>
+            <div class="est-choice-label">Yes, 65 or older</div>
+            <div class="est-choice-sub">Higher renter benefit + PAS-1 eligible</div>
+          </button>
+          <button class="est-choice" data-key="age" data-val="no" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-user"></i></div>
+            <div class="est-choice-label">No, under 65</div>
+            <div class="est-choice-sub">Apply at anchor.nj.gov directly</div>
+          </button>
+        </div>
+        <div class="est-nav">
+          <button class="est-btn-back" onclick="estBack(4)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="est-btn-next" id="next4" disabled onclick="estNext(4)">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="est-step" id="est-step5">
+        <div class="est-q">Are your property taxes current or on a payment plan?</div>
+        <div class="est-hint">More than 12 months delinquent may disqualify homeowners.</div>
+        <div class="est-choices">
+          <button class="est-choice" data-key="taxes" data-val="yes" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-circle-check"></i></div>
+            <div class="est-choice-label">Yes, current</div>
+            <div class="est-choice-sub">Or on a payment plan</div>
+          </button>
+          <button class="est-choice" data-key="taxes" data-val="no" onclick="estSelect(this)">
+            <div class="est-check"><i class="fas fa-check"></i></div>
+            <div class="est-choice-icon"><i class="fas fa-triangle-exclamation"></i></div>
+            <div class="est-choice-label">Unsure / Past Due</div>
+            <div class="est-choice-sub">May still qualify ... let's check</div>
+          </button>
+        </div>
+        <div class="est-nav">
+          <button class="est-btn-back" onclick="estBack(5)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="est-btn-next" id="next5" disabled onclick="estNext(5)">Next <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 6 ... Lead capture -->
+      <div class="est-step" id="est-step6">
+        <div class="est-q">Almost done ... where should we send your results?</div>
+        <div class="est-hint">We'll include your estimated benefit, key deadlines, and next steps.</div>
+        <div class="est-lead-wrap">
+          <div class="est-lead-title">Your Information</div>
+          <div class="est-lead-sub">Required to see your personalized result.</div>
+          <div class="est-field-row">
+            <div class="est-field">
+              <label class="est-label">Full Name <span class="est-required">*</span></label>
+              <input class="est-input" id="est-name" type="text" placeholder="First and last name" autocomplete="name">
+            </div>
+            <div class="est-field">
+              <label class="est-label">Email <span class="est-required">*</span></label>
+              <input class="est-input" id="est-email" type="email" placeholder="your@email.com" autocomplete="email">
+            </div>
           </div>
-        </label>
+          <div class="est-field-row">
+            <div class="est-field">
+              <label class="est-label">Phone <span style="color:#5a6070;font-weight:400;">(optional)</span></label>
+              <input class="est-input" id="est-phone" type="tel" placeholder="(xxx) xxx-xxxx" autocomplete="tel">
+            </div>
+            <div class="est-field">
+              <label class="est-label">Property Address <span class="est-required">*</span></label>
+              <input class="est-input" id="est-address" type="text" placeholder="Street address, city, NJ" autocomplete="street-address">
+            </div>
+          </div>
+        </div>
+        <div class="est-re-box">
+          <label class="est-re-label">
+            <input type="checkbox" id="est-re-interest">
+            <div>
+              <div class="est-re-text-title" id="est-re-title">I'd also like to know what my home is worth</div>
+              <div class="est-re-text-sub" id="est-re-sub">John is a licensed NJ Realtor and can send you a free home valuation ... no pressure, no obligation.</div>
+            </div>
+          </label>
+        </div>
+        <div class="est-nav" style="margin-top:20px;">
+          <button class="est-btn-back" onclick="estBack(6)"><i class="fas fa-arrow-left"></i> Back</button>
+          <button class="est-btn-next gold" onclick="estSubmit()"><i class="fas fa-chart-bar"></i> See My Benefit</button>
+        </div>
       </div>
 
-      <div class="est-nav" style="margin-top:20px;">
-        <button class="est-btn-back" onclick="estBack(6)"><i class="fas fa-arrow-left"></i> Back</button>
-        <button class="est-btn-next gold" onclick="estSubmit()">
-          <i class="fas fa-chart-bar"></i> See My Benefit
-        </button>
+      <!-- Step 7 ... Result -->
+      <div class="est-step" id="est-step7">
+        <div class="est-result" id="est-result-content"></div>
       </div>
-    </div>
 
-    <!-- ── STEP 7 — Result ── -->
-    <div class="est-step" id="est-step7">
-      <div class="est-result" id="est-result-content"></div>
-    </div>
+    </div><!-- end panel-anchor -->
 
-    <!-- Trust bar -->
+    <!-- ══════════════════════════════════════════════════════
+         STAY NJ PANEL
+    ══════════════════════════════════════════════════════ -->
+    <div class="est-panel" id="panel-staynj">
+      <div class="sn-panel">
+
+        <div class="sn-intro">
+          <div class="sn-intro-badge"><i class="fas fa-leaf"></i> Age 65+ Only</div>
+          <h3>Stay NJ ... 50% Off Your Property Tax Bill</h3>
+          <p>Enter your annual tax bill and household income to see your estimated credit, up to <strong>$6,500/year</strong> paid in quarterly installments. Payments began February 2026.</p>
+        </div>
+
+        <div class="sn-inputs">
+          <div class="sn-field">
+            <label class="sn-label">Annual Property Tax Bill</label>
+            <div class="sn-input-wrap">
+              <span class="sn-prefix">$</span>
+              <input class="sn-input" id="sn-tax" type="number" placeholder="e.g. 8,000" min="0" oninput="calcStayNJPage()">
+            </div>
+          </div>
+          <div class="sn-field">
+            <label class="sn-label">Household Income</label>
+            <div class="sn-input-wrap">
+              <span class="sn-prefix">$</span>
+              <input class="sn-input" id="sn-income" type="number" placeholder="e.g. 75,000" min="0" oninput="calcStayNJPage()">
+            </div>
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div class="sn-result" id="sn-result">
+
+          <!-- Ineligible -->
+          <div class="sn-ineligible" id="sn-ineligible" style="display:none;">
+            <p><i class="fas fa-circle-xmark" style="margin-right:6px;"></i>Income exceeds the $500,000 Stay NJ limit</p>
+            <small>You may still qualify for ANCHOR ... use the estimator tab above.</small>
+          </div>
+
+          <!-- Eligible result -->
+          <div id="sn-eligible-block">
+            <div class="sn-result-cards">
+              <div class="sn-result-card primary">
+                <div class="sn-result-card-label">Annual Credit</div>
+                <div class="sn-result-card-num" id="sn-annual">$0</div>
+                <div class="sn-result-card-sub">50% of bill, max $6,500</div>
+              </div>
+              <div class="sn-result-card">
+                <div class="sn-result-card-label">Per Quarter</div>
+                <div class="sn-result-card-num" id="sn-quarterly">$0</div>
+                <div class="sn-result-card-sub">Feb · May · Aug · Nov</div>
+              </div>
+              <div class="sn-result-card">
+                <div class="sn-result-card-label">You Still Pay</div>
+                <div class="sn-result-card-num" id="sn-remain">$0</div>
+                <div class="sn-result-card-sub">After credit applied</div>
+              </div>
+            </div>
+
+            <div class="sn-breakdown">
+              <div class="sn-breakdown-title">Credit vs. Remaining Tax</div>
+              <div class="sn-bar-wrap"><div class="sn-bar-fill" id="sn-bar" style="width:0%"></div></div>
+              <div class="sn-bar-labels">
+                <span class="sn-bar-credit" id="sn-bar-credit-label">Credit: $0</span>
+                <span class="sn-bar-remain" id="sn-bar-remain-label">Remaining: $0</span>
+              </div>
+            </div>
+
+            <ul class="sn-rules">
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Must be age 65 or older</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Household income at or below $500,000</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Credit = 50% of tax bill, max $6,500/year</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Apply via PAS-1 form ... deadline November 2, 2026</li>
+            </ul>
+
+            <!-- Lead capture -->
+            <div class="sn-lead" id="sn-lead-form">
+              <div class="sn-lead-title">Want John to file your PAS-1 for you?</div>
+              <div class="sn-lead-sub">One form covers Stay NJ, ANCHOR, and Senior Freeze. $20 flat fee. John handles everything.</div>
+              <div class="sn-lead-grid">
+                <div class="est-field">
+                  <label class="est-label">Your Name</label>
+                  <input class="est-input" id="sn-name" type="text" placeholder="First and last name">
+                </div>
+                <div class="est-field">
+                  <label class="est-label">Email</label>
+                  <input class="est-input" id="sn-email" type="email" placeholder="your@email.com">
+                </div>
+                <div class="est-field">
+                  <label class="est-label">Phone (optional)</label>
+                  <input class="est-input" id="sn-phone" type="tel" placeholder="(xxx) xxx-xxxx">
+                </div>
+                <div class="est-field">
+                  <label class="est-label">Property Address</label>
+                  <input class="est-input" id="sn-address" type="text" placeholder="Street address, city, NJ">
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+                <button class="sn-btn-book" onclick="snSendLead()"><i class="fas fa-calendar-check"></i> Book PAS-1 Help ... $20</button>
+                <a href="pas-1-guide.html" class="sn-btn-outline"><i class="fas fa-book-open"></i> Free PAS-1 Guide</a>
+              </div>
+              <div class="sn-lead-sent" id="sn-lead-sent"><i class="fas fa-circle-check" style="margin-right:6px;"></i>Got it! John will follow up within one business day.</div>
+            </div>
+
+          </div><!-- end sn-eligible-block -->
+        </div><!-- end sn-result -->
+
+        <!-- Empty state prompt -->
+        <div id="sn-empty" style="background:#f9fafe;border:1px dashed #c0d0e8;border-radius:12px;padding:28px;text-align:center;color:#5a6070;font-size:14px;">
+          <i class="fas fa-leaf" style="font-size:32px;color:#1e6b3a;opacity:0.4;display:block;margin-bottom:10px;"></i>
+          Enter your annual tax bill and household income above to see your Stay NJ credit.
+        </div>
+
+        <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e8eaf0;">
+          <a href="senior-programs.html" style="color:#1a3a6b;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">
+            <i class="fas fa-arrow-right"></i> Full Stay NJ, Senior Freeze &amp; PAS-1 Guide
+          </a>
+        </div>
+
+      </div>
+    </div><!-- end panel-staynj -->
+
+    <!-- TRUST BAR -->
     <div class="est-trust">
       <div class="est-trust-item"><i class="fas fa-lock"></i> Never sold or shared</div>
       <div class="est-trust-item"><i class="fas fa-user-tie"></i> NJ License #2079591</div>
@@ -1069,330 +707,247 @@
   </div><!-- end est-card -->
 </div><!-- end est-card-wrap -->
 
-<!-- ── CONTEXT STATS ─────────────────────────────────────── -->
+<!-- CONTEXT STATS -->
 <div class="est-context">
   <div class="est-ctx-card">
     <div class="est-ctx-num">$1,500</div>
-    <div class="est-ctx-label">Max homeowner benefit, income under $150K</div>
+    <div class="est-ctx-label">Max ANCHOR homeowner benefit, income under $150K</div>
   </div>
   <div class="est-ctx-card">
-    <div class="est-ctx-num">$700</div>
-    <div class="est-ctx-label">Max renter benefit, age 65+ under $150K</div>
+    <div class="est-ctx-num">$6,500</div>
+    <div class="est-ctx-label">Max Stay NJ credit for seniors 65+</div>
   </div>
   <div class="est-ctx-card">
     <div class="est-ctx-num">Nov 2</div>
-    <div class="est-ctx-label">PAS-1 deadline for seniors 65+, 2026</div>
+    <div class="est-ctx-label">PAS-1 deadline ... covers all three senior programs</div>
   </div>
 </div>
 
-<!-- FOOTER loaded by scripts.js -->
 <div id="main-footer"></div>
-
 <script src="scripts.js"></script>
+
 <script>
-(function () {
+(function(){
   'use strict';
 
-  // ── EmailJS config pulled from scripts.js CONFIG ──────────
-  // These match your existing CONFIG object in scripts.js
   var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
   var STRIPE_LINK = 'https://buy.stripe.com/9B69ASdhjg442OLdoWfw400';
 
-  // State
+  // ── TAB SWITCHER ──────────────────────────────────────────
+  window.switchTab = function(tab) {
+    document.querySelectorAll('.est-tab').forEach(function(t){ t.classList.remove('active'); });
+    document.querySelectorAll('.est-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('tab-' + tab).classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ── ANCHOR CALCULATOR ─────────────────────────────────────
   var answers = {};
   var currentStep = 1;
-  var TOTAL_STEPS = 6;
+  var TOTAL = 6;
 
-  // ── Progress helpers ──────────────────────────────────────
   function updateProgress(step) {
-    var pct = Math.round((step / (TOTAL_STEPS + 1)) * 100);
+    var pct = Math.round((step / (TOTAL + 1)) * 100);
     var bar = document.getElementById('est-progress');
     if (bar) bar.style.width = pct + '%';
-
-    var label = document.getElementById('est-step-label');
-    if (label) label.textContent = step <= TOTAL_STEPS ? ('Step ' + step + ' of ' + TOTAL_STEPS) : 'Your Results';
-
-    for (var i = 1; i <= TOTAL_STEPS; i++) {
-      var dot = document.getElementById('dot-' + i);
-      if (!dot) continue;
-      dot.className = 'est-dot';
-      if (i < step) dot.classList.add('done');
-      else if (i === step) dot.classList.add('active');
+    var lbl = document.getElementById('est-step-label');
+    if (lbl) lbl.textContent = step <= TOTAL ? ('Step ' + step + ' of ' + TOTAL) : 'Your Results';
+    for (var i = 1; i <= TOTAL; i++) {
+      var d = document.getElementById('dot-' + i);
+      if (!d) continue;
+      d.className = 'est-dot';
+      if (i < step) d.classList.add('done');
+      else if (i === step) d.classList.add('active');
     }
   }
 
-  // ── Show step ─────────────────────────────────────────────
   function showStep(n) {
-    document.querySelectorAll('.est-step').forEach(function (s) {
-      s.classList.remove('active');
-    });
-    var next = document.getElementById('est-step' + n);
-    if (next) next.classList.add('active');
+    document.querySelectorAll('.est-step').forEach(function(s){ s.classList.remove('active'); });
+    var el = document.getElementById('est-step' + n);
+    if (el) el.classList.add('active');
     currentStep = n;
     updateProgress(n);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // ── Select a choice ───────────────────────────────────────
-  window.estSelect = function (btn) {
+  window.estSelect = function(btn) {
     var key = btn.getAttribute('data-key');
     var val = btn.getAttribute('data-val');
     answers[key] = val;
-
-    // Deselect siblings
-    btn.closest('.est-choices').querySelectorAll('.est-choice').forEach(function (b) {
-      b.classList.remove('selected');
-    });
+    btn.closest('.est-choices').querySelectorAll('.est-choice').forEach(function(b){ b.classList.remove('selected'); });
     btn.classList.add('selected');
-
-    // Enable the next button for this step
-    var nextBtn = document.getElementById('next' + currentStep);
-    if (nextBtn) nextBtn.disabled = false;
-
-    // If renter, hide mid-income option and update RE checkbox text
+    var nb = document.getElementById('next' + currentStep);
+    if (nb) nb.disabled = false;
     if (key === 'tenure') {
-      var midBtn = document.getElementById('est-mid-btn');
-      if (midBtn) {
-        midBtn.style.opacity = val === 'rent' ? '0.4' : '1';
-        midBtn.style.pointerEvents = val === 'rent' ? 'none' : 'auto';
-      }
-      var reTitle = document.getElementById('est-re-title');
-      var reSub   = document.getElementById('est-re-sub');
-      if (val === 'rent' && reTitle && reSub) {
-        reTitle.textContent = "I'm also interested in buying a home";
-        reSub.textContent   = "John is a licensed NJ Realtor and can walk you through buying in South Jersey — no cost, no pressure.";
-      } else if (reTitle && reSub) {
-        reTitle.textContent = "I'd also like to know what my home is worth";
-        reSub.textContent   = "John is a licensed NJ Realtor and can send you a free home valuation — no pressure, no obligation.";
+      var mid = document.getElementById('est-mid-btn');
+      if (mid) { mid.style.opacity = val === 'rent' ? '0.4' : '1'; mid.style.pointerEvents = val === 'rent' ? 'none' : 'auto'; }
+      var rt = document.getElementById('est-re-title');
+      var rs = document.getElementById('est-re-sub');
+      if (val === 'rent' && rt && rs) {
+        rt.textContent = "I'm also interested in buying a home";
+        rs.textContent = "John is a licensed NJ Realtor and can walk you through buying in South Jersey ... no cost, no pressure.";
+      } else if (rt && rs) {
+        rt.textContent = "I'd also like to know what my home is worth";
+        rs.textContent = "John is a licensed NJ Realtor and can send you a free home valuation ... no pressure, no obligation.";
       }
     }
   };
 
-  // ── Next step logic ───────────────────────────────────────
-  window.estNext = function (step) {
-    var nextStep;
-    if (step === 3 && answers.tenure === 'own') nextStep = 5; // skip age for owners (but still ask)
-    else nextStep = step + 1;
-    showStep(nextStep);
+  window.estNext = function(step) {
+    var n = step + 1;
+    if (step === 3 && answers.tenure === 'own') n = 5;
+    showStep(n);
   };
 
-  // ── Back step logic ───────────────────────────────────────
-  window.estBack = function (step) {
-    var prev;
-    if (step === 5 && answers.tenure === 'own') prev = 3;
-    else if (step === 6 && answers.tenure === 'rent') prev = 4;
-    else prev = step - 1;
-    showStep(prev);
+  window.estBack = function(step) {
+    var p = step - 1;
+    if (step === 5 && answers.tenure === 'own') p = 3;
+    if (step === 6 && answers.tenure === 'rent') p = 4;
+    showStep(p);
   };
 
-  // ── Submit + send lead ────────────────────────────────────
-  window.estSubmit = function () {
+  window.estSubmit = function() {
     var name    = (document.getElementById('est-name')    || {}).value || '';
     var email   = (document.getElementById('est-email')   || {}).value || '';
     var phone   = (document.getElementById('est-phone')   || {}).value || '';
     var address = (document.getElementById('est-address') || {}).value || '';
-    var reCheck = document.getElementById('est-re-interest');
-    var reInterested = reCheck ? reCheck.checked : false;
-
-    name    = name.trim();
-    email   = email.trim();
-    phone   = phone.trim();
-    address = address.trim();
-
-    if (!name || !email || !address) {
-      alert('Please fill in your name, email, and property address to continue.');
-      return;
-    }
-
-    // Compute benefit
-    var benefit = '';
-    if (answers.tenure === 'own') {
-      benefit = answers.income === 'low' ? '$1,500' : '$1,000';
-    } else {
-      benefit = answers.age === 'yes' ? '$700' : '$450';
-    }
-
-    var topic = 'ANCHOR Estimator — estimated benefit: ' + benefit;
-    if (reInterested) topic += ' — ALSO interested in ' + (answers.tenure === 'own' ? 'home valuation' : 'buying a home');
-
-    // Send via EmailJS
+    var reEl    = document.getElementById('est-re-interest');
+    var reInt   = reEl ? reEl.checked : false;
+    name = name.trim(); email = email.trim(); phone = phone.trim(); address = address.trim();
+    if (!name || !email || !address) { alert('Please fill in your name, email, and property address to continue.'); return; }
+    var benefit = answers.tenure === 'own' ? (answers.income === 'low' ? '$1,500' : '$1,000') : (answers.age === 'yes' ? '$700' : '$450');
+    var topic = 'ANCHOR Estimator ... est. benefit: ' + benefit;
+    if (reInt) topic += ' ... interested in ' + (answers.tenure === 'own' ? 'home valuation' : 'buying');
     if (typeof emailjs !== 'undefined') {
       emailjs.init({ publicKey: EJS_PUBLIC });
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
-        name:    name,
-        email:   email,
-        phone:   phone   || 'Not provided',
-        topic:   topic,
-        town:    address || 'Not provided',
+        name: name, email: email,
+        phone: phone || 'Not provided',
+        topic: topic,
+        town: address || 'Not provided',
         address: address || 'Not provided',
-        message: [
-          'ANCHOR Estimator Lead',
-          'Tenure: '      + (answers.tenure  || '—'),
-          'Primary res: ' + (answers.primary || '—'),
-          'Income: '      + (answers.income  || '—'),
-          'Age 65+: '     + (answers.age     || '—'),
-          'Taxes OK: '    + (answers.taxes   || '—'),
-          'Est. benefit: '+ benefit,
-          'RE interest: ' + (reInterested ? 'YES' : 'No')
-        ].join('\n')
-      }).then(function () {
-        console.log('ANCHOR lead sent to john@johnscafide.com');
-      }).catch(function (e) {
-        console.warn('EmailJS error:', e);
-      });
+        message: ['ANCHOR Estimator Lead','Tenure: ' + answers.tenure,'Primary: ' + answers.primary,'Income: ' + answers.income,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'RE interest: ' + (reInt ? 'YES' : 'No')].join('\n')
+      }).catch(function(e){ console.warn('EmailJS:', e); });
     }
-
-    // Show result
     showStep(7);
     updateProgress(7);
-    renderResult(benefit, reInterested, address, name);
+    renderResult(benefit, reInt, address);
   };
 
-  // ── Render result ─────────────────────────────────────────
-  function renderResult(benefit, reInterested, address, name) {
+  function renderResult(benefit, reInt, address) {
     var rc = document.getElementById('est-result-content');
     if (!rc) return;
-
-    // No qualify cases
-    if (answers.primary === 'no') {
-      rc.innerHTML = renderNoQualify(
-        "Doesn't Look Like It — But Let's Make Sure",
-        "Your property must have been your primary NJ residence on October 1 of the benefit year. Vacation homes and investment properties don't qualify.",
-        ['Primary residence on Oct 1 is required', 'Vacation and investment properties excluded', 'Sold after Oct 1? You may still qualify — call to confirm']
-      );
-      return;
-    }
-    if (answers.income === 'high') {
-      rc.innerHTML = renderNoQualify(
-        "Income Exceeds ANCHOR Limits",
-        "Unfortunately, income over $250,000 (homeowners) or $150,000 (renters) puts you above the ANCHOR program limits. You may still qualify for other programs.",
-        ['Homeowner limit: $250,000', 'Renter limit: $150,000', 'You may still qualify for a property tax appeal']
-      );
-      return;
-    }
-    if (answers.tenure === 'rent' && answers.income === 'mid') {
-      rc.innerHTML = renderNoQualify(
-        "That Income Bracket Is for Homeowners Only",
-        "The $150,001–$250,000 income range only applies to homeowners. Renters must have income under $150,000 to qualify.",
-        ['Renter income limit: $150,000', 'Under $150K? You qualify for up to $700', 'Own a home? Check with a homeowner status']
-      );
-      return;
-    }
-    if (answers.taxes === 'no' && answers.tenure === 'own') {
-      rc.innerHTML = renderTaxWarn();
-      return;
-    }
-
-    // Qualify!
+    if (answers.primary === 'no') { rc.innerHTML = renderNoQ("Doesn't Look Like It ... But Let's Make Sure","Your property must have been your primary NJ residence on October 1 of the benefit year.",['Primary residence on Oct 1 is required','Vacation and investment properties excluded','Sold after Oct 1? You may still qualify ... call to confirm']); return; }
+    if (answers.income === 'high') { rc.innerHTML = renderNoQ("Income Exceeds ANCHOR Limits","Income over $250,000 (homeowners) or $150,000 (renters) is above ANCHOR limits.",['Homeowner limit: $250,000','Renter limit: $150,000','You may still qualify for a property tax appeal']); return; }
+    if (answers.tenure === 'rent' && answers.income === 'mid') { rc.innerHTML = renderNoQ("That Income Bracket Is for Homeowners Only","The $150,001–$250,000 range only applies to homeowners. Renters must be under $150,000.",['Renter income limit: $150,000','Under $150K? You qualify for up to $700']); return; }
+    if (answers.taxes === 'no' && answers.tenure === 'own') { rc.innerHTML = '<div class="est-no-qualify"><div class="est-result-badge warn"><i class="fas fa-triangle-exclamation"></i>Possible Delinquency Issue</div><div class="est-no-qualify-title">May Need to Verify Tax Status</div><p>Homeowners more than 12 months delinquent may not qualify. Being on a payment plan is typically acceptable ... call to confirm your situation.</p><div class="est-result-actions"><a href="tel:18882381233" class="est-btn-apply"><i class="fas fa-phone"></i> Call 1-888-238-1233</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div></div>'; return; }
     var label = answers.tenure === 'own' ? 'Estimated ANCHOR Homeowner Benefit' : 'Estimated ANCHOR Renter Benefit';
-    var seniorNote = (answers.age === 'yes')
-      ? '<li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>As a senior 65+, apply using the PAS-1 form — it covers 3 programs at once</li>'
-      : '';
-
+    var snNote = answers.age === 'yes' ? '<li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>As a senior, apply using the PAS-1 form ... it covers 3 programs at once</li>' : '';
     var reBlock = '';
-    if (reInterested) {
-      var reTitle = answers.tenure === 'own'
-        ? "We'll send you a free home value estimate"
-        : "We'll reach out to walk you through buying in South Jersey";
-      var reBody = answers.tenure === 'own'
-        ? 'John Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth — no obligation.'
-        : 'John Scafide will follow up to walk you through the buying process in South Jersey — from what you can afford to which neighborhoods fit your needs. No cost, no pressure.';
-      reBlock = '<div class="est-re-result">'
-        + '<div class="est-re-result-title"><i class="fas fa-star"></i>' + reTitle + '</div>'
-        + '<p>' + reBody + '</p>'
-        + (address ? '<div style="font-size:13px;color:#1a3a6b;font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + address + '</div>' : '')
-        + '</div>';
+    if (reInt) {
+      var rTitle = answers.tenure === 'own' ? "We'll send you a free home value estimate" : "We'll walk you through buying in South Jersey";
+      var rBody  = answers.tenure === 'own' ? "John Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth ... no obligation." : "John Scafide will follow up to walk you through the buying process in South Jersey ... from affordability to neighborhoods. No cost, no pressure.";
+      reBlock = '<div class="est-re-result"><div class="est-re-result-title"><i class="fas fa-star"></i>' + rTitle + '</div><p>' + rBody + '</p>' + (address ? '<div style="font-size:13px;color:#1a3a6b;font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + address + '</div>' : '') + '</div>';
     }
-
     rc.innerHTML = '<div class="est-result-qualify">'
       + '<div class="est-result-badge"><i class="fas fa-circle-check"></i>You likely qualify for ANCHOR!</div>'
       + '<div class="est-result-amount">' + benefit + '</div>'
       + '<div class="est-result-label">' + label + '</div>'
-      + '<ul class="est-qualify-list">'
-      + '<li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Income is within program limits</li>'
-      + '<li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>This was your primary NJ residence on Oct 1</li>'
-      + seniorNote
-      + '</ul>'
-      + '<div class="est-result-note">This is an estimate only. Final eligibility is determined by the NJ Division of Taxation. '
-      + 'Apply at <a href="https://anchor.nj.gov" target="_blank">anchor.nj.gov</a> or call <strong>1-888-238-1233</strong>. '
-      + 'Seniors 65+: use the <a href="pas-1-guide.html">PAS-1 form</a> instead.</div>'
+      + '<ul class="est-qualify-list"><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Income is within program limits</li><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Primary NJ residence on Oct 1</li>' + snNote + '</ul>'
+      + '<div class="est-result-note">Estimate only. Final eligibility determined by NJ Division of Taxation. Apply at <a href="https://anchor.nj.gov" target="_blank">anchor.nj.gov</a> or call <strong>1-888-238-1233</strong>. Seniors 65+: use the <a href="pas-1-guide.html">PAS-1 form</a>.</div>'
       + reBlock
-      + renderUpsell()
-      + '<div class="est-result-actions">'
-      + '<a href="https://anchor.nj.gov" target="_blank" class="est-btn-apply"><i class="fas fa-arrow-up-right-from-square"></i> Apply at anchor.nj.gov</a>'
-      + '<button class="est-btn-reset" onclick="estReset()">Start Over</button>'
-      + '</div>'
+      + '<div class="est-upsell"><div class="est-upsell-top"><div class="est-upsell-new">Don\'t miss out</div><div class="est-upsell-headline">3 more programs you may qualify for</div></div><p>ANCHOR is just one piece. Get the complete guide package and make sure you collect every dollar.</p><div class="est-upsell-guides"><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Property Tax Relief Master Guide</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>PAS-1 Complete Walkthrough</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>Property Tax Appeal Prep Kit</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Senior Benefits Checklist</div></div><a href="' + STRIPE_LINK + '" target="_blank" class="est-upsell-cta"><i class="fas fa-download"></i>Get All 4 Guides ... $5</a><span style="font-size:12px;color:#8aaac8;margin-left:12px;">Instant PDF · 33 pages</span></div>'
+      + '<div class="est-result-actions"><a href="https://anchor.nj.gov" target="_blank" class="est-btn-apply"><i class="fas fa-arrow-up-right-from-square"></i> Apply at anchor.nj.gov</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div>'
       + '</div>';
   }
 
-  function renderNoQualify(title, body, points) {
-    var items = points.map(function (p) {
-      return '<li><div class="est-x"><i class="fas fa-xmark" style="font-size:9px;"></i></div>' + p + '</li>';
-    }).join('');
-    return '<div class="est-no-qualify">'
-      + '<div class="est-result-badge no"><i class="fas fa-circle-xmark"></i>May Not Qualify</div>'
-      + '<div class="est-no-qualify-title">' + title + '</div>'
-      + '<p>' + body + '</p>'
-      + '<ul class="est-no-qualify-list">' + items + '</ul>'
-      + '<p style="font-size:13px;color:#5a6070;">Not sure? Call the ANCHOR hotline: <strong>1-888-238-1233</strong><br>Or <a href="index.html#contact" style="color:#1a3a6b;font-weight:600;">ask John directly</a> — free, no pressure.</p>'
-      + '<div class="est-result-actions">'
-      + '<a href="tel:18882381233" class="est-btn-apply"><i class="fas fa-phone"></i> Call 1-888-238-1233</a>'
-      + '<button class="est-btn-reset" onclick="estReset()">Start Over</button>'
-      + '</div>'
-      + '</div>';
+  function renderNoQ(title, body, points) {
+    var items = points.map(function(p){ return '<li><div class="est-x"><i class="fas fa-xmark" style="font-size:9px;"></i></div>' + p + '</li>'; }).join('');
+    return '<div class="est-no-qualify"><div class="est-result-badge no"><i class="fas fa-circle-xmark"></i>May Not Qualify</div><div class="est-no-qualify-title">' + title + '</div><p>' + body + '</p><ul class="est-no-qualify-list">' + items + '</ul><p style="font-size:13px;color:#5a6070;">Not sure? Call <strong>1-888-238-1233</strong> or <a href="index.html#contact" style="color:#1a3a6b;font-weight:600;">ask John directly</a>.</p><div class="est-result-actions"><a href="tel:18882381233" class="est-btn-apply"><i class="fas fa-phone"></i> Call 1-888-238-1233</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div></div>';
   }
 
-  function renderTaxWarn() {
-    return '<div class="est-no-qualify">'
-      + '<div class="est-result-badge warn"><i class="fas fa-triangle-exclamation"></i>Possible Delinquency Issue</div>'
-      + '<div class="est-no-qualify-title">May Need to Verify Tax Status</div>'
-      + '<p>Homeowners more than 12 months delinquent may not qualify. Being on a payment plan is typically acceptable — call to confirm your specific situation before applying.</p>'
-      + '<div class="est-result-actions">'
-      + '<a href="tel:18882381233" class="est-btn-apply"><i class="fas fa-phone"></i> Call 1-888-238-1233</a>'
-      + '<button class="est-btn-reset" onclick="estReset()">Start Over</button>'
-      + '</div>'
-      + '</div>';
-  }
-
-  function renderUpsell() {
-    return '<div class="est-upsell">'
-      + '<div class="est-upsell-top"><div class="est-upsell-new">Don\'t miss out</div><div class="est-upsell-headline">3 more programs you may qualify for</div></div>'
-      + '<p>ANCHOR is just one piece. Get the complete guide package and make sure you collect every dollar available to you.</p>'
-      + '<div class="est-upsell-guides">'
-      + '<div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Property Tax Relief Master Guide</div>'
-      + '<div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>PAS-1 Complete Walkthrough</div>'
-      + '<div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>Property Tax Appeal Prep Kit</div>'
-      + '<div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Senior Benefits Checklist</div>'
-      + '</div>'
-      + '<a href="' + STRIPE_LINK + '" target="_blank" class="est-upsell-cta"><i class="fas fa-download"></i>Get All 4 Guides — $5</a>'
-      + '<span style="font-size:12px;color:#8aaac8;margin-left:12px;">Instant PDF · 33 pages</span>'
-      + '</div>';
-  }
-
-  // ── Reset ─────────────────────────────────────────────────
-  window.estReset = function () {
+  window.estReset = function() {
     answers = {};
-    document.querySelectorAll('.est-choice').forEach(function (b) {
-      b.classList.remove('selected');
-    });
-    document.querySelectorAll('.est-btn-next').forEach(function (b) {
-      b.disabled = true;
-    });
-    ['est-name','est-email','est-phone','est-address'].forEach(function (id) {
-      var el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    var rc = document.getElementById('est-re-interest');
-    if (rc) rc.checked = false;
-    var midBtn = document.getElementById('est-mid-btn');
-    if (midBtn) { midBtn.style.opacity = '1'; midBtn.style.pointerEvents = 'auto'; }
+    document.querySelectorAll('.est-choice').forEach(function(b){ b.classList.remove('selected'); });
+    document.querySelectorAll('.est-btn-next').forEach(function(b){ b.disabled = true; });
+    ['est-name','est-email','est-phone','est-address'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
+    var ri = document.getElementById('est-re-interest'); if(ri) ri.checked = false;
+    var mid = document.getElementById('est-mid-btn'); if(mid){ mid.style.opacity='1'; mid.style.pointerEvents='auto'; }
     showStep(1);
   };
 
-  // Init
   updateProgress(1);
+
+  // ── STAY NJ CALCULATOR ────────────────────────────────────
+  window.calcStayNJPage = function() {
+    var taxVal    = parseFloat((document.getElementById('sn-tax')    || {}).value || 0);
+    var incomeVal = parseFloat((document.getElementById('sn-income') || {}).value || 0);
+    var result    = document.getElementById('sn-result');
+    var empty     = document.getElementById('sn-empty');
+    var ineligEl  = document.getElementById('sn-ineligible');
+    var eligEl    = document.getElementById('sn-eligible-block');
+
+    if (!taxVal || !incomeVal) {
+      if (result) result.classList.remove('visible');
+      if (empty)  empty.style.display = 'block';
+      return;
+    }
+    if (empty)  empty.style.display = 'none';
+    if (result) result.classList.add('visible');
+
+    if (incomeVal > 500000) {
+      if (ineligEl) ineligEl.style.display = 'block';
+      if (eligEl)   eligEl.style.display   = 'none';
+      return;
+    }
+    if (ineligEl) ineligEl.style.display = 'none';
+    if (eligEl)   eligEl.style.display   = 'block';
+
+    var credit    = Math.min(taxVal * 0.5, 6500);
+    var quarterly = Math.round(credit / 4);
+    var remain    = Math.max(taxVal - credit, 0);
+    var pct       = Math.min((credit / taxVal) * 100, 100);
+
+    function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
+
+    var annEl = document.getElementById('sn-annual');    if (annEl)  annEl.textContent  = fmt(credit);
+    var qEl   = document.getElementById('sn-quarterly'); if (qEl)    qEl.textContent    = fmt(quarterly);
+    var remEl = document.getElementById('sn-remain');    if (remEl)  remEl.textContent  = fmt(remain);
+    var barEl = document.getElementById('sn-bar');       if (barEl)  barEl.style.width  = pct.toFixed(1) + '%';
+    var bcEl  = document.getElementById('sn-bar-credit-label'); if (bcEl) bcEl.textContent = 'Credit: ' + fmt(credit);
+    var brEl  = document.getElementById('sn-bar-remain-label'); if (brEl) brEl.textContent = 'Remaining: ' + fmt(remain);
+  };
+
+  // Stay NJ lead
+  window.snSendLead = function() {
+    var name    = (document.getElementById('sn-name')    || {}).value || '';
+    var email   = (document.getElementById('sn-email')   || {}).value || '';
+    var phone   = (document.getElementById('sn-phone')   || {}).value || '';
+    var address = (document.getElementById('sn-address') || {}).value || '';
+    var taxVal  = (document.getElementById('sn-tax')     || {}).value || '';
+    var inc     = (document.getElementById('sn-income')  || {}).value || '';
+    name = name.trim(); email = email.trim();
+    if (!name || !email) { alert('Please enter your name and email.'); return; }
+    var credit = Math.min(parseFloat(taxVal) * 0.5, 6500);
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: EJS_PUBLIC });
+      emailjs.send(EJS_SERVICE, EJS_TMPL, {
+        name: name, email: email,
+        phone: phone || 'Not provided',
+        topic: 'Stay NJ Calculator Lead ... est. credit: $' + Math.round(credit).toLocaleString(),
+        town: address || 'Not provided',
+        address: address || 'Not provided',
+        message: ['Stay NJ Calculator Lead','Annual tax: $' + taxVal,'Household income: $' + inc,'Est. credit: $' + Math.round(credit).toLocaleString(),'PAS-1 help requested: YES'].join('\n')
+      }).catch(function(e){ console.warn('EmailJS:', e); });
+    }
+    var form = document.getElementById('sn-lead-form');
+    var sent = document.getElementById('sn-lead-sent');
+    if (form) form.style.display = 'none';
+    if (sent) sent.classList.add('visible');
+  };
 
 })();
 </script>
