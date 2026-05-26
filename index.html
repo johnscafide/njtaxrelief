@@ -39,12 +39,248 @@
   <!-- Microsoft Clarity -->
   <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
 
-  <script type="application/ld+json">
-  {"@type":"Person","name":"John Scafide","jobTitle":"Licensed Real Estate Agent & Tax Professional","description":"Expert in New Jersey property tax relief programs including ANCHOR, Stay NJ, and Senior Freeze. Licensed Realtor with 15+ years of tax preparation experience.","sameAs":["https://www.tiktok.com/@thetaxwatchdog","https://johnscafide.opuselitesj.com/"],"knowsAbout":["New Jersey Property Tax","ANCHOR Program","Stay NJ Act","Tax Assessment Appeals","NJ Senior Freeze"],"hasCredential":{"@type":"EducationalOccupationalCredential","name":"New Jersey Real Estate License","credentialCategory":"Professional License","identifier":"2079591"}}
-  </script>
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://njpropertytaxrelief.com/#website","url":"https://njpropertytaxrelief.com/","name":"NJ Property Tax Relief Guide","description":"Complete guide to New Jersey property tax relief programs including ANCHOR, Stay NJ, Senior Freeze, and PAS-1 filing assistance for South Jersey residents.","publisher":{"@id":"https://njpropertytaxrelief.com/#organization"},"potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://njpropertytaxrelief.com/?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":"LocalBusiness","@id":"https://njpropertytaxrelief.com/#organization","name":"NJ Property Tax Relief Guide | John Scafide","description":"South Jersey licensed real estate agent and 15+ year tax professional specializing in NJ property tax relief programs.","url":"https://njpropertytaxrelief.com/","telephone":"856-310-6746","address":{"@type":"PostalAddress","addressRegion":"NJ","addressCountry":"US","addressLocality":"South Jersey"},"areaServed":["Camden County, NJ","Gloucester County, NJ","Burlington County, NJ","South Jersey, NJ","New Jersey"],"sameAs":["https://www.tiktok.com/@thetaxwatchdog"],"hasOfferCatalog":{"@type":"OfferCatalog","name":"Services","itemListElement":[{"@type":"Offer","name":"PAS-1 Filing Assistance","price":"20.00","priceCurrency":"USD","url":"https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief"},{"@type":"Offer","name":"Free Property Tax Appeal Comp Report","price":"0","priceCurrency":"USD"},{"@type":"Offer","name":"Free Real Estate Consultation","price":"0","priceCurrency":"USD"}]}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the NJ ANCHOR program?","acceptedAnswer":{"@type":"Answer","text":"ANCHOR (Affordable NJ Communities for Homeowners and Renters) replaced the Homestead Benefit. Homeowners with income up to $150,000 receive $1,500. Homeowners $150,001-$250,000 receive $1,000. Renters up to $150,000 receive $450. Renters 65+ receive $700. Apply at anchor.nj.gov."}},{"@type":"Question","name":"What is the Stay NJ program?","acceptedAnswer":{"@type":"Answer","text":"Stay NJ provides a credit equal to 50% of your annual NJ property tax bill, up to $6,500, for homeowners age 65 or older with income up to $500,000. Payments are quarterly starting February 2026. Apply via the PAS-1 form."}},{"@type":"Question","name":"Who uses the PAS-1 form?","acceptedAnswer":{"@type":"Answer","text":"Seniors 65 or older and homeowners receiving Social Security Disability or Railroad Retirement disability benefits use the PAS-1. It covers ANCHOR, Stay NJ, and Senior Freeze in one application. Deadline: November 2, 2026."}},{"@type":"Question","name":"Can I get help filling out my PAS-1?","acceptedAnswer":{"@type":"Answer","text":"Yes. John Scafide, a licensed NJ real estate agent and 15+ year tax professional, provides PAS-1 filing assistance for a $20 flat fee. Book at njpropertytaxrelief.com. Accepts Venmo, Zelle, credit, debit, and cash."}}]}]}
-  </script>
+  <!--
+================================================================
+SCHEMA UPGRADE — index.html
+================================================================
+INSTRUCTIONS:
+1. Find the two existing <script type="application/ld+json"> blocks
+   in your index.html <head> section (lines ~42-47).
+2. Delete BOTH of them entirely.
+3. Paste this entire block in their place.
+================================================================
+-->
+
+<!-- Person schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "https://njpropertytaxrelief.com/#john-scafide",
+  "name": "John Scafide",
+  "jobTitle": "Licensed Real Estate Agent & Tax Professional",
+  "description": "South Jersey licensed real estate agent and 15+ year tax professional specializing in NJ property tax relief programs including ANCHOR, Stay NJ, Senior Freeze, and PAS-1 filing.",
+  "url": "https://njpropertytaxrelief.com",
+  "telephone": "856-404-1098",
+  "email": "john@johnscafide.com",
+  "sameAs": [
+    "https://www.tiktok.com/@thetaxwatchdog",
+    "https://johnscafide.opuselitesj.com/",
+    "https://www.linkedin.com/in/johnscafide/"
+  ],
+  "knowsAbout": [
+    "New Jersey Property Tax Relief",
+    "ANCHOR Program",
+    "Stay NJ Act",
+    "Senior Freeze PTR",
+    "PAS-1 Combined Application",
+    "Property Tax Assessment Appeals",
+    "NJ Real Estate",
+    "Tax Preparation"
+  ],
+  "hasCredential": [
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "New Jersey Real Estate License",
+      "credentialCategory": "Professional License",
+      "identifier": "2079591"
+    },
+    {
+      "@type": "EducationalOccupationalCredential",
+      "name": "H&R Block Tax Professional Level I",
+      "credentialCategory": "Professional Certification"
+    }
+  ],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Opus Elite Real Estate — The McKenty Team",
+    "url": "https://johnscafide.opuselitesj.com/"
+  }
+}
+</script>
+
+<!-- WebSite + LocalBusiness + AggregateRating + FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://njpropertytaxrelief.com/#website",
+      "url": "https://njpropertytaxrelief.com/",
+      "name": "NJ Property Tax Relief Guide",
+      "description": "Complete guide to New Jersey property tax relief programs including ANCHOR, Stay NJ, Senior Freeze, and PAS-1 filing assistance for South Jersey residents.",
+      "publisher": { "@id": "https://njpropertytaxrelief.com/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://njpropertytaxrelief.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://njpropertytaxrelief.com/#organization",
+      "name": "NJ Property Tax Relief Guide | John Scafide",
+      "description": "South Jersey licensed real estate agent and 15+ year tax professional specializing in NJ property tax relief. Free ANCHOR eligibility calculator, PAS-1 filing help ($20), and property tax appeal comps.",
+      "url": "https://njpropertytaxrelief.com/",
+      "telephone": "856-404-1098",
+      "email": "john@johnscafide.com",
+      "priceRange": "$–$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "NJ",
+        "addressCountry": "US",
+        "addressLocality": "South Jersey"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 39.7,
+        "longitude": -75.1
+      },
+      "areaServed": [
+        "Camden County, NJ",
+        "Gloucester County, NJ",
+        "Burlington County, NJ",
+        "Salem County, NJ",
+        "South Jersey, NJ",
+        "New Jersey"
+      ],
+      "sameAs": ["https://www.tiktok.com/@thetaxwatchdog"],
+      "founder": { "@id": "https://njpropertytaxrelief.com/#john-scafide" },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "3",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Brittany R." },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "John Scafide has done my taxes for two years now, and I truly wouldn't go anywhere else. He is professional, knowledgeable, and extremely thorough every single time.",
+          "datePublished": "2025-01-01"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Dolores S." },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "John's interpersonal skills were excellent. He made us feel very comfortable while doing our taxes. But more important he was very knowledgeable!",
+          "datePublished": "2025-01-01"
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Jenny K." },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "reviewBody": "John Scafide was awesome! He made filing taxes super easy and even explained to make sure we understood what was happening.",
+          "datePublished": "2025-01-01"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "PAS-1 Filing Assistance",
+            "description": "Step-by-step PAS-1 filing help for NJ seniors. Covers ANCHOR, Stay NJ, and Senior Freeze in one session.",
+            "price": "20.00",
+            "priceCurrency": "USD",
+            "url": "https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief"
+          },
+          {
+            "@type": "Offer",
+            "name": "Free Property Tax Appeal Comp Report",
+            "description": "Free MLS comparable sales report to support your property tax assessment appeal.",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          {
+            "@type": "Offer",
+            "name": "Free Real Estate Consultation",
+            "description": "Free home valuation, buying, or selling consultation from a licensed NJ Realtor.",
+            "price": "0",
+            "priceCurrency": "USD"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much is the New Jersey ANCHOR benefit in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For the 2026 application year, NJ ANCHOR pays homeowners with income up to $150,000 a benefit of $1,500. Homeowners earning $150,001 to $250,000 receive $1,000. Renters with income up to $150,000 receive $450, or $700 if age 65 or older. Benefits are paid as a direct cash payment, not a credit on your tax bill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who gets $1,500 from the state of New Jersey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "New Jersey homeowners who owned and occupied their home as their primary residence on October 1 of the benefit year, and whose gross income is $150,000 or less, receive a $1,500 ANCHOR benefit. Homeowners earning between $150,001 and $250,000 receive $1,000. The payment comes directly from the NJ Division of Taxation as a check or direct deposit."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When will NJ ANCHOR payments be sent out in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ANCHOR payments are typically processed within 90 days of a complete application. For non-seniors under 65, the NJ Division of Taxation mails Benefit Confirmation Letters starting in August 2026. Seniors 65 and older must file the PAS-1 form by November 2, 2026 and receive their payments after processing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I check the status of my NJ ANCHOR rebate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To check your NJ ANCHOR rebate status, visit anchor.nj.gov and use the online status tool, or call the ANCHOR hotline at 1-888-238-1233 (Monday through Friday, 8:30 AM to 5:30 PM). You will need your Social Security Number and the PIN from your Benefit Confirmation Letter. Seniors who filed the PAS-1 can also check at propertytaxrelief.nj.gov."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Stay NJ program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Stay NJ is a New Jersey property tax relief program for homeowners age 65 or older with household income at or below $500,000. It provides a credit equal to 50% of your annual property tax bill, up to $6,500 per year, paid in quarterly installments in February, May, August, and November. Apply using the PAS-1 combined form by November 2, 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who uses the PAS-1 form?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Seniors age 65 or older and homeowners receiving Social Security Disability or Railroad Retirement disability benefits use the PAS-1 combined application. It covers ANCHOR, Stay NJ, and Senior Freeze in one form, filed at propertytaxrelief.nj.gov. The 2026 deadline is November 2, 2026. Everyone else under 65 uses the ANC-1 form at anchor.nj.gov."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can renters get property tax relief in New Jersey?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. New Jersey renters qualify for ANCHOR benefits. Renters with income up to $150,000 who rented their primary NJ residence on October 1 of the benefit year receive $450. Renters age 65 or older receive $700. Apply at anchor.nj.gov. Section 8 and federally subsidized housing tenants generally do not qualify."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get help filling out my NJ PAS-1?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. John Scafide, a licensed NJ real estate agent and 15+ year tax professional based in South Jersey, provides PAS-1 filing assistance for a $20 flat fee. He walks you through every line of the form and submits it before the November 2, 2026 deadline. Book at njpropertytaxrelief.com. Accepts Venmo, Zelle, credit card, debit, and cash."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 
   <style>
   /* ============================================================
