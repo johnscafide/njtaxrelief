@@ -29,26 +29,149 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "NJ ANCHOR Program 2025-2026 — Complete Guide",
-  "url": "https://njpropertytaxrelief.com/anchor-program.html",
-  "description": "Complete guide to the New Jersey ANCHOR program (Affordable NJ Communities for Homeowners and Renters). Includes benefit amounts, eligibility requirements, how to apply, and a free eligibility calculator.",
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://njpropertytaxrelief.com/"},
-      {"@type":"ListItem","position":2,"name":"ANCHOR Program","item":"https://njpropertytaxrelief.com/anchor-program.html"}
-    ]
-  },
-  "mainEntity": {
-    "@type": "GovernmentService",
-    "name": "ANCHOR Program — Affordable NJ Communities for Homeowners and Renters",
-    "description": "New Jersey state program providing direct cash benefits to eligible homeowners and renters. Replaced the Homestead Benefit program in 2022.",
-    "provider": {"@type":"GovernmentOrganization","name":"New Jersey Division of Taxation"},
-    "serviceType": "Property Tax Relief",
-    "areaServed": "New Jersey",
-    "url": "https://anchor.nj.gov"
-  }
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://njpropertytaxrelief.com/anchor-program.html#article",
+      "headline": "NJ ANCHOR Program 2025–2026: Complete Eligibility & Application Guide",
+      "description": "Complete guide to the NJ ANCHOR program. Homeowners receive up to $1,500. Renters receive up to $700. Find out if you qualify, how much you get, and how to apply.",
+      "url": "https://njpropertytaxrelief.com/anchor-program.html",
+      "datePublished": "2024-01-01",
+      "dateModified": "2026-05-01",
+      "author": { "@id": "https://njpropertytaxrelief.com/#john-scafide" },
+      "publisher": { "@id": "https://njpropertytaxrelief.com/#organization" },
+      "mainEntityOfPage": "https://njpropertytaxrelief.com/anchor-program.html",
+      "about": {
+        "@type": "GovernmentService",
+        "name": "ANCHOR Program — Affordable NJ Communities for Homeowners and Renters",
+        "description": "New Jersey state program providing direct cash benefits to eligible homeowners and renters. Replaced the Homestead Benefit program.",
+        "provider": {
+          "@type": "GovernmentOrganization",
+          "name": "New Jersey Division of Taxation"
+        },
+        "serviceType": "Property Tax Relief",
+        "areaServed": "New Jersey",
+        "url": "https://anchor.nj.gov"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://njpropertytaxrelief.com/" },
+        { "@type": "ListItem", "position": 2, "name": "ANCHOR Program", "item": "https://njpropertytaxrelief.com/anchor-program.html" }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Apply for the NJ ANCHOR Program",
+      "description": "Step-by-step instructions for applying for the New Jersey ANCHOR property tax relief benefit.",
+      "url": "https://njpropertytaxrelief.com/anchor-program.html#application",
+      "totalTime": "PT30M",
+      "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+      "supply": [
+        { "@type": "HowToSupply", "name": "Social Security Number" },
+        { "@type": "HowToSupply", "name": "NJ property block and lot number (from your tax bill)" },
+        { "@type": "HowToSupply", "name": "Gross income for the benefit year (all sources)" },
+        { "@type": "HowToSupply", "name": "Landlord name and address (renters only)" },
+        { "@type": "HowToSupply", "name": "Bank routing and account numbers for direct deposit" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Gather Your Information",
+          "text": "Collect your Social Security Number, NJ property block and lot number from your tax bill, and your gross income for the benefit year from all sources including wages, Social Security, retirement, and investments. Renters also need their landlord's name and address."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Choose Your Application Method",
+          "text": "Apply online at anchor.nj.gov (fastest), by phone at 1-888-238-1233, or by mailing the paper ANC-1 form. Seniors age 65 or older must use the PAS-1 combined form at propertytaxrelief.nj.gov instead of the ANC-1."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Enter Direct Deposit Information",
+          "text": "Provide your bank routing number and account number to receive your payment significantly faster than a paper check. Direct deposit is the recommended payment method."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Submit and Save Your Confirmation Number",
+          "text": "Submit your application and save the confirmation number you receive. The State will also send a confirmation letter by mail. Processing typically takes up to 90 days from a complete application."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "I never got the Homestead Benefit. Can I still get ANCHOR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. ANCHOR and the old Homestead Benefit are completely separate programs. No prior Homestead history is required. If you meet the income and residency requirements for ANCHOR, you can apply — your Homestead history is irrelevant."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I sold my home this year. Can I still get the ANCHOR benefit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, if you owned and occupied the home as your primary NJ residence on October 1 of the benefit year, you may still qualify even if you sold the home after that date. The October 1 residency date is what determines eligibility, not your current living situation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is ANCHOR a check or a credit on my property tax bill?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ANCHOR is a real cash payment — either a direct deposit to your bank account or a physical check mailed to you. It is NOT applied as a credit to your property tax bill. You receive money you can use for anything."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the benefit year for the NJ ANCHOR program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "There is always a lag with ANCHOR. When you apply, you are claiming benefits for a prior tax year called the benefit year. For example, applications open in 2025 or 2026 may cover the 2023 or 2024 benefit year. Always check which benefit year the current application period covers at anchor.nj.gov."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "My income was over the ANCHOR limit one year. Do I lose it forever?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Each benefit year is evaluated independently. If your income was over the limit in one year but drops into the qualifying range in a future year, you can apply and receive benefits for that future year. There is no permanent disqualification based on prior years."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "I live in a co-op. Do I qualify for ANCHOR?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Possibly. Co-op owners who pay maintenance fees that include a property tax component may qualify under the homeowner track. The key question is whether your unit is assessed and taxed as real property. Call the ANCHOR hotline at 1-888-238-1233 to confirm your specific situation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get ANCHOR and Stay NJ at the same time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Seniors 65 or older can receive ANCHOR, Stay NJ, and Senior Freeze simultaneously by filing a single PAS-1 combined application at propertytaxrelief.nj.gov. The PAS-1 handles all three programs in one form. The deadline is November 2, 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I check my ANCHOR application status?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Check your NJ ANCHOR application status at anchor.nj.gov using the online status tool, or call 1-888-238-1233 Monday through Friday 8:30 AM to 5:30 PM. Have your Social Security Number and PIN from your Benefit Confirmation Letter ready. Processing typically takes up to 90 days from submission."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
