@@ -27,17 +27,165 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "NJ PAS-1 Application Guide 2025-2026",
-  "url": "https://njpropertytaxrelief.com/pas-1-guide.html",
-  "description": "Step-by-step guide to completing the 2025 NJ PAS-1 combined property tax relief application for seniors 65+ and disabled homeowners. Covers ANCHOR, Stay NJ, and Senior Freeze in one form.",
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://njpropertytaxrelief.com/"},
-      {"@type":"ListItem","position":2,"name":"PAS-1 Guide","item":"https://njpropertytaxrelief.com/pas-1-guide.html"}
-    ]
-  }
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://njpropertytaxrelief.com/pas-1-guide.html#article",
+      "headline": "How to Fill Out the 2025 NJ PAS-1 Application — Complete Step-by-Step Guide",
+      "description": "Complete step-by-step guide to the 2025 NJ PAS-1 combined property tax relief application. Covers ANCHOR, Stay NJ, and Senior Freeze in one form. Deadline November 2, 2026.",
+      "url": "https://njpropertytaxrelief.com/pas-1-guide.html",
+      "datePublished": "2025-01-01",
+      "dateModified": "2026-05-01",
+      "author": { "@id": "https://njpropertytaxrelief.com/#john-scafide" },
+      "publisher": { "@id": "https://njpropertytaxrelief.com/#organization" },
+      "mainEntityOfPage": "https://njpropertytaxrelief.com/pas-1-guide.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://njpropertytaxrelief.com/" },
+        { "@type": "ListItem", "position": 2, "name": "PAS-1 Filing Guide", "item": "https://njpropertytaxrelief.com/pas-1-guide.html" }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "name": "How to Fill Out the 2025 NJ PAS-1 Combined Application",
+      "description": "Step-by-step instructions for completing the New Jersey PAS-1 combined property tax relief application, which covers ANCHOR, Stay NJ, and Senior Freeze in one form.",
+      "url": "https://njpropertytaxrelief.com/pas-1-guide.html",
+      "totalTime": "PT45M",
+      "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+      "supply": [
+        { "@type": "HowToSupply", "name": "Social Security Number (yours and spouse's if filing jointly)" },
+        { "@type": "HowToSupply", "name": "NJ block and lot number from your property tax bill" },
+        { "@type": "HowToSupply", "name": "2025 NJ-1040 state tax return (Line 27 for NJ gross income)" },
+        { "@type": "HowToSupply", "name": "2025 property tax bills (all four quarters)" },
+        { "@type": "HowToSupply", "name": "2024 property tax bills (for Senior Freeze calculation)" }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Personal Information",
+          "text": "Fill in your full legal name, Social Security Number, and date of birth exactly as they appear on your NJ tax return. Include your spouse or civil union partner's information if filing jointly. Enter your property address and your block and lot number from your property tax bill."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Line 1 — Filing Status",
+          "text": "Fill in the oval matching how you filed your NJ-1040 for 2025. Choose only one: Single, Married/CU Filing Jointly, Married/CU Filing Separately, Head of Household, or Qualifying Widow(er). This must match your state tax return exactly."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Line 2 — Year of Birth",
+          "text": "Enter your four-digit birth year. You must be age 65 or older by December 31, 2025, or be receiving federal Social Security Disability or Railroad Retirement disability benefits to use the PAS-1. If under 65, stop and use the ANC-1 form at anchor.nj.gov instead."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 4,
+          "name": "Lines 3a & 3b — Disability Status",
+          "text": "Complete only if you are under 65. Line 3a asks if you received federal Social Security disability benefits on December 31, 2025. Line 3b asks about Railroad Retirement disability benefits. If you are 65 or older, skip these lines entirely."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 5,
+          "name": "Line 4 — Principal Residence",
+          "text": "Answer whether you owned and occupied this property as your principal NJ residence on October 1, 2025. If Yes, continue. If No, you are not eligible — stop here. Life estates, trust-owned properties, and mobile homes may qualify."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 6,
+          "name": "Line 14 — 2025 Property Tax Amount",
+          "text": "Enter your total property taxes billed for 2025. Add all four quarterly tax bills for the full annual total. Returning Senior Freeze filers may have their base year amount pre-printed — do not change it."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 7,
+          "name": "Line 15 — 2024 Property Tax Amount",
+          "text": "Enter the total property taxes billed for 2024. The Senior Freeze program calculates your reimbursement using the difference between your current year taxes and your base year amount. Pull your 2024 quarterly tax bills or check your municipality's website."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 8,
+          "name": "Line 16 — PILOT Agreement",
+          "text": "Most homeowners answer No. If you have a Payment In Lieu of Taxes agreement (common in certain redevelopment zones), answer Yes and enter your 2025 PILOT payment on Line 16b."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 9,
+          "name": "Worksheet A — Income Calculation",
+          "text": "Calculate your total income for eligibility. Line a is your NJ gross income from Line 27 of your 2025 NJ-1040. Add back any tax-exempt interest income and other required adjustments. The total determines your eligibility tier for ANCHOR (up to $250,000), Senior Freeze (up to $172,475), and Stay NJ (up to $500,000)."
+        },
+        {
+          "@type": "HowToStep",
+          "position": 10,
+          "name": "Sign, Date & Submit",
+          "text": "Sign and date the application. Both spouses must sign if filing jointly. No proof of property taxes is required. File online at propertytaxrelief.nj.gov (requires ID.me verification) or mail to PO Box 635, Trenton NJ 08646-0635 for homeowners. The deadline is November 2, 2026."
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the PAS-1 form and who needs to fill it out?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The PAS-1 is New Jersey's combined property tax relief application for seniors age 65 or older and homeowners receiving Social Security Disability or Railroad Retirement disability benefits. It covers three programs in one form: ANCHOR (up to $1,500), Stay NJ (up to $6,500), and Senior Freeze (tax increase reimbursement). The deadline is November 2, 2026. Everyone else under 65 uses the ANC-1 form at anchor.nj.gov."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the deadline to file the NJ PAS-1 in 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 2026 NJ PAS-1 filing deadline is November 2, 2026. File online at propertytaxrelief.nj.gov or by mail. Late applications are generally not accepted. If you need help filing, South Jersey tax professional John Scafide offers PAS-1 filing assistance for a $20 flat fee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What documents do I need to fill out the PAS-1?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To complete the NJ PAS-1 you need: your Social Security Number and your spouse's if filing jointly; your property block and lot number from your tax bill; your 2025 NJ-1040 state tax return for Line 27 gross income; all four quarterly property tax bills for 2025; and your 2024 property tax bills for the Senior Freeze calculation. No proof of taxes paid is required as of the new combined form."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between the PAS-1 and ANC-1 forms?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The PAS-1 is for seniors age 65 or older and disabled homeowners. It covers ANCHOR, Stay NJ, and Senior Freeze in one form. The ANC-1 is for everyone else under 65 and only covers ANCHOR. Filing the wrong form can delay your benefits. If you are 65 or older, always use the PAS-1 at propertytaxrelief.nj.gov."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where do I send the NJ PAS-1 application?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "File the NJ PAS-1 online at propertytaxrelief.nj.gov (requires an ID.me account), or mail it to: Homeowners — PO Box 635, Trenton NJ 08646-0635. Renters — PO Box 636, Trenton NJ 08646-0636. The online filing option is faster and recommended. The deadline for both methods is November 2, 2026."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the PAS-1 cover Stay NJ and Senior Freeze too?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The PAS-1 is a combined application that evaluates you for ANCHOR (up to $1,500), Stay NJ (50% of your tax bill, up to $6,500 per year), and Senior Freeze (reimbursement of any tax increase above your base year) all at once. You do not need to apply for each program separately."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get help filling out my NJ PAS-1 form?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. John Scafide, a South Jersey licensed real estate agent and 15+ year tax professional, offers PAS-1 filing assistance for a $20 flat fee. He walks you through every line of the form and submits it before the November 2, 2026 deadline. Book at njpropertytaxrelief.com. Payment accepted via Venmo, Zelle, credit card, debit card, or cash."
+          }
+        }
+      ]
+    }
+  ]
 }
 </script>
 </head>
