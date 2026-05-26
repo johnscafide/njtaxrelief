@@ -483,196 +483,206 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     COMBINED CALCULATOR (ANCHOR + STAY NJ)
-═══════════════════════════════════════════════════════════════ -->
+<!--
+=================================================================
+CALCULATOR SECTION
+=================================================================
+-->
+
 <section class="section" id="calc">
   <div class="section-inner">
+
     <div class="section-label">Eligibility Calculators</div>
     <h2 class="section-title">Check What You're Owed</h2>
-    <p class="section-subtitle">Use the ANCHOR estimator to check your benefit in 90 seconds, or the Stay NJ calculator (age 65+) to see your quarterly credit.</p>
+    <p class="section-subtitle">Two free tools — the ANCHOR estimator for all homeowners and renters, and the Stay NJ calculator for seniors 65+. Takes about 90 seconds.</p>
 
-    <div class="calc-combined-wrap">
-      <!-- Tab buttons -->
-      <div class="calc-tabs-row">
-        <button class="calc-tab-btn active" id="tab-anchor" onclick="switchCalcTab('anchor')">
-          <i class="fas fa-calculator" style="margin-right:8px;"></i>ANCHOR Benefit Estimator
-        </button>
-        <button class="calc-tab-btn" id="tab-staynj" onclick="switchCalcTab('staynj')">
-          <i class="fas fa-leaf" style="margin-right:8px;"></i>Stay NJ Credit Calculator <span style="font-size:12px;font-weight:400;color:var(--text-muted);">(Age 65+)</span>
-        </button>
-      </div>
+    <div class="calc-cta-split">
 
-      <!-- ── ANCHOR PANEL ── -->
-      <div class="calc-tab-panel active" id="panel-anchor">
-        <div class="calc-wrap" style="border:none;border-radius:0;box-shadow:none;">
-          <div class="calc-header" style="border-radius:0;">
-            <h3><i class="fas fa-calculator" style="margin-right:10px;"></i>ANCHOR Benefit Estimator</h3>
-            <p>Estimate only — actual eligibility determined by the NJ Division of Taxation.</p>
-          </div>
-          <div class="calc-body">
-            <div class="progress-bar"><div class="progress-fill" id="a-progress" style="width:16%"></div></div>
-
-            <!-- Step 1 -->
-            <div class="calc-step active" id="a-step1" data-key="tenure">
-              <div class="step-question">Do you own or rent your home?</div>
-              <div class="step-hint">This determines which ANCHOR benefit track applies to you.</div>
-              <div class="choice-grid">
-                <button class="choice-btn" onclick="aSelect('tenure','own',this,1)"><span class="choice-label"><i class="fas fa-house" style="margin-right:6px;color:var(--navy);"></i>I Own</span><span class="choice-sub">I hold title or have a mortgage</span></button>
-                <button class="choice-btn" onclick="aSelect('tenure','rent',this,1)"><span class="choice-label"><i class="fas fa-building" style="margin-right:6px;color:var(--navy);"></i>I Rent</span><span class="choice-sub">I pay rent to a landlord</span></button>
-              </div>
-              <div class="calc-nav"><div></div><button class="btn-next" id="a-next1" disabled onclick="aNext(1,2)">Next →</button></div>
-            </div>
-
-            <!-- Step 2 -->
-            <div class="calc-step" id="a-step2" data-key="primary">
-              <div class="step-question">Was this your primary NJ residence on October 1 of the benefit year?</div>
-              <div class="step-hint">Your main home — not a vacation home or investment property.</div>
-              <div class="choice-grid">
-                <button class="choice-btn" onclick="aSelect('primary','yes',this,2)"><span class="choice-label">Yes, my main NJ home</span></button>
-                <button class="choice-btn" onclick="aSelect('primary','no',this,2)"><span class="choice-label">No, second home or had moved</span></button>
-              </div>
-              <div class="calc-nav"><button class="btn-back" onclick="aBack(2,1)">← Back</button><button class="btn-next" id="a-next2" disabled onclick="aNext(2,3)">Next →</button></div>
-            </div>
-
-            <!-- Step 3 -->
-            <div class="calc-step" id="a-step3" data-key="income">
-              <div class="step-question">What was your approximate gross income for the benefit year?</div>
-              <div class="step-hint">All sources: wages, Social Security, retirement, investments, combined.</div>
-              <div class="choice-grid">
-                <button class="choice-btn" onclick="aSelect('income','low',this,3)"><span class="choice-label">Under $150,000</span></button>
-                <button class="choice-btn" id="a-income-mid" onclick="aSelect('income','mid',this,3)"><span class="choice-label">$150,001–$250,000</span><span class="choice-sub">Homeowners only</span></button>
-                <button class="choice-btn" onclick="aSelect('income','high',this,3)"><span class="choice-label">Over $250,000</span></button>
-              </div>
-              <div class="calc-nav"><button class="btn-back" onclick="aBack(3,2)">← Back</button><button class="btn-next" id="a-next3" disabled onclick="aNext(3,4)">Next →</button></div>
-            </div>
-
-            <!-- Step 4 -->
-            <div class="calc-step" id="a-step4" data-key="age">
-              <div class="step-question">Were you 65 or older during the benefit year?</div>
-              <div class="step-hint">Renters 65+ get a higher benefit ($700 vs $450).</div>
-              <div class="choice-grid">
-                <button class="choice-btn" onclick="aSelect('age','yes',this,4)"><span class="choice-label">Yes, 65 or older</span></button>
-                <button class="choice-btn" onclick="aSelect('age','no',this,4)"><span class="choice-label">No, under 65</span></button>
-              </div>
-              <div class="calc-nav"><button class="btn-back" onclick="aBack(4,3)">← Back</button><button class="btn-next" id="a-next4" disabled onclick="aNext(4,5)">Next →</button></div>
-            </div>
-
-            <!-- Step 5 -->
-            <div class="calc-step" id="a-step5" data-key="taxes">
-              <div class="step-question">Are your property taxes current (or on a payment plan)?</div>
-              <div class="step-hint">More than 12 months delinquent may disqualify homeowners.</div>
-              <div class="choice-grid">
-                <button class="choice-btn" onclick="aSelect('taxes','yes',this,5)"><span class="choice-label">Yes, current</span><span class="choice-sub">Or on a payment plan</span></button>
-                <button class="choice-btn" onclick="aSelect('taxes','no',this,5)"><span class="choice-label">Unsure / Past Due</span></button>
-              </div>
-              <div class="calc-nav"><button class="btn-back" onclick="aBack(5,4)">← Back</button><button class="btn-next" id="a-next5" disabled onclick="aNext(5,6)">Next →</button></div>
-            </div>
-
-            <!-- Step 6: Lead capture + RE hook -->
-            <div class="calc-step" id="a-step6">
-              <div class="step-question">Almost done — where should we send your results?</div>
-              <div class="step-hint">We'll include your estimated benefit, local deadlines, and next steps.</div>
-              <div class="form-group"><label>Your Name</label><input type="text" id="a-lead-name" placeholder="First and last name"></div>
-              <div class="form-group"><label>Email Address</label><input type="email" id="a-lead-email" placeholder="your@email.com"></div>
-              <div class="form-group"><label>Phone (optional)</label><input type="tel" id="a-lead-phone" placeholder="(xxx) xxx-xxxx"></div>
-              <div class="form-group">
-                <label>Property Address</label>
-                <input type="text" id="a-lead-address" placeholder="Start typing your address..." autocomplete="off">
-                <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Pick from the dropdown so we have your full address (city, state, zip).</div>
-              </div>
-              <!-- RE Hook -->
-              <div class="re-hook-box">
-                <label>
-                  <input type="checkbox" id="a-re-check">
-                  <span>
-                    <span class="re-hook-label-text">I'd also like to talk about my home</span>
-                    <span class="re-hook-sub-text">Your assessed value directly affects your ANCHOR benefit. John is a licensed NJ Realtor and can help with valuations, buying, or selling — no pressure either way.</span>
-                  </span>
-                </label>
-              </div>
-              <div class="calc-nav"><button class="btn-back" onclick="aBack(6,5)">← Back</button><button class="btn-next" onclick="aSubmit()">See My Benefit →</button></div>
-            </div>
-
-            <!-- Step 7: Result -->
-            <div class="calc-step" id="a-step7" style="display:none;visibility:hidden;opacity:0;">
-              <div id="a-result-content"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── STAY NJ PANEL ── -->
-      <div class="calc-tab-panel" id="panel-staynj">
-        <div class="staynj-panel-grid">
-          <!-- Left: sliders -->
+      <!-- LEFT: ANCHOR -->
+      <div class="calc-cta-card">
+        <div class="calc-cta-top">
+          <div class="calc-cta-icon"><i class="fas fa-house"></i></div>
           <div>
-            <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--navy-dark);margin-bottom:6px;"><i class="fas fa-leaf" style="color:var(--green,#2d8c4e);margin-right:8px;"></i>Stay NJ — 50% Off Your Property Tax Bill</h3>
-            <p style="font-size:14px;color:var(--text-muted);font-family:'Source Sans 3',sans-serif;line-height:1.6;margin-bottom:24px;">Quarterly payments started February 2026. Apply via the PAS-1 combined form — same form covers ANCHOR and Senior Freeze too.</p>
-
-            <div class="sn-input-group">
-              <label>Your annual property tax bill</label>
-              <div class="sn-slider-row">
-                <input type="range" min="1000" max="20000" value="8000" step="100" id="sn-tax" oninput="updateStayNJ()">
-                <div class="sn-val-badge" id="sn-tax-val">$8,000</div>
-              </div>
-            </div>
-            <div class="sn-input-group">
-              <label>Household income</label>
-              <div class="sn-slider-row">
-                <input type="range" min="0" max="550000" value="65000" step="5000" id="sn-income" oninput="updateStayNJ()">
-                <div class="sn-val-badge" id="sn-income-val">$65,000</div>
-              </div>
-            </div>
-
-            <div class="sn-ineligible-msg" id="sn-ineligible">
-              <i class="fas fa-triangle-exclamation" style="margin-right:6px;"></i>Income exceeds the $500,000 Stay NJ limit. You may still qualify for ANCHOR — use the estimator on the other tab.
-            </div>
-
-            <div style="margin-top:20px;padding:16px;background:#fdf6e3;border:1px solid #e8d48a;border-radius:8px;">
-              <p style="font-size:13px;color:#5a4200;line-height:1.6;font-family:'Source Sans 3',sans-serif;margin-bottom:8px;"><strong>65+ and thinking about selling?</strong> Your Stay NJ credit is a real marketing advantage — buyers see lower carrying costs. Ask John how to use it when listing your home.</p>
-              <a href="#seller-audit" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#5a4200;text-decoration:none;">See the free listing audit <i class="fas fa-arrow-right"></i></a>
-            </div>
-
-            <a href="senior-programs.html" style="display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:var(--navy);font-size:14px;font-weight:600;text-decoration:none;">Full Stay NJ, Senior Freeze &amp; PAS-1 guide <i class="fas fa-arrow-right"></i></a>
+            <div class="calc-cta-label">ANCHOR Program</div>
+            <div class="calc-cta-who">All homeowners &amp; renters</div>
           </div>
-
-          <!-- Right: results -->
-          <div>
-            <h4 style="font-family:'Source Sans 3',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:14px;">Your estimated credits</h4>
-            <div class="sn-results-grid">
-              <div class="sn-result-card highlight">
-                <div class="sn-rc-label">Annual credit</div>
-                <div class="sn-rc-val" id="sn-annual">$4,000</div>
-              </div>
-              <div class="sn-result-card">
-                <div class="sn-rc-label">Per quarter</div>
-                <div class="sn-rc-val" id="sn-quarterly">$1,000</div>
-              </div>
-              <div class="sn-result-card">
-                <div class="sn-rc-label">You still pay</div>
-                <div class="sn-rc-val negative" id="sn-remaining">$4,000</div>
-              </div>
-            </div>
-
-            <div style="background:var(--navy-dark);border-radius:10px;padding:20px;color:#fff;">
-              <h4 style="font-family:'Playfair Display',serif;font-size:16px;color:#fff;margin-bottom:12px;">Key Stay NJ rules</h4>
-              <ul style="list-style:none;font-size:13px;font-family:'Source Sans 3',sans-serif;color:#c0cfdf;line-height:1.7;">
-                <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);"><i class="fas fa-check" style="color:var(--gold);margin-right:8px;"></i>Must be age 65 or older</li>
-                <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);"><i class="fas fa-check" style="color:var(--gold);margin-right:8px;"></i>Household income at or below $500,000</li>
-                <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);"><i class="fas fa-check" style="color:var(--gold);margin-right:8px;"></i>Credit = 50% of bill, max $6,500/year</li>
-                <li style="padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);"><i class="fas fa-check" style="color:var(--gold);margin-right:8px;"></i>Paid quarterly: Feb, May, Aug, Nov</li>
-                <li style="padding:6px 0;"><i class="fas fa-check" style="color:var(--gold);margin-right:8px;"></i>Apply via PAS-1 form — deadline Nov 2, 2026</li>
-              </ul>
-              <a href="pas-1-guide.html" style="display:block;margin-top:14px;background:var(--gold);color:var(--navy-dark);border-radius:6px;padding:11px;text-align:center;font-size:14px;font-weight:700;text-decoration:none;font-family:'Source Sans 3',sans-serif;">Get PAS-1 help — $20 flat fee</a>
-            </div>
-          </div>
+          <div class="calc-cta-amount">up to $1,500</div>
         </div>
+        <p class="calc-cta-desc">Answer 5 quick questions and find out your estimated benefit. Takes about 90 seconds. Results emailed to you directly.</p>
+        <ul class="calc-cta-list">
+          <li><i class="fas fa-check"></i>Homeowners: up to $1,500</li>
+          <li><i class="fas fa-check"></i>Renters: up to $700</li>
+          <li><i class="fas fa-check"></i>No age requirement</li>
+        </ul>
+        <a href="anchor-estimator.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+          <i class="fas fa-calculator"></i>Check My ANCHOR Benefit
+        </a>
       </div>
-    </div><!-- /.calc-combined-wrap -->
+
+      <!-- RIGHT: Stay NJ -->
+      <div class="calc-cta-card calc-cta-card--green">
+        <div class="calc-cta-top">
+          <div class="calc-cta-icon calc-cta-icon--green"><i class="fas fa-leaf"></i></div>
+          <div>
+            <div class="calc-cta-label">Stay NJ Program</div>
+            <div class="calc-cta-who">Seniors 65+ only</div>
+          </div>
+          <div class="calc-cta-amount calc-cta-amount--green">up to $6,500</div>
+        </div>
+        <p class="calc-cta-desc">Enter your annual tax bill and income to see your 50% credit — paid quarterly starting February 2026. Apply via the PAS-1 form.</p>
+        <ul class="calc-cta-list">
+          <li><i class="fas fa-check"></i>50% of your tax bill</li>
+          <li><i class="fas fa-check"></i>Paid Feb, May, Aug, Nov</li>
+          <li><i class="fas fa-check"></i>Income up to $500,000</li>
+        </ul>
+        <a href="anchor-estimator.html#staynj" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;background:var(--green);">
+          <i class="fas fa-leaf"></i>Calculate My Stay NJ Credit
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Deadline note -->
+    <div class="calc-cta-footer">
+      <i class="fas fa-calendar-check"></i>
+      PAS-1 deadline for seniors — covers ANCHOR, Stay NJ, and Senior Freeze in one form:
+      <strong>November 2, 2026</strong> &nbsp;·&nbsp;
+      <a href="pas-1-guide.html">Get PAS-1 help for $20 →</a>
+    </div>
+
   </div>
 </section>
 
+<style>
+/* ── Calculator CTA Split Layout ───────────────────────────
+   Scoped tightly so it doesn't bleed into other sections.
+   Uses your existing CSS variables from styles.css.
+──────────────────────────────────────────────────────────── */
+.calc-cta-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 32px;
+}
+.calc-cta-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 28px 24px;
+  background: var(--bg-white);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.calc-cta-card--green {
+  border-color: #b8d8c4;
+  background: #f6fbf8;
+}
+.calc-cta-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.calc-cta-card--green .calc-cta-top {
+  border-bottom-color: #c8dfd2;
+}
+.calc-cta-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--info-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--navy);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.calc-cta-icon--green {
+  background: #e0f0e8;
+  color: var(--green);
+}
+.calc-cta-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+.calc-cta-who {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.calc-cta-amount {
+  margin-left: auto;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  text-align: right;
+  flex-shrink: 0;
+}
+.calc-cta-amount--green {
+  color: var(--green);
+}
+.calc-cta-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+.calc-cta-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 22px;
+  flex: 1;
+}
+.calc-cta-list li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--text);
+}
+.calc-cta-list li i {
+  color: var(--green);
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.calc-cta-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.calc-cta-footer i {
+  color: var(--navy);
+  font-size: 14px;
+}
+.calc-cta-footer a {
+  color: var(--navy);
+  font-weight: 600;
+  text-decoration: none;
+}
+.calc-cta-footer a:hover { text-decoration: underline; }
+
+@media (max-width: 700px) {
+  .calc-cta-split { grid-template-columns: 1fr; }
+  .calc-cta-amount { font-size: 15px; }
+}
+</style>
 <!-- ═══════════════════════════════════════════════════════════════
      TAX-OPTIMIZED LISTING AUDIT (moved up)
 ═══════════════════════════════════════════════════════════════ -->
