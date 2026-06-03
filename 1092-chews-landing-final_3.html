@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1092 Chews Landing Rd - Laurel Springs, NJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:#1a2332; --gold:#c9a84c; --gold-light:#e8c97a;
+    --cream:#f5f1eb; --white:#fff; --text:#1a2332;
+    --text-light:#4a5568; --border:#e2ddd6; --green:#2d6a4f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);font-size:16px;line-height:1.6;}
+
+  /* HERO */
+  .hero{position:relative;min-height:380px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;}
+  .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 60%;}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(20,30,46,.97) 0%,rgba(20,30,46,.55) 52%,rgba(20,30,46,.08) 100%);}
+  .hero-content{position:relative;z-index:2;padding:28px 22px 30px;color:#fff;}
+  .hero-tag{display:inline-block;background:var(--gold);color:var(--navy);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:2px;margin-bottom:12px;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(23px,5.5vw,38px);font-weight:700;line-height:1.15;margin-bottom:4px;}
+  .hero-sub{font-size:13px;color:rgba(255,255,255,.58);margin-bottom:18px;}
+  .price-badge{display:inline-block;background:var(--gold);color:var(--navy);font-family:'Playfair Display',serif;font-size:clamp(24px,5.5vw,36px);font-weight:700;padding:9px 18px;border-radius:4px;margin-bottom:20px;}
+  .hero-beds{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.14);border-radius:6px;overflow:hidden;}
+  .hero-bed{background:rgba(255,255,255,.07);padding:13px 8px;text-align:center;}
+  .hero-bed-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold-light);display:block;}
+  .hero-bed-label{font-size:10px;color:rgba(255,255,255,.48);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;display:block;}
+
+  /* HIGHLIGHTS */
+  .highlights{background:var(--navy);padding:0 16px 22px;}
+  .contingency{background:rgba(201,168,76,.12);border-left:4px solid var(--gold);margin:16px 0 14px;border-radius:0 6px 6px 0;padding:13px 15px;font-size:13px;color:rgba(255,255,255,.75);line-height:1.6;}
+  .contingency strong{color:var(--gold-light);}
+  .highlights-title{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:rgba(255,255,255,.4);padding-bottom:12px;}
+  .highlight-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .h-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:14px 13px;}
+  .h-card-icon{font-size:18px;margin-bottom:6px;display:block;}
+  .h-card-val{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold-light);display:block;line-height:1.2;margin-bottom:3px;}
+  .h-card.ok .h-card-val{color:#7ecfa0;}
+  .h-card.ok{border-color:rgba(45,106,79,.4);}
+  .h-card.warn{border-color:rgba(201,168,76,.35);}
+  .h-card-label{font-size:11px;color:rgba(255,255,255,.5);line-height:1.4;}
+
+  /* ACCORDION SHELL */
+  .accordion-wrap{max-width:760px;margin:0 auto;padding:20px 16px 32px;}
+  .accordion-intro{font-size:13px;color:var(--text-light);margin-bottom:16px;line-height:1.6;text-align:center;}
+  .acc{background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;overflow:hidden;}
+  .acc-trigger{width:100%;display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:var(--white);border:none;cursor:pointer;text-align:left;gap:12px;transition:background .15s;}
+  .acc-trigger:hover{background:#faf8f4;}
+  .acc-trigger.open{background:var(--navy);}
+  .acc-left{display:flex;align-items:center;gap:12px;}
+  .acc-icon-wrap{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--cream);color:var(--navy);}
+  .acc-trigger.open .acc-icon-wrap{background:rgba(255,255,255,.12);color:var(--gold-light);}
+  .acc-icon-wrap svg{display:block;}
+  .acc-label-group{text-align:left;}
+  .acc-title{font-size:15px;font-weight:600;color:var(--navy);line-height:1.2;}
+  .acc-trigger.open .acc-title{color:#fff;}
+  .acc-subtitle{font-size:12px;color:var(--text-light);margin-top:2px;}
+  .acc-trigger.open .acc-subtitle{color:rgba(255,255,255,.5);}
+  .acc-chevron{width:22px;height:22px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--cream);transition:transform .25s,background .15s;}
+  .acc-trigger.open .acc-chevron{background:rgba(255,255,255,.15);transform:rotate(180deg);}
+  .acc-chevron svg{width:12px;height:12px;stroke:var(--text-light);stroke-width:2.5;fill:none;}
+  .acc-trigger.open .acc-chevron svg{stroke:rgba(255,255,255,.7);}
+  .acc-body{display:none;padding:20px 18px 22px;border-top:1px solid var(--border);}
+  .acc-body.open{display:block;}
+
+  /* INNER CONTENT */
+  .info-row{display:flex;align-items:flex-start;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);}
+  .info-row:last-child{border-bottom:none;}
+  .info-label{font-size:13px;color:var(--text-light);min-width:120px;flex-shrink:0;padding-top:1px;}
+  .info-value{font-size:14px;font-weight:500;color:var(--text);}
+  .pill{display:inline-block;padding:2px 9px;border-radius:20px;font-size:12px;font-weight:600;}
+  .pill-green{background:#d4edda;color:#155724;}
+  .alert{border-radius:6px;padding:13px 15px;margin:10px 0 0;font-size:13px;line-height:1.65;border-left:4px solid;}
+  .alert-ok{background:#edf7f0;border-color:var(--green);color:#1a4730;}
+  .alert-warn{background:#fff8e1;border-color:var(--gold);color:#5c4400;}
+  .alert-info{background:#e8f4f8;border-color:#3b9ac3;color:#1a4f6e;}
+  .checklist{list-style:none;}
+  .checklist li{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.5;}
+  .checklist li:last-child{border-bottom:none;}
+  .ck{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;margin-top:1px;}
+  .ck-y{background:#d4edda;color:#155724;}
+  .ck-n{background:#e2e8f0;color:#4a5568;}
+  .ck-q{background:#fff3cd;color:#856404;}
+  .white-card{background:#faf8f5;border:1px solid var(--border);border-radius:8px;padding:14px 15px;margin-bottom:10px;}
+  .white-card h4{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:7px;text-transform:uppercase;letter-spacing:.07em;}
+  .white-card p{font-size:14px;color:var(--text-light);line-height:1.7;}
+  .white-card p+p{margin-top:7px;}
+  .radon-result{display:flex;align-items:center;gap:16px;background:#f0f7f3;border:1px solid #b8ddc8;border-radius:8px;padding:16px;margin-bottom:12px;}
+  .radon-number{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:var(--green);line-height:1;flex-shrink:0;}
+  .radon-unit{font-size:12px;color:var(--text-light);display:block;margin-top:2px;}
+  .radon-label{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px;}
+  .radon-sub{font-size:13px;color:var(--text-light);line-height:1.5;}
+  .cost-table{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin:10px 0;}
+  .cost-row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-bottom:1px solid var(--border);font-size:14px;}
+  .cost-row:last-child{border-bottom:none;background:#f0f4f0;}
+  .cost-label{color:var(--text-light);}
+  .cost-value{font-weight:600;color:var(--navy);}
+  .cost-row.deduct .cost-value{color:#c0392b;}
+  .cost-row.total .cost-label{font-weight:700;color:var(--navy);}
+  .cost-row.total .cost-value{color:var(--green);font-size:15px;}
+  .anchor-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .anchor-card{background:#f0f7f3;border:1px solid #b8ddc8;border-radius:8px;padding:14px 12px;text-align:center;}
+  .anchor-amount{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--green);display:block;}
+  .anchor-income{font-size:11px;color:var(--text-light);margin-top:3px;display:block;line-height:1.4;}
+  .cash-grid{display:grid;grid-template-columns:1fr;gap:10px;}
+  @media(min-width:480px){.cash-grid{grid-template-columns:1fr 1fr;}}
+  .cash-card{background:#faf8f5;border:1px solid var(--border);border-radius:8px;padding:14px;}
+  .cash-card-title{font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em;}
+  .cash-card-body{font-size:13px;color:var(--text-light);line-height:1.6;}
+  .tag-list{display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:6px 11px;font-size:13px;font-weight:500;color:var(--navy);}
+  .tag-excluded{background:#fff8f0;border-color:#f5c6aa;color:#7a3f1e;text-decoration:line-through;opacity:.7;}
+  .tag-maybe{border-color:var(--gold);background:#fffbf0;}
+  .tsl{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;margin:14px 0 8px;}
+  .tsl-green{color:var(--green);}
+  .tsl-gold{color:#8a6400;}
+  .tsl-red{color:#c0392b;}
+  .tsl-gray{color:var(--text-light);}
+  .timeline-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);align-items:flex-start;}
+  .timeline-item:last-child{border-bottom:none;}
+  .t-date{background:var(--navy);color:var(--gold-light);font-size:10px;font-weight:600;padding:3px 7px;border-radius:3px;white-space:nowrap;min-width:62px;text-align:center;margin-top:2px;flex-shrink:0;}
+  .t-desc{font-size:14px;color:var(--text);line-height:1.5;}
+
+  /* WHY SECTION */
+  .agent-why{background:var(--navy);padding:28px 16px;}
+  .agent-why-inner{max-width:760px;margin:0 auto;}
+  .why-label{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .why-title{font-family:'Playfair Display',serif;font-size:clamp(18px,4vw,22px);font-weight:700;color:#fff;margin-bottom:6px;}
+  .why-intro{font-size:13px;color:rgba(255,255,255,.55);margin-bottom:20px;line-height:1.65;}
+  .why-point{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08);}
+  .why-point:last-of-type{border-bottom:none;}
+  .why-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:24px;line-height:1.1;}
+  .why-point-title{font-size:14px;font-weight:600;color:#fff;margin-bottom:3px;}
+  .why-point-body{font-size:13px;color:rgba(255,255,255,.58);line-height:1.6;}
+
+  /* AGENT CARD */
+  .agent-card-wrap{background:var(--cream);padding:24px 16px;border-top:3px solid var(--gold);}
+  .agent-card{max-width:760px;margin:0 auto;background:var(--white);border:1px solid var(--border);border-radius:12px;overflow:hidden;}
+  .agent-card-header{background:var(--navy);padding:13px 20px;}
+  .agent-card-header-label{font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:2px;}
+  .agent-card-header-sub{font-size:12px;color:rgba(255,255,255,.48);}
+  .agent-card-body{display:flex;flex-direction:column;align-items:center;padding:24px 20px;gap:18px;}
+  .agent-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:center top;border:3px solid var(--gold);flex-shrink:0;}
+  .agent-info{text-align:center;}
+  .agent-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:2px;}
+  .agent-title{font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:13px;}
+  .agent-contacts{display:flex;flex-direction:column;gap:7px;align-items:center;}
+  .agent-contact-item{display:flex;align-items:center;gap:7px;font-size:14px;color:var(--text);font-weight:500;}
+  .agent-contact-item a{color:var(--navy);text-decoration:none;}
+  .agent-contact-item a:hover{color:var(--gold);}
+  .cdot{width:5px;height:5px;background:var(--gold);border-radius:50%;flex-shrink:0;}
+  .agent-disclaimer{background:#f4f1eb;border-top:1px solid var(--border);padding:12px 20px;font-size:11px;color:var(--text-light);line-height:1.65;text-align:center;}
+  @media(min-width:520px){
+    .agent-card-body{flex-direction:row;align-items:center;text-align:left;padding:24px 28px;}
+    .agent-info{text-align:left;}
+    .agent-contacts{align-items:flex-start;}
+  }
+
+  /* FOOTER */
+  .footer{background:#0f1620;color:rgba(255,255,255,.38);text-align:center;padding:24px 16px;font-size:11px;line-height:1.85;}
+  .footer strong{color:rgba(255,255,255,.7);}
+
+  @media(min-width:640px){
+    .hero{min-height:460px;}
+    .hero-content{padding:36px 36px 38px;}
+    .highlights{padding:0 36px 24px;}
+    .accordion-wrap{padding:24px 36px 36px;}
+    .agent-why{padding:36px;}
+    .agent-card-wrap{padding:28px 36px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img class="hero-photo" src="1092Chews.jpg" alt="1092 Chews Landing Rd">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Active Listing - MLS NJCD2117158</div>
+    <h1>1092 Chews Landing Rd</h1>
+    <p class="hero-sub">Laurel Springs, NJ 08021 | Gloucester Township Schools</p>
+    <div class="price-badge">$489,900</div>
+    <div class="hero-beds">
+      <div class="hero-bed"><span class="hero-bed-num">3</span><span class="hero-bed-label">Bedrooms</span></div>
+      <div class="hero-bed"><span class="hero-bed-num">2</span><span class="hero-bed-label">Full Baths</span></div>
+      <div class="hero-bed"><span class="hero-bed-num">1,654</span><span class="hero-bed-label">Sq Ft Est.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGHLIGHT CARDS -->
+<div class="highlights">
+  <div class="contingency">
+    <strong>Heads up:</strong> Sale is contingent on the seller purchasing another property. Your closing timeline depends on their deal completing first.
+  </div>
+  <div class="highlights-title">The numbers that matter most</div>
+  <div class="highlight-grid">
+    <div class="h-card ok">
+            <span class="h-card-val">~$753/mo</span>
+      <span class="h-card-label">Real tax cost after NJ ANCHOR rebate and basin share</span>
+    </div>
+    <div class="h-card ok">
+            <span class="h-card-val">1.7 pCi/L</span>
+      <span class="h-card-label">Radon -- well under the 4.0 EPA action level</span>
+    </div>
+    <div class="h-card ok">
+            <span class="h-card-val">Zone X</span>
+      <span class="h-card-label">FEMA flood zone -- minimal hazard, no insurance required</span>
+    </div>
+    <div class="h-card warn">
+            <span class="h-card-val">2 Easements</span>
+      <span class="h-card-label">Shared driveway and basin -- tap Easements below for plain-English explanation</span>
+    </div>
+  </div>
+</div>
+
+<!-- ACCORDIONS -->
+<div class="accordion-wrap">
+  <p class="accordion-intro">Tap any section to expand. Tap again to close.</p>
+
+  <!-- 1. PROPERTY OVERVIEW -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Property Overview</div>
+          <div class="acc-subtitle">2017 ranch, 1.25 acres, 2-car garage, slab foundation</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="info-row"><span class="info-label">Year Built</span><span class="info-value">2017</span></div>
+      <div class="info-row"><span class="info-label">Style</span><span class="info-value">Ranch / Bungalow, single story</span></div>
+      <div class="info-row"><span class="info-label">Sq Ft</span><span class="info-value">1,654 above grade (estimated)</span></div>
+      <div class="info-row"><span class="info-label">Lot Size</span><span class="info-value">1.25 acres / 54,450 sq ft (estimated)</span></div>
+      <div class="info-row"><span class="info-label">Foundation</span><span class="info-value">Slab -- no basement, no crawl space, no sump pump</span></div>
+      <div class="info-row"><span class="info-label">Garage</span><span class="info-value">Attached 2-car, front entry, inside access, 84"+ door height</span></div>
+      <div class="info-row"><span class="info-label">Parking</span><span class="info-value">6 total spaces (2 garage + 4 driveway)</span></div>
+      <div class="info-row"><span class="info-label">Construction</span><span class="info-value">Vinyl siding, shingle roof (original, 2017)</span></div>
+      <div class="info-row"><span class="info-label">Price Per Sq Ft</span><span class="info-value">$296 (estimated)</span></div>
+      <div class="info-row"><span class="info-label">HOA</span><span class="info-value"><span class="pill pill-green">None</span></span></div>
+      <div class="info-row"><span class="info-label">Flood Zone</span><span class="info-value"><span class="pill pill-green">Zone X -- Minimal Hazard</span></span></div>
+      <div class="info-row"><span class="info-label">School District</span><span class="info-value">Gloucester Township Public Schools</span></div>
+      <div class="info-row"><span class="info-label">County</span><span class="info-value">Camden, NJ</span></div>
+      <div class="info-row"><span class="info-label">Pets</span><span class="info-value">Allowed, no restrictions</span></div>
+      <div class="info-row"><span class="info-label">Days on Market</span><span class="info-value">23 days as of June 3, 2026</span></div>
+      <div class="info-row"><span class="info-label">Access</span><span class="info-value">Turn onto Estates Lane from Chews Landing Rd (private shared driveway -- see Easements)</span></div>
+    </div>
+  </div>
+
+  <!-- 2. TAXES AND RELIEF -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><line x1="6" y1="15" x2="10" y2="15"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Taxes and NJ Tax Relief</div>
+          <div class="acc-subtitle">$10,117/yr gross -- get $1,000 to $1,500 back every year</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="info-row"><span class="info-label">Annual Tax Bill</span><span class="info-value">$10,117 (2025)</span></div>
+      <div class="info-row"><span class="info-label">Monthly (gross)</span><span class="info-value">~$843/month before any rebate</span></div>
+      <div class="info-row"><span class="info-label">Assessed Value</span><span class="info-value">$230,500 -- roughly 47% of list price, normal for NJ</span></div>
+      <div class="info-row"><span class="info-label">Basin Cost Share</span><span class="info-value">~$415/year (1/5 of the $2,075 annual estimate -- recorded deed obligation)</span></div>
+
+      <div class="white-card" style="margin-top:16px;">
+        <h4>The ANCHOR Rebate -- Real Money Back Every Year</h4>
+        <p>NJ pays homeowners a direct annual rebate just for living in their primary residence. You apply online each fall at nj.gov. You need to own and occupy this home on October 1 of the benefit year to qualify. Income must be $250,000 or less.</p>
+      </div>
+      <div class="anchor-grid">
+        <div class="anchor-card">
+          <span class="anchor-amount">$1,500</span>
+          <span class="anchor-income">Household income $150,000 or less</span>
+        </div>
+        <div class="anchor-card">
+          <span class="anchor-amount">$1,000</span>
+          <span class="anchor-income">Household income $150,001 to $250,000</span>
+        </div>
+      </div>
+      <div class="white-card"><h4>Your Net Annual Cost After Relief</h4></div>
+      <div class="cost-table">
+        <div class="cost-row"><span class="cost-label">Property taxes</span><span class="cost-value">$10,117</span></div>
+        <div class="cost-row"><span class="cost-label">Basin maintenance share (est.)</span><span class="cost-value">$415</span></div>
+        <div class="cost-row deduct"><span class="cost-label">ANCHOR rebate (income under $150k)</span><span class="cost-value">- $1,500</span></div>
+        <div class="cost-row total"><span class="cost-label">Net annual property cost</span><span class="cost-value">$9,032/yr (~$753/mo)</span></div>
+      </div>
+      <div class="alert alert-info">
+        Close before October 1, 2026 and you can apply for the 2026 ANCHOR benefit that fall. Payments go out on a rolling basis starting in September by check or direct deposit.
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. CASH PURCHASE -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v1m0 8v1M9.5 9.5a2.5 2.5 0 015 0c0 1.5-1.5 2-2.5 2.5S9.5 13.5 9.5 15a2.5 2.5 0 005 0"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Buying With Cash</div>
+          <div class="acc-subtitle">What changes, what still matters, and your leverage here</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="cash-grid">
+        <div class="cash-card">
+          <div class="cash-card-title">No appraisal contingency</div>
+          <div class="cash-card-body">No lender is requiring a value sign-off. This strengthens your offer significantly compared to financed buyers.</div>
+        </div>
+        <div class="cash-card">
+          <div class="cash-card-title">Faster closing</div>
+          <div class="cash-card-body">Without mortgage underwriting you can close in 2 to 3 weeks. Given the seller's contingency, your timeline flexibility is a real chip at the table.</div>
+        </div>
+        <div class="cash-card">
+          <div class="cash-card-title">Proof of funds required</div>
+          <div class="cash-card-body">The listing agent will expect a proof of funds letter or bank statement dated within 30 days before accepting any offer. Have it ready.</div>
+        </div>
+        <div class="cash-card">
+          <div class="cash-card-title">Inspections are your call</div>
+          <div class="cash-card-body">No lender requires them, but a home inspection and fresh termite report still protect you. Do not skip them just because you can.</div>
+        </div>
+        <div class="cash-card">
+          <div class="cash-card-title">No mortgage deduction</div>
+          <div class="cash-card-body">You lose the federal mortgage interest deduction. But NJ's property tax deduction and the full ANCHOR rebate still apply to cash buyers.</div>
+        </div>
+        <div class="cash-card">
+          <div class="cash-card-title">Get owner's title insurance</div>
+          <div class="cash-card-body">No lender means no lender policy required. But with two recorded easements on this property, owner's title insurance is still absolutely worth buying.</div>
+        </div>
+      </div>
+      <div class="alert alert-ok" style="margin-top:4px;">
+        The seller's contingency is a plus for you. Offer to match their timeline. That flexibility is something a financed buyer cannot easily provide -- and it costs you nothing.
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. EASEMENTS -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Easements and Deed Restrictions</div>
+          <div class="acc-subtitle">What a basin is, what Estates Lane means, what it costs you</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="alert alert-info">
+        Two permanent recorded easements come with this property. They transfer to every future owner. Neither blocks the sale, but both create ongoing obligations your attorney should review during attorney review.
+      </div>
+      <div class="white-card" style="margin-top:12px;">
+        <h4>What Is a Stormwater Detention Basin?</h4>
+        <p>It is a shallow grassed depression designed to collect rainwater runoff during storms. Instead of water rushing into streets all at once, it pools temporarily and slowly filters into the soil over 24 to 72 hours. Between storms it just looks like a low grassy area -- it does not hold permanent standing water when maintained correctly.</p>
+        <p>The basin here is on the neighboring Lot 25. You cannot see it from this property and it does not affect your yard or daily use. What it does affect is a small annual cost share split among 5 lots.</p>
+      </div>
+      <div class="white-card">
+        <h4>Easement 1 -- Estates Lane (Shared Private Driveway)</h4>
+        <p>Estates Lane is the only vehicle access from Chews Landing Rd to this property and two other lots behind it. All three lots share maintenance costs equally. The owner of Lot 26.01 administers the lane. If any owner refuses their share, legal action and liens are possible. There is no other way in or out by vehicle.</p>
+      </div>
+      <div class="white-card">
+        <h4>Easement 2 -- Shared Stormwater Basin (5 Lots, Equal Split)</h4>
+        <p>All five lots in the subdivision share basin maintenance, administered by the owner of Lot 25. Costs split equally regardless of lot size. The 2008 engineering estimate was $2,075 total per year -- roughly $415 per lot. Actual costs may vary.</p>
+        <p>If owners fail to maintain the basin, Gloucester Township can step in, perform the work, and bill owners directly or assess it as a property tax. Non-payment can result in a lien. This obligation must appear in the deed you receive at closing.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. INSPECTIONS -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Inspections and Reports</div>
+          <div class="acc-subtitle">Radon 1.7, termite clear, flood Zone X -- all documented</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="radon-result">
+        <div>
+          <div class="radon-number">1.7</div>
+          <span class="radon-unit">pCi/L</span>
+        </div>
+        <div>
+          <div class="radon-label">Radon: Below EPA Action Level</div>
+          <div class="radon-sub">Tested June 2021, Trinity Inspection Services (RAdata lab). EPA action threshold is 4.0 pCi/L. National average is 1.3. No mitigation recommended.</div>
+        </div>
+      </div>
+      <div class="alert alert-warn">The radon test is 4 years old. EPA recommends retesting every 5 years. Consider making a fresh test a contract condition.</div>
+      <div style="margin-top:14px;">
+        <div class="info-row"><span class="info-label">Termite / WDI</span><span class="info-value"><span class="pill pill-green">Clear</span> June 7, 2021 by Aggressive Pest Elimination, Sewell, NJ. No evidence found, no treatment recommended.</span></div>
+        <div class="info-row"><span class="info-label">Termite Note</span><span class="info-value">The 2021 report has expired for most lenders (90-day rule). A new inspection is needed before closing. Even for cash buyers, strongly recommended.</span></div>
+        <div class="info-row"><span class="info-label">Flood Zone</span><span class="info-value"><span class="pill pill-green">FEMA Zone X</span> Minimal hazard, confirmed by official flood map.</span></div>
+        <div class="info-row"><span class="info-label">Flood History</span><span class="info-value">No damage, no FEMA claims, no disaster assistance ever disclosed.</span></div>
+        <div class="info-row"><span class="info-label">Flood Insurance</span><span class="info-value">Not required. None currently carried on the property.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. CONDITION -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Property Condition</div>
+          <div class="acc-subtitle">Seller disclosure summary -- no mold, no leaks, no structural issues</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <ul class="checklist">
+        <li><span class="ck ck-y">Y</span><span><strong>No basement or crawl space.</strong> Slab only. No sump pump needed.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No roof repairs or leaks</strong> since seller bought in 2021. Roof original to 2017 build.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No structural issues.</strong> No movement, cracking, or foundation problems disclosed.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No termites or pests.</strong> Confirmed clear by professional inspection in 2021.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No fire, smoke, wind, or flood damage</strong> ever disclosed.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No water intrusion or mold</strong> anywhere in the property.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No environmental hazards.</strong> No tanks, no toxic substances, no agency notifications.</span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>No zoning violations, encroachments, or legal actions.</strong></span></li>
+        <li><span class="ck ck-y">Y</span><span><strong>Survey on file.</strong> Aerial, plat, and survey house location listed as available MLS documents.</span></li>
+        <li><span class="ck ck-n">N</span><span><strong>Attic access:</strong> Scuttle hole in the laundry room. Not usable for storage. Whole house fan present.</span></li>
+        <li><span class="ck ck-q">?</span><span><strong>Wiring type listed as "Other."</strong> Not copper or aluminum per the form. Have your inspector verify.</span></li>
+        <li><span class="ck ck-q">?</span><span><strong>Fireplace cleaning date left blank.</strong> Ask seller or confirm during inspection.</span></li>
+        <li><span class="ck ck-q">?</span><span><strong>No furnace service history on file.</strong> Request HVAC records from seller.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. SYSTEMS AND UPGRADES -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Systems and Recent Upgrades</div>
+          <div class="acc-subtitle">New tankless water heater, floors, garage door, and more since 2021</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="info-row"><span class="info-label">Heating</span><span class="info-value">Forced air, natural gas, one zone (2017)</span></div>
+      <div class="info-row"><span class="info-label">Cooling</span><span class="info-value">Central A/C, electric, one zone (2017). Garage not conditioned.</span></div>
+      <div class="info-row"><span class="info-label">Water Heater</span><span class="info-value"><span class="pill pill-green">New May 2022</span> Rinnai tankless, natural gas</span></div>
+      <div class="info-row"><span class="info-label">Electrical</span><span class="info-value">150 amp service, circuit breakers, 240V. Wiring type listed as "Other" -- verify during inspection.</span></div>
+      <div class="info-row"><span class="info-label">Water / Sewer</span><span class="info-value">Public water and public sewer. No well, no septic.</span></div>
+      <div class="info-row"><span class="info-label">Lead Piping</span><span class="info-value"><span class="pill pill-green">None disclosed</span></span></div>
+      <div class="info-row"><span class="info-label">Fireplace</span><span class="info-value">1 fireplace, presently usable. Last cleaning date not provided.</span></div>
+      <div style="margin-top:18px;margin-bottom:8px;font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--text-light);">Documented Upgrades</div>
+      <div class="timeline-item"><span class="t-date">Mar 2025</span><span class="t-desc">New LG Smart Thin-Q French Door Refrigerator</span></div>
+      <div class="timeline-item"><span class="t-date">Dec 2024</span><span class="t-desc">Dusk to dawn exterior wall light fixtures</span></div>
+      <div class="timeline-item"><span class="t-date">Apr 2024</span><span class="t-desc">New garage door and Chamberlain opener</span></div>
+      <div class="timeline-item"><span class="t-date">Mar 2024</span><span class="t-desc">Backyard Lifetime brand shed</span></div>
+      <div class="timeline-item"><span class="t-date">Feb 2024</span><span class="t-desc">Patio door with retractable screen on front porch</span></div>
+      <div class="timeline-item"><span class="t-date">Sep 2023</span><span class="t-desc">Laminate wood flooring throughout</span></div>
+      <div class="timeline-item"><span class="t-date">Jul 2023</span><span class="t-desc">Cordless faux wood blinds on all windows</span></div>
+      <div class="timeline-item"><span class="t-date">Jun 2022</span><span class="t-desc">Master bath vent with Bluetooth speaker</span></div>
+      <div class="timeline-item"><span class="t-date">May 2022</span><span class="t-desc">New Rinnai tankless water heater</span></div>
+      <div class="timeline-item"><span class="t-date">Jul 2021</span><span class="t-desc">Second refrigerator added in garage</span></div>
+    </div>
+  </div>
+
+  <!-- 8. INCLUSIONS -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-4 0v2M8 7V5a2 2 0 00-4 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">What Stays, What Goes</div>
+          <div class="acc-subtitle">House offered as furnished -- full inclusion and exclusion list</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <p style="font-size:13px;color:var(--text-light);margin-bottom:14px;line-height:1.6;">House is being offered as furnished. Final contract terms control. Items below reflect seller disclosure only.</p>
+      <div class="tsl tsl-green">Included</div>
+      <div class="tag-list">
+        <span class="tag">Refrigerator (LG Smart)</span><span class="tag">Gas Range</span>
+        <span class="tag">Built-In Microwave</span><span class="tag">Dishwasher</span>
+        <span class="tag">Garbage Disposal</span><span class="tag">Washer</span>
+        <span class="tag">Dryer</span><span class="tag">2nd Garage Refrigerator</span>
+        <span class="tag">Garage Door Opener (2 remotes)</span><span class="tag">Most Furniture</span>
+      </div>
+      <div class="tsl tsl-gold">Possibly Included -- Confirm in Writing</div>
+      <div class="tag-list">
+        <span class="tag tag-maybe">Shed Contents -- Ryobi Electric Riding Mower and Yard Equipment</span>
+      </div>
+      <div class="tsl tsl-red">Excluded</div>
+      <div class="tag-list">
+        <span class="tag tag-excluded">Coffee stand and items</span>
+        <span class="tag tag-excluded">Kitchen cabinet contents</span>
+        <span class="tag tag-excluded">2 BioBidet units</span>
+        <span class="tag tag-excluded">L-shaped desk and living room items</span>
+        <span class="tag tag-excluded">Decorative bookshelf items</span>
+        <span class="tag tag-excluded">Fire mantel</span>
+        <span class="tag tag-excluded">Wall frames</span>
+        <span class="tag tag-excluded">Master bedroom mini fridge</span>
+        <span class="tag tag-excluded">Nightstand and bookshelf light fixtures</span>
+        <span class="tag tag-excluded">Some garage hand tools</span>
+      </div>
+      <div class="tsl tsl-gray">Not Present on Property</div>
+      <div class="tag-list">
+        <span class="tag" style="color:var(--text-light);">No Pool</span>
+        <span class="tag" style="color:var(--text-light);">No Hot Tub</span>
+        <span class="tag" style="color:var(--text-light);">No Sprinkler System</span>
+        <span class="tag" style="color:var(--text-light);">No Central Vacuum</span>
+        <span class="tag" style="color:var(--text-light);">No Security System</span>
+        <span class="tag" style="color:var(--text-light);">No Solar Panels</span>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="info-row"><span class="info-label">Smoke Detectors</span><span class="info-value">5 total. Battery and electric. All working per seller.</span></div>
+        <div class="info-row"><span class="info-label">CO Detectors</span><span class="info-value">3 present. Working per seller.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9. SHOWING -->
+  <div class="acc">
+    <button class="acc-trigger" onclick="toggle(this)">
+      <div class="acc-left">
+        <div class="acc-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="8" y="14" width="3" height="3" rx="0.5"/></svg></div>
+        <div class="acc-label-group">
+          <div class="acc-title">Showing and Offer Info</div>
+          <div class="acc-subtitle">Appointment only, lock box at gas meter, 23 days on market</div>
+        </div>
+      </div>
+      <div class="acc-chevron"><svg viewBox="0 0 12 12"><polyline points="2,4 6,8 10,4"/></svg></div>
+    </button>
+    <div class="acc-body">
+      <div class="info-row"><span class="info-label">Listed</span><span class="info-value">May 12, 2026</span></div>
+      <div class="info-row"><span class="info-label">Days on Market</span><span class="info-value">23 days as of June 3, 2026</span></div>
+      <div class="info-row"><span class="info-label">Original Price</span><span class="info-value">$489,900 (no price changes to date)</span></div>
+      <div class="info-row"><span class="info-label">Lock Box</span><span class="info-value">Combo box at the gas meter</span></div>
+      <div class="info-row"><span class="info-label">Method</span><span class="info-value">Appointment only, in-person only</span></div>
+      <div class="info-row"><span class="info-label">Possession</span><span class="info-value">At settlement</span></div>
+      <div class="info-row"><span class="info-label">Sale Type</span><span class="info-value">Standard -- contingent on seller's purchase completing</span></div>
+      <div class="info-row"><span class="info-label">Dual Agency</span><span class="info-value">No</span></div>
+      <div class="info-row"><span class="info-label">Seller Concessions</span><span class="info-value">None listed</span></div>
+      <div class="info-row"><span class="info-label">Listing Agent</span><span class="info-value">Kate Griko, OCF Realty LLC -- (609) 827-7804</span></div>
+    </div>
+  </div>
+
+</div><!-- /accordion-wrap -->
+
+<!-- WHY THIS GUIDE EXISTS -->
+<div class="agent-why">
+  <div class="agent-why-inner">
+    <div class="why-label">Why This Guide Exists</div>
+    <div class="why-title">What you just got that you won't find anywhere else</div>
+    <div class="why-intro">Most agents hand you a printout and a disclosure form. This was built so you walk in informed, not overwhelmed.</div>
+    <div class="why-point">
+      <div class="why-num">1</div>
+      <div>
+        <div class="why-point-title">Your actual cost, calculated</div>
+        <div class="why-point-body">$10,117 in taxes is not your real number. After the ANCHOR rebate and basin share, you're looking at roughly $9,032/year or $753/month. That belongs in your budget, not the MLS figure.</div>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-num">2</div>
+      <div>
+        <div class="why-point-title">ANCHOR explained by someone who files it professionally</div>
+        <div class="why-point-body">As a licensed tax professional preparing 200+ NJ returns a year, your agent knows this program cold. You are eligible for $1,000 to $1,500 back every year. Most buyers find out about this months after they close.</div>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-num">3</div>
+      <div>
+        <div class="why-point-title">20 pages of legal documents in plain English</div>
+        <div class="why-point-body">The easement packet is dense. All of it was reviewed and summarized so you know exactly what you are agreeing to before writing a number on an offer.</div>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-num">4</div>
+      <div>
+        <div class="why-point-title">Cash purchase strategy specific to this deal</div>
+        <div class="why-point-body">The seller's contingency situation is leverage for a cash buyer who can match timelines. That is the kind of detail that wins negotiation without changing the number on your offer.</div>
+      </div>
+    </div>
+    <div class="why-point">
+      <div class="why-num">5</div>
+      <div>
+        <div class="why-point-title">Every report reviewed so you didn't have to</div>
+        <div class="why-point-body">Radon 1.7 (fine, but 4 years old). Termite clear (expired, new one needed). Flood Zone X (confirmed). None of this required you to figure out what a picocurie is.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AGENT CARD -->
+<div class="agent-card-wrap">
+  <div class="agent-card">
+    <div class="agent-card-header">
+      <div class="agent-card-header-label">Your Buyer's Agent</div>
+      <div class="agent-card-header-sub">Prepared and presented by -- not affiliated with the listing brokerage</div>
+    </div>
+    <div class="agent-card-body">
+      <img class="agent-photo" src="johnprofile.jpg" alt="John Scafide, REALTOR">
+      <div class="agent-info">
+        <div class="agent-name">John Scafide</div>
+        <div class="agent-title">REALTOR | Opus Elite Real Estate</div>
+        <div class="agent-contacts">
+          <div class="agent-contact-item"><span class="cdot"></span><a href="tel:8564041098">856-404-1098</a></div>
+          <div class="agent-contact-item"><span class="cdot"></span><a href="tel:6095405505">609-540-5505</a></div>
+          <div class="agent-contact-item"><span class="cdot"></span><a href="mailto:john@johnscafide.com">john@johnscafide.com</a></div>
+          <div class="agent-contact-item"><span class="cdot"></span><a href="https://www.johnscafide.com" target="_blank" rel="noopener">www.johnscafide.com</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="agent-disclaimer">
+      This property guide was prepared by John Scafide, REALTOR, Opus Elite Real Estate, on behalf of a prospective buyer. John Scafide is not affiliated with OCF Realty LLC or the listing agent. NJ Real Estate License #2079591. This document is for informational purposes only and does not constitute legal, tax, or financial advice. All information should be independently verified.
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>1092 Chews Landing Rd, Laurel Springs, NJ 08021</strong><br>
+  MLS #NJCD2117158 | Listed at $489,900 | Active as of June 3, 2026<br><br>
+  Compiled from MLS listing, Seller Property Condition Disclosure, easement documents, radon and termite reports, and FEMA flood confirmation.<br>
+  Tax relief figures based on current NJ ANCHOR program rates from nj.gov/treasury/taxation. All details should be independently verified.<br>
+  Not a warranty of condition. Does not constitute legal, tax, or financial advice.
+</div>
+
+<script>
+function toggle(btn) {
+  var body = btn.nextElementSibling;
+  var isOpen = btn.classList.contains('open');
+  document.querySelectorAll('.acc-trigger.open').forEach(function(t) {
+    t.classList.remove('open');
+    t.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    body.classList.add('open');
+    setTimeout(function() {
+      var top = btn.getBoundingClientRect().top + window.scrollY - 16;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }, 50);
+  }
+}
+</script>
+</body>
+</html>
