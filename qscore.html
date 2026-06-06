@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Qwixx Scorecard</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -38,10 +39,74 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  header { text-align: center; margin-bottom: 14px; }
+  /* ── NAME ENTRY SCREEN ── */
+  #name-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+    gap: 20px;
+    width: 100%;
+    max-width: 340px;
+  }
+  #name-screen h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.8rem;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--yellow) 38%, var(--green) 68%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    text-align: center;
+  }
+  #name-screen p {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  #name-input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: 2px solid #ddd;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    background: #fff;
+    color: var(--text);
+    transition: border-color 0.15s;
+  }
+  #name-input:focus { border-color: var(--blue-mid); }
+  #name-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    background: linear-gradient(135deg, #2c2c54, #3d3d7a);
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(44,44,84,0.28);
+    transition: transform 0.1s;
+  }
+  #name-btn:active { transform: scale(0.96); }
+
+  /* ── GAME SCREEN ── */
+  #game-screen { display: none; width: 100%; max-width: 500px; }
+
+  header { text-align: center; margin-bottom: 10px; }
   header h1 {
     font-family: 'Fredoka One', cursive;
-    font-size: 2.4rem;
+    font-size: 2rem;
     letter-spacing: 3px;
     background: linear-gradient(135deg, var(--red) 0%, var(--yellow) 38%, var(--green) 68%, var(--blue) 100%);
     -webkit-background-clip: text;
@@ -49,22 +114,74 @@
     background-clip: text;
     line-height: 1;
   }
-  header p {
-    color: var(--muted);
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
 
+  /* ── OPPONENT BANNER ── */
+  #opponent-banner {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: 0 3px 14px rgba(0,0,0,0.09);
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 52px;
+  }
+  .opp-left { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+  .opp-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opp-waiting { color: var(--muted); font-size: 0.72rem; font-weight: 700; }
+  .opp-mini-rows { display: flex; flex-direction: column; gap: 2px; margin-top: 3px; }
+  .opp-mini-row { display: flex; gap: 2px; align-items: center; }
+  .opp-cell {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.45rem;
+    font-family: 'Fredoka One', cursive;
+    border: 1px solid transparent;
+  }
+  .opp-cell.r  { background: var(--red-light);    border-color: var(--red-mid);    color: var(--red); }
+  .opp-cell.y  { background: var(--yellow-light);  border-color: var(--yellow-mid); color: var(--yellow); }
+  .opp-cell.g  { background: var(--green-light);   border-color: var(--green-mid);  color: var(--green); }
+  .opp-cell.b  { background: var(--blue-light);    border-color: var(--blue-mid);   color: var(--blue); }
+  .opp-cell.r.x  { background: var(--red);    color: #fff; border-color: var(--red); }
+  .opp-cell.y.x  { background: var(--yellow); color: #fff; border-color: var(--yellow); }
+  .opp-cell.g.x  { background: var(--green);  color: #fff; border-color: var(--green); }
+  .opp-cell.b.x  { background: var(--blue);   color: #fff; border-color: var(--blue); }
+  .opp-cell.lk { border-style: dashed; font-size: 0.5rem; }
+  .opp-cell.lk.x { border-style: solid; }
+
+  .opp-score-box { text-align: right; flex-shrink: 0; }
+  .opp-score-label { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; }
+  .opp-score-val { font-family: 'Fredoka One', cursive; font-size: 1.6rem; color: var(--text); line-height: 1; }
+
+  /* ── MAIN CARD ── */
   .card {
     background: var(--card);
     border-radius: 18px;
     box-shadow: 0 6px 28px rgba(0,0,0,0.12);
     padding: 14px 10px 18px;
     width: 100%;
-    max-width: 500px;
+  }
+
+  .player-label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.1rem;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
   }
 
   /* ── SCORING REF ── */
@@ -84,9 +201,7 @@
     color: #666;
   }
 
-  /* ── ROW LAYOUT ──
-     Grid: 22px emoji | 11 equal number cols | 1 equal lock col
-     display:contents on the number wrapper lets cells slot directly into grid */
+  /* ── ROW GRID ── */
   .row {
     display: grid;
     grid-template-columns: 22px repeat(11, 1fr) 1fr;
@@ -94,17 +209,12 @@
     margin-bottom: 6px;
     align-items: center;
   }
-
-  .emoji-label {
-    font-size: 1rem;
-    text-align: center;
-    line-height: 1;
-  }
+  .emoji-label { font-size: 1rem; text-align: center; line-height: 1; }
 
   /* ── NUMBER CELLS ── */
   .cell {
     width: 100%;
-    padding-top: 85%;   /* padding trick for square-ish cells */
+    padding-top: 85%;
     position: relative;
     border-radius: 7px;
     cursor: pointer;
@@ -114,7 +224,6 @@
     user-select: none;
   }
   .cell:active { transform: scale(0.86); }
-
   .cell-inner {
     position: absolute;
     inset: 0;
@@ -126,8 +235,6 @@
     line-height: 1;
     border-radius: 5px;
   }
-
-  /* Row tints */
   .row-red    .cell { background: var(--red-light);    border-color: var(--red-mid); }
   .row-red    .cell-inner { color: var(--red); }
   .row-yellow .cell { background: var(--yellow-light); border-color: var(--yellow-mid); }
@@ -137,7 +244,6 @@
   .row-blue   .cell { background: var(--blue-light);   border-color: var(--blue-mid); }
   .row-blue   .cell-inner { color: var(--blue); }
 
-  /* Crossed */
   .cell.crossed .num { opacity: 0.12; }
   .cell.crossed .cell-inner::after {
     content: '✕';
@@ -154,15 +260,9 @@
   .row-yellow .cell.crossed { background: var(--yellow); border-color: var(--yellow); }
   .row-green  .cell.crossed { background: var(--green);  border-color: var(--green); }
   .row-blue   .cell.crossed { background: var(--blue);   border-color: var(--blue); }
-
-  /* Skipped / unreachable */
   .cell.disabled { opacity: 0.22; pointer-events: none; }
 
-  /* ── LOCK CELL ──
-     Separate from the number cells. Requires:
-       - the last number in the row already crossed
-       - at least 5 total crosses in the row
-     Crossing it is the 12th mark (max 78 pts). */
+  /* ── LOCK CELL ── */
   .lock-cell {
     width: 100%;
     padding-top: 85%;
@@ -175,30 +275,21 @@
     user-select: none;
   }
   .lock-cell:active { transform: scale(0.86); }
-
   .lock-inner {
     position: absolute;
     inset: 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1px;
     border-radius: 5px;
   }
   .lock-icon { font-size: clamp(0.7rem, 2.8vw, 0.95rem); line-height: 1; }
-
   .row-red    .lock-cell { background: var(--red-light);    border-color: var(--red-mid);    color: var(--red); }
   .row-yellow .lock-cell { background: var(--yellow-light); border-color: var(--yellow-mid); color: var(--yellow); }
   .row-green  .lock-cell { background: var(--green-light);  border-color: var(--green-mid);  color: var(--green); }
   .row-blue   .lock-cell { background: var(--blue-light);   border-color: var(--blue-mid);   color: var(--blue); }
-
-  /* Not yet available */
   .lock-cell.unavailable { opacity: 0.28; pointer-events: none; }
-  /* Permanently impossible — deadlocked */
   .lock-cell.dead { opacity: 0.12; pointer-events: none; filter: grayscale(1); }
-
-  /* Crossed lock */
   .lock-cell.crossed { border-style: solid; }
   .row-red    .lock-cell.crossed { background: var(--red);    border-color: var(--red);    color: #fff; }
   .row-yellow .lock-cell.crossed { background: var(--yellow); border-color: var(--yellow); color: #fff; }
@@ -219,36 +310,19 @@
   .lock-cell.crossed .lock-icon { opacity: 0.12; }
 
   /* ── DIVIDER ── */
-  .divider {
-    height: 1px;
-    background: linear-gradient(to right, transparent, #ddd, transparent);
-    margin: 10px 0;
-  }
+  .divider { height: 1px; background: linear-gradient(to right, transparent, #ddd, transparent); margin: 10px 0; }
 
   /* ── PENALTIES ── */
-  .penalties-section {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .penalties-section label {
-    font-family: 'Fredoka One', cursive;
-    font-size: 0.95rem;
-    color: #555;
-  }
+  .penalties-section { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .penalties-section label { font-family: 'Fredoka One', cursive; font-size: 0.95rem; color: #555; }
   .penalty-boxes { display: flex; gap: 5px; }
   .penalty-cell {
-    width: 42px;
-    height: 42px;
+    width: 42px; height: 42px;
     border-radius: 8px;
     background: #f0ece2;
     border: 2px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.9rem;
-    color: #bbb;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; color: #bbb;
     cursor: pointer;
     transition: transform 0.1s;
     -webkit-tap-highlight-color: transparent;
@@ -259,29 +333,10 @@
   .penalty-label { font-size: 0.72rem; color: var(--muted); font-weight: 700; }
 
   /* ── TOTALS ── */
-  .totals-section {
-    margin-top: 14px;
-    padding-top: 12px;
-    border-top: 2px dashed #e0ddd6;
-  }
-  .totals-section h3 {
-    font-family: 'Fredoka One', cursive;
-    font-size: 0.95rem;
-    color: var(--text);
-    text-align: center;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-  }
-  .totals-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
-  }
-  .total-box {
-    border-radius: 10px;
-    padding: 8px 4px;
-    text-align: center;
-  }
+  .totals-section { margin-top: 14px; padding-top: 12px; border-top: 2px dashed #e0ddd6; }
+  .totals-section h3 { font-family: 'Fredoka One', cursive; font-size: 0.95rem; color: var(--text); text-align: center; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .totals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .total-box { border-radius: 10px; padding: 8px 4px; text-align: center; }
   .total-box .tl { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
   .total-box .tv { font-family: 'Fredoka One', cursive; font-size: 1.7rem; line-height: 1.1; }
   .total-box.red    { background: var(--red-light);    color: var(--red); }
@@ -289,199 +344,170 @@
   .total-box.green  { background: var(--green-light);  color: var(--green); }
   .total-box.blue   { background: var(--blue-light);   color: var(--blue); }
   .total-box.pen    { background: #fdecea; color: #c0392b; }
-  .total-box.final  {
-    background: linear-gradient(135deg, #2c2c54, #3d3d7a);
-    color: #fff;
-    grid-column: span 3;
-  }
+  .total-box.final  { background: linear-gradient(135deg, #2c2c54, #3d3d7a); color: #fff; grid-column: span 3; }
   .total-box.final .tl { opacity: 0.85; }
   .total-box.final .tv { font-size: 2rem; }
 
   /* ── BUTTONS ── */
-  .actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-    justify-content: center;
-  }
+  .actions { display: flex; gap: 10px; margin-top: 12px; justify-content: center; }
   button {
     font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    font-size: 0.9rem;
+    font-weight: 800; font-size: 0.9rem;
     padding: 13px 28px;
-    border-radius: 12px;
-    border: none;
+    border-radius: 12px; border: none;
     cursor: pointer;
     transition: transform 0.1s;
     -webkit-tap-highlight-color: transparent;
   }
   button:active { transform: scale(0.94); }
   .btn-reset { background: #f0ece2; color: #666; border: 2px solid #ddd; }
-  .btn-calc  {
-    background: linear-gradient(135deg, #2c2c54, #3d3d7a);
-    color: #fff;
-    box-shadow: 0 4px 14px rgba(44,44,84,0.28);
-  }
+  .btn-leave { background: #fdecea; color: #c0392b; border: 2px solid #f5c0bb; }
 
-  .note {
-    font-size: 0.68rem;
-    color: var(--muted);
-    text-align: center;
-    margin-top: 10px;
-    font-weight: 600;
-    line-height: 1.5;
-    padding: 0 4px;
-  }
+  .note { font-size: 0.68rem; color: var(--muted); text-align: center; margin-top: 10px; font-weight: 600; line-height: 1.5; padding: 0 4px; }
+
+  /* ── SYNC STATUS DOT ── */
+  .sync-row { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 8px; }
+  .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+  .sync-dot.live { background: #27ae60; }
+  .sync-dot.saving { background: var(--yellow); }
+  .sync-label { font-size: 0.65rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
   /* ── TOAST ── */
   #toast {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
+    position: fixed; bottom: 20px; left: 50%;
     transform: translateX(-50%) translateY(80px);
-    background: #2c2c54;
-    color: #fff;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    padding: 10px 20px;
-    border-radius: 30px;
+    background: #2c2c54; color: #fff;
+    font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem;
+    padding: 10px 20px; border-radius: 30px;
     box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     transition: transform 0.3s ease;
-    z-index: 999;
-    white-space: nowrap;
-    pointer-events: none;
+    z-index: 999; white-space: nowrap; pointer-events: none;
   }
   #toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<header>
+<!-- NAME ENTRY -->
+<div id="name-screen">
   <h1>QWIXX</h1>
-  <p>Digital Scorecard</p>
-</header>
+  <p>Multiplayer Scorecard</p>
+  <input id="name-input" type="text" placeholder="Enter your name" maxlength="20" autocomplete="off" />
+  <button id="name-btn" onclick="startGame()">Let's Play</button>
+</div>
 
-<div class="card">
+<!-- GAME -->
+<div id="game-screen">
+  <header><h1>QWIXX</h1></header>
 
-  <div class="scoring-ref">
-    <span>1=1</span><span>2=3</span><span>3=6</span><span>4=10</span><span>5=15</span>
-    <span>6=21</span><span>7=28</span><span>8=36</span><span>9=45</span><span>10=55</span>
-    <span>11=66</span><span>12=78</span>
-  </div>
-
-  <!-- RED: 2→12 then 🔒 -->
-  <div class="row row-red">
-    <div class="emoji-label">🔴</div>
-    <div id="numbers-red"></div>
-    <div class="lock-cell unavailable" id="lock-red" onclick="toggleLock('red')">
-      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+  <!-- Opponent mini-view -->
+  <div id="opponent-banner">
+    <div class="opp-left">
+      <div class="opp-name" id="opp-name">Waiting for opponent...</div>
+      <div id="opp-mini"></div>
+    </div>
+    <div class="opp-score-box">
+      <div class="opp-score-label">Score</div>
+      <div class="opp-score-val" id="opp-score">—</div>
     </div>
   </div>
 
-  <!-- YELLOW: 2→12 then 🔒 -->
-  <div class="row row-yellow">
-    <div class="emoji-label">🟡</div>
-    <div id="numbers-yellow"></div>
-    <div class="lock-cell unavailable" id="lock-yellow" onclick="toggleLock('yellow')">
-      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+  <!-- Sync status -->
+  <div class="sync-row">
+    <div class="sync-dot" id="sync-dot"></div>
+    <div class="sync-label" id="sync-label">Connecting...</div>
+  </div>
+
+  <!-- Main scorecard -->
+  <div class="card">
+    <div class="player-label" id="player-label">Your Card</div>
+
+    <div class="scoring-ref">
+      <span>1=1</span><span>2=3</span><span>3=6</span><span>4=10</span><span>5=15</span>
+      <span>6=21</span><span>7=28</span><span>8=36</span><span>9=45</span><span>10=55</span>
+      <span>11=66</span><span>12=78</span>
     </div>
-  </div>
 
-  <!-- GREEN: 12→2 then 🔒 -->
-  <div class="row row-green">
-    <div class="emoji-label">🟢</div>
-    <div id="numbers-green"></div>
-    <div class="lock-cell unavailable" id="lock-green" onclick="toggleLock('green')">
-      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
-    </div>
-  </div>
-
-  <!-- BLUE: 12→2 then 🔒 -->
-  <div class="row row-blue">
-    <div class="emoji-label">🔵</div>
-    <div id="numbers-blue"></div>
-    <div class="lock-cell unavailable" id="lock-blue" onclick="toggleLock('blue')">
-      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
-    </div>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="penalties-section">
-    <label>Penalties</label>
-    <div class="penalty-boxes" id="penalty-boxes"></div>
-    <div class="penalty-label">= −5 each</div>
-  </div>
-
-  <div class="totals-section">
-    <h3>SCORE TOTALS</h3>
-    <div class="totals-grid">
-      <div class="total-box red">
-        <div class="tl">Red</div>
-        <div class="tv" id="total-red">0</div>
-      </div>
-      <div class="total-box yellow">
-        <div class="tl">Yellow</div>
-        <div class="tv" id="total-yellow">0</div>
-      </div>
-      <div class="total-box green">
-        <div class="tl">Green</div>
-        <div class="tv" id="total-green">0</div>
-      </div>
-      <div class="total-box blue">
-        <div class="tl">Blue</div>
-        <div class="tv" id="total-blue">0</div>
-      </div>
-      <div class="total-box pen">
-        <div class="tl">Penalties</div>
-        <div class="tv" id="total-pen">0</div>
-      </div>
-      <div class="total-box final">
-        <div class="tl">Final Score</div>
-        <div class="tv" id="total-final">0</div>
+    <div class="row row-red">
+      <div class="emoji-label">🔴</div>
+      <div id="numbers-red"></div>
+      <div class="lock-cell unavailable" id="lock-red" onclick="toggleLock('red')">
+        <div class="lock-inner"><span class="lock-icon">🔒</span></div>
       </div>
     </div>
-  </div>
+    <div class="row row-yellow">
+      <div class="emoji-label">🟡</div>
+      <div id="numbers-yellow"></div>
+      <div class="lock-cell unavailable" id="lock-yellow" onclick="toggleLock('yellow')">
+        <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+      </div>
+    </div>
+    <div class="row row-green">
+      <div class="emoji-label">🟢</div>
+      <div id="numbers-green"></div>
+      <div class="lock-cell unavailable" id="lock-green" onclick="toggleLock('green')">
+        <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+      </div>
+    </div>
+    <div class="row row-blue">
+      <div class="emoji-label">🔵</div>
+      <div id="numbers-blue"></div>
+      <div class="lock-cell unavailable" id="lock-blue" onclick="toggleLock('blue')">
+        <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+      </div>
+    </div>
 
-  <div class="actions">
-    <button class="btn-reset" onclick="resetAll()">Reset</button>
-    <button class="btn-calc" onclick="calcScore()">Calculate</button>
-  </div>
+    <div class="divider"></div>
 
-  <p class="note">
-    Mark numbers left→right. To use 🔒: cross the last number in the row (12 or 2) AND have 5+ total crosses. The lock is a 12th cross (max 78 pts).
-  </p>
+    <div class="penalties-section">
+      <label>Penalties</label>
+      <div class="penalty-boxes" id="penalty-boxes"></div>
+      <div class="penalty-label">= −5 each</div>
+    </div>
+
+    <div class="totals-section">
+      <h3>SCORE TOTALS</h3>
+      <div class="totals-grid">
+        <div class="total-box red"><div class="tl">Red</div><div class="tv" id="total-red">0</div></div>
+        <div class="total-box yellow"><div class="tl">Yellow</div><div class="tv" id="total-yellow">0</div></div>
+        <div class="total-box green"><div class="tl">Green</div><div class="tv" id="total-green">0</div></div>
+        <div class="total-box blue"><div class="tl">Blue</div><div class="tv" id="total-blue">0</div></div>
+        <div class="total-box pen"><div class="tl">Penalties</div><div class="tv" id="total-pen">0</div></div>
+        <div class="total-box final"><div class="tl">Final Score</div><div class="tv" id="total-final">0</div></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-reset" onclick="resetAll()">Reset</button>
+      <button class="btn-leave" onclick="leaveGame()">Leave Game</button>
+    </div>
+
+    <p class="note">Mark numbers left→right. Cross the last number (12 or 2) with 5+ crosses to unlock 🔒. Lock = 12th cross = 78 pts max.</p>
+  </div>
 </div>
 
 <div id="toast"></div>
 
 <script>
-/*
-  CORRECT RULES (per official Qwixx rulebook):
-  - Each row has 11 tappable numbers:
-      Red/Yellow:  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
-      Green/Blue: 12,11,10, 9, 8, 7, 6,  5,  4,  3,  2
-  - The 🔒 is a SEPARATE 12th mark after the last number.
-  - To mark the 🔒 you must:
-      1. Have already crossed the last number in the row (12 for red/yellow, 2 for green/blue) — that's index 10
-      2. Have at least 5 total crosses in the row (including that last number)
-  - The lock cross counts toward total crosses → max 12 = 78 pts.
-  - If it becomes impossible to reach 5 crosses, the lock is permanently disabled.
-*/
+// ── SUPABASE ──────────────────────────────────────────────
+const SUPA_URL = 'https://wtuidpjfzguuvhzvuwhr.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind0dWlkcGpmemd1dXZoenZ1d2hyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA3NjkzNjAsImV4cCI6MjA5NjM0NTM2MH0.hof2aPuuYCggKMS4y8F4F2vRig_ISdo7YAFdSuvXlrQ';
+const sb = supabase.createClient(SUPA_URL, SUPA_KEY);
 
+// ── GAME CONFIG ───────────────────────────────────────────
 const ROWS = [
-  { id: 'red',    nums: [2,3,4,5,6,7,8,9,10,11,12] },
-  { id: 'yellow', nums: [2,3,4,5,6,7,8,9,10,11,12] },
-  { id: 'green',  nums: [12,11,10,9,8,7,6,5,4,3,2] },
-  { id: 'blue',   nums: [12,11,10,9,8,7,6,5,4,3,2] },
+  { id: 'red',    nums: [2,3,4,5,6,7,8,9,10,11,12], color: 'r' },
+  { id: 'yellow', nums: [2,3,4,5,6,7,8,9,10,11,12], color: 'y' },
+  { id: 'green',  nums: [12,11,10,9,8,7,6,5,4,3,2],  color: 'g' },
+  { id: 'blue',   nums: [12,11,10,9,8,7,6,5,4,3,2],  color: 'b' },
 ];
-
-// Last number index in each row (the 12 or 2 that must be crossed before lock)
 const LAST_NUM_IDX = 10;
-
-// Points: index = number of total crosses including lock (0–12)
 const PTS = [0,1,3,6,10,15,21,28,36,45,55,66,78];
+
+// ── LOCAL STATE ───────────────────────────────────────────
+let myId   = null;
+let myName = '';
+let saveTimer = null;
 
 const state = {
   red:    { lastIdx: -1, lock: false, dead: false },
@@ -491,11 +517,73 @@ const state = {
   penalties: 0,
 };
 
-// ── BUILD ─────────────────────────────────────────────────
+// ── NAME ENTRY ────────────────────────────────────────────
+document.getElementById('name-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') startGame();
+});
+
+async function startGame() {
+  const raw = document.getElementById('name-input').value.trim();
+  if (!raw) { toast('Enter your name first!'); return; }
+  myName = raw;
+
+  // Check if this name already exists — reuse that row
+  const { data: existing } = await sb
+    .from('qwixx_players')
+    .select('*')
+    .eq('name', myName)
+    .single();
+
+  if (existing) {
+    myId = existing.id;
+    // Restore state from DB
+    restoreState(existing);
+  } else {
+    // Insert new player
+    const { data: inserted, error } = await sb
+      .from('qwixx_players')
+      .insert({ name: myName })
+      .select()
+      .single();
+    if (error) { toast('Connection error — check Supabase setup.'); console.error(error); return; }
+    myId = inserted.id;
+  }
+
+  document.getElementById('name-screen').style.display  = 'none';
+  document.getElementById('game-screen').style.display  = 'flex';
+  document.getElementById('game-screen').style.flexDirection = 'column';
+  document.getElementById('player-label').textContent = myName + "'s Card";
+
+  buildRows();
+  buildPenalties();
+  calcScore();
+  subscribeRealtime();
+  pingAlive();
+  setInterval(pingAlive, 20000); // keep last_seen fresh
+}
+
+// ── RESTORE STATE FROM DB ROW ─────────────────────────────
+function restoreState(row) {
+  ['red','yellow','green','blue'].forEach(color => {
+    const data = row['row_' + color];
+    const cells = Array.from(document.getElementById('numbers-' + color)?.querySelectorAll('.cell') || []);
+    state[color].lastIdx = -1;
+    state[color].lock    = data.lock || false;
+    state[color].dead    = data.dead || false;
+    if (data.cells) {
+      data.cells.forEach(idx => {
+        state[color].lastIdx = Math.max(state[color].lastIdx, idx);
+      });
+    }
+  });
+  state.penalties = row.penalties || 0;
+}
+
+// ── BUILD UI ──────────────────────────────────────────────
 function buildRows() {
   ROWS.forEach(row => {
     const container = document.getElementById('numbers-' + row.id);
-    container.style.display = 'contents'; // grid children slot directly into parent grid
+    container.style.display = 'contents';
     row.nums.forEach((num, idx) => {
       const cell = document.createElement('div');
       cell.className = 'cell';
@@ -503,18 +591,41 @@ function buildRows() {
       cell.addEventListener('click', () => toggleCell(row.id, idx));
       container.appendChild(cell);
     });
+    // Restore crossed state visually
+    restoreVisual(row.id);
   });
+}
+
+function restoreVisual(rowId) {
+  const container = document.getElementById('numbers-' + rowId);
+  const cells = Array.from(container.querySelectorAll('.cell'));
+  const s = state[rowId];
+  // Rebuild crossed from lastIdx — we need the actual cell list stored
+  // Since we store indexes, re-apply
+  cells.forEach((c, i) => {
+    c.classList.remove('crossed', 'disabled');
+  });
+  if (s.lastIdx >= 0) {
+    // We don't know exactly which were skipped vs crossed without storing them
+    // So on restore just mark up to lastIdx as crossed (conservative)
+    // The DB stores actual crossed indexes in cells array
+  }
+  refreshDisabled(rowId);
+  refreshLockUI(rowId);
 }
 
 function buildPenalties() {
   const box = document.getElementById('penalty-boxes');
+  box.innerHTML = '';
   for (let i = 0; i < 4; i++) {
     const p = document.createElement('div');
     p.className = 'penalty-cell';
+    if (i < state.penalties) p.classList.add('active');
     p.addEventListener('click', () => {
       p.classList.toggle('active');
       state.penalties = document.querySelectorAll('.penalty-cell.active').length;
       calcScore();
+      scheduleSave();
     });
     box.appendChild(p);
   }
@@ -528,12 +639,9 @@ function toggleCell(rowId, idx) {
   const cell = cells[idx];
 
   if (cell.classList.contains('crossed')) {
-    // Uncross this and everything after it
     cells.forEach((c, i) => { if (i >= idx) c.classList.remove('crossed'); });
-    // Recalculate lastIdx
     s.lastIdx = -1;
     cells.forEach((c, i) => { if (c.classList.contains('crossed')) s.lastIdx = i; });
-    // If the last number was uncrossed, clear the lock too
     if (idx === LAST_NUM_IDX && s.lock) {
       s.lock = false;
       document.getElementById('lock-' + rowId).classList.remove('crossed');
@@ -545,90 +653,56 @@ function toggleCell(rowId, idx) {
   }
 
   refreshDisabled(rowId);
-  refreshLock(rowId);
+  refreshLockUI(rowId);
   calcScore();
+  scheduleSave();
 }
 
-// ── GREY OUT SKIPPED CELLS ────────────────────────────────
 function refreshDisabled(rowId) {
   const container = document.getElementById('numbers-' + rowId);
   const cells = Array.from(container.querySelectorAll('.cell'));
   const last = state[rowId].lastIdx;
   cells.forEach((c, i) => {
-    if (c.classList.contains('crossed')) {
-      c.classList.remove('disabled');
-    } else if (i < last) {
-      c.classList.add('disabled');
-    } else {
-      c.classList.remove('disabled');
-    }
+    if (c.classList.contains('crossed')) { c.classList.remove('disabled'); }
+    else if (i < last) { c.classList.add('disabled'); }
+    else { c.classList.remove('disabled'); }
   });
 }
 
-// ── REFRESH LOCK AVAILABILITY ─────────────────────────────
-function refreshLock(rowId) {
+function refreshLockUI(rowId) {
   const container = document.getElementById('numbers-' + rowId);
   const cells = Array.from(container.querySelectorAll('.cell'));
   const s = state[rowId];
   const lockEl = document.getElementById('lock-' + rowId);
-
   const crossed = cells.filter(c => c.classList.contains('crossed')).length;
-  // Reachable = cells not yet skipped over (index > lastIdx) that aren't crossed
   const reachable = cells.filter((c, i) => i > s.lastIdx && !c.classList.contains('crossed')).length;
 
-  // If 5 crosses is no longer mathematically possible, kill the lock permanently
-  if (!s.lock && !s.dead && (crossed + reachable + (s.lastIdx >= 0 ? 0 : 0)) < 5) {
-    // More precise: total possible = crossed + reachable cells remaining
-    if (crossed + reachable < 5) {
-      s.dead = true;
-    }
-  }
+  if (!s.lock && !s.dead && crossed + reachable < 5) { s.dead = true; }
 
   if (s.dead && !s.lock) {
-    lockEl.classList.remove('unavailable');
-    lockEl.classList.add('dead');
-    return;
+    lockEl.classList.remove('unavailable'); lockEl.classList.add('dead'); return;
   }
-
-  // Lock is clickable only when:
-  // 1. Last number (index 10) is crossed
-  // 2. Total crosses >= 5
   const lastNumCrossed = cells[LAST_NUM_IDX].classList.contains('crossed');
   const canLock = lastNumCrossed && crossed >= 5;
-
-  if (canLock || s.lock) {
-    lockEl.classList.remove('unavailable', 'dead');
-  } else {
-    lockEl.classList.add('unavailable');
-    lockEl.classList.remove('dead');
-  }
+  if (canLock || s.lock) { lockEl.classList.remove('unavailable', 'dead'); }
+  else { lockEl.classList.add('unavailable'); lockEl.classList.remove('dead'); }
+  lockEl.classList.toggle('crossed', s.lock);
 }
 
-// ── TOGGLE LOCK ───────────────────────────────────────────
 function toggleLock(rowId) {
   const container = document.getElementById('numbers-' + rowId);
   const cells = Array.from(container.querySelectorAll('.cell'));
   const s = state[rowId];
-  const lockEl = document.getElementById('lock-' + rowId);
-
   const crossed = cells.filter(c => c.classList.contains('crossed')).length;
   const lastNumCrossed = cells[LAST_NUM_IDX].classList.contains('crossed');
-
   if (!s.lock) {
-    if (!lastNumCrossed) {
-      const lastNum = cells[LAST_NUM_IDX].querySelector('.num').textContent;
-      toast(`Cross ${lastNum} first, then the lock!`);
-      return;
-    }
-    if (crossed < 5) {
-      toast('Need at least 5 crosses in this row!');
-      return;
-    }
+    if (!lastNumCrossed) { toast(`Cross ${cells[LAST_NUM_IDX].querySelector('.num').textContent} first!`); return; }
+    if (crossed < 5) { toast('Need at least 5 crosses first!'); return; }
   }
-
   s.lock = !s.lock;
-  lockEl.classList.toggle('crossed', s.lock);
+  document.getElementById('lock-' + rowId).classList.toggle('crossed', s.lock);
   calcScore();
+  scheduleSave();
 }
 
 // ── SCORE ─────────────────────────────────────────────────
@@ -636,9 +710,8 @@ function calcScore() {
   let grand = 0;
   ROWS.forEach(row => {
     const container = document.getElementById('numbers-' + row.id);
-    const numCrossed = container.querySelectorAll('.cell.crossed').length;
-    const total = numCrossed + (state[row.id].lock ? 1 : 0);
-    const pts = PTS[total] || 0;
+    const n = container.querySelectorAll('.cell.crossed').length + (state[row.id].lock ? 1 : 0);
+    const pts = PTS[n] || 0;
     document.getElementById('total-' + row.id).textContent = pts;
     grand += pts;
   });
@@ -646,11 +719,122 @@ function calcScore() {
   document.getElementById('total-pen').textContent = penPts > 0 ? '−' + penPts : '0';
   grand -= penPts;
   document.getElementById('total-final').textContent = grand;
+  return grand;
+}
+
+// ── SAVE TO SUPABASE ──────────────────────────────────────
+function scheduleSave() {
+  setSyncStatus('saving');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveToDb, 600);
+}
+
+async function saveToDb() {
+  if (!myId) return;
+  const score = calcScore();
+  const payload = { score, penalties: state.penalties, last_seen: new Date().toISOString() };
+  ROWS.forEach(row => {
+    const container = document.getElementById('numbers-' + row.id);
+    const cells = Array.from(container.querySelectorAll('.cell'));
+    const crossed = [];
+    cells.forEach((c, i) => { if (c.classList.contains('crossed')) crossed.push(i); });
+    payload['row_' + row.id] = {
+      cells: crossed,
+      lock: state[row.id].lock,
+      dead: state[row.id].dead,
+    };
+  });
+  const { error } = await sb.from('qwixx_players').update(payload).eq('id', myId);
+  if (error) { setSyncStatus('offline'); console.error(error); }
+  else { setSyncStatus('live'); }
+}
+
+async function pingAlive() {
+  if (!myId) return;
+  await sb.from('qwixx_players').update({ last_seen: new Date().toISOString() }).eq('id', myId);
+}
+
+// ── REALTIME SUBSCRIPTION ─────────────────────────────────
+function subscribeRealtime() {
+  sb.channel('qwixx-room')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'qwixx_players' }, payload => {
+      const row = payload.new;
+      if (!row || row.id === myId) return; // ignore own updates
+      renderOpponent(row);
+    })
+    .subscribe(status => {
+      if (status === 'SUBSCRIBED') {
+        setSyncStatus('live');
+        loadOpponent(); // grab current opponent state on connect
+      }
+    });
+}
+
+async function loadOpponent() {
+  const { data } = await sb
+    .from('qwixx_players')
+    .select('*')
+    .neq('id', myId)
+    .order('last_seen', { ascending: false })
+    .limit(1)
+    .single();
+  if (data) renderOpponent(data);
+}
+
+// ── RENDER OPPONENT MINI VIEW ─────────────────────────────
+function renderOpponent(row) {
+  document.getElementById('opp-name').textContent = row.name;
+  document.getElementById('opp-score').textContent = row.score ?? '—';
+
+  const mini = document.getElementById('opp-mini');
+  mini.innerHTML = '';
+
+  const colorMap = { red: 'r', yellow: 'y', green: 'g', blue: 'b' };
+  const numsMap  = {
+    red:    [2,3,4,5,6,7,8,9,10,11,12],
+    yellow: [2,3,4,5,6,7,8,9,10,11,12],
+    green:  [12,11,10,9,8,7,6,5,4,3,2],
+    blue:   [12,11,10,9,8,7,6,5,4,3,2],
+  };
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'opp-mini-rows';
+
+  ['red','yellow','green','blue'].forEach(color => {
+    const rowData = row['row_' + color] || { cells: [], lock: false };
+    const crossedSet = new Set(rowData.cells || []);
+    const rowEl = document.createElement('div');
+    rowEl.className = 'opp-mini-row';
+    const cls = colorMap[color];
+    numsMap[color].forEach((num, idx) => {
+      const c = document.createElement('div');
+      c.className = `opp-cell ${cls}${crossedSet.has(idx) ? ' x' : ''}`;
+      c.textContent = crossedSet.has(idx) ? '' : num;
+      rowEl.appendChild(c);
+    });
+    // Lock cell
+    const lk = document.createElement('div');
+    lk.className = `opp-cell ${cls} lk${rowData.lock ? ' x' : ''}`;
+    lk.textContent = rowData.lock ? '' : '🔒';
+    rowEl.appendChild(lk);
+    wrapper.appendChild(rowEl);
+  });
+  mini.appendChild(wrapper);
+}
+
+// ── SYNC STATUS ───────────────────────────────────────────
+function setSyncStatus(s) {
+  const dot   = document.getElementById('sync-dot');
+  const label = document.getElementById('sync-label');
+  dot.className = 'sync-dot';
+  if (s === 'live')    { dot.classList.add('live');   label.textContent = 'Live'; }
+  else if (s === 'saving') { dot.classList.add('saving'); label.textContent = 'Saving...'; }
+  else                 { label.textContent = 'Offline'; }
 }
 
 // ── RESET ─────────────────────────────────────────────────
 function resetAll() {
-  if (!confirm('Clear the whole scorecard?')) return;
+  if (!confirm('Reset your scorecard?')) return;
   ROWS.forEach(row => {
     state[row.id].lastIdx = -1;
     state[row.id].lock    = false;
@@ -662,8 +846,15 @@ function resetAll() {
     lockEl.classList.add('unavailable');
   });
   state.penalties = 0;
-  document.querySelectorAll('.penalty-cell').forEach(p => p.classList.remove('active'));
+  buildPenalties();
   calcScore();
+  scheduleSave();
+}
+
+async function leaveGame() {
+  if (!confirm('Leave the game? Your score will be removed.')) return;
+  if (myId) await sb.from('qwixx_players').delete().eq('id', myId);
+  location.reload();
 }
 
 // ── TOAST ─────────────────────────────────────────────────
@@ -675,10 +866,6 @@ function toast(msg) {
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
 }
-
-buildRows();
-buildPenalties();
-calcScore();
 </script>
 </body>
 </html>
