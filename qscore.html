@@ -674,18 +674,42 @@ function refreshLockUI(rowId) {
   const cells = Array.from(container.querySelectorAll('.cell'));
   const s = state[rowId];
   const lockEl = document.getElementById('lock-' + rowId);
-  const crossed = cells.filter(c => c.classList.contains('crossed')).length;
-  const reachable = cells.filter((c, i) => i > s.lastIdx && !c.classList.contains('crossed')).length;
 
-  if (!s.lock && !s.dead && crossed + reachable < 5) { s.dead = true; }
+  const crossed = cells.filter(c => c.classList.contains('crossed')).length;
+
+  // Reachable = every cell not yet skipped over (index >= lastIdx+1) that isn't crossed
+  // Plus the cell AT lastIdx if it happens to not be crossed (edge case)
+  // Simplest correct version: cells with index > s.lastIdx are still reachable
+  // (they haven't been passed). Cells at exactly lastIdx are either crossed or skipped.
+  const stillReachable = cells.filter((c, i) => i > s.lastIdx).length;
+  const totalPossible = crossed + stillReachable;
+
+  // Only mark dead if 5 is truly impossible and the lock isn't already checked
+  if (!s.lock && !s.dead && totalPossible < 5) {
+    s.dead = true;
+  }
+
+  // If somehow they un-cross enough to recover possibility, un-dead it
+  if (s.dead && !s.lock && totalPossible >= 5) {
+    s.dead = false;
+  }
 
   if (s.dead && !s.lock) {
-    lockEl.classList.remove('unavailable'); lockEl.classList.add('dead'); return;
+    lockEl.classList.remove('unavailable');
+    lockEl.classList.add('dead');
+    return;
   }
+
+  // Lock is available when: last number (index 10) is crossed AND 5+ total crosses
   const lastNumCrossed = cells[LAST_NUM_IDX].classList.contains('crossed');
   const canLock = lastNumCrossed && crossed >= 5;
-  if (canLock || s.lock) { lockEl.classList.remove('unavailable', 'dead'); }
-  else { lockEl.classList.add('unavailable'); lockEl.classList.remove('dead'); }
+
+  if (canLock || s.lock) {
+    lockEl.classList.remove('unavailable', 'dead');
+  } else {
+    lockEl.classList.add('unavailable');
+    lockEl.classList.remove('dead');
+  }
   lockEl.classList.toggle('crossed', s.lock);
 }
 
