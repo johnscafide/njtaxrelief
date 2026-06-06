@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Qwixx Scorecard</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red:          #cc2a2a;
+    --red-light:    #ffd6d6;
+    --red-mid:      #e87070;
+    --yellow:       #c47d00;
+    --yellow-light: #fff0b3;
+    --yellow-mid:   #e8b830;
+    --green:        #1a7a42;
+    --green-light:  #c2f0d4;
+    --green-mid:    #4db872;
+    --blue:         #1560a0;
+    --blue-light:   #c4e4f8;
+    --blue-mid:     #4a9ed4;
+    --bg:           #e8e4dc;
+    --card:         #ffffff;
+    --text:         #1a1a2e;
+    --muted:        #999;
+  }
+
+  html, body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 8px 48px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  header { text-align: center; margin-bottom: 14px; }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.4rem;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--red) 0%, var(--yellow) 38%, var(--green) 68%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+  header p {
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+    padding: 14px 10px 18px;
+    width: 100%;
+    max-width: 500px;
+  }
+
+  /* ── SCORING REF ── */
+  .scoring-ref {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .scoring-ref span {
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: #f0ece2;
+    border-radius: 4px;
+    padding: 2px 5px;
+    color: #666;
+  }
+
+  /* ── ROW LAYOUT ──
+     Grid: 22px emoji | 11 equal number cols | 1 equal lock col
+     display:contents on the number wrapper lets cells slot directly into grid */
+  .row {
+    display: grid;
+    grid-template-columns: 22px repeat(11, 1fr) 1fr;
+    gap: 3px;
+    margin-bottom: 6px;
+    align-items: center;
+  }
+
+  .emoji-label {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1;
+  }
+
+  /* ── NUMBER CELLS ── */
+  .cell {
+    width: 100%;
+    padding-top: 85%;   /* padding trick for square-ish cells */
+    position: relative;
+    border-radius: 7px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s;
+    border: 2px solid transparent;
+    user-select: none;
+  }
+  .cell:active { transform: scale(0.86); }
+
+  .cell-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.8rem, 3.2vw, 1.15rem);
+    line-height: 1;
+    border-radius: 5px;
+  }
+
+  /* Row tints */
+  .row-red    .cell { background: var(--red-light);    border-color: var(--red-mid); }
+  .row-red    .cell-inner { color: var(--red); }
+  .row-yellow .cell { background: var(--yellow-light); border-color: var(--yellow-mid); }
+  .row-yellow .cell-inner { color: var(--yellow); }
+  .row-green  .cell { background: var(--green-light);  border-color: var(--green-mid); }
+  .row-green  .cell-inner { color: var(--green); }
+  .row-blue   .cell { background: var(--blue-light);   border-color: var(--blue-mid); }
+  .row-blue   .cell-inner { color: var(--blue); }
+
+  /* Crossed */
+  .cell.crossed .num { opacity: 0.12; }
+  .cell.crossed .cell-inner::after {
+    content: '✕';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+    border-radius: 5px;
+    color: #fff;
+  }
+  .row-red    .cell.crossed { background: var(--red);    border-color: var(--red); }
+  .row-yellow .cell.crossed { background: var(--yellow); border-color: var(--yellow); }
+  .row-green  .cell.crossed { background: var(--green);  border-color: var(--green); }
+  .row-blue   .cell.crossed { background: var(--blue);   border-color: var(--blue); }
+
+  /* Skipped / unreachable */
+  .cell.disabled { opacity: 0.22; pointer-events: none; }
+
+  /* ── LOCK CELL ──
+     Separate from the number cells. Requires:
+       - the last number in the row already crossed
+       - at least 5 total crosses in the row
+     Crossing it is the 12th mark (max 78 pts). */
+  .lock-cell {
+    width: 100%;
+    padding-top: 85%;
+    position: relative;
+    border-radius: 7px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.1s;
+    border: 2px dashed;
+    user-select: none;
+  }
+  .lock-cell:active { transform: scale(0.86); }
+
+  .lock-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    border-radius: 5px;
+  }
+  .lock-icon { font-size: clamp(0.7rem, 2.8vw, 0.95rem); line-height: 1; }
+
+  .row-red    .lock-cell { background: var(--red-light);    border-color: var(--red-mid);    color: var(--red); }
+  .row-yellow .lock-cell { background: var(--yellow-light); border-color: var(--yellow-mid); color: var(--yellow); }
+  .row-green  .lock-cell { background: var(--green-light);  border-color: var(--green-mid);  color: var(--green); }
+  .row-blue   .lock-cell { background: var(--blue-light);   border-color: var(--blue-mid);   color: var(--blue); }
+
+  /* Not yet available */
+  .lock-cell.unavailable { opacity: 0.28; pointer-events: none; }
+  /* Permanently impossible — deadlocked */
+  .lock-cell.dead { opacity: 0.12; pointer-events: none; filter: grayscale(1); }
+
+  /* Crossed lock */
+  .lock-cell.crossed { border-style: solid; }
+  .row-red    .lock-cell.crossed { background: var(--red);    border-color: var(--red);    color: #fff; }
+  .row-yellow .lock-cell.crossed { background: var(--yellow); border-color: var(--yellow); color: #fff; }
+  .row-green  .lock-cell.crossed { background: var(--green);  border-color: var(--green);  color: #fff; }
+  .row-blue   .lock-cell.crossed { background: var(--blue);   border-color: var(--blue);   color: #fff; }
+  .lock-cell.crossed .lock-inner::after {
+    content: '✕';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(0.95rem, 3.8vw, 1.25rem);
+    color: rgba(255,255,255,0.88);
+    border-radius: 5px;
+  }
+  .lock-cell.crossed .lock-icon { opacity: 0.12; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, #ddd, transparent);
+    margin: 10px 0;
+  }
+
+  /* ── PENALTIES ── */
+  .penalties-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .penalties-section label {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  .penalty-boxes { display: flex; gap: 5px; }
+  .penalty-cell {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    background: #f0ece2;
+    border: 2px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #bbb;
+    cursor: pointer;
+    transition: transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .penalty-cell:active { transform: scale(0.86); }
+  .penalty-cell.active { background: #cc2a2a; border-color: #a01e1e; color: #fff; }
+  .penalty-cell.active::after { content: '✕'; font-family: 'Fredoka One', cursive; }
+  .penalty-label { font-size: 0.72rem; color: var(--muted); font-weight: 700; }
+
+  /* ── TOTALS ── */
+  .totals-section {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 2px dashed #e0ddd6;
+  }
+  .totals-section h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.95rem;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .totals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .total-box {
+    border-radius: 10px;
+    padding: 8px 4px;
+    text-align: center;
+  }
+  .total-box .tl { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.7; }
+  .total-box .tv { font-family: 'Fredoka One', cursive; font-size: 1.7rem; line-height: 1.1; }
+  .total-box.red    { background: var(--red-light);    color: var(--red); }
+  .total-box.yellow { background: var(--yellow-light); color: var(--yellow); }
+  .total-box.green  { background: var(--green-light);  color: var(--green); }
+  .total-box.blue   { background: var(--blue-light);   color: var(--blue); }
+  .total-box.pen    { background: #fdecea; color: #c0392b; }
+  .total-box.final  {
+    background: linear-gradient(135deg, #2c2c54, #3d3d7a);
+    color: #fff;
+    grid-column: span 3;
+  }
+  .total-box.final .tl { opacity: 0.85; }
+  .total-box.final .tv { font-size: 2rem; }
+
+  /* ── BUTTONS ── */
+  .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    justify-content: center;
+  }
+  button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.9rem;
+    padding: 13px 28px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:active { transform: scale(0.94); }
+  .btn-reset { background: #f0ece2; color: #666; border: 2px solid #ddd; }
+  .btn-calc  {
+    background: linear-gradient(135deg, #2c2c54, #3d3d7a);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(44,44,84,0.28);
+  }
+
+  .note {
+    font-size: 0.68rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 0 4px;
+  }
+
+  /* ── TOAST ── */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #2c2c54;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease;
+    z-index: 999;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  #toast.show { transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>QWIXX</h1>
+  <p>Digital Scorecard</p>
+</header>
+
+<div class="card">
+
+  <div class="scoring-ref">
+    <span>1=1</span><span>2=3</span><span>3=6</span><span>4=10</span><span>5=15</span>
+    <span>6=21</span><span>7=28</span><span>8=36</span><span>9=45</span><span>10=55</span>
+    <span>11=66</span><span>12=78</span>
+  </div>
+
+  <!-- RED: 2→12 then 🔒 -->
+  <div class="row row-red">
+    <div class="emoji-label">🔴</div>
+    <div id="numbers-red"></div>
+    <div class="lock-cell unavailable" id="lock-red" onclick="toggleLock('red')">
+      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+    </div>
+  </div>
+
+  <!-- YELLOW: 2→12 then 🔒 -->
+  <div class="row row-yellow">
+    <div class="emoji-label">🟡</div>
+    <div id="numbers-yellow"></div>
+    <div class="lock-cell unavailable" id="lock-yellow" onclick="toggleLock('yellow')">
+      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+    </div>
+  </div>
+
+  <!-- GREEN: 12→2 then 🔒 -->
+  <div class="row row-green">
+    <div class="emoji-label">🟢</div>
+    <div id="numbers-green"></div>
+    <div class="lock-cell unavailable" id="lock-green" onclick="toggleLock('green')">
+      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+    </div>
+  </div>
+
+  <!-- BLUE: 12→2 then 🔒 -->
+  <div class="row row-blue">
+    <div class="emoji-label">🔵</div>
+    <div id="numbers-blue"></div>
+    <div class="lock-cell unavailable" id="lock-blue" onclick="toggleLock('blue')">
+      <div class="lock-inner"><span class="lock-icon">🔒</span></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="penalties-section">
+    <label>Penalties</label>
+    <div class="penalty-boxes" id="penalty-boxes"></div>
+    <div class="penalty-label">= −5 each</div>
+  </div>
+
+  <div class="totals-section">
+    <h3>SCORE TOTALS</h3>
+    <div class="totals-grid">
+      <div class="total-box red">
+        <div class="tl">Red</div>
+        <div class="tv" id="total-red">0</div>
+      </div>
+      <div class="total-box yellow">
+        <div class="tl">Yellow</div>
+        <div class="tv" id="total-yellow">0</div>
+      </div>
+      <div class="total-box green">
+        <div class="tl">Green</div>
+        <div class="tv" id="total-green">0</div>
+      </div>
+      <div class="total-box blue">
+        <div class="tl">Blue</div>
+        <div class="tv" id="total-blue">0</div>
+      </div>
+      <div class="total-box pen">
+        <div class="tl">Penalties</div>
+        <div class="tv" id="total-pen">0</div>
+      </div>
+      <div class="total-box final">
+        <div class="tl">Final Score</div>
+        <div class="tv" id="total-final">0</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-reset" onclick="resetAll()">Reset</button>
+    <button class="btn-calc" onclick="calcScore()">Calculate</button>
+  </div>
+
+  <p class="note">
+    Mark numbers left→right. To use 🔒: cross the last number in the row (12 or 2) AND have 5+ total crosses. The lock is a 12th cross (max 78 pts).
+  </p>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/*
+  CORRECT RULES (per official Qwixx rulebook):
+  - Each row has 11 tappable numbers:
+      Red/Yellow:  2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12
+      Green/Blue: 12,11,10, 9, 8, 7, 6,  5,  4,  3,  2
+  - The 🔒 is a SEPARATE 12th mark after the last number.
+  - To mark the 🔒 you must:
+      1. Have already crossed the last number in the row (12 for red/yellow, 2 for green/blue) — that's index 10
+      2. Have at least 5 total crosses in the row (including that last number)
+  - The lock cross counts toward total crosses → max 12 = 78 pts.
+  - If it becomes impossible to reach 5 crosses, the lock is permanently disabled.
+*/
+
+const ROWS = [
+  { id: 'red',    nums: [2,3,4,5,6,7,8,9,10,11,12] },
+  { id: 'yellow', nums: [2,3,4,5,6,7,8,9,10,11,12] },
+  { id: 'green',  nums: [12,11,10,9,8,7,6,5,4,3,2] },
+  { id: 'blue',   nums: [12,11,10,9,8,7,6,5,4,3,2] },
+];
+
+// Last number index in each row (the 12 or 2 that must be crossed before lock)
+const LAST_NUM_IDX = 10;
+
+// Points: index = number of total crosses including lock (0–12)
+const PTS = [0,1,3,6,10,15,21,28,36,45,55,66,78];
+
+const state = {
+  red:    { lastIdx: -1, lock: false, dead: false },
+  yellow: { lastIdx: -1, lock: false, dead: false },
+  green:  { lastIdx: -1, lock: false, dead: false },
+  blue:   { lastIdx: -1, lock: false, dead: false },
+  penalties: 0,
+};
+
+// ── BUILD ─────────────────────────────────────────────────
+function buildRows() {
+  ROWS.forEach(row => {
+    const container = document.getElementById('numbers-' + row.id);
+    container.style.display = 'contents'; // grid children slot directly into parent grid
+    row.nums.forEach((num, idx) => {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.innerHTML = `<div class="cell-inner"><span class="num">${num}</span></div>`;
+      cell.addEventListener('click', () => toggleCell(row.id, idx));
+      container.appendChild(cell);
+    });
+  });
+}
+
+function buildPenalties() {
+  const box = document.getElementById('penalty-boxes');
+  for (let i = 0; i < 4; i++) {
+    const p = document.createElement('div');
+    p.className = 'penalty-cell';
+    p.addEventListener('click', () => {
+      p.classList.toggle('active');
+      state.penalties = document.querySelectorAll('.penalty-cell.active').length;
+      calcScore();
+    });
+    box.appendChild(p);
+  }
+}
+
+// ── TOGGLE NUMBER CELL ────────────────────────────────────
+function toggleCell(rowId, idx) {
+  const container = document.getElementById('numbers-' + rowId);
+  const cells = Array.from(container.querySelectorAll('.cell'));
+  const s = state[rowId];
+  const cell = cells[idx];
+
+  if (cell.classList.contains('crossed')) {
+    // Uncross this and everything after it
+    cells.forEach((c, i) => { if (i >= idx) c.classList.remove('crossed'); });
+    // Recalculate lastIdx
+    s.lastIdx = -1;
+    cells.forEach((c, i) => { if (c.classList.contains('crossed')) s.lastIdx = i; });
+    // If the last number was uncrossed, clear the lock too
+    if (idx === LAST_NUM_IDX && s.lock) {
+      s.lock = false;
+      document.getElementById('lock-' + rowId).classList.remove('crossed');
+    }
+  } else {
+    if (idx <= s.lastIdx) { toast('Mark left to right only!'); return; }
+    cell.classList.add('crossed');
+    s.lastIdx = idx;
+  }
+
+  refreshDisabled(rowId);
+  refreshLock(rowId);
+  calcScore();
+}
+
+// ── GREY OUT SKIPPED CELLS ────────────────────────────────
+function refreshDisabled(rowId) {
+  const container = document.getElementById('numbers-' + rowId);
+  const cells = Array.from(container.querySelectorAll('.cell'));
+  const last = state[rowId].lastIdx;
+  cells.forEach((c, i) => {
+    if (c.classList.contains('crossed')) {
+      c.classList.remove('disabled');
+    } else if (i < last) {
+      c.classList.add('disabled');
+    } else {
+      c.classList.remove('disabled');
+    }
+  });
+}
+
+// ── REFRESH LOCK AVAILABILITY ─────────────────────────────
+function refreshLock(rowId) {
+  const container = document.getElementById('numbers-' + rowId);
+  const cells = Array.from(container.querySelectorAll('.cell'));
+  const s = state[rowId];
+  const lockEl = document.getElementById('lock-' + rowId);
+
+  const crossed = cells.filter(c => c.classList.contains('crossed')).length;
+  // Reachable = cells not yet skipped over (index > lastIdx) that aren't crossed
+  const reachable = cells.filter((c, i) => i > s.lastIdx && !c.classList.contains('crossed')).length;
+
+  // If 5 crosses is no longer mathematically possible, kill the lock permanently
+  if (!s.lock && !s.dead && (crossed + reachable + (s.lastIdx >= 0 ? 0 : 0)) < 5) {
+    // More precise: total possible = crossed + reachable cells remaining
+    if (crossed + reachable < 5) {
+      s.dead = true;
+    }
+  }
+
+  if (s.dead && !s.lock) {
+    lockEl.classList.remove('unavailable');
+    lockEl.classList.add('dead');
+    return;
+  }
+
+  // Lock is clickable only when:
+  // 1. Last number (index 10) is crossed
+  // 2. Total crosses >= 5
+  const lastNumCrossed = cells[LAST_NUM_IDX].classList.contains('crossed');
+  const canLock = lastNumCrossed && crossed >= 5;
+
+  if (canLock || s.lock) {
+    lockEl.classList.remove('unavailable', 'dead');
+  } else {
+    lockEl.classList.add('unavailable');
+    lockEl.classList.remove('dead');
+  }
+}
+
+// ── TOGGLE LOCK ───────────────────────────────────────────
+function toggleLock(rowId) {
+  const container = document.getElementById('numbers-' + rowId);
+  const cells = Array.from(container.querySelectorAll('.cell'));
+  const s = state[rowId];
+  const lockEl = document.getElementById('lock-' + rowId);
+
+  const crossed = cells.filter(c => c.classList.contains('crossed')).length;
+  const lastNumCrossed = cells[LAST_NUM_IDX].classList.contains('crossed');
+
+  if (!s.lock) {
+    if (!lastNumCrossed) {
+      const lastNum = cells[LAST_NUM_IDX].querySelector('.num').textContent;
+      toast(`Cross ${lastNum} first, then the lock!`);
+      return;
+    }
+    if (crossed < 5) {
+      toast('Need at least 5 crosses in this row!');
+      return;
+    }
+  }
+
+  s.lock = !s.lock;
+  lockEl.classList.toggle('crossed', s.lock);
+  calcScore();
+}
+
+// ── SCORE ─────────────────────────────────────────────────
+function calcScore() {
+  let grand = 0;
+  ROWS.forEach(row => {
+    const container = document.getElementById('numbers-' + row.id);
+    const numCrossed = container.querySelectorAll('.cell.crossed').length;
+    const total = numCrossed + (state[row.id].lock ? 1 : 0);
+    const pts = PTS[total] || 0;
+    document.getElementById('total-' + row.id).textContent = pts;
+    grand += pts;
+  });
+  const penPts = state.penalties * 5;
+  document.getElementById('total-pen').textContent = penPts > 0 ? '−' + penPts : '0';
+  grand -= penPts;
+  document.getElementById('total-final').textContent = grand;
+}
+
+// ── RESET ─────────────────────────────────────────────────
+function resetAll() {
+  if (!confirm('Clear the whole scorecard?')) return;
+  ROWS.forEach(row => {
+    state[row.id].lastIdx = -1;
+    state[row.id].lock    = false;
+    state[row.id].dead    = false;
+    const container = document.getElementById('numbers-' + row.id);
+    container.querySelectorAll('.cell').forEach(c => c.classList.remove('crossed', 'disabled'));
+    const lockEl = document.getElementById('lock-' + row.id);
+    lockEl.classList.remove('crossed', 'dead');
+    lockEl.classList.add('unavailable');
+  });
+  state.penalties = 0;
+  document.querySelectorAll('.penalty-cell').forEach(p => p.classList.remove('active'));
+  calcScore();
+}
+
+// ── TOAST ─────────────────────────────────────────────────
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2400);
+}
+
+buildRows();
+buildPenalties();
+calcScore();
+</script>
+</body>
+</html>
