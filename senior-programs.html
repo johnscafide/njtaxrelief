@@ -78,7 +78,7 @@
     <div style="display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.12);flex-wrap:wrap;">
       <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">$6,500</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">Max Stay NJ credit per year</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">50%</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">Of your annual tax bill</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">$500K</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">Max income for Stay NJ</div></div>
+      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">~$200K</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">New income limit (FY2027)</div></div>
       <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">Nov 2</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">PAS-1 deadline 2026</div></div>
     </div>
   </div>
@@ -96,12 +96,26 @@
   <div class="section-inner">
     <div class="section-label">Stay NJ Program</div>
     <h2 class="section-title">Stay NJ — 50% Off Your Property Tax Bill</h2>
-    <p class="section-subtitle">The Stay NJ Act was signed into law in 2023 and began paying out quarterly in 2026. It's one of the most significant senior benefits ever passed in New Jersey.</p>
+    <p class="section-subtitle">The Stay NJ Act was signed into law in 2023 and began paying out quarterly in 2026. New Jersey's FY2027 budget (June 2026) kept the program but tightened who qualifies.</p>
+
+    <!-- FY2027 budget update callout -->
+    <div style="background:#fff;border:1px solid #f0d7d3;border-left:4px solid #d92d20;border-radius:10px;padding:22px 24px;margin:8px 0 30px;max-width:760px;">
+      <div style="display:inline-block;background:#fbeeec;color:#c0291c;font-size:11px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:12px;">Budget Update &middot; June 2026</div>
+      <h3 style="font-size:20px;color:var(--navy-dark);margin:0 0 10px;">The FY2027 budget changed who qualifies</h3>
+      <p style="font-size:15px;line-height:1.65;color:var(--text);margin:0 0 14px;">The full <strong>$6,500 maximum stays in place</strong>, but the income limit dropped from $500,000 to <strong>about $200,000</strong>, and the benefit is now tiered by income:</p>
+      <ul style="list-style:none;margin:0 0 14px;padding:0;font-size:14.5px;color:var(--text);">
+        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>Income $100,000 or less</span><strong style="color:var(--navy-dark);">up to $6,500</strong></li>
+        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>$100,000 to $150,000</span><strong style="color:var(--navy-dark);">up to $5,000</strong></li>
+        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>$150,000 to $200,000</span><strong style="color:var(--navy-dark);">up to $4,000</strong></li>
+        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;"><span>Over $200,000</span><strong style="color:#c0291c;">not eligible</strong></li>
+      </ul>
+      <p style="font-size:13.5px;line-height:1.6;color:var(--text-muted);margin:0;">Eligibility uses <strong>NJ gross income</strong>, not federal AGI. Exact thresholds will be confirmed by the NJ Division of Taxation. The Senior Freeze program was not cut.</p>
+    </div>
 
     <!-- Stay NJ Calculator -->
     <div class="staynj-highlight" id="staynj-calc">
       <h3><i class="fas fa-leaf" style="margin-right:10px;color:#7ec8a0;"></i>Stay NJ Credit Calculator</h3>
-      <p>Enter your annual property tax bill and household income to estimate your Stay NJ credit. The credit equals 50% of your tax bill, up to $6,500 per year.</p>
+      <p>Enter your annual property tax bill and household income to estimate your Stay NJ credit. The credit is 50% of your tax bill, capped by your income: up to $6,500 under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Over about $200,000 no longer qualifies.</p>
       <div class="staynj-calc-grid">
         <div class="staynj-input-group"><label>Your Annual Property Tax Bill ($)</label><input type="number" id="staynj-tax" placeholder="e.g. 9000" oninput="calcStayNJ()" min="0"></div>
         <div class="staynj-input-group"><label>Household Income ($)</label><input type="number" id="staynj-income" placeholder="e.g. 75000" oninput="calcStayNJ()" min="0"></div>
@@ -143,7 +157,7 @@
         <ul class="requirements-list">
           <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Age 65 or older</strong><span>Must have been 65 by the end of the benefit year</span></div></li>
           <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Surviving spouse age 55+</strong><span>Surviving spouses of eligible homeowners qualify at age 55</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Household income up to $500,000</strong><span>Very generous income limit — most senior homeowners qualify</span></div></li>
+          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Household income up to about $200,000</strong><span>FY2027 limit, down from $500,000. Benefit is tiered by income; over ~$200,000 no longer qualifies</span></div></li>
           <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>NJ principal residence</strong><span>Must own and occupy as your primary NJ home</span></div></li>
           <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Apply via PAS-1 form</strong><span>File at propertytaxrelief.nj.gov — deadline November 2, 2026</span></div></li>
         </ul>
@@ -152,9 +166,9 @@
         <h4 style="font-size:17px;color:var(--navy-dark);margin-bottom:14px;">Stay NJ at a Glance</h4>
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Age Requirement</span><span style="font-weight:600;">65 or older</span></div>
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Surviving Spouse</span><span style="font-weight:600;">Age 55+ qualifies</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Income Limit</span><span style="font-weight:600;">Up to $500,000</span></div>
+        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Income Limit</span><span style="font-weight:600;">Up to ~$200,000 (FY2027)</span></div>
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Benefit</span><span style="font-weight:600;color:var(--success);">50% of your tax bill</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Maximum Credit</span><span style="font-weight:600;color:var(--success);">$6,500 per year</span></div>
+        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Maximum Credit</span><span style="font-weight:600;color:var(--success);">$6,500/yr (income-tiered)</span></div>
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Payment Method</span><span style="font-weight:600;">Quarterly direct payments</span></div>
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;font-size:14px;"><span style="color:var(--text-muted);">Application</span><span style="font-weight:600;">PAS-1 combined form</span></div>
         <a href="https://www.nj.gov/treasury/taxation/staynj.shtml" target="_blank" class="official-link" style="margin-top:14px;">NJ Official Stay NJ Page <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
@@ -253,6 +267,10 @@
         <div class="faq-item">
           <div class="faq-question" onclick="toggleFAQ(this)">Does the Senior Freeze actually stop my taxes from going up? <i class="fas fa-chevron-down faq-arrow"></i></div>
           <div class="faq-answer">No — your actual tax bill still goes up each year. What the Senior Freeze does is reimburse you for the increase above your base year amount. So your bill goes up, but the State sends you a check for the difference. Your net out-of-pocket stays close to your base year level.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">Did the 2026 state budget change Stay NJ? <i class="fas fa-chevron-down faq-arrow"></i></div>
+          <div class="faq-answer">Yes. New Jersey's FY2027 budget, passed in June 2026, kept the $6,500 maximum credit but lowered the income limit from $500,000 to about $200,000 and made the benefit tiered: up to $6,500 for income under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Seniors above about $200,000 in NJ gross income no longer qualify. Eligibility uses NJ gross income, which is not the same as your federal AGI. The Senior Freeze program was not cut. Exact thresholds will be confirmed by the NJ Division of Taxation.</div>
         </div>
         <div class="faq-item">
           <div class="faq-question" onclick="toggleFAQ(this)">When did Stay NJ start paying out? <i class="fas fa-chevron-down faq-arrow"></i></div>
