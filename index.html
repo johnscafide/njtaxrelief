@@ -342,10 +342,11 @@
   .nf-body > p { font-size: 16px; line-height: 1.7; color: var(--text); margin-bottom: 22px; }
 
   .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .compare-col { border-radius: 11px; padding: 18px 20px; background: #f4f6f9; }
-  
+  .compare-col { padding: 2px 0 2px 18px; box-shadow: inset 3px 0 0 var(--border); }
+  .compare-col.current { box-shadow: inset 3px 0 0 var(--green); }
+  .compare-col.proposed { box-shadow: inset 3px 0 0 #d92d20; }
   .compare-tag { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-muted); margin-bottom: 12px; }
-  
+  .compare-col.current .compare-tag { color: var(--green); }
   .compare-col.proposed .compare-tag { color: #c0291c; }
   .compare-line { font-size: 14.5px; line-height: 1.55; color: var(--text); margin-bottom: 9px; }
   .compare-line:last-child { margin-bottom: 0; }
@@ -357,8 +358,8 @@
 
   .nf-note {
     font-size: 14.5px; line-height: 1.65; color: var(--text);
-    background: #fbeeec;
-    padding: 13px 16px; margin-bottom: 20px;
+    border-left: 3px solid #d92d20;
+    padding: 3px 0 3px 16px; margin-bottom: 20px;
   }
   .nf-note b { color: var(--navy-dark); }
   .nf-actions { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
@@ -476,7 +477,7 @@
   <div class="news-strip-inner">
     <div class="news-strip-label"><i class="fas fa-bolt"></i>Latest</div>
     <div class="news-items">
-      <div class="news-item"><i class="fas fa-triangle-exclamation"></i>NJ budget deal would change Stay NJ before July 1, <a href="#staynj-update">what's changing</a></div>
+      <div class="news-item"><i class="fas fa-circle-check"></i>Budget passed: Stay NJ income limit now about $200K, <a href="#staynj-update">what changed</a></div>
       <div class="news-item"><i class="fas fa-calendar"></i>PAS-1 filing deadline: November 2, 2026, <a href="pas-1-guide.html">file now</a></div>
       <div class="news-item"><i class="fas fa-circle-check"></i>ANCHOR confirmation letters mail August 2026, <a href="anchor-program.html">learn more</a></div>
     </div>
@@ -497,39 +498,43 @@
 </div>
 
 <!-- ============================================================
-     BREAKING-NEWS BUDGET BULLETIN
+     BUDGET BULLETIN (Stay NJ, FY2027)
 
-     HOW TO UPDATE when the budget is signed:
-       1. Update "Updated June 28, 2026" in .nf-updated.
-       2. If it becomes law, change the .compare-tag on the right
-          column from "Proposed in the budget deal" to
-          "Now law (FY2027 budget)".
-       3. Replace figures with the official numbers.
-       4. Soften or remove the .nf-note "not yet law" wording.
-     Sources (June 28, 2026): NJ Monitor, NJ.com via NJ1015, The
-     Inquirer. Reported terms, not yet codified.
+     STATUS as of June 30, 2026: The FY2027 budget passed. The
+     $6,500 max is preserved; income limit drops to ~$200,000 with
+     tiers ($6,500 under $100K / $5,000 $100-150K / $4,000 $150-200K
+     / none over $200K). Senior Freeze not cut.
+
+     STILL TO CONFIRM: the exact income threshold ("about $200,000")
+     and tier breakpoints come from NJ.com reporting on the deal.
+     When the NJ Division of Taxation posts official FY2027 Stay NJ
+     guidance, replace "about $200,000" with the exact figure, drop
+     the "will be confirmed" line in .nf-note, and verify the
+     NJ-gross-income definition before listing income sources.
+     Sources (June 23-30, 2026): NJ Governor's Office, AARP NJ,
+     NJ.com via NJ1015, NJBIZ, Jersey Vindicator.
 ============================================================ -->
 <section class="section alert-section" id="staynj-update">
   <div class="section-inner">
     <div class="newsflash">
       <div class="nf-bar">
-        <span class="nf-live"><span class="nf-dot"></span>Budget Alert</span>
-        <span class="nf-deadline"><i class="fas fa-clock"></i>State budget deadline: June 30</span>
-        <span class="nf-updated">Updated June 28, 2026</span>
+        <span class="nf-live"><span class="nf-dot"></span>Now Official</span>
+        <span class="nf-deadline"><i class="fas fa-circle-check"></i>FY2027 budget passed</span>
+        <span class="nf-updated">Updated June 30, 2026</span>
       </div>
       <div class="nf-body">
-        <h2>Stay NJ is changing before the July 1 budget deadline</h2>
-        <p>New Jersey must pass its next state budget by June 30, with the new budget year starting July 1. That budget sets the rules for Stay NJ. In late June, the Governor and legislative leaders announced a deal that keeps the program but tightens who qualifies. It is an agreement, not final law yet, and the official details are still being worked out.</p>
+        <h2>It's official: Stay NJ survived the budget, with a lower income limit</h2>
+        <p>New Jersey passed its FY2027 state budget, and Stay NJ was not cut the way the Governor first proposed. The full $6,500 maximum stays in place. But the income limit to qualify dropped sharply, from $500,000 down to about $200,000, and the benefit is now tiered by income. Here is what changed.</p>
 
         <div class="compare">
           <div class="compare-col current">
-            <div class="compare-tag">Current law</div>
+            <div class="compare-tag">Before (through FY2026)</div>
             <div class="compare-line">Cuts an eligible senior's property tax bill in half, up to <b>$6,500</b>.</div>
             <div class="compare-line">Open to homeowners <b>65 and older</b> with income up to <b>$500,000</b>.</div>
           </div>
           <div class="compare-col proposed">
-            <div class="compare-tag">Proposed in the budget deal</div>
-            <div class="compare-line">Top benefit <b>stays at $6,500</b>, but the income limit drops to <b>$200,000</b> and the amount is tiered:</div>
+            <div class="compare-tag">Now law (FY2027 budget)</div>
+            <div class="compare-line">Top benefit <b>stays at $6,500</b>, the income limit is now about <b>$200,000</b>, and the amount is tiered:</div>
             <div class="tier-table">
               <div class="tier-row"><span>Income $100,000 or less</span><span>up to $6,500</span></div>
               <div class="tier-row"><span>$100,000 to $150,000</span><span>up to $5,000</span></div>
@@ -540,7 +545,7 @@
         </div>
 
         <div class="nf-note">
-          Earn over $200,000? You would no longer qualify under the reported deal. These numbers come from news reports as of June 28, 2026 and are <b>not yet law</b>. We will post the official figures here once the budget is signed. The <b>Senior Freeze</b> program is not affected by these changes.
+          Earn over $200,000 and you no longer qualify for Stay NJ. Eligibility uses <b>NJ gross income</b>, which is not the same as your federal AGI, so check your NJ number before you assume you're out. The exact income thresholds will be confirmed by the NJ Division of Taxation. The <b>Senior Freeze</b> program was not cut.
         </div>
 
         <div class="nf-actions">
@@ -596,7 +601,7 @@
 
       <div class="prog-row">
         <div>
-          <h3>Stay NJ <span style="font-size:12px;font-weight:700;color:#c0291c;">&middot; changing, see above</span></h3>
+          <h3>Stay NJ <span style="font-size:12px;font-weight:700;color:#c0291c;">&middot; new $200K income limit</span></h3>
           <p>For homeowners 65 and older. Cuts an eligible senior's property tax bill in half, up to $6,500.</p>
         </div>
         <a href="senior-programs.html" class="prog-go">Learn more &rarr;</a>
