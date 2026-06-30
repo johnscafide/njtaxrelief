@@ -953,12 +953,19 @@
 
     if (!tax || !income) { res.style.display = 'none'; return; }
 
-    if (income > 500000) {
-      if (amtEl) amtEl.textContent = 'Ineligible';
-      if (lblEl) lblEl.textContent = 'Income exceeds $500,000 limit';
+    // FY2027 budget: income limit ~$200,000, benefit tiered by income.
+    let cap;
+    if      (income > 200000) cap = 0;
+    else if (income > 150000) cap = 4000;
+    else if (income > 100000) cap = 5000;
+    else                      cap = 6500;
+
+    if (cap === 0) {
+      if (amtEl) amtEl.textContent = 'Not eligible';
+      if (lblEl) lblEl.textContent = 'Income over ~$200,000 — no longer eligible (FY2027 budget)';
     } else {
-      if (amtEl) amtEl.textContent = '$' + Math.round(Math.min(tax * 0.5, 6500)).toLocaleString();
-      if (lblEl) lblEl.textContent = 'Estimated Stay NJ Annual Credit (50% of tax bill, max $6,500/yr)';
+      if (amtEl) amtEl.textContent = '$' + Math.round(Math.min(tax * 0.5, cap)).toLocaleString();
+      if (lblEl) lblEl.textContent = 'Estimated Stay NJ annual credit (50% of tax bill, capped at $' + cap.toLocaleString() + ' for your income)';
     }
     res.style.display = 'block';
   }
