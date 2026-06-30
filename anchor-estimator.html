@@ -609,7 +609,7 @@
 
           <!-- Ineligible -->
           <div class="sn-ineligible" id="sn-ineligible" style="display:none;">
-            <p><i class="fas fa-circle-xmark" style="margin-right:6px;"></i>Income exceeds the $500,000 Stay NJ limit</p>
+            <p><i class="fas fa-circle-xmark" style="margin-right:6px;"></i>Income is over the ~$200,000 Stay NJ limit (FY2027 budget)</p>
             <small>You may still qualify for ANCHOR — use the estimator tab above.</small>
           </div>
 
@@ -619,7 +619,7 @@
               <div class="sn-result-card primary">
                 <div class="sn-result-card-label">Annual Credit</div>
                 <div class="sn-result-card-num" id="sn-annual">$0</div>
-                <div class="sn-result-card-sub">50% of bill, max $6,500</div>
+                <div class="sn-result-card-sub">50% of bill, income-tiered cap</div>
               </div>
               <div class="sn-result-card">
                 <div class="sn-result-card-label">Per Quarter</div>
@@ -644,15 +644,15 @@
 
             <ul class="sn-rules">
               <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Must be age 65 or older</li>
-              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Household income at or below $500,000</li>
-              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Credit = 50% of tax bill, max $6,500/year</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Household income at or below about $200,000 (FY2027)</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Credit = 50% of tax bill, capped by income ($6,500 / $5,000 / $4,000)</li>
               <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Apply via PAS-1 form — deadline November 2, 2026</li>
             </ul>
 
-            <!-- Lead capture -->
+            <!-- Realtor lead: ready-to-sell seller -->
             <div class="sn-lead" id="sn-lead-form">
-              <div class="sn-lead-title">Want John to file your PAS-1 for you?</div>
-              <div class="sn-lead-sub">One form covers Stay NJ, ANCHOR, and Senior Freeze. $20 flat fee. John handles everything.</div>
+              <div class="sn-lead-title">Ready to sell your home?</div>
+              <div class="sn-lead-sub">John Scafide is a licensed NJ Realtor in South Jersey. If you're ready to list, he'll build a plan around your timeline and get your home sold for the best price.</div>
               <div class="sn-lead-grid">
                 <div class="est-field">
                   <label class="est-label">Your Name</label>
@@ -667,13 +667,12 @@
                   <input class="est-input" id="sn-phone" type="tel" placeholder="(xxx) xxx-xxxx">
                 </div>
                 <div class="est-field">
-                  <label class="est-label">Property Address</label>
+                  <label class="est-label">Address of the home you're selling</label>
                   <input class="est-input" id="sn-address" type="text" placeholder="Street address, city, NJ">
                 </div>
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-                <button class="sn-btn-book" onclick="snSendLead()"><i class="fas fa-calendar-check"></i> Book PAS-1 Help — $20</button>
-                <a href="pas-1-guide.html" class="sn-btn-outline"><i class="fas fa-book-open"></i> Free PAS-1 Guide</a>
+                <button class="sn-btn-book" onclick="snSendLead()"><i class="fas fa-house"></i> List my home with John</button>
               </div>
               <div class="sn-lead-sent" id="sn-lead-sent"><i class="fas fa-circle-check" style="margin-right:6px;"></i>Got it! John will follow up within one business day.</div>
             </div>
@@ -908,7 +907,7 @@
     if (empty)  empty.style.display = 'none';
     if (result) result.classList.add('visible');
 
-    if (incomeVal > 500000) {
+    if (incomeVal > 200000) {
       if (ineligEl) ineligEl.style.display = 'block';
       if (eligEl)   eligEl.style.display   = 'none';
       return;
@@ -916,7 +915,9 @@
     if (ineligEl) ineligEl.style.display = 'none';
     if (eligEl)   eligEl.style.display   = 'block';
 
-    var credit    = Math.min(taxVal * 0.5, 6500);
+    // FY2027 budget: max credit is tiered by income
+    var cap       = incomeVal > 150000 ? 4000 : (incomeVal > 100000 ? 5000 : 6500);
+    var credit    = Math.min(taxVal * 0.5, cap);
     var quarterly = Math.round(credit / 4);
     var remain    = Math.max(taxVal - credit, 0);
     var pct       = Math.min((credit / taxVal) * 100, 100);
@@ -941,16 +942,15 @@
     var inc     = (document.getElementById('sn-income')  || {}).value || '';
     name = name.trim(); email = email.trim();
     if (!name || !email) { alert('Please enter your name and email.'); return; }
-    var credit = Math.min(parseFloat(taxVal) * 0.5, 6500);
     if (typeof emailjs !== 'undefined') {
       emailjs.init({ publicKey: EJS_PUBLIC });
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
         name: name, email: email,
         phone: phone || 'Not provided',
-        topic: 'Stay NJ Calculator Lead — est. credit: $' + Math.round(credit).toLocaleString(),
+        topic: 'Seller lead — ready to list (Stay NJ estimator)',
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Stay NJ Calculator Lead','Annual tax: $' + taxVal,'Household income: $' + inc,'Est. credit: $' + Math.round(credit).toLocaleString(),'PAS-1 help requested: YES'].join('\n')
+        message: ['Seller lead — homeowner says they are ready to sell','Source: Stay NJ estimator','Address of home to sell: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var form = document.getElementById('sn-lead-form');
