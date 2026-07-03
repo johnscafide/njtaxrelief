@@ -210,29 +210,33 @@
     }
 
     function addPropertyToWatchlist() {
-        const addr = document.getElementById('prop-input').value;
+        const input = document.getElementById('prop-input');
+        const addr = input.value.trim();
         if(!addr) return;
 
         const list = document.getElementById('watchlist-items');
-        const newItem = `
-            <div class="watch-item" style="animation: fadeIn 0.5s;">
-                <div class="watch-info">
-                    <span class="watch-addr">${addr}</span>
-                    <span class="watch-meta">PENDING DATA...</span>
-                </div>
-                <div class="watch-stats">
-                    <div class="watch-price">---</div>
-                    <div class="watch-trend">FETCHING</div>
-                </div>
-            </div>
-        `;
-        list.insertAdjacentHTML('afterbegin', newItem);
-        document.getElementById('prop-input').value = "";
+        const item = document.createElement('div');
+        item.className = 'watch-item';
+        const info = document.createElement('div');
+        info.className = 'watch-info';
+        const addrEl = document.createElement('span');
+        addrEl.className = 'watch-addr';
+        addrEl.textContent = addr;
+        const metaEl = document.createElement('span');
+        metaEl.className = 'watch-meta';
+        metaEl.textContent = 'Added to your list';
+        info.appendChild(addrEl);
+        info.appendChild(metaEl);
+        item.appendChild(info);
+        list.insertBefore(item, list.firstChild);
+
+        input.value = "";
         document.getElementById('add-prop-form').style.display = 'none';
     }
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="js/relief-programs.js"></script>
 <script src="scripts.js"></script>
 
 </body>

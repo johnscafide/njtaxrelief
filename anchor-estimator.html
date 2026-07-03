@@ -723,6 +723,7 @@
 </div>
 
 <footer id="main-footer"></footer>
+<script src="js/relief-programs.js"></script>
 <script src="scripts.js"></script>
 
 <script>
@@ -827,8 +828,9 @@
     var reInt   = reEl ? reEl.checked : false;
     name = name.trim(); email = email.trim(); phone = phone.trim(); address = address.trim();
     if (!name || !email || !address) { alert('Please fill in your name, email, and property address to continue.'); return; }
-    var benefit = answers.tenure === 'own' ? (answers.income === 'low' ? '$1,500' : '$1,000') : (answers.age === 'yes' ? '$700' : '$450');
-    var topic = 'ANCHOR Estimator — est. benefit: ' + benefit;
+    var est = ReliefPrograms.anchorBenefit(answers);
+    var benefit = est.status === 'qualified' ? ReliefPrograms.formatUSD(est.amount) : 'see result';
+    var topic = 'ANCHOR Estimator, est. benefit: ' + benefit;
     if (reInt) topic += ' — interested in ' + (answers.tenure === 'own' ? 'home valuation' : 'buying');
     if (typeof emailjs !== 'undefined') {
       emailjs.init({ publicKey: EJS_PUBLIC });
@@ -843,16 +845,19 @@
     }
     showStep(7);
     updateProgress(7);
-    renderResult(benefit, reInt, address);
+    renderResult(est, reInt, address);
   };
 
-  function renderResult(benefit, reInt, address) {
+  function renderResult(est, reInt, address) {
     var rc = document.getElementById('est-result-content');
     if (!rc) return;
-    if (answers.primary === 'no') { rc.innerHTML = renderNoQ("Doesn't Look Like It — But Let's Make Sure","Your property must have been your primary NJ residence on October 1 of the benefit year.",['Primary residence on Oct 1 is required','Vacation and investment properties excluded','Sold after Oct 1? You may still qualify — call to confirm']); return; }
-    if (answers.income === 'high') { rc.innerHTML = renderNoQ("Income Exceeds ANCHOR Limits","Income over $250,000 (homeowners) or $150,000 (renters) is above ANCHOR limits.",['Homeowner limit: $250,000','Renter limit: $150,000','You may still qualify for a property tax appeal']); return; }
-    if (answers.tenure === 'rent' && answers.income === 'mid') { rc.innerHTML = renderNoQ("That Income Bracket Is for Homeowners Only","The $150,001–$250,000 range only applies to homeowners. Renters must be under $150,000.",['Renter income limit: $150,000','Under $150K? You qualify for up to $700']); return; }
-    if (answers.taxes === 'no' && answers.tenure === 'own') { rc.innerHTML = '<div class="est-no-qualify"><div class="est-result-badge warn"><i class="fas fa-triangle-exclamation"></i>Possible Delinquency Issue</div><div class="est-no-qualify-title">May Need to Verify Tax Status</div><p>Homeowners more than 12 months delinquent may not qualify. Being on a payment plan is typically acceptable — call to confirm your situation.</p><div class="est-result-actions"><a href="tel:18882381233" class="est-btn-apply"><i class="fas fa-phone"></i> Call 1-888-238-1233</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div></div>'; return; }
+    var D = ReliefPrograms.data;
+    var fmt = ReliefPrograms.formatUSD;
+    if (est.reason === 'not_primary_residence') { rc.innerHTML = renderNoQ("Doesn't look like it, but let's make sure","Your property must have been your primary NJ residence on October 1 of the benefit year.",['Primary residence on Oct 1 is required','Vacation and investment properties excluded','Sold after Oct 1? You may still qualify, call to confirm']); return; }
+    if (est.reason === 'income_over_limit') { rc.innerHTML = renderNoQ("Income is over the ANCHOR limits","Income over " + fmt(D.anchor.homeowner.incomeLimit) + " (homeowners) or " + fmt(D.anchor.renter.incomeLimit) + " (renters) is above the ANCHOR limits.",['Homeowner limit: ' + fmt(D.anchor.homeowner.incomeLimit),'Renter limit: ' + fmt(D.anchor.renter.incomeLimit),'You may still have a case for a property tax appeal']); return; }
+    if (est.reason === 'renter_income_over_limit') { rc.innerHTML = renderNoQ("That income bracket is for homeowners only","The " + fmt(D.anchor.homeowner.tiers[0].maxIncome) + " to " + fmt(D.anchor.homeowner.incomeLimit) + " range only applies to homeowners. Renters must be at or under " + fmt(D.anchor.renter.incomeLimit) + ".",['Renter income limit: ' + fmt(D.anchor.renter.incomeLimit),'Under that limit? You qualify for up to ' + fmt(D.anchor.renter.seniorBenefit)]); return; }
+    if (est.reason === 'possible_delinquency') { rc.innerHTML = '<div class="est-no-qualify"><div class="est-result-badge warn">Check your tax status first</div><div class="est-no-qualify-title">Your back taxes may affect this</div><p>Homeowners more than 12 months behind on property taxes may not qualify. Being on a payment plan is usually fine. Call the state hotline to confirm before you apply.</p><div class="est-result-actions"><a href="tel:18882381233" class="est-btn-apply">Call ' + D.hotline + '</a><button class="est-btn-reset" onclick="estReset()">Start over</button></div></div>'; return; }
+    var benefit = fmt(est.amount);
     var label = answers.tenure === 'own' ? 'Estimated ANCHOR Homeowner Benefit' : 'Estimated ANCHOR Renter Benefit';
     var snNote = answers.age === 'yes' ? '<li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>As a senior, apply using the PAS-1 form — it covers 3 programs at once</li>' : '';
     var reBlock = '';
@@ -891,15 +896,19 @@
   updateProgress(1);
 
   // ── STAY NJ CALCULATOR ────────────────────────────────────
+  // Math lives in js/relief-programs.js; this only updates the DOM.
   window.calcStayNJPage = function() {
-    var taxVal    = parseFloat((document.getElementById('sn-tax')    || {}).value || 0);
-    var incomeVal = parseFloat((document.getElementById('sn-income') || {}).value || 0);
     var result    = document.getElementById('sn-result');
     var empty     = document.getElementById('sn-empty');
     var ineligEl  = document.getElementById('sn-ineligible');
     var eligEl    = document.getElementById('sn-eligible-block');
 
-    if (!taxVal || !incomeVal) {
+    var est = ReliefPrograms.stayNJCredit(
+      (document.getElementById('sn-tax')    || {}).value,
+      (document.getElementById('sn-income') || {}).value
+    );
+
+    if (!est.valid) {
       if (result) result.classList.remove('visible');
       if (empty)  empty.style.display = 'block';
       return;
@@ -907,7 +916,7 @@
     if (empty)  empty.style.display = 'none';
     if (result) result.classList.add('visible');
 
-    if (incomeVal > 200000) {
+    if (!est.eligible) {
       if (ineligEl) ineligEl.style.display = 'block';
       if (eligEl)   eligEl.style.display   = 'none';
       return;
@@ -915,21 +924,16 @@
     if (ineligEl) ineligEl.style.display = 'none';
     if (eligEl)   eligEl.style.display   = 'block';
 
-    // FY2027 budget: max credit is tiered by income
-    var cap       = incomeVal > 150000 ? 4000 : (incomeVal > 100000 ? 5000 : 6500);
-    var credit    = Math.min(taxVal * 0.5, cap);
-    var quarterly = Math.round(credit / 4);
-    var remain    = Math.max(taxVal - credit, 0);
-    var pct       = Math.min((credit / taxVal) * 100, 100);
+    var fmt = ReliefPrograms.formatUSD;
+    var taxVal = ReliefPrograms.toNumber((document.getElementById('sn-tax') || {}).value);
+    var pct = Math.min((est.credit / taxVal) * 100, 100);
 
-    function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
-
-    var annEl = document.getElementById('sn-annual');    if (annEl)  annEl.textContent  = fmt(credit);
-    var qEl   = document.getElementById('sn-quarterly'); if (qEl)    qEl.textContent    = fmt(quarterly);
-    var remEl = document.getElementById('sn-remain');    if (remEl)  remEl.textContent  = fmt(remain);
+    var annEl = document.getElementById('sn-annual');    if (annEl)  annEl.textContent  = fmt(est.credit);
+    var qEl   = document.getElementById('sn-quarterly'); if (qEl)    qEl.textContent    = fmt(est.quarterly);
+    var remEl = document.getElementById('sn-remain');    if (remEl)  remEl.textContent  = fmt(est.remaining);
     var barEl = document.getElementById('sn-bar');       if (barEl)  barEl.style.width  = pct.toFixed(1) + '%';
-    var bcEl  = document.getElementById('sn-bar-credit-label'); if (bcEl) bcEl.textContent = 'Credit: ' + fmt(credit);
-    var brEl  = document.getElementById('sn-bar-remain-label'); if (brEl) brEl.textContent = 'Remaining: ' + fmt(remain);
+    var bcEl  = document.getElementById('sn-bar-credit-label'); if (bcEl) bcEl.textContent = 'Credit: ' + fmt(est.credit);
+    var brEl  = document.getElementById('sn-bar-remain-label'); if (brEl) brEl.textContent = 'Remaining: ' + fmt(est.remaining);
   };
 
   // Stay NJ lead

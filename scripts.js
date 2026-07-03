@@ -128,6 +128,7 @@
   // ============================================================
   function onReady() {
     initEmailJS();
+    applySiteFacts(document);
     loadNav();
     initFooter();
     initNewsStrip();
@@ -144,6 +145,23 @@
   }
 
   // ============================================================
+  // 4b. SITE FACTS INJECTION
+  // Any element marked data-nj="path" gets its text filled from
+  // js/relief-programs.js, so a benefit amount, income limit, or
+  // deadline is edited in one file and updates on every page.
+  // Example: <span data-nj="stayNJ.maxCap">$6,500</span>
+  // Keep a current value in the HTML as the fallback; injection
+  // simply overwrites it so the numbers can never disagree.
+  // ============================================================
+  function applySiteFacts(scope) {
+    if (typeof ReliefPrograms === 'undefined') return;
+    (scope || document).querySelectorAll('[data-nj]').forEach(function (el) {
+      const value = ReliefPrograms.fact(el.getAttribute('data-nj'));
+      if (value !== null) el.textContent = value;
+    });
+  }
+
+  // ============================================================
   // 5. NAVIGATION & FOOTER LOADERS
   // ============================================================
   function loadNav() {
@@ -156,6 +174,7 @@
       })
       .then(function (html) {
         navEl.innerHTML = html;
+        applySiteFacts(navEl);
         initNavLogic();
       })
       .catch(function (err) { console.error('Nav load error:', err); });
@@ -173,7 +192,10 @@
         if (!r.ok) throw new Error('footer.html not found');
         return r.text();
       })
-      .then(function (html) { footerEl.innerHTML = html; })
+      .then(function (html) {
+        footerEl.innerHTML = html;
+        applySiteFacts(footerEl);
+      })
       .catch(function (err) { console.error('Footer load error:', err); });
   }
 
@@ -748,10 +770,9 @@
     const reInterested = reInterestEl ? reInterestEl.checked  : false;
 
     if (name && email) {
-      const benefit = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age   === 'yes' ? '$700'   : '$450');
-      let topic = 'ANCHOR Calculator \u2014 estimated benefit: ' + benefit;
+      const est = (typeof ReliefPrograms !== 'undefined') ? ReliefPrograms.anchorBenefit(answers) : null;
+      const benefit = (est && est.status === 'qualified') ? ReliefPrograms.formatUSD(est.amount) : 'see result';
+      let topic = 'ANCHOR Calculator, estimated benefit: ' + benefit;
       if (reInterested) topic += ' \u2014 ALSO interested in real estate help';
 
       sendLead({
@@ -769,6 +790,9 @@
 
   function showResult(reYes, addr) {
     let result = '';
+    const est = (typeof ReliefPrograms !== 'undefined')
+      ? ReliefPrograms.anchorBenefit(answers)
+      : { status: 'incomplete', amount: 0 };
     if (answers.primary === 'no') {
       result = noQualify(
         'Your property was not your NJ primary residence on October 1 of the benefit year.',
@@ -796,9 +820,7 @@
         'color:var(--navy);font-weight:600;">Start Over</button>' +
         '</div></div>';
     } else {
-      const amount = answers.tenure === 'own'
-        ? (answers.income === 'low' ? '$1,500' : '$1,000')
-        : (answers.age   === 'yes' ? '$700'   : '$450');
+      const amount = ReliefPrograms.formatUSD(est.amount);
       const label = answers.tenure === 'own'
         ? 'Estimated ANCHOR Homeowner Benefit'
         : 'Estimated ANCHOR Renter Benefit';
@@ -939,6 +961,7 @@
 
   // ============================================================
   // 13. STAY NJ CALCULATOR
+  // All math lives in js/relief-programs.js; this only updates the DOM.
   // ============================================================
   function calcStayNJ() {
     const taxEl    = $('staynj-tax');
@@ -947,25 +970,20 @@
     const amtEl    = $('staynj-amount');
     const lblEl    = $('staynj-label');
     if (!taxEl || !incomeEl || !res) return;
+    if (typeof ReliefPrograms === 'undefined') return;
 
-    const tax    = parseNum(taxEl.value);
-    const income = parseNum(incomeEl.value);
+    const est = ReliefPrograms.stayNJCredit(taxEl.value, incomeEl.value);
 
-    if (!tax || !income) { res.style.display = 'none'; return; }
+    if (!est.valid) { res.style.display = 'none'; return; }
 
-    // FY2027 budget: income limit ~$200,000, benefit tiered by income.
-    let cap;
-    if      (income > 200000) cap = 0;
-    else if (income > 150000) cap = 4000;
-    else if (income > 100000) cap = 5000;
-    else                      cap = 6500;
-
-    if (cap === 0) {
+    if (!est.eligible) {
       if (amtEl) amtEl.textContent = 'Not eligible';
-      if (lblEl) lblEl.textContent = 'Income over ~$200,000 — no longer eligible (FY2027 budget)';
+      if (lblEl) lblEl.textContent = 'Household income is over the Stay NJ limit of ' +
+        ReliefPrograms.fact('stayNJ.incomeLimit') + '. You may still qualify for ANCHOR.';
     } else {
-      if (amtEl) amtEl.textContent = '$' + Math.round(Math.min(tax * 0.5, cap)).toLocaleString();
-      if (lblEl) lblEl.textContent = 'Estimated Stay NJ annual credit (50% of tax bill, capped at $' + cap.toLocaleString() + ' for your income)';
+      if (amtEl) amtEl.textContent = ReliefPrograms.formatUSD(est.credit);
+      if (lblEl) lblEl.textContent = 'Estimated Stay NJ annual credit: 50% of your tax bill, capped at ' +
+        ReliefPrograms.formatUSD(est.cap) + ' for your income';
     }
     res.style.display = 'block';
   }
@@ -1241,9 +1259,6 @@
   window.filterTowns = filterTowns;
   window.scrollToTop = scrollToTop;
 
-  // Property dashboard
-  window.addPropertyToWatchlist = addPropertyToWatchlist;
-
   // ============================================================
   // GOOGLE PLACES AUTOCOMPLETE
   // Called automatically by Google Maps script via callback param.
@@ -1292,125 +1307,5 @@
   }
 
   window.initAddressAutocomplete = initAddressAutocomplete;
-
-  // ============================================================
-  // PROPERTY DASHBOARD
-  // ============================================================
-  const APIFY_TOKEN = 'apify_api_XdhChKEbRUhZwIHCVGaGkZvZ8AidZO4znzWg';
-  const ACTOR_ID    = 'maxcopell/zillow-scraper';
-
-  document.addEventListener('DOMContentLoaded', function () {
-    const savedProperties = JSON.parse(localStorage.getItem('watchdogList')) || [];
-    const list = $('watchlist-items');
-    if (!list) return;
-    savedProperties.forEach(function (prop) { renderPropertyCard(prop); });
-  });
-
-  async function addPropertyToWatchlist() {
-    const addrInput = $('prop-input');
-    const addr = addrInput ? addrInput.value : '';
-    if (!addr) return;
-
-    const list   = $('watchlist-items');
-    const tempId = 'id-' + Date.now();
-    const loadingItem =
-      '<div class="watch-item" id="' + tempId + '">' +
-      '<div class="watch-info">' +
-      '<span class="watch-addr">' + addr + '</span>' +
-      '<span class="watch-meta"><i class="fas fa-spinner fa-spin"></i> Fetching Live Data...</span>' +
-      '</div></div>';
-    if (list) list.insertAdjacentHTML('afterbegin', loadingItem);
-
-    if (addrInput) addrInput.value = '';
-    const addForm = $('add-prop-form');
-    if (addForm) addForm.style.display = 'none';
-
-    try {
-      const runRes = await fetch(
-        'https://api.apify.com/v2/acts/' + ACTOR_ID + '/runs?token=' + APIFY_TOKEN,
-        { method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ searchQuery: addr, maxResults: 1 }) }
-      );
-      const runData = await runRes.json();
-      pollApifyResult(runData.data.id, tempId, addr);
-    } catch (err) {
-      console.error('Fetch Error:', err);
-      const el = $(tempId);
-      if (el) el.innerHTML = 'Connection Error.';
-    }
-  }
-
-  async function pollApifyResult(runId, elementId, addr) {
-    const res  = await fetch('https://api.apify.com/v2/actor-runs/' + runId + '?token=' + APIFY_TOKEN);
-    const data = await res.json();
-
-    if (data.data.status === 'SUCCEEDED') {
-      const datasetRes = await fetch(
-        'https://api.apify.com/v2/actor-runs/' + runId + '/dataset/items?token=' + APIFY_TOKEN
-      );
-      const items = await datasetRes.json();
-      if (items.length > 0) {
-        const p = items[0];
-        const cleanProp = {
-          id:      elementId,
-          address: addr,
-          price:   p.price || p.zestimate || 'N/A',
-          city:    (p.address && p.address.city) ? p.address.city : 'NJ',
-          trend:   (Math.random() * 4).toFixed(1),
-          isUp:    Math.random() > 0.4
-        };
-        saveToStorage(cleanProp);
-        updatePropertyUI(elementId, cleanProp);
-      } else {
-        const el = $(elementId);
-        if (el) el.innerHTML = 'No Zillow data found.';
-      }
-    } else if (['FAILED', 'ABORTED', 'TIMED-OUT'].includes(data.data.status)) {
-      const el = $(elementId);
-      if (el) el.innerHTML = 'Search failed.';
-    } else {
-      setTimeout(function () { pollApifyResult(runId, elementId, addr); }, 3000);
-    }
-  }
-
-  function updatePropertyUI(elementId, prop) {
-    const el = $(elementId);
-    if (!el) return;
-    el.innerHTML =
-      '<div class="watch-info">' +
-      '<span class="watch-addr">' + prop.address + '</span>' +
-      '<span class="watch-meta">' + prop.city + '</span>' +
-      '</div>' +
-      '<div class="watch-stats">' +
-      '<div class="watch-price">' + (typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price) + '</div>' +
-      '<div class="watch-trend ' + (prop.isUp ? 'up' : 'down') + '">' +
-      '<i class="fas fa-caret-' + (prop.isUp ? 'up' : 'down') + '"></i> ' + prop.trend + '%' +
-      '</div></div>';
-  }
-
-  function renderPropertyCard(prop) {
-    const list = $('watchlist-items');
-    if (!list) return;
-    const item = document.createElement('div');
-    item.className = 'watch-item';
-    item.id        = prop.id;
-    item.innerHTML =
-      '<div class="watch-info">' +
-      '<span class="watch-addr">' + prop.address + '</span>' +
-      '<span class="watch-meta">' + prop.city + '</span>' +
-      '</div>' +
-      '<div class="watch-stats">' +
-      '<div class="watch-price">' + (typeof prop.price === 'number' ? '$' + prop.price.toLocaleString() : prop.price) + '</div>' +
-      '<div class="watch-trend ' + (prop.isUp ? 'up' : 'down') + '">' +
-      '<i class="fas fa-caret-' + (prop.isUp ? 'up' : 'down') + '"></i> ' + prop.trend + '%' +
-      '</div></div>';
-    list.appendChild(item);
-  }
-
-  function saveToStorage(prop) {
-    const current = JSON.parse(localStorage.getItem('watchdogList')) || [];
-    current.push(prop);
-    localStorage.setItem('watchdogList', JSON.stringify(current));
-  }
 
 })();
