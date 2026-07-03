@@ -126,7 +126,20 @@
   // ============================================================
   // 4. PAGE INIT
   // ============================================================
+  // The three main pages include js/relief-programs.js with their own
+  // <script> tag. Every other page gets it loaded here, so the module
+  // (calculator math, data-nj facts) is available site-wide without
+  // editing each page.
+  function ensureReliefPrograms() {
+    if (typeof ReliefPrograms !== 'undefined') return;
+    const s = document.createElement('script');
+    s.src = 'js/relief-programs.js';
+    s.onload = function () { applySiteFacts(document); };
+    document.head.appendChild(s);
+  }
+
   function onReady() {
+    ensureReliefPrograms();
     initEmailJS();
     applySiteFacts(document);
     loadNav();
