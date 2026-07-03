@@ -2606,7 +2606,7 @@ footer {
       Four glyphs only; each use must be justified (see design guide). */
 @font-face {
     font-family: "uicons";
-    src: url("fonts/uicons-subset.woff2") format("woff2");
+    src: url("data:font/woff2;base64,d09GMgABAAAAAAKIAAsAAAAABJwAAAI7AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHCoGYABMCoMwgwIBNgIkAw4LDAAEIAWBHgcgG50DQC4LbGP6UN9wEBmgpTcSyw1v6hHpD4M38fD+2ue5Q/l5s/lqgRxTQbIi8qSqUBHKTd3KVgEK1ayurFBsidQcfz/v1o3FrZt2WURg8b4W6AuRmU5okLFbmFAgbxhCw7+BVBnhiqxzOwELbkCsBrPTaDJ2BQuPOKdm7adO1QQTWhTPi+eiOCd9QrnQmt7J0CuNjb0Ct14cIK2683spJGV22kMFklHjsh290gHbmXM7QEABTQOAIirWoMRrbzG5vr6mbQ/IlLnW//afzs7g+92vYxoDsRsGhGJnjuZFp1z47wqbkbRksu++9/NfNw23T7Sz7avpuq1Q8ZKd5ovcxwPAICBkQnSN9/UOHws8jYuvFYhvb/PF30738X5ETAnGMMy5uY70Fk0JAq49NtfhGFYECY6lj/iWzPU+GcHfh64kITOd4Nr4eoEHe+DttjjtQybok6A9U35zHAaKCsoIQl9r+eh3KS3di+svSmr9B1mnzP4/POkdGy75RofLhled5IUsytSO6MMIu6wSF1l6gFJu/ZeKQiLrt8Xogzebdf969ixiHtrWUmnRUlqCIVuMhKYhkXj3jrIgvyR8nuMA+OINxIz/4LPPAsG7m/bQnvndqkfBpZFXJ278f27+xW7KA7RkIIhpiOk88hkD0mAhc+zJQOmfLtPTADQcq+ylFsVUmOYGMm3TIDcNtwClblvvr0zjgrWpo4OrqLPmlu52xi7M+0d3BzNzM626pmfu4mrt/7mgBbPm5QDiAQAA") format("woff2");
     font-display: block;
 }
 .ic {
