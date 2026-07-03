@@ -28,8 +28,8 @@
   <meta name="twitter:title" content="NJ Property Tax Relief | ANCHOR, Stay NJ, PAS-1">
   <meta name="twitter:description" content="Free eligibility calculator. ANCHOR up to $1,500. Stay NJ up to $6,500. PAS-1 help $20. South Jersey expert.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Google Analytics -->
@@ -237,7 +237,7 @@
           "name": "What is the Stay NJ program?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Stay NJ is a New Jersey property tax relief program for homeowners age 65 or older with household income at or below $500,000. It provides a credit equal to 50% of your annual property tax bill, up to $6,500 per year, paid in quarterly installments in February, May, August, and November. Apply using the PAS-1 combined form by November 2, 2026."
+            "text": "Stay NJ is a New Jersey property tax relief program for homeowners age 65 or older. It provides a credit equal to 50% of your annual property tax bill, up to $6,500 per year, paid in quarterly installments in February, May, August, and November. Under the FY2027 state budget, household income must be at or below about $200,000, and the maximum credit is tiered by income. Apply using the PAS-1 combined form by November 2, 2026."
           }
         },
         {
@@ -272,401 +272,313 @@
 
   <style>
   /* ============================================================
-     HOMEPAGE STYLES (modern rebuild v2, June 2026)
-     Supplements styles.css. Brand palette unchanged.
-     Design intent: quiet, modern cards with soft elevation and
-     generous spacing. No gold outlines, no gold "pill" eyebrows.
-     The one bold element is the breaking-news budget bulletin.
+     HOMEPAGE (2026 redesign)
+     Shared components live in styles.css under the nj- prefix.
+     Only layout unique to this page lives here.
   ============================================================ */
 
-  /* Soft shadow token reused on cards */
-  /* (inlined per-rule below for clarity) */
-
-  /* ── HERO tweaks (keeps the existing background image) ── */
-  .hero h1 { letter-spacing: -0.5px; }
-  .hero-actions { margin-top: 4px; align-items: center; }
-  .hero-actions .btn-primary i { margin-right: 8px; }
-  .hero-sub-link { color: #f0d87a; font-weight: 600; text-decoration: none; font-size: 15px; }
+  .hero { padding: 84px 24px 72px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(34px, 5vw, 48px);
+    letter-spacing: -0.5px;
+    max-width: 720px;
+  }
+  .hero h1 span { color: #f0d87a; }
+  .hero p { font-size: 18px; max-width: 620px; }
+  .hero-actions { align-items: center; gap: 22px; }
+  .hero-sub-link {
+    color: #f0d87a;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 16px;
+  }
   .hero-sub-link:hover { text-decoration: underline; }
-
-  /* ── NEWS STRIP (kept) ── */
-  .news-strip { background: var(--navy-dark); overflow: hidden; }
-  .news-strip-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; display: flex; align-items: stretch; }
-  .news-strip-label { background: var(--gold); color: var(--navy-dark); font-size: 12px; font-weight: 700; padding: 13px 18px; display: flex; align-items: center; gap: 8px; flex-shrink: 0; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
-  .news-items { display: flex; overflow: hidden; flex: 1; }
-  .news-item { padding: 13px 20px; font-size: 13px; color: #c8d6ea; display: flex; align-items: center; gap: 10px; border-left: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
-  .news-item i { color: var(--gold); font-size: 12px; flex-shrink: 0; }
-  .news-item a { color: #fff; text-decoration: none; font-weight: 600; }
-  .news-item a:hover { text-decoration: underline; }
-
-  /* ── CREDIBILITY BAR (kept) ── */
-  .cred-bar { background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 16px 24px; }
-  .cred-bar-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-  .cred-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); }
-  .cred-item i { color: var(--navy); font-size: 15px; }
-  .cred-item strong { color: var(--text); }
-  .cred-item a { color: var(--navy); font-weight: 600; text-decoration: none; }
-  .cred-item a:hover { text-decoration: underline; }
-  .cred-divider { width: 1px; height: 22px; background: var(--border); }
-
-  /* ============================================================
-     SIGNATURE ELEMENT: BREAKING-NEWS BUDGET BULLETIN
-  ============================================================ */
-  .alert-section { background: #f7f8fa; }
-  .newsflash {
-    background: var(--bg-white);
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(16,34,72,0.05), 0 18px 44px -16px rgba(192,57,43,0.28);
-    border: 1px solid #f0d7d3;
+  .hero-cred {
+    margin-top: 44px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.14);
+    font-size: 14.5px;
+    color: #c0cfdf;
+    line-height: 1.6;
+    max-width: 620px;
+    margin-bottom: 0;
   }
-  .nf-bar {
-    display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
-    background: linear-gradient(90deg, #b3182a 0%, #d92d20 100%);
-    color: #fff; padding: 12px 22px;
-  }
-  .nf-live { display: inline-flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
-  .nf-dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 0 rgba(255,255,255,0.7); animation: nfpulse 1.7s infinite; }
-  @keyframes nfpulse {
-    0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.65); }
-    70%  { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
-    100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-  }
-  @media (prefers-reduced-motion: reduce) { .nf-dot { animation: none; } }
-  .nf-deadline { font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; gap: 7px; }
-  .nf-deadline i { font-size: 12px; }
-  .nf-updated { margin-left: auto; font-size: 12px; color: rgba(255,255,255,0.85); font-weight: 600; }
-  .nf-body { padding: 28px 30px 26px; }
-  .nf-body h2 { font-size: 27px; line-height: 1.2; color: var(--navy-dark); margin-bottom: 12px; letter-spacing: -0.3px; }
-  .nf-body > p { font-size: 16px; line-height: 1.7; color: var(--text); margin-bottom: 22px; }
+  .hero-cred a { color: #f0d87a; text-decoration: none; font-weight: 600; }
+  .hero-cred a:hover { text-decoration: underline; }
 
-  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  .compare-col { padding: 2px 0 2px 18px; box-shadow: inset 3px 0 0 var(--border); }
-  .compare-col.current { box-shadow: inset 3px 0 0 var(--green); }
-  .compare-col.proposed { box-shadow: inset 3px 0 0 #d92d20; }
-  .compare-tag { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px; color: var(--text-muted); margin-bottom: 12px; }
-  .compare-col.current .compare-tag { color: var(--green); }
-  .compare-col.proposed .compare-tag { color: #c0291c; }
-  .compare-line { font-size: 14.5px; line-height: 1.55; color: var(--text); margin-bottom: 9px; }
-  .compare-line:last-child { margin-bottom: 0; }
-  .compare-line b { color: var(--navy-dark); }
-  .tier-table { margin-top: 12px; padding-top: 12px; border-top: 1px solid #f0d3cf; }
-  .tier-row { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; padding: 5px 0; }
-  .tier-row span:last-child { font-weight: 700; color: var(--navy-dark); white-space: nowrap; }
-  .tier-row.out span:last-child { color: #c0291c; }
-
-  .nf-note {
-    font-size: 14.5px; line-height: 1.65; color: var(--text);
-    border-left: 3px solid #d92d20;
-    padding: 3px 0 3px 16px; margin-bottom: 20px;
+  /* How seniors apply: a real sequence, so numbered steps are earned */
+  .steps { max-width: 720px; counter-reset: step; list-style: none; padding: 0; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 18px;
+    padding: 18px 0;
   }
-  .nf-note b { color: var(--navy-dark); }
-  .nf-actions { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
-  .nf-actions a { font-size: 14.5px; font-weight: 600; color: var(--navy); text-decoration: none; display: inline-flex; align-items: center; gap: 7px; }
-  .nf-actions a:hover { text-decoration: underline; }
+  .steps li + li { border-top: 1px solid var(--border); }
+  .steps li::before {
+    content: counter(step) ".";
+    font-family: var(--font-display);
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--gold);
+    flex-shrink: 0;
+    width: 28px;
+  }
+  .steps b { color: var(--navy-dark); }
+  .steps p { font-size: 16px; line-height: 1.6; color: var(--text); margin: 0; }
 
-  /* ============================================================
-     CALCULATOR PROMO
-  ============================================================ */
-  .calc-promo-card {
-    background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 60%, #224a8f 100%);
-    border-radius: 16px; padding: 40px;
-    display: grid; grid-template-columns: 1.35fr 1fr; gap: 36px; align-items: center;
+  /* Calculator panel: the one dark surface on this page */
+  .calc-panel {
+    background: var(--navy-dark);
+    border-radius: 10px;
+    padding: 40px 44px;
     color: #fff;
-    box-shadow: 0 24px 56px -18px rgba(14,34,72,0.55);
+    max-width: 860px;
   }
-  .calc-promo-card h2 { font-size: 28px; line-height: 1.18; color: #fff; margin-bottom: 12px; letter-spacing: -0.3px; }
-  .calc-promo-card p { font-size: 16px; line-height: 1.65; color: #cdd9ec; margin-bottom: 24px; max-width: 460px; }
-  .btn-calc {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--gold); color: var(--navy-dark);
-    font-size: 16px; font-weight: 700; text-decoration: none;
-    padding: 14px 26px; border-radius: 8px; transition: background 0.15s, transform 0.15s;
+  .calc-panel h2 {
+    font-family: var(--font-display);
+    font-size: 27px;
+    line-height: 1.25;
+    color: #fff;
+    margin-bottom: 10px;
   }
-  .btn-calc:hover { background: #d4af37; transform: translateY(-1px); }
-  .calc-chips { display: flex; flex-direction: column; gap: 12px; }
-  .calc-chip { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 11px; padding: 16px 18px; }
-  .calc-chip .chip-amt { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; color: #f0d87a; line-height: 1; }
-  .calc-chip .chip-label { font-size: 13px; color: #cdd9ec; margin-top: 5px; }
+  .calc-panel p {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: #c0cfdf;
+    max-width: 520px;
+    margin-bottom: 24px;
+  }
 
-  /* ============================================================
-     PROGRAMS (simple list)
-  ============================================================ */
-  .prog-list { display: flex; flex-direction: column; gap: 12px; max-width: 940px; }
-  .prog-row {
-    display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px;
-    background: var(--bg-white); border: 1px solid var(--border); border-radius: 11px; padding: 20px 22px;
-    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  /* Contact */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 44px;
+    align-items: start;
+    max-width: 980px;
   }
-  .prog-row:hover { border-color: var(--navy-light); box-shadow: 0 10px 26px -12px rgba(26,58,107,0.35); transform: translateY(-1px); }
-  .prog-row h3 { font-size: 18px; color: var(--navy-dark); margin-bottom: 4px; }
-  .prog-row p { font-size: 14.5px; color: var(--text-muted); line-height: 1.55; margin: 0; }
-  .prog-row .prog-go { font-size: 14px; font-weight: 600; color: var(--navy); text-decoration: none; white-space: nowrap; }
-  .prog-row .prog-go:hover { text-decoration: underline; }
-  .prog-foot { max-width: 940px; margin-top: 18px; font-size: 14.5px; color: var(--text-muted); line-height: 1.6; }
-  .prog-foot a { color: var(--navy); font-weight: 600; text-decoration: none; }
-  .prog-foot a:hover { text-decoration: underline; }
-
-  /* ============================================================
-     CONTACT (lean, single form)
-  ============================================================ */
-  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; max-width: 980px; }
-  .contact-copy p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 18px; }
-  .contact-direct { font-size: 15px; line-height: 1.9; }
+  .contact-copy p {
+    font-size: 16.5px;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .contact-direct { font-size: 16px; line-height: 2; }
   .contact-direct a { color: var(--navy); font-weight: 600; text-decoration: none; }
   .contact-direct a:hover { text-decoration: underline; }
-  .contact-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 12px; padding: 26px 24px; box-shadow: 0 1px 2px rgba(16,34,72,0.04), 0 12px 30px -16px rgba(16,34,72,0.2); }
-  .contact-card label { display: block; font-size: 13px; font-weight: 600; color: var(--navy-dark); margin: 14px 0 5px; }
-  .contact-card label:first-of-type { margin-top: 0; }
-  .contact-card input, .contact-card select {
-    width: 100%; padding: 11px 13px; font-size: 15px; font-family: inherit;
-    border: 1px solid var(--border); border-radius: 7px; background: #fff; color: var(--text);
+  .contact-card {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 26px;
   }
-  .contact-card input:focus, .contact-card select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(26,58,107,0.1); }
-  .btn-contact-submit {
-    width: 100%; margin-top: 20px; background: var(--gold); color: var(--navy-dark);
-    border: none; border-radius: 8px; padding: 13px 20px; font-size: 15px; font-weight: 700;
-    font-family: inherit; cursor: pointer; transition: background 0.15s;
+  .contact-card .nj-field + .nj-field { margin-top: 14px; }
+  .contact-privacy {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 12px;
   }
-  .btn-contact-submit:hover { background: #d4af37; }
-  .contact-privacy { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; }
-  .form-success { display: none; background: var(--green-light); border: 1px solid #b8d8c4; border-radius: 10px; padding: 22px; text-align: center; color: var(--green); font-size: 15px; font-weight: 600; }
 
   @media (max-width: 760px) {
-    .nf-body { padding: 22px 18px; }
-    .nf-body h2 { font-size: 22px; }
-    .nf-updated { margin-left: 0; width: 100%; }
-    .compare { grid-template-columns: 1fr; }
-    .calc-promo-card { grid-template-columns: 1fr; padding: 28px 22px; gap: 24px; }
-    .calc-promo-card h2 { font-size: 23px; }
-    .prog-row { grid-template-columns: 1fr; gap: 10px; }
-    .contact-wrap { grid-template-columns: 1fr; gap: 28px; }
+    .hero { padding: 56px 20px 48px; }
+    .calc-panel { padding: 28px 22px; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 30px; }
   }
   </style>
 </head>
 <body>
 
-<!-- TOP BAR (kept) -->
+<!-- TOP BAR -->
 <div class="topbar">
   <div class="topbar-inner">
-    <span><i class="fas fa-landmark" style="margin-right:6px;"></i>New Jersey Property Tax Relief Resource, South Jersey</span>
-    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">Official NJ Treasury <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+    <span>New Jersey Property Tax Relief Resource, South Jersey</span>
+    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank" rel="noopener">Official NJ Treasury <i class="ic ic-ext" aria-hidden="true"></i></a>
   </div>
 </div>
 
-<!-- NAV (kept, injected from nav.html) -->
+<!-- NAV (injected from nav.html) -->
 <nav id="main-nav"></nav>
 
 <!-- ============================================================
-     HERO (keeps the existing background image)
+     HERO
 ============================================================ -->
 <div class="hero">
   <div class="hero-inner">
-    <h1>New Jersey property tax relief, <span>explained simply</span></h1>
-    <p>Millions of NJ homeowners, renters, and seniors qualify for relief they never claim. See what you're owed and how to get it, from a licensed South Jersey agent and 15+ year tax pro.</p>
+    <h1>New Jersey property tax relief, <span>explained straight</span></h1>
+    <p>ANCHOR, Stay NJ, and the Senior Freeze pay real money to NJ homeowners, renters, and seniors. Most people qualify for at least one. None of them pay out unless you apply.</p>
     <div class="hero-actions">
-      <a href="anchor-estimator.html" class="btn-primary"><i class="fas fa-calculator"></i>Check your benefits, free calculator</a>
-      <a href="#programs" class="hero-sub-link">See the programs &rarr;</a>
+      <a href="anchor-estimator.html" class="nj-btn nj-btn-gold">Check what you qualify for</a>
+      <a href="#programs" class="hero-sub-link">See the programs</a>
     </div>
-  </div>
-</div>
-
-<!-- NEWS STRIP (kept) -->
-<div class="news-strip">
-  <div class="news-strip-inner">
-    <div class="news-strip-label"><i class="fas fa-bolt"></i>Latest</div>
-    <div class="news-items">
-      <div class="news-item"><i class="fas fa-circle-check"></i>Budget passed: Stay NJ income limit now about $200K, <a href="#staynj-update">what changed</a></div>
-      <div class="news-item"><i class="fas fa-calendar"></i>PAS-1 filing deadline: November 2, 2026, <a href="pas-1-guide.html">file now</a></div>
-      <div class="news-item"><i class="fas fa-circle-check"></i>ANCHOR confirmation letters mail August 2026, <a href="anchor-program.html">learn more</a></div>
-    </div>
-  </div>
-</div>
-
-<!-- CREDIBILITY BAR (kept) -->
-<div class="cred-bar">
-  <div class="cred-bar-inner">
-    <div class="cred-item"><i class="fas fa-user-tie"></i><span>Licensed NJ Agent <strong>#2079591</strong></span></div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><i class="fas fa-file-invoice-dollar"></i><span><strong>15+ Years</strong> Tax Experience</span></div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><i class="fab fa-tiktok"></i><span><a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank">@thetaxwatchdog</a>, NJ Tax Tips Daily</span></div>
-    <div class="cred-divider"></div>
-    <div class="cred-item"><i class="fas fa-map-marker-alt"></i><span><strong>South Jersey</strong>, Camden, Gloucester, Salem</span></div>
+    <p class="hero-cred">This site is run by <a href="index.html#contact">John Scafide</a>, a licensed South Jersey agent (NJ #2079591) with 15+ years of tax experience. It is an independent guide, not a government site.</p>
   </div>
 </div>
 
 <!-- ============================================================
-     BUDGET BULLETIN (Stay NJ, FY2027)
+     FY2027 BUDGET NOTICE (Stay NJ)
 
      STATUS as of June 30, 2026: The FY2027 budget passed. The
      $6,500 max is preserved; income limit drops to ~$200,000 with
-     tiers ($6,500 under $100K / $5,000 $100-150K / $4,000 $150-200K
-     / none over $200K). Senior Freeze not cut.
+     tiers. Senior Freeze not cut.
 
-     STILL TO CONFIRM: the exact income threshold ("about $200,000")
+     STILL TO CONFIRM: exact income threshold ("about $200,000")
      and tier breakpoints come from NJ.com reporting on the deal.
      When the NJ Division of Taxation posts official FY2027 Stay NJ
-     guidance, replace "about $200,000" with the exact figure, drop
-     the "will be confirmed" line in .nf-note, and verify the
-     NJ-gross-income definition before listing income sources.
-     Sources (June 23-30, 2026): NJ Governor's Office, AARP NJ,
-     NJ.com via NJ1015, NJBIZ, Jersey Vindicator.
+     guidance, update js/relief-programs.js (the numbers below are
+     injected from it via data-nj) and drop the "will be confirmed"
+     sentence in the notice footer.
 ============================================================ -->
-<section class="section alert-section" id="staynj-update">
+<section class="section" id="staynj-update">
   <div class="section-inner">
-    <div class="newsflash">
-      <div class="nf-bar">
-        <span class="nf-live"><span class="nf-dot"></span>Now Official</span>
-        <span class="nf-deadline"><i class="fas fa-circle-check"></i>FY2027 budget passed</span>
-        <span class="nf-updated">Updated June 30, 2026</span>
+    <div class="nj-notice">
+      <div class="nj-notice-head">
+        <span class="nj-notice-tag">Program change, now law</span>
+        <span class="nj-notice-date">Updated <span data-nj="lastVerified">June 30, 2026</span></span>
       </div>
-      <div class="nf-body">
-        <h2>It's official: Stay NJ survived the budget, with a lower income limit</h2>
-        <p>New Jersey passed its FY2027 state budget, and Stay NJ was not cut the way the Governor first proposed. The full $6,500 maximum stays in place. But the income limit to qualify dropped sharply, from $500,000 down to about $200,000, and the benefit is now tiered by income. Here is what changed.</p>
-
-        <div class="compare">
-          <div class="compare-col current">
-            <div class="compare-tag">Before (through FY2026)</div>
-            <div class="compare-line">Cuts an eligible senior's property tax bill in half, up to <b>$6,500</b>.</div>
-            <div class="compare-line">Open to homeowners <b>65 and older</b> with income up to <b>$500,000</b>.</div>
-          </div>
-          <div class="compare-col proposed">
-            <div class="compare-tag">Now law (FY2027 budget)</div>
-            <div class="compare-line">Top benefit <b>stays at $6,500</b>, the income limit is now about <b>$200,000</b>, and the amount is tiered:</div>
-            <div class="tier-table">
-              <div class="tier-row"><span>Income $100,000 or less</span><span>up to $6,500</span></div>
-              <div class="tier-row"><span>$100,000 to $150,000</span><span>up to $5,000</span></div>
-              <div class="tier-row"><span>$150,000 to $200,000</span><span>up to $4,000</span></div>
-              <div class="tier-row out"><span>Over $200,000</span><span>not eligible</span></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="nf-note">
-          Earn over $200,000 and you no longer qualify for Stay NJ. Eligibility uses <b>NJ gross income</b>, which is not the same as your federal AGI, so check your NJ number before you assume you're out. The exact income thresholds will be confirmed by the NJ Division of Taxation. The <b>Senior Freeze</b> program was not cut.
-        </div>
-
-        <div class="nf-actions">
-          <a href="senior-programs.html"><i class="fas fa-leaf" style="color:var(--green);"></i>Stay NJ &amp; senior programs</a>
-          <a href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank">Official NJ Stay NJ page <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
-        </div>
+      <h2>Stay NJ survived the budget, with a lower income limit</h2>
+      <p>New Jersey passed its FY2027 budget and Stay NJ was not cut the way the Governor first proposed. The top credit stays at <b class="nj-amt" data-nj="stayNJ.maxCap">$6,500</b>. But the income limit dropped from $500,000 to <b data-nj="stayNJ.incomeLimit">about $200,000</b>, and the credit is now capped by income:</p>
+      <div class="nj-tiers" style="margin:16px 0 4px;">
+        <div class="nj-tier-row"><span>Income <span data-nj="stayNJ.tier1Income">$100,000</span> or less</span><b>up to <span data-nj="stayNJ.tier1Cap">$6,500</span></b></div>
+        <div class="nj-tier-row"><span><span data-nj="stayNJ.tier1Income">$100,000</span> to <span data-nj="stayNJ.tier2Income">$150,000</span></span><b>up to <span data-nj="stayNJ.tier2Cap">$5,000</span></b></div>
+        <div class="nj-tier-row"><span><span data-nj="stayNJ.tier2Income">$150,000</span> to <span data-nj="stayNJ.tier3Income">$200,000</span></span><b>up to <span data-nj="stayNJ.tier3Cap">$4,000</span></b></div>
+        <div class="nj-tier-row is-out"><span>Over <span data-nj="stayNJ.tier3Income">$200,000</span></span><b>not eligible</b></div>
+      </div>
+      <div class="nj-notice-foot">
+        Eligibility uses NJ gross income, which is not the same as your federal AGI, so check your NJ number before you assume you're out. Exact thresholds will be confirmed by the NJ Division of Taxation. The Senior Freeze was not cut.
+        <a href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank" rel="noopener" class="nj-ext">Official Stay NJ page <i class="ic ic-ext" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     CALCULATOR PROMO
+     THE PROGRAMS: benefit ledger
+============================================================ -->
+<section class="section section-alt" id="programs">
+  <div class="section-inner">
+    <div class="nj-kicker">The programs</div>
+    <h2 class="nj-h2">What New Jersey pays, program by program</h2>
+    <p class="nj-sub">Most NJ residents qualify for at least one line on this list. You have to apply to collect any of them.</p>
+
+    <div class="nj-ledger">
+      <a class="nj-ledger-row" href="anchor-program.html">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">ANCHOR</div>
+          <div class="nj-ledger-desc">A direct payment for homeowners and renters. No age requirement. Renters get <span class="nj-amt" data-nj="anchor.renter.benefit">$450</span>, or <span class="nj-amt" data-nj="anchor.renter.senior">$700</span> at 65 and older.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">up to <span data-nj="anchor.homeowner.max">$1,500</span><small>homeowners</small></div>
+      </a>
+      <a class="nj-ledger-row" href="senior-programs.html">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">Stay NJ</div>
+          <div class="nj-ledger-desc">For homeowners 65 and older. Cuts your property tax bill in half, paid quarterly. New <span data-nj="stayNJ.incomeLimit">about $200,000</span> income limit.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">up to <span data-nj="stayNJ.maxCap">$6,500</span><small>per year</small></div>
+      </a>
+      <a class="nj-ledger-row" href="senior-programs.html#senior-freeze">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">Senior Freeze (PTR)</div>
+          <div class="nj-ledger-desc">For seniors and disabled homeowners. Reimburses the increase in your property taxes above your base year.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">varies<small>by base year</small></div>
+      </a>
+      <a class="nj-ledger-row" href="veterans.html">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">Veterans benefits</div>
+          <div class="nj-ledger-desc">A $250 deduction for eligible NJ veterans, up to a full property tax exemption for 100% disabled veterans.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">$250 and up<small>to full exemption</small></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW SENIORS APPLY (PAS-1)
+============================================================ -->
+<section class="section" id="pas1">
+  <div class="section-inner">
+    <div class="nj-kicker">For seniors 65+</div>
+    <h2 class="nj-h2">One form covers all three programs</h2>
+    <p class="nj-sub">If you're 65 or older, you don't file three applications. The PAS-1 covers ANCHOR, Stay NJ, and the Senior Freeze at once.</p>
+
+    <ol class="steps">
+      <li><p><b>Gather your numbers.</b> Your annual property tax bill and your NJ gross income for the benefit year. That's most of what the form asks for.</p></li>
+      <li><p><b>File the PAS-1 by <span data-nj="pas1.deadline">November 2, 2026</span>.</b> File online at <a href="https://propertytaxrelief.nj.gov" target="_blank" rel="noopener" class="nj-ext">propertytaxrelief.nj.gov <i class="ic ic-ext" aria-hidden="true"></i></a> or on paper. You file it once a year.</p></li>
+      <li><p><b>The state calculates all three benefits.</b> You don't pick a program or do any math. The Division of Taxation determines what you get from that one form.</p></li>
+    </ol>
+
+    <p class="nj-ledger-foot" style="margin-top:20px;">Want a hand with it? <a href="pas-1-guide.html">John walks you through the PAS-1 line by line for a flat $20</a>, or read the free step-by-step guide first.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     CALCULATOR PANEL
 ============================================================ -->
 <section class="section section-alt">
   <div class="section-inner">
-    <div class="calc-promo-card">
-      <div>
-        <h2>See what you qualify for in about 90 seconds</h2>
-        <p>Our free benefits calculator estimates your ANCHOR payment and your Stay NJ senior credit. No login, no cost, just answers.</p>
-        <a class="btn-calc" href="anchor-estimator.html"><i class="fas fa-calculator"></i>Open the free calculator</a>
-      </div>
-      <div class="calc-chips">
-        <div class="calc-chip">
-          <div class="chip-amt">Up to $1,500</div>
-          <div class="chip-label">ANCHOR, homeowners and renters</div>
-        </div>
-        <div class="calc-chip">
-          <div class="chip-amt">Up to $6,500</div>
-          <div class="chip-label">Stay NJ credit, seniors 65+</div>
-        </div>
-      </div>
+    <div class="calc-panel nj-dark">
+      <h2>See your numbers in about two minutes</h2>
+      <p>The free calculator estimates your ANCHOR payment and your Stay NJ credit. No account, no cost. You answer a few questions, you get a dollar figure.</p>
+      <a class="nj-btn nj-btn-gold" href="anchor-estimator.html">Open the calculator</a>
     </div>
   </div>
 </section>
 
 <!-- ============================================================
-     PROGRAMS (simple list)
+     CONTACT
 ============================================================ -->
-<section class="section" id="programs">
-  <div class="section-inner">
-    <h2 class="section-title">The main relief programs</h2>
-    <p class="section-subtitle">Most NJ residents qualify for at least one of these. You have to apply to get them.</p>
-
-    <div class="prog-list">
-      <div class="prog-row">
-        <div>
-          <h3>ANCHOR</h3>
-          <p>A direct payment for NJ homeowners and renters, with no age requirement. Up to $1,500 for homeowners, up to $700 for renters.</p>
-        </div>
-        <a href="anchor-program.html" class="prog-go">Learn more &rarr;</a>
-      </div>
-
-      <div class="prog-row">
-        <div>
-          <h3>Stay NJ <span style="font-size:12px;font-weight:700;color:#c0291c;">&middot; new $200K income limit</span></h3>
-          <p>For homeowners 65 and older. Cuts an eligible senior's property tax bill in half, up to $6,500.</p>
-        </div>
-        <a href="senior-programs.html" class="prog-go">Learn more &rarr;</a>
-      </div>
-
-      <div class="prog-row">
-        <div>
-          <h3>Senior Freeze (PTR)</h3>
-          <p>For seniors and disabled homeowners. Reimburses the increase in your property taxes above your base year.</p>
-        </div>
-        <a href="senior-programs.html#senior-freeze" class="prog-go">Learn more &rarr;</a>
-      </div>
-
-      <div class="prog-row">
-        <div>
-          <h3>Veterans benefits</h3>
-          <p>A $250 deduction for eligible NJ veterans, up to a full property tax exemption for 100% disabled veterans.</p>
-        </div>
-        <a href="veterans.html" class="prog-go">Learn more &rarr;</a>
-      </div>
-    </div>
-
-    <p class="prog-foot">
-      Seniors apply for ANCHOR, Stay NJ, and the Senior Freeze with one form, the PAS-1. The deadline for the 2025 application year is <b>November 2, 2026</b>. Need a hand? <a href="pas-1-guide.html">PAS-1 filing help is $20</a>.
-    </p>
-  </div>
-</section>
-
-<!-- ============================================================
-     CONTACT (lean, single form)
-============================================================ -->
-<section class="section section-alt" id="contact">
+<section class="section" id="contact">
   <div class="section-inner">
     <div class="contact-wrap">
       <div class="contact-copy">
-        <h2 class="section-title">Talk to a local expert</h2>
-        <p>Questions about what you qualify for, a property tax appeal, or buying and selling in South Jersey? John and Heather Scafide are licensed NJ agents, and John has 15+ years of tax experience. No pressure, and it costs nothing to ask.</p>
+        <div class="nj-kicker">Questions</div>
+        <h2 class="nj-h2">Ask a local expert, free</h2>
+        <p>Not sure what you qualify for, thinking about an appeal, or buying or selling in South Jersey? John and Heather Scafide are licensed NJ agents, and John has 15+ years of tax experience. Asking costs nothing.</p>
         <div class="contact-direct">
-          <i class="fas fa-phone" style="color:var(--navy);margin-right:8px;"></i><a href="tel:8564041098">856-404-1098</a><br>
-          <i class="fas fa-envelope" style="color:var(--navy);margin-right:8px;"></i><a href="mailto:john@johnscafide.com">john@johnscafide.com</a><br>
-          <i class="fab fa-tiktok" style="color:var(--navy);margin-right:8px;"></i><a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank">@thetaxwatchdog</a>
+          <a href="tel:8564041098">856-404-1098</a><br>
+          <a href="mailto:john@johnscafide.com">john@johnscafide.com</a><br>
+          <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank" rel="noopener">TikTok: @thetaxwatchdog</a>
         </div>
       </div>
 
       <div>
         <div class="contact-card" id="contact-form">
-          <label for="cf-name">Your name</label>
-          <input type="text" id="cf-name" placeholder="Jane Smith">
-          <label for="cf-email">Email</label>
-          <input type="email" id="cf-email" placeholder="jane@example.com">
-          <label for="cf-phone">Phone (optional)</label>
-          <input type="tel" id="cf-phone" placeholder="(856) 555-0123">
-          <label for="cf-topic">What's this about?</label>
-          <select id="cf-topic">
-            <option value="General property tax question">General property tax question</option>
-            <option value="ANCHOR eligibility">ANCHOR eligibility</option>
-            <option value="Stay NJ / Senior Freeze">Stay NJ or Senior Freeze</option>
-            <option value="Property tax appeal">Property tax appeal</option>
-            <option value="PAS-1 filing help">PAS-1 filing help ($20)</option>
-            <option value="Buying or selling a home">Buying or selling a home</option>
-          </select>
-          <button class="btn-contact-submit" onclick="submitContact()">Request a free consult</button>
-          <p class="contact-privacy">Your info is never sold. Response within one business day.</p>
+          <div class="nj-field">
+            <label for="cf-name">Your name</label>
+            <input class="nj-input" type="text" id="cf-name" autocomplete="name">
+          </div>
+          <div class="nj-field">
+            <label for="cf-email">Email</label>
+            <input class="nj-input" type="email" id="cf-email" autocomplete="email">
+          </div>
+          <div class="nj-field">
+            <label for="cf-phone">Phone (optional)</label>
+            <input class="nj-input" type="tel" id="cf-phone" autocomplete="tel">
+          </div>
+          <div class="nj-field">
+            <label for="cf-topic">What's this about?</label>
+            <select class="nj-select" id="cf-topic">
+              <option value="General property tax question">General property tax question</option>
+              <option value="ANCHOR eligibility">ANCHOR eligibility</option>
+              <option value="Stay NJ / Senior Freeze">Stay NJ or Senior Freeze</option>
+              <option value="Property tax appeal">Property tax appeal</option>
+              <option value="PAS-1 filing help">PAS-1 filing help ($20)</option>
+              <option value="Buying or selling a home">Buying or selling a home</option>
+            </select>
+          </div>
+          <button class="nj-btn nj-btn-gold" style="width:100%;margin-top:20px;" onclick="submitContact()">Send my question</button>
+          <div class="nj-form-error" id="contact-error" role="alert"></div>
+          <p class="contact-privacy">Your info is never sold. You'll hear back within one business day.</p>
         </div>
-        <div class="form-success" id="form-success">
-          <i class="fas fa-circle-check" style="font-size:22px;display:block;margin-bottom:8px;"></i>
+        <div class="nj-form-ok" id="form-success">
           Got it. John or Heather will follow up within one business day.
         </div>
       </div>
@@ -674,15 +586,9 @@
   </div>
 </section>
 
-<!-- FOOTER (kept, injected from footer.html) -->
+<!-- FOOTER (injected from footer.html) -->
 <footer id="main-footer"></footer>
 
-<!-- Back to top (kept) -->
-<button id="backToTop" onclick="scrollToTop()" title="Go to top"><i class="fas fa-arrow-up"></i></button>
-
-<!-- SCRIPTS: EmailJS SDK + shared site script. scripts.js injects the
-     nav/footer, runs the mobile menu and news strip, and handles the
-     contact form (submitContact). No page-specific JS needed. -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/relief-programs.js"></script>
 <script src="scripts.js"></script>

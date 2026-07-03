@@ -4,21 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NJ Senior Property Tax Relief 2025–2026 | Stay NJ & Senior Freeze | NJPropertyTaxRelief.com</title>
-<meta name="description" content="Complete guide to NJ senior property tax relief programs. Stay NJ provides up to $6,500 — 50% off your tax bill. Senior Freeze reimburses your tax increase. Both applied via the PAS-1 form. South Jersey expert help available.">
+<meta name="description" content="Complete guide to NJ senior property tax relief programs. Stay NJ provides up to $6,500 (50% off your tax bill). Senior Freeze reimburses your tax increase. Both applied via the PAS-1 form. South Jersey expert help available.">
 <meta name="keywords" content="Stay NJ program, NJ senior property tax relief, Senior Freeze New Jersey, PTR New Jersey, NJ property tax reimbursement seniors, Stay NJ 2026 payments, NJ senior homeowner tax credit, Senior Freeze income limit 2025, Stay NJ quarterly payments, NJ PAS-1 seniors, South Jersey senior tax relief">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-  
+
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://njpropertytaxrelief.com/senior-programs.html">
 <meta property="og:title" content="NJ Senior Property Tax Relief | Stay NJ & Senior Freeze 2025–2026">
-<meta property="og:description" content="Stay NJ gives seniors 65+ up to $6,500 — 50% off their property tax bill. Senior Freeze reimburses tax increases. Both covered by a single PAS-1 application. Deadline November 2, 2026.">
+<meta property="og:description" content="Stay NJ gives seniors 65+ up to $6,500, 50% off their property tax bill. Senior Freeze reimburses tax increases. Both covered by a single PAS-1 application. Deadline November 2, 2026.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@thetaxwatchdog">
 <link rel="canonical" href="https://njpropertytaxrelief.com/senior-programs.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
@@ -43,135 +43,291 @@
 </script>
 
 <style>
-.payment-timeline { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin:24px 0; }
-.payment-quarter { background:rgba(255,255,255,0.09); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:16px; text-align:center; }
-.payment-quarter .q-month { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; color:#f0d87a; }
-.payment-quarter .q-label { font-size:12px; color:#c0cfdf; margin-top:4px; }
-.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:28px; }
-@media(max-width:768px){ .payment-timeline{grid-template-columns:1fr 1fr;} .compare-grid{grid-template-columns:1fr;} }
+/* ============================================================
+   SENIOR PROGRAMS (2026 redesign)
+   Shared components live in styles.css under the nj- prefix.
+============================================================ */
+
+/* Page hero: flat navy, no photo */
+.page-hero {
+  background: var(--navy-dark);
+  color: #fff;
+  padding: 56px 24px 60px;
+}
+.page-hero-inner { max-width: 1100px; margin: 0 auto; }
+.breadcrumb-nav { font-size: 14px; color: #8aaac8; margin-bottom: 18px; }
+.breadcrumb-nav a { color: #8aaac8; text-decoration: none; }
+.breadcrumb-nav a:hover { color: #fff; }
+.breadcrumb-nav .sep { margin: 0 8px; }
+.breadcrumb-nav .here { color: #f0d87a; }
+.page-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.5vw, 42px);
+  line-height: 1.15;
+  max-width: 700px;
+  margin-bottom: 14px;
+}
+.page-hero h1 span { color: #f0d87a; }
+.page-hero p {
+  font-size: 17.5px;
+  color: #d0dcec;
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+.page-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+/* Stay NJ calculator card */
+.sn-calc {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 30px 32px;
+  max-width: 860px;
+}
+.sn-calc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 8px;
+}
+.sn-calc-result {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.sn-calc-amount {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  line-height: 1.1;
+}
+.sn-calc-label {
+  font-size: 15px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.sn-calc-detail {
+  display: flex;
+  gap: 36px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+.sn-calc-detail div b {
+  display: block;
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 21px;
+  color: var(--navy-dark);
+}
+.sn-calc-detail div span { font-size: 13.5px; color: var(--text-muted); }
+.sn-calc-note {
+  margin-top: 18px;
+  font-size: 14.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* At-a-glance table */
+.glance {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px 24px;
+}
+.glance h4 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--navy-dark);
+  margin-bottom: 12px;
+}
+.glance-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 9px 0;
+  font-size: 15px;
+}
+.glance-row + .glance-row { border-top: 1px solid var(--border); }
+.glance-row span:first-child { color: var(--text-muted); }
+.glance-row span:last-child {
+  font-weight: 600;
+  color: var(--navy-dark);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.glance .nj-ext { display: inline-block; margin-top: 14px; font-size: 14.5px; }
+
+/* Example: the one dark panel on this page, set as a ledger */
+.example-panel {
+  background: var(--navy-dark);
+  border-radius: 10px;
+  padding: 36px 40px;
+  color: #fff;
+  max-width: 860px;
+}
+.example-panel h3 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.example-panel .ex-sub { font-size: 15px; color: #8aaac8; margin-bottom: 22px; }
+.ex-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 12px 0;
+  font-size: 16.5px;
+}
+.ex-row + .ex-row { border-top: 1px solid rgba(255,255,255,0.12); }
+.ex-row .ex-dots { flex: 1; border-bottom: 2px dotted rgba(255,255,255,0.25); transform: translateY(-4px); }
+.ex-row b {
+  font-family: var(--font-display);
+  font-variant-numeric: tabular-nums;
+  font-size: 20px;
+  color: #f0d87a;
+  white-space: nowrap;
+}
+.ex-row.ex-total { border-top: 2px solid rgba(255,255,255,0.35); margin-top: 6px; padding-top: 16px; }
+.ex-row.ex-total b { font-size: 26px; }
+.ex-note { margin-top: 18px; font-size: 14px; color: #8aaac8; line-height: 1.6; }
+
+/* TikTok play triangle (replaces icon font) */
+.play-tri {
+  display: inline-block;
+  width: 0; height: 0;
+  border-left: 16px solid #fff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-left: 4px;
+}
+.play-tri.small {
+  border-left-width: 7px;
+  border-top-width: 4.5px;
+  border-bottom-width: 4.5px;
+  margin: 0 2px 0 0;
+}
+
+@media (max-width: 700px) {
+  .sn-calc { padding: 22px 18px; }
+  .sn-calc-inputs { grid-template-columns: 1fr; }
+  .example-panel { padding: 26px 20px; }
+}
 </style>
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span><i class="fas fa-landmark" style="margin-right:6px;"></i>New Jersey Property Tax Relief Resource Guide</span>
-    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">Official NJ Treasury <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+    <span>New Jersey Property Tax Relief Resource Guide</span>
+    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank" rel="noopener">Official NJ Treasury <i class="ic ic-ext" aria-hidden="true"></i></a>
   </div>
 </div>
 <nav id="main-nav"></nav>
 
-<div class="page-hero" style="background:linear-gradient(rgba(10,24,55,0.82),rgba(10,24,55,0.92)),url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&q=80') center/cover no-repeat;color:#fff;padding:56px 24px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="breadcrumb-nav" style="font-size:13px;color:#8aaac8;margin-bottom:16px;">
-      <a href="index.html" style="color:#8aaac8;text-decoration:none;">Home</a>
-      <span style="margin:0 8px;">›</span>
-      <span style="color:#f0d87a;">Senior Programs</span>
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="breadcrumb-nav">
+      <a href="index.html">Home</a><span class="sep">&rsaquo;</span><span class="here">Senior Programs</span>
     </div>
-    <div class="hero-badge">For Seniors 65+</div>
-    <h1 style="font-size:40px;line-height:1.12;margin:14px 0;max-width:680px;">NJ Senior Property Tax Relief — <span style="color:#f0d87a;">Stay NJ &amp; Senior Freeze</span></h1>
-    <p style="font-size:17px;color:#d0dcec;max-width:600px;margin-bottom:28px;">New Jersey's most powerful property tax relief is for seniors 65+. Stay NJ cuts your bill in half. Senior Freeze reimburses every dollar of increase. Most seniors qualify for both — with one application.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <a href="#staynj-calc" class="btn-primary">Calculate My Stay NJ Credit</a>
-      <a href="pas-1-guide.html" class="btn-outline">File the PAS-1 Form</a>
-    </div>
-    <div style="display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid rgba(255,255,255,0.12);flex-wrap:wrap;">
-      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">$6,500</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">Max Stay NJ credit per year</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">50%</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">Of your annual tax bill</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">~$200K</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">New income limit (FY2027)</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">Nov 2</div><div style="font-size:13px;color:#c0cfdf;margin-top:4px;">PAS-1 deadline 2026</div></div>
+    <h1>Senior property tax relief: <span>Stay NJ and the Senior Freeze</span></h1>
+    <p>If you're 65 or older and own your NJ home, these two programs do the heavy lifting. Stay NJ cuts your bill in half, up to <span class="nj-amt" data-nj="stayNJ.maxCap">$6,500</span> a year. The Senior Freeze reimburses your tax increases. One PAS-1 form applies you to both, plus ANCHOR.</p>
+    <div class="page-hero-actions">
+      <a href="#staynj-calc" class="nj-btn nj-btn-gold">Calculate my Stay NJ credit</a>
+      <a href="pas-1-guide.html" class="nj-btn nj-btn-navy">File the PAS-1</a>
     </div>
   </div>
 </div>
 
 <div class="alert-banner">
   <div class="alert-inner">
-    <i class="fas fa-bullhorn" style="color:var(--gold);"></i>
-    <span><strong>One form covers all three programs.</strong> Seniors 65+ apply for ANCHOR, Stay NJ, and Senior Freeze simultaneously using the PAS-1 combined application. Deadline: <strong>November 2, 2026.</strong> File at <a href="https://propertytaxrelief.nj.gov" target="_blank">propertytaxrelief.nj.gov</a> or <a href="pas-1-guide.html">get step-by-step help here.</a></span>
+    <span><strong>One form covers all three programs.</strong> Seniors 65+ apply for ANCHOR, Stay NJ, and the Senior Freeze with the PAS-1 combined application. Deadline: <strong data-nj="pas1.deadline">November 2, 2026</strong>. File at <a href="https://propertytaxrelief.nj.gov" target="_blank" rel="noopener">propertytaxrelief.nj.gov</a> or <a href="pas-1-guide.html">get step-by-step help here</a>.</span>
   </div>
 </div>
 
 <!-- STAY NJ -->
 <section class="section section-alt" id="staynj">
   <div class="section-inner">
-    <div class="section-label">Stay NJ Program</div>
-    <h2 class="section-title">Stay NJ | 50% Off Your Property Tax Bill</h2>
-    <p class="section-subtitle">The Stay NJ Act was signed into law in 2023 and began paying out quarterly in 2026. New Jersey's FY2027 budget (June 2026) kept the program but tightened who qualifies.</p>
+    <div class="nj-kicker">Stay NJ</div>
+    <h2 class="nj-h2">Stay NJ: half off your property tax bill</h2>
+    <p class="nj-sub">Signed into law in 2023, paying out quarterly since February 2026. The FY2027 budget kept the program but tightened who qualifies.</p>
 
-    <!-- FY2027 budget update callout -->
-    <div style="background:#fff;border:1px solid #f0d7d3;border-radius:10px;padding:22px 24px;margin:8px 0 30px;max-width:760px;">
-      <div style="display:inline-block;background:#fbeeec;color:#c0291c;font-size:11px;font-weight:800;letter-spacing:0.6px;text-transform:uppercase;padding:4px 11px;border-radius:20px;margin-bottom:12px;">Budget Update &middot; June 2026</div>
-      <h3 style="font-size:20px;color:var(--navy-dark);margin:0 0 10px;">The FY2027 budget changed who qualifies</h3>
-      <p style="font-size:15px;line-height:1.65;color:var(--text);margin:0 0 14px;">The full <strong>$6,500 maximum stays in place</strong>, but the income limit dropped from $500,000 to <strong>about $200,000</strong>, and the benefit is now tiered by income:</p>
-      <ul style="list-style:none;margin:0 0 14px;padding:0;font-size:14.5px;color:var(--text);">
-        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>Income $100,000 or less</span><strong style="color:var(--navy-dark);">up to $6,500</strong></li>
-        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>$100,000 to $150,000</span><strong style="color:var(--navy-dark);">up to $5,000</strong></li>
-        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;border-bottom:1px solid #f0e2e0;"><span>$150,000 to $200,000</span><strong style="color:var(--navy-dark);">up to $4,000</strong></li>
-        <li style="display:flex;justify-content:space-between;max-width:430px;padding:5px 0;"><span>Over $200,000</span><strong style="color:#c0291c;">not eligible</strong></li>
-      </ul>
-      <p style="font-size:13.5px;line-height:1.6;color:var(--text-muted);margin:0;">Eligibility uses <strong>NJ gross income</strong>, not federal AGI. Exact thresholds will be confirmed by the NJ Division of Taxation. The Senior Freeze program was not cut.</p>
-    </div>
-
-    <!-- Stay NJ Calculator -->
-    <div class="staynj-highlight" id="staynj-calc">
-      <h3><i class="fas fa-leaf" style="margin-right:10px;color:#7ec8a0;"></i>Stay NJ Credit Calculator</h3>
-      <p>Enter your annual property tax bill and household income to estimate your Stay NJ credit. The credit is 50% of your tax bill, capped by your income: up to $6,500 under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Over about $200,000 no longer qualifies.</p>
-      <div class="staynj-calc-grid">
-        <div class="staynj-input-group"><label>Your Annual Property Tax Bill ($)</label><input type="number" id="staynj-tax" placeholder="e.g. 9000" oninput="calcStayNJ()" min="0"></div>
-        <div class="staynj-input-group"><label>Household Income ($)</label><input type="number" id="staynj-income" placeholder="e.g. 75000" oninput="calcStayNJ()" min="0"></div>
+    <!-- FY2027 budget notice -->
+    <div class="nj-notice" style="margin-bottom:30px;">
+      <div class="nj-notice-head">
+        <span class="nj-notice-tag">Program change, now law</span>
+        <span class="nj-notice-date">Updated <span data-nj="lastVerified">June 30, 2026</span></span>
       </div>
-      <div class="staynj-result" id="staynj-result" style="display:none;">
-        <div class="staynj-result-num" id="staynj-amount">$0</div>
-        <div class="staynj-result-label" id="staynj-label">Estimated Stay NJ Annual Credit</div>
+      <h3>The FY2027 budget changed who qualifies</h3>
+      <p>The <b class="nj-amt" data-nj="stayNJ.maxCap">$6,500</b> maximum stays. But the income limit dropped from $500,000 to <b data-nj="stayNJ.incomeLimit">about $200,000</b>, and the credit is now capped by income:</p>
+      <div class="nj-tiers" style="margin:16px 0 4px;">
+        <div class="nj-tier-row"><span>Income <span data-nj="stayNJ.tier1Income">$100,000</span> or less</span><b>up to <span data-nj="stayNJ.tier1Cap">$6,500</span></b></div>
+        <div class="nj-tier-row"><span><span data-nj="stayNJ.tier1Income">$100,000</span> to <span data-nj="stayNJ.tier2Income">$150,000</span></span><b>up to <span data-nj="stayNJ.tier2Cap">$5,000</span></b></div>
+        <div class="nj-tier-row"><span><span data-nj="stayNJ.tier2Income">$150,000</span> to <span data-nj="stayNJ.tier3Income">$200,000</span></span><b>up to <span data-nj="stayNJ.tier3Cap">$4,000</span></b></div>
+        <div class="nj-tier-row is-out"><span>Over <span data-nj="stayNJ.tier3Income">$200,000</span></span><b>not eligible</b></div>
       </div>
-      <div style="margin-top:18px;">
-        <div style="font-size:13px;color:#c0cfdf;">Stay NJ is paid quarterly — February, May, August, and November. Your annual credit divided by 4 is your quarterly payment.</div>
+      <div class="nj-notice-foot">
+        Eligibility uses NJ gross income, not federal AGI. Exact thresholds will be confirmed by the NJ Division of Taxation. The Senior Freeze was not cut.
       </div>
     </div>
 
-    <!-- Payment timeline -->
-    <h3 style="font-size:22px;color:var(--navy-dark);margin-bottom:8px;">2026 Payment Schedule</h3>
-    <p style="font-size:15px;color:var(--text-muted);margin-bottom:16px;">Stay NJ pays quarterly — four equal payments throughout the year.</p>
-    <div class="payment-timeline" style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:24px 0;">
-      <div style="background:var(--info-bg);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;border-top:3px solid var(--navy);">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);">February</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-top:6px;">Q1 Payment<br>1st quarter</div>
+    <!-- Calculator -->
+    <div class="sn-calc" id="staynj-calc">
+      <h3 style="font-family:var(--font-display);font-size:21px;color:var(--navy-dark);margin-bottom:6px;">Stay NJ credit calculator</h3>
+      <p style="font-size:15.5px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;">Enter your annual property tax bill and household income. The credit is 50% of your bill, capped by the income tiers above.</p>
+      <div class="sn-calc-inputs">
+        <div class="nj-field">
+          <label for="staynj-tax">Annual property tax bill</label>
+          <div class="nj-input-usd">
+            <span class="nj-prefix">$</span>
+            <input class="nj-input" type="number" id="staynj-tax" placeholder="9,000" oninput="calcStayNJ()" min="0" inputmode="numeric">
+          </div>
+        </div>
+        <div class="nj-field">
+          <label for="staynj-income">Household income</label>
+          <div class="nj-input-usd">
+            <span class="nj-prefix">$</span>
+            <input class="nj-input" type="number" id="staynj-income" placeholder="75,000" oninput="calcStayNJ()" min="0" inputmode="numeric">
+          </div>
+        </div>
       </div>
-      <div style="background:var(--info-bg);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;border-top:3px solid var(--navy);">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);">May</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-top:6px;">Q2 Payment<br>2nd quarter</div>
+      <div class="sn-calc-result" id="staynj-result" style="display:none;" aria-live="polite">
+        <div class="sn-calc-amount nj-amt" id="staynj-amount">$0</div>
+        <div class="sn-calc-label" id="staynj-label">Estimated Stay NJ annual credit</div>
+        <div class="sn-calc-detail" id="staynj-detail" style="display:none;">
+          <div><b id="staynj-quarterly">$0</b><span>per quarter</span></div>
+          <div><b id="staynj-remaining">$0</b><span>you still pay per year</span></div>
+        </div>
       </div>
-      <div style="background:var(--info-bg);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;border-top:3px solid var(--navy);">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);">August</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-top:6px;">Q3 Payment<br>3rd quarter</div>
-      </div>
-      <div style="background:var(--info-bg);border:1px solid var(--border);border-radius:8px;padding:18px;text-align:center;border-top:3px solid var(--navy);">
-        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);">November</div>
-        <div style="font-size:13px;color:var(--text-muted);margin-top:6px;">Q4 Payment<br>4th quarter</div>
-      </div>
+      <p class="sn-calc-note">Estimate only; the Division of Taxation sets your final amount. Stay NJ pays quarterly: February, May, August, and November.</p>
     </div>
 
-    <div class="info-grid" style="margin-top:32px;">
+    <div class="info-grid" style="margin-top:36px;">
       <div>
-        <h3 style="font-size:22px;color:var(--navy-dark);margin-bottom:14px;">Stay NJ Requirements</h3>
-        <ul class="requirements-list">
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Age 65 or older</strong><span>Must have been 65 by the end of the benefit year</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Surviving spouse age 55+</strong><span>Surviving spouses of eligible homeowners qualify at age 55</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Household income up to about $200,000</strong><span>FY2027 limit, down from $500,000. Benefit is tiered by income; over ~$200,000 no longer qualifies</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>NJ principal residence</strong><span>Must own and occupy as your primary NJ home</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Apply via PAS-1 form</strong><span>File at propertytaxrelief.nj.gov — deadline November 2, 2026</span></div></li>
+        <h3 style="font-family:var(--font-display);font-size:22px;color:var(--navy-dark);margin-bottom:16px;">Stay NJ requirements</h3>
+        <ul class="nj-checks">
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Age 65 or older</strong><span>You must have turned 65 by the end of the benefit year</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Surviving spouse at 55+</strong><span>Surviving spouses of eligible homeowners qualify from age 55</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Household income up to <span data-nj="stayNJ.incomeLimit">about $200,000</span></strong><span>FY2027 limit, down from $500,000. Credit is tiered by income</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>NJ principal residence</strong><span>You own the home and live in it as your primary NJ residence</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>File the PAS-1 by <span data-nj="pas1.deadline">November 2, 2026</span></strong><span>File at propertytaxrelief.nj.gov, once a year</span></div></li>
         </ul>
       </div>
-      <div class="info-card">
-        <h4 style="font-size:17px;color:var(--navy-dark);margin-bottom:14px;">Stay NJ at a Glance</h4>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Age Requirement</span><span style="font-weight:600;">65 or older</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Surviving Spouse</span><span style="font-weight:600;">Age 55+ qualifies</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Income Limit</span><span style="font-weight:600;">Up to ~$200,000 (FY2027)</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Benefit</span><span style="font-weight:600;color:var(--success);">50% of your tax bill</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Maximum Credit</span><span style="font-weight:600;color:var(--success);">$6,500/yr (income-tiered)</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Payment Method</span><span style="font-weight:600;">Quarterly direct payments</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;font-size:14px;"><span style="color:var(--text-muted);">Application</span><span style="font-weight:600;">PAS-1 combined form</span></div>
-        <a href="https://www.nj.gov/treasury/taxation/staynj.shtml" target="_blank" class="official-link" style="margin-top:14px;">NJ Official Stay NJ Page <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+      <div class="glance">
+        <h4>Stay NJ at a glance</h4>
+        <div class="glance-row"><span>Age requirement</span><span>65 or older</span></div>
+        <div class="glance-row"><span>Surviving spouse</span><span>Qualifies at 55+</span></div>
+        <div class="glance-row"><span>Income limit</span><span data-nj="stayNJ.incomeLimit">about $200,000</span></div>
+        <div class="glance-row"><span>Benefit</span><span>50% of your tax bill</span></div>
+        <div class="glance-row"><span>Maximum credit</span><span><span data-nj="stayNJ.maxCap">$6,500</span>/yr, income-tiered</span></div>
+        <div class="glance-row"><span>Paid</span><span>Quarterly: Feb, May, Aug, Nov</span></div>
+        <div class="glance-row"><span>Application</span><span>PAS-1 combined form</span></div>
+        <a href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank" rel="noopener" class="nj-ext">Official NJ Stay NJ page <i class="ic ic-ext" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
@@ -180,75 +336,58 @@
 <!-- SENIOR FREEZE -->
 <section class="section" id="senior-freeze">
   <div class="section-inner">
-    <div class="section-label">Senior Freeze (PTR)</div>
-    <h2 class="section-title">Senior Freeze — Property Tax Reimbursement</h2>
-    <p class="section-subtitle">The Senior Freeze reimburses you for every dollar your property taxes increase above your "base year" amount. The older your base year, the bigger your check.</p>
+    <div class="nj-kicker">Senior Freeze (PTR)</div>
+    <h2 class="nj-h2">Senior Freeze: your tax increases, reimbursed</h2>
+    <p class="nj-sub">The Senior Freeze pays you back every dollar your property taxes rise above your "base year" amount. The older your base year, the bigger your check.</p>
 
-    <div class="info-box"><strong>How it actually works:</strong> You still receive and pay your full property tax bill every year. But the State reimburses you for the amount above your base year tax. If your 2026 taxes are $6,200 and your base year was $4,100, you receive a <strong>$2,100 reimbursement</strong>.</div>
+    <div class="info-box"><strong>How it actually works:</strong> you still receive and pay your full tax bill every year. Then the State reimburses you for the amount above your base year. If your 2026 taxes are $6,200 and your base year was $4,100, you get a <strong>$2,100</strong> check.</div>
 
-    <div class="info-grid" style="margin-top:28px;">
+    <div class="info-grid" style="margin-top:30px;">
       <div>
-        <h3 style="font-size:22px;color:var(--navy-dark);margin-bottom:14px;">Senior Freeze Requirements</h3>
-        <ul class="requirements-list">
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Age 65 or older — OR permanently disabled</strong><span>Disability must be receiving Social Security or Railroad Retirement disability benefits</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>NJ resident for 10 or more consecutive years</strong><span>Must have lived in New Jersey for at least 10 straight years</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Lived in current home for 3 or more years</strong><span>Must have been in your current home for at least 3 years</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Income limit — 2024: $168,268 / 2025: $172,475</strong><span>Income limits increase slightly each year</span></div></li>
-          <li><span class="req-icon"><i class="fas fa-check"></i></span><div class="req-text"><strong>Property taxes must be paid</strong><span>All taxes due must be paid in full for the year you're claiming</span></div></li>
+        <h3 style="font-family:var(--font-display);font-size:22px;color:var(--navy-dark);margin-bottom:16px;">Senior Freeze requirements</h3>
+        <ul class="nj-checks">
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Age 65 or older, or permanently disabled</strong><span>Disabled means receiving Social Security or Railroad Retirement disability benefits</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>NJ resident for 10+ consecutive years</strong><span>Ten straight years living in New Jersey</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>In your current home for 3+ years</strong><span>Counted from when you moved in</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Income limit: <span data-nj="seniorFreeze.limit2024">$168,268</span> (2024), <span data-nj="seniorFreeze.limit2025">$172,475</span> (2025)</strong><span>The limit rises slightly each year</span></div></li>
+          <li><i class="ic ic-check" aria-hidden="true"></i><div><strong>Property taxes paid in full</strong><span>For the year you're claiming</span></div></li>
         </ul>
-        <div class="warning-box" style="margin-top:16px;"><strong>First-time filers:</strong> Your first year of eligibility establishes your "base year." The reimbursement only applies to increases AFTER your base year. So the sooner you apply, the lower your base year — and the bigger your future reimbursements.</div>
+        <div class="warning-box" style="margin-top:18px;"><strong>First-time filers:</strong> your first eligible year sets your base year, and only increases after it get reimbursed. Applying sooner locks in a lower base year and bigger future checks.</div>
       </div>
-      <div class="info-card">
-        <h4 style="font-size:17px;color:var(--navy-dark);margin-bottom:14px;">Senior Freeze at a Glance</h4>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Age Requirement</span><span style="font-weight:600;">65+ or permanently disabled</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">NJ Residency</span><span style="font-weight:600;">10+ consecutive years</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Home Residency</span><span style="font-weight:600;">3+ years in current home</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Income Limit (2024)</span><span style="font-weight:600;">≤ $168,268</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">Income Limit (2025)</span><span style="font-weight:600;">≤ $172,475</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:14px;"><span style="color:var(--text-muted);">What You Get</span><span style="font-weight:600;color:var(--success);">Tax increase reimbursed</span></div>
-        <div class="detail-row" style="display:flex;justify-content:space-between;padding:9px 0;font-size:14px;"><span style="color:var(--text-muted);">Application</span><span style="font-weight:600;">PAS-1 combined form</span></div>
-        <a href="https://www.nj.gov/treasury/taxation/ptr/" target="_blank" class="official-link" style="margin-top:14px;">NJ Official PTR Page <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+      <div class="glance">
+        <h4>Senior Freeze at a glance</h4>
+        <div class="glance-row"><span>Age requirement</span><span>65+ or disabled</span></div>
+        <div class="glance-row"><span>NJ residency</span><span>10+ consecutive years</span></div>
+        <div class="glance-row"><span>Home residency</span><span>3+ years</span></div>
+        <div class="glance-row"><span>Income limit (2024)</span><span data-nj="seniorFreeze.limit2024">$168,268</span></div>
+        <div class="glance-row"><span>Income limit (2025)</span><span data-nj="seniorFreeze.limit2025">$172,475</span></div>
+        <div class="glance-row"><span>What you get</span><span>Tax increase reimbursed</span></div>
+        <div class="glance-row"><span>Application</span><span>PAS-1 combined form</span></div>
+        <a href="https://www.nj.gov/treasury/taxation/ptr/" target="_blank" rel="noopener" class="nj-ext">Official NJ PTR page <i class="ic ic-ext" aria-hidden="true"></i></a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CAN I GET BOTH -->
+<!-- ALL THREE TOGETHER -->
 <section class="section section-alt" id="both-programs">
   <div class="section-inner">
-    <div class="section-label">Getting Both</div>
-    <h2 class="section-title">Can I Get All Three Programs?</h2>
-    <p class="section-subtitle">Yes — and most eligible seniors should be. Here's how they all work together.</p>
-    <div style="background:var(--navy-dark);color:#fff;border-radius:10px;padding:36px;margin-bottom:28px;">
-      <h3 style="font-size:22px;margin-bottom:20px;">Example: South Jersey Senior with $8,000/yr Property Tax</h3>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:24px;">
-        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:20px;text-align:center;">
-          <div style="font-size:12px;color:#c0cfdf;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">ANCHOR Benefit</div>
-          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">$1,500</div>
-          <div style="font-size:12px;color:#8aaac8;margin-top:6px;">Paid as lump sum</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:20px;text-align:center;">
-          <div style="font-size:12px;color:#c0cfdf;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Stay NJ Credit</div>
-          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">$4,000</div>
-          <div style="font-size:12px;color:#8aaac8;margin-top:6px;">50% of $8,000 tax bill</div>
-        </div>
-        <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:20px;text-align:center;">
-          <div style="font-size:12px;color:#c0cfdf;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Senior Freeze</div>
-          <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:#f0d87a;">Varies</div>
-          <div style="font-size:12px;color:#8aaac8;margin-top:6px;">Based on your base year</div>
-        </div>
-      </div>
-      <div style="text-align:center;padding:16px;background:rgba(184,151,42,0.15);border-radius:8px;">
-        <div style="font-size:14px;color:#c0cfdf;margin-bottom:4px;">Combined from ANCHOR + Stay NJ alone:</div>
-        <div style="font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#f0d87a;">$5,500</div>
-        <div style="font-size:13px;color:#8aaac8;">Plus Senior Freeze reimbursement on top</div>
-      </div>
+    <div class="nj-kicker">Getting all three</div>
+    <h2 class="nj-h2">Yes, you can collect all three at once</h2>
+    <p class="nj-sub">The PAS-1 applies you to every program in one shot. Here's what that looks like for a typical South Jersey senior.</p>
+
+    <div class="example-panel">
+      <h3>Example: senior homeowner, $8,000 tax bill, income under $100,000</h3>
+      <div class="ex-sub">What one PAS-1 filing gets this household per year</div>
+      <div class="ex-row"><span>ANCHOR, paid as a lump sum</span><div class="ex-dots" aria-hidden="true"></div><b data-nj="anchor.homeowner.max">$1,500</b></div>
+      <div class="ex-row"><span>Stay NJ, 50% of the $8,000 bill, paid quarterly</span><div class="ex-dots" aria-hidden="true"></div><b>$4,000</b></div>
+      <div class="ex-row"><span>Senior Freeze, depends on your base year</span><div class="ex-dots" aria-hidden="true"></div><b>varies</b></div>
+      <div class="ex-row ex-total"><span>From ANCHOR and Stay NJ alone</span><div class="ex-dots" aria-hidden="true"></div><b>$5,500</b></div>
+      <div class="ex-note">You don't calculate any of this on the form. Answer the PAS-1's questions accurately and the Division of Taxation works out every benefit you're owed.</div>
     </div>
-    <div class="info-box">
-      <strong>NJ Treasury coordinates these programs.</strong> The PAS-1 application determines eligibility for all three programs at once. You don't need to calculate anything — just answer the questions accurately and the Division of Taxation determines your benefits. File one form, get everything you're owed.
-    </div>
-    <div style="text-align:center;margin-top:28px;">
-      <a href="pas-1-guide.html" class="btn-primary" style="font-size:16px;padding:16px 32px;">File the PAS-1 Now — Deadline November 2, 2026 →</a>
+
+    <div style="margin-top:28px;">
+      <a href="pas-1-guide.html" class="nj-btn nj-btn-gold">File the PAS-1, deadline <span data-nj="pas1.deadlineShort">Nov 2, 2026</span></a>
     </div>
   </div>
 </section>
@@ -256,53 +395,50 @@
 <!-- FAQ -->
 <section class="section" id="faq">
   <div class="section-inner">
-    <div class="section-label">Common Questions</div>
-    <h2 class="section-title">Senior Program FAQ</h2>
- 
-    <!-- Two-column wrapper: FAQ left, video right (stacks on mobile) -->
+    <div class="nj-kicker">Common questions</div>
+    <h2 class="nj-h2">Senior program FAQ</h2>
+
     <div class="faq-with-video">
- 
-      <!-- LEFT COLUMN: FAQ list -->
+
       <div class="faq-list">
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">Does the Senior Freeze actually stop my taxes from going up? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">No — your actual tax bill still goes up each year. What the Senior Freeze does is reimburse you for the increase above your base year amount. So your bill goes up, but the State sends you a check for the difference. Your net out-of-pocket stays close to your base year level.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">Does the Senior Freeze actually stop my taxes from going up? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">No. Your actual tax bill still goes up each year. The Senior Freeze reimburses you for the increase above your base year amount, so your bill rises but the State sends you a check for the difference. Your net out-of-pocket stays close to your base year level.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">Did the 2026 state budget change Stay NJ? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">Yes. New Jersey's FY2027 budget, passed in June 2026, kept the $6,500 maximum credit but lowered the income limit from $500,000 to about $200,000 and made the benefit tiered: up to $6,500 for income under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Seniors above about $200,000 in NJ gross income no longer qualify. Eligibility uses NJ gross income, which is not the same as your federal AGI. The Senior Freeze program was not cut. Exact thresholds will be confirmed by the NJ Division of Taxation.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">Did the 2026 state budget change Stay NJ? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">Yes. The FY2027 budget, passed in June 2026, kept the $6,500 maximum credit but lowered the income limit from $500,000 to about $200,000 and tiered the benefit: up to $6,500 for income under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Above about $200,000 in NJ gross income you no longer qualify. NJ gross income is not the same as your federal AGI. The Senior Freeze was not cut. Exact thresholds will be confirmed by the NJ Division of Taxation.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">When did Stay NJ start paying out? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">Stay NJ payments began in February 2026 for the 2024 benefit year applications. The program was signed into law in 2023 but took time to implement. Payments now go out quarterly — February, May, August, and November — via direct deposit or check.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">When did Stay NJ start paying out? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">Payments began in February 2026 for 2024 benefit year applications. The program became law in 2023 but took time to implement. Payments go out quarterly, in February, May, August, and November, by direct deposit or check.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">My spouse passed away. Do I still qualify? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">Surviving spouses may still qualify for Stay NJ if they are at least 55 years old and meet the other requirements. For Senior Freeze and ANCHOR, contact the hotline at 1-888-238-1233 to understand how benefits transfer in your specific situation.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">My spouse passed away. Do I still qualify? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">You may. Surviving spouses qualify for Stay NJ from age 55 if they meet the other requirements. For the Senior Freeze and ANCHOR, call the hotline at 1-888-238-1233 to confirm how benefits transfer in your situation.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">I just turned 65 this year — when can I first apply? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">You can apply via the PAS-1 for the benefit year in which you turned 65. This is also important because this first year establishes your "base year" for the Senior Freeze — locking in the lower tax amount as your baseline. Apply as soon as you're eligible to lock in the lowest possible base year.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">I just turned 65 this year. When can I first apply? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">You can file the PAS-1 for the benefit year you turned 65. Do it as soon as you're eligible: that first year sets your Senior Freeze base year, and a lower base year means bigger reimbursements every year after.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">Is Stay NJ taxable income? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">The NJ Division of Taxation has not classified Stay NJ credits as taxable income for NJ state tax purposes. However, federal tax treatment of state benefits can be complex. Consult a tax professional regarding your specific federal filing situation.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">Is Stay NJ taxable income? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">The NJ Division of Taxation has not classified Stay NJ credits as taxable income for NJ state tax purposes. Federal treatment of state benefits can be more complicated, so ask a tax professional about your federal filing.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">What if I missed the PAS-1 deadline? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">The NJ Division of Taxation sometimes accepts late applications with a written explanation. Call 1-888-238-1233 immediately if you've missed a deadline — do not assume you've lost the benefit. In some cases, late applications are processed. For future years, mark November 2 on your calendar now.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">What if I missed the PAS-1 deadline? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">Call 1-888-238-1233 right away and do not assume the benefit is gone. The Division of Taxation sometimes accepts late applications with a written explanation. For future years, put November 2 on your calendar now.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">Can I pay someone to fill the PAS-1 out? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">You can pay a paid preparer to fill the PAS-1 out, but it is their responsibility to sign the form as well if you paid them to do so.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">Can I pay someone to fill the PAS-1 out? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">Yes. If you pay a preparer to complete the PAS-1, they are required to sign the form as the paid preparer.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-question" onclick="toggleFAQ(this)">Does the form only need to be filled out once? <i class="fas fa-chevron-down faq-arrow"></i></div>
-          <div class="faq-answer">Applications must be filled out annually. Advice: Consult your tax professional who should be able to complete the PAS-1 form for you after filing your income taxes.</div>
+          <div class="faq-question" onclick="toggleFAQ(this)" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleFAQ(this);}">Do I only fill the form out once? <i class="ic ic-down faq-arrow" aria-hidden="true"></i></div>
+          <div class="faq-answer">No, the PAS-1 is filed every year. A practical tip: your tax professional can complete it for you right after doing your income taxes, while all the numbers are in front of them.</div>
         </div>
       </div>
- 
-      <!-- RIGHT COLUMN: TikTok video card -->
+
       <aside class="faq-video-side">
         <div class="video-card-tiktok">
           <a href="https://www.tiktok.com/@thetaxwatchdog/video/7591627007230741791"
@@ -316,11 +452,11 @@
                  loading="lazy">
             <div class="video-play-overlay">
               <div class="video-play-btn">
-                <i class="fas fa-play"></i>
+                <span class="play-tri" aria-hidden="true"></span>
               </div>
             </div>
             <div class="video-tiktok-badge">
-              <i class="fas fa-play" style="font-size:9px;"></i> Watch on TikTok
+              <span class="play-tri small" aria-hidden="true"></span> Watch on TikTok
             </div>
           </a>
           <div class="video-card-caption">
@@ -329,71 +465,79 @@
           </div>
         </div>
       </aside>
- 
+
     </div><!-- /.faq-with-video -->
   </div><!-- /.section-inner -->
 </section>
 
-<!-- RELATED + CONTACT -->
+<!-- NEXT STEPS -->
 <section class="section section-alt" id="related">
   <div class="section-inner">
-    <div class="section-label">Next Steps</div>
-    <h2 class="section-title">Ready to Apply?</h2>
-    <p class="section-subtitle">Everything flows through the PAS-1 combined application. Here's your path forward.</p>
-    <div class="programs-list">
-      <a href="pas-1-guide.html" class="program-row">
-        <div class="prog-icon-box"><i class="fas fa-file-lines"></i></div>
-        <div class="program-row-main"><div class="program-row-name">PAS-1 Step-by-Step Guide</div><div class="program-row-desc">Line-by-line walkthrough of the 2025 PAS-1 application. Understand exactly what to enter and where.</div></div>
-        <div class="program-row-amount"><div class="program-row-num">Free Guide</div></div>
-        <div class="program-row-arrow"><i class="fas fa-chevron-right"></i></div>
+    <div class="nj-kicker">Next steps</div>
+    <h2 class="nj-h2">Ready to apply?</h2>
+    <p class="nj-sub">Everything flows through the PAS-1. Pick your path.</p>
+
+    <div class="nj-ledger">
+      <a class="nj-ledger-row" href="pas-1-guide.html">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">PAS-1 step-by-step guide</div>
+          <div class="nj-ledger-desc">A line-by-line walkthrough of the application. What to enter, and where.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">free</div>
       </a>
-      <a href="https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief" target="_blank" class="program-row">
-        <div class="prog-icon-box"><i class="fas fa-calendar-check"></i></div>
-        <div class="program-row-main"><div class="program-row-name">Book PAS-1 Filing Help</div><div class="program-row-desc">John Scafide walks you through your PAS-1 line by line. $20 flat fee. Venmo, Zelle, credit, debit, or cash.</div></div>
-        <div class="program-row-amount"><div class="program-row-num">$20</div><div class="program-row-who">Flat fee</div></div>
-        <div class="program-row-arrow"><i class="fas fa-chevron-right"></i></div>
+      <a class="nj-ledger-row" href="https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief" target="_blank" rel="noopener">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">Book PAS-1 filing help</div>
+          <div class="nj-ledger-desc">John walks you through your PAS-1 line by line. Venmo, Zelle, credit, debit, or cash.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">$20<small>flat fee</small></div>
       </a>
-      <a href="anchor-program.html" class="program-row">
-        <div class="prog-icon-box"><i class="fas fa-house"></i></div>
-        <div class="program-row-main"><div class="program-row-name">ANCHOR Program Details</div><div class="program-row-desc">Also covered by the PAS-1 — homeowners up to $1,500, renters up to $700.</div></div>
-        <div class="program-row-amount"><div class="program-row-num">Up to $1,500</div></div>
-        <div class="program-row-arrow"><i class="fas fa-chevron-right"></i></div>
+      <a class="nj-ledger-row" href="anchor-program.html">
+        <div class="nj-ledger-main">
+          <div class="nj-ledger-name">ANCHOR program details</div>
+          <div class="nj-ledger-desc">Also covered by the PAS-1. Homeowners up to <span class="nj-amt" data-nj="anchor.homeowner.max">$1,500</span>, renters up to <span class="nj-amt" data-nj="anchor.renter.senior">$700</span>.</div>
+        </div>
+        <div class="nj-ledger-dots" aria-hidden="true"></div>
+        <div class="nj-ledger-amt">up to <span data-nj="anchor.homeowner.max">$1,500</span></div>
       </a>
     </div>
   </div>
 </section>
 
+<!-- CONTACT -->
 <div class="lead-section" id="contact">
   <div class="lead-inner">
     <div class="lead-top">
       <div class="lead-content">
-        <h2>Questions About Stay NJ or Senior Freeze?</h2>
-        <p>Get a free answer from a South Jersey tax professional. John Scafide has 15+ years of tax experience and specializes in helping NJ seniors navigate these programs.</p>
+        <h2>Questions about Stay NJ or the Senior Freeze?</h2>
+        <p>Ask a South Jersey tax professional and get a straight answer, free. John Scafide has 15+ years of tax experience helping NJ seniors work these programs.</p>
         <ul class="lead-points">
-          <li><i class="fas fa-check"></i>Free eligibility questions answered</li>
-          <li><i class="fas fa-check"></i>PAS-1 filing help — $20 flat fee</li>
-          <li><i class="fas fa-check"></i>Accepts Venmo, Zelle, credit, debit, cash</li>
-          <li><i class="fas fa-check"></i>South Jersey home buying and selling</li>
+          <li><i class="ic ic-check" aria-hidden="true"></i>Eligibility questions answered free</li>
+          <li><i class="ic ic-check" aria-hidden="true"></i>PAS-1 filing help, $20 flat fee</li>
+          <li><i class="ic ic-check" aria-hidden="true"></i>Venmo, Zelle, credit, debit, or cash</li>
+          <li><i class="ic ic-check" aria-hidden="true"></i>South Jersey home buying and selling</li>
         </ul>
-        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:12px;padding:22px 20px;margin-top:20px;">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;font-weight:700;">John Scafide</div>
-          <div style="font-size:13px;color:#c0cfdf;margin:4px 0 6px;">Licensed NJ Agent · 15+ Yrs Tax Experience</div>
-          <div style="font-size:12px;color:#8aaac8;">NJ #2079591 · The McKenty Team · Opus Elite</div>
-          <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:13px;color:var(--gold);text-decoration:none;"><i class="fab fa-tiktok"></i>@thetaxwatchdog</a>
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:10px;padding:20px;margin-top:20px;">
+          <div style="font-family:var(--font-display);font-size:18px;color:#fff;font-weight:700;">John Scafide</div>
+          <div style="font-size:13.5px;color:#c0cfdf;margin:4px 0 6px;">Licensed NJ Agent &middot; 15+ years tax experience</div>
+          <div style="font-size:12.5px;color:#8aaac8;">NJ #2079591 &middot; The McKenty Team &middot; Opus Elite</div>
+          <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;font-size:13.5px;color:var(--gold);text-decoration:none;">TikTok: @thetaxwatchdog</a>
         </div>
-        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:12px;padding:22px 20px;margin-top:12px;">
-          <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;font-weight:700;">Heather Scafide</div>
-          <div style="font-size:13px;color:#c0cfdf;margin:4px 0 6px;">Licensed NJ Agent · South Jersey Specialist</div>
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:10px;padding:20px;margin-top:12px;">
+          <div style="font-family:var(--font-display);font-size:18px;color:#fff;font-weight:700;">Heather Scafide</div>
+          <div style="font-size:13.5px;color:#c0cfdf;margin:4px 0 6px;">Licensed NJ Agent &middot; South Jersey specialist</div>
           <a href="tel:8563106746" style="font-size:18px;font-weight:700;color:var(--gold);text-decoration:none;display:block;margin-top:6px;">856-310-6746</a>
-          <div style="font-size:12px;color:#8aaac8;margin-top:4px;">NJ #2192318 · The McKenty Team · Opus Elite</div>
+          <div style="font-size:12.5px;color:#8aaac8;margin-top:4px;">NJ #2192318 &middot; The McKenty Team &middot; Opus Elite</div>
         </div>
       </div>
       <div>
         <div class="lead-form" id="contact-form">
-          <h3>Get a Free Answer</h3>
-          <input type="text" id="cf-name" placeholder="Your full name">
-          <input type="email" id="cf-email" placeholder="Email address">
-          <input type="tel" id="cf-phone" placeholder="Phone number (optional)">
+          <h3>Ask your question</h3>
+          <input type="text" id="cf-name" placeholder="Your full name" autocomplete="name">
+          <input type="email" id="cf-email" placeholder="Email address" autocomplete="email">
+          <input type="tel" id="cf-phone" placeholder="Phone number (optional)" autocomplete="tel">
           <select id="cf-topic">
             <option value="" disabled selected>What do you need help with?</option>
             <option>Stay NJ eligibility question</option>
@@ -404,14 +548,14 @@
             <option>General property tax question</option>
           </select>
           <input type="text" id="cf-town" placeholder="Your town">
-          <button class="submit-btn" onclick="submitLead()">Send My Question →</button>
-          <p class="privacy">Never sold. Response within 1 business day.</p>
+          <button class="submit-btn" onclick="submitLead()">Send my question</button>
+          <div class="nj-form-error" id="contact-error" role="alert"></div>
+          <p class="privacy">Never sold. You'll hear back within one business day.</p>
         </div>
         <div class="form-success" id="form-success">
-          <i class="fas fa-circle-check check-icon"></i>
-          <h4>Got it — talk soon!</h4>
+          <h4>Got it, talk soon</h4>
           <p>John or Heather will follow up within one business day.</p>
-          <a href="https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief" target="_blank" class="btn-schedule" style="margin-top:16px;display:inline-block;">Book PAS-1 Help Now</a>
+          <a href="https://book.titan.email/johnscafide/nj-pas-1-property-tax-relief" target="_blank" rel="noopener" class="btn-schedule" style="margin-top:16px;display:inline-block;">Book PAS-1 help now</a>
         </div>
       </div>
     </div>
@@ -420,8 +564,6 @@
 
 <!-- FOOTER -->
 <footer id="main-footer"></footer>
-
-
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script src="js/relief-programs.js"></script>

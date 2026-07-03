@@ -586,6 +586,18 @@
   }
 
   // ── Main contact / consultation form ──
+  // Shows errors inline in #contact-error when the page has one;
+  // falls back to alert() on older pages that don't.
+  function contactError(msg) {
+    const box = $('contact-error');
+    if (box) {
+      box.textContent = msg;
+      box.classList.add('visible');
+    } else {
+      alert(msg);
+    }
+  }
+
   function submitLead() {
     const nameEl  = $('cf-name');
     const emailEl = $('cf-email');
@@ -594,15 +606,23 @@
     const townEl  = $('cf-town');
     if (!nameEl || !emailEl) return;
 
+    const errBox = $('contact-error');
+    if (errBox) errBox.classList.remove('visible');
+
     const name  = nameEl.value.trim();
     const email = emailEl.value.trim();
 
-    if (!name)  { nameEl.focus();  alert('Please enter your name.');  return; }
-    if (!email) { emailEl.focus(); alert('Please enter your email.'); return; }
+    if (!name)  { nameEl.focus();  contactError('Enter your name so we know who to reply to.'); return; }
+    if (!email) { emailEl.focus(); contactError('Enter your email so the answer has somewhere to go.'); return; }
 
     const btn = document.querySelector('#contact-form .submit-btn') ||
+                document.querySelector('#contact-form .nj-btn') ||
                 document.querySelector('.btn-contact-submit');
-    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+    if (btn) {
+      btn.dataset.originalLabel = btn.textContent;
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+    }
 
     sendLead({
       name:  name,
@@ -621,8 +641,11 @@
         if (dynSuccess) dynSuccess.style.display = 'block';
       })
       .catch(function (err) {
-        if (btn) { btn.textContent = 'Request Free Consultation →'; btn.disabled = false; }
-        alert('Submission failed. Please try again or call us directly.');
+        if (btn) {
+          btn.textContent = btn.dataset.originalLabel || 'Send my question';
+          btn.disabled = false;
+        }
+        contactError('That did not send. Try again, or call John directly at 856-404-1098.');
         console.error('Contact form error:', err);
       });
   }
@@ -976,14 +999,23 @@
 
     if (!est.valid) { res.style.display = 'none'; return; }
 
+    // Optional detail rows; only the redesigned page has these elements.
+    const detailEl = $('staynj-detail');
+    const qEl      = $('staynj-quarterly');
+    const remEl    = $('staynj-remaining');
+
     if (!est.eligible) {
       if (amtEl) amtEl.textContent = 'Not eligible';
       if (lblEl) lblEl.textContent = 'Household income is over the Stay NJ limit of ' +
         ReliefPrograms.fact('stayNJ.incomeLimit') + '. You may still qualify for ANCHOR.';
+      if (detailEl) detailEl.style.display = 'none';
     } else {
       if (amtEl) amtEl.textContent = ReliefPrograms.formatUSD(est.credit);
       if (lblEl) lblEl.textContent = 'Estimated Stay NJ annual credit: 50% of your tax bill, capped at ' +
         ReliefPrograms.formatUSD(est.cap) + ' for your income';
+      if (qEl)   qEl.textContent   = ReliefPrograms.formatUSD(est.quarterly);
+      if (remEl) remEl.textContent = ReliefPrograms.formatUSD(est.remaining);
+      if (detailEl) detailEl.style.display = '';
     }
     res.style.display = 'block';
   }

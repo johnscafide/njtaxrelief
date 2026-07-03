@@ -1,4 +1,7 @@
-@import url(https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap);
+/* Site fonts. Every rule below uses var(--font-body) or
+   var(--font-display), so changing the site's typefaces is a
+   two-line edit in :root. */
+@import url("https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap");
 .nav-links a,
 .nav-logo,
 .topbar a {
@@ -262,7 +265,7 @@
 .quiz-ribbon p {
     font-size: 14px;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-body);
 }
 
 .quiz-btn {
@@ -468,7 +471,7 @@
 
 /* Content Styling */
 .gateway-title {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-display);
     font-size: 19px;
     font-weight: 700;
     margin-bottom: 8px;
@@ -552,6 +555,8 @@
 
 
 :root {
+    --font-body: "Public Sans", "Source Sans 3", -apple-system, "Segoe UI", Arial, sans-serif;
+    --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
     --navy: #1a3a6b;
     --navy-dark: #0e2248;
     --navy-light: #2a4f8f;
@@ -574,7 +579,7 @@
     padding: 0;
 }
 body {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
     background: var(--bg);
     color: var(--text);
     font-size: 16px;
@@ -584,7 +589,7 @@ h1,
 h2,
 h3,
 h4 {
-    font-family: "Open Sans", sans-serif;
+    font-family: var(--font-display);
     font-weight: 700;
 }
 .calc-container {
@@ -633,7 +638,7 @@ h4 {
 .mega-col h4,
 .sidebar-highlights-title {
     color: var(--navy);
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-display);
 }
 .sidebar-btn {
     display: block;
@@ -647,7 +652,7 @@ h4 {
 }
 .hero-stat-num,
 .nav-logo {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
 }
 .sidebar-list {
     font-size: 13px;
@@ -853,10 +858,7 @@ nav {
     }
 }
 .hero {
-    background:
-        linear-gradient(rgba(10, 24, 55, 0.76), rgba(10, 24, 55, 0.93)),
-        url("https://www.icona.com/wp-content/uploads/2025/02/Romantic-Resorts-in-NJ-1536x864.png") center/cover
-            no-repeat;
+    background: var(--navy-dark);
     color: #fff;
     padding: 72px 24px;
 }
@@ -932,12 +934,12 @@ nav {
     border-radius: 6px;
     font-weight: 600;
     transition: background 0.2s;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .btn-back,
 .btn-outline {
     background: 0 0;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .btn-primary:hover,
 .btn-schedule:hover,
@@ -979,7 +981,7 @@ nav {
     border-radius: 6px;
     padding: 11px 26px;
     font-weight: 600;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
     transition: background 0.2s;
 }
 .btn-next:hover,
@@ -1001,7 +1003,7 @@ nav {
     font-weight: 700;
     text-decoration: none;
     display: inline-block;
-    font-family: "Open Sans", serif;
+    font-family: var(--font-body);
 }
 .alert-inner a,
 .btn-learn,
@@ -1042,11 +1044,11 @@ nav {
     font-size: 11.5px;
     letter-spacing: 1.2px;
     margin-bottom: 8px;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .program-row-name,
 .program-row-num {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
     font-weight: 700;
 }
 .section-title {
@@ -1128,7 +1130,7 @@ nav {
 .info-card h4,
 .tab {
     font-weight: 600;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .program-row-who {
     font-size: 12px;
@@ -1281,9 +1283,7 @@ nav {
     overflow: hidden;
 }
 .calc-header {
-    background:
-        linear-gradient(rgba(0, 0, 128, 0.6), rgba(0, 0, 128, 0.6)) left/cover,
-        url("https://www.icona.com/wp-content/uploads/2025/02/Beach-1536x864.png") left/cover;
+    background: var(--navy-dark);
     color: #fff;
     padding: 22px 28px;
 }
@@ -1299,7 +1299,7 @@ nav {
     padding: 28px;
 }
 .step-question {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
     font-size: 20px;
     color: var(--navy-dark);
     margin-bottom: 6px;
@@ -1307,7 +1307,7 @@ nav {
 .choice-btn,
 .form-group input,
 .form-group select {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
     background: var(--bg);
 }
 .step-hint {
@@ -1332,7 +1332,7 @@ nav {
 .pas-acc-num,
 .pas-acc-title,
 .result-amount {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
 }
 .choice-btn:hover {
     border-color: var(--navy);
@@ -1547,7 +1547,7 @@ nav {
 .mort-field label,
 .mort-field select,
 .pas-acc-subtitle {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .pas-acc-subtitle {
     font-size: 13px;
@@ -1683,7 +1683,7 @@ nav {
 .lead-form select,
 .staynj-input-group input {
     background: rgba(255, 255, 255, 0.1);
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
     width: 100%;
 }
 .mort-field input:focus,
@@ -1700,7 +1700,7 @@ nav {
     font-size: 15px;
     font-weight: 600;
     margin-top: 16px;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
 }
 .mort-output-top,
 .staynj-highlight,
@@ -1716,13 +1716,15 @@ footer {
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.6px;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
+}
+.lead-form .submit-btn {
+    font-family: var(--font-body);
 }
 .agent-photo-name,
-.lead-form .submit-btn,
 .mort-output-num,
 .staynj-result-num {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
 }
 .mort-output-num {
     font-size: 52px;
@@ -2140,7 +2142,7 @@ footer {
 }
 .faq-question,
 .footer-col h4 {
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--font-body);
     font-weight: 600;
 }
 .agent-photo-meta {
@@ -2193,7 +2195,7 @@ footer {
     margin-bottom: 28px;
 }
 .footer-brand {
-    font-family: "Open Sans", serif;
+    font-family: var(--font-display);
     font-size: 17px;
     color: #fff;
     font-weight: 700;
@@ -2209,7 +2211,7 @@ footer {
 .calc-val,
 .kb-card-title,
 .popup-header h4 {
-    font-family: "Playfair Display", serif;
+    font-family: var(--font-display);
 }
 .footer-links li {
     margin-bottom: 7px;
@@ -2591,4 +2593,377 @@ footer {
     .pas-acc-body {
         padding-left: 24px;
     }
+}
+
+/* ============================================================
+   2026 REDESIGN COMPONENT LAYER
+   Shared by index.html, senior-programs.html, anchor-estimator.html.
+   Everything here is prefixed nj- (except the icon and a11y
+   plumbing) and is safe on every page because it only adds rules.
+   ============================================================ */
+
+/* ── Icons: Flaticon UIcons (regular rounded), self-hosted subset.
+      Four glyphs only; each use must be justified (see design guide). */
+@font-face {
+    font-family: "uicons";
+    src: url("fonts/uicons-subset.woff2") format("woff2");
+    font-display: block;
+}
+.ic {
+    font-family: "uicons";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: -0.08em;
+}
+.ic-check::before { content: "\f3c8"; } /* eligibility: met */
+.ic-cross::before { content: "\f4f6"; } /* eligibility: not met */
+.ic-down::before  { content: "\f153"; } /* expands or opens below */
+.ic-ext::before   { content: "\f1b3"; } /* link leaves this site */
+
+/* ── Keyboard focus: always visible ── */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--navy);
+    outline-offset: 2px;
+}
+nav :focus-visible,
+.topbar :focus-visible,
+.hero :focus-visible,
+.nj-dark :focus-visible {
+    outline-color: var(--gold);
+}
+
+/* ── Reduced motion: honor the OS setting everywhere ── */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ── Nav: CSS hamburger (no icon font needed) ── */
+.mobile-menu-icon {
+    background: none;
+    border: 0;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+.mobile-menu-icon span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+}
+@media (max-width: 992px) {
+    .mobile-menu-icon { display: flex; }
+}
+
+/* ── Dollar figures align like a bill ── */
+.nj-amt { font-variant-numeric: tabular-nums; }
+
+/* ── Notice block: dated program-change notice.
+      Red border is a status signal (rules changed), not decoration. ── */
+.nj-notice {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--red);
+    border-radius: 8px;
+    padding: 26px 28px;
+    max-width: 860px;
+}
+.nj-notice-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+.nj-notice-tag {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--red);
+}
+.nj-notice-date {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+.nj-notice h2,
+.nj-notice h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    line-height: 1.25;
+    color: var(--navy-dark);
+    margin-bottom: 10px;
+}
+.nj-notice p {
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+}
+.nj-notice p + p { margin-top: 10px; }
+.nj-notice-foot {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+    font-size: 14.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* ── The ledger: every benefit amount on the site is set this way.
+      Label left, dot leader, tabular figure right, like a tax bill. ── */
+.nj-ledger {
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    max-width: 860px;
+}
+.nj-ledger-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 24px;
+    text-decoration: none;
+    color: inherit;
+}
+.nj-ledger-row + .nj-ledger-row { border-top: 1px solid var(--border); }
+a.nj-ledger-row:hover { background: var(--info-bg); }
+a.nj-ledger-row:hover .nj-ledger-name { color: var(--navy); }
+.nj-ledger-main { min-width: 0; }
+.nj-ledger-name {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy-dark);
+    line-height: 1.3;
+}
+.nj-ledger-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-top: 2px;
+}
+.nj-ledger-dots {
+    flex: 1;
+    min-width: 40px;
+    border-bottom: 2px dotted var(--border);
+    align-self: center;
+    transform: translateY(2px);
+}
+.nj-ledger-amt {
+    font-family: var(--font-display);
+    font-variant-numeric: tabular-nums;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--navy-dark);
+    white-space: nowrap;
+    text-align: right;
+}
+.nj-ledger-amt small {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-top: 1px;
+}
+.nj-ledger-amt.is-out { color: var(--red); }
+.nj-ledger-foot {
+    max-width: 860px;
+    margin-top: 14px;
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+.nj-ledger-foot a,
+.nj-notice a {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+}
+.nj-ledger-foot a:hover,
+.nj-notice a:hover { text-decoration: underline; }
+@media (max-width: 640px) {
+    .nj-ledger-row { flex-wrap: wrap; row-gap: 6px; padding: 16px 18px; }
+    .nj-ledger-dots { display: none; }
+    .nj-ledger-main { flex: 1 1 100%; }
+    .nj-ledger-amt { text-align: left; }
+    .nj-ledger-amt small { display: inline; margin-left: 6px; }
+}
+
+/* ── Tier table: income tiers inside notices and results ── */
+.nj-tiers { max-width: 480px; }
+.nj-tier-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 15.5px;
+}
+.nj-tier-row + .nj-tier-row { border-top: 1px solid var(--border); }
+.nj-tier-row b {
+    font-variant-numeric: tabular-nums;
+    color: var(--navy-dark);
+    white-space: nowrap;
+}
+.nj-tier-row.is-out b { color: var(--red); }
+
+/* ── Eligibility lists: check/cross rows ── */
+.nj-checks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.nj-checks li {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text);
+}
+.nj-checks .ic-check { color: var(--green); flex-shrink: 0; font-size: 15px; }
+.nj-checks .ic-cross { color: var(--red); flex-shrink: 0; font-size: 15px; }
+.nj-checks li strong { color: var(--navy-dark); }
+.nj-checks li span { display: block; font-size: 14.5px; color: var(--text-muted); }
+
+/* ── External link marker ── */
+.nj-ext {
+    color: var(--navy);
+    font-weight: 600;
+    text-decoration: none;
+}
+.nj-ext:hover { text-decoration: underline; }
+.nj-ext .ic-ext { font-size: 12px; margin-left: 4px; }
+
+/* ── Buttons (quiet system: one gold action per screen) ── */
+.nj-btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 600;
+    padding: 13px 26px;
+    border-radius: 6px;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+}
+.nj-btn-gold { background: var(--gold); color: var(--navy-dark); }
+.nj-btn-gold:hover { background: #a5871f; color: #fff; }
+.nj-btn-navy { background: var(--navy); color: #fff; }
+.nj-btn-navy:hover { background: var(--navy-dark); }
+.nj-btn-quiet {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+}
+.nj-btn-quiet:hover { border-color: var(--navy); color: var(--navy); }
+.nj-btn:disabled { background: var(--border); color: #8a8f9c; cursor: not-allowed; }
+
+/* ── Forms ── */
+.nj-field { display: flex; flex-direction: column; gap: 6px; }
+.nj-field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy-dark);
+}
+.nj-input,
+.nj-select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--text);
+    background: var(--bg-white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+}
+.nj-input:focus,
+.nj-select:focus {
+    outline: 3px solid var(--navy);
+    outline-offset: 0;
+    border-color: var(--navy);
+}
+.nj-input-usd { position: relative; }
+.nj-input-usd .nj-prefix {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 16px;
+    pointer-events: none;
+}
+.nj-input-usd .nj-input { padding-left: 28px; }
+.nj-form-error {
+    display: none;
+    font-size: 14.5px;
+    color: var(--red);
+    background: #fdf1ef;
+    border: 1px solid #edcdc7;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 12px;
+}
+.nj-form-error.visible { display: block; }
+.nj-form-ok {
+    display: none;
+    font-size: 15px;
+    color: var(--green);
+    background: var(--green-light);
+    border: 1px solid #b8d8c4;
+    border-radius: 6px;
+    padding: 14px 16px;
+}
+.nj-form-ok.visible { display: block; }
+
+/* ── Section header (quiet) ── */
+.nj-kicker {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+}
+.nj-h2 {
+    font-family: var(--font-display);
+    font-size: 30px;
+    line-height: 1.2;
+    color: var(--navy-dark);
+    margin-bottom: 10px;
+}
+.nj-sub {
+    font-size: 17px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    max-width: 640px;
+    margin-bottom: 28px;
+}
+@media (max-width: 640px) {
+    .nj-h2 { font-size: 25px; }
 }
