@@ -14,7 +14,7 @@
  *   6.  Mobile Menu & Mega Menu
  *   7.  News Strip Rotation
  *   8.  Popups & Lead Magnets
- *   9.  Forms (Contact, Audit, Comps — all three)
+ *   9.  Forms (Contact, Audit, Comps, all three)
  *   10. Accordions (PAS-1, FAQ)
  *   11. Tab Switcher
  *   12. ANCHOR Eligibility Calculator
@@ -462,7 +462,7 @@
   }
 
   // ============================================================
-  // 9. FORMS — Contact, Listing Audit, Free Comps
+  // 9. FORMS: Contact, Listing Audit, Free Comps
   // All submissions route through sendLead() with the appropriate
   // template ID so each form gets its own styled email.
   // ============================================================
@@ -527,7 +527,7 @@
       email:    email,
       address:  addr,
       timeline: timeline,
-      topic:    'Tax-Optimized Listing Audit — ' + timeline,
+      topic:    'Tax-Optimized Listing Audit: ' + timeline,
       town:     addr
     }, CONFIG.emailjs.templateAudit)
       .then(function () {
@@ -570,7 +570,7 @@
       address: addr,
       county:  county,
       taxbill: taxbill,
-      topic:   'Free MLS Comps Request — ' + county,
+      topic:   'Free MLS Comps Request: ' + county,
       town:    addr
     }, CONFIG.emailjs.templateComps)
       .then(function () {
@@ -673,7 +673,7 @@
   }
 
   // ============================================================
-  // 10. ACCORDIONS — PAS-1 & FAQ
+  // 10. ACCORDIONS: PAS-1 & FAQ
   // ============================================================
   function togglePAS(trigger) {
     const item = trigger.parentElement;
@@ -727,7 +727,7 @@
       subEl.textContent  = 'Check this and a local South Jersey agent will reach out with a free, no-obligation home value estimate.';
       if (addrLbl) addrLbl.textContent = 'Your home address';
     } else {
-      textEl.textContent = 'I\u2019m interested in buying a home \u2014 I\u2019m tired of renting.';
+      textEl.textContent = 'I\u2019m interested in buying a home. I\u2019m tired of renting.';
       subEl.textContent  = 'Check this and a local South Jersey agent will reach out to walk you through the buying process at no cost.';
       if (addrLbl) addrLbl.textContent = 'Your current address (so we can show you nearby homes)';
     }
@@ -796,7 +796,7 @@
       const est = (typeof ReliefPrograms !== 'undefined') ? ReliefPrograms.anchorBenefit(answers) : null;
       const benefit = (est && est.status === 'qualified') ? ReliefPrograms.formatUSD(est.amount) : 'see result';
       let topic = 'ANCHOR Calculator, estimated benefit: ' + benefit;
-      if (reInterested) topic += ' \u2014 ALSO interested in real estate help';
+      if (reInterested) topic += ', ALSO interested in real estate help';
 
       sendLead({
         name:    name,
@@ -856,8 +856,8 @@
           ? 'We\u2019ll reach out with your free home value estimate'
           : 'We\u2019ll reach out to talk through the buying process';
         const reBody = answers.tenure === 'own'
-          ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today \u2014 no obligation, no pressure.'
-          : 'John or Heather Scafide will follow up to walk you through buying in South Jersey \u2014 from what you can afford to which neighborhoods fit your budget. No cost, no pressure.';
+          ? 'John or Heather Scafide will follow up with real comparable sales from your neighborhood so you know exactly what your home is worth today. No obligation.'
+          : 'John or Heather Scafide will follow up to walk you through buying in South Jersey, from what you can afford to which neighborhoods fit your budget. No cost.';
         const addrLine = addr
           ? '<div style="font-size:13px;color:var(--navy);font-weight:600;margin-top:8px;"><i class="fas fa-location-dot" style="margin-right:5px;"></i>' + addr + '</div>'
           : '';
@@ -892,7 +892,7 @@
         '<div style="font-size:14px;font-weight:700;color:#fff;">Don\u2019t leave money on the table</div>' +
         '</div>' +
         '<p style="font-size:13px;color:#c0cfdf;line-height:1.6;margin-bottom:14px;">' +
-        'You now know your ANCHOR estimate \u2014 but there are 3 more programs you may qualify for. ' +
+        'You now know your ANCHOR estimate. There are 3 more programs you may qualify for. ' +
         'Get the complete guide package and make sure you collect every dollar.</p>' +
         '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;">' +
         '<div style="font-size:12px;color:#c0cfdf;display:flex;align-items:center;gap:6px;">' +
@@ -908,7 +908,7 @@
         '<a href="' + CONFIG.stripeLink + '" target="_blank" ' +
         'style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:var(--navy-dark);' +
         'font-weight:700;font-size:14px;padding:11px 22px;border-radius:6px;text-decoration:none;">' +
-        '<i class="fas fa-download"></i>Get All 4 Guides \u2014 ' + CONFIG.guidePrice + '</a>' +
+        '<i class="fas fa-download"></i>Get all 4 guides for ' + CONFIG.guidePrice + '</a>' +
         '<span style="font-size:12px;color:#8aaac8;">Instant download \u00b7 PDF \u00b7 33 pages</span>' +
         '</div></div>' +
         '<div class="result-actions" style="margin-top:18px;">' +
@@ -1163,7 +1163,7 @@
     sendLead({
       name:    'Appeal Quiz Lead',
       email:   email,
-      topic:   'Tax Appeal Quiz \u2014 score: ' + score + '% (' + rating + ')',
+      topic:   'Tax Appeal Quiz, score: ' + score + '% (' + rating + ')',
       town:    addr,
       address: addr
     }, CONFIG.emailjs.templateId)
@@ -1307,8 +1307,8 @@
       'cf-town',         // legacy contact form
       'lead-address',    // ANCHOR calculator
       'a-lead-address',  // new combined ANCHOR calculator
-      'df-sell-addr',    // dynamic contact — sell
-      'df-appeal-addr'   // dynamic contact — appeal
+      'df-sell-addr',    // dynamic contact: sell
+      'df-appeal-addr'   // dynamic contact: appeal
     ];
 
     addressFieldIds.forEach(function (id) {
