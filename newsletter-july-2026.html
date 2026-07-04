@@ -6,7 +6,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NJ Budget 2027: What Changed for Your Property Taxes | NJ Property Tax Relief</title>
 <meta name="description" content="The FY2027 NJ budget is signed. Here's what changed for Stay NJ, ANCHOR, Senior Freeze, first-time buyer assistance, and what happens to your benefits when you move.">
-<style>
+ <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+
+  <!-- Microsoft Clarity -->
+  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
+
+  <style>
   :root {
     --navy: #1a3a6b;
     --navy-dark: #0e2248;
@@ -478,13 +485,6 @@
   .re-radios input { accent-color: var(--navy); }
 
 </style>
-<!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
-  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
-
-  <!-- Microsoft Clarity -->
-  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
-
 </head>
 <body>
 
@@ -769,9 +769,13 @@
         setTimeout(closePopup, 3500);
       },
       function (err) {
+        var detail = "";
+        if (err && err.status) detail = " (Error " + err.status + ": " + (err.text || "no details") + ")";
+        errorBox.textContent = "Something went wrong sending your info." + detail + " Please try again, or email me directly at john@johnscafide.com.";
         errorBox.style.display = "block";
         submitBtn.disabled = false;
         submitBtn.textContent = "Keep Me Updated";
+        console.error("EmailJS error:", err);
       }
     );
   });
@@ -784,7 +788,9 @@ document.getElementById("navToggle").addEventListener("click", function () {
   document.getElementById("navLinks").classList.toggle("open");
 });
 </script>
+
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
 
 </body>
 </html>
