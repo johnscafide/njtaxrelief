@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Free NJ Property Tax Guides | NJPropertyTaxRelief.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+  :root{
+    --navy: #0d1b3d;
+    --navy-deep: #08122b;
+    --gold: #c9a13a;
+    --gold-bright: #e0bb52;
+    --cream: #f7f2e7;
+    --paper: #fffdf8;
+    --ink: #14213b;
+    --ink-soft: #4a5470;
+    --line: rgba(13,27,61,0.12);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  /* ---------- TOP BAR ---------- */
+  .topbar{
+    background:var(--navy-deep);
+    color:var(--cream);
+    padding:14px 24px;
+    text-align:center;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.03em;
+  }
+  .topbar span{color:var(--gold-bright);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    background:var(--navy);
+  }
+  .hero-bg{
+    position:absolute;
+    inset:0;
+    background-image:
+      linear-gradient(180deg, rgba(8,18,43,0.55) 0%, rgba(8,18,43,0.80) 55%, rgba(8,18,43,0.97) 100%),
+      url('https://images.unsplash.com/photo-1760210852926-2e097690aa78?auto=format&fit=crop&w=2000&q=80');
+    background-size:cover;
+    background-position:center;
+    filter:saturate(1.05);
+  }
+  .hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+    padding:60px 24px 80px;
+    text-align:center;
+    color:var(--cream);
+  }
+  .stamp{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(224,187,82,0.12);
+    border:1px solid rgba(224,187,82,0.5);
+    color:var(--gold-bright);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    padding:8px 18px;
+    border-radius:999px;
+    margin-bottom:28px;
+  }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    line-height:0.98;
+    color:#fff;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--gold-bright);
+  }
+  .hero-sub{
+    max-width:620px;
+    margin:26px auto 0;
+    font-size:19px;
+    line-height:1.6;
+    color:rgba(247,242,231,0.88);
+  }
+  .hero-sub strong{color:#fff;}
+  .hero-cta{
+    margin-top:40px;
+  }
+  .btn-gold{
+    display:inline-block;
+    background:linear-gradient(135deg, var(--gold-bright), var(--gold));
+    color:var(--navy-deep);
+    font-weight:800;
+    font-size:18px;
+    padding:18px 44px;
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow:0 12px 30px rgba(201,161,58,0.35);
+    border:none;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-gold:hover{
+    transform:translateY(-2px);
+    box-shadow:0 16px 36px rgba(201,161,58,0.45);
+  }
+  .hero-note{
+    margin-top:16px;
+    font-size:13px;
+    color:rgba(247,242,231,0.6);
+    letter-spacing:0.02em;
+  }
+
+  /* ---------- WHAT'S INCLUDED STRIP ---------- */
+  .strip{
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:42px 24px;
+  }
+  .strip-inner{
+    max-width:1040px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    text-align:center;
+  }
+  .strip-item .num{
+    font-family:'Fraunces',serif;
+    font-weight:900;
+    font-size:2.1rem;
+    color:var(--navy);
+    display:block;
+  }
+  .strip-item .label{
+    font-size:13px;
+    color:var(--ink-soft);
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-top:4px;
+  }
+
+  /* ---------- FORM SECTION ---------- */
+  .form-section{
+    padding:100px 24px;
+    display:flex;
+    justify-content:center;
+  }
+  .form-card{
+    background:var(--navy);
+    color:var(--cream);
+    max-width:640px;
+    width:100%;
+    border-radius:18px;
+    padding:56px 44px;
+    box-shadow:0 30px 70px rgba(13,27,61,0.25);
+    position:relative;
+    overflow:hidden;
+  }
+  .form-card::before{
+    content:"";
+    position:absolute;
+    top:-120px; right:-120px;
+    width:320px; height:320px;
+    background:radial-gradient(circle, rgba(224,187,82,0.18), transparent 70%);
+  }
+  .form-card h2{
+    font-size:clamp(1.9rem, 4vw, 2.6rem);
+    color:#fff;
+    text-align:center;
+    margin-bottom:10px;
+  }
+  .form-card .form-sub{
+    text-align:center;
+    color:rgba(247,242,231,0.75);
+    font-size:16px;
+    margin-bottom:34px;
+  }
+  .field{
+    margin-bottom:18px;
+  }
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    color:var(--gold-bright);
+    margin-bottom:7px;
+  }
+  .field input{
+    width:100%;
+    padding:15px 16px;
+    border-radius:9px;
+    border:1px solid rgba(247,242,231,0.2);
+    background:rgba(255,255,255,0.06);
+    color:#fff;
+    font-size:16px;
+    font-family:'Inter',sans-serif;
+  }
+  .field input::placeholder{color:rgba(247,242,231,0.35);}
+  .field input:focus{
+    outline:none;
+    border-color:var(--gold-bright);
+    background:rgba(255,255,255,0.1);
+  }
+  .field.re-field{margin-bottom:8px;}
+  .re-checks{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  .re-check{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(247,242,231,0.2);
+    border-radius:9px;
+    padding:12px 8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    color:rgba(247,242,231,0.85);
+    transition:border-color 0.15s ease, background 0.15s ease;
+  }
+  .re-check:has(input:checked){
+    border-color:var(--gold-bright);
+    background:rgba(224,187,82,0.14);
+    color:#fff;
+  }
+  .re-check input{
+    width:16px;
+    height:16px;
+    accent-color:var(--gold-bright);
+    margin:0;
+  }
+  .submit-row{margin-top:28px;}
+  .btn-gold.wide{width:100%;text-align:center;font-size:19px;padding:19px 0;}
+  .privacy-note{
+    text-align:center;
+    font-size:12.5px;
+    color:rgba(247,242,231,0.5);
+    margin-top:16px;
+    line-height:1.5;
+  }
+
+  /* ---------- SUCCESS / DOWNLOAD STATE ---------- */
+  .success-state{display:none;}
+  .success-state.show{display:block;}
+  .form-state.hide{display:none;}
+  .thanks-badge{
+    text-align:center;
+    font-size:15px;
+    color:var(--gold-bright);
+    font-weight:700;
+    letter-spacing:0.03em;
+    margin-bottom:8px;
+  }
+  .guide-list{
+    margin-top:30px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .guide-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(247,242,231,0.15);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .guide-row .meta{font-size:12px;color:rgba(247,242,231,0.55);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px;}
+  .guide-row .name{font-family:'Fraunces',serif;font-weight:600;font-size:17px;color:#fff;}
+  .guide-row a{
+    flex-shrink:0;
+    background:var(--gold-bright);
+    color:var(--navy-deep);
+    font-weight:800;
+    font-size:14px;
+    padding:11px 20px;
+    border-radius:7px;
+    text-decoration:none;
+    white-space:nowrap;
+  }
+  .download-all{
+    margin-top:22px;
+  }
+
+  /* ---------- PORCH / TRUST SECTION ---------- */
+  .trust{
+    background:var(--paper);
+    padding:0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    align-items:stretch;
+  }
+  .trust-img{
+    background-image:url('https://images.unsplash.com/photo-1754597215918-b4b1f113ca77?auto=format&fit=crop&w=1400&q=80');
+    background-size:cover;
+    background-position:center;
+    min-height:420px;
+  }
+  .trust-copy{
+    padding:70px 56px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+  .trust-copy .eyebrow{
+    font-size:13px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .trust-copy h3{
+    font-size:clamp(1.6rem, 3vw, 2.1rem);
+    color:var(--navy);
+    margin-bottom:18px;
+  }
+  .trust-copy p{
+    font-size:16px;
+    line-height:1.7;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+  .trust-copy .sig{
+    margin-top:18px;
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:17px;
+    color:var(--navy);
+  }
+  .trust-copy .sig span{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-weight:500;
+    font-size:13px;
+    color:var(--ink-soft);
+    margin-top:2px;
+  }
+
+  @media (max-width:820px){
+    .strip-inner{grid-template-columns:repeat(2,1fr);}
+    .re-checks{grid-template-columns:repeat(2,1fr);}
+    .trust{grid-template-columns:1fr;}
+    .trust-img{min-height:260px;}
+    .trust-copy{padding:48px 28px;}
+    .form-card{padding:40px 24px;}
+    .guide-row{flex-direction:column;align-items:flex-start;}
+    .guide-row a{width:100%;text-align:center;}
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:rgba(247,242,231,0.7);
+    padding:50px 24px 30px;
+    font-size:14px;
+  }
+  .footer-inner{
+    max-width:1040px;
+    margin:0 auto;
+    text-align:center;
+  }
+  .footer-inner .brand{
+    font-family:'Fraunces',serif;
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .footer-inner .lic{
+    font-size:13px;
+    color:rgba(247,242,231,0.5);
+    margin-bottom:22px;
+  }
+  .footer-links{
+    display:flex;
+    gap:22px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:22px;
+  }
+  .footer-links a{
+    color:rgba(247,242,231,0.75);
+    text-decoration:none;
+    font-weight:600;
+    font-size:13.5px;
+  }
+  .footer-links a:hover{color:var(--gold-bright);}
+  .disclaimer{
+    font-size:12px;
+    color:rgba(247,242,231,0.4);
+    max-width:640px;
+    margin:0 auto;
+    line-height:1.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">🎥 <span>@thetaxwatchdog</span> sent you here on TikTok. Thanks for the follow — here's your gift.</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="stamp">★ Free gift for TikTok followers ★</div>
+    <h1>Your NJ Property<br>Tax Guides.<br><em>On the house.</em></h1>
+    <p class="hero-sub">
+      You followed the channel, so these are yours, no charge.
+      <strong>4 professional guides</strong> covering ANCHOR, Stay NJ, PAS-1, Senior Freeze, and tax appeals.
+      Just tell me where to send them.
+    </p>
+    <div class="hero-cta">
+      <a href="#getguides" class="btn-gold">Get My Free Guides ↓</a>
+    </div>
+    <div class="hero-note">Takes 30 seconds. No credit card. Ever.</div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><span class="num">4</span><span class="label">Guides Included</span></div>
+    <div class="strip-item"><span class="num">33</span><span class="label">Pages of Real Help</span></div>
+    <div class="strip-item"><span class="num">$0</span><span class="label">Cost, Because You Followed</span></div>
+    <div class="strip-item"><span class="num">NJ</span><span class="label">Specific, Not Generic</span></div>
+  </div>
+</div>
+
+<section class="form-section" id="getguides">
+  <div class="form-card">
+
+    <div class="form-state" id="formState">
+      <h2>Where should I send them?</h2>
+      <p class="form-sub">Fill this out and all 4 guides unlock right below. That's it.</p>
+
+      <form id="leadForm">
+        <div class="field">
+          <label for="fname">Full Name</label>
+          <input type="text" id="fname" name="fname" placeholder="Jane Smith" required>
+        </div>
+        <div class="field">
+          <label for="faddress">Home Address</label>
+          <input type="text" id="faddress" name="faddress" placeholder="123 Main St, Sicklerville, NJ" required>
+        </div>
+        <div class="field">
+          <label for="fphone">Phone Number</label>
+          <input type="tel" id="fphone" name="fphone" placeholder="(555) 555-5555" required>
+        </div>
+        <div class="field re-field">
+          <label>Also Want Real Estate Help? (Optional)</label>
+          <div class="re-checks">
+            <label class="re-check"><input type="checkbox" name="re_help" value="Sell"><span>Sell</span></label>
+            <label class="re-check"><input type="checkbox" name="re_help" value="Buy"><span>Buy</span></label>
+            <label class="re-check"><input type="checkbox" name="re_help" value="Rent"><span>Rent</span></label>
+            <label class="re-check"><input type="checkbox" name="re_help" value="Invest"><span>Invest</span></label>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn-gold wide">Unlock My Free Guides</button>
+        </div>
+        <p class="privacy-note">Your info goes straight to John and Heather Scafide, McKenty Team. Never sold, never spammed. Just used to help you get the relief you're owed.</p>
+      </form>
+    </div>
+
+    <div class="success-state" id="successState">
+      <div class="thanks-badge">✓ You're in. Thanks for following @thetaxwatchdog</div>
+      <h2>Here are your 4 guides</h2>
+      <p class="form-sub">Click each one to download. Save them, you'll want to reference these.</p>
+
+      <div class="guide-list">
+        <div class="guide-row">
+          <div>
+            <div class="meta">Guide 1 of 4 — 14 pages</div>
+            <div class="name">NJ Property Tax Relief Master Guide</div>
+          </div>
+          <a href="https://njpropertytaxrelief.com/Guide1_NJ_Property_Tax_Relief_Master_Guide.pdf" download>Download</a>
+        </div>
+        <div class="guide-row">
+          <div>
+            <div class="meta">Guide 2 of 4 — 7 pages</div>
+            <div class="name">PAS-1 Application Walkthrough</div>
+          </div>
+          <a href="https://njpropertytaxrelief.com/Guide2_PAS1_Complete_Walkthrough.pdf" download>Download</a>
+        </div>
+        <div class="guide-row">
+          <div>
+            <div class="meta">Guide 3 of 4 — 6 pages</div>
+            <div class="name">Property Tax Appeal Prep Kit</div>
+          </div>
+          <a href="https://njpropertytaxrelief.com/Guide3_Property_Tax_Appeal_Prep_Kit.pdf" download>Download</a>
+        </div>
+        <div class="guide-row">
+          <div>
+            <div class="meta">Guide 4 of 4 — 6 pages</div>
+            <div class="name">NJ Senior Benefits Checklist</div>
+          </div>
+          <a href="https://njpropertytaxrelief.com/Guide4_NJ_Senior_Benefits_Checklist.pdf" download>Download</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="trust">
+  <div class="trust-img"></div>
+  <div class="trust-copy">
+    <div class="eyebrow">Why I'm giving these away</div>
+    <h3>Property tax relief shouldn't be locked behind a paywall.</h3>
+    <p>I put these guides together because most people never claim the money they're owed simply because nobody explained the forms in plain English. If TikTok sent you here, you're already ahead of most homeowners in this state.</p>
+    <p>Keep them, share them with family, and if you get stuck on your application, reach out. That part's free too.</p>
+    <div class="sig">John Scafide
+      <span>NJ Real Estate License #2079591 · Senior Tax Professional</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="brand">NJPropertyTaxRelief.com</div>
+    <div class="lic">John Scafide · NJ #2079591 · Heather Scafide · NJ #2192318 · The McKenty Team · Opus Elite Real Estate</div>
+    <div class="footer-links">
+      <a href="https://njpropertytaxrelief.com/anchor-program.html">ANCHOR Program</a>
+      <a href="https://njpropertytaxrelief.com/pas-1-guide.html">PAS-1 Guide</a>
+      <a href="https://njpropertytaxrelief.com/senior-programs.html">Stay NJ &amp; Senior Freeze</a>
+      <a href="https://njpropertytaxrelief.com/property-tax-appeal.html">Tax Appeal Guide</a>
+      <a href="https://www.tiktok.com/@thetaxwatchdog">@thetaxwatchdog on TikTok</a>
+    </div>
+    <p class="disclaimer">Not legal or tax advice. Always verify at official NJ Treasury sources before filing. Independent NJ property tax resource, not affiliated with the State of New Jersey.</p>
+  </div>
+</footer>
+
+<script>
+  // Same EmailJS setup as anchor-estimator.html
+  var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
+  var EJS_SERVICE = 'service_gptqbyx';
+  var EJS_TMPL    = 'template_contact';
+
+  document.getElementById('leadForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var name    = document.getElementById('fname').value.trim();
+    var address = document.getElementById('faddress').value.trim();
+    var phone   = document.getElementById('fphone').value.trim();
+    var reHelp  = Array.prototype.slice.call(document.querySelectorAll('input[name="re_help"]:checked')).map(function(el){ return el.value; });
+    var reText  = reHelp.length ? reHelp.join(', ') : 'None selected';
+
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: EJS_PUBLIC });
+      emailjs.send(EJS_SERVICE, EJS_TMPL, {
+        name: name,
+        email: 'Not provided',
+        phone: phone || 'Not provided',
+        topic: reHelp.length ? 'Free TikTok Guide Download Lead — wants help to ' + reText.toLowerCase() : 'Free TikTok Guide Download Lead',
+        town: address || 'Not provided',
+        address: address || 'Not provided',
+        message: ['Free Guide Download — TikTok Follower','Name: ' + name,'Address: ' + (address || 'Not provided'),'Phone: ' + (phone || 'Not provided'),'Real estate help wanted: ' + reText,'Source: @thetaxwatchdog TikTok'].join('\n')
+      }).catch(function(err){ console.warn('EmailJS:', err); });
+    }
+
+    document.getElementById('formState').classList.add('hide');
+    document.getElementById('successState').classList.add('show');
+    document.getElementById('successState').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+</script>
+
+</body>
+</html>
