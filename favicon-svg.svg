@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- Rounded background square -->
+  <rect width="100" height="100" rx="20" fill="#005a9c"/>
+  
+  <!-- House silhouette -->
+  <path d="M50 15 L15 45 L25 45 L25 85 L75 85 L75 45 L85 45 Z" fill="#ffffff"/>
+  
+  <!-- NJ Text cutout -->
+  <text x="50" y="65" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#005a9c" text-anchor="middle" dominant-baseline="central">NJ</text>
+</svg>
