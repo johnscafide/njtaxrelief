@@ -801,6 +801,63 @@
 .sn-rule { display:flex; align-items:center; gap:10px; font-size:13px; color:#1a1a2e; }
 .sn-rule-check { width:18px; height:18px; border-radius:50%; background:#1e6b3a; display:flex; align-items:center; justify-content:center; font-size:9px; color:#fff; flex-shrink:0; }
 
+/* SENIOR DOWNSIZING SECTION */
+.est-downsize {
+  margin-top: 24px;
+  background: linear-gradient(135deg, #f4f8f3, #edf3ec);
+  border: 1px solid #d8e5d4;
+  border-left: 4px solid #1e6b3a;
+  border-radius: 14px;
+  padding: 26px 26px 24px;
+}
+.est-downsize-badge {
+  width: 44px; height: 44px;
+  border-radius: 11px;
+  background: rgba(30,107,58,0.12);
+  color: #1e6b3a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 19px;
+  margin-bottom: 14px;
+}
+.est-downsize h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #0e2248;
+  margin: 0 0 12px;
+  line-height: 1.3;
+}
+.est-downsize p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #3a4152;
+  margin: 0 0 12px;
+}
+.est-downsize-sub { font-size: 13px !important; color: #5a6070 !important; }
+.est-downsize-cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  background: #1e6b3a;
+  color: #fff;
+  border: none;
+  border-radius: 9px;
+  padding: 13px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Source Sans 3', system-ui, sans-serif;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.15s;
+}
+.est-downsize-cta:hover { background: #17532c; }
+.est-downsize-sent {
+  display: none;
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #1e6b3a;
+}
+.est-downsize-sent.show { display: block; }
+
 /* Ineligible */
 .sn-ineligible { background:#fef2f2; border:1px solid #fca5a5; border-radius:12px; padding:16px 18px; text-align:center; margin-bottom:20px; }
 .sn-ineligible p { font-size:14px; color:#b91c1c; font-weight:600; margin:0; }
@@ -1266,6 +1323,16 @@
           Enter your annual tax bill and household income above to see your Stay NJ credit.
         </div>
 
+        <!-- SENIOR DOWNSIZING SECTION -->
+        <div class="est-downsize">
+          <div class="est-downsize-badge"><i class="fas fa-house-chimney-window"></i></div>
+          <h4>Planning to Retire or Age in Place in NJ? Read This Before You Apply.</h4>
+          <p>The Stay NJ credit is real money, but it caps out at $6,500 a year and follows your current tax bill. For a lot of seniors, the bigger savings come from the move itself: a lower-tax South Jersey town, a smaller single-story home, or both can cut your yearly costs well beyond what any state credit covers. And you keep your credit eligibility at the new place.</p>
+          <p class="est-downsize-sub">John and Heather help seniors run both numbers side by side, what you'd save by staying versus what you'd save by moving, before you make any decision. No pressure either way.</p>
+          <button class="est-downsize-cta" onclick="estDownsizeRequest()"><i class="fas fa-book-open"></i> Request the South Jersey Downsizing Playbook</button>
+          <div class="est-downsize-sent" id="est-downsize-sent"><i class="fas fa-circle-check" style="margin-right:6px;"></i>Request received! John will send over the playbook and follow up within one business day.</div>
+        </div>
+
         <div style="margin-top:20px;padding-top:16px;border-top:1px solid #e8eaf0;">
           <a href="senior-programs.html" style="color:#1a3a6b;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;">
             <i class="fas fa-arrow-right"></i> Full Stay NJ, Senior Freeze &amp; PAS-1 Guide
@@ -1335,8 +1402,8 @@
     </div>
     <div class="est-team-text">
       <div class="est-team-eyebrow">The McKenty Team &middot; Opus Elite Real Estate</div>
-      <div class="est-team-headline">Selling or buying in South Jersey? We're a call away.</div>
-      <div class="est-team-sub">John &amp; Heather Scafide, licensed NJ Realtors, ready to help with your next move.</div>
+      <div class="est-team-headline">Two Agents. One Straight Answer.</div>
+      <div class="est-team-sub">John &amp; Heather Scafide, licensed NJ Realtors and a 15-year tax pro on the same team. Whether the smart move is selling, staying, or downsizing, you'll get the honest math, not a sales pitch.</div>
     </div>
     <div class="est-team-cta">Get In Touch <i class="fas fa-arrow-right"></i></div>
   </div>
@@ -1622,7 +1689,7 @@
     if (answers.tenure === 'own' && !sellInt) {
       reBlock += '<div class="est-value-nudge" id="est-value-nudge">'
         + '<div class="est-value-nudge-icon"><i class="fas fa-house-chimney"></i></div>'
-        + '<div class="est-value-nudge-text"><strong>Curious what your home is worth?</strong><span>One tap, no commitment. Just real comps from your neighborhood.</span></div>'
+        + '<div class="est-value-nudge-text"><strong>Your tax assessment isn\'t your market value.</strong><span>Assessments lag the market, often by years. Your real equity could be worth far more than any rebate. One tap gets you real comps from your neighborhood, no commitment.</span></div>'
         + '<button class="est-value-nudge-btn" onclick="estCuriousClick()">See My Value</button>'
         + '</div>';
     }
@@ -1807,6 +1874,36 @@
     var sent = document.getElementById('sn-lead-sent');
     if (form) form.style.display = 'none';
     if (sent) sent.classList.add('visible');
+  };
+
+  window.estDownsizeRequest = function() {
+    var name    = ((document.getElementById('sn-name')    || {}).value || '').trim();
+    var email   = ((document.getElementById('sn-email')   || {}).value || '').trim();
+    var phone   = ((document.getElementById('sn-phone')   || {}).value || '').trim();
+    var address = ((document.getElementById('sn-address') || {}).value || '').trim();
+    var taxVal  = ((document.getElementById('sn-tax')     || {}).value || '').trim();
+    var inc     = ((document.getElementById('sn-income')  || {}).value || '').trim();
+    if (!name || !email) {
+      name  = (window.prompt('Your name, so John knows who to send the playbook to:') || '').trim();
+      if (!name) return;
+      email = (window.prompt('Best email for the playbook:') || '').trim();
+      if (!email) return;
+    }
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: EJS_PUBLIC });
+      emailjs.send(EJS_SERVICE, EJS_TMPL, {
+        name: name, email: email,
+        phone: phone || 'Not provided',
+        topic: '[🟡 WARM] Downsizing Playbook request (Stay NJ estimator)',
+        town: address || 'Not provided',
+        address: address || 'Not provided',
+        message: ['Downsizing Playbook Request', 'Senior considering downsizing / cost-of-living move', 'Name: ' + name, 'Email: ' + email, 'Phone: ' + (phone || 'Not provided'), 'Current address: ' + (address || 'Not provided'), 'Annual property tax: ' + (taxVal ? '$' + taxVal : 'Not provided'), 'Income bracket input: ' + (inc || 'Not provided'), 'Source: Stay NJ estimator downsizing section'].join('\n')
+      }).catch(function(e){ console.warn('EmailJS:', e); });
+    }
+    var btn = document.querySelector('.est-downsize-cta');
+    var sentMsg = document.getElementById('est-downsize-sent');
+    if (btn) btn.style.display = 'none';
+    if (sentMsg) sentMsg.classList.add('show');
   };
 
 })();
