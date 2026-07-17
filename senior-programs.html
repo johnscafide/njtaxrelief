@@ -112,18 +112,13 @@
       <p style="font-size:13.5px;line-height:1.6;color:var(--text-muted);margin:0;">Eligibility uses <strong>NJ gross income</strong>, not federal AGI. Exact thresholds will be confirmed by the NJ Division of Taxation. The Senior Freeze program was not cut.</p>
     </div>
 
-    <!-- Stay NJ Calculator -->
+    <!-- Stay NJ Calculator — routes to the main calculator (anchor-estimator.html) -->
     <div class="staynj-highlight" id="staynj-calc">
       <h3><i class="fas fa-leaf" style="margin-right:10px;color:#7ec8a0;"></i>Stay NJ Credit Calculator</h3>
       <p>Enter your annual property tax bill and household income to estimate your Stay NJ credit. The credit is 50% of your tax bill, capped by your income: up to $6,500 under $100,000, $5,000 from $100,000 to $150,000, and $4,000 from $150,000 to $200,000. Over about $200,000 no longer qualifies.</p>
-      <div class="staynj-calc-grid">
-        <div class="staynj-input-group"><label>Your Annual Property Tax Bill ($)</label><input type="number" id="staynj-tax" placeholder="e.g. 9000" oninput="calcStayNJ()" min="0"></div>
-        <div class="staynj-input-group"><label>Household Income ($)</label><input type="number" id="staynj-income" placeholder="e.g. 75000" oninput="calcStayNJ()" min="0"></div>
-      </div>
-      <div class="staynj-result" id="staynj-result" style="display:none;">
-        <div class="staynj-result-num" id="staynj-amount">$0</div>
-        <div class="staynj-result-label" id="staynj-label">Estimated Stay NJ Annual Credit</div>
-      </div>
+      <a href="anchor-estimator.html#staynj" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;background:#7ec8a0;color:#0e2248;font-weight:700;">
+        <i class="fas fa-calculator"></i> Open the Stay NJ Calculator
+      </a>
       <div style="margin-top:18px;">
         <div style="font-size:13px;color:#c0cfdf;">Stay NJ is paid quarterly — February, May, August, and November. Your annual credit divided by 4 is your quarterly payment.</div>
       </div>
