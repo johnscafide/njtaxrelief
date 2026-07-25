@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NJ Property Tax Lookup | Find Any Home's Assessment and Tax Bill</title>
-  <meta name="description" content="Free NJ property tax lookup. Type any New Jersey address and see the assessed value, last year's tax bill, block and lot, and sale history straight from state assessment records. No signup.">
+  <meta name="description" content="Free NJ property tax lookup. Type any New Jersey address and see the assessed value, last year's tax bill, block and lot, aerial view, and sale history straight from state assessment records. No signup.">
   <meta name="keywords" content="NJ property tax lookup, New Jersey property tax records, property assessment lookup NJ, block and lot search NJ, MOD-IV records, NJ tax assessment search, how much are my property taxes NJ, property tax by address New Jersey">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta name="author" content="John Scafide, Licensed NJ Real Estate Agent #2079591">
@@ -20,16 +20,18 @@
   <meta property="og:url" content="https://njpropertytaxrelief.com/property-lookup.html">
   <meta property="og:site_name" content="NJ Property Tax Relief Guide">
   <meta property="og:title" content="NJ Property Tax Lookup | Any Address, Instantly">
-  <meta property="og:description" content="See any New Jersey home's assessed value and tax bill from official state records. Free, no signup.">
+  <meta property="og:description" content="See any New Jersey home's assessed value, tax bill, and aerial view from official state records. Free, no signup.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@thetaxwatchdog">
   <meta name="twitter:creator" content="@thetaxwatchdog">
   <meta name="twitter:title" content="NJ Property Tax Lookup | Any Address, Instantly">
-  <meta name="twitter:description" content="See any New Jersey home's assessed value and tax bill from official state records. Free, no signup.">
+  <meta name="twitter:description" content="See any New Jersey home's assessed value, tax bill, and aerial view from official state records. Free, no signup.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="styles.css">
 
   <!-- Google Analytics -->
@@ -43,102 +45,225 @@
 
 <style>
 /* ============================================================
-   PROPERTY LOOKUP  ·  page-scoped, prefixed .pl- so nothing
-   here can collide with styles.css
+   PROPERTY LOOKUP  ·  page-scoped, everything prefixed .pl-
+   Nothing here can collide with styles.css
    ============================================================ */
-.pl-search-wrap { max-width: 760px; margin: 0 auto; }
+
+/* ---------- HERO ---------- */
+.pl-hero {
+  position: relative;
+  min-height: 560px;
+  display: flex; align-items: center; justify-content: center;
+  padding: 90px 20px 80px;
+  overflow: hidden;
+  background: #eef2f8;
+}
+.pl-hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=80&w=2400&auto=format&fit=crop');
+  background-size: cover; background-position: center 40%;
+  opacity: 0.30;
+  transform: scale(1.04);
+}
+.pl-hero-wash {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(244,245,247,.72) 0%, rgba(244,245,247,.55) 45%, rgba(244,245,247,.94) 100%);
+}
+.pl-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 820px; text-align: center; }
+.pl-eyebrow {
+  display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--gold);
+  background: rgba(255,255,255,.82); border: 1px solid rgba(184,151,42,.32);
+  padding: 7px 16px; border-radius: 99px; margin-bottom: 22px;
+  backdrop-filter: blur(6px);
+}
+.pl-hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(34px, 5.4vw, 58px); font-weight: 700; line-height: 1.12;
+  color: var(--navy-dark); margin: 0 0 18px;
+  text-shadow: 0 1px 2px rgba(255,255,255,.7);
+}
+.pl-hero h1 em { font-style: normal; color: var(--gold); }
+.pl-hero-sub {
+  font-size: clamp(16px, 2vw, 19px); color: #3d4759; line-height: 1.65;
+  max-width: 620px; margin: 0 auto 32px;
+}
+
+/* ---------- SEARCH ---------- */
 .pl-search-card {
-  background: var(--bg-white); border: 1px solid var(--border); border-radius: 14px;
-  padding: 28px; box-shadow: 0 4px 24px rgba(26,58,107,0.07);
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  padding: 12px; box-shadow: 0 18px 50px rgba(14,34,72,.14);
+  max-width: 660px; margin: 0 auto;
 }
-.pl-search-label { font-size: 13px; font-weight: 600; color: var(--navy-dark); margin-bottom: 10px; display: block; }
-.pl-search-row { display: flex; gap: 10px; }
+.pl-search-row { display: flex; gap: 9px; }
 .pl-input {
-  flex: 1; padding: 15px 16px; font-size: 16px; font-family: inherit;
-  border: 1.5px solid var(--border); border-radius: 9px; background: #fff; color: var(--text);
-  transition: border-color .15s, box-shadow .15s;
+  flex: 1; padding: 16px 18px; font-size: 16px; font-family: inherit;
+  border: 1.5px solid transparent; border-radius: 11px; background: #f6f7fa; color: var(--text);
+  transition: border-color .15s, background .15s;
 }
-.pl-input:focus { outline: none; border-color: var(--navy-light); box-shadow: 0 0 0 3px rgba(42,79,143,0.12); }
+.pl-input:focus { outline: none; border-color: var(--navy-light); background: #fff; }
 .pl-search-btn {
-  padding: 15px 26px; font-size: 15px; font-weight: 600; font-family: inherit; white-space: nowrap;
-  background: var(--navy); color: #fff; border: none; border-radius: 9px; cursor: pointer;
+  padding: 16px 28px; font-size: 15.5px; font-weight: 700; font-family: inherit; white-space: nowrap;
+  background: var(--navy); color: #fff; border: none; border-radius: 11px; cursor: pointer;
   transition: background .15s, transform .1s;
 }
 .pl-search-btn:hover { background: var(--navy-dark); }
 .pl-search-btn:active { transform: translateY(1px); }
 .pl-search-btn:disabled { opacity: .6; cursor: wait; }
-.pl-hint { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+.pl-hero-note { font-size: 13px; color: #566078; margin-top: 16px; }
+.pl-hero-note strong { color: var(--navy-dark); }
 
-.pl-state { text-align: center; padding: 44px 20px; }
-.pl-state i { font-size: 34px; color: var(--border); margin-bottom: 14px; display: block; }
-.pl-state-title { font-size: 17px; font-weight: 600; color: var(--navy-dark); margin-bottom: 6px; }
-.pl-state-sub { font-size: 14px; color: var(--text-muted); max-width: 420px; margin: 0 auto; line-height: 1.6; }
+/* ---------- RESULT SHELL ---------- */
+.pl-result { max-width: 1040px; margin: 0 auto; }
+.pl-state { text-align: center; padding: 60px 20px; }
+.pl-state > i { font-size: 36px; color: #c3cbdb; margin-bottom: 16px; display: block; }
+.pl-state-title { font-size: 18px; font-weight: 600; color: var(--navy-dark); margin-bottom: 7px; }
+.pl-state-sub { font-size: 14.5px; color: var(--text-muted); max-width: 460px; margin: 0 auto; line-height: 1.65; }
 .pl-spin {
-  width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--navy);
-  border-radius: 50%; animation: plspin .8s linear infinite; margin: 0 auto 14px;
+  width: 36px; height: 36px; border: 3px solid #dfe4ee; border-top-color: var(--navy);
+  border-radius: 50%; animation: plspin .8s linear infinite; margin: 0 auto 16px;
 }
 @keyframes plspin { to { transform: rotate(360deg); } }
 
-.pl-result { max-width: 860px; margin: 30px auto 0; }
-.pl-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
-.pl-card-head { background: var(--navy-dark); color: #fff; padding: 22px 26px; }
-.pl-card-addr { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700; line-height: 1.25; }
-.pl-card-town { font-size: 14px; color: #cdd9ec; margin-top: 5px; }
+/* ---------- LISTING CARD ---------- */
+.pl-listing {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; box-shadow: 0 10px 34px rgba(14,34,72,.09); margin-bottom: 22px;
+}
+.pl-media { display: grid; grid-template-columns: 1.55fr 1fr; gap: 3px; background: var(--border); }
+.pl-media-main { position: relative; background: #e8ecf3; min-height: 340px; }
+.pl-media-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pl-media-side { background: #e8ecf3; min-height: 340px; }
+#pl-map { width: 100%; height: 100%; min-height: 340px; }
+.pl-chips {
+  position: absolute; top: 14px; left: 14px; z-index: 5;
+  display: flex; gap: 6px; background: rgba(255,255,255,.93);
+  padding: 5px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.16);
+  backdrop-filter: blur(8px);
+}
+.pl-chip {
+  font-size: 12.5px; font-weight: 600; font-family: inherit; padding: 7px 13px;
+  border: none; border-radius: 7px; background: transparent; color: var(--text-muted); cursor: pointer;
+}
+.pl-chip.on { background: var(--navy); color: #fff; }
+.pl-imgnote {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4;
+  background: linear-gradient(transparent, rgba(0,0,0,.62));
+  color: #fff; font-size: 11.5px; padding: 22px 14px 9px;
+}
 
-.pl-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--border); }
-.pl-fig { padding: 22px 18px; text-align: center; border-right: 1px solid var(--border); }
+.pl-head { padding: 24px 28px 20px; border-bottom: 1px solid #eef0f5; }
+.pl-head-addr {
+  font-family: 'Playfair Display', Georgia, serif; font-size: 27px; font-weight: 700;
+  color: var(--navy-dark); line-height: 1.22; margin: 0;
+}
+.pl-head-town { font-size: 15px; color: var(--text-muted); margin-top: 6px; }
+.pl-pills { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 13px; }
+.pl-pill {
+  font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 99px;
+  background: var(--info-bg); color: var(--navy);
+}
+.pl-pill.gold { background: #fbf3dc; color: #7a6417; }
+.pl-pill.green { background: var(--green-light); color: var(--green); }
+
+.pl-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(158px, 1fr)); border-bottom: 1px solid #eef0f5; }
+.pl-fig { padding: 24px 18px; text-align: center; border-right: 1px solid #eef0f5; }
 .pl-fig:last-child { border-right: none; }
-.pl-fig-num { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.1; }
+.pl-fig-num { font-size: 27px; font-weight: 700; color: var(--navy); line-height: 1.05; letter-spacing: -.02em; }
 .pl-fig-num.gold { color: var(--gold); }
-.pl-fig-lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-top: 7px; }
+.pl-fig-lbl { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 8px; }
 
-.pl-rows { padding: 8px 26px 22px; }
-.pl-row { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid #eef0f5; font-size: 14.5px; }
+.pl-details { padding: 6px 28px 24px; }
+.pl-details-title {
+  font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--text-muted); margin: 20px 0 4px;
+}
+.pl-row { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-bottom: 1px solid #f1f3f7; font-size: 14.5px; }
 .pl-row:last-child { border-bottom: none; }
 .pl-row-k { color: var(--text-muted); }
 .pl-row-v { font-weight: 600; color: var(--text); text-align: right; }
 
-.pl-flag { margin: 0 26px 22px; padding: 16px 18px; border-radius: 10px; font-size: 14px; line-height: 1.65; }
+.pl-flag { margin: 0 28px 22px; padding: 15px 17px; border-radius: 10px; font-size: 14px; line-height: 1.65; }
 .pl-flag.info { background: var(--info-bg); color: var(--navy-dark); }
 .pl-flag.warn { background: #fdf6e3; color: #6b5514; }
-.pl-flag strong { font-weight: 700; }
 
-.pl-cta { background: var(--navy-dark); border-radius: 14px; padding: 32px 30px; color: #fff; margin-bottom: 20px; }
-.pl-cta h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; margin: 0 0 10px; }
-.pl-cta p { font-size: 15px; color: #cdd9ec; line-height: 1.7; margin: 0 0 20px; }
-.pl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
-.pl-form input {
-  padding: 13px 14px; font-size: 15px; font-family: inherit; border: 1px solid rgba(255,255,255,.2);
-  border-radius: 8px; background: rgba(255,255,255,.09); color: #fff;
+/* ---------- TRACK THIS HOME ---------- */
+.pl-track {
+  background: #fff; border: 2px solid var(--gold); border-radius: 16px;
+  padding: 30px; margin-bottom: 22px;
 }
-.pl-form input::placeholder { color: #90a4c4; }
-.pl-form input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.14); }
+.pl-track-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+  color: #7a6417; background: #fbf3dc; padding: 6px 13px; border-radius: 99px; margin-bottom: 14px;
+}
+.pl-track h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 25px; color: var(--navy-dark); margin: 0 0 10px; }
+.pl-track p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin: 0 0 18px; }
+.pl-track ul { list-style: none; padding: 0; margin: 0 0 22px; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 9px; }
+.pl-track ul li { font-size: 14px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
+.pl-track ul li i { color: var(--green); margin-top: 3px; }
+
+/* ---------- ASSESSMENT REVIEW (with headshot) ---------- */
+.pl-review { background: var(--navy-dark); border-radius: 16px; padding: 32px; color: #fff; margin-bottom: 22px; }
+.pl-review-top { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 22px; }
+.pl-review-photo {
+  width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex-shrink: 0;
+  border: 3px solid var(--gold); box-shadow: 0 6px 18px rgba(0,0,0,.3);
+}
+.pl-review h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 25px; margin: 0 0 8px; }
+.pl-review p { font-size: 15px; color: #cdd9ec; line-height: 1.7; margin: 0; }
+.pl-review-sig { font-size: 13px; color: #90a4c4; margin-top: 11px; }
+.pl-review-sig strong { color: #fff; }
+
+/* ---------- FORMS ---------- */
+.pl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.pl-form input, .pl-form select {
+  padding: 14px 15px; font-size: 15px; font-family: inherit;
+  border: 1px solid var(--border); border-radius: 9px; background: #fff; color: var(--text);
+}
+.pl-form input:focus, .pl-form select:focus { outline: none; border-color: var(--navy-light); }
 .pl-form .pl-wide { grid-column: 1 / -1; }
 .pl-form button {
-  grid-column: 1 / -1; padding: 15px; font-size: 15px; font-weight: 700; font-family: inherit;
-  background: var(--gold); color: var(--navy-dark); border: none; border-radius: 8px; cursor: pointer;
+  grid-column: 1 / -1; padding: 16px; font-size: 15.5px; font-weight: 700; font-family: inherit;
+  background: var(--gold); color: var(--navy-dark); border: none; border-radius: 9px; cursor: pointer;
 }
 .pl-form button:hover { background: #cfa930; }
-.pl-cta-fine { font-size: 12px; color: #90a4c4; margin-top: 13px; line-height: 1.6; }
-.pl-sent { background: #1e6b3a; border-radius: 10px; padding: 22px; text-align: center; font-size: 15.5px; font-weight: 600; }
+.pl-review .pl-form input {
+  border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.09); color: #fff;
+}
+.pl-review .pl-form input::placeholder { color: #90a4c4; }
+.pl-review .pl-form input:focus { border-color: var(--gold); background: rgba(255,255,255,.15); }
+.pl-fine { font-size: 12px; color: var(--text-muted); margin-top: 13px; line-height: 1.6; }
+.pl-review .pl-fine { color: #90a4c4; }
+.pl-sent {
+  background: var(--green-light); border: 1px solid #b8d8c4; color: var(--green);
+  border-radius: 11px; padding: 24px; text-align: center; font-size: 15.5px; font-weight: 600; line-height: 1.6;
+}
+.pl-review .pl-sent { background: #1e6b3a; border-color: #2e8d52; color: #fff; }
 
-.pl-src { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; padding: 18px 22px; background: #f7f8fa; border: 1px solid var(--border); border-radius: 11px; }
+.pl-src {
+  font-size: 12.5px; color: var(--text-muted); line-height: 1.75;
+  padding: 20px 24px; background: #f7f8fa; border: 1px solid var(--border); border-radius: 12px;
+}
 .pl-src strong { color: var(--navy-dark); }
 
+@media (max-width: 860px) {
+  .pl-media { grid-template-columns: 1fr; }
+  .pl-media-main, .pl-media-side, #pl-map { min-height: 260px; }
+}
 @media (max-width: 640px) {
+  .pl-hero { min-height: 480px; padding: 60px 16px 54px; }
   .pl-search-row { flex-direction: column; }
-  .pl-search-card { padding: 20px; }
-  .pl-card-addr { font-size: 20px; }
+  .pl-head, .pl-details { padding-left: 18px; padding-right: 18px; }
+  .pl-flag { margin-left: 18px; margin-right: 18px; }
+  .pl-head-addr { font-size: 21px; }
   .pl-form { grid-template-columns: 1fr; }
-  .pl-fig { border-right: none; border-bottom: 1px solid var(--border); }
-  .pl-rows { padding: 8px 18px 18px; }
-  .pl-flag { margin: 0 18px 18px; }
+  .pl-fig { border-right: none; border-bottom: 1px solid #eef0f5; }
+  .pl-review-top { flex-direction: column; align-items: center; text-align: center; }
+  .pl-track, .pl-review { padding: 22px; }
 }
 </style>
 
-<!-- ============================================================
-     STRUCTURED DATA
-     ============================================================ -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -150,7 +275,7 @@
       "url": "https://njpropertytaxrelief.com/property-lookup.html",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
-      "description": "Free lookup tool that returns the assessed value, prior year tax bill, block and lot, and sale history for any New Jersey property using official state assessment records.",
+      "description": "Free lookup tool that returns the assessed value, prior year tax bill, block and lot, aerial imagery, and sale history for any New Jersey property using official state assessment records.",
       "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
       "areaServed": { "@type": "State", "name": "New Jersey" },
       "provider": {
@@ -213,38 +338,39 @@
 <!-- ============================================================
      HERO
      ============================================================ -->
-<section class="section" style="padding-top:56px;padding-bottom:34px;">
-  <div class="section-inner">
-    <div style="text-align:center;max-width:720px;margin:0 auto 30px;">
-      <div class="section-label">Free Tool</div>
-      <h1 class="section-title" style="margin-bottom:14px;">What are the property taxes on <span class="gold-text">any NJ home?</span></h1>
-      <p class="section-subtitle" style="margin-bottom:0;">
-        Type an address. See the assessed value, last year's tax bill, block and lot, and sale history straight from New Jersey's official assessment records. No signup, no email required to see your results.
-      </p>
-    </div>
-
-    <div class="pl-search-wrap">
-      <div class="pl-search-card">
-        <label class="pl-search-label" for="pl-addr">New Jersey property address</label>
-        <div class="pl-search-row">
-          <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
-                 placeholder="123 Main Street, Williamstown, NJ 08094"
-                 onkeydown="if(event.key==='Enter')plLookup()">
-          <button class="pl-search-btn" id="pl-btn" onclick="plLookup()">
-            <i class="fas fa-magnifying-glass"></i>&nbsp; Look it up
-          </button>
-        </div>
-        <div class="pl-hint">
-          Works for every one of New Jersey's 21 counties. Include the town and zip for the most accurate match.
-        </div>
+<div class="pl-hero">
+  <div class="pl-hero-bg"></div>
+  <div class="pl-hero-wash"></div>
+  <div class="pl-hero-inner">
+    <div class="pl-eyebrow">Free · No signup · All 21 NJ counties</div>
+    <h1>What are the property taxes on <em>any NJ home?</em></h1>
+    <p class="pl-hero-sub">
+      Type an address. See the assessed value, last year's tax bill, block and lot, an aerial view of the property, and sale history, straight from New Jersey's official assessment records.
+    </p>
+    <div class="pl-search-card">
+      <div class="pl-search-row">
+        <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
+               placeholder="123 Main Street, Williamstown, NJ 08094"
+               onkeydown="if(event.key==='Enter')plLookup()">
+        <button class="pl-search-btn" id="pl-btn" onclick="plLookup()">
+          <i class="fas fa-magnifying-glass"></i>&nbsp; Look it up
+        </button>
       </div>
     </div>
+    <div class="pl-hero-note">Include the town and zip for the best match. <strong>Nothing is stored, no email required to see results.</strong></div>
+  </div>
+</div>
 
+<!-- ============================================================
+     RESULTS
+     ============================================================ -->
+<section class="section" style="padding-top:44px;">
+  <div class="section-inner">
     <div id="pl-out" class="pl-result">
       <div class="pl-state">
         <i class="fas fa-house-chimney"></i>
-        <div class="pl-state-title">Enter an address to begin</div>
-        <div class="pl-state-sub">You will get the assessment, the tax bill, the block and lot, and what the property last sold for.</div>
+        <div class="pl-state-title">Enter an address above to begin</div>
+        <div class="pl-state-sub">You will get the assessment, the tax bill, the block and lot, an aerial view, and what the property last sold for.</div>
       </div>
     </div>
   </div>
@@ -259,7 +385,6 @@
       <h2 class="section-title">Reading your assessment</h2>
       <p class="section-subtitle">Three numbers decide your tax bill. Most people only ever see the last one.</p>
     </div>
-
     <div class="info-grid">
       <div class="info-card">
         <h3><i class="fas fa-building-columns" style="color:var(--navy);"></i> Assessed value</h3>
@@ -271,10 +396,9 @@
       </div>
       <div class="info-card">
         <h3><i class="fas fa-scale-balanced" style="color:var(--green);"></i> The equalization ratio</h3>
-        <p>The state's measure of how far your town's assessments have drifted from real market values. Divide your assessment by the ratio and you get the market value your town is implying you have.</p>
+        <p>The state's measure of how far your town's assessments have drifted from real market values. Divide your assessment by the ratio and you get the market value your town is implying.</p>
       </div>
     </div>
-
     <div class="info-box" style="margin-top:30px;">
       <h4><i class="fas fa-lightbulb"></i> The number that actually matters for an appeal</h4>
       <p>Take your assessed value and divide it by your town's equalization ratio. That is the market value your assessment implies. If your home would realistically sell for meaningfully less than that figure, you have a case worth building. New Jersey's Chapter 123 rule gives municipalities a 15 percent cushion, so the gap has to be real, not marginal. Appeals are generally due April 1, or May 1 in a town that recently revalued.</p>
@@ -291,53 +415,58 @@
       <h2 class="section-title">Common questions</h2>
     </div>
     <div style="max-width:800px;margin:0 auto;">
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation's MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. It is public data, refreshed roughly once a year in late spring or early summer.</p></div>
+        <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation's MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. It is public data, refreshed roughly once a year in late spring or early summer. Aerial imagery is from Esri World Imagery.</p></div>
       </div>
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Owner names are stripped from the public version of this dataset under Daniel's Law, which restricts disclosure of certain personal information in New Jersey. Property characteristics, assessments, and tax figures are still public.</p></div>
       </div>
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Is the tax figure my current bill? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>No. It is the prior year billed amount from the most recent published file. Rates are set annually, so your current bill will be different. Treat this as a solid ballpark. For the exact current figure, check your municipal tax collector.</p></div>
       </div>
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">My address did not come up. Why? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Usually one of four things. Newly built homes may not be in the parcel file yet. Condominium units sometimes sit under a parent parcel. Properties billed as multiple lots together appear only once. Or the address needs the town and zip added. Try the full address first, then try without the unit number.</p></div>
       </div>
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Am I paying too much? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Compare the effective rate shown in your results against neighbors on the same street. If yours is noticeably higher for a similar home, either your assessment is out of line or you are missing a deduction you qualify for. Both are fixable. That is the conversation worth having.</p></div>
       </div>
-
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Do I qualify for ANCHOR or Stay NJ? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never claim it. <a href="anchor-estimator.html">Run the free estimator</a> and find out in about 90 seconds.</p></div>
       </div>
-
     </div>
   </div>
 </section>
 
 <footer id="main-footer"></footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="scripts.js"></script>
 
 <script>
 (function () {
   'use strict';
 
-  // ── Public NJ data endpoints. Free, no key. ──────────────
-  var NJ_GEOCODE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
-  var CENSUS     = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
-  var NJ_PARCEL  = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+  // ── Public NJ + Esri endpoints. Free, no key required. ────
+  var NJ_GEOCODE  = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+  var CENSUS      = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
+  var NJ_PARCEL   = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+  var ESRI_TILES  = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
+  var ESRI_EXPORT = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export';
+
+  // OPTIONAL. Paste a Google Maps API key with Street View Static enabled
+  // and a street level photo of the house becomes the first image.
+  // Leave it blank and the page quietly uses aerial imagery only.
+  var GMAPS_KEY = '';
+
+  var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
+  var EJS_SERVICE = 'service_gptqbyx';
+  var EJS_TMPL    = 'template_contact';
 
   var FIELDS = ['PAMS_PIN','COUNTY','MUN_NAME','PROP_LOC','PCLBLOCK','PCLLOT','PCLQCODE',
     'PROP_CLASS','BLDG_DESC','LAND_DESC','CALC_ACRE','YR_CONSTR','DWELL',
@@ -349,11 +478,8 @@
     '15A':'Public property','15B':'Exempt','15C':'Cemetery','15D':'Exempt','15F':'Exempt'
   };
 
-  var EJS_PUBLIC  = 'u262kw5AoJcBI342V';   // same key anchor-estimator.html uses
-  var EJS_SERVICE = 'service_gptqbyx';
-  var EJS_TMPL    = 'template_contact';
-
-  var current = null;   // last successful lookup, used by the lead form
+  var current = null;   // last successful lookup
+  var map = null;       // leaflet instance
 
   function el(id) { return document.getElementById(id); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
@@ -362,16 +488,8 @@
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
     });
   }
-
   function setOut(html) { el('pl-out').innerHTML = html; }
 
-  function stateBox(icon, title, sub) {
-    return '<div class="pl-state"><i class="fas ' + icon + '"></i>' +
-           '<div class="pl-state-title">' + esc(title) + '</div>' +
-           '<div class="pl-state-sub">' + sub + '</div></div>';
-  }
-
-  // ── deed date is a 6 char MMDDYY string ─────────────────
   function deedYear(d) {
     if (!d) return null;
     var s = String(d).replace(/\D/g, '');
@@ -381,6 +499,7 @@
     return (yr > 1900 && yr <= new Date().getFullYear()) ? yr : null;
   }
 
+  // ── GEOCODE ─────────────────────────────────────────────
   function geocode(address) {
     var p = new URLSearchParams({ SingleLine: address, outSR: '4326', maxLocations: '1', f: 'json' });
     return fetch(NJ_GEOCODE + '?' + p)
@@ -392,85 +511,126 @@
       })
       .catch(function () { return geocodeCensus(address); });
   }
-
   function geocodeCensus(address) {
     var p = new URLSearchParams({ address: address, benchmark: 'Public_AR_Current', format: 'json' });
     return fetch(CENSUS + '?' + p)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         var m = d.result && d.result.addressMatches && d.result.addressMatches[0];
-        if (!m) return null;
-        return { lat: m.coordinates.y, lon: m.coordinates.x, matched: m.matchedAddress };
+        return m ? { lat: m.coordinates.y, lon: m.coordinates.x, matched: m.matchedAddress } : null;
       })
       .catch(function () { return null; });
   }
 
+  // ── PARCEL, with geometry so we can draw the lot line ────
   function parcelAt(lat, lon) {
     var p = new URLSearchParams({
       geometry: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
-      geometryType: 'esriGeometryPoint', inSR: '4326',
+      geometryType: 'esriGeometryPoint', inSR: '4326', outSR: '4326',
       spatialRel: 'esriSpatialRelIntersects',
-      outFields: FIELDS, returnGeometry: 'false', resultRecordCount: '1', f: 'json'
+      outFields: FIELDS, returnGeometry: 'true', resultRecordCount: '1', f: 'json'
     });
     return fetch(NJ_PARCEL + '?' + p)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (d.error) throw new Error(d.error.message || 'parcel');
-        return (d.features && d.features[0]) ? d.features[0].attributes : null;
+        return (d.features && d.features[0]) ? d.features[0] : null;
       });
   }
 
+  // bounding box of the parcel rings, padded, for the aerial crop
+  function ringsBBox(rings, padPct) {
+    var minx = 180, miny = 90, maxx = -180, maxy = -90;
+    rings.forEach(function (ring) {
+      ring.forEach(function (pt) {
+        if (pt[0] < minx) minx = pt[0];
+        if (pt[0] > maxx) maxx = pt[0];
+        if (pt[1] < miny) miny = pt[1];
+        if (pt[1] > maxy) maxy = pt[1];
+      });
+    });
+    var pw = (maxx - minx) * padPct, ph = (maxy - miny) * padPct;
+    return [minx - pw, miny - ph, maxx + pw, maxy + ph];
+  }
+  function bboxFor() {
+    return (current && current.rings)
+      ? ringsBBox(current.rings, 0.55)
+      : [current.lon - 0.0009, current.lat - 0.0007, current.lon + 0.0009, current.lat + 0.0007];
+  }
+  function aerialUrl(bbox, w, h) {
+    var p = new URLSearchParams({
+      bbox: bbox.join(','), bboxSR: '4326', imageSR: '3857',
+      size: w + ',' + h, format: 'jpg', transparent: 'false', f: 'image'
+    });
+    return ESRI_EXPORT + '?' + p;
+  }
+  function streetUrl(lat, lon) {
+    if (!GMAPS_KEY) return null;
+    return 'https://maps.googleapis.com/maps/api/streetview?size=640x400&location=' +
+           lat + ',' + lon + '&fov=75&pitch=8&source=outdoor&key=' + GMAPS_KEY;
+  }
+
+  // ── MAIN ────────────────────────────────────────────────
   window.plLookup = function () {
     var addr = (el('pl-addr').value || '').trim();
     if (!addr) { el('pl-addr').focus(); return; }
-
     var btn = el('pl-btn');
     btn.disabled = true;
-    setOut('<div class="pl-state"><div class="pl-spin"></div><div class="pl-state-title">Searching state records</div><div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>');
+    map = null;
 
-    if (typeof gtag === 'function') gtag('event', 'property_lookup', { address_entered: 'yes' });
+    setOut('<div class="pl-state"><div class="pl-spin"></div><div class="pl-state-title">Searching state records</div><div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>');
+    if (typeof gtag === 'function') gtag('event', 'property_lookup');
 
     geocode(addr)
       .then(function (g) {
         if (!g) throw new Error('nogeo');
-        return parcelAt(g.lat, g.lon).then(function (p) { return { g: g, p: p }; });
+        return parcelAt(g.lat, g.lon).then(function (f) { return { g: g, f: f }; });
       })
       .then(function (res) {
-        if (!res.p) throw new Error('noparcel');
-        render(res.p, addr);
+        if (!res.f) throw new Error('noparcel');
+        render(res.f, res.g, addr);
       })
       .catch(function (e) {
         var msg = (e && e.message) === 'nogeo'
           ? 'We could not place that address. Try adding the town and zip code, or drop the unit number.'
           : 'We found the location but no parcel record matched. That usually means a condo unit, a brand new build, or a property billed together with other lots.';
-        setOut(stateBox('fa-circle-question', 'No match found', msg) +
-          '<div class="pl-src" style="margin-top:18px;">Not every property lands cleanly. If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="contact.html">Send me the address</a> and I will look it up by hand.</div>');
+        setOut('<div class="pl-state"><i class="fas fa-circle-question"></i>' +
+          '<div class="pl-state-title">No match found</div>' +
+          '<div class="pl-state-sub">' + msg + '</div></div>' +
+          '<div class="pl-src" style="margin-top:20px;">Not every property lands cleanly. If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="index.html#contact">Send me the address</a> and I will look it up by hand.</div>');
       })
       .then(function () { btn.disabled = false; });
   };
 
-  function render(p, typed) {
+  function render(feat, geo, typed) {
+    var p = feat.attributes;
+    var rings = (feat.geometry && feat.geometry.rings) ? feat.geometry.rings : null;
+
     var assessed = +p.NET_VALUE || 0;
     var tax = +p.LAST_YR_TX || 0;
     var rate = assessed > 0 ? (tax / assessed) * 100 : null;
     var dy = deedYear(p.DEED_DATE);
     var sale = +p.SALE_PRICE || 0;
     var cls = (p.PROP_CLASS || '').trim().toUpperCase();
+    var tenure = dy ? (new Date().getFullYear() - dy) : null;
 
     current = {
-      address: p.PROP_LOC || typed,
-      town: p.MUN_NAME || '',
-      county: p.COUNTY || '',
-      assessed: assessed,
-      tax: tax,
-      rate: rate,
-      block: p.PCLBLOCK || '',
-      lot: p.PCLLOT || ''
+      address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '',
+      assessed: assessed, tax: tax, rate: rate,
+      block: p.PCLBLOCK || '', lot: p.PCLLOT || '', pin: p.PAMS_PIN || '',
+      lat: geo.lat, lon: geo.lon, rings: rings
     };
 
     function row(k, v) {
       return v ? '<div class="pl-row"><span class="pl-row-k">' + k + '</span><span class="pl-row-v">' + esc(v) + '</span></div>' : '';
     }
+
+    var pills = [];
+    if (CLASSES[cls]) pills.push('<span class="pl-pill">' + esc(CLASSES[cls]) + '</span>');
+    if (p.YR_CONSTR) pills.push('<span class="pl-pill">Built ' + esc(p.YR_CONSTR) + '</span>');
+    if (p.CALC_ACRE) pills.push('<span class="pl-pill">' + (+p.CALC_ACRE).toFixed(2) + ' acres</span>');
+    if (tenure !== null && tenure >= 15) pills.push('<span class="pl-pill gold">Owned ' + tenure + '+ years</span>');
+    if (rate && rate <= 2.4) pills.push('<span class="pl-pill green">Below average rate</span>');
 
     var flag = '';
     if (cls === '4C') {
@@ -479,56 +639,220 @@
       flag = '<div class="pl-flag warn"><strong>This is vacant land</strong>, not a residence. The assessment reflects the lot only.</div>';
     } else if (rate && rate > 3.2) {
       flag = '<div class="pl-flag warn"><strong>That effective rate is on the high side.</strong> Anything over roughly 3 percent is worth a second look. Either the assessment is out of line with what the home would actually sell for, or a deduction is being missed.</div>';
-    } else if (dy && (new Date().getFullYear() - dy) >= 15) {
-      flag = '<div class="pl-flag info"><strong>Owned for ' + (new Date().getFullYear() - dy) + ' years.</strong> If the assessment has not been revisited in that time, it is worth checking whether it still reflects reality.</div>';
+    } else if (tenure !== null && tenure >= 15) {
+      flag = '<div class="pl-flag info"><strong>Owned for ' + tenure + ' years.</strong> If the assessment has not been revisited in that time, it is worth checking whether it still reflects reality.</div>';
     }
 
+    var bbox = bboxFor();
+    var sv = streetUrl(geo.lat, geo.lon);
+    var chips = sv
+      ? '<div class="pl-chips">' +
+          '<button class="pl-chip on" id="plc-street" onclick="plView(\'street\')">Street</button>' +
+          '<button class="pl-chip"    id="plc-aerial" onclick="plView(\'aerial\')">Aerial</button>' +
+        '</div>'
+      : '';
+
     setOut(
-      '<div class="pl-card">' +
-        '<div class="pl-card-head">' +
-          '<div class="pl-card-addr">' + esc(p.PROP_LOC || typed) + '</div>' +
-          '<div class="pl-card-town">' + esc(p.MUN_NAME || '') + (p.COUNTY ? ', ' + esc(p.COUNTY) + ' County' : '') + '</div>' +
+      '<div class="pl-listing">' +
+        '<div class="pl-media">' +
+          '<div class="pl-media-main">' + chips +
+            '<img id="pl-photo" alt="View of ' + esc(p.PROP_LOC || typed) + '" ' +
+              'src="' + (sv || aerialUrl(bbox, 900, 560)) + '" onerror="plPhotoFail()">' +
+            '<div class="pl-imgnote" id="pl-imgnote">' + (sv ? 'Street level imagery, Google' : 'Aerial imagery, Esri World Imagery') + '</div>' +
+          '</div>' +
+          '<div class="pl-media-side"><div id="pl-map"></div></div>' +
         '</div>' +
+
+        '<div class="pl-head">' +
+          '<h2 class="pl-head-addr">' + esc(p.PROP_LOC || typed) + '</h2>' +
+          '<div class="pl-head-town">' + esc(p.MUN_NAME || '') + (p.COUNTY ? ', ' + esc(p.COUNTY) + ' County' : '') + (p.ZIP5 ? ' ' + esc(p.ZIP5) : '') + '</div>' +
+          (pills.length ? '<div class="pl-pills">' + pills.join('') + '</div>' : '') +
+        '</div>' +
+
         '<div class="pl-figs">' +
           '<div class="pl-fig"><div class="pl-fig-num">' + (assessed ? money(assessed) : '-') + '</div><div class="pl-fig-lbl">Assessed value</div></div>' +
           '<div class="pl-fig"><div class="pl-fig-num gold">' + (tax ? money(tax) : '-') + '</div><div class="pl-fig-lbl">Prior year tax</div></div>' +
           '<div class="pl-fig"><div class="pl-fig-num">' + (rate ? rate.toFixed(2) + '%' : '-') + '</div><div class="pl-fig-lbl">Effective rate</div></div>' +
-          '<div class="pl-fig"><div class="pl-fig-num">' + (p.YR_CONSTR || '-') + '</div><div class="pl-fig-lbl">Year built</div></div>' +
+          '<div class="pl-fig"><div class="pl-fig-num">' + (sale > 1000 ? money(sale) : '-') + '</div><div class="pl-fig-lbl">Last sale' + (dy ? ' (' + dy + ')' : '') + '</div></div>' +
         '</div>' +
+
         flag +
-        '<div class="pl-rows">' +
-          row('Block / Lot' + (p.PCLQCODE ? ' / Qualifier' : ''), [p.PCLBLOCK, p.PCLLOT, p.PCLQCODE].filter(Boolean).join(' / ')) +
-          row('Property class', cls + (CLASSES[cls] ? '  ·  ' + CLASSES[cls] : '')) +
+
+        '<div class="pl-details">' +
+          '<div class="pl-details-title">Assessment breakdown</div>' +
           row('Land value', p.LAND_VAL ? money(+p.LAND_VAL) : '') +
           row('Improvement value', p.IMPRVT_VAL ? money(+p.IMPRVT_VAL) : '') +
+          row('Total assessed', assessed ? money(assessed) : '') +
+          '<div class="pl-details-title">Parcel record</div>' +
+          row('Block / Lot' + (p.PCLQCODE ? ' / Qualifier' : ''), [p.PCLBLOCK, p.PCLLOT, p.PCLQCODE].filter(Boolean).join(' / ')) +
+          row('Property class', cls + (CLASSES[cls] ? '  ·  ' + CLASSES[cls] : '')) +
           row('Building', p.BLDG_DESC) +
+          row('Land description', p.LAND_DESC) +
           row('Lot size', p.CALC_ACRE ? (+p.CALC_ACRE).toFixed(2) + ' acres' : '') +
           row('Dwelling units', p.DWELL > 0 ? p.DWELL : '') +
-          row('Last recorded sale', sale > 1000 ? money(sale) + (dy ? ' in ' + dy : '') : '') +
           row('State parcel ID', p.PAMS_PIN) +
         '</div>' +
       '</div>' +
 
-      '<div class="pl-cta" id="pl-cta">' +
-        '<h3>Is this assessment fair?</h3>' +
-        '<p>I am a licensed NJ agent and a 15 year tax professional. Send me this address and I will pull recent comparable sales, work out what your town is implying your home is worth, and tell you straight whether an appeal is worth your time. No charge, no pitch.</p>' +
+      // ── TRACK THIS HOME ──
+      '<div class="pl-track" id="pl-track">' +
+        '<div class="pl-track-badge"><i class="fas fa-chart-line"></i> Monthly Value Report</div>' +
+        '<h3>Track this home</h3>' +
+        '<p>Get a short report in your inbox once a month with what this property is worth now, what nearby homes actually sold for, and any change to the assessment or tax rate. Free, and you can stop it any time with one click.</p>' +
+        '<ul>' +
+          '<li><i class="fas fa-circle-check"></i><span>Current market value estimate</span></li>' +
+          '<li><i class="fas fa-circle-check"></i><span>Recent comparable sales nearby</span></li>' +
+          '<li><i class="fas fa-circle-check"></i><span>Assessment and tax rate changes</span></li>' +
+          '<li><i class="fas fa-circle-check"></i><span>Appeal deadline reminders</span></li>' +
+        '</ul>' +
+        '<div class="pl-form">' +
+          '<input id="pl-tname" type="text" placeholder="Your name" autocomplete="name">' +
+          '<input id="pl-temail" type="email" placeholder="Email" autocomplete="email">' +
+          '<select id="pl-trel">' +
+            '<option value="">I am the...</option>' +
+            '<option>Owner, I live here</option>' +
+            '<option>Owner, I rent it out</option>' +
+            '<option>Tenant</option>' +
+            '<option>Just researching</option>' +
+          '</select>' +
+          '<input id="pl-tphone" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
+          '<button onclick="plTrack()"><i class="fas fa-bell"></i>&nbsp; Start tracking this home</button>' +
+        '</div>' +
+        '<div class="pl-fine">One email a month. No spam, no sharing your information, unsubscribe any time.</div>' +
+      '</div>' +
+
+      // ── ASSESSMENT REVIEW ──
+      '<div class="pl-review" id="pl-review">' +
+        '<div class="pl-review-top">' +
+          '<img class="pl-review-photo" src="john-scafide.jpg" alt="John Scafide, NJ real estate agent and tax professional" loading="lazy">' +
+          '<div>' +
+            '<h3>Is this assessment fair?</h3>' +
+            '<p>I will pull recent comparable sales for this address, work out the market value your town is implying, and tell you straight whether an appeal is worth your time. If the numbers do not support it, I will say so.</p>' +
+            '<div class="pl-review-sig"><strong>John Scafide</strong> · Licensed NJ Agent #2079591 · 15+ years preparing NJ tax returns</div>' +
+          '</div>' +
+        '</div>' +
         '<div class="pl-form">' +
           '<input id="pl-name" type="text" placeholder="Your name" autocomplete="name">' +
           '<input id="pl-email" type="email" placeholder="Email" autocomplete="email">' +
           '<input id="pl-phone" class="pl-wide" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
           '<button onclick="plSendLead()">Check my assessment for free</button>' +
         '</div>' +
-        '<div class="pl-cta-fine">Your address and the figures above go with the request so I have what I need. I do not sell or share contact information.</div>' +
+        '<div class="pl-fine">This address and the figures above go with the request so I have what I need. No charge, no pitch, no sharing your information.</div>' +
       '</div>' +
 
       '<div class="pl-src">' +
-        '<strong>About this data.</strong> Sourced from the New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use. Owner names are redacted under Daniel\'s Law. The tax figure is the prior year billed amount, not a current year estimate, because rates are reset annually. Parcel boundaries are for reference and are not survey or legal descriptions. For an exact current bill, contact your municipal tax collector.' +
+        '<strong>About this data.</strong> Sourced from the New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use. Owner names are redacted under Daniel\'s Law. The tax figure is the prior year billed amount, not a current year estimate, because rates are reset annually. Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. For an exact current bill, contact your municipal tax collector.' +
       '</div>'
     );
 
+    drawMap(geo, rings, p);
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
     el('pl-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+
+  // ── LEAFLET MAP WITH THE REAL LOT LINE ──────────────────
+  function drawMap(geo, rings, p) {
+    if (typeof L === 'undefined' || !el('pl-map')) return;
+    try {
+      map = L.map('pl-map', { zoomControl: true, scrollWheelZoom: false })
+             .setView([geo.lat, geo.lon], 18);
+      L.tileLayer(ESRI_TILES, { maxZoom: 19, attribution: 'Imagery &copy; Esri' }).addTo(map);
+
+      if (rings && rings.length) {
+        var latlngs = rings.map(function (ring) {
+          return ring.map(function (pt) { return [pt[1], pt[0]]; });
+        });
+        var poly = L.polygon(latlngs, {
+          color: '#f0d87a', weight: 3, opacity: 1,
+          fillColor: '#b8972a', fillOpacity: 0.16
+        }).addTo(map);
+        map.fitBounds(poly.getBounds(), { padding: [26, 26], maxZoom: 19 });
+        poly.bindTooltip('Block ' + (p.PCLBLOCK || '?') + ', Lot ' + (p.PCLLOT || '?'));
+      } else {
+        L.circleMarker([geo.lat, geo.lon], {
+          radius: 9, color: '#f0d87a', weight: 3, fillColor: '#b8972a', fillOpacity: .7
+        }).addTo(map);
+      }
+      setTimeout(function () { if (map) map.invalidateSize(); }, 220);
+    } catch (err) { console.warn('map:', err); }
+  }
+
+  // ── IMAGE TOGGLE AND FALLBACK ───────────────────────────
+  window.plView = function (which) {
+    if (!current) return;
+    var img = el('pl-photo'), note = el('pl-imgnote'), bbox = bboxFor();
+    if (which === 'aerial') {
+      img.src = aerialUrl(bbox, 900, 560);
+      note.textContent = 'Aerial imagery, Esri World Imagery';
+    } else {
+      img.src = streetUrl(current.lat, current.lon) || aerialUrl(bbox, 900, 560);
+      note.textContent = 'Street level imagery, Google';
+    }
+    ['street', 'aerial'].forEach(function (k) {
+      var c = el('plc-' + k);
+      if (c) c.classList.toggle('on', k === which);
+    });
+  };
+
+  // if Street View has no coverage, silently fall back to aerial
+  window.plPhotoFail = function () {
+    if (!current) return;
+    var img = el('pl-photo');
+    img.onerror = null;
+    img.src = aerialUrl(bboxFor(), 900, 560);
+    var note = el('pl-imgnote');
+    if (note) note.textContent = 'Aerial imagery, Esri World Imagery';
+    var a = el('plc-aerial'), s = el('plc-street');
+    if (a) a.classList.add('on');
+    if (s) s.classList.remove('on');
+  };
+
+  // ── EMAIL ───────────────────────────────────────────────
+  function propertyLines() {
+    return [
+      'Property: ' + current.address,
+      'Town: ' + current.town + ', ' + current.county + ' County',
+      'Block / Lot: ' + current.block + ' / ' + current.lot,
+      'PAMS PIN: ' + current.pin,
+      'Assessed value: ' + (current.assessed ? money(current.assessed) : 'n/a'),
+      'Prior year tax: ' + (current.tax ? money(current.tax) : 'n/a'),
+      'Effective rate: ' + (current.rate ? current.rate.toFixed(2) + '%' : 'n/a')
+    ];
+  }
+  function send(payload) {
+    if (typeof emailjs === 'undefined') return;
+    emailjs.init({ publicKey: EJS_PUBLIC });
+    emailjs.send(EJS_SERVICE, EJS_TMPL, payload).catch(function (e) { console.warn('EmailJS:', e); });
+  }
+
+  window.plTrack = function () {
+    var name  = (el('pl-tname').value || '').trim();
+    var email = (el('pl-temail').value || '').trim();
+    var phone = (el('pl-tphone').value || '').trim();
+    var rel   = (el('pl-trel').value || '').trim() || 'Not stated';
+    if (!name || !email) { alert('Please add your name and email so I know where to send the report.'); return; }
+    if (!current) return;
+
+    var tenure = /tenant/i.test(rel) ? 'Renter' : (/owner/i.test(rel) ? 'Homeowner' : 'Unknown');
+
+    send({
+      name: name, email: email, phone: phone || 'Not provided',
+      topic: '[\uD83D\uDCC8 TRACKING][' + tenure + '] Monthly value report signup, ' + (current.town || 'NJ'),
+      tenure: tenure, lead_type: tenure, finance: 'Not provided',
+      town: current.town || 'Not provided',
+      address: current.address || 'Not provided',
+      message: ['Monthly Value Report signup', 'Relationship to property: ' + rel, 'Tenure: ' + tenure]
+                 .concat(propertyLines())
+                 .concat(['Source: property-lookup.html'])
+                 .join('\n')
+    });
+
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup_track' });
+
+    el('pl-track').innerHTML =
+      '<div class="pl-sent"><i class="fas fa-circle-check"></i> You are on the list.<br>' +
+      'Your first report for ' + esc(current.address) + ' goes out at the start of next month.</div>';
+  };
 
   window.plSendLead = function () {
     var name  = (el('pl-name').value || '').trim();
@@ -537,44 +861,29 @@
     if (!name || !email) { alert('Please add your name and email so I know where to send it.'); return; }
     if (!current) return;
 
-    if (typeof emailjs !== 'undefined') {
-      emailjs.init({ publicKey: EJS_PUBLIC });
-      emailjs.send(EJS_SERVICE, EJS_TMPL, {
-        name: name,
-        email: email,
-        phone: phone || 'Not provided',
-        topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, Property Lookup tool',
-        tenure: 'Homeowner',
-        lead_type: 'Homeowner',
-        town: current.town || 'Not provided',
-        address: current.address || 'Not provided',
-        message: [
-          'Assessment review request from the Property Lookup tool',
-          'Tenure: Homeowner (looked up their own property)',
-          'Property: ' + current.address,
-          'Town: ' + current.town + ', ' + current.county + ' County',
-          'Block / Lot: ' + current.block + ' / ' + current.lot,
-          'Assessed value: ' + (current.assessed ? money(current.assessed) : 'n/a'),
-          'Prior year tax: ' + (current.tax ? money(current.tax) : 'n/a'),
-          'Effective rate: ' + (current.rate ? current.rate.toFixed(2) + '%' : 'n/a'),
-          'Source: property-lookup.html'
-        ].join('\n')
-      }).catch(function (e) { console.warn('EmailJS:', e); });
-    }
+    send({
+      name: name, email: email, phone: phone || 'Not provided',
+      topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, ' + (current.town || 'NJ'),
+      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
+      town: current.town || 'Not provided',
+      address: current.address || 'Not provided',
+      message: ['Assessment review request from the Property Lookup tool',
+                'Tenure: Homeowner (looked up their own property)']
+                 .concat(propertyLines())
+                 .concat(['Source: property-lookup.html'])
+                 .join('\n')
+    });
 
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup' });
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup_review' });
 
-    el('pl-cta').innerHTML =
-      '<div class="pl-sent"><i class="fas fa-circle-check"></i> Got it. I will review ' +
-      esc(current.address) + ' and get back to you within one business day.</div>';
+    el('pl-review').innerHTML =
+      '<div class="pl-sent"><i class="fas fa-circle-check"></i> Got it.<br>' +
+      'I will review ' + esc(current.address) + ' and get back to you within one business day.</div>';
   };
 
-  window.plFaq = function (q) {
-    var item = q.parentElement;
-    item.classList.toggle('active');
-  };
+  window.plFaq = function (q) { q.parentElement.classList.toggle('active'); };
 
-  // deep link support:  property-lookup.html?address=123+Main+St+Williamstown+NJ
+  // deep link:  property-lookup.html?address=123+Main+St+Williamstown+NJ
   var qs = new URLSearchParams(window.location.search);
   if (qs.get('address')) {
     el('pl-addr').value = qs.get('address');
