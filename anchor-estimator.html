@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1419,6 +1418,17 @@
   'use strict';
 
   var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
+
+  // ── TENURE NORMALIZER ─────────────────────────────────────
+  // answers.tenure is 'own' | 'rent' internally. Everything that leaves
+  // this page uses the human label so BoldTrail and LeadIQ can read it.
+  function estTenureLabel(force) {
+    if (force) return force;
+    if (answers && answers.tenure === 'own')  return 'Homeowner';
+    if (answers && answers.tenure === 'rent') return 'Renter';
+    return 'Unknown';
+  }
+
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
   var STRIPE_LINK = 'https://buy.stripe.com/9B69ASdhjg442OLdoWfw400';
@@ -1524,10 +1534,12 @@
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
         name: name || 'Not provided', email: email || 'Not provided',
         phone: phone || 'Not provided',
-        topic: '[🟡 WARM] Home value curiosity click, ANCHOR Estimator',
+        topic: '[🟡 WARM][' + estTenureLabel() + '] Home value curiosity click, ANCHOR Estimator',
+        tenure: estTenureLabel(),
+        lead_type: estTenureLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Home Value Curiosity Click', 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen'].join('\n')
+        message: ['Home Value Curiosity Click', 'Tenure: ' + estTenureLabel(), 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen'].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var nudge = document.getElementById('est-value-nudge');
@@ -1580,7 +1592,7 @@
     else if (reAny) score = '🟡 WARM';
     else score = '❄️ COLD';
 
-    var topic = '[' + score + '] ANCHOR Estimator, est. benefit: ' + benefit;
+    var topic = '[' + score + '][' + estTenureLabel() + '] ANCHOR Estimator, est. benefit: ' + benefit;
     var reParts = [];
     if (sellInt) reParts.push('sell (' + sellWhen + ')');
     if (buyInt)  reParts.push('buy (' + buyWhen + ')');
@@ -1591,9 +1603,11 @@
         name: name, email: email,
         phone: phone || 'Not provided',
         topic: topic,
+        tenure: estTenureLabel(),
+        lead_type: estTenureLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Lead Score: ' + score, 'ANCHOR Estimator Lead','Tenure: ' + answers.tenure,'Primary: ' + answers.primary,'Income Bracket: ' + incomeLabel,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'Looking to sell: ' + (sellInt ? 'YES, ' + sellWhen : 'No'),'Looking to buy: ' + (buyInt ? 'YES, ' + buyWhen : 'No')].join('\n')
+        message: ['Lead Score: ' + score, 'ANCHOR Estimator Lead','Tenure: ' + estTenureLabel(),'Primary: ' + answers.primary,'Income Bracket: ' + incomeLabel,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'Looking to sell: ' + (sellInt ? 'YES, ' + sellWhen : 'No'),'Looking to buy: ' + (buyInt ? 'YES, ' + buyWhen : 'No')].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     showStep(7);
@@ -1864,7 +1878,9 @@
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
         name: name, email: email,
         phone: phone || 'Not provided',
-        topic: 'Seller lead, ready to list (Stay NJ estimator)',
+        topic: '[Homeowner] Seller lead, ready to list (Stay NJ estimator)',
+        tenure: 'Homeowner',
+        lead_type: 'Homeowner',
         town: address || 'Not provided',
         address: address || 'Not provided',
         message: ['Seller lead: homeowner says they are ready to sell','Source: Stay NJ estimator','Address of home to sell: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
@@ -1894,7 +1910,9 @@
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
         name: name, email: email,
         phone: phone || 'Not provided',
-        topic: '[🟡 WARM] Downsizing Playbook request (Stay NJ estimator)',
+        topic: '[🟡 WARM][Homeowner] Downsizing Playbook request (Stay NJ estimator)',
+        tenure: 'Homeowner',
+        lead_type: 'Homeowner',
         town: address || 'Not provided',
         address: address || 'Not provided',
         message: ['Downsizing Playbook Request', 'Senior considering downsizing / cost-of-living move', 'Name: ' + name, 'Email: ' + email, 'Phone: ' + (phone || 'Not provided'), 'Current address: ' + (address || 'Not provided'), 'Annual property tax: ' + (taxVal ? '$' + taxVal : 'Not provided'), 'Income bracket input: ' + (inc || 'Not provided'), 'Source: Stay NJ estimator downsizing section'].join('\n')
