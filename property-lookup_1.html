@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NJ Property Tax Lookup | Find Any Home's Assessment and Tax Bill</title>
+  <meta name="description" content="Free NJ property tax lookup. Type any New Jersey address and see the assessed value, last year's tax bill, block and lot, and sale history straight from state assessment records. No signup.">
+  <meta name="keywords" content="NJ property tax lookup, New Jersey property tax records, property assessment lookup NJ, block and lot search NJ, MOD-IV records, NJ tax assessment search, how much are my property taxes NJ, property tax by address New Jersey">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="John Scafide, Licensed NJ Real Estate Agent #2079591">
+  <link rel="canonical" href="https://njpropertytaxrelief.com/property-lookup.html">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="geo.region" content="US-NJ">
+  <meta name="geo.placename" content="New Jersey">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://njpropertytaxrelief.com/property-lookup.html">
+  <meta property="og:site_name" content="NJ Property Tax Relief Guide">
+  <meta property="og:title" content="NJ Property Tax Lookup | Any Address, Instantly">
+  <meta property="og:description" content="See any New Jersey home's assessed value and tax bill from official state records. Free, no signup.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thetaxwatchdog">
+  <meta name="twitter:creator" content="@thetaxwatchdog">
+  <meta name="twitter:title" content="NJ Property Tax Lookup | Any Address, Instantly">
+  <meta name="twitter:description" content="See any New Jersey home's assessed value and tax bill from official state records. Free, no signup.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+
+  <!-- Microsoft Clarity -->
+  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<style>
+/* ============================================================
+   PROPERTY LOOKUP  ·  page-scoped, prefixed .pl- so nothing
+   here can collide with styles.css
+   ============================================================ */
+.pl-search-wrap { max-width: 760px; margin: 0 auto; }
+.pl-search-card {
+  background: var(--bg-white); border: 1px solid var(--border); border-radius: 14px;
+  padding: 28px; box-shadow: 0 4px 24px rgba(26,58,107,0.07);
+}
+.pl-search-label { font-size: 13px; font-weight: 600; color: var(--navy-dark); margin-bottom: 10px; display: block; }
+.pl-search-row { display: flex; gap: 10px; }
+.pl-input {
+  flex: 1; padding: 15px 16px; font-size: 16px; font-family: inherit;
+  border: 1.5px solid var(--border); border-radius: 9px; background: #fff; color: var(--text);
+  transition: border-color .15s, box-shadow .15s;
+}
+.pl-input:focus { outline: none; border-color: var(--navy-light); box-shadow: 0 0 0 3px rgba(42,79,143,0.12); }
+.pl-search-btn {
+  padding: 15px 26px; font-size: 15px; font-weight: 600; font-family: inherit; white-space: nowrap;
+  background: var(--navy); color: #fff; border: none; border-radius: 9px; cursor: pointer;
+  transition: background .15s, transform .1s;
+}
+.pl-search-btn:hover { background: var(--navy-dark); }
+.pl-search-btn:active { transform: translateY(1px); }
+.pl-search-btn:disabled { opacity: .6; cursor: wait; }
+.pl-hint { font-size: 12.5px; color: var(--text-muted); margin-top: 10px; line-height: 1.5; }
+
+.pl-state { text-align: center; padding: 44px 20px; }
+.pl-state i { font-size: 34px; color: var(--border); margin-bottom: 14px; display: block; }
+.pl-state-title { font-size: 17px; font-weight: 600; color: var(--navy-dark); margin-bottom: 6px; }
+.pl-state-sub { font-size: 14px; color: var(--text-muted); max-width: 420px; margin: 0 auto; line-height: 1.6; }
+.pl-spin {
+  width: 34px; height: 34px; border: 3px solid var(--border); border-top-color: var(--navy);
+  border-radius: 50%; animation: plspin .8s linear infinite; margin: 0 auto 14px;
+}
+@keyframes plspin { to { transform: rotate(360deg); } }
+
+.pl-result { max-width: 860px; margin: 30px auto 0; }
+.pl-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 20px; }
+.pl-card-head { background: var(--navy-dark); color: #fff; padding: 22px 26px; }
+.pl-card-addr { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700; line-height: 1.25; }
+.pl-card-town { font-size: 14px; color: #cdd9ec; margin-top: 5px; }
+
+.pl-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid var(--border); }
+.pl-fig { padding: 22px 18px; text-align: center; border-right: 1px solid var(--border); }
+.pl-fig:last-child { border-right: none; }
+.pl-fig-num { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.1; }
+.pl-fig-num.gold { color: var(--gold); }
+.pl-fig-lbl { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-top: 7px; }
+
+.pl-rows { padding: 8px 26px 22px; }
+.pl-row { display: flex; justify-content: space-between; gap: 18px; padding: 12px 0; border-bottom: 1px solid #eef0f5; font-size: 14.5px; }
+.pl-row:last-child { border-bottom: none; }
+.pl-row-k { color: var(--text-muted); }
+.pl-row-v { font-weight: 600; color: var(--text); text-align: right; }
+
+.pl-flag { margin: 0 26px 22px; padding: 16px 18px; border-radius: 10px; font-size: 14px; line-height: 1.65; }
+.pl-flag.info { background: var(--info-bg); color: var(--navy-dark); }
+.pl-flag.warn { background: #fdf6e3; color: #6b5514; }
+.pl-flag strong { font-weight: 700; }
+
+.pl-cta { background: var(--navy-dark); border-radius: 14px; padding: 32px 30px; color: #fff; margin-bottom: 20px; }
+.pl-cta h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; margin: 0 0 10px; }
+.pl-cta p { font-size: 15px; color: #cdd9ec; line-height: 1.7; margin: 0 0 20px; }
+.pl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+.pl-form input {
+  padding: 13px 14px; font-size: 15px; font-family: inherit; border: 1px solid rgba(255,255,255,.2);
+  border-radius: 8px; background: rgba(255,255,255,.09); color: #fff;
+}
+.pl-form input::placeholder { color: #90a4c4; }
+.pl-form input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,.14); }
+.pl-form .pl-wide { grid-column: 1 / -1; }
+.pl-form button {
+  grid-column: 1 / -1; padding: 15px; font-size: 15px; font-weight: 700; font-family: inherit;
+  background: var(--gold); color: var(--navy-dark); border: none; border-radius: 8px; cursor: pointer;
+}
+.pl-form button:hover { background: #cfa930; }
+.pl-cta-fine { font-size: 12px; color: #90a4c4; margin-top: 13px; line-height: 1.6; }
+.pl-sent { background: #1e6b3a; border-radius: 10px; padding: 22px; text-align: center; font-size: 15.5px; font-weight: 600; }
+
+.pl-src { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; padding: 18px 22px; background: #f7f8fa; border: 1px solid var(--border); border-radius: 11px; }
+.pl-src strong { color: var(--navy-dark); }
+
+@media (max-width: 640px) {
+  .pl-search-row { flex-direction: column; }
+  .pl-search-card { padding: 20px; }
+  .pl-card-addr { font-size: 20px; }
+  .pl-form { grid-template-columns: 1fr; }
+  .pl-fig { border-right: none; border-bottom: 1px solid var(--border); }
+  .pl-rows { padding: 8px 18px 18px; }
+  .pl-flag { margin: 0 18px 18px; }
+}
+</style>
+
+<!-- ============================================================
+     STRUCTURED DATA
+     ============================================================ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://njpropertytaxrelief.com/property-lookup.html#app",
+      "name": "NJ Property Tax Lookup",
+      "url": "https://njpropertytaxrelief.com/property-lookup.html",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "description": "Free lookup tool that returns the assessed value, prior year tax bill, block and lot, and sale history for any New Jersey property using official state assessment records.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "areaServed": { "@type": "State", "name": "New Jersey" },
+      "provider": {
+        "@type": "Person",
+        "name": "John Scafide",
+        "jobTitle": "Licensed NJ Real Estate Agent and Tax Professional",
+        "identifier": "NJ License #2079591"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Where does this property tax data come from?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It comes from the New Jersey Office of GIS statewide parcel layer, which is joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the same system municipal tax assessors use. The data is refreshed once a year, typically in late spring or early summer." }
+        },
+        {
+          "@type": "Question",
+          "name": "Why is the owner name blank?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Owner names are removed from the public version of this data under Daniel's Law, New Jersey legislation that restricts public disclosure of certain personal information. Property details and tax figures remain public." }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the tax amount shown my current bill?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The figure shown is the prior year billed amount from the most recent published assessment file. Your current year bill will differ because municipal tax rates are set annually. Use this as a reliable ballpark, not as an exact current figure." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between assessed value and market value in New Jersey?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Assessed value is the figure your municipality uses to calculate your tax bill. Market value is what the home would sell for today. They are linked by the municipal equalization ratio. Dividing your assessment by that ratio gives you the market value your town is implying. If your home would realistically sell for less than that number, you may have grounds for a tax appeal." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I appeal my New Jersey property tax assessment?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. New Jersey property owners can appeal their assessment to the county board of taxation, generally by April 1, or by May 1 in a municipality that went through a revaluation or reassessment. Under the Chapter 123 rule your assessment is upheld if it falls within 15 percent above the ratio applied to true market value, so an appeal succeeds when credible comparable sales place your market value meaningfully below what the assessment implies." }
+        },
+        {
+          "@type": "Question",
+          "name": "What are block and lot numbers?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Block and lot are how New Jersey municipalities identify individual parcels of land on the official tax map. You need them for tax appeals, deed searches, permit applications, and title work. A qualifier code is added for condominium units and certain subdivided properties." }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://njpropertytaxrelief.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Property Tax Lookup", "item": "https://njpropertytaxrelief.com/property-lookup.html" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="section" style="padding-top:56px;padding-bottom:34px;">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:720px;margin:0 auto 30px;">
+      <div class="section-label">Free Tool</div>
+      <h1 class="section-title" style="margin-bottom:14px;">What are the property taxes on <span class="gold-text">any NJ home?</span></h1>
+      <p class="section-subtitle" style="margin-bottom:0;">
+        Type an address. See the assessed value, last year's tax bill, block and lot, and sale history straight from New Jersey's official assessment records. No signup, no email required to see your results.
+      </p>
+    </div>
+
+    <div class="pl-search-wrap">
+      <div class="pl-search-card">
+        <label class="pl-search-label" for="pl-addr">New Jersey property address</label>
+        <div class="pl-search-row">
+          <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
+                 placeholder="123 Main Street, Williamstown, NJ 08094"
+                 onkeydown="if(event.key==='Enter')plLookup()">
+          <button class="pl-search-btn" id="pl-btn" onclick="plLookup()">
+            <i class="fas fa-magnifying-glass"></i>&nbsp; Look it up
+          </button>
+        </div>
+        <div class="pl-hint">
+          Works for every one of New Jersey's 21 counties. Include the town and zip for the most accurate match.
+        </div>
+      </div>
+    </div>
+
+    <div id="pl-out" class="pl-result">
+      <div class="pl-state">
+        <i class="fas fa-house-chimney"></i>
+        <div class="pl-state-title">Enter an address to begin</div>
+        <div class="pl-state-sub">You will get the assessment, the tax bill, the block and lot, and what the property last sold for.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPLAINER
+     ============================================================ -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:680px;margin:0 auto 34px;">
+      <h2 class="section-title">Reading your assessment</h2>
+      <p class="section-subtitle">Three numbers decide your tax bill. Most people only ever see the last one.</p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <h3><i class="fas fa-building-columns" style="color:var(--navy);"></i> Assessed value</h3>
+        <p>What your municipality says your property is worth for tax purposes. It is not necessarily what the home would sell for. In towns that have not revalued in years, it can be far off.</p>
+      </div>
+      <div class="info-card">
+        <h3><i class="fas fa-percent" style="color:var(--gold);"></i> The tax rate</h3>
+        <p>Set every year by your municipality, county, and school district combined. Your assessment stays flat while this moves, which is why your bill can climb without anything changing about your house.</p>
+      </div>
+      <div class="info-card">
+        <h3><i class="fas fa-scale-balanced" style="color:var(--green);"></i> The equalization ratio</h3>
+        <p>The state's measure of how far your town's assessments have drifted from real market values. Divide your assessment by the ratio and you get the market value your town is implying you have.</p>
+      </div>
+    </div>
+
+    <div class="info-box" style="margin-top:30px;">
+      <h4><i class="fas fa-lightbulb"></i> The number that actually matters for an appeal</h4>
+      <p>Take your assessed value and divide it by your town's equalization ratio. That is the market value your assessment implies. If your home would realistically sell for meaningfully less than that figure, you have a case worth building. New Jersey's Chapter 123 rule gives municipalities a 15 percent cushion, so the gap has to be real, not marginal. Appeals are generally due April 1, or May 1 in a town that recently revalued.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+     ============================================================ -->
+<section class="section">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:640px;margin:0 auto 30px;">
+      <h2 class="section-title">Common questions</h2>
+    </div>
+    <div style="max-width:800px;margin:0 auto;">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation's MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. It is public data, refreshed roughly once a year in late spring or early summer.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Owner names are stripped from the public version of this dataset under Daniel's Law, which restricts disclosure of certain personal information in New Jersey. Property characteristics, assessments, and tax figures are still public.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Is the tax figure my current bill? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>No. It is the prior year billed amount from the most recent published file. Rates are set annually, so your current bill will be different. Treat this as a solid ballpark. For the exact current figure, check your municipal tax collector.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">My address did not come up. Why? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Usually one of four things. Newly built homes may not be in the parcel file yet. Condominium units sometimes sit under a parent parcel. Properties billed as multiple lots together appear only once. Or the address needs the town and zip added. Try the full address first, then try without the unit number.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Am I paying too much? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Compare the effective rate shown in your results against neighbors on the same street. If yours is noticeably higher for a similar home, either your assessment is out of line or you are missing a deduction you qualify for. Both are fixable. That is the conversation worth having.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Do I qualify for ANCHOR or Stay NJ? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never claim it. <a href="anchor-estimator.html">Run the free estimator</a> and find out in about 90 seconds.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer id="main-footer"></footer>
+
+<script src="scripts.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  // ── Public NJ data endpoints. Free, no key. ──────────────
+  var NJ_GEOCODE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+  var CENSUS     = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
+  var NJ_PARCEL  = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+
+  var FIELDS = ['PAMS_PIN','COUNTY','MUN_NAME','PROP_LOC','PCLBLOCK','PCLLOT','PCLQCODE',
+    'PROP_CLASS','BLDG_DESC','LAND_DESC','CALC_ACRE','YR_CONSTR','DWELL',
+    'LAND_VAL','IMPRVT_VAL','NET_VALUE','LAST_YR_TX','SALE_PRICE','DEED_DATE','ZIP5'].join(',');
+
+  var CLASSES = {
+    '1':'Vacant land','2':'Residential (1 to 4 units)','3A':'Farm','3B':'Qualified farm',
+    '4A':'Commercial','4B':'Industrial','4C':'Apartment building (5+ units)',
+    '15A':'Public property','15B':'Exempt','15C':'Cemetery','15D':'Exempt','15F':'Exempt'
+  };
+
+  var EJS_PUBLIC  = 'u262kw5AoJcBI342V';   // same key anchor-estimator.html uses
+  var EJS_SERVICE = 'service_gptqbyx';
+  var EJS_TMPL    = 'template_contact';
+
+  var current = null;   // last successful lookup, used by the lead form
+
+  function el(id) { return document.getElementById(id); }
+  function money(n) { return '$' + Math.round(n).toLocaleString(); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    });
+  }
+
+  function setOut(html) { el('pl-out').innerHTML = html; }
+
+  function stateBox(icon, title, sub) {
+    return '<div class="pl-state"><i class="fas ' + icon + '"></i>' +
+           '<div class="pl-state-title">' + esc(title) + '</div>' +
+           '<div class="pl-state-sub">' + sub + '</div></div>';
+  }
+
+  // ── deed date is a 6 char MMDDYY string ─────────────────
+  function deedYear(d) {
+    if (!d) return null;
+    var s = String(d).replace(/\D/g, '');
+    if (s.length !== 6) return null;
+    var yy = parseInt(s.slice(4, 6), 10);
+    var yr = yy > 40 ? 1900 + yy : 2000 + yy;
+    return (yr > 1900 && yr <= new Date().getFullYear()) ? yr : null;
+  }
+
+  function geocode(address) {
+    var p = new URLSearchParams({ SingleLine: address, outSR: '4326', maxLocations: '1', f: 'json' });
+    return fetch(NJ_GEOCODE + '?' + p)
+      .then(function (r) { if (!r.ok) throw new Error('geo'); return r.json(); })
+      .then(function (d) {
+        var c = d.candidates && d.candidates[0];
+        if (!c) throw new Error('nocand');
+        return { lat: c.location.y, lon: c.location.x, matched: c.address };
+      })
+      .catch(function () { return geocodeCensus(address); });
+  }
+
+  function geocodeCensus(address) {
+    var p = new URLSearchParams({ address: address, benchmark: 'Public_AR_Current', format: 'json' });
+    return fetch(CENSUS + '?' + p)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var m = d.result && d.result.addressMatches && d.result.addressMatches[0];
+        if (!m) return null;
+        return { lat: m.coordinates.y, lon: m.coordinates.x, matched: m.matchedAddress };
+      })
+      .catch(function () { return null; });
+  }
+
+  function parcelAt(lat, lon) {
+    var p = new URLSearchParams({
+      geometry: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
+      geometryType: 'esriGeometryPoint', inSR: '4326',
+      spatialRel: 'esriSpatialRelIntersects',
+      outFields: FIELDS, returnGeometry: 'false', resultRecordCount: '1', f: 'json'
+    });
+    return fetch(NJ_PARCEL + '?' + p)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error) throw new Error(d.error.message || 'parcel');
+        return (d.features && d.features[0]) ? d.features[0].attributes : null;
+      });
+  }
+
+  window.plLookup = function () {
+    var addr = (el('pl-addr').value || '').trim();
+    if (!addr) { el('pl-addr').focus(); return; }
+
+    var btn = el('pl-btn');
+    btn.disabled = true;
+    setOut('<div class="pl-state"><div class="pl-spin"></div><div class="pl-state-title">Searching state records</div><div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>');
+
+    if (typeof gtag === 'function') gtag('event', 'property_lookup', { address_entered: 'yes' });
+
+    geocode(addr)
+      .then(function (g) {
+        if (!g) throw new Error('nogeo');
+        return parcelAt(g.lat, g.lon).then(function (p) { return { g: g, p: p }; });
+      })
+      .then(function (res) {
+        if (!res.p) throw new Error('noparcel');
+        render(res.p, addr);
+      })
+      .catch(function (e) {
+        var msg = (e && e.message) === 'nogeo'
+          ? 'We could not place that address. Try adding the town and zip code, or drop the unit number.'
+          : 'We found the location but no parcel record matched. That usually means a condo unit, a brand new build, or a property billed together with other lots.';
+        setOut(stateBox('fa-circle-question', 'No match found', msg) +
+          '<div class="pl-src" style="margin-top:18px;">Not every property lands cleanly. If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="contact.html">Send me the address</a> and I will look it up by hand.</div>');
+      })
+      .then(function () { btn.disabled = false; });
+  };
+
+  function render(p, typed) {
+    var assessed = +p.NET_VALUE || 0;
+    var tax = +p.LAST_YR_TX || 0;
+    var rate = assessed > 0 ? (tax / assessed) * 100 : null;
+    var dy = deedYear(p.DEED_DATE);
+    var sale = +p.SALE_PRICE || 0;
+    var cls = (p.PROP_CLASS || '').trim().toUpperCase();
+
+    current = {
+      address: p.PROP_LOC || typed,
+      town: p.MUN_NAME || '',
+      county: p.COUNTY || '',
+      assessed: assessed,
+      tax: tax,
+      rate: rate,
+      block: p.PCLBLOCK || '',
+      lot: p.PCLLOT || ''
+    };
+
+    function row(k, v) {
+      return v ? '<div class="pl-row"><span class="pl-row-k">' + k + '</span><span class="pl-row-v">' + esc(v) + '</span></div>' : '';
+    }
+
+    var flag = '';
+    if (cls === '4C') {
+      flag = '<div class="pl-flag warn"><strong>Heads up.</strong> This parcel is an apartment building with five or more units, so the figures below cover the whole building rather than a single unit. If you rent here, you may still qualify for the ANCHOR renter benefit of up to $700.</div>';
+    } else if (cls === '1') {
+      flag = '<div class="pl-flag warn"><strong>This is vacant land</strong>, not a residence. The assessment reflects the lot only.</div>';
+    } else if (rate && rate > 3.2) {
+      flag = '<div class="pl-flag warn"><strong>That effective rate is on the high side.</strong> Anything over roughly 3 percent is worth a second look. Either the assessment is out of line with what the home would actually sell for, or a deduction is being missed.</div>';
+    } else if (dy && (new Date().getFullYear() - dy) >= 15) {
+      flag = '<div class="pl-flag info"><strong>Owned for ' + (new Date().getFullYear() - dy) + ' years.</strong> If the assessment has not been revisited in that time, it is worth checking whether it still reflects reality.</div>';
+    }
+
+    setOut(
+      '<div class="pl-card">' +
+        '<div class="pl-card-head">' +
+          '<div class="pl-card-addr">' + esc(p.PROP_LOC || typed) + '</div>' +
+          '<div class="pl-card-town">' + esc(p.MUN_NAME || '') + (p.COUNTY ? ', ' + esc(p.COUNTY) + ' County' : '') + '</div>' +
+        '</div>' +
+        '<div class="pl-figs">' +
+          '<div class="pl-fig"><div class="pl-fig-num">' + (assessed ? money(assessed) : '-') + '</div><div class="pl-fig-lbl">Assessed value</div></div>' +
+          '<div class="pl-fig"><div class="pl-fig-num gold">' + (tax ? money(tax) : '-') + '</div><div class="pl-fig-lbl">Prior year tax</div></div>' +
+          '<div class="pl-fig"><div class="pl-fig-num">' + (rate ? rate.toFixed(2) + '%' : '-') + '</div><div class="pl-fig-lbl">Effective rate</div></div>' +
+          '<div class="pl-fig"><div class="pl-fig-num">' + (p.YR_CONSTR || '-') + '</div><div class="pl-fig-lbl">Year built</div></div>' +
+        '</div>' +
+        flag +
+        '<div class="pl-rows">' +
+          row('Block / Lot' + (p.PCLQCODE ? ' / Qualifier' : ''), [p.PCLBLOCK, p.PCLLOT, p.PCLQCODE].filter(Boolean).join(' / ')) +
+          row('Property class', cls + (CLASSES[cls] ? '  ·  ' + CLASSES[cls] : '')) +
+          row('Land value', p.LAND_VAL ? money(+p.LAND_VAL) : '') +
+          row('Improvement value', p.IMPRVT_VAL ? money(+p.IMPRVT_VAL) : '') +
+          row('Building', p.BLDG_DESC) +
+          row('Lot size', p.CALC_ACRE ? (+p.CALC_ACRE).toFixed(2) + ' acres' : '') +
+          row('Dwelling units', p.DWELL > 0 ? p.DWELL : '') +
+          row('Last recorded sale', sale > 1000 ? money(sale) + (dy ? ' in ' + dy : '') : '') +
+          row('State parcel ID', p.PAMS_PIN) +
+        '</div>' +
+      '</div>' +
+
+      '<div class="pl-cta" id="pl-cta">' +
+        '<h3>Is this assessment fair?</h3>' +
+        '<p>I am a licensed NJ agent and a 15 year tax professional. Send me this address and I will pull recent comparable sales, work out what your town is implying your home is worth, and tell you straight whether an appeal is worth your time. No charge, no pitch.</p>' +
+        '<div class="pl-form">' +
+          '<input id="pl-name" type="text" placeholder="Your name" autocomplete="name">' +
+          '<input id="pl-email" type="email" placeholder="Email" autocomplete="email">' +
+          '<input id="pl-phone" class="pl-wide" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
+          '<button onclick="plSendLead()">Check my assessment for free</button>' +
+        '</div>' +
+        '<div class="pl-cta-fine">Your address and the figures above go with the request so I have what I need. I do not sell or share contact information.</div>' +
+      '</div>' +
+
+      '<div class="pl-src">' +
+        '<strong>About this data.</strong> Sourced from the New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use. Owner names are redacted under Daniel\'s Law. The tax figure is the prior year billed amount, not a current year estimate, because rates are reset annually. Parcel boundaries are for reference and are not survey or legal descriptions. For an exact current bill, contact your municipal tax collector.' +
+      '</div>'
+    );
+
+    if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
+    el('pl-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  window.plSendLead = function () {
+    var name  = (el('pl-name').value || '').trim();
+    var email = (el('pl-email').value || '').trim();
+    var phone = (el('pl-phone').value || '').trim();
+    if (!name || !email) { alert('Please add your name and email so I know where to send it.'); return; }
+    if (!current) return;
+
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init({ publicKey: EJS_PUBLIC });
+      emailjs.send(EJS_SERVICE, EJS_TMPL, {
+        name: name,
+        email: email,
+        phone: phone || 'Not provided',
+        topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, Property Lookup tool',
+        tenure: 'Homeowner',
+        lead_type: 'Homeowner',
+        town: current.town || 'Not provided',
+        address: current.address || 'Not provided',
+        message: [
+          'Assessment review request from the Property Lookup tool',
+          'Tenure: Homeowner (looked up their own property)',
+          'Property: ' + current.address,
+          'Town: ' + current.town + ', ' + current.county + ' County',
+          'Block / Lot: ' + current.block + ' / ' + current.lot,
+          'Assessed value: ' + (current.assessed ? money(current.assessed) : 'n/a'),
+          'Prior year tax: ' + (current.tax ? money(current.tax) : 'n/a'),
+          'Effective rate: ' + (current.rate ? current.rate.toFixed(2) + '%' : 'n/a'),
+          'Source: property-lookup.html'
+        ].join('\n')
+      }).catch(function (e) { console.warn('EmailJS:', e); });
+    }
+
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup' });
+
+    el('pl-cta').innerHTML =
+      '<div class="pl-sent"><i class="fas fa-circle-check"></i> Got it. I will review ' +
+      esc(current.address) + ' and get back to you within one business day.</div>';
+  };
+
+  window.plFaq = function (q) {
+    var item = q.parentElement;
+    item.classList.toggle('active');
+  };
+
+  // deep link support:  property-lookup.html?address=123+Main+St+Williamstown+NJ
+  var qs = new URLSearchParams(window.location.search);
+  if (qs.get('address')) {
+    el('pl-addr').value = qs.get('address');
+    setTimeout(window.plLookup, 400);
+  }
+
+})();
+</script>
+
+</body>
+</html>
