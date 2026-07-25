@@ -1429,6 +1429,24 @@
     return 'Unknown';
   }
 
+
+  // ── INCOME NORMALIZER ─────────────────────────────────────
+  // ANCHOR uses three brackets. Stay NJ uses a raw dollar input.
+  // Both leave this page as a readable label for {{finance}}.
+  function estIncomeLabel() {
+    if (!answers || !answers.income) return 'Not provided';
+    if (answers.income === 'low')  return 'Under $150,000';
+    if (answers.income === 'mid')  return '$150,001 to $250,000';
+    if (answers.income === 'high') return 'Over $250,000';
+    return 'Not provided';
+  }
+  function snIncomeLabel() {
+    var raw = ((document.getElementById('sn-income') || {}).value || '').toString().replace(/[^0-9.]/g, '');
+    var n = parseFloat(raw);
+    if (!n || n <= 0) return 'Not provided';
+    return '$' + Math.round(n).toLocaleString() + ' (entered)';
+  }
+
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
   var STRIPE_LINK = 'https://buy.stripe.com/9B69ASdhjg442OLdoWfw400';
@@ -1537,9 +1555,11 @@
         topic: '[🟡 WARM][' + estTenureLabel() + '] Home value curiosity click, ANCHOR Estimator',
         tenure: estTenureLabel(),
         lead_type: estTenureLabel(),
+        finance: estIncomeLabel(),
+        income_bracket: estIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Home Value Curiosity Click', 'Tenure: ' + estTenureLabel(), 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen'].join('\n')
+        message: ['Home Value Curiosity Click', 'Tenure: ' + estTenureLabel(), 'Income: ' + estIncomeLabel(), 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen'].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var nudge = document.getElementById('est-value-nudge');
@@ -1605,9 +1625,11 @@
         topic: topic,
         tenure: estTenureLabel(),
         lead_type: estTenureLabel(),
+        finance: estIncomeLabel(),
+        income_bracket: estIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Lead Score: ' + score, 'ANCHOR Estimator Lead','Tenure: ' + estTenureLabel(),'Primary: ' + answers.primary,'Income Bracket: ' + incomeLabel,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'Looking to sell: ' + (sellInt ? 'YES, ' + sellWhen : 'No'),'Looking to buy: ' + (buyInt ? 'YES, ' + buyWhen : 'No')].join('\n')
+        message: ['Lead Score: ' + score, 'ANCHOR Estimator Lead','Tenure: ' + estTenureLabel(),'Income: ' + estIncomeLabel(),'Primary: ' + answers.primary,'Income Bracket: ' + incomeLabel,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'Looking to sell: ' + (sellInt ? 'YES, ' + sellWhen : 'No'),'Looking to buy: ' + (buyInt ? 'YES, ' + buyWhen : 'No')].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     showStep(7);
@@ -1881,9 +1903,11 @@
         topic: '[Homeowner] Seller lead, ready to list (Stay NJ estimator)',
         tenure: 'Homeowner',
         lead_type: 'Homeowner',
+        finance: snIncomeLabel(),
+        income_bracket: snIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Seller lead: homeowner says they are ready to sell','Source: Stay NJ estimator','Address of home to sell: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
+        message: ['Seller lead: homeowner says they are ready to sell','Income: ' + snIncomeLabel(),'Source: Stay NJ estimator','Address of home to sell: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var form = document.getElementById('sn-lead-form');
@@ -1913,9 +1937,11 @@
         topic: '[🟡 WARM][Homeowner] Downsizing Playbook request (Stay NJ estimator)',
         tenure: 'Homeowner',
         lead_type: 'Homeowner',
+        finance: snIncomeLabel(),
+        income_bracket: snIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Downsizing Playbook Request', 'Senior considering downsizing / cost-of-living move', 'Name: ' + name, 'Email: ' + email, 'Phone: ' + (phone || 'Not provided'), 'Current address: ' + (address || 'Not provided'), 'Annual property tax: ' + (taxVal ? '$' + taxVal : 'Not provided'), 'Income bracket input: ' + (inc || 'Not provided'), 'Source: Stay NJ estimator downsizing section'].join('\n')
+        message: ['Downsizing Playbook Request','Income: ' + snIncomeLabel(), 'Senior considering downsizing / cost-of-living move', 'Name: ' + name, 'Email: ' + email, 'Phone: ' + (phone || 'Not provided'), 'Current address: ' + (address || 'Not provided'), 'Annual property tax: ' + (taxVal ? '$' + taxVal : 'Not provided'), 'Income bracket input: ' + (inc || 'Not provided'), 'Source: Stay NJ estimator downsizing section'].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var btn = document.querySelector('.est-downsize-cta');
