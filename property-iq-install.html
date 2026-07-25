@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<!--
+================================================================================
+  PROPERTY IQ  ·  install kit for LeadIQ v4.0 (btc.html)
+  McKenty Team · Opus Elite Real Estate
+
+  This file is NOT a page. It is five paste blocks.
+  Work top to bottom. Each block says exactly what to search for
+  in btc.html and where to drop it. Nothing gets deleted.
+
+  Back up btc.html first.
+================================================================================
+-->
+
+
+<!-- ============================================================
+     BLOCK 1 of 5  ·  NAV TAB
+     FIND (around line 770):
+       <button class="nav-tab" id="ntab-openhouse" ... >
+     PASTE the line below immediately AFTER that whole button line.
+     ============================================================ -->
+
+    <button class="nav-tab" id="ntab-property" onclick="showSection('property')"><span class="tab-icon">🏛</span>Property</button>
+
+
+<!-- ============================================================
+     BLOCK 2 of 5  ·  DASHBOARD CARDS
+     FIND (around line 817), the LAST tool-card in the dashboard:
+       ...setBTTab('bulktag')... Bulk Tag Manager ...
+     That line is followed by:  </div>
+     PASTE the block below immediately AFTER that closing </div>,
+     and BEFORE  <div class="page-footer">
+     ============================================================ -->
+
+    <div class="section-label">Property Intelligence</div>
+    <div class="tool-grid">
+      <div class="tool-card" onclick="showSection('property');setPropTab('match')"><div class="tool-card-icon">🏛</div><div class="tool-card-title">Tax Matcher</div><div class="tool-card-desc">Match contacts to their NJ parcel and pull the real assessment and tax bill.</div><span class="tool-badge badge-new">New</span></div>
+      <div class="tool-card" onclick="showSection('property');setPropTab('single')"><div class="tool-card-icon">🔍</div><div class="tool-card-title">Single Lookup</div><div class="tool-card-desc">Type any NJ address, get the full tax record on the spot.</div><span class="tool-badge badge-new">New</span></div>
+      <div class="tool-card" onclick="showSection('property');setPropTab('appeal')"><div class="tool-card-icon">⚖️</div><div class="tool-card-title">Appeal Screener</div><div class="tool-card-desc">Chapter 123 ratio test. Find who is over-assessed and worth a call.</div><span class="tool-badge badge-new">New</span></div>
+      <div class="tool-card" onclick="showSection('property');setPropTab('signals')"><div class="tool-card-icon">🎯</div><div class="tool-card-title">Listing Signals</div><div class="tool-card-desc">Long tenure, absentee owners, high tax burden. The movers hiding in your database.</div><span class="tool-badge badge-new">New</span></div>
+    </div>
+
+
+<!-- ============================================================
+     BLOCK 3 of 5  ·  THE SECTION
+     FIND (around line 1369):
+       <div class="section" id="section-history">
+     PASTE everything below immediately BEFORE that line.
+     ============================================================ -->
+
+<!-- PROPERTY IQ -->
+<div class="section" id="section-property">
+  <div class="section-inner">
+    <div class="page-eyebrow">Property</div>
+    <h1 class="page-title">Property <span class="grad">IQ</span></h1>
+    <p class="page-sub">Match every contact to their actual NJ parcel, pull the tax record, split owners from renters, and export BoldTrail ready.</p>
+
+    <div id="piq-toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--border2);padding:10px 18px;border-radius:var(--radius);font-size:13px;z-index:9999;"></div>
+
+    <div class="liq-tabs">
+      <button class="liq-tab active" id="ptab-match" onclick="setPropTab('match')">🏛️ Tax Matcher</button>
+      <button class="liq-tab" id="ptab-single" onclick="setPropTab('single')">🔍 Single Lookup</button>
+      <button class="liq-tab" id="ptab-appeal" onclick="setPropTab('appeal')">⚖️ Appeal Screener</button>
+      <button class="liq-tab" id="ptab-signals" onclick="setPropTab('signals')">🎯 Listing Signals</button>
+      <button class="liq-tab" id="ptab-setup" onclick="setPropTab('setup')">⚙️ Setup</button>
+    </div>
+
+    <!-- TAX MATCHER -->
+    <div class="analyze-panel active" id="ppanel-match">
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Run the matcher</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6;">
+          Uses the contact list you uploaded in <strong>Analyze</strong>. Each address gets geocoded, matched to its parcel polygon, and joined to the Division of Taxation MOD-IV record. Results are cached locally so re-running is instant and free.
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label class="field-label">Pause between lookups</label>
+            <select class="field-input" id="piq-delay">
+              <option value="150">Fast (150ms)</option>
+              <option value="250" selected>Normal (250ms)</option>
+              <option value="500">Gentle (500ms)</option>
+              <option value="1000">Very gentle (1s)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Show</label>
+            <select class="field-input" id="piq-filter" onchange="piqRender()">
+              <option value="all">Everything</option>
+              <option value="owners">Homeowners only</option>
+              <option value="renters">Renters only</option>
+              <option value="check">Needs review</option>
+              <option value="included">Checked for export</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">
+          <button class="liq-btn liq-btn-primary" id="piq-run-btn" onclick="piqRun()">Match tax data →</button>
+          <button class="liq-btn liq-btn-danger" id="piq-stop-btn" onclick="piqStop()" style="display:none;">Stop</button>
+          <button class="liq-btn liq-btn-ghost liq-btn-sm" onclick="piqCacheClear()">Clear cache</button>
+        </div>
+        <div id="piq-progress-wrap" style="display:none;margin-top:14px;">
+          <div style="height:6px;background:var(--surface2);border-radius:99px;overflow:hidden;">
+            <div id="piq-bar" style="height:100%;width:0%;background:var(--grad-green);transition:width .2s;"></div>
+          </div>
+          <div id="piq-progress-text" style="font-size:11px;color:var(--text2);margin-top:6px;">Starting...</div>
+        </div>
+      </div>
+
+      <div id="piq-results" style="display:none;">
+        <div class="stat-row" style="margin-bottom:14px;">
+          <div class="stat"><div class="stat-num" style="color:var(--blue)" id="piq-stat-matched">0</div><div class="stat-lbl">Parcels matched</div></div>
+          <div class="stat"><div class="stat-num" style="color:var(--green)" id="piq-stat-owners">0</div><div class="stat-lbl">Homeowners</div></div>
+          <div class="stat"><div class="stat-num" style="color:var(--yellow)" id="piq-stat-renters">0</div><div class="stat-lbl">Renters</div></div>
+          <div class="stat"><div class="stat-num" style="color:var(--purple)" id="piq-stat-avgtax">-</div><div class="stat-lbl">Avg tax bill</div></div>
+        </div>
+
+        <div class="glass-card">
+          <div class="tbl-wrap" style="max-height:520px;overflow:auto;">
+            <table class="tbl">
+              <thead><tr>
+                <th style="width:30px;">✓</th><th>Contact</th><th>Type</th><th>Town</th>
+                <th>Assessed</th><th>Prior tax</th><th>Eff rate</th><th>Tags</th><th>Override</th>
+              </tr></thead>
+              <tbody id="piq-tbody"></tbody>
+            </table>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+            <button class="liq-btn liq-btn-primary" onclick="piqExportBoldTrail('owners')">Export homeowners →</button>
+            <button class="liq-btn liq-btn-warning" onclick="piqExportBoldTrail('renters')">Export renters (tagged)</button>
+            <button class="liq-btn liq-btn-secondary" onclick="piqExportBoldTrail('included')">Export checked</button>
+            <button class="liq-btn liq-btn-ghost" onclick="piqExportFull()">Full data CSV</button>
+          </div>
+          <div style="margin-top:10px;font-size:11px;color:var(--text3);line-height:1.6;">
+            BoldTrail exports use the standard 14 fields so field matching stays clean. Tax data rides along inside <strong>Agent Notes</strong> and <strong>Hashtags</strong>. Renters get exported too, just tagged <strong>Renter</strong> so you can suppress them from seller campaigns.
+          </div>
+        </div>
+      </div>
+
+      <div class="empty" id="piq-empty">
+        <div class="empty-icon">🏛️</div>
+        <div class="empty-title">Upload a contact list in Analyze</div>
+        <div class="empty-sub">Then come back and hit Match tax data.</div>
+      </div>
+    </div>
+
+    <!-- SINGLE LOOKUP -->
+    <div class="analyze-panel" id="ppanel-single">
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Look up one property</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">Type any NJ address. This is the same engine that will power the public lookup page on njpropertytaxrelief.com.</div>
+        <div style="display:flex;gap:8px;">
+          <input class="field-input" id="piq-single-input" type="text" placeholder="123 Main St, Williamstown, NJ 08094" onkeydown="if(event.key==='Enter')piqLookup()">
+          <button class="liq-btn liq-btn-primary" onclick="piqLookup()">Look up</button>
+        </div>
+      </div>
+      <div id="piq-single-out">
+        <div class="empty"><div class="empty-icon">🔍</div><div class="empty-title">Enter an address above</div><div class="empty-sub">Assessment, tax bill, block and lot, sale history.</div></div>
+      </div>
+    </div>
+
+    <!-- APPEAL SCREENER -->
+    <div class="analyze-panel" id="ppanel-appeal">
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Tax appeal screener</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6;">
+          Enter the municipal equalization ratio for the town you are screening, then this backs into what the assessor thinks each home is worth. Anything where your comps come in lower is an appeal conversation.
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label class="field-label">Equalization ratio (%)</label>
+            <input class="field-input" id="piq-ratio" type="number" step="0.01" placeholder="87.42">
+          </div>
+          <div class="field" style="display:flex;align-items:flex-end;">
+            <button class="liq-btn liq-btn-primary liq-btn-full" onclick="piqAppeal()">Screen homeowners →</button>
+          </div>
+        </div>
+      </div>
+      <div id="piq-appeal-out">
+        <div class="empty"><div class="empty-icon">⚖️</div><div class="empty-title">Run the Tax Matcher first</div><div class="empty-sub">Then enter a ratio to screen for appeal candidates.</div></div>
+      </div>
+    </div>
+
+    <!-- LISTING SIGNALS -->
+    <div class="analyze-panel" id="ppanel-signals">
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Listing signals</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">Sorts your matched homeowners into the buckets that actually predict a move.</div>
+        <button class="liq-btn liq-btn-primary" onclick="piqSignals()">Build signal lists →</button>
+      </div>
+      <div id="piq-signals-out">
+        <div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">Run the Tax Matcher first</div></div>
+      </div>
+    </div>
+
+    <!-- SETUP -->
+    <div class="analyze-panel" id="ppanel-setup">
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Connection test</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px;">Both services are free public state endpoints. Run this once to confirm your browser can reach them.</div>
+        <button class="liq-btn liq-btn-secondary" onclick="piqTest()">Test connections</button>
+        <div id="piq-test-out" style="margin-top:12px;"></div>
+      </div>
+      <div class="glass-card" style="margin-bottom:14px;">
+        <div class="card-title">Geocoder</div>
+        <div class="field">
+          <label class="field-label">Which service converts addresses to coordinates</label>
+          <select class="field-input" onchange="piqSetGeocoder(this.value)">
+            <option value="nj">NJ Office of GIS (best NJ accuracy)</option>
+            <option value="census">US Census (fallback if NJ blocks CORS)</option>
+          </select>
+        </div>
+      </div>
+      <div class="glass-card">
+        <div class="card-title">What this data is and is not</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.7;">
+          <p style="margin:0 0 8px;"><strong>Source.</strong> NJ Office of GIS statewide parcels joined to the Division of Taxation MOD-IV assessment records. Refreshed once a year, usually late spring.</p>
+          <p style="margin:0 0 8px;"><strong>Owner names are blank.</strong> Redacted under Daniel's Law. That means the parcel cannot prove your contact is the owner. Owner and renter status here is inference from property class, unit count, and unit numbers, plus anything your contact file already told us. Always reviewable and overridable per row.</p>
+          <p style="margin:0 0 8px;"><strong>The tax figure is last year's billed amount</strong>, not a current-year estimate. Great for a ballpark, not for quoting exact numbers to a client.</p>
+          <p style="margin:0;"><strong>Not every address matches.</strong> Condos, newly subdivided lots, and multi-lot tax bills are the usual misses. Those land in Needs review.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ============================================================
+     BLOCK 4 of 5  ·  THE ENGINE
+     FIND the very end of the file. Scroll to the last  </script>
+     PASTE the script block below immediately BEFORE that </script>,
+     or drop it in as its own <script> tag before </body>.
+     ============================================================ -->
+
+<script>
+// ══════════════════════════════════════════════
+// PROPERTY IQ  ·  NJ parcel + MOD-IV tax matching
+// Data: NJ Office of GIS (geocoder) + NJOGIS Parcels/MOD-IV composite
+// No API key. Nothing stored externally. Cache is local only.
+// ══════════════════════════════════════════════
+
+const PIQ_GEOCODE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+const PIQ_CENSUS  = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
+const PIQ_PARCEL  = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+
+const PIQ_FIELDS = ['PAMS_PIN','COUNTY','MUN_NAME','PROP_LOC','PCLBLOCK','PCLLOT','PCLQCODE',
+  'PROP_CLASS','BLDG_DESC','LAND_DESC','CALC_ACRE','YR_CONSTR','DWELL','COMM_DWELL',
+  'LAND_VAL','IMPRVT_VAL','NET_VALUE','LAST_YR_TX','SALE_PRICE','DEED_DATE','DEED_BOOK','DEED_PAGE',
+  'ST_ADDRESS','CITY_STATE','ZIP5'].join(',');
+
+// NJ property class codes that matter to us
+const PIQ_CLASS = {
+  '1':'Vacant land','2':'Residential (1-4 units)','3A':'Farm (regular)','3B':'Farm (qualified)',
+  '4A':'Commercial','4B':'Industrial','4C':'Apartment (5+ units)','5A':'Railroad','5B':'Railroad',
+  '6A':'Telephone','15A':'Public property','15B':'Other exempt','15C':'Cemetery',
+  '15D':'Other exempt','15E':'Other exempt','15F':'Other exempt'
+};
+
+var piqRows = [];        // enriched results
+var piqRunning = false;
+var piqAbort = false;
+var piqGeocoder = 'nj';  // 'nj' | 'census'
+
+// ── cache so re-runs are free ──
+function piqCacheGet(k){ try { const v = localStorage.getItem('piq_'+k); return v ? JSON.parse(v) : null; } catch(e){ return null; } }
+function piqCacheSet(k,v){ try { localStorage.setItem('piq_'+k, JSON.stringify(v)); } catch(e){} }
+function piqCacheClear(){
+  let n=0;
+  Object.keys(localStorage).filter(k=>k.startsWith('piq_')).forEach(k=>{localStorage.removeItem(k);n++;});
+  piqToast(n+' cached lookups cleared');
+}
+
+function piqToast(msg){
+  const el = document.getElementById('piq-toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+  clearTimeout(window._piqT);
+  window._piqT = setTimeout(()=>{ el.style.display='none'; }, 3200);
+}
+
+// ── read a value from a contact row by fuzzy header match ──
+function piqGet(row, ...keys){
+  const lower = {};
+  Object.keys(row).forEach(h => lower[h.toLowerCase().trim()] = row[h]);
+  for(const k of keys){
+    for(const h of Object.keys(lower)){
+      if(h.includes(k) && lower[h] && String(lower[h]).trim()) return String(lower[h]).trim();
+    }
+  }
+  return '';
+}
+
+// ── build a single-line address out of whatever columns exist ──
+function piqAddressOf(row){
+  const full = piqGet(row,'full address','fulladdress');
+  if(full) return full.replace(/\s+/g,' ').trim();
+  const street = piqGet(row,'primary address','street address','address','street');
+  if(!street) return '';
+  const city  = piqGet(row,'primary city','city','town');
+  const state = piqGet(row,'primary state','state') || 'NJ';
+  const zip   = piqGet(row,'primary zip','zip','postal');
+  return [street, city, state, zip].filter(Boolean).join(', ').replace(/\s+/g,' ').trim();
+}
+
+function piqNameOf(row){
+  const f = piqGet(row,'first name','first','fname');
+  const l = piqGet(row,'last name','last','lname');
+  const n = (f+' '+l).trim();
+  return n || piqGet(row,'full name','name') || '(no name)';
+}
+
+// ── unit / apartment detection in the raw address string ──
+function piqHasUnit(addr){
+  return /(\bapt\b|\bapartment\b|\bunit\b|\bste\b|\bsuite\b|#\s*\d|\bbldg\b|\bfl\b\s*\d|\brm\b)/i.test(addr||'');
+}
+
+// ══════════════════════════════════════════════
+// STEP 1 · GEOCODE
+// ══════════════════════════════════════════════
+async function piqGeocode(address){
+  if(piqGeocoder === 'census') return piqGeocodeCensus(address);
+  const p = new URLSearchParams({ SingleLine:address, outSR:'4326', maxLocations:'1', f:'json' });
+  const r = await fetch(PIQ_GEOCODE+'?'+p);
+  if(!r.ok) throw new Error('geocoder http '+r.status);
+  const d = await r.json();
+  const c = d.candidates && d.candidates[0];
+  if(!c) return null;
+  return { matched:c.address, score:c.score, lat:c.location.y, lon:c.location.x, via:'NJOGIS' };
+}
+
+async function piqGeocodeCensus(address){
+  const p = new URLSearchParams({ address, benchmark:'Public_AR_Current', format:'json' });
+  const r = await fetch(PIQ_CENSUS+'?'+p);
+  if(!r.ok) throw new Error('census http '+r.status);
+  const d = await r.json();
+  const m = d.result && d.result.addressMatches && d.result.addressMatches[0];
+  if(!m) return null;
+  return { matched:m.matchedAddress, score:90, lat:m.coordinates.y, lon:m.coordinates.x, via:'Census' };
+}
+
+// ══════════════════════════════════════════════
+// STEP 2 · PARCEL AT POINT
+// ══════════════════════════════════════════════
+async function piqParcelAt(lat, lon){
+  const p = new URLSearchParams({
+    geometry: JSON.stringify({x:lon, y:lat, spatialReference:{wkid:4326}}),
+    geometryType:'esriGeometryPoint', inSR:'4326',
+    spatialRel:'esriSpatialRelIntersects',
+    outFields:PIQ_FIELDS, returnGeometry:'false', resultRecordCount:'1', f:'json'
+  });
+  const r = await fetch(PIQ_PARCEL+'?'+p);
+  if(!r.ok) throw new Error('parcel http '+r.status);
+  const d = await r.json();
+  if(d.error) throw new Error(d.error.message||'parcel service error');
+  const f = d.features && d.features[0];
+  return f ? f.attributes : null;
+}
+
+// ══════════════════════════════════════════════
+// OWNER vs RENTER CLASSIFICATION
+// This is inference, not proof. Owner names are redacted
+// under Daniel's Law so we cannot match lead name to deed.
+// ══════════════════════════════════════════════
+function piqClassify(row, addr, p){
+  // 1. explicit column from the contact file always wins
+  const stated = piqGet(row,'owner','renter','rent','homeowner','residence','tenure','housing','anchor');
+  if(stated){
+    const s = stated.toLowerCase();
+    if(/rent|tenant|lease/.test(s))  return {status:'Renter',    conf:'Stated', why:'Contact file says "'+stated+'"'};
+    if(/own|home ?owner|deed/.test(s)) return {status:'Homeowner', conf:'Stated', why:'Contact file says "'+stated+'"'};
+  }
+  if(!p) return {status:'Unknown', conf:'None', why:'No parcel matched'};
+
+  const cls  = (p.PROP_CLASS||'').trim().toUpperCase();
+  const dwell = +p.DWELL || 0;
+  const unit = piqHasUnit(addr);
+
+  if(cls === '4C')                 return {status:'Renter',    conf:'High',   why:'Parcel is a 5+ unit apartment building'};
+  if(cls === '4A' || cls === '4B') return {status:'Not a home',conf:'High',   why:'Parcel is '+(PIQ_CLASS[cls]||cls)};
+  if(cls === '1')                  return {status:'Not a home',conf:'High',   why:'Parcel is vacant land'};
+  if(cls.startsWith('15'))         return {status:'Not a home',conf:'Medium', why:'Parcel is exempt property'};
+  if(unit && dwell > 1)            return {status:'Renter',    conf:'Medium', why:'Unit number on a '+dwell+'-unit parcel'};
+  if(unit)                         return {status:'Check',     conf:'Low',    why:'Unit number present. Condo owner or tenant, cannot tell'};
+  if(dwell > 4)                    return {status:'Renter',    conf:'Medium', why:dwell+' dwelling units at this address'};
+  if(dwell > 1)                    return {status:'Check',     conf:'Low',    why:dwell+'-unit property. Could be owner-occupied'};
+  if(cls === '2')                  return {status:'Homeowner', conf:'Medium', why:'Single 1-4 family residential parcel, no unit number'};
+  if(cls === '3A' || cls === '3B') return {status:'Homeowner', conf:'Medium', why:'Farm property with residence'};
+  return {status:'Check', conf:'Low', why:'Property class '+(cls||'blank')};
+}
+
+// ══════════════════════════════════════════════
+// DERIVED SIGNALS
+// ══════════════════════════════════════════════
+function piqDeedYear(d){
+  if(!d) return null;
+  const s = String(d).replace(/\D/g,'');
+  if(s.length !== 6) return null;
+  let yy = +s.slice(4,6);              // assessor format is MMDDYY
+  const yr = yy > 40 ? 1900+yy : 2000+yy;
+  return (yr > 1900 && yr <= new Date().getFullYear()) ? yr : null;
+}
+
+function piqDerive(p, cls){
+  const out = {};
+  const assessed = +p.NET_VALUE || 0;
+  const tax = +p.LAST_YR_TX || 0;
+  out.effRate = assessed > 0 ? +((tax/assessed)*100).toFixed(3) : null;
+
+  const dy = piqDeedYear(p.DEED_DATE);
+  out.deedYear = dy;
+  out.tenure = dy ? (new Date().getFullYear() - dy) : null;
+
+  // absentee: owner mailing address differs from the property location
+  const mail = (p.ST_ADDRESS||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+  const loc  = (p.PROP_LOC||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+  out.absentee = !!(mail && loc && mail !== loc && cls.status !== 'Not a home');
+
+  // rough equity signal: assessed value vs what they paid
+  const paid = +p.SALE_PRICE || 0;
+  out.lastPaid = paid > 1000 ? paid : null;
+  out.gainVsPaid = (out.lastPaid && assessed) ? assessed - out.lastPaid : null;
+
+  const tags = [];
+  if(cls.status === 'Renter')     tags.push('Renter');
+  if(cls.status === 'Homeowner')  tags.push('Homeowner');
+  if(out.absentee)                tags.push('Absentee Owner');
+  if(out.tenure !== null && out.tenure >= 15) tags.push('Long Tenure 15yr+');
+  if(tax >= 12000)                tags.push('High Tax Burden');
+  if((p.PROP_CLASS||'') === '3B') tags.push('Farmland Assessed');
+  out.tags = tags;
+
+  out.note = [
+    assessed ? 'Assessed $'+assessed.toLocaleString() : null,
+    tax ? 'Prior-yr tax $'+Math.round(tax).toLocaleString() : null,
+    out.effRate ? 'Eff rate '+out.effRate+'%' : null,
+    (p.PCLBLOCK||p.PCLLOT) ? 'Blk '+(p.PCLBLOCK||'?')+' Lot '+(p.PCLLOT||'?') : null,
+    p.YR_CONSTR ? 'Built '+p.YR_CONSTR : null,
+    out.lastPaid ? 'Last sale $'+out.lastPaid.toLocaleString()+(dy?' ('+dy+')':'') : null,
+    p.CALC_ACRE ? (+p.CALC_ACRE).toFixed(2)+' ac' : null
+  ].filter(Boolean).join(' | ');
+
+  return out;
+}
+
+// ══════════════════════════════════════════════
+// SINGLE ENRICH
+// ══════════════════════════════════════════════
+async function piqEnrichOne(row){
+  const addr = piqAddressOf(row);
+  const base = { name:piqNameOf(row), email:piqGet(row,'email'), phone:piqGet(row,'cell','phone','mobile'), input:addr, raw:row, include:true };
+
+  if(!addr) return Object.assign(base, {status:'No address', cls:{status:'Unknown',conf:'None',why:'No address column found'}, tags:[], note:''});
+
+  const ck = piqCacheGet(addr.toLowerCase());
+  if(ck) return Object.assign(base, ck, {include: ck.cls && ck.cls.status !== 'Renter' && ck.cls.status !== 'Not a home'});
+
+  const geo = await piqGeocode(addr);
+  if(!geo){
+    const r = {status:'No match', geo:null, p:null, cls:{status:'Unknown',conf:'None',why:'Address did not geocode'}, tags:[], note:''};
+    piqCacheSet(addr.toLowerCase(), r);
+    return Object.assign(base, r, {include:false});
+  }
+
+  const p = await piqParcelAt(geo.lat, geo.lon);
+  const cls = piqClassify(row, addr, p);
+  const d = p ? piqDerive(p, cls) : {tags:[], note:''};
+
+  const r = {
+    status: p ? 'Matched' : 'Geocoded only',
+    geo, p, cls,
+    tags: d.tags||[], note: d.note||'',
+    effRate:d.effRate, tenure:d.tenure, deedYear:d.deedYear,
+    absentee:d.absentee, lastPaid:d.lastPaid
+  };
+  piqCacheSet(addr.toLowerCase(), r);
+  return Object.assign(base, r, {include: cls.status !== 'Renter' && cls.status !== 'Not a home'});
+}
+
+// ══════════════════════════════════════════════
+// BATCH RUN
+// ══════════════════════════════════════════════
+async function piqRun(){
+  if(piqRunning) return;
+  if(!sharedRows || !sharedRows.length){ piqToast('Upload a contact list in Analyze first'); return; }
+
+  piqRunning = true; piqAbort = false; piqRows = [];
+  document.getElementById('piq-empty').style.display = 'none';
+  document.getElementById('piq-progress-wrap').style.display = 'block';
+  document.getElementById('piq-run-btn').style.display = 'none';
+  document.getElementById('piq-stop-btn').style.display = 'inline-flex';
+
+  const delay = +document.getElementById('piq-delay').value || 250;
+  const total = sharedRows.length;
+
+  for(let i=0; i<total; i++){
+    if(piqAbort) break;
+    try { piqRows.push(await piqEnrichOne(sharedRows[i])); }
+    catch(e){
+      piqRows.push({ name:piqNameOf(sharedRows[i]), input:piqAddressOf(sharedRows[i]), raw:sharedRows[i],
+        status:'Error', cls:{status:'Unknown',conf:'None',why:String(e.message||e)}, tags:[], note:'', include:false });
+    }
+    const pct = Math.round(((i+1)/total)*100);
+    document.getElementById('piq-bar').style.width = pct+'%';
+    document.getElementById('piq-progress-text').textContent = (i+1)+' of '+total+' · '+pct+'%';
+    if(i % 5 === 0) piqRender();
+    await new Promise(r => setTimeout(r, delay));
+  }
+
+  piqRunning = false;
+  document.getElementById('piq-run-btn').style.display = 'inline-flex';
+  document.getElementById('piq-stop-btn').style.display = 'none';
+  document.getElementById('piq-progress-text').textContent = piqAbort ? 'Stopped at '+piqRows.length : 'Done · '+piqRows.length+' processed';
+  piqRender();
+}
+
+function piqStop(){ piqAbort = true; piqToast('Stopping after current lookup'); }
+
+// ══════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════
+function piqBadge(cls){
+  const map = {'Homeowner':'badge-green','Renter':'badge-yellow','Not a home':'badge-dim','Check':'badge-purple','Unknown':'badge-dim'};
+  return '<span class="tool-badge '+(map[cls.status]||'badge-dim')+'" title="'+(cls.why||'').replace(/"/g,'&quot;')+'">'+cls.status+'</span>';
+}
+
+function piqRender(){
+  const tb = document.getElementById('piq-tbody');
+  if(!tb) return;
+
+  const owners  = piqRows.filter(r => r.cls && r.cls.status === 'Homeowner').length;
+  const renters = piqRows.filter(r => r.cls && r.cls.status === 'Renter').length;
+  const matched = piqRows.filter(r => r.status === 'Matched').length;
+  const taxes   = piqRows.filter(r => r.p && r.p.LAST_YR_TX).map(r => +r.p.LAST_YR_TX);
+  const avgTax  = taxes.length ? Math.round(taxes.reduce((a,b)=>a+b,0)/taxes.length) : 0;
+
+  document.getElementById('piq-stat-matched').textContent = matched;
+  document.getElementById('piq-stat-owners').textContent  = owners;
+  document.getElementById('piq-stat-renters').textContent = renters;
+  document.getElementById('piq-stat-avgtax').textContent  = avgTax ? '$'+avgTax.toLocaleString() : '-';
+  document.getElementById('piq-results').style.display = piqRows.length ? 'block' : 'none';
+
+  const filter = document.getElementById('piq-filter').value;
+  const show = piqRows.filter(r => {
+    if(filter === 'owners')  return r.cls && r.cls.status === 'Homeowner';
+    if(filter === 'renters') return r.cls && r.cls.status === 'Renter';
+    if(filter === 'check')   return r.cls && (r.cls.status === 'Check' || r.cls.status === 'Unknown');
+    if(filter === 'included')return r.include;
+    return true;
+  });
+
+  tb.innerHTML = show.map(r => {
+    const i = piqRows.indexOf(r);
+    const p = r.p || {};
+    return '<tr>'+
+      '<td><input type="checkbox" '+(r.include?'checked':'')+' onchange="piqToggle('+i+',this.checked)"></td>'+
+      '<td><strong>'+piqEsc(r.name)+'</strong><div style="font-size:11px;color:var(--text3)">'+piqEsc(r.input||'no address')+'</div></td>'+
+      '<td>'+piqBadge(r.cls||{status:'Unknown'})+'<div style="font-size:10px;color:var(--text3);margin-top:2px">'+piqEsc((r.cls&&r.cls.conf)||'')+'</div></td>'+
+      '<td>'+piqEsc(p.MUN_NAME||'-')+'<div style="font-size:11px;color:var(--text3)">'+piqEsc(p.COUNTY||'')+'</div></td>'+
+      '<td>'+(p.NET_VALUE ? '$'+(+p.NET_VALUE).toLocaleString() : '-')+'</td>'+
+      '<td>'+(p.LAST_YR_TX ? '$'+Math.round(+p.LAST_YR_TX).toLocaleString() : '-')+'</td>'+
+      '<td>'+(r.effRate ? r.effRate+'%' : '-')+'</td>'+
+      '<td style="font-size:11px">'+(r.tags||[]).map(t=>'<span class="chip" style="cursor:default">'+piqEsc(t)+'</span>').join(' ')+'</td>'+
+      '<td><select class="field-input" style="font-size:11px;padding:3px 6px" onchange="piqOverride('+i+',this.value)">'+
+        ['Homeowner','Renter','Check','Not a home','Unknown'].map(o=>'<option '+((r.cls&&r.cls.status)===o?'selected':'')+'>'+o+'</option>').join('')+
+      '</select></td>'+
+    '</tr>';
+  }).join('');
+}
+
+function piqEsc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function piqToggle(i,v){ piqRows[i].include = v; }
+function piqOverride(i,v){
+  piqRows[i].cls = {status:v, conf:'Manual', why:'Set by hand'};
+  piqRows[i].tags = (piqRows[i].tags||[]).filter(t => t !== 'Renter' && t !== 'Homeowner');
+  if(v === 'Renter') piqRows[i].tags.unshift('Renter');
+  if(v === 'Homeowner') piqRows[i].tags.unshift('Homeowner');
+  piqRows[i].include = (v !== 'Renter' && v !== 'Not a home');
+  piqRender();
+}
+
+// ══════════════════════════════════════════════
+// EXPORTS
+// ══════════════════════════════════════════════
+// BoldTrail import matches on the 14 standard fields. Tax data rides
+// along inside Hashtags and Agent Notes so field matching stays clean.
+function piqExportBoldTrail(mode){
+  let rows = piqRows;
+  if(mode === 'owners')  rows = piqRows.filter(r => r.include && r.cls && r.cls.status === 'Homeowner');
+  if(mode === 'renters') rows = piqRows.filter(r => r.cls && r.cls.status === 'Renter');
+  if(mode === 'included')rows = piqRows.filter(r => r.include);
+  if(!rows.length){ piqToast('Nothing to export for that filter'); return; }
+
+  const H = ['First Name','Last Name','Email','Cell Phone 1','Primary Address','Primary City',
+             'Primary State','Primary Zip','Hashtags','Agent Notes','Source','status','email_optin','phone_on','text_on'];
+
+  const lines = [H.join(',')];
+  for(const r of rows){
+    const raw = r.raw || {};
+    const p = r.p || {};
+    const existing = piqGet(raw,'hashtag','tag');
+    const tags = [...new Set([...(existing?existing.split(/[;,|]/).map(s=>s.trim()):[]), ...(r.tags||[])])].filter(Boolean);
+    const existingNote = piqGet(raw,'agent note','note','comment');
+    const note = [existingNote, r.note ? 'PROPERTY: '+r.note : ''].filter(Boolean).join(' || ');
+
+    lines.push([
+      piqGet(raw,'first name','first','fname'),
+      piqGet(raw,'last name','last','lname'),
+      piqGet(raw,'email'),
+      piqGet(raw,'cell','phone','mobile'),
+      p.PROP_LOC || piqGet(raw,'primary address','address','street'),
+      p.MUN_NAME || piqGet(raw,'primary city','city'),
+      'NJ',
+      p.ZIP5 || piqGet(raw,'primary zip','zip'),
+      tags.join(';'),
+      note,
+      piqGet(raw,'source','lead source') || 'LeadIQ Property IQ',
+      piqGet(raw,'status') || 'Active',
+      'true','true','true'
+    ].map(piqCsv).join(','));
+  }
+  piqDownload(lines.join('\n'), 'boldtrail_property_'+(mode||'all')+'.csv');
+  piqToast(rows.length+' contacts exported');
+}
+
+// Full data dump for your own analysis, not for BoldTrail import
+function piqExportFull(){
+  if(!piqRows.length){ piqToast('Run the matcher first'); return; }
+  const H = ['Name','Email','Phone','Input Address','Match Status','Classification','Confidence','Why',
+             'County','Municipality','Property Location','Block','Lot','Qual','PAMS PIN','Class','Class Desc',
+             'Year Built','Units','Acres','Land Value','Improvement Value','Assessed Value','Prior Year Tax',
+             'Effective Rate %','Last Sale Price','Deed Year','Tenure Yrs','Absentee','Owner Mailing','Tags'];
+  const lines = [H.join(',')];
+  for(const r of piqRows){
+    const p = r.p || {}, c = r.cls || {};
+    lines.push([
+      r.name, r.email, r.phone, r.input, r.status, c.status, c.conf, c.why,
+      p.COUNTY, p.MUN_NAME, p.PROP_LOC, p.PCLBLOCK, p.PCLLOT, p.PCLQCODE, p.PAMS_PIN,
+      p.PROP_CLASS, PIQ_CLASS[(p.PROP_CLASS||'').trim().toUpperCase()] || '',
+      p.YR_CONSTR, p.DWELL, p.CALC_ACRE, p.LAND_VAL, p.IMPRVT_VAL, p.NET_VALUE, p.LAST_YR_TX,
+      r.effRate, r.lastPaid, r.deedYear, r.tenure, r.absentee ? 'Yes':'No',
+      [p.ST_ADDRESS, p.CITY_STATE].filter(Boolean).join(' '), (r.tags||[]).join('; ')
+    ].map(piqCsv).join(','));
+  }
+  piqDownload(lines.join('\n'), 'property_iq_full.csv');
+}
+
+function piqCsv(v){
+  v = (v == null ? '' : String(v));
+  return /[",\n]/.test(v) ? '"'+v.replace(/"/g,'""')+'"' : v;
+}
+function piqDownload(csv, fname){
+  if(typeof triggerDownload === 'function') return triggerDownload(csv, fname);
+  const b = new Blob([csv],{type:'text/csv'}), u = URL.createObjectURL(b);
+  const a = document.createElement('a'); a.href=u; a.download=fname;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
+}
+
+// ══════════════════════════════════════════════
+// SINGLE LOOKUP  (also the prototype for the public site page)
+// ══════════════════════════════════════════════
+async function piqLookup(){
+  const addr = document.getElementById('piq-single-input').value.trim();
+  const out = document.getElementById('piq-single-out');
+  if(!addr){ piqToast('Enter an address'); return; }
+  out.innerHTML = '<div class="empty"><div class="empty-icon">◷</div><div class="empty-title">Looking up '+piqEsc(addr)+'</div></div>';
+  try {
+    const r = await piqEnrichOne({'Full Address':addr});
+    if(!r.p){ out.innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div class="empty-title">No parcel found</div><div class="empty-sub">'+piqEsc((r.cls&&r.cls.why)||'')+'</div></div>'; return; }
+    const p = r.p;
+    const row = (l,v) => v ? '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--border3)"><span style="color:var(--text2);font-size:12px">'+l+'</span><span style="font-weight:600;font-size:13px">'+piqEsc(v)+'</span></div>' : '';
+    out.innerHTML =
+      '<div class="glass-card">'+
+        '<div class="card-title">'+piqEsc(p.PROP_LOC||addr)+'</div>'+
+        '<div style="color:var(--text2);font-size:12px;margin-bottom:12px">'+piqEsc(p.MUN_NAME||'')+', '+piqEsc(p.COUNTY||'')+' County</div>'+
+        '<div class="stat-row" style="margin-bottom:14px">'+
+          '<div class="stat"><div class="stat-num" style="color:var(--blue)">$'+(+p.NET_VALUE||0).toLocaleString()+'</div><div class="stat-lbl">Assessed</div></div>'+
+          '<div class="stat"><div class="stat-num" style="color:var(--yellow)">$'+Math.round(+p.LAST_YR_TX||0).toLocaleString()+'</div><div class="stat-lbl">Prior yr tax</div></div>'+
+          '<div class="stat"><div class="stat-num" style="color:var(--green)">'+(r.effRate||'-')+'%</div><div class="stat-lbl">Eff. rate</div></div>'+
+          '<div class="stat"><div class="stat-num" style="color:var(--text2)">'+(p.YR_CONSTR||'-')+'</div><div class="stat-lbl">Built</div></div>'+
+        '</div>'+
+        row('Block / Lot / Qual', [p.PCLBLOCK,p.PCLLOT,p.PCLQCODE].filter(Boolean).join(' / '))+
+        row('PAMS PIN', p.PAMS_PIN)+
+        row('Property class', (p.PROP_CLASS||'')+' · '+(PIQ_CLASS[(p.PROP_CLASS||'').trim().toUpperCase()]||''))+
+        row('Building', p.BLDG_DESC)+
+        row('Land', (p.LAND_DESC||'')+(p.CALC_ACRE?' · '+(+p.CALC_ACRE).toFixed(2)+' ac':''))+
+        row('Land value', p.LAND_VAL ? '$'+(+p.LAND_VAL).toLocaleString() : '')+
+        row('Improvement value', p.IMPRVT_VAL ? '$'+(+p.IMPRVT_VAL).toLocaleString() : '')+
+        row('Last sale', r.lastPaid ? '$'+r.lastPaid.toLocaleString()+(r.deedYear?' in '+r.deedYear:'') : '')+
+        row('Deed book/page', [p.DEED_BOOK,p.DEED_PAGE].filter(Boolean).join(' / '))+
+        row('Owner mailing', r.absentee ? [p.ST_ADDRESS,p.CITY_STATE].filter(Boolean).join(', ')+'  (absentee)' : 'Same as property')+
+        '<div style="margin-top:12px;font-size:11px;color:var(--text3);line-height:1.5">Source: NJ Office of GIS parcels joined to Division of Taxation MOD-IV. Owner names are redacted under Daniel\'s Law. Tax figure is the prior year billed amount, not a current-year estimate.</div>'+
+      '</div>';
+  } catch(e){
+    out.innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-title">Lookup failed</div><div class="empty-sub">'+piqEsc(e.message||e)+'</div></div>';
+  }
+}
+
+// ══════════════════════════════════════════════
+// APPEAL SCREENER  (Chapter 123 ratio test)
+// ══════════════════════════════════════════════
+function piqAppeal(){
+  const ratio = parseFloat(document.getElementById('piq-ratio').value);
+  const out = document.getElementById('piq-appeal-out');
+  if(!ratio || ratio <= 0 || ratio > 200){ piqToast('Enter the municipal equalization ratio, for example 87.42'); return; }
+  const cand = piqRows.filter(r => r.p && +r.p.NET_VALUE > 0 && r.cls && r.cls.status === 'Homeowner');
+  if(!cand.length){ out.innerHTML = '<div class="empty"><div class="empty-icon">⚖️</div><div class="empty-title">Run the Tax Matcher first</div><div class="empty-sub">Then come back and enter the ratio.</div></div>'; return; }
+
+  const rows = cand.map(r => {
+    const assessed = +r.p.NET_VALUE;
+    const impliedMarket = assessed / (ratio/100);          // what the town says it is worth
+    const upperLimit = impliedMarket * (ratio/100) * 1.15; // Chapter 123 upper corridor
+    return { r, assessed, impliedMarket, upperLimit, overBy: assessed - upperLimit };
+  }).sort((a,b) => b.overBy - a.overBy);
+
+  out.innerHTML =
+    '<div class="glass-card">'+
+      '<div class="card-title">Screening ratio: '+ratio+'%</div>'+
+      '<div style="font-size:12px;color:var(--text2);margin-bottom:12px;line-height:1.6">Implied market value is the assessment divided by the ratio. Under Chapter 123 an assessment survives if it sits at or below market value times the ratio times 1.15. Anyone whose true market value comes in below the implied figure has a case worth pulling comps on.</div>'+
+      '<div class="tbl-wrap" style="max-height:400px;overflow-y:auto"><table class="tbl"><thead><tr>'+
+      '<th>Contact</th><th>Town</th><th>Assessed</th><th>Implied market</th><th>Prior tax</th><th>Comps needed below</th>'+
+      '</tr></thead><tbody>'+
+      rows.map(x =>
+        '<tr><td><strong>'+piqEsc(x.r.name)+'</strong><div style="font-size:11px;color:var(--text3)">'+piqEsc(x.r.p.PROP_LOC||'')+'</div></td>'+
+        '<td>'+piqEsc(x.r.p.MUN_NAME||'')+'</td>'+
+        '<td>$'+Math.round(x.assessed).toLocaleString()+'</td>'+
+        '<td><strong style="color:var(--blue)">$'+Math.round(x.impliedMarket).toLocaleString()+'</strong></td>'+
+        '<td>$'+Math.round(+x.r.p.LAST_YR_TX||0).toLocaleString()+'</td>'+
+        '<td style="color:var(--yellow)">$'+Math.round(x.impliedMarket/1.15).toLocaleString()+'</td></tr>'
+      ).join('')+
+      '</tbody></table></div>'+
+      '<div style="margin-top:10px;font-size:11px;color:var(--text3)">Get the current ratio from the NJ Division of Taxation Table of Equalized Valuations for the municipality. Ratios change every year.</div>'+
+    '</div>';
+}
+
+// ══════════════════════════════════════════════
+// LISTING SIGNALS
+// ══════════════════════════════════════════════
+function piqSignals(){
+  const out = document.getElementById('piq-signals-out');
+  const owners = piqRows.filter(r => r.p && r.cls && r.cls.status === 'Homeowner');
+  if(!owners.length){ out.innerHTML = '<div class="empty"><div class="empty-icon">🎯</div><div class="empty-title">Run the Tax Matcher first</div></div>'; return; }
+
+  const groups = [
+    {k:'Long tenure', d:'Owned 15+ years. Statistically the most likely to move.', hit: r => r.tenure !== null && r.tenure >= 15, color:'var(--green)'},
+    {k:'Absentee owners', d:'Tax bill mails somewhere other than the property. Landlord or inherited.', hit: r => r.absentee, color:'var(--purple)'},
+    {k:'High tax burden', d:'Prior year bill over $12,000. Prime for appeal talk or a downsize conversation.', hit: r => +r.p.LAST_YR_TX >= 12000, color:'var(--yellow)'},
+    {k:'Big paper gain', d:'Assessed value is at least double what they paid.', hit: r => r.lastPaid && +r.p.NET_VALUE >= r.lastPaid*2, color:'var(--blue)'},
+    {k:'Older housing stock', d:'Built before 1970. Renovation and downsize angles.', hit: r => +r.p.YR_CONSTR > 0 && +r.p.YR_CONSTR < 1970, color:'var(--cyan)'}
+  ];
+
+  out.innerHTML = groups.map(g => {
+    const list = owners.filter(g.hit);
+    return '<div class="glass-card" style="margin-bottom:12px">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'+
+        '<div class="card-title" style="margin:0">'+g.k+'</div>'+
+        '<div style="font-size:24px;font-weight:800;color:'+g.color+'">'+list.length+'</div>'+
+      '</div>'+
+      '<div style="font-size:12px;color:var(--text2);margin-bottom:10px">'+g.d+'</div>'+
+      (list.length ? '<div class="tbl-wrap" style="max-height:200px;overflow-y:auto"><table class="tbl"><tbody>'+
+        list.slice(0,50).map(r => '<tr><td><strong>'+piqEsc(r.name)+'</strong></td><td style="font-size:11px;color:var(--text3)">'+piqEsc(r.p.PROP_LOC||'')+', '+piqEsc(r.p.MUN_NAME||'')+'</td><td style="font-size:11px">'+piqEsc(r.note.split('|')[0]||'')+'</td></tr>').join('')+
+        '</tbody></table></div>' : '<div style="font-size:12px;color:var(--text3)">None in this list.</div>')+
+    '</div>';
+  }).join('');
+}
+
+// ══════════════════════════════════════════════
+// CONNECTION TEST
+// ══════════════════════════════════════════════
+async function piqTest(){
+  const out = document.getElementById('piq-test-out');
+  out.innerHTML = '<div style="font-size:12px;color:var(--text2)">Testing...</div>';
+  const results = [];
+  try { const g = await piqGeocode('125 W State St, Trenton, NJ 08608');
+    results.push(g ? ['NJ geocoder','ok','Matched: '+g.matched] : ['NJ geocoder','warn','Reachable but no candidate']);
+  } catch(e){ results.push(['NJ geocoder','fail',String(e.message||e)+' (likely CORS, switch to Census below)']); }
+  try { const p = await piqParcelAt(40.2206, -74.7697);
+    results.push(p ? ['Parcel service','ok','Matched parcel in '+(p.MUN_NAME||'?')] : ['Parcel service','warn','Reachable but no parcel at test point']);
+  } catch(e){ results.push(['Parcel service','fail',String(e.message||e)]); }
+  const icon = s => s==='ok' ? '✅' : s==='warn' ? '⚠️' : '❌';
+  out.innerHTML = results.map(r => '<div style="display:flex;gap:8px;padding:6px 0;font-size:12px"><span>'+icon(r[1])+'</span><strong style="min-width:120px">'+r[0]+'</strong><span style="color:var(--text2)">'+piqEsc(r[2])+'</span></div>').join('');
+}
+
+function piqSetGeocoder(v){ piqGeocoder = v; piqToast('Geocoder set to '+(v==='nj'?'NJ Office of GIS':'US Census')); }
+
+// ── tabs ──
+function setPropTab(id){
+  document.querySelectorAll('#section-property .liq-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#section-property .analyze-panel').forEach(p => p.classList.remove('active'));
+  const t = document.getElementById('ptab-'+id), p = document.getElementById('ppanel-'+id);
+  if(t) t.classList.add('active');
+  if(p) p.classList.add('active');
+}
+
+</script>
+
+
+<!-- ============================================================
+     BLOCK 5 of 5  ·  ONE LINE HOOK  (optional but recommended)
+     FIND the function  sharedLoaded()  and inside its setTimeout,
+     next to the other try/catch lines, ADD this line:
+
+       try { if(document.getElementById('piq-empty')) document.getElementById('piq-empty').querySelector('.empty-title').textContent = sharedRows.length + ' contacts ready to match'; } catch(e){}
+
+     That is it. Reload btc.html, sign in, click Property.
+     First stop: Setup tab, hit Test connections.
+     ============================================================ -->
