@@ -196,7 +196,7 @@
 .pl-flag.info { background: var(--info-bg); color: var(--navy-dark); }
 .pl-flag.warn { background: #fdf6e3; color: #6b5514; }
 
-/* ---------- DENSE DATA GRID (Property Explorer style) ---------- */
+/* ---------- DENSE DATA GRID ---------- */
 .pl-data { padding: 22px 26px 26px; }
 .pl-dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 34px; }
 .pl-dblock { break-inside: avoid; }
@@ -224,21 +224,47 @@
 
 /* ---------- AGENT & TRACK LAYOUT ---------- */
 .pl-agent-track-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: stretch; }
-.pl-agent-track-row > div { margin-bottom: 0 !important; }
 
 /* ---------- AGENT CARD ---------- */
-.pl-agent { background: var(--navy-dark); border-radius: 16px; padding: 30px; color: #fff; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
-.pl-agent-logo-right { position: absolute; top: 24px; right: 24px; background: #fff; padding: 6px; border-radius: 6px; }
-.pl-agent-logo-right img { height: 34px; width: auto; object-fit: contain; display: block; }
-.pl-agent-top { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 16px; }
+.pl-agent { 
+  background: var(--navy-dark); 
+  border-radius: 16px; 
+  padding: 30px; 
+  color: #fff; 
+  position: relative; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between;
+  box-shadow: 0 12px 30px rgba(14, 34, 72, 0.4); 
+}
+.pl-agent-toggle {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  display: flex;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.2);
+}
+.pl-agent-toggle button {
+  background: transparent; border: none; color: #cdd9ec; padding: 6px 12px;
+  font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s;
+}
+.pl-agent-toggle button.active { background: var(--gold); color: var(--navy-dark); }
+.pl-agent-top { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 16px; margin-top: 10px; }
 .pl-agent-photo { width: 108px; height: 108px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,.34); }
-.pl-agent-meta { flex: 1; padding-right: 70px; } /* Room for logo */
+.pl-agent-meta { flex: 1; padding-right: 10px; } 
 .pl-agent-kicker { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
 .pl-agent-name { font-family: 'Playfair Display', Georgia, serif; font-size: 27px; font-weight: 700; margin: 0 0 4px; }
 .pl-agent-title { font-size: 14px; color: #cdd9ec; line-height: 1.55; }
 .pl-agent-lic { font-size: 12.5px; color: #90a4c4; margin-top: 6px; }
-.pl-agent-brand-bottom { display: flex; align-items: center; gap: 14px; margin-top: auto; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.14); }
-.pl-agent-contact { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 4px; }
+.pl-agent-body { font-size: 14.5px; color: #cdd9ec; line-height: 1.72; margin-bottom: 20px; }
+.pl-agent-body strong { color: #fff; }
+.pl-agent-brand-bottom { 
+  display: flex; flex-direction: column; gap: 16px; margin-top: auto; 
+  padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); 
+}
+.pl-agent-contact { display: flex; flex-wrap: wrap; gap: 9px; }
 .pl-agent-contact a {
   display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600;
   padding: 10px 16px; border-radius: 9px; text-decoration: none;
@@ -247,8 +273,32 @@
 .pl-agent-contact a:hover { background: rgba(255,255,255,.19); }
 .pl-agent-contact a.gold { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
 .pl-agent-contact a.gold:hover { background: #cfa930; }
-.pl-agent-body { font-size: 14.5px; color: #cdd9ec; line-height: 1.72; margin-bottom: 20px; }
-.pl-agent-body strong { color: #fff; }
+.pl-agent-logo-large { height: 50px; width: auto; object-fit: contain; align-self: flex-start; background: #fff; padding: 4px 8px; border-radius: 6px; }
+
+/* ---------- ZILLOW STYLE MATCHES ---------- */
+.z-matches-wrap { margin-bottom: 24px; }
+.z-matches-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin: 0 0 16px; font-family: 'Source Sans 3', sans-serif; }
+.z-matches-alert {
+  background: #e9ecef; border-radius: 8px; padding: 14px 20px; font-size: 15px; color: #1a1a2e;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.z-matches-alert i { font-size: 18px; color: #5a6070; }
+.z-matches-alert a { color: #0054ff; text-decoration: underline; cursor: pointer; }
+.z-matches-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
+.z-match-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px;
+  min-width: 340px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 16px;
+}
+.z-match-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.z-match-info { flex: 1; }
+.z-match-name-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
+.z-match-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 0; }
+.z-match-rating { font-size: 14px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 4px; }
+.z-match-rating i { color: #0054ff; font-size: 12px; }
+.z-match-rating span { color: #5a6070; font-weight: 400; }
+.z-match-broker { font-size: 13px; color: #5a6070; margin-bottom: 12px; }
+.z-match-stat { font-size: 14px; color: #5a6070; margin-bottom: 4px; }
+.z-match-stat strong { color: #1a1a2e; }
 
 /* ---------- TRACK ---------- */
 .pl-track { background: #fff; border: 2px solid var(--gold); border-radius: 16px; padding: 28px; }
@@ -341,11 +391,11 @@
   .pl-menu { left: 0; right: 0; min-width: 0; }
   .pl-form { grid-template-columns: 1fr; }
   .pl-fig { border-right: none; border-bottom: 1px solid #eef0f5; }
-  .pl-agent-top { flex-direction: column; align-items: center; text-align: center; }
-  .pl-agent-meta { padding-right: 0; padding-top: 10px; }
-  .pl-agent-logo-right { position: relative; top: 0; right: 0; margin-bottom: 10px; align-self: center; }
+  .pl-agent-top { flex-direction: column; align-items: center; text-align: center; margin-top: 30px; }
+  .pl-agent-meta { padding-right: 0; }
   .pl-track, .pl-agent, .pl-card { padding: 20px; }
   .pl-agent-contact { justify-content: center; }
+  .pl-agent-brand-bottom { align-items: center; }
 }
 </style>
 
@@ -537,18 +587,41 @@
   // OPTIONAL. Google Maps key with Street View Static enabled.
   var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
 
-  // Your contact details, used by the agent card and the action menu.
-  var AGENT = {
-    name:  'John Scafide',
-    title: 'Licensed NJ Real Estate Agent and Tax Professional',
-    lic:   'NJ License #2079591',
-    team:  'The McKenty Team at Opus Elite Real Estate',
-    phone: '856-404-1098',
-    email: 'john@njpropertytaxrelief.com',
-    photo: 'johnprofile.jpg',
-    logo:  'opuslogo.jpg'
+  // Agent Profiles Database
+  var AGENTS = {
+    john: {
+      name: 'John Scafide',
+      title: 'Licensed NJ Real Estate Agent and Tax Professional',
+      lic: 'NJ License #2079591',
+      team: 'The McKenty Team / Opus Elite Real Estate',
+      phone: '856-404-1098',
+      email: 'john@johnscafide.com',
+      photo: 'johnprofile.jpg',
+      logo: 'opuslogo.jpg',
+      stars: '5.0',
+      reviews: '2',
+      sales: '12',
+      salesNear: '6',
+      bio: 'Most agents can tell you what your home is worth. Very few can also tell you what your assessment is doing to your bottom line. I have spent <strong>15 plus years preparing New Jersey tax returns</strong> and I sell real estate in <strong>{COUNTY} County</strong>, which means I read a settlement statement and a tax assessment the same way. Whether you are selling, buying, or just want to know if you are being overtaxed, that is one conversation, not three.'
+    },
+    heather: {
+      name: 'Heather Scafide',
+      title: 'Licensed NJ Real Estate Agent',
+      lic: 'NJ License #2192318',
+      team: 'The McKenty Team / Opus Elite Real Estate',
+      phone: '856-310-6746',
+      email: 'heather@heatherscafide.com',
+      photo: 'heatherheadshot.png',
+      logo: 'opuslogo.jpg',
+      stars: '5.0',
+      reviews: 'New',
+      sales: '5',
+      salesNear: '4',
+      bio: 'With a strong corporate background as a procurement buyer managing complex packaging and label supply chains, Heather brings elite negotiation skills and contract expertise to real estate. Now dedicating herself full-time to the South Jersey market, she ensures every client gets the strategic edge they need whether buying or selling.'
+    }
   };
 
+  var activeAgentKey = 'john';
   var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
@@ -937,10 +1010,12 @@
       '</div>' +
 
       '<div class="pl-agent-track-row">' +
-        buildAgent() +
+        '<div id="pl-agent-container">' + buildAgentInner() + '</div>' +
         buildTrack() +
       '</div>' +
       
+      buildZillowMatches() +
+
       buildProceeds() +
       buildAppeal() +
 
@@ -979,7 +1054,7 @@
   }
 
   // ══════════════════════════════════════════════
-  // CHARTS  (hand rolled SVG, no library)
+  // CHARTS
   // ══════════════════════════════════════════════
   function chartSplit(land, imprv) {
     var host = el('pl-chart-split');
@@ -1238,33 +1313,76 @@
   };
 
   // ══════════════════════════════════════════════
-  // AGENT CARD
+  // AGENT CARD (Main Toggleable)
   // ══════════════════════════════════════════════
-  function buildAgent() {
-    var phoneBtn = AGENT.phone
-      ? '<a href="tel:' + AGENT.phone.replace(/\D/g, '') + '" class="gold"><i class="fas fa-phone"></i> ' + esc(AGENT.phone) + '</a>' : '';
+  window.plSetAgent = function(key) {
+    activeAgentKey = key;
+    var container = el('pl-agent-container');
+    if (container) container.innerHTML = buildAgentInner();
+  };
+
+  function buildAgentInner() {
+    var a = AGENTS[activeAgentKey];
+    var isJohn = activeAgentKey === 'john';
+    var isHeather = activeAgentKey === 'heather';
+    var formattedBio = a.bio.replace('{COUNTY}', current && current.county ? esc(current.county.toUpperCase()) : 'CAMDEN');
+    
+    var phoneBtn = a.phone ? '<a href="tel:' + a.phone.replace(/\D/g, '') + '" class="gold"><i class="fas fa-phone"></i> ' + esc(a.phone) + '</a>' : '';
+
     return '<div class="pl-agent">' +
-      '<div class="pl-agent-logo-right"><img src="' + AGENT.logo + '" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'"></div>' +
+      '<div class="pl-agent-toggle">' +
+        '<button class="' + (isJohn ? 'active' : '') + '" onclick="plSetAgent(\'john\')">John</button>' +
+        '<button class="' + (isHeather ? 'active' : '') + '" onclick="plSetAgent(\'heather\')">Heather</button>' +
+      '</div>' +
+      
       '<div class="pl-agent-top">' +
-        '<img class="pl-agent-photo" src="' + AGENT.photo + '" alt="' + esc(AGENT.name) + '" loading="lazy">' +
+        '<img class="pl-agent-photo" src="' + a.photo + '" alt="' + esc(a.name) + '" loading="lazy">' +
         '<div class="pl-agent-meta">' +
           '<div class="pl-agent-kicker">Your local expert for this property</div>' +
-          '<div class="pl-agent-name">' + esc(AGENT.name) + '</div>' +
-          '<div class="pl-agent-title">' + esc(AGENT.title) + '</div>' +
-          '<div class="pl-agent-lic">' + esc(AGENT.lic) + '  ·  ' + esc(AGENT.team) + '</div>' +
+          '<div class="pl-agent-name">' + esc(a.name) + '</div>' +
+          '<div class="pl-agent-title">' + esc(a.title) + '</div>' +
+          '<div class="pl-agent-lic">' + esc(a.lic) + '</div>' +
         '</div>' +
       '</div>' +
-      '<div class="pl-agent-body">' +
-        'Most agents can tell you what your home is worth. Very few can also tell you what your assessment is doing to your bottom line. ' +
-        'I have spent <strong>15 plus years preparing New Jersey tax returns</strong> and I sell real estate in <strong>' + esc(current.county || 'South Jersey') + ' County</strong>, ' +
-        'which means I read a settlement statement and a tax assessment the same way. Whether you are selling, buying, or just want to know if you are being overtaxed on ' +
-        esc(current.address) + ', that is one conversation, not three.' +
-      '</div>' +
+      '<div class="pl-agent-body">' + formattedBio + '</div>' +
+      
       '<div class="pl-agent-brand-bottom">' +
         '<div class="pl-agent-contact">' + phoneBtn +
-          '<a href="mailto:' + esc(AGENT.email) + '"><i class="fas fa-envelope"></i> Email</a>' +
+          '<a href="mailto:' + esc(a.email) + '"><i class="fas fa-envelope"></i> Email</a>' +
           '<a href="index.html#contact"><i class="fas fa-calendar-check"></i> Book a call</a>' +
         '</div>' +
+        '<img class="pl-agent-logo-large" src="' + a.logo + '" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'">' +
+      '</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // ZILLOW STYLE MATCHES
+  // ══════════════════════════════════════════════
+  function buildZillowMatches() {
+    var displayZip = current && current.zip ? esc(current.zip) : 'this area';
+    return '<div class="z-matches-wrap">' +
+      '<h2 class="z-matches-title">Listing agent matches for ' + displayZip + '</h2>' +
+      '<div class="z-matches-alert"><i class="fas fa-trophy"></i> <span>These agent <a>matches</a> are featured based on their recent sales in this area.</span></div>' +
+      '<div class="z-matches-scroll">' +
+        buildZillowCard('john') +
+        buildZillowCard('heather') +
+      '</div>' +
+    '</div>';
+  }
+
+  function buildZillowCard(key) {
+    var a = AGENTS[key];
+    return '<div class="z-match-card">' +
+      '<img class="z-match-avatar" src="' + a.photo + '" alt="' + esc(a.name) + '">' +
+      '<div class="z-match-info">' +
+        '<div class="z-match-name-row">' +
+          '<h4 class="z-match-name">' + esc(a.name) + '</h4>' +
+          '<div class="z-match-rating">' + a.stars + ' <i class="fas fa-star"></i> <span>(' + a.reviews + ')</span></div>' +
+        '</div>' +
+        '<div class="z-match-broker">' + esc(a.team) + '</div>' +
+        '<div class="z-match-stat"><strong>' + a.sales + '</strong> recent sales</div>' +
+        '<div class="z-match-stat"><strong>' + a.salesNear + '</strong> sales near you</div>' +
       '</div>' +
     '</div>';
   }
@@ -1381,7 +1499,7 @@
           '<option>1 to 3 months</option><option>3 to 6 months</option>' +
           '<option>6 to 12 months</option><option>Just exploring</option>' +
         '</select>' +
-        '<button onclick="plIntent(\'' + kind + '\')">Send it to John</button>' +
+        '<button onclick="plIntent(\'' + kind + '\')">Send to ' + esc(AGENTS[activeAgentKey].name) + '</button>' +
       '</div>' +
       '<div class="pl-fine">This property\u2019s address and tax figures go with your message so I have the context. <a href="#" onclick="plResetTrack();return false;">Back to monthly tracking</a></div>';
     t.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1402,7 +1520,7 @@
     var tenure = (kind === 'buy' || kind === 'offer') ? 'Unknown' : 'Homeowner';
     send({
       name: name, email: email, phone: phone || 'Not provided',
-      topic: it.topic + ', ' + (current.town || 'NJ'),
+      topic: it.topic + ', ' + (current.town || 'NJ') + ' (' + activeAgentKey + ')',
       tenure: tenure, lead_type: tenure, finance: 'Not provided',
       town: current.town || 'Not provided', address: current.address || 'Not provided',
       message: [it.label + ' request from the Property Lookup tool', 'Timing: ' + when]
@@ -1480,7 +1598,7 @@
     if (!name || !email) { alert('Please add your name and email so I know where to send it.'); return; }
     send({
       name: name, email: email, phone: phone || 'Not provided',
-      topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, ' + (current.town || 'NJ'),
+      topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, ' + (current.town || 'NJ') + ' (' + activeAgentKey + ')',
       tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
       town: current.town || 'Not provided', address: current.address || 'Not provided',
       message: ['Assessment review request from the Property Lookup tool', 'Tenure: Homeowner (looked up their own property)']
