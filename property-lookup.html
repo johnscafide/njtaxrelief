@@ -273,7 +273,7 @@
 .pl-agent-contact a:hover { background: rgba(255,255,255,.19); }
 .pl-agent-contact a.gold { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
 .pl-agent-contact a.gold:hover { background: #cfa930; }
-.pl-agent-logo-large { height: 50px; width: auto; object-fit: contain; align-self: flex-start; background: #fff; padding: 4px 8px; border-radius: 6px; }
+.pl-agent-logo-large { height: 100px; width: auto; object-fit: contain; align-self: flex-start; background: #fff; padding: 4px 8px; border-radius: 6px; }
 
 /* ---------- ZILLOW STYLE MATCHES ---------- */
 .z-matches-wrap { margin-bottom: 24px; }
@@ -600,8 +600,8 @@
       logo: 'opuslogo.jpg',
       stars: '5.0',
       reviews: '2',
-      sales: '12',
-      salesNear: '6',
+      sales: '4',
+      salesNear: '4',
       bio: 'Most agents can tell you what your home is worth. Very few can also tell you what your assessment is doing to your bottom line. I have spent <strong>15 plus years preparing New Jersey tax returns</strong> and I sell real estate in <strong>{COUNTY} County</strong>, which means I read a settlement statement and a tax assessment the same way. Whether you are selling, buying, or just want to know if you are being overtaxed, that is one conversation, not three.'
     },
     heather: {
@@ -615,8 +615,8 @@
       logo: 'opuslogo.jpg',
       stars: '5.0',
       reviews: 'New',
-      sales: '5',
-      salesNear: '4',
+      sales: '0',
+      salesNear: '0',
       bio: 'With a strong corporate background as a procurement buyer managing complex packaging and label supply chains, Heather brings elite negotiation skills and contract expertise to real estate. Now dedicating herself full-time to the South Jersey market, she ensures every client gets the strategic edge they need whether buying or selling.'
     }
   };
@@ -1338,7 +1338,7 @@
       '<div class="pl-agent-top">' +
         '<img class="pl-agent-photo" src="' + a.photo + '" alt="' + esc(a.name) + '" loading="lazy">' +
         '<div class="pl-agent-meta">' +
-          '<div class="pl-agent-kicker">Your local expert for this property</div>' +
+          '<div class="pl-agent-kicker">Your expert for this property</div>' +
           '<div class="pl-agent-name">' + esc(a.name) + '</div>' +
           '<div class="pl-agent-title">' + esc(a.title) + '</div>' +
           '<div class="pl-agent-lic">' + esc(a.lic) + '</div>' +
@@ -1378,7 +1378,7 @@
       '<div class="z-match-info">' +
         '<div class="z-match-name-row">' +
           '<h4 class="z-match-name">' + esc(a.name) + '</h4>' +
-          '<div class="z-match-rating">' + a.stars + ' <i class="fas fa-star"></i> <span>(' + a.reviews + ')</span></div>' +
+          '<div class="z-match-rating">' + a.stars + ' <i class="fas fa-star"></i> <a href="https://www.realtor.com/realestateagents/5fa33046326083001120e3ba"><span>(' + a.reviews + ')</span></a></div>' +
         '</div>' +
         '<div class="z-match-broker">' + esc(a.team) + '</div>' +
         '<div class="z-match-stat"><strong>' + a.sales + '</strong> recent sales</div>' +
