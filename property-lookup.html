@@ -168,21 +168,12 @@
 }
 
 @media (max-width: 880px) {
-  .pl-media { grid-template-columns: 1fr; }
-  .pl-media-main, .pl-media-side, #pl-map { min-height: 250px; }
   .pl-calc-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .pl-hero { min-height: 520px; padding: 62px 16px 56px; }
   .pl-search-row { flex-direction: column; }
-  .pl-head, .pl-data { padding-left: 17px; padding-right: 17px; }
-  .pl-flag { margin-left: 17px; margin-right: 17px; }
-  .pl-head-addr { font-size: 21px; }
-  .pl-actions { width: 100%; }
-  .pl-act { flex: 1; justify-content: center; }
-  .pl-menu { left: 0; right: 0; min-width: 0; }
   .pl-form { grid-template-columns: 1fr; }
-  .pl-fig { border-right: none; border-bottom: 1px solid #eef0f5; }
   .pl-agent-top { flex-direction: column; text-align: center; align-items: center; }
   .pl-track, .pl-agent, .pl-card { padding: 20px; }
   .pl-field-2 { grid-template-columns: 1fr; }
@@ -210,6 +201,7 @@
 .plm-bar {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
   padding: 13px 20px; border-bottom: 1px solid #eef0f5; background: #fff; flex-shrink: 0;
+  position: relative; z-index: 2;
 }
 .plm-back {
   display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 600;
@@ -226,13 +218,20 @@
 .plm-barbtn i { font-size: 15px; }
 .plm-barbtn.saved i { color: var(--red); }
 
-.plm-scroll { overflow-y: auto; overflow-x: hidden; flex: 1; -webkit-overflow-scrolling: touch; }
+/* The scroll area gets its own stacking context. Leaflet assigns z-index up
+   to 1000 to its panes and controls; isolating here keeps all of that
+   contained so the top bar and its dropdown always paint above the map. */
+.plm-scroll {
+  overflow-y: auto; overflow-x: hidden; flex: 1; -webkit-overflow-scrolling: touch;
+  position: relative; z-index: 1; isolation: isolate;
+}
+
 
 /* photo strip */
 .plm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #e8ecf3; position: relative; }
 .plm-photo { position: relative; height: 340px; background: #dde3ec; overflow: hidden; }
 .plm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.plm-photo.map-cell { height: 340px; }
+.plm-photo.map-cell { height: 340px; position: relative; z-index: 0; isolation: isolate; }
 .plm-photo #plm-map { width: 100%; height: 100%; }
 .plm-tag {
   position: absolute; top: 16px; left: 16px; z-index: 6;
@@ -345,7 +344,8 @@
 .plm-note { font-size: 11.5px; color: #8a93a6; line-height: 1.7; margin-top: 14px; }
 
 .plm-menu {
-  position: absolute; right: 0; top: calc(100% + 6px); z-index: 90; min-width: 258px;
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 3; min-width: 258px;
+  max-height: calc(100vh - 120px); overflow-y: auto;
   background: #fff; border: 1px solid var(--border); border-radius: 12px;
   box-shadow: 0 14px 44px rgba(14,34,72,.24); padding: 7px; display: none;
 }
@@ -373,7 +373,7 @@ body.plm-locked { overflow: hidden; }
   .plm-body { padding: 20px 17px 30px; }
   .plm-price { font-size: 32px; }
   .plm-barbtn span { display: none; }
-  .plm-menu { right: -8px; min-width: 232px; }
+  .plm-menu { right: 0; min-width: 214px; }
 }
 
 /* ---------- ZILLOW STYLE AGENT MATCHES ---------- */
@@ -981,8 +981,8 @@ body.plm-locked { overflow: hidden; }
   // Blank = the page skips it entirely and nothing breaks.
   // Records the PROPERTY only. Never the visitor.
   // ══════════════════════════════════════════════
-  var LEDGER_URL = '';   // https://YOURPROJECT.supabase.co
-  var LEDGER_KEY = '';   // your anon / publishable key
+  var LEDGER_URL = 'https://afagpnyjxomuvpfviycm.supabase.co';
+  var LEDGER_KEY = 'sb_publishable_mjMESm5UrAGU7bar1a9JAA_SdNk7kDh';
 
   function recordLookup(p, geo, rate, dy) {
     try {
