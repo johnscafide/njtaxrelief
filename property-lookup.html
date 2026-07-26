@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NJ Property Tax Lookup | Assessment, Tax Bill, Block and Lot by Address</title>
-  <meta name="description" content="Free NJ property tax lookup. Any New Jersey address returns the assessed value, last year's tax bill, block and lot, aerial view, lot lines, tax history chart, and a net proceeds calculator. No signup.">
+  <meta name="description" content="Free NJ property tax lookup. Any New Jersey address returns the assessed value, last year's tax bill, block and lot, aerial view, lot lines, tax history chart, and a seller net proceeds calculator. No signup.">
   <meta name="keywords" content="NJ property tax lookup, New Jersey property tax records, property assessment lookup NJ, block and lot search NJ, MOD-IV records, NJ tax assessment search, how much are my property taxes NJ, NJ seller net proceeds calculator, NJ realty transfer fee">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta name="author" content="John Scafide, Licensed NJ Real Estate Agent #2079591">
@@ -29,18 +29,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
-
-  <!-- Microsoft Clarity -->
   <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
-
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
@@ -128,184 +124,8 @@
 }
 @keyframes plspin { to { transform: rotate(360deg); } }
 
-/* ---------- LISTING ---------- */
-.pl-listing {
-  background: #fff; border: 1px solid var(--border); border-radius: 16px;
-  overflow: hidden; box-shadow: 0 10px 34px rgba(14,34,72,.09); margin-bottom: 20px;
-}
-.pl-media { display: grid; grid-template-columns: 1.6fr 1fr; gap: 2px; background: var(--border); }
-.pl-media-main { position: relative; background: #e8ecf3; min-height: 360px; }
-.pl-media-main img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.pl-media-side { background: #e8ecf3; min-height: 360px; }
-#pl-map { width: 100%; height: 100%; min-height: 360px; }
-.pl-chips {
-  position: absolute; top: 14px; left: 14px; z-index: 5; display: flex; gap: 5px;
-  background: rgba(255,255,255,.94); padding: 5px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,.18);
-}
-.pl-chip { font-size: 12.5px; font-weight: 600; font-family: inherit; padding: 7px 13px; border: none; border-radius: 7px; background: transparent; color: var(--text-muted); cursor: pointer; }
-.pl-chip.on { background: var(--navy); color: #fff; }
-.pl-imgnote { position: absolute; bottom: 0; left: 0; right: 0; z-index: 4; background: linear-gradient(transparent, rgba(0,0,0,.6)); color: #fff; font-size: 11.5px; padding: 22px 14px 9px; }
-
-/* ---------- ADDRESS BAR + ACTIONS ---------- */
-.pl-head { padding: 22px 26px 18px; border-bottom: 1px solid #eef0f5; }
-.pl-head-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; flex-wrap: wrap; }
-.pl-head-addr { font-family: 'Playfair Display', Georgia, serif; font-size: 27px; font-weight: 700; color: var(--navy-dark); line-height: 1.2; margin: 0; }
-.pl-head-town { font-size: 15px; color: var(--text-muted); margin-top: 5px; }
-.pl-status {
-  display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
-  background: var(--navy-dark); color: #fff; padding: 5px 11px; border-radius: 5px; margin-bottom: 9px;
-}
-.pl-status-tax {
-  display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase;
-  background: #810c25; color: #fff; padding: 5px 11px; border-radius: 5px; margin-bottom: 9px; margin-left: 5px;
-}
-.pl-actions { display: flex; align-items: center; gap: 8px; position: relative; flex-shrink: 0; }
-.pl-act {
-  display: inline-flex; align-items: center; gap: 7px; font-size: 13.5px; font-weight: 600; font-family: inherit;
-  padding: 9px 15px; border-radius: 9px; border: 1px solid var(--border); background: #fff;
-  color: var(--navy); cursor: pointer; text-decoration: none;
-}
-.pl-act:hover { border-color: var(--navy-light); background: #f6f8fc; }
-.pl-act.primary { background: var(--gold); border-color: var(--gold); color: var(--navy-dark); }
-.pl-act.primary:hover { background: #cfa930; }
-.pl-act.icon { padding: 9px 12px; }
-.pl-menu {
-  position: absolute; right: 0; top: calc(100% + 8px); z-index: 60; min-width: 254px;
-  background: #fff; border: 1px solid var(--border); border-radius: 12px;
-  box-shadow: 0 14px 40px rgba(14,34,72,.20); padding: 7px; display: none;
-}
-.pl-menu.open { display: block; }
-.pl-menu button, .pl-menu a {
-  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
-  font-size: 14px; font-family: inherit; color: var(--text); background: none; border: none;
-  padding: 11px 12px; border-radius: 8px; cursor: pointer; text-decoration: none;
-}
-.pl-menu button:hover, .pl-menu a:hover { background: #f2f5fa; color: var(--navy-dark); }
-.pl-menu i { width: 17px; text-align: center; color: var(--navy-light); font-size: 14px; }
-.pl-menu hr { border: none; border-top: 1px solid #eef0f5; margin: 6px 4px; }
-.pl-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
-.pl-pill { font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 99px; background: var(--info-bg); color: var(--navy); }
-.pl-pill.gold { background: #fbf3dc; color: #7a6417; }
-.pl-pill.green { background: var(--green-light); color: var(--green); }
-
-/* ---------- FIGURES ---------- */
-.pl-figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); border-bottom: 1px solid #eef0f5; }
-.pl-fig { padding: 22px 16px; text-align: center; border-right: 1px solid #eef0f5; }
-.pl-fig:last-child { border-right: none; }
-.pl-fig-num { font-size: 26px; font-weight: 700; color: var(--navy); line-height: 1.05; letter-spacing: -.02em; }
-.pl-fig-num.gold { color: var(--gold); }
-.pl-fig-lbl { font-size: 10.5px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-top: 7px; }
-
-.pl-flag { margin: 18px 26px 0; padding: 14px 16px; border-radius: 10px; font-size: 14px; line-height: 1.6; }
-.pl-flag.info { background: var(--info-bg); color: var(--navy-dark); }
-.pl-flag.warn { background: #fdf6e3; color: #6b5514; }
-
-/* ---------- DENSE DATA GRID ---------- */
-.pl-data { padding: 22px 26px 26px; }
-.pl-dgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0 34px; }
-.pl-dblock { break-inside: avoid; }
-.pl-dtitle {
-  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
-  color: var(--navy); padding-bottom: 7px; margin: 20px 0 2px; border-bottom: 2px solid var(--navy);
-}
-.pl-dblock:first-child .pl-dtitle { margin-top: 0; }
-.pl-drow { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid #f1f3f7; font-size: 13.5px; line-height: 1.4; }
-.pl-drow:last-child { border-bottom: none; }
-.pl-dk { color: var(--text-muted); flex-shrink: 0; }
-.pl-dv { font-weight: 600; color: var(--text); text-align: right; font-variant-numeric: tabular-nums; }
-
-/* ---------- CHARTS ---------- */
-.pl-charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); gap: 18px; margin-bottom: 20px; }
-.pl-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; }
-.pl-card-h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; gap: 12px; }
-.pl-card-t { font-size: 16px; font-weight: 700; color: var(--navy-dark); }
-.pl-card-s { font-size: 12.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
-.pl-chart { width: 100%; display: block; }
-.pl-legend { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 12px; font-size: 12.5px; color: var(--text-muted); }
-.pl-legend span { display: inline-flex; align-items: center; gap: 7px; }
-.pl-swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
-.pl-nodata { padding: 26px 4px; text-align: center; font-size: 13px; color: var(--text-muted); line-height: 1.65; }
-
-/* ---------- AGENT & TRACK LAYOUT ---------- */
-.pl-agent-track-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; align-items: stretch; }
-
-/* ---------- AGENT CARD ---------- */
-.pl-agent { 
-  background: var(--navy-dark); 
-  border-radius: 16px; 
-  padding: 30px; 
-  color: #fff; 
-  position: relative; 
-  display: flex; 
-  flex-direction: column; 
-  justify-content: space-between;
-  box-shadow: 0 12px 30px rgba(14, 34, 72, 0.4); 
-}
-.pl-agent-toggle {
-  position: absolute;
-  top: 24px; right: 24px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 8px;
-  display: flex;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.pl-agent-toggle button {
-  background: transparent; border: none; color: #cdd9ec; padding: 6px 12px;
-  font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.2s;
-}
-.pl-agent-toggle button.active { background: var(--gold); color: var(--navy-dark); }
-.pl-agent-top { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 16px; margin-top: 10px; }
-.pl-agent-photo { width: 108px; height: 108px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--gold); box-shadow: 0 6px 20px rgba(0,0,0,.34); }
-.pl-agent-meta { flex: 1; padding-right: 10px; } 
-.pl-agent-kicker { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
-.pl-agent-name { font-family: 'Playfair Display', Georgia, serif; font-size: 27px; font-weight: 700; margin: 0 0 4px; }
-.pl-agent-title { font-size: 14px; color: #cdd9ec; line-height: 1.55; }
-.pl-agent-lic { font-size: 12.5px; color: #90a4c4; margin-top: 6px; }
-.pl-agent-body { font-size: 14.5px; color: #cdd9ec; line-height: 1.72; margin-bottom: 20px; }
-.pl-agent-body strong { color: #fff; }
-.pl-agent-brand-bottom { 
-  display: flex; flex-direction: column; gap: 16px; margin-top: auto; 
-  padding-top: 20px; border-top: 1px solid rgba(255,255,255,.14); 
-}
-.pl-agent-contact { display: flex; flex-wrap: wrap; gap: 9px; }
-.pl-agent-contact a {
-  display: inline-flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600;
-  padding: 10px 16px; border-radius: 9px; text-decoration: none;
-  background: rgba(255,255,255,.11); color: #fff; border: 1px solid rgba(255,255,255,.18);
-}
-.pl-agent-contact a:hover { background: rgba(255,255,255,.19); }
-.pl-agent-contact a.gold { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
-.pl-agent-contact a.gold:hover { background: #cfa930; }
-.pl-agent-logo-large { height: 100px; width: auto; object-fit: contain; align-self: flex-start; background: #fff; padding: 4px 8px; border-radius: 6px; }
-
-/* ---------- ZILLOW STYLE MATCHES ---------- */
-.z-matches-wrap { margin-bottom: 24px; }
-.z-matches-title { font-size: 22px; font-weight: 800; color: #1a1a2e; margin: 0 0 16px; font-family: 'Source Sans 3', sans-serif; }
-.z-matches-alert {
-  background: #e9ecef; border-radius: 8px; padding: 14px 20px; font-size: 15px; color: #1a1a2e;
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-}
-.z-matches-alert i { font-size: 18px; color: #5a6070; }
-.z-matches-alert a { color: #0054ff; text-decoration: underline; cursor: pointer; }
-.z-matches-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
-.z-match-card {
-  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px;
-  min-width: 340px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); display: flex; gap: 16px;
-}
-.z-match-avatar { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-.z-match-info { flex: 1; }
-.z-match-name-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-.z-match-name { font-size: 16px; font-weight: 700; color: #1a1a2e; margin: 0; }
-.z-match-rating { font-size: 14px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 4px; }
-.z-match-rating i { color: #0054ff; font-size: 12px; }
-.z-match-rating span { color: #5a6070; font-weight: 400; }
-.z-match-broker { font-size: 13px; color: #5a6070; margin-bottom: 12px; }
-.z-match-stat { font-size: 14px; color: #5a6070; margin-bottom: 4px; }
-.z-match-stat strong { color: #1a1a2e; }
-
 /* ---------- TRACK ---------- */
-.pl-track { background: #fff; border: 2px solid var(--gold); border-radius: 16px; padding: 28px; }
+.pl-track { background: #fff; border: 2px solid var(--gold); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
 .pl-track-badge {
   display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em; color: #7a6417; background: #fbf3dc;
@@ -313,41 +133,9 @@
 }
 .pl-track h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 25px; color: var(--navy-dark); margin: 0 0 9px; }
 .pl-track p { font-size: 15px; color: var(--text-muted); line-height: 1.7; margin: 0 0 16px; }
-.pl-track ul { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: 1fr; gap: 9px; }
+.pl-track ul { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 9px; }
 .pl-track ul li { font-size: 14px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
 .pl-track ul li i { color: var(--green); margin-top: 3px; }
-
-/* ---------- ZILLOW STYLE PROCEEDS CALC ---------- */
-.pl-zcalc { max-width: 800px; margin: 0 auto 20px; }
-.pl-zcalc-header { text-align: center; margin-bottom: 24px; }
-.pl-zcalc-header p { color: #5a6070; margin: 0 0 4px; font-size: 14px; }
-.pl-zcalc-header h3 { font-size: 32px; font-weight: 800; color: #0e2248; margin: 0; }
-.pl-zcalc-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.pl-zcalc-label { font-size: 15px; font-weight: 600; color: #1a1a2e; display:flex; align-items:center; gap:6px; }
-.pl-zcalc-input-wrap { position: relative; width: 140px; }
-.pl-zcalc-input-wrap span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #5a6070; font-weight: 500; }
-.pl-zcalc-input { width: 100%; padding: 10px 12px 10px 24px; font-size: 15px; font-weight: 600; font-family: inherit; border: 1px solid var(--border); border-radius: 8px; text-align: right; }
-.pl-zcalc-input:focus { outline: none; border-color: var(--navy-light); }
-.pl-zcalc-dropdown { border-bottom: 1px solid #eef0f5; padding: 16px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-.pl-zcalc-val { font-size: 15px; font-weight: 600; color: #1a1a2e; }
-.pl-zcalc-val i { color: #8a93a6; font-size: 12px; margin-left: 6px; }
-.pl-zcalc-total { display: flex; justify-content: space-between; align-items: center; padding-top: 20px; margin-top: 10px; }
-.pl-zcalc-total-lbl { font-size: 18px; font-weight: 700; color: #0e2248; }
-.pl-zcalc-total-val { font-size: 18px; font-weight: 700; color: #0e2248; }
-.pl-icon-info { display:inline-flex; align-items:center; justify-content:center; width:16px; height:16px; border:1px solid #8a93a6; border-radius:50%; font-size:10px; color:#8a93a6; font-style:normal; cursor:help; }
-
-/* Zillow Slider CSS */
-.zillow-slider {
-  -webkit-appearance: none; width: 100%; height: 4px; background: #e2e8f0; border-radius: 2px; outline: none; margin: 15px 0 25px;
-}
-.zillow-slider::-webkit-slider-thumb {
-  -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%;
-  background: #ffffff; border: 2px solid #cbd5e1; box-shadow: 0 2px 4px rgba(0,0,0,0.2); cursor: pointer; margin-top: -10px;
-}
-.zillow-slider::-webkit-slider-runnable-track {
-  width: 100%; height: 4px; cursor: pointer;
-  background: linear-gradient(to right, #0054ff var(--value, 50%), #e2e8f0 var(--value, 50%)); border-radius: 2px;
-}
 
 /* ---------- FORMS ---------- */
 .pl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -362,13 +150,13 @@
   background: var(--gold); color: var(--navy-dark); border: none; border-radius: 9px; cursor: pointer;
 }
 .pl-form button:hover { background: #cfa930; }
-#pl-appeal .pl-form input { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.09); color: #fff; }
-#pl-appeal .pl-form input::placeholder { color: #90a4c4; }
-#pl-appeal .pl-form input:focus { border-color: var(--gold); background: rgba(255,255,255,.15); }
+.pl-agent .pl-form input { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.09); color: #fff; }
+.pl-agent .pl-form input::placeholder { color: #90a4c4; }
+.pl-agent .pl-form input:focus { border-color: var(--gold); background: rgba(255,255,255,.15); }
 .pl-fine { font-size: 12px; color: var(--text-muted); margin-top: 12px; line-height: 1.6; }
-#pl-appeal .pl-fine { color: #90a4c4; }
+.pl-agent .pl-fine { color: #90a4c4; }
 .pl-sent { background: var(--green-light); border: 1px solid #b8d8c4; color: var(--green); border-radius: 11px; padding: 24px; text-align: center; font-size: 15.5px; font-weight: 600; line-height: 1.6; }
-#pl-appeal .pl-sent { background: #1e6b3a; border-color: #2e8d52; color: #fff; }
+.pl-agent .pl-sent { background: #1e6b3a; border-color: #2e8d52; color: #fff; }
 
 .pl-src { font-size: 12.5px; color: var(--text-muted); line-height: 1.75; padding: 20px 24px; background: #f7f8fa; border: 1px solid var(--border); border-radius: 12px; }
 .pl-src strong { color: var(--navy-dark); }
@@ -382,7 +170,7 @@
 @media (max-width: 880px) {
   .pl-media { grid-template-columns: 1fr; }
   .pl-media-main, .pl-media-side, #pl-map { min-height: 250px; }
-  .pl-agent-track-row { grid-template-columns: 1fr; }
+  .pl-calc-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .pl-hero { min-height: 520px; padding: 62px 16px 56px; }
@@ -395,12 +183,252 @@
   .pl-menu { left: 0; right: 0; min-width: 0; }
   .pl-form { grid-template-columns: 1fr; }
   .pl-fig { border-right: none; border-bottom: 1px solid #eef0f5; }
-  .pl-agent-top { flex-direction: column; align-items: center; text-align: center; margin-top: 30px; }
-  .pl-agent-meta { padding-right: 0; }
+  .pl-agent-top { flex-direction: column; text-align: center; align-items: center; }
   .pl-track, .pl-agent, .pl-card { padding: 20px; }
-  .pl-agent-contact { justify-content: center; }
-  .pl-agent-brand-bottom { align-items: center; }
+  .pl-field-2 { grid-template-columns: 1fr; }
 }
+
+/* ============================================================
+   MODAL OVERLAY  ·  Zillow style property panel
+   ============================================================ */
+.plm-backdrop {
+  position: fixed; inset: 0; z-index: 4000; background: rgba(10,20,40,.62);
+  backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .22s;
+}
+.plm-backdrop.open { opacity: 1; pointer-events: auto; }
+
+.plm {
+  position: fixed; z-index: 4001; inset: 24px; max-width: 1180px; margin: 0 auto;
+  background: #fff; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 30px 90px rgba(6,16,38,.45);
+  display: flex; flex-direction: column;
+  transform: translateY(22px) scale(.985); opacity: 0;
+  pointer-events: none; transition: transform .26s cubic-bezier(.16,.84,.44,1), opacity .22s;
+}
+.plm.open { transform: none; opacity: 1; pointer-events: auto; }
+
+.plm-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 13px 20px; border-bottom: 1px solid #eef0f5; background: #fff; flex-shrink: 0;
+}
+.plm-back {
+  display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 600;
+  font-family: inherit; background: none; border: none; color: #1a1a2e; cursor: pointer; padding: 6px 4px;
+}
+.plm-back:hover { color: var(--navy); }
+.plm-bar-actions { display: flex; align-items: center; gap: 4px; position: relative; }
+.plm-barbtn {
+  display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;
+  font-family: inherit; background: none; border: none; color: #1a1a2e;
+  padding: 8px 13px; border-radius: 8px; cursor: pointer;
+}
+.plm-barbtn:hover { background: #f2f5fa; }
+.plm-barbtn i { font-size: 15px; }
+.plm-barbtn.saved i { color: var(--red); }
+
+.plm-scroll { overflow-y: auto; overflow-x: hidden; flex: 1; -webkit-overflow-scrolling: touch; }
+
+/* photo strip */
+.plm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #e8ecf3; position: relative; }
+.plm-photo { position: relative; height: 340px; background: #dde3ec; overflow: hidden; }
+.plm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.plm-photo.map-cell { height: 340px; }
+.plm-photo #plm-map { width: 100%; height: 100%; }
+.plm-tag {
+  position: absolute; top: 16px; left: 16px; z-index: 6;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border-radius: 99px; padding: 8px 16px;
+  font-size: 13px; font-weight: 700; color: #1a1a2e; box-shadow: 0 2px 10px rgba(0,0,0,.22);
+}
+.plm-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: #8a93a6; }
+.plm-tag.live .dot { background: #1e8a4a; box-shadow: 0 0 0 3px rgba(30,138,74,.22); }
+.plm-tag.soon .dot { background: #b8972a; }
+.plm-tag.pending .dot { background: #d97706; }
+.plm-tag.sold .dot { background: var(--navy); }
+.plm-imgcredit {
+  position: absolute; bottom: 0; left: 0; right: 0; z-index: 4; pointer-events: none;
+  background: linear-gradient(transparent, rgba(0,0,0,.55)); color: #fff; font-size: 11px; padding: 20px 14px 8px;
+}
+.plm-swap {
+  position: absolute; bottom: 14px; right: 14px; z-index: 6;
+  display: inline-flex; align-items: center; gap: 8px; background: #fff; border: none;
+  border-radius: 9px; padding: 9px 14px; font-size: 13px; font-weight: 700; font-family: inherit;
+  color: #1a1a2e; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.24);
+}
+.plm-swap:hover { background: #f2f5fa; }
+
+/* main body */
+.plm-body { display: grid; grid-template-columns: 1fr 348px; gap: 30px; padding: 26px 30px 34px; align-items: start; }
+.plm-main { min-width: 0; }
+.plm-rail { position: sticky; top: 0; }
+
+.plm-price { font-size: 40px; font-weight: 800; color: #0e2248; letter-spacing: -.025em; line-height: 1; }
+.plm-price-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #5a6070; margin-top: 8px; }
+.plm-addr { font-size: 19px; color: #1a1a2e; margin-top: 12px; font-weight: 500; }
+.plm-addr span { color: #5a6070; font-weight: 400; }
+
+.plm-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 4px; }
+.plm-fchip {
+  display: inline-flex; align-items: center; gap: 10px; background: #f4f6fa;
+  border-radius: 10px; padding: 12px 16px; font-size: 15px; color: #1a1a2e;
+}
+.plm-fchip i { color: #5a6070; font-size: 15px; }
+.plm-fchip b { font-weight: 700; }
+
+.plm-alert {
+  display: flex; gap: 12px; align-items: flex-start; margin-top: 18px;
+  border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6;
+}
+.plm-alert i { margin-top: 2px; }
+.plm-alert.warn { background: #fdf6e3; color: #6b5514; }
+.plm-alert.info { background: var(--info-bg); color: var(--navy-dark); }
+
+.plm-sec { margin-top: 34px; }
+.plm-sec-h { font-size: 21px; font-weight: 800; color: #1a1a2e; margin: 0 0 4px; letter-spacing: -.01em; }
+.plm-sec-s { font-size: 13.5px; color: #5a6070; margin: 0 0 16px; line-height: 1.6; }
+
+.plm-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 0 34px; }
+.plm-fgroup { break-inside: avoid; }
+.plm-fgroup h4 {
+  font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+  color: #0e2248; margin: 18px 0 2px; padding-bottom: 7px; border-bottom: 2px solid #0e2248;
+}
+.plm-fgroup:first-child h4, .plm-fgroup:nth-child(2) h4 { margin-top: 0; }
+.plm-frow { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid #f1f3f7; font-size: 13.5px; line-height: 1.45; }
+.plm-frow:last-child { border-bottom: none; }
+.plm-fk { color: #5a6070; flex-shrink: 0; }
+.plm-fv { font-weight: 700; color: #1a1a2e; text-align: right; font-variant-numeric: tabular-nums; }
+
+.plm-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(126px, 1fr)); gap: 2px; background: #eef0f5; border-radius: 12px; overflow: hidden; margin-top: 4px; }
+.plm-kpi { background: #fff; padding: 18px 12px; text-align: center; }
+.plm-kpi-n { font-size: 21px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.plm-kpi-n.gold { color: var(--gold); }
+.plm-kpi-l { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #5a6070; margin-top: 6px; }
+
+.plm-chartgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* rail cards */
+.plm-rcard { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+.plm-rcard.gold { border: 2px solid var(--gold); }
+.plm-rcard h4 { font-size: 17px; font-weight: 800; color: #0e2248; margin: 0 0 6px; }
+.plm-rcard p { font-size: 13.5px; color: #5a6070; line-height: 1.65; margin: 0 0 14px; }
+.plm-rbtn {
+  display: block; width: 100%; text-align: center; padding: 14px; border-radius: 9px;
+  font-size: 15px; font-weight: 700; font-family: inherit; border: none; cursor: pointer;
+  background: var(--gold); color: var(--navy-dark); text-decoration: none;
+}
+.plm-rbtn:hover { background: #cfa930; }
+.plm-rbtn.ghost { background: #fff; border: 1px solid var(--border); color: var(--navy); margin-top: 9px; }
+.plm-rbtn.ghost:hover { background: #f6f8fc; }
+
+.plm-agent { background: var(--navy-dark); border-radius: 14px; padding: 22px; color: #fff; }
+.plm-agent-toggle { display: flex; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+.plm-agent-toggle button { flex: 1; background: transparent; border: none; color: #cdd9ec; padding: 8px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; }
+.plm-agent-toggle button.active { background: var(--gold); color: var(--navy-dark); }
+.plm-agent-row { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+.plm-agent-row img { width: 66px; height: 66px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex-shrink: 0; }
+.plm-agent-nm { font-size: 17px; font-weight: 800; line-height: 1.25; }
+.plm-agent-ti { font-size: 12.5px; color: #cdd9ec; margin-top: 3px; line-height: 1.45; }
+.plm-agent-li { font-size: 11.5px; color: #90a4c4; margin-top: 4px; }
+.plm-agent-bio { font-size: 13px; color: #cdd9ec; line-height: 1.7; margin-bottom: 15px; }
+.plm-agent-bio strong { color: #fff; }
+.plm-agent-btns { display: grid; gap: 8px; }
+.plm-agent-btns a {
+  display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px;
+  border-radius: 9px; font-size: 13.5px; font-weight: 700; text-decoration: none;
+  background: rgba(255,255,255,.12); color: #fff; border: 1px solid rgba(255,255,255,.2);
+}
+.plm-agent-btns a.gold { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
+.plm-agent-btns a:hover { filter: brightness(1.08); }
+.plm-agent-logo { width: 100%; max-height: 46px; object-fit: contain; background: #fff; border-radius: 7px; padding: 6px; margin-top: 14px; }
+
+.plm-note { font-size: 11.5px; color: #8a93a6; line-height: 1.7; margin-top: 14px; }
+
+.plm-menu {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 90; min-width: 258px;
+  background: #fff; border: 1px solid var(--border); border-radius: 12px;
+  box-shadow: 0 14px 44px rgba(14,34,72,.24); padding: 7px; display: none;
+}
+.plm-menu.open { display: block; }
+.plm-menu button, .plm-menu a {
+  display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
+  font-size: 14px; font-family: inherit; color: var(--text); background: none; border: none;
+  padding: 11px 12px; border-radius: 8px; cursor: pointer; text-decoration: none;
+}
+.plm-menu button:hover, .plm-menu a:hover { background: #f2f5fa; color: var(--navy-dark); }
+.plm-menu i { width: 17px; text-align: center; color: var(--navy-light); }
+.plm-menu hr { border: none; border-top: 1px solid #eef0f5; margin: 6px 4px; }
+
+body.plm-locked { overflow: hidden; }
+
+@media (max-width: 1020px) {
+  .plm-body { grid-template-columns: 1fr; gap: 24px; }
+  .plm-rail { position: static; }
+  .plm-chartgrid { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .plm { inset: 0; border-radius: 0; }
+  .plm-photos { grid-template-columns: 1fr; }
+  .plm-photo, .plm-photo.map-cell { height: 232px; }
+  .plm-body { padding: 20px 17px 30px; }
+  .plm-price { font-size: 32px; }
+  .plm-barbtn span { display: none; }
+  .plm-menu { right: -8px; min-width: 232px; }
+}
+
+/* ---------- ZILLOW STYLE AGENT MATCHES ---------- */
+.z-matches-alert {
+  background: #eef1f5; border-radius: 9px; padding: 13px 18px; font-size: 14px; color: #1a1a2e;
+  display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
+}
+.z-matches-alert i { font-size: 17px; color: var(--gold); }
+.z-matches-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
+.z-match-card {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px;
+  min-width: 330px; flex: 1; box-shadow: 0 4px 12px rgba(0,0,0,.05); display: flex; gap: 16px;
+}
+.z-match-avatar { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.z-match-info { flex: 1; min-width: 0; }
+.z-match-name-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 2px; }
+.z-match-name { font-size: 16px; font-weight: 800; color: #1a1a2e; margin: 0; }
+.z-match-rating { font-size: 14px; font-weight: 700; color: #1a1a2e; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.z-match-rating i { color: var(--gold); font-size: 12px; }
+.z-match-rating span { color: #5a6070; font-weight: 400; }
+.z-match-rating a { text-decoration: none; }
+.z-match-broker { font-size: 13px; color: #5a6070; margin-bottom: 12px; }
+.z-match-stat { font-size: 14px; color: #5a6070; margin-bottom: 4px; }
+.z-match-stat strong { color: #1a1a2e; }
+
+/* ---------- ZILLOW STYLE PROCEEDS CALC ---------- */
+.pl-zcalc { max-width: 100%; }
+.pl-zcalc-header { text-align: center; margin-bottom: 22px; }
+.pl-zcalc-header p { color: #5a6070; margin: 0 0 4px; font-size: 14px; }
+.pl-zcalc-header h3 { font-size: 34px; font-weight: 800; color: #0e2248; margin: 0; letter-spacing: -.02em; }
+.pl-zcalc-row { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin-bottom: 8px; }
+.pl-zcalc-label { font-size: 15px; font-weight: 600; color: #1a1a2e; display: flex; align-items: center; gap: 7px; }
+.pl-zcalc-input-wrap { position: relative; width: 150px; flex-shrink: 0; }
+.pl-zcalc-input-wrap > span { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #5a6070; font-weight: 500; }
+.pl-zcalc-input { width: 100%; padding: 10px 12px 10px 24px; font-size: 15px; font-weight: 600; font-family: inherit; border: 1px solid var(--border); border-radius: 8px; text-align: right; }
+.pl-zcalc-input:focus { outline: none; border-color: var(--navy-light); }
+.pl-zcalc-dropdown { border-bottom: 1px solid #eef0f5; padding: 16px 0; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.pl-zcalc-val { font-size: 15px; font-weight: 700; color: #1a1a2e; white-space: nowrap; }
+.pl-zcalc-val i { color: #8a93a6; font-size: 12px; margin-left: 6px; }
+.pl-zcalc-total { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 20px; margin-top: 10px; border-top: 2px solid #0e2248; }
+.pl-zcalc-total-lbl { font-size: 17px; font-weight: 800; color: #0e2248; }
+.pl-zcalc-total-val { font-size: 18px; font-weight: 800; color: #0e2248; }
+.pl-icon-info { display: inline-flex; align-items: center; justify-content: center; width: 16px; height: 16px; border: 1px solid #8a93a6; border-radius: 50%; font-size: 10px; color: #8a93a6; font-style: normal; cursor: help; }
+
+.zillow-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: #e2e8f0; border-radius: 2px; outline: none; margin: 14px 0 22px; }
+.zillow-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid var(--navy); box-shadow: 0 2px 5px rgba(0,0,0,.22); cursor: pointer; margin-top: -9px; }
+.zillow-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--navy); cursor: pointer; }
+.zillow-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background: linear-gradient(to right, var(--navy) var(--value, 50%), #e2e8f0 var(--value, 50%)); border-radius: 2px; }
+
+#pl-appeal .pl-form input { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.09); color: #fff; }
+#pl-appeal .pl-form input::placeholder { color: #90a4c4; }
+#pl-appeal .pl-form input:focus { border-color: var(--gold); background: rgba(255,255,255,.15); }
+#pl-appeal .pl-fine { color: #90a4c4; }
+#pl-appeal .pl-sent { background: #1e6b3a; border-color: #2e8d52; color: #fff; }
+
 </style>
 
 <script type="application/ld+json">
@@ -423,6 +451,8 @@
         "name": "John Scafide",
         "jobTitle": "Licensed NJ Real Estate Agent and Tax Professional",
         "identifier": "NJ License #2079591",
+        "telephone": "856-404-1098",
+        "email": "john@johnscafide.com",
         "worksFor": { "@type": "Organization", "name": "Opus Elite Real Estate" },
         "areaServed": { "@type": "State", "name": "New Jersey" }
       }
@@ -432,6 +462,8 @@
       "mainEntity": [
         { "@type": "Question", "name": "Where does this property tax data come from?",
           "acceptedAnswer": { "@type": "Answer", "text": "It comes from the New Jersey Office of GIS statewide parcel layer, joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the same system municipal tax assessors use. The data is refreshed once a year, typically in late spring or early summer." } },
+        { "@type": "Question", "name": "Does this show whether a home is for sale?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only partly. There is no free public source that reports live listing status in New Jersey, because MLS data is a licensed feed. This tool reads assessment records, so it shows a home as off market unless the recorded deed is recent or the listing has been added manually. A home shown as off market could still be listed. For current listing status, contact a licensed agent with MLS access." } },
         { "@type": "Question", "name": "Why is the owner name blank?",
           "acceptedAnswer": { "@type": "Answer", "text": "Owner names are removed from the public version of this data under Daniel's Law, New Jersey legislation restricting public disclosure of certain personal information. Property details and tax figures remain public." } },
         { "@type": "Question", "name": "Is the tax amount shown my current bill?",
@@ -458,11 +490,53 @@
 </script>
 </head>
 <body>
-
 <nav id="main-nav"></nav>
 <div class="pl-toast" id="pl-toast"></div>
 
-<!-- HERO -->
+<!-- ============================================================
+     MODAL OVERLAY
+     ============================================================ -->
+<div class="plm-backdrop" id="plm-backdrop" onclick="plCloseModal()"></div>
+<div class="plm" id="plm" role="dialog" aria-modal="true" aria-label="Property details">
+  <div class="plm-bar">
+    <button class="plm-back" onclick="plCloseModal()"><i class="fas fa-chevron-left"></i> Back to search</button>
+    <div class="plm-bar-actions">
+      <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()"><i class="far fa-heart"></i><span>Save</span></button>
+      <button class="plm-barbtn" onclick="plShare()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+      <button class="plm-barbtn" onclick="plMenu(event)"><i class="fas fa-ellipsis"></i><span>More</span></button>
+      <div class="plm-menu" id="plm-menu">
+        <button onclick="plOpenForm('sell')"><i class="fas fa-sign-hanging"></i> Sell this home</button>
+        <button onclick="plOpenForm('value')"><i class="fas fa-house-chimney-medical"></i> What is it worth today?</button>
+        <button onclick="plOpenForm('buy')"><i class="fas fa-key"></i> Buy a home like this</button>
+        <button onclick="plOpenForm('offer')"><i class="fas fa-file-signature"></i> Make an offer</button>
+        <button onclick="plOpenForm('track')"><i class="fas fa-bell"></i> Track this home</button>
+        <hr>
+        <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
+        <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
+        <a href="anchor-estimator.html"><i class="fas fa-piggy-bank"></i> Check ANCHOR and Stay NJ</a>
+        <a href="property-tax-appeal.html"><i class="fas fa-book-open"></i> How NJ appeals work</a>
+        <hr>
+        <button onclick="plCopy()"><i class="fas fa-link"></i> Copy link</button>
+        <button onclick="plDirections()"><i class="fas fa-diamond-turn-right"></i> Driving directions</button>
+        <button onclick="window.print()"><i class="fas fa-print"></i> Print this report</button>
+      </div>
+    </div>
+  </div>
+  <div class="plm-scroll" id="plm-scroll">
+    <div class="plm-photos" id="plm-photos"></div>
+    <div class="plm-body">
+      <div class="plm-main">
+        <div id="plm-head"></div>
+        <div id="plm-main"></div>
+      </div>
+      <div class="plm-rail" id="plm-rail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
 <div class="pl-hero">
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
@@ -486,14 +560,14 @@
         </button>
       </div>
     </div>
-    <div class="pl-hero-note">Tap the crosshair to use your current location. Nothing is stored, no email needed to see results.</div>
+    <div class="pl-hero-note">Tap the crosshair to use your current location. Nothing about you is stored, no email needed to see results.</div>
   </div>
 </div>
 
-<!-- RESULTS -->
-<section class="section" style="padding-top:44px;">
+<!-- STATUS STRIP -->
+<section class="section" style="padding-top:38px;padding-bottom:10px;">
   <div class="section-inner">
-    <div id="pl-out" class="pl-result">
+    <div id="pl-inline" class="pl-result">
       <div class="pl-state">
         <i class="fas fa-house-chimney"></i>
         <div class="pl-state-title">Enter an address above to begin</div>
@@ -543,6 +617,10 @@
         <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. Public data, refreshed roughly once a year in late spring or early summer. Aerial imagery and parcel boundaries render from Esri World Imagery.</p></div>
       </div>
       <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Does this tell me if a home is for sale? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Only partly, and I would rather be straight with you about it. Live listing status in New Jersey lives in the MLS, which is a licensed feed, not public data. There is no free source for it. So this page reads assessment records and shows a home as <strong>off market</strong> unless the recorded deed is recent or I have added the listing myself. A home marked off market could still be listed with another brokerage. If you want current status on a specific property, <a href="index.html#contact">just ask me</a>. I have MLS access and it takes 30 seconds.</p></div>
+      </div>
+      <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Owner names are stripped from the public version of this dataset under Daniel&rsquo;s Law, which restricts disclosure of certain personal information in New Jersey. Property characteristics, assessments, and tax figures are still public.</p></div>
       </div>
@@ -552,7 +630,7 @@
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Who pays the transfer fee when I sell? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>The seller pays the general realty transfer fee at closing, on a graduated schedule tied to sale price. A change that caught a lot of people off guard: for contracts executed on or after July 10, 2025, residential sales over $1,000,000 carry a graduated percent fee that is now the <strong>seller&rsquo;s</strong> responsibility instead of the buyer&rsquo;s, and it applies to the entire sale price, not just the amount above a million. Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. The proceeds calculator above accounts for all of it.</p></div>
+        <div class="faq-answer"><p>The seller pays the general realty transfer fee at closing, on a graduated schedule tied to sale price. A change that caught a lot of people off guard: for contracts executed on or after July 10, 2025, residential sales over $1,000,000 carry a graduated percent fee that is now the <strong>seller&rsquo;s</strong> responsibility instead of the buyer&rsquo;s, and it applies to the entire sale price, not just the amount above a million. Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. The net proceeds calculator accounts for all of it.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">My address did not come up. Why? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
@@ -574,7 +652,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="scripts.js"></script>
-
 <script>
 (function () {
   'use strict';
@@ -587,25 +664,22 @@
   var ESRI_TILES  = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   var ESRI_EXPORT = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export';
 
-  // OPTIONAL. Google Maps key with Street View Static enabled.
+  // Google Maps key, Street View Static enabled.
   var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
 
-  // Agent Profiles Database
   var AGENTS = {
     john: {
       name: 'John Scafide',
-      title: 'Licensed NJ Real Estate Agent and Tax Professional',
+      title: 'Licensed NJ Agent and Tax Professional',
       lic: 'NJ License #2079591',
       team: 'The McKenty Team / Opus Elite Real Estate',
       phone: '856-404-1098',
       email: 'john@johnscafide.com',
       photo: 'johnprofile.jpg',
       logo: 'opuslogo.jpg',
-      stars: '5.0',
-      reviews: '2',
-      sales: '4',
-      salesNear: '4',
-      bio: 'Most agents can tell you what your home is worth. Very few can also tell you what your assessment is doing to your bottom line. I have spent <strong>15 plus years preparing New Jersey tax returns</strong> and I sell real estate in <strong>{COUNTY} County</strong>, which means I read a settlement statement and a tax assessment the same way. Whether you are selling, buying, or just want to know if you are being overtaxed, that is one conversation, not three.'
+      stars: '5.0', reviews: '2', sales: '4', salesNear: '4',
+      reviewUrl: 'https://www.realtor.com/realestateagents/5fa33046326083001120e3ba',
+      bio: 'Most agents can tell you what your home is worth. Very few can also tell you what your assessment is doing to your bottom line. I have spent <strong>15 plus years preparing New Jersey tax returns</strong> and I sell real estate in <strong>{COUNTY}</strong>, which means I read a settlement statement and a tax assessment the same way.'
     },
     heather: {
       name: 'Heather Scafide',
@@ -616,11 +690,9 @@
       email: 'heather@heatherscafide.com',
       photo: 'heatherheadshot.png',
       logo: 'opuslogo.jpg',
-      stars: '5.0',
-      reviews: 'New',
-      sales: '0',
-      salesNear: '0',
-      bio: 'With a strong corporate background as a procurement buyer managing complex packaging and label supply chains, Heather brings elite negotiation skills and contract expertise to real estate. Now dedicating herself full-time to the South Jersey market, she ensures every client gets the strategic edge they need whether buying or selling.'
+      stars: '5.0', reviews: 'New', sales: '0', salesNear: '0',
+      reviewUrl: '',
+      bio: 'A corporate background managing complex packaging and label supply chains as a procurement buyer means <strong>negotiation and contracts are second nature</strong>. Now full time in the South Jersey market, Heather brings that same edge to every client, buying or selling.'
     }
   };
 
@@ -635,10 +707,10 @@
     'ZIP5','ST_ADDRESS','CITY_STATE','ADD_LOTS1'].join(',');
 
   var CLASSES = {
-    '1':'Vacant land','2':'Residential (1 to 4 units)','3A':'Farm, regular','3B':'Farm, qualified',
-    '4A':'Commercial','4B':'Industrial','4C':'Apartment building (5+ units)','5A':'Railroad','5B':'Railroad',
-    '6A':'Telephone','15A':'Public property','15B':'Other exempt','15C':'Cemetery','15D':'Other exempt',
-    '15E':'Other exempt','15F':'Other exempt'
+    '1':'Vacant Land','2':'Single Family / 1 to 4 Units','3A':'Farm, Regular','3B':'Farm, Qualified',
+    '4A':'Commercial','4B':'Industrial','4C':'Apartment, 5+ Units','5A':'Railroad','5B':'Railroad',
+    '6A':'Telephone','15A':'Public Property','15B':'Exempt','15C':'Cemetery','15D':'Exempt',
+    '15E':'Exempt','15F':'Exempt'
   };
 
   var current = null, map = null, rateTable = null;
@@ -650,7 +722,6 @@
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
     });
   }
-  function setOut(h) { el('pl-out').innerHTML = h; }
   function toast(msg) {
     var t = el('pl-toast');
     t.textContent = msg; t.style.display = 'block';
@@ -658,27 +729,18 @@
     window._plT = setTimeout(function () { t.style.display = 'none'; }, 2600);
   }
 
-  // Formatting helpers for Zillow Slider integration
-  window.plFormatNum = function(ele) {
-    var val = ele.value.replace(/\D/g, '');
-    if (val === '') val = '0';
-    ele.value = parseInt(val, 10).toLocaleString();
+  window.plFormatNum = function (e2) {
+    var v = e2.value.replace(/\D/g, ''); if (v === '') v = '0';
+    e2.value = parseInt(v, 10).toLocaleString();
   };
-  window.plSyncSlider = function(inputId, val) {
-    var e = el(inputId);
-    if(e) e.value = parseInt(val, 10).toLocaleString();
+  window.plSyncSlider = function (id, val) {
+    var e2 = el(id); if (e2) e2.value = parseInt(val, 10).toLocaleString();
   };
-  window.plUpdateSliderStyle = function(slider) {
-    var min = parseFloat(slider.min) || 0;
-    var max = parseFloat(slider.max) || 100;
-    var val = parseFloat(slider.value) || 0;
-    var pct = ((val - min) / (max - min)) * 100;
-    slider.style.setProperty('--value', pct + '%');
+  window.plUpdateSliderStyle = function (s) {
+    var mn = parseFloat(s.min) || 0, mx = parseFloat(s.max) || 100, v = parseFloat(s.value) || 0;
+    s.style.setProperty('--value', (((v - mn) / (mx - mn)) * 100) + '%');
   };
 
-  // ══════════════════════════════════════════════
-  // TYPEWRITER HEADLINE
-  // ══════════════════════════════════════════════
   var PHRASES = [
     'any NJ home', 'your home', "your parents' home", "your client's home",
     'the house down the street', 'that listing you are eyeing', 'the one that got away'
@@ -709,9 +771,6 @@
     setTimeout(tick, 550);
   })();
 
-  // ══════════════════════════════════════════════
-  // HELPERS
-  // ══════════════════════════════════════════════
   function deedYear(d) {
     if (!d) return null;
     var s = String(d).replace(/\D/g, '');
@@ -827,41 +886,170 @@
     var addr = (el('pl-addr').value || '').trim();
     if (!addr) { el('pl-addr').focus(); return; }
     var btn = el('pl-btn');
-    btn.disabled = true; map = null;
+    btn.disabled = true;
+    if (map) { try { map.remove(); } catch (e) {} map = null; }
 
-    setOut('<div class="pl-state"><div class="pl-spin"></div><div class="pl-state-title">Searching state records</div><div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>');
+    el('pl-inline').innerHTML =
+      '<div class="pl-state"><div class="pl-spin"></div>' +
+      '<div class="pl-state-title">Searching state records</div>' +
+      '<div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>';
     if (typeof gtag === 'function') gtag('event', 'property_lookup');
 
-    geocode(addr)
+    Promise.all([loadRates(), loadListings()])
+      .then(function () { return geocode(addr); })
       .then(function (g) {
         if (!g) throw new Error('nogeo');
         return parcelAt(g.lat, g.lon).then(function (f) { return { g: g, f: f }; });
       })
       .then(function (res) {
         if (!res.f) throw new Error('noparcel');
-        return loadRates().then(function () { render(res.f, res.g, addr); });
+        el('pl-inline').innerHTML = readyState();
+        render(res.f, res.g, addr);
       })
       .catch(function (e) {
         var msg = (e && e.message) === 'nogeo'
           ? 'We could not place that address. Try adding the town and zip code, or drop the unit number.'
           : 'We found the location but no parcel record matched. That usually means a condo unit, a brand new build, or a property billed together with other lots.';
-        setOut('<div class="pl-state"><i class="fas fa-circle-question"></i>' +
+        el('pl-inline').innerHTML =
+          '<div class="pl-state"><i class="fas fa-circle-question"></i>' +
           '<div class="pl-state-title">No match found</div><div class="pl-state-sub">' + msg + '</div></div>' +
-          '<div class="pl-src" style="margin-top:20px;">If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="index.html#contact">Send me the address</a> and I will look it up by hand.</div>');
+          '<div class="pl-src" style="margin-top:20px;">If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="index.html#contact">Send me the address</a> and I will look it up by hand.</div>';
       })
       .then(function () { btn.disabled = false; });
   };
 
+  function readyState() {
+    return '<div class="pl-state"><i class="fas fa-house-chimney"></i>' +
+      '<div class="pl-state-title">Search another address</div>' +
+      '<div class="pl-state-sub">Assessment, tax bill, block and lot, aerial view with real lot lines, tax history, and a net proceeds estimate.</div></div>';
+  }
+
   function loadRates() {
     if (rateTable !== null) return Promise.resolve();
-    return fetch('tax-rates.json')
-      .then(function (r) { return r.ok ? r.json() : null; })
+    return fetch('tax-rates.json').then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { rateTable = (j && j.rates) ? j.rates : {}; })
       .catch(function () { rateTable = {}; });
   }
 
   // ══════════════════════════════════════════════
-  // RENDER
+  // LISTING STATUS
+  // No free public API reports whether a NJ home is for sale. MLS status
+  // lives behind Bright MLS / IDX. So status resolves in this order:
+  //   1. listings.json override you maintain by hand
+  //   2. recorded deed inside the last 12 months -> Recently sold
+  //   3. otherwise -> Off market, which is what public record supports
+  // When you get an IDX feed, replace this one function.
+  // ══════════════════════════════════════════════
+  var listingTable = null;
+
+  function loadListings() {
+    if (listingTable !== null) return Promise.resolve();
+    return fetch('listings.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { listingTable = (j && j.listings) ? j.listings : {}; })
+      .catch(function () { listingTable = {}; });
+  }
+
+  var STATUS_CLASS = {
+    'For sale': 'live', 'For sale by owner': 'live', 'For rent': 'live',
+    'Coming soon': 'soon', 'Under contract': 'pending', 'Pending': 'pending',
+    'Just sold': 'sold', 'Recently sold': 'sold'
+  };
+
+  function resolveStatus(p, dy) {
+    var keys = [p.PAMS_PIN, (p.PROP_LOC || '').toUpperCase().trim()];
+    for (var i = 0; i < keys.length; i++) {
+      if (keys[i] && listingTable && listingTable[keys[i]]) {
+        var o = listingTable[keys[i]];
+        return {
+          label: o.status || 'For sale', cls: STATUS_CLASS[o.status] || 'live',
+          source: 'listed', detail: o
+        };
+      }
+    }
+    if (dy && (new Date().getFullYear() - dy) <= 1) {
+      return { label: 'Recently sold', cls: 'sold', source: 'deed',
+               detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' } };
+    }
+    return { label: 'Off market', cls: '', source: 'default',
+             detail: { note: 'No public record of an active listing. This page reads assessment data, not the MLS.' } };
+  }
+
+  // ══════════════════════════════════════════════
+  // PROPERTY LEDGER  (optional Supabase write)
+  // Fill these in after running supabase-property-ledger.sql.
+  // Blank = the page skips it entirely and nothing breaks.
+  // Records the PROPERTY only. Never the visitor.
+  // ══════════════════════════════════════════════
+  var LEDGER_URL = '';   // https://YOURPROJECT.supabase.co
+  var LEDGER_KEY = '';   // your anon / publishable key
+
+  function recordLookup(p, geo, rate, dy) {
+    try {
+      var payload = {
+        pams_pin: p.PAMS_PIN || '', address: p.PROP_LOC || '', town: p.MUN_NAME || '',
+        county: p.COUNTY || '', zip: p.ZIP5 || '', block: p.PCLBLOCK || '',
+        lot: p.PCLLOT || '', qualifier: p.PCLQCODE || '',
+        prop_class: (p.PROP_CLASS || '').trim(), year_built: +p.YR_CONSTR || null,
+        acres: +p.CALC_ACRE || null, dwelling_units: +p.DWELL || null,
+        building_desc: p.BLDG_DESC || '', land_value: +p.LAND_VAL || null,
+        improvement_value: +p.IMPRVT_VAL || null, assessed_value: +p.NET_VALUE || null,
+        last_year_tax: +p.LAST_YR_TX || null, effective_rate: rate ? +rate.toFixed(3) : null,
+        last_sale_price: +p.SALE_PRICE || null, last_sale_year: dy || null,
+        lat: geo.lat, lon: geo.lon
+      };
+
+      // always keep a local copy so the feature works with or without Supabase
+      var local = JSON.parse(localStorage.getItem('pl_seen') || '{}');
+      var k = payload.pams_pin || payload.address;
+      local[k] = { a: payload.address, t: payload.town, v: payload.assessed_value,
+                   x: payload.last_year_tax, n: ((local[k] && local[k].n) || 0) + 1, d: Date.now() };
+      localStorage.setItem('pl_seen', JSON.stringify(local));
+
+      if (!LEDGER_URL || !LEDGER_KEY) return;
+      fetch(LEDGER_URL.replace(/\/+$/, '') + '/rest/v1/rpc/record_lookup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', apikey: LEDGER_KEY,
+                   Authorization: 'Bearer ' + LEDGER_KEY },
+        body: JSON.stringify({ p: payload })
+      }).catch(function () {});
+    } catch (e) { /* never let logging break a lookup */ }
+  }
+
+  function timesSeen(pin) {
+    try {
+      var local = JSON.parse(localStorage.getItem('pl_seen') || '{}');
+      return (local[pin] && local[pin].n) || 0;
+    } catch (e) { return 0; }
+  }
+
+  // ══════════════════════════════════════════════
+  // MODAL
+  // ══════════════════════════════════════════════
+  window.plCloseModal = function () {
+    el('plm-backdrop').classList.remove('open');
+    el('plm').classList.remove('open');
+    document.body.classList.remove('plm-locked');
+    if (map) { try { map.remove(); } catch (e) {} map = null; }
+  };
+  function openModal() {
+    el('plm-backdrop').classList.add('open');
+    el('plm').classList.add('open');
+    document.body.classList.add('plm-locked');
+    el('plm-scroll').scrollTop = 0;
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && el('plm') && el('plm').classList.contains('open')) window.plCloseModal();
+  });
+
+  function fchip(icon, label) {
+    return '<div class="plm-fchip"><i class="fas ' + icon + '"></i><b>' + label + '</b></div>';
+  }
+  function frow(k, v) {
+    return v ? '<div class="plm-frow"><span class="plm-fk">' + k + '</span><span class="plm-fv">' + esc(v) + '</span></div>' : '';
+  }
+  // ══════════════════════════════════════════════
+  // RENDER  ->  modal overlay
   // ══════════════════════════════════════════════
   function render(feat, geo, typed) {
     var p = feat.attributes;
@@ -874,175 +1062,182 @@
     var dy = deedYear(p.DEED_DATE), sale = +p.SALE_PRICE || 0;
     var cls = (p.PROP_CLASS || '').trim().toUpperCase();
     var tenure = dy ? (new Date().getFullYear() - dy) : null;
+    var acres = +p.CALC_ACRE || 0;
+    var sqft = acres ? Math.round(acres * 43560) : 0;
     var mail = (p.ST_ADDRESS || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     var loc = (p.PROP_LOC || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
     var absentee = !!(mail && loc && mail !== loc);
+    var status = resolveStatus(p, dy);
 
     current = {
       address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: p.ZIP5 || '',
       assessed: assessed, land: land, imprv: imprv, tax: tax, rate: rate,
       block: p.PCLBLOCK || '', lot: p.PCLLOT || '', qual: p.PCLQCODE || '', pin: p.PAMS_PIN || '',
-      lat: geo.lat, lon: geo.lon, rings: rings, sale: sale, deedYear: dy, cls: cls
+      lat: geo.lat, lon: geo.lon, rings: rings, sale: sale, deedYear: dy, cls: cls,
+      status: status.label, acres: acres, sqft: sqft, yearBuilt: p.YR_CONSTR || ''
     };
 
-    function dr(k, v) {
-      return v ? '<div class="pl-drow"><span class="pl-dk">' + k + '</span><span class="pl-dv">' + esc(v) + '</span></div>' : '';
+    recordLookup(p, geo, rate, dy);
+    var seen = timesSeen(p.PAMS_PIN || '');
+
+    // ---------- photo strip ----------
+    var bbox = bboxFor(), sv = streetUrl(geo.lat, geo.lon);
+    el('plm-photos').innerHTML =
+      '<div class="plm-photo">' +
+        '<div class="plm-tag ' + status.cls + '" title="' + esc((status.detail && status.detail.note) || '') + '">' +
+          '<span class="dot"></span>' + esc(status.label) +
+          (status.detail && status.detail.price ? '  ·  ' + money(status.detail.price) : '') +
+        '</div>' +
+        '<img id="plm-photo-img" alt="View of ' + esc(current.address) + '" ' +
+          'src="' + (sv || aerialUrl(bbox, 900, 600)) + '" onerror="plPhotoFail()">' +
+        '<div class="plm-imgcredit" id="plm-credit">' + (sv ? 'Street level imagery, Google' : 'Aerial imagery, Esri World Imagery') + '</div>' +
+        (sv ? '<button class="plm-swap" id="plm-swap" onclick="plSwapPhoto()"><i class="fas fa-repeat"></i> Aerial view</button>' : '') +
+      '</div>' +
+      '<div class="plm-photo map-cell"><div id="plm-map"></div></div>';
+
+    // ---------- headline ----------
+    var chips = [];
+    if (CLASSES[cls]) chips.push(fchip('fa-building-columns', CLASSES[cls]));
+    if (p.YR_CONSTR) chips.push(fchip('fa-hammer', 'Built in ' + p.YR_CONSTR));
+    if (sqft) chips.push(fchip('fa-ruler-combined', sqft.toLocaleString() + ' Sq Ft Lot'));
+    if (p.DWELL > 0) chips.push(fchip('fa-door-open', p.DWELL + (p.DWELL == 1 ? ' Unit' : ' Units')));
+    if (sale > 1000 && dy) chips.push(fchip('fa-clock-rotate-left', 'Sold ' + money(sale) + ' in ' + dy));
+
+    var alert = '';
+    if (cls === '4C') alert = '<div class="plm-alert warn"><i class="fas fa-triangle-exclamation"></i><div><b>Heads up.</b> This parcel is an apartment building with five or more units, so the figures cover the whole building rather than one unit. If you rent here, you may still qualify for the ANCHOR renter benefit of up to $700.</div></div>';
+    else if (cls === '1') alert = '<div class="plm-alert warn"><i class="fas fa-seedling"></i><div><b>This is vacant land</b>, not a residence. The assessment reflects the lot only.</div></div>';
+    else if (rate && rate > 3.2) alert = '<div class="plm-alert warn"><i class="fas fa-scale-unbalanced"></i><div><b>That effective rate is on the high side.</b> Anything over roughly 3 percent is worth a second look. Either the assessment is out of line with what the home would actually sell for, or a deduction is being missed.</div></div>';
+    else if (tenure !== null && tenure >= 15) alert = '<div class="plm-alert info"><i class="fas fa-calendar-check"></i><div><b>Owned for ' + tenure + ' years.</b> If the assessment has not been revisited in that time, it is worth checking whether it still reflects reality.</div></div>';
+
+    if (status.source === 'listed' && status.detail) {
+      var d = status.detail;
+      alert = '<div class="plm-alert info"><i class="fas fa-sign-hanging"></i><div><b>' + esc(status.label) + '</b>' +
+        (d.price ? ' at ' + money(d.price) : '') + (d.mls ? '  ·  MLS ' + esc(d.mls) : '') +
+        (d.note ? '<br>' + esc(d.note) : '') +
+        (d.url ? '<br><a href="' + esc(d.url) + '">See the listing</a>' : '') + '</div></div>' + alert;
     }
 
-    var pills = [];
-    if (CLASSES[cls]) pills.push('<span class="pl-pill">' + esc(CLASSES[cls]) + '</span>');
-    if (p.YR_CONSTR) pills.push('<span class="pl-pill">Built ' + esc(p.YR_CONSTR) + '</span>');
-    if (p.CALC_ACRE) pills.push('<span class="pl-pill">' + (+p.CALC_ACRE).toFixed(2) + ' acres</span>');
-    if (tenure !== null && tenure >= 15) pills.push('<span class="pl-pill gold">Owned ' + tenure + '+ years</span>');
-    if (absentee) pills.push('<span class="pl-pill gold">Owner mails elsewhere</span>');
-    if (rate && rate <= 2.4) pills.push('<span class="pl-pill green">Below average rate</span>');
+    el('plm-head').innerHTML =
+      '<div class="plm-price">' + (assessed ? money(assessed) : 'No assessment') + '</div>' +
+      '<div class="plm-price-lbl">Assessed value  ·  ' + esc(current.town || 'NJ') + ' tax roll</div>' +
+      '<div class="plm-addr">' + esc(current.address) + '<span>, ' + esc(current.town) +
+        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? ' ' + esc(current.zip) : '') + '</span></div>' +
+      '<div class="plm-chips">' + chips.join('') + '</div>' + alert;
 
-    var flag = '';
-    if (cls === '4C') flag = '<div class="pl-flag warn"><strong>Heads up.</strong> This parcel is an apartment building with five or more units, so the figures cover the whole building rather than one unit. If you rent here, you may still qualify for the ANCHOR renter benefit of up to $700.</div>';
-    else if (cls === '1') flag = '<div class="pl-flag warn"><strong>This is vacant land</strong>, not a residence. The assessment reflects the lot only.</div>';
-    else if (rate && rate > 3.2) flag = '<div class="pl-flag warn"><strong>That effective rate is on the high side.</strong> Anything over roughly 3 percent is worth a second look. Either the assessment is out of line with what the home would actually sell for, or a deduction is being missed.</div>';
-    else if (tenure !== null && tenure >= 15) flag = '<div class="pl-flag info"><strong>Owned for ' + tenure + ' years.</strong> If the assessment has not been revisited in that time, it is worth checking whether it still reflects reality.</div>';
-
-    var bbox = bboxFor(), sv = streetUrl(geo.lat, geo.lon);
-    var chips = sv ? '<div class="pl-chips">' +
-        '<button class="pl-chip on" id="plc-street" onclick="plView(\'street\')">Street</button>' +
-        '<button class="pl-chip" id="plc-aerial" onclick="plView(\'aerial\')">Aerial</button></div>' : '';
-
-    setOut(
-      '<div class="pl-listing">' +
-        '<div class="pl-media">' +
-          '<div class="pl-media-main">' + chips +
-            '<img id="pl-photo" alt="View of ' + esc(current.address) + '" src="' + (sv || aerialUrl(bbox, 900, 560)) + '" onerror="plPhotoFail()">' +
-            '<div class="pl-imgnote" id="pl-imgnote">' + (sv ? 'Street level imagery, Google' : 'Aerial imagery, Esri World Imagery') + '</div>' +
-          '</div>' +
-          '<div class="pl-media-side"><div id="pl-map"></div></div>' +
-        '</div>' +
-
-        '<div class="pl-head">' +
-          '<div class="pl-head-top">' +
-            '<div>' +
-              '<div class="pl-status">Public record</div>' + '<div class="pl-status-tax">Tax</div>' +
-              '<h2 class="pl-head-addr">' + esc(current.address) + '</h2>' +
-              '<div class="pl-head-town">' + esc(current.town) + (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</div>' +
-            '</div>' +
-            '<div class="pl-actions">' +
-              '<button class="pl-act primary" onclick="plScrollTo(\'pl-track\')"><i class="fas fa-bell"></i> Track this home</button>' +
-              '<button class="pl-act icon" id="pl-menu-btn" onclick="plMenu(event)" aria-label="More options"><i class="fas fa-ellipsis"></i></button>' +
-              '<div class="pl-menu" id="pl-menu">' +
-                '<button onclick="plGo(\'sell\')"><i class="fas fa-sign-hanging"></i> Sell this home</button>' +
-                '<button onclick="plGo(\'value\')"><i class="fas fa-house-chimney-medical"></i> What is it worth today?</button>' +
-                '<button onclick="plScrollTo(\'pl-proceeds\')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>' +
-                '<button onclick="plGo(\'buy\')"><i class="fas fa-key"></i> Buy a home like this</button>' +
-                '<button onclick="plGo(\'offer\')"><i class="fas fa-file-signature"></i> Make an offer on this home</button>' +
-                '<hr>' +
-                '<button onclick="plScrollTo(\'pl-appeal\')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>' +
-                '<a href="anchor-estimator.html"><i class="fas fa-piggy-bank"></i> Check ANCHOR and Stay NJ</a>' +
-                '<a href="property-tax-appeal.html"><i class="fas fa-book-open"></i> How NJ appeals work</a>' +
-                '<hr>' +
-                '<button onclick="plCopy()"><i class="fas fa-link"></i> Copy link to this property</button>' +
-                '<button onclick="plShare()"><i class="fas fa-share-nodes"></i> Share</button>' +
-                '<button onclick="plDirections()"><i class="fas fa-diamond-turn-right"></i> Driving directions</button>' +
-                '<button onclick="window.print()"><i class="fas fa-print"></i> Print this report</button>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-          (pills.length ? '<div class="pl-pills">' + pills.join('') + '</div>' : '') +
-        '</div>' +
-
-        '<div class="pl-figs">' +
-          '<div class="pl-fig"><div class="pl-fig-num">' + (assessed ? money(assessed) : '-') + '</div><div class="pl-fig-lbl">Assessed value</div></div>' +
-          '<div class="pl-fig"><div class="pl-fig-num gold">' + (tax ? money(tax) : '-') + '</div><div class="pl-fig-lbl">Prior year tax</div></div>' +
-          '<div class="pl-fig"><div class="pl-fig-num">' + (rate ? rate.toFixed(2) + '%' : '-') + '</div><div class="pl-fig-lbl">Effective rate</div></div>' +
-          '<div class="pl-fig"><div class="pl-fig-num">' + (tax ? money(tax / 12) : '-') + '</div><div class="pl-fig-lbl">Per month</div></div>' +
-          '<div class="pl-fig"><div class="pl-fig-num">' + (sale > 1000 ? money(sale) : '-') + '</div><div class="pl-fig-lbl">Last sale' + (dy ? ' (' + dy + ')' : '') + '</div></div>' +
-        '</div>' +
-
-        flag +
-
-        '<div class="pl-data"><div class="pl-dgrid">' +
-          '<div class="pl-dblock">' +
-            '<div class="pl-dtitle">Assessment</div>' +
-            dr('Land value', land ? money(land) : '') +
-            dr('Improvement value', imprv ? money(imprv) : '') +
-            dr('Total assessed', assessed ? money(assessed) : '') +
-            dr('Prior year tax billed', tax ? money(tax) : '') +
-            dr('Effective rate', rate ? rate.toFixed(3) + '%' : '') +
-            dr('Tax per assessed $1,000', (rate && assessed) ? '$' + (tax / assessed * 1000).toFixed(2) : '') +
-          '</div>' +
-          '<div class="pl-dblock">' +
-            '<div class="pl-dtitle">Parcel identification</div>' +
-            dr('Block', p.PCLBLOCK) + dr('Lot', p.PCLLOT) + dr('Qualifier', p.PCLQCODE) +
-            dr('Additional lots', p.ADD_LOTS1) +
-            dr('Municipality', p.MUN_NAME) + dr('County', p.COUNTY) +
-            dr('State parcel ID', p.PAMS_PIN) +
-          '</div>' +
-          '<div class="pl-dblock">' +
-            '<div class="pl-dtitle">Property characteristics</div>' +
-            dr('Property class', cls + (CLASSES[cls] ? '  ·  ' + CLASSES[cls] : '')) +
-            dr('Building description', p.BLDG_DESC) +
-            dr('Land description', p.LAND_DESC) +
-            dr('Calculated acreage', p.CALC_ACRE ? (+p.CALC_ACRE).toFixed(3) + ' ac' : '') +
-            dr('Lot size', p.CALC_ACRE ? Math.round(+p.CALC_ACRE * 43560).toLocaleString() + ' sq ft' : '') +
-            dr('Year built', p.YR_CONSTR) +
-            dr('Dwelling units', p.DWELL > 0 ? p.DWELL : '') +
-            dr('Commercial units', p.COMM_DWELL > 0 ? p.COMM_DWELL : '') +
-          '</div>' +
-          '<div class="pl-dblock">' +
-            '<div class="pl-dtitle">Transfer history</div>' +
-            dr('Last sale price', sale > 1000 ? money(sale) : 'Not recorded') +
-            dr('Sale year', dy || '') +
-            dr('Years since transfer', tenure !== null ? tenure : '') +
-            dr('Deed book / page', [p.DEED_BOOK, p.DEED_PAGE].filter(Boolean).join(' / ')) +
-            dr('Change vs last sale', (sale > 1000 && assessed) ? (assessed >= sale ? '+' : '') + money(assessed - sale) : '') +
-            dr('Owner mailing', absentee ? [p.ST_ADDRESS, p.CITY_STATE].filter(Boolean).join(', ') : 'Same as property') +
-          '</div>' +
-        '</div></div>' +
-      '</div>' +
-
-      '<div class="pl-charts">' +
-        '<div class="pl-card">' +
-          '<div class="pl-card-h"><div class="pl-card-t">Where the assessment comes from</div></div>' +
-          '<div class="pl-card-s">How your total assessed value splits between the land itself and everything built on it.</div>' +
-          '<div id="pl-chart-split"></div>' +
-        '</div>' +
-        '<div class="pl-card">' +
-          '<div class="pl-card-h"><div class="pl-card-t">Tax history</div></div>' +
-          '<div class="pl-card-s" id="pl-chart-tax-sub">Estimated annual bill by year.</div>' +
-          '<div id="pl-chart-tax"></div>' +
+    // ---------- body ----------
+    el('plm-main').innerHTML =
+      '<div class="plm-sec" style="margin-top:26px;">' +
+        '<h3 class="plm-sec-h">Tax snapshot</h3>' +
+        '<p class="plm-sec-s">The prior year billed amount from the state assessment file. Rates reset annually, so treat it as a ballpark.</p>' +
+        '<div class="plm-kpis">' +
+          '<div class="plm-kpi"><div class="plm-kpi-n gold">' + (tax ? money(tax) : '-') + '</div><div class="plm-kpi-l">Annual tax</div></div>' +
+          '<div class="plm-kpi"><div class="plm-kpi-n">' + (tax ? money(tax / 12) : '-') + '</div><div class="plm-kpi-l">Per month</div></div>' +
+          '<div class="plm-kpi"><div class="plm-kpi-n">' + (rate ? rate.toFixed(2) + '%' : '-') + '</div><div class="plm-kpi-l">Effective rate</div></div>' +
+          '<div class="plm-kpi"><div class="plm-kpi-n">' + (rate && assessed ? '$' + (tax / assessed * 1000).toFixed(0) : '-') + '</div><div class="plm-kpi-l">Per $1k assessed</div></div>' +
+          '<div class="plm-kpi"><div class="plm-kpi-n">' + (sqft && tax ? '$' + (tax / sqft).toFixed(2) : '-') + '</div><div class="plm-kpi-l">Per lot sq ft</div></div>' +
         '</div>' +
       '</div>' +
 
-      '<div class="pl-agent-track-row">' +
-        '<div id="pl-agent-container">' + buildAgentInner() + '</div>' +
-        buildTrack() +
+      '<div class="plm-sec">' +
+        '<h3 class="plm-sec-h">Charts</h3>' +
+        '<div class="plm-chartgrid">' +
+          '<div class="pl-card">' +
+            '<div class="pl-card-t">Where the assessment comes from</div>' +
+            '<div class="pl-card-s">Land versus everything built on it.</div>' +
+            '<div id="pl-chart-split"></div>' +
+          '</div>' +
+          '<div class="pl-card">' +
+            '<div class="pl-card-t">Tax history</div>' +
+            '<div class="pl-card-s" id="pl-chart-tax-sub">Estimated annual bill by year.</div>' +
+            '<div id="pl-chart-tax"></div>' +
+          '</div>' +
+        '</div>' +
       '</div>' +
-    
 
-      buildProceeds() +
-      buildZillowMatches() +
-      buildAppeal() +
+      '<div class="plm-sec">' +
+        '<h3 class="plm-sec-h">Property details</h3>' +
+        '<p class="plm-sec-s">Straight from the Division of Taxation MOD-IV record and the state parcel layer.</p>' +
+        '<div class="plm-facts">' +
+          '<div class="plm-fgroup"><h4>Assessment</h4>' +
+            frow('Land value', land ? money(land) : '') +
+            frow('Improvement value', imprv ? money(imprv) : '') +
+            frow('Total assessed', assessed ? money(assessed) : '') +
+            frow('Land share', (land && assessed) ? Math.round(land / assessed * 100) + '%' : '') +
+            frow('Prior year tax', tax ? money(tax) : '') +
+            frow('Effective rate', rate ? rate.toFixed(3) + '%' : '') +
+          '</div>' +
+          '<div class="plm-fgroup"><h4>Parcel</h4>' +
+            frow('Block', p.PCLBLOCK) + frow('Lot', p.PCLLOT) + frow('Qualifier', p.PCLQCODE) +
+            frow('Additional lots', p.ADD_LOTS1) +
+            frow('Municipality', p.MUN_NAME) + frow('County', p.COUNTY) +
+            frow('State parcel ID', p.PAMS_PIN) +
+          '</div>' +
+          '<div class="plm-fgroup"><h4>Structure and land</h4>' +
+            frow('Property class', cls + (CLASSES[cls] ? '  ·  ' + CLASSES[cls] : '')) +
+            frow('Building', p.BLDG_DESC) +
+            frow('Land description', p.LAND_DESC) +
+            frow('Acreage', acres ? acres.toFixed(3) + ' ac' : '') +
+            frow('Lot size', sqft ? sqft.toLocaleString() + ' sq ft' : '') +
+            frow('Year built', p.YR_CONSTR) +
+            frow('Age', p.YR_CONSTR ? (new Date().getFullYear() - (+p.YR_CONSTR)) + ' years' : '') +
+            frow('Dwelling units', p.DWELL > 0 ? p.DWELL : '') +
+            frow('Commercial units', p.COMM_DWELL > 0 ? p.COMM_DWELL : '') +
+          '</div>' +
+          '<div class="plm-fgroup"><h4>Transfer history</h4>' +
+            frow('Listing status', status.label) +
+            frow('Last sale price', sale > 1000 ? money(sale) : 'Not recorded') +
+            frow('Sale year', dy || '') +
+            frow('Years since transfer', tenure !== null ? tenure : '') +
+            frow('Deed book / page', [p.DEED_BOOK, p.DEED_PAGE].filter(Boolean).join(' / ')) +
+            frow('Assessed vs last sale', (sale > 1000 && assessed) ? (assessed >= sale ? '+' : '') + money(assessed - sale) : '') +
+            frow('Owner mailing', absentee ? [p.ST_ADDRESS, p.CITY_STATE].filter(Boolean).join(', ') : 'Same as property') +
+            frow('Times checked here', seen > 1 ? seen : '') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
 
-      '<div class="pl-src">' +
-        '<strong>About this data.</strong> Sourced from the New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use. Owner names are redacted under Daniel\'s Law. The tax figure is the prior year billed amount, not a current year estimate, because rates are reset annually. Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. All calculators on this page produce estimates only. For an exact current bill contact your municipal tax collector, and confirm closing figures with your attorney and title company.' +
-      '</div>'
-    );
+      '<div class="plm-sec">' +
+        '<h3 class="plm-sec-h">What would you walk away with?</h3>' +
+        '<p class="plm-sec-s">Net proceeds after commission, the NJ realty transfer fee, and everything else. Adjust anything and it moves live.</p>' +
+        buildProceeds() +
+      '</div>' +
 
+      '<div class="plm-sec">' + buildZillowMatches() + '</div>' +
+
+      '<div class="plm-sec">' + buildAppeal() + '</div>' +
+
+      '<div class="plm-note">' +
+        '<strong>About this data.</strong> New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use, refreshed about once a year. Owner names are redacted under Daniel\u2019s Law. The tax figure is the prior year billed amount, not a current year estimate. ' +
+        'Listing status comes from public records and my own listings file, not from the MLS, so a home shown as off market could still be listed somewhere. ' +
+        'Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. All calculators produce estimates only. Confirm closing figures with your attorney and title company.' +
+      '</div>';
+
+    // ---------- rail ----------
+    el('plm-rail').innerHTML =
+      '<div class="plm-rcard gold" id="pl-track-card">' +
+        '<h4><i class="fas fa-chart-line" style="color:var(--gold)"></i> Track this home</h4>' +
+        '<p>One email a month: what it is worth now, what sold nearby, and any change to the assessment or tax rate.</p>' +
+        '<button class="plm-rbtn" onclick="plOpenForm(\'track\')"><i class="fas fa-bell"></i>&nbsp; Start tracking</button>' +
+        '<button class="plm-rbtn ghost" onclick="plOpenForm(\'value\')">What is it worth today?</button>' +
+        '<button class="plm-rbtn ghost" onclick="plOpenForm(\'sell\')">I want to sell this home</button>' +
+      '</div>' +
+      '<div id="plm-agent-slot">' + buildAgentRail() + '</div>';
+
+    openModal();
     drawMap(geo, rings, p);
     chartSplit(land, imprv);
     chartTaxHistory();
     initProceeds();
 
-    if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
-    el('pl-out').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town, status: status.label });
   }
-
   // ══════════════════════════════════════════════
   // MAP
   // ══════════════════════════════════════════════
   function drawMap(geo, rings, p) {
-    if (typeof L === 'undefined' || !el('pl-map')) return;
+    if (typeof L === 'undefined' || !el('plm-map')) return;
     try {
-      map = L.map('pl-map', { zoomControl: true, scrollWheelZoom: false }).setView([geo.lat, geo.lon], 18);
+      map = L.map('plm-map', { zoomControl: true, scrollWheelZoom: false }).setView([geo.lat, geo.lon], 18);
       L.tileLayer(ESRI_TILES, { maxZoom: 19, attribution: 'Imagery &copy; Esri' }).addTo(map);
       if (rings && rings.length) {
         var ll = rings.map(function (r) { return r.map(function (pt) { return [pt[1], pt[0]]; }); });
@@ -1052,13 +1247,10 @@
       } else {
         L.circleMarker([geo.lat, geo.lon], { radius: 9, color: '#f0d87a', weight: 3, fillColor: '#b8972a', fillOpacity: .7 }).addTo(map);
       }
-      setTimeout(function () { if (map) map.invalidateSize(); }, 220);
+      setTimeout(function () { if (map) map.invalidateSize(); }, 300);
     } catch (err) { console.warn('map:', err); }
   }
 
-  // ══════════════════════════════════════════════
-  // CHARTS
-  // ══════════════════════════════════════════════
   function chartSplit(land, imprv) {
     var host = el('pl-chart-split');
     if (!host) return;
@@ -1101,6 +1293,7 @@
     return null;
   }
 
+  // keep axis labels distinct when the range is tight
   function axisLbl(v, span) {
     if (span < 3000) return (v / 1000).toFixed(1) + 'k';
     return Math.round(v / 1000) + 'k';
@@ -1174,6 +1367,9 @@
 
   // ══════════════════════════════════════════════
   // NET PROCEEDS
+  // NJ Realty Transfer Fee, seller side. Two schedules: one at or under
+  // $350,000 consideration, a higher one above it. Verified against the
+  // published schedule ($350k -> $2,105.00, $400k -> $3,215.00).
   // ══════════════════════════════════════════════
   function njRTF(price) {
     if (!price || price <= 0) return 0;
@@ -1191,6 +1387,8 @@
     return f;
   }
 
+  // Graduated Percent Fee. Replaced the buyer paid mansion tax for contracts
+  // executed on or after July 10, 2025. Seller pays. Applies to the ENTIRE price.
   function njGPF(price) {
     if (!price || price <= 1000000) return 0;
     var r = price <= 2000000 ? 0.01
@@ -1204,47 +1402,45 @@
   function buildProceeds() {
     var guess = current.assessed ? Math.round(current.assessed / 1000) * 1000 : 350000;
     return '<div class="pl-card pl-zcalc" id="pl-proceeds">' +
-      '<div class="pl-zcalc-header">' +
-        '<p>Estimated net proceeds</p>' +
-        '<h3 id="pc-o-net">-</h3>' +
-      '</div>' +
-      
+      '<div class="pl-zcalc-header"><p>Estimated net proceeds</p><h3 id="pc-o-net">-</h3></div>' +
+
       '<div class="pl-zcalc-row">' +
-        '<div class="pl-zcalc-label">Est. selling price of your home</div>' +
+        '<div class="pl-zcalc-label">Est. selling price</div>' +
         '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="pc-price" value="' + guess.toLocaleString() + '" oninput="plFormatNum(this); plCalc()"></div>' +
       '</div>' +
       '<input type="range" class="zillow-slider" id="pc-price-slider" min="10000" max="' + (guess * 2.5) + '" step="1000" value="' + guess + '" oninput="plSyncSlider(\'pc-price\', this.value); plCalc()">' +
 
       '<div class="pl-zcalc-row">' +
-        '<div class="pl-zcalc-label">Est. remaining mortgage <i class="pl-icon-info" title="Your remaining mortgage balance">i</i></div>' +
+        '<div class="pl-zcalc-label">Est. remaining mortgage <i class="pl-icon-info" title="Your remaining loan balance">i</i></div>' +
         '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="pc-payoff" value="0" oninput="plFormatNum(this); plCalc()"></div>' +
       '</div>' +
       '<input type="range" class="zillow-slider" id="pc-payoff-slider" min="0" max="' + guess + '" step="1000" value="0" oninput="plSyncSlider(\'pc-payoff\', this.value); plCalc()">' +
-      
-      '<hr style="border:none; border-top:1px solid #eef0f5; margin:10px 0;">' +
-      
-      '<div class="pl-zcalc-dropdown" onclick="document.getElementById(\'pc-prep-wrap\').style.display=document.getElementById(\'pc-prep-wrap\').style.display===\'none\'?\'flex\':\'none\'">' +
-        '<div class="pl-zcalc-label">Est. prep & repair costs <i class="pl-icon-info">i</i></div>' +
+
+      '<hr style="border:none;border-top:1px solid #eef0f5;margin:10px 0;">' +
+
+      '<div class="pl-zcalc-dropdown" onclick="plToggle(\'pc-prep-wrap\')">' +
+        '<div class="pl-zcalc-label">Est. prep and repair costs <i class="pl-icon-info" title="Paint, landscaping, anything you fix before listing">i</i></div>' +
         '<div class="pl-zcalc-val" id="pc-val-prep">$0 <i class="fas fa-chevron-down"></i></div>' +
       '</div>' +
-      '<div id="pc-prep-wrap" style="display:none; padding: 10px 0 20px; align-items:center; justify-content:space-between;">' +
-         '<span style="font-size:14px;color:#5a6070;">Amount:</span>' +
-         '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="pc-prep" value="0" oninput="plFormatNum(this); plCalc()"></div>' +
+      '<div id="pc-prep-wrap" style="display:none;padding:10px 0 20px;align-items:center;justify-content:space-between;">' +
+        '<span style="font-size:14px;color:#5a6070;">Amount</span>' +
+        '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="pc-prep" value="0" oninput="plFormatNum(this); plCalc()"></div>' +
       '</div>' +
-      
-      '<div class="pl-zcalc-dropdown" onclick="document.getElementById(\'pc-closing-wrap\').style.display=document.getElementById(\'pc-closing-wrap\').style.display===\'none\'?\'block\':\'none\'">' +
-        '<div class="pl-zcalc-label">Est. closing costs <i class="pl-icon-info">i</i></div>' +
+
+      '<div class="pl-zcalc-dropdown" onclick="plToggle(\'pc-closing-wrap\')">' +
+        '<div class="pl-zcalc-label">Est. closing costs <i class="pl-icon-info" title="Commission, concessions, NJ transfer fee, attorney and title, taxes owed">i</i></div>' +
         '<div class="pl-zcalc-val" id="pc-val-closing">$0 <i class="fas fa-chevron-down"></i></div>' +
       '</div>' +
-      '<div id="pc-closing-wrap" style="display:none; padding: 10px 0 20px;">' +
-         '<div class="pl-field-2" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:12px;">' +
-           '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Agent commission %</label><input type="number" class="pl-form input pl-zcalc-input" id="pc-comm" value="5" step="0.25" oninput="plCalc()" style="padding-left:12px; text-align:left;"></div>' +
-           '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Seller concessions %</label><input type="number" class="pl-form input pl-zcalc-input" id="pc-conc" value="0" step="0.5" oninput="plCalc()" style="padding-left:12px; text-align:left;"></div>' +
-         '</div>' +
-         '<div class="pl-field-2" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">' +
-           '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Attorney & Title ($)</label><input type="number" class="pl-form input pl-zcalc-input" id="pc-legal" value="2500" step="100" oninput="plCalc()" style="padding-left:12px; text-align:left;"></div>' +
-           '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Tax owed at closing ($)</label><input type="number" class="pl-form input pl-zcalc-input" id="pc-tax" value="' + Math.round((current.tax || 0) / 4) + '" step="100" oninput="plCalc()" style="padding-left:12px; text-align:left;"></div>' +
-         '</div>' +
+      '<div id="pc-closing-wrap" style="display:none;padding:10px 0 20px;">' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">' +
+          '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Agent commission %</label><input type="number" class="pl-zcalc-input" id="pc-comm" value="5" step="0.25" oninput="plCalc()" style="padding-left:12px;text-align:left;width:100%;"></div>' +
+          '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Seller concessions %</label><input type="number" class="pl-zcalc-input" id="pc-conc" value="0" step="0.5" oninput="plCalc()" style="padding-left:12px;text-align:left;width:100%;"></div>' +
+        '</div>' +
+        '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px;">' +
+          '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Attorney and title ($)</label><input type="number" class="pl-zcalc-input" id="pc-legal" value="2500" step="100" oninput="plCalc()" style="padding-left:12px;text-align:left;width:100%;"></div>' +
+          '<div><label style="font-size:12px;color:#5a6070;display:block;margin-bottom:4px;">Tax owed at closing ($)</label><input type="number" class="pl-zcalc-input" id="pc-tax" value="' + Math.round((current.tax || 0) / 4) + '" step="100" oninput="plCalc()" style="padding-left:12px;text-align:left;width:100%;"></div>' +
+        '</div>' +
+        '<div id="pc-fee-detail" style="font-size:12.5px;color:#5a6070;line-height:1.7;padding-top:10px;border-top:1px solid #eef0f5;"></div>' +
       '</div>' +
 
       '<div class="pl-zcalc-total">' +
@@ -1252,128 +1448,112 @@
         '<div class="pl-zcalc-total-val" id="pc-val-total-costs">$0</div>' +
       '</div>' +
 
-      '<div class="pl-fine" id="pc-note" style="margin-top:20px; text-align:center;"></div>' +
+      '<div class="pl-fine" id="pc-note" style="margin-top:18px;text-align:center;"></div>' +
     '</div>';
   }
+
+  window.plToggle = function (id) {
+    var e2 = el(id); if (!e2) return;
+    var open = e2.style.display !== 'none';
+    e2.style.display = open ? 'none' : (id === 'pc-prep-wrap' ? 'flex' : 'block');
+  };
 
   function initProceeds() { window.plCalc(); }
 
   window.plCalc = function () {
     function v(id) {
-      var el = document.getElementById(id);
-      if(!el) return 0;
-      var val = el.value.replace(/\D/g, '');
-      if(el.type === 'number') val = el.value; 
-      return parseFloat(val) || 0;
+      var e2 = el(id); if (!e2) return 0;
+      if (e2.type === 'number') return parseFloat(e2.value) || 0;
+      return parseFloat(String(e2.value).replace(/[^0-9.]/g, '')) || 0;
     }
     var price = v('pc-price'), payoff = v('pc-payoff');
     var comm = price * (v('pc-comm') / 100), conc = price * (v('pc-conc') / 100);
     var rtf = njRTF(price), gpf = njGPF(price);
     var legal = v('pc-legal'), prep = v('pc-prep'), taxdue = v('pc-tax');
-    
-    var totalClosingCosts = comm + conc + rtf + gpf + legal + taxdue;
-    var totalSellingCosts = totalClosingCosts + prep;
-    var net = price - payoff - totalSellingCosts;
 
-    var net$ = el('pc-o-net');
-    if(net$) {
-        net$.textContent = money(net);
-        net$.style.color = '#0e2248';
+    var closing = comm + conc + rtf + gpf + legal + taxdue;
+    var totalCosts = closing + prep;
+    var net = price - payoff - totalCosts;
+
+    var n = el('pc-o-net');
+    if (n) { n.textContent = money(net); n.style.color = net < 0 ? 'var(--red)' : '#0e2248'; }
+
+    var pv = el('pc-val-prep');
+    if (pv) pv.innerHTML = money(prep) + ' <i class="fas fa-chevron-down"></i>';
+    var cv = el('pc-val-closing');
+    if (cv) cv.innerHTML = money(closing) + ' <i class="fas fa-chevron-down"></i>';
+    var pct = el('pc-cost-pct');
+    if (pct && price > 0) pct.textContent = '(' + Math.round((totalCosts / price) * 100) + '%)';
+    var tot = el('pc-val-total-costs');
+    if (tot) tot.textContent = money(totalCosts);
+
+    var det = el('pc-fee-detail');
+    if (det) {
+      det.innerHTML =
+        '<div style="display:flex;justify-content:space-between;"><span>Agent commission</span><b>' + money(comm) + '</b></div>' +
+        (conc ? '<div style="display:flex;justify-content:space-between;"><span>Seller concessions</span><b>' + money(conc) + '</b></div>' : '') +
+        '<div style="display:flex;justify-content:space-between;"><span>NJ realty transfer fee</span><b>' + money(rtf) + '</b></div>' +
+        (gpf ? '<div style="display:flex;justify-content:space-between;color:#c0392b;"><span>Graduated percent fee, seller paid</span><b>' + money(gpf) + '</b></div>' : '') +
+        '<div style="display:flex;justify-content:space-between;"><span>Attorney and title</span><b>' + money(legal) + '</b></div>' +
+        '<div style="display:flex;justify-content:space-between;"><span>Taxes owed at closing</span><b>' + money(taxdue) + '</b></div>';
     }
-    
-    var pcvPrep = el('pc-val-prep');
-    if(pcvPrep) pcvPrep.innerHTML = money(prep) + ' <i class="fas fa-chevron-down"></i>';
-    
-    var pcvClosing = el('pc-val-closing');
-    if(pcvClosing) pcvClosing.innerHTML = money(totalClosingCosts) + ' <i class="fas fa-chevron-down"></i>';
-    
-    var pctCost = el('pc-cost-pct');
-    if(pctCost && price > 0) pctCost.textContent = '(' + Math.round((totalSellingCosts/price)*100) + '%)';
-    
-    var valTotalCosts = el('pc-val-total-costs');
-    if(valTotalCosts) valTotalCosts.textContent = money(totalSellingCosts);
-    
-    // Sync Sliders
-    var priceSlider = document.getElementById('pc-price-slider');
-    if(priceSlider) {
-        priceSlider.value = price;
-        plUpdateSliderStyle(priceSlider);
-        
-        var payoffSlider = document.getElementById('pc-payoff-slider');
-        if(payoffSlider) {
-            payoffSlider.max = price;
-            payoffSlider.value = payoff;
-            plUpdateSliderStyle(payoffSlider);
-        }
+
+    var ps = el('pc-price-slider');
+    if (ps) {
+      ps.value = price; window.plUpdateSliderStyle(ps);
+      var os = el('pc-payoff-slider');
+      if (os) { os.max = price; os.value = payoff; window.plUpdateSliderStyle(os); }
     }
 
     var note = 'Transfer fee figures follow the NJ schedule in effect since July 10, 2025.';
-    if (gpf > 0) note += ' Sales over $1,000,000 now carry the graduated percent fee on the seller, applied to the full price.';
-    note += ' All calculations are estimates and provided for informational purposes only. Actual amounts may vary.';
-    
-    var noteEl = el('pc-note');
-    if(noteEl) noteEl.textContent = note;
+    if (gpf > 0) note += ' Sales over $1,000,000 carry the graduated percent fee on the seller, applied to the full price.';
+    note += ' Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. Estimates only.';
+    var ne = el('pc-note'); if (ne) ne.textContent = note;
   };
 
   // ══════════════════════════════════════════════
-  // AGENT CARD (Main Toggleable)
+  // AGENT RAIL
   // ══════════════════════════════════════════════
-  window.plSetAgent = function(key) {
+  window.plSetAgent = function (key) {
     activeAgentKey = key;
-    var container = el('pl-agent-container');
-    if (container) container.innerHTML = buildAgentInner();
+    var s = el('plm-agent-slot');
+    if (s) s.innerHTML = buildAgentRail();
   };
 
-  function buildAgentInner() {
+  function buildAgentRail() {
     var a = AGENTS[activeAgentKey];
-    var isJohn = activeAgentKey === 'john';
-    var isHeather = activeAgentKey === 'heather';
-    var formattedBio = a.bio.replace('{COUNTY}', current && current.county ? esc(current.county.toUpperCase()) : 'CAMDEN');
-    
-    var phoneBtn = a.phone ? '<a href="tel:' + a.phone.replace(/\D/g, '') + '" class="gold"><i class="fas fa-phone"></i> ' + esc(a.phone) + '</a>' : '';
-
-    return '<div class="pl-agent">' +
-      '<div class="pl-agent-toggle">' +
-        '<button class="' + (isJohn ? 'active' : '') + '" onclick="plSetAgent(\'john\')">John</button>' +
-        '<button class="' + (isHeather ? 'active' : '') + '" onclick="plSetAgent(\'heather\')">Heather</button>' +
+    var bio = a.bio.replace('{COUNTY}', (current && current.county) ? esc(current.county) : 'South Jersey');
+    var phone = a.phone
+      ? '<a href="tel:' + a.phone.replace(/\D/g, '') + '" class="gold"><i class="fas fa-phone"></i> ' + esc(a.phone) + '</a>' : '';
+    return '<div class="plm-agent">' +
+      '<div class="plm-agent-toggle">' +
+        '<button class="' + (activeAgentKey === 'john' ? 'active' : '') + '" onclick="plSetAgent(\'john\')">John</button>' +
+        '<button class="' + (activeAgentKey === 'heather' ? 'active' : '') + '" onclick="plSetAgent(\'heather\')">Heather</button>' +
       '</div>' +
-      
-      '<div class="pl-agent-top">' +
-        '<img class="pl-agent-photo" src="' + a.photo + '" alt="' + esc(a.name) + '" loading="lazy">' +
-        '<div class="pl-agent-meta">' +
-          '<div class="pl-agent-kicker">Your expert for this property</div>' +
-          '<div class="pl-agent-name">' + esc(a.name) + '</div>' +
-          '<div class="pl-agent-title">' + esc(a.title) + '</div>' +
-          '<div class="pl-agent-lic">' + esc(a.lic) + '</div>' +
-        '</div>' +
+      '<div class="plm-agent-row">' +
+        '<img src="' + a.photo + '" alt="' + esc(a.name) + '" loading="lazy">' +
+        '<div><div class="plm-agent-nm">' + esc(a.name) + '</div>' +
+        '<div class="plm-agent-ti">' + esc(a.title) + '</div>' +
+        '<div class="plm-agent-li">' + esc(a.lic) + '</div></div>' +
       '</div>' +
-      '<div class="pl-agent-body">' + formattedBio + '</div>' +
-      
-      '<div class="pl-agent-brand-bottom">' +
-        '<div class="pl-agent-contact">' + phoneBtn +
-          '<a href="mailto:' + esc(a.email) + '"><i class="fas fa-envelope"></i> Email</a>' +
-          '<a href="index.html#contact"><i class="fas fa-calendar-check"></i> Book a call</a>' +
-        '</div>' +
-        '<img class="pl-agent-logo-large" src="' + a.logo + '" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'">' +
+      '<div class="plm-agent-bio">' + bio + '</div>' +
+      '<div class="plm-agent-btns">' + phone +
+        '<a href="mailto:' + esc(a.email) + '"><i class="fas fa-envelope"></i> Email ' + esc(a.name.split(' ')[0]) + '</a>' +
+        '<a href="index.html#contact"><i class="fas fa-calendar-check"></i> Book a call</a>' +
       '</div>' +
+      '<img class="plm-agent-logo" src="' + a.logo + '" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'">' +
     '</div>';
   }
 
   // ══════════════════════════════════════════════
-  // ZILLOW STYLE MATCHES
+  // ZILLOW STYLE AGENT MATCHES
   // ══════════════════════════════════════════════
   function buildZillowMatches() {
-    var displayZip = current && current.zip ? esc(current.zip) : 'this area';
-    return '<div class="z-matches-wrap">' +
-      '<h2 class="z-matches-title">Listing agent matches for ' + displayZip + '</h2>' +
-      '<div class="z-matches-alert"><i class="fas fa-trophy"></i> <span>These agent matches are featured based on their recent sales in this area.</span></div>' +
-      '<div class="z-matches-scroll">' +
-        buildZillowCard('john') +
-        buildZillowCard('heather') +
-      '</div>' +
-    '</div>';
+    var where = (current && current.zip) ? esc(current.zip) : 'this area';
+    return '<h3 class="plm-sec-h">Agent matches for ' + where + '</h3>' +
+      '<div class="z-matches-alert"><i class="fas fa-trophy"></i> <span>Featured based on recent sales and local expertise in this area.</span></div>' +
+      '<div class="z-matches-scroll">' + buildZillowCard('john') + buildZillowCard('heather') + '</div>';
   }
-
   function buildZillowCard(key) {
     var a = AGENTS[key];
     return '<div class="z-match-card">' +
@@ -1381,48 +1561,23 @@
       '<div class="z-match-info">' +
         '<div class="z-match-name-row">' +
           '<h4 class="z-match-name">' + esc(a.name) + '</h4>' +
-          '<div class="z-match-rating">' + a.stars + ' <i class="fas fa-star"></i> <a href="https://www.realtor.com/realestateagents/5fa33046326083001120e3ba"><span>(' + a.reviews + ')</span></a></div>' +
+          '<div class="z-match-rating">' + a.stars + ' <i class="fas fa-star"></i>' +
+            (a.reviewUrl ? '<a href="' + a.reviewUrl + '" target="_blank" rel="noopener"><span>(' + a.reviews + ')</span></a>'
+                         : '<span>(' + a.reviews + ')</span>') +
+          '</div>' +
         '</div>' +
         '<div class="z-match-broker">' + esc(a.team) + '</div>' +
         '<div class="z-match-stat"><strong>' + a.sales + '</strong> recent sales</div>' +
         '<div class="z-match-stat"><strong>' + a.salesNear + '</strong> sales near you</div>' +
+        '<button class="plm-rbtn" style="margin-top:12px;padding:10px;font-size:13.5px;" onclick="plSetAgent(\'' + key + '\');plOpenForm(\'value\')">Contact ' + esc(a.name.split(' ')[0]) + '</button>' +
       '</div>' +
-    '</div>';
-  }
-
-  // ══════════════════════════════════════════════
-  // TRACK + APPEAL FORMS
-  // ══════════════════════════════════════════════
-  function buildTrack() {
-    return '<div class="pl-track" id="pl-track">' +
-      '<div class="pl-track-badge"><i class="fas fa-chart-line"></i> Monthly Value Report</div>' +
-      '<h3>Track this home</h3>' +
-      '<p>Get a short report in your inbox once a month with what this property is worth now, what nearby homes actually sold for, and any change to the assessment or tax rate. Free, and you can stop it any time with one click.</p>' +
-      '<ul>' +
-        '<li><i class="fas fa-circle-check"></i><span>Current market value estimate</span></li>' +
-        '<li><i class="fas fa-circle-check"></i><span>Recent comparable sales nearby</span></li>' +
-        '<li><i class="fas fa-circle-check"></i><span>Assessment and tax rate changes</span></li>' +
-        '<li><i class="fas fa-circle-check"></i><span>Appeal deadline reminders</span></li>' +
-      '</ul>' +
-      '<div class="pl-form">' +
-        '<input id="pl-tname" type="text" placeholder="Your name" autocomplete="name">' +
-        '<input id="pl-temail" type="email" placeholder="Email" autocomplete="email">' +
-        '<select id="pl-trel">' +
-          '<option value="">I am the...</option>' +
-          '<option>Owner, I live here</option><option>Owner, I rent it out</option>' +
-          '<option>Tenant</option><option>Just researching</option>' +
-        '</select>' +
-        '<input id="pl-tphone" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
-        '<button onclick="plTrack()"><i class="fas fa-bell"></i>&nbsp; Start tracking this home</button>' +
-      '</div>' +
-      '<div class="pl-fine">One email a month. No spam, no sharing your information, unsubscribe any time.</div>' +
     '</div>';
   }
 
   function buildAppeal() {
-    return '<div class="pl-agent" id="pl-appeal" style="margin-top:20px;">' +
-      '<h3 style="font-family:\'Playfair Display\',Georgia,serif;font-size:25px;margin:0 0 9px;">Is this assessment fair?</h3>' +
-      '<p style="font-size:15px;color:#cdd9ec;line-height:1.7;margin:0 0 18px;">I will pull recent comparable sales for this address, work out the market value your town is implying, and tell you straight whether an appeal is worth your time. If the numbers do not support it, I will say so.</p>' +
+    return '<div class="plm-agent" id="pl-appeal">' +
+      '<h3 style="font-family:\'Playfair Display\',Georgia,serif;font-size:24px;margin:0 0 9px;">Is this assessment fair?</h3>' +
+      '<p style="font-size:14.5px;color:#cdd9ec;line-height:1.7;margin:0 0 18px;">I will pull recent comparable sales for this address, work out the market value your town is implying, and tell you straight whether an appeal is worth your time. If the numbers do not support it, I will say so.</p>' +
       '<div class="pl-form">' +
         '<input id="pl-name" type="text" placeholder="Your name" autocomplete="name">' +
         '<input id="pl-email" type="email" placeholder="Email" autocomplete="email">' +
@@ -1434,164 +1589,79 @@
   }
 
   // ══════════════════════════════════════════════
-  // ACTIONS
+  // INTENT FORMS  (rail card swaps in place)
   // ══════════════════════════════════════════════
-  window.plMenu = function (e) {
-    e.stopPropagation();
-    el('pl-menu').classList.toggle('open');
-  };
-  document.addEventListener('click', function (e) {
-    var m = el('pl-menu');
-    if (m && m.classList.contains('open') && !m.contains(e.target)) m.classList.remove('open');
-  });
-
-  window.plScrollTo = function (id) {
-    var m = el('pl-menu'); if (m) m.classList.remove('open');
-    var t = el(id);
-    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-
-  function shareUrl() {
-    return location.origin + location.pathname + '?address=' + encodeURIComponent(current.address + ', ' + current.town + ', NJ ' + current.zip);
-  }
-
-  window.plCopy = function () {
-    var m = el('pl-menu'); if (m) m.classList.remove('open');
-    var url = shareUrl();
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(url).then(function () { toast('Link copied'); })
-        .catch(function () { window.prompt('Copy this link:', url); });
-    } else { window.prompt('Copy this link:', url); }
-  };
-
-  window.plShare = function () {
-    var m = el('pl-menu'); if (m) m.classList.remove('open');
-    if (navigator.share) {
-      navigator.share({ title: current.address, text: 'Property tax record for ' + current.address, url: shareUrl() })
-        .catch(function () {});
-    } else { window.plCopy(); }
-  };
-
-  window.plDirections = function () {
-    var m = el('pl-menu'); if (m) m.classList.remove('open');
-    window.open('https://www.google.com/maps/dir/?api=1&destination=' + current.lat + ',' + current.lon, '_blank', 'noopener');
-  };
-
   var INTENTS = {
-    sell:  { topic: '[\uD83D\uDD25 HOT][Homeowner] Wants to SELL this property',  label: 'Sell this home',            blurb: 'Tell me a little about your timing and I will put together a pricing strategy and a net proceeds breakdown for this address.' },
-    value: { topic: '[\uD83D\uDD25 HOT][Homeowner] Home value request',            label: 'What is it worth today?',   blurb: 'I will run current comparable sales and send you a real valuation for this address, not an algorithm guess.' },
-    buy:   { topic: '[\u2600\uFE0F WARM] Buyer lead, wants a home like this',      label: 'Buy a home like this',      blurb: 'Tell me what you are looking for and I will set you up with listings that match this style, size, and price range.' },
-    offer: { topic: '[\uD83D\uDD25 HOT] Wants to make an OFFER on this property',  label: 'Make an offer',             blurb: 'This home may not be listed. I can reach out to the owner on your behalf and find out where they stand.' }
+    track: { topic: '[\uD83D\uDCC8 TRACKING] Monthly value report signup', label: 'Track this home',
+             blurb: 'One email a month with the current value, nearby sales, and any assessment change.', rel: true },
+    value: { topic: '[\uD83D\uDD25 HOT][Homeowner] Home value request', label: 'What is it worth today?',
+             blurb: 'I will run current comparable sales and send you a real valuation, not an algorithm guess.' },
+    sell:  { topic: '[\uD83D\uDD25 HOT][Homeowner] Wants to SELL this property', label: 'Sell this home',
+             blurb: 'Tell me your timing and I will put together a pricing strategy and a net proceeds breakdown.' },
+    buy:   { topic: '[\u2600\uFE0F WARM] Buyer lead, wants a home like this', label: 'Buy a home like this',
+             blurb: 'Tell me what you are after and I will set you up with listings that match this style and price range.' },
+    offer: { topic: '[\uD83D\uDD25 HOT] Wants to make an OFFER on this property', label: 'Make an offer',
+             blurb: 'This home may not be listed. I can reach out to the owner on your behalf and find out where they stand.' }
   };
 
-  window.plGo = function (kind) {
-    var m = el('pl-menu'); if (m) m.classList.remove('open');
-    var it = INTENTS[kind];
-    if (!it) return;
-    var t = el('pl-track');
-    t.innerHTML =
-      '<div class="pl-track-badge"><i class="fas fa-bolt"></i> ' + esc(it.label) + '</div>' +
-      '<h3>' + esc(it.label) + '</h3>' +
+  window.plOpenForm = function (kind) {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    var it = INTENTS[kind]; if (!it) return;
+    var card = el('pl-track-card'); if (!card) return;
+    card.innerHTML =
+      '<h4>' + esc(it.label) + '</h4>' +
       '<p>' + esc(it.blurb) + '</p>' +
-      '<div class="pl-form">' +
-        '<input id="pl-iname" type="text" placeholder="Your name" autocomplete="name">' +
-        '<input id="pl-iemail" type="email" placeholder="Email" autocomplete="email">' +
-        '<input id="pl-iphone" type="tel" placeholder="Phone" autocomplete="tel">' +
-        '<select id="pl-iwhen">' +
-          '<option value="">Timing</option><option>As soon as possible</option>' +
-          '<option>1 to 3 months</option><option>3 to 6 months</option>' +
-          '<option>6 to 12 months</option><option>Just exploring</option>' +
-        '</select>' +
-        '<button onclick="plIntent(\'' + kind + '\')">Send to ' + esc(AGENTS[activeAgentKey].name) + '</button>' +
+      '<div class="pl-form" style="grid-template-columns:1fr;">' +
+        '<input id="pl-fname" type="text" placeholder="Your name" autocomplete="name">' +
+        '<input id="pl-femail" type="email" placeholder="Email" autocomplete="email">' +
+        '<input id="pl-fphone" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
+        (it.rel
+          ? '<select id="pl-frel"><option value="">I am the...</option><option>Owner, I live here</option><option>Owner, I rent it out</option><option>Tenant</option><option>Just researching</option></select>'
+          : '<select id="pl-fwhen"><option value="">Timing</option><option>As soon as possible</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just exploring</option></select>') +
+        '<button onclick="plSubmitForm(\'' + kind + '\')">Send to ' + esc(AGENTS[activeAgentKey].name.split(' ')[0]) + '</button>' +
       '</div>' +
-      '<div class="pl-fine">This property\u2019s address and tax figures go with your message so I have the context. <a href="#" onclick="plResetTrack();return false;">Back to monthly tracking</a></div>';
-    t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      '<div class="pl-fine">The address, block and lot, and tax figures go with your message. <a href="#" onclick="plResetCard();return false;">Back</a></div>';
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  window.plResetTrack = function () {
-    el('pl-track').outerHTML = buildTrack();
+  window.plResetCard = function () {
+    var card = el('pl-track-card'); if (!card) return;
+    card.innerHTML =
+      '<h4><i class="fas fa-chart-line" style="color:var(--gold)"></i> Track this home</h4>' +
+      '<p>One email a month: what it is worth now, what sold nearby, and any change to the assessment or tax rate.</p>' +
+      '<button class="plm-rbtn" onclick="plOpenForm(\'track\')"><i class="fas fa-bell"></i>&nbsp; Start tracking</button>' +
+      '<button class="plm-rbtn ghost" onclick="plOpenForm(\'value\')">What is it worth today?</button>' +
+      '<button class="plm-rbtn ghost" onclick="plOpenForm(\'sell\')">I want to sell this home</button>';
   };
 
-  window.plIntent = function (kind) {
+  window.plSubmitForm = function (kind) {
     var it = INTENTS[kind];
-    var name = (el('pl-iname').value || '').trim();
-    var email = (el('pl-iemail').value || '').trim();
-    var phone = (el('pl-iphone').value || '').trim();
-    var when = (el('pl-iwhen').value || '').trim() || 'Not stated';
+    var name = (el('pl-fname').value || '').trim();
+    var email = (el('pl-femail').value || '').trim();
+    var phone = (el('pl-fphone').value || '').trim();
     if (!name || !email) { alert('Please add your name and email.'); return; }
 
-    var tenure = (kind === 'buy' || kind === 'offer') ? 'Unknown' : 'Homeowner';
+    var relEl = el('pl-frel'), whenEl = el('pl-fwhen');
+    var rel = relEl ? (relEl.value || 'Not stated') : '';
+    var when = whenEl ? (whenEl.value || 'Not stated') : '';
+    var tenure = rel ? (/tenant/i.test(rel) ? 'Renter' : (/owner/i.test(rel) ? 'Homeowner' : 'Unknown'))
+                     : ((kind === 'buy' || kind === 'offer') ? 'Unknown' : 'Homeowner');
+
     send({
       name: name, email: email, phone: phone || 'Not provided',
       topic: it.topic + ', ' + (current.town || 'NJ') + ' (' + activeAgentKey + ')',
       tenure: tenure, lead_type: tenure, finance: 'Not provided',
       town: current.town || 'Not provided', address: current.address || 'Not provided',
-      message: [it.label + ' request from the Property Lookup tool', 'Timing: ' + when]
+      message: [it.label + ' request from the Property Lookup tool',
+                rel ? 'Relationship to property: ' + rel : 'Timing: ' + when,
+                'Tenure: ' + tenure, 'Requested agent: ' + AGENTS[activeAgentKey].name]
         .concat(propertyLines()).concat(['Source: property-lookup.html']).join('\n')
     });
     if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup_' + kind });
-    el('pl-track').innerHTML = '<div class="pl-sent"><i class="fas fa-circle-check"></i> Sent.<br>I will get back to you about ' + esc(current.address) + ' within one business day.</div>';
-  };
 
-  // ══════════════════════════════════════════════
-  // IMAGE TOGGLE
-  // ══════════════════════════════════════════════
-  window.plView = function (which) {
-    if (!current) return;
-    var img = el('pl-photo'), note = el('pl-imgnote'), bbox = bboxFor();
-    if (which === 'aerial') { img.src = aerialUrl(bbox, 900, 560); note.textContent = 'Aerial imagery, Esri World Imagery'; }
-    else { img.src = streetUrl(current.lat, current.lon) || aerialUrl(bbox, 900, 560); note.textContent = 'Street level imagery, Google'; }
-    ['street', 'aerial'].forEach(function (k) {
-      var c = el('plc-' + k); if (c) c.classList.toggle('on', k === which);
-    });
-  };
-  window.plPhotoFail = function () {
-    if (!current) return;
-    var img = el('pl-photo'); img.onerror = null;
-    img.src = aerialUrl(bboxFor(), 900, 560);
-    var n = el('pl-imgnote'); if (n) n.textContent = 'Aerial imagery, Esri World Imagery';
-    var a = el('plc-aerial'), s = el('plc-street');
-    if (a) a.classList.add('on'); if (s) s.classList.remove('on');
-  };
-
-  // ══════════════════════════════════════════════
-  // EMAIL
-  // ══════════════════════════════════════════════
-  function propertyLines() {
-    return [
-      'Property: ' + current.address,
-      'Town: ' + current.town + ', ' + current.county + ' County ' + current.zip,
-      'Block / Lot: ' + current.block + ' / ' + current.lot,
-      'PAMS PIN: ' + current.pin,
-      'Assessed value: ' + (current.assessed ? money(current.assessed) : 'n/a'),
-      'Prior year tax: ' + (current.tax ? money(current.tax) : 'n/a'),
-      'Effective rate: ' + (current.rate ? current.rate.toFixed(2) + '%' : 'n/a'),
-      'Last sale: ' + (current.sale > 1000 ? money(current.sale) + (current.deedYear ? ' in ' + current.deedYear : '') : 'not recorded')
-    ];
-  }
-  function send(payload) {
-    if (typeof emailjs === 'undefined') return;
-    emailjs.init({ publicKey: EJS_PUBLIC });
-    emailjs.send(EJS_SERVICE, EJS_TMPL, payload).catch(function (e) { console.warn('EmailJS:', e); });
-  }
-
-  window.plTrack = function () {
-    var name = (el('pl-tname').value || '').trim();
-    var email = (el('pl-temail').value || '').trim();
-    var phone = (el('pl-tphone').value || '').trim();
-    var rel = (el('pl-trel').value || '').trim() || 'Not stated';
-    if (!name || !email) { alert('Please add your name and email so I know where to send the report.'); return; }
-    var tenure = /tenant/i.test(rel) ? 'Renter' : (/owner/i.test(rel) ? 'Homeowner' : 'Unknown');
-    send({
-      name: name, email: email, phone: phone || 'Not provided',
-      topic: '[\uD83D\uDCC8 TRACKING][' + tenure + '] Monthly value report signup, ' + (current.town || 'NJ'),
-      tenure: tenure, lead_type: tenure, finance: 'Not provided',
-      town: current.town || 'Not provided', address: current.address || 'Not provided',
-      message: ['Monthly Value Report signup', 'Relationship to property: ' + rel, 'Tenure: ' + tenure]
-        .concat(propertyLines()).concat(['Source: property-lookup.html']).join('\n')
-    });
-    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup_track' });
-    el('pl-track').innerHTML = '<div class="pl-sent"><i class="fas fa-circle-check"></i> You are on the list.<br>Your first report for ' + esc(current.address) + ' goes out at the start of next month.</div>';
+    el('pl-track-card').innerHTML =
+      '<div class="pl-sent"><i class="fas fa-circle-check"></i> Sent.<br>' +
+      esc(AGENTS[activeAgentKey].name.split(' ')[0]) + ' will get back to you about ' + esc(current.address) + ' within one business day.</div>';
   };
 
   window.plSendLead = function () {
@@ -1604,16 +1674,111 @@
       topic: '[\uD83D\uDD25 HOT][Homeowner] Assessment review request, ' + (current.town || 'NJ') + ' (' + activeAgentKey + ')',
       tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
       town: current.town || 'Not provided', address: current.address || 'Not provided',
-      message: ['Assessment review request from the Property Lookup tool', 'Tenure: Homeowner (looked up their own property)']
+      message: ['Assessment review request from the Property Lookup tool',
+                'Tenure: Homeowner (looked up their own property)']
         .concat(propertyLines()).concat(['Source: property-lookup.html']).join('\n')
     });
     if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'property_lookup_review' });
     el('pl-appeal').innerHTML = '<div class="pl-sent"><i class="fas fa-circle-check"></i> Got it.<br>I will review ' + esc(current.address) + ' and get back to you within one business day.</div>';
   };
 
+  // ══════════════════════════════════════════════
+  // TOP BAR ACTIONS
+  // ══════════════════════════════════════════════
+  window.plMenu = function (e) { e.stopPropagation(); el('plm-menu').classList.toggle('open'); };
+  document.addEventListener('click', function (e) {
+    var m = el('plm-menu');
+    if (m && m.classList.contains('open') && !m.contains(e.target)) m.classList.remove('open');
+  });
+
+  window.plSaveHome = function () {
+    if (!current) return;
+    var btn = el('plm-save');
+    var saved = JSON.parse(localStorage.getItem('pl_saved') || '{}');
+    var k = current.pin || current.address;
+    if (saved[k]) { delete saved[k]; btn.classList.remove('saved'); btn.innerHTML = '<i class="far fa-heart"></i><span>Save</span>'; toast('Removed'); }
+    else {
+      saved[k] = { a: current.address, t: current.town, v: current.assessed, d: Date.now() };
+      btn.classList.add('saved'); btn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>'; toast('Saved to this browser');
+    }
+    localStorage.setItem('pl_saved', JSON.stringify(saved));
+  };
+
+  function shareUrl() {
+    return location.origin + location.pathname + '?address=' +
+      encodeURIComponent(current.address + ', ' + current.town + ', NJ ' + current.zip);
+  }
+  window.plCopy = function () {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    var url = shareUrl();
+    if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { toast('Link copied'); })
+      .catch(function () { window.prompt('Copy this link:', url); });
+    else window.prompt('Copy this link:', url);
+  };
+  window.plShare = function () {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    if (navigator.share) navigator.share({ title: current.address, text: 'Property record for ' + current.address, url: shareUrl() }).catch(function () {});
+    else window.plCopy();
+  };
+  window.plDirections = function () {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' + current.lat + ',' + current.lon, '_blank', 'noopener');
+  };
+  window.plScrollTo = function (id) {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    var t = el(id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  // photo swap
+  var showingStreet = true;
+  window.plSwapPhoto = function () {
+    if (!current) return;
+    var img = el('plm-photo-img'), c = el('plm-credit'), b = el('plm-swap');
+    showingStreet = !showingStreet;
+    if (showingStreet) {
+      img.src = streetUrl(current.lat, current.lon) || aerialUrl(bboxFor(), 900, 600);
+      c.textContent = 'Street level imagery, Google';
+      if (b) b.innerHTML = '<i class="fas fa-repeat"></i> Aerial view';
+    } else {
+      img.src = aerialUrl(bboxFor(), 900, 600);
+      c.textContent = 'Aerial imagery, Esri World Imagery';
+      if (b) b.innerHTML = '<i class="fas fa-repeat"></i> Street view';
+    }
+  };
+  window.plPhotoFail = function () {
+    if (!current) return;
+    var img = el('plm-photo-img'); img.onerror = null;
+    img.src = aerialUrl(bboxFor(), 900, 600);
+    var c = el('plm-credit'); if (c) c.textContent = 'Aerial imagery, Esri World Imagery';
+    var b = el('plm-swap'); if (b) b.style.display = 'none';
+    showingStreet = false;
+  };
+  // ══════════════════════════════════════════════
+  // EMAIL
+  // ══════════════════════════════════════════════
+  function propertyLines() {
+    return [
+      'Property: ' + current.address,
+      'Town: ' + current.town + ', ' + current.county + ' County ' + current.zip,
+      'Block / Lot: ' + current.block + ' / ' + current.lot,
+      'PAMS PIN: ' + current.pin,
+      'Listing status shown: ' + (current.status || 'n/a'),
+      'Assessed value: ' + (current.assessed ? money(current.assessed) : 'n/a'),
+      'Prior year tax: ' + (current.tax ? money(current.tax) : 'n/a'),
+      'Effective rate: ' + (current.rate ? current.rate.toFixed(2) + '%' : 'n/a'),
+      'Year built: ' + (current.yearBuilt || 'n/a'),
+      'Lot size: ' + (current.sqft ? current.sqft.toLocaleString() + ' sq ft' : 'n/a'),
+      'Last sale: ' + (current.sale > 1000 ? money(current.sale) + (current.deedYear ? ' in ' + current.deedYear : '') : 'not recorded')
+    ];
+  }
+  function send(payload) {
+    if (typeof emailjs === 'undefined') return;
+    emailjs.init({ publicKey: EJS_PUBLIC });
+    emailjs.send(EJS_SERVICE, EJS_TMPL, payload).catch(function (e) { console.warn('EmailJS:', e); });
+  }
+
   window.plFaq = function (q) { q.parentElement.classList.toggle('active'); };
 
-  // deep link
   var qs = new URLSearchParams(window.location.search);
   if (qs.get('address')) {
     el('pl-addr').value = qs.get('address');
@@ -1621,7 +1786,7 @@
   }
 
 })();
-</script>
 
+</script>
 </body>
 </html>

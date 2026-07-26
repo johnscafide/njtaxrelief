@@ -1,0 +1,34 @@
+{
+  "_readme": [
+    "Municipal GENERAL TAX RATES by year, per $100 of assessed value.",
+    "This file drives the 'Tax History' chart on property-lookup.html.",
+    "",
+    "WHERE TO GET THE NUMBERS:",
+    "  NJ Division of Taxation publishes 'General Tax Rates by County and Municipality'",
+    "  every year. Search that phrase on nj.gov/treasury/taxation. Each year is its own table.",
+    "",
+    "HOW TO ADD A TOWN:",
+    "  The key must match the MUN_NAME value the parcel service returns, uppercased.",
+    "  You can see that value in the 'Municipality' row of any lookup result.",
+    "  Then add one entry per year you have a rate for.",
+    "",
+    "  \"MONROE TWP (GLOUCESTER)\": { \"2021\": 3.412, \"2022\": 3.501, \"2023\": 3.588 }",
+    "",
+    "  If a town name appears in more than one county, append the county in parentheses",
+    "  exactly as shown here and the page will match on town + county.",
+    "",
+    "The chart estimates each year's bill as (assessed value x rate) / 100.",
+    "That is an estimate. It uses the CURRENT assessment against each historical rate,",
+    "so it shows what rate movement did to the bill, not reassessment history.",
+    "The page says so on screen. Leave this file empty and the chart hides itself.",
+    "",
+    "Delete the example below once you add real numbers."
+  ],
+
+  "rates": {
+  },
+
+  "_example_do_not_use": {
+    "SOME TWP": { "2021": 0.000, "2022": 0.000, "2023": 0.000, "2024": 0.000 }
+  }
+}

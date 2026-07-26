@@ -1,0 +1,41 @@
+{
+  "_readme": [
+    "LISTING STATUS OVERRIDES for property-lookup.html.",
+    "",
+    "WHY THIS FILE EXISTS:",
+    "  There is no free public API that reports whether a New Jersey home is",
+    "  currently for sale. MLS status lives behind Bright MLS / IDX, which is a",
+    "  licensed feed. Zillow and Realtor.com have no open API and their terms",
+    "  prohibit scraping. So the page cannot detect 'For Sale' on its own.",
+    "",
+    "  What it CAN do without help:",
+    "    - read the recorded deed date from MOD-IV and show 'Recently sold' when",
+    "      the transfer is inside the last 12 months",
+    "    - otherwise show 'Off market', which is what the public record supports",
+    "",
+    "  This file is the override. Anything you list here wins over the automatic",
+    "  status. Use it for your own listings, your team's listings, coming soons,",
+    "  and anything you know about firsthand. When you get an IDX feed, swap the",
+    "  resolveStatus() function in the page and this file becomes optional.",
+    "",
+    "KEYS:",
+    "  Preferred: the PAMS_PIN shown in every lookup result under 'State parcel ID'.",
+    "  Also accepted: the full property address in caps, exactly as PROP_LOC shows it.",
+    "",
+    "STATUS VALUES (anything else is shown as typed):",
+    "  For sale | Coming soon | Under contract | Just sold | For sale by owner | For rent",
+    "",
+    "OPTIONAL FIELDS: price, mls, agent ('john' or 'heather'), url, date, note"
+  ],
+
+  "listings": {
+    "_example_delete_me": {
+      "status": "For sale",
+      "price": 389900,
+      "mls": "NJCD0000000",
+      "agent": "john",
+      "url": "https://njpropertytaxrelief.com/search-homes.html",
+      "note": "Open house Sunday 1 to 3"
+    }
+  }
+}
