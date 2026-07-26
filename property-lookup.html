@@ -1013,10 +1013,10 @@
         '<div id="pl-agent-container">' + buildAgentInner() + '</div>' +
         buildTrack() +
       '</div>' +
-      
-      buildZillowMatches() +
+    
 
       buildProceeds() +
+      buildZillowMatches() +
       buildAppeal() +
 
       '<div class="pl-src">' +
@@ -1363,7 +1363,7 @@
     var displayZip = current && current.zip ? esc(current.zip) : 'this area';
     return '<div class="z-matches-wrap">' +
       '<h2 class="z-matches-title">Listing agent matches for ' + displayZip + '</h2>' +
-      '<div class="z-matches-alert"><i class="fas fa-trophy"></i> <span>These agent <a>matches</a> are featured based on their recent sales in this area.</span></div>' +
+      '<div class="z-matches-alert"><i class="fas fa-trophy"></i> <span>These agent matches are featured based on their recent sales in this area.</span></div>' +
       '<div class="z-matches-scroll">' +
         buildZillowCard('john') +
         buildZillowCard('heather') +
