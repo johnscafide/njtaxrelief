@@ -1062,7 +1062,7 @@ body.plm-locked { overflow: hidden; }
       '<div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>';
     if (typeof gtag === 'function') gtag('event', 'property_lookup');
 
-    Promise.all([loadRates(), loadListings()])
+    Promise.all([loadRates(), loadListings(), loadRatios()])
       .then(function () { return geocode(addr); })
       .then(function (g) {
         if (!g) throw new Error('nogeo');
@@ -1334,138 +1334,210 @@ body.plm-locked { overflow: hidden; }
   }
 
   // ══════════════════════════════════════════════
-  // WATCHDOG VALUATION
+  // WATCHDOG VALUATION  ·  what it would SELL for
   //
-  // A comps-based estimate built only from free public parcel data.
+  // This is a market value estimate, not a tax number. The two are related by
+  // one figure: the municipal equalization ratio.
   //
-  // The problem: the state file has no living square footage, beds, baths,
-  // or condition. So we cannot compare raw prices between houses.
+  //     market value = assessed value / ratio
   //
-  // The move: the assessor already normalized for size and quality. The
-  // assessment IS a quality index. So we compare each nearby sale's
-  // PRICE DIVIDED BY ITS ASSESSMENT, which gives a market multiplier, then
-  // apply a similarity-weighted multiplier to this property's assessment.
-  // That is standard mass appraisal, not something invented here.
+  // A $171,000 assessment in a town assessing at 44% is a $385,000 house.
+  // The same assessment in a town at 100% is a $171,000 house. Getting the
+  // ratio right is the entire job.
   //
-  // Simulated against towns with known true values: median absolute error
-  // about 5%, true value inside the published range 85 to 90% of the time,
-  // and it refuses to answer on roughly 14% of cases where the data is too
-  // thin to support a number.
+  // Ratio sources, in order of trust:
+  //   1. equalization-ratios.json, the official Director's Ratio published
+  //      by NJ Treasury. Computed from verified arm's length sales only.
+  //   2. derived from recorded sales in the town, used only when it looks
+  //      sane, and flagged as lower confidence.
+  //
+  // Nearby sales are then used for what they are genuinely good at: measuring
+  // which way local prices have moved since the ratio year, and sizing the
+  // range. They are NOT used to set the level, because the raw SALE_PRICE
+  // field carries too many nominal and estate transfers to trust as a median.
   // ══════════════════════════════════════════════
 
-  function wQuantile(pairs, p) {
-    pairs = pairs.slice().sort(function (a, b) { return a.v - b.v; });
-    var tot = pairs.reduce(function (s, x) { return s + x.w; }, 0), acc = 0;
-    for (var i = 0; i < pairs.length; i++) { acc += pairs[i].w; if (acc >= tot * p) return pairs[i].v; }
-    return pairs[pairs.length - 1].v;
+  var officialRatios = null;
+
+  function loadRatios() {
+    if (officialRatios !== null) return Promise.resolve();
+    return fetch('equalization-ratios.json')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { officialRatios = (j && j.ratios) ? j.ratios : {}; })
+      .catch(function () { officialRatios = {}; });
   }
 
-  function watchdogValuation(subject, comps, thisYear) {
-    if (!subject || !subject.assessed || subject.assessed < 5000) return null;
-
-    // Pass 1: wide absolute sanity bound only. Absolute bounds would be wrong
-    // here. A town that revalued last year runs a multiplier near 1.0; a town
-    // that has not revalued since 2003 legitimately runs 15x or more.
-    var raw = [];
-    for (var i = 0; i < comps.length; i++) {
-      var c = comps[i];
-      if (!c.price || !c.assessed || !c.year) continue;
-      if (c.price < 40000) continue;
-      var mult = c.price / c.assessed;
-      if (!isFinite(mult) || mult <= 0 || mult > 200) continue;
-      raw.push({ c: c, mult: mult, age: thisYear - c.year });
+  // Look up the published ratio for this town, newest year available.
+  function officialRatio(town, county) {
+    if (!officialRatios) return null;
+    var t = (town || '').toUpperCase().trim();
+    var tc = t + ' (' + (county || '').toUpperCase().trim() + ')';
+    var keys = Object.keys(officialRatios), hit = null;
+    for (var i = 0; i < keys.length; i++) {
+      var k = keys[i].toUpperCase().trim();
+      if (k === tc) { hit = officialRatios[keys[i]]; break; }
     }
-    if (raw.length < 5) return null;
-
-    // Pass 2: keep what sits near this market's own centre. Dollar deeds and
-    // family transfers fall far below it, data errors far above.
-    var centre = median(raw.map(function (x) { return x.mult; }));
-    if (!centre || centre <= 0) return null;
-    var scored = raw.filter(function (x) { return x.mult >= centre * 0.30 && x.mult <= centre * 3.0; });
-    if (scored.length < 5) return null;
-
-    // 3. market drift, measured from the comps themselves
-    var byYear = {};
-    scored.forEach(function (s) { (byYear[s.c.year] = byYear[s.c.year] || []).push(s.mult); });
-    var years = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
-    var drift = 0, pairsUsed = 0;
-    for (var y = 1; y < years.length; y++) {
-      var a = median(byYear[years[y - 1]]), b = median(byYear[years[y]]), gap = years[y] - years[y - 1];
-      if (a > 0 && b > 0 && gap > 0 && byYear[years[y]].length >= 3 && byYear[years[y - 1]].length >= 3) {
-        drift += (Math.pow(b / a, 1 / gap) - 1); pairsUsed++;
+    if (!hit) {
+      for (var j = 0; j < keys.length; j++) {
+        if (keys[j].toUpperCase().trim() === t) { hit = officialRatios[keys[j]]; break; }
       }
     }
-    var driftMeasured = !!pairsUsed;
-    if (!pairsUsed && subject.townDrift != null) { drift = subject.townDrift; driftMeasured = true; }
-    else drift = pairsUsed ? drift / pairsUsed : 0;
-    drift = Math.max(-0.15, Math.min(0.20, drift));
+    if (!hit) return null;
+    var years = Object.keys(hit).map(Number).filter(function (y) { return y > 1990; }).sort();
+    if (!years.length) return null;
+    var yr = years[years.length - 1], pct = +hit[String(yr)];
+    if (!pct || pct <= 0 || pct > 200) return null;
+    return { ratio: pct / 100, year: yr, source: 'official' };
+  }
 
-    // 4. time-adjust, then drop any comp that needed more than a 30%
-    //    correction. Past that it is a projection, not a comparable.
-    scored.forEach(function (s) { s.factor = Math.pow(1 + drift, s.age); s.adj = s.mult * s.factor; });
-    scored = scored.filter(function (s) { return s.factor >= 0.75 && s.factor <= 1.30; });
-    if (scored.length < 5) return null;
-
-    // 5. trim outliers on the adjusted multipliers
-    var adjv = scored.map(function (s) { return s.adj; });
-    var q1 = quantile(adjv, 0.25), q3 = quantile(adjv, 0.75), iqr = q3 - q1;
-    scored = scored.filter(function (s) { return s.adj >= q1 - 1.5 * iqr && s.adj <= q3 + 1.5 * iqr; });
-    if (scored.length < 5) return null;
-
-    // 6. similarity weighting
-    scored.forEach(function (s) {
-      var c = s.c, w = 1;
-      w *= Math.pow(0.72, s.age);
-      if (c.dist != null) w *= 1 / (1 + Math.pow(c.dist / 400, 2));
-      if (c.built && subject.built) w *= 1 / (1 + Math.pow(Math.abs(c.built - subject.built) / 25, 2));
-      if (c.acres && subject.acres) w *= 1 / (1 + Math.pow(Math.abs(c.acres - subject.acres) / Math.max(subject.acres, 0.15), 2));
-      if (c.assessed && subject.assessed) w *= 1 / (1 + Math.pow(Math.abs(c.assessed - subject.assessed) / Math.max(subject.assessed * 0.5, 1), 2));
-      s.w = Math.max(w, 1e-6);
+  // Fallback: derive from recorded sales. Only trusted when the sample is
+  // large and the spread is not absurd, because the SALE_PRICE field is dirty.
+  function derivedRatio(comps, thisYear) {
+    if (!comps || comps.length < 20) return null;
+    var rs = [];
+    comps.forEach(function (c) {
+      if (!c.price || !c.assessed || !c.year) return;
+      if (c.year < thisYear - 4) return;
+      if (c.price < 60000) return;                 // nominal transfers
+      var v = c.assessed / c.price;
+      if (isFinite(v) && v > 0.10 && v < 1.60) rs.push(v);
     });
+    if (rs.length < 15) return null;
+    var q1 = quantile(rs, 0.25), q3 = quantile(rs, 0.75), iqr = q3 - q1;
+    var t = rs.filter(function (v) { return v >= q1 - 1.5 * iqr && v <= q3 + 1.5 * iqr; });
+    if (t.length < 12) return null;
+    var m = median(t);
+    if (!m || m <= 0.12 || m > 1.35) return null;
+    return { ratio: m, year: thisYear - 1, source: 'derived', n: t.length,
+             lo: quantile(t, 0.30), hi: quantile(t, 0.70) };
+  }
 
-    var pairs = scored.map(function (s) { return { v: s.adj, w: s.w }; });
-    var mMid = wQuantile(pairs, 0.50), mLo = wQuantile(pairs, 0.16), mHi = wQuantile(pairs, 0.84);
+  // How fast have local prices moved? Measured off nearby sales year over year.
+  function localDrift(comps, thisYear, anchorRatio) {
+    if (!comps || comps.length < 10) return null;
+    // Only measure drift from sales that behave like real arm's length sales
+    // for this town. If the official ratio says homes trade at 2.25x their
+    // assessment, a row sitting at 1.0x is a nominal transfer, and letting it
+    // into the year over year medians drags the drift the wrong way.
+    var expected = anchorRatio ? (1 / anchorRatio) : null;
+    var byYear = {};
+    comps.forEach(function (c) {
+      if (!c.price || !c.assessed || !c.year) return;
+      if (c.price < 60000) return;
+      var m = c.price / c.assessed;
+      if (!isFinite(m) || m <= 0) return;
+      if (expected && (m < expected * 0.60 || m > expected * 1.65)) return;
+      (byYear[c.year] = byYear[c.year] || []).push(m);
+    });
+    var yy = Object.keys(byYear).map(Number).sort(function (a, b) { return a - b; });
+    var d = 0, n = 0;
+    for (var i = 1; i < yy.length; i++) {
+      var A = median(byYear[yy[i - 1]]), B = median(byYear[yy[i]]), gap = yy[i] - yy[i - 1];
+      if (A > 0 && B > 0 && gap > 0 && byYear[yy[i]].length >= 3 && byYear[yy[i - 1]].length >= 3) {
+        d += Math.pow(B / A, 1 / gap) - 1; n++;
+      }
+    }
+    if (!n) return null;
+    return Math.max(-0.12, Math.min(0.18, d / n));
+  }
 
-    // floor the band. thin samples give artificially tight quantiles and a
-    // confident-looking range that misses.
-    var floorPct = scored.length >= 25 ? 0.08 : scored.length >= 12 ? 0.11 : 0.18;
-    mLo = Math.min(mLo, mMid * (1 - floorPct));
-    mHi = Math.max(mHi, mMid * (1 + floorPct));
+  // Adjust for how this home compares to its neighbours on the things the
+  // public record does tell us: vintage and lot size. Assessment already
+  // captures most of it, so this is a light touch, capped at +/- 8%.
+  function propertyAdjust(subject, comps) {
+    if (!comps || comps.length < 8) return { factor: 1, notes: [] };
+    var builts = comps.map(function (c) { return c.built; }).filter(function (b) { return b > 1700; });
+    var acres = comps.map(function (c) { return c.acres; }).filter(function (a) { return a > 0; });
+    var f = 1, notes = [];
 
-    var spread = mMid ? (mHi - mLo) / mMid : 1;
-    var medAge = median(scored.map(function (s) { return s.age; })) || 0;
-    var strain = Math.abs(Math.pow(1 + drift, medAge) - 1);
+    if (builts.length >= 8 && subject.built > 1700) {
+      var mb = median(builts), dy = subject.built - mb;
+      if (Math.abs(dy) >= 6) {
+        var a = Math.max(-0.05, Math.min(0.05, (dy / 40) * 0.05));
+        f *= (1 + a);
+        notes.push((dy > 0 ? 'newer' : 'older') + ' than the typical nearby home by ' + Math.abs(Math.round(dy)) + ' years');
+      }
+    }
+    if (acres.length >= 8 && subject.acres > 0) {
+      var ma = median(acres);
+      if (ma > 0 && Math.abs(subject.acres - ma) / ma > 0.25) {
+        var b = Math.max(-0.04, Math.min(0.04, ((subject.acres - ma) / ma) * 0.05));
+        f *= (1 + b);
+        notes.push('lot is ' + (subject.acres > ma ? 'larger' : 'smaller') + ' than typical nearby');
+      }
+    }
+    return { factor: Math.max(0.92, Math.min(1.08, f)), notes: notes };
+  }
 
-    var conf = (scored.length >= 25 && spread < 0.45 && driftMeasured && strain < 0.12) ? 'High'
-             : (scored.length >= 12 && spread < 0.70 && strain < 0.22) ? 'Medium' : 'Low';
-    if (conf === 'Low') { mLo = Math.min(mLo, mMid * 0.83); mHi = Math.max(mHi, mMid * 1.17); }
-    // never publish a range wider than about +/- 22%. Past that it is not an
-    // estimate, it is a shrug, and a shrug should decline instead.
-    if ((mHi - mLo) / mMid > 0.44) { mLo = mMid * 0.80; mHi = mMid * 1.20; }
-    if (scored.length < 8 && strain > 0.25) return null;
+  function watchdogValuation(subject, comps, thisYear, town, county) {
+    if (!subject || !subject.assessed || subject.assessed < 5000) return null;
+
+    var R = officialRatio(town, county);
+    var derived = null;
+    if (!R) {
+      derived = derivedRatio(comps, thisYear);
+      R = derived;
+    }
+    if (!R || !R.ratio) return null;
+
+    // level: the state's own conversion
+    var base = subject.assessed / R.ratio;
+
+    // time: move it forward from the ratio year using local price movement
+    var drift = localDrift(comps, thisYear, R.ratio);
+    var years = Math.max(0, Math.min(4, thisYear - R.year));
+    var timeFactor = (drift != null && years > 0) ? Math.pow(1 + drift, years) : 1;
+    timeFactor = Math.max(0.94, Math.min(1.25, timeFactor));
+
+    // property: light adjustment for vintage and lot versus neighbours
+    var adj = propertyAdjust(subject, comps);
+
+    var mid = base * timeFactor * adj.factor;
+
+    // range: driven by how much we trust the ratio and how much data backs it
+    var compCount = (comps || []).filter(function (c) { return c.price > 60000 && c.year >= thisYear - 5; }).length;
+    var band;
+    if (R.source === 'official' && compCount >= 20) band = 0.09;
+    else if (R.source === 'official') band = 0.12;
+    else if (compCount >= 25) band = 0.15;
+    else band = 0.20;
+
+    var conf = (R.source === 'official' && compCount >= 20 && drift != null) ? 'High'
+             : (R.source === 'official') ? 'Medium'
+             : (compCount >= 25) ? 'Medium' : 'Low';
 
     return {
-      method: 'comps',
-      mid: subject.assessed * mMid,
-      lo: subject.assessed * mLo,
-      hi: subject.assessed * mHi,
-      n: scored.length, drift: drift, driftMeasured: driftMeasured,
-      spread: spread, confidence: conf, medAge: medAge,
-      newest: Math.max.apply(null, scored.map(function (s) { return s.c.year; })),
-      drivers: scored.slice().sort(function (a, b) { return b.w - a.w; }).slice(0, 6)
-        .map(function (s) {
-          return { addr: s.c.addr, price: s.c.price, year: s.c.year, dist: s.c.dist,
-                   built: s.c.built, acres: s.c.acres, assessed: s.c.assessed,
-                   implied: subject.assessed * s.adj };
-        })
+      method: R.source,
+      mid: mid, lo: mid * (1 - band), hi: mid * (1 + band),
+      ratio: R.ratio, ratioYear: R.year, ratioSource: R.source,
+      drift: drift, timeFactor: timeFactor,
+      adjFactor: adj.factor, adjNotes: adj.notes,
+      n: compCount, confidence: conf,
+      base: base,
+      newest: comps && comps.length ? Math.max.apply(null, comps.map(function (c) { return c.year || 0; })) : null,
+      drivers: pickDrivers(subject, comps, thisYear, R.ratio)
     };
   }
 
-  // Pull comps, widening the net until there are enough to work with.
+  // The nearby sales worth showing. Sorted by similarity, not by price.
+  function pickDrivers(subject, comps, thisYear, ratio) {
+    if (!comps || !comps.length) return [];
+    return comps
+      .filter(function (c) { return c.price > 60000 && c.year >= thisYear - 5; })
+      .map(function (c) {
+        var w = Math.pow(0.75, thisYear - c.year);
+        if (c.built && subject.built) w *= 1 / (1 + Math.pow(Math.abs(c.built - subject.built) / 20, 2));
+        if (c.acres && subject.acres) w *= 1 / (1 + Math.pow(Math.abs(c.acres - subject.acres) / Math.max(subject.acres, 0.15), 2));
+        if (c.assessed && subject.assessed) w *= 1 / (1 + Math.pow(Math.abs(c.assessed - subject.assessed) / Math.max(subject.assessed * 0.4, 1), 2));
+        return { addr: c.addr, price: c.price, year: c.year, built: c.built,
+                 acres: c.acres, assessed: c.assessed, w: w,
+                 implied: c.assessed ? (subject.assessed / c.assessed) * c.price : null };
+      })
+      .sort(function (a, b) { return b.w - a.w; })
+      .slice(0, 6);
+  }
+
   function gatherComps(lat, lon, muni) {
-    // Stay inside the municipality. Tax rates, schools, and buyer demand all
-    // change at the town line, so a sale 600m away in the next town is not a
-    // comparable no matter how close it looks on a map.
     var radii = [800, 1600, 3000];
     function attempt(i) {
       if (i >= radii.length) return Promise.resolve([]);
@@ -1612,9 +1684,10 @@ body.plm-locked { overflow: hidden; }
     if (!v) {
       box.innerHTML =
         '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation</div>' +
-        '<div class="plm-est-val small">Not enough sales to be honest about</div>' +
-        '<div class="plm-est-sub">There are not enough recorded sales near this property to build an estimate I would stand behind, so I am not going to invent one. ' +
-        '<a href="#" onclick="plOpenForm(\'value\');return false;">Ask me directly</a> and I will pull live MLS comps for it.</div>';
+        '<div class="plm-est-val small">Not enough to go on yet</div>' +
+        '<div class="plm-est-sub">Converting an assessment into a sale price needs this town\u2019s equalization ratio, and I do not have a reliable one on file for ' +
+        esc(current.town || 'this municipality') + ' yet. Rather than guess, I would rather tell you. ' +
+        '<a href="#" onclick="plOpenForm(\'value\');return false;">Ask me directly</a> and I will run live comps on it.</div>';
       var eqx = el('plm-equity');
       if (eqx) eqx.innerHTML = '<div class="plm-kpi-n">-</div><div class="plm-kpi-l">Est. gain since sale</div>';
       return;
@@ -1624,15 +1697,18 @@ body.plm-locked { overflow: hidden; }
     var cm = CONF_META[v.confidence] || CONF_META.Low;
     var trueRate = tax && v.mid ? (tax / v.mid) * 100 : null;
 
-    var basis = v.method !== 'ratio'
-      ? 'Built from <b>' + v.n + '</b> recorded sales near this address' +
-        (v.newest ? ' through ' + v.newest : '') +
-        (v.driftMeasured && Math.abs(v.drift) > 0.005
-          ? ', adjusted for local prices moving about <b>' + (v.drift * 100).toFixed(1) + '% a year</b>.'
-          : '.')
-      : 'Not enough nearby sales, so this falls back to your town\u2019s assessment ratio' +
-        (v.ratio ? ' of <b>' + (v.ratio * 100).toFixed(1) + '%</b>' : '') +
-        ' across <b>' + v.n + '</b> sales. Wider and rougher than a comps estimate.';
+    var basis =
+      (v.ratioSource === 'official'
+        ? '<b>' + esc(current.town) + '</b> assesses at <b>' + (v.ratio * 100).toFixed(2) + '%</b> of market value, ' +
+          'the official state equalization ratio for ' + v.ratioYear + '. Your assessment divided by that ratio is where this starts.'
+        : 'No published state ratio on file for <b>' + esc(current.town) + '</b> yet, so this derives one from recorded sales. Rougher than the official figure.') +
+      (v.drift != null && Math.abs(v.drift) > 0.005 && v.timeFactor !== 1
+        ? ' Then adjusted forward for local prices moving about <b>' + (v.drift * 100).toFixed(1) + '% a year</b> since.'
+        : '') +
+      (v.adjNotes && v.adjNotes.length
+        ? ' Nudged for this home being ' + v.adjNotes.join(' and ') + '.'
+        : '') +
+      (v.n ? ' Cross checked against <b>' + v.n + '</b> nearby recorded sales.' : '');
 
     box.innerHTML =
       '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation' +
@@ -1662,18 +1738,19 @@ body.plm-locked { overflow: hidden; }
     if (!host) return;
     host.innerHTML =
       '<h3 class="plm-sec-h">The sales this estimate leaned on</h3>' +
-      '<p class="plm-sec-s">Weighted most heavily for being close by, recent, and similar in vintage, lot, and assessment. ' +
-      '"Implied" is what this property would be worth if it traded on the same terms as that one.</p>' +
+      '<p class="plm-sec-s">Nearby homes that actually changed hands, picked for being recent and similar in vintage, lot, and assessment. ' +
+      '"Implies" is what this property would be worth if it traded on the same terms as that one.</p>' +
       '<div class="comps-wrap"><table class="comps"><thead><tr>' +
-        '<th>Address</th><th>Sold</th><th>Price</th><th>Away</th><th>Built</th><th>Implies</th>' +
+        '<th>Address</th><th>Sold</th><th>Sale price</th><th>Built</th><th>Lot</th><th>Implies</th>' +
       '</tr></thead><tbody>' +
       v.drivers.map(function (d) {
         return '<tr><td><b>' + esc(d.addr) + '</b></td>' +
           '<td>' + d.year + '</td>' +
           '<td class="num">' + money(d.price) + '</td>' +
-          '<td class="num">' + (d.dist != null ? (d.dist < 1000 ? Math.round(d.dist) + ' m' : (d.dist / 1609).toFixed(1) + ' mi') : '-') + '</td>' +
           '<td>' + (d.built || '-') + '</td>' +
-          '<td class="num" style="color:var(--navy);font-weight:800;">' + money(Math.round(d.implied / 1000) * 1000) + '</td></tr>';
+          '<td class="num">' + (d.acres ? d.acres.toFixed(2) + ' ac' : '-') + '</td>' +
+          '<td class="num" style="color:var(--navy);font-weight:800;">' +
+            (d.implied ? money(Math.round(d.implied / 1000) * 1000) : '-') + '</td></tr>';
       }).join('') +
       '</tbody></table></div>';
   }
@@ -1731,7 +1808,7 @@ body.plm-locked { overflow: hidden; }
     var top = list.slice(0, 12);
     host.innerHTML =
       '<h3 class="plm-sec-h">Recorded sales near this home</h3>' +
-      '<p class="plm-sec-s">Actual deeds recorded within about half a mile, newest first. These come from the state file, so they are real closed transfers, not listings. Sale prices lag by roughly a year.</p>' +
+      '<p class="plm-sec-s">Actual deeds recorded nearby, newest first. These come from the state file, so they are real closed transfers, not listings. Sale prices lag by roughly a year.</p>' +
       '<div class="comps-wrap"><table class="comps"><thead><tr>' +
         '<th>Address</th><th>Sold</th><th>Price</th><th>Assessed</th><th>Built</th><th>Lot</th>' +
       '</tr></thead><tbody>' +
@@ -1962,6 +2039,46 @@ body.plm-locked { overflow: hidden; }
       '</div>';
   }
 
+
+  // ══════════════════════════════════════════════
+  // DIAGNOSTICS  ·  add ?debug=1 to the URL
+  // Shows exactly what the state service returned so a bad estimate can be
+  // traced to the data instead of guessed at.
+  // ══════════════════════════════════════════════
+  function paintDiag(subject, comps, val, town) {
+    if (new URLSearchParams(location.search).get('debug') !== '1') return;
+    var host = el('plm-diag-sec');
+    if (!host) return;
+    var thisYear = new Date().getFullYear();
+    var rows = (comps || []).slice(0, 40).map(function (c) {
+      var m = (c.price && c.assessed) ? (c.price / c.assessed) : null;
+      return '<tr><td>' + esc(c.addr) + '</td><td>' + (c.year || '-') + '</td>' +
+        '<td class="num">' + (c.price ? money(c.price) : '-') + '</td>' +
+        '<td class="num">' + (c.assessed ? money(c.assessed) : '-') + '</td>' +
+        '<td class="num"><b>' + (m ? m.toFixed(2) + 'x' : '-') + '</b></td>' +
+        '<td class="num">' + (c.dist != null ? Math.round(c.dist) : '-') + '</td></tr>';
+    }).join('');
+    var mults = (comps || []).filter(function (c) { return c.price > 60000 && c.assessed; })
+                             .map(function (c) { return c.price / c.assessed; });
+    host.innerHTML =
+      '<h3 class="plm-sec-h">Diagnostics</h3>' +
+      '<p class="plm-sec-s">Raw data from the state service. Only visible with ?debug=1 on the URL.</p>' +
+      '<div class="pl-card" style="font-size:13px;">' +
+        '<div><b>Subject</b>: assessed ' + money(subject.assessed) + ', built ' + (subject.built || '?') +
+          ', ' + (subject.acres || '?') + ' ac</div>' +
+        '<div><b>Comps returned</b>: ' + (comps || []).length + ', usable ' + mults.length + '</div>' +
+        '<div><b>Median price/assessed multiplier</b>: ' + (mults.length ? median(mults).toFixed(3) + 'x' : 'n/a') + '</div>' +
+        '<div><b>Ratio used</b>: ' + (val ? (val.ratio * 100).toFixed(2) + '% (' + val.ratioSource + ', ' + val.ratioYear + ')' : 'none') + '</div>' +
+        '<div><b>Drift</b>: ' + (val && val.drift != null ? (val.drift * 100).toFixed(2) + '%/yr' : 'not measured') +
+          '  <b>Time factor</b>: ' + (val ? val.timeFactor.toFixed(3) : '-') +
+          '  <b>Property adj</b>: ' + (val ? val.adjFactor.toFixed(3) : '-') + '</div>' +
+        '<div><b>Base before adjustments</b>: ' + (val ? money(val.base) : '-') + '</div>' +
+        '<div style="margin-top:12px;" class="comps-wrap"><table class="comps"><thead><tr>' +
+          '<th>Address</th><th>Yr</th><th>Sale</th><th>Assessed</th><th>Mult</th><th>Dist m</th>' +
+        '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '</div>';
+  }
+
   // ══════════════════════════════════════════════
   // MODAL
   // ══════════════════════════════════════════════
@@ -2153,6 +2270,8 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-sec" id="plm-score-sec"></div>' +
 
+      '<div class="plm-sec" id="plm-diag-sec"></div>' +
+
       '<div class="plm-sec" id="plm-timeline-sec"></div>' +
 
       '<div class="plm-sec" id="plm-drivers"></div>' +
@@ -2203,24 +2322,16 @@ body.plm-locked { overflow: hidden; }
       current.comps = comps;
       paintComps(comps);
 
-      // primary: comps driven valuation
-      var val = watchdogValuation(subject, comps, new Date().getFullYear());
-
-      // fallback: the town ratio conversion, when comps are too thin
-      var fallback = null;
-      if (!val && ratio) {
-        var f = watchdogEstimate(assessed, ratio);
-        if (f) fallback = { mid: f.mid, lo: f.lo, hi: f.hi, ratio: f.ratio,
-                            n: f.n, through: f.through, confidence: 'Low', method: 'ratio' };
-      }
-
-      current.valuation = val || fallback;
+      var val = watchdogValuation(subject, comps, new Date().getFullYear(),
+                                  current.town, current.county);
+      current.valuation = val;
       paintValuation(current.valuation, assessed, tax, ratio);
 
       var sc = watchdogScore(assessed, current.valuation, ratio);
       current.score = sc;
       paintScore(sc, tax, assessed);
       paintTimeline(current.valuation);
+      paintDiag(subject, comps, current.valuation, current.town);
     });
 
     neighborhoodStats(geo.lat, geo.lon, 500).then(function (h) {
