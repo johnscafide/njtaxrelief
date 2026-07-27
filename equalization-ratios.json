@@ -1,0 +1,1230 @@
+{
+  "_readme": [
+    "OFFICIAL NJ EQUALIZATION RATIOS  \u00b7  TAX YEAR 2026  \u00b7  SOUTH JERSEY",
+    "",
+    "Source: NJ Division of Taxation, 'Certification of Average Ratios and Common",
+    "Level Ranges for Use in the Tax Year 2026', Chapter 123 Laws of 1973.",
+    "Original certification October 1, 2025, as amended by the NJ Tax Court",
+    "January 30, 2026. Director Marita R. Sciarrotta.",
+    "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+    "",
+    "WHAT THESE DO:",
+    "  market value = assessed value / (ratio / 100)",
+    "  A $200,000 assessment in a town at 58.00 implies a $344,828 home.",
+    "  The same assessment in a town at 94.03 implies a $212,700 home.",
+    "",
+    "  'lower' and 'upper' are the Chapter 123 common level range. If an",
+    "  assessment exceeds the upper limit applied to true market value, the county",
+    "  board is directed to reduce it. That is the whole basis of an appeal, and",
+    "  the page uses these published limits rather than computing its own.",
+    "",
+    "COVERAGE: all 168 municipalities in the seven South Jersey counties.",
+    "  Atlantic 23, Burlington 40, Camden 36, Cape May 16, Cumberland 14,",
+    "  Gloucester 24, Salem 15.",
+    "",
+    "KEY FORMAT: 'MUNICIPALITY (COUNTY)'. Every key is county qualified on",
+    "  purpose. WASHINGTON TWP and GREENWICH TWP each exist in more than one",
+    "  South Jersey county with different ratios, so a bare town name would be",
+    "  ambiguous. Names match MUN_NAME as returned by the state parcel service.",
+    "",
+    "ADDING MORE COUNTIES:",
+    "  Pull the same PDF for the year you want, find the county block, and add",
+    "  entries in this format. Ocean, Mercer, Monmouth and the north are all in",
+    "  the same document.",
+    "",
+    "UPDATING EACH YEAR:",
+    "  The state certifies in October for the following tax year, and the Tax",
+    "  Court may amend it in January. Add the new year alongside the old one:",
+    "    'WINSLOW TWP (CAMDEN)': { '2026': {...}, '2027': {...} }",
+    "  The page automatically uses the most recent year present.",
+    "",
+    "VERIFICATION: every row was checked against the state's own arithmetic,",
+    "  lower = ratio x 0.85 and upper = ratio x 1.15. All 168 matched exactly."
+  ],
+  "_source": {
+    "document": "Certification of Average Ratios and Common Level Ranges, Tax Year 2026",
+    "publisher": "NJ Division of Taxation, Property Administration",
+    "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+    "certified": "2025-10-01",
+    "amended_by_tax_court": "2026-01-30",
+    "municipalities": 168
+  },
+  "ratios": {
+    "ABSECON CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 62.77,
+        "lower": 53.35,
+        "upper": 72.19
+      }
+    },
+    "ATLANTIC CITY CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 57.95,
+        "lower": 49.26,
+        "upper": 66.64
+      }
+    },
+    "BRIGANTINE CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 52.07,
+        "lower": 44.26,
+        "upper": 59.88
+      }
+    },
+    "BUENA BORO (ATLANTIC)": {
+      "2026": {
+        "ratio": 70.15,
+        "lower": 59.63,
+        "upper": 80.67
+      }
+    },
+    "BUENA VISTA TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 66.21,
+        "lower": 56.28,
+        "upper": 76.14
+      }
+    },
+    "CORBIN CITY CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 60.39,
+        "lower": 51.33,
+        "upper": 69.45
+      }
+    },
+    "EGG HARBOR CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 52.78,
+        "lower": 44.86,
+        "upper": 60.7
+      }
+    },
+    "EGG HARBOR TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 61.54,
+        "lower": 52.31,
+        "upper": 70.77
+      }
+    },
+    "ESTELL MANOR CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 55.51,
+        "lower": 47.18,
+        "upper": 63.84
+      }
+    },
+    "FOLSOM BORO (ATLANTIC)": {
+      "2026": {
+        "ratio": 61.68,
+        "lower": 52.43,
+        "upper": 70.93
+      }
+    },
+    "GALLOWAY TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 56.14,
+        "lower": 47.72,
+        "upper": 64.56
+      }
+    },
+    "HAMILTON TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 54.02,
+        "lower": 45.92,
+        "upper": 62.12
+      }
+    },
+    "HAMMONTON TOWN (ATLANTIC)": {
+      "2026": {
+        "ratio": 69.26,
+        "lower": 58.87,
+        "upper": 79.65
+      }
+    },
+    "LINWOOD CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 64.39,
+        "lower": 54.73,
+        "upper": 74.05
+      }
+    },
+    "LONGPORT BORO (ATLANTIC)": {
+      "2026": {
+        "ratio": 55.08,
+        "lower": 46.82,
+        "upper": 63.34
+      }
+    },
+    "MARGATE CITY CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 46.82,
+        "lower": 39.8,
+        "upper": 53.84
+      }
+    },
+    "MULLICA TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 57.62,
+        "lower": 48.98,
+        "upper": 66.26
+      }
+    },
+    "NORTHFIELD CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 61.13,
+        "lower": 51.96,
+        "upper": 70.3
+      }
+    },
+    "PLEASANTVILLE CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 57.64,
+        "lower": 48.99,
+        "upper": 66.29
+      }
+    },
+    "PORT REPUBLIC CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 49.9,
+        "lower": 42.42,
+        "upper": 57.39
+      }
+    },
+    "SOMERS POINT CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 56.13,
+        "lower": 47.71,
+        "upper": 64.55
+      }
+    },
+    "VENTNOR CITY (ATLANTIC)": {
+      "2026": {
+        "ratio": 49.54,
+        "lower": 42.11,
+        "upper": 56.97
+      }
+    },
+    "WEYMOUTH TWP (ATLANTIC)": {
+      "2026": {
+        "ratio": 57.66,
+        "lower": 49.01,
+        "upper": 66.31
+      }
+    },
+    "BASS RIVER TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 68.16,
+        "lower": 57.94,
+        "upper": 78.38
+      }
+    },
+    "BEVERLY CITY (BURLINGTON)": {
+      "2026": {
+        "ratio": 58.93,
+        "lower": 50.09,
+        "upper": 67.77
+      }
+    },
+    "BORDENTOWN CITY (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.17,
+        "lower": 51.14,
+        "upper": 69.2
+      }
+    },
+    "BORDENTOWN TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.08,
+        "lower": 48.52,
+        "upper": 65.64
+      }
+    },
+    "BURLINGTON CITY (BURLINGTON)": {
+      "2026": {
+        "ratio": 63.18,
+        "lower": 53.7,
+        "upper": 72.66
+      }
+    },
+    "BURLINGTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.33,
+        "lower": 51.28,
+        "upper": 69.38
+      }
+    },
+    "CHESTERFIELD TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 62.4,
+        "lower": 53.04,
+        "upper": 71.76
+      }
+    },
+    "CINNAMINSON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 55.13,
+        "lower": 46.86,
+        "upper": 63.4
+      }
+    },
+    "DELANCO TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 61.01,
+        "lower": 51.86,
+        "upper": 70.16
+      }
+    },
+    "DELRAN TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 52.56,
+        "lower": 44.68,
+        "upper": 60.44
+      }
+    },
+    "EASTAMPTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.07,
+        "lower": 48.51,
+        "upper": 65.63
+      }
+    },
+    "EDGEWATER PARK TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 64.86,
+        "lower": 55.13,
+        "upper": 74.59
+      }
+    },
+    "EVESHAM TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.98,
+        "lower": 51.83,
+        "upper": 70.13
+      }
+    },
+    "FIELDSBORO BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 61.85,
+        "lower": 52.57,
+        "upper": 71.13
+      }
+    },
+    "FLORENCE TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 77.4,
+        "lower": 65.79,
+        "upper": 89.01
+      }
+    },
+    "HAINESPORT TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.57,
+        "lower": 51.48,
+        "upper": 69.66
+      }
+    },
+    "LUMBERTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 65.45,
+        "lower": 55.63,
+        "upper": 75.27
+      }
+    },
+    "MANSFIELD TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 56.72,
+        "lower": 48.21,
+        "upper": 65.23
+      }
+    },
+    "MAPLE SHADE TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.36,
+        "lower": 48.76,
+        "upper": 65.96
+      }
+    },
+    "MEDFORD LAKES BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 54.68,
+        "lower": 46.48,
+        "upper": 62.88
+      }
+    },
+    "MEDFORD TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.82,
+        "lower": 49.15,
+        "upper": 66.49
+      }
+    },
+    "MOORESTOWN TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 61.44,
+        "lower": 52.22,
+        "upper": 70.66
+      }
+    },
+    "MT HOLLY TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.89,
+        "lower": 51.76,
+        "upper": 70.02
+      }
+    },
+    "MT LAUREL TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 60.04,
+        "lower": 51.03,
+        "upper": 69.05
+      }
+    },
+    "NEW HANOVER TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 42.87,
+        "lower": 36.44,
+        "upper": 49.3
+      }
+    },
+    "NO HANOVER TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 65.18,
+        "lower": 55.4,
+        "upper": 74.96
+      }
+    },
+    "PALMYRA BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 54.58,
+        "lower": 46.39,
+        "upper": 62.77
+      }
+    },
+    "PEMBERTON BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 65.47,
+        "lower": 55.65,
+        "upper": 75.29
+      }
+    },
+    "PEMBERTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 59.69,
+        "lower": 50.74,
+        "upper": 68.64
+      }
+    },
+    "RIVERSIDE TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.31,
+        "lower": 48.71,
+        "upper": 65.91
+      }
+    },
+    "RIVERTON BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 56.72,
+        "lower": 48.21,
+        "upper": 65.23
+      }
+    },
+    "SHAMONG TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 56.55,
+        "lower": 48.07,
+        "upper": 65.03
+      }
+    },
+    "SOUTHAMPTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 50.4,
+        "lower": 42.84,
+        "upper": 57.96
+      }
+    },
+    "SPRINGFIELD TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 57.52,
+        "lower": 48.89,
+        "upper": 66.15
+      }
+    },
+    "TABERNACLE TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 56.46,
+        "lower": 47.99,
+        "upper": 64.93
+      }
+    },
+    "WASHINGTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 62.49,
+        "lower": 53.12,
+        "upper": 71.86
+      }
+    },
+    "WESTAMPTON TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 63.33,
+        "lower": 53.83,
+        "upper": 72.83
+      }
+    },
+    "WILLINGBORO TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 56.46,
+        "lower": 47.99,
+        "upper": 64.93
+      }
+    },
+    "WOODLAND TWP (BURLINGTON)": {
+      "2026": {
+        "ratio": 67.58,
+        "lower": 57.44,
+        "upper": 77.72
+      }
+    },
+    "WRIGHTSTOWN BORO (BURLINGTON)": {
+      "2026": {
+        "ratio": 47.59,
+        "lower": 40.45,
+        "upper": 54.73
+      }
+    },
+    "AUDUBON BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 61.01,
+        "lower": 51.86,
+        "upper": 70.16
+      }
+    },
+    "AUDUBON PARK BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 99.89,
+        "lower": 84.91,
+        "upper": 114.87
+      }
+    },
+    "BARRINGTON BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 56.47,
+        "lower": 48.0,
+        "upper": 64.94
+      }
+    },
+    "BELLMAWR BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 63.37,
+        "lower": 53.86,
+        "upper": 72.88
+      }
+    },
+    "BERLIN BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 66.55,
+        "lower": 56.57,
+        "upper": 76.53
+      }
+    },
+    "BERLIN TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 58.26,
+        "lower": 49.52,
+        "upper": 67.0
+      }
+    },
+    "BROOKLAWN BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 53.45,
+        "lower": 45.43,
+        "upper": 61.47
+      }
+    },
+    "CAMDEN CITY (CAMDEN)": {
+      "2026": {
+        "ratio": 57.82,
+        "lower": 49.15,
+        "upper": 66.49
+      }
+    },
+    "CHERRY HILL TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 54.32,
+        "lower": 46.17,
+        "upper": 62.47
+      }
+    },
+    "CHESILHURST BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 64.07,
+        "lower": 54.46,
+        "upper": 73.68
+      }
+    },
+    "CLEMENTON BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 62.4,
+        "lower": 53.04,
+        "upper": 71.76
+      }
+    },
+    "COLLINGSWOOD BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 109.22,
+        "lower": 92.84,
+        "upper": 125.6
+      }
+    },
+    "GIBBSBORO BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 66.63,
+        "lower": 56.64,
+        "upper": 76.62
+      }
+    },
+    "GLOUCESTER CITY (CAMDEN)": {
+      "2026": {
+        "ratio": 56.8,
+        "lower": 48.28,
+        "upper": 65.32
+      }
+    },
+    "GLOUCESTER TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 56.95,
+        "lower": 48.41,
+        "upper": 65.49
+      }
+    },
+    "HADDON HEIGHTS BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 80.81,
+        "lower": 68.69,
+        "upper": 92.93
+      }
+    },
+    "HADDON TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 104.64,
+        "lower": 88.94,
+        "upper": 120.34
+      }
+    },
+    "HADDONFIELD BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 70.95,
+        "lower": 60.31,
+        "upper": 81.59
+      }
+    },
+    "HI NELLA BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 56.74,
+        "lower": 48.23,
+        "upper": 65.25
+      }
+    },
+    "LAUREL SPRINGS BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 57.13,
+        "lower": 48.56,
+        "upper": 65.7
+      }
+    },
+    "LAWNSIDE BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 60.99,
+        "lower": 51.84,
+        "upper": 70.14
+      }
+    },
+    "LINDENWOLD BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 59.98,
+        "lower": 50.98,
+        "upper": 68.98
+      }
+    },
+    "MAGNOLIA BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 60.04,
+        "lower": 51.03,
+        "upper": 69.05
+      }
+    },
+    "MERCHANTVILLE BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 55.76,
+        "lower": 47.4,
+        "upper": 64.12
+      }
+    },
+    "MOUNT EPHRAIM BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 56.15,
+        "lower": 47.73,
+        "upper": 64.57
+      }
+    },
+    "OAKLYN BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 55.26,
+        "lower": 46.97,
+        "upper": 63.55
+      }
+    },
+    "PENNSAUKEN TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 109.7,
+        "lower": 93.25,
+        "upper": 126.16
+      }
+    },
+    "PINE HILL BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 51.74,
+        "lower": 43.98,
+        "upper": 59.5
+      }
+    },
+    "RUNNEMEDE BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 54.95,
+        "lower": 46.71,
+        "upper": 63.19
+      }
+    },
+    "SOMERDALE BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 56.5,
+        "lower": 48.03,
+        "upper": 64.98
+      }
+    },
+    "STRATFORD BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 57.7,
+        "lower": 49.05,
+        "upper": 66.36
+      }
+    },
+    "TAVISTOCK BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 100.0,
+        "lower": 85.0,
+        "upper": 115.0
+      }
+    },
+    "VOORHEES TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 105.49,
+        "lower": 89.67,
+        "upper": 121.31
+      }
+    },
+    "WATERFORD TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 53.68,
+        "lower": 45.63,
+        "upper": 61.73
+      }
+    },
+    "WINSLOW TWP (CAMDEN)": {
+      "2026": {
+        "ratio": 58.0,
+        "lower": 49.3,
+        "upper": 66.7
+      }
+    },
+    "WOODLYNNE BORO (CAMDEN)": {
+      "2026": {
+        "ratio": 46.31,
+        "lower": 39.36,
+        "upper": 53.26
+      }
+    },
+    "AVALON BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 54.28,
+        "lower": 46.14,
+        "upper": 62.42
+      }
+    },
+    "CAPE MAY CITY (CAPE MAY)": {
+      "2026": {
+        "ratio": 50.83,
+        "lower": 43.21,
+        "upper": 58.45
+      }
+    },
+    "CAPE MAY POINT BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 53.5,
+        "lower": 45.48,
+        "upper": 61.53
+      }
+    },
+    "DENNIS TWP (CAPE MAY)": {
+      "2026": {
+        "ratio": 66.28,
+        "lower": 56.34,
+        "upper": 76.22
+      }
+    },
+    "LOWER TWP (CAPE MAY)": {
+      "2026": {
+        "ratio": 47.17,
+        "lower": 40.09,
+        "upper": 54.25
+      }
+    },
+    "MIDDLE TWP (CAPE MAY)": {
+      "2026": {
+        "ratio": 64.09,
+        "lower": 54.48,
+        "upper": 73.7
+      }
+    },
+    "NORTH WILDWOOD CITY (CAPE MAY)": {
+      "2026": {
+        "ratio": 51.04,
+        "lower": 43.38,
+        "upper": 58.7
+      }
+    },
+    "OCEAN CITY CITY (CAPE MAY)": {
+      "2026": {
+        "ratio": 51.7,
+        "lower": 43.95,
+        "upper": 59.46
+      }
+    },
+    "SEA ISLE CITY CITY (CAPE MAY)": {
+      "2026": {
+        "ratio": 47.55,
+        "lower": 40.42,
+        "upper": 54.68
+      }
+    },
+    "STONE HARBOR BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 50.22,
+        "lower": 42.69,
+        "upper": 57.75
+      }
+    },
+    "UPPER TWP (CAPE MAY)": {
+      "2026": {
+        "ratio": 56.65,
+        "lower": 48.15,
+        "upper": 65.15
+      }
+    },
+    "WEST CAPE MAY BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 44.36,
+        "lower": 37.71,
+        "upper": 51.01
+      }
+    },
+    "WEST WILDWOOD BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 44.94,
+        "lower": 38.2,
+        "upper": 51.68
+      }
+    },
+    "WILDWOOD CITY (CAPE MAY)": {
+      "2026": {
+        "ratio": 45.84,
+        "lower": 38.96,
+        "upper": 52.72
+      }
+    },
+    "WILDWOOD CREST BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 53.21,
+        "lower": 45.23,
+        "upper": 61.19
+      }
+    },
+    "WOODBINE BORO (CAPE MAY)": {
+      "2026": {
+        "ratio": 77.58,
+        "lower": 65.94,
+        "upper": 89.22
+      }
+    },
+    "BRIDGETON CITY (CUMBERLAND)": {
+      "2026": {
+        "ratio": 56.56,
+        "lower": 48.08,
+        "upper": 65.04
+      }
+    },
+    "COMMERCIAL TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 80.53,
+        "lower": 68.45,
+        "upper": 92.61
+      }
+    },
+    "DEERFIELD TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 60.08,
+        "lower": 51.07,
+        "upper": 69.09
+      }
+    },
+    "DOWNE TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 78.4,
+        "lower": 66.64,
+        "upper": 90.16
+      }
+    },
+    "FAIRFIELD TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 83.33,
+        "lower": 70.83,
+        "upper": 95.83
+      }
+    },
+    "GREENWICH TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 73.98,
+        "lower": 62.88,
+        "upper": 85.08
+      }
+    },
+    "HOPEWELL TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 61.16,
+        "lower": 51.99,
+        "upper": 70.33
+      }
+    },
+    "LAWRENCE TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 74.01,
+        "lower": 62.91,
+        "upper": 85.11
+      }
+    },
+    "MAURICE RIVER TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 83.16,
+        "lower": 70.69,
+        "upper": 95.63
+      }
+    },
+    "MILLVILLE CITY (CUMBERLAND)": {
+      "2026": {
+        "ratio": 57.44,
+        "lower": 48.82,
+        "upper": 66.06
+      }
+    },
+    "SHILOH BORO (CUMBERLAND)": {
+      "2026": {
+        "ratio": 73.24,
+        "lower": 62.25,
+        "upper": 84.23
+      }
+    },
+    "STOW CREEK TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 80.57,
+        "lower": 68.48,
+        "upper": 92.66
+      }
+    },
+    "UPPER DEERFIELD TWP (CUMBERLAND)": {
+      "2026": {
+        "ratio": 69.3,
+        "lower": 58.91,
+        "upper": 79.7
+      }
+    },
+    "VINELAND CITY (CUMBERLAND)": {
+      "2026": {
+        "ratio": 62.1,
+        "lower": 52.79,
+        "upper": 71.42
+      }
+    },
+    "CLAYTON BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 94.03,
+        "lower": 79.93,
+        "upper": 108.13
+      }
+    },
+    "DEPTFORD TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 63.42,
+        "lower": 53.91,
+        "upper": 72.93
+      }
+    },
+    "EAST GREENWICH TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 62.29,
+        "lower": 52.95,
+        "upper": 71.63
+      }
+    },
+    "ELK TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 60.42,
+        "lower": 51.36,
+        "upper": 69.48
+      }
+    },
+    "FRANKLIN TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 58.44,
+        "lower": 49.67,
+        "upper": 67.21
+      }
+    },
+    "GLASSBORO BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 56.97,
+        "lower": 48.42,
+        "upper": 65.52
+      }
+    },
+    "GREENWICH TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 57.69,
+        "lower": 49.04,
+        "upper": 66.34
+      }
+    },
+    "HARRISON TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 60.14,
+        "lower": 51.12,
+        "upper": 69.16
+      }
+    },
+    "LOGAN TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 91.27,
+        "lower": 77.58,
+        "upper": 104.96
+      }
+    },
+    "MANTUA TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 85.33,
+        "lower": 72.53,
+        "upper": 98.13
+      }
+    },
+    "MONROE TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 59.47,
+        "lower": 50.55,
+        "upper": 68.39
+      }
+    },
+    "NATIONAL PARK BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 59.44,
+        "lower": 50.52,
+        "upper": 68.36
+      }
+    },
+    "NEWFIELD BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 60.86,
+        "lower": 51.73,
+        "upper": 69.99
+      }
+    },
+    "PAULSBORO BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 58.83,
+        "lower": 50.01,
+        "upper": 67.65
+      }
+    },
+    "PITMAN BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 73.31,
+        "lower": 62.31,
+        "upper": 84.31
+      }
+    },
+    "SO HARRISON TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 59.13,
+        "lower": 50.26,
+        "upper": 68.0
+      }
+    },
+    "SWEDESBORO BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 57.73,
+        "lower": 49.07,
+        "upper": 66.39
+      }
+    },
+    "WASHINGTON TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 59.41,
+        "lower": 50.5,
+        "upper": 68.32
+      }
+    },
+    "WENONAH BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 61.89,
+        "lower": 52.61,
+        "upper": 71.17
+      }
+    },
+    "WEST DEPTFORD TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 62.18,
+        "lower": 52.85,
+        "upper": 71.51
+      }
+    },
+    "WESTVILLE BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 50.06,
+        "lower": 42.55,
+        "upper": 57.57
+      }
+    },
+    "WOODBURY CITY (GLOUCESTER)": {
+      "2026": {
+        "ratio": 61.62,
+        "lower": 52.38,
+        "upper": 70.86
+      }
+    },
+    "WOODBURY HEIGHTS BORO (GLOUCESTER)": {
+      "2026": {
+        "ratio": 62.28,
+        "lower": 52.94,
+        "upper": 71.62
+      }
+    },
+    "WOOLWICH TWP (GLOUCESTER)": {
+      "2026": {
+        "ratio": 64.34,
+        "lower": 54.69,
+        "upper": 73.99
+      }
+    },
+    "ALLOWAY TWP (SALEM)": {
+      "2026": {
+        "ratio": 66.97,
+        "lower": 56.92,
+        "upper": 77.02
+      }
+    },
+    "CARNEYS POINT TWP (SALEM)": {
+      "2026": {
+        "ratio": 107.29,
+        "lower": 91.2,
+        "upper": 123.38
+      }
+    },
+    "ELMER BORO (SALEM)": {
+      "2026": {
+        "ratio": 70.88,
+        "lower": 60.25,
+        "upper": 81.51
+      }
+    },
+    "ELSINBORO TWP (SALEM)": {
+      "2026": {
+        "ratio": 76.97,
+        "lower": 65.42,
+        "upper": 88.52
+      }
+    },
+    "LOWER ALLOWAY CREEK TWP (SALEM)": {
+      "2026": {
+        "ratio": 60.3,
+        "lower": 51.26,
+        "upper": 69.35
+      }
+    },
+    "MANNINGTON TWP (SALEM)": {
+      "2026": {
+        "ratio": 80.22,
+        "lower": 68.19,
+        "upper": 92.25
+      }
+    },
+    "OLDMANS TWP (SALEM)": {
+      "2026": {
+        "ratio": 80.69,
+        "lower": 68.59,
+        "upper": 92.79
+      }
+    },
+    "PENNS GROVE BORO (SALEM)": {
+      "2026": {
+        "ratio": 59.15,
+        "lower": 50.28,
+        "upper": 68.02
+      }
+    },
+    "PENNSVILLE TWP (SALEM)": {
+      "2026": {
+        "ratio": 64.71,
+        "lower": 55.0,
+        "upper": 74.42
+      }
+    },
+    "PILESGROVE TWP (SALEM)": {
+      "2026": {
+        "ratio": 68.0,
+        "lower": 57.8,
+        "upper": 78.2
+      }
+    },
+    "PITTSGROVE TWP (SALEM)": {
+      "2026": {
+        "ratio": 61.59,
+        "lower": 52.35,
+        "upper": 70.83
+      }
+    },
+    "QUINTON TWP (SALEM)": {
+      "2026": {
+        "ratio": 72.9,
+        "lower": 61.97,
+        "upper": 83.84
+      }
+    },
+    "SALEM CITY (SALEM)": {
+      "2026": {
+        "ratio": 49.82,
+        "lower": 42.35,
+        "upper": 57.29
+      }
+    },
+    "UPPER PITTSGROVE TWP (SALEM)": {
+      "2026": {
+        "ratio": 74.38,
+        "lower": 63.22,
+        "upper": 85.54
+      }
+    },
+    "WOODSTOWN BORO (SALEM)": {
+      "2026": {
+        "ratio": 70.08,
+        "lower": 59.57,
+        "upper": 80.59
+      }
+    }
+  }
+}
