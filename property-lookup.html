@@ -1385,9 +1385,19 @@ body.plm-locked { overflow: hidden; }
     if (!hit) return null;
     var years = Object.keys(hit).map(Number).filter(function (y) { return y > 1990; }).sort();
     if (!years.length) return null;
-    var yr = years[years.length - 1], pct = +hit[String(yr)];
+    var yr = years[years.length - 1], row = hit[String(yr)];
+
+    // the file supports a bare percentage or the full published row with the
+    // Chapter 123 common level range
+    var pct, lower = null, upper = null;
+    if (row && typeof row === 'object') {
+      pct = +row.ratio;
+      if (row.lower) lower = +row.lower / 100;
+      if (row.upper) upper = +row.upper / 100;
+    } else { pct = +row; }
+
     if (!pct || pct <= 0 || pct > 200) return null;
-    return { ratio: pct / 100, year: yr, source: 'official' };
+    return { ratio: pct / 100, lower: lower, upper: upper, year: yr, source: 'official' };
   }
 
   // Fallback: derive from recorded sales. Only trusted when the sample is
@@ -1509,7 +1519,8 @@ body.plm-locked { overflow: hidden; }
     return {
       method: R.source,
       mid: mid, lo: mid * (1 - band), hi: mid * (1 + band),
-      ratio: R.ratio, ratioYear: R.year, ratioSource: R.source,
+      ratio: R.ratio, ratioLower: R.lower, ratioUpper: R.upper,
+      ratioYear: R.year, ratioSource: R.source,
       drift: drift, timeFactor: timeFactor,
       adjFactor: adj.factor, adjNotes: adj.notes,
       n: compCount, confidence: conf,
@@ -1868,41 +1879,66 @@ body.plm-locked { overflow: hidden; }
   // board is supposed to reduce it. So the score is really "how far past the
   // upper limit is this assessment".
   // ══════════════════════════════════════════════
-  function watchdogScore(assessed, val, ratio) {
-    if (!assessed || !val || !val.mid) return null;
+  function watchdogScore(assessed, val, comps) {
+    // The valuation is derived from the assessment, so comparing the two tells
+    // us nothing. The only real signal available in public data is how THIS
+    // property is assessed relative to genuinely comparable neighbours.
+    //
+    // Peer group: nearby homes of similar vintage and lot size. If this one
+    // carries a materially higher assessment per comparable home than its
+    // peers do, that is the pattern an appeal is built on.
+    if (!assessed || !comps || comps.length < 10 || !val) return null;
 
-    // the town's own ratio, preferred from the sales sample, else implied
-    var R = (ratio && ratio.ratio) ? ratio.ratio : (assessed / val.mid);
-    if (!R || R <= 0) return null;
+    var subjBuilt = (current && current.yearBuilt) ? +current.yearBuilt : 0;
+    var subjAcres = (current && current.acres) ? +current.acres : 0;
 
-    var market = val.mid;
-    var fairAssessment = market * R;          // what it should be assessed at
-    var upperLimit = fairAssessment * 1.15;   // Chapter 123 corridor
-    var over = assessed - upperLimit;
-    var overPct = fairAssessment > 0 ? (assessed - fairAssessment) / fairAssessment : 0;
+    var peers = comps.filter(function (c) {
+      if (!c.assessed || c.assessed < 10000) return false;
+      if (subjBuilt && c.built && Math.abs(c.built - subjBuilt) > 18) return false;
+      if (subjAcres && c.acres && (c.acres < subjAcres * 0.5 || c.acres > subjAcres * 2.0)) return false;
+      return true;
+    });
+    if (peers.length < 8) {
+      peers = comps.filter(function (c) { return c.assessed && c.assessed > 10000; });
+    }
+    if (peers.length < 8) return null;
 
-    // score: 50 = exactly fair. above 50 = looks over-assessed.
-    var score = Math.round(50 + Math.max(-45, Math.min(45, overPct * 220)));
+    var pa = peers.map(function (c) { return c.assessed; });
+    var medPeer = median(pa);
+    if (!medPeer) return null;
+
+    var gap = (assessed - medPeer) / medPeer;      // how far above peers
+    var score = Math.round(50 + Math.max(-45, Math.min(45, gap * 180)));
+
+    // what the assessment would be at the peer median, and the resulting range
+    var fair = medPeer;
+    var upper = medPeer * 1.15;                     // Chapter 123 style cushion
 
     var band, label, blurb;
-    if (assessed > upperLimit) {
-      band = 'bad'; label = 'Looks over-assessed';
-      blurb = 'This assessment sits above the Chapter 123 upper limit for what the property appears to be worth. That is the exact condition an appeal is built on.';
-    } else if (overPct > 0.03) {
-      band = 'warn'; label = 'Slightly high';
-      blurb = 'Above what the numbers suggest is fair, but still inside the 15 percent cushion New Jersey gives municipalities. An appeal here is uphill unless the valuation is conservative.';
-    } else if (overPct < -0.08) {
-      band = 'good'; label = 'Assessed below market';
-      blurb = 'The assessment is comfortably under what the property appears to be worth. Good news for the tax bill, and worth knowing before you list.';
+    if (assessed > upper) {
+      band = 'bad'; label = 'Assessed above its peers';
+      blurb = 'Comparable homes nearby, similar vintage and lot size, carry noticeably lower assessments. ' +
+              'That gap is the pattern a New Jersey appeal is built on. It is not proof, because the public record ' +
+              'cannot see condition or upgrades, but it is worth a real look.';
+    } else if (gap > 0.05) {
+      band = 'warn'; label = 'Slightly above peers';
+      blurb = 'A little higher than comparable homes nearby, but inside the cushion New Jersey allows. ' +
+              'An appeal here would need strong comps to succeed.';
+    } else if (gap < -0.10) {
+      band = 'good'; label = 'Assessed below its peers';
+      blurb = 'This property carries a lower assessment than comparable homes nearby. Good news for the tax bill, ' +
+              'and useful to know before you list.';
     } else {
-      band = 'ok'; label = 'Looks about right';
-      blurb = 'The assessment tracks closely with what the property appears to be worth. Nothing here suggests an appeal.';
+      band = 'ok'; label = 'In line with its peers';
+      blurb = 'The assessment tracks closely with comparable homes nearby. Nothing here suggests an appeal.';
     }
 
     return {
       score: score, band: band, label: label, blurb: blurb,
-      ratio: R, market: market, fair: fairAssessment, upper: upperLimit,
-      over: over, overPct: overPct, appealable: assessed > upperLimit
+      peerCount: peers.length, medPeer: medPeer, fair: fair, upper: upper,
+      over: assessed - upper, overPct: gap,
+      market: val.mid, ratio: val.ratio,
+      appealable: assessed > upper
     };
   }
 
@@ -1933,7 +1969,7 @@ body.plm-locked { overflow: hidden; }
 
     host.innerHTML =
       '<h3 class="plm-sec-h">Watchdog Score</h3>' +
-      '<p class="plm-sec-s">How this assessment stacks up against what the property appears to be worth, judged the way a New Jersey tax appeal actually gets decided.</p>' +
+      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is the comparison a New Jersey appeal turns on.</p>' +
       '<div class="score-wrap">' +
         '<div class="score-gauge">' +
           '<svg viewBox="0 0 260 150" role="img" aria-label="Watchdog Score ' + sc.score + '">' +
@@ -1954,9 +1990,12 @@ body.plm-locked { overflow: hidden; }
         '<div class="score-body">' +
           '<p>' + esc(sc.blurb) + '</p>' +
           '<div class="score-rows">' +
-            '<div class="score-row"><span>Current assessment</span><b>' + money(assessed) + '</b></div>' +
-            '<div class="score-row"><span>Fair assessment at ' + (sc.ratio * 100).toFixed(1) + '% ratio</span><b>' + money(sc.fair) + '</b></div>' +
-            '<div class="score-row"><span>Chapter 123 upper limit</span><b>' + money(sc.upper) + '</b></div>' +
+            '<div class="score-row"><span>This assessment</span><b>' + money(assessed) + '</b></div>' +
+            '<div class="score-row"><span>Median of ' + sc.peerCount + ' comparable homes nearby</span><b>' + money(sc.medPeer) + '</b></div>' +
+            '<div class="score-row"><span>Upper limit before it looks out of line</span><b>' + money(sc.upper) + '</b></div>' +
+            (current.valuation && current.valuation.ratioSource === 'official'
+              ? '<div class="score-row"><span>Official ratio, tax year ' + current.valuation.ratioYear + '</span><b>' +
+                (current.valuation.ratio * 100).toFixed(2) + '%</b></div>' : '') +
             (sc.over > 0 ? '<div class="score-row over"><span>Assessed above the limit by</span><b>' + money(sc.over) + '</b></div>' : '') +
           '</div>' +
           (save
@@ -1969,7 +2008,8 @@ body.plm-locked { overflow: hidden; }
             : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'value\')">Have John double check this</button>') +
         '</div>' +
       '</div>' +
-      '<div class="score-fine">Screening estimate only, built on public assessment records and the Watchdog Valuation. ' +
+      '<div class="score-fine">Screening comparison only, built from public assessment records. It cannot see condition, upgrades, or interior finish, ' +
+      'and those are exactly what an assessor weighs. ' +
       'A real appeal needs current comparable sales and the municipality\u2019s official equalization ratio for the tax year. ' +
       'Filing deadlines are generally April 1, or May 1 in a town that recently revalued.</div>';
   }
@@ -2327,7 +2367,7 @@ body.plm-locked { overflow: hidden; }
       current.valuation = val;
       paintValuation(current.valuation, assessed, tax, ratio);
 
-      var sc = watchdogScore(assessed, current.valuation, ratio);
+      var sc = watchdogScore(assessed, current.valuation, comps);
       current.score = sc;
       paintScore(sc, tax, assessed);
       paintTimeline(current.valuation);
