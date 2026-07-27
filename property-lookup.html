@@ -393,6 +393,54 @@ body.plm-locked { overflow: hidden; }
 .plm-dots::after { content: '...'; animation: pldots 1.4s steps(4,end) infinite; }
 @keyframes pldots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
 
+/* ---------- VALUATION HERO ---------- */
+.plm-est-hero {
+  font-size: clamp(42px, 7vw, 62px); font-weight: 800; letter-spacing: -.035em;
+  line-height: 1; margin: 4px 0 8px;
+  background: linear-gradient(180deg, #fff 0%, #dfe8f5 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+}
+.plm-est-range {
+  font-size: 14px; color: #cdd9ec; font-weight: 600;
+  display: inline-block; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16);
+  padding: 6px 14px; border-radius: 99px;
+}
+.plm-est-lbl { font-size: 13px; letter-spacing: .13em; }
+.plm-est-lbl i { font-size: 15px; }
+
+/* ---------- WATCHDOG SCORE ---------- */
+.score-wrap { display: grid; grid-template-columns: 268px 1fr; gap: 26px; align-items: start;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+.score-gauge { position: relative; text-align: center; }
+.score-gauge svg { width: 100%; height: auto; display: block; }
+.score-num { font-size: 40px; font-weight: 800; letter-spacing: -.03em; margin-top: -34px; }
+.score-lbl { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-top: 4px; }
+.score-body p { font-size: 14.5px; color: #3d4759; line-height: 1.7; margin: 0 0 16px; }
+.score-rows { border-top: 1px solid #eef0f5; }
+.score-row { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0;
+  border-bottom: 1px solid #f1f3f7; font-size: 13.5px; color: #5a6070; }
+.score-row b { color: #1a1a2e; font-variant-numeric: tabular-nums; }
+.score-row.over b { color: var(--red); }
+.score-save { margin-top: 18px; padding: 18px; background: #fbf3dc; border-radius: 11px; }
+.score-save-n { font-size: 30px; font-weight: 800; color: #6b5514; letter-spacing: -.02em; }
+.score-save-n span { font-size: 15px; font-weight: 700; }
+.score-save-l { font-size: 13.5px; color: #6b5514; line-height: 1.65; margin: 6px 0 14px; }
+.score-fine { font-size: 11.5px; color: #8a93a6; line-height: 1.7; margin-top: 12px; }
+
+/* ---------- TIMELINE ---------- */
+.tl-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-bottom: 18px; }
+.tl-n { font-size: 20px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.tl-l { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #5a6070; margin-top: 4px; }
+.tl-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+  margin-top: 16px; padding: 16px 18px; background: #f4f6fa; border-radius: 11px; font-size: 14px; color: #3d4759; line-height: 1.6; }
+
+@media (max-width: 700px) {
+  .score-wrap { grid-template-columns: 1fr; padding: 18px; }
+  .score-gauge { max-width: 250px; margin: 0 auto; }
+  .tl-cta { flex-direction: column; align-items: stretch; }
+  .plm-est-hero { font-size: 38px; }
+}
+
 .plm-conf {
   display: inline-flex; align-items: center; gap: 6px; margin-left: 10px;
   font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
@@ -1376,11 +1424,11 @@ body.plm-locked { overflow: hidden; }
     });
 
     var pairs = scored.map(function (s) { return { v: s.adj, w: s.w }; });
-    var mMid = wQuantile(pairs, 0.50), mLo = wQuantile(pairs, 0.12), mHi = wQuantile(pairs, 0.88);
+    var mMid = wQuantile(pairs, 0.50), mLo = wQuantile(pairs, 0.16), mHi = wQuantile(pairs, 0.84);
 
     // floor the band. thin samples give artificially tight quantiles and a
     // confident-looking range that misses.
-    var floorPct = scored.length >= 25 ? 0.08 : scored.length >= 12 ? 0.13 : 0.20;
+    var floorPct = scored.length >= 25 ? 0.08 : scored.length >= 12 ? 0.11 : 0.18;
     mLo = Math.min(mLo, mMid * (1 - floorPct));
     mHi = Math.max(mHi, mMid * (1 + floorPct));
 
@@ -1390,7 +1438,10 @@ body.plm-locked { overflow: hidden; }
 
     var conf = (scored.length >= 25 && spread < 0.45 && driftMeasured && strain < 0.12) ? 'High'
              : (scored.length >= 12 && spread < 0.70 && strain < 0.22) ? 'Medium' : 'Low';
-    if (conf === 'Low') { mLo = Math.min(mLo, mMid * 0.78); mHi = Math.max(mHi, mMid * 1.22); }
+    if (conf === 'Low') { mLo = Math.min(mLo, mMid * 0.83); mHi = Math.max(mHi, mMid * 1.17); }
+    // never publish a range wider than about +/- 22%. Past that it is not an
+    // estimate, it is a shrug, and a shrug should decline instead.
+    if ((mHi - mLo) / mMid > 0.44) { mLo = mMid * 0.80; mHi = mMid * 1.20; }
     if (scored.length < 8 && strain > 0.25) return null;
 
     return {
@@ -1411,12 +1462,15 @@ body.plm-locked { overflow: hidden; }
   }
 
   // Pull comps, widening the net until there are enough to work with.
-  function gatherComps(lat, lon) {
-    var radii = [800, 1600, 3200];
+  function gatherComps(lat, lon, muni) {
+    // Stay inside the municipality. Tax rates, schools, and buyer demand all
+    // change at the town line, so a sale 600m away in the next town is not a
+    // comparable no matter how close it looks on a map.
+    var radii = [800, 1600, 3000];
     function attempt(i) {
       if (i >= radii.length) return Promise.resolve([]);
-      return nearbySales(lat, lon, radii[i]).then(function (list) {
-        if (list.length >= 18 || i === radii.length - 1) return list;
+      return nearbySales(lat, lon, radii[i], muni).then(function (list) {
+        if (list.length >= 20 || i === radii.length - 1) return list;
         return attempt(i + 1);
       });
     }
@@ -1428,14 +1482,14 @@ body.plm-locked { overflow: hidden; }
   // Real comps, from the same free layer. Not MLS, so no photos or
   // list prices, but these are actual recorded transfers next door.
   // ══════════════════════════════════════════════
-  function nearbySales(lat, lon, meters) {
+  function nearbySales(lat, lon, meters, muni) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = { xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
                 spatialReference: { wkid: 4326 } };
     var p = new URLSearchParams({
       geometry: JSON.stringify(env), geometryType: 'esriGeometryEnvelope',
-      inSR: '4326', spatialRel: 'esriSpatialRelIntersects',
-      where: "SALE_PRICE > 50000 AND PROP_CLASS = '2'",
+      inSR: '4326', outSR: '4326', spatialRel: 'esriSpatialRelIntersects',
+      where: "SALE_PRICE > 50000 AND PROP_CLASS = '2'" + (muni ? " AND MUN_NAME = '" + String(muni).replace(/'/g, "''") + "'" : ''),
       outFields: 'PROP_LOC,SALE_PRICE,DEED_DATE,NET_VALUE,YR_CONSTR,CALC_ACRE,MUN_NAME',
       returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '400', f: 'json'
     });
@@ -1456,7 +1510,12 @@ body.plm-locked { overflow: hidden; }
                    assessed: +a.NET_VALUE || 0, built: +a.YR_CONSTR || 0,
                    acres: +a.CALC_ACRE || 0, town: a.MUN_NAME || '', dist: dist };
         })
-        .filter(function (x) { return x.year && x.year >= thisYear - 6 && x.price > 50000; })
+        .filter(function (x) {
+          if (!x.year || x.year < thisYear - 6 || x.price <= 50000) return false;
+          // belt and braces: anything past 5 miles is a projection error, not a neighbour
+          if (x.dist != null && x.dist > 8000) return false;
+          return true;
+        })
         .sort(function (a, b) { return b.year - a.year || b.price - a.price; });
       })
       .catch(function () { return []; });
@@ -1578,8 +1637,8 @@ body.plm-locked { overflow: hidden; }
     box.innerHTML =
       '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation' +
         '<span class="plm-conf ' + cm.cls + '" title="' + cm.note + '">' + cm.txt + '</span></div>' +
-      '<div class="plm-est-val">' + money(r(v.lo)) + ' <span>to</span> ' + money(r(v.hi)) + '</div>' +
-      '<div class="plm-est-mid">Midpoint ' + money(r(v.mid)) + '</div>' +
+      '<div class="plm-est-hero">' + money(r(v.mid)) + '</div>' +
+      '<div class="plm-est-range">Likely range ' + money(r(v.lo)) + ' to ' + money(r(v.hi)) + '</div>' +
       '<div class="plm-est-sub">' + basis +
         ' <button class="plm-inline-why" onclick="plWhy()">How this is calculated</button></div>' +
       (trueRate ? '<div class="plm-est-rate">Tax as a share of estimated market value: <b>' + trueRate.toFixed(2) + '%</b></div>' : '') +
@@ -1718,6 +1777,189 @@ body.plm-locked { overflow: hidden; }
           'Sometimes that is a bigger or nicer house. Sometimes it is an assessment nobody ever challenged. ' +
           '<a href="#" onclick="plScrollTo(\'pl-appeal\');return false;">Worth a look</a>.</div></div>'
         : '');
+  }
+
+  // ══════════════════════════════════════════════
+  // WATCHDOG SCORE
+  //
+  // A 0 to 100 read on whether this property looks over-assessed relative to
+  // what the Watchdog Valuation says it is worth, framed the way a NJ tax
+  // appeal actually gets decided.
+  //
+  // Chapter 123: an assessment survives if it sits at or below true market
+  // value times the town ratio times 1.15. Above that upper limit, the county
+  // board is supposed to reduce it. So the score is really "how far past the
+  // upper limit is this assessment".
+  // ══════════════════════════════════════════════
+  function watchdogScore(assessed, val, ratio) {
+    if (!assessed || !val || !val.mid) return null;
+
+    // the town's own ratio, preferred from the sales sample, else implied
+    var R = (ratio && ratio.ratio) ? ratio.ratio : (assessed / val.mid);
+    if (!R || R <= 0) return null;
+
+    var market = val.mid;
+    var fairAssessment = market * R;          // what it should be assessed at
+    var upperLimit = fairAssessment * 1.15;   // Chapter 123 corridor
+    var over = assessed - upperLimit;
+    var overPct = fairAssessment > 0 ? (assessed - fairAssessment) / fairAssessment : 0;
+
+    // score: 50 = exactly fair. above 50 = looks over-assessed.
+    var score = Math.round(50 + Math.max(-45, Math.min(45, overPct * 220)));
+
+    var band, label, blurb;
+    if (assessed > upperLimit) {
+      band = 'bad'; label = 'Looks over-assessed';
+      blurb = 'This assessment sits above the Chapter 123 upper limit for what the property appears to be worth. That is the exact condition an appeal is built on.';
+    } else if (overPct > 0.03) {
+      band = 'warn'; label = 'Slightly high';
+      blurb = 'Above what the numbers suggest is fair, but still inside the 15 percent cushion New Jersey gives municipalities. An appeal here is uphill unless the valuation is conservative.';
+    } else if (overPct < -0.08) {
+      band = 'good'; label = 'Assessed below market';
+      blurb = 'The assessment is comfortably under what the property appears to be worth. Good news for the tax bill, and worth knowing before you list.';
+    } else {
+      band = 'ok'; label = 'Looks about right';
+      blurb = 'The assessment tracks closely with what the property appears to be worth. Nothing here suggests an appeal.';
+    }
+
+    return {
+      score: score, band: band, label: label, blurb: blurb,
+      ratio: R, market: market, fair: fairAssessment, upper: upperLimit,
+      over: over, overPct: overPct, appealable: assessed > upperLimit
+    };
+  }
+
+  // Annual dollars an appeal down to the fair assessment would save.
+  function appealSavings(sc, tax, assessed) {
+    if (!sc || !tax || !assessed || !sc.appealable) return null;
+    var effRate = tax / assessed;                       // dollars of tax per dollar assessed
+    var target = sc.fair;                               // what it should be
+    var annual = (assessed - target) * effRate;
+    if (annual < 150) return null;                      // not worth anyone's time
+    return { annual: annual, target: target, fiveYear: annual * 5 };
+  }
+
+  function paintScore(sc, tax, assessed) {
+    var host = el('plm-score-sec');
+    if (!host) { return; }
+    if (!sc) { host.innerHTML = ''; return; }
+
+    var COL = { bad: '#c0392b', warn: '#b8972a', ok: '#2e7d52', good: '#1e6b3a' };
+    var col = COL[sc.band] || '#5a6070';
+    var save = appealSavings(sc, tax, assessed);
+
+    // gauge geometry: 180 degree arc
+    var pctOf = Math.max(0, Math.min(100, sc.score)) / 100;
+    var ang = Math.PI * (1 - pctOf);
+    var cx = 130, cy = 118, rad = 92;
+    var nx = cx + rad * Math.cos(ang), ny = cy - rad * Math.sin(ang);
+
+    host.innerHTML =
+      '<h3 class="plm-sec-h">Watchdog Score</h3>' +
+      '<p class="plm-sec-s">How this assessment stacks up against what the property appears to be worth, judged the way a New Jersey tax appeal actually gets decided.</p>' +
+      '<div class="score-wrap">' +
+        '<div class="score-gauge">' +
+          '<svg viewBox="0 0 260 150" role="img" aria-label="Watchdog Score ' + sc.score + '">' +
+            '<defs><linearGradient id="scg" x1="0" y1="0" x2="1" y2="0">' +
+              '<stop offset="0%" stop-color="#1e6b3a"/><stop offset="45%" stop-color="#2e7d52"/>' +
+              '<stop offset="68%" stop-color="#b8972a"/><stop offset="100%" stop-color="#c0392b"/>' +
+            '</linearGradient></defs>' +
+            '<path d="M38 118 A92 92 0 0 1 222 118" fill="none" stroke="#eef0f5" stroke-width="17" stroke-linecap="round"/>' +
+            '<path d="M38 118 A92 92 0 0 1 222 118" fill="none" stroke="url(#scg)" stroke-width="17" stroke-linecap="round" opacity="0.9"/>' +
+            '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(1) + '" y2="' + ny.toFixed(1) + '" stroke="#0e2248" stroke-width="4" stroke-linecap="round"/>' +
+            '<circle cx="' + cx + '" cy="' + cy + '" r="8" fill="#0e2248"/>' +
+            '<text x="38" y="142" font-size="10" fill="#8a93a6">Under</text>' +
+            '<text x="222" y="142" font-size="10" fill="#8a93a6" text-anchor="end">Over</text>' +
+          '</svg>' +
+          '<div class="score-num" style="color:' + col + '">' + sc.score + '</div>' +
+          '<div class="score-lbl" style="color:' + col + '">' + esc(sc.label) + '</div>' +
+        '</div>' +
+        '<div class="score-body">' +
+          '<p>' + esc(sc.blurb) + '</p>' +
+          '<div class="score-rows">' +
+            '<div class="score-row"><span>Current assessment</span><b>' + money(assessed) + '</b></div>' +
+            '<div class="score-row"><span>Fair assessment at ' + (sc.ratio * 100).toFixed(1) + '% ratio</span><b>' + money(sc.fair) + '</b></div>' +
+            '<div class="score-row"><span>Chapter 123 upper limit</span><b>' + money(sc.upper) + '</b></div>' +
+            (sc.over > 0 ? '<div class="score-row over"><span>Assessed above the limit by</span><b>' + money(sc.over) + '</b></div>' : '') +
+          '</div>' +
+          (save
+            ? '<div class="score-save">' +
+                '<div class="score-save-n">' + money(save.annual) + '<span>/yr</span></div>' +
+                '<div class="score-save-l">Estimated tax savings if the assessment came down to fair value. ' +
+                  'That is about <b>' + money(save.fiveYear) + '</b> over five years.</div>' +
+                '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">See if I can win this appeal</button>' +
+              '</div>'
+            : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'value\')">Have John double check this</button>') +
+        '</div>' +
+      '</div>' +
+      '<div class="score-fine">Screening estimate only, built on public assessment records and the Watchdog Valuation. ' +
+      'A real appeal needs current comparable sales and the municipality\u2019s official equalization ratio for the tax year. ' +
+      'Filing deadlines are generally April 1, or May 1 in a town that recently revalued.</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // OWNERSHIP TIMELINE
+  // ══════════════════════════════════════════════
+  function paintTimeline(v) {
+    var host = el('plm-timeline-sec');
+    if (!host) return;
+    if (!v || !v.mid || !current.sale || current.sale < 1000 || !current.deedYear) { host.innerHTML = ''; return; }
+
+    var y0 = current.deedYear, y1 = new Date().getFullYear();
+    var span = y1 - y0;
+    if (span < 1) { host.innerHTML = ''; return; }
+
+    var p0 = current.sale, p1 = v.mid;
+    var cagr = Math.pow(p1 / p0, 1 / span) - 1;
+    var pts = [];
+    for (var y = y0; y <= y1; y++) pts.push({ y: y, v: p0 * Math.pow(1 + cagr, y - y0) });
+
+    var W = 620, H = 190, PL = 62, PR = 14, PT = 18, PB = 30;
+    var iw = W - PL - PR, ih = H - PT - PB;
+    var maxV = p1 * 1.06, minV = Math.min(p0, p1) * 0.9;
+    var X = function (i) { return PL + (i / (pts.length - 1)) * iw; };
+    var Y = function (val) { return PT + ih - ((val - minV) / (maxV - minV || 1)) * ih; };
+
+    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + X(i).toFixed(1) + ' ' + Y(p.v).toFixed(1); }).join(' ');
+    var area = line + ' L' + X(pts.length - 1).toFixed(1) + ' ' + (PT + ih) + ' L' + X(0).toFixed(1) + ' ' + (PT + ih) + ' Z';
+
+    var grid = '';
+    for (var g = 0; g <= 2; g++) {
+      var gv = minV + (maxV - minV) * (g / 2), gy = Y(gv);
+      grid += '<line x1="' + PL + '" y1="' + gy.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + gy.toFixed(1) + '" stroke="#eef0f5"/>' +
+              '<text x="' + (PL - 8) + '" y="' + (gy + 4).toFixed(1) + '" text-anchor="end" font-size="10" fill="#8a93a6">$' + Math.round(gv / 1000) + 'k</text>';
+    }
+
+    var gain = p1 - p0, gainPct = (gain / p0) * 100;
+
+    host.innerHTML =
+      '<h3 class="plm-sec-h">What this home has done since ' + y0 + '</h3>' +
+      '<p class="plm-sec-s">From the recorded ' + y0 + ' sale price to today\u2019s Watchdog Valuation. The path between them is smoothed, not measured year by year.</p>' +
+      '<div class="pl-card">' +
+        '<div class="tl-kpis">' +
+          '<div><div class="tl-n">' + money(p0) + '</div><div class="tl-l">Paid in ' + y0 + '</div></div>' +
+          '<div><div class="tl-n">' + money(p1) + '</div><div class="tl-l">Estimated today</div></div>' +
+          '<div><div class="tl-n" style="color:' + (gain >= 0 ? 'var(--green)' : 'var(--red)') + '">' +
+            (gain >= 0 ? '+' : '') + money(gain) + '</div><div class="tl-l">Change over ' + span + ' years</div></div>' +
+          '<div><div class="tl-n">' + (cagr * 100).toFixed(1) + '%</div><div class="tl-l">Average per year</div></div>' +
+        '</div>' +
+        '<svg class="pl-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Value since purchase">' +
+          '<defs><linearGradient id="tlg" x1="0" y1="0" x2="0" y2="1">' +
+            '<stop offset="0%" stop-color="#b8972a" stop-opacity=".30"/><stop offset="100%" stop-color="#b8972a" stop-opacity="0"/>' +
+          '</linearGradient></defs>' + grid +
+          '<path d="' + area + '" fill="url(#tlg)"/>' +
+          '<path d="' + line + '" fill="none" stroke="#b8972a" stroke-width="2.6" stroke-linecap="round"/>' +
+          '<circle cx="' + X(0).toFixed(1) + '" cy="' + Y(p0).toFixed(1) + '" r="4.5" fill="#fff" stroke="#b8972a" stroke-width="2.5"/>' +
+          '<circle cx="' + X(pts.length - 1).toFixed(1) + '" cy="' + Y(p1).toFixed(1) + '" r="5.5" fill="#0e2248" stroke="#fff" stroke-width="2.5"/>' +
+          '<text x="' + X(0).toFixed(1) + '" y="' + (H - 10) + '" font-size="10.5" fill="#8a93a6" text-anchor="middle">' + y0 + '</text>' +
+          '<text x="' + X(pts.length - 1).toFixed(1) + '" y="' + (H - 10) + '" font-size="10.5" fill="#8a93a6" text-anchor="middle">' + y1 + '</text>' +
+        '</svg>' +
+        '<div class="tl-cta">' +
+          '<div><b>' + (gainPct >= 0 ? 'Up ' + gainPct.toFixed(0) + '%' : 'Down ' + Math.abs(gainPct).toFixed(0) + '%') +
+          ' since you bought.</b> Whether that is worth acting on depends on what you would net after commission, the NJ transfer fee, and your payoff.</div>' +
+          '<button class="plm-rbtn" style="width:auto;padding:12px 20px;" onclick="plScrollTo(\'pl-proceeds\')">Run my net proceeds</button>' +
+        '</div>' +
+      '</div>';
   }
 
   // ══════════════════════════════════════════════
@@ -1909,6 +2151,10 @@ body.plm-locked { overflow: hidden; }
         buildProceeds() +
       '</div>' +
 
+      '<div class="plm-sec" id="plm-score-sec"></div>' +
+
+      '<div class="plm-sec" id="plm-timeline-sec"></div>' +
+
       '<div class="plm-sec" id="plm-drivers"></div>' +
 
       '<div class="plm-sec" id="plm-comps-sec"></div>' +
@@ -1948,7 +2194,7 @@ body.plm-locked { overflow: hidden; }
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
 
     Promise.all([
-      gatherComps(geo.lat, geo.lon),
+      gatherComps(geo.lat, geo.lon, current.town),
       townRatio(current.town, current.county)
     ]).then(function (res) {
       var comps = res[0] || [], ratio = res[1];
@@ -1970,6 +2216,11 @@ body.plm-locked { overflow: hidden; }
 
       current.valuation = val || fallback;
       paintValuation(current.valuation, assessed, tax, ratio);
+
+      var sc = watchdogScore(assessed, current.valuation, ratio);
+      current.score = sc;
+      paintScore(sc, tax, assessed);
+      paintTimeline(current.valuation);
     });
 
     neighborhoodStats(geo.lat, geo.lon, 500).then(function (h) {
@@ -2349,6 +2600,8 @@ body.plm-locked { overflow: hidden; }
              blurb: 'Tell me what you are after and I will set you up with listings that match this style and price range.' },
     offer: { topic: '[\uD83D\uDD25 HOT] Wants to make an OFFER on this property', label: 'Make an offer',
              blurb: 'This home may not be listed. I can reach out to the owner on your behalf and find out where they stand.' },
+    appeal: { topic: '[\uD83D\uDD25 HOT][Homeowner] APPEAL screening request', label: 'Check my appeal case',
+             blurb: 'The public numbers suggest this assessment may be above where it should sit. I will pull real comps and the official ratio for your tax year and tell you straight whether it is worth filing.' },
     comps: { topic: '[\uD83D\uDD25 HOT][Homeowner] Real comps request', label: 'Send me the real comps',
              blurb: 'I will pull the MLS comps for this address with condition, upgrades, days on market, and what actually closed versus what was asked.' },
     premier: { topic: '[\uD83D\uDD25 HOT][Homeowner] Listing appointment request', label: 'List with John and Heather',
