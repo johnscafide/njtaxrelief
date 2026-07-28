@@ -1757,7 +1757,7 @@ body.plm-locked { overflow: hidden; }
       var ratioAsOf = (R.year || thisYear) - 1;          // Jan of the prior year
       yearsStale = Math.max(0, Math.min(3.5, nowDec2 - ratioAsOf));
       if (yearsStale > 0.25) timeFactor = Math.pow(1 + drift, yearsStale);
-      timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
+      timeFactor = Math.max(0.94, Math.min(1.60, timeFactor));
     }
 
     // property: light adjustment for vintage and lot versus neighbours
