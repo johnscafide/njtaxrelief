@@ -1336,25 +1336,24 @@ body.plm-locked { overflow: hidden; }
   // ══════════════════════════════════════════════
   // LIVE RATIO
   //
-  // The published state ratio is authoritative but it lags twice over:
+  // Measure the assessed-to-market relationship from the SAME file we read the
+  // assessment out of. That is the only way to cancel two separate lags:
   //
-  //   1. Timing. The tax year 2026 ratio is built from sales sampled roughly
-  //      July 2024 to June 2025. Its effective valuation date is around
-  //      January 2025. Every month since is appreciation it cannot see.
-  //   2. Assessment vintage. NJGIN publishes the parcel layer with 2024 tax
-  //      year MOD-IV attributes. The published ratio applies to the 2025
-  //      assessments. We were dividing an older assessment by a newer ratio.
+  //   Timing.    The published tax year 2026 ratio is built from sales sampled
+  //              around mid 2024 to mid 2025. It is priced to early 2025.
+  //   Vintage.   NJGIN ships the parcel layer with 2024 tax year MOD-IV, while
+  //              the published ratio applies to the 2025 assessments. Dividing
+  //              our 2024 assessment by a 2026 ratio mixes denominators.
   //
-  // Both errors cancel if we measure the ratio from the SAME file we read the
-  // assessment from: take this town's parcels, compare each one's assessed
-  // value against its own most recently recorded sale price, and take a robust
-  // median. That ratio is, by construction, correct for the vintage of the
-  // assessments we are actually using and for today's prices.
-  //
-  // The published ratio then becomes the sanity check rather than the answer.
+  // Small boroughs do not have enough sales to measure alone, so this widens to
+  // the county rather than giving up. A county ratio is less precise than a town
+  // ratio but it is measured against the right assessment vintage, which beats a
+  // published ratio that is not.
   // ══════════════════════════════════════════════
 
-  // Decimal year from the assessor's MMDDYY deed string, so we can window by month.
+  var DEFAULT_APPRECIATION = 0.05;   // only used when sales cannot tell us
+  var liveRatioCache = {};
+
   function deedDecimal(d) {
     if (!d) return null;
     var s = String(d).replace(/\D/g, '');
@@ -1366,108 +1365,115 @@ body.plm-locked { overflow: hidden; }
     return yr + (mm - 0.5) / 12;
   }
 
-  // Used only when a town's own sales are too sparse to measure price movement.
-  // South Jersey has run mid single digits recently. Change it here if that stops
-  // being true, and the diagnostics panel will tell you when it is being used.
-  var DEFAULT_APPRECIATION = 0.05;
+  function fetchRatioRows(where) {
+    var p = new URLSearchParams({
+      where: where, outFields: 'NET_VALUE,SALE_PRICE,DEED_DATE',
+      returnGeometry: 'false', resultRecordCount: '2000', f: 'json'
+    });
+    return fetch(NJ_PARCEL + '?' + p)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d.features) return { rows: [], raw: 0, dated: 0 };
+        var rows = [], dated = 0;
+        d.features.forEach(function (f) {
+          var a = f.attributes, t = deedDecimal(a.DEED_DATE);
+          var v = (+a.NET_VALUE) / (+a.SALE_PRICE);
+          if (!isFinite(v) || v < 0.10 || v > 2.0) return;
+          if (t === null) return;
+          dated++;
+          rows.push({ r: v, t: t });
+        });
+        return { rows: rows, raw: d.features.length, dated: dated };
+      })
+      .catch(function () { return { rows: [], raw: 0, dated: 0 }; });
+  }
 
-  var liveRatioCache = {};
+  // Given dated rows, measure appreciation then carry every sale forward to
+  // today before taking the median. Without that step the median is measured
+  // against stale prices and reads high, which makes values read low.
+  function ratioFromRows(rows, nowDec, minN) {
+    function windowed(months) {
+      var cut = nowDec - months / 12;
+      return rows.filter(function (x) { return x.t >= cut; });
+    }
+    var span = 24, win = windowed(24);
+    if (win.length < minN) { span = 36; win = windowed(36); }
+    if (win.length < minN) { span = 60; win = windowed(60); }
+    if (win.length < minN) { span = 96; win = windowed(96); }
+    if (win.length < minN) return null;
+
+    var byYr = {};
+    win.forEach(function (x) {
+      var y = Math.floor(x.t);
+      (byYr[y] = byYr[y] || []).push(1 / x.r);          // price per dollar assessed
+    });
+    var yrs = Object.keys(byYr).map(Number).sort(function (a, b) { return a - b; });
+    var d = 0, np = 0;
+    for (var i = 1; i < yrs.length; i++) {
+      var A = median(byYr[yrs[i - 1]]), B = median(byYr[yrs[i]]), gap = yrs[i] - yrs[i - 1];
+      if (A > 0 && B > 0 && gap > 0 && byYr[yrs[i]].length >= 3 && byYr[yrs[i - 1]].length >= 3) {
+        d += Math.pow(B / A, 1 / gap) - 1; np++;
+      }
+    }
+    var appr = np ? (d / np) : DEFAULT_APPRECIATION;
+    appr = Math.max(-0.10, Math.min(0.20, appr));
+
+    var vals = win.map(function (x) {
+      return x.r / Math.pow(1 + appr, Math.max(0, nowDec - x.t));
+    });
+    var q1 = quantile(vals, 0.25), q3 = quantile(vals, 0.75), iqr = q3 - q1;
+    var trim = vals.filter(function (v) { return v >= q1 - 1.5 * iqr && v <= q3 + 1.5 * iqr; });
+    if (trim.length < Math.max(10, minN - 5)) return null;
+
+    var m = median(trim);
+    if (!m || m < 0.12 || m > 1.60) return null;
+
+    return {
+      ratio: m, n: trim.length, months: span,
+      appreciation: appr, apprMeasured: !!np,
+      medSaleAge: median(win.map(function (x) { return Math.max(0, nowDec - x.t); })),
+      lo: quantile(trim, 0.35), hi: quantile(trim, 0.65)
+    };
+  }
 
   function liveRatio(town, county, official) {
     var key = (town + '|' + county).toUpperCase().replace(/[^A-Z0-9|]/g, '');
     if (liveRatioCache[key]) return Promise.resolve(liveRatioCache[key]);
     try {
-      var c = JSON.parse(localStorage.getItem('pl_live2_' + key) || 'null');
+      var c = JSON.parse(localStorage.getItem('pl_live3_' + key) || 'null');
       if (c && (Date.now() - c.t) < 7 * 864e5) { liveRatioCache[key] = c.v; return Promise.resolve(c.v); }
     } catch (e) {}
 
-    var where = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
-                (county ? " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" : '') +
-                " AND PROP_CLASS = '2' AND SALE_PRICE > 50000 AND NET_VALUE > 10000";
-    var p = new URLSearchParams({
-      where: where, outFields: 'NET_VALUE,SALE_PRICE,DEED_DATE',
-      returnGeometry: 'false', resultRecordCount: '4000', f: 'json'
-    });
+    var now = new Date();
+    var nowDec = now.getFullYear() + now.getMonth() / 12;
+    var base = " AND PROP_CLASS = '2' AND SALE_PRICE > 50000 AND NET_VALUE > 10000";
+    var townWhere = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
+                    (county ? " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" : '') + base;
+    var countyWhere = county ? "COUNTY = '" + String(county).replace(/'/g, "''") + "'" + base : null;
 
-    return fetch(NJ_PARCEL + '?' + p)
-      .then(function (r) { return r.json(); })
-      .then(function (d) {
-        if (!d.features || d.features.length < 25) return null;
-        var now = new Date();
-        var nowDec = now.getFullYear() + now.getMonth() / 12;
+    function finish(out, scope, stats) {
+      if (!out) return null;
+      out.source = 'live';
+      out.scope = scope;
+      out.stats = stats;
+      // sanity: a time-adjusted live ratio should land below a stale published
+      // one in a rising market, but not absurdly far from it either way
+      if (official && (out.ratio < official * 0.22 || out.ratio > official * 1.40)) return null;
+      liveRatioCache[key] = out;
+      try { localStorage.setItem('pl_live3_' + key, JSON.stringify({ t: Date.now(), v: out })); } catch (e) {}
+      return out;
+    }
 
-        var rows = [];
-        d.features.forEach(function (f) {
-          var a = f.attributes, t = deedDecimal(a.DEED_DATE);
-          if (t === null) return;
-          var v = (+a.NET_VALUE) / (+a.SALE_PRICE);
-          if (!isFinite(v) || v < 0.10 || v > 2.0) return;    // obvious junk only
-          rows.push({ r: v, t: t });
-        });
-        if (rows.length < 25) return null;
-
-        // tightest window that still has a real sample
-        function windowed(months) {
-          var cut = nowDec - months / 12;
-          return rows.filter(function (x) { return x.t >= cut; });
-        }
-        var span = 18, win = windowed(18);
-        if (win.length < 25) { span = 30; win = windowed(30); }
-        if (win.length < 25) { span = 48; win = windowed(48); }
-        if (win.length < 20) return null;
-
-        // ── the correction that matters ──
-        // Each row is assessed / price-on-the-day-it-sold. Those prices are in
-        // the past. If prices have risen since, the measured ratio reads too
-        // high, and dividing by a too-high ratio produces a value that is too
-        // low. Every single time, and worse the wider the window.
-        //
-        // So pull every sale forward to today before taking the median. First
-        // measure how fast prices moved, from these same sales.
-        var byYr = {};
-        win.forEach(function (x) {
-          var y = Math.floor(x.t);
-          (byYr[y] = byYr[y] || []).push(1 / x.r);      // price per dollar assessed
-        });
-        var yrs = Object.keys(byYr).map(Number).sort(function (a, b) { return a - b; });
-        var d = 0, np = 0;
-        for (var i = 1; i < yrs.length; i++) {
-          var A = median(byYr[yrs[i - 1]]), B = median(byYr[yrs[i]]), gap = yrs[i] - yrs[i - 1];
-          if (A > 0 && B > 0 && gap > 0 && byYr[yrs[i]].length >= 4 && byYr[yrs[i - 1]].length >= 4) {
-            d += Math.pow(B / A, 1 / gap) - 1; np++;
-          }
-        }
-        var appr = np ? (d / np) : DEFAULT_APPRECIATION;
-        appr = Math.max(-0.10, Math.min(0.20, appr));
-        var apprMeasured = !!np;
-
-        var vals = win.map(function (x) {
-          return x.r / Math.pow(1 + appr, Math.max(0, nowDec - x.t));
-        });
-        var medAge = median(win.map(function (x) { return Math.max(0, nowDec - x.t); }));
-
-        // robust centre
-        var q1 = quantile(vals, 0.25), q3 = quantile(vals, 0.75), iqr = q3 - q1;
-        var trim = vals.filter(function (v) { return v >= q1 - 1.5 * iqr && v <= q3 + 1.5 * iqr; });
-        if (trim.length < 18) return null;
-
-        var m = median(trim);
-        if (!m || m < 0.12 || m > 1.60) return null;
-
-        // sanity: a live ratio wildly off the published one means the sales
-        // data is not behaving, so we decline rather than trust it
-        if (official && (m < official * 0.25 || m > official * 1.35)) return null;
-
-        var out = {
-          ratio: m, n: trim.length, months: span, source: 'live',
-          appreciation: appr, apprMeasured: apprMeasured, medSaleAge: medAge,
-          lo: quantile(trim, 0.35), hi: quantile(trim, 0.65)
-        };
-        liveRatioCache[key] = out;
-        try { localStorage.setItem('pl_live2_' + key, JSON.stringify({ t: Date.now(), v: out })); } catch (e) {}
-        return out;
-      })
-      .catch(function () { return null; });
+    return fetchRatioRows(townWhere).then(function (t) {
+      var out = ratioFromRows(t.rows, nowDec, 15);
+      if (out) return finish(out, 'town', { raw: t.raw, dated: t.dated });
+      if (!countyWhere) return null;
+      // town too thin, widen to the county. Still the right assessment vintage.
+      return fetchRatioRows(countyWhere).then(function (c2) {
+        var o2 = ratioFromRows(c2.rows, nowDec, 30);
+        return finish(o2, 'county', { raw: c2.raw, dated: c2.dated, townRaw: t.raw, townDated: t.dated });
+      });
+    }).catch(function () { return null; });
   }
 
   // ══════════════════════════════════════════════
@@ -1651,7 +1657,7 @@ body.plm-locked { overflow: hidden; }
     return { factor: Math.max(0.92, Math.min(1.08, f)), notes: notes };
   }
 
-  function watchdogValuation(subject, comps, thisYear, town, county, ratioObj) {
+  function watchdogValuation(subject, comps, thisYear, town, county, ratioObj, apprHint) {
     if (!subject || !subject.assessed || subject.assessed < 5000) return null;
 
     // ratio precedence: live measurement, then published, then derived.
@@ -1667,15 +1673,26 @@ body.plm-locked { overflow: hidden; }
     // published ratio does. Its effective valuation date is roughly January of
     // the year BEFORE its label, because the sales sample runs mid year to mid
     // year, so tax year 2026 is priced around January 2025.
-    var drift = localDrift(comps, thisYear, R.ratio);
+    // A live ratio is already current and needs no time adjustment. A published
+    // ratio does: its effective valuation date is about January of the year
+    // BEFORE its label, because the sales sample runs mid year to mid year.
+    //
+    // Prefer the appreciation measured across the whole town or county sample.
+    // Drift computed off a few dozen nearby comps is noisy and skews toward
+    // zero when nominal transfers are mixed in, which quietly kills the
+    // adjustment exactly when it is needed most.
+    var localD = localDrift(comps, thisYear, R.ratio);
+    var drift = (apprHint != null) ? apprHint
+              : (localD != null && Math.abs(localD) > 0.015) ? localD
+              : DEFAULT_APPRECIATION;
     var timeFactor = 1, yearsStale = 0;
     if (R.source !== 'live') {
-      var now = new Date();
-      var nowDec = now.getFullYear() + now.getMonth() / 12;
+      var now2 = new Date();
+      var nowDec2 = now2.getFullYear() + now2.getMonth() / 12;
       var ratioAsOf = (R.year || thisYear) - 1;          // Jan of the prior year
-      yearsStale = Math.max(0, Math.min(3.5, nowDec - ratioAsOf));
-      if (drift != null && yearsStale > 0.25) timeFactor = Math.pow(1 + drift, yearsStale);
-      timeFactor = Math.max(0.94, Math.min(1.35, timeFactor));
+      yearsStale = Math.max(0, Math.min(3.5, nowDec2 - ratioAsOf));
+      if (yearsStale > 0.25) timeFactor = Math.pow(1 + drift, yearsStale);
+      timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
     // property: light adjustment for vintage and lot versus neighbours
@@ -1704,8 +1721,9 @@ body.plm-locked { overflow: hidden; }
       ratioYear: R.year, ratioSource: R.source,
       drift: drift, timeFactor: timeFactor, yearsStale: yearsStale, calibration: cal,
       ratioN: R.n || null, ratioMonths: R.months || null,
-      appreciation: (R.appreciation != null ? R.appreciation : null),
+      appreciation: (R.appreciation != null ? R.appreciation : drift),
       apprMeasured: !!R.apprMeasured, medSaleAge: R.medSaleAge || null,
+      ratioScope: R.scope || null, ratioStats: R.stats || null,
       adjFactor: adj.factor, adjNotes: adj.notes,
       n: compCount, confidence: conf,
       base: base,
@@ -1894,20 +1912,22 @@ body.plm-locked { overflow: hidden; }
 
     var basis =
       (v.ratioSource === 'live'
-        ? 'Measured from <b>' + v.ratioN + '</b> homes in <b>' + esc(current.town) + '</b> that actually sold in the last ' +
+        ? 'Measured from <b>' + v.ratioN + '</b> homes in <b>' +
+          esc(v.ratioScope === 'county' ? (current.county + ' County') : current.town) + '</b> that actually sold in the last ' +
           Math.round(v.ratioMonths / 12 * 10) / 10 + ' years, each one carried forward to today\u2019s prices' +
           (v.appreciation != null && Math.abs(v.appreciation) > 0.005
             ? ' at the <b>' + (v.appreciation * 100).toFixed(1) + '% a year</b> this town has actually been moving'
             : '') +
           '. On that basis assessments here run at <b>' + (v.ratio * 100).toFixed(1) + '%</b> of market, and this assessment divided by that is the number.'
         : v.ratioSource === 'official'
-        ? '<b>' + esc(current.town) + '</b> assesses at <b>' + (v.ratio * 100).toFixed(2) + '%</b> of market value, the official state ratio for ' +
-          v.ratioYear + '. Not enough recent local sales to measure a fresher one, so this uses the published figure' +
-          (v.yearsStale > 0.5 ? ' and adds ' + v.yearsStale.toFixed(1) + ' years of price movement on top, since that ratio is priced to early ' + (v.ratioYear - 1) + '.' : '.')
+        ? '<b>' + esc(current.town) + '</b> assesses at <b>' + (v.ratio * 100).toFixed(2) + '%</b> of market value per the official state ratio for ' +
+          v.ratioYear + '. Not enough recorded sales nearby to measure a fresher one, so this uses the published figure' +
+          (v.yearsStale > 0.5
+            ? ' and carries it forward ' + v.yearsStale.toFixed(1) + ' years at <b>' + (v.appreciation * 100).toFixed(1) +
+              '% a year</b>, since that ratio is priced to early ' + (v.ratioYear - 1) + '. Expect this to run conservative.'
+            : '.')
         : 'No published state ratio on file for <b>' + esc(current.town) + '</b> yet, so this derives one from recorded sales. Rougher than usual.') +
-      (v.drift != null && Math.abs(v.drift) > 0.005 && v.timeFactor !== 1
-        ? ' Then adjusted forward for local prices moving about <b>' + (v.drift * 100).toFixed(1) + '% a year</b> since.'
-        : '') +
+
       (v.adjNotes && v.adjNotes.length
         ? ' Nudged for this home being ' + v.adjNotes.join(' and ') + '.'
         : '') +
@@ -2302,6 +2322,10 @@ body.plm-locked { overflow: hidden; }
         '<div><b>Median price/assessed multiplier</b>: ' + (mults.length ? median(mults).toFixed(3) + 'x' : 'n/a') + '</div>' +
         '<div><b>Ratio used</b>: ' + (val ? (val.ratio * 100).toFixed(2) + '% (' + val.ratioSource +
             (val.ratioN ? ', n=' + val.ratioN + ' over ' + val.ratioMonths + ' months' : ', ' + val.ratioYear) + ')' : 'none') + '</div>' +
+        '<div><b>Ratio scope</b>: ' + (val && val.ratioScope ? val.ratioScope : 'n/a') +
+          (val && val.ratioStats ? '  raw rows ' + val.ratioStats.raw + ', with parseable deed dates ' + val.ratioStats.dated +
+            (val.ratioStats.townRaw != null ? '  (town first tried: ' + val.ratioStats.townRaw + ' raw, ' + val.ratioStats.townDated + ' dated)' : '')
+            : '') + '</div>' +
         '<div><b>Sale price appreciation applied</b>: ' +
           (val && val.appreciation != null
             ? (val.appreciation * 100).toFixed(2) + '%/yr ' + (val.apprMeasured ? '(measured from this town)' : '(DEFAULT, town too sparse to measure)') +
@@ -2565,7 +2589,8 @@ body.plm-locked { overflow: hidden; }
       paintComps(comps);
 
       var val = watchdogValuation(subject, comps, new Date().getFullYear(),
-                                  current.town, current.county, live || offR);
+                                  current.town, current.county, live || offR,
+                                  live && live.appreciation != null ? live.appreciation : null);
       current.valuation = val;
       paintValuation(current.valuation, assessed, tax, ratio);
 
