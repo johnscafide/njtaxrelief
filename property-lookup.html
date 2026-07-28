@@ -939,12 +939,8 @@ body.plm-locked { overflow: hidden; }
   })();
 
   function deedYear(d) {
-    if (!d) return null;
-    var s = String(d).replace(/\D/g, '');
-    if (s.length !== 6) return null;
-    var yy = parseInt(s.slice(4, 6), 10);
-    var yr = yy > 40 ? 1900 + yy : 2000 + yy;
-    return (yr > 1900 && yr <= new Date().getFullYear()) ? yr : null;
+    var t = deedDecimal(d);
+    return t === null ? null : Math.floor(t);
   }
 
   function geocode(address) {
@@ -1354,15 +1350,65 @@ body.plm-locked { overflow: hidden; }
   var DEFAULT_APPRECIATION = 0.05;   // only used when sales cannot tell us
   var liveRatioCache = {};
 
+  // DEED_DATE is not one format. Across counties it arrives as MMDDYY,
+  // YYYYMMDD, and sometimes an epoch millisecond number. My first parser only
+  // accepted 6 digit MMDDYY and threw away 87% of the rows in Woodbury Heights,
+  // which is what starved the sample and let stale sales dominate.
+  var THIS_YEAR = new Date().getFullYear();
+
   function deedDecimal(d) {
-    if (!d) return null;
-    var s = String(d).replace(/\D/g, '');
-    if (s.length !== 6) return null;
-    var mm = parseInt(s.slice(0, 2), 10), yy = parseInt(s.slice(4, 6), 10);
-    if (mm < 1 || mm > 12) return null;
-    var yr = yy > 40 ? 1900 + yy : 2000 + yy;
-    if (yr < 1900 || yr > new Date().getFullYear()) return null;
-    return yr + (mm - 0.5) / 12;
+    if (d === null || d === undefined || d === '') return null;
+
+    // epoch milliseconds, which some services return for date fields
+    if (typeof d === 'number' && d > 1e11) {
+      var dt = new Date(d);
+      var y0 = dt.getUTCFullYear();
+      if (y0 < 1900 || y0 > THIS_YEAR) return null;
+      return y0 + (dt.getUTCMonth() + 0.5) / 12;
+    }
+
+    var s = String(d).trim();
+
+    // ISO-ish: 2024-03-15 or 2024/03/15
+    var iso = s.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
+    if (iso) {
+      var yi = +iso[1], mi = +iso[2];
+      if (mi >= 1 && mi <= 12 && yi >= 1900 && yi <= THIS_YEAR) return yi + (mi - 0.5) / 12;
+    }
+    // US-ish: 3/15/2024
+    var us = s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
+    if (us) {
+      var mu = +us[1], yu = +us[3];
+      if (mu >= 1 && mu <= 12 && yu >= 1900 && yu <= THIS_YEAR) return yu + (mu - 0.5) / 12;
+    }
+
+    var n = s.replace(/\D/g, '');
+
+    if (n.length === 8) {                       // YYYYMMDD
+      var y8 = +n.slice(0, 4), m8 = +n.slice(4, 6);
+      if (m8 >= 1 && m8 <= 12 && y8 >= 1900 && y8 <= THIS_YEAR) return y8 + (m8 - 0.5) / 12;
+      var m8b = +n.slice(0, 2), y8b = +n.slice(4, 8);   // MMDDYYYY
+      if (m8b >= 1 && m8b <= 12 && y8b >= 1900 && y8b <= THIS_YEAR) return y8b + (m8b - 0.5) / 12;
+      return null;
+    }
+    if (n.length === 6) {                       // MMDDYY, or YYMMDD
+      var mm = +n.slice(0, 2), yy = +n.slice(4, 6);
+      if (mm >= 1 && mm <= 12) {
+        var yr = yy > 40 ? 1900 + yy : 2000 + yy;
+        if (yr >= 1900 && yr <= THIS_YEAR) return yr + (mm - 0.5) / 12;
+      }
+      var y2 = +n.slice(0, 2), m2 = +n.slice(2, 4);
+      if (m2 >= 1 && m2 <= 12) {
+        var yr2 = y2 > 40 ? 1900 + y2 : 2000 + y2;
+        if (yr2 >= 1900 && yr2 <= THIS_YEAR) return yr2 + (m2 - 0.5) / 12;
+      }
+      return null;
+    }
+    if (n.length === 4) {                       // bare year
+      var y4 = +n;
+      if (y4 >= 1900 && y4 <= THIS_YEAR) return y4 + 0.5;
+    }
+    return null;
   }
 
   function fetchRatioRows(where) {
@@ -1402,6 +1448,11 @@ body.plm-locked { overflow: hidden; }
     if (win.length < minN) { span = 96; win = windowed(96); }
     if (win.length < minN) return null;
 
+    // Appreciation, measured only where there is enough evidence to bother.
+    // A negative rate run backwards through the correction inflates the ratio
+    // and deflates the value, so a noisy negative is worse than no measurement
+    // at all. Require real year buckets, and refuse to believe a decline
+    // unless the sample is large enough to mean it.
     var byYr = {};
     win.forEach(function (x) {
       var y = Math.floor(x.t);
@@ -1411,12 +1462,19 @@ body.plm-locked { overflow: hidden; }
     var d = 0, np = 0;
     for (var i = 1; i < yrs.length; i++) {
       var A = median(byYr[yrs[i - 1]]), B = median(byYr[yrs[i]]), gap = yrs[i] - yrs[i - 1];
-      if (A > 0 && B > 0 && gap > 0 && byYr[yrs[i]].length >= 3 && byYr[yrs[i - 1]].length >= 3) {
+      if (A > 0 && B > 0 && gap > 0 && byYr[yrs[i]].length >= 6 && byYr[yrs[i - 1]].length >= 6) {
         d += Math.pow(B / A, 1 / gap) - 1; np++;
       }
     }
-    var appr = np ? (d / np) : DEFAULT_APPRECIATION;
-    appr = Math.max(-0.10, Math.min(0.20, appr));
+    var appr, apprMeasured = false;
+    if (np >= 2) { appr = d / np; apprMeasured = true; }
+    else { appr = DEFAULT_APPRECIATION; }
+    if (apprMeasured && appr < 0 && win.length < 120) {
+      // a falling market is possible, but not on a thin sample. Do not let
+      // noise reverse the correction.
+      appr = DEFAULT_APPRECIATION; apprMeasured = false;
+    }
+    appr = Math.max(-0.06, Math.min(0.20, appr));
 
     var vals = win.map(function (x) {
       return x.r / Math.pow(1 + appr, Math.max(0, nowDec - x.t));
@@ -1430,7 +1488,7 @@ body.plm-locked { overflow: hidden; }
 
     return {
       ratio: m, n: trim.length, months: span,
-      appreciation: appr, apprMeasured: !!np,
+      appreciation: appr, apprMeasured: apprMeasured,
       medSaleAge: median(win.map(function (x) { return Math.max(0, nowDec - x.t); })),
       lo: quantile(trim, 0.35), hi: quantile(trim, 0.65)
     };
@@ -1440,7 +1498,7 @@ body.plm-locked { overflow: hidden; }
     var key = (town + '|' + county).toUpperCase().replace(/[^A-Z0-9|]/g, '');
     if (liveRatioCache[key]) return Promise.resolve(liveRatioCache[key]);
     try {
-      var c = JSON.parse(localStorage.getItem('pl_live3_' + key) || 'null');
+      var c = JSON.parse(localStorage.getItem('pl_live4_' + key) || 'null');
       if (c && (Date.now() - c.t) < 7 * 864e5) { liveRatioCache[key] = c.v; return Promise.resolve(c.v); }
     } catch (e) {}
 
@@ -1456,11 +1514,18 @@ body.plm-locked { overflow: hidden; }
       out.source = 'live';
       out.scope = scope;
       out.stats = stats;
-      // sanity: a time-adjusted live ratio should land below a stale published
-      // one in a rising market, but not absurdly far from it either way
-      if (official && (out.ratio < official * 0.22 || out.ratio > official * 1.40)) return null;
+      // Direction check. Our assessments are 2024 vintage and our sale prices
+      // are recent, so a correctly measured live ratio lands BELOW the
+      // published one in a rising market. If it comes out above, old deeds are
+      // still dominating the sample and the measurement is not trustworthy.
+      // Woodbury Heights returned 83.48% against an official 62.28% for exactly
+      // that reason, and it produced a value roughly 25% too low.
+      if (official) {
+        if (out.ratio > official * 1.05) { out.rejected = 'above official, stale sales'; return null; }
+        if (out.ratio < official * 0.35) { out.rejected = 'far below official'; return null; }
+      }
       liveRatioCache[key] = out;
-      try { localStorage.setItem('pl_live3_' + key, JSON.stringify({ t: Date.now(), v: out })); } catch (e) {}
+      try { localStorage.setItem('pl_live4_' + key, JSON.stringify({ t: Date.now(), v: out })); } catch (e) {}
       return out;
     }
 
@@ -2322,6 +2387,12 @@ body.plm-locked { overflow: hidden; }
         '<div><b>Median price/assessed multiplier</b>: ' + (mults.length ? median(mults).toFixed(3) + 'x' : 'n/a') + '</div>' +
         '<div><b>Ratio used</b>: ' + (val ? (val.ratio * 100).toFixed(2) + '% (' + val.ratioSource +
             (val.ratioN ? ', n=' + val.ratioN + ' over ' + val.ratioMonths + ' months' : ', ' + val.ratioYear) + ')' : 'none') + '</div>' +
+        '<div><b>Deed date parse rate</b>: ' +
+          (val && val.ratioStats
+            ? val.ratioStats.dated + ' of ' + val.ratioStats.raw + ' rows (' +
+              Math.round(val.ratioStats.dated / Math.max(val.ratioStats.raw, 1) * 100) + '%)' +
+              (val.ratioStats.dated / Math.max(val.ratioStats.raw, 1) < 0.5 ? '  <b style="color:#c0392b">LOW, parser is missing a format</b>' : '')
+            : 'n/a') + '</div>' +
         '<div><b>Ratio scope</b>: ' + (val && val.ratioScope ? val.ratioScope : 'n/a') +
           (val && val.ratioStats ? '  raw rows ' + val.ratioStats.raw + ', with parseable deed dates ' + val.ratioStats.dated +
             (val.ratioStats.townRaw != null ? '  (town first tried: ' + val.ratioStats.townRaw + ' raw, ' + val.ratioStats.townDated + ' dated)' : '')
@@ -2337,6 +2408,15 @@ body.plm-locked { overflow: hidden; }
           '  <b>Time factor</b>: ' + (val ? val.timeFactor.toFixed(3) : '-') +
           '  <b>Property adj</b>: ' + (val ? val.adjFactor.toFixed(3) : '-') + '</div>' +
         '<div><b>Base before adjustments</b>: ' + (val ? money(val.base) : '-') + '</div>' +
+        (function () {
+          var o = officialRatio(current.town, current.county);
+          if (!o) return '<div><b>Official ratio</b>: none on file for this town</div>';
+          var used = val ? val.ratio : null;
+          var dir = (used && used > o.ratio)
+            ? '  <b style="color:#c0392b">live above official, which means stale sales</b>' : '';
+          return '<div><b>Official ratio</b>: ' + (o.ratio * 100).toFixed(2) + '% (tax year ' + o.year + ')' +
+                 (used ? '   <b>ratio actually used</b>: ' + (used * 100).toFixed(2) + '%' + dir : '') + '</div>';
+        })() +
         '<div style="margin-top:12px;" class="comps-wrap"><table class="comps"><thead><tr>' +
           '<th>Address</th><th>Yr</th><th>Sale</th><th>Assessed</th><th>Mult</th><th>Dist m</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
