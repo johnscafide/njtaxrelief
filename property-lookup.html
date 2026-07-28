@@ -1125,18 +1125,24 @@ body.plm-locked { overflow: hidden; }
       if (keys[i] && listingTable && listingTable[keys[i]]) {
         var o = listingTable[keys[i]];
         return {
-          label: o.status || 'For sale', cls: STATUS_CLASS[o.status] || 'live',
-          source: 'listed', detail: o
+          label: o.status || 'For sale', 
+          cls: STATUS_CLASS[o.status] || 'live',
+          source: 'listed', 
+          detail: o,
+          // Capture the live listing price if provided in your listings.json
+          activePrice: o.price || o.listPrice || null 
         };
       }
     }
     if (dy && (new Date().getFullYear() - dy) <= 1) {
-      return { label: 'Recently sold', cls: 'sold', source: 'deed',
-               detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' } };
+      return { 
+        label: 'Recently sold', 
+        cls: 'sold', 
+        source: 'deed',               
+        detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' },
+        activePrice: null 
+      };
     }
-    // No default tag. Assessment data cannot tell us whether a home is
-    // listed, and guessing "off market" was wrong often enough to be worse
-    // than saying nothing. Tag returns only when we actually know.
     return null;
   }
 
@@ -2516,6 +2522,27 @@ body.plm-locked { overflow: hidden; }
         (d.note ? '<br>' + esc(d.note) : '') +
         (d.url ? '<br><a href="' + esc(d.url) + '">See the listing</a>' : '') + '</div></div>' + alert;
     }
+
+    // Inside render(), right before building the estimate box HTML:
+    var displayPrice = null;
+    var priceLabel = "Watchdog Valuation";
+    
+    if (status && status.source === 'listed' && status.activePrice) {
+      displayPrice = status.activePrice;
+      priceLabel = "Current List Price (" + status.label + ")";
+    } else if (current.valuation && current.valuation.mid) {
+      displayPrice = Math.round(current.valuation.mid / 1000) * 1000;
+    }
+
+    // Then update the estimate box HTML injection:
+    el('plm-estimate').innerHTML =      
+      '<div class="plm-est-lbl"><i class="fas fa-house-chimney"></i> ' + priceLabel + 
+      (status && status.source === 'listed' ? '<span class="plm-conf hi" style="margin-left:8px;">Active Listing</span>' : '') + '</div>' +      
+      '<div class="plm-est-hero">' + (displayPrice ? money(displayPrice) : 'Calculated via Comps') + '</div>' +
+      (status && status.source === 'listed' 
+        ? '<div class="plm-est-range">Active MLS Listing Data</div><div class="plm-est-sub">Pulled directly from live listing feeds. Skipping algorithmic valuation model because an active market price is available.</div>'
+        : '<div class="plm-est-range">Likely range ' + money(current.valuation ? current.valuation.lo : 0) + ' to ' + money(current.valuation ? current.valuation.hi : 0) + '</div>...'
+      );
 
     el('plm-head').innerHTML =
       '<div id="plm-estimate" class="plm-est loading">' +
