@@ -1095,6 +1095,52 @@ body.plm-locked { overflow: hidden; }
   }
 
   // ══════════════════════════════════════════════
+  // ADDRESS NORMALIZER
+  // The MLS writes "11 Dalton Pl". The assessor writes "11 DALTON PLACE".
+  // Neither matches the other as raw text, so both sides collapse to the same
+  // canonical form before comparing. This must stay in step with the generator
+  // that builds listings.json.
+  // ══════════════════════════════════════════════
+  var ADDR_SUF = {
+    AVENUE:'AVE', AVE:'AVE', AV:'AVE',
+    STREET:'ST', ST:'ST', STR:'ST',
+    ROAD:'RD', RD:'RD',
+    DRIVE:'DR', DR:'DR', DRV:'DR',
+    COURT:'CT', CT:'CT',
+    LANE:'LN', LN:'LN',
+    PLACE:'PL', PL:'PL', PLC:'PL',
+    BOULEVARD:'BLVD', BLVD:'BLVD', BLV:'BLVD',
+    CIRCLE:'CIR', CIR:'CIR',
+    TERRACE:'TER', TER:'TER', TERR:'TER',
+    PARKWAY:'PKWY', PKWY:'PKWY', PKY:'PKWY',
+    HIGHWAY:'HWY', HWY:'HWY',
+    TRAIL:'TRL', TRL:'TRL',
+    SQUARE:'SQ', SQ:'SQ',
+    WAY:'WAY', LOOP:'LOOP', RUN:'RUN', PATH:'PATH', ROW:'ROW',
+    CROSSING:'XING', XING:'XING', POINT:'PT', PT:'PT',
+    HEIGHTS:'HTS', HTS:'HTS', EXTENSION:'EXT', EXT:'EXT',
+    TURNPIKE:'TPKE', TPKE:'TPKE', PIKE:'PIKE',
+    BRIDGE:'BRG', MANOR:'MNR', MNR:'MNR', COMMONS:'CMNS'
+  };
+  var ADDR_DIR = { NORTH:'N', SOUTH:'S', EAST:'E', WEST:'W',
+                   NORTHEAST:'NE', NORTHWEST:'NW', SOUTHEAST:'SE', SOUTHWEST:'SW' };
+
+  function normAddr(a) {
+    if (!a) return '';
+    var s = String(a).toUpperCase().trim();
+    s = s.replace(/\s+(APT|UNIT|STE|SUITE|#)\s*[\w-]+$/, '');
+    s = s.replace(/[^A-Z0-9 ]/g, ' ');
+    var parts = s.split(/\s+/).filter(Boolean), out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      if (ADDR_DIR[p] && i > 0) out.push(ADDR_DIR[p]);
+      else if (ADDR_SUF[p]) out.push(ADDR_SUF[p]);
+      else out.push(p);
+    }
+    return out.join(' ');
+  }
+
+  // ══════════════════════════════════════════════
   // LISTING STATUS
   // No free public API reports whether a NJ home is for sale. MLS status
   // lives behind Bright MLS / IDX. So status resolves in this order:
@@ -1120,29 +1166,28 @@ body.plm-locked { overflow: hidden; }
   };
 
   function resolveStatus(p, dy) {
-    var keys = [p.PAMS_PIN, (p.PROP_LOC || '').toUpperCase().trim()];
+    var county = (p.COUNTY || '').toUpperCase().trim();
+    var keys = [
+      normAddr(p.PROP_LOC) + '|' + county,   // how listings.json is keyed
+      p.PAMS_PIN,                            // hand entered overrides
+      (p.PROP_LOC || '').toUpperCase().trim()
+    ];
     for (var i = 0; i < keys.length; i++) {
       if (keys[i] && listingTable && listingTable[keys[i]]) {
         var o = listingTable[keys[i]];
         return {
-          label: o.status || 'For sale', 
-          cls: STATUS_CLASS[o.status] || 'live',
-          source: 'listed', 
-          detail: o,
-          // Capture the live listing price if provided in your listings.json
-          activePrice: o.price || o.listPrice || null 
+          label: o.status || 'For sale', cls: STATUS_CLASS[o.status] || 'live',
+          source: 'listed', detail: o
         };
       }
     }
     if (dy && (new Date().getFullYear() - dy) <= 1) {
-      return { 
-        label: 'Recently sold', 
-        cls: 'sold', 
-        source: 'deed',               
-        detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' },
-        activePrice: null 
-      };
+      return { label: 'Recently sold', cls: 'sold', source: 'deed',
+               detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' } };
     }
+    // No default tag. Assessment data cannot tell us whether a home is
+    // listed, and guessing "off market" was wrong often enough to be worse
+    // than saying nothing. Tag returns only when we actually know.
     return null;
   }
 
@@ -1763,7 +1808,7 @@ body.plm-locked { overflow: hidden; }
       var ratioAsOf = (R.year || thisYear) - 1;          // Jan of the prior year
       yearsStale = Math.max(0, Math.min(3.5, nowDec2 - ratioAsOf));
       if (yearsStale > 0.25) timeFactor = Math.pow(1 + drift, yearsStale);
-      timeFactor = Math.max(0.94, Math.min(1.60, timeFactor));
+      timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
     // property: light adjustment for vintage and lot versus neighbours
@@ -2393,6 +2438,8 @@ body.plm-locked { overflow: hidden; }
         '<div><b>Median price/assessed multiplier</b>: ' + (mults.length ? median(mults).toFixed(3) + 'x' : 'n/a') + '</div>' +
         '<div><b>Ratio used</b>: ' + (val ? (val.ratio * 100).toFixed(2) + '% (' + val.ratioSource +
             (val.ratioN ? ', n=' + val.ratioN + ' over ' + val.ratioMonths + ' months' : ', ' + val.ratioYear) + ')' : 'none') + '</div>' +
+        '<div><b>Listing key tried</b>: ' + esc(normAddr(current.address) + '|' + (current.county || '').toUpperCase()) +
+          '  <b>matched</b>: ' + (current.status && current.status !== 'Not known' ? current.status : 'no') + '</div>' +
         '<div><b>Deed date parse rate</b>: ' +
           (val && val.ratioStats
             ? val.ratioStats.dated + ' of ' + val.ratioStats.raw + ' rows (' +
@@ -2518,31 +2565,13 @@ body.plm-locked { overflow: hidden; }
     if (status && status.source === 'listed' && status.detail) {
       var d = status.detail;
       alert = '<div class="plm-alert info"><i class="fas fa-sign-hanging"></i><div><b>' + esc(status.label) + '</b>' +
-        (d.price ? ' at ' + money(d.price) : '') + (d.mls ? '  ·  MLS ' + esc(d.mls) : '') +
+        (d.price ? ' at ' + money(d.price) : '') + (d.mls ? '  \u00b7  MLS ' + esc(d.mls) : '') +
         (d.note ? '<br>' + esc(d.note) : '') +
-        (d.url ? '<br><a href="' + esc(d.url) + '">See the listing</a>' : '') + '</div></div>' + alert;
+        (d.office ? '<br><span style="font-size:12.5px;opacity:.8">Listed by ' + esc(d.office) + '</span>' : '') +
+        (d.url ? '<br><a href="' + esc(d.url) + '">See the listing</a>' : '') +
+        '<br><a href="#" onclick="plOpenForm(\'buy\');return false;"><b>Ask about this listing</b></a>' +
+        '</div></div>' + alert;
     }
-
-    // Inside render(), right before building the estimate box HTML:
-    var displayPrice = null;
-    var priceLabel = "Watchdog Valuation";
-    
-    if (status && status.source === 'listed' && status.activePrice) {
-      displayPrice = status.activePrice;
-      priceLabel = "Current List Price (" + status.label + ")";
-    } else if (current.valuation && current.valuation.mid) {
-      displayPrice = Math.round(current.valuation.mid / 1000) * 1000;
-    }
-
-    // Then update the estimate box HTML injection:
-    el('plm-estimate').innerHTML =      
-      '<div class="plm-est-lbl"><i class="fas fa-house-chimney"></i> ' + priceLabel + 
-      (status && status.source === 'listed' ? '<span class="plm-conf hi" style="margin-left:8px;">Active Listing</span>' : '') + '</div>' +      
-      '<div class="plm-est-hero">' + (displayPrice ? money(displayPrice) : 'Calculated via Comps') + '</div>' +
-      (status && status.source === 'listed' 
-        ? '<div class="plm-est-range">Active MLS Listing Data</div><div class="plm-est-sub">Pulled directly from live listing feeds. Skipping algorithmic valuation model because an active market price is available.</div>'
-        : '<div class="plm-est-range">Likely range ' + money(current.valuation ? current.valuation.lo : 0) + ' to ' + money(current.valuation ? current.valuation.hi : 0) + '</div>...'
-      );
 
     el('plm-head').innerHTML =
       '<div id="plm-estimate" class="plm-est loading">' +
