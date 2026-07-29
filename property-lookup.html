@@ -45,6 +45,162 @@
    Nothing here can collide with styles.css
    ============================================================ */
 
+
+/* ---------- PHOTO & MAP HEADER ENHANCEMENTS ---------- */
+.plm-photos { 
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 4px; 
+  background: #0e2248; 
+  position: relative; 
+}
+.plm-photo { 
+  position: relative; 
+  height: 340px; 
+  background: #1a3a6b; 
+  overflow: hidden; 
+}
+.plm-photo img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+}
+.plm-photo.map-cell { 
+  height: 340px; 
+  position: relative; 
+  z-index: 0; 
+  isolation: isolate; 
+}
+.plm-photo #plm-map { 
+  width: 100%; 
+  height: 100%; 
+}
+
+/* Floating Media Labels & Badges */
+.plm-media-label {
+  position: absolute; 
+  top: 12px; 
+  left: 12px; 
+  z-index: 5;
+  background: rgba(14, 34, 72, 0.85); 
+  backdrop-filter: blur(4px);
+  color: #fff; 
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 5px 12px; 
+  border-radius: 6px; 
+  font-size: 11.5px; 
+  font-weight: 700;
+  text-transform: uppercase; 
+  letter-spacing: 0.05em; 
+  display: flex; 
+  align-items: center; 
+  gap: 6px;
+}
+.plm-media-label i { color: var(--gold, #b8972a); }
+
+.plm-parcel-badge {
+  position: absolute; 
+  bottom: 12px; 
+  left: 12px; 
+  z-index: 5;
+  background: rgba(255,255,255,0.92); 
+  color: #0e2248;
+  padding: 6px 12px; 
+  border-radius: 8px; 
+  font-size: 12px; 
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
+  border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* ---------- JOHN'S OPINION CALLOUT BOX ---------- */
+.john-opinion-card {
+  background: #fdfaf2; 
+  border: 2px solid #b8972a; 
+  border-radius: 14px;
+  padding: 18px 20px; 
+  margin: 20px 0; 
+  display: flex; 
+  gap: 16px; 
+  align-items: flex-start;
+  box-shadow: 0 4px 15px rgba(184,151,42,0.12);
+}
+.john-opinion-card.good {
+  background: #f0fdf4; 
+  border-color: #2e7d52;
+}
+.john-opinion-img {
+  width: 60px; 
+  height: 60px; 
+  border-radius: 50%; 
+  object-fit: cover;
+  border: 2px solid #b8972a; 
+  flex-shrink: 0; 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.john-opinion-card.good .john-opinion-img { border-color: #2e7d52; }
+.john-opinion-body { flex: 1; min-width: 0; }
+.john-opinion-title {
+  font-size: 15px; 
+  font-weight: 800; 
+  color: #0e2248; 
+  margin-bottom: 4px;
+  display: flex; 
+  align-items: center; 
+  gap: 8px;
+}
+.john-opinion-title b { color: #856404; }
+.john-opinion-card.good .john-opinion-title b { color: #1e6b3a; }
+.john-opinion-text { font-size: 14px; color: #3d4759; line-height: 1.6; margin: 0; }
+
+/* ---------- RELIEF & ANCHOR CALLOUT BANNER ---------- */
+.tax-relief-box {
+  background: linear-gradient(135deg, #102a45 0%, #1e4b7a 100%);
+  border-radius: 12px; 
+  padding: 20px; 
+  color: #fff; 
+  margin-top: 18px;
+}
+.tax-relief-header {
+  font-size: 16px; 
+  font-weight: 800; 
+  color: #b8972a; 
+  margin-bottom: 8px;
+  display: flex; 
+  align-items: center; 
+  gap: 8px;
+}
+.tax-relief-grid {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 14px; 
+  margin-top: 12px;
+}
+.tax-relief-card {
+  background: rgba(255,255,255,0.08); 
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 99px; 
+  border-radius: 9px; 
+  padding: 14px; 
+  text-decoration: none; 
+  color: #fff;
+  transition: transform 0.2s, background 0.2s;
+}
+.tax-relief-card:hover {
+  background: rgba(255,255,255,0.15); 
+  transform: translateY(-2px);
+}
+.tax-relief-val { font-size: 22px; font-weight: 800; color: #b8972a; }
+.tax-relief-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #cdd9ec; margin-top: 2px; }
+.tax-relief-sub { font-size: 12px; color: #90a4c4; margin-top: 6px; line-height: 1.4; }
+
+@media (max-width: 640px) {
+  .plm-photos { grid-template-columns: 1fr; }
+  .tax-relief-grid { grid-template-columns: 1fr; }
+  .john-opinion-card { flex-direction: column; align-items: flex-start; }
+}
+
 /* ---------- HERO ---------- */
 .pl-hero {
   position: relative; min-height: 600px;
@@ -2544,6 +2700,24 @@ body.plm-locked { overflow: hidden; }
       'Deadlines are generally April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you when a case is not worth filing.</div>';
   }
 
+  function getJohnOpinionHTML(hasCase, overBy) {
+  if (hasCase && overBy > 0) {
+    return '<div class="john-opinion-card">' +
+      '<img src="johnprofile.jpg" alt="John Scafide" class="john-opinion-img" onerror="this.src=\'opuslogo.jpg\'">' +
+      '<div class="john-opinion-body">' +
+        '<div class="john-opinion-title"><i class="fas fa-gavel"></i> <b>John\'s Opinion:</b> Get this checked out immediately</div>' +
+        '<div class="john-opinion-text">On paper, your town is valuing your property at <b>' + money(overBy) + ' above</b> what the public sales evidence supports under Chapter 123. An appeal could lower your annual tax bill permanently.</div>' +
+      '</div>' +
+    '</div>';
+  } else {
+    return '<div class="john-opinion-card good">' +
+      '<img src="johnprofile.jpg" alt="John Scafide" class="john-opinion-img" onerror="this.src=\'opuslogo.jpg\'">' +
+      '<div class="john-opinion-title"><i class="fas fa-shield-check"></i> <b>John\'s Opinion:</b> You are in good shape</div>' +
+      '<div class="john-opinion-text">Your tax assessment sits comfortably within New Jersey\'s Chapter 123 common level range. Based on recent sales in your area, you are not overpaying on your property taxes right now.</div>' +
+    '</div>';
+  }
+}
+
 
   // the handful of sales that actually moved the number
   function paintDrivers(v) {
@@ -3312,21 +3486,30 @@ body.plm-locked { overflow: hidden; }
   function chartTaxHistory() {
     var host = el('pl-chart-tax'), sub = el('pl-chart-tax-sub');
     if (!host) return;
-    var rates = townRates();
+    var rates = townRates ? townRates() : null;
 
-    if (!rates || !current.assessed) {
-      sub.textContent = 'Year by year bills for this town are not loaded yet.';
+    var assessedVal = current.assessed || current.netVal || 0;
+    var townName = current.town || current.muni || 'your municipality';
+    var billedTax = current.tax || current.lastTax || 0;
+
+    if (!rates || !assessedVal) {
+      if (sub) sub.textContent = 'Year-by-year tax rate history for this municipality is loading or unavailable.';
       host.innerHTML = '<div class="pl-nodata">' +
-        'New Jersey does not publish a per property tax history in the free statewide feed, so this chart is built from your town\'s published general tax rate for each year.' +
-        (current.tax ? '<br><br><strong style="color:#0e2248">Most recent billed amount: ' + money(current.tax) + '</strong>' : '') +
+        'New Jersey does not publish per-property tax history in the free statewide feed. This chart calculates estimated historical bills using published municipal tax rates.' +
+        (billedTax ? '<br><br><strong style="color:#0e2248">Most recent billed tax amount: ' + money(billedTax) + '</strong>' : '') +
         '</div>';
+      appendTaxReliefBanner();
       return;
     }
 
-    var years = Object.keys(rates).map(Number).filter(function (y) { return y > 1990; }).sort();
-    if (years.length < 2) { host.innerHTML = '<div class="pl-nodata">Only one year of rate data on file for this town.</div>'; return; }
+    var years = Object.keys(rates).map(Number).filter(function (y) { return y > 1990; }).sort(function (a, b) { return a - b; });
+    if (years.length < 2) { 
+      host.innerHTML = '<div class="pl-nodata">Only one year of rate data is currently on file for this municipality.</div>'; 
+      appendTaxReliefBanner();
+      return; 
+    }
 
-    var vals = years.map(function (y) { return current.assessed * rates[y] / 100; });
+    var vals = years.map(function (y) { return assessedVal * rates[y] / 100; });
     var max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
     var lo = Math.max(0, min - (max - min) * 0.5), hi = max + (max - min) * 0.2 || max * 1.1;
     var W = 300, H = 168, PL = 46, PR = 8, PT = 12, PB = 26;
@@ -3341,7 +3524,7 @@ body.plm-locked { overflow: hidden; }
     for (var g = 0; g <= ticks; g++) {
       var gv = lo + (hi - lo) * (g / ticks), gy = y(gv);
       grid += '<line x1="' + PL + '" y1="' + gy.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + gy.toFixed(1) + '" stroke="#eef0f5"/>' +
-              '<text x="' + (PL - 6) + '" y="' + (gy + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#8a93a6">$' + axisLbl(gv, hi - lo) + '</text>';
+              '<text x="' + (PL - 6) + '" y="' + (gy + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#8a93a6">$' + (typeof axisLbl === 'function' ? axisLbl(gv, hi - lo) : Math.round(gv).toLocaleString()) + '</text>';
     }
 
     var dots = vals.map(function (v, i) {
@@ -3355,9 +3538,10 @@ body.plm-locked { overflow: hidden; }
 
     var first = vals[0], last = vals[vals.length - 1];
     var pct = first ? ((last - first) / first) * 100 : 0;
+    var colorClass = pct >= 0 ? '#d9534f' : '#2e7d52';
 
     host.innerHTML =
-      '<svg class="pl-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Estimated tax by year">' +
+      '<svg class="pl-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Estimated tax by year" style="width:100%; height:auto;">' +
         '<defs><linearGradient id="plg" x1="0" y1="0" x2="0" y2="1">' +
           '<stop offset="0%" stop-color="#1a3a6b" stop-opacity=".22"/><stop offset="100%" stop-color="#1a3a6b" stop-opacity="0"/>' +
         '</linearGradient></defs>' + grid +
@@ -3365,16 +3549,49 @@ body.plm-locked { overflow: hidden; }
         '<path d="' + line + '" fill="none" stroke="#1a3a6b" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
         dots + labels +
       '</svg>' +
-      '<div class="pl-legend">' +
-        '<span><span class="pl-swatch" style="background:#1a3a6b"></span>Estimated annual bill</span>' +
-        '<span style="color:' + (pct >= 0 ? 'var(--red)' : 'var(--green)') + ';font-weight:700">' +
+      '<div class="pl-legend" style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:12px; color:#5a6070;">' +
+        '<span><span class="pl-swatch" style="display:inline-block; width:10px; height:10px; background:#1a3a6b; border-radius:2px; margin-right:6px;"></span>Estimated annual tax bill</span>' +
+        '<span style="color:' + colorClass + '; font-weight:700;">' +
           (pct >= 0 ? '\u2191 ' : '\u2193 ') + Math.abs(pct).toFixed(1) + '% since ' + years[0] + '</span>' +
       '</div>';
 
-    sub.innerHTML = 'Your current assessment of ' + money(current.assessed) +
-      ' run against ' + esc(current.town) + '\u2019s published general tax rate for each year. It shows what rate changes did to the bill, not reassessment history.';
+    if (sub) {
+      sub.innerHTML = 'Your current assessment of ' + money(assessedVal) +
+        ' calculated against ' + esc(townName) + '\u2019s published tax rates. This reflects general rate changes over time.';
+    }
+
+    // Automatically inject state tax relief banner underneath chart container
+    appendTaxReliefBanner();
   }
 
+  /* Helper to inject the ANCHOR & Stay NJ Callout directly below the tax history card */
+  function appendTaxReliefBanner() {
+    var parentSection = el('pl-chart-tax') ? el('pl-chart-tax').closest('.plm-sec') : null;
+    if (!parentSection || parentSection.querySelector('.tax-relief-box')) return;
+
+    var bannerHTML = 
+      '<div class="tax-relief-box" style="background:linear-gradient(135deg,#102a45 0%,#1e4b7a 100%); border-radius:12px; padding:20px; color:#fff; margin-top:20px;">' +
+        '<div class="tax-relief-header" style="font-size:16px; font-weight:800; color:#b8972a; margin-bottom:6px; display:flex; align-items:center; gap:8px;">' +
+          '<i class="fas fa-piggy-bank"></i> Are you claiming your New Jersey Property Tax Relief?' +
+        '</div>' +
+        '<p style="font-size:13.5px; margin:0 0 14px; color:#d0dbe9; line-height:1.5;">Many New Jersey homeowners leave hundreds of dollars on the table. Estimate your state property tax rebate payout below:</p>' +
+        '<div class="tax-relief-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">' +
+          '<a href="https://njpropertytaxrelief.com/anchor-estimator.html" target="_blank" class="tax-relief-card" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:9px; padding:14px; text-decoration:none; color:#fff; transition:transform 0.2s;">' +
+            '<div style="font-size:22px; font-weight:800; color:#b8972a;">Up to $1,500</div>' +
+            '<div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#cdd9ec; margin-top:2px;">ANCHOR Program (Under 65)</div>' +
+            '<div style="font-size:12px; color:#90a4c4; margin-top:6px; line-height:1.4;">Direct state rebate for eligible homeowners & renters. Calculate payout &rarr;</div>' +
+          '</a>' +
+          '<a href="https://njpropertytaxrelief.com/anchor-estimator.html" target="_blank" class="tax-relief-card" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:9px; padding:14px; text-decoration:none; color:#fff; transition:transform 0.2s;">' +
+            '<div style="font-size:22px; font-weight:800; color:#b8972a;">Up to $6,500</div>' +
+            '<div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#cdd9ec; margin-top:2px;">Stay NJ / Senior Freeze (65+)</div>' +
+            '<div style="font-size:12px; color:#90a4c4; margin-top:6px; line-height:1.4;">Substantial tax relief designed specifically for NJ seniors. Calculate payout &rarr;</div>' +
+          '</a>' +
+        '</div>' +
+      '</div>';
+
+    parentSection.insertAdjacentHTML('beforeend', bannerHTML);
+  }
+  
   // ══════════════════════════════════════════════
   // NET PROCEEDS
   // NJ Realty Transfer Fee, seller side. Two schedules: one at or under
