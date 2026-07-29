@@ -45,162 +45,6 @@
    Nothing here can collide with styles.css
    ============================================================ */
 
-
-/* ---------- PHOTO & MAP HEADER ENHANCEMENTS ---------- */
-.plm-photos { 
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 4px; 
-  background: #0e2248; 
-  position: relative; 
-}
-.plm-photo { 
-  position: relative; 
-  height: 340px; 
-  background: #1a3a6b; 
-  overflow: hidden; 
-}
-.plm-photo img { 
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; 
-  display: block; 
-}
-.plm-photo.map-cell { 
-  height: 340px; 
-  position: relative; 
-  z-index: 0; 
-  isolation: isolate; 
-}
-.plm-photo #plm-map { 
-  width: 100%; 
-  height: 100%; 
-}
-
-/* Floating Media Labels & Badges */
-.plm-media-label {
-  position: absolute; 
-  top: 12px; 
-  left: 12px; 
-  z-index: 5;
-  background: rgba(14, 34, 72, 0.85); 
-  backdrop-filter: blur(4px);
-  color: #fff; 
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 5px 12px; 
-  border-radius: 6px; 
-  font-size: 11.5px; 
-  font-weight: 700;
-  text-transform: uppercase; 
-  letter-spacing: 0.05em; 
-  display: flex; 
-  align-items: center; 
-  gap: 6px;
-}
-.plm-media-label i { color: var(--gold, #b8972a); }
-
-.plm-parcel-badge {
-  position: absolute; 
-  bottom: 12px; 
-  left: 12px; 
-  z-index: 5;
-  background: rgba(255,255,255,0.92); 
-  color: #0e2248;
-  padding: 6px 12px; 
-  border-radius: 8px; 
-  font-size: 12px; 
-  font-weight: 800;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25); 
-  border: 1px solid rgba(0,0,0,0.1);
-}
-
-/* ---------- JOHN'S OPINION CALLOUT BOX ---------- */
-.john-opinion-card {
-  background: #fdfaf2; 
-  border: 2px solid #b8972a; 
-  border-radius: 14px;
-  padding: 18px 20px; 
-  margin: 20px 0; 
-  display: flex; 
-  gap: 16px; 
-  align-items: flex-start;
-  box-shadow: 0 4px 15px rgba(184,151,42,0.12);
-}
-.john-opinion-card.good {
-  background: #f0fdf4; 
-  border-color: #2e7d52;
-}
-.john-opinion-img {
-  width: 60px; 
-  height: 60px; 
-  border-radius: 50%; 
-  object-fit: cover;
-  border: 2px solid #b8972a; 
-  flex-shrink: 0; 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.john-opinion-card.good .john-opinion-img { border-color: #2e7d52; }
-.john-opinion-body { flex: 1; min-width: 0; }
-.john-opinion-title {
-  font-size: 15px; 
-  font-weight: 800; 
-  color: #0e2248; 
-  margin-bottom: 4px;
-  display: flex; 
-  align-items: center; 
-  gap: 8px;
-}
-.john-opinion-title b { color: #856404; }
-.john-opinion-card.good .john-opinion-title b { color: #1e6b3a; }
-.john-opinion-text { font-size: 14px; color: #3d4759; line-height: 1.6; margin: 0; }
-
-/* ---------- RELIEF & ANCHOR CALLOUT BANNER ---------- */
-.tax-relief-box {
-  background: linear-gradient(135deg, #102a45 0%, #1e4b7a 100%);
-  border-radius: 12px; 
-  padding: 20px; 
-  color: #fff; 
-  margin-top: 18px;
-}
-.tax-relief-header {
-  font-size: 16px; 
-  font-weight: 800; 
-  color: #b8972a; 
-  margin-bottom: 8px;
-  display: flex; 
-  align-items: center; 
-  gap: 8px;
-}
-.tax-relief-grid {
-  display: grid; 
-  grid-template-columns: 1fr 1fr; 
-  gap: 14px; 
-  margin-top: 12px;
-}
-.tax-relief-card {
-  background: rgba(255,255,255,0.08); 
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 99px; 
-  border-radius: 9px; 
-  padding: 14px; 
-  text-decoration: none; 
-  color: #fff;
-  transition: transform 0.2s, background 0.2s;
-}
-.tax-relief-card:hover {
-  background: rgba(255,255,255,0.15); 
-  transform: translateY(-2px);
-}
-.tax-relief-val { font-size: 22px; font-weight: 800; color: #b8972a; }
-.tax-relief-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #cdd9ec; margin-top: 2px; }
-.tax-relief-sub { font-size: 12px; color: #90a4c4; margin-top: 6px; line-height: 1.4; }
-
-@media (max-width: 640px) {
-  .plm-photos { grid-template-columns: 1fr; }
-  .tax-relief-grid { grid-template-columns: 1fr; }
-  .john-opinion-card { flex-direction: column; align-items: flex-start; }
-}
-
 /* ---------- HERO ---------- */
 .pl-hero {
   position: relative; min-height: 600px;
@@ -644,6 +488,104 @@ body.plm-locked { overflow: hidden; }
   font-size: 12px; line-height: 1.65; color: #4a5568;
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
+
+/* ---------- SECTION CARD HEADINGS (align with plm-sec-h) ---------- */
+.pl-card-h4 {
+  font-size: 17px; font-weight: 800; color: #1a1a2e; margin: 0 0 4px;
+  letter-spacing: -.01em; line-height: 1.3;
+}
+
+/* ---------- QUICK FACTS STRIP ---------- */
+.plm-quick {
+  grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1px; background: var(--border); border-top: 1px solid var(--border);
+}
+.plm-q { background: #fff; padding: 14px 16px; display: flex; align-items: center; gap: 11px; }
+.plm-q i { color: var(--navy-light); font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
+.plm-q b { display: block; font-size: 15px; font-weight: 800; color: #0e2248; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.plm-q span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
+
+/* ---------- DEADLINE BANNER ---------- */
+.dl-banner {
+  display: flex; align-items: center; gap: 18px; text-decoration: none;
+  background: linear-gradient(120deg, #0e2248, #1a3a6b); border-radius: 12px;
+  padding: 18px 22px; margin-bottom: 18px; border: 1px solid rgba(240,216,122,.3);
+}
+.dl-banner.urgent { background: linear-gradient(120deg, #7a1f16, #c0392b); border-color: rgba(255,255,255,.25); }
+.dl-banner:hover { filter: brightness(1.07); }
+.dl-count { text-align: center; flex-shrink: 0; padding-right: 18px; border-right: 1px solid rgba(255,255,255,.2); }
+.dl-count b { display: block; font-size: 32px; font-weight: 800; color: #f0d87a; line-height: 1; }
+.dl-count span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #cdd9ec; }
+.dl-text { flex: 1; min-width: 0; }
+.dl-text b { display: block; font-size: 15.5px; color: #fff; margin-bottom: 4px; }
+.dl-text span { font-size: 12.5px; color: #cdd9ec; line-height: 1.6; }
+.dl-text span b { display: inline; font-size: inherit; }
+.dl-cta {
+  flex-shrink: 0; display: flex; align-items: center; gap: 8px; white-space: nowrap;
+  background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
+  font-size: 13.5px; font-weight: 800; padding: 11px 18px; border-radius: 9px;
+}
+
+/* ---------- JOHN'S OPINION ---------- */
+.op-box { display: flex; gap: 18px; padding: 20px; border-radius: 12px; margin-bottom: 18px; align-items: flex-start; }
+.op-box.act { background: #fdf6e3; border: 1px solid #e8d9a8; }
+.op-box.clear { background: var(--green-light); border: 1px solid #b8d8c4; }
+.op-photo { width: 62px; height: 62px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 3px solid var(--gold); }
+.op-body { flex: 1; min-width: 0; }
+.op-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #8a7128; margin-bottom: 4px; }
+.op-box.clear .op-label { color: var(--green); }
+.op-head { font-size: 18px; font-weight: 800; color: #0e2248; margin-bottom: 8px; line-height: 1.3; }
+.op-body p { font-size: 14.5px; line-height: 1.7; color: #4a5568; margin: 0 0 10px; }
+.op-body p b { color: #0e2248; }
+.op-sig { font-size: 12px; color: #8a93a6; }
+
+/* ---------- REBATES ---------- */
+.rb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
+.rb-card { background: #fff; border: 1px solid var(--border); border-radius: 13px; padding: 20px; }
+.rb-card.anchor { border-color: #c8d6ea; }
+.rb-card.stay { border-color: #e8d9a8; }
+.rb-badge { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; padding: 4px 11px; border-radius: 99px; margin-bottom: 10px; }
+.rb-card.anchor .rb-badge { background: var(--info-bg); color: var(--navy); }
+.rb-card.stay .rb-badge { background: #fbf3dc; color: #7a6417; }
+.rb-title { font-size: 16px; font-weight: 800; color: #0e2248; margin-bottom: 14px; }
+.rb-math { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.rb-math > i { color: #8a93a6; }
+.rb-before s { display: block; font-size: 19px; color: #a0a8b8; }
+.rb-after b { display: block; font-size: 24px; font-weight: 800; color: var(--green); }
+.rb-before span, .rb-after span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
+.rb-cut { font-size: 13.5px; color: #3d4759; padding: 9px 0; border-top: 1px solid #eef0f5; }
+.rb-cut b { color: var(--green); }
+.rb-note { font-size: 12.5px; color: #5a6070; line-height: 1.6; }
+.rb-btn { display: inline-flex; align-items: center; gap: 9px; margin-top: 16px; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 24px; border-radius: 9px; text-decoration: none; }
+.rb-btn:hover { background: var(--navy-dark); }
+.rb-fine { font-size: 11.5px; color: #8a93a6; line-height: 1.65; margin-top: 12px; }
+
+/* ---------- TRADE UP ---------- */
+.tu-grid { display: grid; grid-template-columns: 1fr 320px; gap: 26px; align-items: start; }
+.tu-out { background: #f6f8fc; border-radius: 12px; padding: 22px; min-height: 240px; }
+.tu-placeholder { text-align: center; color: #8a93a6; font-size: 13.5px; line-height: 1.6; padding: 30px 10px; }
+.tu-placeholder i { display: block; font-size: 26px; margin-bottom: 10px; color: #c3cbdb; }
+.tu-head { font-size: 12.5px; color: #5a6070; margin-bottom: 4px; }
+.tu-head b { color: #0e2248; }
+.tu-big { font-size: 30px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; }
+.tu-big span { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #8a93a6; margin-top: 3px; }
+.tu-rows { margin: 14px 0; }
+.tu-row { display: flex; justify-content: space-between; font-size: 13px; color: #5a6070; padding: 7px 0; border-bottom: 1px solid #e6ebf3; }
+.tu-row b { color: #1a1a2e; font-variant-numeric: tabular-nums; }
+.tu-row.up b { color: var(--red); }
+.tu-row.down b { color: var(--green); }
+.tu-verdict { font-size: 13.5px; line-height: 1.6; padding: 12px 14px; border-radius: 9px; }
+.tu-verdict.warn { background: #fdf6e3; color: #6b5514; }
+.tu-verdict.good { background: var(--green-light); color: var(--green); }
+.tu-src { font-size: 11.5px; color: #8a93a6; margin-top: 10px; }
+
+@media (max-width: 860px) {
+  .tu-grid { grid-template-columns: 1fr; }
+  .dl-banner { flex-direction: column; text-align: center; }
+  .dl-count { border-right: none; border-bottom: 1px solid rgba(255,255,255,.2); padding: 0 0 12px; }
+  .dl-cta { width: 100%; justify-content: center; }
+  .op-box { flex-direction: column; align-items: center; text-align: center; }
+}
 
 /* ---------- HOW WE VALUE GRID ---------- */
 .hv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; }
@@ -1208,12 +1150,12 @@ body.plm-locked { overflow: hidden; }
           <div class="hv-scale">
             <div class="hv-scale-side"><span>Your assessment</span><b class="over">$240k</b></div>
             <div class="hv-scale-mid"><i class="fas fa-scale-unbalanced-flip"></i></div>
-            <div class="hv-scale-side"><span>Neighbors</span><b>$170k</b></div>
+            <div class="hv-scale-side"><span>Neighbours</span><b>$170k</b></div>
           </div>
           <div class="hv-flag">Chapter 123 case</div>
         </div>
         <div class="hv-body">
-          <h3>Compared to your Neighbors</h3>
+          <h3>Compared to your neighbours</h3>
           <p>The appeal test uses evidence that did not come from your assessment: your own last sale, and what genuinely comparable homes nearby are assessed at. That is the argument a county board listens to.</p>
         </div>
       </div>
@@ -2250,7 +2192,7 @@ body.plm-locked { overflow: hidden; }
     return Math.max(-0.12, Math.min(0.18, d / n));
   }
 
-  // Adjust for how this home compares to its Neighbors on the things the
+  // Adjust for how this home compares to its neighbours on the things the
   // public record does tell us: vintage and lot size. Assessment already
   // captures most of it, so this is a light touch, capped at +/- 8%.
   function propertyAdjust(subject, comps) {
@@ -2316,7 +2258,7 @@ body.plm-locked { overflow: hidden; }
       timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
-    // property: light adjustment for vintage and lot versus Neighbors
+    // property: light adjustment for vintage and lot versus neighbours
     var adj = propertyAdjust(subject, comps);
 
     var cal = calibrationFor(town, county) || 1;
@@ -2606,7 +2548,7 @@ body.plm-locked { overflow: hidden; }
     //
     //   A. This property's own last recorded sale, carried forward at the
     //      appreciation measured in its town. Strongest evidence there is.
-    //   B. What comparable Neighbors are assessed at. This is the argument
+    //   B. What comparable neighbours are assessed at. This is the argument
     //      homeowners already make out loud: the house next door pays less.
     var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
     var thisYear = new Date().getFullYear();
@@ -2646,7 +2588,7 @@ body.plm-locked { overflow: hidden; }
       basis = 'its own sale history';
     } else {
       target = peerMed;
-      basis = 'what comparable Neighbors are assessed at';
+      basis = 'what comparable neighbours are assessed at';
     }
     if (peerMed !== null && anchors.length) target = Math.max(target, Math.min(peerMed * 1.25, target * 1.25));
 
@@ -2675,17 +2617,12 @@ body.plm-locked { overflow: hidden; }
       '</div>';
 
     host.innerHTML =
+      buildDeadlineBanner() +
       '<h3 class="plm-sec-h">Do you have a tax appeal?</h3>' +
       '<p class="plm-sec-s">Tested against evidence that did not come from the assessment itself: ' + esc(basis) +
       '. New Jersey gives municipalities a 15 percent cushion under Chapter 123. Above it, the county board is directed to reduce the assessment.</p>' +
       '<div class="pl-card">' +
-        (hasCase
-          ? '<div class="appeal-verdict yes"><i class="fas fa-scale-unbalanced-flip"></i><div>' +
-            '<b>Worth a real look.</b> On the public evidence this assessment sits ' + money(overBy) +
-            ' above the Chapter 123 limit.</div></div>'
-          : '<div class="appeal-verdict no"><i class="fas fa-scale-balanced"></i><div>' +
-            '<b>Probably not, on these numbers.</b> The assessment falls inside the cushion New Jersey allows. ' +
-            'Not a no forever, since condition or a recent nearby sale can change it.</div></div>') +
+        buildOpinion(hasCase, overBy, saving, target) +
         rows +
         (saving && saving > 150
           ? '<div class="score-save">' +
@@ -2699,24 +2636,6 @@ body.plm-locked { overflow: hidden; }
       '<div class="score-fine">Screening only. A filed appeal needs current comparable sales, the municipality\u2019s certified ratio for the tax year, and often an interior inspection. ' +
       'Deadlines are generally April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you when a case is not worth filing.</div>';
   }
-
-  function getJohnOpinionHTML(hasCase, overBy) {
-  if (hasCase && overBy > 0) {
-    return '<div class="john-opinion-card">' +
-      '<img src="johnprofile.jpg" alt="John Scafide" class="john-opinion-img" onerror="this.src=\'opuslogo.jpg\'">' +
-      '<div class="john-opinion-body">' +
-        '<div class="john-opinion-title"><i class="fas fa-gavel"></i> <b>John\'s Opinion:</b> Get this checked out immediately</div>' +
-        '<div class="john-opinion-text">On paper, your town is valuing your property at <b>' + money(overBy) + ' above</b> what the public sales evidence supports under Chapter 123. An appeal could lower your annual tax bill permanently.</div>' +
-      '</div>' +
-    '</div>';
-  } else {
-    return '<div class="john-opinion-card good">' +
-      '<img src="johnprofile.jpg" alt="John Scafide" class="john-opinion-img" onerror="this.src=\'opuslogo.jpg\'">' +
-      '<div class="john-opinion-title"><i class="fas fa-shield-check"></i> <b>John\'s Opinion:</b> You are in good shape</div>' +
-      '<div class="john-opinion-text">Your tax assessment sits comfortably within New Jersey\'s Chapter 123 common level range. Based on recent sales in your area, you are not overpaying on your property taxes right now.</div>' +
-    '</div>';
-  }
-}
 
 
   // the handful of sales that actually moved the number
@@ -2764,7 +2683,7 @@ body.plm-locked { overflow: hidden; }
       '<p><b>Why the appeal test uses different evidence.</b> The headline value above is worked out from your assessment and your ' +
       'town\u2019s ratio, so testing your assessment against it would just be checking a number against itself. The appeal section ' +
       'instead uses evidence that came from somewhere else entirely: your own last recorded sale carried forward, and what ' +
-      'comparable Neighbors are assessed at. That is the argument that actually holds up.</p>' +
+      'comparable neighbours are assessed at. That is the argument that actually holds up.</p>' +
 
       (v && a
         ? '<p>For this property: the evidence supports an assessment of ' +
@@ -2864,7 +2783,7 @@ body.plm-locked { overflow: hidden; }
   function watchdogScore(assessed, val, comps) {
     // The valuation is derived from the assessment, so comparing the two tells
     // us nothing. The only real signal available in public data is how THIS
-    // property is assessed relative to genuinely comparable Neighbors.
+    // property is assessed relative to genuinely comparable neighbours.
     //
     // Peer group: nearby homes of similar vintage and lot size. If this one
     // carries a materially higher assessment per comparable home than its
@@ -3200,7 +3119,15 @@ body.plm-locked { overflow: hidden; }
         '<div class="plm-imgcredit" id="plm-credit">' + (sv ? 'Street level imagery, Google' : 'Aerial imagery, Esri World Imagery') + '</div>' +
 
       '</div>' +
-      '<div class="plm-photo map-cell"><div id="plm-map"></div></div>';
+      '<div class="plm-photo map-cell"><div id="plm-map"></div></div>' +
+      '<div class="plm-quick">' +
+        '<div class="plm-q"><i class="fas fa-building-columns"></i><div><b>' + (assessed ? money(assessed) : '-') + '</b><span>Assessed</span></div></div>' +
+        '<div class="plm-q"><i class="fas fa-file-invoice-dollar"></i><div><b>' + (tax ? money(tax) : '-') + '</b><span>Annual tax</span></div></div>' +
+        '<div class="plm-q"><i class="fas fa-percent"></i><div><b>' + (rate ? rate.toFixed(2) + '%' : '-') + '</b><span>Eff. rate</span></div></div>' +
+        '<div class="plm-q"><i class="fas fa-hammer"></i><div><b>' + (p.YR_CONSTR || '-') + '</b><span>Built</span></div></div>' +
+        '<div class="plm-q"><i class="fas fa-ruler-combined"></i><div><b>' + (sqft ? sqft.toLocaleString() : '-') + '</b><span>Lot sq ft</span></div></div>' +
+        '<div class="plm-q"><i class="fas fa-map-pin"></i><div><b>' + esc((p.PCLBLOCK || '?') + ' / ' + (p.PCLLOT || '?')) + '</b><span>Block / Lot</span></div></div>' +
+      '</div>';
 
     // ---------- headline ----------
     var chips = [];
@@ -3267,12 +3194,12 @@ body.plm-locked { overflow: hidden; }
         '<h3 class="plm-sec-h">Charts</h3>' +
         '<div class="plm-chartgrid">' +
           '<div class="pl-card">' +
-            '<div class="pl-card-t">Where the assessment comes from</div>' +
+            '<h4 class="pl-card-h4">Where the assessment comes from</h4>' +
             '<div class="pl-card-s">Land versus everything built on it.</div>' +
             '<div id="pl-chart-split"></div>' +
           '</div>' +
           '<div class="pl-card">' +
-            '<div class="pl-card-t">Tax history</div>' +
+            '<h4 class="pl-card-h4">Tax history</h4>' +
             '<div class="pl-card-s" id="pl-chart-tax-sub">Estimated annual bill by year.</div>' +
             '<div id="pl-chart-tax"></div>' +
           '</div>' +
@@ -3330,6 +3257,10 @@ body.plm-locked { overflow: hidden; }
       '<div class="plm-sec" id="plm-score-sec"></div>' +
 
       '<div class="plm-sec" id="plm-diag-sec"></div>' +
+
+      '<div class="plm-sec">' + buildRebates(tax) + '</div>' +
+
+      '<div class="plm-sec">' + buildTradeUp() + '</div>' +
 
       '<div class="plm-sec">' + buildMortgageCalc() + '</div>' +
 
@@ -3486,30 +3417,21 @@ body.plm-locked { overflow: hidden; }
   function chartTaxHistory() {
     var host = el('pl-chart-tax'), sub = el('pl-chart-tax-sub');
     if (!host) return;
-    var rates = townRates ? townRates() : null;
+    var rates = townRates();
 
-    var assessedVal = current.assessed || current.netVal || 0;
-    var townName = current.town || current.muni || 'your municipality';
-    var billedTax = current.tax || current.lastTax || 0;
-
-    if (!rates || !assessedVal) {
-      if (sub) sub.textContent = 'Year-by-year tax rate history for this municipality is loading or unavailable.';
+    if (!rates || !current.assessed) {
+      sub.textContent = 'Year by year bills for this town are not loaded yet.';
       host.innerHTML = '<div class="pl-nodata">' +
-        'New Jersey does not publish per-property tax history in the free statewide feed. This chart calculates estimated historical bills using published municipal tax rates.' +
-        (billedTax ? '<br><br><strong style="color:#0e2248">Most recent billed tax amount: ' + money(billedTax) + '</strong>' : '') +
+        'New Jersey does not publish a per property tax history in the free statewide feed, so this chart is built from your town\'s published general tax rate for each year.' +
+        (current.tax ? '<br><br><strong style="color:#0e2248">Most recent billed amount: ' + money(current.tax) + '</strong>' : '') +
         '</div>';
-      appendTaxReliefBanner();
       return;
     }
 
-    var years = Object.keys(rates).map(Number).filter(function (y) { return y > 1990; }).sort(function (a, b) { return a - b; });
-    if (years.length < 2) { 
-      host.innerHTML = '<div class="pl-nodata">Only one year of rate data is currently on file for this municipality.</div>'; 
-      appendTaxReliefBanner();
-      return; 
-    }
+    var years = Object.keys(rates).map(Number).filter(function (y) { return y > 1990; }).sort();
+    if (years.length < 2) { host.innerHTML = '<div class="pl-nodata">Only one year of rate data on file for this town.</div>'; return; }
 
-    var vals = years.map(function (y) { return assessedVal * rates[y] / 100; });
+    var vals = years.map(function (y) { return current.assessed * rates[y] / 100; });
     var max = Math.max.apply(null, vals), min = Math.min.apply(null, vals);
     var lo = Math.max(0, min - (max - min) * 0.5), hi = max + (max - min) * 0.2 || max * 1.1;
     var W = 300, H = 168, PL = 46, PR = 8, PT = 12, PB = 26;
@@ -3524,7 +3446,7 @@ body.plm-locked { overflow: hidden; }
     for (var g = 0; g <= ticks; g++) {
       var gv = lo + (hi - lo) * (g / ticks), gy = y(gv);
       grid += '<line x1="' + PL + '" y1="' + gy.toFixed(1) + '" x2="' + (W - PR) + '" y2="' + gy.toFixed(1) + '" stroke="#eef0f5"/>' +
-              '<text x="' + (PL - 6) + '" y="' + (gy + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#8a93a6">$' + (typeof axisLbl === 'function' ? axisLbl(gv, hi - lo) : Math.round(gv).toLocaleString()) + '</text>';
+              '<text x="' + (PL - 6) + '" y="' + (gy + 3.5).toFixed(1) + '" text-anchor="end" font-size="9.5" fill="#8a93a6">$' + axisLbl(gv, hi - lo) + '</text>';
     }
 
     var dots = vals.map(function (v, i) {
@@ -3538,10 +3460,9 @@ body.plm-locked { overflow: hidden; }
 
     var first = vals[0], last = vals[vals.length - 1];
     var pct = first ? ((last - first) / first) * 100 : 0;
-    var colorClass = pct >= 0 ? '#d9534f' : '#2e7d52';
 
     host.innerHTML =
-      '<svg class="pl-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Estimated tax by year" style="width:100%; height:auto;">' +
+      '<svg class="pl-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Estimated tax by year">' +
         '<defs><linearGradient id="plg" x1="0" y1="0" x2="0" y2="1">' +
           '<stop offset="0%" stop-color="#1a3a6b" stop-opacity=".22"/><stop offset="100%" stop-color="#1a3a6b" stop-opacity="0"/>' +
         '</linearGradient></defs>' + grid +
@@ -3549,49 +3470,16 @@ body.plm-locked { overflow: hidden; }
         '<path d="' + line + '" fill="none" stroke="#1a3a6b" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>' +
         dots + labels +
       '</svg>' +
-      '<div class="pl-legend" style="display:flex; justify-content:space-between; align-items:center; margin-top:8px; font-size:12px; color:#5a6070;">' +
-        '<span><span class="pl-swatch" style="display:inline-block; width:10px; height:10px; background:#1a3a6b; border-radius:2px; margin-right:6px;"></span>Estimated annual tax bill</span>' +
-        '<span style="color:' + colorClass + '; font-weight:700;">' +
+      '<div class="pl-legend">' +
+        '<span><span class="pl-swatch" style="background:#1a3a6b"></span>Estimated annual bill</span>' +
+        '<span style="color:' + (pct >= 0 ? 'var(--red)' : 'var(--green)') + ';font-weight:700">' +
           (pct >= 0 ? '\u2191 ' : '\u2193 ') + Math.abs(pct).toFixed(1) + '% since ' + years[0] + '</span>' +
       '</div>';
 
-    if (sub) {
-      sub.innerHTML = 'Your current assessment of ' + money(assessedVal) +
-        ' calculated against ' + esc(townName) + '\u2019s published tax rates. This reflects general rate changes over time.';
-    }
-
-    // Automatically inject state tax relief banner underneath chart container
-    appendTaxReliefBanner();
+    sub.innerHTML = 'Your current assessment of ' + money(current.assessed) +
+      ' run against ' + esc(current.town) + '\u2019s published general tax rate for each year. It shows what rate changes did to the bill, not reassessment history.';
   }
 
-  /* Helper to inject the ANCHOR & Stay NJ Callout directly below the tax history card */
-  function appendTaxReliefBanner() {
-    var parentSection = el('pl-chart-tax') ? el('pl-chart-tax').closest('.plm-sec') : null;
-    if (!parentSection || parentSection.querySelector('.tax-relief-box')) return;
-
-    var bannerHTML = 
-      '<div class="tax-relief-box" style="background:linear-gradient(135deg,#102a45 0%,#1e4b7a 100%); border-radius:12px; padding:20px; color:#fff; margin-top:20px;">' +
-        '<div class="tax-relief-header" style="font-size:16px; font-weight:800; color:#b8972a; margin-bottom:6px; display:flex; align-items:center; gap:8px;">' +
-          '<i class="fas fa-piggy-bank"></i> Are you claiming your New Jersey Property Tax Relief?' +
-        '</div>' +
-        '<p style="font-size:13.5px; margin:0 0 14px; color:#d0dbe9; line-height:1.5;">Many New Jersey homeowners leave hundreds of dollars on the table. Estimate your state property tax rebate payout below:</p>' +
-        '<div class="tax-relief-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">' +
-          '<a href="https://njpropertytaxrelief.com/anchor-estimator.html" target="_blank" class="tax-relief-card" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:9px; padding:14px; text-decoration:none; color:#fff; transition:transform 0.2s;">' +
-            '<div style="font-size:22px; font-weight:800; color:#b8972a;">Up to $1,500</div>' +
-            '<div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#cdd9ec; margin-top:2px;">ANCHOR Program (Under 65)</div>' +
-            '<div style="font-size:12px; color:#90a4c4; margin-top:6px; line-height:1.4;">Direct state rebate for eligible homeowners & renters. Calculate payout &rarr;</div>' +
-          '</a>' +
-          '<a href="https://njpropertytaxrelief.com/anchor-estimator.html" target="_blank" class="tax-relief-card" style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:9px; padding:14px; text-decoration:none; color:#fff; transition:transform 0.2s;">' +
-            '<div style="font-size:22px; font-weight:800; color:#b8972a;">Up to $6,500</div>' +
-            '<div style="font-size:12px; font-weight:700; text-transform:uppercase; color:#cdd9ec; margin-top:2px;">Stay NJ / Senior Freeze (65+)</div>' +
-            '<div style="font-size:12px; color:#90a4c4; margin-top:6px; line-height:1.4;">Substantial tax relief designed specifically for NJ seniors. Calculate payout &rarr;</div>' +
-          '</a>' +
-        '</div>' +
-      '</div>';
-
-    parentSection.insertAdjacentHTML('beforeend', bannerHTML);
-  }
-  
   // ══════════════════════════════════════════════
   // NET PROCEEDS
   // NJ Realty Transfer Fee, seller side. Two schedules: one at or under
@@ -3736,6 +3624,236 @@ body.plm-locked { overflow: hidden; }
     if (gpf > 0) note += ' Sales over $1,000,000 carry the graduated percent fee on the seller, applied to the full price.';
     note += ' Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. Estimates only.';
     var ne = el('pc-note'); if (ne) ne.textContent = note;
+  };
+
+  // ══════════════════════════════════════════════
+  // APPEAL DEADLINE
+  // April 1 in most towns, May 1 where the town revalued this year.
+  // ══════════════════════════════════════════════
+  function appealDeadline() {
+    var now = new Date();
+    var yr = now.getFullYear();
+    var apr = new Date(yr, 3, 1);                 // April 1
+    if (now > apr) { apr = new Date(yr + 1, 3, 1); }
+    var days = Math.ceil((apr - now) / 864e5);
+    return { date: apr, days: days, year: apr.getFullYear() };
+  }
+
+  function buildDeadlineBanner() {
+    var d = appealDeadline();
+    var urgent = d.days <= 75;
+    var pretty = d.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    return '<a href="#" onclick="plOpenForm(\'appeal\');return false;" class="dl-banner' + (urgent ? ' urgent' : '') + '">' +
+      '<div class="dl-count"><b>' + d.days + '</b><span>day' + (d.days === 1 ? '' : 's') + ' left</span></div>' +
+      '<div class="dl-text">' +
+        '<b>' + (urgent ? 'The appeal window is closing.' : 'Next appeal deadline: ' + pretty + '.') + '</b>' +
+        '<span>New Jersey assessment appeals are generally due <b>April 1</b>, or <b>May 1</b> in a town that revalued this year. ' +
+        'Miss it and the next chance is a full year and another full tax bill away.</span>' +
+      '</div>' +
+      '<div class="dl-cta">Start my review <i class="fas fa-arrow-right"></i></div>' +
+    '</a>';
+  }
+
+  // ══════════════════════════════════════════════
+  // JOHN'S OPINION
+  // A plain verdict in his own voice, next to his face.
+  // ══════════════════════════════════════════════
+  function buildOpinion(hasCase, overBy, saving, target) {
+    var a = AGENTS.john;
+    var body, cls, head;
+
+    if (hasCase) {
+      cls = 'act';
+      head = 'Get this one checked out.';
+      body = 'The public numbers say this assessment is sitting <b>' + money(overBy) + '</b> above where Chapter 123 says it should be. ' +
+        (saving && saving > 150
+          ? 'If that holds up, you are looking at roughly <b>' + money(saving) + ' a year</b> back in your pocket. '
+          : '') +
+        'I cannot see inside the house from here, and that matters, but a gap this size is worth an hour of my time to check properly. There is no charge for me to look.';
+    } else {
+      cls = 'clear';
+      head = 'You are good. No appeal needed here.';
+      body = 'I ran this one against comparable homes nearby and against what the property last sold for. ' +
+        'The assessment lands inside the cushion New Jersey allows, so an appeal would almost certainly fail and cost you the filing fee. ' +
+        '<b>Save your money.</b> If your roof is shot or the inside is rough, that can change the math, so tell me and I will take another look.';
+    }
+
+    return '<div class="op-box ' + cls + '">' +
+      '<img class="op-photo" src="' + a.photo + '" alt="' + esc(a.name) + '" loading="lazy">' +
+      '<div class="op-body">' +
+        '<div class="op-label">John\u2019s opinion</div>' +
+        '<div class="op-head">' + head + '</div>' +
+        '<p>' + body + '</p>' +
+        '<div class="op-sig">' + esc(a.name) + '  \u00b7  ' + esc(a.lic) + '  \u00b7  15+ years preparing NJ tax returns</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // ANCHOR AND STAY NJ REBATES
+  // ══════════════════════════════════════════════
+  function buildRebates(tax) {
+    if (!tax || tax < 500) return '';
+    var anchor = 1500, stay = 6500;
+    var afterAnchor = Math.max(0, tax - anchor);
+    var afterStay = Math.max(0, tax - Math.min(stay, tax * 0.5));   // Stay NJ caps at half the bill
+
+    function card(cls, badge, title, cut, after, note) {
+      return '<div class="rb-card ' + cls + '">' +
+        '<div class="rb-badge">' + badge + '</div>' +
+        '<div class="rb-title">' + title + '</div>' +
+        '<div class="rb-math">' +
+          '<div class="rb-before"><s>' + money(tax) + '</s><span>your bill now</span></div>' +
+          '<i class="fas fa-arrow-right"></i>' +
+          '<div class="rb-after"><b>' + money(after) + '</b><span>after the rebate</span></div>' +
+        '</div>' +
+        '<div class="rb-cut">Up to <b>' + money(cut) + '</b> back</div>' +
+        '<div class="rb-note">' + note + '</div>' +
+      '</div>';
+    }
+
+    return '<div class="rb-wrap">' +
+      '<h3 class="plm-sec-h">You may not have to pay all of that</h3>' +
+      '<p class="plm-sec-s">New Jersey hands money back through ANCHOR and Stay NJ, and most people who qualify never claim it. ' +
+      'Here is what this property\u2019s bill could look like after a rebate.</p>' +
+      '<div class="rb-grid">' +
+        card('anchor', 'Any age', 'ANCHOR, for homeowners', anchor, afterAnchor,
+             'Homeowners can receive up to $1,500 depending on income. Renters can receive up to $700.') +
+        card('stay', 'Age 65+', 'Stay NJ, for seniors', stay, afterStay,
+             'Seniors 65 and over can have up to half their property tax bill covered, to a maximum of $6,500.') +
+      '</div>' +
+      '<a href="https://njpropertytaxrelief.com/anchor-estimator.html" class="rb-btn">' +
+        'Find out what you qualify for <i class="fas fa-arrow-right"></i></a>' +
+      '<div class="rb-fine">Illustration only. Actual benefits depend on income, age, filing status, and residency, and the programs change. ' +
+      'The estimator asks about 90 seconds of questions and gives you a real figure.</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // TRADE UP ESTIMATOR
+  // The tax rate in the town you are moving TO is measured live from that
+  // town's own parcels, so this is not a guess from a rate table.
+  // ══════════════════════════════════════════════
+  var townRateCache = {};
+
+  function townEffectiveRate(town, county) {
+    var key = (town + '|' + county).toUpperCase();
+    if (townRateCache[key]) return Promise.resolve(townRateCache[key]);
+
+    var offR = officialRatio(town, county);
+    if (!offR) return Promise.resolve(null);
+
+    var where = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
+                " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" +
+                " AND PROP_CLASS = '2' AND NET_VALUE > 10000 AND LAST_YR_TX > 100";
+    var p = new URLSearchParams({
+      where: where, outFields: 'NET_VALUE,LAST_YR_TX',
+      returnGeometry: 'false', resultRecordCount: '1500', f: 'json'
+    });
+    return fetch(NJ_PARCEL + '?' + p).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d.features || d.features.length < 20) return null;
+        var rates = [];
+        d.features.forEach(function (f) {
+          var a = f.attributes;
+          var market = (+a.NET_VALUE) / offR.ratio;
+          var r2 = (+a.LAST_YR_TX) / market;
+          if (isFinite(r2) && r2 > 0.002 && r2 < 0.10) rates.push(r2);
+        });
+        if (rates.length < 15) return null;
+        var out = { rate: median(rates), n: rates.length, ratio: offR.ratio };
+        townRateCache[key] = out;
+        return out;
+      }).catch(function () { return null; });
+  }
+
+  function buildTradeUp() {
+    var opts = Object.keys(officialRatios || {}).sort().map(function (k) {
+      return '<option value="' + esc(k) + '">' + esc(k.replace(/ \(/, ', ').replace(/\)$/, '')) + '</option>';
+    }).join('');
+
+    var v = current.valuation;
+    var eq = v && v.mid ? Math.round(v.mid / 1000) * 1000 : 300000;
+
+    return '<div class="tu-wrap">' +
+      '<h3 class="plm-sec-h">Thinking of trading up? Check the tax first.</h3>' +
+      '<p class="plm-sec-s">Two houses at the same price can carry wildly different tax bills depending on which side of a town line they sit on. ' +
+      'Pick where you are looking and this measures that town\u2019s real effective rate from its own parcels, then shows what your new bill would be.</p>' +
+      '<div class="pl-card">' +
+        '<div class="tu-grid">' +
+          '<div>' +
+            '<div class="mtg-row"><label>Sale price of this home</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="tu-sale" value="' + eq.toLocaleString() + '" oninput="plFormatNum(this); plTradeUp()"></div></div>' +
+            '<div class="mtg-row"><label>Mortgage payoff</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="tu-payoff" value="0" oninput="plFormatNum(this); plTradeUp()"></div></div>' +
+            '<div class="mtg-row"><label>Next home price</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span><input type="text" class="pl-zcalc-input" id="tu-next" value="' + Math.round(eq * 1.25 / 1000) * 1000 + '" oninput="plFormatNum(this); plTradeUp()"></div></div>' +
+            '<div class="mtg-row" style="display:block;">' +
+              '<label style="display:block;margin-bottom:6px;">Moving to</label>' +
+              '<select class="pl-zcalc-input" id="tu-town" onchange="plTradeUp()" style="width:100%;text-align:left;padding-left:12px;">' +
+                '<option value="">Pick a town...</option>' + opts +
+              '</select></div>' +
+          '</div>' +
+          '<div class="tu-out" id="tu-out">' +
+            '<div class="tu-placeholder"><i class="fas fa-map-location-dot"></i><span>Pick a town to see what the tax bill would be there.</span></div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="mtg-disc">Estimates only. Effective rates are measured from recent public assessment records in each municipality and will not match any single home exactly. ' +
+        'Your actual bill depends on the specific property, its assessment, and that year\u2019s rate.</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  window.plTradeUp = function () {
+    function v(id) {
+      var e = el(id); if (!e) return 0;
+      return parseFloat(String(e.value).replace(/[^0-9.]/g, '')) || 0;
+    }
+    var sale = v('tu-sale'), payoff = v('tu-payoff'), next = v('tu-next');
+    var sel = el('tu-town'), key = sel ? sel.value : '';
+    var out = el('tu-out');
+    if (!out) return;
+    if (!key) {
+      out.innerHTML = '<div class="tu-placeholder"><i class="fas fa-map-location-dot"></i><span>Pick a town to see what the tax bill would be there.</span></div>';
+      return;
+    }
+
+    var parts = key.replace(/\)$/, '').split(' (');
+    var town = parts[0], county = parts[1] || '';
+    out.innerHTML = '<div class="tu-placeholder"><div class="pl-spin" style="margin:0 auto 12px;"></div><span>Measuring ' + esc(town) + '...</span></div>';
+
+    townEffectiveRate(town, county).then(function (r) {
+      var hereRate = (current.tax && current.valuation && current.valuation.mid)
+        ? current.tax / current.valuation.mid : null;
+      if (!r) {
+        out.innerHTML = '<div class="tu-placeholder"><i class="fas fa-circle-question"></i><span>Not enough recorded data for ' +
+          esc(town) + ' to measure a reliable rate. <a href="#" onclick="plOpenForm(\'buy\');return false;">Ask me and I will pull it.</a></span></div>';
+        return;
+      }
+      var newTax = next * r.rate;
+      var hereTax = current.tax || 0;
+      var diff = newTax - hereTax;
+      var equity = Math.max(0, sale - payoff);
+
+      out.innerHTML =
+        '<div class="tu-head">Moving to <b>' + esc(town) + '</b></div>' +
+        '<div class="tu-big">' + money(newTax) + '<span>estimated annual tax</span></div>' +
+        '<div class="tu-rows">' +
+          '<div class="tu-row"><span>Effective rate there</span><b>' + (r.rate * 100).toFixed(2) + '%</b></div>' +
+          (hereRate ? '<div class="tu-row"><span>Effective rate here</span><b>' + (hereRate * 100).toFixed(2) + '%</b></div>' : '') +
+          '<div class="tu-row"><span>You pay here now</span><b>' + money(hereTax) + '</b></div>' +
+          '<div class="tu-row ' + (diff > 0 ? 'up' : 'down') + '"><span>Change per year</span><b>' +
+            (diff > 0 ? '+' : '') + money(diff) + '</b></div>' +
+          '<div class="tu-row"><span>Equity you would carry over</span><b>' + money(equity) + '</b></div>' +
+        '</div>' +
+        '<div class="tu-verdict ' + (diff > 0 ? 'warn' : 'good') + '">' +
+          (diff > 0
+            ? 'That is <b>' + money(diff / 12) + ' a month</b> more in tax alone, before the bigger mortgage. Worth knowing before you fall in love with a listing.'
+            : 'You would actually pay <b>' + money(Math.abs(diff)) + ' a year less</b> in tax, even on a more expensive house.') +
+        '</div>' +
+        '<div class="tu-src">Measured from ' + r.n + ' properties in ' + esc(town) + '.</div>' +
+        '<button class="plm-rbtn" style="margin-top:14px;" onclick="plOpenForm(\'buy\')">Find me homes there</button>';
+    });
   };
 
   // ══════════════════════════════════════════════
