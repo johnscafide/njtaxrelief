@@ -278,7 +278,8 @@
   display: flex; gap: 12px; align-items: flex-start; margin-top: 18px;
   border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6;
 }
-.plm-alert i { margin-top: 2px; }
+.plm-alert i { margin-top: 2px; flex-shrink: 0; }
+.plm-alert > div { flex: 1; min-width: 0; }
 .plm-alert.warn { background: #fdf6e3; color: #6b5514; }
 .plm-alert.info { background: var(--info-bg); color: var(--navy-dark); }
 
@@ -364,9 +365,21 @@ body.plm-locked { overflow: hidden; }
 
 /* ---------- WATCHDOG ESTIMATE ---------- */
 .plm-est {
+  position: relative; overflow: hidden;
   background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 100%);
-  border-radius: 14px; padding: 22px 24px; color: #fff; margin-bottom: 16px;
+  border-radius: 14px; padding: 24px 26px; color: #fff; margin-bottom: 16px;
 }
+/* Faint roofline pattern, drawn as an inline SVG rather than a photo. A
+   headshot behind a 60px number competes with it, and a remote image is one
+   more thing that can fail to load. This always renders and stays back. */
+.plm-est::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .16;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='72' viewBox='0 0 120 72'%3E%3Cg fill='none' stroke='%23f0d87a' stroke-width='1.4'%3E%3Cpath d='M0 60 L20 40 L40 60'/%3E%3Cpath d='M40 60 L60 40 L80 60'/%3E%3Cpath d='M80 60 L100 40 L120 60'/%3E%3Cpath d='M-20 24 L0 4 L20 24'/%3E%3Cpath d='M20 24 L40 4 L60 24'/%3E%3Cpath d='M60 24 L80 4 L100 24'/%3E%3Cpath d='M100 24 L120 4 L140 24'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 90% at 88% 15%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 75% 90% at 88% 15%, #000 0%, transparent 72%);
+}
+.plm-est > * { position: relative; z-index: 1; }
 .plm-est-lbl {
   font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
   color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
@@ -448,14 +461,16 @@ body.plm-locked { overflow: hidden; }
   border-radius: 10px; padding: 13px 15px; margin: 14px 0 4px;
   font-size: 13.5px; color: #e8eef8; line-height: 1.65;
 }
-.plm-est-purpose i { color: var(--gold); margin-top: 3px; font-size: 15px; }
+.plm-est-purpose i { color: var(--gold); margin-top: 3px; font-size: 15px; flex-shrink: 0; }
+.plm-est-purpose span { flex: 1; min-width: 0; }
 .plm-est-purpose b { color: #fff; }
 
 .appeal-verdict {
   display: flex; gap: 13px; align-items: flex-start; padding: 16px 18px;
   border-radius: 11px; font-size: 15px; line-height: 1.65; margin-bottom: 18px;
 }
-.appeal-verdict i { font-size: 20px; margin-top: 2px; }
+.appeal-verdict i { font-size: 20px; margin-top: 2px; flex-shrink: 0; }
+.appeal-verdict > div { flex: 1; min-width: 0; }
 .appeal-verdict.yes { background: #fdf6e3; color: #6b5514; }
 .appeal-verdict.yes i { color: var(--gold); }
 .appeal-verdict.no { background: var(--green-light); color: var(--green); }
@@ -467,6 +482,46 @@ body.plm-locked { overflow: hidden; }
   font-size: 12px; line-height: 1.65; color: #4a5568;
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
+
+/* ---------- GREENTREE MORTGAGE BANNER ---------- */
+.gt-banner { display: block; max-width: 1060px; margin: 0 auto; text-decoration: none; }
+.gt-banner-inner {
+  background: linear-gradient(120deg, #14361f, #1e6b3a 58%, #2b8a4d);
+  border-radius: 18px; padding: 30px 34px;
+  display: flex; align-items: center; gap: 26px;
+  box-shadow: 0 20px 50px rgba(16,60,32,.28);
+  border: 1px solid rgba(184,151,42,.35);
+  transition: transform .2s ease;
+}
+.gt-banner:hover .gt-banner-inner { transform: translateY(-2px); }
+.gt-photo { flex-shrink: 0; }
+.gt-photo img {
+  width: 78px; height: 78px; border-radius: 50%; object-fit: cover; object-position: center top;
+  border: 3px solid #b8972a; box-shadow: 0 4px 14px rgba(0,0,0,.3); display: block;
+}
+.gt-text { flex: 1; min-width: 0; }
+.gt-eyebrow {
+  font-size: 11.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+  color: #e6c355; margin-bottom: 6px;
+}
+.gt-headline {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(18px, 2.6vw, 24px); font-weight: 700; color: #fff; line-height: 1.25;
+}
+.gt-sub { font-size: 13px; color: #bfe0cb; margin-top: 6px; line-height: 1.6; }
+.gt-cta {
+  flex-shrink: 0; display: flex; align-items: center; gap: 8px;
+  background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
+  font-size: 14px; font-weight: 800; padding: 13px 22px; border-radius: 9px; white-space: nowrap;
+}
+.gt-disc {
+  font-size: 11.5px; color: var(--text-muted); line-height: 1.65;
+  padding: 12px 6px 0; text-align: center; max-width: 900px; margin: 0 auto;
+}
+@media (max-width: 720px) {
+  .gt-banner-inner { flex-direction: column; text-align: center; padding: 26px 22px; }
+  .gt-cta { width: 100%; justify-content: center; }
+}
 
 /* ---------- BROKERAGE ATTRIBUTION ---------- */
 .pl-brokerband {
@@ -604,7 +659,8 @@ body.plm-locked { overflow: hidden; }
   background: #eef1f5; border-radius: 9px; padding: 13px 18px; font-size: 14px; color: #1a1a2e;
   display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
 }
-.z-matches-alert i { font-size: 17px; color: var(--gold); }
+.z-matches-alert i { font-size: 17px; color: var(--gold); flex-shrink: 0; }
+.z-matches-alert span { flex: 1; min-width: 0; }
 .z-matches-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 10px; }
 .z-match-card {
   background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px;
@@ -886,6 +942,27 @@ body.plm-locked { overflow: hidden; }
         <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never claim it. <a href="anchor-estimator.html">Run the free estimator</a> and find out in about 90 seconds.</p></div>
       </div>
     </div>
+  </div>
+</section>
+
+
+<!-- GREENTREE MORTGAGE -->
+<section class="section" style="padding-top:8px;padding-bottom:34px;">
+  <div class="section-inner">
+    <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="gt-banner">
+      <div class="gt-banner-inner">
+        <div class="gt-photo">
+          <img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div class="gt-text">
+          <div class="gt-eyebrow">Greentree Mortgage &middot; John Varano, Senior Manager</div>
+          <div class="gt-headline">Know the payment before you fall in love with the house.</div>
+          <div class="gt-sub">Taxes are only half of what you pay every month. John Varano runs the loan side and will tell you what the real number looks like, including escrow, before you make a move.</div>
+        </div>
+        <div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="gt-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
+    </a>
   </div>
 </section>
 
@@ -2133,9 +2210,9 @@ body.plm-locked { overflow: hidden; }
         '<span class="plm-conf ' + cm.cls + '" title="' + cm.note + '">' + cm.txt + '</span></div>' +
       '<div class="plm-est-hero">' + money(r(argued)) + '</div>' +
       '<div class="plm-est-range">Defensible range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
-      '<div class="plm-est-purpose"><i class="fas fa-gavel"></i> ' +
-        'This is a <b>tax appeal value</b>, not a listing price. It is deliberately set at the ' +
-        'conservative end, because the number that wins in front of a county board is the one you can defend.' +
+      '<div class="plm-est-purpose"><i class="fas fa-gavel"></i>' +
+        '<span>This is a <b>tax appeal value</b>, not a listing price. It is deliberately set at the ' +
+        'conservative end, because the number that wins in front of a county board is the one you can defend.</span>' +
       '</div>' +
       '<div class="plm-est-sub">' + basis +
         ' <button class="plm-inline-why" onclick="plWhy()">How this is calculated</button></div>' +
