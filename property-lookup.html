@@ -441,6 +441,63 @@ body.plm-locked { overflow: hidden; }
   .plm-est-hero { font-size: 38px; }
 }
 
+/* ---------- TAX APPEAL FRAMING ---------- */
+.plm-est-purpose {
+  display: flex; gap: 11px; align-items: flex-start;
+  background: rgba(240,216,122,.12); border: 1px solid rgba(240,216,122,.28);
+  border-radius: 10px; padding: 13px 15px; margin: 14px 0 4px;
+  font-size: 13.5px; color: #e8eef8; line-height: 1.65;
+}
+.plm-est-purpose i { color: var(--gold); margin-top: 3px; font-size: 15px; }
+.plm-est-purpose b { color: #fff; }
+
+.appeal-verdict {
+  display: flex; gap: 13px; align-items: flex-start; padding: 16px 18px;
+  border-radius: 11px; font-size: 15px; line-height: 1.65; margin-bottom: 18px;
+}
+.appeal-verdict i { font-size: 20px; margin-top: 2px; }
+.appeal-verdict.yes { background: #fdf6e3; color: #6b5514; }
+.appeal-verdict.yes i { color: var(--gold); }
+.appeal-verdict.no { background: var(--green-light); color: var(--green); }
+.appeal-verdict.no i { color: var(--green); }
+
+/* ---------- MLS NOTICE ---------- */
+.mls-notice {
+  margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(26,58,107,.16);
+  font-size: 12px; line-height: 1.65; color: #4a5568;
+}
+.mls-notice a { color: var(--navy); font-weight: 700; }
+
+/* ---------- BROKERAGE ATTRIBUTION ---------- */
+.pl-brokerband {
+  display: flex; gap: 22px; align-items: center; flex-wrap: wrap;
+  background: #fff; border: 1px solid var(--border); border-radius: 14px;
+  padding: 20px 24px; max-width: 1060px; margin: 0 auto;
+}
+.pl-brokerband img { height: 66px; width: auto; object-fit: contain; flex-shrink: 0; }
+.pl-brokerband-txt { flex: 1; min-width: 260px; }
+.pl-brokerband-txt p { margin: 0 0 7px; font-size: 15px; line-height: 1.6; color: #3d4759; }
+.pl-brokerband-txt p:last-child { margin-bottom: 0; font-size: 14px; color: #5a6070; }
+.pl-brokerband-txt b { color: var(--navy-dark); }
+.pl-brokerband-txt a { color: var(--navy); font-weight: 700; }
+
+.plm-broker {
+  display: flex; gap: 18px; align-items: center; flex-wrap: wrap;
+  background: #f7f8fa; border: 1px solid var(--border); border-radius: 12px;
+  padding: 18px 20px; margin-bottom: 14px;
+}
+.plm-broker img { height: 54px; width: auto; object-fit: contain; flex-shrink: 0; }
+.plm-broker-lead { font-size: 15px; color: #3d4759; margin-bottom: 5px; }
+.plm-broker-lead b { color: var(--navy-dark); }
+.plm-broker-sub { font-size: 13.5px; color: #5a6070; line-height: 1.65; }
+.plm-broker-sub a { color: var(--navy); font-weight: 700; }
+
+@media (max-width: 700px) {
+  .pl-brokerband { padding: 16px; gap: 14px; }
+  .pl-brokerband img { height: 52px; }
+  .plm-broker { padding: 15px; }
+}
+
 .plm-conf {
   display: inline-flex; align-items: center; gap: 6px; margin-left: 10px;
   font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
@@ -708,9 +765,9 @@ body.plm-locked { overflow: hidden; }
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
   <div class="pl-hero-inner">
-    <h1>What are the property taxes on<br><span class="pl-type" id="pl-type">any NJ home</span>?</h1>
+    <h1>Are you overpaying property tax on<br><span class="pl-type" id="pl-type">any NJ home</span>?</h1>
     <p class="pl-hero-sub">
-      Type an address. Get the assessed value, last year&rsquo;s tax bill, block and lot, the actual lot lines on a map, and what it would net you to sell. Straight from New Jersey&rsquo;s official assessment records.
+      Type an address. See the assessed value, last year&rsquo;s tax bill, block and lot, the real lot lines, and our own read on whether that assessment is defensible. Built from New Jersey&rsquo;s official records.
     </p>
     <div class="pl-search-card">
       <div class="pl-search-row">
@@ -731,8 +788,25 @@ body.plm-locked { overflow: hidden; }
   </div>
 </div>
 
+<!-- BROKERAGE ATTRIBUTION -->
+<section class="section" style="padding-top:30px;padding-bottom:6px;">
+  <div class="section-inner">
+    <div class="pl-brokerband">
+      <img src="opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
+      <div class="pl-brokerband-txt">
+        <p><b>In partnership with Opus Elite Real Estate.</b> John Scafide, Licensed New Jersey Real Estate Agent
+        #2079591, The McKenty Team at Opus Elite Real Estate.</p>
+        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
+        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
+        For full sales information on this and other properties, visit
+        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">johnscafide.opuselitesj.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- STATUS STRIP -->
-<section class="section" style="padding-top:38px;padding-bottom:10px;">
+<section class="section" style="padding-top:20px;padding-bottom:10px;">
   <div class="section-inner">
     <div id="pl-inline" class="pl-result">
       <div class="pl-state">
@@ -862,6 +936,8 @@ body.plm-locked { overflow: hidden; }
       bio: 'A corporate background managing complex packaging and label supply chains as a procurement buyer means <strong>negotiation and contracts are second nature</strong>. Now full time in the South Jersey market, Heather brings that same edge to every client, buying or selling.'
     }
   };
+
+  var IDX_URL = 'https://johnscafide.opuselitesj.com/index.php?advanced=1';
 
   var activeAgentKey = 'john';
   var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
@@ -2012,64 +2088,189 @@ body.plm-locked { overflow: hidden; }
 
     if (!v) {
       box.innerHTML =
-        '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation</div>' +
+        '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value</div>' +
         '<div class="plm-est-val small">Not enough to go on yet</div>' +
-        '<div class="plm-est-sub">Converting an assessment into a sale price needs this town\u2019s equalization ratio, and I do not have a reliable one on file for ' +
-        esc(current.town || 'this municipality') + ' yet. Rather than guess, I would rather tell you. ' +
-        '<a href="#" onclick="plOpenForm(\'value\');return false;">Ask me directly</a> and I will run live comps on it.</div>';
+        '<div class="plm-est-sub">Working out a defensible value for this property needs recorded sales nearby, and there are not enough on file for ' +
+        esc(current.town || 'this town') + ' yet. Rather than invent a number, I would rather tell you. ' +
+        '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Ask me to look at it by hand</a>.</div>';
       var eqx = el('plm-equity');
-      if (eqx) eqx.innerHTML = '<div class="plm-kpi-n">-</div><div class="plm-kpi-l">Est. gain since sale</div>';
+      if (eqx) eqx.innerHTML = '<div class="plm-kpi-n">-</div><div class="plm-kpi-l">Assessment gap</div>';
       return;
     }
 
     var r = function (n) { return Math.round(n / 1000) * 1000; };
     var cm = CONF_META[v.confidence] || CONF_META.Low;
-    var trueRate = tax && v.mid ? (tax / v.mid) * 100 : null;
+
+    // ── the appeal frame ──
+    // Headline is deliberately the conservative end. For a tax appeal you are
+    // arguing what the property is defensibly worth, not what a listing agent
+    // would hope for, and a number you can stand behind in front of a county
+    // board is worth more than an optimistic one.
+    var lowEnd  = v.lo;
+    var midEnd  = v.mid;
+    var argued  = (lowEnd + midEnd) / 2;          // what we would argue
+
+    // what the town's own assessment implies the property is worth
+    var implied = (v.ratio && v.ratio > 0) ? assessed / v.ratio : null;
+    var gap     = implied ? implied - argued : null;
+    var gapPct  = (implied && argued) ? (implied - argued) / argued : null;
+
+    current.appeal = { argued: argued, low: lowEnd, mid: midEnd, implied: implied };
 
     var basis =
       (v.ratioSource === 'live'
-        ? 'Measured from <b>' + v.ratioN + '</b> homes in <b>' +
-          esc(v.ratioScope === 'county' ? (current.county + ' County') : current.town) + '</b> that actually sold in the last ' +
-          Math.round(v.ratioMonths / 12 * 10) / 10 + ' years, each one carried forward to today\u2019s prices' +
-          (v.appreciation != null && Math.abs(v.appreciation) > 0.005
-            ? ' at the <b>' + (v.appreciation * 100).toFixed(1) + '% a year</b> this town has actually been moving'
-            : '') +
-          '. On that basis assessments here run at <b>' + (v.ratio * 100).toFixed(1) + '%</b> of market, and this assessment divided by that is the number.'
+        ? 'Built from <b>' + v.ratioN + '</b> homes in <b>' +
+          esc(v.ratioScope === 'county' ? (current.county + ' County') : current.town) +
+          '</b> that actually sold recently, each carried forward to today\u2019s prices. On that evidence assessments here run at <b>' +
+          (v.ratio * 100).toFixed(1) + '%</b> of what homes really trade for.'
         : v.ratioSource === 'official'
-        ? '<b>' + esc(current.town) + '</b> assesses at <b>' + (v.ratio * 100).toFixed(2) + '%</b> of market value per the official state ratio for ' +
-          v.ratioYear + '. Not enough recorded sales nearby to measure a fresher one, so this uses the published figure' +
-          (v.yearsStale > 0.5
-            ? ' and carries it forward ' + v.yearsStale.toFixed(1) + ' years at <b>' + (v.appreciation * 100).toFixed(1) +
-              '% a year</b>, since that ratio is priced to early ' + (v.ratioYear - 1) + '. Expect this to run conservative.'
-            : '.')
-        : 'No published state ratio on file for <b>' + esc(current.town) + '</b> yet, so this derives one from recorded sales. Rougher than usual.') +
-
-      (v.adjNotes && v.adjNotes.length
-        ? ' Nudged for this home being ' + v.adjNotes.join(' and ') + '.'
-        : '') +
-      (v.n ? ' Cross checked against <b>' + v.n + '</b> nearby recorded sales.' : '');
+        ? 'Based on the official state equalization ratio of <b>' + (v.ratio * 100).toFixed(2) + '%</b> for <b>' +
+          esc(current.town) + '</b>, tax year ' + v.ratioYear + '. That is the same figure a county tax board applies.'
+        : 'Derived from recorded sales, since no published state ratio is on file for <b>' + esc(current.town) + '</b> yet.');
 
     box.innerHTML =
-      '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation' +
+      '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value' +
         '<span class="plm-conf ' + cm.cls + '" title="' + cm.note + '">' + cm.txt + '</span></div>' +
-      '<div class="plm-est-hero">' + money(r(v.mid)) + '</div>' +
-      '<div class="plm-est-range">Likely range ' + money(r(v.lo)) + ' to ' + money(r(v.hi)) + '</div>' +
+      '<div class="plm-est-hero">' + money(r(argued)) + '</div>' +
+      '<div class="plm-est-range">Defensible range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
+      '<div class="plm-est-purpose"><i class="fas fa-gavel"></i> ' +
+        'This is a <b>tax appeal value</b>, not a listing price. It is deliberately set at the ' +
+        'conservative end, because the number that wins in front of a county board is the one you can defend.' +
+      '</div>' +
       '<div class="plm-est-sub">' + basis +
         ' <button class="plm-inline-why" onclick="plWhy()">How this is calculated</button></div>' +
-      (trueRate ? '<div class="plm-est-rate">Tax as a share of estimated market value: <b>' + trueRate.toFixed(2) + '%</b></div>' : '') +
-      '<div class="plm-est-fine">An estimate, never a comp and never an appraisal. It has not seen your kitchen, your roof, or your finished basement, and public sale records lag about a year. ' +
-        '<a href="#" onclick="plOpenForm(\'value\');return false;">Get the real number</a>.</div>';
+      (implied
+        ? '<div class="plm-est-rate">Your assessment of <b>' + money(assessed) + '</b> implies the town values this property at <b>' +
+          money(r(implied)) + '</b>' +
+          (gapPct && gapPct > 0.05
+            ? ', which is <b style="color:#f0a0a0">' + Math.round(gapPct * 100) + '% above</b> what the evidence supports.'
+            : gapPct && gapPct < -0.05
+            ? ', which is <b style="color:#7ee0a8">below</b> what the evidence supports. Good news for your bill.'
+            : ', close to what the evidence supports.') + '</div>'
+        : '') +
+      '<div class="plm-est-fine">An estimate for screening a property tax appeal. It is built from public assessment and sale records and has not seen inside the house. ' +
+        'It is not an appraisal and not a listing price. ' +
+        '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Have me check it properly</a>.</div>';
 
     var eq = el('plm-equity');
-    if (eq && current.sale > 1000) {
-      var gain = v.mid - current.sale;
-      eq.innerHTML = '<div class="plm-kpi-n" style="color:' + (gain >= 0 ? 'var(--green)' : 'var(--red)') + '">' +
-        (gain >= 0 ? '+' : '') + money(gain) + '</div>' +
-        '<div class="plm-kpi-l">Est. gain since ' + current.deedYear + '</div>';
+    if (eq && implied) {
+      var d2 = implied - argued;
+      eq.innerHTML = '<div class="plm-kpi-n" style="color:' + (d2 > 0 ? 'var(--red)' : 'var(--green)') + '">' +
+        (d2 > 0 ? '+' : '') + money(d2) + '</div><div class="plm-kpi-l">Town vs evidence</div>';
     }
 
+    paintAppealCase(assessed, tax, v, current.comps);
     if (v.drivers && v.drivers.length) paintDrivers(v);
   }
+
+  // ══════════════════════════════════════════════
+  // THE APPEAL CASE
+  // ══════════════════════════════════════════════
+  function paintAppealCase(assessed, tax, v, comps) {
+    var host = el('plm-score-sec');
+    if (!host) return;
+
+    // The headline value is derived from the assessment, so testing the
+    // assessment against it proves nothing. An appeal needs evidence that did
+    // not come from the assessment. Two independent anchors exist in public
+    // data, and we use whichever we have.
+    //
+    //   A. This property's own last recorded sale, carried forward at the
+    //      appreciation measured in its town. Strongest evidence there is.
+    //   B. What comparable neighbours are assessed at. This is the argument
+    //      homeowners already make out loud: the house next door pays less.
+    var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
+    var thisYear = new Date().getFullYear();
+    var evidence = [], anchors = [];
+
+    if (current.sale > 1000 && current.deedYear && (thisYear - current.deedYear) <= 12) {
+      var yrs = thisYear - current.deedYear;
+      var carried = current.sale * Math.pow(1 + appr, yrs);
+      evidence.push({ kind: 'sale', value: carried,
+        label: 'Sold for ' + money(current.sale) + ' in ' + current.deedYear +
+               ', carried forward ' + yrs + ' years at ' + (appr * 100).toFixed(1) + '% a year' });
+      anchors.push(carried);
+    }
+
+    var peerMed = null, peerN = 0;
+    if (comps && comps.length >= 8) {
+      var subjBuilt = +current.yearBuilt || 0, subjAcres = +current.acres || 0;
+      var peers = comps.filter(function (c) {
+        if (!c.assessed || c.assessed < 10000) return false;
+        if (subjBuilt && c.built && Math.abs(c.built - subjBuilt) > 18) return false;
+        if (subjAcres && c.acres && (c.acres < subjAcres * 0.5 || c.acres > subjAcres * 2)) return false;
+        return true;
+      });
+      if (peers.length < 8) peers = comps.filter(function (c) { return c.assessed > 10000; });
+      if (peers.length >= 8) {
+        peerMed = median(peers.map(function (c) { return c.assessed; }));
+        peerN = peers.length;
+      }
+    }
+
+    if (!anchors.length && peerMed === null) { host.innerHTML = ''; return; }
+
+    // Where the assessment SHOULD sit, on independent evidence
+    var target = null, basis = '';
+    if (anchors.length) {
+      target = median(anchors) * v.ratio;
+      basis = 'its own sale history';
+    } else {
+      target = peerMed;
+      basis = 'what comparable neighbours are assessed at';
+    }
+    if (peerMed !== null && anchors.length) target = Math.max(target, Math.min(peerMed * 1.25, target * 1.25));
+
+    var limit = target * 1.15;                    // Chapter 123 cushion
+    var overBy = assessed - limit;
+    var hasCase = overBy > 0;
+    var effRate = (tax && assessed) ? tax / assessed : null;
+    var saving = (hasCase && effRate) ? (assessed - target) * effRate : null;
+
+    current.appeal = Object.assign(current.appeal || {}, {
+      target: target, limit: limit, overBy: overBy, hasCase: hasCase,
+      saving: saving, peerMed: peerMed, peerN: peerN, basis: basis
+    });
+
+    var rows = '<div class="score-rows">' +
+      '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
+      evidence.map(function (e) {
+        return '<div class="score-row"><span>' + esc(e.label) + '</span><b>' + money(e.value) + '</b></div>';
+      }).join('') +
+      (peerMed !== null
+        ? '<div class="score-row"><span>Median assessment of ' + peerN + ' comparable homes nearby</span><b>' + money(peerMed) + '</b></div>'
+        : '') +
+      '<div class="score-row"><span>Assessment the evidence supports</span><b>' + money(target) + '</b></div>' +
+      '<div class="score-row' + (hasCase ? ' over' : '') + '"><span>Chapter 123 upper limit</span><b>' + money(limit) + '</b></div>' +
+      (hasCase ? '<div class="score-row over"><span>Assessed above that limit by</span><b>' + money(overBy) + '</b></div>' : '') +
+      '</div>';
+
+    host.innerHTML =
+      '<h3 class="plm-sec-h">Do you have a tax appeal?</h3>' +
+      '<p class="plm-sec-s">Tested against evidence that did not come from the assessment itself: ' + esc(basis) +
+      '. New Jersey gives municipalities a 15 percent cushion under Chapter 123. Above it, the county board is directed to reduce the assessment.</p>' +
+      '<div class="pl-card">' +
+        (hasCase
+          ? '<div class="appeal-verdict yes"><i class="fas fa-scale-unbalanced-flip"></i><div>' +
+            '<b>Worth a real look.</b> On the public evidence this assessment sits ' + money(overBy) +
+            ' above the Chapter 123 limit.</div></div>'
+          : '<div class="appeal-verdict no"><i class="fas fa-scale-balanced"></i><div>' +
+            '<b>Probably not, on these numbers.</b> The assessment falls inside the cushion New Jersey allows. ' +
+            'Not a no forever, since condition or a recent nearby sale can change it.</div></div>') +
+        rows +
+        (saving && saving > 150
+          ? '<div class="score-save">' +
+              '<div class="score-save-n">' + money(saving) + '<span>/yr</span></div>' +
+              '<div class="score-save-l">Estimated annual saving if the assessment came down to ' + money(target) +
+                '. About <b>' + money(saving * 5) + '</b> over five years.</div>' +
+              '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">Have John screen this appeal</button>' +
+            '</div>'
+          : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'appeal\')">Have John double check this</button>') +
+      '</div>' +
+      '<div class="score-fine">Screening only. A filed appeal needs current comparable sales, the municipality\u2019s certified ratio for the tax year, and often an interior inspection. ' +
+      'Deadlines are generally April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you when a case is not worth filing.</div>';
+  }
+
 
   // the handful of sales that actually moved the number
   function paintDrivers(v) {
@@ -2095,33 +2296,39 @@ body.plm-locked { overflow: hidden; }
   }
 
   window.plWhy = function () {
-    var v = current.valuation;
+    var v = current.valuation, a = current.appeal;
     var body =
-      '<p><b>Assessed value</b> is the number your town uses to calculate your tax bill. It is not what your home is worth. ' +
-      'Most New Jersey towns assess at some fraction of real market value, and that fraction drifts every year until the town revalues. ' +
-      'Two identical houses in different towns can carry wildly different assessments and be worth exactly the same.</p>' +
+      '<p><b>Assessed value</b> is the number your town uses to calculate your tax bill. It is not what your home would sell for. ' +
+      'Most New Jersey towns assess at some fraction of real market value, and that fraction drifts every year until the town revalues.</p>' +
 
-      '<p><b>The Watchdog Valuation</b> is a comps estimate. The catch with public data is that it carries no living square footage, ' +
-      'no beds, no baths, no condition, so you cannot compare raw prices between houses. What it does carry is the assessment, ' +
-      'and the assessor already did the work of normalizing for size and quality. So instead of comparing prices we compare each ' +
-      'nearby sale\u2019s <b>price divided by its assessment</b>, then apply a weighted version of that multiplier to this property.</p>' +
+      '<p><b>The Watchdog Tax Value</b> is our estimate of what this property is defensibly worth for tax purposes. ' +
+      'It is built from what comparable homes in your town actually sold for, measured against their assessments, ' +
+      'so it speaks the same language a county tax board does.</p>' +
 
-      '<p>Comps are weighted for how close they are, how recent, and how similar in vintage, lot size, and assessment. ' +
-      'Dollar deeds, family transfers, and distressed sales get filtered out. Older sales are adjusted forward using the price ' +
-      'movement measured in that same neighborhood.</p>' +
+      '<p><b>Why it sits at the conservative end.</b> This is not a listing price and it is not trying to flatter you. ' +
+      'In an appeal you have to defend the number, and the county attorney will push back on an optimistic one. ' +
+      'A value you can stand behind is worth far more than a high one you cannot. If you are thinking about selling ' +
+      'rather than appealing, the number you want is different, and I will run it for you.</p>' +
 
-      (v && v.method === 'comps'
-        ? '<p>For this address it used <b>' + v.n + '</b> sales' + (v.newest ? ' through ' + v.newest : '') +
-          ', with a confidence of <b>' + v.confidence.toLowerCase() + '</b>.</p>'
-        : v ? '<p>This one fell back to the town ratio method because there were not enough nearby sales for a comps estimate.</p>' : '') +
+      '<p><b>How the appeal test works.</b> New Jersey\u2019s Chapter 123 rule says your assessment survives if it sits at or below ' +
+      'true market value times your town\u2019s equalization ratio times 1.15. That 15 percent is the cushion municipalities get. ' +
+      'Above it, the county board is directed to reduce the assessment.</p>' +
 
-      '<p><b>Honest limits.</b> Tested against simulated towns where the true value was known, it lands within about 5 percent ' +
-      'half the time and the published range contains the true value roughly 85 to 90 percent of the time. It is blind to whether ' +
-      'you renovated the kitchen or the roof is shot. Recorded sales lag about a year, so in a fast market it runs behind. ' +
-      'When the data is too thin it refuses to give a number rather than guess.</p>' +
+      '<p><b>Why the appeal test uses different evidence.</b> The headline value above is worked out from your assessment and your ' +
+      'town\u2019s ratio, so testing your assessment against it would just be checking a number against itself. The appeal section ' +
+      'instead uses evidence that came from somewhere else entirely: your own last recorded sale carried forward, and what ' +
+      'comparable neighbours are assessed at. That is the argument that actually holds up.</p>' +
 
-      '<p>It is a starting point for a conversation. It is not an appraisal, not a comp, and not a listing price.</p>';
-    plModalNote('How the Watchdog Valuation works', body);
+      (v && a
+        ? '<p>For this property: the evidence supports an assessment of ' +
+          (a.target ? money(a.target) : 'n/a') + ', with a Chapter 123 upper limit of ' +
+          (a.limit ? money(a.limit) : 'n/a') + '. The current assessment is ' + money(current.assessed) + '.</p>'
+        : '') +
+
+      '<p><b>What it cannot see.</b> Condition, upgrades, a finished basement, a failing roof, or anything else behind the front door. ' +
+      'Recorded sales also lag by roughly a year. This is a screening tool to tell you whether an appeal is worth a closer look, ' +
+      'not an appraisal and not a substitute for one.</p>';
+    plModalNote('How the Watchdog Tax Value works', body);
   };
 
   window.plModalNote = function (title, html) {
@@ -2569,15 +2776,20 @@ body.plm-locked { overflow: hidden; }
         (d.note ? '<br>' + esc(d.note) : '') +
         (d.office ? '<br><span style="font-size:12.5px;opacity:.8">Listed by ' + esc(d.office) + '</span>' : '') +
         (d.url ? '<br><a href="' + esc(d.url) + '">See the listing</a>' : '') +
-        '<br><a href="#" onclick="plOpenForm(\'buy\');return false;"><b>Ask about this listing</b></a>' +
+        '<div class="mls-notice">' +
+          'If this property is for sale and listed by a licensed real estate agent, this is not a direct solicitation of business. ' +
+          'Listing information is provided for reference only and may not reflect current status. ' +
+          'For full sales information on this and other properties, visit ' +
+          '<a href="' + IDX_URL + '" target="_blank" rel="noopener">John Scafide, Realtor, serving New Jersey</a>.' +
+        '</div>' +
         '</div></div>' + alert;
     }
 
     el('plm-head').innerHTML =
       '<div id="plm-estimate" class="plm-est loading">' +
-        '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Valuation</div>' +
-        '<div class="plm-est-val">Pulling nearby sales<span class="plm-dots"></span></div>' +
-        '<div class="plm-est-sub">Finding recorded sales around this address and weighting them for distance, recency, and similarity.</div>' +
+        '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value</div>' +
+        '<div class="plm-est-val">Checking your assessment<span class="plm-dots"></span></div>' +
+        '<div class="plm-est-sub">Measuring what homes in your town actually sell for against what they are assessed at.</div>' +
       '</div>' +
       '<div class="plm-assessed">' +
         '<div class="plm-assessed-n">' + (assessed ? money(assessed) : 'None on file') + '</div>' +
@@ -2686,6 +2898,17 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-sec">' + buildAppeal() + '</div>' +
 
+      '<div class="plm-broker">' +
+        '<img src="opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'">' +
+        '<div>' +
+          '<div class="plm-broker-lead">In partnership with <b>Opus Elite Real Estate</b></div>' +
+          '<div class="plm-broker-sub">John Scafide, Licensed NJ Real Estate Agent #2079591, The McKenty Team at Opus Elite Real Estate. ' +
+          'This site provides property tax information. If a property shown here is for sale and listed by a licensed real estate agent, ' +
+          'nothing on this page is intended as a direct solicitation of business. ' +
+          'For sales information on this and other properties, visit <a href="' + IDX_URL + '" target="_blank" rel="noopener">johnscafide.opuselitesj.com</a>.</div>' +
+        '</div>' +
+      '</div>' +
+
       '<div class="plm-note">' +
         '<strong>About this data.</strong> New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use, refreshed about once a year. Owner names are redacted under Daniel\u2019s Law. The tax figure is the prior year billed amount, not a current year estimate. ' +
         'Listing status comes from public records and my own listings file, not from the MLS, so a home shown as off market could still be listed somewhere. ' +
@@ -2730,9 +2953,6 @@ body.plm-locked { overflow: hidden; }
       current.valuation = val;
       paintValuation(current.valuation, assessed, tax, ratio);
 
-      var sc = watchdogScore(assessed, current.valuation, comps);
-      current.score = sc;
-      paintScore(sc, tax, assessed);
       paintTimeline(current.valuation);
       paintDiag(subject, comps, current.valuation, current.town);
     });
