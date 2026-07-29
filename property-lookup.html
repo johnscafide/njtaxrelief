@@ -263,8 +263,14 @@
 
 .plm-price { font-size: 40px; font-weight: 800; color: #0e2248; letter-spacing: -.025em; line-height: 1; }
 .plm-price-lbl { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #5a6070; margin-top: 8px; }
-.plm-addr { font-size: 19px; color: #1a1a2e; margin-top: 12px; font-weight: 500; }
-.plm-addr span { color: #5a6070; font-weight: 400; }
+.plm-addr {
+  font-size: clamp(24px, 3.4vw, 34px); color: #0e2248; margin-top: 16px;
+  font-weight: 800; letter-spacing: -.02em; line-height: 1.15;
+}
+.plm-addr span {
+  display: block; font-size: 16px; color: #5a6070; font-weight: 600;
+  letter-spacing: 0; margin-top: 6px;
+}
 
 .plm-chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 4px; }
 .plm-fchip {
@@ -482,6 +488,114 @@ body.plm-locked { overflow: hidden; }
   font-size: 12px; line-height: 1.65; color: #4a5568;
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
+
+/* ---------- HOW WE VALUE GRID ---------- */
+.hv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; }
+.hv-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
+.hv-visual { background: #f6f8fc; border-bottom: 1px solid var(--border); padding: 22px 20px; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 9px; }
+.hv-body { padding: 20px 22px 22px; }
+.hv-body h3 { font-size: 17px; font-weight: 800; color: #0e2248; margin: 0 0 7px; }
+.hv-body p { font-size: 14px; color: #5a6070; line-height: 1.65; margin: 0; }
+.hv-card-warn .hv-visual { background: #fdf9ef; }
+
+.hv-bar-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.hv-bar-lbl { width: 84px; color: #5a6070; flex-shrink: 0; }
+.hv-bar { flex: 1; height: 14px; background: #e4e9f2; border-radius: 99px; overflow: hidden; }
+.hv-bar i { display: block; height: 100%; background: var(--navy); border-radius: 99px; }
+.hv-bar i.alt { background: var(--gold); }
+.hv-bar-row b { width: 46px; text-align: right; color: #0e2248; font-variant-numeric: tabular-nums; }
+.hv-ratio { align-self: center; font-size: 12px; font-weight: 800; color: #7a6417; background: #fbf3dc; padding: 4px 12px; border-radius: 99px; margin-top: 4px; }
+
+.hv-sales { display: grid; gap: 6px; }
+.hv-sale { display: flex; justify-content: space-between; font-size: 12.5px; background: #fff; border: 1px solid var(--border); border-radius: 7px; padding: 7px 11px; }
+.hv-sale b { color: #0e2248; font-variant-numeric: tabular-nums; }
+.hv-sale.muted { opacity: .5; text-decoration: line-through; }
+.hv-sale.muted i { font-style: normal; font-size: 10.5px; color: var(--red); }
+.hv-strike { align-self: center; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; color: var(--red); }
+
+.hv-v3 svg { width: 100%; height: auto; display: block; }
+.hv-caption { text-align: center; font-size: 12px; color: #5a6070; }
+
+.hv-scale { display: flex; align-items: center; gap: 12px; }
+.hv-scale-side { flex: 1; text-align: center; background: #fff; border: 1px solid var(--border); border-radius: 9px; padding: 11px 8px; }
+.hv-scale-side span { display: block; font-size: 11.5px; color: #5a6070; margin-bottom: 3px; }
+.hv-scale-side b { font-size: 17px; color: #0e2248; }
+.hv-scale-side b.over { color: var(--red); }
+.hv-scale-mid { color: var(--gold); font-size: 20px; }
+.hv-flag { align-self: center; font-size: 11.5px; font-weight: 800; color: #6b5514; background: #fbf3dc; padding: 4px 12px; border-radius: 99px; }
+
+.hv-conf { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #1a1a2e; }
+.hv-conf em { font-style: normal; font-weight: 400; font-size: 12px; color: #5a6070; margin-left: auto; }
+.hv-conf .dot { width: 9px; height: 9px; border-radius: 50%; background: #c3cbdb; flex-shrink: 0; }
+.hv-conf .dot.hi { background: #2e7d52; }
+.hv-conf .dot.md { background: var(--gold); }
+.hv-conf .dot.lo { background: #8a93a6; }
+.hv-conf.none { opacity: .65; }
+
+.hv-blind { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #6b5514; }
+.hv-blind i { width: 20px; text-align: center; opacity: .7; }
+
+/* ---------- MORTGAGE CALCULATOR ---------- */
+.mtg-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #1e6b3a; margin-bottom: 6px; }
+.mtg-card { border-color: #bfe0cb; }
+.mtg-grid { display: grid; grid-template-columns: 1fr 300px; gap: 26px; align-items: start; }
+.mtg-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 11px; }
+.mtg-row label { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+.mtg-out { background: linear-gradient(150deg, #14361f, #1e6b3a); border-radius: 12px; padding: 22px; color: #fff; }
+.mtg-total { font-size: 34px; font-weight: 800; letter-spacing: -.02em; }
+.mtg-total-lbl { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #bfe0cb; margin-top: 4px; }
+.mtg-breakdown { margin-top: 16px; }
+.mtg-line { display: flex; justify-content: space-between; font-size: 13px; color: #cfe6d8; padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+.mtg-line b { color: #fff; font-variant-numeric: tabular-nums; }
+.mtg-taxshare { font-size: 12.5px; color: #cfe6d8; line-height: 1.6; margin-top: 13px; background: rgba(255,255,255,.09); padding: 11px 13px; border-radius: 9px; }
+.mtg-taxshare b { color: #f0d87a; }
+.mtg-taxshare i { color: #f0d87a; }
+.mtg-btn { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; padding: 14px; border-radius: 9px; background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; font-size: 14.5px; font-weight: 800; text-decoration: none; }
+.mtg-btn:hover { filter: brightness(1.07); }
+.mtg-disc { font-size: 11.5px; color: var(--text-muted); line-height: 1.65; margin-top: 16px; padding-top: 14px; border-top: 1px solid #eef0f5; }
+
+/* ---------- PREAPPROVAL ---------- */
+.pre-wrap { background: #fff; border: 1px solid #bfe0cb; border-radius: 14px; padding: 26px; display: grid; grid-template-columns: 132px 1fr; gap: 24px; align-items: start; }
+.pre-photo img { width: 132px; height: 132px; border-radius: 12px; object-fit: cover; object-position: center top; border: 3px solid #1e6b3a; display: block; }
+.pre-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #1e6b3a; margin-bottom: 6px; }
+.pre-body h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #0e2248; margin: 0 0 9px; }
+.pre-body p { font-size: 14.5px; color: #5a6070; line-height: 1.7; margin: 0 0 14px; }
+.pre-list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 8px; }
+.pre-list li { display: flex; gap: 10px; font-size: 14px; color: #3d4759; line-height: 1.5; }
+.pre-list i { color: #1e6b3a; margin-top: 3px; flex-shrink: 0; }
+.pre-cta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.pre-btn { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(135deg, #2b8a4d, #1e6b3a); color: #fff; font-size: 15px; font-weight: 800; padding: 14px 24px; border-radius: 9px; text-decoration: none; }
+.pre-btn:hover { filter: brightness(1.08); }
+.pre-note { font-size: 12.5px; color: #8a93a6; }
+.pre-disc { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-muted); line-height: 1.65; padding-top: 16px; border-top: 1px solid #eef0f5; }
+
+/* ---------- PROPOSAL ---------- */
+.plm-proposal { background: rgba(240,216,122,.13); border: 1px solid rgba(240,216,122,.3); border-radius: 11px; padding: 15px; margin-bottom: 13px; }
+.plm-proposal-top { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #f0d87a; margin-bottom: 10px; }
+.plm-proposal-btn { width: 100%; padding: 13px; border: none; border-radius: 9px; background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; font-size: 15px; font-weight: 800; font-family: inherit; cursor: pointer; }
+.plm-proposal-btn:hover { filter: brightness(1.07); }
+.plm-proposal-fine { font-size: 11.5px; color: #a9bcd6; line-height: 1.55; margin-top: 9px; }
+.prop-agent { display: flex; gap: 14px; align-items: center; background: #f4f6fa; border-radius: 11px; padding: 14px; margin-bottom: 14px; }
+.prop-agent img { width: 54px; height: 54px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); flex-shrink: 0; }
+.prop-promise { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; background: var(--green-light); border-radius: 9px; padding: 13px 15px; font-size: 13px; color: var(--green); line-height: 1.6; }
+.prop-promise i { margin-top: 3px; flex-shrink: 0; }
+.prop-promise span { flex: 1; min-width: 0; }
+
+/* ---------- CREDENTIALS ---------- */
+.plm-creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,.14); border-radius: 10px; overflow: hidden; margin-bottom: 13px; }
+.plm-cred { background: rgba(255,255,255,.06); padding: 11px 6px; text-align: center; }
+.plm-cred b { display: block; font-size: 16px; font-weight: 800; color: #fff; }
+.plm-cred span { font-size: 10.5px; color: #a9bcd6; }
+.plm-trust { display: grid; gap: 7px; margin-bottom: 14px; }
+.plm-trust div { display: flex; gap: 9px; align-items: center; font-size: 12px; color: #cdd9ec; }
+.plm-trust i { color: var(--gold); width: 14px; text-align: center; flex-shrink: 0; }
+
+@media (max-width: 860px) {
+  .mtg-grid { grid-template-columns: 1fr; }
+  .pre-wrap { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .pre-list li { text-align: left; }
+  .pre-cta { justify-content: center; }
+}
 
 /* ---------- GREENTREE MORTGAGE BANNER ---------- */
 .gt-banner { display: block; max-width: 1060px; margin: 0 auto; text-decoration: none; }
@@ -874,30 +988,111 @@ body.plm-locked { overflow: hidden; }
   </div>
 </section>
 
-<!-- EXPLAINER -->
+<!-- HOW WE VALUE -->
 <section class="section section-alt">
   <div class="section-inner">
-    <div style="text-align:center;max-width:680px;margin:0 auto 34px;">
-      <h2 class="section-title">Reading your assessment</h2>
-      <p class="section-subtitle">Three numbers decide your tax bill. Most people only ever see the last one.</p>
+    <div style="text-align:center;max-width:720px;margin:0 auto 34px;">
+      <div class="section-label">Watchdog Tax Value</div>
+      <h2 class="section-title">How we work out what your home <span class="gold-text">should</span> be assessed at</h2>
+      <p class="section-subtitle">Your tax bill is decided by a number most people never look at. Here is exactly where ours comes from, and what it can and cannot see.</p>
     </div>
-    <div class="info-grid">
-      <div class="info-card">
-        <h3><i class="fas fa-building-columns" style="color:var(--navy);"></i> Assessed value</h3>
-        <p>What your municipality says your property is worth for tax purposes. Not necessarily what the home would sell for. In towns that have not revalued in years, it can be far off.</p>
+
+    <div class="hv-grid">
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v1">
+          <div class="hv-bar-row"><span class="hv-bar-lbl">Market value</span><div class="hv-bar"><i style="width:100%"></i></div><b>$385k</b></div>
+          <div class="hv-bar-row"><span class="hv-bar-lbl">Assessed</span><div class="hv-bar"><i class="alt" style="width:58%"></i></div><b>$223k</b></div>
+          <div class="hv-ratio">58% ratio</div>
+        </div>
+        <div class="hv-body">
+          <h3>The equalization ratio</h3>
+          <p>Almost no New Jersey town assesses at full market value. The state publishes a ratio for every municipality each year. Divide the assessment by it and you get the value your town is implying.</p>
+        </div>
       </div>
-      <div class="info-card">
-        <h3><i class="fas fa-percent" style="color:var(--gold);"></i> The tax rate</h3>
-        <p>Set every year by your municipality, county, and school district combined. Your assessment stays flat while this moves, which is why your bill climbs without anything changing about your house.</p>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v2">
+          <div class="hv-sales">
+            <div class="hv-sale"><span>4 Oak Ln</span><b>$362,000</b></div>
+            <div class="hv-sale"><span>19 Birch Ct</span><b>$341,500</b></div>
+            <div class="hv-sale"><span>7 Maple Dr</span><b>$377,900</b></div>
+            <div class="hv-sale muted"><span>2 Pine Rd</span><b>$1 &nbsp;<i>family transfer</i></b></div>
+          </div>
+          <div class="hv-strike">filtered out</div>
+        </div>
+        <div class="hv-body">
+          <h3>Real recorded sales</h3>
+          <p>We read what homes in your town actually closed at, straight from recorded deeds. Dollar deeds, estate transfers, and distressed sales get filtered out before anything is averaged.</p>
+        </div>
       </div>
-      <div class="info-card">
-        <h3><i class="fas fa-scale-balanced" style="color:var(--green);"></i> The equalization ratio</h3>
-        <p>The state&rsquo;s measure of how far your town&rsquo;s assessments have drifted from real market values. Divide your assessment by the ratio and you get the market value your town is implying.</p>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v3">
+          <svg viewBox="0 0 200 96" role="img" aria-label="Prices carried forward to today">
+            <defs><linearGradient id="hvg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b8972a" stop-opacity=".38"/><stop offset="100%" stop-color="#b8972a" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M10 78 L60 66 L110 48 L160 26 L190 18 L190 88 L10 88 Z" fill="url(#hvg)"/>
+            <path d="M10 78 L60 66 L110 48 L160 26 L190 18" fill="none" stroke="#b8972a" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="190" cy="18" r="5" fill="#0e2248" stroke="#fff" stroke-width="2.5"/>
+            <text x="10" y="94" font-size="8.5" fill="#8a93a6">2022</text>
+            <text x="176" y="94" font-size="8.5" fill="#8a93a6">now</text>
+          </svg>
+          <div class="hv-caption">Every sale carried forward to today</div>
+        </div>
+        <div class="hv-body">
+          <h3>Adjusted for time</h3>
+          <p>A sale from eighteen months ago is priced to eighteen months ago. We measure how fast your town has actually moved and bring every comparable sale forward to today before using it.</p>
+        </div>
       </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v4">
+          <div class="hv-scale">
+            <div class="hv-scale-side"><span>Your assessment</span><b class="over">$240k</b></div>
+            <div class="hv-scale-mid"><i class="fas fa-scale-unbalanced-flip"></i></div>
+            <div class="hv-scale-side"><span>Neighbours</span><b>$170k</b></div>
+          </div>
+          <div class="hv-flag">Chapter 123 case</div>
+        </div>
+        <div class="hv-body">
+          <h3>Compared to your neighbours</h3>
+          <p>The appeal test uses evidence that did not come from your assessment: your own last sale, and what genuinely comparable homes nearby are assessed at. That is the argument a county board listens to.</p>
+        </div>
+      </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v5">
+          <div class="hv-conf"><span class="dot hi"></span>High<em>40+ local sales, tight spread</em></div>
+          <div class="hv-conf"><span class="dot md"></span>Medium<em>enough to work with</em></div>
+          <div class="hv-conf"><span class="dot lo"></span>Low<em>thin data, treat as rough</em></div>
+          <div class="hv-conf none"><span class="dot"></span>No number<em>we decline rather than guess</em></div>
+        </div>
+        <div class="hv-body">
+          <h3>We tell you how sure we are</h3>
+          <p>Every result carries a confidence rating tied to how much local sales data stood behind it. When a town is too thin to support an honest number, the tool says so instead of inventing one.</p>
+        </div>
+      </div>
+
+      <div class="hv-card hv-card-warn">
+        <div class="hv-visual hv-v6">
+          <div class="hv-blind"><i class="fas fa-kitchen-set"></i><span>Your kitchen</span></div>
+          <div class="hv-blind"><i class="fas fa-house-chimney-crack"></i><span>Roof condition</span></div>
+          <div class="hv-blind"><i class="fas fa-stairs"></i><span>Finished basement</span></div>
+          <div class="hv-blind"><i class="fas fa-paint-roller"></i><span>Any renovation</span></div>
+        </div>
+        <div class="hv-body">
+          <h3>What it cannot see</h3>
+          <p>Public records stop at the front door. Condition, upgrades, and interior finish are exactly what an assessor weighs, and none of it is in the data. That is why this is a screening tool, not an appraisal.</p>
+        </div>
+      </div>
+
     </div>
-    <div class="info-box" style="margin-top:30px;">
-      <h4><i class="fas fa-lightbulb"></i> The number that actually matters for an appeal</h4>
-      <p>Take your assessed value and divide it by your town&rsquo;s equalization ratio. That is the market value your assessment implies. If your home would realistically sell for meaningfully less than that figure, you have a case worth building. New Jersey&rsquo;s Chapter 123 rule gives municipalities a 15 percent cushion, so the gap has to be real, not marginal. Appeals are generally due April 1, or May 1 in a town that recently revalued.</p>
+
+    <div class="info-box" style="margin-top:34px;">
+      <h4><i class="fas fa-lightbulb"></i> The number that decides an appeal</h4>
+      <p>New Jersey's Chapter 123 rule says your assessment stands if it sits at or below true market value times your town's equalization ratio times 1.15. That 15 percent is the cushion municipalities get. Above it, the county board is directed to reduce your assessment. Appeals are generally due April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you plainly when a case is not worth filing.</p>
     </div>
   </div>
 </section>
@@ -1014,6 +1209,7 @@ body.plm-locked { overflow: hidden; }
     }
   };
 
+  var GREENTREE_URL = 'https://johnvarano.com/';
   var IDX_URL = 'https://johnscafide.opuselitesj.com/index.php?advanced=1';
 
   var activeAgentKey = 'john';
@@ -2875,8 +3071,8 @@ body.plm-locked { overflow: hidden; }
             '<i class="fas fa-circle-question"></i> not the market value</button>' +
         '</div>' +
       '</div>' +
-      '<div class="plm-addr">' + esc(current.address) + '<span>, ' + esc(current.town) +
-        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? ' ' + esc(current.zip) : '') + '</span></div>' +
+      '<div class="plm-addr">' + esc(current.address) + '<span>' + esc(current.town) +
+        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span></div>' +
       '<div class="plm-chips">' + chips.join('') + '</div>' + alert;
 
     // ---------- body ----------
@@ -2961,6 +3157,8 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-sec" id="plm-diag-sec"></div>' +
 
+      '<div class="plm-sec">' + buildMortgageCalc() + '</div>' +
+
       '<div class="plm-sec" id="plm-timeline-sec"></div>' +
 
       '<div class="plm-sec" id="plm-drivers"></div>' +
@@ -2968,6 +3166,8 @@ body.plm-locked { overflow: hidden; }
       '<div class="plm-sec" id="plm-comps-sec"></div>' +
 
       '<div class="plm-sec" id="plm-hood-sec"></div>' +
+
+      '<div class="plm-sec">' + buildPreapproval() + '</div>' +
 
       '<div class="plm-sec">' + buildSellingOptions() + '</div>' +
 
@@ -3008,6 +3208,7 @@ body.plm-locked { overflow: hidden; }
     chartSplit(land, imprv);
     chartTaxHistory();
     initProceeds();
+    if (el('mtg-price')) window.plMortgage();
 
     // everything below runs after the panel is already on screen
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
@@ -3321,6 +3522,200 @@ body.plm-locked { overflow: hidden; }
   };
 
   // ══════════════════════════════════════════════
+  // MORTGAGE CALCULATOR  ·  Greentree Mortgage
+  // Seeds itself with this property's real tax figure, which is the whole
+  // reason it belongs on a tax page: the escrow line is already known.
+  // ══════════════════════════════════════════════
+  function buildMortgageCalc() {
+    var v = current.valuation;
+    var guess = v && v.mid ? Math.round(v.mid / 1000) * 1000 : (current.assessed || 300000);
+    var monthlyTax = current.tax ? Math.round(current.tax / 12) : 0;
+
+    return '<div class="mtg-wrap">' +
+      '<div class="mtg-head">' +
+        '<div>' +
+          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage</div>' +
+          '<h3 class="plm-sec-h" style="margin:0;">What would the monthly payment be?</h3>' +
+          '<p class="plm-sec-s" style="margin:6px 0 0;">Most calculators guess at your taxes. This one already knows them, because it just read them off the assessment for ' +
+          esc(current.address) + '.</p>' +
+        '</div>' +
+      '</div>' +
+      '<div class="pl-card mtg-card">' +
+        '<div class="mtg-grid">' +
+          '<div class="mtg-inputs">' +
+            '<div class="mtg-row">' +
+              '<label>Purchase price</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span>' +
+              '<input type="text" class="pl-zcalc-input" id="mtg-price" value="' + guess.toLocaleString() + '" oninput="plFormatNum(this); plMortgage()"></div>' +
+            '</div>' +
+            '<div class="mtg-row">' +
+              '<label>Down payment</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>%</span>' +
+              '<input type="number" class="pl-zcalc-input" id="mtg-down" value="10" step="0.5" min="0" max="100" oninput="plMortgage()"></div>' +
+            '</div>' +
+            '<div class="mtg-row">' +
+              '<label>Interest rate</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>%</span>' +
+              '<input type="number" class="pl-zcalc-input" id="mtg-rate" value="6.5" step="0.125" oninput="plMortgage()"></div>' +
+            '</div>' +
+            '<div class="mtg-row">' +
+              '<label>Term</label>' +
+              '<select class="pl-zcalc-input" id="mtg-term" onchange="plMortgage()" style="text-align:left;padding-left:12px;">' +
+                '<option value="30">30 years</option><option value="20">20 years</option>' +
+                '<option value="15">15 years</option><option value="10">10 years</option>' +
+              '</select>' +
+            '</div>' +
+            '<div class="mtg-row">' +
+              '<label>Property tax, monthly</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span>' +
+              '<input type="text" class="pl-zcalc-input" id="mtg-tax" value="' + monthlyTax.toLocaleString() + '" oninput="plFormatNum(this); plMortgage()"></div>' +
+            '</div>' +
+            '<div class="mtg-row">' +
+              '<label>Insurance, monthly</label>' +
+              '<div class="pl-zcalc-input-wrap"><span>$</span>' +
+              '<input type="text" class="pl-zcalc-input" id="mtg-ins" value="125" oninput="plFormatNum(this); plMortgage()"></div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="mtg-out">' +
+            '<div class="mtg-total" id="mtg-total">-</div>' +
+            '<div class="mtg-total-lbl">Estimated monthly payment</div>' +
+            '<div class="mtg-breakdown" id="mtg-breakdown"></div>' +
+            '<div class="mtg-taxshare" id="mtg-taxshare"></div>' +
+            '<a href="' + GREENTREE_URL + '" target="_blank" rel="noopener" class="mtg-btn">' +
+              'Get a real rate from Greentree <i class="fas fa-arrow-right"></i></a>' +
+          '</div>' +
+        '</div>' +
+        '<div class="mtg-disc">Estimate only, for information. Not a loan offer, a rate quote, or a commitment to lend. ' +
+        'Actual terms depend on credit, income, property, and market conditions. Greentree Mortgage Company, L.P. is a separate company ' +
+        'and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>' +
+      '</div>';
+  }
+
+  window.plMortgage = function () {
+    function v(id) {
+      var e = el(id); if (!e) return 0;
+      if (e.type === 'number' || e.tagName === 'SELECT') return parseFloat(e.value) || 0;
+      return parseFloat(String(e.value).replace(/[^0-9.]/g, '')) || 0;
+    }
+    var price = v('mtg-price'), downPct = v('mtg-down'), rate = v('mtg-rate');
+    var term = v('mtg-term'), tax = v('mtg-tax'), ins = v('mtg-ins');
+    var loan = price * (1 - downPct / 100);
+    var i = rate / 100 / 12, n = term * 12;
+    var pi = (i > 0 && n > 0) ? loan * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) : (n ? loan / n : 0);
+
+    // PMI, roughly, when equity is under 20 percent
+    var pmi = downPct < 20 && loan > 0 ? (loan * 0.0055) / 12 : 0;
+    var total = pi + tax + ins + pmi;
+
+    var t = el('mtg-total');
+    if (t) t.textContent = money(total);
+    var b = el('mtg-breakdown');
+    if (b) {
+      b.innerHTML =
+        '<div class="mtg-line"><span>Principal and interest</span><b>' + money(pi) + '</b></div>' +
+        '<div class="mtg-line"><span>Property tax</span><b>' + money(tax) + '</b></div>' +
+        '<div class="mtg-line"><span>Insurance</span><b>' + money(ins) + '</b></div>' +
+        (pmi > 0 ? '<div class="mtg-line"><span>Estimated PMI</span><b>' + money(pmi) + '</b></div>' : '') +
+        '<div class="mtg-line" style="border:none;padding-top:9px;"><span>Loan amount</span><b>' + money(loan) + '</b></div>';
+    }
+    var ts = el('mtg-taxshare');
+    if (ts && total > 0 && tax > 0) {
+      var pct = Math.round((tax / total) * 100);
+      ts.innerHTML = '<i class="fas fa-circle-info"></i> Property tax is <b>' + pct +
+        '%</b> of this payment. That is the part an assessment appeal can actually move.';
+    }
+  };
+
+  // ══════════════════════════════════════════════
+  // PREAPPROVAL
+  // ══════════════════════════════════════════════
+  function buildPreapproval() {
+    return '<div class="pre-wrap">' +
+      '<div class="pre-photo"><img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
+      '<div class="pre-body">' +
+        '<div class="pre-eyebrow">Greentree Mortgage &middot; Advertisement</div>' +
+        '<h3>Get preapproved before you shop</h3>' +
+        '<p>A preapproval letter tells you the real number you can spend and makes your offer count when there is competition. ' +
+        '<b>John Varano</b> is a Senior Manager at Greentree Mortgage and handles the loan side for buyers across South Jersey.</p>' +
+        '<ul class="pre-list">' +
+          '<li><i class="fas fa-circle-check"></i>Know your true budget, taxes and escrow included</li>' +
+          '<li><i class="fas fa-circle-check"></i>Sellers take preapproved offers more seriously</li>' +
+          '<li><i class="fas fa-circle-check"></i>Find credit issues early, while there is time to fix them</li>' +
+        '</ul>' +
+        '<div class="pre-cta">' +
+          '<a href="' + GREENTREE_URL + '" target="_blank" rel="noopener" class="pre-btn">Start my preapproval <i class="fas fa-arrow-right"></i></a>' +
+          '<span class="pre-note">Opens johnvarano.com</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="pre-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. ' +
+      'You are never required to use any particular lender and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // LISTING PROPOSAL
+  // Small overlay, never leaves the page.
+  // ══════════════════════════════════════════════
+  window.plProposal = function () {
+    var a = AGENTS[activeAgentKey];
+    plModalNote('Free listing proposal',
+      '<div class="prop-agent">' +
+        '<img src="' + a.photo + '" alt="' + esc(a.name) + '">' +
+        '<div><b>' + esc(a.name) + '</b> can help you sell ' + esc(current.address) + '<br>' +
+        '<span style="font-size:13px;color:#5a6070;">' + esc(a.team) + '  \u00b7  ' + esc(a.lic) + '</span></div>' +
+      '</div>' +
+      '<p style="margin-top:4px;">Your proposal covers what the home should list for and why, what it nets you after costs, ' +
+      'the marketing plan, my commission in writing, and a review of your tax assessment before we go live. ' +
+      '<b>No obligation and no cost.</b></p>' +
+      '<div class="pl-form" style="grid-template-columns:1fr;">' +
+        '<input id="prop-name" type="text" placeholder="Full name" autocomplete="name">' +
+        '<input id="prop-email" type="email" placeholder="Email" autocomplete="email">' +
+        '<input id="prop-phone" type="tel" placeholder="Phone" autocomplete="tel">' +
+        '<select id="prop-when">' +
+          '<option value="">When are you thinking of selling?</option>' +
+          '<option>As soon as possible</option><option>1 to 3 months</option>' +
+          '<option>3 to 6 months</option><option>6 to 12 months</option>' +
+          '<option>Just want the numbers</option>' +
+        '</select>' +
+        '<button onclick="plSendProposal()">Send me the proposal</button>' +
+      '</div>' +
+      '<div class="prop-promise"><i class="fas fa-clock"></i> <span>Your proposal arrives <b>within one business day</b>. ' +
+      'It comes from me directly, not an automated system, and no one else gets your information.</span></div>');
+  };
+
+  window.plSendProposal = function () {
+    var name = (el('prop-name').value || '').trim();
+    var email = (el('prop-email').value || '').trim();
+    var phone = (el('prop-phone').value || '').trim();
+    var when = (el('prop-when').value || '').trim() || 'Not stated';
+    if (!name || !email) { alert('Please add your name and email so I know where to send it.'); return; }
+
+    var a = AGENTS[activeAgentKey];
+    send({
+      name: name, email: email, phone: phone || 'Not provided',
+      topic: '\u2b50 PROPOSAL REQUEST \u2b50 [' + (current.town || 'NJ') + '] ' + esc(current.address) + ' (' + activeAgentKey + ')',
+      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
+      town: current.town || 'Not provided', address: current.address || 'Not provided',
+      message: ['*** LISTING PROPOSAL REQUESTED, RESPOND WITHIN ONE BUSINESS DAY ***',
+                'Requested agent: ' + a.name,
+                'Timing: ' + when]
+        .concat(propertyLines())
+        .concat(current.valuation ? ['Watchdog Tax Value: ' + money(current.valuation.mid)] : [])
+        .concat(['Source: property-lookup.html, proposal modal']).join('\n')
+    });
+    if (typeof gtag === 'function') gtag('event', 'generate_lead', { source: 'listing_proposal' });
+
+    el('plm-note-overlay').innerHTML =
+      '<div class="plm-note-box" style="text-align:center;">' +
+        '<div style="font-size:44px;color:var(--green);margin-bottom:12px;"><i class="fas fa-circle-check"></i></div>' +
+        '<h3>Your proposal is on the way</h3>' +
+        '<p>I will have it to you <b>within one business day</b>, covering ' + esc(current.address) +
+        '. If anything is urgent, call me directly at <b>' + esc(a.phone) + '</b>.</p>' +
+        '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>' +
+      '</div>';
+  };
+
+  // ══════════════════════════════════════════════
   // AGENT RAIL
   // ══════════════════════════════════════════════
   window.plSetAgent = function (key) {
@@ -3346,6 +3741,21 @@ body.plm-locked { overflow: hidden; }
         '<div class="plm-agent-li">' + esc(a.lic) + '</div></div>' +
       '</div>' +
       '<div class="plm-agent-bio">' + bio + '</div>' +
+      '<div class="plm-creds">' +
+        '<div class="plm-cred"><b>' + esc(a.sales) + '</b><span>Recent sales</span></div>' +
+        '<div class="plm-cred"><b>' + esc(a.stars) + ' \u2605</b><span>' + (a.reviews === 'New' ? 'New agent' : a.reviews + ' reviews') + '</span></div>' +
+        '<div class="plm-cred"><b>NJ</b><span>Licensed ' + esc(a.lic.replace('NJ License ', '')) + '</span></div>' +
+      '</div>' +
+      '<div class="plm-trust">' +
+        '<div><i class="fas fa-reply"></i> Replies within one business day</div>' +
+        '<div><i class="fas fa-user-shield"></i> Your information is never sold or shared</div>' +
+        '<div><i class="fas fa-file-contract"></i> Commission and terms in writing, up front</div>' +
+      '</div>' +
+      '<div class="plm-proposal">' +
+        '<div class="plm-proposal-top"><i class="fas fa-file-signature"></i><span>Thinking of selling?</span></div>' +
+        '<button class="plm-proposal-btn" onclick="plProposal()">View proposal</button>' +
+        '<div class="plm-proposal-fine">Free, no commitment. Pricing, net proceeds, and marketing plan, delivered within one business day.</div>' +
+      '</div>' +
       '<div class="plm-agent-btns">' + phone +
         '<a href="mailto:' + esc(a.email) + '"><i class="fas fa-envelope"></i> Email ' + esc(a.name.split(' ')[0]) + '</a>' +
         '<a href="index.html#contact"><i class="fas fa-calendar-check"></i> Book a call</a>' +
