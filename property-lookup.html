@@ -1052,12 +1052,12 @@ body.plm-locked { overflow: hidden; }
           <div class="hv-scale">
             <div class="hv-scale-side"><span>Your assessment</span><b class="over">$240k</b></div>
             <div class="hv-scale-mid"><i class="fas fa-scale-unbalanced-flip"></i></div>
-            <div class="hv-scale-side"><span>Neighbours</span><b>$170k</b></div>
+            <div class="hv-scale-side"><span>Neighbors</span><b>$170k</b></div>
           </div>
           <div class="hv-flag">Chapter 123 case</div>
         </div>
         <div class="hv-body">
-          <h3>Compared to your neighbours</h3>
+          <h3>Compared to your Neighbors</h3>
           <p>The appeal test uses evidence that did not come from your assessment: your own last sale, and what genuinely comparable homes nearby are assessed at. That is the argument a county board listens to.</p>
         </div>
       </div>
@@ -2094,7 +2094,7 @@ body.plm-locked { overflow: hidden; }
     return Math.max(-0.12, Math.min(0.18, d / n));
   }
 
-  // Adjust for how this home compares to its neighbours on the things the
+  // Adjust for how this home compares to its Neighbors on the things the
   // public record does tell us: vintage and lot size. Assessment already
   // captures most of it, so this is a light touch, capped at +/- 8%.
   function propertyAdjust(subject, comps) {
@@ -2160,7 +2160,7 @@ body.plm-locked { overflow: hidden; }
       timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
-    // property: light adjustment for vintage and lot versus neighbours
+    // property: light adjustment for vintage and lot versus Neighbors
     var adj = propertyAdjust(subject, comps);
 
     var cal = calibrationFor(town, county) || 1;
@@ -2450,7 +2450,7 @@ body.plm-locked { overflow: hidden; }
     //
     //   A. This property's own last recorded sale, carried forward at the
     //      appreciation measured in its town. Strongest evidence there is.
-    //   B. What comparable neighbours are assessed at. This is the argument
+    //   B. What comparable Neighbors are assessed at. This is the argument
     //      homeowners already make out loud: the house next door pays less.
     var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
     var thisYear = new Date().getFullYear();
@@ -2490,7 +2490,7 @@ body.plm-locked { overflow: hidden; }
       basis = 'its own sale history';
     } else {
       target = peerMed;
-      basis = 'what comparable neighbours are assessed at';
+      basis = 'what comparable Neighbors are assessed at';
     }
     if (peerMed !== null && anchors.length) target = Math.max(target, Math.min(peerMed * 1.25, target * 1.25));
 
@@ -2590,7 +2590,7 @@ body.plm-locked { overflow: hidden; }
       '<p><b>Why the appeal test uses different evidence.</b> The headline value above is worked out from your assessment and your ' +
       'town\u2019s ratio, so testing your assessment against it would just be checking a number against itself. The appeal section ' +
       'instead uses evidence that came from somewhere else entirely: your own last recorded sale carried forward, and what ' +
-      'comparable neighbours are assessed at. That is the argument that actually holds up.</p>' +
+      'comparable Neighbors are assessed at. That is the argument that actually holds up.</p>' +
 
       (v && a
         ? '<p>For this property: the evidence supports an assessment of ' +
@@ -2690,7 +2690,7 @@ body.plm-locked { overflow: hidden; }
   function watchdogScore(assessed, val, comps) {
     // The valuation is derived from the assessment, so comparing the two tells
     // us nothing. The only real signal available in public data is how THIS
-    // property is assessed relative to genuinely comparable neighbours.
+    // property is assessed relative to genuinely comparable Neighbors.
     //
     // Peer group: nearby homes of similar vintage and lot size. If this one
     // carries a materially higher assessment per comparable home than its
