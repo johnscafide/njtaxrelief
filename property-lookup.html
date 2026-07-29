@@ -489,6 +489,77 @@ body.plm-locked { overflow: hidden; }
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
 
+/* ---------- AUTH ---------- */
+.auth-av { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
+.auth-btns { display: grid; gap: 10px; margin: 18px 0 4px; }
+.auth-btn {
+  display: flex; align-items: center; justify-content: center; gap: 11px;
+  padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 700; font-family: inherit;
+  cursor: pointer; border: 1px solid var(--border); background: #fff; color: #1a1a2e;
+}
+.auth-btn:hover { background: #f6f8fc; }
+.auth-btn.facebook { background: #1877f2; border-color: #1877f2; color: #fff; }
+.auth-btn.facebook:hover { filter: brightness(1.08); }
+.auth-fine { font-size: 12px; color: #8a93a6; line-height: 1.65; margin-top: 14px; }
+
+/* ---------- ACCOUNT CARD ---------- */
+.acct-cta { background: #fff; border: 1px dashed var(--border); border-radius: 13px; padding: 18px; margin-bottom: 16px; }
+.acct-cta.signed { border-style: solid; border-color: #c8d6ea; }
+.acct-cta-t { font-size: 14.5px; font-weight: 800; color: #0e2248; margin-bottom: 7px; }
+.acct-cta-t i { color: var(--gold); margin-right: 7px; }
+.acct-cta p { font-size: 13px; color: #5a6070; line-height: 1.6; margin: 0 0 13px; }
+.acct-row { display: grid; gap: 8px; }
+.acct-btn {
+  display: flex; align-items: center; gap: 9px; width: 100%; padding: 12px 14px;
+  border: 1px solid var(--border); border-radius: 9px; background: #fff;
+  font-size: 13.5px; font-weight: 700; font-family: inherit; color: var(--navy); cursor: pointer; text-align: left;
+}
+.acct-btn:hover { border-color: var(--navy-light); background: #f6f8fc; }
+.acct-btn.on { background: var(--green-light); border-color: #b8d8c4; color: var(--green); }
+.acct-link {
+  display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  margin-top: 10px; background: none; border: none; font-family: inherit;
+  font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer;
+}
+
+/* ---------- DASHBOARD ---------- */
+.dash-head { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #eef0f5; }
+.dash-head img, .dash-noav { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
+.dash-noav { background: #eef3fa; color: var(--navy); display: flex; align-items: center; justify-content: center; }
+.dash-head > div { flex: 1; min-width: 0; font-size: 15px; color: #0e2248; }
+.dash-head span { font-size: 12.5px; color: #8a93a6; }
+.dash-out { background: none; border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; font-size: 12.5px; font-weight: 700; font-family: inherit; color: #5a6070; cursor: pointer; }
+.dash-out:hover { background: #f6f8fc; }
+.dash-label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #8a93a6; margin: 18px 0 9px; }
+.dash-card { border: 1px solid var(--border); border-radius: 12px; padding: 16px; margin-bottom: 11px; }
+.dash-card-top { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+.dash-card-top b { display: block; font-size: 15px; color: #0e2248; }
+.dash-card-top span { font-size: 12.5px; color: #8a93a6; }
+.dash-flag { flex-shrink: 0; font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; background: #fdf6e3; color: #6b5514; padding: 4px 10px; border-radius: 99px; }
+.dash-figs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.dash-figs b { display: block; font-size: 15px; font-weight: 800; color: #0e2248; font-variant-numeric: tabular-nums; }
+.dash-figs span { font-size: 10.5px; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
+.dash-trend { display: inline-block; font-size: 12px; font-weight: 700; margin-top: 11px; }
+.dash-trend.up { color: var(--red); }
+.dash-trend.down { color: var(--green); }
+.dash-acts { display: flex; gap: 9px; margin-top: 13px; }
+.dash-acts a, .dash-acts button {
+  flex: 1; text-align: center; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: 700;
+  font-family: inherit; text-decoration: none; cursor: pointer; border: 1px solid var(--border);
+  background: #fff; color: var(--navy);
+}
+.dash-acts a { background: var(--navy); color: #fff; border-color: var(--navy); }
+.dash-acts button { color: #8a93a6; }
+.dash-acts button:hover { color: var(--red); border-color: #f0d3cf; }
+.dash-empty { text-align: center; padding: 30px 20px; }
+.dash-empty i { font-size: 34px; color: #c3cbdb; display: block; margin-bottom: 12px; }
+.dash-empty b { display: block; font-size: 16px; color: #0e2248; margin-bottom: 6px; }
+.dash-empty p { font-size: 13.5px; color: #5a6070; line-height: 1.65; margin: 0; }
+.dash-alert { display: flex; gap: 11px; background: #fdf6e3; border-radius: 10px; padding: 14px 16px; font-size: 13.5px; color: #6b5514; line-height: 1.6; margin-bottom: 6px; }
+.dash-alert i { margin-top: 3px; flex-shrink: 0; }
+.dash-alert span { flex: 1; min-width: 0; }
+.dash-alert a { color: var(--navy); font-weight: 700; }
+
 /* ---------- SECTION CARD HEADINGS (align with plm-sec-h) ---------- */
 .pl-card-h4 {
   font-size: 17px; font-weight: 800; color: #1a1a2e; margin: 0 0 4px;
@@ -994,6 +1065,7 @@ body.plm-locked { overflow: hidden; }
     <div class="plm-bar-actions">
       <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()"><i class="far fa-heart"></i><span>Save</span></button>
       <button class="plm-barbtn" onclick="plShare()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+      <button class="plm-barbtn" id="pl-authbtn" onclick="plSignInPrompt()" title="Sign in"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button>
       <button class="plm-barbtn" onclick="plMenu(event)"><i class="fas fa-ellipsis"></i><span>More</span></button>
       <div class="plm-menu" id="plm-menu">
         <button onclick="plOpenForm('sell')"><i class="fas fa-sign-hanging"></i> Sell this home</button>
@@ -1001,6 +1073,10 @@ body.plm-locked { overflow: hidden; }
         <button onclick="plOpenForm('buy')"><i class="fas fa-key"></i> Buy a home like this</button>
         <button onclick="plOpenForm('offer')"><i class="fas fa-file-signature"></i> Make an offer</button>
         <button onclick="plOpenForm('track')"><i class="fas fa-bell"></i> Track this home</button>
+        <hr>
+        <button onclick="plSaveTo('home')"><i class="fas fa-house-chimney"></i> Claim as my home</button>
+        <button onclick="plSaveTo('watch')"><i class="fas fa-eye"></i> Add to watchlist</button>
+        <button onclick="plDashboard()"><i class="fas fa-table-columns"></i> My dashboard</button>
         <hr>
         <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
         <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
@@ -1155,7 +1231,7 @@ body.plm-locked { overflow: hidden; }
           <div class="hv-flag">Chapter 123 case</div>
         </div>
         <div class="hv-body">
-          <h3>Compared to your Neighbors</h3>
+          <h3>Compared to your neighbors</h3>
           <p>The appeal test uses evidence that did not come from your assessment: your own last sale, and what genuinely comparable homes nearby are assessed at. That is the argument a county board listens to.</p>
         </div>
       </div>
@@ -1245,16 +1321,16 @@ body.plm-locked { overflow: hidden; }
     <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="gt-banner">
       <div class="gt-banner-inner">
         <div class="gt-photo">
-          <img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage and HMA Company" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display='none'">
         </div>
         <div class="gt-text">
-          <div class="gt-eyebrow">Greentree Mortgage and HMA Company &middot; John Varano, Branch Manager</div>
+          <div class="gt-eyebrow">Greentree Mortgage &middot; John Varano, Senior Manager</div>
           <div class="gt-headline">Know the payment before you fall in love with the house.</div>
           <div class="gt-sub">Taxes are only half of what you pay every month. John Varano runs the loan side and will tell you what the real number looks like, including escrow, before you make a move.</div>
         </div>
         <div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>
       </div>
-      <div class="gt-disc">Advertisement. Greentree Mortgage and HMA Company is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
+      <div class="gt-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
     </a>
   </div>
 </section>
@@ -1262,6 +1338,7 @@ body.plm-locked { overflow: hidden; }
 <footer id="main-footer"></footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="scripts.js"></script>
 <script>
 (function () {
@@ -1782,7 +1859,7 @@ body.plm-locked { overflow: hidden; }
         var trimmed = ratios.filter(function (v) { return v >= q1 - 1.5 * iqr && v <= q3 + 1.5 * iqr; });
         if (trimmed.length < 10) return null;
 
-        // town-wide drift, used when a neighbourhood is too thin to measure
+        // town-wide drift, used when a neighborhood is too thin to measure
         // its own. median multiplier per year across the whole municipality.
         var mByYear = {};
         d.features.forEach(function (f) {
@@ -2192,7 +2269,7 @@ body.plm-locked { overflow: hidden; }
     return Math.max(-0.12, Math.min(0.18, d / n));
   }
 
-  // Adjust for how this home compares to its Neighbors on the things the
+  // Adjust for how this home compares to its neighbors on the things the
   // public record does tell us: vintage and lot size. Assessment already
   // captures most of it, so this is a light touch, capped at +/- 8%.
   function propertyAdjust(subject, comps) {
@@ -2258,7 +2335,7 @@ body.plm-locked { overflow: hidden; }
       timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
-    // property: light adjustment for vintage and lot versus Neighbors
+    // property: light adjustment for vintage and lot versus neighbors
     var adj = propertyAdjust(subject, comps);
 
     var cal = calibrationFor(town, county) || 1;
@@ -2360,7 +2437,7 @@ body.plm-locked { overflow: hidden; }
         })
         .filter(function (x) {
           if (!x.year || x.year < thisYear - 6 || x.price <= 50000) return false;
-          // belt and braces: anything past 5 miles is a projection error, not a neighbour
+          // belt and braces: anything past 5 miles is a projection error, not a neighbor
           if (x.dist != null && x.dist > 8000) return false;
           return true;
         })
@@ -2548,7 +2625,7 @@ body.plm-locked { overflow: hidden; }
     //
     //   A. This property's own last recorded sale, carried forward at the
     //      appreciation measured in its town. Strongest evidence there is.
-    //   B. What comparable Neighbors are assessed at. This is the argument
+    //   B. What comparable neighbors are assessed at. This is the argument
     //      homeowners already make out loud: the house next door pays less.
     var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
     var thisYear = new Date().getFullYear();
@@ -2588,7 +2665,7 @@ body.plm-locked { overflow: hidden; }
       basis = 'its own sale history';
     } else {
       target = peerMed;
-      basis = 'what comparable Neighbors are assessed at';
+      basis = 'what comparable neighbors are assessed at';
     }
     if (peerMed !== null && anchors.length) target = Math.max(target, Math.min(peerMed * 1.25, target * 1.25));
 
@@ -2683,7 +2760,7 @@ body.plm-locked { overflow: hidden; }
       '<p><b>Why the appeal test uses different evidence.</b> The headline value above is worked out from your assessment and your ' +
       'town\u2019s ratio, so testing your assessment against it would just be checking a number against itself. The appeal section ' +
       'instead uses evidence that came from somewhere else entirely: your own last recorded sale carried forward, and what ' +
-      'comparable Neighbors are assessed at. That is the argument that actually holds up.</p>' +
+      'comparable neighbors are assessed at. That is the argument that actually holds up.</p>' +
 
       (v && a
         ? '<p>For this property: the evidence supports an assessment of ' +
@@ -2739,7 +2816,7 @@ body.plm-locked { overflow: hidden; }
       '</div>';
   }
 
-  // ---- neighbourhood context ----
+  // ---- neighborhood context ----
   function paintHood(h, assessed, tax) {
     var host = el('plm-hood-sec');
     if (!host || !h) { if (host) host.innerHTML = ''; return; }
@@ -2783,7 +2860,7 @@ body.plm-locked { overflow: hidden; }
   function watchdogScore(assessed, val, comps) {
     // The valuation is derived from the assessment, so comparing the two tells
     // us nothing. The only real signal available in public data is how THIS
-    // property is assessed relative to genuinely comparable Neighbors.
+    // property is assessed relative to genuinely comparable neighbors.
     //
     // Peer group: nearby homes of similar vintage and lot size. If this one
     // carries a materially higher assessment per comparable home than its
@@ -3299,6 +3376,8 @@ body.plm-locked { overflow: hidden; }
 
     // ---------- rail ----------
     el('plm-rail').innerHTML =
+      '<div id="plm-account"></div>' +
+
       '<div class="plm-rcard gold" id="pl-track-card">' +
         '<h4><i class="fas fa-chart-line" style="color:var(--gold)"></i> Track this home</h4>' +
         '<p>One email a month: what it is worth now, what sold nearby, and any change to the assessment or tax rate.</p>' +
@@ -3314,6 +3393,7 @@ body.plm-locked { overflow: hidden; }
     chartTaxHistory();
     initProceeds();
     if (el('mtg-price')) window.plMortgage();
+    refreshSaveState();
 
     // everything below runs after the panel is already on screen
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
@@ -3857,6 +3937,237 @@ body.plm-locked { overflow: hidden; }
   };
 
   // ══════════════════════════════════════════════
+  // ACCOUNTS  ·  Supabase auth, Google and Facebook
+  //
+  // Everything a signed in user saves lives behind row level security keyed to
+  // their own auth id. There is no policy anywhere that lets one user read
+  // another's saved properties, and the anon key has no table access at all.
+  // ══════════════════════════════════════════════
+  var sb = null, plUser = null;
+
+  function authReady() {
+    if (sb) return true;
+    if (typeof window.supabase === 'undefined' || !LEDGER_URL || !LEDGER_KEY) return false;
+    sb = window.supabase.createClient(LEDGER_URL, LEDGER_KEY, {
+      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+    });
+    return true;
+  }
+
+  function plInitAuth() {
+    if (!authReady()) { paintAuthBtn(); return; }
+    sb.auth.getSession().then(function (res) {
+      plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
+      paintAuthBtn();
+      // OAuth returns with a hash. Clean it so the address stays shareable.
+      if (location.hash.indexOf('access_token') > -1) {
+        history.replaceState(null, '', location.pathname + location.search);
+      }
+    });
+    sb.auth.onAuthStateChange(function (_e, session) {
+      plUser = session ? session.user : null;
+      paintAuthBtn();
+      if (el('plm-dash-body') && el('plm-note-overlay').classList.contains('open')) plDashboard();
+      if (current) refreshSaveState();
+    });
+  }
+
+  function userName() {
+    if (!plUser) return '';
+    var m = plUser.user_metadata || {};
+    return m.full_name || m.name || (plUser.email || '').split('@')[0] || 'there';
+  }
+  function userAvatar() {
+    var m = (plUser && plUser.user_metadata) || {};
+    return m.avatar_url || m.picture || '';
+  }
+
+  function paintAuthBtn() {
+    var b = el('pl-authbtn');
+    if (!b) return;
+    if (plUser) {
+      var av = userAvatar();
+      b.innerHTML = (av ? '<img src="' + esc(av) + '" alt="" class="auth-av">' : '<i class="fas fa-user"></i>') +
+        '<span>' + esc(userName().split(' ')[0]) + '</span>';
+      b.onclick = plDashboard;
+      b.title = 'Your saved properties';
+    } else {
+      b.innerHTML = '<i class="fas fa-right-to-bracket"></i><span>Sign in</span>';
+      b.onclick = plSignInPrompt;
+      b.title = 'Save properties to your account';
+    }
+  }
+
+  window.plSignInPrompt = function () {
+    if (!authReady()) {
+      plModalNote('Sign in unavailable',
+        '<p>Accounts are not switched on for this site yet. You can still use everything on this page, ' +
+        'and anything you save is kept in this browser.</p>');
+      return;
+    }
+    plModalNote('Save this property to your account',
+      '<p>Create a free account and you can claim your own home, keep a watchlist of others, ' +
+      'and see how their assessments and tax bills move over time. No password to remember.</p>' +
+      '<div class="auth-btns">' +
+        '<button class="auth-btn google" onclick="plOAuth(\'google\')">' +
+          '<svg viewBox="0 0 24 24" width="19" height="19"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.4-.2-2H12v3.9h6c-.1 1-.8 2.5-2.2 3.5v2.7h3.5c2-1.9 3.3-4.7 3.3-8.1z"/><path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1.1-3.7 1.1-2.8 0-5.2-1.9-6.1-4.5H2.3v2.8C4.1 20.6 7.8 23 12 23z"/><path fill="#FBBC05" d="M5.9 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.3C1.5 8.5 1 10.2 1 12s.5 3.5 1.3 5l3.6-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.4 2.1 14.9 1 12 1 7.8 1 4.1 3.4 2.3 7l3.6 2.8C6.8 7.3 9.2 5.4 12 5.4z"/></svg>' +
+          'Continue with Google</button>' +
+        '<button class="auth-btn facebook" onclick="plOAuth(\'facebook\')">' +
+          '<i class="fab fa-facebook-f"></i> Continue with Facebook</button>' +
+      '</div>' +
+      '<div class="auth-fine">We only receive your name, email, and profile photo. ' +
+      'Your saved properties are visible to you and nobody else, not even to me. We never post anything to your account, ' +
+      'and we do not sell or share your information.</div>');
+  };
+
+  window.plOAuth = function (provider) {
+    if (!authReady()) return;
+    sb.auth.signInWithOAuth({
+      provider: provider,
+      options: { redirectTo: location.origin + location.pathname + location.search }
+    });
+  };
+
+  window.plSignOut = function () {
+    if (!sb) return;
+    sb.auth.signOut().then(function () { plUser = null; paintAuthBtn(); plCloseNote(); });
+  };
+
+  // ── save / claim from the property panel ──
+  function propertyPayload(kind) {
+    var v = current.valuation, a = current.appeal;
+    return {
+      kind: kind, pams_pin: current.pin, address: current.address,
+      town: current.town, county: current.county, zip: current.zip,
+      block: current.block, lot: current.lot,
+      assessed: current.assessed || null,
+      last_year_tax: current.tax || null,
+      effective_rate: current.rate ? +current.rate.toFixed(3) : null,
+      watchdog_value: v && v.mid ? Math.round(v.mid) : null,
+      has_appeal_case: !!(a && a.hasCase)
+    };
+  }
+
+  window.plSaveTo = function (kind) {
+    if (!plUser) { plSignInPrompt(); return; }
+    if (!current || !current.pin) { toast('Nothing to save yet'); return; }
+    sb.rpc('save_property', { p: propertyPayload(kind) }).then(function (res) {
+      if (res.error) { toast('Could not save, try again'); return; }
+      toast(kind === 'home' ? 'Saved as your home' : 'Added to your watchlist');
+      refreshSaveState();
+      if (typeof gtag === 'function') gtag('event', 'save_property', { kind: kind });
+    });
+  };
+
+  window.plRemoveSaved = function (id) {
+    if (!plUser) return;
+    sb.from('saved_properties').delete().eq('id', id).then(function () { plDashboard(); });
+  };
+
+  function refreshSaveState() {
+    var wrap = el('plm-account');
+    if (!wrap) return;
+    if (!plUser) {
+      wrap.innerHTML =
+        '<div class="acct-cta">' +
+          '<div class="acct-cta-t"><i class="fas fa-bookmark"></i> Keep track of this property</div>' +
+          '<p>Claim it as your home or add it to a watchlist, and see how the assessment moves each year.</p>' +
+          '<button class="plm-rbtn" onclick="plSignInPrompt()">Create a free account</button>' +
+        '</div>';
+      return;
+    }
+    sb.from('saved_properties').select('id,kind').eq('pams_pin', current.pin).then(function (res) {
+      var rows = (res && res.data) || [];
+      var isHome = rows.some(function (r) { return r.kind === 'home'; });
+      var isWatch = rows.some(function (r) { return r.kind === 'watch'; });
+      wrap.innerHTML =
+        '<div class="acct-cta signed">' +
+          '<div class="acct-cta-t"><i class="fas fa-bookmark"></i> Keep track of this property</div>' +
+          '<div class="acct-row">' +
+            '<button class="acct-btn' + (isHome ? ' on' : '') + '" onclick="plSaveTo(\'home\')">' +
+              '<i class="fas fa-house-chimney"></i> ' + (isHome ? 'This is my home' : 'Claim as my home') + '</button>' +
+            '<button class="acct-btn' + (isWatch ? ' on' : '') + '" onclick="plSaveTo(\'watch\')">' +
+              '<i class="fas fa-eye"></i> ' + (isWatch ? 'On your watchlist' : 'Add to watchlist') + '</button>' +
+          '</div>' +
+          '<button class="acct-link" onclick="plDashboard()">Open my dashboard <i class="fas fa-arrow-right"></i></button>' +
+        '</div>';
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // DASHBOARD
+  // ══════════════════════════════════════════════
+  window.plDashboard = function () {
+    if (!plUser) { plSignInPrompt(); return; }
+    var av = userAvatar();
+    plModalNote('Your properties',
+      '<div class="dash-head">' +
+        (av ? '<img src="' + esc(av) + '" alt="">' : '<div class="dash-noav"><i class="fas fa-user"></i></div>') +
+        '<div><b>' + esc(userName()) + '</b><br><span>' + esc(plUser.email || '') + '</span></div>' +
+        '<button class="dash-out" onclick="plSignOut()">Sign out</button>' +
+      '</div>' +
+      '<div id="plm-dash-body"><div class="pl-spin" style="margin:30px auto;"></div></div>');
+
+    sb.from('saved_properties').select('*').order('created_at', { ascending: false })
+      .then(function (res) {
+        var body = el('plm-dash-body');
+        if (!body) return;
+        if (res.error) { body.innerHTML = '<p>Could not load your properties. Try again in a moment.</p>'; return; }
+        var rows = res.data || [];
+        if (!rows.length) {
+          body.innerHTML =
+            '<div class="dash-empty"><i class="fas fa-house-circle-check"></i>' +
+            '<b>Nothing saved yet</b><p>Look up any New Jersey address, then claim it as your home or add it to your watchlist. ' +
+            'Everything you save shows up here with its tax history.</p></div>';
+          return;
+        }
+        var homes = rows.filter(function (r) { return r.kind === 'home'; });
+        var watch = rows.filter(function (r) { return r.kind === 'watch'; });
+        var cases = rows.filter(function (r) { return r.has_appeal_case; }).length;
+
+        body.innerHTML =
+          (cases
+            ? '<div class="dash-alert"><i class="fas fa-scale-unbalanced-flip"></i><span><b>' + cases +
+              ' of your propert' + (cases === 1 ? 'y looks' : 'ies look') + ' over-assessed.</b> ' +
+              'Worth having me screen ' + (cases === 1 ? 'it' : 'them') + ' before the April 1 deadline. ' +
+              '<a href="#" onclick="plCloseNote();plOpenForm(\'appeal\');return false;">Ask me to look</a></span></div>'
+            : '') +
+          (homes.length ? '<div class="dash-label">Your home' + (homes.length > 1 ? 's' : '') + '</div>' + homes.map(dashCard).join('') : '') +
+          (watch.length ? '<div class="dash-label">Watchlist</div>' + watch.map(dashCard).join('') : '');
+      });
+  };
+
+  function dashCard(r) {
+    var hist = r.history || [];
+    var trend = '';
+    if (hist.length) {
+      var oldest = hist[0];
+      if (oldest && oldest.assessed && r.assessed) {
+        var d = r.assessed - oldest.assessed;
+        if (d !== 0) trend = '<span class="dash-trend ' + (d > 0 ? 'up' : 'down') + '">' +
+          (d > 0 ? '\u2191 ' : '\u2193 ') + money(Math.abs(d)) + ' since you saved it</span>';
+      }
+    }
+    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
+    return '<div class="dash-card">' +
+      '<div class="dash-card-top">' +
+        '<div><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') +
+          (r.county ? ', ' + esc(r.county) + ' County' : '') + '</span></div>' +
+        (r.has_appeal_case ? '<span class="dash-flag">Appeal case</span>' : '') +
+      '</div>' +
+      '<div class="dash-figs">' +
+        '<div><b>' + (r.assessed ? money(r.assessed) : '-') + '</b><span>Assessed</span></div>' +
+        '<div><b>' + (r.last_year_tax ? money(r.last_year_tax) : '-') + '</b><span>Annual tax</span></div>' +
+        '<div><b>' + (r.watchdog_value ? money(r.watchdog_value) : '-') + '</b><span>Watchdog value</span></div>' +
+      '</div>' + trend +
+      '<div class="dash-acts">' +
+        '<a href="?address=' + q + '">Open</a>' +
+        '<button onclick="plRemoveSaved(\'' + r.id + '\')">Remove</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
   // MORTGAGE CALCULATOR  ·  Greentree Mortgage
   // Seeds itself with this property's real tax figure, which is the whole
   // reason it belongs on a tax page: the escrow line is already known.
@@ -3869,7 +4180,7 @@ body.plm-locked { overflow: hidden; }
     return '<div class="mtg-wrap">' +
       '<div class="mtg-head">' +
         '<div>' +
-          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage and HMA Company</div>' +
+          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage</div>' +
           '<h3 class="plm-sec-h" style="margin:0;">What would the monthly payment be?</h3>' +
           '<p class="plm-sec-s" style="margin:6px 0 0;">Most calculators guess at your taxes. This one already knows them, because it just read them off the assessment for ' +
           esc(current.address) + '.</p>' +
@@ -3921,7 +4232,7 @@ body.plm-locked { overflow: hidden; }
           '</div>' +
         '</div>' +
         '<div class="mtg-disc">Estimate only, for information. Not a loan offer, a rate quote, or a commitment to lend. ' +
-        'Actual terms depend on credit, income, property, and market conditions. Greentree Mortgage and HMA Company is a separate company ' +
+        'Actual terms depend on credit, income, property, and market conditions. Greentree Mortgage Company, L.P. is a separate company ' +
         'and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>' +
       '</div>';
   }
@@ -3966,12 +4277,12 @@ body.plm-locked { overflow: hidden; }
   // ══════════════════════════════════════════════
   function buildPreapproval() {
     return '<div class="pre-wrap">' +
-      '<div class="pre-photo"><img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage and HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
+      '<div class="pre-photo"><img src="johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
       '<div class="pre-body">' +
-        '<div class="pre-eyebrow">Greentree Mortgage and HMA Company &middot; Advertisement</div>' +
+        '<div class="pre-eyebrow">Greentree Mortgage &middot; Advertisement</div>' +
         '<h3>Get preapproved before you shop</h3>' +
         '<p>A preapproval letter tells you the real number you can spend and makes your offer count when there is competition. ' +
-        '<b>John Varano</b> is a Branch Manager at Greentree Mortgage and HMA Company and handles the loan side for buyers across South Jersey.</p>' +
+        '<b>John Varano</b> is a Senior Manager at Greentree Mortgage and handles the loan side for buyers across South Jersey.</p>' +
         '<ul class="pre-list">' +
           '<li><i class="fas fa-circle-check"></i>Know your true budget, taxes and escrow included</li>' +
           '<li><i class="fas fa-circle-check"></i>Sellers take preapproved offers more seriously</li>' +
@@ -3982,7 +4293,7 @@ body.plm-locked { overflow: hidden; }
           '<span class="pre-note">Opens johnvarano.com</span>' +
         '</div>' +
       '</div>' +
-      '<div class="pre-disc">Advertisement. Greentree Mortgage and HMA Company is a separate company and is not affiliated with Opus Elite Real Estate. ' +
+      '<div class="pre-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. ' +
       'You are never required to use any particular lender and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>' +
     '</div>';
   }
@@ -4342,6 +4653,8 @@ body.plm-locked { overflow: hidden; }
   }
 
   window.plFaq = function (q) { q.parentElement.classList.toggle('active'); };
+
+  plInitAuth();
 
   var qs = new URLSearchParams(window.location.search);
   if (qs.get('address')) {
