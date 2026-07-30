@@ -87,7 +87,16 @@
   padding: 12px; box-shadow: 0 22px 60px rgba(14,34,72,.22); max-width: 690px; margin: 0 auto;
 }
 .pl-search-row { display: flex; gap: 9px; }
-.pl-input-wrap { flex: 1; position: relative; display: flex; }
+.pl-input-wrap {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 50px; /* Gives the bar its rounded pill shape */
+  padding: 6px 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto;
+}
 .pl-input {
   flex: 1; padding: 16px 52px 16px 18px; font-size: 16px; font-family: inherit; width: 100%;
   border: 1.5px solid transparent; border-radius: 11px; background: #f6f7fa; color: var(--text);
@@ -1393,27 +1402,27 @@ body.pl-signedin .gate-cta { display: none; }
   <div class="pl-hero-wash"></div>
   <div class="pl-hero-inner">
     <h1>Check Property Data on <br><span class="pl-type" id="pl-type">any NJ home</span></h1>
-    <!-- <p class="pl-hero-sub">
-      Type an address. See the assessed value, last year&rsquo;s tax bill, block and lot, the real lot lines, and our own read on whether that assessment is defensible. Built from New Jersey&rsquo;s official records.
-    </p> -->
+    
     <div class="pl-search-card">
       <div class="pl-search-row">
         <div class="pl-input-wrap">
+          <!-- Left: Geolocation Icon Button -->
+          <button class="pl-geo" id="pl-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
+            <i class="fas fa-paper-plane"></i> <!-- Changed to paper-plane to match screenshot arrow icon -->
+          </button>
+
+          <!-- Middle: Text Input -->
           <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
                  placeholder="123 Main Street, Williamstown, NJ 08094"
                  onkeydown="if(event.key==='Enter')plLookup()">
-          <button class="pl-geo" id="pl-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
-            <i class="fas fa-location-crosshairs"></i>
+
+          <!-- Right: Search Icon Button -->
+          <button class="pl-search-btn" id="pl-btn" onclick="plLookup()" title="Search" aria-label="Search">
+            <i class="fas fa-magnifying-glass"></i>
           </button>
-          <button class="pl-search-btn" id="pl-btn" onclick="plLookup()">
-          <i class="fas fa-magnifying-glass"></i>
-        </button>
         </div>
       </div>
     </div>
-    <!-- <div class="pl-hero-note">Tap the crosshair to use your current location. Nothing about you is stored, no email needed to see results.</div>
-    <div class="pl-heroauth" id="pl-heroauth"></div>
-    <div class="pl-freenote">Your assessment, tax bill, and parcel record are always free, no account needed. A free account unlocks the comparisons, the appeal analysis, and saved properties.</div> -->
   </div>
 </div>
 
