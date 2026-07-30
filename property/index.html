@@ -760,6 +760,98 @@ body.pl-signedin .gate-cta { display: none; }
   .op-box { flex-direction: column; align-items: center; text-align: center; }
 }
 
+/* ---------- SECTION HEADINGS ---------- */
+.lp-h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(30px, 4.2vw, 44px); font-weight: 700; color: var(--navy-dark);
+  letter-spacing: -.02em; line-height: 1.15; margin: 0 0 26px; text-align: left;
+}
+
+/* ---------- CREDIBILITY BAR ---------- */
+.lp-cred {
+  display: flex; align-items: center; gap: 22px; flex-wrap: wrap;
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  padding: 22px 26px; max-width: 1080px; margin: 0 auto;
+}
+.lp-cred img { width: 74px; height: 74px; border-radius: 50%; object-fit: cover; border: 3px solid var(--gold); flex-shrink: 0; }
+.lp-cred-txt { flex: 1; min-width: 260px; font-size: 15px; color: #3d4759; line-height: 1.65; }
+.lp-cred-txt b { color: var(--navy-dark); }
+.lp-cred-txt span { display: block; font-size: 13.5px; color: #5a6070; margin-top: 6px; }
+.lp-cred-badges { display: flex; gap: 20px; flex-shrink: 0; }
+.lp-cred-badges b { display: block; font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; }
+.lp-cred-badges span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
+
+/* ---------- PHOTO CARDS ---------- */
+.lp-photo {
+  position: relative; background-size: cover; background-position: center;
+  min-height: 300px; display: flex; align-items: flex-end;
+}
+.lp-photo.short { min-height: 168px; align-items: flex-start; }
+.lp-photo.mid   { min-height: 250px; }
+.lp-photo.tall  { min-height: 380px; }
+.lp-photo::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(14,34,72,.15) 0%, rgba(14,34,72,.30) 42%, rgba(10,24,54,.90) 100%);
+}
+.lp-photo.short::after { background: linear-gradient(180deg, rgba(14,34,72,.30), rgba(14,34,72,.10)); }
+
+/* tag sits inside the photo, top corner */
+.lp-tag {
+  position: absolute; top: 16px; left: 16px; z-index: 3;
+  font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
+  padding: 6px 13px; border-radius: 99px;
+  background: rgba(255,255,255,.94); color: var(--navy-dark);
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
+}
+.lp-tag.gold  { background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; }
+.lp-tag.green { background: #1e6b3a; color: #fff; }
+
+/* heading and copy over the photo */
+.lp-over { position: relative; z-index: 2; padding: 24px 26px 26px; width: 100%; }
+.lp-over h3 {
+  font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 700; color: #fff; margin: 0 0 9px; line-height: 1.2;
+  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+}
+.lp-over p { font-size: 14.5px; color: rgba(255,255,255,.92); line-height: 1.6; margin: 0 0 14px; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+
+.lp-go { font-size: 14.5px; font-weight: 700; color: var(--navy); display: inline-flex; align-items: center; gap: 8px; }
+.lp-go.light { color: #f0d87a; }
+.lp-go i { font-size: 12px; transition: transform .15s; }
+.lp-tool:hover .lp-go i, .lp-path:hover .lp-go i { transform: translateX(4px); }
+
+/* card shells */
+.lp-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1080px; margin: 0 auto; }
+.lp-tool {
+  display: flex; flex-direction: column; text-decoration: none; overflow: hidden;
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
+.lp-tool.feat { grid-column: span 2; grid-row: span 2; }
+.lp-tool.feat .lp-photo { flex: 1; min-height: 100%; }
+.lp-tool.wide { grid-column: span 2; }
+.lp-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+.lp-body h3 { font-size: 18px; font-weight: 800; color: var(--navy-dark); margin: 0 0 8px; letter-spacing: -.01em; }
+.lp-body p { font-size: 14px; color: #5a6070; line-height: 1.6; margin: 0 0 14px; flex: 1; }
+
+.lp-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; max-width: 1080px; margin: 0 auto; }
+.lp-path { display: block; text-decoration: none; border-radius: 16px; overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease; }
+.lp-path:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
+
+@media (max-width: 900px) {
+  .lp-tools { grid-template-columns: 1fr 1fr; }
+  .lp-tool.feat, .lp-tool.wide { grid-column: span 2; grid-row: auto; }
+  .lp-tool.feat .lp-photo { min-height: 300px; }
+}
+@media (max-width: 620px) {
+  .lp-tools { grid-template-columns: 1fr; }
+  .lp-tool.feat, .lp-tool.wide { grid-column: span 1; }
+  .lp-cred { flex-direction: column; text-align: center; }
+  .lp-cred-badges { justify-content: center; }
+}
+
 /* ============================================================
    LANDING PAGE
    ============================================================ */
@@ -1348,71 +1440,89 @@ body.pl-signedin .gate-cta { display: none; }
   </div>
 </section>
 
-<!-- TOOLS GRID -->
-<section class="section" style="padding-top:52px;padding-bottom:20px;">
+
+<!-- CREDIBILITY -->
+<section class="section" style="padding:26px 0 6px;">
   <div class="section-inner">
-    <div class="lp-head">
-      <div class="section-label">Free tools</div>
-      <h2 class="section-title">Everything you need to fight your <span class="gold-text">property tax bill</span></h2>
-      <p class="section-subtitle">All free, all built on New Jersey's own records. No signup to look, no catch.</p>
+    <div class="lp-cred">
+      <img src="/johnprofile.jpg" alt="John Scafide" loading="lazy">
+      <div class="lp-cred-txt">
+        <b>Built and maintained by John Scafide.</b> Licensed New Jersey real estate agent #2079591 with The McKenty Team
+        at Opus Elite Real Estate, and a Level 4 certified tax professional who has prepared New Jersey returns for over 15 years.
+        <span>Every number on this site comes from New Jersey&rsquo;s own published records. Where the data cannot support an
+        answer, it says so instead of guessing.</span>
+      </div>
+      <div class="lp-cred-badges">
+        <div><b>168</b><span>Towns</span></div>
+        <div><b>21</b><span>Counties</span></div>
+        <div><b>15+</b><span>Yrs tax</span></div>
+      </div>
     </div>
+  </div>
+</section>
+
+<!-- TOOLS GRID -->
+<section class="section" style="padding-top:56px;padding-bottom:20px;">
+  <div class="section-inner">
+    <h2 class="lp-h2">Free tools</h2>
 
     <div class="lp-tools">
+
       <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-tool-img" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=70&w=1200&auto=format&fit=crop')"></div>
-        <div class="lp-tool-body">
-          <div class="lp-tool-tag">Most popular</div>
-          <h3>Look up any address</h3>
-          <p>Assessment, tax bill, block and lot, lot lines on a map, and our own read on whether that assessment is defensible.</p>
-          <span class="lp-tool-go">Search a property <i class="fas fa-arrow-right"></i></span>
+        <div class="lp-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=1400&auto=format&fit=crop')">
+          <span class="lp-tag gold">Most popular</span>
+          <div class="lp-over">
+            <h3>Look up any address</h3>
+            <p>Assessment, tax bill, block and lot, real lot lines, and our read on whether that assessment holds up.</p>
+            <span class="lp-go light">Search a property <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
       </a>
 
       <a class="lp-tool" href="/anchor-estimator.html">
-        <div class="lp-tool-icon anchor"><i class="fas fa-piggy-bank"></i></div>
-        <div class="lp-tool-body">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+          <span class="lp-tag green">Up to $6,500</span>
+        </div>
+        <div class="lp-body">
           <h3>ANCHOR &amp; Stay NJ estimator</h3>
-          <p>Up to $1,500 back for homeowners, $700 for renters, $6,500 for seniors. Most people who qualify never claim it.</p>
-          <span class="lp-tool-go">Check what you qualify for <i class="fas fa-arrow-right"></i></span>
+          <p>$1,500 for homeowners, $700 for renters, $6,500 for seniors. Most who qualify never claim it.</p>
+          <span class="lp-go">Check eligibility <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
 
       <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-tool-icon appeal"><i class="fas fa-scale-unbalanced-flip"></i></div>
-        <div class="lp-tool-body">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+          <span class="lp-tag">Chapter 123</span>
+        </div>
+        <div class="lp-body">
           <h3>Appeal screener</h3>
-          <p>We test your assessment against comparable homes and your own sale history, the way a county board actually decides it.</p>
-          <span class="lp-tool-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
+          <p>We test your assessment against comparable homes and your own sale history, the way a county board decides it.</p>
+          <span class="lp-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
 
-      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-tool-icon proceeds"><i class="fas fa-sack-dollar"></i></div>
-        <div class="lp-tool-body">
-          <h3>Net proceeds calculator</h3>
-          <p>What you actually walk away with after commission, the NJ transfer fee, and your payoff. Including the 2025 seller fee change.</p>
-          <span class="lp-tool-go">Run the numbers <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-tool-icon trade"><i class="fas fa-right-left"></i></div>
-        <div class="lp-tool-body">
-          <h3>Trade-up tax check</h3>
-          <p>Same price house, different town, wildly different bill. Compare the real effective rate across all 168 South Jersey towns.</p>
-          <span class="lp-tool-go">Compare towns <i class="fas fa-arrow-right"></i></span>
+      <a class="lp-tool wide" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo mid" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=72&w=1200&auto=format&fit=crop')">
+          <span class="lp-tag">Sellers</span>
+          <div class="lp-over">
+            <h3>Net proceeds &amp; trade-up</h3>
+            <p>What you walk away with after commission and the NJ transfer fee, and what the tax bill looks like in the town you are moving to.</p>
+            <span class="lp-go light">Run the numbers <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
       </a>
 
       <a class="lp-tool" href="/property/dashboard.html">
-        <div class="lp-tool-icon track"><i class="fas fa-chart-line"></i></div>
-        <div class="lp-tool-body">
-          <div class="lp-tool-tag free">Free account</div>
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=900&auto=format&fit=crop&sat=-40')">
+          <span class="lp-tag green">Free account</span>
+        </div>
+        <div class="lp-body">
           <h3>Track your home</h3>
           <p>Claim your property and watch the assessment year over year. We flag it the moment it drifts out of line.</p>
-          <span class="lp-tool-go">Open my dashboard <i class="fas fa-arrow-right"></i></span>
+          <span class="lp-go">Open my dashboard <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
+
     </div>
   </div>
 </section>
@@ -1432,38 +1542,36 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- WHO IT HELPS -->
 <section class="section" style="padding-top:52px;">
   <div class="section-inner">
-    <div class="lp-head">
-      <div class="section-label">Where do you fit?</div>
-      <h2 class="section-title">Start with what you're actually trying to do</h2>
-    </div>
+    <h2 class="lp-h2">Where do you fit?</h2>
     <div class="lp-paths">
-      <div class="lp-path">
-        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=900&auto=format&fit=crop')">
-          <span>I think I'm overpaying</span>
+      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+          <div class="lp-over">
+            <h3>I think I'm overpaying</h3>
+            <p>We test your assessment against comparable homes and what you paid. If there's a case you'll see the dollar figure. If there isn't, I'll tell you to save your filing fee.</p>
+            <span class="lp-go light">Check my assessment <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
-        <div class="lp-path-body">
-          <p>Look up your address and we'll test the assessment against comparable homes nearby and against what you paid. If there's a case, you'll see the dollar figure. If there isn't, I'll tell you to save your filing fee.</p>
-          <button class="lp-path-btn" onclick="document.getElementById('pl-addr').focus()">Check my assessment</button>
+      </a>
+      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+          <div class="lp-over">
+            <h3>I might sell</h3>
+            <p>What the home is defensibly worth, what it nets after costs, and what you'd pay in tax in the town you're moving to. Free listing proposal in one business day.</p>
+            <span class="lp-go light">Run my numbers <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
-      </div>
-      <div class="lp-path">
-        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=70&w=900&auto=format&fit=crop')">
-          <span>I might sell</span>
+      </a>
+      <a class="lp-path" href="/anchor-estimator.html">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+          <span class="lp-tag green">65+</span>
+          <div class="lp-over">
+            <h3>I'm 65 or older</h3>
+            <p>Stay NJ can cover up to half your bill, to $6,500, and it stacks with ANCHOR and the Senior Freeze. Most seniors who qualify have never filed.</p>
+            <span class="lp-go light">See senior benefits <i class="fas fa-arrow-right"></i></span>
+          </div>
         </div>
-        <div class="lp-path-body">
-          <p>See what the home is defensibly worth, what it nets after commission and the NJ transfer fee, and what your tax bill would look like in the town you're moving to. Then get a free listing proposal in one business day.</p>
-          <button class="lp-path-btn" onclick="document.getElementById('pl-addr').focus()">Run my numbers</button>
-        </div>
-      </div>
-      <div class="lp-path">
-        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=900&auto=format&fit=crop&sat=-30')">
-          <span>I'm 65 or older</span>
-        </div>
-        <div class="lp-path-body">
-          <p>Stay NJ can cover up to half your property tax bill, to a maximum of $6,500, and it stacks with ANCHOR and the Senior Freeze. Most seniors who qualify have never filed for it.</p>
-          <a class="lp-path-btn" href="/anchor-estimator.html">See senior benefits</a>
-        </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -1471,8 +1579,7 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- HOW IT WORKS -->
 <section class="section section-alt">
   <div class="section-inner">
-    <div class="lp-head">
-      <div class="section-label">Three steps</div>
+    <h2 class="lp-h2">How it works</h2>
       <h2 class="section-title">How it works</h2>
     </div>
     <div class="lp-steps">
@@ -1498,11 +1605,7 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- HOW WE VALUE -->
 <section class="section section-alt">
   <div class="section-inner">
-    <div style="text-align:center;max-width:720px;margin:0 auto 34px;">
-      <div class="section-label">Watchdog Tax Value</div>
-      <h2 class="section-title">How we work out what your home <span class="gold-text">should</span> be assessed at</h2>
-      <p class="section-subtitle">Your tax bill is decided by a number most people never look at. Here is exactly where ours comes from, and what it can and cannot see.</p>
-    </div>
+<h2 class="lp-h2">How we value your home</h2>
 
     <div class="hv-grid">
 
@@ -1607,9 +1710,7 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- FAQ -->
 <section class="section">
   <div class="section-inner">
-    <div style="text-align:center;max-width:640px;margin:0 auto 30px;">
-      <h2 class="section-title">Common questions</h2>
-    </div>
+<h2 class="lp-h2">Common questions</h2>
     <div style="max-width:800px;margin:0 auto;">
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
@@ -2061,7 +2162,7 @@ body.pl-signedin .gate-cta { display: none; }
   // PASTE THE PUBLISHABLE KEY FOR uvkvaxljhhngydvlrzom HERE.
   // Project Settings -> API Keys -> publishable (starts sb_publishable_).
   // The old key below belongs to a DIFFERENT project and will be rejected.
-  var LEDGER_KEY = 'PASTE_YOUR_PUBLISHABLE_KEY_HERE';
+  var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
   function recordLookup(p, geo, rate, dy) {
     try {
