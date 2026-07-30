@@ -29,7 +29,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/styles.css">
@@ -70,9 +70,10 @@
   box-shadow: 0 2px 10px rgba(14,34,72,.10);
 }
 .pl-hero h1 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 3rem; font-weight: 700; line-height: 1.14;
-  color: #FFFFFF; margin: 0 0 18px;
+  font-family: 'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+  font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 800; line-height: 1.08;
+  letter-spacing: -.032em; color: #fff; margin: 0 0 26px;
+  text-shadow: 0 2px 22px rgba(0,0,0,.42);
 }
 .pl-type { color: #eeda98; border-right: 3px solid var(--gold); padding-right: 3px; }
 .pl-type.done { border-right-color: transparent; }
@@ -83,39 +84,92 @@
 }
 
 /* ---------- SEARCH ---------- */
-.pl-search-card {
-  padding: 12px; box-shadow: 0 22px 60px rgba(14,34,72,.22); max-width: 690px; margin: 0 auto;
-}
-.pl-search-row { display: flex; gap: 9px; }
+.pl-search-card { max-width: 720px; margin: 0 auto; }
+.pl-search-row { display: block; }
+
+/* One pill. Geo icon left, input in the middle, search button right, all on
+   the same white surface with nothing boxed inside it. */
 .pl-input-wrap {
-  display: flex;
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 50px; /* Gives the bar its rounded pill shape */
-  padding: 6px 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  max-width: 700px;
-  margin: 0 auto;
+  display: flex; align-items: center; gap: 4px;
+  background: #fff; border-radius: 999px; padding: 7px 8px 7px 6px;
+  box-shadow: 0 10px 34px rgba(14,34,72,.24), 0 2px 6px rgba(14,34,72,.10);
+  max-width: 720px; margin: 0 auto;
+  transition: box-shadow .18s ease;
 }
+.pl-input-wrap:focus-within { box-shadow: 0 12px 40px rgba(14,34,72,.30), 0 0 0 3px rgba(42,79,143,.18); }
+
 .pl-input {
-  flex: 1; padding: 16px 52px 16px 18px; font-size: 16px; font-family: inherit; width: 100%;
-  border: 1.5px solid transparent; border-radius: 11px; background: #f6f7fa; color: var(--text);
+  flex: 1; min-width: 0; padding: 14px 10px; font-size: 16.5px; font-family: inherit;
+  border: none; background: transparent; color: var(--text); border-radius: 0;
 }
-.pl-input:focus { outline: none; border-color: var(--navy-light); background: #fff; }
+.pl-input:focus { outline: none; }
+.pl-input::placeholder { color: #8a93a6; }
+
 .pl-geo {
-  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-  width: 36px; height: 36px; border: none; border-radius: 9px; background: #e8edf6;
-  color: var(--navy); cursor: pointer; font-size: 15px;
+  position: static; transform: none; flex-shrink: 0;
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  border: none; border-radius: 50%; background: transparent;
+  color: #5a6070; cursor: pointer; font-size: 17px; transition: background .15s, color .15s;
 }
-.pl-geo:hover { background: var(--navy); color: #fff; }
+.pl-geo:hover { background: #f2f5fa; color: var(--navy); }
 .pl-geo.busy { opacity: .5; cursor: wait; }
+
 .pl-search-btn {
-  padding: 16px 28px; font-size: 15.5px; font-weight: 700; font-family: inherit; white-space: nowrap;
-  background: var(--navy); color: #fff; border: none; border-radius: 11px; cursor: pointer;
+  flex-shrink: 0; width: 46px; height: 46px; padding: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; background: var(--navy); color: #fff;
+  border: none; border-radius: 50%; cursor: pointer; transition: background .15s;
 }
 .pl-search-btn:hover { background: var(--navy-dark); }
 .pl-search-btn:disabled { opacity: .6; cursor: wait; }
 .pl-hero-note { font-size: 13px; color: #3c4759; margin-top: 16px; font-weight: 500; text-shadow: 0 1px 8px rgba(255,255,255,.9); }
+
+
+/* ---------- STICKY LANDING SEARCH ---------- */
+.ssearch {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+  background: rgba(255,255,255,.97); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 4px 20px rgba(14,34,72,.10);
+  transform: translateY(-100%); transition: transform .26s cubic-bezier(.16,.84,.44,1);
+}
+.ssearch.on { transform: translateY(0); }
+.ssearch-in {
+  max-width: 1120px; margin: 0 auto; padding: 10px 20px;
+  display: flex; align-items: center; gap: 16px;
+}
+.ssearch-brand, .ssearch-alt {
+  display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
+  font-size: 14px; font-weight: 800; color: var(--navy-dark); text-decoration: none;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -.01em;
+}
+.ssearch-brand i { color: var(--gold); font-size: 17px; }
+.ssearch-alt { font-weight: 700; color: var(--navy); }
+.ssearch-alt i { font-size: 13px; }
+.ssearch-pill {
+  flex: 1; min-width: 0; display: flex; align-items: center; gap: 3px;
+  background: #f4f6fa; border: 1px solid var(--border); border-radius: 999px;
+  padding: 4px 5px 4px 3px; max-width: 620px; margin: 0 auto;
+}
+.ssearch-pill:focus-within { background: #fff; border-color: var(--navy-light); }
+.ssearch-pill input {
+  flex: 1; min-width: 0; border: none; background: transparent; outline: none;
+  font-family: inherit; font-size: 15px; padding: 9px 8px; color: var(--text);
+}
+.ssearch-geo {
+  flex-shrink: 0; width: 34px; height: 34px; border: none; border-radius: 50%;
+  background: transparent; color: #5a6070; cursor: pointer; font-size: 14px;
+}
+.ssearch-geo:hover { background: #e8edf6; color: var(--navy); }
+.ssearch-go {
+  flex-shrink: 0; width: 36px; height: 36px; border: none; border-radius: 50%;
+  background: var(--navy); color: #fff; cursor: pointer; font-size: 14px;
+}
+.ssearch-go:hover { background: var(--navy-dark); }
+@media (max-width: 760px) {
+  .ssearch-brand span, .ssearch-alt span { display: none; }
+  .ssearch-in { gap: 10px; padding: 8px 14px; }
+}
 
 /* ---------- STATES ---------- */
 .pl-result { max-width: 1060px; margin: 0 auto; }
@@ -372,6 +426,7 @@
 .plm-menu hr { border: none; border-top: 1px solid #eef0f5; margin: 6px 4px; }
 
 body.plm-locked { overflow: hidden; }
+body.plm-locked .ssearch { transform: translateY(-100%) !important; }
 
 
 /* ---------- WATCHDOG ESTIMATE ---------- */
@@ -767,7 +822,8 @@ body.pl-signedin .gate-cta { display: none; }
 
 /* ---------- SECTION HEADINGS ---------- */
 .lp-h2 {
-  font-family: 'Playfair Display', Georgia, serif;
+  font-family: 'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+  font-weight: 800 !important; letter-spacing: -.028em;
   font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: var(--navy-dark);
   letter-spacing: -.02em; line-height: 1.15; margin: 0 0 18px; text-align: left;
 }
@@ -1397,6 +1453,25 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- ============================================================
      HERO
      ============================================================ -->
+
+<!-- STICKY SEARCH -->
+<div class="ssearch" id="ssearch">
+  <div class="ssearch-in">
+    <a class="ssearch-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <div class="ssearch-pill">
+      <button class="ssearch-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+      <input id="ss-addr" type="text" autocomplete="off" placeholder="Enter a New Jersey address"
+             onkeydown="if(event.key==='Enter')ssGo()">
+      <button class="ssearch-go" onclick="ssGo()" title="Search" aria-label="Search">
+        <i class="fas fa-magnifying-glass"></i>
+      </button>
+    </div>
+    <a class="ssearch-alt" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My properties</span></a>
+  </div>
+</div>
+
 <div class="pl-hero">
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
@@ -1426,24 +1501,7 @@ body.pl-signedin .gate-cta { display: none; }
   </div>
 </div>
 
-<!-- BROKERAGE ATTRIBUTION -->
-<section class="section" style="padding-top:30px;padding-bottom:6px;">
-  <div class="section-inner">
-    <div class="pl-brokerband">
-      <img src="/opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
-      <div class="pl-brokerband-txt">
-        <p><b>In partnership with Opus Elite Real Estate.</b> John Scafide, Licensed New Jersey Real Estate Agent
-        #2079591, The McKenty Team at Opus Elite Real Estate.</p>
-        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
-        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
-        For full sales information on this and other properties, visit
-        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">johnscafide.opuselitesj.com</a>.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
- <!-- STATUS STRIP -->
+<!-- STATUS STRIP -->
 <!--<section class="section" style="padding-top:20px;padding-bottom:10px;">
   <div class="section-inner">
     <div id="pl-inline" class="pl-result">
@@ -1459,7 +1517,6 @@ body.pl-signedin .gate-cta { display: none; }
 <!-- TOOLS GRID -->
 <section class="section" style="padding-top:50px;padding-bottom:18px;">
   <div class="section-inner">
-    <h2 class="lp-h2">Free tools</h2>
     <div class="lp-tools">
 
       <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
@@ -1534,6 +1591,24 @@ body.pl-signedin .gate-cta { display: none; }
   </div>
 </section>
 
+<!-- BROKERAGE ATTRIBUTION -->
+<section class="section" style="padding-top:30px;padding-bottom:6px;">
+  <div class="section-inner">
+    <div class="pl-brokerband">
+      <img src="/opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
+      <div class="pl-brokerband-txt">
+        <p><b>In partnership with Opus Elite Real Estate.</b> John Scafide, Licensed New Jersey Real Estate Agent
+        #2079591, The McKenty Team at Opus Elite Real Estate.</p>
+        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
+        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
+        For full sales information on this and other properties, visit
+        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">johnscafide.opuselitesj.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
 <!-- WHO IT HELPS -->
 <section class="section" style="padding-top:46px;">
   <div class="section-inner">
@@ -5245,6 +5320,38 @@ body.pl-signedin .gate-cta { display: none; }
   window.plFaq = function (q) { q.parentElement.classList.toggle('active'); };
 
   plInitAuth();
+
+
+  // ══════════════════════════════════════════════
+  // STICKY LANDING SEARCH
+  // Slides in once the hero search has scrolled out of reach, slides away
+  // again when you come back up to it.
+  // ══════════════════════════════════════════════
+  window.ssGo = function () {
+    var a = el('ss-addr'), main = el('pl-addr');
+    if (!a || !main) return;
+    var v = (a.value || '').trim();
+    if (!v) { a.focus(); return; }
+    main.value = v;
+    window.plLookup();
+  };
+
+  (function stickySearch() {
+    var bar = el('ssearch'), hero = document.querySelector('.pl-search-card');
+    if (!bar || !hero) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = hero.getBoundingClientRect();
+      // once the hero search box is off the top of the screen, take over
+      bar.classList.toggle('on', r.bottom < 8);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
 
   var qs = new URLSearchParams(window.location.search);
   if (qs.get('address')) {
