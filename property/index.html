@@ -506,6 +506,11 @@ body.plm-locked { overflow: hidden; }
   text-shadow: 0 1px 8px rgba(255,255,255,.9);
 }
 
+.pl-freenote {
+  max-width: 620px; margin: 14px auto 0; font-size: 13px; color: #3c4759;
+  line-height: 1.6; text-shadow: 0 1px 8px rgba(255,255,255,.9);
+}
+
 /* ---------- STICKY SECTION NAV ---------- */
 .secnav {
   position: absolute; left: 50%; top: 62px; z-index: 40;
@@ -534,6 +539,38 @@ body.plm-locked { overflow: hidden; }
   .secnav button span { display: none; }
   .secnav button i { font-size: 14px; }
   .secnav button.here span { display: inline; }
+}
+
+/* ---------- GATED CONTENT ---------- */
+.gated { position: relative; }
+.gated-inner { filter: blur(7px); opacity: .55; pointer-events: none; user-select: none; transition: filter .25s ease, opacity .25s ease; }
+.gate-cta { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.gate-card {
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  box-shadow: 0 18px 44px rgba(14,34,72,.18);
+  padding: 28px 30px; max-width: 420px; text-align: center;
+}
+.gate-icon {
+  width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 50%;
+  background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.gate-t { font-size: 19px; font-weight: 800; color: #0e2248; margin-bottom: 8px; letter-spacing: -.01em; }
+.gate-b { font-size: 14px; color: #5a6070; line-height: 1.65; margin-bottom: 18px; }
+.gate-btn {
+  width: 100%; padding: 14px; border: none; border-radius: 10px; cursor: pointer;
+  background: var(--navy); color: #fff; font-size: 15.5px; font-weight: 700; font-family: inherit;
+}
+.gate-btn:hover { background: var(--navy-dark); }
+.gate-f { font-size: 12px; color: #8a93a6; margin-top: 12px; line-height: 1.55; }
+
+/* signed in: everything unlocks, overlays vanish */
+body.pl-signedin .gated-inner { filter: none; opacity: 1; pointer-events: auto; user-select: auto; }
+body.pl-signedin .gate-cta { display: none; }
+
+@media (max-width: 640px) {
+  .gate-card { padding: 22px 20px; }
+  .gate-t { font-size: 17px; }
 }
 
 /* ---------- AUTH ---------- */
@@ -1277,6 +1314,7 @@ body.plm-locked { overflow: hidden; }
     </div>
     <div class="pl-hero-note">Tap the crosshair to use your current location. Nothing about you is stored, no email needed to see results.</div>
     <div class="pl-heroauth" id="pl-heroauth"></div>
+    <div class="pl-freenote">Your assessment, tax bill, and parcel record are always free, no account needed. A free account unlocks the comparisons, the appeal analysis, and saved properties.</div>
   </div>
 </div>
 
@@ -3020,7 +3058,9 @@ body.plm-locked { overflow: hidden; }
   function paintDrivers(v) {
     var host = el('plm-drivers');
     if (!host) return;
-    host.innerHTML =
+    host.innerHTML = gate('drivers',
+      'See the sales behind this number',
+      'The six nearby closings that carried the most weight, what each one sold for, and what it implies this property is worth.',
       '<h3 class="plm-sec-h">The sales this estimate leaned on</h3>' +
       '<p class="plm-sec-s">Nearby homes that actually changed hands, picked for being recent and similar in vintage, lot, and assessment. ' +
       '"Implies" is what this property would be worth if it traded on the same terms as that one.</p>' +
@@ -3036,7 +3076,7 @@ body.plm-locked { overflow: hidden; }
           '<td class="num" style="color:var(--navy);font-weight:800;">' +
             (d.implied ? money(Math.round(d.implied / 1000) * 1000) : '-') + '</td></tr>';
       }).join('') +
-      '</tbody></table></div>';
+      '</tbody></table></div>');
   }
 
   window.plWhy = function () {
@@ -3096,7 +3136,9 @@ body.plm-locked { overflow: hidden; }
       return;
     }
     var top = list.slice(0, 12);
-    host.innerHTML =
+    host.innerHTML = gate('comps',
+      'Unlock nearby recorded sales',
+      'Every deed recorded near this address in the last six years, with sale price, assessed value, year built, and lot size.',
       '<h3 class="plm-sec-h">Recorded sales near this home</h3>' +
       '<p class="plm-sec-s">Actual deeds recorded nearby, newest first. These come from the state file, so they are real closed transfers, not listings. Sale prices lag by roughly a year.</p>' +
       '<div class="comps-wrap"><table class="comps"><thead><tr>' +
@@ -3114,7 +3156,7 @@ body.plm-locked { overflow: hidden; }
       '<div class="comps-cta">' +
         '<div><b>' + list.length + ' recorded sales nearby.</b> Want the ones that actually matter, with condition, upgrades, and days on market? That takes MLS access.</div>' +
         '<button class="plm-rbtn" style="width:auto;padding:12px 20px;" onclick="plOpenForm(\'comps\')">Send me the real comps</button>' +
-      '</div>';
+      '</div>');
   }
 
   // ---- neighborhood context ----
@@ -3127,7 +3169,9 @@ body.plm-locked { overflow: hidden; }
       var c = Math.abs(d) < 5 ? '#5a6070' : (d > 0 ? 'var(--red)' : 'var(--green)');
       return '<span style="color:' + c + ';font-weight:700;">' + (d > 0 ? '+' : '') + d.toFixed(0) + '%</span>';
     }
-    host.innerHTML =
+    host.innerHTML = gate('hood',
+      'Compare this home to its neighbors',
+      'Median assessed value, tax bill, year built, and lot size across the residential parcels around it, with the gap on each one.',
       '<h3 class="plm-sec-h">How this home compares nearby</h3>' +
       '<p class="plm-sec-s">Median of ' + h.n + ' residential parcels within about a third of a mile.</p>' +
       '<div class="plm-kpis">' +
@@ -3143,7 +3187,7 @@ body.plm-locked { overflow: hidden; }
           '<b>This home pays about ' + Math.round((tax / h.medTax - 1) * 100) + '% more than its neighbors.</b> ' +
           'Sometimes that is a bigger or nicer house. Sometimes it is an assessment nobody ever challenged. ' +
           '<a href="#" onclick="plScrollTo(\'pl-appeal\');return false;">Worth a look</a>.</div></div>'
-        : '');
+        : ''));
   }
 
   // ══════════════════════════════════════════════
@@ -3630,7 +3674,10 @@ body.plm-locked { overflow: hidden; }
       '<div class="plm-sec">' +
         '<h3 class="plm-sec-h">What would you walk away with?</h3>' +
         '<p class="plm-sec-s">Net proceeds after commission, the NJ realty transfer fee, and everything else. Adjust anything and it moves live.</p>' +
-        buildProceeds() +
+        gate('proceeds',
+          'Unlock the net proceeds calculator',
+          'What you actually walk away with after commission, the NJ realty transfer fee, your payoff, and the 2025 seller fee change.',
+          buildProceeds()) +
       '</div>' +
 
       '<div class="plm-sec" id="plm-score-sec"></div>' +
@@ -3639,7 +3686,10 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-sec" id="plm-rebate-sec">' + buildRebates(tax) + '</div>' +
 
-      '<div class="plm-sec">' + buildTradeUp() + '</div>' +
+      '<div class="plm-sec">' + gate('tradeup',
+        'Compare tax across 168 towns',
+        'Pick where you are looking and see that town\u2019s real effective rate, measured from its own parcels, against what you pay now.',
+        buildTradeUp()) + '</div>' +
 
       '<div class="plm-sec">' + buildMortgageCalc() + '</div>' +
 
@@ -4300,6 +4350,41 @@ body.plm-locked { overflow: hidden; }
     update();
   }
 
+
+  // ══════════════════════════════════════════════
+  // GATED CONTENT
+  //
+  // Honest framing: this is a conversion device, not a security control. The
+  // markup is already in the DOM and anyone who opens devtools can read it.
+  // That is fine, because none of it is secret. It is public record either way.
+  // Nothing genuinely sensitive is ever gated this way.
+  //
+  // What stays free, on purpose: the assessment, the tax bill, the parcel
+  // record, and the headline value. Those are the things a homeowner has a
+  // right to see about their own house, and putting a wall in front of them
+  // would be the wrong trade for a few signups.
+  //
+  // What is gated: the analysis we built on top of it.
+  // ══════════════════════════════════════════════
+  function gate(key, title, blurb, html) {
+    return '<div class="gated" data-gate="' + key + '">' +
+      '<div class="gated-inner">' + html + '</div>' +
+      '<div class="gate-cta">' +
+        '<div class="gate-card">' +
+          '<div class="gate-icon"><i class="fas fa-lock-open"></i></div>' +
+          '<div class="gate-t">' + esc(title) + '</div>' +
+          '<div class="gate-b">' + blurb + '</div>' +
+          '<button class="gate-btn" onclick="plSignInPrompt()">Create a free account</button>' +
+          '<div class="gate-f">Free forever. No card. Takes about twenty seconds and you keep everything you save.</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function applyGates() {
+    document.body.classList.toggle('pl-signedin', !!plUser);
+  }
+
   // ══════════════════════════════════════════════
   // ACCOUNTS  ·  Supabase auth, Google and Facebook
   //
@@ -4324,6 +4409,7 @@ body.plm-locked { overflow: hidden; }
     sb.auth.getSession().then(function (res) {
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
       paintAuthBtn();
+      applyGates();
       // OAuth returns with a hash. Clean it so the address stays shareable.
       if (location.hash.indexOf('access_token') > -1) {
         history.replaceState(null, '', location.pathname + location.search);
@@ -4332,6 +4418,7 @@ body.plm-locked { overflow: hidden; }
     sb.auth.onAuthStateChange(function (_e, session) {
       plUser = session ? session.user : null;
       paintAuthBtn();
+      applyGates();
       if (current) refreshSaveState();
     });
   }
