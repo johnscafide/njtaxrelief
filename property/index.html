@@ -912,6 +912,20 @@ body.pl-signedin .gate-cta { display: none; }
   transition: transform .18s ease, box-shadow .18s ease; }
 .lp-path:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
 
+.lp-tool.span3 { grid-column: span 3; }
+.lp-photo.band { min-height: 210px; align-items: center; }
+.lp-photo.band::after {
+  background: linear-gradient(90deg, rgba(6,14,34,.92) 0%, rgba(6,14,34,.72) 46%, rgba(6,14,34,.18) 100%);
+}
+.lp-over.band-over { max-width: 620px; padding: 26px 30px; }
+@media (max-width: 900px) {
+  .lp-tool.span3 { grid-column: span 2; }
+  .lp-photo.band { min-height: 240px; align-items: flex-end; }
+  .lp-photo.band::after { background: linear-gradient(180deg, rgba(8,18,42,.10), rgba(6,14,34,.94)); }
+  .lp-over.band-over { max-width: none; }
+}
+@media (max-width: 620px) { .lp-tool.span3 { grid-column: span 1; } }
+
 @media (max-width: 900px) {
   .lp-tools { grid-template-columns: 1fr 1fr; }
   .lp-tool.feat, .lp-tool.wide { grid-column: span 2; grid-row: auto; }
@@ -1553,10 +1567,10 @@ body.pl-signedin .gate-cta { display: none; }
         </div>
       </a>
 
-      <a class="lp-tool wide" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo mid" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1200&auto=format&fit=crop')">
+      <a class="lp-tool span3" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo band" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1600&auto=format&fit=crop')">
           <span class="lp-tag">Sellers</span>
-          <div class="lp-over">
+          <div class="lp-over band-over">
             <h3>Net proceeds &amp; trade-up</h3>
             <p>What you walk away with after commission and the NJ transfer fee, and what the tax bill looks like in the town you are moving to.</p>
             <span class="lp-go light">Run the numbers <i class="fas fa-arrow-right"></i></span>
@@ -1575,6 +1589,28 @@ body.pl-signedin .gate-cta { display: none; }
         </div>
       </a>
 
+
+      <a class="lp-tool" href="/property-tax-appeal.html">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-45')">
+          <span class="lp-tag">Guide</span>
+        </div>
+        <div class="lp-body">
+          <h3>How NJ appeals work</h3>
+          <p>Deadlines, the Chapter 123 test, what evidence a county board actually wants, and when not to bother filing.</p>
+          <span class="lp-go">Read the guide <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-25')">
+          <span class="lp-tag">168 towns</span>
+        </div>
+        <div class="lp-body">
+          <h3>Compare your town</h3>
+          <p>Effective tax rate, equalization ratio, and median assessment for every municipality in South Jersey, side by side.</p>
+          <span class="lp-go">Compare towns <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -2114,16 +2150,48 @@ body.pl-signedin .gate-cta { display: none; }
       .then(function (res) {
         if (!res.f) throw new Error('noparcel');
         el('pl-inline').innerHTML = readyState();
-        render(res.f, res.g, addr);
+        // Render separately so a bug in the panel cannot masquerade as
+        // "address not found". Those are completely different problems and
+        // telling someone their address does not exist when the real fault is
+        // ours is the worst possible answer.
+        try {
+          render(res.f, res.g, addr);
+        } catch (err) {
+          console.error('[watchdog] render failed:', err);
+          throw new Error('render:' + (err && err.message ? err.message : err));
+        }
       })
       .catch(function (e) {
-        var msg = (e && e.message) === 'nogeo'
-          ? 'We could not place that address. Try adding the town and zip code, or drop the unit number.'
-          : 'We found the location but no parcel record matched. That usually means a condo unit, a brand new build, or a property billed together with other lots.';
+        var m = (e && e.message) || '';
+        console.error('[watchdog] lookup failed:', e);
+
+        var title, msg, extra = '';
+        if (m === 'nogeo') {
+          title = 'We could not place that address';
+          msg = 'Try adding the town and zip code, or drop the unit number. ' +
+                'New construction and some condo units are not in the state file yet.';
+        } else if (m === 'noparcel') {
+          title = 'No parcel record matched';
+          msg = 'We found the location but no parcel record there. That usually means a condo unit, ' +
+                'a brand new build, or a property billed together with other lots.';
+        } else if (m.indexOf('render:') === 0) {
+          title = 'Something broke on our end';
+          msg = 'We found the property but could not draw the report. That is our fault, not your address.';
+          extra = '<div class="pl-src" style="margin-top:14px;font-size:12px;">Technical detail: ' +
+                  esc(m.slice(7)) + '</div>';
+        } else {
+          title = 'That lookup did not go through';
+          msg = 'The state property service did not answer. It goes down occasionally. ' +
+                'Give it a minute and try again.';
+          extra = '<div class="pl-src" style="margin-top:14px;font-size:12px;">Technical detail: ' + esc(m || 'unknown') + '</div>';
+        }
+
         el('pl-inline').innerHTML =
           '<div class="pl-state"><i class="fas fa-circle-question"></i>' +
-          '<div class="pl-state-title">No match found</div><div class="pl-state-sub">' + msg + '</div></div>' +
-          '<div class="pl-src" style="margin-top:20px;">If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="/index.html#contact">Send me the address</a> and I will look it up by hand.</div>';
+          '<div class="pl-state-title">' + title + '</div>' +
+          '<div class="pl-state-sub">' + msg + '</div></div>' +
+          '<div class="pl-src" style="margin-top:20px;">If you know your block and lot, your municipal tax assessor can pull the exact record. <a href="/index.html#contact">Send me the address</a> and I will look it up by hand.</div>' +
+          extra;
       })
       .then(function () { btn.disabled = false; });
   };
