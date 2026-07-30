@@ -723,6 +723,87 @@ body.plm-locked { overflow: hidden; }
   .op-box { flex-direction: column; align-items: center; text-align: center; }
 }
 
+/* ============================================================
+   LANDING PAGE
+   ============================================================ */
+.lp-head { text-align: center; max-width: 720px; margin: 0 auto 34px; }
+
+/* ---------- TOOLS GRID ---------- */
+.lp-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; max-width: 1080px; margin: 0 auto; }
+.lp-tool {
+  display: flex; flex-direction: column; text-decoration: none; overflow: hidden;
+  background: #fff; border: 1px solid var(--border); border-radius: 16px;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(14,34,72,.13); border-color: var(--navy-light); }
+.lp-tool.feat { grid-column: span 2; flex-direction: row; }
+.lp-tool.feat .lp-tool-img { flex: 0 0 46%; background-size: cover; background-position: center; min-height: 240px; }
+.lp-tool-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+.lp-tool-icon {
+  width: 100%; height: 92px; display: flex; align-items: center; justify-content: center;
+  font-size: 30px; color: #fff;
+}
+.lp-tool-icon.anchor   { background: linear-gradient(135deg, #1e6b3a, #2b8a4d); }
+.lp-tool-icon.appeal   { background: linear-gradient(135deg, #a8341f, #c0392b); }
+.lp-tool-icon.proceeds { background: linear-gradient(135deg, #0e2248, #1a3a6b); }
+.lp-tool-icon.trade    { background: linear-gradient(135deg, #6b5514, #b8972a); }
+.lp-tool-icon.track    { background: linear-gradient(135deg, #2a4f8f, #4a7bc8); }
+.lp-tool-tag {
+  display: inline-block; align-self: flex-start; font-size: 10.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em; padding: 4px 11px; border-radius: 99px;
+  background: #fbf3dc; color: #7a6417; margin-bottom: 10px;
+}
+.lp-tool-tag.free { background: var(--green-light); color: var(--green); }
+.lp-tool h3 { font-size: 19px; font-weight: 800; color: #0e2248; margin: 0 0 8px; letter-spacing: -.01em; }
+.lp-tool.feat h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 27px; font-weight: 700; }
+.lp-tool p { font-size: 14.5px; color: #5a6070; line-height: 1.65; margin: 0 0 16px; flex: 1; }
+.lp-tool-go { font-size: 14.5px; font-weight: 700; color: var(--navy); display: inline-flex; align-items: center; gap: 8px; }
+.lp-tool-go i { font-size: 12px; transition: transform .15s; }
+.lp-tool:hover .lp-tool-go i { transform: translateX(4px); }
+
+/* ---------- STATS BAND ---------- */
+.lp-stats { background: linear-gradient(120deg, #0e2248, #1a3a6b 55%, #2a4f8f); padding: 44px 0; margin: 44px 0 0; }
+.lp-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 26px; text-align: center; }
+.lp-stats-grid b { display: block; font-size: clamp(30px, 4vw, 42px); font-weight: 800; color: #f0d87a; letter-spacing: -.02em; line-height: 1; }
+.lp-stats-grid span { display: block; font-size: 13px; color: #cdd9ec; margin-top: 9px; line-height: 1.5; }
+
+/* ---------- PATHS ---------- */
+.lp-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; }
+.lp-path { background: #fff; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+.lp-path-top {
+  position: relative; height: 150px; background-size: cover; background-position: center;
+  display: flex; align-items: flex-end; padding: 18px 22px;
+}
+.lp-path-top::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(14,34,72,.85)); }
+.lp-path-top span {
+  position: relative; z-index: 2; font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px; font-weight: 700; color: #fff;
+}
+.lp-path-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+.lp-path-body p { font-size: 14.5px; color: #5a6070; line-height: 1.7; margin: 0 0 18px; flex: 1; }
+.lp-path-btn {
+  display: block; width: 100%; text-align: center; padding: 13px; border: none; border-radius: 9px;
+  background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; font-family: inherit;
+  cursor: pointer; text-decoration: none;
+}
+.lp-path-btn:hover { background: var(--navy-dark); }
+
+/* ---------- STEPS ---------- */
+.lp-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; max-width: 1000px; margin: 0 auto; }
+.lp-step { text-align: center; padding: 8px; }
+.lp-step-n {
+  width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 50%;
+  background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
+  display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800;
+}
+.lp-step h3 { font-size: 18px; font-weight: 800; color: #0e2248; margin: 0 0 8px; }
+.lp-step p { font-size: 14.5px; color: #5a6070; line-height: 1.7; margin: 0; }
+
+@media (max-width: 880px) {
+  .lp-tool.feat { grid-column: span 1; flex-direction: column; }
+  .lp-tool.feat .lp-tool-img { min-height: 190px; }
+}
+
 /* ---------- HOW WE VALUE GRID ---------- */
 .hv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; }
 .hv-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
@@ -1090,7 +1171,7 @@ body.plm-locked { overflow: hidden; }
         { "@type": "Question", "name": "Where does this property tax data come from?",
           "acceptedAnswer": { "@type": "Answer", "text": "It comes from the New Jersey Office of GIS statewide parcel layer, joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the same system municipal tax assessors use. The data is refreshed once a year, typically in late spring or early summer." } },
         { "@type": "Question", "name": "Does this show whether a home is for sale?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Only partly. There is no free public source that reports live listing status in New Jersey, because MLS data is a licensed feed. This tool reads assessment records, so it shows a home as off market unless the recorded deed is recent or the listing has been added manually. A home shown as off market could still be listed. For current listing status, contact a licensed agent with MLS access." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Live listing status in New Jersey comes from the MLS, which is a licensed feed and not public data. This tool reads public assessment records only. It can show when a deed was recorded recently, meaning the property changed hands, but it cannot tell you whether a home is currently listed for sale. For that, contact a licensed agent with MLS access." } },
         { "@type": "Question", "name": "Why is the owner name blank?",
           "acceptedAnswer": { "@type": "Answer", "text": "Owner names are removed from the public version of this data under Daniel's Law, New Jersey legislation restricting public disclosure of certain personal information. Property details and tax figures remain public." } },
         { "@type": "Question", "name": "Is the tax amount shown my current bill?",
@@ -1229,6 +1310,153 @@ body.plm-locked { overflow: hidden; }
   </div>
 </section>
 
+<!-- TOOLS GRID -->
+<section class="section" style="padding-top:52px;padding-bottom:20px;">
+  <div class="section-inner">
+    <div class="lp-head">
+      <div class="section-label">Free tools</div>
+      <h2 class="section-title">Everything you need to fight your <span class="gold-text">property tax bill</span></h2>
+      <p class="section-subtitle">All free, all built on New Jersey's own records. No signup to look, no catch.</p>
+    </div>
+
+    <div class="lp-tools">
+      <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-tool-img" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=70&w=1200&auto=format&fit=crop')"></div>
+        <div class="lp-tool-body">
+          <div class="lp-tool-tag">Most popular</div>
+          <h3>Look up any address</h3>
+          <p>Assessment, tax bill, block and lot, lot lines on a map, and our own read on whether that assessment is defensible.</p>
+          <span class="lp-tool-go">Search a property <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="/anchor-estimator.html">
+        <div class="lp-tool-icon anchor"><i class="fas fa-piggy-bank"></i></div>
+        <div class="lp-tool-body">
+          <h3>ANCHOR &amp; Stay NJ estimator</h3>
+          <p>Up to $1,500 back for homeowners, $700 for renters, $6,500 for seniors. Most people who qualify never claim it.</p>
+          <span class="lp-tool-go">Check what you qualify for <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-tool-icon appeal"><i class="fas fa-scale-unbalanced-flip"></i></div>
+        <div class="lp-tool-body">
+          <h3>Appeal screener</h3>
+          <p>We test your assessment against comparable homes and your own sale history, the way a county board actually decides it.</p>
+          <span class="lp-tool-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-tool-icon proceeds"><i class="fas fa-sack-dollar"></i></div>
+        <div class="lp-tool-body">
+          <h3>Net proceeds calculator</h3>
+          <p>What you actually walk away with after commission, the NJ transfer fee, and your payoff. Including the 2025 seller fee change.</p>
+          <span class="lp-tool-go">Run the numbers <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-tool-icon trade"><i class="fas fa-right-left"></i></div>
+        <div class="lp-tool-body">
+          <h3>Trade-up tax check</h3>
+          <p>Same price house, different town, wildly different bill. Compare the real effective rate across all 168 South Jersey towns.</p>
+          <span class="lp-tool-go">Compare towns <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="/property/dashboard.html">
+        <div class="lp-tool-icon track"><i class="fas fa-chart-line"></i></div>
+        <div class="lp-tool-body">
+          <div class="lp-tool-tag free">Free account</div>
+          <h3>Track your home</h3>
+          <p>Claim your property and watch the assessment year over year. We flag it the moment it drifts out of line.</p>
+          <span class="lp-tool-go">Open my dashboard <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="lp-stats">
+  <div class="section-inner">
+    <div class="lp-stats-grid">
+      <div><b>168</b><span>South Jersey towns covered</span></div>
+      <div><b>21</b><span>NJ counties in the parcel data</span></div>
+      <div><b>$6,500</b><span>Max Stay NJ benefit for seniors</span></div>
+      <div><b>15%</b><span>Chapter 123 cushion before an appeal wins</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT HELPS -->
+<section class="section" style="padding-top:52px;">
+  <div class="section-inner">
+    <div class="lp-head">
+      <div class="section-label">Where do you fit?</div>
+      <h2 class="section-title">Start with what you're actually trying to do</h2>
+    </div>
+    <div class="lp-paths">
+      <div class="lp-path">
+        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=900&auto=format&fit=crop')">
+          <span>I think I'm overpaying</span>
+        </div>
+        <div class="lp-path-body">
+          <p>Look up your address and we'll test the assessment against comparable homes nearby and against what you paid. If there's a case, you'll see the dollar figure. If there isn't, I'll tell you to save your filing fee.</p>
+          <button class="lp-path-btn" onclick="document.getElementById('pl-addr').focus()">Check my assessment</button>
+        </div>
+      </div>
+      <div class="lp-path">
+        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=70&w=900&auto=format&fit=crop')">
+          <span>I might sell</span>
+        </div>
+        <div class="lp-path-body">
+          <p>See what the home is defensibly worth, what it nets after commission and the NJ transfer fee, and what your tax bill would look like in the town you're moving to. Then get a free listing proposal in one business day.</p>
+          <button class="lp-path-btn" onclick="document.getElementById('pl-addr').focus()">Run my numbers</button>
+        </div>
+      </div>
+      <div class="lp-path">
+        <div class="lp-path-top" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=900&auto=format&fit=crop&sat=-30')">
+          <span>I'm 65 or older</span>
+        </div>
+        <div class="lp-path-body">
+          <p>Stay NJ can cover up to half your property tax bill, to a maximum of $6,500, and it stacks with ANCHOR and the Senior Freeze. Most seniors who qualify have never filed for it.</p>
+          <a class="lp-path-btn" href="/anchor-estimator.html">See senior benefits</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <div class="lp-head">
+      <div class="section-label">Three steps</div>
+      <h2 class="section-title">How it works</h2>
+    </div>
+    <div class="lp-steps">
+      <div class="lp-step">
+        <div class="lp-step-n">1</div>
+        <h3>Type an address</h3>
+        <p>Any property in New Jersey. Yours, your parents', the one down the street. No account needed to look.</p>
+      </div>
+      <div class="lp-step">
+        <div class="lp-step-n">2</div>
+        <h3>See the real record</h3>
+        <p>Assessment, tax bill, lot lines, sale history, and how it compares to the homes around it. Straight from state records.</p>
+      </div>
+      <div class="lp-step">
+        <div class="lp-step-n">3</div>
+        <h3>Find out if you have a case</h3>
+        <p>We apply the same Chapter 123 test a county board uses. If it's worth appealing, I'll tell you what it's worth in dollars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HOW WE VALUE -->
 <section class="section section-alt">
   <div class="section-inner">
@@ -1351,7 +1579,7 @@ body.plm-locked { overflow: hidden; }
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Does this tell me if a home is for sale? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>Only partly, and I would rather be straight with you about it. Live listing status in New Jersey lives in the MLS, which is a licensed feed, not public data. There is no free source for it. So this page reads assessment records and shows a home as <strong>off market</strong> unless the recorded deed is recent or I have added the listing myself. A home marked off market could still be listed with another brokerage. If you want current status on a specific property, <a href="/index.html#contact">just ask me</a>. I have MLS access and it takes 30 seconds.</p></div>
+        <div class="faq-answer"><p>No, and I would rather be straight with you about it. Live listing status lives in the MLS, which is a licensed feed and not public data. This page reads public assessment records only. The one thing it can tell you is when a <strong>deed was recorded recently</strong>, meaning the property changed hands, and that comes straight from the state file. For current listing status on a specific property, <a href="/index.html#contact">just ask me</a>. I have MLS access and it takes about 30 seconds.</p></div>
       </div>
       <div class="faq-item">
         <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
@@ -1742,6 +1970,9 @@ body.plm-locked { overflow: hidden; }
   // ══════════════════════════════════════════════
   var listingTable = null;
 
+  // Optional. If /listings.json is absent this simply does nothing, which is
+  // the normal state. Only add entries for listings you will actually keep
+  // current, because a wrong status is worse than no status.
   function loadListings() {
     if (listingTable !== null) return Promise.resolve();
     return fetch('/listings.json')
@@ -1757,12 +1988,12 @@ body.plm-locked { overflow: hidden; }
   };
 
   function resolveStatus(p, dy) {
+    // Listing status is NOT read from any MLS feed. The only automatic signal
+    // is the recorded deed date in the state assessment file, which is public,
+    // self updating, and cannot go stale in a way that misleads anyone.
+    // listings.json is optional and only holds listings you enter by hand.
     var county = (p.COUNTY || '').toUpperCase().trim();
-    var keys = [
-      normAddr(p.PROP_LOC) + '|' + county,   // how listings.json is keyed
-      p.PAMS_PIN,                            // hand entered overrides
-      (p.PROP_LOC || '').toUpperCase().trim()
-    ];
+    var keys = [ p.PAMS_PIN, normAddr(p.PROP_LOC) + '|' + county ];
     for (var i = 0; i < keys.length; i++) {
       if (keys[i] && listingTable && listingTable[keys[i]]) {
         var o = listingTable[keys[i]];
@@ -1792,7 +2023,7 @@ body.plm-locked { overflow: hidden; }
   // PASTE THE PUBLISHABLE KEY FOR uvkvaxljhhngydvlrzom HERE.
   // Project Settings -> API Keys -> publishable (starts sb_publishable_).
   // The old key below belongs to a DIFFERENT project and will be rejected.
-  var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var LEDGER_KEY = 'PASTE_YOUR_PUBLISHABLE_KEY_HERE';
 
   function recordLookup(p, geo, rate, dy) {
     try {
@@ -3441,7 +3672,7 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-note">' +
         '<strong>About this data.</strong> New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use, refreshed about once a year. Owner names are redacted under Daniel\u2019s Law. The tax figure is the prior year billed amount, not a current year estimate. ' +
-        'Listing status comes from public records and my own listings file, not from the MLS, so a home shown as off market could still be listed somewhere. ' +
+        'Listing status is not from the MLS. The only automatic signal is a recently recorded deed, which means the property changed hands. ' +
         'Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. All calculators produce estimates only. Confirm closing figures with your attorney and title company.' +
       '</div>';
 
