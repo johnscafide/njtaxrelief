@@ -763,8 +763,8 @@ body.pl-signedin .gate-cta { display: none; }
 /* ---------- SECTION HEADINGS ---------- */
 .lp-h2 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: clamp(30px, 4.2vw, 44px); font-weight: 700; color: var(--navy-dark);
-  letter-spacing: -.02em; line-height: 1.15; margin: 0 0 26px; text-align: left;
+  font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: var(--navy-dark);
+  letter-spacing: -.02em; line-height: 1.15; margin: 0 0 18px; text-align: left;
 }
 
 /* ---------- CREDIBILITY BAR ---------- */
@@ -786,14 +786,19 @@ body.pl-signedin .gate-cta { display: none; }
   position: relative; background-size: cover; background-position: center;
   min-height: 300px; display: flex; align-items: flex-end;
 }
-.lp-photo.short { min-height: 168px; align-items: flex-start; }
+.lp-photo.short { min-height: 150px; align-items: flex-start; }
 .lp-photo.mid   { min-height: 250px; }
-.lp-photo.tall  { min-height: 380px; }
+.lp-photo.tall  { min-height: 340px; }
 .lp-photo::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(14,34,72,.15) 0%, rgba(14,34,72,.30) 42%, rgba(10,24,54,.90) 100%);
+  background: linear-gradient(180deg, rgba(8,18,42,.10) 0%, rgba(8,18,42,.46) 46%, rgba(6,14,34,.94) 100%);
 }
-.lp-photo.short::after { background: linear-gradient(180deg, rgba(14,34,72,.30), rgba(14,34,72,.10)); }
+.lp-photo.short::after { background: linear-gradient(180deg, rgba(8,18,42,.34), rgba(8,18,42,.12)); }
+.lp-photo.audit { background-blend-mode: multiply; background-color: #16305c; }
+.lp-ghost {
+  position: absolute; right: 16px; bottom: 12px; z-index: 2;
+  font-size: 46px; color: rgba(255,255,255,.28);
+}
 
 /* tag sits inside the photo, top corner */
 .lp-tag {
@@ -807,13 +812,19 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tag.green { background: #1e6b3a; color: #fff; }
 
 /* heading and copy over the photo */
-.lp-over { position: relative; z-index: 2; padding: 24px 26px 26px; width: 100%; }
-.lp-over h3 {
+.lp-over { position: relative; z-index: 2; padding: 20px 22px 22px; width: 100%; }
+/* styles.css sets heading colours globally, so these are forced. Without the
+   !important the overlay headings render navy on a dark photo and vanish. */
+.lp-photo .lp-over h3 {
   font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 2.6vw, 30px);
-  font-weight: 700; color: #fff; margin: 0 0 9px; line-height: 1.2;
-  text-shadow: 0 2px 12px rgba(0,0,0,.45);
+  font-weight: 700; color: #ffffff !important; margin: 0 0 9px; line-height: 1.2;
+  text-shadow: 0 2px 14px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.5);
 }
-.lp-over p { font-size: 14.5px; color: rgba(255,255,255,.92); line-height: 1.6; margin: 0 0 14px; text-shadow: 0 1px 8px rgba(0,0,0,.4); }
+.lp-photo .lp-over p {
+  font-size: 14.5px; color: rgba(255,255,255,.95) !important; line-height: 1.6;
+  margin: 0 0 14px; text-shadow: 0 1px 10px rgba(0,0,0,.65);
+}
+.lp-photo .lp-go.light { color: #f5d97e !important; text-shadow: 0 1px 8px rgba(0,0,0,.6); }
 
 .lp-go { font-size: 14.5px; font-weight: 700; color: var(--navy); display: inline-flex; align-items: center; gap: 8px; }
 .lp-go.light { color: #f0d87a; }
@@ -821,7 +832,7 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tool:hover .lp-go i, .lp-path:hover .lp-go i { transform: translateX(4px); }
 
 /* card shells */
-.lp-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 1080px; margin: 0 auto; }
+.lp-tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; max-width: 1120px; margin: 0 auto; }
 .lp-tool {
   display: flex; flex-direction: column; text-decoration: none; overflow: hidden;
   background: #fff; border: 1px solid var(--border); border-radius: 16px;
@@ -831,11 +842,11 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tool.feat { grid-column: span 2; grid-row: span 2; }
 .lp-tool.feat .lp-photo { flex: 1; min-height: 100%; }
 .lp-tool.wide { grid-column: span 2; }
-.lp-body { padding: 20px 22px 22px; flex: 1; display: flex; flex-direction: column; }
+.lp-body { padding: 17px 19px 19px; flex: 1; display: flex; flex-direction: column; }
 .lp-body h3 { font-size: 18px; font-weight: 800; color: var(--navy-dark); margin: 0 0 8px; letter-spacing: -.01em; }
 .lp-body p { font-size: 14px; color: #5a6070; line-height: 1.6; margin: 0 0 14px; flex: 1; }
 
-.lp-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; max-width: 1080px; margin: 0 auto; }
+.lp-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; max-width: 1120px; margin: 0 auto; }
 .lp-path { display: block; text-decoration: none; border-radius: 16px; overflow: hidden;
   transition: transform .18s ease, box-shadow .18s ease; }
 .lp-path:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
@@ -1462,14 +1473,13 @@ body.pl-signedin .gate-cta { display: none; }
 </section>
 
 <!-- TOOLS GRID -->
-<section class="section" style="padding-top:56px;padding-bottom:20px;">
+<section class="section" style="padding-top:50px;padding-bottom:18px;">
   <div class="section-inner">
     <h2 class="lp-h2">Free tools</h2>
-
     <div class="lp-tools">
 
       <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=1400&auto=format&fit=crop')">
+        <div class="lp-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=1400&auto=format&fit=crop')">
           <span class="lp-tag gold">Most popular</span>
           <div class="lp-over">
             <h3>Look up any address</h3>
@@ -1480,7 +1490,7 @@ body.pl-signedin .gate-cta { display: none; }
       </a>
 
       <a class="lp-tool" href="/anchor-estimator.html">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-JacfRVlNmFQ?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop')">
           <span class="lp-tag green">Up to $6,500</span>
         </div>
         <div class="lp-body">
@@ -1491,18 +1501,19 @@ body.pl-signedin .gate-cta { display: none; }
       </a>
 
       <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo short audit" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-60')">
           <span class="lp-tag">Chapter 123</span>
+          <i class="fas fa-scale-unbalanced-flip lp-ghost"></i>
         </div>
         <div class="lp-body">
           <h3>Appeal screener</h3>
-          <p>We test your assessment against comparable homes and your own sale history, the way a county board decides it.</p>
+          <p>We audit your assessment against comparable homes and your own sale history, the way a county board decides it.</p>
           <span class="lp-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
         </div>
       </a>
 
       <a class="lp-tool wide" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo mid" style="background-image:url('https://images.unsplash.com/photo-e0rRIfuYD_M?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo mid" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1200&auto=format&fit=crop')">
           <span class="lp-tag">Sellers</span>
           <div class="lp-over">
             <h3>Net proceeds &amp; trade-up</h3>
@@ -1513,7 +1524,7 @@ body.pl-signedin .gate-cta { display: none; }
       </a>
 
       <a class="lp-tool" href="/property/dashboard.html">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=900&auto=format&fit=crop&sat=-40')">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop')">
           <span class="lp-tag green">Free account</span>
         </div>
         <div class="lp-body">
@@ -1540,12 +1551,12 @@ body.pl-signedin .gate-cta { display: none; }
 </section>
 
 <!-- WHO IT HELPS -->
-<section class="section" style="padding-top:52px;">
+<section class="section" style="padding-top:46px;">
   <div class="section-inner">
     <h2 class="lp-h2">Where do you fit?</h2>
     <div class="lp-paths">
       <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop')">
           <div class="lp-over">
             <h3>I think I'm overpaying</h3>
             <p>We test your assessment against comparable homes and what you paid. If there's a case you'll see the dollar figure. If there isn't, I'll tell you to save your filing fee.</p>
@@ -1554,16 +1565,16 @@ body.pl-signedin .gate-cta { display: none; }
         </div>
       </a>
       <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=74&w=900&auto=format&fit=crop')">
           <div class="lp-over">
             <h3>I might sell</h3>
-            <p>What the home is defensibly worth, what it nets after costs, and what you'd pay in tax in the town you're moving to. Free listing proposal in one business day.</p>
+            <p>What the home is defensibly worth, what it nets after costs, and what you'd pay in tax where you're moving. Free listing proposal in one business day.</p>
             <span class="lp-go light">Run my numbers <i class="fas fa-arrow-right"></i></span>
           </div>
         </div>
       </a>
       <a class="lp-path" href="/anchor-estimator.html">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1533038590840-1cde6e668a91?fm=jpg&q=72&w=900&auto=format&fit=crop')">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=74&w=900&auto=format&fit=crop')">
           <span class="lp-tag green">65+</span>
           <div class="lp-over">
             <h3>I'm 65 or older</h3>
@@ -1580,6 +1591,7 @@ body.pl-signedin .gate-cta { display: none; }
 <section class="section section-alt">
   <div class="section-inner">
     <h2 class="lp-h2">How it works</h2>
+      <h2 class="section-title">How it works</h2>
     </div>
     <div class="lp-steps">
       <div class="lp-step">
