@@ -74,8 +74,7 @@
 .pl-hero h1 {
   font-family: 'Playfair Display', Georgia, serif;
   font-size: clamp(32px, 5.2vw, 56px); font-weight: 700; line-height: 1.14;
-  color: var(--navy-dark); margin: 0 0 18px;
-  text-shadow: 0 2px 14px rgba(255,255,255,.95), 0 1px 3px rgba(255,255,255,1);
+  color: var(--navy-dark); margin: -200px 0 18px;
 }
 .pl-type { color: var(--gold); border-right: 3px solid var(--gold); padding-right: 3px; }
 .pl-type.done { border-right-color: transparent; }
@@ -88,7 +87,7 @@
 /* ---------- SEARCH ---------- */
 .pl-search-card {
   background: #fff; border: 1px solid rgba(216,220,232,.9); border-radius: 16px;
-  padding: 12px; box-shadow: 0 22px 60px rgba(14,34,72,.22); max-width: 690px; margin: 0 auto;
+  padding: 12px; box-shadow: 0 22px 60px rgba(14,34,72,.22); max-width: 690px; margin: 50px auto;
 }
 .pl-search-row { display: flex; gap: 9px; }
 .pl-input-wrap { flex: 1; position: relative; display: flex; }
@@ -1396,7 +1395,7 @@ body.pl-signedin .gate-cta { display: none; }
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
   <div class="pl-hero-inner">
-    <h1>Check Property Taxes on <br><span class="pl-type" id="pl-type">any NJ home</span>?</h1>
+    <h1>Check Property Taxes on <br><span class="pl-type" id="pl-type">any NJ home</span></h1>
     <!-- <p class="pl-hero-sub">
       Type an address. See the assessed value, last year&rsquo;s tax bill, block and lot, the real lot lines, and our own read on whether that assessment is defensible. Built from New Jersey&rsquo;s official records.
     </p> -->
@@ -1438,8 +1437,8 @@ body.pl-signedin .gate-cta { display: none; }
   </div>
 </section>
 
-<!-- <!-- STATUS STRIP -->
-<section class="section" style="padding-top:20px;padding-bottom:10px;">
+ <!-- STATUS STRIP -->
+<!--<section class="section" style="padding-top:20px;padding-bottom:10px;">
   <div class="section-inner">
     <div id="pl-inline" class="pl-result">
       <div class="pl-state">
