@@ -489,6 +489,23 @@ body.plm-locked { overflow: hidden; }
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
 
+/* ---------- HERO AUTH ---------- */
+.pl-heroauth { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
+.heroauth-btn {
+  display: inline-flex; align-items: center; gap: 9px; text-decoration: none; cursor: pointer;
+  background: rgba(255,255,255,.95); border: 1px solid rgba(216,220,232,.9);
+  color: var(--navy-dark); font-size: 14px; font-weight: 700; font-family: inherit;
+  padding: 11px 20px; border-radius: 99px; box-shadow: 0 3px 12px rgba(14,34,72,.10);
+}
+.heroauth-btn:hover { background: #fff; border-color: var(--navy-light); }
+.heroauth-btn img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
+.heroauth-btn.ghost { background: rgba(255,255,255,.82); }
+.heroauth-link {
+  background: none; border: none; cursor: pointer; font-family: inherit;
+  font-size: 13px; font-weight: 600; color: #3c4759; text-decoration: underline;
+  text-shadow: 0 1px 8px rgba(255,255,255,.9);
+}
+
 /* ---------- STICKY SECTION NAV ---------- */
 .secnav {
   position: absolute; left: 50%; top: 62px; z-index: 40;
@@ -1124,7 +1141,7 @@ body.plm-locked { overflow: hidden; }
         <hr>
         <button onclick="plSaveTo('home')"><i class="fas fa-house-chimney"></i> Claim as my home</button>
         <button onclick="plSaveTo('watch')"><i class="fas fa-eye"></i> Add to watchlist</button>
-        <button onclick="location.href=&quot;/property/dashboard.html&quot;"><i class="fas fa-table-columns"></i> My dashboard</button>
+        <a href="/property/dashboard.html"><i class="fas fa-table-columns"></i> My dashboard</a>
         <hr>
         <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
         <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
@@ -1178,6 +1195,7 @@ body.plm-locked { overflow: hidden; }
       </div>
     </div>
     <div class="pl-hero-note">Tap the crosshair to use your current location. Nothing about you is stored, no email needed to see results.</div>
+    <div class="pl-heroauth" id="pl-heroauth"></div>
   </div>
 </div>
 
@@ -1774,7 +1792,7 @@ body.plm-locked { overflow: hidden; }
   // PASTE THE PUBLISHABLE KEY FOR uvkvaxljhhngydvlrzom HERE.
   // Project Settings -> API Keys -> publishable (starts sb_publishable_).
   // The old key below belongs to a DIFFERENT project and will be rejected.
-  var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var LEDGER_KEY = 'PASTE_YOUR_PUBLISHABLE_KEY_HERE';
 
   function recordLookup(p, geo, rate, dy) {
     try {
@@ -4058,6 +4076,7 @@ body.plm-locked { overflow: hidden; }
   // their own auth id. There is no policy anywhere that lets one user read
   // another's saved properties, and the anon key has no table access at all.
   // ══════════════════════════════════════════════
+  var DASHBOARD_URL = '/property/dashboard.html';
   var sb = null, plUser = null;
 
   function authReady() {
@@ -4082,7 +4101,6 @@ body.plm-locked { overflow: hidden; }
     sb.auth.onAuthStateChange(function (_e, session) {
       plUser = session ? session.user : null;
       paintAuthBtn();
-      if (el('plm-dash-body') && el('plm-note-overlay').classList.contains('open')) plDashboard();
       if (current) refreshSaveState();
     });
   }
@@ -4097,7 +4115,25 @@ body.plm-locked { overflow: hidden; }
     return m.avatar_url || m.picture || '';
   }
 
+  function paintHeroAuth() {
+    var h = el('pl-heroauth');
+    if (!h) return;
+    if (plUser) {
+      var av = userAvatar();
+      h.innerHTML =
+        '<a class="heroauth-btn" href="' + DASHBOARD_URL + '">' +
+          (av ? '<img src="' + esc(av) + '" alt="">' : '<i class="fas fa-table-columns"></i>') +
+          'My properties</a>' +
+        '<button class="heroauth-link" onclick="plSignOut()">Sign out</button>';
+    } else {
+      h.innerHTML =
+        '<button class="heroauth-btn ghost" onclick="plSignInPrompt()">' +
+          '<i class="fas fa-right-to-bracket"></i>Sign in to save properties</button>';
+    }
+  }
+
   function paintAuthBtn() {
+    paintHeroAuth();
     var b = el('pl-authbtn');
     if (!b) return;
     if (plUser) {
@@ -4243,7 +4279,7 @@ body.plm-locked { overflow: hidden; }
 
   window.plRemoveSaved = function (id) {
     if (!plUser) return;
-    sb.from('saved_properties').delete().eq('id', id).then(function () { plDashboard(); });
+    sb.from('saved_properties').delete().eq('id', id).then(function () { refreshSaveState(); });
   };
 
   function refreshSaveState() {
@@ -4271,7 +4307,7 @@ body.plm-locked { overflow: hidden; }
             '<button class="acct-btn' + (isWatch ? ' on' : '') + '" onclick="plSaveTo(\'watch\')">' +
               '<i class="fas fa-eye"></i> ' + (isWatch ? 'On your watchlist' : 'Add to watchlist') + '</button>' +
           '</div>' +
-          '<button class="acct-link" onclick="plDashboard()">Open my dashboard <i class="fas fa-arrow-right"></i></button>' +
+          '<a class="acct-link" href="' + DASHBOARD_URL + '">Open my dashboard <i class="fas fa-arrow-right"></i></a>' +
         '</div>';
     });
   }
@@ -4279,75 +4315,14 @@ body.plm-locked { overflow: hidden; }
   // ══════════════════════════════════════════════
   // DASHBOARD
   // ══════════════════════════════════════════════
+  // The dashboard is a real page, not an overlay. Signed out visitors get the
+  // sign in prompt first, otherwise they would land on a locked page.
   window.plDashboard = function () {
     if (!plUser) { plSignInPrompt(); return; }
-    var av = userAvatar();
-    plModalNote('Your properties',
-      '<div class="dash-head">' +
-        (av ? '<img src="' + esc(av) + '" alt="">' : '<div class="dash-noav"><i class="fas fa-user"></i></div>') +
-        '<div><b>' + esc(userName()) + '</b><br><span>' + esc(plUser.email || '') + '</span></div>' +
-        '<button class="dash-out" onclick="plSignOut()">Sign out</button>' +
-      '</div>' +
-      '<div id="plm-dash-body"><div class="pl-spin" style="margin:30px auto;"></div></div>');
-
-    sb.from('saved_properties').select('*').order('created_at', { ascending: false })
-      .then(function (res) {
-        var body = el('plm-dash-body');
-        if (!body) return;
-        if (res.error) { body.innerHTML = '<p>Could not load your properties. Try again in a moment.</p>'; return; }
-        var rows = res.data || [];
-        if (!rows.length) {
-          body.innerHTML =
-            '<div class="dash-empty"><i class="fas fa-house-circle-check"></i>' +
-            '<b>Nothing saved yet</b><p>Look up any New Jersey address, then claim it as your home or add it to your watchlist. ' +
-            'Everything you save shows up here with its tax history.</p></div>';
-          return;
-        }
-        var homes = rows.filter(function (r) { return r.kind === 'home'; });
-        var watch = rows.filter(function (r) { return r.kind === 'watch'; });
-        var cases = rows.filter(function (r) { return r.has_appeal_case; }).length;
-
-        body.innerHTML =
-          (cases
-            ? '<div class="dash-alert"><i class="fas fa-scale-unbalanced-flip"></i><span><b>' + cases +
-              ' of your propert' + (cases === 1 ? 'y looks' : 'ies look') + ' over-assessed.</b> ' +
-              'Worth having me screen ' + (cases === 1 ? 'it' : 'them') + ' before the April 1 deadline. ' +
-              '<a href="#" onclick="plCloseNote();plOpenForm(\'appeal\');return false;">Ask me to look</a></span></div>'
-            : '') +
-          (homes.length ? '<div class="dash-label">Your home' + (homes.length > 1 ? 's' : '') + '</div>' + homes.map(dashCard).join('') : '') +
-          (watch.length ? '<div class="dash-label">Watchlist</div>' + watch.map(dashCard).join('') : '');
-      });
+    window.location.href = DASHBOARD_URL;
   };
 
-  function dashCard(r) {
-    var hist = r.history || [];
-    var trend = '';
-    if (hist.length) {
-      var oldest = hist[0];
-      if (oldest && oldest.assessed && r.assessed) {
-        var d = r.assessed - oldest.assessed;
-        if (d !== 0) trend = '<span class="dash-trend ' + (d > 0 ? 'up' : 'down') + '">' +
-          (d > 0 ? '\u2191 ' : '\u2193 ') + money(Math.abs(d)) + ' since you saved it</span>';
-      }
-    }
-    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
-    return '<div class="dash-card">' +
-      '<div class="dash-card-top">' +
-        '<div><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') +
-          (r.county ? ', ' + esc(r.county) + ' County' : '') + '</span></div>' +
-        (r.has_appeal_case ? '<span class="dash-flag">Appeal case</span>' : '') +
-      '</div>' +
-      '<div class="dash-figs">' +
-        '<div><b>' + (r.assessed ? money(r.assessed) : '-') + '</b><span>Assessed</span></div>' +
-        '<div><b>' + (r.last_year_tax ? money(r.last_year_tax) : '-') + '</b><span>Annual tax</span></div>' +
-        '<div><b>' + (r.watchdog_value ? money(r.watchdog_value) : '-') + '</b><span>Watchdog value</span></div>' +
-      '</div>' + trend +
-      '<div class="dash-acts">' +
-        '<a href="/property/?address=' + q + '">Open</a>' +
-        '<button onclick="plRemoveSaved(\'' + r.id + '\')">Remove</button>' +
-      '</div>' +
-    '</div>';
-  }
+
 
   // ══════════════════════════════════════════════
   // MORTGAGE CALCULATOR  ·  Greentree Mortgage
