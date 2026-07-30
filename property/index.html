@@ -489,6 +489,36 @@ body.plm-locked { overflow: hidden; }
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
 
+/* ---------- STICKY SECTION NAV ---------- */
+.secnav {
+  position: absolute; left: 50%; top: 62px; z-index: 40;
+  transform: translate(-50%, -14px); opacity: 0; pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  display: flex; gap: 3px; padding: 5px;
+  background: rgba(255,255,255,.96); backdrop-filter: blur(10px);
+  border: 1px solid var(--border); border-radius: 99px;
+  box-shadow: 0 6px 22px rgba(14,34,72,.16);
+  max-width: calc(100% - 32px); overflow-x: auto; scrollbar-width: none;
+}
+.secnav::-webkit-scrollbar { display: none; }
+.secnav.on { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.secnav button {
+  display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
+  border: none; background: none; cursor: pointer; font-family: inherit;
+  font-size: 13px; font-weight: 700; color: #5a6070;
+  padding: 9px 15px; border-radius: 99px; transition: background .15s, color .15s;
+}
+.secnav button:hover { background: #f2f5fa; color: var(--navy-dark); }
+.secnav button.here { background: var(--navy); color: #fff; }
+.secnav button i { font-size: 12.5px; }
+@media (max-width: 640px) {
+  .secnav { top: 56px; }
+  .secnav button { padding: 9px 12px; font-size: 12px; }
+  .secnav button span { display: none; }
+  .secnav button i { font-size: 14px; }
+  .secnav button.here span { display: inline; }
+}
+
 /* ---------- AUTH ---------- */
 .auth-av { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
 .auth-btns { display: grid; gap: 10px; margin: 18px 0 4px; }
@@ -1094,7 +1124,7 @@ body.plm-locked { overflow: hidden; }
         <hr>
         <button onclick="plSaveTo('home')"><i class="fas fa-house-chimney"></i> Claim as my home</button>
         <button onclick="plSaveTo('watch')"><i class="fas fa-eye"></i> Add to watchlist</button>
-        <button onclick="plDashboard()"><i class="fas fa-table-columns"></i> My dashboard</button>
+        <button onclick="location.href=&quot;/property/dashboard.html&quot;"><i class="fas fa-table-columns"></i> My dashboard</button>
         <hr>
         <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
         <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
@@ -1107,6 +1137,7 @@ body.plm-locked { overflow: hidden; }
       </div>
     </div>
   </div>
+  <div id="secnav-mount"></div>
   <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
   <div class="plm-scroll" id="plm-scroll">
     <div class="plm-photos" id="plm-photos"></div>
@@ -1339,16 +1370,16 @@ body.plm-locked { overflow: hidden; }
     <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="gt-banner">
       <div class="gt-banner-inner">
         <div class="gt-photo">
-          <img src="/johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display='none'">
+          <img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display='none'">
         </div>
         <div class="gt-text">
-          <div class="gt-eyebrow">Greentree Mortgage &middot; John Varano, Senior Manager</div>
+          <div class="gt-eyebrow">Greentree Mortgage an HMA Company &middot; John Varano, Branch Manager</div>
           <div class="gt-headline">Know the payment before you fall in love with the house.</div>
-          <div class="gt-sub">Taxes are only half of what you pay every month. John Varano runs the loan side and will tell you what the real number looks like, including escrow, before you make a move.</div>
+          <div class="gt-sub">Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.</div>
         </div>
         <div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>
       </div>
-      <div class="gt-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
+      <div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
     </a>
   </div>
 </section>
@@ -3151,6 +3182,7 @@ body.plm-locked { overflow: hidden; }
   // MODAL
   // ══════════════════════════════════════════════
   window.plCloseModal = function () {
+    var sn = el('secnav'); if (sn) sn.classList.remove('on');
     el('plm-backdrop').classList.remove('open');
     el('plm').classList.remove('open');
     document.body.classList.remove('plm-locked');
@@ -3356,7 +3388,7 @@ body.plm-locked { overflow: hidden; }
 
       '<div class="plm-sec" id="plm-diag-sec"></div>' +
 
-      '<div class="plm-sec">' + buildRebates(tax) + '</div>' +
+      '<div class="plm-sec" id="plm-rebate-sec">' + buildRebates(tax) + '</div>' +
 
       '<div class="plm-sec">' + buildTradeUp() + '</div>' +
 
@@ -3408,7 +3440,9 @@ body.plm-locked { overflow: hidden; }
       '</div>' +
       '<div id="plm-agent-slot">' + buildAgentRail() + '</div>';
 
+    el('secnav-mount').innerHTML = buildSectionNav();
     openModal();
+    initSectionNav();
     drawMap(geo, rings, p);
     chartSplit(land, imprv);
     chartTaxHistory();
@@ -3957,6 +3991,66 @@ body.plm-locked { overflow: hidden; }
     });
   };
 
+
+  // ══════════════════════════════════════════════
+  // STICKY SECTION NAV
+  // Appears once the panel scrolls past the headline, hides on the way back up.
+  // Highlights whichever section you are currently looking at.
+  // ══════════════════════════════════════════════
+  var NAV_SECTIONS = [
+    { id: 'plm-estimate',    label: 'Value',    icon: 'fa-dog' },
+    { id: 'plm-score-sec',   label: 'Appeal',   icon: 'fa-scale-balanced' },
+    { id: 'plm-rebate-sec',  label: 'Rebates',  icon: 'fa-piggy-bank' },
+    { id: 'pl-proceeds',     label: 'Proceeds', icon: 'fa-sack-dollar' },
+    { id: 'pl-appeal',       label: 'Contact',  icon: 'fa-envelope' }
+  ];
+
+  function buildSectionNav() {
+    return '<div class="secnav" id="secnav">' +
+      NAV_SECTIONS.map(function (x) {
+        return '<button data-t="' + x.id + '" onclick="plJump(\'' + x.id + '\')">' +
+          '<i class="fas ' + x.icon + '"></i><span>' + x.label + '</span></button>';
+      }).join('') +
+    '</div>';
+  }
+
+  window.plJump = function (id) {
+    var t = el(id);
+    if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  function initSectionNav() {
+    var scroller = el('plm-scroll'), nav = el('secnav');
+    if (!scroller || !nav) return;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var top = scroller.scrollTop;
+      // show it only after the headline has gone by
+      nav.classList.toggle('on', top > 260);
+
+      // which section is in view
+      var active = null, best = 1e9;
+      NAV_SECTIONS.forEach(function (x) {
+        var e = el(x.id);
+        if (!e || !e.offsetParent) return;
+        var d = e.getBoundingClientRect().top - 150;
+        if (d <= 40 && Math.abs(d) < best) { best = Math.abs(d); active = x.id; }
+      });
+      nav.querySelectorAll('button').forEach(function (b) {
+        b.classList.toggle('here', b.getAttribute('data-t') === active);
+      });
+    }
+
+    scroller.removeEventListener('scroll', scroller._navFn || function () {});
+    scroller._navFn = function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
+    };
+    scroller.addEventListener('scroll', scroller._navFn, { passive: true });
+    update();
+  }
+
   // ══════════════════════════════════════════════
   // ACCOUNTS  ·  Supabase auth, Google and Facebook
   //
@@ -4268,7 +4362,7 @@ body.plm-locked { overflow: hidden; }
     return '<div class="mtg-wrap">' +
       '<div class="mtg-head">' +
         '<div>' +
-          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage</div>' +
+          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage, an HMA Company</div>' +
           '<h3 class="plm-sec-h" style="margin:0;">What would the monthly payment be?</h3>' +
           '<p class="plm-sec-s" style="margin:6px 0 0;">Most calculators guess at your taxes. This one already knows them, because it just read them off the assessment for ' +
           esc(current.address) + '.</p>' +
@@ -4320,7 +4414,7 @@ body.plm-locked { overflow: hidden; }
           '</div>' +
         '</div>' +
         '<div class="mtg-disc">Estimate only, for information. Not a loan offer, a rate quote, or a commitment to lend. ' +
-        'Actual terms depend on credit, income, property, and market conditions. Greentree Mortgage Company, L.P. is a separate company ' +
+        'Actual terms depend on credit, income, property, and market conditions. Greentree Mortgage, an HMA Company, is a separate company ' +
         'and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>' +
       '</div>';
   }
@@ -4365,12 +4459,12 @@ body.plm-locked { overflow: hidden; }
   // ══════════════════════════════════════════════
   function buildPreapproval() {
     return '<div class="pre-wrap">' +
-      '<div class="pre-photo"><img src="/johnvarano.jpg" alt="John Varano, Greentree Mortgage" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
+      '<div class="pre-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
       '<div class="pre-body">' +
         '<div class="pre-eyebrow">Greentree Mortgage &middot; Advertisement</div>' +
         '<h3>Get preapproved before you shop</h3>' +
         '<p>A preapproval letter tells you the real number you can spend and makes your offer count when there is competition. ' +
-        '<b>John Varano</b> is a Senior Manager at Greentree Mortgage and handles the loan side for buyers across South Jersey.</p>' +
+        '<b>John Varano</b> is Branch Manager at Greentree Mortgage, an HMA Company, and handles the loan side for buyers across South Jersey.</p>' +
         '<ul class="pre-list">' +
           '<li><i class="fas fa-circle-check"></i>Know your true budget, taxes and escrow included</li>' +
           '<li><i class="fas fa-circle-check"></i>Sellers take preapproved offers more seriously</li>' +
@@ -4381,7 +4475,7 @@ body.plm-locked { overflow: hidden; }
           '<span class="pre-note">Opens johnvarano.com</span>' +
         '</div>' +
       '</div>' +
-      '<div class="pre-disc">Advertisement. Greentree Mortgage Company, L.P. is a separate company and is not affiliated with Opus Elite Real Estate. ' +
+      '<div class="pre-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. ' +
       'You are never required to use any particular lender and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>' +
     '</div>';
   }
