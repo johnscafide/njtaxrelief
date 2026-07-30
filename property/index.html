@@ -1965,6 +1965,39 @@ body.pl-signedin .gate-cta { display: none; }
 
   var current = null, map = null, rateTable = null;
 
+
+  // ══════════════════════════════════════════════
+  // FETCH WITH A TIMEOUT
+  //
+  // The state endpoints occasionally accept a connection and then never
+  // answer. Plain fetch() has no timeout, so that hangs forever and the
+  // spinner spins forever with no error to catch. Every network call on this
+  // page goes through here so a dead server becomes a failure we can handle
+  // instead of a page that just sits there.
+  // ══════════════════════════════════════════════
+  function xfetch(url, ms, opts) {
+    ms = ms || 12000;
+    if (typeof AbortController === 'undefined') {
+      // very old browser: race a timer instead
+      return Promise.race([
+        fetch(url, opts || {}),
+        new Promise(function (_, rej) {
+          setTimeout(function () { rej(new Error('timeout')); }, ms);
+        })
+      ]);
+    }
+    var ctl = new AbortController();
+    var t = setTimeout(function () { ctl.abort(); }, ms);
+    var o = opts ? JSON.parse(JSON.stringify(opts)) : {};
+    o.signal = ctl.signal;
+    return fetch(url, o).then(function (r) {
+      clearTimeout(t); return r;
+    }, function (e) {
+      clearTimeout(t);
+      throw new Error((e && e.name === 'AbortError') ? 'timeout' : (e && e.message) || 'network');
+    });
+  }
+
   function el(id) { return document.getElementById(id); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
   function esc(s) {
@@ -2028,7 +2061,7 @@ body.pl-signedin .gate-cta { display: none; }
 
   function geocode(address) {
     var p = new URLSearchParams({ SingleLine: address, outSR: '4326', maxLocations: '1', f: 'json' });
-    return fetch(NJ_GEOCODE + '?' + p)
+    return xfetch(NJ_GEOCODE + '?' + p, 7000)
       .then(function (r) { if (!r.ok) throw new Error('geo'); return r.json(); })
       .then(function (d) {
         var c = d.candidates && d.candidates[0];
@@ -2039,7 +2072,7 @@ body.pl-signedin .gate-cta { display: none; }
   }
   function geocodeCensus(address) {
     var p = new URLSearchParams({ address: address, benchmark: 'Public_AR_Current', format: 'json' });
-    return fetch(CENSUS + '?' + p).then(function (r) { return r.json(); })
+    return xfetch(CENSUS + '?' + p, 9000).then(function (r) { return r.json(); })
       .then(function (d) {
         var m = d.result && d.result.addressMatches && d.result.addressMatches[0];
         return m ? { lat: m.coordinates.y, lon: m.coordinates.x, matched: m.matchedAddress } : null;
@@ -2054,7 +2087,7 @@ body.pl-signedin .gate-cta { display: none; }
       spatialRel: 'esriSpatialRelIntersects',
       outFields: FIELDS, returnGeometry: 'true', resultRecordCount: '1', f: 'json'
     });
-    return fetch(NJ_PARCEL + '?' + p).then(function (r) { return r.json(); })
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
       .then(function (d) {
         if (d.error) throw new Error(d.error.message || 'parcel');
         return (d.features && d.features[0]) ? d.features[0] : null;
@@ -2100,7 +2133,7 @@ body.pl-signedin .gate-cta { display: none; }
         location: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
         outSR: '4326', f: 'json'
       });
-      fetch(NJ_REVERSE + '?' + p).then(function (r) { return r.json(); })
+      xfetch(NJ_REVERSE + '?' + p, 9000).then(function (r) { return r.json(); })
         .then(function (d) {
           var a = d && d.address;
           var line = a ? (a.Match_addr || a.Address || '') : '';
@@ -2141,7 +2174,20 @@ body.pl-signedin .gate-cta { display: none; }
       '<div class="pl-state-sub">Matching ' + esc(addr) + ' to its parcel.</div></div>';
     if (typeof gtag === 'function') gtag('event', 'property_lookup');
 
-    Promise.all([loadRates(), loadListings(), loadRatios(), loadCalibration()])
+    // The four data files are optional. If any of them is slow or missing the
+    // lookup must still run, so cap the whole preload and move on regardless.
+    var preload = Promise.all([
+      loadRates().catch(function () {}),
+      loadListings().catch(function () {}),
+      loadRatios().catch(function () {}),
+      loadCalibration().catch(function () {})
+    ]);
+    var capped = Promise.race([
+      preload,
+      new Promise(function (res) { setTimeout(res, 9000); })
+    ]);
+
+    capped
       .then(function () { return geocode(addr); })
       .then(function (g) {
         if (!g) throw new Error('nogeo');
@@ -2179,6 +2225,10 @@ body.pl-signedin .gate-cta { display: none; }
           msg = 'We found the property but could not draw the report. That is our fault, not your address.';
           extra = '<div class="pl-src" style="margin-top:14px;font-size:12px;">Technical detail: ' +
                   esc(m.slice(7)) + '</div>';
+        } else if (m === 'timeout') {
+          title = 'The state records service timed out';
+          msg = 'New Jersey\u2019s property server accepted the request and never answered. ' +
+                'That happens now and then and usually clears within a few minutes. Try again shortly.';
         } else {
           title = 'That lookup did not go through';
           msg = 'The state property service did not answer. It goes down occasionally. ' +
@@ -2204,7 +2254,7 @@ body.pl-signedin .gate-cta { display: none; }
 
   function loadRates() {
     if (rateTable !== null) return Promise.resolve();
-    return fetch('/tax-rates.json').then(function (r) { return r.ok ? r.json() : null; })
+    return xfetch('/tax-rates.json', 6000).then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { rateTable = (j && j.rates) ? j.rates : {}; })
       .catch(function () { rateTable = {}; });
   }
@@ -2271,7 +2321,7 @@ body.pl-signedin .gate-cta { display: none; }
   // current, because a wrong status is worse than no status.
   function loadListings() {
     if (listingTable !== null) return Promise.resolve();
-    return fetch('/listings.json')
+    return xfetch('/listings.json', 6000)
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { listingTable = (j && j.listings) ? j.listings : {}; })
       .catch(function () { listingTable = {}; });
@@ -2344,7 +2394,7 @@ body.pl-signedin .gate-cta { display: none; }
       localStorage.setItem('pl_seen', JSON.stringify(local));
 
       if (!LEDGER_URL || !LEDGER_KEY) return;
-      fetch(LEDGER_URL.replace(/\/+$/, '') + '/rest/v1/rpc/record_lookup', {
+      xfetch(LEDGER_URL.replace(/\/+$/, '') + '/rest/v1/rpc/record_lookup', 8000, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', apikey: LEDGER_KEY,
                    Authorization: 'Bearer ' + LEDGER_KEY },
@@ -2423,7 +2473,7 @@ body.pl-signedin .gate-cta { display: none; }
       returnGeometry: 'false', resultRecordCount: '2000', f: 'json'
     });
 
-    return fetch(NJ_PARCEL + '?' + p)
+    return xfetch(NJ_PARCEL + '?' + p, 15000)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.features || !d.features.length) return null;
@@ -2588,7 +2638,7 @@ body.pl-signedin .gate-cta { display: none; }
       where: where, outFields: 'NET_VALUE,SALE_PRICE,DEED_DATE',
       returnGeometry: 'false', resultRecordCount: '2000', f: 'json'
     });
-    return fetch(NJ_PARCEL + '?' + p)
+    return xfetch(NJ_PARCEL + '?' + p, 15000)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.features) return { rows: [], raw: 0, dated: 0 };
@@ -2723,7 +2773,7 @@ body.pl-signedin .gate-cta { display: none; }
 
   function loadCalibration() {
     if (calibration !== null) return Promise.resolve();
-    return fetch('/valuation-calibration.json')
+    return xfetch('/valuation-calibration.json', 6000)
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { calibration = (j && j.factors) ? j.factors : {}; })
       .catch(function () { calibration = {}; });
@@ -2776,7 +2826,7 @@ body.pl-signedin .gate-cta { display: none; }
 
   function loadRatios() {
     if (officialRatios !== null) return Promise.resolve();
-    return fetch('/equalization-ratios.json')
+    return xfetch('/equalization-ratios.json', 8000)
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { officialRatios = (j && j.ratios) ? j.ratios : {}; })
       .catch(function () { officialRatios = {}; });
@@ -3015,7 +3065,7 @@ body.pl-signedin .gate-cta { display: none; }
       outFields: 'PROP_LOC,SALE_PRICE,DEED_DATE,NET_VALUE,YR_CONSTR,CALC_ACRE,MUN_NAME',
       returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '400', f: 'json'
     });
-    return fetch(NJ_PARCEL + '?' + p)
+    return xfetch(NJ_PARCEL + '?' + p, 15000)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.features) return [];
@@ -3057,7 +3107,7 @@ body.pl-signedin .gate-cta { display: none; }
       outFields: 'NET_VALUE,LAST_YR_TX,YR_CONSTR,CALC_ACRE',
       returnGeometry: 'false', resultRecordCount: '600', f: 'json'
     });
-    return fetch(NJ_PARCEL + '?' + p)
+    return xfetch(NJ_PARCEL + '?' + p, 15000)
       .then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.features || d.features.length < 8) return null;
@@ -4442,7 +4492,7 @@ body.pl-signedin .gate-cta { display: none; }
       where: where, outFields: 'NET_VALUE,LAST_YR_TX',
       returnGeometry: 'false', resultRecordCount: '1500', f: 'json'
     });
-    return fetch(NJ_PARCEL + '?' + p).then(function (r) { return r.json(); })
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
       .then(function (d) {
         if (!d.features || d.features.length < 20) return null;
         var rates = [];
