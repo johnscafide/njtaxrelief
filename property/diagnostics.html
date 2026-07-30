@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Endpoint diagnostics</title>
+<style>
+  body { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #0e1626; color: #dbe4f2;
+         margin: 0; padding: 28px 20px 60px; line-height: 1.55; }
+  .wrap { max-width: 900px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0 0 6px; color: #fff; }
+  .sub { font-size: 13px; color: #8fa3c2; margin-bottom: 22px; }
+  button { font-family: inherit; font-size: 14px; font-weight: 700; padding: 12px 20px;
+           border: none; border-radius: 8px; background: #f0d87a; color: #17203a; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: wait; }
+  .row { display: grid; grid-template-columns: 190px 92px 82px 1fr; gap: 12px;
+         padding: 11px 0; border-bottom: 1px solid #22314d; font-size: 13px; align-items: start; }
+  .row.head { color: #8fa3c2; font-weight: 700; border-bottom: 2px solid #22314d; }
+  .name { color: #fff; }
+  .ok   { color: #7ee0a8; font-weight: 700; }
+  .bad  { color: #ff9a8f; font-weight: 700; }
+  .warn { color: #f0d87a; font-weight: 700; }
+  .ms   { color: #8fa3c2; text-align: right; }
+  .note { color: #a9bcd6; word-break: break-word; }
+  .verdict { margin-top: 26px; padding: 18px 20px; border-radius: 10px; background: #16223a;
+             border: 1px solid #22314d; font-size: 14px; color: #dbe4f2; }
+  .verdict b { color: #f0d87a; }
+  code { background: #16223a; padding: 2px 6px; border-radius: 4px; color: #9fd8ff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Watchdog endpoint diagnostics</h1>
+  <div class="sub">Tests every outside service the property lookup depends on, from this browser.
+    Nothing here is stored or sent anywhere.</div>
+
+  <button id="go" onclick="runAll()">Run all tests</button>
+
+  <div id="out" style="margin-top:24px;"></div>
+  <div id="verdict"></div>
+</div>
+
+<script>
+var NJ_GEOCODE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+var NJ_REVERSE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/reverseGeocode';
+var CENSUS     = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
+var NJ_PARCEL  = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+
+var results = [];
+
+function xfetch(url, ms) {
+  var ctl = new AbortController();
+  var t = setTimeout(function () { ctl.abort(); }, ms || 12000);
+  return fetch(url, { signal: ctl.signal }).then(function (r) { clearTimeout(t); return r; },
+    function (e) { clearTimeout(t); throw new Error(e && e.name === 'AbortError' ? 'TIMEOUT' : (e.message || 'network/CORS')); });
+}
+
+function row(name, status, ms, note, cls) {
+  var d = document.createElement('div');
+  d.className = 'row';
+  d.innerHTML = '<div class="name">' + name + '</div>' +
+                '<div class="' + cls + '">' + status + '</div>' +
+                '<div class="ms">' + (ms === null ? '' : ms + ' ms') + '</div>' +
+                '<div class="note">' + note + '</div>';
+  document.getElementById('out').appendChild(d);
+}
+
+function test(name, url, check, ms) {
+  var t0 = performance.now();
+  return xfetch(url, ms).then(function (r) {
+    var dt = Math.round(performance.now() - t0);
+    if (!r.ok) { results.push({ name: name, ok: false }); row(name, 'HTTP ' + r.status, dt, 'Server answered with an error status', 'bad'); return; }
+    return r.json().then(function (j) {
+      var v = check(j);
+      results.push({ name: name, ok: v.ok });
+      row(name, v.ok ? 'OK' : 'EMPTY', dt, v.note, v.ok ? 'ok' : 'warn');
+    }, function () {
+      var dt2 = Math.round(performance.now() - t0);
+      results.push({ name: name, ok: false });
+      row(name, 'BAD JSON', dt2, 'Responded but the body was not JSON', 'bad');
+    });
+  }).catch(function (e) {
+    var dt = Math.round(performance.now() - t0);
+    results.push({ name: name, ok: false, err: e.message });
+    var hint = e.message === 'TIMEOUT'
+      ? 'Connected but never answered. This is what makes the page hang.'
+      : 'Blocked before any response. Almost always CORS, or the host is unreachable from this network.';
+    row(name, e.message, dt, hint, 'bad');
+  });
+}
+
+function runAll() {
+  document.getElementById('go').disabled = true;
+  document.getElementById('out').innerHTML = '';
+  document.getElementById('verdict').innerHTML = '';
+  results = [];
+  row('SERVICE', 'RESULT', null, 'DETAIL', 'head');
+
+  var addr = '11 Dalton Place, Sicklerville, NJ 08081';
+
+  test('NJ geocoder (forward)',
+    NJ_GEOCODE + '?' + new URLSearchParams({ SingleLine: addr, outSR: '4326', maxLocations: '1', f: 'json' }),
+    function (j) {
+      var c = j.candidates && j.candidates[0];
+      return { ok: !!c, note: c ? 'Matched: ' + c.address : 'Reachable but returned no candidates' };
+    }, 8000)
+
+  .then(function () {
+    return test('NJ geocoder (reverse)',
+      NJ_REVERSE + '?' + new URLSearchParams({
+        location: JSON.stringify({ x: -74.9695, y: 39.7205, spatialReference: { wkid: 4326 } }),
+        outSR: '4326', f: 'json' }),
+      function (j) {
+        var a = j.address;
+        return { ok: !!(a && (a.Match_addr || a.Address)), note: a ? ('Returned: ' + (a.Match_addr || a.Address)) : (j.error ? ('Service error: ' + j.error.message) : 'No address returned') };
+      }, 9000);
+  })
+
+  .then(function () {
+    return test('US Census geocoder (fallback)',
+      CENSUS + '?' + new URLSearchParams({ address: addr, benchmark: 'Public_AR_Current', format: 'json' }),
+      function (j) {
+        var m = j.result && j.result.addressMatches && j.result.addressMatches[0];
+        return { ok: !!m, note: m ? 'Matched: ' + m.matchedAddress : 'Reachable but no match' };
+      }, 10000);
+  })
+
+  .then(function () {
+    return test('NJ parcel service',
+      NJ_PARCEL + '?' + new URLSearchParams({
+        geometry: JSON.stringify({ x: -74.9695, y: 39.7205, spatialReference: { wkid: 4326 } }),
+        geometryType: 'esriGeometryPoint', inSR: '4326', outSR: '4326',
+        spatialRel: 'esriSpatialRelIntersects',
+        outFields: 'PROP_LOC,MUN_NAME,NET_VALUE,DEED_DATE', returnGeometry: 'false',
+        resultRecordCount: '1', f: 'json' }),
+      function (j) {
+        if (j.error) return { ok: false, note: 'Service error: ' + j.error.message };
+        var f = j.features && j.features[0];
+        return { ok: !!f, note: f ? ('Matched ' + f.attributes.PROP_LOC + ', ' + f.attributes.MUN_NAME + '  |  DEED_DATE raw value: "' + f.attributes.DEED_DATE + '"') : 'No parcel at that point' };
+      }, 16000);
+  })
+
+  .then(function () {
+    var files = ['/equalization-ratios.json', '/tax-rates.json', '/valuation-calibration.json', '/listings.json'];
+    return files.reduce(function (chain, f) {
+      return chain.then(function () {
+        return test('File ' + f, f, function (j) {
+          var n = j.ratios ? Object.keys(j.ratios).length
+                : j.rates ? Object.keys(j.rates).length
+                : j.factors ? Object.keys(j.factors).length
+                : j.listings ? Object.keys(j.listings).length : 0;
+          return { ok: true, note: n + ' entries' };
+        }, 7000);
+      });
+    }, Promise.resolve());
+  })
+
+  .then(function () {
+    var bad = results.filter(function (r) { return !r.ok; });
+    var njF = results.find(function (r) { return r.name === 'NJ geocoder (forward)'; }) || {};
+    var cen = results.find(function (r) { return r.name === 'US Census geocoder (fallback)'; }) || {};
+    var par = results.find(function (r) { return r.name === 'NJ parcel service'; }) || {};
+
+    var v = '';
+    if (par.ok && (njF.ok || cen.ok)) {
+      v = '<b>Everything the lookup needs is working from this browser.</b> If the page still hangs, ' +
+          'the fault is in the page code rather than the network, and the console will name it.';
+    } else if (!par.ok) {
+      v = '<b>The parcel service is the problem.</b> Without it there is no property record to show, ' +
+          'so nothing can render. ' + (par.err === 'TIMEOUT'
+            ? 'It timed out, which is exactly the hang you are seeing.'
+            : 'It was blocked or unreachable.');
+    } else if (!njF.ok && !cen.ok) {
+      v = '<b>Both geocoders failed.</b> Addresses cannot be turned into coordinates, so every lookup ' +
+          'will report that it could not place the address.';
+    } else if (!njF.ok && cen.ok) {
+      v = '<b>The NJ geocoder is down but Census works.</b> Address lookups should still succeed through ' +
+          'the fallback. The <code>Use my location</code> button will not work, because reverse geocoding ' +
+          'only exists on the NJ service.';
+    }
+    if (bad.length) v += '<br><br>Failing: ' + bad.map(function (b) { return b.name; }).join(', ') + '.';
+    document.getElementById('verdict').innerHTML = '<div class="verdict">' + v + '</div>';
+    document.getElementById('go').disabled = false;
+  });
+}
+</script>
+</body>
+</html>
