@@ -1110,6 +1110,129 @@ body.plm-locked { overflow: hidden; }
   .db-hi { font-size: 22px; }
 }
 
+
+/* ============================================================
+   DASHBOARD TOOLS  ·  dense on purpose
+   ============================================================ */
+#db-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 12px; align-items: start; }
+.tool { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.tool-h {
+  display: flex; align-items: center; gap: 9px; padding: 12px 16px;
+  background: #f6f8fc; border-bottom: 1px solid var(--border);
+  font-size: 13px; font-weight: 800; color: var(--navy-dark);
+  text-transform: uppercase; letter-spacing: .05em;
+}
+.tool-h i { color: var(--navy-light); font-size: 14px; }
+.tool-b { padding: 16px; }
+.tl-note { font-size: 12.5px; color: #5a6070; line-height: 1.6; margin-top: 12px; }
+.tl-fine { font-size: 11px; color: #8a93a6; line-height: 1.55; margin-top: 10px; }
+.tl-p { font-size: 13.5px; color: #5a6070; line-height: 1.65; margin: 0 0 14px; }
+.tl-good { display: flex; gap: 9px; background: var(--green-light); color: var(--green);
+  border-radius: 8px; padding: 11px 13px; font-size: 12.5px; line-height: 1.55; margin-top: 12px; }
+.tl-good i { margin-top: 2px; flex-shrink: 0; }
+.tl-wait { display: flex; gap: 12px; align-items: flex-start; font-size: 13px; color: #5a6070; line-height: 1.6; }
+.tl-wait i { font-size: 18px; color: #c3cbdb; margin-top: 2px; }
+.tl-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+  margin-top: 12px; padding: 11px; border: none; border-radius: 8px; cursor: pointer;
+  background: var(--navy); color: #fff; font-size: 13.5px; font-weight: 700; font-family: inherit; text-decoration: none; }
+.tl-btn:hover { background: var(--navy-dark); }
+.tl-btn.ghost { background: #fff; color: var(--navy); border: 1px solid var(--border); }
+
+/* drift */
+.dr-row { display: grid; grid-template-columns: 1fr 96px 74px 74px; gap: 10px; align-items: center;
+  padding: 10px 0; border-bottom: 1px solid #f1f3f7; }
+.dr-row:last-child { border-bottom: none; }
+.dr-addr b { display: block; font-size: 13px; color: #0e2248; }
+.dr-addr span { font-size: 11px; color: #8a93a6; }
+.dr-spark { width: 96px; height: 30px; }
+.dr-fig { font-size: 13px; font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+.dr-fig span { display: block; font-size: 9.5px; font-weight: 600; color: #8a93a6; text-transform: uppercase; letter-spacing: .04em; }
+.dr-fig.up { color: var(--red); } .dr-fig.down { color: var(--green); }
+
+/* percentile */
+.pct-row { padding: 12px 0; border-bottom: 1px solid #f1f3f7; }
+.pct-row:last-child { border-bottom: none; }
+.pct-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 9px; }
+.pct-top b { font-size: 13.5px; color: #0e2248; }
+.pct-badge { font-size: 10.5px; font-weight: 800; padding: 4px 10px; border-radius: 99px; white-space: nowrap; }
+.pct-badge.hot { background: #fdf6e3; color: #6b5514; }
+.pct-badge.ok  { background: var(--green-light); color: var(--green); }
+.pct-bar { position: relative; height: 8px; border-radius: 99px;
+  background: linear-gradient(90deg, #2e7d52, #f0d87a 60%, #c0392b); }
+.pct-bar i { position: absolute; top: -4px; width: 4px; height: 16px; border-radius: 2px;
+  background: #0e2248; box-shadow: 0 0 0 2px #fff; }
+.pct-legend { display: flex; justify-content: space-between; font-size: 10px; color: #8a93a6; margin-top: 5px; }
+.pct-say { font-size: 12.5px; color: #5a6070; line-height: 1.6; margin-top: 9px; }
+
+/* rebates */
+.rb-stack { border: 1px solid var(--border); border-radius: 9px; overflow: hidden; }
+.rb-line { display: flex; justify-content: space-between; gap: 12px; padding: 10px 13px; font-size: 13px;
+  border-bottom: 1px solid #f1f3f7; color: #3d4759; }
+.rb-line b { font-variant-numeric: tabular-nums; color: #0e2248; }
+.rb-line.minus b { color: var(--green); }
+.rb-line.muted { color: #a0a8b8; } .rb-line.muted b { color: #a0a8b8; }
+.rb-line.total { background: #f6f8fc; border-bottom: none; font-weight: 800; }
+.rb-line.total b { font-size: 16px; }
+
+/* portfolio */
+.pf-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.pf-stats b { display: block; font-size: 18px; font-weight: 800; color: #0e2248; font-variant-numeric: tabular-nums; }
+.pf-stats span { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #8a93a6; }
+.pf-rank-h { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  color: #8a93a6; margin: 4px 0 8px; }
+.pf-line { display: grid; grid-template-columns: 20px 1fr 58px 74px; gap: 8px; align-items: center;
+  padding: 8px 0; border-bottom: 1px solid #f1f3f7; font-size: 12.5px; }
+.pf-n { color: #a0a8b8; font-weight: 800; }
+.pf-a { color: #0e2248; font-weight: 600; } .pf-a em { display: block; font-style: normal; font-size: 10.5px; color: #8a93a6; }
+.pf-e { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+.pf-e.worst { color: var(--red); }
+.pf-t { text-align: right; color: #5a6070; font-variant-numeric: tabular-nums; }
+
+/* compare */
+.cmp-pick { display: grid; gap: 8px; }
+.cmp-pick select { padding: 10px 12px; font-size: 13.5px; font-family: inherit;
+  border: 1px solid var(--border); border-radius: 8px; background: #fff; }
+.cmp-wrap { overflow-x: auto; margin-top: 12px; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.cmp th { background: #0e2248; color: #fff; padding: 9px 10px; text-align: left; font-size: 11px; white-space: nowrap; }
+.cmp td { padding: 9px 10px; border-bottom: 1px solid #f1f3f7; text-align: center; font-variant-numeric: tabular-nums; }
+.cmp td.cmp-l { text-align: left; color: #5a6070; }
+.cmp-best { font-size: 9px; background: #2e7d52; padding: 2px 6px; border-radius: 99px; }
+
+/* true cost */
+.tc-spon { display: flex; align-items: center; gap: 11px; background: #eef7f1; border: 1px solid #bfe0cb;
+  border-radius: 9px; padding: 9px 12px; margin-bottom: 14px; }
+.tc-spon img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid #1e6b3a; }
+.tc-spon b { display: block; font-size: 12px; color: #14361f; }
+.tc-spon span { font-size: 11px; color: #3d6b4c; }
+.tc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.tc-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 8px; }
+.tc-row label { font-size: 11.5px; color: #5a6070; }
+.tc-row input { width: 92px; padding: 7px 9px; font-size: 13px; font-family: inherit; text-align: right;
+  border: 1px solid var(--border); border-radius: 7px; }
+.tc-out { background: linear-gradient(150deg, #14361f, #1e6b3a); border-radius: 10px; padding: 16px; color: #fff; }
+.tc-big { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.tc-lbl { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #bfe0cb; }
+.tc-line { display: flex; justify-content: space-between; font-size: 11.5px; color: #cfe6d8;
+  padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.13); }
+.tc-line b { color: #fff; font-variant-numeric: tabular-nums; }
+.tc-share { font-size: 11.5px; color: #cfe6d8; line-height: 1.55; margin-top: 10px;
+  background: rgba(255,255,255,.09); padding: 9px 11px; border-radius: 7px; }
+.tc-share b, .tc-share i { color: #f0d87a; }
+.tc-btn { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 12px;
+  padding: 11px; border-radius: 8px; background: linear-gradient(135deg, #e0bb52, #b8972a);
+  color: #17203a; font-size: 13px; font-weight: 800; text-decoration: none; }
+
+.ex-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ex-btns .tl-btn { margin-top: 0; }
+
+@media (max-width: 700px) {
+  #db-tools { grid-template-columns: 1fr; }
+  .tc-grid { grid-template-columns: 1fr; }
+  .dr-row { grid-template-columns: 1fr 70px 70px; }
+  .dr-spark { display: none; }
+}
+
 </style>
 </head>
 <body>
@@ -1157,11 +1280,13 @@ body.plm-locked { overflow: hidden; }
       <div class="db-tabs">
         <button class="db-tab active" data-p="homes"   onclick="dbTab('homes')">My homes</button>
         <button class="db-tab"        data-p="watch"   onclick="dbTab('watch')">Watchlist</button>
+        <button class="db-tab"        data-p="tools"   onclick="dbTab('tools')">Tools</button>
         <button class="db-tab"        data-p="profile" onclick="dbTab('profile')">My profile</button>
       </div>
 
       <div class="db-panel active" id="db-homes"></div>
       <div class="db-panel" id="db-watch"></div>
+      <div class="db-panel" id="db-tools"></div>
       <div class="db-panel" id="db-profile"></div>
 
     </div>
@@ -1275,6 +1400,477 @@ body.plm-locked { overflow: hidden; }
     });
   }
 
+  // ══════════════════════════════════════════════
+  // SHARED DATA
+  // ══════════════════════════════════════════════
+  var NJ_PARCEL = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+  var GREENTREE_URL = 'https://johnvarano.com/';
+  var ratios = null, rates = null;
+
+  function xfetch(url, ms) {
+    ms = ms || 14000;
+    var ctl = new AbortController();
+    var t = setTimeout(function () { ctl.abort(); }, ms);
+    return fetch(url, { signal: ctl.signal }).then(function (r) { clearTimeout(t); return r; },
+      function (e) { clearTimeout(t); throw new Error(e && e.name === 'AbortError' ? 'timeout' : 'network'); });
+  }
+  function median(a) {
+    if (!a || !a.length) return null;
+    a = a.slice().sort(function (x, y) { return x - y; });
+    var m = a.length >> 1;
+    return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
+  }
+  function loadRefData() {
+    if (ratios && rates) return Promise.resolve();
+    return Promise.all([
+      xfetch('/equalization-ratios.json', 8000).then(function (r) { return r.json(); })
+        .then(function (j) { ratios = (j && j.ratios) || {}; }).catch(function () { ratios = {}; }),
+      xfetch('/tax-rates.json', 8000).then(function (r) { return r.json(); })
+        .then(function (j) { rates = (j && j.rates) || {}; }).catch(function () { rates = {}; })
+    ]);
+  }
+  function ratioFor(town, county) {
+    if (!ratios) return null;
+    var t = (town || '').toUpperCase().trim();
+    var tc = t + ' (' + (county || '').toUpperCase().trim() + ')';
+    var keys = Object.keys(ratios), hit = null;
+    for (var i = 0; i < keys.length; i++) if (keys[i].toUpperCase().trim() === tc) { hit = ratios[keys[i]]; break; }
+    if (!hit) for (var j = 0; j < keys.length; j++) if (keys[j].toUpperCase().trim() === t) { hit = ratios[keys[j]]; break; }
+    if (!hit) return null;
+    var yrs = Object.keys(hit).map(Number).filter(function (y) { return y > 1990; }).sort();
+    if (!yrs.length) return null;
+    var row = hit[String(yrs[yrs.length - 1])];
+    var pct = (row && typeof row === 'object') ? +row.ratio : +row;
+    if (!pct || pct <= 0) return null;
+    return { ratio: pct / 100, year: yrs[yrs.length - 1],
+             upper: row && row.upper ? +row.upper / 100 : null };
+  }
+
+  // ══════════════════════════════════════════════
+  // 1 · ASSESSMENT DRIFT
+  // Uses the history snapshots the ledger writes whenever a figure changes.
+  // Nobody else has this, because New Jersey does not publish per parcel
+  // assessment history. It accumulates from your own visits.
+  // ══════════════════════════════════════════════
+  function toolDrift() {
+    var withHist = rows.filter(function (r) { return (r.history || []).length; });
+    if (!rows.length) return '';
+
+    if (!withHist.length) {
+      return toolCard('Assessment drift', 'fa-chart-line',
+        '<div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
+        '<div><b>Building your baseline.</b> Every time you open one of these properties we record the ' +
+        'assessment and tax. The first time either one changes, this becomes a year over year chart of ' +
+        'how your assessment has moved against your town. New Jersey does not publish that anywhere, ' +
+        'so it can only be built by watching.</div></div>' +
+        '<div class="tl-note">' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') +
+        ' being tracked. Nothing to compare yet.</div>');
+    }
+
+    var body = withHist.map(function (r) {
+      var pts = (r.history || []).map(function (h) {
+        return { t: h.seen ? new Date(h.seen).getTime() : 0, v: +h.assessed || 0, x: +h.last_year_tax || 0 };
+      }).filter(function (p) { return p.v > 0; });
+      pts.push({ t: Date.now(), v: +r.assessed || 0, x: +r.last_year_tax || 0 });
+      if (pts.length < 2) return '';
+
+      var first = pts[0], last = pts[pts.length - 1];
+      var dA = last.v - first.v, pA = first.v ? (dA / first.v) * 100 : 0;
+      var dT = last.x - first.x, pT = first.x ? (dT / first.x) * 100 : 0;
+
+      var W = 300, H = 60, lo = Math.min.apply(null, pts.map(function (p) { return p.v; })),
+          hi = Math.max.apply(null, pts.map(function (p) { return p.v; }));
+      var path = pts.map(function (p, i) {
+        var x = 4 + (i / (pts.length - 1)) * (W - 8);
+        var y = H - 6 - ((p.v - lo) / ((hi - lo) || 1)) * (H - 14);
+        return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+      }).join(' ');
+
+      return '<div class="dr-row">' +
+        '<div class="dr-addr"><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') + '</span></div>' +
+        '<svg class="dr-spark" viewBox="0 0 ' + W + ' ' + H + '"><path d="' + path + '" fill="none" stroke="' +
+          (dA > 0 ? '#c0392b' : '#1e6b3a') + '" stroke-width="2.4" stroke-linecap="round"/></svg>' +
+        '<div class="dr-fig ' + (dA > 0 ? 'up' : 'down') + '">' + (dA >= 0 ? '+' : '') + money(dA) +
+          '<span>' + (pA >= 0 ? '+' : '') + pA.toFixed(1) + '% assessed</span></div>' +
+        '<div class="dr-fig ' + (dT > 0 ? 'up' : 'down') + '">' + (dT >= 0 ? '+' : '') + money(dT) +
+          '<span>' + (pT >= 0 ? '+' : '') + pT.toFixed(1) + '% tax</span></div>' +
+      '</div>';
+    }).join('');
+
+    return toolCard('Assessment drift', 'fa-chart-line', body +
+      '<div class="tl-note">Measured from snapshots taken each time you opened the property. ' +
+      'A rising assessment with a flat market is the clearest appeal signal there is.</div>');
+  }
+
+  // ══════════════════════════════════════════════
+  // 2 · NEIGHBORHOOD TAX PERCENTILE
+  // ══════════════════════════════════════════════
+  function toolPercentile() {
+    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
+    if (!homes.length) return '';
+    return toolCard('Where you sit in your town', 'fa-ranking-star',
+      '<div id="pct-body"><div class="tl-wait"><div class="pl-spin" style="margin:0;"></div>' +
+      '<div>Reading the tax distribution for your town...</div></div></div>');
+  }
+
+  function paintPercentile() {
+    var host = el('pct-body');
+    if (!host) return;
+    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
+    if (!homes.length) return;
+
+    Promise.all(homes.slice(0, 3).map(function (r) {
+      var where = "MUN_NAME = '" + String(r.town || '').replace(/'/g, "''") + "'" +
+                  " AND PROP_CLASS = '2' AND LAST_YR_TX > 100";
+      var p = new URLSearchParams({ where: where, outFields: 'LAST_YR_TX',
+        returnGeometry: 'false', resultRecordCount: '2000', f: 'json' });
+      return xfetch(NJ_PARCEL + '?' + p, 18000).then(function (x) { return x.json(); })
+        .then(function (d) {
+          var t = (d.features || []).map(function (f) { return +f.attributes.LAST_YR_TX; })
+                    .filter(function (v) { return v > 100 && v < 200000; }).sort(function (a, b) { return a - b; });
+          if (t.length < 30) return { r: r, ok: false };
+          var below = 0;
+          for (var i = 0; i < t.length; i++) if (t[i] < r.last_year_tax) below++;
+          return { r: r, ok: true, pct: Math.round(below / t.length * 100), n: t.length, med: median(t) };
+        }).catch(function () { return { r: r, ok: false }; });
+    })).then(function (res) {
+      host.innerHTML = res.map(function (o) {
+        if (!o.ok) return '<div class="tl-note">Not enough data for ' + esc(o.r.town || 'that town') + ' yet.</div>';
+        var hot = o.pct >= 75;
+        return '<div class="pct-row">' +
+          '<div class="pct-top"><b>' + esc(o.r.address) + '</b>' +
+            '<span class="pct-badge ' + (hot ? 'hot' : 'ok') + '">' + o.pct + 'th percentile</span></div>' +
+          '<div class="pct-bar"><i style="left:' + Math.min(97, Math.max(1, o.pct)) + '%"></i></div>' +
+          '<div class="pct-legend"><span>lowest in ' + esc(o.r.town) + '</span><span>highest</span></div>' +
+          '<div class="pct-say">You pay <b>' + money(o.r.last_year_tax) + '</b>. The median home here pays <b>' +
+            money(o.med) + '</b>. That puts you above <b>' + o.pct + '%</b> of the ' + o.n.toLocaleString() +
+            ' homes in town.' +
+            (hot ? ' <b style="color:var(--red)">That is high enough to be worth challenging.</b>' : '') +
+          '</div>' +
+          (hot ? '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have John look at this</button>' : '') +
+        '</div>';
+      }).join('');
+    });
+  }
+
+  // ══════════════════════════════════════════════
+  // 4 · REBATE STACK
+  // ══════════════════════════════════════════════
+  function toolRebates() {
+    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
+    if (!homes.length) return '';
+    var r = homes[0];
+    var tax = +r.last_year_tax;
+    var senior = profile.age_band === '65plus';
+
+    var anchor = 1500;
+    var stay = senior ? Math.min(6500, tax * 0.5) : 0;
+    var freeze = senior ? 0 : 0;                       // needs a base year, cannot infer
+    var after = Math.max(0, tax - anchor - stay);
+
+    return toolCard('Your rebate stack', 'fa-layer-group',
+      '<div class="rb-stack">' +
+        '<div class="rb-line"><span>Your bill for ' + esc(r.address) + '</span><b>' + money(tax) + '</b></div>' +
+        '<div class="rb-line minus"><span>ANCHOR, homeowners</span><b>-' + money(Math.min(anchor, tax)) + '</b></div>' +
+        (senior
+          ? '<div class="rb-line minus"><span>Stay NJ, age 65+, capped at half the bill</span><b>-' + money(stay) + '</b></div>'
+          : '<div class="rb-line muted"><span>Stay NJ, only from age 65</span><b>not yet</b></div>') +
+        '<div class="rb-line total"><span>What you would actually pay</span><b>' + money(after) + '</b></div>' +
+      '</div>' +
+      (senior
+        ? '<div class="tl-good"><i class="fas fa-circle-check"></i> At 65 or over you can stack both. Most people who ' +
+          'qualify for Stay NJ have never filed for it, and it does not backdate.</div>'
+        : '<div class="tl-note">Set your age band in your profile and this recalculates. If you are approaching 65, ' +
+          'Stay NJ is worth planning for: it covers up to half the bill.</div>') +
+      '<a class="tl-btn" href="/anchor-estimator.html">Run the full estimator</a>' +
+      '<div class="tl-fine">Illustration only. Actual benefits depend on income, age, and residency. ' +
+      'The Senior Freeze needs a base year we cannot infer, so it is not included here and may add more.</div>');
+  }
+
+  // ══════════════════════════════════════════════
+  // 5 · PORTFOLIO
+  // ══════════════════════════════════════════════
+  function toolPortfolio() {
+    if (rows.length < 2) return '';
+    var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
+    var assessed = rows.reduce(function (a, r) { return a + (+r.assessed || 0); }, 0);
+    var value = rows.reduce(function (a, r) { return a + (+r.watchdog_value || +r.assessed || 0); }, 0);
+    var blended = value ? (tot / value) * 100 : 0;
+
+    var ranked = rows.slice().filter(function (r) { return r.last_year_tax && (r.watchdog_value || r.assessed); })
+      .map(function (r) {
+        var v = +r.watchdog_value || +r.assessed;
+        return { r: r, eff: (+r.last_year_tax / v) * 100 };
+      }).sort(function (a, b) { return b.eff - a.eff; });
+
+    return toolCard('Portfolio', 'fa-building-columns',
+      '<div class="pf-stats">' +
+        '<div><b>' + rows.length + '</b><span>Properties</span></div>' +
+        '<div><b>' + money(tot) + '</b><span>Total annual tax</span></div>' +
+        '<div><b>' + money(assessed) + '</b><span>Total assessed</span></div>' +
+        '<div><b>' + blended.toFixed(2) + '%</b><span>Blended effective rate</span></div>' +
+      '</div>' +
+      (ranked.length
+        ? '<div class="pf-rank"><div class="pf-rank-h">Worst value per dollar, highest tax burden first</div>' +
+          ranked.slice(0, 6).map(function (o, i) {
+            return '<div class="pf-line">' +
+              '<span class="pf-n">' + (i + 1) + '</span>' +
+              '<span class="pf-a">' + esc(o.r.address) + '<em>' + esc(o.r.town || '') + '</em></span>' +
+              '<span class="pf-e' + (i === 0 && ranked.length > 1 ? ' worst' : '') + '">' + o.eff.toFixed(2) + '%</span>' +
+              '<span class="pf-t">' + money(o.r.last_year_tax) + '</span>' +
+            '</div>';
+          }).join('') + '</div>'
+        : '') +
+      '<div class="tl-note">Effective rate is tax divided by estimated market value, which is the only fair way to ' +
+      'compare properties across different towns. Two homes at the same price can differ by thousands a year.</div>');
+  }
+
+  // ══════════════════════════════════════════════
+  // 6 · TOWN COMPARISON
+  // ══════════════════════════════════════════════
+  function toolCompare() {
+    var opts = Object.keys(ratios || {}).sort().map(function (k) {
+      return '<option value="' + esc(k) + '">' + esc(k.replace(/ \(/, ', ').replace(/\)$/, '')) + '</option>';
+    }).join('');
+    var mine = rows.length ? rows[0] : null;
+    return toolCard('Compare towns', 'fa-scale-balanced',
+      '<div class="cmp-pick">' +
+        '<select id="cmp-a"><option value="">Town A...</option>' + opts + '</select>' +
+        '<select id="cmp-b"><option value="">Town B...</option>' + opts + '</select>' +
+        '<select id="cmp-c"><option value="">Town C, optional...</option>' + opts + '</select>' +
+        '<button class="tl-btn" onclick="dbCompare()">Compare</button>' +
+      '</div>' +
+      '<div id="cmp-out">' +
+        (mine ? '<div class="tl-note">Tip: start with <b>' + esc(mine.town || '') + '</b>, where you already own, ' +
+          'then add the towns you are considering.</div>' : '') +
+      '</div>');
+  }
+
+  window.dbCompare = function () {
+    var picks = ['cmp-a', 'cmp-b', 'cmp-c'].map(function (id) { return (el(id) || {}).value; })
+      .filter(function (v) { return v; });
+    var out = el('cmp-out');
+    if (picks.length < 2) { out.innerHTML = '<div class="tl-note">Pick at least two towns.</div>'; return; }
+    out.innerHTML = '<div class="tl-wait"><div class="pl-spin" style="margin:0;"></div><div>Measuring each town...</div></div>';
+
+    Promise.all(picks.map(function (key) {
+      var parts = key.replace(/\)$/, '').split(' (');
+      var town = parts[0], county = parts[1] || '';
+      var R = ratioFor(town, county);
+      var where = "MUN_NAME = '" + town.replace(/'/g, "''") + "' AND COUNTY = '" + county.replace(/'/g, "''") +
+                  "' AND PROP_CLASS = '2' AND NET_VALUE > 10000 AND LAST_YR_TX > 100";
+      var p = new URLSearchParams({ where: where, outFields: 'NET_VALUE,LAST_YR_TX',
+        returnGeometry: 'false', resultRecordCount: '1200', f: 'json' });
+      return xfetch(NJ_PARCEL + '?' + p, 18000).then(function (x) { return x.json(); })
+        .then(function (d) {
+          var f = d.features || [];
+          var assessed = f.map(function (x) { return +x.attributes.NET_VALUE; });
+          var taxes = f.map(function (x) { return +x.attributes.LAST_YR_TX; });
+          var eff = [];
+          if (R) f.forEach(function (x) {
+            var mv = (+x.attributes.NET_VALUE) / R.ratio;
+            var e = (+x.attributes.LAST_YR_TX) / mv;
+            if (isFinite(e) && e > 0.002 && e < 0.10) eff.push(e);
+          });
+          return { town: town, county: county, ratio: R, n: f.length,
+                   medAssessed: median(assessed), medTax: median(taxes), eff: median(eff) };
+        }).catch(function () { return { town: town, county: county, ratio: R, n: 0 }; });
+    })).then(function (res) {
+      var best = res.filter(function (r) { return r.eff; }).sort(function (a, b) { return a.eff - b.eff; })[0];
+      out.innerHTML =
+        '<div class="cmp-wrap"><table class="cmp"><thead><tr><th>Town</th>' +
+        res.map(function (r) { return '<th>' + esc(r.town) + (best && r.town === best.town ? ' <span class="cmp-best">lowest</span>' : '') + '</th>'; }).join('') +
+        '</tr></thead><tbody>' +
+        cmpRow('Effective tax rate', res, function (r) { return r.eff ? (r.eff * 100).toFixed(2) + '%' : '-'; }) +
+        cmpRow('Equalization ratio', res, function (r) { return r.ratio ? (r.ratio.ratio * 100).toFixed(2) + '%' : '-'; }) +
+        cmpRow('Median assessment', res, function (r) { return r.medAssessed ? money(r.medAssessed) : '-'; }) +
+        cmpRow('Median tax bill', res, function (r) { return r.medTax ? money(r.medTax) : '-'; }) +
+        cmpRow('Tax on a $400k home', res, function (r) { return r.eff ? money(400000 * r.eff) : '-'; }) +
+        cmpRow('Homes measured', res, function (r) { return r.n ? r.n.toLocaleString() : '-'; }) +
+        '</tbody></table></div>' +
+        (best ? '<div class="tl-good"><i class="fas fa-circle-check"></i> On a $400,000 home, <b>' + esc(best.town) +
+          '</b> is the cheapest of these at about <b>' + money(400000 * best.eff) + '</b> a year.</div>' : '') +
+        '<div class="tl-fine">Effective rates are measured live from each town\u2019s own parcels, not from a rate table. ' +
+        'They will not match any single home exactly.</div>';
+    });
+  };
+  function cmpRow(label, res, fn) {
+    return '<tr><td class="cmp-l">' + label + '</td>' +
+      res.map(function (r) { return '<td>' + fn(r) + '</td>'; }).join('') + '</tr>';
+  }
+
+  // ══════════════════════════════════════════════
+  // 8 · TRUE COST OF OWNERSHIP  ·  sponsored
+  // ══════════════════════════════════════════════
+  function toolCost() {
+    var homes = rows.filter(function (r) { return r.kind === 'home'; });
+    if (!homes.length) return '';
+    var r = homes[0];
+    var v = +r.watchdog_value || +r.assessed || 300000;
+    var mTax = Math.round((+r.last_year_tax || 0) / 12);
+
+    return toolCard('True cost of ownership', 'fa-wallet',
+      '<div class="tc-spon"><img src="/johnvarano.jpg" alt="John Varano">' +
+        '<div><b>Sponsored by Greentree Mortgage, an HMA Company</b>' +
+        '<span>John Varano, Branch Manager</span></div></div>' +
+      '<div class="tc-grid">' +
+        '<div class="tc-in">' +
+          tcRow('Home value', 'tc-val', v.toLocaleString()) +
+          tcRow('Loan balance', 'tc-loan', Math.round(v * 0.7).toLocaleString()) +
+          tcRow('Rate %', 'tc-rate', '6.5', 'number', '0.125') +
+          tcRow('Property tax, monthly', 'tc-tax', mTax.toLocaleString()) +
+          tcRow('Insurance, monthly', 'tc-ins', '125') +
+          tcRow('Upkeep, % of value/yr', 'tc-up', '1', 'number', '0.25') +
+        '</div>' +
+        '<div class="tc-out">' +
+          '<div class="tc-big" id="tc-total">-</div>' +
+          '<div class="tc-lbl">True monthly cost</div>' +
+          '<div id="tc-break"></div>' +
+          '<div class="tc-share" id="tc-share"></div>' +
+          '<a class="tc-btn" href="' + GREENTREE_URL + '" target="_blank" rel="noopener">' +
+            'Talk to John Varano <i class="fas fa-arrow-right"></i></a>' +
+        '</div>' +
+      '</div>' +
+      '<div class="tl-fine">Estimate only. Not a loan offer or a commitment to lend. Greentree Mortgage, an HMA Company, ' +
+      'is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>');
+  }
+  function tcRow(label, id, val, type, step) {
+    return '<div class="tc-row"><label>' + label + '</label>' +
+      '<input id="' + id + '" type="' + (type || 'text') + '"' + (step ? ' step="' + step + '"' : '') +
+      ' value="' + val + '" oninput="dbCost()"></div>';
+  }
+
+  window.dbCost = function () {
+    function v(id) {
+      var e = el(id); if (!e) return 0;
+      return parseFloat(String(e.value).replace(/[^0-9.]/g, '')) || 0;
+    }
+    var val = v('tc-val'), loan = v('tc-loan'), rate = v('tc-rate');
+    var tax = v('tc-tax'), ins = v('tc-ins'), up = v('tc-up');
+    var i = rate / 100 / 12, n = 360;
+    var pi = i > 0 ? loan * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) : loan / n;
+    var upk = (val * (up / 100)) / 12;
+    var total = pi + tax + ins + upk;
+
+    var t = el('tc-total'); if (t) t.textContent = money(total);
+    var b = el('tc-break');
+    if (b) b.innerHTML =
+      tcLine('Principal and interest', pi) + tcLine('Property tax', tax) +
+      tcLine('Insurance', ins) + tcLine('Upkeep and repairs', upk);
+    var sh = el('tc-share');
+    if (sh && total > 0) {
+      var pct = Math.round((tax / total) * 100);
+      sh.innerHTML = '<i class="fas fa-circle-info"></i> Property tax is <b>' + pct +
+        '%</b> of what this home costs you every month. It is also the only line here you can appeal.';
+    }
+  };
+  function tcLine(l, v) {
+    return '<div class="tc-line"><span>' + l + '</span><b>' + money(v) + '</b></div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // 10 · PROFESSIONAL EXPORT
+  // ══════════════════════════════════════════════
+  function toolExport() {
+    if (!rows.length) return '';
+    return toolCard('Export for your attorney or agent', 'fa-file-export',
+      '<p class="tl-p">A clean parcel sheet with block, lot, PAMS PIN, assessment, the town ratio, and the ' +
+      'Chapter 123 upper limit worked out for each property. This is the format a tax attorney or a county board ' +
+      'actually wants, and it saves an hour of transcription.</p>' +
+      '<div class="ex-btns">' +
+        '<button class="tl-btn" onclick="dbExportCSV()"><i class="fas fa-file-csv"></i> Download CSV</button>' +
+        '<button class="tl-btn ghost" onclick="dbExportPrint()"><i class="fas fa-print"></i> Printable sheet</button>' +
+      '</div>' +
+      '<div class="tl-fine">Figures are drawn from public assessment records and the state equalization table. ' +
+      'Verify against the municipal record before filing anything.</div>');
+  }
+
+  function exportRows() {
+    return rows.map(function (r) {
+      var R = ratioFor(r.town, r.county);
+      var mv = +r.watchdog_value || (R && r.assessed ? r.assessed / R.ratio : null);
+      var fair = (mv && R) ? mv * R.ratio : null;
+      var upper = fair ? fair * 1.15 : null;
+      return {
+        Address: r.address || '', Town: r.town || '', County: r.county || '', Zip: r.zip || '',
+        Block: r.block || '', Lot: r.lot || '', PAMS_PIN: r.pams_pin || '',
+        Assessed: r.assessed || '', Annual_Tax: r.last_year_tax || '',
+        Effective_Rate_Pct: r.effective_rate || '',
+        Town_Ratio_Pct: R ? (R.ratio * 100).toFixed(2) : '',
+        Ratio_Tax_Year: R ? R.year : '',
+        Est_Market_Value: mv ? Math.round(mv) : '',
+        Supported_Assessment: fair ? Math.round(fair) : '',
+        Ch123_Upper_Limit: upper ? Math.round(upper) : '',
+        Over_Limit_By: (upper && r.assessed > upper) ? Math.round(r.assessed - upper) : 0,
+        Appeal_Indicated: (upper && r.assessed > upper) ? 'YES' : 'no',
+        Verification: r.verify_level || 'self', Kind: r.kind
+      };
+    });
+  }
+
+  window.dbExportCSV = function () {
+    var d = exportRows();
+    if (!d.length) return;
+    var head = Object.keys(d[0]);
+    var csv = [head.join(',')].concat(d.map(function (r) {
+      return head.map(function (k) {
+        var v = r[k] == null ? '' : String(r[k]);
+        return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+      }).join(',');
+    })).join('\n');
+    var b = new Blob([csv], { type: 'text/csv' }), u = URL.createObjectURL(b);
+    var a = document.createElement('a');
+    a.href = u; a.download = 'nj-parcel-sheet-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
+  };
+
+  window.dbExportPrint = function () {
+    var d = exportRows();
+    var w = window.open('', '_blank');
+    if (!w) { toast('Allow popups to print'); return; }
+    var head = ['Address', 'Town', 'Block', 'Lot', 'PAMS_PIN', 'Assessed', 'Annual_Tax',
+                'Town_Ratio_Pct', 'Supported_Assessment', 'Ch123_Upper_Limit', 'Appeal_Indicated'];
+    w.document.write('<html><head><title>NJ parcel sheet</title><style>' +
+      'body{font-family:system-ui,sans-serif;padding:28px;color:#1a1a2e}' +
+      'h1{font-size:19px;margin:0 0 4px}.sub{font-size:12px;color:#666;margin-bottom:18px}' +
+      'table{width:100%;border-collapse:collapse;font-size:11px}' +
+      'th{background:#0e2248;color:#fff;padding:7px;text-align:left}' +
+      'td{padding:6px 7px;border-bottom:1px solid #ddd}' +
+      'tr:nth-child(even) td{background:#f7f8fa}' +
+      '.y{color:#c0392b;font-weight:700}' +
+      '.f{margin-top:18px;font-size:10.5px;color:#666;line-height:1.6}' +
+      '</style></head><body>' +
+      '<h1>New Jersey parcel sheet</h1>' +
+      '<div class="sub">Prepared ' + new Date().toLocaleDateString() + ' for ' + esc(plUser.email || '') +
+      ' via njpropertytaxrelief.com</div>' +
+      '<table><thead><tr>' + head.map(function (h) { return '<th>' + h.replace(/_/g, ' ') + '</th>'; }).join('') +
+      '</tr></thead><tbody>' +
+      d.map(function (r) {
+        return '<tr>' + head.map(function (h) {
+          var v = r[h] == null ? '' : r[h];
+          if (typeof v === 'number' && /Assess|Tax|Limit|Value/.test(h)) v = '$' + v.toLocaleString();
+          return '<td' + (h === 'Appeal_Indicated' && v === 'YES' ? ' class="y"' : '') + '>' + v + '</td>';
+        }).join('') + '</tr>';
+      }).join('') +
+      '</tbody></table>' +
+      '<div class="f">Figures drawn from the NJ Office of GIS parcel layer joined to Division of Taxation MOD-IV records, ' +
+      'and the NJ Division of Taxation Table of Equalized Valuations. Chapter 123 upper limit is the supported assessment ' +
+      'times 1.15. Estimates only; verify against the municipal record before filing. ' +
+      'Prepared by John Scafide, Licensed NJ Real Estate Agent #2079591, The McKenty Team at Opus Elite Real Estate.</div>' +
+      '</body></html>');
+    w.document.close();
+    setTimeout(function () { w.print(); }, 400);
+  };
+
+  // ── shared card shell ──
+  // Named toolCard, not card. The dashboard already has a card(r) that renders
+  // saved property tiles, and shadowing it silently replaced every property
+  // card with a tool shell.
+  function toolCard(title, icon, body) {
+    return '<div class="tool"><div class="tool-h"><i class="fas ' + icon + '"></i>' + title + '</div>' +
+           '<div class="tool-b">' + body + '</div></div>';
+  }
+
   function render() {
     var homes = rows.filter(function (r) { return r.kind === 'home'; });
     var watch = rows.filter(function (r) { return r.kind === 'watch'; });
@@ -1319,6 +1915,20 @@ body.plm-locked { overflow: hidden; }
       : empty('fa-eye', 'Watchlist is empty',
               'Add any New Jersey property and keep an eye on what it is assessed at.');
     el('db-profile').innerHTML = profileForm();
+
+    // Tools need the reference data, so build them once it is in.
+    loadRefData().then(function () {
+      var t = el('db-tools');
+      if (!t) return;
+      var html = [toolDrift(), toolPercentile(), toolRebates(), toolPortfolio(),
+                  toolCompare(), toolCost(), toolExport()].filter(Boolean).join('');
+      t.innerHTML = html || '<div class="db-empty"><i class="fas fa-toolbox"></i>' +
+        '<b>Save a property first</b><p>The tools work on the homes and watchlist items you save. ' +
+        'Look up an address and claim it, then come back.</p>' +
+        '<a class="db-btn" href="/property/">Look up an address</a></div>';
+      if (el('tc-total')) window.dbCost();
+      paintPercentile();
+    });
   }
 
   function stat(v, l, i) {
@@ -1370,7 +1980,7 @@ body.plm-locked { overflow: hidden; }
   }
 
   window.dbTab = function (p) {
-    ['homes', 'watch', 'profile'].forEach(function (k) {
+    ['homes', 'watch', 'tools', 'profile'].forEach(function (k) {
       var t = document.querySelector('.db-tab[data-p="' + k + '"]');
       if (t) t.classList.toggle('active', k === p);
       var panel = el('db-' + k);
