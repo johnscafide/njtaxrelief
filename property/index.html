@@ -1258,6 +1258,15 @@ body.pl-signedin .gate-cta { display: none; }
 }
 .plm-note-x:hover { background: #e4e9f2; }
 
+/* ---------- VERIFIED SALES ---------- */
+.vs-hero {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2px;
+  background: var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 16px;
+}
+.vs-hero > div { background: #0e2248; padding: 18px 16px; text-align: center; }
+.vs-n { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.vs-l { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #9db1d0; margin-top: 5px; }
+
 /* ---------- COMPS TABLE ---------- */
 .comps-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
 .comps { width: 100%; border-collapse: collapse; font-size: 13.5px; }
@@ -2311,7 +2320,8 @@ body.pl-signedin .gate-cta { display: none; }
       loadRates().catch(function () {}),
       loadListings().catch(function () {}),
       loadRatios().catch(function () {}),
-      loadCalibration().catch(function () {})
+      loadCalibration().catch(function () {}),
+      loadSR1A().catch(function () {})
     ]);
     var capped = Promise.race([
       preload,
@@ -2905,6 +2915,171 @@ body.pl-signedin .gate-cta { display: none; }
   }
 
   // ══════════════════════════════════════════════
+  // SR1A  ·  the state's own verified sales
+  //
+  // This replaces the live ratio machinery entirely. That code existed to work
+  // out, from raw parcel rows, which recorded deeds were real arm's length
+  // sales. The Division of Taxation already makes that judgment on every deed
+  // and publishes it in the SR1A file. We were reconstructing badly what the
+  // state hands over cleanly.
+  //
+  // What went away with it: the town wide ratio query, the county fallback
+  // query, the appreciation back-correction, the direction check against the
+  // published ratio, and the per town calibration fudge. All of it was
+  // compensating for reading unverified deeds.
+  //
+  // Lookup is by the 4 digit district code, which is the first four characters
+  // of PAMS_PIN. No town name matching, so no ambiguity between the two
+  // Washington Twps or the two Greenwich Twps.
+  // ══════════════════════════════════════════════
+  var sr1aTable = null;
+  var sr1aSales = {};          // county file cache, loaded only when needed
+
+  function loadSR1A() {
+    if (sr1aTable !== null) return Promise.resolve();
+    return xfetch('/property/sr1a-ratios.json', 9000)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { sr1aTable = (j && j.districts) ? j.districts : {}; })
+      .catch(function () { sr1aTable = {}; });
+  }
+
+  function districtCode(p) {
+    var pin = String(p.PAMS_PIN || '');
+    var m = pin.match(/^(\d{4})/);
+    return m ? m[1] : null;
+  }
+
+  function sr1aRatio(p) {
+    if (!sr1aTable) return null;
+    var d = districtCode(p);
+    if (!d) return null;
+    var row = sr1aTable[d];
+    if (!row || !row.ratio || row.n < 10) return null;
+    return {
+      ratio: row.ratio, n: row.n, source: 'sr1a', district: d,
+      lo: row.p25 || null, hi: row.p75 || null,
+      drift: row.drift, ppsf: row.ppsf, medPrice: row.medPrice,
+      years: row.years, county: row.county
+    };
+  }
+
+  // ── verified comparable sales, with square footage ──
+  function loadCountySales(county) {
+    var key = String(county || '').toLowerCase().replace(/\s+/g, '-');
+    if (!key) return Promise.resolve(null);
+    if (sr1aSales[key]) return Promise.resolve(sr1aSales[key]);
+    return xfetch('/property/sales-' + key + '.json', 20000)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        sr1aSales[key] = (j && j.sales) ? j.sales : [];
+        return sr1aSales[key];
+      })
+      .catch(function () { sr1aSales[key] = []; return []; });
+  }
+
+  // Rank verified sales in the same town by how comparable they actually are.
+  // With living space in hand this can finally weight on size, which is what
+  // an appraiser leads with and what we never had before.
+  function verifiedComps(p, subject) {
+    var d = districtCode(p);
+    if (!d) return Promise.resolve([]);
+    return loadCountySales(p.COUNTY).then(function (all) {
+      if (!all || !all.length) return [];
+      var thisYear = new Date().getFullYear();
+      var scored = all.filter(function (s) {
+        return s.d === d && String(s.c).trim() === '2' && s.p > 40000 && s.y >= thisYear - 3;
+      }).map(function (s) {
+        var w = Math.pow(0.72, (thisYear - s.y) + (12 - (s.m || 6)) / 12);
+        if (subject.sqft && s.sf) {
+          var dz = Math.abs(s.sf - subject.sqft) / Math.max(subject.sqft, 400);
+          w *= 1 / (1 + dz * dz * 5);
+        }
+        if (subject.built && s.yb) w *= 1 / (1 + Math.pow(Math.abs(s.yb - subject.built) / 22, 2));
+        if (subject.assessed && s.av) {
+          var da = Math.abs(s.av - subject.assessed) / Math.max(subject.assessed, 1);
+          w *= 1 / (1 + da * da * 3);
+        }
+        return {
+          addr: s.a, price: s.p, year: s.y, month: s.m, sqft: s.sf,
+          built: s.yb, assessed: s.av, ppsf: s.ppsf, ratio: s.r,
+          block: s.b, lot: s.l, w: w
+        };
+      });
+      scored.sort(function (a, b) { return b.w - a.w; });
+      return scored;
+    });
+  }
+
+
+  // Find THIS property inside the verified sales file. MOD-IV does not publish
+  // living space, so the only way to know the subject's square footage is if it
+  // has sold recently and the state recorded it on the SR1A.
+  function subjectFromSR1A(p) {
+    var d = districtCode(p);
+    if (!d) return Promise.resolve(null);
+    var blk = String(p.PCLBLOCK || '').replace(/^0+/, '');
+    var lot = String(p.PCLLOT || '').replace(/^0+/, '');
+    if (!blk || !lot) return Promise.resolve(null);
+    return loadCountySales(p.COUNTY).then(function (all) {
+      if (!all) return null;
+      var hit = null;
+      for (var i = 0; i < all.length; i++) {
+        var s = all[i];
+        if (s.d !== d) continue;
+        if (String(s.b || '').replace(/^0+/, '') !== blk) continue;
+        if (String(s.l || '').replace(/^0+/, '') !== lot) continue;
+        if (!hit || s.y > hit.y || (s.y === hit.y && s.m > hit.m)) hit = s;
+      }
+      return hit;
+    });
+  }
+
+  function paintVerified(list, subject) {
+    var host = el('plm-verified-sec');
+    if (!host) return;
+    if (!list || list.length < 3) { host.innerHTML = ''; return; }
+
+    var top = list.slice(0, 8);
+    var withSf = list.filter(function (c) { return c.ppsf; });
+    var medPpsf = withSf.length >= 5 ? median(withSf.slice(0, 40).map(function (c) { return c.ppsf; })) : null;
+    var impliedBySize = (medPpsf && subject.sqft) ? medPpsf * subject.sqft : null;
+
+    host.innerHTML = gate('verified',
+      'See the verified sales behind this',
+      'Actual arm\u2019s length closings in this town, confirmed by the state, with square footage and price per square foot.',
+      '<h3 class="plm-sec-h">Verified sales in this town</h3>' +
+      '<p class="plm-sec-s">These are not raw deeds. New Jersey\u2019s own assessors reviewed each one and confirmed it was ' +
+      'a genuine arm\u2019s length sale, so family transfers, estates, and sheriff sales are already excluded. ' +
+      'Ranked by how closely each compares to this property.</p>' +
+      (impliedBySize
+        ? '<div class="vs-hero">' +
+            '<div><div class="vs-n">' + money(Math.round(impliedBySize / 1000) * 1000) + '</div>' +
+            '<div class="vs-l">What ' + subject.sqft.toLocaleString() + ' sq ft is worth here</div></div>' +
+            '<div><div class="vs-n">$' + medPpsf + '</div><div class="vs-l">Median per sq ft, verified</div></div>' +
+            '<div><div class="vs-n">' + list.length + '</div><div class="vs-l">Verified sales nearby</div></div>' +
+          '</div>'
+        : '') +
+      '<div class="comps-wrap"><table class="comps"><thead><tr>' +
+        '<th>Address</th><th>Sold</th><th>Price</th><th>Sq ft</th><th>$/sq ft</th><th>Built</th>' +
+      '</tr></thead><tbody>' +
+      top.map(function (c) {
+        return '<tr><td><b>' + esc(c.addr) + '</b></td>' +
+          '<td>' + (c.month ? String(c.month).padStart(2, '0') + '/' : '') + c.year + '</td>' +
+          '<td class="num">' + money(c.price) + '</td>' +
+          '<td class="num">' + (c.sqft ? c.sqft.toLocaleString() : '-') + '</td>' +
+          '<td class="num"><b>' + (c.ppsf ? '$' + c.ppsf : '-') + '</b></td>' +
+          '<td>' + (c.built || '-') + '</td></tr>';
+      }).join('') +
+      '</tbody></table></div>' +
+      '<div class="comps-cta">' +
+        '<div><b>' + list.length + ' verified sales in ' + esc(current.town) + '.</b> ' +
+        'What this cannot see is condition, upgrades, and what the inside actually looks like. ' +
+        'That is the part that moves a price.</div>' +
+        '<button class="plm-rbtn" style="width:auto;padding:12px 20px;" onclick="plOpenForm(\'comps\')">Get the full comps</button>' +
+      '</div>');
+  }
+
+  // ══════════════════════════════════════════════
   // CALIBRATION
   // A per-town correction factor you set from real closings. Whenever you
   // know a true sale price and what this page estimated, the ratio of the
@@ -3114,7 +3289,7 @@ body.pl-signedin .gate-cta { display: none; }
               : (localD != null && Math.abs(localD) > 0.015) ? localD
               : DEFAULT_APPRECIATION;
     var timeFactor = 1, yearsStale = 0;
-    if (R.source !== 'live') {
+    if (R.source !== 'live' && R.source !== 'sr1a') {
       var now2 = new Date();
       var nowDec2 = now2.getFullYear() + now2.getMonth() / 12;
       var ratioAsOf = (R.year || thisYear) - 1;          // Jan of the prior year
@@ -3132,12 +3307,17 @@ body.pl-signedin .gate-cta { display: none; }
     // range: driven by how much we trust the ratio and how much data backs it
     var compCount = (comps || []).filter(function (c) { return c.price > 60000 && c.year >= thisYear - 5; }).length;
     var band;
-    if (R.source === 'live' && R.n >= 40) band = 0.09;
+    if (R.source === 'sr1a' && R.n >= 150) band = 0.07;
+    else if (R.source === 'sr1a' && R.n >= 40) band = 0.09;
+    else if (R.source === 'sr1a') band = 0.12;
+    else if (R.source === 'live' && R.n >= 40) band = 0.09;
     else if (R.source === 'live') band = 0.12;
     else if (R.source === 'official') band = 0.15;
     else band = 0.20;
 
-    var conf = (R.source === 'live' && R.n >= 40) ? 'High'
+    var conf = (R.source === 'sr1a' && R.n >= 40) ? 'High'
+             : (R.source === 'sr1a') ? 'Medium'
+             : (R.source === 'live' && R.n >= 40) ? 'High'
              : (R.source === 'live' && R.n >= 20) ? 'Medium'
              : (R.source === 'official' && compCount >= 20 && drift != null) ? 'Medium'
              : (R.source === 'official') ? 'Medium' : 'Low';
@@ -3362,7 +3542,12 @@ body.pl-signedin .gate-cta { display: none; }
     current.appeal = { argued: argued, low: lowEnd, mid: midEnd, implied: implied };
 
     var basis =
-      (v.ratioSource === 'live'
+      (v.ratioSource === 'sr1a'
+        ? 'Measured from <b>' + v.ratioN + '</b> sales in <b>' + esc(current.town) + '</b> that New Jersey\u2019s own ' +
+          'assessors verified as genuine arm\u2019s length transactions. On that evidence, assessments here run at <b>' +
+          (v.ratio * 100).toFixed(1) + '%</b> of what homes actually sell for. ' +
+          'Family transfers, estates and sheriff sales are excluded by the state before we ever see them.'
+        : v.ratioSource === 'live'
         ? 'Built from <b>' + v.ratioN + '</b> homes in <b>' +
           esc(v.ratioScope === 'county' ? (current.county + ' County') : current.town) +
           '</b> that actually sold recently, each carried forward to today\u2019s prices. On that evidence assessments here run at <b>' +
@@ -3888,6 +4073,11 @@ body.pl-signedin .gate-cta { display: none; }
           ', ' + (subject.acres || '?') + ' ac</div>' +
         '<div><b>Comps returned</b>: ' + (comps || []).length + ', usable ' + mults.length + '</div>' +
         '<div><b>Median price/assessed multiplier</b>: ' + (mults.length ? median(mults).toFixed(3) + 'x' : 'n/a') + '</div>' +
+        '<div><b>SR1A district</b>: ' + esc(districtCode(p) || 'none') +
+          (sr1aTable && districtCode(p) && sr1aTable[districtCode(p)]
+            ? '  ratio ' + (sr1aTable[districtCode(p)].ratio * 100).toFixed(2) + '%, n=' + sr1aTable[districtCode(p)].n +
+              ', median $/sqft ' + (sr1aTable[districtCode(p)].ppsf || '-')
+            : '  <b style="color:#c0392b">not in the SR1A table</b>') + '</div>' +
         '<div><b>Ratio used</b>: ' + (val ? (val.ratio * 100).toFixed(2) + '% (' + val.ratioSource +
             (val.ratioN ? ', n=' + val.ratioN + ' over ' + val.ratioMonths + ' months' : ', ' + val.ratioYear) + ')' : 'none') + '</div>' +
         '<div><b>Listing key tried</b>: ' + esc(normAddr(current.address) + '|' + (current.county || '').toUpperCase()) +
@@ -4006,6 +4196,7 @@ body.pl-signedin .gate-cta { display: none; }
         '<div class="plm-q"><i class="fas fa-percent"></i><div><b>' + (rate ? rate.toFixed(2) + '%' : '-') + '</b><span>Eff. rate</span></div></div>' +
         '<div class="plm-q"><i class="fas fa-hammer"></i><div><b>' + (p.YR_CONSTR || '-') + '</b><span>Built</span></div></div>' +
         '<div class="plm-q"><i class="fas fa-ruler-combined"></i><div><b>' + (sqft ? sqft.toLocaleString() : '-') + '</b><span>Lot sq ft</span></div></div>' +
+        '<div class="plm-q" id="plm-q-living"><i class="fas fa-house"></i><div><b>-</b><span>Living sq ft</span></div></div>' +
         '<div class="plm-q"><i class="fas fa-map-pin"></i><div><b>' + esc((p.PCLBLOCK || '?') + ' / ' + (p.PCLLOT || '?')) + '</b><span>Block / Lot</span></div></div>' +
       '</div>';
 
@@ -4154,6 +4345,8 @@ body.pl-signedin .gate-cta { display: none; }
 
       '<div class="plm-sec" id="plm-drivers"></div>' +
 
+      '<div class="plm-sec" id="plm-verified-sec"></div>' +
+
       '<div class="plm-sec" id="plm-comps-sec"></div>' +
 
       '<div class="plm-sec" id="plm-hood-sec"></div>' +
@@ -4215,19 +4408,38 @@ body.pl-signedin .gate-cta { display: none; }
     // accurately. Dropping it removes a whole request and 2,000 records from
     // every single lookup. These are free public servers and we should not
     // hammer them for data we throw away.
+    // liveRatio used to run here, querying up to 2,000 town records to work out
+    // which deeds were real sales. SR1A already carries the state's own verdict
+    // on every deed, so that whole query is gone.
+    var sr1a = sr1aRatio(p);
     Promise.all([
       gatherComps(geo.lat, geo.lon, current.town),
-      liveRatio(current.town, current.county, offR ? offR.ratio : null)
+      verifiedComps(p, subject),
+      subjectFromSR1A(p)
     ]).then(function (res) {
-      var comps = res[0] || [], live = res[1], ratio = live || offR;
-      if (live && live.appreciation != null) subject.townDrift = live.appreciation;
+      var comps = res[0] || [], verified = res[1] || [], own = res[2];
+      // If the state has a verified sale on this exact parcel, take its living
+      // space and its confirmed sale price. Both are better than what the
+      // parcel layer gives us.
+      if (own) {
+        if (own.sf) {
+          subject.sqft = own.sf; current.livingSpace = own.sf;
+          var lq = el('plm-q-living');
+          if (lq) lq.innerHTML = '<i class="fas fa-house"></i><div><b>' + own.sf.toLocaleString() +
+            '</b><span>Living sq ft</span></div>';
+        }
+        if (own.p > 1000) { current.verifiedSale = own.p; current.verifiedSaleYear = own.y; }
+      }
+      var ratio = sr1a || offR;
+      paintVerified(verified, subject);
+      if (sr1a && sr1a.drift != null) subject.townDrift = sr1a.drift;
 
       current.comps = comps;
       paintComps(comps);
 
       var val = watchdogValuation(subject, comps, new Date().getFullYear(),
-                                  current.town, current.county, live || offR,
-                                  live && live.appreciation != null ? live.appreciation : null);
+                                  current.town, current.county, sr1a || offR,
+                                  sr1a && sr1a.drift != null ? sr1a.drift : null);
       current.valuation = val;
       paintValuation(current.valuation, assessed, tax, ratio);
 
