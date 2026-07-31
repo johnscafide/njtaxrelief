@@ -94,6 +94,18 @@
     $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  function preloadComparableAnalysis() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('njptr.comparableAnalysis') || 'null');
+      if (!saved) return;
+      if (saved.address) $('address').value = saved.address;
+      if (saved.assessedValue) $('assessedValue').value = saved.assessedValue;
+      if (saved.estimatedMarketValue) $('marketValue').value = saved.estimatedMarketValue;
+      if (saved.comparableMedianRatio) $('comparableRatio').value = saved.comparableMedianRatio;
+      $('status').textContent = 'Comparable-property analysis loaded. Select the municipality and calculate.';
+    } catch (error) { console.warn('Could not load comparable analysis.', error); }
+  }
+
   async function init() {
     try {
       const response = await fetch(DATA_URL, { cache: 'no-store' });
@@ -137,5 +149,6 @@
     render(calculate(record), municipality);
   });
 
+  preloadComparableAnalysis();
   init();
 })();

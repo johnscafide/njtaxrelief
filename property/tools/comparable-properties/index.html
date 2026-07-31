@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Comparable Properties | NJ Property Tax Relief</title>
+  <link rel="stylesheet" href="comparable-properties.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap header-inner"><a class="brand" href="../../../">NJPropertyTaxRelief.com</a><a href="../appeal-potential/">Appeal Potential</a></div></header>
+<main class="wrap">
+  <section class="hero">
+    <p class="eyebrow">Property intelligence</p><h1>Comparable Properties</h1>
+    <p>Enter the subject property and recent comparable sales. The tool estimates a comp-supported value range and compares assessment ratios.</p>
+  </section>
+  <section class="panel">
+    <h2>Subject property</h2>
+    <div class="grid three">
+      <label>Address<input id="subjectAddress" placeholder="123 Main Street"></label>
+      <label>Assessed value<input id="subjectAssessment" inputmode="decimal" placeholder="325000"></label>
+      <label>Living area (sq. ft.)<input id="subjectSqft" inputmode="decimal" placeholder="2100"></label>
+    </div>
+  </section>
+  <section class="panel">
+    <div class="section-head"><div><h2>Comparable sales</h2><p>Add at least three similar, recent arms-length sales.</p></div><button id="addComp" type="button" class="secondary">+ Add comparable</button></div>
+    <div id="compRows" class="comp-list"></div>
+    <p id="message" class="message" aria-live="polite"></p>
+    <button id="analyze" type="button" class="primary">Analyze comparables</button>
+  </section>
+  <section id="results" class="results" hidden>
+    <div class="summary-grid">
+      <article class="metric"><span>Comp-supported value</span><strong id="estimatedValue">—</strong><small id="valueRange">—</small></article>
+      <article class="metric"><span>Subject assessment ratio</span><strong id="subjectRatio">—</strong><small>Assessed value ÷ estimated value</small></article>
+      <article class="metric"><span>Comparable median ratio</span><strong id="medianRatio">—</strong><small>Median of entered comp ratios</small></article>
+      <article class="metric"><span>Ratio difference</span><strong id="ratioGap">—</strong><small id="gapInterpretation">—</small></article>
+    </div>
+    <section class="panel"><h2>Comparable analysis</h2><div class="table-wrap"><table><thead><tr><th>Property</th><th>Sale price</th><th>Sq. ft.</th><th>Price/sq. ft.</th><th>Assessment</th><th>Assessment ratio</th></tr></thead><tbody id="resultsBody"></tbody></table></div></section>
+    <section class="panel callout"><h2>What this suggests</h2><p id="explanation"></p><button id="useInAppeal" class="primary" type="button">Use this in Appeal Potential</button></section>
+  </section>
+  <section class="disclaimer"><strong>Screening tool only.</strong> Comparable selection, sale validity, property condition, location, valuation date, and legally permitted evidence can materially change an appeal analysis.</section>
+</main>
+<template id="compTemplate"><article class="comp-row"><div class="comp-title"><strong>Comparable <span class="comp-number"></span></strong><button type="button" class="remove" aria-label="Remove comparable">Remove</button></div><div class="grid five"><label>Address<input data-field="address" placeholder="Comparable address"></label><label>Sale price<input data-field="salePrice" inputmode="decimal" placeholder="410000"></label><label>Assessed value<input data-field="assessment" inputmode="decimal" placeholder="295000"></label><label>Living area<input data-field="sqft" inputmode="decimal" placeholder="2050"></label><label>Sale date<input data-field="saleDate" type="date"></label></div></article></template>
+<script src="../../js/property-data-model.js"></script><script src="comparable-properties.js"></script>
+</body></html>
