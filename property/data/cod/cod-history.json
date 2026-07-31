@@ -1,0 +1,16 @@
+{
+  "sourceLabel": "Demonstration COD dataset — replace with verified NJ Division of Taxation figures",
+  "sourceUrl": "https://www.nj.gov/treasury/taxation/",
+  "generatedAt": "2026-07-31",
+  "isDemonstrationData": true,
+  "municipalities": [
+    {"id":"washington-twp-gloucester","municipality":"Washington Township","county":"Gloucester","propertyClass":"Residential","history":[{"year":2021,"cod":11.8},{"year":2022,"cod":12.4},{"year":2023,"cod":13.1},{"year":2024,"cod":12.6},{"year":2025,"cod":11.9}]},
+    {"id":"monroe-twp-gloucester","municipality":"Monroe Township","county":"Gloucester","propertyClass":"Residential","history":[{"year":2021,"cod":15.1},{"year":2022,"cod":15.8},{"year":2023,"cod":16.4},{"year":2024,"cod":17.0},{"year":2025,"cod":16.7}]},
+    {"id":"deptford-twp","municipality":"Deptford Township","county":"Gloucester","propertyClass":"Residential","history":[{"year":2021,"cod":10.2},{"year":2022,"cod":10.6},{"year":2023,"cod":10.9},{"year":2024,"cod":10.3},{"year":2025,"cod":9.8}]},
+    {"id":"cherry-hill-twp","municipality":"Cherry Hill Township","county":"Camden","propertyClass":"Residential","history":[{"year":2021,"cod":8.4},{"year":2022,"cod":8.7},{"year":2023,"cod":9.0},{"year":2024,"cod":8.8},{"year":2025,"cod":8.5}]},
+    {"id":"gloucester-twp","municipality":"Gloucester Township","county":"Camden","propertyClass":"Residential","history":[{"year":2021,"cod":13.7},{"year":2022,"cod":14.1},{"year":2023,"cod":14.6},{"year":2024,"cod":15.2},{"year":2025,"cod":15.0}]},
+    {"id":"voorhees-twp","municipality":"Voorhees Township","county":"Camden","propertyClass":"Residential","history":[{"year":2021,"cod":9.5},{"year":2022,"cod":9.2},{"year":2023,"cod":9.7},{"year":2024,"cod":9.4},{"year":2025,"cod":9.1}]},
+    {"id":"vineland-city","municipality":"Vineland City","county":"Cumberland","propertyClass":"Residential","history":[{"year":2021,"cod":17.3},{"year":2022,"cod":18.0},{"year":2023,"cod":18.7},{"year":2024,"cod":19.1},{"year":2025,"cod":18.5}]},
+    {"id":"medford-twp","municipality":"Medford Township","county":"Burlington","propertyClass":"Residential","history":[{"year":2021,"cod":7.9},{"year":2022,"cod":8.1},{"year":2023,"cod":7.8},{"year":2024,"cod":7.5},{"year":2025,"cod":7.3}]}
+  ]
+}
