@@ -9,8 +9,9 @@
   let records = [];
 
   const el = id => document.getElementById(id);
-  const latest = record => record.history.at(-1);
-  const previous = record => record.history.at(-2) || latest(record);
+  const validHistory = record => record.history.filter(item => Number.isFinite(item.cod));
+  const latest = record => validHistory(record).at(-1);
+  const previous = record => validHistory(record).at(-2) || latest(record);
 
   function scoreFor(cod, min, max) {
     if (max === min) return 75;
@@ -18,9 +19,9 @@
   }
 
   function percentileFor(cod) {
-    const sorted = records.map(r => latest(r).cod).sort((a,b) => a-b);
-    const betterOrEqual = sorted.filter(v => v <= cod).length;
-    return Math.round((betterOrEqual / sorted.length) * 100);
+    const values = records.map(latest).filter(Boolean).map(item => item.cod);
+    const lower = values.filter(value => value < cod).length;
+    return Math.round((lower / values.length) * 100);
   }
 
   function classification(score) {
@@ -38,15 +39,17 @@
   function renderChart(history) {
     const chart = el('chart');
     chart.innerHTML = '';
-    const max = Math.max(...history.map(d => d.cod)) * 1.15;
+    const valid = history.filter(d => Number.isFinite(d.cod));
+    const max = Math.max(...valid.map(d => d.cod)) * 1.15;
     history.forEach(d => {
       const wrap = document.createElement('div');
       wrap.className = 'af-bar-wrap';
       const bar = document.createElement('div');
       bar.className = 'af-bar';
-      bar.style.height = `${Math.max(4, (d.cod / max) * 100)}%`;
+      bar.style.height = Number.isFinite(d.cod) ? `${Math.max(4, (d.cod / max) * 100)}%` : '4%';
+      if (!Number.isFinite(d.cod)) bar.classList.add('is-missing');
       const value = document.createElement('span');
-      value.textContent = d.cod.toFixed(1);
+      value.textContent = Number.isFinite(d.cod) ? d.cod.toFixed(1) : 'N/A';
       bar.appendChild(value);
       const year = document.createElement('div');
       year.className = 'af-year';
@@ -58,15 +61,21 @@
 
   function render(record) {
     const current = latest(record);
+    if (!current) {
+      status.textContent = `No Class 2 residential COD is available for ${record.municipality} in the loaded years.`;
+      status.classList.add('is-bad');
+      return;
+    }
+    status.classList.remove('is-bad');
     const prior = previous(record);
-    const all = records.map(r => latest(r).cod);
+    const all = records.map(latest).filter(Boolean).map(item => item.cod);
     const score = scoreFor(current.cod, Math.min(...all), Math.max(...all));
-    const rank = percentileFor(current.cod);
+    const inconsistencyPercentile = percentileFor(current.cod);
     const quality = classification(score);
     const delta = current.cod - prior.cod;
     const trend = Math.abs(delta) < .05 ? 'Stable' : delta < 0 ? 'Improving' : 'Worsening';
     const trendClass = trend === 'Improving' ? 'is-good' : trend === 'Worsening' ? 'is-bad' : '';
-    const lessConsistentPct = Math.max(0, 100 - rank);
+    const lessConsistentPct = inconsistencyPercentile;
     const appeal = appealCopy(score);
 
     el('reportTitle').textContent = `${record.municipality}, ${record.county} County`;
@@ -78,8 +87,8 @@
     el('plainEnglishText').textContent = `Based on the loaded COD dataset, ${record.municipality}'s assessments are less consistent than approximately ${lessConsistentPct}% of included municipalities. This is a relative comparison, not a finding about any one property.`;
     el('codValue').textContent = current.cod.toFixed(1);
     el('codExplanation').textContent = 'Lower values generally indicate assessments cluster more closely around the median assessment ratio.';
-    el('percentileValue').textContent = `${rank}th`;
-    el('percentileText').textContent = `Approximately ${rank}% of loaded municipalities have an equal or lower COD.`;
+    el('percentileValue').textContent = `${inconsistencyPercentile}th`;
+    el('percentileText').textContent = `Approximately ${inconsistencyPercentile}% of municipalities have a lower residential COD and therefore show greater assessment consistency.`;
     el('trendValue').textContent = trend;
     el('trendValue').className = `af-big-number af-trend ${trendClass}`;
     el('trendText').textContent = `${delta > 0 ? '+' : ''}${delta.toFixed(1)} COD points versus ${prior.year}.`;
