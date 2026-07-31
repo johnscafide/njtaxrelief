@@ -36,6 +36,7 @@
     Nothing here is stored or sent anywhere.</div>
 
   <button id="go" onclick="runAll()">Run all tests</button>
+  <button id="go2" onclick="runLookup()" style="background:#7ee0a8;margin-left:8px;">Run a real lookup, stage by stage</button>
 
   <div id="out" style="margin-top:24px;"></div>
   <div id="verdict"></div>
@@ -87,6 +88,113 @@ function test(name, url, check, ms) {
       ? 'Connected but never answered. This is what makes the page hang.'
       : 'Blocked before any response. Almost always CORS, or the host is unreachable from this network.';
     row(name, e.message, dt, hint, 'bad');
+  });
+}
+
+
+// ── Stage by stage replay of exactly what the page does on a search ──
+function stage(name, fn) {
+  var t0 = performance.now();
+  return Promise.resolve().then(fn).then(function (v) {
+    row(name, 'OK', Math.round(performance.now() - t0), v || 'done', 'ok');
+    return v;
+  }, function (e) {
+    row(name, 'FAILED', Math.round(performance.now() - t0),
+        (e && e.message ? e.message : String(e)), 'bad');
+    throw e;
+  });
+}
+
+function runLookup() {
+  document.getElementById('go2').disabled = true;
+  document.getElementById('out').innerHTML = '';
+  document.getElementById('verdict').innerHTML = '';
+  row('STAGE', 'RESULT', null, 'DETAIL', 'head');
+
+  var addr = '11 Dalton Place, Sicklerville, NJ 08081';
+  var geo = null, feat = null;
+
+  stage('1. Geocode the address', function () {
+    return xfetch(NJ_GEOCODE + '?' + new URLSearchParams({ SingleLine: addr, outSR: '4326', maxLocations: '1', f: 'json' }), 8000)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        var c = d.candidates && d.candidates[0];
+        if (!c) throw new Error('no candidates returned');
+        geo = { lat: c.location.y, lon: c.location.x };
+        return 'lat ' + geo.lat.toFixed(5) + ', lon ' + geo.lon.toFixed(5);
+      });
+  })
+  .then(function () {
+    return stage('2. Fetch the parcel', function () {
+      return xfetch(NJ_PARCEL + '?' + new URLSearchParams({
+        geometry: JSON.stringify({ x: geo.lon, y: geo.lat, spatialReference: { wkid: 4326 } }),
+        geometryType: 'esriGeometryPoint', inSR: '4326', outSR: '4326',
+        spatialRel: 'esriSpatialRelIntersects',
+        outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,NET_VALUE,LAST_YR_TX,DEED_DATE,SALE_PRICE,YR_CONSTR,CALC_ACRE',
+        returnGeometry: 'true', resultRecordCount: '1', f: 'json' }), 15000)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.error) throw new Error(d.error.message);
+          feat = d.features && d.features[0];
+          if (!feat) throw new Error('no parcel at that point');
+          var a = feat.attributes;
+          return a.PROP_LOC + ', ' + a.MUN_NAME + '  |  assessed ' + a.NET_VALUE + '  |  tax ' + a.LAST_YR_TX +
+                 '  |  geometry rings: ' + (feat.geometry && feat.geometry.rings ? feat.geometry.rings.length : 'NONE');
+        });
+    });
+  })
+  .then(function () {
+    return stage('3. Town-wide sales (live ratio)', function () {
+      var a = feat.attributes;
+      var where = "MUN_NAME = '" + a.MUN_NAME.replace(/'/g, "''") + "' AND COUNTY = '" + a.COUNTY.replace(/'/g, "''") +
+                  "' AND PROP_CLASS = '2' AND SALE_PRICE > 50000 AND NET_VALUE > 10000";
+      return xfetch(NJ_PARCEL + '?' + new URLSearchParams({
+        where: where, outFields: 'NET_VALUE,SALE_PRICE,DEED_DATE',
+        returnGeometry: 'false', resultRecordCount: '2000', f: 'json' }), 20000)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.error) throw new Error(d.error.message);
+          var n = (d.features || []).length;
+          var dated = (d.features || []).filter(function (f) {
+            return f.attributes.DEED_DATE && String(f.attributes.DEED_DATE).replace(/\D/g, '').length === 6;
+          }).length;
+          if (!n) throw new Error('zero rows returned');
+          return n + ' rows, ' + dated + ' with 6-digit deed dates (' + Math.round(dated / n * 100) + '%)';
+        });
+    });
+  })
+  .then(function () {
+    return stage('4. Nearby sales (comps)', function () {
+      var d1 = 800 / 111320, d2 = 800 / (111320 * Math.cos(geo.lat * Math.PI / 180));
+      return xfetch(NJ_PARCEL + '?' + new URLSearchParams({
+        geometry: JSON.stringify({ xmin: geo.lon - d2, ymin: geo.lat - d1, xmax: geo.lon + d2, ymax: geo.lat + d1, spatialReference: { wkid: 4326 } }),
+        geometryType: 'esriGeometryEnvelope', inSR: '4326', outSR: '4326',
+        spatialRel: 'esriSpatialRelIntersects',
+        where: "SALE_PRICE > 50000 AND PROP_CLASS = '2'",
+        outFields: 'PROP_LOC,SALE_PRICE,DEED_DATE,NET_VALUE',
+        returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '400', f: 'json' }), 15000)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (d.error) throw new Error(d.error.message);
+          var f = d.features || [];
+          var withC = f.filter(function (x) { return x.centroid && x.centroid.x != null; }).length;
+          return f.length + ' comps, ' + withC + ' with centroids';
+        });
+    });
+  })
+  .then(function () {
+    document.getElementById('verdict').innerHTML =
+      '<div class="verdict"><b>Every stage of a real lookup succeeded from this browser.</b><br>' +
+      'The data path is fine, so if the page still fails the fault is in the page script. ' +
+      'Load <code>/property/</code>, search the same address, and read the red banner at the bottom ' +
+      'of the screen or the <code>[watchdog]</code> line in the console. That names the exact failure.</div>';
+    document.getElementById('go2').disabled = false;
+  })
+  .catch(function () {
+    document.getElementById('verdict').innerHTML =
+      '<div class="verdict"><b>A stage above failed.</b> That is the one to fix. ' +
+      'The detail column shows what the server actually said.</div>';
+    document.getElementById('go2').disabled = false;
   });
 }
 
