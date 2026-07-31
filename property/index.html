@@ -125,6 +125,21 @@
 .pl-hero-note { font-size: 13px; color: #3c4759; margin-top: 16px; font-weight: 500; text-shadow: 0 1px 8px rgba(255,255,255,.9); }
 
 
+.pl-fatal {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 99999; display: none;
+  background: #7a1f16; color: #fff; box-shadow: 0 -6px 30px rgba(0,0,0,.35);
+}
+.pl-fatal-in {
+  max-width: 1080px; margin: 0 auto; padding: 14px 20px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13.5px; line-height: 1.5;
+}
+.pl-fatal-in b { display: flex; align-items: center; gap: 9px; font-size: 14.5px; }
+.pl-fatal-in span { flex: 1; min-width: 240px; opacity: .92; font-family: ui-monospace, Menlo, monospace; font-size: 12.5px; }
+.pl-fatal-in button {
+  background: #fff; color: #7a1f16; border: none; border-radius: 7px;
+  padding: 8px 16px; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer;
+}
+
 /* ---------- STICKY LANDING SEARCH ---------- */
 .ssearch {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
@@ -2014,6 +2029,38 @@ body.pl-signedin .gate-cta { display: none; }
       throw new Error((e && e.name === 'AbortError') ? 'timeout' : (e && e.message) || 'network');
     });
   }
+
+
+  // ══════════════════════════════════════════════
+  // GLOBAL ERROR SURFACE
+  // Anything that escapes a try/catch, including errors thrown inside event
+  // handlers and third party scripts, gets shown instead of dying silently in
+  // a console nobody has open.
+  // ══════════════════════════════════════════════
+  function showFatal(what, detail, where) {
+    var b = document.getElementById('pl-fatal');
+    if (!b) {
+      b = document.createElement('div');
+      b.id = 'pl-fatal';
+      b.className = 'pl-fatal';
+      document.body.appendChild(b);
+    }
+    b.innerHTML =
+      '<div class="pl-fatal-in">' +
+        '<b><i class="fas fa-triangle-exclamation"></i> ' + what + '</b>' +
+        '<span>' + String(detail || '').slice(0, 300) + (where ? '  \u00b7  ' + where : '') + '</span>' +
+        '<button onclick="this.parentNode.parentNode.remove()">Dismiss</button>' +
+      '</div>';
+    b.style.display = 'block';
+  }
+  window.addEventListener('error', function (e) {
+    showFatal('A script error stopped the page', e.message,
+      (e.filename || '').split('/').pop() + ':' + e.lineno);
+  });
+  window.addEventListener('unhandledrejection', function (e) {
+    var r = e.reason;
+    showFatal('A request failed and was not handled', (r && r.message) || String(r), '');
+  });
 
   function el(id) { return document.getElementById(id); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
