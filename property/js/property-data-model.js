@@ -1,55 +1,12 @@
 (function (global) {
   'use strict';
-
-  const numberOrNull = value => {
-    if (value === '' || value === null || value === undefined) return null;
-    const parsed = Number(value);
-    return Number.isFinite(parsed) ? parsed : null;
-  };
-
-  function createPropertyRecord(input = {}) {
-    return {
-      schemaVersion: '1.0.0',
-      property: {
-        address: String(input.address || '').trim(),
-        municipalityId: String(input.municipalityId || '').trim(),
-        municipality: String(input.municipality || '').trim(),
-        county: String(input.county || '').trim(),
-        assessedValue: numberOrNull(input.assessedValue),
-        estimatedMarketValue: numberOrNull(input.estimatedMarketValue),
-        comparableMedianRatio: numberOrNull(input.comparableMedianRatio),
-        yearsSinceRevaluation: numberOrNull(input.yearsSinceRevaluation)
-      },
-      municipalityMetrics: {
-        cod: numberOrNull(input.cod),
-        codPercentile: numberOrNull(input.codPercentile),
-        codYear: numberOrNull(input.codYear)
-      },
-      metadata: {
-        createdAt: new Date().toISOString(),
-        source: input.source || 'user-input-and-nj-cod'
-      }
-    };
-  }
-
-  function assessmentRatio(record) {
-    const assessed = record?.property?.assessedValue;
-    const market = record?.property?.estimatedMarketValue;
-    if (!Number.isFinite(assessed) || !Number.isFinite(market) || market <= 0) return null;
-    return assessed / market;
-  }
-
-  function validatePropertyRecord(record) {
-    const errors = [];
-    const assessed = record?.property?.assessedValue;
-    const market = record?.property?.estimatedMarketValue;
-    if (!Number.isFinite(assessed) || assessed <= 0) errors.push('Assessed value must be greater than zero.');
-    if (!Number.isFinite(market) || market <= 0) errors.push('Estimated market value must be greater than zero.');
-    if (Number.isFinite(record?.property?.yearsSinceRevaluation) && record.property.yearsSinceRevaluation < 0) {
-      errors.push('Years since revaluation cannot be negative.');
-    }
-    return { valid: errors.length === 0, errors };
-  }
-
-  global.NJPropertyModel = { createPropertyRecord, assessmentRatio, validatePropertyRecord };
+  const KEY='njptr.propertyRecord';
+  const numberOrNull=value=>{if(value===''||value==null)return null;const n=Number(String(value).replace(/[$,%\s,]/g,''));return Number.isFinite(n)?n:null};
+  function createPropertyRecord(input={}){return{schemaVersion:'1.1.0',property:{address:String(input.address||'').trim(),municipalityId:String(input.municipalityId||'').trim(),municipality:String(input.municipality||'').trim(),county:String(input.county||'').trim(),assessedValue:numberOrNull(input.assessedValue),estimatedMarketValue:numberOrNull(input.estimatedMarketValue),valueLow:numberOrNull(input.valueLow),valueHigh:numberOrNull(input.valueHigh),livingArea:numberOrNull(input.livingArea),comparableMedianRatio:numberOrNull(input.comparableMedianRatio),yearsSinceRevaluation:numberOrNull(input.yearsSinceRevaluation)},municipalityMetrics:{cod:numberOrNull(input.cod),codPercentile:numberOrNull(input.codPercentile),codYear:numberOrNull(input.codYear)},analysis:{neighborhoodMedianAssessment:numberOrNull(input.neighborhoodMedianAssessment),neighborhoodMedianRatio:numberOrNull(input.neighborhoodMedianRatio),appealScore:numberOrNull(input.appealScore),appealLevel:String(input.appealLevel||'')},metadata:{updatedAt:new Date().toISOString(),source:input.source||'user-input-and-nj-cod'}}}
+  function load(){try{return JSON.parse(localStorage.getItem(KEY))||createPropertyRecord()}catch{return createPropertyRecord()}}
+  function save(record){record.metadata=record.metadata||{};record.metadata.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(record));return record}
+  function merge(input={}){const current=load(),fresh=createPropertyRecord(input);const merged={...current,property:{...current.property,...Object.fromEntries(Object.entries(fresh.property).filter(([,v])=>v!==null&&v!==''))},municipalityMetrics:{...current.municipalityMetrics,...Object.fromEntries(Object.entries(fresh.municipalityMetrics).filter(([,v])=>v!==null&&v!==''))},analysis:{...current.analysis,...Object.fromEntries(Object.entries(fresh.analysis).filter(([,v])=>v!==null&&v!==''))},metadata:fresh.metadata};return save(merged)}
+  function assessmentRatio(record){const a=record?.property?.assessedValue,v=record?.property?.estimatedMarketValue;return Number.isFinite(a)&&Number.isFinite(v)&&v>0?a/v:null}
+  function completeness(record){const fields=['address','municipality','assessedValue','estimatedMarketValue','livingArea'];const count=fields.filter(f=>record?.property?.[f]).length;return Math.round(count/fields.length*100)}
+  global.NJPropertyModel={createPropertyRecord,load,save,merge,assessmentRatio,completeness};
 })(window);
