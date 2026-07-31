@@ -887,6 +887,9 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tag.gold  { background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; }
 .lp-tag.green { background: #1e6b3a; color: #fff; }
 
+/* tag sits inside the photo, right corner */
+.lp-tag.right { left: auto; right: 16px; }
+
 /* heading and copy over the photo */
 .lp-over { position: relative; z-index: 2; padding: 20px 22px 22px; width: 100%; }
 /* styles.css sets heading colours globally, so these are forced. Without the
@@ -1584,7 +1587,7 @@ body.pl-signedin .gate-cta { display: none; }
 
       <a class="lp-tool span3" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
         <div class="lp-photo band" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1600&auto=format&fit=crop')">
-          <span class="lp-tag">Sellers</span>
+          <span class="lp-tag right">Sellers</span>
           <div class="lp-over band-over">
             <h3>Net proceeds &amp; trade-up</h3>
             <p>What you walk away with after commission and the NJ transfer fee, and what the tax bill looks like in the town you are moving to.</p>
