@@ -2059,16 +2059,20 @@ body.pl-signedin .gate-cta { display: none; }
     return t === null ? null : Math.floor(t);
   }
 
+  // The US Census geocoder does not send CORS headers, so a browser can never
+  // read its response. It is left defined for a future server side proxy but
+  // is deliberately NOT in the fallback path: calling it only burns seconds on
+  // a request that cannot succeed. NJOGIS answers in about 130ms.
   function geocode(address) {
     var p = new URLSearchParams({ SingleLine: address, outSR: '4326', maxLocations: '1', f: 'json' });
-    return xfetch(NJ_GEOCODE + '?' + p, 7000)
-      .then(function (r) { if (!r.ok) throw new Error('geo'); return r.json(); })
+    return xfetch(NJ_GEOCODE + '?' + p, 8000)
+      .then(function (r) { if (!r.ok) throw new Error('geo http ' + r.status); return r.json(); })
       .then(function (d) {
+        if (d && d.error) throw new Error('geo service: ' + (d.error.message || 'error'));
         var c = d.candidates && d.candidates[0];
-        if (!c) throw new Error('nocand');
+        if (!c) return null;                      // genuinely no match, not a failure
         return { lat: c.location.y, lon: c.location.x, matched: c.address };
-      })
-      .catch(function () { return geocodeCensus(address); });
+      });
   }
   function geocodeCensus(address) {
     var p = new URLSearchParams({ address: address, benchmark: 'Public_AR_Current', format: 'json' });
@@ -2161,30 +2165,11 @@ body.pl-signedin .gate-cta { display: none; }
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     navigator.geolocation.getCurrentPosition(function (pos) {
       var lat = pos.coords.latitude, lon = pos.coords.longitude;
-      var p = new URLSearchParams({
-        location: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
-        outSR: '4326', f: 'json'
-      });
-      xfetch(NJ_REVERSE + '?' + p, 9000)
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          var a = d && d.address;
-          return a ? (a.Match_addr || a.Address || '') : '';
-        })
-        .catch(function () { return ''; })
-        .then(function (line) {
-          if (line) {
-            el('pl-addr').value = line;
-            resetGeoBtn();
-            window.plLookup();
-            return;
-          }
-          // No street address available. We do not actually need one: the
-          // parcel lookup works from coordinates. Go straight there.
-          resetGeoBtn();
-          toast('Found you. Pulling the property at your location.');
-          lookupAtPoint(lat, lon, 'Your current location');
-        });
+      // NJOGIS returns "Unable to complete operation" for reverseGeocode, so
+      // there is no address to fetch. We never needed one: the parcel lookup
+      // works directly from coordinates.
+      resetGeoBtn();
+      lookupAtPoint(lat, lon, 'Your current location');
     }, function (err) {
       resetGeoBtn();
       toast(err.code === 1 ? 'Location permission denied' : 'Could not get your location');
@@ -2651,13 +2636,20 @@ body.pl-signedin .gate-cta { display: none; }
       if (m8b >= 1 && m8b <= 12 && y8b >= 1900 && y8b <= THIS_YEAR) return y8b + (m8b - 0.5) / 12;
       return null;
     }
-    if (n.length === 6) {                       // MMDDYY, or YYMMDD
-      var mm = +n.slice(0, 2), yy = +n.slice(4, 6);
+    // Six digit dates from MOD-IV are YYMMDD, confirmed against a live value of
+    // "231201" which is only valid read that way (month 23 does not exist).
+    // This matters: most dates parse under BOTH readings, so getting the order
+    // wrong silently returns a date years off. "060115" is January 2006 here,
+    // not June 2015.
+    if (n.length === 6) {
+      var yy = +n.slice(0, 2), mm = +n.slice(2, 4);
       if (mm >= 1 && mm <= 12) {
         var yr = yy > 40 ? 1900 + yy : 2000 + yy;
         if (yr >= 1900 && yr <= THIS_YEAR) return yr + (mm - 0.5) / 12;
       }
-      var y2 = +n.slice(0, 2), m2 = +n.slice(2, 4);
+      // Fall back to MMDDYY only when YYMMDD cannot be true, so mixed county
+      // formats still resolve instead of being discarded.
+      var m2 = +n.slice(0, 2), y2 = +n.slice(4, 6);
       if (m2 >= 1 && m2 <= 12) {
         var yr2 = y2 > 40 ? 1900 + y2 : 2000 + y2;
         if (yr2 >= 1900 && yr2 <= THIS_YEAR) return yr2 + (m2 - 0.5) / 12;
