@@ -2122,6 +2122,38 @@ body.pl-signedin .gate-cta { display: none; }
   // ══════════════════════════════════════════════
   // LOCATE ME
   // ══════════════════════════════════════════════
+
+  // Look up whatever parcel sits under a coordinate. Used by the locate button
+  // when reverse geocoding is unavailable, and safe to call directly.
+  function lookupAtPoint(lat, lon, label) {
+    var btn = el('pl-btn');
+    if (btn) btn.disabled = true;
+    el('pl-inline').innerHTML =
+      '<div class="pl-state"><div class="pl-spin"></div>' +
+      '<div class="pl-state-title">Searching state records</div>' +
+      '<div class="pl-state-sub">Finding the parcel at your location.</div></div>';
+
+    Promise.all([
+      loadRates().catch(function () {}), loadListings().catch(function () {}),
+      loadRatios().catch(function () {}), loadCalibration().catch(function () {})
+    ])
+      .then(function () { return parcelAt(lat, lon); })
+      .then(function (f) {
+        if (!f) throw new Error('noparcel');
+        el('pl-inline').innerHTML = readyState();
+        render(f, { lat: lat, lon: lon, matched: label }, label);
+      })
+      .catch(function (e) {
+        console.error('[watchdog] point lookup failed:', e);
+        el('pl-inline').innerHTML =
+          '<div class="pl-state"><i class="fas fa-circle-question"></i>' +
+          '<div class="pl-state-title">No parcel found there</div>' +
+          '<div class="pl-state-sub">There is no New Jersey parcel record at that spot. ' +
+          'If you are outside NJ that is expected. Type an address instead.</div></div>';
+      })
+      .then(function () { if (btn) btn.disabled = false; });
+  }
+
   window.plLocate = function () {
     if (!navigator.geolocation) { toast('Your browser does not support location'); return; }
     var btn = el('pl-geo');
@@ -2133,20 +2165,26 @@ body.pl-signedin .gate-cta { display: none; }
         location: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
         outSR: '4326', f: 'json'
       });
-      xfetch(NJ_REVERSE + '?' + p, 9000).then(function (r) { return r.json(); })
+      xfetch(NJ_REVERSE + '?' + p, 9000)
+        .then(function (r) { return r.json(); })
         .then(function (d) {
           var a = d && d.address;
-          var line = a ? (a.Match_addr || a.Address || '') : '';
+          return a ? (a.Match_addr || a.Address || '') : '';
+        })
+        .catch(function () { return ''; })
+        .then(function (line) {
           if (line) {
             el('pl-addr').value = line;
             resetGeoBtn();
             window.plLookup();
-          } else {
-            resetGeoBtn();
-            toast('Found you but could not read an address. Type it in.');
+            return;
           }
-        })
-        .catch(function () { resetGeoBtn(); toast('Could not look up that location'); });
+          // No street address available. We do not actually need one: the
+          // parcel lookup works from coordinates. Go straight there.
+          resetGeoBtn();
+          toast('Found you. Pulling the property at your location.');
+          lookupAtPoint(lat, lon, 'Your current location');
+        });
     }, function (err) {
       resetGeoBtn();
       toast(err.code === 1 ? 'Location permission denied' : 'Could not get your location');
@@ -2155,7 +2193,7 @@ body.pl-signedin .gate-cta { display: none; }
   function resetGeoBtn() {
     var b = el('pl-geo');
     b.classList.remove('busy');
-    b.innerHTML = '<i class="fas fa-location-crosshairs"></i>';
+    b.innerHTML = '<i class="fas fa-paper-plane"></i>';
   }
 
   // ══════════════════════════════════════════════
