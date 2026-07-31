@@ -1975,6 +1975,23 @@ body.pl-signedin .gate-cta { display: none; }
   // page goes through here so a dead server becomes a failure we can handle
   // instead of a page that just sits there.
   // ══════════════════════════════════════════════
+
+  // ══════════════════════════════════════════════
+  // REQUEST CACHE
+  // These are free public servers. Anything we already asked for this session
+  // gets reused instead of asked again. Coordinates are rounded so two lookups
+  // on the same street share one result.
+  // ══════════════════════════════════════════════
+  var reqCache = {};
+  function cached(key, ms, fn) {
+    var hit = reqCache[key];
+    if (hit && (Date.now() - hit.t) < (ms || 6e5)) return Promise.resolve(hit.v);
+    return fn().then(function (v) { reqCache[key] = { t: Date.now(), v: v }; return v; });
+  }
+  function geoKey(lat, lon, extra) {
+    return (extra || '') + '|' + lat.toFixed(3) + ',' + lon.toFixed(3);
+  }
+
   function xfetch(url, ms, opts) {
     ms = ms || 12000;
     if (typeof AbortController === 'undefined') {
@@ -2085,6 +2102,10 @@ body.pl-signedin .gate-cta { display: none; }
   }
 
   function parcelAt(lat, lon) {
+    return cached(geoKey(lat, lon, 'parcel'), 6e5,
+      function () { return parcelAtRaw(lat, lon); });
+  }
+  function parcelAtRaw(lat, lon) {
     var p = new URLSearchParams({
       geometry: JSON.stringify({ x: lon, y: lat, spatialReference: { wkid: 4326 } }),
       geometryType: 'esriGeometryPoint', inSR: '4326', outSR: '4326',
@@ -3085,6 +3106,10 @@ body.pl-signedin .gate-cta { display: none; }
   // list prices, but these are actual recorded transfers next door.
   // ══════════════════════════════════════════════
   function nearbySales(lat, lon, meters, muni) {
+    return cached(geoKey(lat, lon, 'sales' + meters + (muni || '')), 6e5,
+      function () { return nearbySalesRaw(lat, lon, meters, muni); });
+  }
+  function nearbySalesRaw(lat, lon, meters, muni) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = { xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
                 spatialReference: { wkid: 4326 } };
@@ -3127,6 +3152,10 @@ body.pl-signedin .gate-cta { display: none; }
   // NEIGHBOURHOOD CONTEXT
   // ══════════════════════════════════════════════
   function neighborhoodStats(lat, lon, meters) {
+    return cached(geoKey(lat, lon, 'hood' + meters), 6e5,
+      function () { return neighborhoodStatsRaw(lat, lon, meters); });
+  }
+  function neighborhoodStatsRaw(lat, lon, meters) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = { xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
                 spatialReference: { wkid: 4326 } };
@@ -3135,7 +3164,7 @@ body.pl-signedin .gate-cta { display: none; }
       inSR: '4326', spatialRel: 'esriSpatialRelIntersects',
       where: "PROP_CLASS = '2' AND NET_VALUE > 10000",
       outFields: 'NET_VALUE,LAST_YR_TX,YR_CONSTR,CALC_ACRE',
-      returnGeometry: 'false', resultRecordCount: '600', f: 'json'
+      returnGeometry: 'false', resultRecordCount: '400', f: 'json'
     });
     return xfetch(NJ_PARCEL + '?' + p, 15000)
       .then(function (r) { return r.json(); })
@@ -4091,13 +4120,17 @@ body.pl-signedin .gate-cta { display: none; }
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
 
     var offR = officialRatio(current.town, current.county);
+    // townRatio used to run here as well. It queried the same municipality as
+    // liveRatio, 2,000 records, for a figure liveRatio already produces more
+    // accurately. Dropping it removes a whole request and 2,000 records from
+    // every single lookup. These are free public servers and we should not
+    // hammer them for data we throw away.
     Promise.all([
       gatherComps(geo.lat, geo.lon, current.town),
-      townRatio(current.town, current.county),
       liveRatio(current.town, current.county, offR ? offR.ratio : null)
     ]).then(function (res) {
-      var comps = res[0] || [], ratio = res[1], live = res[2];
-      if (ratio && ratio.drift != null) subject.townDrift = ratio.drift;
+      var comps = res[0] || [], live = res[1], ratio = live || offR;
+      if (live && live.appreciation != null) subject.townDrift = live.appreciation;
 
       current.comps = comps;
       paintComps(comps);
@@ -4520,7 +4553,7 @@ body.pl-signedin .gate-cta { display: none; }
                 " AND PROP_CLASS = '2' AND NET_VALUE > 10000 AND LAST_YR_TX > 100";
     var p = new URLSearchParams({
       where: where, outFields: 'NET_VALUE,LAST_YR_TX',
-      returnGeometry: 'false', resultRecordCount: '1500', f: 'json'
+      returnGeometry: 'false', resultRecordCount: '900', f: 'json'
     });
     return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
       .then(function (d) {
