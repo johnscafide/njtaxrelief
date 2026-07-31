@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>NJ Property Tax Appeal Potential</title>
+  <meta name="description" content="Screen a New Jersey property for potential assessment appeal indicators using property-specific values and official municipal COD data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="appeal-potential.css">
+</head>
+<body>
+<header class="ap-header"><a class="ap-brand" href="/property/">NJ Property Intelligence</a><a href="../assessment-fairness/">Assessment Fairness</a></header>
+<main>
+  <section class="ap-hero">
+    <div class="ap-shell">
+      <p class="ap-kicker">Appeal Potential</p>
+      <h1>Is your assessment worth a closer review?</h1>
+      <p>Enter property-specific values and select the municipality. The tool combines the implied assessment ratio with official municipal consistency data to produce an educational screening score.</p>
+    </div>
+  </section>
+
+  <section class="ap-shell ap-layout">
+    <form id="appealForm" class="ap-card ap-form">
+      <h2>Property inputs</h2>
+      <p class="ap-muted">Assessed value and estimated market value are required. The other fields improve the score's confidence.</p>
+      <label>Property address <input id="address" placeholder="Optional"></label>
+      <label>Municipality <select id="municipality" required><option value="">Choose a municipality</option></select></label>
+      <div class="ap-grid-2">
+        <label>Assessed value <span class="ap-input-prefix">$<input id="assessedValue" inputmode="decimal" required placeholder="350000"></span></label>
+        <label>Estimated market value <span class="ap-input-prefix">$<input id="marketValue" inputmode="decimal" required placeholder="425000"></span></label>
+      </div>
+      <div class="ap-grid-2">
+        <label>Years since revaluation <input id="revaluationAge" type="number" min="0" max="100" placeholder="Optional"></label>
+        <label>Comparable median ratio <span class="ap-input-suffix"><input id="comparableRatio" inputmode="decimal" placeholder="Optional, e.g. 0.74"><span>ratio</span></span></label>
+      </div>
+      <button type="submit">Calculate appeal potential</button>
+      <p id="status" class="ap-status" aria-live="polite">Loading official municipality data…</p>
+    </form>
+
+    <section id="result" class="ap-card ap-result" hidden>
+      <div class="ap-score-head"><div><p class="ap-label">Screening result</p><h2 id="resultLabel">—</h2></div><div class="ap-score"><strong id="score">—</strong><span>/100</span></div></div>
+      <div class="ap-meter"><div id="meterFill"></div></div>
+      <p id="summary" class="ap-summary"></p>
+      <div class="ap-stats">
+        <div><span>Implied ratio</span><strong id="ratio">—</strong></div>
+        <div><span>Municipal COD</span><strong id="cod">—</strong></div>
+        <div><span>Confidence</span><strong id="confidence">—</strong></div>
+      </div>
+      <h3>Why this result</h3>
+      <ul id="reasons"></ul>
+      <div class="ap-next">
+        <h3>Recommended next step</h3>
+        <p id="recommendation"></p>
+      </div>
+      <div class="ap-warning"><strong>Not a legal determination:</strong> This score does not establish that an assessment is incorrect or that an appeal will succeed. Appeals depend on legally admissible evidence, applicable ratios, deadlines, and local procedures.</div>
+    </section>
+  </section>
+
+  <section class="ap-shell ap-method">
+    <article class="ap-card"><p class="ap-label">Transparent model</p><h2>How the score works</h2><p>The engine gives the greatest weight to the property's assessed value relative to its estimated market value. Municipality COD is supporting context. Optional comparable-ratio and revaluation-age inputs add evidence and increase confidence. Missing optional data does not automatically increase the score.</p></article>
+  </section>
+</main>
+<footer><div class="ap-shell">Educational screening only. Verify assessments, equalization ratios, filing deadlines, and appeal requirements with official New Jersey and county sources.</div></footer>
+<script src="../../js/property-data-model.js"></script>
+<script src="appeal-potential.js"></script>
+</body>
+</html>
