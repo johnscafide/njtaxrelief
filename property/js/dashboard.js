@@ -96,11 +96,13 @@
 
     Promise.all([
       sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
-      sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle()
+      sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
+      loadRefData(), loadSR1A()
     ]).then(function (res) {
       rows = (res[0] && res[0].data) || [];
       profile = (res[1] && res[1].data) || {};
       render();
+      el('db-profile-body').innerHTML = profileForm();
     });
   }
 
@@ -566,129 +568,390 @@
     setTimeout(function () { w.print(); }, 400);
   };
 
+  // ══════════════════════════════════════════════
+  // SR1A  ·  verified sales ratios
+  // ══════════════════════════════════════════════
+  var sr1a = null;
+  function loadSR1A() {
+    if (sr1a) return Promise.resolve();
+    return xfetch('/property/sr1a-ratios.json', 9000).then(function (r) { return r.json(); })
+      .then(function (j) { sr1a = (j && j.districts) || {}; }).catch(function () { sr1a = {}; });
+  }
+  function sr1aFor(r) {
+    if (!sr1a) return null;
+    var d = String(r.pams_pin || '').slice(0, 4);
+    var row = d && sr1a[d];
+    return (row && row.ratio && row.n >= 10) ? row : null;
+  }
+
+  // Market value from the state's verified sales, falling back to the
+  // published ratio. This is the number every other figure hangs off.
+  function marketValue(r) {
+    var s = sr1aFor(r);
+    if (s && r.assessed) return { v: r.assessed / s.ratio, ratio: s.ratio, n: s.n, src: 'verified' };
+    var R = ratioFor(r.town, r.county);
+    if (R && r.assessed) return { v: r.assessed / R.ratio, ratio: R.ratio, n: null, src: 'published' };
+    if (r.watchdog_value) return { v: r.watchdog_value, ratio: null, n: null, src: 'stored' };
+    return null;
+  }
+
+  // An appeal test needs a market value that did NOT come from the assessment.
+  // Dividing the assessment by the town ratio and then multiplying it back is
+  // circular: the supported assessment always equals the assessment and no
+  // case can ever fire. So we only test when there is an independent anchor.
+  //
+  //   A. watchdog_value  the comps based estimate saved from the lookup page
+  //   B. median price per square foot in town, applied to this home's size
+  //
+  // With neither, we say so rather than showing a number that means nothing.
+  function chapter123(r) {
+    var m = marketValue(r);
+    if (!m || !r.assessed) return null;
+
+    var indep = null, basis = null;
+    if (r.watchdog_value && Math.abs(r.watchdog_value - m.v) / m.v > 0.001) {
+      indep = +r.watchdog_value; basis = 'comparable sales from the full record';
+    } else {
+      var s = sr1aFor(r);
+      if (s && s.ppsf && r.living_sqft) {
+        indep = s.ppsf * r.living_sqft;
+        basis = 'median price per square foot in this town';
+      }
+    }
+
+    var eff = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
+    var out = {
+      market: m.v, ratio: m.ratio, src: m.src, n: m.n,
+      testable: false, hasCase: false, indep: indep, basis: basis
+    };
+    if (indep == null) return out;
+
+    var fair = indep * m.ratio;
+    var limit = fair * 1.15;
+    out.testable = true;
+    out.fair = fair;
+    out.limit = limit;
+    out.over = r.assessed - limit;
+    out.hasCase = out.over > 0;
+    out.saving = (out.hasCase && eff) ? (r.assessed - fair) * eff : null;
+    return out;
+  }
+
+  // ══════════════════════════════════════════════
+  // ACCESS TIERS
+  //   free  · signed in, sees their own numbers
+  //   pro   · paid, sees the analysis and the exports
+  // Gating is presentational. Everything here is public record either way,
+  // so nothing sensitive hides behind it.
+  // ══════════════════════════════════════════════
+  function isPro() { return !!(profile && profile.plan === 'pro'); }
+
+  function locked(label, why, html) {
+    if (isPro()) return html;
+    return '<div class="lk">' +
+      '<div class="lk-in">' + html + '</div>' +
+      '<div class="lk-over">' +
+        '<div class="lk-t"><i class="fas fa-lock"></i> ' + esc(label) + '</div>' +
+        '<div class="lk-w">' + why + '</div>' +
+        '<button class="lk-b" onclick="dbUpgrade()">See what Pro includes</button>' +
+      '</div></div>';
+  }
+
+  window.dbUpgrade = function () {
+    plModalNote('Watchdog Pro',
+      '<p>Everything on this page stays free. Pro is for the work that comes after: the analysis, ' +
+      'the comparisons across towns, and the exports you can hand to an attorney or a client.</p>' +
+      '<div class="pro-list">' +
+        '<div><b>Chapter 123 screening on every property</b><span>The supported assessment, the statutory limit, ' +
+        'and the dollar figure you would be arguing for.</span></div>' +
+        '<div><b>Verified sales comparables</b><span>Arm\u2019s length sales the state itself confirmed, with square ' +
+        'footage and price per square foot.</span></div>' +
+        '<div><b>Town by town comparison</b><span>Effective rates measured from live parcel data across all 565 ' +
+        'municipalities.</span></div>' +
+        '<div><b>CSV and print exports</b><span>Block, lot, PAMS PIN, ratio and limits in the format a county board ' +
+        'expects.</span></div>' +
+        '<div><b>Unlimited saved properties</b><span>Portfolio totals, blended rates, and drift tracking across all ' +
+        'of them.</span></div>' +
+      '</div>' +
+      '<p style="font-size:13.5px;color:#8a93a6;">Not open yet. Tell me you want it and I will let you know the day ' +
+      'it is, at the price early users get.</p>' +
+      '<button class="db-btn" onclick="dbWantPro()">Tell John I want this</button>');
+  };
+
+  window.dbWantPro = function () {
+    send({
+      name: name(), email: plUser.email, phone: (profile && profile.phone) || 'Not provided',
+      topic: '\u2b50 PRO INTEREST \u2b50 dashboard upgrade request',
+      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
+      town: (rows[0] && rows[0].town) || 'Not provided',
+      address: (rows[0] && rows[0].address) || 'Not provided',
+      message: ['Wants to know when Watchdog Pro opens.',
+                'Properties saved: ' + rows.length,
+                'Source: /property/dashboard.html'].join('\n')
+    });
+    plModalNote('Noted', '<p>I will let you know. Nothing changes on your account in the meantime.</p>' +
+      '<button class="db-btn" onclick="plCloseNote()">Close</button>');
+  };
+
+  // ══════════════════════════════════════════════
+  // THE BRIEF
+  // A paragraph that actually says something, instead of a row of tiles.
+  // This is the first thing anyone reads, so it has to be worth reading.
+  // ══════════════════════════════════════════════
+  function brief() {
+    if (!rows.length) return '';
+    var homes = rows.filter(function (r) { return r.kind === 'home'; });
+    var lead = homes[0] || rows[0];
+    var c = chapter123(lead);
+    var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
+    var cases = rows.filter(function (r) { var x = chapter123(r); return x && x.hasCase; });
+
+    var s = [];
+    s.push('You are tracking <b>' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') + '</b>');
+    if (tot) s.push(' carrying <b>' + money(tot) + '</b> a year in property tax between them');
+    s.push('. ');
+
+    if (c) {
+      s.push('<b>' + esc(lead.address) + '</b> is assessed at ' + money(lead.assessed) + '. ');
+      s.push(c.src === 'verified'
+        ? 'Sales in ' + esc(lead.town) + ' that New Jersey verified as genuine put assessments there at ' +
+          (c.ratio * 100).toFixed(1) + '% of market, which values it around <b>' + money(rnd(c.market)) + '</b>. '
+        : 'At the published ' + (c.ratio * 100).toFixed(1) + '% ratio that implies about <b>' +
+          money(rnd(c.market)) + '</b>. ');
+      s.push(!c.testable
+        ? '<a href="/property/?address=' + encodeURIComponent(lead.address + ', ' + (lead.town || '') + ', NJ') +
+          '">Open the full record</a> to test it against comparable sales, which is what an appeal turns on.'
+        : c.hasCase
+        ? 'That puts the assessment <b class="neg">' + money(c.over) + ' above</b> the Chapter 123 limit' +
+          (c.saving ? ', worth roughly <b>' + money(c.saving) + ' a year</b> if it came down' : '') + '.'
+        : 'Against ' + c.basis + ' it sits inside the cushion the state allows, so there is no appeal to make here.');
+    }
+
+    var d = deadline();
+    if (cases.length) {
+      s.push(cases.length === 1
+        ? ' <span class="urgent">One of your properties looks over-assessed, and the filing deadline is ' +
+          d.days + ' days out.</span>'
+        : ' <span class="urgent">' + cases.length + ' of your properties look over-assessed, and the filing ' +
+          'deadline is ' + d.days + ' days out.</span>');
+    }
+    return '<p class="brief">' + s.join('') + '</p>';
+  }
+
+  function rnd(n) { return Math.round(n / 1000) * 1000; }
+  function deadline() {
+    var now = new Date(), apr = new Date(now.getFullYear(), 3, 1);
+    if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
+    return { date: apr, days: Math.ceil((apr - now) / 864e5) };
+  }
+
+  // ══════════════════════════════════════════════
+  // PROPERTY  ·  simple view
+  // The numbers, in a sentence, then a hairline table. No card, no shadow.
+  // ══════════════════════════════════════════════
+  function propertyBlock(r) {
+    var c = chapter123(r);
+    var s = sr1aFor(r);
+    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
+    var v = VERIFY[r.verify_level || 'self'];
+
+    var head =
+      '<div class="pr-head">' +
+        '<div class="pr-id">' +
+          '<h3>' + esc(r.address) + '</h3>' +
+          '<div class="pr-sub">' + esc(r.town || '') +
+            (r.county ? ', ' + esc(r.county) + ' County' : '') +
+            (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
+            '  \u00b7  <span class="vf ' + v.cls + '">' + v.label + '</span>' +
+          '</div>' +
+        '</div>' +
+        (c && c.hasCase ? '<div class="pr-flag">Over the limit by ' + money(c.over) + '</div>' : '') +
+      '</div>';
+
+    var line = c
+      ? '<p class="pr-line">Assessed <b>' + money(r.assessed) + '</b>, taxed <b>' +
+        money(r.last_year_tax || 0) + '</b> a year. ' +
+        (c.src === 'verified'
+          ? 'Against <b>' + c.n + '</b> verified sales in this town the market value works out to <b>' +
+            money(rnd(c.market)) + '</b>.'
+          : 'The published ratio implies <b>' + money(rnd(c.market)) + '</b>.') +
+        (s && s.ppsf ? ' Homes here trade around <b>$' + s.ppsf + ' a square foot</b>.' : '') + '</p>'
+      : '';
+
+    var figs =
+      '<dl class="fig">' +
+        f('Assessed', money(r.assessed || 0)) +
+        f('Annual tax', money(r.last_year_tax || 0)) +
+        f('Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-') +
+        (c ? f('Market value', money(rnd(c.market))) : '') +
+        (s ? f('Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
+        (s && s.medPrice ? f('Median sale here', money(s.medPrice)) : '') +
+      '</dl>';
+
+    var appeal = '';
+    if (c && c.testable) {
+      appeal = locked('Chapter 123 analysis',
+        'The supported assessment, the statutory limit, and what an appeal would actually be worth.',
+        '<dl class="fig tight">' +
+          f('Supported assessment', money(c.fair), 'from ' + c.basis) +
+          f('Chapter 123 limit', money(c.limit)) +
+          f(c.hasCase ? 'Over by' : 'Under by', money(Math.abs(c.over)), null, c.hasCase ? 'neg' : 'pos') +
+          (c.saving ? f('If reduced', money(c.saving) + '/yr') : '') +
+        '</dl>');
+    } else if (c) {
+      appeal = '<p class="untest">An appeal is argued against comparable sales, not against the ratio, so this ' +
+        'needs the full record to test properly. ' +
+        '<a href="/property/?address=' + q + '">Open it</a> and the analysis saves back here.</p>';
+    }
+
+    return '<article class="pr">' + head + line + figs + appeal +
+      '<div class="pr-acts">' +
+        '<a href="/property/?address=' + q + '">Open full record</a>' +
+        (r.kind === 'home' && r.verify_level !== 'mail'
+          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')">Verify ownership</button>' : '') +
+        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Ask John</button>' +
+        '<button class="rm" onclick="dbRemove(\'' + r.id + '\')">Remove</button>' +
+      '</div></article>';
+  }
+
+  function f(k, v, note, cls) {
+    return '<div><dt>' + k + '</dt><dd' + (cls ? ' class="' + cls + '"' : '') + '>' + v +
+      (note ? '<em>' + note + '</em>' : '') + '</dd></div>';
+  }
+
+  var VERIFY = {
+    self: { label: 'unverified', cls: 'no' },
+    doc:  { label: 'document on file', cls: 'mid' },
+    mail: { label: 'verified owner', cls: 'yes' }
+  };
+
+  // ══════════════════════════════════════════════
+  // PRO VIEW  ·  one dense table, everything at once
+  // Built for someone who already knows what they are looking at and wants
+  // to scan twenty properties, not read twenty paragraphs.
+  // ══════════════════════════════════════════════
+  function proTable() {
+    if (!rows.length) return '';
+    var body = rows.map(function (r) {
+      var c = chapter123(r);
+      var s = sr1aFor(r);
+      return '<tr' + (c && c.hasCase ? ' class="hot"' : '') + '>' +
+        '<td class="a">' + esc(r.address) + '</td>' +
+        '<td>' + esc(r.town || '') + '</td>' +
+        '<td>' + esc(r.block || '') + '/' + esc(r.lot || '') + '</td>' +
+        '<td class="n">' + (r.assessed ? r.assessed.toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (r.last_year_tax ? Math.round(r.last_year_tax).toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (r.effective_rate ? (+r.effective_rate).toFixed(2) : '-') + '</td>' +
+        '<td class="n">' + (s ? (s.ratio * 100).toFixed(1) : (c ? (c.ratio * 100).toFixed(1) : '-')) + '</td>' +
+        '<td class="n">' + (s ? s.n : '-') + '</td>' +
+        '<td class="n">' + (c ? rnd(c.market).toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (c && c.testable ? Math.round(c.fair).toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (c && c.testable ? Math.round(c.limit).toLocaleString() : '-') + '</td>' +
+        '<td class="n ' + (c && c.hasCase ? 'neg' : '') + '">' + (c && c.testable ? Math.round(c.over).toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (c && c.saving ? Math.round(c.saving).toLocaleString() : '-') + '</td>' +
+        '<td>' + (r.verify_level || 'self') + '</td>' +
+      '</tr>';
+    }).join('');
+
+    return '<div class="pro-wrap"><table class="pro"><thead><tr>' +
+      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
+        .map(function (h, i) { return '<th' + (i >= 3 && i <= 12 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
+      '</tr></thead><tbody>' + body + '</tbody></table></div>' +
+      '<p class="pro-note">Ratio is measured from state verified arm\u2019s length sales where available, ' +
+      'otherwise the published Director\u2019s Ratio. n is the number of verified sales behind it. ' +
+      'Supported assessment is market value times the ratio; the Chapter 123 limit adds the statutory 15 percent.</p>';
+  }
+
   // ── shared card shell ──
   // Named toolCard, not card. The dashboard already has a card(r) that renders
   // saved property tiles, and shadowing it silently replaced every property
   // card with a tool shell.
+  // A section, not a card. A hairline and a small label, then the content.
   function toolCard(title, icon, body) {
-    return '<div class="tool"><div class="tool-h"><i class="fas ' + icon + '"></i>' + title + '</div>' +
-           '<div class="tool-b">' + body + '</div></div>';
+    return '<section class="sec"><h4><i class="fas ' + icon + '"></i>' + title + '</h4>' + body + '</section>';
   }
+
+  var view = 'simple';
+
+  window.dbView = function (v) {
+    view = v;
+    document.body.classList.toggle('pro-view', v === 'pro');
+    ['simple', 'pro'].forEach(function (k) {
+      var b = document.querySelector('.vw[data-v="' + k + '"]');
+      if (b) b.classList.toggle('on', k === v);
+    });
+    render();
+  };
 
   function render() {
     var homes = rows.filter(function (r) { return r.kind === 'home'; });
     var watch = rows.filter(function (r) { return r.kind === 'watch'; });
-    var cases = rows.filter(function (r) { return r.has_appeal_case; });
-    var totalTax = rows.filter(function (r) { return r.kind === 'home'; })
-                       .reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
+    var cases = rows.filter(function (r) { var c = chapter123(r); return c && c.hasCase; });
+    var d = deadline();
 
-    // deadline
-    var now = new Date(), apr = new Date(now.getFullYear(), 3, 1);
-    if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
-    var days = Math.ceil((apr - now) / 864e5);
+    el('db-brief').innerHTML = rows.length ? brief() : '';
 
-    el('db-alerts').innerHTML =
-      (cases.length
-        ? '<div class="db-alert warn"><i class="fas fa-scale-unbalanced-flip"></i><div>' +
-          '<b>' + cases.length + ' of your properties look over-assessed.</b> ' +
-          'There are <b>' + days + ' days</b> until the April 1 appeal deadline. ' +
-          'I will screen ' + (cases.length === 1 ? 'it' : 'them') + ' at no charge and tell you straight if a case is not worth filing.' +
-          '<button class="db-btn" style="margin-top:12px;" onclick="dbAsk(\'appeal\')">Ask John to review</button>' +
-          '</div></div>'
-        : '') +
-      (!profile.profile_complete
-        ? '<div class="db-alert info"><i class="fas fa-id-card"></i><div>' +
-          '<b>Finish your profile.</b> Two minutes, and it lets me send you only what is actually relevant, ' +
-          'like your town\'s appeal deadline or a rebate you qualify for. ' +
-          '<button class="db-btn" style="margin-top:12px;" onclick="dbTab(\'profile\')">Complete profile</button>' +
-          '</div></div>'
-        : '');
+    // A thin status line, not a row of tiles.
+    el('db-line').innerHTML = rows.length
+      ? '<div class="rail">' +
+          rl(rows.length, 'tracked') +
+          rl(money(rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0)), 'annual tax') +
+          rl(cases.length, cases.length === 1 ? 'possible appeal' : 'possible appeals', cases.length ? 'neg' : '') +
+          rl(d.days, 'days to file', d.days <= 75 ? 'neg' : '') +
+        '</div>'
+      : '';
 
-    el('db-stats').innerHTML =
-      stat(homes.length, 'Homes claimed', 'fa-house-chimney') +
-      stat(watch.length, 'On watchlist', 'fa-eye') +
-      stat(totalTax ? money(totalTax) : '-', 'Annual tax tracked', 'fa-file-invoice-dollar') +
-      stat(days, 'Days to appeal deadline', 'fa-calendar-day');
-
-    el('db-homes').innerHTML = homes.length
-      ? homes.map(card).join('')
-      : empty('fa-house-circle-check', 'No homes claimed yet',
-              'Look up your address and claim it. Then I can track the assessment for you year over year.');
-    el('db-watch').innerHTML = watch.length
-      ? watch.map(card).join('')
-      : empty('fa-eye', 'Watchlist is empty',
-              'Add any New Jersey property and keep an eye on what it is assessed at.');
-    el('db-profile').innerHTML = profileForm();
-
-    // Tools need the reference data, so build them once it is in.
-    loadRefData().then(function () {
-      var t = el('db-tools');
-      if (!t) return;
-      var html = [toolDrift(), toolPercentile(), toolRebates(), toolPortfolio(),
-                  toolCompare(), toolCost(), toolExport()].filter(Boolean).join('');
-      t.innerHTML = html || '<div class="db-empty"><i class="fas fa-toolbox"></i>' +
-        '<b>Save a property first</b><p>The tools work on the homes and watchlist items you save. ' +
-        'Look up an address and claim it, then come back.</p>' +
+    if (!rows.length) {
+      el('db-body').innerHTML =
+        '<div class="blank"><h3>Nothing saved yet</h3>' +
+        '<p>Look up any New Jersey address and claim it as your home, or add it to a watchlist. ' +
+        'Everything on this page is built from the properties you save.</p>' +
         '<a class="db-btn" href="/property/">Look up an address</a></div>';
-      if (el('tc-total')) window.dbCost();
-      paintPercentile();
-    });
-  }
-
-  function stat(v, l, i) {
-    return '<div class="db-stat"><i class="fas ' + i + '"></i><b>' + v + '</b><span>' + l + '</span></div>';
-  }
-  function empty(i, t, p) {
-    return '<div class="db-empty"><i class="fas ' + i + '"></i><b>' + t + '</b><p>' + p + '</p>' +
-      '<a class="db-btn" href="/property/">Look up an address</a></div>';
-  }
-
-  var VERIFY = {
-    self: { label: 'Unverified',        cls: 'no'  },
-    doc:  { label: 'Document on file',  cls: 'mid' },
-    mail: { label: 'Verified owner',    cls: 'yes' }
-  };
-
-  function card(r) {
-    var v = VERIFY[r.verify_level || 'self'] || VERIFY.self;
-    var hist = r.history || [], trend = '';
-    if (hist.length && hist[0].assessed && r.assessed) {
-      var d = r.assessed - hist[0].assessed;
-      if (d) trend = '<div class="db-trend ' + (d > 0 ? 'up' : 'down') + '">' +
-        (d > 0 ? '\u2191 ' : '\u2193 ') + money(Math.abs(d)) + ' since you saved it</div>';
+      return;
     }
-    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
-    return '<div class="db-card">' +
-      '<div class="db-card-h">' +
-        '<div><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') +
-          (r.county ? ', ' + esc(r.county) + ' County' : '') + '</span></div>' +
-        '<div class="db-badges">' +
-          (r.has_appeal_case ? '<span class="db-flag warn">Appeal case</span>' : '') +
-          '<span class="db-flag ' + v.cls + '">' + v.label + '</span>' +
-        '</div>' +
-      '</div>' +
-      '<div class="db-figs">' +
-        '<div><b>' + (r.assessed ? money(r.assessed) : '-') + '</b><span>Assessed</span></div>' +
-        '<div><b>' + (r.last_year_tax ? money(r.last_year_tax) : '-') + '</b><span>Annual tax</span></div>' +
-        '<div><b>' + (r.watchdog_value ? money(r.watchdog_value) : '-') + '</b><span>Watchdog value</span></div>' +
-        '<div><b>' + (r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-') + '</b><span>Eff. rate</span></div>' +
-      '</div>' + trend +
-      '<div class="db-acts">' +
-        '<a class="db-btn ghost" href="/property/?address=' + q + '">Open</a>' +
-        (r.kind === 'home' && r.verify_level !== 'mail'
-          ? '<button class="db-btn ghost" onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, "") + '\')">Verify ownership</button>' : '') +
-        '<button class="db-btn ghost" onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, "") + '\')">Ask John</button>' +
-        '<button class="db-btn danger" onclick="dbRemove(\'' + r.id + '\')">Remove</button>' +
-      '</div>' +
-    '</div>';
+
+    if (view === 'pro') {
+      el('db-body').innerHTML =
+        locked('The full table',
+          'Every property with its ratio, supported assessment, statutory limit and appeal value, in one scannable grid.',
+          proTable()) +
+        toolsHTML();
+      afterTools();
+      return;
+    }
+
+    el('db-body').innerHTML =
+      (homes.length ? '<h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
+        homes.map(propertyBlock).join('') : '') +
+      (watch.length ? '<h2 class="grp">Watching</h2>' + watch.map(propertyBlock).join('') : '') +
+      toolsHTML();
+    afterTools();
   }
 
-  window.dbTab = function (p) {
-    ['homes', 'watch', 'tools', 'profile'].forEach(function (k) {
-      var t = document.querySelector('.db-tab[data-p="' + k + '"]');
-      if (t) t.classList.toggle('active', k === p);
-      var panel = el('db-' + k);
-      if (panel) panel.classList.toggle('active', k === p);
+  function rl(v, l, cls) {
+    return '<span class="' + (cls || '') + '"><b>' + v + '</b>' + l + '</span>';
+  }
+
+  function toolsHTML() {
+    var free = [toolDrift(), toolRebates()].filter(Boolean).join('');
+    var pro = [toolPercentile(), toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
+    return free +
+      (pro ? locked('Analysis tools',
+        'Where you sit in your town, portfolio totals, town comparisons and the exports.', pro) : '') +
+      toolCost();
+  }
+
+  function afterTools() {
+    if (el('tc-total')) window.dbCost();
+    if (isPro()) paintPercentile();
+  }
+
+  window.dbPanel = function (p) {
+    ['main','profile'].forEach(function (k) {
+      var b = document.querySelector('.pn[data-p="' + k + '"]');
+      if (b) b.classList.toggle('on', k === p);
+      var e = el(k === 'main' ? 'db-panel-main' : 'db-' + k);
+      if (e) e.style.display = (k === p) ? '' : 'none';
     });
   };
 
