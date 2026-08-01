@@ -568,6 +568,23 @@
     setTimeout(function () { w.print(); }, 400);
   };
 
+
+  // ══════════════════════════════════════════════
+  // STREET VIEW
+  // The Static API takes a plain address, so no coordinates needed and no
+  // schema change. Images are requested live from Google every time. They are
+  // never downloaded, cached or re-hosted, which is what Google's terms require
+  // and what keeps this clean if the report is ever exported.
+  // ══════════════════════════════════════════════
+  var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
+
+  function streetImg(r, w, h) {
+    var loc = [r.address, r.town, 'NJ', r.zip].filter(Boolean).join(', ');
+    return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
+           '&location=' + encodeURIComponent(loc) +
+           '&fov=76&pitch=6&source=outdoor&key=' + GMAPS_KEY;
+  }
+
   // ══════════════════════════════════════════════
   // SR1A  ·  verified sales ratios
   // ══════════════════════════════════════════════
@@ -755,17 +772,34 @@
     var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
     var v = VERIFY[r.verify_level || 'self'];
 
+    var tone = (c && c.hasCase) ? 'hot' : (c && c.testable) ? 'ok' : 'neutral';
+
     var head =
-      '<div class="pr-head">' +
+      '<div class="pr-top">' +
+        '<div class="pr-shot">' +
+          '<img src="' + streetImg(r, 400, 260) + '" alt="' + esc(r.address) + '" loading="lazy" ' +
+            'onerror="this.parentNode.classList.add(\'noimg\')">' +
+          (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
+                             : '<span class="pr-kind">Watching</span>') +
+        '</div>' +
         '<div class="pr-id">' +
           '<h3>' + esc(r.address) + '</h3>' +
           '<div class="pr-sub">' + esc(r.town || '') +
             (r.county ? ', ' + esc(r.county) + ' County' : '') +
             (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
-            '  \u00b7  <span class="vf ' + v.cls + '">' + v.label + '</span>' +
+          '</div>' +
+          '<div class="pr-tags">' +
+            '<span class="tg ' + v.cls + '"><i class="fas ' +
+              (r.verify_level === 'mail' ? 'fa-circle-check' : 'fa-circle-half-stroke') + '"></i>' +
+              v.label + '</span>' +
+            (c && c.hasCase
+              ? '<span class="tg hot"><i class="fas fa-scale-unbalanced-flip"></i>Over the limit by ' +
+                money(c.over) + '</span>'
+              : c && c.testable
+              ? '<span class="tg ok"><i class="fas fa-circle-check"></i>Within Chapter 123</span>'
+              : '') +
           '</div>' +
         '</div>' +
-        (c && c.hasCase ? '<div class="pr-flag">Over the limit by ' + money(c.over) + '</div>' : '') +
       '</div>';
 
     var line = c
@@ -804,7 +838,7 @@
         '<a href="/property/?address=' + q + '">Open it</a> and the analysis saves back here.</p>';
     }
 
-    return '<article class="pr">' + head + line + figs + appeal +
+    return '<article class="pr ' + tone + '">' + head + line + figs + appeal +
       '<div class="pr-acts">' +
         '<a href="/property/?address=' + q + '">Open full record</a>' +
         (r.kind === 'home' && r.verify_level !== 'mail'
