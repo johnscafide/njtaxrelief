@@ -2194,10 +2194,233 @@
   }
 
   // ══════════════════════════════════════════════
+  // NEIGHBORHOOD VIEW
+  //
+  // After a lookup, the page behind the panel becomes a map with the
+  // surrounding properties listed beside it. Closing the panel drops you back
+  // here rather than at an empty search box, so comparing four houses on a
+  // street is four clicks instead of four searches.
+  //
+  // These are NOT listings. There is no free feed of what is for sale in New
+  // Jersey. Every card here is a parcel from the state assessment file, which
+  // is the right data for comps anyway: it covers every house, not only the
+  // ones currently on the market.
+  // ══════════════════════════════════════════════
+  var hoodMap = null, hoodItems = [], hoodMarkers = {}, hoodSort = 'near';
+
+  function hoodStreet(a, w, h) {
+    var loc = [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
+    return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
+           '&location=' + encodeURIComponent(loc) + '&fov=78&pitch=6&source=outdoor&key=' + GMAPS_KEY;
+  }
+
+  // Every residential parcel around the subject, with its public figures.
+  function hoodParcels(lat, lon, meters) {
+    var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
+    var p = new URLSearchParams({
+      geometry: JSON.stringify({ xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
+                                 spatialReference: { wkid: 4326 } }),
+      geometryType: 'esriGeometryEnvelope', inSR: '4326', outSR: '4326',
+      spatialRel: 'esriSpatialRelIntersects',
+      where: "PROP_CLASS = '2' AND NET_VALUE > 10000",
+      outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,ZIP5,PCLBLOCK,PCLLOT,NET_VALUE,LAST_YR_TX,' +
+                 'YR_CONSTR,CALC_ACRE,SALE_PRICE,DEED_DATE',
+      returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '150', f: 'json'
+    });
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (!d.features) return [];
+        return d.features.map(function (f) {
+          var a = f.attributes, c = f.centroid || {};
+          var dist = null;
+          if (c.x != null) {
+            var dx = (c.x - lon) * 111320 * Math.cos(lat * Math.PI / 180);
+            var dy = (c.y - lat) * 111320;
+            dist = Math.sqrt(dx * dx + dy * dy);
+          }
+          var av = +a.NET_VALUE || 0, tax = +a.LAST_YR_TX || 0;
+          return {
+            pin: a.PAMS_PIN, addr: a.PROP_LOC || '', town: a.MUN_NAME || '',
+            county: a.COUNTY || '', zip: a.ZIP5 || '',
+            block: a.PCLBLOCK, lot: a.PCLLOT,
+            assessed: av, tax: tax, built: +a.YR_CONSTR || null,
+            acres: +a.CALC_ACRE || null, sale: +a.SALE_PRICE || 0,
+            saleYear: deedYear(a.DEED_DATE),
+            lat: c.y, lon: c.x, dist: dist,
+            rate: av ? (tax / av) * 100 : null
+          };
+        }).filter(function (x) { return x.addr && x.dist != null && x.dist < 2500; });
+      }).catch(function () { return []; });
+  }
+
+  // Market value from the SR1A verified ratio, so the cards show what these
+  // homes are actually worth rather than only what they are assessed at.
+  function hoodValue(x) {
+    if (!sr1aTable) return null;
+    var d = String(x.pin || '').slice(0, 4);
+    var row = d && sr1aTable[d];
+    if (!row || !row.ratio || !x.assessed) return null;
+    return x.assessed / row.ratio;
+  }
+
+  window.plShowHood = function () {
+    var w = el('pl-hood');
+    if (!w) return;
+    w.classList.add('on');
+    document.body.classList.add('hood-on');
+    setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 60);
+  };
+  window.plHideHood = function () {
+    var w = el('pl-hood');
+    if (w) w.classList.remove('on');
+    document.body.classList.remove('hood-on');
+  };
+
+  function buildHood(centre, list) {
+    hoodItems = list;
+    var w = el('pl-hood');
+    if (!w) return;
+
+    w.innerHTML =
+      '<div class="hd-bar">' +
+        '<button class="hd-back" onclick="plHideHood()"><i class="fas fa-chevron-left"></i> New search</button>' +
+        '<div class="hd-where"><b>' + esc(centre.town) + '</b>' +
+          '<span>' + list.length + ' nearby properties from the state assessment file</span></div>' +
+        '<select class="hd-sort" onchange="plHoodSort(this.value)">' +
+          '<option value="near">Closest first</option>' +
+          '<option value="valHigh">Highest value</option>' +
+          '<option value="valLow">Lowest value</option>' +
+          '<option value="taxHigh">Highest tax</option>' +
+          '<option value="taxLow">Lowest tax</option>' +
+          '<option value="rateHigh">Highest effective rate</option>' +
+          '<option value="recent">Most recently sold</option>' +
+        '</select>' +
+      '</div>' +
+      '<div class="hd-split">' +
+        '<div class="hd-map"><div id="hd-map"></div></div>' +
+        '<div class="hd-list" id="hd-list"></div>' +
+      '</div>';
+
+    drawHoodMap(centre, list);
+    paintHoodList();
+  }
+
+  window.plHoodSort = function (k) { hoodSort = k; paintHoodList(); };
+
+  function sortedHood() {
+    var l = hoodItems.slice();
+    var fns = {
+      near:     function (a, b) { return a.dist - b.dist; },
+      valHigh:  function (a, b) { return (hoodValue(b) || b.assessed) - (hoodValue(a) || a.assessed); },
+      valLow:   function (a, b) { return (hoodValue(a) || a.assessed) - (hoodValue(b) || b.assessed); },
+      taxHigh:  function (a, b) { return b.tax - a.tax; },
+      taxLow:   function (a, b) { return a.tax - b.tax; },
+      rateHigh: function (a, b) { return (b.rate || 0) - (a.rate || 0); },
+      recent:   function (a, b) { return (b.saleYear || 0) - (a.saleYear || 0); }
+    };
+    return l.sort(fns[hoodSort] || fns.near);
+  }
+
+  function paintHoodList() {
+    var host = el('hd-list');
+    if (!host) return;
+    var list = sortedHood();
+
+    host.innerHTML = list.map(function (x, i) {
+      var v = hoodValue(x);
+      var isSubject = current && x.pin === current.pin;
+      return '<article class="hd-card' + (isSubject ? ' me' : '') + '" data-pin="' + esc(x.pin) + '" ' +
+        'onmouseenter="plHoodHi(\'' + esc(x.pin) + '\',1)" onmouseleave="plHoodHi(\'' + esc(x.pin) + '\',0)" ' +
+        'onclick="plHoodOpen(' + i + ')">' +
+        '<div class="hd-shot">' +
+          '<img src="' + hoodStreet(x, 420, 260) + '" alt="" loading="lazy" ' +
+            'onerror="this.parentNode.classList.add(\'noimg\')">' +
+          (isSubject ? '<span class="hd-badge me">The one you searched</span>' : '') +
+          (x.saleYear && (new Date().getFullYear() - x.saleYear) <= 1
+            ? '<span class="hd-badge sold">Sold ' + x.saleYear + '</span>' : '') +
+        '</div>' +
+        '<div class="hd-body">' +
+          '<div class="hd-val">' + (v ? money(Math.round(v / 1000) * 1000) : money(x.assessed)) +
+            (v ? '' : '<em>assessed</em>') + '</div>' +
+          '<div class="hd-meta">' +
+            (x.built ? '<span>' + x.built + '</span>' : '') +
+            (x.acres ? '<span>' + Math.round(x.acres * 43560).toLocaleString() + ' sq ft lot</span>' : '') +
+            '<span>' + money(x.tax) + ' tax</span>' +
+          '</div>' +
+          '<div class="hd-addr">' + esc(x.addr) + '</div>' +
+          '<div class="hd-sub">' + esc(x.town) + (x.zip ? ' ' + esc(x.zip) : '') +
+            '  \u00b7  ' + Math.round(x.dist) + 'm away</div>' +
+        '</div>' +
+      '</article>';
+    }).join('') +
+    '<p class="hd-note">These are parcels from New Jersey\u2019s public assessment file, not listings. ' +
+    'There is no free feed of what is for sale in this state. Every house in the neighborhood appears here, ' +
+    'which is what you want when you are comparing values. For what is actually on the market, ' +
+    '<a href="' + IDX_URL + '" target="_blank" rel="noopener">search the MLS</a>.</p>';
+  }
+
+  window.plHoodHi = function (pin, on) {
+    var m = hoodMarkers[pin];
+    if (!m) return;
+    try {
+      m.setStyle({ radius: on ? 11 : 7, weight: on ? 3 : 2,
+                   fillColor: on ? '#b8972a' : (m._isMe ? '#b8972a' : '#0e2248') });
+      if (on) m.bringToFront();
+    } catch (e) {}
+  };
+
+  window.plHoodOpen = function (i) {
+    var x = sortedHood()[i];
+    if (!x) return;
+    el('pl-addr').value = x.addr + ', ' + x.town + ', NJ ' + (x.zip || '');
+    window.plLookup();
+  };
+
+  function drawHoodMap(centre, list) {
+    if (typeof L === 'undefined' || !el('hd-map')) return;
+    try {
+      if (hoodMap) { hoodMap.remove(); hoodMap = null; }
+      hoodMarkers = {};
+      hoodMap = L.map('hd-map', { zoomControl: true, scrollWheelZoom: true })
+                 .setView([centre.lat, centre.lon], 16);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+        maxZoom: 19, subdomains: 'abcd',
+        attribution: '&copy; OpenStreetMap, &copy; CARTO'
+      }).addTo(hoodMap);
+
+      var pts = [];
+      list.forEach(function (x) {
+        if (x.lat == null) return;
+        var me = current && x.pin === current.pin;
+        var mk = L.circleMarker([x.lat, x.lon], {
+          radius: me ? 10 : 7, color: '#fff', weight: 2,
+          fillColor: me ? '#b8972a' : '#0e2248', fillOpacity: 1
+        }).addTo(hoodMap);
+        mk._isMe = me;
+        var v = hoodValue(x);
+        mk.bindTooltip('<b>' + esc(x.addr) + '</b><br>' +
+          (v ? money(Math.round(v / 1000) * 1000) : money(x.assessed) + ' assessed') +
+          '<br>' + money(x.tax) + ' tax', { direction: 'top' });
+        mk.on('click', function () {
+          el('pl-addr').value = x.addr + ', ' + x.town + ', NJ ' + (x.zip || '');
+          window.plLookup();
+        });
+        hoodMarkers[x.pin] = mk;
+        pts.push([x.lat, x.lon]);
+      });
+      if (pts.length > 1) hoodMap.fitBounds(pts, { padding: [40, 40], maxZoom: 17 });
+      setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 120);
+    } catch (e) { console.warn('[watchdog] hood map:', e); }
+  }
+
+  // ══════════════════════════════════════════════
   // MODAL
   // ══════════════════════════════════════════════
   window.plCloseModal = function () {
     var sn = el('secnav'); if (sn) sn.classList.remove('on');
+    // The neighborhood view stays behind the panel. Closing returns you to the
+    // map you were already looking at instead of an empty search box.
+    setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 260);
     el('plm-backdrop').classList.remove('open');
     el('plm').classList.remove('open');
     document.body.classList.remove('plm-locked');
@@ -2524,6 +2747,20 @@
 
     neighborhoodStats(geo.lat, geo.lon, 500).then(function (h) {
       paintHood(h, assessed, tax);
+    });
+
+    // Build the map view behind the panel so closing it lands somewhere useful.
+    hoodParcels(geo.lat, geo.lon, 900).then(function (list) {
+      if (!list.length) return;
+      // make sure the searched property is in the list even if the envelope missed it
+      if (!list.some(function (x) { return x.pin === current.pin; })) {
+        list.unshift({ pin: current.pin, addr: current.address, town: current.town,
+          county: current.county, zip: current.zip, block: current.block, lot: current.lot,
+          assessed: assessed, tax: tax, built: +p.YR_CONSTR || null, acres: acres,
+          sale: sale, saleYear: dy, lat: geo.lat, lon: geo.lon, dist: 0, rate: rate });
+      }
+      buildHood({ lat: geo.lat, lon: geo.lon, town: current.town }, list);
+      plShowHood();
     });
 
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
