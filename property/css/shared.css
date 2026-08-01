@@ -302,9 +302,8 @@ body.plm-locked { overflow: hidden; }
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
 }
 .plm-est-range {
-  font-size: 14px; color: #cdd9ec; font-weight: 600;
-  display: inline-block; background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.16);
-  padding: 6px 14px; border-radius: 99px;
+  font-size: 11px; color: #cdd9ec; margin-top: -2px;
+  display: inline-block;
 }
 .plm-est-lbl { font-size: 13px; letter-spacing: .13em; }
 .plm-est-lbl i { font-size: 15px; }
@@ -742,7 +741,7 @@ body.plm-locked { overflow: hidden; }
 .plm-conf.lo { background: rgba(255,255,255,.14); color: #cdd9ec; }
 .plm-assessed {
   display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap;
-  padding: 14px 18px; background: #f4f6fa; border-radius: 11px; border-left: 4px solid #8a93a6;
+  padding: 14px 18px; background: #f4f6fa; border-radius: 11px;
 }
 .plm-assessed-n { font-size: 24px; font-weight: 800; color: #3d4759; letter-spacing: -.02em; }
 .plm-assessed-l { font-size: 13px; color: #5a6070; font-weight: 600; }
