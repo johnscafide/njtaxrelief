@@ -1288,67 +1288,324 @@
   };
 
   // ── profile ──
-  function sel(id, label, opts, val) {
-    return '<div class="db-field"><label>' + label + '</label><select id="' + id + '">' +
-      '<option value="">Prefer not to say</option>' +
+  // ══════════════════════════════════════════════
+  // PROFILE
+  //
+  // Built as a set of collapsible groups rather than one long form, because a
+  // wall of forty inputs gets abandoned. Each group states plainly what the
+  // answers unlock, since people fill in fields when they can see the point
+  // and skip them when they cannot.
+  //
+  // Income is a real number, not a band. Every New Jersey benefit that matters
+  // turns on a threshold, and a band cannot answer "do I qualify" when the
+  // cutoff sits inside it.
+  // ══════════════════════════════════════════════
+
+  var PF_OPEN = { you: true };
+
+  function pfCompletion() {
+    var fields = ['display_name','photo_url','city','zip','role','household_size','filing_status',
+      'birth_year','gross_income','income_year','years_in_home','properties_owned','move_timeline',
+      'mortgage_balance','mortgage_rate','home_insurance','credit_band','contact_pref','phone',
+      'claims_anchor','is_veteran','goals'];
+    var have = fields.filter(function (k) {
+      var v = profile[k];
+      return v !== null && v !== undefined && v !== '' && v !== false;
+    }).length;
+    return Math.round(have / fields.length * 100);
+  }
+
+  function grp(key, title, why, body) {
+    var open = !!PF_OPEN[key];
+    return '<section class="pg' + (open ? ' open' : '') + '" id="pg-' + key + '">' +
+      '<button class="pg-h" onclick="pfToggle(\'' + key + '\')">' +
+        '<span class="pg-t">' + title + '</span>' +
+        '<span class="pg-w">' + why + '</span>' +
+        '<i class="fas fa-chevron-down"></i>' +
+      '</button>' +
+      '<div class="pg-b">' + body + '</div>' +
+    '</section>';
+  }
+
+  window.pfToggle = function (k) {
+    PF_OPEN[k] = !PF_OPEN[k];
+    var e = el('pg-' + k);
+    if (e) e.classList.toggle('open', PF_OPEN[k]);
+  };
+
+  function txt(id, label, ph, type, hint) {
+    var v = profile[id];
+    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
+      '<input id="pf-' + id + '" type="' + (type || 'text') + '" placeholder="' + (ph || '') + '"' +
+      (type === 'number' ? ' inputmode="numeric"' : '') +
+      ' value="' + esc(v == null ? '' : v) + '">' +
+      (hint ? '<em>' + hint + '</em>' : '') + '</div>';
+  }
+
+  function mny(id, label, ph, hint) {
+    var v = profile[id];
+    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
+      '<div class="pf-money"><span>$</span><input id="pf-' + id + '" type="text" inputmode="numeric" ' +
+      'placeholder="' + (ph || '') + '" value="' + (v == null || v === '' ? '' : (+v).toLocaleString()) + '" ' +
+      'oninput="pfNum(this)"></div>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
+  }
+
+  window.pfNum = function (e) {
+    var v = e.value.replace(/[^0-9]/g, '');
+    e.value = v ? parseInt(v, 10).toLocaleString() : '';
+  };
+
+  function pick(id, label, opts, hint) {
+    var v = profile[id];
+    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
+      '<select id="pf-' + id + '"><option value="">Prefer not to say</option>' +
       opts.map(function (o) {
-        return '<option value="' + o[0] + '"' + (val === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
-      }).join('') + '</select></div>';
+        return '<option value="' + o[0] + '"' + (v === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
+      }).join('') + '</select>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
+  }
+
+  function yn(id, label) {
+    return '<label class="pf-yn"><input type="checkbox" id="pf-' + id + '"' +
+      (profile[id] ? ' checked' : '') + '><span>' + label + '</span></label>';
+  }
+
+  function multi(id, label, opts, hint) {
+    var cur = profile[id] || [];
+    return '<div class="pf-f wide"><label>' + label + '</label><div class="pf-chips">' +
+      opts.map(function (o) {
+        var on = cur.indexOf(o[0]) > -1;
+        return '<label class="chip' + (on ? ' on' : '') + '">' +
+          '<input type="checkbox" data-multi="' + id + '" value="' + o[0] + '"' + (on ? ' checked' : '') +
+          ' onchange="this.parentNode.classList.toggle(\'on\', this.checked)">' + o[1] + '</label>';
+      }).join('') + '</div>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
+  }
+
+  // A professional the user works with. Stored as one JSON object per role.
+  function pro(id, label, hint) {
+    var v = profile[id] || {};
+    return '<div class="pf-pro"><div class="pf-pro-h">' + label + (hint ? '<em>' + hint + '</em>' : '') + '</div>' +
+      '<div class="pf-pro-g">' +
+        '<input id="pf-' + id + '-name"  placeholder="Name"    value="' + esc(v.name || '') + '">' +
+        '<input id="pf-' + id + '-co"    placeholder="Company" value="' + esc(v.company || '') + '">' +
+        '<input id="pf-' + id + '-phone" placeholder="Phone"   value="' + esc(v.phone || '') + '">' +
+        '<input id="pf-' + id + '-email" placeholder="Email"   value="' + esc(v.email || '') + '">' +
+      '</div></div>';
   }
 
   function profileForm() {
-    var ints = profile.interests || [];
-    function chk(v, l) {
-      return '<label class="db-chk"><input type="checkbox" value="' + v + '"' +
-        (ints.indexOf(v) > -1 ? ' checked' : '') + '> ' + l + '</label>';
-    }
-    return '<div class="db-card">' +
-      '<h3 style="margin:0 0 6px;font-size:18px;color:#0e2248;">About you</h3>' +
-      '<p style="font-size:14px;color:#5a6070;line-height:1.65;margin:0 0 18px;">' +
-        'All optional, and it only shapes what I send you. I do not sell or share any of this, ' +
-        'and you can clear it any time.</p>' +
-      '<div class="db-field"><label>Phone, if you would rather I call</label>' +
-        '<input id="pf-phone" type="tel" value="' + esc(profile.phone || '') + '" placeholder="Optional"></div>' +
-      sel('pf-owner', 'Which are you?', [['own','I own my home'],['rent','I rent'],
-          ['looking','Looking to buy'],['agent','I am an agent or investor']], profile.owner_status) +
-      sel('pf-age', 'Age band, this decides which rebates apply to you',
-          [['under35','Under 35'],['35to49','35 to 49'],['50to64','50 to 64'],['65plus','65 or older']], profile.age_band) +
-      sel('pf-house', 'People in the household',
-          [['1','Just me'],['2','Two'],['3','Three'],['4','Four'],['5','Five or more']],
-          profile.household_size ? String(profile.household_size) : '') +
-      sel('pf-move', 'Thinking about moving?',
-          [['asap','As soon as possible'],['3mo','Within 3 months'],['6mo','Within 6 months'],
-           ['12mo','Within a year'],['none','Not at all']], profile.move_timeline) +
-      '<div class="db-field"><label>What would you like help with?</label>' +
-        '<div class="db-chks" id="pf-ints">' +
-          chk('appeal', 'Lowering my property tax') +
-          chk('rebates', 'ANCHOR and Stay NJ rebates') +
-          chk('selling', 'Selling my home') +
-          chk('buying', 'Buying a home') +
-        '</div></div>' +
-      '<label class="db-chk" style="margin:6px 0 16px;"><input type="checkbox" id="pf-optin"' +
-        (profile.marketing_optin ? ' checked' : '') + '> Send me occasional updates about deadlines and rebates I qualify for</label>' +
-      '<button class="db-btn" onclick="dbSaveProfile()">Save my profile</button>' +
+    var pct = pfCompletion();
+    var photo = profile.photo_url || meta().avatar_url || meta().picture || '';
+
+    return '<div class="pf">' +
+
+      '<div class="pf-top">' +
+        '<div class="pf-photo">' +
+          (photo ? '<img src="' + esc(photo) + '" alt="" onerror="this.style.display=\'none\'">'
+                 : '<div class="pf-noimg">' + esc((name() || '?').charAt(0).toUpperCase()) + '</div>') +
+        '</div>' +
+        '<div class="pf-topb">' +
+          '<div class="pf-meter"><i style="width:' + pct + '%"></i></div>' +
+          '<div class="pf-pct"><b>' + pct + '% complete</b>' +
+            (pct < 100 ? ' \u00b7 the more you fill in, the more of this we can answer for you' : ' \u00b7 everything filled') +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+
+      grp('you', 'You', 'Name, photo and where you are',
+        '<div class="pf-grid">' +
+          txt('display_name', 'Display name', 'How you want to be addressed') +
+          txt('phone', 'Phone', 'Optional', 'tel') +
+          txt('city', 'Town you live in', 'Williamstown') +
+          txt('zip', 'Zip', '08094') +
+          txt('photo_url', 'Photo URL', 'Paste a link, or leave it to use your sign in photo', 'url',
+              'Direct image link. Upload arrives once storage is switched on.') +
+          txt('headline', 'One line about you', 'Homeowner since 2014, thinking about downsizing') +
+        '</div>' +
+        multi('roles', 'What are you, in the property market?', [
+          ['owner','Homeowner'], ['renter','Renter'], ['buyer','Buying'], ['seller','Selling'],
+          ['investor','Investor'], ['landlord','Landlord'], ['agent','Real estate agent'],
+          ['attorney','Attorney'], ['lender','Lender'], ['appraiser','Appraiser']
+        ], 'Pick as many as fit. Most people are more than one.')) +
+
+      grp('house', 'Your household', 'Decides which New Jersey benefits you qualify for',
+        '<div class="pf-grid">' +
+          txt('household_size', 'People in the household', '3', 'number') +
+          txt('dependents', 'Dependents claimed', '1', 'number') +
+          pick('filing_status', 'Filing status', [
+            ['single','Single'], ['married_joint','Married, filing jointly'],
+            ['married_separate','Married, filing separately'], ['head','Head of household'],
+            ['widow','Qualifying widow or widower']
+          ]) +
+          txt('birth_year', 'Your birth year', '1968', 'number', 'Stay NJ and the Senior Freeze start at 65') +
+          txt('spouse_birth_year', 'Spouse birth year', 'Optional', 'number') +
+          txt('years_in_home', 'Years in your current home', '11', 'number') +
+        '</div>') +
+
+      grp('money', 'Income and housing costs',
+        'Exact figures, because every benefit here turns on a threshold',
+        '<p class="pf-say">New Jersey\u2019s programs cut off at specific numbers. ANCHOR changes at $150,000. ' +
+        'Stay NJ stops at $500,000. The Senior Freeze has its own limit that moves each year. A range cannot ' +
+        'tell you which side of a line you are on, so this asks for the real figure.</p>' +
+        '<div class="pf-grid">' +
+          mny('gross_income', 'Gross annual income', '112,000', 'Total household, before tax') +
+          txt('income_year', 'For tax year', '2025', 'number') +
+          mny('nj_taxable_income', 'NJ taxable income', 'Optional', 'Line 29 of your NJ-1040, if you have it') +
+          mny('mortgage_balance', 'Mortgage balance', '184,000') +
+          txt('mortgage_rate', 'Rate %', '6.25', 'number') +
+          mny('mortgage_payment', 'Monthly payment', '1,940', 'Principal and interest') +
+          mny('escrow_monthly', 'Monthly escrow', '620') +
+          mny('home_insurance', 'Annual home insurance', '1,450') +
+          mny('heloc_balance', 'HELOC or second lien', 'Optional') +
+          pick('credit_band', 'Credit range', [
+            ['excellent','Excellent, 760 and up'], ['good','Good, 700 to 759'],
+            ['fair','Fair, 640 to 699'], ['building','Building, under 640']
+          ], 'Never checked, never pulled. Self reported only.') +
+        '</div>') +
+
+      grp('benefits', 'What you already claim', 'So we stop suggesting things you have',
+        '<div class="pf-yns">' +
+          yn('claims_anchor', 'ANCHOR') +
+          yn('claims_stay_nj', 'Stay NJ') +
+          yn('claims_senior_freeze', 'Senior Freeze') +
+          yn('claims_senior_deduction', '$250 senior deduction') +
+          yn('claims_vet_deduction', '$250 veteran deduction') +
+          yn('is_veteran', 'I am a veteran') +
+          yn('filed_appeal_before', 'I have filed a tax appeal before') +
+        '</div>' +
+        '<div class="pf-grid">' +
+          txt('appeal_year', 'Year of that appeal', '2023', 'number') +
+          pick('appeal_outcome', 'How it went', [
+            ['won','Assessment reduced'], ['settled','Settled before hearing'],
+            ['lost','No reduction'], ['withdrew','Withdrew it']
+          ]) +
+        '</div>') +
+
+      grp('plans', 'What you are planning', 'Shapes what gets flagged for you',
+        '<div class="pf-grid">' +
+          pick('move_timeline', 'Thinking of selling', [
+            ['asap','As soon as possible'], ['3mo','Within 3 months'], ['6mo','Within 6 months'],
+            ['12mo','Within a year'], ['2yr','One to two years'], ['none','Not at all']
+          ]) +
+          pick('buy_timeline', 'Thinking of buying', [
+            ['asap','As soon as possible'], ['3mo','Within 3 months'], ['6mo','Within 6 months'],
+            ['12mo','Within a year'], ['none','Not at all']
+          ]) +
+          mny('price_target_low', 'Budget from', '350,000') +
+          mny('price_target_high', 'Budget to', '475,000') +
+          txt('properties_owned', 'Properties you own', '1', 'number') +
+        '</div>' +
+        '<div class="pf-f wide"><label for="pf-target_towns">Towns you are watching</label>' +
+        '<input id="pf-target_towns" placeholder="Washington Twp, Deptford, Mantua" value="' +
+        esc((profile.target_towns || []).join(', ')) + '"><em>Comma separated. We will flag revaluations and ' +
+        'rate changes in these.</em></div>' +
+        '<div class="pf-f wide"><label for="pf-goals">What are you actually trying to do?</label>' +
+        '<textarea id="pf-goals" rows="3" placeholder="Cut the tax bill, then downsize in about two years once ' +
+        'the youngest finishes school.">' + esc(profile.goals || '') + '</textarea></div>') +
+
+      grp('pros', 'Your people', 'Keep them handy, and we will not suggest replacements',
+        pro('pro_agent', 'Real estate agent') +
+        pro('pro_lender', 'Lender or mortgage broker') +
+        pro('pro_attorney', 'Attorney') +
+        pro('pro_accountant', 'Accountant or tax preparer') +
+        pro('pro_insurance', 'Insurance agent')) +
+
+      grp('reach', 'How to reach you', 'And what is worth interrupting you for',
+        '<div class="pf-grid">' +
+          pick('contact_pref', 'Preferred contact', [
+            ['email','Email'], ['phone','Phone call'], ['text','Text message'], ['none','Do not contact me']
+          ]) +
+          pick('best_time', 'Best time', [
+            ['morning','Morning'], ['midday','Midday'], ['evening','Evening'], ['weekend','Weekends']
+          ]) +
+        '</div>' +
+        '<div class="pf-yns">' +
+          yn('notify_deadline', 'Appeal deadlines') +
+          yn('notify_reval', 'My town announces a revaluation') +
+          yn('notify_value', 'My assessment or value changes') +
+          yn('notify_market', 'Monthly market note for my towns') +
+        '</div>') +
+
+      '<div class="pf-save">' +
+        '<button class="db-btn" onclick="dbSaveProfile()">Save profile</button>' +
+        '<span id="pf-saved"></span>' +
+      '</div>' +
+
+      '<p class="pf-priv"><i class="fas fa-lock"></i> Everything here is visible only to your account. ' +
+      'It is never sold, never shared, and never shown to other users. Every field is optional and you can ' +
+      'clear any of them at any time.</p>' +
     '</div>';
   }
 
+  // ══════════════════════════════════════════════
+  // SAVE
+  // ══════════════════════════════════════════════
+  function gv(id) { var e = el('pf-' + id); return e ? String(e.value || '').trim() : ''; }
+  function gn(id) { var v = gv(id).replace(/[^0-9.\-]/g, ''); return v === '' ? null : Math.round(+v); }
+  function gf(id) { var v = gv(id).replace(/[^0-9.\-]/g, ''); return v === '' ? null : +v; }
+  function gb(id) { var e = el('pf-' + id); return e ? !!e.checked : null; }
+  function gs(id) { return gv(id) || null; }
+  function gpro(id) {
+    var o = { name: gv(id + '-name'), company: gv(id + '-co'),
+              phone: gv(id + '-phone'), email: gv(id + '-email') };
+    return (o.name || o.company || o.phone || o.email) ? o : null;
+  }
+  function gmulti(id) {
+    var out = [];
+    document.querySelectorAll('input[data-multi="' + id + '"]:checked')
+      .forEach(function (c) { out.push(c.value); });
+    return out.length ? out : null;
+  }
+
   window.dbSaveProfile = function () {
-    var ints = [];
-    document.querySelectorAll('#pf-ints input:checked').forEach(function (c) { ints.push(c.value); });
-    var hs = el('pf-house').value;
-    sb.from('profiles').update({
-      phone: el('pf-phone').value.trim() || null,
-      owner_status: el('pf-owner').value || null,
-      age_band: el('pf-age').value || null,
-      household_size: hs ? parseInt(hs, 10) : null,
-      move_timeline: el('pf-move').value || null,
-      interests: ints.length ? ints : null,
-      marketing_optin: el('pf-optin').checked,
+    var towns = gv('target_towns').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
+    var patch = {
+      display_name: gs('display_name'), photo_url: gs('photo_url'), headline: gs('headline'),
+      city: gs('city'), zip: gs('zip'), phone: gs('phone'),
+      roles: gmulti('roles'),
+      household_size: gn('household_size'), dependents: gn('dependents'),
+      filing_status: gs('filing_status'), birth_year: gn('birth_year'),
+      spouse_birth_year: gn('spouse_birth_year'), years_in_home: gn('years_in_home'),
+      gross_income: gn('gross_income'), income_year: gn('income_year'),
+      nj_taxable_income: gn('nj_taxable_income'),
+      mortgage_balance: gn('mortgage_balance'), mortgage_rate: gf('mortgage_rate'),
+      mortgage_payment: gf('mortgage_payment'), escrow_monthly: gf('escrow_monthly'),
+      home_insurance: gf('home_insurance'), heloc_balance: gn('heloc_balance'),
+      credit_band: gs('credit_band'),
+      claims_anchor: gb('claims_anchor'), claims_stay_nj: gb('claims_stay_nj'),
+      claims_senior_freeze: gb('claims_senior_freeze'),
+      claims_senior_deduction: gb('claims_senior_deduction'),
+      claims_vet_deduction: gb('claims_vet_deduction'), is_veteran: gb('is_veteran'),
+      filed_appeal_before: gb('filed_appeal_before'), appeal_year: gn('appeal_year'),
+      appeal_outcome: gs('appeal_outcome'),
+      move_timeline: gs('move_timeline'), buy_timeline: gs('buy_timeline'),
+      price_target_low: gn('price_target_low'), price_target_high: gn('price_target_high'),
+      properties_owned: gn('properties_owned'),
+      target_towns: towns.length ? towns : null, goals: gs('goals'),
+      pro_agent: gpro('pro_agent'), pro_lender: gpro('pro_lender'),
+      pro_attorney: gpro('pro_attorney'), pro_accountant: gpro('pro_accountant'),
+      pro_insurance: gpro('pro_insurance'),
+      contact_pref: gs('contact_pref'), best_time: gs('best_time'),
+      notify_deadline: gb('notify_deadline'), notify_reval: gb('notify_reval'),
+      notify_value: gb('notify_value'), notify_market: gb('notify_market'),
       profile_complete: true
-    }).eq('id', plUser.id).then(function (r) {
-      if (r.error) { toast('Could not save'); return; }
-      toast('Profile saved');
-      paint();
+    };
+    // derive the age band so existing tools keep working
+    if (patch.birth_year) {
+      var age = new Date().getFullYear() - patch.birth_year;
+      patch.age_band = age >= 65 ? '65plus' : age >= 50 ? '50to64' : age >= 35 ? '35to49' : 'under35';
+    }
+    Object.keys(patch).forEach(function (k) { profile[k] = patch[k]; });
+    patch.profile_pct = pfCompletion();
+
+    sb.from('profiles').update(patch).eq('id', plUser.id).then(function (r) {
+      var s = el('pf-saved');
+      if (r.error) {
+        if (s) s.innerHTML = '<span class="bad">Could not save. ' + esc(r.error.message || '') + '</span>';
+        return;
+      }
+      if (s) s.innerHTML = '<span class="ok"><i class="fas fa-circle-check"></i> Saved</span>';
+      el('db-profile-body').innerHTML = profileForm();
+      render();
     });
   };
 
