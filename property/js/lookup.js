@@ -2208,6 +2208,68 @@
   // ══════════════════════════════════════════════
   var hoodMap = null, hoodItems = [], hoodMarkers = {}, hoodSort = 'near';
 
+  // ══════════════════════════════════════════════
+  // BASEMAP STYLES
+  // All free, no API key, no attribution beyond the credit line. Positron is
+  // the default because a pale map lets the price markers carry the colour;
+  // a busy basemap and coloured pins fight each other.
+  // ══════════════════════════════════════════════
+  var HOOD_STYLES = {
+    light: { name: 'Light',
+      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
+      sub: 'abcd', attr: '&copy; OpenStreetMap, &copy; CARTO', max: 20 },
+    streets: { name: 'Streets',
+      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+      sub: 'abcd', attr: '&copy; OpenStreetMap, &copy; CARTO', max: 20 },
+    satellite: { name: 'Satellite',
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      sub: '', attr: 'Imagery &copy; Esri', max: 19 },
+    dark: { name: 'Dark',
+      url: 'https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png',
+      sub: 'abcd', attr: '&copy; OpenStreetMap, &copy; CARTO', max: 20 }
+  };
+  var hoodStyle = 'light', hoodTiles = null;
+
+  window.plHoodStyle = function (k) {
+    if (!HOOD_STYLES[k] || !hoodMap) return;
+    hoodStyle = k;
+    try { localStorage.setItem('pl_mapstyle', k); } catch (e) {}
+    if (hoodTiles) hoodMap.removeLayer(hoodTiles);
+    var st = HOOD_STYLES[k];
+    hoodTiles = L.tileLayer(st.url, { maxZoom: st.max, subdomains: st.sub, attribution: st.attr });
+    hoodTiles.addTo(hoodMap);
+    hoodTiles.bringToBack();
+    document.querySelectorAll('.hd-style button').forEach(function (b) {
+      b.classList.toggle('on', b.getAttribute('data-s') === k);
+    });
+    document.body.classList.toggle('map-dark', k === 'dark' || k === 'satellite');
+  };
+
+  function styleSwitch() {
+    return '<div class="hd-style">' +
+      Object.keys(HOOD_STYLES).map(function (k) {
+        return '<button data-s="' + k + '"' + (k === hoodStyle ? ' class="on"' : '') +
+          ' onclick="plHoodStyle(\'' + k + '\')">' + HOOD_STYLES[k].name + '</button>';
+      }).join('') + '</div>';
+  }
+
+  // A price pill with the watchdog mark, rather than a dot. The number is the
+  // annual tax, because that is what this site is actually about and it is the
+  // figure people compare between houses.
+  function hoodPin(x, me) {
+    var v = x.tax ? '$' + (x.tax >= 10000 ? Math.round(x.tax / 1000) + 'k'
+                                          : (Math.round(x.tax / 100) / 10) + 'k') : '-';
+    return L.divIcon({
+      className: 'hd-pin-wrap',
+      html: '<div class="hd-pin' + (me ? ' me' : '') + '">' +
+              '<svg viewBox="0 0 24 24" class="hd-dog"><path fill="currentColor" d="M4.5 3.5c0-.8.9-1.3 1.6-.9l2.2 1.4h6.4l2.2-1.4c.7-.4 1.6.1 1.6.9v3.9c1 .9 1.5 2.2 1.5 3.6v5.6c0 2.4-2 4.4-4.4 4.4H7.4C5 21 3 19 3 16.6V11c0-1.4.5-2.7 1.5-3.6V3.5Zm4 7.3c-.6 0-1 .5-1 1.1v.6c0 .6.4 1.1 1 1.1s1-.5 1-1.1v-.6c0-.6-.4-1.1-1-1.1Zm7 0c-.6 0-1 .5-1 1.1v.6c0 .6.4 1.1 1 1.1s1-.5 1-1.1v-.6c0-.6-.4-1.1-1-1.1Zm-4.7 5.1c.4.5 1 .8 1.7.8s1.3-.3 1.7-.8a.6.6 0 0 0-.9-.8c-.2.2-.5.4-.8.4s-.6-.2-.8-.4a.6.6 0 0 0-.9.8Z"/></svg>' +
+              '<span>' + v + '</span>' +
+            '</div>',
+      iconSize: [64, 26], iconAnchor: [32, 26], popupAnchor: [0, -24]
+    });
+  }
+
+
   function hoodStreet(a, w, h) {
     var loc = [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
     return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
@@ -2427,7 +2489,7 @@
     w.innerHTML =
       '<div class="hd-bar" id="hd-bar"></div>' +
       '<div class="hd-split">' +
-        '<div class="hd-map"><div id="hd-map"></div></div>' +
+        '<div class="hd-map"><div id="hd-map"></div><div class="hd-stylebox" id="hd-stylebox"></div></div>' +
         '<div class="hd-right">' +
           '<div class="hd-head">' +
             '<h2>Homes near ' + esc(centre.town) + '</h2>' +
@@ -2506,7 +2568,7 @@
     });
 
     // drop the ad in after the first row, the way a real results page does
-    if (cards.length > 4) cards.splice(4, 0, hoodAd());
+    if (cards.length > 3) cards.splice(3, 0, hoodAd());
     else cards.push(hoodAd());
 
     host.innerHTML = cards.join('') +
@@ -2517,12 +2579,11 @@
 
   window.plHoodHi = function (pin, on) {
     var m = hoodMarkers[pin];
-    if (!m) return;
-    try {
-      m.setStyle({ radius: on ? 11 : 7, weight: on ? 3 : 2,
-                   fillColor: on ? '#b8972a' : (m._isMe ? '#b8972a' : '#0e2248') });
-      if (on) m.bringToFront();
-    } catch (e) {}
+    if (!m || !m._icon) return;
+    var pill = m._icon.querySelector('.hd-pin');
+    if (pill) pill.classList.toggle('hi', !!on);
+    if (on && m.setZIndexOffset) m.setZIndexOffset(1000);
+    else if (m.setZIndexOffset) m.setZIndexOffset(0);
   };
 
   window.plHoodOpen = function (i) {
@@ -2536,27 +2597,26 @@
     if (typeof L === 'undefined' || !el('hd-map')) return;
     try {
       if (hoodMap) { hoodMap.remove(); hoodMap = null; }
-      hoodMarkers = {};
+      hoodMarkers = {}; hoodTiles = null;
+      try { hoodStyle = localStorage.getItem('pl_mapstyle') || 'light'; } catch (e) {}
+      if (!HOOD_STYLES[hoodStyle]) hoodStyle = 'light';
+
       hoodMap = L.map('hd-map', { zoomControl: true, scrollWheelZoom: true })
                  .setView([centre.lat, centre.lon], 16);
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        maxZoom: 19, subdomains: 'abcd',
-        attribution: '&copy; OpenStreetMap, &copy; CARTO'
-      }).addTo(hoodMap);
+      var st = HOOD_STYLES[hoodStyle];
+      hoodTiles = L.tileLayer(st.url, { maxZoom: st.max, subdomains: st.sub, attribution: st.attr });
+      hoodTiles.addTo(hoodMap);
+      document.body.classList.toggle('map-dark', hoodStyle === 'dark' || hoodStyle === 'satellite');
 
       var pts = [];
       list.forEach(function (x) {
         if (x.lat == null) return;
         var me = current && x.pin === current.pin;
-        var mk = L.circleMarker([x.lat, x.lon], {
-          radius: me ? 10 : 7, color: '#fff', weight: 2,
-          fillColor: me ? '#b8972a' : '#0e2248', fillOpacity: 1
-        }).addTo(hoodMap);
-        mk._isMe = me;
+        var mk = L.marker([x.lat, x.lon], { icon: hoodPin(x, me), riseOnHover: true }).addTo(hoodMap);
         var v = hoodValue(x);
         mk.bindTooltip('<b>' + esc(x.addr) + '</b><br>' +
-          (v ? money(Math.round(v / 1000) * 1000) : money(x.assessed) + ' assessed') +
-          '<br>' + money(x.tax) + ' tax', { direction: 'top' });
+          (v ? money(Math.round(v / 1000) * 1000) + ' est. value' : money(x.assessed) + ' assessed') +
+          '<br>' + money(x.tax) + ' a year in tax', { direction: 'top', offset: [0, -22] });
         mk.on('click', function () {
           el('pl-addr').value = x.addr + ', ' + x.town + ', NJ ' + (x.zip || '');
           window.plLookup();
@@ -2564,8 +2624,12 @@
         hoodMarkers[x.pin] = mk;
         pts.push([x.lat, x.lon]);
       });
-      if (pts.length > 1) hoodMap.fitBounds(pts, { padding: [50, 50], maxZoom: 18 });
+
+      if (pts.length > 1) hoodMap.fitBounds(pts, { padding: [56, 56], maxZoom: 18 });
       if (hoodMap.getZoom() < 15) hoodMap.setZoom(16);
+
+      var sw = el('hd-stylebox');
+      if (sw) sw.innerHTML = styleSwitch();
       setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 120);
     } catch (e) { console.warn('[watchdog] hood map:', e); }
   }
@@ -3588,6 +3652,7 @@
           'My properties</a>' +
         '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#wishlist">Wishlist</a>' +
         '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#saved">Saved</a>' +
+        '<a class="heroauth-link nav pro" href="/property/pro.html">Pro Hub</a>' +
         '<button class="heroauth-link" onclick="plSignOut()">Sign out</button>';
     } else {
       h.innerHTML =
