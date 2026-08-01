@@ -1,0 +1,64 @@
+/* ============================================================
+   PROFESSIONAL HUB
+   ============================================================ */
+.ph-in { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+
+.ph-hero { background: linear-gradient(150deg, #0e2248 0%, #14346e 55%, #1e4a8f 100%);
+  color: #fff; padding: 64px 0 54px; }
+.ph-tag { display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .14em; color: #f0d87a; border: 1px solid rgba(240,216,122,.4);
+  padding: 6px 14px; border-radius: 99px; margin-bottom: 22px; }
+.ph-hero h1 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: clamp(30px, 4.6vw, 46px); font-weight: 800; letter-spacing: -.035em;
+  line-height: 1.1; margin: 0 0 18px; max-width: 800px; color: #fff; }
+.ph-hero p { font-size: 17.5px; line-height: 1.7; color: #c6d5ec; max-width: 660px; margin: 0 0 28px; }
+.ph-cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; margin-bottom: 44px; }
+.ph-btn { background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; border: none;
+  font-family: inherit; font-size: 15.5px; font-weight: 800; padding: 14px 28px;
+  border-radius: 8px; cursor: pointer; }
+.ph-btn:hover { filter: brightness(1.07); }
+.ph-alt { color: #c6d5ec; font-size: 14.5px; font-weight: 600; text-decoration: none;
+  border-bottom: 1px solid rgba(198,213,236,.4); }
+.ph-nums { display: flex; gap: 46px; flex-wrap: wrap; padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,.16); }
+.ph-nums b { display: block; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 30px; font-weight: 800; letter-spacing: -.03em; color: #f0d87a; line-height: 1; }
+.ph-nums span { font-size: 12px; color: #9db1d0; margin-top: 6px; display: block; }
+
+.ph-sec { padding: 58px 0; }
+.ph-sec.alt { background: #f6f8fc; }
+.ph-sec h2 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 13px;
+  font-weight: 800; text-transform: uppercase; letter-spacing: .13em; color: #8a93a6; margin: 0 0 28px; }
+
+.ph-who { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 34px; }
+.ph-who i { font-size: 20px; color: #b8972a; margin-bottom: 12px; display: block; }
+.ph-who h3 { font-size: 18px; font-weight: 800; color: #0e2248; margin: 0 0 8px; letter-spacing: -.02em; }
+.ph-who p { font-size: 14.5px; line-height: 1.7; color: #5a6070; margin: 0; }
+
+.ph-feat { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 4px 40px; }
+.ph-feat > div { padding: 16px 0; border-bottom: 1px solid #e4e7ee; }
+.ph-feat b { display: block; font-size: 15.5px; color: #0e2248; margin-bottom: 5px; }
+.ph-feat span { font-size: 14px; line-height: 1.65; color: #5a6070; }
+
+.ph-price { display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: start; }
+.ph-card { border: 2px solid #0e2248; border-radius: 14px; padding: 28px; }
+.ph-card-h { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .1em;
+  color: #8a93a6; margin-bottom: 10px; }
+.ph-amt { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 46px; font-weight: 800;
+  letter-spacing: -.04em; color: #0e2248; line-height: 1; }
+.ph-amt span { font-size: 16px; font-weight: 600; color: #8a93a6; letter-spacing: 0; }
+.ph-card ul { list-style: none; padding: 0; margin: 22px 0 24px; }
+.ph-card li { font-size: 14.5px; color: #3d4759; padding: 9px 0 9px 26px; position: relative;
+  border-bottom: 1px solid #eef0f5; }
+.ph-card li::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; left: 0; top: 10px; font-size: 11px; color: #1c7a4a; }
+.ph-card .ph-btn { width: 100%; }
+
+.ph-note h3 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 22px;
+  font-weight: 800; letter-spacing: -.025em; color: #0e2248; margin: 0 0 14px; }
+.ph-note p { font-size: 15.5px; line-height: 1.75; color: #5a6070; margin: 0 0 16px; }
+.ph-fine { font-size: 12px !important; line-height: 1.65 !important; color: #8a93a6 !important;
+  padding-top: 16px; border-top: 1px solid #e4e7ee; }
+
+@media (max-width: 860px) { .ph-price { grid-template-columns: 1fr; gap: 34px; } }
+@media (max-width: 600px) { .ph-nums { gap: 28px; } .ph-nums b { font-size: 24px; } }
