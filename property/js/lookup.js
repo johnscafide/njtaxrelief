@@ -2225,7 +2225,7 @@
       where: "PROP_CLASS = '2' AND NET_VALUE > 10000",
       outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,ZIP5,PCLBLOCK,PCLLOT,NET_VALUE,LAST_YR_TX,' +
                  'YR_CONSTR,CALC_ACRE,SALE_PRICE,DEED_DATE',
-      returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '150', f: 'json'
+      returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '80', f: 'json'
     });
     return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
       .then(function (d) {
@@ -2249,7 +2249,12 @@
             lat: c.y, lon: c.x, dist: dist,
             rate: av ? (tax / av) * 100 : null
           };
-        }).filter(function (x) { return x.addr && x.dist != null && x.dist < 2500; });
+        })
+        // Keep it to the immediate blocks. A map with 150 dots is a heat map,
+        // not a comparison, and nobody scrolls 150 cards.
+        .filter(function (x) { return x.addr && x.dist != null && x.dist <= 500; })
+        .sort(function (a, b) { return a.dist - b.dist; })
+        .slice(0, 24);
       }).catch(function () { return []; });
   }
 
@@ -2285,7 +2290,7 @@
       '<div class="hd-bar">' +
         '<button class="hd-back" onclick="plHideHood()"><i class="fas fa-chevron-left"></i> New search</button>' +
         '<div class="hd-where"><b>' + esc(centre.town) + '</b>' +
-          '<span>' + list.length + ' nearby properties from the state assessment file</span></div>' +
+          '<span>' + list.length + ' properties within a few blocks, from the state assessment file</span></div>' +
         '<select class="hd-sort" onchange="plHoodSort(this.value)">' +
           '<option value="near">Closest first</option>' +
           '<option value="valHigh">Highest value</option>' +
@@ -2408,7 +2413,8 @@
         hoodMarkers[x.pin] = mk;
         pts.push([x.lat, x.lon]);
       });
-      if (pts.length > 1) hoodMap.fitBounds(pts, { padding: [40, 40], maxZoom: 17 });
+      if (pts.length > 1) hoodMap.fitBounds(pts, { padding: [50, 50], maxZoom: 18 });
+      if (hoodMap.getZoom() < 15) hoodMap.setZoom(16);
       setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 120);
     } catch (e) { console.warn('[watchdog] hood map:', e); }
   }
@@ -2750,7 +2756,7 @@
     });
 
     // Build the map view behind the panel so closing it lands somewhere useful.
-    hoodParcels(geo.lat, geo.lon, 900).then(function (list) {
+    hoodParcels(geo.lat, geo.lon, 420).then(function (list) {
       if (!list.length) return;
       // make sure the searched property is in the list even if the envelope missed it
       if (!list.some(function (x) { return x.pin === current.pin; })) {
