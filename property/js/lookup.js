@@ -2469,8 +2469,13 @@
   }
 
   window.plShowHood = function () {
-    var w = el('pl-hood');
-    if (!w) return;
+    var w = elReal('pl-hood');
+    // Never hide the page for a container that is missing or empty. A blank
+    // screen with no way back is worse than not having the feature.
+    if (!w || !w.innerHTML || w.innerHTML.length < 200) {
+      document.body.classList.remove('hood-on');
+      return;
+    }
     w.classList.add('on');
     document.body.classList.add('hood-on');
     setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 60);
@@ -2981,8 +2986,15 @@
           sale: sale, saleYear: dy, lat: geo.lat, lon: geo.lon, dist: 0, rate: rate });
       }
       loadHoodSaved().then(function () {
-        buildHood({ lat: geo.lat, lon: geo.lon, town: current.town }, list);
-        plShowHood();
+        try {
+          buildHood({ lat: geo.lat, lon: geo.lon, town: current.town }, list);
+          plShowHood();
+        } catch (e) {
+          console.warn('[watchdog] neighborhood view failed, leaving the page as it was:', e);
+          document.body.classList.remove('hood-on');
+          var w = elReal('pl-hood');
+          if (w) w.classList.remove('on');
+        }
       });
     });
 
