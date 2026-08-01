@@ -565,3 +565,90 @@ body { background: var(--paper); }
   .pr-shotwrap { width: 100%; }
   .pr.picked { outline-offset: 4px; }
 }
+
+/* ============================================================
+   PROFILE
+   Collapsible groups. A wall of forty inputs gets abandoned, so each
+   group says what it unlocks and only one or two are open at a time.
+   ============================================================ */
+.pf { max-width: 760px; }
+
+.pf-top { display: flex; align-items: center; gap: 20px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--hair); margin-bottom: 8px; }
+.pf-photo img, .pf-noimg { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; display: block; }
+.pf-noimg { background: var(--accent); color: #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 30px; font-weight: 800; }
+.pf-topb { flex: 1; min-width: 0; }
+.pf-meter { height: 7px; background: var(--hair); border-radius: 99px; overflow: hidden; }
+.pf-meter i { display: block; height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .4s ease; }
+.pf-pct { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
+.pf-pct b { color: var(--accent); }
+
+.pg { border-bottom: 1px solid var(--hair); }
+.pg-h { display: flex; align-items: center; gap: 14px; width: 100%; padding: 18px 2px;
+  background: none; border: none; font-family: inherit; text-align: left; cursor: pointer; }
+.pg-h:hover .pg-t { color: var(--accent-2); }
+.pg-t { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.01em; }
+.pg-w { flex: 1; font-size: 13px; color: var(--ink-3); }
+.pg-h i { color: var(--ink-3); font-size: 12px; transition: transform .2s ease; }
+.pg.open .pg-h i { transform: rotate(180deg); }
+.pg-b { display: none; padding: 2px 2px 26px; }
+.pg.open .pg-b { display: block; }
+
+.pf-say { font-size: 14px; line-height: 1.65; color: var(--ink-2);
+  background: var(--accent-bg); border-left: 3px solid var(--accent-2);
+  padding: 13px 16px; border-radius: 0 6px 6px 0; margin: 0 0 20px; }
+
+.pf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px 22px; }
+.pf-f { display: flex; flex-direction: column; }
+.pf-f.wide { grid-column: 1 / -1; margin-top: 18px; }
+.pf-f label { font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin-bottom: 6px; }
+.pf-f input, .pf-f select, .pf-f textarea {
+  width: 100%; padding: 10px 0; font-size: 15.5px; font-family: inherit; color: var(--ink);
+  border: none; border-bottom: 1.5px solid var(--hair); background: none;
+}
+.pf-f textarea { border: 1.5px solid var(--hair); border-radius: 7px; padding: 11px 13px;
+  resize: vertical; line-height: 1.6; font-size: 15px; }
+.pf-f input:focus, .pf-f select:focus, .pf-f textarea:focus {
+  outline: none; border-color: var(--accent-2); }
+.pf-f em { font-style: normal; font-size: 11.5px; color: var(--ink-3); margin-top: 5px; line-height: 1.45; }
+
+.pf-money { display: flex; align-items: center; border-bottom: 1.5px solid var(--hair); }
+.pf-money:focus-within { border-color: var(--accent-2); }
+.pf-money span { color: var(--ink-3); font-size: 15.5px; padding-right: 4px; }
+.pf-money input { border-bottom: none !important; }
+
+.pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; font-size: 13.5px; padding: 8px 15px;
+  border: 1px solid var(--hair); border-radius: 99px; cursor: pointer; color: var(--ink-2);
+  transition: all .15s ease; }
+.chip input { display: none; }
+.chip:hover { border-color: var(--accent-2); }
+.chip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+.pf-yns { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 20px; }
+.pf-yn { display: flex; align-items: center; gap: 9px; font-size: 14.5px; color: var(--ink-2); cursor: pointer; }
+.pf-yn input { width: 17px; height: 17px; accent-color: var(--accent-2); cursor: pointer; }
+
+.pf-pro { padding: 16px 0; border-bottom: 1px solid var(--hair-2); }
+.pf-pro:last-child { border-bottom: none; }
+.pf-pro-h { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.pf-pro-h em { font-style: normal; font-weight: 400; color: var(--ink-3); margin-left: 8px; font-size: 12px; }
+.pf-pro-g { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.pf-pro-g input { padding: 9px 11px; font-size: 14px; font-family: inherit;
+  border: 1px solid var(--hair); border-radius: 6px; color: var(--ink); }
+.pf-pro-g input:focus { outline: none; border-color: var(--accent-2); }
+
+.pf-save { display: flex; align-items: center; gap: 16px; padding: 26px 0 10px; }
+#pf-saved .ok { color: var(--pos); font-size: 14px; font-weight: 600; }
+#pf-saved .bad { color: var(--neg); font-size: 13.5px; }
+.pf-priv { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 620px; }
+.pf-priv i { color: var(--pos); margin-right: 6px; }
+
+@media (max-width: 640px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pg-w { display: none; }
+  .pf-top { gap: 14px; }
+}
