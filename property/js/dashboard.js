@@ -102,6 +102,7 @@
       rows = (res[0] && res[0].data) || [];
       profile = (res[1] && res[1].data) || {};
       render();
+      hydrateDetails().then(render);
       el('db-profile-body').innerHTML = profileForm();
     });
   }
@@ -253,7 +254,7 @@
             ' homes in town.' +
             (hot ? ' <b style="color:var(--red)">That is high enough to be worth challenging.</b>' : '') +
           '</div>' +
-          (hot ? '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have John look at this</button>' : '') +
+          (hot ? '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have an agent review this</button>' : '') +
         '</div>';
       }).join('');
     });
@@ -655,6 +656,240 @@
   }
 
   // ══════════════════════════════════════════════
+  // PROPERTY DETAIL FROM SR1A
+  //
+  // MOD-IV publishes no square footage and New Jersey publishes no bedroom or
+  // bathroom counts anywhere in the public record. Those live in the MLS.
+  // What the SR1A file does carry, on any parcel that has sold, is living
+  // space and year built, so we look the property up by block and lot and use
+  // what genuinely exists rather than inventing the rest.
+  // ══════════════════════════════════════════════
+  var salesCache = {};
+
+  function countySales(county) {
+    var k = String(county || '').toLowerCase().replace(/\s+/g, '-');
+    if (!k) return Promise.resolve([]);
+    if (salesCache[k]) return Promise.resolve(salesCache[k]);
+    return xfetch('/property/sales-' + k + '.json', 20000)
+      .then(function (r) { return r.json(); })
+      .then(function (j) { salesCache[k] = (j && j.sales) || []; return salesCache[k]; })
+      .catch(function () { salesCache[k] = []; return []; });
+  }
+
+  function hydrateDetails() {
+    var counties = {};
+    rows.forEach(function (r) { if (r.county) counties[r.county] = 1; });
+    return Promise.all(Object.keys(counties).map(countySales)).then(function () {
+      rows.forEach(function (r) {
+        var all = salesCache[String(r.county || '').toLowerCase().replace(/\s+/g, '-')];
+        if (!all) return;
+        var d = String(r.pams_pin || '').slice(0, 4);
+        var blk = String(r.block || '').replace(/^0+/, '');
+        var lot = String(r.lot || '').replace(/^0+/, '');
+        if (!d || !blk) return;
+        var hit = null;
+        for (var i = 0; i < all.length; i++) {
+          var s = all[i];
+          if (s.d !== d) continue;
+          if (String(s.b || '').replace(/^0+/, '') !== blk) continue;
+          if (String(s.l || '').replace(/^0+/, '') !== lot) continue;
+          if (!hit || s.y > hit.y) hit = s;
+        }
+        if (hit) {
+          r._sqft = hit.sf || null;
+          r._built = hit.yb || null;
+          r._lastSale = hit.p || null;
+          r._lastSaleYear = hit.y || null;
+        }
+      });
+    });
+  }
+
+  // A short factual line. Only what the public record actually holds.
+  function detailLine(r) {
+    var bits = [];
+    if (r._sqft) bits.push('<b>' + r._sqft.toLocaleString() + '</b> sq ft');
+    if (r._built) bits.push('built <b>' + r._built + '</b>');
+    if (r._lastSale && r._lastSaleYear)
+      bits.push('last sold <b>' + money(r._lastSale) + '</b> in ' + r._lastSaleYear);
+    return bits.length ? '<div class="pr-facts">' + bits.join('<span class="dot">&middot;</span>') + '</div>' : '';
+  }
+
+  function addedOn(r) {
+    if (!r.created_at) return '';
+    var d = new Date(r.created_at);
+    if (isNaN(d)) return '';
+    return (r.kind === 'home' ? 'Claimed ' : 'Added ') +
+      d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
+  // ══════════════════════════════════════════════
+  // SORTING
+  // ══════════════════════════════════════════════
+  var sortBy = 'added';
+  var SORTS = {
+    added:     { label: 'Recently added',   fn: function (a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); } },
+    valHigh:   { label: 'Highest value',    fn: function (a, b) { return mv(b) - mv(a); } },
+    valLow:    { label: 'Lowest value',     fn: function (a, b) { return mv(a) - mv(b); } },
+    taxHigh:   { label: 'Highest taxes',    fn: function (a, b) { return (+b.last_year_tax || 0) - (+a.last_year_tax || 0); } },
+    taxLow:    { label: 'Lowest taxes',     fn: function (a, b) { return (+a.last_year_tax || 0) - (+b.last_year_tax || 0); } }
+  };
+  function mv(r) { var m = marketValue(r); return m ? m.v : 0; }
+
+  window.dbSort = function (k) {
+    sortBy = k;
+    render();
+  };
+
+  function sortControl() {
+    return '<div class="sortbar">' +
+      '<label>Sort</label>' +
+      '<select onchange="dbSort(this.value)">' +
+        Object.keys(SORTS).map(function (k) {
+          return '<option value="' + k + '"' + (k === sortBy ? ' selected' : '') + '>' +
+            SORTS[k].label + '</option>';
+        }).join('') +
+      '</select>' +
+      (picked.length
+        ? '<span class="cmp-count">' + picked.length + ' selected' +
+          '<button onclick="dbCompareSel()"' + (picked.length < 2 ? ' disabled' : '') + '>Compare</button>' +
+          '<button class="clr" onclick="dbClearPick()">Clear</button></span>'
+        : '<span class="cmp-hint">Tick up to three properties to compare them</span>') +
+    '</div>';
+  }
+
+  // ══════════════════════════════════════════════
+  // COMPARE
+  // ══════════════════════════════════════════════
+  var picked = [];
+
+  window.dbPick = function (id, box) {
+    var i = picked.indexOf(id);
+    if (i > -1) picked.splice(i, 1);
+    else {
+      if (picked.length >= 3) {
+        if (box) box.checked = false;
+        toast('Three at a time is the limit');
+        return;
+      }
+      picked.push(id);
+    }
+    render();
+  };
+  window.dbClearPick = function () { picked = []; render(); };
+
+  window.dbCompareSel = function () {
+    var sel = picked.map(function (id) {
+      return rows.filter(function (r) { return r.id === id; })[0];
+    }).filter(Boolean);
+    if (sel.length < 2) return;
+
+    function row(label, fn, note) {
+      var vals = sel.map(fn);
+      var nums = vals.map(function (v) { return typeof v === 'number' ? v : null; });
+      var real = nums.filter(function (v) { return v != null; });
+      var best = null;
+      if (real.length === sel.length && note) {
+        best = note === 'low' ? Math.min.apply(null, real) : Math.max.apply(null, real);
+      }
+      return '<tr><th>' + label + '</th>' +
+        vals.map(function (v, i) {
+          var txt = (v == null || v === '') ? '<span class="na">not on file</span>'
+                  : (typeof v === 'number' ? money(v) : v);
+          var mark = (best != null && nums[i] === best) ? ' class="win"' : '';
+          return '<td' + mark + '>' + txt + '</td>';
+        }).join('') + '</tr>';
+    }
+
+    plModalNote('Comparing ' + sel.length + ' properties',
+      '<div class="cw"><table class="cmp3"><thead><tr><th></th>' +
+        sel.map(function (r) {
+          return '<td class="ch"><img src="' + streetImg(r, 260, 150) + '" alt="" ' +
+            'onerror="this.style.display=\'none\'"><b>' + esc(r.address) + '</b>' +
+            '<span>' + esc(r.town || '') + '</span></td>';
+        }).join('') +
+      '</tr></thead><tbody>' +
+        row('Assessed', function (r) { return +r.assessed || null; }) +
+        row('Annual tax', function (r) { return +r.last_year_tax || null; }, 'low') +
+        row('Market value', function (r) { var m = marketValue(r); return m ? Math.round(m.v) : null; }, 'high') +
+        row('Effective rate', function (r) { return r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : null; }) +
+        row('Town ratio', function (r) { var s = sr1aFor(r); return s ? (s.ratio * 100).toFixed(1) + '%' : null; }) +
+        row('Square feet', function (r) { return r._sqft ? r._sqft.toLocaleString() : null; }) +
+        row('Year built', function (r) { return r._built || null; }) +
+        row('Median sale in town', function (r) { var s = sr1aFor(r); return s && s.medPrice ? s.medPrice : null; }) +
+        row('Price per sq ft here', function (r) { var s = sr1aFor(r); return s && s.ppsf ? '$' + s.ppsf : null; }) +
+        row('Tax per $1,000 of value', function (r) {
+          var m = marketValue(r);
+          return (m && r.last_year_tax) ? Math.round(r.last_year_tax / m.v * 1000) : null;
+        }, 'low') +
+        row('Appeal case', function (r) {
+          var c = chapter123(r);
+          if (!c || !c.testable) return 'needs full record';
+          return c.hasCase ? 'yes, over by ' + money(c.over) : 'no';
+        }) +
+      '</tbody></table></div>' +
+      '<p class="cw-note">Highlighted cells are the better number in that row. Bedroom and bathroom counts are ' +
+      'not published anywhere in New Jersey\u2019s public property records, so they are not shown. Square footage ' +
+      'comes from the state sales file and only exists for properties that have sold.</p>');
+  };
+
+  // ══════════════════════════════════════════════
+  // PER PROPERTY MENU
+  // ══════════════════════════════════════════════
+  window.dbMenu = function (id, ev) {
+    ev.stopPropagation();
+    var open = document.querySelector('.pm.open');
+    if (open) open.classList.remove('open');
+    var m = document.getElementById('pm-' + id);
+    if (m && (!open || open !== m)) m.classList.add('open');
+  };
+  document.addEventListener('click', function () {
+    var o = document.querySelector('.pm.open');
+    if (o) o.classList.remove('open');
+  });
+
+  function propMenu(r) {
+    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
+    return '<div class="pm-wrap">' +
+      '<button class="pm-btn" onclick="dbMenu(\'' + r.id + '\', event)" aria-label="More"><i class="fas fa-ellipsis"></i></button>' +
+      '<div class="pm" id="pm-' + r.id + '">' +
+        '<a href="/property/?address=' + q + '"><i class="fas fa-file-lines"></i> Open full record</a>' +
+        '<button onclick="dbShare(\'' + r.id + '\')"><i class="fas fa-share-nodes"></i> Share</button>' +
+        '<button onclick="dbCopy(\'' + r.id + '\')"><i class="fas fa-link"></i> Copy link</button>' +
+        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-envelope"></i> Email an agent</button>' +
+        '<button onclick="dbDirections(\'' + r.id + '\')"><i class="fas fa-diamond-turn-right"></i> Directions</button>' +
+        '<hr>' +
+        (r.kind === 'home' && r.verify_level !== 'mail'
+          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
+          : '') +
+        '<button class="rm" onclick="dbRemove(\'' + r.id + '\')"><i class="fas fa-trash"></i> Remove</button>' +
+      '</div></div>';
+  }
+
+  function byId(id) { return rows.filter(function (r) { return r.id === id; })[0]; }
+  function propUrl(r) {
+    return 'https://njpropertytaxrelief.com/property/?address=' +
+      encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
+  }
+  window.dbShare = function (id) {
+    var r = byId(id); if (!r) return;
+    if (navigator.share) navigator.share({ title: r.address, url: propUrl(r) }).catch(function () {});
+    else window.dbCopy(id);
+  };
+  window.dbCopy = function (id) {
+    var r = byId(id); if (!r) return;
+    var u = propUrl(r);
+    if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('Link copied'); })
+      .catch(function () { window.prompt('Copy this link:', u); });
+    else window.prompt('Copy this link:', u);
+  };
+  window.dbDirections = function (id) {
+    var r = byId(id); if (!r) return;
+    window.open('https://www.google.com/maps/dir/?api=1&destination=' +
+      encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ'), '_blank', 'noopener');
+  };
+
+  // ══════════════════════════════════════════════
   // ACCESS TIERS
   //   free  · signed in, sees their own numbers
   //   pro   · paid, sees the analysis and the exports
@@ -690,9 +925,9 @@
         '<div><b>Unlimited saved properties</b><span>Portfolio totals, blended rates, and drift tracking across all ' +
         'of them.</span></div>' +
       '</div>' +
-      '<p style="font-size:13.5px;color:#8a93a6;">Not open yet. Tell me you want it and I will let you know the day ' +
+      '<p style="font-size:13.5px;color:#8a93a6;">Not open yet. Tell me you want it and We will let you know the day ' +
       'it is, at the price early users get.</p>' +
-      '<button class="db-btn" onclick="dbWantPro()">Tell John I want this</button>');
+      '<button class="db-btn" onclick="dbWantPro()">Tell us we want this</button>');
   };
 
   window.dbWantPro = function () {
@@ -706,7 +941,7 @@
                 'Properties saved: ' + rows.length,
                 'Source: /property/dashboard.html'].join('\n')
     });
-    plModalNote('Noted', '<p>I will let you know. Nothing changes on your account in the meantime.</p>' +
+    plModalNote('Noted', '<p>We will let you know. Nothing changes on your account in the meantime.</p>' +
       '<button class="db-btn" onclick="plCloseNote()">Close</button>');
   };
 
@@ -776,18 +1011,27 @@
 
     var head =
       '<div class="pr-top">' +
-        '<div class="pr-shot">' +
-          '<img src="' + streetImg(r, 400, 260) + '" alt="' + esc(r.address) + '" loading="lazy" ' +
-            'onerror="this.parentNode.classList.add(\'noimg\')">' +
-          (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
-                             : '<span class="pr-kind">Watching</span>') +
+        '<div class="pr-shotwrap">' +
+          '<div class="pr-shot">' +
+            '<img src="' + streetImg(r, 400, 260) + '" alt="' + esc(r.address) + '" loading="lazy" ' +
+              'onerror="this.parentNode.classList.add(\'noimg\')">' +
+            (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
+                               : '<span class="pr-kind">Watching</span>') +
+          '</div>' +
+          '<div class="pr-when">' + esc(addedOn(r)) + '</div>' +
         '</div>' +
         '<div class="pr-id">' +
+          '<div class="pr-titlerow">' +
+            '<label class="pick"><input type="checkbox"' + (picked.indexOf(r.id) > -1 ? ' checked' : '') +
+              ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
+            propMenu(r) +
+          '</div>' +
           '<h3>' + esc(r.address) + '</h3>' +
           '<div class="pr-sub">' + esc(r.town || '') +
             (r.county ? ', ' + esc(r.county) + ' County' : '') +
             (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
           '</div>' +
+          detailLine(r) +
           '<div class="pr-tags">' +
             '<span class="tg ' + v.cls + '"><i class="fas ' +
               (r.verify_level === 'mail' ? 'fa-circle-check' : 'fa-circle-half-stroke') + '"></i>' +
@@ -838,13 +1082,11 @@
         '<a href="/property/?address=' + q + '">Open it</a> and the analysis saves back here.</p>';
     }
 
-    return '<article class="pr ' + tone + '">' + head + line + figs + appeal +
+    return '<article class="pr ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
+      head + line + figs + appeal +
       '<div class="pr-acts">' +
         '<a href="/property/?address=' + q + '">Open full record</a>' +
-        (r.kind === 'home' && r.verify_level !== 'mail'
-          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')">Verify ownership</button>' : '') +
-        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Ask John</button>' +
-        '<button class="rm" onclick="dbRemove(\'' + r.id + '\')">Remove</button>' +
+        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Contact agent</button>' +
       '</div></article>';
   }
 
@@ -954,10 +1196,18 @@
       return;
     }
 
+    var srt = SORTS[sortBy].fn;
+    homes = homes.slice().sort(srt);
+    watch = watch.slice().sort(srt);
+
     el('db-body').innerHTML =
-      (homes.length ? '<h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
-        homes.map(propertyBlock).join('') : '') +
-      (watch.length ? '<h2 class="grp">Watching</h2>' + watch.map(propertyBlock).join('') : '') +
+      sortControl() +
+      (homes.length
+        ? '<section class="band own"><h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
+          homes.map(propertyBlock).join('') + '</section>' : '') +
+      (watch.length
+        ? '<section class="band"><h2 class="grp">Watchlist</h2>' +
+          watch.map(propertyBlock).join('') + '</section>' : '') +
       toolsHTML();
     afterTools();
   }
@@ -1009,14 +1259,14 @@
         '<input id="vc-code" type="text" placeholder="Six character code" maxlength="8" style="text-transform:uppercase;letter-spacing:.15em;">' +
         '<button onclick="dbRedeem(\'' + pin + '\')">Verify</button>' +
       '</div>' +
-      '<div class="auth-fine">In a hurry? Email me a copy of your tax bill or deed and I will mark it verified by hand.</div>');
+      '<div class="auth-fine">In a hurry? Email a copy of your tax bill or deed and we will mark it verified by hand.</div>');
   };
 
   window.dbRequestCode = function (pin, address) {
     sb.rpc('request_verify_code', { p_pin: pin, p_address: address }).then(function (r) {
       if (r.error) { toast('Could not request a code'); return; }
       plModalNote('Code on the way',
-        '<p>I will post a code to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
+        '<p>We will post a code to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
         '<p style="font-size:13.5px;color:#8a93a6;">The code goes to the property address, not to your email, because that is the whole point.</p>' +
         '<button class="plm-rbtn" onclick="plCloseNote()">Got it</button>');
     });
@@ -1121,7 +1371,7 @@
       message: ['Appeal review requested from the dashboard.', 'Properties flagged:']
         .concat(list).concat(['Source: /property/dashboard.html']).join('\n')
     });
-    plModalNote('On it', '<p>I will review those and get back to you within one business day.</p>' +
+    plModalNote('On it', '<p>An agent will review those and get back to you within one business day.</p>' +
       '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
   };
 
@@ -1133,7 +1383,7 @@
       town: 'Not provided', address: address,
       message: ['Question from the dashboard about ' + address, 'Source: /property/dashboard.html'].join('\n')
     });
-    plModalNote('Message sent', '<p>I will get back to you about <b>' + esc(address) + '</b> within one business day.</p>' +
+    plModalNote('Message sent', '<p>An agent will get back to you about <b>' + esc(address) + '</b> within one business day.</p>' +
       '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
   };
 
