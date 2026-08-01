@@ -11,71 +11,66 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script><link rel="stylesheet" href="/property/css/shared.css">
-<link rel="stylesheet" href="/property/css/dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body>
 <nav id="main-nav"></nav>
 <div class="pl-toast" id="pl-toast"></div>
 <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
 
-<div class="db-shell">
+<section class="gate" id="db-gate">
+  <h1>Your properties</h1>
+  <p>Sign in to see the homes you have claimed, what they are really worth against sales the state
+     verified, and whether any of them are assessed above what New Jersey allows.</p>
+  <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
+  <a class="gate-back" href="/property/">Back to the property lookup</a>
+</section>
 
-  <!-- SIGNED OUT -->
-  <section class="section" id="db-gate">
-    <div class="section-inner">
-      <div class="db-gate">
-        <i class="fas fa-house-lock"></i>
-        <h1>Your properties</h1>
-        <p>Sign in to see the homes you have claimed, your watchlist, and how their assessments and tax bills have moved.</p>
-        <button class="plm-rbtn" style="max-width:320px;margin:0 auto;" onclick="plSignInPrompt()">Sign in</button>
-        <div class="db-gate-back"><a href="/property/">Back to the property lookup</a></div>
-      </div>
-    </div>
-  </section>
+<main id="db-main" style="display:none;">
 
-  <!-- SIGNED IN -->
-  <section class="section" id="db-main" style="display:none;">
-    <div class="section-inner">
-
-      <div class="db-top">
-        <div class="db-who">
-          <div id="db-avatar"></div>
-          <div>
-            <div class="db-hi" id="db-hi">Welcome back</div>
-            <div class="db-email" id="db-email"></div>
-          </div>
-        </div>
-        <div class="db-top-acts">
-          <a class="db-btn ghost" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up an address</a>
-          <button class="db-btn ghost" onclick="plSignOut()">Sign out</button>
+  <header class="top">
+    <div class="top-in">
+      <div class="who">
+        <div id="db-avatar"></div>
+        <div>
+          <h1 id="db-hi">Your properties</h1>
+          <span id="db-email"></span>
         </div>
       </div>
-
-      <div id="db-alerts"></div>
-
-      <div class="db-stats" id="db-stats"></div>
-
-      <div class="db-tabs">
-        <button class="db-tab active" data-p="homes"   onclick="dbTab('homes')">My homes</button>
-        <button class="db-tab"        data-p="watch"   onclick="dbTab('watch')">Watchlist</button>
-        <button class="db-tab"        data-p="tools"   onclick="dbTab('tools')">Tools</button>
-        <button class="db-tab"        data-p="profile" onclick="dbTab('profile')">My profile</button>
+      <div class="top-acts">
+        <div class="vwset">
+          <button class="vw on" data-v="simple" onclick="dbView('simple')">Simple</button>
+          <button class="vw" data-v="pro" onclick="dbView('pro')">Pro</button>
+        </div>
+        <button class="pn on" data-p="main" onclick="dbPanel('main')">Properties</button>
+        <button class="pn" data-p="profile" onclick="dbPanel('profile')">Profile</button>
+        <a class="tl" href="/property/">Look up an address</a>
+        <button class="tl" onclick="plSignOut()">Sign out</button>
       </div>
-
-      <div class="db-panel active" id="db-homes"></div>
-      <div class="db-panel" id="db-watch"></div>
-      <div class="db-panel" id="db-tools"></div>
-      <div class="db-panel" id="db-profile"></div>
-
     </div>
-  </section>
-</div>
+  </header>
+
+  <div class="wrap" id="db-panel-main">
+    <div id="db-brief"></div>
+    <div id="db-line"></div>
+    <div id="db-body"></div>
+  </div>
+
+  <div class="wrap" id="db-profile" style="display:none;">
+    <h2 class="grp">About you</h2>
+    <p class="lede">All optional. It only shapes what I send you and which benefits get calculated for
+       your properties. Nothing here is sold or shared.</p>
+    <div id="db-profile-body"></div>
+  </div>
+
+</main>
 
 <footer id="main-footer"></footer>
 
