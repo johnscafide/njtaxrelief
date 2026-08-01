@@ -90,14 +90,12 @@
   max-width: 1120px; margin: 0 auto; padding: 10px 20px;
   display: flex; align-items: center; gap: 16px;
 }
-.ssearch-brand, .ssearch-alt {
+.ssearch-brand {
   display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   font-size: 14px; font-weight: 800; color: var(--navy-dark); text-decoration: none;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -.01em;
 }
 .ssearch-brand i { color: var(--gold); font-size: 17px; }
-.ssearch-alt { font-weight: 700; color: var(--navy); }
-.ssearch-alt i { font-size: 13px; }
 .ssearch-pill {
   flex: 1; min-width: 0; display: flex; align-items: center; gap: 3px;
   background: #f4f6fa; border: 1px solid var(--border); border-radius: 999px;
@@ -119,7 +117,7 @@
 }
 .ssearch-go:hover { background: var(--navy-dark); }
 @media (max-width: 760px) {
-  .ssearch-brand span, .ssearch-alt span { display: none; }
+  .ssearch-brand span { display: none; }
   .ssearch-in { gap: 10px; padding: 8px 14px; }
 }
 body.plm-locked .ssearch { transform: translateY(-100%) !important; }
@@ -427,8 +425,8 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
 
 /* ---------- results grid ---------- */
 .hd-list {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(196px, 1fr));
-  gap: 20px; align-content: start; align-items: start;
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 22px; align-content: start; align-items: start;
   padding: 20px 24px 60px;
 }
 .hd-note { grid-column: 1 / -1; font-size: 12px; line-height: 1.65; color: #8a93a6; margin: 6px 0 0; }
@@ -445,7 +443,7 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
 .hd-card:hover { box-shadow: 0 8px 22px rgba(14,34,72,.15); transform: translateY(-2px); }
 .hd-card.me { border: 2px solid var(--gold); }
 
-.hd-shot { position: relative; height: 128px; flex: 0 0 128px; background: #dde3ec; overflow: hidden; }
+.hd-shot { position: relative; height: 168px; flex: 0 0 168px; background: #dde3ec; overflow: hidden; }
 .hd-shot img { width: 100%; height: 100%; object-fit: cover; display: block; background: #dde3ec; }
 .hd-shot.noimg img { display: none; }
 .hd-shot.noimg::after {
@@ -470,19 +468,20 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
 .hd-badge.me   { background: var(--gold); color: #17203a; }
 .hd-badge.sold { background: var(--navy); color: #fff; }
 
-.hd-body { padding: 11px 13px 13px; flex: 1 1 auto; }
-.hd-val { font-size: 18px; font-weight: 800; color: #0e2248; letter-spacing: -.02em;
+.hd-body { padding: 13px 15px 15px; flex: 1 1 auto; }
+.hd-val { font-size: 20px; font-weight: 800; color: #0e2248; letter-spacing: -.02em;
   font-variant-numeric: tabular-nums; line-height: 1.1; }
-.hd-meta { display: flex; flex-wrap: wrap; gap: 0 5px; font-size: 11.5px; color: #5a6070; margin: 5px 0 6px; }
+.hd-meta { display: flex; flex-wrap: wrap; gap: 0 5px; font-size: 12.5px; color: #5a6070; margin: 5px 0 6px; }
 .hd-meta span:not(:last-child)::after { content: ' |'; color: #c3cbdb; margin-left: 4px; }
-.hd-addr { font-size: 12.5px; color: #1a1a2e; font-weight: 600; line-height: 1.35; }
+.hd-addr { font-size: 13.5px; color: #1a1a2e; font-weight: 600; line-height: 1.35; }
 .hd-sub { font-size: 11.5px; color: #8a93a6; margin-top: 2px; }
 
 /* ---------- the ad. Reads as an ad, not a property. ---------- */
 .hd-ad {
-  grid-column: span 2; display: flex; gap: 14px; align-items: center;
-  background: linear-gradient(120deg, #14361f, #1e6b3a 70%); border-radius: 10px;
-  padding: 16px 18px; text-decoration: none; position: relative; overflow: hidden;
+  grid-column: span 1; display: flex; gap: 14px; align-items: center;
+  background: linear-gradient(150deg, #14361f, #1e6b3a 70%); border-radius: 10px;
+  padding: 18px; text-decoration: none; position: relative; overflow: hidden;
+  flex-direction: column; align-items: flex-start; min-height: 300px; justify-content: center;
 }
 .hd-ad:hover { filter: brightness(1.07); }
 .hd-ad-tag {
@@ -499,13 +498,17 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
 .hd-ad-b em i { font-size: 10px; margin-left: 4px; }
 
 /* ---------- sticky bar nav ---------- */
-.ssearch-nav { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
-.ssearch-nav a {
-  display: inline-flex; align-items: center; gap: 7px; padding: 8px 12px; border-radius: 7px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: 13.5px; font-weight: 700; color: var(--navy-dark); text-decoration: none; white-space: nowrap;
+.ssearch-nav {
+  display: flex; align-items: center; gap: 2px; flex-shrink: 0;
+  background: none; border: none; padding: 0;
 }
-.ssearch-nav a:hover { background: #f2f5fa; color: var(--navy); }
+.ssearch-nav a {
+  display: inline-flex; align-items: center; gap: 7px; padding: 8px 13px; border-radius: 7px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 13.5px; font-weight: 700; color: var(--navy-dark);
+  text-decoration: none; white-space: nowrap; background: none;
+}
+.ssearch-nav a:hover { background: #eef3fc; color: var(--navy); }
 .ssearch-nav i { font-size: 12px; color: var(--navy-light); }
 .heroauth-link.nav { text-decoration: none; font-weight: 700; padding: 0 6px; }
 
@@ -524,3 +527,65 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
   .hd-bar { padding: 10px 14px; gap: 6px; }
   .hf-right { width: 100%; margin-left: 0; justify-content: space-between; }
 }
+
+/* ============================================================
+   MAP MARKERS AND STYLES
+   ============================================================ */
+.hd-pin-wrap { background: none !important; border: none !important; }
+.hd-pin {
+  display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  background: #fff; color: #0e2248; border: 1.5px solid #0e2248;
+  border-radius: 20px; padding: 4px 10px 4px 7px;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 12px; font-weight: 800; letter-spacing: -.01em;
+  box-shadow: 0 2px 8px rgba(14,34,72,.28); cursor: pointer;
+  transition: transform .12s ease, background .12s ease, color .12s ease;
+}
+.hd-pin::after {
+  content: ''; position: absolute; left: 50%; bottom: -6px; transform: translateX(-50%);
+  border-left: 5px solid transparent; border-right: 5px solid transparent;
+  border-top: 6px solid #0e2248;
+}
+.hd-dog { width: 14px; height: 14px; flex-shrink: 0; color: #b8972a; }
+.hd-pin:hover, .hd-pin.hi {
+  background: #0e2248; color: #fff; transform: scale(1.1); z-index: 999;
+}
+.hd-pin:hover .hd-dog, .hd-pin.hi .hd-dog { color: #f0d87a; }
+.hd-pin.me { background: #b8972a; border-color: #8a6f14; color: #17203a; }
+.hd-pin.me::after { border-top-color: #8a6f14; }
+.hd-pin.me .hd-dog { color: #17203a; }
+
+/* style switcher, bottom left of the map */
+.hd-stylebox { position: absolute; left: 12px; bottom: 24px; z-index: 500; }
+.hd-style {
+  display: inline-flex; background: rgba(255,255,255,.96); border-radius: 8px;
+  padding: 3px; box-shadow: 0 3px 12px rgba(14,34,72,.22); backdrop-filter: blur(6px);
+}
+.hd-style button {
+  border: none; background: none; font-family: inherit; font-size: 11.5px; font-weight: 700;
+  color: #5a6070; padding: 7px 11px; border-radius: 6px; cursor: pointer;
+}
+.hd-style button:hover { background: #f2f5fa; color: #0e2248; }
+.hd-style button.on { background: #0e2248; color: #fff; }
+
+/* on a dark or satellite basemap the pills need more contrast */
+body.map-dark .hd-pin { border-color: #fff; box-shadow: 0 2px 10px rgba(0,0,0,.5); }
+body.map-dark .hd-pin::after { border-top-color: #fff; }
+
+/* ---------- mobile: no map, just the list ---------- */
+@media (max-width: 900px) {
+  .hd-map { display: none; }
+  .hd-split { grid-template-columns: 1fr; height: auto; }
+  .hd-right { overflow: visible; }
+  .hd-list { grid-template-columns: 1fr 1fr; gap: 16px; padding: 16px; }
+  .hd-ad { min-height: 260px; }
+}
+@media (max-width: 520px) {
+  .hd-list { grid-template-columns: 1fr; }
+  .hd-ad { min-height: 0; flex-direction: row; align-items: center; }
+}
+
+.ssearch-nav a.pro-link { color: var(--gold-dark, #8a6f14); }
+.ssearch-nav a.pro-link i { color: var(--gold); }
+.ssearch-nav a.pro-link:hover { background: #fdf6e0; }
+.heroauth-link.pro { color: #8a6f14; font-weight: 800; }
