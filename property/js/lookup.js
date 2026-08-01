@@ -2268,6 +2268,144 @@
     return x.assessed / row.ratio;
   }
 
+  // ── which parcels the user has already saved, so hearts render filled ──
+  var hoodSaved = {};
+
+  function loadHoodSaved() {
+    if (!plUser || !sb) return Promise.resolve();
+    return sb.from('saved_properties').select('pams_pin,kind').then(function (r) {
+      hoodSaved = {};
+      (r.data || []).forEach(function (x) { hoodSaved[x.pams_pin] = x.kind; });
+    }).catch(function () {});
+  }
+
+  // Save straight from a card. No need to open the property first.
+  window.plHoodSave = function (pin, ev) {
+    if (ev) ev.stopPropagation();
+    if (!plUser) { plSignInPrompt(); return; }
+    var x = null;
+    for (var i = 0; i < hoodItems.length; i++) if (hoodItems[i].pin === pin) x = hoodItems[i];
+    if (!x) return;
+
+    if (hoodSaved[pin]) {
+      sb.from('saved_properties').delete().eq('pams_pin', pin).then(function () {
+        delete hoodSaved[pin];
+        paintHoodList();
+        toast('Removed from your wishlist');
+      });
+      return;
+    }
+    sb.rpc('save_property', { p: {
+      kind: 'watch', pams_pin: pin, address: x.addr, town: x.town, county: x.county,
+      zip: x.zip, block: x.block, lot: x.lot,
+      assessed: x.assessed || null, last_year_tax: x.tax || null,
+      effective_rate: x.rate ? +x.rate.toFixed(3) : null,
+      watchdog_value: hoodValue(x) ? Math.round(hoodValue(x)) : null
+    } }).then(function (res) {
+      if (res.error) { toast('Could not save'); return; }
+      hoodSaved[pin] = 'watch';
+      paintHoodList();
+      toast('Added to your wishlist');
+      if (typeof gtag === 'function') gtag('event', 'save_property', { kind: 'watch', from: 'map' });
+    });
+  };
+
+  // ══════════════════════════════════════════════
+  // FILTERS
+  // The same fields the rest of the site curates on, so what you filter here
+  // matches what you see everywhere else.
+  // ══════════════════════════════════════════════
+  var hoodF = { vMin: '', vMax: '', tMax: '', built: '', lot: '', appeal: false, sold: false };
+
+  window.plHoodFilter = function (k, v) {
+    hoodF[k] = (k === 'appeal' || k === 'sold') ? !hoodF[k] : v;
+    paintHoodList();
+  };
+  window.plHoodReset = function () {
+    hoodF = { vMin: '', vMax: '', tMax: '', built: '', lot: '', appeal: false, sold: false };
+    buildHoodBar();
+    paintHoodList();
+  };
+
+  function hoodPasses(x) {
+    var v = hoodValue(x) || x.assessed;
+    if (hoodF.vMin && v < +hoodF.vMin) return false;
+    if (hoodF.vMax && v > +hoodF.vMax) return false;
+    if (hoodF.tMax && x.tax > +hoodF.tMax) return false;
+    if (hoodF.built && (!x.built || x.built < +hoodF.built)) return false;
+    if (hoodF.lot && (!x.acres || x.acres * 43560 < +hoodF.lot)) return false;
+    if (hoodF.sold && (!x.saleYear || (new Date().getFullYear() - x.saleYear) > 2)) return false;
+    if (hoodF.appeal) {
+      // over-assessed relative to its own neighbors, which is the signal that
+      // matters and the one nobody else lets you filter on
+      var med = hoodMedianRate();
+      if (!med || !x.rate || x.rate <= med * 1.12) return false;
+    }
+    return true;
+  }
+
+  function hoodMedianRate() {
+    var r = hoodItems.map(function (x) { return x.rate; }).filter(function (v) { return v > 0; });
+    if (r.length < 5) return null;
+    r.sort(function (a, b) { return a - b; });
+    return r[r.length >> 1];
+  }
+
+  function sel(k, label, opts) {
+    return '<select class="hf-s" onchange="plHoodFilter(\'' + k + '\', this.value)">' +
+      '<option value="">' + label + '</option>' +
+      opts.map(function (o) {
+        return '<option value="' + o[0] + '"' + (String(hoodF[k]) === String(o[0]) ? ' selected' : '') +
+          '>' + o[1] + '</option>';
+      }).join('') + '</select>';
+  }
+
+  function buildHoodBar() {
+    var bar = el('hd-bar');
+    if (!bar) return;
+    var n = hoodItems.filter(hoodPasses).length;
+    var any = hoodF.vMin || hoodF.vMax || hoodF.tMax || hoodF.built || hoodF.lot || hoodF.appeal || hoodF.sold;
+
+    bar.innerHTML =
+      '<button class="hd-back" onclick="plHideHood()"><i class="fas fa-chevron-left"></i></button>' +
+      sel('vMin', 'Value from', [[200000,'$200k'],[300000,'$300k'],[400000,'$400k'],[500000,'$500k'],[750000,'$750k']]) +
+      sel('vMax', 'Value to', [[300000,'$300k'],[400000,'$400k'],[500000,'$500k'],[750000,'$750k'],[1000000,'$1M']]) +
+      sel('tMax', 'Tax under', [[4000,'$4,000'],[6000,'$6,000'],[8000,'$8,000'],[10000,'$10,000'],[15000,'$15,000']]) +
+      sel('built', 'Built after', [[1950,'1950'],[1970,'1970'],[1990,'1990'],[2000,'2000'],[2015,'2015']]) +
+      sel('lot', 'Lot over', [[5000,'5,000 sq ft'],[10000,'10,000 sq ft'],[20000,'half acre'],[43560,'1 acre']]) +
+      '<button class="hf-t' + (hoodF.appeal ? ' on' : '') + '" onclick="plHoodFilter(\'appeal\')">' +
+        '<i class="fas fa-scale-unbalanced-flip"></i> Over-assessed</button>' +
+      '<button class="hf-t' + (hoodF.sold ? ' on' : '') + '" onclick="plHoodFilter(\'sold\')">' +
+        '<i class="fas fa-tag"></i> Sold recently</button>' +
+      (any ? '<button class="hf-clr" onclick="plHoodReset()">Clear</button>' : '') +
+      '<div class="hf-right">' +
+        '<span class="hf-n">' + n + ' propert' + (n === 1 ? 'y' : 'ies') + '</span>' +
+        '<select class="hf-s sort" onchange="plHoodSort(this.value)">' +
+          '<option value="near">Closest</option>' +
+          '<option value="valHigh">Highest value</option>' +
+          '<option value="valLow">Lowest value</option>' +
+          '<option value="taxHigh">Highest tax</option>' +
+          '<option value="taxLow">Lowest tax</option>' +
+          '<option value="rateHigh">Highest tax rate</option>' +
+          '<option value="recent">Recently sold</option>' +
+        '</select>' +
+      '</div>';
+  }
+
+  // ── the Greentree unit. An ad, styled like one, not a property card. ──
+  function hoodAd() {
+    return '<a class="hd-ad" href="' + GREENTREE_URL + '" target="_blank" rel="noopener">' +
+      '<span class="hd-ad-tag">Advertisement</span>' +
+      '<img src="/johnvarano.jpg" alt="John Varano" onerror="this.style.display=\'none\'">' +
+      '<div class="hd-ad-b">' +
+        '<b>Know the payment before you fall in love with the house.</b>' +
+        '<span>John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the ' +
+        'real monthly number looks like, escrow included.</span>' +
+        '<em>Get a rate <i class="fas fa-arrow-right"></i></em>' +
+      '</div>' +
+    '</a>';
+  }
+
   window.plShowHood = function () {
     var w = el('pl-hood');
     if (!w) return;
@@ -2287,25 +2425,20 @@
     if (!w) return;
 
     w.innerHTML =
-      '<div class="hd-bar">' +
-        '<button class="hd-back" onclick="plHideHood()"><i class="fas fa-chevron-left"></i> New search</button>' +
-        '<div class="hd-where"><b>' + esc(centre.town) + '</b>' +
-          '<span>' + list.length + ' properties within a few blocks, from the state assessment file</span></div>' +
-        '<select class="hd-sort" onchange="plHoodSort(this.value)">' +
-          '<option value="near">Closest first</option>' +
-          '<option value="valHigh">Highest value</option>' +
-          '<option value="valLow">Lowest value</option>' +
-          '<option value="taxHigh">Highest tax</option>' +
-          '<option value="taxLow">Lowest tax</option>' +
-          '<option value="rateHigh">Highest effective rate</option>' +
-          '<option value="recent">Most recently sold</option>' +
-        '</select>' +
-      '</div>' +
+      '<div class="hd-bar" id="hd-bar"></div>' +
       '<div class="hd-split">' +
         '<div class="hd-map"><div id="hd-map"></div></div>' +
-        '<div class="hd-list" id="hd-list"></div>' +
+        '<div class="hd-right">' +
+          '<div class="hd-head">' +
+            '<h2>Homes near ' + esc(centre.town) + '</h2>' +
+            '<p>Every property on these blocks, straight from New Jersey\u2019s assessment records. ' +
+            'Not just what is for sale, which is what you want when you are comparing what a home is worth.</p>' +
+          '</div>' +
+          '<div class="hd-list" id="hd-list"></div>' +
+        '</div>' +
       '</div>';
 
+    buildHoodBar();
     drawHoodMap(centre, list);
     paintHoodList();
   }
@@ -2331,37 +2464,55 @@
     if (!host) return;
     var list = sortedHood();
 
-    host.innerHTML = list.map(function (x, i) {
+    var shown = list.filter(hoodPasses);
+    buildHoodBar();
+
+    if (!shown.length) {
+      host.innerHTML = '<div class="hd-none"><b>Nothing matches those filters</b>' +
+        '<p>Try widening the value or tax range.</p>' +
+        '<button class="hf-clr" onclick="plHoodReset()">Clear filters</button></div>';
+      return;
+    }
+
+    var cards = shown.map(function (x) {
       var v = hoodValue(x);
       var isSubject = current && x.pin === current.pin;
-      return '<article class="hd-card' + (isSubject ? ' me' : '') + '" data-pin="' + esc(x.pin) + '" ' +
+      var saved = !!hoodSaved[x.pin];
+      var idx = hoodItems.indexOf(x);
+      return '<article class="hd-card' + (isSubject ? ' me' : '') + '" ' +
         'onmouseenter="plHoodHi(\'' + esc(x.pin) + '\',1)" onmouseleave="plHoodHi(\'' + esc(x.pin) + '\',0)" ' +
-        'onclick="plHoodOpen(' + i + ')">' +
+        'onclick="plHoodOpen(' + idx + ')">' +
         '<div class="hd-shot">' +
-          '<img src="' + hoodStreet(x, 420, 260) + '" alt="" loading="lazy" ' +
+          '<img src="' + hoodStreet(x, 340, 200) + '" alt="" loading="lazy" ' +
             'onerror="this.parentNode.classList.add(\'noimg\')">' +
-          (isSubject ? '<span class="hd-badge me">The one you searched</span>' : '') +
-          (x.saleYear && (new Date().getFullYear() - x.saleYear) <= 1
+          '<button class="hd-heart' + (saved ? ' on' : '') + '" title="Save to wishlist" ' +
+            'onclick="plHoodSave(\'' + esc(x.pin) + '\', event)">' +
+            '<i class="' + (saved ? 'fas' : 'far') + ' fa-heart"></i></button>' +
+          (isSubject ? '<span class="hd-badge me">Searched</span>' : '') +
+          (!isSubject && x.saleYear && (new Date().getFullYear() - x.saleYear) <= 1
             ? '<span class="hd-badge sold">Sold ' + x.saleYear + '</span>' : '') +
         '</div>' +
         '<div class="hd-body">' +
-          '<div class="hd-val">' + (v ? money(Math.round(v / 1000) * 1000) : money(x.assessed)) +
-            (v ? '' : '<em>assessed</em>') + '</div>' +
+          '<div class="hd-val">' + (v ? money(Math.round(v / 1000) * 1000) : money(x.assessed)) + '</div>' +
           '<div class="hd-meta">' +
             (x.built ? '<span>' + x.built + '</span>' : '') +
-            (x.acres ? '<span>' + Math.round(x.acres * 43560).toLocaleString() + ' sq ft lot</span>' : '') +
+            (x.acres ? '<span>' + Math.round(x.acres * 43560 / 100) / 10 + 'k sq ft lot</span>' : '') +
             '<span>' + money(x.tax) + ' tax</span>' +
           '</div>' +
           '<div class="hd-addr">' + esc(x.addr) + '</div>' +
-          '<div class="hd-sub">' + esc(x.town) + (x.zip ? ' ' + esc(x.zip) : '') +
-            '  \u00b7  ' + Math.round(x.dist) + 'm away</div>' +
+          '<div class="hd-sub">' + esc(x.town) + (x.zip ? ' ' + esc(x.zip) : '') + '</div>' +
         '</div>' +
       '</article>';
-    }).join('') +
-    '<p class="hd-note">These are parcels from New Jersey\u2019s public assessment file, not listings. ' +
-    'There is no free feed of what is for sale in this state. Every house in the neighborhood appears here, ' +
-    'which is what you want when you are comparing values. For what is actually on the market, ' +
-    '<a href="' + IDX_URL + '" target="_blank" rel="noopener">search the MLS</a>.</p>';
+    });
+
+    // drop the ad in after the first row, the way a real results page does
+    if (cards.length > 4) cards.splice(4, 0, hoodAd());
+    else cards.push(hoodAd());
+
+    host.innerHTML = cards.join('') +
+      '<p class="hd-note">These are parcels from New Jersey\u2019s public assessment file, not listings. ' +
+      'There is no free feed of what is for sale in this state. For what is actually on the market, ' +
+      '<a href="' + IDX_URL + '" target="_blank" rel="noopener">search the MLS</a>.</p>';
   }
 
   window.plHoodHi = function (pin, on) {
@@ -2765,8 +2916,10 @@
           assessed: assessed, tax: tax, built: +p.YR_CONSTR || null, acres: acres,
           sale: sale, saleYear: dy, lat: geo.lat, lon: geo.lon, dist: 0, rate: rate });
       }
-      buildHood({ lat: geo.lat, lon: geo.lon, town: current.town }, list);
-      plShowHood();
+      loadHoodSaved().then(function () {
+        buildHood({ lat: geo.lat, lon: geo.lon, town: current.town }, list);
+        plShowHood();
+      });
     });
 
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
@@ -3433,6 +3586,8 @@
         '<a class="heroauth-btn" href="' + DASHBOARD_URL + '">' +
           (av ? '<img src="' + esc(av) + '" alt="">' : '<i class="fas fa-table-columns"></i>') +
           'My properties</a>' +
+        '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#wishlist">Wishlist</a>' +
+        '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#saved">Saved</a>' +
         '<button class="heroauth-link" onclick="plSignOut()">Sign out</button>';
     } else {
       h.innerHTML =
