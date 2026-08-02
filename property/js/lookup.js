@@ -3624,12 +3624,62 @@
     return true;
   }
 
+
+  // ══════════════════════════════════════════════
+  // GOOGLE ONE TAP
+  //
+  // Immediate, but not a redirect. A hard bounce to Google on page load would
+  // break the promise that you can look up any address without an account, and
+  // Google's crawler cannot follow it either, so the whole site would drop out
+  // of search.
+  //
+  // One Tap shows the account chooser within a second of load, signs the person
+  // in without leaving the page, and dismisses if they are not interested.
+  // Google suppresses it for two hours after a dismissal, which is their rule,
+  // not ours.
+  // ══════════════════════════════════════════════
+  var GOOGLE_CLIENT_ID = '500529228851-m70vsghofv8g16hr6uavls7v9palb3u4.apps.googleusercontent.com';
+
+  function initOneTap() {
+    if (plUser || !authReady()) return;
+    if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) return;
+    try {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: function (res) {
+          if (!res || !res.credential) return;
+          sb.auth.signInWithIdToken({ provider: 'google', token: res.credential })
+            .then(function (r) {
+              if (r.error) { console.warn('[watchdog] one tap:', r.error.message); return; }
+              plUser = r.data && r.data.user;
+              paintAuthBtn();
+              applyGates();
+              toast('Signed in');
+              if (typeof gtag === 'function') gtag('event', 'login', { method: 'one_tap' });
+            });
+        },
+        auto_select: true,             // straight back in for a returning visitor
+        cancel_on_tap_outside: false,
+        context: 'signin',
+        itp_support: true
+      });
+      google.accounts.id.prompt();
+    } catch (e) { console.warn('[watchdog] one tap unavailable:', e); }
+  }
+
+  window.plOneTapReady = function () {
+    // wait for the session check so we never prompt someone already signed in
+    if (plUser === undefined) { setTimeout(window.plOneTapReady, 300); return; }
+    initOneTap();
+  };
+
   function plInitAuth() {
     if (!authReady()) { paintAuthBtn(); return; }
     sb.auth.getSession().then(function (res) {
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
       paintAuthBtn();
       applyGates();
+      if (!plUser) setTimeout(initOneTap, 700);
       // OAuth returns with a hash. Clean it so the address stays shareable.
       if (location.hash.indexOf('access_token') > -1) {
         history.replaceState(null, '', location.pathname + location.search);
@@ -3673,7 +3723,20 @@
     }
   }
 
+  function paintNav() {
+    var r = elReal('wd-right');
+    if (!r) return;
+    r.innerHTML = plUser
+      ? '<a href="/property/pro.html">Pro Hub</a>' +
+        '<a href="/property/dashboard.html">My Properties</a>' +
+        '<button onclick="plSignOut()">Sign out</button>'
+      : '<a href="/property/pro.html">Pro Hub</a>' +
+        '<a href="/property/dashboard.html">My Properties</a>' +
+        '<button onclick="plSignInPrompt()">Sign in</button>';
+  }
+
   function paintAuthBtn() {
+    paintNav();
     paintHeroAuth();
     var b = el('pl-authbtn');
     if (!b) return;
@@ -4384,6 +4447,33 @@
     }, { passive: true });
     window.addEventListener('resize', update, { passive: true });
     update();
+  })();
+
+
+  // Nav goes solid once the hero is behind you.
+  (function navScroll() {
+    var n = document.getElementById('wd-nav');
+    if (!n) return;
+    var hero = document.querySelector('.pl-hero');
+    var ticking = false;
+    function upd() {
+      ticking = false;
+      var past = hero ? (hero.getBoundingClientRect().bottom < 70) : (window.scrollY > 40);
+      n.classList.toggle('solid', past);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; requestAnimationFrame(upd); }
+    }, { passive: true });
+    upd();
+  })();
+
+  // Days to the filing deadline, on the glance panel.
+  (function insDays() {
+    var e = document.getElementById('ins-days');
+    if (!e) return;
+    var now = new Date(), apr = new Date(now.getFullYear(), 3, 1);
+    if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
+    e.textContent = Math.ceil((apr - now) / 864e5);
   })();
 
   var qs = new URLSearchParams(window.location.search);
