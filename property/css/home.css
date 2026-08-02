@@ -204,3 +204,72 @@
   .rv-score { min-width: 84px; padding: 12px 16px; }
   .rv-score b { font-size: 28px; }
 }
+
+/* ============================================================
+   BENEFIT STACK  +  BUYER TRUE COST
+   ============================================================ */
+.sb-stack { border: 1px solid var(--hair); border-radius: 10px; overflow: hidden; max-width: 620px; }
+.sb-l { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start;
+  padding: 13px 18px; border-bottom: 1px solid var(--hair-2); font-size: 14.5px; color: var(--ink-2); }
+.sb-l:last-child { border-bottom: none; }
+.sb-l em { display: block; font-style: normal; font-size: 11.5px; color: var(--ink-3); margin-top: 3px; }
+.sb-l b { font-variant-numeric: tabular-nums; color: var(--ink); white-space: nowrap; }
+.sb-l.head { background: #f7f9fc; font-weight: 600; color: var(--ink); }
+.sb-l.minus b { color: var(--pos); }
+.sb-l.out, .sb-l.out b { color: var(--ink-3); }
+.sb-l.unknown b { color: #8a6f14; }
+.sb-l.total { background: var(--accent-bg); border-top: 2px solid var(--accent); font-weight: 700; color: var(--ink); }
+.sb-l.total b { font-size: 20px; color: var(--accent); }
+
+.sb-meter { position: relative; height: 26px; background: var(--hair); border-radius: 99px;
+  overflow: hidden; max-width: 620px; margin: 16px 0 20px; }
+.sb-meter i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent-2), var(--pos)); }
+.sb-meter span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
+
+.sb-notes { list-style: none; padding: 0; margin: 0 0 20px; max-width: 720px; }
+.sb-notes li { display: flex; gap: 12px; align-items: flex-start; padding: 13px 0;
+  border-bottom: 1px solid var(--hair-2); font-size: 14px; line-height: 1.65; color: var(--ink-2); }
+.sb-notes li:last-child { border-bottom: none; }
+.sb-notes i { width: 16px; text-align: center; margin-top: 3px; color: var(--gold); flex-shrink: 0; }
+.sb-notes b { color: var(--ink); }
+
+.sb-cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+.sb-cta .tl-btn { margin-top: 0; background: var(--accent); color: #fff; border-color: var(--accent); }
+.sb-cta span { font-size: 13px; color: var(--ink-3); }
+.sb-cta b { color: var(--ink); }
+
+.bc-in { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
+.bc-in label { font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--ink-3); }
+.bc-money { display: flex; align-items: center; border-bottom: 2px solid var(--hair); }
+.bc-money span { color: var(--ink-3); font-size: 18px; }
+.bc-money input { border: none; background: none; font-family: var(--sans); font-size: 22px;
+  font-weight: 800; letter-spacing: -.02em; color: var(--accent); padding: 6px 4px; width: 160px; }
+.bc-money input:focus { outline: none; }
+.bc-money:focus-within { border-bottom-color: var(--accent-2); }
+
+.bc-now { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;
+  padding: 18px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); margin-bottom: 18px; }
+.bc-now b { display: block; font-family: var(--sans); font-size: 25px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--accent); line-height: 1.1; }
+.bc-now span { font-size: 12px; color: var(--ink-3); display: block; margin-top: 4px; line-height: 1.4; }
+.bc-now .up b { color: var(--neg); }
+
+.bc-warn, .bc-ok { display: flex; gap: 13px; border-radius: 10px; padding: 16px 18px;
+  font-size: 14.5px; line-height: 1.7; margin-bottom: 20px; max-width: 720px; }
+.bc-warn { background: var(--neg-bg); border-left: 4px solid var(--neg); color: var(--ink-2); }
+.bc-warn i { color: var(--neg); margin-top: 3px; }
+.bc-ok { background: var(--pos-bg); border-left: 4px solid var(--pos); color: var(--ink-2); }
+.bc-ok i { color: var(--pos); margin-top: 3px; }
+.bc-warn b { color: var(--ink); }
+
+.bc-proj { max-width: 560px; }
+.bc-proj h5 { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+  color: var(--ink-3); margin: 0 0 10px; }
+.bc-proj table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.bc-proj td { padding: 9px 0; border-bottom: 1px solid var(--hair-2); color: var(--ink-2);
+  font-variant-numeric: tabular-nums; }
+.bc-proj td.n { text-align: right; }
+.bc-proj td b { color: var(--neg); }
+.bc-proj p { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; margin: 12px 0 0; }
