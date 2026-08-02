@@ -21,7 +21,7 @@
 .hm-hero { background: linear-gradient(150deg, #0e2248, #14346e 70%); color: #fff; }
 .hm-hero-in { max-width: 1080px; margin: 0 auto; padding: 30px 24px;
   display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
-.hm-shot { width: 280px; height: 176px; flex-shrink: 0; border-radius: 12px;
+.hm-shot { width: 380px; height: 238px; flex-shrink: 0; border-radius: 12px;
   background-size: cover; background-position: center; background-color: #22345c; }
 .hm-id { flex: 1; min-width: 260px; }
 .hm-kind { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
@@ -131,3 +131,76 @@
 .rr-say { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); margin: 12px 0 0; max-width: 700px; }
 .rr-say b { color: var(--ink); }
 .comps td.neg { color: var(--neg); font-weight: 700; }
+
+/* ============================================================
+   AGENT INTEL
+   Outlined, not filled. The headshot sits on the border so the panel
+   reads as something a person wrote rather than a system message.
+   ============================================================ */
+.ai {
+  position: relative; border: 1.5px solid var(--hair); border-radius: 14px;
+  padding: 30px 28px 24px; margin: 26px 0 30px; max-width: 820px;
+}
+.ai-h { position: absolute; top: -22px; left: 22px; display: flex; align-items: center;
+  gap: 12px; background: #fff; padding: 0 12px 0 0; }
+.ai-h img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover;
+  border: 2px solid var(--gold); background: #fff; display: block; }
+.ai-h b { display: block; font-family: var(--sans); font-size: 15px; font-weight: 800;
+  letter-spacing: -.01em; color: var(--accent); line-height: 1.2; }
+.ai-h span { font-size: 11px; color: var(--ink-3); }
+.ai .hm-lede { font-size: 17.5px; margin: 0; }
+
+.ai-pts { list-style: none; padding: 0; margin: 20px 0 0; border-top: 1px solid var(--hair-2); }
+.ai-pts li { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0;
+  border-bottom: 1px solid var(--hair-2); font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+.ai-pts li:last-child { border-bottom: none; padding-bottom: 0; }
+.ai-pts i { width: 16px; text-align: center; margin-top: 3px; flex-shrink: 0; color: var(--ink-3); }
+.ai-pts li.good i { color: var(--pos); }
+.ai-pts li.bad i { color: var(--neg); }
+
+@media (max-width: 700px) {
+  .ai { padding: 32px 18px 20px; }
+  .ai-h { left: 14px; }
+  .ai-h img { width: 38px; height: 38px; }
+  .ai .hm-lede { font-size: 16px; }
+}
+
+/* ============================================================
+   REVALUATION RADAR
+   ============================================================ */
+.rv-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; }
+.rv-score { flex-shrink: 0; text-align: center; padding: 15px 22px; border-radius: 10px; min-width: 104px; }
+.rv-score b { display: block; font-family: var(--sans); font-size: 36px; font-weight: 800;
+  letter-spacing: -.04em; line-height: 1; }
+.rv-score span { font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; opacity: .75; }
+.rv-score.high     { background: var(--neg-bg); color: var(--neg); }
+.rv-score.building { background: var(--gold-bg); color: #8a6f14; }
+.rv-score.low      { background: #eef3fc; color: var(--accent); }
+.rv-score.minimal, .rv-score.recent { background: var(--pos-bg); color: var(--pos); }
+.rv-say { flex: 1; min-width: 250px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+.rv-say b { color: var(--ink); }
+
+.rv-meters { max-width: 620px; margin-bottom: 22px; }
+.rv-m { margin-bottom: 15px; }
+.rv-m-h { display: flex; justify-content: space-between; gap: 14px; margin-bottom: 5px; font-size: 13px; }
+.rv-m-h span { color: var(--ink-2); font-weight: 600; }
+.rv-m-h b { color: var(--ink-3); font-weight: 400; text-align: right; }
+.rv-m-bar { height: 6px; background: var(--hair); border-radius: 99px; overflow: hidden; }
+.rv-m-bar i { display: block; height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, #4a7bc8, var(--gold) 55%, var(--neg)); }
+
+.rv-own { border-radius: 10px; padding: 18px 20px; max-width: 700px; }
+.rv-own.up   { background: var(--neg-bg); border-left: 4px solid var(--neg); }
+.rv-own.down { background: var(--pos-bg); border-left: 4px solid var(--pos); }
+.rv-own.flat { background: #f7f9fc; border-left: 4px solid var(--hair); }
+.rv-own-h { font-size: 15.5px; font-weight: 700; color: var(--ink); margin-bottom: 9px; }
+.rv-own-h b.up { color: var(--neg); } .rv-own-h b.down { color: var(--pos); }
+.rv-own p { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 10px; }
+.rv-own p b { color: var(--ink); }
+.rv-fine { font-size: 12.5px !important; color: var(--ink-3) !important; margin: 0 !important; }
+
+@media (max-width: 640px) {
+  .rv-score { min-width: 84px; padding: 12px 16px; }
+  .rv-score b { font-size: 28px; }
+}
