@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Report | NJ Property Tax Relief</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/css/home.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div class="pl-toast" id="pl-toast"></div>
+<div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
+
+<section class="gate" id="hm-gate" style="display:none;">
+  <h1>Sign in to see this report</h1>
+  <p>Property reports are built from the homes you have saved to your account.</p>
+  <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
+  <a class="gate-back" href="/property/">Back to the property lookup</a>
+</section>
+
+<main id="hm-main" style="display:none;">
+
+  <header class="hm-top">
+    <div class="hm-top-in">
+      <a class="hm-back" href="/property/dashboard.html"><i class="fas fa-chevron-left"></i> All properties</a>
+      <select id="hm-switch" onchange="hmSwitch(this.value)"></select>
+      <div class="hm-top-r">
+        <button class="hm-tl" onclick="hmGlossary()"><i class="fas fa-book"></i> Glossary</button>
+        <button class="hm-tl" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+      </div>
+    </div>
+  </header>
+
+  <div id="hm-body"></div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/home.js"></script>
+</body>
+</html>
