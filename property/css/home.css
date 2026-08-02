@@ -1,0 +1,100 @@
+/* ============================================================
+   PROPERTY REPORT  +  condensed metrics and tooltips
+   njpropertytaxrelief.com/property
+   ============================================================ */
+.hm-top { border-bottom: 1px solid var(--hair); background: #fff; position: sticky; top: 0; z-index: 40; }
+.hm-top-in { max-width: 1080px; margin: 0 auto; padding: 12px 24px;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.hm-back { display: inline-flex; align-items: center; gap: 8px; font-size: 14px;
+  font-weight: 700; color: var(--accent); text-decoration: none; white-space: nowrap; }
+.hm-back:hover { color: var(--accent-2); }
+#hm-switch { flex: 1; min-width: 180px; max-width: 420px; padding: 9px 12px;
+  font-family: inherit; font-size: 14px; color: var(--ink);
+  border: 1px solid var(--hair); border-radius: 7px; background: #fff; }
+.hm-top-r { display: flex; gap: 4px; margin-left: auto; }
+.hm-tl { display: inline-flex; align-items: center; gap: 7px; background: none; border: none;
+  font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--ink-2);
+  padding: 8px 12px; border-radius: 7px; cursor: pointer; }
+.hm-tl:hover { background: var(--accent-bg); color: var(--accent); }
+.hm-tl i { font-size: 12px; color: var(--ink-3); }
+
+.hm-hero { background: linear-gradient(150deg, #0e2248, #14346e 70%); color: #fff; }
+.hm-hero-in { max-width: 1080px; margin: 0 auto; padding: 30px 24px;
+  display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.hm-shot { width: 280px; height: 176px; flex-shrink: 0; border-radius: 12px;
+  background-size: cover; background-position: center; background-color: #22345c; }
+.hm-id { flex: 1; min-width: 260px; }
+.hm-kind { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .11em; color: #f0d87a; border: 1px solid rgba(240,216,122,.4);
+  padding: 4px 11px; border-radius: 99px; margin-bottom: 12px; }
+.hm-id h1 { font-family: var(--sans); font-size: clamp(24px, 3.4vw, 34px); font-weight: 800;
+  letter-spacing: -.032em; color: #fff; margin: 0 0 6px; line-height: 1.15; }
+.hm-id p { font-size: 13.5px; color: #9db1d0; margin: 0; }
+.hm-val { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.16); }
+.hm-val b { display: block; font-family: var(--sans); font-size: 34px; font-weight: 800;
+  letter-spacing: -.035em; color: #f0d87a; line-height: 1; }
+.hm-val span { font-size: 12.5px; color: #9db1d0; }
+
+.hm-wrap { max-width: 1080px; padding-top: 30px; }
+.hm-lede { font-size: 19px; line-height: 1.7; color: var(--ink-2); max-width: 760px; margin: 0 0 28px; }
+.hm-lede b { color: var(--accent); }
+.hm-flag { color: var(--neg); font-weight: 600; border-bottom: 2px solid rgba(192,52,43,.25); }
+
+.hm-figs { display: flex; flex-wrap: wrap; gap: 0 44px; background: #f7f9fc;
+  border-radius: 10px; padding: 18px 24px; margin-bottom: 8px; }
+.hm-figs > div { padding: 6px 0; }
+.hm-figs dt { font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--ink-3); margin-bottom: 4px; }
+.hm-figs dd { margin: 0; font-family: var(--sans); font-size: 21px; font-weight: 800;
+  letter-spacing: -.025em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.hm-figs dd em { display: block; font-style: normal; font-size: 11px; font-weight: 400;
+  color: var(--ink-3); margin-top: 2px; }
+
+.hm-acts { display: flex; gap: 14px; flex-wrap: wrap; padding: 30px 0 10px;
+  border-top: 1px solid var(--hair); margin-top: 34px; }
+.hm-acts .tl-btn { margin-top: 0; }
+
+/* ---------- condensed strip on dashboard cards ---------- */
+.ms { display: flex; flex-wrap: wrap; gap: 0 34px; background: #f7f9fc;
+  border-radius: 8px; padding: 13px 18px; margin-bottom: 16px; }
+.ms-c { padding: 3px 0; }
+.ms-l { display: block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin-bottom: 3px; }
+.ms-v { display: block; font-family: var(--sans); font-size: 18px; font-weight: 800;
+  letter-spacing: -.02em; color: var(--accent); font-variant-numeric: tabular-nums; line-height: 1.15; }
+.ms-v.good { color: var(--pos); }
+.ms-v.mid  { color: #8a6f14; }
+.ms-v.bad  { color: var(--neg); }
+.ms-s { display: block; font-size: 10.5px; color: var(--ink-3); margin-top: 1px; }
+
+.pr-acts .prime { font-weight: 800; color: var(--accent); border-bottom-color: var(--accent); }
+.pr-acts .prime i { font-size: 10px; margin-left: 5px; }
+
+/* ---------- tooltips ---------- */
+.tip { cursor: help; border-bottom: 1px dotted var(--ink-3); }
+.tip i { font-size: 9px; margin-left: 4px; opacity: .55; }
+.tip:focus { outline: 2px solid var(--accent-2); outline-offset: 2px; border-radius: 2px; }
+.tipbox { position: absolute; z-index: 9999; display: none; width: 300px;
+  background: #10182b; color: #e8edf6; font-size: 12.5px; line-height: 1.6;
+  padding: 11px 14px; border-radius: 8px; box-shadow: 0 10px 30px rgba(16,24,43,.3);
+  pointer-events: none; }
+.tipbox.on { display: block; }
+
+/* ---------- glossary ---------- */
+.gl > div { padding: 12px 0; border-bottom: 1px solid var(--hair-2); }
+.gl > div:last-child { border-bottom: none; }
+.gl b { display: block; font-size: 14.5px; color: var(--accent); margin-bottom: 4px; }
+.gl span { font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
+
+@media (max-width: 700px) {
+  .hm-shot { width: 100%; height: 200px; }
+  .hm-hero-in { padding: 22px 18px; gap: 18px; }
+  .hm-figs { gap: 0 26px; padding: 15px 18px; }
+  .ms { gap: 0 22px; }
+  .tipbox { width: calc(100vw - 32px); }
+}
+@media print {
+  .hm-top, .hm-acts, .lk-over { display: none !important; }
+  .lk-in { filter: none !important; opacity: 1 !important; }
+  .hm-hero { background: #0e2248 !important; -webkit-print-color-adjust: exact; }
+}
