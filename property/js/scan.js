@@ -90,12 +90,24 @@
         .then(function (j) { appeals = j || {}; }).catch(function () { appeals = {}; })
     ]);
   }
+  // A missing county file and a town with few sales are completely different
+  // problems, and telling someone "not enough sales" when the file simply is
+  // not there sends them looking in the wrong place.
   function countySales(name) {
     var k = String(name || '').toLowerCase().replace(/\s+/g, '-');
     if (salesCache[k]) return Promise.resolve(salesCache[k]);
-    return xfetch('/property/sales-' + k + '.json', 30000).then(function (r) { return r.json(); })
-      .then(function (j) { salesCache[k] = (j && j.sales) || []; return salesCache[k]; })
-      .catch(function () { salesCache[k] = []; return []; });
+    return xfetch('/property/sales-' + k + '.json', 30000)
+      .then(function (r) {
+        if (!r.ok) { var e = new Error('missing'); e.file = 'sales-' + k + '.json'; e.status = r.status; throw e; }
+        return r.json();
+      })
+      .then(function (j) {
+        if (!j || !j.sales || !j.sales.length) {
+          var e = new Error('empty'); e.file = 'sales-' + k + '.json'; throw e;
+        }
+        salesCache[k] = j.sales;
+        return salesCache[k];
+      });
   }
 
   // ── the town picker is built from the ratio file, so it only ever offers
@@ -143,7 +155,21 @@
     el('sc-out').innerHTML = '<div class="sc-load"><div class="pl-spin"></div>' +
       '<div>Reading verified sales for ' + esc((uni[d] && uni[d].name) || d) + '...</div></div>';
 
-    countySales(s.county).then(function (all) {
+    countySales(s.county).catch(function (err) {
+      el('sc-out').innerHTML =
+        '<div class="sc-err"><b><i class="fas fa-triangle-exclamation"></i> ' +
+          (err.message === 'missing' ? 'The sales file for this county is not on the server'
+                                     : 'The sales file for this county is empty') + '</b>' +
+        '<p>The scanner reads <code>' + esc(err.file || '') + '</code> from <code>/property/</code>, and it is ' +
+        (err.status === 404 ? 'not there' : 'not returning usable data') + '. ' +
+        'The ratio, uniformity and appeal files loaded fine, so this is one missing upload rather than ' +
+        'anything broken.</p>' +
+        '<p class="sc-err-f">Run <code>parse_sr1a.py --all</code> and upload the resulting ' +
+        '<code>sales-&lt;county&gt;.json</code> files to <code>/property/</code>. They are large, ' +
+        'roughly 1 MB per county, which is why they are loaded on demand rather than up front.</p></div>';
+      return null;
+    }).then(function (all) {
+      if (!all) return;
       var TY = new Date().getFullYear();
       var ratio = s.ratio;
       // appreciation measured from this town's own verified sales; falls back
