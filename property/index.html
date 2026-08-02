@@ -99,6 +99,28 @@
 </script>
 </head>
 <body>
+<!-- SITE NAV -->
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <nav class="wd-left">
+      <a href="/property/">Lookup</a>
+      <a href="/anchor-estimator.html">Rebates</a>
+      <a href="/property/#appeals">Appeals</a>
+      <a href="/insights.html">Insights</a>
+    </nav>
+
+    <a class="wd-logo" href="/property/">
+      <i class="fas fa-dog"></i><span>Watchdog</span>
+    </a>
+
+    <nav class="wd-right" id="wd-right">
+      <a href="/property/pro.html">Pro Hub</a>
+      <a href="/property/dashboard.html">My Properties</a>
+      <button onclick="plSignInPrompt()">Sign in</button>
+    </nav>
+  </div>
+</header>
+
 <div class="pl-toast" id="pl-toast"></div>
 
 <!-- ============================================================
@@ -236,6 +258,7 @@
 
       <a class="lp-tool" href="/anchor-estimator.html">
         <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <span class="lp-tag green right">Up to $6,500</span>
         </div>
         <div class="lp-body">
           <h3>ANCHOR &amp; Stay NJ estimator</h3>
@@ -351,7 +374,7 @@
       </a>
       <a class="lp-path" href="/anchor-estimator.html">
         <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <span class="lp-tag green">65+ ONLY</span>
+          <span class="lp-tag green">65+</span>
           <div class="lp-over">
             <h3>I'm 65 or older</h3>
             <p>Stay NJ can cover up to half your bill, to $6,500, and it stacks with ANCHOR and the Senior Freeze. Most seniors who qualify have never filed.</p>
@@ -554,6 +577,61 @@
 </section>
 
 
+<!-- INSIGHTS -->
+<section class="section" style="padding-top:52px;">
+  <div class="section-inner">
+    <h2 class="lp-h2">New Jersey property tax insights</h2>
+    <div class="ins-grid">
+
+      <a class="ins-lead" href="/insights/equalization-ratios.html">
+        <div class="ins-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=1000&auto=format&fit=crop')"></div>
+        <span class="ins-kicker">Explainer</span>
+        <h3>Your assessment is not what your house is worth, and the gap is the whole game</h3>
+        <p>Almost no New Jersey town assesses at full market value. Understanding the equalization ratio is
+           the difference between guessing at an appeal and knowing whether you have one.</p>
+        <em>Coming soon</em>
+      </a>
+
+      <div class="ins-list">
+        <a href="/insights/appeal-deadline.html">
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Deadlines</span>
+            <h4>April 1, or May 1 if your town revalued. How to tell which one applies to you</h4>
+            <em>Coming soon</em></div>
+        </a>
+        <a href="/insights/stay-nj.html">
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Benefits</span>
+            <h4>Stay NJ, ANCHOR and the Senior Freeze stack. Most seniors claim one of the three</h4>
+            <em>Coming soon</em></div>
+        </a>
+        <a href="/insights/reassessment.html">
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Watch out</span>
+            <h4>Six signs your town is about to revalue, and what happens to your bill when it does</h4>
+            <em>Coming soon</em></div>
+        </a>
+        <div class="ins-more"><a href="/insights.html">All insights</a></div>
+      </div>
+    </div>
+
+    <div class="ins-glance">
+      <div class="ins-glance-h">
+        <b>New Jersey property tax at a glance</b>
+        <span id="ins-asof">From the state’s own records</span>
+      </div>
+      <div class="ins-stats">
+        <div><i class="fas fa-building-columns"></i><div><b>565</b><span>Municipalities</span></div></div>
+        <div><i class="fas fa-file-signature"></i><div><b>131,244</b><span>Verified sales on file</span></div></div>
+        <div><i class="fas fa-percent"></i><div><b>55.2%</b><span>Median assessment to market ratio</span></div></div>
+        <div><i class="fas fa-calendar-day"></i><div><b id="ins-days">-</b><span>Days to the appeal deadline</span></div></div>
+      </div>
+      <div class="ins-src">Source: NJ Division of Taxation SR1A verified sales and the Table of Equalized Valuations.
+        <a href="/property/">Check your own address</a></div>
+    </div>
+  </div>
+</section>
+
 <!-- GREENTREE MORTGAGE -->
 <section class="section" style="padding-top:8px;padding-bottom:34px;">
   <div class="section-inner">
@@ -578,6 +656,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="/scripts.js"></script>
 <script src="/property/js/lookup.js"></script>
 </body>
