@@ -211,7 +211,7 @@
   var PHRASES = [
     'any New Jersey home', 'your home', 'the neighborhood', "your parents' home", "your client's home",
     'that empty house', 'the house down the street', 'that listing you are eyeing',
-    'the one that got away', 'commercial and mixed use buildings', 'New Jersey',
+    'the one that got away', 'commercial use buildings', 'New Jersey',
   ];
   (function typewriter() {
     var node = el('pl-type');
