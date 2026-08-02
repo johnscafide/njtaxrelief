@@ -4,8 +4,6 @@
    ============================================================ */
 
 .nobox {
-  position: relative;
-  padding: 20px;
   /* Draws a faint red X from corner to corner */
   background-image: 
     linear-gradient(to bottom right, transparent calc(50% - 1px), rgba(255, 0, 0, 0.15) calc(50% - 1px), rgba(255, 0, 0, 0.15) calc(50% + 1px), transparent calc(50% + 1px)),
