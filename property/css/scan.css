@@ -94,3 +94,11 @@
 }
 .sc-cov { font-size: 12.5px; color: var(--ink-3); margin: -18px 0 26px; }
 .sc-cov b { color: var(--ink-2); }
+.sc-err { background: var(--neg-bg); border-left: 4px solid var(--neg); border-radius: 0 10px 10px 0;
+  padding: 20px 24px; max-width: 720px; }
+.sc-err b { display: block; font-size: 16px; color: var(--neg); margin-bottom: 10px; }
+.sc-err b i { margin-right: 8px; }
+.sc-err p { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 12px; }
+.sc-err code { background: rgba(255,255,255,.75); padding: 2px 6px; border-radius: 4px;
+  font-size: 13px; font-family: var(--mono); color: var(--ink); }
+.sc-err-f { font-size: 13px !important; color: var(--ink-3) !important; margin: 0 !important; }
