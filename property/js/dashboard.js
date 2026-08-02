@@ -97,7 +97,7 @@
     Promise.all([
       sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
       sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
-      loadRefData(), loadSR1A()
+      loadRefData(), loadSR1A(), loadUniformity(), loadAppeals()
     ]).then(function (res) {
       rows = (res[0] && res[0].data) || [];
       profile = (res[1] && res[1].data) || {};
@@ -1138,6 +1138,198 @@
       'Supported assessment is market value times the ratio; the Chapter 123 limit adds the statutory 15 percent.</p>';
   }
 
+  // ══════════════════════════════════════════════
+  // UNIFORMITY AND APPEAL ODDS
+  //
+  // Two datasets New Jersey publishes and nobody reads, joined to the property
+  // in front of you.
+  //
+  //   uniformity.json  how consistently a town assesses, 558 districts
+  //   appeals.json     what actually happens to appeals, 21 counties, 10 years
+  //
+  // Separately they are trivia. Together with the property's own gap they
+  // answer the only question that matters: is filing worth it.
+  // ══════════════════════════════════════════════
+  var uniData = null, appealData = null;
+
+  function ordinal(n) {
+    var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+  }
+
+
+  function loadUniformity() {
+    if (uniData) return Promise.resolve();
+    return xfetch('/property/uniformity.json', 12000).then(function (r) { return r.json(); })
+      .then(function (j) { uniData = (j && j.districts) || {}; })
+      .catch(function () { uniData = {}; });
+  }
+  function loadAppeals() {
+    if (appealData) return Promise.resolve();
+    return xfetch('/property/appeals.json', 12000).then(function (r) { return r.json(); })
+      .then(function (j) { appealData = j || {}; })
+      .catch(function () { appealData = {}; });
+  }
+
+  function uniFor(r) {
+    var d = String(r.pams_pin || '').slice(0, 4);
+    return (uniData && d) ? uniData[d] : null;
+  }
+  function appealFor(r) {
+    var c = String(r.pams_pin || '').slice(0, 2);
+    return (appealData && appealData.counties && c) ? appealData.counties[c] : null;
+  }
+
+  var BAND_TEXT = {
+    'excellent': 'assesses very consistently',
+    'good':      'assesses reasonably consistently',
+    'fair':      'assessments here vary more than they should',
+    'poor':      'assessments here are noticeably uneven',
+    'very poor': 'the assessment roll here is a mess'
+  };
+  var BAND_CLS = {
+    'excellent': 'good', 'good': 'good', 'fair': 'mid', 'poor': 'bad', 'very poor': 'bad'
+  };
+
+  // ── 1 · ASSESSMENT UNIFORMITY ──
+  function toolUniformity() {
+    var homes = rows.filter(function (r) { return uniFor(r); });
+    if (!homes.length) return '';
+    var r = homes[0], u = uniFor(r);
+
+    var W = 320, H = 62;
+    var yrs = Object.keys(u.series).sort();
+    var vals = yrs.map(function (y) { return u.series[y]; });
+    var lo = Math.min.apply(null, vals.concat([8])), hi = Math.max.apply(null, vals.concat([22]));
+    var path = vals.map(function (v, i) {
+      var x = 6 + (i / Math.max(1, vals.length - 1)) * (W - 12);
+      var y = H - 8 - ((v - lo) / ((hi - lo) || 1)) * (H - 20);
+      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }).join(' ');
+    // the IAAO line, which is the only benchmark that means anything
+    var iaao = H - 8 - ((15 - lo) / ((hi - lo) || 1)) * (H - 20);
+
+    return toolCard('Assessment uniformity', 'fa-ruler-combined',
+      '<p class="tl-p">Your town\u2019s equalization ratio says whether it assesses <em>high or low</em>. ' +
+      'This says whether it assesses <em>fairly</em>. It is the average percentage by which individual ' +
+      'assessments in ' + esc(u.name) + ' stray from the town\u2019s own standard, and New Jersey publishes ' +
+      'it every year in a ninety page PDF nobody opens.</p>' +
+
+      '<div class="un-head">' +
+        '<div class="un-score ' + (BAND_CLS[u.band] || 'mid') + '">' +
+          '<b>' + u.score + '</b><span>uniformity score</span></div>' +
+        '<div class="un-say">' +
+          '<b>' + esc(u.name) + ' ' + (BAND_TEXT[u.band] || '') + '.</b> ' +
+          'Its residential coefficient of deviation is <b>' + u.coefficient + '</b>. ' +
+          'The professional standard is 15 or below. ' +
+          'That puts it in the <b>' + ordinal(u.percentile) + ' percentile</b> statewide, so ' +
+          (u.percentile >= 50
+            ? 'it is more consistent than most of New Jersey.'
+            : 'most of New Jersey assesses more consistently than this.') +
+        '</div>' +
+      '</div>' +
+
+      '<div class="un-chart">' +
+        '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Coefficient of deviation over time">' +
+          '<line x1="6" y1="' + iaao.toFixed(1) + '" x2="' + (W - 6) + '" y2="' + iaao.toFixed(1) +
+            '" stroke="#c3cbdb" stroke-width="1" stroke-dasharray="4 4"/>' +
+          '<text x="' + (W - 8) + '" y="' + (iaao - 5).toFixed(1) + '" text-anchor="end" ' +
+            'font-size="9" fill="#8a93a6">standard, 15</text>' +
+          '<path d="' + path + '" fill="none" stroke="' +
+            (u.band === 'poor' || u.band === 'very poor' ? '#c0342b' : '#14346e') +
+            '" stroke-width="2.4" stroke-linecap="round"/>' +
+        '</svg>' +
+        '<div class="un-yrs">' + yrs.map(function (y, i) {
+          return '<span>' + y + '<em>' + vals[i] + '</em></span>';
+        }).join('') + '</div>' +
+      '</div>' +
+
+      (u.commercial && u.commercial > u.coefficient * 1.5
+        ? '<div class="tl-note">Commercial property here deviates at <b>' + u.commercial + '</b>, far worse ' +
+          'than residential. Uneven commercial assessment shifts burden onto homeowners over time.</div>'
+        : '') +
+
+      '<div class="tl-fine">Coefficient of deviation, class 2 residential, from the NJ Division of Taxation ' +
+      'Measures of Property Assessment Uniformity. Weighted toward recent years, adjusted for volatility and ' +
+      'sample size. A high coefficient does not by itself win an appeal, but it is the condition that makes ' +
+      'one arguable.</div>');
+  }
+
+  // ── 2 · APPEAL ODDS ──
+  function toolAppealOdds() {
+    var cands = rows.filter(function (r) { return appealFor(r); });
+    if (!cands.length) return '';
+    var r = cands[0], a = appealFor(r), L = a.latest, u = uniFor(r);
+    var hist = Object.keys(a.history).sort();
+
+    var W = 330, H = 58;
+    var rates = hist.map(function (y) { return a.history[y].win_rate_filed; });
+    var lo = Math.min.apply(null, rates), hi = Math.max.apply(null, rates);
+    var path = rates.map(function (v, i) {
+      var x = 6 + (i / Math.max(1, rates.length - 1)) * (W - 12);
+      var y = H - 8 - ((v - lo) / ((hi - lo) || 1)) * (H - 18);
+      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
+    }).join(' ');
+
+    // Expected value. This is the number nobody else can produce, because it
+    // needs the county outcome record, the town's uniformity, and this
+    // property's own gap, and no one publishes the three together.
+    var c = chapter123(r);
+    var ev = null;
+    if (c && c.testable && c.hasCase && c.saving) {
+      var p = L.win_rate_decided ? L.win_rate_decided / 100 : L.win_rate_filed / 100;
+      // a sloppier roll is a friendlier roll for an appellant
+      if (u) p = Math.max(0.05, Math.min(0.95, p * (u.coefficient > 20 ? 1.12 : u.coefficient < 10 ? 0.88 : 1)));
+      ev = { p: p, gross: c.saving * 5, net: (c.saving * 5 * p) - 25 };
+    }
+
+    return toolCard('Appeal odds in ' + esc(a.county.toLowerCase().replace(/\b\w/g, function (m) { return m.toUpperCase(); })) + ' County',
+      'fa-gavel',
+      '<p class="tl-p">Appeals are decided by the <b>county</b> board of taxation, not your town, so this is the ' +
+      'body that would actually hear your case. New Jersey publishes what happens to every appeal filed, ' +
+      'and has done for ten years.</p>' +
+
+      '<div class="ap-grid">' +
+        '<div><b>' + L.win_rate_filed + '%</b><span>of all appeals filed won a reduction</span></div>' +
+        '<div><b>' + (L.win_rate_decided != null ? L.win_rate_decided + '%' : '-') +
+          '</b><span>of those actually decided</span></div>' +
+        '<div><b>' + L.total.toLocaleString() + '</b><span>filed in ' + a.latest_year + '</span></div>' +
+        '<div><b>' + L.residential.toLocaleString() + '</b><span>were residential like yours</span></div>' +
+      '</div>' +
+
+      '<div class="ap-chart">' +
+        '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Win rate over ten years">' +
+          '<path d="' + path + '" fill="none" stroke="#1c7a4a" stroke-width="2.4" stroke-linecap="round"/>' +
+        '</svg>' +
+        '<div class="ap-yrs"><span>' + hist[0] + '  ' + rates[0] + '%</span>' +
+          '<span class="' + (a.trend > 0 ? 'up' : a.trend < 0 ? 'down' : '') + '">' +
+          (a.trend > 0 ? 'up ' + a.trend + ' points' : a.trend < 0 ? 'down ' + Math.abs(a.trend) + ' points' : 'flat') +
+          ' over ten years</span>' +
+          '<span>' + hist[hist.length - 1] + '  ' + rates[rates.length - 1] + '%</span></div>' +
+      '</div>' +
+
+      (ev
+        ? '<div class="ap-ev">' +
+            '<div class="ap-ev-n">' + money(Math.round(ev.net)) + '</div>' +
+            '<div class="ap-ev-l">Expected value of filing on <b>' + esc(r.address) + '</b>, over five years, ' +
+              'after the filing fee. That is a <b>' + Math.round(ev.p * 100) + '%</b> chance of winning ' +
+              money(Math.round(ev.gross)) + '.</div>' +
+            '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have an agent screen this</button>' +
+          '</div>'
+        : '<div class="tl-note">Your saved properties do not currently show an assessment above the Chapter 123 ' +
+          'limit, so there is nothing to weigh these odds against. Open a property\u2019s full record and the ' +
+          'analysis saves back here.</div>') +
+
+      '<div class="tl-fine">A win means the assessment came down, either revised by the board or stipulated by ' +
+      'agreement before hearing. Most successful appeals settle, so counting only board revisions would ' +
+      'understate this badly. Withdrawals and dismissals are excluded from the decided rate. ' +
+      'The average successful appeal in ' + a.county.toLowerCase() + ' cut ' +
+      (L.avg_reduction_per_win ? money(L.avg_reduction_per_win) : 'an unrecorded amount') +
+      ' off the assessed value, though that figure is dominated by commercial cases and a house will be far less. ' +
+      'This data is published by county, not by town. Anyone offering you a town level win rate for New Jersey ' +
+      'is guessing.</div>');
+  }
+
   // ── shared card shell ──
   // Named toolCard, not card. The dashboard already has a card(r) that renders
   // saved property tiles, and shadowing it silently replaced every property
@@ -1217,8 +1409,11 @@
   }
 
   function toolsHTML() {
-    var free = [toolDrift(), toolRebates()].filter(Boolean).join('');
-    var pro = [toolPercentile(), toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
+    // Uniformity is free on purpose: it is the most surprising number on the
+    // site and the reason someone tells a neighbour about it.
+    var free = [toolUniformity(), toolDrift(), toolRebates()].filter(Boolean).join('');
+    var pro = [toolAppealOdds(), toolPercentile(), toolPortfolio(),
+               toolCompare(), toolExport()].filter(Boolean).join('');
     return free +
       (pro ? locked('Analysis tools',
         'Where you sit in your town, portfolio totals, town comparisons and the exports.', pro) : '') +
