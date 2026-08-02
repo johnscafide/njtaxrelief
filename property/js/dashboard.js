@@ -1838,6 +1838,318 @@
       'council decided to. Confirm with your municipal assessor before making a decision on it.</div>');
   }
 
+  // ══════════════════════════════════════════════
+  // NEW JERSEY BENEFIT RULES
+  //
+  // Kept in one place because they change with every state budget, and because
+  // the whole point of these tools is being right about the thresholds. Each
+  // figure below is dated so it is obvious when it went stale.
+  //
+  // Verified against the Division of Taxation, August 2026.
+  // ══════════════════════════════════════════════
+  var NJ = {
+    asOf: 'August 2026',
+    stayNJ: {
+      // The FY2027 Appropriations Act, signed 30 June 2026, cut the income
+      // limit from $500,000 to $200,000. A great many sites still quote the
+      // old figure, which would tell a household earning $300,000 it qualifies
+      // when it no longer does.
+      incomeLimit: 200000,
+      minAge: 65,
+      share: 0.50,            // 50% of the property tax bill
+      taxCap: 13000,          // applied to the first $13,000 of tax
+      benefitCap: 6500,
+      homeownersOnly: true
+    },
+    anchor: {
+      // Homeowners, by age and NJ-1040 line 29 income.
+      senior:  [[150000, 1750], [250000, 1250]],
+      under65: [[150000, 1500], [250000, 1000]],
+      renter:  [[150000, 700]],
+      hardLimit: 250000
+    },
+    freeze: {
+      incomeLimit: 172475,    // 2025 filing year
+      minAge: 65,
+      minYearsOwned: 10,
+      minYearsResident: 10
+    },
+    deduction: {
+      senior: 250,            // annual, age 65+ or permanently disabled
+      seniorIncomeLimit: 10000,
+      veteran: 250
+    },
+    deadline: 'November 2, 2026',
+    form: 'PAS-1'
+  };
+
+  function anchorAmount(income, age65, renter) {
+    if (income == null) return null;
+    if (renter) return income <= 150000 ? NJ.anchor.renter[0][1] : 0;
+    if (income > NJ.anchor.hardLimit) return 0;
+    var table = age65 ? NJ.anchor.senior : NJ.anchor.under65;
+    for (var i = 0; i < table.length; i++) if (income <= table[i][0]) return table[i][1];
+    return 0;
+  }
+
+  // ══════════════════════════════════════════════
+  // 14 · SENIOR BENEFIT MAXIMIZER
+  //
+  // The stacking is genuinely counterintuitive and it costs people money.
+  //
+  // Stay NJ is a TOP OFF, not an addition. The state works out ANCHOR and the
+  // Senior Freeze first. If those two together already reach 50% of the tax
+  // bill, Stay NJ pays nothing. If they fall short, Stay NJ pays the
+  // difference up to the cap.
+  //
+  // The practical consequence, which nobody explains: claiming ANCHOR does not
+  // increase a senior's total relief once Stay NJ is in play. It changes which
+  // pot the money comes from. What DOES increase the total is the Senior
+  // Freeze, because the freeze amount grows every year the base year holds,
+  // and a large freeze plus Stay NJ can exceed 50% of the bill.
+  //
+  // Which makes the base year the single most valuable thing on this page.
+  // ══════════════════════════════════════════════
+  function seniorBenefits(tax, income, age, yearsOwned, freezeBase) {
+    if (!tax) return null;
+    var out = { tax: tax, income: income, age: age, notes: [], eligible: {} };
+
+    var is65 = age != null && age >= 65;
+    out.eligible.anchor = income != null && income <= NJ.anchor.hardLimit;
+    out.eligible.stay = is65 && income != null && income <= NJ.stayNJ.incomeLimit;
+    out.eligible.freeze = is65 && income != null && income <= NJ.freeze.incomeLimit &&
+                          (yearsOwned == null || yearsOwned >= NJ.freeze.minYearsOwned);
+
+    out.anchor = out.eligible.anchor ? anchorAmount(income, is65, false) : 0;
+
+    // Senior Freeze reimburses the increase over the base year. Without a base
+    // year on file we cannot invent one, and saying so is more useful than a
+    // made up number.
+    out.freeze = null;
+    if (out.eligible.freeze) {
+      out.freeze = (freezeBase && freezeBase > 0 && tax > freezeBase) ? (tax - freezeBase) : null;
+      if (out.freeze == null) out.notes.push('freeze-nobase');
+    }
+
+    // Stay NJ tops the other two up to half the bill.
+    var target = Math.min(tax, NJ.stayNJ.taxCap) * NJ.stayNJ.share;
+    target = Math.min(target, NJ.stayNJ.benefitCap);
+    var already = out.anchor + (out.freeze || 0);
+    out.stayTarget = target;
+    out.stay = out.eligible.stay ? Math.max(0, target - already) : 0;
+
+    out.total = out.anchor + (out.freeze || 0) + out.stay;
+    out.after = Math.max(0, tax - out.total);
+    out.pct = tax ? out.total / tax : 0;
+
+    // Where the money is actually left on the table.
+    if (!is65 && age != null && age >= 60) out.notes.push('approaching65');
+    if (out.eligible.freeze && out.freeze == null) out.notes.push('file-freeze');
+    if (is65 && income != null && income > NJ.stayNJ.incomeLimit &&
+        income <= 500000) out.notes.push('stay-limit-changed');
+    if (out.eligible.stay && out.anchor && already >= target) out.notes.push('anchor-absorbed');
+    return out;
+  }
+
+  function toolSeniorBenefits(r) {
+    var tax = +r.last_year_tax || 0;
+    if (!tax) return '';
+    var income = profile.gross_income != null ? +profile.gross_income : null;
+    var age = profile.birth_year ? (new Date().getFullYear() - +profile.birth_year) : null;
+    var yrs = profile.years_in_home != null ? +profile.years_in_home : null;
+
+    if (income == null || age == null) {
+      return toolCard('Senior benefit stack', 'fa-layer-group',
+        '<p class="tl-p">New Jersey runs three programs for homeowners aged 65 and over, and they interact in ' +
+        'a way that surprises people: <b>Stay NJ is a top-off, not an addition</b>. The state works out ANCHOR ' +
+        'and the Senior Freeze first, then Stay NJ pays whatever is needed to reach half the tax bill.</p>' +
+        '<p class="tl-p">Working out where a specific household lands needs two figures, and they are both ' +
+        'optional in your profile: <b>your birth year and your household income</b>. Every threshold in these ' +
+        'programs is a hard cutoff, so a range cannot answer it.</p>' +
+        '<a class="tl-btn" href="/property/dashboard.html#profile">Add them to your profile</a>');
+    }
+
+    var b = seniorBenefits(tax, income, age, yrs, profile.freeze_base ? +profile.freeze_base : null);
+    if (!b) return '';
+    var is65 = age >= 65;
+
+    function line(label, amt, note, cls) {
+      return '<div class="sb-l ' + (cls || '') + '">' +
+        '<span>' + label + (note ? '<em>' + note + '</em>' : '') + '</span>' +
+        '<b>' + (amt == null ? 'unknown' : (amt > 0 ? '-' + money(amt) : money(0))) + '</b></div>';
+    }
+
+    var notes = {
+      'approaching65':
+        ['fa-hourglass-half', 'At ' + age + ', you are ' + (65 - age) + ' year' + (65 - age === 1 ? '' : 's') +
+         ' from the two largest programs. Stay NJ alone would be worth about ' +
+         money(Math.min(tax * 0.5, NJ.stayNJ.benefitCap)) + ' a year at this bill.'],
+      'file-freeze':
+        ['fa-snowflake', 'You appear to qualify for the Senior Freeze but there is no base year on file. ' +
+         'This is the one worth acting on: the freeze locks your tax at its current level and reimburses every ' +
+         'increase after it, so the benefit compounds for as long as you stay. Filing late does not backdate it.'],
+      'stay-limit-changed':
+        ['fa-triangle-exclamation', 'The Stay NJ income limit was cut from $500,000 to <b>$200,000</b> by the ' +
+         'budget signed in June 2026. A lot of guidance still quotes the old figure. At your income you would ' +
+         'have qualified last year and do not now.'],
+      'anchor-absorbed':
+        ['fa-circle-info', 'Your ANCHOR benefit does not add to your total once Stay NJ is in play, because ' +
+         'Stay NJ only pays the shortfall to 50%. It changes which pot the money comes from, not how much you ' +
+         'get. Still file for it: the state calculates all three from the one form.']
+    };
+
+    return toolCard('Senior benefit stack', 'fa-layer-group',
+      '<p class="tl-p">Three programs, one application, and an interaction almost nobody explains. ' +
+      '<b>Stay NJ is a top-off</b>: the state calculates ANCHOR and the Senior Freeze first, then Stay NJ pays ' +
+      'whatever is still needed to reach half your bill, capped at ' + money(NJ.stayNJ.benefitCap) + '.</p>' +
+
+      '<div class="sb-stack">' +
+        '<div class="sb-l head"><span>Your bill on ' + esc(r.address) + '</span><b>' + money(tax) + '</b></div>' +
+        line('ANCHOR', b.eligible.anchor ? b.anchor : 0,
+             b.eligible.anchor ? (is65 ? 'age 65+ rate' : 'under 65 rate')
+                               : 'income above the $250,000 limit', b.anchor ? 'minus' : 'out') +
+        line('Senior Freeze', b.eligible.freeze ? b.freeze : 0,
+             !is65 ? 'requires age 65'
+             : !b.eligible.freeze ? 'income or ownership requirement not met'
+             : b.freeze == null ? 'needs your base year' : 'reimburses the increase since your base year',
+             b.eligible.freeze ? (b.freeze ? 'minus' : 'unknown') : 'out') +
+        line('Stay NJ', b.eligible.stay ? b.stay : 0,
+             !is65 ? 'requires age 65'
+             : income > NJ.stayNJ.incomeLimit ? 'income above the $200,000 limit'
+             : 'tops the others up to half the bill', b.stay ? 'minus' : 'out') +
+        '<div class="sb-l total"><span>What you would actually pay</span><b>' + money(b.after) + '</b></div>' +
+      '</div>' +
+
+      '<div class="sb-meter"><i style="width:' + Math.round(Math.min(1, b.pct) * 100) + '%"></i>' +
+        '<span>' + Math.round(b.pct * 100) + '% of the bill covered</span></div>' +
+
+      (b.notes.length
+        ? '<ul class="sb-notes">' + b.notes.map(function (k) {
+            var n = notes[k];
+            return n ? '<li><i class="fas ' + n[0] + '"></i><span>' + n[1] + '</span></li>' : '';
+          }).join('') + '</ul>'
+        : '') +
+
+      '<div class="sb-cta">' +
+        '<a class="tl-btn" href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank" rel="noopener">' +
+          'File Form ' + NJ.form + '</a>' +
+        '<span>Deadline <b>' + NJ.deadline + '</b>. One form covers all three.</span>' +
+      '</div>' +
+
+      '<div class="tl-fine">Thresholds current as of ' + NJ.asOf + ', from the NJ Division of Taxation. ' +
+      'Benefit amounts depend on figures we do not hold, including your NJ-1040 line 29 income and your ' +
+      'Senior Freeze base year, so treat these as estimates. Availability of every one of these programs is ' +
+      'subject to annual state budget appropriations, and the Stay NJ limit has already been cut once. ' +
+      'Not tax advice.</div>');
+  }
+
+  // ══════════════════════════════════════════════
+  // 13 · FIRST TIME BUYER TRUE COST
+  //
+  // A listing shows the seller's tax bill. That is not what the buyer will pay,
+  // for two reasons nobody mentions at the open house: the assessment may not
+  // have caught up with what the house is now worth, and the rate moves every
+  // year regardless.
+  // ══════════════════════════════════════════════
+  function buyerCost(r, price) {
+    var s = sr1aFor(r);
+    if (!s || !price) return null;
+    var rate = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
+    if (!rate) return null;
+
+    var todayTax = r.last_year_tax;
+    // if the town reassessed this parcel to the purchase price
+    var caughtAssessment = price * s.ratio;
+    var caughtTax = caughtAssessment * rate;
+
+    var u = uniFor(r);
+    var rv = (typeof revalRadar === 'function') ? revalRadar(r) : null;
+
+    // rate drift, from this town's own published history where we have it
+    var yrs = [1, 3, 5];
+    var growth = 0.025;                         // NJ levies have run near this
+    var proj = yrs.map(function (y) {
+      return { y: y, low: todayTax * Math.pow(1 + growth, y),
+                     high: Math.max(todayTax, caughtTax) * Math.pow(1 + growth, y) };
+    });
+
+    return {
+      price: price, ratio: s.ratio, rate: rate,
+      todayTax: todayTax, caughtAssessment: caughtAssessment, caughtTax: caughtTax,
+      jump: caughtTax - todayTax,
+      exposed: caughtTax > todayTax * 1.08,
+      proj: proj, revalPressure: rv ? rv.score : null
+    };
+  }
+
+  function toolBuyerCost(r) {
+    var s = sr1aFor(r);
+    if (!s || !r.last_year_tax || !r.assessed) return '';
+    var guess = r.watchdog_value || (r.assessed / s.ratio);
+    var id = 'bc-' + (r.pams_pin || 'x').replace(/[^\w]/g, '');
+
+    return toolCard('What a buyer would actually pay', 'fa-key',
+      '<p class="tl-p">A listing shows the <em>seller\u2019s</em> tax bill. A buyer may not pay that. If the ' +
+      'assessment has not kept pace with what the house is now worth, the gap closes eventually and the bill ' +
+      'moves with it.</p>' +
+      '<div class="bc-in">' +
+        '<label for="' + id + '">Purchase price</label>' +
+        '<div class="bc-money"><span>$</span>' +
+        '<input id="' + id + '" type="text" inputmode="numeric" value="' +
+          Math.round(guess / 1000) * 1000 + '" oninput="bcCalc(\'' + esc(r.pams_pin) + '\', this)"></div>' +
+      '</div>' +
+      '<div id="' + id + '-out"></div>' +
+      '<div class="tl-fine">Projections assume municipal levies grow about 2.5% a year, which is roughly where ' +
+      'New Jersey has run, and that the town eventually assesses at its current verified ratio of ' +
+      (s.ratio * 100).toFixed(1) + '%. Neither is guaranteed. No one outside the municipality can say when an ' +
+      'assessor will act on a specific parcel. This is exposure, not a schedule.</div>');
+  }
+
+  window.bcCalc = function (pin, input) {
+    var v = String(input.value).replace(/[^0-9]/g, '');
+    input.value = v ? parseInt(v, 10).toLocaleString() : '';
+    var price = +v || 0;
+    var r = null;
+    for (var i = 0; i < rows.length; i++) if (rows[i].pams_pin === pin) r = rows[i];
+    if (!r) return;
+    var id = 'bc-' + pin.replace(/[^\w]/g, '');
+    var host = el(id + '-out');
+    if (!host) return;
+    var b = buyerCost(r, price);
+    if (!b) { host.innerHTML = ''; return; }
+
+    host.innerHTML =
+      '<div class="bc-now">' +
+        '<div><b>' + money(b.todayTax) + '</b><span>the bill today</span></div>' +
+        '<div class="' + (b.exposed ? 'up' : '') + '"><b>' + money(b.caughtTax) +
+          '</b><span>if the assessment catches up to ' + money(price) + '</span></div>' +
+        '<div class="' + (b.exposed ? 'up' : '') + '"><b>' +
+          (b.jump > 0 ? '+' + money(b.jump) : money(0)) + '</b><span>a year, unbooked</span></div>' +
+      '</div>' +
+      (b.exposed
+        ? '<div class="bc-warn"><i class="fas fa-triangle-exclamation"></i><div>' +
+          'At ' + money(price) + ' this property would be assessed around <b>' +
+          money(Math.round(b.caughtAssessment)) + '</b> if the town applied its own ratio, against the <b>' +
+          money(r.assessed) + '</b> on the books now. The bill in the listing understates what a buyer ends up ' +
+          'paying by roughly <b>' + money(Math.round(b.jump / 12)) + ' a month</b>.' +
+          (b.revalPressure != null && b.revalPressure >= 45
+            ? ' Revaluation pressure in this town is running at <b>' + b.revalPressure +
+              ' out of 100</b>, which makes the catch-up more likely than not.' : '') +
+          '</div></div>'
+        : '<div class="bc-ok"><i class="fas fa-circle-check"></i><div>At ' + money(price) +
+          ' the assessment is broadly in line with the town ratio, so there is no hidden catch-up waiting ' +
+          'in this one.</div></div>') +
+      '<div class="bc-proj"><h5>Projected annual tax</h5><table><tbody>' +
+        b.proj.map(function (p) {
+          return '<tr><td>In ' + p.y + ' year' + (p.y === 1 ? '' : 's') + '</td>' +
+            '<td class="n">' + money(p.low) + '</td><td class="n">to</td>' +
+            '<td class="n"><b>' + money(p.high) + '</b></td></tr>';
+        }).join('') +
+      '</tbody></table>' +
+      '<p>The low column assumes the assessment is never revisited. The high column assumes it catches up. ' +
+      'Both include ordinary levy growth.</p></div>';
+  };
+
   // ── shared card shell ──
   // Named toolCard, not card. The dashboard already has a card(r) that renders
   // saved property tiles, and shadowing it silently replaced every property
@@ -1923,7 +2235,7 @@
     // property, so printing them under a list of five was misleading. They now
     // live on that property's own report page, and each card carries the short
     // version instead.
-    var free = [toolDrift(), toolRebates()].filter(Boolean).join('');
+    var free = [toolDrift()].filter(Boolean).join('');
     var pro = [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
     return free +
       (pro ? locked('Analysis tools',
