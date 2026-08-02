@@ -589,3 +589,119 @@ body.map-dark .hd-pin::after { border-top-color: #fff; }
 .ssearch-nav a.pro-link i { color: var(--gold); }
 .ssearch-nav a.pro-link:hover { background: #fdf6e0; }
 .heroauth-link.pro { color: #8a6f14; font-weight: 800; }
+
+/* ============================================================
+   SITE NAV
+   Transparent over the hero, solid once you scroll. Logo centred,
+   plain text either side. No pills, no boxes.
+   ============================================================ */
+.wd-nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 800;
+  background: transparent; transition: background .25s ease, box-shadow .25s ease;
+}
+.wd-nav-in {
+  max-width: 1240px; margin: 0 auto; padding: 20px 26px;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px;
+}
+.wd-left, .wd-right { display: flex; align-items: center; gap: 26px; }
+.wd-right { justify-content: flex-end; }
+.wd-nav a, .wd-nav button {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 14.5px; font-weight: 600; color: #fff; text-decoration: none;
+  background: none; border: none; padding: 0; cursor: pointer; white-space: nowrap;
+  text-shadow: 0 1px 10px rgba(0,0,0,.45); transition: opacity .15s;
+}
+.wd-nav a:hover, .wd-nav button:hover { opacity: .72; }
+
+.wd-logo {
+  display: inline-flex; align-items: center; gap: 9px; justify-self: center;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 21px !important; font-weight: 800 !important; letter-spacing: -.03em;
+}
+.wd-logo i { color: var(--gold); font-size: 22px; }
+
+/* solid state, set by script once past the hero */
+.wd-nav.solid {
+  position: fixed; background: rgba(255,255,255,.97); backdrop-filter: blur(10px);
+  box-shadow: 0 1px 0 var(--border), 0 4px 18px rgba(14,34,72,.07);
+}
+.wd-nav.solid .wd-nav-in { padding: 13px 26px; }
+.wd-nav.solid a, .wd-nav.solid button { color: var(--navy-dark); text-shadow: none; }
+.wd-nav.solid .wd-logo { color: var(--navy-dark); }
+
+/* pages without a hero image start solid */
+body.nav-solid .wd-nav { position: sticky; background: #fff; box-shadow: 0 1px 0 var(--border); }
+body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo { color: var(--navy-dark); text-shadow: none; }
+
+@media (max-width: 940px) {
+  .wd-nav-in { grid-template-columns: 1fr auto 1fr; gap: 12px; padding: 14px 16px; }
+  .wd-left { gap: 16px; }
+  .wd-right { gap: 16px; }
+  .wd-left a:nth-child(n+3) { display: none; }
+  .wd-right a:nth-child(2) { display: none; }
+  .wd-nav a, .wd-nav button { font-size: 13.5px; }
+  .wd-logo { font-size: 18px !important; }
+}
+@media (max-width: 560px) {
+  .wd-left a:nth-child(n+2) { display: none; }
+  .wd-right a { display: none; }
+}
+
+/* ============================================================
+   INSIGHTS
+   ============================================================ */
+.ins-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 34px; max-width: 1120px; margin: 0 auto; }
+
+.ins-lead { display: block; text-decoration: none; }
+.ins-photo { height: 300px; border-radius: 12px; background-size: cover; background-position: center;
+  margin-bottom: 16px; }
+.ins-kicker { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--gold-dark, #8a6f14); margin-bottom: 8px; }
+.ins-lead h3 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 25px; font-weight: 800; letter-spacing: -.028em; line-height: 1.22;
+  color: var(--navy-dark); margin: 0 0 10px; }
+.ins-lead p { font-size: 15px; line-height: 1.7; color: #5a6070; margin: 0 0 10px; }
+.ins-lead em, .ins-list em { font-style: normal; font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .07em; color: #a0a8b8; }
+.ins-lead:hover h3 { color: var(--navy); }
+
+.ins-list { display: flex; flex-direction: column; }
+.ins-list a { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border);
+  text-decoration: none; }
+.ins-list a:first-child { padding-top: 0; }
+.ins-thumb { width: 128px; height: 86px; flex-shrink: 0; border-radius: 8px;
+  background-size: cover; background-position: center; }
+.ins-list h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 16px; font-weight: 700; letter-spacing: -.02em; line-height: 1.32;
+  color: var(--navy-dark); margin: 0 0 7px; }
+.ins-list a:hover h4 { color: var(--navy); }
+.ins-more { padding-top: 16px; text-align: right; }
+.ins-more a { display: inline; border: none; padding: 0; font-size: 14px; font-weight: 700;
+  color: var(--navy); text-decoration: underline; }
+
+.ins-glance { max-width: 1120px; margin: 40px auto 0; background: #f6f8fc;
+  border-radius: 14px; padding: 26px 30px; }
+.ins-glance-h { margin-bottom: 22px; }
+.ins-glance-h b { display: block; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: var(--navy-dark); }
+.ins-glance-h span { font-size: 13px; color: #8a93a6; }
+.ins-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px; }
+.ins-stats > div { display: flex; align-items: center; gap: 13px; }
+.ins-stats i { width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; background: #fff;
+  display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 15px; }
+.ins-stats b { display: block; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--navy-dark); line-height: 1.1; }
+.ins-stats span { font-size: 12px; color: #5a6070; }
+.ins-src { font-size: 12px; color: #8a93a6; margin-top: 22px; padding-top: 16px;
+  border-top: 1px solid var(--border); }
+.ins-src a { color: var(--navy); font-weight: 600; }
+
+@media (max-width: 860px) {
+  .ins-grid { grid-template-columns: 1fr; gap: 26px; }
+  .ins-photo { height: 220px; }
+  .ins-lead h3 { font-size: 21px; }
+}
+@media (max-width: 480px) {
+  .ins-thumb { width: 92px; height: 68px; }
+  .ins-list h4 { font-size: 14.5px; }
+}
