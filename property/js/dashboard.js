@@ -1083,9 +1083,10 @@
     }
 
     return '<article class="pr ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
-      head + line + figs + appeal +
+      head + line + figs + metricStrip(r) + appeal +
       '<div class="pr-acts">' +
-        '<a href="/property/?address=' + q + '">Open full record</a>' +
+        '<a class="prime" href="' + reportLink(r) + '">Full report <i class="fas fa-arrow-right"></i></a>' +
+        '<a href="/property/?address=' + q + '">Property record</a>' +
         '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Contact agent</button>' +
       '</div></article>';
   }
@@ -1330,6 +1331,119 @@
       'is guessing.</div>');
   }
 
+  // ══════════════════════════════════════════════
+  // CONDENSED METRICS
+  //
+  // Every saved property gets its own numbers. The previous build computed
+  // these once from rows[0] and printed them under a list of five properties,
+  // which read as though they applied to all of them. They did not.
+  //
+  // Full depth lives on the per property report at home.html. What sits here
+  // is the short version: four figures, each explained on hover, plus a link
+  // through to the whole thing.
+  // ══════════════════════════════════════════════
+
+  var TIPS = {
+    uniformity:
+      'How consistently this town assesses its homes. The equalization ratio tells you whether a town ' +
+      'assesses high or low; this tells you whether it assesses fairly. Scored 0 to 100 from the state\u2019s ' +
+      'Coefficient of Deviation, where the professional standard is a coefficient of 15 or below.',
+    ratio:
+      'What share of true market value assessments run at in this town, measured from sales New Jersey ' +
+      'itself verified as genuine arm\u2019s length transactions. Your assessment divided by this is roughly ' +
+      'what the town thinks your home is worth.',
+    odds:
+      'The share of property tax appeals in this county that ended with the assessment reduced, counting ' +
+      'both board decisions and settlements. Appeals are heard by the county board, not the town, so the ' +
+      'county is the body whose behaviour this predicts.',
+    gap:
+      'How far the assessment sits above the Chapter 123 limit, which is the supported assessment plus the ' +
+      '15 percent cushion New Jersey allows. Above zero means there is an argument to make. This needs an ' +
+      'independent market value, so it only appears once the full record has been opened.',
+    eff:
+      'Annual tax divided by estimated market value. This is the only fair way to compare two properties in ' +
+      'different towns, because assessment levels differ everywhere.',
+    drift:
+      'How much this assessment has moved since you started tracking it. New Jersey does not publish ' +
+      'per parcel assessment history anywhere, so this accumulates from your own visits.'
+  };
+
+  function tip(key, label) {
+    return '<span class="tip" tabindex="0" data-tip="' + esc(TIPS[key] || '') + '">' +
+      label + '<i class="fas fa-circle-info"></i></span>';
+  }
+
+  // The four numbers worth showing on a card, each one specific to this row.
+  function metricStrip(r) {
+    var u = uniFor(r), a = appealFor(r), s = sr1aFor(r), c = chapter123(r);
+    if (!u && !a && !s && !c) return '';
+
+    var cells = [];
+    if (u) cells.push(cell(tip('uniformity', 'Uniformity'), u.score,
+      u.band, BAND_CLS[u.band] || 'mid'));
+    if (s) cells.push(cell(tip('ratio', 'Town ratio'), (s.ratio * 100).toFixed(1) + '%',
+      s.n + ' verified sales', ''));
+    if (a) cells.push(cell(tip('odds', 'Appeal odds'), a.latest.win_rate_filed + '%',
+      esc(titleCase(a.county)) + ' County', ''));
+    if (c && c.testable) {
+      cells.push(cell(tip('gap', 'Over the limit'),
+        c.hasCase ? money(c.over) : 'No',
+        c.hasCase ? 'worth ' + money(c.saving) + '/yr' : 'within Chapter 123',
+        c.hasCase ? 'bad' : 'good'));
+    } else if (r.effective_rate) {
+      cells.push(cell(tip('eff', 'Effective rate'), (+r.effective_rate).toFixed(2) + '%',
+        'of market value', ''));
+    }
+
+    return '<div class="ms">' + cells.join('') + '</div>';
+  }
+
+  function cell(label, val, sub, cls) {
+    return '<div class="ms-c"><span class="ms-l">' + label + '</span>' +
+      '<b class="ms-v ' + (cls || '') + '">' + val + '</b>' +
+      '<span class="ms-s">' + sub + '</span></div>';
+  }
+
+  function titleCase(s) {
+    return String(s || '').toLowerCase().replace(/\b\w/g, function (m) { return m.toUpperCase(); });
+  }
+
+  function reportLink(r) {
+    return '/property/home.html?pin=' + encodeURIComponent(r.pams_pin || '');
+  }
+
+  // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
+  // node per tip and it survives the list being rebuilt on every sort.
+  function initTips() {
+    if (document.getElementById('tipbox')) return;
+    var box = document.createElement('div');
+    box.id = 'tipbox';
+    box.className = 'tipbox';
+    document.body.appendChild(box);
+
+    function show(e) {
+      var t = e.target.closest ? e.target.closest('.tip') : null;
+      if (!t) return;
+      box.textContent = t.getAttribute('data-tip') || '';
+      box.classList.add('on');
+      var r = t.getBoundingClientRect();
+      var top = r.bottom + window.scrollY + 8;
+      var left = Math.min(
+        Math.max(12, r.left + window.scrollX + r.width / 2 - 150),
+        window.innerWidth - 312
+      );
+      box.style.top = top + 'px';
+      box.style.left = left + 'px';
+    }
+    function hide(e) {
+      if (e.target.closest && e.target.closest('.tip')) box.classList.remove('on');
+    }
+    document.addEventListener('mouseover', show);
+    document.addEventListener('mouseout', hide);
+    document.addEventListener('focusin', show);
+    document.addEventListener('focusout', hide);
+  }
+
   // ── shared card shell ──
   // Named toolCard, not card. The dashboard already has a card(r) that renders
   // saved property tiles, and shadowing it silently replaced every property
@@ -1411,9 +1525,12 @@
   function toolsHTML() {
     // Uniformity is free on purpose: it is the most surprising number on the
     // site and the reason someone tells a neighbour about it.
-    var free = [toolUniformity(), toolDrift(), toolRebates()].filter(Boolean).join('');
-    var pro = [toolAppealOdds(), toolPercentile(), toolPortfolio(),
-               toolCompare(), toolExport()].filter(Boolean).join('');
+    // toolUniformity and toolAppealOdds used to sit here. Both describe a single
+    // property, so printing them under a list of five was misleading. They now
+    // live on that property's own report page, and each card carries the short
+    // version instead.
+    var free = [toolDrift(), toolRebates()].filter(Boolean).join('');
+    var pro = [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
     return free +
       (pro ? locked('Analysis tools',
         'Where you sit in your town, portfolio totals, town comparisons and the exports.', pro) : '') +
