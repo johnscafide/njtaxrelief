@@ -209,9 +209,9 @@
   };
 
   var PHRASES = [
-    'any NJ home', 'your home', "your parents' home", "your client's home",
+    'any NJ home', 'your home', 'the neighborhood', "your parents' home", "your client's home",
     'the empty house', 'the house down the street', 'that listing you are eyeing',
-    'the one that got away', 'the property before you move', 'New Jersey',
+    'the one that got away', 'New Jersey',
   ];
   (function typewriter() {
     var node = el('pl-type');
