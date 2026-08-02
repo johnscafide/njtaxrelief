@@ -575,7 +575,7 @@ body.plm-locked { overflow: hidden; }
 .hv-body { padding: 20px 22px 22px; }
 .hv-body h3 { font-size: 17px; font-weight: 800; color: #0e2248; margin: 0 0 7px; }
 .hv-body p { font-size: 14px; color: #5a6070; line-height: 1.65; margin: 0; }
-.hv-card-warn .hv-visual { background: #fdf9ef; }
+.hv-card-warn .hv-visual { background: #fdf2ef; }
 .hv-bar-row { display: flex; align-items: center; gap: 10px; font-size: 12px; }
 .hv-bar-lbl { width: 84px; color: #5a6070; flex-shrink: 0; }
 .hv-bar { flex: 1; height: 14px; background: #e4e9f2; border-radius: 99px; overflow: hidden; }
