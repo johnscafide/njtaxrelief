@@ -1024,6 +1024,190 @@ body {
 }
 
 /* ============================================================
+   GREENTREE MORTGAGE · STICKY SPONSOR RAIL
+   Desktop: stationary right rail. Tablet/mobile: inline sponsor unit.
+   ============================================================ */
+.db-content-grid {
+  align-items: start;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) 292px;
+}
+
+.db-content-main { min-width: 0; }
+
+.gt-rail {
+  align-self: start;
+  min-width: 0;
+  position: sticky;
+  top: 96px;
+}
+
+.gt-ad {
+  background: #fff;
+  border: 1px solid #cfe2d5;
+  border-radius: 15px;
+  box-shadow: 0 12px 36px rgba(16, 55, 37, .08);
+  color: #14243b;
+  overflow: hidden;
+}
+
+.gt-ad-label {
+  align-items: center;
+  color: #738093;
+  display: flex;
+  font-size: 9px;
+  font-weight: 800;
+  justify-content: space-between;
+  letter-spacing: .13em;
+  padding: 11px 14px;
+  text-transform: uppercase;
+}
+
+.gt-ad-label i { color: #247947; font-size: 12px; }
+
+.gt-ad-portrait {
+  background: linear-gradient(145deg, #e8eeeb, #d3ddd8);
+  height: 168px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gt-ad-portrait::after {
+  background: linear-gradient(180deg, transparent 42%, rgba(8, 36, 22, .72));
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.gt-ad-portrait img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  width: 100%;
+}
+
+.gt-ad-portrait.no-photo::before {
+  align-items: center;
+  color: #247947;
+  content: '\f1ad';
+  display: flex;
+  font-family: 'Font Awesome 6 Free';
+  font-size: 52px;
+  font-weight: 900;
+  inset: 0;
+  justify-content: center;
+  position: absolute;
+}
+
+.gt-ad-portrait.no-photo img { display: none; }
+
+.gt-ad-brand {
+  bottom: 14px;
+  color: #fff;
+  font-family: var(--sans, 'Plus Jakarta Sans'), sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  left: 16px;
+  letter-spacing: -.025em;
+  position: absolute;
+  z-index: 2;
+}
+
+.gt-ad-body { padding: 19px 17px 17px; }
+
+.gt-ad-kicker {
+  color: #247947;
+  display: block;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: .11em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.gt-ad h3 {
+  color: #112443;
+  font-family: var(--sans, 'Plus Jakarta Sans'), sans-serif;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -.035em;
+  line-height: 1.16;
+  margin: 0 0 10px;
+}
+
+.gt-ad-body > p {
+  color: #657186;
+  font-size: 12.5px;
+  line-height: 1.55;
+  margin: 0 0 15px;
+}
+
+.gt-ad-benefits { display: grid; gap: 9px; margin-bottom: 17px; }
+.gt-ad-benefits span { align-items: flex-start; color: #425168; display: flex; font-size: 11.5px; gap: 8px; line-height: 1.4; }
+.gt-ad-benefits i { color: #27834e; font-size: 12px; margin-top: 2px; }
+
+.gt-ad-cta {
+  align-items: center;
+  background: #247947;
+  border-radius: 9px;
+  box-shadow: 0 7px 18px rgba(36, 121, 71, .2);
+  color: #fff !important;
+  display: flex;
+  font-size: 13px;
+  font-weight: 800;
+  gap: 8px;
+  justify-content: space-between;
+  padding: 12px 13px;
+  text-decoration: none;
+  transition: background .18s ease, transform .18s ease;
+}
+
+.gt-ad-cta:hover { background: #1b6338; transform: translateY(-1px); }
+.gt-ad-cta i { font-size: 11px; }
+
+.gt-ad-office {
+  align-items: flex-start;
+  border-top: 1px solid #e5ece8;
+  display: flex;
+  gap: 9px;
+  margin-top: 16px;
+  padding-top: 14px;
+}
+
+.gt-ad-office > i { color: #247947; font-size: 13px; margin-top: 3px; }
+.gt-ad-office b { color: #263950; display: block; font-size: 11.5px; margin-bottom: 2px; }
+.gt-ad-office span { color: #7a8594; display: block; font-size: 10.5px; line-height: 1.45; }
+.gt-ad-phone { color: #247947 !important; display: inline-block; font-size: 11.5px; font-weight: 750; margin-top: 10px; text-decoration: none; }
+
+.gt-ad-fine {
+  background: #f7faf8;
+  border-top: 1px solid #e2ebe5;
+  color: #849087;
+  font-size: 8.5px;
+  line-height: 1.5;
+  padding: 11px 14px 13px;
+}
+
+@media (max-width: 1280px) {
+  .db-content-grid { grid-template-columns: minmax(0, 1fr); }
+  .gt-rail { position: static; }
+  .gt-ad { display: grid; grid-template-columns: 210px minmax(0, 1fr); }
+  .gt-ad-label { display: none; }
+  .gt-ad-portrait { height: 100%; min-height: 340px; }
+  .gt-ad-body { padding: 24px; }
+  .gt-ad-fine { grid-column: 1 / -1; }
+}
+
+@media (max-width: 680px) {
+  .gt-ad { display: block; }
+  .gt-ad-label { display: flex; }
+  .gt-ad-portrait { height: 185px; min-height: 0; }
+  .gt-ad-body { padding: 19px 17px 17px; }
+}
+
+/* ============================================================
    2027 PROPERTY RECORDS
    Dense, decision-oriented entries with explicit status and actions.
    ============================================================ */
