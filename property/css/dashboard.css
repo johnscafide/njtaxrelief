@@ -871,7 +871,7 @@ body {
 /* Page content */
 .wrap { max-width: 1440px; padding: 34px 34px 90px; }
 .brief {
-  color: var(--saas-muted); font-size: 16px; line-height: 1.65; margin: 0 0 22px; max-width: 890px;
+  color: var(--saas-muted); font-size: 16px; line-height: 1.65; margin: 0 0 22px; max-width: 100%;
 }
 .brief b { color: var(--saas-text); }
 .rail {
