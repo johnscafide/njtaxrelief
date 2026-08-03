@@ -1043,157 +1043,227 @@
       '<button class="db-btn" onclick="plCloseNote()">Close</button>');
   };
 
-   // ══════════════════════════════════════════════
-  // THE BRIEF
-  // A paragraph that actually says something, instead of a row of tiles.
-  // This is the first thing anyone reads, so it has to be worth reading.
-  // ══════════════════════════════════════════════
-  function brief() {
-    if (!rows.length) return '';
-    var homes = rows.filter(function (r) { return r.kind === 'home'; });
-    var lead = homes[0] || rows[0];
-    var c = chapter123(lead);
-    var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
-    var cases = rows.filter(function (r) { var x = chapter123(r); return x && x.hasCase; });
-    var plan = String((profile && profile.plan) || 'free').toLowerCase().replace(/[\s_-]/g, '');
-    var plus = plan === 'pro+' || plan === 'proplus';
-    var pro = plus || plan === 'pro';
-    var count = '<b>' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') + '</b>';
-    var taxes = tot ? ' representing <b>' + money(tot) + '</b> in annual property tax' : '';
-    var d = deadline();
-    var s = [];
+// ══════════════════════════════════════════════
+// THE BRIEF
+// Tier-aware dashboard guidance using Watchdog icons.
+// ══════════════════════════════════════════════
+function brief() {
+  if (!rows.length) return '';
 
-     }).catch(function (err) {
-  console.error('Dashboard loading error:', err);
+  var homes = rows.filter(function (r) {
+    return r.kind === 'home';
+  });
 
-  el('db-line').innerHTML = '';
-  el('db-body').innerHTML =
-    '<div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
-      '<div><h3>We could not finish loading your workspace.</h3>' +
-      '<p>' + esc(err && err.message ? err.message : 'Unknown dashboard error') + '</p>' +
-      '<button class="db-btn" onclick="location.reload()">Try again</button></div>' +
-    '</div>';
-});
+  var lead = homes[0] || rows[0];
+  var c = chapter123(lead);
 
-    function briefPoint(content, extraClass) {
-  return '<span class="brief-point' + (extraClass ? ' ' + extraClass : '') + '">' +
-    '<i class="fas fa-dog brief-point-icon" aria-hidden="true"></i>' +
-    '<span class="brief-point-copy">' + content + '</span>' +
-  '</span>';
-}
+  var tot = rows.reduce(function (total, r) {
+    return total + (+r.last_year_tax || 0);
+  }, 0);
 
-if (!pro) {
-  s.push(briefPoint(
-    '<b>Your property-tax starting point.</b> You are currently tracking ' +
-    count + taxes + '.'
-  ));
+  var cases = rows.filter(function (r) {
+    var result = chapter123(r);
+    return result && result.hasCase;
+  });
 
-  s.push(briefPoint(
-    'Review each property card for its assessment, annual tax, estimated market value, ' +
-    'town ratio, and basic appeal signals.'
-  ));
+  var plan = String(
+    (profile && profile.plan) || 'free'
+  ).toLowerCase().replace(/[\s_-]/g, '');
 
-  s.push(briefPoint(
-    'Open <b>Full report</b> when a number needs context. Use <b>Compare</b> to place ' +
-    'properties side by side, and add homes to your watchlist as your plans change.'
-  ));
+  var plus = plan === 'pro+' || plan === 'proplus';
+  var pro = plus || plan === 'pro';
 
-  if (c) {
-    s.push(briefPoint(
-      'For <b>' + esc(lead.address) + '</b>, the current records indicate an assessed ' +
-      'value of <b>' + money(lead.assessed) + '</b> and an estimated market value near ' +
-      '<b>' + money(rnd(c.market)) + '</b>.'
-    ));
+  var count =
+    '<b>' + rows.length + ' propert' +
+    (rows.length === 1 ? 'y' : 'ies') +
+    '</b>';
+
+  var taxes = tot
+    ? ' representing <b>' + money(tot) +
+      '</b> in annual property tax'
+    : '';
+
+  var d = deadline();
+  var s = [];
+
+  function briefPoint(content, extraClass) {
+    return (
+      '<span class="brief-point' +
+        (extraClass ? ' ' + extraClass : '') +
+      '">' +
+        '<i class="fas fa-dog brief-point-icon" aria-hidden="true"></i>' +
+        '<span class="brief-point-copy">' +
+          content +
+        '</span>' +
+      '</span>'
+    );
   }
 
-  s.push(briefPoint(
-    '<a href="/property/pro.html"><b>Upgrade to Pro</b></a> for Chapter 123 screening, ' +
-    'verified sales comparables, professional town comparisons, unlimited saved ' +
-    'properties, and client-ready exports.'
-  ));
+  // FREE ACCOUNT
+  if (!pro) {
+    s.push(
+      briefPoint(
+        '<b>Your property-tax starting point.</b> You are currently tracking ' +
+        count + taxes + '.'
+      )
+    );
 
-  s.push(briefPoint(
-    '<a href="/property/pro.html"><b>Step up to Pro+</b></a> for 1,000+ record workflows, ' +
-    'exclusive Watchdog intelligence, bulk research, and API access.',
-    'brief-point-upgrade'
-  ));
+    s.push(
+      briefPoint(
+        'Review each property card for its assessment, annual tax, estimated ' +
+        'market value, town ratio, and basic appeal signals.'
+      )
+    );
 
-} else {
-  s.push(briefPoint(
-    (plus ? '<b>Pro+ intelligence.</b> ' : '<b>Pro intelligence.</b> ') +
-    'Your workspace is tracking ' + count + taxes + '.'
-  ));
+    s.push(
+      briefPoint(
+        'Open <b>Full report</b> when a number needs more context. Use ' +
+        '<b>Compare</b> to place properties side by side, and add homes to ' +
+        'your watchlist as your plans change.'
+      )
+    );
 
-  if (c) {
-    var propertySummary =
-      '<b>' + esc(lead.address) + '</b> is assessed at ' +
-      '<b>' + money(lead.assessed) + '</b>. ';
+    if (c) {
+      var freeMarketValue =
+        Number.isFinite(+c.market)
+          ? money(rnd(+c.market))
+          : 'not yet available';
 
-    propertySummary += c.src === 'verified'
-      ? 'New Jersey verified sales place the town at <b>' +
-        (c.ratio * 100).toFixed(1) +
-        '% of market</b>, supporting an estimated value near <b>' +
-        money(rnd(c.market)) + '</b>. '
-      : 'The published ratio supports an estimated value near <b>' +
-        money(rnd(c.market)) + '</b>. ';
-
-    if (!c.testable) {
-      propertySummary +=
-        'Open the full record and review comparable sales before drawing an appeal conclusion.';
-    } else if (c.hasCase) {
-      propertySummary +=
-        'The assessment appears <b class="neg">' + money(c.over) +
-        ' above</b> the Chapter 123 limit' +
-        (c.saving
-          ? ', with approximately <b>' + money(c.saving) +
-            ' per year</b> potentially at stake.'
-          : '.');
-    } else {
-      propertySummary +=
-        'The assessment currently falls within the permitted Chapter 123 range.';
+      s.push(
+        briefPoint(
+          'For <b>' + esc(lead.address) + '</b>, the current records indicate ' +
+          'an assessed value of <b>' + money(+lead.assessed || 0) +
+          '</b> and an estimated market value near <b>' +
+          freeMarketValue + '</b>.'
+        )
+      );
     }
 
-    s.push(briefPoint(propertySummary));
+    s.push(
+      briefPoint(
+        '<a href="/property/pro.html"><b>Upgrade to Pro</b></a> for Chapter 123 ' +
+        'screening, verified sales comparables, professional town comparisons, ' +
+        'unlimited saved properties, and client-ready exports.',
+        'brief-point-upgrade'
+      )
+    );
+
+    s.push(
+      briefPoint(
+        '<a href="/property/pro.html"><b>Step up to Pro+</b></a> for 1,000+ ' +
+        'record workflows, exclusive Watchdog intelligence, bulk research, ' +
+        'and API access.',
+        'brief-point-upgrade'
+      )
+    );
   }
 
-  s.push(briefPoint(
-    'Use property reports to validate parcel-level findings, comparison tools to measure ' +
-    'tax burden across municipalities, and exports to move supported figures into client, ' +
-    'attorney, or internal review workflows.'
-  ));
+  // PRO AND PRO+ ACCOUNTS
+  else {
+    s.push(
+      briefPoint(
+        (plus
+          ? '<b>Pro+ intelligence.</b> '
+          : '<b>Pro intelligence.</b> ') +
+        'Your workspace is tracking ' + count + taxes + '.'
+      )
+    );
 
-  if (plus) {
-    s.push(briefPoint(
-      'Use your Pro+ workspace to screen territories and portfolios in bulk, enrich ' +
-      '1,000+ records, surface Watchdog-only risk and opportunity signals, and deliver ' +
-      'results through exports, scheduled workflows, or the API.',
-      'brief-point-plus'
-    ));
-  } else {
-    s.push(briefPoint(
-      'Working at a larger scale? <a href="/property/pro.html"><b>Compare Pro+</b></a> ' +
-      'for municipality-wide prospecting, 1,000+ record enrichment, proprietary signals, ' +
-      'and direct system access.',
-      'brief-point-upgrade'
-    ));
+    if (c) {
+      var propertySummary =
+        '<b>' + esc(lead.address) + '</b> is assessed at <b>' +
+        money(+lead.assessed || 0) + '</b>. ';
+
+      if (
+        c.src === 'verified' &&
+        Number.isFinite(+c.ratio) &&
+        Number.isFinite(+c.market)
+      ) {
+        propertySummary +=
+          'New Jersey verified sales place the town at <b>' +
+          (+c.ratio * 100).toFixed(1) +
+          '% of market</b>, supporting an estimated value near <b>' +
+          money(rnd(+c.market)) + '</b>. ';
+      } else if (Number.isFinite(+c.market)) {
+        propertySummary +=
+          'The published ratio supports an estimated value near <b>' +
+          money(rnd(+c.market)) + '</b>. ';
+      } else {
+        propertySummary +=
+          'A supported market-value estimate is still being assembled. ';
+      }
+
+      if (!c.testable) {
+        propertySummary +=
+          'Open the full record and review comparable sales before drawing ' +
+          'an appeal conclusion.';
+      } else if (c.hasCase) {
+        propertySummary +=
+          'The assessment appears <b class="neg">' +
+          money(+c.over || 0) +
+          ' above</b> the Chapter 123 limit';
+
+        propertySummary += c.saving
+          ? ', with approximately <b>' +
+            money(+c.saving) +
+            ' per year</b> potentially at stake.'
+          : '.';
+      } else {
+        propertySummary +=
+          'The assessment currently falls within the permitted Chapter 123 range.';
+      }
+
+      s.push(briefPoint(propertySummary));
+    }
+
+    s.push(
+      briefPoint(
+        'Use property reports to validate parcel-level findings, comparison ' +
+        'tools to measure tax burden across municipalities, and exports to ' +
+        'move supported figures into client, attorney, or internal review workflows.'
+      )
+    );
+
+    if (plus) {
+      s.push(
+        briefPoint(
+          'Use your Pro+ workspace to screen territories and portfolios in ' +
+          'bulk, enrich 1,000+ records, surface Watchdog-only risk and ' +
+          'opportunity signals, and deliver results through exports, scheduled ' +
+          'workflows, or the API.',
+          'brief-point-plus'
+        )
+      );
+    } else {
+      s.push(
+        briefPoint(
+          'Working at a larger scale? ' +
+          '<a href="/property/pro.html"><b>Compare Pro+</b></a> for ' +
+          'municipality-wide prospecting, 1,000+ record enrichment, ' +
+          'proprietary signals, and direct system access.',
+          'brief-point-upgrade'
+        )
+      );
+    }
   }
+
+  // APPEAL DEADLINE WARNING
+  if (cases.length) {
+    var warning =
+      cases.length === 1
+        ? '<b>Action may be needed.</b> One tracked property currently shows ' +
+          'a possible over-assessment. The next general filing deadline is ' +
+          '<b>' + d.days + ' days away</b>.'
+        : '<b>Action may be needed.</b> ' + cases.length +
+          ' tracked properties currently show possible over-assessments. ' +
+          'The next general filing deadline is <b>' +
+          d.days + ' days away</b>.';
+
+    s.push(briefPoint(warning, 'urgent'));
+  }
+
+  return '<div class="brief">' + s.join('') + '</div>';
 }
-
-if (cases.length) {
-  s.push(briefPoint(
-    cases.length === 1
-      ? '<b>Action may be needed.</b> One tracked property currently shows a possible ' +
-        'over-assessment. The next general filing deadline is <b>' + d.days +
-        ' days away</b>.'
-      : '<b>Action may be needed.</b> ' + cases.length +
-        ' tracked properties currently show possible over-assessments. The next general ' +
-        'filing deadline is <b>' + d.days + ' days away</b>.',
-    'urgent'
-  ));
-}
-
-return '<div class="brief">' + s.join('') + '</div>';
-  }
      
   // ══════════════════════════════════════════════
   // PROPERTY  ·  simple view
