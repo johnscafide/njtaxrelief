@@ -1106,6 +1106,10 @@
     var v = VERIFY[r.verify_level || 'self'];
 
     var tone = (c && c.hasCase) ? 'hot' : (c && c.testable) ? 'ok' : 'neutral';
+    var statusLabel = (c && c.hasCase) ? 'Review recommended' :
+      (c && c.testable) ? 'Assessment in range' : 'Analysis building';
+    var statusIcon = (c && c.hasCase) ? 'fa-triangle-exclamation' :
+      (c && c.testable) ? 'fa-circle-check' : 'fa-wave-square';
 
     var head =
       '<div class="pr-top">' +
@@ -1116,13 +1120,16 @@
             (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
                                : '<span class="pr-kind">Watching</span>') +
           '</div>' +
-          '<div class="pr-when">' + esc(addedOn(r)) + '</div>' +
         '</div>' +
         '<div class="pr-id">' +
           '<div class="pr-titlerow">' +
-            '<label class="pick"><input type="checkbox"' + (picked.indexOf(r.id) > -1 ? ' checked' : '') +
-              ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
-            propMenu(r) +
+            '<div class="pr-record-state ' + tone + '"><i class="fas ' + statusIcon + '"></i>' +
+              '<span>' + statusLabel + '</span><em>' + esc(addedOn(r)) + '</em></div>' +
+            '<div class="pr-record-controls">' +
+              '<label class="pick"><input type="checkbox"' + (picked.indexOf(r.id) > -1 ? ' checked' : '') +
+                ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
+              propMenu(r) +
+            '</div>' +
           '</div>' +
           '<h3>' + esc(r.address) + '</h3>' +
           '<div class="pr-sub">' + esc(r.town || '') +
