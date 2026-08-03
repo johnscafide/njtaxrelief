@@ -708,7 +708,8 @@ body { background: var(--paper); }
    ============================================================ */
 
 :root {
-  --saas-bg: #f5f7fa;
+  /* --saas-bg: #f5f7fa; */
+  --saas-bg: #FFFFFF;
   --saas-panel: #ffffff;
   --saas-sidebar: #0f2748;
   --saas-sidebar-2: #14345d;
