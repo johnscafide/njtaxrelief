@@ -1,3643 +1,972 @@
 /* ============================================================
    DASHBOARD
    njpropertytaxrelief.com/property
+
+   Deliberately not a wall of cards. Structure comes from hairlines,
+   type weight and whitespace instead of borders, shadows and rounded
+   boxes. Numbers are allowed to sit on the page on their own.
    ============================================================ */
-(function () {
-  'use strict';
-
-  var LEDGER_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
-  var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
-
-  var EJS_PUBLIC  = 'u262kw5AoJcBI342V';
-  var EJS_SERVICE = 'service_gptqbyx';
-  var EJS_TMPL    = 'template_contact';
-
-  var sb = null, plUser = null, rows = [], profile = null;
-
-  function el(id) { return document.getElementById(id); }
-  function money(n) { return '$' + Math.round(n).toLocaleString(); }
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
-      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
-    });
-  }
-  function toast(m) {
-    var t = el('pl-toast'); if (!t) return;
-    t.textContent = m; t.style.display = 'block';
-    clearTimeout(window._t); window._t = setTimeout(function () { t.style.display = 'none'; }, 2600);
-  }
-  window.plModalNote = function (title, html) {
-    var n = el('plm-note-overlay');
-    n.innerHTML = '<div class="plm-note-box"><button class="plm-note-x" onclick="plCloseNote()"><i class="fas fa-xmark"></i></button>' +
-      '<h3>' + esc(title) + '</h3>' + html + '</div>';
-    n.classList.add('open');
-  };
-  window.plCloseNote = function () { el('plm-note-overlay').classList.remove('open'); };
-
-  function ready() {
-    if (sb) return true;
-    if (typeof window.supabase === 'undefined' || LEDGER_KEY.indexOf('PASTE') === 0) return false;
-    sb = window.supabase.createClient(LEDGER_URL, LEDGER_KEY,
-      { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true } });
-    return true;
-  }
-
-  window.plSignInPrompt = function () {
-    if (!ready()) { plModalNote('Sign in unavailable', '<p>Accounts are not switched on yet.</p>'); return; }
-    plModalNote('Sign in',
-      '<div class="auth-magic"><label for="auth-email">Email me a sign in link</label>' +
-        '<div class="auth-magic-row"><input id="auth-email" type="email" placeholder="you@email.com" ' +
-        'onkeydown="if(event.key===\'Enter\')plMagicLink()"><button onclick="plMagicLink()">Send link</button></div>' +
-        '<div class="auth-magic-note">No password to create or remember.</div></div>' +
-      '<div class="auth-or"><span>or</span></div>' +
-      '<div class="auth-btns"><button class="auth-btn google" onclick="plOAuth(\'google\')">Continue with Google</button></div>');
-  };
-  window.plOAuth = function (p) {
-    if (!ready()) return;
-    sb.auth.signInWithOAuth({ provider: p, options: { redirectTo: location.origin + location.pathname } });
-  };
-  window.plMagicLink = function () {
-    var e = el('auth-email'), v = e ? e.value.trim() : '';
-    if (!v || v.indexOf('@') < 1) { toast('Enter a valid email'); return; }
-    sb.auth.signInWithOtp({ email: v, options: { emailRedirectTo: location.origin + location.pathname } })
-      .then(function (r) {
-        if (r.error) { toast('Could not send, try again shortly'); return; }
-        plModalNote('Check your email', '<p>Sign in link sent to <b>' + esc(v) + '</b>.</p>');
-      });
-  };
-  window.plSignOut = function () { if (sb) sb.auth.signOut().then(function () { location.reload(); }); };
-
-  // ── boot ──
-  if (ready()) {
-    sb.auth.getSession().then(function (r) {
-      plUser = (r.data && r.data.session) ? r.data.session.user : null;
-      if (location.hash.indexOf('access_token') > -1) history.replaceState(null, '', location.pathname);
-      paint();
-    });
-    sb.auth.onAuthStateChange(function (_e, s) { plUser = s ? s.user : null; paint(); });
-  } else {
-    document.addEventListener('DOMContentLoaded', function () { el('db-gate').style.display = ''; });
-  }
-
-  function meta() { return (plUser && plUser.user_metadata) || {}; }
-  function name() { return meta().full_name || meta().name || (plUser.email || '').split('@')[0]; }
-
-  function paint() {
-    if (!plUser) { el('db-gate').style.display = ''; el('db-main').style.display = 'none'; return; }
-    el('db-gate').style.display = 'none';
-    el('db-main').style.display = '';
-
-    var av = meta().avatar_url || meta().picture;
-    el('db-avatar').innerHTML = av
-      ? '<img src="' + esc(av) + '" alt="">'
-      : '<div class="db-noav">' + esc((name() || '?').charAt(0).toUpperCase()) + '</div>';
-    el('db-hi').textContent = 'Welcome back, ' + (name() || '').split(' ')[0];
-    el('db-email').textContent = plUser.email || '';
-
-    Promise.all([
-      sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
-      sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
-      loadRefData(), loadSR1A(), loadUniformity(), loadAppeals(), loadAbatements()
-    ]).then(function (res) {
-      rows = (res[0] && res[0].data) || [];
-      profile = (res[1] && res[1].data) || {};
-      render();
-      hydrateDetails().then(render);
-      el('db-profile-body').innerHTML = profileForm();
-    });
-  }
-
-  // ══════════════════════════════════════════════
-  // SHARED DATA
-  // ══════════════════════════════════════════════
-  var NJ_PARCEL = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
-  var GREENTREE_URL = 'https://johnvarano.com/';
-  var ratios = null, rates = null;
-
-  function xfetch(url, ms) {
-    ms = ms || 14000;
-    var ctl = new AbortController();
-    var t = setTimeout(function () { ctl.abort(); }, ms);
-    return fetch(url, { signal: ctl.signal }).then(function (r) { clearTimeout(t); return r; },
-      function (e) { clearTimeout(t); throw new Error(e && e.name === 'AbortError' ? 'timeout' : 'network'); });
-  }
-  function median(a) {
-    if (!a || !a.length) return null;
-    a = a.slice().sort(function (x, y) { return x - y; });
-    var m = a.length >> 1;
-    return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
-  }
-  function loadRefData() {
-    if (ratios && rates) return Promise.resolve();
-    return Promise.all([
-      xfetch('/equalization-ratios.json', 8000).then(function (r) { return r.json(); })
-        .then(function (j) { ratios = (j && j.ratios) || {}; }).catch(function () { ratios = {}; }),
-      xfetch('/tax-rates.json', 8000).then(function (r) { return r.json(); })
-        .then(function (j) { rates = (j && j.rates) || {}; }).catch(function () { rates = {}; })
-    ]);
-  }
-  function ratioFor(town, county) {
-    if (!ratios) return null;
-    var t = (town || '').toUpperCase().trim();
-    var tc = t + ' (' + (county || '').toUpperCase().trim() + ')';
-    var keys = Object.keys(ratios), hit = null;
-    for (var i = 0; i < keys.length; i++) if (keys[i].toUpperCase().trim() === tc) { hit = ratios[keys[i]]; break; }
-    if (!hit) for (var j = 0; j < keys.length; j++) if (keys[j].toUpperCase().trim() === t) { hit = ratios[keys[j]]; break; }
-    if (!hit) return null;
-    var yrs = Object.keys(hit).map(Number).filter(function (y) { return y > 1990; }).sort();
-    if (!yrs.length) return null;
-    var row = hit[String(yrs[yrs.length - 1])];
-    var pct = (row && typeof row === 'object') ? +row.ratio : +row;
-    if (!pct || pct <= 0) return null;
-    return { ratio: pct / 100, year: yrs[yrs.length - 1],
-             upper: row && row.upper ? +row.upper / 100 : null };
-  }
-
-  // ══════════════════════════════════════════════
-  // 1 · ASSESSMENT DRIFT
-  // Uses the history snapshots the ledger writes whenever a figure changes.
-  // Nobody else has this, because New Jersey does not publish per parcel
-  // assessment history. It accumulates from your own visits.
-  // ══════════════════════════════════════════════
-  function toolDrift() {
-    var withHist = rows.filter(function (r) { return (r.history || []).length; });
-    if (!rows.length) return '';
-
-    if (!withHist.length) {
-      return toolCard('Assessment drift', 'fa-chart-line',
-        '<div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
-        '<div><b>Building your baseline.</b> Every time you open one of these properties we record the ' +
-        'assessment and tax. The first time either one changes, this becomes a year over year chart of ' +
-        'how your assessment has moved against your town. New Jersey does not publish that anywhere, ' +
-        'so it can only be built by watching.</div></div>' +
-        '<div class="tl-note">' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') +
-        ' being tracked. Nothing to compare yet.</div>');
-    }
-
-    var body = withHist.map(function (r) {
-      var pts = (r.history || []).map(function (h) {
-        return { t: h.seen ? new Date(h.seen).getTime() : 0, v: +h.assessed || 0, x: +h.last_year_tax || 0 };
-      }).filter(function (p) { return p.v > 0; });
-      pts.push({ t: Date.now(), v: +r.assessed || 0, x: +r.last_year_tax || 0 });
-      if (pts.length < 2) return '';
-
-      var first = pts[0], last = pts[pts.length - 1];
-      var dA = last.v - first.v, pA = first.v ? (dA / first.v) * 100 : 0;
-      var dT = last.x - first.x, pT = first.x ? (dT / first.x) * 100 : 0;
-
-      var W = 300, H = 60, lo = Math.min.apply(null, pts.map(function (p) { return p.v; })),
-          hi = Math.max.apply(null, pts.map(function (p) { return p.v; }));
-      var path = pts.map(function (p, i) {
-        var x = 4 + (i / (pts.length - 1)) * (W - 8);
-        var y = H - 6 - ((p.v - lo) / ((hi - lo) || 1)) * (H - 14);
-        return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-      }).join(' ');
-
-      return '<div class="dr-row">' +
-        '<div class="dr-addr"><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') + '</span></div>' +
-        '<svg class="dr-spark" viewBox="0 0 ' + W + ' ' + H + '"><path d="' + path + '" fill="none" stroke="' +
-          (dA > 0 ? '#c0392b' : '#1e6b3a') + '" stroke-width="2.4" stroke-linecap="round"/></svg>' +
-        '<div class="dr-fig ' + (dA > 0 ? 'up' : 'down') + '">' + (dA >= 0 ? '+' : '') + money(dA) +
-          '<span>' + (pA >= 0 ? '+' : '') + pA.toFixed(1) + '% assessed</span></div>' +
-        '<div class="dr-fig ' + (dT > 0 ? 'up' : 'down') + '">' + (dT >= 0 ? '+' : '') + money(dT) +
-          '<span>' + (pT >= 0 ? '+' : '') + pT.toFixed(1) + '% tax</span></div>' +
-      '</div>';
-    }).join('');
-
-    return toolCard('Assessment drift', 'fa-chart-line', body +
-      '<div class="tl-note">Measured from snapshots taken each time you opened the property. ' +
-      'A rising assessment with a flat market is the clearest appeal signal there is.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // 2 · NEIGHBORHOOD TAX PERCENTILE
-  // ══════════════════════════════════════════════
-  function toolPercentile() {
-    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
-    if (!homes.length) return '';
-    return toolCard('Where you sit in your town', 'fa-ranking-star',
-      '<div id="pct-body"><div class="tl-wait"><div class="pl-spin" style="margin:0;"></div>' +
-      '<div>Reading the tax distribution for your town...</div></div></div>');
-  }
-
-  function paintPercentile() {
-    var host = el('pct-body');
-    if (!host) return;
-    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
-    if (!homes.length) return;
-
-    Promise.all(homes.slice(0, 3).map(function (r) {
-      var where = "MUN_NAME = '" + String(r.town || '').replace(/'/g, "''") + "'" +
-                  " AND PROP_CLASS = '2' AND LAST_YR_TX > 100";
-      var p = new URLSearchParams({ where: where, outFields: 'LAST_YR_TX',
-        returnGeometry: 'false', resultRecordCount: '2000', f: 'json' });
-      return xfetch(NJ_PARCEL + '?' + p, 18000).then(function (x) { return x.json(); })
-        .then(function (d) {
-          var t = (d.features || []).map(function (f) { return +f.attributes.LAST_YR_TX; })
-                    .filter(function (v) { return v > 100 && v < 200000; }).sort(function (a, b) { return a - b; });
-          if (t.length < 30) return { r: r, ok: false };
-          var below = 0;
-          for (var i = 0; i < t.length; i++) if (t[i] < r.last_year_tax) below++;
-          return { r: r, ok: true, pct: Math.round(below / t.length * 100), n: t.length, med: median(t) };
-        }).catch(function () { return { r: r, ok: false }; });
-    })).then(function (res) {
-      host.innerHTML = res.map(function (o) {
-        if (!o.ok) return '<div class="tl-note">Not enough data for ' + esc(o.r.town || 'that town') + ' yet.</div>';
-        var hot = o.pct >= 75;
-        return '<div class="pct-row">' +
-          '<div class="pct-top"><b>' + esc(o.r.address) + '</b>' +
-            '<span class="pct-badge ' + (hot ? 'hot' : 'ok') + '">' + o.pct + 'th percentile</span></div>' +
-          '<div class="pct-bar"><i style="left:' + Math.min(97, Math.max(1, o.pct)) + '%"></i></div>' +
-          '<div class="pct-legend"><span>lowest in ' + esc(o.r.town) + '</span><span>highest</span></div>' +
-          '<div class="pct-say">You pay <b>' + money(o.r.last_year_tax) + '</b>. The median home here pays <b>' +
-            money(o.med) + '</b>. That puts you above <b>' + o.pct + '%</b> of the ' + o.n.toLocaleString() +
-            ' homes in town.' +
-            (hot ? ' <b style="color:var(--red)">That is high enough to be worth challenging.</b>' : '') +
-          '</div>' +
-          (hot ? '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have an agent review this</button>' : '') +
-        '</div>';
-      }).join('');
-    });
-  }
-
-  // ══════════════════════════════════════════════
-  // 4 · REBATE STACK
-  // ══════════════════════════════════════════════
-  function toolRebates() {
-    var homes = rows.filter(function (r) { return r.kind === 'home' && r.last_year_tax > 0; });
-    if (!homes.length) return '';
-    var r = homes[0];
-    var tax = +r.last_year_tax;
-    var senior = profile.age_band === '65plus';
-
-    var anchor = 1500;
-    var stay = senior ? Math.min(6500, tax * 0.5) : 0;
-    var freeze = senior ? 0 : 0;                       // needs a base year, cannot infer
-    var after = Math.max(0, tax - anchor - stay);
-
-    return toolCard('Your rebate stack', 'fa-layer-group',
-      '<div class="rb-stack">' +
-        '<div class="rb-line"><span>Your bill for ' + esc(r.address) + '</span><b>' + money(tax) + '</b></div>' +
-        '<div class="rb-line minus"><span>ANCHOR, homeowners</span><b>-' + money(Math.min(anchor, tax)) + '</b></div>' +
-        (senior
-          ? '<div class="rb-line minus"><span>Stay NJ, age 65+, capped at half the bill</span><b>-' + money(stay) + '</b></div>'
-          : '<div class="rb-line muted"><span>Stay NJ, only from age 65</span><b>not yet</b></div>') +
-        '<div class="rb-line total"><span>What you would actually pay</span><b>' + money(after) + '</b></div>' +
-      '</div>' +
-      (senior
-        ? '<div class="tl-good"><i class="fas fa-circle-check"></i> At 65 or over you can stack both. Most people who ' +
-          'qualify for Stay NJ have never filed for it, and it does not backdate.</div>'
-        : '<div class="tl-note">Set your age band in your profile and this recalculates. If you are approaching 65, ' +
-          'Stay NJ is worth planning for: it covers up to half the bill.</div>') +
-      '<a class="tl-btn" href="/anchor-estimator.html">Run the full estimator</a>' +
-      '<div class="tl-fine">Illustration only. Actual benefits depend on income, age, and residency. ' +
-      'The Senior Freeze needs a base year we cannot infer, so it is not included here and may add more.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // 5 · PORTFOLIO
-  // ══════════════════════════════════════════════
-  function toolPortfolio() {
-    if (rows.length < 2) return '';
-    var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
-    var assessed = rows.reduce(function (a, r) { return a + (+r.assessed || 0); }, 0);
-    var value = rows.reduce(function (a, r) { return a + (+r.watchdog_value || +r.assessed || 0); }, 0);
-    var blended = value ? (tot / value) * 100 : 0;
-
-    var ranked = rows.slice().filter(function (r) { return r.last_year_tax && (r.watchdog_value || r.assessed); })
-      .map(function (r) {
-        var v = +r.watchdog_value || +r.assessed;
-        return { r: r, eff: (+r.last_year_tax / v) * 100 };
-      }).sort(function (a, b) { return b.eff - a.eff; });
-
-    return toolCard('Portfolio', 'fa-building-columns',
-      '<div class="pf-stats">' +
-        '<div><b>' + rows.length + '</b><span>Properties</span></div>' +
-        '<div><b>' + money(tot) + '</b><span>Total annual tax</span></div>' +
-        '<div><b>' + money(assessed) + '</b><span>Total assessed</span></div>' +
-        '<div><b>' + blended.toFixed(2) + '%</b><span>Blended effective rate</span></div>' +
-      '</div>' +
-      (ranked.length
-        ? '<div class="pf-rank"><div class="pf-rank-h">Worst value per dollar, highest tax burden first</div>' +
-          ranked.slice(0, 6).map(function (o, i) {
-            return '<div class="pf-line">' +
-              '<span class="pf-n">' + (i + 1) + '</span>' +
-              '<span class="pf-a">' + esc(o.r.address) + '<em>' + esc(o.r.town || '') + '</em></span>' +
-              '<span class="pf-e' + (i === 0 && ranked.length > 1 ? ' worst' : '') + '">' + o.eff.toFixed(2) + '%</span>' +
-              '<span class="pf-t">' + money(o.r.last_year_tax) + '</span>' +
-            '</div>';
-          }).join('') + '</div>'
-        : '') +
-      '<div class="tl-note">Effective rate is tax divided by estimated market value, which is the only fair way to ' +
-      'compare properties across different towns. Two homes at the same price can differ by thousands a year.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // 6 · TOWN COMPARISON
-  // ══════════════════════════════════════════════
-  function toolCompare() {
-    var opts = Object.keys(ratios || {}).sort().map(function (k) {
-      return '<option value="' + esc(k) + '">' + esc(k.replace(/ \(/, ', ').replace(/\)$/, '')) + '</option>';
-    }).join('');
-    var mine = rows.length ? rows[0] : null;
-    return toolCard('Compare towns', 'fa-scale-balanced',
-      '<div class="cmp-pick">' +
-        '<select id="cmp-a"><option value="">Town A...</option>' + opts + '</select>' +
-        '<select id="cmp-b"><option value="">Town B...</option>' + opts + '</select>' +
-        '<select id="cmp-c"><option value="">Town C, optional...</option>' + opts + '</select>' +
-        '<button class="tl-btn" onclick="dbCompare()">Compare</button>' +
-      '</div>' +
-      '<div id="cmp-out">' +
-        (mine ? '<div class="tl-note">Tip: start with <b>' + esc(mine.town || '') + '</b>, where you already own, ' +
-          'then add the towns you are considering.</div>' : '') +
-      '</div>');
-  }
-
-  window.dbCompare = function () {
-    var picks = ['cmp-a', 'cmp-b', 'cmp-c'].map(function (id) { return (el(id) || {}).value; })
-      .filter(function (v) { return v; });
-    var out = el('cmp-out');
-    if (picks.length < 2) { out.innerHTML = '<div class="tl-note">Pick at least two towns.</div>'; return; }
-    out.innerHTML = '<div class="tl-wait"><div class="pl-spin" style="margin:0;"></div><div>Measuring each town...</div></div>';
-
-    Promise.all(picks.map(function (key) {
-      var parts = key.replace(/\)$/, '').split(' (');
-      var town = parts[0], county = parts[1] || '';
-      var R = ratioFor(town, county);
-      var where = "MUN_NAME = '" + town.replace(/'/g, "''") + "' AND COUNTY = '" + county.replace(/'/g, "''") +
-                  "' AND PROP_CLASS = '2' AND NET_VALUE > 10000 AND LAST_YR_TX > 100";
-      var p = new URLSearchParams({ where: where, outFields: 'NET_VALUE,LAST_YR_TX',
-        returnGeometry: 'false', resultRecordCount: '1200', f: 'json' });
-      return xfetch(NJ_PARCEL + '?' + p, 18000).then(function (x) { return x.json(); })
-        .then(function (d) {
-          var f = d.features || [];
-          var assessed = f.map(function (x) { return +x.attributes.NET_VALUE; });
-          var taxes = f.map(function (x) { return +x.attributes.LAST_YR_TX; });
-          var eff = [];
-          if (R) f.forEach(function (x) {
-            var mv = (+x.attributes.NET_VALUE) / R.ratio;
-            var e = (+x.attributes.LAST_YR_TX) / mv;
-            if (isFinite(e) && e > 0.002 && e < 0.10) eff.push(e);
-          });
-          return { town: town, county: county, ratio: R, n: f.length,
-                   medAssessed: median(assessed), medTax: median(taxes), eff: median(eff) };
-        }).catch(function () { return { town: town, county: county, ratio: R, n: 0 }; });
-    })).then(function (res) {
-      var best = res.filter(function (r) { return r.eff; }).sort(function (a, b) { return a.eff - b.eff; })[0];
-      out.innerHTML =
-        '<div class="cmp-wrap"><table class="cmp"><thead><tr><th>Town</th>' +
-        res.map(function (r) { return '<th>' + esc(r.town) + (best && r.town === best.town ? ' <span class="cmp-best">lowest</span>' : '') + '</th>'; }).join('') +
-        '</tr></thead><tbody>' +
-        cmpRow('Effective tax rate', res, function (r) { return r.eff ? (r.eff * 100).toFixed(2) + '%' : '-'; }) +
-        cmpRow('Equalization ratio', res, function (r) { return r.ratio ? (r.ratio.ratio * 100).toFixed(2) + '%' : '-'; }) +
-        cmpRow('Median assessment', res, function (r) { return r.medAssessed ? money(r.medAssessed) : '-'; }) +
-        cmpRow('Median tax bill', res, function (r) { return r.medTax ? money(r.medTax) : '-'; }) +
-        cmpRow('Tax on a $400k home', res, function (r) { return r.eff ? money(400000 * r.eff) : '-'; }) +
-        cmpRow('Homes measured', res, function (r) { return r.n ? r.n.toLocaleString() : '-'; }) +
-        '</tbody></table></div>' +
-        (best ? '<div class="tl-good"><i class="fas fa-circle-check"></i> On a $400,000 home, <b>' + esc(best.town) +
-          '</b> is the cheapest of these at about <b>' + money(400000 * best.eff) + '</b> a year.</div>' : '') +
-        '<div class="tl-fine">Effective rates are measured live from each town\u2019s own parcels, not from a rate table. ' +
-        'They will not match any single home exactly.</div>';
-    });
-  };
-  function cmpRow(label, res, fn) {
-    return '<tr><td class="cmp-l">' + label + '</td>' +
-      res.map(function (r) { return '<td>' + fn(r) + '</td>'; }).join('') + '</tr>';
-  }
-
-  // ══════════════════════════════════════════════
-  // 8 · TRUE COST OF OWNERSHIP  ·  sponsored
-  // ══════════════════════════════════════════════
-  function toolCost() {
-    var homes = rows.filter(function (r) { return r.kind === 'home'; });
-    if (!homes.length) return '';
-    var r = homes[0];
-    var v = +r.watchdog_value || +r.assessed || 300000;
-    var mTax = Math.round((+r.last_year_tax || 0) / 12);
-
-    return toolCard('True cost of ownership', 'fa-wallet',
-      '<div class="tc-spon"><img src="/johnvarano.jpg" alt="John Varano">' +
-        '<div><b>Sponsored by Greentree Mortgage, an HMA Company</b>' +
-        '<span>John Varano, Branch Manager</span></div></div>' +
-      '<div class="tc-grid">' +
-        '<div class="tc-in">' +
-          tcRow('Home value', 'tc-val', v.toLocaleString()) +
-          tcRow('Loan balance', 'tc-loan', Math.round(v * 0.7).toLocaleString()) +
-          tcRow('Rate %', 'tc-rate', '6.5', 'number', '0.125') +
-          tcRow('Property tax, monthly', 'tc-tax', mTax.toLocaleString()) +
-          tcRow('Insurance, monthly', 'tc-ins', '125') +
-          tcRow('Upkeep, % of value/yr', 'tc-up', '1', 'number', '0.25') +
-        '</div>' +
-        '<div class="tc-out">' +
-          '<div class="tc-big" id="tc-total">-</div>' +
-          '<div class="tc-lbl">True monthly cost</div>' +
-          '<div id="tc-break"></div>' +
-          '<div class="tc-share" id="tc-share"></div>' +
-          '<a class="tc-btn" href="' + GREENTREE_URL + '" target="_blank" rel="noopener">' +
-            'Talk to John Varano <i class="fas fa-arrow-right"></i></a>' +
-        '</div>' +
-      '</div>' +
-      '<div class="tl-fine">Estimate only. Not a loan offer or a commitment to lend. Greentree Mortgage, an HMA Company, ' +
-      'is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>');
-  }
-  function tcRow(label, id, val, type, step) {
-    return '<div class="tc-row"><label>' + label + '</label>' +
-      '<input id="' + id + '" type="' + (type || 'text') + '"' + (step ? ' step="' + step + '"' : '') +
-      ' value="' + val + '" oninput="dbCost()"></div>';
-  }
-
-  window.dbCost = function () {
-    function v(id) {
-      var e = el(id); if (!e) return 0;
-      return parseFloat(String(e.value).replace(/[^0-9.]/g, '')) || 0;
-    }
-    var val = v('tc-val'), loan = v('tc-loan'), rate = v('tc-rate');
-    var tax = v('tc-tax'), ins = v('tc-ins'), up = v('tc-up');
-    var i = rate / 100 / 12, n = 360;
-    var pi = i > 0 ? loan * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) : loan / n;
-    var upk = (val * (up / 100)) / 12;
-    var total = pi + tax + ins + upk;
-
-    var t = el('tc-total'); if (t) t.textContent = money(total);
-    var b = el('tc-break');
-    if (b) b.innerHTML =
-      tcLine('Principal and interest', pi) + tcLine('Property tax', tax) +
-      tcLine('Insurance', ins) + tcLine('Upkeep and repairs', upk);
-    var sh = el('tc-share');
-    if (sh && total > 0) {
-      var pct = Math.round((tax / total) * 100);
-      sh.innerHTML = '<i class="fas fa-circle-info"></i> Property tax is <b>' + pct +
-        '%</b> of what this home costs you every month. It is also the only line here you can appeal.';
-    }
-  };
-  function tcLine(l, v) {
-    return '<div class="tc-line"><span>' + l + '</span><b>' + money(v) + '</b></div>';
-  }
-
-  // ══════════════════════════════════════════════
-  // 10 · PROFESSIONAL EXPORT
-  // ══════════════════════════════════════════════
-  function toolExport() {
-    if (!rows.length) return '';
-    return toolCard('Export for your attorney or agent', 'fa-file-export',
-      '<p class="tl-p">A clean parcel sheet with block, lot, PAMS PIN, assessment, the town ratio, and the ' +
-      'Chapter 123 upper limit worked out for each property. This is the format a tax attorney or a county board ' +
-      'actually wants, and it saves an hour of transcription.</p>' +
-      '<div class="ex-btns">' +
-        '<button class="tl-btn" onclick="dbExportCSV()"><i class="fas fa-file-csv"></i> Download CSV</button>' +
-        '<button class="tl-btn ghost" onclick="dbExportPrint()"><i class="fas fa-print"></i> Printable sheet</button>' +
-      '</div>' +
-      '<div class="tl-fine">Figures are drawn from public assessment records and the state equalization table. ' +
-      'Verify against the municipal record before filing anything.</div>');
-  }
-
-  function exportRows() {
-    return rows.map(function (r) {
-      var R = ratioFor(r.town, r.county);
-      var mv = +r.watchdog_value || (R && r.assessed ? r.assessed / R.ratio : null);
-      var fair = (mv && R) ? mv * R.ratio : null;
-      var upper = fair ? fair * 1.15 : null;
-      return {
-        Address: r.address || '', Town: r.town || '', County: r.county || '', Zip: r.zip || '',
-        Block: r.block || '', Lot: r.lot || '', PAMS_PIN: r.pams_pin || '',
-        Assessed: r.assessed || '', Annual_Tax: r.last_year_tax || '',
-        Effective_Rate_Pct: r.effective_rate || '',
-        Town_Ratio_Pct: R ? (R.ratio * 100).toFixed(2) : '',
-        Ratio_Tax_Year: R ? R.year : '',
-        Est_Market_Value: mv ? Math.round(mv) : '',
-        Supported_Assessment: fair ? Math.round(fair) : '',
-        Ch123_Upper_Limit: upper ? Math.round(upper) : '',
-        Over_Limit_By: (upper && r.assessed > upper) ? Math.round(r.assessed - upper) : 0,
-        Appeal_Indicated: (upper && r.assessed > upper) ? 'YES' : 'no',
-        Verification: r.verify_level || 'self', Kind: r.kind
-      };
-    });
-  }
-
-  window.dbExportCSV = function () {
-    var d = exportRows();
-    if (!d.length) return;
-    var head = Object.keys(d[0]);
-    var csv = [head.join(',')].concat(d.map(function (r) {
-      return head.map(function (k) {
-        var v = r[k] == null ? '' : String(r[k]);
-        return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
-      }).join(',');
-    })).join('\n');
-    var b = new Blob([csv], { type: 'text/csv' }), u = URL.createObjectURL(b);
-    var a = document.createElement('a');
-    a.href = u; a.download = 'nj-parcel-sheet-' + new Date().toISOString().slice(0, 10) + '.csv';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
-  };
-
-  window.dbExportPrint = function () {
-    var d = exportRows();
-    var w = window.open('', '_blank');
-    if (!w) { toast('Allow popups to print'); return; }
-    var head = ['Address', 'Town', 'Block', 'Lot', 'PAMS_PIN', 'Assessed', 'Annual_Tax',
-                'Town_Ratio_Pct', 'Supported_Assessment', 'Ch123_Upper_Limit', 'Appeal_Indicated'];
-    w.document.write('<html><head><title>NJ parcel sheet</title><style>' +
-      'body{font-family:system-ui,sans-serif;padding:28px;color:#1a1a2e}' +
-      'h1{font-size:19px;margin:0 0 4px}.sub{font-size:12px;color:#666;margin-bottom:18px}' +
-      'table{width:100%;border-collapse:collapse;font-size:11px}' +
-      'th{background:#0e2248;color:#fff;padding:7px;text-align:left}' +
-      'td{padding:6px 7px;border-bottom:1px solid #ddd}' +
-      'tr:nth-child(even) td{background:#f7f8fa}' +
-      '.y{color:#c0392b;font-weight:700}' +
-      '.f{margin-top:18px;font-size:10.5px;color:#666;line-height:1.6}' +
-      '</style></head><body>' +
-      '<h1>New Jersey parcel sheet</h1>' +
-      '<div class="sub">Prepared ' + new Date().toLocaleDateString() + ' for ' + esc(plUser.email || '') +
-      ' via njpropertytaxrelief.com</div>' +
-      '<table><thead><tr>' + head.map(function (h) { return '<th>' + h.replace(/_/g, ' ') + '</th>'; }).join('') +
-      '</tr></thead><tbody>' +
-      d.map(function (r) {
-        return '<tr>' + head.map(function (h) {
-          var v = r[h] == null ? '' : r[h];
-          if (typeof v === 'number' && /Assess|Tax|Limit|Value/.test(h)) v = '$' + v.toLocaleString();
-          return '<td' + (h === 'Appeal_Indicated' && v === 'YES' ? ' class="y"' : '') + '>' + v + '</td>';
-        }).join('') + '</tr>';
-      }).join('') +
-      '</tbody></table>' +
-      '<div class="f">Figures drawn from the NJ Office of GIS parcel layer joined to Division of Taxation MOD-IV records, ' +
-      'and the NJ Division of Taxation Table of Equalized Valuations. Chapter 123 upper limit is the supported assessment ' +
-      'times 1.15. Estimates only; verify against the municipal record before filing. ' +
-      'Prepared by John Scafide, Licensed NJ Real Estate Agent #2079591, The McKenty Team at Opus Elite Real Estate.</div>' +
-      '</body></html>');
-    w.document.close();
-    setTimeout(function () { w.print(); }, 400);
-  };
-
-
-  // ══════════════════════════════════════════════
-  // STREET VIEW
-  // The Static API takes a plain address, so no coordinates needed and no
-  // schema change. Images are requested live from Google every time. They are
-  // never downloaded, cached or re-hosted, which is what Google's terms require
-  // and what keeps this clean if the report is ever exported.
-  // ══════════════════════════════════════════════
-  var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
-
-  function streetImg(r, w, h) {
-    var loc = [r.address, r.town, 'NJ', r.zip].filter(Boolean).join(', ');
-    return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
-           '&location=' + encodeURIComponent(loc) +
-           '&fov=76&pitch=6&source=outdoor&key=' + GMAPS_KEY;
-  }
-
-  // ══════════════════════════════════════════════
-  // SR1A  ·  verified sales ratios
-  // ══════════════════════════════════════════════
-  var sr1a = null;
-  function loadSR1A() {
-    if (sr1a) return Promise.resolve();
-    return xfetch('/property/sr1a-ratios.json', 9000).then(function (r) { return r.json(); })
-      .then(function (j) { sr1a = (j && j.districts) || {}; }).catch(function () { sr1a = {}; });
-  }
-  function sr1aFor(r) {
-    if (!sr1a) return null;
-    var d = String(r.pams_pin || '').slice(0, 4);
-    var row = d && sr1a[d];
-    return (row && row.ratio && row.n >= 10) ? row : null;
-  }
-
-  // Market value from the state's verified sales, falling back to the
-  // published ratio. This is the number every other figure hangs off.
-  function marketValue(r) {
-    var s = sr1aFor(r);
-    if (s && r.assessed) return { v: r.assessed / s.ratio, ratio: s.ratio, n: s.n, src: 'verified' };
-    var R = ratioFor(r.town, r.county);
-    if (R && r.assessed) return { v: r.assessed / R.ratio, ratio: R.ratio, n: null, src: 'published' };
-    if (r.watchdog_value) return { v: r.watchdog_value, ratio: null, n: null, src: 'stored' };
-    return null;
-  }
-
-  // An appeal test needs a market value that did NOT come from the assessment.
-  // Dividing the assessment by the town ratio and then multiplying it back is
-  // circular: the supported assessment always equals the assessment and no
-  // case can ever fire. So we only test when there is an independent anchor.
-  //
-  //   A. watchdog_value  the comps based estimate saved from the lookup page
-  //   B. median price per square foot in town, applied to this home's size
-  //
-  // With neither, we say so rather than showing a number that means nothing.
-  function chapter123(r) {
-    var m = marketValue(r);
-    if (!m || !r.assessed) return null;
-
-    var indep = null, basis = null;
-    if (r.watchdog_value && Math.abs(r.watchdog_value - m.v) / m.v > 0.001) {
-      indep = +r.watchdog_value; basis = 'comparable sales from the full record';
-    } else {
-      var s = sr1aFor(r);
-      if (s && s.ppsf && r.living_sqft) {
-        indep = s.ppsf * r.living_sqft;
-        basis = 'median price per square foot in this town';
-      }
-    }
-
-    var eff = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
-    var out = {
-      market: m.v, ratio: m.ratio, src: m.src, n: m.n,
-      testable: false, hasCase: false, indep: indep, basis: basis
-    };
-    if (indep == null) return out;
-
-    var fair = indep * m.ratio;
-    var limit = fair * 1.15;
-    out.testable = true;
-    out.fair = fair;
-    out.limit = limit;
-    out.over = r.assessed - limit;
-    out.hasCase = out.over > 0;
-    out.saving = (out.hasCase && eff) ? (r.assessed - fair) * eff : null;
-    return out;
-  }
-
-  // ══════════════════════════════════════════════
-  // PROPERTY DETAIL FROM SR1A
-  //
-  // MOD-IV publishes no square footage and New Jersey publishes no bedroom or
-  // bathroom counts anywhere in the public record. Those live in the MLS.
-  // What the SR1A file does carry, on any parcel that has sold, is living
-  // space and year built, so we look the property up by block and lot and use
-  // what genuinely exists rather than inventing the rest.
-  // ══════════════════════════════════════════════
-  var salesCache = {};
-
-  function countySales(county) {
-    var k = String(county || '').toLowerCase().replace(/\s+/g, '-');
-    if (!k) return Promise.resolve([]);
-    if (salesCache[k]) return Promise.resolve(salesCache[k]);
-    return xfetch('/property/sales-' + k + '.json', 20000)
-      .then(function (r) { return r.json(); })
-      .then(function (j) { salesCache[k] = (j && j.sales) || []; return salesCache[k]; })
-      .catch(function () { salesCache[k] = []; return []; });
-  }
-
-  function hydrateDetails() {
-    var counties = {};
-    rows.forEach(function (r) { if (r.county) counties[r.county] = 1; });
-    return Promise.all(Object.keys(counties).map(countySales)).then(function () {
-      rows.forEach(function (r) {
-        var all = salesCache[String(r.county || '').toLowerCase().replace(/\s+/g, '-')];
-        if (!all) return;
-        var d = String(r.pams_pin || '').slice(0, 4);
-        var blk = String(r.block || '').replace(/^0+/, '');
-        var lot = String(r.lot || '').replace(/^0+/, '');
-        if (!d || !blk) return;
-        var hit = null;
-        for (var i = 0; i < all.length; i++) {
-          var s = all[i];
-          if (s.d !== d) continue;
-          if (String(s.b || '').replace(/^0+/, '') !== blk) continue;
-          if (String(s.l || '').replace(/^0+/, '') !== lot) continue;
-          if (!hit || s.y > hit.y) hit = s;
-        }
-        if (hit) {
-          r._sqft = hit.sf || null;
-          r._built = hit.yb || null;
-          r._lastSale = hit.p || null;
-          r._lastSaleYear = hit.y || null;
-        }
-      });
-    });
-  }
-
-  // A short factual line. Only what the public record actually holds.
-  function detailLine(r) {
-    var bits = [];
-    if (r._sqft) bits.push('<b>' + r._sqft.toLocaleString() + '</b> sq ft');
-    if (r._built) bits.push('built <b>' + r._built + '</b>');
-    if (r._lastSale && r._lastSaleYear)
-      bits.push('last sold <b>' + money(r._lastSale) + '</b> in ' + r._lastSaleYear);
-    return bits.length ? '<div class="pr-facts">' + bits.join('<span class="dot">&middot;</span>') + '</div>' : '';
-  }
-
-  function addedOn(r) {
-    if (!r.created_at) return '';
-    var d = new Date(r.created_at);
-    if (isNaN(d)) return '';
-    return (r.kind === 'home' ? 'Claimed ' : 'Added ') +
-      d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  }
-
-  // ══════════════════════════════════════════════
-  // SORTING
-  // ══════════════════════════════════════════════
-  var sortBy = 'added';
-  var SORTS = {
-    added:     { label: 'Recently added',   fn: function (a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); } },
-    valHigh:   { label: 'Highest value',    fn: function (a, b) { return mv(b) - mv(a); } },
-    valLow:    { label: 'Lowest value',     fn: function (a, b) { return mv(a) - mv(b); } },
-    taxHigh:   { label: 'Highest taxes',    fn: function (a, b) { return (+b.last_year_tax || 0) - (+a.last_year_tax || 0); } },
-    taxLow:    { label: 'Lowest taxes',     fn: function (a, b) { return (+a.last_year_tax || 0) - (+b.last_year_tax || 0); } }
-  };
-  function mv(r) { var m = marketValue(r); return m ? m.v : 0; }
-
-  window.dbSort = function (k) {
-    sortBy = k;
-    render();
-  };
-
-  function sortControl() {
-    return '<div class="sortbar">' +
-      '<label>Sort</label>' +
-      '<select onchange="dbSort(this.value)">' +
-        Object.keys(SORTS).map(function (k) {
-          return '<option value="' + k + '"' + (k === sortBy ? ' selected' : '') + '>' +
-            SORTS[k].label + '</option>';
-        }).join('') +
-      '</select>' +
-      (picked.length
-        ? '<span class="cmp-count">' + picked.length + ' selected' +
-          '<button onclick="dbCompareSel()"' + (picked.length < 2 ? ' disabled' : '') + '>Compare</button>' +
-          '<button class="clr" onclick="dbClearPick()">Clear</button></span>'
-        : '<span class="cmp-hint">Tick up to three properties to compare them</span>') +
-    '</div>';
-  }
-
-  // ══════════════════════════════════════════════
-  // COMPARE
-  // ══════════════════════════════════════════════
-  var picked = [];
-
-  window.dbPick = function (id, box) {
-    var i = picked.indexOf(id);
-    if (i > -1) picked.splice(i, 1);
-    else {
-      if (picked.length >= 3) {
-        if (box) box.checked = false;
-        toast('Three at a time is the limit');
-        return;
-      }
-      picked.push(id);
-    }
-    render();
-  };
-  window.dbClearPick = function () { picked = []; render(); };
-
-  window.dbCompareSel = function () {
-    var sel = picked.map(function (id) {
-      return rows.filter(function (r) { return r.id === id; })[0];
-    }).filter(Boolean);
-    if (sel.length < 2) return;
-
-    function row(label, fn, note) {
-      var vals = sel.map(fn);
-      var nums = vals.map(function (v) { return typeof v === 'number' ? v : null; });
-      var real = nums.filter(function (v) { return v != null; });
-      var best = null;
-      if (real.length === sel.length && note) {
-        best = note === 'low' ? Math.min.apply(null, real) : Math.max.apply(null, real);
-      }
-      return '<tr><th>' + label + '</th>' +
-        vals.map(function (v, i) {
-          var txt = (v == null || v === '') ? '<span class="na">not on file</span>'
-                  : (typeof v === 'number' ? money(v) : v);
-          var mark = (best != null && nums[i] === best) ? ' class="win"' : '';
-          return '<td' + mark + '>' + txt + '</td>';
-        }).join('') + '</tr>';
-    }
-
-    plModalNote('Comparing ' + sel.length + ' properties',
-      '<div class="cw"><table class="cmp3"><thead><tr><th></th>' +
-        sel.map(function (r) {
-          return '<td class="ch"><img src="' + streetImg(r, 260, 150) + '" alt="" ' +
-            'onerror="this.style.display=\'none\'"><b>' + esc(r.address) + '</b>' +
-            '<span>' + esc(r.town || '') + '</span></td>';
-        }).join('') +
-      '</tr></thead><tbody>' +
-        row('Assessed', function (r) { return +r.assessed || null; }) +
-        row('Annual tax', function (r) { return +r.last_year_tax || null; }, 'low') +
-        row('Market value', function (r) { var m = marketValue(r); return m ? Math.round(m.v) : null; }, 'high') +
-        row('Effective rate', function (r) { return r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : null; }) +
-        row('Town ratio', function (r) { var s = sr1aFor(r); return s ? (s.ratio * 100).toFixed(1) + '%' : null; }) +
-        row('Square feet', function (r) { return r._sqft ? r._sqft.toLocaleString() : null; }) +
-        row('Year built', function (r) { return r._built || null; }) +
-        row('Median sale in town', function (r) { var s = sr1aFor(r); return s && s.medPrice ? s.medPrice : null; }) +
-        row('Price per sq ft here', function (r) { var s = sr1aFor(r); return s && s.ppsf ? '$' + s.ppsf : null; }) +
-        row('Tax per $1,000 of value', function (r) {
-          var m = marketValue(r);
-          return (m && r.last_year_tax) ? Math.round(r.last_year_tax / m.v * 1000) : null;
-        }, 'low') +
-        row('Appeal case', function (r) {
-          var c = chapter123(r);
-          if (!c || !c.testable) return 'needs full record';
-          return c.hasCase ? 'yes, over by ' + money(c.over) : 'no';
-        }) +
-      '</tbody></table></div>' +
-      '<p class="cw-note">Highlighted cells are the better number in that row. Bedroom and bathroom counts are ' +
-      'not published anywhere in New Jersey\u2019s public property records, so they are not shown. Square footage ' +
-      'comes from the state sales file and only exists for properties that have sold.</p>');
-  };
-
-  // ══════════════════════════════════════════════
-  // PER PROPERTY MENU
-  // ══════════════════════════════════════════════
-  window.dbMenu = function (id, ev) {
-    ev.stopPropagation();
-    var open = document.querySelector('.pm.open');
-    if (open) open.classList.remove('open');
-    var m = document.getElementById('pm-' + id);
-    if (m && (!open || open !== m)) m.classList.add('open');
-  };
-  document.addEventListener('click', function () {
-    var o = document.querySelector('.pm.open');
-    if (o) o.classList.remove('open');
-  });
-
-  function propMenu(r) {
-    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
-    return '<div class="pm-wrap">' +
-      '<button class="pm-btn" onclick="dbMenu(\'' + r.id + '\', event)" aria-label="More"><i class="fas fa-ellipsis"></i></button>' +
-      '<div class="pm" id="pm-' + r.id + '">' +
-        '<a href="/property/?address=' + q + '"><i class="fas fa-file-lines"></i> Open full record</a>' +
-        '<button onclick="dbShare(\'' + r.id + '\')"><i class="fas fa-share-nodes"></i> Share</button>' +
-        '<button onclick="dbCopy(\'' + r.id + '\')"><i class="fas fa-link"></i> Copy link</button>' +
-        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-envelope"></i> Email an agent</button>' +
-        '<button onclick="dbDirections(\'' + r.id + '\')"><i class="fas fa-diamond-turn-right"></i> Directions</button>' +
-        '<hr>' +
-        (r.kind === 'home' && r.verify_level !== 'mail'
-          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
-          : '') +
-        '<button class="rm" onclick="dbRemove(\'' + r.id + '\')"><i class="fas fa-trash"></i> Remove</button>' +
-      '</div></div>';
-  }
-
-  function byId(id) { return rows.filter(function (r) { return r.id === id; })[0]; }
-  function propUrl(r) {
-    return 'https://njpropertytaxrelief.com/property/?address=' +
-      encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
-  }
-  window.dbShare = function (id) {
-    var r = byId(id); if (!r) return;
-    if (navigator.share) navigator.share({ title: r.address, url: propUrl(r) }).catch(function () {});
-    else window.dbCopy(id);
-  };
-  window.dbCopy = function (id) {
-    var r = byId(id); if (!r) return;
-    var u = propUrl(r);
-    if (navigator.clipboard) navigator.clipboard.writeText(u).then(function () { toast('Link copied'); })
-      .catch(function () { window.prompt('Copy this link:', u); });
-    else window.prompt('Copy this link:', u);
-  };
-  window.dbDirections = function (id) {
-    var r = byId(id); if (!r) return;
-    window.open('https://www.google.com/maps/dir/?api=1&destination=' +
-      encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ'), '_blank', 'noopener');
-  };
-
-  // ══════════════════════════════════════════════
-  // ACCESS TIERS
-  //   free  · signed in, sees their own numbers
-  //   pro   · paid, sees the analysis and the exports
-  // Gating is presentational. Everything here is public record either way,
-  // so nothing sensitive hides behind it.
-  // ══════════════════════════════════════════════
-  function isPro() { return !!(profile && profile.plan === 'pro'); }
-
-  function locked(label, why, html) {
-    if (isPro()) return html;
-    return '<div class="lk">' +
-      '<div class="lk-in">' + html + '</div>' +
-      '<div class="lk-over">' +
-        '<div class="lk-t"><i class="fas fa-lock"></i> ' + esc(label) + '</div>' +
-        '<div class="lk-w">' + why + '</div>' +
-        '<button class="lk-b" onclick="dbUpgrade()">See what Pro includes</button>' +
-      '</div></div>';
-  }
-
-  window.dbUpgrade = function () {
-    plModalNote('Watchdog Pro',
-      '<p>Everything on this page stays free. Pro is for the work that comes after: the analysis, ' +
-      'the comparisons across towns, and the exports you can hand to an attorney or a client.</p>' +
-      '<div class="pro-list">' +
-        '<div><b>Chapter 123 screening on every property</b><span>The supported assessment, the statutory limit, ' +
-        'and the dollar figure you would be arguing for.</span></div>' +
-        '<div><b>Verified sales comparables</b><span>Arm\u2019s length sales the state itself confirmed, with square ' +
-        'footage and price per square foot.</span></div>' +
-        '<div><b>Town by town comparison</b><span>Effective rates measured from live parcel data across all 565 ' +
-        'municipalities.</span></div>' +
-        '<div><b>CSV and print exports</b><span>Block, lot, PAMS PIN, ratio and limits in the format a county board ' +
-        'expects.</span></div>' +
-        '<div><b>Unlimited saved properties</b><span>Portfolio totals, blended rates, and drift tracking across all ' +
-        'of them.</span></div>' +
-      '</div>' +
-      '<p style="font-size:13.5px;color:#8a93a6;">Not open yet. Tell me you want it and We will let you know the day ' +
-      'it is, at the price early users get.</p>' +
-      '<button class="db-btn" onclick="dbWantPro()">Tell us we want this</button>');
-  };
-
-  window.dbWantPro = function () {
-    send({
-      name: name(), email: plUser.email, phone: (profile && profile.phone) || 'Not provided',
-      topic: '\u2b50 PRO INTEREST \u2b50 dashboard upgrade request',
-      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
-      town: (rows[0] && rows[0].town) || 'Not provided',
-      address: (rows[0] && rows[0].address) || 'Not provided',
-      message: ['Wants to know when Watchdog Pro opens.',
-                'Properties saved: ' + rows.length,
-                'Source: /property/dashboard.html'].join('\n')
-    });
-    plModalNote('Noted', '<p>We will let you know. Nothing changes on your account in the meantime.</p>' +
-      '<button class="db-btn" onclick="plCloseNote()">Close</button>');
-  };
-
-  // ══════════════════════════════════════════════
-  // THE BRIEF
-  // A paragraph that actually says something, instead of a row of tiles.
-  // This is the first thing anyone reads, so it has to be worth reading.
-  // ══════════════════════════════════════════════
-  function brief() {
-    if (!rows.length) return '';
-    var homes = rows.filter(function (r) { return r.kind === 'home'; });
-    var lead = homes[0] || rows[0];
-    var c = chapter123(lead);
-    var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
-    var cases = rows.filter(function (r) { var x = chapter123(r); return x && x.hasCase; });
-
-    var s = [];
-    s.push('You are tracking <b>' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') + '</b>');
-    if (tot) s.push(' carrying <b>' + money(tot) + '</b> a year in property tax between them');
-    s.push('. ');
-
-    if (c) {
-      s.push('<b>' + esc(lead.address) + '</b> is assessed at ' + money(lead.assessed) + '. ');
-      s.push(c.src === 'verified'
-        ? 'Sales in ' + esc(lead.town) + ' that New Jersey verified as genuine put assessments there at ' +
-          (c.ratio * 100).toFixed(1) + '% of market, which values it around <b>' + money(rnd(c.market)) + '</b>. '
-        : 'At the published ' + (c.ratio * 100).toFixed(1) + '% ratio that implies about <b>' +
-          money(rnd(c.market)) + '</b>. ');
-      s.push(!c.testable
-        ? '<a href="/property/?address=' + encodeURIComponent(lead.address + ', ' + (lead.town || '') + ', NJ') +
-          '">Open the full record</a> to test it against comparable sales, which is what an appeal turns on.'
-        : c.hasCase
-        ? 'That puts the assessment <b class="neg">' + money(c.over) + ' above</b> the Chapter 123 limit' +
-          (c.saving ? ', worth roughly <b>' + money(c.saving) + ' a year</b> if it came down' : '') + '.'
-        : 'Against ' + c.basis + ' it sits inside the cushion the state allows, so there is no appeal to make here.');
-    }
-
-    var d = deadline();
-    if (cases.length) {
-      s.push(cases.length === 1
-        ? ' <span class="urgent">One of your properties looks over-assessed, and the filing deadline is ' +
-          d.days + ' days out.</span>'
-        : ' <span class="urgent">' + cases.length + ' of your properties look over-assessed, and the filing ' +
-          'deadline is ' + d.days + ' days out.</span>');
-    }
-    return '<p class="brief">' + s.join('') + '</p>';
-  }
-
-  function rnd(n) { return Math.round(n / 1000) * 1000; }
-  function deadline() {
-    var now = new Date(), apr = new Date(now.getFullYear(), 3, 1);
-    if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
-    return { date: apr, days: Math.ceil((apr - now) / 864e5) };
-  }
-
-  // ══════════════════════════════════════════════
-  // PROPERTY  ·  simple view
-  // The numbers, in a sentence, then a hairline table. No card, no shadow.
-  // ══════════════════════════════════════════════
-  function propertyBlock(r) {
-    var c = chapter123(r);
-    var s = sr1aFor(r);
-    var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
-    var v = VERIFY[r.verify_level || 'self'];
-
-    var tone = (c && c.hasCase) ? 'hot' : (c && c.testable) ? 'ok' : 'neutral';
-
-    var head =
-      '<div class="pr-top">' +
-        '<div class="pr-shotwrap">' +
-          '<div class="pr-shot">' +
-            '<img src="' + streetImg(r, 400, 260) + '" alt="' + esc(r.address) + '" loading="lazy" ' +
-              'onerror="this.parentNode.classList.add(\'noimg\')">' +
-            (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
-                               : '<span class="pr-kind">Watching</span>') +
-          '</div>' +
-          '<div class="pr-when">' + esc(addedOn(r)) + '</div>' +
-        '</div>' +
-        '<div class="pr-id">' +
-          '<div class="pr-titlerow">' +
-            '<label class="pick"><input type="checkbox"' + (picked.indexOf(r.id) > -1 ? ' checked' : '') +
-              ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
-            propMenu(r) +
-          '</div>' +
-          '<h3>' + esc(r.address) + '</h3>' +
-          '<div class="pr-sub">' + esc(r.town || '') +
-            (r.county ? ', ' + esc(r.county) + ' County' : '') +
-            (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
-          '</div>' +
-          detailLine(r) +
-          '<div class="pr-tags">' +
-            '<span class="tg ' + v.cls + '"><i class="fas ' +
-              (r.verify_level === 'mail' ? 'fa-circle-check' : 'fa-circle-half-stroke') + '"></i>' +
-              v.label + '</span>' +
-            (c && c.hasCase
-              ? '<span class="tg hot"><i class="fas fa-scale-unbalanced-flip"></i>Over the limit by ' +
-                money(c.over) + '</span>'
-              : c && c.testable
-              ? '<span class="tg ok"><i class="fas fa-circle-check"></i>Within Chapter 123</span>'
-              : '') +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-    var line = c
-      ? '<p class="pr-line">Assessed <b>' + money(r.assessed) + '</b>, taxed <b>' +
-        money(r.last_year_tax || 0) + '</b> a year. ' +
-        (c.src === 'verified'
-          ? 'Against <b>' + c.n + '</b> verified sales in this town the market value works out to <b>' +
-            money(rnd(c.market)) + '</b>.'
-          : 'The published ratio implies <b>' + money(rnd(c.market)) + '</b>.') +
-        (s && s.ppsf ? ' Homes here trade around <b>$' + s.ppsf + ' a square foot</b>.' : '') + '</p>'
-      : '';
-
-    var figs =
-      '<dl class="fig">' +
-        f('Assessed', money(r.assessed || 0)) +
-        f('Annual tax', money(r.last_year_tax || 0)) +
-        f('Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-') +
-        (c ? f('Market value', money(rnd(c.market))) : '') +
-        (s ? f('Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
-        (s && s.medPrice ? f('Median sale here', money(s.medPrice)) : '') +
-      '</dl>';
-
-    var appeal = '';
-    if (c && c.testable) {
-      appeal = locked('Chapter 123 analysis',
-        'The supported assessment, the statutory limit, and what an appeal would actually be worth.',
-        '<dl class="fig tight">' +
-          f('Supported assessment', money(c.fair), 'from ' + c.basis) +
-          f('Chapter 123 limit', money(c.limit)) +
-          f(c.hasCase ? 'Over by' : 'Under by', money(Math.abs(c.over)), null, c.hasCase ? 'neg' : 'pos') +
-          (c.saving ? f('If reduced', money(c.saving) + '/yr') : '') +
-        '</dl>');
-    } else if (c) {
-      appeal = '<p class="untest">An appeal is argued against comparable sales, not against the ratio, so this ' +
-        'needs the full record to test properly. ' +
-        '<a href="/property/?address=' + q + '">Open it</a> and the analysis saves back here.</p>';
-    }
-
-    return '<article class="pr ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
-      head + line + figs + metricStrip(r) + appeal +
-      '<div class="pr-acts">' +
-        '<a class="prime" href="' + reportLink(r) + '">Full report <i class="fas fa-arrow-right"></i></a>' +
-        '<a href="/property/?address=' + q + '">Property record</a>' +
-        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Contact agent</button>' +
-      '</div></article>';
-  }
-
-  function f(k, v, note, cls) {
-    return '<div><dt>' + k + '</dt><dd' + (cls ? ' class="' + cls + '"' : '') + '>' + v +
-      (note ? '<em>' + note + '</em>' : '') + '</dd></div>';
-  }
-
-  var VERIFY = {
-    self: { label: 'unverified', cls: 'no' },
-    doc:  { label: 'document on file', cls: 'mid' },
-    mail: { label: 'verified owner', cls: 'yes' }
-  };
-
-  // ══════════════════════════════════════════════
-  // PRO VIEW  ·  one dense table, everything at once
-  // Built for someone who already knows what they are looking at and wants
-  // to scan twenty properties, not read twenty paragraphs.
-  // ══════════════════════════════════════════════
-  function proTable() {
-    if (!rows.length) return '';
-    var body = rows.map(function (r) {
-      var c = chapter123(r);
-      var s = sr1aFor(r);
-      return '<tr' + (c && c.hasCase ? ' class="hot"' : '') + '>' +
-        '<td class="a">' + esc(r.address) + '</td>' +
-        '<td>' + esc(r.town || '') + '</td>' +
-        '<td>' + esc(r.block || '') + '/' + esc(r.lot || '') + '</td>' +
-        '<td class="n">' + (r.assessed ? r.assessed.toLocaleString() : '-') + '</td>' +
-        '<td class="n">' + (r.last_year_tax ? Math.round(r.last_year_tax).toLocaleString() : '-') + '</td>' +
-        '<td class="n">' + (r.effective_rate ? (+r.effective_rate).toFixed(2) : '-') + '</td>' +
-        '<td class="n">' + (s ? (s.ratio * 100).toFixed(1) : (c ? (c.ratio * 100).toFixed(1) : '-')) + '</td>' +
-        '<td class="n">' + (s ? s.n : '-') + '</td>' +
-        '<td class="n">' + (c ? rnd(c.market).toLocaleString() : '-') + '</td>' +
-        '<td class="n">' + (c && c.testable ? Math.round(c.fair).toLocaleString() : '-') + '</td>' +
-        '<td class="n">' + (c && c.testable ? Math.round(c.limit).toLocaleString() : '-') + '</td>' +
-        '<td class="n ' + (c && c.hasCase ? 'neg' : '') + '">' + (c && c.testable ? Math.round(c.over).toLocaleString() : '-') + '</td>' +
-        '<td class="n">' + (c && c.saving ? Math.round(c.saving).toLocaleString() : '-') + '</td>' +
-        '<td>' + (r.verify_level || 'self') + '</td>' +
-      '</tr>';
-    }).join('');
-
-    return '<div class="pro-wrap"><table class="pro"><thead><tr>' +
-      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
-        .map(function (h, i) { return '<th' + (i >= 3 && i <= 12 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
-      '</tr></thead><tbody>' + body + '</tbody></table></div>' +
-      '<p class="pro-note">Ratio is measured from state verified arm\u2019s length sales where available, ' +
-      'otherwise the published Director\u2019s Ratio. n is the number of verified sales behind it. ' +
-      'Supported assessment is market value times the ratio; the Chapter 123 limit adds the statutory 15 percent.</p>';
-  }
-
-  // ══════════════════════════════════════════════
-  // UNIFORMITY AND APPEAL ODDS
-  //
-  // Two datasets New Jersey publishes and nobody reads, joined to the property
-  // in front of you.
-  //
-  //   uniformity.json  how consistently a town assesses, 558 districts
-  //   appeals.json     what actually happens to appeals, 21 counties, 10 years
-  //
-  // Separately they are trivia. Together with the property's own gap they
-  // answer the only question that matters: is filing worth it.
-  // ══════════════════════════════════════════════
-  var uniData = null, appealData = null;
-
-  function ordinal(n) {
-    var s = ['th', 'st', 'nd', 'rd'], v = n % 100;
-    return n + (s[(v - 20) % 10] || s[v] || s[0]);
-  }
-
-
-  function loadUniformity() {
-    if (uniData) return Promise.resolve();
-    return xfetch('/property/uniformity.json', 12000).then(function (r) { return r.json(); })
-      .then(function (j) { uniData = (j && j.districts) || {}; })
-      .catch(function () { uniData = {}; });
-  }
-  function loadAppeals() {
-    if (appealData) return Promise.resolve();
-    return xfetch('/property/appeals.json', 12000).then(function (r) { return r.json(); })
-      .then(function (j) { appealData = j || {}; })
-      .catch(function () { appealData = {}; });
-  }
-
-  function uniFor(r) {
-    var d = String(r.pams_pin || '').slice(0, 4);
-    return (uniData && d) ? uniData[d] : null;
-  }
-  function appealFor(r) {
-    var c = String(r.pams_pin || '').slice(0, 2);
-    return (appealData && appealData.counties && c) ? appealData.counties[c] : null;
-  }
-
-  var BAND_TEXT = {
-    'excellent': 'assesses very consistently',
-    'good':      'assesses reasonably consistently',
-    'fair':      'assessments here vary more than they should',
-    'poor':      'assessments here are noticeably uneven',
-    'very poor': 'the assessment roll here is a mess'
-  };
-  var BAND_CLS = {
-    'excellent': 'good', 'good': 'good', 'fair': 'mid', 'poor': 'bad', 'very poor': 'bad'
-  };
-
-  // ── 1 · ASSESSMENT UNIFORMITY ──
-  function toolUniformity() {
-    var homes = rows.filter(function (r) { return uniFor(r); });
-    if (!homes.length) return '';
-    var r = homes[0], u = uniFor(r);
-
-    var W = 320, H = 62;
-    var yrs = Object.keys(u.series).sort();
-    var vals = yrs.map(function (y) { return u.series[y]; });
-    var lo = Math.min.apply(null, vals.concat([8])), hi = Math.max.apply(null, vals.concat([22]));
-    var path = vals.map(function (v, i) {
-      var x = 6 + (i / Math.max(1, vals.length - 1)) * (W - 12);
-      var y = H - 8 - ((v - lo) / ((hi - lo) || 1)) * (H - 20);
-      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-    }).join(' ');
-    // the IAAO line, which is the only benchmark that means anything
-    var iaao = H - 8 - ((15 - lo) / ((hi - lo) || 1)) * (H - 20);
-
-    return toolCard('Assessment uniformity', 'fa-ruler-combined',
-      '<p class="tl-p">Your town\u2019s equalization ratio says whether it assesses <em>high or low</em>. ' +
-      'This says whether it assesses <em>fairly</em>. It is the average percentage by which individual ' +
-      'assessments in ' + esc(u.name) + ' stray from the town\u2019s own standard, and New Jersey publishes ' +
-      'it every year in a ninety page PDF nobody opens.</p>' +
-
-      '<div class="un-head">' +
-        '<div class="un-score ' + (BAND_CLS[u.band] || 'mid') + '">' +
-          '<b>' + u.score + '</b><span>uniformity score</span></div>' +
-        '<div class="un-say">' +
-          '<b>' + esc(u.name) + ' ' + (BAND_TEXT[u.band] || '') + '.</b> ' +
-          'Its residential coefficient of deviation is <b>' + u.coefficient + '</b>. ' +
-          'The professional standard is 15 or below. ' +
-          'That puts it in the <b>' + ordinal(u.percentile) + ' percentile</b> statewide, so ' +
-          (u.percentile >= 50
-            ? 'it is more consistent than most of New Jersey.'
-            : 'most of New Jersey assesses more consistently than this.') +
-        '</div>' +
-      '</div>' +
-
-      '<div class="un-chart">' +
-        '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Coefficient of deviation over time">' +
-          '<line x1="6" y1="' + iaao.toFixed(1) + '" x2="' + (W - 6) + '" y2="' + iaao.toFixed(1) +
-            '" stroke="#c3cbdb" stroke-width="1" stroke-dasharray="4 4"/>' +
-          '<text x="' + (W - 8) + '" y="' + (iaao - 5).toFixed(1) + '" text-anchor="end" ' +
-            'font-size="9" fill="#8a93a6">standard, 15</text>' +
-          '<path d="' + path + '" fill="none" stroke="' +
-            (u.band === 'poor' || u.band === 'very poor' ? '#c0342b' : '#14346e') +
-            '" stroke-width="2.4" stroke-linecap="round"/>' +
-        '</svg>' +
-        '<div class="un-yrs">' + yrs.map(function (y, i) {
-          return '<span>' + y + '<em>' + vals[i] + '</em></span>';
-        }).join('') + '</div>' +
-      '</div>' +
-
-      (u.commercial && u.commercial > u.coefficient * 1.5
-        ? '<div class="tl-note">Commercial property here deviates at <b>' + u.commercial + '</b>, far worse ' +
-          'than residential. Uneven commercial assessment shifts burden onto homeowners over time.</div>'
-        : '') +
-
-      '<div class="tl-fine">Coefficient of deviation, class 2 residential, from the NJ Division of Taxation ' +
-      'Measures of Property Assessment Uniformity. Weighted toward recent years, adjusted for volatility and ' +
-      'sample size. A high coefficient does not by itself win an appeal, but it is the condition that makes ' +
-      'one arguable.</div>');
-  }
-
-  // ── 2 · APPEAL ODDS ──
-  function toolAppealOdds() {
-    var cands = rows.filter(function (r) { return appealFor(r); });
-    if (!cands.length) return '';
-    var r = cands[0], a = appealFor(r), L = a.latest, u = uniFor(r);
-    var hist = Object.keys(a.history).sort();
-
-    var W = 330, H = 58;
-    var rates = hist.map(function (y) { return a.history[y].win_rate_filed; });
-    var lo = Math.min.apply(null, rates), hi = Math.max.apply(null, rates);
-    var path = rates.map(function (v, i) {
-      var x = 6 + (i / Math.max(1, rates.length - 1)) * (W - 12);
-      var y = H - 8 - ((v - lo) / ((hi - lo) || 1)) * (H - 18);
-      return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-    }).join(' ');
-
-    // Expected value. This is the number nobody else can produce, because it
-    // needs the county outcome record, the town's uniformity, and this
-    // property's own gap, and no one publishes the three together.
-    var c = chapter123(r);
-    var ev = null;
-    if (c && c.testable && c.hasCase && c.saving) {
-      var p = L.win_rate_decided ? L.win_rate_decided / 100 : L.win_rate_filed / 100;
-      // a sloppier roll is a friendlier roll for an appellant
-      if (u) p = Math.max(0.05, Math.min(0.95, p * (u.coefficient > 20 ? 1.12 : u.coefficient < 10 ? 0.88 : 1)));
-      ev = { p: p, gross: c.saving * 5, net: (c.saving * 5 * p) - 25 };
-    }
-
-    return toolCard('Appeal odds in ' + esc(a.county.toLowerCase().replace(/\b\w/g, function (m) { return m.toUpperCase(); })) + ' County',
-      'fa-gavel',
-      '<p class="tl-p">Appeals are decided by the <b>county</b> board of taxation, not your town, so this is the ' +
-      'body that would actually hear your case. New Jersey publishes what happens to every appeal filed, ' +
-      'and has done for ten years.</p>' +
-
-      '<div class="ap-grid">' +
-        '<div><b>' + L.win_rate_filed + '%</b><span>of all appeals filed won a reduction</span></div>' +
-        '<div><b>' + (L.win_rate_decided != null ? L.win_rate_decided + '%' : '-') +
-          '</b><span>of those actually decided</span></div>' +
-        '<div><b>' + L.total.toLocaleString() + '</b><span>filed in ' + a.latest_year + '</span></div>' +
-        '<div><b>' + L.residential.toLocaleString() + '</b><span>were residential like yours</span></div>' +
-      '</div>' +
-
-      '<div class="ap-chart">' +
-        '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Win rate over ten years">' +
-          '<path d="' + path + '" fill="none" stroke="#1c7a4a" stroke-width="2.4" stroke-linecap="round"/>' +
-        '</svg>' +
-        '<div class="ap-yrs"><span>' + hist[0] + '  ' + rates[0] + '%</span>' +
-          '<span class="' + (a.trend > 0 ? 'up' : a.trend < 0 ? 'down' : '') + '">' +
-          (a.trend > 0 ? 'up ' + a.trend + ' points' : a.trend < 0 ? 'down ' + Math.abs(a.trend) + ' points' : 'flat') +
-          ' over ten years</span>' +
-          '<span>' + hist[hist.length - 1] + '  ' + rates[rates.length - 1] + '%</span></div>' +
-      '</div>' +
-
-      (ev
-        ? '<div class="ap-ev">' +
-            '<div class="ap-ev-n">' + money(Math.round(ev.net)) + '</div>' +
-            '<div class="ap-ev-l">Expected value of filing on <b>' + esc(r.address) + '</b>, over five years, ' +
-              'after the filing fee. That is a <b>' + Math.round(ev.p * 100) + '%</b> chance of winning ' +
-              money(Math.round(ev.gross)) + '.</div>' +
-            '<button class="tl-btn" onclick="dbAsk(\'appeal\')">Have an agent screen this</button>' +
-          '</div>'
-        : '<div class="tl-note">Your saved properties do not currently show an assessment above the Chapter 123 ' +
-          'limit, so there is nothing to weigh these odds against. Open a property\u2019s full record and the ' +
-          'analysis saves back here.</div>') +
-
-      '<div class="tl-fine">A win means the assessment came down, either revised by the board or stipulated by ' +
-      'agreement before hearing. Most successful appeals settle, so counting only board revisions would ' +
-      'understate this badly. Withdrawals and dismissals are excluded from the decided rate. ' +
-      'The average successful appeal in ' + a.county.toLowerCase() + ' cut ' +
-      (L.avg_reduction_per_win ? money(L.avg_reduction_per_win) : 'an unrecorded amount') +
-      ' off the assessed value, though that figure is dominated by commercial cases and a house will be far less. ' +
-      'This data is published by county, not by town. Anyone offering you a town level win rate for New Jersey ' +
-      'is guessing.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // CONDENSED METRICS
-  //
-  // Every saved property gets its own numbers. The previous build computed
-  // these once from rows[0] and printed them under a list of five properties,
-  // which read as though they applied to all of them. They did not.
-  //
-  // Full depth lives on the per property report at home.html. What sits here
-  // is the short version: four figures, each explained on hover, plus a link
-  // through to the whole thing.
-  // ══════════════════════════════════════════════
-
-  var TIPS = {
-    uniformity:
-      'How consistently this town assesses its homes. The equalization ratio tells you whether a town ' +
-      'assesses high or low; this tells you whether it assesses fairly. Scored 0 to 100 from the state\u2019s ' +
-      'Coefficient of Deviation, where the professional standard is a coefficient of 15 or below.',
-    ratio:
-      'What share of true market value assessments run at in this town, measured from sales New Jersey ' +
-      'itself verified as genuine arm\u2019s length transactions. Your assessment divided by this is roughly ' +
-      'what the town thinks your home is worth.',
-    odds:
-      'The share of property tax appeals in this county that ended with the assessment reduced, counting ' +
-      'both board decisions and settlements. Appeals are heard by the county board, not the town, so the ' +
-      'county is the body whose behaviour this predicts.',
-    gap:
-      'How far the assessment sits above the Chapter 123 limit, which is the supported assessment plus the ' +
-      '15 percent cushion New Jersey allows. Above zero means there is an argument to make. This needs an ' +
-      'independent market value, so it only appears once the full record has been opened.',
-    eff:
-      'Annual tax divided by estimated market value. This is the only fair way to compare two properties in ' +
-      'different towns, because assessment levels differ everywhere.',
-    drift:
-      'How much this assessment has moved since you started tracking it. New Jersey does not publish ' +
-      'per parcel assessment history anywhere, so this accumulates from your own visits.'
-  };
-
-  function tip(key, label) {
-    return '<span class="tip" tabindex="0" data-tip="' + esc(TIPS[key] || '') + '">' +
-      label + '<i class="fas fa-circle-info"></i></span>';
-  }
-
-  // The four numbers worth showing on a card, each one specific to this row.
-  function metricStrip(r) {
-    var u = uniFor(r), a = appealFor(r), s = sr1aFor(r), c = chapter123(r);
-    if (!u && !a && !s && !c) return '';
-
-    var cells = [];
-    if (u) cells.push(cell(tip('uniformity', 'Uniformity'), u.score,
-      u.band, BAND_CLS[u.band] || 'mid'));
-    if (s) cells.push(cell(tip('ratio', 'Town ratio'), (s.ratio * 100).toFixed(1) + '%',
-      s.n + ' verified sales', ''));
-    if (a) cells.push(cell(tip('odds', 'Appeal odds'), a.latest.win_rate_filed + '%',
-      esc(titleCase(a.county)) + ' County', ''));
-    if (c && c.testable) {
-      cells.push(cell(tip('gap', 'Over the limit'),
-        c.hasCase ? money(c.over) : 'No',
-        c.hasCase ? 'worth ' + money(c.saving) + '/yr' : 'within Chapter 123',
-        c.hasCase ? 'bad' : 'good'));
-    } else if (r.effective_rate) {
-      cells.push(cell(tip('eff', 'Effective rate'), (+r.effective_rate).toFixed(2) + '%',
-        'of market value', ''));
-    }
-
-    return '<div class="ms">' + cells.join('') + '</div>';
-  }
-
-  function cell(label, val, sub, cls) {
-    return '<div class="ms-c"><span class="ms-l">' + label + '</span>' +
-      '<b class="ms-v ' + (cls || '') + '">' + val + '</b>' +
-      '<span class="ms-s">' + sub + '</span></div>';
-  }
-
-  function titleCase(s) {
-    return String(s || '').toLowerCase().replace(/\b\w/g, function (m) { return m.toUpperCase(); });
-  }
-
-  function reportLink(r) {
-    return '/property/home.html?pin=' + encodeURIComponent(r.pams_pin || '');
-  }
-
-  // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
-  // node per tip and it survives the list being rebuilt on every sort.
-  function initTips() {
-    if (document.getElementById('tipbox')) return;
-    var box = document.createElement('div');
-    box.id = 'tipbox';
-    box.className = 'tipbox';
-    document.body.appendChild(box);
-
-    function show(e) {
-      var t = e.target.closest ? e.target.closest('.tip') : null;
-      if (!t) return;
-      box.textContent = t.getAttribute('data-tip') || '';
-      box.classList.add('on');
-      var r = t.getBoundingClientRect();
-      var top = r.bottom + window.scrollY + 8;
-      var left = Math.min(
-        Math.max(12, r.left + window.scrollX + r.width / 2 - 150),
-        window.innerWidth - 312
-      );
-      box.style.top = top + 'px';
-      box.style.left = left + 'px';
-    }
-    function hide(e) {
-      if (e.target.closest && e.target.closest('.tip')) box.classList.remove('on');
-    }
-    document.addEventListener('mouseover', show);
-    document.addEventListener('mouseout', hide);
-    document.addEventListener('focusin', show);
-    document.addEventListener('focusout', hide);
-  }
-
-  // ══════════════════════════════════════════════
-  // REASSESSMENT RISK
-  //
-  // When a home sells, the price becomes public evidence of what it is worth.
-  // The assessment does not automatically follow. In most New Jersey towns it
-  // sits untouched until the assessor gets to it, which can be years, or until
-  // the town revalues, at which point it catches up all at once.
-  //
-  // That gap is visible in the state's own files, and it cuts two ways:
-  //
-  //   A buyer  needs to know the bill is about to jump, because the listing
-  //            shows the seller's tax, not theirs.
-  //   An owner needs to know they are currently under-assessed, which is good
-  //            news worth not drawing attention to, and terrible news if they
-  //            were about to file an appeal.
-  //
-  // THE TRAP, AND WHY THIS IS NOT A NAIVE RATIO SCREEN
-  //
-  //   A naive version flags every sale where assessed/price runs below the
-  //   town norm, and it is wrong roughly a tenth of the time. New construction
-  //   sells for the price of a finished house while still assessed on the bare
-  //   land, which produces ratios near 10% that look spectacular and mean
-  //   nothing. Same for teardowns and land sales.
-  //
-  //   Testing on Winslow: 98 sales looked like lags. 6 were land with no
-  //   building on record, 3 were new construction awaiting an added
-  //   assessment. Calling those "stale" would have been wrong and obvious to
-  //   anyone who knows the market. They are classified separately here.
-  // ══════════════════════════════════════════════
-
-  var LAG_CLS = {
-    stale: {
-      label: 'Assessment has not kept up',
-      why: 'An existing home that sold well above what its assessment implies. The assessor has not ' +
-           'revisited it yet.'
-    },
-    'new': {
-      label: 'New construction, added assessment coming',
-      why: 'Built within a few years of the sale and still assessed close to bare land. New Jersey adds ' +
-           'the improvement through an added assessment, and the bill rises sharply when it lands.'
-    },
-    land: {
-      label: 'Land or teardown at time of sale',
-      why: 'No building on record when it changed hands, so the assessment covers the lot only.'
-    }
-  };
-
-  function lagClass(x, saleYear) {
-    if (!x.sf && !x.yb) return 'land';
-    if (x.yb && x.yb >= (saleYear || x.y) - 4) return 'new';
-    return 'stale';
-  }
-
-  // Classify every recent verified sale in a town against that town's own ratio.
-  function townLag(county, district, ratio) {
-    return loadCountySales(county).then(function (all) {
-      if (!all || !all.length || !ratio) return null;
-      var thisYear = new Date().getFullYear();
-      var recent = all.filter(function (x) {
-        return x.d === district && String(x.c).trim() === '2' &&
-               x.r && x.p > 40000 && x.y >= thisYear - 3;
-      });
-      if (recent.length < 20) return null;
-
-      var out = { total: recent.length, stale: [], 'new': [], land: [] };
-      recent.forEach(function (x) {
-        if (x.r < ratio * 0.80) out[lagClass(x, x.y)].push(x);
-      });
-      out.staleShare = out.stale.length / recent.length;
-      out.medianStale = out.stale.length
-        ? median(out.stale.map(function (x) { return x.r; })) : null;
-      out.stale.sort(function (a, b) { return a.r - b.r; });
-      return out;
-    });
-  }
-
-  // Where does THIS property sit? Needs its own verified sale to say anything.
-  function ownLag(r, ratio) {
-    if (!r._lastSale || !r._lastSaleYear || !r.assessed || !ratio) return null;
-    var thisYear = new Date().getFullYear();
-    if (thisYear - r._lastSaleYear > 6) return null;      // too old to be evidence
-
-    var implied = r.assessed / r._lastSale;
-    var expected = r._lastSale * ratio;
-    var gap = expected - r.assessed;
-    var eff = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
-
-    return {
-      sale: r._lastSale, year: r._lastSaleYear,
-      implied: implied, expected: expected, gap: gap,
-      pct: implied / ratio,
-      behind: implied < ratio * 0.85,
-      ahead: implied > ratio * 1.15,
-      taxIfCaught: (gap > 0 && eff) ? gap * eff : null,
-      cls: lagClass({ sf: r._sqft, yb: r._built }, r._lastSaleYear)
-    };
-  }
-
-  // the sales loader is named countySales in this file
-  function loadCountySales(c) { return countySales(c); }
-
-  function toolReassessRisk(r) {
-    var s = sr1aFor(r);
-    if (!s || !s.ratio) return '';
-    var own = ownLag(r, s.ratio);
-    var d = String(r.pams_pin || '').slice(0, 4);
-
-    var body = '';
-
-    if (own && own.behind) {
-      var meta = LAG_CLS[own.cls];
-      body +=
-        '<div class="rr-flag ' + (own.cls === 'stale' ? 'warn' : 'info') + '">' +
-          '<div class="rr-flag-h"><i class="fas fa-triangle-exclamation"></i> ' + esc(meta.label) + '</div>' +
-          '<p>This property sold for <b>' + money(own.sale) + '</b> in ' + own.year +
-          ', and is assessed at <b>' + money(r.assessed) + '</b>. That is <b>' +
-          (own.implied * 100).toFixed(1) + '%</b> of what it actually fetched, against a town norm of <b>' +
-          (s.ratio * 100).toFixed(1) + '%</b>. ' + esc(meta.why) + '</p>' +
-          '<div class="rr-math">' +
-            '<div><span>Assessed at</span><b>' + money(r.assessed) + '</b></div>' +
-            '<div><span>Town norm would put it at</span><b>' + money(Math.round(own.expected)) + '</b></div>' +
-            '<div class="up"><span>If the assessor catches up</span><b>+' +
-              money(Math.round(own.gap)) + '</b></div>' +
-            (own.taxIfCaught
-              ? '<div class="up"><span>Which would add, per year</span><b>+' +
-                money(Math.round(own.taxIfCaught)) + '</b></div>' : '') +
-          '</div>' +
-          '<p class="rr-note">Nothing here is owed today and nothing is overdue. It is a standing exposure: ' +
-          'the figures say this assessment is low relative to the sale, and assessments that sit low get ' +
-          'corrected eventually, usually at a revaluation.</p>' +
-        '</div>';
-    } else if (own && own.ahead) {
-      body +=
-        '<div class="rr-flag good">' +
-          '<div class="rr-flag-h"><i class="fas fa-circle-check"></i> Assessed above what it sold for</div>' +
-          '<p>This sold for <b>' + money(own.sale) + '</b> in ' + own.year + ' and carries an assessment of <b>' +
-          money(r.assessed) + '</b>, which works out to <b>' + (own.implied * 100).toFixed(1) +
-          '%</b> against a town norm of <b>' + (s.ratio * 100).toFixed(1) + '%</b>. ' +
-          'A recent arm\u2019s length sale below the assessed level is among the strongest appeal evidence there ' +
-          'is, because it is your own property rather than a comparable.</p>' +
-        '</div>';
-    } else if (own) {
-      body +=
-        '<p class="tl-p">This sold for <b>' + money(own.sale) + '</b> in ' + own.year +
-        ', which puts its assessment at <b>' + (own.implied * 100).toFixed(1) +
-        '%</b> of the sale price against a town norm of <b>' + (s.ratio * 100).toFixed(1) +
-        '%</b>. That is broadly in line, so there is no catch-up hanging over it.</p>';
-    } else {
-      body +=
-        '<p class="tl-p">No verified sale is on file for this property in the years the state publishes, so ' +
-        'there is nothing to measure its assessment against directly. What follows is the pattern across the ' +
-        'town.</p>';
-    }
-
-    body += '<div id="rr-town-' + esc(d) + '" class="rr-town">' +
-            '<div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
-            '<div>Reading recent verified sales in ' + esc(r.town || 'this town') + '...</div></div></div>';
-
-    // town level pattern, loaded after the card is on screen
-    townLag(r.county, d, s.ratio).then(function (t) {
-      var host = el('rr-town-' + d);
-      if (!host) return;
-      if (!t) { host.innerHTML = '<div class="tl-note">Not enough recent verified sales here to read a ' +
-        'town wide pattern.</div>'; return; }
-
-      var pct = Math.round(t.staleShare * 100);
-      host.innerHTML =
-        '<h5 class="rr-h">How common this is in ' + esc(r.town || 'this town') + '</h5>' +
-        '<div class="rr-bar"><i style="width:' + Math.min(100, pct) + '%"></i></div>' +
-        '<p class="rr-say"><b>' + pct + '%</b> of the ' + t.total + ' verified sales here in the last three ' +
-        'years left the buyer with an assessment well below what they paid' +
-        (t.medianStale ? ', the typical one sitting at <b>' + (t.medianStale * 100).toFixed(0) +
-          '%</b> of the sale price against a town norm of <b>' + (s.ratio * 100).toFixed(0) + '%</b>' : '') +
-        '. ' +
-        (pct >= 15
-          ? 'That is a lot, and it usually means the town is overdue for a revaluation.'
-          : 'That is fairly typical for New Jersey.') + '</p>' +
-        (t['new'].length || t.land.length
-          ? '<p class="tl-fine">Excluded from that figure: <b>' + t['new'].length + '</b> new builds still ' +
-            'assessed near bare land and <b>' + t.land.length + '</b> land or teardown sale' +
-            (t.land.length === 1 ? '' : 's') + '. Both look like ' +
-            'lagging assessments and neither is one.</p>'
-          : '') +
-        (t.stale.length
-          ? locked('The properties themselves',
-              'Every recent sale in this town whose assessment has not caught up, with the dollar gap on each.',
-              '<div class="comps-wrap"><table class="comps"><thead><tr>' +
-                '<th>Address</th><th>Sold</th><th class="num">Price</th><th class="num">Assessed</th>' +
-                '<th class="num">Ratio</th><th class="num">Gap</th></tr></thead><tbody>' +
-              t.stale.slice(0, 12).map(function (x) {
-                return '<tr><td><b>' + esc(x.a) + '</b></td><td>' + x.y + '</td>' +
-                  '<td class="num">' + money(x.p) + '</td>' +
-                  '<td class="num">' + money(x.av) + '</td>' +
-                  '<td class="num">' + (x.r * 100).toFixed(0) + '%</td>' +
-                  '<td class="num neg">+' + money(Math.round(x.p * s.ratio - x.av)) + '</td></tr>';
-              }).join('') + '</tbody></table></div>')
-          : '');
-    });
-
-    return toolCard('Reassessment risk', 'fa-arrow-trend-up',
-      '<p class="tl-p">A sale price is public evidence of what a home is worth. The assessment does not ' +
-      'automatically follow it. Where the two have drifted apart, the bill is carrying an increase that has ' +
-      'not arrived yet.</p>' + body +
-      '<div class="tl-fine">Measured from the New Jersey SR1A file of sales the state verified as genuine ' +
-      'arm\u2019s length transactions, against the same file\u2019s town level ratio. New construction and land ' +
-      'sales are classified separately, because both produce very low ratios for reasons that have nothing ' +
-      'to do with a stale assessment. This is not a prediction of when an assessor will act, and no one ' +
-      'outside the municipality can make that prediction.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // REVALUATION RADAR
-  //
-  // A revaluation is the single largest thing that can happen to a New Jersey
-  // property tax bill, and almost nobody sees it coming. Assessments across a
-  // whole town are reset to current market value at once. In a town that has
-  // not revalued in twenty years, assessments can double or triple overnight.
-  //
-  // The bill does not double, because the tax RATE falls to compensate. That is
-  // the part that gets lost in the panic, and the part that matters: a
-  // revaluation redistributes the burden rather than raising it. Whoever has
-  // been under-assessed relative to their neighbours pays more afterwards, and
-  // whoever has been over-assessed pays less. Which side you land on is
-  // knowable in advance, and that is what this works out.
-  //
-  // WHAT ACTUALLY TRIGGERS ONE
-  //
-  //   A county board of taxation may order a revaluation, and the Director may
-  //   compel one. The two figures that drive it are both published:
-  //
-  //     Director's ratio    drifting well below 100% means assessments no
-  //                         longer track market value
-  //     Coefficient of      above 15 means the town assesses unevenly, which is
-  //     deviation           the fairness argument for forcing a reset
-  //
-  // WHAT THIS DOES NOT HAVE, AND WILL NOT PRETEND TO
-  //
-  //   The list of towns currently under a revaluation order, and the date each
-  //   town last revalued. Both exist; neither is published in a machine
-  //   readable form. So this reads pressure, not schedule. A town can sit at
-  //   maximum pressure for years, and a town under low pressure can still
-  //   revalue because its governing body decided to. This is a weather
-  //   forecast, not a calendar.
-  // ══════════════════════════════════════════════
-
-  function revalRadar(r) {
-    var s = sr1aFor(r), u = uniFor(r);
-    var off = ratioFor(r.town, r.county);
-    if (!s || !off) return null;
-
-    var pub = off.ratio, ver = s.ratio;
-    var drift = pub - ver;                       // how stale the published figure is
-    var coeff = u ? u.coefficient : null;
-
-    // Three pressures, each scored 0 to 1, then weighted.
-    //
-    //   level   how far the published ratio sits below 100. New Jersey uses
-    //           85% as the common trigger point in practice.
-    //   spread  the coefficient of deviation against the standard of 15.
-    //   decay   how far verified sales have already moved below the published
-    //           figure, which is next year's ratio arriving early.
-    var level = Math.max(0, Math.min(1, (0.85 - pub) / 0.35));
-    var spread = coeff == null ? null : Math.max(0, Math.min(1, (coeff - 15) / 20));
-    var decay = Math.max(0, Math.min(1, drift / 0.20));
-
-    var parts = [[level, 0.45], [decay, 0.25]];
-    if (spread != null) parts.push([spread, 0.30]);
-    var wsum = parts.reduce(function (a, p) { return a + p[1]; }, 0);
-    var raw = parts.reduce(function (a, p) { return a + p[0] * p[1]; }, 0) / wsum;
-    var score = Math.round(raw * 100);
-
-    // A ratio at or above 100 means the town has revalued recently and
-    // assessments currently exceed market. Pressure is genuinely near zero, and
-    // the interesting news there is the opposite one: appeal season.
-    var freshReval = pub >= 0.98;
-    if (freshReval) score = Math.min(score, 8);
-
-    var band = freshReval ? 'recent'
-             : score >= 70 ? 'high'
-             : score >= 45 ? 'building'
-             : score >= 22 ? 'low'
-             : 'minimal';
-
-    // Which side of a reset does THIS property land on? The whole point.
-    var own = null;
-    if (r.assessed && ver) {
-      var market = r.assessed / ver;
-      // after a reval every assessment becomes market value, and the rate falls
-      // by roughly the ratio, so the bill moves by how far this property sits
-      // from the town's own average relationship
-      var impliedNow = r._lastSale ? (r.assessed / r._lastSale) : null;
-      if (impliedNow) {
-        var rel = impliedNow / ver;           // below 1 = under-assessed vs town
-        own = {
-          rel: rel,
-          direction: rel < 0.92 ? 'up' : rel > 1.08 ? 'down' : 'flat',
-          pct: Math.round((1 / rel - 1) * 100),
-          basis: 'its ' + r._lastSaleYear + ' sale'
-        };
-      }
-    }
-
-    return {
-      score: score, band: band, pub: pub, ver: ver, drift: drift,
-      coeff: coeff, level: level, spread: spread, decay: decay,
-      freshReval: freshReval, own: own, town: r.town,
-      years: u ? u.years : null
-    };
-  }
-
-  var REVAL_TEXT = {
-    recent: ['Recently revalued', 'Assessments here currently sit at or above market value, which is what a ' +
-             'town looks like just after a reset. Pressure for another one is effectively nil, and this is ' +
-             'the point in the cycle when appeals are most winnable.'],
-    high:   ['Under real pressure', 'Both figures the state watches are well outside where they should be. ' +
-             'A revaluation here would not be a surprise.'],
-    building: ['Pressure building', 'Drifting in the direction that eventually forces a reset, though not yet ' +
-             'at the point where a county board typically acts.'],
-    low:    ['Little pressure', 'The published figures are close enough to where the state expects them that ' +
-             'nothing is being forced.'],
-    minimal:['Settled', 'Assessments here track market value closely and the roll is applied evenly. ' +
-             'Nothing suggests a reset is coming.']
-  };
-
-  function toolRevalRadar(r) {
-    var v = revalRadar(r);
-    if (!v) return '';
-    var t = REVAL_TEXT[v.band];
-
-    function meter(label, val, detail) {
-      if (val == null) return '';
-      var pct = Math.round(val * 100);
-      return '<div class="rv-m">' +
-        '<div class="rv-m-h"><span>' + label + '</span><b>' + detail + '</b></div>' +
-        '<div class="rv-m-bar"><i style="width:' + pct + '%"></i></div></div>';
-    }
-
-    return toolCard('Revaluation radar', 'fa-tower-broadcast',
-      '<p class="tl-p">A revaluation resets every assessment in a town to current market value at once. ' +
-      'It is the largest single thing that can happen to a tax bill, and it arrives with very little warning. ' +
-      'These are the two figures the state watches, read against ' + esc(v.town || 'this town') + '.</p>' +
-
-      '<div class="rv-head">' +
-        '<div class="rv-score ' + v.band + '"><b>' + v.score + '</b><span>pressure</span></div>' +
-        '<div class="rv-say"><b>' + t[0] + '.</b> ' + t[1] + '</div>' +
-      '</div>' +
-
-      '<div class="rv-meters">' +
-        meter('Assessment level', v.level,
-          (v.pub * 100).toFixed(1) + '% of market' +
-          (v.pub < 0.85 ? ', below the 85% mark' : ', comfortable')) +
-        (v.spread != null
-          ? meter('Assessment evenness', v.spread,
-              'coefficient ' + v.coeff + ' against a standard of 15')
-          : '') +
-        meter('Drift since certification', v.decay,
-          'verified sales say ' + (v.ver * 100).toFixed(1) + '%, ' +
-          (v.drift > 0 ? (v.drift * 100).toFixed(1) + ' points below the published figure'
-                       : 'in line with the published figure')) +
-      '</div>' +
-
-      (v.own
-        ? '<div class="rv-own ' + v.own.direction + '">' +
-            '<div class="rv-own-h">If ' + esc(v.town) + ' revalued, this property would likely go ' +
-              (v.own.direction === 'up' ? '<b class="up">up</b>'
-               : v.own.direction === 'down' ? '<b class="down">down</b>'
-               : '<b>roughly sideways</b>') + '</div>' +
-            '<p>' +
-              (v.own.direction === 'up'
-                ? 'Measured against ' + v.own.basis + ', its assessment would need to rise roughly <b>' +
-                  Math.abs(v.own.pct) + '%</b> to sit where the town average sits. A reset would do exactly ' +
-                  'that, and the bill would rise with it even though the tax rate falls.'
-               : v.own.direction === 'down'
-                ? 'Measured against ' + v.own.basis + ', its assessment sits roughly <b>' + Math.abs(v.own.pct) +
-                  '%</b> above where the town average sits. A reset would correct that downward, and the bill ' +
-                  'should fall with it.'
-                : 'Measured against ' + v.own.basis + ', this sits close to the town average, so a reset would ' +
-                  'move the bill very little in either direction.') +
-            '</p>' +
-            '<p class="rv-fine">A revaluation redistributes the burden, it does not raise it. The rate falls ' +
-            'roughly in proportion as assessments rise. Which way an individual bill moves depends entirely on ' +
-            'whether that property was under or over assessed compared with its neighbours beforehand.</p>' +
-          '</div>'
-        : '<div class="tl-note">No verified sale is on file for this property, so there is no way to say which ' +
-          'side of a reset it would land on. That needs its own sale price, not the town average.</div>') +
-
-      '<div class="tl-fine">Built from the Director\u2019s Ratio published by the Division of Taxation, the ' +
-      'Coefficient of Deviation from the same department, and the verified sales ratio measured from the ' +
-      'state\u2019s SR1A file. <b>This reads pressure, not schedule.</b> The list of towns currently under a ' +
-      'revaluation order and the date each town last revalued are not published in any machine readable form, ' +
-      'so a town can sit at high pressure for years without acting, and a settled town can revalue because its ' +
-      'council decided to. Confirm with your municipal assessor before making a decision on it.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // NEW JERSEY BENEFIT RULES
-  //
-  // Kept in one place because they change with every state budget, and because
-  // the whole point of these tools is being right about the thresholds. Each
-  // figure below is dated so it is obvious when it went stale.
-  //
-  // Verified against the Division of Taxation, August 2026.
-  // ══════════════════════════════════════════════
-  var NJ = {
-    asOf: 'August 2026',
-    stayNJ: {
-      // The FY2027 Appropriations Act, signed 30 June 2026, cut the income
-      // limit from $500,000 to $200,000. A great many sites still quote the
-      // old figure, which would tell a household earning $300,000 it qualifies
-      // when it no longer does.
-      incomeLimit: 200000,
-      minAge: 65,
-      share: 0.50,            // 50% of the property tax bill
-      taxCap: 13000,          // applied to the first $13,000 of tax
-      benefitCap: 6500,
-      homeownersOnly: true
-    },
-    anchor: {
-      // Homeowners, by age and NJ-1040 line 29 income.
-      senior:  [[150000, 1750], [250000, 1250]],
-      under65: [[150000, 1500], [250000, 1000]],
-      renter:  [[150000, 700]],
-      hardLimit: 250000
-    },
-    freeze: {
-      incomeLimit: 172475,    // 2025 filing year
-      minAge: 65,
-      minYearsOwned: 10,
-      minYearsResident: 10
-    },
-    deduction: {
-      senior: 250,            // annual, age 65+ or permanently disabled
-      seniorIncomeLimit: 10000,
-      veteran: 250
-    },
-    deadline: 'November 2, 2026',
-    form: 'PAS-1'
-  };
-
-  function anchorAmount(income, age65, renter) {
-    if (income == null) return null;
-    if (renter) return income <= 150000 ? NJ.anchor.renter[0][1] : 0;
-    if (income > NJ.anchor.hardLimit) return 0;
-    var table = age65 ? NJ.anchor.senior : NJ.anchor.under65;
-    for (var i = 0; i < table.length; i++) if (income <= table[i][0]) return table[i][1];
-    return 0;
-  }
-
-  // ══════════════════════════════════════════════
-  // 14 · SENIOR BENEFIT MAXIMIZER
-  //
-  // The stacking is genuinely counterintuitive and it costs people money.
-  //
-  // Stay NJ is a TOP OFF, not an addition. The state works out ANCHOR and the
-  // Senior Freeze first. If those two together already reach 50% of the tax
-  // bill, Stay NJ pays nothing. If they fall short, Stay NJ pays the
-  // difference up to the cap.
-  //
-  // The practical consequence, which nobody explains: claiming ANCHOR does not
-  // increase a senior's total relief once Stay NJ is in play. It changes which
-  // pot the money comes from. What DOES increase the total is the Senior
-  // Freeze, because the freeze amount grows every year the base year holds,
-  // and a large freeze plus Stay NJ can exceed 50% of the bill.
-  //
-  // Which makes the base year the single most valuable thing on this page.
-  // ══════════════════════════════════════════════
-  function seniorBenefits(tax, income, age, yearsOwned, freezeBase) {
-    if (!tax) return null;
-    var out = { tax: tax, income: income, age: age, notes: [], eligible: {} };
-
-    var is65 = age != null && age >= 65;
-    out.eligible.anchor = income != null && income <= NJ.anchor.hardLimit;
-    out.eligible.stay = is65 && income != null && income <= NJ.stayNJ.incomeLimit;
-    out.eligible.freeze = is65 && income != null && income <= NJ.freeze.incomeLimit &&
-                          (yearsOwned == null || yearsOwned >= NJ.freeze.minYearsOwned);
-
-    out.anchor = out.eligible.anchor ? anchorAmount(income, is65, false) : 0;
-
-    // Senior Freeze reimburses the increase over the base year. Without a base
-    // year on file we cannot invent one, and saying so is more useful than a
-    // made up number.
-    out.freeze = null;
-    if (out.eligible.freeze) {
-      out.freeze = (freezeBase && freezeBase > 0 && tax > freezeBase) ? (tax - freezeBase) : null;
-      if (out.freeze == null) out.notes.push('freeze-nobase');
-    }
-
-    // Stay NJ tops the other two up to half the bill.
-    var target = Math.min(tax, NJ.stayNJ.taxCap) * NJ.stayNJ.share;
-    target = Math.min(target, NJ.stayNJ.benefitCap);
-    var already = out.anchor + (out.freeze || 0);
-    out.stayTarget = target;
-    out.stay = out.eligible.stay ? Math.max(0, target - already) : 0;
-
-    out.total = out.anchor + (out.freeze || 0) + out.stay;
-    out.after = Math.max(0, tax - out.total);
-    out.pct = tax ? out.total / tax : 0;
-
-    // Where the money is actually left on the table.
-    if (!is65 && age != null && age >= 60) out.notes.push('approaching65');
-    if (out.eligible.freeze && out.freeze == null) out.notes.push('file-freeze');
-    if (is65 && income != null && income > NJ.stayNJ.incomeLimit &&
-        income <= 500000) out.notes.push('stay-limit-changed');
-    if (out.eligible.stay && out.anchor && already >= target) out.notes.push('anchor-absorbed');
-    return out;
-  }
-
-  function toolSeniorBenefits(r) {
-    var tax = +r.last_year_tax || 0;
-    if (!tax) return '';
-    var income = profile.gross_income != null ? +profile.gross_income : null;
-    var age = profile.birth_year ? (new Date().getFullYear() - +profile.birth_year) : null;
-    var yrs = profile.years_in_home != null ? +profile.years_in_home : null;
-
-    if (income == null || age == null) {
-      return toolCard('Senior benefit stack', 'fa-layer-group',
-        '<p class="tl-p">New Jersey runs three programs for homeowners aged 65 and over, and they interact in ' +
-        'a way that surprises people: <b>Stay NJ is a top-off, not an addition</b>. The state works out ANCHOR ' +
-        'and the Senior Freeze first, then Stay NJ pays whatever is needed to reach half the tax bill.</p>' +
-        '<p class="tl-p">Working out where a specific household lands needs two figures, and they are both ' +
-        'optional in your profile: <b>your birth year and your household income</b>. Every threshold in these ' +
-        'programs is a hard cutoff, so a range cannot answer it.</p>' +
-        '<a class="tl-btn" href="/property/dashboard.html#profile">Add them to your profile</a>');
-    }
-
-    var b = seniorBenefits(tax, income, age, yrs, profile.freeze_base ? +profile.freeze_base : null);
-    if (!b) return '';
-    var is65 = age >= 65;
-
-    function line(label, amt, note, cls) {
-      return '<div class="sb-l ' + (cls || '') + '">' +
-        '<span>' + label + (note ? '<em>' + note + '</em>' : '') + '</span>' +
-        '<b>' + (amt == null ? 'unknown' : (amt > 0 ? '-' + money(amt) : money(0))) + '</b></div>';
-    }
-
-    var notes = {
-      'approaching65':
-        ['fa-hourglass-half', 'At ' + age + ', you are ' + (65 - age) + ' year' + (65 - age === 1 ? '' : 's') +
-         ' from the two largest programs. Stay NJ alone would be worth about ' +
-         money(Math.min(tax * 0.5, NJ.stayNJ.benefitCap)) + ' a year at this bill.'],
-      'file-freeze':
-        ['fa-snowflake', 'You appear to qualify for the Senior Freeze but there is no base year on file. ' +
-         'This is the one worth acting on: the freeze locks your tax at its current level and reimburses every ' +
-         'increase after it, so the benefit compounds for as long as you stay. Filing late does not backdate it.'],
-      'stay-limit-changed':
-        ['fa-triangle-exclamation', 'The Stay NJ income limit was cut from $500,000 to <b>$200,000</b> by the ' +
-         'budget signed in June 2026. A lot of guidance still quotes the old figure. At your income you would ' +
-         'have qualified last year and do not now.'],
-      'anchor-absorbed':
-        ['fa-circle-info', 'Your ANCHOR benefit does not add to your total once Stay NJ is in play, because ' +
-         'Stay NJ only pays the shortfall to 50%. It changes which pot the money comes from, not how much you ' +
-         'get. Still file for it: the state calculates all three from the one form.']
-    };
-
-    return toolCard('Senior benefit stack', 'fa-layer-group',
-      '<p class="tl-p">Three programs, one application, and an interaction almost nobody explains. ' +
-      '<b>Stay NJ is a top-off</b>: the state calculates ANCHOR and the Senior Freeze first, then Stay NJ pays ' +
-      'whatever is still needed to reach half your bill, capped at ' + money(NJ.stayNJ.benefitCap) + '.</p>' +
-
-      '<div class="sb-stack">' +
-        '<div class="sb-l head"><span>Your bill on ' + esc(r.address) + '</span><b>' + money(tax) + '</b></div>' +
-        line('ANCHOR', b.eligible.anchor ? b.anchor : 0,
-             b.eligible.anchor ? (is65 ? 'age 65+ rate' : 'under 65 rate')
-                               : 'income above the $250,000 limit', b.anchor ? 'minus' : 'out') +
-        line('Senior Freeze', b.eligible.freeze ? b.freeze : 0,
-             !is65 ? 'requires age 65'
-             : !b.eligible.freeze ? 'income or ownership requirement not met'
-             : b.freeze == null ? 'needs your base year' : 'reimburses the increase since your base year',
-             b.eligible.freeze ? (b.freeze ? 'minus' : 'unknown') : 'out') +
-        line('Stay NJ', b.eligible.stay ? b.stay : 0,
-             !is65 ? 'requires age 65'
-             : income > NJ.stayNJ.incomeLimit ? 'income above the $200,000 limit'
-             : 'tops the others up to half the bill', b.stay ? 'minus' : 'out') +
-        '<div class="sb-l total"><span>What you would actually pay</span><b>' + money(b.after) + '</b></div>' +
-      '</div>' +
-
-      '<div class="sb-meter"><i style="width:' + Math.round(Math.min(1, b.pct) * 100) + '%"></i>' +
-        '<span>' + Math.round(b.pct * 100) + '% of the bill covered</span></div>' +
-
-      (b.notes.length
-        ? '<ul class="sb-notes">' + b.notes.map(function (k) {
-            var n = notes[k];
-            return n ? '<li><i class="fas ' + n[0] + '"></i><span>' + n[1] + '</span></li>' : '';
-          }).join('') + '</ul>'
-        : '') +
-
-      '<div class="sb-cta">' +
-        '<a class="tl-btn" href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank" rel="noopener">' +
-          'File Form ' + NJ.form + '</a>' +
-        '<span>Deadline <b>' + NJ.deadline + '</b>. One form covers all three.</span>' +
-      '</div>' +
-
-      '<div class="tl-fine">Thresholds current as of ' + NJ.asOf + ', from the NJ Division of Taxation. ' +
-      'Benefit amounts depend on figures we do not hold, including your NJ-1040 line 29 income and your ' +
-      'Senior Freeze base year, so treat these as estimates. Availability of every one of these programs is ' +
-      'subject to annual state budget appropriations, and the Stay NJ limit has already been cut once. ' +
-      'Not tax advice.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // 13 · FIRST TIME BUYER TRUE COST
-  //
-  // A listing shows the seller's tax bill. That is not what the buyer will pay,
-  // for two reasons nobody mentions at the open house: the assessment may not
-  // have caught up with what the house is now worth, and the rate moves every
-  // year regardless.
-  // ══════════════════════════════════════════════
-  function buyerCost(r, price) {
-    var s = sr1aFor(r);
-    if (!s || !price) return null;
-    var rate = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
-    if (!rate) return null;
-
-    var todayTax = r.last_year_tax;
-    // if the town reassessed this parcel to the purchase price
-    var caughtAssessment = price * s.ratio;
-    var caughtTax = caughtAssessment * rate;
-
-    var u = uniFor(r);
-    var rv = (typeof revalRadar === 'function') ? revalRadar(r) : null;
-
-    // rate drift, from this town's own published history where we have it
-    var yrs = [1, 3, 5];
-    var growth = 0.025;                         // NJ levies have run near this
-    var proj = yrs.map(function (y) {
-      return { y: y, low: todayTax * Math.pow(1 + growth, y),
-                     high: Math.max(todayTax, caughtTax) * Math.pow(1 + growth, y) };
-    });
-
-    return {
-      price: price, ratio: s.ratio, rate: rate,
-      todayTax: todayTax, caughtAssessment: caughtAssessment, caughtTax: caughtTax,
-      jump: caughtTax - todayTax,
-      exposed: caughtTax > todayTax * 1.08,
-      proj: proj, revalPressure: rv ? rv.score : null
-    };
-  }
-
-  function toolBuyerCost(r) {
-    var s = sr1aFor(r);
-    if (!s || !r.last_year_tax || !r.assessed) return '';
-    var guess = r.watchdog_value || (r.assessed / s.ratio);
-    var id = 'bc-' + (r.pams_pin || 'x').replace(/[^\w]/g, '');
-
-    return toolCard('What a buyer would actually pay', 'fa-key',
-      '<p class="tl-p">A listing shows the <em>seller\u2019s</em> tax bill. A buyer may not pay that. If the ' +
-      'assessment has not kept pace with what the house is now worth, the gap closes eventually and the bill ' +
-      'moves with it.</p>' +
-      '<div class="bc-in">' +
-        '<label for="' + id + '">Purchase price</label>' +
-        '<div class="bc-money"><span>$</span>' +
-        '<input id="' + id + '" type="text" inputmode="numeric" value="' +
-          Math.round(guess / 1000) * 1000 + '" oninput="bcCalc(\'' + esc(r.pams_pin) + '\', this)"></div>' +
-      '</div>' +
-      '<div id="' + id + '-out"></div>' +
-      '<div class="tl-fine">Projections assume municipal levies grow about 2.5% a year, which is roughly where ' +
-      'New Jersey has run, and that the town eventually assesses at its current verified ratio of ' +
-      (s.ratio * 100).toFixed(1) + '%. Neither is guaranteed. No one outside the municipality can say when an ' +
-      'assessor will act on a specific parcel. This is exposure, not a schedule.</div>');
-  }
-
-  window.bcCalc = function (pin, input) {
-    var v = String(input.value).replace(/[^0-9]/g, '');
-    input.value = v ? parseInt(v, 10).toLocaleString() : '';
-    var price = +v || 0;
-    var r = null;
-    for (var i = 0; i < rows.length; i++) if (rows[i].pams_pin === pin) r = rows[i];
-    if (!r) return;
-    var id = 'bc-' + pin.replace(/[^\w]/g, '');
-    var host = el(id + '-out');
-    if (!host) return;
-    var b = buyerCost(r, price);
-    if (!b) { host.innerHTML = ''; return; }
-
-    host.innerHTML =
-      '<div class="bc-now">' +
-        '<div><b>' + money(b.todayTax) + '</b><span>the bill today</span></div>' +
-        '<div class="' + (b.exposed ? 'up' : '') + '"><b>' + money(b.caughtTax) +
-          '</b><span>if the assessment catches up to ' + money(price) + '</span></div>' +
-        '<div class="' + (b.exposed ? 'up' : '') + '"><b>' +
-          (b.jump > 0 ? '+' + money(b.jump) : money(0)) + '</b><span>a year, unbooked</span></div>' +
-      '</div>' +
-      (b.exposed
-        ? '<div class="bc-warn"><i class="fas fa-triangle-exclamation"></i><div>' +
-          'At ' + money(price) + ' this property would be assessed around <b>' +
-          money(Math.round(b.caughtAssessment)) + '</b> if the town applied its own ratio, against the <b>' +
-          money(r.assessed) + '</b> on the books now. The bill in the listing understates what a buyer ends up ' +
-          'paying by roughly <b>' + money(Math.round(b.jump / 12)) + ' a month</b>.' +
-          (b.revalPressure != null && b.revalPressure >= 45
-            ? ' Revaluation pressure in this town is running at <b>' + b.revalPressure +
-              ' out of 100</b>, which makes the catch-up more likely than not.' : '') +
-          '</div></div>'
-        : '<div class="bc-ok"><i class="fas fa-circle-check"></i><div>At ' + money(price) +
-          ' the assessment is broadly in line with the town ratio, so there is no hidden catch-up waiting ' +
-          'in this one.</div></div>') +
-      '<div class="bc-proj"><h5>Projected annual tax</h5><table><tbody>' +
-        b.proj.map(function (p) {
-          return '<tr><td>In ' + p.y + ' year' + (p.y === 1 ? '' : 's') + '</td>' +
-            '<td class="n">' + money(p.low) + '</td><td class="n">to</td>' +
-            '<td class="n"><b>' + money(p.high) + '</b></td></tr>';
-        }).join('') +
-      '</tbody></table>' +
-      '<p>The low column assumes the assessment is never revisited. The high column assumes it catches up. ' +
-      'Both include ordinary levy growth.</p></div>';
-  };
-
-  // ══════════════════════════════════════════════
-  // ABATEMENT EXPOSURE
-  //
-  // Column 3 of the NJ Abstract of Ratables: "Total Taxable Value of Partial
-  // Exemptions and Abatements". The slice of a town's assessment base that has
-  // been granted partial relief and therefore does not pay the full rate.
-  //
-  // WHY IT MATTERS TO EVERYONE ELSE
-  //
-  //   A municipal levy is a fixed dollar amount divided across whatever base
-  //   remains. Take a slice out and the rest covers the same budget. Nobody
-  //   tells the people carrying it.
-  //
-  // WHAT THIS MEASURES, AND WHAT IT DOES NOT
-  //
-  //   Included: five year improvement abatements, fire suppression system
-  //   exemptions, historic site exemptions, Urban Enterprise Zone abatements.
-  //   All are PARTIAL relief on property that is otherwise on the tax roll.
-  //
-  //   NOT included, and this is the honest limit of the tool: PILOT agreements
-  //   and long term tax exemptions, which are FULL exemptions rather than
-  //   partial ones and sit in a different table entirely. Nor fully exempt
-  //   property, meaning churches, schools, government and non-profits.
-  //
-  //   That matters most in exactly the places people assume it matters. A city
-  //   financing redevelopment through PILOTs will look low here, because its
-  //   largest giveaways are not in this column. The tool says so rather than
-  //   letting the number be read as the whole story.
-  // ══════════════════════════════════════════════
-  var abateData = null;
-
-  function loadAbatements() {
-    if (abateData) return Promise.resolve();
-    return xfetch('/property/abatements.json', 12000).then(function (r) { return r.json(); })
-      .then(function (j) { abateData = j || {}; })
-      .catch(function () { abateData = { districts: {} }; });
-  }
-
-  function abateFor(r) {
-    if (!abateData || !abateData.districts) return null;
-    var d = String(r.pams_pin || '').slice(0, 4);
-    return d ? abateData.districts[d] : null;
-  }
-
-  function toolAbatement(r) {
-    var a = abateFor(r);
-    if (!a) return '';
-    var med = abateData.statewide_median_share || 0;
-    var share = a.abated_share;
-    var pct = share * 100;
-
-    // What the abated slice costs a specific bill. If the base were whole, the
-    // rate needed to raise the same levy would be lower by the abated share.
-    var mine = +r.last_year_tax || 0;
-    var shifted = mine ? mine * share : 0;
-
-    var band = pct >= 2 ? 'high' : pct >= 0.5 ? 'notable' : pct >= 0.05 ? 'small' : 'negligible';
-    var BAND = {
-      high:       ['Substantial', 'A meaningful share of this town\u2019s base carries partial relief.'],
-      notable:    ['Noticeable', 'Enough of the base is abated to move the rate slightly.'],
-      small:      ['Small', 'A little of the base is abated, not enough to matter much on any one bill.'],
-      negligible: ['Effectively none', 'Almost nothing in this town carries a partial abatement.']
-    };
-    var t = BAND[band];
-
-    return toolCard('Abatement exposure', 'fa-scissors',
-      '<p class="tl-p">A town\u2019s tax levy is a fixed dollar figure spread across whatever assessment base ' +
-      'remains after relief is granted. Every dollar taken out is covered by everyone still paying. New Jersey ' +
-      'publishes the number in the Abstract of Ratables and it is never shown to the people carrying it.</p>' +
-
-      '<div class="ab-head">' +
-        '<div class="ab-n ' + band + '"><b>' + (pct < 0.01 && pct > 0 ? '<0.01' : pct.toFixed(2)) +
-          '%</b><span>of the base abated</span></div>' +
-        '<div class="ab-say"><b>' + t[0] + '.</b> ' + t[1] + ' ' +
-          money(a.abated) + ' of ' + esc(a.name) + '\u2019s ' + money(a.total_base) +
-          ' assessment base carries partial relief. ' +
-          (a.percentile != null
-            ? 'That is the <b>' + ordinal(a.percentile) + ' percentile</b> among the towns on file.'
-            : '') +
-        '</div>' +
-      '</div>' +
-
-      (mine && shifted >= 1
-        ? '<div class="ab-mine">' +
-            '<div><b>' + money(shifted) + '</b><span>of your ' + money(mine) +
-              ' bill, roughly, covers the abated share</span></div>' +
-            '<p>If that base were paying at the full rate, the levy would spread across a base <b>' +
-            (share / (1 - share) * 100).toFixed(2) + '% larger</b>, and the rate would fall to match.</p>' +
-          '</div>'
-        : '') +
-
-      '<div class="ab-cmp">' +
-        '<div class="ab-bar"><i style="width:' + Math.min(100, Math.max(1.5, (share / 0.04) * 100)) + '%"></i></div>' +
-        '<div class="ab-cmp-l"><span>' + esc(a.name) + ' <b>' + pct.toFixed(2) + '%</b></span>' +
-        '<span>statewide median <b>' + (med * 100).toFixed(2) + '%</b></span></div>' +
-      '</div>' +
-
-      '<div class="ab-limit">' +
-        '<b><i class="fas fa-circle-info"></i> What this figure leaves out</b>' +
-        '<p>This is column 3 of the Abstract: <b>partial</b> exemptions and abatements. Five year improvement ' +
-        'abatements, fire suppression systems, historic sites, Urban Enterprise Zone relief. All of it sits on ' +
-        'property that is otherwise on the tax roll.</p>' +
-        '<p>It does <b>not</b> include PILOT agreements or long term tax exemptions, which are full exemptions ' +
-        'recorded elsewhere, nor fully exempt property such as churches, schools and government land. A city ' +
-        'financing redevelopment through PILOTs will look low here precisely because its largest arrangements ' +
-        'are not in this column. Read this as one component of the picture, not the whole of it.</p>' +
-      '</div>' +
-
-      '<div class="tl-fine">Source: NJ Division of Taxation Abstract of Ratables, filed annually by each county ' +
-      'board of taxation. The share of your own bill attributable to the abated base is arithmetic on the levy, ' +
-      'not a figure the state publishes, and it assumes the levy would be unchanged if the base were whole. ' +
-      'Abatements are also how most redevelopment gets financed, so a high figure is a fact about a town\u2019s ' +
-      'strategy rather than evidence of anything wrong.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // TOWN PROFILE  ·  one query, two tools
-  //
-  // Both of the tools below need the same thing: every class 2 parcel in the
-  // municipality with its land and improvement values, plus the class mix of
-  // the whole town. Pulling that once and sharing it keeps a single request on
-  // a free public server rather than two.
-  // ══════════════════════════════════════════════
-  var townProfileCache = {};
-
-  function townProfile(r) {
-    var d = String(r.pams_pin || '').slice(0, 4);
-    var town = r.town, county = r.county;
-    if (!town) return Promise.resolve(null);
-    var key = d || (town + county);
-    if (townProfileCache[key]) return Promise.resolve(townProfileCache[key]);
-
-    var where = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
-                (county ? " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" : '') +
-                " AND NET_VALUE > 1000";
-    var p = new URLSearchParams({
-      where: where,
-      outFields: 'PROP_CLASS,LAND_VAL,IMPRVT_VAL,NET_VALUE,YR_CONSTR,CALC_ACRE,PCLBLOCK,PCLLOT',
-      returnGeometry: 'false', resultRecordCount: '2000', f: 'json'
-    });
-
-    return xfetch(NJ_PARCEL + '?' + p, 20000).then(function (x) { return x.json(); })
-      .then(function (j) {
-        if (!j.features || j.features.length < 40) return null;
-        var byClass = {}, resid = [], subject = null;
-        var blk = String(r.block || '').replace(/^0+/, '');
-        var lot = String(r.lot || '').replace(/^0+/, '');
-
-        j.features.forEach(function (f) {
-          var a = f.attributes;
-          var cls = String(a.PROP_CLASS || '').trim().toUpperCase();
-          var net = +a.NET_VALUE || 0;
-          if (!cls || net <= 0) return;
-          if (!byClass[cls]) byClass[cls] = { n: 0, value: 0 };
-          byClass[cls].n++;
-          byClass[cls].value += net;
-
-          if (cls === '2') {
-            var land = +a.LAND_VAL || 0, imp = +a.IMPRVT_VAL || 0;
-            if (land > 0 && imp > 0) {
-              var rec = { land: land, imp: imp, net: net, share: imp / (land + imp),
-                          built: +a.YR_CONSTR || 0, acres: +a.CALC_ACRE || 0 };
-              resid.push(rec);
-              if (blk && String(a.PCLBLOCK || '').replace(/^0+/, '') === blk &&
-                  String(a.PCLLOT || '').replace(/^0+/, '') === lot) subject = rec;
-            }
-          }
-        });
-
-        if (resid.length < 25) return null;
-        var out = {
-          sampled: j.features.length,
-          byClass: byClass,
-          resid: resid,
-          subject: subject,
-          medShare: median(resid.map(function (x) { return x.share; })),
-          medLand: median(resid.map(function (x) { return x.land; })),
-          medImp: median(resid.map(function (x) { return x.imp; }))
-        };
-        townProfileCache[key] = out;
-        return out;
-      }).catch(function () { return null; });
-  }
-
-  // ══════════════════════════════════════════════
-  // 3 · IMPROVEMENT RATIO ANOMALY
-  //
-  // Every assessment is two numbers: the land and the building on it. Land
-  // value is set by location and lot size and is very hard to argue with,
-  // because the lot next door is worth what your lot is worth. The improvement
-  // figure is the assessor's judgment about a structure, and judgment is what
-  // an appeal actually contests.
-  //
-  // So a property whose IMPROVEMENT share runs well above comparable homes in
-  // the same town is carrying its excess in the one component that can be
-  // argued, which makes it the most winnable kind of case. A property whose
-  // excess is all in the land is a much harder fight.
-  //
-  // This is not a market value estimate. Both sides of the comparison are
-  // assessments from the same roll, so no valuation model is involved and none
-  // of its error comes with it.
-  // ══════════════════════════════════════════════
-  function toolImprovementRatio(r) {
-    var id = 'ir-' + String(r.pams_pin || 'x').replace(/[^\w]/g, '');
-    townProfile(r).then(function (t) {
-      var host = el(id);
-      if (!host) return;
-      if (!t) {
-        host.innerHTML = '<div class="tl-note">Not enough parcel records came back for ' +
-          esc(r.town || 'this town') + ' to compare the split.</div>';
-        return;
-      }
-      if (!t.subject) {
-        host.innerHTML = '<div class="tl-note">This parcel was not in the sample returned for ' +
-          esc(r.town || 'this town') + ', so its own land and improvement split is not available. ' +
-          'Homes here are assessed at a median of <b>' + (t.medShare * 100).toFixed(1) +
-          '%</b> improvement, <b>' + ((1 - t.medShare) * 100).toFixed(1) + '%</b> land.</div>';
-        return;
-      }
-
-      var s = t.subject;
-      // peers matched on vintage and lot, because a new build on a small lot
-      // legitimately carries a higher improvement share than an old ranch on
-      // an acre, and comparing across that is meaningless
-      var peers = t.resid.filter(function (x) {
-        if (s.built && x.built && Math.abs(x.built - s.built) > 20) return false;
-        if (s.acres && x.acres && (x.acres < s.acres * 0.5 || x.acres > s.acres * 2)) return false;
-        return true;
-      });
-      if (peers.length < 15) peers = t.resid;
-      var peerShare = median(peers.map(function (x) { return x.share; }));
-      var peerImp = median(peers.map(function (x) { return x.imp; }));
-      var peerLand = median(peers.map(function (x) { return x.land; }));
-
-      var gap = s.share - peerShare;
-      var impGap = s.imp - peerImp;
-      var landGap = s.land - peerLand;
-      var high = gap > 0.06;
-      var low = gap < -0.06;
-
-      // where the excess sits, which is the actually useful part
-      var totalGap = (s.land + s.imp) - (peerLand + peerImp);
-      var fromImp = totalGap !== 0 ? impGap / totalGap : null;
-
-      host.innerHTML =
-        '<div class="ir-split">' +
-          '<div class="ir-row"><span>This property</span>' +
-            '<div class="ir-bar"><i class="land" style="width:' + ((1 - s.share) * 100).toFixed(1) + '%">' +
-              '</i><i class="imp" style="width:' + (s.share * 100).toFixed(1) + '%"></i></div>' +
-            '<b>' + (s.share * 100).toFixed(1) + '%</b></div>' +
-          '<div class="ir-row"><span>' + peers.length + ' comparable homes</span>' +
-            '<div class="ir-bar"><i class="land" style="width:' + ((1 - peerShare) * 100).toFixed(1) + '%">' +
-              '</i><i class="imp" style="width:' + (peerShare * 100).toFixed(1) + '%"></i></div>' +
-            '<b>' + (peerShare * 100).toFixed(1) + '%</b></div>' +
-          '<div class="ir-key"><span class="k land"></span>land' +
-            '<span class="k imp"></span>building</div>' +
-        '</div>' +
-
-        '<dl class="fig tight">' +
-          f('Land', money(s.land), 'peers ' + money(peerLand)) +
-          f('Building', money(s.imp), 'peers ' + money(peerImp), high ? 'neg' : '') +
-          f('Building share', (s.share * 100).toFixed(1) + '%',
-            (gap >= 0 ? '+' : '') + (gap * 100).toFixed(1) + ' points vs peers',
-            high ? 'neg' : low ? 'pos' : '') +
-        '</dl>' +
-
-        (high
-          ? '<div class="ir-say bad"><i class="fas fa-hammer"></i><div>' +
-            '<b>The excess is in the building, which is the arguable half.</b> This property carries a ' +
-            'building share <b>' + (gap * 100).toFixed(1) + ' points</b> above comparable homes here' +
-            (landGap < 0 && impGap > 0
-              ? ', and its land is assessed <b>below</b> peers while its building sits <b>' +
-                money(Math.abs(impGap)) + '</b> above. Every dollar of the difference is in the structure'
-              : fromImp != null && fromImp > 0.6 && fromImp <= 1 && totalGap > 0
-              ? ', and <b>' + Math.round(fromImp * 100) + '%</b> of its total excess over peers sits in the ' +
-                'improvement figure rather than the land' : '') +
-            '. Land value is set by location and lot size and is very hard to contest, because the lot next ' +
-            'door is worth what yours is. The improvement figure is a judgment about a structure, and judgment ' +
-            'is what an appeal contests. Condition, an unfinished basement counted as finished, or square ' +
-            'footage recorded wrong all show up here.</div></div>'
-          : low
-          ? '<div class="ir-say good"><i class="fas fa-circle-check"></i><div>' +
-            'The building carries a <b>smaller</b> share here than in comparable homes, ' +
-            (gap * 100).toFixed(1) + ' points below. Whatever is happening with this assessment, the structure ' +
-            'is not where it is concentrated.</div></div>'
-          : '<div class="ir-say"><i class="fas fa-scale-balanced"></i><div>' +
-            'The land and building split tracks comparable homes closely, within ' +
-            Math.abs(gap * 100).toFixed(1) + ' points. Nothing in the composition of this assessment stands ' +
-            'out either way.</div></div>');
-    });
-
-    return toolCard('Land and building split', 'fa-layer-group',
-      '<p class="tl-p">Every assessment is two numbers. <b>Land</b> is set by location and lot size, and it is ' +
-      'very hard to argue with. <b>The building</b> is the assessor\u2019s judgment about a structure, and ' +
-      'judgment is what an appeal actually contests. Where a property carries its excess decides how winnable ' +
-      'a case is.</p>' +
-      '<div id="' + id + '"><div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
-      '<div>Comparing against parcels in ' + esc(r.town || 'this town') + '...</div></div></div>' +
-      '<div class="tl-fine">Both figures come from the same municipal assessment roll, so this compares like ' +
-      'with like and involves no market value estimate. Peers are matched on vintage within twenty years and ' +
-      'lot size within a factor of two, because a new build on a small lot legitimately carries a higher ' +
-      'building share than an old house on an acre. A high share is a reason to look, not proof of anything.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // 11 · CLASS MIX
-  //
-  // Who actually pays for a town. A municipality with a thin commercial base
-  // funds its budget almost entirely from houses, and that is a structural
-  // condition rather than a bad year. It also predicts the future: a town at
-  // 95% residential has nowhere to turn when costs rise except the homeowners.
-  // ══════════════════════════════════════════════
-  var CLASS_NAMES = {
-    '1':  ['Vacant land', 'vac'],
-    '2':  ['Residential', 'res'],
-    '3A': ['Farm, regular', 'farm'],
-    '3B': ['Farm, qualified', 'farm'],
-    '4A': ['Commercial', 'com'],
-    '4B': ['Industrial', 'ind'],
-    '4C': ['Apartments', 'apt'],
-    '15A':['Public property', 'exempt'],
-    '15B':['Exempt', 'exempt'],
-    '15C':['Cemetery', 'exempt'],
-    '15D':['Exempt', 'exempt'],
-    '15E':['Exempt', 'exempt'],
-    '15F':['Exempt', 'exempt'],
-    '5A': ['Railroad', 'other'],
-    '5B': ['Railroad', 'other'],
-    '6A': ['Telephone', 'other']
-  };
-
-  function toolClassMix(r) {
-    var id = 'cm-' + String(r.pams_pin || 'x').replace(/[^\w]/g, '');
-    townProfile(r).then(function (t) {
-      var host = el(id);
-      if (!host) return;
-      if (!t) { host.innerHTML = '<div class="tl-note">Not enough parcel records came back to read the mix.</div>'; return; }
-
-      // taxable classes only; exempt parcels pay nothing and belong to a
-      // different question, which is tool 10
-      var taxable = {};
-      var totalVal = 0;
-      Object.keys(t.byClass).forEach(function (c) {
-        if (c.charAt(0) === '1' && c.length > 1) return;      // 15A onward, exempt
-        if (c === '5A' || c === '5B') return;
-        var nm = CLASS_NAMES[c];
-        if (!nm) return;
-        var k = nm[0];
-        if (!taxable[k]) taxable[k] = { value: 0, n: 0, cls: nm[1] };
-        taxable[k].value += t.byClass[c].value;
-        taxable[k].n += t.byClass[c].n;
-        totalVal += t.byClass[c].value;
-      });
-      if (!totalVal) { host.innerHTML = ''; return; }
-
-      var rows = Object.keys(taxable).map(function (k) {
-        return { name: k, value: taxable[k].value, n: taxable[k].n,
-                 cls: taxable[k].cls, share: taxable[k].value / totalVal };
-      }).sort(function (a, b) { return b.value - a.value; });
-
-      var res = rows.filter(function (x) { return x.name === 'Residential'; })[0];
-      var resShare = res ? res.share : 0;
-      var biz = rows.filter(function (x) {
-        return x.name === 'Commercial' || x.name === 'Industrial' || x.name === 'Apartments';
-      }).reduce(function (a, x) { return a + x.share; }, 0);
-
-      var verdict = resShare >= 0.90
-        ? ['bad', 'Almost entirely residential',
-           'Houses carry nearly the whole budget here. When municipal costs rise there is no commercial base ' +
-           'to absorb any of it, so the increase lands on homeowners more or less in full. This is a ' +
-           'structural condition, not a bad year.']
-        : resShare >= 0.75
-        ? ['mid', 'Mostly residential',
-           'Homeowners carry most of the burden, with some commercial base to share it. That is typical of a ' +
-           'New Jersey suburb and it is why suburban bills climb steadily.']
-        : ['good', 'Meaningfully diversified',
-           'A real share of this town\u2019s base is business property, which absorbs part of every increase ' +
-           'before it reaches a homeowner. Towns like this hold their rates down more easily.'];
-
-      host.innerHTML =
-        '<div class="cm-bar">' + rows.map(function (x) {
-          return '<i class="' + x.cls + '" style="width:' + (x.share * 100).toFixed(2) + '%" ' +
-            'title="' + esc(x.name) + '  ' + (x.share * 100).toFixed(1) + '%"></i>';
-        }).join('') + '</div>' +
-
-        '<table class="cm-t"><tbody>' + rows.map(function (x) {
-          return '<tr><td><span class="k ' + x.cls + '"></span>' + esc(x.name) + '</td>' +
-            '<td class="n">' + (x.share * 100).toFixed(1) + '%</td>' +
-            '<td class="n">' + money(x.value) + '</td>' +
-            '<td class="n q">' + x.n.toLocaleString() + ' parcels</td></tr>';
-        }).join('') + '</tbody></table>' +
-
-        '<div class="cm-say ' + verdict[0] + '"><b>' + verdict[1] + '.</b> ' + verdict[2] +
-          ' Business property is <b>' + (biz * 100).toFixed(1) + '%</b> of the taxable base here.</div>';
-    });
-
-    return toolCard('Who pays for this town', 'fa-chart-pie',
-      '<p class="tl-p">A municipal budget is divided across everything on the tax roll. The mix decides how ' +
-      'much of every increase reaches a homeowner, and it barely changes from year to year, which makes it one ' +
-      'of the more reliable things you can know about a town.</p>' +
-      '<div id="' + id + '"><div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
-      '<div>Reading the tax roll for ' + esc(r.town || 'this town') + '...</div></div></div>' +
-      '<div class="tl-fine">Measured from the statewide parcel layer, taxable classes only. Fully exempt ' +
-      'property, meaning churches, schools and government land, is excluded here and is a separate question. ' +
-      'Large municipalities are sampled rather than counted in full, so treat the shares as close rather than ' +
-      'exact.</div>');
-  }
-
-  // ══════════════════════════════════════════════
-  // APPEAL PACKET
-  //
-  // Everything the site knows about one property, assembled in the order a
-  // county board hears it and printed as a document someone can attach to a
-  // filing.
-  //
-  // WHAT THIS IS NOT
-  //
-  //   It is not a completed Form A-1, and it does not file anything. New
-  //   Jersey requires the form itself, the filing fee, and service on the
-  //   assessor and clerk. What it removes is the two hours somebody otherwise
-  //   spends transcribing block and lot numbers, looking up the ratio, finding
-  //   comparable sales and doing the Chapter 123 arithmetic by hand.
-  //
-  //   Every figure carries its source, because a number an attorney cannot
-  //   attribute is a number they cannot use.
-  //
-  // THE ORDER MATTERS
-  //
-  //   Subject property, then the evidence, then the statutory test, then the
-  //   argument. That is the order a board follows, and a packet that arrives
-  //   in a different order makes the reader do work.
-  // ══════════════════════════════════════════════
-
-  function packetComps(r, limit) {
-    // The strongest comparables are verified arm's length sales of similar
-    // homes in the same district. Ranked on size, vintage and assessment,
-    // exactly as the report ranks them elsewhere.
-    var d = String(r.pams_pin || '').slice(0, 4);
-    return countySales(r.county).then(function (all) {
-      if (!all || !all.length) return [];
-      var TY = new Date().getFullYear();
-      return all.filter(function (x) {
-        return x.d === d && String(x.c).trim() === '2' && x.p > 40000 && x.y >= TY - 3 &&
-               !(r.block && String(x.b || '').replace(/^0+/, '') === String(r.block).replace(/^0+/, '') &&
-                 String(x.l || '').replace(/^0+/, '') === String(r.lot || '').replace(/^0+/, ''));
-      }).map(function (x) {
-        var w = Math.pow(0.75, TY - x.y);
-        if (r._sqft && x.sf) w *= 1 / (1 + Math.pow(Math.abs(x.sf - r._sqft) / Math.max(r._sqft, 400), 2) * 4);
-        if (r._built && x.yb) w *= 1 / (1 + Math.pow(Math.abs(x.yb - r._built) / 20, 2));
-        if (r.assessed && x.av) w *= 1 / (1 + Math.pow(Math.abs(x.av - r.assessed) / Math.max(r.assessed * 0.4, 1), 2));
-        return { a: x.a, b: x.b, l: x.l, p: x.p, y: x.y, m: x.m, av: x.av, sf: x.sf,
-                 yb: x.yb, ppsf: x.ppsf, ratio: x.r, w: w };
-      }).sort(function (a, b) { return b.w - a.w; }).slice(0, limit || 8);
-    }).catch(function () { return []; });
-  }
-
-  function toolAppealPacket(r) {
-    var c = chapter123(r);
-    var id = 'pk-' + String(r.pams_pin || 'x').replace(/[^\w]/g, '');
-
-    var ready = !!(c && c.testable);
-    return toolCard('Appeal packet', 'fa-folder-open',
-      '<p class="tl-p">Everything on this page, assembled in the order a county board hears it and printed as ' +
-      'a document you can attach to a filing. Subject property, then the evidence, then the statutory test, ' +
-      'then the argument.</p>' +
-
-      (ready
-        ? (c.hasCase
-            ? '<div class="pk-ok"><i class="fas fa-circle-check"></i><div>' +
-              'This property has a testable case. The packet will show the assessment sitting <b>' +
-              money(c.over) + '</b> above the Chapter 123 limit' +
-              (c.saving ? ', worth about <b>' + money(c.saving) + ' a year</b>' : '') + '.</div></div>'
-            : '<div class="pk-warn"><i class="fas fa-circle-info"></i><div>' +
-              'On the evidence available this assessment sits <b>inside</b> the cushion the state allows. ' +
-              'The packet will still generate, and it is worth having: knowing why a case fails is how you ' +
-              'decide not to file, and that decision saves a client the fee.</div></div>')
-        : '<div class="pk-warn"><i class="fas fa-circle-info"></i><div>' +
-          'The Chapter 123 test needs an independent market value, which means either this property\u2019s own ' +
-          'recent sale or comparable sales from the full record. The packet will assemble what exists and say ' +
-          'plainly where the gap is.</div></div>') +
-
-      '<div class="pk-inc"><b>What it contains</b><ul>' +
-        '<li>Subject property: block, lot, qualifier, PAMS PIN, class, and the current assessment split ' +
-          'between land and improvement</li>' +
-        '<li>Comparable sales the State of New Jersey verified as arm\u2019s length, with square footage and ' +
-          'price per square foot</li>' +
-        '<li>The municipal equalization ratio, both the published Director\u2019s Ratio and the ratio measured ' +
-          'from verified sales, with the year each applies to</li>' +
-        '<li>The Chapter 123 calculation set out line by line</li>' +
-        '<li>The town\u2019s coefficient of deviation against the professional standard</li>' +
-        '<li>County board outcomes for the last ten years</li>' +
-        '<li>A source note for every figure</li>' +
-      '</ul></div>' +
-
-      '<div class="pk-acts">' +
-        '<button class="tl-btn pk-go" onclick="pkBuild(\'' + esc(r.pams_pin) + '\')">' +
-          '<i class="fas fa-print"></i> Generate packet</button>' +
-        '<button class="tl-btn" onclick="pkCSV(\'' + esc(r.pams_pin) + '\')">' +
-          '<i class="fas fa-file-csv"></i> Comparables as CSV</button>' +
-      '</div>' +
-      '<div id="' + id + '"></div>' +
-
-      '<div class="tl-fine">This is a working document, not a filed pleading. New Jersey requires Form A-1, ' +
-      'the filing fee, and service on the assessor and municipal clerk, none of which this does. Appeals are ' +
-      'generally due April 1, or May 1 in a municipality that revalued. Comparable sales come from the state ' +
-      'SR1A file and are verified arm\u2019s length transactions, but the public record cannot see condition or ' +
-      'interior finish, so every comparable needs a human look before it goes in front of a board.</div>');
-  }
-
-  window.pkCSV = function (pin) {
-    var r = null;
-    for (var i = 0; i < rows.length; i++) if (rows[i].pams_pin === pin) r = rows[i];
-    if (!r) return;
-    packetComps(r, 25).then(function (cs) {
-      if (!cs.length) { toast('No verified comparables on file for this town'); return; }
-      var head = ['Address','Block','Lot','Sale_Year','Sale_Month','Sale_Price','Assessed',
-                  'Living_SqFt','Year_Built','Price_Per_SqFt','Assessed_Over_Sale'];
-      var lines = [head.join(',')].concat(cs.map(function (x) {
-        return [x.a, x.b, x.l, x.y, x.m || '', x.p, x.av || '', x.sf || '', x.yb || '',
-                x.ppsf || '', x.ratio != null ? (x.ratio * 100).toFixed(1) + '%' : ''
-        ].map(function (v) {
-          v = v == null ? '' : String(v);
-          return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
-        }).join(',');
-      }));
-      var b = new Blob([lines.join('\n')], { type: 'text/csv' }), u = URL.createObjectURL(b);
-      var a = document.createElement('a');
-      a.href = u;
-      a.download = 'comparables-' + String(r.address).toLowerCase().replace(/[^\w]+/g, '-') + '.csv';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
-    });
-  };
-
-  window.pkBuild = function (pin) {
-    var r = null;
-    for (var i = 0; i < rows.length; i++) if (rows[i].pams_pin === pin) r = rows[i];
-    if (!r) return;
-    var id = 'pk-' + String(pin).replace(/[^\w]/g, '');
-    var host = el(id);
-    if (host) host.innerHTML = '<div class="tl-wait"><div class="pl-spin" style="margin:0"></div>' +
-      '<div>Assembling comparables and sources...</div></div>';
-
-    packetComps(r, 8).then(function (cs) {
-      if (host) host.innerHTML = '';
-      var w = window.open('', '_blank');
-      if (!w) { toast('Allow popups to generate the packet'); return; }
-      w.document.write(packetHTML(r, cs));
-      w.document.close();
-      setTimeout(function () { w.print(); }, 500);
-      if (typeof gtag === 'function') gtag('event', 'appeal_packet', { town: r.town });
-    });
-  };
-
-  function packetHTML(r, cs) {
-    var c = chapter123(r), s = sr1aFor(r), u = uniFor(r), a = appealFor(r);
-    var off = ratioFor(r.town, r.county);
-    var today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    var TY = new Date().getFullYear();
-
-    function row(k, v, note) {
-      return '<tr><th>' + k + '</th><td>' + (v == null || v === '' ? '<span class="na">not on file</span>' : v) +
-        (note ? '<em>' + note + '</em>' : '') + '</td></tr>';
-    }
-
-    var compRows = cs.map(function (x) {
-      return '<tr><td>' + esc(x.a) + '</td><td>' + esc(x.b) + '/' + esc(x.l) + '</td>' +
-        '<td>' + (x.m ? String(x.m).padStart(2, '0') + '/' : '') + x.y + '</td>' +
-        '<td class="n">' + money(x.p) + '</td>' +
-        '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '\u2014') + '</td>' +
-        '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '\u2014') + '</td>' +
-        '<td class="n">' + (x.yb || '\u2014') + '</td>' +
-        '<td class="n">' + (x.av ? money(x.av) : '\u2014') + '</td></tr>';
-    }).join('');
-
-    var medPpsf = null, sized = cs.filter(function (x) { return x.ppsf; });
-    if (sized.length >= 3) medPpsf = median(sized.map(function (x) { return x.ppsf; }));
-
-    return '<html><head><meta charset="utf-8"><title>Appeal packet, ' + esc(r.address) + '</title><style>' +
-      '@page{margin:20mm 16mm}' +
-      'body{font-family:Georgia,"Times New Roman",serif;color:#10182b;line-height:1.5;font-size:11pt;margin:0}' +
-      'h1{font-size:17pt;margin:0 0 4px;letter-spacing:-.01em}' +
-      '.sub{font-size:10pt;color:#555;margin-bottom:4px}' +
-      '.rule{border-bottom:2px solid #10182b;margin:10px 0 18px}' +
-      'h2{font-size:11pt;text-transform:uppercase;letter-spacing:.09em;margin:22px 0 8px;' +
-        'border-bottom:1px solid #bbb;padding-bottom:4px}' +
-      'table{width:100%;border-collapse:collapse;font-size:10pt;margin-bottom:6px}' +
-      'th{text-align:left;padding:5px 10px 5px 0;font-weight:normal;color:#555;width:38%;vertical-align:top}' +
-      'td{padding:5px 0;vertical-align:top}' +
-      'td em{display:block;font-style:normal;font-size:8.5pt;color:#777;margin-top:1px}' +
-      '.na{color:#999;font-style:italic}' +
-      '.ct th{background:#10182b;color:#fff;padding:6px 8px;width:auto;font-size:8.5pt;' +
-        'text-transform:uppercase;letter-spacing:.05em}' +
-      '.ct td{padding:6px 8px;border-bottom:1px solid #ddd;font-size:9.5pt}' +
-      '.ct td.n,.ct th.n{text-align:right}' +
-      '.calc{background:#f4f6fa;padding:14px 18px;border-left:3px solid #10182b;margin:10px 0}' +
-      '.calc div{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #dde}' +
-      '.calc div:last-child{border-bottom:none;font-weight:bold;border-top:2px solid #10182b;margin-top:4px;padding-top:8px}' +
-      '.arg{font-size:10.5pt;line-height:1.65}' +
-      '.arg p{margin:0 0 10px}' +
-      '.src{font-size:8.5pt;color:#666;line-height:1.55;margin-top:22px;border-top:1px solid #bbb;padding-top:10px}' +
-      '.warn{background:#fdf1ef;border-left:3px solid #c0342b;padding:10px 14px;font-size:9.5pt;margin:12px 0}' +
-      '</style></head><body>' +
-
-      '<h1>Property tax appeal packet</h1>' +
-      '<div class="sub">' + esc(r.address) + ', ' + esc(r.town || '') +
-        (r.county ? ', ' + esc(titleCase(r.county)) + ' County, New Jersey' : '') + '</div>' +
-      '<div class="sub">Prepared ' + today + ' for tax year ' + TY + '</div>' +
-      '<div class="rule"></div>' +
-
-      '<h2>1. Subject property</h2><table>' +
-        row('Address', esc(r.address)) +
-        row('Municipality', esc(r.town || '')) +
-        row('Block / Lot' + (r.qualifier ? ' / Qualifier' : ''),
-            esc(r.block || '') + ' / ' + esc(r.lot || '') + (r.qualifier ? ' / ' + esc(r.qualifier) : '')) +
-        row('State parcel identifier', esc(r.pams_pin || '')) +
-        row('Property class', '2, residential') +
-        row('Living space', r._sqft ? r._sqft.toLocaleString() + ' sq ft' : null,
-            r._sqft ? 'from the state verified sales file' : null) +
-        row('Year built', r._built || null) +
-        row('Current assessment', money(r.assessed || 0)) +
-        row('Prior year tax', money(r.last_year_tax || 0)) +
-        row('Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(3) + '%' : null) +
-        (r._lastSale ? row('Subject\u2019s own last sale', money(r._lastSale) + ' in ' + r._lastSaleYear,
-            'verified arm\u2019s length transaction; the strongest single item of evidence available') : '') +
-      '</table>' +
-
-      '<h2>2. Municipal equalization</h2><table>' +
-        row('Director\u2019s Ratio', off ? (off.ratio * 100).toFixed(2) + '%' : null,
-            off ? 'certified for tax year ' + off.year + ', published by the Division of Taxation' : null) +
-        row('Ratio measured from verified sales', s ? (s.ratio * 100).toFixed(2) + '%' : null,
-            s ? 'median of ' + s.n + ' arm\u2019s length sales the state confirmed, ' +
-                (s.years ? s.years[0] + ' to ' + s.years[1] : 'recent years') : null) +
-        row('Coefficient of deviation', u ? u.coefficient : null,
-            u ? 'residential, ' + u.latest_year + '. The professional standard is 15 or below; this town ' +
-                'ranks in the ' + ordinal(u.percentile) + ' percentile statewide' : null) +
-        row('Median price per square foot', (medPpsf ? '$' + Math.round(medPpsf) : (s && s.ppsf ? '$' + s.ppsf : null)),
-            'from the comparable sales listed below') +
-      '</table>' +
-      (u && u.coefficient > 15
-        ? '<div class="warn"><b>Note on uniformity.</b> A coefficient of ' + u.coefficient + ' exceeds the ' +
-          'standard of 15, indicating that assessments in this municipality are applied unevenly. That is a ' +
-          'condition of the roll itself and applies independently of the subject property.</div>'
-        : '') +
-
-      '<h2>3. Comparable sales</h2>' +
-      (cs.length
-        ? '<table class="ct"><thead><tr><th>Address</th><th>Block/Lot</th><th>Sold</th>' +
-          '<th class="n">Price</th><th class="n">Sq ft</th><th class="n">$/sq ft</th>' +
-          '<th class="n">Built</th><th class="n">Assessed</th></tr></thead><tbody>' +
-          compRows + '</tbody></table>' +
-          '<div class="src" style="margin-top:6px;border:none;padding:0">All sales above were verified as ' +
-          'usable arm\u2019s length transactions by the assessing authority and reported to the Division of ' +
-          'Taxation on Form SR-1A. Non-usable transfers, including family conveyances, estate sales and ' +
-          'sheriff\u2019s sales, are excluded at source.</div>'
-        : '<p class="na">No verified comparable sales are on file for this municipality in the period covered.</p>') +
-
-      '<h2>4. Chapter 123 calculation</h2>' +
-      (c && c.testable
-        ? '<div class="calc">' +
-            '<div><span>Market value indicated by the evidence</span><b>' + money(Math.round(c.indep)) + '</b></div>' +
-            '<div><span>Municipal equalization ratio</span><b>' + (c.ratio * 100).toFixed(2) + '%</b></div>' +
-            '<div><span>Supported assessment (value \u00d7 ratio)</span><b>' + money(Math.round(c.fair)) + '</b></div>' +
-            '<div><span>Statutory upper limit (\u00d7 1.15)</span><b>' + money(Math.round(c.limit)) + '</b></div>' +
-            '<div><span>Assessment currently on the roll</span><b>' + money(r.assessed || 0) + '</b></div>' +
-            '<div><span>' + (c.hasCase ? 'Amount above the statutory limit' : 'Amount below the statutory limit') +
-              '</span><b>' + money(Math.abs(Math.round(c.over))) + '</b></div>' +
-          '</div>' +
-          '<p class="arg">' + (c.hasCase
-            ? 'The assessment exceeds the Chapter 123 upper limit. Under N.J.S.A. 54:51A-6 the county board ' +
-              'is directed to reduce an assessment that exceeds true market value multiplied by the average ' +
-              'ratio and the statutory 15 percent margin.' +
-              (c.saving ? ' At the effective rate shown, a reduction to the supported assessment would reduce ' +
-                'the annual obligation by approximately ' + money(Math.round(c.saving)) + '.' : '')
-            : 'The assessment falls within the 15 percent margin the statute affords the municipality. On this ' +
-              'evidence the board would be required to affirm, and a filing is not advisable.') + '</p>'
-        : '<p class="na">The Chapter 123 test requires an independent determination of market value. Neither a ' +
-          'recent arm\u2019s length sale of the subject nor a sufficient set of comparables was available at the ' +
-          'time this packet was generated.</p>') +
-
-      '<h2>5. County board history</h2>' +
-      (a
-        ? '<table>' +
-            row('Appeals filed', a.latest.total.toLocaleString() + ' in ' + a.latest_year) +
-            row('Reduced', a.latest.wins.toLocaleString() + ' (' + a.latest.win_rate_filed + '% of those filed)') +
-            row('Of those decided on the merits', a.latest.win_rate_decided != null
-                ? a.latest.win_rate_decided + '%' : null,
-                'excluding withdrawals and dismissals') +
-            row('Residential appeals', a.latest.residential.toLocaleString()) +
-            row('Ten year trend', a.trend != null
-                ? (a.trend > 0 ? 'up ' : 'down ') + Math.abs(a.trend) + ' percentage points' : null) +
-          '</table>'
-        : '<p class="na">County outcome data is not available for this jurisdiction.</p>') +
-
-      '<div class="src"><b>Sources.</b> Assessment and parcel data: New Jersey Office of Information ' +
-      'Technology, Office of GIS statewide parcel layer, joined to Division of Taxation MOD-IV records. ' +
-      'Comparable sales: Division of Taxation SR-1A verified sales file. Equalization ratio: Table of ' +
-      'Equalized Valuations, certified by the Director of the Division of Taxation. Coefficient of deviation: ' +
-      'Measures of Property Assessment Uniformity in New Jersey Taxing Districts. Appeal outcomes: Summary of ' +
-      'Property Tax Appeals, filed under N.J.S.A. 54:3-5.1. Owner names are redacted at source under ' +
-      'P.L. 2020, c. 125.<br><br>' +
-      '<b>Limitations.</b> Public assessment records do not record property condition, interior finish, ' +
-      'renovation history or deferred maintenance, and any of those may explain a difference between the ' +
-      'subject and a comparable. This document is a working analysis prepared to support professional ' +
-      'judgment. It is not a completed appeal, not an appraisal, and not legal advice. Filing requires Form ' +
-      'A-1, the applicable fee, and service on the municipal assessor and clerk. Appeals are generally due ' +
-      'April 1, or May 1 in a municipality that has undergone revaluation or reassessment.<br><br>' +
-      'Generated by njpropertytaxrelief.com.</div>' +
-
-      '</body></html>';
-  }
-
-  // ══════════════════════════════════════════════
-  // 18 · RELOCATION COMPARISON
-  //
-  // The same money buys a very different tax bill depending on which side of a
-  // town line it lands. Nobody compares this before they move, because the
-  // figure a listing shows is the seller's bill on that specific house, not
-  // what the town charges for a given amount of value.
-  //
-  // Everything here runs on data already loaded. No queries.
-  // ══════════════════════════════════════════════
-  function townRateFor(code) {
-    // Effective rate implied by the verified ratio and the town's own median
-    // bill. Where a published rate history exists it wins, because it is the
-    // actual rate rather than one inferred from it.
-    var t = (typeof rates !== 'undefined') ? rates : null;
-    var nm = (uniData && uniData[code] && uniData[code].name) || '';
-    var cty = (sr1a && sr1a[code] && sr1a[code].county) || '';
-    if (t && nm) {
-      // keys look like "WINSLOW TWP (CAMDEN)". Match on the town name and,
-      // where a county is present, require it too: WASHINGTON TWP and
-      // GREENWICH TWP each exist in more than one New Jersey county.
-      // The two files abbreviate differently: one says TWP, the other TWNSHP.
-      // Normalise both sides before comparing.
-      var norm = function (x) {
-        return String(x).toUpperCase()
-          .replace(/\bTOWNSHIP\b|\bTWNSHP\b|\bTWSP\b/g, 'TWP')
-          .replace(/\bBOROUGH\b|\bBORO\b/g, 'BORO')
-          .replace(/\bVILLAGE\b/g, 'VLG')
-          .replace(/\bTOWN OF\b/g, '')
-          .replace(/[^A-Z0-9 ]/g, ' ')
-          .replace(/\s+/g, ' ').trim();
-      };
-      var want = norm(nm);
-      var keys = Object.keys(t);
-      var hit = null;
-      for (var i = 0; i < keys.length; i++) {
-        var K = keys[i].toUpperCase();
-        var base = norm(K.replace(/\s*\([^)]*\)\s*$/, ''));
-        if (base !== want) continue;
-        if (cty && K.indexOf('(' + cty.toUpperCase() + ')') < 0) continue;
-        hit = keys[i];
-        break;
-      }
-      if (hit) {
-        {
-          var h = t[hit];
-          var yrs = Object.keys(h).map(Number).filter(function (y) { return y > 1990; }).sort();
-          if (yrs.length) {
-            var last = yrs[yrs.length - 1];
-            return { rate: +h[String(last)] / 100, src: 'published', year: last,
-                     hist: h, years: yrs };
-          }
-        }
-      }
-    }
-    return null;
-  }
-
-  function relocRow(code, budget) {
-    var s = sr1a && sr1a[code];
-    if (!s || !s.ratio) return null;
-    var u = uniData && uniData[code];
-    var a = appealData && appealData.counties && appealData.counties[code.slice(0, 2)];
-    var pub = townRateFor(code);
-
-    // Assessment a house at this price would carry, then the tax on it.
-    var assessed = budget * s.ratio;
-    var rate = pub ? pub.rate : null;
-    // Without a published rate, infer the effective rate from the town's own
-    // median sale and typical bill. Marked clearly as inferred.
-    var tax = rate ? assessed * rate : null;
-
-    return {
-      code: code,
-      name: (u && u.name) || code,
-      county: s.county,
-      ratio: s.ratio,
-      assessed: assessed,
-      rate: rate,
-      tax: tax,
-      inferred: !pub,
-      medPrice: s.medPrice,
-      ppsf: s.ppsf,
-      afford: s.ppsf ? Math.round(budget / s.ppsf) : null,
-      uniformity: u ? u.score : null,
-      coeff: u ? u.coefficient : null,
-      winRate: a ? a.latest.win_rate_filed : null
-    };
-  }
-
-  function toolRelocation(r) {
-    if (!sr1a || !uniData) return '';
-    var here = String(r.pams_pin || '').slice(0, 4);
-    var opts = Object.keys(sr1a)
-      .filter(function (d) { return uniData[d] && uniData[d].name; })
-      .map(function (d) { return { d: d, n: uniData[d].name, c: sr1a[d].county }; })
-      .sort(function (a, b) { return a.n.localeCompare(b.n); });
-
-    var budget = r.watchdog_value || (r.assessed && sr1a[here] ? r.assessed / sr1a[here].ratio : 400000);
-    budget = Math.round(budget / 10000) * 10000;
-
-    var sel = function (n, pre) {
-      return '<select id="rl-' + n + '"><option value="">Add a town...</option>' +
-        opts.map(function (o) {
-          return '<option value="' + o.d + '"' + (o.d === pre ? ' selected' : '') + '>' +
-            esc(o.n) + '  \u00b7  ' + esc(titleCase(o.c)) + '</option>';
-        }).join('') + '</select>';
-    };
-
-    return toolCard('If you moved', 'fa-route',
-      '<p class="tl-p">The same money buys a very different tax bill depending on which side of a town line ' +
-      'it lands. A listing shows the seller\u2019s bill on one house. This shows what a town charges for a ' +
-      'given amount of value, which is the comparison that actually travels.</p>' +
-
-      '<div class="rl-in">' +
-        '<div class="rl-b"><label for="rl-budget">Budget</label>' +
-          '<div class="rl-money"><span>$</span><input id="rl-budget" type="text" inputmode="numeric" ' +
-          'value="' + budget.toLocaleString() + '" oninput="rlGo(this)"></div></div>' +
-        '<div class="rl-t"><label>Compare</label><div class="rl-sels">' +
-          sel('a', here) + sel('b') + sel('c') + '</div></div>' +
-        '<button class="tl-btn" onclick="rlGo()">Compare</button>' +
-      '</div>' +
-      '<div id="rl-out"></div>' +
-
-      '<div class="tl-fine">Assessment is the budget multiplied by the town\u2019s verified ratio, which is what ' +
-      'a house at that price would actually be assessed at there. Tax uses the published general rate where ' +
-      'one is on file. A specific property will differ: this compares towns, not houses. Square footage ' +
-      'affordable is the budget divided by the median price per square foot in that town.</div>');
-  }
-
-  window.rlGo = function (input) {
-    if (input) {
-      var v = String(input.value).replace(/[^0-9]/g, '');
-      input.value = v ? parseInt(v, 10).toLocaleString() : '';
-    }
-    var b = +String((el('rl-budget') || {}).value || '').replace(/[^0-9]/g, '') || 0;
-    var host = el('rl-out');
-    if (!host) return;
-    if (!b) { host.innerHTML = '<div class="tl-note">Enter a budget.</div>'; return; }
-
-    var picked = ['a', 'b', 'c'].map(function (k) { return (el('rl-' + k) || {}).value; })
-      .filter(function (x) { return x; });
-    if (!picked.length) { host.innerHTML = '<div class="tl-note">Pick at least one town.</div>'; return; }
-
-    var rows2 = picked.map(function (d) { return relocRow(d, b); }).filter(Boolean);
-    if (!rows2.length) { host.innerHTML = '<div class="tl-note">No data for those towns.</div>'; return; }
-
-    var withTax = rows2.filter(function (x) { return x.tax; });
-    var best = withTax.length ? withTax.slice().sort(function (x, y) { return x.tax - y.tax; })[0] : null;
-    var worst = withTax.length > 1 ? withTax.slice().sort(function (x, y) { return y.tax - x.tax; })[0] : null;
-
-    host.innerHTML =
-      '<div class="rl-wrap"><table class="rl-t"><thead><tr><th></th>' +
-        rows2.map(function (x) {
-          return '<th' + (best && x.code === best.code ? ' class="win"' : '') + '>' + esc(x.name) +
-            '<span>' + esc(titleCase(x.county)) + '</span></th>';
-        }).join('') + '</tr></thead><tbody>' +
-        rlRow('Assessed at this budget', rows2, function (x) { return money(x.assessed); }) +
-        rlRow('Town ratio', rows2, function (x) { return (x.ratio * 100).toFixed(1) + '%'; }) +
-        rlRow('Estimated annual tax', rows2, function (x) {
-          return x.tax ? '<b>' + money(x.tax) + '</b>' : '<span class="na">no rate on file</span>'; }) +
-        rlRow('Per month', rows2, function (x) { return x.tax ? money(x.tax / 12) : '\u2014'; }) +
-        rlRow('Median sale price', rows2, function (x) { return x.medPrice ? money(x.medPrice) : '\u2014'; }) +
-        rlRow('Price per sq ft', rows2, function (x) { return x.ppsf ? '$' + x.ppsf : '\u2014'; }) +
-        rlRow('Square feet this buys', rows2, function (x) {
-          return x.afford ? x.afford.toLocaleString() + ' sq ft' : '\u2014'; }) +
-        rlRow('Assessment uniformity', rows2, function (x) {
-          return x.uniformity != null ? x.uniformity + ' of 100' : '\u2014'; }) +
-        rlRow('County appeal win rate', rows2, function (x) {
-          return x.winRate != null ? x.winRate + '%' : '\u2014'; }) +
-      '</tbody></table></div>' +
-
-      (best && worst && worst.tax > best.tax * 1.05
-        ? '<div class="rl-say"><b>' + esc(best.name) + ' is the cheaper move.</b> On a ' + money(b) +
-          ' budget the difference against ' + esc(worst.name) + ' is <b>' +
-          money(worst.tax - best.tax) + ' a year</b>, or ' + money((worst.tax - best.tax) / 12) +
-          ' a month, on the same amount of house. Over ten years that is ' +
-          money((worst.tax - best.tax) * 10) + ' before any rate increase.</div>'
-        : best
-        ? '<div class="rl-say">These towns land within a few percent of each other on tax at this budget. ' +
-          'What separates them is what the money buys: compare the square footage row.</div>'
-        : '');
-  };
-
-  function rlRow(label, rows2, fn) {
-    return '<tr><th class="rl-l">' + label + '</th>' +
-      rows2.map(function (x) { return '<td>' + fn(x) + '</td>'; }).join('') + '</tr>';
-  }
-
-  // ══════════════════════════════════════════════
-  // 15 · INVESTOR SCREENER
-  //
-  // Ranks saved properties on the only measure that compares fairly across
-  // town lines: tax per thousand dollars of market value. Two properties at
-  // the same price in different municipalities can differ by thousands a year,
-  // and assessed value cannot show that because assessment levels differ
-  // everywhere.
-  // ══════════════════════════════════════════════
-  function toolInvestorScreen() {
-    var rs = (rows || []).filter(function (r) { return r.assessed && r.last_year_tax; });
-    if (rs.length < 2) return '';
-
-    var scored = rs.map(function (r) {
-      var m = marketValue(r), c = chapter123(r), s = sr1aFor(r), u = uniFor(r);
-      var mv = m ? m.v : null;
-      return {
-        r: r,
-        market: mv,
-        burden: mv ? (r.last_year_tax / mv) * 1000 : null,   // tax per $1,000 of value
-        yieldDrag: mv ? r.last_year_tax / mv : null,
-        overBy: (c && c.testable && c.hasCase) ? c.over : 0,
-        saving: (c && c.saving) || 0,
-        uniformity: u ? u.score : null,
-        ratio: s ? s.ratio : null
-      };
-    }).filter(function (x) { return x.burden != null; });
-    if (scored.length < 2) return '';
-
-    scored.sort(function (a, b) { return b.burden - a.burden; });
-    var worst = scored[0], best = scored[scored.length - 1];
-    var totalSaving = scored.reduce(function (a, x) { return a + x.saving; }, 0);
-    var totalTax = scored.reduce(function (a, x) { return a + (+x.r.last_year_tax || 0); }, 0);
-    var totalVal = scored.reduce(function (a, x) { return a + x.market; }, 0);
-
-    return toolCard('Portfolio screen', 'fa-ranking-star',
-      '<p class="tl-p">Ranked on tax per thousand dollars of market value, which is the only measure that ' +
-      'compares fairly across town lines. Assessed value cannot do it, because assessment levels differ in ' +
-      'every municipality.</p>' +
-
-      '<div class="iv-top">' +
-        '<div><b>' + scored.length + '</b><span>properties</span></div>' +
-        '<div><b>' + money(totalTax) + '</b><span>total annual tax</span></div>' +
-        '<div><b>$' + (totalTax / totalVal * 1000).toFixed(2) + '</b><span>blended, per $1,000 of value</span></div>' +
-        (totalSaving > 0
-          ? '<div class="hot"><b>' + money(totalSaving) + '</b><span>at stake in appeals</span></div>' : '') +
-      '</div>' +
-
-      '<div class="comps-wrap"><table class="comps"><thead><tr>' +
-        '<th>Property</th><th>Town</th><th class="num">Market</th><th class="num">Tax</th>' +
-        '<th class="num">Per $1,000</th><th class="num">Over limit</th><th class="num">Uniformity</th>' +
-      '</tr></thead><tbody>' +
-      scored.map(function (x, i) {
-        return '<tr' + (i === 0 && scored.length > 1 ? ' class="hot"' : '') + '>' +
-          '<td><b>' + esc(x.r.address) + '</b></td>' +
-          '<td>' + esc(x.r.town || '') + '</td>' +
-          '<td class="num">' + money(Math.round(x.market / 1000) * 1000) + '</td>' +
-          '<td class="num">' + money(x.r.last_year_tax) + '</td>' +
-          '<td class="num"><b>$' + x.burden.toFixed(2) + '</b></td>' +
-          '<td class="num' + (x.overBy > 0 ? ' neg' : '') + '">' +
-            (x.overBy > 0 ? money(x.overBy) : '\u2014') + '</td>' +
-          '<td class="num">' + (x.uniformity != null ? x.uniformity : '\u2014') + '</td></tr>';
-      }).join('') + '</tbody></table></div>' +
-
-      (worst.burden > best.burden * 1.15
-        ? '<div class="iv-say"><b>' + esc(worst.r.address) + ' carries the heaviest burden</b> at $' +
-          worst.burden.toFixed(2) + ' per thousand against $' + best.burden.toFixed(2) + ' for ' +
-          esc(best.r.address) + '. On equal value that is a gap of <b>' +
-          money((worst.burden - best.burden) * worst.market / 1000) + ' a year</b>. ' +
-          'That difference is the municipality, not the property.</div>'
-        : '<div class="iv-say">Tax burden is fairly even across these, within 15 percent per dollar of value. ' +
-          'No one property is dragging on the others.</div>') +
-
-      '<div class="tl-fine">Market value comes from the state verified sales ratio where available. Tax per ' +
-      'thousand is the prior year bill divided by market value. This is a screening comparison, not an ' +
-      'investment recommendation, and it takes no account of rent, condition, vacancy or financing.</div>');
-  }
-
-  // ── shared card shell ──
-  // Named toolCard, not card. The dashboard already has a card(r) that renders
-  // saved property tiles, and shadowing it silently replaced every property
-  // card with a tool shell.
-  // A section, not a card. A hairline and a small label, then the content.
-  function toolCard(title, icon, body) {
-    return '<section class="sec"><h4><i class="fas ' + icon + '"></i>' + title + '</h4>' + body + '</section>';
-  }
-
-  var view = 'simple';
-
-  window.dbView = function (v) {
-    view = v;
-    document.body.classList.toggle('pro-view', v === 'pro');
-    ['simple', 'pro'].forEach(function (k) {
-      var b = document.querySelector('.vw[data-v="' + k + '"]');
-      if (b) b.classList.toggle('on', k === v);
-    });
-    render();
-  };
-
-  function render() {
-    var homes = rows.filter(function (r) { return r.kind === 'home'; });
-    var watch = rows.filter(function (r) { return r.kind === 'watch'; });
-    var cases = rows.filter(function (r) { var c = chapter123(r); return c && c.hasCase; });
-    var d = deadline();
-
-    el('db-brief').innerHTML = rows.length ? brief() : '';
-
-    // A thin status line, not a row of tiles.
-    el('db-line').innerHTML = rows.length
-      ? '<div class="rail">' +
-          rl(rows.length, 'tracked') +
-          rl(money(rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0)), 'annual tax') +
-          rl(cases.length, cases.length === 1 ? 'possible appeal' : 'possible appeals', cases.length ? 'neg' : '') +
-          rl(d.days, 'days to file', d.days <= 75 ? 'neg' : '') +
-        '</div>'
-      : '';
-
-    if (!rows.length) {
-      el('db-body').innerHTML =
-        '<div class="blank"><h3>Nothing saved yet</h3>' +
-        '<p>Look up any New Jersey address and claim it as your home, or add it to a watchlist. ' +
-        'Everything on this page is built from the properties you save.</p>' +
-        '<a class="db-btn" href="/property/">Look up an address</a></div>';
-      return;
-    }
-
-    if (view === 'pro') {
-      el('db-body').innerHTML =
-        locked('The full table',
-          'Every property with its ratio, supported assessment, statutory limit and appeal value, in one scannable grid.',
-          proTable()) +
-        toolsHTML();
-      afterTools();
-      return;
-    }
-
-    var srt = SORTS[sortBy].fn;
-    homes = homes.slice().sort(srt);
-    watch = watch.slice().sort(srt);
-
-    el('db-body').innerHTML =
-      sortControl() +
-      (homes.length
-        ? '<section class="band own"><h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
-          homes.map(propertyBlock).join('') + '</section>' : '') +
-      (watch.length
-        ? '<section class="band"><h2 class="grp">Watchlist</h2>' +
-          watch.map(propertyBlock).join('') + '</section>' : '') +
-      toolsHTML();
-    afterTools();
-  }
-
-  function rl(v, l, cls) {
-    return '<span class="' + (cls || '') + '"><b>' + v + '</b>' + l + '</span>';
-  }
-
-  function toolsHTML() {
-    // Uniformity is free on purpose: it is the most surprising number on the
-    // site and the reason someone tells a neighbour about it.
-    // toolUniformity and toolAppealOdds used to sit here. Both describe a single
-    // property, so printing them under a list of five was misleading. They now
-    // live on that property's own report page, and each card carries the short
-    // version instead.
-    var free = [toolDrift()].filter(Boolean).join('');
-    var pro = [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
-    return free +
-      (pro ? locked('Analysis tools',
-        'Where you sit in your town, portfolio totals, town comparisons and the exports.', pro) : '') +
-      toolCost();
-  }
-
-  function afterTools() {
-    if (el('tc-total')) window.dbCost();
-    if (isPro()) paintPercentile();
-  }
-
-  window.dbPanel = function (p) {
-    ['main','profile'].forEach(function (k) {
-      var b = document.querySelector('.pn[data-p="' + k + '"]');
-      if (b) b.classList.toggle('on', k === p);
-      var e = el(k === 'main' ? 'db-panel-main' : 'db-' + k);
-      if (e) e.style.display = (k === p) ? '' : 'none';
-    });
-  };
-
-  window.dbRemove = function (id) {
-    if (!confirm('Remove this property from your list?')) return;
-    sb.from('saved_properties').delete().eq('id', id).then(paint);
-  };
-
-  // ── ownership verification ──
-  window.dbVerify = function (pin, address) {
-    plModalNote('Verify you own this home',
-      '<p>New Jersey redacts owner names from the public property file under Daniel\'s Law, so nothing can confirm ownership ' +
-      'automatically from public records. The reliable way is the old fashioned one.</p>' +
-      '<p><b>I mail a six character code to ' + esc(address) + '.</b> You type it in here. That proves someone receiving mail ' +
-      'at the property asked for it, which is the same standard a county board would accept.</p>' +
-      '<div class="pl-form" style="grid-template-columns:1fr;">' +
-        '<button onclick="dbRequestCode(\'' + pin + '\',\'' + esc(address).replace(/\'/g, "") + '\')">Mail me a code</button>' +
-      '</div>' +
-      '<div class="auth-or"><span>already have one</span></div>' +
-      '<div class="pl-form" style="grid-template-columns:1fr;">' +
-        '<input id="vc-code" type="text" placeholder="Six character code" maxlength="8" style="text-transform:uppercase;letter-spacing:.15em;">' +
-        '<button onclick="dbRedeem(\'' + pin + '\')">Verify</button>' +
-      '</div>' +
-      '<div class="auth-fine">In a hurry? Email a copy of your tax bill or deed and we will mark it verified by hand.</div>');
-  };
-
-  window.dbRequestCode = function (pin, address) {
-    sb.rpc('request_verify_code', { p_pin: pin, p_address: address }).then(function (r) {
-      if (r.error) { toast('Could not request a code'); return; }
-      plModalNote('Code on the way',
-        '<p>We will post a code to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
-        '<p style="font-size:13.5px;color:#8a93a6;">The code goes to the property address, not to your email, because that is the whole point.</p>' +
-        '<button class="plm-rbtn" onclick="plCloseNote()">Got it</button>');
-    });
-  };
-
-  window.dbRedeem = function (pin) {
-    var c = el('vc-code'), v = c ? c.value.trim().toUpperCase() : '';
-    if (!v) { toast('Enter the code'); return; }
-    sb.rpc('redeem_verify_code', { p_pin: pin, p_code: v }).then(function (r) {
-      var d = r.data || {};
-      if (r.error || !d.ok) {
-        toast(d.reason === 'wrong code' ? 'That code did not match' : (d.reason || 'Could not verify'));
-        return;
-      }
-      plModalNote('Verified', '<p>This home is now marked as verified. Thanks for confirming.</p>' +
-        '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
-      paint();
-    });
-  };
-
-  // ── profile ──
-  // ══════════════════════════════════════════════
-  // PROFILE
-  //
-  // Built as a set of collapsible groups rather than one long form, because a
-  // wall of forty inputs gets abandoned. Each group states plainly what the
-  // answers unlock, since people fill in fields when they can see the point
-  // and skip them when they cannot.
-  //
-  // Income is a real number, not a band. Every New Jersey benefit that matters
-  // turns on a threshold, and a band cannot answer "do I qualify" when the
-  // cutoff sits inside it.
-  // ══════════════════════════════════════════════
-
-  var PF_OPEN = { you: true };
-
-  function pfCompletion() {
-    var fields = ['display_name','photo_url','city','zip','role','household_size','filing_status',
-      'birth_year','gross_income','income_year','years_in_home','properties_owned','move_timeline',
-      'mortgage_balance','mortgage_rate','home_insurance','credit_band','contact_pref','phone',
-      'claims_anchor','is_veteran','goals'];
-    var have = fields.filter(function (k) {
-      var v = profile[k];
-      return v !== null && v !== undefined && v !== '' && v !== false;
-    }).length;
-    return Math.round(have / fields.length * 100);
-  }
-
-  function grp(key, title, why, body) {
-    var open = !!PF_OPEN[key];
-    return '<section class="pg' + (open ? ' open' : '') + '" id="pg-' + key + '">' +
-      '<button class="pg-h" onclick="pfToggle(\'' + key + '\')">' +
-        '<span class="pg-t">' + title + '</span>' +
-        '<span class="pg-w">' + why + '</span>' +
-        '<i class="fas fa-chevron-down"></i>' +
-      '</button>' +
-      '<div class="pg-b">' + body + '</div>' +
-    '</section>';
-  }
-
-  window.pfToggle = function (k) {
-    PF_OPEN[k] = !PF_OPEN[k];
-    var e = el('pg-' + k);
-    if (e) e.classList.toggle('open', PF_OPEN[k]);
-  };
-
-  function txt(id, label, ph, type, hint) {
-    var v = profile[id];
-    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
-      '<input id="pf-' + id + '" type="' + (type || 'text') + '" placeholder="' + (ph || '') + '"' +
-      (type === 'number' ? ' inputmode="numeric"' : '') +
-      ' value="' + esc(v == null ? '' : v) + '">' +
-      (hint ? '<em>' + hint + '</em>' : '') + '</div>';
-  }
-
-  function mny(id, label, ph, hint) {
-    var v = profile[id];
-    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
-      '<div class="pf-money"><span>$</span><input id="pf-' + id + '" type="text" inputmode="numeric" ' +
-      'placeholder="' + (ph || '') + '" value="' + (v == null || v === '' ? '' : (+v).toLocaleString()) + '" ' +
-      'oninput="pfNum(this)"></div>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
-  }
-
-  window.pfNum = function (e) {
-    var v = e.value.replace(/[^0-9]/g, '');
-    e.value = v ? parseInt(v, 10).toLocaleString() : '';
-  };
-
-  function pick(id, label, opts, hint) {
-    var v = profile[id];
-    return '<div class="pf-f"><label for="pf-' + id + '">' + label + '</label>' +
-      '<select id="pf-' + id + '"><option value="">Prefer not to say</option>' +
-      opts.map(function (o) {
-        return '<option value="' + o[0] + '"' + (v === o[0] ? ' selected' : '') + '>' + o[1] + '</option>';
-      }).join('') + '</select>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
-  }
-
-  function yn(id, label) {
-    return '<label class="pf-yn"><input type="checkbox" id="pf-' + id + '"' +
-      (profile[id] ? ' checked' : '') + '><span>' + label + '</span></label>';
-  }
-
-  function multi(id, label, opts, hint) {
-    var cur = profile[id] || [];
-    return '<div class="pf-f wide"><label>' + label + '</label><div class="pf-chips">' +
-      opts.map(function (o) {
-        var on = cur.indexOf(o[0]) > -1;
-        return '<label class="chip' + (on ? ' on' : '') + '">' +
-          '<input type="checkbox" data-multi="' + id + '" value="' + o[0] + '"' + (on ? ' checked' : '') +
-          ' onchange="this.parentNode.classList.toggle(\'on\', this.checked)">' + o[1] + '</label>';
-      }).join('') + '</div>' + (hint ? '<em>' + hint + '</em>' : '') + '</div>';
-  }
-
-  // A professional the user works with. Stored as one JSON object per role.
-  function pro(id, label, hint) {
-    var v = profile[id] || {};
-    return '<div class="pf-pro"><div class="pf-pro-h">' + label + (hint ? '<em>' + hint + '</em>' : '') + '</div>' +
-      '<div class="pf-pro-g">' +
-        '<input id="pf-' + id + '-name"  placeholder="Name"    value="' + esc(v.name || '') + '">' +
-        '<input id="pf-' + id + '-co"    placeholder="Company" value="' + esc(v.company || '') + '">' +
-        '<input id="pf-' + id + '-phone" placeholder="Phone"   value="' + esc(v.phone || '') + '">' +
-        '<input id="pf-' + id + '-email" placeholder="Email"   value="' + esc(v.email || '') + '">' +
-      '</div></div>';
-  }
-
-  function profileForm() {
-    var pct = pfCompletion();
-    var photo = profile.photo_url || meta().avatar_url || meta().picture || '';
-
-    return '<div class="pf">' +
-
-      '<div class="pf-top">' +
-        '<div class="pf-photo">' +
-          (photo ? '<img src="' + esc(photo) + '" alt="" onerror="this.style.display=\'none\'">'
-                 : '<div class="pf-noimg">' + esc((name() || '?').charAt(0).toUpperCase()) + '</div>') +
-        '</div>' +
-        '<div class="pf-topb">' +
-          '<div class="pf-meter"><i style="width:' + pct + '%"></i></div>' +
-          '<div class="pf-pct"><b>' + pct + '% complete</b>' +
-            (pct < 100 ? ' \u00b7 the more you fill in, the more of this we can answer for you' : ' \u00b7 everything filled') +
-          '</div>' +
-        '</div>' +
-      '</div>' +
-
-      grp('you', 'You', 'Name, photo and where you are',
-        '<div class="pf-grid">' +
-          txt('display_name', 'Display name', 'How you want to be addressed') +
-          txt('phone', 'Phone', 'Optional', 'tel') +
-          txt('city', 'Town you live in', 'Williamstown') +
-          txt('zip', 'Zip', '08094') +
-          txt('photo_url', 'Photo URL', 'Paste a link, or leave it to use your sign in photo', 'url',
-              'Direct image link. Upload arrives once storage is switched on.') +
-          txt('headline', 'One line about you', 'Homeowner since 2014, thinking about downsizing') +
-        '</div>' +
-        multi('roles', 'What are you, in the property market?', [
-          ['owner','Homeowner'], ['renter','Renter'], ['buyer','Buying'], ['seller','Selling'],
-          ['investor','Investor'], ['landlord','Landlord'], ['agent','Real estate agent'],
-          ['attorney','Attorney'], ['lender','Lender'], ['appraiser','Appraiser']
-        ], 'Pick as many as fit. Most people are more than one.')) +
-
-      grp('house', 'Your household', 'Decides which New Jersey benefits you qualify for',
-        '<div class="pf-grid">' +
-          txt('household_size', 'People in the household', '3', 'number') +
-          txt('dependents', 'Dependents claimed', '1', 'number') +
-          pick('filing_status', 'Filing status', [
-            ['single','Single'], ['married_joint','Married, filing jointly'],
-            ['married_separate','Married, filing separately'], ['head','Head of household'],
-            ['widow','Qualifying widow or widower']
-          ]) +
-          txt('birth_year', 'Your birth year', '1968', 'number', 'Stay NJ and the Senior Freeze start at 65') +
-          txt('spouse_birth_year', 'Spouse birth year', 'Optional', 'number') +
-          txt('years_in_home', 'Years in your current home', '11', 'number') +
-        '</div>') +
-
-      grp('money', 'Income and housing costs',
-        'Exact figures, because every benefit here turns on a threshold',
-        '<p class="pf-say">New Jersey\u2019s programs cut off at specific numbers. ANCHOR changes at $150,000. ' +
-        'Stay NJ stops at $500,000. The Senior Freeze has its own limit that moves each year. A range cannot ' +
-        'tell you which side of a line you are on, so this asks for the real figure.</p>' +
-        '<div class="pf-grid">' +
-          mny('gross_income', 'Gross annual income', '112,000', 'Total household, before tax') +
-          txt('income_year', 'For tax year', '2025', 'number') +
-          mny('nj_taxable_income', 'NJ taxable income', 'Optional', 'Line 29 of your NJ-1040, if you have it') +
-          mny('mortgage_balance', 'Mortgage balance', '184,000') +
-          txt('mortgage_rate', 'Rate %', '6.25', 'number') +
-          mny('mortgage_payment', 'Monthly payment', '1,940', 'Principal and interest') +
-          mny('escrow_monthly', 'Monthly escrow', '620') +
-          mny('home_insurance', 'Annual home insurance', '1,450') +
-          mny('heloc_balance', 'HELOC or second lien', 'Optional') +
-          pick('credit_band', 'Credit range', [
-            ['excellent','Excellent, 760 and up'], ['good','Good, 700 to 759'],
-            ['fair','Fair, 640 to 699'], ['building','Building, under 640']
-          ], 'Never checked, never pulled. Self reported only.') +
-        '</div>') +
-
-      grp('benefits', 'What you already claim', 'So we stop suggesting things you have',
-        '<div class="pf-yns">' +
-          yn('claims_anchor', 'ANCHOR') +
-          yn('claims_stay_nj', 'Stay NJ') +
-          yn('claims_senior_freeze', 'Senior Freeze') +
-          yn('claims_senior_deduction', '$250 senior deduction') +
-          yn('claims_vet_deduction', '$250 veteran deduction') +
-          yn('is_veteran', 'I am a veteran') +
-          yn('filed_appeal_before', 'I have filed a tax appeal before') +
-        '</div>' +
-        '<div class="pf-grid">' +
-          txt('appeal_year', 'Year of that appeal', '2023', 'number') +
-          pick('appeal_outcome', 'How it went', [
-            ['won','Assessment reduced'], ['settled','Settled before hearing'],
-            ['lost','No reduction'], ['withdrew','Withdrew it']
-          ]) +
-        '</div>') +
-
-      grp('plans', 'What you are planning', 'Shapes what gets flagged for you',
-        '<div class="pf-grid">' +
-          pick('move_timeline', 'Thinking of selling', [
-            ['asap','As soon as possible'], ['3mo','Within 3 months'], ['6mo','Within 6 months'],
-            ['12mo','Within a year'], ['2yr','One to two years'], ['none','Not at all']
-          ]) +
-          pick('buy_timeline', 'Thinking of buying', [
-            ['asap','As soon as possible'], ['3mo','Within 3 months'], ['6mo','Within 6 months'],
-            ['12mo','Within a year'], ['none','Not at all']
-          ]) +
-          mny('price_target_low', 'Budget from', '350,000') +
-          mny('price_target_high', 'Budget to', '475,000') +
-          txt('properties_owned', 'Properties you own', '1', 'number') +
-        '</div>' +
-        '<div class="pf-f wide"><label for="pf-target_towns">Towns you are watching</label>' +
-        '<input id="pf-target_towns" placeholder="Washington Twp, Deptford, Mantua" value="' +
-        esc((profile.target_towns || []).join(', ')) + '"><em>Comma separated. We will flag revaluations and ' +
-        'rate changes in these.</em></div>' +
-        '<div class="pf-f wide"><label for="pf-goals">What are you actually trying to do?</label>' +
-        '<textarea id="pf-goals" rows="3" placeholder="Cut the tax bill, then downsize in about two years once ' +
-        'the youngest finishes school.">' + esc(profile.goals || '') + '</textarea></div>') +
-
-      grp('pros', 'Your people', 'Keep them handy, and we will not suggest replacements',
-        pro('pro_agent', 'Real estate agent') +
-        pro('pro_lender', 'Lender or mortgage broker') +
-        pro('pro_attorney', 'Attorney') +
-        pro('pro_accountant', 'Accountant or tax preparer') +
-        pro('pro_insurance', 'Insurance agent')) +
-
-      grp('reach', 'How to reach you', 'And what is worth interrupting you for',
-        '<div class="pf-grid">' +
-          pick('contact_pref', 'Preferred contact', [
-            ['email','Email'], ['phone','Phone call'], ['text','Text message'], ['none','Do not contact me']
-          ]) +
-          pick('best_time', 'Best time', [
-            ['morning','Morning'], ['midday','Midday'], ['evening','Evening'], ['weekend','Weekends']
-          ]) +
-        '</div>' +
-        '<div class="pf-yns">' +
-          yn('notify_deadline', 'Appeal deadlines') +
-          yn('notify_reval', 'My town announces a revaluation') +
-          yn('notify_value', 'My assessment or value changes') +
-          yn('notify_market', 'Monthly market note for my towns') +
-        '</div>') +
-
-      '<div class="pf-save">' +
-        '<button class="db-btn" onclick="dbSaveProfile()">Save profile</button>' +
-        '<span id="pf-saved"></span>' +
-      '</div>' +
-
-      '<p class="pf-priv"><i class="fas fa-lock"></i> Everything here is visible only to your account. ' +
-      'It is never sold, never shared, and never shown to other users. Every field is optional and you can ' +
-      'clear any of them at any time.</p>' +
-    '</div>';
-  }
-
-  // ══════════════════════════════════════════════
-  // SAVE
-  // ══════════════════════════════════════════════
-  function gv(id) { var e = el('pf-' + id); return e ? String(e.value || '').trim() : ''; }
-  function gn(id) { var v = gv(id).replace(/[^0-9.\-]/g, ''); return v === '' ? null : Math.round(+v); }
-  function gf(id) { var v = gv(id).replace(/[^0-9.\-]/g, ''); return v === '' ? null : +v; }
-  function gb(id) { var e = el('pf-' + id); return e ? !!e.checked : null; }
-  function gs(id) { return gv(id) || null; }
-  function gpro(id) {
-    var o = { name: gv(id + '-name'), company: gv(id + '-co'),
-              phone: gv(id + '-phone'), email: gv(id + '-email') };
-    return (o.name || o.company || o.phone || o.email) ? o : null;
-  }
-  function gmulti(id) {
-    var out = [];
-    document.querySelectorAll('input[data-multi="' + id + '"]:checked')
-      .forEach(function (c) { out.push(c.value); });
-    return out.length ? out : null;
-  }
-
-  window.dbSaveProfile = function () {
-    var towns = gv('target_towns').split(',').map(function (t) { return t.trim(); }).filter(Boolean);
-    var patch = {
-      display_name: gs('display_name'), photo_url: gs('photo_url'), headline: gs('headline'),
-      city: gs('city'), zip: gs('zip'), phone: gs('phone'),
-      roles: gmulti('roles'),
-      household_size: gn('household_size'), dependents: gn('dependents'),
-      filing_status: gs('filing_status'), birth_year: gn('birth_year'),
-      spouse_birth_year: gn('spouse_birth_year'), years_in_home: gn('years_in_home'),
-      gross_income: gn('gross_income'), income_year: gn('income_year'),
-      nj_taxable_income: gn('nj_taxable_income'),
-      mortgage_balance: gn('mortgage_balance'), mortgage_rate: gf('mortgage_rate'),
-      mortgage_payment: gf('mortgage_payment'), escrow_monthly: gf('escrow_monthly'),
-      home_insurance: gf('home_insurance'), heloc_balance: gn('heloc_balance'),
-      credit_band: gs('credit_band'),
-      claims_anchor: gb('claims_anchor'), claims_stay_nj: gb('claims_stay_nj'),
-      claims_senior_freeze: gb('claims_senior_freeze'),
-      claims_senior_deduction: gb('claims_senior_deduction'),
-      claims_vet_deduction: gb('claims_vet_deduction'), is_veteran: gb('is_veteran'),
-      filed_appeal_before: gb('filed_appeal_before'), appeal_year: gn('appeal_year'),
-      appeal_outcome: gs('appeal_outcome'),
-      move_timeline: gs('move_timeline'), buy_timeline: gs('buy_timeline'),
-      price_target_low: gn('price_target_low'), price_target_high: gn('price_target_high'),
-      properties_owned: gn('properties_owned'),
-      target_towns: towns.length ? towns : null, goals: gs('goals'),
-      pro_agent: gpro('pro_agent'), pro_lender: gpro('pro_lender'),
-      pro_attorney: gpro('pro_attorney'), pro_accountant: gpro('pro_accountant'),
-      pro_insurance: gpro('pro_insurance'),
-      contact_pref: gs('contact_pref'), best_time: gs('best_time'),
-      notify_deadline: gb('notify_deadline'), notify_reval: gb('notify_reval'),
-      notify_value: gb('notify_value'), notify_market: gb('notify_market'),
-      profile_complete: true
-    };
-    // derive the age band so existing tools keep working
-    if (patch.birth_year) {
-      var age = new Date().getFullYear() - patch.birth_year;
-      patch.age_band = age >= 65 ? '65plus' : age >= 50 ? '50to64' : age >= 35 ? '35to49' : 'under35';
-    }
-    Object.keys(patch).forEach(function (k) { profile[k] = patch[k]; });
-    patch.profile_pct = pfCompletion();
-
-    sb.from('profiles').update(patch).eq('id', plUser.id).then(function (r) {
-      var s = el('pf-saved');
-      if (r.error) {
-        if (s) s.innerHTML = '<span class="bad">Could not save. ' + esc(r.error.message || '') + '</span>';
-        return;
-      }
-      if (s) s.innerHTML = '<span class="ok"><i class="fas fa-circle-check"></i> Saved</span>';
-      el('db-profile-body').innerHTML = profileForm();
-      render();
-    });
-  };
-
-  // ── contact ──
-  function send(payload) {
-    if (typeof emailjs === 'undefined') return;
-    emailjs.init({ publicKey: EJS_PUBLIC });
-    emailjs.send(EJS_SERVICE, EJS_TMPL, payload).catch(function (e) { console.warn(e); });
-  }
 
-  window.dbAsk = function (kind) {
-    var list = rows.filter(function (r) { return r.has_appeal_case; })
-                   .map(function (r) { return r.address + ', ' + r.town + ' (assessed ' + money(r.assessed || 0) + ')'; });
-    send({
-      name: name(), email: plUser.email, phone: profile.phone || 'Not provided',
-      topic: '\u2b50 DASHBOARD [' + kind.toUpperCase() + '] appeal review request',
-      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
-      town: (rows[0] && rows[0].town) || 'Not provided',
-      address: (rows[0] && rows[0].address) || 'Not provided',
-      message: ['Appeal review requested from the dashboard.', 'Properties flagged:']
-        .concat(list).concat(['Source: /property/dashboard.html']).join('\n')
-    });
-    plModalNote('On it', '<p>An agent will review those and get back to you within one business day.</p>' +
-      '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
-  };
-
-  window.dbAskAbout = function (address) {
-    send({
-      name: name(), email: plUser.email, phone: profile.phone || 'Not provided',
-      topic: '\u2b50 DASHBOARD question about ' + address,
-      tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
-      town: 'Not provided', address: address,
-      message: ['Question from the dashboard about ' + address, 'Source: /property/dashboard.html'].join('\n')
-    });
-    plModalNote('Message sent', '<p>An agent will get back to you about <b>' + esc(address) + '</b> within one business day.</p>' +
-      '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
-  };
-
-})();
+:root {
+  --ink:      #10182b;
+  --ink-2:    #46536b;
+  --ink-3:    #7d8798;
+  --hair:     #e4e7ee;
+  --hair-2:   #eef0f5;
+  --paper:    #fff;
+  --neg:      #c0342b;
+  --neg-bg:   #fdf1ef;
+  --pos:      #1c7a4a;
+  --pos-bg:   #eef8f2;
+  --accent:   #14346e;
+  --accent-2: #2d5fb8;
+  --accent-bg:#eef3fc;
+  --gold:     #b8972a;
+  --gold-bg:  #fdf6e0;
+  --mono:     ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  --sans:     'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+}
+
+body { background: var(--paper); }
+
+/* ---------- signed out ---------- */
+.gate {
+  max-width: 480px; margin: 70px auto; padding: 0 24px; text-align: left;
+}
+.gate h1 {
+  font-family: var(--sans); font-size: 34px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--ink); margin: 0 0 12px;
+}
+.gate p { font-size: 16px; line-height: 1.7; color: var(--ink-2); margin: 0 0 22px; }
+.gate-back { display: block; margin-top: 18px; font-size: 14px; color: var(--ink-3); }
+
+/* ---------- header ---------- */
+.top { border-bottom: 1px solid var(--hair); background: var(--paper); }
+.top-in {
+  max-width: 1180px; margin: 0 auto; padding: 20px 24px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+}
+.who { display: flex; align-items: center; gap: 13px; }
+.who img, .noav { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
+.noav {
+  background: var(--accent); color: #fff; display: flex; align-items: center;
+  justify-content: center; font-weight: 800; font-size: 17px;
+}
+.who h1 {
+  font-family: var(--sans); font-size: 25px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--ink); margin: 0; line-height: 1.15;
+}
+.who span { font-size: 13px; color: var(--ink-3); }
+
+.top-acts { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.tl, .pn {
+  background: none; border: none; font-family: inherit; font-size: 14px;
+  color: var(--ink-2); padding: 7px 11px; cursor: pointer; text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+.tl:hover, .pn:hover { color: var(--ink); }
+.pn.on { color: var(--ink); font-weight: 700; border-bottom-color: var(--accent); }
+
+.vwset { display: inline-flex; border: 1px solid var(--hair); border-radius: 6px; overflow: hidden; margin-right: 8px; }
+.vw {
+  background: none; border: none; font-family: inherit; font-size: 12.5px; font-weight: 700;
+  color: var(--ink-3); padding: 7px 14px; cursor: pointer;
+}
+.vw.on { background: var(--accent); color: #fff; }
+
+/* ---------- page ---------- */
+.wrap { max-width: 1180px; margin: 0 auto; padding: 34px 24px 90px; }
+
+/* The brief. This is prose, and it should read like it. */
+.brief {
+  font-size: 20px; line-height: 1.65; color: var(--ink-2);
+  max-width: 720px; margin: 0 0 26px; font-weight: 400;
+}
+.brief b { color: var(--ink); font-weight: 700; }
+.brief b.neg { color: var(--neg); }
+.brief .urgent {
+  display: inline; color: var(--neg); font-weight: 600;
+  border-bottom: 2px solid rgba(179,38,30,.25);
+}
+
+/* A thin rail of figures. Not tiles. */
+.rail {
+  display: flex; gap: 34px; flex-wrap: wrap;
+  padding: 16px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
+  margin-bottom: 34px;
+}
+.rail span { display: flex; align-items: baseline; gap: 8px; font-size: 12.5px; color: var(--ink-3); }
+.rail b {
+  font-family: var(--sans); font-size: 26px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.rail span.neg b { color: var(--neg); }
+
+.grp {
+  font-family: var(--sans); font-size: 12px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--ink-3); margin: 42px 0 4px;
+}
+.grp:first-child { margin-top: 0; }
+.lede { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); max-width: 640px; margin: 8px 0 24px; }
+
+/* ---------- a property ---------- */
+.pr { padding: 26px 0; border-top: 1px solid var(--hair); }
+.pr-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+.pr-id h3 {
+  font-family: var(--sans); font-size: 22px; font-weight: 800; letter-spacing: -.025em;
+  color: var(--ink); margin: 0 0 4px; line-height: 1.2;
+}
+.pr-sub { font-size: 13px; color: var(--ink-3); }
+.vf { font-weight: 700; }
+.vf.yes { color: var(--pos); }
+.vf.mid { color: var(--gold); }
+.vf.no  { color: var(--ink-3); }
+.pr-flag {
+  font-size: 12.5px; font-weight: 700; color: var(--neg);
+  border-left: 3px solid var(--neg); padding: 3px 0 3px 11px; white-space: nowrap;
+}
+.pr-line { font-size: 16px; line-height: 1.7; color: var(--ink-2); max-width: 760px; margin: 14px 0 18px; }
+.pr-line b { color: var(--ink); font-weight: 700; }
+
+/* figures sit in a row, separated by space rather than borders */
+.fig { display: flex; flex-wrap: wrap; gap: 0 46px; margin: 0 0 16px; }
+.fig.tight { gap: 0 34px; margin-bottom: 0; }
+.fig > div { padding: 4px 0; }
+.fig dt {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--ink-3); margin-bottom: 3px;
+}
+.fig dd {
+  margin: 0; font-family: var(--sans); font-size: 19px; font-weight: 700;
+  letter-spacing: -.02em; color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.fig dd.neg { color: var(--neg); }
+.fig dd.pos { color: var(--pos); }
+.fig dd em { display: block; font-style: normal; font-size: 11px; font-weight: 400; color: var(--ink-3); margin-top: 2px; }
+
+.pr-acts { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 4px; }
+.pr-acts a, .pr-acts button {
+  background: none; border: none; padding: 0; font-family: inherit; font-size: 13.5px;
+  font-weight: 600; color: var(--accent); cursor: pointer; text-decoration: none;
+  border-bottom: 1px solid rgba(14,34,72,.2);
+}
+.pr-acts a:hover, .pr-acts button:hover { border-bottom-color: var(--accent); }
+.pr-acts .rm { color: var(--ink-3); border-bottom-color: transparent; }
+.pr-acts .rm:hover { color: var(--neg); }
+
+/* ---------- pro table ---------- */
+.pro-wrap { overflow-x: auto; margin-bottom: 10px; }
+.pro { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.pro th {
+  text-align: left; padding: 8px 12px 8px 0; font-size: 10.5px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3);
+  border-bottom: 2px solid var(--ink); white-space: nowrap;
+}
+.pro td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--hair-2); color: var(--ink-2); white-space: nowrap; }
+.pro td.a { color: var(--ink); font-weight: 600; }
+.pro th.n, .pro td.n { text-align: right; padding-right: 18px; }
+.pro td.neg { color: var(--neg); font-weight: 700; }
+.pro tr.hot td { background: #fdf6f5; }
+.pro tbody tr:hover td { background: #f7f9fc; }
+.pro-note { font-size: 11.5px; line-height: 1.65; color: var(--ink-3); max-width: 780px; margin: 0 0 8px; }
+
+/* ---------- sections ---------- */
+.sec { padding: 30px 0 6px; border-top: 1px solid var(--hair); margin-top: 34px; }
+.sec h4 {
+  font-family: var(--sans); font-size: 12px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--ink-3); margin: 0 0 18px;
+  display: flex; align-items: center; gap: 8px;
+}
+.sec h4 i { font-size: 12px; color: var(--gold); }
+
+/* ---------- locked ---------- */
+.lk { position: relative; margin: 8px 0; }
+.lk-in { filter: blur(6px); opacity: .45; pointer-events: none; user-select: none; }
+.lk-over {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  align-items: flex-start; justify-content: center; padding: 0 4px;
+  background: linear-gradient(90deg, rgba(255,255,255,.97) 55%, rgba(255,255,255,.72));
+}
+.lk-t { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 5px; }
+.lk-t i { color: var(--gold); margin-right: 7px; }
+.lk-w { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; max-width: 440px; margin-bottom: 13px; }
+.lk-b {
+  background: var(--accent); color: #fff; border: none; font-family: inherit;
+  font-size: 13.5px; font-weight: 700; padding: 10px 18px; border-radius: 6px; cursor: pointer;
+}
+.lk-b:hover { background: #17335f; }
+
+.pro-list { margin: 16px 0; }
+.pro-list > div { padding: 11px 0; border-bottom: 1px solid var(--hair-2); }
+.pro-list b { display: block; font-size: 14.5px; color: var(--ink); margin-bottom: 3px; }
+.pro-list span { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
+
+/* ---------- blank ---------- */
+.blank { padding: 60px 0; max-width: 520px; }
+.blank h3 { font-family: var(--sans); font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 10px; }
+.blank p { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 20px; }
+
+.db-btn {
+  display: inline-block; background: var(--accent); color: #fff; border: none;
+  font-family: inherit; font-size: 15px; font-weight: 700; padding: 12px 22px;
+  border-radius: 6px; cursor: pointer; text-decoration: none;
+}
+.db-btn:hover { background: #17335f; }
+
+/* ---------- tool internals, restrained ---------- */
+.tl-note, .tl-fine, .pro-note { color: var(--ink-3); }
+.tl-note { font-size: 12.5px; line-height: 1.65; margin-top: 12px; max-width: 720px; }
+.tl-fine { font-size: 11.5px; line-height: 1.6; margin-top: 10px; max-width: 720px; }
+.tl-p { font-size: 15px; line-height: 1.7; color: var(--ink-2); max-width: 700px; margin: 0 0 16px; }
+.tl-wait { display: flex; gap: 12px; font-size: 14px; color: var(--ink-2); line-height: 1.65; max-width: 700px; }
+.tl-wait i { color: var(--hair); font-size: 17px; margin-top: 3px; }
+.tl-good { font-size: 13.5px; color: var(--pos); line-height: 1.6; margin-top: 12px; max-width: 700px; }
+.tl-good i { margin-right: 7px; }
+.tl-btn {
+  display: inline-block; margin-top: 14px; background: none; border: 1px solid var(--hair);
+  font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--accent);
+  padding: 10px 18px; border-radius: 6px; cursor: pointer; text-decoration: none;
+}
+.tl-btn:hover { border-color: var(--accent); }
+
+.dr-row { display: grid; grid-template-columns: 1fr 110px 90px 90px; gap: 14px; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--hair-2); }
+.dr-addr b { display: block; font-size: 14px; color: var(--ink); }
+.dr-addr span { font-size: 11.5px; color: var(--ink-3); }
+.dr-spark { width: 110px; height: 32px; }
+.dr-fig { text-align: right; font-family: var(--sans); font-size: 15px; font-weight: 800;
+  font-variant-numeric: tabular-nums; color: var(--ink); }
+.dr-fig span { display: block; font-size: 9.5px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--ink-3); }
+.dr-fig.up { color: var(--neg); } .dr-fig.down { color: var(--pos); }
+
+.rb-stack { max-width: 560px; }
+.rb-line { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0;
+  border-bottom: 1px solid var(--hair-2); font-size: 14.5px; color: var(--ink-2); }
+.rb-line b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.rb-line.minus b { color: var(--pos); }
+.rb-line.muted, .rb-line.muted b { color: var(--ink-3); }
+.rb-line.total { border-bottom: none; border-top: 2px solid var(--ink); margin-top: 4px; font-weight: 700; }
+.rb-line.total b { font-size: 20px; }
+
+.pct-row { padding: 16px 0; border-bottom: 1px solid var(--hair-2); max-width: 720px; }
+.pct-top { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.pct-top b { font-size: 15px; color: var(--ink); }
+.pct-badge { font-size: 12px; font-weight: 700; }
+.pct-badge.hot { color: var(--neg); } .pct-badge.ok { color: var(--pos); }
+.pct-bar { position: relative; height: 3px; background: var(--hair); }
+.pct-bar i { position: absolute; top: -5px; width: 3px; height: 13px; background: var(--ink); }
+.pct-legend { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--ink-3); margin-top: 6px; }
+.pct-say { font-size: 14.5px; line-height: 1.65; color: var(--ink-2); margin-top: 10px; }
+
+.pf-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-bottom: 20px; }
+.pf-stats b { display: block; font-family: var(--sans); font-size: 24px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--ink); font-variant-numeric: tabular-nums; }
+.pf-stats span { font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); }
+.pf-rank-h { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+  color: var(--ink-3); margin-bottom: 6px; }
+.pf-line { display: grid; grid-template-columns: 22px 1fr 66px 88px; gap: 10px; align-items: center;
+  padding: 9px 0; border-bottom: 1px solid var(--hair-2); font-size: 13.5px; max-width: 720px; }
+.pf-n { color: var(--ink-3); }
+.pf-a { color: var(--ink); } .pf-a em { display: block; font-style: normal; font-size: 11px; color: var(--ink-3); }
+.pf-e { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.pf-e.worst { color: var(--neg); }
+.pf-t { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+
+.cmp-pick { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; max-width: 780px; }
+.cmp-pick select { padding: 9px 11px; font-size: 13.5px; font-family: inherit;
+  border: 1px solid var(--hair); border-radius: 5px; background: var(--paper); color: var(--ink); }
+.cmp-pick .tl-btn { margin-top: 0; }
+.cmp-wrap { overflow-x: auto; margin-top: 18px; }
+.cmp { width: 100%; border-collapse: collapse; font-size: 13px; max-width: 820px; }
+.cmp th { text-align: left; padding: 8px 14px 8px 0; font-size: 11px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3);
+  border-bottom: 2px solid var(--ink); white-space: nowrap; }
+.cmp td { padding: 9px 14px 9px 0; border-bottom: 1px solid var(--hair-2);
+  color: var(--ink); font-variant-numeric: tabular-nums; }
+.cmp td.cmp-l { color: var(--ink-3); }
+.cmp-best { font-size: 9.5px; color: var(--pos); }
+
+.tc-spon { display: flex; align-items: center; gap: 11px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--hair-2); margin-bottom: 18px; max-width: 720px; }
+.tc-spon img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; object-position: center top; }
+.tc-spon b { display: block; font-size: 12.5px; color: var(--ink); }
+.tc-spon span { font-size: 11.5px; color: var(--ink-3); }
+.tc-grid { display: grid; grid-template-columns: 300px 1fr; gap: 40px; align-items: start; max-width: 820px; }
+.tc-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 7px 0;
+  border-bottom: 1px solid var(--hair-2); }
+.tc-row label { font-size: 13px; color: var(--ink-2); }
+.tc-row input { width: 100px; padding: 6px 9px; font-size: 13.5px; font-family: var(--mono);
+  text-align: right; border: 1px solid var(--hair); border-radius: 4px; color: var(--ink); }
+.tc-out { }
+.tc-big { font-family: var(--sans); font-size: 42px; font-weight: 800; letter-spacing: -.035em;
+  color: var(--ink); line-height: 1; }
+.tc-lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--ink-3); margin: 6px 0 16px; }
+.tc-line { display: flex; justify-content: space-between; font-size: 13.5px; color: var(--ink-2);
+  padding: 7px 0; border-bottom: 1px solid var(--hair-2); }
+.tc-line b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.tc-share { font-size: 13.5px; color: var(--ink-2); line-height: 1.6; margin-top: 14px; }
+.tc-share b { color: var(--ink); }
+.tc-share i { color: var(--gold); margin-right: 6px; }
+.tc-btn { display: inline-block; margin-top: 14px; font-size: 13.5px; font-weight: 700;
+  color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(14,34,72,.25); }
+
+.ex-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- profile ---------- */
+.db-field { max-width: 460px; margin-bottom: 18px; }
+.db-field label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin-bottom: 6px; }
+.db-field input, .db-field select { width: 100%; padding: 10px 12px; font-size: 15px;
+  font-family: inherit; border: none; border-bottom: 1px solid var(--hair);
+  background: none; color: var(--ink); }
+.db-field input:focus, .db-field select:focus { outline: none; border-bottom-color: var(--accent); }
+.db-chks { display: flex; flex-wrap: wrap; gap: 8px 26px; }
+.db-chk { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--ink-2); cursor: pointer; }
+
+/* ---------- verification and misc ---------- */
+.auth-magic, .auth-or, .auth-btns { max-width: 460px; }
+
+@media (max-width: 820px) {
+  .tc-grid { grid-template-columns: 1fr; gap: 24px; }
+  .brief { font-size: 17.5px; }
+  .rail { gap: 24px; }
+  .rail b { font-size: 21px; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 24px 18px 70px; }
+  .top-in { padding: 16px 18px; }
+  .dr-row { grid-template-columns: 1fr 80px 80px; }
+  .dr-spark { display: none; }
+  .pf-line { grid-template-columns: 18px 1fr 56px 72px; }
+  .lk-over { background: rgba(255,255,255,.95); }
+  .fig { gap: 0 28px; }
+}
+
+.untest { font-size: 13.5px; line-height: 1.65; color: var(--ink-3); max-width: 640px; margin: 0 0 16px; }
+.untest a { color: var(--accent); border-bottom: 1px solid rgba(14,34,72,.25); }
+
+
+/* ============================================================
+   COLOR AND WEIGHT
+   Restrained, but not timid. Color carries meaning here: it only
+   appears where a number needs a verdict attached to it.
+   ============================================================ */
+
+/* header gets a spine of brand color */
+.top { border-bottom: none; box-shadow: inset 0 -1px 0 var(--hair); }
+.top::before { content: ''; display: block; height: 4px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 45%, var(--gold) 100%); }
+
+.who h1 { font-size: 26px; }
+.vwset { border-color: #d6dceb; }
+.vw.on { background: var(--accent); }
+.pn.on { border-bottom-color: var(--accent-2); }
+
+/* the brief sits on a tinted panel, edge to edge, with a left spine */
+.brief {
+  background: var(--accent-bg); border-left: 4px solid var(--accent-2);
+  padding: 22px 26px; max-width: none; border-radius: 0 8px 8px 0;
+  font-size: 19px; color: #253453;
+}
+.brief b { color: var(--accent); }
+.brief a { color: var(--accent-2); font-weight: 700; border-bottom: 1px solid rgba(45,95,184,.35); }
+.brief .urgent { color: var(--neg); border-bottom-color: rgba(192,52,43,.3); }
+
+/* rail figures get colour by meaning */
+.rail { border-top: none; border-bottom: 2px solid var(--hair); padding: 20px 0 18px; }
+.rail b { font-size: 30px; color: var(--accent); }
+.rail span.neg b { color: var(--neg); }
+
+/* ---------- property, with photo ---------- */
+.pr { padding: 0 0 30px; border-top: none; margin-bottom: 30px; border-bottom: 1px solid var(--hair); }
+.pr:last-child { border-bottom: none; }
+
+.pr-top { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 18px; flex-wrap: wrap; }
+.pr-shot {
+  position: relative; width: 232px; height: 152px; flex-shrink: 0;
+  border-radius: 10px; overflow: hidden; background: #dfe4ee;
+}
+.pr-shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pr-shot.noimg::after {
+  content: '\f015'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 34px; color: #b9c2d4;
+}
+.pr-shot.noimg img { display: none; }
+.pr-kind {
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em;
+  background: rgba(255,255,255,.95); color: var(--ink); padding: 4px 9px; border-radius: 4px;
+}
+.pr-kind.home { background: var(--accent); color: #fff; }
+
+.pr-id { flex: 1; min-width: 240px; }
+.pr-id h3 { font-size: 24px; margin-bottom: 5px; }
+.pr-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 11px; }
+.tg {
+  display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700;
+  padding: 5px 11px; border-radius: 5px; background: #f1f3f8; color: var(--ink-2);
+}
+.tg i { font-size: 11px; }
+.tg.yes { background: var(--pos-bg); color: var(--pos); }
+.tg.mid { background: var(--gold-bg); color: #8a6f14; }
+.tg.no  { background: #f1f3f8; color: var(--ink-3); }
+.tg.hot { background: var(--neg-bg); color: var(--neg); }
+.tg.ok  { background: var(--pos-bg); color: var(--pos); }
+
+/* the figure row becomes a banded strip, which reads faster than bare text */
+.fig {
+  background: #f7f9fc; border-radius: 8px; padding: 16px 20px;
+  gap: 0 42px; margin-bottom: 16px;
+}
+.fig.tight { background: var(--gold-bg); }
+.pr.hot .fig.tight { background: var(--neg-bg); }
+.fig dd { font-size: 21px; color: var(--accent); }
+.fig dd.neg { color: var(--neg); }
+.fig dd.pos { color: var(--pos); }
+
+.pr-line { font-size: 16.5px; }
+.pr-line b { color: var(--accent); }
+
+.pr-acts a, .pr-acts button { color: var(--accent-2); border-bottom-color: rgba(45,95,184,.28); }
+
+/* ---------- pro table ---------- */
+.pro th { border-bottom-color: var(--accent); color: var(--accent); }
+.pro td.a { color: var(--accent); }
+.pro tr.hot td { background: var(--neg-bg); }
+.pro td.neg { color: var(--neg); }
+
+/* ---------- sections ---------- */
+.sec h4 { color: var(--accent); }
+.sec h4 i { color: var(--accent-2); }
+
+/* ---------- locked ---------- */
+.lk-over { background: linear-gradient(90deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.68)); }
+.lk-t i { color: var(--gold); }
+.lk-b { background: var(--accent); }
+.lk-b:hover { background: var(--accent-2); }
+
+.db-btn { background: var(--accent); }
+.db-btn:hover { background: var(--accent-2); }
+.tl-btn { border-color: #d6dceb; color: var(--accent); }
+.tl-btn:hover { border-color: var(--accent-2); background: var(--accent-bg); }
+
+.rb-line.total { border-top-color: var(--accent); }
+.rb-line.total b { color: var(--accent); }
+.pf-stats b { color: var(--accent); }
+.tc-big { color: var(--accent); }
+.cmp th { border-bottom-color: var(--accent); color: var(--accent); }
+
+@media (max-width: 700px) {
+  .pr-shot { width: 100%; height: 180px; }
+  .brief { padding: 18px 18px; font-size: 17px; border-radius: 0; margin-left: -18px; margin-right: -18px; }
+  .fig { padding: 14px 16px; gap: 0 26px; }
+}
+
+/* ============================================================
+   SORT BAR, COMPARE, MENUS, GROUP BANDS
+   ============================================================ */
+.sortbar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 14px 0 18px; font-size: 13px; color: var(--ink-3);
+}
+.sortbar label { font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: 11px; }
+.sortbar select {
+  padding: 8px 12px; font-family: inherit; font-size: 13.5px; color: var(--ink);
+  border: 1px solid #d6dceb; border-radius: 6px; background: #fff;
+}
+.cmp-hint { margin-left: auto; font-size: 12.5px; color: var(--ink-3); }
+.cmp-count {
+  margin-left: auto; display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700; color: var(--accent);
+}
+.cmp-count button {
+  background: var(--accent); color: #fff; border: none; font-family: inherit;
+  font-size: 13px; font-weight: 700; padding: 8px 15px; border-radius: 6px; cursor: pointer;
+}
+.cmp-count button:disabled { background: #c3cbdb; cursor: not-allowed; }
+.cmp-count .clr { background: none; color: var(--ink-3); padding: 8px 4px; }
+
+/* group bands. Your home reads warmer than the watchlist. */
+.band { padding: 4px 26px 10px; border-radius: 12px; margin-bottom: 26px; }
+.band.own { background: linear-gradient(180deg, #f4f8fd 0%, #fbfcfe 100%); border: 1px solid #e0e9f6; }
+.band .grp { margin-top: 20px; }
+.band.own .grp { color: var(--accent-2); }
+.band .pr:last-child { border-bottom: none; padding-bottom: 14px; }
+
+/* title row holds the compare tick and the menu */
+.pr-titlerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.pick { display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); }
+.pick input { width: 15px; height: 15px; accent-color: var(--accent-2); cursor: pointer; }
+.pr.picked { outline: 2px solid var(--accent-2); outline-offset: 10px; border-radius: 6px; }
+
+/* photo column with its added-on caption */
+.pr-shotwrap { flex-shrink: 0; }
+.pr-when { font-size: 10.5px; color: var(--ink-3); margin-top: 6px; text-align: center; letter-spacing: .01em; }
+
+/* the factual line under the address */
+.pr-facts { font-size: 13.5px; color: var(--ink-2); margin-top: 7px; }
+.pr-facts b { color: var(--ink); font-weight: 700; }
+.pr-facts .dot { margin: 0 8px; color: var(--hair); }
+
+/* per property menu */
+.pm-wrap { position: relative; }
+.pm-btn {
+  background: none; border: 1px solid var(--hair); border-radius: 6px; width: 30px; height: 28px;
+  color: var(--ink-3); cursor: pointer; font-size: 13px;
+}
+.pm-btn:hover { border-color: var(--accent-2); color: var(--accent); }
+.pm {
+  display: none; position: absolute; right: 0; top: calc(100% + 6px); z-index: 60;
+  min-width: 214px; background: #fff; border: 1px solid var(--hair); border-radius: 9px;
+  box-shadow: 0 12px 34px rgba(16,24,43,.16); padding: 6px;
+}
+.pm.open { display: block; }
+.pm a, .pm button {
+  display: flex; align-items: center; gap: 11px; width: 100%; text-align: left;
+  background: none; border: none; font-family: inherit; font-size: 13.5px; color: var(--ink-2);
+  padding: 9px 11px; border-radius: 6px; cursor: pointer; text-decoration: none;
+}
+.pm a:hover, .pm button:hover { background: var(--accent-bg); color: var(--accent); }
+.pm i { width: 15px; text-align: center; color: var(--ink-3); }
+.pm hr { border: none; border-top: 1px solid var(--hair-2); margin: 5px 4px; }
+.pm .rm { color: var(--ink-3); }
+.pm .rm:hover { background: var(--neg-bg); color: var(--neg); }
+
+/* compare table */
+.cw { overflow-x: auto; margin: 4px 0 14px; }
+.cmp3 { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.cmp3 .ch { padding: 0 10px 14px 0; vertical-align: bottom; min-width: 150px; }
+.cmp3 .ch img { width: 100%; max-width: 170px; height: 92px; object-fit: cover; border-radius: 7px; display: block; margin-bottom: 7px; }
+.cmp3 .ch b { display: block; font-size: 13.5px; color: var(--ink); line-height: 1.25; }
+.cmp3 .ch span { font-size: 11.5px; color: var(--ink-3); }
+.cmp3 th {
+  text-align: left; padding: 10px 14px 10px 0; font-size: 12px; font-weight: 700;
+  color: var(--ink-3); border-bottom: 1px solid var(--hair-2); white-space: nowrap;
+}
+.cmp3 thead th { border-bottom: 2px solid var(--accent); }
+.cmp3 td {
+  padding: 10px 14px 10px 0; border-bottom: 1px solid var(--hair-2);
+  color: var(--ink); font-variant-numeric: tabular-nums; font-weight: 600;
+}
+.cmp3 td.win { color: var(--pos); }
+.cmp3 td.win::after { content: ' \2713'; font-size: 11px; }
+.cmp3 .na { color: var(--ink-3); font-weight: 400; font-size: 12.5px; }
+.cw-note { font-size: 12px; line-height: 1.6; color: var(--ink-3); }
+
+@media (max-width: 700px) {
+  .band { padding: 4px 16px 10px; margin-left: -16px; margin-right: -16px; border-radius: 0; }
+  .sortbar { gap: 8px; }
+  .cmp-hint, .cmp-count { margin-left: 0; width: 100%; }
+  .pr-shotwrap { width: 100%; }
+  .pr.picked { outline-offset: 4px; }
+}
+
+/* ============================================================
+   PROFILE
+   Collapsible groups. A wall of forty inputs gets abandoned, so each
+   group says what it unlocks and only one or two are open at a time.
+   ============================================================ */
+.pf { max-width: 760px; }
+
+.pf-top { display: flex; align-items: center; gap: 20px; padding-bottom: 24px;
+  border-bottom: 1px solid var(--hair); margin-bottom: 8px; }
+.pf-photo img, .pf-noimg { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; display: block; }
+.pf-noimg { background: var(--accent); color: #fff; display: flex; align-items: center;
+  justify-content: center; font-size: 30px; font-weight: 800; }
+.pf-topb { flex: 1; min-width: 0; }
+.pf-meter { height: 7px; background: var(--hair); border-radius: 99px; overflow: hidden; }
+.pf-meter i { display: block; height: 100%; border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .4s ease; }
+.pf-pct { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
+.pf-pct b { color: var(--accent); }
+
+.pg { border-bottom: 1px solid var(--hair); }
+.pg-h { display: flex; align-items: center; gap: 14px; width: 100%; padding: 18px 2px;
+  background: none; border: none; font-family: inherit; text-align: left; cursor: pointer; }
+.pg-h:hover .pg-t { color: var(--accent-2); }
+.pg-t { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.01em; }
+.pg-w { flex: 1; font-size: 13px; color: var(--ink-3); }
+.pg-h i { color: var(--ink-3); font-size: 12px; transition: transform .2s ease; }
+.pg.open .pg-h i { transform: rotate(180deg); }
+.pg-b { display: none; padding: 2px 2px 26px; }
+.pg.open .pg-b { display: block; }
+
+.pf-say { font-size: 14px; line-height: 1.65; color: var(--ink-2);
+  background: var(--accent-bg); border-left: 3px solid var(--accent-2);
+  padding: 13px 16px; border-radius: 0 6px 6px 0; margin: 0 0 20px; }
+
+.pf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px 22px; }
+.pf-f { display: flex; flex-direction: column; }
+.pf-f.wide { grid-column: 1 / -1; margin-top: 18px; }
+.pf-f label { font-size: 11.5px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin-bottom: 6px; }
+.pf-f input, .pf-f select, .pf-f textarea {
+  width: 100%; padding: 10px 0; font-size: 15.5px; font-family: inherit; color: var(--ink);
+  border: none; border-bottom: 1.5px solid var(--hair); background: none;
+}
+.pf-f textarea { border: 1.5px solid var(--hair); border-radius: 7px; padding: 11px 13px;
+  resize: vertical; line-height: 1.6; font-size: 15px; }
+.pf-f input:focus, .pf-f select:focus, .pf-f textarea:focus {
+  outline: none; border-color: var(--accent-2); }
+.pf-f em { font-style: normal; font-size: 11.5px; color: var(--ink-3); margin-top: 5px; line-height: 1.45; }
+
+.pf-money { display: flex; align-items: center; border-bottom: 1.5px solid var(--hair); }
+.pf-money:focus-within { border-color: var(--accent-2); }
+.pf-money span { color: var(--ink-3); font-size: 15.5px; padding-right: 4px; }
+.pf-money input { border-bottom: none !important; }
+
+.pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; font-size: 13.5px; padding: 8px 15px;
+  border: 1px solid var(--hair); border-radius: 99px; cursor: pointer; color: var(--ink-2);
+  transition: all .15s ease; }
+.chip input { display: none; }
+.chip:hover { border-color: var(--accent-2); }
+.chip.on { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+.pf-yns { display: flex; flex-wrap: wrap; gap: 10px 26px; margin-bottom: 20px; }
+.pf-yn { display: flex; align-items: center; gap: 9px; font-size: 14.5px; color: var(--ink-2); cursor: pointer; }
+.pf-yn input { width: 17px; height: 17px; accent-color: var(--accent-2); cursor: pointer; }
+
+.pf-pro { padding: 16px 0; border-bottom: 1px solid var(--hair-2); }
+.pf-pro:last-child { border-bottom: none; }
+.pf-pro-h { font-size: 13.5px; font-weight: 700; color: var(--ink); margin-bottom: 10px; }
+.pf-pro-h em { font-style: normal; font-weight: 400; color: var(--ink-3); margin-left: 8px; font-size: 12px; }
+.pf-pro-g { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.pf-pro-g input { padding: 9px 11px; font-size: 14px; font-family: inherit;
+  border: 1px solid var(--hair); border-radius: 6px; color: var(--ink); }
+.pf-pro-g input:focus { outline: none; border-color: var(--accent-2); }
+
+.pf-save { display: flex; align-items: center; gap: 16px; padding: 26px 0 10px; }
+#pf-saved .ok { color: var(--pos); font-size: 14px; font-weight: 600; }
+#pf-saved .bad { color: var(--neg); font-size: 13.5px; }
+.pf-priv { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; max-width: 620px; }
+.pf-priv i { color: var(--pos); margin-right: 6px; }
+
+@media (max-width: 640px) {
+  .pf-grid { grid-template-columns: 1fr; }
+  .pg-w { display: none; }
+  .pf-top { gap: 14px; }
+}
+
+/* ============================================================
+   UNIFORMITY AND APPEAL ODDS
+   ============================================================ */
+.un-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
+.un-score { flex-shrink: 0; text-align: center; padding: 14px 20px; border-radius: 10px; min-width: 110px; }
+.un-score b { display: block; font-family: var(--sans); font-size: 38px; font-weight: 800;
+  letter-spacing: -.04em; line-height: 1; }
+.un-score span { font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .07em; opacity: .75; }
+.un-score.good { background: var(--pos-bg); color: var(--pos); }
+.un-score.mid  { background: var(--gold-bg); color: #8a6f14; }
+.un-score.bad  { background: var(--neg-bg); color: var(--neg); }
+.un-say { flex: 1; min-width: 260px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+.un-say b { color: var(--ink); }
+
+.un-chart { max-width: 340px; margin-bottom: 4px; }
+.un-chart svg { width: 100%; height: auto; display: block; }
+.un-yrs { display: flex; justify-content: space-between; margin-top: 4px; }
+.un-yrs span { font-size: 10.5px; color: var(--ink-3); text-align: center; }
+.un-yrs em { display: block; font-style: normal; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+
+.ap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px; margin-bottom: 22px; }
+.ap-grid b { display: block; font-family: var(--sans); font-size: 26px; font-weight: 800;
+  letter-spacing: -.03em; color: var(--accent); line-height: 1.1; }
+.ap-grid span { font-size: 12px; color: var(--ink-3); line-height: 1.45; display: block; margin-top: 3px; }
+
+.ap-chart { max-width: 350px; margin-bottom: 20px; }
+.ap-chart svg { width: 100%; height: auto; display: block; }
+.ap-yrs { display: flex; justify-content: space-between; align-items: center;
+  font-size: 10.5px; color: var(--ink-3); margin-top: 4px; }
+.ap-yrs .up { color: var(--pos); font-weight: 700; }
+.ap-yrs .down { color: var(--neg); font-weight: 700; }
+
+.ap-ev { background: var(--accent-bg); border-left: 4px solid var(--accent-2);
+  border-radius: 0 8px 8px 0; padding: 18px 20px; max-width: 620px; }
+.ap-ev-n { font-family: var(--sans); font-size: 34px; font-weight: 800;
+  letter-spacing: -.035em; color: var(--accent); line-height: 1; }
+.ap-ev-l { font-size: 14px; line-height: 1.65; color: var(--ink-2); margin-top: 8px; }
+.ap-ev-l b { color: var(--accent); }
+.ap-ev .tl-btn { margin-top: 14px; background: var(--accent); color: #fff; border-color: var(--accent); }
+.ap-ev .tl-btn:hover { background: var(--accent-2); }
+
+@media (max-width: 640px) {
+  .un-head { gap: 14px; }
+  .un-score { min-width: 88px; padding: 12px 16px; }
+  .un-score b { font-size: 30px; }
+}
+
+/* ============================================================
+   SAAS APPLICATION SHELL
+   Polished workspace layout layered over the existing dashboard tools.
+   ============================================================ */
+
+:root {
+  --saas-bg: #f5f7fa;
+  --saas-panel: #ffffff;
+  --saas-sidebar: #0f2748;
+  --saas-sidebar-2: #14345d;
+  --saas-teal: #078486;
+  --saas-teal-dark: #056b6d;
+  --saas-blue: #173e75;
+  --saas-gold: #b89518;
+  --saas-text: #16253d;
+  --saas-muted: #6c788b;
+  --saas-border: #e1e7ee;
+  --saas-shadow: 0 10px 32px rgba(16, 41, 75, .07);
+}
+
+body {
+  background: var(--saas-bg);
+  color: var(--saas-text);
+}
+
+/* Signed-out state */
+.gate {
+  background: #fff;
+  border: 1px solid var(--saas-border);
+  border-radius: 18px;
+  box-shadow: var(--saas-shadow);
+  margin: 80px auto 120px;
+  max-width: 610px;
+  padding: 52px;
+  text-align: center;
+}
+.gate-mark {
+  align-items: center; background: var(--saas-teal); border-radius: 16px; color: #fff;
+  display: inline-flex; font-size: 25px; height: 58px; justify-content: center; margin-bottom: 20px; width: 58px;
+}
+.gate-kicker {
+  color: var(--saas-teal); display: block; font-family: var(--sans); font-size: 11px;
+  font-weight: 800; letter-spacing: .13em; margin-bottom: 10px; text-transform: uppercase;
+}
+.gate h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.12; margin-bottom: 15px; }
+.gate p { font-size: 16.5px; margin: 0 auto 28px; max-width: 480px; }
+.gate-actions { align-items: center; display: flex; flex-direction: column; gap: 14px; }
+.gate .db-btn { align-items: center; display: inline-flex; gap: 9px; justify-content: center; }
+.gate-back { color: var(--saas-blue); font-size: 14px; font-weight: 700; margin: 0; text-decoration: none; }
+.gate-back i { margin-right: 6px; }
+.gate-trust { border-top: 1px solid var(--saas-border); color: var(--saas-muted); font-size: 12.5px; margin-top: 28px; padding-top: 20px; }
+.gate-trust i { color: var(--saas-teal); margin-right: 6px; }
+
+/* Main shell */
+#db-main { background: var(--saas-bg); min-height: 100vh; }
+.db-shell { display: grid; grid-template-columns: 252px minmax(0, 1fr); min-height: 100vh; }
+.db-workspace { min-width: 0; }
+
+/* Sidebar */
+.db-sidebar {
+  align-self: start; background: linear-gradient(180deg, var(--saas-sidebar), #0c203c);
+  color: #fff; display: flex; flex-direction: column; height: 100vh; left: 0; padding: 22px 15px;
+  position: sticky; top: 0; z-index: 120;
+}
+.db-side-brand {
+  align-items: center; color: #fff; display: flex; gap: 11px; margin: 0 5px 28px; padding: 7px;
+  text-decoration: none;
+}
+.db-side-brand > span {
+  align-items: center; background: var(--saas-teal); border-radius: 11px; display: inline-flex;
+  flex: 0 0 40px; height: 40px; justify-content: center; width: 40px;
+}
+.db-side-brand > span i { font-size: 17px; }
+.db-side-brand b { display: block; font-family: var(--sans); font-size: 17px; letter-spacing: -.02em; }
+.db-side-brand small { color: #91a5bf; display: block; font-size: 10.5px; margin-top: 2px; }
+.db-side-section { border-top: 1px solid rgba(255,255,255,.09); margin-bottom: 18px; padding-top: 18px; }
+.db-side-label {
+  color: #7890ad; display: block; font-size: 10px; font-weight: 800; letter-spacing: .13em;
+  margin: 0 12px 8px; text-transform: uppercase;
+}
+.db-sidebar .pn, .db-side-link, .db-side-account button {
+  align-items: center; background: transparent; border: 0; border-radius: 8px; color: #bdc9d8;
+  cursor: pointer; display: flex; font-family: inherit; font-size: 13.5px; font-weight: 600; gap: 11px;
+  line-height: 1.2; margin: 2px 0; padding: 11px 12px; text-align: left; text-decoration: none; width: 100%;
+}
+.db-sidebar .pn { border-bottom: 0; }
+.db-sidebar .pn i, .db-side-link i, .db-side-account i { color: #7f98b5; text-align: center; width: 17px; }
+.db-sidebar .pn:hover, .db-side-link:hover, .db-side-account button:hover { background: rgba(255,255,255,.07); color: #fff; }
+.db-sidebar .pn.on { background: rgba(7,132,134,.24); border: 0; color: #fff; }
+.db-sidebar .pn.on i { color: #48c1bc; }
+.db-side-link em { background: rgba(184,149,24,.18); border-radius: 4px; color: #e1c65d; font-size: 8px; font-style: normal; margin-left: auto; padding: 3px 5px; }
+.db-side-account { border-top: 1px solid rgba(255,255,255,.09); margin-top: auto; padding-top: 14px; }
+
+/* Workspace header */
+.top {
+  background: rgba(255,255,255,.96); border-bottom: 1px solid var(--saas-border); position: sticky; top: 0;
+  z-index: 100; backdrop-filter: blur(10px);
+}
+.top-in { align-items: center; max-width: 1440px; padding: 17px 34px; }
+.who img, .db-noav, .noav { height: 44px; width: 44px; }
+.db-noav { align-items: center; background: var(--saas-teal); border-radius: 50%; color: #fff; display: flex; font-size: 17px; font-weight: 800; justify-content: center; }
+.top-eyebrow { color: var(--saas-teal) !important; display: block; font-size: 9.5px !important; font-weight: 800; letter-spacing: .11em; margin-bottom: 2px; text-transform: uppercase; }
+.who h1 { color: var(--saas-text); font-size: 21px; }
+.who > div > span:last-child { font-size: 12px; }
+.top-acts { gap: 12px; }
+.vwset { background: #eef2f6; border: 0; border-radius: 8px; margin: 0; padding: 3px; }
+.vw { align-items: center; border-radius: 6px; display: inline-flex; gap: 6px; padding: 8px 12px; }
+.vw.on { background: #fff; box-shadow: 0 2px 8px rgba(16,41,75,.1); color: var(--saas-blue); }
+.db-add {
+  align-items: center; background: var(--saas-teal); border-radius: 8px; color: #fff; display: inline-flex;
+  font-size: 13.5px; font-weight: 700; gap: 8px; padding: 10px 15px; text-decoration: none;
+}
+.db-add:hover { background: var(--saas-teal-dark); color: #fff; }
+
+/* Page content */
+.wrap { max-width: 1440px; padding: 34px 34px 90px; }
+.brief {
+  color: var(--saas-muted); font-size: 16px; line-height: 1.65; margin: 0 0 22px; max-width: 890px;
+}
+.brief b { color: var(--saas-text); }
+.rail {
+  display: grid; gap: 14px; grid-template-columns: repeat(4, minmax(150px, 1fr));
+  border: 0; margin: 0 0 28px; padding: 0;
+}
+.rail span {
+  align-items: flex-start; background: #fff; border: 1px solid var(--saas-border); border-radius: 11px;
+  box-shadow: 0 3px 14px rgba(16,41,75,.035); display: flex; flex-direction: column; gap: 3px;
+  min-height: 92px; padding: 17px 18px; text-transform: uppercase; letter-spacing: .06em;
+}
+.rail b { color: var(--saas-text); font-size: 25px; order: -1; }
+.rail span.neg { background: #fffafa; border-color: #f0d8d5; }
+
+/* Sorting and property groups */
+.sortbar {
+  align-items: center; background: #fff; border: 1px solid var(--saas-border); border-radius: 10px;
+  margin-bottom: 20px; padding: 10px 12px;
+}
+.band { background: transparent; border: 0; border-radius: 0; margin: 0 0 26px; padding: 0; }
+.band.own { background: transparent; }
+.grp { color: var(--saas-muted); margin: 30px 0 10px; }
+
+/* Property surfaces */
+.pr {
+  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.045);
+  margin: 0 0 14px; overflow: visible; padding: 20px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+.pr:hover { border-color: #cbd6e2; box-shadow: var(--saas-shadow); transform: translateY(-1px); }
+.pr:first-of-type { border-top: 1px solid var(--saas-border); }
+.pr-id h3 { color: var(--saas-text); font-size: 19px; }
+.pr-line { font-size: 14.5px; margin: 12px 0 15px; }
+.pr-shot { border-radius: 9px; overflow: hidden; }
+.pr-acts { border-top: 1px solid var(--saas-border); gap: 12px; margin-top: 17px; padding-top: 14px; }
+.pr-acts a, .pr-acts button { border: 0; border-radius: 6px; padding: 7px 9px; }
+.pr-acts a:hover, .pr-acts button:hover { background: #eef5f5; border: 0; }
+.pr-acts .prime { background: var(--saas-teal); color: #fff; padding: 8px 12px; }
+.pr-acts .prime:hover { background: var(--saas-teal-dark); color: #fff; }
+.fig { gap: 12px; }
+.fig > div { background: #f7f9fb; border-radius: 8px; min-width: 122px; padding: 10px 12px; }
+.fig dd { font-size: 17px; }
+
+/* Tool cards */
+.sec {
+  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.04);
+  margin-top: 18px; padding: 22px 24px;
+}
+.sec h4 { color: var(--saas-text); font-size: 12px; margin-bottom: 20px; }
+.sec h4 i {
+  align-items: center; background: #edf6f5; border-radius: 7px; color: var(--saas-teal); display: inline-flex;
+  height: 29px; justify-content: center; width: 29px;
+}
+.lk { background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; margin-top: 18px; overflow: hidden; }
+.lk-in { padding: 20px 24px; }
+.lk-over { background: rgba(255,255,255,.94); padding: 26px; }
+.lk-b, .db-btn { background: var(--saas-teal); border-radius: 8px; }
+.lk-b:hover, .db-btn:hover { background: var(--saas-teal-dark); }
+.tl-btn { border-radius: 7px; }
+
+/* Tables */
+.pro-wrap, .cw { background: #fff; border: 1px solid var(--saas-border); border-radius: 11px; overflow-x: auto; }
+.pro { min-width: 820px; }
+.pro th { background: #f5f7fa; border-bottom: 1px solid var(--saas-border); color: var(--saas-muted); padding: 11px 13px; }
+.pro td { padding: 11px 13px; }
+.pro th.n, .pro td.n { padding-right: 13px; }
+
+/* Empty state */
+.blank {
+  background: #fff; border: 1px dashed #c8d3df; border-radius: 14px; margin-top: 18px; max-width: none;
+  padding: 58px 34px; text-align: center;
+}
+.blank h3 { font-size: 23px; }
+.blank p { margin-left: auto; margin-right: auto; max-width: 520px; }
+
+/* Loading and recoverable error states */
+.db-loading-rail span { overflow: hidden; position: relative; }
+.db-loading-rail span::after {
+  animation: dbShimmer 1.35s infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,.78), transparent);
+  content: ''; inset: 0; position: absolute; transform: translateX(-100%);
+}
+.db-loading-panel, .db-error-panel {
+  align-items: center; background: #fff; border: 1px solid var(--saas-border); border-radius: 13px;
+  display: flex; gap: 18px; margin-top: 18px; min-height: 150px; padding: 30px;
+}
+.db-loading-panel b { color: var(--saas-text); display: block; font-size: 16px; margin-bottom: 4px; }
+.db-loading-panel span { color: var(--saas-muted); display: block; font-size: 13.5px; }
+.db-error-panel > i { color: var(--neg); font-size: 25px; }
+.db-error-panel h3 { color: var(--saas-text); font-family: var(--sans); font-size: 19px; margin: 0 0 5px; }
+.db-error-panel p { color: var(--saas-muted); font-size: 14px; margin: 0 0 15px; }
+@keyframes dbShimmer { to { transform: translateX(100%); } }
+
+/* Profile page */
+.db-page-head { align-items: end; border-bottom: 1px solid var(--saas-border); display: flex; gap: 35px; justify-content: space-between; margin-bottom: 24px; padding-bottom: 23px; }
+.db-page-head > div > span { color: var(--saas-teal); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.db-page-head h2 { color: var(--saas-text); font-family: var(--sans); font-size: 26px; letter-spacing: -.03em; margin: 4px 0 0; }
+.db-page-head p { color: var(--saas-muted); font-size: 13.5px; line-height: 1.55; margin: 0; max-width: 480px; }
+.pf { background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.04); max-width: 920px; padding: 25px; }
+.pg { border-color: var(--saas-border); }
+.pg-h { border-radius: 7px; padding-left: 8px; padding-right: 8px; }
+.pg-h:hover { background: #f7f9fb; }
+.pf-f input, .pf-f select, .pf-f textarea { background: #fff; border: 1px solid var(--saas-border); border-radius: 7px; padding: 10px 12px; }
+.pf-money { border: 1px solid var(--saas-border); border-radius: 7px; padding-left: 12px; }
+
+/* Responsive shell */
+@media (max-width: 1080px) {
+  .db-shell { grid-template-columns: 78px minmax(0, 1fr); }
+  .db-sidebar { padding-left: 10px; padding-right: 10px; }
+  .db-side-brand { justify-content: center; margin-left: 0; margin-right: 0; }
+  .db-side-brand > div, .db-side-label, .db-sidebar .pn span, .db-side-link span,
+  .db-side-link em, .db-side-account span { display: none; }
+  .db-sidebar .pn, .db-side-link, .db-side-account button { justify-content: center; padding: 12px; }
+  .db-sidebar .pn i, .db-side-link i, .db-side-account i { font-size: 16px; width: auto; }
+  .rail { grid-template-columns: repeat(2, minmax(150px, 1fr)); }
+}
+
+@media (max-width: 760px) {
+  .db-shell { display: block; }
+  .db-sidebar {
+    align-items: center; bottom: 0; box-shadow: 0 -5px 22px rgba(16,41,75,.16); flex-direction: row;
+    height: 66px; justify-content: space-around; left: 0; padding: 7px 10px; position: fixed; right: 0; top: auto; width: 100%; z-index: 1000;
+  }
+  .db-side-brand, .db-side-label, .db-side-section:nth-of-type(2), .db-side-account { display: none; }
+  .db-side-section { border: 0; display: contents; margin: 0; padding: 0; }
+  .db-sidebar .pn, .db-side-link { flex: 1 1 0; flex-direction: column; font-size: 9px; gap: 4px; justify-content: center; margin: 0; max-width: 86px; padding: 7px 4px; }
+  .db-sidebar .pn span, .db-side-link span { display: block; }
+  .db-sidebar .pn i, .db-side-link i { font-size: 16px; }
+  .db-workspace { padding-bottom: 66px; }
+  .top { position: static; }
+  .top-in { align-items: flex-start; padding: 15px 18px; }
+  .who > div > #db-email { display: none; }
+  .vwset { display: none; }
+  .db-add { font-size: 0; height: 40px; justify-content: center; padding: 0; width: 40px; }
+  .db-add i { font-size: 14px; }
+  .wrap { padding: 25px 18px 70px; }
+  .rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .rail span { min-height: 82px; padding: 14px; }
+  .rail b { font-size: 21px; }
+  .db-page-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+  .gate { border: 0; border-radius: 0; box-shadow: none; margin: 35px auto 80px; padding: 38px 24px; }
+}
+
+@media (max-width: 520px) {
+  .rail { gap: 9px; }
+  .rail span { font-size: 10px; }
+  .brief { font-size: 14.5px; }
+  .pr { padding: 15px; }
+  .fig > div { flex: 1 1 calc(50% - 8px); min-width: 0; }
+  .sec { padding: 18px 16px; }
+  .pf { border-radius: 10px; padding: 17px; }
+}
