@@ -1043,7 +1043,7 @@
       '<button class="db-btn" onclick="plCloseNote()">Close</button>');
   };
 
-  // ══════════════════════════════════════════════
+   // ══════════════════════════════════════════════
   // THE BRIEF
   // A paragraph that actually says something, instead of a row of tiles.
   // This is the first thing anyone reads, so it has to be worth reading.
@@ -1055,36 +1055,68 @@
     var c = chapter123(lead);
     var tot = rows.reduce(function (a, r) { return a + (+r.last_year_tax || 0); }, 0);
     var cases = rows.filter(function (r) { var x = chapter123(r); return x && x.hasCase; });
-
+    var plan = String((profile && profile.plan) || 'free').toLowerCase().replace(/[\s_-]/g, '');
+    var plus = plan === 'pro+' || plan === 'proplus';
+    var pro = plus || plan === 'pro';
+    var count = '<b>' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') + '</b>';
+    var taxes = tot ? ' representing <b>' + money(tot) + '</b> in annual property tax' : '';
+    var d = deadline();
     var s = [];
-    s.push('You are tracking <b>' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') + '</b>');
-    if (tot) s.push(' carrying <b>' + money(tot) + '</b> a year in property tax between them');
-    s.push('. ');
 
-    if (c) {
-      s.push('<b>' + esc(lead.address) + '</b> is assessed at ' + money(lead.assessed) + '. ');
-      s.push(c.src === 'verified'
-        ? 'Sales in ' + esc(lead.town) + ' that New Jersey verified as genuine put assessments there at ' +
-          (c.ratio * 100).toFixed(1) + '% of market, which values it around <b>' + money(rnd(c.market)) + '</b>. '
-        : 'At the published ' + (c.ratio * 100).toFixed(1) + '% ratio that implies about <b>' +
-          money(rnd(c.market)) + '</b>. ');
-      s.push(!c.testable
-        ? '<a href="/property/?address=' + encodeURIComponent(lead.address + ', ' + (lead.town || '') + ', NJ') +
-          '">Open the full record</a> to test it against comparable sales, which is what an appeal turns on.'
-        : c.hasCase
-        ? 'That puts the assessment <b class="neg">' + money(c.over) + ' above</b> the Chapter 123 limit' +
-          (c.saving ? ', worth roughly <b>' + money(c.saving) + ' a year</b> if it came down' : '') + '.'
-        : 'Against ' + c.basis + ' it sits inside the cushion the state allows, so there is no appeal to make here.');
+    if (!pro) {
+      s.push('Use this dashboard as your property-tax starting point. You are currently tracking ' + count + taxes + '. ' +
+        'Review each property card for its assessment, annual tax, estimated market value, town ratio, and basic ' +
+        'appeal signals. Open <b>Full report</b> when a number needs context, use <b>Compare</b> to place properties ' +
+        'side by side, and add homes to your watchlist as your plans change. ');
+
+      if (c) {
+        s.push('For <b>' + esc(lead.address) + '</b>, the current records indicate an assessed value of <b>' +
+          money(lead.assessed) + '</b> and an estimated market value near <b>' + money(rnd(c.market)) + '</b>. ');
+      }
+
+      s.push('<a href="/property/pro.html"><b>Upgrade to Pro</b></a> when you need Chapter 123 screening, verified ' +
+        'sales comparables, professional town comparisons, unlimited saved properties, and client-ready exports. ' +
+        '<a href="/property/pro.html"><b>Pro+</b></a> adds 1,000+ record workflows, exclusive Watchdog intelligence, ' +
+        'bulk research, and API access.');
+    } else {
+      s.push((plus ? '<b>Pro+ intelligence:</b> ' : '<b>Pro intelligence:</b> ') +
+        'Your workspace is tracking ' + count + taxes + '. ');
+
+      if (c) {
+        s.push('<b>' + esc(lead.address) + '</b> is assessed at ' + money(lead.assessed) + '. ' +
+          (c.src === 'verified'
+            ? 'New Jersey verified sales place the town at <b>' + (c.ratio * 100).toFixed(1) +
+              '% of market</b>, supporting an estimated value near <b>' + money(rnd(c.market)) + '</b>. '
+            : 'The published ratio supports an estimated value near <b>' + money(rnd(c.market)) + '</b>. ') +
+          (!c.testable
+            ? 'Open the full record and review comparable sales before drawing an appeal conclusion. '
+            : c.hasCase
+            ? 'The assessment appears <b class="neg">' + money(c.over) + ' above</b> the Chapter 123 limit' +
+              (c.saving ? ', with approximately <b>' + money(c.saving) + ' per year</b> potentially at stake. ' : '. ')
+            : 'The assessment currently falls within the permitted Chapter 123 range. '));
+      }
+
+      s.push('Use the property reports to validate parcel-level findings, the comparison tools to measure tax burden ' +
+        'across municipalities, and exports to move supported figures into client, attorney, or internal review workflows. ');
+
+      if (plus) {
+        s.push('For larger assignments, use Pro+ to screen territories and portfolios in bulk, enrich 1,000+ records, ' +
+          'surface Watchdog-only risk and opportunity signals, and deliver results through exports, scheduled workflows, ' +
+          'or the API. ');
+      } else {
+        s.push('If your work expands into municipality-wide prospecting, 1,000+ record enrichment, proprietary signals, ' +
+          'or direct system access, <a href="/property/pro.html"><b>compare Pro+</b></a>. ');
+      }
     }
 
-    var d = deadline();
     if (cases.length) {
       s.push(cases.length === 1
-        ? ' <span class="urgent">One of your properties looks over-assessed, and the filing deadline is ' +
-          d.days + ' days out.</span>'
-        : ' <span class="urgent">' + cases.length + ' of your properties look over-assessed, and the filing ' +
-          'deadline is ' + d.days + ' days out.</span>');
+        ? '<span class="urgent"> One tracked property currently shows a possible over-assessment; the next general ' +
+          'filing deadline is ' + d.days + ' days away.</span>'
+        : '<span class="urgent"> ' + cases.length + ' tracked properties currently show possible over-assessments; ' +
+          'the next general filing deadline is ' + d.days + ' days away.</span>');
     }
+
     return '<p class="brief">' + s.join('') + '</p>';
   }
 
@@ -1094,7 +1126,6 @@
     if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
     return { date: apr, days: Math.ceil((apr - now) / 864e5) };
   }
-
   // ══════════════════════════════════════════════
   // PROPERTY  ·  simple view
   // The numbers, in a sentence, then a hairline table. No card, no shadow.
