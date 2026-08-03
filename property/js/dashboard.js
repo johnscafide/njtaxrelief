@@ -1063,6 +1063,18 @@
     var d = deadline();
     var s = [];
 
+     }).catch(function (err) {
+  console.error('Dashboard loading error:', err);
+
+  el('db-line').innerHTML = '';
+  el('db-body').innerHTML =
+    '<div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
+      '<div><h3>We could not finish loading your workspace.</h3>' +
+      '<p>' + esc(err && err.message ? err.message : 'Unknown dashboard error') + '</p>' +
+      '<button class="db-btn" onclick="location.reload()">Try again</button></div>' +
+    '</div>';
+});
+
     function briefPoint(content, extraClass) {
   return '<span class="brief-point' + (extraClass ? ' ' + extraClass : '') + '">' +
     '<i class="fas fa-dog brief-point-icon" aria-hidden="true"></i>' +
