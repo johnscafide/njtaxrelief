@@ -1065,12 +1065,12 @@
 
     if (!pro) {
       s.push('Use this dashboard as your property-tax starting point. You are currently tracking ' + count + taxes + '. ' +
-        'Review each property card for its assessment, annual tax, estimated market value, town ratio, and basic ' +
-        'appeal signals. Open <b>Full report</b> when a number needs context, use <b>Compare</b> to place properties ' +
+        '<p> Review each property card for its assessment, annual tax, estimated market value, town ratio, and basic ' +
+        'appeal signals. <p>Open <b>Full report</b> when a number needs context, use <b>Compare</b> to place properties ' +
         'side by side, and add homes to your watchlist as your plans change. ');
 
       if (c) {
-        s.push('For <b>' + esc(lead.address) + '</b>, the current records indicate an assessed value of <b>' +
+        s.push('<p>For <b>' + esc(lead.address) + '</b>, the current records indicate an assessed value of <b>' +
           money(lead.assessed) + '</b> and an estimated market value near <b>' + money(rnd(c.market)) + '</b>. ');
       }
 
