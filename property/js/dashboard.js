@@ -1065,8 +1065,8 @@
 
     if (!pro) {
       s.push('Use this dashboard as your property-tax starting point. You are currently tracking ' + count + taxes + '. ' +
-        '<br> Review each property card for its assessment, annual tax, estimated market value, town ratio, and basic ' +
-        'appeal signals. <br>Open <b>Full report</b> when a number needs context, use <b>Compare</b> to place properties ' +
+        '<br><br> Review each property card for its assessment, annual tax, estimated market value, town ratio, and basic ' +
+        'appeal signals. <br><br>Open <b>Full report</b> when a number needs context, use <b>Compare</b> to place properties ' +
         'side by side, and add homes to your watchlist as your plans change. ');
 
       if (c) {
