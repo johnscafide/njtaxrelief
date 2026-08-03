@@ -2265,6 +2265,299 @@
       'strategy rather than evidence of anything wrong.</div>');
   }
 
+  // ══════════════════════════════════════════════
+  // TOWN PROFILE  ·  one query, two tools
+  //
+  // Both of the tools below need the same thing: every class 2 parcel in the
+  // municipality with its land and improvement values, plus the class mix of
+  // the whole town. Pulling that once and sharing it keeps a single request on
+  // a free public server rather than two.
+  // ══════════════════════════════════════════════
+  var townProfileCache = {};
+
+  function townProfile(r) {
+    var d = String(r.pams_pin || '').slice(0, 4);
+    var town = r.town, county = r.county;
+    if (!town) return Promise.resolve(null);
+    var key = d || (town + county);
+    if (townProfileCache[key]) return Promise.resolve(townProfileCache[key]);
+
+    var where = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
+                (county ? " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" : '') +
+                " AND NET_VALUE > 1000";
+    var p = new URLSearchParams({
+      where: where,
+      outFields: 'PROP_CLASS,LAND_VAL,IMPRVT_VAL,NET_VALUE,YR_CONSTR,CALC_ACRE,PCLBLOCK,PCLLOT',
+      returnGeometry: 'false', resultRecordCount: '2000', f: 'json'
+    });
+
+    return xfetch(NJ_PARCEL + '?' + p, 20000).then(function (x) { return x.json(); })
+      .then(function (j) {
+        if (!j.features || j.features.length < 40) return null;
+        var byClass = {}, resid = [], subject = null;
+        var blk = String(r.block || '').replace(/^0+/, '');
+        var lot = String(r.lot || '').replace(/^0+/, '');
+
+        j.features.forEach(function (f) {
+          var a = f.attributes;
+          var cls = String(a.PROP_CLASS || '').trim().toUpperCase();
+          var net = +a.NET_VALUE || 0;
+          if (!cls || net <= 0) return;
+          if (!byClass[cls]) byClass[cls] = { n: 0, value: 0 };
+          byClass[cls].n++;
+          byClass[cls].value += net;
+
+          if (cls === '2') {
+            var land = +a.LAND_VAL || 0, imp = +a.IMPRVT_VAL || 0;
+            if (land > 0 && imp > 0) {
+              var rec = { land: land, imp: imp, net: net, share: imp / (land + imp),
+                          built: +a.YR_CONSTR || 0, acres: +a.CALC_ACRE || 0 };
+              resid.push(rec);
+              if (blk && String(a.PCLBLOCK || '').replace(/^0+/, '') === blk &&
+                  String(a.PCLLOT || '').replace(/^0+/, '') === lot) subject = rec;
+            }
+          }
+        });
+
+        if (resid.length < 25) return null;
+        var out = {
+          sampled: j.features.length,
+          byClass: byClass,
+          resid: resid,
+          subject: subject,
+          medShare: median(resid.map(function (x) { return x.share; })),
+          medLand: median(resid.map(function (x) { return x.land; })),
+          medImp: median(resid.map(function (x) { return x.imp; }))
+        };
+        townProfileCache[key] = out;
+        return out;
+      }).catch(function () { return null; });
+  }
+
+  // ══════════════════════════════════════════════
+  // 3 · IMPROVEMENT RATIO ANOMALY
+  //
+  // Every assessment is two numbers: the land and the building on it. Land
+  // value is set by location and lot size and is very hard to argue with,
+  // because the lot next door is worth what your lot is worth. The improvement
+  // figure is the assessor's judgment about a structure, and judgment is what
+  // an appeal actually contests.
+  //
+  // So a property whose IMPROVEMENT share runs well above comparable homes in
+  // the same town is carrying its excess in the one component that can be
+  // argued, which makes it the most winnable kind of case. A property whose
+  // excess is all in the land is a much harder fight.
+  //
+  // This is not a market value estimate. Both sides of the comparison are
+  // assessments from the same roll, so no valuation model is involved and none
+  // of its error comes with it.
+  // ══════════════════════════════════════════════
+  function toolImprovementRatio(r) {
+    var id = 'ir-' + String(r.pams_pin || 'x').replace(/[^\w]/g, '');
+    townProfile(r).then(function (t) {
+      var host = el(id);
+      if (!host) return;
+      if (!t) {
+        host.innerHTML = '<div class="tl-note">Not enough parcel records came back for ' +
+          esc(r.town || 'this town') + ' to compare the split.</div>';
+        return;
+      }
+      if (!t.subject) {
+        host.innerHTML = '<div class="tl-note">This parcel was not in the sample returned for ' +
+          esc(r.town || 'this town') + ', so its own land and improvement split is not available. ' +
+          'Homes here are assessed at a median of <b>' + (t.medShare * 100).toFixed(1) +
+          '%</b> improvement, <b>' + ((1 - t.medShare) * 100).toFixed(1) + '%</b> land.</div>';
+        return;
+      }
+
+      var s = t.subject;
+      // peers matched on vintage and lot, because a new build on a small lot
+      // legitimately carries a higher improvement share than an old ranch on
+      // an acre, and comparing across that is meaningless
+      var peers = t.resid.filter(function (x) {
+        if (s.built && x.built && Math.abs(x.built - s.built) > 20) return false;
+        if (s.acres && x.acres && (x.acres < s.acres * 0.5 || x.acres > s.acres * 2)) return false;
+        return true;
+      });
+      if (peers.length < 15) peers = t.resid;
+      var peerShare = median(peers.map(function (x) { return x.share; }));
+      var peerImp = median(peers.map(function (x) { return x.imp; }));
+      var peerLand = median(peers.map(function (x) { return x.land; }));
+
+      var gap = s.share - peerShare;
+      var impGap = s.imp - peerImp;
+      var landGap = s.land - peerLand;
+      var high = gap > 0.06;
+      var low = gap < -0.06;
+
+      // where the excess sits, which is the actually useful part
+      var totalGap = (s.land + s.imp) - (peerLand + peerImp);
+      var fromImp = totalGap !== 0 ? impGap / totalGap : null;
+
+      host.innerHTML =
+        '<div class="ir-split">' +
+          '<div class="ir-row"><span>This property</span>' +
+            '<div class="ir-bar"><i class="land" style="width:' + ((1 - s.share) * 100).toFixed(1) + '%">' +
+              '</i><i class="imp" style="width:' + (s.share * 100).toFixed(1) + '%"></i></div>' +
+            '<b>' + (s.share * 100).toFixed(1) + '%</b></div>' +
+          '<div class="ir-row"><span>' + peers.length + ' comparable homes</span>' +
+            '<div class="ir-bar"><i class="land" style="width:' + ((1 - peerShare) * 100).toFixed(1) + '%">' +
+              '</i><i class="imp" style="width:' + (peerShare * 100).toFixed(1) + '%"></i></div>' +
+            '<b>' + (peerShare * 100).toFixed(1) + '%</b></div>' +
+          '<div class="ir-key"><span class="k land"></span>land' +
+            '<span class="k imp"></span>building</div>' +
+        '</div>' +
+
+        '<dl class="fig tight">' +
+          f('Land', money(s.land), 'peers ' + money(peerLand)) +
+          f('Building', money(s.imp), 'peers ' + money(peerImp), high ? 'neg' : '') +
+          f('Building share', (s.share * 100).toFixed(1) + '%',
+            (gap >= 0 ? '+' : '') + (gap * 100).toFixed(1) + ' points vs peers',
+            high ? 'neg' : low ? 'pos' : '') +
+        '</dl>' +
+
+        (high
+          ? '<div class="ir-say bad"><i class="fas fa-hammer"></i><div>' +
+            '<b>The excess is in the building, which is the arguable half.</b> This property carries a ' +
+            'building share <b>' + (gap * 100).toFixed(1) + ' points</b> above comparable homes here' +
+            (landGap < 0 && impGap > 0
+              ? ', and its land is assessed <b>below</b> peers while its building sits <b>' +
+                money(Math.abs(impGap)) + '</b> above. Every dollar of the difference is in the structure'
+              : fromImp != null && fromImp > 0.6 && fromImp <= 1 && totalGap > 0
+              ? ', and <b>' + Math.round(fromImp * 100) + '%</b> of its total excess over peers sits in the ' +
+                'improvement figure rather than the land' : '') +
+            '. Land value is set by location and lot size and is very hard to contest, because the lot next ' +
+            'door is worth what yours is. The improvement figure is a judgment about a structure, and judgment ' +
+            'is what an appeal contests. Condition, an unfinished basement counted as finished, or square ' +
+            'footage recorded wrong all show up here.</div></div>'
+          : low
+          ? '<div class="ir-say good"><i class="fas fa-circle-check"></i><div>' +
+            'The building carries a <b>smaller</b> share here than in comparable homes, ' +
+            (gap * 100).toFixed(1) + ' points below. Whatever is happening with this assessment, the structure ' +
+            'is not where it is concentrated.</div></div>'
+          : '<div class="ir-say"><i class="fas fa-scale-balanced"></i><div>' +
+            'The land and building split tracks comparable homes closely, within ' +
+            Math.abs(gap * 100).toFixed(1) + ' points. Nothing in the composition of this assessment stands ' +
+            'out either way.</div></div>');
+    });
+
+    return toolCard('Land and building split', 'fa-layer-group',
+      '<p class="tl-p">Every assessment is two numbers. <b>Land</b> is set by location and lot size, and it is ' +
+      'very hard to argue with. <b>The building</b> is the assessor\u2019s judgment about a structure, and ' +
+      'judgment is what an appeal actually contests. Where a property carries its excess decides how winnable ' +
+      'a case is.</p>' +
+      '<div id="' + id + '"><div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
+      '<div>Comparing against parcels in ' + esc(r.town || 'this town') + '...</div></div></div>' +
+      '<div class="tl-fine">Both figures come from the same municipal assessment roll, so this compares like ' +
+      'with like and involves no market value estimate. Peers are matched on vintage within twenty years and ' +
+      'lot size within a factor of two, because a new build on a small lot legitimately carries a higher ' +
+      'building share than an old house on an acre. A high share is a reason to look, not proof of anything.</div>');
+  }
+
+  // ══════════════════════════════════════════════
+  // 11 · CLASS MIX
+  //
+  // Who actually pays for a town. A municipality with a thin commercial base
+  // funds its budget almost entirely from houses, and that is a structural
+  // condition rather than a bad year. It also predicts the future: a town at
+  // 95% residential has nowhere to turn when costs rise except the homeowners.
+  // ══════════════════════════════════════════════
+  var CLASS_NAMES = {
+    '1':  ['Vacant land', 'vac'],
+    '2':  ['Residential', 'res'],
+    '3A': ['Farm, regular', 'farm'],
+    '3B': ['Farm, qualified', 'farm'],
+    '4A': ['Commercial', 'com'],
+    '4B': ['Industrial', 'ind'],
+    '4C': ['Apartments', 'apt'],
+    '15A':['Public property', 'exempt'],
+    '15B':['Exempt', 'exempt'],
+    '15C':['Cemetery', 'exempt'],
+    '15D':['Exempt', 'exempt'],
+    '15E':['Exempt', 'exempt'],
+    '15F':['Exempt', 'exempt'],
+    '5A': ['Railroad', 'other'],
+    '5B': ['Railroad', 'other'],
+    '6A': ['Telephone', 'other']
+  };
+
+  function toolClassMix(r) {
+    var id = 'cm-' + String(r.pams_pin || 'x').replace(/[^\w]/g, '');
+    townProfile(r).then(function (t) {
+      var host = el(id);
+      if (!host) return;
+      if (!t) { host.innerHTML = '<div class="tl-note">Not enough parcel records came back to read the mix.</div>'; return; }
+
+      // taxable classes only; exempt parcels pay nothing and belong to a
+      // different question, which is tool 10
+      var taxable = {};
+      var totalVal = 0;
+      Object.keys(t.byClass).forEach(function (c) {
+        if (c.charAt(0) === '1' && c.length > 1) return;      // 15A onward, exempt
+        if (c === '5A' || c === '5B') return;
+        var nm = CLASS_NAMES[c];
+        if (!nm) return;
+        var k = nm[0];
+        if (!taxable[k]) taxable[k] = { value: 0, n: 0, cls: nm[1] };
+        taxable[k].value += t.byClass[c].value;
+        taxable[k].n += t.byClass[c].n;
+        totalVal += t.byClass[c].value;
+      });
+      if (!totalVal) { host.innerHTML = ''; return; }
+
+      var rows = Object.keys(taxable).map(function (k) {
+        return { name: k, value: taxable[k].value, n: taxable[k].n,
+                 cls: taxable[k].cls, share: taxable[k].value / totalVal };
+      }).sort(function (a, b) { return b.value - a.value; });
+
+      var res = rows.filter(function (x) { return x.name === 'Residential'; })[0];
+      var resShare = res ? res.share : 0;
+      var biz = rows.filter(function (x) {
+        return x.name === 'Commercial' || x.name === 'Industrial' || x.name === 'Apartments';
+      }).reduce(function (a, x) { return a + x.share; }, 0);
+
+      var verdict = resShare >= 0.90
+        ? ['bad', 'Almost entirely residential',
+           'Houses carry nearly the whole budget here. When municipal costs rise there is no commercial base ' +
+           'to absorb any of it, so the increase lands on homeowners more or less in full. This is a ' +
+           'structural condition, not a bad year.']
+        : resShare >= 0.75
+        ? ['mid', 'Mostly residential',
+           'Homeowners carry most of the burden, with some commercial base to share it. That is typical of a ' +
+           'New Jersey suburb and it is why suburban bills climb steadily.']
+        : ['good', 'Meaningfully diversified',
+           'A real share of this town\u2019s base is business property, which absorbs part of every increase ' +
+           'before it reaches a homeowner. Towns like this hold their rates down more easily.'];
+
+      host.innerHTML =
+        '<div class="cm-bar">' + rows.map(function (x) {
+          return '<i class="' + x.cls + '" style="width:' + (x.share * 100).toFixed(2) + '%" ' +
+            'title="' + esc(x.name) + '  ' + (x.share * 100).toFixed(1) + '%"></i>';
+        }).join('') + '</div>' +
+
+        '<table class="cm-t"><tbody>' + rows.map(function (x) {
+          return '<tr><td><span class="k ' + x.cls + '"></span>' + esc(x.name) + '</td>' +
+            '<td class="n">' + (x.share * 100).toFixed(1) + '%</td>' +
+            '<td class="n">' + money(x.value) + '</td>' +
+            '<td class="n q">' + x.n.toLocaleString() + ' parcels</td></tr>';
+        }).join('') + '</tbody></table>' +
+
+        '<div class="cm-say ' + verdict[0] + '"><b>' + verdict[1] + '.</b> ' + verdict[2] +
+          ' Business property is <b>' + (biz * 100).toFixed(1) + '%</b> of the taxable base here.</div>';
+    });
+
+    return toolCard('Who pays for this town', 'fa-chart-pie',
+      '<p class="tl-p">A municipal budget is divided across everything on the tax roll. The mix decides how ' +
+      'much of every increase reaches a homeowner, and it barely changes from year to year, which makes it one ' +
+      'of the more reliable things you can know about a town.</p>' +
+      '<div id="' + id + '"><div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
+      '<div>Reading the tax roll for ' + esc(r.town || 'this town') + '...</div></div></div>' +
+      '<div class="tl-fine">Measured from the statewide parcel layer, taxable classes only. Fully exempt ' +
+      'property, meaning churches, schools and government land, is excluded here and is a separate question. ' +
+      'Large municipalities are sampled rather than counted in full, so treat the shares as close rather than ' +
+      'exact.</div>');
+  }
+
   // ── shared card shell ──
   // Named toolCard, not card. The dashboard already has a card(r) that renders
   // saved property tiles, and shadowing it silently replaced every property
