@@ -2562,6 +2562,7 @@
   window.hmSwitch = function (pin) {
     history.replaceState({}, '', '/property/home.html?pin=' + encodeURIComponent(pin));
     current = rows.filter(function (r) { return r.pams_pin === pin; })[0] || rows[0];
+    OPEN = {};
     paintReport();
   };
 
@@ -2664,19 +2665,12 @@
           (s && s.medPrice ? hf('Median sale', money(s.medPrice), 'in this town') : '') +
         '</div>' +
 
-        (u ? toolUniformityFor(r) : '') +
-        (a ? toolAppealOddsFor(r) : '') +
-        (c && c.testable ? ch123Block(r, c) : untestableBlock(r)) +
-        toolReassessRisk(r) +
-        toolRevalRadar(r) +
-        toolSeniorBenefits(r) +
-        toolBuyerCost(r) +
-        toolAbatement(r) +
-        toolImprovementRatio(r) +
-        toolClassMix(r) +
-        toolAppealPacket(r) +
-        toolRelocation(r) +
-        toolInvestorScreen() +
+        scorecard(r) +
+
+        '<div class="hm-secbar"><h2>The detail</h2>' +
+          '<button id="hm-all" onclick="hmExpandAll()"><i class="fas fa-expand"></i> Expand all</button></div>' +
+
+        SECTIONS.map(function (sec) { return sectionShell(sec, r); }).join('') +
 
         '<div class="hm-acts">' +
           '<a class="db-btn" href="/property/?address=' + encodeURIComponent(loc) + '">Open the full property record</a>' +
@@ -2685,6 +2679,201 @@
       '</div>';
 
     initTips();
+  }
+
+
+  // ══════════════════════════════════════════════
+  // PAGE STRUCTURE
+  //
+  // The previous version stacked fourteen tools down one column. Everything was
+  // correct and almost nobody would have read past the third. A tax report has
+  // two readers who want opposite things: a homeowner wants one sentence and a
+  // number, a professional wants every figure at once.
+  //
+  // So the page opens with a scorecard, then collapses everything. Each closed
+  // header carries a one line summary, so the whole page can be scanned without
+  // opening anything. Each opened section leads with the plain reading and
+  // carries a separate note on why a professional would care. Content is built
+  // on open rather than on load, which keeps the first paint fast.
+  // ══════════════════════════════════════════════
+  var OPEN = {};
+
+  var SECTIONS = [
+    {
+      k: 'fair', icon: 'fa-scale-balanced', title: 'Is this assessment fair?',
+      pro: 'The Chapter 123 test verbatim, then where the excess sits. Land value is close to unarguable; ' +
+           'the improvement figure is a judgment about a structure, and judgment is what an appeal contests.',
+      build: function (r) {
+        var c = chapter123(r);
+        return (c && c.testable ? ch123Block(r, c) : untestableBlock(r)) + toolImprovementRatio(r);
+      },
+      sum: function (r) {
+        var c = chapter123(r);
+        if (!c || !c.testable) return 'Needs comparable sales to test';
+        return c.hasCase ? money(c.over) + ' above the limit' : 'Within the cushion the state allows';
+      },
+      tone: function (r) {
+        var c = chapter123(r);
+        return (c && c.testable && c.hasCase) ? 'bad' : (c && c.testable) ? 'good' : '';
+      }
+    },
+    {
+      k: 'kept', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
+      pro: 'For a buyer this is undisclosed exposure, because the listing shows the seller\u2019s bill. ' +
+           'For a seller it is worth knowing before an offer arrives.',
+      build: function (r) { return toolReassessRisk(r); }
+    },
+    {
+      k: 'reval', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
+      pro: 'A reset redistributes burden across a whole town at once. Knowing which side a client lands on ' +
+           'beforehand is the difference between a call they thank you for and one they do not.',
+      build: function (r) { return toolRevalRadar(r); },
+      sum: function (r) {
+        var v = revalRadar(r);
+        return v ? 'Pressure ' + v.score + ' of 100' : '';
+      }
+    },
+    {
+      k: 'town', icon: 'fa-ruler-combined', title: 'How this town assesses',
+      pro: 'A high coefficient of deviation means the roll itself is uneven, which strengthens every appeal ' +
+           'in the municipality regardless of the individual property.',
+      build: function (r) {
+        var u = uniFor(r);
+        return (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
+      },
+      sum: function (r) {
+        var u = uniFor(r);
+        return u ? 'Uniformity ' + u.score + ' of 100, ' + u.band : '';
+      }
+    },
+    {
+      k: 'file', icon: 'fa-gavel', title: 'What happens if you file',
+      pro: 'Ten years of county board outcomes, then a printable packet with the comparables and the ' +
+           'statutory calculation already assembled.',
+      build: function (r) {
+        var a = appealFor(r);
+        return (a ? appealBody(r, a) : '') + toolAppealPacket(r);
+      },
+      sum: function (r) {
+        var a = appealFor(r);
+        return a ? a.latest.win_rate_filed + '% of appeals here won a reduction' : '';
+      }
+    },
+    {
+      k: 'owed', icon: 'fa-hand-holding-dollar', title: 'Money you may be owed',
+      pro: 'ANCHOR, Stay NJ and the Senior Freeze interact in a way most people get wrong. Stay NJ is a ' +
+           'top-off rather than an addition, and the Freeze base year is the item that actually compounds.',
+      build: function (r) { return toolSeniorBenefits(r); }
+    },
+    {
+      k: 'buy', icon: 'fa-key', title: 'What a buyer would pay',
+      pro: 'Running the buyer\u2019s number before an offer is written avoids the conversation nobody wants ' +
+           'after closing.',
+      build: function (r) { return toolBuyerCost(r); }
+    },
+    {
+      k: 'compare', icon: 'fa-route', title: 'Compare against other towns',
+      pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
+           'relocation conversation and for ranking a portfolio.',
+      build: function (r) { return toolRelocation(r) + toolInvestorScreen(); }
+    }
+  ];
+
+  function sectionShell(sec, r) {
+    var sum = '', tone = '';
+    try { sum = sec.sum ? (sec.sum(r) || '') : ''; } catch (e) {}
+    try { tone = sec.tone ? (sec.tone(r) || '') : ''; } catch (e) {}
+    return '<section class="sec2 ' + tone + '" id="sec-' + sec.k + '">' +
+      '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
+        '<i class="fas ' + sec.icon + ' sec2-i"></i>' +
+        '<span class="sec2-t">' + sec.title + '</span>' +
+        (sum ? '<span class="sec2-s">' + sum + '</span>' : '') +
+        '<i class="fas fa-chevron-down sec2-c"></i>' +
+      '</button>' +
+      '<div class="sec2-b">' +
+        '<div class="sec2-pro"><b>Why a professional cares</b><span>' + sec.pro + '</span></div>' +
+        '<div id="secb-' + sec.k + '"></div>' +
+      '</div></section>';
+  }
+
+  window.hmToggle = function (k) {
+    OPEN[k] = !OPEN[k];
+    var e = el('sec-' + k);
+    if (!e) return;
+    e.classList.toggle('open', OPEN[k]);
+    if (OPEN[k] && !e.getAttribute('data-built')) {
+      var sec = SECTIONS.filter(function (x) { return x.k === k; })[0];
+      var host = el('secb-' + k);
+      if (sec && host && current) {
+        var html = '';
+        try { html = sec.build(current) || ''; }
+        catch (err) { html = '<div class="tl-note">This section could not be built for this property.</div>'; }
+        host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
+        e.setAttribute('data-built', '1');
+        initTips();
+        if (el('tc-total')) window.dbCost();
+      }
+    }
+  };
+
+  window.hmOpen = function (k) {
+    if (!OPEN[k]) window.hmToggle(k);
+    var e = el('sec-' + k);
+    if (e && e.scrollIntoView) e.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  window.hmExpandAll = function () {
+    SECTIONS.forEach(function (x) { if (!OPEN[x.k]) window.hmToggle(x.k); });
+    var b = el('hm-all');
+    if (b) { b.innerHTML = '<i class="fas fa-compress"></i> Collapse all';
+             b.setAttribute('onclick', 'hmCollapseAll()'); }
+  };
+  window.hmCollapseAll = function () {
+    SECTIONS.forEach(function (x) { if (OPEN[x.k]) window.hmToggle(x.k); });
+    var b = el('hm-all');
+    if (b) { b.innerHTML = '<i class="fas fa-expand"></i> Expand all';
+             b.setAttribute('onclick', 'hmExpandAll()'); }
+  };
+
+  // ── the scorecard: four numbers, each with a verdict you can act on ──
+  function scorecard(r) {
+    var c = chapter123(r), u = uniFor(r), a = appealFor(r), s = sr1aFor(r);
+    var cards = [];
+
+    if (c) {
+      var over = c.testable && c.hasCase;
+      cards.push({ k: 'fair',
+        n: c.testable ? (over ? money(c.over) : 'None') : '\u2014',
+        l: 'Over the Chapter 123 limit',
+        v: !c.testable ? 'Needs comparable sales to test'
+           : over ? (c.saving ? 'Worth about ' + money(c.saving) + ' a year' : 'There is a case here')
+           : 'No appeal to make on these numbers',
+        tone: over ? 'bad' : c.testable ? 'good' : '' });
+    }
+    if (u) {
+      cards.push({ k: 'town', n: u.score, l: 'Assessment uniformity, of 100',
+        v: u.percentile >= 50 ? 'Fairer than ' + u.percentile + '% of New Jersey'
+                              : 'Less consistent than ' + (100 - u.percentile) + '% of New Jersey',
+        tone: u.score >= 60 ? 'good' : u.score < 35 ? 'bad' : 'mid' });
+    }
+    if (a) {
+      cards.push({ k: 'file', n: a.latest.win_rate_filed + '%', l: 'Appeals here that won',
+        v: titleCase(a.county) + ' County, ' + a.latest_year,
+        tone: a.latest.win_rate_filed >= 50 ? 'good' : a.latest.win_rate_filed < 35 ? 'bad' : 'mid' });
+    }
+    if (c) {
+      cards.push({ k: 'kept', n: money(Math.round(c.market / 1000) * 1000), l: 'Estimated market value',
+        v: c.src === 'verified' ? 'From ' + c.n + ' verified sales in this town'
+                                : 'From the published town ratio', tone: '' });
+    }
+    if (!cards.length) return '';
+
+    return '<div class="sc-cards">' + cards.map(function (x) {
+      return '<button class="sc-c ' + (x.tone || '') + '" onclick="hmOpen(\'' + x.k + '\')">' +
+        '<b>' + x.n + '</b><span class="sc-l">' + x.l + '</span>' +
+        '<span class="sc-v">' + x.v + '</span>' +
+        '<span class="sc-go">See why <i class="fas fa-arrow-down"></i></span></button>';
+    }).join('') + '</div>';
   }
 
   function f(k, v, note, cls) {
