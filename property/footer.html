@@ -1,458 +1,824 @@
-<!-- WATCHDOG FOOTER: HTML + CSS -->
+<!-- ============================================================
+     WATCHDOG FOOTER
+     Self-contained HTML and CSS
+     ============================================================ -->
+
 <style>
-    .watchdog-footer,
-    .watchdog-footer * {
+    /*
+     * Everything is scoped beneath #wd-property-footer.
+     * This prevents /styles.css from changing the footer layout.
+     */
+
+    #wd-property-footer {
+        --wdf-teal: #078486;
+        --wdf-teal-dark: #056b6d;
+        --wdf-navy: #10294b;
+        --wdf-heading: #142c31;
+        --wdf-text: #5c686b;
+        --wdf-border: #dde5e5;
+        --wdf-soft-bg: #f3f7f6;
+        --wdf-background: #fbfcfb;
+
+        background: var(--wdf-background);
+        border: 0;
+        border-top: 1px solid var(--wdf-border);
+        border-radius: 0;
+        box-shadow: none;
+        clear: both;
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1.5;
+        margin: 0;
+        max-width: none;
+        min-height: 0;
+        overflow: hidden;
+        padding: 58px 30px 25px;
+        position: relative;
+        text-align: left;
+        text-transform: none;
+        width: 100%;
+    }
+
+    #wd-property-footer,
+    #wd-property-footer * {
         box-sizing: border-box;
     }
 
-    .watchdog-footer {
-        --wd-teal: #087b7d;
-        --wd-dark-teal: #055e60;
-        --wd-navy: #142d32;
-        --wd-text: #5e686a;
-        --wd-border: #dfe6e6;
-        --wd-bg: #fafbfa;
-
-        background: var(--wd-bg);
-        border-top: 1px solid var(--wd-border);
-        color: var(--wd-text);
-        font-family: inherit;
-        padding: 56px 28px 28px;
-    }
-
-    .watchdog-footer-inner {
+    #wd-property-footer .wdf-inner {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
         margin: 0 auto;
         max-width: 1680px;
+        padding: 0;
+        width: 100%;
     }
 
-    .watchdog-footer-grid {
+    /*
+     * Main four-column layout
+     */
+    #wd-property-footer .wdf-grid {
+        align-items: start;
+        background: transparent;
         display: grid;
+        gap: 52px;
         grid-template-columns:
-            minmax(170px, 0.8fr)
+            minmax(165px, 0.78fr)
             minmax(190px, 0.9fr)
             minmax(190px, 0.9fr)
-            minmax(430px, 2.25fr);
-        gap: 48px;
+            minmax(430px, 2.2fr);
+        margin: 0;
+        padding: 0;
+        width: 100%;
     }
 
-    /* Column headings */
-    .watchdog-footer-heading {
-        color: var(--wd-text);
-        font-size: 21px;
-        font-weight: 500;
-        line-height: 1.3;
-        margin: 0 0 20px;
-    }
-
-    .watchdog-footer-subheading {
-        color: var(--wd-text);
-        font-size: 20px;
-        font-weight: 500;
-        line-height: 1.3;
-        margin: 32px 0 18px;
-    }
-
-    /* Footer navigation */
-    .watchdog-footer-nav {
+    /*
+     * Navigation columns
+     */
+    #wd-property-footer .wdf-column {
+        align-items: flex-start;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        float: none;
+        height: auto;
+        margin: 0;
+        min-height: 0;
+        padding: 0;
+        position: static;
+        width: auto;
     }
 
-    .watchdog-footer-nav a {
-        color: #111;
+    #wd-property-footer .wdf-heading {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.25;
+        margin: 0 0 20px;
+        padding: 0;
+        text-align: left;
+        text-transform: none;
+    }
+
+    #wd-property-footer .wdf-subheading {
+        margin-top: 28px;
+    }
+
+    #wd-property-footer .wdf-link {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        color: #101515;
+        display: inline-flex;
+        font-family: "Source Sans 3", Arial, sans-serif;
         font-size: 15px;
+        font-style: normal;
         font-weight: 700;
+        gap: 9px;
+        justify-content: flex-start;
+        letter-spacing: 0;
         line-height: 1.4;
-        margin-bottom: 17px;
+        margin: 0 0 16px;
+        max-width: 100%;
+        padding: 0;
+        position: static;
+        text-align: left;
         text-decoration: none;
-        transition: color 0.2s ease;
+        text-transform: none;
+        transform: none;
+        transition: color 0.18s ease;
+        width: auto;
     }
 
-    .watchdog-footer-nav a:hover,
-    .watchdog-footer-nav a:focus-visible {
-        color: var(--wd-teal);
+    #wd-property-footer .wdf-link:hover,
+    #wd-property-footer .wdf-link:focus-visible {
+        background: transparent;
+        color: var(--wdf-teal);
         text-decoration: underline;
         text-underline-offset: 4px;
+        transform: none;
     }
 
-    .watchdog-footer-featured {
-        color: var(--wd-teal) !important;
+    #wd-property-footer .wdf-featured {
+        color: var(--wdf-teal);
     }
 
-    /* Contact block */
-    .watchdog-contact-line {
-        align-items: center;
-        display: flex;
-        gap: 9px;
-    }
-
-    .watchdog-contact-line i {
-        color: var(--wd-teal);
+    #wd-property-footer .wdf-link i {
+        color: var(--wdf-teal);
+        flex: 0 0 18px;
         font-size: 14px;
+        text-align: center;
         width: 18px;
     }
 
-    /* Social links */
-    .watchdog-social {
+    /*
+     * Social icons
+     */
+    #wd-property-footer .wdf-social {
+        align-items: center;
+        background: transparent;
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
         gap: 10px;
-        margin-top: 3px;
+        margin: 4px 0 0;
+        padding: 0;
     }
 
-    .watchdog-social a {
+    #wd-property-footer .wdf-social-link {
         align-items: center;
-        border: 1px solid var(--wd-border);
+        background: transparent;
+        border: 1px solid #b8c8c8;
         border-radius: 50%;
-        color: var(--wd-teal);
-        display: flex;
+        box-shadow: none;
+        color: var(--wdf-teal);
+        display: inline-flex;
+        flex: 0 0 38px;
         height: 38px;
         justify-content: center;
         margin: 0;
+        padding: 0;
+        text-decoration: none;
+        transform: none;
         transition:
-            background-color 0.2s ease,
-            border-color 0.2s ease,
-            color 0.2s ease;
+            background-color 0.18s ease,
+            border-color 0.18s ease,
+            color 0.18s ease;
         width: 38px;
     }
 
-    .watchdog-social a:hover,
-    .watchdog-social a:focus-visible {
-        background: var(--wd-teal);
-        border-color: var(--wd-teal);
+    #wd-property-footer .wdf-social-link:hover,
+    #wd-property-footer .wdf-social-link:focus-visible {
+        background: var(--wdf-teal);
+        border-color: var(--wdf-teal);
         color: #fff;
         text-decoration: none;
+        transform: none;
     }
 
-    /* Main branding and legal area */
-    .watchdog-brand {
-        border-left: 1px solid var(--wd-border);
-        padding-left: 48px;
+    #wd-property-footer .wdf-social-link i {
+        color: inherit;
+        font-size: 15px;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        width: auto;
     }
 
-    .watchdog-logo {
+    /*
+     * Branding and legal column
+     */
+    #wd-property-footer .wdf-brand {
+        background: transparent;
+        border: 0;
+        border-left: 1px solid var(--wdf-border);
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        min-width: 0;
+        padding: 0 0 0 52px;
+    }
+
+    #wd-property-footer .wdf-logo {
         align-items: center;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
         display: inline-flex;
-        gap: 13px;
-        margin-bottom: 22px;
+        gap: 14px;
+        margin: 0 0 24px;
+        padding: 0;
         text-decoration: none;
+        transform: none;
     }
 
-    .watchdog-logo-icon {
+    #wd-property-footer .wdf-logo:hover {
+        background: transparent;
+        text-decoration: none;
+        transform: none;
+    }
+
+    #wd-property-footer .wdf-logo-icon {
         align-items: center;
-        background: var(--wd-teal);
+        background: var(--wdf-teal);
+        border: 0;
         border-radius: 50%;
         color: #fff;
-        display: flex;
-        flex: 0 0 50px;
-        font-size: 21px;
-        height: 50px;
+        display: inline-flex;
+        flex: 0 0 52px;
+        height: 52px;
         justify-content: center;
-        width: 50px;
+        margin: 0;
+        padding: 0;
+        width: 52px;
     }
 
-    .watchdog-logo-text {
+    #wd-property-footer .wdf-logo-icon i {
+        color: #fff;
+        font-size: 23px;
+        margin: 0;
+    }
+
+    #wd-property-footer .wdf-logo-copy {
+        background: transparent;
         display: flex;
         flex-direction: column;
+        margin: 0;
+        padding: 0;
     }
 
-    .watchdog-logo-name {
-        color: var(--wd-navy);
+    #wd-property-footer .wdf-logo-name {
+        color: #101515;
+        display: block;
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
         font-size: 23px;
-        font-weight: 900;
-        letter-spacing: -0.6px;
-        line-height: 1;
+        font-weight: 800;
+        letter-spacing: -0.7px;
+        line-height: 1.05;
+        margin: 0;
+        padding: 0;
         text-transform: uppercase;
     }
 
-    .watchdog-logo-name span {
-        color: var(--wd-teal);
+    #wd-property-footer .wdf-logo-name span {
+        color: var(--wdf-teal);
     }
 
-    .watchdog-logo-tagline {
-        color: var(--wd-text);
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 1.3px;
-        margin-top: 6px;
+    #wd-property-footer .wdf-tagline {
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.35px;
+        line-height: 1.4;
+        margin: 6px 0 0;
+        padding: 0;
         text-transform: uppercase;
     }
 
-    .watchdog-brand-description {
-        font-size: 14px;
+    #wd-property-footer .wdf-description {
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
         line-height: 1.65;
-        margin: 0 0 20px;
-        max-width: 700px;
+        margin: 0 0 23px;
+        max-width: 760px;
+        padding: 0;
     }
 
-    .watchdog-legal {
+    #wd-property-footer .wdf-legal {
+        background: transparent;
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
         font-size: 12.5px;
+        font-weight: 400;
         line-height: 1.55;
+        margin: 0;
+        padding: 0;
     }
 
-    .watchdog-legal p {
+    #wd-property-footer .wdf-legal p {
+        background: transparent;
+        color: var(--wdf-text);
+        font-family: inherit;
+        font-size: 12.5px;
+        font-weight: 400;
+        line-height: 1.55;
         margin: 0 0 12px;
+        padding: 0;
     }
 
-    .watchdog-legal strong {
-        color: var(--wd-navy);
-    }
-
-    .watchdog-legal a {
-        color: var(--wd-teal);
+    #wd-property-footer .wdf-legal strong {
+        color: var(--wdf-heading);
         font-weight: 700;
+    }
+
+    #wd-property-footer .wdf-inline-link {
+        background: transparent;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: inherit;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
         text-decoration: none;
     }
 
-    .watchdog-legal a:hover,
-    .watchdog-legal a:focus-visible {
-        color: var(--wd-dark-teal);
+    #wd-property-footer .wdf-inline-link:hover,
+    #wd-property-footer .wdf-inline-link:focus-visible {
+        color: var(--wdf-teal-dark);
         text-decoration: underline;
         text-underline-offset: 3px;
     }
 
-    .watchdog-legal-links {
+    /*
+     * Legal links
+     */
+    #wd-property-footer .wdf-legal-links {
+        align-items: center;
+        background: transparent;
         display: flex;
         flex-wrap: wrap;
         gap: 10px 22px;
-        margin: 18px 0;
+        margin: 18px 0 0;
+        padding: 0;
     }
 
-    .watchdog-agent-box {
-        align-items: flex-start;
-        background: #f1f6f5;
-        border-left: 4px solid var(--wd-teal);
-        border-radius: 4px;
-        display: flex;
-        gap: 13px;
-        margin-top: 20px;
-        padding: 15px 17px;
-    }
-
-    .watchdog-agent-box > i {
-        color: var(--wd-teal);
-        font-size: 24px;
-        margin-top: 3px;
-    }
-
-    .watchdog-agent-box p {
-        color: var(--wd-navy);
-        font-size: 12px;
+    #wd-property-footer .wdf-legal-link {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: 12.5px;
         font-weight: 700;
-        line-height: 1.5;
         margin: 0;
-        text-transform: uppercase;
-    }
-
-    /* Lower copyright bar */
-    .watchdog-footer-bottom {
-        align-items: center;
-        border-top: 1px solid var(--wd-border);
-        display: flex;
-        justify-content: space-between;
-        gap: 25px;
-        margin-top: 42px;
-        padding-top: 22px;
-    }
-
-    .watchdog-footer-bottom p {
-        font-size: 12px;
-        line-height: 1.5;
-        margin: 0;
-    }
-
-    .watchdog-footer-bottom-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 20px;
-    }
-
-    .watchdog-footer-bottom-links a {
-        color: var(--wd-teal);
-        font-size: 12px;
-        font-weight: 700;
+        padding: 0;
         text-decoration: none;
     }
 
-    .watchdog-footer-bottom-links a:hover {
+    #wd-property-footer .wdf-legal-link:hover,
+    #wd-property-footer .wdf-legal-link:focus-visible {
+        color: var(--wdf-teal-dark);
         text-decoration: underline;
         text-underline-offset: 3px;
     }
 
-    /* Tablet */
-    @media (max-width: 1100px) {
-        .watchdog-footer-grid {
+    /*
+     * Fair Housing notice
+     */
+    #wd-property-footer .wdf-housing {
+        align-items: flex-start;
+        background: var(--wdf-soft-bg);
+        border: 0;
+        border-left: 4px solid var(--wdf-teal);
+        border-radius: 4px;
+        box-shadow: none;
+        display: flex;
+        gap: 13px;
+        margin: 21px 0 0;
+        padding: 15px 17px;
+    }
+
+    #wd-property-footer .wdf-housing-icon {
+        color: var(--wdf-teal);
+        flex: 0 0 25px;
+        font-size: 23px;
+        margin-top: 2px;
+        text-align: center;
+        width: 25px;
+    }
+
+    #wd-property-footer .wdf-housing p {
+        color: var(--wdf-heading);
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        font-size: 11.5px;
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.45;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    /*
+     * Copyright bar
+     */
+    #wd-property-footer .wdf-bottom {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-top: 1px solid var(--wdf-border);
+        box-shadow: none;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        margin: 42px 0 0;
+        padding: 22px 0 0;
+    }
+
+    #wd-property-footer .wdf-copyright {
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-bottom-links {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        justify-content: flex-end;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-bottom-link {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    #wd-property-footer .wdf-bottom-link:hover,
+    #wd-property-footer .wdf-bottom-link:focus-visible {
+        color: var(--wdf-teal-dark);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /*
+     * Tablet
+     */
+    @media (max-width: 1120px) {
+        #wd-property-footer .wdf-grid {
             grid-template-columns: repeat(3, minmax(170px, 1fr));
+            gap: 42px;
         }
 
-        .watchdog-brand {
+        #wd-property-footer .wdf-brand {
             border-left: 0;
-            border-top: 1px solid var(--wd-border);
+            border-top: 1px solid var(--wdf-border);
             grid-column: 1 / -1;
-            padding: 35px 0 0;
+            padding: 38px 0 0;
         }
     }
 
-    /* Small tablet */
+    /*
+     * Small tablet
+     */
     @media (max-width: 760px) {
-        .watchdog-footer {
-            padding: 44px 22px 24px;
+        #wd-property-footer {
+            padding: 45px 22px 24px;
         }
 
-        .watchdog-footer-grid {
-            grid-template-columns: repeat(2, minmax(150px, 1fr));
-            gap: 36px 28px;
+        #wd-property-footer .wdf-grid {
+            grid-template-columns: repeat(2, minmax(145px, 1fr));
+            gap: 38px 28px;
         }
 
-        .watchdog-brand {
+        #wd-property-footer .wdf-brand {
             grid-column: 1 / -1;
+        }
+
+        #wd-property-footer .wdf-bottom {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #wd-property-footer .wdf-bottom-links {
+            justify-content: flex-start;
         }
     }
 
-    /* Mobile */
+    /*
+     * Mobile
+     */
     @media (max-width: 540px) {
-        .watchdog-footer-grid {
-            grid-template-columns: 1fr;
+        #wd-property-footer {
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
-        .watchdog-brand {
+        #wd-property-footer .wdf-grid {
+            grid-template-columns: 1fr;
+            gap: 34px;
+        }
+
+        #wd-property-footer .wdf-brand {
             grid-column: auto;
         }
 
-        .watchdog-footer-bottom {
+        #wd-property-footer .wdf-logo {
             align-items: flex-start;
-            flex-direction: column;
         }
 
-        .watchdog-logo-name {
+        #wd-property-footer .wdf-logo-icon {
+            flex-basis: 46px;
+            height: 46px;
+            width: 46px;
+        }
+
+        #wd-property-footer .wdf-logo-icon i {
             font-size: 20px;
+        }
+
+        #wd-property-footer .wdf-logo-name {
+            font-size: 19px;
+        }
+
+        #wd-property-footer .wdf-tagline {
+            font-size: 9px;
+            letter-spacing: 1px;
         }
     }
 </style>
 
-<footer class="watchdog-footer">
-    <div class="watchdog-footer-inner">
+<div
+    id="wd-property-footer"
+    role="contentinfo"
+    aria-label="Watchdog website footer"
+>
+    <div class="wdf-inner">
 
-        <div class="watchdog-footer-grid">
+        <div class="wdf-grid">
 
-            <!-- Tax relief -->
-            <nav class="watchdog-footer-nav" aria-label="Tax relief">
-                <h2 class="watchdog-footer-heading">Tax Relief</h2>
+            <!-- TAX RELIEF -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Property tax relief links"
+            >
+                <h2 class="wdf-heading">Tax Relief</h2>
 
-                <a href="anchor-estimator.html" class="watchdog-footer-featured">
+                <a
+                    href="/anchor-estimator.html"
+                    class="wdf-link wdf-featured"
+                >
                     Free Benefit Calculator
                 </a>
 
-                <a href="anchor-program.html">ANCHOR Program</a>
-                <a href="senior-programs.html">Stay NJ & Senior Freeze</a>
-                <a href="veterans-benefits.html">Veterans Benefits</a>
-                <a href="pas-1-guide.html">PAS-1 Filing Guide</a>
-                <a href="property-tax-appeal.html">Property Tax Appeals</a>
-                <a href="tax-calendar.html">Tax Calendar</a>
-            </nav>
+                <a href="/anchor-program.html" class="wdf-link">
+                    ANCHOR Program
+                </a>
 
-            <!-- Homeowner tools -->
-            <nav class="watchdog-footer-nav" aria-label="Homeowner resources">
-                <h2 class="watchdog-footer-heading">Homeowner Tools</h2>
+                <a href="/senior-programs.html" class="wdf-link">
+                    Stay NJ &amp; Senior Freeze
+                </a>
 
-                <a href="resources.html">Resources & Terminology</a>
-                <a href="guides.html">Free Downloadable Guides</a>
-                <a href="home-improvement-abatement.html">
+                <a href="/veterans-benefits.html" class="wdf-link">
+                    Veterans Benefits
+                </a>
+
+                <a href="/pas-1-guide.html" class="wdf-link">
+                    PAS-1 Filing Guide
+                </a>
+
+                <a href="/property-tax-appeal.html" class="wdf-link">
+                    Property Tax Appeals
+                </a>
+
+                <a href="/tax-calendar.html" class="wdf-link">
+                    Tax Calendar
+                </a>
+            </div>
+
+            <!-- HOMEOWNER TOOLS -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Homeowner tools"
+            >
+                <h2 class="wdf-heading">Homeowner Tools</h2>
+
+                <a href="/property/" class="wdf-link wdf-featured">
+                    Property Tax Lookup
+                </a>
+
+                <a href="/resources.html" class="wdf-link">
+                    Resources &amp; Terminology
+                </a>
+
+                <a href="/guides.html" class="wdf-link">
+                    Free Downloadable Guides
+                </a>
+
+                <a
+                    href="/home-improvement-abatement.html"
+                    class="wdf-link"
+                >
                     Renovation Tax Savings
                 </a>
-                <a href="mortgage-calculator.html">Mortgage Calculator</a>
-                <a href="home-value.html">Home Value Estimator</a>
-                <a href="search-homes.html">Search Homes</a>
-            </nav>
 
-            <!-- Counties and contact -->
+                <a href="/mortgage-calculator.html" class="wdf-link">
+                    Mortgage Calculator
+                </a>
+
+                <a href="/home-value.html" class="wdf-link">
+                    Home Value Estimator
+                </a>
+
+                <a href="/search-homes.html" class="wdf-link">
+                    Search Homes
+                </a>
+
+                <a href="/property/dashboard.html" class="wdf-link">
+                    My Properties
+                </a>
+
+                <a href="/property/pro.html" class="wdf-link">
+                    Pro Hub
+                </a>
+            </div>
+
+            <!-- SOUTH JERSEY AND CONTACT -->
             <div>
-                <nav class="watchdog-footer-nav" aria-label="County resources">
-                    <h2 class="watchdog-footer-heading">South Jersey</h2>
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="South Jersey county resources"
+                >
+                    <h2 class="wdf-heading">South Jersey</h2>
 
-                    <a href="camden-county.html">Camden County</a>
-                    <a href="gloucester-county.html">Gloucester County</a>
-                    <a href="burlington-county.html">Burlington County</a>
-                    <a href="atlantic-county.html">Atlantic County</a>
-                    <a href="salem-county.html">Salem County</a>
-                </nav>
+                    <a href="/camden-county.html" class="wdf-link">
+                        Camden County
+                    </a>
 
-                <nav class="watchdog-footer-nav" aria-label="Contact information">
-                    <h2 class="watchdog-footer-subheading">Find Us</h2>
+                    <a href="/gloucester-county.html" class="wdf-link">
+                        Gloucester County
+                    </a>
 
-                    <a href="index.html#contact" class="watchdog-contact-line">
-                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <a href="/burlington-county.html" class="wdf-link">
+                        Burlington County
+                    </a>
+
+                    <a href="/atlantic-county.html" class="wdf-link">
+                        Atlantic County
+                    </a>
+
+                    <a href="/salem-county.html" class="wdf-link">
+                        Salem County
+                    </a>
+                </div>
+
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="Contact Watchdog"
+                >
+                    <h2 class="wdf-heading wdf-subheading">Find Us</h2>
+
+                    <a href="/#contact" class="wdf-link">
+                        <i
+                            class="fas fa-envelope"
+                            aria-hidden="true"
+                        ></i>
                         Contact Us
                     </a>
 
-                    <a href="tel:+18564041098" class="watchdog-contact-line">
-                        <i class="fas fa-phone" aria-hidden="true"></i>
+                    <a href="tel:+18564041098" class="wdf-link">
+                        <i
+                            class="fas fa-phone"
+                            aria-hidden="true"
+                        ></i>
                         856-404-1098
                     </a>
 
                     <a
                         href="mailto:john@johnscafide.com"
-                        class="watchdog-contact-line"
+                        class="wdf-link"
                     >
-                        <i class="fas fa-at" aria-hidden="true"></i>
+                        <i
+                            class="fas fa-at"
+                            aria-hidden="true"
+                        ></i>
                         Email John
                     </a>
 
-                    <div class="watchdog-social">
+                    <div class="wdf-social">
                         <a
                             href="https://www.tiktok.com/@thetaxwatchdog"
+                            class="wdf-social-link"
                             target="_blank"
                             rel="noopener noreferrer"
-                            aria-label="The Tax Watchdog on TikTok"
+                            aria-label="Watchdog on TikTok"
                         >
-                            <i class="fab fa-tiktok" aria-hidden="true"></i>
+                            <i
+                                class="fab fa-tiktok"
+                                aria-hidden="true"
+                            ></i>
                         </a>
 
-                        <a href="#" aria-label="Watchdog on Facebook">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
+                        <!-- Replace # with your Facebook URL -->
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Facebook"
+                        >
+                            <i
+                                class="fab fa-facebook-f"
+                                aria-hidden="true"
+                            ></i>
                         </a>
 
-                        <a href="#" aria-label="Watchdog on Instagram">
-                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        <!-- Replace # with your Instagram URL -->
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Instagram"
+                        >
+                            <i
+                                class="fab fa-instagram"
+                                aria-hidden="true"
+                            ></i>
                         </a>
                     </div>
-                </nav>
+                </div>
             </div>
 
-            <!-- Branding and disclosures -->
-            <section class="watchdog-brand">
-                <a href="index.html" class="watchdog-logo">
-                    <span class="watchdog-logo-icon" aria-hidden="true">
-                        <i class="fas fa-shield-alt"></i>
+            <!-- BRANDING AND DISCLOSURES -->
+            <div class="wdf-brand">
+
+                <a href="/property/" class="wdf-logo">
+                    <span class="wdf-logo-icon" aria-hidden="true">
+                        <i class="fas fa-shield-halved"></i>
                     </span>
 
-                    <span class="watchdog-logo-text">
-                        <span class="watchdog-logo-name">
-                            The Tax <span>Watchdog</span>
+                    <span class="wdf-logo-copy">
+                        <span class="wdf-logo-name">
+                            <span>Watchdog</span>
                         </span>
 
-                        <span class="watchdog-logo-tagline">
+                        <span class="wdf-tagline">
                             Watching out for New Jersey homeowners
                         </span>
                     </span>
                 </a>
 
-                <p class="watchdog-brand-description">
+                <p class="wdf-description">
                     Straightforward New Jersey property-tax information,
                     homeowner tools, and local real-estate guidance from John
                     and Heather Scafide. We help South Jersey residents
-                    understand their benefits, protect their home equity, and
-                    make informed real-estate decisions.
+                    understand their tax assessments, protect their home
+                    equity, and make informed real-estate decisions.
                 </p>
 
-                <div class="watchdog-legal">
+                <div class="wdf-legal">
                     <p>
                         <strong>John Scafide</strong> is a licensed New Jersey
                         real-estate salesperson, tax professional with more
                         than 15 years of experience, and creator of
                         <a
                             href="https://www.tiktok.com/@thetaxwatchdog"
+                            class="wdf-inline-link"
                             target="_blank"
                             rel="noopener noreferrer"
                         >@thetaxwatchdog</a>.
@@ -480,71 +846,112 @@
                     </p>
 
                     <p>
-                        Website information and calculators are provided for
-                        general educational purposes and do not constitute
-                        individualized tax, legal, financial, or accounting
-                        advice. Program rules, deadlines, eligibility
-                        requirements, and benefit amounts may change. Always
-                        confirm current information with the appropriate
-                        government agency or a qualified professional.
+                        Website information, property records, estimates, and
+                        calculators are provided for general educational
+                        purposes only. They do not constitute individualized
+                        tax, legal, financial, appraisal, or accounting advice.
+                        Property information may not reflect the most recent
+                        municipal records. Program rules, eligibility
+                        requirements, deadlines, and benefit amounts may
+                        change.
                     </p>
 
-                    <div class="watchdog-legal-links">
-                        <a href="privacy-policy.html">Privacy Policy</a>
-                        <a href="terms.html">Terms of Use</a>
-                        <a href="accessibility.html">Accessibility</a>
+                    <p>
+                        Always verify property information and tax-relief
+                        eligibility with the appropriate government agency or
+                        a qualified professional.
+                    </p>
+
+                    <div class="wdf-legal-links">
+                        <a
+                            href="/privacy-policy.html"
+                            class="wdf-legal-link"
+                        >
+                            Privacy Policy
+                        </a>
+
+                        <a href="/terms.html" class="wdf-legal-link">
+                            Terms of Use
+                        </a>
+
+                        <a
+                            href="/accessibility.html"
+                            class="wdf-legal-link"
+                        >
+                            Accessibility
+                        </a>
+
+                        <a href="/#contact" class="wdf-legal-link">
+                            Contact
+                        </a>
 
                         <a
                             href="https://www.nj.gov/treasury/taxation/"
+                            class="wdf-legal-link"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
                             Official NJ Taxation Website
                             <i
-                                class="fas fa-external-link-alt"
+                                class="fas fa-arrow-up-right-from-square"
                                 aria-hidden="true"
                             ></i>
                         </a>
                     </div>
 
-                    <div class="watchdog-agent-box">
-                        <i class="fas fa-home" aria-hidden="true"></i>
+                    <div class="wdf-housing">
+                        <i
+                            class="fas fa-house"
+                            aria-hidden="true"
+                        ></i>
 
                         <p>
-                            We support the Fair Housing Act and Equal
+                            Watchdog supports the Fair Housing Act and Equal
                             Opportunity Act. Equal Housing Opportunity.
                         </p>
                     </div>
                 </div>
-            </section>
+            </div>
 
         </div>
 
-        <div class="watchdog-footer-bottom">
-            <p>
+        <!-- COPYRIGHT -->
+        <div class="wdf-bottom">
+            <p class="wdf-copyright">
                 Copyright &copy;
-                <span id="watchdogCopyrightYear">2026</span>
-                The Tax Watchdog / NJPropertyTaxRelief.com.
-                All rights reserved.
+                <span id="wdf-current-year">2026</span>
+                Watchdog / NJPropertyTaxRelief.com. All rights reserved.
             </p>
 
-            <div class="watchdog-footer-bottom-links">
-                <a href="index.html">Home</a>
-                <a href="resources.html">Resources</a>
-                <a href="index.html#contact">Talk to an Expert</a>
+            <div class="wdf-bottom-links">
+                <a href="/property/" class="wdf-bottom-link">
+                    Property Lookup
+                </a>
+
+                <a href="/insights.html" class="wdf-bottom-link">
+                    Insights
+                </a>
+
+                <a href="/resources.html" class="wdf-bottom-link">
+                    Resources
+                </a>
+
+                <a href="/#contact" class="wdf-bottom-link">
+                    Talk to an Expert
+                </a>
             </div>
         </div>
 
     </div>
-</footer>
+</div>
 
 <script>
     (function () {
-        var yearElement =
-            document.getElementById("watchdogCopyrightYear");
+        var watchdogYear =
+            document.getElementById("wdf-current-year");
 
-        if (yearElement) {
-            yearElement.textContent = new Date().getFullYear();
+        if (watchdogYear) {
+            watchdogYear.textContent = new Date().getFullYear();
         }
     })();
 </script>
