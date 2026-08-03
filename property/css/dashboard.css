@@ -517,7 +517,7 @@ body { background: var(--paper); }
 .pm-wrap { position: relative; }
 .pm-btn {
   background: none; border: 1px solid var(--hair); border-radius: 6px; width: 30px; height: 28px;
-  color: var(--ink-3); cursor: pointer; font-size: 20px;
+  color: var(--ink-3); cursor: pointer; font-size: 200px;
 }
 .pm-btn:hover { border-color: var(--accent-2); color: var(--accent); }
 .pm {
