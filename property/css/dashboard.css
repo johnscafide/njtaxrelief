@@ -32,6 +32,46 @@ body { background: var(--paper); }
     font-size: 22px;
 }
 
+.brief {
+  display: grid;
+  gap: 14px;
+}
+
+.brief-point {
+  align-items: flex-start;
+  display: flex;
+  gap: 13px;
+  line-height: 1.65;
+}
+
+.brief-point-icon {
+  color: var(--saas-teal);
+  flex: 0 0 auto;
+  font-size: 15px;
+  margin-top: 5px;
+  width: 18px;
+}
+
+.brief-point-copy {
+  display: block;
+  min-width: 0;
+}
+
+.brief-point-upgrade {
+  background: #f2f8f7;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.brief-point-plus {
+  border-left: 3px solid var(--saas-teal);
+  padding-left: 14px;
+}
+
+.brief-point.urgent {
+  color: var(--neg);
+}
+
 /* ---------- signed out ---------- */
 .gate {
   max-width: 480px; margin: 70px auto; padding: 0 24px; text-align: left;
