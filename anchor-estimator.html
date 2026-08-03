@@ -902,6 +902,29 @@
   .est-upsell-guides { grid-template-columns:1fr; }
   .est-trust { gap:12px; }
 }
+
+/* ── Email verification gate ────────────────────────────── */
+.est-verify-target{font-size:15px;color:#1a3a6b;font-weight:600;
+  text-align:center;margin-bottom:18px;line-height:1.5;word-break:break-word;}
+.est-verify-target small{display:block;font-weight:400;color:#5a6070;
+  font-size:13px;margin-top:5px;}
+.est-code-row{display:flex;justify-content:center;}
+.est-code-input{width:100%;max-width:260px;text-align:center;
+  font-size:30px;font-weight:700;letter-spacing:.34em;text-indent:.34em;
+  padding:14px 10px;border:2px solid #d5dae3;border-radius:12px;
+  font-family:inherit;color:#1a3a6b;background:#fff;transition:border-color .15s;}
+.est-code-input:focus{outline:none;border-color:#c9a227;}
+.est-code-input.err{border-color:#c0392b;}
+.est-verify-msg{min-height:20px;text-align:center;font-size:13px;
+  margin:12px 0 16px;line-height:1.45;}
+.est-verify-msg.err{color:#c0392b;}
+.est-verify-msg.ok{color:#1e7d46;}
+.est-verify-links{display:flex;justify-content:center;align-items:center;
+  gap:10px;margin-top:14px;flex-wrap:wrap;}
+.est-verify-sep{color:#c4cad4;}
+.est-linkbtn{background:none;border:none;padding:0;cursor:pointer;
+  font:inherit;font-size:13px;color:#1a3a6b;text-decoration:underline;}
+.est-linkbtn[disabled]{color:#a0a7b4;cursor:default;text-decoration:none;}
 </style>
   <!-- Microsoft Clarity -->
   <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
@@ -1205,6 +1228,34 @@
         </div>
       </div>
 
+      <!-- Step 6.5: Email verification -->
+      <div class="est-step" id="est-step6v">
+        <div class="est-q">Check your email</div>
+        <div class="est-hint">We sent a 6-digit code. Enter it to unlock your estimate.</div>
+
+        <div class="est-lead-wrap">
+          <div class="est-verify-target" id="est-verify-target"></div>
+
+          <div class="est-code-row">
+            <input class="est-code-input" id="est-code" type="text" inputmode="numeric"
+                   autocomplete="one-time-code" maxlength="6" placeholder="000000">
+          </div>
+
+          <div class="est-verify-msg" id="est-verify-msg"></div>
+
+          <button class="est-btn-next gold" id="est-verify-btn"
+                  style="width:100%;justify-content:center;" onclick="estVerifyCheck()">
+            <i class="fas fa-lock-open"></i> Verify &amp; See My Benefit
+          </button>
+
+          <div class="est-verify-links">
+            <button type="button" class="est-linkbtn" id="est-resend" onclick="estVerifySend(false)">Resend code</button>
+            <span class="est-verify-sep">&middot;</span>
+            <button type="button" class="est-linkbtn" onclick="showStep(6)">Wrong email?</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Step 7: Result -->
       <div class="est-step" id="est-step7">
         <div class="est-result" id="est-result-content"></div>
@@ -1456,6 +1507,8 @@
   var SB_URL = 'https://afagpnyjxomuvpfviycm.supabase.co';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmYWdwbnlqeG9tdXZwZnZpeWNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzg2MjIsImV4cCI6MjA5OTg1NDYyMn0.FWQTsq-yRQiSvbSuZkGN_J1Ao8OsGIUpdshJ2r-kXXU';
 
+  var VERIFY_FN = SB_URL + '/functions/v1/verify-email';
+
   // ── TAB SWITCHER ──────────────────────────────────────────
   window.switchTab = function(tab) {
     document.querySelectorAll('.est-tab').forEach(function(t){ t.classList.remove('active'); });
@@ -1476,6 +1529,7 @@
   var TOTAL = 6;
 
   function updateProgress(step) {
+    if (step === '6v') step = 6;
     var pct = Math.round((step / (TOTAL + 1)) * 100);
     var bar = document.getElementById('est-progress');
     if (bar) bar.style.width = pct + '%';
@@ -1582,72 +1636,208 @@
     showStep(p);
   };
 
-  window.estSubmit = function() {
-    var name    = (document.getElementById('est-name')    || {}).value || '';
-    var email   = (document.getElementById('est-email')   || {}).value || '';
-    var phone   = (document.getElementById('est-phone')   || {}).value || '';
-    var address = (document.getElementById('est-address') || {}).value || '';
-    var sellEl  = document.getElementById('est-sell-interest');
-    var buyEl   = document.getElementById('est-buy-interest');
-    var sellInt = sellEl ? sellEl.checked : false;
-    var buyInt  = buyEl ? buyEl.checked : false;
-    var sellWhen = sellInt ? ((document.getElementById('est-sell-when') || {}).value || '') : '';
-    var buyWhen  = buyInt  ? ((document.getElementById('est-buy-when')  || {}).value || '') : '';
-    name = name.trim(); email = email.trim(); phone = phone.trim(); address = address.trim();
-    if (!name || !email || !address) { alert('Please fill in your name, email, and property address to continue.'); return; }
-    var incomeLabel = answers.income === 'low' ? 'Under $150,000' : (answers.income === 'mid' ? '$150,001–$250,000' : 'Over $250,000');
-    var benefit = answers.tenure === 'own' ? (answers.income === 'low' ? '$1,500' : '$1,000') : (answers.age === 'yes' ? '$700' : '$450');
+  // Holds the validated lead between step 6 and the verified result.
+  var pendingLead = null;
 
-    // ── LEAD SCORE ──────────────────────────────────────────
+  window.estSubmit = function() {
+    var name    = ((document.getElementById('est-name')    || {}).value || '').trim();
+    var email   = ((document.getElementById('est-email')   || {}).value || '').trim();
+    var phone   = ((document.getElementById('est-phone')   || {}).value || '').trim();
+    var address = ((document.getElementById('est-address') || {}).value || '').trim();
+
+    if (!name || !email || !address) {
+      alert('Please fill in your name, email, and property address to continue.');
+      return;
+    }
+    if (!/^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email)) {
+      alert('That email address doesn\'t look right. We need a working one to send your results.');
+      return;
+    }
+
+    var sellEl = document.getElementById('est-sell-interest');
+    var buyEl  = document.getElementById('est-buy-interest');
+    var sellInt = sellEl ? sellEl.checked : false;
+    var buyInt  = buyEl  ? buyEl.checked  : false;
+
+    pendingLead = {
+      name: name, email: email, phone: phone, address: address,
+      sellInt: sellInt, buyInt: buyInt,
+      sellWhen: sellInt ? ((document.getElementById('est-sell-when') || {}).value || '') : '',
+      buyWhen:  buyInt  ? ((document.getElementById('est-buy-when')  || {}).value || '') : ''
+    };
+
+    var codeEl = document.getElementById('est-code');
+    if (codeEl) { codeEl.value = ''; codeEl.classList.remove('err'); }
+    estVerifyMsg('', '');
+
+    showStep('6v');
+    estVerifySend(true);
+  };
+
+  // ── EMAIL VERIFICATION GATE ───────────────────────
+
+  function estVerifyMsg(text, kind) {
+    var el = document.getElementById('est-verify-msg');
+    if (!el) return;
+    el.textContent = text || '';
+    el.className = 'est-verify-msg' + (kind ? ' ' + kind : '');
+  }
+
+  window.estVerifySend = function(initial) {
+    if (!pendingLead) return;
+    var resend = document.getElementById('est-resend');
+    if (resend && resend.disabled) return;
+    if (resend) { resend.disabled = true; resend.textContent = 'Sending\u2026'; }
+    if (!initial) estVerifyMsg('', '');
+
+    var tgt = document.getElementById('est-verify-target');
+    if (tgt) {
+      tgt.innerHTML = 'Code sent to <strong>' + pendingLead.email + '</strong>'
+        + '<small>Give it a minute, and check spam if it\'s not there.</small>';
+    }
+
+    fetch(VERIFY_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY },
+      body: JSON.stringify({ action: 'send', email: pendingLead.email })
+    })
+    .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
+    .then(function(res){
+      if (!res.ok) estVerifyMsg(res.body.error || 'Could not send the code.', 'err');
+      else if (!initial) estVerifyMsg('New code sent.', 'ok');
+    })
+    .catch(function(){ estVerifyMsg('Network problem. Try again.', 'err'); })
+    .then(function(){
+      // 45-second cooldown so nobody mashes the button.
+      var t = 45;
+      var tick = setInterval(function(){
+        var b = document.getElementById('est-resend');
+        if (!b) { clearInterval(tick); return; }
+        t--;
+        if (t <= 0) { clearInterval(tick); b.disabled = false; b.textContent = 'Resend code'; }
+        else { b.textContent = 'Resend in ' + t + 's'; }
+      }, 1000);
+    });
+  };
+
+  window.estVerifyCheck = function() {
+    if (!pendingLead) return;
+    var input = document.getElementById('est-code');
+    var btn   = document.getElementById('est-verify-btn');
+    var code  = ((input || {}).value || '').replace(/\D/g, '');
+
+    if (code.length !== 6) {
+      if (input) input.classList.add('err');
+      estVerifyMsg('Enter the 6-digit code.', 'err');
+      return;
+    }
+    if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking\u2026'; }
+
+    fetch(VERIFY_FN, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY },
+      body: JSON.stringify({ action: 'check', email: pendingLead.email, code: code })
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(j){
+      if (j.ok) { estDeliverResult(); return; }
+      if (input) input.classList.add('err');
+      estVerifyMsg(j.error || 'That code didn\'t match.', 'err');
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock-open"></i> Verify &amp; See My Benefit'; }
+    })
+    .catch(function(){
+      estVerifyMsg('Network problem. Try again.', 'err');
+      if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-lock-open"></i> Verify &amp; See My Benefit'; }
+    });
+  };
+
+  // Auto-submit once the sixth digit lands.
+  (function(){
+    var c = document.getElementById('est-code');
+    if (!c) return;
+    c.addEventListener('input', function(){
+      c.classList.remove('err');
+      if (c.value.replace(/\D/g, '').length === 6) estVerifyCheck();
+    });
+  })();
+
+  // ── RESULT DELIVERY (runs only after a verified code) ────
+
+  function estDeliverResult() {
+    var L = pendingLead || {};
+    var incomeLabel = answers.income === 'low' ? 'Under $150,000'
+                    : (answers.income === 'mid' ? '$150,001\u2013$250,000' : 'Over $250,000');
+    var benefit = answers.tenure === 'own'
+      ? (answers.income === 'low' ? '$1,500' : '$1,000')
+      : (answers.age === 'yes' ? '$700' : '$450');
+
+    // ── LEAD SCORE ───────────────────────────────
     var qualifies = answers.primary !== 'no'
       && answers.income !== 'high'
       && !(answers.tenure === 'rent' && answers.income === 'mid')
       && !(answers.taxes === 'no' && answers.tenure === 'own');
     var soonTimeframe = function(tf) { return tf === '0-3 months' || tf === '3-6 months'; };
-    var reSoon = (sellInt && soonTimeframe(sellWhen)) || (buyInt && soonTimeframe(buyWhen));
-    var reAny  = sellInt || buyInt;
+    var reSoon = (L.sellInt && soonTimeframe(L.sellWhen)) || (L.buyInt && soonTimeframe(L.buyWhen));
+    var reAny  = L.sellInt || L.buyInt;
     var score;
-    if (qualifies && reSoon) score = '🔥 HOT';
-    else if (qualifies && reAny) score = '🟡 WARM';
-    else if (qualifies) score = '🟢 QUALIFIED';
-    else if (reAny) score = '🟡 WARM';
-    else score = '❄️ COLD';
+    if (qualifies && reSoon) score = '\ud83d\udd25 HOT';
+    else if (qualifies && reAny) score = '\ud83d\udfe1 WARM';
+    else if (qualifies) score = '\ud83d\udfe2 QUALIFIED';
+    else if (reAny) score = '\ud83d\udfe1 WARM';
+    else score = '\u2744\ufe0f COLD';
 
-    var topic = '[' + score + '][' + estTenureLabel() + '] ANCHOR Estimator, est. benefit: ' + benefit;
+    var topic = '[\u2705 VERIFIED][' + score + '][' + estTenureLabel()
+              + '] ANCHOR Estimator, est. benefit: ' + benefit;
     var reParts = [];
-    if (sellInt) reParts.push('sell (' + sellWhen + ')');
-    if (buyInt)  reParts.push('buy (' + buyWhen + ')');
+    if (L.sellInt) reParts.push('sell (' + L.sellWhen + ')');
+    if (L.buyInt)  reParts.push('buy (' + L.buyWhen + ')');
     if (reParts.length) topic += ', looking to ' + reParts.join(' & ');
+
     if (typeof emailjs !== 'undefined') {
       emailjs.init({ publicKey: EJS_PUBLIC });
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
-        name: name, email: email,
-        phone: phone || 'Not provided',
+        name: L.name, email: L.email,
+        phone: L.phone || 'Not provided',
         topic: topic,
         tenure: estTenureLabel(),
         lead_type: estTenureLabel(),
         finance: estIncomeLabel(),
         income_bracket: estIncomeLabel(),
-        town: address || 'Not provided',
-        address: address || 'Not provided',
-        message: ['Lead Score: ' + score, 'ANCHOR Estimator Lead','Tenure: ' + estTenureLabel(),'Income: ' + estIncomeLabel(),'Primary: ' + answers.primary,'Income Bracket: ' + incomeLabel,'Age 65+: ' + answers.age,'Taxes OK: ' + answers.taxes,'Benefit: ' + benefit,'Looking to sell: ' + (sellInt ? 'YES, ' + sellWhen : 'No'),'Looking to buy: ' + (buyInt ? 'YES, ' + buyWhen : 'No')].join('\n')
+        town: L.address || 'Not provided',
+        address: L.address || 'Not provided',
+        message: [
+          'Lead Score: ' + score,
+          'Email VERIFIED: ' + L.email,
+          'ANCHOR Estimator Lead',
+          'Tenure: ' + estTenureLabel(),
+          'Income: ' + estIncomeLabel(),
+          'Primary: ' + answers.primary,
+          'Income Bracket: ' + incomeLabel,
+          'Age 65+: ' + answers.age,
+          'Taxes OK: ' + answers.taxes,
+          'Benefit: ' + benefit,
+          'Looking to sell: ' + (L.sellInt ? 'YES, ' + L.sellWhen : 'No'),
+          'Looking to buy: ' + (L.buyInt ? 'YES, ' + L.buyWhen : 'No')
+        ].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
+
     showStep(7);
     updateProgress(7);
     estLogCalculatorUse();
+
     var rcEl = document.getElementById('est-result-content');
     if (rcEl) {
       rcEl.innerHTML = '<div class="est-loading">'
         + '<div class="est-loading-spinner"></div>'
-        + '<div class="est-loading-text">Calculating your benefit…</div>'
+        + '<div class="est-loading-text">Calculating your benefit\u2026</div>'
         + '<div class="est-loading-tiktok">While you wait, <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank"><i class="fa-brands fa-tiktok"></i> follow @thetaxwatchdog</a> for more NJ tax tips</div>'
         + '</div>';
     }
     setTimeout(function() {
-      renderResult(benefit, sellInt, buyInt, sellWhen, buyWhen, address);
+      renderResult(benefit, L.sellInt, L.buyInt, L.sellWhen, L.buyWhen, L.address);
     }, 1300);
-  };
+  }
 
   function estNumberToWords(num) {
     var ones = ['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen'];
@@ -1754,7 +1944,12 @@
     answers = {};
     document.querySelectorAll('.est-choice').forEach(function(b){ b.classList.remove('selected'); });
     document.querySelectorAll('.est-btn-next').forEach(function(b){ b.disabled = true; });
-    ['est-name','est-email','est-phone','est-address'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
+    ['est-name','est-email','est-phone','est-address','est-code'].forEach(function(id){ var el = document.getElementById(id); if(el) el.value = ''; });
+    pendingLead = null;
+    var ce = document.getElementById('est-code'); if(ce) ce.classList.remove('err');
+    var vb = document.getElementById('est-verify-btn');
+    if(vb){ vb.disabled = false; vb.innerHTML = '<i class="fas fa-lock-open"></i> Verify &amp; See My Benefit'; }
+    estVerifyMsg('', '');
     var si = document.getElementById('est-sell-interest'); if(si) si.checked = false;
     var bi = document.getElementById('est-buy-interest');  if(bi) bi.checked = false;
     var st = document.getElementById('est-sell-timeframe'); if(st) st.style.display = 'none';
