@@ -1116,14 +1116,6 @@ function brief() {
       )
     );
 
-    s.push(
-      briefPoint(
-        'Open <b>Full report</b> when a number needs more context. Use ' +
-        '<b>Compare</b> to place properties side by side, and add homes to ' +
-        'your watchlist as your plans change.'
-      )
-    );
-
     if (c) {
       var freeMarketValue =
         Number.isFinite(+c.market)
@@ -1164,8 +1156,8 @@ function brief() {
     s.push(
       briefPoint(
         (plus
-          ? '<b>Pro+ intelligence.</b> '
-          : '<b>Pro intelligence.</b> ') +
+          ? '<b>Pro+ Dashboard.</b> '
+          : '<b>Pro Dashboard.</b> ') +
         'Your workspace is tracking ' + count + taxes + '.'
       )
     );
