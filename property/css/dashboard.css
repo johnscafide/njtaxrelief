@@ -1348,8 +1348,8 @@ body {
 .ai-h span { font-size: 11px; color: var(--ink-3, #7d8798); }
 .ai .brief { margin: 0; }
 
-.ai-star { position: absolute; top: -16px; right: 20px; background: #fff; padding: 0 6px;
-  font-size: 19px; color: #c3cbdb; line-height: 1; }
+.ai-star { position: absolute; top: -12px; right: 10px; background: #fff; padding: 0 6px;
+  font-size: 21px; color: #c3cbdb; line-height: 1; }
 .ai-star.pro { color: var(--gold, #b8972a); text-shadow: 0 0 14px rgba(184,151,42,.45); }
 .ai-star.pro i { animation: wd-twinkle 3.5s ease-in-out infinite; }
 @keyframes wd-twinkle { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.16);opacity:.82} }
