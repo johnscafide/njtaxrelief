@@ -163,7 +163,7 @@
 
   function initFooter(attempts) {
     attempts = attempts || 0;
-    const footerEl = $('main-footer');
+    const footerEl = $('watchdog-footer-mount');
     if (!footerEl) {
       if (attempts < 30) setTimeout(function () { initFooter(attempts + 1); }, 100);
       return;
