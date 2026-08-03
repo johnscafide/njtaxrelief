@@ -213,6 +213,44 @@
   var GREENTREE_URL = 'https://johnvarano.com/';
   var ratios = null, rates = null;
 
+  function greentreeRailAd() {
+    return '<aside class="gt-rail" aria-label="Greentree Mortgage advertisement">' +
+      '<div class="gt-ad">' +
+        '<div class="gt-ad-label"><span>Sponsored</span><i class="fas fa-building-columns"></i></div>' +
+        '<div class="gt-ad-portrait">' +
+          '<img src="/johnvarano.jpg" alt="John Varano of Greentree Mortgage" ' +
+            'onerror="this.parentNode.classList.add(\'no-photo\')">' +
+          '<span class="gt-ad-brand">Greentree Mortgage</span>' +
+        '</div>' +
+        '<div class="gt-ad-body">' +
+          '<span class="gt-ad-kicker">Your local mortgage office</span>' +
+          '<h3>Know your buying power before the next showing.</h3>' +
+          '<p>John Varano helps South Jersey buyers turn a budget into a clear, competitive preapproval.</p>' +
+          '<div class="gt-ad-benefits">' +
+            '<span><i class="fas fa-circle-check"></i>Taxes and escrow included</span>' +
+            '<span><i class="fas fa-circle-check"></i>Purchase, refinance and equity options</span>' +
+            '<span><i class="fas fa-circle-check"></i>25+ years of mortgage experience</span>' +
+          '</div>' +
+          '<a class="gt-ad-cta" href="' + GREENTREE_URL + '" target="_blank" rel="sponsored noopener">' +
+            'Start my preapproval <i class="fas fa-arrow-right"></i></a>' +
+          '<div class="gt-ad-office">' +
+            '<i class="fas fa-location-dot"></i>' +
+            '<div><b>Turnersville office</b><span>5001 Route 42<br>Turnersville, NJ 08012</span></div>' +
+          '</div>' +
+          '<a class="gt-ad-phone" href="tel:+12152197357"><i class="fas fa-phone"></i> 215-219-7357</a>' +
+        '</div>' +
+        '<div class="gt-ad-fine">Advertisement. John Varano, NMLS #142739. Branch and Corporate NMLS #139164. ' +
+          'Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. ' +
+          'You may choose any lender. This is not a commitment to lend or a guarantee of terms.</div>' +
+      '</div>' +
+    '</aside>';
+  }
+
+  function dashboardWithAd(content) {
+    return '<div class="db-content-grid"><div class="db-content-main">' + content + '</div>' +
+      greentreeRailAd() + '</div>';
+  }
+
   function xfetch(url, ms) {
     ms = ms || 14000;
     var ctl = new AbortController();
@@ -3713,10 +3751,12 @@ function brief() {
 
     if (view === 'pro') {
       el('db-body').innerHTML =
-        locked('The full table',
-          'Every property with its ratio, supported assessment, statutory limit and appeal value, in one scannable grid.',
-          proTable()) +
-        toolsHTML();
+        dashboardWithAd(
+          locked('The full table',
+            'Every property with its ratio, supported assessment, statutory limit and appeal value, in one scannable grid.',
+            proTable()) +
+          toolsHTML()
+        );
       afterTools();
       return;
     }
@@ -3726,14 +3766,16 @@ function brief() {
     watch = watch.slice().sort(srt);
 
     el('db-body').innerHTML =
-      sortControl() +
-      (homes.length
-        ? '<section class="band own"><h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
-          homes.map(propertyBlock).join('') + '</section>' : '') +
-      (watch.length
-        ? '<section class="band"><h2 class="grp">Watchlist</h2>' +
-          watch.map(propertyBlock).join('') + '</section>' : '') +
-      toolsHTML();
+      dashboardWithAd(
+        sortControl() +
+        (homes.length
+          ? '<section class="band own"><h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
+            homes.map(propertyBlock).join('') + '</section>' : '') +
+        (watch.length
+          ? '<section class="band"><h2 class="grp">Watchlist</h2>' +
+            watch.map(propertyBlock).join('') + '</section>' : '') +
+        toolsHTML()
+      );
     afterTools();
   }
 
