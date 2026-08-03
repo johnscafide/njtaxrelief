@@ -26,48 +26,82 @@
 <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
 
 <section class="gate" id="db-gate">
-  <h1>Your properties</h1>
-  <p>Sign in to see the homes you have claimed, what they are really worth against sales the state
-     verified, and whether any of them are assessed above what New Jersey allows.</p>
-  <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
-  <a class="gate-back" href="/property/">Back to the property lookup</a>
+  <div class="gate-mark"><i class="fas fa-dog"></i></div>
+  <span class="gate-kicker">Watchdog workspace</span>
+  <h1>Your property intelligence, in one place.</h1>
+  <p>Track assessments, tax bills, appeal signals, estimated value and available relief for every property you care about.</p>
+  <div class="gate-actions">
+    <button class="db-btn" onclick="plSignInPrompt()"><i class="fas fa-right-to-bracket"></i> Sign in to your workspace</button>
+    <a class="gate-back" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up a property</a>
+  </div>
+  <div class="gate-trust"><i class="fas fa-shield-halved"></i> Passwordless sign-in. Your saved properties and profile are private.</div>
 </section>
 
 <main id="db-main" style="display:none;">
 
-  <header class="top">
-    <div class="top-in">
-      <div class="who">
-        <div id="db-avatar"></div>
-        <div>
-          <h1 id="db-hi">Your properties</h1>
-          <span id="db-email"></span>
-        </div>
+  <div class="db-shell">
+    <aside class="db-sidebar" aria-label="Dashboard navigation">
+      <a class="db-side-brand" href="/property/">
+        <span><i class="fas fa-dog"></i></span>
+        <div><b>Watchdog</b><small>Property intelligence</small></div>
+      </a>
+
+      <div class="db-side-section">
+        <span class="db-side-label">Workspace</span>
+        <button class="pn on" data-p="main" onclick="dbPanel('main')"><i class="fas fa-table-columns"></i><span>Overview</span></button>
+        <button class="pn" data-p="profile" onclick="dbPanel('profile')"><i class="fas fa-user-gear"></i><span>Profile &amp; benefits</span></button>
+        <a class="db-side-link" href="/property/dashboard.html#wishlist"><i class="fas fa-heart"></i><span>Watchlist</span></a>
+        <a class="db-side-link" href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved reports</span></a>
       </div>
-      <div class="top-acts">
-        <div class="vwset">
-          <button class="vw on" data-v="simple" onclick="dbView('simple')">Simple</button>
-          <button class="vw" data-v="pro" onclick="dbView('pro')">Pro</button>
+
+      <div class="db-side-section">
+        <span class="db-side-label">Tools</span>
+        <a class="db-side-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a>
+        <a class="db-side-link" href="/anchor-estimator.html"><i class="fas fa-calculator"></i><span>Benefit calculator</span></a>
+        <a class="db-side-link" href="/property-tax-appeal.html"><i class="fas fa-scale-balanced"></i><span>Appeal guide</span></a>
+        <a class="db-side-link pro-side" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Pro Hub</span><em>PRO</em></a>
+      </div>
+
+      <div class="db-side-account">
+        <button onclick="plSignOut()"><i class="fas fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
+      </div>
+    </aside>
+
+    <div class="db-workspace">
+      <header class="top">
+        <div class="top-in">
+          <div class="who">
+            <div id="db-avatar"></div>
+            <div>
+              <span class="top-eyebrow">My workspace</span>
+              <h1 id="db-hi">Your properties</h1>
+              <span id="db-email"></span>
+            </div>
+          </div>
+          <div class="top-acts">
+            <div class="vwset" aria-label="Dashboard view">
+              <button class="vw on" data-v="simple" onclick="dbView('simple')"><i class="fas fa-border-all"></i> Standard</button>
+              <button class="vw" data-v="pro" onclick="dbView('pro')"><i class="fas fa-table-list"></i> Pro</button>
+            </div>
+            <a class="db-add" href="/property/"><i class="fas fa-plus"></i> Add property</a>
+          </div>
         </div>
-        <button class="pn on" data-p="main" onclick="dbPanel('main')">Properties</button>
-        <button class="pn" data-p="profile" onclick="dbPanel('profile')">Profile</button>
-        <a class="tl" href="/property/">Look up an address</a>
-        <button class="tl" onclick="plSignOut()">Sign out</button>
+      </header>
+
+      <div class="wrap" id="db-panel-main">
+        <div id="db-brief"></div>
+        <div id="db-line"></div>
+        <div id="db-body"></div>
+      </div>
+
+      <div class="wrap" id="db-profile" style="display:none;">
+        <div class="db-page-head">
+          <div><span>Account settings</span><h2>Profile &amp; benefit details</h2></div>
+          <p>Optional information personalizes benefit estimates and property guidance. It is never sold or shared.</p>
+        </div>
+        <div id="db-profile-body"></div>
       </div>
     </div>
-  </header>
-
-  <div class="wrap" id="db-panel-main">
-    <div id="db-brief"></div>
-    <div id="db-line"></div>
-    <div id="db-body"></div>
-  </div>
-
-  <div class="wrap" id="db-profile" style="display:none;">
-    <h2 class="grp">About you</h2>
-    <p class="lede">All optional. It only shapes what I send you and which benefits get calculated for
-       your properties. Nothing here is sold or shared.</p>
-    <div id="db-profile-body"></div>
   </div>
 
 </main>
