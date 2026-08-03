@@ -195,7 +195,8 @@
       render();
       hydrateDetails().then(render);
       el('db-profile-body').innerHTML = profileForm();
-    }).catch(function () {
+    }).catch(function (err) {
+      console.error('Dashboard workspace error:', err);
       el('db-line').innerHTML = '';
       el('db-body').innerHTML =
         '<div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
@@ -1264,6 +1265,19 @@ function brief() {
 
   return '<div class="brief">' + s.join('') + '</div>';
 }
+
+  // Shared helpers used by the brief, property cards and dashboard totals.
+  function rnd(n) {
+    n = Number(n);
+    return Number.isFinite(n) ? Math.round(n / 1000) * 1000 : 0;
+  }
+
+  function deadline() {
+    var now = new Date();
+    var apr = new Date(now.getFullYear(), 3, 1);
+    if (now > apr) apr = new Date(now.getFullYear() + 1, 3, 1);
+    return { date: apr, days: Math.ceil((apr - now) / 864e5) };
+  }
      
   // ══════════════════════════════════════════════
   // PROPERTY  ·  simple view
