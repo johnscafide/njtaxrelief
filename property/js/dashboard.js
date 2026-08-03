@@ -1181,6 +1181,7 @@ if (cases.length) {
 }
 
 return '<div class="brief">' + s.join('') + '</div>';
+  }
      
   // ══════════════════════════════════════════════
   // PROPERTY  ·  simple view
