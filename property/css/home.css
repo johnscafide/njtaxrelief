@@ -441,3 +441,72 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 .iv-say { margin-top: 16px; }
 
 @media (max-width: 640px) { .rl-sels select { min-width: 100%; } }
+
+/* ============================================================
+   SCORECARD  +  ACCORDION
+   The page has to be scannable closed and complete open. The closed
+   state carries a verdict on every header so nothing has to be
+   opened just to find out whether it matters.
+   ============================================================ */
+.sc-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 14px; margin: 26px 0 34px; }
+.sc-c { text-align: left; background: #fff; border: 1px solid var(--hair); border-left-width: 4px;
+  border-radius: 10px; padding: 18px 20px; cursor: pointer; font-family: inherit;
+  transition: box-shadow .16s ease, transform .16s ease; }
+.sc-c:hover { box-shadow: 0 8px 22px rgba(16,24,43,.12); transform: translateY(-2px); }
+.sc-c b { display: block; font-family: var(--sans); font-size: 27px; font-weight: 800;
+  letter-spacing: -.035em; color: var(--accent); line-height: 1; }
+.sc-l { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin: 7px 0 8px; }
+.sc-v { display: block; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+.sc-go { display: block; font-size: 12px; font-weight: 700; color: var(--accent-2); margin-top: 12px; }
+.sc-go i { font-size: 9px; margin-left: 4px; }
+.sc-c.good { border-left-color: var(--pos); } .sc-c.good b { color: var(--pos); }
+.sc-c.bad  { border-left-color: var(--neg); } .sc-c.bad b  { color: var(--neg); }
+.sc-c.mid  { border-left-color: var(--gold); } .sc-c.mid b { color: #8a6f14; }
+.sc-c:not(.good):not(.bad):not(.mid) { border-left-color: var(--accent-2); }
+
+.hm-secbar { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
+.hm-secbar h2 { font-family: var(--sans); font-size: 13px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--ink-3); margin: 0; }
+#hm-all { background: none; border: none; font-family: inherit; font-size: 13px; font-weight: 700;
+  color: var(--accent-2); cursor: pointer; padding: 4px 0; }
+#hm-all i { font-size: 11px; margin-right: 6px; }
+
+.sec2 { border-bottom: 1px solid var(--hair); }
+.sec2-h { display: flex; align-items: center; gap: 14px; width: 100%; padding: 20px 4px;
+  background: none; border: none; font-family: inherit; text-align: left; cursor: pointer; }
+.sec2-h:hover .sec2-t { color: var(--accent-2); }
+.sec2-i { width: 18px; text-align: center; font-size: 15px; color: var(--ink-3); flex-shrink: 0; }
+.sec2-t { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.015em; flex-shrink: 0; }
+.sec2-s { flex: 1; font-size: 13.5px; color: var(--ink-3); text-align: right; }
+.sec2-c { color: var(--ink-3); font-size: 12px; transition: transform .2s ease; flex-shrink: 0; }
+.sec2.open .sec2-c { transform: rotate(180deg); }
+.sec2-b { display: none; padding: 0 4px 30px; }
+.sec2.open .sec2-b { display: block; }
+
+.sec2.bad .sec2-i { color: var(--neg); }
+.sec2.bad .sec2-s { color: var(--neg); font-weight: 600; }
+.sec2.good .sec2-i { color: var(--pos); }
+
+.sec2-pro { background: #f7f9fc; border-left: 3px solid var(--ink-3); border-radius: 0 8px 8px 0;
+  padding: 13px 16px; margin-bottom: 22px; max-width: 780px; }
+.sec2-pro b { display: block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--ink-3); margin-bottom: 5px; }
+.sec2-pro span { font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
+
+/* inside a section the tool cards lose their own rules; the section provides them */
+.sec2-b .sec { border-top: none; margin-top: 0; padding-top: 0; }
+.sec2-b .sec + .sec { border-top: 1px solid var(--hair-2); margin-top: 26px; padding-top: 26px; }
+
+@media (max-width: 720px) {
+  .sec2-s { display: none; }
+  .sec2-h { gap: 11px; padding: 17px 2px; }
+  .sec2-t { font-size: 15.5px; }
+  .sc-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sc-c { padding: 14px 15px; }
+  .sc-c b { font-size: 21px; }
+  .sc-go { display: none; }
+}
+@media (max-width: 420px) { .sc-cards { grid-template-columns: 1fr; } }
