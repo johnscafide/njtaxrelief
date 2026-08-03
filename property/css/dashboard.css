@@ -28,6 +28,12 @@
 }
 
 body { background: var(--paper); }
+.flip-icon i,
+.flip-icon svg {
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+}
 
 /* ---------- signed out ---------- */
 .gate {
