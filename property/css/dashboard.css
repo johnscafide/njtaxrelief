@@ -367,7 +367,7 @@ body { background: var(--paper); }
 
 /* the brief sits on a tinted panel, edge to edge, with a left spine */
 .brief {
-  background: var(--accent-bg); border-left: 4px solid var(--accent-2);
+  background: var(--accent-bg);
   padding: 22px 26px; max-width: none; border-radius: 0 8px 8px 0;
   font-size: 19px; color: #253453;
 }
@@ -492,7 +492,7 @@ body { background: var(--paper); }
 
 /* group bands. Your home reads warmer than the watchlist. */
 .band { padding: 4px 26px 10px; border-radius: 12px; margin-bottom: 26px; }
-.band.own { background: linear-gradient(180deg, #f4f8fd 0%, #fbfcfe 100%); border: 1px solid #e0e9f6; }
+.band.own { background: linear-gradient(180deg, #f4f8fd 0%, #fbfcfe 100%); }
 .band .grp { margin-top: 20px; }
 .band.own .grp { color: var(--accent-2); }
 .band .pr:last-child { border-bottom: none; padding-bottom: 14px; }
