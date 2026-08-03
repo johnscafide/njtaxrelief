@@ -1,48 +1,397 @@
-<div class="nav-inner">
-    <a href="index.html" class="nav-logo">NJPropertyTax<span>Relief</span>.com</a>
-    
-    <div class="mobile-menu-icon" onclick="toggleMobileMenu()">
-        <i class="fas fa-bars"></i>
-    </div>
+<style>
+    .site-footer {
+    --footer-text: #4f5b5d;
+    --footer-heading: #172a2d;
+    --footer-accent: #087b7d;
+    --footer-accent-dark: #055f61;
+    --footer-border: #dce5e5;
+    --footer-background: #f8faf9;
 
-    <div class="nav-links" id="navLinks">
-        <a href="resources.html">Resources and Terminology</a>
-        
-        <div class="mega-dropdown">
-            <a href="javascript:void(0)" class="mega-trigger">New Jersey <i class="fas fa-chevron-down"></i></a>
-            <div class="mega-content">
-                <div class="mega-grid">
-                    <div class="mega-col">
-                        <h4>Tax Relief</h4>
-                        <a href="anchor-estimator.html" style="font-weight:700;">Free Benefit Calculator</a>
-                        <a href="anchor-program.html">ANCHOR Program</a>
-                        <a href="senior-programs.html">Stay NJ / Senior Freeze</a>
-                        <a href="veterans-benefits.html">Veterans Benefits</a>
-                        <a href="pas-1-guide.html">PAS-1 Filing Guide</a>
-                        <a href="property-tax-appeal.html">Property Tax Appeal</a>
-                        <a href="tax-calendar.html">Tax Calendar</a>
-                        <a href="guides.html">Guides Download</a>
-                        <a href="resources.html">Resources & Terminology</a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>NJ Counties</h4>
-                        <a href="camden-county.html">Camden County</a>
-                        <a href="gloucester-county.html">Gloucester County</a>
-                        <a href="burlington-county.html">Burlington County</a>
-                        <a href="atlantic-county.html">Atlantic County</a>
-                        <a href="salem-county.html">Salem County</a>
-                    </div>
-                    <div class="mega-col">
-                        <h4>Real Estate</h4>
-                        <a href="home-improvement-abatement.html">Renovation Savings</a>
-                        <a href="mortgage-calculator.html">Mortgage Calculator</a>
-                        <a href="home-value.html">Home Value Estimator</a>
-                        <a href="search-homes.html">Search Listings</a>
-                    </div>
+    background: var(--footer-background);
+    border-top: 1px solid var(--footer-border);
+    color: var(--footer-text);
+    font-family: inherit;
+    padding: 64px 24px 24px;
+}
+
+.footer-inner {
+    width: min(1440px, 100%);
+    margin: 0 auto;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: minmax(260px, 1.45fr) repeat(3, minmax(155px, 1fr));
+    gap: 48px;
+}
+
+.footer-logo {
+    display: inline-block;
+    color: var(--footer-heading);
+    font-size: clamp(21px, 2vw, 27px);
+    font-weight: 800;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+    margin-bottom: 18px;
+    text-decoration: none;
+}
+
+.footer-logo span {
+    color: var(--footer-accent);
+}
+
+.footer-brand p {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0 0 22px;
+    max-width: 390px;
+}
+
+.footer-button {
+    align-items: center;
+    background: var(--footer-accent);
+    border-radius: 6px;
+    color: #fff;
+    display: inline-flex;
+    font-size: 14px;
+    font-weight: 700;
+    gap: 9px;
+    padding: 12px 18px;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.footer-button:hover {
+    background: var(--footer-accent-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.footer-social {
+    display: flex;
+    gap: 10px;
+    margin-top: 24px;
+}
+
+.footer-social a {
+    align-items: center;
+    border: 1px solid var(--footer-border);
+    border-radius: 50%;
+    color: var(--footer-accent);
+    display: flex;
+    height: 38px;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: 38px;
+}
+
+.footer-social a:hover {
+    background: var(--footer-accent);
+    border-color: var(--footer-accent);
+    color: #fff;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-column h3,
+.footer-agent-info h3 {
+    color: var(--footer-heading);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0 0 18px;
+}
+
+.footer-column .footer-subheading {
+    margin-top: 28px;
+}
+
+.footer-column a {
+    color: var(--footer-heading);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 13px;
+    text-decoration: none;
+}
+
+.footer-column a:hover,
+.footer-legal-links a:hover {
+    color: var(--footer-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer-divider {
+    border-top: 1px solid var(--footer-border);
+    margin: 48px 0 36px;
+}
+
+.footer-legal-grid {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(500px, 2fr);
+    gap: 64px;
+}
+
+.footer-agent-info p,
+.footer-disclaimer p {
+    font-size: 13px;
+    line-height: 1.65;
+    margin: 0 0 14px;
+}
+
+.footer-agent-info strong,
+.footer-disclaimer strong {
+    color: var(--footer-heading);
+}
+
+.footer-legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    margin-top: 22px;
+}
+
+.footer-legal-links a {
+    color: var(--footer-accent);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    align-items: center;
+    border-top: 1px solid var(--footer-border);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 34px;
+    padding-top: 22px;
+}
+
+.footer-bottom p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.equal-housing {
+    align-items: center;
+    color: var(--footer-heading);
+    display: flex;
+    font-size: 12px;
+    font-weight: 700;
+    gap: 8px;
+    text-transform: uppercase;
+}
+
+.equal-housing i {
+    color: var(--footer-accent);
+    font-size: 19px;
+}
+
+/* Tablet */
+@media (max-width: 1050px) {
+    .footer-columns {
+        grid-template-columns: 1.4fr repeat(2, 1fr);
+    }
+
+    .footer-column:last-child {
+        grid-column: 2 / 4;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(150px, 1fr));
+        column-gap: 30px;
+    }
+
+    .footer-column:last-child h3 {
+        grid-column: 1 / -1;
+    }
+
+    .footer-column:last-child .footer-subheading {
+        margin-top: 14px;
+    }
+
+    .footer-legal-grid {
+        grid-template-columns: 1fr 2fr;
+        gap: 40px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+    .site-footer {
+        padding: 44px 20px 22px;
+    }
+
+    .footer-columns,
+    .footer-legal-grid {
+        grid-template-columns: 1fr;
+        gap: 34px;
+    }
+
+    .footer-column:last-child {
+        display: flex;
+        grid-column: auto;
+    }
+
+    .footer-column:last-child h3 {
+        grid-column: auto;
+    }
+
+    .footer-brand p {
+        max-width: 100%;
+    }
+
+    .footer-divider {
+        margin: 38px 0 30px;
+    }
+
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 16px;
+    }
+}
+</style>
+<footer class="site-footer">
+    <div class="footer-inner">
+
+        <div class="footer-columns">
+            <!-- Brand -->
+            <div class="footer-brand">
+                <a href="/" class="footer-logo">
+                    NJPropertyTax<span>Relief</span>.com
+                </a>
+
+                <p>
+                    Free tools and practical guidance to help New Jersey homeowners
+                    understand property-tax relief, home values, and real-estate options.
+                </p>
+
+                <a href="/anchor-estimator.html" class="footer-button">
+                    <i class="fas fa-calculator"></i>
+                    Check Your Benefits
+                </a>
+
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" aria-label="TikTok">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tax Relief -->
+            <div class="footer-column">
+                <h3>Tax Relief</h3>
+                <a href="/anchor-estimator.html">Benefit Calculator</a>
+                <a href="/anchor-program.html">ANCHOR Program</a>
+                <a href="/senior-programs.html">Stay NJ & Senior Freeze</a>
+                <a href="/veterans-benefits.html">Veterans Benefits</a>
+                <a href="/property-tax-appeal.html">Property Tax Appeals</a>
+                <a href="/pas-1-guide.html">PAS-1 Filing Guide</a>
+                <a href="/tax-calendar.html">Tax Calendar</a>
+            </div>
+
+            <!-- Homeowners -->
+            <div class="footer-column">
+                <h3>Homeowners</h3>
+                <a href="/resources.html">Resources & Terminology</a>
+                <a href="/guides.html">Free Guides</a>
+                <a href="/home-improvement-abatement.html">Renovation Savings</a>
+                <a href="/property/mortgage-calculator.html">Mortgage Calculator</a>
+                <a href="/property/home-value.html">Home Value Estimator</a>
+                <a href="/property/search-homes.html">Search Homes</a>
+            </div>
+
+            <!-- Local Resources -->
+            <div class="footer-column">
+                <h3>South Jersey</h3>
+                <a href="/camden-county.html">Camden County</a>
+                <a href="/gloucester-county.html">Gloucester County</a>
+                <a href="/burlington-county.html">Burlington County</a>
+                <a href="/atlantic-county.html">Atlantic County</a>
+                <a href="/salem-county.html">Salem County</a>
+
+                <h3 class="footer-subheading">Get Help</h3>
+                <a href="/#contact">Contact John & Heather</a>
+                <a href="tel:+18563106746">856-310-6746</a>
+            </div>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-legal-grid">
+            <div class="footer-agent-info">
+                <h3>Local New Jersey Guidance</h3>
+
+                <p>
+                    <strong>John Scafide</strong><br>
+                    Licensed New Jersey Real Estate Agent · Tax Professional<br>
+                    NJ License #2079591
+                </p>
+
+                <p>
+                    <strong>Heather Scafide</strong><br>
+                    Licensed New Jersey Real Estate Agent<br>
+                    NJ License #2192318
+                </p>
+            </div>
+
+            <div class="footer-disclaimer">
+                <p>
+                    <strong>Independent educational resource:</strong>
+                    NJPropertyTaxRelief.com is not affiliated with or endorsed by the
+                    State of New Jersey, the New Jersey Division of Taxation, or any
+                    county or municipal government.
+                </p>
+
+                <p>
+                    Information and calculators on this website are provided for general
+                    educational purposes only and should not be considered tax, legal,
+                    financial, or accounting advice. Program requirements, benefit
+                    amounts, filing dates, and property information may change. Always
+                    verify information with the appropriate government agency or a
+                    qualified professional.
+                </p>
+
+                <p>
+                    Real-estate services are provided by independently licensed New
+                    Jersey real-estate professionals. Equal Housing Opportunity.
+                </p>
+
+                <div class="footer-legal-links">
+                    <a href="/privacy-policy.html">Privacy Policy</a>
+                    <a href="/terms.html">Terms of Use</a>
+                    <a href="/accessibility.html">Accessibility</a>
+                    <a href="/#contact">Contact</a>
                 </div>
             </div>
         </div>
 
-        <a href="index.html#contact" class="nav-cta">Talk to an Expert</a>
+        <div class="footer-bottom">
+            <p>
+                &copy; <span id="footerYear"></span> NJPropertyTaxRelief.com.
+                All rights reserved.
+            </p>
+
+            <div class="equal-housing">
+                <i class="fas fa-house"></i>
+                <span>Equal Housing Opportunity</span>
+            </div>
+        </div>
+
     </div>
-</div>
+</footer>
+
+<script>
+    document.getElementById("footerYear").textContent =
+        new Date().getFullYear();
+</script>
