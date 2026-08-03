@@ -1507,7 +1507,10 @@
   var SB_URL = 'https://afagpnyjxomuvpfviycm.supabase.co';
   var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmYWdwbnlqeG9tdXZwZnZpeWNtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQyNzg2MjIsImV4cCI6MjA5OTg1NDYyMn0.FWQTsq-yRQiSvbSuZkGN_J1Ao8OsGIUpdshJ2r-kXXU';
 
-  var VERIFY_FN = SB_URL + '/functions/v1/verify-email';
+  // Email verification lives in a DIFFERENT Supabase project than the usage counter.
+  var VERIFY_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+  var VERIFY_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var VERIFY_FN  = VERIFY_URL + '/functions/v1/verify-email';
 
   // ── TAB SWITCHER ──────────────────────────────────────────
   window.switchTab = function(tab) {
@@ -1698,7 +1701,7 @@
 
     fetch(VERIFY_FN, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY },
+      headers: { 'Content-Type': 'application/json', 'apikey': VERIFY_KEY, 'Authorization': 'Bearer ' + VERIFY_KEY },
       body: JSON.stringify({ action: 'send', email: pendingLead.email })
     })
     .then(function(r){ return r.json().then(function(j){ return { ok: r.ok, body: j }; }); })
@@ -1735,7 +1738,7 @@
 
     fetch(VERIFY_FN, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY },
+      headers: { 'Content-Type': 'application/json', 'apikey': VERIFY_KEY, 'Authorization': 'Bearer ' + VERIFY_KEY },
       body: JSON.stringify({ action: 'check', email: pendingLead.email, code: code })
     })
     .then(function(r){ return r.json(); })
