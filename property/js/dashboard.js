@@ -3864,7 +3864,61 @@ function brief() {
   // Uses Leaflet where it is loaded and degrades to the ranking alone where it
   // is not, because the ranking is the part that carries the meaning.
   // ══════════════════════════════════════════════
-  var pfMap = null, pfMarkers = {};
+
+  // ══════════════════════════════════════════════
+  // COORDINATES
+  //
+  // saved_properties has no lat/lon columns, and save_property never sent any,
+  // so nothing on this page knew where a property was. Rather than a schema
+  // change and a backfill, addresses are geocoded on demand against the state
+  // service and cached in localStorage. NJOGIS answers in about 130ms and the
+  // cache means each address is looked up once, ever.
+  // ══════════════════════════════════════════════
+  var NJ_GEOCODE_URL = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+  var geoCache = null;
+
+  function loadGeoCache() {
+    if (geoCache) return geoCache;
+    try { geoCache = JSON.parse(localStorage.getItem('wd_geo') || '{}'); }
+    catch (e) { geoCache = {}; }
+    return geoCache;
+  }
+  function saveGeoCache() {
+    try { localStorage.setItem('wd_geo', JSON.stringify(geoCache || {})); } catch (e) {}
+  }
+
+  function geocodeRow(r) {
+    var key = String(r.pams_pin || r.address || '');
+    if (!key) return Promise.resolve(null);
+    var cache = loadGeoCache();
+    if (cache[key]) return Promise.resolve(cache[key]);
+
+    var addr = [r.address, r.town, 'NJ', r.zip].filter(Boolean).join(', ');
+    var q = new URLSearchParams({ SingleLine: addr, outSR: '4326', maxLocations: '1', f: 'json' });
+    return xfetch(NJ_GEOCODE_URL + '?' + q, 8000)
+      .then(function (x) { return x.json(); })
+      .then(function (d) {
+        var c = d && d.candidates && d.candidates[0];
+        if (!c || !c.location) return null;
+        var pt = { lat: c.location.y, lon: c.location.x };
+        cache[key] = pt;
+        saveGeoCache();
+        return pt;
+      })
+      .catch(function () { return null; });
+  }
+
+  function locateRows(list) {
+    return Promise.all(list.map(function (r) {
+      if (r.lat != null && r.lon != null) return Promise.resolve(r);
+      return geocodeRow(r).then(function (pt) {
+        if (pt) { r.lat = pt.lat; r.lon = pt.lon; }
+        return r;
+      });
+    }));
+  }
+
+  var pfMap = null, pfMarkers = {}, pfSig = null;
 
   function portfolioMap() {
     var scored = rows.map(function (r) {
@@ -3878,10 +3932,20 @@ function brief() {
     var avg = Math.round(scored.reduce(function (a, x) { return a + x.w.score; }, 0) / scored.length);
     var cases = rows.filter(function (r) { var c = chapter123(r); return c && c.testable && c.hasCase; }).length;
 
-    setTimeout(drawPortfolioMap, 60);
+    // paint() runs again after details hydrate, so guard the redraw: geocoding
+    // is cached but rebuilding the map on every paint is wasted work.
+    var sig = rows.map(function (x) { return x.pams_pin; }).join('|');
+    if (pfSig !== sig || !pfMap) {
+      pfSig = sig;
+      locateRows(rows.slice()).then(function () { drawPortfolioMap(); });
+    } else {
+      setTimeout(function () { if (pfMap) pfMap.invalidateSize(); }, 60);
+    }
 
     return '<section class="pf-strip">' +
-      '<div class="pf-map"><div id="pf-map"></div>' +
+      '<div class="pf-map"><div id="pf-map">' +
+          '<div class="pf-none"><div class="pl-spin" style="margin:0"></div>' +
+          '<span>Placing your properties...</span></div></div>' +
         '<div class="pf-map-note"><i class="fas fa-dog"></i> Pins show the Watchdog Score</div></div>' +
       '<div class="pf-rank">' +
         '<div class="pf-rank-h">' +
@@ -3901,12 +3965,18 @@ function brief() {
       '</div></section>';
   }
 
+  function mapFallback(msg) {
+    var host = el('pf-map');
+    if (!host) return;
+    // Never leave the slot blank. An empty half of the page reads as broken;
+    // a short line saying why reads as honest.
+    host.innerHTML = '<div class="pf-none"><i class="fas fa-map-location-dot"></i><span>' + msg + '</span></div>';
+  }
+
   function drawPortfolioMap() {
     var host = el('pf-map');
-    if (!host || typeof L === 'undefined') {
-      if (host) host.parentNode.style.display = 'none';
-      return;
-    }
+    if (!host) return;
+    if (typeof L === 'undefined') { mapFallback('Map library did not load.'); return; }
     var pts = [];
     try {
       if (pfMap) { pfMap.remove(); pfMap = null; }
@@ -3929,12 +3999,12 @@ function brief() {
         pts.push([r.lat, r.lon]);
       });
 
-      if (!pts.length) { host.parentNode.style.display = 'none'; return; }
+      if (!pts.length) { mapFallback('Could not place these addresses on a map.'); return; }
       if (pts.length === 1) pfMap.setView(pts[0], 14);
       else pfMap.fitBounds(pts, { padding: [34, 34], maxZoom: 13 });
       setTimeout(function () { if (pfMap) pfMap.invalidateSize(); }, 120);
     } catch (e) {
-      if (host) host.parentNode.style.display = 'none';
+      mapFallback('Map could not be drawn.');
     }
   }
 
