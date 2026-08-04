@@ -209,9 +209,8 @@
   };
 
   var PHRASES = [
-    'any New Jersey home', 'your home', 'the neighborhood', "your parents' home", "your client's home",
-    'that empty house', 'the house down the street', 'that listing you are eyeing',
-    'the one that got away', 'commercial use buildings', 'New Jersey',
+    'any NJ home', 'your home', "your parents' home", "your client's home",
+    'the house down the street', 'that listing you are eyeing', 'the one that got away'
   ];
   (function typewriter() {
     var node = el('pl-type');
@@ -2363,7 +2362,9 @@
       zip: x.zip, block: x.block, lot: x.lot,
       assessed: x.assessed || null, last_year_tax: x.tax || null,
       effective_rate: x.rate ? +x.rate.toFixed(3) : null,
-      watchdog_value: hoodValue(x) ? Math.round(hoodValue(x)) : null
+      watchdog_value: hoodValue(x) ? Math.round(hoodValue(x)) : null,
+      lat: x.lat != null ? +(+x.lat).toFixed(6) : null,
+      lon: x.lon != null ? +(+x.lon).toFixed(6) : null
     } }).then(function (res) {
       if (res.error) { toast('Could not save'); return; }
       hoodSaved[pin] = 'watch';
@@ -3867,7 +3868,9 @@
       last_year_tax: current.tax || null,
       effective_rate: current.rate ? +current.rate.toFixed(3) : null,
       watchdog_value: v && v.mid ? Math.round(v.mid) : null,
-      has_appeal_case: !!(a && a.hasCase)
+      has_appeal_case: !!(a && a.hasCase),
+      lat: current.lat != null ? +(+current.lat).toFixed(6) : null,
+      lon: current.lon != null ? +(+current.lon).toFixed(6) : null
     };
   }
 
