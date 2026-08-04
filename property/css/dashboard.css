@@ -1702,7 +1702,7 @@ body {
 }
 
 .pr-card::before {
-  background: #90a1b4;
+  /* background: #90a1b4; */
   border-radius: 16px 16px 0 0;
   content: '';
   height: 3px;
@@ -1713,7 +1713,7 @@ body {
   z-index: 5;
 }
 
-.pr-card.ok::before { background: linear-gradient(90deg, #20a174, #71c7a7); }
+/* .pr-card.ok::before { background: linear-gradient(90deg, #20a174, #71c7a7); } */
 .pr-card.hot::before { background: linear-gradient(90deg, #d94a3f, #e99965); }
 .pr-card:hover { border-color: #c5d3df; box-shadow: 0 18px 42px rgba(13,38,72,.11); transform: translateY(-3px); }
 .pr-card.picked { border-color: var(--saas-teal); box-shadow: 0 0 0 3px rgba(7,132,134,.13), 0 18px 42px rgba(13,38,72,.1); }
