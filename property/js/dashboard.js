@@ -867,6 +867,7 @@
   var pageSize = 4;
   var currentPage = 1;
   var mobileVisibleCount = 4;
+  var mobileSponsorAt = 4 + Math.floor(Math.random() * 3);
   var mobilePropertyObserver = null;
   var mobileCollectionQuery = window.matchMedia ? window.matchMedia('(max-width: 760px)') : null;
   try {
@@ -899,7 +900,7 @@
   };
 
   window.dbPage = function (page) {
-    var pages = Math.max(1, Math.ceil(rows.length / pageSize));
+    var pages = Math.max(1, Math.ceil(orderedCollectionRows(false).length / pageSize));
     currentPage = Math.max(1, Math.min(pages, parseInt(page, 10) || 1));
     render();
     requestAnimationFrame(function () {
@@ -912,6 +913,40 @@
 
   function isMobileCollection() {
     return !!(mobileCollectionQuery && mobileCollectionQuery.matches);
+  }
+
+  function primaryHome() {
+    return rows.filter(function (r) { return r.kind === 'home'; })[0] || null;
+  }
+
+  function orderedCollectionRows(mobile) {
+    var home = primaryHome();
+    var rest = rows.filter(function (r) { return !home || r.id !== home.id; })
+      .slice().sort(SORTS[sortBy].fn);
+    if (mobile && home) return [home].concat(rest);
+    return home ? rest : rows.slice().sort(SORTS[sortBy].fn);
+  }
+
+  function mobileSponsorCard() {
+    return '<article class="mobile-sponsored-card" aria-label="Sponsored Greentree Mortgage message">' +
+      '<div class="mobile-sponsored-label">Sponsored</div>' +
+      '<div class="mobile-sponsored-head"><img src="/johnvarano.jpg" alt="" loading="lazy" decoding="async" ' +
+        'onerror="this.style.display=\'none\'"><div><span>Greentree Mortgage</span>' +
+        '<h3>Know your buying power before the next showing.</h3></div></div>' +
+      '<p>Get a clear preapproval with property taxes and escrow considered from the start.</p>' +
+      '<a href="' + GREENTREE_URL + '" target="_blank" rel="sponsored noopener">Start my preapproval ' +
+        '<i class="fas fa-arrow-right"></i></a>' +
+      '<small>Advertisement. John Varano, NMLS #142739. This is not a commitment to lend.</small>' +
+    '</article>';
+  }
+
+  function renderPropertyBatch(list, start, mobile) {
+    return list.map(function (r, i) {
+      var position = start + i;
+      var html = propertyBlock(r, position);
+      if (mobile && position + 1 === mobileSponsorAt) html += mobileSponsorCard();
+      return html;
+    }).join('');
   }
 
   function resetCollectionForViewport() {
@@ -998,15 +1033,13 @@
     if (!isMobileCollection()) return;
     var grid = document.querySelector('#property-collection .property-card-grid');
     if (!grid) return;
-    var ordered = rows.slice().sort(SORTS[sortBy].fn);
+    var ordered = orderedCollectionRows(true);
     var next = ordered.slice(mobileVisibleCount, mobileVisibleCount + 4);
     if (!next.length) {
       setupMobilePropertyScroll(ordered.length);
       return;
     }
-    grid.insertAdjacentHTML('beforeend', next.map(function (r, i) {
-      return propertyBlock(r, mobileVisibleCount + i);
-    }).join(''));
+    grid.insertAdjacentHTML('beforeend', renderPropertyBatch(next, mobileVisibleCount, true));
     mobileVisibleCount += next.length;
     setupMobilePropertyScroll(ordered.length);
   };
@@ -3804,6 +3837,98 @@ function brief() {
     render();
   };
 
+  function agentIntelMarkup(paid, mobile) {
+    return '<section class="ai' + (mobile ? ' ai-mobile' : '') + '">' +
+      '<div class="ai-h">' +
+        '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
+        '<div><b' + (mobile ? ' id="mobile-intel-title"' : '') + '>' +
+          (paid ? 'Pro Intel' : 'Agent Intel') + '</b>' +
+          '<span>Generated from your saved properties</span></div>' +
+      '</div>' +
+      (paid
+        ? '<span class="ai-star pro" title="Pro tier"><i class="fas fa-star"></i></span>'
+        : '<span class="ai-star" title="Standard account"><i class="far fa-star"></i></span>') +
+      brief() +
+    '</section>';
+  }
+
+  window.dbIntelOpen = function () {
+    var overlay = el('mobile-intel-overlay');
+    var content = el('mobile-intel-content');
+    if (!overlay || !content) return;
+    content.innerHTML = agentIntelMarkup(isPro(), true);
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('mobile-intel-open');
+    try { sessionStorage.setItem('watchdogIntelSeen', '1'); } catch (_intelStorageError) {}
+    var nav = document.querySelector('.mobile-intel-nav');
+    if (nav) nav.classList.add('seen');
+    var close = overlay.querySelector('.mobile-intel-close');
+    if (close) close.focus();
+  };
+
+  window.dbIntelClose = function () {
+    var overlay = el('mobile-intel-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('mobile-intel-open');
+  };
+
+  window.dbToggleSidebar = function () {
+    if (isMobileCollection()) return;
+    document.body.classList.toggle('db-sidebar-expanded');
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    try { localStorage.setItem('watchdogSidebarExpanded', expanded ? '1' : '0'); } catch (_sidebarStorageError) {}
+    paintSidebarToggle();
+  };
+
+  function paintSidebarToggle() {
+    var button = el('db-sidebar-toggle');
+    if (!button) return;
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
+    var icon = button.querySelector('i');
+    var label = button.querySelector('span');
+    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
+  }
+
+  window.dbScrollTop = function () {
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  };
+
+  function initDashboardChrome() {
+    try {
+      if (localStorage.getItem('watchdogSidebarExpanded') === '1' && !isMobileCollection()) {
+        document.body.classList.add('db-sidebar-expanded');
+      }
+      if (sessionStorage.getItem('watchdogIntelSeen') === '1') {
+        var intelNav = document.querySelector('.mobile-intel-nav');
+        if (intelNav) intelNav.classList.add('seen');
+      }
+    } catch (_chromeStorageError) {}
+    paintSidebarToggle();
+    var queued = false;
+    window.addEventListener('scroll', function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        var top = el('db-to-top');
+        if (top) top.classList.toggle('show', window.scrollY > 850);
+      });
+    }, { passive: true });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') window.dbIntelClose();
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initDashboardChrome, { once: true });
+  else initDashboardChrome();
+
   function render() {
     var homes = rows.filter(function (r) { return r.kind === 'home'; });
     var watch = rows.filter(function (r) { return r.kind === 'watch'; });
@@ -3811,18 +3936,14 @@ function brief() {
     var d = deadline();
 
     var paid = isPro();
-    el('db-brief').innerHTML = rows.length
-      ? '<section class="ai">' +
-          '<div class="ai-h">' +
-            '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
-            '<div><b>' + (paid ? 'Pro Intel' : 'Agent Intel') + '</b>' +
-            '<span>Generated from your saved properties</span></div>' +
-          '</div>' +
-          (paid
-            ? '<span class="ai-star pro" title="Pro tier"><i class="fas fa-star"></i></span>'
-            : '<span class="ai-star" title="Standard account"><i class="far fa-star"></i></span>') +
-          brief() +
-        '</section>'
+    var home = primaryHome();
+    el('db-brief').innerHTML = rows.length && !isMobileCollection()
+      ? '<div class="intel-home-row">' + agentIntelMarkup(paid, false) +
+          '<div class="intel-home-card">' +
+            (home ? propertyBlock(home, 0) :
+              '<a class="claim-home-card" href="/property/"><i class="fas fa-house-circle-plus"></i>' +
+              '<b>Claim your home</b><span>Keep your primary property at the center of the workspace.</span></a>') +
+          '</div></div>'
       : '';
 
     // The rail used to sit here as four large figures. It was space spent on
@@ -3862,9 +3983,8 @@ function brief() {
       return;
     }
 
-    var srt = SORTS[sortBy].fn;
-    var ordered = rows.slice().sort(srt);
     var mobileCollection = isMobileCollection();
+    var ordered = orderedCollectionRows(mobileCollection);
     var pages = Math.max(1, Math.ceil(ordered.length / pageSize));
     if (currentPage > pages) currentPage = pages;
     var offset = mobileCollection ? 0 : (currentPage - 1) * pageSize;
@@ -3877,7 +3997,7 @@ function brief() {
         sortControl(ordered.length) +
         '<section class="property-collection" id="property-collection" aria-label="Saved properties">' +
           '<div class="property-card-grid">' +
-            visible.map(function (r, i) { return propertyBlock(r, i); }).join('') +
+            renderPropertyBatch(visible, offset, mobileCollection) +
           '</div>' +
           (mobileCollection
             ? mobileScrollStatus(ordered.length, visible.length)
