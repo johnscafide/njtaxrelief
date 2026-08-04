@@ -1873,6 +1873,7 @@ body {
   display: block;
   font-family: var(--sans, 'Plus Jakarta Sans'), sans-serif;
   font-size: clamp(11px, 1vw, 15px);
+  font-size: 1.25em;
   font-variant-numeric: tabular-nums;
   font-weight: 800;
   line-height: 1.05;
@@ -1880,7 +1881,7 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.pr-card-metrics small { color: #929dac; display: block; font-size: 8px; margin-top: 3px; text-transform: uppercase; }
+.pr-card-metrics small { color: #929dac; display: block; font-size: .8em; margin-top: 3px; text-transform: uppercase; }
 
 .pr-card-actions {
   display: grid;
