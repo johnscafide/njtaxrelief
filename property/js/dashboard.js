@@ -972,7 +972,7 @@
       numbered += '<button type="button" onclick="dbPage(' + pages + ')">' + pages + '</button>';
     }
 
-    return '<nav class="property-pager" aria-label="Saved property pages">' +
+    return '<nav class="property-pager" style="background:none; box-shadow: none;" aria-label="Saved property pages">' +
       '<span class="pager-count">Showing ' + start + '&ndash;' + end + ' of ' + total + '</span>' +
       '<div class="pager-buttons">' +
         '<button type="button" class="pager-arrow" aria-label="Previous page" onclick="dbPage(' + (currentPage - 1) + ')"' +
