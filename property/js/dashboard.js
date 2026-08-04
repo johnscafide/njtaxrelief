@@ -3852,6 +3852,99 @@ function brief() {
     '</section>';
   }
 
+
+  // ══════════════════════════════════════════════
+  // PORTFOLIO STRIP
+  //
+  // What replaced the Intel panel. A map on its own is decoration: pins tell
+  // you where things are, which the address already did. This pairs the map
+  // with the Watchdog Score, so the pin IS the comparison, and puts the whole
+  // portfolio on one scale beside it.
+  //
+  // Uses Leaflet where it is loaded and degrades to the ranking alone where it
+  // is not, because the ranking is the part that carries the meaning.
+  // ══════════════════════════════════════════════
+  var pfMap = null, pfMarkers = {};
+
+  function portfolioMap() {
+    var scored = rows.map(function (r) {
+      var w = watchdogScore(r);
+      return w ? { r: r, w: w } : null;
+    }).filter(Boolean);
+
+    if (!scored.length) return '';
+    scored.sort(function (a, b) { return b.w.score - a.w.score; });
+
+    var avg = Math.round(scored.reduce(function (a, x) { return a + x.w.score; }, 0) / scored.length);
+    var cases = rows.filter(function (r) { var c = chapter123(r); return c && c.testable && c.hasCase; }).length;
+
+    setTimeout(drawPortfolioMap, 60);
+
+    return '<section class="pf-strip">' +
+      '<div class="pf-map"><div id="pf-map"></div>' +
+        '<div class="pf-map-note"><i class="fas fa-dog"></i> Pins show the Watchdog Score</div></div>' +
+      '<div class="pf-rank">' +
+        '<div class="pf-rank-h">' +
+          '<div><b>' + avg + '</b><span>average Watchdog Score</span></div>' +
+          (cases ? '<div class="hot"><b>' + cases + '</b><span>with an appeal case</span></div>' : '') +
+        '</div>' +
+        '<div class="pf-list">' + scored.map(function (x) {
+          return '<a class="pf-i" href="/property/home.html?pin=' + encodeURIComponent(x.r.pams_pin || '') + '" ' +
+            'onmouseenter="pfHi(\'' + esc(x.r.pams_pin) + '\',1)" ' +
+            'onmouseleave="pfHi(\'' + esc(x.r.pams_pin) + '\',0)">' +
+            '<span class="pf-s ' + x.w.band + '">' + x.w.score + '</span>' +
+            '<span class="pf-a">' + esc(x.r.address) + '<em>' + esc(x.r.town || '') + '</em></span>' +
+            '<span class="pf-b"><i class="' + x.w.band + '" style="width:' + x.w.score + '%"></i></span>' +
+          '</a>';
+        }).join('') + '</div>' +
+        '<div class="pf-foot">Higher is a better tax position. It says nothing about the house itself.</div>' +
+      '</div></section>';
+  }
+
+  function drawPortfolioMap() {
+    var host = el('pf-map');
+    if (!host || typeof L === 'undefined') {
+      if (host) host.parentNode.style.display = 'none';
+      return;
+    }
+    var pts = [];
+    try {
+      if (pfMap) { pfMap.remove(); pfMap = null; }
+      pfMarkers = {};
+      pfMap = L.map('pf-map', { zoomControl: false, scrollWheelZoom: false, attributionControl: false });
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
+        { maxZoom: 19, subdomains: 'abcd' }).addTo(pfMap);
+
+      rows.forEach(function (r) {
+        if (r.lat == null || r.lon == null) return;
+        var w = watchdogScore(r);
+        if (!w) return;
+        var mk = L.marker([r.lat, r.lon], {
+          icon: L.divIcon({ className: 'pf-pin-wrap',
+            html: '<div class="pf-pin ' + w.band + '"><i class="fas fa-dog"></i><b>' + w.score + '</b></div>',
+            iconSize: [58, 24], iconAnchor: [29, 24] })
+        }).addTo(pfMap);
+        mk.bindTooltip('<b>' + esc(r.address) + '</b><br>Watchdog Score ' + w.score, { direction: 'top' });
+        pfMarkers[r.pams_pin] = mk;
+        pts.push([r.lat, r.lon]);
+      });
+
+      if (!pts.length) { host.parentNode.style.display = 'none'; return; }
+      if (pts.length === 1) pfMap.setView(pts[0], 14);
+      else pfMap.fitBounds(pts, { padding: [34, 34], maxZoom: 13 });
+      setTimeout(function () { if (pfMap) pfMap.invalidateSize(); }, 120);
+    } catch (e) {
+      if (host) host.parentNode.style.display = 'none';
+    }
+  }
+
+  window.pfHi = function (pin, on) {
+    var m = pfMarkers[pin];
+    if (!m || !m._icon) return;
+    var p = m._icon.querySelector('.pf-pin');
+    if (p) p.classList.toggle('hi', !!on);
+  };
+
   window.dbIntelOpen = function () {
     var overlay = el('mobile-intel-overlay');
     var content = el('mobile-intel-content');
@@ -3861,7 +3954,7 @@ function brief() {
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('mobile-intel-open');
     try { sessionStorage.setItem('watchdogIntelSeen', '1'); } catch (_intelStorageError) {}
-    var nav = document.querySelector('.mobile-intel-nav');
+    var nav = document.querySelector('.intel-nav');
     if (nav) nav.classList.add('seen');
     var close = overlay.querySelector('.mobile-intel-close');
     if (close) close.focus();
@@ -3906,7 +3999,7 @@ function brief() {
         document.body.classList.add('db-sidebar-expanded');
       }
       if (sessionStorage.getItem('watchdogIntelSeen') === '1') {
-        var intelNav = document.querySelector('.mobile-intel-nav');
+        var intelNav = document.querySelector('.intel-nav');
         if (intelNav) intelNav.classList.add('seen');
       }
     } catch (_chromeStorageError) {}
@@ -3937,14 +4030,10 @@ function brief() {
 
     var paid = isPro();
     var home = primaryHome();
-    el('db-brief').innerHTML = rows.length && !isMobileCollection()
-      ? '<div class="intel-home-row">' + agentIntelMarkup(paid, false) +
-          '<div class="intel-home-card">' +
-            (home ? propertyBlock(home, 0) :
-              '<a class="claim-home-card" href="/property/"><i class="fas fa-house-circle-plus"></i>' +
-              '<b>Claim your home</b><span>Keep your primary property at the center of the workspace.</span></a>') +
-          '</div></div>'
-      : '';
+    // Agent Intel is now an overlay at every width, reached from the sidebar.
+    // It reads better as something you open than as a block you scroll past,
+    // and it frees the top of the page for something that earns its place.
+    el('db-brief').innerHTML = rows.length ? portfolioMap() : '';
 
     // The rail used to sit here as four large figures. It was space spent on
     // numbers nobody acts on, so it now reads as one quiet line under the
@@ -3972,13 +4061,29 @@ function brief() {
     }
 
     if (view === 'pro') {
-      el('db-body').innerHTML =
-        dashboardWithAd(
-          locked('The full table',
-            'Every property with its ratio, supported assessment, statutory limit and appeal value, in one scannable grid.',
-            proTable()) +
-          toolsHTML()
-        );
+      var body;
+      if (isPro()) {
+        body = proTable() +
+          [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
+      } else {
+        body =
+          proLocked('The full table',
+            'Every saved property on one line, with its town ratio, supported assessment, statutory limit ' +
+            'and the annual dollars at stake. Built to be scanned, sorted and exported.',
+            ['Ratio and supported assessment per parcel',
+             'Chapter 123 limit and the amount over it',
+             'Estimated annual saving, ranked',
+             'Sortable and exportable'],
+            ghostTable(7, 8)) +
+          proLocked('Analysis tools',
+            'The comparisons that need more than one property to be worth anything.',
+            ['Where each property sits in its town\u2019s tax distribution',
+             'Portfolio totals and blended effective rate',
+             'Town by town comparison across all 565 municipalities',
+             'CSV and print exports in the format a county board expects'],
+            ghostPanel());
+      }
+      el('db-body').innerHTML = dashboardWithAd(body);
       afterTools();
       return;
     }
@@ -4020,12 +4125,58 @@ function brief() {
     // property, so printing them under a list of five was misleading. They now
     // live on that property's own report page, and each card carries the short
     // version instead.
-    var free = [toolDrift()].filter(Boolean).join('');
-    var pro = [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
-    return free +
-      (pro ? locked('Analysis tools',
-        'Where you sit in your town, portfolio totals, town comparisons and the exports.', pro) : '') +
-      toolCost();
+    // The standard view shows only what a standard account can use. A locked
+    // panel sitting in the default view is an advert wearing the costume of a
+    // feature, and it makes the page feel smaller than it is. Everything gated
+    // lives behind the Pro tab, where somebody has actively gone looking.
+    return [toolDrift()].filter(Boolean).join('') + toolCost();
+  }
+
+  // ══════════════════════════════════════════════
+  // PRO VIEW
+  //
+  // A standard account sees the shape of what it is missing, not a wall of
+  // text telling it. The preview underneath is deliberately generic: real
+  // figures behind a blur are still readable if somebody opens the inspector,
+  // and showing a stranger's numbers to make a sales point is a bad trade.
+  // ══════════════════════════════════════════════
+  function proLocked(title, why, bullets, preview) {
+    if (isPro()) return null;
+    return '<section class="prolock">' +
+      '<div class="prolock-ghost" aria-hidden="true">' + preview + '</div>' +
+      '<div class="prolock-over">' +
+        '<div class="prolock-badge"><i class="fas fa-lock"></i> Pro</div>' +
+        '<h3>' + esc(title) + '</h3>' +
+        '<p>' + why + '</p>' +
+        '<ul>' + bullets.map(function (b) { return '<li>' + b + '</li>'; }).join('') + '</ul>' +
+        '<button class="prolock-btn" onclick="dbUpgrade()">See what Pro includes</button>' +
+      '</div></section>';
+  }
+
+  // Placeholder geometry only. No real addresses, no real figures.
+  function ghostTable(rowsN, colsN) {
+    var head = '<div class="gh-r gh-h">' + Array(colsN + 1).join('<i></i>') + '</div>';
+    var body = '';
+    for (var i = 0; i < rowsN; i++) {
+      body += '<div class="gh-r">';
+      for (var j = 0; j < colsN; j++) {
+        body += '<i style="width:' + (42 + ((i * 7 + j * 13) % 46)) + '%"></i>';
+      }
+      body += '</div>';
+    }
+    return '<div class="gh-t">' + head + body + '</div>';
+  }
+
+  function ghostPanel() {
+    return '<div class="gh-p">' +
+      '<div class="gh-bars">' +
+        [72, 46, 88, 61, 34].map(function (h) {
+          return '<i style="height:' + h + '%"></i>';
+        }).join('') +
+      '</div>' +
+      '<div class="gh-lines">' +
+        [86, 64, 92, 51].map(function (w) { return '<i style="width:' + w + '%"></i>'; }).join('') +
+      '</div></div>';
   }
 
   function afterTools() {
