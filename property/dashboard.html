@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260804b">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260804c">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -46,10 +46,18 @@
         <div><b>Watchdog</b><small>Property Tax Database</small></div>
       </a>
 
+      <button class="db-sidebar-toggle" id="db-sidebar-toggle" type="button" onclick="dbToggleSidebar()"
+        aria-label="Expand navigation" aria-expanded="false">
+        <i class="fas fa-chevron-right"></i><span>Expand navigation</span>
+      </button>
+
       <div class="db-side-section">
         <span class="db-side-label">Workspace</span>
         <button class="pn on" data-p="main" onclick="dbPanel('main')"><i class="fas fa-table-columns"></i><span>Overview</span></button>
         <button class="pn" data-p="profile" onclick="dbPanel('profile')"><i class="fas fa-user-gear"></i><span>Profile &amp; benefits</span></button>
+        <button class="pn mobile-intel-nav" type="button" onclick="dbIntelOpen()">
+          <i class="fas fa-dog"></i><span>Agent Intel</span><em class="intel-nav-dot" aria-hidden="true"></em>
+        </button>
         <a class="db-side-link" href="/property/dashboard.html#wishlist"><i class="fas fa-heart"></i><span>Watchlist</span></a>
         <a class="db-side-link" href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved reports</span></a>
       </div>
@@ -84,7 +92,9 @@
               <button class="vw on" data-v="simple" onclick="dbView('simple')"><i class="fas fa-border-all"></i> Standard</button>
               <button class="vw" data-v="pro" onclick="dbView('pro')"><i class="fas fa-table-list"></i> Pro</button>
             </div>
-            <a class="db-add" href="/property/"><i class="fas fa-plus"></i> Add property</a>
+            <a class="db-add" href="/property/" aria-label="Add property"><i class="fas fa-plus"></i>
+              <span class="db-add-full">Add property</span><span class="db-add-short">Add</span>
+            </a>
           </div>
         </div>
       </header>
@@ -106,6 +116,21 @@
   </div>
 
 </main>
+
+<div class="mobile-intel-overlay" id="mobile-intel-overlay" aria-hidden="true"
+  onclick="if(event.target===this)dbIntelClose()">
+  <section class="mobile-intel-sheet" role="dialog" aria-modal="true" aria-labelledby="mobile-intel-title">
+    <div class="mobile-intel-bar" aria-hidden="true"></div>
+    <button class="mobile-intel-close" type="button" onclick="dbIntelClose()" aria-label="Close Agent Intel">
+      <i class="fas fa-xmark"></i>
+    </button>
+    <div id="mobile-intel-content"></div>
+  </section>
+</div>
+
+<button class="db-to-top" id="db-to-top" type="button" onclick="dbScrollTop()" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
 
 <!-- ============================================================
      WATCHDOG FOOTER
@@ -1067,6 +1092,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/scripts.js"></script>
-<script src="/property/js/dashboard.js?v=20260804b"></script>
+<script src="/property/js/dashboard.js?v=20260804c"></script>
 </body>
 </html>
