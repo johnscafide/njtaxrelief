@@ -3918,7 +3918,7 @@ function brief() {
     }));
   }
 
-  var pfMap = null, pfMarkers = {}, pfSig = null;
+  var pfMap = null, pfMarkers = {}, pfHost = null;
 
   function portfolioMap() {
     var scored = rows.map(function (r) {
@@ -3932,15 +3932,24 @@ function brief() {
     var avg = Math.round(scored.reduce(function (a, x) { return a + x.w.score; }, 0) / scored.length);
     var cases = rows.filter(function (r) { var c = chapter123(r); return c && c.testable && c.hasCase; }).length;
 
-    // paint() runs again after details hydrate, so guard the redraw: geocoding
-    // is cached but rebuilding the map on every paint is wasted work.
-    var sig = rows.map(function (x) { return x.pams_pin; }).join('|');
-    if (pfSig !== sig || !pfMap) {
-      pfSig = sig;
+    // paint() runs again after details hydrate, and it returns a brand new
+    // #pf-map div every time. A guard that only compared the property list
+    // therefore skipped the redraw into a container that had just been
+    // replaced, leaving the placeholder spinning forever with the live map
+    // still bound to a node no longer in the document.
+    //
+    // So the guard now asks the only question that matters: is the map
+    // attached to the element currently on the page?
+    setTimeout(function () {
+      var host = el('pf-map');
+      if (!host) return;
+      if (pfHost === host && pfMap) {
+        pfMap.invalidateSize();
+        return;
+      }
+      pfHost = host;
       locateRows(rows.slice()).then(function () { drawPortfolioMap(); });
-    } else {
-      setTimeout(function () { if (pfMap) pfMap.invalidateSize(); }, 60);
-    }
+    }, 0);
 
     return '<section class="pf-strip">' +
       '<div class="pf-map"><div id="pf-map">' +
@@ -3975,8 +3984,9 @@ function brief() {
 
   function drawPortfolioMap() {
     var host = el('pf-map');
-    if (!host) return;
-    if (typeof L === 'undefined') { mapFallback('Map library did not load.'); return; }
+    if (!host) { pfHost = null; return; }
+    pfHost = host;
+    if (typeof L === 'undefined') { mapFallback('Map library did not load.'); pfMap = null; return; }
     var pts = [];
     try {
       if (pfMap) { pfMap.remove(); pfMap = null; }
@@ -3999,12 +4009,13 @@ function brief() {
         pts.push([r.lat, r.lon]);
       });
 
-      if (!pts.length) { mapFallback('Could not place these addresses on a map.'); return; }
+      if (!pts.length) { mapFallback('Could not place these addresses on a map.'); pfMap = null; return; }
       if (pts.length === 1) pfMap.setView(pts[0], 14);
       else pfMap.fitBounds(pts, { padding: [34, 34], maxZoom: 13 });
       setTimeout(function () { if (pfMap) pfMap.invalidateSize(); }, 120);
     } catch (e) {
       mapFallback('Map could not be drawn.');
+      pfMap = null;
     }
   }
 
