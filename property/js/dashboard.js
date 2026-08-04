@@ -864,6 +864,15 @@
   // SORTING
   // ══════════════════════════════════════════════
   var sortBy = 'added';
+  var pageSize = 4;
+  var currentPage = 1;
+  var mobileVisibleCount = 4;
+  var mobilePropertyObserver = null;
+  var mobileCollectionQuery = window.matchMedia ? window.matchMedia('(max-width: 760px)') : null;
+  try {
+    var savedPageSize = parseInt(localStorage.getItem('watchdogDashboardPageSize'), 10);
+    if ([4, 10, 25, 100].indexOf(savedPageSize) > -1) pageSize = savedPageSize;
+  } catch (_pageSizeError) {}
   var SORTS = {
     added:     { label: 'Recently added',   fn: function (a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); } },
     valHigh:   { label: 'Highest value',    fn: function (a, b) { return mv(b) - mv(a); } },
@@ -875,24 +884,159 @@
 
   window.dbSort = function (k) {
     sortBy = k;
+    currentPage = 1;
+    mobileVisibleCount = 4;
     render();
   };
 
-  function sortControl() {
+  window.dbPageSize = function (value) {
+    var next = parseInt(value, 10);
+    if ([4, 10, 25, 100].indexOf(next) === -1) next = 4;
+    pageSize = next;
+    currentPage = 1;
+    try { localStorage.setItem('watchdogDashboardPageSize', String(next)); } catch (_storageError) {}
+    render();
+  };
+
+  window.dbPage = function (page) {
+    var pages = Math.max(1, Math.ceil(rows.length / pageSize));
+    currentPage = Math.max(1, Math.min(pages, parseInt(page, 10) || 1));
+    render();
+    requestAnimationFrame(function () {
+      var collection = document.getElementById('property-collection');
+      if (!collection) return;
+      var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      collection.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    });
+  };
+
+  function isMobileCollection() {
+    return !!(mobileCollectionQuery && mobileCollectionQuery.matches);
+  }
+
+  function resetCollectionForViewport() {
+    currentPage = 1;
+    mobileVisibleCount = 4;
+    if (rows.length) render();
+  }
+
+  if (mobileCollectionQuery) {
+    if (mobileCollectionQuery.addEventListener) mobileCollectionQuery.addEventListener('change', resetCollectionForViewport);
+    else if (mobileCollectionQuery.addListener) mobileCollectionQuery.addListener(resetCollectionForViewport);
+  }
+
+  function sortControl(total) {
     return '<div class="sortbar">' +
-      '<label>Sort</label>' +
-      '<select onchange="dbSort(this.value)">' +
-        Object.keys(SORTS).map(function (k) {
-          return '<option value="' + k + '"' + (k === sortBy ? ' selected' : '') + '>' +
-            SORTS[k].label + '</option>';
-        }).join('') +
-      '</select>' +
+      '<div class="sortbar-control"><label for="db-sort">Sort</label>' +
+        '<select id="db-sort" onchange="dbSort(this.value)">' +
+          Object.keys(SORTS).map(function (k) {
+            return '<option value="' + k + '"' + (k === sortBy ? ' selected' : '') + '>' +
+              SORTS[k].label + '</option>';
+          }).join('') +
+        '</select></div>' +
+      '<div class="sortbar-control page-size-control"><label for="db-page-size">Show</label>' +
+        '<select id="db-page-size" onchange="dbPageSize(this.value)">' +
+          [4, 10, 25, 100].map(function (n) {
+            return '<option value="' + n + '"' + (n === pageSize ? ' selected' : '') + '>' + n + '</option>';
+          }).join('') +
+        '</select><span>per page</span></div>' +
+      '<span class="property-total">' + total + ' saved propert' + (total === 1 ? 'y' : 'ies') + '</span>' +
       (picked.length
         ? '<span class="cmp-count">' + picked.length + ' selected' +
           '<button onclick="dbCompareSel()"' + (picked.length < 2 ? ' disabled' : '') + '>Compare</button>' +
           '<button class="clr" onclick="dbClearPick()">Clear</button></span>'
         : '<span class="cmp-hint">Tick up to three properties to compare them</span>') +
     '</div>';
+  }
+
+  function pagination(total) {
+    var pages = Math.max(1, Math.ceil(total / pageSize));
+    if (currentPage > pages) currentPage = pages;
+    var start = total ? ((currentPage - 1) * pageSize) + 1 : 0;
+    var end = Math.min(total, currentPage * pageSize);
+    var from = Math.max(1, currentPage - 2);
+    var to = Math.min(pages, from + 4);
+    from = Math.max(1, to - 4);
+    var numbered = '';
+
+    if (from > 1) {
+      numbered += '<button type="button" onclick="dbPage(1)">1</button>';
+      if (from > 2) numbered += '<span class="pager-gap" aria-hidden="true">&hellip;</span>';
+    }
+    for (var p = from; p <= to; p++) {
+      numbered += '<button type="button"' + (p === currentPage ? ' class="on" aria-current="page"' : '') +
+        ' onclick="dbPage(' + p + ')">' + p + '</button>';
+    }
+    if (to < pages) {
+      if (to < pages - 1) numbered += '<span class="pager-gap" aria-hidden="true">&hellip;</span>';
+      numbered += '<button type="button" onclick="dbPage(' + pages + ')">' + pages + '</button>';
+    }
+
+    return '<nav class="property-pager" aria-label="Saved property pages">' +
+      '<span class="pager-count">Showing ' + start + '&ndash;' + end + ' of ' + total + '</span>' +
+      '<div class="pager-buttons">' +
+        '<button type="button" class="pager-arrow" aria-label="Previous page" onclick="dbPage(' + (currentPage - 1) + ')"' +
+          (currentPage === 1 ? ' disabled' : '') + '><i class="fas fa-chevron-left"></i></button>' +
+        numbered +
+        '<button type="button" class="pager-arrow" aria-label="Next page" onclick="dbPage(' + (currentPage + 1) + ')"' +
+          (currentPage === pages ? ' disabled' : '') + '><i class="fas fa-chevron-right"></i></button>' +
+      '</div>' +
+    '</nav>';
+  }
+
+  function mobileScrollStatus(total, showing) {
+    return '<div class="mobile-scroll-status" aria-live="polite">' +
+      '<span id="mobile-scroll-count">Showing ' + showing + ' of ' + total + '</span>' +
+      (showing < total
+        ? '<div class="property-scroll-sentinel" id="property-scroll-sentinel">' +
+            '<span class="property-scroll-pulse"></span><span>Loading more properties</span></div>'
+        : '<span class="mobile-scroll-end"><i class="fas fa-circle-check"></i>All properties loaded</span>') +
+    '</div>';
+  }
+
+  window.dbLoadMoreProperties = function () {
+    if (!isMobileCollection()) return;
+    var grid = document.querySelector('#property-collection .property-card-grid');
+    if (!grid) return;
+    var ordered = rows.slice().sort(SORTS[sortBy].fn);
+    var next = ordered.slice(mobileVisibleCount, mobileVisibleCount + 4);
+    if (!next.length) {
+      setupMobilePropertyScroll(ordered.length);
+      return;
+    }
+    grid.insertAdjacentHTML('beforeend', next.map(function (r, i) {
+      return propertyBlock(r, mobileVisibleCount + i);
+    }).join(''));
+    mobileVisibleCount += next.length;
+    setupMobilePropertyScroll(ordered.length);
+  };
+
+  function setupMobilePropertyScroll(total) {
+    if (mobilePropertyObserver) {
+      mobilePropertyObserver.disconnect();
+      mobilePropertyObserver = null;
+    }
+    var status = document.querySelector('.mobile-scroll-status');
+    if (!status) return;
+    var shown = Math.min(mobileVisibleCount, total);
+    var count = document.getElementById('mobile-scroll-count');
+    if (count) count.textContent = 'Showing ' + shown + ' of ' + total;
+    var sentinel = document.getElementById('property-scroll-sentinel');
+    if (shown >= total) {
+      if (sentinel) sentinel.outerHTML = '<span class="mobile-scroll-end"><i class="fas fa-circle-check"></i>All properties loaded</span>';
+      return;
+    }
+    if (!sentinel) return;
+    if (!('IntersectionObserver' in window)) {
+      sentinel.innerHTML = '<button type="button" onclick="dbLoadMoreProperties()">Load more properties</button>';
+      return;
+    }
+    mobilePropertyObserver = new IntersectionObserver(function (entries) {
+      if (!entries[0] || !entries[0].isIntersecting) return;
+      mobilePropertyObserver.disconnect();
+      window.dbLoadMoreProperties();
+    }, { root: null, rootMargin: '500px 0px', threshold: 0.01 });
+    mobilePropertyObserver.observe(sentinel);
   }
 
   // ══════════════════════════════════════════════
@@ -1033,7 +1177,10 @@
   // Gating is presentational. Everything here is public record either way,
   // so nothing sensitive hides behind it.
   // ══════════════════════════════════════════════
-  function isPro() { return !!(profile && profile.plan === 'pro'); }
+  function isPro() {
+    var plan = String((profile && profile.plan) || '').toLowerCase().replace(/[\s_-]/g, '');
+    return plan === 'pro' || plan === 'pro+' || plan === 'proplus' || plan === 'teams';
+  }
 
   function locked(label, why, html) {
     if (isPro()) return html;
@@ -1310,105 +1457,59 @@ function brief() {
   }
      
   // ══════════════════════════════════════════════
-  // PROPERTY  ·  simple view
-  // The numbers, in a sentence, then a hairline table. No card, no shadow.
+  // PROPERTY  ·  fast compact card view
+  // Only the current page is rendered, keeping Street View requests bounded.
   // ══════════════════════════════════════════════
-  function propertyBlock(r) {
+  function propertyBlock(r, index) {
     var c = chapter123(r);
-    var s = sr1aFor(r);
     var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
     var v = VERIFY[r.verify_level || 'self'];
-
     var tone = (c && c.hasCase) ? 'hot' : (c && c.testable) ? 'ok' : 'neutral';
     var statusLabel = (c && c.hasCase) ? 'Review recommended' :
       (c && c.testable) ? 'Assessment in range' : 'Analysis building';
     var statusIcon = (c && c.hasCase) ? 'fa-triangle-exclamation' :
       (c && c.testable) ? 'fa-circle-check' : 'fa-wave-square';
+    var market = c && Number.isFinite(+c.market) ? money(rnd(+c.market)) : '&mdash;';
+    var paid = isPro();
+    var tierLink = paid
+      ? '<a class="pr-tier pro" href="/property/pro.html"><i class="fas fa-briefcase"></i>Pro Hub</a>'
+      : '<a class="pr-tier upgrade" href="/property/pro.html"><i class="fas fa-star"></i>Upgrade to Pro</a>';
 
-    var head =
-      '<div class="pr-top">' +
-        '<div class="pr-shotwrap">' +
-          '<div class="pr-shot">' +
-            '<img src="' + streetImg(r, 400, 260) + '" alt="' + esc(r.address) + '" loading="lazy" ' +
-              'onerror="this.parentNode.classList.add(\'noimg\')">' +
-            (r.kind === 'home' ? '<span class="pr-kind home">Your home</span>'
-                               : '<span class="pr-kind">Watching</span>') +
-            wdBadge(r) +
+    return '<div class="pr-item" style="--card-i:' + (index || 0) + '">' +
+      '<article class="pr-card ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
+        '<div class="pr-card-media">' +
+          '<img src="' + streetImg(r, 520, 390) + '" alt="Street View of ' + esc(r.address) + '" ' +
+            'loading="lazy" decoding="async" fetchpriority="low" width="520" height="390" ' +
+            'onerror="this.parentNode.classList.add(\'noimg\')">' +
+          '<span class="pr-kind ' + (r.kind === 'home' ? 'home' : '') + '">' +
+            (r.kind === 'home' ? 'Your home' : 'Watching') + '</span>' +
+          '<label class="pr-card-compare"><input type="checkbox"' +
+            (picked.indexOf(r.id) > -1 ? ' checked' : '') +
+            ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
+          '<div class="pr-card-menu">' + propMenu(r) + '</div>' +
+          wdBadge(r) +
+        '</div>' +
+        '<div class="pr-card-body">' +
+          '<div class="pr-card-status ' + tone + '"><i class="fas ' + statusIcon + '"></i>' +
+            '<span>' + statusLabel + '</span><em>' + esc(v.label) + '</em></div>' +
+          '<h3 title="' + esc(r.address) + '">' + esc(r.address) + '</h3>' +
+          '<p>' + esc(r.town || '') + (r.county ? ', ' + esc(r.county) + ' County' : '') +
+            (r.block ? ' &middot; Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') + '</p>' +
+          '<div class="pr-card-metrics">' +
+            '<span><b>' + money(r.assessed || 0) + '</b><small>Assessed</small></span>' +
+            '<span><b>' + money(r.last_year_tax || 0) + '</b><small>Tax / year</small></span>' +
+            '<span><b>' + market + '</b><small>Market value</small></span>' +
           '</div>' +
         '</div>' +
-        '<div class="pr-id">' +
-          '<div class="pr-titlerow">' +
-            '<div class="pr-record-state ' + tone + '"><i class="fas ' + statusIcon + '"></i>' +
-              '<span>' + statusLabel + '</span><em>' + esc(addedOn(r)) + '</em></div>' +
-            '<div class="pr-record-controls">' +
-              '<label class="pick"><input type="checkbox"' + (picked.indexOf(r.id) > -1 ? ' checked' : '') +
-                ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
-              propMenu(r) +
-            '</div>' +
-          '</div>' +
-          '<h3>' + esc(r.address) + '</h3>' +
-          '<div class="pr-sub">' + esc(r.town || '') +
-            (r.county ? ', ' + esc(r.county) + ' County' : '') +
-            (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
-          '</div>' +
-          detailLine(r) +
-          '<div class="pr-tags">' +
-            '<span class="tg ' + v.cls + '"><i class="fas ' +
-              (r.verify_level === 'mail' ? 'fa-circle-check' : 'fa-circle-half-stroke') + '"></i>' +
-              v.label + '</span>' +
-            (c && c.hasCase
-              ? '<span class="tg hot"><i class="fas fa-scale-unbalanced-flip"></i>Over the limit by ' +
-                money(c.over) + '</span>'
-              : c && c.testable
-              ? '<span class="tg ok"><i class="fas fa-circle-check"></i>Within Chapter 123</span>'
-              : '') +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-    var line = c
-      ? '<p class="pr-line">Assessed <b>' + money(r.assessed) + '</b>, taxed <b>' +
-        money(r.last_year_tax || 0) + '</b> a year. ' +
-        (c.src === 'verified'
-          ? 'Against <b>' + c.n + '</b> verified sales in this town the market value works out to <b>' +
-            money(rnd(c.market)) + '</b>.'
-          : 'The published ratio implies <b>' + money(rnd(c.market)) + '</b>.') +
-        (s && s.ppsf ? ' Homes here trade around <b>$' + s.ppsf + ' a square foot</b>.' : '') + '</p>'
-      : '';
-
-    var figs =
-      '<dl class="fig">' +
-        f('Assessed', money(r.assessed || 0)) +
-        f('Annual tax', money(r.last_year_tax || 0)) +
-        f('Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-') +
-        (c ? f('Market value', money(rnd(c.market))) : '') +
-        (s ? f('Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
-        (s && s.medPrice ? f('Median sale here', money(s.medPrice)) : '') +
-      '</dl>';
-
-    var appeal = '';
-    if (c && c.testable) {
-      appeal = locked('Chapter 123 analysis',
-        'The supported assessment, the statutory limit, and what an appeal would actually be worth.',
-        '<dl class="fig tight">' +
-          f('Supported assessment', money(c.fair), 'from ' + c.basis) +
-          f('Chapter 123 limit', money(c.limit)) +
-          f(c.hasCase ? 'Over by' : 'Under by', money(Math.abs(c.over)), null, c.hasCase ? 'neg' : 'pos') +
-          (c.saving ? f('If reduced', money(c.saving) + '/yr') : '') +
-        '</dl>');
-    } else if (c) {
-      appeal = '<p class="untest">An appeal is argued against comparable sales, not against the ratio, so this ' +
-        'needs the full record to test properly. ' +
-        '<a href="/property/?address=' + q + '">Open it</a> and the analysis saves back here.</p>';
-    }
-
-    return '<article class="pr ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
-      head + line + figs + metricStrip(r) + appeal +
-      '<div class="pr-acts">' +
-        '<a class="prime" href="' + reportLink(r) + '">Full report <i class="fas fa-arrow-right"></i></a>' +
-        '<a href="/property/?address=' + q + '">Property record</a>' +
-        '<button onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">Contact agent</button>' +
-      '</div></article>';
+      '</article>' +
+      '<div class="pr-card-actions">' +
+        '<a class="primary" href="' + reportLink(r) + '"><i class="fas fa-chart-line"></i>Full report</a>' +
+        '<a href="/property/?address=' + q + '"><i class="fas fa-file-lines"></i>Property record</a>' +
+        '<button type="button" onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">' +
+          '<i class="fas fa-envelope"></i>Contact agent</button>' +
+        tierLink +
+      '</div>' +
+    '</div>';
   }
 
   function f(k, v, note, cls) {
@@ -3762,21 +3863,30 @@ function brief() {
     }
 
     var srt = SORTS[sortBy].fn;
-    homes = homes.slice().sort(srt);
-    watch = watch.slice().sort(srt);
+    var ordered = rows.slice().sort(srt);
+    var mobileCollection = isMobileCollection();
+    var pages = Math.max(1, Math.ceil(ordered.length / pageSize));
+    if (currentPage > pages) currentPage = pages;
+    var offset = mobileCollection ? 0 : (currentPage - 1) * pageSize;
+    var visible = mobileCollection
+      ? ordered.slice(0, Math.min(mobileVisibleCount, ordered.length))
+      : ordered.slice(offset, offset + pageSize);
 
     el('db-body').innerHTML =
       dashboardWithAd(
-        sortControl() +
-        (homes.length
-          ? '<section class="band own"><h2 class="grp">Your home' + (homes.length > 1 ? 's' : '') + '</h2>' +
-            homes.map(propertyBlock).join('') + '</section>' : '') +
-        (watch.length
-          ? '<section class="band"><h2 class="grp">Watchlist</h2>' +
-            watch.map(propertyBlock).join('') + '</section>' : '') +
+        sortControl(ordered.length) +
+        '<section class="property-collection" id="property-collection" aria-label="Saved properties">' +
+          '<div class="property-card-grid">' +
+            visible.map(function (r, i) { return propertyBlock(r, i); }).join('') +
+          '</div>' +
+          (mobileCollection
+            ? mobileScrollStatus(ordered.length, visible.length)
+            : pagination(ordered.length)) +
+        '</section>' +
         toolsHTML()
       );
     afterTools();
+    if (mobileCollection) setupMobilePropertyScroll(ordered.length);
   }
 
   function rl(v, l, cls) {
