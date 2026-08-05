@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T18:25:16-04:00",
+  "updated_at": "2026-08-05T18:40:10-04:00",
   "releases": [
+    {
+      "version": "0.16.1",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T18:40:10-04:00",
+      "title": "Developer login workspace repair",
+      "category": "Fix",
+      "status": "Completed",
+      "summary": "Fixed the post-login Dashboard failure for Developer and paid accounts. The standard Dashboard was calling the lazy Pro percentile painter before its module had loaded. The call is now capability-guarded, and Dashboard/Home no longer create a second Supabase auth client through plan simulation.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/data-center.html", "/property/updates.html"],
+      "files": ["property/js/dashboard/index.js", "property/js/plan-context.js", "property/dashboard.html", "property/home.html", "property/data-center.html", "property/data/versions.json"],
+      "impact": { "html": 3, "css": 0, "javascript": 2, "data": 1, "navigation": 0 }
+    },
     {
       "version": "0.16.0",
       "date": "2026-08-05",
