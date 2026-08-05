@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805f';
+  var HOME_MODULE_VERSION = '20260805g';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1692,7 +1692,10 @@
       el('hm-gate').style.display = 'none';
       el('hm-main').style.display = '';
       Promise.all([
-        loadHomeTools(['uniformity', 'revaluation-radar']),
+        // These three modules supply calculations used while the report is
+        // first painted. The remaining report tools stay lazy-loaded when
+        // their corresponding sections are opened.
+        loadHomeTools(['uniformity', 'revaluation-radar', 'reassessment-risk']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         loadRefData(), loadSR1A()
