@@ -1,0 +1,46 @@
+/* ============================================================
+   FAIRNESS INDEX
+   njpropertytaxrelief.com/property/fairness.html
+   Everything else (shell, sidebar, .pro table, .sec cards, .tl-*
+   text styles) comes from dashboard.css. This file only covers
+   what's unique to this page: the search/filter bar and badges.
+   ============================================================ */
+.fi-controls {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 18px;
+}
+.fi-controls input, .fi-controls select {
+  font-family: inherit; font-size: 14px; padding: 9px 12px;
+  border: 1px solid var(--saas-border); border-radius: 8px; color: var(--saas-text);
+}
+.fi-controls input { flex: 1; min-width: 200px; }
+.fi-count { font-size: 12px; color: var(--saas-muted); margin-left: auto; }
+
+.fi-table th[data-k] { cursor: pointer; user-select: none; }
+.fi-table th[data-k]:hover { color: var(--saas-teal); }
+.fi-table th .car { font-size: 10px; margin-left: 3px; opacity: .5; }
+.fi-rank { color: var(--saas-muted); font-variant-numeric: tabular-nums; width: 34px; }
+.fi-town b { display: block; color: var(--saas-text); }
+.fi-town span { font-size: 12px; color: var(--saas-muted); }
+.fi-score { font-weight: 800; font-size: 15.5px; }
+
+.fi-badge {
+  display: inline-block; font-size: 11px; font-weight: 700; padding: 3px 9px;
+  border-radius: 99px; white-space: nowrap;
+}
+.fi-badge.excellent { background: var(--pos-bg); color: var(--pos); }
+.fi-badge.good      { background: var(--accent-bg); color: var(--accent-2); }
+.fi-badge.fair       { background: var(--gold-bg); color: #8a6f14; }
+.fi-badge.poor       { background: var(--neg-bg); color: var(--neg); }
+
+.fi-cta { display: inline-flex; align-items: center; gap: 9px; margin-top: 8px; color: #fff; text-decoration: none; }
+
+@media (max-width: 760px) {
+  .fi-table .n:nth-child(4), .fi-table .n:nth-child(5) { display: none; }
+}
+.fi-detail { scroll-margin-top:110px; margin:18px 0 24px; }
+.fi-detail .ti-report { box-shadow:0 14px 38px rgba(13,38,72,.08); }
+.fi-copy { background:#fff; border:1px solid #d5e0e8; border-radius:9px; color:#173e75; cursor:pointer; font:800 11px inherit; margin-top:9px; padding:10px 13px; }
+.fi-copy i { color:#078486; margin-right:6px; }
+.fi-table tbody tr { cursor:pointer; }
+.fi-table tbody tr:focus { outline:3px solid rgba(7,132,134,.25); outline-offset:-3px; }

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appeal Prospect Scanner | Professional Hub</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805c">
+<link rel="stylesheet" href="/property/css/scan.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div class="pl-toast" id="pl-toast"></div>
+<div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
+
+<header class="sc-top">
+  <div class="sc-top-in">
+    <a class="sc-back" href="/property/pro.html"><i class="fas fa-chevron-left"></i> Pro Hub</a>
+    <div class="sc-title"><b>Appeal Prospect Scanner</b><span>Screen an entire municipality at once</span></div>
+    <a class="sc-tl" href="/property/dashboard.html">My Properties</a>
+  </div>
+</header>
+
+<section class="gate" id="sc-gate" style="display:none;">
+  <h1>Sign in to run a scan</h1>
+  <p>The scanner reads New Jersey's verified sales file against current assessments across a whole town.
+     It needs an account so results can be saved and exported.</p>
+  <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
+  <a class="gate-back" href="/property/pro.html">Back to the Pro Hub</a>
+</section>
+
+<main id="sc-main" style="display:none;">
+  <div class="sc-wrap">
+
+    <div class="sc-intro">
+      <h1>Every property in a town with a provable appeal case</h1>
+      <p>This does not estimate what homes are worth. It reads the price each one <em>actually sold for</em>,
+         verified by the State of New Jersey as a genuine arm's length transaction, and tests the current
+         assessment against it using the Chapter 123 formula a county board applies. A property's own recent
+         sale is the strongest evidence there is, and it needs no appraisal to stand up.</p>
+    </div>
+
+    <div class="sc-form">
+      <div class="sc-f">
+        <label for="sc-county">County</label>
+        <select id="sc-county" onchange="scCounty(this.value)"><option value="">Choose a county</option></select>
+      </div>
+      <div class="sc-f">
+        <label for="sc-town">Municipality</label>
+        <select id="sc-town" disabled><option value="">Choose a county first</option></select>
+      </div>
+      <div class="sc-f narrow">
+        <label for="sc-years">Sale within</label>
+        <select id="sc-years">
+          <option value="2">2 years</option>
+          <option value="3" selected>3 years</option>
+          <option value="6">All on file</option>
+        </select>
+      </div>
+      <div class="sc-f narrow">
+        <label for="sc-min">Min. saving</label>
+        <select id="sc-min">
+          <option value="0">Any</option>
+          <option value="250" selected>$250 a year</option>
+          <option value="500">$500 a year</option>
+          <option value="1000">$1,000 a year</option>
+        </select>
+      </div>
+      <button class="sc-run" onclick="scRun()"><i class="fas fa-magnifying-glass-chart"></i> Run scan</button>
+    </div>
+
+    <p class="sc-cov">Verified sales currently on file cover <b>2024 to 2026</b>. New Jersey publishes
+       one sales file per year, so earlier years can be added as they are loaded.</p>
+
+    <div id="sc-out"></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/scan.js"></script>
+</body>
+</html>

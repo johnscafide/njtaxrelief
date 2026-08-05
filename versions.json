@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "timezone": "America/New_York",
+  "updated_at": "2026-08-05T11:25:15-04:00",
+  "releases": [
+    {
+      "version": "0.8.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T11:25:15-04:00",
+      "title": "Visual version tracker and project roadmap",
+      "category": "Platform",
+      "status": "Completed",
+      "summary": "Added a permanent visual change history, impact charts and prioritized project roadmap. Future releases will receive exact timestamps in this data file.",
+      "links": ["/property/updates.html", "/property/sidemenu.html"],
+      "files": ["property/updates.html", "property/css/updates.css", "property/js/updates.js", "property/data/versions.json", "property/sidemenu.html", "property/js/sidemenu.js"],
+      "impact": { "html": 2, "css": 1, "javascript": 2, "data": 1, "navigation": 1 }
+    },
+    {
+      "version": "0.7.0",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Town Intelligence integration",
+      "category": "Tools",
+      "status": "Completed",
+      "summary": "Connected the Fairness Index and Tax Rate Trajectory across public pages, Dashboard, Home, Agent Intel, comparisons, Pro exports and buyer analysis. Added town comparison, municipal risk matrix and tax pressure simulator.",
+      "links": ["/property/fairness.html", "/property/town-compare.html", "/property/dashboard.html", "/property/home.html", "/property/"],
+      "files": ["property/js/dashboard/tools/town-intelligence.js", "property/js/dashboard/tools/town-risk-matrix.js", "property/js/dashboard/tools/tax-pressure-simulator.js", "property/js/town-compare/index.js", "property/css/dashboard/07-town-intelligence.css", "property/town-compare.html"],
+      "impact": { "html": 8, "css": 3, "javascript": 10, "data": 0, "navigation": 3 }
+    },
+    {
+      "version": "0.6.0",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Persistent property comparison and Agent Intel repair",
+      "category": "Dashboard",
+      "status": "Completed",
+      "summary": "Added a fixed comparison tray with selected-property chips, direct remove and clear actions, corrected comparison-modal map stacking and enabled Agent Intel on desktop.",
+      "links": ["/property/dashboard.html"],
+      "files": ["property/dashboard.html", "property/js/dashboard/index.js", "property/css/dashboard/05-collections.css", "property/css/dashboard/06-responsive-additions.css", "property/css/shared/04-marketing-components.css"],
+      "impact": { "html": 1, "css": 3, "javascript": 1, "data": 0, "navigation": 0 }
+    },
+    {
+      "version": "0.5.0",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Modular CSS and shared responsive navigation",
+      "category": "Architecture",
+      "status": "Completed",
+      "summary": "Split the large shared, Dashboard, Home and Lookup stylesheets into focused modules. Added one sidemenu.html source for desktop and mobile navigation and changed Watchlist to open Home.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/sidemenu.html"],
+      "files": ["property/css/shared/", "property/css/dashboard/", "property/css/home/", "property/css/lookup/", "property/sidemenu.html", "property/js/sidemenu.js"],
+      "impact": { "html": 5, "css": 22, "javascript": 3, "data": 0, "navigation": 5 }
+    },
+    {
+      "version": "0.4.1",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Property report startup dependency fix",
+      "category": "Fix",
+      "status": "Completed",
+      "summary": "Preloaded Reassessment Risk because Agent Intel required ownLag during the first property-report paint.",
+      "links": ["/property/home.html"],
+      "files": ["property/home.html", "property/js/dashboard/home/index.js"],
+      "impact": { "html": 1, "css": 0, "javascript": 1, "data": 0, "navigation": 0 }
+    },
+    {
+      "version": "0.4.0",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Home integrated into the Watchdog workspace",
+      "category": "Home",
+      "status": "Completed",
+      "summary": "Rebuilt the per-property report inside the Dashboard shell while keeping property selection, reports, menus and shared lazy-loaded tools intact.",
+      "links": ["/property/home.html", "/property/dashboard.html"],
+      "files": ["property/home.html", "property/css/home.css", "property/js/dashboard/home/index.js"],
+      "impact": { "html": 2, "css": 1, "javascript": 1, "data": 0, "navigation": 1 }
+    },
+    {
+      "version": "0.3.0",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "True lazy-loaded Dashboard tools",
+      "category": "Architecture",
+      "status": "Completed",
+      "summary": "Separated Dashboard tools into individual ES modules with dependency-aware lazy loading instead of loading one large JavaScript file on every visit.",
+      "links": ["/property/dashboard.html", "/property/js/dashboard/"],
+      "files": ["property/js/dashboard/index.js", "property/js/dashboard/tools/"],
+      "impact": { "html": 1, "css": 0, "javascript": 23, "data": 0, "navigation": 0 }
+    },
+    {
+      "version": "0.2.1",
+      "date": "2026-08-05",
+      "timestamp": null,
+      "time_note": "Time not captured in the original session",
+      "title": "Google OAuth callback and session recovery",
+      "category": "Authentication",
+      "status": "Completed",
+      "summary": "Corrected PKCE callback handling so the OAuth code could be exchanged and the authenticated Dashboard session persisted after Google sign-in.",
+      "links": ["/property/dashboard.html", "/property/home.html"],
+      "files": ["property/js/dashboard/index.js", "property/js/dashboard/home/index.js"],
+      "impact": { "html": 0, "css": 0, "javascript": 2, "data": 0, "navigation": 0 }
+    }
+  ],
+  "roadmap": [
+    { "priority": 1, "title": "Verification code delivery repair", "readiness": "Ready now", "effort": "Medium", "category": "Reliability", "why": "Ownership verification exists in the interface but request_verify_code still needs tracing across the RPC and mail step.", "deliverables": ["RPC diagnostics", "mail delivery logging", "retry-safe user feedback", "verification status test page"] },
+    { "priority": 2, "title": "Modularize lookup.js", "readiness": "Ready now", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith and is the highest-traffic page.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
+    { "priority": 3, "title": "Historical Property Time Machine", "readiness": "Existing data", "effort": "Large", "category": "Data product", "why": "The property_lookups ledger is already accumulating parcel snapshots that New Jersey does not publish as a usable history.", "deliverables": ["snapshot timeline", "assessment and tax change chart", "change explanations", "property report integration"] },
+    { "priority": 4, "title": "Automated state-data refresh pipeline", "readiness": "Ready now", "effort": "Large", "category": "Operations", "why": "Fairness, rates, sales and appeal tools become more valuable when updates are repeatable and timestamped.", "deliverables": ["source freshness registry", "parser runs", "coverage validation", "version history entry generation", "failure report"] },
+    { "priority": 5, "title": "Exempt property and PILOT exposure", "readiness": "Needs NJ download", "effort": "Medium", "category": "Municipal intelligence", "why": "Current abatement data covers only partial exemptions and can understate redevelopment exposure.", "deliverables": ["exempt-value share", "PILOT context", "municipal comparison", "Town Intelligence integration"] },
+    { "priority": 6, "title": "Added and omitted assessment monitor", "readiness": "Needs NJ download", "effort": "Medium", "category": "Homeowner tool", "why": "Home improvements and omitted assessments can create unexpected tax changes outside the normal annual cycle.", "deliverables": ["risk screener", "notice explainer", "deadline guidance", "saved-property alert field"] },
+    { "priority": 7, "title": "Municipal budget pressure", "readiness": "Needs NJ download", "effort": "Large", "category": "Municipal intelligence", "why": "Tax-rate history explains the past; budget and ratable-base pressure can explain what may drive the next cycle without pretending to forecast it.", "deliverables": ["levy trend", "ratable-base growth", "school and municipal components", "pressure bands"] },
+    { "priority": 8, "title": "Farmland assessment qualification", "readiness": "Needs NJ download", "effort": "Medium", "category": "Specialized tool", "why": "Farmland assessment rules and rollback exposure are valuable to rural owners, agents and attorneys.", "deliverables": ["qualification checklist", "acreage and income inputs", "rollback-tax explainer", "professional handoff"] },
+    { "priority": 9, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
+    { "priority": 10, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
+  ]
+}
