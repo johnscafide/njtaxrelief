@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T16:35:00-04:00",
+  "updated_at": "2026-08-05T17:02:42-04:00",
   "releases": [
+    {
+      "version": "0.14.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T17:02:42-04:00",
+      "title": "Mobile app polish for Dashboard and Home",
+      "category": "Mobile UX",
+      "status": "Completed",
+      "summary": "Reworked the phone hierarchy for Dashboard and Home with larger typography and tap targets, floating safe-area navigation, photo-first property presentation, denser but more readable property metrics, compact report chrome and a true full-width Agent Intel bottom sheet on both pages.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/sidemenu.html", "/property/updates.html"],
+      "files": ["property/css/mobile-app.css", "property/dashboard.html", "property/home.html", "property/js/dashboard/home/index.js", "property/updates.html", "property/js/updates.js", "property/data/versions.json"],
+      "impact": { "html": 2, "css": 1, "javascript": 1, "data": 1, "navigation": 2 }
+    },
     {
       "version": "0.13.0",
       "date": "2026-08-05",

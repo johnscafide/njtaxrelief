@@ -46,6 +46,7 @@ const required = [
   'property/data-center.html',
   'property/js/data-center.js',
   'property/css/data-center.css',
+  'property/css/mobile-app.css',
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
@@ -79,7 +80,7 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 4) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.13.0' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.14.0' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -93,6 +94,9 @@ if (!read('property/js/dashboard/home/index.js').includes('toolProfessionalWorkf
 const markerRegistry = JSON.parse(read('property/data/marker-registry.json'));
 if (markerRegistry.summary.total !== 323 || markerRegistry.markers.length !== 323) throw new Error('Marker registry tally changed unexpectedly');
 if (!menu.includes('/property/data-center.html')) throw new Error('Data Center navigation link is missing');
+if (!read('property/home.html').includes('hm-mobile-intel-overlay') || !read('property/home.html').includes('mobile-app.css')) throw new Error('Home mobile app treatment is missing');
+if (!read('property/dashboard.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
+if (!read('property/js/dashboard/home/index.js').includes("class=\"ai ai-mobile\"")) throw new Error('Home Agent Intel mobile sheet is missing');
 if (!menu.includes('db-side-group-toggle') || !menu.includes('db-side-mobile')) throw new Error('Responsive drill-down navigation is missing');
 if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
 if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band + '\"'")) throw new Error('Town Intelligence can still emit an undefined class');
@@ -113,4 +117,4 @@ const cardCss = read('property/css/dashboard/05-collections.css');
 if (!cardCss.includes('aspect-ratio: auto') || !cardCss.includes('grid-template-rows: auto auto')) throw new Error('Dashboard card sizing repair is missing');
 if (cardCss.includes('.pr-card-metrics span { border-left:')) throw new Error('Dashboard metric divider returned');
 
-console.log('Verified release 0.13.0: 323-marker professional registry, Pro+ Data Center, closing evidence, Escrow Shock, municipal research, flood/wetlands preflight, and scrollable drill-down navigation.');
+console.log('Verified release 0.14.0: mobile app polish, full-width Agent Intel sheets, 323-marker professional registry, Pro+ Data Center, professional workflows, and prior Watchdog integrations.');

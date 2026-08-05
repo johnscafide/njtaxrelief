@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805r';
+  var HOME_MODULE_VERSION = '20260805s';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1723,7 +1723,28 @@
 
   window.hmAgentIntel = function () {
     var panel = document.querySelector('#hm-body .ai');
+    var mobile = window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+    if (mobile && panel) {
+      var overlay = el('hm-mobile-intel-overlay'), content = el('hm-mobile-intel-content');
+      if (!overlay || !content) return;
+      content.innerHTML = panel.outerHTML.replace('class="ai"', 'class="ai ai-mobile"')
+        .replace('<b>Agent Intel</b>', '<b id="hm-mobile-intel-title">Agent Intel</b>');
+      overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('mobile-intel-open');
+      document.querySelectorAll('.db-side-mobile .pn').forEach(function (n) { n.classList.remove('on'); });
+      document.querySelectorAll('.db-side-mobile .intel-nav').forEach(function (n) { n.classList.add('on'); });
+      var close = overlay.querySelector('.mobile-intel-close'); if (close) close.focus();
+      return;
+    }
     if (panel && panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  window.hmIntelClose = function () {
+    var overlay = el('hm-mobile-intel-overlay'); if (!overlay) return;
+    overlay.classList.remove('open'); overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('mobile-intel-open');
+    document.querySelectorAll('.db-side-mobile .intel-nav').forEach(function (n) { n.classList.remove('on'); });
+    document.querySelectorAll('.db-side-mobile [data-nav-page="home"]').forEach(function (n) { n.classList.add('on'); });
   };
 
   window.hmScrollTop = function () {

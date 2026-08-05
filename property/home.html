@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Property Report | NJ Property Tax Relief</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
 <link rel="stylesheet" href="/property/css/dashboard.css?v=20260805i">
 <link rel="stylesheet" href="/property/css/home.css?v=20260805c">
+<link rel="stylesheet" href="/property/css/mobile-app.css?v=20260805a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -79,6 +80,17 @@
   </div>
 </main>
 
+<div class="mobile-intel-overlay hm-mobile-intel" id="hm-mobile-intel-overlay" aria-hidden="true"
+  onclick="if(event.target===this)hmIntelClose()">
+  <section class="mobile-intel-sheet" role="dialog" aria-modal="true" aria-labelledby="hm-mobile-intel-title">
+    <div class="mobile-intel-bar" aria-hidden="true"></div>
+    <button class="mobile-intel-close" type="button" onclick="hmIntelClose()" aria-label="Close Agent Intel">
+      <i class="fas fa-xmark"></i>
+    </button>
+    <div id="hm-mobile-intel-content"></div>
+  </section>
+</div>
+
 <button class="db-to-top" id="db-to-top" type="button" onclick="hmScrollTop()" aria-label="Back to top">
   <i class="fas fa-arrow-up"></i>
 </button>
@@ -86,6 +98,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/ownership-verification.js?v=20260805a"></script>
 <script src="/property/js/sidemenu.js?v=20260805f"></script>
-<script type="module" src="/property/js/dashboard/home/index.js?v=20260805r"></script>
+<script type="module" src="/property/js/dashboard/home/index.js?v=20260805s"></script>
 </body>
 </html>

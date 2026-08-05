@@ -1,8 +1,8 @@
-# NJPTR Watchdog platform release 0.13.0
+# NJPTR Watchdog platform release 0.14.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
-Release 0.13.0 fixes the expanded sidebar scroll region and completes the five-part professional foundation: downloadable Closing Evidence, Post-Closing Escrow Shock scenarios, municipal lien/tax-sale research tracking, NJDEP/FEMA flood and wetlands screening, and the first usable Pro+ Data Center field catalog. The marker registry currently contains 323 live unique markers (275 public-source, 48 Watchdog-derived), each labeled by profession, plan tier, category, scope and origin.
+Release 0.14.0 adds a phone-specific app-style presentation for Dashboard and Home. It keeps the professional/data foundation from 0.13.0 while increasing mobile type and touch targets, tightening page chrome, converting Home to a photo-first property layout, floating the five-item safe-area navigation, and moving Agent Intel into a full-width bottom sheet on phones.
 
 ## Included integrations
 
@@ -52,6 +52,10 @@ Release 0.13.0 fixes the expanded sidebar scroll region and completes the five-p
 - Pro+ Data Center field builder with profession/category/origin filters and persistent selections
 - Closing Evidence JSON export with current live public findings
 - Post-Closing Escrow Shock scenario and locally persistent municipal research checklist
+- App-style mobile property cards with larger metrics, labels and action targets
+- Compact mobile Home header, one-row property switcher and photo-first property hero
+- Full-width Agent Intel mobile sheet on both Dashboard and Home; desktop report presentation is unchanged
+- Floating, safe-area-aware five-item mobile navigation
 
 ## Keeping the tracker current
 
