@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805b';
+  var MODULE_VERSION = '20260805c';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -82,6 +82,7 @@
           persistSession: true,
           autoRefreshToken: true,
           detectSessionInUrl: true,
+          flowType: 'pkce',
           // Keep the lookup page and dashboard on the exact same session key.
           storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token'
         } });
@@ -100,7 +101,13 @@
   };
   window.plOAuth = function (p) {
     if (!ready()) return;
-    sb.auth.signInWithOAuth({ provider: p, options: { redirectTo: location.origin + location.pathname } });
+    sb.auth.signInWithOAuth({ provider: p, options: { redirectTo: location.origin + location.pathname } })
+      .then(function (result) {
+        if (result && result.error) {
+          console.error('OAuth start failed:', result.error);
+          toast('Google sign in could not start. Please try again.');
+        }
+      });
   };
   window.plMagicLink = function () {
     var e = el('auth-email'), v = e ? e.value.trim() : '';
@@ -183,11 +190,10 @@
       }
     });
 
+    // Supabase owns the OAuth callback URL. Do not clear its code/hash here:
+    // doing so can remove the callback before the asynchronous exchange has
+    // persisted the session. Supabase safely cleans it after processing.
     readSession();
-
-    if (location.hash.indexOf('access_token') > -1) {
-      history.replaceState(null, '', location.pathname + location.search);
-    }
   }
 
   // Authentication starts after the initial calculation modules are available.
