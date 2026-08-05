@@ -7,11 +7,36 @@
     return document.body.getAttribute('data-sidebar-page') || '';
   }
 
+  function isMobile() {
+    return window.matchMedia && window.matchMedia('(max-width: 760px)').matches;
+  }
+
+  function paintToggle() {
+    var button = document.getElementById('db-sidebar-toggle');
+    if (!button) return;
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
+    var icon = button.querySelector('i');
+    var label = button.querySelector('span');
+    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
+  }
+
+  function genericToggle() {
+    if (isMobile()) return;
+    document.body.classList.toggle('db-sidebar-expanded');
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    try { localStorage.setItem('watchdogSidebarExpanded', expanded ? '1' : '0'); } catch (_storageError) {}
+    paintToggle();
+  }
+
   function runAction(action, event) {
     var page = pageName();
     if (action === 'toggle') {
       if (page === 'home' && typeof window.hmToggleSidebar === 'function') window.hmToggleSidebar();
       else if (typeof window.dbToggleSidebar === 'function') window.dbToggleSidebar();
+      else genericToggle();
       return;
     }
     if (action === 'agent-intel') {
@@ -46,12 +71,18 @@
       var control = event.target.closest('[data-side-action]');
       if (control) runAction(control.getAttribute('data-side-action'), event);
     });
+    try {
+      if (localStorage.getItem('watchdogSidebarExpanded') === '1' && !isMobile()) {
+        document.body.classList.add('db-sidebar-expanded');
+      }
+    } catch (_storageError) {}
+    paintToggle();
   }
 
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260805c', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260805d', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();
@@ -72,4 +103,5 @@
   window.njptrSideMenuReady = document.readyState === 'loading'
     ? new Promise(function (resolve) { document.addEventListener('DOMContentLoaded', function () { load().then(resolve); }, { once: true }); })
     : load();
+  window.njptrToggleSidebar = genericToggle;
 })();

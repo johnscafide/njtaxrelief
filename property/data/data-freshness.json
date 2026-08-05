@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-05T16:08:01.395162+00:00",
+  "overall_status": "passed",
+  "datasets": [
+    {
+      "id": "cod-history",
+      "label": "Coefficient of Deviation history",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 564,
+      "minimum": 550,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.192329+00:00",
+      "cadence": "annual",
+      "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf"
+    },
+    {
+      "id": "uniformity",
+      "label": "Assessment Uniformity scores",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 558,
+      "minimum": 500,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.299085+00:00",
+      "cadence": "annual",
+      "source_url": null
+    },
+    {
+      "id": "appeals",
+      "label": "Property-tax appeal outcomes",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 10,
+      "minimum": 8,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.188560+00:00",
+      "cadence": "annual",
+      "source_url": null
+    },
+    {
+      "id": "tax-rates",
+      "label": "Municipal general tax rates",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 567,
+      "minimum": 500,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.294903+00:00",
+      "cadence": "annual",
+      "source_url": null
+    },
+    {
+      "id": "sr1a-ratios",
+      "label": "Verified-sale municipal ratios",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 536,
+      "minimum": 350,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.294903+00:00",
+      "cadence": "quarterly",
+      "source_url": null
+    },
+    {
+      "id": "verified-sales",
+      "label": "County verified sales files",
+      "agency": "NJ Division of Taxation",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 21,
+      "minimum": 21,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.290903+00:00",
+      "cadence": "quarterly",
+      "source_url": null
+    },
+    {
+      "id": "abatements",
+      "label": "Abatement and exemption indicators",
+      "agency": "NJ public records",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 211,
+      "minimum": 200,
+      "changed": false,
+      "last_modified": "2026-08-05T14:40:14.182903+00:00",
+      "cadence": "annual",
+      "source_url": null
+    }
+  ],
+  "failures": []
+}

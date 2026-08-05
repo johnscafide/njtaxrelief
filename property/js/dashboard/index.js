@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805g';
+  var MODULE_VERSION = '20260805h';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -868,7 +868,7 @@
         '<button onclick="dbDirections(\'' + r.id + '\')"><i class="fas fa-diamond-turn-right"></i> Directions</button>' +
         '<hr>' +
         (r.kind === 'home' && r.verify_level !== 'mail'
-          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
+          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\',\'' + esc(r.town || '').replace(/'/g, '') + '\',\'' + esc(r.zip || '').replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
           : '') +
         '<button class="rm" onclick="dbRemove(\'' + r.id + '\')"><i class="fas fa-trash"></i> Remove</button>' +
       '</div></div>';
@@ -1919,14 +1919,14 @@ function brief() {
   };
 
   // ── ownership verification ──
-  window.dbVerify = function (pin, address) {
+  window.dbVerify = function (pin, address, town, zip) {
     plModalNote('Verify you own this home',
       '<p>New Jersey redacts owner names from the public property file under Daniel\'s Law, so nothing can confirm ownership ' +
       'automatically from public records. The reliable way is the old fashioned one.</p>' +
       '<p><b>I mail a six character code to ' + esc(address) + '.</b> You type it in here. That proves someone receiving mail ' +
       'at the property asked for it, which is the same standard a county board would accept.</p>' +
       '<div class="pl-form" style="grid-template-columns:1fr;">' +
-        '<button onclick="dbRequestCode(\'' + pin + '\',\'' + esc(address).replace(/\'/g, "") + '\')">Mail me a code</button>' +
+        '<button id="vc-request" onclick="dbRequestCode(\'' + pin + '\',\'' + esc(address).replace(/\'/g, "") + '\',\'' + esc(town || '').replace(/\'/g, "") + '\',\'' + esc(zip || '').replace(/\'/g, "") + '\')">Mail me a code</button>' +
       '</div>' +
       '<div class="auth-or"><span>already have one</span></div>' +
       '<div class="pl-form" style="grid-template-columns:1fr;">' +
@@ -1936,13 +1936,26 @@ function brief() {
       '<div class="auth-fine">In a hurry? Email a copy of your tax bill or deed and we will mark it verified by hand.</div>');
   };
 
-  window.dbRequestCode = function (pin, address) {
-    sb.rpc('request_verify_code', { p_pin: pin, p_address: address }).then(function (r) {
-      if (r.error) { toast('Could not request a code'); return; }
+  window.dbRequestCode = function (pin, address, town, zip) {
+    var button = el('vc-request');
+    if (button) { button.disabled = true; button.textContent = 'Submitting mailing...'; }
+    sb.functions.invoke('request-verify-code', { body: { pams_pin: pin, address_line1: address, city: town, postal_code: zip } }).then(function (r) {
+      var data = (r && r.data) || {};
+      if (r.error || !data.ok) {
+        var reason = data.reason || (r.error && r.error.message) || 'Could not request a code';
+        if (button) { button.disabled = false; button.textContent = 'Mail me a code'; }
+        console.error('Verification mailing failed:', data.stage || 'request', r.error || data);
+        toast(reason);
+        return;
+      }
       plModalNote('Code on the way',
         '<p>We will post a code to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
         '<p style="font-size:13.5px;color:#8a93a6;">The code goes to the property address, not to your email, because that is the whole point.</p>' +
         '<button class="plm-rbtn" onclick="plCloseNote()">Got it</button>');
+    }).catch(function (error) {
+      console.error('Verification service unavailable:', error);
+      if (button) { button.disabled = false; button.textContent = 'Mail me a code'; }
+      toast('Verification service is temporarily unavailable');
     });
   };
 

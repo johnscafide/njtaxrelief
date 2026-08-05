@@ -1,61 +1,21 @@
-/* Lazy dashboard module: assessment-drift. Generated from the original dashboard without calculation changes. */
+/* Historical Property Time Machine. Uses the private snapshot ledger attached to each saved property. */
 (function () {
   'use strict';
-  function toolDrift() {
-    var withHist = rows.filter(function (r) { return (r.history || []).length; });
-    if (!rows.length) return '';
-
-    if (!withHist.length) {
-      return toolCard('Assessment drift', 'fa-chart-line',
-        '<div class="tl-wait"><i class="fas fa-hourglass-half"></i>' +
-        '<div><b>Building your baseline.</b> Every time you open one of these properties we record the ' +
-        'assessment and tax. The first time either one changes, this becomes a year over year chart of ' +
-        'how your assessment has moved against your town. New Jersey does not publish that anywhere, ' +
-        'so it can only be built by watching.</div></div>' +
-        '<div class="tl-note">' + rows.length + ' propert' + (rows.length === 1 ? 'y' : 'ies') +
-        ' being tracked. Nothing to compare yet.</div>');
-    }
-
-    var body = withHist.map(function (r) {
-      var pts = (r.history || []).map(function (h) {
-        return { t: h.seen ? new Date(h.seen).getTime() : 0, v: +h.assessed || 0, x: +h.last_year_tax || 0 };
-      }).filter(function (p) { return p.v > 0; });
-      pts.push({ t: Date.now(), v: +r.assessed || 0, x: +r.last_year_tax || 0 });
-      if (pts.length < 2) return '';
-
-      var first = pts[0], last = pts[pts.length - 1];
-      var dA = last.v - first.v, pA = first.v ? (dA / first.v) * 100 : 0;
-      var dT = last.x - first.x, pT = first.x ? (dT / first.x) * 100 : 0;
-
-      var W = 300, H = 60, lo = Math.min.apply(null, pts.map(function (p) { return p.v; })),
-          hi = Math.max.apply(null, pts.map(function (p) { return p.v; }));
-      var path = pts.map(function (p, i) {
-        var x = 4 + (i / (pts.length - 1)) * (W - 8);
-        var y = H - 6 - ((p.v - lo) / ((hi - lo) || 1)) * (H - 14);
-        return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
-      }).join(' ');
-
-      return '<div class="dr-row">' +
-        '<div class="dr-addr"><b>' + esc(r.address) + '</b><span>' + esc(r.town || '') + '</span></div>' +
-        '<svg class="dr-spark" viewBox="0 0 ' + W + ' ' + H + '"><path d="' + path + '" fill="none" stroke="' +
-          (dA > 0 ? '#c0392b' : '#1e6b3a') + '" stroke-width="2.4" stroke-linecap="round"/></svg>' +
-        '<div class="dr-fig ' + (dA > 0 ? 'up' : 'down') + '">' + (dA >= 0 ? '+' : '') + money(dA) +
-          '<span>' + (pA >= 0 ? '+' : '') + pA.toFixed(1) + '% assessed</span></div>' +
-        '<div class="dr-fig ' + (dT > 0 ? 'up' : 'down') + '">' + (dT >= 0 ? '+' : '') + money(dT) +
-          '<span>' + (pT >= 0 ? '+' : '') + pT.toFixed(1) + '% tax</span></div>' +
-      '</div>';
-    }).join('');
-
-    return toolCard('Assessment drift', 'fa-chart-line', body +
-      '<div class="tl-note">Measured from snapshots taken each time you opened the property. ' +
-      'A rising assessment with a flat market is the clearest appeal signal there is.</div>');
+  function snapshotPoints(r) {
+    var raw = Array.isArray(r.history) ? r.history : [];
+    var points = raw.map(function (h) { return { seen:h.seen||h.created_at||h.captured_at||h.date||'', assessed:+(h.assessed||h.assessed_value||h.av_total||0), tax:+(h.last_year_tax||h.tax||h.tax_bill||0) }; });
+    points.push({ seen:r.updated_at||r.last_seen||new Date().toISOString(), assessed:+r.assessed||0, tax:+r.last_year_tax||0 });
+    points = points.filter(function (p) { return p.assessed > 0 || p.tax > 0; }).sort(function (a,b) { return new Date(a.seen||0)-new Date(b.seen||0); });
+    return points.filter(function (p,i) { if (!i) return true; var q=points[i-1]; return p.assessed!==q.assessed||p.tax!==q.tax||String(p.seen).slice(0,10)!==String(q.seen).slice(0,10); });
   }
-
-  // ══════════════════════════════════════════════
-  // 2 · NEIGHBORHOOD TAX PERCENTILE
-  // ══════════════════════════════════════════════
-
-  Object.assign(window, { toolDrift });
+  function shortDate(v) { if(!v)return 'Date unavailable';var d=new Date(v);return isNaN(d.getTime())?String(v).slice(0,10):d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
+  function delta(a,b){return(+b||0)-(+a||0);} function pct(a,b){return +a?delta(a,b)/+a*100:0;}
+  function signedMoney(v){return(v>0?'+':v<0?'-':'')+money(Math.abs(v));} function signedPct(v){return(v>0?'+':'')+v.toFixed(1)+'%';}
+  function linePath(points,key,w,h){var vals=points.map(function(p){return+p[key]||0;}).filter(function(v){return v>0;});if(!vals.length)return'';var lo=Math.min.apply(null,vals),hi=Math.max.apply(null,vals);return points.map(function(p,i){var x=12+(i/Math.max(1,points.length-1))*(w-24),y=h-14-(((+p[key]||lo)-lo)/((hi-lo)||1))*(h-28);return(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}).join(' ');}
+  function explanation(a,b){var da=delta(a.assessed,b.assessed),dt=delta(a.tax,b.tax);if(!da&&!dt)return'No recorded assessment or tax change yet. This first observation is your baseline.';if(!da&&dt)return'The recorded assessment stayed level while the tax bill changed. That usually points to a rate or levy change rather than a reassessment.';if(da&&!dt)return'The assessment changed while the recorded tax figure stayed level. Confirm the effective year before relying on the newest bill.';if((da>0)===(dt>0))return'Assessment and tax moved in the same direction. The two percentages show whether the bill moved faster or slower than the assessment.';return'Assessment and tax moved in different directions. A rate change may have offset part of the assessment movement.';}
+  function timeMachineMarkup(r,detailed){var pts=snapshotPoints(r),first=pts[0],last=pts[pts.length-1];if(!first)return'<div class="tl-wait"><i class="fas fa-hourglass-half"></i><div><b>Building your baseline.</b> Open this saved property over time and Watchdog will preserve changes to its assessment and tax figures.</div></div>';var da=delta(first.assessed,last.assessed),dt=delta(first.tax,last.tax);var chart='<div class="tm-chart" role="img" aria-label="Assessment and tax history chart"><svg viewBox="0 0 720 190" preserveAspectRatio="none"><g class="tm-grid"><line x1="12" y1="48" x2="708" y2="48"/><line x1="12" y1="96" x2="708" y2="96"/><line x1="12" y1="144" x2="708" y2="144"/></g><path class="tm-assessed" d="'+linePath(pts,'assessed',720,190)+'"/><path class="tm-tax" d="'+linePath(pts,'tax',720,190)+'"/></svg><div class="tm-legend"><span><i class="assessed"></i>Assessment</span><span><i class="tax"></i>Tax bill</span></div></div>';var events=pts.slice().reverse().map(function(p,i,rev){var older=rev[i+1];return'<li><span class="tm-dot"></span><div><b>'+shortDate(p.seen)+'</b><span>Assessment '+money(p.assessed)+' · Tax '+money(p.tax)+'</span>'+(older?'<small>'+signedMoney(delta(older.assessed,p.assessed))+' assessment · '+signedMoney(delta(older.tax,p.tax))+' tax</small>':'<small>First recorded baseline</small>')+'</div></li>';}).join('');return'<div class="tm-head"><div><span>Observed '+pts.length+' time'+(pts.length===1?'':'s')+'</span><h3>'+esc(r.address||'Saved property')+'</h3></div><div class="tm-range"><span>'+shortDate(first.seen)+'</span><i class="fas fa-arrow-right"></i><span>'+shortDate(last.seen)+'</span></div></div><div class="tm-kpis"><div><span>Assessment change</span><b class="'+(da>0?'up':da<0?'down':'')+'">'+signedMoney(da)+'</b><small>'+signedPct(pct(first.assessed,last.assessed))+'</small></div><div><span>Tax-bill change</span><b class="'+(dt>0?'up':dt<0?'down':'')+'">'+signedMoney(dt)+'</b><small>'+signedPct(pct(first.tax,last.tax))+'</small></div><div><span>Snapshots</span><b>'+pts.length+'</b><small>private observations</small></div></div>'+chart+'<div class="tm-reading"><i class="fas fa-lightbulb"></i><p><b>What changed:</b> '+explanation(first,last)+'</p></div>'+(detailed?'<ol class="tm-events">'+events+'</ol>':'<a class="tm-open" href="/property/home.html?pin='+encodeURIComponent(r.pams_pin||'')+'#sec-history">Open the full timeline <i class="fas fa-arrow-right"></i></a>')+'<p class="tl-fine">Built from snapshots saved when this property is opened. It is an observed Watchdog history, not a complete municipal record for years before tracking began.</p>';}
+  function toolDrift(){if(!rows.length)return'';return toolCard('Historical Property Time Machine','fa-clock-rotate-left',rows.map(function(r){return'<article class="tm-property">'+timeMachineMarkup(r,false)+'</article>';}).join(''));}
+  function toolTimeMachine(r){return'<div class="tm-detail">'+timeMachineMarkup(r,true)+'</div>';}
+  Object.assign(window,{toolDrift:toolDrift,toolTimeMachine:toolTimeMachine,propertySnapshotPoints:snapshotPoints});
 })();
-
 export {};

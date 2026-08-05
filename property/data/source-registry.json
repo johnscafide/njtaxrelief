@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "timezone": "America/New_York",
+  "datasets": [
+    {"id":"cod-history","label":"Coefficient of Deviation history","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf","output":"property/data/cod/cod-history.json","parser":["node","property/scripts/parse-cod-pdf.js","{download}"],"collection":"municipalities","minimum_records":550,"cadence":"annual"},
+    {"id":"uniformity","label":"Assessment Uniformity scores","agency":"NJ Division of Taxation","output":"property/uniformity.json","collection":"districts","minimum_records":500,"cadence":"annual","derived":true},
+    {"id":"appeals","label":"Property-tax appeal outcomes","agency":"NJ Division of Taxation","output":"property/appeals.json","collection":"statewide","minimum_records":8,"cadence":"annual"},
+    {"id":"tax-rates","label":"Municipal general tax rates","agency":"NJ Division of Taxation","output":"property/tax-rates.json","collection":"rates","minimum_records":500,"cadence":"annual"},
+    {"id":"sr1a-ratios","label":"Verified-sale municipal ratios","agency":"NJ Division of Taxation","output":"property/sr1a-ratios.json","collection":"districts","minimum_records":350,"cadence":"quarterly","derived":true},
+    {"id":"verified-sales","label":"County verified sales files","agency":"NJ Division of Taxation","glob":"property/sales-*.json","minimum_files":21,"cadence":"quarterly"},
+    {"id":"abatements","label":"Abatement and exemption indicators","agency":"NJ public records","output":"property/abatements.json","collection":"districts","minimum_records":200,"cadence":"annual"}
+  ]
+}

@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805j';
+  var HOME_MODULE_VERSION = '20260805k';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1396,6 +1396,15 @@
         var t = trajectory(r);
         return t ? (t.cagr >= 0 ? '+' : '') + (t.cagr * 100).toFixed(1) + '%/yr' : '';
       }
+    },
+    {
+      k: 'history', icon: 'fa-clock-rotate-left', title: 'How has this property changed?',
+      pro: 'Watchdog preserves observed assessment and tax snapshots that are not available as a clean parcel history from the state. The timeline separates a changed assessment from a changed bill.',
+      build: function (r) { return toolTimeMachine(r); },
+      sum: function (r) {
+        var pts = typeof propertySnapshotPoints === 'function' ? propertySnapshotPoints(r) : [];
+        return pts.length > 1 ? pts.length + ' recorded observations' : 'Baseline is being built';
+      }
     }
   ];
 
@@ -1426,7 +1435,8 @@
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
     compare: ['relocation', 'investor-screen'],
-    trend: ['tax-trajectory', 'tax-pressure-simulator']
+    trend: ['tax-trajectory', 'tax-pressure-simulator'],
+    history: ['assessment-drift']
   };
 
   window.hmToggle = function (k) {
@@ -1736,6 +1746,7 @@
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
         paintHomeChrome();
         paintReport();
+        if (location.hash === '#sec-history') window.hmToggle('history');
         // square footage, year built and the last verified sale come from the
         // SR1A county file, which is too large to block the first paint on.
         hydrateDetails().then(function () { paintReport(); paintHomeChrome(); });

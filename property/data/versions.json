@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T11:25:15-04:00",
+  "updated_at": "2026-08-05T12:05:35-04:00",
   "releases": [
+    {
+      "version": "0.9.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T12:05:35-04:00",
+      "title": "Verification delivery, Property Time Machine and state-data automation",
+      "category": "Platform",
+      "status": "Completed",
+      "summary": "Added secure postal ownership-code delivery infrastructure and diagnostics, upgraded assessment drift into a detailed Historical Property Time Machine, added a review-first automated state-data refresh pipeline, and repaired expansion of the shared sidebar on every page.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/verification-diagnostics.html", "/property/updates.html", "/property/pro.html"],
+      "files": ["property/js/sidemenu.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/js/dashboard/tools/assessment-drift.js", "property/css/dashboard/08-time-machine.css", "property/verification-diagnostics.html", "supabase/migrations/20260805180000_ownership_verification.sql", "supabase/functions/request-verify-code/index.ts", "property/scripts/refresh_state_data.py", "property/data/source-registry.json", ".github/workflows/state-data-refresh.yml"],
+      "impact": { "html": 4, "css": 2, "javascript": 5, "data": 4, "navigation": 6 }
+    },
     {
       "version": "0.8.0",
       "date": "2026-08-05",
@@ -108,15 +120,13 @@
     }
   ],
   "roadmap": [
-    { "priority": 1, "title": "Verification code delivery repair", "readiness": "Ready now", "effort": "Medium", "category": "Reliability", "why": "Ownership verification exists in the interface but request_verify_code still needs tracing across the RPC and mail step.", "deliverables": ["RPC diagnostics", "mail delivery logging", "retry-safe user feedback", "verification status test page"] },
-    { "priority": 2, "title": "Modularize lookup.js", "readiness": "Ready now", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith and is the highest-traffic page.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
-    { "priority": 3, "title": "Historical Property Time Machine", "readiness": "Existing data", "effort": "Large", "category": "Data product", "why": "The property_lookups ledger is already accumulating parcel snapshots that New Jersey does not publish as a usable history.", "deliverables": ["snapshot timeline", "assessment and tax change chart", "change explanations", "property report integration"] },
-    { "priority": 4, "title": "Automated state-data refresh pipeline", "readiness": "Ready now", "effort": "Large", "category": "Operations", "why": "Fairness, rates, sales and appeal tools become more valuable when updates are repeatable and timestamped.", "deliverables": ["source freshness registry", "parser runs", "coverage validation", "version history entry generation", "failure report"] },
-    { "priority": 5, "title": "Exempt property and PILOT exposure", "readiness": "Needs NJ download", "effort": "Medium", "category": "Municipal intelligence", "why": "Current abatement data covers only partial exemptions and can understate redevelopment exposure.", "deliverables": ["exempt-value share", "PILOT context", "municipal comparison", "Town Intelligence integration"] },
-    { "priority": 6, "title": "Added and omitted assessment monitor", "readiness": "Needs NJ download", "effort": "Medium", "category": "Homeowner tool", "why": "Home improvements and omitted assessments can create unexpected tax changes outside the normal annual cycle.", "deliverables": ["risk screener", "notice explainer", "deadline guidance", "saved-property alert field"] },
-    { "priority": 7, "title": "Municipal budget pressure", "readiness": "Needs NJ download", "effort": "Large", "category": "Municipal intelligence", "why": "Tax-rate history explains the past; budget and ratable-base pressure can explain what may drive the next cycle without pretending to forecast it.", "deliverables": ["levy trend", "ratable-base growth", "school and municipal components", "pressure bands"] },
-    { "priority": 8, "title": "Farmland assessment qualification", "readiness": "Needs NJ download", "effort": "Medium", "category": "Specialized tool", "why": "Farmland assessment rules and rollback exposure are valuable to rural owners, agents and attorneys.", "deliverables": ["qualification checklist", "acreage and income inputs", "rollback-tax explainer", "professional handoff"] },
-    { "priority": 9, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
-    { "priority": 10, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
+    { "priority": 1, "title": "Modularize lookup.js", "readiness": "Deferred by owner", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith and is the highest-traffic page, but this work is intentionally postponed.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
+    { "priority": 2, "title": "Pro+ Data Center", "readiness": "Specification complete", "effort": "Multi-phase", "category": "Pro+", "why": "Every current and future data point belongs in one customizable sheet where a professional selects property, town, or county scope and checks the exact fields to add as columns.", "deliverables": ["field registry", "checkbox filter catalog", "virtualized data sheet", "saved views", "bulk export", "scheduled delivery", "API payload builder"] },
+    { "priority": 3, "title": "Exempt property and PILOT exposure", "readiness": "Needs NJ download", "effort": "Medium", "category": "Municipal intelligence", "why": "Current abatement data covers only partial exemptions and can understate redevelopment exposure.", "deliverables": ["exempt-value share", "PILOT context", "municipal comparison", "Town Intelligence integration"] },
+    { "priority": 4, "title": "Added and omitted assessment monitor", "readiness": "Needs NJ download", "effort": "Medium", "category": "Homeowner tool", "why": "Home improvements and omitted assessments can create unexpected tax changes outside the normal annual cycle.", "deliverables": ["risk screener", "notice explainer", "deadline guidance", "saved-property alert field"] },
+    { "priority": 5, "title": "Municipal budget pressure", "readiness": "Needs NJ download", "effort": "Large", "category": "Municipal intelligence", "why": "Tax-rate history explains the past; budget and ratable-base pressure can explain what may drive the next cycle without pretending to forecast it.", "deliverables": ["levy trend", "ratable-base growth", "school and municipal components", "pressure bands"] },
+    { "priority": 6, "title": "Farmland assessment qualification", "readiness": "Needs NJ download", "effort": "Medium", "category": "Specialized tool", "why": "Farmland assessment rules and rollback exposure are valuable to rural owners, agents and attorneys.", "deliverables": ["qualification checklist", "acreage and income inputs", "rollback-tax explainer", "professional handoff"] },
+    { "priority": 7, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
+    { "priority": 8, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
   ]
 }
