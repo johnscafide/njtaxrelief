@@ -1,0 +1,102 @@
+NJPTR WATCHDOG RELEASE 0.16.0
+=============================
+
+This package integrates Tax Rate Trajectory and the Statewide Fairness Index
+throughout the existing /property experience.
+
+UPLOAD
+------
+1. Upload the contents of this package while preserving every folder.
+2. The included `property` folder merges into your website's `/property` folder.
+3. Replace matching files when prompted.
+4. Upload new folders and files as well as replacements.
+5. Upload the root `sitemap.xml` to the website root.
+
+DELETE
+------
+Delete this obsolete file from the server if it exists:
+  /property/css/fairness.html
+
+It was an old HTML copy accidentally stored inside the CSS directory. The real
+page remains `/property/fairness.html`.
+
+TEST
+----
+Open these pages in an incognito browser window:
+  /property/updates.html
+  /property/verification-diagnostics.html
+  /property/fairness.html
+  /property/town-compare.html
+  /property/dashboard.html
+  /property/home.html
+  /property/data-center.html
+
+On Dashboard, confirm:
+  - Assessed, Tax / Year and Market Value remain fully visible on each card
+  - Town Intelligence and Budget Pressure rows are not clipped on desktop/mobile
+  - property cards show town fairness, statewide rank and rate trend
+  - Compare includes the new town rows
+  - Agent Intel includes Town signals
+  - the Pro view includes the municipal risk matrix and new export columns
+  - card metrics have no divider lines
+  - Historical Property Time Machine starts collapsed and expands normally
+  - expanded desktop navigation uses drill-down groups and remains scrollable
+  - opening several navigation groups still leaves every link reachable
+  - on a phone, card metrics and buttons are comfortably readable/tappable
+  - Agent Intel opens as a full-width bottom sheet and closes normally
+
+On Home, open:
+  - on a phone, confirm the compact header, one-row property selector and photo-first hero
+  - tap Agent Intel in the bottom navigation; it should open as a full-width sheet rather than scroll to a narrow card
+  - Closing & collateral due diligence
+    - confirm DCA permit/certificate results and NJDEP environmental signals load
+    - if location is available, confirm Tidelands/Highlands/Pinelands pills appear
+    - confirm NFHL, tidal CAFE and wetlands screening appears
+    - download a Closing Evidence File
+    - change Escrow Shock assumptions and confirm the monthly delta recalculates
+    - change municipal-search statuses and reload to confirm they persist
+  - How this town assesses
+    - confirm Exempt property & PILOT exposure appears after abatement exposure
+  - Has the assessment kept up?
+    - confirm the Added & omitted assessment monitor can save and recalculate
+  - Could farmland assessment apply?
+    - enter acreage/sales and confirm the checklist recalculates
+  - What a buyer would pay
+  - Where is this bill headed?
+
+The last section now contains the adjustable Tax Bill Pressure Simulator.
+
+SUPABASE AND POSTAL VERIFICATION
+--------------------------------
+These steps are required before Mail me a code can work:
+1. Run both included Supabase migration files in timestamp order. The second
+   safely converts an earlier PostGrid setup to administrator-email delivery.
+2. Create the EmailJS template `template_verifymail` using the variables in
+   supabase/functions/request-verify-code/EMAILJS-TEMPLATE-SETUP.md.
+3. Add these Supabase Edge Function secrets:
+   EMAILJS_PRIVATE_KEY, EMAILJS_PUBLIC_KEY, EMAILJS_SERVICE_ID,
+   EMAILJS_TEMPLATE_ID, VERIFY_ADMIN_EMAIL, and VERIFY_FROM_EMAIL.
+   Never place EMAILJS_PRIVATE_KEY in a website JavaScript file.
+4. Review the complete secret list in
+   supabase/functions/request-verify-code/README.md.
+5. Deploy the request-verify-code Edge Function with JWT verification enabled.
+6. Open /property/verification-diagnostics.html and run the checks.
+7. Submit one test request. Confirm that the code and property mailing address
+   arrive in your administrator inbox, then mail the postcard yourself.
+
+STATE DATA AUTOMATION
+---------------------
+Commit the included .github/workflows/state-data-refresh.yml file to GitHub.
+It validates data monthly and opens a review pull request when files change.
+It never merges state data automatically.
+
+CACHE VERSIONS
+--------------
+Dashboard JavaScript: 20260805n
+Home JavaScript: 20260805s
+Dashboard CSS: 20260805i
+Shared navigation: 20260805f
+Fairness CSS: 20260805b
+
+A database migration and Edge Function deployment are required for postal
+ownership verification. Other release features do not require a migration.

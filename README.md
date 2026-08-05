@@ -1,8 +1,8 @@
-# NJPTR Watchdog platform release 0.15.0
+# NJPTR Watchdog platform release 0.16.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
-Release 0.15.0 introduces a universal data-marker experience. Home now uses neutral report cards, category icon tiles and concise scan-first summaries instead of colored rails. Desktop users can hover or focus a data point for a compact explanation; clicking or tapping opens one reusable detail page with the current reading, methodology, plan/profession metadata, related markers and source provenance. All 324 catalog markers are supported, with richer editorial content for the primary Home signals.
+Release 0.16.0 completes progressive disclosure on Home: full reports become compact signal rows, hover/focus explains the signal, click/tap opens its sourced marker page, and the original tool is revealed only on demand. It also removes remaining left rails, compacts Data Center rows, adds Pricing to the public header, adds Developer GOD access with Standard/Pro/Pro+ View As simulation, and records a 90-marker professional proprietary backlog plus a 15-capability SaaS maturity pipeline.
 
 ## Included integrations
 
@@ -52,6 +52,11 @@ Release 0.15.0 introduces a universal data-marker experience. Home now uses neut
 - Universal hover preview and click-through detail page for every registered marker
 - Rich plain-English explanations and authoritative links for the 13 primary Home signals
 - Neutral, scan-first Home accordions with category identity and no colored report rails
+- Compact signal rows with on-demand access to the original full tools
+- Developer account role and persistent Standard / Pro / Pro+ / Developer View As controls
+- Server migration assigning developer access to the administrator account
+- 90 proposed proprietary markers: 10 each for nine professional audiences
+- Professional SaaS operating-layer pipeline covering 15 missing platform capabilities
 - Pro+ Data Center field builder with profession/category/origin filters and persistent selections
 - Closing Evidence JSON export with current live public findings
 - Post-Closing Escrow Shock scenario and locally persistent municipal research checklist
