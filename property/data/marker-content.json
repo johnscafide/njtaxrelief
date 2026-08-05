@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "markers": {
+    "property.assessed_value": {
+      "plain": "The value your municipality currently places on the taxable land and improvements. It is the assessment basis, not necessarily the property's current sale price.",
+      "why": "This is the starting number for the tax bill and most appeal analysis. It becomes meaningful only when compared with the municipality's assessment ratio and credible market evidence.",
+      "method": "Land assessment plus improvement assessment from the parcel record.",
+      "caution": "Assessed value and market value are different concepts in most New Jersey municipalities.",
+      "sources": [{"label":"NJGIN Parcels and MOD-IV","url":"https://nj.gov/njgin/"}],
+      "related": ["property.land_assessment", "property.improvement_assessment", "watchdog.market_value_estimate", "watchdog.chapter123_position"]
+    },
+    "property.annual_tax": {
+      "plain": "The last full-year property-tax amount reported for this parcel.",
+      "why": "It is the clearest current carrying-cost number, but it does not show whether the property is likely to change after improvements, an added assessment or a municipal revaluation.",
+      "method": "Reported parcel tax for the latest available full year.",
+      "caution": "A seller's current bill is not a guarantee of a buyer's future escrow or tax bill.",
+      "sources": [{"label":"NJGIN Parcels and MOD-IV","url":"https://nj.gov/njgin/"}],
+      "related": ["watchdog.tax_trajectory", "watchdog.escrow_monthly_delta", "watchdog.added_omitted_risk"]
+    },
+    "watchdog.market_value_estimate": {
+      "plain": "Watchdog's estimate of market value using the parcel assessment and the strongest available municipal assessment-to-market ratio.",
+      "why": "It translates a tax assessment into a market-scale number that can support fairness, tax-burden and Chapter 123 analysis.",
+      "method": "Assessed value divided by the verified-sales municipal ratio when adequate sales exist; otherwise the published equalization ratio is used.",
+      "caution": "This is a screening estimate, not an appraisal or broker price opinion.",
+      "sources": [{"label":"NJ Division of Taxation verified sales","url":"https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"}],
+      "related": ["sales.ratio", "property.assessed_value", "watchdog.chapter123_position"]
+    },
+    "watchdog.effective_tax_rate": {
+      "plain": "Annual property tax divided by Watchdog's estimated market value, expressed as a percentage.",
+      "why": "Unlike the nominal municipal tax rate, this measure can be compared across towns with different assessment levels.",
+      "method": "Latest full-year parcel tax divided by the supported market-value estimate.",
+      "caution": "The result inherits the limitations of the market-value estimate and is not a forecast of a future bill.",
+      "sources": [{"label":"NJ Division of Taxation local property tax","url":"https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"}],
+      "related": ["property.annual_tax", "watchdog.market_value_estimate", "tax.rate_2025"]
+    },
+    "watchdog.chapter123_position": {
+      "plain": "Whether the assessment appears above, below or within New Jersey's Chapter 123 common-level range using the current market evidence available to Watchdog.",
+      "why": "It is the legal screening framework most homeowners and professionals use to decide whether an assessment may be excessive.",
+      "method": "Compares supported market value with the municipality's common-level ratio and permitted 15% range.",
+      "caution": "A favorable screen is not a legal conclusion. Filing requires defensible valuation evidence and the current official ratio/range.",
+      "sources": [{"label":"NJ Division of Taxation — Chapter 123","url":"https://www.nj.gov/treasury/taxation/lpt/chapter123.shtml"}],
+      "related": ["watchdog.chapter123_lower_bound", "watchdog.chapter123_upper_bound", "watchdog.appeal_odds"]
+    },
+    "uniformity.score": {
+      "plain": "A Watchdog 0–100 translation of how consistently a municipality assesses property, based primarily on New Jersey's coefficient of deviation.",
+      "why": "Two towns can use similar assessment ratios but differ greatly in how evenly assessments are distributed. Consistency affects appeal context and confidence in the roll.",
+      "method": "Transforms the state-published coefficient of deviation into a statewide comparative score and percentile.",
+      "caution": "This describes the municipal roll; it does not by itself decide whether one parcel is correctly assessed.",
+      "sources": [{"label":"NJ Division of Taxation Coefficients of Deviation","url":"https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf"}],
+      "related": ["uniformity.coefficient", "uniformity.percentile", "watchdog.fairness_score"]
+    },
+    "appeals.latest_win_rate_filed": {
+      "plain": "The latest share of filed county tax appeals that ended with an assessment reduction.",
+      "why": "It provides useful board-level context for evidence standards and outcomes in that county.",
+      "method": "Assessment-reduction outcomes divided by all filed appeals in the latest published year.",
+      "caution": "County history is not a prediction for a specific property. Case quality, evidence and procedural compliance matter.",
+      "sources": [{"label":"NJ property-tax appeal statistics","url":"https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"}],
+      "related": ["appeals.latest_total", "appeals.latest_avg_reduction_per_win", "watchdog.appeal_odds"]
+    },
+    "sales.ratio": {
+      "plain": "The median relationship between assessments and sale prices in state-verified arm's-length sales for this municipality.",
+      "why": "It provides a market-grounded way to translate assessments and compare properties where assessment levels differ.",
+      "method": "Built from usable NJ SR-1A verified sales matched to the municipality.",
+      "caution": "Small or unusual sales samples can be less representative; Watchdog requires a minimum sample before using the ratio.",
+      "sources": [{"label":"NJ Division of Taxation SR-1A sales","url":"https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"}],
+      "related": ["sales.sample_size", "sales.median_price", "sales.ppsf"]
+    },
+    "sales.ppsf": {
+      "plain": "The median verified sale price per reported square foot in the municipality's usable sales sample.",
+      "why": "It is a quick market context measure and can reveal whether a property estimate is far outside recent local transactions.",
+      "method": "Verified sale price divided by reported building area, summarized as a municipal median.",
+      "caution": "Price per square foot does not adjust for condition, design, lot, location or property subtype.",
+      "sources": [{"label":"NJ Division of Taxation SR-1A sales","url":"https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"}],
+      "related": ["sales.median_price", "sales.p25", "sales.p75"]
+    },
+    "sales.median_price": {
+      "plain": "The midpoint sale price among the municipality's usable state-verified sales.",
+      "why": "It places the property in the local transaction market without letting a few unusually high or low sales dominate the result.",
+      "method": "Median of usable verified arm's-length sale prices.",
+      "caution": "A townwide median is context, not a comparable-market analysis for one house.",
+      "sources": [{"label":"NJ Division of Taxation SR-1A sales","url":"https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"}],
+      "related": ["sales.p25", "sales.p75", "sales.ppsf"]
+    },
+    "watchdog.tax_pressure": {
+      "plain": "A Watchdog signal combining municipal levy growth, ratable-base movement, collections, debt and budget balance.",
+      "why": "Tax rates alone describe the past. Pressure helps identify municipalities where the fiscal ingredients for future increases are accumulating.",
+      "method": "Weighted model using NJ DCA budget and property-tax components with statewide percentile normalization.",
+      "caution": "This is an explainable risk indicator, not a forecast of a specific future bill.",
+      "sources": [{"label":"NJ DCA property-tax information","url":"https://www.nj.gov/dca/dlgs/resources/Property_Tax_info.shtml"}],
+      "related": ["budget.pressure_score", "budget.levy_base_gap", "watchdog.tax_trajectory"]
+    },
+    "watchdog.reassessment_risk": {
+      "plain": "A Watchdog screen for signs that the current assessment may lag a sale, improvement or broader municipal reset.",
+      "why": "The current seller's tax bill can understate a future owner's carrying cost when taxable improvements or assessment changes have not fully landed.",
+      "method": "Combines sale/assessment relationships, permit and improvement context, added-assessment signals and municipal revaluation pressure when available.",
+      "caution": "New Jersey does not generally reassess a property merely because it sold.",
+      "sources": [{"label":"NJ Division of Taxation local property tax","url":"https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"}],
+      "related": ["watchdog.added_omitted_risk", "watchdog.revaluation_risk", "watchdog.escrow_monthly_delta"]
+    },
+    "watchdog.escrow_monthly_delta": {
+      "plain": "The modeled monthly difference between the current tax amount and the user's future-assessment/tax-rate scenario.",
+      "why": "It converts a tax scenario into the monthly payment language borrowers and mortgage professionals actually use.",
+      "method": "Scenario annual tax minus current annual tax, divided by twelve.",
+      "caution": "User-controlled scenario only; it is not a lender disclosure, assessment decision or tax forecast.",
+      "sources": [],
+      "related": ["watchdog.escrow_scenario_tax", "watchdog.escrow_reserve_12m", "property.annual_tax"]
+    }
+  }
+}

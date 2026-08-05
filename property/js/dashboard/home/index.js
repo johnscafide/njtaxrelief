@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805s';
+  var HOME_MODULE_VERSION = '20260805t';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1279,17 +1279,17 @@
           intelPoints(r, c, u, a) +
         '</section>' +
         '<div class="hm-figs">' +
-          hf('Assessed', money(r.assessed || 0), 'what the town says') +
-          hf('Annual tax', money(r.last_year_tax || 0), 'last full year') +
-          hf('Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-', 'of market value') +
-          (s ? hf('Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
-          (s && s.ppsf ? hf('Price per sq ft', '$' + s.ppsf, 'median here') : '') +
-          (s && s.medPrice ? hf('Median sale', money(s.medPrice), 'in this town') : '') +
+          hf('property.assessed_value', 'Assessed', money(r.assessed || 0), 'what the town says') +
+          hf('property.annual_tax', 'Annual tax', money(r.last_year_tax || 0), 'last full year') +
+          hf('watchdog.effective_tax_rate', 'Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-', 'of market value') +
+          (s ? hf('sales.ratio', 'Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
+          (s && s.ppsf ? hf('sales.ppsf', 'Price per sq ft', '$' + s.ppsf, 'median here') : '') +
+          (s && s.medPrice ? hf('sales.median_price', 'Median sale', money(s.medPrice), 'in this town') : '') +
         '</div>' +
 
         scorecard(r) +
 
-        '<div class="hm-secbar"><h2>The detail</h2>' +
+        '<div class="hm-secbar"><div><h2>Explore your property</h2><p>Start with a signal. Open only what matters to you.</p></div>' +
           '<button id="hm-all" onclick="hmExpandAll()"><i class="fas fa-expand"></i> Expand all</button></div>' +
 
         SECTIONS.map(function (sec) { return sectionShell(sec, r); }).join('') +
@@ -1322,7 +1322,7 @@
 
   var SECTIONS = [
     {
-      k: 'fair', icon: 'fa-scale-balanced', title: 'Is this assessment fair?',
+      k: 'fair', cat: 'Assessment', icon: 'fa-scale-balanced', title: 'Is this assessment fair?',
       pro: 'The Chapter 123 test verbatim, then where the excess sits. Land value is close to unarguable; ' +
            'the improvement figure is a judgment about a structure, and judgment is what an appeal contests.',
       build: function (r) {
@@ -1340,13 +1340,13 @@
       }
     },
     {
-      k: 'kept', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
+      k: 'kept', cat: 'Assessment', short: 'Sale, permit and assessment timing', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
       pro: 'For a buyer this is undisclosed exposure, because the listing shows the seller\u2019s bill. ' +
            'For a seller it is worth knowing before an offer arrives.',
       build: function (r) { return toolReassessRisk(r) + toolAddedOmitted(r); }
     },
     {
-      k: 'farmland', icon: 'fa-seedling', title: 'Could farmland assessment apply?',
+      k: 'farmland', cat: 'Land use', short: 'Acreage, use, income and rollback screen', icon: 'fa-seedling', title: 'Could farmland assessment apply?',
       pro: 'For rural property, a small change in qualifying acreage, gross sales or continued use can change the assessment basis entirely. This checklist makes the filing requirements and rollback exposure explicit before a client relies on the benefit.',
       build: function (r) { return toolFarmland(r); },
       sum: function (r) {
@@ -1355,7 +1355,7 @@
       }
     },
     {
-      k: 'reval', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
+      k: 'reval', cat: 'Town change', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
       pro: 'A reset redistributes burden across a whole town at once. Knowing which side a client lands on ' +
            'beforehand is the difference between a call they thank you for and one they do not.',
       build: function (r) { return toolRevalRadar(r); },
@@ -1365,7 +1365,7 @@
       }
     },
     {
-      k: 'town', icon: 'fa-ruler-combined', title: 'How this town assesses',
+      k: 'town', cat: 'Town health', icon: 'fa-ruler-combined', title: 'How this town assesses',
       pro: 'A high coefficient of deviation means the roll itself is uneven, which strengthens every appeal ' +
            'in the municipality regardless of the individual property.',
       build: function (r) {
@@ -1379,7 +1379,7 @@
       }
     },
     {
-      k: 'file', icon: 'fa-gavel', title: 'What happens if you file',
+      k: 'file', cat: 'Appeals', icon: 'fa-gavel', title: 'What happens if you file',
       pro: 'Ten years of county board outcomes, then a printable packet with the comparables and the ' +
            'statutory calculation already assembled.',
       build: function (r) {
@@ -1392,31 +1392,31 @@
       }
     },
     {
-      k: 'owed', icon: 'fa-hand-holding-dollar', title: 'Money you may be owed',
+      k: 'owed', cat: 'Benefits', short: 'ANCHOR, Stay NJ and Senior Freeze', icon: 'fa-hand-holding-dollar', title: 'Money you may be owed',
       pro: 'ANCHOR, Stay NJ and the Senior Freeze interact in a way most people get wrong. Stay NJ is a ' +
            'top-off rather than an addition, and the Freeze base year is the item that actually compounds.',
       build: function (r) { return toolSeniorBenefits(r); }
     },
     {
-      k: 'buy', icon: 'fa-key', title: 'What a buyer would pay',
+      k: 'buy', cat: 'Buyer costs', short: 'Closing costs and future tax exposure', icon: 'fa-key', title: 'What a buyer would pay',
       pro: 'Running the buyer\u2019s number before an offer is written avoids the conversation nobody wants ' +
            'after closing.',
       build: function (r) { return toolBuyerCost(r); }
     },
     {
-      k: 'diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
+      k: 'diligence', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
       build: function (r) { return toolProfessionalDueDiligence(r) + toolProfessionalWorkflows(r); },
       sum: function () { return 'Closing evidence + escrow + lien + NJDEP constraints'; }
     },
     {
-      k: 'compare', icon: 'fa-route', title: 'Compare against other towns',
+      k: 'compare', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
       build: function (r) { return toolRelocation(r) + toolInvestorScreen(); }
     },
     {
-      k: 'trend', icon: 'fa-chart-line', title: 'Where is this bill headed?',
+      k: 'trend', cat: 'Tax outlook', icon: 'fa-chart-line', title: 'Where is this bill headed?',
       pro: 'Isolates the town\u2019s tax RATE trend from any reassessment or revaluation, so a buyer or ' +
            'seller can see the budget-driven trajectory on its own.',
       build: function (r) { return toolTaxTrajectory(r) + toolTaxPressure(r); },
@@ -1426,7 +1426,7 @@
       }
     },
     {
-      k: 'history', icon: 'fa-clock-rotate-left', title: 'How has this property changed?',
+      k: 'history', cat: 'Property history', icon: 'fa-clock-rotate-left', title: 'How has this property changed?',
       pro: 'Watchdog preserves observed assessment and tax snapshots that are not available as a clean parcel history from the state. The timeline separates a changed assessment from a changed bill.',
       build: function (r) { return toolTimeMachine(r); },
       sum: function (r) {
@@ -1439,12 +1439,14 @@
   function sectionShell(sec, r) {
     var sum = '', tone = '';
     try { sum = sec.sum ? (sec.sum(r) || '') : ''; } catch (e) {}
+    if (!sum) sum = sec.short || '';
     try { tone = sec.tone ? (sec.tone(r) || '') : ''; } catch (e) {}
-    return '<section class="sec2 ' + tone + '" id="sec-' + sec.k + '">' +
+    var catClass = String(sec.cat || 'Analysis').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
-        '<i class="fas ' + sec.icon + ' sec2-i"></i>' +
-        '<span class="sec2-t">' + sec.title + '</span>' +
-        (sum ? '<span class="sec2-s">' + sum + '</span>' : '') +
+        '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
+        '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
+        (sum ? '<span class="sec2-s">' + sum + '</span>' : '') + '</span>' +
         '<i class="fas fa-chevron-down sec2-c"></i>' +
       '</button>' +
       '<div class="sec2-b">' +
@@ -1521,7 +1523,7 @@
 
     if (c) {
       var over = c.testable && c.hasCase;
-      cards.push({ k: 'fair',
+      cards.push({ k: 'fair', marker: 'watchdog.chapter123_position',
         n: c.testable ? (over ? money(c.over) : 'None') : '\u2014',
         l: 'Over the Chapter 123 limit',
         v: !c.testable ? 'Needs comparable sales to test'
@@ -1530,29 +1532,36 @@
         tone: over ? 'bad' : c.testable ? 'good' : '' });
     }
     if (u) {
-      cards.push({ k: 'town', n: u.score, l: 'Assessment uniformity, of 100',
+      cards.push({ k: 'town', marker: 'uniformity.score', n: u.score, l: 'Assessment uniformity, of 100',
         v: u.percentile >= 50 ? 'Fairer than ' + u.percentile + '% of New Jersey'
                               : 'Less consistent than ' + (100 - u.percentile) + '% of New Jersey',
         tone: u.score >= 60 ? 'good' : u.score < 35 ? 'bad' : 'mid' });
     }
     if (a) {
-      cards.push({ k: 'file', n: a.latest.win_rate_filed + '%', l: 'Appeals here that won',
+      cards.push({ k: 'file', marker: 'appeals.latest_win_rate_filed', n: a.latest.win_rate_filed + '%', l: 'Appeals here that won',
         v: titleCase(a.county) + ' County, ' + a.latest_year,
         tone: a.latest.win_rate_filed >= 50 ? 'good' : a.latest.win_rate_filed < 35 ? 'bad' : 'mid' });
     }
     if (c) {
-      cards.push({ k: 'kept', n: money(Math.round(c.market / 1000) * 1000), l: 'Estimated market value',
+      cards.push({ k: 'kept', marker: 'watchdog.market_value_estimate', n: money(Math.round(c.market / 1000) * 1000), l: 'Estimated market value',
         v: c.src === 'verified' ? 'From ' + c.n + ' verified sales in this town'
                                 : 'From the published town ratio', tone: '' });
     }
     if (!cards.length) return '';
 
     return '<div class="sc-cards">' + cards.map(function (x) {
-      return '<button class="sc-c ' + (x.tone || '') + '" onclick="hmOpen(\'' + x.k + '\')">' +
-        '<b>' + x.n + '</b><span class="sc-l">' + x.l + '</span>' +
-        '<span class="sc-v">' + x.v + '</span>' +
-        '<span class="sc-go">See why <i class="fas fa-arrow-down"></i></span></button>';
+      var href = markerHref(x.marker, x.n, x.v);
+      return '<article class="sc-c dm-card ' + (x.tone || '') + '" data-marker-id="' + esc(x.marker) + '" data-marker-value="' + esc(x.n) + '" data-marker-note="' + esc(x.v) + '">' +
+        '<button class="sc-main" onclick="hmOpen(\'' + x.k + '\')"><b>' + x.n + '</b><span class="sc-l">' + x.l + '</span>' +
+        '<span class="sc-v">' + x.v + '</span><span class="sc-go">Open analysis <i class="fas fa-arrow-down"></i></span></button>' +
+        '<a class="sc-data" href="' + href + '"><i class="fas fa-circle-info"></i> Data details</a></article>';
     }).join('') + '</div>';
+  }
+
+  function markerHref(markerId, value, note) {
+    var pin = current && current.pams_pin ? current.pams_pin : '';
+    return '/property/marker.html?id=' + encodeURIComponent(markerId) + '&pin=' + encodeURIComponent(pin) +
+      '&value=' + encodeURIComponent(String(value || '')) + '&note=' + encodeURIComponent(String(note || ''));
   }
 
   function f(k, v, note, cls) {
@@ -1622,8 +1631,9 @@
     }).join('') + '</ul>';
   }
 
-  function hf(k, v, sub) {
-    return '<div><dt>' + k + '</dt><dd>' + v + '<em>' + sub + '</em></dd></div>';
+  function hf(markerId, k, v, sub) {
+    var href = markerHref(markerId, v, sub);
+    return '<a class="dm" href="' + href + '" data-marker-id="' + esc(markerId) + '" data-marker-value="' + esc(v) + '" data-marker-note="' + esc(sub) + '"><dt>' + k + '<i class="fas fa-circle-info dm-info"></i></dt><dd>' + v + '<em>' + sub + '</em></dd></a>';
   }
 
   function summarySentence(r, c, u, a) {

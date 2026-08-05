@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-06T03:47:23+08:00",
+  "generated_at": "2026-08-05T17:40:26-04:00",
   "target_markers": 1000,
   "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
   "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
   "summary": {
-    "total": 323,
+    "total": 324,
     "public_source": 275,
-    "proprietary_derived": 48,
+    "proprietary_derived": 49,
     "by_tier": {
-      "standard": 21,
+      "standard": 22,
       "pro": 181,
       "pro_plus": 121
     },
     "by_profession": {
-      "consumer": 55,
-      "attorney": 323,
+      "consumer": 56,
+      "attorney": 324,
       "title": 47,
-      "agent": 313,
-      "lender": 163,
-      "appraiser": 315,
+      "agent": 314,
+      "lender": 164,
+      "appraiser": 316,
       "contractor": 47,
-      "investor": 323,
+      "investor": 324,
       "municipal": 233
     },
-    "percent_of_goal": 32.3
+    "percent_of_goal": 32.4
   },
   "professions": [
     {
@@ -1083,6 +1083,27 @@
       "source_id": "watchdog-models",
       "status": "live",
       "field": "chapter123_position"
+    },
+    {
+      "id": "watchdog.effective_tax_rate",
+      "label": "Effective tax rate on estimated market value",
+      "description": "Effective tax rate on estimated market value",
+      "category": "watchdog intelligence",
+      "scope": "property",
+      "tier": "standard",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "consumer",
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "effective_tax_rate"
     },
     {
       "id": "watchdog.chapter123_lower_bound",

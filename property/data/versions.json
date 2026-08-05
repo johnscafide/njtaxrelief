@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T17:02:42-04:00",
+  "updated_at": "2026-08-05T17:44:07-04:00",
   "releases": [
+    {
+      "version": "0.15.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T17:44:07-04:00",
+      "title": "Universal data marker intelligence",
+      "category": "Data experience",
+      "status": "Completed",
+      "summary": "Replaced Home's colored report rails with a quieter app-style category system, concise scan-first summaries and neutral open cards. Added desktop hover previews and a universal click-through detail experience for all 324 catalog markers, including value context, methodology, plan/profession metadata, related markers and source provenance. The 13 primary Home signals also receive richer editorial explanations and direct authoritative source links.",
+      "links": ["/property/home.html", "/property/marker.html", "/property/data-center.html", "/property/updates.html"],
+      "files": ["property/home.html", "property/css/home/05-marker-experience.css", "property/js/dashboard/home/index.js", "property/marker.html", "property/css/marker-intelligence.css", "property/js/marker-intelligence.js", "property/js/marker-detail.js", "property/data/marker-content.json", "property/data/marker-registry.json", "property/data-center.html", "property/js/data-center.js", "property/data/versions.json"],
+      "impact": { "html": 3, "css": 2, "javascript": 4, "data": 3, "navigation": 2 }
+    },
     {
       "version": "0.14.0",
       "date": "2026-08-05",
