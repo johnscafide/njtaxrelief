@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T13:37:25-04:00",
+  "updated_at": "2026-08-05T14:29:11-04:00",
   "releases": [
+    {
+      "version": "0.11.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T14:29:11-04:00",
+      "title": "Exempt/PILOT, Added/Omitted and Farmland tools",
+      "category": "Tools",
+      "status": "Completed",
+      "summary": "Completed roadmap items 3, 4 and 5 as separate lazy-loaded tools. Added statewide exempt-property/PILOT exposure from the 2025 Abstract and DCA's 2026 PILOT database, a saved-property added/omitted assessment monitor with current AA-1 deadline guidance, and a 2026 Farmland Assessment qualification/rollback screener. Also repaired Dashboard property cards so Assessed, Tax, Market Value and both intelligence strips remain visible on desktop and mobile.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/updates.html"],
+      "files": ["property/data/exempt-pilot.json", "property/abatements.json", "property/scripts/build_exempt_pilot.py", "property/js/dashboard/tools/exempt-pilot-exposure.js", "property/js/dashboard/tools/added-omitted-monitor.js", "property/js/dashboard/tools/farmland-qualification.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/dashboard/05-collections.css", "property/css/dashboard/10-special-assessments.css", "property/css/dashboard.css", "property/data/source-registry.json", "property/data/data-freshness.json", "property/docs/pro-plus-data-center-spec.md"],
+      "impact": { "html": 2, "css": 3, "javascript": 5, "data": 5, "navigation": 0 }
+    },
     {
       "version": "0.10.0",
       "date": "2026-08-05",
@@ -170,10 +182,7 @@
   "roadmap": [
     { "priority": 1, "title": "Modularize lookup.js", "readiness": "Deferred by owner", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith and is the highest-traffic page, but this work is intentionally postponed.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
     { "priority": 2, "title": "Pro+ Data Center", "readiness": "Specification complete", "effort": "Multi-phase", "category": "Pro+", "why": "Every current and future data point belongs in one customizable sheet where a professional selects property, town, or county scope and checks the exact fields to add as columns.", "deliverables": ["field registry", "checkbox filter catalog", "virtualized data sheet", "saved views", "bulk export", "scheduled delivery", "API payload builder"] },
-    { "priority": 3, "title": "Exempt property and PILOT exposure", "readiness": "Needs NJ download", "effort": "Medium", "category": "Municipal intelligence", "why": "Current abatement data covers only partial exemptions and can understate redevelopment exposure.", "deliverables": ["exempt-value share", "PILOT context", "municipal comparison", "Town Intelligence integration"] },
-    { "priority": 4, "title": "Added and omitted assessment monitor", "readiness": "Needs NJ download", "effort": "Medium", "category": "Homeowner tool", "why": "Home improvements and omitted assessments can create unexpected tax changes outside the normal annual cycle.", "deliverables": ["risk screener", "notice explainer", "deadline guidance", "saved-property alert field"] },
-    { "priority": 5, "title": "Farmland assessment qualification", "readiness": "Needs NJ download", "effort": "Medium", "category": "Specialized tool", "why": "Farmland assessment rules and rollback exposure are valuable to rural owners, agents and attorneys.", "deliverables": ["qualification checklist", "acreage and income inputs", "rollback-tax explainer", "professional handoff"] },
-    { "priority": 6, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
-    { "priority": 7, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
+    { "priority": 3, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
+    { "priority": 4, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
   ]
 }

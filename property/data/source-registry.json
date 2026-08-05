@@ -9,6 +9,7 @@
     {"id":"sr1a-ratios","label":"Verified-sale municipal ratios","agency":"NJ Division of Taxation","output":"property/sr1a-ratios.json","collection":"districts","minimum_records":350,"cadence":"quarterly","derived":true},
     {"id":"verified-sales","label":"County verified sales files","agency":"NJ Division of Taxation","glob":"property/sales-*.json","minimum_files":21,"cadence":"quarterly"},
     {"id":"abatements","label":"Abatement and exemption indicators","agency":"NJ public records","output":"property/abatements.json","collection":"districts","minimum_records":200,"cadence":"annual"},
-    {"id":"budget-pressure","label":"Municipal Budget Pressure","agency":"NJ Department of Community Affairs","source_url":"https://www.nj.gov/dca/dlgs/resources/Property_Tax_info.shtml","output":"property/data/budget-pressure.json","collection":"municipalities","minimum_records":560,"cadence":"annual","derived":true}
+    {"id":"budget-pressure","label":"Municipal Budget Pressure","agency":"NJ Department of Community Affairs","source_url":"https://www.nj.gov/dca/dlgs/resources/Property_Tax_info.shtml","output":"property/data/budget-pressure.json","collection":"municipalities","minimum_records":560,"cadence":"annual","derived":true},
+    {"id":"exempt-pilot","label":"Exempt property and PILOT exposure","agency":"NJ Division of Taxation + NJ Department of Community Affairs","source_url":"https://www.nj.gov/dca/dlgs/taxabatementkit.shtml","output":"property/data/exempt-pilot.json","collection":"municipalities","minimum_records":564,"cadence":"annual","derived":true}
   ]
 }

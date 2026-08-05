@@ -28,6 +28,13 @@ const required = [
   'property/css/dashboard/09-budget-pressure.css',
   'property/data/budget-pressure.json',
   'property/scripts/build_budget_pressure.py',
+  'property/js/dashboard/tools/exempt-pilot-exposure.js',
+  'property/js/dashboard/tools/added-omitted-monitor.js',
+  'property/js/dashboard/tools/farmland-qualification.js',
+  'property/css/dashboard/10-special-assessments.css',
+  'property/data/exempt-pilot.json',
+  'property/abatements.json',
+  'property/scripts/build_exempt_pilot.py',
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
@@ -45,7 +52,7 @@ const fairness = read('property/fairness.html');
 for (const marker of ['townIntelSummary(r)', 'townIntelAgentPoints()', 'toolTownRiskMatrix()', "Town fairness (0-100)"]) {
   if (!dashboard.includes(marker)) throw new Error('Dashboard integration missing: ' + marker);
 }
-for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pressure-simulator'"]) {
+for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pressure-simulator'", 'toolAddedOmitted(r)', 'toolFarmland(r)', 'toolExemptPilot(r)']) {
   if (!home.includes(marker)) throw new Error('Home integration missing: ' + marker);
 }
 if (!menu.includes('/property/fairness.html') || !menu.includes('/property/town-compare.html')) {
@@ -60,8 +67,8 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
-if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 7) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.10.0' || !versions.releases[0].timestamp) {
+if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 4) throw new Error('Project roadmap is incomplete');
+if (versions.releases[0].version !== '0.11.0' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -79,5 +86,11 @@ if (!budgetPressure.municipalities || Object.keys(budgetPressure.municipalities)
 if (!read('property/js/dashboard/index.js').includes('budgetPressureSummary(r)')) throw new Error('Dashboard Budget Pressure integration is missing');
 if (!read('property/js/dashboard/home/index.js').includes('budgetPressureCard(r)')) throw new Error('Home Budget Pressure integration is missing');
 if (!read('property/js/town-compare/index.js').includes('Budget pressure score')) throw new Error('Town comparison Budget Pressure integration is missing');
+const exposure = JSON.parse(read('property/data/exempt-pilot.json'));
+if (!exposure.municipalities || Object.keys(exposure.municipalities).length !== 564) throw new Error('Exempt/PILOT coverage is incomplete');
+const abatements = JSON.parse(read('property/abatements.json'));
+if (!abatements.districts || Object.keys(abatements.districts).length !== 564) throw new Error('Partial-abatement coverage is incomplete');
+const cardCss = read('property/css/dashboard/05-collections.css');
+if (!cardCss.includes('aspect-ratio: auto') || !cardCss.includes('grid-template-rows: auto auto')) throw new Error('Dashboard card sizing repair is missing');
 
-console.log('Verified release 0.10.0: Municipal Budget Pressure, shared claim verification, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');
+console.log('Verified release 0.11.0: Exempt/PILOT exposure, Added/Omitted monitor, Farmland screener, Dashboard card repair, Budget Pressure, verification, Town Intelligence, Time Machine, tracker, and Pro+ Data Center specification.');

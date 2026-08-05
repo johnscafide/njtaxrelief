@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805k';
+  var MODULE_VERSION = '20260805m';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -21,14 +21,20 @@
     'property-class-mix': ['town-profile']
   };
   var moduleGroups = {
-    initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
+    initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'exempt-pilot-exposure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
     pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'export']
   };
 
   function loadToolModule(name) {
     if (!modulePromises[name]) {
       modulePromises[name] = Promise.all((moduleDependencies[name] || []).map(loadToolModule))
-        .then(function () { return import('./tools/' + name + '.js?v=' + MODULE_VERSION); }).catch(function (error) {
+        .then(function () { return import('./tools/' + name + '.js?v=' + MODULE_VERSION); })
+        .then(function (module) {
+          if (name === 'exempt-pilot-exposure' && typeof loadExemptPilot === 'function') {
+            return loadExemptPilot().then(function () { return module; });
+          }
+          return module;
+        }).catch(function (error) {
         delete modulePromises[name];
         throw error;
       });
@@ -1496,6 +1502,11 @@ function brief() {
       .sort(function (a, b) { return b.t.trajectory.cagr - a.t.trajectory.cagr; })[0];
     var pressure = rows.map(function (r) { var b = budgetPressureFor(r); return b ? { r: r, b: b } : null; }).filter(Boolean)
       .sort(function (a, b) { return b.b.score - a.b.score; })[0];
+    var pilot = typeof exemptPilotFor === 'function' ? rows.map(function (r) {
+      var x = exemptPilotFor(r); return x ? { r:r, x:x } : null;
+    }).filter(Boolean).sort(function (a, b) {
+      return (+b.x.pilot_value_share || 0) - (+a.x.pilot_value_share || 0);
+    })[0] : null;
     return '<div class="ai-town-intel"><b>Town signals</b>' +
       '<p><i class="fas fa-scale-balanced"></i><span><strong>' + esc(leastFair.r.address) + '</strong> is in ' +
         esc(leastFair.t.name) + ', ranked #' + leastFair.t.stateRank + ' of ' + leastFair.t.stateTotal +
@@ -1503,6 +1514,7 @@ function brief() {
       (fastest ? '<p><i class="fas fa-chart-line"></i><span><strong>' + esc(fastest.r.address) + '</strong> has the fastest municipal rate trend in this list at ' +
         (fastest.t.trajectory.cagr >= 0 ? '+' : '') + (fastest.t.trajectory.cagr * 100).toFixed(1) + '% per year.</span></p>' : '') +
       (pressure ? '<p><i class="fas fa-building-columns"></i><span><strong>' + esc(pressure.r.address) + '</strong> has the highest municipal budget pressure in this list at ' + pressure.b.score + '/100 (' + pressure.b.band + ').</span></p>' : '') +
+      (pilot && pilot.x.pilot_count ? '<p><i class="fas fa-landmark"></i><span><strong>' + esc(pilot.r.address) + '</strong> is in a town reporting ' + pilot.x.pilot_count + ' PILOT agreement' + (pilot.x.pilot_count === 1 ? '' : 's') + ', covering ' + (pilot.x.pilot_value_share * 100).toFixed(1) + '% of assessed value.</span></p>' : '') +
       '<a href="/property/town-compare.html">Compare municipalities</a></div>';
   }
 

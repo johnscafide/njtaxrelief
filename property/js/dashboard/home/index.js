@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805n';
+  var HOME_MODULE_VERSION = '20260805p';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -25,6 +25,7 @@
         .then(function (module) {
           if (name === 'uniformity') return Promise.all([loadUniformity(), loadAppeals()]).then(function () { return module; });
           if (name === 'abatement-exposure') return loadAbatements().then(function () { return module; });
+          if (name === 'exempt-pilot-exposure') return loadExemptPilot().then(function () { return module; });
           return module;
         }).catch(function (error) { delete homeModulePromises[name]; throw error; });
     }
@@ -1339,7 +1340,16 @@
       k: 'kept', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
       pro: 'For a buyer this is undisclosed exposure, because the listing shows the seller\u2019s bill. ' +
            'For a seller it is worth knowing before an offer arrives.',
-      build: function (r) { return toolReassessRisk(r); }
+      build: function (r) { return toolReassessRisk(r) + toolAddedOmitted(r); }
+    },
+    {
+      k: 'farmland', icon: 'fa-seedling', title: 'Could farmland assessment apply?',
+      pro: 'For rural property, a small change in qualifying acreage, gross sales or continued use can change the assessment basis entirely. This checklist makes the filing requirements and rollback exposure explicit before a client relies on the benefit.',
+      build: function (r) { return toolFarmland(r); },
+      sum: function (r) {
+        var s = typeof farmlandSavedFor === 'function' ? farmlandSavedFor(r) : null;
+        return s && s.acres ? s.acres + ' acres entered' : '5-acre, use and gross-sales screen';
+      }
     },
     {
       k: 'reval', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
@@ -1357,7 +1367,7 @@
            'in the municipality regardless of the individual property.',
       build: function (r) {
         var u = uniFor(r);
-        return townIntelligenceCard(r) + budgetPressureCard(r) + (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
+        return townIntelligenceCard(r) + budgetPressureCard(r) + (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r) + toolExemptPilot(r);
       },
       sum: function (r) {
         var t = townIntelFor(r), u = uniFor(r), b = budgetPressureFor(r);
@@ -1437,9 +1447,10 @@
 
   var HOME_SECTION_MODULES = {
     fair: ['improvement-ratio'],
-    kept: ['reassessment-risk'],
+    kept: ['reassessment-risk', 'assessment-drift', 'added-omitted-monitor'],
+    farmland: ['farmland-qualification'],
     reval: ['revaluation-radar'],
-    town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure'],
+    town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure', 'exempt-pilot-exposure'],
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],

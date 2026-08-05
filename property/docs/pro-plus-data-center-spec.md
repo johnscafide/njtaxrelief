@@ -23,6 +23,9 @@ The Data Center is the all-encompassing Pro+ workspace for every property, munic
 7. Watchdog history: first observed, last observed, snapshot count, assessment change, tax change, latest change date.
 8. Workflow: saved status, verification level, report links, notes, tags, assigned team member, last export.
 9. Municipal budget pressure: pressure score and band, total levy growth, organic ratable growth, levy-to-ratable gap, school/municipal/county levy shares and growth, municipal appropriation growth, debt-service share, collection rate, structural-imbalance share, source year and formula version.
+10. Exempt property & PILOT exposure: assessed value including exempt property, ordinary taxable base, fully exempt value/share, non-PILOT exempt value, PILOT count, PILOT assessed value/share, PILOT billing, conventional-tax comparison, DCA municipal subsidy, subsidy-to-budget share, partial-abatement value/share, source years and coverage flags.
+11. Added/omitted monitor: monitor status, observed assessment-change signal, recent-construction signal, user-entered improvement flag, notice type, notice date, added/omitted amount, working appeal deadline, AA-1 source version, and availability status. Browser-private entries remain excluded from bulk export until account-synced storage is intentionally added.
+12. Farmland assessment: screening status, actively devoted acres, agricultural/woodland use type, entered gross sales, required gross-sales threshold, two-year-use check, continued-use check, woodland-plan check, under-seven-acre narrative check, next FA-1 filing deadline, target tax year and rule-source version. Browser-private qualification inputs remain excluded from bulk export until account-synced storage is intentionally added.
 
 Every future tool must register its exportable fields in the Data Center field catalog as part of its definition of done.
 
