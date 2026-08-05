@@ -15,15 +15,19 @@ async function sha(value: string) {
 
 Deno.serve(async req => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
-  const resendKey = Deno.env.get('RESEND_API_KEY') || '';
+  const emailPrivateKey = Deno.env.get('EMAILJS_PRIVATE_KEY') || '';
+  const emailPublicKey = Deno.env.get('EMAILJS_PUBLIC_KEY') || 'u262kw5AoJcBI342V';
+  const emailServiceId = Deno.env.get('EMAILJS_SERVICE_ID') || 'service_gptqbyx';
+  const emailTemplateId = Deno.env.get('EMAILJS_TEMPLATE_ID') || 'template_verifymail';
   const adminEmail = Deno.env.get('VERIFY_ADMIN_EMAIL') || '';
   const fromEmail = Deno.env.get('VERIFY_FROM_EMAIL') || '';
-  const emailReady = !!(resendKey && adminEmail && fromEmail);
+  const emailReady = !!(emailPrivateKey && emailPublicKey && emailServiceId && emailTemplateId && adminEmail && fromEmail);
   if (req.method === 'GET') return json({
     ok: true,
     service: 'request-verify-code',
     database_configured: !!Deno.env.get('SUPABASE_SERVICE_ROLE_KEY'),
     admin_email_configured: emailReady,
+    email_provider: 'EmailJS',
     delivery_mode: 'manual postcard'
   });
 
@@ -62,29 +66,43 @@ Deno.serve(async req => {
     }).select('id').single();
     if (insertError) return json({ ok: false, reason: 'Verification queue is unavailable', stage: 'database', detail: insertError.code }, 500);
 
-    const emailResponse = await fetch('https://api.resend.com/emails', {
+    const expiresDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
+      month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York'
+    });
+    const emailResponse = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
-      headers: { Authorization: 'Bearer ' + resendKey, 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        from: fromEmail,
-        to: [adminEmail],
-        subject: 'Postcard verification request: ' + line1 + ', ' + city,
-        html: '<h2>Mail this Watchdog verification postcard</h2>' +
-          '<p><b>Mail to:</b><br>' + line1 + '<br>' + city + ', NJ ' + postal + '</p>' +
-          '<p><b>Verification code:</b></p><p style="font-size:32px;font-weight:800;letter-spacing:6px">' + code + '</p>' +
-          '<p>Request ID: ' + row.id + '<br>PAMS PIN: ' + pin + '<br>Expires in 30 days.</p>' +
-          '<p>Do not email this code to the requester. Put it on the postcard you mail to the property.</p>'
+        service_id: emailServiceId,
+        template_id: emailTemplateId,
+        user_id: emailPublicKey,
+        accessToken: emailPrivateKey,
+        template_params: {
+          to_email: adminEmail,
+          from_email: fromEmail,
+          property_address: line1,
+          property_city: city,
+          property_state: 'NJ',
+          property_zip: postal,
+          full_mailing_address: line1 + '\n' + city + ', NJ ' + postal,
+          verification_code: code,
+          request_id: row.id,
+          pams_pin: pin,
+          expires_date: expiresDate,
+          requester_email: user.email || '',
+          instructions: 'Put this code on a postcard and mail it to the property. Do not email the code to the requester.'
+        }
       })
     });
-    const emailResult = await emailResponse.json().catch(() => ({}));
+    const emailResult = await emailResponse.text().catch(() => '');
     if (!emailResponse.ok) {
       await admin.from('ownership_verifications').update({
-        status: 'failed', provider_message: String(emailResult?.message || emailResponse.status).slice(0, 300), updated_at: new Date().toISOString()
+        status: 'failed', provider_message: String(emailResult || emailResponse.status).slice(0, 300), updated_at: new Date().toISOString()
       }).eq('id', row.id);
       return json({ ok: false, reason: 'The administrator email could not be sent', stage: 'admin_email', provider_status: emailResponse.status }, 502);
     }
     await admin.from('ownership_verifications').update({
-      status: 'awaiting_mail', provider_id: emailResult?.id || null, updated_at: new Date().toISOString()
+      status: 'awaiting_mail', provider_id: 'emailjs:' + row.id, updated_at: new Date().toISOString()
     }).eq('id', row.id);
     return json({ ok: true, status: 'awaiting_mail', request_id: row.id, expires_in_days: 30 });
   } catch (error) {

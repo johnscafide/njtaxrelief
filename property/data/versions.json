@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T12:30:15-04:00",
+  "updated_at": "2026-08-05T12:37:53-04:00",
   "releases": [
+    {
+      "version": "0.9.2",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T12:37:53-04:00",
+      "title": "EmailJS administrator delivery for manual postcards",
+      "category": "Reliability",
+      "status": "Completed",
+      "summary": "Connected the secure verification worker to the existing EmailJS account and template. Codes and mailing instructions go only to the administrator, while the EmailJS private key remains protected in Supabase secrets.",
+      "links": ["/property/verification-diagnostics.html", "/property/dashboard.html"],
+      "files": ["supabase/functions/request-verify-code/index.ts", "supabase/functions/request-verify-code/README.md", "supabase/functions/request-verify-code/EMAILJS-TEMPLATE-SETUP.md", "property/js/verification-diagnostics.js", "property/verification-diagnostics.html"],
+      "impact": { "html": 1, "css": 0, "javascript": 2, "data": 1, "navigation": 0 }
+    },
     {
       "version": "0.9.1",
       "date": "2026-08-05",

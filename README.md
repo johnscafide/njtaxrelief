@@ -1,4 +1,4 @@
-# NJPTR Watchdog platform release 0.9.1
+# NJPTR Watchdog platform release 0.9.2
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
@@ -37,7 +37,7 @@ Earlier work reconstructed from this project session is labeled `Time not captur
 
 ## Important verification deployment note
 
-The web files can be uploaded normally, but postal verification also requires the included Supabase migration and Edge Function. The function emails each secure code and mailing address to the administrator through Resend. The administrator writes or prints the code on a postcard and mails it to the property. The requester never receives the code by email. The package does not contain any private API key.
+The web files can be uploaded normally, but postal verification also requires the included Supabase migrations and Edge Function. The function uses the existing EmailJS service and `template_verifymail` to send each secure code and mailing address to the administrator. The administrator writes or prints the code on a postcard and mails it to the property. The requester never receives the code by email. The EmailJS private key is stored only as a Supabase secret and is not included in this package.
 
 The Data Center is documented and added to the Pro+ roadmap. It is not presented as a finished user tool in this release.
 

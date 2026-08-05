@@ -25,6 +25,7 @@ const required = [
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
+  'supabase/functions/request-verify-code/EMAILJS-TEMPLATE-SETUP.md',
   '.github/workflows/state-data-refresh.yml',
   'sitemap.xml'
 ];
@@ -52,9 +53,9 @@ if (!fairness.includes("townIntelAll()") || !fairness.includes('fi-detail')) {
 if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder HTML copy is present');
 
 const versions = JSON.parse(read('property/data/versions.json'));
-if (!Array.isArray(versions.releases) || versions.releases.length < 10) throw new Error('Release history is incomplete');
+if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 8) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.9.1' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.9.2' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -63,6 +64,6 @@ if (!read('property/js/sidemenu.js').includes('genericToggle')) throw new Error(
 if (!read('property/js/dashboard/tools/assessment-drift.js').includes('toolTimeMachine')) throw new Error('Property Time Machine is missing');
 if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
 if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band + '\"'")) throw new Error('Town Intelligence can still emit an undefined class');
-if (!read('supabase/functions/request-verify-code/index.ts').includes('VERIFY_ADMIN_EMAIL')) throw new Error('Manual administrator-email delivery is missing');
+if (!read('supabase/functions/request-verify-code/index.ts').includes('api.emailjs.com/api/v1.0/email/send')) throw new Error('EmailJS administrator delivery is missing');
 
-console.log('Verified release 0.9.1: mobile cards, manual postcard fulfillment, navigation, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');
+console.log('Verified release 0.9.2: EmailJS manual postcard fulfillment, mobile cards, navigation, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');

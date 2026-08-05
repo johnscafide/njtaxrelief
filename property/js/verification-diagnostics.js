@@ -24,7 +24,7 @@
     host.innerHTML =
       card('fa-code', 'Edge Function', health.ok ? 'The secure-code endpoint responded.' : (health.reason || 'No response.'), health.ok ? 'Online' : 'Unavailable', !!health.ok) +
       card('fa-database', 'Verification database', health.database_configured ? 'Service-role database access is configured.' : 'Service-role access is missing or the function is unavailable.', health.database_configured ? 'Configured' : 'Needs setup', !!health.database_configured) +
-      card('fa-envelope-circle-check', 'Administrator email', health.admin_email_configured ? 'Codes and property addresses will be sent to the configured administrator inbox for manual postcard mailing.' : 'Resend or administrator-email settings are not configured.', health.admin_email_configured ? 'Configured' : 'Needs setup', !!health.admin_email_configured) +
+      card('fa-envelope-circle-check', 'Administrator email', health.admin_email_configured ? 'EmailJS will send codes and property addresses to the configured administrator inbox for manual postcard mailing.' : 'EmailJS private-key or administrator-email settings are not configured.', health.admin_email_configured ? 'EmailJS configured' : 'Needs setup', !!health.admin_email_configured) +
       card('fa-user-shield', 'Your account', signed ? (account && account.ok ? ((account.active || 0) + ' active, ' + (account.verified || 0) + ' verified, ' + (account.failed || 0) + ' failed') : (account && account.reason || 'Status RPC needs deployment')) : 'Sign in to see request totals.', signed && account && account.ok ? 'Connected' : signed ? 'Needs migration' : 'Signed out', signed ? !!(account && account.ok) : null);
   }
   document.getElementById('vd-refresh').addEventListener('click', run);
