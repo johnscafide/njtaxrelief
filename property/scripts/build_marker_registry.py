@@ -91,6 +91,23 @@ for f,l,cat in [
 for f,l,cat in [('escrow_scenario_tax','Scenario annual tax','lending'),('escrow_monthly_delta','Scenario monthly escrow delta','lending'),('escrow_reserve_12m','12-month escrow-shock reserve','lending'),('escrow_shock_band','Escrow-shock band','lending'),('lien_search_completion','Municipal search completion','closing'),('lien_open_items','Open municipal-search items','closing'),('lien_issue_count','Municipal-search issue count','closing'),('constraint_stack_count','Development-constraint stack count','development')]:
     add('watchdog.'+f,l,cat,'property','pro_plus','watchdog-derived',['attorney','title','agent','lender','contractor','investor'],'watchdog-professional')
 
+# v0.17 professional intelligence: implemented, formula-backed Watchdog markers.
+for mid,label,cat,tier,prof in [
+ ('investor_carry_cost_volatility','Investor Carry-Cost Volatility','investment','pro_plus',['investor','lender','agent']),
+ ('appeal_evidence_strength','Appeal Evidence Strength','appeals','pro',['attorney','appraiser','agent']),
+ ('permit_lifecycle_score','Permit Lifecycle Intelligence','permits','pro_plus',['attorney','title','agent','lender','contractor','investor']),
+ ('listing_friction_index','Listing Friction Index','broker intelligence','pro',['agent']),
+ ('tax_carry_advantage','Tax Carry Advantage','broker intelligence','pro',['agent']),
+ ('buyer_objection_radar','Buyer Objection Radar','broker intelligence','pro',['agent']),
+ ('prelist_readiness_score','Pre-List Readiness Score','broker intelligence','pro',['agent']),
+ ('marketability_drag_index','Marketability Drag Index','broker intelligence','pro',['agent']),
+ ('revaluation_conversation_risk','Revaluation Conversation Risk','broker intelligence','pro',['agent']),
+ ('offer_diligence_priority','Offer Diligence Priority','broker intelligence','pro',['agent']),
+ ('verified_listing_story_strength','Verified Listing Story Strength','broker intelligence','pro',['agent']),
+ ('assessment_surprise_index','Assessment Surprise Index','broker intelligence','pro',['agent']),
+ ('tax_trend_position','Tax Trend Position','broker intelligence','pro',['agent'])]:
+    add('watchdog.'+mid,label,cat,'property',tier,'watchdog-derived',prof,'watchdog-models')
+
 summary={"total":len(markers),"public_source":sum(m['origin']=='public' for m in markers),"proprietary_derived":sum(m['proprietary'] for m in markers)}
 summary['by_tier']={t:sum(m['tier']==t for m in markers) for t in ('standard','pro','pro_plus')}
 summary['by_profession']={p:sum(p in m['professions'] for m in markers) for p in PROF}

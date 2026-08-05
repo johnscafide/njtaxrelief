@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805u';
+  var HOME_MODULE_VERSION = '20260806a';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -14,6 +14,10 @@
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
     'investor-screen': ['uniformity'],
+    'investor-carry-volatility': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory', 'exempt-pilot-exposure'],
+    'appeal-evidence-strength': ['uniformity'],
+    'permit-lifecycle-intelligence': ['professional-due-diligence'],
+    'real-estate-intelligence': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
     'improvement-ratio': ['town-profile'],
     'property-class-mix': ['town-profile']
   };
@@ -826,6 +830,9 @@
     [/abatement|pilot/i, 'watchdog.exempt_pilot_exposure'],
     [/escrow/i, 'watchdog.escrow_monthly_delta'],
     [/permit/i, 'preflight.open_permit_count'],
+    [/carry-cost/i, 'watchdog.investor_carry_cost_volatility'],
+    [/evidence strength/i, 'watchdog.appeal_evidence_strength'],
+    [/real estate professional/i, 'watchdog.listing_friction_index'],
     [/flood|wetland|environment/i, 'watchdog.constraint_stack_count'],
     [/farmland/i, 'property.property_class'],
     [/closing cost|buyer cost/i, 'watchdog.closing_cost_estimate'],
@@ -1490,7 +1497,7 @@
            'statutory calculation already assembled.',
       build: function (r) {
         var a = appealFor(r);
-        return (a ? appealBody(r, a) : '') + toolAppealPacket(r);
+        return (a ? appealBody(r, a) : '') + toolAppealEvidenceStrength(r) + toolAppealPacket(r);
       },
       sum: function (r) {
         var a = appealFor(r);
@@ -1512,14 +1519,20 @@
     {
       k: 'diligence', tier: 'pro_plus', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
-      build: function (r) { return toolProfessionalDueDiligence(r) + toolProfessionalWorkflows(r); },
+      build: function (r) { return toolProfessionalDueDiligence(r) + toolPermitLifecycle(r) + toolProfessionalWorkflows(r); },
       sum: function () { return 'Closing evidence + escrow + lien + NJDEP constraints'; }
+    },
+    {
+      k: 'broker', tier: 'pro', cat: 'Professional intelligence', icon: 'fa-house-circle-check', title: 'Real Estate Professional Intelligence',
+      pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal signals into ten attributable client-conversation markers instead of another wall of raw numbers.',
+      build: function (r) { return toolRealEstateIntelligence(r); },
+      sum: function () { return '10 agent-specific Watchdog markers'; }
     },
     {
       k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
-      build: function (r) { return toolRelocation(r) + toolInvestorScreen(); }
+      build: function (r) { return toolRelocation(r) + toolInvestorScreen() + toolCarryCostVolatility(r); }
     },
     {
       k: 'trend', tier: 'pro', cat: 'Tax outlook', icon: 'fa-chart-line', title: 'Where is this bill headed?',
@@ -1568,11 +1581,12 @@
     farmland: ['farmland-qualification'],
     reval: ['revaluation-radar'],
     town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure', 'exempt-pilot-exposure'],
-    file: ['appeal-packet'],
+    file: ['appeal-packet', 'appeal-evidence-strength'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
-    diligence: ['professional-due-diligence', 'professional-workflows'],
-    compare: ['relocation', 'investor-screen'],
+    diligence: ['professional-due-diligence', 'permit-lifecycle-intelligence', 'professional-workflows'],
+    broker: ['real-estate-intelligence'],
+    compare: ['relocation', 'investor-screen', 'investor-carry-volatility'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
     history: ['assessment-drift']
   };

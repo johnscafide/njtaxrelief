@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805n';
+  var MODULE_VERSION = '20260806a';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -15,6 +15,7 @@
     'town-risk-matrix': ['town-intelligence', 'municipal-budget-pressure', 'watchdog-score'],
     'export': ['municipal-budget-pressure'],
     'investor-screen': ['uniformity'],
+    'investor-carry-volatility': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory', 'exempt-pilot-exposure'],
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
     'improvement-ratio': ['town-profile'],
@@ -22,7 +23,7 @@
   };
   var moduleGroups = {
     initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'exempt-pilot-exposure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
-    pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'professional-due-diligence', 'export']
+    pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'professional-due-diligence', 'investor-carry-volatility', 'export']
   };
 
   function loadToolModule(name) {
@@ -354,6 +355,15 @@
     if (!pct || pct <= 0) return null;
     return { ratio: pct / 100, year: yrs[yrs.length - 1],
              upper: row && row.upper ? +row.upper / 100 : null };
+  }
+  function rateHistory(town, county) {
+    if (!rates) return null;
+    var t=(town||'').toUpperCase().trim(),tc=t+' ('+(county||'').toUpperCase().trim()+')',keys=Object.keys(rates),hit=null;
+    for(var i=0;i<keys.length;i++)if(keys[i].toUpperCase().trim()===tc){hit=rates[keys[i]];break;}
+    if(!hit)for(var j=0;j<keys.length;j++)if(keys[j].toUpperCase().trim()===t){hit=rates[keys[j]];break;}
+    if(!hit)return null;
+    var years=Object.keys(hit).map(Number).filter(function(y){return y>1990;}).sort();
+    return years.length<3?null:years.map(function(y){return{year:y,rate:+hit[String(y)]};});
   }
 
   // ══════════════════════════════════════════════
@@ -1813,7 +1823,7 @@ function brief() {
       var body;
       if (isPro()) {
         body = proTable() +
-          [toolDueDiligencePortfolio(rows), toolPortfolio(), toolTownRiskMatrix(), toolCompare(), toolExport()].filter(Boolean).join('');
+          [toolDueDiligencePortfolio(rows), toolCarryCostPortfolio(rows), toolPortfolio(), toolTownRiskMatrix(), toolCompare(), toolExport()].filter(Boolean).join('');
       } else {
         body =
           proLocked('The full table',
@@ -2318,7 +2328,7 @@ function brief() {
   };
 
   // Compatibility bridge for lazy modules. Read-only getters keep shared state private.
-  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, rnd, deadline, propertyBlock, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
+  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, rateHistory, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, rnd, deadline, propertyBlock, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
   [
     ['plUser', function () { return plUser; }],
     ['rows', function () { return rows; }],

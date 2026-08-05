@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "version": "0.17.0",
+  "principle": "Every proprietary score exposes its component inputs and weights. Scores support prioritization; they are not legal, appraisal, credit, investment or transaction outcomes.",
+  "markers": {
+    "watchdog.investor_carry_cost_volatility": {"range":"0-100; higher means more tax-driven carry uncertainty","formula":"32% municipal budget pressure + 24% positive levy/ratable growth gap + 22% revaluation pressure + 14% positive tax-rate CAGR + 8% exempt/PILOT exposure"},
+    "watchdog.appeal_evidence_strength": {"range":"0-100; higher means a stronger evidence file","formula":"25% independent value anchor + 20% Chapter 123 margin + 18% verified comparable depth + 14% assessment-uniformity context + 10% county outcome context + 13% property-record completeness"},
+    "watchdog.permit_lifecycle_score": {"range":"0-100; higher means more permit lifecycle review","formula":"Up to 45 points stale open permits + 25 open permit/certificate gaps + 20 oldest-open age + 10 recent permit frequency"},
+    "watchdog.listing_friction_index": {"range":"0-100 risk","formula":"23% budget pressure + 23% revaluation pressure + 18% assessment unevenness + 18% tax-rate trend + 18% appeal/assessment tension"},
+    "watchdog.tax_carry_advantage": {"range":"0-100 advantage","formula":"Inverse normalized effective property-tax burden using current tax divided by independent market-value estimate"},
+    "watchdog.buyer_objection_radar": {"range":"0-100 priority","formula":"Maximum current budget, revaluation, assessment-uniformity or appeal-tension signal"},
+    "watchdog.prelist_readiness_score": {"range":"0-100 readiness","formula":"55% record completeness + 25% verified-sale evidence depth + 20% inverse listing friction"},
+    "watchdog.marketability_drag_index": {"range":"0-100 drag","formula":"34% effective tax burden + 23% budget pressure + 23% revaluation pressure + 20% assessment unevenness"},
+    "watchdog.revaluation_conversation_risk": {"range":"0-100 risk","formula":"70% revaluation pressure + 30% assessment unevenness"},
+    "watchdog.offer_diligence_priority": {"range":"0-100 priority","formula":"55% listing friction + 25% missing property-record evidence + 20% missing verified-sale evidence depth"},
+    "watchdog.verified_listing_story_strength": {"range":"0-100 strength","formula":"50% record completeness + 35% verified-sale evidence depth + 15% assessment consistency"},
+    "watchdog.assessment_surprise_index": {"range":"0-100 risk","formula":"40% revaluation pressure + 30% appeal/assessment tension + 15% tax-rate trend + 15% budget pressure"},
+    "watchdog.tax_trend_position": {"range":"0-100 stability","formula":"Inverse normalized positive historical general-tax-rate CAGR"}
+  }
+}

@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-05T17:40:26-04:00",
+  "generated_at": "2026-08-06T07:15:31+08:00",
   "target_markers": 1000,
   "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
   "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
   "summary": {
-    "total": 324,
+    "total": 337,
     "public_source": 275,
-    "proprietary_derived": 49,
+    "proprietary_derived": 62,
     "by_tier": {
       "standard": 22,
-      "pro": 181,
-      "pro_plus": 121
+      "pro": 192,
+      "pro_plus": 123
     },
     "by_profession": {
       "consumer": 56,
-      "attorney": 324,
-      "title": 47,
-      "agent": 314,
-      "lender": 164,
-      "appraiser": 316,
-      "contractor": 47,
-      "investor": 324,
+      "attorney": 326,
+      "title": 48,
+      "agent": 327,
+      "lender": 166,
+      "appraiser": 317,
+      "contractor": 48,
+      "investor": 326,
       "municipal": 233
     },
-    "percent_of_goal": 32.4
+    "percent_of_goal": 33.7
   },
   "professions": [
     {
@@ -6749,6 +6749,223 @@
       "source_id": "watchdog-professional",
       "status": "live",
       "field": "constraint_stack_count"
+    },
+    {
+      "id": "watchdog.investor_carry_cost_volatility",
+      "label": "Investor Carry-Cost Volatility",
+      "description": "Investor Carry-Cost Volatility",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "investor",
+        "lender",
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "investor_carry_cost_volatility"
+    },
+    {
+      "id": "watchdog.appeal_evidence_strength",
+      "label": "Appeal Evidence Strength",
+      "description": "Appeal Evidence Strength",
+      "category": "appeals",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "attorney",
+        "appraiser",
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "appeal_evidence_strength"
+    },
+    {
+      "id": "watchdog.permit_lifecycle_score",
+      "label": "Permit Lifecycle Intelligence",
+      "description": "Permit Lifecycle Intelligence",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "permit_lifecycle_score"
+    },
+    {
+      "id": "watchdog.listing_friction_index",
+      "label": "Listing Friction Index",
+      "description": "Listing Friction Index",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "listing_friction_index"
+    },
+    {
+      "id": "watchdog.tax_carry_advantage",
+      "label": "Tax Carry Advantage",
+      "description": "Tax Carry Advantage",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "tax_carry_advantage"
+    },
+    {
+      "id": "watchdog.buyer_objection_radar",
+      "label": "Buyer Objection Radar",
+      "description": "Buyer Objection Radar",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "buyer_objection_radar"
+    },
+    {
+      "id": "watchdog.prelist_readiness_score",
+      "label": "Pre-List Readiness Score",
+      "description": "Pre-List Readiness Score",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "prelist_readiness_score"
+    },
+    {
+      "id": "watchdog.marketability_drag_index",
+      "label": "Marketability Drag Index",
+      "description": "Marketability Drag Index",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "marketability_drag_index"
+    },
+    {
+      "id": "watchdog.revaluation_conversation_risk",
+      "label": "Revaluation Conversation Risk",
+      "description": "Revaluation Conversation Risk",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "revaluation_conversation_risk"
+    },
+    {
+      "id": "watchdog.offer_diligence_priority",
+      "label": "Offer Diligence Priority",
+      "description": "Offer Diligence Priority",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "offer_diligence_priority"
+    },
+    {
+      "id": "watchdog.verified_listing_story_strength",
+      "label": "Verified Listing Story Strength",
+      "description": "Verified Listing Story Strength",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "verified_listing_story_strength"
+    },
+    {
+      "id": "watchdog.assessment_surprise_index",
+      "label": "Assessment Surprise Index",
+      "description": "Assessment Surprise Index",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "assessment_surprise_index"
+    },
+    {
+      "id": "watchdog.tax_trend_position",
+      "label": "Tax Trend Position",
+      "description": "Tax Trend Position",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "tax_trend_position"
     }
   ]
 }
