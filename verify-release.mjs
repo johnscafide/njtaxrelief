@@ -91,7 +91,7 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 4) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.16.0' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.16.1' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -112,6 +112,8 @@ if (!read('property/js/dashboard/home/index.js').includes('compactHomeSection'))
 if (!read('property/css/home/05-marker-experience.css').includes('border-left-width:0!important')) throw new Error('Home report rails returned');
 if (!read('property/index.html').includes('/property/pro.html#plans')) throw new Error('Public Pricing link is missing');
 if (!read('property/home.html').includes('plan-context.js') || !read('property/dashboard.html').includes('plan-context.js')) throw new Error('Developer View As integration is missing');
+if (!read('property/js/dashboard/index.js').includes("typeof window.paintPercentile === 'function'")) throw new Error('Paid/developer lazy-tool login guard is missing');
+if (!read('property/data-center.html').includes('data-plan-auto="true"')) throw new Error('Standalone Data Center plan initialization is missing');
 const proprietaryBacklog = JSON.parse(read('property/data/proprietary-marker-backlog.json'));
 if (proprietaryBacklog.professions.length !== 9 || proprietaryBacklog.professions.some(p => p.markers.length !== 10)) throw new Error('Professional proprietary-marker backlog is incomplete');
 const saasPipeline = JSON.parse(read('property/data/saas-platform-pipeline.json'));
@@ -140,4 +142,4 @@ const cardCss = read('property/css/dashboard/05-collections.css');
 if (!cardCss.includes('aspect-ratio: auto') || !cardCss.includes('grid-template-rows: auto auto')) throw new Error('Dashboard card sizing repair is missing');
 if (cardCss.includes('.pr-card-metrics span { border-left:')) throw new Error('Dashboard metric divider returned');
 
-console.log('Verified release 0.16.0: compact Home signals, sourced drill-downs, developer View As, dense Data Center, 90-marker backlog, SaaS pipeline, and prior Watchdog integrations.');
+console.log('Verified release 0.16.1: developer login repair, compact Home signals, View As, dense Data Center, 90-marker backlog, SaaS pipeline, and prior integrations.');
