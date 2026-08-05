@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805k';
+  var HOME_MODULE_VERSION = '20260805l';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],

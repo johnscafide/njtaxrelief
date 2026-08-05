@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T12:05:35-04:00",
+  "updated_at": "2026-08-05T12:30:15-04:00",
   "releases": [
+    {
+      "version": "0.9.1",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T12:30:15-04:00",
+      "title": "Mobile property-card repair and manual postcard fulfillment",
+      "category": "Fix",
+      "status": "Completed",
+      "summary": "Corrected Town Intelligence so property cards no longer receive an undefined status class, allowed mobile cards to grow with their data, and replaced PostGrid with a secure administrator-email workflow for manually mailed verification postcards.",
+      "links": ["/property/dashboard.html", "/property/verification-diagnostics.html"],
+      "files": ["property/js/dashboard/tools/town-intelligence.js", "property/css/dashboard/07-town-intelligence.css", "property/css/dashboard/05-collections.css", "property/js/dashboard/index.js", "supabase/migrations/20260805180000_ownership_verification.sql", "supabase/migrations/20260805183000_manual_verification_email.sql", "supabase/functions/request-verify-code/index.ts", "property/verification-diagnostics.html", "property/js/verification-diagnostics.js"],
+      "impact": { "html": 2, "css": 2, "javascript": 4, "data": 1, "navigation": 0 }
+    },
     {
       "version": "0.9.0",
       "date": "2026-08-05",

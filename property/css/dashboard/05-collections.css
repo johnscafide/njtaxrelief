@@ -506,7 +506,8 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 }
 
 @media (max-width: 420px) {
-  .pr-card { grid-template-rows: 60% 40%; }
+  .pr-card { aspect-ratio:auto; grid-template-rows:190px auto; }
+  .pr-card-body { min-height:225px; }
   .pr-card-compare span { display: none; }
   .pr-card-compare { right: 47px; }
   .pr-card-body h3 { font-size: 22px; }

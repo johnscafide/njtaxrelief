@@ -1,4 +1,4 @@
-# NJPTR Watchdog platform release 0.9.0
+# NJPTR Watchdog platform release 0.9.1
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
@@ -24,7 +24,7 @@ This release turns the existing Tax Rate Trajectory and Statewide Fairness Index
 - Release-impact and category charts, plus a prioritized project roadmap
 - Shared sidebar expansion and collapse on Dashboard, Home, Fairness, Town Compare, Updates, and diagnostics pages
 - Historical assessment and tax charts with a per-property event timeline
-- Postal verification queue, salted code storage, rate limits, redemption, diagnostics, and PostGrid worker
+- Postal verification queue, salted code storage, rate limits, redemption, diagnostics, and administrator-email delivery
 - Monthly state-data validation and refresh workflow that opens a pull request for review
 - Source registry and freshness report covering seven data families
 - Pro+ Data Center product specification and plan integration
@@ -37,7 +37,7 @@ Earlier work reconstructed from this project session is labeled `Time not captur
 
 ## Important verification deployment note
 
-The web files can be uploaded normally, but postal verification also requires the included Supabase migration and Edge Function. A PostGrid account and API key are required to print and mail real postcards. Keep PostGrid in test mode until the diagnostics page and one test postcard pass. The package does not contain any private API key.
+The web files can be uploaded normally, but postal verification also requires the included Supabase migration and Edge Function. The function emails each secure code and mailing address to the administrator through Resend. The administrator writes or prints the code on a postcard and mails it to the property. The requester never receives the code by email. The package does not contain any private API key.
 
 The Data Center is documented and added to the Pro+ roadmap. It is not presented as a finished user tool in this release.
 

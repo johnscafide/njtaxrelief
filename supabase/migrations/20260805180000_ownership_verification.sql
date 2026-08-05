@@ -7,8 +7,8 @@ create table if not exists public.ownership_verifications (
   delivery_address jsonb not null,
   code_hash text not null,
   code_nonce text not null,
-  status text not null default 'queued' check (status in ('queued','submitted','mailed','delivered','verified','expired','failed')),
-  provider text not null default 'postgrid',
+  status text not null default 'queued' check (status in ('queued','awaiting_mail','mailed','delivered','verified','expired','failed')),
+  provider text not null default 'manual_email',
   provider_id text,
   provider_message text,
   attempts integer not null default 0,
@@ -29,7 +29,7 @@ begin
   if auth.uid() is null then return jsonb_build_object('ok',false,'reason','Sign in required'); end if;
   v_code := upper(regexp_replace(coalesce(p_code,''),'[^A-Z0-9]','','g'));
   select * into v_row from public.ownership_verifications
-   where user_id=auth.uid() and pams_pin=p_pin and status in ('queued','submitted','mailed','delivered')
+   where user_id=auth.uid() and pams_pin=p_pin and status in ('queued','awaiting_mail','mailed','delivered')
    order by created_at desc limit 1 for update;
   if v_row.id is null then return jsonb_build_object('ok',false,'reason','No active code found'); end if;
   if v_row.expires_at < now() then update public.ownership_verifications set status='expired',updated_at=now() where id=v_row.id; return jsonb_build_object('ok',false,'reason','Code expired'); end if;
@@ -46,7 +46,7 @@ create or replace function public.verification_delivery_status()
 returns jsonb language sql security definer set search_path=public as $$
   select jsonb_build_object(
     'ok',true,
-    'active',count(*) filter(where status in ('queued','submitted','mailed','delivered')),
+    'active',count(*) filter(where status in ('queued','awaiting_mail','mailed','delivered')),
     'verified',count(*) filter(where status='verified'),
     'failed',count(*) filter(where status='failed'),
     'latest',max(created_at)

@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805h';
+  var MODULE_VERSION = '20260805i';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -1938,7 +1938,7 @@ function brief() {
 
   window.dbRequestCode = function (pin, address, town, zip) {
     var button = el('vc-request');
-    if (button) { button.disabled = true; button.textContent = 'Submitting mailing...'; }
+    if (button) { button.disabled = true; button.textContent = 'Creating secure code...'; }
     sb.functions.invoke('request-verify-code', { body: { pams_pin: pin, address_line1: address, city: town, postal_code: zip } }).then(function (r) {
       var data = (r && r.data) || {};
       if (r.error || !data.ok) {
@@ -1948,8 +1948,8 @@ function brief() {
         toast(reason);
         return;
       }
-      plModalNote('Code on the way',
-        '<p>We will post a code to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
+      plModalNote('Postcard request received',
+        '<p>Your secure code was sent to our mailing desk. We will post it to <b>' + esc(address) + '</b>. Allow a few days for it to arrive, then come back here and enter it.</p>' +
         '<p style="font-size:13.5px;color:#8a93a6;">The code goes to the property address, not to your email, because that is the whole point.</p>' +
         '<button class="plm-rbtn" onclick="plCloseNote()">Got it</button>');
     }).catch(function (error) {

@@ -54,7 +54,10 @@
 .tp-output div { min-width:150px; }.tp-output span,.tp-output b,.tp-output small { display:block; }.tp-output span { color:#718095; font-size:10px; }.tp-output b { color:#173e75; font-size:25px; margin-top:3px; }.tp-output small { color:#758399; font-size:10px; }.tp-output .up b,.tp-output .up small { color:#c5443b; }.tp-output .down b,.tp-output .down small { color:#17825e; }.tp-output > i { color:#9babb9; }
 
 @media(max-width:760px){
-  .ti-mini { grid-template-columns:repeat(3,minmax(100px,1fr)); overflow-x:auto; }
+  .ti-mini { grid-template-columns:repeat(3,minmax(0,1fr)); overflow:hidden; }
+  .ti-mini > span { padding:7px 5px; }
+  .ti-mini b { font-size:10.5px; }
+  .ti-mini small { font-size:8px; }
   .ti-stat-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .ti-stat-grid > div:nth-child(2) { border-right:0; }
   .ti-links { align-items:flex-start; flex-direction:column; }

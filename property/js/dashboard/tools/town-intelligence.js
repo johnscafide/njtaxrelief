@@ -98,13 +98,14 @@ function townIntelFor(value) {
 
 function townIntelAll() { return TI_DATA.rows.slice(); }
 
-function townIntelSummary(row) {
+function townIntelSummary(value) {
+  var row = value && value.score != null && value.stateRank ? value : townIntelFor(value);
   if (!row) return '';
-  var rate = row.trajectory;
-  return '<div class="ti-mini ' + row.band + '">' +
+  var rate = row.trajectory, band = row.band || tiBand(+row.score || 0);
+  return '<div class="ti-mini ' + band + '">' +
     '<span><b>' + row.score + '</b><small>town fairness</small></span>' +
     '<span><b>#' + row.stateRank + '</b><small>of ' + row.stateTotal + ' statewide</small></span>' +
-    (rate ? '<span><b>' + (rate.cagr >= 0 ? '+' : '') + (rate.cagr * 100).toFixed(1) + '%</b><small>tax rate / year</small></span>' : '') +
+    (rate ? '<span><b>' + (rate.cagr >= 0 ? '+' : '') + (rate.cagr * 100).toFixed(1) + '%</b><small>tax rate / year</small></span>' : '<span><b>-</b><small>rate history limited</small></span>') +
   '</div>';
 }
 
