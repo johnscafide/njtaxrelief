@@ -6,46 +6,115 @@
 <title>Property Report | NJ Property Tax Relief</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css">
-<link rel="stylesheet" href="/property/css/dashboard.css">
-<link rel="stylesheet" href="/property/css/home.css">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260804c">
+<link rel="stylesheet" href="/property/css/home.css?v=20260805f">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body>
+<body class="hm-dashboard-page">
 <div class="pl-toast" id="pl-toast"></div>
 <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
 
+<section class="hm-loading-screen" id="hm-loading" aria-live="polite">
+  <div class="pl-spin"></div>
+  <div><b>Opening your property report</b><span>Loading the workspace and current property records.</span></div>
+</section>
+
 <section class="gate" id="hm-gate" style="display:none;">
-  <h1>Sign in to see this report</h1>
-  <p>Property reports are built from the homes you have saved to your account.</p>
-  <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
-  <a class="gate-back" href="/property/">Back to the property lookup</a>
+  <div class="gate-mark"><i class="fas fa-dog"></i></div>
+  <span class="gate-kicker">Watchdog workspace</span>
+  <h1>Your property report is ready when you are.</h1>
+  <p>Sign in to open the detailed assessment, appeal, benefit and buyer analysis for your saved property.</p>
+  <div class="gate-actions">
+    <button class="db-btn" onclick="plSignInPrompt()"><i class="fas fa-right-to-bracket"></i> Sign in to your workspace</button>
+    <a class="gate-back" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up a property</a>
+  </div>
+  <div class="gate-trust"><i class="fas fa-shield-halved"></i> Passwordless sign-in. Your saved properties and profile are private.</div>
 </section>
 
 <main id="hm-main" style="display:none;">
+  <div class="db-shell">
+    <aside class="db-sidebar" aria-label="Watchdog workspace navigation">
+      <a class="db-side-brand" href="/property/">
+        <span><i class="fas fa-dog"></i></span>
+        <div><b>Watchdog</b><small>Property Tax Database</small></div>
+      </a>
 
-  <header class="hm-top">
-    <div class="hm-top-in">
-      <a class="hm-back" href="/property/dashboard.html"><i class="fas fa-chevron-left"></i> All properties</a>
-      <select id="hm-switch" onchange="hmSwitch(this.value)"></select>
-      <div class="hm-top-r">
-        <button class="hm-tl" onclick="hmGlossary()"><i class="fas fa-book"></i> Glossary</button>
-        <button class="hm-tl" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+      <button class="db-sidebar-toggle" id="db-sidebar-toggle" type="button" onclick="hmToggleSidebar()"
+        aria-label="Expand navigation" aria-expanded="false">
+        <i class="fas fa-chevron-right"></i><span>Expand navigation</span>
+      </button>
+
+      <div class="db-side-section">
+        <span class="db-side-label">Workspace</span>
+        <a class="db-side-link" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My properties</span></a>
+        <a class="db-side-link pn on" href="#report-top"><i class="fas fa-house-chimney-window"></i><span>Property report</span></a>
+        <a class="db-side-link" href="/property/dashboard.html#profile"><i class="fas fa-user-gear"></i><span>Profile &amp; benefits</span></a>
+        <button class="pn intel-nav" type="button" onclick="hmAgentIntel()"><i class="fas fa-dog"></i><span>Agent Intel</span></button>
+        <a class="db-side-link" href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved reports</span></a>
       </div>
+
+      <div class="db-side-section">
+        <span class="db-side-label">Tools</span>
+        <a class="db-side-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a>
+        <a class="db-side-link" href="/anchor-estimator.html"><i class="fas fa-calculator"></i><span>Benefit calculator</span></a>
+        <a class="db-side-link" href="/property-tax-appeal.html"><i class="fas fa-scale-balanced"></i><span>Appeal guide</span></a>
+        <a class="db-side-link pro-side" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Pro Hub</span><em>PRO</em></a>
+      </div>
+
+      <div class="db-side-account">
+        <button onclick="plSignOut()"><i class="fas fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
+      </div>
+    </aside>
+
+    <div class="db-workspace" id="report-top">
+      <header class="top">
+        <div class="top-in">
+          <div class="who">
+            <div id="hm-avatar"></div>
+            <div>
+              <span class="top-eyebrow">Property intelligence report</span>
+              <h1 id="hm-hi">Your property</h1>
+              <span id="hm-email"></span>
+              <div class="db-stat" id="hm-stat"></div>
+            </div>
+          </div>
+          <div class="top-acts">
+            <button class="hm-head-action" type="button" onclick="hmGlossary()"><i class="fas fa-book"></i><span>Glossary</span></button>
+            <button class="hm-head-action" type="button" onclick="window.print()"><i class="fas fa-print"></i><span>Print</span></button>
+            <a class="db-add" href="/property/" aria-label="Add property"><i class="fas fa-plus"></i><span class="db-add-full">Add property</span><span class="db-add-short">Add</span></a>
+          </div>
+        </div>
+      </header>
+
+      <div class="hm-top">
+        <div class="hm-top-in">
+          <a class="hm-back" href="/property/dashboard.html"><i class="fas fa-chevron-left"></i> All properties</a>
+          <label class="hm-switch-label" for="hm-switch">Viewing</label>
+          <select id="hm-switch" onchange="hmSwitch(this.value)" aria-label="Choose a saved property"></select>
+          <span class="hm-saved"><i class="fas fa-circle-check"></i> Saved to your workspace</span>
+        </div>
+      </div>
+
+      <div id="hm-body"></div>
     </div>
-  </header>
-
-  <div id="hm-body"></div>
-
+  </div>
 </main>
 
+<button class="db-to-top" id="db-to-top" type="button" onclick="hmScrollTop()" aria-label="Back to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script type="module" src="/property/js/dashboard/home/index.js?v=20260805e"></script>
+<script type="module" src="/property/js/dashboard/home/index.js?v=20260805f"></script>
 </body>
 </html>
