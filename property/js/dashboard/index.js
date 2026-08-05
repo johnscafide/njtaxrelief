@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805d';
+  var MODULE_VERSION = '20260805f';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -71,8 +71,13 @@
     n.innerHTML = '<div class="plm-note-box"><button class="plm-note-x" onclick="plCloseNote()"><i class="fas fa-xmark"></i></button>' +
       '<h3>' + esc(title) + '</h3>' + html + '</div>';
     n.classList.add('open');
+    document.body.classList.add('note-modal-open');
   };
-  window.plCloseNote = function () { el('plm-note-overlay').classList.remove('open'); };
+  window.plCloseNote = function () {
+    var n = el('plm-note-overlay');
+    if (n) n.classList.remove('open', 'comparison-open');
+    document.body.classList.remove('note-modal-open');
+  };
 
   function ready() {
     if (sb) return true;
@@ -246,6 +251,7 @@
       render();
       hydrateDetails().then(render);
       el('db-profile-body').innerHTML = profileForm();
+      if (location.hash === '#profile') window.dbPanel('profile');
     }).catch(function (err) {
       console.error('Dashboard workspace error:', err);
       el('db-line').innerHTML = '';
@@ -716,6 +722,36 @@
   // ══════════════════════════════════════════════
   var picked = [];
 
+  function selectedRows() {
+    return picked.map(function (id) { return byId(id); }).filter(Boolean);
+  }
+
+  function paintCompareTray() {
+    var root = el('compare-tray-root');
+    if (!root) return;
+    var selected = selectedRows();
+    if (!selected.length) {
+      root.innerHTML = '';
+      document.body.classList.remove('compare-tray-visible');
+      return;
+    }
+    root.innerHTML = '<section class="compare-tray" aria-label="Selected properties for comparison">' +
+      '<div class="compare-tray-head"><i class="fas fa-code-compare"></i><span><b>' + selected.length +
+        '</b> of 3 selected</span></div>' +
+      '<div class="compare-tray-items">' + selected.map(function (r) {
+        return '<div class="compare-tray-item"><span><b>' + esc(r.address || 'Saved property') + '</b>' +
+          '<small>' + esc(r.town || '') + '</small></span>' +
+          '<button type="button" onclick="dbRemovePick(\'' + esc(r.id) + '\')" aria-label="Remove ' +
+            esc(r.address || 'property') + ' from comparison"><i class="fas fa-xmark"></i></button></div>';
+      }).join('') + '</div>' +
+      '<div class="compare-tray-actions"><button class="compare-tray-clear" type="button" onclick="dbClearPick()">Clear</button>' +
+        '<button class="compare-tray-go" type="button" onclick="dbCompareSel()"' +
+          (selected.length < 2 ? ' disabled title="Select one more property"' : '') +
+          '><i class="fas fa-code-compare"></i> Compare' + (selected.length > 1 ? ' ' + selected.length : '') + '</button></div>' +
+    '</section>';
+    document.body.classList.add('compare-tray-visible');
+  }
+
   window.dbPick = function (id, box) {
     var i = picked.indexOf(id);
     if (i > -1) picked.splice(i, 1);
@@ -728,8 +764,18 @@
       picked.push(id);
     }
     render();
+    paintCompareTray();
   };
-  window.dbClearPick = function () { picked = []; render(); };
+  window.dbRemovePick = function (id) {
+    picked = picked.filter(function (pickedId) { return pickedId !== id; });
+    render();
+    paintCompareTray();
+  };
+  window.dbClearPick = function () {
+    picked = [];
+    render();
+    paintCompareTray();
+  };
 
   window.dbCompareSel = function () {
     var sel = picked.map(function (id) {
@@ -784,6 +830,8 @@
       '<p class="cw-note">Highlighted cells are the better number in that row. Bedroom and bathroom counts are ' +
       'not published anywhere in New Jersey\u2019s public property records, so they are not shown. Square footage ' +
       'comes from the state sales file and only exists for properties that have sold.</p>');
+    var modal = el('plm-note-overlay');
+    if (modal) modal.classList.add('comparison-open');
   };
 
   // ══════════════════════════════════════════════
@@ -1830,7 +1878,8 @@ function brief() {
 
   window.dbPanel = function (p) {
     ['main','profile'].forEach(function (k) {
-      var b = document.querySelector('.pn[data-p="' + k + '"]');
+      var action = k === 'main' ? 'overview' : 'profile';
+      var b = document.querySelector('[data-side-action="' + action + '"]');
       if (b) b.classList.toggle('on', k === p);
       var e = el(k === 'main' ? 'db-panel-main' : 'db-' + k);
       if (e) e.style.display = (k === p) ? '' : 'none';
@@ -2257,7 +2306,10 @@ function brief() {
     Object.defineProperty(window, entry[0], { configurable: true, get: entry[1] });
   });
 
-  loadToolModules(moduleGroups.initial).then(function () {
+  Promise.all([
+    loadToolModules(moduleGroups.initial),
+    Promise.resolve(window.njptrSideMenuReady)
+  ]).then(function () {
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', bootAuth, { once: true });
     } else {

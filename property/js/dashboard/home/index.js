@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805g';
+  var HOME_MODULE_VERSION = '20260805h';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1723,8 +1723,10 @@
     });
   }
   function startHome() {
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
-    else bootHome();
+    Promise.resolve(window.njptrSideMenuReady).then(function () {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
+      else bootHome();
+    });
   }
   initHomeChrome();
   startHome();

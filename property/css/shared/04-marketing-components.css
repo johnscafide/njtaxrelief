@@ -89,14 +89,17 @@
 .plm-why:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
 /* ---------- EXPLAINER OVERLAY ---------- */
 .plm-note-overlay {
-  position: absolute; inset: 0; z-index: 50; background: rgba(10,20,40,.55);
+  position: fixed; inset: 0; z-index: 6000; background: rgba(10,20,40,.62);
   display: none; align-items: center; justify-content: center; padding: 24px;
 }
 .plm-note-overlay.open { display: flex; }
 .plm-note-box {
   background: #fff; border-radius: 14px; padding: 28px; max-width: 620px;
-  max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(6,16,38,.4);
+  max-height: min(86vh, 900px); overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(6,16,38,.4);
 }
+.plm-note-overlay.comparison-open .plm-note-box { max-width: 1080px; width: min(1080px, calc(100vw - 48px)); }
+body.note-modal-open { overflow: hidden; }
+body.note-modal-open .leaflet-container { visibility: hidden; }
 .plm-note-box h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #0e2248; margin: 0 0 14px; }
 .plm-note-box p { font-size: 14.5px; color: #3d4759; line-height: 1.75; margin: 0 0 14px; }
 .plm-note-box b { color: #0e2248; }
