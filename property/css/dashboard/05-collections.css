@@ -345,14 +345,13 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 }
 
 .pr-card-metrics {
-  border-top: 1px solid #e8edf2;
   display: grid;
+  gap: 12px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding-top: 8px;
+  padding-top: 10px;
 }
 
-.pr-card-metrics span { border-left: 1px solid #e8edf2; min-width: 0; padding: 0 8px; }
-.pr-card-metrics span:first-child { border-left: 0; padding-left: 0; }
+.pr-card-metrics span { min-width: 0; padding: 0; }
 .pr-card-metrics b {
   color: #1a3151;
   display: block;

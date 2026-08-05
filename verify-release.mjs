@@ -31,6 +31,11 @@ const required = [
   'property/js/dashboard/tools/exempt-pilot-exposure.js',
   'property/js/dashboard/tools/added-omitted-monitor.js',
   'property/js/dashboard/tools/farmland-qualification.js',
+  'property/js/dashboard/tools/professional-due-diligence.js',
+  'property/css/dashboard/11-ui-polish.css',
+  'property/css/dashboard/12-professional-due-diligence.css',
+  'property/css/home.css',
+  'property/css/home/04-scorecard-workspace.css',
   'property/css/dashboard/10-special-assessments.css',
   'property/data/exempt-pilot.json',
   'property/abatements.json',
@@ -52,7 +57,7 @@ const fairness = read('property/fairness.html');
 for (const marker of ['townIntelSummary(r)', 'townIntelAgentPoints()', 'toolTownRiskMatrix()', "Town fairness (0-100)"]) {
   if (!dashboard.includes(marker)) throw new Error('Dashboard integration missing: ' + marker);
 }
-for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pressure-simulator'", 'toolAddedOmitted(r)', 'toolFarmland(r)', 'toolExemptPilot(r)']) {
+for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pressure-simulator'", 'toolAddedOmitted(r)', 'toolFarmland(r)', 'toolExemptPilot(r)', 'toolProfessionalDueDiligence(r)']) {
   if (!home.includes(marker)) throw new Error('Home integration missing: ' + marker);
 }
 if (!menu.includes('/property/fairness.html') || !menu.includes('/property/town-compare.html')) {
@@ -68,13 +73,16 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 4) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.11.0' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.12.0' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
 if (freshness.overall_status !== 'passed' || freshness.failures.length) throw new Error('State-data coverage validation failed');
 if (!read('property/js/sidemenu.js').includes('genericToggle')) throw new Error('Shared sidebar fallback is missing');
 if (!read('property/js/dashboard/tools/assessment-drift.js').includes('toolTimeMachine')) throw new Error('Property Time Machine is missing');
+if (!read('property/js/dashboard/tools/assessment-drift.js').includes('tm-dashboard-disclosure')) throw new Error('Collapsed Dashboard Time Machine is missing');
+if (!read('property/js/dashboard/tools/professional-due-diligence.js').includes('Tidelands')) throw new Error('Professional due-diligence state signals are missing');
+if (!menu.includes('db-side-group-toggle') || !menu.includes('db-side-mobile')) throw new Error('Responsive drill-down navigation is missing');
 if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
 if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band + '\"'")) throw new Error('Town Intelligence can still emit an undefined class');
 if (!read('supabase/functions/request-verify-code/index.ts').includes('api.emailjs.com/api/v1.0/email/send')) throw new Error('EmailJS administrator delivery is missing');
@@ -92,5 +100,6 @@ const abatements = JSON.parse(read('property/abatements.json'));
 if (!abatements.districts || Object.keys(abatements.districts).length !== 564) throw new Error('Partial-abatement coverage is incomplete');
 const cardCss = read('property/css/dashboard/05-collections.css');
 if (!cardCss.includes('aspect-ratio: auto') || !cardCss.includes('grid-template-rows: auto auto')) throw new Error('Dashboard card sizing repair is missing');
+if (cardCss.includes('.pr-card-metrics span { border-left:')) throw new Error('Dashboard metric divider returned');
 
-console.log('Verified release 0.11.0: Exempt/PILOT exposure, Added/Omitted monitor, Farmland screener, Dashboard card repair, Budget Pressure, verification, Town Intelligence, Time Machine, tracker, and Pro+ Data Center specification.');
+console.log('Verified release 0.12.0: professional due diligence, drill-down navigation, UI polish, Time Machine disclosure, state data registry, and prior Watchdog integrations.');

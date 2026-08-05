@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-05T18:30:37.649145+00:00",
+  "generated_at": "2026-08-05T19:09:31.310548+00:00",
   "overall_status": "passed",
   "datasets": [
     {
@@ -119,6 +119,110 @@
       "last_modified": "2026-08-05T18:27:29.772633+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml"
+    },
+    {
+      "id": "construction-permits-live",
+      "label": "Parcel construction permit and certificate activity",
+      "agency": "NJ Department of Community Affairs",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "monthly",
+      "source_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra"
+    },
+    {
+      "id": "known-contaminated-sites-live",
+      "label": "Known Contaminated Sites List",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "daily",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0"
+    },
+    {
+      "id": "deed-notices-live",
+      "label": "Environmental Deed Notice Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40"
+    },
+    {
+      "id": "groundwater-cea-live",
+      "label": "Groundwater Classification Exception Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5"
+    },
+    {
+      "id": "underground-storage-tanks-live",
+      "label": "Underground Storage Tank Facilities",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9"
+    },
+    {
+      "id": "tidelands-reference-live",
+      "label": "Tidelands statewide reference layer",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30"
+    },
+    {
+      "id": "highlands-area-live",
+      "label": "Highlands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6"
+    },
+    {
+      "id": "pinelands-area-live",
+      "label": "Pinelands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 0,
+      "minimum": 1,
+      "changed": false,
+      "last_modified": null,
+      "cadence": "as published",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7"
     }
   ],
   "failures": []

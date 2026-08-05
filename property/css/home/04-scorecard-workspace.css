@@ -121,8 +121,14 @@
   height: 220px; width: min(390px, 38%);
 }
 .hm-dashboard-page .hm-wrap { max-width: 1372px; padding: 26px 34px 100px; }
-.hm-dashboard-page .ai { background: #fff; border-color: #d9e3e9; box-shadow: 0 10px 28px rgba(16,41,75,.055); max-width: none; }
-.hm-dashboard-page .ai-h { background: var(--saas-bg, #f4f7f9); }
+.hm-dashboard-page .ai {
+  background: #fff; border-color: #d9e3e9; border-radius: 22px;
+  box-shadow: 0 14px 38px rgba(16,41,75,.075); max-width: none;
+}
+.hm-dashboard-page .ai-h {
+  background: #fff; border-radius: 999px; box-shadow: 0 5px 18px rgba(16,41,75,.07);
+  padding: 4px 15px 4px 4px;
+}
 .hm-dashboard-page .hm-figs { background: #fff; border: 1px solid #dfe7ec; box-shadow: 0 8px 24px rgba(16,41,75,.04); }
 .hm-dashboard-page .sc-c { box-shadow: 0 7px 20px rgba(16,41,75,.045); }
 .hm-dashboard-page .hm-secbar { margin-top: 12px; }

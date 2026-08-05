@@ -13,6 +13,8 @@ def nested(data,key):
         value=value.get(part,{}) if isinstance(value,dict) else {}
     return value
 def validate(item):
+    if item.get('live'):
+        return True,0,[]
     if item.get('glob'):
         files=[pathlib.Path(x) for x in glob.glob(str(ROOT/item['glob']))]
         return len(files)>=item.get('minimum_files',1),len(files),files

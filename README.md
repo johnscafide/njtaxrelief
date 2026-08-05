@@ -1,6 +1,8 @@
-# NJPTR Watchdog platform release 0.11.0
+# NJPTR Watchdog platform release 0.12.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
+
+Release 0.12.0 adds the first professional closing/collateral due-diligence surface, backed by live DCA and NJDEP public data. It also replaces the long desktop menu with animated drill-down navigation while keeping mobile to five core destinations, removes Dashboard card metric dividers, rounds/polishes Home Agent Intel, and makes the Dashboard Time Machine collapsed by default.
 
 ## Included integrations
 
@@ -39,6 +41,13 @@ This release turns the existing Tax Rate Trajectory and Statewide Fairness Index
 - Farmland Assessment qualification screener using the current 2026 acreage, two-year-use, gross-sales, filing and woodland rules, plus rollback-tax exposure
 - Dashboard property-card sizing repair so Assessed, Tax / Year, Market Value, Town Intelligence and Budget Pressure remain visible on both desktop and mobile
 - Pro+ Data Center specification extended with exportable fields from all three new tools
+- Live DCA permit/certificate review joined by Treasury municipality code + block + lot
+- Live NJDEP contaminated-site, Deed Notice, groundwater CEA, underground-storage-tank, Tidelands, Highlands and Pinelands screening
+- Property-level “Closing & collateral due diligence” section on Home, lazy-loaded only when opened
+- Professional Due Diligence launcher in the paid Dashboard Pro view
+- Drill-down desktop sidebar with remembered open groups and an independent five-item mobile menu
+- Divider-free Dashboard metrics, rounded Home Agent Intel and collapsed-by-default Dashboard Time Machine
+- Source registry expanded from 9 to 17 validated/live state data families
 
 ## Keeping the tracker current
 
@@ -67,5 +76,7 @@ These two tools do not require a new database migration in this release. User-en
 ## Limits preserved in the interface
 
 Fairness measures consistency within a municipality. It does not mean taxes are low and does not decide whether one property has an appeal. Tax-rate trajectory describes history. The simulator is an adjustable scenario, not a forecast.
+
+Professional Due Diligence is a screening surface, not a title, environmental, legal or credit-eligibility opinion. DCA explicitly describes the construction-permit feed as raw and potentially incomplete. NJDEP notes coordinate/mapping limitations, and the statewide Tidelands layer is reference-only; only the actual promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line.
 
 The integration uses 558 tax districts with current uniformity data. Of those, 459 currently have enough matched rate history for a trajectory calculation.

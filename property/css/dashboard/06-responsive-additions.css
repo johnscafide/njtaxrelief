@@ -10,6 +10,31 @@
 /* Agent Intel is a sidebar item at every width now, not a mobile fallback. */
 .intel-nav { display: flex !important; position: relative; }
 .intel-nav.seen .intel-nav-dot { display: none; }
+.db-side-mobile { display: none; }
+
+/* Drill-down desktop navigation. The compact rail stays icon-only. */
+.db-side-desktop { min-height: 0; overflow: visible; }
+.db-side-navgroups { padding-bottom: 10px; }
+.db-side-group { margin: 3px 0; }
+.db-side-group-toggle {
+  align-items: center; background: transparent; border: 0; border-radius: 10px; color: #bdc9d8; cursor: pointer;
+  display: flex; font: 650 12.5px/1.2 inherit; gap: 10px; min-height: 48px; padding: 8px 11px; text-align: left;
+  transition: background .2s ease, color .2s ease, transform .2s ease; width: 100%;
+}
+.db-side-group-toggle:hover { background: rgba(255,255,255,.07); color: #fff; transform: translateX(2px); }
+.db-side-group-toggle > i:first-child { color: #7f98b5; text-align: center; width: 18px; }
+.db-side-group-toggle > span { flex: 1; min-width: 0; }
+.db-side-group-toggle b { color: inherit; display: block; font-size: 12.5px; }
+.db-side-group-toggle small { color: #6f87a5; display: block; font-size: 8.5px; font-weight: 600; margin-top: 2px; }
+.db-side-group-toggle em { background: rgba(214,177,53,.16); border-radius: 5px; color: #e1c65d; font-size: 7.5px; font-style: normal; font-weight: 850; letter-spacing: .06em; padding: 3px 5px; }
+.db-side-chevron { color: #647c9a !important; font-size: 8px; transition: transform .25s cubic-bezier(.2,.8,.2,1); width: auto !important; }
+.db-side-group.open .db-side-chevron { transform: rotate(180deg); }
+.db-side-submenu { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows .25s cubic-bezier(.2,.8,.2,1), opacity .2s ease; }
+.db-side-submenu > div { min-height: 0; overflow: hidden; }
+.db-side-group.open .db-side-submenu { grid-template-rows: 1fr; opacity: 1; }
+.db-side-submenu .db-side-link { font-size: 11.5px; margin-left: 17px; padding: 8px 10px 8px 13px; position: relative; width: calc(100% - 17px); }
+.db-side-submenu .db-side-link::before { background: rgba(83,126,165,.28); border-radius: 99px; content: ''; height: 100%; left: -7px; position: absolute; top: 0; width: 1px; }
+.db-side-submenu .db-side-link:hover::before, .db-side-submenu .db-side-link.on::before { background: #45c5be; width: 2px; }
 
 /* The same Agent Intel sheet opens as a centered dialog on desktop. */
 @media (min-width: 761px) {
@@ -64,6 +89,9 @@
   .db-sidebar .pn, .db-side-link, .db-side-account button { justify-content: center; padding: 12px; }
   .db-sidebar .pn i, .db-side-link i, .db-side-account i { font-size: 16px; width: auto; }
   .db-sidebar-toggle { margin-left: auto; margin-right: auto; width: 36px; }
+  .db-side-desktop { overflow: hidden; }
+  .db-side-group-toggle { justify-content: center; padding: 10px; }
+  .db-side-group-toggle > span, .db-side-group-toggle > em, .db-side-chevron, .db-side-submenu { display: none; }
 
   body.db-sidebar-expanded .db-shell { grid-template-columns: 252px minmax(0, 1fr); }
   body.db-sidebar-expanded .db-sidebar { padding-left: 15px; padding-right: 15px; }
@@ -82,6 +110,13 @@
   body.db-sidebar-expanded .db-side-link i,
   body.db-sidebar-expanded .db-side-account i { font-size: inherit; width: 17px; }
   body.db-sidebar-expanded .db-sidebar-toggle { margin-left: 5px; margin-right: 5px; width: calc(100% - 10px); }
+  body.db-sidebar-expanded .db-sidebar { overflow-y: auto; overscroll-behavior: contain; scrollbar-color: rgba(126,153,184,.35) transparent; scrollbar-width: thin; }
+  body.db-sidebar-expanded .db-side-desktop { overflow: visible; }
+  body.db-sidebar-expanded .db-side-group-toggle { justify-content: flex-start; }
+  body.db-sidebar-expanded .db-side-group-toggle > span,
+  body.db-sidebar-expanded .db-side-group-toggle > em,
+  body.db-sidebar-expanded .db-side-chevron { display: block; }
+  body.db-sidebar-expanded .db-side-submenu { display: grid; }
 }
 
 @media (min-width: 761px) and (max-width: 1120px) {
@@ -90,6 +125,10 @@
 }
 
 @media (max-width: 760px) {
+  .db-side-desktop { display: none; }
+  .db-side-mobile { display: contents; }
+  .db-side-mobile .pn { position: relative; }
+  .db-side-mobile .pn.on::after { background: #51cbc5; border-radius: 99px; content: ''; height: 3px; left: 28%; position: absolute; right: 28%; top: 0; }
   .db-sidebar-toggle { display: none; }
   .intel-nav-dot {
     background: #4fd0c7; border: 2px solid #0c203c; border-radius: 50%; height: 8px; position: absolute;

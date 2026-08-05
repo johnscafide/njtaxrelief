@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805m';
+  var MODULE_VERSION = '20260805n';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -22,7 +22,7 @@
   };
   var moduleGroups = {
     initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'exempt-pilot-exposure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
-    pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'export']
+    pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'professional-due-diligence', 'export']
   };
 
   function loadToolModule(name) {
@@ -1811,7 +1811,7 @@ function brief() {
       var body;
       if (isPro()) {
         body = proTable() +
-          [toolPortfolio(), toolTownRiskMatrix(), toolCompare(), toolExport()].filter(Boolean).join('');
+          [toolDueDiligencePortfolio(rows), toolPortfolio(), toolTownRiskMatrix(), toolCompare(), toolExport()].filter(Boolean).join('');
       } else {
         body =
           proLocked('The full table',

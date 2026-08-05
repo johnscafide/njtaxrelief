@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805p';
+  var HOME_MODULE_VERSION = '20260805q';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -473,7 +473,10 @@
     });
   };
 
-  function isPro() { return !!(profile && profile.plan === 'pro'); }
+  function isPro() {
+    var plan = String((profile && profile.plan) || '').toLowerCase().replace(/[\s_-]/g, '');
+    return plan === 'pro' || plan === 'pro+' || plan === 'proplus' || plan === 'teams';
+  }
 
   function locked(label, why, html) {
     if (isPro()) return html;
@@ -1401,6 +1404,12 @@
       build: function (r) { return toolBuyerCost(r); }
     },
     {
+      k: 'diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
+      pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
+      build: function (r) { return toolProfessionalDueDiligence(r); },
+      sum: function () { return 'DCA permits + NJDEP environmental controls'; }
+    },
+    {
       k: 'compare', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
@@ -1454,6 +1463,7 @@
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
+    diligence: ['professional-due-diligence'],
     compare: ['relocation', 'investor-screen'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
     history: ['assessment-drift']
@@ -1774,7 +1784,10 @@
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
         paintHomeChrome();
         paintReport();
-        if (location.hash === '#sec-history') window.hmToggle('history');
+        if (location.hash.indexOf('#sec-') === 0) {
+          var sectionKey = location.hash.slice(5);
+          if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
+        }
         // square footage, year built and the last verified sale come from the
         // SR1A county file, which is too large to block the first paint on.
         hydrateDetails().then(function () { paintReport(); paintHomeChrome(); });

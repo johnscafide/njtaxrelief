@@ -33,6 +33,11 @@
 
   function runAction(action, event) {
     var page = pageName();
+    if (action === 'nav-group') {
+      var button = event.target.closest('.db-side-group-toggle');
+      if (button) setGroup(button, button.getAttribute('aria-expanded') !== 'true', true);
+      return;
+    }
     if (action === 'toggle') {
       if (page === 'home' && typeof window.hmToggleSidebar === 'function') window.hmToggleSidebar();
       else if (typeof window.dbToggleSidebar === 'function') window.dbToggleSidebar();
@@ -59,6 +64,35 @@
     }
   }
 
+  function setGroup(button, expanded, remember) {
+    var group = button && button.closest('.db-side-group');
+    var submenu = group && group.querySelector('.db-side-submenu');
+    if (!group || !submenu) return;
+    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    group.classList.toggle('open', expanded);
+    if (expanded) submenu.removeAttribute('hidden');
+    else window.setTimeout(function () {
+      if (!group.classList.contains('open')) submenu.setAttribute('hidden', '');
+    }, 260);
+    if (remember) {
+      try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_storageError) {}
+    }
+  }
+
+  function restoreGroups(container) {
+    container.querySelectorAll('.db-side-group').forEach(function (group) {
+      var button = group.querySelector('.db-side-group-toggle');
+      if (!button) return;
+      var expanded = button.getAttribute('aria-expanded') === 'true';
+      try {
+        var saved = localStorage.getItem('watchdogNavGroup:' + group.getAttribute('data-side-group'));
+        if (saved !== null) expanded = saved === '1';
+      } catch (_storageError) {}
+      if (group.querySelector('[aria-current="page"]')) expanded = true;
+      setGroup(button, expanded, false);
+    });
+  }
+
   function activate(container) {
     var current = pageName();
     container.querySelectorAll('[data-nav-page]').forEach(function (item) {
@@ -67,6 +101,7 @@
       if (active) item.setAttribute('aria-current', 'page');
       else item.removeAttribute('aria-current');
     });
+    restoreGroups(container);
     container.addEventListener('click', function (event) {
       var control = event.target.closest('[data-side-action]');
       if (control) runAction(control.getAttribute('data-side-action'), event);
@@ -82,7 +117,7 @@
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260805d', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260805e', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();

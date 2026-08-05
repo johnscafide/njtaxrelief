@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T14:29:11-04:00",
+  "updated_at": "2026-08-05T15:07:51-04:00",
   "releases": [
+    {
+      "version": "0.12.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T15:07:51-04:00",
+      "title": "Professional Due Diligence and navigation polish",
+      "category": "Professional tools",
+      "status": "Completed",
+      "summary": "Added a lazy-loaded closing and collateral preflight backed by live NJ DCA permit/certificate records and NJDEP contaminated-site, deed-notice, groundwater CEA, underground-storage-tank, Tidelands, Highlands and Pinelands layers. Redesigned the shared desktop sidebar into animated drill-down groups with a separate five-item mobile navigation, removed Dashboard metric dividers, rounded and polished Home Agent Intel, and made Historical Property Time Machine collapsed by default.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/pro.html", "/property/updates.html", "/property/sidemenu.html"],
+      "files": ["property/sidemenu.html", "property/js/sidemenu.js", "property/css/dashboard/05-collections.css", "property/css/dashboard/06-responsive-additions.css", "property/css/dashboard/11-ui-polish.css", "property/css/dashboard/12-professional-due-diligence.css", "property/js/dashboard/tools/assessment-drift.js", "property/js/dashboard/tools/professional-due-diligence.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/home/04-scorecard-workspace.css", "property/pro.html", "property/data/source-registry.json", "property/data/data-freshness.json", "property/scripts/refresh_state_data.py"],
+      "impact": { "html": 5, "css": 5, "javascript": 5, "data": 2, "navigation": 5 }
+    },
     {
       "version": "0.11.0",
       "date": "2026-08-05",
@@ -180,9 +192,10 @@
     }
   ],
   "roadmap": [
-    { "priority": 1, "title": "Modularize lookup.js", "readiness": "Deferred by owner", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith and is the highest-traffic page, but this work is intentionally postponed.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
-    { "priority": 2, "title": "Pro+ Data Center", "readiness": "Specification complete", "effort": "Multi-phase", "category": "Pro+", "why": "Every current and future data point belongs in one customizable sheet where a professional selects property, town, or county scope and checks the exact fields to add as columns.", "deliverables": ["field registry", "checkbox filter catalog", "virtualized data sheet", "saved views", "bulk export", "scheduled delivery", "API payload builder"] },
-    { "priority": 3, "title": "Appeal outcome logging and predictive foundation", "readiness": "Start collecting now", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes that public county data does not provide.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
-    { "priority": 4, "title": "Static town report landing pages", "readiness": "Existing data", "effort": "Large", "category": "Growth", "why": "Town Intelligence can support useful local search pages when each page has unique context and honest data limits.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
+    { "priority": 1, "title": "Exhaust New Jersey professional data sources", "readiness": "In progress", "effort": "Multi-phase", "category": "Professional data", "why": "Professional workflows should be built on the widest defensible state-data foundation before lower-priority roadmap work resumes. The first live due-diligence layer now covers DCA permits plus eight NJDEP closing and land-use signals.", "deliverables": ["freshwater/flood constraint layers", "parcel permit/certificate history", "additional recorded environmental controls", "professional source-quality registry", "title/municipal evidence workflow", "field catalog for every Pro and Pro+ datapoint"] },
+    { "priority": 2, "title": "Pro+ Data Center", "readiness": "Queued after data inventory", "effort": "Multi-phase", "category": "Pro+", "why": "Every validated data point should land in one customizable property, town or county sheet after the professional field inventory is broad enough to justify the interface.", "deliverables": ["field registry", "checkbox filter catalog", "virtualized data sheet", "saved views", "bulk export", "scheduled delivery", "API payload builder"] },
+    { "priority": 3, "title": "Modularize lookup.js", "readiness": "Back burner", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith, but feature work is intentionally paused while the Pro/Pro+ data foundation is expanded.", "deliverables": ["lookup core loader", "property modal modules", "map and search modules", "lead and account modules", "dependency tests"] },
+    { "priority": 4, "title": "Appeal outcome logging and predictive foundation", "readiness": "Back burner", "effort": "Long term", "category": "Data foundation", "why": "A defensible predictive model requires real parcel-level outcomes; collection can resume after the professional public-data inventory is exhausted.", "deliverables": ["outcome schema", "attorney and homeowner intake", "evidence-quality fields", "model-readiness dashboard"] },
+    { "priority": 5, "title": "Static town report landing pages", "readiness": "Back burner", "effort": "Large", "category": "Growth", "why": "Growth pages are intentionally behind data depth and professional utility for now.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
   ]
 }
