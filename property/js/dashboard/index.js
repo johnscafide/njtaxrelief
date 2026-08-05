@@ -1930,7 +1930,10 @@ function brief() {
 
   function afterTools() {
     if (el('tc-total')) window.dbCost();
-    if (isPro()) paintPercentile();
+    // The percentile painter lives in the lazy Pro bundle. Developer/Pro
+    // accounts can render the standard dashboard before that bundle has ever
+    // been requested, so never assume the function already exists.
+    if (isPro() && typeof window.paintPercentile === 'function') window.paintPercentile();
   }
 
   window.dbPanel = function (p) {

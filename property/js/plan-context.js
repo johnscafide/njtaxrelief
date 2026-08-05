@@ -76,7 +76,10 @@
   function can(required) { return state.effective === 'developer' || order[state.effective] >= order[normalized(required)]; }
 
   function autoInit() {
-    if (!window.supabase || state.user) return;
+    // Dashboard and Home already own their Supabase auth lifecycle and call
+    // NJPTRPlan.init() with the settled session/profile. Only standalone pages
+    // that explicitly opt in should create a lightweight client here.
+    if (!document.body || document.body.getAttribute('data-plan-auto') !== 'true' || !window.supabase || state.user) return;
     var client = window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co', 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     client.auth.getSession().then(function (result) {
