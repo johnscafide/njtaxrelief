@@ -1,8 +1,8 @@
-# NJPTR Watchdog platform release 0.14.0
+# NJPTR Watchdog platform release 0.15.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
-Release 0.14.0 adds a phone-specific app-style presentation for Dashboard and Home. It keeps the professional/data foundation from 0.13.0 while increasing mobile type and touch targets, tightening page chrome, converting Home to a photo-first property layout, floating the five-item safe-area navigation, and moving Agent Intel into a full-width bottom sheet on phones.
+Release 0.15.0 introduces a universal data-marker experience. Home now uses neutral report cards, category icon tiles and concise scan-first summaries instead of colored rails. Desktop users can hover or focus a data point for a compact explanation; clicking or tapping opens one reusable detail page with the current reading, methodology, plan/profession metadata, related markers and source provenance. All 324 catalog markers are supported, with richer editorial content for the primary Home signals.
 
 ## Included integrations
 
@@ -48,7 +48,10 @@ Release 0.14.0 adds a phone-specific app-style presentation for Dashboard and Ho
 - Drill-down desktop sidebar with remembered open groups and an independent five-item mobile menu
 - Divider-free Dashboard metrics, rounded Home Agent Intel and collapsed-by-default Dashboard Time Machine
 - Source registry expanded with NFHL flood, tidal CAFE and wetlands screening layers
-- 323-marker catalog with Standard / Pro / Pro+ and profession tagging
+- 324-marker catalog with Standard / Pro / Pro+ and profession tagging
+- Universal hover preview and click-through detail page for every registered marker
+- Rich plain-English explanations and authoritative links for the 13 primary Home signals
+- Neutral, scan-first Home accordions with category identity and no colored report rails
 - Pro+ Data Center field builder with profession/category/origin filters and persistent selections
 - Closing Evidence JSON export with current live public findings
 - Post-Closing Escrow Shock scenario and locally persistent municipal research checklist

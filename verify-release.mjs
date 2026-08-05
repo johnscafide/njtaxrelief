@@ -47,6 +47,12 @@ const required = [
   'property/js/data-center.js',
   'property/css/data-center.css',
   'property/css/mobile-app.css',
+  'property/marker.html',
+  'property/css/marker-intelligence.css',
+  'property/css/home/05-marker-experience.css',
+  'property/js/marker-intelligence.js',
+  'property/js/marker-detail.js',
+  'property/data/marker-content.json',
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
@@ -80,7 +86,7 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 4) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.14.0' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.15.0' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -92,7 +98,11 @@ if (!read('property/js/dashboard/tools/professional-due-diligence.js').includes(
 if (!read('property/js/dashboard/tools/professional-due-diligence.js').includes('constraintsHTML')) throw new Error('Flood/wetlands preflight is missing');
 if (!read('property/js/dashboard/home/index.js').includes('toolProfessionalWorkflows(r)')) throw new Error('Professional closing workflows are missing from Home');
 const markerRegistry = JSON.parse(read('property/data/marker-registry.json'));
-if (markerRegistry.summary.total !== 323 || markerRegistry.markers.length !== 323) throw new Error('Marker registry tally changed unexpectedly');
+if (markerRegistry.summary.total !== 324 || markerRegistry.markers.length !== 324) throw new Error('Marker registry tally changed unexpectedly');
+if (!read('property/home.html').includes('marker-intelligence.css') || !read('property/home.html').includes('marker-intelligence.js')) throw new Error('Home marker intelligence is not loaded');
+if (!read('property/js/dashboard/home/index.js').includes('data-marker-id')) throw new Error('Home data-marker links are missing');
+if (!read('property/marker.html').includes('marker-detail.js')) throw new Error('Universal marker detail page is incomplete');
+if (!read('property/data-center.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
 if (!menu.includes('/property/data-center.html')) throw new Error('Data Center navigation link is missing');
 if (!read('property/home.html').includes('hm-mobile-intel-overlay') || !read('property/home.html').includes('mobile-app.css')) throw new Error('Home mobile app treatment is missing');
 if (!read('property/dashboard.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
@@ -117,4 +127,4 @@ const cardCss = read('property/css/dashboard/05-collections.css');
 if (!cardCss.includes('aspect-ratio: auto') || !cardCss.includes('grid-template-rows: auto auto')) throw new Error('Dashboard card sizing repair is missing');
 if (cardCss.includes('.pr-card-metrics span { border-left:')) throw new Error('Dashboard metric divider returned');
 
-console.log('Verified release 0.14.0: mobile app polish, full-width Agent Intel sheets, 323-marker professional registry, Pro+ Data Center, professional workflows, and prior Watchdog integrations.');
+console.log('Verified release 0.15.0: universal 324-marker intelligence, Home scan-first redesign, mobile app polish, Pro+ Data Center, and prior Watchdog integrations.');
