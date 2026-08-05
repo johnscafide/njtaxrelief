@@ -1,0 +1,169 @@
+
+
+/* ============================================================
+   SCORECARD  +  ACCORDION
+   The page has to be scannable closed and complete open. The closed
+   state carries a verdict on every header so nothing has to be
+   opened just to find out whether it matters.
+   ============================================================ */
+.sc-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 14px; margin: 26px 0 34px; }
+.sc-c { text-align: left; background: #fff; border: 1px solid var(--hair); border-left-width: 4px;
+  border-radius: 10px; padding: 18px 20px; cursor: pointer; font-family: inherit;
+  transition: box-shadow .16s ease, transform .16s ease; }
+.sc-c:hover { box-shadow: 0 8px 22px rgba(16,24,43,.12); transform: translateY(-2px); }
+.sc-c b { display: block; font-family: var(--sans); font-size: 27px; font-weight: 800;
+  letter-spacing: -.035em; color: var(--accent); line-height: 1; }
+.sc-l { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--ink-3); margin: 7px 0 8px; }
+.sc-v { display: block; font-size: 13.5px; line-height: 1.5; color: var(--ink-2); }
+.sc-go { display: block; font-size: 12px; font-weight: 700; color: var(--accent-2); margin-top: 12px; }
+.sc-go i { font-size: 9px; margin-left: 4px; }
+.sc-c.good { border-left-color: var(--pos); } .sc-c.good b { color: var(--pos); }
+.sc-c.bad  { border-left-color: var(--neg); } .sc-c.bad b  { color: var(--neg); }
+.sc-c.mid  { border-left-color: var(--gold); } .sc-c.mid b { color: #8a6f14; }
+.sc-c:not(.good):not(.bad):not(.mid) { border-left-color: var(--accent-2); }
+
+.hm-secbar { display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding-bottom: 10px; border-bottom: 2px solid var(--ink); margin-bottom: 4px; }
+.hm-secbar h2 { font-family: var(--sans); font-size: 13px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--ink-3); margin: 0; }
+#hm-all { background: none; border: none; font-family: inherit; font-size: 13px; font-weight: 700;
+  color: var(--accent-2); cursor: pointer; padding: 4px 0; }
+#hm-all i { font-size: 11px; margin-right: 6px; }
+
+.sec2 { border-bottom: 1px solid var(--hair); }
+.sec2-h { display: flex; align-items: center; gap: 14px; width: 100%; padding: 20px 4px;
+  background: none; border: none; font-family: inherit; text-align: left; cursor: pointer; }
+.sec2-h:hover .sec2-t { color: var(--accent-2); }
+.sec2-i { width: 18px; text-align: center; font-size: 15px; color: var(--ink-3); flex-shrink: 0; }
+.sec2-t { font-size: 17px; font-weight: 800; color: var(--ink); letter-spacing: -.015em; flex-shrink: 0; }
+.sec2-s { flex: 1; font-size: 13.5px; color: var(--ink-3); text-align: right; }
+.sec2-c { color: var(--ink-3); font-size: 12px; transition: transform .2s ease; flex-shrink: 0; }
+.sec2.open .sec2-c { transform: rotate(180deg); }
+.sec2-b { display: none; padding: 0 4px 30px; }
+.sec2.open .sec2-b { display: block; }
+
+.sec2.bad .sec2-i { color: var(--neg); }
+.sec2.bad .sec2-s { color: var(--neg); font-weight: 600; }
+.sec2.good .sec2-i { color: var(--pos); }
+
+.sec2-pro { background: #f7f9fc; border-left: 3px solid var(--ink-3); border-radius: 0 8px 8px 0;
+  padding: 13px 16px; margin-bottom: 22px; max-width: 780px; }
+.sec2-pro b { display: block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--ink-3); margin-bottom: 5px; }
+.sec2-pro span { font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
+
+/* inside a section the tool cards lose their own rules; the section provides them */
+.sec2-b .sec { border-top: none; margin-top: 0; padding-top: 0; }
+.sec2-b .sec + .sec { border-top: 1px solid var(--hair-2); margin-top: 26px; padding-top: 26px; }
+
+@media (max-width: 720px) {
+  .sec2-s { display: none; }
+  .sec2-h { gap: 11px; padding: 17px 2px; }
+  .sec2-t { font-size: 15.5px; }
+  .sc-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sc-c { padding: 14px 15px; }
+  .sc-c b { font-size: 21px; }
+  .sc-go { display: none; }
+}
+@media (max-width: 420px) { .sc-cards { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   DASHBOARD-INTEGRATED PROPERTY REPORT
+   The report keeps its deep analysis but now lives inside the same Watchdog
+   workspace chrome as the property collection.
+   ============================================================ */
+.hm-dashboard-page { background: var(--saas-bg, #f4f7f9); }
+.hm-dashboard-page #hm-main { background: var(--saas-bg, #f4f7f9); min-height: 100vh; }
+.hm-dashboard-page .db-workspace { background: var(--saas-bg, #f4f7f9); }
+
+.hm-loading-screen {
+  align-items: center; color: #53647a; display: flex; gap: 16px; justify-content: center;
+  min-height: 72vh; padding: 40px 24px;
+}
+.hm-loading-screen b { color: #10294b; display: block; font-family: var(--sans); font-size: 18px; }
+.hm-loading-screen span { display: block; font-size: 13px; margin-top: 4px; }
+
+.hm-dashboard-page .top-in { justify-content: space-between; }
+.hm-dashboard-page .who { min-width: 0; }
+.hm-dashboard-page .who h1 { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hm-dashboard-page .db-stat { margin-top: 3px; }
+.hm-dashboard-page .db-stat span { white-space: nowrap; }
+
+.hm-head-action {
+  align-items: center; background: #fff; border: 1px solid var(--saas-border, #dbe3e9);
+  border-radius: 8px; color: #40526a; cursor: pointer; display: inline-flex; font-family: inherit;
+  font-size: 12.5px; font-weight: 750; gap: 7px; min-height: 39px; padding: 9px 12px;
+}
+.hm-head-action:hover { border-color: var(--saas-teal, #078486); color: var(--saas-teal, #078486); }
+
+.hm-dashboard-page .hm-top {
+  background: rgba(255,255,255,.97); border-bottom: 1px solid var(--saas-border, #dbe3e9);
+  box-shadow: 0 4px 16px rgba(16,41,75,.035); position: sticky; top: 79px; z-index: 90;
+}
+.hm-dashboard-page .hm-top-in { max-width: 1440px; padding: 11px 34px; }
+.hm-switch-label {
+  color: #8490a0; font-size: 9.5px; font-weight: 850; letter-spacing: .11em;
+  margin-left: 8px; text-transform: uppercase;
+}
+.hm-saved { color: #658074; font-size: 11px; font-weight: 700; margin-left: auto; white-space: nowrap; }
+.hm-saved i { color: #1c8b62; margin-right: 5px; }
+
+.hm-dashboard-page .hm-hero {
+  background: linear-gradient(135deg, #10294b 0%, #143f63 62%, #087e80 145%);
+  border-bottom: 0; margin: 22px 34px 0; overflow: hidden; border-radius: 18px;
+  box-shadow: 0 18px 46px rgba(16,41,75,.14);
+}
+.hm-dashboard-page .hm-hero-in { max-width: 1372px; padding: 25px; }
+.hm-dashboard-page .hm-shot {
+  border: 1px solid rgba(255,255,255,.2); box-shadow: 0 12px 28px rgba(5,20,38,.22);
+  height: 220px; width: min(390px, 38%);
+}
+.hm-dashboard-page .hm-wrap { max-width: 1372px; padding: 26px 34px 100px; }
+.hm-dashboard-page .ai { background: #fff; border-color: #d9e3e9; box-shadow: 0 10px 28px rgba(16,41,75,.055); max-width: none; }
+.hm-dashboard-page .ai-h { background: var(--saas-bg, #f4f7f9); }
+.hm-dashboard-page .hm-figs { background: #fff; border: 1px solid #dfe7ec; box-shadow: 0 8px 24px rgba(16,41,75,.04); }
+.hm-dashboard-page .sc-c { box-shadow: 0 7px 20px rgba(16,41,75,.045); }
+.hm-dashboard-page .hm-secbar { margin-top: 12px; }
+.hm-dashboard-page .sec2 {
+  background: #fff; border: 1px solid #dfe7ec; border-radius: 12px; margin: 10px 0;
+  overflow: hidden; transition: border-color .18s ease, box-shadow .18s ease;
+}
+.hm-dashboard-page .sec2:hover { border-color: #c9d7df; }
+.hm-dashboard-page .sec2.open { border-color: #afcdd0; box-shadow: 0 11px 30px rgba(16,41,75,.065); }
+.hm-dashboard-page .sec2-h { padding: 18px 20px; }
+.hm-dashboard-page .sec2-b { padding: 0 20px 26px; }
+.hm-dashboard-page .sec2.open .sec2-h { background: #f8fbfb; }
+.hm-dashboard-page .hm-acts { background: #fff; border: 1px solid #dfe7ec; border-radius: 12px; padding: 20px; }
+
+@media (max-width: 760px) {
+  .hm-dashboard-page .hm-top { position: static; }
+  .hm-dashboard-page .hm-top-in { gap: 9px; padding: 10px 18px; }
+  .hm-dashboard-page .hm-back { width: 100%; }
+  .hm-dashboard-page .hm-switch-label, .hm-saved { display: none; }
+  .hm-dashboard-page #hm-switch { max-width: none; min-width: 0; width: 100%; }
+  .hm-dashboard-page .hm-hero { border-radius: 0; margin: 0; }
+  .hm-dashboard-page .hm-hero-in { padding: 20px 18px; }
+  .hm-dashboard-page .hm-shot { height: 190px; width: 100%; }
+  .hm-dashboard-page .hm-wrap { padding: 28px 18px 100px; }
+  .hm-dashboard-page .hm-head-action span { display: none; }
+  .hm-head-action { height: 40px; justify-content: center; padding: 0; width: 40px; }
+  .hm-dashboard-page .sec2-h { padding: 17px 15px; }
+  .hm-dashboard-page .sec2-b { padding: 0 15px 22px; }
+}
+
+@media (max-width: 520px) {
+  .hm-dashboard-page .who h1 { font-size: 17px; max-width: 190px; }
+  .hm-dashboard-page .top-acts { gap: 6px; }
+  .hm-dashboard-page .hm-id h1 { font-size: 25px; }
+  .hm-dashboard-page .hm-val b { font-size: 29px; }
+  .hm-dashboard-page .hm-figs { display: grid; gap: 0; grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  .hm-dashboard-page .db-sidebar, .hm-dashboard-page .top, .hm-dashboard-page .db-to-top { display: none !important; }
+  .hm-dashboard-page .db-shell { display: block; }
+  .hm-dashboard-page .hm-hero { border-radius: 0; margin: 0; }
+  .hm-dashboard-page .hm-wrap { padding: 24px; }
+}
