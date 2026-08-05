@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805c';
+  var MODULE_VERSION = '20260805d';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -2243,7 +2243,7 @@ function brief() {
   };
 
   // Compatibility bridge for lazy modules. Read-only getters keep shared state private.
-  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, briefPoint, rnd, deadline, propertyBlock, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
+  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, rnd, deadline, propertyBlock, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
   [
     ['plUser', function () { return plUser; }],
     ['rows', function () { return rows; }],
