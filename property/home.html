@@ -13,14 +13,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
-<link rel="stylesheet" href="/property/css/shared.css">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260804c">
-<link rel="stylesheet" href="/property/css/home.css?v=20260805f">
+<link rel="stylesheet" href="/property/css/shared.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/home.css?v=20260805a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body class="hm-dashboard-page">
+<body class="hm-dashboard-page" data-sidebar-page="home">
 <div class="pl-toast" id="pl-toast"></div>
 <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
 
@@ -43,38 +43,7 @@
 
 <main id="hm-main" style="display:none;">
   <div class="db-shell">
-    <aside class="db-sidebar" aria-label="Watchdog workspace navigation">
-      <a class="db-side-brand" href="/property/">
-        <span><i class="fas fa-dog"></i></span>
-        <div><b>Watchdog</b><small>Property Tax Database</small></div>
-      </a>
-
-      <button class="db-sidebar-toggle" id="db-sidebar-toggle" type="button" onclick="hmToggleSidebar()"
-        aria-label="Expand navigation" aria-expanded="false">
-        <i class="fas fa-chevron-right"></i><span>Expand navigation</span>
-      </button>
-
-      <div class="db-side-section">
-        <span class="db-side-label">Workspace</span>
-        <a class="db-side-link" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My properties</span></a>
-        <a class="db-side-link pn on" href="#report-top"><i class="fas fa-house-chimney-window"></i><span>Property report</span></a>
-        <a class="db-side-link" href="/property/dashboard.html#profile"><i class="fas fa-user-gear"></i><span>Profile &amp; benefits</span></a>
-        <button class="pn intel-nav" type="button" onclick="hmAgentIntel()"><i class="fas fa-dog"></i><span>Agent Intel</span></button>
-        <a class="db-side-link" href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved reports</span></a>
-      </div>
-
-      <div class="db-side-section">
-        <span class="db-side-label">Tools</span>
-        <a class="db-side-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a>
-        <a class="db-side-link" href="/anchor-estimator.html"><i class="fas fa-calculator"></i><span>Benefit calculator</span></a>
-        <a class="db-side-link" href="/property-tax-appeal.html"><i class="fas fa-scale-balanced"></i><span>Appeal guide</span></a>
-        <a class="db-side-link pro-side" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Pro Hub</span><em>PRO</em></a>
-      </div>
-
-      <div class="db-side-account">
-        <button onclick="plSignOut()"><i class="fas fa-arrow-right-from-bracket"></i><span>Sign out</span></button>
-      </div>
-    </aside>
+    <div id="property-side-menu" aria-live="polite"></div>
 
     <div class="db-workspace" id="report-top">
       <header class="top">
@@ -115,6 +84,7 @@
 </button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script type="module" src="/property/js/dashboard/home/index.js?v=20260805g"></script>
+<script src="/property/js/sidemenu.js?v=20260805a"></script>
+<script type="module" src="/property/js/dashboard/home/index.js?v=20260805h"></script>
 </body>
 </html>
