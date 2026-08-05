@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805e';
+  var HOME_MODULE_VERSION = '20260805f';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1154,6 +1154,7 @@
     current = rows.filter(function (r) { return r.pams_pin === pin; })[0] || rows[0];
     OPEN = {};
     paintReport();
+    paintHomeChrome();
   };
 
   window.hmGlossary = function () {
@@ -1199,6 +1200,7 @@
 
   function paintReport() {
     var r = current;
+    paintHomeChrome();
     if (!r) {
       el('hm-body').innerHTML = '<div class="wrap"><div class="blank"><h3>Nothing saved yet</h3>' +
         '<p>Look up an address and claim it, and its report appears here.</p>' +
@@ -1597,6 +1599,81 @@
       '">Open the full record to run it</a>');
   }
 
+  function paintHomeChrome() {
+    if (!plUser) return;
+    var m = meta();
+    var displayName = name() || '';
+    var avatar = el('hm-avatar');
+    if (avatar) {
+      var photo = m.avatar_url || m.picture;
+      avatar.innerHTML = photo
+        ? '<img src="' + esc(photo) + '" alt="">'
+        : '<div class="db-noav">' + esc((displayName || '?').charAt(0).toUpperCase()) + '</div>';
+    }
+    var heading = el('hm-hi');
+    if (heading) heading.textContent = current && current.address ? current.address : 'Your property report';
+    var email = el('hm-email');
+    if (email) email.textContent = plUser.email || '';
+    var stat = el('hm-stat');
+    if (stat) {
+      stat.innerHTML = current
+        ? '<span>' + esc(current.town || 'New Jersey') + '</span>' +
+          (current.last_year_tax ? '<span>' + money(current.last_year_tax) + ' yearly tax</span>' : '') +
+          '<span>' + (current.kind === 'home' ? 'Your home' : 'Watchlist') + '</span>'
+        : '<span>' + rows.length + ' saved ' + (rows.length === 1 ? 'property' : 'properties') + '</span>';
+    }
+  }
+
+  window.hmToggleSidebar = function () {
+    if (window.matchMedia && window.matchMedia('(max-width: 760px)').matches) return;
+    document.body.classList.toggle('db-sidebar-expanded');
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    try { localStorage.setItem('watchdogSidebarExpanded', expanded ? '1' : '0'); } catch (e) {}
+    paintHomeSidebarToggle();
+  };
+
+  function paintHomeSidebarToggle() {
+    var button = el('db-sidebar-toggle');
+    if (!button) return;
+    var expanded = document.body.classList.contains('db-sidebar-expanded');
+    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
+    var icon = button.querySelector('i');
+    var label = button.querySelector('span');
+    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
+  }
+
+  window.hmAgentIntel = function () {
+    var panel = document.querySelector('#hm-body .ai');
+    if (panel && panel.scrollIntoView) panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  };
+
+  window.hmScrollTop = function () {
+    var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
+  };
+
+  function initHomeChrome() {
+    try {
+      if (localStorage.getItem('watchdogSidebarExpanded') === '1' &&
+          !(window.matchMedia && window.matchMedia('(max-width: 760px)').matches)) {
+        document.body.classList.add('db-sidebar-expanded');
+      }
+    } catch (e) {}
+    paintHomeSidebarToggle();
+    var queued = false;
+    window.addEventListener('scroll', function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        var button = el('db-to-top');
+        if (button) button.classList.toggle('show', window.scrollY > 850);
+      });
+    }, { passive: true });
+  }
+
   // Per property versions of the two tools that used to run once for rows[0].
   function toolUniformityFor(r) { var s = uniFor(r); return s ? uniBody(r, s) : ''; }
   function toolAppealOddsFor(r) { var a = appealFor(r); return a ? appealBody(r, a) : ''; }
@@ -1606,37 +1683,49 @@
     if (!getClient()) { setTimeout(bootHome, 120); return; }
     sb.auth.getSession().then(function (res) {
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
-      if (!plUser) { el('hm-gate').style.display = ''; return; }
+      if (!plUser) {
+        el('hm-loading').style.display = 'none';
+        el('hm-gate').style.display = '';
+        return;
+      }
+      el('hm-loading').style.display = 'none';
+      el('hm-gate').style.display = 'none';
       el('hm-main').style.display = '';
       Promise.all([
+        loadHomeTools(['uniformity', 'revaluation-radar']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         loadRefData(), loadSR1A()
       ]).then(function (out) {
-        rows = (out[0] && out[0].data) || [];
-        profile = (out[1] && out[1].data) || {};
+        rows = (out[1] && out[1].data) || [];
+        profile = (out[2] && out[2].data) || {};
         var pin = qsPin();
         current = (pin && rows.filter(function (x) { return x.pams_pin === pin; })[0]) ||
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
+        paintHomeChrome();
         paintReport();
         // square footage, year built and the last verified sale come from the
         // SR1A county file, which is too large to block the first paint on.
-        hydrateDetails().then(paintReport);
+        hydrateDetails().then(function () { paintReport(); paintHomeChrome(); });
+      }).catch(function (error) {
+        console.error('Property report workspace failed:', error);
+        el('hm-body').innerHTML = '<div class="wrap"><div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
+          '<div><h3>We could not finish loading this property report.</h3><p>Your saved information has not been changed.</p>' +
+          '<button class="db-btn" onclick="location.reload()">Try again</button></div></div></div>';
       });
+    }).catch(function (error) {
+      console.error('Property report session failed:', error);
+      el('hm-loading').style.display = 'none';
+      el('hm-gate').style.display = '';
     });
   }
   function startHome() {
-    loadHomeTools(['uniformity', 'revaluation-radar']).then(function () {
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
-      else bootHome();
-    }).catch(function (error) {
-      console.error('Home report modules could not load:', error);
-      var gate = el('hm-gate');
-      if (gate) { gate.style.display = ''; gate.querySelector('p').textContent = 'The property report could not load. Refresh the page to try again.'; }
-    });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
+    else bootHome();
   }
+  initHomeChrome();
   startHome();
-  Object.assign(window, { el, money, esc, toast, getClient, meta, name, xfetch, median, loadRefData, ratioFor, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, sortControl, propMenu, byId, propUrl, isPro, locked, uniBody, appealBody, tip, metricStrip, cell, titleCase, reportLink, initTips, toolCard, qsPin, paintReport, sectionShell, scorecard, f, intelPoints, hf, summarySentence, ch123Block, untestableBlock, toolUniformityFor, toolAppealOddsFor, bootHome, startHome });
+  Object.assign(window, { el, money, esc, toast, getClient, meta, name, xfetch, median, loadRefData, ratioFor, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, sortControl, propMenu, byId, propUrl, isPro, locked, uniBody, appealBody, tip, metricStrip, cell, titleCase, reportLink, initTips, toolCard, qsPin, paintReport, sectionShell, scorecard, f, intelPoints, hf, summarySentence, ch123Block, untestableBlock, paintHomeChrome, paintHomeSidebarToggle, initHomeChrome, toolUniformityFor, toolAppealOddsFor, bootHome, startHome });
   [
     ['plUser', function () { return plUser; }],
     ['rows', function () { return rows; }],
