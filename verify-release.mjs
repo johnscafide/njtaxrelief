@@ -24,6 +24,10 @@ const required = [
   'property/docs/pro-plus-data-center-spec.md',
   'property/js/ownership-verification.js',
   'property/js/lookup.js',
+  'property/js/dashboard/tools/municipal-budget-pressure.js',
+  'property/css/dashboard/09-budget-pressure.css',
+  'property/data/budget-pressure.json',
+  'property/scripts/build_budget_pressure.py',
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
@@ -56,8 +60,8 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
-if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 8) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.9.3' || !versions.releases[0].timestamp) {
+if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 7) throw new Error('Project roadmap is incomplete');
+if (versions.releases[0].version !== '0.10.0' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -70,5 +74,10 @@ if (!read('supabase/functions/request-verify-code/index.ts').includes('api.email
 if (!read('property/js/lookup.js').includes("kind === 'home' && window.NJPTRVerification")) throw new Error('Lookup does not offer verification after claiming a home');
 if (!read('property/js/dashboard/home/index.js').includes('window.dbVerify = function')) throw new Error('Home verification action is missing');
 if (!read('property/dashboard.html').includes('ownership-verification.js') || !read('property/home.html').includes('ownership-verification.js')) throw new Error('Shared ownership verification is not loaded');
+const budgetPressure = JSON.parse(read('property/data/budget-pressure.json'));
+if (!budgetPressure.municipalities || Object.keys(budgetPressure.municipalities).length < 560) throw new Error('Municipal Budget Pressure coverage is incomplete');
+if (!read('property/js/dashboard/index.js').includes('budgetPressureSummary(r)')) throw new Error('Dashboard Budget Pressure integration is missing');
+if (!read('property/js/dashboard/home/index.js').includes('budgetPressureCard(r)')) throw new Error('Home Budget Pressure integration is missing');
+if (!read('property/js/town-compare/index.js').includes('Budget pressure score')) throw new Error('Town comparison Budget Pressure integration is missing');
 
-console.log('Verified release 0.9.3: shared claim verification, EmailJS manual postcard fulfillment, mobile cards, navigation, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');
+console.log('Verified release 0.10.0: Municipal Budget Pressure, shared claim verification, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');

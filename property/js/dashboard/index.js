@@ -5,14 +5,15 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805j';
+  var MODULE_VERSION = '20260805k';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
     'watchdog-score': ['uniformity', 'revaluation-radar'],
     'revaluation-radar': ['uniformity'],
     'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
-    'town-risk-matrix': ['town-intelligence', 'watchdog-score'],
+    'town-risk-matrix': ['town-intelligence', 'municipal-budget-pressure', 'watchdog-score'],
+    'export': ['municipal-budget-pressure'],
     'investor-screen': ['uniformity'],
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
@@ -20,7 +21,7 @@
     'property-class-mix': ['town-profile']
   };
   var moduleGroups = {
-    initial: ['uniformity', 'town-intelligence', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
+    initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
     pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'export']
   };
 
@@ -528,7 +529,9 @@
     taxLow:    { label: 'Lowest taxes',     fn: function (a, b) { return (+a.last_year_tax || 0) - (+b.last_year_tax || 0); } },
     fairHigh:  { label: 'Fairest town',     fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (y ? y.score : -1) - (x ? x.score : -1); } },
     fairLow:   { label: 'Least fair town',  fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (x ? x.score : 101) - (y ? y.score : 101); } },
-    rateHigh:  { label: 'Fastest rate rise', fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (y && y.trajectory ? y.trajectory.cagr : -1) - (x && x.trajectory ? x.trajectory.cagr : -1); } }
+    rateHigh:  { label: 'Fastest rate rise', fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (y && y.trajectory ? y.trajectory.cagr : -1) - (x && x.trajectory ? x.trajectory.cagr : -1); } },
+    pressureHigh: { label: 'Highest budget pressure', fn: function (a, b) { var x = budgetPressureFor(a), y = budgetPressureFor(b); return (y ? y.score : -1) - (x ? x.score : -1); } },
+    pressureLow: { label: 'Lowest budget pressure', fn: function (a, b) { var x = budgetPressureFor(a), y = budgetPressureFor(b); return (x ? x.score : 101) - (y ? y.score : 101); } }
   };
   function mv(r) { var m = marketValue(r); return m ? m.v : 0; }
 
@@ -817,6 +820,12 @@
         row('Town fairness (0-100)', function (r) { var t = townIntelFor(r); return t ? t.score : null; }, 'high') +
         row('Statewide town rank', function (r) { var t = townIntelFor(r); return t ? '#' + t.stateRank + ' of ' + t.stateTotal : null; }) +
         row('Tax-rate trend', function (r) { var t = townIntelFor(r); return t && t.trajectory ? (t.trajectory.cagr >= 0 ? '+' : '') + (t.trajectory.cagr * 100).toFixed(1) + '% / year' : null; }, 'low') +
+        row('Budget pressure (0-100)', function (r) { var b = budgetPressureFor(r); return b ? b.score : null; }, 'low') +
+        row('Budget pressure band', function (r) { var b = budgetPressureFor(r); return b ? b.band : null; }) +
+        row('Total levy growth', function (r) { var b = budgetPressureFor(r), v = b && b.trend.total_levy_cagr; return v == null ? null : ((v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '% / year'); }, 'low') +
+        row('Organic ratable growth', function (r) { var b = budgetPressureFor(r), v = b && b.trend.ratable_growth; return v == null ? null : ((v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '% / year'); }, 'high') +
+        row('School levy growth', function (r) { var b = budgetPressureFor(r), v = b && b.trend.school_levy_cagr; return v == null ? null : ((v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '% / year'); }, 'low') +
+        row('Municipal levy growth', function (r) { var b = budgetPressureFor(r), v = b && b.trend.municipal_levy_cagr; return v == null ? null : ((v >= 0 ? '+' : '') + (v * 100).toFixed(1) + '% / year'); }, 'low') +
         row('Market value', function (r) { var m = marketValue(r); return m ? Math.round(m.v) : null; }, 'high') +
         row('Effective rate', function (r) { return r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : null; }) +
         row('Town ratio', function (r) { var s = sr1aFor(r); return s ? (s.ratio * 100).toFixed(1) + '%' : null; }) +
@@ -1228,6 +1237,7 @@ function brief() {
             '<span><b>' + market + '</b><small>Market value</small></span>' +
           '</div>' +
           townIntelSummary(r) +
+          budgetPressureSummary(r) +
         '</div>' +
       '</article>' +
       '<div class="pr-card-actions">' +
@@ -1262,6 +1272,7 @@ function brief() {
       var c = chapter123(r);
       var s = sr1aFor(r);
       var ti = townIntelFor(r);
+      var bp = budgetPressureFor(r);
       return '<tr' + (c && c.hasCase ? ' class="hot"' : '') + '>' +
         '<td class="a">' + esc(r.address) + '</td>' +
         '<td>' + esc(r.town || '') + '</td>' +
@@ -1272,6 +1283,8 @@ function brief() {
         '<td class="n">' + (ti ? ti.score : '-') + '</td>' +
         '<td class="n">' + (ti ? ti.stateRank : '-') + '</td>' +
         '<td class="n">' + (ti && ti.trajectory ? (ti.trajectory.cagr * 100).toFixed(1) : '-') + '</td>' +
+        '<td class="n">' + (bp ? bp.score : '-') + '</td>' +
+        '<td>' + (bp ? bp.band : '-') + '</td>' +
         '<td class="n">' + (s ? (s.ratio * 100).toFixed(1) : (c ? (c.ratio * 100).toFixed(1) : '-')) + '</td>' +
         '<td class="n">' + (s ? s.n : '-') + '</td>' +
         '<td class="n">' + (c ? rnd(c.market).toLocaleString() : '-') + '</td>' +
@@ -1284,8 +1297,8 @@ function brief() {
     }).join('');
 
     return '<div class="pro-wrap"><table class="pro"><thead><tr>' +
-      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Fairness','NJ rank','Rate trend%','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
-        .map(function (h, i) { return '<th' + (i >= 3 && i <= 15 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
+      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Fairness','NJ rank','Rate trend%','Budget pressure','Pressure band','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
+        .map(function (h, i) { return '<th' + (i >= 3 && i <= 9 || i >= 11 && i <= 17 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
       '</tr></thead><tbody>' + body + '</tbody></table></div>' +
       '<p class="pro-note">Ratio is measured from state verified arm\u2019s length sales where available, ' +
       'otherwise the published Director\u2019s Ratio. n is the number of verified sales behind it. ' +
@@ -1481,12 +1494,15 @@ function brief() {
     var leastFair = intel.slice().sort(function (a, b) { return a.t.score - b.t.score; })[0];
     var fastest = intel.filter(function (x) { return x.t.trajectory; })
       .sort(function (a, b) { return b.t.trajectory.cagr - a.t.trajectory.cagr; })[0];
+    var pressure = rows.map(function (r) { var b = budgetPressureFor(r); return b ? { r: r, b: b } : null; }).filter(Boolean)
+      .sort(function (a, b) { return b.b.score - a.b.score; })[0];
     return '<div class="ai-town-intel"><b>Town signals</b>' +
       '<p><i class="fas fa-scale-balanced"></i><span><strong>' + esc(leastFair.r.address) + '</strong> is in ' +
         esc(leastFair.t.name) + ', ranked #' + leastFair.t.stateRank + ' of ' + leastFair.t.stateTotal +
         ' statewide for assessment fairness.</span></p>' +
       (fastest ? '<p><i class="fas fa-chart-line"></i><span><strong>' + esc(fastest.r.address) + '</strong> has the fastest municipal rate trend in this list at ' +
         (fastest.t.trajectory.cagr >= 0 ? '+' : '') + (fastest.t.trajectory.cagr * 100).toFixed(1) + '% per year.</span></p>' : '') +
+      (pressure ? '<p><i class="fas fa-building-columns"></i><span><strong>' + esc(pressure.r.address) + '</strong> has the highest municipal budget pressure in this list at ' + pressure.b.score + '/100 (' + pressure.b.band + ').</span></p>' : '') +
       '<a href="/property/town-compare.html">Compare municipalities</a></div>';
   }
 

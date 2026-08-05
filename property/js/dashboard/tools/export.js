@@ -16,12 +16,14 @@
   }
 
   function exportRows() {
+    function pct(value) { return value == null ? '' : (value * 100).toFixed(2); }
     return rows.map(function (r) {
       var R = ratioFor(r.town, r.county);
       var mv = +r.watchdog_value || (R && r.assessed ? r.assessed / R.ratio : null);
       var fair = (mv && R) ? mv * R.ratio : null;
       var upper = fair ? fair * 1.15 : null;
       var town = typeof townIntelFor === 'function' ? townIntelFor(r) : null;
+      var budget = typeof budgetPressureFor === 'function' ? budgetPressureFor(r) : null;
       return {
         Address: r.address || '', Town: r.town || '', County: r.county || '', Zip: r.zip || '',
         Block: r.block || '', Lot: r.lot || '', PAMS_PIN: r.pams_pin || '',
@@ -30,6 +32,12 @@
         Town_Fairness_Score: town ? town.score : '',
         Town_Statewide_Rank: town ? town.stateRank : '',
         Town_Rate_Trend_Pct_Per_Year: town && town.trajectory ? (town.trajectory.cagr * 100).toFixed(2) : '',
+        Municipal_Budget_Pressure_Score: budget ? budget.score : '',
+        Municipal_Budget_Pressure_Band: budget ? budget.band : '',
+        Total_Levy_Growth_Pct_Per_Year: budget ? pct(budget.trend.total_levy_cagr) : '',
+        Organic_Ratable_Growth_Pct_Per_Year: budget ? pct(budget.trend.ratable_growth) : '',
+        School_Levy_Growth_Pct_Per_Year: budget ? pct(budget.trend.school_levy_cagr) : '',
+        Municipal_Levy_Growth_Pct_Per_Year: budget ? pct(budget.trend.municipal_levy_cagr) : '',
         Town_Ratio_Pct: R ? (R.ratio * 100).toFixed(2) : '',
         Ratio_Tax_Year: R ? R.year : '',
         Est_Market_Value: mv ? Math.round(mv) : '',
@@ -64,6 +72,7 @@
     if (!w) { toast('Allow popups to print'); return; }
     var head = ['Address', 'Town', 'Block', 'Lot', 'PAMS_PIN', 'Assessed', 'Annual_Tax',
                 'Town_Fairness_Score', 'Town_Statewide_Rank', 'Town_Rate_Trend_Pct_Per_Year',
+                'Municipal_Budget_Pressure_Score', 'Municipal_Budget_Pressure_Band',
                 'Town_Ratio_Pct', 'Supported_Assessment', 'Ch123_Upper_Limit', 'Appeal_Indicated'];
     w.document.write('<html><head><title>NJ parcel sheet</title><style>' +
       'body{font-family:system-ui,sans-serif;padding:28px;color:#1a1a2e}' +

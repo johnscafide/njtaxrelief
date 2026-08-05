@@ -5,12 +5,12 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805m';
+  var HOME_MODULE_VERSION = '20260805n';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
     'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
-    'tax-pressure-simulator': ['town-intelligence'],
+    'tax-pressure-simulator': ['town-intelligence', 'municipal-budget-pressure'],
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
     'investor-screen': ['uniformity'],
@@ -1357,11 +1357,11 @@
            'in the municipality regardless of the individual property.',
       build: function (r) {
         var u = uniFor(r);
-        return townIntelligenceCard(r) + (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
+        return townIntelligenceCard(r) + budgetPressureCard(r) + (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
       },
       sum: function (r) {
-        var t = townIntelFor(r), u = uniFor(r);
-        return t ? 'Fairness ' + t.score + ', statewide rank #' + t.stateRank :
+        var t = townIntelFor(r), u = uniFor(r), b = budgetPressureFor(r);
+        return t ? 'Fairness ' + t.score + ', statewide rank #' + t.stateRank + (b ? ', budget pressure ' + b.score + '/100' : '') :
           (u ? 'Uniformity ' + u.score + ' of 100, ' + u.band : '');
       }
     },
@@ -1439,7 +1439,7 @@
     fair: ['improvement-ratio'],
     kept: ['reassessment-risk'],
     reval: ['revaluation-radar'],
-    town: ['town-intelligence', 'property-class-mix', 'abatement-exposure'],
+    town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure'],
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
@@ -1582,6 +1582,14 @@
       p.push(['fa-file-signature', 'good',
         'It sold below its own assessed level in ' + own.year +
         '. Your own arm\u2019s length sale is stronger evidence than any comparable.']);
+    }
+    var bp = typeof budgetPressureAgentPoint === 'function' ? budgetPressureAgentPoint(r) : null;
+    if (bp && (bp.band === 'high' || bp.band === 'elevated')) {
+      p.push(['fa-building-columns', 'bad',
+        'Municipal budget pressure is ' + bp.band + ' at ' + bp.score + '/100. ' + bp.text]);
+    } else if (bp && bp.band === 'low') {
+      p.push(['fa-building-columns', 'good',
+        'Municipal budget pressure is currently low at ' + bp.score + '/100. ' + bp.text]);
     }
     if (r.verify_level !== 'mail' && r.kind === 'home') {
       p.push(['fa-badge-check', '',
@@ -1743,7 +1751,7 @@
         // These three modules supply calculations used while the report is
         // first painted. The remaining report tools stay lazy-loaded when
         // their corresponding sections are opened.
-        loadHomeTools(['uniformity', 'town-intelligence', 'revaluation-radar', 'reassessment-risk']),
+        loadHomeTools(['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'reassessment-risk']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         loadRefData(), loadSR1A()

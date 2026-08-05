@@ -1,4 +1,4 @@
-# NJPTR Watchdog platform release 0.9.3
+# NJPTR Watchdog platform release 0.10.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
@@ -30,6 +30,9 @@ This release turns the existing Tax Rate Trajectory and Statewide Fairness Index
 - Pro+ Data Center product specification and plan integration
 - Shared ownership-verification module used by Lookup, Dashboard and Home
 - Immediate verification choice after a property is claimed as Home, with a clear Not now path
+- Municipal Budget Pressure for 564 New Jersey municipalities using 2021-2025 levy and ratable data plus the 2025 User-Friendly Budget Database
+- Explainable pressure bands with levy growth, organic ratable growth, municipal/school/county components, budget growth, debt service, collections and structural imbalance
+- Budget Pressure integration across Dashboard cards and sorting, Home, Agent Intel, property comparison, town reports, town comparison, exports and the future Pro+ Data Center catalog
 
 ## Keeping the tracker current
 
@@ -42,6 +45,10 @@ Earlier work reconstructed from this project session is labeled `Time not captur
 The web files can be uploaded normally, but postal verification also requires the included Supabase migrations and Edge Function. The function uses the existing EmailJS service and `template_verifymail` to send each secure code and mailing address to the administrator. The administrator writes or prints the code on a postcard and mails it to the property. The requester never receives the code by email. The EmailJS private key is stored only as a Supabase secret and is not included in this package.
 
 The Data Center is documented and added to the Pro+ roadmap. It is not presented as a finished user tool in this release.
+
+## Municipal Budget Pressure data
+
+The eleven NJ DCA Excel files are build inputs and do not need to be uploaded to the public website. The web-ready result is `property/data/budget-pressure.json`. To refresh it in a future year, place the current DCA workbooks in a local folder and run the included `property/scripts/build_budget_pressure.py` builder, then review the generated data before publishing it.
 
 ## Limits preserved in the interface
 

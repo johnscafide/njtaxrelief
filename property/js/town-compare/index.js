@@ -1,4 +1,5 @@
 import '/property/js/dashboard/tools/town-intelligence.js?v=20260805a';
+import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
 
 const all = townIntelAll();
 const selected = [];
@@ -13,6 +14,7 @@ all.slice().sort((a,b) => a.county.localeCompare(b.county) || a.name.localeCompa
 
 function esc(value) { return tiEsc(value); }
 function rate(row) { return row.trajectory ? `${row.trajectory.cagr >= 0 ? '+' : ''}${(row.trajectory.cagr * 100).toFixed(1)}%` : 'Not available'; }
+function pressureRate(value) { return value == null ? null : `${value >= 0 ? '+' : ''}${(value * 100).toFixed(1)}%`; }
 function metric(label, rows, value, best) {
   const vals = rows.map(value);
   const nums = vals.map(v => typeof v === 'number' ? v : null).filter(v => v != null);
@@ -37,7 +39,7 @@ function render() {
     output.innerHTML = '<div class="blank"><h3>Choose your first town</h3><p>Add two or more municipalities to compare their assessment systems and tax-rate direction.</p></div>';
     return;
   }
-  output.innerHTML = `<section class="tc-cards">${rows.map(row => townIntelligenceCard(row.district)).join('')}</section>` +
+  output.innerHTML = `<section class="tc-cards">${rows.map(row => '<div>' + townIntelligenceCard(row.district) + budgetPressureSummary(row.district) + '</div>').join('')}</section>` +
     (rows.length > 1 ? `<div class="pro-wrap tc-table"><table class="pro"><thead><tr><th>Measure</th>${rows.map(row => `<th>${esc(row.name)}</th>`).join('')}</tr></thead><tbody>` +
       metric('Fairness score',rows,row=>row.score,'high') +
       metric('Statewide rank',rows,row=>row.stateRank,'low') +
@@ -45,6 +47,12 @@ function render() {
       metric('Coefficient of deviation',rows,row=>row.coefficient == null ? null : row.coefficient,'low') +
       metric('Assessment currency gap',rows,row=>row.drift == null ? null : `${row.drift >= 0 ? '+' : ''}${(row.drift*100).toFixed(1)}%`) +
       metric('Tax-rate trend / year',rows,row=>rate(row)) +
+      metric('Budget pressure score',rows,row=>{ const b=budgetPressureFor(row.district); return b ? b.score : null; },'low') +
+      metric('Budget pressure band',rows,row=>{ const b=budgetPressureFor(row.district); return b ? b.band : null; }) +
+      metric('Total levy growth / year',rows,row=>{ const b=budgetPressureFor(row.district); return b ? pressureRate(b.trend.total_levy_cagr) : null; }) +
+      metric('Organic ratable growth / year',rows,row=>{ const b=budgetPressureFor(row.district); return b ? pressureRate(b.trend.ratable_growth) : null; }) +
+      metric('School levy growth / year',rows,row=>{ const b=budgetPressureFor(row.district); return b ? pressureRate(b.trend.school_levy_cagr) : null; }) +
+      metric('Municipal levy growth / year',rows,row=>{ const b=budgetPressureFor(row.district); return b ? pressureRate(b.trend.municipal_levy_cagr) : null; }) +
       metric('Years of rate history',rows,row=>row.trajectory ? row.trajectory.history.length : null,'high') +
     '</tbody></table></div>' : '');
 }

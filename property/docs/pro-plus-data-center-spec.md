@@ -22,6 +22,7 @@ The Data Center is the all-encompassing Pro+ workspace for every property, munic
 6. Appeal intelligence: county filings, success rate, residential filings, evidence readiness.
 7. Watchdog history: first observed, last observed, snapshot count, assessment change, tax change, latest change date.
 8. Workflow: saved status, verification level, report links, notes, tags, assigned team member, last export.
+9. Municipal budget pressure: pressure score and band, total levy growth, organic ratable growth, levy-to-ratable gap, school/municipal/county levy shares and growth, municipal appropriation growth, debt-service share, collection rate, structural-imbalance share, source year and formula version.
 
 Every future tool must register its exportable fields in the Data Center field catalog as part of its definition of done.
 

@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Compare NJ Property Tax Fairness and Rate Trends | NJ Property Tax Relief</title>
-<meta name="description" content="Compare assessment fairness, statewide rank, coefficient of deviation and municipal tax-rate history for up to four New Jersey towns.">
+<title>Compare NJ Property Tax Fairness and Budget Pressure | NJ Property Tax Relief</title>
+<meta name="description" content="Compare assessment fairness, municipal budget pressure, levy growth, ratable growth and tax-rate history for up to four New Jersey towns.">
 <link rel="canonical" href="https://njpropertytaxrelief.com/property/town-compare.html">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805e">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805f">
 <link rel="stylesheet" href="/property/css/town-compare.css?v=20260805a">
 </head>
 <body data-sidebar-page="town-compare">
@@ -21,12 +21,12 @@
     <div class="db-workspace">
       <header class="top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-code-compare"></i></div><div>
         <span class="top-eyebrow">Statewide data &middot; free</span><h1>Compare municipalities</h1>
-        <span>Fairness, assessment currency and tax-rate direction</span></div></div>
+        <span>Fairness, assessment currency, tax-rate direction and budget pressure</span></div></div>
         <div class="top-acts"><a class="db-add" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a></div>
       </div></header>
       <div class="wrap tc-wrap">
         <div class="db-page-head"><div><span>Town Intelligence</span><h2>Put up to four New Jersey towns side by side</h2>
-          <p>Compare how evenly each town assesses, how current its assessment roll appears and where its general tax rate has been moving.</p></div></div>
+          <p>Compare how evenly each town assesses, where its tax rate has been moving, and whether levy, ratable and municipal-budget trends are creating fiscal pressure.</p></div></div>
         <section class="tc-picker">
           <label for="tc-town">Add a municipality</label>
           <div><select id="tc-town"><option value="">Choose a town</option></select><button id="tc-add" type="button"><i class="fas fa-plus"></i> Add</button></div>
@@ -34,12 +34,12 @@
         </section>
         <div class="db-loading-panel" id="tc-loading"><div class="pl-spin"></div><div><b>Loading town intelligence</b><span>Preparing statewide rankings and tax-rate histories.</span></div></div>
         <div id="tc-output"></div>
-        <section class="tc-limit"><i class="fas fa-circle-info"></i><p><b>Read these measures separately.</b> A high fairness score means assessments are relatively consistent inside that municipality. It does not mean tax bills are low. Rate history describes the general rate, not a forecast of a specific property bill.</p></section>
+        <section class="tc-limit"><i class="fas fa-circle-info"></i><p><b>Read these measures separately.</b> A high fairness score means assessments are relatively consistent inside that municipality. Budget Pressure compares reported fiscal conditions statewide. Neither measure forecasts a specific property bill.</p></section>
       </div>
     </div>
   </div>
 </main>
 <script src="/property/js/sidemenu.js?v=20260805d"></script>
-<script type="module" src="/property/js/town-compare/index.js?v=20260805a"></script>
+<script type="module" src="/property/js/town-compare/index.js?v=20260805b"></script>
 </body>
 </html>

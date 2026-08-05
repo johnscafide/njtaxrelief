@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-05T16:08:01.395162+00:00",
+  "generated_at": "2026-08-05T17:36:16.732171+00:00",
   "overall_status": "passed",
   "datasets": [
     {
@@ -93,6 +93,19 @@
       "last_modified": "2026-08-05T14:40:14.182903+00:00",
       "cadence": "annual",
       "source_url": null
+    },
+    {
+      "id": "budget-pressure",
+      "label": "Municipal Budget Pressure",
+      "agency": "NJ Department of Community Affairs",
+      "status": "passed",
+      "action": "validated",
+      "records_or_files": 564,
+      "minimum": 560,
+      "changed": false,
+      "last_modified": "2026-08-05T17:31:50.909111+00:00",
+      "cadence": "annual",
+      "source_url": "https://www.nj.gov/dca/dlgs/resources/Property_Tax_info.shtml"
     }
   ],
   "failures": []
