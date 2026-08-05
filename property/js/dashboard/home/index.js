@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805q';
+  var HOME_MODULE_VERSION = '20260805r';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1406,8 +1406,8 @@
     {
       k: 'diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
-      build: function (r) { return toolProfessionalDueDiligence(r); },
-      sum: function () { return 'DCA permits + NJDEP environmental controls'; }
+      build: function (r) { return toolProfessionalDueDiligence(r) + toolProfessionalWorkflows(r); },
+      sum: function () { return 'Closing evidence + escrow + lien + NJDEP constraints'; }
     },
     {
       k: 'compare', icon: 'fa-route', title: 'Compare against other towns',
@@ -1463,7 +1463,7 @@
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
-    diligence: ['professional-due-diligence'],
+    diligence: ['professional-due-diligence', 'professional-workflows'],
     compare: ['relocation', 'investor-screen'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
     history: ['assessment-drift']

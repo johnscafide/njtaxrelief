@@ -81,6 +81,12 @@
 .claim-home-card span { color: var(--saas-muted); font-size: 12px; max-width: 260px; }
 
 @media (min-width: 761px) {
+  .db-sidebar { overflow: hidden; }
+  .db-side-desktop {
+    flex: 1 1 auto; min-height: 0; overflow-x: hidden; overflow-y: auto;
+    overscroll-behavior: contain; padding-bottom: 14px; scrollbar-color: rgba(126,153,184,.38) transparent; scrollbar-width: thin;
+  }
+  .db-side-account { flex: 0 0 auto; margin-top: 0; }
   .db-shell { grid-template-columns: 78px minmax(0, 1fr); transition: grid-template-columns .24s ease; }
   .db-sidebar { padding-left: 10px; padding-right: 10px; transition: padding .24s ease; }
   .db-side-brand { justify-content: center; margin-left: 0; margin-right: 0; }
@@ -89,7 +95,7 @@
   .db-sidebar .pn, .db-side-link, .db-side-account button { justify-content: center; padding: 12px; }
   .db-sidebar .pn i, .db-side-link i, .db-side-account i { font-size: 16px; width: auto; }
   .db-sidebar-toggle { margin-left: auto; margin-right: auto; width: 36px; }
-  .db-side-desktop { overflow: hidden; }
+  .db-side-desktop { overflow-x: hidden; overflow-y: auto; }
   .db-side-group-toggle { justify-content: center; padding: 10px; }
   .db-side-group-toggle > span, .db-side-group-toggle > em, .db-side-chevron, .db-side-submenu { display: none; }
 
@@ -110,8 +116,8 @@
   body.db-sidebar-expanded .db-side-link i,
   body.db-sidebar-expanded .db-side-account i { font-size: inherit; width: 17px; }
   body.db-sidebar-expanded .db-sidebar-toggle { margin-left: 5px; margin-right: 5px; width: calc(100% - 10px); }
-  body.db-sidebar-expanded .db-sidebar { overflow-y: auto; overscroll-behavior: contain; scrollbar-color: rgba(126,153,184,.35) transparent; scrollbar-width: thin; }
-  body.db-sidebar-expanded .db-side-desktop { overflow: visible; }
+  body.db-sidebar-expanded .db-sidebar { overflow: hidden; }
+  body.db-sidebar-expanded .db-side-desktop { overflow-x: hidden; overflow-y: auto; }
   body.db-sidebar-expanded .db-side-group-toggle { justify-content: flex-start; }
   body.db-sidebar-expanded .db-side-group-toggle > span,
   body.db-sidebar-expanded .db-side-group-toggle > em,

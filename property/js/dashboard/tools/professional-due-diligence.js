@@ -6,8 +6,11 @@
   var DEP_ENV = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer';
   var DEP_RSP = 'https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer';
   var DEP_HYDRO = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer';
+  var DEP_LAND = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer';
+  var DEP_LAND_LU = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer';
   var cache = Object.create(null);
   var records = Object.create(null);
+  var evidenceRecords = Object.create(null);
 
   function key(r) { return String((r && (r.pams_pin || r.id)) || 'property').replace(/[^a-z0-9]/gi, ''); }
   function clean(v) { return String(v == null ? '' : v).trim(); }
@@ -39,8 +42,10 @@
       geoQuery(DEP_NJEMS,9,r,250,'*'),
       geoQuery(DEP_HYDRO,30,r,0,'*'),
       geoQuery(DEP_RSP,6,r,0,'*'),
-      geoQuery(DEP_RSP,7,r,0,'*')
-    ]).then(function(x){return{permits:x[0],contaminated:x[1],deed:x[2],cea:x[3],ust:x[4],tidelands:x[5],highlands:x[6],pinelands:x[7]};});
+      geoQuery(DEP_RSP,7,r,0,'*'),
+      geoQuery(DEP_HYDRO,43,r,0,'*'), geoQuery(DEP_HYDRO,48,r,0,'*'),
+      geoQuery(DEP_LAND_LU,2,r,0,'ACRES,LABEL12,TYPE12'), geoQuery(DEP_LAND,79,r,0,'*')
+    ]).then(function(x){return{permits:x[0],contaminated:x[1],deed:x[2],cea:x[3],ust:x[4],tidelands:x[5],highlands:x[6],pinelands:x[7],flood:x[8],cafe:x[9],wetlands:x[10],priorityWetlands:x[11]};});
     return cache[k];
   }
   function featureRows(payload){return(payload&&payload.features||[]).map(function(f){return f.attributes||{};});}
@@ -62,9 +67,23 @@
       (tidelands.length?'<p><b>NJ-specific title review:</b> the saved property point intersects NJDEP’s statewide Tidelands reference layer. NJDEP cautions that only the actual promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line, so this is a prompt for source-map/title review, not a claim determination.</p>':'')+
       (nearList?'<ul class="dd-records">'+nearList+'</ul>':'')+'</article>';
   }
+  function constraintsHTML(d) {
+    var flood=featureRows(d.flood),cafe=featureRows(d.cafe),wet=featureRows(d.wetlands),priority=featureRows(d.priorityWetlands);
+    var count=(flood.length?1:0)+(cafe.length?1:0)+(wet.length?1:0)+(priority.length?1:0);
+    var zones=flood.slice(0,3).map(function(x){return safe(x.FLD_ZONE||x.ZONE_SUBTY||'mapped area');}).filter(Boolean).join(', ');
+    return '<article class="dd-signal '+(count?'review':'clear')+'"><div class="dd-signal-head"><i class="fas fa-water"></i><span><b>Flood, wetlands &amp; development preflight</b><small>NJDEP / FEMA · point intersection</small></span><strong>'+count+' layer'+(count===1?'':'s')+'</strong></div><div class="dd-pills">'+
+      '<span class="'+(flood.length?'hit':'')+'">NFHL '+(flood.length?(zones||'hit'):'no hit')+'</span><span class="'+(cafe.length?'hit':'')+'">Tidal CAFE '+(cafe.length?'hit':'no hit')+'</span><span class="'+(wet.length?'hit':'')+'">2012 wetlands '+(wet.length?'hit':'no hit')+'</span><span class="'+(priority.length?'hit':'')+'">Priority wetlands '+(priority.length?'hit':'no hit')+'</span></div>'+
+      (count?'<p><b>Development-constraint stack:</b> '+count+' screening layer'+(count===1?' intersects':'s intersect')+' the saved map point. Obtain the controlling determination before a lending, title, development or construction decision.</p>':'<p>No intersection was returned at the saved point from these four screening layers. That does not establish absence of flood or wetlands constraints.</p>')+
+      '<p class="dd-micro">NJDEP’s 2012 wetlands layer and Flood Indicator layers are screening references. Regulatory mapping, field delineations and written rules control.</p></article>';
+  }
+  function evidence(r,data) {
+    var payload={generated_at:new Date().toISOString(),property:{address:r.address||'',municipality:r.municipality||r.town||'',county:r.county||'',pams_pin:r.pams_pin||'',block:r.block||'',lot:r.lot||''},findings:{permits:(data.permits&&data.permits.rows)||[],contaminated:featureRows(data.contaminated),deed_notices:featureRows(data.deed),groundwater_cea:featureRows(data.cea),ust:featureRows(data.ust),tidelands:featureRows(data.tidelands),highlands:featureRows(data.highlands),pinelands:featureRows(data.pinelands),nfhl:featureRows(data.flood),tidal_cafe:featureRows(data.cafe),wetlands_2012:featureRows(data.wetlands),priority_wetlands:featureRows(data.priorityWetlands)},disclaimer:'Screening evidence only; not a title, legal, environmental, survey, wetlands, flood or credit-eligibility opinion. Verify controlling source records.'};
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='watchdog-closing-evidence-'+key(r)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  }
   function render(r,data) {
     var host=document.getElementById('dd-'+key(r));if(!host)return;
-    host.innerHTML='<div class="dd-grid">'+permitHTML(data.permits)+envHTML(data)+'</div><div class="dd-caveat"><i class="fas fa-circle-info"></i><p><b>Due-diligence signal, not a title, environmental, legal or credit-eligibility opinion.</b> DCA says its raw permit feed may be incomplete or contain errors. NJDEP notes that some site coordinates and statewide reference layers are approximate. A “not found” result does not prove absence. Confirm flagged items with the issuing municipality, promulgated maps/recorded instruments, NJDEP/DataMiner, title professionals, counsel, or an environmental professional as appropriate.</p></div><div class="dd-sources"><a href="https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra" target="_blank" rel="noopener">DCA permit source</a><a href="https://dep.nj.gov/srp/gis/interactive-mapping/" target="_blank" rel="noopener">NJDEP Site Remediation map</a><a href="https://dep.nj.gov/gis/nj-geoweb-profiles/" target="_blank" rel="noopener">NJDEP GeoWeb profiles</a></div>';
+    records[key(r)]=r;evidenceRecords[key(r)]=data;
+    host.innerHTML='<div class="dd-grid">'+permitHTML(data.permits)+envHTML(data)+constraintsHTML(data)+'</div><div class="dd-caveat"><i class="fas fa-circle-info"></i><p><b>Due-diligence signal, not a title, environmental, legal or credit-eligibility opinion.</b> DCA says its raw permit feed may be incomplete or contain errors. NJDEP layers are screening references and may be approximate. A “not found” result does not prove absence. Confirm flagged items with controlling municipal, NJDEP, FEMA, recorded or professional source records.</p></div><div class="dd-actions"><button class="dd-refresh" type="button" onclick="ddEvidence(\''+key(r)+'\')"><i class="fas fa-file-arrow-down"></i> Download Closing Evidence File</button></div><div class="dd-sources"><a href="https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra" target="_blank" rel="noopener">DCA permit source</a><a href="https://dep.nj.gov/climatechange/flood-tool/" target="_blank" rel="noopener">NJ Flood Indicator Tool</a><a href="https://dep.nj.gov/gis/nj-geoweb-profiles/" target="_blank" rel="noopener">NJDEP GeoWeb profiles</a></div>';
   }
   function load(r,force) {
     var k=key(r),host=document.getElementById('dd-'+k);if(!host)return;if(force)delete cache[k];
@@ -73,7 +92,8 @@
   }
   function tool(r) { var k=key(r);records[k]=r;setTimeout(function(){load(r,false);},0);return'<div class="dd-tool"><div class="dd-intro"><span class="dd-pro-badge">PRO DUE DILIGENCE</span><h3>Closing &amp; collateral preflight</h3><p>One property-level pass across state permit/certificate status and NJDEP environmental controls. Built for the questions attorneys, lenders, brokers and appraisers need to chase during property and collateral review.</p></div><div id="dd-'+k+'"></div><button class="dd-refresh" type="button" onclick="ddRefresh(\''+k+'\')"><i class="fas fa-rotate"></i> Recheck live sources</button></div>'; }
   function refresh(k){var r=records[k];if(r)load(r,true);}
+  function downloadEvidence(k){var r=records[k],d=evidenceRecords[k];if(r&&d)evidence(r,d);}
   function portfolio(list){list=list||[];return'<section class="sec dd-portfolio"><h4><i class="fas fa-shield-halved"></i> Professional due diligence</h4><p class="dd-portfolio-lede">Open a property report for a live permit/certificate and NJDEP environmental preflight. The check runs against the parcel’s block/lot and saved map point.</p><div class="dd-portfolio-links">'+list.map(function(r){return'<a href="/property/home.html?pin='+encodeURIComponent(r.pams_pin||'')+'#sec-diligence"><span>'+safe(r.address||'Saved property')+'</span><i class="fas fa-arrow-right"></i></a>';}).join('')+'</div></section>';}
-  Object.assign(window,{toolProfessionalDueDiligence:tool,toolDueDiligencePortfolio:portfolio,ddRefresh:refresh});
+  Object.assign(window,{toolProfessionalDueDiligence:tool,toolDueDiligencePortfolio:portfolio,ddRefresh:refresh,ddEvidence:downloadEvidence});
 })();
 export {};

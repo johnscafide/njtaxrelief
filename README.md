@@ -1,8 +1,8 @@
-# NJPTR Watchdog platform release 0.12.0
+# NJPTR Watchdog platform release 0.13.0
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
-Release 0.12.0 adds the first professional closing/collateral due-diligence surface, backed by live DCA and NJDEP public data. It also replaces the long desktop menu with animated drill-down navigation while keeping mobile to five core destinations, removes Dashboard card metric dividers, rounds/polishes Home Agent Intel, and makes the Dashboard Time Machine collapsed by default.
+Release 0.13.0 fixes the expanded sidebar scroll region and completes the five-part professional foundation: downloadable Closing Evidence, Post-Closing Escrow Shock scenarios, municipal lien/tax-sale research tracking, NJDEP/FEMA flood and wetlands screening, and the first usable Pro+ Data Center field catalog. The marker registry currently contains 323 live unique markers (275 public-source, 48 Watchdog-derived), each labeled by profession, plan tier, category, scope and origin.
 
 ## Included integrations
 
@@ -47,7 +47,11 @@ Release 0.12.0 adds the first professional closing/collateral due-diligence surf
 - Professional Due Diligence launcher in the paid Dashboard Pro view
 - Drill-down desktop sidebar with remembered open groups and an independent five-item mobile menu
 - Divider-free Dashboard metrics, rounded Home Agent Intel and collapsed-by-default Dashboard Time Machine
-- Source registry expanded from 9 to 17 validated/live state data families
+- Source registry expanded with NFHL flood, tidal CAFE and wetlands screening layers
+- 323-marker catalog with Standard / Pro / Pro+ and profession tagging
+- Pro+ Data Center field builder with profession/category/origin filters and persistent selections
+- Closing Evidence JSON export with current live public findings
+- Post-Closing Escrow Shock scenario and locally persistent municipal research checklist
 
 ## Keeping the tracker current
 
@@ -59,7 +63,7 @@ Earlier work reconstructed from this project session is labeled `Time not captur
 
 The web files can be uploaded normally, but postal verification also requires the included Supabase migrations and Edge Function. The function uses the existing EmailJS service and `template_verifymail` to send each secure code and mailing address to the administrator. The administrator writes or prints the code on a postcard and mails it to the property. The requester never receives the code by email. The EmailJS private key is stored only as a Supabase secret and is not included in this package.
 
-The Data Center is documented and added to the Pro+ roadmap. It is not presented as a finished user tool in this release.
+The Data Center field catalog is now live. Row-level value providers, saved server-side views, bulk XLSX and scheduled delivery remain roadmap work. Plan labels in the catalog are product metadata; sensitive/paid row-level values must be enforced server-side as those providers are connected.
 
 ## Municipal Budget Pressure data
 
