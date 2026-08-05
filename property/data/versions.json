@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T17:44:07-04:00",
+  "updated_at": "2026-08-05T18:25:16-04:00",
   "releases": [
+    {
+      "version": "0.16.0",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T18:25:16-04:00",
+      "title": "Progressive data disclosure and developer plan simulation",
+      "category": "Product platform",
+      "status": "Completed",
+      "summary": "Home now converts full tool reports into compact signal rows: hover or focus explains the reading, clicking opens the sourced marker page, and the original full tool is available only on demand. Removed remaining left-edge rails, repaired Data Center row density, added Pricing to the public header, introduced a server-backed Developer role with Standard/Pro/Pro+ View As simulation, and documented 90 proprietary professional markers plus a 15-part SaaS maturity pipeline.",
+      "links": ["/property/", "/property/home.html", "/property/data-center.html", "/property/marker.html", "/property/updates.html"],
+      "files": ["property/index.html", "property/home.html", "property/dashboard.html", "property/css/home/05-marker-experience.css", "property/js/dashboard/home/index.js", "property/css/data-center.css", "property/data-center.html", "property/js/plan-context.js", "property/css/plan-context.css", "supabase/migrations/20260805220000_developer_plan_access.sql", "property/data/proprietary-marker-backlog.json", "property/data/saas-platform-pipeline.json", "property/data/versions.json"],
+      "impact": { "html": 4, "css": 3, "javascript": 3, "data": 4, "navigation": 1 }
+    },
     {
       "version": "0.15.0",
       "date": "2026-08-05",
@@ -236,9 +248,11 @@
     { "priority": 6, "title": "Broker Listing Risk & Opportunity Brief", "readiness": "Existing data", "effort": "Medium", "category": "Real estate agent", "why": "Put the tax, permit, revaluation and development facts most likely to change a buyer conversation into a one-page brief.", "deliverables": ["effective-tax burden", "tax trajectory", "escrow scenario", "permit gaps", "reval pressure", "appeal opportunity", "constraint flags", "shareable source links"] },
     { "priority": 7, "title": "Investor Carry-Cost Volatility", "readiness": "Existing data", "effort": "Medium", "category": "Investor", "why": "Rank properties and municipalities by uncertainty in tax-driven operating costs.", "deliverables": ["tax CAGR", "levy/base gap", "budget pressure", "revaluation reset frequency", "abatement/PILOT exposure", "carry-cost volatility score", "portfolio concentration"] },
     { "priority": 8, "title": "NJ Geological & Water Preflight", "readiness": "State download / GIS", "effort": "Medium", "category": "Contractor / lender", "why": "NJ Geological and Water Survey datasets can surface site conditions usually checked much later in diligence.", "deliverables": ["surficial geology", "bedrock geology", "aquifer", "groundwater recharge", "wellhead protection", "abandoned mines", "earthquake history", "water-withdrawal context"] },
-    { "priority": 9, "title": "Data Center value providers", "readiness": "Registry live", "effort": "Multi-phase", "category": "Pro+", "why": "The catalog and field builder are live; next connect every marker to row-level property/town/county values with saved views and exports.", "deliverables": ["323 current value providers", "virtualized sheets", "saved column sets", "property/town/county scopes", "bulk CSV/XLSX", "scheduled delivery", "API payload builder"] },
-    { "priority": 10, "title": "1,000-marker expansion program", "readiness": "Ongoing", "effort": "Multi-phase", "category": "Data foundation", "why": "Grow from 323 live markers to 1,000+ without padding counts: roughly half can become proprietary only where a transparent combination creates a genuinely new decision signal.", "deliverables": ["marker QA rules", "profession taxonomy", "tier governance", "provenance per marker", "derived-metric formula registry", "freshness SLA", "deprecation/version policy"] },
+    { "priority": 9, "title": "Data Center value providers", "readiness": "Registry live", "effort": "Multi-phase", "category": "Pro+", "why": "The catalog and field builder are live; next connect every marker to row-level property/town/county values with saved views and exports.", "deliverables": ["324 current value providers", "virtualized sheets", "saved column sets", "property/town/county scopes", "bulk CSV/XLSX", "scheduled delivery", "API payload builder"] },
+    { "priority": 10, "title": "1,000-marker expansion program", "readiness": "Ongoing", "effort": "Multi-phase", "category": "Data foundation", "why": "Grow from 324 live markers to 1,000+ without padding counts: roughly half can become proprietary only where a transparent combination creates a genuinely new decision signal.", "deliverables": ["marker QA rules", "profession taxonomy", "tier governance", "provenance per marker", "derived-metric formula registry", "freshness SLA", "deprecation/version policy"] },
     { "priority": 11, "title": "Modularize lookup.js", "readiness": "Back burner", "effort": "Large", "category": "Architecture", "why": "Lookup remains the last major JavaScript monolith; professional data depth remains the current priority.", "deliverables": ["lookup core loader", "property modal modules", "map/search modules", "lead/account modules", "dependency tests"] },
-    { "priority": 12, "title": "Static town report landing pages", "readiness": "Back burner", "effort": "Large", "category": "Growth", "why": "Growth pages remain behind data depth and professional utility.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] }
+    { "priority": 12, "title": "Static town report landing pages", "readiness": "Back burner", "effort": "Large", "category": "Growth", "why": "Growth pages remain behind data depth and professional utility.", "deliverables": ["town page generator", "internal linking", "structured data", "annual refresh", "lead path"] },
+    { "priority": 13, "title": "90-marker professional proprietary backlog", "readiness": "Ideas cataloged", "effort": "Multi-phase", "category": "Proprietary intelligence", "why": "Ten transparent, decision-oriented derived markers are now specified for each of nine professional audiences. They must be validated and formula-documented before joining the live 324-marker tally.", "deliverables": ["90 proposed markers", "10 per profession", "input lineage", "formula registry", "confidence scoring", "professional review", "tier assignment"] },
+    { "priority": 14, "title": "Professional SaaS operating layer", "readiness": "Pipeline defined", "effort": "Multi-phase", "category": "Platform", "why": "The product has deep analysis; the next maturity layer is entitlement enforcement, saved workspaces, collaboration, lineage, notifications, report templates, integrations and reliable background jobs.", "deliverables": ["server entitlement service", "audit log", "saved views", "command palette", "notification center", "team permissions", "report templates", "API and webhooks", "usage and billing console", "reliability center"] }
   ]
 }

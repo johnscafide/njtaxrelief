@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "status": "pipeline",
+  "items": [
+    {"priority":1,"capability":"Entitlement service and audit log","reason":"One server-enforced source of truth for role, plan, profession, overrides and every access decision."},
+    {"priority":2,"capability":"Saved workspaces and reusable views","reason":"Professionals expect saved filters, columns, properties and team-standard templates."},
+    {"priority":3,"capability":"Global command palette","reason":"Fast keyboard access to properties, markers, reports, tools and actions."},
+    {"priority":4,"capability":"Notification and change center","reason":"Surface material property, source, deadline and report changes without making users recheck everything."},
+    {"priority":5,"capability":"Data freshness and lineage drawer","reason":"Every value should expose source, retrieved date, transform, confidence and version."},
+    {"priority":6,"capability":"Team workspaces and permissions","reason":"Organization roles, shared folders, comments, assignments and client-safe sharing are core professional SaaS needs."},
+    {"priority":7,"capability":"Report builder and templates","reason":"Turn selected markers into branded attorney, lender, agent and investor deliverables."},
+    {"priority":8,"capability":"Activity history and undo","reason":"Professionals need to know who changed a property, view, note or export and recover mistakes."},
+    {"priority":9,"capability":"Universal search","reason":"Search properties, towns, owners, block/lot, markers and source documents from one place."},
+    {"priority":10,"capability":"Onboarding and empty-state guidance","reason":"Role-aware setup, sample reports and progressive disclosure shorten time to first value."},
+    {"priority":11,"capability":"Bulk jobs and background processing","reason":"Large exports, portfolio refreshes and report generation need progress, retry and completion states."},
+    {"priority":12,"capability":"API keys, webhooks and integrations","reason":"Pro+ and Teams users will expect controlled movement into CRMs, LOS, case and transaction systems."},
+    {"priority":13,"capability":"Usage, quota and billing console","reason":"Make plan limits, credits, renewals, invoices and overages transparent."},
+    {"priority":14,"capability":"In-product feedback and support context","reason":"Capture the page, property, marker and diagnostics with every support request."},
+    {"priority":15,"capability":"Reliability center","reason":"Expose source outages, delayed refreshes, incidents and expected recovery with subscriptions."}
+  ]
+}

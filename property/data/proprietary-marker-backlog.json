@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "status": "work_in_progress",
+  "target_total": 90,
+  "rule": "Each proposed marker must combine at least two attributable inputs, publish a formula or decision rubric, carry freshness and confidence metadata, and pass professional review before launch.",
+  "professions": [
+    {
+      "id": "consumer",
+      "label": "Homeowner / buyer",
+      "markers": [
+        ["watchdog.true_monthly_ownership_cost", "True monthly ownership cost", "Tax, escrow, utilities, insurance and expected maintenance burden."],
+        ["watchdog.tax_bill_shock_risk", "Tax bill shock risk", "Revaluation, added assessment, levy trend and seller-to-buyer exposure."],
+        ["watchdog.appeal_readiness", "Appeal readiness", "Evidence completeness, Chapter 123 position and filing-window status."],
+        ["watchdog.benefit_capture_gap", "Benefit capture gap", "Likely eligible relief minus benefits currently recorded or claimed."],
+        ["watchdog.neighborhood_tax_value", "Neighborhood tax value", "Services, tax burden and market-value context against nearby towns."],
+        ["watchdog.ownership_cost_stability", "Ownership-cost stability", "Five-year variability across tax, assessment and municipal pressure."],
+        ["watchdog.record_accuracy_risk", "Property-record accuracy risk", "Conflicts among parcel, permit, sale and owner-supplied facts."],
+        ["watchdog.home_improvement_tax_exposure", "Improvement tax exposure", "Project type, permit value and local assessment behavior."],
+        ["watchdog.move_cost_break_even", "Move-cost break-even", "Selling, buying, financing and tax differences translated into years."],
+        ["watchdog.homeowner_action_priority", "Homeowner action priority", "Ranks the next most valuable verified action for this property."]
+      ]
+    },
+    {
+      "id": "attorney",
+      "label": "Attorney",
+      "markers": [
+        ["watchdog.closing_exception_severity", "Closing exception severity", "Open evidence weighted by legal and closing consequence."],
+        ["watchdog.chain_of_title_continuity", "Chain-of-title continuity", "Deed chronology gaps, party mismatches and instrument sequence."],
+        ["watchdog.municipal_lien_search_priority", "Municipal lien search priority", "Tax-sale, utility, permit and assessment-change signals."],
+        ["watchdog.unresolved_permit_liability", "Unresolved permit liability", "Open permit age, scope and missing certificate exposure."],
+        ["watchdog.environmental_counsel_trigger", "Environmental counsel trigger", "Recorded controls, known sites and proximity evidence."],
+        ["watchdog.tax_appeal_evidence_strength", "Tax appeal evidence strength", "Comparable quality, margin, uniformity and outcome priors."],
+        ["watchdog.owner_entity_consistency", "Owner/entity consistency", "Owner, mailing, deed and business-registration agreement."],
+        ["watchdog.post_closing_dispute_risk", "Post-closing dispute risk", "Disclosure-sensitive conditions and unresolved public evidence."],
+        ["watchdog.deadline_criticality", "Deadline criticality", "Filing and response windows ranked by days and consequence."],
+        ["watchdog.source_admissibility_score", "Source admissibility score", "Officiality, recency, parcel match and document traceability."]
+      ]
+    },
+    {
+      "id": "title",
+      "label": "Title / closing",
+      "markers": [
+        ["watchdog.title_evidence_completeness", "Title evidence completeness", "Required evidence families found, current and reconciled."],
+        ["watchdog.instrument_sequence_anomaly", "Instrument sequence anomaly", "Unexpected deed, mortgage, discharge or assignment order."],
+        ["watchdog.party_name_variance", "Party-name variance", "Material spelling/entity differences across instruments."],
+        ["watchdog.open_mortgage_probability", "Open mortgage probability", "Mortgage records without a confidently matched discharge."],
+        ["watchdog.tax_sale_exposure", "Tax-sale exposure", "Delinquency, sale-list and redemption-context combination."],
+        ["watchdog.block_lot_identity_confidence", "Block/lot identity confidence", "Parcel identifiers reconciled across agencies and years."],
+        ["watchdog.closing_document_freshness", "Closing-document freshness", "Age and cadence of every evidence source in the file."],
+        ["watchdog.utility_lien_followup", "Utility-lien follow-up", "Municipal utility and delinquency indicators requiring confirmation."],
+        ["watchdog.recorded_constraint_density", "Recorded constraint density", "Deed notices, easement proxies and regulatory overlays."],
+        ["watchdog.closing_clearance_confidence", "Closing clearance confidence", "Evidence coverage minus unresolved high-severity exceptions."]
+      ]
+    },
+    {
+      "id": "agent",
+      "label": "Real estate agent",
+      "markers": [
+        ["watchdog.listing_conversation_risk", "Listing conversation risk", "Issues likely to surprise a buyer or derail negotiations."],
+        ["watchdog.tax_marketing_advantage", "Tax marketing advantage", "Effective burden relative to comparable competing listings."],
+        ["watchdog.price_tax_fit", "Price-to-tax fit", "Asking-price position adjusted for recurring tax burden."],
+        ["watchdog.buyer_objection_forecast", "Buyer objection forecast", "Tax, permit, condition and location signals ranked by likelihood."],
+        ["watchdog.prelisting_readiness", "Pre-listing readiness", "Public-record, permit, tax and disclosure preparation score."],
+        ["watchdog.marketability_friction", "Marketability friction", "Constraint, tax and record issues that narrow the buyer pool."],
+        ["watchdog.relocation_tax_delta", "Relocation tax delta", "True tax-cost change between origin and destination."],
+        ["watchdog.offer_due_diligence_priority", "Offer due-diligence priority", "Highest-value checks before an offer or waiver decision."],
+        ["watchdog.listing_story_strength", "Listing story strength", "Verified features and location advantages with source confidence."],
+        ["watchdog.client_update_urgency", "Client update urgency", "Material changes since the last saved report or conversation."]
+      ]
+    },
+    {
+      "id": "lender",
+      "label": "Mortgage lender / broker",
+      "markers": [
+        ["watchdog.escrow_undercollection_risk", "Escrow undercollection risk", "Current escrow against projected tax and insurance obligations."],
+        ["watchdog.payment_shock_percentile", "Payment-shock percentile", "Projected payment change against similar local collateral."],
+        ["watchdog.collateral_tax_stress", "Collateral tax stress", "Tax growth and reassessment scenarios against borrower payment."],
+        ["watchdog.collateral_record_confidence", "Collateral record confidence", "Agreement among parcel, permit, sale and appraisal inputs."],
+        ["watchdog.flood_cost_uncertainty", "Flood-cost uncertainty", "Flood evidence, elevation context and missing insurance inputs."],
+        ["watchdog.revaluation_payment_sensitivity", "Revaluation payment sensitivity", "Estimated escrow range under municipal reset scenarios."],
+        ["watchdog.added_assessment_reserve", "Added-assessment reserve", "Suggested reserve based on improvements and local tax rate."],
+        ["watchdog.property_liquidity_risk", "Property liquidity risk", "Constraints, tax burden and market depth affecting resale."],
+        ["watchdog.credit_file_property_exception", "Credit-file property exception", "Property-side issues requiring underwriter review."],
+        ["watchdog.total_housing_cost_pressure", "Total housing-cost pressure", "Principal, interest, tax, insurance and known recurring costs."]
+      ]
+    },
+    {
+      "id": "appraiser",
+      "label": "Appraiser",
+      "markers": [
+        ["watchdog.comparable_evidence_quality", "Comparable evidence quality", "Recency, proximity, similarity and verification combined."],
+        ["watchdog.sale_price_dispersion", "Comparable price dispersion", "Adjusted price variability and outlier burden."],
+        ["watchdog.assessment_component_anomaly", "Assessment component anomaly", "Land/building split deviation from matched parcels."],
+        ["watchdog.neighborhood_boundary_confidence", "Neighborhood boundary confidence", "Consistency of market behavior across inferred boundaries."],
+        ["watchdog.market_value_evidence_range", "Market-value evidence range", "Reconciled range with source-specific confidence weights."],
+        ["watchdog.property_characteristic_conflict", "Property characteristic conflict", "Size, age, class and improvement disagreements."],
+        ["watchdog.sale_verification_strength", "Sale verification strength", "Arm's-length, record completeness and assessor acceptance."],
+        ["watchdog.time_adjustment_pressure", "Time-adjustment pressure", "Local price movement between comp and effective dates."],
+        ["watchdog.tax_assessment_independence", "Assessment-independence score", "How independent the valuation evidence is from assessment."],
+        ["watchdog.reconciliation_confidence", "Value reconciliation confidence", "Agreement and quality across independent approaches."]
+      ]
+    },
+    {
+      "id": "contractor",
+      "label": "Contractor / developer",
+      "markers": [
+        ["watchdog.development_constraint_severity", "Development-constraint severity", "Count, overlap and consequence of mapped constraints."],
+        ["watchdog.permit_cycle_duration", "Permit-cycle duration", "Local issue-to-certificate timing by project type."],
+        ["watchdog.site_approval_complexity", "Site-approval complexity", "Jurisdiction, environmental and land-use review stack."],
+        ["watchdog.buildable_area_confidence", "Buildable-area confidence", "Parcel area minus mapped setbacks and constraints."],
+        ["watchdog.project_tax_increment", "Project tax increment", "Improvement value scenario translated into annual tax."],
+        ["watchdog.rollback_tax_exposure", "Rollback-tax exposure", "Farmland history, use change and assessed-value difference."],
+        ["watchdog.infrastructure_dependency", "Infrastructure dependency", "Sewer, water, road and utility evidence gaps."],
+        ["watchdog.site_condition_unknowns", "Site-condition unknowns", "Missing geology, environmental and historic-use evidence."],
+        ["watchdog.approval_sequence_risk", "Approval-sequence risk", "Required approvals and likely critical-path dependencies."],
+        ["watchdog.development_feasibility_confidence", "Development feasibility confidence", "Evidence completeness across site, rule and cost layers."]
+      ]
+    },
+    {
+      "id": "investor",
+      "label": "Investor / portfolio",
+      "markers": [
+        ["watchdog.carry_cost_volatility", "Carry-cost volatility", "Tax, insurance and municipal-pressure variability."],
+        ["watchdog.tax_adjusted_cap_rate", "Tax-adjusted cap rate", "Operating return using projected rather than seller tax."],
+        ["watchdog.portfolio_municipal_concentration", "Municipal concentration risk", "Exposure to shared budget and revaluation events."],
+        ["watchdog.value_add_tax_drag", "Value-add tax drag", "Expected tax increase created by planned improvements."],
+        ["watchdog.exit_liquidity_score", "Exit liquidity score", "Market depth adjusted for property-specific friction."],
+        ["watchdog.operating_cost_surprise", "Operating-cost surprise", "Gap between advertised and normalized recurring costs."],
+        ["watchdog.portfolio_data_confidence", "Portfolio data confidence", "Coverage, freshness and conflicts across holdings."],
+        ["watchdog.municipal_fiscal_beta", "Municipal fiscal beta", "Property tax sensitivity to local levy and base movement."],
+        ["watchdog.redevelopment_incentive_exposure", "Redevelopment incentive exposure", "PILOT/abatement context and competitive effect."],
+        ["watchdog.investment_action_rank", "Investment action rank", "Acquire, investigate, hold or exit signal with reasons."]
+      ]
+    },
+    {
+      "id": "municipal",
+      "label": "Municipal professional",
+      "markers": [
+        ["watchdog.assessment_roll_drift", "Assessment-roll drift", "Market-to-assessment divergence and uniformity movement."],
+        ["watchdog.revaluation_necessity", "Revaluation necessity", "Ratio, COD, age and appeal pressure combined."],
+        ["watchdog.revenue_base_resilience", "Revenue-base resilience", "Ratable mix, growth and concentration stability."],
+        ["watchdog.exemption_burden_shift", "Exemption burden shift", "Estimated levy burden transferred off exempt value."],
+        ["watchdog.appeal_loss_budget_risk", "Appeal-loss budget risk", "Pending/outcome patterns against assessed base."],
+        ["watchdog.collection_stress_momentum", "Collection-stress momentum", "Multi-year delinquency and collection movement."],
+        ["watchdog.capital_project_tax_pressure", "Capital-project tax pressure", "Debt and project schedules translated into levy sensitivity."],
+        ["watchdog.permit_pipeline_value", "Permit-pipeline value", "Open construction activity and likely future ratables."],
+        ["watchdog.service_cost_ratable_gap", "Service-cost/ratable gap", "Budget growth relative to organic tax-base growth."],
+        ["watchdog.fiscal_intervention_priority", "Fiscal intervention priority", "Ranks the most material, addressable municipal pressure."]
+      ]
+    }
+  ]
+}
