@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805t';
+  var HOME_MODULE_VERSION = '20260805u';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -474,7 +474,8 @@
   };
 
   function isPro() {
-    var plan = String((profile && profile.plan) || '').toLowerCase().replace(/[\s_-]/g, '');
+    if (window.NJPTRPlan) return window.NJPTRPlan.can('pro');
+    var plan = String((profile && (profile.plan_tier || profile.plan)) || '').toLowerCase().replace(/[\s_-]/g, '');
     return plan === 'pro' || plan === 'pro+' || plan === 'proplus' || plan === 'teams';
   }
 
@@ -802,6 +803,111 @@
   // A section, not a card. A hairline and a small label, then the content.
   function toolCard(title, icon, body) {
     return '<section class="sec"><h4><i class="fas ' + icon + '"></i>' + title + '</h4>' + body + '</section>';
+  }
+
+  // Home is a signal browser, not the final technical report. Tool modules
+  // still build their complete analysis so calculations and interactive forms
+  // remain available, but the report initially presents one compact row per
+  // signal. The row opens the sourced marker page; "Use full tool" reveals the
+  // original analysis only when somebody deliberately asks for it.
+  var HOME_SIGNAL_MARKERS = [
+    [/chapter 123/i, 'watchdog.chapter123_position'],
+    [/land and building/i, 'watchdog.improvement_ratio'],
+    [/reassessment|assessment lag/i, 'watchdog.reassessment_risk'],
+    [/added.*omitted/i, 'watchdog.added_omitted_risk'],
+    [/revaluation/i, 'watchdog.revaluation_risk'],
+    [/uniformity|how.*assess/i, 'uniformity.score'],
+    [/budget pressure/i, 'watchdog.tax_pressure'],
+    [/appeal/i, 'appeals.latest_win_rate_filed'],
+    [/market value|estimated value/i, 'watchdog.market_value_estimate'],
+    [/tax trajectory|bill headed/i, 'watchdog.tax_trajectory'],
+    [/effective tax/i, 'watchdog.effective_tax_rate'],
+    [/class mix|residential share/i, 'property.property_class'],
+    [/abatement|pilot/i, 'watchdog.exempt_pilot_exposure'],
+    [/escrow/i, 'watchdog.escrow_monthly_delta'],
+    [/permit/i, 'preflight.open_permit_count'],
+    [/flood|wetland|environment/i, 'watchdog.constraint_stack_count'],
+    [/farmland/i, 'property.property_class'],
+    [/closing cost|buyer cost/i, 'watchdog.closing_cost_estimate'],
+    [/benefit|anchor|stay nj|senior freeze/i, 'property.annual_tax'],
+    [/history|time machine/i, 'property.assessed_value']
+  ];
+
+  function signalMarker(title, fallback) {
+    for (var i = 0; i < HOME_SIGNAL_MARKERS.length; i++) {
+      if (HOME_SIGNAL_MARKERS[i][0].test(title)) return HOME_SIGNAL_MARKERS[i][1];
+    }
+    return fallback || 'property.assessed_value';
+  }
+
+  function signalSummary(node) {
+    var preferred = node.querySelector('.ir-say,.rr-flag,.rv-own,.bc-warn,.bc-ok,.ap-ev,.tl-p,.tm-reading,p');
+    var text = preferred ? preferred.textContent.replace(/\s+/g, ' ').trim() : '';
+    if (!text) text = 'Open for the current reading, methodology and source trail.';
+    return text.length > 145 ? text.slice(0, 142).replace(/\s+\S*$/, '') + '…' : text;
+  }
+
+  function compactHomeSection(host, sectionKey) {
+    var fallback = {
+      fair: 'watchdog.chapter123_position', kept: 'watchdog.reassessment_risk', farmland: 'property.property_class',
+      reval: 'watchdog.revaluation_risk', town: 'uniformity.score', file: 'appeals.latest_win_rate_filed',
+      owed: 'property.annual_tax', buy: 'watchdog.closing_cost_estimate', diligence: 'watchdog.constraint_stack_count',
+      compare: 'watchdog.effective_tax_rate', trend: 'watchdog.tax_trajectory', history: 'property.assessed_value'
+    }[sectionKey];
+    var looseBlocks = [
+      ['.ti-report', 'Town intelligence', 'fa-chart-column'],
+      ['.bp-report', 'Municipal budget pressure', 'fa-building-columns'],
+      ['.tm-detail', 'Historical Property Time Machine', 'fa-clock-rotate-left'],
+      ['.dd-tool', 'Closing and collateral preflight', 'fa-shield-halved'],
+      ['.pw-stack', 'Professional closing workflows', 'fa-briefcase']
+    ];
+    looseBlocks.forEach(function (config) {
+      host.querySelectorAll(':scope > ' + config[0]).forEach(function (block) {
+        var wrapper = document.createElement('section');
+        wrapper.className = 'sec';
+        wrapper.innerHTML = '<h4><i class="fas ' + config[2] + '"></i>' + config[1] + '</h4>';
+        block.parentNode.insertBefore(wrapper, block);
+        wrapper.appendChild(block);
+      });
+    });
+    host.querySelectorAll('.sec').forEach(function (node) {
+      if (node.classList.contains('hs-ready')) return;
+      var heading = node.querySelector(':scope > h4');
+      if (!heading) return;
+      var title = heading.textContent.replace(/\s+/g, ' ').trim();
+      var icon = heading.querySelector('i');
+      var marker = signalMarker(title, fallback);
+      var summary = signalSummary(node);
+      var valueNode = node.querySelector('.fig dd strong,.fig b,.ir-row b,.tm-kpis b');
+      var value = valueNode ? valueNode.textContent.replace(/\s+/g, ' ').trim() : '';
+      var detail = document.createElement('div');
+      detail.className = 'hs-full';
+      detail.hidden = true;
+      Array.from(node.children).forEach(function (child) {
+        if (child !== heading) detail.appendChild(child);
+      });
+      var href = markerHref(marker, value, summary);
+      node.classList.add('hs-ready');
+      heading.hidden = true;
+      node.insertAdjacentHTML('afterbegin',
+        '<div class="hs-signal" data-marker-id="' + esc(marker) + '" data-marker-value="' + esc(value) + '" data-marker-note="' + esc(summary) + '">' +
+          '<a class="hs-open dm" data-marker-id="' + esc(marker) + '" data-marker-value="' + esc(value) + '" data-marker-note="' + esc(summary) + '" href="' + href + '">' +
+            '<span class="hs-icon"><i class="' + (icon ? icon.className : 'fas fa-chart-simple') + '"></i></span>' +
+            '<span class="hs-copy"><b>' + esc(title) + '</b><small>' + esc(summary) + '</small></span>' +
+            (value ? '<strong>' + esc(value) + '</strong>' : '') +
+            '<i class="fas fa-chevron-right hs-chevron"></i>' +
+          '</a>' +
+          '<button class="hs-tool" type="button" aria-expanded="false"><i class="fas fa-sliders"></i> Use full tool</button>' +
+        '</div>');
+      node.appendChild(detail);
+      var button = node.querySelector('.hs-tool');
+      button.addEventListener('click', function () {
+        var open = detail.hidden;
+        detail.hidden = !open;
+        button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        button.innerHTML = open ? '<i class="fas fa-minus"></i> Hide full tool' : '<i class="fas fa-sliders"></i> Use full tool';
+      });
+    });
   }
 
 
@@ -1322,7 +1428,7 @@
 
   var SECTIONS = [
     {
-      k: 'fair', cat: 'Assessment', icon: 'fa-scale-balanced', title: 'Is this assessment fair?',
+      k: 'fair', tier: 'standard', cat: 'Assessment', icon: 'fa-scale-balanced', title: 'Is this assessment fair?',
       pro: 'The Chapter 123 test verbatim, then where the excess sits. Land value is close to unarguable; ' +
            'the improvement figure is a judgment about a structure, and judgment is what an appeal contests.',
       build: function (r) {
@@ -1340,13 +1446,13 @@
       }
     },
     {
-      k: 'kept', cat: 'Assessment', short: 'Sale, permit and assessment timing', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
+      k: 'kept', tier: 'standard', cat: 'Assessment', short: 'Sale, permit and assessment timing', icon: 'fa-arrow-trend-up', title: 'Has the assessment kept up?',
       pro: 'For a buyer this is undisclosed exposure, because the listing shows the seller\u2019s bill. ' +
            'For a seller it is worth knowing before an offer arrives.',
       build: function (r) { return toolReassessRisk(r) + toolAddedOmitted(r); }
     },
     {
-      k: 'farmland', cat: 'Land use', short: 'Acreage, use, income and rollback screen', icon: 'fa-seedling', title: 'Could farmland assessment apply?',
+      k: 'farmland', tier: 'pro', cat: 'Land use', short: 'Acreage, use, income and rollback screen', icon: 'fa-seedling', title: 'Could farmland assessment apply?',
       pro: 'For rural property, a small change in qualifying acreage, gross sales or continued use can change the assessment basis entirely. This checklist makes the filing requirements and rollback exposure explicit before a client relies on the benefit.',
       build: function (r) { return toolFarmland(r); },
       sum: function (r) {
@@ -1355,7 +1461,7 @@
       }
     },
     {
-      k: 'reval', cat: 'Town change', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
+      k: 'reval', tier: 'pro', cat: 'Town change', icon: 'fa-tower-broadcast', title: 'Is a revaluation coming?',
       pro: 'A reset redistributes burden across a whole town at once. Knowing which side a client lands on ' +
            'beforehand is the difference between a call they thank you for and one they do not.',
       build: function (r) { return toolRevalRadar(r); },
@@ -1365,7 +1471,7 @@
       }
     },
     {
-      k: 'town', cat: 'Town health', icon: 'fa-ruler-combined', title: 'How this town assesses',
+      k: 'town', tier: 'pro', cat: 'Town health', icon: 'fa-ruler-combined', title: 'How this town assesses',
       pro: 'A high coefficient of deviation means the roll itself is uneven, which strengthens every appeal ' +
            'in the municipality regardless of the individual property.',
       build: function (r) {
@@ -1379,7 +1485,7 @@
       }
     },
     {
-      k: 'file', cat: 'Appeals', icon: 'fa-gavel', title: 'What happens if you file',
+      k: 'file', tier: 'pro', cat: 'Appeals', icon: 'fa-gavel', title: 'What happens if you file',
       pro: 'Ten years of county board outcomes, then a printable packet with the comparables and the ' +
            'statutory calculation already assembled.',
       build: function (r) {
@@ -1392,31 +1498,31 @@
       }
     },
     {
-      k: 'owed', cat: 'Benefits', short: 'ANCHOR, Stay NJ and Senior Freeze', icon: 'fa-hand-holding-dollar', title: 'Money you may be owed',
+      k: 'owed', tier: 'standard', cat: 'Benefits', short: 'ANCHOR, Stay NJ and Senior Freeze', icon: 'fa-hand-holding-dollar', title: 'Money you may be owed',
       pro: 'ANCHOR, Stay NJ and the Senior Freeze interact in a way most people get wrong. Stay NJ is a ' +
            'top-off rather than an addition, and the Freeze base year is the item that actually compounds.',
       build: function (r) { return toolSeniorBenefits(r); }
     },
     {
-      k: 'buy', cat: 'Buyer costs', short: 'Closing costs and future tax exposure', icon: 'fa-key', title: 'What a buyer would pay',
+      k: 'buy', tier: 'pro', cat: 'Buyer costs', short: 'Closing costs and future tax exposure', icon: 'fa-key', title: 'What a buyer would pay',
       pro: 'Running the buyer\u2019s number before an offer is written avoids the conversation nobody wants ' +
            'after closing.',
       build: function (r) { return toolBuyerCost(r); }
     },
     {
-      k: 'diligence', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
+      k: 'diligence', tier: 'pro_plus', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
       build: function (r) { return toolProfessionalDueDiligence(r) + toolProfessionalWorkflows(r); },
       sum: function () { return 'Closing evidence + escrow + lien + NJDEP constraints'; }
     },
     {
-      k: 'compare', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
+      k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
       build: function (r) { return toolRelocation(r) + toolInvestorScreen(); }
     },
     {
-      k: 'trend', cat: 'Tax outlook', icon: 'fa-chart-line', title: 'Where is this bill headed?',
+      k: 'trend', tier: 'pro', cat: 'Tax outlook', icon: 'fa-chart-line', title: 'Where is this bill headed?',
       pro: 'Isolates the town\u2019s tax RATE trend from any reassessment or revaluation, so a buyer or ' +
            'seller can see the budget-driven trajectory on its own.',
       build: function (r) { return toolTaxTrajectory(r) + toolTaxPressure(r); },
@@ -1426,7 +1532,7 @@
       }
     },
     {
-      k: 'history', cat: 'Property history', icon: 'fa-clock-rotate-left', title: 'How has this property changed?',
+      k: 'history', tier: 'pro', cat: 'Property history', icon: 'fa-clock-rotate-left', title: 'How has this property changed?',
       pro: 'Watchdog preserves observed assessment and tax snapshots that are not available as a clean parcel history from the state. The timeline separates a changed assessment from a changed bill.',
       build: function (r) { return toolTimeMachine(r); },
       sum: function (r) {
@@ -1442,7 +1548,7 @@
     if (!sum) sum = sec.short || '';
     try { tone = sec.tone ? (sec.tone(r) || '') : ''; } catch (e) {}
     var catClass = String(sec.cat || 'Analysis').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + '" id="sec-' + sec.k + '">' +
+    return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
         '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
@@ -1472,6 +1578,11 @@
   };
 
   window.hmToggle = function (k) {
+    var accessSection = SECTIONS.filter(function (x) { return x.k === k; })[0];
+    if (accessSection && window.NJPTRPlan && !window.NJPTRPlan.can(accessSection.tier || 'standard')) {
+      toast((accessSection.tier === 'pro_plus' ? 'Pro+' : 'Pro') + ' access is required in this View As mode');
+      return;
+    }
     OPEN[k] = !OPEN[k];
     var e = el('sec-' + k);
     if (!e) return;
@@ -1486,6 +1597,7 @@
           try { html = sec.build(current) || ''; }
           catch (err) { console.error('Section build failed:', k, err); html = '<div class="tl-note">This section could not be built for this property.</div>'; }
           host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
+          compactHomeSection(host, k);
           e.setAttribute('data-built', '1');
           initTips();
           if (el('tc-total')) window.dbCost();
@@ -1810,6 +1922,7 @@
       ]).then(function (out) {
         rows = (out[1] && out[1].data) || [];
         profile = (out[2] && out[2].data) || {};
+        if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
         var pin = qsPin();
         current = (pin && rows.filter(function (x) { return x.pams_pin === pin; })[0]) ||
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
@@ -1841,6 +1954,9 @@
     });
   }
   initHomeChrome();
+  document.addEventListener('njptr:plan-change', function () {
+    if (current) paintReport();
+  });
   startHome();
   Object.assign(window, { el, money, esc, toast, getClient, meta, name, xfetch, median, loadRefData, ratioFor, rateHistory, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, sortControl, propMenu, byId, propUrl, isPro, locked, uniBody, appealBody, tip, metricStrip, cell, titleCase, reportLink, initTips, toolCard, qsPin, paintReport, sectionShell, scorecard, f, intelPoints, hf, summarySentence, ch123Block, untestableBlock, paintHomeChrome, paintHomeSidebarToggle, initHomeChrome, toolUniformityFor, toolAppealOddsFor, bootHome, startHome });
   [

@@ -3729,10 +3729,12 @@
     var r = elReal('wd-right');
     if (!r) return;
     r.innerHTML = plUser
-      ? '<a href="/property/pro.html">Pro Hub</a>' +
+      ? '<a href="/property/pro.html#plans">Pricing</a>' +
+        '<a href="/property/pro.html">Pro Hub</a>' +
         '<a href="/property/dashboard.html">My Properties</a>' +
         '<button onclick="plSignOut()">Sign out</button>'
-      : '<a href="/property/pro.html">Pro Hub</a>' +
+      : '<a href="/property/pro.html#plans">Pricing</a>' +
+        '<a href="/property/pro.html">Pro Hub</a>' +
         '<a href="/property/dashboard.html">My Properties</a>' +
         '<button onclick="plSignInPrompt()">Sign in</button>';
   }

@@ -256,6 +256,7 @@
     ]).then(function (res) {
       rows = (res[0] && res[0].data) || [];
       profile = (res[1] && res[1].data) || {};
+      if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
       render();
       hydrateDetails().then(render);
       el('db-profile-body').innerHTML = profileForm();
@@ -920,7 +921,8 @@
   // so nothing sensitive hides behind it.
   // ══════════════════════════════════════════════
   function isPro() {
-    var plan = String((profile && profile.plan) || '').toLowerCase().replace(/[\s_-]/g, '');
+    if (window.NJPTRPlan) return window.NJPTRPlan.can('pro');
+    var plan = String((profile && (profile.plan_tier || profile.plan)) || '').toLowerCase().replace(/[\s_-]/g, '');
     return plan === 'pro' || plan === 'pro+' || plan === 'proplus' || plan === 'teams';
   }
 
