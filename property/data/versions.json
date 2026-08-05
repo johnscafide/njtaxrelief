@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T12:37:53-04:00",
+  "updated_at": "2026-08-05T13:18:14-04:00",
   "releases": [
+    {
+      "version": "0.9.3",
+      "date": "2026-08-05",
+      "timestamp": "2026-08-05T13:18:14-04:00",
+      "title": "Shared home-ownership verification flow",
+      "category": "Fix",
+      "status": "Completed",
+      "summary": "Changed Claim as my home so it immediately offers postcard verification after saving, added an explicit Not now path that leaves the home unverified, repaired Verify ownership on Home, and moved Lookup, Dashboard and Home onto one shared verification module.",
+      "links": ["/property/", "/property/dashboard.html", "/property/home.html"],
+      "files": ["property/js/ownership-verification.js", "property/js/lookup.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/index.html", "property/dashboard.html", "property/home.html"],
+      "impact": { "html": 3, "css": 0, "javascript": 4, "data": 1, "navigation": 0 }
+    },
     {
       "version": "0.9.2",
       "date": "2026-08-05",

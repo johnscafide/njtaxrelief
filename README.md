@@ -1,4 +1,4 @@
-# NJPTR Watchdog platform release 0.9.2
+# NJPTR Watchdog platform release 0.9.3
 
 This release turns the existing Tax Rate Trajectory and Statewide Fairness Index into a shared municipal-intelligence system. It also adds the Historical Property Time Machine, secure postal ownership-verification infrastructure, live delivery diagnostics, review-first state-data automation, reliable shared-sidebar behavior, and the Pro+ Data Center specification.
 
@@ -28,6 +28,8 @@ This release turns the existing Tax Rate Trajectory and Statewide Fairness Index
 - Monthly state-data validation and refresh workflow that opens a pull request for review
 - Source registry and freshness report covering seven data families
 - Pro+ Data Center product specification and plan integration
+- Shared ownership-verification module used by Lookup, Dashboard and Home
+- Immediate verification choice after a property is claimed as Home, with a clear Not now path
 
 ## Keeping the tracker current
 

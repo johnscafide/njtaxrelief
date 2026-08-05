@@ -1832,13 +1832,13 @@
     plModalNote('How the Watchdog Tax Value works', body);
   };
 
-  window.plModalNote = function (title, html) {
+  window.plModalNote = function (title, html, plain) {
     var n = el('plm-note-overlay');
     n.innerHTML =
       '<div class="plm-note-box">' +
         '<button class="plm-note-x" onclick="plCloseNote()" aria-label="Close"><i class="fas fa-xmark"></i></button>' +
         '<h3>' + esc(title) + '</h3>' + html +
-        '<button class="plm-rbtn" style="margin-top:18px;" onclick="plCloseNote();plOpenForm(\'value\')">Get a real valuation from John</button>' +
+        (plain ? '' : '<button class="plm-rbtn" style="margin-top:18px;" onclick="plCloseNote();plOpenForm(\'value\')">Get a real valuation from John</button>') +
       '</div>';
     n.classList.add('open');
   };
@@ -3881,6 +3881,13 @@
       if (res.error) { toast('Could not save, try again'); return; }
       toast(kind === 'home' ? 'Saved as your home' : 'Added to your watchlist');
       refreshSaveState();
+      if (kind === 'home' && window.NJPTRVerification) {
+        window.NJPTRVerification.open({
+          client: sb, pin: current.pin, address: current.address, town: current.town, zip: current.zip,
+          modal: window.plModalNote, close: window.plCloseNote, toast: toast,
+          onVerified: refreshSaveState
+        });
+      }
       if (typeof gtag === 'function') gtag('event', 'save_property', { kind: kind });
     });
   };

@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805l';
+  var HOME_MODULE_VERSION = '20260805m';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -434,7 +434,7 @@
         '<button onclick="dbDirections(\'' + r.id + '\')"><i class="fas fa-diamond-turn-right"></i> Directions</button>' +
         '<hr>' +
         (r.kind === 'home' && r.verify_level !== 'mail'
-          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
+          ? '<button onclick="dbVerify(\'' + r.pams_pin + '\',\'' + esc(r.address).replace(/'/g, '') + '\',\'' + esc(r.town || '').replace(/'/g, '') + '\',\'' + esc(r.zip || '').replace(/'/g, '') + '\')"><i class="fas fa-badge-check"></i> Verify ownership</button>'
           : '') +
         '<button class="rm" onclick="dbRemove(\'' + r.id + '\')"><i class="fas fa-trash"></i> Remove</button>' +
       '</div></div>';
@@ -461,6 +461,15 @@
     var r = byId(id); if (!r) return;
     window.open('https://www.google.com/maps/dir/?api=1&destination=' +
       encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ'), '_blank', 'noopener');
+  };
+
+  window.dbVerify = function (pin, address, town, zip) {
+    if (!getClient() || !window.NJPTRVerification) { toast('Verification is temporarily unavailable'); return; }
+    window.NJPTRVerification.open({
+      client: sb, pin: pin, address: address, town: town, zip: zip,
+      modal: window.plModalNote, close: window.plCloseNote, toast: toast,
+      onVerified: function () { setTimeout(function () { location.reload(); }, 350); }
+    });
   };
 
   function isPro() { return !!(profile && profile.plan === 'pro'); }

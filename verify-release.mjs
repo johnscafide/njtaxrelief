@@ -22,6 +22,8 @@ const required = [
   'property/data/data-freshness.json',
   'property/scripts/refresh_state_data.py',
   'property/docs/pro-plus-data-center-spec.md',
+  'property/js/ownership-verification.js',
+  'property/js/lookup.js',
   'supabase/migrations/20260805180000_ownership_verification.sql',
   'supabase/migrations/20260805183000_manual_verification_email.sql',
   'supabase/functions/request-verify-code/index.ts',
@@ -55,7 +57,7 @@ if (exists('property/css/fairness.html')) throw new Error('Obsolete CSS-folder H
 const versions = JSON.parse(read('property/data/versions.json'));
 if (!Array.isArray(versions.releases) || versions.releases.length < 11) throw new Error('Release history is incomplete');
 if (!Array.isArray(versions.roadmap) || versions.roadmap.length < 8) throw new Error('Project roadmap is incomplete');
-if (versions.releases[0].version !== '0.9.2' || !versions.releases[0].timestamp) {
+if (versions.releases[0].version !== '0.9.3' || !versions.releases[0].timestamp) {
   throw new Error('Current tracker release or timestamp is missing');
 }
 const freshness = JSON.parse(read('property/data/data-freshness.json'));
@@ -65,5 +67,8 @@ if (!read('property/js/dashboard/tools/assessment-drift.js').includes('toolTimeM
 if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
 if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band + '\"'")) throw new Error('Town Intelligence can still emit an undefined class');
 if (!read('supabase/functions/request-verify-code/index.ts').includes('api.emailjs.com/api/v1.0/email/send')) throw new Error('EmailJS administrator delivery is missing');
+if (!read('property/js/lookup.js').includes("kind === 'home' && window.NJPTRVerification")) throw new Error('Lookup does not offer verification after claiming a home');
+if (!read('property/js/dashboard/home/index.js').includes('window.dbVerify = function')) throw new Error('Home verification action is missing');
+if (!read('property/dashboard.html').includes('ownership-verification.js') || !read('property/home.html').includes('ownership-verification.js')) throw new Error('Shared ownership verification is not loaded');
 
-console.log('Verified release 0.9.2: EmailJS manual postcard fulfillment, mobile cards, navigation, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');
+console.log('Verified release 0.9.3: shared claim verification, EmailJS manual postcard fulfillment, mobile cards, navigation, Town Intelligence, Property Time Machine, data automation, tracker, and Pro+ Data Center specification.');
