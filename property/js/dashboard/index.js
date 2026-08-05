@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805a';
+  var MODULE_VERSION = '20260805b';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -123,6 +123,10 @@
     var nextUser = session && session.user ? session.user : null;
     var nextId = nextUser ? nextUser.id : null;
 
+    // During an OAuth or magic-link callback, INITIAL_SESSION/getSession can
+    // finish with an older null result after SIGNED_IN has already supplied a
+    // valid user. Never let that stale result replace an authenticated state.
+    if (!force && authUserId && !nextId) return;
     if (!force && authSettled && nextId === authUserId) return;
 
     authSettled = true;
@@ -134,7 +138,8 @@
     paint();
   }
 
-  function showSignedOut() {
+  function showSignedOut(force) {
+    if (!force && authUserId) return;
     settleAuth(null, true);
   }
 
@@ -158,7 +163,7 @@
       return sb.auth.refreshSession().then(function (fresh) {
         var recovered = fresh && fresh.data && fresh.data.session;
         settleAuth(recovered || null);
-      }).catch(showSignedOut);
+      }).catch(function () { showSignedOut(false); });
     }).catch(function () {
       showSignedOut();
     });
@@ -170,8 +175,12 @@
       return;
     }
 
-    sb.auth.onAuthStateChange(function (_event, session) {
-      settleAuth(session || null);
+    sb.auth.onAuthStateChange(function (event, session) {
+      if (session && session.user) {
+        settleAuth(session);
+      } else if (event === 'SIGNED_OUT') {
+        showSignedOut(true);
+      }
     });
 
     readSession();
