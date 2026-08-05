@@ -51,7 +51,7 @@
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260805b', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260805c', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();
