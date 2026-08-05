@@ -1,30 +1,30 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-06T07:15:31+08:00",
+  "generated_at": "2026-08-06T07:48:07+08:00",
   "target_markers": 1000,
   "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
   "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
   "summary": {
-    "total": 337,
+    "total": 342,
     "public_source": 275,
-    "proprietary_derived": 62,
+    "proprietary_derived": 67,
     "by_tier": {
       "standard": 22,
-      "pro": 192,
-      "pro_plus": 123
+      "pro": 194,
+      "pro_plus": 126
     },
     "by_profession": {
       "consumer": 56,
-      "attorney": 326,
+      "attorney": 329,
       "title": 48,
-      "agent": 327,
-      "lender": 166,
-      "appraiser": 317,
+      "agent": 330,
+      "lender": 171,
+      "appraiser": 319,
       "contractor": 48,
-      "investor": 326,
-      "municipal": 233
+      "investor": 329,
+      "municipal": 236
     },
-    "percent_of_goal": 33.7
+    "percent_of_goal": 34.2
   },
   "professions": [
     {
@@ -6966,6 +6966,100 @@
       "source_id": "watchdog-models",
       "status": "live",
       "field": "tax_trend_position"
+    },
+    {
+      "id": "watchdog.comparable_evidence_reliability",
+      "label": "Comparable Evidence Reliability",
+      "description": "Comparable Evidence Reliability",
+      "category": "evidence quality",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "appraiser",
+        "attorney",
+        "agent",
+        "lender"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "comparable_evidence_reliability"
+    },
+    {
+      "id": "watchdog.municipal_cost_absorption_score",
+      "label": "Municipal Cost Absorption Score",
+      "description": "Municipal Cost Absorption Score",
+      "category": "municipal finance",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "investor",
+        "lender",
+        "agent",
+        "municipal"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "municipal_cost_absorption_score"
+    },
+    {
+      "id": "watchdog.transaction_tax_shock_index",
+      "label": "Transaction Tax Shock Index",
+      "description": "Transaction Tax Shock Index",
+      "category": "transaction risk",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "attorney",
+        "investor"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "transaction_tax_shock_index"
+    },
+    {
+      "id": "watchdog.fiscal_resilience_score",
+      "label": "Municipal Fiscal Resilience Score",
+      "description": "Municipal Fiscal Resilience Score",
+      "category": "municipal finance",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "investor",
+        "lender",
+        "municipal"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "fiscal_resilience_score"
+    },
+    {
+      "id": "watchdog.assessment_defensibility_score",
+      "label": "Assessment Defensibility Score",
+      "description": "Assessment Defensibility Score",
+      "category": "assessment evidence",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "attorney",
+        "appraiser",
+        "lender",
+        "municipal"
+      ],
+      "source_id": "watchdog-models",
+      "status": "live",
+      "field": "assessment_defensibility_score"
     }
   ]
 }

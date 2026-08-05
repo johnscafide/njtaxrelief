@@ -1,6 +1,6 @@
 param(
-  [string]$Manifest = "property/CHANGED-FILES-v0.17.0.txt",
-  [string]$Message = "Watchdog v0.17.0"
+  [string]$Manifest = "property/CHANGED-FILES-v0.18.0.txt",
+  [string]$Message = "Watchdog v0.18.0"
 )
 $ErrorActionPreference = "Stop"
 $root = git rev-parse --show-toplevel 2>$null

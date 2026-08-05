@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260806a';
+  var HOME_MODULE_VERSION = '20260806b';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -18,6 +18,7 @@
     'appeal-evidence-strength': ['uniformity'],
     'permit-lifecycle-intelligence': ['professional-due-diligence'],
     'real-estate-intelligence': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
+    'professional-decision-signals': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
     'improvement-ratio': ['town-profile'],
     'property-class-mix': ['town-profile']
   };
@@ -833,6 +834,7 @@
     [/carry-cost/i, 'watchdog.investor_carry_cost_volatility'],
     [/evidence strength/i, 'watchdog.appeal_evidence_strength'],
     [/real estate professional/i, 'watchdog.listing_friction_index'],
+    [/cross-professional decision/i, 'watchdog.transaction_tax_shock_index'],
     [/flood|wetland|environment/i, 'watchdog.constraint_stack_count'],
     [/farmland/i, 'property.property_class'],
     [/closing cost|buyer cost/i, 'watchdog.closing_cost_estimate'],
@@ -1529,6 +1531,12 @@
       sum: function () { return '10 agent-specific Watchdog markers'; }
     },
     {
+      k: 'decision', tier: 'pro_plus', cat: 'Professional intelligence', icon: 'fa-compass-drafting', title: 'Cross-Professional Decision Signals',
+      pro: 'These scores compress several independently sourced facts into a consistent triage layer for attorneys, lenders, appraisers, agents and investors while keeping the underlying formula visible.',
+      build: function (r) { return toolProfessionalDecisionSignals(r); },
+      sum: function () { return '5 new formula-backed professional signals'; }
+    },
+    {
       k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
@@ -1586,6 +1594,7 @@
     buy: ['buyer-closing-costs'],
     diligence: ['professional-due-diligence', 'permit-lifecycle-intelligence', 'professional-workflows'],
     broker: ['real-estate-intelligence'],
+    decision: ['professional-decision-signals'],
     compare: ['relocation', 'investor-screen', 'investor-carry-volatility'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
     history: ['assessment-drift']

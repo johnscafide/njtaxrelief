@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "0.17.0",
+  "version": "0.18.0",
   "principle": "Every proprietary score exposes its component inputs and weights. Scores support prioritization; they are not legal, appraisal, credit, investment or transaction outcomes.",
   "markers": {
     "watchdog.investor_carry_cost_volatility": {"range":"0-100; higher means more tax-driven carry uncertainty","formula":"32% municipal budget pressure + 24% positive levy/ratable growth gap + 22% revaluation pressure + 14% positive tax-rate CAGR + 8% exempt/PILOT exposure"},
@@ -15,6 +15,11 @@
     "watchdog.offer_diligence_priority": {"range":"0-100 priority","formula":"55% listing friction + 25% missing property-record evidence + 20% missing verified-sale evidence depth"},
     "watchdog.verified_listing_story_strength": {"range":"0-100 strength","formula":"50% record completeness + 35% verified-sale evidence depth + 15% assessment consistency"},
     "watchdog.assessment_surprise_index": {"range":"0-100 risk","formula":"40% revaluation pressure + 30% appeal/assessment tension + 15% tax-rate trend + 15% budget pressure"},
-    "watchdog.tax_trend_position": {"range":"0-100 stability","formula":"Inverse normalized positive historical general-tax-rate CAGR"}
+    "watchdog.tax_trend_position": {"range":"0-100 stability","formula":"Inverse normalized positive historical general-tax-rate CAGR"},
+    "watchdog.comparable_evidence_reliability": {"range":"0-100 confidence","formula":"45% verified-sale sample depth + 30% assessment-ratio dispersion stability + 15% source recency + 10% subject square-foot detail availability"},
+    "watchdog.municipal_cost_absorption_score": {"range":"0-100 capacity","formula":"70% inverse positive gap between total-levy CAGR and organic ratable CAGR + 30% normalized tax-collection rate"},
+    "watchdog.transaction_tax_shock_index": {"range":"0-100 risk","formula":"35% revaluation pressure + 25% municipal budget pressure + 25% positive general-tax-rate CAGR + 15% levy/ratable growth gap"},
+    "watchdog.fiscal_resilience_score": {"range":"0-100 resilience","formula":"35% inverse budget pressure + 30% municipal cost absorption + 20% normalized collection rate + 15% inverse debt-service burden"},
+    "watchdog.assessment_defensibility_score": {"range":"0-100 support","formula":"30% comparable evidence reliability + 25% assessment uniformity + 25% Chapter 123 within-range support + 20% independent-value-anchor availability"}
   }
 }

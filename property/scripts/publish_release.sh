@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
-manifest="${1:-property/CHANGED-FILES-v0.17.0.txt}"
-message="${2:-Watchdog v0.17.0}"
+manifest="${1:-property/CHANGED-FILES-v0.18.0.txt}"
+message="${2:-Watchdog v0.18.0}"
 root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [[ -z "$root" ]]; then echo "Run this from anywhere inside your cloned GitHub repository."; exit 1; fi
 cd "$root"

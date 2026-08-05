@@ -108,6 +108,15 @@ for mid,label,cat,tier,prof in [
  ('tax_trend_position','Tax Trend Position','broker intelligence','pro',['agent'])]:
     add('watchdog.'+mid,label,cat,'property',tier,'watchdog-derived',prof,'watchdog-models')
 
+# v0.18 cross-professional decision signals. Each has a UI value provider and documented formula.
+for mid,label,cat,tier,prof in [
+ ('comparable_evidence_reliability','Comparable Evidence Reliability','evidence quality','pro',['appraiser','attorney','agent','lender']),
+ ('municipal_cost_absorption_score','Municipal Cost Absorption Score','municipal finance','pro_plus',['investor','lender','agent','municipal']),
+ ('transaction_tax_shock_index','Transaction Tax Shock Index','transaction risk','pro',['agent','lender','attorney','investor']),
+ ('fiscal_resilience_score','Municipal Fiscal Resilience Score','municipal finance','pro_plus',['investor','lender','municipal']),
+ ('assessment_defensibility_score','Assessment Defensibility Score','assessment evidence','pro_plus',['attorney','appraiser','lender','municipal'])]:
+    add('watchdog.'+mid,label,cat,'property',tier,'watchdog-derived',prof,'watchdog-models')
+
 summary={"total":len(markers),"public_source":sum(m['origin']=='public' for m in markers),"proprietary_derived":sum(m['proprietary'] for m in markers)}
 summary['by_tier']={t:sum(m['tier']==t for m in markers) for t in ('standard','pro','pro_plus')}
 summary['by_profession']={p:sum(p in m['professions'] for m in markers) for p in PROF}
