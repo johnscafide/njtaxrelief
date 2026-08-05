@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805h';
+  var HOME_MODULE_VERSION = '20260805i';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -141,6 +141,22 @@
     if (!pct || pct <= 0) return null;
     return { ratio: pct / 100, year: yrs[yrs.length - 1],
              upper: row && row.upper ? +row.upper / 100 : null };
+  }
+
+  // Full multi-year general tax rate history for a town, sorted oldest to
+  // newest. Same name-matching rule as ratioFor: try "TOWN (COUNTY)" first,
+  // fall back to town alone, since a few small towns are unique statewide.
+  function rateHistory(town, county) {
+    if (!rates) return null;
+    var t = (town || '').toUpperCase().trim();
+    var tc = t + ' (' + (county || '').toUpperCase().trim() + ')';
+    var keys = Object.keys(rates), hit = null;
+    for (var i = 0; i < keys.length; i++) if (keys[i].toUpperCase().trim() === tc) { hit = rates[keys[i]]; break; }
+    if (!hit) for (var j = 0; j < keys.length; j++) if (keys[j].toUpperCase().trim() === t) { hit = rates[keys[j]]; break; }
+    if (!hit) return null;
+    var years = Object.keys(hit).map(Number).filter(function (y) { return y > 1990; }).sort();
+    if (years.length < 3) return null;
+    return years.map(function (y) { return { year: y, rate: +hit[String(y)] }; });
   }
 
   // ══════════════════════════════════════════════
@@ -1368,6 +1384,16 @@
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
       build: function (r) { return toolRelocation(r) + toolInvestorScreen(); }
+    },
+    {
+      k: 'trend', icon: 'fa-chart-line', title: 'Where is this bill headed?',
+      pro: 'Isolates the town\u2019s tax RATE trend from any reassessment or revaluation, so a buyer or ' +
+           'seller can see the budget-driven trajectory on its own.',
+      build: function (r) { return toolTaxTrajectory(r); },
+      sum: function (r) {
+        var t = trajectory(r);
+        return t ? (t.cagr >= 0 ? '+' : '') + (t.cagr * 100).toFixed(1) + '%/yr' : '';
+      }
     }
   ];
 
@@ -1397,7 +1423,8 @@
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
-    compare: ['relocation', 'investor-screen']
+    compare: ['relocation', 'investor-screen'],
+    trend: ['tax-trajectory']
   };
 
   window.hmToggle = function (k) {
@@ -1730,7 +1757,7 @@
   }
   initHomeChrome();
   startHome();
-  Object.assign(window, { el, money, esc, toast, getClient, meta, name, xfetch, median, loadRefData, ratioFor, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, sortControl, propMenu, byId, propUrl, isPro, locked, uniBody, appealBody, tip, metricStrip, cell, titleCase, reportLink, initTips, toolCard, qsPin, paintReport, sectionShell, scorecard, f, intelPoints, hf, summarySentence, ch123Block, untestableBlock, paintHomeChrome, paintHomeSidebarToggle, initHomeChrome, toolUniformityFor, toolAppealOddsFor, bootHome, startHome });
+  Object.assign(window, { el, money, esc, toast, getClient, meta, name, xfetch, median, loadRefData, ratioFor, rateHistory, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, sortControl, propMenu, byId, propUrl, isPro, locked, uniBody, appealBody, tip, metricStrip, cell, titleCase, reportLink, initTips, toolCard, qsPin, paintReport, sectionShell, scorecard, f, intelPoints, hf, summarySentence, ch123Block, untestableBlock, paintHomeChrome, paintHomeSidebarToggle, initHomeChrome, toolUniformityFor, toolAppealOddsFor, bootHome, startHome });
   [
     ['plUser', function () { return plUser; }],
     ['rows', function () { return rows; }],
