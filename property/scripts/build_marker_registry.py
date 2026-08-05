@@ -40,6 +40,7 @@ for f,l in [("ratio","Verified-sale assessment ratio"),("sample_size","Verified-
 for f,l,t,o in [
  ('watchdog_score','Watchdog Score','standard','watchdog-derived'),('fairness_score','Assessment Fairness Index','standard','watchdog-derived'),
  ('market_value_estimate','Watchdog market value estimate','standard','watchdog-derived'),('chapter123_position','Chapter 123 position','standard','watchdog-derived'),
+ ('effective_tax_rate','Effective tax rate on estimated market value','standard','watchdog-derived'),
  ('chapter123_lower_bound','Chapter 123 lower bound','pro','watchdog-derived'),('chapter123_upper_bound','Chapter 123 upper bound','pro','watchdog-derived'),
  ('assessment_drift','Assessment drift signal','pro','watchdog-derived'),('reassessment_risk','Reassessment risk score','pro','watchdog-derived'),
  ('improvement_ratio','Improvement-to-total ratio','pro','watchdog-derived'),('tax_trajectory','Tax trajectory','pro','watchdog-derived'),
