@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NJ Property Tax Fairness Index 2026 — Every Town Ranked | NJ Property Tax Relief</title>
-<meta name="description" content="See how fairly every one of New Jersey's 536 towns assesses property tax, ranked from most to least uniform, built from state Coefficient of Deviation and verified sale data.">
+<title>NJ Property Tax Fairness Index 2026 | Every Town Ranked | NJ Property Tax Relief</title>
+<meta name="description" content="Compare New Jersey municipalities with available assessment-uniformity data, ranked from most to least consistent using state Coefficient of Deviation and verified sale data.">
 <link rel="canonical" href="https://njpropertytaxrelief.com/property/fairness.html">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -15,8 +15,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/fairness.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805c">
+<link rel="stylesheet" href="/property/css/fairness.css?v=20260805b">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 </head>
@@ -35,7 +35,7 @@
             <div>
               <span class="top-eyebrow">Statewide data &middot; free</span>
               <h1>Fairness Index</h1>
-              <span>All 536 NJ towns, ranked by assessment uniformity</span>
+              <span>558 NJ tax districts with current uniformity data</span>
             </div>
           </div>
           <div class="top-acts">
@@ -62,9 +62,11 @@
           <span class="fi-count" id="fi-count"></span>
         </div>
 
+        <div id="fi-detail" class="fi-detail" style="display:none"></div>
+
         <div class="db-loading-panel" id="fi-loading">
           <div class="pl-spin"></div>
-          <div><b>Loading all 536 towns</b><span>Pulling the latest uniformity and verified sales data.</span></div>
+          <div><b>Loading statewide town data</b><span>Pulling the latest uniformity and verified sales data.</span></div>
         </div>
 
         <div class="db-error-panel" id="fi-error" style="display:none">
@@ -92,9 +94,9 @@
           <h4><i class="fas fa-circle-info"></i> How the score is built</h4>
           <p class="tl-p">Seventy percent of each town's score is its Coefficient of Deviation, the Division of
           Taxation's own measure of how consistently similar properties are assessed relative to each other
-          &mdash; the lower the coefficient, the more evenly the tax burden is spread within that town. Thirty
+          - the lower the coefficient, the more evenly the tax burden is spread within that town. Thirty
           percent is an assessment-currency component built from the drift between the town's officially
-          published assessment ratio and the ratio implied by its own recent state-verified sales &mdash; the
+          published assessment ratio and the ratio implied by its own recent state-verified sales. The
           smaller that gap, the more current the town's assessments actually are.</p>
           <p class="tl-note">A high score means a town assesses its own properties evenly and its numbers are
           current, not that its tax rate or total tax bill is low. It is not a ranking of towns to move to or
@@ -111,8 +113,9 @@
   </div>
 </main>
 
-<script src="/property/js/sidemenu.js?v=20260805a"></script>
-<script>
+<script src="/property/js/sidemenu.js?v=20260805b"></script>
+<script type="module">
+import '/property/js/dashboard/tools/town-intelligence.js?v=20260805a';
 (function () {
   'use strict';
   var rows = [];
@@ -133,30 +136,8 @@
     return String(s || '').charAt(0) + String(s || '').slice(1).toLowerCase();
   }
 
-  Promise.all([
-    fetch('/property/uniformity.json').then(function (r) { return r.json(); }),
-    fetch('/property/sr1a-ratios.json').then(function (r) { return r.json(); })
-  ]).then(function (results) {
-    var uni = (results[0] && results[0].districts) || {};
-    var sr1a = (results[1] && results[1].districts) || {};
-
-    Object.keys(uni).forEach(function (d) {
-      var u = uni[d], s = sr1a[d];
-      if (!u || u.score == null) return;
-
-      // Currency component: smaller drift between published and verified
-      // ratio means the town's numbers are more current. Drift runs roughly
-      // -0.15 to +0.15 in practice, so scale accordingly.
-      var currency = s && s.drift != null ? Math.max(0, 100 - Math.abs(s.drift) * 400) : null;
-      var score = currency != null ? Math.round(u.score * 0.7 + currency * 0.3) : Math.round(u.score);
-
-      rows.push({
-        district: d, name: u.name, county: u.county,
-        score: score, coefficient: u.coefficient,
-        drift: s ? s.drift : null,
-        band: bandFor(score)
-      });
-    });
+  try {
+    rows = townIntelAll();
 
     var counties = Array.from(new Set(rows.map(function (r) { return r.county; }))).sort();
     var sel = document.getElementById('fi-county');
@@ -169,11 +150,26 @@
     document.getElementById('fi-loading').style.display = 'none';
     document.getElementById('fi-table-wrap').style.display = 'block';
     render();
-  }).catch(function (err) {
+    var requested = new URLSearchParams(location.search).get('district');
+    if (requested && townIntelFor(requested)) openTown(requested, false);
+  } catch (err) {
     document.getElementById('fi-loading').style.display = 'none';
     document.getElementById('fi-error').style.display = 'flex';
     console.error(err);
-  });
+  }
+
+  function openTown(district, updateUrl) {
+    var row = townIntelFor(district), host = document.getElementById('fi-detail');
+    if (!row || !host) return;
+    host.innerHTML = townIntelligenceCard(district) +
+      '<button class="fi-copy" type="button" id="fi-copy"><i class="fas fa-link"></i> Copy town report link</button>';
+    host.style.display = 'block';
+    if (updateUrl !== false) history.replaceState(null, '', '?district=' + encodeURIComponent(district));
+    document.getElementById('fi-copy').onclick = function () {
+      navigator.clipboard.writeText(location.href).then(function () { this.textContent = 'Link copied'; }.bind(this));
+    };
+    host.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 
   function render() {
     var q = document.getElementById('fi-search').value.trim().toUpperCase();
@@ -194,15 +190,19 @@
     document.getElementById('fi-count').textContent = filtered.length + ' of ' + rows.length + ' towns';
 
     document.getElementById('fi-body').innerHTML = filtered.map(function (r, i) {
-      return '<tr>' +
-        '<td class="fi-rank">' + (i + 1) + '</td>' +
+      return '<tr tabindex="0" data-district="' + r.district + '" aria-label="Open ' + esc(r.name) + ' town report">' +
+        '<td class="fi-rank">' + r.stateRank + '</td>' +
         '<td class="fi-town"><b>' + esc(r.name) + '</b><span>' + esc(titleCase(r.county)) + ' County</span></td>' +
         '<td class="n fi-score">' + r.score + '</td>' +
-        '<td class="n">' + (r.coefficient != null ? r.coefficient.toFixed(1) : '\u2014') + '</td>' +
-        '<td class="n">' + (r.drift != null ? (r.drift > 0 ? '+' : '') + (r.drift * 100).toFixed(1) + '%' : '\u2014') + '</td>' +
+        '<td class="n">' + (r.coefficient != null ? r.coefficient.toFixed(1) : 'Not available') + '</td>' +
+        '<td class="n">' + (r.drift != null ? (r.drift > 0 ? '+' : '') + (r.drift * 100).toFixed(1) + '%' : 'Not available') + '</td>' +
         '<td><span class="fi-badge ' + r.band + '">' + bandLabel(r.band) + '</span></td>' +
       '</tr>';
     }).join('');
+    document.querySelectorAll('#fi-body tr[data-district]').forEach(function (tr) {
+      tr.addEventListener('click', function () { openTown(tr.getAttribute('data-district')); });
+      tr.addEventListener('keydown', function (event) { if (event.key === 'Enter') openTown(tr.getAttribute('data-district')); });
+    });
   }
 
   document.getElementById('fi-search').addEventListener('input', render);
@@ -210,7 +210,7 @@
   document.querySelectorAll('.fi-table th[data-k]').forEach(function (th) {
     th.addEventListener('click', function () {
       var k = th.getAttribute('data-k');
-      if (k === 'rank') return;
+      if (k === 'rank') { sortKey = 'score'; sortDir = -1; render(); return; }
       if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = k === 'name' ? 1 : -1; }
       render();
     });
@@ -223,7 +223,7 @@
   "@context": "https://schema.org",
   "@type": "Dataset",
   "name": "New Jersey Property Tax Fairness Index 2026",
-  "description": "A ranking of all 536 New Jersey municipalities by property assessment uniformity, built from state Coefficient of Deviation and verified sales data.",
+  "description": "A ranking of New Jersey tax districts with available property-assessment uniformity data, built from state Coefficient of Deviation and verified sales data.",
   "url": "https://njpropertytaxrelief.com/property/fairness.html",
   "creator": { "@type": "Organization", "name": "njpropertytaxrelief.com" }
 }

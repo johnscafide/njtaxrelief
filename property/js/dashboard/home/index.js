@@ -5,11 +5,12 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260805i';
+  var HOME_MODULE_VERSION = '20260805j';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
-    'buyer-closing-costs': ['uniformity', 'revaluation-radar'],
+    'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
+    'tax-pressure-simulator': ['town-intelligence'],
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
     'investor-screen': ['uniformity'],
@@ -1347,11 +1348,12 @@
            'in the municipality regardless of the individual property.',
       build: function (r) {
         var u = uniFor(r);
-        return (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
+        return townIntelligenceCard(r) + (u ? uniBody(r, u) : '') + toolClassMix(r) + toolAbatement(r);
       },
       sum: function (r) {
-        var u = uniFor(r);
-        return u ? 'Uniformity ' + u.score + ' of 100, ' + u.band : '';
+        var t = townIntelFor(r), u = uniFor(r);
+        return t ? 'Fairness ' + t.score + ', statewide rank #' + t.stateRank :
+          (u ? 'Uniformity ' + u.score + ' of 100, ' + u.band : '');
       }
     },
     {
@@ -1389,7 +1391,7 @@
       k: 'trend', icon: 'fa-chart-line', title: 'Where is this bill headed?',
       pro: 'Isolates the town\u2019s tax RATE trend from any reassessment or revaluation, so a buyer or ' +
            'seller can see the budget-driven trajectory on its own.',
-      build: function (r) { return toolTaxTrajectory(r); },
+      build: function (r) { return toolTaxTrajectory(r) + toolTaxPressure(r); },
       sum: function (r) {
         var t = trajectory(r);
         return t ? (t.cagr >= 0 ? '+' : '') + (t.cagr * 100).toFixed(1) + '%/yr' : '';
@@ -1419,12 +1421,12 @@
     fair: ['improvement-ratio'],
     kept: ['reassessment-risk'],
     reval: ['revaluation-radar'],
-    town: ['property-class-mix', 'abatement-exposure'],
+    town: ['town-intelligence', 'property-class-mix', 'abatement-exposure'],
     file: ['appeal-packet'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
     compare: ['relocation', 'investor-screen'],
-    trend: ['tax-trajectory']
+    trend: ['tax-trajectory', 'tax-pressure-simulator']
   };
 
   window.hmToggle = function (k) {
@@ -1722,7 +1724,7 @@
         // These three modules supply calculations used while the report is
         // first painted. The remaining report tools stay lazy-loaded when
         // their corresponding sections are opened.
-        loadHomeTools(['uniformity', 'revaluation-radar', 'reassessment-risk']),
+        loadHomeTools(['uniformity', 'town-intelligence', 'revaluation-radar', 'reassessment-risk']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         loadRefData(), loadSR1A()

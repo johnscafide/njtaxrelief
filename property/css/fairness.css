@@ -5,7 +5,6 @@
    text styles) comes from dashboard.css. This file only covers
    what's unique to this page: the search/filter bar and badges.
    ============================================================ */
-
 .fi-controls {
   display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
   margin-bottom: 18px;
@@ -39,3 +38,9 @@
 @media (max-width: 760px) {
   .fi-table .n:nth-child(4), .fi-table .n:nth-child(5) { display: none; }
 }
+.fi-detail { scroll-margin-top:110px; margin:18px 0 24px; }
+.fi-detail .ti-report { box-shadow:0 14px 38px rgba(13,38,72,.08); }
+.fi-copy { background:#fff; border:1px solid #d5e0e8; border-radius:9px; color:#173e75; cursor:pointer; font:800 11px inherit; margin-top:9px; padding:10px 13px; }
+.fi-copy i { color:#078486; margin-right:6px; }
+.fi-table tbody tr { cursor:pointer; }
+.fi-table tbody tr:focus { outline:3px solid rgba(7,132,134,.25); outline-offset:-3px; }

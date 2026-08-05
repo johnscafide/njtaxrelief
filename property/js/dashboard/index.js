@@ -5,13 +5,14 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260805f';
+  var MODULE_VERSION = '20260805g';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
     'watchdog-score': ['uniformity', 'revaluation-radar'],
     'revaluation-radar': ['uniformity'],
-    'buyer-closing-costs': ['uniformity', 'revaluation-radar'],
+    'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
+    'town-risk-matrix': ['town-intelligence', 'watchdog-score'],
     'investor-screen': ['uniformity'],
     'appeal-packet': ['uniformity'],
     'relocation': ['uniformity'],
@@ -19,8 +20,8 @@
     'property-class-mix': ['town-profile']
   };
   var moduleGroups = {
-    initial: ['uniformity', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
-    pro: ['town-percentile', 'portfolio-analysis', 'property-comparison', 'export']
+    initial: ['uniformity', 'town-intelligence', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
+    pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'export']
   };
 
   function loadToolModule(name) {
@@ -524,7 +525,10 @@
     valHigh:   { label: 'Highest value',    fn: function (a, b) { return mv(b) - mv(a); } },
     valLow:    { label: 'Lowest value',     fn: function (a, b) { return mv(a) - mv(b); } },
     taxHigh:   { label: 'Highest taxes',    fn: function (a, b) { return (+b.last_year_tax || 0) - (+a.last_year_tax || 0); } },
-    taxLow:    { label: 'Lowest taxes',     fn: function (a, b) { return (+a.last_year_tax || 0) - (+b.last_year_tax || 0); } }
+    taxLow:    { label: 'Lowest taxes',     fn: function (a, b) { return (+a.last_year_tax || 0) - (+b.last_year_tax || 0); } },
+    fairHigh:  { label: 'Fairest town',     fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (y ? y.score : -1) - (x ? x.score : -1); } },
+    fairLow:   { label: 'Least fair town',  fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (x ? x.score : 101) - (y ? y.score : 101); } },
+    rateHigh:  { label: 'Fastest rate rise', fn: function (a, b) { var x = townIntelFor(a), y = townIntelFor(b); return (y && y.trajectory ? y.trajectory.cagr : -1) - (x && x.trajectory ? x.trajectory.cagr : -1); } }
   };
   function mv(r) { var m = marketValue(r); return m ? m.v : 0; }
 
@@ -810,6 +814,9 @@
       '</tr></thead><tbody>' +
         row('Assessed', function (r) { return +r.assessed || null; }) +
         row('Annual tax', function (r) { return +r.last_year_tax || null; }, 'low') +
+        row('Town fairness (0-100)', function (r) { var t = townIntelFor(r); return t ? t.score : null; }, 'high') +
+        row('Statewide town rank', function (r) { var t = townIntelFor(r); return t ? '#' + t.stateRank + ' of ' + t.stateTotal : null; }) +
+        row('Tax-rate trend', function (r) { var t = townIntelFor(r); return t && t.trajectory ? (t.trajectory.cagr >= 0 ? '+' : '') + (t.trajectory.cagr * 100).toFixed(1) + '% / year' : null; }, 'low') +
         row('Market value', function (r) { var m = marketValue(r); return m ? Math.round(m.v) : null; }, 'high') +
         row('Effective rate', function (r) { return r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : null; }) +
         row('Town ratio', function (r) { var s = sr1aFor(r); return s ? (s.ratio * 100).toFixed(1) + '%' : null; }) +
@@ -1220,6 +1227,7 @@ function brief() {
             '<span><b>' + money(r.last_year_tax || 0) + '</b><small>Tax / year</small></span>' +
             '<span><b>' + market + '</b><small>Market value</small></span>' +
           '</div>' +
+          townIntelSummary(r) +
         '</div>' +
       '</article>' +
       '<div class="pr-card-actions">' +
@@ -1253,6 +1261,7 @@ function brief() {
     var body = rows.map(function (r) {
       var c = chapter123(r);
       var s = sr1aFor(r);
+      var ti = townIntelFor(r);
       return '<tr' + (c && c.hasCase ? ' class="hot"' : '') + '>' +
         '<td class="a">' + esc(r.address) + '</td>' +
         '<td>' + esc(r.town || '') + '</td>' +
@@ -1260,6 +1269,9 @@ function brief() {
         '<td class="n">' + (r.assessed ? r.assessed.toLocaleString() : '-') + '</td>' +
         '<td class="n">' + (r.last_year_tax ? Math.round(r.last_year_tax).toLocaleString() : '-') + '</td>' +
         '<td class="n">' + (r.effective_rate ? (+r.effective_rate).toFixed(2) : '-') + '</td>' +
+        '<td class="n">' + (ti ? ti.score : '-') + '</td>' +
+        '<td class="n">' + (ti ? ti.stateRank : '-') + '</td>' +
+        '<td class="n">' + (ti && ti.trajectory ? (ti.trajectory.cagr * 100).toFixed(1) : '-') + '</td>' +
         '<td class="n">' + (s ? (s.ratio * 100).toFixed(1) : (c ? (c.ratio * 100).toFixed(1) : '-')) + '</td>' +
         '<td class="n">' + (s ? s.n : '-') + '</td>' +
         '<td class="n">' + (c ? rnd(c.market).toLocaleString() : '-') + '</td>' +
@@ -1272,8 +1284,8 @@ function brief() {
     }).join('');
 
     return '<div class="pro-wrap"><table class="pro"><thead><tr>' +
-      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
-        .map(function (h, i) { return '<th' + (i >= 3 && i <= 12 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
+      ['Address','Town','Blk/Lot','Assessed','Tax','Eff%','Fairness','NJ rank','Rate trend%','Ratio%','n','Market','Supported','Ch123 limit','Over','Saving/yr','Verified']
+        .map(function (h, i) { return '<th' + (i >= 3 && i <= 15 ? ' class="n"' : '') + '>' + h + '</th>'; }).join('') +
       '</tr></thead><tbody>' + body + '</tbody></table></div>' +
       '<p class="pro-note">Ratio is measured from state verified arm\u2019s length sales where available, ' +
       'otherwise the published Director\u2019s Ratio. n is the number of verified sales behind it. ' +
@@ -1459,8 +1471,23 @@ function brief() {
       (paid
         ? '<span class="ai-star pro" title="Pro tier"><i class="fas fa-star"></i></span>'
         : '<span class="ai-star" title="Standard account"><i class="far fa-star"></i></span>') +
-      brief() +
+      brief() + townIntelAgentPoints() +
     '</section>';
+  }
+
+  function townIntelAgentPoints() {
+    var intel = rows.map(function (r) { var t = townIntelFor(r); return t ? { r: r, t: t } : null; }).filter(Boolean);
+    if (!intel.length) return '';
+    var leastFair = intel.slice().sort(function (a, b) { return a.t.score - b.t.score; })[0];
+    var fastest = intel.filter(function (x) { return x.t.trajectory; })
+      .sort(function (a, b) { return b.t.trajectory.cagr - a.t.trajectory.cagr; })[0];
+    return '<div class="ai-town-intel"><b>Town signals</b>' +
+      '<p><i class="fas fa-scale-balanced"></i><span><strong>' + esc(leastFair.r.address) + '</strong> is in ' +
+        esc(leastFair.t.name) + ', ranked #' + leastFair.t.stateRank + ' of ' + leastFair.t.stateTotal +
+        ' statewide for assessment fairness.</span></p>' +
+      (fastest ? '<p><i class="fas fa-chart-line"></i><span><strong>' + esc(fastest.r.address) + '</strong> has the fastest municipal rate trend in this list at ' +
+        (fastest.t.trajectory.cagr >= 0 ? '+' : '') + (fastest.t.trajectory.cagr * 100).toFixed(1) + '% per year.</span></p>' : '') +
+      '<a href="/property/town-compare.html">Compare municipalities</a></div>';
   }
 
 
@@ -1756,7 +1783,7 @@ function brief() {
       var body;
       if (isPro()) {
         body = proTable() +
-          [toolPortfolio(), toolCompare(), toolExport()].filter(Boolean).join('');
+          [toolPortfolio(), toolTownRiskMatrix(), toolCompare(), toolExport()].filter(Boolean).join('');
       } else {
         body =
           proLocked('The full table',
