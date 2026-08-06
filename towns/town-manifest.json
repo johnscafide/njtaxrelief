@@ -1,0 +1,3955 @@
+{
+  "generated_at": "2026-08-06",
+  "total_towns": 564,
+  "counties": 21,
+  "pages": [
+    {
+      "district": "0101",
+      "name": "Absecon City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/absecon-city.html",
+      "rate_label": "3.517% \u00b7 2025 rate"
+    },
+    {
+      "district": "0102",
+      "name": "Atlantic City City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/atlantic-city-city.html",
+      "rate_label": "3.380% \u00b7 2025 rate"
+    },
+    {
+      "district": "0103",
+      "name": "Brigantine City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/brigantine-city.html",
+      "rate_label": "1.953% \u00b7 2025 rate"
+    },
+    {
+      "district": "0104",
+      "name": "Buena Borough",
+      "county": "Atlantic",
+      "path": "towns/atlantic/buena-borough.html",
+      "rate_label": "3.408% \u00b7 2025 rate"
+    },
+    {
+      "district": "0105",
+      "name": "Buena Vista Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/buena-vista-township.html",
+      "rate_label": "3.018% \u00b7 2025 rate"
+    },
+    {
+      "district": "0106",
+      "name": "Corbin City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/corbin-city.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0107",
+      "name": "Egg Harbor City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/egg-harbor-city.html",
+      "rate_label": "5.568% \u00b7 2025 rate"
+    },
+    {
+      "district": "0108",
+      "name": "Egg Harbor Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/egg-harbor-township.html",
+      "rate_label": "3.401% \u00b7 2025 rate"
+    },
+    {
+      "district": "0109",
+      "name": "Estell Manor City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/estell-manor-city.html",
+      "rate_label": "2.949% \u00b7 2025 rate"
+    },
+    {
+      "district": "0110",
+      "name": "Folsom Borough",
+      "county": "Atlantic",
+      "path": "towns/atlantic/folsom-borough.html",
+      "rate_label": "2.349% \u00b7 2025 rate"
+    },
+    {
+      "district": "0111",
+      "name": "Galloway Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/galloway-township.html",
+      "rate_label": "3.390% \u00b7 2025 rate"
+    },
+    {
+      "district": "0112",
+      "name": "Hamilton Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/hamilton-township.html",
+      "rate_label": "3.520% \u00b7 2025 rate"
+    },
+    {
+      "district": "0113",
+      "name": "Hammonton Town",
+      "county": "Atlantic",
+      "path": "towns/atlantic/hammonton-town.html",
+      "rate_label": "2.817% \u00b7 2025 rate"
+    },
+    {
+      "district": "0114",
+      "name": "Linwood City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/linwood-city.html",
+      "rate_label": "3.929% \u00b7 2025 rate"
+    },
+    {
+      "district": "0115",
+      "name": "Longport Borough",
+      "county": "Atlantic",
+      "path": "towns/atlantic/longport-borough.html",
+      "rate_label": "1.111% \u00b7 2025 rate"
+    },
+    {
+      "district": "0116",
+      "name": "Margate City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/margate-city.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0117",
+      "name": "Mullica Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/mullica-township.html",
+      "rate_label": "3.966% \u00b7 2025 rate"
+    },
+    {
+      "district": "0118",
+      "name": "Northfield City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/northfield-city.html",
+      "rate_label": "3.778% \u00b7 2025 rate"
+    },
+    {
+      "district": "0119",
+      "name": "Pleasantville City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/pleasantville-city.html",
+      "rate_label": "5.421% \u00b7 2025 rate"
+    },
+    {
+      "district": "0120",
+      "name": "Port Republic City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/port-republic-city.html",
+      "rate_label": "3.804% \u00b7 2025 rate"
+    },
+    {
+      "district": "0121",
+      "name": "Somers Point City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/somers-point-city.html",
+      "rate_label": "3.722% \u00b7 2025 rate"
+    },
+    {
+      "district": "0122",
+      "name": "Ventnor City",
+      "county": "Atlantic",
+      "path": "towns/atlantic/ventnor-city.html",
+      "rate_label": "2.824% \u00b7 2025 rate"
+    },
+    {
+      "district": "0123",
+      "name": "Weymouth Township",
+      "county": "Atlantic",
+      "path": "towns/atlantic/weymouth-township.html",
+      "rate_label": "3.108% \u00b7 2025 rate"
+    },
+    {
+      "district": "0201",
+      "name": "Allendale Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/allendale-borough.html",
+      "rate_label": "2.030% \u00b7 2025 rate"
+    },
+    {
+      "district": "0202",
+      "name": "Alpine Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/alpine-borough.html",
+      "rate_label": "0.837% \u00b7 2025 rate"
+    },
+    {
+      "district": "0203",
+      "name": "Bergenfield Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/bergenfield-borough.html",
+      "rate_label": "3.738% \u00b7 2025 rate"
+    },
+    {
+      "district": "0204",
+      "name": "Bogota Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/bogota-borough.html",
+      "rate_label": "2.398% \u00b7 2025 rate"
+    },
+    {
+      "district": "0205",
+      "name": "Carlstadt Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/carlstadt-borough.html",
+      "rate_label": "1.705% \u00b7 2025 rate"
+    },
+    {
+      "district": "0206",
+      "name": "Cliffside Park Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/cliffside-park-borough.html",
+      "rate_label": "2.836% \u00b7 2025 rate"
+    },
+    {
+      "district": "0207",
+      "name": "Closter Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/closter-borough.html",
+      "rate_label": "2.072% \u00b7 2025 rate"
+    },
+    {
+      "district": "0208",
+      "name": "Cresskill Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/cresskill-borough.html",
+      "rate_label": "2.269% \u00b7 2025 rate"
+    },
+    {
+      "district": "0209",
+      "name": "Demarest Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/demarest-borough.html",
+      "rate_label": "1.805% \u00b7 2025 rate"
+    },
+    {
+      "district": "0210",
+      "name": "Dumont Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/dumont-borough.html",
+      "rate_label": "2.340% \u00b7 2025 rate"
+    },
+    {
+      "district": "0212",
+      "name": "East Rutherford Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/east-rutherford-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0213",
+      "name": "Edgewater Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/edgewater-borough.html",
+      "rate_label": "1.645% \u00b7 2025 rate"
+    },
+    {
+      "district": "0211",
+      "name": "Elmwood Park Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/elmwood-park-borough.html",
+      "rate_label": "3.202% \u00b7 2025 rate"
+    },
+    {
+      "district": "0214",
+      "name": "Emerson Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/emerson-borough.html",
+      "rate_label": "3.420% \u00b7 2025 rate"
+    },
+    {
+      "district": "0215",
+      "name": "Englewood City",
+      "county": "Bergen",
+      "path": "towns/bergen/englewood-city.html",
+      "rate_label": "3.116% \u00b7 2025 rate"
+    },
+    {
+      "district": "0216",
+      "name": "Englewood Cliffs Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/englewood-cliffs-borough.html",
+      "rate_label": "1.165% \u00b7 2025 rate"
+    },
+    {
+      "district": "0217",
+      "name": "Fair Lawn Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/fair-lawn-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0218",
+      "name": "Fairview Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/fairview-borough.html",
+      "rate_label": "2.275% \u00b7 2025 rate"
+    },
+    {
+      "district": "0219",
+      "name": "Fort Lee Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/fort-lee-borough.html",
+      "rate_label": "2.700% \u00b7 2025 rate"
+    },
+    {
+      "district": "0220",
+      "name": "Franklin Lakes Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/franklin-lakes-borough.html",
+      "rate_label": "1.904% \u00b7 2025 rate"
+    },
+    {
+      "district": "0221",
+      "name": "Garfield City",
+      "county": "Bergen",
+      "path": "towns/bergen/garfield-city.html",
+      "rate_label": "3.479% \u00b7 2025 rate"
+    },
+    {
+      "district": "0222",
+      "name": "Glen Rock Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/glen-rock-borough.html",
+      "rate_label": "3.407% \u00b7 2025 rate"
+    },
+    {
+      "district": "0223",
+      "name": "Hackensack City",
+      "county": "Bergen",
+      "path": "towns/bergen/hackensack-city.html",
+      "rate_label": "3.209% \u00b7 2025 rate"
+    },
+    {
+      "district": "0224",
+      "name": "Harrington Park Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/harrington-park-borough.html",
+      "rate_label": "3.271% \u00b7 2025 rate"
+    },
+    {
+      "district": "0225",
+      "name": "Hasbrouck Heights Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/hasbrouck-heights-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0226",
+      "name": "Haworth Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/haworth-borough.html",
+      "rate_label": "3.225% \u00b7 2025 rate"
+    },
+    {
+      "district": "0227",
+      "name": "Hillsdale Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/hillsdale-borough.html",
+      "rate_label": "3.330% \u00b7 2025 rate"
+    },
+    {
+      "district": "0228",
+      "name": "Ho-Ho-Kus Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/ho-ho-kus-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0229",
+      "name": "Leonia Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/leonia-borough.html",
+      "rate_label": "3.609% \u00b7 2025 rate"
+    },
+    {
+      "district": "0230",
+      "name": "Little Ferry Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/little-ferry-borough.html",
+      "rate_label": "2.436% \u00b7 2025 rate"
+    },
+    {
+      "district": "0231",
+      "name": "Lodi Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/lodi-borough.html",
+      "rate_label": "3.540% \u00b7 2025 rate"
+    },
+    {
+      "district": "0232",
+      "name": "Lyndhurst Township",
+      "county": "Bergen",
+      "path": "towns/bergen/lyndhurst-township.html",
+      "rate_label": "2.225% \u00b7 2025 rate"
+    },
+    {
+      "district": "0233",
+      "name": "Mahwah Township",
+      "county": "Bergen",
+      "path": "towns/bergen/mahwah-township.html",
+      "rate_label": "2.127% \u00b7 2025 rate"
+    },
+    {
+      "district": "0234",
+      "name": "Maywood Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/maywood-borough.html",
+      "rate_label": "2.156% \u00b7 2025 rate"
+    },
+    {
+      "district": "0235",
+      "name": "Midland Park Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/midland-park-borough.html",
+      "rate_label": "3.688% \u00b7 2025 rate"
+    },
+    {
+      "district": "0236",
+      "name": "Montvale Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/montvale-borough.html",
+      "rate_label": "2.552% \u00b7 2025 rate"
+    },
+    {
+      "district": "0237",
+      "name": "Moonachie Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/moonachie-borough.html",
+      "rate_label": "1.769% \u00b7 2025 rate"
+    },
+    {
+      "district": "0238",
+      "name": "New Milford Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/new-milford-borough.html",
+      "rate_label": "2.178% \u00b7 2025 rate"
+    },
+    {
+      "district": "0239",
+      "name": "North Arlington Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/north-arlington-borough.html",
+      "rate_label": "2.236% \u00b7 2025 rate"
+    },
+    {
+      "district": "0240",
+      "name": "Northvale Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/northvale-borough.html",
+      "rate_label": "3.328% \u00b7 2025 rate"
+    },
+    {
+      "district": "0241",
+      "name": "Norwood Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/norwood-borough.html",
+      "rate_label": "2.892% \u00b7 2025 rate"
+    },
+    {
+      "district": "0242",
+      "name": "Oakland Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/oakland-borough.html",
+      "rate_label": "2.185% \u00b7 2025 rate"
+    },
+    {
+      "district": "0243",
+      "name": "Old Tappan Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/old-tappan-borough.html",
+      "rate_label": "2.346% \u00b7 2025 rate"
+    },
+    {
+      "district": "0244",
+      "name": "Oradell Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/oradell-borough.html",
+      "rate_label": "2.295% \u00b7 2025 rate"
+    },
+    {
+      "district": "0245",
+      "name": "Palisades Park Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/palisades-park-borough.html",
+      "rate_label": "1.463% \u00b7 2025 rate"
+    },
+    {
+      "district": "0246",
+      "name": "Paramus Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/paramus-borough.html",
+      "rate_label": "1.499% \u00b7 2025 rate"
+    },
+    {
+      "district": "0247",
+      "name": "Park Ridge Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/park-ridge-borough.html",
+      "rate_label": "3.333% \u00b7 2025 rate"
+    },
+    {
+      "district": "0248",
+      "name": "Ramsey Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/ramsey-borough.html",
+      "rate_label": "2.059% \u00b7 2025 rate"
+    },
+    {
+      "district": "0249",
+      "name": "Ridgefield Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/ridgefield-borough.html",
+      "rate_label": "1.694% \u00b7 2025 rate"
+    },
+    {
+      "district": "0250",
+      "name": "Ridgefield Park Village",
+      "county": "Bergen",
+      "path": "towns/bergen/ridgefield-park-village.html",
+      "rate_label": "3.061% \u00b7 2025 rate"
+    },
+    {
+      "district": "0251",
+      "name": "Ridgewood Village",
+      "county": "Bergen",
+      "path": "towns/bergen/ridgewood-village.html",
+      "rate_label": "2.890% \u00b7 2025 rate"
+    },
+    {
+      "district": "0252",
+      "name": "River Edge Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/river-edge-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0253",
+      "name": "River Vale Township",
+      "county": "Bergen",
+      "path": "towns/bergen/river-vale-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0254",
+      "name": "Rochelle Park Township",
+      "county": "Bergen",
+      "path": "towns/bergen/rochelle-park-township.html",
+      "rate_label": "2.934% \u00b7 2025 rate"
+    },
+    {
+      "district": "0255",
+      "name": "Rockleigh Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/rockleigh-borough.html",
+      "rate_label": "0.839% \u00b7 2025 rate"
+    },
+    {
+      "district": "0256",
+      "name": "Rutherford Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/rutherford-borough.html",
+      "rate_label": "3.200% \u00b7 2025 rate"
+    },
+    {
+      "district": "0257",
+      "name": "Saddle Brook Township",
+      "county": "Bergen",
+      "path": "towns/bergen/saddle-brook-township.html",
+      "rate_label": "2.373% \u00b7 2025 rate"
+    },
+    {
+      "district": "0258",
+      "name": "Saddle River Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/saddle-river-borough.html",
+      "rate_label": "1.067% \u00b7 2025 rate"
+    },
+    {
+      "district": "0259",
+      "name": "South Hackensack Township",
+      "county": "Bergen",
+      "path": "towns/bergen/south-hackensack-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0260",
+      "name": "Teaneck Township",
+      "county": "Bergen",
+      "path": "towns/bergen/teaneck-township.html",
+      "rate_label": "2.292% \u00b7 2025 rate"
+    },
+    {
+      "district": "0261",
+      "name": "Tenafly Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/tenafly-borough.html",
+      "rate_label": "2.973% \u00b7 2025 rate"
+    },
+    {
+      "district": "0262",
+      "name": "Teterboro Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/teterboro-borough.html",
+      "rate_label": "1.050% \u00b7 2025 rate"
+    },
+    {
+      "district": "0263",
+      "name": "Upper Saddle River Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/upper-saddle-river-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0264",
+      "name": "Waldwick Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/waldwick-borough.html",
+      "rate_label": "2.295% \u00b7 2025 rate"
+    },
+    {
+      "district": "0265",
+      "name": "Wallington Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/wallington-borough.html",
+      "rate_label": "1.950% \u00b7 2025 rate"
+    },
+    {
+      "district": "0266",
+      "name": "Washington Township",
+      "county": "Bergen",
+      "path": "towns/bergen/washington-township.html",
+      "rate_label": "2.859% \u00b7 2025 rate"
+    },
+    {
+      "district": "0267",
+      "name": "Westwood Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/westwood-borough.html",
+      "rate_label": "2.162% \u00b7 2025 rate"
+    },
+    {
+      "district": "0269",
+      "name": "Wood-Ridge Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/wood-ridge-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0268",
+      "name": "Woodcliff Lake Borough",
+      "county": "Bergen",
+      "path": "towns/bergen/woodcliff-lake-borough.html",
+      "rate_label": "2.186% \u00b7 2025 rate"
+    },
+    {
+      "district": "0270",
+      "name": "Wyckoff Township",
+      "county": "Bergen",
+      "path": "towns/bergen/wyckoff-township.html",
+      "rate_label": "2.026% \u00b7 2025 rate"
+    },
+    {
+      "district": "0301",
+      "name": "Bass River Township",
+      "county": "Burlington",
+      "path": "towns/burlington/bass-river-township.html",
+      "rate_label": "2.237% \u00b7 2025 rate"
+    },
+    {
+      "district": "0302",
+      "name": "Beverly City",
+      "county": "Burlington",
+      "path": "towns/burlington/beverly-city.html",
+      "rate_label": "4.957% \u00b7 2025 rate"
+    },
+    {
+      "district": "0303",
+      "name": "Bordentown City",
+      "county": "Burlington",
+      "path": "towns/burlington/bordentown-city.html",
+      "rate_label": "3.888% \u00b7 2025 rate"
+    },
+    {
+      "district": "0304",
+      "name": "Bordentown Township",
+      "county": "Burlington",
+      "path": "towns/burlington/bordentown-township.html",
+      "rate_label": "3.469% \u00b7 2025 rate"
+    },
+    {
+      "district": "0305",
+      "name": "Burlington City",
+      "county": "Burlington",
+      "path": "towns/burlington/burlington-city.html",
+      "rate_label": "4.441% \u00b7 2025 rate"
+    },
+    {
+      "district": "0306",
+      "name": "Burlington Township",
+      "county": "Burlington",
+      "path": "towns/burlington/burlington-township.html",
+      "rate_label": "2.944% \u00b7 2025 rate"
+    },
+    {
+      "district": "0307",
+      "name": "Chesterfield Township",
+      "county": "Burlington",
+      "path": "towns/burlington/chesterfield-township.html",
+      "rate_label": "3.410% \u00b7 2025 rate"
+    },
+    {
+      "district": "0308",
+      "name": "Cinnaminson Township",
+      "county": "Burlington",
+      "path": "towns/burlington/cinnaminson-township.html",
+      "rate_label": "3.669% \u00b7 2025 rate"
+    },
+    {
+      "district": "0309",
+      "name": "Delanco Township",
+      "county": "Burlington",
+      "path": "towns/burlington/delanco-township.html",
+      "rate_label": "3.583% \u00b7 2025 rate"
+    },
+    {
+      "district": "0310",
+      "name": "Delran Township",
+      "county": "Burlington",
+      "path": "towns/burlington/delran-township.html",
+      "rate_label": "3.845% \u00b7 2025 rate"
+    },
+    {
+      "district": "0311",
+      "name": "Eastampton Township",
+      "county": "Burlington",
+      "path": "towns/burlington/eastampton-township.html",
+      "rate_label": "3.459% \u00b7 2025 rate"
+    },
+    {
+      "district": "0312",
+      "name": "Edgewater Park Township",
+      "county": "Burlington",
+      "path": "towns/burlington/edgewater-park-township.html",
+      "rate_label": "3.345% \u00b7 2025 rate"
+    },
+    {
+      "district": "0313",
+      "name": "Evesham Township",
+      "county": "Burlington",
+      "path": "towns/burlington/evesham-township.html",
+      "rate_label": "3.451% \u00b7 2025 rate"
+    },
+    {
+      "district": "0314",
+      "name": "Fieldsboro Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/fieldsboro-borough.html",
+      "rate_label": "3.020% \u00b7 2025 rate"
+    },
+    {
+      "district": "0315",
+      "name": "Florence Township",
+      "county": "Burlington",
+      "path": "towns/burlington/florence-township.html",
+      "rate_label": "2.790% \u00b7 2025 rate"
+    },
+    {
+      "district": "0316",
+      "name": "Hainesport Township",
+      "county": "Burlington",
+      "path": "towns/burlington/hainesport-township.html",
+      "rate_label": "2.948% \u00b7 2025 rate"
+    },
+    {
+      "district": "0317",
+      "name": "Lumberton Township",
+      "county": "Burlington",
+      "path": "towns/burlington/lumberton-township.html",
+      "rate_label": "3.039% \u00b7 2025 rate"
+    },
+    {
+      "district": "0318",
+      "name": "Mansfield Township",
+      "county": "Burlington",
+      "path": "towns/burlington/mansfield-township.html",
+      "rate_label": "3.222% \u00b7 2025 rate"
+    },
+    {
+      "district": "0319",
+      "name": "Maple Shade Township",
+      "county": "Burlington",
+      "path": "towns/burlington/maple-shade-township.html",
+      "rate_label": "3.958% \u00b7 2025 rate"
+    },
+    {
+      "district": "0321",
+      "name": "Medford Lakes Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/medford-lakes-borough.html",
+      "rate_label": "4.023% \u00b7 2025 rate"
+    },
+    {
+      "district": "0320",
+      "name": "Medford Township",
+      "county": "Burlington",
+      "path": "towns/burlington/medford-township.html",
+      "rate_label": "3.754% \u00b7 2025 rate"
+    },
+    {
+      "district": "0322",
+      "name": "Moorestown Township",
+      "county": "Burlington",
+      "path": "towns/burlington/moorestown-township.html",
+      "rate_label": "2.813% \u00b7 2025 rate"
+    },
+    {
+      "district": "0323",
+      "name": "Mount Holly Township",
+      "county": "Burlington",
+      "path": "towns/burlington/mount-holly-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0324",
+      "name": "Mount Laurel Township",
+      "county": "Burlington",
+      "path": "towns/burlington/mount-laurel-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0325",
+      "name": "New Hanover Township",
+      "county": "Burlington",
+      "path": "towns/burlington/new-hanover-township.html",
+      "rate_label": "3.220% \u00b7 2025 rate"
+    },
+    {
+      "district": "0326",
+      "name": "North Hanover Township",
+      "county": "Burlington",
+      "path": "towns/burlington/north-hanover-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0327",
+      "name": "Palmyra Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/palmyra-borough.html",
+      "rate_label": "4.589% \u00b7 2025 rate"
+    },
+    {
+      "district": "0328",
+      "name": "Pemberton Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/pemberton-borough.html",
+      "rate_label": "2.910% \u00b7 2025 rate"
+    },
+    {
+      "district": "0329",
+      "name": "Pemberton Township",
+      "county": "Burlington",
+      "path": "towns/burlington/pemberton-township.html",
+      "rate_label": "3.253% \u00b7 2025 rate"
+    },
+    {
+      "district": "0330",
+      "name": "Riverside Township",
+      "county": "Burlington",
+      "path": "towns/burlington/riverside-township.html",
+      "rate_label": "4.090% \u00b7 2025 rate"
+    },
+    {
+      "district": "0331",
+      "name": "Riverton Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/riverton-borough.html",
+      "rate_label": "4.087% \u00b7 2025 rate"
+    },
+    {
+      "district": "0332",
+      "name": "Shamong Township",
+      "county": "Burlington",
+      "path": "towns/burlington/shamong-township.html",
+      "rate_label": "3.323% \u00b7 2025 rate"
+    },
+    {
+      "district": "0333",
+      "name": "Southampton Township",
+      "county": "Burlington",
+      "path": "towns/burlington/southampton-township.html",
+      "rate_label": "3.353% \u00b7 2025 rate"
+    },
+    {
+      "district": "0334",
+      "name": "Springfield Township",
+      "county": "Burlington",
+      "path": "towns/burlington/springfield-township.html",
+      "rate_label": "3.372% \u00b7 2025 rate"
+    },
+    {
+      "district": "0335",
+      "name": "Tabernacle Township",
+      "county": "Burlington",
+      "path": "towns/burlington/tabernacle-township.html",
+      "rate_label": "3.382% \u00b7 2025 rate"
+    },
+    {
+      "district": "0336",
+      "name": "Washington Township",
+      "county": "Burlington",
+      "path": "towns/burlington/washington-township.html",
+      "rate_label": "2.103% \u00b7 2025 rate"
+    },
+    {
+      "district": "0337",
+      "name": "Westampton Township",
+      "county": "Burlington",
+      "path": "towns/burlington/westampton-township.html",
+      "rate_label": "3.079% \u00b7 2025 rate"
+    },
+    {
+      "district": "0338",
+      "name": "Willingboro Township",
+      "county": "Burlington",
+      "path": "towns/burlington/willingboro-township.html",
+      "rate_label": "4.405% \u00b7 2025 rate"
+    },
+    {
+      "district": "0339",
+      "name": "Woodland Township",
+      "county": "Burlington",
+      "path": "towns/burlington/woodland-township.html",
+      "rate_label": "2.982% \u00b7 2025 rate"
+    },
+    {
+      "district": "0340",
+      "name": "Wrightstown Borough",
+      "county": "Burlington",
+      "path": "towns/burlington/wrightstown-borough.html",
+      "rate_label": "3.777% \u00b7 2025 rate"
+    },
+    {
+      "district": "0401",
+      "name": "Audubon Borough",
+      "county": "Camden",
+      "path": "towns/camden/audubon-borough.html",
+      "rate_label": "4.200% \u00b7 2025 rate"
+    },
+    {
+      "district": "0402",
+      "name": "Audubon Park Borough",
+      "county": "Camden",
+      "path": "towns/camden/audubon-park-borough.html",
+      "rate_label": "6.918% \u00b7 2025 rate"
+    },
+    {
+      "district": "0403",
+      "name": "Barrington Borough",
+      "county": "Camden",
+      "path": "towns/camden/barrington-borough.html",
+      "rate_label": "4.999% \u00b7 2025 rate"
+    },
+    {
+      "district": "0404",
+      "name": "Bellmawr Borough",
+      "county": "Camden",
+      "path": "towns/camden/bellmawr-borough.html",
+      "rate_label": "3.844% \u00b7 2025 rate"
+    },
+    {
+      "district": "0405",
+      "name": "Berlin Borough",
+      "county": "Camden",
+      "path": "towns/camden/berlin-borough.html",
+      "rate_label": "3.472% \u00b7 2025 rate"
+    },
+    {
+      "district": "0406",
+      "name": "Berlin Township",
+      "county": "Camden",
+      "path": "towns/camden/berlin-township.html",
+      "rate_label": "3.942% \u00b7 2025 rate"
+    },
+    {
+      "district": "0407",
+      "name": "Brooklawn Borough",
+      "county": "Camden",
+      "path": "towns/camden/brooklawn-borough.html",
+      "rate_label": "4.434% \u00b7 2025 rate"
+    },
+    {
+      "district": "0408",
+      "name": "Camden City",
+      "county": "Camden",
+      "path": "towns/camden/camden-city.html",
+      "rate_label": "3.687% \u00b7 2025 rate"
+    },
+    {
+      "district": "0409",
+      "name": "Cherry Hill Township",
+      "county": "Camden",
+      "path": "towns/camden/cherry-hill-township.html",
+      "rate_label": "4.348% \u00b7 2025 rate"
+    },
+    {
+      "district": "0410",
+      "name": "Chesilhurst Borough",
+      "county": "Camden",
+      "path": "towns/camden/chesilhurst-borough.html",
+      "rate_label": "4.724% \u00b7 2025 rate"
+    },
+    {
+      "district": "0411",
+      "name": "Clementon Borough",
+      "county": "Camden",
+      "path": "towns/camden/clementon-borough.html",
+      "rate_label": "4.776% \u00b7 2025 rate"
+    },
+    {
+      "district": "0412",
+      "name": "Collingswood Borough",
+      "county": "Camden",
+      "path": "towns/camden/collingswood-borough.html",
+      "rate_label": "2.231% \u00b7 2025 rate"
+    },
+    {
+      "district": "0413",
+      "name": "Gibbsboro Borough",
+      "county": "Camden",
+      "path": "towns/camden/gibbsboro-borough.html",
+      "rate_label": "4.663% \u00b7 2025 rate"
+    },
+    {
+      "district": "0414",
+      "name": "Gloucester City City",
+      "county": "Camden",
+      "path": "towns/camden/gloucester-city-city.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0415",
+      "name": "Gloucester Township",
+      "county": "Camden",
+      "path": "towns/camden/gloucester-township.html",
+      "rate_label": "4.179% \u00b7 2025 rate"
+    },
+    {
+      "district": "0418",
+      "name": "Haddon Heights Borough",
+      "county": "Camden",
+      "path": "towns/camden/haddon-heights-borough.html",
+      "rate_label": "3.492% \u00b7 2025 rate"
+    },
+    {
+      "district": "0416",
+      "name": "Haddon Township",
+      "county": "Camden",
+      "path": "towns/camden/haddon-township.html",
+      "rate_label": "2.179% \u00b7 2025 rate"
+    },
+    {
+      "district": "0417",
+      "name": "Haddonfield Borough",
+      "county": "Camden",
+      "path": "towns/camden/haddonfield-borough.html",
+      "rate_label": "3.315% \u00b7 2025 rate"
+    },
+    {
+      "district": "0419",
+      "name": "Hi-nella Borough",
+      "county": "Camden",
+      "path": "towns/camden/hi-nella-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0420",
+      "name": "Laurel Springs Borough",
+      "county": "Camden",
+      "path": "towns/camden/laurel-springs-borough.html",
+      "rate_label": "5.729% \u00b7 2025 rate"
+    },
+    {
+      "district": "0421",
+      "name": "Lawnside Borough",
+      "county": "Camden",
+      "path": "towns/camden/lawnside-borough.html",
+      "rate_label": "4.876% \u00b7 2025 rate"
+    },
+    {
+      "district": "0422",
+      "name": "Lindenwold Borough",
+      "county": "Camden",
+      "path": "towns/camden/lindenwold-borough.html",
+      "rate_label": "4.769% \u00b7 2025 rate"
+    },
+    {
+      "district": "0423",
+      "name": "Magnolia Borough",
+      "county": "Camden",
+      "path": "towns/camden/magnolia-borough.html",
+      "rate_label": "4.967% \u00b7 2025 rate"
+    },
+    {
+      "district": "0424",
+      "name": "Merchantville Borough",
+      "county": "Camden",
+      "path": "towns/camden/merchantville-borough.html",
+      "rate_label": "5.502% \u00b7 2025 rate"
+    },
+    {
+      "district": "0425",
+      "name": "Mount Ephraim Borough",
+      "county": "Camden",
+      "path": "towns/camden/mount-ephraim-borough.html",
+      "rate_label": "5.349% \u00b7 2025 rate"
+    },
+    {
+      "district": "0426",
+      "name": "Oaklyn Borough",
+      "county": "Camden",
+      "path": "towns/camden/oaklyn-borough.html",
+      "rate_label": "5.625% \u00b7 2025 rate"
+    },
+    {
+      "district": "0427",
+      "name": "Pennsauken Township",
+      "county": "Camden",
+      "path": "towns/camden/pennsauken-township.html",
+      "rate_label": "2.172% \u00b7 2025 rate"
+    },
+    {
+      "district": "0428",
+      "name": "Pine Hill Borough",
+      "county": "Camden",
+      "path": "towns/camden/pine-hill-borough.html",
+      "rate_label": "5.508% \u00b7 2025 rate"
+    },
+    {
+      "district": "0430",
+      "name": "Runnemede Borough",
+      "county": "Camden",
+      "path": "towns/camden/runnemede-borough.html",
+      "rate_label": "4.781% \u00b7 2025 rate"
+    },
+    {
+      "district": "0431",
+      "name": "Somerdale Borough",
+      "county": "Camden",
+      "path": "towns/camden/somerdale-borough.html",
+      "rate_label": "4.798% \u00b7 2025 rate"
+    },
+    {
+      "district": "0432",
+      "name": "Stratford Borough",
+      "county": "Camden",
+      "path": "towns/camden/stratford-borough.html",
+      "rate_label": "5.001% \u00b7 2025 rate"
+    },
+    {
+      "district": "0433",
+      "name": "Tavistock Borough",
+      "county": "Camden",
+      "path": "towns/camden/tavistock-borough.html",
+      "rate_label": "1.454% \u00b7 2025 rate"
+    },
+    {
+      "district": "0434",
+      "name": "Voorhees Township",
+      "county": "Camden",
+      "path": "towns/camden/voorhees-township.html",
+      "rate_label": "2.574% \u00b7 2025 rate"
+    },
+    {
+      "district": "0435",
+      "name": "Waterford Township",
+      "county": "Camden",
+      "path": "towns/camden/waterford-township.html",
+      "rate_label": "4.560% \u00b7 2025 rate"
+    },
+    {
+      "district": "0436",
+      "name": "Winslow Township",
+      "county": "Camden",
+      "path": "towns/camden/winslow-township.html",
+      "rate_label": "3.695% \u00b7 2025 rate"
+    },
+    {
+      "district": "0437",
+      "name": "Woodlynne Borough",
+      "county": "Camden",
+      "path": "towns/camden/woodlynne-borough.html",
+      "rate_label": "8.103% \u00b7 2025 rate"
+    },
+    {
+      "district": "0501",
+      "name": "Avalon Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/avalon-borough.html",
+      "rate_label": "0.608% \u00b7 2025 rate"
+    },
+    {
+      "district": "0502",
+      "name": "Cape May City",
+      "county": "Cape May",
+      "path": "towns/cape-may/cape-may-city.html",
+      "rate_label": "1.093% \u00b7 2025 rate"
+    },
+    {
+      "district": "0503",
+      "name": "Cape May Point Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/cape-may-point-borough.html",
+      "rate_label": "0.766% \u00b7 2025 rate"
+    },
+    {
+      "district": "0504",
+      "name": "Dennis Township",
+      "county": "Cape May",
+      "path": "towns/cape-may/dennis-township.html",
+      "rate_label": "2.145% \u00b7 2025 rate"
+    },
+    {
+      "district": "0505",
+      "name": "Lower Township",
+      "county": "Cape May",
+      "path": "towns/cape-may/lower-township.html",
+      "rate_label": "2.018% \u00b7 2025 rate"
+    },
+    {
+      "district": "0506",
+      "name": "Middle Township",
+      "county": "Cape May",
+      "path": "towns/cape-may/middle-township.html",
+      "rate_label": "2.082% \u00b7 2025 rate"
+    },
+    {
+      "district": "0507",
+      "name": "North Wildwood City",
+      "county": "Cape May",
+      "path": "towns/cape-may/north-wildwood-city.html",
+      "rate_label": "1.585% \u00b7 2025 rate"
+    },
+    {
+      "district": "0508",
+      "name": "Ocean City City",
+      "county": "Cape May",
+      "path": "towns/cape-may/ocean-city-city.html",
+      "rate_label": "1.160% \u00b7 2025 rate"
+    },
+    {
+      "district": "0509",
+      "name": "Sea Isle City",
+      "county": "Cape May",
+      "path": "towns/cape-may/sea-isle-city.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0510",
+      "name": "Stone Harbor Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/stone-harbor-borough.html",
+      "rate_label": "0.776% \u00b7 2025 rate"
+    },
+    {
+      "district": "0511",
+      "name": "Upper Township",
+      "county": "Cape May",
+      "path": "towns/cape-may/upper-township.html",
+      "rate_label": "2.303% \u00b7 2025 rate"
+    },
+    {
+      "district": "0512",
+      "name": "West Cape May Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/west-cape-may-borough.html",
+      "rate_label": "1.444% \u00b7 2025 rate"
+    },
+    {
+      "district": "0513",
+      "name": "West Wildwood Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/west-wildwood-borough.html",
+      "rate_label": "2.070% \u00b7 2025 rate"
+    },
+    {
+      "district": "0514",
+      "name": "Wildwood City",
+      "county": "Cape May",
+      "path": "towns/cape-may/wildwood-city.html",
+      "rate_label": "3.084% \u00b7 2025 rate"
+    },
+    {
+      "district": "0515",
+      "name": "Wildwood Crest Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/wildwood-crest-borough.html",
+      "rate_label": "1.447% \u00b7 2025 rate"
+    },
+    {
+      "district": "0516",
+      "name": "Woodbine Borough",
+      "county": "Cape May",
+      "path": "towns/cape-may/woodbine-borough.html",
+      "rate_label": "1.712% \u00b7 2025 rate"
+    },
+    {
+      "district": "0601",
+      "name": "Bridgeton City",
+      "county": "Cumberland",
+      "path": "towns/cumberland/bridgeton-city.html",
+      "rate_label": "5.790% \u00b7 2025 rate"
+    },
+    {
+      "district": "0602",
+      "name": "Commercial Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/commercial-township.html",
+      "rate_label": "2.758% \u00b7 2025 rate"
+    },
+    {
+      "district": "0603",
+      "name": "Deerfield Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/deerfield-township.html",
+      "rate_label": "3.894% \u00b7 2025 rate"
+    },
+    {
+      "district": "0604",
+      "name": "Downe Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/downe-township.html",
+      "rate_label": "2.933% \u00b7 2025 rate"
+    },
+    {
+      "district": "0605",
+      "name": "Fairfield Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/fairfield-township.html",
+      "rate_label": "2.975% \u00b7 2025 rate"
+    },
+    {
+      "district": "0606",
+      "name": "Greenwich Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/greenwich-township.html",
+      "rate_label": "3.642% \u00b7 2025 rate"
+    },
+    {
+      "district": "0607",
+      "name": "Hopewell Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/hopewell-township.html",
+      "rate_label": "3.693% \u00b7 2025 rate"
+    },
+    {
+      "district": "0608",
+      "name": "Lawrence Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/lawrence-township.html",
+      "rate_label": "2.980% \u00b7 2025 rate"
+    },
+    {
+      "district": "0609",
+      "name": "Maurice River Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/maurice-river-township.html",
+      "rate_label": "2.668% \u00b7 2025 rate"
+    },
+    {
+      "district": "0610",
+      "name": "Millville City",
+      "county": "Cumberland",
+      "path": "towns/cumberland/millville-city.html",
+      "rate_label": "4.056% \u00b7 2025 rate"
+    },
+    {
+      "district": "0611",
+      "name": "Shiloh Borough",
+      "county": "Cumberland",
+      "path": "towns/cumberland/shiloh-borough.html",
+      "rate_label": "3.147% \u00b7 2025 rate"
+    },
+    {
+      "district": "0612",
+      "name": "Stow Creek Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/stow-creek-township.html",
+      "rate_label": "2.995% \u00b7 2025 rate"
+    },
+    {
+      "district": "0613",
+      "name": "Upper Deerfield Township",
+      "county": "Cumberland",
+      "path": "towns/cumberland/upper-deerfield-township.html",
+      "rate_label": "3.293% \u00b7 2025 rate"
+    },
+    {
+      "district": "0614",
+      "name": "Vineland City",
+      "county": "Cumberland",
+      "path": "towns/cumberland/vineland-city.html",
+      "rate_label": "3.309% \u00b7 2025 rate"
+    },
+    {
+      "district": "0701",
+      "name": "Belleville Township",
+      "county": "Essex",
+      "path": "towns/essex/belleville-township.html",
+      "rate_label": "4.157% \u00b7 2025 rate"
+    },
+    {
+      "district": "0702",
+      "name": "Bloomfield Township",
+      "county": "Essex",
+      "path": "towns/essex/bloomfield-township.html",
+      "rate_label": "3.489% \u00b7 2025 rate"
+    },
+    {
+      "district": "0703",
+      "name": "Caldwell Borough",
+      "county": "Essex",
+      "path": "towns/essex/caldwell-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0704",
+      "name": "Cedar Grove Township",
+      "county": "Essex",
+      "path": "towns/essex/cedar-grove-township.html",
+      "rate_label": "2.603% \u00b7 2025 rate"
+    },
+    {
+      "district": "0717",
+      "name": "City of Orange Township",
+      "county": "Essex",
+      "path": "towns/essex/city-of-orange-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0705",
+      "name": "East Orange City",
+      "county": "Essex",
+      "path": "towns/essex/east-orange-city.html",
+      "rate_label": "3.241% \u00b7 2025 rate"
+    },
+    {
+      "district": "0706",
+      "name": "Essex Fells Borough",
+      "county": "Essex",
+      "path": "towns/essex/essex-fells-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0707",
+      "name": "Fairfield Township",
+      "county": "Essex",
+      "path": "towns/essex/fairfield-township.html",
+      "rate_label": "2.081% \u00b7 2025 rate"
+    },
+    {
+      "district": "0708",
+      "name": "Glen Ridge Borough",
+      "county": "Essex",
+      "path": "towns/essex/glen-ridge-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0709",
+      "name": "Irvington Township",
+      "county": "Essex",
+      "path": "towns/essex/irvington-township.html",
+      "rate_label": "2.587% \u00b7 2025 rate"
+    },
+    {
+      "district": "0710",
+      "name": "Livingston Township",
+      "county": "Essex",
+      "path": "towns/essex/livingston-township.html",
+      "rate_label": "2.531% \u00b7 2025 rate"
+    },
+    {
+      "district": "0711",
+      "name": "Maplewood Township",
+      "county": "Essex",
+      "path": "towns/essex/maplewood-township.html",
+      "rate_label": "2.401% \u00b7 2025 rate"
+    },
+    {
+      "district": "0712",
+      "name": "Millburn Township",
+      "county": "Essex",
+      "path": "towns/essex/millburn-township.html",
+      "rate_label": "2.019% \u00b7 2025 rate"
+    },
+    {
+      "district": "0713",
+      "name": "Montclair Township",
+      "county": "Essex",
+      "path": "towns/essex/montclair-township.html",
+      "rate_label": "3.516% \u00b7 2025 rate"
+    },
+    {
+      "district": "0714",
+      "name": "Newark City",
+      "county": "Essex",
+      "path": "towns/essex/newark-city.html",
+      "rate_label": "3.999% \u00b7 2025 rate"
+    },
+    {
+      "district": "0715",
+      "name": "North Caldwell Borough",
+      "county": "Essex",
+      "path": "towns/essex/north-caldwell-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0716",
+      "name": "Nutley Township",
+      "county": "Essex",
+      "path": "towns/essex/nutley-township.html",
+      "rate_label": "2.699% \u00b7 2025 rate"
+    },
+    {
+      "district": "0718",
+      "name": "Roseland Borough",
+      "county": "Essex",
+      "path": "towns/essex/roseland-borough.html",
+      "rate_label": "1.862% \u00b7 2025 rate"
+    },
+    {
+      "district": "0719",
+      "name": "South Orange Village Township",
+      "county": "Essex",
+      "path": "towns/essex/south-orange-village-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0720",
+      "name": "Verona Township",
+      "county": "Essex",
+      "path": "towns/essex/verona-township.html",
+      "rate_label": "3.165% \u00b7 2025 rate"
+    },
+    {
+      "district": "0721",
+      "name": "West Caldwell Township",
+      "county": "Essex",
+      "path": "towns/essex/west-caldwell-township.html",
+      "rate_label": "2.749% \u00b7 2025 rate"
+    },
+    {
+      "district": "0722",
+      "name": "West Orange Township",
+      "county": "Essex",
+      "path": "towns/essex/west-orange-township.html",
+      "rate_label": "2.627% \u00b7 2025 rate"
+    },
+    {
+      "district": "0801",
+      "name": "Clayton Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/clayton-borough.html",
+      "rate_label": "2.569% \u00b7 2025 rate"
+    },
+    {
+      "district": "0802",
+      "name": "Deptford Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/deptford-township.html",
+      "rate_label": "3.440% \u00b7 2025 rate"
+    },
+    {
+      "district": "0803",
+      "name": "East Greenwich Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/east-greenwich-township.html",
+      "rate_label": "3.187% \u00b7 2025 rate"
+    },
+    {
+      "district": "0804",
+      "name": "Elk Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/elk-township.html",
+      "rate_label": "3.688% \u00b7 2025 rate"
+    },
+    {
+      "district": "0805",
+      "name": "Franklin Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/franklin-township.html",
+      "rate_label": "3.741% \u00b7 2025 rate"
+    },
+    {
+      "district": "0806",
+      "name": "Glassboro Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/glassboro-borough.html",
+      "rate_label": "3.637% \u00b7 2025 rate"
+    },
+    {
+      "district": "0807",
+      "name": "Greenwich Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/greenwich-township.html",
+      "rate_label": "3.566% \u00b7 2025 rate"
+    },
+    {
+      "district": "0808",
+      "name": "Harrison Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/harrison-township.html",
+      "rate_label": "3.300% \u00b7 2025 rate"
+    },
+    {
+      "district": "0809",
+      "name": "Logan Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/logan-township.html",
+      "rate_label": "1.445% \u00b7 2025 rate"
+    },
+    {
+      "district": "0810",
+      "name": "Mantua Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/mantua-township.html",
+      "rate_label": "2.516% \u00b7 2025 rate"
+    },
+    {
+      "district": "0811",
+      "name": "Monroe Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/monroe-township.html",
+      "rate_label": "3.769% \u00b7 2025 rate"
+    },
+    {
+      "district": "0812",
+      "name": "National Park Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/national-park-borough.html",
+      "rate_label": "4.783% \u00b7 2025 rate"
+    },
+    {
+      "district": "0813",
+      "name": "Newfield Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/newfield-borough.html",
+      "rate_label": "3.743% \u00b7 2025 rate"
+    },
+    {
+      "district": "0814",
+      "name": "Paulsboro Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/paulsboro-borough.html",
+      "rate_label": "4.854% \u00b7 2025 rate"
+    },
+    {
+      "district": "0815",
+      "name": "Pitman Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/pitman-borough.html",
+      "rate_label": "3.596% \u00b7 2025 rate"
+    },
+    {
+      "district": "0816",
+      "name": "South Harrison Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/south-harrison-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "0817",
+      "name": "Swedesboro Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/swedesboro-borough.html",
+      "rate_label": "4.358% \u00b7 2025 rate"
+    },
+    {
+      "district": "0818",
+      "name": "Washington Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/washington-township.html",
+      "rate_label": "3.665% \u00b7 2025 rate"
+    },
+    {
+      "district": "0819",
+      "name": "Wenonah Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/wenonah-borough.html",
+      "rate_label": "4.481% \u00b7 2025 rate"
+    },
+    {
+      "district": "0820",
+      "name": "West Deptford Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/west-deptford-township.html",
+      "rate_label": "3.483% \u00b7 2025 rate"
+    },
+    {
+      "district": "0821",
+      "name": "Westville Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/westville-borough.html",
+      "rate_label": "5.387% \u00b7 2025 rate"
+    },
+    {
+      "district": "0822",
+      "name": "Woodbury City",
+      "county": "Gloucester",
+      "path": "towns/gloucester/woodbury-city.html",
+      "rate_label": "4.865% \u00b7 2025 rate"
+    },
+    {
+      "district": "0823",
+      "name": "Woodbury Heights Borough",
+      "county": "Gloucester",
+      "path": "towns/gloucester/woodbury-heights-borough.html",
+      "rate_label": "4.832% \u00b7 2025 rate"
+    },
+    {
+      "district": "0824",
+      "name": "Woolwich Township",
+      "county": "Gloucester",
+      "path": "towns/gloucester/woolwich-township.html",
+      "rate_label": "3.377% \u00b7 2025 rate"
+    },
+    {
+      "district": "0901",
+      "name": "Bayonne City",
+      "county": "Hudson",
+      "path": "towns/hudson/bayonne-city.html",
+      "rate_label": "2.880% \u00b7 2025 rate"
+    },
+    {
+      "district": "0902",
+      "name": "East Newark Borough",
+      "county": "Hudson",
+      "path": "towns/hudson/east-newark-borough.html",
+      "rate_label": "3.076% \u00b7 2025 rate"
+    },
+    {
+      "district": "0903",
+      "name": "Guttenberg Town",
+      "county": "Hudson",
+      "path": "towns/hudson/guttenberg-town.html",
+      "rate_label": "4.181% \u00b7 2025 rate"
+    },
+    {
+      "district": "0904",
+      "name": "Harrison Town",
+      "county": "Hudson",
+      "path": "towns/hudson/harrison-town.html",
+      "rate_label": "2.384% \u00b7 2025 rate"
+    },
+    {
+      "district": "0905",
+      "name": "Hoboken City",
+      "county": "Hudson",
+      "path": "towns/hudson/hoboken-city.html",
+      "rate_label": "1.805% \u00b7 2025 rate"
+    },
+    {
+      "district": "0906",
+      "name": "Jersey City City",
+      "county": "Hudson",
+      "path": "towns/hudson/jersey-city-city.html",
+      "rate_label": "2.335% \u00b7 2025 rate"
+    },
+    {
+      "district": "0907",
+      "name": "Kearny Town",
+      "county": "Hudson",
+      "path": "towns/hudson/kearny-town.html",
+      "rate_label": "10.848% \u00b7 2025 rate"
+    },
+    {
+      "district": "0908",
+      "name": "North Bergen Township",
+      "county": "Hudson",
+      "path": "towns/hudson/north-bergen-township.html",
+      "rate_label": "1.828% \u00b7 2025 rate"
+    },
+    {
+      "district": "0909",
+      "name": "Secaucus Town",
+      "county": "Hudson",
+      "path": "towns/hudson/secaucus-town.html",
+      "rate_label": "4.268% \u00b7 2025 rate"
+    },
+    {
+      "district": "0910",
+      "name": "Union City City",
+      "county": "Hudson",
+      "path": "towns/hudson/union-city-city.html",
+      "rate_label": "1.848% \u00b7 2025 rate"
+    },
+    {
+      "district": "0911",
+      "name": "Weehawken Township",
+      "county": "Hudson",
+      "path": "towns/hudson/weehawken-township.html",
+      "rate_label": "2.046% \u00b7 2025 rate"
+    },
+    {
+      "district": "0912",
+      "name": "West New York Town",
+      "county": "Hudson",
+      "path": "towns/hudson/west-new-york-town.html",
+      "rate_label": "8.707% \u00b7 2025 rate"
+    },
+    {
+      "district": "1001",
+      "name": "Alexandria Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/alexandria-township.html",
+      "rate_label": "3.081% \u00b7 2025 rate"
+    },
+    {
+      "district": "1002",
+      "name": "Bethlehem Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/bethlehem-township.html",
+      "rate_label": "2.021% \u00b7 2025 rate"
+    },
+    {
+      "district": "1003",
+      "name": "Bloomsbury Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/bloomsbury-borough.html",
+      "rate_label": "3.667% \u00b7 2025 rate"
+    },
+    {
+      "district": "1004",
+      "name": "Califon Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/califon-borough.html",
+      "rate_label": "3.897% \u00b7 2025 rate"
+    },
+    {
+      "district": "1005",
+      "name": "Clinton Town",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/clinton-town.html",
+      "rate_label": "2.948% \u00b7 2025 rate"
+    },
+    {
+      "district": "1006",
+      "name": "Clinton Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/clinton-township.html",
+      "rate_label": "3.104% \u00b7 2025 rate"
+    },
+    {
+      "district": "1007",
+      "name": "Delaware Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/delaware-township.html",
+      "rate_label": "2.883% \u00b7 2025 rate"
+    },
+    {
+      "district": "1008",
+      "name": "East Amwell Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/east-amwell-township.html",
+      "rate_label": "2.621% \u00b7 2025 rate"
+    },
+    {
+      "district": "1009",
+      "name": "Flemington Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/flemington-borough.html",
+      "rate_label": "2.736% \u00b7 2025 rate"
+    },
+    {
+      "district": "1010",
+      "name": "Franklin Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/franklin-township.html",
+      "rate_label": "3.005% \u00b7 2025 rate"
+    },
+    {
+      "district": "1011",
+      "name": "Frenchtown Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/frenchtown-borough.html",
+      "rate_label": "2.731% \u00b7 2025 rate"
+    },
+    {
+      "district": "1012",
+      "name": "Glen Gardner Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/glen-gardner-borough.html",
+      "rate_label": "2.057% \u00b7 2025 rate"
+    },
+    {
+      "district": "1013",
+      "name": "Hampton Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/hampton-borough.html",
+      "rate_label": "4.016% \u00b7 2025 rate"
+    },
+    {
+      "district": "1014",
+      "name": "High Bridge Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/high-bridge-borough.html",
+      "rate_label": "3.324% \u00b7 2025 rate"
+    },
+    {
+      "district": "1015",
+      "name": "Holland Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/holland-township.html",
+      "rate_label": "3.346% \u00b7 2025 rate"
+    },
+    {
+      "district": "1016",
+      "name": "Kingwood Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/kingwood-township.html",
+      "rate_label": "2.606% \u00b7 2025 rate"
+    },
+    {
+      "district": "1017",
+      "name": "Lambertville City",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/lambertville-city.html",
+      "rate_label": "2.126% \u00b7 2025 rate"
+    },
+    {
+      "district": "1018",
+      "name": "Lebanon Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/lebanon-borough.html",
+      "rate_label": "2.776% \u00b7 2025 rate"
+    },
+    {
+      "district": "1019",
+      "name": "Lebanon Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/lebanon-township.html",
+      "rate_label": "2.969% \u00b7 2025 rate"
+    },
+    {
+      "district": "1020",
+      "name": "Milford Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/milford-borough.html",
+      "rate_label": "4.027% \u00b7 2025 rate"
+    },
+    {
+      "district": "1021",
+      "name": "Raritan Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/raritan-township.html",
+      "rate_label": "3.029% \u00b7 2025 rate"
+    },
+    {
+      "district": "1022",
+      "name": "Readington Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/readington-township.html",
+      "rate_label": "2.798% \u00b7 2025 rate"
+    },
+    {
+      "district": "1023",
+      "name": "Stockton Borough",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/stockton-borough.html",
+      "rate_label": "2.055% \u00b7 2025 rate"
+    },
+    {
+      "district": "1024",
+      "name": "Tewksbury Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/tewksbury-township.html",
+      "rate_label": "2.519% \u00b7 2025 rate"
+    },
+    {
+      "district": "1025",
+      "name": "Union Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/union-township.html",
+      "rate_label": "2.197% \u00b7 2025 rate"
+    },
+    {
+      "district": "1026",
+      "name": "West Amwell Township",
+      "county": "Hunterdon",
+      "path": "towns/hunterdon/west-amwell-township.html",
+      "rate_label": "2.128% \u00b7 2025 rate"
+    },
+    {
+      "district": "1101",
+      "name": "East Windsor Township",
+      "county": "Mercer",
+      "path": "towns/mercer/east-windsor-township.html",
+      "rate_label": "3.627% \u00b7 2025 rate"
+    },
+    {
+      "district": "1102",
+      "name": "Ewing Township",
+      "county": "Mercer",
+      "path": "towns/mercer/ewing-township.html",
+      "rate_label": "4.051% \u00b7 2025 rate"
+    },
+    {
+      "district": "1103",
+      "name": "Hamilton Township",
+      "county": "Mercer",
+      "path": "towns/mercer/hamilton-township.html",
+      "rate_label": "3.708% \u00b7 2025 rate"
+    },
+    {
+      "district": "1104",
+      "name": "Hightstown Borough",
+      "county": "Mercer",
+      "path": "towns/mercer/hightstown-borough.html",
+      "rate_label": "5.109% \u00b7 2025 rate"
+    },
+    {
+      "district": "1105",
+      "name": "Hopewell Borough",
+      "county": "Mercer",
+      "path": "towns/mercer/hopewell-borough.html",
+      "rate_label": "3.498% \u00b7 2025 rate"
+    },
+    {
+      "district": "1106",
+      "name": "Hopewell Township",
+      "county": "Mercer",
+      "path": "towns/mercer/hopewell-township.html",
+      "rate_label": "3.129% \u00b7 2025 rate"
+    },
+    {
+      "district": "1107",
+      "name": "Lawrence Township",
+      "county": "Mercer",
+      "path": "towns/mercer/lawrence-township.html",
+      "rate_label": "3.165% \u00b7 2025 rate"
+    },
+    {
+      "district": "1108",
+      "name": "Pennington Borough",
+      "county": "Mercer",
+      "path": "towns/mercer/pennington-borough.html",
+      "rate_label": "3.308% \u00b7 2025 rate"
+    },
+    {
+      "district": "1114",
+      "name": "Princeton",
+      "county": "Mercer",
+      "path": "towns/mercer/princeton.html",
+      "rate_label": "2.733% \u00b7 2025 rate"
+    },
+    {
+      "district": "1112",
+      "name": "Robbinsville Township",
+      "county": "Mercer",
+      "path": "towns/mercer/robbinsville-township.html",
+      "rate_label": "3.488% \u00b7 2025 rate"
+    },
+    {
+      "district": "1111",
+      "name": "Trenton City",
+      "county": "Mercer",
+      "path": "towns/mercer/trenton-city.html",
+      "rate_label": "5.890% \u00b7 2025 rate"
+    },
+    {
+      "district": "1113",
+      "name": "West Windsor Township",
+      "county": "Mercer",
+      "path": "towns/mercer/west-windsor-township.html",
+      "rate_label": "3.162% \u00b7 2025 rate"
+    },
+    {
+      "district": "1201",
+      "name": "Carteret Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/carteret-borough.html",
+      "rate_label": "1.568% \u00b7 2025 rate"
+    },
+    {
+      "district": "1202",
+      "name": "Cranbury Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/cranbury-township.html",
+      "rate_label": "1.836% \u00b7 2025 rate"
+    },
+    {
+      "district": "1203",
+      "name": "Dunellen Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/dunellen-borough.html",
+      "rate_label": "2.448% \u00b7 2025 rate"
+    },
+    {
+      "district": "1204",
+      "name": "East Brunswick Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/east-brunswick-township.html",
+      "rate_label": "12.177% \u00b7 2025 rate"
+    },
+    {
+      "district": "1205",
+      "name": "Edison Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/edison-township.html",
+      "rate_label": "5.725% \u00b7 2025 rate"
+    },
+    {
+      "district": "1206",
+      "name": "Helmetta Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/helmetta-borough.html",
+      "rate_label": "3.558% \u00b7 2025 rate"
+    },
+    {
+      "district": "1207",
+      "name": "Highland Park Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/highland-park-borough.html",
+      "rate_label": "2.723% \u00b7 2025 rate"
+    },
+    {
+      "district": "1208",
+      "name": "Jamesburg Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/jamesburg-borough.html",
+      "rate_label": "6.955% \u00b7 2025 rate"
+    },
+    {
+      "district": "1210",
+      "name": "Metuchen Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/metuchen-borough.html",
+      "rate_label": "7.255% \u00b7 2025 rate"
+    },
+    {
+      "district": "1211",
+      "name": "Middlesex Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/middlesex-borough.html",
+      "rate_label": "2.120% \u00b7 2025 rate"
+    },
+    {
+      "district": "1212",
+      "name": "Milltown Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/milltown-borough.html",
+      "rate_label": "6.951% \u00b7 2025 rate"
+    },
+    {
+      "district": "1213",
+      "name": "Monroe Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/monroe-township.html",
+      "rate_label": "2.740% \u00b7 2025 rate"
+    },
+    {
+      "district": "1214",
+      "name": "New Brunswick City",
+      "county": "Middlesex",
+      "path": "towns/middlesex/new-brunswick-city.html",
+      "rate_label": "2.688% \u00b7 2025 rate"
+    },
+    {
+      "district": "1215",
+      "name": "North Brunswick Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/north-brunswick-township.html",
+      "rate_label": "6.571% \u00b7 2025 rate"
+    },
+    {
+      "district": "1209",
+      "name": "Old Bridge Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/old-bridge-township.html",
+      "rate_label": "6.094% \u00b7 2025 rate"
+    },
+    {
+      "district": "1216",
+      "name": "Perth Amboy City",
+      "county": "Middlesex",
+      "path": "towns/middlesex/perth-amboy-city.html",
+      "rate_label": "3.178% \u00b7 2025 rate"
+    },
+    {
+      "district": "1217",
+      "name": "Piscataway Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/piscataway-township.html",
+      "rate_label": "1.750% \u00b7 2025 rate"
+    },
+    {
+      "district": "1218",
+      "name": "Plainsboro Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/plainsboro-township.html",
+      "rate_label": "2.766% \u00b7 2025 rate"
+    },
+    {
+      "district": "1219",
+      "name": "Sayreville Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/sayreville-borough.html",
+      "rate_label": "6.259% \u00b7 2025 rate"
+    },
+    {
+      "district": "1220",
+      "name": "South Amboy City",
+      "county": "Middlesex",
+      "path": "towns/middlesex/south-amboy-city.html",
+      "rate_label": "3.217% \u00b7 2025 rate"
+    },
+    {
+      "district": "1221",
+      "name": "South Brunswick Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/south-brunswick-township.html",
+      "rate_label": "5.578% \u00b7 2025 rate"
+    },
+    {
+      "district": "1222",
+      "name": "South Plainfield Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/south-plainfield-borough.html",
+      "rate_label": "7.316% \u00b7 2025 rate"
+    },
+    {
+      "district": "1223",
+      "name": "South River Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/south-river-borough.html",
+      "rate_label": "2.669% \u00b7 2025 rate"
+    },
+    {
+      "district": "1224",
+      "name": "Spotswood Borough",
+      "county": "Middlesex",
+      "path": "towns/middlesex/spotswood-borough.html",
+      "rate_label": "3.792% \u00b7 2025 rate"
+    },
+    {
+      "district": "1225",
+      "name": "Woodbridge Township",
+      "county": "Middlesex",
+      "path": "towns/middlesex/woodbridge-township.html",
+      "rate_label": "12.034% \u00b7 2025 rate"
+    },
+    {
+      "district": "1330",
+      "name": "Aberdeen Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/aberdeen-township.html",
+      "rate_label": "1.824% \u00b7 2025 rate"
+    },
+    {
+      "district": "1301",
+      "name": "Allenhurst Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/allenhurst-borough.html",
+      "rate_label": "0.497% \u00b7 2025 rate"
+    },
+    {
+      "district": "1302",
+      "name": "Allentown Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/allentown-borough.html",
+      "rate_label": "3.547% \u00b7 2025 rate"
+    },
+    {
+      "district": "1303",
+      "name": "Asbury Park City",
+      "county": "Monmouth",
+      "path": "towns/monmouth/asbury-park-city.html",
+      "rate_label": "1.752% \u00b7 2025 rate"
+    },
+    {
+      "district": "1304",
+      "name": "Atlantic Highlands Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/atlantic-highlands-borough.html",
+      "rate_label": "1.530% \u00b7 2025 rate"
+    },
+    {
+      "district": "1305",
+      "name": "Avon-by-the-Sea Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/avon-by-the-sea-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1306",
+      "name": "Belmar Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/belmar-borough.html",
+      "rate_label": "1.570% \u00b7 2025 rate"
+    },
+    {
+      "district": "1307",
+      "name": "Bradley Beach Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/bradley-beach-borough.html",
+      "rate_label": "0.885% \u00b7 2025 rate"
+    },
+    {
+      "district": "1308",
+      "name": "Brielle Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/brielle-borough.html",
+      "rate_label": "1.203% \u00b7 2025 rate"
+    },
+    {
+      "district": "1309",
+      "name": "Colts Neck Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/colts-neck-township.html",
+      "rate_label": "1.394% \u00b7 2025 rate"
+    },
+    {
+      "district": "1310",
+      "name": "Deal Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/deal-borough.html",
+      "rate_label": "0.411% \u00b7 2025 rate"
+    },
+    {
+      "district": "1311",
+      "name": "Eatontown Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/eatontown-borough.html",
+      "rate_label": "1.758% \u00b7 2025 rate"
+    },
+    {
+      "district": "1312",
+      "name": "Englishtown Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/englishtown-borough.html",
+      "rate_label": "1.799% \u00b7 2025 rate"
+    },
+    {
+      "district": "1313",
+      "name": "Fair Haven Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/fair-haven-borough.html",
+      "rate_label": "1.427% \u00b7 2025 rate"
+    },
+    {
+      "district": "1314",
+      "name": "Farmingdale Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/farmingdale-borough.html",
+      "rate_label": "1.725% \u00b7 2025 rate"
+    },
+    {
+      "district": "1315",
+      "name": "Freehold Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/freehold-borough.html",
+      "rate_label": "2.005% \u00b7 2025 rate"
+    },
+    {
+      "district": "1316",
+      "name": "Freehold Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/freehold-township.html",
+      "rate_label": "1.673% \u00b7 2025 rate"
+    },
+    {
+      "district": "1339",
+      "name": "Hazlet Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/hazlet-township.html",
+      "rate_label": "1.933% \u00b7 2025 rate"
+    },
+    {
+      "district": "1317",
+      "name": "Highlands Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/highlands-borough.html",
+      "rate_label": "1.710% \u00b7 2025 rate"
+    },
+    {
+      "district": "1318",
+      "name": "Holmdel Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/holmdel-township.html",
+      "rate_label": "1.539% \u00b7 2025 rate"
+    },
+    {
+      "district": "1319",
+      "name": "Howell Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/howell-township.html",
+      "rate_label": "1.659% \u00b7 2025 rate"
+    },
+    {
+      "district": "1320",
+      "name": "Interlaken Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/interlaken-borough.html",
+      "rate_label": "0.799% \u00b7 2025 rate"
+    },
+    {
+      "district": "1321",
+      "name": "Keansburg Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/keansburg-borough.html",
+      "rate_label": "2.143% \u00b7 2025 rate"
+    },
+    {
+      "district": "1322",
+      "name": "Keyport Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/keyport-borough.html",
+      "rate_label": "1.992% \u00b7 2025 rate"
+    },
+    {
+      "district": "1347",
+      "name": "Lake Como Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/lake-como-borough.html",
+      "rate_label": "1.002% \u00b7 2025 rate"
+    },
+    {
+      "district": "1323",
+      "name": "Little Silver Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/little-silver-borough.html",
+      "rate_label": "1.437% \u00b7 2025 rate"
+    },
+    {
+      "district": "1324",
+      "name": "Loch Arbour Village",
+      "county": "Monmouth",
+      "path": "towns/monmouth/loch-arbour-village.html",
+      "rate_label": "0.379% \u00b7 2025 rate"
+    },
+    {
+      "district": "1325",
+      "name": "Long Branch City",
+      "county": "Monmouth",
+      "path": "towns/monmouth/long-branch-city.html",
+      "rate_label": "1.500% \u00b7 2025 rate"
+    },
+    {
+      "district": "1326",
+      "name": "Manalapan Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/manalapan-township.html",
+      "rate_label": "1.645% \u00b7 2025 rate"
+    },
+    {
+      "district": "1327",
+      "name": "Manasquan Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/manasquan-borough.html",
+      "rate_label": "1.755% \u00b7 2025 rate"
+    },
+    {
+      "district": "1328",
+      "name": "Marlboro Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/marlboro-township.html",
+      "rate_label": "2.564% \u00b7 2025 rate"
+    },
+    {
+      "district": "1329",
+      "name": "Matawan Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/matawan-borough.html",
+      "rate_label": "2.087% \u00b7 2025 rate"
+    },
+    {
+      "district": "1331",
+      "name": "Middletown Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/middletown-township.html",
+      "rate_label": "1.614% \u00b7 2025 rate"
+    },
+    {
+      "district": "1332",
+      "name": "Millstone Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/millstone-township.html",
+      "rate_label": "2.116% \u00b7 2025 rate"
+    },
+    {
+      "district": "1333",
+      "name": "Monmouth Beach Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/monmouth-beach-borough.html",
+      "rate_label": "0.887% \u00b7 2025 rate"
+    },
+    {
+      "district": "1335",
+      "name": "Neptune City Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/neptune-city-borough.html",
+      "rate_label": "1.767% \u00b7 2025 rate"
+    },
+    {
+      "district": "1334",
+      "name": "Neptune Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/neptune-township.html",
+      "rate_label": "1.770% \u00b7 2025 rate"
+    },
+    {
+      "district": "1337",
+      "name": "Ocean Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/ocean-township.html",
+      "rate_label": "1.320% \u00b7 2025 rate"
+    },
+    {
+      "district": "1338",
+      "name": "Oceanport Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/oceanport-borough.html",
+      "rate_label": "1.475% \u00b7 2025 rate"
+    },
+    {
+      "district": "1340",
+      "name": "Red Bank Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/red-bank-borough.html",
+      "rate_label": "1.822% \u00b7 2025 rate"
+    },
+    {
+      "district": "1341",
+      "name": "Roosevelt Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/roosevelt-borough.html",
+      "rate_label": "2.385% \u00b7 2025 rate"
+    },
+    {
+      "district": "1342",
+      "name": "Rumson Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/rumson-borough.html",
+      "rate_label": "1.049% \u00b7 2025 rate"
+    },
+    {
+      "district": "1343",
+      "name": "Sea Bright Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/sea-bright-borough.html",
+      "rate_label": "0.855% \u00b7 2025 rate"
+    },
+    {
+      "district": "1344",
+      "name": "Sea Girt Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/sea-girt-borough.html",
+      "rate_label": "0.499% \u00b7 2025 rate"
+    },
+    {
+      "district": "1345",
+      "name": "Shrewsbury Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/shrewsbury-borough.html",
+      "rate_label": "1.661% \u00b7 2025 rate"
+    },
+    {
+      "district": "1346",
+      "name": "Shrewsbury Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/shrewsbury-township.html",
+      "rate_label": "1.542% \u00b7 2025 rate"
+    },
+    {
+      "district": "1348",
+      "name": "Spring Lake Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/spring-lake-borough.html",
+      "rate_label": "0.457% \u00b7 2025 rate"
+    },
+    {
+      "district": "1349",
+      "name": "Spring Lake Heights Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/spring-lake-heights-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1336",
+      "name": "Tinton Falls Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/tinton-falls-borough.html",
+      "rate_label": "1.386% \u00b7 2025 rate"
+    },
+    {
+      "district": "1350",
+      "name": "Union Beach Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/union-beach-borough.html",
+      "rate_label": "2.145% \u00b7 2025 rate"
+    },
+    {
+      "district": "1351",
+      "name": "Upper Freehold Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/upper-freehold-township.html",
+      "rate_label": "1.848% \u00b7 2025 rate"
+    },
+    {
+      "district": "1352",
+      "name": "Wall Township",
+      "county": "Monmouth",
+      "path": "towns/monmouth/wall-township.html",
+      "rate_label": "2.127% \u00b7 2025 rate"
+    },
+    {
+      "district": "1353",
+      "name": "West Long Branch Borough",
+      "county": "Monmouth",
+      "path": "towns/monmouth/west-long-branch-borough.html",
+      "rate_label": "1.266% \u00b7 2025 rate"
+    },
+    {
+      "district": "1401",
+      "name": "Boonton Town",
+      "county": "Morris",
+      "path": "towns/morris/boonton-town.html",
+      "rate_label": "3.478% \u00b7 2025 rate"
+    },
+    {
+      "district": "1402",
+      "name": "Boonton Township",
+      "county": "Morris",
+      "path": "towns/morris/boonton-township.html",
+      "rate_label": "2.538% \u00b7 2025 rate"
+    },
+    {
+      "district": "1403",
+      "name": "Butler Borough",
+      "county": "Morris",
+      "path": "towns/morris/butler-borough.html",
+      "rate_label": "2.511% \u00b7 2025 rate"
+    },
+    {
+      "district": "1404",
+      "name": "Chatham Borough",
+      "county": "Morris",
+      "path": "towns/morris/chatham-borough.html",
+      "rate_label": "1.701% \u00b7 2025 rate"
+    },
+    {
+      "district": "1405",
+      "name": "Chatham Township",
+      "county": "Morris",
+      "path": "towns/morris/chatham-township.html",
+      "rate_label": "2.104% \u00b7 2025 rate"
+    },
+    {
+      "district": "1406",
+      "name": "Chester Borough",
+      "county": "Morris",
+      "path": "towns/morris/chester-borough.html",
+      "rate_label": "2.328% \u00b7 2025 rate"
+    },
+    {
+      "district": "1407",
+      "name": "Chester Township",
+      "county": "Morris",
+      "path": "towns/morris/chester-township.html",
+      "rate_label": "2.587% \u00b7 2025 rate"
+    },
+    {
+      "district": "1408",
+      "name": "Denville Township",
+      "county": "Morris",
+      "path": "towns/morris/denville-township.html",
+      "rate_label": "2.789% \u00b7 2025 rate"
+    },
+    {
+      "district": "1409",
+      "name": "Dover Town",
+      "county": "Morris",
+      "path": "towns/morris/dover-town.html",
+      "rate_label": "3.490% \u00b7 2025 rate"
+    },
+    {
+      "district": "1410",
+      "name": "East Hanover Township",
+      "county": "Morris",
+      "path": "towns/morris/east-hanover-township.html",
+      "rate_label": "2.652% \u00b7 2025 rate"
+    },
+    {
+      "district": "1411",
+      "name": "Florham Park Borough",
+      "county": "Morris",
+      "path": "towns/morris/florham-park-borough.html",
+      "rate_label": "1.691% \u00b7 2025 rate"
+    },
+    {
+      "district": "1412",
+      "name": "Hanover Township",
+      "county": "Morris",
+      "path": "towns/morris/hanover-township.html",
+      "rate_label": "2.052% \u00b7 2025 rate"
+    },
+    {
+      "district": "1413",
+      "name": "Harding Township",
+      "county": "Morris",
+      "path": "towns/morris/harding-township.html",
+      "rate_label": "1.234% \u00b7 2025 rate"
+    },
+    {
+      "district": "1414",
+      "name": "Jefferson Township",
+      "county": "Morris",
+      "path": "towns/morris/jefferson-township.html",
+      "rate_label": "3.003% \u00b7 2025 rate"
+    },
+    {
+      "district": "1415",
+      "name": "Kinnelon Borough",
+      "county": "Morris",
+      "path": "towns/morris/kinnelon-borough.html",
+      "rate_label": "2.985% \u00b7 2025 rate"
+    },
+    {
+      "district": "1416",
+      "name": "Lincoln Park Borough",
+      "county": "Morris",
+      "path": "towns/morris/lincoln-park-borough.html",
+      "rate_label": "2.171% \u00b7 2025 rate"
+    },
+    {
+      "district": "1430",
+      "name": "Long Hill Township",
+      "county": "Morris",
+      "path": "towns/morris/long-hill-township.html",
+      "rate_label": "2.201% \u00b7 2025 rate"
+    },
+    {
+      "district": "1417",
+      "name": "Madison Borough",
+      "county": "Morris",
+      "path": "towns/morris/madison-borough.html",
+      "rate_label": "2.254% \u00b7 2025 rate"
+    },
+    {
+      "district": "1418",
+      "name": "Mendham Borough",
+      "county": "Morris",
+      "path": "towns/morris/mendham-borough.html",
+      "rate_label": "2.526% \u00b7 2025 rate"
+    },
+    {
+      "district": "1419",
+      "name": "Mendham Township",
+      "county": "Morris",
+      "path": "towns/morris/mendham-township.html",
+      "rate_label": "1.839% \u00b7 2025 rate"
+    },
+    {
+      "district": "1420",
+      "name": "Mine Hill Township",
+      "county": "Morris",
+      "path": "towns/morris/mine-hill-township.html",
+      "rate_label": "2.820% \u00b7 2025 rate"
+    },
+    {
+      "district": "1421",
+      "name": "Montville Township",
+      "county": "Morris",
+      "path": "towns/morris/montville-township.html",
+      "rate_label": "2.673% \u00b7 2025 rate"
+    },
+    {
+      "district": "1423",
+      "name": "Morris Plains Borough",
+      "county": "Morris",
+      "path": "towns/morris/morris-plains-borough.html",
+      "rate_label": "2.548% \u00b7 2025 rate"
+    },
+    {
+      "district": "1422",
+      "name": "Morris Township",
+      "county": "Morris",
+      "path": "towns/morris/morris-township.html",
+      "rate_label": "1.968% \u00b7 2025 rate"
+    },
+    {
+      "district": "1424",
+      "name": "Morristown Town",
+      "county": "Morris",
+      "path": "towns/morris/morristown-town.html",
+      "rate_label": "1.760% \u00b7 2025 rate"
+    },
+    {
+      "district": "1426",
+      "name": "Mount Arlington Borough",
+      "county": "Morris",
+      "path": "towns/morris/mount-arlington-borough.html",
+      "rate_label": "2.203% \u00b7 2025 rate"
+    },
+    {
+      "district": "1427",
+      "name": "Mount Olive Township",
+      "county": "Morris",
+      "path": "towns/morris/mount-olive-township.html",
+      "rate_label": "3.366% \u00b7 2025 rate"
+    },
+    {
+      "district": "1425",
+      "name": "Mountain Lakes Borough",
+      "county": "Morris",
+      "path": "towns/morris/mountain-lakes-borough.html",
+      "rate_label": "2.299% \u00b7 2025 rate"
+    },
+    {
+      "district": "1428",
+      "name": "Netcong Borough",
+      "county": "Morris",
+      "path": "towns/morris/netcong-borough.html",
+      "rate_label": "3.447% \u00b7 2025 rate"
+    },
+    {
+      "district": "1429",
+      "name": "Parsippany-Troy Hills Township",
+      "county": "Morris",
+      "path": "towns/morris/parsippany-troy-hills-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1431",
+      "name": "Pequannock Township",
+      "county": "Morris",
+      "path": "towns/morris/pequannock-township.html",
+      "rate_label": "1.839% \u00b7 2025 rate"
+    },
+    {
+      "district": "1432",
+      "name": "Randolph Township",
+      "county": "Morris",
+      "path": "towns/morris/randolph-township.html",
+      "rate_label": "2.932% \u00b7 2025 rate"
+    },
+    {
+      "district": "1433",
+      "name": "Riverdale Borough",
+      "county": "Morris",
+      "path": "towns/morris/riverdale-borough.html",
+      "rate_label": "1.901% \u00b7 2025 rate"
+    },
+    {
+      "district": "1434",
+      "name": "Rockaway Borough",
+      "county": "Morris",
+      "path": "towns/morris/rockaway-borough.html",
+      "rate_label": "3.368% \u00b7 2025 rate"
+    },
+    {
+      "district": "1435",
+      "name": "Rockaway Township",
+      "county": "Morris",
+      "path": "towns/morris/rockaway-township.html",
+      "rate_label": "2.463% \u00b7 2025 rate"
+    },
+    {
+      "district": "1436",
+      "name": "Roxbury Township",
+      "county": "Morris",
+      "path": "towns/morris/roxbury-township.html",
+      "rate_label": "2.821% \u00b7 2025 rate"
+    },
+    {
+      "district": "1437",
+      "name": "Victory Gardens Borough",
+      "county": "Morris",
+      "path": "towns/morris/victory-gardens-borough.html",
+      "rate_label": "3.538% \u00b7 2025 rate"
+    },
+    {
+      "district": "1438",
+      "name": "Washington Township",
+      "county": "Morris",
+      "path": "towns/morris/washington-township.html",
+      "rate_label": "3.003% \u00b7 2025 rate"
+    },
+    {
+      "district": "1439",
+      "name": "Wharton Borough",
+      "county": "Morris",
+      "path": "towns/morris/wharton-borough.html",
+      "rate_label": "2.607% \u00b7 2025 rate"
+    },
+    {
+      "district": "1501",
+      "name": "Barnegat Light Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/barnegat-light-borough.html",
+      "rate_label": "1.107% \u00b7 2025 rate"
+    },
+    {
+      "district": "1533",
+      "name": "Barnegat Township",
+      "county": "Ocean",
+      "path": "towns/ocean/barnegat-township.html",
+      "rate_label": "3.083% \u00b7 2025 rate"
+    },
+    {
+      "district": "1502",
+      "name": "Bay Head Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/bay-head-borough.html",
+      "rate_label": "1.105% \u00b7 2025 rate"
+    },
+    {
+      "district": "1503",
+      "name": "Beach Haven Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/beach-haven-borough.html",
+      "rate_label": "1.426% \u00b7 2025 rate"
+    },
+    {
+      "district": "1504",
+      "name": "Beachwood Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/beachwood-borough.html",
+      "rate_label": "3.187% \u00b7 2025 rate"
+    },
+    {
+      "district": "1505",
+      "name": "Berkeley Township",
+      "county": "Ocean",
+      "path": "towns/ocean/berkeley-township.html",
+      "rate_label": "2.590% \u00b7 2025 rate"
+    },
+    {
+      "district": "1506",
+      "name": "Brick Township",
+      "county": "Ocean",
+      "path": "towns/ocean/brick-township.html",
+      "rate_label": "2.664% \u00b7 2025 rate"
+    },
+    {
+      "district": "1508",
+      "name": "Eagleswood Township",
+      "county": "Ocean",
+      "path": "towns/ocean/eagleswood-township.html",
+      "rate_label": "2.987% \u00b7 2025 rate"
+    },
+    {
+      "district": "1509",
+      "name": "Harvey Cedars Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/harvey-cedars-borough.html",
+      "rate_label": "1.112% \u00b7 2025 rate"
+    },
+    {
+      "district": "1510",
+      "name": "Island Heights Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/island-heights-borough.html",
+      "rate_label": "2.234% \u00b7 2025 rate"
+    },
+    {
+      "district": "1511",
+      "name": "Jackson Township",
+      "county": "Ocean",
+      "path": "towns/ocean/jackson-township.html",
+      "rate_label": "1.386% \u00b7 2025 rate"
+    },
+    {
+      "district": "1512",
+      "name": "Lacey Township",
+      "county": "Ocean",
+      "path": "towns/ocean/lacey-township.html",
+      "rate_label": "2.735% \u00b7 2025 rate"
+    },
+    {
+      "district": "1513",
+      "name": "Lakehurst Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/lakehurst-borough.html",
+      "rate_label": "2.297% \u00b7 2025 rate"
+    },
+    {
+      "district": "1514",
+      "name": "Lakewood Township",
+      "county": "Ocean",
+      "path": "towns/ocean/lakewood-township.html",
+      "rate_label": "2.462% \u00b7 2025 rate"
+    },
+    {
+      "district": "1515",
+      "name": "Lavallette Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/lavallette-borough.html",
+      "rate_label": "1.014% \u00b7 2025 rate"
+    },
+    {
+      "district": "1516",
+      "name": "Little Egg Harbor Township",
+      "county": "Ocean",
+      "path": "towns/ocean/little-egg-harbor-township.html",
+      "rate_label": "3.207% \u00b7 2025 rate"
+    },
+    {
+      "district": "1517",
+      "name": "Long Beach Township",
+      "county": "Ocean",
+      "path": "towns/ocean/long-beach-township.html",
+      "rate_label": "0.913% \u00b7 2025 rate"
+    },
+    {
+      "district": "1518",
+      "name": "Manchester Township",
+      "county": "Ocean",
+      "path": "towns/ocean/manchester-township.html",
+      "rate_label": "1.455% \u00b7 2025 rate"
+    },
+    {
+      "district": "1519",
+      "name": "Mantoloking Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/mantoloking-borough.html",
+      "rate_label": "0.912% \u00b7 2025 rate"
+    },
+    {
+      "district": "1521",
+      "name": "Ocean Gate Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/ocean-gate-borough.html",
+      "rate_label": "1.821% \u00b7 2025 rate"
+    },
+    {
+      "district": "1520",
+      "name": "Ocean Township",
+      "county": "Ocean",
+      "path": "towns/ocean/ocean-township.html",
+      "rate_label": "1.578% \u00b7 2025 rate"
+    },
+    {
+      "district": "1522",
+      "name": "Pine Beach Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/pine-beach-borough.html",
+      "rate_label": "2.028% \u00b7 2025 rate"
+    },
+    {
+      "district": "1523",
+      "name": "Plumsted Township",
+      "county": "Ocean",
+      "path": "towns/ocean/plumsted-township.html",
+      "rate_label": "3.150% \u00b7 2025 rate"
+    },
+    {
+      "district": "1525",
+      "name": "Point Pleasant Beach Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/point-pleasant-beach-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1524",
+      "name": "Point Pleasant Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/point-pleasant-borough.html",
+      "rate_label": "2.424% \u00b7 2025 rate"
+    },
+    {
+      "district": "1526",
+      "name": "Seaside Heights Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/seaside-heights-borough.html",
+      "rate_label": "1.284% \u00b7 2025 rate"
+    },
+    {
+      "district": "1527",
+      "name": "Seaside Park Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/seaside-park-borough.html",
+      "rate_label": "1.735% \u00b7 2025 rate"
+    },
+    {
+      "district": "1528",
+      "name": "Ship Bottom Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/ship-bottom-borough.html",
+      "rate_label": "1.241% \u00b7 2025 rate"
+    },
+    {
+      "district": "1529",
+      "name": "South Toms River Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/south-toms-river-borough.html",
+      "rate_label": "3.520% \u00b7 2025 rate"
+    },
+    {
+      "district": "1530",
+      "name": "Stafford Township",
+      "county": "Ocean",
+      "path": "towns/ocean/stafford-township.html",
+      "rate_label": "2.623% \u00b7 2025 rate"
+    },
+    {
+      "district": "1531",
+      "name": "Surf City Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/surf-city-borough.html",
+      "rate_label": "1.066% \u00b7 2025 rate"
+    },
+    {
+      "district": "1507",
+      "name": "Toms River Township",
+      "county": "Ocean",
+      "path": "towns/ocean/toms-river-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1532",
+      "name": "Tuckerton Borough",
+      "county": "Ocean",
+      "path": "towns/ocean/tuckerton-borough.html",
+      "rate_label": "3.201% \u00b7 2025 rate"
+    },
+    {
+      "district": "1601",
+      "name": "Bloomingdale Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/bloomingdale-borough.html",
+      "rate_label": "4.718% \u00b7 2025 rate"
+    },
+    {
+      "district": "1602",
+      "name": "Clifton City",
+      "county": "Passaic",
+      "path": "towns/passaic/clifton-city.html",
+      "rate_label": "6.129% \u00b7 2025 rate"
+    },
+    {
+      "district": "1603",
+      "name": "Haledon Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/haledon-borough.html",
+      "rate_label": "5.428% \u00b7 2025 rate"
+    },
+    {
+      "district": "1604",
+      "name": "Hawthorne Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/hawthorne-borough.html",
+      "rate_label": "3.144% \u00b7 2025 rate"
+    },
+    {
+      "district": "1605",
+      "name": "Little Falls Township",
+      "county": "Passaic",
+      "path": "towns/passaic/little-falls-township.html",
+      "rate_label": "3.496% \u00b7 2025 rate"
+    },
+    {
+      "district": "1606",
+      "name": "North Haledon Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/north-haledon-borough.html",
+      "rate_label": "3.187% \u00b7 2025 rate"
+    },
+    {
+      "district": "1607",
+      "name": "Passaic City",
+      "county": "Passaic",
+      "path": "towns/passaic/passaic-city.html",
+      "rate_label": "4.258% \u00b7 2025 rate"
+    },
+    {
+      "district": "1608",
+      "name": "Paterson City",
+      "county": "Passaic",
+      "path": "towns/passaic/paterson-city.html",
+      "rate_label": "5.335% \u00b7 2025 rate"
+    },
+    {
+      "district": "1609",
+      "name": "Pompton Lakes Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/pompton-lakes-borough.html",
+      "rate_label": "4.131% \u00b7 2025 rate"
+    },
+    {
+      "district": "1610",
+      "name": "Prospect Park Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/prospect-park-borough.html",
+      "rate_label": "6.231% \u00b7 2025 rate"
+    },
+    {
+      "district": "1611",
+      "name": "Ringwood Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/ringwood-borough.html",
+      "rate_label": "4.259% \u00b7 2025 rate"
+    },
+    {
+      "district": "1612",
+      "name": "Totowa Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/totowa-borough.html",
+      "rate_label": "2.934% \u00b7 2025 rate"
+    },
+    {
+      "district": "1613",
+      "name": "Wanaque Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/wanaque-borough.html",
+      "rate_label": "4.541% \u00b7 2025 rate"
+    },
+    {
+      "district": "1614",
+      "name": "Wayne Township",
+      "county": "Passaic",
+      "path": "towns/passaic/wayne-township.html",
+      "rate_label": "5.998% \u00b7 2025 rate"
+    },
+    {
+      "district": "1615",
+      "name": "West Milford Township",
+      "county": "Passaic",
+      "path": "towns/passaic/west-milford-township.html",
+      "rate_label": "4.214% \u00b7 2025 rate"
+    },
+    {
+      "district": "1616",
+      "name": "Woodland Park Borough",
+      "county": "Passaic",
+      "path": "towns/passaic/woodland-park-borough.html",
+      "rate_label": "3.435% \u00b7 2025 rate"
+    },
+    {
+      "district": "1701",
+      "name": "Alloway Township",
+      "county": "Salem",
+      "path": "towns/salem/alloway-township.html",
+      "rate_label": "3.627% \u00b7 2025 rate"
+    },
+    {
+      "district": "1713",
+      "name": "Carneys Point Township",
+      "county": "Salem",
+      "path": "towns/salem/carneys-point-township.html",
+      "rate_label": "2.410% \u00b7 2025 rate"
+    },
+    {
+      "district": "1702",
+      "name": "Elmer Borough",
+      "county": "Salem",
+      "path": "towns/salem/elmer-borough.html",
+      "rate_label": "4.102% \u00b7 2025 rate"
+    },
+    {
+      "district": "1703",
+      "name": "Elsinboro Township",
+      "county": "Salem",
+      "path": "towns/salem/elsinboro-township.html",
+      "rate_label": "3.172% \u00b7 2025 rate"
+    },
+    {
+      "district": "1704",
+      "name": "Lower Alloways Creek Township",
+      "county": "Salem",
+      "path": "towns/salem/lower-alloways-creek-township.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1705",
+      "name": "Mannington Township",
+      "county": "Salem",
+      "path": "towns/salem/mannington-township.html",
+      "rate_label": "3.604% \u00b7 2025 rate"
+    },
+    {
+      "district": "1706",
+      "name": "Oldmans Township",
+      "county": "Salem",
+      "path": "towns/salem/oldmans-township.html",
+      "rate_label": "2.699% \u00b7 2025 rate"
+    },
+    {
+      "district": "1707",
+      "name": "Penns Grove Borough",
+      "county": "Salem",
+      "path": "towns/salem/penns-grove-borough.html",
+      "rate_label": "5.649% \u00b7 2025 rate"
+    },
+    {
+      "district": "1708",
+      "name": "Pennsville Township",
+      "county": "Salem",
+      "path": "towns/salem/pennsville-township.html",
+      "rate_label": "5.199% \u00b7 2025 rate"
+    },
+    {
+      "district": "1709",
+      "name": "Pilesgrove Township",
+      "county": "Salem",
+      "path": "towns/salem/pilesgrove-township.html",
+      "rate_label": "3.746% \u00b7 2025 rate"
+    },
+    {
+      "district": "1710",
+      "name": "Pittsgrove Township",
+      "county": "Salem",
+      "path": "towns/salem/pittsgrove-township.html",
+      "rate_label": "4.123% \u00b7 2025 rate"
+    },
+    {
+      "district": "1711",
+      "name": "Quinton Township",
+      "county": "Salem",
+      "path": "towns/salem/quinton-township.html",
+      "rate_label": "3.841% \u00b7 2025 rate"
+    },
+    {
+      "district": "1712",
+      "name": "Salem City",
+      "county": "Salem",
+      "path": "towns/salem/salem-city.html",
+      "rate_label": "8.628% \u00b7 2025 rate"
+    },
+    {
+      "district": "1714",
+      "name": "Upper Pittsgrove Township",
+      "county": "Salem",
+      "path": "towns/salem/upper-pittsgrove-township.html",
+      "rate_label": "3.098% \u00b7 2025 rate"
+    },
+    {
+      "district": "1715",
+      "name": "Woodstown Borough",
+      "county": "Salem",
+      "path": "towns/salem/woodstown-borough.html",
+      "rate_label": "4.153% \u00b7 2025 rate"
+    },
+    {
+      "district": "1801",
+      "name": "Bedminster Township",
+      "county": "Somerset",
+      "path": "towns/somerset/bedminster-township.html",
+      "rate_label": "1.204% \u00b7 2025 rate"
+    },
+    {
+      "district": "1802",
+      "name": "Bernards Township",
+      "county": "Somerset",
+      "path": "towns/somerset/bernards-township.html",
+      "rate_label": "1.688% \u00b7 2025 rate"
+    },
+    {
+      "district": "1803",
+      "name": "Bernardsville Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/bernardsville-borough.html",
+      "rate_label": "1.898% \u00b7 2025 rate"
+    },
+    {
+      "district": "1804",
+      "name": "Bound Brook Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/bound-brook-borough.html",
+      "rate_label": "2.207% \u00b7 2025 rate"
+    },
+    {
+      "district": "1805",
+      "name": "Branchburg Township",
+      "county": "Somerset",
+      "path": "towns/somerset/branchburg-township.html",
+      "rate_label": "1.709% \u00b7 2025 rate"
+    },
+    {
+      "district": "1806",
+      "name": "Bridgewater Township",
+      "county": "Somerset",
+      "path": "towns/somerset/bridgewater-township.html",
+      "rate_label": "1.902% \u00b7 2025 rate"
+    },
+    {
+      "district": "1807",
+      "name": "Far Hills Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/far-hills-borough.html",
+      "rate_label": "1.160% \u00b7 2025 rate"
+    },
+    {
+      "district": "1808",
+      "name": "Franklin Township",
+      "county": "Somerset",
+      "path": "towns/somerset/franklin-township.html",
+      "rate_label": "1.678% \u00b7 2025 rate"
+    },
+    {
+      "district": "1809",
+      "name": "Green Brook Township",
+      "county": "Somerset",
+      "path": "towns/somerset/green-brook-township.html",
+      "rate_label": "2.125% \u00b7 2025 rate"
+    },
+    {
+      "district": "1810",
+      "name": "Hillsborough Township",
+      "county": "Somerset",
+      "path": "towns/somerset/hillsborough-township.html",
+      "rate_label": "2.160% \u00b7 2025 rate"
+    },
+    {
+      "district": "1811",
+      "name": "Manville Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/manville-borough.html",
+      "rate_label": "2.110% \u00b7 2025 rate"
+    },
+    {
+      "district": "1812",
+      "name": "Millstone Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/millstone-borough.html",
+      "rate_label": "2.154% \u00b7 2025 rate"
+    },
+    {
+      "district": "1813",
+      "name": "Montgomery Township",
+      "county": "Somerset",
+      "path": "towns/somerset/montgomery-township.html",
+      "rate_label": "3.438% \u00b7 2025 rate"
+    },
+    {
+      "district": "1814",
+      "name": "North Plainfield Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/north-plainfield-borough.html",
+      "rate_label": "4.543% \u00b7 2025 rate"
+    },
+    {
+      "district": "1815",
+      "name": "Peapack and Gladstone Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/peapack-and-gladstone-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1816",
+      "name": "Raritan Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/raritan-borough.html",
+      "rate_label": "3.042% \u00b7 2025 rate"
+    },
+    {
+      "district": "1817",
+      "name": "Rocky Hill Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/rocky-hill-borough.html",
+      "rate_label": "2.081% \u00b7 2025 rate"
+    },
+    {
+      "district": "1818",
+      "name": "Somerville Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/somerville-borough.html",
+      "rate_label": "4.079% \u00b7 2025 rate"
+    },
+    {
+      "district": "1819",
+      "name": "South Bound Brook Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/south-bound-brook-borough.html",
+      "rate_label": "Municipal report"
+    },
+    {
+      "district": "1820",
+      "name": "Warren Township",
+      "county": "Somerset",
+      "path": "towns/somerset/warren-township.html",
+      "rate_label": "1.752% \u00b7 2025 rate"
+    },
+    {
+      "district": "1821",
+      "name": "Watchung Borough",
+      "county": "Somerset",
+      "path": "towns/somerset/watchung-borough.html",
+      "rate_label": "1.952% \u00b7 2025 rate"
+    },
+    {
+      "district": "1901",
+      "name": "Andover Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/andover-borough.html",
+      "rate_label": "3.300% \u00b7 2025 rate"
+    },
+    {
+      "district": "1902",
+      "name": "Andover Township",
+      "county": "Sussex",
+      "path": "towns/sussex/andover-township.html",
+      "rate_label": "4.360% \u00b7 2025 rate"
+    },
+    {
+      "district": "1903",
+      "name": "Branchville Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/branchville-borough.html",
+      "rate_label": "2.516% \u00b7 2025 rate"
+    },
+    {
+      "district": "1904",
+      "name": "Byram Township",
+      "county": "Sussex",
+      "path": "towns/sussex/byram-township.html",
+      "rate_label": "4.019% \u00b7 2025 rate"
+    },
+    {
+      "district": "1905",
+      "name": "Frankford Township",
+      "county": "Sussex",
+      "path": "towns/sussex/frankford-township.html",
+      "rate_label": "3.040% \u00b7 2025 rate"
+    },
+    {
+      "district": "1906",
+      "name": "Franklin Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/franklin-borough.html",
+      "rate_label": "2.515% \u00b7 2025 rate"
+    },
+    {
+      "district": "1907",
+      "name": "Fredon Township",
+      "county": "Sussex",
+      "path": "towns/sussex/fredon-township.html",
+      "rate_label": "3.160% \u00b7 2025 rate"
+    },
+    {
+      "district": "1908",
+      "name": "Green Township",
+      "county": "Sussex",
+      "path": "towns/sussex/green-township.html",
+      "rate_label": "2.274% \u00b7 2025 rate"
+    },
+    {
+      "district": "1909",
+      "name": "Hamburg Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/hamburg-borough.html",
+      "rate_label": "5.135% \u00b7 2025 rate"
+    },
+    {
+      "district": "1910",
+      "name": "Hampton Township",
+      "county": "Sussex",
+      "path": "towns/sussex/hampton-township.html",
+      "rate_label": "3.495% \u00b7 2025 rate"
+    },
+    {
+      "district": "1911",
+      "name": "Hardyston Township",
+      "county": "Sussex",
+      "path": "towns/sussex/hardyston-township.html",
+      "rate_label": "1.929% \u00b7 2025 rate"
+    },
+    {
+      "district": "1912",
+      "name": "Hopatcong Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/hopatcong-borough.html",
+      "rate_label": "2.214% \u00b7 2025 rate"
+    },
+    {
+      "district": "1913",
+      "name": "Lafayette Township",
+      "county": "Sussex",
+      "path": "towns/sussex/lafayette-township.html",
+      "rate_label": "2.987% \u00b7 2025 rate"
+    },
+    {
+      "district": "1914",
+      "name": "Montague Township",
+      "county": "Sussex",
+      "path": "towns/sussex/montague-township.html",
+      "rate_label": "3.165% \u00b7 2025 rate"
+    },
+    {
+      "district": "1915",
+      "name": "Newton Town",
+      "county": "Sussex",
+      "path": "towns/sussex/newton-town.html",
+      "rate_label": "2.662% \u00b7 2025 rate"
+    },
+    {
+      "district": "1916",
+      "name": "Ogdensburg Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/ogdensburg-borough.html",
+      "rate_label": "4.154% \u00b7 2025 rate"
+    },
+    {
+      "district": "1917",
+      "name": "Sandyston Township",
+      "county": "Sussex",
+      "path": "towns/sussex/sandyston-township.html",
+      "rate_label": "3.338% \u00b7 2025 rate"
+    },
+    {
+      "district": "1918",
+      "name": "Sparta Township",
+      "county": "Sussex",
+      "path": "towns/sussex/sparta-township.html",
+      "rate_label": "3.668% \u00b7 2025 rate"
+    },
+    {
+      "district": "1919",
+      "name": "Stanhope Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/stanhope-borough.html",
+      "rate_label": "4.660% \u00b7 2025 rate"
+    },
+    {
+      "district": "1920",
+      "name": "Stillwater Township",
+      "county": "Sussex",
+      "path": "towns/sussex/stillwater-township.html",
+      "rate_label": "3.771% \u00b7 2025 rate"
+    },
+    {
+      "district": "1921",
+      "name": "Sussex Borough",
+      "county": "Sussex",
+      "path": "towns/sussex/sussex-borough.html",
+      "rate_label": "3.615% \u00b7 2025 rate"
+    },
+    {
+      "district": "1922",
+      "name": "Vernon Township",
+      "county": "Sussex",
+      "path": "towns/sussex/vernon-township.html",
+      "rate_label": "2.345% \u00b7 2025 rate"
+    },
+    {
+      "district": "1923",
+      "name": "Walpack Township",
+      "county": "Sussex",
+      "path": "towns/sussex/walpack-township.html",
+      "rate_label": "0.502% \u00b7 2025 rate"
+    },
+    {
+      "district": "1924",
+      "name": "Wantage Township",
+      "county": "Sussex",
+      "path": "towns/sussex/wantage-township.html",
+      "rate_label": "3.002% \u00b7 2025 rate"
+    },
+    {
+      "district": "2001",
+      "name": "Berkeley Heights Township",
+      "county": "Union",
+      "path": "towns/union/berkeley-heights-township.html",
+      "rate_label": "4.401% \u00b7 2025 rate"
+    },
+    {
+      "district": "2002",
+      "name": "Clark Township",
+      "county": "Union",
+      "path": "towns/union/clark-township.html",
+      "rate_label": "2.269% \u00b7 2025 rate"
+    },
+    {
+      "district": "2003",
+      "name": "Cranford Township",
+      "county": "Union",
+      "path": "towns/union/cranford-township.html",
+      "rate_label": "7.248% \u00b7 2025 rate"
+    },
+    {
+      "district": "2004",
+      "name": "Elizabeth City",
+      "county": "Union",
+      "path": "towns/union/elizabeth-city.html",
+      "rate_label": "2.017% \u00b7 2025 rate"
+    },
+    {
+      "district": "2005",
+      "name": "Fanwood Borough",
+      "county": "Union",
+      "path": "towns/union/fanwood-borough.html",
+      "rate_label": "3.120% \u00b7 2025 rate"
+    },
+    {
+      "district": "2006",
+      "name": "Garwood Borough",
+      "county": "Union",
+      "path": "towns/union/garwood-borough.html",
+      "rate_label": "2.858% \u00b7 2025 rate"
+    },
+    {
+      "district": "2007",
+      "name": "Hillside Township",
+      "county": "Union",
+      "path": "towns/union/hillside-township.html",
+      "rate_label": "8.899% \u00b7 2025 rate"
+    },
+    {
+      "district": "2008",
+      "name": "Kenilworth Borough",
+      "county": "Union",
+      "path": "towns/union/kenilworth-borough.html",
+      "rate_label": "6.625% \u00b7 2025 rate"
+    },
+    {
+      "district": "2009",
+      "name": "Linden City",
+      "county": "Union",
+      "path": "towns/union/linden-city.html",
+      "rate_label": "7.345% \u00b7 2025 rate"
+    },
+    {
+      "district": "2010",
+      "name": "Mountainside Borough",
+      "county": "Union",
+      "path": "towns/union/mountainside-borough.html",
+      "rate_label": "2.100% \u00b7 2025 rate"
+    },
+    {
+      "district": "2011",
+      "name": "New Providence Borough",
+      "county": "Union",
+      "path": "towns/union/new-providence-borough.html",
+      "rate_label": "5.242% \u00b7 2025 rate"
+    },
+    {
+      "district": "2012",
+      "name": "Plainfield City",
+      "county": "Union",
+      "path": "towns/union/plainfield-city.html",
+      "rate_label": "8.926% \u00b7 2025 rate"
+    },
+    {
+      "district": "2013",
+      "name": "Rahway City",
+      "county": "Union",
+      "path": "towns/union/rahway-city.html",
+      "rate_label": "7.584% \u00b7 2025 rate"
+    },
+    {
+      "district": "2014",
+      "name": "Roselle Borough",
+      "county": "Union",
+      "path": "towns/union/roselle-borough.html",
+      "rate_label": "9.147% \u00b7 2025 rate"
+    },
+    {
+      "district": "2015",
+      "name": "Roselle Park Borough",
+      "county": "Union",
+      "path": "towns/union/roselle-park-borough.html",
+      "rate_label": "4.506% \u00b7 2025 rate"
+    },
+    {
+      "district": "2016",
+      "name": "Scotch Plains Township",
+      "county": "Union",
+      "path": "towns/union/scotch-plains-township.html",
+      "rate_label": "12.350% \u00b7 2025 rate"
+    },
+    {
+      "district": "2017",
+      "name": "Springfield Township",
+      "county": "Union",
+      "path": "towns/union/springfield-township.html",
+      "rate_label": "2.411% \u00b7 2025 rate"
+    },
+    {
+      "district": "2018",
+      "name": "Summit City",
+      "county": "Union",
+      "path": "towns/union/summit-city.html",
+      "rate_label": "4.471% \u00b7 2025 rate"
+    },
+    {
+      "district": "2019",
+      "name": "Union Township",
+      "county": "Union",
+      "path": "towns/union/union-township.html",
+      "rate_label": "23.323% \u00b7 2025 rate"
+    },
+    {
+      "district": "2020",
+      "name": "Westfield Town",
+      "county": "Union",
+      "path": "towns/union/westfield-town.html",
+      "rate_label": "2.292% \u00b7 2025 rate"
+    },
+    {
+      "district": "2021",
+      "name": "Winfield Township",
+      "county": "Union",
+      "path": "towns/union/winfield-township.html",
+      "rate_label": "23.411% \u00b7 2025 rate"
+    },
+    {
+      "district": "2101",
+      "name": "Allamuchy Township",
+      "county": "Warren",
+      "path": "towns/warren/allamuchy-township.html",
+      "rate_label": "3.227% \u00b7 2025 rate"
+    },
+    {
+      "district": "2102",
+      "name": "Alpha Borough",
+      "county": "Warren",
+      "path": "towns/warren/alpha-borough.html",
+      "rate_label": "3.485% \u00b7 2025 rate"
+    },
+    {
+      "district": "2103",
+      "name": "Belvidere Town",
+      "county": "Warren",
+      "path": "towns/warren/belvidere-town.html",
+      "rate_label": "3.302% \u00b7 2025 rate"
+    },
+    {
+      "district": "2104",
+      "name": "Blairstown Township",
+      "county": "Warren",
+      "path": "towns/warren/blairstown-township.html",
+      "rate_label": "3.134% \u00b7 2025 rate"
+    },
+    {
+      "district": "2105",
+      "name": "Franklin Township",
+      "county": "Warren",
+      "path": "towns/warren/franklin-township.html",
+      "rate_label": "3.129% \u00b7 2025 rate"
+    },
+    {
+      "district": "2106",
+      "name": "Frelinghuysen Township",
+      "county": "Warren",
+      "path": "towns/warren/frelinghuysen-township.html",
+      "rate_label": "2.858% \u00b7 2025 rate"
+    },
+    {
+      "district": "2107",
+      "name": "Greenwich Township",
+      "county": "Warren",
+      "path": "towns/warren/greenwich-township.html",
+      "rate_label": "4.052% \u00b7 2025 rate"
+    },
+    {
+      "district": "2108",
+      "name": "Hackettstown Town",
+      "county": "Warren",
+      "path": "towns/warren/hackettstown-town.html",
+      "rate_label": "3.477% \u00b7 2025 rate"
+    },
+    {
+      "district": "2109",
+      "name": "Hardwick Township",
+      "county": "Warren",
+      "path": "towns/warren/hardwick-township.html",
+      "rate_label": "3.825% \u00b7 2025 rate"
+    },
+    {
+      "district": "2110",
+      "name": "Harmony Township",
+      "county": "Warren",
+      "path": "towns/warren/harmony-township.html",
+      "rate_label": "2.665% \u00b7 2025 rate"
+    },
+    {
+      "district": "2111",
+      "name": "Hope Township",
+      "county": "Warren",
+      "path": "towns/warren/hope-township.html",
+      "rate_label": "3.466% \u00b7 2025 rate"
+    },
+    {
+      "district": "2112",
+      "name": "Independence Township",
+      "county": "Warren",
+      "path": "towns/warren/independence-township.html",
+      "rate_label": "3.795% \u00b7 2025 rate"
+    },
+    {
+      "district": "2113",
+      "name": "Knowlton Township",
+      "county": "Warren",
+      "path": "towns/warren/knowlton-township.html",
+      "rate_label": "4.271% \u00b7 2025 rate"
+    },
+    {
+      "district": "2114",
+      "name": "Liberty Township",
+      "county": "Warren",
+      "path": "towns/warren/liberty-township.html",
+      "rate_label": "3.656% \u00b7 2025 rate"
+    },
+    {
+      "district": "2115",
+      "name": "Lopatcong Township",
+      "county": "Warren",
+      "path": "towns/warren/lopatcong-township.html",
+      "rate_label": "3.042% \u00b7 2025 rate"
+    },
+    {
+      "district": "2116",
+      "name": "Mansfield Township",
+      "county": "Warren",
+      "path": "towns/warren/mansfield-township.html",
+      "rate_label": "3.563% \u00b7 2025 rate"
+    },
+    {
+      "district": "2117",
+      "name": "Oxford Township",
+      "county": "Warren",
+      "path": "towns/warren/oxford-township.html",
+      "rate_label": "4.827% \u00b7 2025 rate"
+    },
+    {
+      "district": "2119",
+      "name": "Phillipsburg Town",
+      "county": "Warren",
+      "path": "towns/warren/phillipsburg-town.html",
+      "rate_label": "4.675% \u00b7 2025 rate"
+    },
+    {
+      "district": "2120",
+      "name": "Pohatcong Township",
+      "county": "Warren",
+      "path": "towns/warren/pohatcong-township.html",
+      "rate_label": "4.535% \u00b7 2025 rate"
+    },
+    {
+      "district": "2121",
+      "name": "Washington Borough",
+      "county": "Warren",
+      "path": "towns/warren/washington-borough.html",
+      "rate_label": "5.890% \u00b7 2025 rate"
+    },
+    {
+      "district": "2122",
+      "name": "Washington Township",
+      "county": "Warren",
+      "path": "towns/warren/washington-township.html",
+      "rate_label": "4.110% \u00b7 2025 rate"
+    },
+    {
+      "district": "2123",
+      "name": "White Township",
+      "county": "Warren",
+      "path": "towns/warren/white-township.html",
+      "rate_label": "2.620% \u00b7 2025 rate"
+    }
+  ]
+}
