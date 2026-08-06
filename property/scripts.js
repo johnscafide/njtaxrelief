@@ -2,8 +2,7 @@
  * NJPropertyTaxRelief.com :: Main JavaScript
  * Each section is labeled.
  * I appreciate you finding this useful if you are a lurker.
- * I only ask, if you use this, please credit John@johnscafide.com
- * or Venmo a tip: https://www.venmo.com/u/John-Scafide
+ * Watchdog Property Intelligence public application code.
  *
  * SECTIONS:
  *   1.  Config & Constants

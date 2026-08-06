@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build the public Watchdog marker catalog from fields already implemented in /property."""
 import json
+import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 
@@ -124,3 +126,4 @@ summary['percent_of_goal']=round(len(markers)/10,1)
 doc={"schema_version":1,"generated_at":datetime.now().astimezone().isoformat(timespec='seconds'),"target_markers":1000,"definition":"One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.","tier_rule":"Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.","summary":summary,"professions":[{"id":k,"label":v} for k,v in PROF.items()],"markers":markers}
 (ROOT/'data'/'marker-registry.json').write_text(json.dumps(doc,indent=2)+'\n')
 print(json.dumps(summary,indent=2))
+subprocess.run([sys.executable, str(ROOT/'scripts'/'build_marker_refresh_policy.py')], check=True)

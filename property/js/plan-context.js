@@ -85,8 +85,12 @@
     client.auth.getSession().then(function (result) {
       var user = result && result.data && result.data.session && result.data.session.user;
       if (!user) return;
-      client.from('profiles').select('account_role,plan_tier').eq('id', user.id).maybeSingle().then(function (profileResult) {
-        init(user, profileResult && profileResult.data || {});
+      client.rpc('get_my_entitlement').then(function (entitlementResult) {
+        var rows = entitlementResult && entitlementResult.data || [], ent = Array.isArray(rows) ? rows[0] : rows;
+        if (ent) { init(user, { account_role: ent.account_role, plan_tier: ent.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end }); return; }
+        client.from('profiles').select('account_role,plan_tier').eq('id', user.id).maybeSingle().then(function (profileResult) {
+          init(user, profileResult && profileResult.data || {});
+        });
       });
     }).catch(function () {});
   }

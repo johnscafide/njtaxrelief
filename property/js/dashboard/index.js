@@ -157,6 +157,7 @@
     var checking = el('db-auth-check');
     if (checking) checking.style.display = 'none';
     paint();
+    if (nextUser && window.WatchdogBilling) window.setTimeout(function () { window.WatchdogBilling.resume(); }, 0);
   }
 
   function showSignedOut(force) {
@@ -253,10 +254,13 @@
     Promise.all([
       sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
       sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
+      sb.rpc('get_my_entitlement'),
       loadRefData(), loadSR1A(), loadUniformity(), loadAppeals(), loadAbatements()
     ]).then(function (res) {
       rows = (res[0] && res[0].data) || [];
       profile = (res[1] && res[1].data) || {};
+      var entRows = (res[2] && res[2].data) || [], ent = Array.isArray(entRows) ? entRows[0] : entRows;
+      if (ent) profile = Object.assign({}, profile, { account_role: ent.account_role || profile.account_role, plan_tier: ent.plan_tier || profile.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end });
       if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
       render();
       hydrateDetails().then(render);
@@ -948,24 +952,7 @@
   }
 
   window.dbUpgrade = function () {
-    plModalNote('Watchdog Pro',
-      '<p>Everything on this page stays free. Pro is for the work that comes after: the analysis, ' +
-      'the comparisons across towns, and the exports you can hand to an attorney or a client.</p>' +
-      '<div class="pro-list">' +
-        '<div><b>Chapter 123 screening on every property</b><span>The supported assessment, the statutory limit, ' +
-        'and the dollar figure you would be arguing for.</span></div>' +
-        '<div><b>Verified sales comparables</b><span>Arm\u2019s length sales the state itself confirmed, with square ' +
-        'footage and price per square foot.</span></div>' +
-        '<div><b>Town by town comparison</b><span>Effective rates measured from live parcel data across all 565 ' +
-        'municipalities.</span></div>' +
-        '<div><b>CSV and print exports</b><span>Block, lot, PAMS PIN, ratio and limits in the format a county board ' +
-        'expects.</span></div>' +
-        '<div><b>Unlimited saved properties</b><span>Portfolio totals, blended rates, and drift tracking across all ' +
-        'of them.</span></div>' +
-      '</div>' +
-      '<p style="font-size:13.5px;color:#8a93a6;">Not open yet. Tell me you want it and We will let you know the day ' +
-      'it is, at the price early users get.</p>' +
-      '<button class="db-btn" onclick="dbWantPro()">Tell us we want this</button>');
+    location.href = '/property/pro.html#plans';
   };
 
   window.dbWantPro = function () {

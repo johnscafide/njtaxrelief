@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Account & Billing | Watchdog</title><meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css?v=20260805b"><link rel="stylesheet" href="/property/css/dashboard.css?v=20260806a"><link rel="stylesheet" href="/property/css/account.css?v=20260806a"><link rel="stylesheet" href="/property/css/plan-context.css?v=20260805a">
+</head><body data-sidebar-page="account"><main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace">
+<header class="top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-credit-card"></i></div><div><span class="top-eyebrow">ACCOUNT</span><h1>Account &amp; billing</h1><span>Your Watchdog access, subscription and professional profile.</span></div></div></div></header>
+<section class="ac-shell" id="ac-app" hidden>
+  <div class="ac-success" id="ac-success" hidden><i class="fas fa-circle-check"></i><div><b>Checkout completed.</b><span>Stripe is confirming the subscription. Your plan updates automatically when the signed webhook arrives.</span></div></div>
+  <div class="ac-grid"><article class="ac-card ac-plan"><span>CURRENT ACCESS</span><h2 id="ac-plan">—</h2><p id="ac-status">Checking subscription…</p><div class="ac-meta"><div><small>Renewal / period end</small><b id="ac-renewal">—</b></div><div><small>Profession</small><b id="ac-profession">Not set</b></div></div><button class="ac-primary" id="ac-portal" data-billing-portal hidden>Manage billing in Stripe</button></article>
+  <article class="ac-card"><span>PLAN OPTIONS</span><h2>Change your workload</h2><p>Stripe handles payment details. Watchdog receives subscription state, never your full card number.</p><div class="ac-actions"><button data-billing-plan="pro">Pro · $49/month</button><button data-billing-plan="pro_plus">Pro+ · $149/month</button><a href="/property/pro.html#plans">Compare every feature</a></div></article></div>
+  <article class="ac-card ac-security"><div><span>BILLING SECURITY</span><h2>Server-owned access</h2></div><p>Paid entitlements are synchronized from verified Stripe subscription events. Developer “View As” changes presentation only and never changes billing.</p></article>
+</section>
+<section class="ac-gate" id="ac-gate"><i class="fas fa-lock"></i><h2>Sign in to manage your account</h2><a href="/property/dashboard.html">Open Dashboard to sign in</a></section>
+</div></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/billing-client.js?v=20260806a"></script><script src="/property/js/plan-context.js?v=20260806a"></script><script src="/property/js/sidemenu.js?v=20260806a"></script><script src="/property/js/account.js?v=20260806a"></script>
+</body></html>
