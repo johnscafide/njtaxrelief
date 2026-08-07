@@ -1260,6 +1260,8 @@
       'cf-town',         // legacy contact form
       'lead-address',    // ANCHOR calculator
       'a-lead-address',  // new combined ANCHOR calculator
+      'est-address',     // standalone ANCHOR estimator
+      'sn-address',      // standalone Stay NJ estimator
       'df-sell-addr',    // dynamic contact — sell
       'df-appeal-addr'   // dynamic contact — appeal
     ];
@@ -1278,8 +1280,28 @@
       autocomplete.addListener('place_changed', function () {
         const place = autocomplete.getPlace();
         if (place && place.formatted_address) {
+          const state = (place.address_components || []).find(function (part) {
+            return (part.types || []).indexOf('administrative_area_level_1') !== -1;
+          });
+          const isEstimator = id === 'est-address' || id === 'sn-address';
+          if (isEstimator && state && state.short_name !== 'NJ') {
+            input.setCustomValidity('Please choose a New Jersey address.');
+            input.reportValidity();
+            return;
+          }
+          input.setCustomValidity('');
           input.value = place.formatted_address;
+          input.dataset.googleAddress = '1';
+          input.dispatchEvent(new CustomEvent('watchdog:address-selected', {
+            bubbles: true,
+            detail: { formattedAddress: place.formatted_address }
+          }));
         }
+      });
+
+      input.addEventListener('input', function () {
+        input.setCustomValidity('');
+        input.dataset.googleAddress = '0';
       });
 
       input.addEventListener('keydown', function (e) {

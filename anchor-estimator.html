@@ -13,6 +13,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Mozilla+Text:wght@200..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="anchor-watchdog.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 /* ============================================================
@@ -1215,8 +1218,8 @@
               <input class="est-input" id="est-phone" type="tel" placeholder="(xxx) xxx-xxxx" autocomplete="tel">
             </div>
             <div class="est-field">
-              <label class="est-label">Property Address <span class="est-required">*</span></label>
-              <input class="est-input" id="est-address" type="text" placeholder="Street address, city, NJ" autocomplete="street-address">
+              <label class="est-label">Home Address <span class="est-required">*</span></label>
+              <input class="est-input" id="est-address" type="text" placeholder="Start typing your NJ address" autocomplete="street-address">
             </div>
           </div>
         </div>
@@ -1498,6 +1501,10 @@
 
 <footer id="main-footer"></footer>
 <script src="scripts.js"></script>
+<script src="nj-parcel-enrich.js"></script>
+<script src="anchor-funnel.js"></script>
+<script src="anchor-watchdog-bridge.js"></script>
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5pi4EDEKDaqml3urDCqbfAawxKhgWhgQ&libraries=places&callback=initAddressAutocomplete"></script>
 
 <script>
 (function(){
@@ -1587,6 +1594,7 @@
     if (el) el.classList.add('active');
     currentStep = n;
     updateProgress(n);
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_step_view', { step: String(n) });
     // Scroll to top of the card, not the page (keeps user in context)
     var card = document.querySelector('.est-card-wrap');
     if (card) {
@@ -1599,6 +1607,13 @@
     var key = btn.getAttribute('data-key');
     var val = btn.getAttribute('data-val');
     answers[key] = val;
+    if (window.AnchorFunnel) {
+      window.AnchorFunnel.track('anchor_answer_selected', {
+        question: key,
+        answer: key === 'income' ? 'income_bracket_selected' : val,
+        step: currentStep
+      });
+    }
     btn.closest('.est-choices').querySelectorAll('.est-choice').forEach(function(b){ b.classList.remove('selected'); });
     btn.classList.add('selected');
     var nb = document.getElementById('next' + currentStep);
@@ -1613,6 +1628,7 @@
     var box = document.getElementById('est-' + which + '-timeframe');
     var chk = document.getElementById('est-' + which + '-interest');
     if (box && chk) box.style.display = chk.checked ? 'block' : 'none';
+    if (window.AnchorFunnel && chk) window.AnchorFunnel.track('anchor_real_estate_interest', { interest:which, selected:chk.checked });
     if (which === 'sell') {
       var widget = document.getElementById('est-text-widget');
       if (widget) widget.classList.toggle('show', chk.checked);
@@ -1639,6 +1655,8 @@
     var email   = ((document.getElementById('est-email')   || {}).value || '').trim();
     var phone   = ((document.getElementById('est-phone')   || {}).value || '').trim();
     var address = ((document.getElementById('est-address') || {}).value || '').trim();
+    var leadAttribution = window.AnchorFunnel ? window.AnchorFunnel.leadContext() : null;
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_home_value_review_request', { tenure:answers.tenure || 'unknown' });
     if (typeof emailjs !== 'undefined') {
       emailjs.init({ publicKey: EJS_PUBLIC });
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
@@ -1651,7 +1669,7 @@
         income_bracket: estIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Home Value Curiosity Click', 'Tenure: ' + estTenureLabel(), 'Income: ' + estIncomeLabel(), 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen'].join('\n')
+        message: ['Home Value Curiosity Click', 'Tenure: ' + estTenureLabel(), 'Income: ' + estIncomeLabel(), 'Name: ' + (name || 'Not provided'), 'Address: ' + (address || 'Not provided'), 'Phone: ' + (phone || 'Not provided'), 'Source: ANCHOR Estimator results screen', 'First-touch attribution: ' + (leadAttribution ? leadAttribution.firstTouchSummary : 'Unavailable'), 'Last-touch attribution: ' + (leadAttribution ? leadAttribution.lastTouchSummary : 'Unavailable')].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var nudge = document.getElementById('est-value-nudge');
@@ -1698,10 +1716,18 @@
 
     pendingLead = {
       name: name, email: email, phone: phone, address: address,
+      googleAddress: ((document.getElementById('est-address') || {}).dataset || {}).googleAddress === '1',
       sellInt: sellInt, buyInt: buyInt,
       sellWhen: sellInt ? ((document.getElementById('est-sell-when') || {}).value || '') : '',
       buyWhen:  buyInt  ? ((document.getElementById('est-buy-when')  || {}).value || '') : ''
     };
+
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_lead_submitted', {
+      tenure: answers.tenure,
+      sell_interest: sellInt,
+      buy_interest: buyInt,
+      google_address: pendingLead.googleAddress
+    });
 
     var codeEl = document.getElementById('est-code');
     if (codeEl) { codeEl.value = ''; codeEl.classList.remove('err'); }
@@ -1808,7 +1834,7 @@
       ? (answers.income === 'low' ? '$1,500' : '$1,000')
       : (answers.age === 'yes' ? '$700' : '$450');
 
-    // ── LEAD SCORE ───────────────────────────────
+    // ── LEAD / HOMEOWNER INTENT SCORE ───────────
     var qualifies = answers.primary !== 'no'
       && answers.income !== 'high'
       && !(answers.tenure === 'rent' && answers.income === 'mid')
@@ -1817,13 +1843,25 @@
     var reSoon = (L.sellInt && soonTimeframe(L.sellWhen)) || (L.buyInt && soonTimeframe(L.buyWhen));
     var reAny  = L.sellInt || L.buyInt;
     var score;
-    if (qualifies && reSoon) score = '\ud83d\udd25 HOT';
-    else if (qualifies && reAny) score = '\ud83d\udfe1 WARM';
-    else if (qualifies) score = '\ud83d\udfe2 QUALIFIED';
-    else if (reAny) score = '\ud83d\udfe1 WARM';
-    else score = '\u2744\ufe0f COLD';
+    if (qualifies && reSoon) score = 'HOT';
+    else if (qualifies && reAny) score = 'WARM';
+    else if (qualifies) score = 'QUALIFIED';
+    else if (reAny) score = 'WARM';
+    else score = 'NURTURE';
+    var intent = window.AnchorFunnel ? window.AnchorFunnel.score({
+      qualified: qualifies,
+      emailVerified: true,
+      address: L.address,
+      googleAddress: L.googleAddress,
+      tenure: answers.tenure,
+      sellInterest: L.sellInt,
+      buyInterest: L.buyInt,
+      sellWhen: L.sellWhen,
+      buyWhen: L.buyWhen
+    }) : { score: 0, band: score.toLowerCase() };
+    var attribution = window.AnchorFunnel ? window.AnchorFunnel.leadContext() : null;
 
-    var topic = '[\u2705 VERIFIED][' + score + '][' + estTenureLabel()
+    var topic = '[VERIFIED][INTENT ' + intent.score + ' ' + intent.band.toUpperCase() + '][' + estTenureLabel()
               + '] ANCHOR Estimator, est. benefit: ' + benefit;
     var reParts = [];
     if (L.sellInt) reParts.push('sell (' + L.sellWhen + ')');
@@ -1843,7 +1881,8 @@
         town: L.address || 'Not provided',
         address: L.address || 'Not provided',
         message: [
-          'Lead Score: ' + score,
+          'Legacy Lead Band: ' + score,
+          'Watchdog Intent Score: ' + intent.score + '/100 (' + intent.band.toUpperCase() + ')',
           'Email VERIFIED: ' + L.email,
           'ANCHOR Estimator Lead',
           'Tenure: ' + estTenureLabel(),
@@ -1854,7 +1893,11 @@
           'Taxes OK: ' + answers.taxes,
           'Benefit: ' + benefit,
           'Looking to sell: ' + (L.sellInt ? 'YES, ' + L.sellWhen : 'No'),
-          'Looking to buy: ' + (L.buyInt ? 'YES, ' + L.buyWhen : 'No')
+          'Looking to buy: ' + (L.buyInt ? 'YES, ' + L.buyWhen : 'No'),
+          'Google-selected address: ' + (L.googleAddress ? 'Yes' : 'No'),
+          'First-touch attribution: ' + (attribution ? attribution.firstTouchSummary : 'Unavailable'),
+          'Last-touch attribution: ' + (attribution ? attribution.lastTouchSummary : 'Unavailable'),
+          'Funnel session: ' + (attribution ? attribution.sessionId : 'Unavailable')
         ].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
@@ -1862,17 +1905,27 @@
     showStep(7);
     updateProgress(7);
     estLogCalculatorUse();
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_email_verified', {
+      tenure: answers.tenure,
+      qualified: qualifies,
+      intent_score: intent.score,
+      intent_band: intent.band,
+      sell_interest: !!L.sellInt,
+      buy_interest: !!L.buyInt
+    });
 
     var rcEl = document.getElementById('est-result-content');
     if (rcEl) {
       rcEl.innerHTML = '<div class="est-loading">'
         + '<div class="est-loading-spinner"></div>'
         + '<div class="est-loading-text">Calculating your benefit\u2026</div>'
-        + '<div class="est-loading-tiktok">While you wait, <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank"><i class="fa-brands fa-tiktok"></i> follow @thetaxwatchdog</a> for more NJ tax tips</div>'
+        + '<div class="est-loading-tiktok">Then we\'ll match your address to a few useful Property Watchdog signals.</div>'
         + '</div>';
     }
     setTimeout(function() {
       renderResult(benefit, L.sellInt, L.buyInt, L.sellWhen, L.buyWhen, L.address);
+      if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_result_view', { tenure: answers.tenure, qualified: qualifies, intent_score: intent.score });
+      if (window.AnchorWatchdog) window.AnchorWatchdog.hydrate({ targetId:'est-watchdog-bridge', tenure:answers.tenure, address:L.address });
     }, 1300);
   }
 
@@ -1957,7 +2010,10 @@
         + '<button class="est-value-nudge-btn" onclick="estCuriousClick()">Review My Home Value</button>'
         + '</div>';
     }
-    var decisionBlock = '<div class="est-decision-intro"><strong>Your rebate is the small number. Your housing decision is the big one.</strong><span>Tax relief can help your annual budget, but market value, equity, property taxes and the cost of your next home can change the picture by tens of thousands of dollars. Use the estimate as the start of the conversation—not the end of it.</span></div>'
+    var decisionBlock = answers.tenure === 'rent'
+      ? '<div class="est-decision-intro"><strong>Your benefit is useful. Your housing options are the bigger picture.</strong><span>We won\'t pretend your rental address is a home you own. Instead, Watchdog can show what residential ownership costs look like nearby, then help you decide whether buying is worth exploring.</span></div>'
+      + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div><h3>' + (buyInt ? 'Let\'s turn this into a realistic buying plan.' : 'Curious what ownership could look like?') + '</h3><p>Start with local property-tax context. If you want to go further, add price, financing, insurance and your timeline before deciding whether renting or buying fits better.</p><div class="est-decision-grid"><a class="est-decision-card" href="index.html#contact"><i class="fas fa-key"></i><b>Build my rent-vs-own plan</b><span>Local taxes + real buying context</span></a><a class="est-decision-card" href="/property/"><i class="fas fa-magnifying-glass-location"></i><b>Explore Property Watchdog</b><span>Research NJ homes and towns</span></a></div></div>'
+      : '<div class="est-decision-intro"><strong>Your rebate is the small number. Your housing decision is the big one.</strong><span>Tax relief can help your annual budget, but market value, equity, property taxes and the cost of your next home can change the picture by tens of thousands of dollars. Use the estimate as the start of the conversation—not the end of it.</span></div>'
       + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div>'
       + '<h3>' + (sellInt ? 'Let\'s put a real number on your home.' : buyInt ? 'Let\'s turn the tax answer into a buying plan.' : 'What would make this estimate more useful?') + '</h3>'
       + '<p>' + (sellInt ? 'You asked for a home-value review. We\'ll use actual neighborhood sales and your timeline so the answer is useful for a real decision.' : buyInt ? 'You asked for buying guidance. The useful conversation is total monthly cost, local taxes, timing and what your current housing position lets you do next.' : 'No sales pitch. Pick the question you actually want answered, or simply take your benefit estimate and apply with the state.') + '</p>'
@@ -1973,6 +2029,7 @@
       + '<ul class="est-qualify-list"><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Income is within program limits</li><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Primary NJ residence on Oct 1</li>' + snNote + '</ul>'
       + '<div class="est-result-note">Estimate only. Final eligibility determined by NJ Division of Taxation. Apply at <a href="https://anchor.nj.gov" target="_blank">anchor.nj.gov</a> or call <strong>1-888-238-1233</strong>. Seniors 65+: use the <a href="pas-1-guide.html">PAS-1 form</a>.</div>'
       + reBlock
+      + '<div id="est-watchdog-bridge"></div>'
       + decisionBlock
       + '<details class="est-resource-details"><summary><i class="fas fa-folder-open"></i>Need more NJ tax-relief help? See the optional guides</summary><div class="est-upsell"><div class="est-upsell-top"><div class="est-upsell-new">Tax resources</div><div class="est-upsell-headline">4 plain-English NJ property-tax guides</div></div><p>If you want the filing material too, the guide package is still available here without competing with your homeowner next step.</p><div class="est-upsell-guides"><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Property Tax Relief Master Guide</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>PAS-1 Complete Walkthrough</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>Property Tax Appeal Prep Kit</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Senior Benefits Checklist</div></div><a href="' + STRIPE_LINK + '" target="_blank" class="est-upsell-cta"><i class="fas fa-download"></i>Get All 4 Guides for $5</a></div></details>'
       + '<div class="est-result-actions"><a href="https://anchor.nj.gov" target="_blank" class="est-btn-apply"><i class="fas fa-arrow-up-right-from-square"></i> Apply at anchor.nj.gov</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div>'

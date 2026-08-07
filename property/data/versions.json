@@ -1,8 +1,41 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T07:59:39-04:00",
+  "updated_at": "2026-08-07T09:10:53-04:00",
   "releases": [
+    {
+      "version": "0.22.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T09:10:53-04:00",
+      "title": "ANCHOR-to-Watchdog conversion bridge",
+      "category": "Lead funnel / consumer experience",
+      "status": "Completed",
+      "summary": "Turned the estimator address into a Google-assisted NJ address field, added persistent first/last-touch campaign attribution and funnel events, introduced a 0-100 Watchdog intent score on verified leads, and added a compact post-result Watchdog transition: homeowners see a personalized parcel/tax snapshot while renters see aggregated nearby ownership context instead of subject-property claims.",
+      "links": [
+        "/anchor-estimator.html",
+        "/property/",
+        "/property/updates.html",
+        "/privacy.html"
+      ],
+      "files": [
+        "anchor-estimator.html",
+        "anchor-funnel.js",
+        "anchor-watchdog-bridge.js",
+        "anchor-watchdog.css",
+        "scripts.js",
+        "privacy.html",
+        "property/data/versions.json",
+        "property/updates.html"
+      ],
+      "impact": {
+        "html": 2,
+        "css": 1,
+        "javascript": 3,
+        "data": 1,
+        "analytics": 1,
+        "lead_funnel": 1
+      }
+    },
     {
       "version": "0.21.0",
       "date": "2026-08-07",
@@ -1110,6 +1143,23 @@
         "report templates",
         "API and webhooks",
         "reliability center"
+      ]
+    },
+    {
+      "priority": 15,
+      "title": "Lead conversion intelligence and CRM handoff",
+      "readiness": "Estimator attribution, milestone events and intent scoring shipped in v0.22.0; durable server-side event collection and CRM routing next",
+      "effort": "Medium",
+      "category": "Growth / operations",
+      "why": "The consumer funnel can now identify campaign source and intent in the browser and verified lead notification. The production step is a server-owned event history so conversion quality, source ROI, follow-up speed and closed-business attribution can be measured without depending on email or a single browser.",
+      "deliverables": [
+        "server-side funnel event endpoint",
+        "lead and session identity stitching",
+        "CRM/BoldTrail handoff",
+        "intent-score calibration against outcomes",
+        "source-to-appointment reporting",
+        "follow-up SLA alerts",
+        "consent and retention controls"
       ]
     }
   ]
