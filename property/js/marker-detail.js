@@ -4,14 +4,16 @@
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function label(v){return String(v||'').replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});}
   Promise.all([
+    window.njptrAccessReady || Promise.resolve({developer:false}),
     fetch('/property/data/marker-registry.json?v=20260806a').then(function(r){return r.json();}),
     fetch('/property/data/marker-content.json?v=20260805a').then(function(r){return r.json();}).catch(function(){return{markers:{}};}),
     fetch('/property/data/source-registry.json?v=20260805a').then(function(r){return r.json();}).catch(function(){return{datasets:[]};}),
     fetch('/property/data/derived-marker-formulas.json?v=20260806a').then(function(r){return r.json();}).catch(function(){return{markers:{}};}),
     fetch('/property/data/marker-refresh-policy.json?v=20260806a').then(function(r){return r.json();}).catch(function(){return{markers:[]};})
   ]).then(function(x){
-    var reg=x[0],rich=(x[1].markers||{})[q.get('id')]||{},sources=x[2].datasets||[],formula=(x[3].markers||{})[q.get('id')],refresh=(x[4].markers||[]).find(function(v){return v.marker_id===q.get('id');}),m=reg.markers.find(function(v){return v.id===q.get('id');});
+    var access=x[0]||{},reg=x[1],rich=(x[2].markers||{})[q.get('id')]||{},sources=x[3].datasets||[],formula=(x[4].markers||{})[q.get('id')],refresh=(x[5].markers||[]).find(function(v){return v.marker_id===q.get('id');}),m=reg.markers.find(function(v){return v.id===q.get('id');});
     if(!m)throw Error('Unknown marker');
+    if(m.tier!=='standard'&&!access.developer){location.replace('/property/dashboard.html?access=restricted');return;}
     document.title=m.label+' | Watchdog Data';$('mk-title').textContent=m.label;$('mk-crumb').textContent=label(m.category)+' · '+label(m.scope);
     $('mk-intro').textContent=rich.plain||m.description||'A Watchdog data marker with plan, profession and provenance metadata.';
     $('mk-why').textContent=rich.why||('This '+label(m.scope).toLowerCase()+' marker is used in Watchdog '+label(m.category).toLowerCase()+' analysis and can be selected in the Pro+ Data Center.');

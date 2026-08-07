@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.19.0",
+  "version": "0.23.0",
   "goal": "Move Watchdog from a feature-rich prototype into a secure, billable, supportable professional SaaS product.",
   "items": [
     {"priority":"P0","area":"backend","capability":"Server-side entitlement source of truth","status":"foundation_shipped","detail":"Plan, profession and subscription state owned by the backend; client-side View As remains presentation only."},
-    {"priority":"P0","area":"revenue","capability":"Stripe Checkout + Customer Portal","status":"code_shipped_needs_stripe_configuration","detail":"Authenticated Pro and Pro+ Checkout plus Customer Portal Edge Functions are implemented. Create Stripe Products/Prices, enable the Portal, set test secrets and deploy before activation."},
+    {"priority":"P0","area":"revenue","capability":"Stripe Checkout + Customer Portal","status":"code_ready_enrollment_closed","detail":"Checkout and Portal foundations are implemented, but customer Pro/Pro+ enrollment is deliberately disabled. Pricing routes collect early access until Stripe test-mode validation and a deliberate launch flag."},
     {"priority":"P0","area":"backend","capability":"Verified billing webhooks","status":"code_shipped_needs_test_mode_validation","detail":"Signed Stripe subscription/checkout webhook synchronizes server entitlements and records webhook IDs. Stripe test-mode lifecycle testing is still required before launch."},
     {"priority":"P0","area":"security","capability":"RLS coverage audit","status":"in_progress","detail":"Saved Data Center views now use ownership + Pro+ RLS; profile role/plan escalation is blocked and paid entitlement tables remain service-owned. Continue auditing every legacy customer table."},
     {"priority":"P0","area":"security","capability":"Authorization + action audit trail","status":"foundation_shipped","detail":"Log access decisions, exports, API actions, admin overrides and sensitive workflow events using service-owned writes."},
@@ -14,7 +14,7 @@
     {"priority":"P0","area":"ops","capability":"Backup + restore drills","status":"planned","detail":"Scheduled database backups plus documented, tested restore procedure for profiles, saved work, verification and billing metadata."},
     {"priority":"P0","area":"legal","capability":"Commercial terms + privacy + data-use review","status":"product_drafts_shipped_counsel_review_required","detail":"Watchdog Terms, Privacy and Data Methodology drafts cover subscriptions, public-source limits, derived intelligence, Daniel's Law handling and non-consumer-report use. Counsel review remains required before general paid launch."},
     {"priority":"P0","area":"frontend","capability":"Real account + billing center","status":"initial_center_shipped","detail":"Account page shows server plan/status/period and launches Stripe billing management plus Pro/Pro+ changes. Usage, seats and richer professional-profile controls remain next."},
-    {"priority":"P0","area":"frontend","capability":"Checkout-ready pricing flow","status":"code_shipped_needs_stripe_configuration","detail":"Pro/Pro+ pricing CTAs now enter authenticated Stripe Checkout with account success/cancel returns; deployment waits on Stripe test Price IDs and secrets."},
+    {"priority":"P0","area":"frontend","capability":"Checkout-ready pricing flow","status":"enrollment_closed","detail":"Pro/Pro+ pricing remains public as product marketing, but customer CTAs collect early-access interest and do not invoke checkout until paid enrollment is intentionally opened."},
     {"priority":"P1","area":"product","capability":"Saved Data Center views","status":"server_foundation_shipped","detail":"Pro+ can persist selected columns and filters to an RLS-protected server table. Named templates, sharing and server-side result sheets remain next."},
     {"priority":"P1","area":"product","capability":"Data Center value providers","status":"in_progress","detail":"Turn the 342-marker catalog into actual row-level property/town/county sheets, not only a selectable metadata catalog."},
     {"priority":"P1","area":"product","capability":"Professional report builder","status":"planned","detail":"Select markers and evidence to generate branded attorney, lender, broker, investor and client-safe reports."},

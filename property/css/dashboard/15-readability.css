@@ -1,0 +1,25 @@
+/* Readability pass — keep dense data useful without falling into 9–10px UI text. */
+@media (min-width: 761px) {
+  .top-eyebrow { font-size: 11px !important; }
+  .who h1 { font-size: clamp(24px, 2vw, 31px) !important; line-height: 1.12 !important; }
+  .who > div > span:last-child, #db-email { font-size: 14px !important; line-height: 1.4 !important; }
+  .db-stat, .brief { font-size: 14px !important; }
+  .db-side-link, .db-side-group-toggle { font-size: 14px !important; }
+  .pr-card-status { font-size: 11.5px !important; }
+  .pr-card-body h3 { font-size: clamp(23px, 1.8vw, 29px) !important; }
+  .pr-card-body > p { font-size: 16px !important; }
+  .pr-card-metrics b { font-size: clamp(18px, 1.35vw, 22px) !important; }
+  .pr-card-metrics small { font-size: 11.5px !important; }
+  .pr-card-actions a, .pr-card-actions button { font-size: 13px !important; min-height: 40px; }
+  .ti-mini b, .bp-mini b { font-size: 14px !important; }
+  .ti-mini small, .bp-mini small { font-size: 11.5px !important; line-height: 1.35 !important; }
+}
+
+@media (max-width: 760px) {
+  .pr-card-status { font-size: 10.5px !important; }
+  .pr-card-metrics small { font-size: 11px !important; }
+  .ti-mini b, .bp-mini b { font-size: 12.5px !important; }
+  .ti-mini small, .bp-mini small { font-size: 10.5px !important; line-height: 1.3 !important; }
+}
+
+html.access-pending body { visibility: hidden; }

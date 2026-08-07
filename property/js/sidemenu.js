@@ -112,7 +112,7 @@
       }
     } catch (_storageError) {}
     paintToggle();
-    paintDeveloperLinks(!!(window.NJPTRPlan && window.NJPTRPlan.state && window.NJPTRPlan.state().developer));
+    paintDeveloperLinks(!!window.NJPTRDeveloperConfirmed || !!(window.NJPTRPlan && window.NJPTRPlan.state && window.NJPTRPlan.state().developer));
   }
 
   function paintDeveloperLinks(show) {

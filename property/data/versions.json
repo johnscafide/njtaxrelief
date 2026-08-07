@@ -1,8 +1,65 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T09:10:53-04:00",
+  "updated_at": "2026-08-07T10:19:30-04:00",
   "releases": [
+    {
+      "version": "0.23.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T10:19:30-04:00",
+      "title": "Customer-access lockdown and readability pass",
+      "category": "Security / product hardening",
+      "status": "Completed",
+      "summary": "Restricted internal operations, roadmap/history, diagnostics, Data Center, scanner and legacy analysis prototypes to the server-confirmed developer role; removed email and user-metadata authorization shortcuts; kept Standard marker detail available to signed-in Standard accounts while withholding paid marker detail; closed Pro/Pro+ checkout enrollment in favor of early access; removed personal-name footer branding; and increased undersized dashboard/card typography across desktop and mobile.",
+      "links": [
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/pro.html",
+        "/property/updates.html",
+        "/property/developer-data.html"
+      ],
+      "files": [
+        "property/js/access-guard.js",
+        "property/js/plan-context.js",
+        "property/js/sidemenu.js",
+        "property/sidemenu.html",
+        "property/css/dashboard/15-readability.css",
+        "property/css/dashboard.css",
+        "property/dashboard.html",
+        "property/home.html",
+        "footer.html",
+        "property/index.html",
+        "property/footer.html",
+        "property/account.html",
+        "property/pro.html",
+        "property/marker.html",
+        "property/js/marker-detail.js",
+        "property/updates.html",
+        "property/developer-data.html",
+        "property/verification-diagnostics.html",
+        "property/diagnostics.html",
+        "property/data-center.html",
+        "property/scan.html"
+        ,"property/dashboards.html"
+        ,"property/property-analysis.html"
+        ,"property/tools/appeal-potential/index.html"
+        ,"property/tools/assessment-fairness/index.html"
+        ,"property/tools/comparable-properties/index.html"
+        ,"property/tools/market-value/index.html"
+        ,"property/tools/neighborhood-comparison/index.html"
+        ,"property/data/saas-production-readiness.json"
+        ,"property/CHANGED-FILES-v0.23.0.txt"
+      ],
+      "impact": {
+        "security": 1,
+        "authorization": 1,
+        "html": 13,
+        "css": 2,
+        "javascript": 4,
+        "branding": 1,
+        "accessibility": 1
+      }
+    },
     {
       "version": "0.22.0",
       "date": "2026-08-07",

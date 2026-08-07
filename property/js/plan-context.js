@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  var DEV_EMAILS = ['john.v.scafide@gmail.com'];
   var order = { standard: 0, pro: 1, pro_plus: 2, developer: 3 };
   var state = { user: null, profile: null, actual: 'standard', effective: 'standard', developer: false };
 
@@ -9,15 +8,12 @@
     value = String(value || '').toLowerCase().replace(/\+/g, '_plus').replace(/[^a-z_]/g, '');
     return order[value] == null ? 'standard' : value;
   }
-  function devFor(user, profile) {
-    var email = String(user && user.email || '').toLowerCase();
-    return DEV_EMAILS.indexOf(email) >= 0 || normalized(profile && profile.account_role) === 'developer' ||
-      normalized(user && user.user_metadata && user.user_metadata.account_role) === 'developer';
-  }
+  // Authorization is server-owned. Never infer a developer or paid plan from
+  // an email address or editable user_metadata.
+  function devFor(_user, profile) { return normalized(profile && profile.account_role) === 'developer'; }
   function actualFor(user, profile) {
     if (devFor(user, profile)) return 'developer';
-    return normalized((profile && (profile.plan_tier || profile.plan)) ||
-      (user && user.user_metadata && (user.user_metadata.plan_tier || user.user_metadata.plan)) || 'standard');
+    return normalized((profile && (profile.plan_tier || profile.plan)) || 'standard');
   }
   function savedView() {
     try { return normalized(localStorage.getItem('watchdog:developer:view-as')); } catch (_error) { return 'developer'; }
@@ -29,7 +25,7 @@
     document.body && (document.body.dataset.viewPlan = state.effective);
     document.querySelectorAll('[data-min-plan]').forEach(function (node) {
       var required = normalized(node.dataset.minPlan);
-      var allowed = order[state.effective] >= order[required] || state.effective === 'developer';
+      var allowed = can(required);
       node.classList.toggle('plan-locked', !allowed);
       node.setAttribute('aria-disabled', allowed ? 'false' : 'true');
     });
@@ -73,7 +69,13 @@
     apply();
     return Object.assign({}, state);
   }
-  function can(required) { return state.effective === 'developer' || order[state.effective] >= order[normalized(required)]; }
+  function can(required) {
+    var need = normalized(required);
+    // Paid customer enrollment/access is intentionally closed. Developers can
+    // still use View As to QA Standard, Pro and Pro+ before launch.
+    if (need !== 'standard' && !state.developer) return false;
+    return state.effective === 'developer' || order[state.effective] >= order[need];
+  }
 
   function autoInit() {
     // Dashboard and Home already own their Supabase auth lifecycle and call
@@ -82,15 +84,13 @@
     if (!document.body || document.body.getAttribute('data-plan-auto') !== 'true' || !window.supabase || state.user) return;
     var client = window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co', 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
-    client.auth.getSession().then(function (result) {
-      var user = result && result.data && result.data.session && result.data.session.user;
+    client.auth.getUser().then(function (result) {
+      var user = result && result.data && result.data.user;
       if (!user) return;
       client.rpc('get_my_entitlement').then(function (entitlementResult) {
         var rows = entitlementResult && entitlementResult.data || [], ent = Array.isArray(rows) ? rows[0] : rows;
         if (ent) { init(user, { account_role: ent.account_role, plan_tier: ent.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end }); return; }
-        client.from('profiles').select('account_role,plan_tier').eq('id', user.id).maybeSingle().then(function (profileResult) {
-          init(user, profileResult && profileResult.data || {});
-        });
+        init(user, {});
       });
     }).catch(function () {});
   }

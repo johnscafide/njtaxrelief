@@ -1,0 +1,55 @@
+Watchdog v0.23.0 — customer-access lockdown and readability pass
+2026-08-07
+
+Upload these files preserving the same paths.
+
+Access and navigation
+- property/js/access-guard.js
+- property/js/plan-context.js
+- property/js/sidemenu.js
+- property/sidemenu.html
+- property/updates.html
+- property/developer-data.html
+- property/verification-diagnostics.html
+- property/diagnostics.html
+- property/data-center.html
+- property/scan.html
+- property/marker.html
+- property/js/marker-detail.js
+- property/dashboards.html
+- property/property-analysis.html
+- property/tools/appeal-potential/index.html
+- property/tools/assessment-fairness/index.html
+- property/tools/comparable-properties/index.html
+- property/tools/market-value/index.html
+- property/tools/neighborhood-comparison/index.html
+
+Brand, plans and customer surfaces
+- footer.html
+- property/dashboard.html
+- property/home.html
+- property/index.html
+- property/footer.html
+- property/account.html
+- property/pro.html
+
+Readability
+- property/css/dashboard.css
+- property/css/dashboard/15-readability.css
+
+Release / SaaS tracking
+- property/data/versions.json
+- property/data/saas-production-readiness.json
+- property/CHANGED-FILES-v0.23.0.txt
+
+No SQL migration is required for this release. Developer authorization uses
+the existing is_watchdog_developer() / get_my_entitlement() server RPCs.
+
+Important deployment note
+-------------------------
+The direct customer UI is now role-gated, and paid access is disabled for
+non-developers. Because this site is statically hosted, HTML/JSON placed in a
+public web directory is still a public static asset at the HTTP layer. Data
+that must be confidential (rather than merely inaccessible through the app)
+must be moved behind a server/Edge Function or an RLS-protected Supabase
+resource before it can be treated as secret.
