@@ -649,6 +649,40 @@
   padding: 0 10px;
 }
 
+/* 2027 HOMEOWNER DECISION EXPERIENCE */
+.est-decision-intro {
+  margin:18px 0 14px; padding:18px 20px; border-radius:14px;
+  background:linear-gradient(135deg,#f3f7fc,#f8fafc); text-align:left;
+}
+.est-decision-intro strong { display:block; color:#0e2248; font-family:"Mozilla Text",sans-serif; font-size:17px; margin-bottom:5px; }
+.est-decision-intro span { display:block; color:#5a6070; font-size:13.5px; line-height:1.55; }
+.est-decision-panel {
+  margin:0 0 18px; padding:22px; border-radius:16px; background:#0e2248;
+  color:#fff; text-align:left; box-shadow:0 14px 32px rgba(14,34,72,.16);
+}
+.est-decision-kicker { color:#e6c355; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.2px; }
+.est-decision-panel h3 { color:#fff; font-family:"Mozilla Text",sans-serif; font-size:20px; line-height:1.25; margin:5px 0 7px; }
+.est-decision-panel > p { color:#b8cbe0; font-size:13.5px; line-height:1.55; margin:0 0 16px; }
+.est-decision-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.est-decision-card {
+  appearance:none; border:1px solid rgba(255,255,255,.16); border-radius:12px;
+  background:rgba(255,255,255,.07); padding:15px; color:#fff; text-align:left;
+  text-decoration:none; cursor:pointer; transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+.est-decision-card:hover { transform:translateY(-2px); background:rgba(255,255,255,.12); border-color:rgba(230,195,85,.55); }
+.est-decision-card i { color:#e6c355; margin-bottom:9px; font-size:16px; }
+.est-decision-card b { display:block; font-size:14px; margin-bottom:3px; }
+.est-decision-card span { display:block; color:#b8cbe0; font-size:11.5px; line-height:1.4; }
+.est-resource-details { margin:12px 0 18px; border-top:1px solid #e5e9f0; border-bottom:1px solid #e5e9f0; text-align:left; }
+.est-resource-details summary { cursor:pointer; list-style:none; padding:13px 2px; color:#52627a; font-size:12.5px; font-weight:700; }
+.est-resource-details summary::-webkit-details-marker { display:none; }
+.est-resource-details summary i { color:#b8972a; margin-right:7px; }
+.est-resource-details .est-upsell { margin-top:0; }
+@media(max-width:560px){
+  .est-decision-panel { padding:18px; }
+  .est-decision-grid { grid-template-columns:1fr; }
+}
+
 /* LIVE TEXT-ME-NOW WIDGET */
 .est-text-widget {
   position: fixed;
@@ -974,9 +1008,9 @@
 <!-- HERO -->
 <div class="est-hero">
   <div class="est-hero-inner">
-    <div class="est-eyebrow"><i class="fas fa-calculator"></i>Free NJ Tax Relief Calculators</div>
-    <h1 class="est-h1">Find Out What You're<br><span>Owed in Tax Relief</span></h1>
-    <p class="est-sub">Two free tools: one for ANCHOR (all homeowners &amp; renters) and one for Stay NJ (seniors 65+). Takes about 90 seconds each.</p>
+    <div class="est-eyebrow"><i class="fas fa-house-circle-check"></i>Your NJ Homeowner Checkup</div>
+    <h1 class="est-h1">Start With Your Tax Relief.<br><span>Understand the Bigger Picture.</span></h1>
+    <p class="est-sub">See your estimated ANCHOR or Stay NJ benefit, then understand what it means alongside your home, equity and next move. About 90 seconds.</p>
     <div class="est-pills">
       <div class="est-pill"><div class="est-pill-icon"><i class="fas fa-house"></i></div>ANCHOR <strong>up to $1,500</strong></div>
       <div class="est-pill"><div class="est-pill-icon"><i class="fas fa-leaf"></i></div>Stay NJ <strong>up to $6,500</strong></div>
@@ -1160,11 +1194,11 @@
 
       <!-- Step 6: Lead capture -->
       <div class="est-step" id="est-step6">
-        <div class="est-q">Almost done, where should we send your results?</div>
-        <div class="est-hint">We'll include your estimated benefit, key deadlines, and next steps.</div>
+        <div class="est-q">Almost done. What would be useful after your tax estimate?</div>
+        <div class="est-hint">Your benefit is only one number. If you're a homeowner, we can also help put your home's value or a future move into context. Choose only what is useful to you.</div>
         <div class="est-lead-wrap">
-          <div class="est-lead-title">Your Information</div>
-          <div class="est-lead-sub">Required to see your personalized result.</div>
+          <div class="est-lead-title">Where should we send your homeowner summary?</div>
+          <div class="est-lead-sub">Your estimated benefit, important deadlines and the next step you choose below.</div>
           <div class="est-field-row">
             <div class="est-field">
               <label class="est-label">Full Name <span class="est-required">*</span></label>
@@ -1190,8 +1224,8 @@
           <label class="est-re-label">
             <input type="checkbox" id="est-sell-interest" onchange="estToggleTimeframe('sell')">
             <div>
-              <div class="est-re-text-title">I'm looking to sell</div>
-              <div class="est-re-text-sub">John is a licensed NJ Realtor and can send you a free home valuation, no pressure, no obligation.</div>
+              <div class="est-re-text-title">Show me what my home could sell for</div>
+              <div class="est-re-text-sub">Get a human-reviewed value and equity conversation using real neighborhood sales—not an automated Zestimate-style number.</div>
             </div>
           </label>
           <div class="est-timeframe" id="est-sell-timeframe" style="display:none;">
@@ -1208,8 +1242,8 @@
           <label class="est-re-label">
             <input type="checkbox" id="est-buy-interest" onchange="estToggleTimeframe('buy')">
             <div>
-              <div class="est-re-text-title">I'm looking to buy</div>
-              <div class="est-re-text-sub">John is a licensed NJ Realtor and can walk you through buying in South Jersey, no cost, no pressure.</div>
+              <div class="est-re-text-title">Help me understand a future purchase</div>
+              <div class="est-re-text-sub">Compare timing, taxes, affordability and South Jersey options before you start touring homes.</div>
             </div>
           </label>
           <div class="est-timeframe" id="est-buy-timeframe" style="display:none;">
@@ -1337,10 +1371,10 @@
               <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Apply via PAS-1 form, deadline November 2, 2026</li>
             </ul>
 
-            <!-- Realtor lead: ready-to-sell seller -->
+            <!-- Realtor lead: homeowner decision review -->
             <div class="sn-lead" id="sn-lead-form">
-              <div class="sn-lead-title">Ready to sell your home?</div>
-              <div class="sn-lead-sub">John Scafide is a licensed NJ Realtor in South Jersey. If you're ready to list, he'll build a plan around your timeline and get your home sold for the best price.</div>
+              <div class="sn-lead-title">Would staying or moving leave you in a better position?</div>
+              <div class="sn-lead-sub">Stay NJ lowers one expense. Your home's current value, equity, a smaller home's price and the tax rate in another town can change the answer much more. Request a simple stay-vs.-move review before you make any decision.</div>
               <div class="sn-lead-grid">
                 <div class="est-field">
                   <label class="est-label">Your Name</label>
@@ -1355,12 +1389,12 @@
                   <input class="est-input" id="sn-phone" type="tel" placeholder="(xxx) xxx-xxxx">
                 </div>
                 <div class="est-field">
-                  <label class="est-label">Address of the home you're selling</label>
+                  <label class="est-label">Your current property address</label>
                   <input class="est-input" id="sn-address" type="text" placeholder="Street address, city, NJ">
                 </div>
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
-                <button class="sn-btn-book" onclick="snSendLead()"><i class="fas fa-house"></i> List my home with John</button>
+                <button class="sn-btn-book" onclick="snSendLead()"><i class="fas fa-scale-balanced"></i> Compare Staying vs. Moving</button>
               </div>
               <div class="sn-lead-sent" id="sn-lead-sent"><i class="fas fa-circle-check" style="margin-right:6px;"></i>Got it! John will follow up within one business day.</div>
             </div>
@@ -1919,10 +1953,18 @@
     if (answers.tenure === 'own' && !sellInt) {
       reBlock += '<div class="est-value-nudge" id="est-value-nudge">'
         + '<div class="est-value-nudge-icon"><i class="fas fa-house-chimney"></i></div>'
-        + '<div class="est-value-nudge-text"><strong>Your tax assessment isn\'t your market value.</strong><span>Assessments lag the market, often by years. Your real equity could be worth far more than any rebate. One tap gets you real comps from your neighborhood, no commitment.</span></div>'
-        + '<button class="est-value-nudge-btn" onclick="estCuriousClick()">See My Value</button>'
+        + '<div class="est-value-nudge-text"><strong>Your tax assessment is not your home\'s market value.</strong><span>If you own, the more useful next question may be what the home could sell for today and how much equity that creates.</span></div>'
+        + '<button class="est-value-nudge-btn" onclick="estCuriousClick()">Review My Home Value</button>'
         + '</div>';
     }
+    var decisionBlock = '<div class="est-decision-intro"><strong>Your rebate is the small number. Your housing decision is the big one.</strong><span>Tax relief can help your annual budget, but market value, equity, property taxes and the cost of your next home can change the picture by tens of thousands of dollars. Use the estimate as the start of the conversation—not the end of it.</span></div>'
+      + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div>'
+      + '<h3>' + (sellInt ? 'Let\'s put a real number on your home.' : buyInt ? 'Let\'s turn the tax answer into a buying plan.' : 'What would make this estimate more useful?') + '</h3>'
+      + '<p>' + (sellInt ? 'You asked for a home-value review. We\'ll use actual neighborhood sales and your timeline so the answer is useful for a real decision.' : buyInt ? 'You asked for buying guidance. The useful conversation is total monthly cost, local taxes, timing and what your current housing position lets you do next.' : 'No sales pitch. Pick the question you actually want answered, or simply take your benefit estimate and apply with the state.') + '</p>'
+      + '<div class="est-decision-grid">'
+      + '<button class="est-decision-card" onclick="estCuriousClick()"><i class="fas fa-house-circle-check"></i><b>What could my home sell for?</b><span>Human-reviewed comps + equity context</span></button>'
+      + '<a class="est-decision-card" href="index.html#contact"><i class="fas fa-key"></i><b>What could I buy next?</b><span>Taxes, monthly cost + South Jersey options</span></a>'
+      + '</div></div>';
     var payeeName = ((document.getElementById('est-name') || {}).value || 'You').trim();
     rc.innerHTML = '<div class="est-result-qualify">'
       + '<div class="est-result-badge"><i class="fas fa-circle-check"></i>You likely qualify for ANCHOR!</div>'
@@ -1931,9 +1973,8 @@
       + '<ul class="est-qualify-list"><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Income is within program limits</li><li><div class="est-qualify-check"><i class="fas fa-check" style="font-size:9px;"></i></div>Primary NJ residence on Oct 1</li>' + snNote + '</ul>'
       + '<div class="est-result-note">Estimate only. Final eligibility determined by NJ Division of Taxation. Apply at <a href="https://anchor.nj.gov" target="_blank">anchor.nj.gov</a> or call <strong>1-888-238-1233</strong>. Seniors 65+: use the <a href="pas-1-guide.html">PAS-1 form</a>.</div>'
       + reBlock
-      + '<div class="est-check-bridge">This is what you\'re owed. Here\'s how to make sure you actually get it.</div>'
-      + '<div class="est-upsell"><div class="est-upsell-top"><div class="est-upsell-new">Don\'t miss out</div><div class="est-upsell-headline">3 more programs you may qualify for</div></div><p>ANCHOR is just one piece. Get the complete guide package and make sure you collect every dollar.</p><div class="est-upsell-guides"><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Property Tax Relief Master Guide</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>PAS-1 Complete Walkthrough</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>Property Tax Appeal Prep Kit</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Senior Benefits Checklist</div></div><a href="' + STRIPE_LINK + '" target="_blank" class="est-upsell-cta"><i class="fas fa-download"></i>Get All 4 Guides for $5</a><span style="font-size:12px;color:#8aaac8;margin-left:12px;">Instant PDF · 33 pages</span></div>'
-      + '<div class="est-tiktok-cta"><a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank"><i class="fa-brands fa-tiktok"></i> Follow @thetaxwatchdog for more NJ tax tips</a></div>'
+      + decisionBlock
+      + '<details class="est-resource-details"><summary><i class="fas fa-folder-open"></i>Need more NJ tax-relief help? See the optional guides</summary><div class="est-upsell"><div class="est-upsell-top"><div class="est-upsell-new">Tax resources</div><div class="est-upsell-headline">4 plain-English NJ property-tax guides</div></div><p>If you want the filing material too, the guide package is still available here without competing with your homeowner next step.</p><div class="est-upsell-guides"><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Property Tax Relief Master Guide</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>PAS-1 Complete Walkthrough</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>Property Tax Appeal Prep Kit</div><div class="est-upsell-guide"><i class="fas fa-file-pdf"></i>NJ Senior Benefits Checklist</div></div><a href="' + STRIPE_LINK + '" target="_blank" class="est-upsell-cta"><i class="fas fa-download"></i>Get All 4 Guides for $5</a></div></details>'
       + '<div class="est-result-actions"><a href="https://anchor.nj.gov" target="_blank" class="est-btn-apply"><i class="fas fa-arrow-up-right-from-square"></i> Apply at anchor.nj.gov</a><button class="est-btn-reset" onclick="estReset()">Start Over</button></div>'
       + '</div>';
   }
@@ -2099,14 +2140,14 @@
       emailjs.send(EJS_SERVICE, EJS_TMPL, {
         name: name, email: email,
         phone: phone || 'Not provided',
-        topic: '[Homeowner] Seller lead, ready to list (Stay NJ estimator)',
+        topic: '[🟡 WARM][Homeowner] Stay-vs-move review request (Stay NJ estimator)',
         tenure: 'Homeowner',
         lead_type: 'Homeowner',
         finance: snIncomeLabel(),
         income_bracket: snIncomeLabel(),
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Seller lead: homeowner says they are ready to sell','Income: ' + snIncomeLabel(),'Source: Stay NJ estimator','Address of home to sell: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
+        message: ['Stay-vs-Move Review Request','Homeowner asked to compare staying with a possible move','Income: ' + snIncomeLabel(),'Source: Stay NJ estimator','Current property: ' + (address || 'Not provided'),'Annual property tax: $' + taxVal].join('\n')
       }).catch(function(e){ console.warn('EmailJS:', e); });
     }
     var form = document.getElementById('sn-lead-form');
