@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/insights", "destination": "/insights.html" },
+    { "source": "/insights/:slug.html", "destination": "/insights/article.html" }
+  ]
+}

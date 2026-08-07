@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="art-title">NJ Property Tax Insights | njpropertytaxrelief.com</title>
+<meta id="art-desc" name="description" content="New Jersey property tax insights.">
+<link id="art-canonical" rel="canonical" href="https://njpropertytaxrelief.com/insights/">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/lookup.css?v=20260805b">
+<style>
+  .art-wrap { max-width: 760px; margin: 0 auto; padding: 44px 24px 90px; }
+  .art-kicker { display: inline-block; font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); margin-bottom: 14px; }
+  .art-h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(28px, 4vw, 42px); line-height: 1.2; color: var(--navy-dark); margin: 0 0 16px; }
+  .art-dek { font-size: 18px; line-height: 1.65; color: var(--text-muted); margin: 0 0 22px; }
+  .art-meta { display: flex; gap: 16px; align-items: center; font-size: 13px; color: var(--text-muted); padding-bottom: 26px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+  .art-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 14px; margin-bottom: 34px; background: #eef0f5; }
+  .art-body { font-size: 17px; line-height: 1.8; color: var(--text); }
+  .art-body h2 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 23px; color: var(--navy-dark); margin: 38px 0 14px; }
+  .art-body p { margin: 0 0 20px; }
+  .art-body ul, .art-body ol { margin: 0 0 20px; padding-left: 24px; }
+  .art-body li { margin-bottom: 10px; line-height: 1.7; }
+  .art-body b { color: var(--navy-dark); }
+  .art-faq { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
+  .art-faq h2 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 22px; color: var(--navy-dark); margin: 0 0 20px; }
+  .art-faq-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .art-faq-item:last-child { border-bottom: none; }
+  .art-faq-item h3 { font-size: 16px; color: var(--navy-dark); margin: 0 0 8px; }
+  .art-faq-item p { font-size: 15px; line-height: 1.7; color: var(--text-muted); margin: 0; }
+  .art-back { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; color: var(--navy); text-decoration: none; margin-bottom: 26px; }
+  .art-back:hover { text-decoration: underline; }
+  .art-cta {
+    margin-top: 46px; background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 100%); border-radius: 14px;
+    padding: 30px; color: #fff; text-align: center;
+  }
+  .art-cta h3 { font-size: 20px; margin: 0 0 8px; }
+  .art-cta p { font-size: 14.5px; color: #cdd9ec; margin: 0 0 18px; }
+  .art-cta a { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy-dark); font-weight: 700; text-decoration: none; padding: 12px 24px; border-radius: 8px; }
+  .art-loading, .art-error { text-align: center; padding: 90px 20px; color: var(--text-muted); }
+  @media (max-width: 640px) { .art-wrap { padding: 30px 18px 70px; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span><i class="fas fa-landmark" style="margin-right:6px;"></i>New Jersey Property Tax Relief Resource, South Jersey</span>
+    <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank">Official NJ Treasury <i class="fas fa-arrow-up-right-from-square" style="font-size:11px;"></i></a>
+  </div>
+</div>
+<nav id="main-nav"></nav>
+
+<div class="art-wrap">
+  <a class="art-back" href="/insights.html"><i class="fas fa-arrow-left"></i> All insights</a>
+  <div id="art-loading" class="art-loading"><i class="fas fa-spinner fa-spin"></i> Loading article&hellip;</div>
+  <div id="art-error" class="art-error" style="display:none">
+    <i class="fas fa-triangle-exclamation" style="font-size:22px;display:block;margin-bottom:10px;"></i>
+    Couldn't find that article. <a href="/insights.html">Browse all insights &rarr;</a>
+  </div>
+  <article id="art-content" style="display:none">
+    <span class="art-kicker" id="art-kicker"></span>
+    <h1 class="art-h1" id="art-h1"></h1>
+    <p class="art-dek" id="art-dek"></p>
+    <div class="art-meta">
+      <span id="art-author"></span>
+      <span>&middot;</span>
+      <span id="art-date"></span>
+      <span>&middot;</span>
+      <span id="art-reading"></span>
+    </div>
+    <img class="art-hero" id="art-hero" alt="">
+    <div class="art-body" id="art-body"></div>
+    <div class="art-faq" id="art-faq" style="display:none">
+      <h2>Frequently asked questions</h2>
+      <div id="art-faq-list"></div>
+    </div>
+    <div class="art-cta">
+      <h3>See your own property's numbers</h3>
+      <p>Free assessment lookup, tax history, and appeal odds for any NJ address.</p>
+      <a href="/property/"><i class="fas fa-magnifying-glass"></i> Open Watchdog</a>
+    </div>
+  </article>
+</div>
+
+<footer id="main-footer"></footer>
+<script src="scripts.js"></script>
+<script>
+(function () {
+  'use strict';
+  var SUPA_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+  // Public publishable key — safe in client code, read-only per RLS (published articles only).
+  var SUPA_ANON = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
+
+  function slugFromPath() {
+    var m = location.pathname.match(/\/insights\/([a-z0-9-]+)\.html$/i);
+    return m ? m[1] : null;
+  }
+
+  function render(a) {
+    document.title = a.title + ' | njpropertytaxrelief.com';
+    document.getElementById('art-title').textContent = a.title + ' | njpropertytaxrelief.com';
+    var desc = a.meta_description || a.dek;
+    document.getElementById('art-desc').setAttribute('content', desc);
+    var canonical = 'https://njpropertytaxrelief.com/insights/' + a.slug + '.html';
+    document.getElementById('art-canonical').setAttribute('href', canonical);
+
+    document.getElementById('art-kicker').textContent = a.kicker;
+    document.getElementById('art-h1').textContent = a.title;
+    document.getElementById('art-dek').textContent = a.dek;
+    document.getElementById('art-author').textContent = a.author;
+    document.getElementById('art-date').textContent = new Date(a.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    document.getElementById('art-reading').textContent = (a.reading_minutes || 5) + ' min read';
+
+    var hero = document.getElementById('art-hero');
+    if (a.hero_image_url) {
+      hero.src = a.hero_image_url;
+      hero.alt = a.hero_image_alt || a.title;
+    } else {
+      hero.style.display = 'none';
+    }
+
+    // body_html is hand-authored only via the password-gated admin panel —
+    // never user-submitted, so direct injection is acceptable here.
+    document.getElementById('art-body').innerHTML = a.body_html;
+
+    var faq = Array.isArray(a.faq) ? a.faq : [];
+    if (faq.length) {
+      document.getElementById('art-faq').style.display = 'block';
+      document.getElementById('art-faq-list').innerHTML = faq.map(function (f) {
+        return '<div class="art-faq-item"><h3>' + esc(f.q) + '</h3><p>' + esc(f.a) + '</p></div>';
+      }).join('');
+    }
+
+    // Article schema
+    var ldArticle = {
+      '@context': 'https://schema.org', '@type': 'Article',
+      headline: a.title, description: desc, image: a.hero_image_url || undefined,
+      author: { '@type': 'Person', name: a.author },
+      publisher: { '@type': 'Organization', name: 'njpropertytaxrelief.com' },
+      datePublished: a.published_at, dateModified: a.updated_at || a.published_at,
+      mainEntityOfPage: canonical
+    };
+    var s1 = document.createElement('script'); s1.type = 'application/ld+json'; s1.textContent = JSON.stringify(ldArticle);
+    document.head.appendChild(s1);
+
+    // FAQPage schema — this is the AEO/GEO piece: answer engines lift Q&A
+    // pairs directly from this markup.
+    if (faq.length) {
+      var ldFaq = {
+        '@context': 'https://schema.org', '@type': 'FAQPage',
+        mainEntity: faq.map(function (f) {
+          return { '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } };
+        })
+      };
+      var s2 = document.createElement('script'); s2.type = 'application/ld+json'; s2.textContent = JSON.stringify(ldFaq);
+      document.head.appendChild(s2);
+    }
+
+    document.getElementById('art-loading').style.display = 'none';
+    document.getElementById('art-content').style.display = 'block';
+  }
+
+  var slug = slugFromPath();
+  if (!slug) {
+    document.getElementById('art-loading').style.display = 'none';
+    document.getElementById('art-error').style.display = 'block';
+  } else {
+    fetch(SUPA_URL + '/rest/v1/insights_articles?slug=eq.' + encodeURIComponent(slug) + '&published=eq.true&select=*', {
+      headers: { apikey: SUPA_ANON, Authorization: 'Bearer ' + SUPA_ANON }
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (rows) {
+        if (!rows || !rows.length) throw new Error('not found');
+        render(rows[0]);
+      })
+      .catch(function () {
+        document.getElementById('art-loading').style.display = 'none';
+        document.getElementById('art-error').style.display = 'block';
+      });
+  }
+})();
+</script>
+</body>
+</html>

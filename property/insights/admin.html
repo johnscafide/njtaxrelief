@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insights admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root { --navy:#1a3a6b; --navy-dark:#0e2248; --gold:#b8972a; --border:#e4e7ee; --text:#1b2436; --muted:#6b7280; --pos:#1c7a4a; --neg:#c0342b; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family:'Source Sans 3',system-ui,sans-serif; background:#f6f7fa; color:var(--text); }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 36px 22px 80px; }
+  h1 { font-size:22px; color:var(--navy-dark); margin:0 0 22px; }
+  .gate { max-width: 360px; margin: 120px auto; background:#fff; border:1px solid var(--border); border-radius:12px; padding:28px; text-align:center; }
+  .gate input { width:100%; padding:11px 13px; font-size:15px; border:1px solid var(--border); border-radius:7px; margin:14px 0; }
+  .gate button, .btn { background:var(--navy); color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  .btn.gold { background: var(--gold); color: var(--navy-dark); }
+  .btn.ghost { background:#fff; color:var(--navy); border:1px solid var(--border); }
+  .btn.danger { background:#fff; color:var(--neg); border:1px solid #f3d2ce; }
+  .err { color:var(--neg); font-size:13.5px; margin-top:8px; }
+  .toolbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--border); }
+  th, td { text-align:left; padding:11px 14px; font-size:14px; border-bottom:1px solid var(--border); }
+  th { font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); background:#fafbfc; }
+  tr:last-child td { border-bottom:none; }
+  .pill { display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:99px; }
+  .pill.live { background:#eef8f2; color:var(--pos); }
+  .pill.draft { background:#f1f2f5; color:var(--muted); }
+  a.rowlink { color:var(--navy); font-weight:600; text-decoration:none; cursor:pointer; }
+  .editor { display:none; background:#fff; border:1px solid var(--border); border-radius:12px; padding:26px; margin-top:20px; }
+  .editor.on { display:block; }
+  .field { margin-bottom:16px; }
+  .field label { display:block; font-size:12.5px; font-weight:700; color:var(--navy-dark); margin-bottom:5px; }
+  .field input, .field textarea { width:100%; padding:10px 12px; font-size:14.5px; font-family:inherit; border:1px solid var(--border); border-radius:7px; }
+  .field textarea { min-height:90px; resize:vertical; }
+  .field textarea.body { min-height:340px; font-family:ui-monospace,Menlo,monospace; font-size:13px; }
+  .row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .faq-item { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; margin-bottom:8px; align-items:start; }
+  .faq-item textarea { min-height:56px; }
+  .hint { font-size:12px; color:var(--muted); margin-top:4px; }
+  .actions { display:flex; gap:10px; margin-top:22px; padding-top:18px; border-top:1px solid var(--border); }
+  .toast { position:fixed; top:18px; right:18px; background:var(--navy-dark); color:#fff; padding:12px 18px; border-radius:8px; font-size:14px; display:none; z-index:99; }
+</style>
+</head>
+<body>
+
+<div id="gate" class="gate">
+  <i class="fas fa-lock" style="font-size:22px;color:var(--navy);"></i>
+  <h1 style="margin-top:12px;">Insights admin</h1>
+  <input id="gate-pw" type="password" placeholder="Admin password" autocomplete="off">
+  <button class="btn" style="width:100%" onclick="unlock()">Enter</button>
+  <div id="gate-err" class="err"></div>
+</div>
+
+<div id="app" class="wrap" style="display:none">
+  <div class="toolbar">
+    <h1>Insights admin</h1>
+    <button class="btn gold" onclick="openEditor(null)"><i class="fas fa-plus"></i> New article</button>
+  </div>
+  <table>
+    <thead><tr><th>Title</th><th>Kicker</th><th>Status</th><th>Updated</th><th></th></tr></thead>
+    <tbody id="list-body"></tbody>
+  </table>
+
+  <div class="editor" id="editor">
+    <div class="field"><label>Title</label><input id="f-title" placeholder="Six signs your town is about to revalue"></div>
+    <div class="row2">
+      <div class="field"><label>Slug (leave blank to auto-generate from title)</label><input id="f-slug" placeholder="reassessment"></div>
+      <div class="field"><label>Kicker / category</label><input id="f-kicker" placeholder="Watch out"></div>
+    </div>
+    <div class="field"><label>Dek (1-2 sentence summary — used as the card text and meta description)</label><textarea id="f-dek" style="min-height:60px"></textarea></div>
+    <div class="row2">
+      <div class="field"><label>Hero image URL</label><input id="f-hero" placeholder="https://images.unsplash.com/..."></div>
+      <div class="field"><label>Hero image alt text</label><input id="f-hero-alt"></div>
+    </div>
+    <div class="field">
+      <label>Body (HTML — use &lt;h2&gt;, &lt;p&gt;, &lt;ul&gt;/&lt;li&gt;, &lt;b&gt;)</label>
+      <textarea id="f-body" class="body" placeholder="<p>Opening paragraph...</p>
+<h2>A subheading</h2>
+<p>More content...</p>"></textarea>
+      <div class="hint">This is rendered directly on the page, so only paste content you trust — no need to worry about it being public-submitted, just don't paste untrusted markup.</div>
+    </div>
+    <div class="field">
+      <label>FAQ (for AEO — answer engines lift these directly)</label>
+      <div id="faq-list"></div>
+      <button class="btn ghost" onclick="addFaq()" type="button"><i class="fas fa-plus"></i> Add question</button>
+    </div>
+    <div class="field"><label>Reading minutes (optional — auto-estimated if blank)</label><input id="f-reading" type="number" style="max-width:120px"></div>
+    <div class="field">
+      <label><input type="checkbox" id="f-published" style="width:auto;display:inline-block;margin-right:8px;"> Published (live on the site immediately)</label>
+    </div>
+    <div class="actions">
+      <button class="btn" onclick="save()"><i class="fas fa-check"></i> Save</button>
+      <button class="btn ghost" onclick="closeEditor()">Cancel</button>
+      <button class="btn danger" id="del-btn" style="display:none;margin-left:auto" onclick="del()"><i class="fas fa-trash"></i> Delete</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  var FN_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/insights-publish';
+  var pw = null, currentId = null;
+
+  function toast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.style.display = 'block';
+    setTimeout(function () { t.style.display = 'none'; }, 2600);
+  }
+
+  function call(payload) {
+    payload.admin_key = pw;
+    return fetch(FN_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().then(function (j) { if (!r.ok || !j.ok) throw new Error(j.error || 'Request failed'); return j; }); });
+  }
+
+  function unlock() {
+    pw = document.getElementById('gate-pw').value;
+    call({ action: 'list' }).then(function (j) {
+      document.getElementById('gate').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      renderList(j.articles);
+    }).catch(function (e) {
+      document.getElementById('gate-err').textContent = e.message;
+    });
+  }
+
+  function renderList(articles) {
+    document.getElementById('list-body').innerHTML = articles.map(function (a) {
+      return '<tr><td><a class="rowlink" onclick="openEditor(\'' + a.id + '\')">' + esc(a.title) + '</a></td>' +
+        '<td>' + esc(a.kicker) + '</td>' +
+        '<td><span class="pill ' + (a.published ? 'live' : 'draft') + '">' + (a.published ? 'Live' : 'Draft') + '</span></td>' +
+        '<td>' + new Date(a.updated_at).toLocaleDateString() + '</td>' +
+        '<td>' + (a.published ? '<a class="rowlink" href="/insights/' + esc(a.slug) + '.html" target="_blank">View &rarr;</a>' : '') + '</td></tr>';
+    }).join('') || '<tr><td colspan="5" style="color:#999;text-align:center;padding:30px">No articles yet</td></tr>';
+  }
+
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  function addFaq(q, a) {
+    var div = document.createElement('div');
+    div.className = 'faq-item';
+    div.innerHTML = '<textarea class="faq-q" placeholder="Question">' + esc(q || '') + '</textarea>' +
+      '<textarea class="faq-a" placeholder="Answer">' + esc(a || '') + '</textarea>' +
+      '<button class="btn ghost" type="button" onclick="this.parentElement.remove()"><i class="fas fa-xmark"></i></button>';
+    document.getElementById('faq-list').appendChild(div);
+  }
+
+  function openEditor(id) {
+    currentId = id;
+    document.getElementById('editor').classList.add('on');
+    document.getElementById('faq-list').innerHTML = '';
+    document.getElementById('del-btn').style.display = id ? 'inline-flex' : 'none';
+
+    if (!id) {
+      ['f-title','f-slug','f-kicker','f-dek','f-hero','f-hero-alt','f-body','f-reading'].forEach(function (i) { document.getElementById(i).value = ''; });
+      document.getElementById('f-published').checked = false;
+      addFaq(); addFaq();
+      document.getElementById('editor').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
+    call({ action: 'get', id: id }).then(function (j) {
+      var a = j.article;
+      document.getElementById('f-title').value = a.title;
+      document.getElementById('f-slug').value = a.slug;
+      document.getElementById('f-kicker').value = a.kicker;
+      document.getElementById('f-dek').value = a.dek;
+      document.getElementById('f-hero').value = a.hero_image_url || '';
+      document.getElementById('f-hero-alt').value = a.hero_image_alt || '';
+      document.getElementById('f-body').value = a.body_html;
+      document.getElementById('f-reading').value = a.reading_minutes || '';
+      document.getElementById('f-published').checked = !!a.published;
+      (a.faq || []).forEach(function (f) { addFaq(f.q, f.a); });
+      if (!a.faq || !a.faq.length) { addFaq(); addFaq(); }
+      document.getElementById('editor').scrollIntoView({ behavior: 'smooth' });
+    }).catch(function (e) { toast(e.message); });
+  }
+
+  function closeEditor() {
+    document.getElementById('editor').classList.remove('on');
+    currentId = null;
+  }
+
+  function save() {
+    var faq = Array.from(document.querySelectorAll('.faq-item')).map(function (row) {
+      return { q: row.querySelector('.faq-q').value.trim(), a: row.querySelector('.faq-a').value.trim() };
+    }).filter(function (f) { return f.q && f.a; });
+
+    var payload = {
+      action: 'save',
+      id: currentId || undefined,
+      title: document.getElementById('f-title').value,
+      slug: document.getElementById('f-slug').value,
+      kicker: document.getElementById('f-kicker').value,
+      dek: document.getElementById('f-dek').value,
+      hero_image_url: document.getElementById('f-hero').value,
+      hero_image_alt: document.getElementById('f-hero-alt').value,
+      body_html: document.getElementById('f-body').value,
+      reading_minutes: document.getElementById('f-reading').value || null,
+      faq: faq,
+      published: document.getElementById('f-published').checked
+    };
+
+    call(payload).then(function (j) {
+      toast('Saved' + (payload.published ? ' and published: /insights/' + j.slug + '.html' : ' as draft'));
+      closeEditor();
+      return call({ action: 'list' });
+    }).then(function (j) { renderList(j.articles); }).catch(function (e) { toast(e.message); });
+  }
+
+  function del() {
+    if (!currentId || !confirm('Delete this article permanently?')) return;
+    call({ action: 'delete', id: currentId }).then(function () {
+      toast('Deleted');
+      closeEditor();
+      return call({ action: 'list' });
+    }).then(function (j) { renderList(j.articles); }).catch(function (e) { toast(e.message); });
+  }
+</script>
+</body>
+</html>
