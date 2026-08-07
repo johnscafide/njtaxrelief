@@ -33,6 +33,8 @@
 
   function runAction(action, event) {
     var page = pageName();
+    if (action === 'mobile-menu') { toggleMobileMenu(true); return; }
+    if (action === 'mobile-menu-close') { toggleMobileMenu(false); return; }
     if (action === 'nav-group') {
       var button = event.target.closest('.db-side-group-toggle');
       if (button) setGroup(button, button.getAttribute('aria-expanded') !== 'true', true);
@@ -61,6 +63,24 @@
     if (action === 'profile' && typeof window.dbPanel === 'function') {
       event.preventDefault();
       window.dbPanel('profile');
+    }
+  }
+
+  function toggleMobileMenu(open) {
+    var menu = document.getElementById('wd-mobile-menu');
+    if (!menu) return;
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(function () { menu.classList.add('open'); });
+      document.body.classList.add('wd-mobile-menu-open');
+      var close = menu.querySelector('[data-side-action="mobile-menu-close"]');
+      if (close) close.focus();
+    } else {
+      menu.classList.remove('open');
+      document.body.classList.remove('wd-mobile-menu-open');
+      window.setTimeout(function () { if (!menu.classList.contains('open')) menu.hidden = true; }, 180);
+      var trigger = document.querySelector('[data-side-action="mobile-menu"]');
+      if (trigger) trigger.focus();
     }
   }
 
@@ -113,21 +133,39 @@
     } catch (_storageError) {}
     paintToggle();
     paintDeveloperLinks(!!window.NJPTRDeveloperConfirmed || !!(window.NJPTRPlan && window.NJPTRPlan.state && window.NJPTRPlan.state().developer));
+    paintPlanNavigation();
   }
 
   function paintDeveloperLinks(show) {
     document.querySelectorAll('.developer-only').forEach(function (node) { node.hidden = !show; });
   }
 
+  function paintPlanNavigation() {
+    var plan = window.NJPTRPlan && window.NJPTRPlan.state ? window.NJPTRPlan.state() : null;
+    var paid = !!(plan && (plan.effective === 'pro' || plan.effective === 'pro_plus' || plan.effective === 'developer'));
+    document.querySelectorAll('.db-side-mobile [data-nav-page="pro"]').forEach(function (node) {
+      var label = node.querySelector('span');
+      if (label) label.textContent = paid ? 'Tools' : 'Pro';
+      node.setAttribute('aria-label', paid ? 'Professional tools' : 'Pro plans');
+    });
+    document.querySelectorAll('.wd-mobile-pro-link').forEach(function (node) {
+      var title = node.querySelector('b'), note = node.querySelector('small');
+      if (paid) { if (title) title.textContent = 'Professional tools'; if (note) note.textContent = 'Your plan workspace'; }
+      else { if (title) title.textContent = 'Explore Pro'; if (note) note.textContent = 'Professional tools and workflows'; }
+    });
+  }
+
   document.addEventListener('njptr:plan-change', function (event) {
     paintDeveloperLinks(!!(event.detail && event.detail.developer));
+    paintPlanNavigation();
   });
   document.addEventListener('watchdog:developer-confirmed', function () { paintDeveloperLinks(true); });
+  document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260806a', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260807f', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();

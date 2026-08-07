@@ -1,13 +1,14 @@
 param(
-  [string]$Manifest = "property/CHANGED-FILES-v0.19.0.txt",
-  [string]$Message = "Watchdog v0.19.0"
+  [string]$Manifest = "property/CHANGED-FILES-v0.25.0.txt",
+  [string]$Message = "Watchdog v0.25.0: institutional 100-marker data release"
 )
 $ErrorActionPreference = "Stop"
 $root = git rev-parse --show-toplevel 2>$null
 if (-not $root) { throw "Run this from anywhere inside your cloned GitHub repository." }
 Set-Location $root
 if (-not (Test-Path $Manifest)) { throw "Cannot find $Manifest. Extract the release ZIP into the repository first." }
-$files = Get-Content $Manifest | Where-Object { $_.Trim() -and -not $_.Trim().StartsWith("#") }
+$files = Get-Content $Manifest | Where-Object { $_ -match '^property/' }
+if (-not $files) { throw "No repository paths found in $Manifest." }
 Write-Host "Files this release will stage:" -ForegroundColor Cyan
 git status --short -- $files
 $answer = Read-Host "Stage these release files, commit, and push? (y/N)"

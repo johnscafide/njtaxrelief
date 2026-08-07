@@ -46,11 +46,17 @@
     var bar = old || document.createElement('aside');
     bar.id = 'dev-view-bar';
     bar.className = 'dev-view-bar';
-    bar.innerHTML = '<div><i class="fas fa-code"></i><span><b>Developer access</b><small>Viewing the product as</small></span></div>' +
+    bar.innerHTML = '<button id="dev-view-toggle" type="button" aria-expanded="false" title="Open developer view controls"><i class="fas fa-code"></i><span class="sr-only">Open developer view controls</span></button>' +
+      '<div><i class="fas fa-code"></i><span><b>Developer access</b><small>Viewing the product as</small></span></div>' +
       '<label><span class="sr-only">View as plan</span><select id="dev-view-select">' +
       ['standard', 'pro', 'pro_plus', 'developer'].map(function (p) { return '<option value="' + p + '"' + (p === state.effective ? ' selected' : '') + '>' + label(p) + '</option>'; }).join('') +
       '</select></label><button id="dev-view-reset" type="button" title="Return to developer view"><i class="fas fa-rotate-left"></i></button>';
     if (!old) document.body.appendChild(bar);
+    bar.querySelector('#dev-view-toggle').addEventListener('click', function () {
+      var open = bar.classList.toggle('open');
+      this.setAttribute('aria-expanded', open ? 'true' : 'false');
+      this.setAttribute('title', open ? 'Close developer view controls' : 'Open developer view controls');
+    });
     bar.querySelector('#dev-view-select').addEventListener('change', function (event) { setView(event.target.value); });
     bar.querySelector('#dev-view-reset').addEventListener('click', function () { setView('developer'); });
   }

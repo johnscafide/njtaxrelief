@@ -35,21 +35,28 @@
   }
   function inspect(r) {
     var k=key(r);if(cache[k])return cache[k];
-    cache[k]=Promise.all([
-      permits(r),
-      geoQuery(DEP_NJEMS,0,r,500,'PI_NAME,ADDRESS,PI_NUMBER,STATUS,REMEDIAL_L,DN_STATUS,CEA_STATUS'),
-      geoQuery(DEP_ENV,40,r,0,'PREF_ID_NUM,PI_NAME,DN_NAME,ADDRESS,BLOCK_LOT,FILED_DATE,DESCRIPTION,CAP_TYPE,ACRES'),
-      geoQuery(DEP_RSP,5,r,0,'*'),
-      geoQuery(DEP_NJEMS,9,r,250,'*'),
-      geoQuery(DEP_HYDRO,30,r,0,'*'),
-      geoQuery(DEP_RSP,6,r,0,'*'),
-      geoQuery(DEP_RSP,7,r,0,'*'),
-      geoQuery(DEP_HYDRO,43,r,0,'*'), geoQuery(DEP_HYDRO,48,r,0,'*'),
-      geoQuery(DEP_LAND_LU,2,r,0,'ACRES,LABEL12,TYPE12'), geoQuery(DEP_LAND,79,r,0,'*'),
-      geoQuery(DEP_GEO,0,r,1000,'SITENAME,COMMODITY'), geoQuery(DEP_GEO,13,r,0,'GEONAME'), geoQuery(DEP_GEO,14,r,0,'GEONAME'),
-      geoQuery(DEP_GEO,18,r,0,'WMA_NAME,RANK'), geoQuery(DEP_GEO,19,r,0,'SSANAME'), geoQuery(DEP_GEO,23,r,0,'GEONAME'), geoQuery(DEP_GEO,25,r,0,'GEONAME'),
-      geoQuery(DEP_HYDRO,25,r,0,'TIER,TRAVELTIME'), geoQuery(DEP_HYDRO,26,r,0,'TIER,TRAVELTIME')
-    ]).then(function(x){return{permits:x[0],contaminated:x[1],deed:x[2],cea:x[3],ust:x[4],tidelands:x[5],highlands:x[6],pinelands:x[7],flood:x[8],cafe:x[9],wetlands:x[10],priorityWetlands:x[11],mines:x[14],bedrockAquifer:x[15],bedrockGeology:x[16],recharge:x[17],soleSourceAquifer:x[18],surficialAquifer:x[19],surficialGeology:x[20],wellheadCommunity:x[21],wellheadNonCommunity:x[22]};});
+    var q={
+      permits:permits(r),
+      contaminated:geoQuery(DEP_NJEMS,0,r,500,'PI_NAME,ADDRESS,PI_NUMBER,STATUS,REMEDIAL_L,DN_STATUS,CEA_STATUS'),
+      deed:geoQuery(DEP_ENV,40,r,0,'PREF_ID_NUM,PI_NAME,DN_NAME,ADDRESS,BLOCK_LOT,FILED_DATE,DESCRIPTION,CAP_TYPE,ACRES'),
+      cea:geoQuery(DEP_RSP,5,r,0,'*'),ust:geoQuery(DEP_NJEMS,9,r,250,'*'),tidelands:geoQuery(DEP_HYDRO,30,r,0,'*'),
+      highlands:geoQuery(DEP_RSP,6,r,0,'*'),pinelands:geoQuery(DEP_RSP,7,r,0,'*'),flood:geoQuery(DEP_HYDRO,43,r,0,'*'),cafe:geoQuery(DEP_HYDRO,48,r,0,'*'),
+      wetlands:geoQuery(DEP_LAND_LU,2,r,0,'ACRES,LABEL12,TYPE12'),priorityWetlands:geoQuery(DEP_LAND,79,r,0,'*'),
+      mines:geoQuery(DEP_GEO,0,r,1000,'*'),landslides:geoQuery(DEP_GEO,1,r,1000,'*'),quarries:geoQuery(DEP_GEO,3,r,1500,'*'),faults:geoQuery(DEP_GEO,6,r,500,'*'),
+      soilMapping:geoQuery(DEP_GEO,11,r,0,'*'),bedrockAquifer:geoQuery(DEP_GEO,13,r,0,'*'),bedrockGeology:geoQuery(DEP_GEO,14,r,0,'*'),bedrockOutcrop:geoQuery(DEP_GEO,16,r,0,'*'),
+      recharge:geoQuery(DEP_GEO,18,r,0,'*'),soleSourceAquifer:geoQuery(DEP_GEO,19,r,0,'*'),physiographicProvince:geoQuery(DEP_GEO,20,r,0,'*'),historicFill:geoQuery(DEP_GEO,22,r,0,'*'),
+      surficialAquifer:geoQuery(DEP_GEO,23,r,0,'*'),surficialGeology:geoQuery(DEP_GEO,25,r,0,'*'),acidSoil:geoQuery(DEP_GEO,27,r,0,'*'),
+      wellheadCommunity:geoQuery(DEP_HYDRO,25,r,0,'*'),wellheadNonCommunity:geoQuery(DEP_HYDRO,26,r,0,'*'),groundwaterTreatment:geoQuery(DEP_HYDRO,27,r,0,'*'),
+      category1Water:geoQuery(DEP_HYDRO,6,r,500,'*'),floodPlan:geoQuery(DEP_HYDRO,28,r,0,'*'),floodProfile:geoQuery(DEP_HYDRO,29,r,500,'*'),surfaceSpring:geoQuery(DEP_HYDRO,34,r,1000,'*'),
+      waterSourceArea:geoQuery(DEP_HYDRO,16,r,0,'*'),watershedHuc11:geoQuery(DEP_HYDRO,17,r,0,'*'),subwatershedHuc14:geoQuery(DEP_HYDRO,22,r,0,'*'),
+      openSpace:geoQuery(DEP_LAND,65,r,0,'*'),openSpaceNearby:geoQuery(DEP_LAND,65,r,500,'*'),historicProperty:geoQuery(DEP_LAND,55,r,0,'*'),historicDistrict:geoQuery(DEP_LAND,57,r,0,'*'),
+      archaeologicalGrid:geoQuery(DEP_LAND,56,r,0,'*'),wetlandMitigationBank:geoQuery(DEP_LAND,72,r,0,'*'),wetlandMitigationServiceArea:geoQuery(DEP_LAND,70,r,0,'*'),
+      naturalAreaPreserve:geoQuery(DEP_LAND,80,r,0,'*'),wetlandsLoi:geoQuery(DEP_LAND,21,r,0,'*')
+    };
+    var names=Object.keys(q);
+    cache[k]=Promise.all(names.map(function(name){return q[name].catch(function(error){return{features:[],unavailable:error.message};});})).then(function(values){
+      var out={};names.forEach(function(name,i){out[name]=values[i];});return out;
+    });
     return cache[k];
   }
   function featureRows(payload){return(payload&&payload.features||[]).map(function(f){return f.attributes||{};});}
@@ -80,14 +87,26 @@
       (count?'<p><b>Development-constraint stack:</b> '+count+' screening layer'+(count===1?' intersects':'s intersect')+' the saved map point. Obtain the controlling determination before a lending, title, development or construction decision.</p>':'<p>No intersection was returned at the saved point from these four screening layers. That does not establish absence of flood or wetlands constraints.</p>')+
       '<p class="dd-micro">NJDEP’s 2012 wetlands layer and Flood Indicator layers are screening references. Regulatory mapping, field delineations and written rules control.</p></article>';
   }
+  function institutionalHTML(d) {
+    function n(name){return featureRows(d[name]).length;}
+    var geo=['mines','landslides','quarries','faults','historicFill','acidSoil','bedrockOutcrop'].reduce(function(a,k){return a+(n(k)?1:0);},0);
+    var water=['wellheadCommunity','wellheadNonCommunity','groundwaterTreatment','category1Water','floodPlan','floodProfile','surfaceSpring'].reduce(function(a,k){return a+(n(k)?1:0);},0);
+    var land=['openSpace','historicProperty','historicDistrict','archaeologicalGrid','wetlandMitigationBank','wetlandMitigationServiceArea','naturalAreaPreserve','wetlandsLoi'].reduce(function(a,k){return a+(n(k)?1:0);},0);
+    var aq=featureRows(d.bedrockAquifer)[0]||{},recharge=featureRows(d.recharge)[0]||{},province=featureRows(d.physiographicProvince)[0]||{};
+    return '<article class="dd-signal '+(geo+water+land?'watch':'clear')+'"><div class="dd-signal-head"><i class="fas fa-layer-group"></i><span><b>Institutional site context</b><small>NJDEP geology + hydrography + land</small></span><strong>'+(geo+water+land)+' review flags</strong></div>'+
+      '<div class="dd-pills"><span class="'+(geo?'hit':'')+'">Geology '+geo+'</span><span class="'+(water?'hit':'')+'">Water '+water+'</span><span class="'+(land?'hit':'')+'">Land / historic '+land+'</span></div>'+
+      '<p><b>Mapped context:</b> '+safe(aq.GEONAME||aq.AQUIFER||'aquifer not labeled')+' · recharge '+safe(recharge.RANK||'not mapped')+' · '+safe(province.PROVINCE||province.NAME||'physiographic province not labeled')+'.</p>'+
+      '<p class="dd-micro">These are screening flags from live statewide feature services. Open individual Data Center markers for source, tier, professional purpose and refresh rules.</p></article>';
+  }
   function evidence(r,data) {
     var payload={generated_at:new Date().toISOString(),property:{address:r.address||'',municipality:r.municipality||r.town||'',county:r.county||'',pams_pin:r.pams_pin||'',block:r.block||'',lot:r.lot||''},findings:{permits:(data.permits&&data.permits.rows)||[],contaminated:featureRows(data.contaminated),deed_notices:featureRows(data.deed),groundwater_cea:featureRows(data.cea),ust:featureRows(data.ust),tidelands:featureRows(data.tidelands),highlands:featureRows(data.highlands),pinelands:featureRows(data.pinelands),nfhl:featureRows(data.flood),tidal_cafe:featureRows(data.cafe),wetlands_2012:featureRows(data.wetlands),priority_wetlands:featureRows(data.priorityWetlands)},disclaimer:'Screening evidence only; not a title, legal, environmental, survey, wetlands, flood or credit-eligibility opinion. Verify controlling source records.'};
+    payload.findings.institutional_context={geology:{mines:featureRows(data.mines),landslides:featureRows(data.landslides),quarries:featureRows(data.quarries),faults:featureRows(data.faults),bedrock_aquifer:featureRows(data.bedrockAquifer),bedrock_geology:featureRows(data.bedrockGeology),recharge:featureRows(data.recharge),historic_fill:featureRows(data.historicFill),acid_soil:featureRows(data.acidSoil)},water:{wellhead_community:featureRows(data.wellheadCommunity),wellhead_noncommunity:featureRows(data.wellheadNonCommunity),source_area:featureRows(data.waterSourceArea),category1:featureRows(data.category1Water),flood_plan:featureRows(data.floodPlan),flood_profile:featureRows(data.floodProfile)},land:{open_space:featureRows(data.openSpace),historic_property:featureRows(data.historicProperty),historic_district:featureRows(data.historicDistrict),archaeological_grid:featureRows(data.archaeologicalGrid),wetland_mitigation_bank:featureRows(data.wetlandMitigationBank),natural_area_preserve:featureRows(data.naturalAreaPreserve),wetlands_loi:featureRows(data.wetlandsLoi)}};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),a=document.createElement('a'),url=URL.createObjectURL(blob);a.href=url;a.download='watchdog-closing-evidence-'+key(r)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);
   }
   function render(r,data) {
     var host=document.getElementById('dd-'+key(r));if(!host)return;
     records[key(r)]=r;evidenceRecords[key(r)]=data;
-    host.innerHTML='<div class="dd-grid">'+permitHTML(data.permits)+envHTML(data)+constraintsHTML(data)+'</div><div class="dd-caveat"><i class="fas fa-circle-info"></i><p><b>Due-diligence signal, not a title, environmental, legal or credit-eligibility opinion.</b> DCA says its raw permit feed may be incomplete or contain errors. NJDEP layers are screening references and may be approximate. A “not found” result does not prove absence. Confirm flagged items with controlling municipal, NJDEP, FEMA, recorded or professional source records.</p></div><div class="dd-actions"><button class="dd-refresh" type="button" onclick="ddEvidence(\''+key(r)+'\')"><i class="fas fa-file-arrow-down"></i> Download Closing Evidence File</button></div><div class="dd-sources"><a href="https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra" target="_blank" rel="noopener">DCA permit source</a><a href="https://dep.nj.gov/climatechange/flood-tool/" target="_blank" rel="noopener">NJ Flood Indicator Tool</a><a href="https://dep.nj.gov/gis/nj-geoweb-profiles/" target="_blank" rel="noopener">NJDEP GeoWeb profiles</a></div>';
+    host.innerHTML='<div class="dd-grid">'+permitHTML(data.permits)+envHTML(data)+constraintsHTML(data)+institutionalHTML(data)+'</div><div class="dd-caveat"><i class="fas fa-circle-info"></i><p><b>Due-diligence signal, not a title, environmental, legal, appraisal, insurance or credit-eligibility opinion.</b> DCA says its raw permit feed may be incomplete or contain errors. NJDEP layers are screening references and may be approximate. A “not found” result does not prove absence. Confirm flagged items with controlling municipal, NJDEP, FEMA, recorded or professional source records.</p></div><div class="dd-actions"><button class="dd-refresh" type="button" onclick="ddEvidence(\''+key(r)+'\')"><i class="fas fa-file-arrow-down"></i> Download Closing Evidence File</button></div><div class="dd-sources"><a href="https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra" target="_blank" rel="noopener">DCA permit source</a><a href="https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer" target="_blank" rel="noopener">NJDEP geology</a><a href="https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer" target="_blank" rel="noopener">NJDEP hydrography</a><a href="https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer" target="_blank" rel="noopener">NJDEP land</a></div>';
   }
   function load(r,force) {
     var k=key(r),host=document.getElementById('dd-'+k);if(!host)return;if(force)delete cache[k];

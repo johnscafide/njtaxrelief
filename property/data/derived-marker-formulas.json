@@ -1,26 +1,1053 @@
 {
   "schema_version": 1,
-  "version": "0.21.0",
-  "principle": "Every proprietary score exposes its component inputs and weights. Scores support prioritization; they are not legal, appraisal, credit, investment or transaction outcomes.",
+  "version": "0.31.0",
+  "principle": "Every proprietary score exposes its component inputs/formula. Scores support prioritization; they are not legal, appraisal, credit, investment, insurance or transaction outcomes.",
   "markers": {
-    "watchdog.investor_carry_cost_volatility": {"range":"0-100; higher means more tax-driven carry uncertainty","formula":"32% municipal budget pressure + 24% positive levy/ratable growth gap + 22% revaluation pressure + 14% positive tax-rate CAGR + 8% exempt/PILOT exposure"},
-    "watchdog.appeal_evidence_strength": {"range":"0-100; higher means a stronger evidence file","formula":"25% independent value anchor + 20% Chapter 123 margin + 18% verified comparable depth + 14% assessment-uniformity context + 10% county outcome context + 13% property-record completeness"},
-    "watchdog.appeal_opportunity_index": {"range":"0-100 opportunity with separate 0-100 evidence coverage; higher means stronger current review priority","formula":"Available-input normalized: 35% Chapter 123 position + 25% evidence-file strength + 15% inverse assessment consistency + 10% county appeal outcome context + 15% estimated annual dollars at stake. Missing inputs reduce evidence coverage instead of counting as negative evidence."},
-    "watchdog.permit_lifecycle_score": {"range":"0-100; higher means more permit lifecycle review","formula":"Up to 45 points stale open permits + 25 open permit/certificate gaps + 20 oldest-open age + 10 recent permit frequency"},
-    "watchdog.listing_friction_index": {"range":"0-100 risk","formula":"23% budget pressure + 23% revaluation pressure + 18% assessment unevenness + 18% tax-rate trend + 18% appeal/assessment tension"},
-    "watchdog.tax_carry_advantage": {"range":"0-100 advantage","formula":"Inverse normalized effective property-tax burden using current tax divided by independent market-value estimate"},
-    "watchdog.buyer_objection_radar": {"range":"0-100 priority","formula":"Maximum current budget, revaluation, assessment-uniformity or appeal-tension signal"},
-    "watchdog.prelist_readiness_score": {"range":"0-100 readiness","formula":"55% record completeness + 25% verified-sale evidence depth + 20% inverse listing friction"},
-    "watchdog.marketability_drag_index": {"range":"0-100 drag","formula":"34% effective tax burden + 23% budget pressure + 23% revaluation pressure + 20% assessment unevenness"},
-    "watchdog.revaluation_conversation_risk": {"range":"0-100 risk","formula":"70% revaluation pressure + 30% assessment unevenness"},
-    "watchdog.offer_diligence_priority": {"range":"0-100 priority","formula":"55% listing friction + 25% missing property-record evidence + 20% missing verified-sale evidence depth"},
-    "watchdog.verified_listing_story_strength": {"range":"0-100 strength","formula":"50% record completeness + 35% verified-sale evidence depth + 15% assessment consistency"},
-    "watchdog.assessment_surprise_index": {"range":"0-100 risk","formula":"40% revaluation pressure + 30% appeal/assessment tension + 15% tax-rate trend + 15% budget pressure"},
-    "watchdog.tax_trend_position": {"range":"0-100 stability","formula":"Inverse normalized positive historical general-tax-rate CAGR"},
-    "watchdog.comparable_evidence_reliability": {"range":"0-100 confidence","formula":"45% verified-sale sample depth + 30% assessment-ratio dispersion stability + 15% source recency + 10% subject square-foot detail availability"},
-    "watchdog.municipal_cost_absorption_score": {"range":"0-100 capacity","formula":"70% inverse positive gap between total-levy CAGR and organic ratable CAGR + 30% normalized tax-collection rate"},
-    "watchdog.transaction_tax_shock_index": {"range":"0-100 risk","formula":"35% revaluation pressure + 25% municipal budget pressure + 25% positive general-tax-rate CAGR + 15% levy/ratable growth gap"},
-    "watchdog.fiscal_resilience_score": {"range":"0-100 resilience","formula":"35% inverse budget pressure + 30% municipal cost absorption + 20% normalized collection rate + 15% inverse debt-service burden"},
-    "watchdog.assessment_defensibility_score": {"range":"0-100 support","formula":"30% comparable evidence reliability + 25% assessment uniformity + 25% Chapter 123 within-range support + 20% independent-value-anchor availability"}
+    "watchdog.investor_carry_cost_volatility": {
+      "range": "0-100; higher means more tax-driven carry uncertainty",
+      "formula": "32% municipal budget pressure + 24% positive levy/ratable growth gap + 22% revaluation pressure + 14% positive tax-rate CAGR + 8% exempt/PILOT exposure"
+    },
+    "watchdog.appeal_evidence_strength": {
+      "range": "0-100; higher means a stronger evidence file",
+      "formula": "25% independent value anchor + 20% Chapter 123 margin + 18% verified comparable depth + 14% assessment-uniformity context + 10% county outcome context + 13% property-record completeness"
+    },
+    "watchdog.appeal_opportunity_index": {
+      "range": "0-100 opportunity with separate 0-100 evidence coverage; higher means stronger current review priority",
+      "formula": "Available-input normalized: 35% Chapter 123 position + 25% evidence-file strength + 15% inverse assessment consistency + 10% county appeal outcome context + 15% estimated annual dollars at stake. Missing inputs reduce evidence coverage instead of counting as negative evidence."
+    },
+    "watchdog.permit_lifecycle_score": {
+      "range": "0-100; higher means more permit lifecycle review",
+      "formula": "Up to 45 points stale open permits + 25 open permit/certificate gaps + 20 oldest-open age + 10 recent permit frequency"
+    },
+    "watchdog.listing_friction_index": {
+      "range": "0-100 risk",
+      "formula": "23% budget pressure + 23% revaluation pressure + 18% assessment unevenness + 18% tax-rate trend + 18% appeal/assessment tension"
+    },
+    "watchdog.tax_carry_advantage": {
+      "range": "0-100 advantage",
+      "formula": "Inverse normalized effective property-tax burden using current tax divided by independent market-value estimate"
+    },
+    "watchdog.buyer_objection_radar": {
+      "range": "0-100 priority",
+      "formula": "Maximum current budget, revaluation, assessment-uniformity or appeal-tension signal"
+    },
+    "watchdog.prelist_readiness_score": {
+      "range": "0-100 readiness",
+      "formula": "55% record completeness + 25% verified-sale evidence depth + 20% inverse listing friction"
+    },
+    "watchdog.marketability_drag_index": {
+      "range": "0-100 drag",
+      "formula": "34% effective tax burden + 23% budget pressure + 23% revaluation pressure + 20% assessment unevenness"
+    },
+    "watchdog.revaluation_conversation_risk": {
+      "range": "0-100 risk",
+      "formula": "70% revaluation pressure + 30% assessment unevenness"
+    },
+    "watchdog.offer_diligence_priority": {
+      "range": "0-100 priority",
+      "formula": "55% listing friction + 25% missing property-record evidence + 20% missing verified-sale evidence depth"
+    },
+    "watchdog.verified_listing_story_strength": {
+      "range": "0-100 strength",
+      "formula": "50% record completeness + 35% verified-sale evidence depth + 15% assessment consistency"
+    },
+    "watchdog.assessment_surprise_index": {
+      "range": "0-100 risk",
+      "formula": "40% revaluation pressure + 30% appeal/assessment tension + 15% tax-rate trend + 15% budget pressure"
+    },
+    "watchdog.tax_trend_position": {
+      "range": "0-100 stability",
+      "formula": "Inverse normalized positive historical general-tax-rate CAGR"
+    },
+    "watchdog.comparable_evidence_reliability": {
+      "range": "0-100 confidence",
+      "formula": "45% verified-sale sample depth + 30% assessment-ratio dispersion stability + 15% source recency + 10% subject square-foot detail availability"
+    },
+    "watchdog.municipal_cost_absorption_score": {
+      "range": "0-100 capacity",
+      "formula": "70% inverse positive gap between total-levy CAGR and organic ratable CAGR + 30% normalized tax-collection rate"
+    },
+    "watchdog.transaction_tax_shock_index": {
+      "range": "0-100 risk",
+      "formula": "35% revaluation pressure + 25% municipal budget pressure + 25% positive general-tax-rate CAGR + 15% levy/ratable growth gap"
+    },
+    "watchdog.fiscal_resilience_score": {
+      "range": "0-100 resilience",
+      "formula": "35% inverse budget pressure + 30% municipal cost absorption + 20% normalized collection rate + 15% inverse debt-service burden"
+    },
+    "watchdog.assessment_defensibility_score": {
+      "range": "0-100 support",
+      "formula": "30% comparable evidence reliability + 25% assessment uniformity + 25% Chapter 123 within-range support + 20% independent-value-anchor availability"
+    },
+    "watchdog.environmental_encumbrance_severity": {
+      "range": "score / 100",
+      "formula": "weighted(deed_notice, CEA, contaminated_site, UST)",
+      "professional_reason": "Prioritizes environmental public-record exceptions for counsel/title review."
+    },
+    "watchdog.title_constraint_stack": {
+      "range": "score / 100",
+      "formula": "count(tidelands, deed_notice, historic, wetlands_LOI, open_space_encumbrance)",
+      "professional_reason": "Surfaces overlapping public-record constraints before closing."
+    },
+    "watchdog.permit_closure_confidence": {
+      "range": "score / 100",
+      "formula": "100 - normalized(open_permit_gap / permit_count)",
+      "professional_reason": "Focuses closing review on permit/certificate gaps."
+    },
+    "watchdog.source_authority_coverage": {
+      "range": "score / 100",
+      "formula": "authoritative_fields / required_fields * 100",
+      "professional_reason": "Shows how much of a diligence brief is backed by authoritative sources."
+    },
+    "watchdog.parcel_identity_confidence": {
+      "range": "score / 100",
+      "formula": "matched(address, municipality, block, lot, qualifier, PAMS_PIN) / 6 * 100",
+      "professional_reason": "Reduces wrong-parcel risk before professional analysis."
+    },
+    "watchdog.appeal_case_readiness": {
+      "range": "score / 100",
+      "formula": "weighted(comparable_depth, evidence_strength, chapter123_margin, deadline_readiness)",
+      "professional_reason": "Packages appeal evidence prerequisites into one readiness signal."
+    },
+    "watchdog.chapter123_margin_stability": {
+      "range": "score / 100",
+      "formula": "100 - normalized(abs(current_margin - historical_margin))",
+      "professional_reason": "Separates a persistent assessment signal from a one-period anomaly."
+    },
+    "watchdog.evidence_chain_completeness": {
+      "range": "score / 100",
+      "formula": "verified_sources / required_evidence_sources * 100",
+      "professional_reason": "Makes missing source support visible before reliance."
+    },
+    "watchdog.filing_deadline_risk": {
+      "range": "score / 100",
+      "formula": "deadline_proximity * readiness_gap",
+      "professional_reason": "Highlights matters where incomplete evidence and time pressure overlap."
+    },
+    "watchdog.closing_exception_priority": {
+      "range": "score / 100",
+      "formula": "weighted(open_permits, title_constraints, environmental_encumbrance, flood_context)",
+      "professional_reason": "Ranks public-record issues for a closing checklist without making a legal determination."
+    },
+    "watchdog.collateral_operating_cost_stress": {
+      "range": "score / 100",
+      "formula": "weighted(tax_burden, levy_growth, escrow_volatility)",
+      "professional_reason": "Shows when recurring public charges may materially change monthly housing cost."
+    },
+    "watchdog.escrow_volatility_score": {
+      "range": "score / 100",
+      "formula": "normalized(stddev(tax_history) + levy_growth_gap)",
+      "professional_reason": "Turns multi-year tax movement into an escrow planning signal."
+    },
+    "watchdog.collateral_tax_reset_sensitivity": {
+      "range": "score / 100",
+      "formula": "transaction_tax_shock * assessment_ratio_gap",
+      "professional_reason": "Flags collateral where a reset scenario could materially alter taxes."
+    },
+    "watchdog.municipal_fiscal_capacity": {
+      "range": "score / 100",
+      "formula": "weighted(tax_base_growth, collection_rate, inverse_debt_share)",
+      "professional_reason": "Provides consistent municipal-finance context for collateral review."
+    },
+    "watchdog.collateral_constraint_burden": {
+      "range": "score / 100",
+      "formula": "normalized(count(flood, wetlands, geology, title, permit families))",
+      "professional_reason": "Summarizes mapped constraint density for lender diligence."
+    },
+    "watchdog.environmental_collateral_review": {
+      "range": "score / 100",
+      "formula": "weighted(environmental_encumbrance, water_protection_overlap)",
+      "professional_reason": "Prioritizes collateral that warrants deeper environmental review."
+    },
+    "watchdog.permit_collateral_completion": {
+      "range": "score / 100",
+      "formula": "permit_closure_confidence * source_authority_coverage / 100",
+      "professional_reason": "Combines permit lifecycle and source confidence for collateral files."
+    },
+    "watchdog.five_year_tax_reserve_ratio": {
+      "range": "score / 100",
+      "formula": "projected_5y_tax / current_annual_tax",
+      "professional_reason": "Gives mortgage professionals a comparable reserve-planning ratio."
+    },
+    "watchdog.listing_tax_burden_percentile": {
+      "range": "score / 100",
+      "formula": "percentile(effective_tax_rate within municipality)",
+      "professional_reason": "Gives agents a defensible tax-position talking point."
+    },
+    "watchdog.buyer_monthly_carry_delta": {
+      "range": "score / 100",
+      "formula": "(scenario_annual_tax - current_annual_tax) / 12",
+      "professional_reason": "Translates tax scenarios into the monthly number buyers budget for."
+    },
+    "watchdog.preoffer_public_record_risk": {
+      "range": "score / 100",
+      "formula": "weighted(permit_gap, flood, environmental, title_constraint_stack)",
+      "professional_reason": "Identifies diligence questions before an offer without making legal conclusions."
+    },
+    "watchdog.buyer_tax_reset_exposure": {
+      "range": "score / 100",
+      "formula": "transaction_tax_shock_index",
+      "professional_reason": "Turns assessment/tax relationships into buyer planning context."
+    },
+    "watchdog.seller_appeal_opportunity_signal": {
+      "range": "score / 100",
+      "formula": "appeal_opportunity_index * evidence_chain_completeness / 100",
+      "professional_reason": "Helps agents recognize when a tax conversation deserves professional review."
+    },
+    "watchdog.town_fiscal_story_score": {
+      "range": "score / 100",
+      "formula": "weighted(collection_rate, tax_base_growth, inverse_levy_base_gap)",
+      "professional_reason": "Condenses sourced, non-demographic municipal finance context."
+    },
+    "watchdog.transaction_diligence_completion": {
+      "range": "score / 100",
+      "formula": "completed_public_record_checks / required_checks * 100",
+      "professional_reason": "Gives agents a transaction-research completion meter."
+    },
+    "watchdog.property_story_confidence": {
+      "range": "score / 100",
+      "formula": "weighted(source_authority_coverage, parcel_identity_confidence, record_completeness)",
+      "professional_reason": "Shows whether the facts supporting a property brief are complete."
+    },
+    "watchdog.carry_cost_downside": {
+      "range": "score / 100",
+      "formula": "weighted(tax_growth, levy_base_gap, escrow_volatility)",
+      "professional_reason": "Screens holdings for adverse recurring-cost momentum."
+    },
+    "watchdog.municipal_concentration_risk": {
+      "range": "score / 100",
+      "formula": "portfolio_value_in_municipality / portfolio_value * fiscal_stress",
+      "professional_reason": "Exposes portfolio concentration in a single municipal fiscal context."
+    },
+    "watchdog.tax_base_absorption_risk": {
+      "range": "score / 100",
+      "formula": "normalized(max(0, levy_growth - tax_base_growth))",
+      "professional_reason": "Flags levies rising faster than the equalized base."
+    },
+    "watchdog.revaluation_reset_exposure": {
+      "range": "score / 100",
+      "formula": "revaluation_risk * assessment_ratio_gap",
+      "professional_reason": "Surfaces assets exposed to a valuation/reset event."
+    },
+    "watchdog.regulatory_constraint_density": {
+      "range": "score / 100",
+      "formula": "distinct_constraint_layers / monitored_layers * 100",
+      "professional_reason": "Provides a consistent cross-property regulatory screen."
+    },
+    "watchdog.capital_improvement_activity": {
+      "range": "score / 100",
+      "formula": "normalized(recent_permit_count)",
+      "professional_reason": "Uses public permit activity as reinvestment context."
+    },
+    "watchdog.fiscal_trend_momentum": {
+      "range": "score / 100",
+      "formula": "weighted(tax_base_CAGR - levy_CAGR, collection_rate_change)",
+      "professional_reason": "Condenses multi-year municipal-finance direction for portfolios."
+    },
+    "watchdog.development_constraint_density": {
+      "range": "score / 100",
+      "formula": "distinct(site_constraint_layers) / monitored_layers * 100",
+      "professional_reason": "Compares the public-record diligence burden across sites."
+    },
+    "watchdog.permitting_velocity": {
+      "range": "score / 100",
+      "formula": "recent_permit_count / observation_months normalized",
+      "professional_reason": "Shows relative permit activity using reported DCA records."
+    },
+    "watchdog.certificate_closure_rate": {
+      "range": "score / 100",
+      "formula": "closed_certificate_records / permit_records * 100",
+      "professional_reason": "Highlights permit-to-certificate lifecycle completion."
+    },
+    "watchdog.regulatory_overlap_score": {
+      "range": "score / 100",
+      "formula": "weighted(highlands, pinelands, wetlands, water_protection, historic, open_space)",
+      "professional_reason": "Identifies sites where mapped regulatory programs overlap."
+    },
+    "watchdog.site_water_constraint_score": {
+      "range": "score / 100",
+      "formula": "weighted(wetlands, category1_water, wellhead, source_water, flood)",
+      "professional_reason": "Condenses water-related site constraints for screening."
+    },
+    "watchdog.geology_complexity_score": {
+      "range": "score / 100",
+      "formula": "weighted(fill, acid_soil, mines, faults, landslides, aquifer_context)",
+      "professional_reason": "Creates a first-pass geology diligence score from state mapping."
+    },
+    "watchdog.predevelopment_review_priority": {
+      "range": "score / 100",
+      "formula": "weighted(development_constraint_density, regulatory_overlap, water_constraint, geology_complexity)",
+      "professional_reason": "Ranks sites for deeper review before design spend."
+    },
+    "watchdog.comparable_depth_score": {
+      "range": "score / 100",
+      "formula": "normalized(verified_sale_sample_size, recency, dispersion)",
+      "professional_reason": "Shows whether the public sales evidence base is deep enough for comparison."
+    },
+    "watchdog.assessment_uniformity_reliability": {
+      "range": "score / 100",
+      "formula": "weighted(inverse_COD, usable_sales, inverse_volatility)",
+      "professional_reason": "Adds reliability context to municipal assessment ratios."
+    },
+    "watchdog.appraisal_record_completeness": {
+      "range": "score / 100",
+      "formula": "present(appraisal_fields) / required_fields * 100",
+      "professional_reason": "Surfaces missing public-record inputs before valuation work."
+    },
+    "watchdog.land_improvement_outlier": {
+      "range": "score / 100",
+      "formula": "percentile(abs(property_improvement_share - peer_median_share))",
+      "professional_reason": "Flags unusual assessment composition for review."
+    },
+    "watchdog.market_anchor_confidence": {
+      "range": "score / 100",
+      "formula": "weighted(comparable_depth, source_coverage, inverse_sale_dispersion)",
+      "professional_reason": "States how strongly verified evidence supports the market anchor."
+    },
+    "watchdog.flood_context_severity": {
+      "range": "score / 100",
+      "formula": "weighted(NFHL, tidal_CAFE, flood_plan, flood_profile_proximity)",
+      "professional_reason": "Combines public flood mapping into a screening priority, not an insurance determination."
+    },
+    "watchdog.environmental_site_proximity": {
+      "range": "score / 100",
+      "formula": "weighted(contaminated_500m, UST_250m, deed_notice, CEA)",
+      "professional_reason": "Prioritizes environmental site review from state public records."
+    },
+    "watchdog.water_protection_overlap": {
+      "range": "score / 100",
+      "formula": "weighted(wellhead_tier, source_water, sole_source_aquifer, category1_water)",
+      "professional_reason": "Shows overlapping drinking-water/protection contexts relevant to risk review."
+    },
+    "watchdog.historic_property_constraint": {
+      "range": "score / 100",
+      "formula": "weighted(historic_property, historic_district, archaeological_screen, LOI)",
+      "professional_reason": "Flags historic-resource mapping that may affect diligence."
+    },
+    "watchdog.physical_due_diligence_priority": {
+      "range": "score / 100",
+      "formula": "weighted(flood_context, environmental_proximity, water_overlap, geology_complexity)",
+      "professional_reason": "Ranks properties for deeper physical/environmental review."
+    },
+    "watchdog.consumer.home_cost_clarity": {
+      "range": "score / 100",
+      "formula": "coverage(annual_tax, rate, assessment, sale_context)",
+      "professional_reason": "Shows whether the core public-cost facts needed for a homeowner decision are present."
+    },
+    "watchdog.consumer.tax_change_watch": {
+      "range": "score / 100",
+      "formula": "weighted(tax_trajectory, levy_growth, revaluation_risk)",
+      "professional_reason": "Prioritizes a homeowner review when tax drivers move together."
+    },
+    "watchdog.consumer.appeal_question_readiness": {
+      "range": "score / 100",
+      "formula": "weighted(chapter123_position, evidence_chain_completeness, deadline_readiness)",
+      "professional_reason": "Explains when it is worth asking a qualified professional about an appeal."
+    },
+    "watchdog.consumer.buyer_tax_planning_signal": {
+      "range": "score / 100",
+      "formula": "weighted(transaction_tax_shock, buyer_monthly_carry_delta)",
+      "professional_reason": "Translates public tax relationships into a buyer-planning conversation."
+    },
+    "watchdog.consumer.ownership_record_confidence": {
+      "range": "score / 100",
+      "formula": "parcel_identity_confidence * source_authority_coverage / 100",
+      "professional_reason": "Shows whether the public parcel record is well matched before relying on it."
+    },
+    "watchdog.consumer.property_change_attention": {
+      "range": "score / 100",
+      "formula": "weighted(score_change, permit_activity, source_change)",
+      "professional_reason": "Prioritizes which recorded changes deserve a homeowner look."
+    },
+    "watchdog.consumer.public_record_completeness": {
+      "range": "score / 100",
+      "formula": "present(public_homeowner_fields) / required_homeowner_fields * 100",
+      "professional_reason": "Makes missing public-record facts visible without filling gaps by assumption."
+    },
+    "watchdog.consumer.sale_context_strength": {
+      "range": "score / 100",
+      "formula": "weighted(verified_sale_count, recency, sale_dispersion)",
+      "professional_reason": "States the strength of available public sale context, not a valuation opinion."
+    },
+    "watchdog.consumer.home_improvement_followup": {
+      "range": "score / 100",
+      "formula": "weighted(recent_permit_count, permit_closure_confidence)",
+      "professional_reason": "Helps a homeowner identify when completed work may need record follow-up."
+    },
+    "watchdog.consumer.tax_relief_pathway_fit": {
+      "range": "score / 100",
+      "formula": "eligibility_inputs_present / required_inputs * 100",
+      "professional_reason": "Shows whether enough information exists to discuss an available relief pathway."
+    },
+    "watchdog.attorney.record_exception_sequence": {
+      "range": "score / 100",
+      "formula": "ordered(open_permits, deed_notice, title_constraints, environmental_hits)",
+      "professional_reason": "Orders public-record exceptions into a review sequence without legal conclusions."
+    },
+    "watchdog.attorney.appeal_evidence_gap": {
+      "range": "score / 100",
+      "formula": "100 - evidence_chain_completeness",
+      "professional_reason": "Shows which appeal-supporting public evidence remains incomplete."
+    },
+    "watchdog.attorney.deadline_evidence_collision": {
+      "range": "score / 100",
+      "formula": "filing_deadline_risk * appeal_evidence_gap / 100",
+      "professional_reason": "Highlights matters where evidence needs and filing time collide."
+    },
+    "watchdog.attorney.municipal_record_reliance": {
+      "range": "score / 100",
+      "formula": "weighted(source_authority_coverage, parcel_identity_confidence)",
+      "professional_reason": "Signals how safely municipal public records can anchor first-pass analysis."
+    },
+    "watchdog.attorney.land_use_exception_stack": {
+      "range": "score / 100",
+      "formula": "count(wetlands, historic, open_space, tidelands, highlands, pinelands)",
+      "professional_reason": "Identifies overlapping mapped land-use programs for counsel review."
+    },
+    "watchdog.attorney.closing_record_aging": {
+      "range": "score / 100",
+      "formula": "normalized(age(open_permit, latest_deed, source_refresh))",
+      "professional_reason": "Surfaces records that may need current-source confirmation."
+    },
+    "watchdog.attorney.assessment_argument_specificity": {
+      "range": "score / 100",
+      "formula": "weighted(chapter123_margin, comparable_depth, land_improvement_outlier)",
+      "professional_reason": "Distinguishes a general concern from an evidence-specific assessment question."
+    },
+    "watchdog.attorney.environmental_exception_path": {
+      "range": "score / 100",
+      "formula": "weighted(environmental_encumbrance, water_protection_overlap, historic_fill)",
+      "professional_reason": "Prioritizes environmental record review before reliance."
+    },
+    "watchdog.attorney.public_notice_density": {
+      "range": "score / 100",
+      "formula": "count(deed_notice, CEA, historic, open_space, tidelands)",
+      "professional_reason": "Counts distinct public notice types, not legal encumbrances."
+    },
+    "watchdog.attorney.case_file_source_freshness": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, source_authority_coverage)",
+      "professional_reason": "Shows whether a working file may require updated official source pulls."
+    },
+    "watchdog.title.closing_clearance_signal": {
+      "range": "score / 100",
+      "formula": "weighted(parcel_identity_confidence, permit_closure_confidence, inverse_title_constraints)",
+      "professional_reason": "Ranks public-record clearance questions before title examination."
+    },
+    "watchdog.title.parcel_match_variance": {
+      "range": "score / 100",
+      "formula": "100 - parcel_identity_confidence",
+      "professional_reason": "Flags records requiring manual block/lot/address reconciliation."
+    },
+    "watchdog.title.permit_certificate_gap_age": {
+      "range": "score / 100",
+      "formula": "age(oldest_open_permit_or_certificate_gap)",
+      "professional_reason": "Shows elapsed age of a public permit/certificate gap."
+    },
+    "watchdog.title.title_land_constraint_mix": {
+      "range": "score / 100",
+      "formula": "count(tidelands, open_space, historic, wetlands_LOI)",
+      "professional_reason": "Makes the types of mapped public constraints scannable."
+    },
+    "watchdog.title.recording_reference_completeness": {
+      "range": "score / 100",
+      "formula": "present(deed_book, deed_page, sale_date, parcel_id) / 4 * 100",
+      "professional_reason": "Shows whether key public recording references are available."
+    },
+    "watchdog.title.exception_resolution_priority": {
+      "range": "score / 100",
+      "formula": "weighted(title_constraint_stack, open_permit_age, environmental_encumbrance)",
+      "professional_reason": "Prioritizes exception follow-up without stating marketability of title."
+    },
+    "watchdog.title.address_alias_risk": {
+      "range": "score / 100",
+      "formula": "normalized(address_variants, qualifier_variants, parcel_match_variance)",
+      "professional_reason": "Flags a risk of mismatched public address formats."
+    },
+    "watchdog.title.closing_source_currency": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, official_release_status)",
+      "professional_reason": "Shows whether source confirmation may be needed before closing use."
+    },
+    "watchdog.title.map_notice_overlap": {
+      "range": "score / 100",
+      "formula": "count(mapped_notice_layers)",
+      "professional_reason": "Summarizes mapped notice layers that may warrant record examination."
+    },
+    "watchdog.title.municipal_search_scope": {
+      "range": "score / 100",
+      "formula": "coverage(municipal_search_items, parcel_context)",
+      "professional_reason": "Shows the breadth of public municipal-search items reviewed."
+    },
+    "watchdog.agent.listing_tax_talking_point": {
+      "range": "score / 100",
+      "formula": "weighted(tax_carry_advantage, listing_tax_burden_percentile)",
+      "professional_reason": "Provides a sourced tax-position talking point for a listing discussion."
+    },
+    "watchdog.agent.buyer_cost_explanation": {
+      "range": "score / 100",
+      "formula": "weighted(buyer_monthly_carry_delta, transaction_tax_shock)",
+      "professional_reason": "Shows how complete a buyer tax-cost explanation can be."
+    },
+    "watchdog.agent.listing_public_record_readiness": {
+      "range": "score / 100",
+      "formula": "weighted(property_story_confidence, transaction_diligence_completion)",
+      "professional_reason": "Shows whether public facts are ready for a careful property narrative."
+    },
+    "watchdog.agent.offer_question_density": {
+      "range": "score / 100",
+      "formula": "count(permit, flood, environmental, title questions)",
+      "professional_reason": "Counts pre-offer diligence questions\u2014not defects or deal outcomes."
+    },
+    "watchdog.agent.seller_tax_story_stability": {
+      "range": "score / 100",
+      "formula": "weighted(tax_trend_position, inverse_revaluation_conversation_risk)",
+      "professional_reason": "Signals whether the tax story is stable enough for buyer conversations."
+    },
+    "watchdog.agent.buyer_diligence_sequence": {
+      "range": "score / 100",
+      "formula": "ordered(offer_diligence_priority, buyer_objection_radar, permit_lifecycle)",
+      "professional_reason": "Organizes public-record questions into a buyer-friendly order."
+    },
+    "watchdog.agent.market_context_confidence": {
+      "range": "score / 100",
+      "formula": "weighted(market_anchor_confidence, sale_context_strength)",
+      "professional_reason": "Shows the strength of public market context behind an agent brief."
+    },
+    "watchdog.agent.listing_change_alert": {
+      "range": "score / 100",
+      "formula": "weighted(permit_activity, tax_change, score_change)",
+      "professional_reason": "Prioritizes property changes to revisit during a listing cycle."
+    },
+    "watchdog.agent.client_brief_completeness": {
+      "range": "score / 100",
+      "formula": "present(client_brief_fields) / required_brief_fields * 100",
+      "professional_reason": "Shows whether the client-facing public-record brief has its essentials."
+    },
+    "watchdog.agent.transaction_cost_conversation": {
+      "range": "score / 100",
+      "formula": "weighted(closing_cost_estimate, buyer_monthly_carry_delta, tax_reset_exposure)",
+      "professional_reason": "Creates an explainable transaction-cost discussion starter."
+    },
+    "watchdog.lender.payment_stability_signal": {
+      "range": "score / 100",
+      "formula": "weighted(escrow_volatility, collateral_operating_cost_stress)",
+      "professional_reason": "Summarizes public recurring-cost stability for collateral discussion."
+    },
+    "watchdog.lender.tax_reserve_confidence": {
+      "range": "score / 100",
+      "formula": "weighted(five_year_tax_reserve_ratio, source_authority_coverage)",
+      "professional_reason": "Shows confidence in a public-tax reserve planning signal."
+    },
+    "watchdog.lender.collateral_record_gap": {
+      "range": "score / 100",
+      "formula": "100 - appraisal_record_completeness",
+      "professional_reason": "Identifies missing public collateral facts before workflow handoff."
+    },
+    "watchdog.lender.municipal_tax_capacity_watch": {
+      "range": "score / 100",
+      "formula": "weighted(municipal_fiscal_capacity, tax_base_absorption_risk)",
+      "professional_reason": "Adds municipal fiscal context without credit or underwriting decisions."
+    },
+    "watchdog.lender.insurance_cost_attention": {
+      "range": "score / 100",
+      "formula": "weighted(flood_context_severity, environmental_collateral_review)",
+      "professional_reason": "Flags public risk context that may require verified insurance inputs."
+    },
+    "watchdog.lender.revaluation_payment_risk": {
+      "range": "score / 100",
+      "formula": "weighted(collateral_tax_reset_sensitivity, revaluation_reset_exposure)",
+      "professional_reason": "Highlights when a public assessment reset scenario could affect payments."
+    },
+    "watchdog.lender.escrow_evidence_freshness": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, tax_history_depth)",
+      "professional_reason": "Shows whether tax evidence should be refreshed for escrow planning."
+    },
+    "watchdog.lender.collateral_completion_watch": {
+      "range": "score / 100",
+      "formula": "weighted(permit_collateral_completion, permit_certificate_gap_age)",
+      "professional_reason": "Focuses attention on public permit completion context."
+    },
+    "watchdog.lender.lending_diligence_coverage": {
+      "range": "score / 100",
+      "formula": "present(lending_public_fields) / required_lending_fields * 100",
+      "professional_reason": "Measures public-data coverage for a collateral conversation."
+    },
+    "watchdog.lender.tax_shock_explanation_quality": {
+      "range": "score / 100",
+      "formula": "weighted(transaction_tax_shock, source_authority_coverage)",
+      "professional_reason": "Shows whether a tax-shock discussion has sufficient public evidence."
+    },
+    "watchdog.appraiser.sale_sample_recency": {
+      "range": "score / 100",
+      "formula": "normalized(days_since_median_verified_sale)",
+      "professional_reason": "Shows how current the verified sale sample is."
+    },
+    "watchdog.appraiser.sale_dispersion_watch": {
+      "range": "score / 100",
+      "formula": "normalized(p75_sale_price - p25_sale_price)",
+      "professional_reason": "Flags wide public sale dispersion requiring deeper comparable review."
+    },
+    "watchdog.appraiser.assessment_composition_context": {
+      "range": "score / 100",
+      "formula": "weighted(land_improvement_outlier, improvement_ratio)",
+      "professional_reason": "Shows how unusual assessed land/improvement composition may be."
+    },
+    "watchdog.appraiser.ratio_stability_context": {
+      "range": "score / 100",
+      "formula": "weighted(assessment_uniformity_reliability, chapter123_margin_stability)",
+      "professional_reason": "Adds stability context to public assessment ratios."
+    },
+    "watchdog.appraiser.public_input_gap": {
+      "range": "score / 100",
+      "formula": "100 - appraisal_record_completeness",
+      "professional_reason": "Makes missing public appraisal inputs explicit."
+    },
+    "watchdog.appraiser.market_anchor_refresh": {
+      "range": "score / 100",
+      "formula": "weighted(market_anchor_confidence, sale_sample_recency)",
+      "professional_reason": "Signals whether the public market anchor needs refreshed evidence."
+    },
+    "watchdog.appraiser.parcel_physical_context": {
+      "range": "score / 100",
+      "formula": "weighted(lot_area, square_feet, year_built, property_class)",
+      "professional_reason": "Shows availability of basic public physical context, not condition."
+    },
+    "watchdog.appraiser.comparable_screen_priority": {
+      "range": "score / 100",
+      "formula": "weighted(comparable_depth_score, sale_dispersion_watch, public_input_gap)",
+      "professional_reason": "Ranks where a comparable screen deserves deeper work."
+    },
+    "watchdog.appraiser.assessment_evidence_alignment": {
+      "range": "score / 100",
+      "formula": "weighted(assessment_defensibility, comparable_evidence_reliability)",
+      "professional_reason": "Shows agreement between public assessment and sale-evidence context."
+    },
+    "watchdog.appraiser.valuation_record_freshness": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, verified_sale_recency, parcel_identity_confidence)",
+      "professional_reason": "Shows whether valuation-related public inputs are current enough to screen."
+    },
+    "watchdog.contractor.site_preflight_completeness": {
+      "range": "score / 100",
+      "formula": "present(site_constraint_fields) / required_site_fields * 100",
+      "professional_reason": "Shows whether public site-screening inputs are complete before design spend."
+    },
+    "watchdog.contractor.permit_sequence_clarity": {
+      "range": "score / 100",
+      "formula": "weighted(permitting_velocity, certificate_closure_rate)",
+      "professional_reason": "Makes public permit lifecycle context easier to scan."
+    },
+    "watchdog.contractor.water_review_priority": {
+      "range": "score / 100",
+      "formula": "weighted(site_water_constraint, flood_context, wellhead_overlap)",
+      "professional_reason": "Prioritizes water-related public mapping review."
+    },
+    "watchdog.contractor.ground_condition_attention": {
+      "range": "score / 100",
+      "formula": "weighted(geology_complexity, historic_fill, acid_soil)",
+      "professional_reason": "Flags public geology/soil context for further investigation."
+    },
+    "watchdog.contractor.jurisdiction_overlap_watch": {
+      "range": "score / 100",
+      "formula": "regulatory_overlap_score",
+      "professional_reason": "Shows the density of mapped regulatory programs affecting a site screen."
+    },
+    "watchdog.contractor.construction_record_gap": {
+      "range": "score / 100",
+      "formula": "100 - permit_closure_confidence",
+      "professional_reason": "Identifies public permit/certificate completeness gaps."
+    },
+    "watchdog.contractor.site_constraint_change_watch": {
+      "range": "score / 100",
+      "formula": "weighted(source_change, mapped_constraint_layers)",
+      "professional_reason": "Alerts when a mapped source or constraint context changes."
+    },
+    "watchdog.contractor.preconstruction_question_set": {
+      "range": "score / 100",
+      "formula": "count(water, geology, wetlands, historic, permit questions)",
+      "professional_reason": "Counts public diligence questions before work begins."
+    },
+    "watchdog.contractor.development_timeline_uncertainty": {
+      "range": "score / 100",
+      "formula": "weighted(open_permit_age, regulatory_overlap, source_freshness)",
+      "professional_reason": "Signals sources of public-record timeline uncertainty."
+    },
+    "watchdog.contractor.project_screening_confidence": {
+      "range": "score / 100",
+      "formula": "weighted(site_preflight_completeness, source_authority_coverage)",
+      "professional_reason": "Shows confidence in a first-pass public-record screen."
+    },
+    "watchdog.investor.hold_cost_stability": {
+      "range": "score / 100",
+      "formula": "weighted(inverse_carry_cost_downside, fiscal_trend_momentum)",
+      "professional_reason": "Summarizes recurring public-cost stability for a holding-period screen."
+    },
+    "watchdog.investor.municipal_exposure_diversification": {
+      "range": "score / 100",
+      "formula": "100 - municipal_concentration_risk",
+      "professional_reason": "Shows concentration sensitivity when municipal fiscal context matters."
+    },
+    "watchdog.investor.tax_base_gap_watch": {
+      "range": "score / 100",
+      "formula": "tax_base_absorption_risk",
+      "professional_reason": "Highlights levy growth outpacing the equalized tax base."
+    },
+    "watchdog.investor.capital_reinvestment_signal": {
+      "range": "score / 100",
+      "formula": "weighted(capital_improvement_activity, permitting_velocity)",
+      "professional_reason": "Uses public permit activity as reinvestment context, not property condition."
+    },
+    "watchdog.investor.asset_constraint_screen": {
+      "range": "score / 100",
+      "formula": "weighted(regulatory_constraint_density, environmental_site_proximity)",
+      "professional_reason": "Summarizes public mapped constraint context across an asset."
+    },
+    "watchdog.investor.revaluation_hold_sensitivity": {
+      "range": "score / 100",
+      "formula": "revaluation_reset_exposure",
+      "professional_reason": "Shows a public assessment-reset consideration for holding-cost scenarios."
+    },
+    "watchdog.investor.portfolio_evidence_coverage": {
+      "range": "score / 100",
+      "formula": "present(portfolio_public_fields) / required_portfolio_fields * 100",
+      "professional_reason": "Measures coverage of selected public portfolio fields."
+    },
+    "watchdog.investor.municipal_fiscal_direction": {
+      "range": "score / 100",
+      "formula": "weighted(fiscal_trend_momentum, municipal_fiscal_capacity)",
+      "professional_reason": "Condenses public municipal fiscal direction for cross-market screening."
+    },
+    "watchdog.investor.exit_tax_story": {
+      "range": "score / 100",
+      "formula": "weighted(tax_trend_position, listing_tax_burden_percentile)",
+      "professional_reason": "Supports an explainable tax conversation at disposition."
+    },
+    "watchdog.investor.investment_diligence_priority": {
+      "range": "score / 100",
+      "formula": "weighted(carry_cost_downside, asset_constraint_screen, revaluation_hold_sensitivity)",
+      "professional_reason": "Ranks assets for deeper professional diligence."
+    },
+    "watchdog.municipal.tax_base_change_signal": {
+      "range": "score / 100",
+      "formula": "weighted(tax_base_growth, equalized_value_cagr)",
+      "professional_reason": "Shows public taxable-base direction across published periods."
+    },
+    "watchdog.municipal.levy_alignment_score": {
+      "range": "score / 100",
+      "formula": "100 - normalized(abs(levy_growth - tax_base_growth))",
+      "professional_reason": "Shows how closely levy growth tracks the published base."
+    },
+    "watchdog.municipal.collection_resilience_context": {
+      "range": "score / 100",
+      "formula": "weighted(collection_rate, fiscal_resilience_score)",
+      "professional_reason": "Adds context to published collection performance."
+    },
+    "watchdog.municipal.exemption_pressure_watch": {
+      "range": "score / 100",
+      "formula": "weighted(exempt_share, pilot_value_share, abated_share)",
+      "professional_reason": "Summarizes exempt/PILOT/abatement pressure on the public tax base."
+    },
+    "watchdog.municipal.debt_service_attention": {
+      "range": "score / 100",
+      "formula": "weighted(debt_service_share, net_debt_pct)",
+      "professional_reason": "Prioritizes public debt-service context for review."
+    },
+    "watchdog.municipal.budget_data_freshness": {
+      "range": "score / 100",
+      "formula": "age(latest_budget_release)",
+      "professional_reason": "Shows whether a published budget series may need a refresh."
+    },
+    "watchdog.municipal.ratable_growth_quality": {
+      "range": "score / 100",
+      "formula": "weighted(ratable_growth, inverse_levy_base_gap)",
+      "professional_reason": "Provides an explainable public ratable-growth context."
+    },
+    "watchdog.municipal.appeal_activity_context": {
+      "range": "score / 100",
+      "formula": "weighted(appeal_volume, win_rate_decided, assessed_appealed)",
+      "professional_reason": "Summarizes published county appeal activity without predicting outcomes."
+    },
+    "watchdog.municipal.municipal_source_coverage": {
+      "range": "score / 100",
+      "formula": "present(municipal_source_fields) / required_municipal_fields * 100",
+      "professional_reason": "Shows how much of a municipal snapshot has published support."
+    },
+    "watchdog.municipal.fiscal_monitor_priority": {
+      "range": "score / 100",
+      "formula": "weighted(levy_alignment, exemption_pressure, debt_service_attention)",
+      "professional_reason": "Ranks municipal records for closer operational monitoring."
+    },
+    "watchdog.insurance.mapped_hazard_overlap": {
+      "range": "score / 100",
+      "formula": "count(flood, wetlands, contaminated, geology, water_protection)",
+      "professional_reason": "Counts distinct public mapping contexts; it is not an insurance eligibility decision."
+    },
+    "watchdog.insurance.flood_evidence_freshness": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, flood_map_version)",
+      "professional_reason": "Shows whether public flood-map context should be refreshed."
+    },
+    "watchdog.insurance.environmental_review_scope": {
+      "range": "score / 100",
+      "formula": "weighted(environmental_site_proximity, environmental_encumbrance)",
+      "professional_reason": "Summarizes public environmental review context."
+    },
+    "watchdog.insurance.water_protection_context": {
+      "range": "score / 100",
+      "formula": "water_protection_overlap",
+      "professional_reason": "Makes drinking-water and protection mapping context scannable."
+    },
+    "watchdog.insurance.geology_hazard_context": {
+      "range": "score / 100",
+      "formula": "weighted(geology_complexity, landslide, mine, fault)",
+      "professional_reason": "Summarizes public geology hazard mapping for review."
+    },
+    "watchdog.insurance.historic_constraint_context": {
+      "range": "score / 100",
+      "formula": "historic_property_constraint",
+      "professional_reason": "Flags public historic-resource mapping context."
+    },
+    "watchdog.insurance.physical_record_coverage": {
+      "range": "score / 100",
+      "formula": "present(physical_risk_fields) / required_risk_fields * 100",
+      "professional_reason": "Shows completeness of public physical-risk inputs."
+    },
+    "watchdog.insurance.site_review_escalation": {
+      "range": "score / 100",
+      "formula": "weighted(physical_due_diligence_priority, mapped_hazard_overlap)",
+      "professional_reason": "Prioritizes deeper verified site review."
+    },
+    "watchdog.insurance.public_risk_source_currency": {
+      "range": "score / 100",
+      "formula": "weighted(source_age, source_authority_coverage)",
+      "professional_reason": "Shows whether public risk-source pulls may require refresh."
+    },
+    "watchdog.insurance.risk_context_consistency": {
+      "range": "score / 100",
+      "formula": "weighted(flood_context, water_overlap, geology_context, environmental_context)",
+      "professional_reason": "Shows whether mapped public risk contexts agree enough for first-pass review."
+    },
+    "watchdog.njplus.permit_to_certificate_lag": {
+      "range": "score / 100",
+      "formula": "normalized(days_between(latest_permit, latest_certificate))",
+      "professional_reason": "Shows public lifecycle timing; it is not a construction-completion finding."
+    },
+    "watchdog.njplus.construction_scope_signal": {
+      "range": "score / 100",
+      "formula": "weighted(authorized_construction_cost, authorized_square_feet, permit_type_mix)",
+      "professional_reason": "Makes recorded project scope easier to triage."
+    },
+    "watchdog.njplus.permit_activity_momentum": {
+      "range": "score / 100",
+      "formula": "weighted(rolling_12m_permits, rolling_36m_permits)",
+      "professional_reason": "Shows whether recorded activity is accelerating or cooling."
+    },
+    "watchdog.njplus.certificate_gap_priority": {
+      "range": "score / 100",
+      "formula": "weighted(open_permit_count, oldest_open_permit_age)",
+      "professional_reason": "Prioritizes public permit/certificate follow-up without treating a gap as a violation."
+    },
+    "watchdog.njplus.development_pipeline_velocity": {
+      "range": "score / 100",
+      "formula": "weighted(yoy_units_authorized, yoy_construction_cost)",
+      "professional_reason": "Summarizes the direction of reported local development activity."
+    },
+    "watchdog.njplus.housing_supply_delivery_ratio": {
+      "range": "score / 100",
+      "formula": "certificates_of_occupancy / max(housing_units_authorized, 1)",
+      "professional_reason": "Compares reported completions with authorized units; it is not a future supply forecast."
+    },
+    "watchdog.njplus.commercial_buildout_signal": {
+      "range": "score / 100",
+      "formula": "weighted(office_square_feet_authorized, retail_square_feet_authorized, other_nonresidential_square_feet)",
+      "professional_reason": "Creates a consistent commercial construction screen."
+    },
+    "watchdog.njplus.demolition_redevelopment_watch": {
+      "range": "score / 100",
+      "formula": "weighted(demolitions, new_housing_units_authorized, construction_cost_authorized)",
+      "professional_reason": "Signals where local public construction records merit a redevelopment review."
+    },
+    "watchdog.njplus.new_build_price_pressure": {
+      "range": "score / 100",
+      "formula": "normalized(new_home_warranty_price_change)",
+      "professional_reason": "Shows reported new-home price movement, not a price forecast."
+    },
+    "watchdog.njplus.new_build_delivery_momentum": {
+      "range": "score / 100",
+      "formula": "weighted(enrollment_change, sales_count_change)",
+      "professional_reason": "Summarizes reported warranty enrollment momentum."
+    },
+    "watchdog.njplus.new_build_market_depth": {
+      "range": "score / 100",
+      "formula": "normalized(new_home_warranty_sales_count)",
+      "professional_reason": "Shows the depth of available reported new-home transactions."
+    },
+    "watchdog.njplus.new_build_comp_context": {
+      "range": "score / 100",
+      "formula": "weighted(sales_count, median_price_recency, price_dispersion)",
+      "professional_reason": "Shows how much reported new-home evidence is available for a comparison conversation."
+    },
+    "watchdog.njplus.rental_market_pressure": {
+      "range": "score / 100",
+      "formula": "weighted(vacancy_rate inverse, rent_change, eviction_rate)",
+      "professional_reason": "Presents public housing conditions for market research; not tenant screening."
+    },
+    "watchdog.njplus.housing_affordability_gap": {
+      "range": "score / 100",
+      "formula": "weighted(housing_cost_burden_share, income_to_rent_gap)",
+      "professional_reason": "Highlights municipal-level public affordability context."
+    },
+    "watchdog.njplus.housing_supply_balance": {
+      "range": "score / 100",
+      "formula": "weighted(housing_production, household_growth, vacancy_rate)",
+      "professional_reason": "Summarizes public supply and demand context; it is not a rent or home-value forecast."
+    },
+    "watchdog.njplus.municipal_housing_evidence_depth": {
+      "range": "score / 100",
+      "formula": "coverage(profile_fields)",
+      "professional_reason": "Shows whether a municipal housing brief has a complete published data footprint."
+    },
+    "watchdog.njplus.affordable_supply_coverage": {
+      "range": "score / 100",
+      "formula": "affordable_units_total / max(low_income_households, 1)",
+      "professional_reason": "Compares reported units with reported households; not a compliance opinion."
+    },
+    "watchdog.njplus.affordable_pipeline_signal": {
+      "range": "score / 100",
+      "formula": "weighted(affordable_units_pipeline, trust_fund_balance)",
+      "professional_reason": "Summarizes reported affordable-housing capacity under monitoring."
+    },
+    "watchdog.njplus.rent_support_context": {
+      "range": "score / 100",
+      "formula": "weighted(hud_subsidized_units, affordable_units_rental)",
+      "professional_reason": "Provides municipal support context, never household eligibility."
+    },
+    "watchdog.njplus.housing_program_record_freshness": {
+      "range": "score / 100",
+      "formula": "age(affordable_housing_reporting_status)",
+      "professional_reason": "Shows when published program data should be refreshed before reliance."
+    },
+    "watchdog.njplus.amenity_access_profile": {
+      "range": "score / 100",
+      "formula": "weighted(transit, hospital, college, park, library proximity)",
+      "professional_reason": "Makes state-mapped community amenities comparable without asserting neighborhood quality."
+    },
+    "watchdog.njplus.development_designation_stack": {
+      "range": "score / 100",
+      "formula": "count(opportunity_zone, urban_enterprise_zone, transit_village, redevelopment_area)",
+      "professional_reason": "Counts state/federal designation contexts for professional research."
+    },
+    "watchdog.njplus.public_facility_proximity_signal": {
+      "range": "score / 100",
+      "formula": "weighted(hospital_access, library_access, park_access)",
+      "professional_reason": "Creates an explainable public-facility proximity summary."
+    },
+    "watchdog.njplus.site_marketing_context": {
+      "range": "score / 100",
+      "formula": "weighted(amenity_access_profile, development_designation_stack)",
+      "professional_reason": "Packages sourced location context for an agent or investor brief, not a valuation."
+    },
+    "watchdog.njplus.zoning_research_readiness": {
+      "range": "score / 100",
+      "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
+      "professional_reason": "Measures the completeness of linked public zoning resources\u2014not permitted use."
+    },
+    "watchdog.njplus.planning_document_currency": {
+      "range": "score / 100",
+      "formula": "age(zoning_map_last_checked, master_plan_link)",
+      "professional_reason": "Flags linked resources that may need direct municipal confirmation."
+    },
+    "watchdog.njplus.development_entitlement_entrypoint": {
+      "range": "score / 100",
+      "formula": "coverage(planning_board_link, land_use_board_link, redevelopment_plan_link)",
+      "professional_reason": "Makes the public starting points for entitlement research scannable."
+    },
+    "watchdog.njplus.municipal_land_use_transparency": {
+      "range": "score / 100",
+      "formula": "weighted(zoning_research_readiness, planning_document_currency inverse)",
+      "professional_reason": "Summarizes availability of public links, not the quality of a municipality."
+    },
+    "watchdog.njplus.pilot_rolloff_watch": {
+      "range": "score / 100",
+      "formula": "weighted(term_remaining inverse, revenue_projection)",
+      "professional_reason": "Highlights when published agreement terms approach expiration."
+    },
+    "watchdog.njplus.pilot_revenue_concentration": {
+      "range": "score / 100",
+      "formula": "pilot_project_assessment / max(municipal_tax_base, 1)",
+      "professional_reason": "Shows public PILOT exposure relative to the published tax base."
+    },
+    "watchdog.njplus.pilot_forecast_confidence": {
+      "range": "score / 100",
+      "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
+      "professional_reason": "Shows the completeness of an available public forecast\u2014not a revenue prediction."
+    },
+    "watchdog.njplus.development_incentive_profile": {
+      "range": "score / 100",
+      "formula": "weighted(pilot_project_count, project_type_mix, revenue_projection)",
+      "professional_reason": "Summarizes published PILOT activity for municipal or investment research."
+    },
+    "watchdog.njplus.assessment_change_trace": {
+      "range": "score / 100",
+      "formula": "ordered(assessment_land_history, assessment_improvement_history, assessment_total_history)",
+      "professional_reason": "Organizes published assessment history for professional review."
+    },
+    "watchdog.njplus.parcel_record_volatility": {
+      "range": "score / 100",
+      "formula": "normalized(parcel_record_change_count, property_class_history)",
+      "professional_reason": "Shows the amount of public-record movement, not a property-condition finding."
+    },
+    "watchdog.njplus.assessment_component_shift": {
+      "range": "score / 100",
+      "formula": "normalized(change(land_assessment) - change(improvement_assessment))",
+      "professional_reason": "Flags changes in published assessment composition for review."
+    },
+    "watchdog.njplus.assessment_history_reliability": {
+      "range": "score / 100",
+      "formula": "weighted(assessment_history_depth, source_freshness, parcel_identity_confidence)",
+      "professional_reason": "Shows the strength of available historical public assessment context."
+    },
+    "watchdog.njplus.local_demand_context": {
+      "range": "score / 100",
+      "formula": "weighted(population_change, employment_density, household_income trend)",
+      "professional_reason": "Summarizes public area trends; it never profiles individuals or protected classes."
+    },
+    "watchdog.njplus.household_cost_context": {
+      "range": "score / 100",
+      "formula": "weighted(real_estate_tax_median, rental_cost_change, home_value_change)",
+      "professional_reason": "Provides broad municipal or area cost context, not affordability advice."
+    },
+    "watchdog.njplus.accessibility_context": {
+      "range": "score / 100",
+      "formula": "weighted(walkability_score, commute_mode_mix, transit_station_access)",
+      "professional_reason": "Makes public mobility context easier to compare."
+    },
+    "watchdog.njplus.neighborhood_trend_freshness": {
+      "range": "score / 100",
+      "formula": "age(neighborhood_trend_year)",
+      "professional_reason": "Shows the vintage of published neighborhood trend context."
+    },
+    "watchdog.njplus.environmental_record_resolution": {
+      "range": "score / 100",
+      "formula": "coverage(kcsl_case_status, remediation_phase, remediation_status, deed_notice_reference)",
+      "professional_reason": "Shows whether a public environmental screen has usable detail; it is not an environmental clearance."
+    },
+    "watchdog.njplus.environmental_case_activity": {
+      "range": "score / 100",
+      "formula": "weighted(remediation_phase, remediation_status, source_freshness)",
+      "professional_reason": "Prioritizes cases for review from official record status."
+    },
+    "watchdog.njplus.brownfield_reuse_context": {
+      "range": "score / 100",
+      "formula": "weighted(brownfield_inventory_status, remediation_status, redevelopment_area_status)",
+      "professional_reason": "Highlights public redevelopment context without indicating suitability."
+    },
+    "watchdog.njplus.environmental_source_currency": {
+      "range": "score / 100",
+      "formula": "age(environmental_layer_vintage)",
+      "professional_reason": "Shows when a professional should refresh the official environmental source."
+    }
   }
 }

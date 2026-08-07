@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260807b';
+  var MODULE_VERSION = '20260807c';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
@@ -1202,29 +1202,43 @@ function brief() {
   // PROPERTY  ·  fast compact card view
   // Only the current page is rendered, keeping Street View requests bounded.
   // ══════════════════════════════════════════════
+  function isCommercialProperty(r) {
+    var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
+    return /^4/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification) || /_c\d+$/i.test(String(r.pams_pin || ''));
+  }
+  window.dbToggleSignals = function (button) {
+    var box = button && button.closest('.pr-card-context');
+    if (!box) return;
+    var open = box.classList.toggle('open');
+    button.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var text = button.querySelector('span');
+    if (text) text.textContent = open ? 'Hide town & tax signals' : 'Town & tax signals';
+  };
+  function propertySignals(r) {
+    return '<div class="pr-card-context"><button type="button" class="pr-card-signals-toggle" onclick="dbToggleSignals(this)" aria-expanded="false"><i class="fas fa-chart-simple"></i><span>Town &amp; tax signals</span><b>More</b><i class="fas fa-chevron-down"></i></button><div class="pr-card-context-body">' +
+      townIntelSummary(r) + budgetPressureSummary(r) + '</div></div>';
+  }
   function propertyBlock(r, index) {
-    var c = chapter123(r);
+    var commercial = isCommercialProperty(r), c = commercial ? null : chapter123(r);
     var q = encodeURIComponent(r.address + ', ' + (r.town || '') + ', NJ ' + (r.zip || ''));
     var v = VERIFY[r.verify_level || 'self'];
     var tone = (c && c.hasCase) ? 'hot' : (c && c.testable) ? 'ok' : 'neutral';
-    var statusLabel = (c && c.hasCase) ? 'Review recommended' :
+    var statusLabel = commercial ? 'Commercial research' : (c && c.hasCase) ? 'Review recommended' :
       (c && c.testable) ? 'Assessment in range' : 'Analysis building';
-    var statusIcon = (c && c.hasCase) ? 'fa-triangle-exclamation' :
+    var statusIcon = commercial ? 'fa-building' : (c && c.hasCase) ? 'fa-triangle-exclamation' :
       (c && c.testable) ? 'fa-circle-check' : 'fa-wave-square';
     var market = c && Number.isFinite(+c.market) ? money(rnd(+c.market)) : '&mdash;';
     var paid = isPro();
-    var tierLink = paid
-      ? '<a class="pr-tier pro" href="/property/pro.html"><i class="fas fa-briefcase"></i>Pro Hub</a>'
-      : '<a class="pr-tier upgrade" href="/property/pro.html"><i class="fas fa-star"></i>Upgrade to Pro</a>';
+    var tierLink = paid ? '' : '<a class="pr-tier upgrade" href="/property/pro.html"><i class="fas fa-star"></i>Upgrade to Pro</a>';
 
     return '<div class="pr-item" style="--card-i:' + (index || 0) + '">' +
-      '<article class="pr-card ' + tone + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
+      '<article class="pr-card ' + tone + (commercial ? ' commercial' : '') + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +
         '<div class="pr-card-media">' +
           '<img src="' + streetImg(r, 520, 390) + '" alt="Street View of ' + esc(r.address) + '" ' +
             'loading="lazy" decoding="async" fetchpriority="low" width="520" height="390" ' +
             'onerror="this.parentNode.classList.add(\'noimg\')">' +
           '<span class="pr-kind ' + (r.kind === 'home' ? 'home' : '') + '">' +
-            (r.kind === 'home' ? 'Your home' : 'Watching') + '</span>' +
+            (commercial ? 'Commercial property' : (r.kind === 'home' ? 'Your home' : 'Watching')) + '</span>' +
           '<label class="pr-card-compare"><input type="checkbox"' +
             (picked.indexOf(r.id) > -1 ? ' checked' : '') +
             ' onchange="dbPick(\'' + r.id + '\', this)"><span>Compare</span></label>' +
@@ -1240,17 +1254,16 @@ function brief() {
           '<div class="pr-card-metrics">' +
             '<span><b>' + money(r.assessed || 0) + '</b><small>Assessed</small></span>' +
             '<span><b>' + money(r.last_year_tax || 0) + '</b><small>Tax / year</small></span>' +
-            '<span><b>' + market + '</b><small>Market value</small></span>' +
+            (commercial ? '<span><b>' + (r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '&mdash;') + '</b><small>Effective tax rate</small></span>' : '<span><b>' + market + '</b><small>Market value</small></span>') +
           '</div>' +
-          townIntelSummary(r) +
-          budgetPressureSummary(r) +
+          propertySignals(r) +
         '</div>' +
       '</article>' +
-      '<div class="pr-card-actions">' +
-        '<a class="primary" href="' + reportLink(r) + '"><i class="fas fa-chart-line"></i>Full report</a>' +
+      '<div class="pr-card-actions ' + (paid ? 'is-paid' : 'is-standard') + '">' +
+        '<a class="primary" href="' + reportLink(r) + '"><i class="fas ' + (commercial ? 'fa-building' : 'fa-chart-line') + '"></i>' + (commercial ? 'Commercial brief' : 'Full report') + '</a>' +
         '<a href="/property/?address=' + q + '"><i class="fas fa-file-lines"></i>Property record</a>' +
         '<button type="button" onclick="dbAskAbout(\'' + esc(r.address).replace(/'/g, '') + '\')">' +
-          '<i class="fas fa-envelope"></i>Contact agent</button>' +
+          '<i class="fas fa-envelope"></i>' + (commercial ? 'Commercial inquiry' : 'Contact agent') + '</button>' +
         tierLink +
       '</div>' +
     '</div>';

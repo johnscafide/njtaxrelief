@@ -1,0 +1,24 @@
+name: Watchdog NJ source monitor
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: write
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect authoritative NJ publisher changes
+        env:
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SUPABASE_SOURCE_MONITOR_URL: ${{ secrets.SUPABASE_SOURCE_MONITOR_URL }}
+        run: python property/scripts/monitor_nj_sources.py --emit-url "$SUPABASE_SOURCE_MONITOR_URL"
+      - name: Commit reviewed monitor state
+        run: |
+          git config user.name "Watchdog source monitor"
+          git config user.email "source-monitor@users.noreply.github.com"
+          git add property/data/source-watch-state.json property/data/source-monitor-report.json
+          git diff --cached --quiet || git commit -m "chore: refresh NJ source monitor state"
+          git push

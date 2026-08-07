@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260807b';
+  var HOME_MODULE_VERSION = '20260807c';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -1319,6 +1319,11 @@
   // ══════════════════════════════════════════════
   var current = null;
 
+  function isCommercialProperty(r) {
+    var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
+    return /^4/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification) || /_c\d+$/i.test(String(r.pams_pin || ''));
+  }
+
   function qsPin() {
     var m = window.location.search.match(/[?&]pin=([^&]+)/);
     return m ? decodeURIComponent(m[1]) : null;
@@ -1391,7 +1396,7 @@
       }).join('');
     }
 
-    var c = chapter123(r), u = uniFor(r), a = appealFor(r), s = sr1aFor(r);
+    var commercial = isCommercialProperty(r), c = commercial ? null : chapter123(r), u = uniFor(r), a = appealFor(r), s = commercial ? null : sr1aFor(r);
     var loc = [r.address, r.town, 'NJ', r.zip].filter(Boolean).join(', ');
 
     el('hm-body').innerHTML =
@@ -1401,7 +1406,7 @@
             '?size=760x460&location=' + encodeURIComponent(loc) + '&fov=76&pitch=6&source=outdoor&key=' +
             GMAPS_KEY + '\')"></div>' +
           '<div class="hm-id">' +
-            '<span class="hm-kind">' + (r.kind === 'home' ? 'Your home' : 'Watchlist') + '</span>' +
+            '<span class="hm-kind' + (commercial ? ' hm-commercial-kind' : '') + '">' + (commercial ? 'Commercial property' : (r.kind === 'home' ? 'Your home' : 'Watchlist')) + '</span>' +
             '<h1>' + esc(r.address) + '</h1>' +
             '<p>' + esc(r.town || '') + (r.county ? ', ' + esc(titleCase(r.county)) + ' County' : '') +
               (r.block ? '  \u00b7  Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') +
@@ -1415,6 +1420,7 @@
       '</header>' +
 
       '<div class="wrap hm-wrap">' +
+        (commercial ? '<section class="hm-commercial-note"><i class="fas fa-building"></i><div><b>Commercial property workspace</b><p>This record is kept separate from homeowner benefit and residential comparable logic. Use the assessment, tax, parcel and diligence data here; confirm valuation and appeal strategy with commercial-specific evidence.</p></div></section>' : '') +
         '<section class="ai">' +
           '<div class="ai-h">' +
             '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
@@ -1428,11 +1434,11 @@
           hf('property.annual_tax', 'Annual tax', money(r.last_year_tax || 0), 'last full year') +
           hf('watchdog.effective_tax_rate', 'Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-', 'of market value') +
           (s ? hf('sales.ratio', 'Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
-          (s && s.ppsf ? hf('sales.ppsf', 'Price per sq ft', '$' + s.ppsf, 'median here') : '') +
-          (s && s.medPrice ? hf('sales.median_price', 'Median sale', money(s.medPrice), 'in this town') : '') +
+          (s && s.ppsf ? hf('sales.ppsf', 'Price per sq ft', '$' + s.ppsf, 'median here', 'hm-detail-metric') : '') +
+          (s && s.medPrice ? hf('sales.median_price', 'Median sale', money(s.medPrice), 'in this town', 'hm-detail-metric') : '') +
         '</div>' +
 
-        scorecard(r) +
+        (commercial ? '' : scorecard(r)) +
         (typeof toolScoreHistory === 'function' ? toolScoreHistory(r) : '') +
         (typeof toolRealEstateConcierge === 'function' ? toolRealEstateConcierge(r) : '') +
 
@@ -1798,9 +1804,9 @@
     }).join('') + '</ul>';
   }
 
-  function hf(markerId, k, v, sub) {
+  function hf(markerId, k, v, sub, extraClass) {
     var href = markerHref(markerId, v, sub);
-    return '<a class="dm" href="' + href + '" data-marker-id="' + esc(markerId) + '" data-marker-value="' + esc(v) + '" data-marker-note="' + esc(sub) + '"><dt>' + k + '<i class="fas fa-circle-info dm-info"></i></dt><dd>' + v + '<em>' + sub + '</em></dd></a>';
+    return '<a class="dm ' + (extraClass || '') + '" href="' + href + '" data-marker-id="' + esc(markerId) + '" data-marker-value="' + esc(v) + '" data-marker-note="' + esc(sub) + '"><dt>' + k + '<i class="fas fa-circle-info dm-info"></i></dt><dd>' + v + '<em>' + sub + '</em></dd></a>';
   }
 
   function summarySentence(r, c, u, a) {

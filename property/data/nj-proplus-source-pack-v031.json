@@ -1,0 +1,3419 @@
+{
+  "schema_version": 1,
+  "version": "0.31.0",
+  "released": "2026-08-07",
+  "definition": "154 governed New Jersey source-expansion markers across statewide DCA and NJDEP datasets. Direct fields remain public-record facts; Watchdog calculations only prioritize research. They are not legal, zoning, title, appraisal, environmental, lending, insurance, investment, eligibility or transaction determinations.",
+  "activation_rule": "A source-marked field is shown only after the source-specific refresh and quality gate succeed. Catalog inclusion never means live coverage.",
+  "markers": [
+    {
+      "id": "njplus.nj-dca-permits-raw.permit_issued_count",
+      "label": "Permit issued count",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "permit_issued_count",
+      "source_field": "permit_issued_count",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.certificate_count",
+      "label": "Certificate count",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "certificate_count",
+      "source_field": "certificate_count",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.latest_permit_date",
+      "label": "Latest permit date",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "latest_permit_date",
+      "source_field": "latest_permit_date",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.latest_certificate_date",
+      "label": "Latest certificate date",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "latest_certificate_date",
+      "source_field": "latest_certificate_date",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.permit_type_mix",
+      "label": "Permit type mix",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "permit_type_mix",
+      "source_field": "permit_type_mix",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.use_group_mix",
+      "label": "Use-group mix",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "use_group_mix",
+      "source_field": "use_group_mix",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.authorized_construction_cost",
+      "label": "Authorized construction cost",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "authorized_construction_cost",
+      "source_field": "authorized_construction_cost",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.authorized_square_feet",
+      "label": "Authorized square feet",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "authorized_square_feet",
+      "source_field": "authorized_square_feet",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.rental_units_gained",
+      "label": "Rental units gained",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "rental_units_gained",
+      "source_field": "rental_units_gained",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-permits-raw.sale_units_gained",
+      "label": "For-sale units gained",
+      "description": "Published construction permits data for professional review; verify the official record before reliance.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "nj-dca-permits-raw",
+      "field": "sale_units_gained",
+      "source_field": "sale_units_gained",
+      "professional_reason": "Published construction permits data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.permit_to_certificate_lag",
+      "label": "Permit-to-certificate lag",
+      "description": "Shows public lifecycle timing; it is not a construction-completion finding.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "permit_to_certificate_lag",
+      "formula": "normalized(days_between(latest_permit, latest_certificate))",
+      "professional_reason": "Shows public lifecycle timing; it is not a construction-completion finding.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-permits-raw"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.construction_scope_signal",
+      "label": "Construction Scope Signal",
+      "description": "Makes recorded project scope easier to triage.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "construction_scope_signal",
+      "formula": "weighted(authorized_construction_cost, authorized_square_feet, permit_type_mix)",
+      "professional_reason": "Makes recorded project scope easier to triage.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-permits-raw"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.permit_activity_momentum",
+      "label": "Permit Activity Momentum",
+      "description": "Shows whether recorded activity is accelerating or cooling.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "permit_activity_momentum",
+      "formula": "weighted(rolling_12m_permits, rolling_36m_permits)",
+      "professional_reason": "Shows whether recorded activity is accelerating or cooling.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-permits-raw"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.certificate_gap_priority",
+      "label": "Certificate Gap Priority",
+      "description": "Prioritizes public permit/certificate follow-up without treating a gap as a violation.",
+      "category": "permits",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "certificate_gap_priority",
+      "formula": "weighted(open_permit_count, oldest_open_permit_age)",
+      "professional_reason": "Prioritizes public permit/certificate follow-up without treating a gap as a violation.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-permits-raw"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.housing_units_authorized",
+      "label": "Housing units authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "housing_units_authorized",
+      "source_field": "housing_units_authorized",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.new_housing_units_authorized",
+      "label": "New-construction units authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "new_housing_units_authorized",
+      "source_field": "new_housing_units_authorized",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.office_square_feet_authorized",
+      "label": "Office square feet authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "office_square_feet_authorized",
+      "source_field": "office_square_feet_authorized",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.retail_square_feet_authorized",
+      "label": "Retail square feet authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "retail_square_feet_authorized",
+      "source_field": "retail_square_feet_authorized",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.other_nonresidential_square_feet",
+      "label": "Other nonresidential square feet authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "other_nonresidential_square_feet",
+      "source_field": "other_nonresidential_square_feet",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.construction_cost_authorized",
+      "label": "Construction cost authorized",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "construction_cost_authorized",
+      "source_field": "construction_cost_authorized",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.demolitions",
+      "label": "Demolitions",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "demolitions",
+      "source_field": "demolitions",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.certificate_of_occupancy_count",
+      "label": "Certificates of occupancy",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "certificate_of_occupancy_count",
+      "source_field": "certificate_of_occupancy_count",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.rental_units_created",
+      "label": "Rental units created",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "rental_units_created",
+      "source_field": "rental_units_created",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.for_sale_units_created",
+      "label": "For-sale units created",
+      "description": "Published development trends data for professional review; verify the official record before reliance.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "for_sale_units_created",
+      "source_field": "for_sale_units_created",
+      "professional_reason": "Published development trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.development_pipeline_velocity",
+      "label": "Development Pipeline Velocity",
+      "description": "Summarizes the direction of reported local development activity.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "development_pipeline_velocity",
+      "formula": "weighted(yoy_units_authorized, yoy_construction_cost)",
+      "professional_reason": "Summarizes the direction of reported local development activity.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-development-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.housing_supply_delivery_ratio",
+      "label": "Housing Supply Delivery Ratio",
+      "description": "Compares reported completions with authorized units; it is not a future supply forecast.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "housing_supply_delivery_ratio",
+      "formula": "certificates_of_occupancy / max(housing_units_authorized, 1)",
+      "professional_reason": "Compares reported completions with authorized units; it is not a future supply forecast.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-development-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.commercial_buildout_signal",
+      "label": "Commercial Buildout Signal",
+      "description": "Creates a consistent commercial construction screen.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "commercial_buildout_signal",
+      "formula": "weighted(office_square_feet_authorized, retail_square_feet_authorized, other_nonresidential_square_feet)",
+      "professional_reason": "Creates a consistent commercial construction screen.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-development-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.demolition_redevelopment_watch",
+      "label": "Demolition Redevelopment Watch",
+      "description": "Signals where local public construction records merit a redevelopment review.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "demolition_redevelopment_watch",
+      "formula": "weighted(demolitions, new_housing_units_authorized, construction_cost_authorized)",
+      "professional_reason": "Signals where local public construction records merit a redevelopment review.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-development-trends"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_enrollments",
+      "label": "New-home warranty enrollments",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_enrollments",
+      "source_field": "new_home_warranty_enrollments",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_average_price",
+      "label": "Average new-home price",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_average_price",
+      "source_field": "new_home_warranty_average_price",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_median_price",
+      "label": "Median new-home price",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_median_price",
+      "source_field": "new_home_warranty_median_price",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_sales_count",
+      "label": "New-home sales count",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_sales_count",
+      "source_field": "new_home_warranty_sales_count",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_quarter",
+      "label": "Warranty report quarter",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_quarter",
+      "source_field": "new_home_warranty_quarter",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_year",
+      "label": "Warranty report year",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_year",
+      "source_field": "new_home_warranty_year",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_price_change",
+      "label": "New-home price change",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_price_change",
+      "source_field": "new_home_warranty_price_change",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_enrollment_change",
+      "label": "Warranty enrollment change",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_enrollment_change",
+      "source_field": "new_home_warranty_enrollment_change",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_county_rank",
+      "label": "County warranty enrollment rank",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_county_rank",
+      "source_field": "new_home_warranty_county_rank",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_municipal_rank",
+      "label": "Municipal warranty enrollment rank",
+      "description": "Published new home warranties data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-new-home-warranty",
+      "field": "new_home_warranty_municipal_rank",
+      "source_field": "new_home_warranty_municipal_rank",
+      "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.new_build_price_pressure",
+      "label": "New-Build Price Pressure",
+      "description": "Shows reported new-home price movement, not a price forecast.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "new_build_price_pressure",
+      "formula": "normalized(new_home_warranty_price_change)",
+      "professional_reason": "Shows reported new-home price movement, not a price forecast.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-new-home-warranty"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.new_build_delivery_momentum",
+      "label": "New-Build Delivery Momentum",
+      "description": "Summarizes reported warranty enrollment momentum.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "new_build_delivery_momentum",
+      "formula": "weighted(enrollment_change, sales_count_change)",
+      "professional_reason": "Summarizes reported warranty enrollment momentum.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-new-home-warranty"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.new_build_market_depth",
+      "label": "New-Build Market Depth",
+      "description": "Shows the depth of available reported new-home transactions.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "new_build_market_depth",
+      "formula": "normalized(new_home_warranty_sales_count)",
+      "professional_reason": "Shows the depth of available reported new-home transactions.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-new-home-warranty"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.new_build_comp_context",
+      "label": "New-Build Comparable Context",
+      "description": "Shows how much reported new-home evidence is available for a comparison conversation.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "new_build_comp_context",
+      "formula": "weighted(sales_count, median_price_recency, price_dispersion)",
+      "professional_reason": "Shows how much reported new-home evidence is available for a comparison conversation.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-new-home-warranty"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.housing_stock",
+      "label": "Housing stock",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "housing_stock",
+      "source_field": "housing_stock",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.owner_occupied_share",
+      "label": "Owner-occupied share",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "owner_occupied_share",
+      "source_field": "owner_occupied_share",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.renter_occupied_share",
+      "label": "Renter-occupied share",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "renter_occupied_share",
+      "source_field": "renter_occupied_share",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.vacancy_rate",
+      "label": "Vacancy rate",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "vacancy_rate",
+      "source_field": "vacancy_rate",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.median_gross_rent",
+      "label": "Median gross rent",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "median_gross_rent",
+      "source_field": "median_gross_rent",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.median_home_value",
+      "label": "Median home value",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "median_home_value",
+      "source_field": "median_home_value",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.housing_cost_burden_share",
+      "label": "Housing cost burden share",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "housing_cost_burden_share",
+      "source_field": "housing_cost_burden_share",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.eviction_rate",
+      "label": "Eviction rate",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "eviction_rate",
+      "source_field": "eviction_rate",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.housing_production",
+      "label": "Housing production",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "housing_production",
+      "source_field": "housing_production",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-municipal-housing-profile.household_growth",
+      "label": "Household growth",
+      "description": "Published municipal housing profiles data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-municipal-housing-profile",
+      "field": "household_growth",
+      "source_field": "household_growth",
+      "professional_reason": "Published municipal housing profiles data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.rental_market_pressure",
+      "label": "Rental Market Pressure",
+      "description": "Presents public housing conditions for market research; not tenant screening.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "rental_market_pressure",
+      "formula": "weighted(vacancy_rate inverse, rent_change, eviction_rate)",
+      "professional_reason": "Presents public housing conditions for market research; not tenant screening.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-municipal-housing-profile"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.housing_affordability_gap",
+      "label": "Housing Affordability Gap",
+      "description": "Highlights municipal-level public affordability context.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "housing_affordability_gap",
+      "formula": "weighted(housing_cost_burden_share, income_to_rent_gap)",
+      "professional_reason": "Highlights municipal-level public affordability context.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-municipal-housing-profile"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.housing_supply_balance",
+      "label": "Housing Supply Balance",
+      "description": "Summarizes public supply and demand context; it is not a rent or home-value forecast.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "housing_supply_balance",
+      "formula": "weighted(housing_production, household_growth, vacancy_rate)",
+      "professional_reason": "Summarizes public supply and demand context; it is not a rent or home-value forecast.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-municipal-housing-profile"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.municipal_housing_evidence_depth",
+      "label": "Municipal Housing Evidence Depth",
+      "description": "Shows whether a municipal housing brief has a complete published data footprint.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "municipal_housing_evidence_depth",
+      "formula": "coverage(profile_fields)",
+      "professional_reason": "Shows whether a municipal housing brief has a complete published data footprint.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-municipal-housing-profile"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_units_total",
+      "label": "Affordable units total",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_units_total",
+      "source_field": "affordable_units_total",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_units_rental",
+      "label": "Affordable rental units",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_units_rental",
+      "source_field": "affordable_units_rental",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_units_for_sale",
+      "label": "Affordable for-sale units",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_units_for_sale",
+      "source_field": "affordable_units_for_sale",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_units_pipeline",
+      "label": "Affordable units in pipeline",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_units_pipeline",
+      "source_field": "affordable_units_pipeline",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_trust_fund_balance",
+      "label": "Affordable housing trust-fund balance",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_trust_fund_balance",
+      "source_field": "affordable_trust_fund_balance",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.low_income_households",
+      "label": "Low-income households",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "low_income_households",
+      "source_field": "low_income_households",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.moderate_income_households",
+      "label": "Moderate-income households",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "moderate_income_households",
+      "source_field": "moderate_income_households",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.hud_subsidized_units",
+      "label": "HUD-subsidized units",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "hud_subsidized_units",
+      "source_field": "hud_subsidized_units",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.low_income_cost_burden",
+      "label": "Low-income cost burden",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "low_income_cost_burden",
+      "source_field": "low_income_cost_burden",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-affordable-housing.affordable_housing_reporting_status",
+      "label": "Affordable housing reporting status",
+      "description": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-affordable-housing",
+      "field": "affordable_housing_reporting_status",
+      "source_field": "affordable_housing_reporting_status",
+      "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.affordable_supply_coverage",
+      "label": "Affordable Supply Coverage",
+      "description": "Compares reported units with reported households; not a compliance opinion.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "affordable_supply_coverage",
+      "formula": "affordable_units_total / max(low_income_households, 1)",
+      "professional_reason": "Compares reported units with reported households; not a compliance opinion.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-affordable-housing"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.affordable_pipeline_signal",
+      "label": "Affordable Pipeline Signal",
+      "description": "Summarizes reported affordable-housing capacity under monitoring.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "affordable_pipeline_signal",
+      "formula": "weighted(affordable_units_pipeline, trust_fund_balance)",
+      "professional_reason": "Summarizes reported affordable-housing capacity under monitoring.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-affordable-housing"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.rent_support_context",
+      "label": "Rent Support Context",
+      "description": "Provides municipal support context, never household eligibility.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "rent_support_context",
+      "formula": "weighted(hud_subsidized_units, affordable_units_rental)",
+      "professional_reason": "Provides municipal support context, never household eligibility.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-affordable-housing"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.housing_program_record_freshness",
+      "label": "Housing Program Record Freshness",
+      "description": "Shows when published program data should be refreshed before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "housing_program_record_freshness",
+      "formula": "age(affordable_housing_reporting_status)",
+      "professional_reason": "Shows when published program data should be refreshed before reliance.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-affordable-housing"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.transit_station_access",
+      "label": "Transit-station access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "transit_station_access",
+      "source_field": "transit_station_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.bus_terminal_access",
+      "label": "Bus-terminal access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "bus_terminal_access",
+      "source_field": "bus_terminal_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.hospital_access",
+      "label": "Hospital access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "hospital_access",
+      "source_field": "hospital_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.college_access",
+      "label": "College access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "college_access",
+      "source_field": "college_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.park_access",
+      "label": "Park access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "park_access",
+      "source_field": "park_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.library_access",
+      "label": "Library access",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "library_access",
+      "source_field": "library_access",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.opportunity_zone_status",
+      "label": "Opportunity Zone status",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "opportunity_zone_status",
+      "source_field": "opportunity_zone_status",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.urban_enterprise_zone_status",
+      "label": "Urban Enterprise Zone status",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "urban_enterprise_zone_status",
+      "source_field": "urban_enterprise_zone_status",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.transit_village_status",
+      "label": "Transit Village status",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "transit_village_status",
+      "source_field": "transit_village_status",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-community-assets.redevelopment_area_status",
+      "label": "Redevelopment-area status",
+      "description": "Published community assets and designations data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-community-assets",
+      "field": "redevelopment_area_status",
+      "source_field": "redevelopment_area_status",
+      "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.amenity_access_profile",
+      "label": "Amenity Access Profile",
+      "description": "Makes state-mapped community amenities comparable without asserting neighborhood quality.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "amenity_access_profile",
+      "formula": "weighted(transit, hospital, college, park, library proximity)",
+      "professional_reason": "Makes state-mapped community amenities comparable without asserting neighborhood quality.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-community-assets"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.development_designation_stack",
+      "label": "Development Designation Stack",
+      "description": "Counts state/federal designation contexts for professional research.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "development_designation_stack",
+      "formula": "count(opportunity_zone, urban_enterprise_zone, transit_village, redevelopment_area)",
+      "professional_reason": "Counts state/federal designation contexts for professional research.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-community-assets"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.public_facility_proximity_signal",
+      "label": "Public Facility Proximity Signal",
+      "description": "Creates an explainable public-facility proximity summary.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "public_facility_proximity_signal",
+      "formula": "weighted(hospital_access, library_access, park_access)",
+      "professional_reason": "Creates an explainable public-facility proximity summary.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-community-assets"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.site_marketing_context",
+      "label": "Site Marketing Context",
+      "description": "Packages sourced location context for an agent or investor brief, not a valuation.",
+      "category": "planning",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "site_marketing_context",
+      "formula": "weighted(amenity_access_profile, development_designation_stack)",
+      "professional_reason": "Packages sourced location context for an agent or investor brief, not a valuation.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-community-assets"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.zoning_map_url",
+      "label": "Official zoning-map link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "zoning_map_url",
+      "source_field": "zoning_map_url",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.zoning_ordinance_url",
+      "label": "Zoning-ordinance link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "zoning_ordinance_url",
+      "source_field": "zoning_ordinance_url",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.zoning_officer_contact",
+      "label": "Zoning officer contact",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "zoning_officer_contact",
+      "source_field": "zoning_officer_contact",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.zoning_map_last_checked",
+      "label": "Zoning-map last checked",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "zoning_map_last_checked",
+      "source_field": "zoning_map_last_checked",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.municipal_zoning_portal",
+      "label": "Municipal zoning portal",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "municipal_zoning_portal",
+      "source_field": "municipal_zoning_portal",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.redevelopment_plan_link",
+      "label": "Redevelopment-plan link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "redevelopment_plan_link",
+      "source_field": "redevelopment_plan_link",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.master_plan_link",
+      "label": "Master-plan link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "master_plan_link",
+      "source_field": "master_plan_link",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.planning_board_link",
+      "label": "Planning-board link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "planning_board_link",
+      "source_field": "planning_board_link",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.land_use_board_link",
+      "label": "Land-use board link",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "land_use_board_link",
+      "source_field": "land_use_board_link",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-zoning-directory.zoning_directory_status",
+      "label": "Zoning-directory status",
+      "description": "Published zoning information directory data for professional review; verify the official record before reliance.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-zoning-directory",
+      "field": "zoning_directory_status",
+      "source_field": "zoning_directory_status",
+      "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.zoning_research_readiness",
+      "label": "Zoning Research Readiness",
+      "description": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "zoning_research_readiness",
+      "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
+      "professional_reason": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-zoning-directory"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.planning_document_currency",
+      "label": "Planning Document Currency",
+      "description": "Flags linked resources that may need direct municipal confirmation.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "planning_document_currency",
+      "formula": "age(zoning_map_last_checked, master_plan_link)",
+      "professional_reason": "Flags linked resources that may need direct municipal confirmation.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-zoning-directory"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.development_entitlement_entrypoint",
+      "label": "Development Entitlement Entrypoint",
+      "description": "Makes the public starting points for entitlement research scannable.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "development_entitlement_entrypoint",
+      "formula": "coverage(planning_board_link, land_use_board_link, redevelopment_plan_link)",
+      "professional_reason": "Makes the public starting points for entitlement research scannable.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-zoning-directory"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.municipal_land_use_transparency",
+      "label": "Municipal Land-Use Transparency",
+      "description": "Summarizes availability of public links, not the quality of a municipality.",
+      "category": "planning",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "municipal_land_use_transparency",
+      "formula": "weighted(zoning_research_readiness, planning_document_currency inverse)",
+      "professional_reason": "Summarizes availability of public links, not the quality of a municipality.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-zoning-directory"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_agreement_count",
+      "label": "PILOT agreement count",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_agreement_count",
+      "source_field": "pilot_agreement_count",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_project_count",
+      "label": "PILOT project count",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_project_count",
+      "source_field": "pilot_project_count",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_project_assessment",
+      "label": "PILOT project assessment",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_project_assessment",
+      "source_field": "pilot_project_assessment",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_payment_schedule",
+      "label": "PILOT payment schedule",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_payment_schedule",
+      "source_field": "pilot_payment_schedule",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_term_remaining",
+      "label": "PILOT term remaining",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_term_remaining",
+      "source_field": "pilot_term_remaining",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_expiration_year",
+      "label": "PILOT expiration year",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_expiration_year",
+      "source_field": "pilot_expiration_year",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_revenue_projection",
+      "label": "PILOT revenue projection",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_revenue_projection",
+      "source_field": "pilot_revenue_projection",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_forecast_year",
+      "label": "PILOT forecast year",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_forecast_year",
+      "source_field": "pilot_forecast_year",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_project_type",
+      "label": "PILOT project type",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_project_type",
+      "source_field": "pilot_project_type",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-pilot-forecast.pilot_municipal_share",
+      "label": "PILOT municipal share",
+      "description": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-pilot-forecast",
+      "field": "pilot_municipal_share",
+      "source_field": "pilot_municipal_share",
+      "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.pilot_rolloff_watch",
+      "label": "PILOT Rolloff Watch",
+      "description": "Highlights when published agreement terms approach expiration.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "pilot_rolloff_watch",
+      "formula": "weighted(term_remaining inverse, revenue_projection)",
+      "professional_reason": "Highlights when published agreement terms approach expiration.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-pilot-forecast"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.pilot_revenue_concentration",
+      "label": "PILOT Revenue Concentration",
+      "description": "Shows public PILOT exposure relative to the published tax base.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "pilot_revenue_concentration",
+      "formula": "pilot_project_assessment / max(municipal_tax_base, 1)",
+      "professional_reason": "Shows public PILOT exposure relative to the published tax base.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-pilot-forecast"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.pilot_forecast_confidence",
+      "label": "PILOT Forecast Confidence",
+      "description": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "pilot_forecast_confidence",
+      "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
+      "professional_reason": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-pilot-forecast"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.development_incentive_profile",
+      "label": "Development Incentive Profile",
+      "description": "Summarizes published PILOT activity for municipal or investment research.",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "development_incentive_profile",
+      "formula": "weighted(pilot_project_count, project_type_mix, revenue_projection)",
+      "professional_reason": "Summarizes published PILOT activity for municipal or investment research.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-pilot-forecast"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.assessment_history_depth",
+      "label": "Assessment-history depth",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "assessment_history_depth",
+      "source_field": "assessment_history_depth",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.assessment_land_history",
+      "label": "Land-assessment history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "assessment_land_history",
+      "source_field": "assessment_land_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.assessment_improvement_history",
+      "label": "Improvement-assessment history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "assessment_improvement_history",
+      "source_field": "assessment_improvement_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.assessment_total_history",
+      "label": "Total-assessment history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "assessment_total_history",
+      "source_field": "assessment_total_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.property_class_history",
+      "label": "Property-class history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "property_class_history",
+      "source_field": "property_class_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.exemption_code_history",
+      "label": "Exemption-code history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "exemption_code_history",
+      "source_field": "exemption_code_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.added_assessment_history",
+      "label": "Added-assessment history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "added_assessment_history",
+      "source_field": "added_assessment_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.omitted_assessment_history",
+      "label": "Omitted-assessment history",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "omitted_assessment_history",
+      "source_field": "omitted_assessment_history",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count",
+      "label": "Parcel-record change count",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "parcel_record_change_count",
+      "source_field": "parcel_record_change_count",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-modiv-longitudinal.assessment_record_years",
+      "label": "Assessment record years",
+      "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-modiv-longitudinal",
+      "field": "assessment_record_years",
+      "source_field": "assessment_record_years",
+      "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.assessment_change_trace",
+      "label": "Assessment Change Trace",
+      "description": "Organizes published assessment history for professional review.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "assessment_change_trace",
+      "formula": "ordered(assessment_land_history, assessment_improvement_history, assessment_total_history)",
+      "professional_reason": "Organizes published assessment history for professional review.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-modiv-longitudinal"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.parcel_record_volatility",
+      "label": "Parcel Record Volatility",
+      "description": "Shows the amount of public-record movement, not a property-condition finding.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "parcel_record_volatility",
+      "formula": "normalized(parcel_record_change_count, property_class_history)",
+      "professional_reason": "Shows the amount of public-record movement, not a property-condition finding.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-modiv-longitudinal"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.assessment_component_shift",
+      "label": "Assessment Component Shift",
+      "description": "Flags changes in published assessment composition for review.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "assessment_component_shift",
+      "formula": "normalized(change(land_assessment) - change(improvement_assessment))",
+      "professional_reason": "Flags changes in published assessment composition for review.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-modiv-longitudinal"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.assessment_history_reliability",
+      "label": "Assessment History Reliability",
+      "description": "Shows the strength of available historical public assessment context.",
+      "category": "assessment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "assessment_history_reliability",
+      "formula": "weighted(assessment_history_depth, source_freshness, parcel_identity_confidence)",
+      "professional_reason": "Shows the strength of available historical public assessment context.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-modiv-longitudinal"
+      ]
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.population_change",
+      "label": "Population change",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "population_change",
+      "source_field": "population_change",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.employment_density",
+      "label": "Employment density",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "employment_density",
+      "source_field": "employment_density",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.household_income",
+      "label": "Household income",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "household_income",
+      "source_field": "household_income",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.home_value_change",
+      "label": "Home-value change",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "home_value_change",
+      "source_field": "home_value_change",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.real_estate_tax_median",
+      "label": "Median real-estate tax",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "real_estate_tax_median",
+      "source_field": "real_estate_tax_median",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.walkability_score",
+      "label": "Walkability score",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "walkability_score",
+      "source_field": "walkability_score",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.rental_cost_change",
+      "label": "Rental-cost change",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "rental_cost_change",
+      "source_field": "rental_cost_change",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.housing_unit_change",
+      "label": "Housing-unit change",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "housing_unit_change",
+      "source_field": "housing_unit_change",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.commute_mode_mix",
+      "label": "Commute-mode mix",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "commute_mode_mix",
+      "source_field": "commute_mode_mix",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-neighborhood-trends.neighborhood_trend_year",
+      "label": "Neighborhood trend year",
+      "description": "Published neighborhood trends data for professional review; verify the official record before reliance.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "nj-dca-neighborhood-trends",
+      "field": "neighborhood_trend_year",
+      "source_field": "neighborhood_trend_year",
+      "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.local_demand_context",
+      "label": "Local Demand Context",
+      "description": "Summarizes public area trends; it never profiles individuals or protected classes.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "local_demand_context",
+      "formula": "weighted(population_change, employment_density, household_income trend)",
+      "professional_reason": "Summarizes public area trends; it never profiles individuals or protected classes.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-neighborhood-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.household_cost_context",
+      "label": "Household Cost Context",
+      "description": "Provides broad municipal or area cost context, not affordability advice.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "household_cost_context",
+      "formula": "weighted(real_estate_tax_median, rental_cost_change, home_value_change)",
+      "professional_reason": "Provides broad municipal or area cost context, not affordability advice.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-neighborhood-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.accessibility_context",
+      "label": "Accessibility Context",
+      "description": "Makes public mobility context easier to compare.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "accessibility_context",
+      "formula": "weighted(walkability_score, commute_mode_mix, transit_station_access)",
+      "professional_reason": "Makes public mobility context easier to compare.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-neighborhood-trends"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.neighborhood_trend_freshness",
+      "label": "Neighborhood Trend Freshness",
+      "description": "Shows the vintage of published neighborhood trend context.",
+      "category": "housing",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal",
+        "attorney"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "neighborhood_trend_freshness",
+      "formula": "age(neighborhood_trend_year)",
+      "professional_reason": "Shows the vintage of published neighborhood trend context.",
+      "unit": "score / 100",
+      "dependencies": [
+        "nj-dca-neighborhood-trends"
+      ]
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.kcsl_case_status",
+      "label": "Known-contaminated-site case status",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "kcsl_case_status",
+      "source_field": "kcsl_case_status",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.kcsl_program_interest",
+      "label": "Contaminated-site program interest",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "kcsl_program_interest",
+      "source_field": "kcsl_program_interest",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.kcsl_remediation_phase",
+      "label": "Remediation phase",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "kcsl_remediation_phase",
+      "source_field": "kcsl_remediation_phase",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.kcsl_remediation_status",
+      "label": "Remediation status",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "kcsl_remediation_status",
+      "source_field": "kcsl_remediation_status",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.kcsl_site_id",
+      "label": "Contaminated-site site identifier",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "kcsl_site_id",
+      "source_field": "kcsl_site_id",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.deed_notice_reference",
+      "label": "Environmental deed-notice reference",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "deed_notice_reference",
+      "source_field": "deed_notice_reference",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.cea_reference",
+      "label": "Groundwater CEA reference",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "cea_reference",
+      "source_field": "cea_reference",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.ust_facility_reference",
+      "label": "UST facility reference",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "ust_facility_reference",
+      "source_field": "ust_facility_reference",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.brownfield_inventory_status",
+      "label": "Brownfield inventory status",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "brownfield_inventory_status",
+      "source_field": "brownfield_inventory_status",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.njdep-csrr-gis.environmental_layer_vintage",
+      "label": "Environmental layer vintage",
+      "description": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-csrr-gis",
+      "field": "environmental_layer_vintage",
+      "source_field": "environmental_layer_vintage",
+      "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance."
+    },
+    {
+      "id": "watchdog.njplus.environmental_record_resolution",
+      "label": "Environmental Record Resolution",
+      "description": "Shows whether a public environmental screen has usable detail; it is not an environmental clearance.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "environmental_record_resolution",
+      "formula": "coverage(kcsl_case_status, remediation_phase, remediation_status, deed_notice_reference)",
+      "professional_reason": "Shows whether a public environmental screen has usable detail; it is not an environmental clearance.",
+      "unit": "score / 100",
+      "dependencies": [
+        "njdep-csrr-gis"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.environmental_case_activity",
+      "label": "Environmental Case Activity",
+      "description": "Prioritizes cases for review from official record status.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "environmental_case_activity",
+      "formula": "weighted(remediation_phase, remediation_status, source_freshness)",
+      "professional_reason": "Prioritizes cases for review from official record status.",
+      "unit": "score / 100",
+      "dependencies": [
+        "njdep-csrr-gis"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.brownfield_reuse_context",
+      "label": "Brownfield Reuse Context",
+      "description": "Highlights public redevelopment context without indicating suitability.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "brownfield_reuse_context",
+      "formula": "weighted(brownfield_inventory_status, remediation_status, redevelopment_area_status)",
+      "professional_reason": "Highlights public redevelopment context without indicating suitability.",
+      "unit": "score / 100",
+      "dependencies": [
+        "njdep-csrr-gis"
+      ]
+    },
+    {
+      "id": "watchdog.njplus.environmental_source_currency",
+      "label": "Environmental Source Currency",
+      "description": "Shows when a professional should refresh the official environmental source.",
+      "category": "environment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "watchdog-nj-source-v031",
+      "field": "environmental_source_currency",
+      "formula": "age(environmental_layer_vintage)",
+      "professional_reason": "Shows when a professional should refresh the official environmental source.",
+      "unit": "score / 100",
+      "dependencies": [
+        "njdep-csrr-gis"
+      ]
+    }
+  ]
+}

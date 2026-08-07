@@ -2,6 +2,17 @@
   "schema_version": 1,
   "version": "0.23.0",
   "goal": "Move Watchdog from a feature-rich prototype into a secure, billable, supportable professional SaaS product.",
+  "readiness_score": {
+    "current": 42,
+    "summary": "Product depth is ahead of operating maturity. The next gains come from reliable billing, tested authorization, customer support and observable operations—not another large surface area."
+  },
+  "phases": [
+    {"target":55,"title":"Trustworthy core","focus":"Mobile clarity, entitlement QA, error recovery, first-run onboarding and a reviewed source-monitor baseline."},
+    {"target":70,"title":"Paid launch readiness","focus":"Stripe test lifecycle, webhooks, plan enforcement, support/legal review and a staging release gate."},
+    {"target":80,"title":"Daily professional value","focus":"Change notifications, saved work, exports, source lineage and profession-first workflows."},
+    {"target":90,"title":"Team operating system","focus":"Organizations, seats, roles, jobs, reporting templates, usage controls and integrations."},
+    {"target":100,"title":"Resilient platform","focus":"Monitoring, incident practice, backups, security review, load testing and native companion delivery."}
+  ],
   "items": [
     {"priority":"P0","area":"backend","capability":"Server-side entitlement source of truth","status":"foundation_shipped","detail":"Plan, profession and subscription state owned by the backend; client-side View As remains presentation only."},
     {"priority":"P0","area":"revenue","capability":"Stripe Checkout + Customer Portal","status":"code_ready_enrollment_closed","detail":"Checkout and Portal foundations are implemented, but customer Pro/Pro+ enrollment is deliberately disabled. Pricing routes collect early access until Stripe test-mode validation and a deliberate launch flag."},
@@ -27,8 +38,8 @@
     {"priority":"P1","area":"frontend","capability":"Global search / command palette","status":"planned","detail":"One fast search across address, block/lot, municipality, marker, report, saved view and action."},
     {"priority":"P1","area":"frontend","capability":"Accessibility + keyboard QA","status":"planned","detail":"WCAG-focused audit of focus states, dialogs, tables, color contrast, mobile navigation and dynamic content announcements."},
     {"priority":"P1","area":"performance","capability":"Performance budgets","status":"planned","detail":"Measure LCP/INP/CLS, module weight, map cost and API waterfalls; establish page-level budgets and regression checks."},
-    {"priority":"P1","area":"quality","capability":"Automated test pyramid","status":"planned","detail":"Unit tests for formulas, integration tests for auth/data access, and browser smoke tests for login, plan gating, Home, Dashboard, Data Center and checkout."},
-    {"priority":"P1","area":"quality","capability":"Preview/staging environment","status":"planned","detail":"Every release is tested against staging data and billing test mode before production deploy."},
+    {"priority":"P1","area":"quality","capability":"Automated test pyramid","status":"access_contract_shipped","detail":"GitHub Actions now enforces a static protected-route and entitlement contract on every pull request and main push. Next: staged browser smoke tests for login, plan gating, Home, Dashboard, Data Center and checkout."},
+    {"priority":"P1","area":"quality","capability":"Preview/staging environment","status":"anonymous_smoke_harness_shipped","detail":"A manual GitHub Action now tests anonymous protected-route redirects against a non-production hostname and refuses the production domain. Next: provision disposable Standard, Pro and Developer staging accounts for authenticated RLS and entitlement smoke tests."},
     {"priority":"P2","area":"revenue","capability":"Trial + lifecycle automation","status":"planned","detail":"Time-limited Pro trial, onboarding sequence, activation nudges, failed-payment recovery and cancellation feedback."},
     {"priority":"P2","area":"analytics","capability":"Product + revenue funnel analytics","status":"planned","detail":"Measure signup → property added → professional tool used → report/export → trial → paid → retained, without exposing protected property data."},
     {"priority":"P2","area":"support","capability":"In-product support context","status":"planned","detail":"Support requests include page, release, anonymized request ID, source health and safe diagnostics so failures can be reproduced."},

@@ -1,0 +1,25 @@
+name: Access boundary audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/**'
+      - 'supabase/**'
+      - '.github/workflows/access-boundary-audit.yml'
+  pull_request:
+    paths:
+      - 'property/**'
+      - 'supabase/**'
+      - '.github/workflows/access-boundary-audit.yml'
+
+jobs:
+  static-boundary-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify protected-route and entitlement contracts
+        run: node property/scripts/audit_access_boundaries.mjs

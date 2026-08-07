@@ -12,7 +12,8 @@ markers = []
 PROF = {
     "consumer": "Homeowner / buyer", "attorney": "Attorney", "title": "Title / closing",
     "agent": "Real estate agent", "lender": "Mortgage lender / broker", "appraiser": "Appraiser",
-    "contractor": "Contractor / developer", "investor": "Investor / portfolio", "municipal": "Municipal professional"
+    "contractor": "Contractor / developer", "investor": "Investor / portfolio", "municipal": "Municipal professional",
+    "insurance": "Insurance / risk professional"
 }
 
 def add(mid, label, category, scope, tier, origin, professions, source, description="", field=None):
@@ -110,6 +111,36 @@ for mid,label,cat,tier,prof in [
  ('assessment_surprise_index','Assessment Surprise Index','broker intelligence','pro',['agent']),
  ('tax_trend_position','Tax Trend Position','broker intelligence','pro',['agent'])]:
     add('watchdog.'+mid,label,cat,'property',tier,'watchdog-derived',prof,'watchdog-models')
+
+# v0.25 institutional pack. Kept in a separate reviewed data contract so adding
+# professional intelligence never turns this generator into a hand-maintained wall.
+pack_path = ROOT / 'data' / 'institutional-marker-pack.json'
+if pack_path.exists():
+    pack = json.loads(pack_path.read_text())
+    for item in pack['markers']:
+        add(item['id'], item['label'], item['category'], item['scope'], item['tier'], item['origin'],
+            item['professions'], item['source_id'], item.get('description',''), item.get('field'))
+        markers[-1].update({k:item[k] for k in ('professional_reason','formula','unit','source_field','source_layer') if item.get(k) is not None})
+
+# v0.30 cross-professional marker pack. Separate reviewed contract keeps all
+# 100 professional signals attributable and prevents undocumented catalog growth.
+v030_path = ROOT / 'data' / 'professional-marker-pack-v030.json'
+if v030_path.exists():
+    v030 = json.loads(v030_path.read_text())
+    for item in v030['markers']:
+        add(item['id'], item['label'], item['category'], item['scope'], item['tier'], item['origin'],
+            item['professions'], item['source_id'], item.get('description',''), item.get('field'))
+        markers[-1].update({k:item[k] for k in ('professional_reason','formula','unit') if item.get(k) is not None})
+
+# v0.31 bulk statewide DCA/NJDEP expansion. Source-specific activation gates
+# determine whether a cataloged public field may be presented as live.
+v031_path = ROOT / 'data' / 'nj-proplus-source-pack-v031.json'
+if v031_path.exists():
+    v031 = json.loads(v031_path.read_text())
+    for item in v031['markers']:
+        add(item['id'], item['label'], item['category'], item['scope'], item['tier'], item['origin'],
+            item['professions'], item['source_id'], item.get('description',''), item.get('field'))
+        markers[-1].update({k:item[k] for k in ('professional_reason','formula','unit','source_field','dependencies') if item.get(k) is not None})
 
 # v0.18 cross-professional decision signals. Each has a UI value provider and documented formula.
 for mid,label,cat,tier,prof in [

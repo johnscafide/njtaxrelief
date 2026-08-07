@@ -1,0 +1,23 @@
+Watchdog v0.26.0 — Property Pulse and installable app foundation
+
+Deploy these files after v0.25.0:
+- property/pulse.html
+- property/css/pulse.css
+- property/js/pulse.js
+- property/manifest.webmanifest
+- property/sw.js
+- property/offline.html
+- property/js/pwa.js
+- property/icons/watchdog-192.png
+- property/icons/watchdog-512.png
+- property/css/mobile-app.css
+- property/sidemenu.html
+- property/js/sidemenu.js
+- property/dashboard.html
+- property/home.html
+- property/account.html
+- property/data/versions.json
+- property/data/saas-platform-pipeline.json
+- supabase/migrations/20260807173000_property_pulse_alert_preferences.sql
+
+The accompanying database migration has already been applied to the connected Supabase project.

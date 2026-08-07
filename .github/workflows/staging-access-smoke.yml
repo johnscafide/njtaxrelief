@@ -1,0 +1,25 @@
+name: Staging access smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      staging_base_url:
+        description: Non-production URL to test, e.g. https://watchdog-staging.example.com
+        required: true
+        type: string
+
+jobs:
+  anonymous-route-smoke:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-save playwright@1.55.0
+      - run: npx playwright install --with-deps chromium
+      - name: Confirm protected routes redirect before rendering private content
+        env:
+          STAGING_BASE_URL: ${{ inputs.staging_base_url }}
+        run: node property/tests/staging-access-smoke.mjs

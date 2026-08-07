@@ -1,8 +1,92 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T11:15:00-04:00",
+  "updated_at": "2026-08-07T22:10:00-04:00",
   "releases": [
+    {
+      "version": "0.31.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T22:10:00-04:00",
+      "title": "New Jersey bulk-data intelligence expansion",
+      "category": "Pro+ data platform / source operations",
+      "status": "Completed",
+      "summary": "Added 154 governed Pro+ markers from eleven high-value statewide DCA and NJDEP source families: raw parcel-linked permits, development trends, new-home warranties, municipal housing profiles, affordable-housing monitoring, community assets, zoning-directory links, PILOT forecasts, MOD-IV longitudinal history, neighborhood trends and contaminated-site remediation data. The governed catalog now contains 697 markers, including 262 transparent Watchdog-derived signals. Added an incremental DCA raw-permit importer that joins official Treasury municipality code, block and lot, plus a source activation catalog that makes live-vs-catalog status explicit.",
+      "links": ["/property/data-center.html", "/property/developer-data.html", "/property/updates.html"],
+      "files": ["property/data/nj-proplus-source-pack-v031.json", "property/data/nj-proplus-source-catalog-v031.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/scripts/build_nj_proplus_source_pack_v031.py", "property/scripts/refresh_dca_construction_permits.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/data/versions.json"],
+      "impact": {"markers": 154, "public_source_markers": 110, "proprietary_markers": 44, "marker_catalog_total": 697, "source_families": 11, "parcel_linked_importer": 1}
+    },
+    {
+      "version": "0.30.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T21:15:00-04:00",
+      "title": "Cross-professional marker expansion and mobile navigation foundation",
+      "category": "Data platform / mobile product quality",
+      "status": "Completed",
+      "summary": "Added 100 transparent Watchdog-derived markers—ten for each of ten professional audiences—with formula, professional reason, access tier and dependency-refresh contract. The governed marker catalog now contains 543 fields, including 218 proprietary Watchdog signals. Added a staging-only, browser-level anonymous access smoke test that refuses the production domain. Mobile navigation now uses a clean More sheet with grouped workspace, research and account destinations, large touch targets, safe-area handling, keyboard dismissal, focus visibility and reduced-motion support.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/data-center.html", "/property/updates.html"],
+      "files": ["property/data/professional-marker-pack-v030.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/scripts/build_professional_marker_pack_v030.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/sidemenu.html", "property/js/sidemenu.js", "property/css/mobile-menu.css", "property/tests/staging-access-smoke.mjs", ".github/workflows/staging-access-smoke.yml", "property/docs/staging-smoke-tests.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"markers": 100, "professional_audiences": 10, "proprietary_markers_total": 218, "marker_catalog_total": 543, "staging_smoke_workflow": 1, "mobile_accessibility_menu": 1}
+    },
+    {
+      "version": "0.29.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T20:45:00-04:00",
+      "title": "Protected-route and entitlement regression audit",
+      "category": "Security / reliability",
+      "status": "Completed",
+      "summary": "Added a source-level access-boundary contract that runs automatically on GitHub pull requests and main pushes. It checks each known signed-in and developer-only route, verifies the server-evaluated developer check and anonymous RPC revocations, confirms core entitlement/RLS primitives, and fails if a service credential appears in browser-delivered property files. The initial audit passes 38 checks. A staged live-RLS test remains the next operational gate before paid enrollment.",
+      "links": ["/property/updates.html"],
+      "files": ["property/scripts/audit_access_boundaries.mjs", ".github/workflows/access-boundary-audit.yml", "property/docs/access-boundary-audit.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"protected_route_contracts": 15, "entitlement_regression_checks": 4, "browser_secret_scan": 1, "ci_workflow": 1}
+    },
+    {
+      "version": "0.28.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T20:30:00-04:00",
+      "title": "Mobile product clarity and production-readiness control",
+      "category": "Product polish / SaaS operations",
+      "status": "Completed",
+      "summary": "Turned the developer View As control into a compact phone control that opens only when needed, so it no longer blocks report or dashboard content. Pro and Developer views now label the mobile destination as Tools rather than Pro, paid property cards remove the empty upgrade action, and secondary dashboard signals are collapsed on phones until requested. Home prioritizes four primary facts and moves secondary market metrics out of the first mobile scan. Data Operations now displays a developer-only 42% production-readiness baseline and staged path to launch-grade SaaS.",
+      "links": ["/property/dashboard.html", "/property/home.html", "/property/developer-data.html", "/property/updates.html"],
+      "files": ["property/js/plan-context.js", "property/css/plan-context.css", "property/js/sidemenu.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/mobile-app.css", "property/css/dashboard/05-collections.css", "property/developer-data.html", "property/js/developer-data.js", "property/css/production-readiness.css", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"mobile_content_obstruction_removed": 1, "role_aware_navigation": 1, "progressive_disclosure": 2, "production_readiness_control": 1}
+    },
+    {
+      "version": "0.27.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T18:15:00-04:00",
+      "title": "NJ source monitoring and commercial-property context",
+      "category": "Data operations / property experience",
+      "status": "Completed",
+      "summary": "Connected the source-change watcher to a service-role-only Supabase ingestion function and scheduled GitHub workflow. A changed authoritative NJ source now creates a private Property Pulse review event for opted-in saved properties, without claiming a parcel changed before validation. Commercial parcels are visibly distinguished on Dashboard and Watchlist, suppress residential market-value and Chapter 123 presentation, and receive commercial-specific research language. Enlarged key mobile controls and property actions for thumb-friendly use.",
+      "links": ["/property/pulse.html", "/property/dashboard.html", "/property/home.html"],
+      "files": ["property/scripts/monitor_nj_sources.py", "supabase/functions/source-monitor-ingest/index.ts", ".github/workflows/source-monitor.yml", "property/docs/source-monitor-setup.md", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/mobile-app.css", "property/data/versions.json"],
+      "impact": {"scheduled_source_monitor": 1, "private_event_delivery": 1, "commercial_property_context": 1, "mobile_touch_target_pass": 1}
+    },
+    {
+      "version": "0.26.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T17:30:00-04:00",
+      "title": "Property Pulse and installable app foundation",
+      "category": "Customer intelligence / iPhone readiness",
+      "status": "Completed",
+      "summary": "Added Property Pulse: an authenticated change center with per-property preferences for score, tax, assessment and deadline signals, plus a server-only event inbox designed for future source-monitor jobs and native push delivery. Added an installable PWA shell with iPhone Home Screen guidance, an offline-safe reconnect page and a service worker that deliberately never caches private property data.",
+      "links": ["/property/pulse.html", "/property/dashboard.html", "/property/home.html", "/property/account.html"],
+      "files": ["property/pulse.html", "property/css/pulse.css", "property/js/pulse.js", "property/manifest.webmanifest", "property/sw.js", "property/offline.html", "property/js/pwa.js", "property/css/mobile-app.css", "property/sidemenu.html", "property/js/sidemenu.js", "supabase/migrations/20260807173000_property_pulse_alert_preferences.sql", "property/data/versions.json"],
+      "impact": {"customer_update_center": 1, "per_property_preferences": 1, "database_tables": 2, "pwa_shell": 1, "ios_readiness": 1, "native_app_dependency": "reduced"}
+    },
+    {
+      "version": "0.25.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T11:55:19-04:00",
+      "title": "Institutional 100-marker data release",
+      "category": "Data platform / professional intelligence",
+      "status": "Completed",
+      "summary": "Added exactly 100 governed markers: 50 authoritative NJ public-source observations across geology, hydrography, land/historic resources and municipal finance, plus 50 transparent Watchdog-derived professional signals spanning attorneys/title, lenders, real estate, investors, developers, appraisers and insurance/risk. Expanded the live NJDEP diligence query layer, added professional-purpose metadata, formula lineage, source monitoring and marker refresh contracts, and moved the governed catalog from 343 to 443 markers.",
+      "links": ["/property/data-center.html", "/property/marker.html", "/property/pro.html", "/property/home.html", "/property/updates.html"],
+      "files": ["property/data/institutional-marker-pack.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/data/source-registry.json", "property/data/next-100-marker-roadmap.json", "property/scripts/build_institutional_marker_pack.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/scripts/sync_marker_roadmap.py", "property/js/dashboard/tools/professional-due-diligence.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/js/data-center.js", "property/js/marker-detail.js", "property/js/marker-intelligence.js", "property/js/updates.js", "property/dashboard.html", "property/home.html", "property/data-center.html", "property/marker.html", "property/css/data-center.css", "property/pro.html", "property/data/versions.json"],
+      "impact": {"markers": 100, "public_source_markers": 50, "proprietary_markers": 50, "professional_categories": 7, "live_source_families": 3}
+    },
     {
       "version": "0.24.0",
       "date": "2026-08-07",
@@ -968,6 +1052,23 @@
     }
   ],
   "roadmap": [
+    {
+      "priority": 0,
+      "title": "Institutional marker governance layer",
+      "readiness": "100-marker expansion shipped in v0.25.0",
+      "effort": "Large",
+      "category": "Data platform",
+      "why": "A sellable professional SaaS needs attributable, refreshable data contracts—not an ever-growing list of unexplained fields.",
+      "deliverables": [
+        "443 live governed markers",
+        "50 new authoritative source markers",
+        "50 new Watchdog-derived markers",
+        "profession and plan labels",
+        "source lineage and refresh cadence",
+        "formula disclosure for derived signals",
+        "NJDEP geology, hydrography and land source families"
+      ]
+    },
     {
       "priority": 1,
       "title": "Title Evidence Graph",

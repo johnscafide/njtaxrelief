@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 set -euo pipefail
-manifest="${1:-property/CHANGED-FILES-v0.19.0.txt}"
-message="${2:-Watchdog v0.19.0}"
+manifest="${1:-property/CHANGED-FILES-v0.25.0.txt}"
+message="${2:-Watchdog v0.25.0: institutional 100-marker data release}"
 root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 if [[ -z "$root" ]]; then echo "Run this from anywhere inside your cloned GitHub repository."; exit 1; fi
 cd "$root"
 if [[ ! -f "$manifest" ]]; then echo "Cannot find $manifest. Extract the release ZIP into the repository first."; exit 1; fi
-mapfile -t files < <(sed '/^[[:space:]]*$/d;/^[[:space:]]*#/d' "$manifest")
+mapfile -t files < <(sed -n '/^property\\//p' "$manifest")
+[[ "${#files[@]}" -gt 0 ]] || { echo "No repository paths found in $manifest."; exit 1; }
 echo "Files this release will stage:"
 git status --short -- "${files[@]}"
 read -r -p "Stage these release files, commit, and push? (y/N) " answer

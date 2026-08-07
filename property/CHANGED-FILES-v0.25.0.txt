@@ -1,0 +1,35 @@
+Watchdog v0.25.0 — Institutional 100-Marker Data Release
+2026-08-07
+
+Deploy these paths relative to the repository root:
+
+property/CHANGED-FILES-v0.25.0.txt
+property/dashboard.html
+property/home.html
+property/data-center.html
+property/marker.html
+property/pro.html
+property/css/data-center.css
+property/js/dashboard/index.js
+property/js/dashboard/home/index.js
+property/js/dashboard/tools/professional-due-diligence.js
+property/js/data-center.js
+property/js/marker-detail.js
+property/js/marker-intelligence.js
+property/js/updates.js
+property/data/institutional-marker-pack.json
+property/data/marker-registry.json
+property/data/marker-refresh-policy.json
+property/data/derived-marker-formulas.json
+property/data/source-registry.json
+property/data/next-100-marker-roadmap.json
+property/data/versions.json
+property/scripts/build_institutional_marker_pack.py
+property/scripts/build_marker_registry.py
+property/scripts/build_marker_refresh_policy.py
+property/scripts/build_derived_marker_formulas.py
+property/scripts/sync_marker_roadmap.py
+property/scripts/publish_release.sh
+property/scripts/publish_release.ps1
+
+No SQL migration is required for v0.25.0.

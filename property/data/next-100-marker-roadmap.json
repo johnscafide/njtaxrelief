@@ -1,128 +1,770 @@
 {
   "schema_version": 1,
-  "version": "0.18.0",
+  "version": "0.25.0",
   "target": 100,
-  "strategy": "Ten markers for each of ten revenue-relevant professional categories. Proprietary markers must combine attributable inputs and publish formulas. Source-expansion markers remain planned until an authoritative source and repeatable ingestion path are verified.",
+  "strategy": "Professional marker pipeline synchronized against the governed registry. A planned marker becomes live only after source/provenance, plan tier and methodology are implemented.",
   "categories": [
-    {"id":"attorney","label":"Attorney / tax counsel","markers":[
-      ["watchdog.assessment_defensibility_score","Assessment Defensibility Score","derived","pro_plus","live"],
-      ["watchdog.appeal_comparable_quality_index","Appeal Comparable Quality Index","derived","pro_plus","planned"],
-      ["watchdog.evidence_chain_completeness","Evidence Chain Completeness","derived","pro_plus","planned"],
-      ["watchdog.filing_deadline_risk","Filing Deadline Risk","derived","pro","planned"],
-      ["watchdog.chapter123_margin_stability","Chapter 123 Margin Stability","derived","pro_plus","planned"],
-      ["watchdog.municipal_record_conflict_score","Municipal Record Conflict Score","derived","pro_plus","planned"],
-      ["watchdog.environmental_encumbrance_severity","Environmental Encumbrance Severity","derived","pro_plus","planned"],
-      ["watchdog.closing_exception_resolution_age","Closing Exception Resolution Age","source_expansion","pro_plus","planned"],
-      ["watchdog.tax_court_escalation_readiness","Tax Court Escalation Readiness","derived","pro_plus","planned"],
-      ["watchdog.evidence_source_authority_score","Evidence Source Authority Score","derived","pro_plus","planned"]
-    ]},
-    {"id":"title","label":"Title / closing","markers":[
-      ["watchdog.chain_of_title_gap_index","Chain-of-Title Gap Index","derived","pro_plus","planned"],
-      ["watchdog.deed_reference_completeness","Deed Reference Completeness","derived","pro_plus","planned"],
-      ["watchdog.mortgage_discharge_gap","Mortgage Discharge Gap","source_expansion","pro_plus","planned"],
-      ["watchdog.tax_sale_redemption_risk","Tax Sale Redemption Risk","source_expansion","pro_plus","planned"],
-      ["watchdog.municipal_lien_evidence_age","Municipal Lien Evidence Age","source_expansion","pro_plus","planned"],
-      ["watchdog.owner_name_consistency","Owner Name Consistency","derived","pro_plus","planned"],
-      ["watchdog.block_lot_cross_source_confidence","Block/Lot Cross-Source Confidence","derived","pro","planned"],
-      ["watchdog.open_permit_closing_severity","Open Permit Closing Severity","derived","pro_plus","planned"],
-      ["watchdog.tidelands_title_review_priority","Tidelands Title Review Priority","derived","pro_plus","planned"],
-      ["watchdog.closing_clearance_confidence","Closing Clearance Confidence","derived","pro_plus","planned"]
-    ]},
-    {"id":"agent","label":"Real estate agent / broker","markers":[
-      ["watchdog.transaction_tax_shock_index","Transaction Tax Shock Index","derived","pro","live"],
-      ["watchdog.listing_tax_burden_percentile","Listing Tax Burden Percentile","derived","pro","planned"],
-      ["watchdog.buyer_monthly_carry_delta","Buyer Monthly Carry Delta","derived","pro","planned"],
-      ["watchdog.preoffer_public_record_risk","Pre-Offer Public Record Risk","derived","pro","planned"],
-      ["watchdog.neighborhood_assessment_stability","Neighborhood Assessment Stability","derived","pro","planned"],
-      ["watchdog.listing_record_mismatch_score","Listing Record Mismatch Score","source_expansion","pro_plus","planned"],
-      ["watchdog.buyer_tax_reset_exposure","Buyer Tax Reset Exposure","derived","pro","planned"],
-      ["watchdog.seller_appeal_opportunity_signal","Seller Appeal Opportunity Signal","derived","pro","planned"],
-      ["watchdog.town_fiscal_story_score","Town Fiscal Story Score","derived","pro","planned"],
-      ["watchdog.transaction_diligence_completion","Transaction Diligence Completion","derived","pro_plus","planned"]
-    ]},
-    {"id":"lender","label":"Mortgage lender / broker","markers":[
-      ["watchdog.escrow_volatility_score","Escrow Volatility Score","derived","pro","planned"],
-      ["watchdog.collateral_tax_reset_sensitivity","Collateral Tax Reset Sensitivity","derived","pro_plus","planned"],
-      ["watchdog.municipal_fiscal_capacity","Municipal Fiscal Capacity","derived","pro_plus","planned"],
-      ["watchdog.debt_service_tax_pressure","Debt-Service Tax Pressure","derived","pro_plus","planned"],
-      ["watchdog.payment_shock_1y","1-Year Payment Shock","derived","pro","planned"],
-      ["watchdog.payment_shock_3y","3-Year Payment Shock","derived","pro_plus","planned"],
-      ["watchdog.payment_shock_5y","5-Year Payment Shock","derived","pro_plus","planned"],
-      ["watchdog.collateral_record_confidence","Collateral Record Confidence","derived","pro_plus","planned"],
-      ["watchdog.environmental_collateral_review","Environmental Collateral Review","derived","pro_plus","planned"],
-      ["watchdog.tax_delinquency_followup_priority","Tax Delinquency Follow-Up Priority","source_expansion","pro_plus","planned"]
-    ]},
-    {"id":"appraiser","label":"Appraiser / valuation","markers":[
-      ["watchdog.comparable_evidence_reliability","Comparable Evidence Reliability","derived","pro","live"],
-      ["watchdog.comp_ratio_dispersion","Comparable Ratio Dispersion","derived","pro","planned"],
-      ["watchdog.verified_sale_recency","Verified Sale Recency","source_expansion","pro","planned"],
-      ["watchdog.comp_sample_depth","Comparable Sample Depth","source_expansion","pro","planned"],
-      ["watchdog.uniformity_adjusted_confidence","Uniformity-Adjusted Valuation Confidence","derived","pro_plus","planned"],
-      ["watchdog.improvement_value_outlier","Improvement Value Outlier","derived","pro_plus","planned"],
-      ["watchdog.land_value_outlier","Land Value Outlier","derived","pro_plus","planned"],
-      ["watchdog.ppsf_reliability","Price-per-Square-Foot Reliability","derived","pro","planned"],
-      ["watchdog.sale_assessment_anomaly","Sale-to-Assessment Anomaly","derived","pro_plus","planned"],
-      ["watchdog.revaluation_cycle_adjustment","Revaluation Cycle Adjustment","derived","pro_plus","planned"]
-    ]},
-    {"id":"contractor","label":"Contractor / developer","markers":[
-      ["watchdog.permit_closure_velocity","Permit Closure Velocity","derived","pro_plus","planned"],
-      ["watchdog.stale_permit_severity","Stale Permit Severity","derived","pro_plus","planned"],
-      ["watchdog.permit_activity_intensity","Permit Activity Intensity","derived","pro","planned"],
-      ["watchdog.post_sale_improvement_activity","Post-Sale Improvement Activity","derived","pro_plus","planned"],
-      ["watchdog.improvement_assessment_lag","Improvement Assessment Lag","derived","pro_plus","planned"],
-      ["watchdog.development_constraint_density","Development Constraint Density","derived","pro_plus","planned"],
-      ["watchdog.wetland_review_priority","Wetland Review Priority","source_expansion","pro_plus","planned"],
-      ["watchdog.flood_design_review_priority","Flood Design Review Priority","source_expansion","pro_plus","planned"],
-      ["watchdog.remediation_proximity_band","Environmental Remediation Proximity Band","source_expansion","pro_plus","planned"],
-      ["watchdog.project_tax_impact_sensitivity","Project Tax Impact Sensitivity","derived","pro_plus","planned"]
-    ]},
-    {"id":"investor","label":"Investor / portfolio manager","markers":[
-      ["watchdog.municipal_cost_absorption_score","Municipal Cost Absorption Score","derived","pro_plus","live"],
-      ["watchdog.fiscal_resilience_score","Municipal Fiscal Resilience Score","derived","pro_plus","live"],
-      ["watchdog.net_tax_carry_growth","Net Tax Carry Growth","derived","pro","planned"],
-      ["watchdog.portfolio_tax_concentration","Portfolio Tax Concentration","derived","pro_plus","planned"],
-      ["watchdog.revaluation_beta","Revaluation Beta","derived","pro_plus","planned"],
-      ["watchdog.tax_burden_spread","Tax Burden Spread","derived","pro_plus","planned"],
-      ["watchdog.municipality_diversification_score","Municipality Diversification Score","derived","pro_plus","planned"],
-      ["watchdog.carry_downside_1y","1-Year Carry-Cost Downside","derived","pro_plus","planned"],
-      ["watchdog.carry_downside_5y","5-Year Carry-Cost Downside","derived","pro_plus","planned"],
-      ["watchdog.exemption_shift_exposure","Exemption Shift Exposure","derived","pro_plus","planned"]
-    ]},
-    {"id":"municipal","label":"Municipal / tax professional","markers":[
-      ["watchdog.collection_efficiency_trend","Collection Efficiency Trend","source_expansion","pro","planned"],
-      ["watchdog.levy_growth_acceleration","Levy Growth Acceleration","derived","pro","planned"],
-      ["watchdog.ratable_base_momentum","Ratable Base Momentum","derived","pro","planned"],
-      ["watchdog.school_levy_pressure","School Levy Pressure","derived","pro_plus","planned"],
-      ["watchdog.county_levy_pressure","County Levy Pressure","derived","pro_plus","planned"],
-      ["watchdog.debt_service_trajectory","Debt-Service Trajectory","source_expansion","pro_plus","planned"],
-      ["watchdog.structural_imbalance_trend","Structural Imbalance Trend","derived","pro_plus","planned"],
-      ["watchdog.exempt_base_dependency","Exempt-Base Dependency","derived","pro_plus","planned"],
-      ["watchdog.residential_tax_shift_risk","Residential Tax-Shift Risk","derived","pro_plus","planned"],
-      ["watchdog.appeal_volume_pressure","Appeal Volume Pressure","derived","pro_plus","planned"]
-    ]},
-    {"id":"property_manager","label":"Property manager / asset operations","markers":[
-      ["watchdog.tenant_tax_passthrough_pressure","Tenant Tax Pass-Through Pressure","derived","pro_plus","planned"],
-      ["watchdog.annual_tax_budget_variance","Annual Tax Budget Variance","derived","pro","planned"],
-      ["watchdog.property_cost_stability","Property Cost Stability","derived","pro","planned"],
-      ["watchdog.capital_project_permit_status","Capital Project Permit Status","source_expansion","pro_plus","planned"],
-      ["watchdog.maintenance_permit_recency","Maintenance Permit Recency","source_expansion","pro_plus","planned"],
-      ["watchdog.portfolio_municipal_concentration","Portfolio Municipal Concentration","derived","pro_plus","planned"],
-      ["watchdog.tax_increase_notice_priority","Tax Increase Notice Priority","derived","pro","planned"],
-      ["watchdog.reassessment_lease_risk","Reassessment Lease Risk","derived","pro_plus","planned"],
-      ["watchdog.record_maintenance_confidence","Property Record Maintenance Confidence","derived","pro_plus","planned"],
-      ["watchdog.municipal_cost_pressure","Municipal Cost Pressure","derived","pro_plus","planned"]
-    ]},
-    {"id":"insurance","label":"Insurance / property risk","markers":[
-      ["watchdog.flood_layer_confidence","Flood Layer Confidence","source_expansion","pro_plus","planned"],
-      ["watchdog.environmental_control_stack","Environmental Control Stack","derived","pro_plus","planned"],
-      ["watchdog.contaminated_site_proximity_band","Contaminated-Site Proximity Band","source_expansion","pro_plus","planned"],
-      ["watchdog.ust_proximity_band","Underground Storage Tank Proximity Band","source_expansion","pro_plus","planned"],
-      ["watchdog.wetland_constraint_confidence","Wetland Constraint Confidence","source_expansion","pro_plus","planned"],
-      ["watchdog.building_permit_recency_risk","Building Permit Recency Risk","derived","pro_plus","planned"],
-      ["watchdog.improvement_age_proxy","Improvement Age Proxy","derived","pro_plus","planned"],
-      ["watchdog.catastrophe_mapping_completeness","Catastrophe Mapping Completeness","derived","pro_plus","planned"],
-      ["watchdog.property_identity_confidence","Property Identity Confidence","derived","pro_plus","planned"],
-      ["watchdog.risk_source_freshness_score","Risk Source Freshness Score","derived","pro_plus","planned"]
-    ]}
-  ]
+    {
+      "id": "attorney",
+      "label": "Attorney / tax counsel",
+      "markers": [
+        [
+          "watchdog.assessment_defensibility_score",
+          "Assessment Defensibility Score",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.appeal_comparable_quality_index",
+          "Appeal Comparable Quality Index",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.evidence_chain_completeness",
+          "Evidence Chain Completeness",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.filing_deadline_risk",
+          "Filing Deadline Risk",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.chapter123_margin_stability",
+          "Chapter 123 Margin Stability",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.municipal_record_conflict_score",
+          "Municipal Record Conflict Score",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.environmental_encumbrance_severity",
+          "Environmental Encumbrance Severity",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.closing_exception_resolution_age",
+          "Closing Exception Resolution Age",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.tax_court_escalation_readiness",
+          "Tax Court Escalation Readiness",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.evidence_source_authority_score",
+          "Evidence Source Authority Score",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "title",
+      "label": "Title / closing",
+      "markers": [
+        [
+          "watchdog.chain_of_title_gap_index",
+          "Chain-of-Title Gap Index",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.deed_reference_completeness",
+          "Deed Reference Completeness",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.mortgage_discharge_gap",
+          "Mortgage Discharge Gap",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.tax_sale_redemption_risk",
+          "Tax Sale Redemption Risk",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.municipal_lien_evidence_age",
+          "Municipal Lien Evidence Age",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.owner_name_consistency",
+          "Owner Name Consistency",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.block_lot_cross_source_confidence",
+          "Block/Lot Cross-Source Confidence",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.open_permit_closing_severity",
+          "Open Permit Closing Severity",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.tidelands_title_review_priority",
+          "Tidelands Title Review Priority",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.closing_clearance_confidence",
+          "Closing Clearance Confidence",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "agent",
+      "label": "Real estate agent / broker",
+      "markers": [
+        [
+          "watchdog.transaction_tax_shock_index",
+          "Transaction Tax Shock Index",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.listing_tax_burden_percentile",
+          "Listing Tax Burden Percentile",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.buyer_monthly_carry_delta",
+          "Buyer Monthly Carry Delta",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.preoffer_public_record_risk",
+          "Pre-Offer Public Record Risk",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.neighborhood_assessment_stability",
+          "Neighborhood Assessment Stability",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.listing_record_mismatch_score",
+          "Listing Record Mismatch Score",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.buyer_tax_reset_exposure",
+          "Buyer Tax Reset Exposure",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.seller_appeal_opportunity_signal",
+          "Seller Appeal Opportunity Signal",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.town_fiscal_story_score",
+          "Town Fiscal Story Score",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.transaction_diligence_completion",
+          "Transaction Diligence Completion",
+          "derived",
+          "pro_plus",
+          "live"
+        ]
+      ]
+    },
+    {
+      "id": "lender",
+      "label": "Mortgage lender / broker",
+      "markers": [
+        [
+          "watchdog.escrow_volatility_score",
+          "Escrow Volatility Score",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.collateral_tax_reset_sensitivity",
+          "Collateral Tax Reset Sensitivity",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.municipal_fiscal_capacity",
+          "Municipal Fiscal Capacity",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.debt_service_tax_pressure",
+          "Debt-Service Tax Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.payment_shock_1y",
+          "1-Year Payment Shock",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.payment_shock_3y",
+          "3-Year Payment Shock",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.payment_shock_5y",
+          "5-Year Payment Shock",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.collateral_record_confidence",
+          "Collateral Record Confidence",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.environmental_collateral_review",
+          "Environmental Collateral Review",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.tax_delinquency_followup_priority",
+          "Tax Delinquency Follow-Up Priority",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "appraiser",
+      "label": "Appraiser / valuation",
+      "markers": [
+        [
+          "watchdog.comparable_evidence_reliability",
+          "Comparable Evidence Reliability",
+          "derived",
+          "pro",
+          "live"
+        ],
+        [
+          "watchdog.comp_ratio_dispersion",
+          "Comparable Ratio Dispersion",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.verified_sale_recency",
+          "Verified Sale Recency",
+          "source_expansion",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.comp_sample_depth",
+          "Comparable Sample Depth",
+          "source_expansion",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.uniformity_adjusted_confidence",
+          "Uniformity-Adjusted Valuation Confidence",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.improvement_value_outlier",
+          "Improvement Value Outlier",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.land_value_outlier",
+          "Land Value Outlier",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.ppsf_reliability",
+          "Price-per-Square-Foot Reliability",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.sale_assessment_anomaly",
+          "Sale-to-Assessment Anomaly",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.revaluation_cycle_adjustment",
+          "Revaluation Cycle Adjustment",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "contractor",
+      "label": "Contractor / developer",
+      "markers": [
+        [
+          "watchdog.permit_closure_velocity",
+          "Permit Closure Velocity",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.stale_permit_severity",
+          "Stale Permit Severity",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.permit_activity_intensity",
+          "Permit Activity Intensity",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.post_sale_improvement_activity",
+          "Post-Sale Improvement Activity",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.improvement_assessment_lag",
+          "Improvement Assessment Lag",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.development_constraint_density",
+          "Development Constraint Density",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.wetland_review_priority",
+          "Wetland Review Priority",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.flood_design_review_priority",
+          "Flood Design Review Priority",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.remediation_proximity_band",
+          "Environmental Remediation Proximity Band",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.project_tax_impact_sensitivity",
+          "Project Tax Impact Sensitivity",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "investor",
+      "label": "Investor / portfolio manager",
+      "markers": [
+        [
+          "watchdog.municipal_cost_absorption_score",
+          "Municipal Cost Absorption Score",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.fiscal_resilience_score",
+          "Municipal Fiscal Resilience Score",
+          "derived",
+          "pro_plus",
+          "live"
+        ],
+        [
+          "watchdog.net_tax_carry_growth",
+          "Net Tax Carry Growth",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.portfolio_tax_concentration",
+          "Portfolio Tax Concentration",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.revaluation_beta",
+          "Revaluation Beta",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.tax_burden_spread",
+          "Tax Burden Spread",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.municipality_diversification_score",
+          "Municipality Diversification Score",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.carry_downside_1y",
+          "1-Year Carry-Cost Downside",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.carry_downside_5y",
+          "5-Year Carry-Cost Downside",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.exemption_shift_exposure",
+          "Exemption Shift Exposure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "municipal",
+      "label": "Municipal / tax professional",
+      "markers": [
+        [
+          "watchdog.collection_efficiency_trend",
+          "Collection Efficiency Trend",
+          "source_expansion",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.levy_growth_acceleration",
+          "Levy Growth Acceleration",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.ratable_base_momentum",
+          "Ratable Base Momentum",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.school_levy_pressure",
+          "School Levy Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.county_levy_pressure",
+          "County Levy Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.debt_service_trajectory",
+          "Debt-Service Trajectory",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.structural_imbalance_trend",
+          "Structural Imbalance Trend",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.exempt_base_dependency",
+          "Exempt-Base Dependency",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.residential_tax_shift_risk",
+          "Residential Tax-Shift Risk",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.appeal_volume_pressure",
+          "Appeal Volume Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "property_manager",
+      "label": "Property manager / asset operations",
+      "markers": [
+        [
+          "watchdog.tenant_tax_passthrough_pressure",
+          "Tenant Tax Pass-Through Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.annual_tax_budget_variance",
+          "Annual Tax Budget Variance",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.property_cost_stability",
+          "Property Cost Stability",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.capital_project_permit_status",
+          "Capital Project Permit Status",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.maintenance_permit_recency",
+          "Maintenance Permit Recency",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.portfolio_municipal_concentration",
+          "Portfolio Municipal Concentration",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.tax_increase_notice_priority",
+          "Tax Increase Notice Priority",
+          "derived",
+          "pro",
+          "planned"
+        ],
+        [
+          "watchdog.reassessment_lease_risk",
+          "Reassessment Lease Risk",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.record_maintenance_confidence",
+          "Property Record Maintenance Confidence",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.municipal_cost_pressure",
+          "Municipal Cost Pressure",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    },
+    {
+      "id": "insurance",
+      "label": "Insurance / property risk",
+      "markers": [
+        [
+          "watchdog.flood_layer_confidence",
+          "Flood Layer Confidence",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.environmental_control_stack",
+          "Environmental Control Stack",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.contaminated_site_proximity_band",
+          "Contaminated-Site Proximity Band",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.ust_proximity_band",
+          "Underground Storage Tank Proximity Band",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.wetland_constraint_confidence",
+          "Wetland Constraint Confidence",
+          "source_expansion",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.building_permit_recency_risk",
+          "Building Permit Recency Risk",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.improvement_age_proxy",
+          "Improvement Age Proxy",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.catastrophe_mapping_completeness",
+          "Catastrophe Mapping Completeness",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.property_identity_confidence",
+          "Property Identity Confidence",
+          "derived",
+          "pro_plus",
+          "planned"
+        ],
+        [
+          "watchdog.risk_source_freshness_score",
+          "Risk Source Freshness Score",
+          "derived",
+          "pro_plus",
+          "planned"
+        ]
+      ]
+    }
+  ],
+  "live_count": 21,
+  "planned_count": 79
 }

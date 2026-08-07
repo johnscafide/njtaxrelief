@@ -411,6 +411,10 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .pr-card-actions .primary:hover { background: var(--saas-teal-dark); border-color: var(--saas-teal-dark); color: #fff; }
 .pr-card-actions .pr-tier.upgrade { border-color: #dfd39e; color: #846c13; }
 .pr-card-actions .pr-tier.pro { border-color: #c6dcda; color: var(--saas-teal); }
+.pr-card-actions.is-paid .primary { grid-column: 1 / -1; }
+.pr-card-context { margin-top: 11px; }
+.pr-card-signals-toggle { display: none; }
+.pr-card-context-body > :first-child { margin-top: 0 !important; }
 
 /* Sorting and page-size controls */
 .sortbar { align-items: center; display: flex; gap: 10px; }

@@ -17,8 +17,25 @@ SOURCE = {
     'nj-abstract-pilot': ('annual', 'exempt-pilot', 'official_release'),
     'nj-tax-abstract': ('annual', 'abatements', 'official_release'),
     'njdep-dca-live': ('live', 'professional-live-feeds', 'live_query'),
+    'njdep-geology-live': ('live', 'institutional-njdep-geology', 'live_query'),
+    'njdep-hydro-live': ('live', 'institutional-njdep-hydrography', 'live_query'),
+    'njdep-land-live': ('live', 'institutional-njdep-land', 'live_query'),
     'watchdog-models': ('dependency', 'watchdog-models', 'dependency_change'),
-    'watchdog-professional': ('dependency', 'watchdog-models', 'dependency_change')
+    'watchdog-professional': ('dependency', 'watchdog-models', 'dependency_change'),
+    'watchdog-institutional': ('dependency', 'watchdog-institutional', 'dependency_change')
+    ,'watchdog-professional-v030': ('dependency', 'watchdog-professional-v030', 'dependency_change')
+    ,'watchdog-nj-source-v031': ('dependency', 'watchdog-nj-source-v031', 'dependency_change')
+    ,'nj-dca-permits-raw': ('monthly', 'dca-construction-permits', 'official_release')
+    ,'nj-dca-development-trends': ('annual', 'dca-development-trends', 'official_release')
+    ,'nj-dca-new-home-warranty': ('quarterly', 'dca-new-home-warranty', 'official_release')
+    ,'nj-dca-municipal-housing-profile': ('annual', 'dca-municipal-housing-profile', 'official_release')
+    ,'nj-dca-affordable-housing': ('annual', 'dca-affordable-housing', 'official_release')
+    ,'nj-dca-community-assets': ('review', 'dca-community-assets', 'source_change')
+    ,'nj-dca-zoning-directory': ('review', 'dca-zoning-directory', 'source_change')
+    ,'nj-dca-pilot-forecast': ('annual', 'dca-pilot-forecast', 'official_release')
+    ,'nj-dca-modiv-longitudinal': ('annual', 'dca-modiv-longitudinal', 'official_release')
+    ,'nj-dca-neighborhood-trends': ('annual', 'dca-neighborhood-trends', 'official_release')
+    ,'njdep-csrr-gis': ('live', 'njdep-csrr-gis', 'live_query')
 }
 
 rows = []

@@ -1,0 +1,1982 @@
+{
+  "schema_version": 1,
+  "version": "0.25.0",
+  "released": "2026-08-07",
+  "definition": "50 authoritative public-source markers plus 50 transparent Watchdog-derived professional signals. Derived scores are screening aids, not legal, appraisal, lending or insurance determinations.",
+  "markers": [
+    {
+      "id": "geology.abandoned_mine_within_1km",
+      "label": "Abandoned mine within 1 km",
+      "description": "Abandoned mine within 1 km",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "0",
+      "field": "abandoned_mine_within_1km",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.bedrock_aquifer",
+      "label": "Bedrock aquifer",
+      "description": "Bedrock aquifer",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "13",
+      "field": "bedrock_aquifer",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.bedrock_geology",
+      "label": "Bedrock geology",
+      "description": "Bedrock geology",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "14",
+      "field": "bedrock_geology",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.groundwater_recharge_rank",
+      "label": "Groundwater recharge rank",
+      "description": "Groundwater recharge rank",
+      "category": "water & geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "18",
+      "field": "groundwater_recharge_rank",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.sole_source_aquifer",
+      "label": "Sole-source aquifer",
+      "description": "Sole-source aquifer",
+      "category": "water & geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "19",
+      "field": "sole_source_aquifer",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.surficial_aquifer",
+      "label": "Surficial aquifer",
+      "description": "Surficial aquifer",
+      "category": "water & geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "23",
+      "field": "surficial_aquifer",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.surficial_geology",
+      "label": "Surficial geology",
+      "description": "Surficial geology",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "25",
+      "field": "surficial_geology",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.historic_fill_hit",
+      "label": "Historic fill intersection",
+      "description": "Historic fill intersection",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "22",
+      "field": "historic_fill_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.acid_producing_soil_hit",
+      "label": "Potential acid-producing soil intersection",
+      "description": "Potential acid-producing soil intersection",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "27",
+      "field": "acid_producing_soil_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.physiographic_province",
+      "label": "Physiographic province",
+      "description": "Physiographic province",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "20",
+      "field": "physiographic_province",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.landslide_within_1km",
+      "label": "Mapped landslide within 1 km",
+      "description": "Mapped landslide within 1 km",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "1",
+      "field": "landslide_within_1km",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.bedrock_outcrop_hit",
+      "label": "Bedrock outcrop intersection",
+      "description": "Bedrock outcrop intersection",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "16",
+      "field": "bedrock_outcrop_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.fault_within_500m",
+      "label": "Mapped fault within 500 m",
+      "description": "Mapped fault within 500 m",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "6",
+      "field": "fault_within_500m",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.quarry_within_1500m",
+      "label": "Mapped quarry within 1.5 km",
+      "description": "Mapped quarry within 1.5 km",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "3",
+      "field": "quarry_within_1500m",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "geology.soil_mapping_hit",
+      "label": "NJDEP soil mapping coverage",
+      "description": "NJDEP soil mapping coverage",
+      "category": "geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-geology-live",
+      "source_layer": "11",
+      "field": "soil_mapping_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.wellhead_community_tier",
+      "label": "Community wellhead protection tier",
+      "description": "Community wellhead protection tier",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "25",
+      "field": "wellhead_community_tier",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.wellhead_community_travel_time",
+      "label": "Community wellhead travel-time band",
+      "description": "Community wellhead travel-time band",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "25",
+      "field": "wellhead_community_travel_time",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.wellhead_noncommunity_tier",
+      "label": "Non-community wellhead protection tier",
+      "description": "Non-community wellhead protection tier",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "26",
+      "field": "wellhead_noncommunity_tier",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.wellhead_noncommunity_travel_time",
+      "label": "Non-community wellhead travel-time band",
+      "description": "Non-community wellhead travel-time band",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "26",
+      "field": "wellhead_noncommunity_travel_time",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.groundwater_treatment_source_area",
+      "label": "Groundwater treatment source-water area",
+      "description": "Groundwater treatment source-water area",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "27",
+      "field": "groundwater_treatment_source_area",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.category1_water_within_500m",
+      "label": "Category One water within 500 m",
+      "description": "Category One water within 500 m",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "6",
+      "field": "category1_water_within_500m",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.flood_profile_within_500m",
+      "label": "State flood profile within 500 m",
+      "description": "State flood profile within 500 m",
+      "category": "flood",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "29",
+      "field": "flood_profile_within_500m",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.flood_plan_locator_hit",
+      "label": "State flood-plan locator intersection",
+      "description": "State flood-plan locator intersection",
+      "category": "flood",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "28",
+      "field": "flood_plan_locator_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.surface_spring_within_1km",
+      "label": "Mapped surface spring within 1 km",
+      "description": "Mapped surface spring within 1 km",
+      "category": "water & geology",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "34",
+      "field": "surface_spring_within_1km",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.water_source_area",
+      "label": "Water source area",
+      "description": "Water source area",
+      "category": "water protection",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "16",
+      "field": "water_source_area",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.watershed_huc11",
+      "label": "HUC11 watershed",
+      "description": "HUC11 watershed",
+      "category": "watershed",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "17",
+      "field": "watershed_huc11",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "water.subwatershed_huc14",
+      "label": "HUC14 subwatershed",
+      "description": "HUC14 subwatershed",
+      "category": "watershed",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-hydro-live",
+      "source_layer": "22",
+      "field": "subwatershed_huc14",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.open_space_hit",
+      "label": "Open-space parcel intersection",
+      "description": "Open-space parcel intersection",
+      "category": "land use",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "65",
+      "field": "open_space_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.open_space_encumbrance",
+      "label": "Open-space encumbrance status",
+      "description": "Open-space encumbrance status",
+      "category": "land use",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "65",
+      "field": "open_space_encumbrance",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.historic_property_hit",
+      "label": "Historic property intersection",
+      "description": "Historic property intersection",
+      "category": "historic resources",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "55",
+      "field": "historic_property_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.historic_district_hit",
+      "label": "Historic district intersection",
+      "description": "Historic district intersection",
+      "category": "historic resources",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "57",
+      "field": "historic_district_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.archaeological_grid_hit",
+      "label": "Archaeological site-grid screening hit",
+      "description": "Archaeological site-grid screening hit",
+      "category": "historic resources",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "56",
+      "field": "archaeological_grid_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.wetland_mitigation_bank_hit",
+      "label": "Wetland mitigation bank intersection",
+      "description": "Wetland mitigation bank intersection",
+      "category": "wetlands",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "72",
+      "field": "wetland_mitigation_bank_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.wetland_mitigation_service_area",
+      "label": "Wetland mitigation service-area intersection",
+      "description": "Wetland mitigation service-area intersection",
+      "category": "wetlands",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "70",
+      "field": "wetland_mitigation_service_area",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.natural_area_preserve_hit",
+      "label": "State natural-area preserve intersection",
+      "description": "State natural-area preserve intersection",
+      "category": "land use",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "80",
+      "field": "natural_area_preserve_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.open_space_within_500m",
+      "label": "Open space within 500 m",
+      "description": "Open space within 500 m",
+      "category": "land use",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "65",
+      "field": "open_space_within_500m",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "land.wetlands_loi_hit",
+      "label": "Wetlands Letter-of-Interpretation coverage",
+      "description": "Wetlands Letter-of-Interpretation coverage",
+      "category": "wetlands",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "title",
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "insurance"
+      ],
+      "source_id": "njdep-land-live",
+      "source_layer": "21",
+      "field": "wetlands_loi_hit",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.total_levy_2021",
+      "label": "2021 total tax levy",
+      "description": "2021 total tax levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "total_levy_2021",
+      "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill."
+    },
+    {
+      "id": "budget.total_levy_2022",
+      "label": "2022 total tax levy",
+      "description": "2022 total tax levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "total_levy_2022",
+      "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill."
+    },
+    {
+      "id": "budget.total_levy_2023",
+      "label": "2023 total tax levy",
+      "description": "2023 total tax levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "total_levy_2023",
+      "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill."
+    },
+    {
+      "id": "budget.total_levy_2024",
+      "label": "2024 total tax levy",
+      "description": "2024 total tax levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "total_levy_2024",
+      "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill."
+    },
+    {
+      "id": "budget.total_levy_2025",
+      "label": "2025 total tax levy",
+      "description": "2025 total tax levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "attorney",
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "total_levy_2025",
+      "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill."
+    },
+    {
+      "id": "budget.municipal_levy_2024",
+      "label": "2024 municipal levy",
+      "description": "2024 municipal levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "municipal_levy_2024",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.municipal_levy_2025",
+      "label": "2025 municipal levy",
+      "description": "2025 municipal levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "municipal_levy_2025",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.school_levy_2024",
+      "label": "2024 school levy",
+      "description": "2024 school levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "school_levy_2024",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.school_levy_2025",
+      "label": "2025 school levy",
+      "description": "2025 school levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "school_levy_2025",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.county_levy_2024",
+      "label": "2024 county levy",
+      "description": "2024 county levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "county_levy_2024",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.county_levy_2025",
+      "label": "2025 county levy",
+      "description": "2025 county levy",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "county_levy_2025",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.tax_base_2024",
+      "label": "2024 equalized tax base",
+      "description": "2024 equalized tax base",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "tax_base_2024",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "budget.tax_base_2025",
+      "label": "2025 equalized tax base",
+      "description": "2025 equalized tax base",
+      "category": "municipal finance",
+      "scope": "municipality",
+      "tier": "pro",
+      "origin": "public",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-budget",
+      "source_layer": "historical",
+      "field": "tax_base_2025",
+      "professional_reason": "Adds an authoritative public-record fact to professional due diligence."
+    },
+    {
+      "id": "watchdog.environmental_encumbrance_severity",
+      "label": "Environmental Encumbrance Severity",
+      "description": "Prioritizes environmental public-record exceptions for counsel/title review.",
+      "category": "legal diligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "environmental_encumbrance_severity",
+      "formula": "weighted(deed_notice, CEA, contaminated_site, UST)",
+      "professional_reason": "Prioritizes environmental public-record exceptions for counsel/title review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.title_constraint_stack",
+      "label": "Title Constraint Stack",
+      "description": "Surfaces overlapping public-record constraints before closing.",
+      "category": "title diligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "title_constraint_stack",
+      "formula": "count(tidelands, deed_notice, historic, wetlands_LOI, open_space_encumbrance)",
+      "professional_reason": "Surfaces overlapping public-record constraints before closing.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.permit_closure_confidence",
+      "label": "Permit Closure Confidence",
+      "description": "Focuses closing review on permit/certificate gaps.",
+      "category": "legal diligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "permit_closure_confidence",
+      "formula": "100 - normalized(open_permit_gap / permit_count)",
+      "professional_reason": "Focuses closing review on permit/certificate gaps.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.source_authority_coverage",
+      "label": "Source Authority Coverage",
+      "description": "Shows how much of a diligence brief is backed by authoritative sources.",
+      "category": "evidence quality",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "source_authority_coverage",
+      "formula": "authoritative_fields / required_fields * 100",
+      "professional_reason": "Shows how much of a diligence brief is backed by authoritative sources.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.parcel_identity_confidence",
+      "label": "Parcel Identity Confidence",
+      "description": "Reduces wrong-parcel risk before professional analysis.",
+      "category": "evidence quality",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title",
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "parcel_identity_confidence",
+      "formula": "matched(address, municipality, block, lot, qualifier, PAMS_PIN) / 6 * 100",
+      "professional_reason": "Reduces wrong-parcel risk before professional analysis.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.appeal_case_readiness",
+      "label": "Appeal Case Readiness",
+      "description": "Packages appeal evidence prerequisites into one readiness signal.",
+      "category": "appeals",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "appeal_case_readiness",
+      "formula": "weighted(comparable_depth, evidence_strength, chapter123_margin, deadline_readiness)",
+      "professional_reason": "Packages appeal evidence prerequisites into one readiness signal.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.chapter123_margin_stability",
+      "label": "Chapter 123 Margin Stability",
+      "description": "Separates a persistent assessment signal from a one-period anomaly.",
+      "category": "appeals",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "chapter123_margin_stability",
+      "formula": "100 - normalized(abs(current_margin - historical_margin))",
+      "professional_reason": "Separates a persistent assessment signal from a one-period anomaly.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.evidence_chain_completeness",
+      "label": "Evidence Chain Completeness",
+      "description": "Makes missing source support visible before reliance.",
+      "category": "legal diligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "evidence_chain_completeness",
+      "formula": "verified_sources / required_evidence_sources * 100",
+      "professional_reason": "Makes missing source support visible before reliance.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.filing_deadline_risk",
+      "label": "Filing Deadline Risk",
+      "description": "Highlights matters where incomplete evidence and time pressure overlap.",
+      "category": "appeals",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "filing_deadline_risk",
+      "formula": "deadline_proximity * readiness_gap",
+      "professional_reason": "Highlights matters where incomplete evidence and time pressure overlap.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.closing_exception_priority",
+      "label": "Closing Exception Priority",
+      "description": "Ranks public-record issues for a closing checklist without making a legal determination.",
+      "category": "title diligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "attorney",
+        "title"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "closing_exception_priority",
+      "formula": "weighted(open_permits, title_constraints, environmental_encumbrance, flood_context)",
+      "professional_reason": "Ranks public-record issues for a closing checklist without making a legal determination.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.collateral_operating_cost_stress",
+      "label": "Collateral Operating-Cost Stress",
+      "description": "Shows when recurring public charges may materially change monthly housing cost.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "collateral_operating_cost_stress",
+      "formula": "weighted(tax_burden, levy_growth, escrow_volatility)",
+      "professional_reason": "Shows when recurring public charges may materially change monthly housing cost.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.escrow_volatility_score",
+      "label": "Escrow Volatility Score",
+      "description": "Turns multi-year tax movement into an escrow planning signal.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "escrow_volatility_score",
+      "formula": "normalized(stddev(tax_history) + levy_growth_gap)",
+      "professional_reason": "Turns multi-year tax movement into an escrow planning signal.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.collateral_tax_reset_sensitivity",
+      "label": "Collateral Tax-Reset Sensitivity",
+      "description": "Flags collateral where a reset scenario could materially alter taxes.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "collateral_tax_reset_sensitivity",
+      "formula": "transaction_tax_shock * assessment_ratio_gap",
+      "professional_reason": "Flags collateral where a reset scenario could materially alter taxes.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.municipal_fiscal_capacity",
+      "label": "Municipal Fiscal Capacity",
+      "description": "Provides consistent municipal-finance context for collateral review.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender",
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "municipal_fiscal_capacity",
+      "formula": "weighted(tax_base_growth, collection_rate, inverse_debt_share)",
+      "professional_reason": "Provides consistent municipal-finance context for collateral review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.collateral_constraint_burden",
+      "label": "Collateral Constraint Burden",
+      "description": "Summarizes mapped constraint density for lender diligence.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "collateral_constraint_burden",
+      "formula": "normalized(count(flood, wetlands, geology, title, permit families))",
+      "professional_reason": "Summarizes mapped constraint density for lender diligence.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.environmental_collateral_review",
+      "label": "Environmental Collateral Review Priority",
+      "description": "Prioritizes collateral that warrants deeper environmental review.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender",
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "environmental_collateral_review",
+      "formula": "weighted(environmental_encumbrance, water_protection_overlap)",
+      "professional_reason": "Prioritizes collateral that warrants deeper environmental review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.permit_collateral_completion",
+      "label": "Permit Collateral Completion",
+      "description": "Combines permit lifecycle and source confidence for collateral files.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "permit_collateral_completion",
+      "formula": "permit_closure_confidence * source_authority_coverage / 100",
+      "professional_reason": "Combines permit lifecycle and source confidence for collateral files.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.five_year_tax_reserve_ratio",
+      "label": "Five-Year Tax Reserve Ratio",
+      "description": "Gives mortgage professionals a comparable reserve-planning ratio.",
+      "category": "lending",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "lender"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "five_year_tax_reserve_ratio",
+      "formula": "projected_5y_tax / current_annual_tax",
+      "professional_reason": "Gives mortgage professionals a comparable reserve-planning ratio.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.listing_tax_burden_percentile",
+      "label": "Listing Tax-Burden Percentile",
+      "description": "Gives agents a defensible tax-position talking point.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "listing_tax_burden_percentile",
+      "formula": "percentile(effective_tax_rate within municipality)",
+      "professional_reason": "Gives agents a defensible tax-position talking point.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.buyer_monthly_carry_delta",
+      "label": "Buyer Monthly Carry Delta",
+      "description": "Translates tax scenarios into the monthly number buyers budget for.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "buyer_monthly_carry_delta",
+      "formula": "(scenario_annual_tax - current_annual_tax) / 12",
+      "professional_reason": "Translates tax scenarios into the monthly number buyers budget for.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.preoffer_public_record_risk",
+      "label": "Pre-Offer Public-Record Review",
+      "description": "Identifies diligence questions before an offer without making legal conclusions.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "preoffer_public_record_risk",
+      "formula": "weighted(permit_gap, flood, environmental, title_constraint_stack)",
+      "professional_reason": "Identifies diligence questions before an offer without making legal conclusions.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.buyer_tax_reset_exposure",
+      "label": "Buyer Tax-Reset Exposure",
+      "description": "Turns assessment/tax relationships into buyer planning context.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "buyer_tax_reset_exposure",
+      "formula": "transaction_tax_shock_index",
+      "professional_reason": "Turns assessment/tax relationships into buyer planning context.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.seller_appeal_opportunity_signal",
+      "label": "Seller Appeal Opportunity Signal",
+      "description": "Helps agents recognize when a tax conversation deserves professional review.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "seller_appeal_opportunity_signal",
+      "formula": "appeal_opportunity_index * evidence_chain_completeness / 100",
+      "professional_reason": "Helps agents recognize when a tax conversation deserves professional review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.town_fiscal_story_score",
+      "label": "Town Fiscal Story Score",
+      "description": "Condenses sourced, non-demographic municipal finance context.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "town_fiscal_story_score",
+      "formula": "weighted(collection_rate, tax_base_growth, inverse_levy_base_gap)",
+      "professional_reason": "Condenses sourced, non-demographic municipal finance context.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.transaction_diligence_completion",
+      "label": "Transaction Diligence Completion",
+      "description": "Gives agents a transaction-research completion meter.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "transaction_diligence_completion",
+      "formula": "completed_public_record_checks / required_checks * 100",
+      "professional_reason": "Gives agents a transaction-research completion meter.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.property_story_confidence",
+      "label": "Property Story Confidence",
+      "description": "Shows whether the facts supporting a property brief are complete.",
+      "category": "broker intelligence",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "agent"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "property_story_confidence",
+      "formula": "weighted(source_authority_coverage, parcel_identity_confidence, record_completeness)",
+      "professional_reason": "Shows whether the facts supporting a property brief are complete.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.carry_cost_downside",
+      "label": "Carry-Cost Downside",
+      "description": "Screens holdings for adverse recurring-cost momentum.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "carry_cost_downside",
+      "formula": "weighted(tax_growth, levy_base_gap, escrow_volatility)",
+      "professional_reason": "Screens holdings for adverse recurring-cost momentum.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.municipal_concentration_risk",
+      "label": "Municipal Concentration Risk",
+      "description": "Exposes portfolio concentration in a single municipal fiscal context.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "municipal_concentration_risk",
+      "formula": "portfolio_value_in_municipality / portfolio_value * fiscal_stress",
+      "professional_reason": "Exposes portfolio concentration in a single municipal fiscal context.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.tax_base_absorption_risk",
+      "label": "Tax-Base Absorption Risk",
+      "description": "Flags levies rising faster than the equalized base.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "tax_base_absorption_risk",
+      "formula": "normalized(max(0, levy_growth - tax_base_growth))",
+      "professional_reason": "Flags levies rising faster than the equalized base.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.revaluation_reset_exposure",
+      "label": "Revaluation Reset Exposure",
+      "description": "Surfaces assets exposed to a valuation/reset event.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "revaluation_reset_exposure",
+      "formula": "revaluation_risk * assessment_ratio_gap",
+      "professional_reason": "Surfaces assets exposed to a valuation/reset event.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.regulatory_constraint_density",
+      "label": "Regulatory Constraint Density",
+      "description": "Provides a consistent cross-property regulatory screen.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor",
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "regulatory_constraint_density",
+      "formula": "distinct_constraint_layers / monitored_layers * 100",
+      "professional_reason": "Provides a consistent cross-property regulatory screen.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.capital_improvement_activity",
+      "label": "Capital Improvement Activity",
+      "description": "Uses public permit activity as reinvestment context.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "capital_improvement_activity",
+      "formula": "normalized(recent_permit_count)",
+      "professional_reason": "Uses public permit activity as reinvestment context.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.fiscal_trend_momentum",
+      "label": "Fiscal Trend Momentum",
+      "description": "Condenses multi-year municipal-finance direction for portfolios.",
+      "category": "investment",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "investor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "fiscal_trend_momentum",
+      "formula": "weighted(tax_base_CAGR - levy_CAGR, collection_rate_change)",
+      "professional_reason": "Condenses multi-year municipal-finance direction for portfolios.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.development_constraint_density",
+      "label": "Development Constraint Density",
+      "description": "Compares the public-record diligence burden across sites.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "development_constraint_density",
+      "formula": "distinct(site_constraint_layers) / monitored_layers * 100",
+      "professional_reason": "Compares the public-record diligence burden across sites.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.permitting_velocity",
+      "label": "Permitting Velocity",
+      "description": "Shows relative permit activity using reported DCA records.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "permitting_velocity",
+      "formula": "recent_permit_count / observation_months normalized",
+      "professional_reason": "Shows relative permit activity using reported DCA records.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.certificate_closure_rate",
+      "label": "Certificate Closure Rate",
+      "description": "Highlights permit-to-certificate lifecycle completion.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "certificate_closure_rate",
+      "formula": "closed_certificate_records / permit_records * 100",
+      "professional_reason": "Highlights permit-to-certificate lifecycle completion.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.regulatory_overlap_score",
+      "label": "Regulatory Overlap Score",
+      "description": "Identifies sites where mapped regulatory programs overlap.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "regulatory_overlap_score",
+      "formula": "weighted(highlands, pinelands, wetlands, water_protection, historic, open_space)",
+      "professional_reason": "Identifies sites where mapped regulatory programs overlap.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.site_water_constraint_score",
+      "label": "Site Water Constraint Score",
+      "description": "Condenses water-related site constraints for screening.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "site_water_constraint_score",
+      "formula": "weighted(wetlands, category1_water, wellhead, source_water, flood)",
+      "professional_reason": "Condenses water-related site constraints for screening.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.geology_complexity_score",
+      "label": "Geology Complexity Score",
+      "description": "Creates a first-pass geology diligence score from state mapping.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "geology_complexity_score",
+      "formula": "weighted(fill, acid_soil, mines, faults, landslides, aquifer_context)",
+      "professional_reason": "Creates a first-pass geology diligence score from state mapping.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.predevelopment_review_priority",
+      "label": "Predevelopment Review Priority",
+      "description": "Ranks sites for deeper review before design spend.",
+      "category": "development",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "contractor"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "predevelopment_review_priority",
+      "formula": "weighted(development_constraint_density, regulatory_overlap, water_constraint, geology_complexity)",
+      "professional_reason": "Ranks sites for deeper review before design spend.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.comparable_depth_score",
+      "label": "Comparable Depth Score",
+      "description": "Shows whether the public sales evidence base is deep enough for comparison.",
+      "category": "appraisal",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "comparable_depth_score",
+      "formula": "normalized(verified_sale_sample_size, recency, dispersion)",
+      "professional_reason": "Shows whether the public sales evidence base is deep enough for comparison.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.assessment_uniformity_reliability",
+      "label": "Assessment Uniformity Reliability",
+      "description": "Adds reliability context to municipal assessment ratios.",
+      "category": "appraisal",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "assessment_uniformity_reliability",
+      "formula": "weighted(inverse_COD, usable_sales, inverse_volatility)",
+      "professional_reason": "Adds reliability context to municipal assessment ratios.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.appraisal_record_completeness",
+      "label": "Appraisal Record Completeness",
+      "description": "Surfaces missing public-record inputs before valuation work.",
+      "category": "appraisal",
+      "scope": "property",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "professions": [
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "appraisal_record_completeness",
+      "formula": "present(appraisal_fields) / required_fields * 100",
+      "professional_reason": "Surfaces missing public-record inputs before valuation work.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.land_improvement_outlier",
+      "label": "Land/Improvement Outlier",
+      "description": "Flags unusual assessment composition for review.",
+      "category": "appraisal",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "land_improvement_outlier",
+      "formula": "percentile(abs(property_improvement_share - peer_median_share))",
+      "professional_reason": "Flags unusual assessment composition for review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.market_anchor_confidence",
+      "label": "Market Anchor Confidence",
+      "description": "States how strongly verified evidence supports the market anchor.",
+      "category": "appraisal",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "appraiser"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "market_anchor_confidence",
+      "formula": "weighted(comparable_depth, source_coverage, inverse_sale_dispersion)",
+      "professional_reason": "States how strongly verified evidence supports the market anchor.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.flood_context_severity",
+      "label": "Flood Context Severity",
+      "description": "Combines public flood mapping into a screening priority, not an insurance determination.",
+      "category": "risk",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "flood_context_severity",
+      "formula": "weighted(NFHL, tidal_CAFE, flood_plan, flood_profile_proximity)",
+      "professional_reason": "Combines public flood mapping into a screening priority, not an insurance determination.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.environmental_site_proximity",
+      "label": "Environmental Site Proximity",
+      "description": "Prioritizes environmental site review from state public records.",
+      "category": "risk",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "environmental_site_proximity",
+      "formula": "weighted(contaminated_500m, UST_250m, deed_notice, CEA)",
+      "professional_reason": "Prioritizes environmental site review from state public records.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.water_protection_overlap",
+      "label": "Water Protection Overlap",
+      "description": "Shows overlapping drinking-water/protection contexts relevant to risk review.",
+      "category": "risk",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "water_protection_overlap",
+      "formula": "weighted(wellhead_tier, source_water, sole_source_aquifer, category1_water)",
+      "professional_reason": "Shows overlapping drinking-water/protection contexts relevant to risk review.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.historic_property_constraint",
+      "label": "Historic Property Constraint",
+      "description": "Flags historic-resource mapping that may affect diligence.",
+      "category": "risk",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "historic_property_constraint",
+      "formula": "weighted(historic_property, historic_district, archaeological_screen, LOI)",
+      "professional_reason": "Flags historic-resource mapping that may affect diligence.",
+      "unit": "score / 100"
+    },
+    {
+      "id": "watchdog.physical_due_diligence_priority",
+      "label": "Physical Due-Diligence Priority",
+      "description": "Ranks properties for deeper physical/environmental review.",
+      "category": "risk",
+      "scope": "property",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "professions": [
+        "insurance"
+      ],
+      "source_id": "watchdog-institutional",
+      "field": "physical_due_diligence_priority",
+      "formula": "weighted(flood_context, environmental_proximity, water_overlap, geology_complexity)",
+      "professional_reason": "Ranks properties for deeper physical/environmental review.",
+      "unit": "score / 100"
+    }
+  ]
+}
