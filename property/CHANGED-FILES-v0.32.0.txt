@@ -1,0 +1,17 @@
+Watchdog v0.32.0 — Payment backend deployment and launch safety gate
+
+Updated files
+supabase/functions/create-checkout-session/index.ts
+supabase/functions/create-portal-session/index.ts
+supabase/functions/stripe-webhook/index.ts
+supabase/functions/BILLING-SETUP.md
+property/data/saas-production-readiness.json
+property/data/versions.json
+
+Live Supabase deployment
+create-checkout-session — authenticated, version 6
+create-portal-session — authenticated, version 1
+stripe-webhook — Stripe-signature authenticated, version 1
+
+Launch state
+Paid enrollment remains closed. BILLING_CHECKOUT_ENABLED must be exactly true on the server before Checkout can create a Stripe session.

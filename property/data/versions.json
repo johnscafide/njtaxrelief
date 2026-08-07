@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T22:10:00-04:00",
+  "updated_at": "2026-08-07T18:49:13-04:00",
   "releases": [
+    {
+      "version": "0.32.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T18:49:13-04:00",
+      "title": "Payment backend deployment and launch safety gate",
+      "category": "Revenue / billing infrastructure",
+      "status": "Backend deployed; Stripe activation pending",
+      "summary": "Deployed the complete Stripe billing backend to Supabase: authenticated Checkout, authenticated Customer Portal and a signature-verified public Stripe webhook. Checkout is now deny-by-default behind a server-only BILLING_CHECKOUT_ENABLED switch, missing Stripe configuration fails closed, and paid entitlements remain server-owned and synchronized only from verified Stripe subscription events. Public Pro and Pro+ CTAs remain early-access until test-mode lifecycle validation is complete.",
+      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
+      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/stripe-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"edge_functions_live": 3, "signed_billing_webhook": 1, "server_launch_gate": 1, "public_paid_enrollment": 0}
+    },
     {
       "version": "0.31.0",
       "date": "2026-08-07",

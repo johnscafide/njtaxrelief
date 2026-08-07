@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.23.0",
+  "version": "0.32.0",
   "goal": "Move Watchdog from a feature-rich prototype into a secure, billable, supportable professional SaaS product.",
   "readiness_score": {
-    "current": 42,
-    "summary": "Product depth is ahead of operating maturity. The next gains come from reliable billing, tested authorization, customer support and observable operations—not another large surface area."
+    "current": 48,
+    "summary": "Product depth is ahead of operating maturity. Checkout, Customer Portal and the signed billing webhook are now deployed behind a fail-closed server launch gate. The next revenue gate is Stripe test-mode product/price/webhook configuration plus full subscription lifecycle validation."
   },
   "phases": [
     {"target":55,"title":"Trustworthy core","focus":"Mobile clarity, entitlement QA, error recovery, first-run onboarding and a reviewed source-monitor baseline."},
@@ -15,8 +15,8 @@
   ],
   "items": [
     {"priority":"P0","area":"backend","capability":"Server-side entitlement source of truth","status":"foundation_shipped","detail":"Plan, profession and subscription state owned by the backend; client-side View As remains presentation only."},
-    {"priority":"P0","area":"revenue","capability":"Stripe Checkout + Customer Portal","status":"code_ready_enrollment_closed","detail":"Checkout and Portal foundations are implemented, but customer Pro/Pro+ enrollment is deliberately disabled. Pricing routes collect early access until Stripe test-mode validation and a deliberate launch flag."},
-    {"priority":"P0","area":"backend","capability":"Verified billing webhooks","status":"code_shipped_needs_test_mode_validation","detail":"Signed Stripe subscription/checkout webhook synchronizes server entitlements and records webhook IDs. Stripe test-mode lifecycle testing is still required before launch."},
+    {"priority":"P0","area":"revenue","capability":"Stripe Checkout + Customer Portal","status":"backend_deployed_launch_gate_closed","detail":"Authenticated Checkout and Customer Portal are live in Supabase. Checkout is fail-closed behind BILLING_CHECKOUT_ENABLED and public pricing still collects early-access interest until Stripe test-mode validation passes."},
+    {"priority":"P0","area":"backend","capability":"Verified billing webhooks","status":"deployed_needs_stripe_endpoint_and_test_validation","detail":"The unauthenticated Stripe webhook endpoint is live and verifies the raw signed request before syncing server-owned entitlements or writing its idempotency ledger. Stripe endpoint registration and test-mode lifecycle validation remain required before launch."},
     {"priority":"P0","area":"security","capability":"RLS coverage audit","status":"in_progress","detail":"Saved Data Center views now use ownership + Pro+ RLS; profile role/plan escalation is blocked and paid entitlement tables remain service-owned. Continue auditing every legacy customer table."},
     {"priority":"P0","area":"security","capability":"Authorization + action audit trail","status":"foundation_shipped","detail":"Log access decisions, exports, API actions, admin overrides and sensitive workflow events using service-owned writes."},
     {"priority":"P0","area":"data","capability":"Marker lineage + confidence contract","status":"refresh_contract_shipped_lineage_expanding","detail":"All 342 markers now have developer-visible source/dependency, cadence, trigger and refresh rules; marker detail pages expose refresh contracts. Formula/input lineage continues to expand."},

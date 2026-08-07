@@ -7,13 +7,18 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+  if (Deno.env.get('BILLING_CHECKOUT_ENABLED') !== 'true') {
+    return json({ error: 'Paid enrollment is not open yet' }, 503);
+  }
   const auth = req.headers.get('Authorization');
   if (!auth) return json({ error: 'Sign in required' }, 401);
 
   const url = Deno.env.get('SUPABASE_URL')!;
   const anon = Deno.env.get('SUPABASE_ANON_KEY')!;
   const service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-  const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!);
+  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  if (!stripeKey) return json({ error: 'Billing is not configured yet' }, 503);
+  const stripe = new Stripe(stripeKey);
   const userClient = createClient(url, anon, { global: { headers: { Authorization: auth } } });
   const admin = createClient(url, service);
   const { data: { user }, error: userError } = await userClient.auth.getUser();

@@ -16,7 +16,9 @@ Deno.serve(async (req) => {
   if (!user) return json({ error: 'Sign in required' }, 401);
   const { data: entitlement } = await admin.from('account_entitlements').select('provider_customer_id').eq('user_id', user.id).maybeSingle();
   if (!entitlement?.provider_customer_id) return json({ error: 'No billing account exists yet' }, 409);
-  const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!);
+  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  if (!stripeKey) return json({ error: 'Billing is not configured yet' }, 503);
+  const stripe = new Stripe(stripeKey);
   const session = await stripe.billingPortal.sessions.create({ customer: entitlement.provider_customer_id, return_url: 'https://njpropertytaxrelief.com/property/account.html' });
   await admin.from('access_audit_log').insert({ user_id: user.id, event_type: 'billing.portal_opened', resource_type: 'billing_customer', allowed: true });
   return json({ url: session.url });

@@ -1,7 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(Deno.env.get('STRIPE_SECRET_KEY')!);
 const cryptoProvider = Stripe.createSubtleCryptoProvider();
 const service = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
 const planForPrice = (price?: string | null) => price && price === Deno.env.get('STRIPE_PRICE_PRO_PLUS') ? 'pro_plus' : price && price === Deno.env.get('STRIPE_PRICE_PRO') ? 'pro' : null;
@@ -37,12 +36,16 @@ async function syncSubscription(sub: Stripe.Subscription) {
 
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  const webhookSecret = Deno.env.get('STRIPE_WEBHOOK_SIGNING_SECRET');
+  if (!stripeKey || !webhookSecret) return new Response('Billing webhook is not configured', { status: 503 });
+  const stripe = new Stripe(stripeKey);
   const signature = req.headers.get('stripe-signature');
   if (!signature) return new Response('Missing Stripe signature', { status: 400 });
   const body = await req.text();
   let event: Stripe.Event;
   try {
-    event = await stripe.webhooks.constructEventAsync(body, signature, Deno.env.get('STRIPE_WEBHOOK_SIGNING_SECRET')!, undefined, cryptoProvider);
+    event = await stripe.webhooks.constructEventAsync(body, signature, webhookSecret, undefined, cryptoProvider);
   } catch (error) {
     return new Response(`Invalid webhook: ${error instanceof Error ? error.message : 'unknown error'}`, { status: 400 });
   }
