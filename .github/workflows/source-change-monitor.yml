@@ -1,0 +1,55 @@
+name: NJ authoritative source monitor
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "7 */6 * * *"
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fingerprint official NJ sources
+        run: python3 property/scripts/monitor_nj_sources.py
+      - name: Read result
+        id: result
+        run: |
+          echo "changed=$(jq '.changed|length' property/data/source-monitor-report.json)" >> "$GITHUB_OUTPUT"
+          echo "errors=$(jq '.errors|length' property/data/source-monitor-report.json)" >> "$GITHUB_OUTPUT"
+          echo "baseline=$(jq -r '.baseline_missing' property/data/source-monitor-report.json)" >> "$GITHUB_OUTPUT"
+      - name: Preserve monitor report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nj-authoritative-source-monitor
+          path: property/data/source-monitor-report.json
+      - name: Accept fingerprint into review branch
+        if: steps.result.outputs.changed != '0' || steps.result.outputs.baseline == 'true'
+        run: python3 property/scripts/monitor_nj_sources.py --accept
+      - name: Create source-state review PR
+        if: steps.result.outputs.changed != '0' || steps.result.outputs.baseline == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          branch="automation/source-watch-$(date -u +%Y%m%d-%H%M%S)"
+          git config user.name "Watchdog Data Monitor"
+          git config user.email "actions@users.noreply.github.com"
+          git switch -c "$branch"
+          git add property/data/source-watch-state.json property/data/source-monitor-report.json
+          git commit -m "ops: review NJ source fingerprint change"
+          git push origin "$branch"
+          gh pr create --title "Data source monitor: review NJ publisher change" --body "An official source fingerprint changed (or the monitor is establishing its first baseline). This PR updates monitoring state only; it does not publish new tax data. Review the source and run the normal validated refresh before merging user-facing data." --base main --head "$branch"
+      - name: Open developer alert issue
+        if: steps.result.outputs.changed != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          count="${{ steps.result.outputs.changed }}"
+          gh issue create --title "NJ source update detected: $count source(s) need review" --body "The daily Watchdog source monitor detected a change at one or more authoritative publisher endpoints. Review the source-monitor artifact and the generated source-state PR. Do not publish changed data until its parser and coverage checks pass." --label "data-refresh" || gh issue create --title "NJ source update detected: $count source(s) need review" --body "Review the source-monitor artifact and generated PR."
+      - name: Fail visibly on source outages
+        if: steps.result.outputs.errors != '0'
+        run: |
+          echo "One or more authoritative endpoints could not be checked. Review the uploaded monitor report."
+          exit 1

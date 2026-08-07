@@ -104,7 +104,9 @@ def page_head(title: str, description: str, canonical: str, schema: dict, hero: 
   <meta property="og:type" content="website"><meta property="og:site_name" content="NJ Property Tax Relief">
   <meta property="og:title" content="{esc(title)}"><meta property="og:description" content="{esc(description)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{hero}">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="/towns/town-pages.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com"><link rel="stylesheet" href="/towns/town-pages.css?v=20260807a">
   <script type="application/ld+json">{json.dumps(schema, separators=(",", ":"))}</script>
 </head>'''
 
@@ -195,7 +197,7 @@ def directory_page(counties: dict[str, list[dict]], modified: str) -> str:
     total = sum(len(v) for v in counties.values())
     title = "New Jersey Property Tax Reports by Town | NJ Property Tax Relief"
     desc = f"Browse {total} New Jersey municipal property-tax reports. Find rate history, assessment context, relief links, and Property Watchdog research tools by town."
-    groups = "".join(f'<section class="tp-county-group"><h2><a href="/{slug(county)}/">{esc(county)} County</a></h2><div class="tp-town-grid">' + "".join(f'<a class="tp-town-card" href="/{esc(t["path"]) }"><span>{esc(t["name"])}</span><small>{esc(t["rate_label"])}</small><b>Open report →</b></a>' for t in towns) + '</div></section>' for county, towns in sorted(counties.items()))
+    groups = "".join(f'<section class="tp-county-group"><h2><a href="/towns/{slug(county)}/">{esc(county)} County</a></h2><div class="tp-town-grid">' + "".join(f'<a class="tp-town-card" href="/{esc(t["path"]) }"><span>{esc(t["name"])}</span><small>{esc(t["rate_label"])}</small><b>Open report →</b></a>' for t in towns) + '</div></section>' for county, towns in sorted(counties.items()))
     schema = {"@context": "https://schema.org", "@type": "CollectionPage", "name": title, "url": canonical, "description": desc, "dateModified": modified}
     return page_head(title, desc, canonical, schema, "https://images.unsplash.com/photo-1505843795480-5cfb3c03f6ff?auto=format&fit=crop&w=1800&q=85") + f'''<body>{nav()}<main><section class="tp-directory-hero"><div class="tp-wrap"><p class="tp-eyebrow">New Jersey property-tax research</p><h1>Find your town. Get the municipal context.</h1><p>{esc(desc)}</p><label class="tp-search"><span>Search all town reports</span><input id="townSearch" type="search" placeholder="Try Woodbury Heights, Newark, or Atlantic" autocomplete="off"></label></div></section><section class="tp-wrap tp-directory"><p class="tp-kicker">{total} municipal reports · {len(counties)} counties</p>{groups}</section></main>{footer()}<script>const i=document.getElementById('townSearch');i.addEventListener('input',()=>{{const q=i.value.toLowerCase().trim();document.querySelectorAll('.tp-town-card').forEach(c=>c.hidden=!!q&&!c.textContent.toLowerCase().includes(q));document.querySelectorAll('.tp-county-group').forEach(g=>g.hidden=!!q&&![...g.querySelectorAll('.tp-town-card')].some(c=>!c.hidden));}});</script></body></html>'''
 

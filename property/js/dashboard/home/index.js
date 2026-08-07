@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260806b';
+  var HOME_MODULE_VERSION = '20260807a';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -16,6 +16,7 @@
     'investor-screen': ['uniformity'],
     'investor-carry-volatility': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory', 'exempt-pilot-exposure'],
     'appeal-evidence-strength': ['uniformity'],
+    'appeal-opportunity': ['uniformity', 'appeal-evidence-strength'],
     'permit-lifecycle-intelligence': ['professional-due-diligence'],
     'real-estate-intelligence': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
     'professional-decision-signals': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
@@ -1499,7 +1500,7 @@
            'statutory calculation already assembled.',
       build: function (r) {
         var a = appealFor(r);
-        return (a ? appealBody(r, a) : '') + toolAppealEvidenceStrength(r) + toolAppealPacket(r);
+        return toolAppealOpportunity(r) + (a ? appealBody(r, a) : '') + toolAppealEvidenceStrength(r) + toolAppealPacket(r);
       },
       sum: function (r) {
         var a = appealFor(r);
@@ -1589,7 +1590,7 @@
     farmland: ['farmland-qualification'],
     reval: ['revaluation-radar'],
     town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure', 'exempt-pilot-exposure'],
-    file: ['appeal-packet', 'appeal-evidence-strength'],
+    file: ['appeal-opportunity', 'appeal-packet', 'appeal-evidence-strength'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs'],
     diligence: ['professional-due-diligence', 'permit-lifecycle-intelligence', 'professional-workflows'],

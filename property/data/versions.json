@@ -1,8 +1,84 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-05T20:39:19-04:00",
+  "updated_at": "2026-08-07T07:59:39-04:00",
   "releases": [
+    {
+      "version": "0.21.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T07:59:39-04:00",
+      "title": "Appeal Opportunity workflow and unified town-page design",
+      "category": "Appeals / product experience",
+      "status": "Completed",
+      "summary": "Launched the Watchdog Appeal Opportunity Index for per-property Pro triage, upgraded the municipality-wide Appeal Prospect Scanner into a true Pro+ workspace with entitlement-aware access and opportunity ranking, added the scanner to professional navigation, expanded the marker catalog to 343 fields, and aligned all 564 public town reports with Dashboard/Home typography, navy-teal palette, cards, spacing and mobile behavior.",
+      "links": [
+        "/property/home.html",
+        "/property/scan.html",
+        "/property/pro.html",
+        "/towns/",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/scan.html",
+        "property/js/scan.js",
+        "property/css/scan.css",
+        "property/js/dashboard/home/index.js",
+        "property/js/dashboard/tools/appeal-opportunity.js",
+        "property/css/dashboard/14-appeal-opportunity.css",
+        "property/sidemenu.html",
+        "property/pro.html",
+        "property/data/derived-marker-formulas.json",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "towns/town-pages.css",
+        "scripts/generate_town_pages.py",
+        "property/data/versions.json",
+        "property/updates.html"
+      ],
+      "impact": {
+        "html": 590,
+        "css": 3,
+        "javascript": 4,
+        "data": 4,
+        "navigation": 2,
+        "automation": 1
+      }
+    },
+    {
+      "version": "0.20.0",
+      "date": "2026-08-06",
+      "timestamp": "2026-08-06T12:00:00-04:00",
+      "title": "Statewide town-report publishing system",
+      "category": "Public discovery / municipality intelligence",
+      "status": "Completed",
+      "summary": "Added a generated public-report system for all 564 New Jersey municipalities, 21 county hubs, a searchable town directory, canonical metadata, answer-ready FAQs, structured data, rate and assessment context, Watchdog conversion paths, and statewide sitemap coverage. The pages regenerate from the local municipal datasets after each state-data refresh.",
+      "links": [
+        "/towns/",
+        "/property/",
+        "/anchor-estimator.html",
+        "/property/pro.html#plans"
+      ],
+      "files": [
+        "towns/",
+        "towns/town-pages.css",
+        "towns/town-manifest.json",
+        "scripts/generate_town_pages.py",
+        "scripts/verify_town_pages.py",
+        "sitemap.xml",
+        "nav.html",
+        "footer.html",
+        "property/sidemenu.html",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "html": 586,
+        "css": 1,
+        "javascript": 1,
+        "data": 1,
+        "navigation": 3,
+        "automation": 2
+      }
+    },
     {
       "version": "0.19.0",
       "date": "2026-08-05",
@@ -860,12 +936,14 @@
     },
     {
       "priority": 5,
-      "title": "Appeal Evidence Strength",
-      "readiness": "Core shipped in v0.17.0; comp-quality expansion next",
+      "title": "Appeal Opportunity & Case Workspace",
+      "readiness": "Opportunity Index and Pro+ municipality scanner shipped in v0.21.0; saved case workflow next",
       "effort": "Large",
       "category": "Attorney / appraiser",
-      "why": "Measure whether an appeal has evidence quality, not just apparent overassessment.",
+      "why": "Move from apparent overassessment to a sourced professional case workflow: opportunity triage first, evidence quality second, then verified comparables, deadlines and a saved working file.",
       "deliverables": [
+        "Watchdog Appeal Opportunity Index",
+        "municipality-wide Pro+ prospect ranking",
         "comparable count",
         "comparable recency",
         "distance dispersion",
@@ -873,7 +951,8 @@
         "Chapter 123 margin",
         "county outcome prior",
         "uniformity context",
-        "evidence strength score"
+        "evidence strength score",
+        "saved case workspace and deadline status"
       ]
     },
     {
@@ -982,16 +1061,17 @@
     {
       "priority": 12,
       "title": "Static town report landing pages",
-      "readiness": "Back burner",
+      "readiness": "564 municipality reports shipped in v0.20.0; Dashboard/Home visual alignment shipped in v0.21.0",
       "effort": "Large",
       "category": "Growth",
-      "why": "Growth pages remain behind data depth and professional utility.",
+      "why": "The statewide discovery layer is live and generated from the same municipal data as Watchdog; ongoing work is source refresh, internal linking, conversion measurement and search-quality iteration.",
       "deliverables": [
         "town page generator",
         "internal linking",
         "structured data",
         "annual refresh",
-        "lead path"
+        "lead path",
+        "search performance measurement"
       ]
     },
     {

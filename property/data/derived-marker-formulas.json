@@ -1,10 +1,11 @@
 {
   "schema_version": 1,
-  "version": "0.18.0",
+  "version": "0.21.0",
   "principle": "Every proprietary score exposes its component inputs and weights. Scores support prioritization; they are not legal, appraisal, credit, investment or transaction outcomes.",
   "markers": {
     "watchdog.investor_carry_cost_volatility": {"range":"0-100; higher means more tax-driven carry uncertainty","formula":"32% municipal budget pressure + 24% positive levy/ratable growth gap + 22% revaluation pressure + 14% positive tax-rate CAGR + 8% exempt/PILOT exposure"},
     "watchdog.appeal_evidence_strength": {"range":"0-100; higher means a stronger evidence file","formula":"25% independent value anchor + 20% Chapter 123 margin + 18% verified comparable depth + 14% assessment-uniformity context + 10% county outcome context + 13% property-record completeness"},
+    "watchdog.appeal_opportunity_index": {"range":"0-100 opportunity with separate 0-100 evidence coverage; higher means stronger current review priority","formula":"Available-input normalized: 35% Chapter 123 position + 25% evidence-file strength + 15% inverse assessment consistency + 10% county appeal outcome context + 15% estimated annual dollars at stake. Missing inputs reduce evidence coverage instead of counting as negative evidence."},
     "watchdog.permit_lifecycle_score": {"range":"0-100; higher means more permit lifecycle review","formula":"Up to 45 points stale open permits + 25 open permit/certificate gaps + 20 oldest-open age + 10 recent permit frequency"},
     "watchdog.listing_friction_index": {"range":"0-100 risk","formula":"23% budget pressure + 23% revaluation pressure + 18% assessment unevenness + 18% tax-rate trend + 18% appeal/assessment tension"},
     "watchdog.tax_carry_advantage": {"range":"0-100 advantage","formula":"Inverse normalized effective property-tax burden using current tax divided by independent market-value estimate"},

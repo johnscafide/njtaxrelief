@@ -148,6 +148,7 @@
 .pp-data-row b { display: block; font-size: 15px; margin-bottom: 3px; }
 .pp-data-row p { color: var(--pp-muted); font-size: 12.5px; line-height: 1.5; margin: 0; }
 .pp-data-row em { color: var(--pp-muted); font-family: "DM Mono", monospace; font-size: 9px; font-style: normal; text-transform: uppercase; white-space: nowrap; }
+.pp-data-row a,.pp-inline-link{color:var(--pp-teal);font-size:11px;font-weight:800;text-decoration:none}.pp-data-row a{display:inline-block;margin-top:5px}.pp-inline-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px}.pp-data-row a:hover,.pp-inline-link:hover{text-decoration:underline}
 
 /* Teams */
 .pp-teams { background: var(--pp-navy); color: #fff; padding: 80px 0; }
@@ -225,7 +226,7 @@
         </div>
       </div>
       <div class="pp-proof" aria-label="Dataset coverage">
-        <div class="pp-proof-row"><b>565</b><span>NJ municipalities</span></div>
+        <div class="pp-proof-row"><b>564</b><span>NJ municipalities</span></div>
         <div class="pp-proof-row"><b>131,244+</b><span>Verified sales indexed</span></div>
         <div class="pp-proof-row"><b>21</b><span>County jurisdictions</span></div>
         <div class="pp-proof-row"><b>1,000+</b><span>Records per Pro+ workflow</span></div>
@@ -299,6 +300,7 @@
             <li>Webhooks and scheduled data delivery</li>
             <li>Priority data and technical support</li>
           </ul>
+          <a class="pp-inline-link" href="/property/scan.html">Open Appeal Prospect Scanner <i class="fas fa-arrow-right"></i></a>
         </article>
 
         <article class="pp-plan">
@@ -362,7 +364,7 @@
         </div>
         <div class="pp-data-list">
           <div class="pp-data-row"><span>01</span><div><b>Assessment drift</b><p>Longitudinal change built from Watchdog snapshots when a parcel’s assessment or bill moves.</p></div><em>Exclusive</em></div>
-          <div class="pp-data-row"><span>02</span><div><b>Appeal opportunity ranking</b><p>Parcels ordered by evidence strength and estimated annual dollars at stake.</p></div><em>Exclusive</em></div>
+          <div class="pp-data-row"><span>02</span><div><b>Appeal opportunity ranking</b><p>The Watchdog Appeal Opportunity Index ranks parcels by Chapter 123 position, evidence quality, assessment consistency, county context and annual dollars at stake.</p><a href="/property/scan.html">Open municipality scanner →</a></div><em>Exclusive</em></div>
           <div class="pp-data-row"><span>03</span><div><b>Assessment uniformity context</b><p>Municipal consistency measures connected directly to the subject property and its jurisdiction.</p></div><em>Derived</em></div>
           <div class="pp-data-row"><span>04</span><div><b>Tax burden percentile</b><p>Where a property sits against comparable residential parcels in its municipality.</p></div><em>Derived</em></div>
           <div class="pp-data-row"><span>05</span><div><b>Town structural profile</b><p>Residential, commercial, industrial, apartment, and exempt-base composition.</p></div><em>Derived</em></div>

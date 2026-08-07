@@ -1,1069 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Properties | NJ Property Tax Relief</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="https://njpropertytaxrelief.com/property/dashboard.html">
-<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="shortcut icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="/styles.css">
-<link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805c">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-</head>
-<body data-sidebar-page="dashboard">
-<!-- <nav id="main-nav"></nav> -->
-<div class="pl-toast" id="pl-toast"></div>
-<div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Dashboard | NJ Property Tax Relief</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Dashboard-Specific UI Overrides */
+        body { background-color: #f4f7f9; }
+        
+        .dash-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 30px;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
 
-<section class="gate" id="db-gate">
-  <div class="gate-mark"><i class="fas fa-dog"></i></div>
-  <span class="gate-kicker">Watchdog workspace</span>
-  <h1>Your property intelligence, in one place.</h1>
-  <p>Track assessments, tax bills, appeal signals, estimated value and available relief for every property you care about.</p>
-  <div class="gate-actions">
-    <button class="db-btn" onclick="plSignInPrompt()"><i class="fas fa-right-to-bracket"></i> Sign in to your workspace</button>
-    <a class="gate-back" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up a property</a>
+        /* Robinhood-Style Watchlist (The Legend) */
+        .watchlist-card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 25px;
+            border: 1px solid var(--border);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .watchlist-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .add-prop-btn {
+            background: var(--navy);
+            color: #fff;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .add-prop-btn:hover { background: var(--gold); transform: scale(1.1); }
+
+        .watch-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f9f9f9;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .watch-item:hover { background: #fcfcfc; padding-left: 5px; }
+
+        .watch-addr { font-weight: 700; font-size: 14px; color: var(--navy); display: block; }
+        .watch-meta { font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+        
+        .watch-stats { text-align: right; }
+        .watch-price { font-weight: 800; font-size: 15px; color: var(--navy); }
+        .watch-trend { font-size: 12px; font-weight: 600; margin-top: 2px; }
+        .watch-trend.up { color: var(--green); }
+        .watch-trend.down { color: #ff4d4d; }
+
+        /* Main Content Cards */
+        .main-dash-content { display: flex; flex-direction: column; gap: 25px; }
+        
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .mini-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .mini-label { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px; }
+        .mini-value { font-size: 28px; font-weight: 800; margin: 10px 0; color: var(--navy); }
+
+        @media (max-width: 992px) {
+            .dash-layout { grid-template-columns: 1fr; margin-top: 20px; }
+            .watchlist-card { position: static; order: 2; }
+        }
+    </style>
+</head>
+<body>
+
+<nav id="main-nav"></nav>
+
+<div class="hero" style="padding: 80px 24px; background: var(--navy-dark); border-bottom: 4px solid var(--gold);">
+  <div class="hero-inner">
+    <h1 style="color:#fff;">Member <span>Dashboard</span></h1>
+    <p style="color: rgba(255,255,255,0.8);">Real-time property monitoring and tax relief tracking.</p>
   </div>
-  <div class="gate-trust"><i class="fas fa-shield-halved"></i> Passwordless sign-in. Your saved properties and profile are private.</div>
+</div>
+
+<section class="section">
+    <div class="section-inner">
+        
+        <div class="dash-layout">
+            
+            <div class="main-dash-content">
+                
+                <div class="stats-row">
+                    <div class="mini-card">
+                        <div class="mini-label">Overall Probability</div>
+                        <div class="mini-value" style="color: var(--green);">82%</div>
+                        <span class="quiz-badge">High Success</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-label">Total Est. Savings</div>
+                        <div class="mini-value">$2,150</div>
+                        <span style="font-size:11px; color:var(--text-muted);">Annual potential</span>
+                    </div>
+                    <div class="mini-card">
+                        <div class="mini-label">Next Deadline</div>
+                        <div class="mini-value" style="font-size: 22px;">May 1st</div>
+                        <button class="btn-outline" style="padding: 5px 10px; font-size: 10px;" onclick="syncCalendar()">Sync Google Cal</button>
+                    </div>
+                </div>
+
+                <div class="dash-card">
+                    <h3 style="margin-bottom:20px;"><i class="fas fa-bullhorn" style="color:var(--gold);"></i> Watchdog Market Feed</h3>
+                    <div class="timeline">
+                        <li class="active">
+                            <span class="date">May 1, 2026</span>
+                            <strong>Stay NJ Application Portal Open</strong>
+                            <p>Verify your income requirements for the 2026 senior tax credit. John has updated the PAS-1 checklist in your resources.</p>
+                        </li>
+                        <li>
+                            <span class="date">Oct 15, 2026</span>
+                            <strong>ANCHOR Benefit Confirmation</strong>
+                            <p>Expected date for the next round of state confirmation letters.</p>
+                        </li>
+                    </div>
+                </div>
+
+                <div class="prog-card-new gold">
+                    <h3>Quick Town Lookup</h3>
+                    <p>Access tax collector info for any municipality in your portfolio.</p>
+                    <a href="resources.html" class="btn-primary" style="margin-top:15px; display:inline-block;">Search Town Directory</a>
+                </div>
+            </div>
+
+            <aside class="watchlist-card">
+                <div class="watchlist-header">
+                    <h3 style="font-size: 18px; color: var(--navy);"><i class="fas fa-list-ul"></i> My Properties</h3>
+                    <button class="add-prop-btn" onclick="openAddProperty()"><i class="fas fa-plus"></i></button>
+                </div>
+
+                <div id="add-prop-form" style="display:none; background:#f8fafc; padding:15px; border-radius:8px; margin-bottom:20px;">
+                    <input type="text" id="prop-input" placeholder="Address..." style="width:100%; padding:10px; border-radius:5px; border:1px solid #ddd; margin-bottom:10px;">
+                    <button class="btn-primary" style="width:100%; font-size:12px;" onclick="addPropertyToWatchlist()">Monitor Property</button>
+                </div>
+
+                <div id="watchlist-items">
+                    <div class="watch-item">
+                        <div class="watch-info">
+                            <span style="font-size:9px; background:var(--navy); color:#fff; padding:2px 5px; border-radius:3px; text-transform:uppercase;">Primary</span>
+                            <span class="watch-addr">11 Dalton Place</span>
+                            <span class="watch-meta">Sicklerville, NJ</span>
+                        </div>
+                        <div class="watch-stats">
+                            <div class="watch-price">$350,000</div>
+                            <div class="watch-trend up"><i class="fas fa-caret-up"></i> 2.4%</div>
+                        </div>
+                    </div>
+
+                    <div class="watch-item">
+                        <div class="watch-info">
+                            <span class="watch-addr">45 Blue Anchor Rd</span>
+                            <span class="watch-meta">Winslow, NJ</span>
+                        </div>
+                        <div class="watch-stats">
+                            <div class="watch-price">$412,000</div>
+                            <div class="watch-trend down"><i class="fas fa-caret-down"></i> 0.8%</div>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+        </div>
+    </div>
 </section>
 
-<main id="db-main" style="display:none;">
-
-  <div class="db-shell">
-    <div id="property-side-menu" aria-live="polite"></div>
-
-    <div class="db-workspace">
-      <header class="top">
-        <div class="top-in">
-          <div class="who">
-            <div id="db-avatar"></div>
-            <div>
-              <span class="top-eyebrow">Dashboard</span>
-              <h1 id="db-hi">Your properties</h1>
-              <span id="db-email"></span>
-          <div class="db-stat" id="db-stat"></div>
-            </div>
-          </div>
-          <div class="top-acts">
-            <div class="vwset" aria-label="Dashboard view">
-              <button class="vw on" data-v="simple" onclick="dbView('simple')"><i class="fas fa-border-all"></i> Standard</button>
-              <button class="vw" data-v="pro" onclick="dbView('pro')"><i class="fas fa-table-list"></i> Pro</button>
-            </div>
-            <a class="db-add" href="/property/" aria-label="Add property"><i class="fas fa-plus"></i>
-              <span class="db-add-full">Add property</span><span class="db-add-short">Add</span>
-            </a>
-          </div>
-        </div>
-      </header>
-
-      <div class="wrap" id="db-panel-main">
-        <div id="db-brief"></div>
-        <div id="db-line"></div>
-        <div id="db-body"></div>
-      </div>
-
-      <div class="wrap" id="db-profile" style="display:none;">
-        <div class="db-page-head">
-          <div><span>Account settings</span><h2>Profile &amp; benefit details</h2></div>
-          <p>Optional information personalizes benefit estimates and property guidance. It is never sold or shared.</p>
-        </div>
-        <div id="db-profile-body"></div>
-      </div>
-    </div>
-  </div>
-
-</main>
-
-<div id="compare-tray-root" aria-live="polite"></div>
-
-<div class="mobile-intel-overlay" id="mobile-intel-overlay" aria-hidden="true"
-  onclick="if(event.target===this)dbIntelClose()">
-  <section class="mobile-intel-sheet" role="dialog" aria-modal="true" aria-labelledby="mobile-intel-title">
-    <div class="mobile-intel-bar" aria-hidden="true"></div>
-    <button class="mobile-intel-close" type="button" onclick="dbIntelClose()" aria-label="Close Agent Intel">
-      <i class="fas fa-xmark"></i>
-    </button>
-    <div id="mobile-intel-content"></div>
-  </section>
-</div>
-
-<button class="db-to-top" id="db-to-top" type="button" onclick="dbScrollTop()" aria-label="Back to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
-
-<!-- ============================================================
-     WATCHDOG FOOTER
-     Self-contained HTML and CSS
-     ============================================================ -->
-
-<style>
-    /*
-     * Everything is scoped beneath #wd-property-footer.
-     * This prevents /styles.css from changing the footer layout.
-     */
-
-    #wd-property-footer {
-        --wdf-teal: #078486;
-        --wdf-teal-dark: #056b6d;
-        --wdf-navy: #10294b;
-        --wdf-heading: #142c31;
-        --wdf-text: #5c686b;
-        --wdf-border: #dde5e5;
-        --wdf-soft-bg: #f3f7f6;
-        --wdf-background: #fbfcfb;
-
-        background: var(--wdf-background);
-        border: 0;
-        border-top: 1px solid var(--wdf-border);
-        border-radius: 0;
-        box-shadow: none;
-        clear: both;
-        color: var(--wdf-text);
-        display: block;
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        letter-spacing: normal;
-        line-height: 1.5;
-        margin: 0;
-        max-width: none;
-        min-height: 0;
-        overflow: hidden;
-        padding: 58px 30px 25px;
-        position: relative;
-        text-align: left;
-        text-transform: none;
-        width: 100%;
-    }
-
-    #wd-property-footer,
-    #wd-property-footer * {
-        box-sizing: border-box;
-    }
-
-    #wd-property-footer .wdf-inner {
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        margin: 0 auto;
-        max-width: 1680px;
-        padding: 0;
-        width: 100%;
-    }
-
-    /*
-     * Main four-column layout
-     */
-    #wd-property-footer .wdf-grid {
-        align-items: start;
-        background: transparent;
-        display: grid;
-        gap: 52px;
-        grid-template-columns:
-            minmax(165px, 0.78fr)
-            minmax(190px, 0.9fr)
-            minmax(190px, 0.9fr)
-            minmax(430px, 2.2fr);
-        margin: 0;
-        padding: 0;
-        width: 100%;
-    }
-
-    /*
-     * Navigation columns
-     */
-    #wd-property-footer .wdf-column {
-        align-items: flex-start;
-        background: transparent;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        float: none;
-        height: auto;
-        margin: 0;
-        min-height: 0;
-        padding: 0;
-        position: static;
-        width: auto;
-    }
-
-    #wd-property-footer .wdf-heading {
-        background: transparent;
-        border: 0;
-        color: var(--wdf-text);
-        display: block;
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 21px;
-        font-style: normal;
-        font-weight: 500;
-        letter-spacing: 0;
-        line-height: 1.25;
-        margin: 0 0 20px;
-        padding: 0;
-        text-align: left;
-        text-transform: none;
-    }
-
-    #wd-property-footer .wdf-subheading {
-        margin-top: 28px;
-    }
-
-    #wd-property-footer .wdf-link {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        border-radius: 0;
-        box-shadow: none;
-        color: #101515;
-        display: inline-flex;
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 700;
-        gap: 9px;
-        justify-content: flex-start;
-        letter-spacing: 0;
-        line-height: 1.4;
-        margin: 0 0 16px;
-        max-width: 100%;
-        padding: 0;
-        position: static;
-        text-align: left;
-        text-decoration: none;
-        text-transform: none;
-        transform: none;
-        transition: color 0.18s ease;
-        width: auto;
-    }
-
-    #wd-property-footer .wdf-link:hover,
-    #wd-property-footer .wdf-link:focus-visible {
-        background: transparent;
-        color: var(--wdf-teal);
-        text-decoration: underline;
-        text-underline-offset: 4px;
-        transform: none;
-    }
-
-    #wd-property-footer .wdf-featured {
-        color: var(--wdf-teal);
-    }
-
-    #wd-property-footer .wdf-link i {
-        color: var(--wdf-teal);
-        flex: 0 0 18px;
-        font-size: 14px;
-        text-align: center;
-        width: 18px;
-    }
-
-    /*
-     * Social icons
-     */
-    #wd-property-footer .wdf-social {
-        align-items: center;
-        background: transparent;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin: 4px 0 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-social-link {
-        align-items: center;
-        background: transparent;
-        border: 1px solid #b8c8c8;
-        border-radius: 50%;
-        box-shadow: none;
-        color: var(--wdf-teal);
-        display: inline-flex;
-        flex: 0 0 38px;
-        height: 38px;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-        transform: none;
-        transition:
-            background-color 0.18s ease,
-            border-color 0.18s ease,
-            color 0.18s ease;
-        width: 38px;
-    }
-
-    #wd-property-footer .wdf-social-link:hover,
-    #wd-property-footer .wdf-social-link:focus-visible {
-        background: var(--wdf-teal);
-        border-color: var(--wdf-teal);
-        color: #fff;
-        text-decoration: none;
-        transform: none;
-    }
-
-    #wd-property-footer .wdf-social-link i {
-        color: inherit;
-        font-size: 15px;
-        height: auto;
-        margin: 0;
-        padding: 0;
-        width: auto;
-    }
-
-    /*
-     * Branding and legal column
-     */
-    #wd-property-footer .wdf-brand {
-        background: transparent;
-        border: 0;
-        border-left: 1px solid var(--wdf-border);
-        border-radius: 0;
-        box-shadow: none;
-        margin: 0;
-        min-width: 0;
-        padding: 0 0 0 52px;
-    }
-
-    #wd-property-footer .wdf-logo {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        display: inline-flex;
-        gap: 14px;
-        margin: 0 0 24px;
-        padding: 0;
-        text-decoration: none;
-        transform: none;
-    }
-
-    #wd-property-footer .wdf-logo:hover {
-        background: transparent;
-        text-decoration: none;
-        transform: none;
-    }
-
-    #wd-property-footer .wdf-logo-icon {
-        align-items: center;
-        background: var(--wdf-teal);
-        border: 0;
-        border-radius: 50%;
-        color: #fff;
-        display: inline-flex;
-        flex: 0 0 52px;
-        height: 52px;
-        justify-content: center;
-        margin: 0;
-        padding: 0;
-        width: 52px;
-    }
-
-    #wd-property-footer .wdf-logo-icon i {
-        color: #fff;
-        font-size: 23px;
-        margin: 0;
-    }
-
-    #wd-property-footer .wdf-logo-copy {
-        background: transparent;
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-logo-name {
-        color: #101515;
-        display: block;
-        font-family: "Plus Jakarta Sans", Arial, sans-serif;
-        font-size: 23px;
-        font-weight: 800;
-        letter-spacing: -0.7px;
-        line-height: 1.05;
-        margin: 0;
-        padding: 0;
-        text-transform: uppercase;
-    }
-
-    #wd-property-footer .wdf-logo-name span {
-        color: var(--wdf-teal);
-    }
-
-    #wd-property-footer .wdf-tagline {
-        color: var(--wdf-text);
-        display: block;
-        font-family: "Plus Jakarta Sans", Arial, sans-serif;
-        font-size: 10px;
-        font-weight: 800;
-        letter-spacing: 1.35px;
-        line-height: 1.4;
-        margin: 6px 0 0;
-        padding: 0;
-        text-transform: uppercase;
-    }
-
-    #wd-property-footer .wdf-description {
-        color: var(--wdf-text);
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 1.65;
-        margin: 0 0 23px;
-        max-width: 760px;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-legal {
-        background: transparent;
-        color: var(--wdf-text);
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 12.5px;
-        font-weight: 400;
-        line-height: 1.55;
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-legal p {
-        background: transparent;
-        color: var(--wdf-text);
-        font-family: inherit;
-        font-size: 12.5px;
-        font-weight: 400;
-        line-height: 1.55;
-        margin: 0 0 12px;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-legal strong {
-        color: var(--wdf-heading);
-        font-weight: 700;
-    }
-
-    #wd-property-footer .wdf-inline-link {
-        background: transparent;
-        color: var(--wdf-teal);
-        display: inline;
-        font-size: inherit;
-        font-weight: 700;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
-
-    #wd-property-footer .wdf-inline-link:hover,
-    #wd-property-footer .wdf-inline-link:focus-visible {
-        color: var(--wdf-teal-dark);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-
-    /*
-     * Legal links
-     */
-    #wd-property-footer .wdf-legal-links {
-        align-items: center;
-        background: transparent;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px 22px;
-        margin: 18px 0 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-legal-link {
-        background: transparent;
-        border: 0;
-        color: var(--wdf-teal);
-        display: inline;
-        font-size: 12.5px;
-        font-weight: 700;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
-
-    #wd-property-footer .wdf-legal-link:hover,
-    #wd-property-footer .wdf-legal-link:focus-visible {
-        color: var(--wdf-teal-dark);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-
-    /*
-     * Fair Housing notice
-     */
-    #wd-property-footer .wdf-housing {
-        align-items: flex-start;
-        background: var(--wdf-soft-bg);
-        border: 0;
-        border-left: 4px solid var(--wdf-teal);
-        border-radius: 4px;
-        box-shadow: none;
-        display: flex;
-        gap: 13px;
-        margin: 21px 0 0;
-        padding: 15px 17px;
-    }
-
-    #wd-property-footer .wdf-housing-icon {
-        color: var(--wdf-teal);
-        flex: 0 0 25px;
-        font-size: 23px;
-        margin-top: 2px;
-        text-align: center;
-        width: 25px;
-    }
-
-    #wd-property-footer .wdf-housing p {
-        color: var(--wdf-heading);
-        font-family: "Plus Jakarta Sans", Arial, sans-serif;
-        font-size: 11.5px;
-        font-weight: 800;
-        letter-spacing: 0;
-        line-height: 1.45;
-        margin: 0;
-        padding: 0;
-        text-transform: uppercase;
-    }
-
-    /*
-     * Copyright bar
-     */
-    #wd-property-footer .wdf-bottom {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        border-top: 1px solid var(--wdf-border);
-        box-shadow: none;
-        display: flex;
-        gap: 30px;
-        justify-content: space-between;
-        margin: 42px 0 0;
-        padding: 22px 0 0;
-    }
-
-    #wd-property-footer .wdf-copyright {
-        color: var(--wdf-text);
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 1.5;
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-bottom-links {
-        align-items: center;
-        background: transparent;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 20px;
-        justify-content: flex-end;
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-footer .wdf-bottom-link {
-        background: transparent;
-        border: 0;
-        color: var(--wdf-teal);
-        display: inline;
-        font-size: 12px;
-        font-weight: 700;
-        margin: 0;
-        padding: 0;
-        text-decoration: none;
-    }
-
-    #wd-property-footer .wdf-bottom-link:hover,
-    #wd-property-footer .wdf-bottom-link:focus-visible {
-        color: var(--wdf-teal-dark);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-
-    /*
-     * Tablet
-     */
-    @media (max-width: 1120px) {
-        #wd-property-footer .wdf-grid {
-            grid-template-columns: repeat(3, minmax(170px, 1fr));
-            gap: 42px;
-        }
-
-        #wd-property-footer .wdf-brand {
-            border-left: 0;
-            border-top: 1px solid var(--wdf-border);
-            grid-column: 1 / -1;
-            padding: 38px 0 0;
-        }
-    }
-
-    /*
-     * Small tablet
-     */
-    @media (max-width: 760px) {
-        #wd-property-footer {
-            padding: 45px 22px 24px;
-        }
-
-        #wd-property-footer .wdf-grid {
-            grid-template-columns: repeat(2, minmax(145px, 1fr));
-            gap: 38px 28px;
-        }
-
-        #wd-property-footer .wdf-brand {
-            grid-column: 1 / -1;
-        }
-
-        #wd-property-footer .wdf-bottom {
-            align-items: flex-start;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        #wd-property-footer .wdf-bottom-links {
-            justify-content: flex-start;
-        }
-    }
-
-    /*
-     * Mobile
-     */
-    @media (max-width: 540px) {
-        #wd-property-footer {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        #wd-property-footer .wdf-grid {
-            grid-template-columns: 1fr;
-            gap: 34px;
-        }
-
-        #wd-property-footer .wdf-brand {
-            grid-column: auto;
-        }
-
-        #wd-property-footer .wdf-logo {
-            align-items: flex-start;
-        }
-
-        #wd-property-footer .wdf-logo-icon {
-            flex-basis: 46px;
-            height: 46px;
-            width: 46px;
-        }
-
-        #wd-property-footer .wdf-logo-icon i {
-            font-size: 20px;
-        }
-
-        #wd-property-footer .wdf-logo-name {
-            font-size: 19px;
-        }
-
-        #wd-property-footer .wdf-tagline {
-            font-size: 9px;
-            letter-spacing: 1px;
-        }
-    }
-</style>
-
-<div
-    id="wd-property-footer"
-    role="contentinfo"
-    aria-label="Watchdog website footer"
->
-    <div class="wdf-inner">
-
-        <div class="wdf-grid">
-
-            <!-- TAX RELIEF -->
-            <div
-                class="wdf-column"
-                role="navigation"
-                aria-label="Property tax relief links"
-            >
-                <h2 class="wdf-heading">Tax Relief</h2>
-
-                <a
-                    href="/anchor-estimator.html"
-                    class="wdf-link wdf-featured"
-                >
-                    Free Benefit Calculator
-                </a>
-
-                <a href="/anchor-program.html" class="wdf-link">
-                    ANCHOR Program
-                </a>
-
-                <a href="/senior-programs.html" class="wdf-link">
-                    Stay NJ &amp; Senior Freeze
-                </a>
-
-                <a href="/veterans-benefits.html" class="wdf-link">
-                    Veterans Benefits
-                </a>
-
-                <a href="/pas-1-guide.html" class="wdf-link">
-                    PAS-1 Filing Guide
-                </a>
-
-                <a href="/property-tax-appeal.html" class="wdf-link">
-                    Property Tax Appeals
-                </a>
-
-                <a href="/tax-calendar.html" class="wdf-link">
-                    Tax Calendar
-                </a>
-            </div>
-
-            <!-- HOMEOWNER TOOLS -->
-            <div
-                class="wdf-column"
-                role="navigation"
-                aria-label="Homeowner tools"
-            >
-                <h2 class="wdf-heading">Homeowner Tools</h2>
-
-                <a href="/property/" class="wdf-link wdf-featured">
-                    Property Tax Lookup
-                </a>
-
-                <a href="/resources.html" class="wdf-link">
-                    Resources &amp; Terminology
-                </a>
-
-                <a href="/guides.html" class="wdf-link">
-                    Free Downloadable Guides
-                </a>
-
-                <a
-                    href="/home-improvement-abatement.html"
-                    class="wdf-link"
-                >
-                    Renovation Tax Savings
-                </a>
-
-                <a href="/mortgage-calculator.html" class="wdf-link">
-                    Mortgage Calculator
-                </a>
-
-                <a href="/home-value.html" class="wdf-link">
-                    Home Value Estimator
-                </a>
-
-                <a href="/search-homes.html" class="wdf-link">
-                    Search Homes
-                </a>
-
-                <a href="/property/dashboard.html" class="wdf-link">
-                    My Properties
-                </a>
-
-                <a href="/property/pro.html" class="wdf-link">
-                    Pro Hub
-                </a>
-            </div>
-
-            <!-- SOUTH JERSEY AND CONTACT -->
-            <div>
-                <div
-                    class="wdf-column"
-                    role="navigation"
-                    aria-label="South Jersey county resources"
-                >
-                    <h2 class="wdf-heading">South Jersey</h2>
-
-                    <a href="/camden-county.html" class="wdf-link">
-                        Camden County
-                    </a>
-
-                    <a href="/gloucester-county.html" class="wdf-link">
-                        Gloucester County
-                    </a>
-
-                    <a href="/burlington-county.html" class="wdf-link">
-                        Burlington County
-                    </a>
-
-                    <a href="/atlantic-county.html" class="wdf-link">
-                        Atlantic County
-                    </a>
-
-                    <a href="/salem-county.html" class="wdf-link">
-                        Salem County
-                    </a>
-                </div>
-
-                <div
-                    class="wdf-column"
-                    role="navigation"
-                    aria-label="Contact Watchdog"
-                >
-                    <h2 class="wdf-heading wdf-subheading">Find Us</h2>
-
-                    <a href="/#contact" class="wdf-link">
-                        <i
-                            class="fas fa-envelope"
-                            aria-hidden="true"
-                        ></i>
-                        Contact Us
-                    </a>
-
-                    <a href="tel:+18564041098" class="wdf-link">
-                        <i
-                            class="fas fa-phone"
-                            aria-hidden="true"
-                        ></i>
-                        856-404-1098
-                    </a>
-
-                    <a
-                        href="mailto:john@johnscafide.com"
-                        class="wdf-link"
-                    >
-                        <i
-                            class="fas fa-at"
-                            aria-hidden="true"
-                        ></i>
-                        Email John
-                    </a>
-
-                    <div class="wdf-social">
-                        <a
-                            href="https://www.tiktok.com/@thetaxwatchdog"
-                            class="wdf-social-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Watchdog on TikTok"
-                        >
-                            <i
-                                class="fab fa-tiktok"
-                                aria-hidden="true"
-                            ></i>
-                        </a>
-
-                        <!-- Replace # with your Facebook URL -->
-                        <a
-                            href="#"
-                            class="wdf-social-link"
-                            aria-label="Watchdog on Facebook"
-                        >
-                            <i
-                                class="fab fa-facebook-f"
-                                aria-hidden="true"
-                            ></i>
-                        </a>
-
-                        <!-- Replace # with your Instagram URL -->
-                        <a
-                            href="#"
-                            class="wdf-social-link"
-                            aria-label="Watchdog on Instagram"
-                        >
-                            <i
-                                class="fab fa-instagram"
-                                aria-hidden="true"
-                            ></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- BRANDING AND DISCLOSURES -->
-            <div class="wdf-brand">
-
-                <a href="/property/" class="wdf-logo">
-                    <span class="wdf-logo-icon" aria-hidden="true">
-                        <i class="fas fa-shield-halved"></i>
-                    </span>
-
-                    <span class="wdf-logo-copy">
-                        <span class="wdf-logo-name">
-                            <span>Watchdog</span>
-                        </span>
-
-                        <span class="wdf-tagline">
-                            Watching out for New Jersey homeowners
-                        </span>
-                    </span>
-                </a>
-
-                <p class="wdf-description">
-                    Straightforward New Jersey property-tax information,
-                    homeowner tools, and local real-estate guidance from John
-                    and Heather Scafide. We help South Jersey residents
-                    understand their tax assessments, protect their home
-                    equity, and make informed real-estate decisions.
-                </p>
-
-                <div class="wdf-legal">
-                    <p>
-                        <strong>John Scafide</strong> is a licensed New Jersey
-                        real-estate salesperson, tax professional with more
-                        than 15 years of experience, and creator of
-                        <a
-                            href="https://www.tiktok.com/@thetaxwatchdog"
-                            class="wdf-inline-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >@thetaxwatchdog</a>.
-                        New Jersey real-estate license #2079591.
-                    </p>
-
-                    <p>
-                        <strong>Heather Scafide</strong> is a licensed New
-                        Jersey real-estate salesperson. New Jersey real-estate
-                        license #2192318.
-                    </p>
-
-                    <p>
-                        John and Heather are affiliated with the McKenty Team
-                        at Opus Elite Real Estate. Real-estate brokerage
-                        services are offered in compliance with New Jersey law
-                        and federal fair-housing requirements.
-                    </p>
-
-                    <p>
-                        NJPropertyTaxRelief.com is an independent educational
-                        resource and is not affiliated with or endorsed by the
-                        State of New Jersey, the New Jersey Division of
-                        Taxation, or any county or municipal government.
-                    </p>
-
-                    <p>
-                        Website information, property records, estimates, and
-                        calculators are provided for general educational
-                        purposes only. They do not constitute individualized
-                        tax, legal, financial, appraisal, or accounting advice.
-                        Property information may not reflect the most recent
-                        municipal records. Program rules, eligibility
-                        requirements, deadlines, and benefit amounts may
-                        change.
-                    </p>
-
-                    <p>
-                        Always verify property information and tax-relief
-                        eligibility with the appropriate government agency or
-                        a qualified professional.
-                    </p>
-
-                    <div class="wdf-legal-links">
-                        <a
-                            href="/privacy-policy.html"
-                            class="wdf-legal-link"
-                        >
-                            Privacy Policy
-                        </a>
-
-                        <a href="/terms.html" class="wdf-legal-link">
-                            Terms of Use
-                        </a>
-
-                        <a
-                            href="/accessibility.html"
-                            class="wdf-legal-link"
-                        >
-                            Accessibility
-                        </a>
-
-                        <a href="/#contact" class="wdf-legal-link">
-                            Contact
-                        </a>
-
-                        <a
-                            href="https://www.nj.gov/treasury/taxation/"
-                            class="wdf-legal-link"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Official NJ Taxation Website
-                            <i
-                                class="fas fa-arrow-up-right-from-square"
-                                aria-hidden="true"
-                            ></i>
-                        </a>
-                    </div>
-
-                    <div class="wdf-housing">
-                        <i
-                            class="fas fa-house"
-                            aria-hidden="true"
-                        ></i>
-
-                        <p>
-                            Watchdog supports the Fair Housing Act and Equal
-                            Opportunity Act. Equal Housing Opportunity.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- COPYRIGHT -->
-        <div class="wdf-bottom">
-            <p class="wdf-copyright">
-                Copyright &copy;
-                <span id="wdf-current-year">2026</span>
-                Watchdog / NJPropertyTaxRelief.com. All rights reserved.
-            </p>
-
-            <div class="wdf-bottom-links">
-                <a href="/property/" class="wdf-bottom-link">
-                    Property Lookup
-                </a>
-
-                <a href="/insights.html" class="wdf-bottom-link">
-                    Insights
-                </a>
-
-                <a href="/resources.html" class="wdf-bottom-link">
-                    Resources
-                </a>
-
-                <a href="/#contact" class="wdf-bottom-link">
-                    Talk to an Expert
-                </a>
-            </div>
-        </div>
-
-    </div>
-</div>
+<footer id="main-footer"></footer>
 
 <script>
-    (function () {
-        var watchdogYear =
-            document.getElementById("wdf-current-year");
+    /* DASHBOARD INTERACTIVE FUNCTIONS */
+    function openAddProperty() {
+        const form = document.getElementById('add-prop-form');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
 
-        if (watchdogYear) {
-            watchdogYear.textContent = new Date().getFullYear();
-        }
-    })();
+    function addPropertyToWatchlist() {
+        const addr = document.getElementById('prop-input').value;
+        if(!addr) return;
+
+        const list = document.getElementById('watchlist-items');
+        const newItem = `
+            <div class="watch-item" style="animation: fadeIn 0.5s;">
+                <div class="watch-info">
+                    <span class="watch-addr">${addr}</span>
+                    <span class="watch-meta">PENDING DATA...</span>
+                </div>
+                <div class="watch-stats">
+                    <div class="watch-price">---</div>
+                    <div class="watch-trend">FETCHING</div>
+                </div>
+            </div>
+        `;
+        list.insertAdjacentHTML('afterbegin', newItem);
+        document.getElementById('prop-input').value = "";
+        document.getElementById('add-prop-form').style.display = 'none';
+    }
 </script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/scripts.js"></script>
-<script src="/property/js/sidemenu.js?v=20260805c"></script>
-<script type="module" src="/property/js/dashboard/index.js?v=20260805g"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="scripts.js"></script>
+
 </body>
 </html>

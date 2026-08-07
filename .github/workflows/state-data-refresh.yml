@@ -1,0 +1,38 @@
+name: NJ state data refresh
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 10 1 * *"
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF parser
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Refresh and validate datasets
+        run: python3 property/scripts/refresh_state_data.py --refresh --write-version || echo "refresh_failed=1" >> "$GITHUB_ENV"
+      - name: Preserve validation report
+        uses: actions/upload-artifact@v4
+        with:
+          name: nj-state-data-freshness
+          path: property/data/data-freshness.json
+      - name: Stop on coverage or parser failure
+        if: env.refresh_failed == '1'
+        run: exit 1
+      - name: Create review branch and pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet; then exit 0; fi
+          branch="automation/state-data-$(date -u +%Y%m%d-%H%M%S)"
+          git config user.name "NJPTR Data Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git switch -c "$branch"
+          git add property/data property/uniformity.json property/appeals.json property/tax-rates.json property/sr1a-ratios.json property/sales-*.json
+          git commit -m "data: refresh NJ state datasets"
+          git push origin "$branch"
+          gh pr create --title "Data: NJ state refresh" --body "Automated refresh with coverage and freshness report. Review before merging." --base main --head "$branch"

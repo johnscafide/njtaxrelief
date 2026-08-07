@@ -42,8 +42,8 @@
     '19':'Sussex','20':'Union','21':'Warren'
   };
 
-  var sb = null, plUser = null, profile = {};
-  var sr1a = null, uni = null, appeals = null, salesCache = {}, lastRun = null;
+  var sb = null, plUser = null, profile = {}, refPromise = null;
+  var sr1a = null, uni = null, appeals = null, taxRates = {}, taxRateIndex = {}, salesCache = {}, lastRun = null;
 
   function el(id) { return document.getElementById(id); }
   function esc(s) {
@@ -68,6 +68,10 @@
     return fetch(url, { signal: c.signal }).then(function (r) { clearTimeout(t); return r; },
       function (e) { clearTimeout(t); throw e; });
   }
+  function rateKey(s) {
+    return String(s || '').toUpperCase().replace(/TOWNSHIP|TWNSHP/g, 'TWP')
+      .replace(/BOROUGH/g, 'BORO').replace(/\s+/g, ' ').trim();
+  }
 
   window.plCloseNote = function () { el('plm-note-overlay').classList.remove('open'); };
   window.plModalNote = function (title, html) {
@@ -87,7 +91,13 @@
       xfetch('/property/uniformity.json', 12000).then(function (r) { return r.json(); })
         .then(function (j) { uni = (j && j.districts) || {}; }).catch(function () { uni = {}; }),
       xfetch('/property/appeals.json', 12000).then(function (r) { return r.json(); })
-        .then(function (j) { appeals = j || {}; }).catch(function () { appeals = {}; })
+        .then(function (j) { appeals = j || {}; }).catch(function () { appeals = {}; }),
+      xfetch('/property/tax-rates.json', 12000).then(function (r) { return r.json(); })
+        .then(function (j) {
+          taxRates = (j && j.rates) || {};
+          taxRateIndex = {};
+          Object.keys(taxRates).forEach(function (k) { taxRateIndex[rateKey(k)] = taxRates[k]; });
+        }).catch(function () { taxRates = {}; taxRateIndex = {}; })
     ]);
   }
   // A missing county file and a town with few sales are completely different
@@ -144,6 +154,22 @@
     return { k: 'D', t: 'Weak', w: 'The sale is old enough that the adjustment does most of the work.' };
   }
 
+  function clamp(v) { return Math.max(0, Math.min(100, +v || 0)); }
+  function opportunity(hit, u, countyAppeal) {
+    var parts = [], available = 0;
+    function add(label, weight, value) {
+      if (value == null || !isFinite(value)) return;
+      available += weight; parts.push({ label: label, weight: weight, value: clamp(value) });
+    }
+    add('Sale recency', 30, hit.g.k === 'A' ? 100 : hit.g.k === 'B' ? 82 : hit.g.k === 'C' ? 58 : 32);
+    add('Chapter 123 margin', 30, clamp(hit.over / Math.max(1, hit.av) * 500));
+    if (u) add('Assessment inconsistency', 15, clamp((+u.coefficient - 10) / 15 * 100));
+    if (countyAppeal && countyAppeal.latest) add('County outcome context', 10, +countyAppeal.latest.win_rate_filed);
+    add('Annual dollars at stake', 15, clamp(hit.saving / 2500 * 100));
+    var score = available ? Math.round(parts.reduce(function (z, p) { return z + p.value * p.weight; }, 0) / available) : null;
+    return { score: score, confidence: available, band: score >= 75 ? 'High priority' : score >= 55 ? 'Review' : score >= 35 ? 'Developing' : 'Low signal', parts: parts };
+  }
+
   window.scRun = function () {
     var d = el('sc-town').value;
     if (!d) { toast('Pick a municipality'); return; }
@@ -188,12 +214,10 @@
         return;
       }
 
-      // typical effective rate here, used to turn an assessment gap into dollars
-      var effs = pool.filter(function (x) { return x.av; })
-                     .map(function (x) { return ratio; });
+      // Municipality general tax rate, used to turn an assessment gap into dollars.
       var townRate = townEffRate(d);
 
-      var hits = [];
+      var hits = [], u = uni[d] || null, countyAppeal = appeals.counties && appeals.counties[d.slice(0, 2)];
       pool.forEach(function (x) {
         var age = TY - x.y;
         var market = x.p * Math.pow(1 + drift, age);
@@ -203,13 +227,15 @@
         var over = x.av - limit;
         var saving = (x.av - fair) * townRate;
         if (saving < minSave) return;
-        hits.push({
+        var hit = {
           a: x.a, b: x.b, l: x.l, y: x.y, p: x.p, av: x.av, sf: x.sf, yb: x.yb,
           age: age, market: market, fair: fair, limit: limit, over: over,
           saving: saving, implied: x.av / x.p, g: grade(age)
-        });
+        };
+        hit.opportunity = opportunity(hit, u, countyAppeal);
+        hits.push(hit);
       });
-      hits.sort(function (a, b) { return b.saving - a.saving; });
+      hits.sort(function (a, b) { return (b.opportunity.score - a.opportunity.score) || (b.saving - a.saving); });
       lastRun = { d: d, name: (uni[d] && uni[d].name) || d, s: s, hits: hits, pool: pool.length,
                   drift: drift, rate: townRate, maxYears: maxYears,
                   from: Math.min.apply(null, pool.map(function (x) { return x.y; })),
@@ -218,26 +244,31 @@
     });
   };
 
-  // Median tax per dollar of assessment in this town. Derived from the file we
-  // already have rather than another network call.
+  // Use the newest municipality rate in our NJ tax-rate series. A conservative
+  // fallback remains for a district that has not landed in that source yet.
   function townEffRate(d) {
-    var t = (window.__rates && window.__rates[d]) || null;
-    return t || 0.033;                       // NJ residential runs near 3.3%
+    var town = (uni[d] && uni[d].name) || '';
+    var county = COUNTIES[d.slice(0, 2)] || '';
+    var series = taxRateIndex[rateKey(town + ' (' + county + ')')];
+    if (!series) return 0.033;
+    var years = Object.keys(series).filter(function (y) { return /^\d{4}$/.test(y); })
+      .sort(function (a, b) { return +b - +a; });
+    return years.length && +series[years[0]] > 0 ? +series[years[0]] / 100 : 0.033;
   }
 
   function paint() {
     var r = lastRun, s = r.s, u = uni[r.d], a = appeals.counties && appeals.counties[r.d.slice(0, 2)];
     var totalSaving = r.hits.reduce(function (x, h) { return x + h.saving; }, 0);
-    var strong = r.hits.filter(function (h) { return h.g.k === 'A' || h.g.k === 'B'; }).length;
+    var priority = r.hits.filter(function (h) { return h.opportunity && h.opportunity.score >= 75; }).length;
 
     el('sc-out').innerHTML =
       '<div class="sc-res">' +
 
         '<div class="sc-sum">' +
-          '<div><b>' + r.hits.length.toLocaleString() + '</b><span>properties with a case</span></div>' +
+          '<div><b>' + r.hits.length.toLocaleString() + '</b><span>properties above the screen</span></div>' +
           '<div><b>' + Math.round(r.hits.length / r.pool * 100) + '%</b><span>of the ' + r.pool +
             ' sales screened</span></div>' +
-          '<div><b>' + strong.toLocaleString() + '</b><span>on evidence three years old or newer</span></div>' +
+          '<div><b>' + priority.toLocaleString() + '</b><span>high-priority opportunity files</span></div>' +
           '<div><b>' + money(totalSaving) + '</b><span>annual tax at stake, combined</span></div>' +
         '</div>' +
 
@@ -257,12 +288,13 @@
         '</div>' +
 
         '<div class="sc-tablewrap"><table class="sc-t"><thead><tr>' +
-          '<th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Sale price</th>' +
+          '<th>Opportunity</th><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Sale price</th>' +
           '<th class="n">Assessed</th><th class="n">Ch123 limit</th><th class="n">Over by</th>' +
           '<th class="n">Saving/yr</th><th>Evidence</th>' +
         '</tr></thead><tbody>' +
         r.hits.slice(0, 300).map(function (h) {
           return '<tr>' +
+            '<td><span class="sc-op op' + (h.opportunity.score >= 75 ? 'hi' : h.opportunity.score >= 55 ? 'md' : 'lo') + '"><b>' + h.opportunity.score + '</b><small>' + h.opportunity.band + '</small></span></td>' +
             '<td class="a">' + esc(h.a) + '</td>' +
             '<td class="q">' + esc(h.b) + '/' + esc(h.l) + '</td>' +
             '<td class="q">' + h.y + '</td>' +
@@ -312,7 +344,8 @@
         Ch123_Limit: Math.round(h.limit), Over_Limit_By: Math.round(h.over),
         Est_Annual_Saving: Math.round(h.saving),
         Assessed_Pct_Of_Sale: (h.implied * 100).toFixed(1),
-        Evidence_Grade: h.g.k, Evidence_Note: h.g.t
+          Opportunity_Index: h.opportunity.score, Opportunity_Band: h.opportunity.band,
+          Evidence_Grade: h.g.k, Evidence_Note: h.g.t
       };
     });
   }
@@ -350,11 +383,11 @@
       '<h1>Appeal prospects, ' + esc(r.name) + '</h1>' +
       '<div class="s">' + r.hits.length + ' properties assessed above the Chapter 123 limit against their own ' +
       'verified sale. Prepared ' + new Date().toLocaleDateString() + '.</div>' +
-      '<table><thead><tr><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Price</th>' +
+      '<table><thead><tr><th>Opportunity</th><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Price</th>' +
       '<th class="n">Assessed</th><th class="n">Limit</th><th class="n">Over</th><th class="n">Saving/yr</th>' +
       '<th>Grade</th></tr></thead><tbody>' +
       r.hits.map(function (h) {
-        return '<tr><td>' + esc(h.a) + '</td><td>' + esc(h.b) + '/' + esc(h.l) + '</td><td>' + h.y + '</td>' +
+        return '<tr><td>' + h.opportunity.score + '</td><td>' + esc(h.a) + '</td><td>' + esc(h.b) + '/' + esc(h.l) + '</td><td>' + h.y + '</td>' +
           '<td class="n">' + money(h.p) + '</td><td class="n">' + money(h.av) + '</td>' +
           '<td class="n">' + money(h.limit) + '</td><td class="n">' + money(h.over) + '</td>' +
           '<td class="n">' + money(h.saving) + '</td><td>' + h.g.k + '</td></tr>';
@@ -369,16 +402,36 @@
   };
 
   // ── boot ──
+  function showAccess() {
+    el('sc-main').style.display = '';
+    var allowed = window.NJPTRPlan ? window.NJPTRPlan.can('pro_plus') : false;
+    el('sc-plan-gate').style.display = allowed ? 'none' : '';
+    el('sc-tool').style.display = allowed ? '' : 'none';
+    if (allowed && !refPromise) refPromise = loadRef().then(buildPickers);
+  }
+
+  function settleEntitlement() {
+    return sb.rpc('get_my_entitlement').then(function (result) {
+      var rows = result && result.data || [], ent = Array.isArray(rows) ? rows[0] : rows;
+      if (ent) profile = { account_role: ent.account_role, plan_tier: ent.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end };
+      return profile;
+    }).catch(function () { return profile; }).then(function () {
+      if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
+      showAccess();
+    });
+  }
+
   function ready() {
     if (typeof supabase === 'undefined') { setTimeout(ready, 120); return; }
-    sb = supabase.createClient(LEDGER_URL, LEDGER_KEY);
+    sb = supabase.createClient(LEDGER_URL, LEDGER_KEY,
+      { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     sb.auth.getSession().then(function (res) {
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
       if (!plUser) { el('sc-gate').style.display = ''; return; }
-      el('sc-main').style.display = '';
-      loadRef().then(buildPickers);
+      settleEntitlement();
     });
   }
+  document.addEventListener('njptr:plan-change', function () { if (plUser) showAccess(); });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ready);
   else ready();
 })();

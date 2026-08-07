@@ -11,41 +11,47 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260805i">
-<link rel="stylesheet" href="/property/css/scan.css">
+<link rel="stylesheet" href="/property/css/dashboard.css?v=20260807a">
+<link rel="stylesheet" href="/property/css/mobile-app.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/plan-context.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/scan.css?v=20260807a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
-<body>
+<body data-sidebar-page="scan">
 <div class="pl-toast" id="pl-toast"></div>
 <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
 
-<header class="sc-top">
-  <div class="sc-top-in">
-    <a class="sc-back" href="/property/pro.html"><i class="fas fa-chevron-left"></i> Pro Hub</a>
-    <div class="sc-title"><b>Appeal Prospect Scanner</b><span>Screen an entire municipality at once</span></div>
-    <a class="sc-tl" href="/property/dashboard.html">My Properties</a>
-  </div>
-</header>
-
 <section class="gate" id="sc-gate" style="display:none;">
+  <div class="gate-mark"><i class="fas fa-magnifying-glass-chart"></i></div>
+  <span class="gate-kicker">Watchdog Pro+ workspace</span>
   <h1>Sign in to run a scan</h1>
   <p>The scanner reads New Jersey's verified sales file against current assessments across a whole town.
-     It needs an account so results can be saved and exported.</p>
+     Municipality-wide ranking and bulk export are Pro+ workspace features.</p>
   <button class="db-btn" onclick="plSignInPrompt()">Sign in</button>
   <a class="gate-back" href="/property/pro.html">Back to the Pro Hub</a>
 </section>
 
 <main id="sc-main" style="display:none;">
-  <div class="sc-wrap">
+  <div class="db-shell">
+    <div id="property-side-menu" aria-live="polite"></div>
+    <div class="db-workspace">
+      <header class="top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-magnifying-glass-chart"></i></div><div><span class="top-eyebrow">Professional intelligence</span><h1>Appeal Prospect Scanner</h1><span>Municipality-wide opportunity ranking · Pro+</span></div></div><div class="top-acts"><a class="sc-head-link" href="/property/pro.html"><i class="fas fa-arrow-left"></i> Pro Hub</a></div></div></header>
+      <div class="sc-wrap">
+
+    <section class="sc-plan-gate" id="sc-plan-gate" style="display:none;">
+      <div class="sc-plan-icon"><i class="fas fa-lock"></i></div><div><span>Pro+ workflow</span><h2>Municipality-wide scanning starts with Pro+</h2><p>Per-property appeal analysis is available in Pro. Pro+ adds territory-scale screening, ranking and bulk export across a municipality.</p><a href="/property/pro.html#plans">Compare Watchdog plans</a></div>
+    </section>
+
+    <div id="sc-tool" style="display:none;">
 
     <div class="sc-intro">
-      <h1>Every property in a town with a provable appeal case</h1>
+      <span class="sc-eyebrow">Territory screening</span>
+      <h2>Find the files worth opening first.</h2>
       <p>This does not estimate what homes are worth. It reads the price each one <em>actually sold for</em>,
          verified by the State of New Jersey as a genuine arm's length transaction, and tests the current
-         assessment against it using the Chapter 123 formula a county board applies. A property's own recent
-         sale is the strongest evidence there is, and it needs no appraisal to stand up.</p>
+         assessment against it using the Chapter 123 screen, then ranks the resulting opportunities by evidence quality and dollars at stake.</p>
     </div>
 
     <div class="sc-form">
@@ -81,10 +87,15 @@
        one sales file per year, so earlier years can be added as they are loaded.</p>
 
     <div id="sc-out"></div>
+    </div>
+      </div>
+    </div>
   </div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/scan.js"></script>
+<script src="/property/js/plan-context.js?v=20260806a"></script>
+<script src="/property/js/sidemenu.js?v=20260806a"></script>
+<script src="/property/js/scan.js?v=20260807a"></script>
 </body>
 </html>

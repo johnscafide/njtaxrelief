@@ -97,6 +97,7 @@ for f,l,cat in [('escrow_scenario_tax','Scenario annual tax','lending'),('escrow
 for mid,label,cat,tier,prof in [
  ('investor_carry_cost_volatility','Investor Carry-Cost Volatility','investment','pro_plus',['investor','lender','agent']),
  ('appeal_evidence_strength','Appeal Evidence Strength','appeals','pro',['attorney','appraiser','agent']),
+ ('appeal_opportunity_index','Watchdog Appeal Opportunity Index','appeals','pro',['attorney','appraiser','agent','investor']),
  ('permit_lifecycle_score','Permit Lifecycle Intelligence','permits','pro_plus',['attorney','title','agent','lender','contractor','investor']),
  ('listing_friction_index','Listing Friction Index','broker intelligence','pro',['agent']),
  ('tax_carry_advantage','Tax Carry Advantage','broker intelligence','pro',['agent']),

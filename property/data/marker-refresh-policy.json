@@ -4241,6 +4241,19 @@
       "rule": "Recalculate when any input dataset changes."
     },
     {
+      "marker_id": "watchdog.appeal_opportunity_index",
+      "label": "Watchdog Appeal Opportunity Index",
+      "source_id": "watchdog-models",
+      "dataset_id": "watchdog-models",
+      "cadence": "dependency",
+      "trigger": "dependency_change",
+      "priority": "high",
+      "tier": "pro",
+      "origin": "watchdog-derived",
+      "scope": "property",
+      "rule": "Recalculate when any input dataset changes."
+    },
+    {
       "marker_id": "watchdog.permit_lifecycle_score",
       "label": "Permit Lifecycle Intelligence",
       "source_id": "watchdog-models",
@@ -4450,11 +4463,11 @@
     }
   ],
   "summary": {
-    "total": 342,
+    "total": 343,
     "annual": 94,
     "quarterly": 7,
     "live": 14,
-    "dependency": 47,
+    "dependency": 48,
     "correction": 180,
     "review": 0
   }
