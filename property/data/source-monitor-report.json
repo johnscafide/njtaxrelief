@@ -1,8 +1,339 @@
 {
   "schema_version": 1,
-  "checked_at": null,
-  "checked": 0,
-  "changed": [],
+  "checked_at": "2026-08-07T19:09:36.362112+00:00",
+  "checked": 16,
+  "changed": [
+    {
+      "id": "nj-lpt-statistical-index",
+      "label": "NJ Local Property Tax statistical publication index",
+      "agency": "NJ Division of Taxation",
+      "url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "before": {
+        "url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+        "checked_at": "2026-08-07T19:09:31.796450+00:00",
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "b98de5025167d86cbb505f32a2af99c03a2e83eb23366f4b431caafdb3932b06"
+      },
+      "after": {
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "ab3c616f1f53583e96fcc93e6f60b99b96fd154cf698415d7e31679a9ebbb3b9"
+      }
+    },
+    {
+      "id": "budget-pressure",
+      "label": "Municipal Budget Pressure",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
+      "before": {
+        "url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
+        "checked_at": "2026-08-07T19:09:32.701411+00:00",
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "9f469f0974204d433d53e240d82503b985f6514d09c2ce43f22a868a8c8c6de0"
+      },
+      "after": {
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "5ee612e8628cf32daf6ada7f07564c26273bc9c53d3e177afd50325c2fe6937e"
+      }
+    },
+    {
+      "id": "exempt-pilot",
+      "label": "Exempt property and PILOT exposure",
+      "agency": "NJ Division of Taxation + NJ Department of Community Affairs",
+      "url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
+      "before": {
+        "url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
+        "checked_at": "2026-08-07T19:09:32.751902+00:00",
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "e8e35de397dd0d25535d6de2706417d2d84cc36c32fd6059900290496709a9c6"
+      },
+      "after": {
+        "status": 200,
+        "etag": null,
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "e987413479adc1ea9f2dd2bde5b510e781fcd43b155978dd652e6322eb331586"
+      }
+    },
+    {
+      "id": "construction-permits-live",
+      "label": "Parcel construction permit and certificate activity",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
+      "before": {
+        "url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
+        "checked_at": "2026-08-07T19:09:33.226008+00:00",
+        "status": 200,
+        "etag": "W/\"359fc97aef8472285023a155aae43b20\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "06cfe6acb87d2582b036c7377a6bd3754eca7b6171efe3c7b7b8504494d75036"
+      },
+      "after": {
+        "status": 200,
+        "etag": "W/\"2f37450f78c021bfbbc8e2f1fa723b90\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "2ee0737d97f7e2e9ee1c5f105861ea53445ad12a780b57e7a7b735b4512d36e9"
+      }
+    },
+    {
+      "id": "known-contaminated-sites-live",
+      "label": "Known Contaminated Sites List",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
+        "checked_at": "2026-08-07T19:09:33.329332+00:00",
+        "status": 200,
+        "etag": "\"721a0a4d\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "b5ff52bf814609bb938418ba8de60eba8e34dbd9b73dc82cf76593a9881b8261"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"721a0a4d\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "2c183352a9696861bf0d90b7128ac5fce1d592c99f7bff855b13cfbd85fa6fa2"
+      }
+    },
+    {
+      "id": "deed-notices-live",
+      "label": "Environmental Deed Notice Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
+        "checked_at": "2026-08-07T19:09:33.422866+00:00",
+        "status": 200,
+        "etag": "\"1965dca1\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "64ece4994faf9d50bc10490fa5814821b364e5b4e40f8d70db98dd151ecccd03"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"1965dca1\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "0abaee29c8fdb4d7061d11a86b4d0e220da72a8191c06158439f803ec49be528"
+      }
+    },
+    {
+      "id": "groundwater-cea-live",
+      "label": "Groundwater Classification Exception Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
+        "checked_at": "2026-08-07T19:09:33.477400+00:00",
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "66473e47d3fe2791734cb80bcc983faf13a3e15944751474e2b66feeac47ce5a"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "c48e7fb3e7c534fba5a2a7895193b47ce56de9846896047792a8c195e291c7bd"
+      }
+    },
+    {
+      "id": "underground-storage-tanks-live",
+      "label": "Underground Storage Tank Facilities",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
+        "checked_at": "2026-08-07T19:09:33.530532+00:00",
+        "status": 200,
+        "etag": "\"721a0a4d\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "e588c4b1fa25907018cb486f883890b9c745f9d7203c2f1f47b7335c56a6c2ca"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"721a0a4d\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "cf11f84f35003ff182ec6ea6aebd9f844895734a7a77fbfc892692ac3267d4fb"
+      }
+    },
+    {
+      "id": "tidelands-reference-live",
+      "label": "Tidelands statewide reference layer",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30",
+        "checked_at": "2026-08-07T19:09:33.578482+00:00",
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "d3ca271f1150787aa0fc887722d28d964a4b6a7143e7f64b131d32b795ff64ff"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "88f30f4c248437551ffb59b0ef6055daf68542abcc66b60d04e67b92af3fe7c5"
+      }
+    },
+    {
+      "id": "highlands-area-live",
+      "label": "Highlands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
+        "checked_at": "2026-08-07T19:09:33.665212+00:00",
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "3a8955b815c27b43213377849240f098b5fc2f6a2e78dac9b4f5f7d4c8ac94c2"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "3d06b5078c5d3106ebb6d526c96eaaf638750b8cedfa58e3f9431a914187543e"
+      }
+    },
+    {
+      "id": "pinelands-area-live",
+      "label": "Pinelands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
+        "checked_at": "2026-08-07T19:09:33.711441+00:00",
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "ca6a9c5d095476d4bcfda2e46412dcc7d6dfcb593051155d920c705b4a565cad"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"3eff662f\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "1b6d129eb18e4a836ccce7cee6708d5ff847a9ebca273eb9ed7dde0fc636e034"
+      }
+    },
+    {
+      "id": "nfhl-flood-live",
+      "label": "National Flood Hazard Layer",
+      "agency": "FEMA via NJDEP",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43",
+        "checked_at": "2026-08-07T19:09:33.774402+00:00",
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "da72913d3e32e38d8af0956d45114038a2f8f72310a966e1e10d67f1afa75250"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "eafe0649bfb077602ca6f4aa38ce7a94c9598a1a75d9cb66f39c68751812407a"
+      }
+    },
+    {
+      "id": "tidal-cafe-live",
+      "label": "Tidal Climate Adjusted Flood Elevation",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
+        "checked_at": "2026-08-07T19:09:33.851097+00:00",
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "b05912af4ff7ad06e332280e48727d2f3f6edc6716963df76a441926777cd9e3"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"ff2fba40\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "cab63f319f78b85146e044f1beae38c96fecca72e57dd0bd2df068c707ee3f1b"
+      }
+    },
+    {
+      "id": "wetlands-2012-live",
+      "label": "NJDEP Wetlands 2012 reference",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2",
+        "checked_at": "2026-08-07T19:09:33.905556+00:00",
+        "status": 200,
+        "etag": "\"ab6a7ff1\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "284b13819c800ae50e81eaaae4007c25316bba386b82be0dceeaf747fac16714"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"ab6a7ff1\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "a254cac7c72cbd3f63a445877b4c6f5179f1148e4bac49748b0803afba2465f5"
+      }
+    },
+    {
+      "id": "priority-wetlands-live",
+      "label": "EPA Priority Wetlands",
+      "agency": "NJ Department of Environmental Protection",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
+      "before": {
+        "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
+        "checked_at": "2026-08-07T19:09:33.983801+00:00",
+        "status": 200,
+        "etag": "\"a46fbf3e\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "f94f9c1c64f32aa46006e2a26b69d27332d251ef433fb790b46749c7a452d028"
+      },
+      "after": {
+        "status": 200,
+        "etag": "\"a46fbf3e\"",
+        "last_modified": null,
+        "content_length": null,
+        "sha256_prefix_2mb": "ac51ecc673e1819b2c87120aeb641a67ede1e1fdd29da750865072be78c55056"
+      }
+    }
+  ],
   "errors": [],
-  "baseline_missing": true
+  "baseline_missing": false
 }
