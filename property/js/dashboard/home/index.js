@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260807a';
+  var HOME_MODULE_VERSION = '20260807b';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -19,6 +19,11 @@
     'appeal-opportunity': ['uniformity', 'appeal-evidence-strength'],
     'permit-lifecycle-intelligence': ['professional-due-diligence'],
     'real-estate-intelligence': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
+    'broker-listing-brief': ['real-estate-intelligence'],
+    'collateral-escrow-stress': ['buyer-closing-costs', 'municipal-budget-pressure'],
+    'development-constraint-stack': ['professional-due-diligence'],
+    'score-history': ['watchdog-score'],
+    'watchdog-score': ['uniformity', 'revaluation-radar'],
     'professional-decision-signals': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
     'improvement-ratio': ['town-profile'],
     'property-class-mix': ['town-profile']
@@ -69,6 +74,21 @@
   };
   window.plCloseNote = function () { el('plm-note-overlay').classList.remove('open'); };
 
+  function sendLead(payload) {
+    if (typeof emailjs === 'undefined') return Promise.reject(new Error('Email service unavailable'));
+    emailjs.init({ publicKey: EJS_PUBLIC });
+    return emailjs.send(EJS_SERVICE, EJS_TMPL, payload);
+  }
+  window.dbLeadGen = function (kind, address) {
+    var seller = kind === 'seller';
+    var topic = seller ? 'Seller strategy request' : 'Buyer strategy request';
+    sendLead({ name:name(), email:plUser&&plUser.email, phone:(profile&&profile.phone)||'Not provided', topic:'⭐ WATCHDOG '+topic,
+      tenure:seller?'Homeowner':'Buyer', lead_type:seller?'Seller lead':'Buyer lead', finance:'Not provided', town:(current&&current.town)||'Not provided', address:address||'Not provided',
+      message:[topic+' from Watchdog.', 'Property: '+(address||'Not provided'), 'Source: /property/home.html'].join('\n') }).catch(function(e){ console.warn(e); });
+    plModalNote(seller?'Let’s talk through the sale':'Let’s talk through the purchase','<p>'+(seller?'An agent will pair the Watchdog property story with current comparable sales and a practical listing plan.':'An agent will pair the Watchdog diligence with current listings, comps and an offer strategy.')+'</p><p><b>No obligation and no pressure.</b></p>');
+  };
+  window.dbAskAbout = function (address) { window.dbLeadGen(current&&current.kind==='home'?'seller':'buyer', address); };
+
   function getClient() {
     if (sb) return true;
     if (typeof window.supabase === 'undefined' || LEDGER_KEY.indexOf('PASTE') === 0) return false;
@@ -76,6 +96,15 @@
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     return true;
   }
+  window.watchdogScoreObserve = function (r, score, markerId) {
+    if (!sb || !plUser || !r || !r.pams_pin) return Promise.resolve([]);
+    markerId=markerId||'watchdog.score';var row={user_id:plUser.id,pams_pin:r.pams_pin,marker_id:markerId,score:+score,observed_on:new Date().toISOString().slice(0,10)};
+    return sb.from('score_observations').upsert(row,{onConflict:'user_id,pams_pin,marker_id,observed_on'}).select().then(function(){
+      return sb.from('score_observations').select('score,observed_at,observed_on').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).eq('marker_id',markerId).order('observed_at',{ascending:true}).limit(120);
+    }).then(function(x){return x.data||[];});
+  };
+  window.watchdogAppealCaseLoad = function (r) { if(!sb||!plUser)return Promise.resolve(null);return sb.from('appeal_case_workspaces').select('*').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).maybeSingle().then(function(x){if(x.error)throw x.error;return x.data;}); };
+  window.watchdogAppealCaseSave = function (r, values) { var opp=typeof appealOpportunityIndex==='function'?appealOpportunityIndex(r):null,evid=typeof appealEvidenceStrength==='function'?appealEvidenceStrength(r):null;return sb.from('appeal_case_workspaces').upsert(Object.assign({user_id:plUser.id,pams_pin:r.pams_pin,property_address:r.address||'',municipality:r.town||r.municipality||'',opportunity_score:opp&&opp.score,evidence_score:evid&&evid.score,updated_at:new Date().toISOString()},values),{onConflict:'user_id,pams_pin'}).select().single().then(function(x){if(x.error)throw x.error;return x.data;}); };
 
   window.plSignInPrompt = function () {
     if (!getClient()) { plModalNote('Sign in unavailable', '<p>Accounts are not switched on yet.</p>'); return; }
@@ -1404,6 +1433,8 @@
         '</div>' +
 
         scorecard(r) +
+        (typeof toolScoreHistory === 'function' ? toolScoreHistory(r) : '') +
+        (typeof toolRealEstateConcierge === 'function' ? toolRealEstateConcierge(r) : '') +
 
         '<div class="hm-secbar"><div><h2>Explore your property</h2><p>Start with a signal. Open only what matters to you.</p></div>' +
           '<button id="hm-all" onclick="hmExpandAll()"><i class="fas fa-expand"></i> Expand all</button></div>' +
@@ -1500,7 +1531,7 @@
            'statutory calculation already assembled.',
       build: function (r) {
         var a = appealFor(r);
-        return toolAppealOpportunity(r) + (a ? appealBody(r, a) : '') + toolAppealEvidenceStrength(r) + toolAppealPacket(r);
+        return toolAppealOpportunity(r) + (a ? appealBody(r, a) : '') + toolAppealEvidenceStrength(r) + toolAppealCaseWorkspace(r) + toolAppealPacket(r);
       },
       sum: function (r) {
         var a = appealFor(r);
@@ -1517,18 +1548,18 @@
       k: 'buy', tier: 'pro', cat: 'Buyer costs', short: 'Closing costs and future tax exposure', icon: 'fa-key', title: 'What a buyer would pay',
       pro: 'Running the buyer\u2019s number before an offer is written avoids the conversation nobody wants ' +
            'after closing.',
-      build: function (r) { return toolBuyerCost(r); }
+      build: function (r) { return toolBuyerCost(r) + toolCollateralEscrowStress(r); }
     },
     {
       k: 'diligence', tier: 'pro_plus', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: parcel-keyed permit/certificate status plus live NJDEP environmental controls and nearby remediation signals. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
-      build: function (r) { return toolProfessionalDueDiligence(r) + toolPermitLifecycle(r) + toolProfessionalWorkflows(r); },
+      build: function (r) { return toolProfessionalDueDiligence(r) + toolDevelopmentConstraintStack(r) + toolPermitLifecycle(r) + toolProfessionalWorkflows(r); },
       sum: function () { return 'Closing evidence + escrow + lien + NJDEP constraints'; }
     },
     {
       k: 'broker', tier: 'pro', cat: 'Professional intelligence', icon: 'fa-house-circle-check', title: 'Real Estate Professional Intelligence',
       pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal signals into ten attributable client-conversation markers instead of another wall of raw numbers.',
-      build: function (r) { return toolRealEstateIntelligence(r); },
+      build: function (r) { return toolRealEstateIntelligence(r) + toolBrokerListingBrief(r); },
       sum: function () { return '10 agent-specific Watchdog markers'; }
     },
     {
@@ -1590,11 +1621,11 @@
     farmland: ['farmland-qualification'],
     reval: ['revaluation-radar'],
     town: ['town-intelligence', 'municipal-budget-pressure', 'property-class-mix', 'abatement-exposure', 'exempt-pilot-exposure'],
-    file: ['appeal-opportunity', 'appeal-packet', 'appeal-evidence-strength'],
+    file: ['appeal-opportunity', 'appeal-packet', 'appeal-evidence-strength', 'appeal-case-workspace'],
     owed: ['senior-benefits'],
-    buy: ['buyer-closing-costs'],
-    diligence: ['professional-due-diligence', 'permit-lifecycle-intelligence', 'professional-workflows'],
-    broker: ['real-estate-intelligence'],
+    buy: ['buyer-closing-costs', 'collateral-escrow-stress'],
+    diligence: ['professional-due-diligence', 'development-constraint-stack', 'permit-lifecycle-intelligence', 'professional-workflows'],
+    broker: ['real-estate-intelligence', 'broker-listing-brief'],
     decision: ['professional-decision-signals'],
     compare: ['relocation', 'investor-screen', 'investor-carry-volatility'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
@@ -1939,7 +1970,7 @@
         // These three modules supply calculations used while the report is
         // first painted. The remaining report tools stay lazy-loaded when
         // their corresponding sections are opened.
-        loadHomeTools(['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'reassessment-risk']),
+        loadHomeTools(['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'reassessment-risk', 'score-history', 'real-estate-concierge']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         sb.rpc('get_my_entitlement'),

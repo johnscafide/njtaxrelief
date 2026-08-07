@@ -8,6 +8,7 @@
   var DEP_HYDRO = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer';
   var DEP_LAND = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer';
   var DEP_LAND_LU = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer';
+  var DEP_GEO = 'https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer';
   var cache = Object.create(null);
   var records = Object.create(null);
   var evidenceRecords = Object.create(null);
@@ -44,8 +45,11 @@
       geoQuery(DEP_RSP,6,r,0,'*'),
       geoQuery(DEP_RSP,7,r,0,'*'),
       geoQuery(DEP_HYDRO,43,r,0,'*'), geoQuery(DEP_HYDRO,48,r,0,'*'),
-      geoQuery(DEP_LAND_LU,2,r,0,'ACRES,LABEL12,TYPE12'), geoQuery(DEP_LAND,79,r,0,'*')
-    ]).then(function(x){return{permits:x[0],contaminated:x[1],deed:x[2],cea:x[3],ust:x[4],tidelands:x[5],highlands:x[6],pinelands:x[7],flood:x[8],cafe:x[9],wetlands:x[10],priorityWetlands:x[11]};});
+      geoQuery(DEP_LAND_LU,2,r,0,'ACRES,LABEL12,TYPE12'), geoQuery(DEP_LAND,79,r,0,'*'),
+      geoQuery(DEP_GEO,0,r,1000,'SITENAME,COMMODITY'), geoQuery(DEP_GEO,13,r,0,'GEONAME'), geoQuery(DEP_GEO,14,r,0,'GEONAME'),
+      geoQuery(DEP_GEO,18,r,0,'WMA_NAME,RANK'), geoQuery(DEP_GEO,19,r,0,'SSANAME'), geoQuery(DEP_GEO,23,r,0,'GEONAME'), geoQuery(DEP_GEO,25,r,0,'GEONAME'),
+      geoQuery(DEP_HYDRO,25,r,0,'TIER,TRAVELTIME'), geoQuery(DEP_HYDRO,26,r,0,'TIER,TRAVELTIME')
+    ]).then(function(x){return{permits:x[0],contaminated:x[1],deed:x[2],cea:x[3],ust:x[4],tidelands:x[5],highlands:x[6],pinelands:x[7],flood:x[8],cafe:x[9],wetlands:x[10],priorityWetlands:x[11],mines:x[14],bedrockAquifer:x[15],bedrockGeology:x[16],recharge:x[17],soleSourceAquifer:x[18],surficialAquifer:x[19],surficialGeology:x[20],wellheadCommunity:x[21],wellheadNonCommunity:x[22]};});
     return cache[k];
   }
   function featureRows(payload){return(payload&&payload.features||[]).map(function(f){return f.attributes||{};});}

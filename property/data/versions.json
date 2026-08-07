@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T10:19:30-04:00",
+  "updated_at": "2026-08-07T11:15:00-04:00",
   "releases": [
+    {
+      "version": "0.24.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T11:15:00-04:00",
+      "title": "Professional workflow suite and longitudinal Watchdog Score",
+      "category": "Professional intelligence / lead generation",
+      "status": "Completed",
+      "summary": "Completed roadmap priorities 2–7 as integrated professional workflows: collateral/escrow stress, expanded permit lifecycle intelligence, NJDEP/NJGS development constraints, private appeal case tracking, a broker listing brief and portfolio carry-cost concentration. Added genuine dated Watchdog Score observations with up/down ticker and trend chart, plus contextual John/Heather buyer and seller strategy CTAs that keep agent branding inside real-estate guidance surfaces.",
+      "links": ["/property/dashboard.html", "/property/home.html"],
+      "files": ["property/dashboard.html", "property/home.html", "property/updates.html", "property/js/updates.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/professional-workflows.css", "property/js/dashboard/tools/collateral-escrow-stress.js", "property/js/dashboard/tools/permit-lifecycle-intelligence.js", "property/js/dashboard/tools/development-constraint-stack.js", "property/js/dashboard/tools/professional-due-diligence.js", "property/js/dashboard/tools/appeal-case-workspace.js", "property/js/dashboard/tools/broker-listing-brief.js", "property/js/dashboard/tools/investor-carry-volatility.js", "property/js/dashboard/tools/real-estate-concierge.js", "property/js/dashboard/tools/score-history.js", "supabase/migrations/20260807145034_professional_workflows_score_history.sql", "supabase/migrations/20260807151500_revoke_anon_internal_entitlement_rpcs.sql", "property/data/versions.json"],
+      "impact": {"professional_tools": 6, "javascript": 10, "css": 1, "database_tables": 2, "lead_generation": 1, "longitudinal_metrics": 1}
+    },
     {
       "version": "0.23.0",
       "date": "2026-08-07",
@@ -975,7 +987,7 @@
     {
       "priority": 2,
       "title": "Collateral & Escrow Stress Lab",
-      "readiness": "Existing data + expansion",
+      "readiness": "Shipped in v0.24.0",
       "effort": "Medium",
       "category": "Lender / mortgage",
       "why": "The new Escrow Shock scenario should grow into an explainable collateral operating-cost stress test.",
@@ -992,7 +1004,7 @@
     {
       "priority": 3,
       "title": "Permit Lifecycle Intelligence",
-      "readiness": "Core shipped in v0.17.0",
+      "readiness": "Expanded workflow shipped in v0.24.0",
       "effort": "Medium",
       "category": "Attorney / contractor / lender",
       "why": "A permit list becomes professional intelligence when age, certificate gaps and project sequence are measured.",
@@ -1009,7 +1021,7 @@
     {
       "priority": 4,
       "title": "Development Constraint Stack",
-      "readiness": "NJDEP layers live",
+      "readiness": "NJDEP + NJ Geological Survey constraint stack shipped in v0.24.0",
       "effort": "Large",
       "category": "Contractor / developer",
       "why": "Combine flood, wetlands, Tidelands, Pinelands, Highlands, geology and water constraints into a sourced pre-development screen.",
@@ -1027,7 +1039,7 @@
     {
       "priority": 5,
       "title": "Appeal Opportunity & Case Workspace",
-      "readiness": "Opportunity Index and Pro+ municipality scanner shipped in v0.21.0; saved case workflow next",
+      "readiness": "Opportunity Index, Pro+ scanner and private saved case workflow shipped by v0.24.0",
       "effort": "Large",
       "category": "Attorney / appraiser",
       "why": "Move from apparent overassessment to a sourced professional case workflow: opportunity triage first, evidence quality second, then verified comparables, deadlines and a saved working file.",
@@ -1048,7 +1060,7 @@
     {
       "priority": 6,
       "title": "Broker Listing Risk & Opportunity Brief",
-      "readiness": "10 proprietary agent markers live in v0.17.0",
+      "readiness": "10 proprietary markers + client brief shipped by v0.24.0",
       "effort": "Medium",
       "category": "Real estate agent",
       "why": "Put the tax, permit, revaluation and development facts most likely to change a buyer conversation into a one-page brief.",
@@ -1066,7 +1078,7 @@
     {
       "priority": 7,
       "title": "Investor Carry-Cost Volatility",
-      "readiness": "Core shipped in v0.17.0",
+      "readiness": "Expanded portfolio concentration workflow shipped in v0.24.0",
       "effort": "Medium",
       "category": "Investor",
       "why": "Rank properties and municipalities by uncertainty in tax-driven operating costs.",

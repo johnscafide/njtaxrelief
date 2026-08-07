@@ -5,11 +5,12 @@
 (function () {
   'use strict';
 
-  var MODULE_VERSION = '20260806a';
+  var MODULE_VERSION = '20260807b';
   var modulePromises = Object.create(null);
   var moduleDependencies = {
     'appeal-odds': ['uniformity'],
     'watchdog-score': ['uniformity', 'revaluation-radar'],
+    'score-history': ['watchdog-score'],
     'revaluation-radar': ['uniformity'],
     'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
     'town-risk-matrix': ['town-intelligence', 'municipal-budget-pressure', 'watchdog-score'],
@@ -22,7 +23,7 @@
     'property-class-mix': ['town-profile']
   };
   var moduleGroups = {
-    initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'exempt-pilot-exposure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'assessment-drift', 'true-cost'],
+    initial: ['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'exempt-pilot-exposure', 'revaluation-radar', 'abatement-exposure', 'watchdog-score', 'score-history', 'real-estate-concierge', 'assessment-drift', 'true-cost'],
     pro: ['town-percentile', 'portfolio-analysis', 'town-risk-matrix', 'property-comparison', 'professional-due-diligence', 'investor-carry-volatility', 'export']
   };
 
@@ -1875,7 +1876,8 @@ function brief() {
     // panel sitting in the default view is an advert wearing the costume of a
     // feature, and it makes the page feel smaller than it is. Everything gated
     // lives behind the Pro tab, where somebody has actively gone looking.
-    return [toolDrift()].filter(Boolean).join('') + toolCost();
+    var home=primaryHome();
+    return [home&&typeof toolScoreHistory==='function'?toolScoreHistory(home):'',home&&typeof toolRealEstateConcierge==='function'?toolRealEstateConcierge(home):'',toolDrift()].filter(Boolean).join('') + toolCost();
   }
 
   // ══════════════════════════════════════════════
@@ -2312,6 +2314,17 @@ function brief() {
     });
     plModalNote('Message sent', '<p>An agent will get back to you about <b>' + esc(address) + '</b> within one business day.</p>' +
       '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
+  };
+
+  window.dbLeadGen = function (kind, address) {
+    var seller=kind==='seller';
+    send({name:name(),email:plUser.email,phone:profile.phone||'Not provided',topic:'⭐ WATCHDOG '+(seller?'Seller strategy request':'Buyer strategy request'),tenure:seller?'Homeowner':'Buyer',lead_type:seller?'Seller lead':'Buyer lead',finance:'Not provided',town:'Not provided',address:address||'Not provided',message:[seller?'Seller strategy request from dashboard.':'Buyer strategy request from dashboard.','Property: '+(address||'Not provided'),'Source: /property/dashboard.html'].join('\n')});
+    plModalNote(seller?'Seller strategy':'Buyer strategy','<p>'+(seller?'An agent will pair the Watchdog tax story with current comps and a listing plan.':'An agent will pair the Watchdog diligence with live market context and an offer plan.')+'</p><p><b>No obligation and no pressure.</b></p>');
+  };
+  window.watchdogScoreObserve = function (r, score, markerId) {
+    if(!sb||!plUser||!r||!r.pams_pin)return Promise.resolve([]);
+    markerId=markerId||'watchdog.score';var row={user_id:plUser.id,pams_pin:r.pams_pin,marker_id:markerId,score:+score,observed_on:new Date().toISOString().slice(0,10)};
+    return sb.from('score_observations').upsert(row,{onConflict:'user_id,pams_pin,marker_id,observed_on'}).select().then(function(){return sb.from('score_observations').select('score,observed_at,observed_on').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).eq('marker_id',markerId).order('observed_at',{ascending:true}).limit(120);}).then(function(x){return x.data||[];});
   };
 
   // Compatibility bridge for lazy modules. Read-only getters keep shared state private.
