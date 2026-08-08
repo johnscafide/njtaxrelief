@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260807c';
+  var HOME_MODULE_VERSION = '20260807h';
   var homeModulePromises = Object.create(null);
   var homeModuleDependencies = {
     'revaluation-radar': ['uniformity'],
@@ -869,7 +869,8 @@
     [/farmland/i, 'property.property_class'],
     [/closing cost|buyer cost/i, 'watchdog.closing_cost_estimate'],
     [/benefit|anchor|stay nj|senior freeze/i, 'property.annual_tax'],
-    [/history|time machine/i, 'property.assessed_value']
+    [/history|time machine/i, 'property.assessed_value'],
+    [/statewide|mod-iv|municipal baseline/i, 'modiv_intel.median_assessed_value']
   ];
 
   function signalMarker(title, fallback) {
@@ -1575,6 +1576,12 @@
       sum: function () { return '5 new formula-backed professional signals'; }
     },
     {
+      k: 'statewide', tier: 'pro', cat: 'Statewide baseline', icon: 'fa-table-cells-large', title: 'How does this town compare statewide?',
+      pro: 'The full 2026 MOD-IV roll is condensed into municipal distributions so a professional can see the local baseline without downloading or querying millions of parcel rows.',
+      build: function (r) { return toolStatewideModivIntelligence(r); },
+      sum: function (r) { return typeof statewideModivSummary === 'function' ? statewideModivSummary(r) : '2026 statewide MOD-IV baseline'; }
+    },
+    {
       k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
@@ -1633,6 +1640,7 @@
     diligence: ['professional-due-diligence', 'development-constraint-stack', 'permit-lifecycle-intelligence', 'professional-workflows'],
     broker: ['real-estate-intelligence', 'broker-listing-brief'],
     decision: ['professional-decision-signals'],
+    statewide: ['statewide-modiv-intelligence'],
     compare: ['relocation', 'investor-screen', 'investor-carry-volatility'],
     trend: ['tax-trajectory', 'tax-pressure-simulator'],
     history: ['assessment-drift']

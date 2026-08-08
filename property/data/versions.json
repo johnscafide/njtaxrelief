@@ -1,12 +1,50 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T22:30:00-04:00",
+  "updated_at": "2026-08-07T22:10:37-04:00",
   "releases": [
+    {
+      "version": "0.36.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T22:10:37-04:00",
+      "title": "MOD-IV customer delivery and sourced marker dossiers",
+      "category": "Professional intelligence / evidence UX",
+      "status": "Completed",
+      "summary": "Connected the compact 2026 statewide MOD-IV intelligence layer to individual property reports using the four-digit municipality prefix already embedded in the PAMS PIN. The new Statewide Baseline section lazy-loads only when opened, exposes six Pro municipal benchmarks and the deeper Pro+ diagnostic set, and links every value into its marker dossier. Rebuilt marker detail pages around plain-English meaning, reading guidance, transparent method/formula, professional relevance, limitations, update cadence, and a numbered evidence trail with visible official URLs. State source registries and the DCA Pro+ source catalog now resolve source links automatically; relevant independent professional references are clearly labeled as contextual rather than as the source of Watchdog values.",
+      "links": [
+        "/property/home.html",
+        "/property/marker.html",
+        "/property/data-center.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/home.html",
+        "property/css/home.css",
+        "property/css/home/06-statewide-modiv.css",
+        "property/js/dashboard/home/index.js",
+        "property/js/dashboard/tools/statewide-modiv-intelligence.js",
+        "property/marker.html",
+        "property/js/marker-detail.js",
+        "property/css/marker-intelligence.css",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "property/data/derived-marker-formulas.json",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "property_to_municipality_join": 1,
+        "modiv_runtime_signals": 24,
+        "pro_baseline_signals": 6,
+        "catalog_markers": 721,
+        "marker_dossier_sections": 8,
+        "saas_readiness_percent": 59
+      }
+    },
     {
       "version": "0.35.0",
       "date": "2026-08-07",
-      "timestamp": "2026-08-07T22:30:00-04:00",
+      "timestamp": "2026-08-07T21:32:00-04:00",
       "title": "Statewide Intelligence Compiler",
       "category": "Pro+ data platform / cost-efficient architecture",
       "status": "Completed",
