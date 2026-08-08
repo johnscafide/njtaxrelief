@@ -2698,6 +2698,9 @@
       lat: geo.lat, lon: geo.lon, rings: rings, sale: sale, deedYear: dy, cls: cls,
       status: status ? status.label : 'Not known', acres: acres, sqft: sqft, yearBuilt: p.YR_CONSTR || ''
     };
+    if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.remember === 'function') {
+      window.WatchdogPublicNav.remember(current);
+    }
 
     recordLookup(p, geo, rate, dy);
     var seen = timesSeen(p.PAMS_PIN || '');
@@ -3726,6 +3729,9 @@
   }
 
   function paintNav() {
+    if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.setUser === 'function') {
+      window.WatchdogPublicNav.setUser(plUser);
+    }
     var r = elReal('wd-right');
     if (!r) return;
     r.innerHTML = plUser

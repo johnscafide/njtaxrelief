@@ -23,6 +23,7 @@
 .ac-gate{margin:100px auto;max-width:480px;text-align:center}
 .ac-gate i{color:#93a1b2;font-size:34px}
 .ac-gate a{color:#07898b}
+.ac-profession-label{color:#53687e;display:block;font-size:12px;font-weight:800;margin-top:18px}.ac-profession-select{background:#fff;border:1px solid #d8e2e8;border-radius:10px;color:#173453;font-size:15px;margin-top:7px;padding:12px;width:100%}.ac-profession-note{color:#087f80;display:block;font-weight:800;min-height:18px;margin-top:8px}
 @media(max-width:800px){
   .ac-shell{padding:18px}
   .ac-grid{grid-template-columns:1fr}

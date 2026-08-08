@@ -77,9 +77,9 @@
   }
   function can(required) {
     var need = normalized(required);
-    // Paid customer enrollment/access is intentionally closed. Developers can
-    // still use View As to QA Standard, Pro and Pro+ before launch.
-    if (need !== 'standard' && !state.developer) return false;
+    // Backend RPC/RLS owns authorization. This helper only paints capabilities
+    // for the server-returned plan (or a developer View As preview, which can
+    // never grant server access).
     return state.effective === 'developer' || order[state.effective] >= order[need];
   }
 

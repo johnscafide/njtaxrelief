@@ -39,6 +39,7 @@
   <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>  <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
   <link rel="stylesheet" href="/property/css/lookup.css?v=20260805b">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css?v=20260808a">
 
 <script type="application/ld+json">
 {
@@ -98,25 +99,44 @@
 <!-- SITE NAV -->
 <header class="wd-nav" id="wd-nav">
   <div class="wd-nav-in">
-    <nav class="wd-left" style="background: none; box-shadow: none;">
-      <a href="/property/">Lookup</a>
-      <a href="/anchor-estimator.html">Rebates</a>
-      <a href="/property/#appeals">Appeals</a>
-      <a href="/insights.html">Insights</a>
-      <a href="/property/pro.html#plans">Pricing</a>
-    </nav>
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </button>
 
     <a class="wd-logo" href="/property/">
       <i class="fas fa-dog"></i><span>Watchdog</span>
     </a>
 
-    <nav class="wd-right" id="wd-right" style="background: none; box-shadow: none;">
-      <a href="/property/pro.html">Pro Hub</a>
-      <a href="/property/dashboard.html">My Properties</a>
-      <button onclick="plSignInPrompt()">Sign in</button>
-    </nav>
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+      <i class="fas fa-user"></i><span>Sign in</span>
+    </button>
   </div>
 </header>
+
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation">
+  <div class="wd-public-sheet-head"><b><i class="fas fa-dog"></i> Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close menu"><i class="fas fa-xmark"></i></button></div>
+  <div class="wd-public-section"><span class="wd-public-label">Property intelligence</span>
+    <a class="wd-public-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My properties</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/home.html"><i class="fas fa-heart"></i><span>Watchlist</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/town-compare.html"><i class="fas fa-route"></i><span>Compare towns</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+  <div class="wd-public-section"><span class="wd-public-label">Tax relief &amp; research</span>
+    <a class="wd-public-link" href="/anchor-estimator.html"><i class="fas fa-hand-holding-dollar"></i><span>ANCHOR &amp; Stay NJ estimator</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/fairness.html"><i class="fas fa-scale-balanced"></i><span>Assessment fairness</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/data-methodology.html"><i class="fas fa-book-open"></i><span>Data methodology</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+  <div class="wd-public-section"><span class="wd-public-label">Watchdog</span>
+    <a class="wd-public-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Professional intelligence</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/pro.html#plans"><i class="fas fa-tags"></i><span>Plans &amp; pricing</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/updates.html"><i class="fas fa-clock-rotate-left"></i><span>What's new</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+</aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
 
 <div class="pl-toast" id="pl-toast"></div>
 
@@ -1583,7 +1603,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script src="/scripts.js"></script>
+<script src="/property/js/public-nav.js?v=20260808a"></script>
 <script src="/property/js/ownership-verification.js?v=20260805a"></script>
-<script src="/property/js/lookup.js?v=20260805a"></script>
+<script src="/property/js/lookup.js?v=20260808a"></script>
 </body>
 </html>

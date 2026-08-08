@@ -28,7 +28,8 @@ const protectedPages = [
   ['property/tools/market-value/index.html', 'developer'],
   ['property/tools/neighborhood-comparison/index.html', 'developer'],
   ['property/pulse.html', 'standard'],
-  ['property/marker.html', 'standard']
+  ['property/marker.html', 'standard'],
+  ['property/workbench.html', 'pro']
 ];
 
 for (const [file, level] of protectedPages) {
@@ -39,13 +40,18 @@ for (const [file, level] of protectedPages) {
 
 const guard = read('property/js/access-guard.js');
 check('developer guard uses server RPC', guard.includes("rpc('is_watchdog_developer')"), 'No email or browser role heuristic');
+check('paid route guard uses server entitlement RPC', guard.includes("rpc('get_my_entitlement')"), 'Paid URL access is based on server subscription state');
 check('developer guard redirects unauthenticated users', guard.includes("destination('signin')"), 'Unauthenticated route behavior');
 check('developer guard redirects unauthorized users', guard.includes("destination('restricted')"), 'Unauthorized route behavior');
 
 const entitlement = read('supabase/migrations/20260805235900_billing_saved_views_rls.sql');
+const v040 = read('supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql');
 const revokeAnon = read('supabase/migrations/20260807151500_revoke_anon_internal_entitlement_rpcs.sql');
 check('profiles have RLS', entitlement.includes('alter table public.profiles enable row level security'), 'Customer profile boundary');
 check('plan checks are server-owned', entitlement.includes('create or replace function public.has_watchdog_plan') && entitlement.includes('security definer'), 'Plan authority resides in database');
+check('Workbench RLS requires Pro', v040.includes('professional cases select own pro') && v040.includes("public.has_watchdog_plan('pro')"), 'Professional case rows are server plan-gated');
+check('score history is browser read-only', v040.includes('revoke insert, update, delete on table public.score_observations from authenticated'), 'Historical evidence is server-created');
+check('Paddle webhook ledger is service-only', v040.includes('billing_provider_events') && v040.includes('revoke all on table public.billing_provider_events from anon, authenticated'), 'Billing events cannot be forged by browser clients');
 check('entitlement RPC is not anon-callable', revokeAnon.includes('revoke execute on function public.get_my_entitlement() from anon'), 'No anonymous entitlement lookup');
 check('developer RPC is not anon-callable', revokeAnon.includes('revoke execute on function public.is_watchdog_developer() from anon'), 'No anonymous developer check');
 

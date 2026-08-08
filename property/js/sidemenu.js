@@ -153,6 +153,7 @@
       if (paid) { if (title) title.textContent = 'Professional tools'; if (note) note.textContent = 'Your plan workspace'; }
       else { if (title) title.textContent = 'Explore Pro'; if (note) note.textContent = 'Professional tools and workflows'; }
     });
+    document.querySelectorAll('.paid-only').forEach(function (node) { node.hidden = !paid; });
   }
 
   document.addEventListener('njptr:plan-change', function (event) {
@@ -165,7 +166,7 @@
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260807f', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260808a', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();

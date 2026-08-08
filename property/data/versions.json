@@ -1,31 +1,31 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-08T07:27:48-04:00",
+  "updated_at": "2026-08-08T14:20:00-04:00",
   "releases": [
     {
-      "version": "0.38.0",
+      "version": "0.40.0",
       "date": "2026-08-08",
-      "timestamp": "2026-08-08T07:27:48-04:00",
-      "title": "Paddle billing foundation",
-      "category": "Revenue / subscription infrastructure",
-      "status": "Backend deployed; Paddle Sandbox configuration next",
-      "summary": "Selected Paddle Billing as Watchdog's subscription provider while preserving a provider-neutral entitlement boundary. Applied the production schema update for Paddle IDs and ordered webhook events, deployed JWT-protected Paddle Checkout and Customer Portal functions, and deployed a public webhook that verifies Paddle-Signature against the exact raw request body before changing access. Price IDs remain the plan authority, webhook events are idempotent, stale events cannot overwrite newer state, and paid enrollment remains fail-closed until the complete Sandbox and live lifecycle tests pass.",
-      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
-      "files": ["supabase/migrations/20260808112150_paddle_billing_provider.sql", "supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "supabase/config.toml", "property/js/billing-client.js", "property/account.html", "property/privacy.html", "property/terms.html", "property/docs/billing-launch-status.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"billing_provider":"paddle", "production_schema_migration":1, "edge_functions_deployed":3, "signed_webhook":1, "provider_event_ordering":1, "server_checkout_gate":1, "public_paid_enrollment":0, "saas_readiness_percent":61}
+      "timestamp": "2026-08-08T14:20:00-04:00",
+      "title": "SaaS control plane, Change Intelligence and Professional Workbench",
+      "category": "SaaS platform / revenue / professional workflow",
+      "status": "Code complete; Paddle activation and database migration require deployment",
+      "summary": "Built the first provider-neutral paid control plane around Paddle with authenticated server-created transactions, temporary Customer Portal sessions, signed webhook verification, idempotent/out-of-order event handling and server-authoritative Pro/Pro+ route enforcement. Upgraded Property Pulse into Change Intelligence with date/type filtering, sourced change deltas and trusted Watchdog Score history while removing customer browser writes to score evidence. Shipped the Pro Watchdog Workbench for private property case files, notes, status, marker pins, dated snapshots, exports and activity history, and connected Evidence Graph 2.0 to the case/change workflow. Added customer-owned profession personalization that changes recommendations without changing entitlement.",
+      "links": ["/property/account.html", "/property/pulse.html", "/property/workbench.html", "/property/home.html", "/property/updates.html"],
+      "files": ["supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql", "supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "property/js/access-guard.js", "property/js/plan-context.js", "property/account.html", "property/js/account.js", "property/pulse.html", "property/js/pulse.js", "property/workbench.html", "property/js/workbench.js", "property/css/workbench.css", "property/js/dashboard/tools/score-history.js", "property/js/dashboard/tools/title-evidence-graph.js", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"new_private_workbench_tables": 2, "billing_providers_ready": 1, "trusted_history_write_paths_in_browser": 0, "change_event_types": 12, "professional_case_workflows": 8, "saas_readiness_percent": 72}
     },
     {
-      "version": "0.37.0",
+      "version": "0.39.0",
       "date": "2026-08-08",
-      "timestamp": "2026-08-08T11:50:00-04:00",
-      "title": "Automated source history and release confirmation",
-      "category": "Data operations / historical integrity",
-      "status": "Completed; migration and Edge Function deployment required",
-      "summary": "Replaced the duplicate six-hour source-monitor workflows with one read-only daily job that never opens branches, PRs, issues, or automated commits. It records source observations for 730 days, treats rendered-page hashes as diagnostic only, and requires the same publisher ETag or Last-Modified token on two daily checks before creating a review event. The private warehouse now records immutable monitor runs and observations through the existing service-only Edge Function. Source releases already remain versioned and approved separately, providing the correct foundation for future customer-facing current-versus-as-of-date property data without overwriting historical values.",
-      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
-      "files": [".github/workflows/source-change-monitor.yml", ".github/workflows/source-monitor.yml (deleted)", "property/scripts/monitor_nj_sources.py", "property/data/source-watch-history.json", "supabase/migrations/20260808113000_source_monitor_history.sql", "supabase/functions/source-monitor-ingest/index.ts", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/docs/source-monitor-setup.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"monitor_workflows": 1, "scheduled_checks_per_day": 1, "source_history_retention_days": 730, "workflow_artifact_retention_days": 90, "confirmation_observations_required": 2, "saas_readiness_percent": 61}
+      "timestamp": "2026-08-08T13:04:00-04:00",
+      "title": "Watchdog Evidence Graph and unified mobile public shell",
+      "category": "Professional intelligence / mobile product / authentication trust",
+      "status": "Completed; branded OAuth hostname requires external paid-domain cutover",
+      "summary": "Shipped the first Watchdog Evidence Graph inside the Pro+ closing workflow, connecting parcel identity, assessment/tax, sale/deed context, DCA permit/certificate status, environmental controls and land/flood jurisdiction into one sourced research view without making title-clearance claims. Rebuilt the public homepage navigation around a hamburger menu plus account/profile sheet with recent-property memory, profile/account destinations and proper signed-in state. Enlarged the mobile neighborhood search/results controls and cards, and re-spaced the Agent Intel app sheet with safer bottom clearance. Documented the exact Google/Supabase custom-domain cutover required to replace the random Supabase OAuth hostname with Watchdog-branded authentication.",
+      "links": ["/property/", "/property/home.html", "/property/updates.html"],
+      "files": ["property/index.html", "property/css/public-mobile-nav.css", "property/js/public-nav.js", "property/css/lookup/01-search-hero.css", "property/css/lookup/03-neighborhood-results.css", "property/js/lookup.js", "property/css/mobile-app.css", "property/css/dashboard.css", "property/css/dashboard/16-title-evidence-graph.css", "property/js/dashboard/home/index.js", "property/js/dashboard/tools/title-evidence-graph.js", "property/home.html", "property/docs/google-auth-branding.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"evidence_graph_nodes": 6, "live_evidence_source_families": 5, "mobile_public_menus": 2, "recent_property_memory": 1, "mobile_search_touch_target_px": 46, "saas_readiness_percent": 63}
     },
     {
       "version": "0.36.0",
@@ -1196,52 +1196,53 @@
   "roadmap": [
     {
       "priority": 0,
-      "title": "Institutional marker governance layer",
-      "readiness": "100-marker expansion shipped in v0.25.0",
+      "title": "Activate and validate Paddle paid lifecycle",
+      "readiness": "v0.40 server control plane shipped; external Paddle/Supabase configuration required",
       "effort": "Large",
-      "category": "Data platform",
-      "why": "A sellable professional SaaS needs attributable, refreshable data contracts—not an ever-growing list of unexplained fields.",
+      "category": "Revenue / backend",
+      "why": "Paid SaaS is not launch-ready until checkout, renewal, past-due recovery, cancellation, Portal and entitlement enforcement have all been proven end to end.",
       "deliverables": [
-        "443 live governed markers",
-        "50 new authoritative source markers",
-        "50 new Watchdog-derived markers",
-        "profession and plan labels",
-        "source lineage and refresh cadence",
-        "formula disclosure for derived signals",
-        "NJDEP geology, hydrography and land source families"
+        "Paddle Sandbox Products and Prices",
+        "default payment link and checkout",
+        "verified subscription webhooks",
+        "Customer Portal lifecycle",
+        "past-due / pause / cancel acceptance tests",
+        "one controlled Live-mode transaction",
+        "intentional public enrollment switch"
       ]
     },
     {
       "priority": 1,
-      "title": "Title Evidence Graph",
-      "readiness": "Next professional build",
+      "title": "Property Change Engine + durable history",
+      "readiness": "Change Intelligence UI and trusted event/history contract shipped in v0.40.0",
       "effort": "Large",
-      "category": "Attorney / title",
-      "why": "Turn scattered deed, mortgage, lien, tax, permit and environmental evidence into one sourced closing chronology.",
+      "category": "Data platform / retention",
+      "why": "Professionals return when Watchdog can prove exactly what changed since yesterday, last month or last year and link the change back to its authoritative source.",
       "deliverables": [
-        "chain-of-title event markers",
-        "deed/mortgage reference links",
-        "permit-to-CO gap age",
-        "environmental encumbrance index",
-        "unresolved-evidence count",
-        "source-date confidence"
+        "field-level before/after snapshots",
+        "assessment/tax/permit/deed diff jobs",
+        "trusted derived-score recomputation",
+        "historical backfill by available source year",
+        "material-change thresholds",
+        "email/in-app delivery",
+        "source lineage on every change"
       ]
     },
     {
       "priority": 2,
-      "title": "Collateral & Escrow Stress Lab",
-      "readiness": "Shipped in v0.24.0",
-      "effort": "Medium",
-      "category": "Lender / mortgage",
-      "why": "The new Escrow Shock scenario should grow into an explainable collateral operating-cost stress test.",
+      "title": "Professional Workbench report builder",
+      "readiness": "Private Pro case files, snapshots, marker pins, activity and export foundation shipped in v0.40.0",
+      "effort": "Large",
+      "category": "Professional workflow",
+      "why": "Cases become revenue-grade when a professional can turn saved evidence into a repeatable, client-safe deliverable instead of copying screenshots out of Watchdog.",
       "deliverables": [
-        "1/3/5-year tax stress",
-        "revaluation sensitivity",
-        "added-assessment sensitivity",
-        "municipal levy volatility",
-        "insurance/flood inputs",
-        "payment-shock percentile",
-        "reserve recommendation"
+        "attorney/title report preset",
+        "lender collateral report preset",
+        "broker listing brief preset",
+        "investor diligence preset",
+        "shareable read-only case links",
+        "branded PDF generation",
+        "case-level source manifest and evidence dates"
       ]
     },
     {

@@ -2334,10 +2334,10 @@ function brief() {
     send({name:name(),email:plUser.email,phone:profile.phone||'Not provided',topic:'⭐ WATCHDOG '+(seller?'Seller strategy request':'Buyer strategy request'),tenure:seller?'Homeowner':'Buyer',lead_type:seller?'Seller lead':'Buyer lead',finance:'Not provided',town:'Not provided',address:address||'Not provided',message:[seller?'Seller strategy request from dashboard.':'Buyer strategy request from dashboard.','Property: '+(address||'Not provided'),'Source: /property/dashboard.html'].join('\n')});
     plModalNote(seller?'Seller strategy':'Buyer strategy','<p>'+(seller?'An agent will pair the Watchdog tax story with current comps and a listing plan.':'An agent will pair the Watchdog diligence with live market context and an offer plan.')+'</p><p><b>No obligation and no pressure.</b></p>');
   };
-  window.watchdogScoreObserve = function (r, score, markerId) {
+  window.watchdogScoreHistory = function (r, markerId) {
     if(!sb||!plUser||!r||!r.pams_pin)return Promise.resolve([]);
-    markerId=markerId||'watchdog.score';var row={user_id:plUser.id,pams_pin:r.pams_pin,marker_id:markerId,score:+score,observed_on:new Date().toISOString().slice(0,10)};
-    return sb.from('score_observations').upsert(row,{onConflict:'user_id,pams_pin,marker_id,observed_on'}).select().then(function(){return sb.from('score_observations').select('score,observed_at,observed_on').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).eq('marker_id',markerId).order('observed_at',{ascending:true}).limit(120);}).then(function(x){return x.data||[];});
+    markerId=markerId||'watchdog.score';
+    return sb.from('score_observations').select('score,observed_at,observed_on').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).eq('marker_id',markerId).order('observed_at',{ascending:true}).limit(240).then(function(x){return x.data||[];});
   };
 
   // Compatibility bridge for lazy modules. Read-only getters keep shared state private.

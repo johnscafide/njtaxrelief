@@ -1,51 +1,43 @@
 # Watchdog Paddle billing setup
 
-Watchdog now uses a provider-neutral entitlement layer with Paddle Billing as the selected payment provider. Paid enrollment remains fail-closed until the Paddle sandbox lifecycle has passed and `BILLING_CHECKOUT_ENABLED=true` is deliberately set.
+Watchdog v0.40 uses Paddle as the planned customer billing provider. The customer-facing JavaScript remains provider-neutral; all credentials, Price IDs, entitlement changes and webhook verification stay server-side in Supabase Edge Functions.
 
-## Paddle objects to create
+## Secrets
 
-In Paddle Sandbox first, create two recurring monthly products/prices:
+Set these only in Supabase Edge Function secrets:
 
-- Watchdog Pro — `$49/month`
-- Watchdog Pro+ — `$149/month`
-
-Set the default payment link to `https://njpropertytaxrelief.com/property/account.html` when the live domain is approved. Use a development/default payment link allowed by Paddle while testing in Sandbox.
-
-## Supabase Edge Function secrets
-
-Set these secrets before deploying the Paddle billing functions:
-
-- `PADDLE_API_KEY` — server-side Paddle API key; never expose it to browser code
-- `PADDLE_CLIENT_TOKEN` — Paddle.js client-side token (safe for checkout use in the browser)
-- `PADDLE_WEBHOOK_SECRET` — secret for the Paddle notification destination
-- `PADDLE_PRICE_PRO` — recurring Paddle Price ID for Pro (`pri_...`)
-- `PADDLE_PRICE_PRO_PLUS` — recurring Paddle Price ID for Pro+ (`pri_...`)
-- `PADDLE_ENVIRONMENT` — `sandbox` during validation; omit or set `production` for live
+- `PADDLE_API_KEY`
+- `PADDLE_WEBHOOK_SECRET`
+- `PADDLE_PRICE_PRO`
+- `PADDLE_PRICE_PRO_PLUS`
+- `PADDLE_ENVIRONMENT` — `sandbox` while testing, then `live`
 - `BILLING_CHECKOUT_ENABLED` — keep `false` until the full sandbox lifecycle passes
 
-Supabase supplies `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` to hosted Edge Functions.
+Optional: `PADDLE_WEBHOOK_TOLERANCE_SECONDS` (defaults to Paddle SDK-compatible 5 seconds) and `PADDLE_API_BASE` for controlled testing.
 
-## Webhook
+Never place an API key, webhook secret, Supabase service-role key, or Paddle customer/subscription identifier in `/property` JavaScript.
 
-Deploy `paddle-webhook` with JWT verification disabled. Paddle authenticates the public endpoint with `Paddle-Signature`, which the function verifies against the exact raw body before doing any entitlement work.
+## Deploy order
 
-Notification URL:
+1. Apply `supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql`.
+2. Configure recurring Pro and Pro+ Prices in Paddle Sandbox.
+3. Configure Paddle's default payment link so API-created transactions receive a `checkout.url`.
+4. Add the secrets above with sandbox values and keep checkout disabled.
+5. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
+6. Deploy `paddle-webhook` with JWT verification disabled. Paddle authenticates this endpoint with its `Paddle-Signature`; the function verifies the raw body HMAC before processing it.
+7. Create a Paddle notification destination at `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/paddle-webhook` for subscription lifecycle events (`created`, `updated`, `activated`, `trialing`, `past_due`, `paused`, `resumed`, `canceled`) plus `transaction.completed`.
+8. Set `BILLING_CHECKOUT_ENABLED=true` only in Sandbox and test: new Pro, new Pro+, Portal, cancellation scheduled at period end, `past_due`, resume, and duplicate/out-of-order webhook delivery.
+9. Confirm `account_entitlements` changes only from the verified webhook and `billing_provider_events` records the provider event once.
+10. Turn checkout back off, replace Sandbox credentials with Live credentials, repeat a controlled live test, then intentionally open enrollment.
 
-`https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/paddle-webhook`
+Paddle Customer Portal URLs are created on demand. They are temporary and are never cached or hard-coded into Watchdog pages.
 
-Subscribe to the subscription lifecycle events, including created, trialing, activated, updated, past due, paused, resumed, and canceled. The handler is idempotent and ignores stale out-of-order subscription events.
+## Entitlement behavior
 
-## Deploy/test order
+- `active` / `trialing`: paid access is granted according to the mapped Price ID.
+- `past_due`: billing state is retained so recovery can happen through Paddle; route authorization can be tightened later if business policy requires immediate suspension.
+- `paused` / `canceled`: `get_my_entitlement()` resolves the customer to Standard access.
+- Developer access is a separate server role and is never granted by checkout.
+- “View As” is visual QA only; it cannot change RLS, entitlement RPCs or paid route authorization.
 
-1. The `paddle_billing_provider` migration is already applied to production.
-2. Create the Sandbox Pro and Pro+ recurring prices.
-3. Add the Paddle Sandbox API key, client token, webhook secret, both Price IDs, and `PADDLE_ENVIRONMENT=sandbox` as Supabase secrets.
-4. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
-5. Deploy `paddle-webhook` with JWT verification disabled.
-6. Create the Paddle notification destination for the webhook URL and select the subscription lifecycle events.
-7. Temporarily set `BILLING_CHECKOUT_ENABLED=true` and test Pro checkout → signed webhook → entitlement → Customer Portal → cancellation.
-8. Set checkout back to `false`, create/approve the live Paddle catalog/domain, replace Sandbox secrets with live values, repeat the lifecycle test, then intentionally open enrollment.
-
-The plan authority is always the recognized Paddle Price ID received in a verified webhook. `custom_data` carries the Supabase user ID only for account linkage; it never decides the paid plan.
-
-Never put the Paddle API key, webhook secret, or Supabase service-role key in `/property` JavaScript.
+Official Paddle references used for this implementation: Overlay Checkout/build checkout, webhook signature verification, subscription provisioning, Customer Portal sessions, Transactions and custom data in the Paddle Developer documentation.

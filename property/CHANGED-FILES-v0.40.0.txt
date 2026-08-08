@@ -1,0 +1,93 @@
+Watchdog v0.40.0 — SaaS control plane + Change Intelligence + Professional Workbench
+
+This package intentionally includes the v0.39 mobile/Evidence Graph files plus v0.40 so the combined update can be uploaded once.
+
+IMPORTANT DEPLOYMENT ORDER
+1. Upload the web/static files.
+2. Apply: supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql
+3. Set Paddle SANDBOX secrets described in property/docs/paddle-billing-launch.md.
+4. Deploy create-checkout-session and create-portal-session with JWT verification ON.
+5. Deploy paddle-webhook with JWT verification OFF. It verifies Paddle-Signature itself.
+6. Deploy source-monitor-ingest with JWT verification ON if your current deployed copy predates this release.
+7. Run the full Paddle sandbox acceptance checklist.
+8. Keep BILLING_CHECKOUT_ENABLED=false until every lifecycle check passes.
+
+WEB / PRODUCT
+property/index.html
+property/dashboard.html
+property/home.html
+property/account.html
+property/pulse.html
+property/workbench.html
+property/privacy.html
+property/terms.html
+property/sidemenu.html
+property/updates.html
+property/css/account.css
+property/css/dashboard.css
+property/css/dashboard/16-title-evidence-graph.css
+property/css/dashboard/17-evidence-graph-v2.css
+property/css/public-mobile-nav.css
+property/css/mobile-app.css
+property/css/lookup/01-search-hero.css
+property/css/lookup/03-neighborhood-results.css
+property/css/pulse.css
+property/css/pulse-v040.css
+property/css/workbench.css
+property/js/access-guard.js
+property/js/account.js
+property/js/plan-context.js
+property/js/public-nav.js
+property/js/lookup.js
+property/js/pulse.js
+property/js/sidemenu.js
+property/js/workbench.js
+property/js/dashboard/index.js
+property/js/dashboard/home/index.js
+property/js/dashboard/tools/professional-due-diligence.js
+property/js/dashboard/tools/score-history.js
+property/js/dashboard/tools/title-evidence-graph.js
+property/data/versions.json
+property/data/saas-production-readiness.json
+
+BILLING / BACKEND
+supabase/config.toml
+supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql
+supabase/functions/create-checkout-session/index.ts
+supabase/functions/create-checkout-session/deno.json
+supabase/functions/create-portal-session/index.ts
+supabase/functions/create-portal-session/deno.json
+supabase/functions/paddle-webhook/index.ts
+supabase/functions/paddle-webhook/deno.json
+supabase/functions/source-monitor-ingest/index.ts
+supabase/functions/BILLING-SETUP.md
+
+DOCS / QA
+property/docs/google-auth-branding.md
+property/docs/billing-launch-status.md
+property/docs/paddle-billing-launch.md
+property/scripts/audit_access_boundaries.mjs
+property/CHANGED-FILES-v0.39.0.txt
+property/CHANGED-FILES-v0.40.0.txt
+
+SECURITY CONTRACTS IN THIS RELEASE
+- Standard/Pro/Pro+ route checks use server entitlement state.
+- Developer View As is presentation-only and cannot grant RLS access.
+- Professional Workbench rows require owned user_id + Pro RLS.
+- Historical score observations are read-only in customer browsers.
+- Paddle Price IDs determine paid tier in the signed webhook.
+- Billing webhook events are service-only and idempotent.
+- Paid checkout remains fail-closed until explicitly enabled server-side.
+
+Verification run before packaging:
+- JavaScript syntax checks: pass
+- Edge Function TypeScript parser checks: pass
+- Access-boundary static audit: 51 passed / 0 failed
+- versions/readiness JSON validation: pass
+
+External activation still required:
+- Paddle account / Sandbox Products / recurring Prices / default payment link
+- Supabase Edge Function secrets and deployment
+- Paddle notification destination
+- Sandbox lifecycle acceptance tests
+- Branded Google OAuth custom-domain cutover remains a separate external configuration step

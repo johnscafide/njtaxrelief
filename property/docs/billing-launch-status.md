@@ -1,37 +1,30 @@
 # Watchdog billing launch status
 
-Last checked: 2026-08-08
+Updated: 2026-08-08 · v0.40
 
-## Selected provider
+## Current decision
 
-Paddle Billing is now the selected subscription provider. The prior Stripe implementation remains in the repository as rollback/reference code but is no longer the launch path. There are no live Stripe subscriptions to migrate.
+Paddle is the planned subscription billing provider for Watchdog Pro and Pro+. The browser integration is provider-neutral. Stripe subscription code remains in the repository only as legacy/fallback source and is not the v0.40 launch path.
 
-## Implemented
+## Shipped in code
 
-- Production entitlement schema now accepts Paddle while remaining provider-neutral.
-- Provider event timestamps prevent older webhook deliveries from overwriting newer subscription state.
-- A service-only provider event ledger provides webhook idempotency.
-- `create-checkout-session` is converted to Paddle transactions and remains JWT-protected and fail-closed.
-- `create-portal-session` now generates temporary authenticated Paddle Customer Portal sessions.
-- `paddle-webhook` verifies `Paddle-Signature` against the raw request body before syncing entitlements.
-- Paddle Price IDs—not browser metadata—are the plan authority.
-- Account & Billing UI is Paddle-ready; developer View As remains presentation-only.
-- Production checkout remains closed.
+- Authenticated server-created Paddle transaction for Pro/Pro+ checkout.
+- Price selection is server-owned; the browser sends only `pro` or `pro_plus`.
+- Transaction `custom_data` is populated server-side with the authenticated Watchdog user ID and requested plan.
+- Temporary Paddle Customer Portal session created on demand for the authenticated subscription owner.
+- Raw-body `Paddle-Signature` verification before any entitlement write.
+- Provider-neutral idempotency ledger and out-of-order subscription event protection.
+- Server-authoritative Pro/Pro+ route guard plus RLS-protected Pro Workbench.
+- `BILLING_CHECKOUT_ENABLED` remains the explicit fail-closed launch switch.
 
-## Remaining activation steps
+## Still required outside the repository
 
-1. Create/finish the Paddle account and its Sandbox catalog.
-2. Create Watchdog Pro ($49/month) and Pro+ ($149/month) recurring Sandbox prices.
-3. Create a Sandbox client-side token and API key.
-4. Register the Supabase `paddle-webhook` notification destination and copy its endpoint secret into Supabase.
-5. Install the two Sandbox Price IDs as Supabase secrets.
-6. Deploy the three Paddle-ready Edge Functions.
-7. Run Checkout → webhook → entitlement → Portal → cancellation in Sandbox.
-8. Complete Paddle live-domain/account approval and repeat with production credentials.
-9. Only after the live lifecycle passes, deliberately set `BILLING_CHECKOUT_ENABLED=true` and change public Pro/Pro+ CTAs from early access to paid enrollment.
+1. Create/verify Paddle Sandbox Products and recurring Prices for Pro and Pro+.
+2. Configure Paddle's default payment link.
+3. Install the Paddle API key, webhook secret and Price IDs as Supabase Function secrets.
+4. Apply the v0.40 database migration.
+5. Deploy the Paddle webhook + checkout/Portal functions.
+6. Register the Paddle notification destination and run every sandbox acceptance case in `property/docs/paddle-billing-launch.md`.
+7. Perform one controlled Live-mode lifecycle before opening public enrollment.
 
-## Production reference
-
-Webhook URL: `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/paddle-webhook`
-
-Never store Paddle API keys, webhook secrets, or Supabase service-role credentials in the Git repository or browser JavaScript.
+Public paid enrollment should remain off until those steps have evidence.

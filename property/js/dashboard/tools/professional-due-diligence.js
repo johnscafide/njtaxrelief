@@ -115,8 +115,9 @@
   }
   function tool(r) { var k=key(r);records[k]=r;setTimeout(function(){load(r,false);},0);return'<div class="dd-tool"><div class="dd-intro"><span class="dd-pro-badge">PRO DUE DILIGENCE</span><h3>Closing &amp; collateral preflight</h3><p>One property-level pass across state permit/certificate status and NJDEP environmental controls. Built for the questions attorneys, lenders, brokers and appraisers need to chase during property and collateral review.</p></div><div id="dd-'+k+'"></div><button class="dd-refresh" type="button" onclick="ddRefresh(\''+k+'\')"><i class="fas fa-rotate"></i> Recheck live sources</button></div>'; }
   function refresh(k){var r=records[k];if(r)load(r,true);}
+  function inspectFresh(r){delete cache[key(r)];return inspect(r);}
   function downloadEvidence(k){var r=records[k],d=evidenceRecords[k];if(r&&d)evidence(r,d);}
   function portfolio(list){list=list||[];return'<section class="sec dd-portfolio"><h4><i class="fas fa-shield-halved"></i> Professional due diligence</h4><p class="dd-portfolio-lede">Open a property report for a live permit/certificate and NJDEP environmental preflight. The check runs against the parcel’s block/lot and saved map point.</p><div class="dd-portfolio-links">'+list.map(function(r){return'<a href="/property/home.html?pin='+encodeURIComponent(r.pams_pin||'')+'#sec-diligence"><span>'+safe(r.address||'Saved property')+'</span><i class="fas fa-arrow-right"></i></a>';}).join('')+'</div></section>';}
-  Object.assign(window,{toolProfessionalDueDiligence:tool,toolDueDiligencePortfolio:portfolio,ddPermitRecords:permits,ddInspect:inspect,ddRefresh:refresh,ddEvidence:downloadEvidence});
+  Object.assign(window,{toolProfessionalDueDiligence:tool,toolDueDiligencePortfolio:portfolio,ddPermitRecords:permits,ddInspect:inspect,ddInspectFresh:inspectFresh,ddRefresh:refresh,ddEvidence:downloadEvidence});
 })();
 export {};

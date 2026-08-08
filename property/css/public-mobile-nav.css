@@ -1,0 +1,25 @@
+/* Watchdog public navigation: one app-like shell for landing + search. */
+.wd-nav .wd-nav-in{grid-template-columns:1fr auto 1fr}
+.wd-public-trigger{align-items:center!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px!important;display:inline-flex!important;gap:8px!important;justify-content:center!important;min-height:44px;padding:0 14px!important;width:max-content}
+.wd-public-trigger i{font-size:17px}
+.wd-public-profile{justify-self:end;margin-left:auto}
+.wd-public-profile img{border:2px solid rgba(255,255,255,.82);border-radius:50%;height:30px;object-fit:cover;width:30px}
+.wd-nav.solid .wd-public-trigger{background:#f5f8fa!important;border-color:#dbe4ea!important}
+.wd-public-backdrop{background:rgba(5,18,34,.54);inset:0;opacity:0;pointer-events:none;position:fixed;transition:opacity .2s ease;z-index:6090}
+.wd-public-backdrop.open{opacity:1;pointer-events:auto}
+.wd-public-sheet{background:#fff;box-shadow:0 22px 65px rgba(7,28,50,.24);box-sizing:border-box;color:#122845;height:100dvh;max-width:430px;overflow:auto;overscroll-behavior:contain;padding:22px 18px calc(30px + env(safe-area-inset-bottom));position:fixed;top:0;transform:translateX(-105%);transition:transform .24s cubic-bezier(.2,.8,.2,1);width:min(92vw,430px);z-index:6100}
+.wd-public-sheet.right{left:auto;right:0;transform:translateX(105%)}
+.wd-public-sheet.open{transform:none}
+.wd-public-sheet-head{align-items:center;display:flex;justify-content:space-between;margin-bottom:22px;min-height:48px}
+.wd-public-sheet-head b{align-items:center;display:flex;font:800 20px/1.15 'Plus Jakarta Sans',sans-serif;gap:9px}.wd-public-sheet-head b i{color:#b79b2f}
+.wd-public-close{align-items:center;background:#eef3f5;border:0;border-radius:50%;color:#213a58;cursor:pointer;display:flex;height:46px;justify-content:center;width:46px}
+.wd-public-section{border-top:1px solid #e4eaee;padding:14px 0}.wd-public-section:first-of-type{border-top:0;padding-top:0}
+.wd-public-label{color:#8290a2;display:block;font:800 9px/1.3 'Plus Jakarta Sans',sans-serif;letter-spacing:.13em;margin:4px 10px 8px;text-transform:uppercase}
+.wd-public-link{align-items:center;border-radius:14px;color:#18304f;display:flex;font:750 15px/1.25 'Plus Jakarta Sans',sans-serif;gap:13px;min-height:52px;padding:6px 11px;text-decoration:none}
+.wd-public-link:hover,.wd-public-link:focus-visible{background:#f1f6f7;outline:none}.wd-public-link>i{color:#6c8198;text-align:center;width:20px}.wd-public-link .fa-chevron-right{color:#a6b1bd;font-size:9px;margin-left:auto}
+.wd-public-account{align-items:center;background:#f2f7f7;border-radius:18px;display:flex;gap:12px;margin-bottom:18px;padding:14px}.wd-public-account img,.wd-public-account .avatar{align-items:center;background:#0b8586;border-radius:50%;color:#fff;display:flex;font:800 17px 'Plus Jakarta Sans',sans-serif;height:48px;justify-content:center;object-fit:cover;width:48px}.wd-public-account b{display:block;font:800 14px 'Plus Jakarta Sans',sans-serif}.wd-public-account span{color:#728196;display:block;font-size:12px;margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wd-public-signin{align-items:center;background:#0b898a;border:0;border-radius:14px;color:#fff;cursor:pointer;display:flex;font:800 15px 'Plus Jakarta Sans',sans-serif;gap:10px;justify-content:center;min-height:52px;padding:0 18px;width:100%}
+.wd-public-recent-empty{color:#7d8a9a;font-size:12.5px;line-height:1.5;padding:8px 11px 12px}.wd-public-recent .wd-public-link{align-items:flex-start}.wd-public-recent small{color:#7c8b9b;display:block;font-size:10px;font-weight:600;margin-top:3px}
+body.wd-public-menu-open{overflow:hidden}
+@media(max-width:560px){.wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}}
+@media(prefers-reduced-motion:reduce){.wd-public-sheet,.wd-public-backdrop{transition:none}}

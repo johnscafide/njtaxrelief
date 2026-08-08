@@ -1,0 +1,30 @@
+Watchdog v0.39.0 — Evidence Graph + mobile public shell
+
+Upload these paths exactly as shown:
+
+property/index.html
+property/dashboard.html
+property/home.html
+property/css/public-mobile-nav.css
+property/css/mobile-app.css
+property/css/lookup/01-search-hero.css
+property/css/lookup/03-neighborhood-results.css
+property/css/dashboard.css
+property/css/dashboard/16-title-evidence-graph.css
+property/js/public-nav.js
+property/js/lookup.js
+property/js/dashboard/home/index.js
+property/js/dashboard/tools/professional-due-diligence.js
+property/js/dashboard/tools/title-evidence-graph.js
+property/data/versions.json
+property/data/saas-production-readiness.json
+property/docs/google-auth-branding.md
+property/CHANGED-FILES-v0.39.0.txt
+
+No database migration is required for this release.
+
+Google OAuth note:
+The codebase is ready for branded Watchdog navigation, but replacing the
+*.supabase.co hostname on Google's consent screen requires the external
+Google OAuth branding + Supabase custom-domain cutover documented in:
+property/docs/google-auth-branding.md

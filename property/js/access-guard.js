@@ -29,16 +29,25 @@
     return sb().auth.getUser().then(function (result) {
       var user = result && result.data && result.data.user;
       if (!user) { location.replace(destination('signin')); throw new Error('Sign in required'); }
-      return sb().rpc('is_watchdog_developer').then(function (devResult) {
+      return Promise.all([sb().rpc('is_watchdog_developer'), sb().rpc('get_my_entitlement')]).then(function (values) {
+        var devResult = values[0], entitlementResult = values[1];
         if (devResult.error) throw devResult.error;
+        if (entitlementResult.error) throw entitlementResult.error;
         var isDeveloper = devResult.data === true;
-        if (required !== 'standard' && !isDeveloper) { location.replace(destination('restricted')); throw new Error('Developer access required'); }
+        var rows = entitlementResult.data || [], entitlement = Array.isArray(rows) ? rows[0] : rows;
+        var order = { standard: 0, pro: 1, pro_plus: 2, developer: 3 };
+        var plan = isDeveloper ? 'developer' : String(entitlement && entitlement.plan_tier || 'standard');
+        var status = String(entitlement && entitlement.subscription_status || 'none');
+        var paidActive = status === 'active' || status === 'trialing' || status === 'past_due';
+        var allowed = required === 'standard' || isDeveloper || (paidActive && (order[plan] || 0) >= (order[required] || 0));
+        if (required === 'developer' && !isDeveloper) allowed = false;
+        if (!allowed) { location.replace(destination('restricted')); throw new Error('Plan access required'); }
         if (isDeveloper) {
           window.NJPTRDeveloperConfirmed = true;
           document.dispatchEvent(new CustomEvent('watchdog:developer-confirmed'));
         }
         reveal();
-        return { user: user, developer: isDeveloper };
+        return { user: user, developer: isDeveloper, entitlement: entitlement || null, plan: plan };
       });
     }).catch(function (error) {
       if (!/required$/.test(error.message || '')) location.replace(destination('restricted'));
