@@ -1,19 +1,19 @@
 {
   "schema_version": 1,
-  "accepted_at": "2026-08-07T22:23:40.040282+00:00",
+  "accepted_at": "2026-08-08T07:07:37.446629+00:00",
   "sources": {
     "nj-lpt-statistical-index": {
       "url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
-      "checked_at": "2026-08-07T22:23:34.609452+00:00",
+      "checked_at": "2026-08-08T07:07:33.611521+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "ee3fe3be4ddbcbed9eb7683d5ba22276bc20bf7950eec57059903033248bf855"
+      "sha256_prefix_2mb": "0bc56ca1119086046024b69cf1c7672106f7bc5488dfe42889dc6bc3800e7586"
     },
     "cod-history": {
       "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf",
-      "checked_at": "2026-08-07T22:23:35.461238+00:00",
+      "checked_at": "2026-08-08T07:07:33.835577+00:00",
       "status": 200,
       "etag": "\"2a60d2-697ce3e5\"",
       "last_modified": "Fri, 30 Jan 2026 17:01:25 GMT",
@@ -22,255 +22,255 @@
     },
     "budget-pressure": {
       "url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
-      "checked_at": "2026-08-07T22:23:35.659664+00:00",
+      "checked_at": "2026-08-08T07:07:33.888769+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "69141bae89e34ef916e57dde1459db5ec1afc7f5f47dafe34dfe8c5cb4a786fe"
+      "sha256_prefix_2mb": "a896b0824436d37763b9590abb15fbe9b884b44e4f351b9ee8f12a0a03d355ff"
     },
     "exempt-pilot": {
       "url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
-      "checked_at": "2026-08-07T22:23:35.759236+00:00",
+      "checked_at": "2026-08-08T07:07:33.933270+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "378d65774e7585640e5a92e1ed3bb39049c380b72457da6454dbb4e37540e58d"
+      "sha256_prefix_2mb": "ef80d1ed5a3ab6d35c94950f58e272f9acef60a4d053b8e73dc24ee2b796f84e"
     },
     "construction-permits-live": {
       "url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
-      "checked_at": "2026-08-07T22:23:36.359473+00:00",
+      "checked_at": "2026-08-08T07:07:34.324748+00:00",
       "status": 200,
-      "etag": "W/\"a772805d141ca702eadaf8d1b20f37f9\"",
+      "etag": "W/\"ab9127d7c76b2f98ec8d0371df60640f\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "b1d0e1b95bcad1e4f31239b4c288d2872d7beec94d2bfad60d4ee6458b3d31de"
+      "sha256_prefix_2mb": "3047e2f68b168ff7a639225d80ce4b9e8607b757bdc9ab30a3828c6ce5342fc1"
     },
     "known-contaminated-sites-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
-      "checked_at": "2026-08-07T22:23:36.674785+00:00",
+      "checked_at": "2026-08-08T07:07:34.389128+00:00",
       "status": 200,
-      "etag": "\"721a0a4d\"",
+      "etag": "\"e7088eac\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "b3598a692b322d3e0ce25aae954c70e15e4b901ddd96422ffe2729ed224c956b"
+      "sha256_prefix_2mb": "2c9299c4e40c144b482290b1687b468f71ee8a49f4bb7da6738d433f35e108a6"
     },
     "deed-notices-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
-      "checked_at": "2026-08-07T22:23:36.770607+00:00",
+      "checked_at": "2026-08-08T07:07:34.463905+00:00",
       "status": 200,
-      "etag": "\"1965dca1\"",
+      "etag": "\"5e27da09\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "ed7dd667c5c41f154abf2a5f704e0838170f8b851651224af1a7796c1fad6cad"
+      "sha256_prefix_2mb": "751837f335a222d54b4812822e2f33d4577da663f6b7844b8948fc9f3e71693e"
     },
     "groundwater-cea-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
-      "checked_at": "2026-08-07T22:23:36.870209+00:00",
+      "checked_at": "2026-08-08T07:07:34.528536+00:00",
       "status": 200,
-      "etag": "\"3eff662f\"",
+      "etag": "\"dc77e8c\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "fe5d36c066e0c33f1aba414783f6981d77b321055d0b1287d9cfec89aa740a3b"
+      "sha256_prefix_2mb": "14d181015115072db21970bd8a41599a2ef12f77de008783f191858a93eaeb18"
     },
     "underground-storage-tanks-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
-      "checked_at": "2026-08-07T22:23:37.004465+00:00",
+      "checked_at": "2026-08-08T07:07:34.601039+00:00",
       "status": 200,
-      "etag": "\"721a0a4d\"",
+      "etag": "\"e7088eac\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "cad0376e2d9dad0128bb951f61f455da3e5499ba09fc601e1db56e944ecbb0cc"
+      "sha256_prefix_2mb": "4d656a1094d422f9e0719da85eb3ed8bfdd78873f70ed0eec16cbec7451f362b"
     },
     "tidelands-reference-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30",
-      "checked_at": "2026-08-07T22:23:37.131430+00:00",
+      "checked_at": "2026-08-08T07:07:34.661650+00:00",
       "status": 200,
-      "etag": "\"ff2fba40\"",
+      "etag": "\"b7c15a4f\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "7667afd2a909fc21ae8a9214917e02754d1b39b9860f572450338173d9fc4949"
+      "sha256_prefix_2mb": "a90825d11fd4fc2f4a82ab71eeef2a8611e36dfc9a217db41ca8559d3182bf1e"
     },
     "highlands-area-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
-      "checked_at": "2026-08-07T22:23:37.216045+00:00",
+      "checked_at": "2026-08-08T07:07:34.740300+00:00",
       "status": 200,
-      "etag": "\"3eff662f\"",
+      "etag": "\"dc77e8c\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "84ac3ccef18ed3160037f3fd43a2038b8f8f576cd298c6fa3250766da9677033"
+      "sha256_prefix_2mb": "0962be6df2e456844acadce1882d5745c74544b024e23d43aa813cbd0bef6b15"
     },
     "pinelands-area-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
-      "checked_at": "2026-08-07T22:23:37.391264+00:00",
+      "checked_at": "2026-08-08T07:07:34.780823+00:00",
       "status": 200,
-      "etag": "\"3eff662f\"",
+      "etag": "\"dc77e8c\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "c798e3558ffcf3b9470e35a7266d7137b13f4f27944e5f4c4236798e82bbc077"
+      "sha256_prefix_2mb": "8a9397027681e1dbb93fa7d80b677e7ea837a82c23511614b0110f5451cba314"
     },
     "nfhl-flood-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43",
-      "checked_at": "2026-08-07T22:23:37.557466+00:00",
+      "checked_at": "2026-08-08T07:07:34.889319+00:00",
       "status": 200,
-      "etag": "\"ff2fba40\"",
+      "etag": "\"b7c15a4f\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "0c13f3367aafcedb160d89b9b0184942c0b7ed5728ade06d77349848367425fd"
+      "sha256_prefix_2mb": "22f84c418d76a360729f0f374b2933de7cbdcea49690feeacc2a6fd0946cbdfb"
     },
     "tidal-cafe-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
-      "checked_at": "2026-08-07T22:23:37.670779+00:00",
+      "checked_at": "2026-08-08T07:07:34.968738+00:00",
       "status": 200,
-      "etag": "\"ff2fba40\"",
+      "etag": "\"b7c15a4f\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "d504b4f4d6c85caf7dde482231ae4cf69ba30a21c48c38cb0a7bc7b88460402f"
+      "sha256_prefix_2mb": "4a24d5ab48af4156bc54df76b9e2930df212e5c97eda10d58aeaa6a564421f0f"
     },
     "wetlands-2012-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2",
-      "checked_at": "2026-08-07T22:23:37.817156+00:00",
+      "checked_at": "2026-08-08T07:07:35.045245+00:00",
       "status": 200,
-      "etag": "\"ab6a7ff1\"",
+      "etag": "\"c48b3825\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "ecda16f9f29e3598d4f13b20f25df2e11a3f4edfd9811c30ae2f6712d7defc9c"
+      "sha256_prefix_2mb": "128c3e26b3b103d852d2671294fbbf807c8d4903f28ef7c09b48f6a948ab39f2"
     },
     "priority-wetlands-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
-      "checked_at": "2026-08-07T22:23:37.925368+00:00",
+      "checked_at": "2026-08-08T07:07:35.111526+00:00",
       "status": 200,
-      "etag": "\"a46fbf3e\"",
+      "etag": "\"19a6394c\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "5b40e38769f5c3d9d4daaa353cc53963569a85ffe30d7fa6044890ea75e7ae76"
+      "sha256_prefix_2mb": "a5356280fe74e721b55d570f065c9631945caaa078d26ee4dcf785cfefd85c3c"
     },
     "njdep-geology-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer",
-      "checked_at": "2026-08-07T22:23:38.010881+00:00",
+      "checked_at": "2026-08-08T07:07:35.160788+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "72b4cbd8d041271bfc9fb8c5eeebbc4f9245fa49a98b2052d9f83f893855cebf"
+      "sha256_prefix_2mb": "3addf9bf581c9cfa06877d03955ee15139a3cfb39d6482e5a024459e334d8dad"
     },
     "njdep-hydro-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer",
-      "checked_at": "2026-08-07T22:23:38.112607+00:00",
+      "checked_at": "2026-08-08T07:07:35.206761+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "91a613b1cacfcc1bd7f432a3c76a7823329b35ef88dc4535aef7cbb45f30c70f"
+      "sha256_prefix_2mb": "3bb594737a1c20e289b492ae59791743afde5eea715431bc0a0e2bbf72ea907e"
     },
     "njdep-land-live": {
       "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer",
-      "checked_at": "2026-08-07T22:23:38.246936+00:00",
+      "checked_at": "2026-08-08T07:07:35.297851+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "ce832d3863cb8c3dbdf7a817db72b49a5f816f6e3060250642d6cb1f7d928651"
+      "sha256_prefix_2mb": "ba49979d711eda74a84dbf8059aea4e8081ed4e055c6f31eede1d5151754641b"
     },
     "nj-dca-permits-raw": {
       "url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
-      "checked_at": "2026-08-07T22:23:38.800469+00:00",
+      "checked_at": "2026-08-08T07:07:35.725162+00:00",
       "status": 200,
-      "etag": "W/\"177c80f3b4130c816c0306d2de5b63e5\"",
+      "etag": "W/\"06744c692b2dc7e83ea250afcc8883f6\"",
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "4fec6af415a14d035bb20ee36ab8f38b855e50dc05408fd33584be5eecabf34e"
+      "sha256_prefix_2mb": "20045fcec54579c39f6cff1a448e4c216d8688666238ecefb02f77fb9bf51175"
     },
     "nj-dca-development-trends": {
       "url": "https://www.nj.gov/dca/codes/reporter/building_permits.shtml",
-      "checked_at": "2026-08-07T22:23:38.889601+00:00",
+      "checked_at": "2026-08-08T07:07:35.810359+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "d27a6f90242790cf4be6cdfc993cf17a12003b3dea29eca698017435220839ca"
+      "sha256_prefix_2mb": "c4428d9938fbb506da7df364cf771db398821c9763c9d7bf0dde3f1b2b544614"
     },
     "nj-dca-new-home-warranty": {
       "url": "https://www.nj.gov/dca/codes/reporter/",
-      "checked_at": "2026-08-07T22:23:38.994068+00:00",
+      "checked_at": "2026-08-08T07:07:35.894624+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "affa77053c5e9ae738ef459ad1a66808bc140bc948c9c69d574c43b886bed3bd"
+      "sha256_prefix_2mb": "4f33500db20679d3a363d2225a83bf301e632830dea47c0d2d99d77a830f62b7"
     },
     "nj-dca-municipal-housing-profile": {
       "url": "https://datahub.dca.nj.gov/",
-      "checked_at": "2026-08-07T22:23:39.367520+00:00",
+      "checked_at": "2026-08-08T07:07:35.934884+00:00",
       "status": 200,
-      "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+      "etag": "W/\"b69b-A9MkwxmBd+POzosN5EcmvmVNCrY\"",
       "last_modified": null,
       "content_length": "46747",
-      "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      "sha256_prefix_2mb": "6e87d71e5d82a44aee13f2aea949afd2fca7b0a727e3e490e8de6be3085bae77"
     },
     "nj-dca-affordable-housing": {
       "url": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
-      "checked_at": "2026-08-07T22:23:39.461076+00:00",
+      "checked_at": "2026-08-08T07:07:36.000233+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "48d11c27407c3c0d4b243b862b483c84b5112ffdc81d1b33da0c1993555a526e"
+      "sha256_prefix_2mb": "7296750c48a4a5c50d66eef843fb99177a6e4793747f84d93fc63fabd37d58f0"
     },
     "nj-dca-community-assets": {
       "url": "https://www.nj.gov/dca/communityassetmap/",
-      "checked_at": "2026-08-07T22:23:39.545698+00:00",
+      "checked_at": "2026-08-08T07:07:36.066628+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "c931c10b928af2e10141f74ba7bed732fef4d9c98a19c95faed63825eebb95e4"
+      "sha256_prefix_2mb": "72bdd024cc3bc123411da58673f220a453006c8411c536dfbe516b697dad413c"
     },
     "nj-dca-zoning-directory": {
       "url": "https://www.nj.gov/dca/dlps/",
-      "checked_at": "2026-08-07T22:23:39.652552+00:00",
+      "checked_at": "2026-08-08T07:07:36.124773+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
       "content_length": null,
-      "sha256_prefix_2mb": "c38537cbaa30145c474d3fcacbec0bbcfbab776b25b847c9a4a76b3ead355b0b"
+      "sha256_prefix_2mb": "9a3222d43731a506caf04bcf98965087c3fa2ef796973941feb533df847731dd"
     },
     "nj-dca-pilot-forecast": {
       "url": "https://datahub.dca.nj.gov/",
-      "checked_at": "2026-08-07T22:23:39.752726+00:00",
+      "checked_at": "2026-08-08T07:07:36.218281+00:00",
       "status": 200,
-      "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+      "etag": "W/\"b69b-A9MkwxmBd+POzosN5EcmvmVNCrY\"",
       "last_modified": null,
       "content_length": "46747",
-      "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      "sha256_prefix_2mb": "6e87d71e5d82a44aee13f2aea949afd2fca7b0a727e3e490e8de6be3085bae77"
     },
     "nj-dca-modiv-longitudinal": {
       "url": "https://datahub.dca.nj.gov/",
-      "checked_at": "2026-08-07T22:23:39.858987+00:00",
+      "checked_at": "2026-08-08T07:07:36.321464+00:00",
       "status": 200,
-      "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+      "etag": "W/\"b69b-A9MkwxmBd+POzosN5EcmvmVNCrY\"",
       "last_modified": null,
       "content_length": "46747",
-      "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      "sha256_prefix_2mb": "6e87d71e5d82a44aee13f2aea949afd2fca7b0a727e3e490e8de6be3085bae77"
     },
     "nj-dca-neighborhood-trends": {
       "url": "https://datahub.dca.nj.gov/",
-      "checked_at": "2026-08-07T22:23:39.980995+00:00",
+      "checked_at": "2026-08-08T07:07:36.406095+00:00",
       "status": 200,
-      "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+      "etag": "W/\"b69b-A9MkwxmBd+POzosN5EcmvmVNCrY\"",
       "last_modified": null,
       "content_length": "46747",
-      "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      "sha256_prefix_2mb": "6e87d71e5d82a44aee13f2aea949afd2fca7b0a727e3e490e8de6be3085bae77"
     },
     "njdep-csrr-gis": {
       "url": "https://dep.nj.gov/srp/gis/gis-layers/",
-      "checked_at": "2026-08-07T22:23:40.040234+00:00",
+      "checked_at": "2026-08-08T07:07:37.446606+00:00",
       "status": 200,
       "etag": null,
       "last_modified": null,
-      "content_length": "1163",
-      "sha256_prefix_2mb": "439f67ed0ce7367514da5de9f328f8fa57ee5b2186a29df482be3dcc1e5f47fe"
+      "content_length": null,
+      "sha256_prefix_2mb": "70c41c9f8ed07ea353ed3c7626b26f587dd80325e7bcff5cdfeacb07a2b41618"
     }
   }
 }
