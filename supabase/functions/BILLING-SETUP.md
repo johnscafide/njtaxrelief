@@ -2,6 +2,19 @@
 
 The billing code is ready for Stripe test mode, but it intentionally contains no secret keys or hard-coded Stripe Price IDs.
 
+## Current live Stripe state — 2026-08-07
+
+The existing live catalog has been verified through Stripe:
+
+- Watchdog Pro — `$49/month` — `price_1U1FfAAgYeNIcesF57ieW4Ku`
+- Watchdog Pro+ — `$149/month` — `price_1U1FfvAgYeNIcesFnpntDSLy`
+- Production webhook destination — `we_1U1xCXAgYeNIcesFdsgxEtPO`
+- Production webhook URL — `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/stripe-webhook`
+
+The production webhook destination is intentionally **disabled** until its signing secret is installed in Supabase and Stripe enables charges on the account. The Stripe account currently reports `charges_enabled=false`; resolve the account's Stripe supportability/Terms review before attempting live enrollment.
+
+Do not copy a webhook signing secret, Stripe secret key or Supabase service-role key into this repository.
+
 ## Stripe objects
 
 Create two recurring monthly Prices in Stripe:
@@ -10,6 +23,8 @@ Create two recurring monthly Prices in Stripe:
 - Watchdog Pro+ — $149/month
 
 Enable the Stripe Customer Portal for payment-method updates, invoices, subscription changes, and cancellation behavior you want customers to have.
+
+The live Customer Portal still needs to be activated/configured in the Stripe Dashboard. Prefer cancellation at period end for the self-service SaaS flow unless the business policy is intentionally changed.
 
 ## Supabase Edge Function secrets
 

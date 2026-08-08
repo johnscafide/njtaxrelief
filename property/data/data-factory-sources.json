@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-08-07T20:00:00-04:00",
+  "policy": {
+    "raw_source_in_git": false,
+    "publish_requires_validation": true,
+    "publisher_change_requires_review": true,
+    "person_level_fields_allowed": false,
+    "raw_modiv_excluded_fields": [
+      "owner_name",
+      "owner_mailing_address",
+      "mortgage_account_number",
+      "social_security_number",
+      "rebate_person_fields"
+    ]
+  },
+  "sources": [
+    {
+      "id": "treasury-modiv-2026",
+      "label": "2026 Property Assessment List (MOD-IV)",
+      "agency": "NJ Division of Taxation",
+      "type": "bulk_fixed_width",
+      "edition": "2026",
+      "cadence": "annual",
+      "status": "received_validation_ready",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "layout_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/modivlayout.pdf",
+      "expected_partitions": 21,
+      "record_length": 700,
+      "line_ending_bytes": 2,
+      "join_key": "county_district + block + lot + qualifier",
+      "professional_value": ["attorney", "title", "agent", "lender", "appraiser", "investor", "developer", "municipal"]
+    },
+    {
+      "id": "njgin-parcel-composite",
+      "label": "Parcels and MOD-IV Composite of New Jersey",
+      "agency": "NJ Office of GIS",
+      "type": "arcgis_feature_service",
+      "cadence": "publisher update",
+      "status": "live_connector_ready",
+      "source_url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0",
+      "item_id": "533599bbfbaa4748bf39faf1375a8a9c",
+      "spatial_reference": 3857,
+      "join_key": "PAMS_PIN",
+      "max_record_count": 2000,
+      "privacy_note": "Watchdog requests only allow-listed parcel and geometry fields. OWNER_NAME and mailing-address fields are explicitly excluded."
+    },
+    {
+      "id": "dca-data-hub-inventory-2026-07-28",
+      "label": "DCA Data Hub public-data inventory",
+      "agency": "NJ Department of Community Affairs",
+      "type": "source_catalog",
+      "edition": "2026-07-28",
+      "cadence": "semiannual inventory",
+      "status": "received_cataloged",
+      "source_url": "https://datahub.dca.nj.gov/",
+      "next_publisher_inventory": "2027-01-28",
+      "priority_feeds": [
+        "user-friendly-budget-database",
+        "municipal-financial-dashboard",
+        "zoning-information-directory",
+        "local-code-ordinances-directory",
+        "rent-control-survey",
+        "pilot-database",
+        "municipal-revitalization-index",
+        "neighborhood-trends-database",
+        "land-capacity-analysis",
+        "development-trends-viewer",
+        "raw-permit-data",
+        "building-permit-data",
+        "demolition-permit-data",
+        "certificates-of-occupancy",
+        "new-home-sales-prices",
+        "affordable-housing-status",
+        "housing-inspection-database",
+        "lead-inspection-data"
+      ]
+    }
+  ]
+}

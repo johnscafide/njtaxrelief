@@ -1,0 +1,28 @@
+name: Data Factory live-source health
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 10 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  njgin-contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate current NJGIN parcel contract
+        run: python3 property/scripts/data_factory_njgin.py --health > njgin-data-factory-health.json
+      - name: Upload health evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: njgin-data-factory-health
+          path: njgin-data-factory-health.json
+          retention-days: 30
+

@@ -5,6 +5,9 @@ supabase/functions/create-checkout-session/index.ts
 supabase/functions/create-portal-session/index.ts
 supabase/functions/stripe-webhook/index.ts
 supabase/functions/BILLING-SETUP.md
+property/docs/billing-launch-status.md
+property/account.html
+property/css/account.css
 property/data/saas-production-readiness.json
 property/data/versions.json
 
@@ -12,6 +15,12 @@ Live Supabase deployment
 create-checkout-session — authenticated, version 6
 create-portal-session — authenticated, version 1
 stripe-webhook — Stripe-signature authenticated, version 1
+
+Stripe live catalog
+Watchdog Pro — $49/month verified
+Watchdog Pro+ — $149/month verified
+Production webhook destination registered and intentionally disabled pending Stripe account approval + Supabase signing-secret installation
+Stripe-hosted Customer Portal login linked from Account & Billing for active paid customers
 
 Launch state
 Paid enrollment remains closed. BILLING_CHECKOUT_ENABLED must be exactly true on the server before Checkout can create a Stripe session.

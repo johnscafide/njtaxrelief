@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-08T00:41:01.251864+00:00",
+  "overall_status": "validated_not_published",
+  "release": "0.33.0",
+  "summary": {
+    "governed_sources": 3,
+    "bulk_sources_received": 2,
+    "live_connectors": 1,
+    "expected_modiv_partitions": 21,
+    "validated_modiv_partitions": 21,
+    "normalized_modiv_records": 3208097,
+    "publish_state": "validated_awaiting_review",
+    "modiv_source_records": 3208097,
+    "modiv_invalid_records": 0,
+    "njgin_geometry_records": 3478727,
+    "njgin_connector_state": "healthy"
+  },
+  "stages": [
+    {
+      "id": "source-contract",
+      "label": "Source contracts",
+      "status": "passed",
+      "detail": "MOD-IV, NJGIN and DCA inventory are governed by explicit source contracts."
+    },
+    {
+      "id": "modiv-ingest",
+      "label": "2026 MOD-IV validation",
+      "status": "passed",
+      "detail": "3,208,097 2026 MOD-IV records checked across 21 county files; 0 structurally invalid."
+    },
+    {
+      "id": "njgin",
+      "label": "NJGIN geometry connector",
+      "status": "passed",
+      "detail": "Live NJGIN layer reports 3,478,727 parcel geometries; 38/38 safe fields available; 0 forbidden fields requested."
+    },
+    {
+      "id": "publish",
+      "label": "Production publish",
+      "status": "review_required",
+      "detail": "Validation passed. Production publication still requires explicit review and warehouse load approval."
+    }
+  ],
+  "latest_modiv_run": {
+    "schema_version": 1,
+    "dataset_id": "treasury-modiv-2026",
+    "tax_year": 2026,
+    "started_at": "2026-08-08T00:40:20.746644+00:00",
+    "completed_at": "2026-08-08T00:40:49.658070+00:00",
+    "source_archive": "modiv-2026 (1).zip",
+    "source_sha256": "d667f8218585d9cea0f0f12ab78284f1e85dbf630ffe17cfd0bf4fbedac9a25c",
+    "county_files": 21,
+    "source_records": 3208097,
+    "normalized_records": 3208097,
+    "invalid_records": 0,
+    "missing_parcel_keys": 0,
+    "assessment_math_mismatches": 7607,
+    "validation_passed": true,
+    "normalized_output_emitted": false,
+    "privacy_contract": "strict_allow_list_no_owner_mailing_mortgage_ssn_or_person_rebate_fields",
+    "counties": [
+      {
+        "county": "Atlantic",
+        "source_file": "Atlantic 26 RE.txt",
+        "records": 155868,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 309,
+        "output": null
+      },
+      {
+        "county": "Bergen",
+        "source_file": "Bergen 26 RE.txt",
+        "records": 284733,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 252,
+        "output": null
+      },
+      {
+        "county": "Burlington",
+        "source_file": "Burlington 26 RE.txt",
+        "records": 182301,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 328,
+        "output": null
+      },
+      {
+        "county": "Camden",
+        "source_file": "Camden 26 RE.txt",
+        "records": 194367,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 1391,
+        "output": null
+      },
+      {
+        "county": "Cape May",
+        "source_file": "Cape May 26 RE.txt",
+        "records": 109912,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 360,
+        "output": null
+      },
+      {
+        "county": "Cumberland",
+        "source_file": "Cumberland 26 RE.txt",
+        "records": 65922,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 82,
+        "output": null
+      },
+      {
+        "county": "Essex",
+        "source_file": "Essex 26 RE.txt",
+        "records": 190094,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 311,
+        "output": null
+      },
+      {
+        "county": "Gloucester",
+        "source_file": "Gloucester 26 RE.txt",
+        "records": 122230,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 133,
+        "output": null
+      },
+      {
+        "county": "Hudson",
+        "source_file": "Hudson 26 RE.txt",
+        "records": 153838,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 1802,
+        "output": null
+      },
+      {
+        "county": "Hunterdon",
+        "source_file": "Hunterdon 26 RE.txt",
+        "records": 59494,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 17,
+        "output": null
+      },
+      {
+        "county": "Mercer",
+        "source_file": "Mercer 26 RE.txt",
+        "records": 131923,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 877,
+        "output": null
+      },
+      {
+        "county": "Middlesex",
+        "source_file": "Middlesex 26 RE.txt",
+        "records": 251942,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 1036,
+        "output": null
+      },
+      {
+        "county": "Monmouth",
+        "source_file": "Monmouth 26 RE.txt",
+        "records": 258163,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 186,
+        "output": null
+      },
+      {
+        "county": "Morris",
+        "source_file": "Morris 26 RE.txt",
+        "records": 182073,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 39,
+        "output": null
+      },
+      {
+        "county": "Ocean",
+        "source_file": "Ocean 26 RE.txt",
+        "records": 302418,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 34,
+        "output": null
+      },
+      {
+        "county": "Passaic",
+        "source_file": "Passaic 26 RE.txt",
+        "records": 130168,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 80,
+        "output": null
+      },
+      {
+        "county": "Salem",
+        "source_file": "Salem 26 RE.txt",
+        "records": 33334,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 28,
+        "output": null
+      },
+      {
+        "county": "Somerset",
+        "source_file": "Somerset 26 RE.txt",
+        "records": 121573,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 87,
+        "output": null
+      },
+      {
+        "county": "Sussex",
+        "source_file": "Sussex 26 RE.txt",
+        "records": 77548,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 13,
+        "output": null
+      },
+      {
+        "county": "Union",
+        "source_file": "Union 26 RE.txt",
+        "records": 150095,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 223,
+        "output": null
+      },
+      {
+        "county": "Warren",
+        "source_file": "Warren 26 RE.txt",
+        "records": 50101,
+        "invalid_length_or_decode": 0,
+        "missing_parcel_key": 0,
+        "assessment_math_mismatch": 19,
+        "output": null
+      }
+    ]
+  },
+  "latest_njgin_health": {
+    "ok": true,
+    "service": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0",
+    "layer": "Cad_parcel_mod4",
+    "geometry_type": "esriGeometryPolygon",
+    "max_record_count": 2000,
+    "record_count": 3478727,
+    "safe_fields_present": 38,
+    "safe_fields_expected": 38,
+    "missing_safe_fields": [],
+    "forbidden_fields_requested": [],
+    "privacy_contract": "owner_and_mailing_fields_not_requested",
+    "checked_at": "2026-08-08T00:41:01.251864+00:00"
+  }
+}

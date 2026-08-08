@@ -1,19 +1,31 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T18:49:13-04:00",
+  "updated_at": "2026-08-07T20:39:04-04:00",
   "releases": [
+    {
+      "version": "0.33.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T20:39:04-04:00",
+      "title": "Watchdog Data Factory v1 and 2026 statewide baseline",
+      "category": "Data infrastructure / governance",
+      "status": "Validated; production publication review-gated",
+      "summary": "Built the first governed statewide ingestion layer for Watchdog. The 2026 Treasury MOD-IV archive validates across all 21 county partitions with 3,208,097 source records and zero structural failures, then normalizes only approved property/tax fields into Git-ignored work products. Added a privacy-limited live connector for NJGIN's current statewide parcel service, whose validation run reports 3,478,727 parcel geometries with all 38 approved fields present and zero forbidden owner/mailing fields requested. Registered the July 2026 DCA Data Hub inventory as the acquisition map, added daily live-source contract checks, and surfaced the complete review gate in developer-only Data Operations. No validated source automatically becomes customer-facing data.",
+      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
+      "files": ["property/data/data-factory-sources.json", "property/data/data-factory-status.json", "property/scripts/data_factory_modiv.py", "property/scripts/data_factory_njgin.py", "property/scripts/run_data_factory.py", "property/docs/data-factory.md", ".github/workflows/data-factory-health.yml", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/data/saas-production-readiness.json", "property/data/versions.json", ".gitignore"],
+      "impact": {"modiv_records_validated": 3208097, "county_partitions": 21, "structural_failures": 0, "njgin_geometry_records": 3478727, "njgin_safe_fields": 38, "forbidden_person_fields_requested": 0, "daily_live_contract": 1, "saas_readiness_percent": 53}
+    },
     {
       "version": "0.32.0",
       "date": "2026-08-07",
       "timestamp": "2026-08-07T18:49:13-04:00",
       "title": "Payment backend deployment and launch safety gate",
       "category": "Revenue / billing infrastructure",
-      "status": "Backend deployed; Stripe activation pending",
-      "summary": "Deployed the complete Stripe billing backend to Supabase: authenticated Checkout, authenticated Customer Portal and a signature-verified public Stripe webhook. Checkout is now deny-by-default behind a server-only BILLING_CHECKOUT_ENABLED switch, missing Stripe configuration fails closed, and paid entitlements remain server-owned and synchronized only from verified Stripe subscription events. Public Pro and Pro+ CTAs remain early-access until test-mode lifecycle validation is complete.",
+      "status": "Backend deployed; Stripe account review pending",
+      "summary": "Deployed the complete Stripe billing backend to Supabase: authenticated Checkout, authenticated Customer Portal and a signature-verified public Stripe webhook. Verified the existing live $49 Pro and $149 Pro+ recurring prices and registered the production webhook destination, which remains disabled until its signing secret is installed and Stripe clears the account for charges. Added the Stripe-hosted Customer Portal login to Account & Billing for active paid customers. Checkout is deny-by-default behind a server-only BILLING_CHECKOUT_ENABLED switch. Public Pro and Pro+ CTAs remain early-access until sandbox lifecycle validation and Stripe account approval are complete.",
       "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
-      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/stripe-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"edge_functions_live": 3, "signed_billing_webhook": 1, "server_launch_gate": 1, "public_paid_enrollment": 0}
+      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/stripe-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/account.html", "property/css/account.css", "property/docs/billing-launch-status.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"edge_functions_live": 3, "live_prices_verified": 2, "production_webhook_registered": 1, "signed_billing_webhook": 1, "hosted_customer_portal": 1, "server_launch_gate": 1, "public_paid_enrollment": 0}
     },
     {
       "version": "0.31.0",

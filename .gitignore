@@ -1,0 +1,6 @@
+# Watchdog Data Factory work products are large, rebuildable, and may contain
+# public-record parcel rows that should not be shipped with the website source.
+artifacts/data-factory/
+property/data-factory-work/
+property/scripts/__pycache__/
+
