@@ -1,0 +1,33 @@
+Watchdog v0.38.0 — Paddle billing foundation
+
+UPLOAD / REPLACE
+supabase/config.toml
+supabase/migrations/20260808112150_paddle_billing_provider.sql
+supabase/functions/BILLING-SETUP.md
+supabase/functions/create-checkout-session/index.ts
+supabase/functions/create-checkout-session/deno.json
+supabase/functions/create-portal-session/index.ts
+supabase/functions/create-portal-session/deno.json
+supabase/functions/paddle-webhook/index.ts
+supabase/functions/paddle-webhook/deno.json
+property/js/billing-client.js
+property/account.html
+property/privacy.html
+property/terms.html
+property/pro.html
+property/dashboard.html
+property/docs/billing-launch-status.md
+property/data/saas-production-readiness.json
+property/data/versions.json
+property/CHANGED-FILES-v0.38.0.txt
+
+ALREADY DEPLOYED TO SUPABASE
+- Migration: paddle_billing_provider (20260808112150)
+- create-checkout-session version 7, JWT required
+- create-portal-session version 2, JWT required
+- paddle-webhook version 1, Paddle-Signature authenticated (JWT disabled by design)
+
+NOT YET ENABLED
+- Public paid enrollment remains closed behind BILLING_CHECKOUT_ENABLED.
+- Paddle Sandbox API key, client token, webhook secret and Pro/Pro+ Price IDs still need to be installed.
+- Sandbox lifecycle validation must pass before live credentials or public checkout are enabled.

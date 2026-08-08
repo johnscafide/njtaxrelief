@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-08T11:50:00-04:00",
+  "updated_at": "2026-08-08T07:27:48-04:00",
   "releases": [
+    {
+      "version": "0.38.0",
+      "date": "2026-08-08",
+      "timestamp": "2026-08-08T07:27:48-04:00",
+      "title": "Paddle billing foundation",
+      "category": "Revenue / subscription infrastructure",
+      "status": "Backend deployed; Paddle Sandbox configuration next",
+      "summary": "Selected Paddle Billing as Watchdog's subscription provider while preserving a provider-neutral entitlement boundary. Applied the production schema update for Paddle IDs and ordered webhook events, deployed JWT-protected Paddle Checkout and Customer Portal functions, and deployed a public webhook that verifies Paddle-Signature against the exact raw request body before changing access. Price IDs remain the plan authority, webhook events are idempotent, stale events cannot overwrite newer state, and paid enrollment remains fail-closed until the complete Sandbox and live lifecycle tests pass.",
+      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
+      "files": ["supabase/migrations/20260808112150_paddle_billing_provider.sql", "supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "supabase/config.toml", "property/js/billing-client.js", "property/account.html", "property/privacy.html", "property/terms.html", "property/docs/billing-launch-status.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"billing_provider":"paddle", "production_schema_migration":1, "edge_functions_deployed":3, "signed_webhook":1, "provider_event_ordering":1, "server_checkout_gate":1, "public_paid_enrollment":0, "saas_readiness_percent":61}
+    },
     {
       "version": "0.37.0",
       "date": "2026-08-08",

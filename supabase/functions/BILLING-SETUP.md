@@ -1,54 +1,51 @@
-# Watchdog Stripe billing setup
+# Watchdog Paddle billing setup
 
-The billing code is ready for Stripe test mode, but it intentionally contains no secret keys or hard-coded Stripe Price IDs.
+Watchdog now uses a provider-neutral entitlement layer with Paddle Billing as the selected payment provider. Paid enrollment remains fail-closed until the Paddle sandbox lifecycle has passed and `BILLING_CHECKOUT_ENABLED=true` is deliberately set.
 
-## Current live Stripe state — 2026-08-07
+## Paddle objects to create
 
-The existing live catalog has been verified through Stripe:
+In Paddle Sandbox first, create two recurring monthly products/prices:
 
-- Watchdog Pro — `$49/month` — `price_1U1FfAAgYeNIcesF57ieW4Ku`
-- Watchdog Pro+ — `$149/month` — `price_1U1FfvAgYeNIcesFnpntDSLy`
-- Production webhook destination — `we_1U1xCXAgYeNIcesFdsgxEtPO`
-- Production webhook URL — `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/stripe-webhook`
+- Watchdog Pro — `$49/month`
+- Watchdog Pro+ — `$149/month`
 
-The production webhook destination is intentionally **disabled** until its signing secret is installed in Supabase and Stripe enables charges on the account. The Stripe account currently reports `charges_enabled=false`; resolve the account's Stripe supportability/Terms review before attempting live enrollment.
-
-Do not copy a webhook signing secret, Stripe secret key or Supabase service-role key into this repository.
-
-## Stripe objects
-
-Create two recurring monthly Prices in Stripe:
-
-- Watchdog Pro — $49/month
-- Watchdog Pro+ — $149/month
-
-Enable the Stripe Customer Portal for payment-method updates, invoices, subscription changes, and cancellation behavior you want customers to have.
-
-The live Customer Portal still needs to be activated/configured in the Stripe Dashboard. Prefer cancellation at period end for the self-service SaaS flow unless the business policy is intentionally changed.
+Set the default payment link to `https://njpropertytaxrelief.com/property/account.html` when the live domain is approved. Use a development/default payment link allowed by Paddle while testing in Sandbox.
 
 ## Supabase Edge Function secrets
 
-Set these secrets in Supabase before deploying the billing functions:
+Set these secrets before deploying the Paddle billing functions:
 
-- `STRIPE_SECRET_KEY` — Stripe test-mode secret key while testing
-- `STRIPE_WEBHOOK_SIGNING_SECRET` — signing secret for the deployed `stripe-webhook` endpoint
-- `STRIPE_PRICE_PRO` — recurring Price ID for Pro
-- `STRIPE_PRICE_PRO_PLUS` — recurring Price ID for Pro+
-- `BILLING_CHECKOUT_ENABLED` — keep unset or `false` during deployment; set to `true` only while running test checkout and after the production launch decision
+- `PADDLE_API_KEY` — server-side Paddle API key; never expose it to browser code
+- `PADDLE_CLIENT_TOKEN` — Paddle.js client-side token (safe for checkout use in the browser)
+- `PADDLE_WEBHOOK_SECRET` — secret for the Paddle notification destination
+- `PADDLE_PRICE_PRO` — recurring Paddle Price ID for Pro (`pri_...`)
+- `PADDLE_PRICE_PRO_PLUS` — recurring Paddle Price ID for Pro+ (`pri_...`)
+- `PADDLE_ENVIRONMENT` — `sandbox` during validation; omit or set `production` for live
+- `BILLING_CHECKOUT_ENABLED` — keep `false` until the full sandbox lifecycle passes
 
 Supabase supplies `SUPABASE_URL`, `SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` to hosted Edge Functions.
 
-## Deploy order
+## Webhook
 
-1. Apply migrations through `20260805235900_billing_saved_views_rls.sql`.
-2. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
-3. Deploy `stripe-webhook` with JWT verification disabled. Stripe authenticates that endpoint with its signature; the function verifies it before processing data.
-4. In Stripe, register the deployed webhook URL and subscribe to `checkout.session.completed` plus `customer.subscription.created`, `customer.subscription.updated`, `customer.subscription.deleted`, and `customer.subscription.paused` when available.
-5. Leave `BILLING_CHECKOUT_ENABLED=false` while the backend is first deployed.
-6. Configure Stripe test-mode secrets and temporarily set `BILLING_CHECKOUT_ENABLED=true` to test Pro and Pro+ checkout, Portal, cancellation, and webhook-driven entitlement changes.
-7. Switch the flag back off before replacing test secrets with live Stripe secrets.
-8. Only after live products/prices and the live webhook are configured should `BILLING_CHECKOUT_ENABLED=true` be used for general availability.
+Deploy `paddle-webhook` with JWT verification disabled. Paddle authenticates the public endpoint with `Paddle-Signature`, which the function verifies against the exact raw body before doing any entitlement work.
 
-The public pricing buttons may remain on the early-access lead form until the final launch switch. The server flag is the authority: changing browser JavaScript must never be enough to enable payments.
+Notification URL:
 
-Never put the Stripe secret key, webhook signing secret, or service-role key in `/property` JavaScript.
+`https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/paddle-webhook`
+
+Subscribe to the subscription lifecycle events, including created, trialing, activated, updated, past due, paused, resumed, and canceled. The handler is idempotent and ignores stale out-of-order subscription events.
+
+## Deploy/test order
+
+1. The `paddle_billing_provider` migration is already applied to production.
+2. Create the Sandbox Pro and Pro+ recurring prices.
+3. Add the Paddle Sandbox API key, client token, webhook secret, both Price IDs, and `PADDLE_ENVIRONMENT=sandbox` as Supabase secrets.
+4. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
+5. Deploy `paddle-webhook` with JWT verification disabled.
+6. Create the Paddle notification destination for the webhook URL and select the subscription lifecycle events.
+7. Temporarily set `BILLING_CHECKOUT_ENABLED=true` and test Pro checkout → signed webhook → entitlement → Customer Portal → cancellation.
+8. Set checkout back to `false`, create/approve the live Paddle catalog/domain, replace Sandbox secrets with live values, repeat the lifecycle test, then intentionally open enrollment.
+
+The plan authority is always the recognized Paddle Price ID received in a verified webhook. `custom_data` carries the Supabase user ID only for account linkage; it never decides the paid plan.
+
+Never put the Paddle API key, webhook secret, or Supabase service-role key in `/property` JavaScript.
