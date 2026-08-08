@@ -32,6 +32,12 @@
 .do-source-alert{background:#fff;border-radius:14px;margin-bottom:14px;padding:16px 20px}
 .do-source-alert.good{color:#18764b}
 .do-source-alert.warn{color:#9d5c13}
+.do-source-history{background:#fff;border-radius:18px;margin:14px 0;padding:22px}
+.do-source-history-head{align-items:flex-start;display:flex;gap:20px;justify-content:space-between}
+.do-source-history h2{color:var(--do-ink);font-size:21px;margin:5px 0}.do-source-history p{color:var(--do-muted);font-size:13px;margin:0;max-width:720px}
+.do-history-pill{background:#e8f6f3;border-radius:999px;color:#087b7d;font-size:10px;font-weight:900;letter-spacing:.08em;padding:8px 10px;text-transform:uppercase}
+.do-history-grid{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin-top:18px}.do-history-grid article{background:#f5f8fa;border-radius:13px;padding:14px}.do-history-grid b{color:var(--do-ink);display:block;font-size:21px}.do-history-grid span{color:var(--do-muted);font-size:11px}
+.do-history-note{border-top:1px solid var(--do-rule);color:var(--do-muted);font-size:12px;line-height:1.5;margin-top:18px;padding-top:14px}
 .do-controls{display:grid;gap:10px;grid-template-columns:minmax(260px,1fr) 190px 170px;margin-bottom:12px}
 .do-controls input,.do-controls select{background:#fff;border:1px solid var(--do-rule);border-radius:10px;font:inherit;padding:12px}
 .do-table-wrap{background:#fff;border-radius:16px;max-height:calc(100vh - 430px);overflow:auto}
@@ -49,4 +55,4 @@
 .do-denied a{color:var(--do-teal)}
 @media(max-width:1100px){.do-factory-metrics{grid-template-columns:repeat(3,1fr)}.do-factory-stages{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:900px){.do-shell{padding:18px}.do-stats{grid-template-columns:repeat(2,1fr)}.do-controls{grid-template-columns:1fr}.do-table-wrap{max-height:none;overflow-x:auto}.do-hero,.do-factory-head{align-items:flex-start;flex-direction:column;gap:20px}.do-factory-metrics{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.do-factory{padding:18px}.do-factory-metrics,.do-factory-stages{grid-template-columns:1fr}.do-factory-state{white-space:normal}}
+@media(max-width:560px){.do-factory{padding:18px}.do-factory-metrics,.do-factory-stages,.do-history-grid{grid-template-columns:1fr}.do-factory-state{white-space:normal}}

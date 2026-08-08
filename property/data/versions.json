@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T22:10:37-04:00",
+  "updated_at": "2026-08-08T11:50:00-04:00",
   "releases": [
+    {
+      "version": "0.37.0",
+      "date": "2026-08-08",
+      "timestamp": "2026-08-08T11:50:00-04:00",
+      "title": "Automated source history and release confirmation",
+      "category": "Data operations / historical integrity",
+      "status": "Completed; migration and Edge Function deployment required",
+      "summary": "Replaced the duplicate six-hour source-monitor workflows with one read-only daily job that never opens branches, PRs, issues, or automated commits. It records source observations for 730 days, treats rendered-page hashes as diagnostic only, and requires the same publisher ETag or Last-Modified token on two daily checks before creating a review event. The private warehouse now records immutable monitor runs and observations through the existing service-only Edge Function. Source releases already remain versioned and approved separately, providing the correct foundation for future customer-facing current-versus-as-of-date property data without overwriting historical values.",
+      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
+      "files": [".github/workflows/source-change-monitor.yml", ".github/workflows/source-monitor.yml (deleted)", "property/scripts/monitor_nj_sources.py", "property/data/source-watch-history.json", "supabase/migrations/20260808113000_source_monitor_history.sql", "supabase/functions/source-monitor-ingest/index.ts", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/docs/source-monitor-setup.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"monitor_workflows": 1, "scheduled_checks_per_day": 1, "source_history_retention_days": 730, "workflow_artifact_retention_days": 90, "confirmation_observations_required": 2, "saas_readiness_percent": 61}
+    },
     {
       "version": "0.36.0",
       "date": "2026-08-07",

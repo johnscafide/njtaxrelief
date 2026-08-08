@@ -1,0 +1,27 @@
+Watchdog v0.37.0 — Automated source history and release confirmation
+
+UPLOAD/REPLACE AT THE REPOSITORY ROOT
+
+.github/workflows/source-change-monitor.yml
+property/scripts/monitor_nj_sources.py
+property/data/source-watch-history.json
+property/docs/source-monitor-setup.md
+property/developer-data.html
+property/js/developer-data.js
+property/css/developer-data.css
+property/data/saas-production-readiness.json
+property/data/versions.json
+supabase/migrations/20260808113000_source_monitor_history.sql
+supabase/functions/source-monitor-ingest/index.ts
+
+DELETE AFTER UPLOAD
+
+.github/workflows/source-monitor.yml
+
+Deployment already completed in Supabase during this release:
+  - migration source_monitor_history
+  - Edge Function source-monitor-ingest version 2
+
+After pushing the GitHub workflow files, GitHub Actions will run once each
+morning and retain source-monitor artifacts for 90 days. The private Supabase
+ledger keeps 730 days of source-health observations.
