@@ -54,5 +54,4 @@ The expected sequence is:
 7. Recompute dependent Watchdog markers with versioned lineage.
 8. Publish only after customer-facing regression checks pass.
 
-Data Factory v1 implements steps 1–4 and the explicit gate before step 6. The production warehouse loader is intentionally a separate milestone so storage, rollback and access controls are designed before millions of rows become customer-facing.
-
+Data Factory v1 implements steps 1–4 and the explicit gate before step 6. Watchdog v0.34 adds the private warehouse schema and bulk `COPY` loader, but the 2026 rows remain unpublished until the warehouse load and explicit approval complete. See `property/docs/private-warehouse.md`.

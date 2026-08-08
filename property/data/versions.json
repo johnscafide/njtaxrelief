@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T20:39:04-04:00",
+  "updated_at": "2026-08-07T21:03:11-04:00",
   "releases": [
+    {
+      "version": "0.34.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T21:03:11-04:00",
+      "title": "Private historical property warehouse foundation",
+      "category": "Data infrastructure / SaaS backend",
+      "status": "Schema deployed; 2026 bulk load awaiting trusted DB connection",
+      "summary": "Deployed Watchdog's first private historical warehouse to Supabase. Five RLS-enabled tables now version source releases, load runs, privacy-limited MOD-IV observations, data-quality results and the explicitly published release pointer; anon and authenticated roles have no warehouse table privileges. Added a streaming PostgreSQL COPY loader for the validated 3,208,097-row 2026 MOD-IV baseline plus a separate review/approve/publish command. Dataset publication cannot happen during ingestion, and publishing requires the exact reviewed release UUID to be confirmed. The local preflight passes 21/21 normalized county partitions; the actual 3.2M-row warehouse COPY remains intentionally pending until a trusted database connection is configured locally.",
+      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
+      "files": ["supabase/migrations/20260808005727_watchdog_private_warehouse_v1.sql", "supabase/migrations/20260808010348_watchdog_warehouse_publication_fk_indexes.sql", "property/scripts/load_modiv_warehouse.py", "property/scripts/review_warehouse_release.py", "property/docs/private-warehouse.md", "property/docs/data-factory.md", "property/scripts/data_factory_modiv.py", "property/scripts/README-data-refresh.md", "property/data/data-factory-status.json", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/data/saas-production-readiness.json", "property/data/versions.json"],
+      "impact": {"private_warehouse_tables": 5, "warehouse_customer_roles_with_direct_access": 0, "validated_rows_ready_for_copy": 3208097, "county_partitions_ready": 21, "duplicate_parcel_keys": 0, "explicit_release_gates": 3, "saas_readiness_percent": 55}
+    },
     {
       "version": "0.33.0",
       "date": "2026-08-07",

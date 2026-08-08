@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_at": "2026-08-08T00:41:01.251864+00:00",
   "overall_status": "validated_not_published",
-  "release": "0.33.0",
+  "release": "0.34.0",
   "summary": {
     "governed_sources": 3,
     "bulk_sources_received": 2,
@@ -14,7 +14,11 @@
     "modiv_source_records": 3208097,
     "modiv_invalid_records": 0,
     "njgin_geometry_records": 3478727,
-    "njgin_connector_state": "healthy"
+    "njgin_connector_state": "healthy",
+    "warehouse_schema_state": "deployed_private",
+    "warehouse_load_state": "awaiting_bulk_copy",
+    "warehouse_loaded_records": 0,
+    "warehouse_loaded_partitions": 0
   },
   "stages": [
     {
@@ -36,10 +40,22 @@
       "detail": "Live NJGIN layer reports 3,478,727 parcel geometries; 38/38 safe fields available; 0 forbidden fields requested."
     },
     {
+      "id": "warehouse-schema",
+      "label": "Private warehouse schema",
+      "status": "passed",
+      "detail": "Private Supabase warehouse is deployed with five RLS-enabled tables; anon and authenticated roles have no table privileges."
+    },
+    {
+      "id": "warehouse-load",
+      "label": "2026 warehouse bulk load",
+      "status": "pending",
+      "detail": "3,208,097 normalized records are ready for direct PostgreSQL COPY; production credentials are never stored in the repository."
+    },
+    {
       "id": "publish",
       "label": "Production publish",
-      "status": "review_required",
-      "detail": "Validation passed. Production publication still requires explicit review and warehouse load approval."
+      "status": "blocked",
+      "detail": "Publication remains blocked until the private warehouse load completes and its data-quality review is explicitly approved."
     }
   ],
   "latest_modiv_run": {

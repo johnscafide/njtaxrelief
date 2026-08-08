@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "version": "0.33.0",
+  "version": "0.34.0",
   "goal": "Move Watchdog from a feature-rich prototype into a secure, billable, supportable professional SaaS product.",
   "readiness_score": {
-    "current": 53,
-    "summary": "Watchdog now has a governed statewide Data Factory baseline in addition to its billing and entitlement foundations: all 21 2026 MOD-IV county partitions validate, 3.2M assessment records normalize through a privacy allow-list, and the current NJGIN parcel service has an automated schema/count contract. The largest remaining launch gaps are paid lifecycle validation, production observability, backup/restore drills and a reviewed warehouse publication path."
+    "current": 55,
+    "summary": "Watchdog has reached the trustworthy-core milestone: the governed statewide Data Factory now feeds a deployed private, versioned warehouse architecture with explicit load, quality, approval and publication states. The 2026 3.2M-row MOD-IV release is validated and ready for direct PostgreSQL COPY, but remains deliberately unloaded/unpublished until the trusted bulk connection is supplied. Major remaining launch gaps are paid lifecycle validation, production observability, backup/restore drills and customer-facing server projections over approved warehouse releases."
   },
   "phases": [
     {"target":55,"title":"Trustworthy core","focus":"Mobile clarity, entitlement QA, error recovery, first-run onboarding and a reviewed source-monitor baseline."},
@@ -22,6 +22,7 @@
     {"priority":"P0","area":"data","capability":"Marker lineage + confidence contract","status":"refresh_contract_shipped_lineage_expanding","detail":"All 342 markers now have developer-visible source/dependency, cadence, trigger and refresh rules; marker detail pages expose refresh contracts. Formula/input lineage continues to expand."},
     {"priority":"P0","area":"data","capability":"Automated source health checks","status":"publisher_monitor_plus_data_factory_health_shipped","detail":"Six-hour publisher fingerprint monitoring is joined by a daily NJGIN contract check. The 2026 Data Factory baseline validates 3,208,097 MOD-IV rows across 21 counties and the live parcel service schema/count while preserving a review-first publication gate."},
     {"priority":"P0","area":"data","capability":"Governed statewide Data Factory","status":"v1_shipped_review_gated","detail":"Official bulk MOD-IV ingestion now validates, checksums and privacy-normalizes all county partitions; live NJGIN access requests only an explicit property-data allow-list. Raw statewide work products remain out of Git and production publication requires explicit approval."},
+    {"priority":"P0","area":"data","capability":"Private historical property warehouse","status":"schema_live_bulk_load_ready","detail":"A non-exposed Supabase warehouse now versions source releases, load runs, MOD-IV observations, QA summaries and the active publication pointer. All tables have RLS enabled and anon/authenticated have no warehouse privileges. The direct COPY loader requires exact row-count validation and separate approval/publication commands."},
     {"priority":"P0","area":"ops","capability":"Error monitoring and alerting","status":"planned","detail":"Capture frontend exceptions, Edge Function failures, source outages and slow requests with release/environment context."},
     {"priority":"P0","area":"ops","capability":"Backup + restore drills","status":"planned","detail":"Scheduled database backups plus documented, tested restore procedure for profiles, saved work, verification and billing metadata."},
     {"priority":"P0","area":"legal","capability":"Commercial terms + privacy + data-use review","status":"product_drafts_shipped_counsel_review_required","detail":"Watchdog Terms, Privacy and Data Methodology drafts cover subscriptions, public-source limits, derived intelligence, Daniel's Law handling and non-consumer-report use. Counsel review remains required before general paid launch."},

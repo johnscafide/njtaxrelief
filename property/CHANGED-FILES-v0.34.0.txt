@@ -1,0 +1,30 @@
+Watchdog v0.34.0 — Private historical property warehouse
+
+NEW
+supabase/migrations/20260808005727_watchdog_private_warehouse_v1.sql
+supabase/migrations/20260808010348_watchdog_warehouse_publication_fk_indexes.sql
+property/scripts/load_modiv_warehouse.py
+property/scripts/review_warehouse_release.py
+property/docs/private-warehouse.md
+
+UPDATED
+property/scripts/data_factory_modiv.py
+property/docs/data-factory.md
+property/scripts/README-data-refresh.md
+property/data/data-factory-status.json
+property/developer-data.html
+property/js/developer-data.js
+property/css/developer-data.css
+property/data/saas-production-readiness.json
+property/data/versions.json
+
+LIVE BACKEND STATE
+Supabase migration 20260808005727 watchdog_private_warehouse_v1: applied
+Supabase migration 20260808010348 watchdog_warehouse_publication_fk_indexes: applied
+Private warehouse tables: 5
+Warehouse rows loaded: 0 (bulk COPY intentionally pending trusted database connection)
+anon/authenticated direct warehouse grants: 0
+
+NOT SHIPPED
+artifacts/data-factory/modiv/2026/*.jsonl.gz
+Raw and normalized statewide data remain local/rebuildable and are excluded from Git/release archives.

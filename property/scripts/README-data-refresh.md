@@ -10,6 +10,8 @@ Large statewide sources now use the stricter Watchdog Data Factory path. For an 
 
 Run `python3 property/scripts/data_factory_njgin.py --health` for the live parcel connector contract by itself. See `property/docs/data-factory.md` for the privacy allow-list and publication gate.
 
+The private warehouse schema is deployed separately from the public Data API. After normalization, run `python3 property/scripts/load_modiv_warehouse.py --preflight`, then the same command without `--preflight` once `WATCHDOG_DATABASE_URL` is configured and `psql` is installed. Review/approval/publication is handled separately by `property/scripts/review_warehouse_release.py`. See `property/docs/private-warehouse.md`.
+
 Add future sources to `property/data/source-registry.json`. A source can be validation-only, glob-based, or fully automated with a direct URL and parser command. Parsers must never extract owner names or party addresses.
 
 `Municipal Budget Pressure` is rebuilt from the NJ DCA User-Friendly Budget Database plus the Property Tax Tables for 2021 through 2025. Put those eleven state workbooks in one folder, then run `python3 property/scripts/build_budget_pressure.py --input-dir PATH --output property/data/budget-pressure.json`. The builder uses municipal financial data only and does not read person-level records.

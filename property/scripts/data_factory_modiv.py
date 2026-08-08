@@ -160,8 +160,16 @@ def update_status(path: pathlib.Path, result: dict, emitted: bool) -> None:
             stage["status"] = "passed" if result["validation_passed"] else "failed"
             stage["detail"] = f"{result['source_records']:,} 2026 MOD-IV records checked across {result['county_files']} county files; {result['invalid_records']:,} structurally invalid."
         if stage.get("id") == "publish":
-            stage["status"] = "review_required" if result["validation_passed"] else "blocked"
-            stage["detail"] = "Validation passed. Production publication still requires explicit review and warehouse load approval." if result["validation_passed"] else "Publication blocked because MOD-IV validation failed."
+            warehouse_waiting = summary.get("warehouse_schema_state") == "deployed_private" and summary.get("warehouse_load_state") not in {"loaded_awaiting_review", "approved", "published"}
+            if not result["validation_passed"]:
+                stage["status"] = "blocked"
+                stage["detail"] = "Publication blocked because MOD-IV validation failed."
+            elif warehouse_waiting:
+                stage["status"] = "blocked"
+                stage["detail"] = "Validation passed; publication remains blocked until the private warehouse load completes."
+            else:
+                stage["status"] = "review_required"
+                stage["detail"] = "Validation and warehouse loading passed. Production publication still requires explicit review approval."
     current["latest_modiv_run"] = result
     path.write_text(json.dumps(current, indent=2) + "\n", encoding="utf-8")
 
