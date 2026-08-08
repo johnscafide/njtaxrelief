@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "0.31.0",
+  "version": "0.35.0",
   "principle": "Every proprietary score exposes its component inputs/formula. Scores support prioritization; they are not legal, appraisal, credit, investment, insurance or transaction outcomes.",
   "markers": {
     "watchdog.investor_carry_cost_volatility": {
@@ -1048,6 +1048,126 @@
       "range": "score / 100",
       "formula": "age(environmental_layer_vintage)",
       "professional_reason": "Shows when a professional should refresh the official environmental source."
+    },
+    "modiv_intel.median_assessed_value": {
+      "range": "currency",
+      "formula": "Median net assessment across MOD-IV parcels.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.assessment_dispersion_iqr_pct": {
+      "range": "percent",
+      "formula": "Interquartile assessment range divided by median assessment.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_annual_tax": {
+      "range": "currency",
+      "formula": "Median latest positive annual-tax field available in this MOD-IV release. The 2026 file currently reports this in the prior-year tax field.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.tax_dispersion_iqr_pct": {
+      "range": "percent",
+      "formula": "Interquartile latest-reported annual-tax range divided by the median reported annual tax.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_assessment_change_pct": {
+      "range": "percent",
+      "formula": "Median current net assessment change versus prior-year net assessment.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.assessment_growth_positive_share_pct": {
+      "range": "percent",
+      "formula": "Share of comparable prior-year records whose net assessment increased.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.assessment_change_dispersion_pct": {
+      "range": "percent",
+      "formula": "Interquartile spread of parcel assessment changes versus prior-year assessment, expressed in percentage points.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.assessment_jump_share_pct": {
+      "range": "percent",
+      "formula": "Share of parcels with comparable prior-year assessment whose absolute assessment change exceeded 10%.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_land_share_pct": {
+      "range": "percent",
+      "formula": "Median land value as a share of net assessment.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.improvement_value_share_pct": {
+      "range": "percent",
+      "formula": "Aggregate improvement assessment divided by aggregate net assessment.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.residential_parcel_share_pct": {
+      "range": "percent",
+      "formula": "Share of MOD-IV parcels classified as property class 2.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.commercial_parcel_share_pct": {
+      "range": "percent",
+      "formula": "Share of MOD-IV parcels in class 4 commercial/industrial/apartment categories.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.exempt_parcel_share_pct": {
+      "range": "percent",
+      "formula": "Share of MOD-IV parcels in class 15 exempt categories.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.vacant_parcel_share_pct": {
+      "range": "percent",
+      "formula": "Share of MOD-IV parcels in class 1 vacant land.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.farm_parcel_share_pct": {
+      "range": "percent",
+      "formula": "Share of MOD-IV parcels in class 3 farm categories.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.recent_sale_turnover_pct": {
+      "range": "percent",
+      "formula": "2024-or-later deed records with positive sale price divided by parcel count; not an arm's-length-sale claim.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_building_age": {
+      "range": "years",
+      "formula": "2026 minus median plausible construction year.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.pre_1978_building_share_pct": {
+      "range": "percent",
+      "formula": "Share of parcels with plausible construction year before 1978.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.recent_build_share_pct": {
+      "range": "percent",
+      "formula": "Share of parcels with plausible construction year 2020\u20132026.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_effective_tax_rate_pct": {
+      "range": "percent",
+      "formula": "Median latest reported annual tax divided by current net assessment; indicative only and distinct from an equalized market-value tax rate.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_sale_assessment_ratio_pct": {
+      "range": "percent",
+      "formula": "Median sale-assessment divided by recorded sale price across positive observations; not a verified SR-1A equalization statistic.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.sale_assessment_ratio_dispersion_pct": {
+      "range": "percent",
+      "formula": "Interquartile spread of sale-assessment ratios divided by their median.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.median_parcel_acres": {
+      "range": "acres",
+      "formula": "Median positive calculated acreage reported in MOD-IV.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "modiv_intel.assessed_value_per_acre": {
+      "range": "currency_per_acre",
+      "formula": "Aggregate net assessment divided by aggregate positive reported acreage.",
+      "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
     }
   }
 }

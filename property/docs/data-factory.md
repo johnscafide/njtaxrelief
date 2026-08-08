@@ -43,15 +43,15 @@ The scheduled GitHub health workflow runs this same contract without modifying p
 
 ## Publication gate
 
-The expected sequence is:
+The default low-cost production sequence is:
 
 1. Acquire the official source.
 2. Validate the source contract and record a checksum.
 3. Normalize only approved fields.
 4. Run source-specific QA and join coverage tests.
 5. Review anomalies and publisher notes.
-6. Approve the warehouse load explicitly.
+6. Compile privacy-limited rows into reviewed municipality/county/state intelligence.
 7. Recompute dependent Watchdog markers with versioned lineage.
-8. Publish only after customer-facing regression checks pass.
+8. Publish only aggregate intelligence after customer-facing regression checks pass.
 
-Data Factory v1 implements steps 1–4 and the explicit gate before step 6. Watchdog v0.34 adds the private warehouse schema and bulk `COPY` loader, but the 2026 rows remain unpublished until the warehouse load and explicit approval complete. See `property/docs/private-warehouse.md`.
+Watchdog v0.35 completes this path for the 2026 MOD-IV baseline: 3,208,097 rows compile into 24 professional signals covering all 564 municipalities and 21 counties. The resulting aggregate artifact is under 2 MB. A full Supabase MOD-IV copy is no longer required; the v0.34 private warehouse remains optional for future selected historical workloads. See `property/docs/statewide-intelligence-compiler.md`.

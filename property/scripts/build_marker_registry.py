@@ -142,6 +142,17 @@ if v031_path.exists():
             item['professions'], item['source_id'], item.get('description',''), item.get('field'))
         markers[-1].update({k:item[k] for k in ('professional_reason','formula','unit','source_field','dependencies') if item.get(k) is not None})
 
+# v0.35 compact statewide intelligence. These are aggregate-only signals
+# compiled from the validated 2026 MOD-IV release; parcel/person rows are not
+# shipped to the browser or required in the production database.
+v035_path = ROOT / 'data' / 'statewide-intelligence-marker-pack.json'
+if v035_path.exists():
+    v035 = json.loads(v035_path.read_text())
+    for item in v035['markers']:
+        add(item['id'], item['label'], item['category'], item['scope'], item['tier'], item['origin'],
+            item['professions'], item['source_id'], item.get('description',''), item.get('field'))
+        markers[-1].update({k:item[k] for k in ('professional_reason','formula','unit','dependencies') if item.get(k) is not None})
+
 # v0.18 cross-professional decision signals. Each has a UI value provider and documented formula.
 for mid,label,cat,tier,prof in [
  ('comparable_evidence_reliability','Comparable Evidence Reliability','evidence quality','pro',['appraiser','attorney','agent','lender']),

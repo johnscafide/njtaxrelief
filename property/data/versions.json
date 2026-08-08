@@ -1,8 +1,52 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-07T21:03:11-04:00",
+  "updated_at": "2026-08-07T22:30:00-04:00",
   "releases": [
+    {
+      "version": "0.35.0",
+      "date": "2026-08-07",
+      "timestamp": "2026-08-07T22:30:00-04:00",
+      "title": "Statewide Intelligence Compiler",
+      "category": "Pro+ data platform / cost-efficient architecture",
+      "status": "Completed",
+      "summary": "Replaced the planned requirement to warehouse every statewide MOD-IV parcel with a lean intelligence compiler. The validated 3,208,097-row 2026 source now produces compact municipality, county and statewide benchmarks across all 564 New Jersey municipalities and 21 counties. Added 24 transparent Watchdog-derived professional signals, including assessment dispersion, assessment-jump prevalence, property-class mix, turnover, building-age exposure, sale-assessment dispersion and parcel-value context. The aggregate production artifact is under 2 MB; raw and person-level source data remain outside the browser and Git. The optional private warehouse remains available for future selected historical workloads without forcing a database-plan upgrade today.",
+      "links": [
+        "/property/developer-data.html",
+        "/property/data-center.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/scripts/build_statewide_intelligence.py",
+        "property/data/statewide-intelligence.json",
+        "property/data/statewide-intelligence-marker-pack.json",
+        "property/scripts/build_marker_registry.py",
+        "property/scripts/build_marker_refresh_policy.py",
+        "property/scripts/build_derived_marker_formulas.py",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "property/data/derived-marker-formulas.json",
+        "property/data/data-factory-status.json",
+        "property/developer-data.html",
+        "property/js/developer-data.js",
+        "property/docs/statewide-intelligence-compiler.md",
+        "property/docs/data-factory.md",
+        "property/scripts/README-data-refresh.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "source_records_analyzed": 3208097,
+        "municipalities_compiled": 564,
+        "counties_compiled": 21,
+        "new_proprietary_signals": 24,
+        "catalog_markers": 721,
+        "catalog_goal_percent": 72.1,
+        "aggregate_output_bytes": 1978126,
+        "full_statewide_database_copy_required": 0,
+        "saas_readiness_percent": 57
+      }
+    },
     {
       "version": "0.34.0",
       "date": "2026-08-07",

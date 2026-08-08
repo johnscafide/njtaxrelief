@@ -9,6 +9,7 @@ REGISTRY = json.loads((ROOT / 'property/data/marker-registry.json').read_text())
 
 SOURCE = {
     'nj-parcels-modiv': ('annual', 'parcel-roll', 'official_release'),
+    'treasury-modiv-2026': ('annual', 'treasury-modiv-2026', 'official_release'),
     'nj-division-taxation': ('annual', 'tax-rates', 'official_release'),
     'nj-sr1a': ('quarterly', 'sr1a-ratios', 'official_release'),
     'nj-tax-court-appeals': ('annual', 'appeals', 'official_release'),

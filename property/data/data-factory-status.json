@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "generated_at": "2026-08-08T00:41:01.251864+00:00",
-  "overall_status": "validated_not_published",
-  "release": "0.34.0",
+  "overall_status": "compact_intelligence_ready",
+  "release": "0.35.0",
   "summary": {
     "governed_sources": 3,
     "bulk_sources_received": 2,
@@ -16,9 +16,15 @@
     "njgin_geometry_records": 3478727,
     "njgin_connector_state": "healthy",
     "warehouse_schema_state": "deployed_private",
-    "warehouse_load_state": "awaiting_bulk_copy",
+    "warehouse_load_state": "optional_dormant",
     "warehouse_loaded_records": 0,
-    "warehouse_loaded_partitions": 0
+    "warehouse_loaded_partitions": 0,
+    "intelligence_compiler_state": "passed",
+    "intelligence_source_records": 3208097,
+    "intelligence_municipalities": 564,
+    "intelligence_counties": 21,
+    "intelligence_signals": 24,
+    "intelligence_output_bytes": 1978126
   },
   "stages": [
     {
@@ -41,21 +47,21 @@
     },
     {
       "id": "warehouse-schema",
-      "label": "Private warehouse schema",
+      "label": "Private warehouse (optional)",
       "status": "passed",
-      "detail": "Private Supabase warehouse is deployed with five RLS-enabled tables; anon and authenticated roles have no table privileges."
+      "detail": "The secure Supabase warehouse schema remains available for future selected historical workloads, but a full statewide MOD-IV copy is no longer required for this release."
     },
     {
-      "id": "warehouse-load",
-      "label": "2026 warehouse bulk load",
-      "status": "pending",
-      "detail": "3,208,097 normalized records are ready for direct PostgreSQL COPY; production credentials are never stored in the repository."
+      "id": "intelligence-compile",
+      "label": "Statewide intelligence compile",
+      "status": "passed",
+      "detail": "3,208,097 privacy-limited source rows were condensed into 24 professional signals for all 564 municipalities, 21 counties and the statewide baseline."
     },
     {
       "id": "publish",
-      "label": "Production publish",
-      "status": "blocked",
-      "detail": "Publication remains blocked until the private warehouse load completes and its data-quality review is explicitly approved."
+      "label": "Aggregate intelligence publish",
+      "status": "passed",
+      "detail": "Only compact aggregate benchmarks and transparent marker definitions are shipped. Raw and parcel-level MOD-IV work products remain outside Git and outside the customer browser payload."
     }
   ],
   "latest_modiv_run": {
