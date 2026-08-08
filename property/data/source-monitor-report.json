@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "checked_at": "2026-08-07T22:24:35.751635+00:00",
+  "checked_at": "2026-08-08T02:22:17.773244+00:00",
   "checked": 30,
   "changed": [
     {
@@ -22,7 +22,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "db393491fcc820e9e34517b92503ca8cc442cb7ee9629f4fc7c048d4b11ceba7"
+        "sha256_prefix_2mb": "33aecfc102f69f62f430416283a7d9583a91201254a52ff02e7a59af7be51399"
       }
     },
     {
@@ -44,7 +44,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "d7e813e744e7610e71bebedd271b7b80b2f9fe034cfb7b566bdd910df5bd3dcc"
+        "sha256_prefix_2mb": "ee812cffd90c18d56bb1ab06b62c4c7f99fbd4a55d7ae8148c4b6063090f06e5"
       }
     },
     {
@@ -66,7 +66,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "584e0fba95be3a930ea1e584dffdb9929e394dcda6b39bf716120a8d721717e2"
+        "sha256_prefix_2mb": "0a2ca3207077fe5da2889304d2784f7145d615d050db86d0567d7dd840458ecf"
       }
     },
     {
@@ -85,10 +85,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "W/\"6f15c2ea1b1881372e808bcf4f405e72\"",
+        "etag": "W/\"de88c8570441d18e4ff63ed0f7a4a4e4\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "97d7176fe728d5b046b03889a1f0805872bb99fa949aa7cc7be9c9ee387f72c1"
+        "sha256_prefix_2mb": "9fb6b21c2e04d1171128ae01fb0b29eb652b266c8867b7b9e05a42f9537ff19b"
       }
     },
     {
@@ -107,10 +107,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"721a0a4d\"",
+        "etag": "\"e7088eac\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "40b2f83d6b82555f335f001e99f6366bbfc4a15142ff82a407dfa9a612578a82"
+        "sha256_prefix_2mb": "30f91109b56d7fad53dcc643023bf8666d7cfabe0062ca3d7c6cb1e7e579098f"
       }
     },
     {
@@ -129,10 +129,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"1965dca1\"",
+        "etag": "\"5e27da09\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "24a6defb6a96e2e3a05a0c284e8fcdf166008f776d8fdd5cf586045443b5b2cb"
+        "sha256_prefix_2mb": "fb0f017352cd92cc8ab2989a641edf65ea8358352b1ae9719cee1569cf389d53"
       }
     },
     {
@@ -151,10 +151,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"3eff662f\"",
+        "etag": "\"dc77e8c\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "4a1c0d45e3618e2c77d5c71cf683d8dbd3aa93af7e8096249f7d58678afc2554"
+        "sha256_prefix_2mb": "50e27433da84327781693397d31562b0b23b4cb165885f08aedcba62ff30073e"
       }
     },
     {
@@ -173,10 +173,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"721a0a4d\"",
+        "etag": "\"e7088eac\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "6a1a69c4d10c3ae398f3eba8c8d2617557575e396912b1ef337209b9e340ff0c"
+        "sha256_prefix_2mb": "8e3cd5fe5738b537e8d506137336e60104287fb130996efbed6091aaf2621eed"
       }
     },
     {
@@ -195,10 +195,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"ff2fba40\"",
+        "etag": "\"b7c15a4f\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "ab4e0c81ae4360c35826357c81bf761bc8e4c32df965e27911f3cacb759e503e"
+        "sha256_prefix_2mb": "133eec790415035ab232fa135efd4252dc977341c5702f272bdf944729cdb4ab"
       }
     },
     {
@@ -217,10 +217,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"3eff662f\"",
+        "etag": "\"dc77e8c\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "4ca6a393456ef3a56d39e115df459c6fda7b236f0513e6aebd0df095b669ccfa"
+        "sha256_prefix_2mb": "a414f7ee62d237f209ba6ba76e0fe27d34b3aeb79b1bbea5548f4488fbfca0e6"
       }
     },
     {
@@ -239,10 +239,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"3eff662f\"",
+        "etag": "\"dc77e8c\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "6faf06a6e815c0929294dff081f0944cda7383c4b1e674e20c63d0f10015263d"
+        "sha256_prefix_2mb": "987d2ba076d9c3ad3db0e07cce9bf8b7f5b589a1597c4cdb2c147292fec2a86e"
       }
     },
     {
@@ -261,10 +261,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"ff2fba40\"",
+        "etag": "\"b7c15a4f\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "c9e0f110bd56aed5cd614c60e2cf8477b7f897a418c1e8a7e3a7cb2bfd166b9a"
+        "sha256_prefix_2mb": "0ee055f7ad8983323e5e11a3ff0edea0ef30bcd50bcfe2eca60141526fba70b0"
       }
     },
     {
@@ -283,10 +283,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"ff2fba40\"",
+        "etag": "\"b7c15a4f\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "7d10c3a31185fe91e70d36fc00ee498d27a6dc358c68591ddf46c1c6ce913567"
+        "sha256_prefix_2mb": "455e93be7f68460603f1f81f20c049031a66875aa4223a924c41fa84653a2942"
       }
     },
     {
@@ -305,10 +305,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"ab6a7ff1\"",
+        "etag": "\"c48b3825\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "b87e7a8c0f6eff4c820d8d4735282920ae1abe4560419820bcaf1bb8c701b59b"
+        "sha256_prefix_2mb": "f532828ccf955808254aea5e2fa9789057824682de98a3400ee13f76783be080"
       }
     },
     {
@@ -327,10 +327,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "\"a46fbf3e\"",
+        "etag": "\"19a6394c\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "7d67e85abb8ddc63848c49f8bc0cebb7dd34aafa3395520cb0f0497a6b5c662e"
+        "sha256_prefix_2mb": "b6b7b44812d68aab71d9b8c905eca60d3489cca0bf414f82d853eac17e5aadac"
       }
     },
     {
@@ -352,7 +352,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "59d81c274f36aa25c819ab7e9c5623cd454f93abf347856a84bb7fca0c920432"
+        "sha256_prefix_2mb": "ff88afc8585b1222c66360dcc7812f447d540d44055a6d69454fcda4a1ee2939"
       }
     },
     {
@@ -374,7 +374,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "11286348f23587d7ac7a9311fda1a36ae1517d4783e231d8e4c799c8c6b1ecfb"
+        "sha256_prefix_2mb": "80dfa30baccc2907002d0808568e33a26729e76b241aa9ef60fee8544089d3fd"
       }
     },
     {
@@ -396,7 +396,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "fd29a86804768bcec3f44ff579ff9bdaa65363518b4dfe490e63c56d0d368941"
+        "sha256_prefix_2mb": "cd198819920da7e8fdc52fa250631fff0fe353102cca38e7590d5494f611b8b9"
       }
     },
     {
@@ -415,10 +415,10 @@
       },
       "after": {
         "status": 200,
-        "etag": "W/\"b6b6c8e8f09cd213afcff5c152d26b22\"",
+        "etag": "W/\"c0d97947d0c4aed22cd0f27f6e957905\"",
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "7361e4858f94a61526ecfc4d7a4b796dd51cc8efabdfc49c02a67147fcc4ff47"
+        "sha256_prefix_2mb": "f66c26928d2559eda739fc1ff5c119027e4dcb922197c5cf29257d243f503f0b"
       }
     },
     {
@@ -440,7 +440,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "0ee03b195803f05622063defcdce2ce9d21213e19550541ebd784752f356d91c"
+        "sha256_prefix_2mb": "a610bc074180e05daf7ec3bfa24fa92fcb786513866d10d7a965b7e65168fbf2"
       }
     },
     {
@@ -462,7 +462,29 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "16ef5e2c9edbe86bbb385ff1c5feb14e985b6f47c5fe2c274c0f1019e4e598de"
+        "sha256_prefix_2mb": "fbcaa7755f89746bb30c8b83083de9a85cdef69adc89eb72a4c99b369f82b26e"
+      }
+    },
+    {
+      "id": "nj-dca-municipal-housing-profile",
+      "label": "Municipal Housing Profile Dashboard",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://datahub.dca.nj.gov/",
+      "before": {
+        "url": "https://datahub.dca.nj.gov/",
+        "checked_at": "2026-08-07T22:23:39.367520+00:00",
+        "status": 200,
+        "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      },
+      "after": {
+        "status": 200,
+        "etag": "W/\"b69b-RbRaxOr4sGztnhZKl/fIhAqFCNA\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "d03f23c34b9ff32b7449d75f14fd9f300f3ae95fbf856d09ba584caf714e66eb"
       }
     },
     {
@@ -484,7 +506,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "c939b41267a797fba921034f91ba759298da132949dd5c4a8afd6149fd97622c"
+        "sha256_prefix_2mb": "1ef404204b7defb5651ebfe950030148b76a8fc137371a59e46dac40ddb13e39"
       }
     },
     {
@@ -506,7 +528,7 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "5fe8e58d67a80d513782574371c93a946aecae64c3a3f1f00ed7cf00eee82222"
+        "sha256_prefix_2mb": "2bb0fd65b44bd2fd8467f5ecc033f69ca2f02998e3b0197b9f927f7cb6b7ee4f"
       }
     },
     {
@@ -528,7 +550,73 @@
         "etag": null,
         "last_modified": null,
         "content_length": null,
-        "sha256_prefix_2mb": "8b6d9a58e5f775c9931d260a1578c96c66805134f90766205fa133f17e47845e"
+        "sha256_prefix_2mb": "5097ade7c5027b852692c160c6a3d424d8d6d78092041b8a5f31b40edd9d0111"
+      }
+    },
+    {
+      "id": "nj-dca-pilot-forecast",
+      "label": "PILOT Database Viewer and Financial Agreement Forecast",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://datahub.dca.nj.gov/",
+      "before": {
+        "url": "https://datahub.dca.nj.gov/",
+        "checked_at": "2026-08-07T22:23:39.752726+00:00",
+        "status": 200,
+        "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      },
+      "after": {
+        "status": 200,
+        "etag": "W/\"b69b-RbRaxOr4sGztnhZKl/fIhAqFCNA\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "d03f23c34b9ff32b7449d75f14fd9f300f3ae95fbf856d09ba584caf714e66eb"
+      }
+    },
+    {
+      "id": "nj-dca-modiv-longitudinal",
+      "label": "MOD-IV Longitudinal Database",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://datahub.dca.nj.gov/",
+      "before": {
+        "url": "https://datahub.dca.nj.gov/",
+        "checked_at": "2026-08-07T22:23:39.858987+00:00",
+        "status": 200,
+        "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      },
+      "after": {
+        "status": 200,
+        "etag": "W/\"b69b-RbRaxOr4sGztnhZKl/fIhAqFCNA\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "d03f23c34b9ff32b7449d75f14fd9f300f3ae95fbf856d09ba584caf714e66eb"
+      }
+    },
+    {
+      "id": "nj-dca-neighborhood-trends",
+      "label": "Neighborhood Trends Database",
+      "agency": "NJ Department of Community Affairs",
+      "url": "https://datahub.dca.nj.gov/",
+      "before": {
+        "url": "https://datahub.dca.nj.gov/",
+        "checked_at": "2026-08-07T22:23:39.980995+00:00",
+        "status": 200,
+        "etag": "W/\"b69b-+QXLdkRMzETP/DX6xJzmssa/DPM\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "51795fabfb16427dda70cd4ee24532d3401335b7807371158164454f17128e07"
+      },
+      "after": {
+        "status": 200,
+        "etag": "W/\"b69b-RbRaxOr4sGztnhZKl/fIhAqFCNA\"",
+        "last_modified": null,
+        "content_length": "46747",
+        "sha256_prefix_2mb": "d03f23c34b9ff32b7449d75f14fd9f300f3ae95fbf856d09ba584caf714e66eb"
       }
     },
     {
@@ -549,12 +637,19 @@
         "status": 200,
         "etag": null,
         "last_modified": null,
-        "content_length": "212",
-        "sha256_prefix_2mb": "d02032286070b4dd9d8fbd985a7bdca8af8edf52b89ff177db3bfcb2c8a9c43d"
+        "content_length": null,
+        "sha256_prefix_2mb": "5b8adfde4b451e5810e348eb932072f091a1cb79308695b164543a49b1fe8138"
       }
     }
   ],
   "errors": [],
   "baseline_missing": false,
-  "event_delivery": null
+  "event_delivery": {
+    "ok": true,
+    "status": 200,
+    "response": {
+      "delivered": 435,
+      "ignored": -406
+    }
+  }
 }
