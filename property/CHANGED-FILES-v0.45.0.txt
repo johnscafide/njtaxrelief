@@ -1,0 +1,36 @@
+Watchdog v0.45.0 — upload these paths exactly
+
+.github/workflows/access-boundary-audit.yml
+property/CHANGED-FILES-v0.45.0.txt
+property/account.html
+property/agent-desk.html
+property/css/agent-desk.css
+property/css/dashboard/06-responsive-additions.css
+property/css/updates.css
+property/dashboard.html
+property/data-center.html
+property/data/versions.json
+property/developer-data.html
+property/docs/v045-control-plane.md
+property/fairness.html
+property/home.html
+property/js/agent-control.js
+property/js/agent-desk.js
+property/js/sidemenu.js
+property/js/updates.js
+property/pulse.html
+property/scan.html
+property/sidemenu.html
+property/tests/v045-control-plane.mjs
+property/town-compare.html
+property/updates.html
+property/verification-diagnostics.html
+property/workbench.html
+supabase/config.toml
+supabase/functions/municipal-data/index.ts
+supabase/migrations/20260809233000_watchdog_v045_control_plane.sql
+
+Backend deployment status
+- Migration applied to primary Supabase project.
+- municipal-data Edge Function v3 active with JWT verification, the current property-lookup schema, and explicit retry timing.
+- Static files still require upload to the website/GitHub repository.
