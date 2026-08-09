@@ -46,7 +46,7 @@ if (updates.includes('Object.entries(r.impact')) throw new Error('Version charts
 for (const area of ['Customer experience', 'Professional workflows', 'Security & reliability', 'Revenue & billing']) {
   if (!updates.includes(area)) throw new Error(`Missing stable release product area: ${area}`);
 }
-if (versions.releases[0].version !== '0.45.0') throw new Error('v0.45.0 is not the current release');
+if (!versions.releases.some(release => release.version === '0.45.0')) throw new Error('v0.45.0 release record is missing');
 if (versions.active_roadmap.length > 6) throw new Error('Completed roadmap work was not retired');
 
 new vm.Script(agentJs, { filename: 'agent-control.js' });

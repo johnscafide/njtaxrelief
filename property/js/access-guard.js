@@ -57,6 +57,7 @@
 
   var required = document.documentElement.getAttribute('data-access-require') ||
     (document.body && document.body.getAttribute('data-access-require'));
+  if (location.pathname.replace(/\/+$/, '') === '/property/data-center.html') required = 'pro_plus';
   if (required) document.documentElement.classList.add('access-pending');
   window.NJPTRAccess = { require: requireAccess, client: sb };
   window.njptrAccessReady = required ? requireAccess(required) : Promise.resolve({ developer: false });

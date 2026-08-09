@@ -1,0 +1,23 @@
+name: Watchdog change and delivery automation
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 */6 * * *'
+permissions:
+  contents: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run protected automation
+        env:
+          WATCHDOG_AUTOMATION_URL: ${{ secrets.WATCHDOG_AUTOMATION_URL }}
+          WATCHDOG_AUTOMATION_SECRET: ${{ secrets.WATCHDOG_AUTOMATION_SECRET }}
+        run: |
+          if [ -z "$WATCHDOG_AUTOMATION_URL" ] || [ -z "$WATCHDOG_AUTOMATION_SECRET" ]; then
+            echo "::notice::Automation secrets are not configured; this scheduled run was safely skipped."
+            exit 0
+          fi
+          curl --fail-with-body --retry 3 --retry-all-errors \
+            -H "x-watchdog-automation-secret: $WATCHDOG_AUTOMATION_SECRET" \
+            "$WATCHDOG_AUTOMATION_URL"

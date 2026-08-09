@@ -18,3 +18,9 @@ verify_jwt = false
 
 [functions.municipal-data]
 verify_jwt = true
+
+[functions.report-share]
+verify_jwt = false
+
+[functions.watchdog-automation]
+verify_jwt = false

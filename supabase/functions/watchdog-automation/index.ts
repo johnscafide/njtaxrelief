@@ -1,0 +1,27 @@
+import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const fields=["address","town","county","block","lot","assessed","last_year_tax","effective_rate","watchdog_value","verified","verify_level"];
+const sourceUrl="https://njpropertytaxrelief.com/property/data-methodology.html";
+function stable(v:unknown){return JSON.stringify(v,Object.keys(v as Record<string,unknown>).sort());}
+async function sha(v:string){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");}
+function materiality(k:string,a:unknown,b:unknown){if(["assessed","last_year_tax","watchdog_value"].includes(k)){const old=Number(a)||0,next=Number(b)||0,pct=old?Math.abs(next-old)/old:1;return pct>=.05?"action":pct>=.01?"material":"informational";}return ["verified","verify_level"].includes(k)?"material":"informational";}
+Deno.serve(async(req)=>{
+  const secret=Deno.env.get("WATCHDOG_AUTOMATION_SECRET")||Deno.env.get("AGENT_DIGEST_CRON_SECRET")||"",got=req.headers.get("x-watchdog-automation-secret")||"";
+  if(!secret||got!==secret)return new Response(JSON.stringify({error:"Unauthorized"}),{status:401,headers:{"content-type":"application/json"}});
+  const url=Deno.env.get("SUPABASE_URL"),key=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");if(!url||!key)return new Response("Unavailable",{status:503});
+  const db=createClient(url,key,{auth:{persistSession:false}}),runAt=new Date().toISOString();let snapshots=0,changes=0,jobs=0;
+  const {data:rows,error}=await db.from("saved_properties").select("user_id,pams_pin,address,town,county,block,lot,assessed,last_year_tax,effective_rate,watchdog_value,verified,verify_level");if(error)throw error;
+  const byPin=new Map<string,any[]>();for(const row of rows||[]){if(!row.pams_pin)continue;const a=byPin.get(row.pams_pin)||[];a.push(row);byPin.set(row.pams_pin,a);}
+  for(const [pin,owners] of byPin){const sample=owners[0],payload=Object.fromEntries(fields.map(k=>[k,sample[k]??null])),payloadHash=await sha(stable(payload));
+    const {data:prior}=await db.from("property_record_snapshots").select("id,payload,captured_at").eq("pams_pin",pin).eq("source_kind","manual").eq("job_key","watchdog.saved-property-sync").order("captured_at",{ascending:false}).limit(1).maybeSingle();
+    const {data:snap,error:se}=await db.from("property_record_snapshots").upsert({pams_pin:pin,source_kind:"manual",source_url:sourceUrl,source_recorded_at:runAt,captured_at:runAt,payload,payload_hash:payloadHash,job_key:"watchdog.saved-property-sync"},{onConflict:"pams_pin,source_kind,payload_hash",ignoreDuplicates:true}).select("id").maybeSingle();if(se)throw se;if(!snap)continue;snapshots++;
+    if(prior){for(const k of fields){const before=prior.payload?.[k]??null,after=payload[k]??null;if(JSON.stringify(before)===JSON.stringify(after))continue;const m=materiality(k,before,after),delta=Number.isFinite(Number(after)-Number(before))?Number(after)-Number(before):null;
+      const {data:ch}=await db.from("property_field_changes").insert({snapshot_id:snap.id,pams_pin:pin,field_key:k,old_value:before===null?null:before,new_value:after===null?null:after,change_kind:before===null?"added":after===null?"removed":"changed",materiality:m,delta_numeric:delta,source_key:"watchdog.saved-property-sync",source_url:sourceUrl,observed_at:runAt}).select("id").single();changes++;
+      for(const owner of owners){const pref=await db.from("property_alert_preferences").select("paused,alert_score,alert_tax,alert_assessment,alert_deadline").eq("user_id",owner.user_id).eq("pams_pin",pin).maybeSingle();if(pref.data?.paused)continue;const type=k==="assessed"?"assessment_change":k==="last_year_tax"?"tax_change":k==="watchdog_value"?"market_change":"evidence_change";await db.from("property_update_events").upsert({user_id:owner.user_id,pams_pin:pin,event_key:`field:${ch.id}:${owner.user_id}`,event_type:type,severity:m==="action"?"action":m==="material"?"watch":"info",title:`${k.replaceAll("_"," ")} changed`,summary:`Watchdog recorded a sourced before-and-after change for ${owner.address||pin}.`,payload:{change_id:ch.id,source_key:"watchdog.saved-property-sync"},occurred_at:runAt,marker_id:`property.${k}`,old_value:String(before??""),new_value:String(after??""),delta_numeric:delta,source_url:sourceUrl,minimum_plan:"standard"},{onConflict:"user_id,event_key"});}
+    }}
+  }
+  await db.rpc("queue_due_data_center_jobs");const {data:due}=await db.from("data_center_delivery_jobs").select("id,user_id,view_id,name,scope,format,cadence").eq("status","queued").limit(25);
+  for(const job of due||[]){await db.from("data_center_delivery_jobs").update({status:"running",updated_at:runAt}).eq("id",job.id);const {data:view}=await db.from("saved_data_center_views").select("name,marker_ids,filters").eq("id",job.view_id).eq("user_id",job.user_id).maybeSingle();const next=job.cadence==="weekly"?new Date(Date.now()+7*86400000):job.cadence==="monthly"?new Date(Date.now()+30*86400000):null;await db.from("data_center_delivery_jobs").update({status:"ready",last_run_at:runAt,next_run_at:next?.toISOString()||runAt,result:{generated_at:runAt,view:view||null,format:job.format,delivery:"download-ready"},updated_at:runAt}).eq("id",job.id);jobs++;}
+  return new Response(JSON.stringify({ok:true,run_at:runAt,snapshots,changes,data_center_jobs:jobs}),{headers:{"content-type":"application/json","cache-control":"no-store"}});
+});
