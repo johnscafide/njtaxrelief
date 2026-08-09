@@ -6,6 +6,7 @@
 .db-add-short,
 .mobile-intel-overlay,
 .db-to-top { display: none; }
+.wb-modal[hidden] { display: none !important; }
 
 /* Agent Intel is a sidebar item at every width now, not a mobile fallback. */
 .intel-nav { display: flex !important; position: relative; }
@@ -57,12 +58,11 @@
 }
 
 .db-sidebar-toggle {
-  align-items: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
-  border-radius: 8px; color: #b8c7d8; cursor: pointer; display: flex; font-family: inherit;
-  font-size: 11px; font-weight: 750; gap: 9px; justify-content: center; margin: -14px 5px 18px;
-  min-height: 35px; padding: 8px 10px; width: calc(100% - 10px);
+  align-items:center;background:#fff;border:1px solid #d7e1e8;border-radius:50%;box-shadow:0 7px 20px rgba(8,27,50,.16);
+  color:#173e75;cursor:pointer;display:flex;font-family:inherit;font-size:12px;justify-content:center;
+  height:38px;left:78px;margin:0;padding:0;position:fixed;top:50%;transform:translate(-50%,-50%);transition:left .24s ease,transform .18s ease;width:38px;z-index:1200;
 }
-.db-sidebar-toggle:hover { background: rgba(255,255,255,.11); color: #fff; }
+.db-sidebar-toggle:hover { background:#eaf6f5;color:#07898b;transform:translate(-50%,-50%) scale(1.06); }
 
 .intel-home-row {
   align-items: stretch; display: grid; gap: 22px; grid-template-columns: minmax(0, 3fr) minmax(310px, 2fr);
@@ -94,7 +94,7 @@
   .db-side-link em, .db-side-account span, .db-sidebar-toggle span { display: none; }
   .db-sidebar .pn, .db-side-link, .db-side-account button { justify-content: center; padding: 12px; }
   .db-sidebar .pn i, .db-side-link i, .db-side-account i { font-size: 16px; width: auto; }
-  .db-sidebar-toggle { margin-left: auto; margin-right: auto; width: 36px; }
+  .db-sidebar-toggle { left:78px; }
   .db-side-desktop { overflow-x: hidden; overflow-y: auto; }
   .db-side-group-toggle { justify-content: center; padding: 10px; }
   .db-side-group-toggle > span, .db-side-group-toggle > em, .db-side-chevron, .db-side-submenu { display: none; }
@@ -115,7 +115,7 @@
   body.db-sidebar-expanded .db-sidebar .pn i,
   body.db-sidebar-expanded .db-side-link i,
   body.db-sidebar-expanded .db-side-account i { font-size: inherit; width: 17px; }
-  body.db-sidebar-expanded .db-sidebar-toggle { margin-left: 5px; margin-right: 5px; width: calc(100% - 10px); }
+  body.db-sidebar-expanded .db-sidebar-toggle { left:252px;width:38px; }
   body.db-sidebar-expanded .db-sidebar { overflow: hidden; }
   body.db-sidebar-expanded .db-side-desktop { overflow-x: hidden; overflow-y: auto; }
   body.db-sidebar-expanded .db-side-group-toggle { justify-content: flex-start; }

@@ -1073,23 +1073,6 @@ function brief() {
       );
     }
 
-    s.push(
-      briefPoint(
-        '<a href="/property/pro.html"><b>Upgrade to Pro</b></a> for Chapter 123 ' +
-        'screening, verified sales comparables, professional town comparisons, ' +
-        'unlimited saved properties, and client-ready exports.',
-        'brief-point-upgrade'
-      )
-    );
-
-    s.push(
-      briefPoint(
-        '<a href="/property/pro.html"><b>Step up to Pro+</b></a> for 1,000+ ' +
-        'record workflows, exclusive Watchdog intelligence, bulk research, ' +
-        'and API access.',
-        'brief-point-upgrade'
-      )
-    );
   }
 
   // PRO AND PRO+ ACCOUNTS
@@ -1218,7 +1201,11 @@ function brief() {
   // ══════════════════════════════════════════════
   function isCommercialProperty(r) {
     var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
-    return /^4(?:a|b|c)?(?:\b|\s|-)/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification);
+    if (/^4(?:a|b|c)?(?:\b|\s|-)/.test(classification) || /commercial|retail|office|industrial|apartment|mixed.use/.test(classification)) return true;
+    if (/^(?:1|2|3|15)(?:\b|\s|-)/.test(classification)) return false;
+    var qualified = /_c\d+$/i.test(String(r.pams_pin || ''));
+    var rangeAddress = /^\s*\d+\s*[-–]\s*\d+/.test(String(r.address || ''));
+    return qualified && (rangeAddress || (+r.assessed || 0) >= 1000000 || (+r.last_year_tax || 0) >= 50000 || (+r.lot_sq_ft || 0) >= 100000);
   }
   window.dbToggleSignals = function (button) {
     var box = button && button.closest('.pr-card-context');
@@ -1294,7 +1281,7 @@ function brief() {
     mail: { label: 'verified owner', cls: 'yes', note: 'Ownership was verified through Watchdog\'s verification process.' }
   };
   function verificationBadge(v) {
-    return '<span class="verify-help ' + esc(v.cls) + '" tabindex="0"><em>' + esc(v.label) + '</em><span role="tooltip"><b>' + esc(v.label) + '</b>' + esc(v.note) + '</span></span>';
+    return '<span class="verify-help tip ' + esc(v.cls) + '" tabindex="0" data-tip="' + esc(v.label + ': ' + v.note) + '"><em>' + esc(v.label) + '</em></span>';
   }
 
   // ══════════════════════════════════════════════
@@ -1488,6 +1475,7 @@ function brief() {
     document.addEventListener('focusin', show);
     document.addEventListener('focusout', hide);
   }
+  initTips();
 
   // ══════════════════════════════════════════════
 
@@ -1761,7 +1749,7 @@ function brief() {
     button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
     var icon = button.querySelector('i');
     var label = button.querySelector('span');
-    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (icon) icon.className = 'fas fa-angles-' + (expanded ? 'left' : 'right');
     if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
   }
 

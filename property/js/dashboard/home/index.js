@@ -1321,7 +1321,10 @@
 
   function isCommercialProperty(r) {
     var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
-    return /^4/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification) || /_c\d+$/i.test(String(r.pams_pin || ''));
+    if (/^4(?:a|b|c)?(?:\b|\s|-)/.test(classification) || /commercial|retail|office|industrial|apartment|mixed.use/.test(classification)) return true;
+    if (/^(?:1|2|3|15)(?:\b|\s|-)/.test(classification)) return false;
+    var qualified=/_c\d+$/i.test(String(r.pams_pin||'')),range=/^\s*\d+\s*[-–]\s*\d+/.test(String(r.address||''));
+    return qualified&&(range||(+r.assessed||0)>=1000000||(+r.last_year_tax||0)>=50000||(+r.lot_sq_ft||0)>=100000);
   }
 
   function qsPin() {
@@ -1436,6 +1439,7 @@
           (s ? hf('sales.ratio', 'Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
           (s && s.ppsf ? hf('sales.ppsf', 'Price per sq ft', '$' + s.ppsf, 'median here', 'hm-detail-metric') : '') +
           (s && s.medPrice ? hf('sales.median_price', 'Median sale', money(s.medPrice), 'in this town', 'hm-detail-metric') : '') +
+          (u && Number.isFinite(+u.score) ? hf('watchdog.assessment_uniformity_score', 'Fairness score', (+u.score).toFixed(1) + '/100', '#' + u.stateRank + ' statewide', 'hm-detail-metric') : '') +
         '</div>' +
 
         (commercial ? '' : scorecard(r)) +
@@ -1803,7 +1807,7 @@
     }
     if (r.verify_level !== 'mail' && r.kind === 'home') {
       p.push(['fa-badge-check', '',
-        'Ownership is not verified on this one yet, which is worth doing before anything is filed.']);
+        'Ownership is not verified on this one yet, which is worth doing before anything is filed. <a class="ai-verify-action" href="/property/dashboard.html#profile">Verify ownership</a>']);
     }
     if (!p.length) return '';
     return '<ul class="ai-pts">' + p.map(function (x) {
@@ -1907,7 +1911,7 @@
     button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
     var icon = button.querySelector('i');
     var label = button.querySelector('span');
-    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (icon) icon.className = 'fas fa-angles-' + (expanded ? 'left' : 'right');
     if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
   }
 

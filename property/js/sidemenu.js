@@ -19,7 +19,7 @@
     button.setAttribute('aria-label', expanded ? 'Collapse navigation' : 'Expand navigation');
     var icon = button.querySelector('i');
     var label = button.querySelector('span');
-    if (icon) icon.className = 'fas fa-chevron-' + (expanded ? 'left' : 'right');
+    if (icon) icon.className = 'fas fa-angles-' + (expanded ? 'left' : 'right');
     if (label) label.textContent = expanded ? 'Collapse navigation' : 'Expand navigation';
   }
 
@@ -166,7 +166,7 @@
   function load() {
     var target = document.getElementById(targetId);
     if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html?v=20260808a', { credentials: 'same-origin' })
+    return fetch('/property/sidemenu.html?v=20260809d', { credentials: 'same-origin' })
       .then(function (response) {
         if (!response.ok) throw new Error('Navigation request returned ' + response.status);
         return response.text();
