@@ -8,10 +8,13 @@ const js = read('property/js/agent-desk.js');
 const sql = read('supabase/migrations/20260809213000_agent_opportunity_desk.sql');
 const digest = read('supabase/functions/agent-opportunity-digest/index.ts');
 
-for (const id of ['ad-list','ad-stats','ad-import-modal','ad-drawer','ad-digest','ad-load-more']) {
+for (const id of ['ad-list','ad-stats','ad-focus','ad-import-modal','ad-drawer','ad-digest','ad-load-more']) {
   if (!html.includes(`id="${id}"`)) throw new Error(`Missing Agent Desk UI contract: ${id}`);
 }
 if (!html.includes('data-queue="top"')) throw new Error('Top 10 focused worklist is missing');
+if (!js.includes('Anonymous property signal')) throw new Error('Agent Desk does not disclose the contact-safe property-signal boundary');
+if (!js.includes('function focusCard()')) throw new Error('Best-next-conversation focus card is missing');
+if (!js.includes("'Evidence ready'")) throw new Error('Evidence-readiness KPI is missing');
 if (!js.includes("'/property/home.html?pin='")) throw new Error('Matched properties do not deep-link to the property workspace');
 if (!js.includes("ACTIONABLE_TYPES=['assessment_change'")) throw new Error('Actionable event allowlist is missing');
 if (!js.includes("propertyKey(property),e.event_type")) throw new Error('Property/reason deduplication key is missing');
