@@ -3,7 +3,7 @@
   "status": "pipeline",
   "items": [
     {"priority":1,"capability":"Entitlement service and audit log","reason":"Server entitlement foundation and route-regression audit are shipped. Next: run authenticated Standard, Pro and Developer staging tests against deployed RLS policies."},
-    {"priority":2,"capability":"Saved workspaces and reusable views","reason":"Professionals expect saved filters, columns, properties and team-standard templates."},
+    {"priority":2,"capability":"Agent Opportunity Desk scale validation","reason":"MVP is shipped with private sphere import, sourced ranking, weekly digest and outcome analytics. Next: validate weekly usefulness and conversion workflow with 10 active New Jersey agents before changing Agent pricing."},
     {"priority":3,"capability":"Global command palette","reason":"Fast keyboard access to properties, markers, reports, tools and actions."},
     {"priority":4,"capability":"Notification and change center","reason":"Property Pulse and the source-change delivery contract are live. Next: validate/download changed editions, email delivery and opt-in native push."},
     {"priority":5,"capability":"Data freshness and lineage drawer","reason":"Every value should expose source, retrieved date, transform, confidence and version."},

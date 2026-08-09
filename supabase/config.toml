@@ -12,3 +12,6 @@ verify_jwt = true
 
 [functions.request-verify-code]
 verify_jwt = true
+
+[functions.agent-opportunity-digest]
+verify_jwt = false
