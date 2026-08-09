@@ -9,9 +9,12 @@ function tiEsc(value) {
 
 function tiNormalize(value) {
   return String(value || '').toUpperCase().trim()
-    .replace(/TOWNSHIP|TWNSHP/g, 'TWP').replace(/BOROUGH/g, 'BORO')
+    .replace(/\bTOWNSHIP\b|\bTWNSHP\b|\bTWSP\b/g, 'TWP')
+    .replace(/\bBOROUGH\b|\bBORO\b/g, 'BORO').replace(/\bVILLAGE\b/g, 'VLG')
+    .replace(/\bTOWN OF\b/g, '').replace(/[^A-Z0-9 ()]/g, ' ')
     .replace(/\s+/g, ' ');
 }
+window.NJPTRTownName = Object.freeze({ normalize: tiNormalize });
 
 function tiBand(score) {
   return score >= 70 ? 'excellent' : score >= 50 ? 'good' : score >= 30 ? 'fair' : 'poor';

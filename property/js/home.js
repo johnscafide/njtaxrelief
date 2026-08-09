@@ -434,7 +434,7 @@
   function locked(label, why, html) {
     if (isPro()) return html;
     return '<div class="lk">' +
-      '<div class="lk-in">' + html + '</div>' +
+      '<div class="lk-in" aria-hidden="true"><div class="locked-skeleton"><i></i><i></i><i></i></div></div>' +
       '<div class="lk-over">' +
         '<div class="lk-t"><i class="fas fa-lock"></i> ' + esc(label) + '</div>' +
         '<div class="lk-w">' + why + '</div>' +

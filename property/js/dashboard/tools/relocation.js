@@ -14,15 +14,8 @@
       // GREENWICH TWP each exist in more than one New Jersey county.
       // The two files abbreviate differently: one says TWP, the other TWNSHP.
       // Normalise both sides before comparing.
-      var norm = function (x) {
-        return String(x).toUpperCase()
-          .replace(/\bTOWNSHIP\b|\bTWNSHP\b|\bTWSP\b/g, 'TWP')
-          .replace(/\bBOROUGH\b|\bBORO\b/g, 'BORO')
-          .replace(/\bVILLAGE\b/g, 'VLG')
-          .replace(/\bTOWN OF\b/g, '')
-          .replace(/[^A-Z0-9 ]/g, ' ')
-          .replace(/\s+/g, ' ').trim();
-      };
+      var norm = window.NJPTRTownName && window.NJPTRTownName.normalize;
+      if (!norm) throw new Error('Shared town-name normalizer is unavailable');
       var want = norm(nm);
       var keys = Object.keys(t);
       var hit = null;

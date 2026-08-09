@@ -44,6 +44,7 @@
 
   var sb = null, plUser = null, profile = {}, refPromise = null;
   var sr1a = null, uni = null, appeals = null, taxRates = {}, taxRateIndex = {}, salesCache = {}, lastRun = null;
+  var scanSortKey = 'opportunity', scanSortDir = -1;
 
   function el(id) { return document.getElementById(id); }
   function esc(s) {
@@ -170,6 +171,63 @@
     return { score: score, confidence: available, band: score >= 75 ? 'High priority' : score >= 55 ? 'Review' : score >= 35 ? 'Developing' : 'Low signal', parts: parts };
   }
 
+  function sortedHits() {
+    if (!lastRun) return [];
+    var value = {
+      opportunity: function (h) { return h.opportunity.score; }, address: function (h) { return h.a; },
+      block: function (h) { return String(h.b || '') + '/' + String(h.l || ''); }, year: function (h) { return h.y; },
+      sale: function (h) { return h.p; }, assessed: function (h) { return h.av; }, limit: function (h) { return h.limit; },
+      over: function (h) { return h.over; }, saving: function (h) { return h.saving; }, evidence: function (h) { return h.g.k; }
+    }[scanSortKey] || function (h) { return h.opportunity.score; };
+    return lastRun.hits.slice().sort(function (a, b) {
+      var av = value(a), bv = value(b);
+      if (typeof av === 'string') return scanSortDir * av.localeCompare(bv, undefined, { numeric: true });
+      return scanSortDir * ((av == null ? -Infinity : av) - (bv == null ? -Infinity : bv));
+    });
+  }
+  window.scSort = function (key) {
+    if (scanSortKey === key) scanSortDir *= -1;
+    else { scanSortKey = key; scanSortDir = /address|block|evidence/.test(key) ? 1 : -1; }
+    paint();
+  };
+  function sortHead(key, label, numeric) {
+    var active = scanSortKey === key;
+    return '<th' + (numeric ? ' class="n"' : '') + ' aria-sort="' + (active ? (scanSortDir > 0 ? 'ascending' : 'descending') : 'none') + '">' +
+      '<button type="button" onclick="scSort(\'' + key + '\')">' + label + '<i class="fas fa-sort' +
+      (active ? (scanSortDir > 0 ? '-up' : '-down') : '') + '"></i></button></th>';
+  }
+  function prospectPin(h) { return lastRun.d + '_' + String(h.b || '').trim() + '_' + String(h.l || '').trim(); }
+  function prospectUrl(h) {
+    return '/property/?address=' + encodeURIComponent(h.a + ', ' + lastRun.name + ', ' + COUNTIES[lastRun.d.slice(0, 2)] + ' County, NJ');
+  }
+  function reasonMarkup(h, index) {
+    var parts = h.opportunity.parts.map(function (p) {
+      return '<li><b>' + esc(p.label) + '</b><span>' + Math.round(p.value) + '/100 &middot; ' + p.weight + '% weight</span></li>';
+    }).join('');
+    return '<span class="sc-address-wrap"><a class="sc-address" href="' + prospectUrl(h) + '" aria-describedby="sc-reason-' + index + '">' + esc(h.a) + '</a>' +
+      '<span class="sc-reason" id="sc-reason-' + index + '" role="tooltip"><strong>Why this scored ' + h.opportunity.score + '</strong>' +
+      '<p>The current assessment is <b>' + money(h.over) + '</b> above the Chapter 123 screening limit derived from this parcel\'s own NJ-verified ' + h.y + ' sale.</p>' +
+      '<dl><div><dt>Verified sale</dt><dd>' + money(h.p) + '</dd></div><div><dt>Time-adjusted market</dt><dd>' + money(h.market) + '</dd></div>' +
+      '<div><dt>Supported assessment</dt><dd>' + money(h.fair) + '</dd></div><div><dt>Ch. 123 limit</dt><dd>' + money(h.limit) + '</dd></div></dl>' +
+      '<ul>' + parts + '</ul><p class="sc-caution"><b>Screening signal, not certainty.</b> Condition, renovations, record errors, exemptions and a later revaluation can change the result. Confirm the current record and comparable evidence before filing.</p>' +
+      '<p class="sc-sources">Sources: <a href="https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml" target="_blank" rel="noopener">NJ Division of Taxation equalization data</a> and <a href="https://www.nj.gov/treasury/taxation/pdf/lpt/chap123.pdf" target="_blank" rel="noopener">Chapter 123 guidance</a>.</p></span></span>' +
+      '<button class="sc-quick" type="button" onclick="scQuickAdd(' + index + ',event)" title="Add this parcel to your Watchlist"><i class="fas fa-plus"></i><span>Quick add</span></button>';
+  }
+  window.scQuickAdd = function (index, event) {
+    if (event) event.stopPropagation();
+    if (!plUser) { window.location.href = '/property/dashboard.html'; return; }
+    var h = sortedHits()[index]; if (!h) return;
+    sb.rpc('save_property', { p: {
+      kind: 'watch', pams_pin: prospectPin(h), address: h.a, town: lastRun.name,
+      county: COUNTIES[lastRun.d.slice(0, 2)], block: h.b, lot: h.l, assessed: h.av || null,
+      last_year_tax: h.av ? Math.round(h.av * lastRun.rate) : null,
+      effective_rate: +(lastRun.rate * 100).toFixed(3), watchdog_value: Math.round(h.market)
+    } }).then(function (res) {
+      if (res.error) { console.error('Scanner quick add failed', res.error); toast('Could not add this property'); return; }
+      toast('Added ' + h.a + ' to your Watchlist');
+    });
+  };
+
   window.scRun = function () {
     var d = el('sc-town').value;
     if (!d) { toast('Pick a municipality'); return; }
@@ -261,6 +319,7 @@
     var totalSaving = r.hits.reduce(function (x, h) { return x + h.saving; }, 0);
     var priority = r.hits.filter(function (h) { return h.opportunity && h.opportunity.score >= 75; }).length;
 
+    var displayHits = sortedHits();
     el('sc-out').innerHTML =
       '<div class="sc-res">' +
 
@@ -288,14 +347,13 @@
         '</div>' +
 
         '<div class="sc-tablewrap"><table class="sc-t"><thead><tr>' +
-          '<th>Opportunity</th><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Sale price</th>' +
-          '<th class="n">Assessed</th><th class="n">Ch123 limit</th><th class="n">Over by</th>' +
-          '<th class="n">Saving/yr</th><th>Evidence</th>' +
+          sortHead('opportunity','Opportunity') + sortHead('address','Address') + sortHead('block','Blk/Lot') + sortHead('year','Sold') + sortHead('sale','Sale price',true) +
+          sortHead('assessed','Assessed',true) + sortHead('limit','Ch123 limit',true) + sortHead('over','Over by',true) + sortHead('saving','Saving/yr',true) + sortHead('evidence','Evidence') +
         '</tr></thead><tbody>' +
-        r.hits.slice(0, 300).map(function (h) {
+        displayHits.slice(0, 300).map(function (h, index) {
           return '<tr>' +
             '<td><span class="sc-op op' + (h.opportunity.score >= 75 ? 'hi' : h.opportunity.score >= 55 ? 'md' : 'lo') + '"><b>' + h.opportunity.score + '</b><small>' + h.opportunity.band + '</small></span></td>' +
-            '<td class="a">' + esc(h.a) + '</td>' +
+            '<td class="a">' + reasonMarkup(h, index) + '</td>' +
             '<td class="q">' + esc(h.b) + '/' + esc(h.l) + '</td>' +
             '<td class="q">' + h.y + '</td>' +
             '<td class="n">' + money(h.p) + '</td>' +
@@ -335,7 +393,7 @@
 
   // ── exports ──
   function rowsOut() {
-    return lastRun.hits.map(function (h) {
+    return sortedHits().map(function (h) {
       return {
         Address: h.a, Block: h.b, Lot: h.l, Town: lastRun.name,
         Sale_Year: h.y, Sale_Price: h.p, Assessed: h.av,

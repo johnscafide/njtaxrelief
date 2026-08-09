@@ -533,6 +533,7 @@
   // SORTING
   // ══════════════════════════════════════════════
   var sortBy = 'added';
+  var commercialOnly = false;
   var pageSize = 4;
   var currentPage = 1;
   var mobileVisibleCount = 4;
@@ -564,6 +565,13 @@
     render();
   };
 
+  window.dbCommercialOnly = function (checked) {
+    commercialOnly = !!checked;
+    currentPage = 1;
+    mobileVisibleCount = 4;
+    render();
+  };
+
   window.dbPageSize = function (value) {
     var next = parseInt(value, 10);
     if ([4, 10, 25, 100].indexOf(next) === -1) next = 4;
@@ -589,16 +597,21 @@
     return !!(mobileCollectionQuery && mobileCollectionQuery.matches);
   }
 
-  function primaryHome() {
-    return rows.filter(function (r) { return r.kind === 'home'; })[0] || null;
+  function collectionRows() {
+    return commercialOnly ? rows.filter(isCommercialProperty) : rows.slice();
+  }
+
+  function primaryHome(source) {
+    return (source || rows).filter(function (r) { return r.kind === 'home'; })[0] || null;
   }
 
   function orderedCollectionRows(mobile) {
-    var home = primaryHome();
-    var rest = rows.filter(function (r) { return !home || r.id !== home.id; })
+    var source = collectionRows();
+    var home = primaryHome(source);
+    var rest = source.filter(function (r) { return !home || r.id !== home.id; })
       .slice().sort(SORTS[sortBy].fn);
     if (mobile && home) return [home].concat(rest);
-    return home ? rest : rows.slice().sort(SORTS[sortBy].fn);
+    return home ? rest : source.slice().sort(SORTS[sortBy].fn);
   }
 
   function mobileSponsorCard() {
@@ -649,6 +662,7 @@
             return '<option value="' + n + '"' + (n === pageSize ? ' selected' : '') + '>' + n + '</option>';
           }).join('') +
         '</select><span>per page</span></div>' +
+      '<label class="commercial-filter"><input type="checkbox" onchange="dbCommercialOnly(this.checked)"' + (commercialOnly ? ' checked' : '') + '><span><i class="fas fa-building"></i> Commercial only</span></label>' +
       '<span class="property-total">' + total + ' saved propert' + (total === 1 ? 'y' : 'ies') + '</span>' +
       (picked.length
         ? '<span class="cmp-count">' + picked.length + ' selected' +
@@ -944,7 +958,7 @@
   function locked(label, why, html) {
     if (isPro()) return html;
     return '<div class="lk">' +
-      '<div class="lk-in">' + html + '</div>' +
+      '<div class="lk-in" aria-hidden="true"><div class="locked-skeleton"><i></i><i></i><i></i></div></div>' +
       '<div class="lk-over">' +
         '<div class="lk-t"><i class="fas fa-lock"></i> ' + esc(label) + '</div>' +
         '<div class="lk-w">' + why + '</div>' +
@@ -1204,7 +1218,7 @@ function brief() {
   // ══════════════════════════════════════════════
   function isCommercialProperty(r) {
     var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
-    return /^4/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification) || /_c\d+$/i.test(String(r.pams_pin || ''));
+    return /^4(?:a|b|c)?(?:\b|\s|-)/.test(classification) || /commercial|retail|office|industrial|apartment/.test(classification);
   }
   window.dbToggleSignals = function (button) {
     var box = button && button.closest('.pr-card-context');
@@ -1247,7 +1261,7 @@ function brief() {
         '</div>' +
         '<div class="pr-card-body">' +
           '<div class="pr-card-status ' + tone + '"><i class="fas ' + statusIcon + '"></i>' +
-            '<span>' + statusLabel + '</span><em>' + esc(v.label) + '</em></div>' +
+            '<span>' + statusLabel + '</span>' + verificationBadge(v) + '</div>' +
           '<h3 title="' + esc(r.address) + '">' + esc(r.address) + '</h3>' +
           '<p>' + esc(r.town || '') + (r.county ? ', ' + esc(r.county) + ' County' : '') +
             (r.block ? ' &middot; Block ' + esc(r.block) + ' Lot ' + esc(r.lot || '') : '') + '</p>' +
@@ -1275,10 +1289,13 @@ function brief() {
   }
 
   var VERIFY = {
-    self: { label: 'unverified', cls: 'no' },
-    doc:  { label: 'document on file', cls: 'mid' },
-    mail: { label: 'verified owner', cls: 'yes' }
+    self: { label: 'unverified', cls: 'no', note: 'Ownership has not been confirmed. The public property and tax record can still be reviewed, but this account has not verified that it represents the current owner.' },
+    doc:  { label: 'document on file', cls: 'mid', note: 'A supporting ownership document is on file. Some ownership details may still be awaiting final review.' },
+    mail: { label: 'verified owner', cls: 'yes', note: 'Ownership was verified through Watchdog\'s verification process.' }
   };
+  function verificationBadge(v) {
+    return '<span class="verify-help ' + esc(v.cls) + '" tabindex="0"><em>' + esc(v.label) + '</em><span role="tooltip"><b>' + esc(v.label) + '</b>' + esc(v.note) + '</span></span>';
+  }
 
   // ══════════════════════════════════════════════
   // PRO VIEW  ·  one dense table, everything at once
@@ -1862,7 +1879,7 @@ function brief() {
         sortControl(ordered.length) +
         '<section class="property-collection" id="property-collection" aria-label="Saved properties">' +
           '<div class="property-card-grid">' +
-            renderPropertyBatch(visible, offset, mobileCollection) +
+            (visible.length ? renderPropertyBatch(visible, offset, mobileCollection) : '<div class="collection-empty"><i class="fas fa-building-circle-xmark"></i><b>No commercial properties saved</b><span>Turn off Commercial only to see your full collection.</span></div>') +
           '</div>' +
           (mobileCollection
             ? mobileScrollStatus(ordered.length, visible.length)
@@ -2341,7 +2358,7 @@ function brief() {
   };
 
   // Compatibility bridge for lazy modules. Read-only getters keep shared state private.
-  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, rateHistory, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, rnd, deadline, propertyBlock, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
+  Object.assign(window, { el, money, esc, toast, ready, settleAuth, showSignedOut, readSession, bootAuth, meta, name, paint, greentreeRailAd, dashboardWithAd, xfetch, median, loadRefData, ratioFor, rateHistory, streetImg, loadSR1A, sr1aFor, marketValue, chapter123, countySales, hydrateDetails, detailLine, addedOn, mv, isMobileCollection, collectionRows, primaryHome, orderedCollectionRows, mobileSponsorCard, renderPropertyBatch, resetCollectionForViewport, sortControl, pagination, mobileScrollStatus, setupMobilePropertyScroll, propMenu, byId, propUrl, isPro, locked, brief, rnd, deadline, isCommercialProperty, propertyBlock, verificationBadge, f, proTable, tip, metricStrip, cell, titleCase, reportLink, initTips, agentIntelMarkup, loadGeoCache, saveGeoCache, geocodeRow, locateRows, portfolioMap, mapFallback, drawPortfolioMap, paintSidebarToggle, initDashboardChrome, render, rl, toolsHTML, proLocked, ghostTable, ghostPanel, afterTools, pfCompletion, grp, txt, mny, pick, yn, multi, pro, profileForm, gv, gn, gf, gb, gs, gpro, gmulti, send });
   [
     ['plUser', function () { return plUser; }],
     ['rows', function () { return rows; }],

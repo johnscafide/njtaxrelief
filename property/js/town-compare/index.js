@@ -4,13 +4,29 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
 const all = townIntelAll();
 const selected = [];
 const select = document.getElementById('tc-town');
+const search = document.getElementById('tc-town-search');
+const list = document.getElementById('tc-town-list');
+const townByLabel = new Map();
 
 all.slice().sort((a,b) => a.county.localeCompare(b.county) || a.name.localeCompare(b.name)).forEach(row => {
+  const label = `${row.name} (${row.county} County)`;
   const option = document.createElement('option');
   option.value = row.district;
-  option.textContent = `${row.name} (${row.county} County)`;
+  option.textContent = label;
   select.appendChild(option);
+  const suggestion = document.createElement('option');
+  suggestion.value = label;
+  list.appendChild(suggestion);
+  townByLabel.set(label.toLowerCase(), row.district);
 });
+
+function searchedDistrict() {
+  const value = search.value.trim().toLowerCase();
+  if (!value) return '';
+  if (townByLabel.has(value)) return townByLabel.get(value);
+  const matches = all.filter(row => row.name.toLowerCase() === value || row.name.toLowerCase().startsWith(value));
+  return matches.length === 1 ? matches[0].district : '';
+}
 
 function esc(value) { return tiEsc(value); }
 function rate(row) { return row.trajectory ? `${row.trajectory.cagr >= 0 ? '+' : ''}${(row.trajectory.cagr * 100).toFixed(1)}%` : 'Not available'; }
@@ -58,11 +74,16 @@ function render() {
 }
 
 document.getElementById('tc-add').onclick = () => {
-  const value = select.value;
-  if (!value || selected.includes(value)) return;
+  const value = searchedDistrict() || select.value;
+  if (!value) { search.setCustomValidity('Choose a town from the suggestions or the full list.'); search.reportValidity(); return; }
+  search.setCustomValidity('');
+  if (selected.includes(value)) return;
   if (selected.length >= 4) { alert('Compare up to four towns at a time.'); return; }
-  selected.push(value); select.value=''; render();
+  selected.push(value); select.value=''; search.value=''; render();
 };
+search.addEventListener('input', () => search.setCustomValidity(''));
+search.addEventListener('keydown', event => { if (event.key === 'Enter') { event.preventDefault(); document.getElementById('tc-add').click(); } });
+select.addEventListener('change', () => { if (select.value) search.value = ''; });
 
 const initial = (new URLSearchParams(location.search).get('towns') || '').split(',').filter(d => townIntelFor(d)).slice(0,4);
 selected.push(...initial);

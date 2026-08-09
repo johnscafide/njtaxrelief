@@ -83,6 +83,8 @@
                 <th class="n" data-k="score">Fairness score <span class="car">&#8597;</span></th>
                 <th class="n" data-k="coefficient">Coeff. of deviation <span class="car">&#8597;</span></th>
                 <th class="n" data-k="drift">Assessment currency <span class="car">&#8597;</span></th>
+                <th class="n" data-k="residential">Residential parcels <span class="car">&#8597;</span></th>
+                <th class="n" data-k="commercial">Commercial parcels <span class="car">&#8597;</span></th>
                 <th data-k="band">Rating</th>
               </tr>
             </thead>
@@ -102,6 +104,9 @@
           current, not that its tax rate or total tax bill is low. It is not a ranking of towns to move to or
           avoid; a low score is a reason to check your own assessment against your neighbors', not a verdict
           on the town.</p>
+          <p class="tl-note"><b>Parcel mix is context, not a score input.</b> Residential and commercial counts
+          are shown because a municipality's property mix can help explain assessment workload and fiscal
+          structure. A correlation does not establish that either property type caused a town's fairness score.</p>
           <p class="tl-fine">Sources: NJ Division of Taxation Table of Equalized Valuations and Abstract of
           Ratables (Coefficient of Deviation), and the state's SR1A file of verified arm's-length sales,
           2024&ndash;2026. Both are republished annually by the state.</p>
@@ -113,7 +118,7 @@
   </div>
 </main>
 
-<script src="/property/js/sidemenu.js?v=20260805f"></script>
+<script src="/property/js/sidemenu.js?v=20260809c"></script>
 <script type="module">
 import '/property/js/dashboard/tools/town-intelligence.js?v=20260805a';
 import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
@@ -137,8 +142,15 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
     return String(s || '').charAt(0) + String(s || '').slice(1).toLowerCase();
   }
 
-  try {
-    rows = townIntelAll();
+  function start(modiv) {
+    try {
+    var municipality = modiv && modiv.municipalities || {};
+    rows = townIntelAll().map(function (row) {
+      var mix = municipality[row.district] && municipality[row.district].composition || {};
+      row.residential = Number.isFinite(+mix.residential) ? +mix.residential : null;
+      row.commercial = Number.isFinite(+mix.commercial) ? +mix.commercial : null;
+      return row;
+    });
 
     var counties = Array.from(new Set(rows.map(function (r) { return r.county; }))).sort();
     var sel = document.getElementById('fi-county');
@@ -158,6 +170,12 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
     document.getElementById('fi-error').style.display = 'flex';
     console.error(err);
   }
+  }
+
+  fetch('/property/data/statewide-intelligence.json')
+    .then(function (response) { if (!response.ok) throw new Error('MOD-IV context unavailable'); return response.json(); })
+    .then(start)
+    .catch(function (error) { console.warn(error); start({ municipalities: {} }); });
 
   function openTown(district, updateUrl) {
     var row = townIntelFor(district), host = document.getElementById('fi-detail');
@@ -197,6 +215,8 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
         '<td class="n fi-score">' + r.score + '</td>' +
         '<td class="n">' + (r.coefficient != null ? r.coefficient.toFixed(1) : 'Not available') + '</td>' +
         '<td class="n">' + (r.drift != null ? (r.drift > 0 ? '+' : '') + (r.drift * 100).toFixed(1) + '%' : 'Not available') + '</td>' +
+        '<td class="n">' + (r.residential != null ? r.residential.toLocaleString() : 'Not available') + '</td>' +
+        '<td class="n">' + (r.commercial != null ? r.commercial.toLocaleString() : 'Not available') + '</td>' +
         '<td><span class="fi-badge ' + r.band + '">' + bandLabel(r.band) + '</span></td>' +
       '</tr>';
     }).join('');

@@ -11,6 +11,20 @@
   }
   function plan(value) { return value === 'pro_plus' || value === 'Pro+' ? 'pro_plus' : value === 'pro' || value === 'Pro' ? 'pro' : null; }
   function session() { var c = sb(); return c ? c.auth.getSession().then(function (r) { return r.data && r.data.session; }) : Promise.resolve(null); }
+  function billingError(error, context) {
+    console.error('Billing ' + context + ' failed', error);
+    var message = error && error.message === 'SIGN_IN_REQUIRED' ? 'Please sign in before managing a plan.' :
+      context === 'portal' ? 'We could not open billing management. Please try again in a moment.' :
+      'We could not start checkout. Your account was not charged. Please try again.';
+    var toast = document.getElementById('wd-billing-toast');
+    if (!toast) {
+      toast = document.createElement('div'); toast.id = 'wd-billing-toast'; toast.setAttribute('role', 'alert');
+      Object.assign(toast.style, { position:'fixed', right:'18px', bottom:'18px', zIndex:'100000', maxWidth:'390px', padding:'14px 17px', borderRadius:'12px', background:'#10294b', color:'#fff', boxShadow:'0 16px 38px rgba(8,25,48,.28)', font:'700 14px/1.45 "Source Sans 3",sans-serif' });
+      document.body.appendChild(toast);
+    }
+    toast.textContent = message; toast.hidden = false;
+    clearTimeout(window.__wdBillingToast); window.__wdBillingToast = setTimeout(function () { toast.hidden = true; }, 5200);
+  }
   function invoke(name, body) {
     return session().then(function (s) {
       if (!s) throw new Error('SIGN_IN_REQUIRED');
@@ -95,11 +109,11 @@
         });
         });
       });
-    }).catch(function (e) { busy = false; alert(e.message === 'SIGN_IN_REQUIRED' ? 'Please sign in first.' : e.message); });
+    }).catch(function (e) { busy = false; billingError(e, 'checkout'); });
   }
   function portal() {
     if (busy) return Promise.resolve(); busy = true;
-    return invoke('create-portal-session').then(function (j) { if (j.url) location.href = j.url; }).catch(function (e) { busy = false; alert(e.message); });
+    return invoke('create-portal-session').then(function (j) { if (j.url) location.href = j.url; }).catch(function (e) { busy = false; billingError(e, 'portal'); });
   }
   function resume() {
     var wanted = null; try { wanted = sessionStorage.getItem('watchdog:billing:pending-plan'); } catch (_) {}

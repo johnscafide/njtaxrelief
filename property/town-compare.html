@@ -28,8 +28,8 @@
         <div class="db-page-head"><div><span>Town Intelligence</span><h2>Put up to four New Jersey towns side by side</h2>
           <p>Compare how evenly each town assesses, where its tax rate has been moving, and whether levy, ratable and municipal-budget trends are creating fiscal pressure.</p></div></div>
         <section class="tc-picker">
-          <label for="tc-town">Add a municipality</label>
-          <div><select id="tc-town"><option value="">Choose a town</option></select><button id="tc-add" type="button"><i class="fas fa-plus"></i> Add</button></div>
+          <label for="tc-town-search">Add a municipality</label>
+          <div class="tc-picker-row"><input id="tc-town-search" type="search" list="tc-town-list" autocomplete="off" placeholder="Type a town name"><datalist id="tc-town-list"></datalist><span class="tc-or">or</span><select id="tc-town" aria-label="Choose a municipality from the full list"><option value="">Choose from all towns</option></select><button id="tc-add" type="button"><i class="fas fa-plus"></i> Add</button></div>
           <div class="tc-selected" id="tc-selected"></div>
         </section>
         <div class="db-loading-panel" id="tc-loading"><div class="pl-spin"></div><div><b>Loading town intelligence</b><span>Preparing statewide rankings and tax-rate histories.</span></div></div>
@@ -39,7 +39,7 @@
     </div>
   </div>
 </main>
-<script src="/property/js/sidemenu.js?v=20260805f"></script>
+<script src="/property/js/sidemenu.js?v=20260809c"></script>
 <script type="module" src="/property/js/town-compare/index.js?v=20260805b"></script>
 </body>
 </html>

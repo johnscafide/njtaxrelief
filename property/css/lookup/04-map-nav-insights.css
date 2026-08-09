@@ -138,9 +138,9 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
 .ins-lead:hover h3 { color: var(--navy); }
 
 .ins-list { display: flex; flex-direction: column; }
-.ins-list a { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border);
+.ins-list > a, .ins-list > article { display: flex; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border);
   text-decoration: none; }
-.ins-list a:first-child { padding-top: 0; }
+.ins-list > a:first-child, .ins-list > article:first-child { padding-top: 0; }
 .ins-thumb { width: 128px; height: 86px; flex-shrink: 0; border-radius: 8px;
   background-size: cover; background-position: center; }
 .ins-list h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
