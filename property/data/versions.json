@@ -1,19 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-08T21:04:37-04:00",
+  "updated_at": "2026-08-09T06:50:46-04:00",
   "releases": [
+    {"version":"0.41.0","date":"2026-08-09","timestamp":"2026-08-09T16:30:00-04:00","title":"Launch hardening and reliability control center","category":"SaaS operations / billing / roadmap","status":"Reliability Edge Functions active; site upload pending","summary":"Retired completed projects from the active roadmap, added an explicit Pro+ downgrade confirmation with feature-loss and proration disclosure, and built authenticated privacy-minimized client telemetry plus a developer-only reliability center for errors and slow pages.","links":["/property/account.html","/property/verification-diagnostics.html","/property/updates.html"],"files":["property/js/billing-client.js","property/css/billing-lifecycle.css","property/js/platform-observability.js","property/verification-diagnostics.html","property/js/verification-diagnostics.js","supabase/functions/report-platform-event/index.ts","supabase/functions/get-platform-health/index.ts","property/data/versions.json"],"impact":{"roadmap_items_retired":9,"billing_safety_flows":1,"authenticated_telemetry_endpoints":2,"developer_operations_views":1}},
     {
       "version": "0.40.1",
       "date": "2026-08-08",
       "timestamp": "2026-08-08T21:04:37-04:00",
       "title": "Paddle Sandbox lifecycle and paid-plan switching",
       "category": "Billing / security / launch QA",
-      "status": "Sandbox Pro lifecycle passed; Pro to Pro+ plan-change acceptance pending",
-      "summary": "Reconciled Paddle's server-created transaction flow with Paddle.js Overlay Checkout, fixed the initial-subscription identity contract, and validated a real Sandbox Pro purchase end to end. The signed webhook now maps the Paddle subscription to the authenticated Watchdog account, Pro access survives a scheduled end-of-period cancellation, reversing that cancellation restores renewal state, and the Customer Portal uses a newly generated server URL. Added the paid-plan change path so an active subscriber choosing a different tier changes the Paddle subscription price with proration; Watchdog still waits for the verified Paddle subscription.updated event before changing entitlement.",
+      "status": "Sandbox Pro lifecycle and bidirectional Pro/Pro+ plan switching passed",
+      "summary": "Reconciled Paddle's server-created transaction flow with Paddle.js Overlay Checkout, fixed the initial-subscription identity contract, and validated a real Sandbox Pro purchase end to end. The signed webhook maps the Paddle subscription to the authenticated Watchdog account, Pro access survives a scheduled end-of-period cancellation, reversing that cancellation restores renewal state, and the Customer Portal uses a newly generated server URL. Bidirectional plan switching also passed: Paddle retained the original subscription through Pro to Pro+ and Pro+ to Pro changes, processed each prorated adjustment, and Watchdog changed access only after the matching signed subscription.updated event. A customer-facing downgrade confirmation and retention experience remains required before public launch.",
       "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
       "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/js/billing-client.js", "property/js/account.js", "property/pro.html", "property/account.html", "property/dashboard.html", "property/docs/paddle-billing-launch.md", "property/data/versions.json"],
-      "impact": {"billing_identity_mapping_fixes": 1, "overlay_checkout_paths": 1, "orphaned_subscription_risk_paths": 0, "validated_pro_lifecycles": 1, "validated_cancel_resume_cycles": 1, "paid_plan_switch_paths": 1}
+      "impact": {"billing_identity_mapping_fixes": 1, "overlay_checkout_paths": 1, "orphaned_subscription_risk_paths": 0, "validated_pro_lifecycles": 1, "validated_cancel_resume_cycles": 1, "paid_plan_switch_paths": 1, "validated_pro_plus_upgrades": 1, "validated_pro_downgrades": 1, "duplicate_subscriptions_created": 0}
     },
     {
       "version": "0.40.0",
@@ -1204,6 +1205,16 @@
         "navigation": 0
       }
     }
+  ],
+  "active_roadmap": [
+    {"priority":0,"title":"Finish the paid-launch lifecycle","readiness":"Sandbox purchase, Portal, cancellation/resume and bidirectional Pro/Pro+ switching passed","effort":"Medium","category":"Revenue / backend","why":"Revenue is not production-ready until failure states and one controlled Live-mode cycle have evidence.","deliverables":["past-due and paused acceptance tests","customer-safe downgrade timing","one Live purchase/refund/cancel cycle","intentional public enrollment switch","billing support runbook"]},
+    {"priority":1,"title":"Production reliability and incident response","readiness":"Authenticated telemetry and developer Reliability Center shipped in v0.41.0","effort":"Medium","category":"Operations","why":"A paid platform must detect customer-facing failures before support emails arrive.","deliverables":["Edge Function failure ingestion","alert thresholds and delivery","release correlation","incident ownership and runbooks","30-day reliability trend"]},
+    {"priority":2,"title":"RLS and authenticated release gate","readiness":"Static access contract and anonymous staging smoke test shipped","effort":"Large","category":"Security / quality","why":"Every release needs repeatable proof that Standard, Pro, Pro+ and Developer accounts see only what they should.","deliverables":["complete customer-table RLS audit","disposable staged accounts","authenticated browser smoke suite","checkout entitlement regression","security advisor clean-up"]},
+    {"priority":3,"title":"Property Change Engine and durable history","readiness":"Change Intelligence UI and trusted history contract shipped","effort":"Large","category":"Data platform / retention","why":"Professionals return when Watchdog proves what changed and ties it to an authoritative source.","deliverables":["field-level snapshots and diffs","assessment/tax/permit/deed jobs","historical backfill","material-change thresholds","email and in-app delivery"]},
+    {"priority":4,"title":"Professional report builder","readiness":"Private case Workbench and evidence snapshots shipped","effort":"Large","category":"Professional workflow","why":"Saved evidence becomes billable when it turns into a consistent client-safe deliverable.","deliverables":["profession presets","branded PDF","read-only share links","source manifest","report version history"]},
+    {"priority":5,"title":"Usage metering and plan quotas","readiness":"Entitlement enforcement shipped; consumption accounting not started","effort":"Large","category":"Revenue / backend","why":"Paid tiers need measurable limits, defensible upgrades and protection from bulk abuse.","deliverables":["lookup/export/API counters","server-side quota enforcement","usage page","limit warnings","admin adjustments and audit trail"]},
+    {"priority":6,"title":"Data Center value-provider completion","readiness":"721 governed markers and municipal provider foundation live","effort":"Multi-phase","category":"Pro+","why":"The catalog becomes a durable Pro+ product when every selectable marker resolves to a real scoped value.","deliverables":["property/town/county providers","virtualized result sheet","saved column sets","bulk export","scheduled delivery"]},
+    {"priority":7,"title":"Backup, restore and continuity drills","readiness":"Provider backups exist; Watchdog restore evidence and recovery objectives are not documented","effort":"Medium","category":"Operations / risk","why":"A supportable SaaS needs a tested path back from bad releases, deleted records and provider incidents.","deliverables":["RPO and RTO targets","restore runbook","quarterly drill","billing reconciliation recovery","customer communication template"]}
   ],
   "roadmap": [
     {
