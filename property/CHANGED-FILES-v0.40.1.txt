@@ -1,0 +1,25 @@
+Watchdog v0.40.1 — Paddle Sandbox checkout hardening
+
+Upload these repository files preserving paths:
+
+property/account.html
+property/dashboard.html
+property/pro.html
+property/js/billing-client.js
+property/docs/paddle-billing-launch.md
+property/data/versions.json
+supabase/functions/BILLING-SETUP.md
+supabase/functions/create-checkout-session/index.ts
+supabase/functions/create-checkout-session/deno.json
+
+Server status:
+- create-checkout-session v12 was deployed to Supabase on 2026-08-08 with JWT verification enabled.
+- The server now writes custom_data.watchdog_user_id, matching paddle-webhook's initial-subscription lookup.
+- Public paid enrollment should remain early-access while Sandbox acceptance testing is underway.
+
+Required Paddle/Supabase configuration before retrying:
+- PADDLE_CLIENT_TOKEN = the Paddle Sandbox client-side token for Paddle.js
+- PADDLE_ENVIRONMENT = sandbox
+- BILLING_CHECKOUT_ENABLED = true only during controlled Sandbox testing
+
+Never add PADDLE_API_KEY or PADDLE_WEBHOOK_SECRET to repository files or browser JavaScript.

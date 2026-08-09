@@ -1,8 +1,20 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-08T14:20:00-04:00",
+  "updated_at": "2026-08-08T20:33:08-04:00",
   "releases": [
+    {
+      "version": "0.40.1",
+      "date": "2026-08-08",
+      "timestamp": "2026-08-08T20:33:08-04:00",
+      "title": "Paddle Sandbox checkout hardening",
+      "category": "Billing / security / launch QA",
+      "status": "Server hotfix deployed; Sandbox client token and frontend hotfix required for checkout test",
+      "summary": "Reconciled Paddle's server-created transaction flow with Paddle.js Overlay Checkout after the first controlled Sandbox request exposed a missing client-side token. Fixed the initial-subscription identity contract so Checkout and the signed webhook use the same server-authenticated watchdog_user_id, preventing a successful Paddle purchase from becoming orphaned from its Watchdog account. Added browser support for transaction-ID Overlay Checkout with Sandbox environment isolation and a completed-checkout return to Account & Billing.",
+      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
+      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/BILLING-SETUP.md", "property/js/billing-client.js", "property/pro.html", "property/account.html", "property/dashboard.html", "property/docs/paddle-billing-launch.md", "property/data/versions.json"],
+      "impact": {"billing_identity_mapping_fixes": 1, "overlay_checkout_paths": 1, "orphaned_subscription_risk_paths": 0}
+    },
     {
       "version": "0.40.0",
       "date": "2026-08-08",

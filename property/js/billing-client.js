@@ -18,33 +18,31 @@
     }).then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Billing request failed'); return j; }); });
   }
   function loadPaddle(token, environment) {
+    if (!token) return Promise.reject(new Error('Paddle Checkout is not configured yet'));
     if (paddleReady) return paddleReady;
     paddleReady = new Promise(function (resolve, reject) {
-      function start() {
+      function init() {
         try {
-          if (!window.Paddle) throw new Error('Paddle Checkout did not load');
           if (environment === 'sandbox') window.Paddle.Environment.set('sandbox');
-          window.Paddle.Initialize({ token: token });
+          window.Paddle.Initialize({
+            token: token,
+            eventCallback: function (event) {
+              if (event && event.name === 'checkout.completed') location.href = '/property/account.html?checkout=success';
+              if (event && event.name === 'checkout.closed') busy = false;
+            }
+          });
           resolve(window.Paddle);
-        } catch (e) { reject(e); }
+        } catch (e) { paddleReady = null; reject(e); }
       }
-      if (window.Paddle) { start(); return; }
+      if (window.Paddle) { init(); return; }
       var script = document.createElement('script');
       script.src = 'https://cdn.paddle.com/paddle/v2/paddle.js';
       script.async = true;
-      script.onload = start;
-      script.onerror = function () { reject(new Error('Could not load secure checkout')); };
+      script.onload = init;
+      script.onerror = function () { paddleReady = null; reject(new Error('Paddle Checkout could not load')); };
       document.head.appendChild(script);
     });
     return paddleReady;
-  }
-  function openCheckout(j) {
-    if (j.url) { location.href = j.url; return Promise.resolve(); }
-    if (j.provider !== 'paddle' || !j.transaction_id || !j.client_token) throw new Error('Checkout response is incomplete');
-    return loadPaddle(j.client_token, j.environment).then(function (paddle) {
-      paddle.Checkout.open({ transactionId: j.transaction_id, settings: { displayMode: 'overlay', variant: 'one-page', theme: 'light', locale: 'en', successUrl: 'https://njpropertytaxrelief.com/property/account.html?checkout=success' } });
-      busy = false;
-    });
   }
   function checkout(value) {
     var wanted = plan(value); if (!wanted || busy) return Promise.resolve(); busy = true;
@@ -54,7 +52,13 @@
         location.href = '/property/dashboard.html?billing=signin';
         return null;
       }
-      return invoke('create-checkout-session', { plan: wanted }).then(openCheckout);
+      return invoke('create-checkout-session', { plan: wanted }).then(function (j) {
+        if (j.url) { location.href = j.url; return null; }
+        if (!j.transaction_id) throw new Error('Paddle transaction was not created');
+        return loadPaddle(j.client_token, j.environment).then(function (paddle) {
+          paddle.Checkout.open({ transactionId: j.transaction_id });
+        });
+      });
     }).catch(function (e) { busy = false; alert(e.message === 'SIGN_IN_REQUIRED' ? 'Please sign in first.' : e.message); });
   }
   function portal() {

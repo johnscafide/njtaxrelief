@@ -7,11 +7,21 @@ Watchdog v0.40 uses Paddle as the planned customer billing provider. The custome
 Set these only in Supabase Edge Function secrets:
 
 - `PADDLE_API_KEY`
+- `PADDLE_CLIENT_TOKEN` — Paddle.js client-side token for the matching Sandbox/Live environment; intentionally safe for client use but stored here to keep environment selection server-owned
 - `PADDLE_WEBHOOK_SECRET`
 - `PADDLE_PRICE_PRO`
 - `PADDLE_PRICE_PRO_PLUS`
 - `PADDLE_ENVIRONMENT` — `sandbox` while testing, then `live`
 - `BILLING_CHECKOUT_ENABLED` — keep `false` until the full sandbox lifecycle passes
+
+### Current Sandbox Price mapping
+
+These IDs are environment-specific identifiers, not credentials. The Edge Functions still read them from server environment variables so Sandbox and Live can never be mixed accidentally.
+
+- `PADDLE_PRICE_PRO=pri_01kzhtgke8bync5tjrgxged792`
+- `PADDLE_PRICE_PRO_PLUS=pri_01kzhtev36x06eaadc3t9qa1am`
+- `PADDLE_ENVIRONMENT=sandbox`
+- `BILLING_CHECKOUT_ENABLED=false` until the acceptance gate passes
 
 Optional: `PADDLE_WEBHOOK_TOLERANCE_SECONDS` (defaults to Paddle SDK-compatible 5 seconds) and `PADDLE_API_BASE` for controlled testing.
 

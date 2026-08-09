@@ -6,12 +6,14 @@ The application is now wired for server-created Paddle transactions, temporary C
 
 ## Acceptance gate
 
-- [ ] Pro and Pro+ recurring Prices created in Paddle Sandbox
+- [x] Pro and Pro+ recurring Prices created in Paddle Sandbox
+- [x] Sandbox Price mapping recorded: Pro `pri_01kzhtgke8bync5tjrgxged792`; Pro+ `pri_01kzhtev36x06eaadc3t9qa1am`
 - [ ] Default payment link configured in Paddle
-- [ ] Supabase Edge Function secrets installed
-- [ ] v0.40 migration applied
-- [ ] `paddle-webhook` deployed without Supabase JWT verification
-- [ ] Checkout/Portal functions deployed with JWT verification
+- [x] Supabase Edge Function secrets installed (Sandbox configuration, confirmed 2026-08-08)
+- [ ] Matching Sandbox `PADDLE_CLIENT_TOKEN` installed for Paddle.js checkout
+- [x] v0.40 billing/workbench schema capabilities verified in the connected Supabase project
+- [x] `paddle-webhook` deployed without Supabase JWT verification
+- [x] Checkout/Portal functions deployed with JWT verification
 - [ ] Paddle notification destination created
 - [ ] Pro purchase grants only Pro
 - [ ] Pro+ purchase grants Pro+
