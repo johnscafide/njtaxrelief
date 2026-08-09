@@ -22,6 +22,15 @@ This is property-triggered relationship intelligence. It is not a list of people
 6. The agent can open the property, add it to a watchlist/case, copy a conversation starter, snooze it, or record an outcome.
 7. The performance panel reports touches, replies, valuation requests, appointments, and listings—not vanity “lead” counts.
 
+## Focus rules
+
+- The opening view contains at most ten properties and only the highest-value reason for each one.
+- Routine source-monitor refreshes are operations data, not agent opportunities, and never enter the desk or weekly digest.
+- Repeated events are combined into the latest or highest-scoring reason for the same property and reason type.
+- Longer queues render twelve records at a time.
+- A parcel-matched card deep-links to the saved property workspace. Address lookup is only a fallback for an unmatched imported address.
+- When a sphere property has no material event, Watchdog may offer a clearly labeled current-record review. It must never describe that fallback as a change or a seller signal.
+
 ## Initial touch reasons
 
 | Signal | Useful conversation | Required source |
@@ -80,4 +89,3 @@ Validate Agent at $49 and $99 with 10 working agents before changing Paddle prod
 - No anonymous owner name/contact enrichment is required.
 - Dashboard measures opportunities reviewed, touches recorded, replies, valuation requests, appointments, and listings.
 - A weekly email contains the ten highest-value new or materially changed opportunities.
-

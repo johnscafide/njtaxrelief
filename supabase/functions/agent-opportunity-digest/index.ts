@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
-const eventWeights: Record<string, number> = { appeal_deadline: 30, assessment_change: 27, tax_change: 25, permit_change: 23, deed_change: 22, evidence_change: 22, market_change: 20, municipal_change: 18, source_refresh: 10 };
+const eventWeights: Record<string, number> = { appeal_deadline: 30, assessment_change: 27, tax_change: 25, permit_change: 23, deed_change: 22, evidence_change: 22, market_change: 20, municipal_change: 18 };
 const clean = (v: unknown, n = 240) => String(v || "").replace(/[<>]/g, "").trim().slice(0, n);
 
 function due(pref: any, now: Date) {
@@ -33,11 +33,36 @@ Deno.serve(async request => {
   for (const pref of prefs || []) {
     if (!due(pref, now)) { result.skipped++; continue; }
     const since = pref.last_sent_at || new Date(now.getTime() - 8 * 86400000).toISOString();
-    const [{ data: items }, authResult] = await Promise.all([
+    const [{ data: items }, authResult, { data: farm }, { data: saved }] = await Promise.all([
       admin.from("property_update_events").select("id,pams_pin,event_type,severity,title,summary,source_url,occurred_at,payload").eq("user_id", pref.user_id).gte("occurred_at", since).order("occurred_at", { ascending: false }).limit(100),
-      admin.auth.admin.getUserById(pref.user_id)
+      admin.auth.admin.getUserById(pref.user_id),
+      admin.from("agent_farm_properties").select("pams_pin,address").eq("user_id", pref.user_id).limit(1000),
+      admin.from("saved_properties").select("pams_pin,address").eq("user_id", pref.user_id).limit(1000)
     ]);
-    const top = (items || []).filter((x: any) => eventWeights[x.event_type]).map((x: any) => ({ ...x, property_address: x.payload?.property_address || x.payload?.address || x.pams_pin })).sort((a: any, b: any) => score(b) - score(a)).slice(0, 10);
+    const sphere = [...(farm || []), ...(saved || [])];
+    const pins = new Set(sphere.map((x: any) => clean(x.pams_pin).toLowerCase()).filter(Boolean));
+    const addresses = new Set(sphere.map((x: any) => clean(x.address).toLowerCase()).filter(Boolean));
+    const grouped = new Map<string, any>();
+    (items || []).filter((x: any) => {
+      if (!eventWeights[x.event_type]) return false;
+      const pin = clean(x.pams_pin || x.payload?.pams_pin).toLowerCase();
+      const address = clean(x.payload?.property_address || x.payload?.address).toLowerCase();
+      return (pin && pins.has(pin)) || (address && addresses.has(address));
+    }).forEach((x: any) => {
+      const address = x.payload?.property_address || x.payload?.address || x.pams_pin;
+      const propertyKey = clean(x.pams_pin || address).toLowerCase();
+      const key = `${propertyKey}:${x.event_type}`;
+      const candidate = { ...x, property_address: address };
+      const prior = grouped.get(key);
+      if (!prior || score(candidate) > score(prior) || new Date(candidate.occurred_at) > new Date(prior.occurred_at)) grouped.set(key, candidate);
+    });
+    const uniqueProperties = new Set<string>();
+    const top = [...grouped.values()].sort((a: any, b: any) => score(b) - score(a)).filter((x: any) => {
+      const key = clean(x.pams_pin || x.property_address).toLowerCase();
+      if (uniqueProperties.has(key)) return false;
+      uniqueProperties.add(key);
+      return true;
+    }).slice(0, 10);
     const email = authResult.data.user?.email;
     if (!email || !top.length) { result.skipped++; continue; }
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({

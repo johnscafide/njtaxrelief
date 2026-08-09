@@ -6,10 +6,18 @@ const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const html = read('property/agent-desk.html');
 const js = read('property/js/agent-desk.js');
 const sql = read('supabase/migrations/20260809213000_agent_opportunity_desk.sql');
+const digest = read('supabase/functions/agent-opportunity-digest/index.ts');
 
-for (const id of ['ad-list','ad-stats','ad-import-modal','ad-drawer','ad-digest']) {
+for (const id of ['ad-list','ad-stats','ad-import-modal','ad-drawer','ad-digest','ad-load-more']) {
   if (!html.includes(`id="${id}"`)) throw new Error(`Missing Agent Desk UI contract: ${id}`);
 }
+if (!html.includes('data-queue="top"')) throw new Error('Top 10 focused worklist is missing');
+if (!js.includes("'/property/home.html?pin='")) throw new Error('Matched properties do not deep-link to the property workspace');
+if (!js.includes("ACTIONABLE_TYPES=['assessment_change'")) throw new Error('Actionable event allowlist is missing');
+if (!js.includes("propertyKey(property),e.event_type")) throw new Error('Property/reason deduplication key is missing');
+if (!js.includes("type:'record_review'")) throw new Error('Property-specific baseline review fallback is missing');
+if (/eventWeights[^\n]*source_refresh/.test(digest)) throw new Error('Digest still treats routine source refreshes as agent opportunities');
+if (!digest.includes('agent_farm_properties') || !digest.includes('saved_properties')) throw new Error('Digest is not constrained to the agent sphere');
 for (const reason of ['assessment_change','tax_change','appeal_deadline','permit_change','deed_change']) {
   if (!js.includes(`${reason}:`)) throw new Error(`Missing authoritative reason: ${reason}`);
 }
