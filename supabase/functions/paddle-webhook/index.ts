@@ -56,7 +56,14 @@ Deno.serve(async (req) => {
     const sub = event.data || {};
     const subscriptionId = String(sub.id || '');
     const customerId = String(sub.customer_id || '');
-    const customUserId = sub?.custom_data?.watchdog_user_id ? String(sub.custom_data.watchdog_user_id) : null;
+    // Current Checkout uses watchdog_user_id. Accept the earlier Sandbox field
+    // as a migration fallback so an in-flight test subscription cannot become
+    // orphaned while the billing contract is being cut over.
+    const customUserId = sub?.custom_data?.watchdog_user_id
+      ? String(sub.custom_data.watchdog_user_id)
+      : sub?.custom_data?.supabase_user_id
+        ? String(sub.custom_data.supabase_user_id)
+        : null;
     const priceId = sub?.items?.[0]?.price?.id ? String(sub.items[0].price.id) : undefined;
     const plan = planForPrice(priceId);
     let userId = customUserId;

@@ -54,6 +54,10 @@
       }
       return invoke('create-checkout-session', { plan: wanted }).then(function (j) {
         if (j.url) { location.href = j.url; return null; }
+        if (j.plan_change_requested) {
+          location.href = '/property/account.html?plan_change=pending&plan=' + encodeURIComponent(j.requested_plan || wanted);
+          return null;
+        }
         if (!j.transaction_id) throw new Error('Paddle transaction was not created');
         return loadPaddle(j.client_token, j.environment).then(function (paddle) {
           paddle.Checkout.open({ transactionId: j.transaction_id });

@@ -6,18 +6,23 @@ property/account.html
 property/dashboard.html
 property/pro.html
 property/js/billing-client.js
+property/js/account.js
 property/docs/paddle-billing-launch.md
 property/data/versions.json
 supabase/functions/BILLING-SETUP.md
 supabase/functions/create-checkout-session/index.ts
 supabase/functions/create-checkout-session/deno.json
+supabase/functions/paddle-webhook/index.ts
+supabase/functions/paddle-webhook/deno.json
 
 Server status:
-- create-checkout-session v12 was deployed to Supabase on 2026-08-08 with JWT verification enabled.
-- The server now writes custom_data.watchdog_user_id, matching paddle-webhook's initial-subscription lookup.
-- Public paid enrollment should remain early-access while Sandbox acceptance testing is underway.
+- create-checkout-session v14 is deployed to Supabase with JWT verification enabled.
+- paddle-webhook v7 is deployed with Paddle signature verification and the corrected watchdog_user_id mapping.
+- Pro purchase, portal, scheduled cancellation and resume lifecycle tests passed in Paddle Sandbox.
+- Active Pro → Pro+ requests now change the Paddle subscription price server-side using immediate proration; entitlement still changes only from the verified Paddle webhook.
+- Public paid enrollment should remain early-access until Pro+ and remaining failure-state acceptance tests pass.
 
-Required Paddle/Supabase configuration before retrying:
+Required Paddle/Supabase configuration (installed for Sandbox):
 - PADDLE_CLIENT_TOKEN = the Paddle Sandbox client-side token for Paddle.js
 - PADDLE_ENVIRONMENT = sandbox
 - BILLING_CHECKOUT_ENABLED = true only during controlled Sandbox testing

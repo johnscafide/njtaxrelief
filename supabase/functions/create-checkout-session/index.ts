@@ -42,11 +42,44 @@ Deno.serve(async (req) => {
   if (!clientToken) return json({ error: 'Paddle Checkout is not configured yet' }, 503);
 
   const { data: entitlement } = await admin.from('account_entitlements')
-    .select('provider,provider_customer_id,provider_subscription_id,subscription_status')
+    .select('plan_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
     .eq('user_id', user.id).maybeSingle();
   const customerId = entitlement?.provider === 'paddle' ? entitlement.provider_customer_id : null;
 
   if (customerId && entitlement?.provider_subscription_id && ['active','trialing','past_due','paused'].includes(entitlement.subscription_status || '')) {
+    const samePlan = entitlement?.plan_tier === plan || entitlement?.provider_price_id === price;
+    if (!samePlan && ['active','trialing'].includes(entitlement.subscription_status || '')) {
+      try {
+        // Paddle remains the billing authority. This endpoint only requests the
+        // price change; access changes after paddle-webhook receives the signed
+        // subscription.updated event and resolves the new Price ID server-side.
+        const subscription = await paddle(`/subscriptions/${encodeURIComponent(entitlement.provider_subscription_id)}`, {
+          method: 'PATCH',
+          body: JSON.stringify({
+            items: [{ price_id: price, quantity: 1 }],
+            proration_billing_mode: 'prorated_immediately'
+          })
+        });
+        await admin.from('access_audit_log').insert({
+          user_id: user.id,
+          event_type: 'billing.subscription_plan_change_requested',
+          resource_type: 'subscription',
+          resource_id: entitlement.provider_subscription_id,
+          required_plan: plan,
+          allowed: true,
+          metadata: { provider: 'paddle', from_plan: entitlement.plan_tier, to_plan: plan, proration: 'prorated_immediately' }
+        });
+        return json({
+          provider: 'paddle',
+          destination: 'plan_change',
+          plan_change_requested: true,
+          subscription_id: subscription?.id || entitlement.provider_subscription_id,
+          requested_plan: plan
+        });
+      } catch (error) {
+        return json({ error: error instanceof Error ? error.message : 'Could not change subscription plan' }, 502);
+      }
+    }
     try {
       const portal = await paddle(`/customers/${encodeURIComponent(customerId)}/portal-sessions`, { method: 'POST', body: JSON.stringify({ subscription_ids: [entitlement.provider_subscription_id] }) });
       await admin.from('access_audit_log').insert({ user_id: user.id, event_type: 'billing.existing_subscription_redirected_to_portal', resource_type: 'subscription', resource_id: entitlement.provider_subscription_id, allowed: true });
