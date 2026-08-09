@@ -45,6 +45,7 @@
   var sb = null, plUser = null, profile = {}, refPromise = null;
   var sr1a = null, uni = null, appeals = null, taxRates = {}, taxRateIndex = {}, salesCache = {}, lastRun = null;
   var scanSortKey = 'opportunity', scanSortDir = -1;
+  var savedPins = Object.create(null), savingPins = Object.create(null), reasonHideTimer = null;
 
   function el(id) { return document.getElementById(id); }
   function esc(s) {
@@ -200,31 +201,83 @@
   function prospectUrl(h) {
     return '/property/?address=' + encodeURIComponent(h.a + ', ' + lastRun.name + ', ' + COUNTIES[lastRun.d.slice(0, 2)] + ' County, NJ');
   }
-  function reasonMarkup(h, index) {
+  function reasonContent(h) {
     var parts = h.opportunity.parts.map(function (p) {
       return '<li><b>' + esc(p.label) + '</b><span>' + Math.round(p.value) + '/100 &middot; ' + p.weight + '% weight</span></li>';
     }).join('');
-    return '<span class="sc-address-wrap"><a class="sc-address" href="' + prospectUrl(h) + '" aria-describedby="sc-reason-' + index + '">' + esc(h.a) + '</a>' +
-      '<span class="sc-reason" id="sc-reason-' + index + '" role="tooltip"><strong>Why this scored ' + h.opportunity.score + '</strong>' +
+    return '<strong>Why this scored ' + h.opportunity.score + '</strong>' +
       '<p>The current assessment is <b>' + money(h.over) + '</b> above the Chapter 123 screening limit derived from this parcel\'s own NJ-verified ' + h.y + ' sale.</p>' +
       '<dl><div><dt>Verified sale</dt><dd>' + money(h.p) + '</dd></div><div><dt>Time-adjusted market</dt><dd>' + money(h.market) + '</dd></div>' +
       '<div><dt>Supported assessment</dt><dd>' + money(h.fair) + '</dd></div><div><dt>Ch. 123 limit</dt><dd>' + money(h.limit) + '</dd></div></dl>' +
       '<ul>' + parts + '</ul><p class="sc-caution"><b>Screening signal, not certainty.</b> Condition, renovations, record errors, exemptions and a later revaluation can change the result. Confirm the current record and comparable evidence before filing.</p>' +
-      '<p class="sc-sources">Sources: <a href="https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml" target="_blank" rel="noopener">NJ Division of Taxation equalization data</a> and <a href="https://www.nj.gov/treasury/taxation/pdf/lpt/chap123.pdf" target="_blank" rel="noopener">Chapter 123 guidance</a>.</p></span></span>' +
-      '<button class="sc-quick" type="button" onclick="scQuickAdd(' + index + ',event)" title="Add this parcel to your Watchlist"><i class="fas fa-plus"></i><span>Quick add</span></button>';
+      '<p class="sc-sources">Sources: <a href="https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml" target="_blank" rel="noopener">NJ Division of Taxation equalization data</a> and <a href="https://www.nj.gov/treasury/taxation/pdf/lpt/chap123.pdf" target="_blank" rel="noopener">Chapter 123 guidance</a>.</p>';
+  }
+  function reasonTip() {
+    var tip = el('sc-reason-float');
+    if (tip) return tip;
+    tip = document.createElement('div');
+    tip.id = 'sc-reason-float'; tip.className = 'sc-reason'; tip.setAttribute('role', 'tooltip');
+    tip.addEventListener('mouseenter', function () { clearTimeout(reasonHideTimer); });
+    tip.addEventListener('mouseleave', function () { window.scHideReason(); });
+    document.body.appendChild(tip);
+    return tip;
+  }
+  window.scShowReason = function (index, anchor) {
+    clearTimeout(reasonHideTimer);
+    var h = sortedHits()[index]; if (!h || !anchor) return;
+    var tip = reasonTip(), rect = anchor.getBoundingClientRect();
+    tip.innerHTML = reasonContent(h); tip.classList.add('open');
+    tip.style.left = '12px'; tip.style.top = '12px';
+    var box = tip.getBoundingClientRect(), gap = 10;
+    var left = Math.max(12, Math.min(rect.left, window.innerWidth - box.width - 12));
+    var top = rect.bottom + gap;
+    if (top + box.height > window.innerHeight - 12) top = Math.max(12, rect.top - box.height - gap);
+    tip.style.left = left + 'px'; tip.style.top = top + 'px';
+  };
+  window.scHideReason = function () {
+    clearTimeout(reasonHideTimer);
+    reasonHideTimer = setTimeout(function () { var tip = el('sc-reason-float'); if (tip) tip.classList.remove('open'); }, 140);
+  };
+  function quickButton(pin, index) {
+    var added = !!savedPins[pin], saving = !!savingPins[pin];
+    return '<button class="sc-quick' + (added ? ' added' : '') + '" type="button" data-pin="' + esc(pin) + '" onclick="scQuickAdd(' + index + ',event)" ' +
+      (added || saving ? 'disabled ' : '') + 'title="' + (added ? 'Already in your Watchlist' : 'Add this parcel to your Watchlist') + '">' +
+      '<i class="fas ' + (added ? 'fa-check' : saving ? 'fa-spinner fa-spin' : 'fa-plus') + '"></i><span>' + (added ? 'Added' : saving ? 'Adding...' : 'Quick add') + '</span></button>';
+  }
+  function refreshQuickButtons(pin) {
+    document.querySelectorAll('.sc-quick[data-pin]').forEach(function (button) {
+      if (button.getAttribute('data-pin') !== pin) return;
+      var added = !!savedPins[pin], saving = !!savingPins[pin];
+      button.classList.toggle('added', added); button.disabled = added || saving;
+      button.title = added ? 'Already in your Watchlist' : 'Add this parcel to your Watchlist';
+      button.innerHTML = '<i class="fas ' + (added ? 'fa-check' : saving ? 'fa-spinner fa-spin' : 'fa-plus') + '"></i><span>' + (added ? 'Added' : saving ? 'Adding...' : 'Quick add') + '</span>';
+    });
+  }
+  function reasonMarkup(h, index) {
+    var pin = prospectPin(h);
+    return '<span class="sc-address-wrap"><a class="sc-address" href="' + prospectUrl(h) + '" aria-describedby="sc-reason-float" ' +
+      'onmouseenter="scShowReason(' + index + ',this)" onmouseleave="scHideReason()" onfocus="scShowReason(' + index + ',this)" onblur="scHideReason()">' + esc(h.a) + '</a></span>' + quickButton(pin, index);
   }
   window.scQuickAdd = function (index, event) {
     if (event) event.stopPropagation();
     if (!plUser) { window.location.href = '/property/dashboard.html'; return; }
     var h = sortedHits()[index]; if (!h) return;
+    var pin = prospectPin(h);
+    if (savedPins[pin] || savingPins[pin]) { refreshQuickButtons(pin); return; }
+    savingPins[pin] = true; refreshQuickButtons(pin);
     sb.rpc('save_property', { p: {
-      kind: 'watch', pams_pin: prospectPin(h), address: h.a, town: lastRun.name,
+      kind: 'watch', pams_pin: pin, address: h.a, town: lastRun.name,
       county: COUNTIES[lastRun.d.slice(0, 2)], block: h.b, lot: h.l, assessed: h.av || null,
       last_year_tax: h.av ? Math.round(h.av * lastRun.rate) : null,
       effective_rate: +(lastRun.rate * 100).toFixed(3), watchdog_value: Math.round(h.market)
     } }).then(function (res) {
-      if (res.error) { console.error('Scanner quick add failed', res.error); toast('Could not add this property'); return; }
+      delete savingPins[pin];
+      if (res.error) { console.error('Scanner quick add failed', res.error); refreshQuickButtons(pin); toast('Could not add this property'); return; }
+      savedPins[pin] = true; refreshQuickButtons(pin);
       toast('Added ' + h.a + ' to your Watchlist');
+    }).catch(function (error) {
+      delete savingPins[pin]; refreshQuickButtons(pin);
+      console.error('Scanner quick add failed', error); toast('Could not add this property');
     });
   };
 
@@ -469,11 +522,15 @@
   }
 
   function settleEntitlement() {
-    return sb.rpc('get_my_entitlement').then(function (result) {
+    var entitlement = sb.rpc('get_my_entitlement').then(function (result) {
       var rows = result && result.data || [], ent = Array.isArray(rows) ? rows[0] : rows;
       if (ent) profile = { account_role: ent.account_role, plan_tier: ent.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end };
       return profile;
-    }).catch(function () { return profile; }).then(function () {
+    }).catch(function () { return profile; });
+    var saved = sb.from('saved_properties').select('pams_pin').then(function (result) {
+      (result.data || []).forEach(function (row) { if (row.pams_pin) savedPins[String(row.pams_pin)] = true; });
+    }).catch(function () {});
+    return Promise.all([entitlement, saved]).then(function () {
       if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
       showAccess();
     });

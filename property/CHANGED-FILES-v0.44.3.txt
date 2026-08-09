@@ -1,0 +1,29 @@
+Watchdog v0.44.3 — Scanner saved-state and unclipped evidence
+
+UPLOAD / STATIC SITE
+vercel.json
+.github/workflows/access-boundary-audit.yml
+property/tests/security-contracts.mjs
+property/tests/appeal-scanner-ux.mjs
+property/index.html
+property/scan.html
+property/js/scan.js
+property/css/scan.css
+property/data/versions.json
+
+SUPABASE EDGE FUNCTION — REDEPLOY
+supabase/functions/request-verify-code/index.ts
+
+NO DATABASE MIGRATION IS REQUIRED FOR THIS PATCH.
+
+SCANNER FIXES
+1. Quick add changes immediately to Added and becomes disabled after success.
+2. Already-saved PAMS PINs display Added after a reload.
+3. A pending add cannot be submitted twice.
+4. Score reasoning is rendered at document level and positioned inside the viewport,
+   so a one-row or two-row result list cannot clip it at the table boundary.
+
+VERIFY
+node property/tests/appeal-scanner-ux.mjs
+node property/tests/security-contracts.mjs
+node property/scripts/audit_access_boundaries.mjs

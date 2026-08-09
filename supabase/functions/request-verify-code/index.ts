@@ -1,7 +1,8 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
+const allowedOrigin = Deno.env.get('ALLOWED_ORIGIN') || 'https://njpropertytaxrelief.com';
 const cors = {
-  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Origin': allowedOrigin,
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
 };
 const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
@@ -64,7 +65,7 @@ Deno.serve(async req => {
       user_id: user.id, pams_pin: pin, delivery_address: address, code_hash: hash,
       code_nonce: nonce, status: 'queued', provider: 'manual_email'
     }).select('id').single();
-    if (insertError) return json({ ok: false, reason: 'Verification queue is unavailable', stage: 'database', detail: insertError.code }, 500);
+    if (insertError) return json({ ok: false, reason: 'Verification queue is unavailable', stage: 'database' }, 500);
 
     const expiresDate = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toLocaleDateString('en-US', {
       month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York'
@@ -105,7 +106,7 @@ Deno.serve(async req => {
       status: 'awaiting_mail', provider_id: 'emailjs:' + row.id, updated_at: new Date().toISOString()
     }).eq('id', row.id);
     return json({ ok: true, status: 'awaiting_mail', request_id: row.id, expires_in_days: 30 });
-  } catch (error) {
-    return json({ ok: false, reason: 'Unexpected verification service error', stage: 'function', detail: String(error).slice(0, 180) }, 500);
+  } catch (_error) {
+    return json({ ok: false, reason: 'Unexpected verification service error', stage: 'function' }, 500);
   }
 });
