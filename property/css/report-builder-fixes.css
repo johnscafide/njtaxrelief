@@ -1,0 +1,33 @@
+.rb-modal { padding: 20px; }
+
+.rb-modal-card {
+  max-height: calc(100dvh - 40px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-padding: 24px;
+}
+
+#rb-note {
+  min-height: 1.4em;
+  margin: 10px 0 0;
+  color: #9b302b;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .rb-modal { align-items: flex-end; padding: 0; }
+  .rb-modal-card {
+    width: 100%;
+    max-height: calc(100dvh - 16px);
+    padding: 28px 20px max(26px, env(safe-area-inset-bottom));
+    border-radius: 24px 24px 0 0;
+  }
+  .rb-modal-card h2 { padding-right: 46px; font-size: 29px; }
+  .rb-modal-card label { font-size: 15px; }
+  .rb-modal-card select,
+  .rb-modal-card input,
+  .rb-modal-card .rb-primary { min-height: 52px; font-size: 16px; }
+}

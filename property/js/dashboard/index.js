@@ -428,9 +428,20 @@
   //   B. median price per square foot in town, applied to this home's size
   //
   // With neither, we say so rather than showing a number that means nothing.
+  var chapterCoverageSeen = Object.create(null);
+  function trackChapterCoverage(r, testable, basis) {
+    var key = [r && (r.pams_pin || r.id || r.address), testable ? '1' : '0', basis].join('|');
+    if (chapterCoverageSeen[key]) return;
+    chapterCoverageSeen[key] = 1;
+    if (typeof gtag === 'function') gtag('event', 'chapter123_coverage', {
+      testable: testable ? 'true' : 'false', evidence_basis: basis,
+      living_sqft_present: r && r.living_sqft ? 'true' : 'false',
+      municipality: r && r.town || 'unknown', property_class: r && (r.property_class || r.cls) || 'unknown'
+    });
+  }
   function chapter123(r) {
     var m = marketValue(r);
-    if (!m || !r.assessed) return null;
+    if (!m || !r.assessed) { trackChapterCoverage(r, false, 'neither'); return null; }
 
     var indep = null, basis = null;
     if (r.watchdog_value && Math.abs(r.watchdog_value - m.v) / m.v > 0.001) {
@@ -448,7 +459,7 @@
       market: m.v, ratio: m.ratio, src: m.src, n: m.n,
       testable: false, hasCase: false, indep: indep, basis: basis
     };
-    if (indep == null) return out;
+    if (indep == null) { trackChapterCoverage(r, false, 'neither'); return out; }
 
     var fair = indep * m.ratio;
     var limit = fair * 1.15;
@@ -458,6 +469,7 @@
     out.over = r.assessed - limit;
     out.hasCase = out.over > 0;
     out.saving = (out.hasCase && eff) ? (r.assessed - fair) * eff : null;
+    trackChapterCoverage(r, true, basis === 'comparable sales from the full record' ? 'A-watchdog-value' : 'B-town-ppsf');
     return out;
   }
 
@@ -1798,7 +1810,18 @@ function brief() {
     // Agent Intel is now an overlay at every width, reached from the sidebar.
     // It reads better as something you open than as a block you scroll past,
     // and it frees the top of the page for something that earns its place.
-    el('db-brief').innerHTML = rows.length ? portfolioMap() : '';
+    // The portfolio map belongs to the Standard collection view. Keeping its
+    // Leaflet surface alive behind the locked Professional preview lets map
+    // panes escape into the CTA on some browsers, so tear it down first.
+    if (view === 'pro') {
+      try { if (pfMap) pfMap.remove(); } catch (_portfolioMapRemoveError) {}
+      pfMap = null;
+      pfHost = null;
+      pfMarkers = {};
+      el('db-brief').innerHTML = '';
+    } else {
+      el('db-brief').innerHTML = rows.length ? portfolioMap() : '';
+    }
 
     // The rail used to sit here as four large figures. It was space spent on
     // numbers nobody acts on, so it now reads as one quiet line under the

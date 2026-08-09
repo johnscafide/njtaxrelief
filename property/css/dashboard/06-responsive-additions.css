@@ -45,16 +45,18 @@
   }
   .mobile-intel-sheet {
     background: #fff; border: 1px solid #dce5ec; border-radius: 18px; box-shadow: 0 25px 70px rgba(7,24,46,.3);
-    max-height: min(82vh, 760px); max-width: 760px; overflow: auto; padding: 22px; position: relative; width: 100%;
+    max-height: min(82vh, 760px); max-width: 760px; overflow: auto; overscroll-behavior: contain;
+    padding: 30px 28px 28px; position: relative; scroll-padding-bottom: 28px; width: 100%;
   }
   .mobile-intel-close {
     align-items: center; background: #f1f4f7; border: 0; border-radius: 50%; color: #34465d; cursor: pointer;
     display: flex; height: 36px; justify-content: center; position: absolute; right: 15px; top: 15px; width: 36px; z-index: 3;
   }
   .mobile-intel-bar { display: none; }
-  .ai.ai-mobile { border: 0; margin: 0; padding: 36px 8px 8px; width: 100%; }
-  .ai.ai-mobile .ai-h { left: 8px; }
-  .ai.ai-mobile .ai-star { right: 48px; }
+  .ai.ai-mobile { border: 0; margin: 0; padding: 76px 10px 20px; width: 100%; }
+  .ai.ai-mobile .ai-h { left: 10px; right: 64px; top: 16px; width: auto; }
+  .ai.ai-mobile .ai-star { right: 52px; top: 20px; }
+  .ai.ai-mobile .hm-lede { margin-top: 12px; }
 }
 
 .db-sidebar-toggle {
@@ -231,9 +233,10 @@
    ============================================================ */
 .pf-strip { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px;
   margin: 22px 0 26px; align-items: stretch; }
-.pf-map { position: relative; min-height: 268px; border-radius: 14px; overflow: hidden;
+.pf-map { position: relative; min-height: 268px; border-radius: 14px; overflow: hidden; isolation: isolate;
   background: #dfe4ee; border: 1px solid var(--hair, #e4e7ee); }
-.pf-map #pf-map { position: absolute; inset: 0; }
+.pf-map #pf-map { position: absolute; inset: 0; z-index: 0; }
+.pf-map .leaflet-pane, .pf-map .leaflet-control { z-index: 1; }
 .pf-map-note { position: absolute; left: 12px; bottom: 12px; z-index: 500;
   background: rgba(255,255,255,.94); border-radius: 20px; padding: 6px 13px;
   font-size: 11.5px; font-weight: 600; color: #46536b; box-shadow: 0 2px 9px rgba(14,34,72,.16); }
@@ -278,12 +281,12 @@
    PRO LOCK  ·  shape without substance
    ============================================================ */
 .prolock { position: relative; border: 1px solid var(--hair, #e4e7ee); border-radius: 14px;
-  overflow: hidden; margin-bottom: 20px; min-height: 250px; }
-.prolock-ghost { padding: 24px; filter: blur(2.5px); opacity: .4; pointer-events: none;
-  user-select: none; }
-.prolock-over { position: absolute; inset: 0; display: flex; flex-direction: column;
+  overflow: clip; margin-bottom: 20px; min-height: 0; }
+.prolock-ghost { inset: 0; overflow: hidden; padding: 24px; filter: blur(2.5px); opacity: .4;
+  pointer-events: none; position: absolute; user-select: none; }
+.prolock-over { position: relative; display: flex; flex-direction: column; min-height: 310px;
   align-items: flex-start; justify-content: center; padding: 28px 34px;
-  background: linear-gradient(100deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.8)); }
+  background: linear-gradient(100deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.86)); z-index: 2; }
 .prolock-badge { display: inline-flex; align-items: center; gap: 7px; font-size: 10.5px;
   font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: #8a6f14;
   background: #fdf6e0; padding: 5px 12px; border-radius: 20px; margin-bottom: 12px; }
@@ -315,8 +318,9 @@
   .pf-list { max-height: none; }
 }
 @media (max-width: 620px) {
-  .prolock-over { padding: 22px 20px; background: rgba(255,255,255,.95); }
+  .prolock-over { min-height: 365px; padding: 24px 20px; background: rgba(255,255,255,.97); }
   .prolock-over h3 { font-size: 18px; }
+  .prolock-btn { min-height: 48px; width: 100%; }
 }
 .pf-none { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 12px;
   align-items: center; justify-content: center; text-align: center; padding: 20px;

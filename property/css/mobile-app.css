@@ -59,14 +59,14 @@
   /* Agent Intel becomes a true app sheet instead of a compressed report card. */
   .mobile-intel-overlay,.hm-mobile-intel{align-items:flex-end;background:rgba(5,17,32,.5);display:flex;inset:0;justify-content:center;opacity:0;padding:0;pointer-events:none;position:fixed;z-index:5000}
   .mobile-intel-overlay.open,.hm-mobile-intel.open{opacity:1;pointer-events:auto}
-  .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 -18px 50px rgba(7,24,46,.20);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:42px 22px calc(112px + env(safe-area-inset-bottom));scroll-padding-bottom:130px;transform:translateY(24px);width:100%}
+  .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 -18px 50px rgba(7,24,46,.20);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
   .mobile-intel-overlay.open .mobile-intel-sheet{transform:none}
   .mobile-intel-bar{height:5px;top:10px;width:46px}
   .mobile-intel-close{background:#edf1f4;height:44px;right:18px;top:20px;width:44px}
-  .ai.ai-mobile{border:0!important;box-shadow:none!important;box-sizing:border-box;margin:18px 0 0!important;max-width:none!important;padding:56px 0 8px!important;width:100%!important}
+  .ai.ai-mobile{border:0!important;box-shadow:none!important;box-sizing:border-box;margin:18px 0 0!important;max-width:none!important;padding:64px 0 20px!important;width:100%!important}
   .ai.ai-mobile .ai-h{align-items:center;background:transparent!important;box-shadow:none!important;gap:12px;left:0!important;padding:0!important;right:62px;top:0;width:auto}
   .ai.ai-mobile .ai-h img{height:52px;width:52px}.ai.ai-mobile .ai-h b{font-size:21px;line-height:1.2}.ai.ai-mobile .ai-h span{font-size:13px;line-height:1.35;margin-top:3px}
-  .ai.ai-mobile .hm-lede{font-size:17.5px;line-height:1.62;margin-top:12px!important}.ai.ai-mobile .ai-pts{margin-top:24px}.ai.ai-mobile .ai-pts li{font-size:16px;gap:14px;line-height:1.55;padding:17px 0}.ai.ai-mobile .ai-pts i{margin-top:5px}
+  .ai.ai-mobile .hm-lede{font-size:17.5px;line-height:1.62;margin-top:18px!important}.ai.ai-mobile .ai-pts{margin-bottom:16px;margin-top:26px}.ai.ai-mobile .ai-pts li{font-size:16px;gap:14px;line-height:1.55;padding:17px 0}.ai.ai-mobile .ai-pts i{margin-top:5px}
 
   /* Home: turn the desktop report header into a compact app header. */
   .hm-dashboard-page .top-in{min-height:78px;padding:11px 14px}

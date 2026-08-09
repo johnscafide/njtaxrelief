@@ -4114,7 +4114,18 @@ function brief() {
     // Agent Intel is now an overlay at every width, reached from the sidebar.
     // It reads better as something you open than as a block you scroll past,
     // and it frees the top of the page for something that earns its place.
-    el('db-brief').innerHTML = rows.length ? portfolioMap() : '';
+    // The portfolio map belongs to the Standard collection view. Keeping its
+    // Leaflet surface alive behind the locked Professional preview lets map
+    // panes escape into the CTA on some browsers, so tear it down first.
+    if (view === 'pro') {
+      try { if (pfMap) pfMap.remove(); } catch (_portfolioMapRemoveError) {}
+      pfMap = null;
+      pfHost = null;
+      pfMarkers = {};
+      el('db-brief').innerHTML = '';
+    } else {
+      el('db-brief').innerHTML = rows.length ? portfolioMap() : '';
+    }
 
     // The rail used to sit here as four large figures. It was space spent on
     // numbers nobody acts on, so it now reads as one quiet line under the

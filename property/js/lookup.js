@@ -185,8 +185,8 @@
   function elReal(id) { return document.getElementById(id); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
   function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
-      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c];
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
     });
   }
   function toast(msg) {
@@ -1712,7 +1712,11 @@
       }
     }
 
-    if (!anchors.length && peerMed === null) { host.innerHTML = ''; return; }
+    if (!anchors.length && peerMed === null) {
+      trackChapter123Coverage(false, 'neither');
+      host.innerHTML = '';
+      return;
+    }
 
     // Where the assessment SHOULD sit, on independent evidence
     var target = null, basis = '';
@@ -1735,6 +1739,7 @@
       target: target, limit: limit, overBy: overBy, hasCase: hasCase,
       saving: saving, peerMed: peerMed, peerN: peerN, basis: basis
     });
+    trackChapter123Coverage(true, anchors.length ? 'A-own-sale' : 'B-peer-assessments');
 
     var rows = '<div class="score-rows">' +
       '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
@@ -1768,6 +1773,22 @@
       '</div>' +
       '<div class="score-fine">Screening only. A filed appeal needs current comparable sales, the municipality\u2019s certified ratio for the tax year, and often an interior inspection. ' +
       'Deadlines are generally April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you when a case is not worth filing.</div>';
+  }
+
+  function trackChapter123Coverage(testable, basis) {
+    if (!current) return;
+    var key = [current.pin || current.address, testable ? '1' : '0', basis].join('|');
+    if (current._chapter123CoverageKey === key) return;
+    current._chapter123CoverageKey = key;
+    if (typeof gtag === 'function') {
+      gtag('event', 'chapter123_coverage', {
+        testable: testable ? 'true' : 'false',
+        evidence_basis: basis,
+        living_sqft_present: current.livingSpace ? 'true' : 'false',
+        municipality: current.town || 'unknown',
+        property_class: current.cls || 'unknown'
+      });
+    }
   }
 
 
@@ -3579,10 +3600,8 @@
   // ══════════════════════════════════════════════
   // GATED CONTENT
   //
-  // Honest framing: this is a conversion device, not a security control. The
-  // markup is already in the DOM and anyone who opens devtools can read it.
-  // That is fine, because none of it is secret. It is public record either way.
-  // Nothing genuinely sensitive is ever gated this way.
+  // Anonymous visitors receive only a neutral placeholder. The analysis is
+  // held outside the DOM until the account session has been established.
   //
   // What stays free, on purpose: the assessment, the tax bill, the parcel
   // record, and the headline value. Those are the things a homeowner has a
@@ -3591,9 +3610,13 @@
   //
   // What is gated: the analysis we built on top of it.
   // ══════════════════════════════════════════════
-  function gate(key, title, blurb, html) {
+  var gateContent = Object.create(null);
+
+  function gateShell(key, title, blurb) {
     return '<div class="gated" data-gate="' + key + '">' +
-      '<div class="gated-inner">' + html + '</div>' +
+      '<div class="gated-inner" aria-hidden="true">' +
+        '<div class="gate-skeleton"><i></i><i></i><i></i></div>' +
+      '</div>' +
       '<div class="gate-cta">' +
         '<div class="gate-card">' +
           '<div class="gate-icon"><i class="fas fa-lock-open"></i></div>' +
@@ -3606,8 +3629,23 @@
     '</div>';
   }
 
+  function gate(key, title, blurb, html) {
+    gateContent[key] = { title: title, blurb: blurb, html: html };
+    return plUser ? html : gateShell(key, title, blurb);
+  }
+
   function applyGates() {
     document.body.classList.toggle('pl-signedin', !!plUser);
+    document.querySelectorAll('[data-gate]').forEach(function (node) {
+      var key = node.getAttribute('data-gate');
+      var item = gateContent[key];
+      if (!item) return;
+      if (plUser) {
+        node.outerHTML = item.html;
+      } else {
+        node.outerHTML = gateShell(key, item.title, item.blurb);
+      }
+    });
   }
 
   // ══════════════════════════════════════════════
@@ -3862,7 +3900,12 @@
 
   window.plSignOut = function () {
     if (!sb) return;
-    sb.auth.signOut().then(function () { plUser = null; paintAuthBtn(); plCloseNote(); });
+    sb.auth.signOut().then(function () {
+      plUser = null;
+      paintAuthBtn();
+      applyGates();
+      plCloseNote();
+    });
   };
 
   // ── save / claim from the property panel ──

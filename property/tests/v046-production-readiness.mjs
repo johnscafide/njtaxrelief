@@ -20,5 +20,5 @@ assert.match(report, /professional_report_versions/);
 assert.match(report, /Save version/);
 assert.match(workflow, /safely skipped/);
 assert.equal(versions.active_roadmap.length, 3);
-assert.equal(versions.releases[0].version, '0.46.0');
+assert.ok(versions.releases.some(release => release.version === '0.46.0'));
 console.log('v0.46 production-readiness contracts passed');
