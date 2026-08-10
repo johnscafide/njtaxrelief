@@ -29,7 +29,32 @@
   function signIn(){close();if(typeof window.plSignInPrompt==='function')window.plSignInPrompt();}
   function signOut(){close();if(typeof window.plSignOut==='function')window.plSignOut();}
   function setUser(u){user=u||null;renderTrigger();renderProfile();}
-  function init(){renderTrigger();renderProfile();document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});}
+
+  function runAddressFromQuery(){
+    var params;
+    try{params=new URLSearchParams(window.location.search||'');}catch(e){return;}
+    var address=(params.get('address')||'').trim();
+    if(!address)return;
+    var attempts=0;
+    function handoff(){
+      attempts+=1;
+      var input=q('pl-addr');
+      if(input&&typeof window.plLookup==='function'){
+        input.value=address;
+        window.plLookup();
+        try{
+          var clean=new URL(window.location.href);
+          clean.searchParams.delete('address');
+          window.history.replaceState({},document.title,clean.pathname+clean.search+clean.hash);
+        }catch(e){}
+        return;
+      }
+      if(attempts<80)window.setTimeout(handoff,100);
+    }
+    handoff();
+  }
+
+  function init(){renderTrigger();renderProfile();document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
   window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:setRecent,signIn:signIn,signOut:signOut};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
