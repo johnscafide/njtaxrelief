@@ -30,6 +30,42 @@
   function signOut(){close();if(typeof window.plSignOut==='function')window.plSignOut();}
   function setUser(u){user=u||null;renderTrigger();renderProfile();}
 
+  /* NJW-23: the lookup previously pulled an entire county's SR1A file to use
+     one municipality. Capture the municipality from the official parcel query,
+     then transparently replace only that sales request with the scoped API. */
+  (function scopeVerifiedSales(){
+    if(window.__watchdogSalesFetchScoped)return;
+    window.__watchdogSalesFetchScoped=true;
+    var original=window.fetch.bind(window),district='';
+    function rememberFromParcel(response){
+      try{
+        response.clone().json().then(function(data){
+          var f=data&&data.features&&data.features[0],a=f&&f.attributes||{},pin=String(a.PAMS_PIN||'');
+          var d=pin.replace(/\D/g,'').slice(0,4);
+          if(d.length===4){district=d;try{sessionStorage.setItem('watchdogCurrentDistrict',d);}catch(_){}}
+        }).catch(function(){});
+      }catch(_){}
+    }
+    try{district=sessionStorage.getItem('watchdogCurrentDistrict')||'';}catch(_){}
+    window.fetch=function(input,init){
+      var url=typeof input==='string'?input:(input&&input.url)||'';
+      if(/Parcels_Composite_NJ_WM|Framework\/Cadastral/i.test(url)){
+        return original(input,init).then(function(r){rememberFromParcel(r);return r;});
+      }
+      var m=url.match(/\/property\/sales-([a-z-]+)\.json(?:\?|$)/i);
+      if(m&&district&&/^\d{4}$/.test(district)){
+        var scoped='/api/sales-by-district?county='+encodeURIComponent(m[1].toLowerCase())+'&district='+encodeURIComponent(district);
+        return original(scoped,init).then(function(r){
+          if(r.ok)return r;
+          district='';
+          try{sessionStorage.removeItem('watchdogCurrentDistrict');}catch(_){}
+          return original(input,init);
+        }).catch(function(){return original(input,init);});
+      }
+      return original(input,init);
+    };
+  })();
+
   function runAddressFromQuery(){
     var params;
     try{params=new URLSearchParams(window.location.search||'');}catch(e){return;}
