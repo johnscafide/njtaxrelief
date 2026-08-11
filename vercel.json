@@ -6,6 +6,16 @@
       "maxDuration": 10
     }
   },
+  "redirects": [
+    {
+      "source": "/anchor-estimator.html",
+      "missing": [
+        { "type": "cookie", "key": "nj_estimator_consent", "value": "accepted" }
+      ],
+      "destination": "/anchor-estimator-consent.html",
+      "permanent": false
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
