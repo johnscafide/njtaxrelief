@@ -35,11 +35,12 @@
         if (entitlementResult.error) throw entitlementResult.error;
         var isDeveloper = devResult.data === true;
         var rows = entitlementResult.data || [], entitlement = Array.isArray(rows) ? rows[0] : rows;
-        var order = { standard: 0, pro: 1, pro_plus: 2, developer: 3 };
+        var order = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
         var plan = isDeveloper ? 'developer' : String(entitlement && entitlement.plan_tier || 'standard');
+        if (order[plan] == null) plan = 'standard';
         var status = String(entitlement && entitlement.subscription_status || 'none');
         var paidActive = status === 'active' || status === 'trialing' || status === 'past_due';
-        var allowed = required === 'standard' || isDeveloper || (paidActive && (order[plan] || 0) >= (order[required] || 0));
+        var allowed = required === 'standard' || isDeveloper || (paidActive && order[plan] >= (order[required] == null ? 999 : order[required]));
         if (required === 'developer' && !isDeveloper) allowed = false;
         if (!allowed) { location.replace(destination('restricted')); throw new Error('Plan access required'); }
         if (isDeveloper) {
