@@ -1,0 +1,17 @@
+{
+  "updated_at":"2026-08-11T17:15:00-04:00",
+  "release":"0.48.0",
+  "title":"Agent Control Center + Farm Workbench Stabilization",
+  "status":"Production code deployed through GitHub/Vercel; Supabase intelligence services active",
+  "summary":"Converted Agent Control into a standalone realtor workspace, repaired the map-farm startup failure, added official NJ address/town autocomplete, preserved saved-farm context across Map/Database/Reports, and expanded farming/reporting into proprietary Watchdog intelligence workflows.",
+  "items":[
+    {"area":"Agent Control","state":"shipped","detail":"Sidebar launches a standalone Agent Control Center window with Opportunity Desk, Farm Map, Growth and Advanced Farm navigation."},
+    {"area":"Map Farm Builder","state":"shipped","detail":"Fixed map JavaScript startup failure; address/town lookup now uses the NJ Office of GIS statewide geocoder with autocomplete and standardized matches."},
+    {"area":"Advanced Farm Builder","state":"shipped","detail":"Town, county, ZIP and radius inputs now autocomplete/normalize through the same NJ geocoder before preview/save."},
+    {"area":"Saved Farm Navigation","state":"shipped","detail":"Returning from Farm Database to Map preserves the saved list ID, polygon and Report Studio target."},
+    {"area":"Report Studio","state":"shipped","detail":"Bulk hydration refreshes parcel rows and Watchdog metrics; print remains curated while CSV can carry all selected data points."},
+    {"area":"Watchdog Intelligence Farming","state":"shipped","detail":"Farm Builder and Map support proprietary score/tax-pressure/holding-period/building-age filters through farm-intelligence-scan."},
+    {"area":"CRM Hub","state":"next","detail":"Next major integration layer: HubSpot first, then BoldTrail/kvCORE/Follow Up Boss adapters, field mapping, farm sync, match history and automation."}
+  ],
+  "files":["property/agent-desk.html","property/js/sidemenu.js","property/farm-map.html","property/js/farm-map.js","property/farm-builder.html","property/js/farm-builder.js","property/js/nj-place-autocomplete.js","property/js/market-list.js","property/report-studio.html","property/js/report-studio.js","property/data/current-update.json"]
+}
