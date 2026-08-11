@@ -1,9 +1,9 @@
 name: Agent Opportunity weekly digest
 
 on:
-  schedule:
-    # Edge Function checks each user's weekday, local hour and last-send time.
-    - cron: "0 * * * *"
+  # Hourly scheduling is intentionally paused until the required repository
+  # secrets are configured and a manual dispatch succeeds. Keeping the broken
+  # cron active creates 24 false failures per day and hides meaningful CI noise.
   workflow_dispatch:
 
 permissions:
@@ -14,12 +14,20 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - name: Validate digest configuration
+        env:
+          DIGEST_URL: ${{ secrets.SUPABASE_AGENT_DIGEST_URL }}
+          DIGEST_SECRET: ${{ secrets.AGENT_DIGEST_CRON_SECRET }}
+        run: |
+          if [ -z "$DIGEST_URL" ] || [ -z "$DIGEST_SECRET" ]; then
+            echo "Agent digest is not configured: add SUPABASE_AGENT_DIGEST_URL and AGENT_DIGEST_CRON_SECRET before re-enabling the schedule."
+            exit 1
+          fi
       - name: Request due digests
         env:
           DIGEST_URL: ${{ secrets.SUPABASE_AGENT_DIGEST_URL }}
           DIGEST_SECRET: ${{ secrets.AGENT_DIGEST_CRON_SECRET }}
         run: |
-          test -n "$DIGEST_URL" && test -n "$DIGEST_SECRET"
           curl --fail-with-body --silent --show-error \
             --retry 2 --retry-all-errors \
             -X POST "$DIGEST_URL" \
