@@ -1,5 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/sales-by-district.js": {
+      "includeFiles": "property/sales-*.json",
+      "maxDuration": 10
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
