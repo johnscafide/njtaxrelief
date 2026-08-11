@@ -1,15 +1,13 @@
 (function () {
   'use strict';
 
-  var order = { standard: 0, pro: 1, pro_plus: 2, developer: 3 };
+  var order = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
   var state = { user: null, profile: null, actual: 'standard', effective: 'standard', developer: false };
 
   function normalized(value) {
     value = String(value || '').toLowerCase().replace(/\+/g, '_plus').replace(/[^a-z_]/g, '');
     return order[value] == null ? 'standard' : value;
   }
-  // Authorization is server-owned. Never infer a developer or paid plan from
-  // an email address or editable user_metadata.
   function devFor(_user, profile) { return normalized(profile && profile.account_role) === 'developer'; }
   function actualFor(user, profile) {
     if (devFor(user, profile)) return 'developer';
@@ -18,7 +16,7 @@
   function savedView() {
     try { return normalized(localStorage.getItem('watchdog:developer:view-as')); } catch (_error) { return 'developer'; }
   }
-  function label(plan) { return plan === 'pro_plus' ? 'Pro+' : plan.charAt(0).toUpperCase() + plan.slice(1); }
+  function label(plan) { if(plan==='pro_plus')return 'Pro+'; if(plan==='agent')return 'Agent'; if(plan==='teams')return 'Teams'; return plan.charAt(0).toUpperCase() + plan.slice(1); }
   function apply() {
     document.documentElement.dataset.accountPlan = state.actual;
     document.documentElement.dataset.viewPlan = state.effective;
@@ -32,7 +30,7 @@
     var preview = document.getElementById('dc-tier');
     if (preview) {
       var previewPlan = state.effective === 'developer' ? 'pro_plus' : state.effective;
-      if (preview.value !== previewPlan) {
+      if (preview.value !== previewPlan && Array.from(preview.options || []).some(function(o){return o.value===previewPlan;})) {
         preview.value = previewPlan;
         preview.dispatchEvent(new Event('change', { bubbles: true }));
       }
@@ -49,7 +47,7 @@
     bar.innerHTML = '<button id="dev-view-toggle" type="button" aria-expanded="false" title="Open developer view controls"><i class="fas fa-code"></i><span class="sr-only">Open developer view controls</span></button>' +
       '<div><i class="fas fa-code"></i><span><b>Developer access</b><small>Viewing the product as</small></span></div>' +
       '<label><span class="sr-only">View as plan</span><select id="dev-view-select">' +
-      ['standard', 'pro', 'pro_plus', 'developer'].map(function (p) { return '<option value="' + p + '"' + (p === state.effective ? ' selected' : '') + '>' + label(p) + '</option>'; }).join('') +
+      ['standard', 'agent', 'pro', 'pro_plus', 'teams', 'developer'].map(function (p) { return '<option value="' + p + '"' + (p === state.effective ? ' selected' : '') + '>' + label(p) + '</option>'; }).join('') +
       '</select></label><button id="dev-view-reset" type="button" title="Return to developer view"><i class="fas fa-rotate-left"></i></button>';
     if (!old) document.body.appendChild(bar);
     bar.querySelector('#dev-view-toggle').addEventListener('click', function () {
@@ -77,16 +75,10 @@
   }
   function can(required) {
     var need = normalized(required);
-    // Backend RPC/RLS owns authorization. This helper only paints capabilities
-    // for the server-returned plan (or a developer View As preview, which can
-    // never grant server access).
     return state.effective === 'developer' || order[state.effective] >= order[need];
   }
 
   function autoInit() {
-    // Dashboard and Home already own their Supabase auth lifecycle and call
-    // NJPTRPlan.init() with the settled session/profile. Only standalone pages
-    // that explicitly opt in should create a lightweight client here.
     if (!document.body || document.body.getAttribute('data-plan-auto') !== 'true' || !window.supabase || state.user) return;
     var client = window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co', 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
