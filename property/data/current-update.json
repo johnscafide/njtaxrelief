@@ -1,19 +1,17 @@
 {
-  "updated_at":"2026-08-11T10:48:00-04:00",
-  "release":"0.49.0",
-  "title":"Agent Control Production Hardening",
-  "status":"Production verified on GitHub/Vercel; existing Supabase quota and farm intelligence services preserved",
-  "summary":"Completed the Agent Control hardening release with live plan capacity visibility, quota-aware workspace guards, safe user-facing errors and bounded observability, complete loading/empty/error treatment, and Chapter 123-style assessment opportunity farming with ranked annual tax-impact results and direct Opportunity Desk handoff.",
+  "updated_at":"2026-08-11T12:18:00-04:00",
+  "release":"0.50.0",
+  "title":"Agent Farming Accuracy & Workflow Release",
+  "status":"Production deployed; Farm intelligence screening v3 active",
+  "summary":"Major Agent workflow release focused on correctness before expansion: repaired Chapter 123 farm screening so nominal/token sales cannot create absurd ratios or false annual-impact rankings, added categorized NJ location discovery for farm mapping, made destructive live-list actions unmistakable, and rebuilt Report Studio refresh behavior so newly hydrated intelligence is carried into the printable report view.",
   "items":[
-    {"area":"Server-enforced Agent workspace quotas","state":"shipped","detail":"Frontend now reads the live get_agent_usage() contract and leaves the existing Supabase database/function enforcement as the final authority."},
-    {"area":"Agent usage / capacity meter","state":"shipped","detail":"Agent Control displays property, live-farm and territory usage with plan limits, remaining capacity, 80% warning state and hard-limit state."},
-    {"area":"Quota-aware creation and imports","state":"shipped","detail":"New farms, territories and sphere imports are checked against live remaining capacity before submission, including partial CSV capacity messaging."},
-    {"area":"Clean error system + observability","state":"shipped","detail":"Known auth, plan, quota and network failures receive safe copy; unknown failures receive AGT reference IDs while internal detail is sent through platform observability."},
-    {"area":"Loading / empty / error states","state":"shipped","detail":"Territories, live lists and conversion funnel retain explicit loading and explanatory empty states; failed panels gain safe retry behavior."},
-    {"area":"Over-assessment farming","state":"shipped","detail":"Farm Map now exposes Chapter 123 screening, annual tax-impact, percent-above-upper-limit and assessment-reduction thresholds plus $750/$1,500/$2,500 presets."},
-    {"area":"Ranked assessment opportunity database","state":"shipped","detail":"Assessment-screened farms default-sort by estimated annual tax impact and expose assessment, recorded sale, ratio/upper limit, supported assessment, reduction and annual impact."},
-    {"area":"Opportunity Desk handoff","state":"shipped","detail":"Qualifying parcels can be added once to Opportunity Desk with a persisted factual assessment-review reason, source/date context and no seller-intent language."},
-    {"area":"Release verification","state":"shipped","detail":"Latest main deployment is READY in Vercel production; production Agent Control and Farm Map return HTTP 200 with the new assets, and no matching Vercel runtime errors were found during verification."}
+    {"area":"Chapter 123 farming accuracy","state":"shipped","detail":"Assessment screening now rejects nominal/token recorded consideration and implausible assessment-to-sale ratios before Chapter 123 metrics are generated."},
+    {"area":"Ratio presentation","state":"shipped","detail":"Decimal Chapter 123 ratios are rendered as percentages while percentage-point metrics remain percentage points."},
+    {"area":"Farm location discovery","state":"shipped","detail":"NJ geocoder suggestions are categorized as ZIP Code, County, Town / Municipality or Address, with ZIP-oriented secondary context and grouped results."},
+    {"area":"Report Studio refresh","state":"shipped","detail":"A completed intelligence refresh now triggers a clean report rebuild so the print/PDF surface is reconstructed from the refreshed governed values rather than leaving a stale preview."},
+    {"area":"Live-list destructive action","state":"shipped","detail":"Delete now changes to an explicit red destructive hover/focus state without changing the normal neutral appearance."},
+    {"area":"Backend safety","state":"shipped","detail":"farm-intelligence-scan v3 remains authenticated, quota-aware and plan-aware; the existing quota and entitlement backend was preserved."},
+    {"area":"Production verification","state":"shipped","detail":"Latest main deployment is READY in Vercel production and the v0.50 frontend assets are deployed from main."}
   ],
-  "files":["property/agent-desk.html","property/js/agent-capacity.js","property/js/agent-ui-safety.js","property/js/agent-desk-safety.js","property/js/agent-assessment-desk.js","property/js/platform-observability.js","property/css/agent-hardening.css","property/farm-map.html","property/js/farm-map.js","property/css/farm-map.css","property/market-list.html","property/js/market-list.js","property/css/market-list.css","property/data/current-update.json"]
+  "files":["property/css/agent-discover.css","property/js/nj-place-autocomplete.js","property/js/market-list.js","property/report-studio.html","property/js/report-studio-refresh.js","property/data/current-update.json","supabase/functions/farm-intelligence-scan"]
 }
