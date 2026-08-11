@@ -1,17 +1,18 @@
 {
-  "updated_at":"2026-08-11T12:18:00-04:00",
-  "release":"0.50.0",
-  "title":"Agent Farming Accuracy & Workflow Release",
-  "status":"Production deployed; Farm intelligence screening v3 active",
-  "summary":"Major Agent workflow release focused on correctness before expansion: repaired Chapter 123 farm screening so nominal/token sales cannot create absurd ratios or false annual-impact rankings, added categorized NJ location discovery for farm mapping, made destructive live-list actions unmistakable, and rebuilt Report Studio refresh behavior so newly hydrated intelligence is carried into the printable report view.",
+  "updated_at":"2026-08-11T12:43:00-04:00",
+  "release":"0.51.0",
+  "title":"Launch Truth, Security Headers & Tool Discoverability",
+  "status":"Production release candidate; feature freeze active; external launch evidence gates remain open",
+  "summary":"Shifted Watchdog from feature expansion to launch truth and discoverability. Closed stale strategy/audit work in Linear, hardened response and cache headers, stopped selling unavailable Teams seats and customer API access, documented the owner-contact data boundary, and shipped Phase 1 of the 45-tool discoverability project with a shared registry, searchable index, plan locks and desktop/mobile navigation. External Paddle Live, staging-role, restore, stale Stripe-function and legacy client-side Scanner security gates remain explicitly open.",
   "items":[
-    {"area":"Chapter 123 farming accuracy","state":"shipped","detail":"Assessment screening now rejects nominal/token recorded consideration and implausible assessment-to-sale ratios before Chapter 123 metrics are generated."},
-    {"area":"Ratio presentation","state":"shipped","detail":"Decimal Chapter 123 ratios are rendered as percentages while percentage-point metrics remain percentage points."},
-    {"area":"Farm location discovery","state":"shipped","detail":"NJ geocoder suggestions are categorized as ZIP Code, County, Town / Municipality or Address, with ZIP-oriented secondary context and grouped results."},
-    {"area":"Report Studio refresh","state":"shipped","detail":"A completed intelligence refresh now triggers a clean report rebuild so the print/PDF surface is reconstructed from the refreshed governed values rather than leaving a stale preview."},
-    {"area":"Live-list destructive action","state":"shipped","detail":"Delete now changes to an explicit red destructive hover/focus state without changing the normal neutral appearance."},
-    {"area":"Backend safety","state":"shipped","detail":"farm-intelligence-scan v3 remains authenticated, quota-aware and plan-aware; the existing quota and entitlement backend was preserved."},
-    {"area":"Production verification","state":"shipped","detail":"Latest main deployment is READY in Vercel production and the v0.50 frontend assets are deployed from main."}
+    {"area":"Linear backlog reduction","state":"shipped","detail":"At least one quarter of the active list present at the start of the work session was completed or truthfully retired, with strategy/audit deliverables separated from unresolved engineering gates."},
+    {"area":"Security and caching headers","state":"shipped","detail":"Root Vercel configuration now carries HSTS, nosniff, framing, referrer, permissions and report-only CSP headers plus explicit JSON, CSS and HTML cache policies."},
+    {"area":"Commerce truth","state":"shipped","detail":"Teams is no longer purchasable while seats/admin are unbuilt, and Pro+/Teams no longer advertise a customer API that does not exist. Agent, Pro and Pro+ annual billing remains available with yearly-first presentation."},
+    {"area":"Owner-contact policy","state":"shipped","detail":"Published a public and internal policy explaining that Watchdog sells property intelligence rather than arbitrary-parcel phone/email enrichment or skip tracing."},
+    {"area":"Tool discoverability Phase 1","state":"shipped","detail":"Created a 45-tool registry, searchable/filterable All Tools index grouped by user job, current-plan lock states, and desktop/mobile navigation entry points."},
+    {"area":"Pricing metadata regression protection","state":"shipped","detail":"Canonical, Open Graph, Twitter and indexability metadata were restored to the pricing page after commerce copy changes."},
+    {"area":"Feature freeze","state":"active","detail":"New feature expansion is paused under NJW-86 except launch blockers, NJW-77 Phase 1 discoverability and real-customer breakage."},
+    {"area":"Open launch blockers","state":"blocked","detail":"Legacy Appeal Prospect Scanner still performs paid computation against static JSON in the browser; controlled Paddle Live/four-role/restore evidence is incomplete; stale Stripe Edge Function/secrets require external removal capabilities."}
   ],
-  "files":["property/css/agent-discover.css","property/js/nj-place-autocomplete.js","property/js/market-list.js","property/report-studio.html","property/js/report-studio-refresh.js","property/data/current-update.json","supabase/functions/farm-intelligence-scan"]
+  "files":["vercel.json","property/pro.html","property/data-use.html","property/docs/data-use-position.md","property/compare/propertyradar.html","property/data/tool-registry.json","property/tools.html","property/js/tools-index.js","property/sidemenu.html","property/data/current-update.json"]
 }
