@@ -8,5 +8,22 @@
   .wd-mobile-menu-brand{align-items:center;color:#10294b;display:flex;gap:10px;text-decoration:none}.wd-mobile-menu-brand>i{align-items:center;background:#078b8b;border-radius:12px;color:#fff;display:flex;font-size:19px;height:42px;justify-content:center;width:42px}.wd-mobile-menu-brand b{display:block;font:800 18px/1.1 "Plus Jakarta Sans",sans-serif}.wd-mobile-menu-brand small{color:#718298;display:block;font-size:12px;margin-top:3px}
   .wd-mobile-menu-sheet header button{align-items:center;background:#f1f5f7;border:0;border-radius:50%;color:#28445e;display:flex;font-size:17px;height:44px;justify-content:center;width:44px}
   .wd-mobile-menu-group{border-bottom:1px solid #e7edf1;padding:17px 0}.wd-mobile-menu-group:last-child{border:0}.wd-mobile-menu-group>span{color:#788a9f;display:block;font-size:10px;font-weight:850;letter-spacing:.12em;margin:0 0 8px;padding:0 4px}.wd-mobile-menu-group a,.wd-mobile-menu-group button{align-items:center;background:none;border:0;border-radius:12px;box-sizing:border-box;color:#183451;display:flex;font:700 16px/1.2 "Source Sans 3",sans-serif;gap:13px;min-height:52px;padding:0 10px;text-align:left;text-decoration:none;width:100%}.wd-mobile-menu-group a>i:first-child,.wd-mobile-menu-group button>i:first-child{color:#52708d;font-size:17px;text-align:center;width:21px}.wd-mobile-menu-group button{cursor:pointer}.wd-mobile-menu-group .wd-mobile-pro-link{background:#eff8f7;display:grid;grid-template-columns:21px 1fr auto;gap:13px;margin-top:5px;min-height:66px}.wd-mobile-pro-link b{font-size:16px}.wd-mobile-pro-link small{color:#6f8193;font-size:11.5px;font-weight:600;grid-column:2;line-height:1.25;margin-top:-13px}.wd-mobile-pro-link>i:last-child{color:#7890a5;font-size:12px;grid-column:3;grid-row:1 / 3}.wd-mobile-menu-group a:focus-visible,.wd-mobile-menu-group button:focus-visible,.wd-mobile-menu-sheet header button:focus-visible{outline:3px solid #0a8b8c;outline-offset:2px}
+
+  /* The fragment is shared by every workspace page. Keep the sheet independent
+     from page-specific sidebar/link rules so navigating and reopening it cannot
+     inherit Workbench or dashboard styles. */
+  #wd-mobile-menu[hidden]{display:none!important}
+  #wd-mobile-menu:not([hidden]){display:block!important}
+  #wd-mobile-menu .wd-mobile-menu-sheet{font-family:"Source Sans 3",Arial,sans-serif}
+  #wd-mobile-menu .wd-mobile-menu-group a,#wd-mobile-menu .wd-mobile-menu-group button{max-width:none!important;height:auto!important;position:relative!important;right:auto!important;top:auto!important;transform:none!important;box-shadow:none!important}
+
+  /* NJW-92: use the phone width for property imagery and leave a deliberate
+     gutter between Compare and the overflow menu. */
+  body[data-sidebar-page="dashboard"] .top,body[data-sidebar-page="dashboard"] .top-in{min-height:0!important}
+  body[data-sidebar-page="dashboard"] .top-in{padding-top:12px!important;padding-bottom:12px!important}
+  body[data-sidebar-page="dashboard"] .pr-card,body[data-sidebar-page="dashboard"] .pr-card-media{width:100%!important;max-width:none!important}
+  body[data-sidebar-page="dashboard"] .pr-card-media img,body[data-sidebar-page="dashboard"] .pr-card-media picture{display:block;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover}
+  body[data-sidebar-page="dashboard"] .pr-card-compare{right:76px!important}
+  body[data-sidebar-page="dashboard"] .pr-card-menu{right:12px!important}
 }
 @media(prefers-reduced-motion:reduce){.wd-mobile-menu,.wd-mobile-menu-sheet{transition:none!important}}
