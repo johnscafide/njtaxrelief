@@ -1,17 +1,19 @@
 {
-  "updated_at":"2026-08-11T17:15:00-04:00",
-  "release":"0.48.0",
-  "title":"Agent Control Center + Farm Workbench Stabilization",
-  "status":"Production code deployed through GitHub/Vercel; Supabase intelligence services active",
-  "summary":"Converted Agent Control into a standalone realtor workspace, repaired the map-farm startup failure, added official NJ address/town autocomplete, preserved saved-farm context across Map/Database/Reports, and expanded farming/reporting into proprietary Watchdog intelligence workflows.",
+  "updated_at":"2026-08-11T10:48:00-04:00",
+  "release":"0.49.0",
+  "title":"Agent Control Production Hardening",
+  "status":"Production verified on GitHub/Vercel; existing Supabase quota and farm intelligence services preserved",
+  "summary":"Completed the Agent Control hardening release with live plan capacity visibility, quota-aware workspace guards, safe user-facing errors and bounded observability, complete loading/empty/error treatment, and Chapter 123-style assessment opportunity farming with ranked annual tax-impact results and direct Opportunity Desk handoff.",
   "items":[
-    {"area":"Agent Control","state":"shipped","detail":"Sidebar launches a standalone Agent Control Center window with Opportunity Desk, Farm Map, Growth and Advanced Farm navigation."},
-    {"area":"Map Farm Builder","state":"shipped","detail":"Fixed map JavaScript startup failure; address/town lookup now uses the NJ Office of GIS statewide geocoder with autocomplete and standardized matches."},
-    {"area":"Advanced Farm Builder","state":"shipped","detail":"Town, county, ZIP and radius inputs now autocomplete/normalize through the same NJ geocoder before preview/save."},
-    {"area":"Saved Farm Navigation","state":"shipped","detail":"Returning from Farm Database to Map preserves the saved list ID, polygon and Report Studio target."},
-    {"area":"Report Studio","state":"shipped","detail":"Bulk hydration refreshes parcel rows and Watchdog metrics; print remains curated while CSV can carry all selected data points."},
-    {"area":"Watchdog Intelligence Farming","state":"shipped","detail":"Farm Builder and Map support proprietary score/tax-pressure/holding-period/building-age filters through farm-intelligence-scan."},
-    {"area":"CRM Hub","state":"next","detail":"Next major integration layer: HubSpot first, then BoldTrail/kvCORE/Follow Up Boss adapters, field mapping, farm sync, match history and automation."}
+    {"area":"Server-enforced Agent workspace quotas","state":"shipped","detail":"Frontend now reads the live get_agent_usage() contract and leaves the existing Supabase database/function enforcement as the final authority."},
+    {"area":"Agent usage / capacity meter","state":"shipped","detail":"Agent Control displays property, live-farm and territory usage with plan limits, remaining capacity, 80% warning state and hard-limit state."},
+    {"area":"Quota-aware creation and imports","state":"shipped","detail":"New farms, territories and sphere imports are checked against live remaining capacity before submission, including partial CSV capacity messaging."},
+    {"area":"Clean error system + observability","state":"shipped","detail":"Known auth, plan, quota and network failures receive safe copy; unknown failures receive AGT reference IDs while internal detail is sent through platform observability."},
+    {"area":"Loading / empty / error states","state":"shipped","detail":"Territories, live lists and conversion funnel retain explicit loading and explanatory empty states; failed panels gain safe retry behavior."},
+    {"area":"Over-assessment farming","state":"shipped","detail":"Farm Map now exposes Chapter 123 screening, annual tax-impact, percent-above-upper-limit and assessment-reduction thresholds plus $750/$1,500/$2,500 presets."},
+    {"area":"Ranked assessment opportunity database","state":"shipped","detail":"Assessment-screened farms default-sort by estimated annual tax impact and expose assessment, recorded sale, ratio/upper limit, supported assessment, reduction and annual impact."},
+    {"area":"Opportunity Desk handoff","state":"shipped","detail":"Qualifying parcels can be added once to Opportunity Desk with a persisted factual assessment-review reason, source/date context and no seller-intent language."},
+    {"area":"Release verification","state":"shipped","detail":"Latest main deployment is READY in Vercel production; production Agent Control and Farm Map return HTTP 200 with the new assets, and no matching Vercel runtime errors were found during verification."}
   ],
-  "files":["property/agent-desk.html","property/js/sidemenu.js","property/farm-map.html","property/js/farm-map.js","property/farm-builder.html","property/js/farm-builder.js","property/js/nj-place-autocomplete.js","property/js/market-list.js","property/report-studio.html","property/js/report-studio.js","property/data/current-update.json"]
+  "files":["property/agent-desk.html","property/js/agent-capacity.js","property/js/agent-ui-safety.js","property/js/agent-desk-safety.js","property/js/agent-assessment-desk.js","property/js/platform-observability.js","property/css/agent-hardening.css","property/farm-map.html","property/js/farm-map.js","property/css/farm-map.css","property/market-list.html","property/js/market-list.js","property/css/market-list.css","property/data/current-update.json"]
 }
