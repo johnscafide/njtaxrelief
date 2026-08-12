@@ -1,24 +1,20 @@
 {
-  "updated_at":"2026-08-11T20:31:00-04:00",
-  "release":"0.53.0",
+  "updated_at":"2026-08-11T20:47:00-04:00",
+  "release":"0.53.1",
   "date":"2026-08-11",
-  "timestamp":"2026-08-11T20:31:00-04:00",
-  "title":"Professional Data Workbench",
-  "category":"Professional SaaS / bulk data / campaigns / Teams",
+  "timestamp":"2026-08-11T20:47:00-04:00",
+  "title":"Data Workbench Live Hydration & Map",
+  "category":"Professional SaaS / data quality / Workbench UX",
   "status":"Production deployed and verified",
-  "summary":"Launches Watchdog's plan-aware professional Data Workbench as a real JavaScript application for Agent, Pro, Pro+ and Teams. Paid users can work across saved properties, Saved Farms and Opportunity Desk records; choose, reorder and sort governed fields; apply advanced property and intelligence filters; page through server-backed farm datasets; hydrate available marker observations; save personal or Teams-shared workspaces; check FEMA flood zones; and turn selected properties into CRM, direct-mail, mailing-label, mail-merge and privacy-safe online-ad exports. Pro+ and Teams retain access to the full governed marker catalog while lower plans receive only their entitled fields.",
+  "summary":"Hardens the Professional Data Workbench after live-use review. The retired Developer Access view-as switcher is removed globally; Workbench rows now automatically re-check the normalized property warehouse and NJOGIS Parcels/Mod-IV source when they load; newly selected fields trigger a fresh hydration pass; additional source fields such as owner name, mailing context, deed fields, property use, building class and parcel dates are resolved when the user's plan permits them; the field library is organized by category with understated plan-level rails and higher-plan fields disabled; and an interactive synchronized parcel map can be opened directly from the Workbench.",
   "items":[
-    {"area":"Data application","state":"shipped","detail":"Added /property/data-workbench.html as a JavaScript-driven data application mounted in the Watchdog shell, with professional grid behavior, sortable and draggable columns, row selection, searchable field library and 25/50/100/250/500/1000 row views."},
-    {"area":"Live data sources","state":"shipped","detail":"Workbench sources now include My Properties, Saved Farms and Opportunity Desk. Saved Farms reuse the existing municipal-data, farm-map-query and farm-intelligence-scan server contracts with paginated loading rather than downloading whole statewide datasets into the browser."},
-    {"area":"Plan governance","state":"shipped","detail":"The app reads the live get_agent_usage() plan contract. Agent sees Standard plus agent-relevant Pro fields, Pro sees Standard + Pro, and Pro+/Teams/Developer can use the complete governed marker catalog. Standard accounts are routed to plan selection."},
-    {"area":"Marker hydration","state":"shipped","detail":"Farm intelligence metrics and per-user score_observations are merged into Workbench rows so connected Watchdog markers can be sorted, filtered and exported without inventing values for unavailable fields."},
-    {"area":"Advanced filtering","state":"shipped","detail":"Added town/county, assessment, annual tax, Watchdog value, year built, Watchdog Score, Chapter 123 annual-impact and FEMA flood-risk filtering plus free-text filtering and sortable columns."},
-    {"area":"Campaign workflows","state":"shipped","detail":"Selected properties can be persisted as campaign drafts and exported as CRM-ready files, direct-mail files, mailing labels, mail-merge files or privacy-safe property/geography audiences for online advertising."},
-    {"area":"Saved and shared workspaces","state":"shipped","detail":"Added dedicated RLS-protected data_workbench_views and data_workbench_campaigns persistence. Agent/Pro/Pro+/Teams may save personal views; Teams organization members can share Workbench views through existing organization membership boundaries."},
-    {"area":"Flood intelligence","state":"shipped","detail":"Workbench includes FEMA Flood Zone and Flood Risk columns backed by the production FEMA NFHL lookup service and supports bulk checks for visible properties with coordinates."},
-    {"area":"Navigation","state":"shipped","detail":"Data Workbench is exposed in desktop and mobile Professional Work navigation for every paid plan. The deeper Data Center field catalog remains separate and is now correctly gated to Pro+ rather than Developer-only."},
-    {"area":"Production verification","state":"passed","detail":"Vercel production builds reached READY; /property/data-workbench.html and its JavaScript/CSS assets return HTTP 200; the RLS policies and can_use_data_workbench entitlement function are present in production Supabase; the Pro+ Data Center entitlement is aligned with the product contract."}
+    {"area":"Developer controls","state":"shipped","detail":"Removed the Developer Access / View As switcher and legacy stored plan override. Developer accounts now use their actual Developer entitlement without a floating overlay."},
+    {"area":"Automatic hydration","state":"shipped","detail":"Added authenticated workbench-hydrate v3. Every loaded Workbench row is checked by PAMS PIN against the normalized property warehouse plus the NJOGIS Parcels/Mod-IV Composite, and current marker observations are merged automatically."},
+    {"area":"Expanded property fields","state":"shipped","detail":"The hydrator resolves available parcel, assessment, tax, sale, building, owner, mailing, deed and parcel-publication fields from authoritative source records when requested and permitted by plan."},
+    {"area":"Field selection","state":"shipped","detail":"Field Library entries are grouped into Property Record, Parcel, Assessment, Tax, Sales, Building, Appeal Intelligence, Flood & Environment, Watchdog Intelligence, Ownership, Permits, Market, Finance and Risk. Plan level is shown as a simple right-edge rail; higher-plan fields remain visible but greyed and disabled."},
+    {"area":"Map workflow","state":"shipped","detail":"Added a Leaflet/OpenStreetMap Workbench map using current warehouse coordinates. Loaded properties are plotted, selected records are visually emphasized, and clicking a map point selects the matching Workbench row."},
+    {"area":"Data integrity","state":"passed","detail":"Workbench no longer assumes the sparse saved-properties or Opportunity Desk row is the complete property record. Missing source values remain explicitly Not available rather than being fabricated."}
   ],
-  "links":["/property/data-workbench.html","/property/data-center.html","/property/agent-desk.html","/property/farm-map.html","/property/updates.html"],
-  "files":["property/data-workbench.html","property/js/data-workbench.js","property/css/data-workbench.css","property/css/data-workbench-v2.css","property/sidemenu.html","property/data-center.html","property/data/current-update.json","api/flood-zone.js","property/js/flood-intelligence.js","supabase:data_workbench_views","supabase:data_workbench_campaigns","supabase:can_use_data_workbench"]
+  "links":["/property/data-workbench.html","/property/data-center.html","/property/updates.html"],
+  "files":["property/js/plan-context.js","property/data-workbench.html","property/js/data-workbench-enhancements.js","property/css/data-workbench-v3.css","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json"]
 }
