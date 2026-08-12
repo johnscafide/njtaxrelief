@@ -137,7 +137,9 @@
   function loadRuntime() {
     loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js?v=20260812a', function () {
       loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js?v=20260812a', function () {
-        loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js?v=20260812a');
+        loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js?v=20260812a', function () {
+          loadScript('njw96-search-corrections', '/property/js/search-corrections.js?v=20260812b');
+        });
       });
     });
   }
