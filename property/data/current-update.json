@@ -1,8 +1,8 @@
 {
-  "updated_at":"2026-08-11T20:27:00-04:00",
+  "updated_at":"2026-08-11T20:31:00-04:00",
   "release":"0.53.0",
   "date":"2026-08-11",
-  "timestamp":"2026-08-11T20:27:00-04:00",
+  "timestamp":"2026-08-11T20:31:00-04:00",
   "title":"Professional Data Workbench",
   "category":"Professional SaaS / bulk data / campaigns / Teams",
   "status":"Production deployed and verified",
@@ -16,9 +16,9 @@
     {"area":"Campaign workflows","state":"shipped","detail":"Selected properties can be persisted as campaign drafts and exported as CRM-ready files, direct-mail files, mailing labels, mail-merge files or privacy-safe property/geography audiences for online advertising."},
     {"area":"Saved and shared workspaces","state":"shipped","detail":"Added dedicated RLS-protected data_workbench_views and data_workbench_campaigns persistence. Agent/Pro/Pro+/Teams may save personal views; Teams organization members can share Workbench views through existing organization membership boundaries."},
     {"area":"Flood intelligence","state":"shipped","detail":"Workbench includes FEMA Flood Zone and Flood Risk columns backed by the production FEMA NFHL lookup service and supports bulk checks for visible properties with coordinates."},
-    {"area":"Navigation","state":"shipped","detail":"Data Workbench is now exposed in desktop and mobile Professional Work navigation for every paid plan, while the deeper Data Center field catalog remains Pro+ gated."},
-    {"area":"Production verification","state":"passed","detail":"Latest Vercel production builds reached READY; /property/data-workbench.html and its JavaScript/CSS assets return HTTP 200; the RLS policies and can_use_data_workbench entitlement function are present in production Supabase."}
+    {"area":"Navigation","state":"shipped","detail":"Data Workbench is exposed in desktop and mobile Professional Work navigation for every paid plan. The deeper Data Center field catalog remains separate and is now correctly gated to Pro+ rather than Developer-only."},
+    {"area":"Production verification","state":"passed","detail":"Vercel production builds reached READY; /property/data-workbench.html and its JavaScript/CSS assets return HTTP 200; the RLS policies and can_use_data_workbench entitlement function are present in production Supabase; the Pro+ Data Center entitlement is aligned with the product contract."}
   ],
   "links":["/property/data-workbench.html","/property/data-center.html","/property/agent-desk.html","/property/farm-map.html","/property/updates.html"],
-  "files":["property/data-workbench.html","property/js/data-workbench.js","property/css/data-workbench.css","property/css/data-workbench-v2.css","property/sidemenu.html","property/data/current-update.json","api/flood-zone.js","property/js/flood-intelligence.js","supabase:data_workbench_views","supabase:data_workbench_campaigns","supabase:can_use_data_workbench"]
+  "files":["property/data-workbench.html","property/js/data-workbench.js","property/css/data-workbench.css","property/css/data-workbench-v2.css","property/sidemenu.html","property/data-center.html","property/data/current-update.json","api/flood-zone.js","property/js/flood-intelligence.js","supabase:data_workbench_views","supabase:data_workbench_campaigns","supabase:can_use_data_workbench"]
 }
