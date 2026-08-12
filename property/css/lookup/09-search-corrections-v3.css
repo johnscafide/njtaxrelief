@@ -1,0 +1,63 @@
+/* NJW-96 correction v3 */
+
+/* Filter rail remains above map without visually crushing the results surface. */
+body.hood-on .njw-filterbar{z-index:10!important;}
+body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-bottom:0!important;padding-bottom:0!important;}
+
+/* White heart halo, no black drop shadow. */
+#pl-hood .hd-heart{
+  text-shadow:0 0 2px rgba(255,255,255,1),0 1px 5px rgba(255,255,255,.96),0 0 10px rgba(255,255,255,.72)!important;
+  -webkit-text-stroke:1.25px rgba(255,255,255,.98)!important;
+  filter:none!important;
+}
+#pl-hood .hd-heart.on{-webkit-text-stroke:1px rgba(255,255,255,.98)!important;}
+
+/* Ellipsis is always in the text/value row. */
+.njw-val-row{display:flex!important;align-items:center!important;gap:10px!important;position:relative!important;}
+.njw-val-row .hd-val{flex:1 1 auto!important;min-width:0!important;}
+.njw-card-menu-btn{
+  display:grid!important;position:static!important;place-items:center!important;
+  width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important;
+  border:0!important;border-radius:7px!important;background:#f3f5f8!important;color:#10294b!important;
+  box-shadow:none!important;font-size:18px!important;cursor:pointer!important;
+}
+.njw-card-menu-btn:hover{background:#e7ebf1!important;}
+.njw-card-menu{right:12px!important;top:auto!important;margin-top:5px!important;z-index:40!important;}
+
+/* Range controls keep direct entry and add a dual slider. */
+.njw-dual-slider{margin:4px 0 20px;}
+.njw-slider-labels{display:flex;justify-content:space-between;margin:0 1px 8px;color:#6f7989;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;}
+.njw-slider-track{position:relative;height:30px;}
+.njw-slider-track:before{
+  content:"";position:absolute;left:0;right:0;top:13px;height:4px;border-radius:999px;background:#dce2eb;
+}
+.njw-slider-track i{position:absolute;left:0;right:0;top:13px;height:4px;border-radius:999px;background:#10294b;pointer-events:none;}
+.njw-slider-track input[type=range]{
+  position:absolute;left:0;top:3px;width:100%;height:24px;margin:0;background:transparent;pointer-events:none;-webkit-appearance:none;appearance:none;
+}
+.njw-slider-track input[type=range]::-webkit-slider-runnable-track{height:4px;background:transparent;border:0;}
+.njw-slider-track input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;margin-top:-9px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
+}
+.njw-slider-track input[type=range]::-moz-range-track{height:4px;background:transparent;border:0;}
+.njw-slider-track input[type=range]::-moz-range-thumb{
+  width:19px;height:19px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
+}
+
+/* Score should look like a first-class datum while async calculation completes. */
+.njw-card-score b{min-width:40px;text-align:right!important;}
+.njw-card-score b:empty:after{content:"Calculating…";color:#7b8595;font-weight:700;}
+
+/* The illustration is the literal end of the right-hand scroll container. */
+#pl-hood .hd-right>#njw-search-art{
+  display:block!important;width:100%!important;max-width:none!important;min-height:0!important;
+  margin:30px 0 0!important;padding:24px 18px 0!important;overflow:visible!important;flex:0 0 auto!important;
+}
+#pl-hood .hd-right>#njw-search-art img{
+  display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;margin:0!important;padding:0!important;
+}
+#pl-hood .hd-right>#njw-search-art:after{display:none!important;}
+
+@media(max-width:760px){
+  .njw-range-panel{width:min(94vw,430px)!important;}
+}

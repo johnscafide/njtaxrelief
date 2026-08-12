@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="/property/css/mobile-menu.css?v=20260811c">
 <aside class="db-sidebar" aria-label="Watchdog workspace navigation">
   <a class="db-side-brand" href="/property/dashboard.html" aria-label="Watchdog dashboard">
     <span><i class="fas fa-dog"></i></span>
@@ -18,30 +19,19 @@
 
     <div class="db-side-section db-side-primary">
       <span class="db-side-label">Overview</span>
-      <a class="db-side-link pn" data-nav-page="dashboard" data-side-action="overview" href="/property/dashboard.html">
-        <i class="fas fa-table-columns"></i><span>Properties</span>
-      </a>
-      <a class="db-side-link pn" data-nav-page="home" href="/property/home.html">
-        <i class="fas fa-heart"></i><span>Watchlist</span>
-      </a>
-      <a class="db-side-link" data-nav-page="pulse" href="/property/pulse.html">
-        <i class="fas fa-wave-square"></i><span>Change intelligence</span>
-      </a>
-      <a class="db-side-link paid-only db-side-feature" data-nav-page="agent-desk" href="/property/agent-desk.html" hidden>
-        <i class="fas fa-bullseye"></i><span>Agent Control</span><em>PRO</em>
-      </a>
-      <button class="pn intel-nav" type="button" data-side-action="agent-intel">
-        <i class="fas fa-dog"></i><span>Agent Intel</span><em class="intel-nav-dot" aria-hidden="true"></em>
-      </button>
+      <a class="db-side-link pn" data-nav-page="dashboard" data-side-action="overview" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>Properties</span></a>
+      <a class="db-side-link pn" data-nav-page="home" href="/property/home.html"><i class="fas fa-heart"></i><span>Watchlist</span></a>
+      <a class="db-side-link" data-nav-page="pulse" href="/property/pulse.html"><i class="fas fa-wave-square"></i><span>Change intelligence</span></a>
+      <a class="db-side-link paid-only db-side-feature" data-nav-page="agent-desk" href="/property/agent-desk.html" hidden><i class="fas fa-bullseye"></i><span>Agent Control</span><em>PRO</em></a>
+      <button class="pn intel-nav" type="button" data-side-action="agent-intel"><i class="fas fa-dog"></i><span>Agent Intel</span><em class="intel-nav-dot" aria-hidden="true"></em></button>
     </div>
 
     <div class="db-side-section db-side-navgroups">
       <div class="db-side-group" data-side-group="research">
-        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false">
-          <i class="fas fa-magnifying-glass-chart"></i><span><b>Research</b></span><i class="fas fa-chevron-down db-side-chevron"></i>
-        </button>
+        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false"><i class="fas fa-magnifying-glass-chart"></i><span><b>Research</b></span><i class="fas fa-chevron-down db-side-chevron"></i></button>
         <div class="db-side-submenu" hidden><div>
           <a class="db-side-link" href="/property/"><i class="fas fa-location-dot"></i><span>Property lookup</span></a>
+          <a class="db-side-link" data-nav-page="tools" href="/property/tools.html"><i class="fas fa-grid-2"></i><span>All tools</span></a>
           <a class="db-side-link" data-nav-page="fairness" href="/property/fairness.html"><i class="fas fa-ranking-star"></i><span>Fairness Index</span></a>
           <a class="db-side-link" data-nav-page="town-compare" href="/property/town-compare.html"><i class="fas fa-code-compare"></i><span>Compare towns</span></a>
           <a class="db-side-link" href="/towns/"><i class="fas fa-map-location-dot"></i><span>Town reports</span></a>
@@ -50,11 +40,10 @@
       </div>
 
       <div class="db-side-group" data-side-group="work">
-        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false">
-          <i class="fas fa-briefcase"></i><span><b>Professional work</b></span><em>PRO</em><i class="fas fa-chevron-down db-side-chevron"></i>
-        </button>
+        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false"><i class="fas fa-briefcase"></i><span><b>Professional work</b></span><em>PRO</em><i class="fas fa-chevron-down db-side-chevron"></i></button>
         <div class="db-side-submenu" hidden><div>
           <a class="db-side-link pro-side" data-nav-page="pro" href="/property/pro.html"><i class="fas fa-grid-2"></i><span>Professional Hub</span></a>
+          <a class="db-side-link paid-only" data-nav-page="data-workbench" href="/property/data-workbench.html" hidden><i class="fas fa-table-list"></i><span>Data Workbench</span><em>PRO</em></a>
           <a class="db-side-link paid-only" data-nav-page="workbench" href="/property/workbench.html" hidden><i class="fas fa-folder-tree"></i><span>Case Workbench</span></a>
           <a class="db-side-link paid-only" href="/property/pro.html#portfolio" hidden><i class="fas fa-layer-group"></i><span>Portfolio intelligence</span></a>
           <a class="db-side-link paid-only" href="/property/pro.html#exports" hidden><i class="fas fa-file-export"></i><span>Professional exports</span></a>
@@ -65,9 +54,7 @@
       </div>
 
       <div class="db-side-group developer-only" data-side-group="platform" hidden>
-        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false">
-          <i class="fas fa-code"></i><span><b>Platform</b></span><em>DEV</em><i class="fas fa-chevron-down db-side-chevron"></i>
-        </button>
+        <button class="db-side-group-toggle" type="button" data-side-action="nav-group" aria-expanded="false"><i class="fas fa-code"></i><span><b>Platform</b></span><em>DEV</em><i class="fas fa-chevron-down db-side-chevron"></i></button>
         <div class="db-side-submenu" hidden><div>
           <a class="db-side-link" data-nav-page="updates" href="/property/updates.html"><i class="fas fa-code-branch"></i><span>Releases &amp; roadmap</span></a>
           <a class="db-side-link" data-nav-page="verification-diagnostics" href="/property/verification-diagnostics.html"><i class="fas fa-heart-pulse"></i><span>Reliability center</span></a>
@@ -93,8 +80,8 @@
   <section class="wd-mobile-menu" id="wd-mobile-menu" role="dialog" aria-modal="true" aria-label="Watchdog menu" hidden>
     <div class="wd-mobile-menu-sheet">
       <header><a class="wd-mobile-menu-brand" href="/property/dashboard.html"><i class="fas fa-dog"></i><span><b>Watchdog</b><small>NJ property intelligence</small></span></a><button type="button" data-side-action="mobile-menu-close" aria-label="Close menu"><i class="fas fa-xmark"></i></button></header>
-      <div class="wd-mobile-menu-group"><span>YOUR WORKSPACE</span><a href="/property/dashboard.html"><i class="fas fa-table-columns"></i>Properties</a><a href="/property/home.html"><i class="fas fa-heart"></i>Watchlist</a><a href="/property/pulse.html"><i class="fas fa-wave-square"></i>Change intelligence</a><a class="paid-only" href="/property/agent-desk.html" hidden><i class="fas fa-bullseye"></i>Agent Control</a><a class="paid-only" href="/property/workbench.html" hidden><i class="fas fa-folder-tree"></i>Case Workbench</a></div>
-      <div class="wd-mobile-menu-group"><span>RESEARCH</span><a href="/property/"><i class="fas fa-magnifying-glass"></i>Property lookup</a><a href="/property/fairness.html"><i class="fas fa-ranking-star"></i>Fairness Index</a><a href="/property/town-compare.html"><i class="fas fa-code-compare"></i>Compare towns</a><a class="wd-mobile-pro-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><b>Explore Pro</b><small>Professional tools and workflows</small><i class="fas fa-chevron-right"></i></a></div>
+      <div class="wd-mobile-menu-group"><span>YOUR WORKSPACE</span><a href="/property/dashboard.html"><i class="fas fa-table-columns"></i>Properties</a><a href="/property/home.html"><i class="fas fa-heart"></i>Watchlist</a><a href="/property/pulse.html"><i class="fas fa-wave-square"></i>Change intelligence</a><a class="paid-only" href="/property/agent-desk.html" hidden><i class="fas fa-bullseye"></i>Agent Control</a><a class="paid-only" href="/property/data-workbench.html" hidden><i class="fas fa-table-list"></i>Data Workbench</a><a class="paid-only" href="/property/workbench.html" hidden><i class="fas fa-folder-tree"></i>Case Workbench</a></div>
+      <div class="wd-mobile-menu-group"><span>RESEARCH</span><a href="/property/"><i class="fas fa-magnifying-glass"></i>Property lookup</a><a href="/property/tools.html"><i class="fas fa-grid-2"></i>All tools</a><a href="/property/fairness.html"><i class="fas fa-ranking-star"></i>Fairness Index</a><a href="/property/town-compare.html"><i class="fas fa-code-compare"></i>Compare towns</a><a class="wd-mobile-pro-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><b>Explore Pro</b><small>Professional tools and workflows</small><i class="fas fa-chevron-right"></i></a></div>
       <div class="wd-mobile-menu-group"><span>ACCOUNT</span><a href="/property/account.html"><i class="fas fa-user-gear"></i>Account &amp; billing</a><a href="/anchor-estimator.html"><i class="fas fa-calculator"></i>Benefit calculator</a><button type="button" data-side-action="sign-out"><i class="fas fa-arrow-right-from-bracket"></i>Sign out</button></div>
     </div>
   </section>

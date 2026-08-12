@@ -1,0 +1,38 @@
+/* NJW-96 correction v2 */
+body.hood-on{--focus-ring:none!important;}
+body.hood-on :is(a,button,input,select,textarea,[tabindex]):focus-visible{outline:none!important;box-shadow:none!important;}
+
+body.hood-on .wd-nav,
+body.hood-on .wd-nav-in,
+body.hood-on .ssearch,
+body.hood-on .ssearch-in,
+body.hood-on .ssearch-nav,
+body.hood-on .ssearch-nav a,
+body.hood-on .ssearch-brand,
+body.hood-on .heroauth-link.nav{
+  box-shadow:none!important;
+  filter:none!important;
+}
+body.hood-on .ssearch{border-bottom:1px solid #e3e7ee!important;}
+body.hood-on .ssearch-in{border:0!important;}
+
+/* Global footer must be a sibling after the search view, never a child of hd-right. */
+body.hood-on #wd-property-footer{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  position:relative!important;
+  clear:both!important;
+  z-index:1!important;
+}
+#pl-hood .hd-right>#wd-property-footer{display:none!important;}
+#pl-hood .hd-right>.njw-search-art{margin-top:auto!important;}
+
+/* Keep the sticky rail unequivocally above map panes and controls. */
+body.hood-on .njw-filterbar{z-index:10!important;isolation:isolate!important;}
+body.hood-on .njw-range-panel{z-index:5100!important;}
+body.hood-on .hd-map{z-index:1!important;}
+body.hood-on .leaflet-control-container{position:relative;z-index:2!important;}
+
+.njw-filter-btn:hover,.njw-sort:hover,.njw-search-back:hover{background:#edf1f6!important;}
+.njw-save-slot .hf-save:hover{background:#203e70!important;border-color:#203e70!important;}

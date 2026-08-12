@@ -1,0 +1,6 @@
+:root{--fs-2xs:.75rem;--fs-xs:.8125rem;--fs-sm:.875rem;--fs-md:.9375rem;--fs-lg:1.0625rem;--fs-xl:1.25rem;--fs-2xl:1.5rem;--fs-3xl:2rem;--fs-4xl:2.5rem;--focus-ring:#087f80}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--focus-ring)!important;outline-offset:2px!important}
+:where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){min-height:44px}
+:where(table,[class*="stat"],[class*="metric"],[class*="score"],[class*="tax"],[class*="price"],[class*="ratio"],[class*="amount"]){font-variant-numeric:tabular-nums}
+.pl-toast,.ad-toast{font-size:max(12px,1em)}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}

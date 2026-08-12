@@ -1,0 +1,18 @@
+name: Quarterly comparison verification
+
+on:
+  schedule:
+    - cron: '17 14 5 1,4,7,10 *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  remind:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comparison verification due
+        run: |
+          echo "Quarterly Watchdog competitor comparison review is due."
+          echo "Follow property/docs/compare-verification.md and verify all six vendor pages against official sources."

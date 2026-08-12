@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Before You Use the NJ Property Tax Relief Estimator</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#17203a;font-family:'Source Sans 3',system-ui,sans-serif;min-height:100vh;display:grid;place-items:center;padding:24px}.gate{width:min(680px,100%);background:#fff;border-radius:20px;box-shadow:0 24px 70px rgba(14,34,72,.18);overflow:hidden}.gate-head{background:linear-gradient(135deg,#0e2248,#1a3a6b);color:#fff;padding:34px 34px 30px}.gate-icon{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(230,195,85,.18);color:#e6c355;font-size:20px;margin-bottom:16px}.gate h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(27px,5vw,36px);line-height:1.15;margin:0 0 10px}.gate-head p{margin:0;color:#c8d6e8;font-size:15px;line-height:1.6}.gate-body{padding:30px 34px 34px}.gate-body h2{font-size:16px;margin:0 0 14px;color:#0e2248}.disclosures{display:grid;gap:12px;margin:0 0 22px}.disclosure{display:flex;gap:12px;align-items:flex-start;background:#f7f9fc;border:1px solid #e2e7ef;border-radius:11px;padding:14px 15px}.disclosure i{color:#1a3a6b;margin-top:3px;width:18px;text-align:center}.disclosure p{margin:0;font-size:14px;line-height:1.55;color:#3d4658}.ack{display:flex;gap:11px;align-items:flex-start;padding:15px;border:1px solid #d8dce8;border-radius:11px;cursor:pointer}.ack input{width:20px;height:20px;margin:1px 0 0;accent-color:#1a3a6b;flex:0 0 auto}.ack span{font-size:14px;line-height:1.55;font-weight:600}.actions{display:flex;gap:10px;margin-top:20px}.accept{flex:1;border:0;border-radius:10px;padding:14px 20px;background:#b8972a;color:#fff;font:700 15px 'Source Sans 3',sans-serif;cursor:pointer}.accept:disabled{background:#c9cbd0;color:#6d7280;cursor:not-allowed}.back{border:1px solid #d8dce8;border-radius:10px;padding:14px 18px;background:#fff;color:#1a3a6b;font:700 14px 'Source Sans 3',sans-serif;text-decoration:none;text-align:center}.fine{font-size:12px;color:#737b8c;line-height:1.5;margin:18px 0 0;text-align:center}@media(max-width:560px){body{padding:0;background:#fff}.gate{border-radius:0;box-shadow:none;min-height:100vh}.gate-head,.gate-body{padding-left:22px;padding-right:22px}.actions{flex-direction:column}.back{order:2}}
+</style>
+</head>
+<body>
+<main class="gate" aria-labelledby="consent-title">
+  <div class="gate-head">
+    <div class="gate-icon"><i class="fas fa-shield-halved"></i></div>
+    <h1 id="consent-title">Before you open the estimator</h1>
+    <p>Please review and acknowledge how this independent estimator works and how information you choose to provide may be used.</p>
+  </div>
+  <div class="gate-body">
+    <h2>Important disclosure</h2>
+    <div class="disclosures">
+      <div class="disclosure"><i class="fas fa-user-tie"></i><p>Information you provide through the estimator will be sent to a <strong>licensed New Jersey real estate agent</strong>, who may contact you as needed regarding your results, property, or real estate questions.</p></div>
+      <div class="disclosure"><i class="fas fa-share-nodes"></i><p>Information you provide may also be <strong>sent to or processed by third-party service providers</strong> used to operate the website, deliver results, manage communications, analytics, or related services.</p></div>
+      <div class="disclosure"><i class="fas fa-landmark"></i><p><strong>NJPropertyTaxRelief.com is an independent website.</strong> It is not affiliated with, endorsed by, sponsored by, or operated by the State of New Jersey, the New Jersey Division of Taxation, or any federal, state, county, or municipal government entity.</p></div>
+      <div class="disclosure"><i class="fas fa-calculator"></i><p>The estimator provides an <strong>informational estimate only</strong>. It does not file a government application, guarantee eligibility, or determine an official benefit. Final eligibility and benefit amounts are determined by the appropriate government agency.</p></div>
+    </div>
+    <label class="ack" for="accept-check">
+      <input id="accept-check" type="checkbox">
+      <span>I have read and understand the disclosure above, and I accept these terms before proceeding to the estimator.</span>
+    </label>
+    <div class="actions">
+      <button class="accept" id="accept-btn" disabled>I Accept — Open Estimator</button>
+      <a class="back" href="index.html">Go Back</a>
+    </div>
+    <p class="fine">You must affirmatively select “I accept” before the estimator can open.</p>
+  </div>
+</main>
+<script>
+(function(){
+  var check=document.getElementById('accept-check');
+  var button=document.getElementById('accept-btn');
+  check.addEventListener('change',function(){button.disabled=!check.checked;});
+  button.addEventListener('click',function(){
+    if(!check.checked)return;
+    document.cookie='nj_estimator_consent=accepted; Max-Age=31536000; Path=/; SameSite=Lax; Secure';
+    window.location.replace('/anchor-estimator.html');
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+/* NJW-96 correction pass — header, sticky rail, cards, SEO contrast, footer. */
+body.hood-on .ssearch{
+  position:sticky!important;top:0!important;z-index:1200!important;
+  box-shadow:none!important;border-bottom:1px solid #e1e6ee!important;
+  background:#fff!important;backdrop-filter:none!important;
+}
+body.hood-on .ssearch-in{
+  max-width:none!important;min-height:64px!important;padding:0 30px!important;
+  border:0!important;box-shadow:none!important;background:#fff!important;
+}
+body.hood-on .ssearch-brand{font-size:19px!important;font-weight:900!important;letter-spacing:-.025em!important;}
+body.hood-on .ssearch-nav{align-self:stretch!important;align-items:center!important;}
+body.hood-on .ssearch-nav a{border-radius:8px!important;min-height:42px!important;padding:0 15px!important;box-shadow:none!important;}
+body.hood-on .ssearch-nav a:hover{background:#f5f7fa!important;}
+body.hood-on .ssearch-nav .pro-link{background:#fbf7ed!important;color:#947516!important;}
+
+.njw-filterbar{
+  position:sticky!important;top:64px!important;z-index:1150!important;
+  min-height:66px!important;padding:9px 16px!important;box-shadow:none!important;
+  background:#fff!important;border-bottom:1px solid #e1e6ee!important;
+}
+.njw-filter-btn,.njw-sort,.njw-save-slot .hf-save,.njw-search-back,.njw-search-slot .hd-searchbox{
+  border-radius:8px!important;
+}
+.njw-filter-btn,.njw-search-back,.njw-sort{transition:background .14s ease,border-color .14s ease!important;}
+.njw-filter-btn:hover,.njw-search-back:hover,.njw-sort:hover{background:#f1f4f8!important;border-color:#9eabbc!important;}
+.njw-save-slot .hf-save{transition:background .14s ease,border-color .14s ease!important;}
+.njw-save-slot .hf-save:hover{background:#1b3766!important;border-color:#1b3766!important;}
+.njw-search-slot .hd-searchbox button{border-radius:7px!important;}
+.njw-range-panel{z-index:1400!important;border-radius:12px!important;}
+.njw-range-inputs label div,.njw-range-actions button{border-radius:8px!important;}
+
+/* Keep map beneath both fixed UI rails. */
+body.hood-on .hd-map,body.hood-on .hd-map #hd-map,.leaflet-pane,.leaflet-control{z-index:auto;}
+body.hood-on .hd-map{z-index:1!important;}
+body.hood-on .hd-right{position:relative;z-index:2;}
+
+/* Card actions: heart stays on image; ellipsis belongs in assessment row. */
+#pl-hood .hd-card{box-shadow:0 7px 22px rgba(14,34,72,.13),0 2px 5px rgba(14,34,72,.07)!important;}
+#pl-hood .hd-card:hover{box-shadow:0 7px 22px rgba(14,34,72,.13),0 2px 5px rgba(14,34,72,.07)!important;}
+#pl-hood .hd-heart{width:46px!important;height:46px!important;font-size:30px!important;right:10px!important;top:9px!important;}
+.njw-val-row{display:flex;align-items:center;gap:8px;position:relative;}
+.njw-val-row .hd-val{flex:1;min-width:0;}
+.njw-card-menu-btn{
+  position:static!important;flex:0 0 34px!important;width:34px!important;height:34px!important;
+  border-radius:7px!important;background:#f4f6f9!important;box-shadow:none!important;
+  color:#17203a!important;font-size:17px!important;
+}
+.njw-card-menu-btn:hover{background:#e8edf4!important;}
+.njw-card-menu{top:auto!important;right:12px!important;margin-top:4px!important;border-radius:10px!important;}
+.njw-card-score b.loading{color:#7d8798!important;font-weight:700!important;}
+
+/* Force the dark SEO intro to retain high contrast over inherited lookup rules. */
+.njw-seo-intro,.njw-seo-intro *{color:#fff!important;}
+.njw-seo-intro>span{color:#f1cf4f!important;}
+.njw-seo-intro h3{color:#fff!important;opacity:1!important;}
+.njw-seo-intro p{color:#dfe8f7!important;}
+.njw-near-radius{font-size:11px;color:#788397;margin-left:7px;font-weight:700;}
+
+/* Artwork ends the listing column; global footer stays outside the split view. */
+.njw-search-art{padding:28px 24px 0!important;border-top:1px solid #e8ecf2;}
+body.hood-on #wd-property-footer{display:block!important;position:relative!important;width:100%!important;}
+body.hood-on .pl-hood~#wd-property-footer,body.hood-on body>footer#wd-property-footer{display:block!important;}
+
+@media(max-width:900px){
+  body.hood-on .ssearch{position:sticky!important;top:0!important;}
+  .njw-filterbar{top:58px!important;z-index:1150!important;}
+}
+@media(max-width:560px){
+  .njw-filterbar{top:72px!important;}
+  body.hood-on .ssearch-in{padding:0 12px!important;}
+}

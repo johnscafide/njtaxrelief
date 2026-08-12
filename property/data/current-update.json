@@ -1,0 +1,22 @@
+{
+  "updated_at":"2026-08-11T21:38:00-04:00",
+  "release":"0.54.0",
+  "date":"2026-08-11",
+  "timestamp":"2026-08-11T21:38:00-04:00",
+  "title":"Data Workbench On-Demand Provider Resolution",
+  "category":"Professional SaaS / provider coverage / derived intelligence",
+  "status":"Production deployed and verified",
+  "summary":"Turns Data Workbench hydration into an explicit on-demand provider resolver. Selected fields are checked against plan governance, the Watchdog property warehouse, NJOGIS Parcels/MOD-IV, trusted Watchdog observations and user-scoped derived-value cache. Canonical deterministic property metrics and Chapter 123 screening values are calculated on demand when source facts support them, cached for reuse, and returned with provider/source/status metadata. Unsupported catalog fields are now distinguished from trusted scores that simply have not yet been computed.",
+  "items":[
+    {"area":"Provider resolver","state":"shipped","detail":"workbench-hydrate v5 classifies each requested property/marker value as authoritative source data, trusted Watchdog observation, cached value, deterministic derived metric, Chapter 123 derived metric, not yet computed, provider missing or not entitled."},
+    {"area":"On-demand derived data","state":"shipped","detail":"Canonical existing formulas now resolve building age, years since last sale, tax-to-assessment rate, land share, improvement share, assessment per acre and lot-area square footage whenever those fields are selected."},
+    {"area":"Chapter 123","state":"shipped","detail":"The Workbench reuses the production farm-intelligence Chapter 123 methodology, including nominal/token sale rejection and plausible assessment-to-sale screening, to resolve ratio, upper-limit, supported assessment, estimated reduction, annual tax difference and percent-above-upper-limit fields on demand."},
+    {"area":"Trusted scores","state":"shipped","detail":"Watchdog Score, Tax Pressure, Revaluation Risk and Uniformity remain sourced only from trusted score observations. If no trusted observation exists the resolver reports Not yet computed instead of inventing a replacement formula."},
+    {"area":"Caching and lineage","state":"shipped","detail":"Derived values are persisted to the existing user-scoped bulk_metric_cache and every resolved cell receives source/observation metadata for UI provenance and future freshness handling."},
+    {"area":"Provider truth table","state":"shipped","detail":"Expanded data_center_provider_coverage from the original core field set to record the live Workbench resolver, canonical derived providers, Chapter 123 provider and partial trusted-score coverage."},
+    {"area":"Workbench status UX","state":"shipped","detail":"Added a provider-status client layer that distinguishes resolved values, trusted scores awaiting computation, provider gaps and entitlement blocks, with source/checked-time details available on cell hover."},
+    {"area":"Data integrity","state":"passed","detail":"No new proprietary score formulas were invented. Fields without a connected provider remain explicitly identified as provider gaps so provider coverage can be expanded systematically."}
+  ],
+  "links":["/property/data-workbench.html","/property/data-center.html","/property/updates.html"],
+  "files":["property/data-workbench.html","property/js/data-workbench-provider-status.js","property/js/data-workbench-enhancements.js","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json","supabase:data_center_provider_coverage","supabase:bulk_metric_cache"]
+}

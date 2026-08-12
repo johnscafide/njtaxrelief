@@ -116,11 +116,31 @@
     }).join('');
   }
 
+  function currentRelease(item) {
+    if (!item || !item.release) return null;
+    return {
+      version: item.release,
+      date: item.date || String(item.updated_at || '').slice(0, 10),
+      timestamp: item.timestamp || item.updated_at,
+      title: item.title || 'Current production release',
+      category: item.category || 'Production release',
+      status: item.status || 'Production deployed',
+      summary: item.summary || '',
+      links: item.links || [],
+      files: item.files || [],
+      impact: item.impact || {}
+    };
+  }
+
   Promise.all([
     fetch('/property/data/versions.json?v=20260809f').then(function (response) { return response.json(); }),
-    fetch('/property/data/marker-registry.json?v=20260807c').then(function (response) { return response.json(); }).catch(function () { return null; })
+    fetch('/property/data/marker-registry.json?v=20260807c').then(function (response) { return response.json(); }).catch(function () { return null; }),
+    fetch('/property/data/current-update.json?v=20260811c').then(function (response) { return response.json(); }).catch(function () { return null; })
   ]).then(function (result) {
     data = result[0];
+    var current = currentRelease(result[2]);
+    if (current && !data.releases.some(function (release) { return release.version === current.version; })) data.releases.unshift(current);
+    data.updated_at = current && current.timestamp ? current.timestamp : data.updated_at;
     data.roadmap = data.active_roadmap || data.roadmap;
     registry = result[1];
     renderCharts(); renderHistory(); renderRoadmap();
