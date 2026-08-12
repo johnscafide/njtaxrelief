@@ -13,6 +13,7 @@
   var townScores = [];
   var nearbyRows = [];
   var seoBusy = false;
+  var seoCacheKey = '';
   var footerPlaceholder = null;
   var filters = { aMin: '', aMax: '', tMin: '', tMax: '', sMin: '', sMax: '', sort: 'default' };
 
@@ -177,39 +178,48 @@
       scoreLow: function (a,b) { return (cardData(a).score == null ? Infinity : cardData(a).score) - (cardData(b).score == null ? Infinity : cardData(b).score); }
     }[filters.sort];
     if (!fn) return;
-    cards.sort(fn);
+    var desired = cards.slice().sort(fn);
+    var changed = desired.some(function (c, i) { return c !== cards[i]; });
+    if (!changed) return;
     var anchor = host.querySelector('.hd-ad,.hd-note,.hd-seo,.hd-more');
-    cards.forEach(function (c) { host.insertBefore(c, anchor || null); });
+    desired.forEach(function (c) { host.insertBefore(c, anchor || null); });
   }
   function updateCount() {
     var host = document.getElementById('hd-list');
     var count = document.getElementById('hd-countline');
     if (!host || !count) return;
     var n = host.querySelectorAll('.hd-card:not([hidden])').length;
-    count.innerHTML = '<strong>' + n.toLocaleString() + ' properties</strong>';
+    var html = '<strong>' + n.toLocaleString() + ' properties</strong>';
+    if (count.innerHTML !== html) count.innerHTML = html;
+  }
+  function paintScores(cards) {
+    cards.forEach(function (card) {
+      var pin = pinOf(card), score = scoreMap[pin], body = card.querySelector('.hd-body');
+      card.dataset.watchdogScore = score == null ? '' : score;
+      if (!body) return;
+      var line = body.querySelector('.njw-card-score');
+      if (!line) {
+        line = document.createElement('div'); line.className = 'njw-card-score';
+        line.innerHTML = '<i class="fas fa-shield-dog"></i> Watchdog Score <b></b>';
+        body.appendChild(line);
+      }
+      var b = line.querySelector('b');
+      if (b) { var next = score == null ? '—' : String(Math.round(score)); if (b.textContent !== next) b.textContent = next; }
+    });
   }
   function hydrateCards() {
     var host = document.getElementById('hd-list');
     if (!host) return;
     var cards = Array.prototype.slice.call(host.querySelectorAll('.hd-card'));
     if (!cards.length) return;
-    cards.forEach(enhanceCard);
+    cards.forEach(enhanceCard); paintScores(cards);
     var pins = cards.map(pinOf).filter(Boolean);
-    if (!pins.length || !sb()) { applyCardFilters(); return; }
-    sb().rpc('get_public_property_watchdog_scores', { p_pins: pins }).then(function (r) {
+    var missing = pins.filter(function (pin) { return !Object.prototype.hasOwnProperty.call(scoreMap, pin); });
+    if (!missing.length || !sb()) { applyCardFilters(); return; }
+    missing.forEach(function (pin) { scoreMap[pin] = null; });
+    sb().rpc('get_public_property_watchdog_scores', { p_pins: missing }).then(function (r) {
       if (!r.error) (r.data || []).forEach(function (x) { scoreMap[x.pams_pin] = +x.watchdog_score; });
-      cards.forEach(function (card) {
-        var pin = pinOf(card), score = scoreMap[pin], body = card.querySelector('.hd-body');
-        card.dataset.watchdogScore = score == null ? '' : score;
-        if (body && !body.querySelector('.njw-card-score')) {
-          var line = document.createElement('div'); line.className = 'njw-card-score';
-          line.innerHTML = '<i class="fas fa-shield-dog"></i> Watchdog Score <b>' + (score == null ? '—' : Math.round(score)) + '</b>';
-          body.appendChild(line);
-        } else if (body) {
-          var b = body.querySelector('.njw-card-score b'); if (b) b.textContent = score == null ? '—' : Math.round(score);
-        }
-      });
-      applyCardFilters();
+      paintScores(cards); applyCardFilters();
     }).catch(function () { applyCardFilters(); });
   }
   function enhanceCard(card) {
@@ -252,6 +262,8 @@
     var stats=JSON.stringify([{statisticType:'avg',onStatisticField:'NET_VALUE',outStatisticFieldName:'avg_assessment'},{statisticType:'count',onStatisticField:'PAMS_PIN',outStatisticFieldName:'property_count'}]);
     var allParams=new URLSearchParams({where:"PROP_CLASS = '2' AND NET_VALUE > 10000",outStatistics:stats,groupByFieldsForStatistics:'COUNTY,MUN_NAME',orderByFields:'COUNTY,MUN_NAME',returnGeometry:'false',resultRecordCount:'2000',f:'json'});
     var center=map.getCenter();
+    var key=norm(currentTownName())+'|'+center.lat.toFixed(2)+'|'+center.lng.toFixed(2);
+    if(townRows.length&&nearbyRows.length&&seoCacheKey===key){renderSeo(host);seoBusy=false;return;}
     function nearbyFetch(span){
       var p=new URLSearchParams({geometry:JSON.stringify({xmin:center.lng-span,ymin:center.lat-span,xmax:center.lng+span,ymax:center.lat+span,spatialReference:{wkid:4326}}),geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',where:"PROP_CLASS = '2' AND NET_VALUE > 10000",outFields:'MUN_NAME,COUNTY,NET_VALUE',returnGeometry:'false',returnCentroid:'true',resultRecordCount:'2000',f:'json'});
       return fetch(PARCEL+'?'+p.toString()).then(function(r){return r.json();}).then(function(d){
@@ -263,7 +275,7 @@
     var scorePromise=sb()?sb().rpc('get_public_town_watchdog_scores').then(function(r){return r.error?[]:(r.data||[]);}).catch(function(){return [];}):Promise.resolve([]);
     Promise.all([fetch(PARCEL+'?'+allParams.toString()).then(function(r){return r.json();}),nearbyFetch(0.22).then(function(rows){return rows.length>=11?rows:nearbyFetch(0.42);}),scorePromise]).then(function(all){
       townRows=(all[0].features||[]).map(function(f){var a=f.attributes||{};return {town:a.MUN_NAME,county:a.COUNTY,avg:+a.avg_assessment||0,count:+a.property_count||0};}).filter(function(x){return x.town&&x.county;});
-      nearbyRows=all[1]||[]; townScores=all[2]||[]; renderSeo(host);
+      nearbyRows=all[1]||[]; townScores=all[2]||[]; seoCacheKey=key; renderSeo(host);
     }).catch(function(){host.innerHTML='<h3>Explore New Jersey property tax assessments</h3><p><a href="/towns/">Browse every municipality</a>.</p>';}).finally(function(){seoBusy=false;});
   }
   function scoreFor(row) {
@@ -304,7 +316,11 @@
     if(!art){art=document.createElement('div');art.id='njw-search-art';art.className='njw-search-art';art.innerHTML='<img src="/property/assets/watchdog-layout.svg" alt="Watchdog property intelligence illustration">';}
     var footer=document.getElementById('wd-property-footer');
     if(footer&&!footerPlaceholder){footerPlaceholder=document.createComment('watchdog-footer-home');footer.parentNode.insertBefore(footerPlaceholder,footer);}
-    if(document.body.classList.contains('hood-on')){right.appendChild(art);if(footer)right.appendChild(footer);}
+    if(document.body.classList.contains('hood-on')){
+      if(art.parentNode!==right)right.appendChild(art);
+      if(footer&&footer.parentNode!==right)right.appendChild(footer);
+      if(footer&&art.nextSibling!==footer)right.insertBefore(art,footer);
+    }
   }
   function restoreFooterIfNeeded() {
     var footer=document.getElementById('wd-property-footer');
