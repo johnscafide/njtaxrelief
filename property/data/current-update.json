@@ -1,19 +1,24 @@
 {
-  "updated_at":"2026-08-11T15:22:00-04:00",
-  "release":"0.52.0",
+  "updated_at":"2026-08-11T20:27:00-04:00",
+  "release":"0.53.0",
   "date":"2026-08-11",
-  "timestamp":"2026-08-11T15:22:00-04:00",
-  "title":"Mobile Reliability, Farm Search & Municipality-Scoped Sales",
-  "category":"Customer experience / performance / Agent farming",
+  "timestamp":"2026-08-11T20:27:00-04:00",
+  "title":"Professional Data Workbench",
+  "category":"Professional SaaS / bulk data / campaigns / Teams",
   "status":"Production deployed and verified",
-  "summary":"Closed the latest mobile and farming regressions while removing the largest avoidable payload from the public property lookup. The shared mobile workspace menu now carries its own stylesheet and host-page isolation so it reopens consistently after navigation; mobile property cards use the available phone width with cleaner Compare/overflow spacing; Farm Map autocomplete now groups live New Jersey ZIP, county, municipality and address matches; and verified-sales lookup requests are reduced from an entire county file to the current four-digit municipality district through a cached server endpoint with safe fallback.",
+  "summary":"Launches Watchdog's plan-aware professional Data Workbench as a real JavaScript application for Agent, Pro, Pro+ and Teams. Paid users can work across saved properties, Saved Farms and Opportunity Desk records; choose, reorder and sort governed fields; apply advanced property and intelligence filters; page through server-backed farm datasets; hydrate available marker observations; save personal or Teams-shared workspaces; check FEMA flood zones; and turn selected properties into CRM, direct-mail, mailing-label, mail-merge and privacy-safe online-ad exports. Pro+ and Teams retain access to the full governed marker catalog while lower plans receive only their entitled fields.",
   "items":[
-    {"area":"Mobile property layout","state":"shipped","detail":"Removed excess dashboard header space on phones, made property imagery fill the mobile card width, and separated Compare from the overflow control."},
-    {"area":"Mobile workspace menu","state":"shipped","detail":"The shared sidemenu fragment now loads the mobile-menu stylesheet on every workspace page and isolates menu links/buttons from host-page CSS so reopening after navigation preserves the intended sheet layout."},
-    {"area":"Farm Map autocomplete","state":"shipped","detail":"Autocomplete now merges NJ geocoder suggestions and candidates with local county prefix matches, groups results as ZIP Codes, Counties, Towns & Municipalities, and Addresses & Places, and retains coordinates for reliable selection."},
-    {"area":"Lookup payload","state":"shipped","detail":"The browser captures the municipality district from the official NJ parcel response and routes the later verified-sales request through /api/sales-by-district. The server filters the bundled county source to that municipality, caches the result at the edge, and falls back to the legacy county file if the scoped endpoint is unavailable."},
-    {"area":"Production verification","state":"passed","detail":"The latest Vercel deployment is READY; production sidemenu, mobile-menu CSS and Farm Map autocomplete assets return HTTP 200 with the new release code, and Vercel runtime telemetry records successful HTTP 200 execution of /api/sales-by-district."}
+    {"area":"Data application","state":"shipped","detail":"Added /property/data-workbench.html as a JavaScript-driven data application mounted in the Watchdog shell, with professional grid behavior, sortable and draggable columns, row selection, searchable field library and 25/50/100/250/500/1000 row views."},
+    {"area":"Live data sources","state":"shipped","detail":"Workbench sources now include My Properties, Saved Farms and Opportunity Desk. Saved Farms reuse the existing municipal-data, farm-map-query and farm-intelligence-scan server contracts with paginated loading rather than downloading whole statewide datasets into the browser."},
+    {"area":"Plan governance","state":"shipped","detail":"The app reads the live get_agent_usage() plan contract. Agent sees Standard plus agent-relevant Pro fields, Pro sees Standard + Pro, and Pro+/Teams/Developer can use the complete governed marker catalog. Standard accounts are routed to plan selection."},
+    {"area":"Marker hydration","state":"shipped","detail":"Farm intelligence metrics and per-user score_observations are merged into Workbench rows so connected Watchdog markers can be sorted, filtered and exported without inventing values for unavailable fields."},
+    {"area":"Advanced filtering","state":"shipped","detail":"Added town/county, assessment, annual tax, Watchdog value, year built, Watchdog Score, Chapter 123 annual-impact and FEMA flood-risk filtering plus free-text filtering and sortable columns."},
+    {"area":"Campaign workflows","state":"shipped","detail":"Selected properties can be persisted as campaign drafts and exported as CRM-ready files, direct-mail files, mailing labels, mail-merge files or privacy-safe property/geography audiences for online advertising."},
+    {"area":"Saved and shared workspaces","state":"shipped","detail":"Added dedicated RLS-protected data_workbench_views and data_workbench_campaigns persistence. Agent/Pro/Pro+/Teams may save personal views; Teams organization members can share Workbench views through existing organization membership boundaries."},
+    {"area":"Flood intelligence","state":"shipped","detail":"Workbench includes FEMA Flood Zone and Flood Risk columns backed by the production FEMA NFHL lookup service and supports bulk checks for visible properties with coordinates."},
+    {"area":"Navigation","state":"shipped","detail":"Data Workbench is now exposed in desktop and mobile Professional Work navigation for every paid plan, while the deeper Data Center field catalog remains Pro+ gated."},
+    {"area":"Production verification","state":"passed","detail":"Latest Vercel production builds reached READY; /property/data-workbench.html and its JavaScript/CSS assets return HTTP 200; the RLS policies and can_use_data_workbench entitlement function are present in production Supabase."}
   ],
-  "links":["/property/dashboard.html","/property/workbench.html","/property/farm-map.html","/property/","/property/updates.html"],
-  "files":["property/sidemenu.html","property/css/mobile-menu.css","property/js/nj-place-autocomplete.js","api/sales-by-district.js","vercel.json","property/js/public-nav.js","property/data/current-update.json","property/js/updates.js"]
+  "links":["/property/data-workbench.html","/property/data-center.html","/property/agent-desk.html","/property/farm-map.html","/property/updates.html"],
+  "files":["property/data-workbench.html","property/js/data-workbench.js","property/css/data-workbench.css","property/css/data-workbench-v2.css","property/sidemenu.html","property/data/current-update.json","api/flood-zone.js","property/js/flood-intelligence.js","supabase:data_workbench_views","supabase:data_workbench_campaigns","supabase:can_use_data_workbench"]
 }
