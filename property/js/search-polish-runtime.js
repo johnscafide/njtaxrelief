@@ -330,7 +330,7 @@
     installFilterBar();hydrateCards();updateCount();if(document.getElementById('hd-seo'))loadSeo();installSearchArtAndFooter();
   }
   document.addEventListener('click',function(e){if(!e.target.closest('.njw-filter-wrap')&&!e.target.closest('.njw-card-menu-btn'))closePanels();});
-  var obs=new MutationObserver(function(){clearTimeout(window.__njwPolishScan);window.__njwPolishScan=setTimeout(scan,60);});
+  var obs=new MutationObserver(function(){clearTimeout(window.__njwPolishScan);window.__njwPolishScan=setTimeout(scan,60);if(!window.__njwPolishMaxWait){window.__njwPolishMaxWait=setTimeout(function(){window.__njwPolishMaxWait=null;clearTimeout(window.__njwPolishScan);scan();},500);}});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();
 })();

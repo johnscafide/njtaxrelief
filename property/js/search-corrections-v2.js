@@ -93,7 +93,7 @@
   // scoreAllCards() removed: search-corrections-v3.js now owns the visible
   // Watchdog Score line. Running this too caused a flicker/overwrite race
   // between competing score-fetch calls.
-  var obs=new MutationObserver(function(){clearTimeout(window.__njwV2Scan);window.__njwV2Scan=setTimeout(scan,80);});
+  var obs=new MutationObserver(function(){clearTimeout(window.__njwV2Scan);window.__njwV2Scan=setTimeout(scan,80);if(!window.__njwV2MaxWait){window.__njwV2MaxWait=setTimeout(function(){window.__njwV2MaxWait=null;clearTimeout(window.__njwV2Scan);scan();},500);}});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();
 })();

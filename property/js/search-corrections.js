@@ -130,7 +130,7 @@
     var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));
     cards.forEach(moveCardMenu);
   }
-  var obs=new MutationObserver(function(){clearTimeout(window.__njwCorrectionScan);window.__njwCorrectionScan=setTimeout(scan,90);});
+  var obs=new MutationObserver(function(){clearTimeout(window.__njwCorrectionScan);window.__njwCorrectionScan=setTimeout(scan,90);if(!window.__njwCorrectionMaxWait){window.__njwCorrectionMaxWait=setTimeout(function(){window.__njwCorrectionMaxWait=null;clearTimeout(window.__njwCorrectionScan);scan();},500);}});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();
 })();
