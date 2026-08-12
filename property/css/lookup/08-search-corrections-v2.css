@@ -2,6 +2,8 @@
 body.hood-on{--focus-ring:none!important;}
 body.hood-on :is(a,button,input,select,textarea,[tabindex]):focus-visible{outline:none!important;box-shadow:none!important;}
 
+body.hood-on .wd-nav,
+body.hood-on .wd-nav-in,
 body.hood-on .ssearch,
 body.hood-on .ssearch-in,
 body.hood-on .ssearch-nav,
