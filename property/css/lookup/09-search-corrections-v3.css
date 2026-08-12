@@ -1,7 +1,7 @@
 /* NJW-96 correction v3 */
 
 /* Filter rail remains above map without visually crushing the results surface. */
-body.hood-on .njw-filterbar{z-index:5000!important;}
+body.hood-on .njw-filterbar{z-index:10!important;}
 body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-bottom:0!important;padding-bottom:0!important;}
 
 /* White heart halo, no black drop shadow. */
