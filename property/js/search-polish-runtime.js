@@ -194,17 +194,13 @@
   }
   function paintScores(cards) {
     cards.forEach(function (card) {
-      var pin = pinOf(card), score = scoreMap[pin], body = card.querySelector('.hd-body');
+      var pin = pinOf(card), score = scoreMap[pin];
       card.dataset.watchdogScore = score == null ? '' : score;
-      if (!body) return;
-      var line = body.querySelector('.njw-card-score');
-      if (!line) {
-        line = document.createElement('div'); line.className = 'njw-card-score';
-        line.innerHTML = '<i class="fas fa-shield-dog"></i> Watchdog Score <b></b>';
-        body.appendChild(line);
-      }
-      var b = line.querySelector('b');
-      if (b) { var next = score == null ? '—' : String(Math.round(score)); if (b.textContent !== next) b.textContent = next; }
+      // Visible score line is owned by search-corrections-v3.js. Writing it
+      // here too caused a flicker/overwrite race between the two scripts,
+      // where this file's slower fetch would blank out a good number v3
+      // had just painted. This file still tracks scoreMap internally so the
+      // Watchdog Score filter and sort options keep working.
     });
   }
   function hydrateCards() {

@@ -86,7 +86,10 @@
     }).catch(function(){cards.forEach(function(card){var b=card.querySelector('.njw-card-score b');if(b)b.textContent='—';});}).finally(function(){busy=false;});
   }
 
-  function scan(){injectCorrectionCss();forceFooterOutside();ensureArtEndsRight();scoreAllCards();}
+  function scan(){injectCorrectionCss();forceFooterOutside();ensureArtEndsRight();}
+  // scoreAllCards() removed: search-corrections-v3.js now owns the visible
+  // Watchdog Score line. Running this too caused a flicker/overwrite race
+  // between competing score-fetch calls.
   var obs=new MutationObserver(function(){clearTimeout(window.__njwV2Scan);window.__njwV2Scan=setTimeout(scan,80);});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();

@@ -120,7 +120,12 @@
 
   function scan(){
     if(!document.body.classList.contains('hood-on'))return;
-    polishHeader();ensureScoreLines();restoreFooter();renderNearbyWithinTen();
+    polishHeader();restoreFooter();renderNearbyWithinTen();
+    // ensureScoreLines()/hydrateScores() removed: search-corrections-v3.js
+    // now owns the visible Watchdog Score line. Running this too caused a
+    // flicker/overwrite race between competing score-fetch calls.
+    var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));
+    cards.forEach(moveCardMenu);
   }
   var obs=new MutationObserver(function(){clearTimeout(window.__njwCorrectionScan);window.__njwCorrectionScan=setTimeout(scan,90);});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
