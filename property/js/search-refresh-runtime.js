@@ -160,6 +160,7 @@
           saleYear:deedYear(a.DEED_DATE), lat:c.y, lon:c.x };
       }).filter(function (x) { return x.addr && x.lat != null && x.lon != null; });
       state.active = true;
+      window.__njwRows = state.rows;
       var counts = {};
       state.rows.forEach(function (x) { var k=x.town+'|'+x.county; counts[k]=(counts[k]||0)+1; });
       var best = Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];})[0];

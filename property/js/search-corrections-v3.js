@@ -102,6 +102,16 @@
   }
 
   function fetchPeerRows(){
+    // Prefer the parcel list already loaded to build the visible cards —
+    // guaranteed to be the same town/area shown on screen. The independent
+    // map-bounds query below was found to sometimes drift to a different
+    // town's parcels entirely (map bounds not tightly matching the visible
+    // result set), which meant peer PINs could never match any card's PIN.
+    if(window.__njwRows&&window.__njwRows.length){
+      return Promise.resolve(window.__njwRows.map(function(x){
+        return {pin:x.pin||'',town:x.town||'',county:x.county||'',assessed:+x.assessed||0,tax:+x.tax||0,built:+x.built||0,acres:+x.acres||0};
+      }));
+    }
     var map=window.__njw96HoodMap;if(!map)return Promise.resolve([]);var b=map.getBounds(),latPad=Math.max(.015,(b.getNorth()-b.getSouth())*.65),lonPad=Math.max(.02,(b.getEast()-b.getWest())*.65);
     var geom={xmin:b.getWest()-lonPad,ymin:b.getSouth()-latPad,xmax:b.getEast()+lonPad,ymax:b.getNorth()+latPad,spatialReference:{wkid:4326}};
     var p=new URLSearchParams({geometry:JSON.stringify(geom),geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',where:"PROP_CLASS = '2' AND NET_VALUE > 10000",outFields:'PAMS_PIN,MUN_NAME,COUNTY,NET_VALUE,LAST_YR_TX,YR_CONSTR,CALC_ACRE',returnGeometry:'false',resultRecordCount:'2000',f:'json'});

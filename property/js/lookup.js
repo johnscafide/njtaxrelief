@@ -2511,6 +2511,7 @@
 
   function buildHood(centre, list) {
     hoodItems = list;
+    window.__njwRows = list;
     var w = el('pl-hood');
     if (!w) return;
 
