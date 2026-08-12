@@ -13,14 +13,13 @@
     if (devFor(user, profile)) return 'developer';
     return normalized((profile && (profile.plan_tier || profile.plan)) || 'standard');
   }
-  function savedView() {
-    try { return normalized(localStorage.getItem('watchdog:developer:view-as')); } catch (_error) { return 'developer'; }
-  }
-  function label(plan) { if(plan==='pro_plus')return 'Pro+'; if(plan==='agent')return 'Agent'; if(plan==='teams')return 'Teams'; return plan.charAt(0).toUpperCase() + plan.slice(1); }
   function apply() {
     document.documentElement.dataset.accountPlan = state.actual;
     document.documentElement.dataset.viewPlan = state.effective;
-    document.body && (document.body.dataset.viewPlan = state.effective);
+    if (document.body) document.body.dataset.viewPlan = state.effective;
+    var legacyBar = document.getElementById('dev-view-bar');
+    if (legacyBar) legacyBar.remove();
+    try { localStorage.removeItem('watchdog:developer:view-as'); } catch (_error) {}
     document.querySelectorAll('[data-min-plan]').forEach(function (node) {
       var required = normalized(node.dataset.minPlan);
       var allowed = can(required);
@@ -35,33 +34,11 @@
         preview.dispatchEvent(new Event('change', { bubbles: true }));
       }
     }
-    paintBar();
     document.dispatchEvent(new CustomEvent('njptr:plan-change', { detail: Object.assign({}, state) }));
   }
-  function paintBar() {
-    var old = document.getElementById('dev-view-bar');
-    if (!state.developer) { if (old) old.remove(); return; }
-    var bar = old || document.createElement('aside');
-    bar.id = 'dev-view-bar';
-    bar.className = 'dev-view-bar';
-    bar.innerHTML = '<button id="dev-view-toggle" type="button" aria-expanded="false" title="Open developer view controls"><i class="fas fa-code"></i><span class="sr-only">Open developer view controls</span></button>' +
-      '<div><i class="fas fa-code"></i><span><b>Developer access</b><small>Viewing the product as</small></span></div>' +
-      '<label><span class="sr-only">View as plan</span><select id="dev-view-select">' +
-      ['standard', 'agent', 'pro', 'pro_plus', 'teams', 'developer'].map(function (p) { return '<option value="' + p + '"' + (p === state.effective ? ' selected' : '') + '>' + label(p) + '</option>'; }).join('') +
-      '</select></label><button id="dev-view-reset" type="button" title="Return to developer view"><i class="fas fa-rotate-left"></i></button>';
-    if (!old) document.body.appendChild(bar);
-    bar.querySelector('#dev-view-toggle').addEventListener('click', function () {
-      var open = bar.classList.toggle('open');
-      this.setAttribute('aria-expanded', open ? 'true' : 'false');
-      this.setAttribute('title', open ? 'Close developer view controls' : 'Open developer view controls');
-    });
-    bar.querySelector('#dev-view-select').addEventListener('change', function (event) { setView(event.target.value); });
-    bar.querySelector('#dev-view-reset').addEventListener('click', function () { setView('developer'); });
-  }
-  function setView(plan) {
-    if (!state.developer) return;
-    state.effective = normalized(plan);
-    try { localStorage.setItem('watchdog:developer:view-as', state.effective); } catch (_error) {}
+  function setView() {
+    /* Developer plan simulation was retired in NJW-99. Keep the API as a no-op for older callers. */
+    state.effective = state.actual;
     apply();
   }
   function init(user, profile) {
@@ -69,7 +46,7 @@
     state.profile = profile || {};
     state.developer = devFor(state.user, state.profile);
     state.actual = actualFor(state.user, state.profile);
-    state.effective = state.developer ? savedView() : state.actual;
+    state.effective = state.actual;
     apply();
     return Object.assign({}, state);
   }
