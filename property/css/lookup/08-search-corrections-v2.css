@@ -29,7 +29,7 @@ body.hood-on #wd-property-footer{
 #pl-hood .hd-right>.njw-search-art{margin-top:auto!important;}
 
 /* Keep the sticky rail unequivocally above map panes and controls. */
-body.hood-on .njw-filterbar{z-index:5000!important;isolation:isolate!important;}
+body.hood-on .njw-filterbar{z-index:10!important;isolation:isolate!important;}
 body.hood-on .njw-range-panel{z-index:5100!important;}
 body.hood-on .hd-map{z-index:1!important;}
 body.hood-on .leaflet-control-container{position:relative;z-index:2!important;}
