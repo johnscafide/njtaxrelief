@@ -88,12 +88,19 @@
     if (document.getElementById(id)) { if (next) next(); return; }
     var s = document.createElement('script'); s.id = id; s.src = src; s.onload = function () { if (next) next(); }; document.body.appendChild(s);
   }
+  function loadCss(id, href) {
+    if (document.getElementById(id)) return;
+    var l=document.createElement('link');l.id=id;l.rel='stylesheet';l.href=href;document.head.appendChild(l);
+  }
   function loadRuntime() {
+    loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css?v=20260812d');
     loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js?v=20260812a', function () {
       loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js?v=20260812a', function () {
         loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js?v=20260812a', function () {
           loadScript('njw96-search-corrections', '/property/js/search-corrections.js?v=20260812b', function () {
-            loadScript('njw96-search-corrections-v2', '/property/js/search-corrections-v2.js?v=20260812c');
+            loadScript('njw96-search-corrections-v2', '/property/js/search-corrections-v2.js?v=20260812c', function () {
+              loadScript('njw96-search-corrections-v3', '/property/js/search-corrections-v3.js?v=20260812d');
+            });
           });
         });
       });
