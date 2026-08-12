@@ -126,13 +126,18 @@
       }
     });
   }
-  function loadRuntime() {
-    if (document.getElementById('njw96-search-runtime')) return;
+  function loadScript(id, src, next) {
+    if (document.getElementById(id)) { if (next) next(); return; }
     var s = document.createElement('script');
-    s.id = 'njw96-search-runtime';
-    s.src = '/property/js/search-refresh-runtime.js?v=20260812a';
-    s.defer = true;
+    s.id = id;
+    s.src = src;
+    s.onload = function () { if (next) next(); };
     document.body.appendChild(s);
+  }
+  function loadRuntime() {
+    loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js?v=20260812a', function () {
+      loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js?v=20260812a');
+    });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadRuntime, { once: true });
   else loadRuntime();
