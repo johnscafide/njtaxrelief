@@ -5,6 +5,10 @@
   var SB_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var client=null,busy=false,lastSignature='';
 
+  function injectCorrectionCss(){
+    if(document.getElementById('njw96-corrections-v2-css'))return;
+    var l=document.createElement('link');l.id='njw96-corrections-v2-css';l.rel='stylesheet';l.href='/property/css/lookup/08-search-corrections-v2.css?v=20260812d';document.head.appendChild(l);
+  }
   function sb(){
     if(client||!window.supabase)return client;
     client=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
@@ -22,7 +26,6 @@
   }
   function assessmentOf(card){return parseMoney(card.getAttribute('data-assessment')||card.getAttribute('data-assessed')||(card.querySelector('.hd-val')||{}).textContent);}
 
-  /* Prevent the older polish layer from re-parenting the full footer into hd-right. */
   (function installFooterGuard(){
     if(window.__njwFooterAppendGuard)return;window.__njwFooterAppendGuard=true;
     var nativeAppend=Node.prototype.appendChild,nativeInsert=Node.prototype.insertBefore;
@@ -83,7 +86,7 @@
     }).catch(function(){cards.forEach(function(card){var b=card.querySelector('.njw-card-score b');if(b)b.textContent='—';});}).finally(function(){busy=false;});
   }
 
-  function scan(){forceFooterOutside();ensureArtEndsRight();scoreAllCards();}
+  function scan(){injectCorrectionCss();forceFooterOutside();ensureArtEndsRight();scoreAllCards();}
   var obs=new MutationObserver(function(){clearTimeout(window.__njwV2Scan);window.__njwV2Scan=setTimeout(scan,80);});
   obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();
