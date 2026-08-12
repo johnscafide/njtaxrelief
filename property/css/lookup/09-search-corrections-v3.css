@@ -12,17 +12,14 @@ body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-botto
 }
 #pl-hood .hd-heart.on{-webkit-text-stroke:1px rgba(255,255,255,.98)!important;}
 
-/* Ellipsis is always in the text/value row. */
+/* Property cards no longer expose the unused ellipsis menu. */
 .njw-val-row{display:flex!important;align-items:center!important;gap:10px!important;position:relative!important;}
 .njw-val-row .hd-val{flex:1 1 auto!important;min-width:0!important;}
-.njw-card-menu-btn{
-  display:grid!important;position:static!important;place-items:center!important;
-  width:34px!important;height:34px!important;min-width:34px!important;flex:0 0 34px!important;
-  border:0!important;border-radius:7px!important;background:#f3f5f8!important;color:#10294b!important;
-  box-shadow:none!important;font-size:18px!important;cursor:pointer!important;
-}
-.njw-card-menu-btn:hover{background:#e7ebf1!important;}
-.njw-card-menu{right:12px!important;top:auto!important;margin-top:5px!important;z-index:40!important;}
+.njw-card-menu-btn,.njw-card-menu{display:none!important;}
+
+/* Search fields keep the clean pill surface while typing, without a colored focus outline. */
+.pl-input:focus,.pl-input:focus-visible{outline:none!important;border-color:transparent!important;box-shadow:none!important;}
+.pl-input-wrap:focus-within{box-shadow:0 10px 34px rgba(14,34,72,.24),0 2px 6px rgba(14,34,72,.10)!important;}
 
 /* Range controls keep direct entry and add a dual slider. */
 .njw-dual-slider{margin:4px 0 20px;}
