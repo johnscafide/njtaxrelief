@@ -2292,7 +2292,7 @@
 
 
   function hoodStreet(a, w, h) {
-    var loc = [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
+    var loc = (a.lat != null && a.lon != null) ? (a.lat + ',' + a.lon) : [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
     return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
            '&location=' + encodeURIComponent(loc) + '&fov=78&pitch=6&source=outdoor&key=' + GMAPS_KEY;
   }
@@ -2511,6 +2511,7 @@
 
   function buildHood(centre, list) {
     hoodItems = list;
+    window.__njwRows = list;
     var w = el('pl-hood');
     if (!w) return;
 
@@ -2576,6 +2577,7 @@
           '<img src="' + hoodStreet(x, 340, 200) + '" alt="" loading="lazy" ' +
             'onerror="this.parentNode.classList.add(\'noimg\')">' +
           '<button class="hd-heart' + (saved ? ' on' : '') + '" title="Save to wishlist" ' +
+            'data-save-pin="' + esc(x.pin) + '" ' +
             'onclick="plHoodSave(\'' + esc(x.pin) + '\', event)">' +
             '<i class="' + (saved ? 'fas' : 'far') + ' fa-heart"></i></button>' +
           (isSubject ? '<span class="hd-badge me">Searched</span>' : '') +
@@ -3660,10 +3662,12 @@
 
   function authReady() {
     if (sb) return true;
+    if (window.__njwSB) { sb = window.__njwSB; return true; }
     if (typeof window.supabase === 'undefined' || !LEDGER_URL || !LEDGER_KEY) return false;
     sb = window.supabase.createClient(LEDGER_URL, LEDGER_KEY, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
     });
+    window.__njwSB = sb;
     return true;
   }
 
