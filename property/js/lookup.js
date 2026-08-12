@@ -2576,6 +2576,7 @@
           '<img src="' + hoodStreet(x, 340, 200) + '" alt="" loading="lazy" ' +
             'onerror="this.parentNode.classList.add(\'noimg\')">' +
           '<button class="hd-heart' + (saved ? ' on' : '') + '" title="Save to wishlist" ' +
+            'data-save-pin="' + esc(x.pin) + '" ' +
             'onclick="plHoodSave(\'' + esc(x.pin) + '\', event)">' +
             '<i class="' + (saved ? 'fas' : 'far') + ' fa-heart"></i></button>' +
           (isSubject ? '<span class="hd-badge me">Searched</span>' : '') +
