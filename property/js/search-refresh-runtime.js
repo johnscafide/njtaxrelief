@@ -214,7 +214,7 @@
   }
 
   function street(x) {
-    var loc=[x.addr,x.town,'NJ',x.zip].filter(Boolean).join(', ');
+    var loc = (x.lat != null && x.lon != null) ? (x.lat + ',' + x.lon) : [x.addr, x.town, 'NJ', x.zip].filter(Boolean).join(', ');
     return 'https://maps.googleapis.com/maps/api/streetview?size=340x200&location='+encodeURIComponent(loc)+'&fov=78&pitch=6&source=outdoor&key='+GMAPS_KEY;
   }
   function ad() {
