@@ -2292,7 +2292,7 @@
 
 
   function hoodStreet(a, w, h) {
-    var loc = [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
+    var loc = (a.lat != null && a.lon != null) ? (a.lat + ',' + a.lon) : [a.addr, a.town, 'NJ', a.zip].filter(Boolean).join(', ');
     return 'https://maps.googleapis.com/maps/api/streetview?size=' + w + 'x' + h +
            '&location=' + encodeURIComponent(loc) + '&fov=78&pitch=6&source=outdoor&key=' + GMAPS_KEY;
   }
