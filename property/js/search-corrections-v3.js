@@ -111,11 +111,16 @@
   function ensureScoreLine(card){var body=card.querySelector('.hd-body');if(!body)return;var line=body.querySelector('.njw-card-score');if(!line){line=document.createElement('div');line.className='njw-card-score';line.innerHTML='<i class="fas fa-shield-dog"></i> Watchdog Score <b>Calculating…</b>';body.appendChild(line);}return line;}
 
   function scoreCards(){
-    if(scoreBusy||!sb()||!document.body.classList.contains('hood-on'))return;
-    var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));if(!cards.length)return;
+    console.log('[WD DEBUG] scoreCards() entered. scoreBusy=',scoreBusy,' sb()=',!!sb(),' hood-on=',document.body.classList.contains('hood-on'));
+    if(scoreBusy||!sb()||!document.body.classList.contains('hood-on')){console.log('[WD DEBUG] scoreCards() blocked by guard, returning early');return;}
+    var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));
+    console.log('[WD DEBUG] card count found:',cards.length);
+    if(!cards.length){console.log('[WD DEBUG] no cards, returning early');return;}
     cards.forEach(function(c){ensureScoreLine(c);});
     var pins=cards.map(pinOf).filter(Boolean),sig=pins.join('|');if(sig===lastScoreSig&&cards.every(function(c){return c.dataset.njwPeerScoreDone==='1';}))return;lastScoreSig=sig;scoreBusy=true;
+    console.log('[WD DEBUG] about to call get_public_watchdog_score_cache with pins:',pins);
     sb().rpc('get_public_watchdog_score_cache',{p_pins:pins}).then(function(cacheRes){
+      console.log('[WD DEBUG] cache RPC resolved:',cacheRes);
       var cache=Object.create(null);if(!cacheRes.error)(cacheRes.data||[]).forEach(function(x){cache[x.pams_pin]=+x.watchdog_score;});
       cards.forEach(function(c){var v=cache[pinOf(c)];if(v!=null){paintScore(c,v,'Saved Watchdog peer score');c.dataset.njwPeerScoreDone='1';}else paintScore(c,null);});
       var missing=cards.filter(function(c){return !c.dataset.njwPeerScoreDone;});if(!missing.length)return [];
@@ -124,7 +129,7 @@
         missing.forEach(function(card){var subject=byPin[pinOf(card)],sc=scoreFromPeers(subject,rows);if(!sc){paintScore(card,50,'Neutral fallback: insufficient peer evidence');card.dataset.njwPeerScoreDone='1';return;}paintScore(card,sc.score,'Calculated on demand from nearby comparable assessments');card.dataset.njwPeerScoreDone='1';saves.push({pams_pin:subject.pin,watchdog_score:sc.score,town:subject.town,county:subject.county,peer_count:sc.peerCount,peer_median:sc.peerMedian,assessed_value:subject.assessed});});
         if(saves.length)return sb().rpc('save_public_watchdog_score_cache',{p_rows:saves});return [];
       });
-    }).catch(function(){cards.forEach(function(c){if(!c.dataset.njwPeerScoreDone){paintScore(c,50,'Neutral fallback');c.dataset.njwPeerScoreDone='1';}});}).finally(function(){scoreBusy=false;var sel=document.getElementById('njw-sort-select');if(sel&&/score/i.test(sel.value))sel.dispatchEvent(new Event('change'));});
+    }).catch(function(e){console.error('[WD DEBUG] scoreCards promise chain rejected:',e);cards.forEach(function(c){if(!c.dataset.njwPeerScoreDone){paintScore(c,50,'Neutral fallback');c.dataset.njwPeerScoreDone='1';}});}).finally(function(){scoreBusy=false;var sel=document.getElementById('njw-sort-select');if(sel&&/score/i.test(sel.value))sel.dispatchEvent(new Event('change'));});
   }
 
   function fixScrollEnd(){
@@ -132,7 +137,13 @@
     if(art.parentNode!==right)right.appendChild(art);if(art!==right.lastElementChild)right.appendChild(art);
   }
 
-  function scan(){installSliders();ensureMenus();scoreCards();fixScrollEnd();}
+  function scan(){
+    console.log('[WD DEBUG] scan() called');
+    try{installSliders();}catch(e){console.error('[WD DEBUG] installSliders threw:',e);}
+    try{ensureMenus();}catch(e){console.error('[WD DEBUG] ensureMenus threw:',e);}
+    try{scoreCards();}catch(e){console.error('[WD DEBUG] scoreCards threw:',e);}
+    try{fixScrollEnd();}catch(e){console.error('[WD DEBUG] fixScrollEnd threw:',e);}
+  }
   installGlobalSearch();
   var obs=new MutationObserver(function(){clearTimeout(window.__njwV3Scan);window.__njwV3Scan=setTimeout(scan,90);});obs.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('load',scan);scan();
