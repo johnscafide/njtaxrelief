@@ -93,13 +93,13 @@
     var l=document.createElement('link');l.id=id;l.rel='stylesheet';l.href=href;document.head.appendChild(l);
   }
   function loadRuntime() {
-    loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css?v=20260812d');
-    loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js?v=20260812a', function () {
-      loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js?v=20260812a', function () {
-        loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js?v=20260812a', function () {
-          loadScript('njw96-search-corrections', '/property/js/search-corrections.js?v=20260812b', function () {
-            loadScript('njw96-search-corrections-v2', '/property/js/search-corrections-v2.js?v=20260812c', function () {
-              loadScript('njw96-search-corrections-v3', '/property/js/search-corrections-v3.js?v=20260812d');
+    loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css');
+    loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js', function () {
+      loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js', function () {
+        loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js', function () {
+          loadScript('njw96-search-corrections', '/property/js/search-corrections.js', function () {
+            loadScript('njw96-search-corrections-v2', '/property/js/search-corrections-v2.js', function () {
+              loadScript('njw96-search-corrections-v3', '/property/js/search-corrections-v3.js');
             });
           });
         });
