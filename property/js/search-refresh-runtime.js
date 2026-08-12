@@ -28,11 +28,14 @@
     window.__njw96Toast = setTimeout(function () { t.style.display = 'none'; }, 2600);
   }
   function sb() {
-    if (client || !window.supabase) return client;
+    if (client) return client;
+    if (window.__njwSB) { client = window.__njwSB; return client; }
+    if (!window.supabase) return null;
     client = window.supabase.createClient(SB_URL, SB_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
       flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token'
     }});
+    window.__njwSB = client;
     return client;
   }
 
@@ -214,7 +217,7 @@
   }
 
   function street(x) {
-    var loc = (x.lat != null && x.lon != null) ? (x.lat + ',' + x.lon) : [x.addr, x.town, 'NJ', x.zip].filter(Boolean).join(', ');
+    var loc=[x.addr,x.town,'NJ',x.zip].filter(Boolean).join(', ');
     return 'https://maps.googleapis.com/maps/api/streetview?size=340x200&location='+encodeURIComponent(loc)+'&fov=78&pitch=6&source=outdoor&key='+GMAPS_KEY;
   }
   function ad() {

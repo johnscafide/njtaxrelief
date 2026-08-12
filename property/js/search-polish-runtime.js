@@ -38,11 +38,14 @@
   }
   function townUrl(row) { return '/towns/' + slug(row.county) + '/' + slug(row.town) + '.html'; }
   function sb() {
-    if (client || !window.supabase) return client;
+    if (client) return client;
+    if (window.__njwSB) { client = window.__njwSB; return client; }
+    if (!window.supabase) return null;
     client = window.supabase.createClient(SB_URL, SB_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
       flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token'
     }});
+    window.__njwSB = client;
     return client;
   }
   function toast(msg) {

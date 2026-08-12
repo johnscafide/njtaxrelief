@@ -8,8 +8,11 @@
   var client=null,scoreBusy=false,lastScoreSig='';
 
   function sb(){
-    if(client||!window.supabase)return client;
+    if(client)return client;
+    if(window.__njwSB){client=window.__njwSB;return client;}
+    if(!window.supabase)return null;
     client=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
+    window.__njwSB=client;
     return client;
   }
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}

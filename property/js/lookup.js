@@ -3661,10 +3661,12 @@
 
   function authReady() {
     if (sb) return true;
+    if (window.__njwSB) { sb = window.__njwSB; return true; }
     if (typeof window.supabase === 'undefined' || !LEDGER_URL || !LEDGER_KEY) return false;
     sb = window.supabase.createClient(LEDGER_URL, LEDGER_KEY, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
     });
+    window.__njwSB = sb;
     return true;
   }
 

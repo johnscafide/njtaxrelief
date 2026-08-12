@@ -10,8 +10,11 @@
     var l=document.createElement('link');l.id='njw96-corrections-v2-css';l.rel='stylesheet';l.href='/property/css/lookup/08-search-corrections-v2.css?v=20260812d';document.head.appendChild(l);
   }
   function sb(){
-    if(client||!window.supabase)return client;
+    if(client)return client;
+    if(window.__njwSB){client=window.__njwSB;return client;}
+    if(!window.supabase)return null;
     client=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
+    window.__njwSB=client;
     return client;
   }
   function parseMoney(v){
