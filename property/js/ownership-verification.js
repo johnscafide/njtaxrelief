@@ -110,3 +110,30 @@
 
   window.NJPTRVerification = { open: open };
 })();
+
+/* NJW-96 runtime bridge. This file loads before lookup.js, so it can capture
+   the Leaflet neighborhood map when lookup.js creates it, then load the
+   completion layer after the core bundle has initialized. */
+(function () {
+  'use strict';
+  if (window.L && L.Map && !window.__njw96MapHookInstalled) {
+    window.__njw96MapHookInstalled = true;
+    L.Map.addInitHook(function () {
+      var container = this.getContainer && this.getContainer();
+      if (container && container.id === 'hd-map') {
+        window.__njw96HoodMap = this;
+        window.dispatchEvent(new CustomEvent('njw96:hood-map', { detail: { map: this } }));
+      }
+    });
+  }
+  function loadRuntime() {
+    if (document.getElementById('njw96-search-runtime')) return;
+    var s = document.createElement('script');
+    s.id = 'njw96-search-runtime';
+    s.src = '/property/js/search-refresh-runtime.js?v=20260812a';
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadRuntime, { once: true });
+  else loadRuntime();
+})();
