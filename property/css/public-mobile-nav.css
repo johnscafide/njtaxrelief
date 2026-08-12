@@ -1,6 +1,6 @@
 /* Watchdog public navigation: one app-like shell for landing + search. */
 .wd-nav .wd-nav-in{grid-template-columns:1fr auto 1fr}
-.wd-public-trigger{align-items:center!important;border:1px solid rgba(255,255,255,.28)!important;border-radius:999px!important;display:inline-flex!important;gap:8px!important;justify-content:center!important;min-height:44px;padding:0 14px!important;width:max-content}
+.wd-public-trigger{align-items:center!important;border:1px solid rgba(255,255,255,.28);border-radius:999px!important;display:inline-flex!important;gap:8px!important;justify-content:center!important;min-height:44px;padding:0 14px!important;width:max-content}
 .wd-public-trigger i{font-size:17px}
 .wd-public-profile{justify-self:end;margin-left:auto}
 .wd-public-profile img{border:2px solid rgba(255,255,255,.82);border-radius:50%;height:30px;object-fit:cover;width:30px}
