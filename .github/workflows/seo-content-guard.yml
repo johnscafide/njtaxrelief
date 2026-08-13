@@ -4,13 +4,22 @@ on:
     paths:
       - 'property/data/play-catalog.json'
       - 'property/data/glossary.json'
+      - 'property/plays/**'
       - 'api/play.js'
       - 'api/glossary.js'
+      - 'vercel.json'
+      - 'robots.txt'
+      - 'sitemap*.xml'
       - 'scripts/validate-seo-content.js'
+      - 'scripts/validate-static-seo.js'
   pull_request:
     paths:
       - 'property/data/play-catalog.json'
       - 'property/data/glossary.json'
+      - 'property/plays/**'
+      - 'vercel.json'
+      - 'robots.txt'
+      - 'sitemap*.xml'
 jobs:
   validate:
     runs-on: ubuntu-latest
@@ -20,3 +29,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/validate-seo-content.js
+      - run: node scripts/validate-static-seo.js

@@ -7,190 +7,45 @@
     }
   },
   "redirects": [
-    {
-      "source": "/anchor-estimator.html",
-      "missing": [
-        {
-          "type": "cookie",
-          "key": "nj_estimator_consent",
-          "value": "accepted"
-        }
-      ],
-      "destination": "/anchor-estimator-consent.html",
-      "permanent": false
-    },
-    {
-      "source": "/index-old.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/index_1.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/1092chews.html",
-      "destination": "/property/",
-      "permanent": true
-    },
-    {
-      "source": "/1092chews-DNU.html",
-      "destination": "/property/",
-      "permanent": true
-    },
-    {
-      "source": "/1092-chews-DNU.html",
-      "destination": "/property/",
-      "permanent": true
-    },
-    {
-      "source": "/btc-old.html",
-      "destination": "/btc.html",
-      "permanent": true
-    },
-    {
-      "source": "/property/towns/:path*",
-      "destination": "/towns/:path*",
-      "permanent": true
-    },
-    {
-      "source": "/insights.html",
-      "destination": "/property/insights/",
-      "permanent": true
-    },
-    {
-      "source": "/insights/:slug.html",
-      "destination": "/property/insights/:slug.html",
-      "permanent": true
-    }
+    {"source":"/anchor-estimator.html","missing":[{"type":"cookie","key":"nj_estimator_consent","value":"accepted"}],"destination":"/anchor-estimator-consent.html","permanent":false},
+    {"source":"/index-old.html","destination":"/","permanent":true},
+    {"source":"/index_1.html","destination":"/","permanent":true},
+    {"source":"/1092chews.html","destination":"/property/","permanent":true},
+    {"source":"/1092chews-DNU.html","destination":"/property/","permanent":true},
+    {"source":"/1092-chews-DNU.html","destination":"/property/","permanent":true},
+    {"source":"/btc-old.html","destination":"/btc.html","permanent":true},
+    {"source":"/property/towns/:path*","destination":"/towns/:path*","permanent":true},
+    {"source":"/insights.html","destination":"/property/insights/","permanent":true},
+    {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
   ],
   "rewrites": [
-    {
-      "source": "/property/insights/:slug.html",
-      "destination": "/api/insight?slug=:slug"
-    },
-    {
-      "source": "/property/plays/agents/:slug/",
-      "destination": "/api/play?profession=agents&slug=:slug"
-    },
-    {
-      "source": "/property/plays/mortgage/:slug/",
-      "destination": "/api/play?profession=mortgage&slug=:slug"
-    },
-    {
-      "source": "/property/plays/agents/",
-      "destination": "/api/play?profession=agents"
-    },
-    {
-      "source": "/property/plays/mortgage/",
-      "destination": "/api/play?profession=mortgage"
-    },
-    {
-      "source": "/property/plays/attorneys/",
-      "destination": "/api/play?profession=attorneys"
-    },
-    {
-      "source": "/property/plays/investors/",
-      "destination": "/api/play?profession=investors"
-    },
-    {
-      "source": "/property/glossary/:slug/",
-      "destination": "/api/glossary?slug=:slug"
-    }
+    {"source":"/property/insights/:slug.html","destination":"/api/insight?slug=:slug"},
+    {"source":"/property/plays/agents/:slug/","destination":"/api/play?profession=agents&slug=:slug"},
+    {"source":"/property/plays/mortgage/:slug/","destination":"/api/play?profession=mortgage&slug=:slug"},
+    {"source":"/property/plays/agents/","destination":"/api/play?profession=agents"},
+    {"source":"/property/plays/mortgage/","destination":"/api/play?profession=mortgage"},
+    {"source":"/property/plays/attorneys/","destination":"/api/play?profession=attorneys"},
+    {"source":"/property/plays/investors/","destination":"/api/play?profession=investors"},
+    {"source":"/property/glossary/:slug/","destination":"/api/glossary?slug=:slug"}
   ],
   "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "geolocation=(self), camera=(), microphone=()"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=31536000; includeSubDomains; preload"
-        },
-        {
-          "key": "Content-Security-Policy-Report-Only",
-          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; worker-src 'self' blob:; manifest-src 'self'"
-        }
-      ]
-    },
-    {
-      "source": "/property/(.*).json",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
-        }
-      ]
-    },
-    {
-      "source": "/property/css/(.*).css",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
-        }
-      ]
-    },
-    {
-      "source": "/property/(.*).html",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
-        }
-      ]
-    },
-    {
-      "source": "/btc.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/leadiq.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/qscore.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    },
-    {
-      "source": "/property/insights/admin.html",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow, noarchive"
-        }
-      ]
-    }
+    {"source":"/(.*)","headers":[
+      {"key":"X-Content-Type-Options","value":"nosniff"},
+      {"key":"X-Frame-Options","value":"SAMEORIGIN"},
+      {"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
+      {"key":"Permissions-Policy","value":"geolocation=(self), camera=(), microphone=()"},
+      {"key":"Strict-Transport-Security","value":"max-age=31536000; includeSubDomains; preload"},
+      {"key":"Content-Security-Policy-Report-Only","value":"default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; worker-src 'self' blob:; manifest-src 'self'"}
+    ]},
+    {"source":"/property/(.*).json","headers":[{"key":"Cache-Control","value":"public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"}]},
+    {"source":"/property/css/(.*).css","headers":[{"key":"Cache-Control","value":"public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"}]},
+    {"source":"/property/(.*).html","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
+    {"source":"/btc.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/leadiq.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/qscore.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/property/insights/admin.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/property/data-workbench.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/property/data-center.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
+    {"source":"/property/growth/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]}
   ]
 }
