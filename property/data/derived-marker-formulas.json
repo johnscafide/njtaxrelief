@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "version": "0.35.0",
+  "version": "0.36.0",
   "principle": "Every proprietary score exposes its component inputs/formula. Scores support prioritization; they are not legal, appraisal, credit, investment, insurance or transaction outcomes.",
   "markers": {
     "watchdog.investor_carry_cost_volatility": {
@@ -497,7 +497,7 @@
     "watchdog.agent.offer_question_density": {
       "range": "score / 100",
       "formula": "count(permit, flood, environmental, title questions)",
-      "professional_reason": "Counts pre-offer diligence questions\u2014not defects or deal outcomes."
+      "professional_reason": "Counts pre-offer diligence questions—not defects or deal outcomes."
     },
     "watchdog.agent.seller_tax_story_stability": {
       "range": "score / 100",
@@ -952,7 +952,7 @@
     "watchdog.njplus.zoning_research_readiness": {
       "range": "score / 100",
       "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
-      "professional_reason": "Measures the completeness of linked public zoning resources\u2014not permitted use."
+      "professional_reason": "Measures the completeness of linked public zoning resources—not permitted use."
     },
     "watchdog.njplus.planning_document_currency": {
       "range": "score / 100",
@@ -982,7 +982,7 @@
     "watchdog.njplus.pilot_forecast_confidence": {
       "range": "score / 100",
       "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
-      "professional_reason": "Shows the completeness of an available public forecast\u2014not a revenue prediction."
+      "professional_reason": "Shows the completeness of an available public forecast—not a revenue prediction."
     },
     "watchdog.njplus.development_incentive_profile": {
       "range": "score / 100",
@@ -1141,7 +1141,7 @@
     },
     "modiv_intel.recent_build_share_pct": {
       "range": "percent",
-      "formula": "Share of parcels with plausible construction year 2020\u20132026.",
+      "formula": "Share of parcels with plausible construction year 2020–2026.",
       "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
     },
     "modiv_intel.median_effective_tax_rate_pct": {
@@ -1168,6 +1168,226 @@
       "range": "currency_per_acre",
       "formula": "Aggregate net assessment divided by aggregate positive reported acreage.",
       "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark."
+    },
+    "watchdog.watchdog_score": {
+      "range": "0-100; higher means stronger overall property intelligence position",
+      "formula": "Available-input normalized composite: 30% tax burden, 20% Chapter 123 assessment fairness, 15% assessment uniformity, 15% revaluation stability, 10% assessment trajectory, and 10% appeal recourse. Missing components are dropped and remaining weights are renormalized."
+    },
+    "watchdog.fairness_score": {
+      "range": "0-100; higher means the current assessment is better supported by independent value evidence",
+      "formula": "Compares assessed value with an independent market-value anchor after applying the municipality common-level ratio and Chapter 123 corridor; values outside the upper corridor reduce the fairness score, with evidence coverage reported separately when inputs are missing."
+    },
+    "watchdog.market_value_estimate": {
+      "range": "Estimated dollars; property-level market-value reference, not an appraisal",
+      "formula": "Assessed value divided by the verified municipal SR-1A sales ratio when a sufficient verified sample is available; otherwise assessed value divided by the latest published equalization ratio; otherwise a stored comparable-sale estimate may be used."
+    },
+    "watchdog.chapter123_position": {
+      "range": "Relative assessment position under the New Jersey Chapter 123 corridor",
+      "formula": "Assessment-to-independent-market-value ratio compared with the municipality common-level ratio and statutory upper limit; the upper limit is normally 115% of the common-level ratio."
+    },
+    "watchdog.effective_tax_rate": {
+      "range": "Percent of estimated market value paid annually in property tax",
+      "formula": "Annual property tax divided by the current independent market-value estimate, multiplied by 100."
+    },
+    "watchdog.chapter123_lower_bound": {
+      "range": "Assessment dollars at the lower Chapter 123 corridor boundary",
+      "formula": "Independent market value multiplied by the municipality lower Chapter 123 ratio boundary."
+    },
+    "watchdog.chapter123_upper_bound": {
+      "range": "Assessment dollars at the upper Chapter 123 corridor boundary",
+      "formula": "Independent market value multiplied by the municipality upper Chapter 123 ratio boundary; where only the common-level ratio is available, the upper boundary is common-level ratio × 1.15."
+    },
+    "watchdog.assessment_drift": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Assessment drift signal"
+    },
+    "watchdog.reassessment_risk": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Reassessment risk score"
+    },
+    "watchdog.improvement_ratio": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Improvement-to-total ratio"
+    },
+    "watchdog.tax_trajectory": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Tax trajectory"
+    },
+    "watchdog.tax_pressure": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Tax pressure score"
+    },
+    "watchdog.town_percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Town percentile"
+    },
+    "watchdog.appeal_odds": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Appeal odds"
+    },
+    "watchdog.true_cost": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. True ownership cost"
+    },
+    "watchdog.closing_cost_estimate": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Buyer closing-cost estimate"
+    },
+    "watchdog.added_omitted_risk": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Added/omitted assessment risk"
+    },
+    "watchdog.abatement_exposure": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Abatement exposure signal"
+    },
+    "watchdog.exempt_pilot_exposure": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Exempt/PILOT exposure signal"
+    },
+    "watchdog.revaluation_risk": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Revaluation radar risk"
+    },
+    "watchdog.investor_screen": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Investor screen score"
+    },
+    "uniformity.score": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Uniformity score"
+    },
+    "uniformity.percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Uniformity percentile"
+    },
+    "uniformity.volatility": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Uniformity volatility"
+    },
+    "budget.structural_imbalance": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Structural budget imbalance"
+    },
+    "budget.structural_imbalance_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Structural imbalance share"
+    },
+    "budget.levy_base_gap": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Levy/base growth gap"
+    },
+    "budget.pressure_score": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Municipal budget-pressure score"
+    },
+    "budget.pressure_band": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Municipal budget-pressure band"
+    },
+    "exemption.exempt_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Exempt share of assessed base"
+    },
+    "exemption.pilot_value_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. PILOT value share"
+    },
+    "exemption.partial_relief_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Partial relief share"
+    },
+    "exemption.municipal_subsidy": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Municipal tax-base subsidy estimate"
+    },
+    "exemption.subsidy_budget_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Subsidy share of municipal budget"
+    },
+    "exemption.tax_if_conventional": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Tax if conventionally taxable"
+    },
+    "exemption.exempt_percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Exempt-share percentile"
+    },
+    "exemption.pilot_percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. PILOT-share percentile"
+    },
+    "exemption.subsidy_percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Subsidy percentile"
+    },
+    "abatement.abated_share": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Abated share"
+    },
+    "abatement.percentile": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Abatement percentile"
+    },
+    "abatement.vs_median": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Abatement vs statewide median"
+    },
+    "watchdog.escrow_scenario_tax": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Scenario annual tax"
+    },
+    "watchdog.escrow_monthly_delta": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Scenario monthly escrow delta"
+    },
+    "watchdog.escrow_reserve_12m": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. 12-month escrow-shock reserve"
+    },
+    "watchdog.escrow_shock_band": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Escrow-shock band"
+    },
+    "watchdog.lien_search_completion": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Municipal search completion"
+    },
+    "watchdog.lien_open_items": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Open municipal-search items"
+    },
+    "watchdog.lien_issue_count": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Municipal-search issue count"
+    },
+    "watchdog.constraint_stack_count": {
+      "range": "Derived property-intelligence metric; interpretation follows the marker description",
+      "formula": "Derived from the cited authoritative inputs for this marker. Development-constraint stack count"
+    },
+    "watchdog.building_age_years": {
+      "range": "years",
+      "formula": "Derived from the cited authoritative inputs for this marker. Years since the year of construction on the MOD-IV record."
+    },
+    "watchdog.years_since_last_sale": {
+      "range": "years",
+      "formula": "Derived from the cited authoritative inputs for this marker. Years since the recorded deed date on the MOD-IV record."
+    },
+    "watchdog.tax_to_assessment_rate": {
+      "range": "percent",
+      "formula": "Derived from the cited authoritative inputs for this marker. Last year's tax divided by total assessment, expressed as a percent. The parcel's own effective rate."
+    },
+    "watchdog.land_share_pct": {
+      "range": "percent",
+      "formula": "Derived from the cited authoritative inputs for this marker. Land value as a percent of total assessment. Land is hard to contest, so a high share narrows what an appeal can argue."
+    },
+    "watchdog.improvement_share_pct": {
+      "range": "percent",
+      "formula": "Derived from the cited authoritative inputs for this marker. Improvement value as a percent of total assessment. This is the figure an appeal actually argues."
+    },
+    "watchdog.assessment_per_acre": {
+      "range": "currency",
+      "formula": "Derived from the cited authoritative inputs for this marker. Total assessment divided by calculated acreage."
     }
   }
 }

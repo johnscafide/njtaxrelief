@@ -7,7 +7,6 @@
   var SB_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var SB_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var client = null;
-  var scoreMap = Object.create(null);
   var hiddenPins = Object.create(null);
   var townRows = [];
   var townScores = [];
@@ -15,7 +14,7 @@
   var seoBusy = false;
   var seoCacheKey = '';
   var footerPlaceholder = null;
-  var filters = { aMin: '', aMax: '', tMin: '', tMax: '', sMin: '', sMax: '', sort: 'default' };
+  var filters = { aMin: '', aMax: '', tMin: '', tMax: '', sort: 'default' };
 
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -62,7 +61,6 @@
     document.querySelectorAll('.njw-card-menu.open').forEach(function (p) { p.classList.remove('open'); });
   }
   function rangeControl(key, label, prefix, min, max, step) {
-    var isScore = key === 's';
     return '<div class="njw-filter-wrap">' +
       '<button class="njw-filter-btn" type="button" data-range-toggle="' + key + '">' + esc(label) + ' <i class="fas fa-chevron-down"></i></button>' +
       '<div class="njw-range-panel" data-range-panel="' + key + '">' +
@@ -72,7 +70,6 @@
           '<em>–</em>' +
           '<label><span>Max</span><div>' + (prefix ? '<b>' + prefix + '</b>' : '') + '<input inputmode="numeric" type="number" min="' + min + '" max="' + max + '" step="' + step + '" data-range-max="' + key + '" placeholder="No max"></div></label>' +
         '</div>' +
-        (isScore ? '<div class="njw-score-scale"><span>0</span><i></i><span>100</span></div>' : '') +
         '<div class="njw-range-actions"><button type="button" data-range-clear="' + key + '">Clear</button><button class="apply" type="button" data-range-apply="' + key + '">Apply</button></div>' +
       '</div></div>';
   }
@@ -90,11 +87,9 @@
       '<div class="njw-search-slot"></div>' +
       rangeControl('a', 'Assessment', '$', 0, 10000000, 10000) +
       rangeControl('t', 'Tax Amount', '$', 0, 100000, 500) +
-      rangeControl('s', 'Watchdog Score', '', 0, 100, 1) +
       '<label class="njw-sort"><span>Sort</span><select id="njw-sort-select">' +
         '<option value="default">Recommended</option><option value="assessmentHigh">Assessment: high to low</option><option value="assessmentLow">Assessment: low to high</option>' +
         '<option value="taxHigh">Tax: high to low</option><option value="taxLow">Tax: low to high</option>' +
-        '<option value="scoreHigh">Watchdog Score: high to low</option><option value="scoreLow">Watchdog Score: low to high</option>' +
       '</select></label>' +
       '<div class="njw-save-slot"></div>';
     hood.insertBefore(bar, split);
@@ -149,9 +144,7 @@
       if (/tax/i.test(s.textContent)) { tax = parseMoney(s.textContent); return true; }
       return false;
     });
-    var pin = pinOf(card);
-    var score = scoreMap[pin] == null ? null : +scoreMap[pin];
-    return { pin: pin, assessed: assessed, tax: tax, score: score };
+    return { pin: pinOf(card), assessed: assessed, tax: tax };
   }
   function visibleByFilters(d) {
     if (hiddenPins[d.pin]) return false;
@@ -159,8 +152,6 @@
     if (filters.aMax !== '' && (d.assessed == null || d.assessed > filters.aMax)) return false;
     if (filters.tMin !== '' && (d.tax == null || d.tax < filters.tMin)) return false;
     if (filters.tMax !== '' && (d.tax == null || d.tax > filters.tMax)) return false;
-    if (filters.sMin !== '' && (d.score == null || d.score < filters.sMin)) return false;
-    if (filters.sMax !== '' && (d.score == null || d.score > filters.sMax)) return false;
     return true;
   }
   function applyCardFilters() {
@@ -176,9 +167,7 @@
       assessmentHigh: function (a,b) { return (cardData(b).assessed || -1) - (cardData(a).assessed || -1); },
       assessmentLow: function (a,b) { return (cardData(a).assessed || Infinity) - (cardData(b).assessed || Infinity); },
       taxHigh: function (a,b) { return (cardData(b).tax || -1) - (cardData(a).tax || -1); },
-      taxLow: function (a,b) { return (cardData(a).tax || Infinity) - (cardData(b).tax || Infinity); },
-      scoreHigh: function (a,b) { return (cardData(b).score == null ? -1 : cardData(b).score) - (cardData(a).score == null ? -1 : cardData(a).score); },
-      scoreLow: function (a,b) { return (cardData(a).score == null ? Infinity : cardData(a).score) - (cardData(b).score == null ? Infinity : cardData(b).score); }
+      taxLow: function (a,b) { return (cardData(a).tax || Infinity) - (cardData(b).tax || Infinity); }
     }[filters.sort];
     if (!fn) return;
     var desired = cards.slice().sort(fn);
@@ -195,15 +184,10 @@
     var html = '<strong>' + n.toLocaleString() + ' properties</strong>';
     if (count.innerHTML !== html) count.innerHTML = html;
   }
-  function paintScores(cards) {
+  function clearStaleScores(cards) {
     cards.forEach(function (card) {
-      var pin = pinOf(card), score = scoreMap[pin];
-      card.dataset.watchdogScore = score == null ? '' : score;
-      // Visible score line is owned by search-corrections-v3.js. Writing it
-      // here too caused a flicker/overwrite race between the two scripts,
-      // where this file's slower fetch would blank out a good number v3
-      // had just painted. This file still tracks scoreMap internally so the
-      // Watchdog Score filter and sort options keep working.
+      card.removeAttribute('data-watchdog-score');
+      if (card.dataset) delete card.dataset.watchdogScore;
     });
   }
   function hydrateCards() {
@@ -211,15 +195,9 @@
     if (!host) return;
     var cards = Array.prototype.slice.call(host.querySelectorAll('.hd-card'));
     if (!cards.length) return;
-    cards.forEach(enhanceCard); paintScores(cards);
-    var pins = cards.map(pinOf).filter(Boolean);
-    var missing = pins.filter(function (pin) { return !Object.prototype.hasOwnProperty.call(scoreMap, pin); });
-    if (!missing.length || !sb()) { applyCardFilters(); return; }
-    missing.forEach(function (pin) { scoreMap[pin] = null; });
-    sb().rpc('get_public_property_watchdog_scores', { p_pins: missing }).then(function (r) {
-      if (!r.error) (r.data || []).forEach(function (x) { scoreMap[x.pams_pin] = +x.watchdog_score; });
-      paintScores(cards); applyCardFilters();
-    }).catch(function () { applyCardFilters(); });
+    cards.forEach(enhanceCard);
+    clearStaleScores(cards);
+    applyCardFilters();
   }
   function enhanceCard(card) {
     if (card.dataset.njwPolished === '1') return;

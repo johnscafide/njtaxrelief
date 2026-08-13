@@ -7,3 +7,14 @@
 @import url("/property/css/lookup/07-search-corrections.css");
 @import url("/property/css/lookup/08-search-corrections-v2.css");
 @import url("/property/css/lookup/09-search-corrections-v3.css");
+
+
+/* NJW-101 main search input focus normalization */
+.pl-input:focus,
+#pl-addr:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.pl-input-wrap:focus-within {
+  outline: none !important;
+}
