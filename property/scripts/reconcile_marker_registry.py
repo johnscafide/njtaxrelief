@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reconcile marker catalog status against actual provider capability."""
+"""Reconcile marker catalog status against actual provider capability and year coverage."""
 from __future__ import annotations
 import argparse, json, re
 from collections import Counter
@@ -7,6 +7,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]; DATA=ROOT/'property'/'data'
 REGISTRY=DATA/'marker-registry.json'; SOURCE_REGISTRY=DATA/'source-registry.json'; REPORT=DATA/'marker-reconciliation.json'
+TAX_RATES=ROOT/'property'/'tax-rates.json'; UNIFORMITY=ROOT/'property'/'uniformity.json'
 HYDRATE=ROOT/'supabase'/'functions'/'workbench-hydrate'/'index.ts'; REFRESH=ROOT/'supabase'/'functions'/'workbench-refresh'/'index.ts'; SCORE=ROOT/'supabase'/'functions'/'workbench-score'/'index.ts'
 DIRECT={'nj-parcels-modiv','nj-sr1a','nj-cod','nj-dca-budget','nj-tax-court-appeals'}; RUNTIME={'njdep-dca-live'}
 COMPUTED={'watchdog-models','watchdog-professional','watchdog-professional-v030','watchdog-institutional','watchdog-statewide-intelligence','watchdog-models-v035'}
@@ -23,9 +24,28 @@ def implemented_scores():
     for p in (HYDRATE,REFRESH,SCORE):
         if p.exists(): out.update(re.findall(r"['\"]((?:watchdog|uniformity)\.[A-Za-z0-9_.-]+)['\"]",p.read_text(encoding='utf-8')))
     return out
-def classify(m,direct,scores):
+def covered_tax_years(minimum=500):
+    if not TAX_RATES.exists(): return set()
+    rates=load(TAX_RATES).get('rates',{}); counts=Counter()
+    for history in rates.values():
+        if isinstance(history,dict): counts.update(str(y) for y,v in history.items() if v is not None)
+    return {y for y,n in counts.items() if n>=minimum}
+def covered_cod_years(minimum=500):
+    if not UNIFORMITY.exists(): return set()
+    districts=load(UNIFORMITY).get('districts',{}); counts=Counter()
+    for row in districts.values():
+        series=row.get('series',{}) if isinstance(row,dict) else {}
+        counts.update(str(y) for y,v in series.items() if v is not None)
+    return {y for y,n in counts.items() if n>=minimum}
+def classify(m,direct,scores,tax_years,cod_years):
     mid=str(m.get('id') or ''); src=str(m.get('source_id') or ''); origin=str(m.get('origin') or '')
     if mid in scores: return 'computed','server score/provider implementation detected'
+    mt=re.fullmatch(r'tax\.rate_(\d{4})',mid)
+    if src=='nj-division-taxation' and mt:
+        return ('live',f'general tax rate has statewide coverage for {mt.group(1)}') if mt.group(1) in tax_years else ('cataloged',f'no verified statewide general-tax-rate coverage for {mt.group(1)}')
+    mc=re.fullmatch(r'uniformity\.cod_(\d{4})',mid)
+    if src=='nj-cod' and mc:
+        return ('live',f'official COD series has statewide coverage for {mc.group(1)}') if mc.group(1) in cod_years else ('cataloged',f'current authoritative COD source does not provide statewide {mc.group(1)} coverage')
     if src in direct: return 'live','direct server provider family detected'
     if src in RUNTIME: return 'live','dedicated runtime provider family'
     if mid.startswith('njplus.'): return 'cataloged','activation-gated source pack; catalog inclusion is not live coverage'
@@ -34,16 +54,16 @@ def classify(m,direct,scores):
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--write',action='store_true'); args=ap.parse_args()
     reg=load(REGISTRY); src_reg=load(SOURCE_REGISTRY); markers=reg.get('markers',[]); ids=[str(m.get('id') or '') for m in markers]
-    duplicates=sorted(k for k,v in Counter(ids).items() if k and v>1); direct=providers(); scores=implemented_scores(); governed={str(x.get('id')) for x in src_reg.get('datasets',[]) if x.get('id')}
+    duplicates=sorted(k for k,v in Counter(ids).items() if k and v>1); direct=providers(); scores=implemented_scores(); tax_years=covered_tax_years(); cod_years=covered_cod_years(); governed={str(x.get('id')) for x in src_reg.get('datasets',[]) if x.get('id')}
     counts=Counter(); rows=[]; ungoverned=set()
     for m in markers:
-        status,reason=classify(m,direct,scores); source=str(m.get('source_id') or ''); counts[status]+=1
+        status,reason=classify(m,direct,scores,tax_years,cod_years); source=str(m.get('source_id') or ''); counts[status]+=1
         if source and source not in governed and source not in direct and source not in RUNTIME and source not in COMPUTED: ungoverned.add(source)
         rows.append({'id':m.get('id'),'source_id':source,'previous_status':m.get('status'),'reconciled_status':status,'reason':reason})
         if args.write: m['status']=status; m['status_reason']=reason
-    now=datetime.now(timezone.utc).isoformat(); summary={'markers':len(markers),'duplicates':len(duplicates),'by_status':dict(sorted(counts.items())),'direct_provider_families':sorted(direct),'score_marker_implementations_detected':len(scores),'ungoverned_source_aliases':len(ungoverned)}
-    REPORT.write_text(json.dumps({'schema_version':1,'generated_at':now,'summary':summary,'duplicates':duplicates,'ungoverned_source_aliases':sorted(ungoverned),'markers':rows},indent=2)+'\n',encoding='utf-8')
+    now=datetime.now(timezone.utc).isoformat(); summary={'markers':len(markers),'duplicates':len(duplicates),'by_status':dict(sorted(counts.items())),'direct_provider_families':sorted(direct),'tax_rate_years_live':sorted(tax_years),'cod_years_live':sorted(cod_years),'score_marker_implementations_detected':len(scores),'ungoverned_source_aliases':len(ungoverned)}
+    REPORT.write_text(json.dumps({'schema_version':2,'generated_at':now,'summary':summary,'duplicates':duplicates,'ungoverned_source_aliases':sorted(ungoverned),'markers':rows},indent=2)+'\n',encoding='utf-8')
     if args.write:
-        reg.setdefault('summary',{})['by_status']=dict(sorted(counts.items())); reg['reconciled_at']=now; reg['status_contract']='live = verified provider family; computed = verified implementation; cataloged = definition/source metadata without verified live provider'; REGISTRY.write_text(json.dumps(reg,indent=2)+'\n',encoding='utf-8')
+        reg.setdefault('summary',{})['by_status']=dict(sorted(counts.items())); reg['reconciled_at']=now; reg['status_contract']='live = verified provider plus required year coverage; computed = verified implementation; cataloged = definition/source metadata without verified live coverage'; REGISTRY.write_text(json.dumps(reg,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(summary,indent=2)); return 1 if duplicates else 0
 if __name__=='__main__': raise SystemExit(main())
