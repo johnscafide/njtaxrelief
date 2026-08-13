@@ -14,7 +14,7 @@ Deno.serve(async(req)=>{
  let props:any={};if(b.properties&&typeof b.properties==='object'&&!Array.isArray(b.properties)){for(const [k,v] of Object.entries(b.properties))if(PROPERTY_KEYS.has(k))props[k]=s(v,100)}
  const row={event_name:b.event_name,visitor_id:b.visitor_id,session_id:b.session_id,path:s(b.path,240),tool:s(b.tool,80),referrer_host:s(b.referrer_host,120),utm_source:s(b.utm_source,80),utm_medium:s(b.utm_medium,80),utm_campaign:s(b.utm_campaign,120),utm_content:s(b.utm_content,120),utm_term:s(b.utm_term,120),properties:props};
  const url=Deno.env.get('SUPABASE_URL'),key=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');if(!url||!key)return new Response('{"error":"server_config"}',{status:500,headers:cors(origin)});
- const r=await fetch(url+'/rest/v1/product_events',{method:'POST',headers:{apikey:key,Authorization:'Bearer '+key,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)});
+ const r=await fetch(url+'/rest/v1/watchdog_product_events',{method:'POST',headers:{apikey:key,Authorization:'Bearer '+key,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)});
  if(!r.ok){console.error('product analytics insert failed',r.status,await r.text());return new Response('{"error":"insert_failed"}',{status:500,headers:cors(origin)})}
  return new Response('{"ok":true}',{status:202,headers:cors(origin)});
 });
