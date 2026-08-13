@@ -1,1 +1,1607 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NJ Property Tax Lookup | Assessment, Tax Bill, Block and Lot by Address</title>
+  <meta name="description" content="Free NJ property tax lookup. Any New Jersey address returns the assessed value, last year's tax bill, block and lot, aerial view, lot lines, tax history chart, and a seller net proceeds calculator. No signup.">
+  <meta name="keywords" content="NJ property tax lookup, New Jersey property tax records, property assessment lookup NJ, block and lot search NJ, MOD-IV records, NJ tax assessment search, how much are my property taxes NJ, NJ seller net proceeds calculator, NJ realty transfer fee">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <meta name="author" content="Watchdog Property Intelligence">
+  <link rel="canonical" href="https://njpropertytaxrelief.com/property/">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="geo.region" content="US-NJ">
+  <meta name="geo.placename" content="New Jersey">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://njpropertytaxrelief.com/property/">
+  <meta property="og:site_name" content="NJ Property Tax Relief Guide">
+  <meta property="og:title" content="NJ Property Tax Lookup | Any Address, Instantly">
+  <meta property="og:description" content="Assessed value, tax bill, lot lines, tax history, and net proceeds for any New Jersey address. Free, no signup.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@thetaxwatchdog">
+  <meta name="twitter:creator" content="@thetaxwatchdog">
+  <meta name="twitter:title" content="NJ Property Tax Lookup | Any Address, Instantly">
+  <meta name="twitter:description" content="Assessed value, tax bill, lot lines, tax history, and net proceeds for any New Jersey address. Free, no signup.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="/styles.css">
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/lookup.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://njpropertytaxrelief.com/property/#app",
+      "name": "NJ Property Tax Lookup",
+      "url": "https://njpropertytaxrelief.com/property/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "description": "Free lookup tool returning assessed value, prior year tax bill, block and lot, aerial imagery, parcel boundaries, tax history, and a seller net proceeds estimate for any New Jersey property, using official state assessment records.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "areaServed": { "@type": "State", "name": "New Jersey" },
+      "featureList": ["Property tax lookup by address", "Assessed value breakdown", "Parcel boundary map", "Tax history chart", "Seller net proceeds calculator", "NJ realty transfer fee calculator"],
+      "provider": {
+        "@type": "Organization",
+        "name": "Watchdog Property Intelligence",
+        "url": "https://njpropertytaxrelief.com/property/",
+        "areaServed": { "@type": "State", "name": "New Jersey" }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Where does this property tax data come from?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It comes from the New Jersey Office of GIS statewide parcel layer, joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the same system municipal tax assessors use. The data is refreshed once a year, typically in late spring or early summer." } },
+        { "@type": "Question", "name": "Does this show whether a home is for sale?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Live listing status in New Jersey comes from the MLS, which is a licensed feed and not public data. This tool reads public assessment records only. It can show when a deed was recorded recently, meaning the property changed hands, but it cannot tell you whether a home is currently listed for sale. For that, contact a licensed agent with MLS access." } },
+        { "@type": "Question", "name": "Why is the owner name blank?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Owner names are removed from the public version of this data under Daniel's Law, New Jersey legislation restricting public disclosure of certain personal information. Property details and tax figures remain public." } },
+        { "@type": "Question", "name": "Is the tax amount shown my current bill?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The figure shown is the prior year billed amount from the most recent published assessment file. Your current year bill will differ because municipal tax rates are set annually. Use it as a reliable ballpark, not an exact current figure." } },
+        { "@type": "Question", "name": "What is the difference between assessed value and market value in New Jersey?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Assessed value is the figure your municipality uses to calculate your tax bill. Market value is what the home would sell for today. They are linked by the municipal equalization ratio. Dividing your assessment by that ratio gives the market value your town is implying. If your home would realistically sell for less than that number, you may have grounds for a tax appeal." } },
+        { "@type": "Question", "name": "Can I appeal my New Jersey property tax assessment?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. New Jersey property owners can appeal their assessment to the county board of taxation, generally by April 1, or by May 1 in a municipality that went through a revaluation or reassessment. Under the Chapter 123 rule an assessment is upheld if it falls within 15 percent above the ratio applied to true market value, so an appeal succeeds when credible comparable sales place market value meaningfully below what the assessment implies." } },
+        { "@type": "Question", "name": "Who pays the realty transfer fee when selling a home in New Jersey?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The seller pays the general realty transfer fee at closing, calculated on a graduated schedule based on the sale price. For contracts fully executed on or after July 10, 2025, residential sales over one million dollars also carry a graduated percent fee that is now paid by the seller rather than the buyer, and it applies to the entire sale price rather than only the amount above one million. Sellers who are 62 or older, blind, or permanently disabled may qualify for a partial exemption using Form RTF-1." } },
+        { "@type": "Question", "name": "What are block and lot numbers?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Block and lot are how New Jersey municipalities identify individual parcels of land on the official tax map. They are needed for tax appeals, deed searches, permit applications, and title work. A qualifier code is added for condominium units and certain subdivided properties." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://njpropertytaxrelief.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Property Tax Lookup", "item": "https://njpropertytaxrelief.com/property/" }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<!-- SITE NAV -->
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </button>
+
+    <a class="wd-logo" href="/property/">
+      <i class="fas fa-dog"></i><span>Watchdog</span>
+    </a>
+
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+      <i class="fas fa-user"></i><span>Sign in</span>
+    </button>
+  </div>
+</header>
+
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation">
+  <div class="wd-public-sheet-head"><b><i class="fas fa-dog"></i> Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close menu"><i class="fas fa-xmark"></i></button></div>
+  <div class="wd-public-section"><span class="wd-public-label">Property intelligence</span>
+    <a class="wd-public-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My properties</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/home.html"><i class="fas fa-heart"></i><span>Watchlist</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/town-compare.html"><i class="fas fa-route"></i><span>Compare towns</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+  <div class="wd-public-section"><span class="wd-public-label">Tax relief &amp; research</span>
+    <a class="wd-public-link" href="/anchor-estimator.html"><i class="fas fa-hand-holding-dollar"></i><span>ANCHOR &amp; Stay NJ estimator</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/fairness.html"><i class="fas fa-scale-balanced"></i><span>Assessment fairness</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/data-methodology.html"><i class="fas fa-book-open"></i><span>Data methodology</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+  <div class="wd-public-section"><span class="wd-public-label">Watchdog</span>
+    <a class="wd-public-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Professional intelligence</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/pro.html#plans"><i class="fas fa-tags"></i><span>Plans &amp; pricing</span><i class="fas fa-chevron-right"></i></a>
+    <a class="wd-public-link" href="/property/updates.html"><i class="fas fa-clock-rotate-left"></i><span>What's new</span><i class="fas fa-chevron-right"></i></a>
+  </div>
+</aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
+
+<div class="pl-toast" id="pl-toast"></div>
+
+<!-- ============================================================
+     MODAL OVERLAY
+     ============================================================ -->
+<div class="plm-backdrop" id="plm-backdrop" onclick="plCloseModal()"></div>
+<div class="plm" id="plm" role="dialog" aria-modal="true" aria-label="Property details">
+  <div class="plm-bar">
+    <button class="plm-back" onclick="plCloseModal()"><i class="fas fa-chevron-left"></i> Back to search</button>
+    <div class="plm-bar-actions">
+      <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()"><i class="far fa-heart"></i><span>Save</span></button>
+      <button class="plm-barbtn" onclick="plShare()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+      <button class="plm-barbtn" id="pl-authbtn" onclick="plSignInPrompt()" title="Sign in"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button>
+      <button class="plm-barbtn" onclick="plMenu(event)"><i class="fas fa-ellipsis"></i><span>More</span></button>
+      <div class="plm-menu" id="plm-menu">
+        <button onclick="plOpenForm('sell')"><i class="fas fa-sign-hanging"></i> Sell this home</button>
+        <button onclick="plOpenForm('value')"><i class="fas fa-house-chimney-medical"></i> What is it worth today?</button>
+        <button onclick="plOpenForm('buy')"><i class="fas fa-key"></i> Buy a home like this</button>
+        <button onclick="plOpenForm('offer')"><i class="fas fa-file-signature"></i> Make an offer</button>
+        <button onclick="plOpenForm('track')"><i class="fas fa-bell"></i> Track this home</button>
+        <hr>
+        <button onclick="plSaveTo('home')"><i class="fas fa-house-chimney"></i> Claim as my home</button>
+        <button onclick="plSaveTo('watch')"><i class="fas fa-eye"></i> Add to watchlist</button>
+        <a href="/property/dashboard.html"><i class="fas fa-table-columns"></i> My dashboard</a>
+        <hr>
+        <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
+        <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
+        <a href="/anchor-estimator.html"><i class="fas fa-piggy-bank"></i> Check ANCHOR and Stay NJ</a>
+        <a href="/property-tax-appeal.html"><i class="fas fa-book-open"></i> How NJ appeals work</a>
+        <hr>
+        <button onclick="plCopy()"><i class="fas fa-link"></i> Copy link</button>
+        <button onclick="plDirections()"><i class="fas fa-diamond-turn-right"></i> Driving directions</button>
+        <button onclick="window.print()"><i class="fas fa-print"></i> Print this report</button>
+      </div>
+    </div>
+  </div>
+  <div id="secnav-mount"></div>
+  <div class="plm-note-overlay" id="plm-note-overlay" onclick="if(event.target===this)plCloseNote()"></div>
+  <div class="plm-scroll" id="plm-scroll">
+    <div class="plm-photos" id="plm-photos"></div>
+    <div class="plm-body">
+      <div class="plm-main">
+        <div id="plm-head"></div>
+        <div id="plm-main"></div>
+      </div>
+      <div class="plm-rail" id="plm-rail"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+
+<!-- STICKY SEARCH -->
+<div class="ssearch" id="ssearch">
+  <div class="ssearch-in">
+    <button class="wd-public-trigger ssearch-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu"><i class="fas fa-bars"></i><span>Menu</span></button>
+    <a class="ssearch-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <div class="ssearch-pill">
+      <button class="ssearch-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+      <input id="ss-addr" type="text" autocomplete="off" placeholder="Enter a New Jersey address"
+             onkeydown="if(event.key==='Enter')ssGo()">
+      <button class="ssearch-go" onclick="ssGo()" title="Search" aria-label="Search">
+        <i class="fas fa-magnifying-glass"></i>
+      </button>
+    </div>
+    <button class="wd-public-trigger wd-public-profile ssearch-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu"><i class="fas fa-user"></i><span>Account</span></button>
+  </div>
+</div>
+
+<div class="pl-hero">
+  <div class="pl-hero-bg"></div>
+  <div class="pl-hero-wash"></div>
+  <div class="pl-hero-inner">
+    <h1>Check Property Data on <br><span class="pl-type" id="pl-type">any NJ home</span></h1>
+    
+    <div class="pl-search-card">
+      <div class="pl-search-row">
+        <div class="pl-input-wrap">
+          <!-- Left: Geolocation Icon Button -->
+          <button class="pl-geo" id="pl-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
+            <i class="fas fa-paper-plane"></i> <!-- Changed to paper-plane to match screenshot arrow icon -->
+          </button>
+
+          <!-- Middle: Text Input -->
+          <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
+                 placeholder="123 Main Street, Williamstown, NJ 08094"
+                 onkeydown="if(event.key==='Enter')plLookup()">
+
+          <!-- Right: Search Icon Button -->
+          <button class="pl-search-btn" id="pl-btn" onclick="plLookup()" title="Search" aria-label="Search">
+            <i class="fas fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATUS STRIP -->
+<!--<section class="section" style="padding-top:20px;padding-bottom:10px;">
+  <div class="section-inner">
+    <div id="pl-inline" class="pl-result">
+      <div class="pl-state">
+        <i class="fas fa-house-chimney"></i>
+        <div class="pl-state-title">Enter an address above to begin</div>
+        <div class="pl-state-sub">Assessment, tax bill, block and lot, aerial view with real lot lines, tax history, and a net proceeds estimate.</div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- TOOLS GRID -->
+<section class="section" style="padding-top:50px;padding-bottom:18px;">
+  <div class="section-inner">
+    <div class="lp-tools">
+
+      <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=1400&auto=format&fit=crop')">
+          <span class="lp-tag gold">Most popular</span>
+          <div class="lp-over">
+            <h3>Look up any address</h3>
+            <p>Assessment, tax bill, block and lot, real lot lines, and our read on whether that assessment holds up.</p>
+            <span class="lp-go light">Search a property <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="/anchor-estimator.html">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <span class="lp-tag green right">Up to $6,500</span>
+        </div>
+        <div class="lp-body">
+          <h3>ANCHOR &amp; Stay NJ estimator</h3>
+          <p>$1,500 for homeowners, $700 for renters, $6,500 for seniors. Most who qualify never claim it.</p>
+          <span class="lp-go">Check eligibility <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo short audit" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-60')">
+          <span class="lp-tag">Chapter 123</span>
+          <i class="fas fa-scale-unbalanced-flip lp-ghost"></i>
+        </div>
+        <div class="lp-body">
+          <h3>Appeal screener</h3>
+          <p>We audit your assessment against comparable homes and your own sale history, the way a county board decides it.</p>
+          <span class="lp-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="/property/fairness.html">
+        <div class="lp-photo short audit"><i class="fas fa-ranking-star lp-ghost"></i></div>
+        <div class="lp-body"><h3>NJ Fairness Index</h3><p>See how consistently every New Jersey municipality assesses its residential properties.</p>
+          <span class="lp-go">Explore statewide rankings <i class="fas fa-arrow-right"></i></span></div>
+      </a>
+
+      <a class="lp-tool" href="/property/town-compare.html">
+        <div class="lp-photo short"><i class="fas fa-code-compare lp-ghost"></i></div>
+        <div class="lp-body"><h3>Compare municipalities</h3><p>Put fairness, assessment currency and tax-rate direction side by side for up to four towns.</p>
+          <span class="lp-go">Compare towns <i class="fas fa-arrow-right"></i></span></div>
+      </a>
+
+      <a class="lp-tool span3" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo band" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1600&auto=format&fit=crop')">
+          <span class="lp-tag right">Sellers</span>
+          <div class="lp-over band-over">
+            <h3>Net proceeds &amp; trade-up</h3>
+            <p>What you walk away with after commission and the NJ transfer fee, and what the tax bill looks like in the town you are moving to.</p>
+            <span class="lp-go light">Run the numbers <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="/property/dashboard.html">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <!-- <span class="lp-tag green">Free account</span> -->
+        </div>
+        <div class="lp-body">
+          <h3>Track your home</h3>
+          <p>Claim your property and watch the assessment year over year. We flag it the moment it drifts out of line.</p>
+          <span class="lp-go">Open my dashboard <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+
+      <a class="lp-tool" href="/property-tax-appeal.html">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-45')">
+          <!-- <span class="lp-tag">Guide</span> -->
+        </div>
+        <div class="lp-body">
+          <h3>How NJ appeals work</h3>
+          <p>Deadlines, the Chapter 123 test, what evidence a county board actually wants, and when not to bother filing.</p>
+          <span class="lp-go">Read the guide <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-25')">
+          <!-- <span class="lp-tag">168 towns</span> -->
+        </div>
+        <div class="lp-body">
+          <h3>Compare your town</h3>
+          <p>Effective tax rate, equalization ratio, and median assessment for every municipality in South Jersey, side by side.</p>
+          <span class="lp-go">Compare towns <i class="fas fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- NEIGHBORHOOD VIEW -->
+<div class="pl-hood" id="pl-hood"></div>
+
+<!-- BROKERAGE ATTRIBUTION -->
+<section class="section" style="padding-top:30px;padding-bottom:6px;">
+  <div class="section-inner">
+    <div class="pl-brokerband">
+      <img src="/opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
+      <div class="pl-brokerband-txt">
+        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
+        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
+        For full sales information on this and other properties, visit
+        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">opuselitesj.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+ 
+<!-- WHO IT HELPS -->
+<section class="section" style="padding-top:46px;">
+  <div class="section-inner">
+    <h2 class="lp-h2">Where do you fit?</h2>
+    <div class="lp-paths">
+      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <div class="lp-over">
+            <h3>I think I'm overpaying</h3>
+            <p>Test your assessment against comparable homes and what you paid. </p>
+            <span class="lp-go light">Check my assessment <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <div class="lp-over">
+            <h3>I might sell</h3>
+            <span class="lp-go light">Run my numbers <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+      <a class="lp-path" href="/anchor-estimator.html">
+        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=74&w=900&auto=format&fit=crop')">
+          <span class="lp-tag green">65+</span>
+          <div class="lp-over">
+            <h3>I'm 65 or older</h3>
+            <p>Stay NJ can cover up to half your bill, to $6,500, and it stacks with ANCHOR and the Senior Freeze.</p>
+            <span class="lp-go light">See senior benefits <i class="fas fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="section-inner">
+    <!-- <h2 class="lp-h2">How it works</h2> -->
+    <div class="lp-steps">
+      <div class="lp-step">
+        <div class="lp-step-n">1</div>
+        <h3>Type an address</h3>
+        <p>Any property in New Jersey. Yours, your parents', the one down the street. No account needed to look.</p>
+      </div>
+      <div class="lp-step">
+        <div class="lp-step-n">2</div>
+        <h3>See the real record</h3>
+        <p>Assessment, tax bill, lot lines, sale history, and how it compares to the homes around it. Straight from state records.</p>
+      </div>
+      <div class="lp-step">
+        <div class="lp-step-n">3</div>
+        <h3>Find out if you have a case</h3>
+        <p>We apply the same Chapter 123 test a county board uses. If it's worth appealing, I'll tell you what it's worth in dollars.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE VALUE -->
+<section class="section section-alt">
+  <div class="section-inner">
+<h2 class="lp-h2">How we value your home</h2>
+
+    <div class="hv-grid">
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v1">
+          <div class="hv-bar-row"><span class="hv-bar-lbl">Market value</span><div class="hv-bar"><i style="width:100%"></i></div><b>$385k</b></div>
+          <div class="hv-bar-row"><span class="hv-bar-lbl">Assessed</span><div class="hv-bar"><i class="alt" style="width:58%"></i></div><b>$223k</b></div>
+          <div class="hv-ratio">58% ratio</div>
+        </div>
+        <div class="hv-body">
+          <h3>Equalized Assessments</h3>
+          <p>Since most NJ towns don't assess at full market value, we apply the state’s equalization ratio to reveal your home's true implied value.</p>
+        </div>
+      </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v2">
+          <div class="hv-sales">
+            <div class="hv-sale"><span>328 Elm St</span><b>$405,000</b></div>
+            <div class="hv-sale"><span>105 Rutgers Dr</span><b>$397,900</b></div>
+            <div class="hv-sale muted"><span>84 Pine Rd</span><b>$1 &nbsp;<i>family transfer</i></b></div>
+          </div>
+          <!-- <div class="hv-strike">filtered out</div> -->
+        </div>
+        <div class="hv-body">
+          <h3>Verified Real Sales</h3>
+          <p>We use actual recorded deeds, strictly filtering out distorted data like dollar deeds, estate transfers, and distressed sales.</p>
+        </div>
+      </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v3">
+          <svg viewBox="0 0 200 96" role="img" aria-label="Prices carried forward to today">
+            <defs><linearGradient id="hvg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#b8972a" stop-opacity=".38"/><stop offset="100%" stop-color="#b8972a" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M10 78 L60 66 L110 48 L160 26 L190 18 L190 88 L10 88 Z" fill="url(#hvg)"/>
+            <path d="M10 78 L60 66 L110 48 L160 26 L190 18" fill="none" stroke="#b8972a" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="190" cy="18" r="5" fill="#0e2248" stroke="#fff" stroke-width="2.5"/>
+            <text x="10" y="94" font-size="8.5" fill="#8a93a6">2022</text>
+            <text x="176" y="94" font-size="8.5" fill="#8a93a6">now</text>
+          </svg>
+          <div class="hv-caption">Every sale carried forward to today</div>
+        </div>
+        <div class="hv-body">
+          <h3>Time-Adjusted Accuracy</h3>
+          <p>A sale from 18 months ago isn't relevant today. We adjust past sales to reflect your town's current market conditions.</p>
+        </div>
+      </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v4">
+          <div class="hv-scale">
+            <div class="hv-scale-side"><span>Your assessment</span><b class="over">$240k</b></div>
+            <div class="hv-scale-mid"><i class="fas fa-scale-unbalanced-flip"></i></div>
+            <div class="hv-scale-side"><span>Neighbors</span><b>$170k</b></div>
+          </div>
+          <div class="hv-flag">Chapter 123 case</div>
+        </div>
+        <div class="hv-body">
+          <h3>Meaningful Comparisons</h3>
+          <p>We build your case using what matters to the county board: genuinely comparable local sales and your neighbors' assessments.</p>
+        </div>
+      </div>
+
+      <div class="hv-card">
+        <div class="hv-visual hv-v5">
+          <div class="hv-conf"><span class="dot hi"></span>High<em>40+ local sales, tight spread</em></div>
+          <div class="hv-conf"><span class="dot md"></span>Medium<em>enough to work with</em></div>
+          <div class="hv-conf"><span class="dot lo"></span>Low<em>thin data, treat as rough</em></div>
+          <div class="hv-conf none"><span class="dot"></span>No number<em>we decline rather than guess</em></div>
+        </div>
+        <div class="hv-body">
+          <h3>Honest Confidence Ratings</h3>
+          <p>Every result includes a confidence score based on available data. If there isn't enough local sales history, we tell you instead of guessing.</p>
+        </div>
+      </div>
+
+      <div class="hv-card hv-card-warn ">
+        <div class="hv-visual hv-v6">
+          <div class="hv-blind"><i class="fas fa-kitchen-set"></i><span>Your kitchen</span></div>
+          <div class="hv-blind"><i class="fas fa-house-chimney-crack"></i><span>Roof condition</span></div>
+          <div class="hv-blind"><i class="fas fa-stairs"></i><span>Finished basement</span></div>
+          <div class="hv-blind"><i class="fas fa-paint-roller"></i><span>Any renovation</span></div>
+        </div>
+        <div class="hv-body">
+          <h3>Smart Screening</h3>
+          <p>Public records stop at the front door. Because we cannot see interior conditions or recent upgrades, this is designed as a powerful screening tool rather than a formal appraisal.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-box" style="margin-top:34px; border:none;">
+      <h4><i class="fas fa-lightbulb"></i> The number that decides an appeal</h4>
+      <p>New Jersey's Chapter 123 rule creates a permitted assessment range around the common level ratio. Watchdog surfaces the published ratio, supported value evidence, and filing context as a screening tool. A filing decision should be checked against the current official instructions and, when appropriate, reviewed with a qualified professional.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section">
+  <div class="section-inner">
+<h2 class="lp-h2">Common questions</h2>
+    <div style="/* max-width:800px; */margin:0 auto;">
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. Public data, refreshed roughly once a year in late spring or early summer. Aerial imagery and parcel boundaries render from Esri World Imagery.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Does this tell me if a home is for sale? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>No, and I would rather be straight with you about it. Live listing status lives in the MLS, which is a licensed feed and not public data. This page reads public assessment records only. The one thing it can tell you is when a <strong>deed was recorded recently</strong>, meaning the property changed hands, and that comes straight from the state file. For current listing status on a specific property, <a href="/index.html#contact">just ask me</a>. I have MLS access and it takes about 30 seconds.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Owner names are stripped from the public version of this dataset under Daniel&rsquo;s Law, which restricts disclosure of certain personal information in New Jersey. Property characteristics, assessments, and tax figures are still public.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Is the tax figure my current bill? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>No. It is the prior year billed amount from the most recent published file. Rates are set annually, so your current bill will be different. Treat it as a solid ballpark. For the exact current figure, check your municipal tax collector.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Who pays the transfer fee when I sell? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>The seller pays the general realty transfer fee at closing, on a graduated schedule tied to sale price. A change that caught a lot of people off guard: for contracts executed on or after July 10, 2025, residential sales over $1,000,000 carry a graduated percent fee that is now the <strong>seller&rsquo;s</strong> responsibility instead of the buyer&rsquo;s, and it applies to the entire sale price, not just the amount above a million. Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. The net proceeds calculator accounts for all of it.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">My address did not come up. Why? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Usually one of four things. Newly built homes may not be in the parcel file yet. Condominium units sometimes sit under a parent parcel. Properties billed as multiple lots together appear only once. Or the address needs the town and zip added. Try the full address first, then try without the unit number.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Am I paying too much? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Compare the effective rate in your results against neighbors on the same street. If yours is noticeably higher for a similar home, either your assessment is out of line or you are missing a deduction you qualify for. Both are fixable. That is the conversation worth having.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="plFaq(this)">Do I qualify for ANCHOR or Stay NJ? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never claim it. <a href="/anchor-estimator.html">Run the free estimator</a> and find out in about 90 seconds.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- INSIGHTS -->
+<section class="section" style="padding-top:52px;">
+  <div class="section-inner">
+    <h2 class="lp-h2">New Jersey property tax insights</h2>
+    <div class="ins-grid">
+
+      <article class="ins-lead" aria-label="Equalization ratios article in editorial review">
+        <div class="ins-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=72&w=1000&auto=format&fit=crop')"></div>
+        <span class="ins-kicker">Explainer</span>
+        <h3>Your assessment is not what your house is worth, and the gap is the whole game</h3>
+        <p>Almost no New Jersey town assesses at full market value. Understanding the equalization ratio is
+           the difference between guessing at an appeal and knowing whether you have one.</p>
+        <em>Coming soon</em>
+      </article>
+
+      <div class="ins-list">
+        <article>
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Deadlines</span>
+            <h4>April 1, or May 1 if your town revalued. How to tell which one applies to you</h4>
+            <em>Coming soon</em></div>
+        </article>
+        <article>
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Benefits</span>
+            <h4>Stay NJ, ANCHOR and the Senior Freeze stack. Most seniors claim one of the three</h4>
+            <em>Coming soon</em></div>
+        </article>
+        <article>
+          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=70&w=400&auto=format&fit=crop')"></div>
+          <div><span class="ins-kicker">Watch out</span>
+            <h4>Six signs your town is about to revalue, and what happens to your bill when it does</h4>
+            <em>Coming soon</em></div>
+        </article>
+        <div class="ins-more"><a href="/insights.html">All insights</a></div>
+      </div>
+    </div>
+
+    <div class="ins-glance">
+      <div class="ins-glance-h">
+        <b>New Jersey property tax at a glance</b>
+        <span id="ins-asof">From the state’s own records</span>
+      </div>
+      <div class="ins-stats">
+        <div><i class="fas fa-building-columns"></i><div><b>565</b><span>Municipalities</span></div></div>
+        <div><i class="fas fa-file-signature"></i><div><b>131,244</b><span>Verified sales on file</span></div></div>
+        <div><i class="fas fa-percent"></i><div><b>55.2%</b><span>Median assessment to market ratio</span></div></div>
+        <div><i class="fas fa-calendar-day"></i><div><b id="ins-days">-</b><span>Days to the appeal deadline</span></div></div>
+      </div>
+      <div class="ins-src">Source: NJ Division of Taxation SR1A verified sales and the Table of Equalized Valuations.
+        <a href="/property/">Check your own address</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- GREENTREE MORTGAGE -->
+<section class="section" style="padding-top:8px;padding-bottom:34px;">
+  <div class="section-inner">
+    <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="gt-banner">
+      <div class="gt-banner-inner">
+        <div class="gt-photo">
+          <img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display='none'">
+        </div>
+        <div class="gt-text">
+          <div class="gt-eyebrow">Greentree Mortgage an HMA Company &middot; John Varano, Branch Manager</div>
+          <div class="gt-headline">Know the payment before you fall in love with the house.</div>
+          <div class="gt-sub">Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.</div>
+        </div>
+        <div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
+    </a>
+  </div>
+</section>
+
+<!-- ============================================================
+     WATCHDOG FOOTER
+     Self-contained HTML and CSS
+     ============================================================ -->
+
+<style>
+    /*
+     * Everything is scoped beneath #wd-property-footer.
+     * This prevents /styles.css from changing the footer layout.
+     */
+
+    #wd-property-footer {
+        --wdf-teal: #078486;
+        --wdf-teal-dark: #056b6d;
+        --wdf-navy: #10294b;
+        --wdf-heading: #142c31;
+        --wdf-text: #5c686b;
+        --wdf-border: #dde5e5;
+        --wdf-soft-bg: #f3f7f6;
+        --wdf-background: #fbfcfb;
+
+        background: var(--wdf-background);
+        border: 0;
+        border-top: 1px solid var(--wdf-border);
+        border-radius: 0;
+        box-shadow: none;
+        clear: both;
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        letter-spacing: normal;
+        line-height: 1.5;
+        margin: 0;
+        max-width: none;
+        min-height: 0;
+        overflow: hidden;
+        padding: 58px 30px 25px;
+        position: relative;
+        text-align: left;
+        text-transform: none;
+        width: 100%;
+    }
+
+    #wd-property-footer,
+    #wd-property-footer * {
+        box-sizing: border-box;
+    }
+
+    #wd-property-footer .wdf-inner {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        margin: 0 auto;
+        max-width: 1680px;
+        padding: 0;
+        width: 100%;
+    }
+
+    /*
+     * Main four-column layout
+     */
+    #wd-property-footer .wdf-grid {
+        align-items: start;
+        background: transparent;
+        display: grid;
+        gap: 52px;
+        grid-template-columns:
+            minmax(165px, 0.78fr)
+            minmax(190px, 0.9fr)
+            minmax(190px, 0.9fr)
+            minmax(430px, 2.2fr);
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    /*
+     * Navigation columns
+     */
+    #wd-property-footer .wdf-column {
+        align-items: flex-start;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        display: flex;
+        flex-direction: column;
+        float: none;
+        height: auto;
+        margin: 0;
+        min-height: 0;
+        padding: 0;
+        position: static;
+        width: auto;
+    }
+
+    #wd-property-footer .wdf-heading {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 21px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0;
+        line-height: 1.25;
+        margin: 0 0 20px;
+        padding: 0;
+        text-align: left;
+        text-transform: none;
+    }
+
+    #wd-property-footer .wdf-subheading {
+        margin-top: 28px;
+    }
+
+    #wd-property-footer .wdf-link {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        color: #101515;
+        display: inline-flex;
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 15px;
+        font-style: normal;
+        font-weight: 700;
+        gap: 9px;
+        justify-content: flex-start;
+        letter-spacing: 0;
+        line-height: 1.4;
+        margin: 0 0 16px;
+        max-width: 100%;
+        padding: 0;
+        position: static;
+        text-align: left;
+        text-decoration: none;
+        text-transform: none;
+        transform: none;
+        transition: color 0.18s ease;
+        width: auto;
+    }
+
+    #wd-property-footer .wdf-link:hover,
+    #wd-property-footer .wdf-link:focus-visible {
+        background: transparent;
+        color: var(--wdf-teal);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        transform: none;
+    }
+
+    #wd-property-footer .wdf-featured {
+        color: var(--wdf-teal);
+    }
+
+    #wd-property-footer .wdf-link i {
+        color: var(--wdf-teal);
+        flex: 0 0 18px;
+        font-size: 14px;
+        text-align: center;
+        width: 18px;
+    }
+
+    /*
+     * Social icons
+     */
+    #wd-property-footer .wdf-social {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 4px 0 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-social-link {
+        align-items: center;
+        background: transparent;
+        border: 1px solid #b8c8c8;
+        border-radius: 50%;
+        box-shadow: none;
+        color: var(--wdf-teal);
+        display: inline-flex;
+        flex: 0 0 38px;
+        height: 38px;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+        transform: none;
+        transition:
+            background-color 0.18s ease,
+            border-color 0.18s ease,
+            color 0.18s ease;
+        width: 38px;
+    }
+
+    #wd-property-footer .wdf-social-link:hover,
+    #wd-property-footer .wdf-social-link:focus-visible {
+        background: var(--wdf-teal);
+        border-color: var(--wdf-teal);
+        color: #fff;
+        text-decoration: none;
+        transform: none;
+    }
+
+    #wd-property-footer .wdf-social-link i {
+        color: inherit;
+        font-size: 15px;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        width: auto;
+    }
+
+    /*
+     * Branding and legal column
+     */
+    #wd-property-footer .wdf-brand {
+        background: transparent;
+        border: 0;
+        border-left: 1px solid var(--wdf-border);
+        border-radius: 0;
+        box-shadow: none;
+        margin: 0;
+        min-width: 0;
+        padding: 0 0 0 52px;
+    }
+
+    #wd-property-footer .wdf-logo {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        display: inline-flex;
+        gap: 14px;
+        margin: 0 0 24px;
+        padding: 0;
+        text-decoration: none;
+        transform: none;
+    }
+
+    #wd-property-footer .wdf-logo:hover {
+        background: transparent;
+        text-decoration: none;
+        transform: none;
+    }
+
+    #wd-property-footer .wdf-logo-icon {
+        align-items: center;
+        background: var(--wdf-teal);
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        display: inline-flex;
+        flex: 0 0 52px;
+        height: 52px;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        width: 52px;
+    }
+
+    #wd-property-footer .wdf-logo-icon i {
+        color: #fff;
+        font-size: 23px;
+        margin: 0;
+    }
+
+    #wd-property-footer .wdf-logo-copy {
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-logo-name {
+        color: #101515;
+        display: block;
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        font-size: 23px;
+        font-weight: 800;
+        letter-spacing: -0.7px;
+        line-height: 1.05;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    #wd-property-footer .wdf-logo-name span {
+        color: var(--wdf-teal);
+    }
+
+    #wd-property-footer .wdf-tagline {
+        color: var(--wdf-text);
+        display: block;
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.35px;
+        line-height: 1.4;
+        margin: 6px 0 0;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    #wd-property-footer .wdf-description {
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 1.65;
+        margin: 0 0 23px;
+        max-width: 760px;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-legal {
+        background: transparent;
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 12.5px;
+        font-weight: 400;
+        line-height: 1.55;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-legal p {
+        background: transparent;
+        color: var(--wdf-text);
+        font-family: inherit;
+        font-size: 12.5px;
+        font-weight: 400;
+        line-height: 1.55;
+        margin: 0 0 12px;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-legal strong {
+        color: var(--wdf-heading);
+        font-weight: 700;
+    }
+
+    #wd-property-footer .wdf-inline-link {
+        background: transparent;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: inherit;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    #wd-property-footer .wdf-inline-link:hover,
+    #wd-property-footer .wdf-inline-link:focus-visible {
+        color: var(--wdf-teal-dark);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /*
+     * Legal links
+     */
+    #wd-property-footer .wdf-legal-links {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        margin: 18px 0 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-legal-link {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: 12.5px;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    #wd-property-footer .wdf-legal-link:hover,
+    #wd-property-footer .wdf-legal-link:focus-visible {
+        color: var(--wdf-teal-dark);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /*
+     * Fair Housing notice
+     */
+    #wd-property-footer .wdf-housing {
+        align-items: flex-start;
+        background: var(--wdf-soft-bg);
+        border: 0;
+        border-left: 4px solid var(--wdf-teal);
+        border-radius: 4px;
+        box-shadow: none;
+        display: flex;
+        gap: 13px;
+        margin: 21px 0 0;
+        padding: 15px 17px;
+    }
+
+    #wd-property-footer .wdf-housing-icon {
+        color: var(--wdf-teal);
+        flex: 0 0 25px;
+        font-size: 23px;
+        margin-top: 2px;
+        text-align: center;
+        width: 25px;
+    }
+
+    #wd-property-footer .wdf-housing p {
+        color: var(--wdf-heading);
+        font-family: "Plus Jakarta Sans", Arial, sans-serif;
+        font-size: 11.5px;
+        font-weight: 800;
+        letter-spacing: 0;
+        line-height: 1.45;
+        margin: 0;
+        padding: 0;
+        text-transform: uppercase;
+    }
+
+    /*
+     * Copyright bar
+     */
+    #wd-property-footer .wdf-bottom {
+        align-items: center;
+        background: transparent;
+        border: 0;
+        border-top: 1px solid var(--wdf-border);
+        box-shadow: none;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        margin: 42px 0 0;
+        padding: 22px 0 0;
+    }
+
+    #wd-property-footer .wdf-copyright {
+        color: var(--wdf-text);
+        font-family: "Source Sans 3", Arial, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-bottom-links {
+        align-items: center;
+        background: transparent;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 20px;
+        justify-content: flex-end;
+        margin: 0;
+        padding: 0;
+    }
+
+    #wd-property-footer .wdf-bottom-link {
+        background: transparent;
+        border: 0;
+        color: var(--wdf-teal);
+        display: inline;
+        font-size: 12px;
+        font-weight: 700;
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+
+    #wd-property-footer .wdf-bottom-link:hover,
+    #wd-property-footer .wdf-bottom-link:focus-visible {
+        color: var(--wdf-teal-dark);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    /*
+     * Tablet
+     */
+    @media (max-width: 1120px) {
+        #wd-property-footer .wdf-grid {
+            grid-template-columns: repeat(3, minmax(170px, 1fr));
+            gap: 42px;
+        }
+
+        #wd-property-footer .wdf-brand {
+            border-left: 0;
+            border-top: 1px solid var(--wdf-border);
+            grid-column: 1 / -1;
+            padding: 38px 0 0;
+        }
+    }
+
+    /*
+     * Small tablet
+     */
+    @media (max-width: 760px) {
+        #wd-property-footer {
+            padding: 45px 22px 24px;
+        }
+
+        #wd-property-footer .wdf-grid {
+            grid-template-columns: repeat(2, minmax(145px, 1fr));
+            gap: 38px 28px;
+        }
+
+        #wd-property-footer .wdf-brand {
+            grid-column: 1 / -1;
+        }
+
+        #wd-property-footer .wdf-bottom {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #wd-property-footer .wdf-bottom-links {
+            justify-content: flex-start;
+        }
+    }
+
+    /*
+     * Mobile
+     */
+    @media (max-width: 540px) {
+        #wd-property-footer {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #wd-property-footer .wdf-grid {
+            grid-template-columns: 1fr;
+            gap: 34px;
+        }
+
+        #wd-property-footer .wdf-brand {
+            grid-column: auto;
+        }
+
+        #wd-property-footer .wdf-logo {
+            align-items: flex-start;
+        }
+
+        #wd-property-footer .wdf-logo-icon {
+            flex-basis: 46px;
+            height: 46px;
+            width: 46px;
+        }
+
+        #wd-property-footer .wdf-logo-icon i {
+            font-size: 20px;
+        }
+
+        #wd-property-footer .wdf-logo-name {
+            font-size: 19px;
+        }
+
+        #wd-property-footer .wdf-tagline {
+            font-size: 9px;
+            letter-spacing: 1px;
+        }
+    }
+</style>
+
+<div
+    id="wd-property-footer"
+    role="contentinfo"
+    aria-label="Watchdog website footer"
+>
+    <div class="wdf-inner">
+
+        <div class="wdf-grid">
+
+            <!-- TAX RELIEF -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Property tax relief links"
+            >
+                <h2 class="wdf-heading">Tax Relief</h2>
+
+                <a
+                    href="/anchor-estimator.html"
+                    class="wdf-link wdf-featured"
+                >
+                    Free Benefit Calculator
+                </a>
+
+                <a href="/anchor-program.html" class="wdf-link">
+                    ANCHOR Program
+                </a>
+
+                <a href="/senior-programs.html" class="wdf-link">
+                    Stay NJ &amp; Senior Freeze
+                </a>
+
+                <a href="/veterans-benefits.html" class="wdf-link">
+                    Veterans Benefits
+                </a>
+
+                <a href="/pas-1-guide.html" class="wdf-link">
+                    PAS-1 Filing Guide
+                </a>
+
+                <a href="/property-tax-appeal.html" class="wdf-link">
+                    Property Tax Appeals
+                </a>
+
+                <a href="/tax-calendar.html" class="wdf-link">
+                    Tax Calendar
+                </a>
+            </div>
+
+            <!-- HOMEOWNER TOOLS -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Homeowner tools"
+            >
+                <h2 class="wdf-heading">Homeowner Tools</h2>
+
+                <a href="/property/" class="wdf-link wdf-featured">
+                    Property Tax Lookup
+                </a>
+
+                <a href="/resources.html" class="wdf-link">
+                    Resources &amp; Terminology
+                </a>
+
+                <a href="/guides.html" class="wdf-link">
+                    Free Downloadable Guides
+                </a>
+
+                <a
+                    href="/home-improvement-abatement.html"
+                    class="wdf-link"
+                >
+                    Renovation Tax Savings
+                </a>
+
+                <a href="/mortgage-calculator.html" class="wdf-link">
+                    Mortgage Calculator
+                </a>
+
+                <a href="/home-value.html" class="wdf-link">
+                    Home Value Estimator
+                </a>
+
+                <a href="/search-homes.html" class="wdf-link">
+                    Search Homes
+                </a>
+
+                <a href="/property/dashboard.html" class="wdf-link">
+                    My Properties
+                </a>
+
+                <a href="/property/pro.html" class="wdf-link">
+                    Pro Hub
+                </a>
+            </div>
+
+            <!-- SOUTH JERSEY AND CONTACT -->
+            <div>
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="South Jersey county resources"
+                >
+                    <h2 class="wdf-heading">South Jersey</h2>
+
+                    <a href="/camden-county.html" class="wdf-link">
+                        Camden County
+                    </a>
+
+                    <a href="/gloucester-county.html" class="wdf-link">
+                        Gloucester County
+                    </a>
+
+                    <a href="/burlington-county.html" class="wdf-link">
+                        Burlington County
+                    </a>
+
+                    <a href="/towns/atlantic/index.html" class="wdf-link">
+                        Atlantic County
+                    </a>
+
+                    <a href="/towns/salem/index.html" class="wdf-link">
+                        Salem County
+                    </a>
+                </div>
+
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="Contact Watchdog"
+                >
+                    <h2 class="wdf-heading wdf-subheading">Find Us</h2>
+
+                    <a href="/#contact" class="wdf-link">
+                        <i
+                            class="fas fa-envelope"
+                            aria-hidden="true"
+                        ></i>
+                        Contact Us
+                    </a>
+
+                    <a href="tel:+18564041098" class="wdf-link">
+                        <i
+                            class="fas fa-phone"
+                            aria-hidden="true"
+                        ></i>
+                        856-404-1098
+                    </a>
+
+                    <a
+                        href="mailto:john@johnscafide.com"
+                        class="wdf-link"
+                    >
+                        <i
+                            class="fas fa-at"
+                            aria-hidden="true"
+                        ></i>
+                        Email agent
+                    </a>
+
+                    <div class="wdf-social">
+                        <a
+                            href="https://www.tiktok.com/@thetaxwatchdog"
+                            class="wdf-social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Watchdog on TikTok"
+                        >
+                            <i
+                                class="fab fa-tiktok"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+
+                        <!-- Replace # with your Facebook URL -->
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Facebook"
+                        >
+                            <i
+                                class="fab fa-facebook-f"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+
+                        <!-- Replace # with your Instagram URL -->
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Instagram"
+                        >
+                            <i
+                                class="fab fa-instagram"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BRANDING AND DISCLOSURES -->
+            <div class="wdf-brand">
+
+                <a href="/property/" class="wdf-logo">
+                    <span class="wdf-logo-icon" aria-hidden="true">
+                        <i class="fas fa-shield-halved"></i>
+                    </span>
+
+                    <span class="wdf-logo-copy">
+                        <span class="wdf-logo-name">
+                            <span>Watchdog</span>
+                        </span>
+
+                        <span class="wdf-tagline">
+                            Watching out for New Jersey homeowners
+                        </span>
+                    </span>
+                </a>
+
+                <p class="wdf-description">
+                    Watchdog brings New Jersey property-tax records,
+                    homeowner tools, and plain-English property intelligence
+                    into one place. Understand assessments, monitor tax
+                    changes, protect home equity, and make better-informed
+                    housing decisions.
+                </p>
+
+                <div class="wdf-legal">
+                    <p>
+                        Real-estate questions submitted through Watchdog are
+                        handled by licensed New Jersey real-estate
+                        professionals affiliated with Opus Elite Real Estate.
+                        Brokerage services are separate from Watchdog's
+                        educational property-intelligence tools and are offered
+                        in compliance with New Jersey law and federal
+                        fair-housing requirements.
+                    </p>
+
+                    <p>
+                        NJPropertyTaxRelief.com is an independent educational
+                        resource and is not affiliated with or endorsed by the
+                        State of New Jersey, the New Jersey Division of
+                        Taxation, or any county or municipal government.
+                    </p>
+
+                    <p>
+                        Website information, property records, estimates, and
+                        calculators are provided for general educational
+                        purposes only. They do not constitute individualized
+                        tax, legal, financial, appraisal, or accounting advice.
+                        Property information may not reflect the most recent
+                        municipal records. Program rules, eligibility
+                        requirements, deadlines, and benefit amounts may
+                        change.
+                    </p>
+
+                    <p>
+                        Always verify property information and tax-relief
+                        eligibility with the appropriate government agency or
+                        a qualified professional.
+                    </p>
+
+                    <div class="wdf-legal-links">
+                        <a
+                            href="/property/privacy.html"
+                            class="wdf-legal-link"
+                        >
+                            Privacy Policy
+                        </a>
+
+                        <a href="/property/terms.html" class="wdf-legal-link">
+                            Terms of Use
+                        </a>
+
+                        <a
+                            href="/accessibility.html"
+                            class="wdf-legal-link"
+                        >
+                            Accessibility
+                        </a>
+
+                        <a href="/#contact" class="wdf-legal-link">
+                            Contact
+                        </a>
+
+                        <a
+                            href="https://www.nj.gov/treasury/taxation/"
+                            class="wdf-legal-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Official NJ Taxation Website
+                            <i
+                                class="fas fa-arrow-up-right-from-square"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+                    </div>
+
+                    <div class="wdf-housing">
+                        <i
+                            class="fas fa-house"
+                            aria-hidden="true"
+                        ></i>
+
+                        <p>
+                            Watchdog supports the Fair Housing Act and Equal
+                            Opportunity Act. Equal Housing Opportunity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="wdf-bottom">
+            <p class="wdf-copyright">
+                Copyright &copy;
+                <span id="wdf-current-year">2026</span>
+                Watchdog / NJPropertyTaxRelief.com. All rights reserved.
+            </p>
+
+            <div class="wdf-bottom-links">
+                <a href="/property/" class="wdf-bottom-link">
+                    Property Lookup
+                </a>
+
+                <a href="/insights.html" class="wdf-bottom-link">
+                    Insights
+                </a>
+
+                <a href="/resources.html" class="wdf-bottom-link">
+                    Resources
+                </a>
+
+                <a href="/#contact" class="wdf-bottom-link">
+                    Talk to an Expert
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    (function () {
+        var watchdogYear =
+            document.getElementById("wdf-current-year");
+
+        if (watchdogYear) {
+            watchdogYear.textContent = new Date().getFullYear();
+        }
+    })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="/scripts.js"></script>
+<script src="/property/js/public-nav.js"></script>
+<script src="/property/js/ownership-verification.js"></script>
+<script src="/property/js/lookup.js"></script>
+</body>
+</html>
