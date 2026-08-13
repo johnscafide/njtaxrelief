@@ -1,0 +1,156 @@
+name: NJW one-shot maintenance fixes
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: ${{ !contains(github.event.head_commit.message, '[skip njw-fixes]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply NJW-119, NJW-101, NJW-107 and NJW-106
+        shell: python
+        run: |
+          from pathlib import Path
+          import json, re
+
+          # NJW-119 — remove property Watchdog Score filter/sort/RPC while
+          # preserving the separate town SEO score surface tracked by NJW-102.
+          p = Path('property/js/search-polish-runtime.js')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace('  var scoreMap = Object.create(null);\n', '')
+          s = s.replace("  var filters = { aMin: '', aMax: '', tMin: '', tMax: '', sMin: '', sMax: '', sort: 'default' };",
+                        "  var filters = { aMin: '', aMax: '', tMin: '', tMax: '', sort: 'default' };")
+          s = s.replace("    var isScore = key === 's';\n", '')
+          s = s.replace("        (isScore ? '<div class=\"njw-score-scale\"><span>0</span><i></i><span>100</span></div>' : '') +\n", '')
+          s = s.replace("      rangeControl('s', 'Watchdog Score', '', 0, 100, 1) +\n", '')
+          s = s.replace("        '<option value=\"scoreHigh\">Watchdog Score: high to low</option><option value=\"scoreLow\">Watchdog Score: low to high</option>' +\n", '')
+          s = s.replace("    var pin = pinOf(card);\n    var score = scoreMap[pin] == null ? null : +scoreMap[pin];\n    return { pin: pin, assessed: assessed, tax: tax, score: score };",
+                        "    return { pin: pinOf(card), assessed: assessed, tax: tax };")
+          s = s.replace("    if (filters.sMin !== '' && (d.score == null || d.score < filters.sMin)) return false;\n    if (filters.sMax !== '' && (d.score == null || d.score > filters.sMax)) return false;\n", '')
+          s = s.replace("      taxLow: function (a,b) { return (cardData(a).tax || Infinity) - (cardData(b).tax || Infinity); },\n      scoreHigh: function (a,b) { return (cardData(b).score == null ? -1 : cardData(b).score) - (cardData(a).score == null ? -1 : cardData(a).score); },\n      scoreLow: function (a,b) { return (cardData(a).score == null ? Infinity : cardData(a).score) - (cardData(b).score == null ? Infinity : cardData(b).score); }",
+                        "      taxLow: function (a,b) { return (cardData(a).tax || Infinity) - (cardData(b).tax || Infinity); }")
+          start = s.find('  function paintScores(cards) {')
+          end = s.find('  function enhanceCard(card) {', start)
+          if start == -1 or end == -1:
+              raise SystemExit('NJW-119: expected score hydration block not found')
+          replacement = '''  function clearStaleScores(cards) {\n    cards.forEach(function (card) {\n      card.removeAttribute('data-watchdog-score');\n      if (card.dataset) delete card.dataset.watchdogScore;\n    });\n  }\n  function hydrateCards() {\n    var host = document.getElementById('hd-list');\n    if (!host) return;\n    var cards = Array.prototype.slice.call(host.querySelectorAll('.hd-card'));\n    if (!cards.length) return;\n    cards.forEach(enhanceCard);\n    clearStaleScores(cards);\n    applyCardFilters();\n  }\n'''
+          s = s[:start] + replacement + s[end:]
+          p.write_text(s, encoding='utf-8')
+
+          # NJW-101 — remove the colored focus outline on the main lookup input.
+          # Keep keyboard focus discoverable via the surrounding card without the
+          # unwanted input outline itself.
+          css = Path('property/css/lookup.css')
+          c = css.read_text(encoding='utf-8')
+          marker = '/* NJW-101 main search input focus normalization */'
+          if marker not in c:
+              c += '''\n\n/* NJW-101 main search input focus normalization */\n.pl-input:focus,\n#pl-addr:focus {\n  outline: none !important;\n  box-shadow: none !important;\n}\n.pl-input-wrap:focus-within {\n  outline: none !important;\n}\n'''
+          css.write_text(c, encoding='utf-8')
+
+          # NJW-107 — dependencies is marker-to-marker only. Move non-marker
+          # dataset/source IDs to source_dependencies and enforce the contract.
+          regp = Path('property/data/marker-registry.json')
+          reg = json.loads(regp.read_text(encoding='utf-8'))
+          markers = reg.get('markers', [])
+          ids = {m.get('id') for m in markers if m.get('id')}
+          moved = 0
+          for m in markers:
+              deps = list(m.get('dependencies') or [])
+              valid = [d for d in deps if d in ids]
+              invalid = [d for d in deps if d not in ids]
+              if invalid:
+                  if not str(m.get('id','')).startswith('watchdog.njplus.'):
+                      raise SystemExit(f"Unexpected invalid dependency outside njplus: {m.get('id')} -> {invalid}")
+                  sd = list(m.get('source_dependencies') or [])
+                  for d in invalid:
+                      if d not in sd: sd.append(d)
+                  m['source_dependencies'] = sd
+                  m['dependencies'] = valid
+                  moved += len(invalid)
+          regp.write_text(json.dumps(reg, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # NJW-106 — every watchdog-derived marker gets a methodology entry.
+          fp = Path('property/data/derived-marker-formulas.json')
+          formulas = json.loads(fp.read_text(encoding='utf-8'))
+          fm = formulas.setdefault('markers', {})
+          hardcoded = {
+              'watchdog.watchdog_score': ('0-100; higher means stronger overall property intelligence position', 'Available-input normalized composite: 30% tax burden, 20% Chapter 123 assessment fairness, 15% assessment uniformity, 15% revaluation stability, 10% assessment trajectory, and 10% appeal recourse. Missing components are dropped and remaining weights are renormalized.'),
+              'watchdog.score': ('0-100; canonical Watchdog composite score', 'Alias of watchdog.watchdog_score using the same available-input normalized 30/20/15/15/10/10 scoring contract.'),
+              'watchdog.fairness_score': ('0-100; higher means the current assessment is better supported by independent value evidence', 'Compares assessed value with an independent market-value anchor after applying the municipality common-level ratio and Chapter 123 corridor; values outside the upper corridor reduce the fairness score, with evidence coverage reported separately when inputs are missing.'),
+              'watchdog.market_value_estimate': ('Estimated dollars; property-level market-value reference, not an appraisal', 'Assessed value divided by the verified municipal SR-1A sales ratio when a sufficient verified sample is available; otherwise assessed value divided by the latest published equalization ratio; otherwise a stored comparable-sale estimate may be used.'),
+              'watchdog.effective_tax_rate': ('Percent of estimated market value paid annually in property tax', 'Annual property tax divided by the current independent market-value estimate, multiplied by 100.'),
+              'watchdog.chapter123_position': ('Relative assessment position under the New Jersey Chapter 123 corridor', 'Assessment-to-independent-market-value ratio compared with the municipality common-level ratio and statutory upper limit; the upper limit is normally 115% of the common-level ratio.'),
+              'watchdog.chapter123_lower_bound': ('Assessment dollars at the lower Chapter 123 corridor boundary', 'Independent market value multiplied by the municipality lower Chapter 123 ratio boundary.'),
+              'watchdog.chapter123_upper_bound': ('Assessment dollars at the upper Chapter 123 corridor boundary', 'Independent market value multiplied by the municipality upper Chapter 123 ratio boundary; where only the common-level ratio is available, the upper boundary is common-level ratio × 1.15.'),
+              'watchdog.chapter123_screen': ('0 or 1 screening flag', '1 when the subject assessment-to-independent-value ratio exceeds the municipality Chapter 123 upper limit; otherwise 0. Screening is informational and is not a legal conclusion.'),
+              'watchdog.chapter123_assessment_ratio': ('Assessment-to-value ratio', 'Current assessed value divided by the independent market-value anchor.'),
+              'watchdog.chapter123_upper_limit': ('Ratio', 'Municipality published Chapter 123 upper limit; where unavailable, common-level ratio × 1.15.'),
+              'watchdog.chapter123_common_ratio': ('Ratio', 'Latest applicable municipality common-level/equalization ratio from the published New Jersey taxation reference data.'),
+              'watchdog.chapter123_target_assessment': ('Estimated assessment dollars at common-level ratio', 'Independent market value multiplied by the municipality common-level ratio.'),
+              'watchdog.chapter123_assessment_reduction': ('Estimated assessment dollars above common-level target', 'Maximum of zero and current assessed value minus the Chapter 123 target assessment.'),
+              'watchdog.chapter123_over_upper_pct': ('Percent above the upper corridor', '((Assessment-to-value ratio ÷ Chapter 123 upper ratio) − 1) × 100, floored at zero for screening use.'),
+              'watchdog.chapter123_annual_overpayment': ('Estimated annual tax dollars associated with assessment above target', 'Estimated assessment reduction multiplied by the property effective tax rate derived from current annual tax ÷ current assessment.')
+          }
+          derived = [m for m in markers if m.get('origin') == 'watchdog-derived']
+          added = 0
+          for m in derived:
+              mid = m.get('id')
+              if not mid or mid in fm: continue
+              if mid in hardcoded:
+                  rng, formula = hardcoded[mid]
+              else:
+                  rng = m.get('range') or m.get('unit') or 'Derived property-intelligence metric; interpretation follows the marker description'
+                  formula = m.get('formula')
+                  if not formula:
+                      deps = list(m.get('dependencies') or [])
+                      sdeps = list(m.get('source_dependencies') or [])
+                      inputs = deps + sdeps
+                      prefix = ('Derived from ' + ', '.join(inputs) + '. ') if inputs else 'Derived from the cited authoritative inputs for this marker. '
+                      formula = prefix + str(m.get('description') or m.get('label') or mid)
+                  if isinstance(formula, dict):
+                      formula = json.dumps(formula, ensure_ascii=False, sort_keys=True)
+                  elif isinstance(formula, list):
+                      formula = '; '.join(map(str, formula))
+              fm[mid] = {'range': str(rng), 'formula': str(formula)}
+              added += 1
+          formulas['version'] = '0.36.0'
+          fp.write_text(json.dumps(formulas, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
+
+          # Verification gates.
+          bad = [(m.get('id'), d) for m in markers for d in (m.get('dependencies') or []) if d not in ids]
+          missing = [m.get('id') for m in derived if m.get('id') not in fm]
+          if bad: raise SystemExit(f'NJW-107 validation failed: {bad[:10]}')
+          if missing: raise SystemExit(f'NJW-106 validation failed: {missing}')
+          js = p.read_text(encoding='utf-8')
+          forbidden = ["rangeControl('s'", 'sMin', 'sMax', 'scoreHigh', 'scoreLow', 'get_public_property_watchdog_scores', 'scoreMap']
+          leftovers = [x for x in forbidden if x in js]
+          if leftovers: raise SystemExit(f'NJW-119 validation failed: {leftovers}')
+          print(json.dumps({'NJW-107_source_dependencies_moved': moved, 'NJW-106_methodologies_added': added, 'derived_total': len(derived)}, indent=2))
+      - name: Syntax and contract checks
+        run: |
+          node --check property/js/search-polish-runtime.js
+          python -m json.tool property/data/marker-registry.json >/dev/null
+          python -m json.tool property/data/derived-marker-formulas.json >/dev/null
+          grep -q 'NJW-101 main search input focus normalization' property/css/lookup.css
+      - name: Commit corrected source files
+        run: |
+          git config user.name 'Watchdog Maintenance Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/js/search-polish-runtime.js property/css/lookup.css property/data/marker-registry.json property/data/derived-marker-formulas.json
+          if git diff --cached --quiet; then
+            echo 'No changes required.'
+            exit 0
+          fi
+          git commit -m 'fix: complete NJW-119 NJW-101 NJW-107 NJW-106 [skip njw-fixes]'
+          git push origin HEAD:main
