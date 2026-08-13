@@ -1,0 +1,51 @@
+name: Repair property sticky nav
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  repair:
+    if: "!contains(github.event.head_commit.message, '[nav-repair-done]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore index and update sticky navigation
+        shell: python
+        run: |
+          import subprocess
+          from pathlib import Path
+          GOOD='d4c4f8251588aa4c2769797e1a3e23b501c8c7b9'
+          subprocess.run(['git','checkout',GOOD,'--','property/index.html'],check=True)
+          p=Path('property/index.html')
+          s=p.read_text()
+          old='''    <a class="ssearch-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>\n    <div class="ssearch-pill">'''
+          new='''    <button class="wd-public-trigger ssearch-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu"><i class="fas fa-bars"></i><span>Menu</span></button>\n    <a class="ssearch-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>\n    <div class="ssearch-pill">'''
+          if old not in s:
+              raise SystemExit('sticky brand block not found')
+          s=s.replace(old,new,1)
+          oldnav='''    <nav class="ssearch-nav">\n      <a href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My Properties</span></a>\n      <a href="/property/home.html"><i class="fas fa-heart"></i><span>Watchlist</span></a>\n      <a href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved</span></a>\n      <a class="pro-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Pro Hub</span></a>\n    </nav>'''
+          newnav='''    <button class="wd-public-trigger wd-public-profile ssearch-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu"><i class="fas fa-user"></i><span>Account</span></button>'''
+          if oldnav not in s:
+              raise SystemExit('old sticky nav block not found')
+          s=s.replace(oldnav,newnav,1)
+          p.write_text(s)
+      - name: Add sticky nav compatibility styles
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('property/css/lookup/01-search-hero.css')
+          s=p.read_text()
+          marker='/* current Watchdog controls inside sticky search */'
+          if marker not in s:
+              s += '''\n\n/* current Watchdog controls inside sticky search */\n.ssearch .wd-public-trigger{position:static;display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;background:transparent;border:0;color:var(--navy-dark);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;font-weight:800;cursor:pointer;padding:9px 10px;border-radius:9px}\n.ssearch .wd-public-trigger:hover{background:#eef3fc}\n.ssearch .wd-public-trigger i{color:var(--navy-light)}\n.ssearch-menu-trigger{order:-2}.ssearch-brand{order:-1}.ssearch-profile-trigger{margin-left:auto}\n@media(max-width:760px){.ssearch .wd-public-trigger span{display:none}.ssearch .wd-public-trigger{width:42px;height:42px;padding:0}.ssearch-profile-trigger{margin-left:0}}\n'''
+              p.write_text(s)
+      - name: Commit repair
+        run: |
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add property/index.html property/css/lookup/01-search-hero.css
+          git commit -m "[nav-repair-done] Use current Watchdog nav in sticky header"
+          git push
