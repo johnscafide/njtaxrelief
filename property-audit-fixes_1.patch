@@ -1,0 +1,205 @@
+diff --git a/property/developer-data.html b/property/developer-data.html
+index fe022e4..e4f6965 100644
+--- a/property/developer-data.html
++++ b/property/developer-data.html
+@@ -12,6 +12,7 @@
+   <section class="do-readiness" id="do-readiness" aria-label="SaaS production readiness"></section>
+   <section class="do-factory" id="do-factory" aria-label="Watchdog Data Factory status"></section>
+   <div class="do-source-alert" id="do-source-alert"></div>
++  <section class="do-source-history" id="do-source-history" aria-label="NJ publication history"></section>
+   <div class="do-controls"><input id="do-search" type="search" placeholder="Search marker or source…"><select id="do-cadence"><option value="">All cadences</option><option>annual</option><option>quarterly</option><option>live</option><option>dependency</option><option>correction</option><option>review</option></select><select id="do-tier"><option value="">All plans</option><option value="standard">Standard</option><option value="pro">Pro</option><option value="pro_plus">Pro+</option></select></div>
+   <div class="do-table-wrap"><table><thead><tr><th>Marker</th><th>Refresh</th><th>Source / dependency</th><th>Last refreshed</th><th>Trigger</th><th>Plan</th><th>Rule</th></tr></thead><tbody id="do-rows"></tbody></table></div>
+ </section>
+diff --git a/property/growth/run.js b/property/growth/run.js
+index 0e5cf25..cf895a6 100644
+--- a/property/growth/run.js
++++ b/property/growth/run.js
+@@ -1 +1 @@
+-(()=>{'use strict';const q=new URLSearchParams(location.search),profession=q.get('profession')==='mortgage'?'mortgage':'agent',play=q.get('play')||'geo-farm';const names={'geo-farm':'Strategic GeoFarm','sphere-review':'Sphere Property Review','assessment-change':'Assessment Change Conversation','recent-sale-circle':'Recent Sale Circle','long-hold':'Long-Hold Homeowners','permit-complete':'Permit & Improvement Follow-up','tax-pressure':'Tax Change Review','buyer-need':'Buyer Need Match','commercial-farm':'Small Commercial Farm','watchdog-stack':'Watchdog Signal Stack','purchase-farm':'Purchase Opportunity Farm','recent-purchase':'Recent Purchase Follow-up','assessment-payment':'Tax & Payment Context','improvement-finance':'Improvement Activity','portfolio':'Investor Portfolio Watch','refi-review':'Property Value Review','partner-farm':'Agent Partner Territory','commercial-lending':'Commercial Property Watch','change-alert':'Client Property Change Desk'},$=id=>document.getElementById(id);$('rw-title').textContent=names[play]||'Professional Growth Workflow';$('rw-kicker').textContent=(profession==='agent'?'RESIDENTIAL AGENT':'MORTGAGE PROFESSIONAL')+' · WORKFLOW BUILDER';$('rw-name').value=names[play]||'';if(play.includes('commercial'))$('rw-class').value='4A,4B,4C';if(['municipality','county','zip'].includes(q.get('scope'))) $('rw-scope').value=q.get('scope');if(q.get('value')){$('rw-value').value=q.get('value');$('rw-name').value=(names[play]||'Growth Campaign')+' · '+q.get('value')}Promise.resolve(window.njptrAccessReady).then(ctx=>{const client=window.NJPTRAccess.client(),user=ctx.user;if(!user)return;$('rw-form').onsubmit=async e=>{e.preventDefault();const btn=e.submitter,original=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Building campaign…';const raw=$('rw-class').value,record={user_id:user.id,profession,play_key:play,name:$('rw-name').value.trim(),scope_type:$('rw-scope').value,scope_value:$('rw-value').value.trim(),criteria:{property_classes:raw?raw.split(','):[]},crm_name:$('rw-crm').value.trim()||null,status:'active'};const ins=await client.from('professional_campaigns').insert(record).select().single();if(ins.error){btn.disabled=false;btn.innerHTML=original;$('rw-result').innerHTML='<div class="gc-card"><b>Campaign could not be created</b><p>'+ins.error.message+'</p></div>';return}location.href='/property/growth/results.html?id='+encodeURIComponent(ins.data.id)}}}).catch(()=>{})})();
+\ No newline at end of file
++(()=>{'use strict';const q=new URLSearchParams(location.search),profession=q.get('profession')==='mortgage'?'mortgage':'agent',play=q.get('play')||'geo-farm';const names={'geo-farm':'Strategic GeoFarm','sphere-review':'Sphere Property Review','assessment-change':'Assessment Change Conversation','recent-sale-circle':'Recent Sale Circle','long-hold':'Long-Hold Homeowners','permit-complete':'Permit & Improvement Follow-up','tax-pressure':'Tax Change Review','buyer-need':'Buyer Need Match','commercial-farm':'Small Commercial Farm','watchdog-stack':'Watchdog Signal Stack','purchase-farm':'Purchase Opportunity Farm','recent-purchase':'Recent Purchase Follow-up','assessment-payment':'Tax & Payment Context','improvement-finance':'Improvement Activity','portfolio':'Investor Portfolio Watch','refi-review':'Property Value Review','partner-farm':'Agent Partner Territory','commercial-lending':'Commercial Property Watch','change-alert':'Client Property Change Desk'},$=id=>document.getElementById(id);$('rw-title').textContent=names[play]||'Professional Growth Workflow';$('rw-kicker').textContent=(profession==='agent'?'RESIDENTIAL AGENT':'MORTGAGE PROFESSIONAL')+' · WORKFLOW BUILDER';$('rw-name').value=names[play]||'';if(play.includes('commercial'))$('rw-class').value='4A,4B,4C';if(['municipality','county','zip'].includes(q.get('scope'))) $('rw-scope').value=q.get('scope');if(q.get('value')){$('rw-value').value=q.get('value');$('rw-name').value=(names[play]||'Growth Campaign')+' · '+q.get('value')}Promise.resolve(window.njptrAccessReady).then(ctx=>{const client=window.NJPTRAccess.client(),user=ctx.user;if(!user)return;$('rw-form').onsubmit=async e=>{e.preventDefault();const btn=e.submitter,original=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Building campaign…';const raw=$('rw-class').value,record={user_id:user.id,profession,play_key:play,name:$('rw-name').value.trim(),scope_type:$('rw-scope').value,scope_value:$('rw-value').value.trim(),criteria:{property_classes:raw?raw.split(','):[]},crm_name:$('rw-crm').value.trim()||null,status:'active'};const ins=await client.from('professional_campaigns').insert(record).select().single();if(ins.error){btn.disabled=false;btn.innerHTML=original;$('rw-result').innerHTML='<div class="gc-card"><b>Campaign could not be created</b><p>'+ins.error.message+'</p></div>';return}location.href='/property/growth/results.html?id='+encodeURIComponent(ins.data.id)}}).catch(()=>{})})();
+\ No newline at end of file
+diff --git a/property/insights/article.html b/property/insights/article.html
+index 90a537f..08ef58d 100644
+--- a/property/insights/article.html
++++ b/property/insights/article.html
+@@ -87,7 +87,7 @@
+ </div>
+ 
+ <footer id="main-footer"></footer>
+-<script src="scripts.js"></script>
++<script src="/scripts.js"></script>
+ <script>
+ (function () {
+   'use strict';
+diff --git a/property/js/data-workbench-enhancements.js b/property/js/data-workbench-enhancements.js
+index dc1dca8..1163065 100644
+--- a/property/js/data-workbench-enhancements.js
++++ b/property/js/data-workbench-enhancements.js
+@@ -11,7 +11,7 @@ function direct(id,r){const s=String(id||'').toLowerCase(),m=r.__markers||{},f=f
+ function format(id,v){if(v==null||v==='')return null;const s=id.toLowerCase();if(/value|assessment|tax|price|reduction|overpayment/.test(s)&&!/(rate|ratio|pct|percent|year)/.test(s))return money(v);if(/rate|pct|percent/.test(s))return pct(v);if(/flood.*risk/.test(s))return String(v).replace(/^./,c=>c.toUpperCase());return String(v)}
+ async function ensureFloodForRows(pins){const ids=columnIds();if(!ids.some(id=>/fema\.flood_|flood.*(zone|risk)/i.test(id)))return;const jobs=pins.map(pin=>async()=>{if(floodCache.has(pin))return;const r=cache.get(pin);if(!r||!Number.isFinite(Number(r.lat))||!Number.isFinite(Number(r.lon)))return;try{const res=await fetch(`/api/flood-zone?lat=${encodeURIComponent(r.lat)}&lon=${encodeURIComponent(r.lon)}`);if(!res.ok)return;floodCache.set(pin,await res.json())}catch(_){}});for(let i=0;i<jobs.length;i+=6)await Promise.all(jobs.slice(i,i+6).map(fn=>fn()))}
+ async function hydrate(force=false){if(pending)return;const c=client(),pins=rowPins();if(!c||!pins.length)return;const signature=pins.join('|')+'::'+columnIds().join('|');if(!force&&signature===lastSignature&&pins.every(p=>cache.has(p))){paintTable();return}lastSignature=signature;pending=true;const note=$('#dw-hydrate-note');if(note){note.classList.add('dw-hydrating');note.textContent=' · checking selected fields…'}try{for(let i=0;i<pins.length;i+=500){const batch=pins.slice(i,i+500),res=await c.functions.invoke('workbench-hydrate',{body:{pams_pins:batch,marker_ids:columnIds()}});if(res.error)throw res.error;(res.data?.records||[]).forEach(r=>{const old=cache.get(String(r.pams_pin))||{};cache.set(String(r.pams_pin),{...old,...r})});Object.entries(res.data?.markers||{}).forEach(([pin,values])=>markerCache.set(String(pin),{...(markerCache.get(String(pin))||{}),...(values||{})}))}await ensureFloodForRows(pins);paintTable();if(mapOn)paintMap();if(note){note.textContent=' · fields checked';setTimeout(()=>{if(note)note.textContent=''},1800)}}catch(e){if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('workbench-auto-hydrate',e);if(note)note.textContent=' · some source data unavailable'}finally{if(note)note.classList.remove('dw-hydrating');pending=false}}
+-function paintTable(){const ids=columnIds();$$('#dw-rows tr').forEach(tr=>{const cb=$('[data-row]',tr);if(!cb)return;const pin=cb.dataset.row,r=cache.get(pin);if(!r)return;r.__markers={...(r.__markers||{}),...(markerCache.get(pin)||{})};const cells=$$('td',tr).slice(1);ids.forEach((id,i)=>{const cell=cells[i];if(!cell)return;const v=format(id,direct(id,r));if(v!=null){cell.textContent=v;cell.title=v;cell.classList.remove('dw-source-missing')}else{const current=cell.textContent.trim();if(current===''||current==='Not connected'||current==='Not available'){cell.textContent='Not available';cell.classList.add('dw-source-missing')}})})}
++function paintTable(){const ids=columnIds();$$('#dw-rows tr').forEach(tr=>{const cb=$('[data-row]',tr);if(!cb)return;const pin=cb.dataset.row,r=cache.get(pin);if(!r)return;r.__markers={...(r.__markers||{}),...(markerCache.get(pin)||{})};const cells=$$('td',tr).slice(1);ids.forEach((id,i)=>{const cell=cells[i];if(!cell)return;const v=format(id,direct(id,r));if(v!=null){cell.textContent=v;cell.title=v;cell.classList.remove('dw-source-missing')}else{const current=cell.textContent.trim();if(current===''||current==='Not connected'||current==='Not available'){cell.textContent='Not available';cell.classList.add('dw-source-missing')}}})})}
+ function ensureHydrateNote(){if($('#dw-hydrate-note'))return;const count=$('#dw-count');if(!count)return;const s=document.createElement('span');s.id='dw-hydrate-note';count.insertAdjacentElement('afterend',s)}
+ function ensureMapUi(){if($('#dw-map-toggle'))return;const toolbar=$('.dw-toolbar');if(!toolbar)return;const b=document.createElement('button');b.id='dw-map-toggle';b.type='button';b.innerHTML='<i class="fas fa-map-location-dot"></i> Map';const fields=$('#dw-fields');fields?fields.insertAdjacentElement('afterend',b):toolbar.prepend(b);const wrap=$('.dw-grid-wrap');if(!wrap)return;const pane=document.createElement('aside');pane.id='dw-map-panel';pane.className='dw-map-panel';pane.hidden=true;pane.innerHTML='<header><div><span>MAP VIEW</span><b id="dw-map-count">0 mapped</b></div><button id="dw-map-close" type="button" aria-label="Close map"><i class="fas fa-xmark"></i></button></header><div id="dw-map"></div><small>Map points use current parcel coordinates. Click a point to select the matching Workbench row.</small>';wrap.parentElement.insertBefore(pane,wrap.nextSibling);b.onclick=()=>toggleMap(!mapOn);$('#dw-map-close').onclick=()=>toggleMap(false)}
+ function toggleMap(on){mapOn=on;const p=$('#dw-map-panel'),b=$('#dw-map-toggle'),main=$('.dw-main');if(!p)return;p.hidden=!on;b&&b.classList.toggle('on',on);main&&main.classList.toggle('dw-map-open',on);if(on)setTimeout(async()=>{initMap();await hydrate();paintMap()},40)}
+diff --git a/property/js/lookup.js b/property/js/lookup.js
+index e74f10b..d988092 100644
+--- a/property/js/lookup.js
++++ b/property/js/lookup.js
+@@ -1928,153 +1928,6 @@
+         : ''));
+   }
+ 
+-  // ══════════════════════════════════════════════
+-  // WATCHDOG SCORE
+-  //
+-  // A 0 to 100 read on whether this property looks over-assessed relative to
+-  // what the Watchdog Valuation says it is worth, framed the way a NJ tax
+-  // appeal actually gets decided.
+-  //
+-  // Chapter 123: an assessment survives if it sits at or below true market
+-  // value times the town ratio times 1.15. Above that upper limit, the county
+-  // board is supposed to reduce it. So the score is really "how far past the
+-  // upper limit is this assessment".
+-  // ══════════════════════════════════════════════
+-  function watchdogScore(assessed, val, comps) {
+-    // The valuation is derived from the assessment, so comparing the two tells
+-    // us nothing. The only real signal available in public data is how THIS
+-    // property is assessed relative to genuinely comparable neighbors.
+-    //
+-    // Peer group: nearby homes of similar vintage and lot size. If this one
+-    // carries a materially higher assessment per comparable home than its
+-    // peers do, that is the pattern an appeal is built on.
+-    if (!assessed || !comps || comps.length < 10 || !val) return null;
+-
+-    var subjBuilt = (current && current.yearBuilt) ? +current.yearBuilt : 0;
+-    var subjAcres = (current && current.acres) ? +current.acres : 0;
+-
+-    var peers = comps.filter(function (c) {
+-      if (!c.assessed || c.assessed < 10000) return false;
+-      if (subjBuilt && c.built && Math.abs(c.built - subjBuilt) > 18) return false;
+-      if (subjAcres && c.acres && (c.acres < subjAcres * 0.5 || c.acres > subjAcres * 2.0)) return false;
+-      return true;
+-    });
+-    if (peers.length < 8) {
+-      peers = comps.filter(function (c) { return c.assessed && c.assessed > 10000; });
+-    }
+-    if (peers.length < 8) return null;
+-
+-    var pa = peers.map(function (c) { return c.assessed; });
+-    var medPeer = median(pa);
+-    if (!medPeer) return null;
+-
+-    var gap = (assessed - medPeer) / medPeer;      // how far above peers
+-    var score = Math.round(50 + Math.max(-45, Math.min(45, gap * 180)));
+-
+-    // what the assessment would be at the peer median, and the resulting range
+-    var fair = medPeer;
+-    var upper = medPeer * 1.15;                     // Chapter 123 style cushion
+-
+-    var band, label, blurb;
+-    if (assessed > upper) {
+-      band = 'bad'; label = 'Assessed above its peers';
+-      blurb = 'Comparable homes nearby, similar vintage and lot size, carry noticeably lower assessments. ' +
+-              'That gap is the pattern a New Jersey appeal is built on. It is not proof, because the public record ' +
+-              'cannot see condition or upgrades, but it is worth a real look.';
+-    } else if (gap > 0.05) {
+-      band = 'warn'; label = 'Slightly above peers';
+-      blurb = 'A little higher than comparable homes nearby, but inside the cushion New Jersey allows. ' +
+-              'An appeal here would need strong comps to succeed.';
+-    } else if (gap < -0.10) {
+-      band = 'good'; label = 'Assessed below its peers';
+-      blurb = 'This property carries a lower assessment than comparable homes nearby. Good news for the tax bill, ' +
+-              'and useful to know before you list.';
+-    } else {
+-      band = 'ok'; label = 'In line with its peers';
+-      blurb = 'The assessment tracks closely with comparable homes nearby. Nothing here suggests an appeal.';
+-    }
+-
+-    return {
+-      score: score, band: band, label: label, blurb: blurb,
+-      peerCount: peers.length, medPeer: medPeer, fair: fair, upper: upper,
+-      over: assessed - upper, overPct: gap,
+-      market: val.mid, ratio: val.ratio,
+-      appealable: assessed > upper
+-    };
+-  }
+-
+-  // Annual dollars an appeal down to the fair assessment would save.
+-  function appealSavings(sc, tax, assessed) {
+-    if (!sc || !tax || !assessed || !sc.appealable) return null;
+-    var effRate = tax / assessed;                       // dollars of tax per dollar assessed
+-    var target = sc.fair;                               // what it should be
+-    var annual = (assessed - target) * effRate;
+-    if (annual < 150) return null;                      // not worth anyone's time
+-    return { annual: annual, target: target, fiveYear: annual * 5 };
+-  }
+-
+-  function paintScore(sc, tax, assessed) {
+-    var host = el('plm-score-sec');
+-    if (!host) { return; }
+-    if (!sc) { host.innerHTML = ''; return; }
+-
+-    var COL = { bad: '#c0392b', warn: '#b8972a', ok: '#2e7d52', good: '#1e6b3a' };
+-    var col = COL[sc.band] || '#5a6070';
+-    var save = appealSavings(sc, tax, assessed);
+-
+-    // gauge geometry: 180 degree arc
+-    var pctOf = Math.max(0, Math.min(100, sc.score)) / 100;
+-    var ang = Math.PI * (1 - pctOf);
+-    var cx = 130, cy = 118, rad = 92;
+-    var nx = cx + rad * Math.cos(ang), ny = cy - rad * Math.sin(ang);
+-
+-    host.innerHTML =
+-      '<h3 class="plm-sec-h">Watchdog Score</h3>' +
+-      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is the comparison a New Jersey appeal turns on.</p>' +
+-      '<div class="score-wrap">' +
+-        '<div class="score-gauge">' +
+-          '<svg viewBox="0 0 260 150" role="img" aria-label="Watchdog Score ' + sc.score + '">' +
+-            '<defs><linearGradient id="scg" x1="0" y1="0" x2="1" y2="0">' +
+-              '<stop offset="0%" stop-color="#1e6b3a"/><stop offset="45%" stop-color="#2e7d52"/>' +
+-              '<stop offset="68%" stop-color="#b8972a"/><stop offset="100%" stop-color="#c0392b"/>' +
+-            '</linearGradient></defs>' +
+-            '<path d="M38 118 A92 92 0 0 1 222 118" fill="none" stroke="#eef0f5" stroke-width="17" stroke-linecap="round"/>' +
+-            '<path d="M38 118 A92 92 0 0 1 222 118" fill="none" stroke="url(#scg)" stroke-width="17" stroke-linecap="round" opacity="0.9"/>' +
+-            '<line x1="' + cx + '" y1="' + cy + '" x2="' + nx.toFixed(1) + '" y2="' + ny.toFixed(1) + '" stroke="#0e2248" stroke-width="4" stroke-linecap="round"/>' +
+-            '<circle cx="' + cx + '" cy="' + cy + '" r="8" fill="#0e2248"/>' +
+-            '<text x="38" y="142" font-size="10" fill="#8a93a6">Under</text>' +
+-            '<text x="222" y="142" font-size="10" fill="#8a93a6" text-anchor="end">Over</text>' +
+-          '</svg>' +
+-          '<div class="score-num" style="color:' + col + '">' + sc.score + '</div>' +
+-          '<div class="score-lbl" style="color:' + col + '">' + esc(sc.label) + '</div>' +
+-        '</div>' +
+-        '<div class="score-body">' +
+-          '<p>' + esc(sc.blurb) + '</p>' +
+-          '<div class="score-rows">' +
+-            '<div class="score-row"><span>This assessment</span><b>' + money(assessed) + '</b></div>' +
+-            '<div class="score-row"><span>Median of ' + sc.peerCount + ' comparable homes nearby</span><b>' + money(sc.medPeer) + '</b></div>' +
+-            '<div class="score-row"><span>Upper limit before it looks out of line</span><b>' + money(sc.upper) + '</b></div>' +
+-            (current.valuation && current.valuation.ratioSource === 'official'
+-              ? '<div class="score-row"><span>Official ratio, tax year ' + current.valuation.ratioYear + '</span><b>' +
+-                (current.valuation.ratio * 100).toFixed(2) + '%</b></div>' : '') +
+-            (sc.over > 0 ? '<div class="score-row over"><span>Assessed above the limit by</span><b>' + money(sc.over) + '</b></div>' : '') +
+-          '</div>' +
+-          (save
+-            ? '<div class="score-save">' +
+-                '<div class="score-save-n">' + money(save.annual) + '<span>/yr</span></div>' +
+-                '<div class="score-save-l">Estimated tax savings if the assessment came down to fair value. ' +
+-                  'That is about <b>' + money(save.fiveYear) + '</b> over five years.</div>' +
+-                '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">See if I can win this appeal</button>' +
+-              '</div>'
+-            : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'value\')">Have John double check this</button>') +
+-        '</div>' +
+-      '</div>' +
+-      '<div class="score-fine">Screening comparison only, built from public assessment records. It cannot see condition, upgrades, or interior finish, ' +
+-      'and those are exactly what an assessor weighs. ' +
+-      'A real appeal needs current comparable sales and the municipality\u2019s official equalization ratio for the tax year. ' +
+-      'Filing deadlines are generally April 1, or May 1 in a town that recently revalued.</div>';
+-  }
+-
+   // ══════════════════════════════════════════════
+   // OWNERSHIP TIMELINE
+   // ══════════════════════════════════════════════
