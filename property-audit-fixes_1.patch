@@ -1,3 +1,50 @@
+diff --git a/property/css/lookup/07-search-corrections.css b/property/css/lookup/07-search-corrections.css
+index 3e63f7d..5ebec90 100644
+--- a/property/css/lookup/07-search-corrections.css
++++ b/property/css/lookup/07-search-corrections.css
+@@ -48,7 +48,7 @@ body.hood-on .hd-right{position:relative;z-index:2;}
+ }
+ .njw-card-menu-btn:hover{background:#e8edf4!important;}
+ .njw-card-menu{top:auto!important;right:12px!important;margin-top:4px!important;border-radius:10px!important;}
+-.njw-card-score b.loading{color:#7d8798!important;font-weight:700!important;}
++/* Loading state retired: the score line no longer fetches a number. */
+ 
+ /* Force the dark SEO intro to retain high contrast over inherited lookup rules. */
+ .njw-seo-intro,.njw-seo-intro *{color:#fff!important;}
+diff --git a/property/css/lookup/09-search-corrections-v3.css b/property/css/lookup/09-search-corrections-v3.css
+index d36b83e..d1b88ae 100644
+--- a/property/css/lookup/09-search-corrections-v3.css
++++ b/property/css/lookup/09-search-corrections-v3.css
+@@ -44,9 +44,26 @@ body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-botto
+   width:19px;height:19px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
+ }
+ 
+-/* Score should look like a first-class datum while async calculation completes. */
+-.njw-card-score b{min-width:40px;text-align:right!important;}
+-.njw-card-score b:empty:after{content:"Calculating…";color:#7b8595;font-weight:700;}
++/* The score line is a link now, not a number. Search cards never show the
++   Watchdog Score itself: unsubscribed visitors get a Subscribe prompt, paid
++   accounts get a link through to that property's full report. */
++.njw-card-score{text-decoration:none!important;cursor:pointer;transition:color .12s ease;}
++.njw-card-score b{margin-left:auto;text-align:right!important;white-space:nowrap;}
++
++.njw-card-score-locked b{
++  color:#8a6d14;
++  background:#fdf6e2;
++  border:1px solid #f0e2b6;
++  border-radius:999px;
++  padding:2px 10px;
++  font-size:11.5px;
++  letter-spacing:.02em;
++}
++.njw-card-score-locked:hover b{background:#f8edd0;border-color:#e3d09a;}
++
++.njw-card-score-open b{color:#0e2248;}
++.njw-card-score-open b:after{content:" \2192";font-weight:700;}
++.njw-card-score-open:hover b{color:#1d4ed8;}
+ 
+ /* The illustration is the literal end of the right-hand scroll container. */
+ #pl-hood .hd-right>#njw-search-art{
 diff --git a/property/developer-data.html b/property/developer-data.html
 index fe022e4..e4f6965 100644
 --- a/property/developer-data.html
@@ -19,6 +66,27 @@ index 0e5cf25..cf895a6 100644
 \ No newline at end of file
 +(()=>{'use strict';const q=new URLSearchParams(location.search),profession=q.get('profession')==='mortgage'?'mortgage':'agent',play=q.get('play')||'geo-farm';const names={'geo-farm':'Strategic GeoFarm','sphere-review':'Sphere Property Review','assessment-change':'Assessment Change Conversation','recent-sale-circle':'Recent Sale Circle','long-hold':'Long-Hold Homeowners','permit-complete':'Permit & Improvement Follow-up','tax-pressure':'Tax Change Review','buyer-need':'Buyer Need Match','commercial-farm':'Small Commercial Farm','watchdog-stack':'Watchdog Signal Stack','purchase-farm':'Purchase Opportunity Farm','recent-purchase':'Recent Purchase Follow-up','assessment-payment':'Tax & Payment Context','improvement-finance':'Improvement Activity','portfolio':'Investor Portfolio Watch','refi-review':'Property Value Review','partner-farm':'Agent Partner Territory','commercial-lending':'Commercial Property Watch','change-alert':'Client Property Change Desk'},$=id=>document.getElementById(id);$('rw-title').textContent=names[play]||'Professional Growth Workflow';$('rw-kicker').textContent=(profession==='agent'?'RESIDENTIAL AGENT':'MORTGAGE PROFESSIONAL')+' · WORKFLOW BUILDER';$('rw-name').value=names[play]||'';if(play.includes('commercial'))$('rw-class').value='4A,4B,4C';if(['municipality','county','zip'].includes(q.get('scope'))) $('rw-scope').value=q.get('scope');if(q.get('value')){$('rw-value').value=q.get('value');$('rw-name').value=(names[play]||'Growth Campaign')+' · '+q.get('value')}Promise.resolve(window.njptrAccessReady).then(ctx=>{const client=window.NJPTRAccess.client(),user=ctx.user;if(!user)return;$('rw-form').onsubmit=async e=>{e.preventDefault();const btn=e.submitter,original=btn.innerHTML;btn.disabled=true;btn.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Building campaign…';const raw=$('rw-class').value,record={user_id:user.id,profession,play_key:play,name:$('rw-name').value.trim(),scope_type:$('rw-scope').value,scope_value:$('rw-value').value.trim(),criteria:{property_classes:raw?raw.split(','):[]},crm_name:$('rw-crm').value.trim()||null,status:'active'};const ins=await client.from('professional_campaigns').insert(record).select().single();if(ins.error){btn.disabled=false;btn.innerHTML=original;$('rw-result').innerHTML='<div class="gc-card"><b>Campaign could not be created</b><p>'+ins.error.message+'</p></div>';return}location.href='/property/growth/results.html?id='+encodeURIComponent(ins.data.id)}}).catch(()=>{})})();
 \ No newline at end of file
+diff --git a/property/index.html b/property/index.html
+index 74c6c27..e10b656 100644
+--- a/property/index.html
++++ b/property/index.html
+@@ -96,7 +96,7 @@
+ }
+ </script>
+ </head>
+-<body>
++<body data-plan-auto="true">
+ <!-- SITE NAV -->
+ <header class="wd-nav" id="wd-nav">
+   <div class="wd-nav-in">
+@@ -1604,6 +1604,7 @@
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+ <script src="https://accounts.google.com/gsi/client" async defer></script>
+ <script src="/scripts.js"></script>
++<script src="/property/js/plan-context.js?v=20260812a"></script>
+ <script src="/property/js/public-nav.js"></script>
+ <script src="/property/js/ownership-verification.js"></script>
+ <script src="/property/js/lookup.js"></script>
 diff --git a/property/insights/article.html b/property/insights/article.html
 index 90a537f..08ef58d 100644
 --- a/property/insights/article.html
@@ -203,3 +271,134 @@ index e74f10b..d988092 100644
    // ══════════════════════════════════════════════
    // OWNERSHIP TIMELINE
    // ══════════════════════════════════════════════
+diff --git a/property/js/search-corrections-v3.js b/property/js/search-corrections-v3.js
+index b35c729..704ea1d 100644
+--- a/property/js/search-corrections-v3.js
++++ b/property/js/search-corrections-v3.js
+@@ -1,23 +1,9 @@
+-/* NJW-96 correction v3: statewide search, persisted peer scores, sliders, card actions. */
++/* NJW-96 correction v3: statewide search, sliders, card actions, gated score CTA. */
+ (function(){
+   'use strict';
+-  var PARCEL='https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+   var GEOCODE='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+-  var SB_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
+-  var SB_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+-  var client=null,scoreBusy=false,lastScoreSig='';
+ 
+-  function sb(){
+-    if(client)return client;
+-    if(window.__njwSB){client=window.__njwSB;return client;}
+-    if(!window.supabase)return null;
+-    client=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
+-    window.__njwSB=client;
+-    return client;
+-  }
+-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+   function pinOf(card){var b=card.querySelector('[data-save-pin]');return b?b.getAttribute('data-save-pin'):'';}
+-  function median(a){if(!a.length)return 0;var b=a.slice().sort(function(x,y){return x-y;}),m=b.length>>1;return b.length%2?b[m]:(b[m-1]+b[m])/2;}
+   function townFromTitle(){var h=document.getElementById('hd-results-title');return h?h.textContent.replace(/,\s*NJ\s+Property Tax Assessments.*$/i,'').trim():'';}
+ 
+   /* Statewide search: never filter only the already-rendered cards. */
+@@ -91,52 +77,63 @@
+     });
+   }
+ 
+-  function scoreFromPeers(subject,rows){
+-    if(!subject||!subject.assessed)return null;
+-    var peers=rows.filter(function(c){if(c.pin===subject.pin||!c.assessed||c.assessed<10000)return false;if(subject.built&&c.built&&Math.abs(c.built-subject.built)>18)return false;if(subject.acres&&c.acres&&(c.acres<subject.acres*.5||c.acres>subject.acres*2))return false;return true;});
+-    if(peers.length<8)peers=rows.filter(function(c){return c.pin!==subject.pin&&c.assessed>10000;});
+-    if(peers.length<8)return null;
+-    var med=median(peers.map(function(c){return c.assessed;}));if(!med)return null;
+-    var gap=(subject.assessed-med)/med;
+-    return {score:Math.round(50+Math.max(-45,Math.min(45,gap*180))),peerCount:peers.length,peerMedian:med};
++  // ── Watchdog Score on search cards ──────────────────────────────
++  //
++  // Search cards no longer display a score. The number that used to sit here
++  // came from an on-demand peer-gap calculation, which is NOT the Watchdog
++  // Score: the real one is the six-component composite in
++  // js/dashboard/tools/watchdog-score.js. Two different numbers under one
++  // name was worse than no number, so the line is now a gated link.
++  //
++  //   no subscription -> "Subscribe", links to the pricing page
++  //   subscribed      -> "View score", links to that property's report
++  //
++  // The composite is deliberately not computed here. It needs municipal
++  // uniformity, appeal, SR1A and revaluation lookups that only load on the
++  // dashboard, and it is a paid signal.
++  function isSubscriber(){
++    try{ return !!(window.NJPTRPlan && window.NJPTRPlan.can && window.NJPTRPlan.can('pro')); }
++    catch(e){ return false; }
+   }
+ 
+-  function fetchPeerRows(){
+-    // Prefer the parcel list already loaded to build the visible cards —
+-    // guaranteed to be the same town/area shown on screen. The independent
+-    // map-bounds query below was found to sometimes drift to a different
+-    // town's parcels entirely (map bounds not tightly matching the visible
+-    // result set), which meant peer PINs could never match any card's PIN.
+-    if(window.__njwRows&&window.__njwRows.length){
+-      return Promise.resolve(window.__njwRows.map(function(x){
+-        return {pin:x.pin||'',town:x.town||'',county:x.county||'',assessed:+x.assessed||0,tax:+x.tax||0,built:+x.built||0,acres:+x.acres||0};
+-      }));
++  function scoreLineHTML(pin){
++    if(isSubscriber() && pin){
++      return '<a class="njw-card-score njw-card-score-open" href="/property/home.html?pin='+
++        encodeURIComponent(pin)+'" title="Open the full Watchdog report for this property">'+
++        '<i class="fas fa-shield-dog"></i> Watchdog Score <b>View score</b></a>';
+     }
+-    var map=window.__njw96HoodMap;if(!map)return Promise.resolve([]);var b=map.getBounds(),latPad=Math.max(.015,(b.getNorth()-b.getSouth())*.65),lonPad=Math.max(.02,(b.getEast()-b.getWest())*.65);
+-    var geom={xmin:b.getWest()-lonPad,ymin:b.getSouth()-latPad,xmax:b.getEast()+lonPad,ymax:b.getNorth()+latPad,spatialReference:{wkid:4326}};
+-    var p=new URLSearchParams({geometry:JSON.stringify(geom),geometryType:'esriGeometryEnvelope',inSR:'4326',outSR:'4326',spatialRel:'esriSpatialRelIntersects',where:"PROP_CLASS = '2' AND NET_VALUE > 10000",outFields:'PAMS_PIN,MUN_NAME,COUNTY,NET_VALUE,LAST_YR_TX,YR_CONSTR,CALC_ACRE',returnGeometry:'false',resultRecordCount:'2000',f:'json'});
+-    return fetch(PARCEL+'?'+p.toString()).then(function(r){return r.json();}).then(function(d){return(d.features||[]).map(function(f){var a=f.attributes||{};return{pin:a.PAMS_PIN||'',town:a.MUN_NAME||'',county:a.COUNTY||'',assessed:+a.NET_VALUE||0,tax:+a.LAST_YR_TX||0,built:+a.YR_CONSTR||0,acres:+a.CALC_ACRE||0};});});
++    return '<a class="njw-card-score njw-card-score-locked" href="/property/pro.html" '+
++      'title="Watchdog Scores are part of a Watchdog subscription">'+
++      '<i class="fas fa-shield-dog"></i> Watchdog Score <b>Subscribe</b></a>';
++  }
++
++  function ensureScoreLine(card){
++    var body=card.querySelector('.hd-body');if(!body)return;
++    var pin=pinOf(card),want=scoreLineHTML(pin);
++    var line=body.querySelector('.njw-card-score');
++    // Replace rather than patch: the element type changes between the two
++    // states (both anchors now, but hrefs and classes differ), and an older
++    // cached div may still be in the DOM from a previous deploy.
++    if(!line){
++      body.insertAdjacentHTML('beforeend',want);
++      return body.querySelector('.njw-card-score');
++    }
++    if(line.outerHTML!==want){
++      line.outerHTML=want;
++      return body.querySelector('.njw-card-score');
++    }
++    return line;
+   }
+-  function paintScore(card,val,title){var b=card.querySelector('.njw-card-score b');if(!b)return;b.textContent=val==null?'Calculating…':String(Math.round(val));if(title)b.title=title;card.dataset.watchdogScore=val==null?'':String(val);}
+-  function ensureScoreLine(card){var body=card.querySelector('.hd-body');if(!body)return;var line=body.querySelector('.njw-card-score');if(!line){line=document.createElement('div');line.className='njw-card-score';line.innerHTML='<i class="fas fa-shield-dog"></i> Watchdog Score <b>Calculating…</b>';body.appendChild(line);}return line;}
+ 
+   function scoreCards(){
+-    if(scoreBusy||!sb()||!document.body.classList.contains('hood-on'))return;
+-    var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));if(!cards.length)return;
+-    cards.forEach(function(c){ensureScoreLine(c);});
+-    var pins=cards.map(pinOf).filter(Boolean),sig=pins.join('|');if(sig===lastScoreSig&&cards.every(function(c){return c.dataset.njwPeerScoreDone==='1';}))return;lastScoreSig=sig;scoreBusy=true;
+-    sb().rpc('get_public_watchdog_score_cache',{p_pins:pins}).then(function(cacheRes){
+-      var cache=Object.create(null);if(!cacheRes.error)(cacheRes.data||[]).forEach(function(x){cache[x.pams_pin]=+x.watchdog_score;});
+-      cards.forEach(function(c){var v=cache[pinOf(c)];if(v!=null){paintScore(c,v,'Saved Watchdog peer score');c.dataset.njwPeerScoreDone='1';}else paintScore(c,null);});
+-      var missing=cards.filter(function(c){return !c.dataset.njwPeerScoreDone;});if(!missing.length)return [];
+-      return fetchPeerRows().then(function(rows){
+-        var byPin=Object.create(null);rows.forEach(function(x){byPin[x.pin]=x;});var saves=[];
+-        missing.forEach(function(card){var subject=byPin[pinOf(card)],sc=scoreFromPeers(subject,rows);if(!sc){paintScore(card,50,'Neutral fallback: insufficient peer evidence');card.dataset.njwPeerScoreDone='1';return;}paintScore(card,sc.score,'Calculated on demand from nearby comparable assessments');card.dataset.njwPeerScoreDone='1';saves.push({pams_pin:subject.pin,watchdog_score:sc.score,town:subject.town,county:subject.county,peer_count:sc.peerCount,peer_median:sc.peerMedian,assessed_value:subject.assessed});});
+-        if(saves.length)return sb().rpc('save_public_watchdog_score_cache',{p_rows:saves});return [];
+-      });
+-    }).catch(function(){cards.forEach(function(c){if(!c.dataset.njwPeerScoreDone){paintScore(c,50,'Neutral fallback');c.dataset.njwPeerScoreDone='1';}});}).finally(function(){scoreBusy=false;var sel=document.getElementById('njw-sort-select');if(sel&&/score/i.test(sel.value))sel.dispatchEvent(new Event('change'));});
++    var cards=Array.prototype.slice.call(document.querySelectorAll('#hd-list .hd-card'));
++    cards.forEach(ensureScoreLine);
+   }
+ 
++  // Plan resolves asynchronously after sign-in, so repaint when it lands.
++  window.addEventListener('njptr:plan-change',function(){ scoreCards(); });
++
++
+   function fixScrollEnd(){
+     var right=document.querySelector('#pl-hood .hd-right'),art=document.getElementById('njw-search-art');if(!right||!art)return;
+     if(art.parentNode!==right)right.appendChild(art);if(art!==right.lastElementChild)right.appendChild(art);
