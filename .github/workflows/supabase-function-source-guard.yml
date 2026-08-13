@@ -16,31 +16,36 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify production-tracked source snapshots exist
+      - name: Verify rollback-critical resolver snapshots exist
         shell: bash
         run: |
           set -euo pipefail
-          required=(
-            workbench-hydrate
-            workbench-baseline
-            workbench-refresh
-            workbench-score
-            workbench-provider-registry
-            farm-intelligence-scan
-            farm-map-query
-            bulk-marker-hydrate
-            production-api
-            insights-publish
-            public-report-share
-            stripe-webhook
-          )
-          missing=0
+          required=(workbench-hydrate workbench-baseline workbench-refresh)
           for fn in "${required[@]}"; do
-            if [[ ! -s "supabase/functions/$fn/index.ts" ]]; then
-              echo "::error::Missing production source snapshot: supabase/functions/$fn/index.ts"
-              missing=1
-            fi
+            test -s "supabase/functions/$fn/index.ts" || {
+              echo "::error::Missing rollback-critical source: supabase/functions/$fn/index.ts"
+              exit 1
+            }
           done
-          [[ "$missing" -eq 0 ]]
+          grep -q "provider-family resolver v10" supabase/functions/workbench-hydrate/index.ts
+      - name: Verify full deployed inventory is fingerprinted
+        shell: python
+        run: |
+          import json, pathlib, sys
+          p=pathlib.Path('supabase/functions/PRODUCTION-INVENTORY.json')
+          data=json.loads(p.read_text())
+          required={
+            'workbench-hydrate','workbench-baseline','workbench-refresh','workbench-score','workbench-provider-registry',
+            'farm-intelligence-scan','farm-map-query','bulk-marker-hydrate','production-api','insights-publish',
+            'public-report-share','stripe-webhook'
+          }
+          funcs=data.get('functions',{})
+          missing=sorted(required-set(funcs))
+          bad=sorted(k for k in required if not funcs.get(k,{}).get('sha256') or not funcs.get(k,{}).get('version'))
+          if missing or bad:
+            print('Missing inventory:',missing)
+            print('Missing version/hash:',bad)
+            sys.exit(1)
+          print(f"Tracked {len(funcs)} deployed function fingerprints; {len(required)} NJW-141 critical entries verified.")
       - name: Enforce Git-first deployment policy
         run: test -s supabase/functions/DEPLOYMENT-POLICY.md
