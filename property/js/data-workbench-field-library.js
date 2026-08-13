@@ -26,7 +26,7 @@ const categoryLabel=m=>{
 const order=['Parcel & Location','Ownership & Mailing','Assessment & Valuation','Property Tax','Sales & Deeds','Building & Improvements','Appeal & Assessment Equity','Flood & Environmental','Permits & Construction','Market Intelligence','Finance & Liens','Watchdog Intelligence','Other Property Data'];
 async function getCatalog(){
   if(catalog)return catalog;
-  try{const r=await fetch('/property/data/marker-registry.json?v=20260811f',{cache:'no-store'});if(r.ok)catalog=await r.json();}catch(_){ }
+  try{const r=await fetch('/property/data/marker-registry.json',{cache:'no-store'});if(r.ok)catalog=await r.json();}catch(_){ }
   return catalog||{markers:[]};
 }
 function markerMap(){return new Map((catalog?.markers||[]).map(m=>[m.id,m]));}
