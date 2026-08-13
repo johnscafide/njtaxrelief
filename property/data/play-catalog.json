@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-13",
+  "professions": {
+    "agents": [
+      {
+        "slug": "geo-farm",
+        "title": "Build a geographic farm in any New Jersey town",
+        "query": "nj real estate farming area",
+        "example": "In Gloucester Township, start with a municipality-wide parcel set, then narrow by property class and layer assessment, sale and permit changes. A 56.95% 2026 Director's Ratio is context for assessment interpretation, not a lead score.",
+        "limits": "Public property records do not identify seller intent, financial distress, protected-class traits or whether an owner wants contact."
+      },
+      {
+        "slug": "sphere-review",
+        "title": "Monitor the properties your past clients own",
+        "query": "real estate sphere of influence tracking",
+        "example": "An agent can attach known-client addresses from their CRM to Watchdog and monitor assessment, tax and permit changes while keeping identity and consent in the CRM.",
+        "limits": "Watchdog should not infer personal circumstances from property changes; the CRM remains the source of the relationship and consent."
+      },
+      {
+        "slug": "recent-sale-circle",
+        "title": "Work the circle around a recent New Jersey sale",
+        "query": "just sold farming real estate",
+        "example": "Use a verified recent sale as the center of a local research set, then compare surrounding assessments and recent verified-sale context before creating neighborhood-specific market content.",
+        "limits": "A nearby sale is market context, not proof that another property would sell for the same price."
+      },
+      {
+        "slug": "long-hold",
+        "title": "Research long-tenure properties in a farm area",
+        "query": "long time homeowners list",
+        "example": "Where deed and sale-year history is supported, sort a farm by years since last recorded sale and then verify each record before outreach.",
+        "limits": "A long holding period does not imply age, equity, motivation, family status or likelihood to sell."
+      },
+      {
+        "slug": "tax-pressure",
+        "title": "Find properties affected by material tax change",
+        "query": "nj property tax increase by town",
+        "example": "Combine parcel tax history with municipal budget pressure so a tax increase can be explained in context instead of treated as a generic distress signal.",
+        "limits": "Budget pressure is a screening indicator, not a forecast of a specific future bill."
+      },
+      {
+        "slug": "buyer-need",
+        "title": "Match a buyer need against New Jersey property records",
+        "query": "property search by criteria nj",
+        "example": "Build a property universe by geography, class, lot area or building attributes, then manually research likely fit before any lawful outreach through the agent's CRM.",
+        "limits": "Public property attributes do not establish willingness to sell or fair-housing-safe marketing eligibility."
+      },
+      {
+        "slug": "commercial-farm",
+        "title": "Build a small commercial property farm",
+        "query": "commercial property farming nj",
+        "example": "Track commercial-class parcels for assessment, sale and permit changes, then prioritize manual review when several independent property signals overlap.",
+        "limits": "Property records do not reveal business health, tenant circumstances or owner motivation."
+      },
+      {
+        "slug": "watchdog-stack",
+        "title": "Stack independent Watchdog property signals",
+        "query": "property data signals nj",
+        "example": "A parcel with an assessment change, a recent permit and above-normal municipal tax pressure can be placed higher in a research queue because multiple property facts changed.",
+        "limits": "Signal stacking is prioritization for research, not a prediction about a person or transaction."
+      }
+    ],
+    "mortgage": [
+      {
+        "slug": "purchase-farm",
+        "title": "Build a purchase-opportunity property territory",
+        "query": "mortgage purchase farming nj",
+        "example": "Organize a territory around active agent relationships and monitor verified sale, assessment and property-record changes that create a reason for a property-side review.",
+        "limits": "Do not infer creditworthiness, income, eligibility or borrowing intent from property data."
+      },
+      {
+        "slug": "recent-purchase",
+        "title": "Review recent-purchase property cohorts",
+        "query": "recent home purchase follow up mortgage",
+        "example": "Track known clients or consented cohorts after purchase for material property-tax and assessment changes that may affect escrow conversations.",
+        "limits": "This is property servicing context, not a refinance solicitation trigger by itself."
+      },
+      {
+        "slug": "assessment-payment",
+        "title": "Translate assessment change into tax-payment context",
+        "query": "nj assessment change mortgage escrow",
+        "example": "If a $300,000 assessment changes materially, compare the new assessment with the municipality's ratio and tax context before discussing possible escrow impact.",
+        "limits": "Only the tax authority and servicer determine the actual bill and escrow analysis."
+      },
+      {
+        "slug": "improvement-finance",
+        "title": "Monitor permitted improvement activity",
+        "query": "home improvement financing leads nj",
+        "example": "For an existing client relationship, a completed permit can trigger a property review to discuss updated value and financing needs without assuming the owner wants a loan.",
+        "limits": "A permit does not establish project cost, completion quality, borrowing intent or eligibility."
+      },
+      {
+        "slug": "portfolio",
+        "title": "Watch an investor property portfolio",
+        "query": "rental property tax monitoring nj",
+        "example": "Group known investment properties by municipality and monitor tax, assessment, permit and sale-record changes in one property-side workspace.",
+        "limits": "Portfolio monitoring does not estimate borrower financial condition."
+      },
+      {
+        "slug": "refi-review",
+        "title": "Prepare a property-value refinance review",
+        "query": "property value review refinance nj",
+        "example": "Use verified sale ratios, assessment context and property attributes to identify records worth a manual value review, then use lender-approved valuation processes.",
+        "limits": "Watchdog is not an appraisal and does not determine loan eligibility."
+      },
+      {
+        "slug": "partner-farm",
+        "title": "Share a property intelligence territory with an agent partner",
+        "query": "mortgage realtor farming partnership",
+        "example": "A lender and agent can work from the same geography and property changes while each keeps contact identity and consent in their own CRM.",
+        "limits": "The shared layer should contain property facts, not protected or inferred consumer traits."
+      },
+      {
+        "slug": "commercial-lending",
+        "title": "Monitor commercial property changes for lending research",
+        "query": "commercial property monitoring nj",
+        "example": "Monitor commercial parcels for transfers, improvements, assessment changes and environmental due-diligence flags before a relationship-based review.",
+        "limits": "Public property intelligence does not establish business creditworthiness or financing need."
+      },
+      {
+        "slug": "change-alert",
+        "title": "Build a client property-change desk",
+        "query": "mortgage client property alerts",
+        "example": "Known-client properties can be watched for material assessment, permit and tax changes so a loan officer can provide timely service.",
+        "limits": "Alerts should be tied to an existing relationship or compliant outreach process."
+      }
+    ]
+  }
+}

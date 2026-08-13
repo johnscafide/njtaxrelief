@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "policy": {
+    "unique_value_required": true,
+    "self_canonical_required": true,
+    "structured_data_required": true,
+    "source_required_for_glossary": true,
+    "prune_after_days_without_impressions": 90,
+    "gated_paths_excluded": [
+      "/property/growth/",
+      "/property/data-workbench.html",
+      "/property/data-center.html"
+    ]
+  },
+  "clusters": {
+    "insights": "sitemap-content.xml",
+    "plays": "sitemap-plays.xml",
+    "glossary": "sitemap-glossary.xml"
+  }
+}

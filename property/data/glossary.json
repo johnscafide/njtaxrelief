@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-13",
+  "terms": [
+    {
+      "slug": "chapter-123",
+      "term": "Chapter 123",
+      "definition": "New Jersey's statutory assessment-ratio framework used by county tax boards to compare an assessment with true value and the municipality's common level range.",
+      "example": "A $400,000 supported true value in Gloucester Township at a 56.95% 2026 Director's Ratio has a common-level assessment of about $227,800 before applying the certified lower and upper range.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+    },
+    {
+      "slug": "directors-ratio",
+      "term": "Director's Ratio / equalization ratio",
+      "definition": "The state-certified average ratio of assessed value to true value for a municipality.",
+      "example": "At 54.32%, a $300,000 assessment corresponds to roughly $552,283 of equalized value before other evidence is considered.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+    },
+    {
+      "slug": "coefficient-of-deviation",
+      "term": "Coefficient of deviation",
+      "definition": "A state measure of assessment uniformity showing how tightly individual assessment-to-sale ratios cluster around the municipality's average.",
+      "example": "A lower coefficient generally indicates a more uniform assessment roll; it does not prove one parcel is correctly assessed.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "added-assessment",
+      "term": "Added assessment",
+      "definition": "An additional assessment imposed when taxable new construction or an improvement is completed after the regular assessment date.",
+      "example": "A completed addition can create an added assessment for the portion of the tax year after completion, so the seller's old bill may not represent the future carrying cost.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "omitted-assessment",
+      "term": "Omitted assessment",
+      "definition": "An assessment used when taxable property or an improvement should have been assessed but was omitted from the regular roll.",
+      "example": "An omitted improvement can create a later bill even though it did not appear on the original annual assessment notice.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "revaluation-vs-reassessment",
+      "term": "Revaluation vs. reassessment",
+      "definition": "Both update assessments toward current value, but New Jersey uses distinct administrative processes and terminology for municipal-wide assessment maintenance.",
+      "example": "A townwide reset can materially change assessed values while the final tax burden still depends on the new rate and total ratable base.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "true-value-vs-assessed-value",
+      "term": "True value vs. assessed value",
+      "definition": "True value is market-value concept; assessed value is the taxable value carried on the municipal assessment roll.",
+      "example": "A $300,000 assessment in a municipality assessed near 54% of true value should not be read as a $300,000 market-value opinion.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "common-level-range",
+      "term": "Common level range",
+      "definition": "The Chapter 123 corridor around a municipality's certified ratio, generally 15% above and below the average ratio.",
+      "example": "Gloucester Township's 56.95% ratio produces a certified range approximately 48.41% to 65.49% for tax year 2026.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+    },
+    {
+      "slug": "senior-freeze-base-year",
+      "term": "Senior Freeze base year",
+      "definition": "The tax year used as the comparison point for an eligible Senior Freeze applicant's future property-tax reimbursement calculation.",
+      "example": "The actionable number is the eligible base-year tax amount, not simply the homeowner's current age or current bill.",
+      "source": "https://www.nj.gov/treasury/taxation/ptr/"
+    },
+    {
+      "slug": "pilot-agreement",
+      "term": "PILOT agreement",
+      "definition": "A payment-in-lieu-of-taxes arrangement in which an approved project makes negotiated payments under an applicable redevelopment or tax-exemption program instead of ordinary property taxes.",
+      "example": "A PILOT payment cannot be compared directly with a conventional parcel tax bill without reviewing the governing agreement and program.",
+      "source": "https://www.nj.gov/dca/"
+    },
+    {
+      "slug": "abatement-vs-exemption",
+      "term": "Abatement vs. exemption",
+      "definition": "An exemption removes qualifying value from taxation while an abatement generally reduces or phases the taxable obligation under a specific legal program.",
+      "example": "The words are often used loosely in marketing; the actual ordinance, approval and tax treatment control.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "sr1a",
+      "term": "SR-1A",
+      "definition": "New Jersey's property-transfer and sales-ratio record used by the Division of Taxation in equalization and assessment analysis.",
+      "example": "Watchdog uses state-verified usable sales rather than treating every recorded transfer as an arm's-length comparable.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"
+    },
+    {
+      "slug": "mod-iv",
+      "term": "MOD-IV",
+      "definition": "New Jersey's standardized local property-tax assessment data format used to transmit municipal assessment-roll information.",
+      "example": "Parcel assessment, class, tax and many physical fields in Watchdog originate from MOD-IV-derived public records.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "farmland-assessment",
+      "term": "Farmland assessment",
+      "definition": "A preferential assessment program for qualifying actively devoted agricultural or horticultural land, subject to statutory requirements and possible rollback taxes after disqualifying changes in use.",
+      "example": "A low farmland assessment should not be treated as ordinary residential market-value evidence.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/farmlandassessment.shtml"
+    },
+    {
+      "slug": "tax-rate-vs-effective-tax-rate",
+      "term": "Tax rate vs. effective tax rate",
+      "definition": "The municipal tax rate is applied to assessed value; an effective tax rate expresses tax relative to estimated true market value, making cross-town comparisons more meaningful.",
+      "example": "Two towns can show very different nominal rates simply because their assessment levels differ.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    },
+    {
+      "slug": "improvement-ratio",
+      "term": "Improvement ratio",
+      "definition": "The share of a parcel's total assessment allocated to improvements rather than land.",
+      "example": "If improvements are $240,000 of a $300,000 total assessment, the improvement share is 80%; that describes the assessment split, not construction quality or market value.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+    }
+  ]
+}

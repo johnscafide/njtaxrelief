@@ -1,0 +1,22 @@
+name: SEO content quality guard
+on:
+  push:
+    paths:
+      - 'property/data/play-catalog.json'
+      - 'property/data/glossary.json'
+      - 'api/play.js'
+      - 'api/glossary.js'
+      - 'scripts/validate-seo-content.js'
+  pull_request:
+    paths:
+      - 'property/data/play-catalog.json'
+      - 'property/data/glossary.json'
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/validate-seo-content.js
