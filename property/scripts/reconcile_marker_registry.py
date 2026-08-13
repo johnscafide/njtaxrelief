@@ -7,17 +7,20 @@ from datetime import datetime, timezone
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]; DATA=ROOT/'property'/'data'
 REGISTRY=DATA/'marker-registry.json'; SOURCE_REGISTRY=DATA/'source-registry.json'; REPORT=DATA/'marker-reconciliation.json'
-HYDRATE=ROOT/'supabase'/'functions'/'workbench-hydrate'/'index.ts'; SCORE=ROOT/'supabase'/'functions'/'workbench-score'/'index.ts'
+HYDRATE=ROOT/'supabase'/'functions'/'workbench-hydrate'/'index.ts'; REFRESH=ROOT/'supabase'/'functions'/'workbench-refresh'/'index.ts'; SCORE=ROOT/'supabase'/'functions'/'workbench-score'/'index.ts'
 DIRECT={'nj-parcels-modiv','nj-sr1a','nj-cod','nj-dca-budget','nj-tax-court-appeals'}; RUNTIME={'njdep-dca-live'}
 COMPUTED={'watchdog-models','watchdog-professional','watchdog-professional-v030','watchdog-institutional','watchdog-statewide-intelligence','watchdog-models-v035'}
 def load(p): return json.loads(p.read_text(encoding='utf-8'))
 def providers():
     out=set(DIRECT)
     if HYDRATE.exists(): out.update(re.findall(r"src\s*===\s*['\"]([^'\"]+)['\"]",HYDRATE.read_text(encoding='utf-8')))
+    if REFRESH.exists():
+        text=REFRESH.read_text(encoding='utf-8')
+        if 'tax.rate_' in text and 'TAX_RATES_URL' in text: out.add('nj-division-taxation')
     return out
 def implemented_scores():
     out=set()
-    for p in (HYDRATE,SCORE):
+    for p in (HYDRATE,REFRESH,SCORE):
         if p.exists(): out.update(re.findall(r"['\"]((?:watchdog|uniformity)\.[A-Za-z0-9_.-]+)['\"]",p.read_text(encoding='utf-8')))
     return out
 def classify(m,direct,scores):
