@@ -1,0 +1,31 @@
+{
+  "project_ref": "uvkvaxljhhngydvlrzom",
+  "captured_at": "2026-08-13",
+  "policy": "Git-first. Do not redeploy a production function from a local checkout unless its committed source snapshot is current. Functions marked fingerprint_only must be pulled into Git before their next deployment.",
+  "functions": {
+    "workbench-hydrate": {"version": 10, "sha256": "96af72e6bb1ae217622d8715614c02651bfa599bcfbf26420416128222285197", "verify_jwt": true, "tracking": "source_snapshot"},
+    "workbench-baseline": {"version": 3, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
+    "workbench-refresh": {"version": 3, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
+    "workbench-score": {"version": 3, "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "workbench-provider-registry": {"version": 3, "sha256": "5435727a643e5a5b33bff5fe286b2ecfe41c86ddd9dabd334cb29c508d7c163f", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "farm-intelligence-scan": {"version": 3, "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "farm-map-query": {"version": 2, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad6d64e38253ab04e5f9c", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "bulk-marker-hydrate": {"version": 2, "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "production-api": {"version": 7, "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "insights-publish": {"version": 14, "sha256": "cb5036e8c019bbf5392374a317624c5e548e3c068abec4c53d6f2b380561584a", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "public-report-share": {"version": 2, "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2", "verify_jwt": false, "tracking": "fingerprint_only"},
+    "stripe-webhook": {"version": 13, "sha256": "05942e219f20911cb18e583dcc27914c52127225160b3cb784a42e932da7dac6", "verify_jwt": false, "tracking": "fingerprint_only"},
+    "verify-email": {"version": 23, "sha256": "591d51a8d8bcc7412da028f016ed7bf7eb444e2cc16691469ad9941a8ab02f65", "verify_jwt": true, "tracking": "existing_or_external"},
+    "request-verify-code": {"version": 21, "sha256": "ab54292e3ef495676b7b496bece829bab73d0f60d9fd3e0979da90b306e8ecf6", "verify_jwt": true, "tracking": "source_snapshot"},
+    "create-checkout-session": {"version": 24, "sha256": "b95d2b5031d485c32ad7e66810071a85b4d66192579f7a82269d4433f503a6d2", "verify_jwt": true, "tracking": "source_snapshot"},
+    "create-portal-session": {"version": 14, "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c", "verify_jwt": true, "tracking": "source_snapshot"},
+    "paddle-webhook": {"version": 15, "sha256": "a7104ab0b0c8d8aa0ada6c2fbbc8cc7b90b606f48c61c8b4d02712fb8435fdc8", "verify_jwt": false, "tracking": "source_snapshot"},
+    "report-platform-event": {"version": 8, "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068", "verify_jwt": true, "tracking": "source_snapshot"},
+    "get-platform-health": {"version": 9, "sha256": "9f81718f21f0ecb67caf27708159022c9078338e6ba3eae4bbd8e2859ec9c678", "verify_jwt": true, "tracking": "source_snapshot"},
+    "agent-opportunity-digest": {"version": 9, "sha256": "fa1de66129dd0b9d0523acac805348c935dc771ca6af7047dea3a06e9ff1a365", "verify_jwt": true, "tracking": "source_snapshot"},
+    "municipal-data": {"version": 12, "sha256": "c7bcd7f48e2a9efd219f1fe759afe3cc7a5c6f6c719626ad67ace7b70229901d", "verify_jwt": true, "tracking": "source_snapshot"},
+    "report-share": {"version": 7, "sha256": "45f86fd7e4e781275a54b8fe768443f1d95a26a2cd7ecedfa3bbf418b897e152", "verify_jwt": false, "tracking": "source_snapshot"},
+    "watchdog-automation": {"version": 6, "sha256": "c214eb9d135bfcc02dc3367728aa682dbdda8a5ce9b60b61add7204d8086f8e8", "verify_jwt": false, "tracking": "source_snapshot"},
+    "source-monitor-ingest": {"version": 15, "sha256": "660e65e0756e726539184cba2f90f29dffb96f6cdcd370476c56a74a2265465a", "verify_jwt": true, "tracking": "source_snapshot"}
+  }
+}
