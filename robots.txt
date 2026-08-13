@@ -1,31 +1,78 @@
 # robots.txt — NJPropertyTaxRelief.com
+# Last updated: 2026
+# Questions: contact@njpropertytaxrelief.com
+
+# Allow all major search engines full access
 User-agent: *
 Allow: /
+
+# Allow major AI crawlers explicitly
 User-agent: GPTBot
 Allow: /
+
 User-agent: ChatGPT-User
 Allow: /
+
 User-agent: ClaudeBot
 Allow: /
+
 User-agent: Claude-Web
 Allow: /
+
 User-agent: anthropic-ai
 Allow: /
+
 User-agent: PerplexityBot
 Allow: /
+
 User-agent: Gemini-Web
 Allow: /
+
 User-agent: Google-Extended
 Allow: /
+
 User-agent: Googlebot
 Allow: /
+
 User-agent: Googlebot-Image
 Allow: /
+
 User-agent: Bingbot
 Allow: /
+
 User-agent: DuckDuckBot
 Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+#
+
+# ---------------------------------------------------------------
+# Deliberately NOT disallowed here.
+#
+# index-old.html, index_1.html, 1092chews*.html, btc.html,
+# btc-old.html, leadiq.html and qscore.html all carry
+# noindex via <meta name="robots"> and an X-Robots-Tag header
+# in vercel.json.
+#
+# A Disallow rule would BLOCK crawling, which stops Google ever
+# reading the noindex, and already-indexed URLs would stay in the
+# index as bare links. Crawling must stay allowed until they drop
+# out of the index.
+#
+# Once Search Console shows zero impressions for these URLs,
+# a Disallow block can be added here (or the files deleted).
+# ---------------------------------------------------------------
+
+# Sitemap location
 Sitemap: https://njpropertytaxrelief.com/sitemap.xml
-Sitemap: https://njpropertytaxrelief.com/sitemap-content.xml
-Sitemap: https://njpropertytaxrelief.com/sitemap-plays.xml
-Sitemap: https://njpropertytaxrelief.com/sitemap-glossary.xml
