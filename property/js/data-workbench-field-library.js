@@ -3,6 +3,9 @@
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 let catalog=null, busy=false;
 const enabledTiers=new Set(['standard','agent','pro','pro_plus']);
+const enabledStatuses=new Set(['live']);
+const STATUS_LABEL={live:'LIVE',planned:'PLANNED',unavailable:'UNAVAILABLE'};
+const STATUS_HINT={live:'Returns a value today.',planned:'No provider connected yet. Selecting it returns nothing.',unavailable:'Cannot be sourced. Selecting it returns nothing.'};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 const tierLabel=t=>t==='pro_plus'?'PRO+':t==='pro'?'PRO':t==='agent'?'AGENT':'STANDARD';
 const categoryLabel=m=>{
@@ -42,7 +45,8 @@ function updateCounts(host){
 function applyTierFilter(host){
   $$('.dw-field',host).forEach(label=>{
     const tier=label.dataset.fieldTier||'standard';
-    label.hidden=!enabledTiers.has(tier);
+    const st=label.dataset.fieldStatus||'planned';
+    label.hidden=!enabledTiers.has(tier)||!enabledStatuses.has(st);
   });
   updateCounts(host);
 }
@@ -64,8 +68,17 @@ async function organize(){
     const input=$('[data-field]',label); if(!input)return;
     const m=byId.get(input.dataset.field)||{id:input.dataset.field,category:'other',tier:'pro_plus'};
     const cat=categoryLabel(m), tier=String(m.tier||'standard');
+    const st=String(m.provider_status||'planned');
     label.dataset.fieldTier=tier;
     label.dataset.fieldCategory=cat;
+    label.dataset.fieldStatus=st;
+    if(st!=='live'&&!$('.dw-field-status',label)){
+      const b=document.createElement('span');
+      b.className='dw-field-status '+st;
+      b.textContent=STATUS_LABEL[st]||st.toUpperCase();
+      b.title=(m.provider_note?m.provider_note+' \u2014 ':'')+(STATUS_HINT[st]||'');
+      label.appendChild(b);
+    }
     if(!groups.has(cat))groups.set(cat,[]);
     groups.get(cat).push(label);
   });
@@ -75,6 +88,14 @@ async function organize(){
   filters.innerHTML='<div><span>ACCESS LEVELS</span><small>Filter the library without changing your plan.</small></div><div class="dw-field-access-options">'+['standard','agent','pro','pro_plus'].map(t=>`<label><input type="checkbox" value="${t}" checked><span>${tierLabel(t)}</span></label>`).join('')+'</div>';
   host.appendChild(filters);
   $$('input',filters).forEach(cb=>cb.addEventListener('change',()=>{cb.checked?enabledTiers.add(cb.value):enabledTiers.delete(cb.value);applyTierFilter(host);}));
+  const counts={live:0,planned:0,unavailable:0};
+  $$('.dw-field',host).forEach(l=>{const k=l.dataset.fieldStatus||'planned';if(k in counts)counts[k]++;});
+  const avail=document.createElement('div');
+  avail.className='dw-field-access-filter dw-field-status-filter';
+  avail.innerHTML='<div><span>DATA AVAILABILITY</span><small>Only fields that return a value are shown by default.</small></div><div class="dw-field-access-options">'+
+    ['live','planned','unavailable'].map(t=>`<label title="${esc(STATUS_HINT[t])}"><input type="checkbox" value="${t}"${t==='live'?' checked':''}><span>${STATUS_LABEL[t]} (${counts[t]})</span></label>`).join('')+'</div>';
+  host.appendChild(avail);
+  $$('input',avail).forEach(cb=>cb.addEventListener('change',()=>{cb.checked?enabledStatuses.add(cb.value):enabledStatuses.delete(cb.value);applyTierFilter(host);}));
   const searching=String($('#dw-field-search')?.value||'').trim().length>0;
   [...groups.keys()].sort((a,b)=>{const ai=order.indexOf(a),bi=order.indexOf(b);return(ai<0?999:ai)-(bi<0?999:bi)||a.localeCompare(b)}).forEach(cat=>{
     const section=document.createElement('section');
