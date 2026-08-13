@@ -1,0 +1,46 @@
+name: Supabase function source guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/**'
+      - '.github/workflows/supabase-function-source-guard.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/**'
+      - '.github/workflows/supabase-function-source-guard.yml'
+
+jobs:
+  source-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify production-tracked source snapshots exist
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            workbench-hydrate
+            workbench-baseline
+            workbench-refresh
+            workbench-score
+            workbench-provider-registry
+            farm-intelligence-scan
+            farm-map-query
+            bulk-marker-hydrate
+            production-api
+            insights-publish
+            public-report-share
+            stripe-webhook
+          )
+          missing=0
+          for fn in "${required[@]}"; do
+            if [[ ! -s "supabase/functions/$fn/index.ts" ]]; then
+              echo "::error::Missing production source snapshot: supabase/functions/$fn/index.ts"
+              missing=1
+            fi
+          done
+          [[ "$missing" -eq 0 ]]
+      - name: Enforce Git-first deployment policy
+        run: test -s supabase/functions/DEPLOYMENT-POLICY.md
