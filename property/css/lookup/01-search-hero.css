@@ -290,3 +290,11 @@ body.pl-signedin .gate-cta { display: none; }
   .lp-cred { flex-direction: column; text-align: center; }
   .lp-cred-badges { justify-content: center; }
 }
+
+
+/* current Watchdog controls inside sticky search */
+.ssearch .wd-public-trigger{position:static;display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;background:transparent;border:0;color:var(--navy-dark);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;font-weight:800;cursor:pointer;padding:9px 10px;border-radius:9px}
+.ssearch .wd-public-trigger:hover{background:#eef3fc}
+.ssearch .wd-public-trigger i{color:var(--navy-light)}
+.ssearch-menu-trigger{order:-2}.ssearch-brand{order:-1}.ssearch-profile-trigger{margin-left:auto}
+@media(max-width:760px){.ssearch .wd-public-trigger span{display:none}.ssearch .wd-public-trigger{width:42px;height:42px;padding:0}.ssearch-profile-trigger{margin-left:0}}
