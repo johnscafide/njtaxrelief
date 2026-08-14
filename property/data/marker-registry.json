@@ -1,36 +1,37 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-07T21:43:39-04:00",
+ "generated_at": "2026-08-14T13:08:38.147Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
  "summary": {
-  "total": 728,
+  "total": 734,
   "public_source": 436,
-  "proprietary_derived": 292,
+  "proprietary_derived": 298,
   "by_tier": {
    "standard": 31,
-   "pro": 339,
+   "pro": 345,
    "pro_plus": 358
   },
   "by_profession": {
-   "consumer": 66,
-   "attorney": 556,
-   "title": 171,
-   "agent": 577,
-   "lender": 389,
-   "appraiser": 478,
-   "contractor": 197,
-   "investor": 576,
-   "municipal": 409,
-   "insurance": 67
+   "consumer": 79,
+   "attorney": 569,
+   "title": 184,
+   "agent": 590,
+   "lender": 402,
+   "appraiser": 491,
+   "contractor": 210,
+   "investor": 589,
+   "municipal": 415,
+   "insurance": 73
   },
-  "percent_of_goal": 72.1,
+  "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 263,
-   "unavailable": 59,
-   "planned": 406
-  }
+   "live": 278,
+   "unavailable": 3,
+   "planned": 453
+  },
+  "retired_phase5": 0
  },
  "professions": [
   {
@@ -409,7 +410,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "owner_name",
    "provider_status": "unavailable",
-   "provider_note": "Redacted statewide under Daniel\u2019s Law (P.L. 2021, c.371)"
+   "provider_note": "Redacted statewide under Daniel’s Law (P.L. 2021, c.371)"
   },
   {
    "id": "property.sale_price",
@@ -1071,8 +1072,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "watchdog_score",
-   "provider_status": "live",
-   "provider_note": "Watchdog canonical scoring pipeline"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.fairness_score",
@@ -1093,8 +1094,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "fairness_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.market_value_estimate",
@@ -1115,8 +1116,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "market_value_estimate",
-   "provider_status": "live",
-   "provider_note": "Watchdog canonical scoring pipeline"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.chapter123_position",
@@ -1137,8 +1138,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "chapter123_position",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.effective_tax_rate",
@@ -1159,8 +1160,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "effective_tax_rate",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.chapter123_lower_bound",
@@ -1181,8 +1182,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "chapter123_lower_bound",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.chapter123_upper_bound",
@@ -1203,8 +1204,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "chapter123_upper_bound",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.assessment_drift",
@@ -1225,8 +1226,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "assessment_drift",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.reassessment_risk",
@@ -1247,8 +1248,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "reassessment_risk",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.improvement_ratio",
@@ -1269,8 +1270,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "improvement_ratio",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.tax_trajectory",
@@ -1291,8 +1292,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "tax_trajectory",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.tax_pressure",
@@ -1313,8 +1314,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "tax_pressure",
-   "provider_status": "live",
-   "provider_note": "Watchdog canonical scoring pipeline"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.town_percentile",
@@ -1335,8 +1336,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "town_percentile",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appeal_odds",
@@ -1357,8 +1358,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "appeal_odds",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.true_cost",
@@ -1379,8 +1380,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "true_cost",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.closing_cost_estimate",
@@ -1401,8 +1402,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "closing_cost_estimate",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.added_omitted_risk",
@@ -1423,8 +1424,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "added_omitted_risk",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.abatement_exposure",
@@ -1445,8 +1446,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "abatement_exposure",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.exempt_pilot_exposure",
@@ -1467,8 +1468,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "exempt_pilot_exposure",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.revaluation_risk",
@@ -1489,8 +1490,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "revaluation_risk",
-   "provider_status": "live",
-   "provider_note": "Watchdog canonical scoring pipeline"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor_screen",
@@ -1511,8 +1512,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "investor_screen",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "appeals.latest_total",
@@ -5339,8 +5340,8 @@
    ],
    "source_id": "nj-cod",
    "field": "score",
-   "provider_status": "live",
-   "provider_note": "Watchdog canonical scoring pipeline"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "uniformity.percentile",
@@ -5361,8 +5362,8 @@
    ],
    "source_id": "nj-cod",
    "field": "percentile",
-   "provider_status": "live",
-   "provider_note": "NJ Division of Taxation assessment uniformity"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "uniformity.volatility",
@@ -5383,8 +5384,8 @@
    ],
    "source_id": "nj-cod",
    "field": "volatility",
-   "provider_status": "live",
-   "provider_note": "NJ Division of Taxation assessment uniformity"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "uniformity.cod_2016",
@@ -5769,8 +5770,8 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "structural_imbalance",
-   "provider_status": "live",
-   "provider_note": "NJ DCA municipal budget and tax levy filings"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "budget.structural_imbalance_share",
@@ -5791,8 +5792,8 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "structural_imbalance_share",
-   "provider_status": "live",
-   "provider_note": "NJ DCA municipal budget and tax levy filings"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "budget.municipal_share",
@@ -6011,8 +6012,8 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "levy_base_gap",
-   "provider_status": "live",
-   "provider_note": "NJ DCA municipal budget and tax levy filings"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "budget.total_levy_change",
@@ -6055,8 +6056,8 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "pressure_score",
-   "provider_status": "live",
-   "provider_note": "NJ DCA municipal budget and tax levy filings"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "budget.pressure_band",
@@ -6077,8 +6078,8 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "pressure_band",
-   "provider_status": "live",
-   "provider_note": "NJ DCA municipal budget and tax levy filings"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.exempt_value",
@@ -6121,8 +6122,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "exempt_share",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.exempt_nonpilot_value",
@@ -6231,8 +6232,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "pilot_value_share",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.partial_exemptions_abatements",
@@ -6275,8 +6276,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "partial_relief_share",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.municipal_subsidy",
@@ -6297,8 +6298,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "municipal_subsidy",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.subsidy_budget_share",
@@ -6319,8 +6320,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "subsidy_budget_share",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.tax_if_conventional",
@@ -6341,8 +6342,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "tax_if_conventional",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.exempt_percentile",
@@ -6363,8 +6364,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "exempt_percentile",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.pilot_percentile",
@@ -6385,8 +6386,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "pilot_percentile",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "exemption.subsidy_percentile",
@@ -6407,8 +6408,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "subsidy_percentile",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "abatement.total_base",
@@ -6539,8 +6540,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "abated_share",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "abatement.percentile",
@@ -6561,8 +6562,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "percentile",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "abatement.vs_median",
@@ -6583,8 +6584,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "vs_median",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "preflight.permit_count",
@@ -6927,8 +6928,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "escrow_scenario_tax",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.escrow_monthly_delta",
@@ -6949,8 +6950,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "escrow_monthly_delta",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.escrow_reserve_12m",
@@ -6971,8 +6972,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "escrow_reserve_12m",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.escrow_shock_band",
@@ -6993,8 +6994,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "escrow_shock_band",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lien_search_completion",
@@ -7015,8 +7016,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "lien_search_completion",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lien_open_items",
@@ -7037,8 +7038,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "lien_open_items",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lien_issue_count",
@@ -7059,8 +7060,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "lien_issue_count",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.constraint_stack_count",
@@ -7081,8 +7082,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "constraint_stack_count",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor_carry_cost_volatility",
@@ -7100,8 +7101,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "investor_carry_cost_volatility",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appeal_evidence_strength",
@@ -7119,8 +7120,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "appeal_evidence_strength",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appeal_opportunity_index",
@@ -7139,8 +7140,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "appeal_opportunity_index",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.permit_lifecycle_score",
@@ -7161,8 +7162,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "permit_lifecycle_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.listing_friction_index",
@@ -7178,8 +7179,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "listing_friction_index",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.tax_carry_advantage",
@@ -7195,8 +7196,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "tax_carry_advantage",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.buyer_objection_radar",
@@ -7212,8 +7213,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "buyer_objection_radar",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.prelist_readiness_score",
@@ -7229,8 +7230,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "prelist_readiness_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.marketability_drag_index",
@@ -7246,8 +7247,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "marketability_drag_index",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.revaluation_conversation_risk",
@@ -7263,8 +7264,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "revaluation_conversation_risk",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.offer_diligence_priority",
@@ -7280,8 +7281,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "offer_diligence_priority",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.verified_listing_story_strength",
@@ -7297,8 +7298,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "verified_listing_story_strength",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.assessment_surprise_index",
@@ -7314,8 +7315,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "assessment_surprise_index",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.tax_trend_position",
@@ -7331,8 +7332,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "tax_trend_position",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "geology.abandoned_mine_within_1km",
@@ -8315,7 +8316,7 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "total_levy_2021",
-   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill.",
+   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today’s bill.",
    "source_layer": "historical",
    "provider_status": "live",
    "provider_note": "NJ DCA municipal budget and tax levy filings"
@@ -8339,7 +8340,7 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "total_levy_2022",
-   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill.",
+   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today’s bill.",
    "source_layer": "historical",
    "provider_status": "live",
    "provider_note": "NJ DCA municipal budget and tax levy filings"
@@ -8363,7 +8364,7 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "total_levy_2023",
-   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill.",
+   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today’s bill.",
    "source_layer": "historical",
    "provider_status": "live",
    "provider_note": "NJ DCA municipal budget and tax levy filings"
@@ -8387,7 +8388,7 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "total_levy_2024",
-   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill.",
+   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today’s bill.",
    "source_layer": "historical",
    "provider_status": "live",
    "provider_note": "NJ DCA municipal budget and tax levy filings"
@@ -8411,7 +8412,7 @@
    ],
    "source_id": "nj-dca-budget",
    "field": "total_levy_2025",
-   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today\u2019s bill.",
+   "professional_reason": "Shows the actual municipal tax-carry trajectory behind today’s bill.",
    "source_layer": "historical",
    "provider_status": "live",
    "provider_note": "NJ DCA municipal budget and tax levy filings"
@@ -8612,8 +8613,8 @@
    "professional_reason": "Prioritizes environmental public-record exceptions for counsel/title review.",
    "formula": "weighted(deed_notice, CEA, contaminated_site, UST)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.title_constraint_stack",
@@ -8633,8 +8634,8 @@
    "professional_reason": "Surfaces overlapping public-record constraints before closing.",
    "formula": "count(tidelands, deed_notice, historic, wetlands_LOI, open_space_encumbrance)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.permit_closure_confidence",
@@ -8654,8 +8655,8 @@
    "professional_reason": "Focuses closing review on permit/certificate gaps.",
    "formula": "100 - normalized(open_permit_gap / permit_count)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.source_authority_coverage",
@@ -8676,8 +8677,8 @@
    "professional_reason": "Shows how much of a diligence brief is backed by authoritative sources.",
    "formula": "authoritative_fields / required_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.parcel_identity_confidence",
@@ -8699,7 +8700,7 @@
    "formula": "matched(address, municipality, block, lot, qualifier, PAMS_PIN) / 6 * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appeal_case_readiness",
@@ -8720,7 +8721,7 @@
    "formula": "weighted(comparable_depth, evidence_strength, chapter123_margin, deadline_readiness)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.chapter123_margin_stability",
@@ -8741,7 +8742,7 @@
    "formula": "100 - normalized(abs(current_margin - historical_margin))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.evidence_chain_completeness",
@@ -8762,7 +8763,7 @@
    "formula": "verified_sources / required_evidence_sources * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.filing_deadline_risk",
@@ -8782,7 +8783,7 @@
    "formula": "deadline_proximity * readiness_gap",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.closing_exception_priority",
@@ -8802,8 +8803,8 @@
    "professional_reason": "Ranks public-record issues for a closing checklist without making a legal determination.",
    "formula": "weighted(open_permits, title_constraints, environmental_encumbrance, flood_context)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.collateral_operating_cost_stress",
@@ -8823,7 +8824,7 @@
    "formula": "weighted(tax_burden, levy_growth, escrow_volatility)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.escrow_volatility_score",
@@ -8843,7 +8844,7 @@
    "formula": "normalized(stddev(tax_history) + levy_growth_gap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.collateral_tax_reset_sensitivity",
@@ -8863,7 +8864,7 @@
    "formula": "transaction_tax_shock * assessment_ratio_gap",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal_fiscal_capacity",
@@ -8884,7 +8885,7 @@
    "formula": "weighted(tax_base_growth, collection_rate, inverse_debt_share)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.collateral_constraint_burden",
@@ -8904,7 +8905,7 @@
    "formula": "normalized(count(flood, wetlands, geology, title, permit families))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.environmental_collateral_review",
@@ -8925,7 +8926,7 @@
    "formula": "weighted(environmental_encumbrance, water_protection_overlap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.permit_collateral_completion",
@@ -8945,7 +8946,7 @@
    "formula": "permit_closure_confidence * source_authority_coverage / 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.five_year_tax_reserve_ratio",
@@ -8965,7 +8966,7 @@
    "formula": "projected_5y_tax / current_annual_tax",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.listing_tax_burden_percentile",
@@ -8985,7 +8986,7 @@
    "formula": "percentile(effective_tax_rate within municipality)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.buyer_monthly_carry_delta",
@@ -9005,7 +9006,7 @@
    "formula": "(scenario_annual_tax - current_annual_tax) / 12",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.preoffer_public_record_risk",
@@ -9024,8 +9025,8 @@
    "professional_reason": "Identifies diligence questions before an offer without making legal conclusions.",
    "formula": "weighted(permit_gap, flood, environmental, title_constraint_stack)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.buyer_tax_reset_exposure",
@@ -9045,7 +9046,7 @@
    "formula": "transaction_tax_shock_index",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.seller_appeal_opportunity_signal",
@@ -9065,7 +9066,7 @@
    "formula": "appeal_opportunity_index * evidence_chain_completeness / 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.town_fiscal_story_score",
@@ -9085,7 +9086,7 @@
    "formula": "weighted(collection_rate, tax_base_growth, inverse_levy_base_gap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.transaction_diligence_completion",
@@ -9104,8 +9105,8 @@
    "professional_reason": "Gives agents a transaction-research completion meter.",
    "formula": "completed_public_record_checks / required_checks * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.property_story_confidence",
@@ -9124,8 +9125,8 @@
    "professional_reason": "Shows whether the facts supporting a property brief are complete.",
    "formula": "weighted(source_authority_coverage, parcel_identity_confidence, record_completeness)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.carry_cost_downside",
@@ -9145,7 +9146,7 @@
    "formula": "weighted(tax_growth, levy_base_gap, escrow_volatility)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal_concentration_risk",
@@ -9165,7 +9166,7 @@
    "formula": "portfolio_value_in_municipality / portfolio_value * fiscal_stress",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.tax_base_absorption_risk",
@@ -9185,7 +9186,7 @@
    "formula": "normalized(max(0, levy_growth - tax_base_growth))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.revaluation_reset_exposure",
@@ -9205,7 +9206,7 @@
    "formula": "revaluation_risk * assessment_ratio_gap",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.regulatory_constraint_density",
@@ -9225,8 +9226,8 @@
    "professional_reason": "Provides a consistent cross-property regulatory screen.",
    "formula": "distinct_constraint_layers / monitored_layers * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.capital_improvement_activity",
@@ -9246,7 +9247,7 @@
    "formula": "normalized(recent_permit_count)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.fiscal_trend_momentum",
@@ -9266,7 +9267,7 @@
    "formula": "weighted(tax_base_CAGR - levy_CAGR, collection_rate_change)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.development_constraint_density",
@@ -9285,8 +9286,8 @@
    "professional_reason": "Compares the public-record diligence burden across sites.",
    "formula": "distinct(site_constraint_layers) / monitored_layers * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.permitting_velocity",
@@ -9306,7 +9307,7 @@
    "formula": "recent_permit_count / observation_months normalized",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.certificate_closure_rate",
@@ -9325,8 +9326,8 @@
    "professional_reason": "Highlights permit-to-certificate lifecycle completion.",
    "formula": "closed_certificate_records / permit_records * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.regulatory_overlap_score",
@@ -9346,7 +9347,7 @@
    "formula": "weighted(highlands, pinelands, wetlands, water_protection, historic, open_space)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.site_water_constraint_score",
@@ -9366,7 +9367,7 @@
    "formula": "weighted(wetlands, category1_water, wellhead, source_water, flood)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.geology_complexity_score",
@@ -9386,7 +9387,7 @@
    "formula": "weighted(fill, acid_soil, mines, faults, landslides, aquifer_context)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.predevelopment_review_priority",
@@ -9406,7 +9407,7 @@
    "formula": "weighted(development_constraint_density, regulatory_overlap, water_constraint, geology_complexity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.comparable_depth_score",
@@ -9426,7 +9427,7 @@
    "formula": "normalized(verified_sale_sample_size, recency, dispersion)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.assessment_uniformity_reliability",
@@ -9446,7 +9447,7 @@
    "formula": "weighted(inverse_COD, usable_sales, inverse_volatility)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraisal_record_completeness",
@@ -9465,8 +9466,8 @@
    "professional_reason": "Surfaces missing public-record inputs before valuation work.",
    "formula": "present(appraisal_fields) / required_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.land_improvement_outlier",
@@ -9486,7 +9487,7 @@
    "formula": "percentile(abs(property_improvement_share - peer_median_share))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.market_anchor_confidence",
@@ -9506,7 +9507,7 @@
    "formula": "weighted(comparable_depth, source_coverage, inverse_sale_dispersion)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.flood_context_severity",
@@ -9526,7 +9527,7 @@
    "formula": "weighted(NFHL, tidal_CAFE, flood_plan, flood_profile_proximity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.environmental_site_proximity",
@@ -9546,7 +9547,7 @@
    "formula": "weighted(contaminated_500m, UST_250m, deed_notice, CEA)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.water_protection_overlap",
@@ -9566,7 +9567,7 @@
    "formula": "weighted(wellhead_tier, source_water, sole_source_aquifer, category1_water)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.historic_property_constraint",
@@ -9586,7 +9587,7 @@
    "formula": "weighted(historic_property, historic_district, archaeological_screen, LOI)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.physical_due_diligence_priority",
@@ -9606,7 +9607,7 @@
    "formula": "weighted(flood_context, environmental_proximity, water_overlap, geology_complexity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.home_cost_clarity",
@@ -9625,8 +9626,8 @@
    "professional_reason": "Shows whether the core public-cost facts needed for a homeowner decision are present.",
    "formula": "coverage(annual_tax, rate, assessment, sale_context)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.consumer.tax_change_watch",
@@ -9646,7 +9647,7 @@
    "formula": "weighted(tax_trajectory, levy_growth, revaluation_risk)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.appeal_question_readiness",
@@ -9666,7 +9667,7 @@
    "formula": "weighted(chapter123_position, evidence_chain_completeness, deadline_readiness)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.buyer_tax_planning_signal",
@@ -9686,7 +9687,7 @@
    "formula": "weighted(transaction_tax_shock, buyer_monthly_carry_delta)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.ownership_record_confidence",
@@ -9706,7 +9707,7 @@
    "formula": "parcel_identity_confidence * source_authority_coverage / 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.property_change_attention",
@@ -9726,7 +9727,7 @@
    "formula": "weighted(score_change, permit_activity, source_change)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.public_record_completeness",
@@ -9745,8 +9746,8 @@
    "professional_reason": "Makes missing public-record facts visible without filling gaps by assumption.",
    "formula": "present(public_homeowner_fields) / required_homeowner_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.consumer.sale_context_strength",
@@ -9766,7 +9767,7 @@
    "formula": "weighted(verified_sale_count, recency, sale_dispersion)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.home_improvement_followup",
@@ -9786,7 +9787,7 @@
    "formula": "weighted(recent_permit_count, permit_closure_confidence)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.consumer.tax_relief_pathway_fit",
@@ -9806,7 +9807,7 @@
    "formula": "eligibility_inputs_present / required_inputs * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.record_exception_sequence",
@@ -9826,7 +9827,7 @@
    "formula": "ordered(open_permits, deed_notice, title_constraints, environmental_hits)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.appeal_evidence_gap",
@@ -9846,7 +9847,7 @@
    "formula": "100 - evidence_chain_completeness",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.deadline_evidence_collision",
@@ -9866,7 +9867,7 @@
    "formula": "filing_deadline_risk * appeal_evidence_gap / 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.municipal_record_reliance",
@@ -9886,7 +9887,7 @@
    "formula": "weighted(source_authority_coverage, parcel_identity_confidence)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.land_use_exception_stack",
@@ -9906,7 +9907,7 @@
    "formula": "count(wetlands, historic, open_space, tidelands, highlands, pinelands)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.closing_record_aging",
@@ -9926,7 +9927,7 @@
    "formula": "normalized(age(open_permit, latest_deed, source_refresh))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.assessment_argument_specificity",
@@ -9946,7 +9947,7 @@
    "formula": "weighted(chapter123_margin, comparable_depth, land_improvement_outlier)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.environmental_exception_path",
@@ -9966,7 +9967,7 @@
    "formula": "weighted(environmental_encumbrance, water_protection_overlap, historic_fill)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.public_notice_density",
@@ -9986,7 +9987,7 @@
    "formula": "count(deed_notice, CEA, historic, open_space, tidelands)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.attorney.case_file_source_freshness",
@@ -10006,7 +10007,7 @@
    "formula": "weighted(source_age, source_authority_coverage)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.closing_clearance_signal",
@@ -10026,7 +10027,7 @@
    "formula": "weighted(parcel_identity_confidence, permit_closure_confidence, inverse_title_constraints)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.parcel_match_variance",
@@ -10046,7 +10047,7 @@
    "formula": "100 - parcel_identity_confidence",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.permit_certificate_gap_age",
@@ -10066,7 +10067,7 @@
    "formula": "age(oldest_open_permit_or_certificate_gap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.title_land_constraint_mix",
@@ -10086,7 +10087,7 @@
    "formula": "count(tidelands, open_space, historic, wetlands_LOI)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.recording_reference_completeness",
@@ -10105,8 +10106,8 @@
    "professional_reason": "Shows whether key public recording references are available.",
    "formula": "present(deed_book, deed_page, sale_date, parcel_id) / 4 * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.title.exception_resolution_priority",
@@ -10126,7 +10127,7 @@
    "formula": "weighted(title_constraint_stack, open_permit_age, environmental_encumbrance)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.address_alias_risk",
@@ -10146,7 +10147,7 @@
    "formula": "normalized(address_variants, qualifier_variants, parcel_match_variance)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.closing_source_currency",
@@ -10166,7 +10167,7 @@
    "formula": "weighted(source_age, official_release_status)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.map_notice_overlap",
@@ -10186,7 +10187,7 @@
    "formula": "count(mapped_notice_layers)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.title.municipal_search_scope",
@@ -10206,7 +10207,7 @@
    "formula": "coverage(municipal_search_items, parcel_context)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.listing_tax_talking_point",
@@ -10226,7 +10227,7 @@
    "formula": "weighted(tax_carry_advantage, listing_tax_burden_percentile)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.buyer_cost_explanation",
@@ -10246,7 +10247,7 @@
    "formula": "weighted(buyer_monthly_carry_delta, transaction_tax_shock)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.listing_public_record_readiness",
@@ -10266,12 +10267,12 @@
    "formula": "weighted(property_story_confidence, transaction_diligence_completion)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.offer_question_density",
    "label": "Offer Question Density",
-   "description": "Counts pre-offer diligence questions\u2014not defects or deal outcomes.",
+   "description": "Counts pre-offer diligence questions—not defects or deal outcomes.",
    "category": "broker intelligence",
    "scope": "property",
    "tier": "pro",
@@ -10282,11 +10283,11 @@
    ],
    "source_id": "watchdog-professional-v030",
    "field": "offer_question_density",
-   "professional_reason": "Counts pre-offer diligence questions\u2014not defects or deal outcomes.",
+   "professional_reason": "Counts pre-offer diligence questions—not defects or deal outcomes.",
    "formula": "count(permit, flood, environmental, title questions)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.seller_tax_story_stability",
@@ -10306,7 +10307,7 @@
    "formula": "weighted(tax_trend_position, inverse_revaluation_conversation_risk)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.buyer_diligence_sequence",
@@ -10326,7 +10327,7 @@
    "formula": "ordered(offer_diligence_priority, buyer_objection_radar, permit_lifecycle)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.market_context_confidence",
@@ -10346,7 +10347,7 @@
    "formula": "weighted(market_anchor_confidence, sale_context_strength)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.listing_change_alert",
@@ -10366,7 +10367,7 @@
    "formula": "weighted(permit_activity, tax_change, score_change)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.agent.client_brief_completeness",
@@ -10385,8 +10386,8 @@
    "professional_reason": "Shows whether the client-facing public-record brief has its essentials.",
    "formula": "present(client_brief_fields) / required_brief_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.agent.transaction_cost_conversation",
@@ -10406,7 +10407,7 @@
    "formula": "weighted(closing_cost_estimate, buyer_monthly_carry_delta, tax_reset_exposure)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.payment_stability_signal",
@@ -10426,7 +10427,7 @@
    "formula": "weighted(escrow_volatility, collateral_operating_cost_stress)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.tax_reserve_confidence",
@@ -10446,7 +10447,7 @@
    "formula": "weighted(five_year_tax_reserve_ratio, source_authority_coverage)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.collateral_record_gap",
@@ -10465,8 +10466,8 @@
    "professional_reason": "Identifies missing public collateral facts before workflow handoff.",
    "formula": "100 - appraisal_record_completeness",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.lender.municipal_tax_capacity_watch",
@@ -10486,7 +10487,7 @@
    "formula": "weighted(municipal_fiscal_capacity, tax_base_absorption_risk)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.insurance_cost_attention",
@@ -10506,7 +10507,7 @@
    "formula": "weighted(flood_context_severity, environmental_collateral_review)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.revaluation_payment_risk",
@@ -10526,7 +10527,7 @@
    "formula": "weighted(collateral_tax_reset_sensitivity, revaluation_reset_exposure)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.escrow_evidence_freshness",
@@ -10546,7 +10547,7 @@
    "formula": "weighted(source_age, tax_history_depth)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.collateral_completion_watch",
@@ -10566,7 +10567,7 @@
    "formula": "weighted(permit_collateral_completion, permit_certificate_gap_age)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.lender.lending_diligence_coverage",
@@ -10585,8 +10586,8 @@
    "professional_reason": "Measures public-data coverage for a collateral conversation.",
    "formula": "present(lending_public_fields) / required_lending_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.lender.tax_shock_explanation_quality",
@@ -10606,7 +10607,7 @@
    "formula": "weighted(transaction_tax_shock, source_authority_coverage)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.sale_sample_recency",
@@ -10626,7 +10627,7 @@
    "formula": "normalized(days_since_median_verified_sale)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.sale_dispersion_watch",
@@ -10646,7 +10647,7 @@
    "formula": "normalized(p75_sale_price - p25_sale_price)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.assessment_composition_context",
@@ -10666,7 +10667,7 @@
    "formula": "weighted(land_improvement_outlier, improvement_ratio)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.ratio_stability_context",
@@ -10686,7 +10687,7 @@
    "formula": "weighted(assessment_uniformity_reliability, chapter123_margin_stability)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.public_input_gap",
@@ -10705,8 +10706,8 @@
    "professional_reason": "Makes missing public appraisal inputs explicit.",
    "formula": "100 - appraisal_record_completeness",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.appraiser.market_anchor_refresh",
@@ -10726,7 +10727,7 @@
    "formula": "weighted(market_anchor_confidence, sale_sample_recency)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.parcel_physical_context",
@@ -10746,7 +10747,7 @@
    "formula": "weighted(lot_area, square_feet, year_built, property_class)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.comparable_screen_priority",
@@ -10766,7 +10767,7 @@
    "formula": "weighted(comparable_depth_score, sale_dispersion_watch, public_input_gap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.assessment_evidence_alignment",
@@ -10786,7 +10787,7 @@
    "formula": "weighted(assessment_defensibility, comparable_evidence_reliability)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.appraiser.valuation_record_freshness",
@@ -10806,7 +10807,7 @@
    "formula": "weighted(source_age, verified_sale_recency, parcel_identity_confidence)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.site_preflight_completeness",
@@ -10826,7 +10827,7 @@
    "formula": "present(site_constraint_fields) / required_site_fields * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.permit_sequence_clarity",
@@ -10846,7 +10847,7 @@
    "formula": "weighted(permitting_velocity, certificate_closure_rate)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.water_review_priority",
@@ -10866,7 +10867,7 @@
    "formula": "weighted(site_water_constraint, flood_context, wellhead_overlap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.ground_condition_attention",
@@ -10886,7 +10887,7 @@
    "formula": "weighted(geology_complexity, historic_fill, acid_soil)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.jurisdiction_overlap_watch",
@@ -10906,7 +10907,7 @@
    "formula": "regulatory_overlap_score",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.construction_record_gap",
@@ -10925,8 +10926,8 @@
    "professional_reason": "Identifies public permit/certificate completeness gaps.",
    "formula": "100 - permit_closure_confidence",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.contractor.site_constraint_change_watch",
@@ -10946,7 +10947,7 @@
    "formula": "weighted(source_change, mapped_constraint_layers)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.preconstruction_question_set",
@@ -10966,7 +10967,7 @@
    "formula": "count(water, geology, wetlands, historic, permit questions)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.development_timeline_uncertainty",
@@ -10986,7 +10987,7 @@
    "formula": "weighted(open_permit_age, regulatory_overlap, source_freshness)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.contractor.project_screening_confidence",
@@ -11006,7 +11007,7 @@
    "formula": "weighted(site_preflight_completeness, source_authority_coverage)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.hold_cost_stability",
@@ -11026,7 +11027,7 @@
    "formula": "weighted(inverse_carry_cost_downside, fiscal_trend_momentum)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.municipal_exposure_diversification",
@@ -11046,7 +11047,7 @@
    "formula": "100 - municipal_concentration_risk",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.tax_base_gap_watch",
@@ -11066,7 +11067,7 @@
    "formula": "tax_base_absorption_risk",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.capital_reinvestment_signal",
@@ -11086,7 +11087,7 @@
    "formula": "weighted(capital_improvement_activity, permitting_velocity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.asset_constraint_screen",
@@ -11106,7 +11107,7 @@
    "formula": "weighted(regulatory_constraint_density, environmental_site_proximity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.revaluation_hold_sensitivity",
@@ -11126,7 +11127,7 @@
    "formula": "revaluation_reset_exposure",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.portfolio_evidence_coverage",
@@ -11146,7 +11147,7 @@
    "formula": "present(portfolio_public_fields) / required_portfolio_fields * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.municipal_fiscal_direction",
@@ -11166,7 +11167,7 @@
    "formula": "weighted(fiscal_trend_momentum, municipal_fiscal_capacity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.exit_tax_story",
@@ -11186,7 +11187,7 @@
    "formula": "weighted(tax_trend_position, listing_tax_burden_percentile)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.investor.investment_diligence_priority",
@@ -11206,7 +11207,7 @@
    "formula": "weighted(carry_cost_downside, asset_constraint_screen, revaluation_hold_sensitivity)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.tax_base_change_signal",
@@ -11226,7 +11227,7 @@
    "formula": "weighted(tax_base_growth, equalized_value_cagr)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.levy_alignment_score",
@@ -11246,7 +11247,7 @@
    "formula": "100 - normalized(abs(levy_growth - tax_base_growth))",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.collection_resilience_context",
@@ -11266,7 +11267,7 @@
    "formula": "weighted(collection_rate, fiscal_resilience_score)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.exemption_pressure_watch",
@@ -11286,7 +11287,7 @@
    "formula": "weighted(exempt_share, pilot_value_share, abated_share)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.debt_service_attention",
@@ -11306,7 +11307,7 @@
    "formula": "weighted(debt_service_share, net_debt_pct)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.budget_data_freshness",
@@ -11326,7 +11327,7 @@
    "formula": "age(latest_budget_release)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.ratable_growth_quality",
@@ -11346,7 +11347,7 @@
    "formula": "weighted(ratable_growth, inverse_levy_base_gap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.appeal_activity_context",
@@ -11366,7 +11367,7 @@
    "formula": "weighted(appeal_volume, win_rate_decided, assessed_appealed)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.municipal_source_coverage",
@@ -11386,7 +11387,7 @@
    "formula": "present(municipal_source_fields) / required_municipal_fields * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal.fiscal_monitor_priority",
@@ -11406,7 +11407,7 @@
    "formula": "weighted(levy_alignment, exemption_pressure, debt_service_attention)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.mapped_hazard_overlap",
@@ -11426,7 +11427,7 @@
    "formula": "count(flood, wetlands, contaminated, geology, water_protection)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.flood_evidence_freshness",
@@ -11446,7 +11447,7 @@
    "formula": "weighted(source_age, flood_map_version)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.environmental_review_scope",
@@ -11466,7 +11467,7 @@
    "formula": "weighted(environmental_site_proximity, environmental_encumbrance)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.water_protection_context",
@@ -11486,7 +11487,7 @@
    "formula": "water_protection_overlap",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.geology_hazard_context",
@@ -11506,7 +11507,7 @@
    "formula": "weighted(geology_complexity, landslide, mine, fault)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.historic_constraint_context",
@@ -11526,7 +11527,7 @@
    "formula": "historic_property_constraint",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.physical_record_coverage",
@@ -11546,7 +11547,7 @@
    "formula": "present(physical_risk_fields) / required_risk_fields * 100",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.site_review_escalation",
@@ -11566,7 +11567,7 @@
    "formula": "weighted(physical_due_diligence_priority, mapped_hazard_overlap)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.public_risk_source_currency",
@@ -11586,7 +11587,7 @@
    "formula": "weighted(source_age, source_authority_coverage)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.insurance.risk_context_consistency",
@@ -11606,7 +11607,7 @@
    "formula": "weighted(flood_context, water_overlap, geology_context, environmental_context)",
    "unit": "score / 100",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "njplus.nj-dca-permits-raw.permit_issued_count",
@@ -11885,7 +11886,7 @@
     "nj-dca-permits-raw"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.construction_scope_signal",
@@ -11914,7 +11915,7 @@
     "nj-dca-permits-raw"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.permit_activity_momentum",
@@ -11943,7 +11944,7 @@
     "nj-dca-permits-raw"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.certificate_gap_priority",
@@ -11972,7 +11973,7 @@
     "nj-dca-permits-raw"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-development-trends.housing_units_authorized",
@@ -12240,7 +12241,7 @@
     "nj-dca-development-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.housing_supply_delivery_ratio",
@@ -12268,7 +12269,7 @@
     "nj-dca-development-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.commercial_buildout_signal",
@@ -12296,7 +12297,7 @@
     "nj-dca-development-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.demolition_redevelopment_watch",
@@ -12324,7 +12325,7 @@
     "nj-dca-development-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-new-home-warranty.new_home_warranty_enrollments",
@@ -12581,7 +12582,7 @@
     "nj-dca-new-home-warranty"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.new_build_delivery_momentum",
@@ -12608,7 +12609,7 @@
     "nj-dca-new-home-warranty"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.new_build_market_depth",
@@ -12635,7 +12636,7 @@
     "nj-dca-new-home-warranty"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.new_build_comp_context",
@@ -12662,7 +12663,7 @@
     "nj-dca-new-home-warranty"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-municipal-housing-profile.housing_stock",
@@ -12919,7 +12920,7 @@
     "nj-dca-municipal-housing-profile"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.housing_affordability_gap",
@@ -12946,7 +12947,7 @@
     "nj-dca-municipal-housing-profile"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.housing_supply_balance",
@@ -12973,7 +12974,7 @@
     "nj-dca-municipal-housing-profile"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.municipal_housing_evidence_depth",
@@ -13000,7 +13001,7 @@
     "nj-dca-municipal-housing-profile"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_total",
@@ -13257,7 +13258,7 @@
     "nj-dca-affordable-housing"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.affordable_pipeline_signal",
@@ -13284,7 +13285,7 @@
     "nj-dca-affordable-housing"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.rent_support_context",
@@ -13311,7 +13312,7 @@
     "nj-dca-affordable-housing"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.housing_program_record_freshness",
@@ -13338,7 +13339,7 @@
     "nj-dca-affordable-housing"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-community-assets.transit_station_access",
@@ -13606,7 +13607,7 @@
     "nj-dca-community-assets"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.development_designation_stack",
@@ -13634,7 +13635,7 @@
     "nj-dca-community-assets"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.public_facility_proximity_signal",
@@ -13662,7 +13663,7 @@
     "nj-dca-community-assets"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.site_marketing_context",
@@ -13690,7 +13691,7 @@
     "nj-dca-community-assets"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-zoning-directory.zoning_map_url",
@@ -13935,7 +13936,7 @@
   {
    "id": "watchdog.njplus.zoning_research_readiness",
    "label": "Zoning Research Readiness",
-   "description": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+   "description": "Measures the completeness of linked public zoning resources—not permitted use.",
    "category": "planning",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -13951,14 +13952,14 @@
    ],
    "source_id": "watchdog-nj-source-v031",
    "field": "zoning_research_readiness",
-   "professional_reason": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+   "professional_reason": "Measures the completeness of linked public zoning resources—not permitted use.",
    "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
    "unit": "score / 100",
    "dependencies": [
     "nj-dca-zoning-directory"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.planning_document_currency",
@@ -13986,7 +13987,7 @@
     "nj-dca-zoning-directory"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.development_entitlement_entrypoint",
@@ -14014,7 +14015,7 @@
     "nj-dca-zoning-directory"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.municipal_land_use_transparency",
@@ -14042,7 +14043,7 @@
     "nj-dca-zoning-directory"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-pilot-forecast.pilot_agreement_count",
@@ -14310,7 +14311,7 @@
     "nj-dca-pilot-forecast"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.pilot_revenue_concentration",
@@ -14338,12 +14339,12 @@
     "nj-dca-pilot-forecast"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.pilot_forecast_confidence",
    "label": "PILOT Forecast Confidence",
-   "description": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+   "description": "Shows the completeness of an available public forecast—not a revenue prediction.",
    "category": "municipal finance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -14359,14 +14360,14 @@
    ],
    "source_id": "watchdog-nj-source-v031",
    "field": "pilot_forecast_confidence",
-   "professional_reason": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+   "professional_reason": "Shows the completeness of an available public forecast—not a revenue prediction.",
    "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
    "unit": "score / 100",
    "dependencies": [
     "nj-dca-pilot-forecast"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.development_incentive_profile",
@@ -14394,7 +14395,7 @@
     "nj-dca-pilot-forecast"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-modiv-longitudinal.assessment_history_depth",
@@ -14673,7 +14674,7 @@
     "nj-dca-modiv-longitudinal"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.parcel_record_volatility",
@@ -14702,7 +14703,7 @@
     "nj-dca-modiv-longitudinal"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.assessment_component_shift",
@@ -14731,7 +14732,7 @@
     "nj-dca-modiv-longitudinal"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.assessment_history_reliability",
@@ -14760,7 +14761,7 @@
     "nj-dca-modiv-longitudinal"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.nj-dca-neighborhood-trends.population_change",
@@ -15017,7 +15018,7 @@
     "nj-dca-neighborhood-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.household_cost_context",
@@ -15044,7 +15045,7 @@
     "nj-dca-neighborhood-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.accessibility_context",
@@ -15071,7 +15072,7 @@
     "nj-dca-neighborhood-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.neighborhood_trend_freshness",
@@ -15098,7 +15099,7 @@
     "nj-dca-neighborhood-trends"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "njplus.njdep-csrr-gis.kcsl_case_status",
@@ -15388,7 +15389,7 @@
     "njdep-csrr-gis"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.environmental_case_activity",
@@ -15418,7 +15419,7 @@
     "njdep-csrr-gis"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.brownfield_reuse_context",
@@ -15448,7 +15449,7 @@
     "njdep-csrr-gis"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "watchdog.njplus.environmental_source_currency",
@@ -15478,7 +15479,7 @@
     "njdep-csrr-gis"
    ],
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
   },
   {
    "id": "modiv_intel.median_assessed_value",
@@ -15504,7 +15505,7 @@
    "formula": "Median net assessment across MOD-IV parcels.",
    "unit": "currency",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.assessment_dispersion_iqr_pct",
@@ -15530,7 +15531,7 @@
    "formula": "Interquartile assessment range divided by median assessment.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_annual_tax",
@@ -15556,7 +15557,7 @@
    "formula": "Median latest positive annual-tax field available in this MOD-IV release. The 2026 file currently reports this in the prior-year tax field.",
    "unit": "currency",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.tax_dispersion_iqr_pct",
@@ -15582,7 +15583,7 @@
    "formula": "Interquartile latest-reported annual-tax range divided by the median reported annual tax.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_assessment_change_pct",
@@ -15608,7 +15609,7 @@
    "formula": "Median current net assessment change versus prior-year net assessment.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.assessment_growth_positive_share_pct",
@@ -15634,7 +15635,7 @@
    "formula": "Share of comparable prior-year records whose net assessment increased.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.assessment_change_dispersion_pct",
@@ -15660,7 +15661,7 @@
    "formula": "Interquartile spread of parcel assessment changes versus prior-year assessment, expressed in percentage points.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.assessment_jump_share_pct",
@@ -15686,7 +15687,7 @@
    "formula": "Share of parcels with comparable prior-year assessment whose absolute assessment change exceeded 10%.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_land_share_pct",
@@ -15712,7 +15713,7 @@
    "formula": "Median land value as a share of net assessment.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.improvement_value_share_pct",
@@ -15738,7 +15739,7 @@
    "formula": "Aggregate improvement assessment divided by aggregate net assessment.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.residential_parcel_share_pct",
@@ -15764,7 +15765,7 @@
    "formula": "Share of MOD-IV parcels classified as property class 2.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.commercial_parcel_share_pct",
@@ -15790,7 +15791,7 @@
    "formula": "Share of MOD-IV parcels in class 4 commercial/industrial/apartment categories.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.exempt_parcel_share_pct",
@@ -15816,7 +15817,7 @@
    "formula": "Share of MOD-IV parcels in class 15 exempt categories.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.vacant_parcel_share_pct",
@@ -15842,7 +15843,7 @@
    "formula": "Share of MOD-IV parcels in class 1 vacant land.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.farm_parcel_share_pct",
@@ -15868,7 +15869,7 @@
    "formula": "Share of MOD-IV parcels in class 3 farm categories.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.recent_sale_turnover_pct",
@@ -15894,7 +15895,7 @@
    "formula": "2024-or-later deed records with positive sale price divided by parcel count; not an arm's-length-sale claim.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_building_age",
@@ -15920,7 +15921,7 @@
    "formula": "2026 minus median plausible construction year.",
    "unit": "years",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.pre_1978_building_share_pct",
@@ -15946,12 +15947,12 @@
    "formula": "Share of parcels with plausible construction year before 1978.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.recent_build_share_pct",
    "label": "Recent construction share",
-   "description": "Share of parcels with plausible construction year 2020\u20132026.",
+   "description": "Share of parcels with plausible construction year 2020–2026.",
    "category": "statewide MOD-IV intelligence",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -15969,10 +15970,10 @@
    "source_id": "treasury-modiv-2026",
    "field": "recent_build_share_pct",
    "professional_reason": "Statewide parcel-level MOD-IV context condensed into a comparable municipal benchmark.",
-   "formula": "Share of parcels with plausible construction year 2020\u20132026.",
+   "formula": "Share of parcels with plausible construction year 2020–2026.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_effective_tax_rate_pct",
@@ -15998,7 +15999,7 @@
    "formula": "Median latest reported annual tax divided by current net assessment; indicative only and distinct from an equalized market-value tax rate.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_sale_assessment_ratio_pct",
@@ -16024,7 +16025,7 @@
    "formula": "Median sale-assessment divided by recorded sale price across positive observations; not a verified SR-1A equalization statistic.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.sale_assessment_ratio_dispersion_pct",
@@ -16050,7 +16051,7 @@
    "formula": "Interquartile spread of sale-assessment ratios divided by their median.",
    "unit": "percent",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.median_parcel_acres",
@@ -16076,7 +16077,7 @@
    "formula": "Median positive calculated acreage reported in MOD-IV.",
    "unit": "acres",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "modiv_intel.assessed_value_per_acre",
@@ -16102,7 +16103,7 @@
    "formula": "Aggregate net assessment divided by aggregate positive reported acreage.",
    "unit": "currency_per_acre",
    "provider_status": "planned",
-   "provider_note": "No provider family connected yet"
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.comparable_evidence_reliability",
@@ -16121,8 +16122,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "comparable_evidence_reliability",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.municipal_cost_absorption_score",
@@ -16141,8 +16142,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "municipal_cost_absorption_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.transaction_tax_shock_index",
@@ -16161,8 +16162,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "transaction_tax_shock_index",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.fiscal_resilience_score",
@@ -16180,8 +16181,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "fiscal_resilience_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.assessment_defensibility_score",
@@ -16200,8 +16201,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "assessment_defensibility_score",
-   "provider_status": "unavailable",
-   "provider_note": "No formula or dependencies defined \u2014 candidate for removal"
+   "provider_status": "planned",
+   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation."
   },
   {
    "id": "watchdog.building_age_years",
@@ -16226,7 +16227,7 @@
    "field": "building_age_years",
    "unit": "years",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.years_since_last_sale",
@@ -16251,7 +16252,7 @@
    "field": "years_since_last_sale",
    "unit": "years",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.tax_to_assessment_rate",
@@ -16276,7 +16277,7 @@
    "field": "tax_to_assessment_rate",
    "unit": "percent",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.land_share_pct",
@@ -16301,7 +16302,7 @@
    "field": "land_share_pct",
    "unit": "percent",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.improvement_share_pct",
@@ -16326,7 +16327,7 @@
    "field": "improvement_share_pct",
    "unit": "percent",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "watchdog.assessment_per_acre",
@@ -16351,7 +16352,7 @@
    "field": "assessment_per_acre",
    "unit": "currency",
    "provider_status": "live",
-   "provider_note": "Watchdog deterministic property formula"
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   },
   {
    "id": "property.lot_area_sqft",
@@ -16377,6 +16378,162 @@
    "unit": "square feet",
    "provider_status": "live",
    "provider_note": "NJOGIS Parcels / MOD-IV Composite"
+  },
+  {
+   "id": "watchdog.sale_to_assessment_ratio",
+   "label": "Sale To Assessment Ratio",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "sale_to_assessment_ratio",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
+  },
+  {
+   "id": "watchdog.assessment_to_sale_ratio",
+   "label": "Assessment To Sale Ratio",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "assessment_to_sale_ratio",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
+  },
+  {
+   "id": "watchdog.land_to_improvement_ratio",
+   "label": "Land To Improvement Ratio",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "land_to_improvement_ratio",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
+  },
+  {
+   "id": "watchdog.permit_activity_score",
+   "label": "Permit Activity Score",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "permit_activity_score",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
+  },
+  {
+   "id": "watchdog.flood_environment_risk_score",
+   "label": "Flood Environment Risk Score",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "flood_environment_risk_score",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
+  },
+  {
+   "id": "watchdog.due_diligence_signal_count",
+   "label": "Due Diligence Signal Count",
+   "description": "Watchdog governed derived intelligence marker.",
+   "category": "derived",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor",
+    "municipal",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "due_diligence_signal_count",
+   "provider_status": "live",
+   "provider_note": "Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned."
   }
  ]
 }
