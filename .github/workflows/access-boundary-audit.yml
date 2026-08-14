@@ -39,5 +39,7 @@ jobs:
           test -s /tmp/watchdog-render-test/manifest.json
           grep -q "Curious what your home" /tmp/watchdog-render-test/seller-value-postcard-front.svg
           grep -q "could be worth?" /tmp/watchdog-render-test/seller-value-postcard-front.svg
+      - name: Verify Marketing Studio Opportunity Discovery contracts
+        run: node property/tests/marketing-discovery-contracts.mjs
       - name: Verify v0.45 protected delivery and Agent Control contracts
         run: node property/tests/v045-control-plane.mjs

@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const migration=read('supabase/migrations/20260814195500_marketing_opportunity_discovery_v1.sql');
+const ui=read('property/js/marketing-studio-discovery.js');
+assert.match(migration,/can_use_data_workbench\(uid\)/i,'Opportunity Discovery must require Agent+ Marketing Studio entitlement.');
+assert.match(migration,/property_lookups/i,'Discovery must derive v1 segments from governed property records.');
+assert.match(migration,/does not assert seller intent|does not assert seller intent/i,'Long-term ownership must not be presented as known seller intent.');
+assert.match(migration,/no savings or appeal result is implied/i,'Tax-review discovery must not promise an appeal outcome.');
+assert.doesNotMatch(migration,/race|religion|gender|ethnicity|marital|children|income bracket/i,'Discovery definitions must not introduce demographic profiling fields.');
+assert.match(ui,/marketing_discover_opportunities/,'The UI must request server-generated opportunity counts.');
+assert.match(ui,/marketing_create_campaign_from_opportunity/,'Audience creation must use the server-owned opportunity RPC.');
+assert.doesNotMatch(ui,/from\(['"]property_lookups['"]\).*insert|property_lookups.*delete/s,'The browser must not mutate property records.');
+console.log('Marketing Studio Opportunity Discovery contracts passed.');
