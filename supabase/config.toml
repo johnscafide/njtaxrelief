@@ -24,3 +24,6 @@ verify_jwt = false
 
 [functions.watchdog-automation]
 verify_jwt = false
+
+[functions.pcm-direct-mail]
+verify_jwt = true
