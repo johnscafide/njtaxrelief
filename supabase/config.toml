@@ -36,3 +36,6 @@ verify_jwt = false
 
 [functions.marketing-track]
 verify_jwt = false
+
+[functions.marketing-provider-status]
+verify_jwt = true
