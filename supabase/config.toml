@@ -36,3 +36,12 @@ verify_jwt = false
 
 [functions.marketing-track]
 verify_jwt = false
+
+[functions.marketing-provider-status]
+verify_jwt = true
+
+[functions.google-ads-oauth-start]
+verify_jwt = true
+
+[functions.google-ads-oauth-callback]
+verify_jwt = false
