@@ -1,2 +1,3 @@
--- Include sort_order in the template projection used by marketing_creative_studio_bootstrap.
--- This keeps the curated template gallery deterministic while preserving Agent+ ownership checks.
+-- The deterministic template ordering fix is incorporated into
+-- 20260814190500_marketing_creative_tracking_path.sql for fresh environments.
+-- This migration remains intentionally idempotent for production migration history.
