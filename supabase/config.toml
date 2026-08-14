@@ -33,3 +33,6 @@ verify_jwt = true
 
 [functions.stripe-webhook]
 verify_jwt = false
+
+[functions.marketing-track]
+verify_jwt = false
