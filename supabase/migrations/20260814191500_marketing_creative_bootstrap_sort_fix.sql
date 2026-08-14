@@ -1,0 +1,2 @@
+-- Include sort_order in the template projection used by marketing_creative_studio_bootstrap.
+-- This keeps the curated template gallery deterministic while preserving Agent+ ownership checks.
