@@ -51,7 +51,17 @@ function state(m){
   if(src==='nj-dca-permits-raw'&&dcaPermitFields.has(f))return'live';
   if(src==='nj-dca-development-trends'&&dcaDevFields.has(f))return'live';
   if(src==='nj-cod'&&codNotYetLive.has(f))return'planned';
-  if(sourceLive.has(src)){if(src.startsWith('njdep-')&&!m.source_layer)return'planned';return'live'}
+  if(sourceLive.has(src)){
+    // A computed/proprietary marker riding on a live raw-data family (e.g. the 5
+    // budget.structural_imbalance-style markers under nj-dca-budget) is NOT automatically
+    // live just because the family is -- it needs its own governed formula/dependency
+    // definition, which is build-derived-governance.js's job, not this script's. Without this
+    // guard, this rule and that script fought each other and flipped these markers back and
+    // forth depending on which one ran last (found 2026-08-14).
+    if(m.origin==='watchdog-derived'||m.proprietary===true)return'planned';
+    if(src.startsWith('njdep-')&&!m.source_layer)return'planned';
+    return'live'
+  }
   return'planned'
 }
 const c={live:0,planned:0,partial:0,unavailable:0};
