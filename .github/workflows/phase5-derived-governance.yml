@@ -1,0 +1,44 @@
+name: Phase 5 derived marker governance
+on:
+  push:
+    branches: [phase5-complete-ci-fix-20260814, main]
+    paths:
+      - 'property/data/marker-registry.json'
+      - 'property/data/derived-marker-formulas.json'
+      - 'scripts/build-derived-governance.js'
+      - '.github/workflows/phase5-derived-governance.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  govern:
+    if: "!contains(github.event.head_commit.message || '', '[phase5-governance]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build complete derived-marker governance
+        run: node scripts/build-derived-governance.js
+      - name: Verify zero untriaged derived markers
+        run: |
+          node - <<'NODE'
+          const g=require('./property/data/derived-marker-governance.json');
+          if(g.summary.untriaged!==0)throw new Error('Untriaged derived markers remain: '+g.summary.untriaged);
+          if(g.summary.total_derived!==g.summary.live+g.summary.blocked+g.summary.retired)throw new Error('Governance totals do not reconcile');
+          console.log(g.summary);
+          NODE
+      - name: Commit governance artifact when changed
+        run: |
+          if git diff --quiet -- property/data/marker-registry.json property/data/derived-marker-governance.json; then
+            echo 'Governance is already current.'
+            exit 0
+          fi
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add property/data/marker-registry.json property/data/derived-marker-governance.json
+          git commit -m "[phase5-governance] Reconcile all derived marker states"
+          git push
