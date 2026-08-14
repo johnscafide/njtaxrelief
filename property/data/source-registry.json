@@ -2,31 +2,282 @@
   "schema_version": 1,
   "timezone": "America/New_York",
   "datasets": [
-    {"id":"nj-lpt-statistical-index","label":"NJ Local Property Tax statistical publication index","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","cadence":"six-hour monitor","live":true,"monitor_only":true,"note":"Change-detection landing page for new Abstract of Ratables, equalization, residential statistics, tax-rate and related annual publications. A page change is an alert, not automatic approval of new data."},
-    {"id":"cod-history","label":"Coefficient of Deviation history","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf","output":"property/data/cod/cod-history.json","parser":["node","property/scripts/parse-cod-pdf.js","{download}"],"collection":"municipalities","minimum_records":550,"cadence":"annual"},
-    {"id":"uniformity","label":"Assessment Uniformity scores","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","output":"property/uniformity.json","collection":"districts","minimum_records":500,"cadence":"annual","derived":true},
-    {"id":"appeals","label":"Property-tax appeal outcomes","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml","output":"property/appeals.json","collection":"statewide","minimum_records":8,"cadence":"annual"},
-    {"id":"tax-rates","label":"Municipal general tax rates","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","output":"property/tax-rates.json","collection":"rates","minimum_records":500,"cadence":"annual"},
-    {"id":"sr1a-ratios","label":"Verified-sale municipal ratios","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/sr1a.shtml","output":"property/sr1a-ratios.json","collection":"districts","minimum_records":350,"cadence":"quarterly","derived":true},
-    {"id":"verified-sales","label":"County verified sales files","agency":"NJ Division of Taxation","source_url":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","glob":"property/sales-*.json","minimum_files":21,"cadence":"quarterly"},
-    {"id":"abatements","label":"Abatement and exemption indicators","agency":"NJ public records","source_url":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","output":"property/abatements.json","collection":"districts","minimum_records":200,"cadence":"annual"},
-    {"id":"budget-pressure","label":"Municipal Budget Pressure","agency":"NJ Department of Community Affairs","source_url":"https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml","output":"property/data/budget-pressure.json","collection":"municipalities","minimum_records":560,"cadence":"annual","derived":true},
-    {"id":"exempt-pilot","label":"Exempt property and PILOT exposure","agency":"NJ Division of Taxation + NJ Department of Community Affairs","source_url":"https://www.nj.gov/dca/dlgs/taxabatementkit.shtml","output":"property/data/exempt-pilot.json","collection":"municipalities","minimum_records":564,"cadence":"annual","derived":true},
-    {"id":"watchdog-nj-source-v031","label":"Watchdog NJ public-source catalog v0.31","agency":"State of New Jersey public data sources","source_url":"https://data.nj.gov/","cadence":"varies by upstream dataset","derived":true,"note":"Watchdog source-family identifier for derived markers built from the specific New Jersey public datasets recorded in each marker's dependency/source metadata."},
-    {"id":"construction-permits-live","label":"Parcel construction permit and certificate activity","agency":"NJ Department of Community Affairs","source_url":"https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra","cadence":"monthly","live":true,"join":"Treasury municipality code + block + lot"},
-    {"id":"known-contaminated-sites-live","label":"Known Contaminated Sites List","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0","cadence":"daily","live":true,"join":"saved property coordinate + 500 meter proximity"},
-    {"id":"deed-notices-live","label":"Environmental Deed Notice Areas","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40","cadence":"as published","live":true,"join":"saved property coordinate intersection"},
-    {"id":"groundwater-cea-live","label":"Groundwater Classification Exception Areas","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5","cadence":"as published","live":true,"join":"saved property coordinate intersection"},
-    {"id":"underground-storage-tanks-live","label":"Underground Storage Tank Facilities","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9","cadence":"as published","live":true,"join":"saved property coordinate + 250 meter proximity"},
-    {"id":"tidelands-reference-live","label":"Tidelands statewide reference layer","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30","cadence":"as published","live":true,"join":"saved property coordinate intersection","warning":"Reference screening only; NJDEP states only promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line."},
-    {"id":"highlands-area-live","label":"Highlands Area","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6","cadence":"as published","live":true,"join":"saved property coordinate intersection"},
-    {"id":"pinelands-area-live","label":"Pinelands Area","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7","cadence":"as published","live":true,"join":"saved property coordinate intersection"},
-    {"id":"nfhl-flood-live","label":"National Flood Hazard Layer","agency":"FEMA via NJDEP","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43","cadence":"as published","live":true,"join":"saved property coordinate intersection","warning":"Screening result only; regulatory mapping and written rules control."},
-    {"id":"tidal-cafe-live","label":"Tidal Climate Adjusted Flood Elevation","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48","cadence":"as published","live":true,"join":"saved property coordinate intersection"},
-    {"id":"wetlands-2012-live","label":"NJDEP Wetlands 2012 reference","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2","cadence":"historic reference","live":true,"join":"saved property coordinate intersection","warning":"2012 reference data; not a regulatory wetlands delineation."},
-    {"id":"priority-wetlands-live","label":"EPA Priority Wetlands","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79","cadence":"historic reference","live":true,"join":"saved property coordinate intersection"},
-    {"id":"njdep-geology-live","label":"NJDEP Geology feature service","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer","cadence":"as published","live":true,"join":"saved property coordinate intersection or documented proximity buffer","warning":"Screening data only. Layer metadata, mapped features and applicable professional/regulatory review control."},
-    {"id":"njdep-hydro-live","label":"NJDEP Hydrography feature service","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer","cadence":"as published","live":true,"join":"saved property coordinate intersection or documented proximity buffer","warning":"Screening data only. Flood, wellhead and water-resource determinations require the governing map, rule or agency record."},
-    {"id":"njdep-land-live","label":"NJDEP Land feature service","agency":"NJ Department of Environmental Protection","source_url":"https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer","cadence":"as published","live":true,"join":"saved property coordinate intersection or documented proximity buffer","warning":"Public screening context only; mapped historic, archaeological, wetlands and open-space features are not legal determinations."}
+    {
+      "id": "nj-lpt-statistical-index",
+      "label": "NJ Local Property Tax statistical publication index",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "cadence": "six-hour monitor",
+      "live": true,
+      "monitor_only": true,
+      "note": "Change-detection landing page for new Abstract of Ratables, equalization, residential statistics, tax-rate and related annual publications. A page change is an alert, not automatic approval of new data."
+    },
+    {
+      "id": "cod-history",
+      "label": "Coefficient of Deviation history",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf",
+      "output": "property/data/cod/cod-history.json",
+      "parser": [
+        "node",
+        "property/scripts/parse-cod-pdf.js",
+        "{download}"
+      ],
+      "collection": "municipalities",
+      "minimum_records": 550,
+      "cadence": "annual"
+    },
+    {
+      "id": "uniformity",
+      "label": "Assessment Uniformity scores",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "output": "property/uniformity.json",
+      "collection": "districts",
+      "minimum_records": 500,
+      "cadence": "annual",
+      "derived": true
+    },
+    {
+      "id": "appeals",
+      "label": "Property-tax appeal outcomes",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml",
+      "output": "property/appeals.json",
+      "collection": "statewide",
+      "minimum_records": 8,
+      "cadence": "annual"
+    },
+    {
+      "id": "tax-rates",
+      "label": "Municipal general tax rates",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "output": "property/tax-rates.json",
+      "collection": "rates",
+      "minimum_records": 500,
+      "cadence": "annual"
+    },
+    {
+      "id": "sr1a-ratios",
+      "label": "Verified-sale municipal ratios",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/sr1a.shtml",
+      "output": "property/sr1a-ratios.json",
+      "collection": "districts",
+      "minimum_records": 350,
+      "cadence": "quarterly",
+      "derived": true
+    },
+    {
+      "id": "verified-sales",
+      "label": "County verified sales files",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "glob": "property/sales-*.json",
+      "minimum_files": 21,
+      "cadence": "quarterly"
+    },
+    {
+      "id": "abatements",
+      "label": "Abatement and exemption indicators",
+      "agency": "NJ public records",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "output": "property/abatements.json",
+      "collection": "districts",
+      "minimum_records": 200,
+      "cadence": "annual"
+    },
+    {
+      "id": "budget-pressure",
+      "label": "Municipal Budget Pressure",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
+      "output": "property/data/budget-pressure.json",
+      "collection": "municipalities",
+      "minimum_records": 560,
+      "cadence": "annual",
+      "derived": true
+    },
+    {
+      "id": "exempt-pilot",
+      "label": "Exempt property and PILOT exposure",
+      "agency": "NJ Division of Taxation + NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
+      "output": "property/data/exempt-pilot.json",
+      "collection": "municipalities",
+      "minimum_records": 564,
+      "cadence": "annual",
+      "derived": true
+    },
+    {
+      "id": "watchdog-nj-source-v031",
+      "label": "Watchdog NJ public-source catalog v0.31",
+      "agency": "State of New Jersey public data sources",
+      "source_url": "https://data.nj.gov/",
+      "cadence": "varies by upstream dataset",
+      "derived": true,
+      "note": "Watchdog source-family identifier for derived markers built from the specific New Jersey public datasets recorded in each marker's dependency/source metadata."
+    },
+    {
+      "id": "construction-permits-live",
+      "label": "Parcel construction permit and certificate activity",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
+      "cadence": "monthly",
+      "live": true,
+      "join": "Treasury municipality code + block + lot"
+    },
+    {
+      "id": "known-contaminated-sites-live",
+      "label": "Known Contaminated Sites List",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
+      "cadence": "daily",
+      "live": true,
+      "join": "saved property coordinate + 500 meter proximity"
+    },
+    {
+      "id": "deed-notices-live",
+      "label": "Environmental Deed Notice Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "groundwater-cea-live",
+      "label": "Groundwater Classification Exception Areas",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "underground-storage-tanks-live",
+      "label": "Underground Storage Tank Facilities",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate + 250 meter proximity"
+    },
+    {
+      "id": "tidelands-reference-live",
+      "label": "Tidelands statewide reference layer",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection",
+      "warning": "Reference screening only; NJDEP states only promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line."
+    },
+    {
+      "id": "highlands-area-live",
+      "label": "Highlands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "pinelands-area-live",
+      "label": "Pinelands Area",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "nfhl-flood-live",
+      "label": "National Flood Hazard Layer",
+      "agency": "FEMA via NJDEP",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection",
+      "warning": "Screening result only; regulatory mapping and written rules control."
+    },
+    {
+      "id": "tidal-cafe-live",
+      "label": "Tidal Climate Adjusted Flood Elevation",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "wetlands-2012-live",
+      "label": "NJDEP Wetlands 2012 reference",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2",
+      "cadence": "historic reference",
+      "live": true,
+      "join": "saved property coordinate intersection",
+      "warning": "2012 reference data; not a regulatory wetlands delineation."
+    },
+    {
+      "id": "priority-wetlands-live",
+      "label": "EPA Priority Wetlands",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
+      "cadence": "historic reference",
+      "live": true,
+      "join": "saved property coordinate intersection"
+    },
+    {
+      "id": "njdep-geology-live",
+      "label": "NJDEP Geology feature service",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection or documented proximity buffer",
+      "warning": "Screening data only. Layer metadata, mapped features and applicable professional/regulatory review control."
+    },
+    {
+      "id": "njdep-hydro-live",
+      "label": "NJDEP Hydrography feature service",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection or documented proximity buffer",
+      "warning": "Screening data only. Flood, wellhead and water-resource determinations require the governing map, rule or agency record."
+    },
+    {
+      "id": "njdep-land-live",
+      "label": "NJDEP Land feature service",
+      "agency": "NJ Department of Environmental Protection",
+      "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer",
+      "cadence": "as published",
+      "live": true,
+      "join": "saved property coordinate intersection or documented proximity buffer",
+      "warning": "Public screening context only; mapped historic, archaeological, wetlands and open-space features are not legal determinations."
+    },
+    {
+      "id": "affordable-housing-status",
+      "label": "Municipal Affordable Housing Status Report",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlps/hss/annualreporting/Affordable%20Housing%20Municipal%20Status%20Report%207-1-26.xlsx",
+      "source_page": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
+      "source_page_note": "The page embeds an older 6-5-25.xlsx link at the top; the working current workbook is the 7-1-26.xlsx one listed separately under Related Links. Confirmed 2026-08-14. NJ has not fixed the stale embedded link on their end -- source_url below intentionally points to the fresh one, not the one the page links first.",
+      "output": "property/data/affordable-housing.json",
+      "parser": [
+        "python3",
+        "property/scripts/parse_affordable_housing.py",
+        "{download}",
+        "property/data/affordable-housing.json"
+      ],
+      "collection": "districts",
+      "minimum_records": 50,
+      "minimum_records_note": "Conservative placeholder -- this report only covers municipalities with a reported project in AHMS, not all 564. Tighten this once the first real run shows an actual count.",
+      "cadence": "annual"
+    }
   ]
 }
