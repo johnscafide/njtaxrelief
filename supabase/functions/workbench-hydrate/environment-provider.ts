@@ -16,7 +16,9 @@ const PRE:Record<string,Spec>={
  'preflight.tidelands_reference_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer',layer:'30',mode:'hit'},
  'preflight.highlands_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer',layer:'6',mode:'hit'},
  'preflight.pinelands_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer',layer:'7',mode:'hit'},
- 'preflight.fema_flood_zone':{base:FEMA_NFHL,layer:'28',mode:'fema'}
+ 'preflight.fema_flood_zone':{base:FEMA_NFHL,layer:'28',mode:'fema'},
+ 'preflight.tidal_cafe_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer',layer:'48',mode:'hit'},
+ 'preflight.wetlands_2012_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer',layer:'2',mode:'hit'}
 };
 const cache=new Map<string,{at:number,v:any[]}>(),TTL=6*60*60*1000;
 function norm(s:string){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
@@ -26,4 +28,4 @@ async function query(spec:Spec,lat:number,lon:number){const ck=[spec.base,spec.l
 function femaValue(fs:any[]){if(!fs.length)return null;const a=fs[0]?.attributes||{};const zone=String(a.FLD_ZONE||'').trim(),sub=String(a.ZONE_SUBTY||'').trim();if(zone&&sub&&sub.toLowerCase()!=='null')return zone+' · '+sub;if(zone)return zone;if(sub&&sub.toLowerCase()!=='null')return sub;return 'Mapped NFHL flood hazard'}
 export async function njdepValue(marker:any,row:any){const lat=Number(row?.lat),lon=Number(row?.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return null;const id=String(marker?.id||''),pre=PRE[id];let spec=pre;if(!spec){const base=SERVICES[String(marker?.source_id||'')],layer=String(marker?.source_layer??'');if(!base||!layer)return null;spec={base,layer,distance:distanceFor(String(marker?.field||''))}}const fs=await query(spec,lat,lon),field=String(marker?.field||'');if(spec.mode==='fema')return femaValue(fs);if(spec.mode==='count'||field.endsWith('_count')||/_(\d+)m$/.test(field))return fs.length;if(spec.mode==='hit'||/_hit$|within_/.test(field))return fs.length>0;if(!fs.length)return null;return pick(fs[0].attributes||{},field)}
 export function isNjdepMarker(marker:any){return !!PRE[String(marker?.id||'')] || (!!SERVICES[String(marker?.source_id||'')]&&marker?.source_layer!=null)}
-export const NJDEP_PROVIDER_VERSION='spatial-preflight-v3-njdep-fema';
+export const NJDEP_PROVIDER_VERSION='spatial-preflight-v4-njdep-fema';
