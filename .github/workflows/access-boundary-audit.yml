@@ -21,11 +21,22 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - name: Verify protected-route and entitlement contracts
         run: node property/scripts/audit_access_boundaries.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
       - name: Verify Marketing Studio creative and launch contracts
         run: node property/tests/marketing-creative-contracts.mjs
+      - name: Verify Marketing Studio visual renderer
+        run: |
+          rm -rf /tmp/watchdog-render-test
+          python3 property/scripts/render_marketing_creatives.py --input property/tests/fixtures/marketing-creative.json --output-dir /tmp/watchdog-render-test
+          test -s /tmp/watchdog-render-test/seller-value-postcard-front.svg
+          test -s /tmp/watchdog-render-test/seller-value-postcard-back.svg
+          test -s /tmp/watchdog-render-test/manifest.json
+          grep -q "Curious what your home could be worth" /tmp/watchdog-render-test/seller-value-postcard-front.svg
       - name: Verify v0.45 protected delivery and Agent Control contracts
         run: node property/tests/v045-control-plane.mjs
