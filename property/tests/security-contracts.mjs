@@ -15,10 +15,14 @@ assert.match(config, /\[functions\.stripe-webhook\][\s\S]*?verify_jwt\s*=\s*fals
   'Stripe campaign webhooks must authenticate with Stripe signatures, not a Supabase JWT.');
 assert.match(config, /\[functions\.marketing-track\][\s\S]*?verify_jwt\s*=\s*false/,
   'Public campaign tracking uses an opaque campaign token rather than a user JWT.');
+assert.match(config, /\[functions\.marketing-provider-status\][\s\S]*?verify_jwt\s*=\s*true/,
+  'Provider readiness details must require an authenticated Marketing Studio session.');
 assert.equal(fs.existsSync(path.join(root, 'supabase/functions/stripe-webhook/index.ts')), true,
   'The Stripe campaign payment webhook source must be checked in for rollback and audit.');
 assert.equal(fs.existsSync(path.join(root, 'supabase/functions/marketing-track/index.ts')), true,
   'The public campaign tracking source must be checked in for rollback and audit.');
+assert.equal(fs.existsSync(path.join(root, 'supabase/functions/marketing-provider-status/index.ts')), true,
+  'Provider readiness source must be checked in for rollback and audit.');
 
 const stripe = read('supabase/functions/stripe-webhook/index.ts');
 assert.match(stripe, /STRIPE_WEBHOOK_SIGNING_SECRET/,
@@ -53,6 +57,38 @@ assert.match(marketingTrack, /destination_path/,
   'Tracking redirects must use the server-stored destination, never a browser destination parameter.');
 assert.doesNotMatch(marketingTrack, /searchParams\.get\(['"](?:url|redirect|destination)['"]\)/,
   'Tracking must not expose an open redirect parameter.');
+
+const providerStatus = read('supabase/functions/marketing-provider-status/index.ts');
+assert.doesNotMatch(providerStatus, /'Access-Control-Allow-Origin':\s*'\*'/,
+  'Provider readiness must never use wildcard CORS.');
+assert.match(providerStatus, /client\.rpc\('marketing_studio_bootstrap'\)/,
+  'Provider readiness must verify Marketing Studio entitlement before returning its catalog.');
+assert.doesNotMatch(providerStatus, /missing_configuration/,
+  'Agent-facing provider readiness must not expose server secret variable names.');
+assert.doesNotMatch(providerStatus, /value:\s*Deno\.env|get\(k\).*return.*k/s,
+  'Provider readiness must never return server secret values.');
+
+const providerCatalog = read('supabase/migrations/20260814183500_marketing_provider_adapter_catalog.sql');
+assert.match(providerCatalog, /oauth2_multi_user/,
+  'Google Ads must declare a multi-user OAuth adapter strategy.');
+assert.match(providerCatalog, /owner_record_custom_audiences[^\n]*false/,
+  'Google Ads adapter metadata must reject property-owner-record custom audiences.');
+assert.match(providerCatalog, /cold_property_record_email[^\n]*false/,
+  'Email adapter metadata must reject cold property-record email.');
+assert.match(providerCatalog, /cold_property_record_sms[^\n]*false/,
+  'SMS adapter metadata must reject cold property-record SMS.');
+assert.match(providerCatalog, /revoke all on public\.marketing_provider_connections from anon,authenticated/i,
+  'Provider connection internals must remain server-only.');
+
+const consentMigration = read('supabase/migrations/20260814184000_marketing_contact_consent_ledger.sql');
+assert.match(consentMigration, /subject_hash text not null check\(subject_hash ~ '\^\[a-f0-9\]\{64\}\$'\)/i,
+  'Permission-based channel consent must use a normalized SHA-256 subject hash.');
+assert.match(consentMigration, /marketing_has_contact_consent/,
+  'Permission-based adapters need a central consent check.');
+assert.match(consentMigration, /not public\.marketing_is_suppressed/i,
+  'Consent may not override an active suppression.');
+assert.match(consentMigration, /revoke insert,update,delete on public\.marketing_contact_consents from anon,authenticated/i,
+  'Browser clients must not fabricate consent records.');
 
 const automationMigration = read('supabase/migrations/20260814180500_marketing_automation_attribution_engine.sql');
 assert.match(automationMigration, /kill_switch/,
@@ -119,4 +155,4 @@ for (const relative of [
   assert.match(source, /living_sqft_present/, `${relative} must record subject square-footage coverage.`);
 }
 
-console.log('Security, campaign billing, marketing automation and Chapter 123 measurement contracts passed.');
+console.log('Security, campaign billing, marketing automation, provider adapters and Chapter 123 measurement contracts passed.');
