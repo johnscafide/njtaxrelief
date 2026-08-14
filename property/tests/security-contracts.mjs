@@ -13,8 +13,12 @@ assert.match(config, /\[functions\.marketing-campaign-checkout\][\s\S]*?verify_j
   'Marketing campaign checkout must require an authenticated Supabase JWT.');
 assert.match(config, /\[functions\.stripe-webhook\][\s\S]*?verify_jwt\s*=\s*false/,
   'Stripe campaign webhooks must authenticate with Stripe signatures, not a Supabase JWT.');
+assert.match(config, /\[functions\.marketing-track\][\s\S]*?verify_jwt\s*=\s*false/,
+  'Public campaign tracking uses an opaque campaign token rather than a user JWT.');
 assert.equal(fs.existsSync(path.join(root, 'supabase/functions/stripe-webhook/index.ts')), true,
   'The Stripe campaign payment webhook source must be checked in for rollback and audit.');
+assert.equal(fs.existsSync(path.join(root, 'supabase/functions/marketing-track/index.ts')), true,
+  'The public campaign tracking source must be checked in for rollback and audit.');
 
 const stripe = read('supabase/functions/stripe-webhook/index.ts');
 assert.match(stripe, /STRIPE_WEBHOOK_SIGNING_SECRET/,
@@ -37,6 +41,33 @@ assert.match(campaignCheckout, /marketing_payments/,
   'Campaign checkout must persist a server-side payment ledger row.');
 assert.doesNotMatch(campaignCheckout, /body\?\.(price|amount|unit_amount|retail_cents)/,
   'Browser-submitted price or amount must never be authoritative for campaign checkout.');
+
+const marketingTrack = read('supabase/functions/marketing-track/index.ts');
+assert.doesNotMatch(marketingTrack, /'Access-Control-Allow-Origin':\s*'\*'/,
+  'Public marketing tracking must never use wildcard CORS.');
+assert.match(marketingTrack, /\^\[a-f0-9\]\{64\}\$/,
+  'Public marketing tracking must require a 64-character opaque token.');
+assert.match(marketingTrack, /ORIGINS\.has\(o\)/,
+  'Tracking POST events must validate the Watchdog origin.');
+assert.match(marketingTrack, /destination_path/,
+  'Tracking redirects must use the server-stored destination, never a browser destination parameter.');
+assert.doesNotMatch(marketingTrack, /searchParams\.get\(['"](?:url|redirect|destination)['"]\)/,
+  'Tracking must not expose an open redirect parameter.');
+
+const automationMigration = read('supabase/migrations/20260814180500_marketing_automation_attribution_engine.sql');
+assert.match(automationMigration, /kill_switch/,
+  'Campaign automation must include a kill switch.');
+assert.match(automationMigration, /for update of s skip locked/i,
+  'Due-step claiming must use row locking to prevent duplicate processing.');
+assert.match(automationMigration, /grant execute on function public\.marketing_claim_due_steps\(integer\) to service_role/i,
+  'Only the service role may claim due automation steps.');
+const controlsMigration = read('supabase/migrations/20260814181500_marketing_automation_controls_and_learning.sql');
+assert.match(controlsMigration, /SHA-256 hash/,
+  'Suppression subjects must be stored as hashes rather than raw contact values.');
+assert.match(controlsMigration, /sample_size integer not null check\(sample_size>=5\)/i,
+  'Aggregate recommendation learning must enforce a minimum privacy sample.');
+assert.match(controlsMigration, /revoke all on public\.marketing_performance_rollups from anon,authenticated/i,
+  'Cross-customer aggregate learning data must remain server-only.');
 
 const paddle = read('supabase/functions/paddle-webhook/index.ts');
 const signatureRead = paddle.indexOf("req.headers.get('Paddle-Signature')");
@@ -88,4 +119,4 @@ for (const relative of [
   assert.match(source, /living_sqft_present/, `${relative} must record subject square-footage coverage.`);
 }
 
-console.log('Security, campaign billing and Chapter 123 measurement contracts passed.');
+console.log('Security, campaign billing, marketing automation and Chapter 123 measurement contracts passed.');
