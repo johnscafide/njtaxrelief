@@ -1,0 +1,3 @@
+-- The deterministic template ordering fix is incorporated into
+-- 20260814190500_marketing_creative_tracking_path.sql for fresh environments.
+-- This migration remains intentionally idempotent for production migration history.

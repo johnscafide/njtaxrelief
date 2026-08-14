@@ -25,5 +25,7 @@ jobs:
         run: node property/scripts/audit_access_boundaries.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
+      - name: Verify Marketing Studio creative and launch contracts
+        run: node property/tests/marketing-creative-contracts.mjs
       - name: Verify v0.45 protected delivery and Agent Control contracts
         run: node property/tests/v045-control-plane.mjs

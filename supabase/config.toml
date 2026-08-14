@@ -45,3 +45,6 @@ verify_jwt = true
 
 [functions.google-ads-oauth-callback]
 verify_jwt = false
+
+[functions.marketing-direct-mail-launch]
+verify_jwt = true
