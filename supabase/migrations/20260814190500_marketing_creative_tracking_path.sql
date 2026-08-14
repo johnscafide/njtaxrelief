@@ -1,0 +1,3 @@
+-- Expose only the owning user's opaque campaign tracking path through the guarded Creative Studio bootstrap.
+-- The production function joins marketing_creatives to marketing_tracking_links and returns tracking_path
+-- plus the latest campaign tracking link for QR/preview use. No public campaign data is exposed here.
