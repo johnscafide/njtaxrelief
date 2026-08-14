@@ -27,3 +27,9 @@ verify_jwt = false
 
 [functions.pcm-direct-mail]
 verify_jwt = true
+
+[functions.marketing-campaign-checkout]
+verify_jwt = true
+
+[functions.stripe-webhook]
+verify_jwt = false
