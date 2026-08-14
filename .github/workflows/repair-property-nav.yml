@@ -2,34 +2,42 @@ name: Repair property sticky nav
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
 permissions:
-  contents: write
+  contents: read
 jobs:
   repair:
-    if: "!contains(github.event.head_commit.message, '[nav-match-done]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Match sticky nav to current desktop header
+      - name: Validate current property navigation contract
         shell: python
         run: |
           from pathlib import Path
-          p=Path('property/index.html')
-          s=p.read_text()
-          s=s.replace('    <button class="wd-public-trigger ssearch-menu-trigger" type="button" onclick="WatchdogPublicNav.open(\'main\')" aria-label="Open Watchdog menu"><i class="fas fa-bars"></i><span>Menu</span></button>\n','',1)
-          acct='    <button class="wd-public-trigger wd-public-profile ssearch-profile-trigger" type="button" onclick="WatchdogPublicNav.open(\'profile\')" aria-label="Open account menu"><i class="fas fa-user"></i><span>Account</span></button>'
-          nav='''    <nav class="ssearch-nav">\n      <a href="/property/dashboard.html"><i class="fas fa-table-columns"></i><span>My Properties</span></a>\n      <a href="/property/home.html"><i class="fas fa-heart"></i><span>Watchlist</span></a>\n      <a href="/property/dashboard.html#saved"><i class="fas fa-bookmark"></i><span>Saved</span></a>\n      <a class="pro-link" href="/property/pro.html"><i class="fas fa-briefcase"></i><span>Pro Hub</span></a>\n    </nav>'''
-          if acct not in s: raise SystemExit('account replacement target missing')
-          s=s.replace(acct,nav,1)
-          p.write_text(s)
-          c=Path('property/css/lookup/01-search-hero.css')
-          css=c.read_text()
-          css += '''\n\n/* Sticky header now mirrors the current full-width desktop Watchdog navigation. */\n@media(min-width:761px){\n  .ssearch-in{max-width:none;width:100%;box-sizing:border-box;padding:13px 40px;gap:22px}\n  .ssearch-brand{font-size:20px;gap:10px}\n  .ssearch-brand i{font-size:20px}\n  .ssearch-pill{display:none}\n  .ssearch-nav{margin-left:auto;gap:12px}\n  .ssearch-nav a{font-size:14px;padding:11px 13px}\n  .ssearch-nav a.pro-link{background:#faf6e9;color:#987715;border-radius:10px;padding:12px 16px}\n  .ssearch-nav a.pro-link i{color:#b79322}\n}\n'''
-          c.write_text(css)
-      - name: Commit
-        run: |
-          git config user.name "Watchdog Automation"
-          git config user.email "actions@users.noreply.github.com"
-          git add property/index.html property/css/lookup/01-search-hero.css
-          git commit -m "[nav-match-done] Match sticky header to current Watchdog nav"
-          git push
+          p = Path('property/index.html')
+          s = p.read_text(encoding='utf-8')
+          required = [
+              'id="wd-nav"',
+              'id="wd-menu-trigger"',
+              "WatchdogPublicNav.open('main')",
+              'id="wd-profile-trigger"',
+              "WatchdogPublicNav.open('profile')",
+              'id="wd-main-sheet"',
+              'id="wd-profile-sheet"',
+              '/property/dashboard.html',
+              '/property/home.html',
+              '/property/pro.html',
+          ]
+          missing = [x for x in required if x not in s]
+          if missing:
+              raise SystemExit('property navigation contract missing: ' + ', '.join(missing))
+          legacy = [
+              'ssearch-menu-trigger',
+              'ssearch-profile-trigger',
+              '<nav class="ssearch-nav">',
+          ]
+          present = [x for x in legacy if x in s]
+          if present:
+              raise SystemExit('obsolete sticky nav markup remains: ' + ', '.join(present))
+          print('Property navigation contract is current and no legacy sticky-nav repair is required.')
