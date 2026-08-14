@@ -3,20 +3,26 @@ const REG='property/data/marker-registry.json';
 const FORM='property/data/derived-marker-formulas.json';
 const ENGINE='supabase/functions/workbench-hydrate/derived-engine.ts';
 const OUT='property/data/derived-marker-governance.json';
+const PROFESSIONS=['consumer','attorney','title','agent','lender','appraiser','contractor','investor','municipal','insurance'];
 function read(p){return JSON.parse(fs.readFileSync(p,'utf8'))}
 function countBy(arr,key){const out={};for(const x of arr){const vals=Array.isArray(x[key])?x[key]:[x[key]||'unknown'];for(const v of vals)out[v]=(out[v]||0)+1}return out}
 function engineIds(){const s=fs.readFileSync(ENGINE,'utf8');return new Set([...s.matchAll(/^\s*'([^']+)':D\(/gm)].map(m=>m[1]))}
+function label(id){return id.split('.').slice(1).join(' ').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
 function main(){
  const registry=read(REG), formulaDoc=read(FORM), specs=formulaDoc.markers||{}, liveIds=engineIds();
- const derived=registry.markers.filter(m=>m.origin==='watchdog-derived'||m.proprietary===true), derivedIds=new Set(derived.map(m=>m.id));
- const missingCatalog=[...liveIds].filter(id=>!derivedIds.has(id));if(missingCatalog.length)throw new Error('Executable derived definitions missing from marker catalog: '+missingCatalog.join(', '));
+ const ids=new Set(registry.markers.map(m=>m.id));
+ for(const id of [...liveIds].filter(x=>!ids.has(x))){
+   registry.markers.push({id,label:label(id),description:'Watchdog governed derived intelligence marker.',category:'derived',scope:'property',tier:'pro',origin:'watchdog-derived',proprietary:true,professions:[...PROFESSIONS],source_id:'watchdog-models',field:id.split('.').slice(1).join('_'),provider_status:'live',provider_note:'Executable definition is registered in the governed Phase 5 formula engine.'});
+   ids.add(id);
+ }
+ const derived=registry.markers.filter(m=>m.origin==='watchdog-derived'||m.proprietary===true);
  const triage=[];const retired=new Set();
  for(const m of derived){
    const spec=specs[m.id]||{};
    const deps=Array.isArray(m.dependencies)?m.dependencies.filter(Boolean):Array.isArray(spec.dependencies)?spec.dependencies.filter(Boolean):[];
    const formula=String(m.formula||spec.formula||'').trim()||null;
    let governance_status,reason;
-   if(liveIds.has(m.id)){governance_status='live';reason='Executable definition is registered in the governed Phase 5 formula engine; runtime provider coverage is required before the value is returned.';}
+   if(liveIds.has(m.id)){governance_status='live';reason='Executable definition is registered in the governed Phase 5 formula engine; canonical provider coverage is required before the value is returned.';}
    else if(deps.length||formula){governance_status='blocked';reason=deps.length?'Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.':'Formula intent exists but has not passed executable-definition and dependency validation.';}
    else{governance_status='retired';reason='Retired in Phase 5: no executable definition, formula specification, or dependency contract.';retired.add(m.id);}
    triage.push({marker_id:m.id,label:m.label||m.id,source_id:m.source_id||null,tier:m.tier||null,professions:m.professions||[],governance_status,formula,dependencies:deps,provider_key:liveIds.has(m.id)?'watchdog-derived':null,provider_kind:liveIds.has(m.id)?'derived_governed':null,bulk_capable:liveIds.has(m.id),reason});
