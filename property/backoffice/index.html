@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-access-require="developer">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -18,18 +18,22 @@
       <a class="bo-auth-brand" href="/property/"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Private Backoffice</small></span></a>
       <span class="bo-kicker" id="bo-auth-kicker">PRIVATE ACCESS</span>
       <h1 id="bo-auth-title">Watchdog Backoffice</h1>
-      <p id="bo-auth-copy">Enter the shared Backoffice key.</p>
-      <form id="bo-auth-form" data-mode="login">
+      <p id="bo-auth-copy">Backoffice currently uses your Watchdog developer account. No separate shared password is required.</p>
+      <form id="bo-auth-form" data-mode="login" hidden>
         <label>Who's signing in?
           <select name="actor"><option value="john">John</option><option value="wife">Wife</option></select>
         </label>
-        <label>Shared Backoffice key<input name="key" type="password" autocomplete="off" data-lpignore="true" data-1p-ignore="true" minlength="14" required></label>
+        <label>Shared Backoffice key<input name="key" type="password" autocomplete="off" data-lpignore="true" data-1p-ignore="true" minlength="14"></label>
         <label id="bo-auth-confirm-wrap" hidden>Confirm shared key<input name="confirm" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" minlength="14"></label>
-        <p class="bo-auth-dev" id="bo-dev-hint" hidden>First-time setup is locked to an existing Watchdog developer session. <button type="button" id="bo-signin-dev">Sign in to Watchdog</button></p>
+        <p class="bo-auth-dev" id="bo-dev-hint" hidden>Developer access is required. <button type="button" id="bo-signin-dev">Sign in to Watchdog</button></p>
         <div id="bo-auth-error" class="bo-form-error" role="alert"></div>
         <button class="bo-button bo-button-primary bo-auth-submit" id="bo-auth-submit" type="submit">Unlock Backoffice</button>
       </form>
-      <small class="bo-auth-foot">Lead data is served only after server-side authentication. The shared key is stored in Supabase Vault, not in this page or GitHub.</small>
+      <div id="bo-dev-access">
+        <p id="bo-dev-access-status" style="margin:0 0 16px;color:#617184">Checking your Watchdog developer session…</p>
+        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-dev-login" type="button">Open with Watchdog developer account</button>
+      </div>
+      <small class="bo-auth-foot">Lead data remains server-side and is available only through an authenticated Watchdog developer session.</small>
     </div>
   </section>
 
@@ -59,7 +63,7 @@
           <article><div class="bo-provider-icon">G</div><div><b>Google Address Validation</b><span>Standardize and verify submitted addresses</span></div><em id="google-status" class="pending">Connect API key</em><button type="button" class="bo-card-action" id="google-configure" onclick="document.getElementById('bo-settings').click()">Configure</button></article>
           <article><div class="bo-provider-icon">J</div><div><b>John BoldTrail</b><span>Download import-ready lead CSV</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-john">Export new</button></article>
           <article><div class="bo-provider-icon">W</div><div><b>Wife BoldTrail</b><span>Separate assignment and export history</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-wife">Export new</button></article>
-          <article><div class="bo-provider-icon">S</div><div><b>Backoffice security</b><span>Supabase Vault + expiring sessions</span></div><em id="secure-status" class="connected">Password protected</em><button type="button" class="bo-card-action" onclick="document.getElementById('bo-settings').click()">Rotate key</button></article>
+          <article><div class="bo-provider-icon">S</div><div><b>Backoffice security</b><span>Watchdog developer authentication + expiring sessions</span></div><em id="secure-status" class="connected">Developer gated</em><button type="button" class="bo-card-action" disabled>Developer access</button></article>
         </div>
       </section>
 
@@ -104,14 +108,15 @@
       <div class="bo-dialog-head"><div><span>PRIVATE SETTINGS</span><h2>Backoffice connections</h2><p>Secrets are sent directly to the server and stored in Supabase Vault.</p></div><button type="button" class="bo-close" id="settings-close" aria-label="Close">×</button></div>
       <div id="settings-error" class="bo-form-error" role="alert"></div>
       <form id="google-form" class="bo-settings-section"><div><b>Google Address Validation</b><p>Paste the Google Maps Platform API key. It must be the single 39-character key beginning with AIza. This field is intentionally not a password field so browser password managers cannot replace it.</p></div><label>Google API key<input type="text" name="google_key" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="AIza…" minlength="39" maxlength="39" pattern="AIza[0-9A-Za-z_-]{35}" required></label><button class="bo-button bo-button-primary" id="google-save" type="submit">Save Google key</button></form>
-      <form id="rotate-form" class="bo-settings-section"><div><b>Shared Backoffice key</b><p>Changing this immediately revokes every active Backoffice session.</p></div><label>New shared key<input type="password" name="new_key" minlength="14" autocomplete="new-password" required></label><label>Confirm new key<input type="password" name="confirm_key" minlength="14" autocomplete="new-password" required></label><button class="bo-button bo-button-quiet" type="submit">Rotate shared key</button></form>
+      <div class="bo-settings-section"><div><b>Backoffice access</b><p>The separate shared password is temporarily disabled. Access currently requires a signed-in Watchdog developer account.</p></div></div>
+      <form id="rotate-form" class="bo-settings-section" hidden><div><b>Shared Backoffice key</b><p>Password access is temporarily disabled.</p></div><label>New shared key<input type="password" name="new_key" minlength="14" autocomplete="new-password"></label><label>Confirm new key<input type="password" name="confirm_key" minlength="14" autocomplete="new-password"></label><button class="bo-button bo-button-quiet" type="submit">Rotate shared key</button></form>
     </div>
   </dialog>
 
   <div id="bo-toast" class="bo-toast" role="status" aria-live="polite"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-dev-auth.js" defer></script>
   <script src="/property/backoffice/backoffice.js" defer></script>
-  <script src="/property/backoffice/backoffice-recovery.js" defer></script>
 </body>
 </html>
