@@ -7,7 +7,6 @@
     }
   },
   "redirects": [
-    {"source":"/anchor-estimator.html","missing":[{"type":"cookie","key":"nj_estimator_consent","value":"accepted"}],"destination":"/anchor-estimator-consent.html","permanent":false},
     {"source":"/index-old.html","destination":"/","permanent":true},
     {"source":"/index_1.html","destination":"/","permanent":true},
     {"source":"/1092chews.html","destination":"/property/","permanent":true},
