@@ -1,6 +1,7 @@
 (function(){
 'use strict';
-const DEV_LOGIN_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-dev-login';
+const SESSION_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-dev-login';
+const BACKOFFICE_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-api';
 const SESSION_KEY='watchdog-backoffice-session';
 const $=(s,r=document)=>r.querySelector(s);
 let working=false;
@@ -11,76 +12,54 @@ function paint(message){
   const status=$('#bo-dev-access-status');
   const secure=$('#secure-status');
   if(title)title.textContent='Watchdog Backoffice';
-  if(copy)copy.textContent='Backoffice currently uses your Watchdog developer account. No separate shared password is required.';
+  if(copy)copy.textContent='Authentication is temporarily disabled. Backoffice opens automatically.';
   if(status&&message)status.textContent=message;
-  if(secure&&secure.textContent!=='Developer gated'){
-    secure.textContent='Developer gated';
-    secure.className='connected';
-  }
+  if(secure){secure.textContent='Open access';secure.className='pending'}
 }
 
-async function developerToken(){
+async function sessionStillWorks(token){
+  if(!token)return false;
   try{
-    if(!window.NJPTRAccess)return'';
-    await Promise.resolve(window.njptrAccessReady).catch(()=>null);
-    const result=await window.NJPTRAccess.client().auth.getSession();
-    return result?.data?.session?.access_token||'';
-  }catch{return''}
+    const res=await fetch(BACKOFFICE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({action:'session'})});
+    return res.ok;
+  }catch{return false}
 }
 
-async function openWithDeveloper(){
+async function openPublicSession(){
   if(working)return;
   working=true;
   const btn=$('#bo-dev-login');
-  if(btn)btn.disabled=true;
+  if(btn){btn.disabled=true;btn.textContent='Opening Backoffice…'}
   try{
-    const accessToken=await developerToken();
-    if(!accessToken){
-      paint('Sign in to your Watchdog developer account to continue.');
-      if(btn){btn.textContent='Sign in to Watchdog';btn.disabled=false;btn.dataset.mode='signin'}
-      return;
-    }
-    paint('Developer access confirmed. Opening Backoffice…');
-    const res=await fetch(DEV_LOGIN_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken},body:JSON.stringify({actor:'john'})});
+    paint('Opening Backoffice…');
+    const res=await fetch(SESSION_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({actor:'john'})});
     let data={};try{data=await res.json()}catch{}
-    if(!res.ok)throw new Error(data.error||'Could not open Backoffice.');
+    if(!res.ok||!data.token)throw new Error(data.error||'Could not open Backoffice.');
     sessionStorage.setItem(SESSION_KEY,data.token);
     location.reload();
   }catch(ex){
-    paint(ex.message||'Developer access could not be confirmed.');
-    if(btn){btn.textContent='Try developer access again';btn.disabled=false;btn.dataset.mode='retry'}
+    paint(ex.message||'Backoffice could not open.');
+    if(btn){btn.textContent='Try again';btn.disabled=false;btn.onclick=openPublicSession}
   }finally{working=false}
 }
 
-function install(){
+async function install(){
   const authForm=$('#bo-auth-form');
   const rotate=$('#rotate-form');
   if(authForm)authForm.hidden=true;
   if(rotate)rotate.hidden=true;
-  paint('Checking your Watchdog developer session…');
+  paint('Opening Backoffice…');
 
-  const btn=$('#bo-dev-login');
-  if(btn)btn.onclick=async()=>{
-    if(btn.dataset.mode==='signin'){
-      location.href='/property/dashboard.html?access=signin&return=%2Fproperty%2Fbackoffice%2F';
-      return;
-    }
-    await openWithDeveloper();
-  };
-
-  const auth=$('#bo-auth');
-  if(auth){
-    const authObserver=new MutationObserver(()=>paint());
-    authObserver.observe(auth,{subtree:true,childList:true,characterData:true});
-  }
   const secure=$('#secure-status');
   if(secure){
-    const secureObserver=new MutationObserver(()=>paint());
-    secureObserver.observe(secure,{subtree:true,childList:true,characterData:true,attributes:true});
+    const observer=new MutationObserver(()=>paint());
+    observer.observe(secure,{subtree:true,childList:true,characterData:true,attributes:true});
   }
 
-  if(sessionStorage.getItem(SESSION_KEY))return;
-  setTimeout(openWithDeveloper,50);
+  const existing=sessionStorage.getItem(SESSION_KEY)||'';
+  if(await sessionStillWorks(existing))return;
+  sessionStorage.removeItem(SESSION_KEY);
+  await openPublicSession();
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
