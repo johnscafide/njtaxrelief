@@ -1,0 +1,22 @@
+-- Enforce Watchdog plan property capacity at the server boundary for every Audience Hub path, including hand-picked map homes.
+create or replace function public.marketing_audience_hub_apply_keys(p_campaign_id uuid,p_property_keys jsonb,p_source_type text default 'audience_hub',p_source_ref text default 'manual',p_source_label text default 'Custom Watchdog audience',p_limit integer default 1000,p_qualification_summary jsonb default '{}'::jsonb) returns jsonb language plpgsql security definer set search_path='public' as $$
+declare uid uuid:=auth.uid(); c public.marketing_campaigns%rowtype; aid uuid; sid uuid; keys jsonb; cnt int; v int; requested int:=least(greatest(coalesce(p_limit,1000),1),10000); lim int; st text:=lower(trim(coalesce(p_source_type,'audience_hub'))); sr text:=trim(coalesce(p_source_ref,'manual')); sl text:=left(trim(coalesce(p_source_label,'Custom Watchdog audience')),180); plan text; limits jsonb; capacity int;
+begin
+ if uid is null or not public.can_use_data_workbench(uid) then raise exception 'Marketing Studio requires Agent or higher'; end if;
+ select public.watchdog_effective_plan(uid) into plan; select public.agent_plan_limits(plan) into limits; capacity:=coalesce((limits->>'properties')::int,0); if capacity<1 then raise exception 'Marketing Studio audience capacity is unavailable for this plan'; end if; lim:=least(requested,capacity);
+ select * into c from public.marketing_campaigns where id=p_campaign_id and user_id=uid for update; if c.id is null then raise exception 'Campaign not found'; end if;
+ if jsonb_typeof(coalesce(p_property_keys,'[]'::jsonb))<>'array' then raise exception 'property_keys must be an array'; end if;
+ with raw as (select nullif(trim(value),'') k,min(ord) ord from jsonb_array_elements_text(coalesce(p_property_keys,'[]'::jsonb)) with ordinality x(value,ord) group by nullif(trim(value),'')),chosen as (select k,ord from raw where k is not null order by ord limit lim) select coalesce(jsonb_agg(k order by ord),'[]'::jsonb),count(*) into keys,cnt from chosen;
+ if cnt<1 then raise exception 'Choose at least one property'; end if;
+ aid:=c.audience_id;
+ if aid is null then insert into public.marketing_audiences(user_id,name,source_type,source_ref,criteria,dynamic,status) values(uid,c.name||' audience',st,jsonb_build_object('source_ref',sr),coalesce(p_qualification_summary,'{}'::jsonb),false,'active') returning id into aid;
+ else update public.marketing_audiences set name=c.name||' audience',source_type=st,source_ref=jsonb_build_object('source_ref',sr),criteria=coalesce(p_qualification_summary,'{}'::jsonb),updated_at=now() where id=aid and user_id=uid; end if;
+ insert into public.marketing_audience_snapshots(audience_id,user_id,property_keys,qualification_summary,property_count) values(aid,uid,keys,coalesce(p_qualification_summary,'{}'::jsonb)||jsonb_build_object('source_type',st,'source_ref',sr,'source_label',sl,'requested_limit',requested,'plan_capacity',capacity),cnt) returning id into sid;
+ delete from public.marketing_campaign_recipient_sources where user_id=uid and campaign_id=c.id;
+ update public.marketing_campaigns set audience_id=aid,audience_snapshot_id=sid,current_version=current_version+1,updated_at=now(),settings=coalesce(settings,'{}'::jsonb)||jsonb_build_object('audience_source_type',st,'audience_source_ref',sr,'audience_source_label',sl) where id=c.id returning current_version into v;
+ insert into public.marketing_campaign_versions(campaign_id,version,user_id,definition) values(c.id,v,uid,jsonb_build_object('change','audience_replaced','source_type',st,'source_ref',sr,'source_label',sl,'property_count',cnt,'requested_limit',requested,'plan_capacity',capacity,'qualification_summary',coalesce(p_qualification_summary,'{}'::jsonb)));
+ insert into public.marketing_events(user_id,campaign_id,event_type,source,payload) values(uid,c.id,'audience.hub_applied','watchdog',jsonb_build_object('source_type',st,'source_ref',sr,'source_label',sl,'property_count',cnt,'requested_limit',requested,'plan_capacity',capacity));
+ return jsonb_build_object('campaign_id',c.id,'audience_id',aid,'snapshot_id',sid,'property_count',cnt,'source_type',st,'source_ref',sr,'source_label',sl,'requested_limit',requested,'plan_capacity',capacity,'capacity_limited',requested>capacity);
+end $$;
+revoke all on function public.marketing_audience_hub_apply_keys(uuid,jsonb,text,text,text,integer,jsonb) from public,anon;
+grant execute on function public.marketing_audience_hub_apply_keys(uuid,jsonb,text,text,text,integer,jsonb) to authenticated,service_role;

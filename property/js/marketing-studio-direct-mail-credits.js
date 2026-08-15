@@ -1,0 +1,12 @@
+(function(){'use strict';
+const $=(s,r=document)=>r.querySelector(s);let client=null,summary=null,timer=null;
+const money=c=>'$'+(Number(c||0)/100).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:2});
+function daysLeft(v){if(!v)return 0;return Math.max(0,Math.ceil((new Date(v).getTime()-Date.now())/86400000))}
+function promoCopy(){return '<b>Annual member bonus</b><span>Agent yearly includes $50, Pro yearly $100, and Pro+ yearly $300 in one-time Direct Mail credit. New annual credits must be used within 30 days.</span>'}
+function activeCopy(s){const left=daysLeft(s.expires_at);return `<b>${money(s.available_cents)} Direct Mail credit available</b><span>Your annual-plan marketing bonus is ready to use${left?` for ${left} more day${left===1?'':'s'}`:''}. Eligible credit is automatically applied before campaign checkout.</span>`}
+function render(){const shell=$('#mw-shell');if(!shell||$('#ms-credit-banner'))return false;const main=$('.mw-stage',shell);if(!main)return false;const el=document.createElement('div');el.id='ms-credit-banner';el.className='ms-credit-banner '+(Number(summary?.available_cents||0)>0?'active':'promo');el.innerHTML=`<i class="fas ${Number(summary?.available_cents||0)>0?'fa-coins':'fa-gift'}"></i><div>${Number(summary?.available_cents||0)>0?activeCopy(summary):promoCopy()}</div>${Number(summary?.available_cents||0)>0?`<small>Expires ${new Date(summary.expires_at).toLocaleDateString()}</small>`:'<a href="/property/pricing.html">View annual plans</a>'}`;const head=$('.mw-stage-head',main);head?.after(el);return true}
+async function load(){try{const r=await client.rpc('marketing_credit_summary');if(r.error)throw r.error;summary=r.data||{};render()}catch(e){console.warn('Direct Mail credit summary unavailable',e)}}
+function schedule(){clearTimeout(timer);timer=setTimeout(()=>{if(!$('#ms-credit-banner'))render()},100)}
+async function init(){try{await window.njptrAccessReady;client=window.NJPTRAccess.client();await load();const root=$('#mw-shell')||document.body;new MutationObserver(schedule).observe(root,{childList:true,subtree:true});schedule()}catch(e){console.warn('Marketing credit banner unavailable',e)}}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,0));else setTimeout(init,0);
+})();
