@@ -1,6 +1,6 @@
 (function(){'use strict';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let client=null,catalog=null,enrichTimer=null;
 function campaignId(){return new URLSearchParams(location.search).get('campaign')||''}
 async function rpc(name,args={}){const r=await client.rpc(name,args);if(r.error)throw r.error;return r.data}
