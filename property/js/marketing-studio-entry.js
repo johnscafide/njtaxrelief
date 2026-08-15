@@ -1,0 +1,1 @@
+(function(){'use strict';window.WatchdogMarketingStudioRoutes={audience:'/property/marketing-studio-audience.html',design:'/property/marketing-studio-design.html',customize:'/property/marketing-studio-customize.html',recipients:'/property/marketing-studio-recipients.html',review:'/property/marketing-studio-review.html'};})();
