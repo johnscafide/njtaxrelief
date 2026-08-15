@@ -1,0 +1,10 @@
+revoke all on table public.agent_dynamic_list_materializations from anon;
+revoke all on table public.agent_dynamic_list_properties from anon;
+revoke insert, update, delete, truncate, references, trigger on table public.agent_dynamic_list_materializations from authenticated;
+revoke insert, update, delete, truncate, references, trigger on table public.agent_dynamic_list_properties from authenticated;
+grant select on table public.agent_dynamic_list_materializations to authenticated;
+grant select on table public.agent_dynamic_list_properties to authenticated;
+revoke all on table public.agent_dynamic_list_materialization_runs from anon, authenticated;
+revoke all on table public.watchdog_test_accounts from anon, authenticated;
+revoke all on table public.watchdog_test_auth_events from anon, authenticated;
+revoke all on table public.watchdog_test_bootstrap_tokens from anon, authenticated;
