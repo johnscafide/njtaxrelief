@@ -1,8 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
-
-const SUPABASE_URL=Deno.env.get('SUPABASE_URL')!;
-const SERVICE_ROLE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-
+const SUPABASE_URL=Deno.env.get('SUPABASE_URL')!,SERVICE_ROLE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 function json(status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}})}
 function clean(v:unknown,max=200){return String(v??'').trim().replace(/[\u0000-\u001f]/g,'').slice(0,max)}
 function bytesToHex(bytes:Uint8Array){return Array.from(bytes).map(b=>b.toString(16).padStart(2,'0')).join('')}
@@ -12,29 +9,16 @@ async function sha256Hex(text:string){const d=await crypto.subtle.digest('SHA-25
 async function hmacSha256(secret:string,text:string){const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);const sig=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(text));return new Uint8Array(sig)}
 function normalizedProvidedSignature(raw:string){return raw.trim().replace(/^sha256=/i,'')}
 function contract(){return{secret:Deno.env.get('PCM_WEBHOOK_SIGNATURE_SECRET')||'',header:clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_HEADER')||'',100).toLowerCase(),format:clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_FORMAT')||'',60).toLowerCase()}}
+function first(obj:any,keys:string[]){for(const k of keys){const v=obj?.[k];if(v!==undefined&&v!==null&&clean(v,300))return clean(v,300)}return''}
 function eventType(payload:any){return clean(payload?.eventType??payload?.event_type??payload?.type??payload?.event??payload?.status,120)||'pcm.webhook'}
 function providerEventKey(payload:any,rawHash:string){return clean(payload?.eventId??payload?.event_id??payload?.webhookId??payload?.webhook_id??payload?.id,180)||rawHash}
-
+function ids(payload:any){const src=payload?.data&&typeof payload.data==='object'?payload.data:payload;return{order:first(src,['orderID','orderId','order_id','order']),batch:first(src,['batchID','batchId','batch_id','batch']),external:first(src,['extRefNbr','externalReference','external_reference','externalRef','reference'])}}
+function mappedStatus(payload:any,type:string){const raw=[type,payload?.status,payload?.data?.status,payload?.event,payload?.type].map(x=>clean(x,120).toLowerCase()).join(' ');if(/cancel/.test(raw))return'canceled';if(/fail|error|reject/.test(raw))return'failed';if(/deliver/.test(raw))return'delivered';if(/mail|postal|drop/.test(raw))return'mailed';if(/complete|finished/.test(raw))return'completed';if(/process|print|production/.test(raw))return'processing';if(/submit|accept|created|order/.test(raw))return'submitted';return''}
 Deno.serve(async(req)=>{
-  if(req.method==='GET'){
-    const c=contract();
-    return json(200,{provider:'pcm',receiver:'ready',signature_contract_ready:Boolean(c.secret&&c.header&&['hmac-sha256-hex','hmac-sha256-base64'].includes(c.format)),signature_header_configured:Boolean(c.header),signature_format:c.format||null,processing_mode:'inbox_only_until_pcm_payload_contract_verified'});
-  }
-  if(req.method!=='POST')return json(405,{error:'Method not allowed'});
-  const c=contract();
-  if(!c.secret||!c.header||!['hmac-sha256-hex','hmac-sha256-base64'].includes(c.format))return json(503,{error:'PCM webhook signature contract is not configured yet',code:'PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING'});
-  const providedRaw=req.headers.get(c.header)||'';
-  if(!providedRaw)return json(401,{error:'Missing PCM webhook signature',code:'PCM_WEBHOOK_SIGNATURE_MISSING'});
-  const raw=await req.text();
-  if(!raw)return json(400,{error:'Empty webhook body'});
-  const mac=await hmacSha256(c.secret,raw);
-  const expected=c.format==='hmac-sha256-base64'?bytesToBase64(mac):bytesToHex(mac);
-  const provided=normalizedProvidedSignature(providedRaw);
-  if(!constantTimeEqual(expected,provided))return json(401,{error:'Invalid PCM webhook signature',code:'PCM_WEBHOOK_SIGNATURE_INVALID'});
-  let payload:any;try{payload=JSON.parse(raw)}catch{return json(400,{error:'Webhook body must be JSON'})}
-  const rawHash=await sha256Hex(raw),key=providerEventKey(payload,rawHash),type=eventType(payload);
-  const admin=createClient(SUPABASE_URL,SERVICE_ROLE,{auth:{persistSession:false}});
-  const saved=await admin.from('marketing_provider_webhook_events').upsert({provider_key:'pcm',event_key:key,event_type:type,signature_verified:true,payload,raw_body_sha256:rawHash,status:'received_unmapped'},{onConflict:'provider_key,event_key',ignoreDuplicates:true}).select('id,status').maybeSingle();
-  if(saved.error){console.error('PCM_WEBHOOK_INBOX_ERROR',saved.error);return json(503,{error:'Webhook inbox unavailable'})}
-  return json(202,{accepted:true,event_key:key,status:'received_unmapped',duplicate:!saved.data});
+ if(req.method==='GET'){const c=contract();return json(200,{provider:'pcm',receiver:'ready',signature_contract_ready:Boolean(c.secret&&c.header&&['hmac-sha256-hex','hmac-sha256-base64'].includes(c.format)),signature_header_configured:Boolean(c.header),signature_format:c.format||null,processing_mode:'verified_inbox_with_safe_job_reconciliation'})}
+ if(req.method!=='POST')return json(405,{error:'Method not allowed'});const c=contract();if(!c.secret||!c.header||!['hmac-sha256-hex','hmac-sha256-base64'].includes(c.format))return json(503,{error:'PCM webhook signature contract is not configured yet',code:'PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING'});const providedRaw=req.headers.get(c.header)||'';if(!providedRaw)return json(401,{error:'Missing PCM webhook signature',code:'PCM_WEBHOOK_SIGNATURE_MISSING'});const raw=await req.text();if(!raw)return json(400,{error:'Empty webhook body'});const mac=await hmacSha256(c.secret,raw),expected=c.format==='hmac-sha256-base64'?bytesToBase64(mac):bytesToHex(mac),provided=normalizedProvidedSignature(providedRaw);if(!constantTimeEqual(expected,provided))return json(401,{error:'Invalid PCM webhook signature',code:'PCM_WEBHOOK_SIGNATURE_INVALID'});let payload:any;try{payload=JSON.parse(raw)}catch{return json(400,{error:'Webhook body must be JSON'})}
+ const rawHash=await sha256Hex(raw),key=providerEventKey(payload,rawHash),type=eventType(payload),providerIds=ids(payload),status=mappedStatus(payload,type),admin=createClient(SUPABASE_URL,SERVICE_ROLE,{auth:{persistSession:false}});const existing=await admin.from('marketing_provider_webhook_events').select('id,status').eq('provider_key','pcm').eq('event_key',key).maybeSingle();if(existing.data)return json(200,{accepted:true,duplicate:true,event_key:key,status:existing.data.status});const saved=await admin.from('marketing_provider_webhook_events').insert({provider_key:'pcm',event_key:key,event_type:type,signature_verified:true,payload,raw_body_sha256:rawHash,status:'received'}).select('id').single();if(saved.error){console.error('PCM_WEBHOOK_INBOX_ERROR',saved.error);return json(503,{error:'Webhook inbox unavailable'})}
+ let matched:any=null;if(providerIds.order||providerIds.batch){const jobs=await admin.from('marketing_provider_jobs').select('id,user_id,campaign_id,provider_job_id,status,response_summary').eq('provider_key','pcm').order('created_at',{ascending:false}).limit(250);matched=(jobs.data||[]).find((j:any)=>[j.provider_job_id,j.response_summary?.order_id,j.response_summary?.batch_id].filter(Boolean).some(x=>String(x)===providerIds.order||String(x)===providerIds.batch))||null}
+ if(matched&&status){const final=['delivered','completed','failed','canceled'].includes(status),update:any={status,updated_at:new Date().toISOString(),response_summary:{...(matched.response_summary||{}),last_webhook_event:type,last_webhook_status:status,last_webhook_at:new Date().toISOString(),order_id:providerIds.order||matched.response_summary?.order_id||null,batch_id:providerIds.batch||matched.response_summary?.batch_id||null}};if(final)update.completed_at=new Date().toISOString();await admin.from('marketing_provider_jobs').update(update).eq('id',matched.id);const campaignStatus=status==='failed'?'launch_failed':status==='canceled'?'canceled':final?'completed':'live';await admin.from('marketing_campaigns').update({status:campaignStatus,updated_at:new Date().toISOString()}).eq('id',matched.campaign_id).eq('user_id',matched.user_id);await admin.from('marketing_events').insert({user_id:matched.user_id,campaign_id:matched.campaign_id,provider_job_id:matched.id,event_type:'direct_mail.provider_status',source:'pcm',payload:{provider_event_type:type,status,order_id:providerIds.order||null,batch_id:providerIds.batch||null}});await admin.from('marketing_provider_webhook_events').update({status:'mapped'}).eq('id',saved.data.id);return json(200,{accepted:true,event_key:key,status:'mapped',job_id:matched.id,provider_status:status})}
+ await admin.from('marketing_provider_webhook_events').update({status:'received_unmapped'}).eq('id',saved.data.id);return json(202,{accepted:true,event_key:key,status:'received_unmapped',provider_ids:providerIds,mapped_status:status||null})
 });
