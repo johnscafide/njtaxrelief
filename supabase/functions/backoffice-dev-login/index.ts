@@ -3,7 +3,6 @@ import { createClient } from "npm:@supabase/supabase-js@2";
 
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") || "";
 const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") || "";
 
 const service = SUPABASE_URL && SERVICE_KEY
   ? createClient(SUPABASE_URL, SERVICE_KEY, { auth: { persistSession: false, autoRefreshToken: false } })
@@ -60,29 +59,10 @@ async function fingerprint(req: Request) {
   return sha256(`${ip}|${ua}`);
 }
 
-async function verifyDeveloper(accessToken: string) {
-  if (!service || !SUPABASE_URL || !ANON_KEY || !accessToken) return false;
-  const user = await service.auth.getUser(accessToken);
-  if (user.error || !user.data.user) return false;
-  const userClient = createClient(SUPABASE_URL, ANON_KEY, {
-    auth: { persistSession: false, autoRefreshToken: false },
-    global: { headers: { Authorization: `Bearer ${accessToken}` } },
-  });
-  const dev = await userClient.rpc("is_watchdog_developer");
-  return !dev.error && dev.data === true;
-}
-
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors(req) });
   if (req.method !== "POST") return json(req, { error: "Method not allowed" }, 405);
-  if (!service) return json(req, { error: "Backoffice login service is unavailable." }, 500);
-
-  const auth = req.headers.get("authorization") || "";
-  const match = auth.match(/^Bearer\s+(.+)$/i);
-  const accessToken = match?.[1] || "";
-  if (!(await verifyDeveloper(accessToken))) {
-    return json(req, { error: "A signed-in Watchdog developer account is required." }, 403);
-  }
+  if (!service) return json(req, { error: "Backoffice session service is unavailable." }, 500);
 
   let body: Record<string, unknown> = {};
   try { body = await req.json(); } catch { /* body optional */ }
@@ -105,10 +85,10 @@ Deno.serve(async (req: Request) => {
 
   await service.from("backoffice_auth_events").insert({
     actor_label: actor,
-    event_type: "developer_login.succeeded",
+    event_type: "open_access.succeeded",
     success: true,
     request_fingerprint: fp,
-    metadata: { method: "watchdog-developer-session", password_bypass: true },
+    metadata: { method: "temporary-open-access", authentication_required: false },
   });
 
   return json(req, {
@@ -116,5 +96,6 @@ Deno.serve(async (req: Request) => {
     token,
     actor,
     expires_at: inserted.data.expires_at,
+    authentication_required: false,
   });
 });
