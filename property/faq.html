@@ -126,18 +126,18 @@
   .faqp-side a:last-child{border-bottom:none;}
   .faqp-side a:hover{color:var(--navy);}
 
-  .faq-item{border:1px solid rgba(31,31,31,0.36);border-radius:16px;margin-bottom:14px;background:#dcdaf733;overflow:hidden;}
-  .faq-question{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;cursor:pointer;font-size:1rem;font-weight:600;line-height:1.25;color:#1f1f1f;user-select:none;transition:background 0.2s ease;}
-  .faq-question:hover{background:rgba(255,255,255,0.08);}
-  .faq-answer{display:none;padding:0 24px 24px;color:#3d3d3d;font-size:1.05rem;line-height:1.7;}
+  .faq-item{border:1px solid #cfc5b4;border-radius:0;margin-bottom:12px;background:#e5dfd3;overflow:hidden;}
+  .faq-question{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 24px;cursor:pointer;font-size:1rem;font-weight:600;line-height:1.25;color:#1f1f1f;background:#e5dfd3;user-select:none;transition:background 0.2s ease;border-radius:0;}
+  .faq-question:hover{background:#e5dfd3;}
+  .faq-answer{display:none;padding:0 24px 24px;color:#1f1f1f;background:#e5dfd3;font-size:1.05rem;line-height:1.7;border-radius:0;}
   .faq-answer p{margin:0;}
-  .faq-arrow{position:relative;width:32px;height:32px;border:2px solid #1f1f1f;border-radius:10px;background:#f4efe7;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s ease,border-color 0.2s ease,transform 0.2s ease;}
-  .faq-arrow::before,.faq-arrow::after{content:"";position:absolute;width:14px;height:2.5px;background:#1f1f1f;border-radius:999px;transition:background 0.2s ease,transform 0.2s ease,opacity 0.2s ease;}
+  .faq-arrow{position:relative;width:28px;height:28px;border:1px solid #1f1f1f;border-radius:0;background:transparent;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;transition:background 0.2s ease,border-color 0.2s ease,transform 0.2s ease;}
+  .faq-arrow::before,.faq-arrow::after{content:"";position:absolute;width:12px;height:2px;background:#c56b32;border-radius:0;transition:background 0.2s ease,transform 0.2s ease,opacity 0.2s ease;}
   .faq-arrow::after{transform:rotate(90deg);}
-  .faq-question:hover .faq-arrow{background:#f8efe6;border-color:#c96d31;}
-  .faq-question:hover .faq-arrow::before,.faq-question:hover .faq-arrow::after{background:#c96d31;}
-  .faq-item.active .faq-arrow,.faq-item.open .faq-arrow{background:#c96d31;border-color:#c96d31;}
-  .faq-item.active .faq-arrow::before,.faq-item.open .faq-arrow::before,.faq-item.active .faq-arrow::after,.faq-item.open .faq-arrow::after{background:#fff;}
+  .faq-question:hover .faq-arrow{border-color:#c56b32;background:rgba(197,107,50,0.06);}
+  .faq-question:hover .faq-arrow::before,.faq-question:hover .faq-arrow::after{background:#c56b32;}
+  .faq-item.active .faq-arrow,.faq-item.open .faq-arrow{border-color:#c56b32;background:rgba(197,107,50,0.06);}
+  .faq-item.active .faq-arrow::before,.faq-item.open .faq-arrow::before,.faq-item.active .faq-arrow::after,.faq-item.open .faq-arrow::after{background:#c56b32;}
   .faq-item.active .faq-arrow::after,.faq-item.open .faq-arrow::after{opacity:0;transform:rotate(0deg);}
 
   .faq-cat{margin-bottom:40px;scroll-margin-top:90px;}
@@ -165,7 +165,7 @@
   <aside class="faqp-side">
     <div class="faqp-search">
     <input id="faq-search" type="text" placeholder="Search, e.g. &quot;appeal&quot; or &quot;ANCHOR&quot;" autocomplete="off">
-    <button type="button" style="border: none;"onclick="document.getElementById('faq-search').focus()"><i class="fas fa-magnifying-glass"></i></button>
+    <button type="button" style="border: none;" onclick="document.getElementById('faq-search').focus()"><i class="fas fa-magnifying-glass"></i></button>
   </div>
     <h4>Topics</h4>
     <a href="#cat-data">Data &amp; Records</a>
