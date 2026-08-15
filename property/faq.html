@@ -168,6 +168,7 @@
     <button type="button" style="border: none;" onclick="document.getElementById('faq-search').focus()"><i class="fas fa-magnifying-glass"></i></button>
   </div>
     <h4>Topics</h4>
+    <a href="#cat-started">Getting Started</a>
     <a href="#cat-data">Data &amp; Records</a>
     <a href="#cat-assess">Assessments &amp; Fairness</a>
     <a href="#cat-appeals">Appeals</a>
@@ -179,10 +180,40 @@
 
   <div class="faqp-main">
 
+    <section class="faq-cat" id="cat-started">
+      <h2>Getting Started</h2>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">How do I join Watchdog? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>It's quick and easy to start. <a href="/signup">Just Click Here.</a></p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Why should I join Watchdog? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Watchdog is a collection of public records that help you understand your property's tax assessment and make informed decisions about your home. Whether you're buying, selling, or simply want to stay informed about your property's value, Watchdog provides the information you need.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Who can sign up for Watchdog? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Anyone over the age of 13 can sign up for a free Watchdog account. Agent and Pro/Pro+ accounts are for professionals in select fields. <a href="/signup">Start your property data journey today.</a></p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Where is Watchdog based out of? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Watchdog is based in New Jersey, with operations spanning across the state. More closely, office in Washington Township, NJ <a href="/signup">Start your property data journey today.</a></p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Why is it called Watchdog? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Watchdog is named after the idea of keeping a watchful eye on property data and tax assessments, ensuring that homeowners have access to accurate and up-to-date information about their properties.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Can I personally update my property information? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Not at this moment. Because we are committed to providing accurate and up-to-date information about properties, we extract data from publicly available and official sources, and currently do not allow users to directly update their property or tax details.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="wdFaqToggle(this)">Why was Watchdog created? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
+        <div class="faq-answer"><p>Transparent property data is crucial for informed decision making. We aim to provide easy access to accurate information about their properties, ensuring transparency in the property tax assessment process.</p></div>
+      </div>
+    </section>
+
     <section class="faq-cat" id="cat-data">
       <h2>Data &amp; Records</h2>
-      <p class="faq-cat-sub">Where the numbers on this site actually come from.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Two state files, stitched together. The New Jersey Office of GIS publishes a statewide parcel layer; the Division of Taxation publishes MOD-IV, the same assessment database every municipal tax assessor works out of. We join them by block, lot, and municipality code. Aerial imagery and parcel boundaries come from Esri World Imagery. Both source files refresh roughly once a year, usually late spring to early summer, so a recent sale or a just-decided appeal can take a few months to show up.<span class="faq-src">Source: NJ Office of GIS, NJ Division of Taxation (MOD-IV)</span></p></div>
@@ -211,8 +242,6 @@
 
     <section class="faq-cat" id="cat-assess">
       <h2>Assessments &amp; Fairness</h2>
-      <p class="faq-cat-sub">What the number on your card actually means.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">What's the difference between assessed value and market value? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Assessed value is the number your town uses to calculate your bill. Market value is what your home would actually sell for today. In most New Jersey towns those aren't the same number, because towns aren't required to reassess every year while home prices move constantly. The link between the two is the equalization ratio, also called the Director's Ratio, published annually by the state. Divide your assessment by your town's ratio and you get the market value your assessment implies. If your home would realistically sell for meaningfully less than that number, you may have grounds for an appeal.<span class="faq-src">Source: N.J.S.A. 54:1-35a, NJ Division of Taxation Table of Equalized Valuations</span></p></div>
@@ -236,8 +265,6 @@
 
     <section class="faq-cat" id="cat-appeals">
       <h2>Appeals</h2>
-      <p class="faq-cat-sub">Deadlines, cost, and what a county board actually wants to see.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">Can I appeal my property tax assessment? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Yes. File with your county board of taxation by April 1, or by May 1 if your town went through a revaluation or reassessment that year. Burlington, Gloucester, and Monmouth counties run on a different calendar and use a January 15 deadline instead. Miss the date and you're locked out for the year, there's no exception for a good reason.<span class="faq-src">Source: N.J.S.A. 54:3-21</span></p></div>
@@ -266,8 +293,6 @@
 
     <section class="faq-cat" id="cat-bill">
       <h2>Tax Bill &amp; Payments</h2>
-      <p class="faq-cat-sub">What happens at closing, and what happens if you fall behind.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">Who pays the transfer fee when I sell? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>The seller pays the general realty transfer fee at closing, on a graduated schedule tied to sale price. A change that caught a lot of people off guard: for contracts executed on or after July 10, 2025, residential sales over $1,000,000 also carry a graduated percent fee that is now the <strong>seller's</strong> responsibility instead of the buyer's, and it applies to the entire sale price, not just the amount above a million. Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. The net proceeds calculator on the lookup page accounts for all of it.</p></div>
@@ -281,8 +306,6 @@
 
     <section class="faq-cat" id="cat-relief">
       <h2>Benefits &amp; Relief</h2>
-      <p class="faq-cat-sub">Money on the table that most people never claim.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">Do I qualify for ANCHOR or Stay NJ? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never file for it. The <a href="/anchor-estimator.html">free estimator</a> takes about 90 seconds and tells you exactly what you're leaving on the table.</p></div>
@@ -306,8 +329,6 @@
 
     <section class="faq-cat" id="cat-financing">
       <h2>Financing &amp; Working With an Agent</h2>
-      <p class="faq-cat-sub">The stuff people usually ask a lender or an agent, not a tax site. Fair questions, so here they are.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">How much house can I actually afford? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>Most lenders start with the 28/36 rule: your monthly housing payment, principal, interest, taxes, and insurance, shouldn't run more than 28% of your gross monthly income, and your total debt (housing plus car payments, student loans, credit cards) shouldn't exceed 36%. It's a guideline, not a law, some loan programs qualify borrowers up into the 43-50% range depending on credit and cash reserves. In New Jersey specifically, the tax line matters more than it does in most states. A $500,000 home with a $12,000 annual tax bill carries a meaningfully different monthly payment than the same price home in a lower-tax town, which is exactly why checking the assessment before you fall for a house matters.</p></div>
@@ -372,8 +393,6 @@
 
     <section class="faq-cat" id="cat-buysell">
       <h2>Buying, Selling &amp; Your Account</h2>
-      <p class="faq-cat-sub">The practical stuff.</p>
-
       <div class="faq-item">
         <div class="faq-question" onclick="wdFaqToggle(this)">Does buying a home trigger a new assessment right away? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
         <div class="faq-answer"><p>No, not automatically. A sale alone doesn't reset your assessment. Assessments change because of a town-wide revaluation, new construction, or a filed appeal, not because ownership changed hands. Your first tax bill as the new owner will reflect the same assessment the previous owner had, until one of those things happens.</p></div>
