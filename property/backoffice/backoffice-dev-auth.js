@@ -13,7 +13,10 @@ function paint(message){
   if(title)title.textContent='Watchdog Backoffice';
   if(copy)copy.textContent='Backoffice currently uses your Watchdog developer account. No separate shared password is required.';
   if(status&&message)status.textContent=message;
-  if(secure){secure.textContent='Developer gated';secure.className='connected'}
+  if(secure&&secure.textContent!=='Developer gated'){
+    secure.textContent='Developer gated';
+    secure.className='connected';
+  }
 }
 
 async function developerToken(){
@@ -65,9 +68,16 @@ function install(){
     await openWithDeveloper();
   };
 
-  const observer=new MutationObserver(()=>paint());
   const auth=$('#bo-auth');
-  if(auth)observer.observe(auth,{subtree:true,childList:true,characterData:true});
+  if(auth){
+    const authObserver=new MutationObserver(()=>paint());
+    authObserver.observe(auth,{subtree:true,childList:true,characterData:true});
+  }
+  const secure=$('#secure-status');
+  if(secure){
+    const secureObserver=new MutationObserver(()=>paint());
+    secureObserver.observe(secure,{subtree:true,childList:true,characterData:true,attributes:true});
+  }
 
   if(sessionStorage.getItem(SESSION_KEY))return;
   setTimeout(openWithDeveloper,50);
