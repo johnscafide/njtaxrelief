@@ -1,358 +1,44 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 const NJOGIS = "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query";
-const allowedOrigins = new Set([
-  "https://njpropertytaxrelief.com",
-  "https://www.njpropertytaxrelief.com",
-]);
+const RATIO_URL = "https://njpropertytaxrelief.com/property/sr1a-ratios.json";
+const PAGE_SIZE = 500;
+const allowedOrigins = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com"]);
 
-function cors(req: Request) {
-  const origin = req.headers.get("origin") || "";
-  return {
-    "Access-Control-Allow-Origin": allowedOrigins.has(origin) ? origin : "https://njpropertytaxrelief.com",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-    "Vary": "Origin",
-  };
-}
-function reply(req: Request, status: number, payload: unknown) {
-  return new Response(JSON.stringify(payload), {
-    status,
-    headers: {
-      ...cors(req),
-      "Content-Type": "application/json; charset=utf-8",
-      "Cache-Control": "private, no-store",
-    },
-  });
-}
-function clean(v: unknown, max = 160) {
-  return String(v ?? "").trim().replace(/[\u0000-\u001f]/g, "").slice(0, max);
-}
-function num(v: unknown) {
-  const n = Number(v);
-  return Number.isFinite(n) ? n : null;
-}
-function sqlText(v: string) {
-  return v.replace(/'/g, "''");
-}
-function saleYear(v: unknown) {
-  const x = String(v ?? "");
-  const full = x.match(/(19|20)\d{2}/);
-  if (full) return Number(full[0]);
-  if (/^\d{6}$/.test(x)) {
-    const y = Number(x.slice(-2));
-    return y + (y > 50 ? 1900 : 2000);
-  }
-  return null;
-}
-function normalize(a: Record<string, unknown>) {
-  return {
-    pams_pin: clean(a.PAMS_PIN, 80),
-    address: clean(a.PROP_LOC, 220),
-    town: clean(a.MUN_NAME, 140),
-    county: clean(a.COUNTY, 100),
-    zip: clean(a.ZIP5 || a.ZIP_CODE, 10),
-    block: clean(a.PCLBLOCK, 40),
-    lot: clean(a.PCLLOT, 40),
-    qualifier: clean(a.PCLQCODE, 40),
-    prop_class: clean(a.PROP_CLASS, 12),
-    year_built: num(a.YR_CONSTR),
-    acres: num(a.CALC_ACRE),
-    dwelling_units: num(a.DWELL) ?? num(a.COMM_DWELL),
-    building_desc: clean(a.BLDG_DESC, 220),
-    land_value: num(a.LAND_VAL),
-    improvement_value: num(a.IMPRVT_VAL),
-    assessed_value: num(a.NET_VALUE),
-    last_year_tax: num(a.LAST_YR_TX),
-    effective_rate: null,
-    last_sale_price: num(a.SALE_PRICE),
-    last_sale_year: saleYear(a.DEED_DATE),
-    last_seen: new Date().toISOString(),
-    history: {
-      source: "NJ Office of GIS statewide Parcels and MOD-IV Composite",
-      purpose: "dynamic_list_materialization",
-      cached_at: new Date().toISOString(),
-    },
-  };
-}
-async function geocode(address: string) {
-  const u = new URL("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress");
-  u.searchParams.set("address", `${address}, NJ`);
-  u.searchParams.set("benchmark", "Public_AR_Current");
-  u.searchParams.set("format", "json");
-  const r = await fetch(u);
-  if (!r.ok) return null;
-  const j = await r.json();
-  const c = j?.result?.addressMatches?.[0]?.coordinates;
-  return c ? { lat: Number(c.y), lon: Number(c.x) } : null;
-}
-function definition(list: any) {
-  return {
-    scope_type: list.scope_type,
-    scope_value: list.scope_value,
-    criteria: list.criteria || {},
-  };
-}
-function hasKeys(obj: unknown) {
-  return !!obj && typeof obj === "object" && !Array.isArray(obj) && Object.keys(obj as Record<string, unknown>).length > 0;
-}
-function buildWhere(classes: string[], filters: Record<string, unknown>, scopeType: string, scopeValue: string) {
-  let where = "1=1";
-  if (scopeType === "municipality") where += ` AND UPPER(MUN_NAME) LIKE '%${sqlText(scopeValue.toUpperCase())}%'`;
-  if (scopeType === "county") where += ` AND UPPER(COUNTY) LIKE '%${sqlText(scopeValue.toUpperCase().replace(/ COUNTY$/, ""))}%'`;
-  if (scopeType === "zip") where += ` AND ZIP5='${sqlText(scopeValue.replace(/\D/g, "").slice(0, 5))}'`;
-  const safeClasses = classes.filter((x) => /^[0-9A-Z.]{1,4}$/.test(x));
-  if (safeClasses.length) where += ` AND PROP_CLASS IN (${safeClasses.map((x) => `'${sqlText(x)}'`).join(",")})`;
-  const remote: Record<string, [string, string]> = {
-    year_built_min: ["YR_CONSTR", ">="],
-    year_built_max: ["YR_CONSTR", "<="],
-    assessment_min: ["NET_VALUE", ">="],
-    assessment_max: ["NET_VALUE", "<="],
-    tax_min: ["LAST_YR_TX", ">="],
-    tax_max: ["LAST_YR_TX", "<="],
-    sale_price_min: ["SALE_PRICE", ">="],
-    sale_price_max: ["SALE_PRICE", "<="],
-    acres_min: ["CALC_ACRE", ">="],
-    acres_max: ["CALC_ACRE", "<="],
-    units_min: ["DWELL", ">="],
-    units_max: ["DWELL", "<="],
-  };
-  for (const [key, [field, op]] of Object.entries(remote)) {
-    const value = num(filters[key]);
-    if (value !== null) where += ` AND ${field} ${op} ${value}`;
-  }
-  return where;
-}
+function cors(req: Request) { const o=req.headers.get("origin")||""; return {"Access-Control-Allow-Origin":allowedOrigins.has(o)?o:"https://njpropertytaxrelief.com","Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"}; }
+function reply(req: Request,status:number,payload:unknown){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),"Content-Type":"application/json; charset=utf-8","Cache-Control":"private, no-store"}})}
+function clean(v:unknown,max=160){return String(v??"").trim().replace(/[\u0000-\u001f]/g,"").slice(0,max)}
+function num(v:unknown){const n=Number(v);return Number.isFinite(n)?n:null}
+function sqlText(v:string){return v.replace(/'/g,"''")}
+function saleYear(v:unknown){const x=String(v??"");const full=x.match(/(19|20)\d{2}/);if(full)return Number(full[0]);if(/^\d{6}$/.test(x)){const y=Number(x.slice(-2));return y+(y>50?1900:2000)}return null}
+function normalize(a:Record<string,unknown>){return{pams_pin:clean(a.PAMS_PIN,80),address:clean(a.PROP_LOC,220),town:clean(a.MUN_NAME,140),county:clean(a.COUNTY,100),zip:clean(a.ZIP5||a.ZIP_CODE,10),block:clean(a.PCLBLOCK,40),lot:clean(a.PCLLOT,40),qualifier:clean(a.PCLQCODE,40),prop_class:clean(a.PROP_CLASS,12),year_built:num(a.YR_CONSTR),acres:num(a.CALC_ACRE),dwelling_units:num(a.DWELL)??num(a.COMM_DWELL),building_desc:clean(a.BLDG_DESC,220),land_value:num(a.LAND_VAL),improvement_value:num(a.IMPRVT_VAL),assessed_value:num(a.NET_VALUE),last_year_tax:num(a.LAST_YR_TX),effective_rate:null,last_sale_price:num(a.SALE_PRICE),last_sale_year:saleYear(a.DEED_DATE),sales_code:clean(a.SALES_CODE,20),last_seen:new Date().toISOString(),history:{source:"NJ Office of GIS statewide Parcels and MOD-IV Composite",purpose:"dynamic_list_materialization",cached_at:new Date().toISOString()}}}
+async function geocode(address:string){const u=new URL("https://geocoding.geo.census.gov/geocoder/locations/onelineaddress");u.searchParams.set("address",`${address}, NJ`);u.searchParams.set("benchmark","Public_AR_Current");u.searchParams.set("format","json");const r=await fetch(u);if(!r.ok)return null;const j=await r.json();const c=j?.result?.addressMatches?.[0]?.coordinates;return c?{lat:Number(c.y),lon:Number(c.x)}:null}
+function definition(list:any){return{scope_type:list.scope_type,scope_value:list.scope_value,criteria:list.criteria||{}}}
+function hasKeys(obj:unknown){return!!obj&&typeof obj==="object"&&!Array.isArray(obj)&&Object.keys(obj as Record<string,unknown>).length>0}
+function buildWhere(classes:string[],filters:Record<string,unknown>,scopeType:string,scopeValue:string){let where="1=1";if(scopeType==="municipality")where+=` AND UPPER(MUN_NAME) LIKE '%${sqlText(scopeValue.toUpperCase())}%'`;if(scopeType==="county")where+=` AND UPPER(COUNTY) LIKE '%${sqlText(scopeValue.toUpperCase().replace(/ COUNTY$/,"") )}%'`;if(scopeType==="zip")where+=` AND ZIP5='${sqlText(scopeValue.replace(/\D/g,"").slice(0,5))}'`;const safeClasses=classes.filter(x=>/^[0-9A-Z.]{1,4}$/.test(x));if(safeClasses.length)where+=` AND PROP_CLASS IN (${safeClasses.map(x=>`'${sqlText(x)}'`).join(",")})`;const remote:Record<string,[string,string]>={year_built_min:["YR_CONSTR",">="],year_built_max:["YR_CONSTR","<="],assessment_min:["NET_VALUE",">="],assessment_max:["NET_VALUE","<="],tax_min:["LAST_YR_TX",">="],tax_max:["LAST_YR_TX","<="],sale_price_min:["SALE_PRICE",">="],sale_price_max:["SALE_PRICE","<="],acres_min:["CALC_ACRE",">="],acres_max:["CALC_ACRE","<="],units_min:["DWELL",">="],units_max:["DWELL","<="]};for(const[key,[field,op]]of Object.entries(remote)){const value=num(filters[key]);if(value!==null)where+=` AND ${field} ${op} ${value}`}return where}
+function ratioRow(root:any,code:string,town:string){const pools=[root?.districts,root?.municipalities,root?.ratios,root?.data,root];for(const pool of pools){if(!pool)continue;if(Array.isArray(pool)){const row=pool.find((x:any)=>String(x?.district||x?.code||x?.district_code||'').padStart(4,'0')===code||String(x?.name||x?.municipality||'').toLowerCase()===town.toLowerCase());if(row)return row}else if(typeof pool==='object'){if(pool[code])return pool[code];const row=Object.values(pool).find((x:any)=>String(x?.district||x?.code||x?.district_code||'').padStart(4,'0')===code||String(x?.name||x?.municipality||'').toLowerCase()===town.toLowerCase());if(row)return row}}return null}
+function pctRatio(v:any){let x=num(v);if(x===null)return null;if(x>2)x/=100;return x>0&&x<2?x:null}
+function usableSale(row:any){const sale=num(row.last_sale_price),ass=num(row.assessed_value);if(sale===null||sale<1000)return false;if(ass!==null&&ass>0){const raw=ass/sale;if(raw>5||raw<0.05)return false}return true}
+function chapter123(row:any,ratios:any){const code=String(row.pams_pin||'').replace(/\D/g,'').slice(0,4).padStart(4,'0'),rr=ratioRow(ratios,code,String(row.town||''));if(!rr)return null;const common=pctRatio(rr.common_level_ratio??rr.common_ratio??rr.ratio??rr.average_ratio??rr.avg_ratio),upper=pctRatio(rr.upper_limit??rr.upper_ratio??rr.upper)??(common!==null?common*1.15:null),ass=num(row.assessed_value),sale=num(row.last_sale_price),tax=num(row.last_year_tax);if(common===null||upper===null||!ass||!usableSale(row))return null;const assessmentRatio=ass/Number(sale);if(assessmentRatio<=upper)return{eligible:false,common,upper,assessment_ratio:assessmentRatio};const target=Number(sale)*common,reduction=Math.max(0,ass-target),taxRate=tax!==null&&ass>0?tax/ass:null,annual=taxRate!==null?reduction*taxRate:null;return{eligible:true,common,upper,assessment_ratio:assessmentRatio,target_assessment:Math.round(target),assessment_reduction:Math.round(reduction),annual_overpayment:annual!==null?Math.round(annual):null,over_upper_pct:Number(((assessmentRatio/upper-1)*100).toFixed(1))}}
+function metricMap(row:any,obs:Record<string,number>,ratios:any){const y=new Date().getFullYear(),m:any={...obs};if(num(row.year_built)&&Number(row.year_built)>1600)m['watchdog.building_age_years']=Math.max(0,y-Number(row.year_built));if(num(row.last_sale_year)&&Number(row.last_sale_year)>1800)m['watchdog.years_since_last_sale']=Math.max(0,y-Number(row.last_sale_year));if(num(row.assessed_value)&&Number(row.assessed_value)>0&&num(row.last_year_tax)!==null)m['watchdog.tax_to_assessment_rate']=Number((Number(row.last_year_tax)/Number(row.assessed_value)*100).toFixed(3));if(num(row.assessed_value)&&Number(row.assessed_value)>0&&num(row.land_value)!==null)m['watchdog.land_share_pct']=Number((Number(row.land_value)/Number(row.assessed_value)*100).toFixed(1));if(num(row.assessed_value)&&Number(row.assessed_value)>0&&num(row.improvement_value)!==null)m['watchdog.improvement_share_pct']=Number((Number(row.improvement_value)/Number(row.assessed_value)*100).toFixed(1));if(num(row.acres)&&Number(row.acres)>0)m['watchdog.assessment_per_acre']=Math.round(Number(row.assessed_value||0)/Number(row.acres));const c=chapter123(row,ratios);if(c){m['watchdog.chapter123_screen']=c.eligible?1:0;m['watchdog.chapter123_assessment_ratio']=Number(c.assessment_ratio.toFixed(4));m['watchdog.chapter123_upper_limit']=Number(c.upper.toFixed(4));m['watchdog.chapter123_common_ratio']=Number(c.common.toFixed(4));if(c.eligible){m['watchdog.chapter123_target_assessment']=c.target_assessment;m['watchdog.chapter123_assessment_reduction']=c.assessment_reduction;m['watchdog.chapter123_over_upper_pct']=c.over_upper_pct;if(c.annual_overpayment!==null)m['watchdog.chapter123_annual_overpayment']=c.annual_overpayment}}return m}
+const RULES:any={watchdog_score:['watchdog.score'],tax_pressure:['watchdog.tax_pressure'],revaluation_risk:['watchdog.revaluation_risk'],uniformity:['uniformity.score'],building_age:['watchdog.building_age_years'],years_since_sale:['watchdog.years_since_last_sale'],tax_assessment_rate:['watchdog.tax_to_assessment_rate'],assessment_per_acre:['watchdog.assessment_per_acre'],overassessment_annual:['watchdog.chapter123_annual_overpayment'],overassessment_pct:['watchdog.chapter123_over_upper_pct'],assessment_reduction:['watchdog.chapter123_assessment_reduction']};
+function intelPass(metrics:any,f:any){if(f.overassessment_only===true&&num(metrics['watchdog.chapter123_screen'])!==1)return false;for(const[key,[id]]of Object.entries(RULES) as any){const min=num(f[key+'_min']),max=num(f[key+'_max']);if(min===null&&max===null)continue;const v=num(metrics[id]);if(v===null)return false;if(min!==null&&Number(v)<min)return false;if(max!==null&&Number(v)>max)return false}return true}
+function salePass(row:any,filters:any){const min=num(filters.sale_year_min),max=num(filters.sale_year_max);if(min===null&&max===null)return true;const y=num(row.last_sale_year);if(y===null)return false;if(min!==null&&y<min)return false;if(max!==null&&y>max)return false;return true}
+async function metricsFor(admin:any,rows:any[]){let ratios:any={};try{const rr=await fetch(RATIO_URL,{headers:{accept:'application/json'}});if(rr.ok)ratios=await rr.json()}catch{}const pins=rows.map(x=>x.pams_pin).filter(Boolean),obs:Record<string,Record<string,number>>={};for(let i=0;i<pins.length;i+=500){const{data}=await admin.from('score_observations').select('pams_pin,marker_id,score,observed_at').in('pams_pin',pins.slice(i,i+500)).order('observed_at',{ascending:false});for(const x of data||[]){obs[x.pams_pin]??={};if(obs[x.pams_pin][x.marker_id]===undefined)obs[x.pams_pin][x.marker_id]=Number(x.score)}}return rows.map(r=>({row:r,metrics:metricMap(r,obs[r.pams_pin]||{},ratios)}))}
+async function cacheRows(admin:any,rows:any[]){for(let i=0;i<rows.length;i+=500){const cleaned=rows.slice(i,i+500).map(({sales_code,...r}:any)=>r);const{error}=await admin.from('property_lookups').upsert(cleaned,{onConflict:'pams_pin',ignoreDuplicates:false});if(error)throw new Error('CACHE_WRITE_FAILED')}}
+async function insertMembers(admin:any,userId:string,listId:string,generation:string,rows:any[]){if(!rows.length)return;for(let i=0;i<rows.length;i+=500){const members=rows.slice(i,i+500).map((row:any)=>({user_id:userId,dynamic_list_id:listId,pams_pin:row.pams_pin,generation,matched_at:new Date().toISOString()}));const{error}=await admin.from('agent_dynamic_list_properties').insert(members);if(error)throw new Error('MATERIALIZATION_WRITE_FAILED')}}
+async function failRun(admin:any,run:any,detail:string){await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',run.dynamic_list_id).eq('generation',run.generation);await admin.from('agent_dynamic_list_materialization_runs').update({status:'failed',detail,updated_at:new Date().toISOString(),completed_at:new Date().toISOString()}).eq('id',run.id)}
 
-Deno.serve(async (req: Request) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: cors(req) });
-  if (req.method !== "POST") return reply(req, 405, { error: "POST required" });
-
-  const origin = req.headers.get("origin") || "";
-  if (origin && !allowedOrigins.has(origin)) return reply(req, 403, { error: "Origin not allowed" });
-
-  const auth = req.headers.get("authorization") || "";
-  if (!auth.startsWith("Bearer ")) return reply(req, 401, { error: "Sign in required", code: "AUTH_REQUIRED" });
-
-  const url = Deno.env.get("SUPABASE_URL") || "";
-  const anon = Deno.env.get("SUPABASE_ANON_KEY") || "";
-  const service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-  const userClient = createClient(url, anon, {
-    global: { headers: { Authorization: auth } },
-    auth: { persistSession: false },
-  });
-  const admin = createClient(url, service, { auth: { persistSession: false, autoRefreshToken: false } });
-  const { data: authData, error: authError } = await userClient.auth.getUser();
-  if (authError || !authData.user) return reply(req, 401, { error: "Session could not be verified", code: "AUTH_REQUIRED" });
-
-  let body: any;
-  try {
-    body = await req.json();
-  } catch {
-    return reply(req, 400, { error: "Invalid JSON" });
-  }
-  const listId = clean(body?.list_id, 80);
-  if (!/^[0-9a-f-]{36}$/i.test(listId)) return reply(req, 400, { error: "A valid saved farm is required" });
-
-  const { data: list, error: listError } = await admin
-    .from("agent_dynamic_lists")
-    .select("*")
-    .eq("id", listId)
-    .eq("user_id", authData.user.id)
-    .single();
-  if (listError || !list) return reply(req, 404, { error: "Saved farm not found" });
-
-  const { data: plan } = await admin.rpc("watchdog_effective_plan", { p_user_id: authData.user.id });
-  const { data: limits } = await admin.rpc("agent_plan_limits", { p_plan: plan || "standard" });
-  const tier = String(plan || "standard");
-  const capacity = Math.max(0, Number(limits?.properties || 0));
-  const requestLimit = Math.max(1, Number(limits?.requests_5m || 20));
-  if (capacity < 1) return reply(req, 403, { error: "Saved farm materialization requires an Agent or professional plan.", code: "PLAN_REQUIRED" });
-
-  const criteria = list.criteria && typeof list.criteria === "object" ? list.criteria : {};
-  const intelligence = criteria.intelligence_filters && typeof criteria.intelligence_filters === "object" ? criteria.intelligence_filters : {};
-  const filters = criteria.filters && typeof criteria.filters === "object" ? criteria.filters : {};
-  if (hasKeys(intelligence)) {
-    return reply(req, 409, {
-      error: "This Watchdog intelligence farm cannot be mailed until its full candidate set can be materialized without scan truncation.",
-      code: "INTELLIGENCE_MATERIALIZATION_PENDING",
-    });
-  }
-  if (Object.prototype.hasOwnProperty.call(filters, "sale_year_min") || Object.prototype.hasOwnProperty.call(filters, "sale_year_max")) {
-    return reply(req, 409, {
-      error: "Sale-year farms need exact upstream filtering before direct-mail materialization can be enabled.",
-      code: "UNSUPPORTED_EXACT_FILTER",
-    });
-  }
-
-  const scopeType = clean(list.scope_type, 20).toLowerCase();
-  const scopeValue = clean(list.scope_value);
-  if (!["municipality", "county", "zip", "radius", "polygon"].includes(scopeType)) {
-    return reply(req, 400, { error: "This saved list type is not eligible for direct-mail materialization yet.", code: "UNSUPPORTED_SCOPE" });
-  }
-
-  const deliveryId = crypto.randomUUID();
-  const { data: quota, error: quotaError } = await admin.rpc("consume_municipal_quota", {
-    p_user_id: authData.user.id,
-    p_endpoint: "materialize-dynamic-list",
-    p_limit: requestLimit,
-    p_rows: 0,
-    p_delivery_id: deliveryId,
-  });
-  if (quotaError) return reply(req, 503, { error: "Materialization quota could not be checked", code: "SERVICE_UNAVAILABLE" });
-  if (!quota?.allowed) {
-    return reply(req, 429, {
-      error: "Data refresh limit reached. Try again after the usage window resets.",
-      code: "AGENT_QUOTA_REQUESTS",
-      reset_at: quota?.reset_at,
-    });
-  }
-
-  const classes = Array.isArray(criteria.property_classes) ? criteria.property_classes.map((x: unknown) => clean(x, 4)) : [];
-  const where = buildWhere(classes, filters, scopeType, scopeValue);
-  const common: Record<string, string> = { f: "json", where };
-
-  if (scopeType === "radius") {
-    const center = await geocode(scopeValue);
-    if (!center) return reply(req, 404, { error: "Farm center address could not be geocoded", code: "LOCATION_NOT_FOUND" });
-    Object.assign(common, {
-      geometry: `${center.lon},${center.lat}`,
-      geometryType: "esriGeometryPoint",
-      inSR: "4326",
-      spatialRel: "esriSpatialRelIntersects",
-      distance: String(Math.max(0.1, Math.min(num(criteria.radius_miles) || 2, 50))),
-      units: "esriSRUnit_StatuteMile",
-    });
-  } else if (scopeType === "polygon") {
-    const rings = criteria?.polygon?.rings;
-    if (!Array.isArray(rings) || !rings.length || !Array.isArray(rings[0]) || rings[0].length < 4) {
-      return reply(req, 400, { error: "Saved farm polygon is invalid", code: "INVALID_POLYGON" });
-    }
-    Object.assign(common, {
-      geometry: JSON.stringify({ rings, spatialReference: { wkid: 4326 } }),
-      geometryType: "esriGeometryPolygon",
-      inSR: "4326",
-      spatialRel: "esriSpatialRelIntersects",
-    });
-  }
-
-  const countParams = new URLSearchParams({ ...common, returnCountOnly: "true" });
-  const countRes = await fetch(`${NJOGIS}?${countParams}`);
-  if (!countRes.ok) return reply(req, 503, { error: "NJ statewide parcel service is temporarily unavailable", code: "SERVICE_UNAVAILABLE" });
-  const countJson = await countRes.json();
-  if (countJson.error) return reply(req, 503, { error: "NJ statewide parcel count failed", code: "SERVICE_UNAVAILABLE" });
-
-  const sourceCount = Math.max(0, Number(countJson.count || 0));
-  const targetCount = Math.min(sourceCount, capacity);
-  const generation = crypto.randomUUID();
-  const sourceName = "NJ Office of GIS statewide Parcels and MOD-IV Composite via Watchdog";
-  const outFields = "PAMS_PIN,PCLBLOCK,PCLLOT,PCLQCODE,COUNTY,MUN_NAME,PROP_CLASS,PROP_LOC,ZIP_CODE,ZIP5,LAND_VAL,IMPRVT_VAL,NET_VALUE,LAST_YR_TX,BLDG_DESC,CALC_ACRE,YR_CONSTR,SALE_PRICE,DEED_DATE,DWELL,COMM_DWELL";
-  const unique = new Map<string, any>();
-
-  for (let offset = 0; offset < targetCount; offset += 1000) {
-    const pageSize = Math.min(1000, targetCount - offset);
-    const params = new URLSearchParams({
-      ...common,
-      outFields,
-      returnGeometry: "false",
-      resultOffset: String(offset),
-      resultRecordCount: String(pageSize),
-      orderByFields: "MUN_NAME ASC, PROP_LOC ASC, PAMS_PIN ASC",
-    });
-    const rowsRes = await fetch(`${NJOGIS}?${params}`);
-    if (!rowsRes.ok) return reply(req, 503, { error: "NJ parcel materialization stopped before completion", code: "SERVICE_UNAVAILABLE" });
-    const rowsJson = await rowsRes.json();
-    if (rowsJson.error) return reply(req, 503, { error: "NJ parcel materialization query failed", code: "SERVICE_UNAVAILABLE" });
-    const batch = (rowsJson.features || []).map((f: any) => normalize(f.attributes || {})).filter((r: any) => r.pams_pin);
-    for (const row of batch) unique.set(row.pams_pin, row);
-    if ((rowsJson.features || []).length < pageSize && offset + (rowsJson.features || []).length < targetCount) {
-      return reply(req, 503, { error: "NJ parcel service returned an incomplete page; the previous durable farm set was preserved.", code: "INCOMPLETE_UPSTREAM_PAGE" });
-    }
-  }
-
-  if (unique.size !== targetCount) {
-    return reply(req, 503, {
-      error: "The statewide parcel source did not return the complete expected property-key set; the previous durable farm set was preserved.",
-      code: "INCOMPLETE_PROPERTY_SET",
-      expected: targetCount,
-      received: unique.size,
-    });
-  }
-
-  const records = Array.from(unique.values());
-  for (let i = 0; i < records.length; i += 500) {
-    const batch = records.slice(i, i + 500);
-    const { error } = await admin.from("property_lookups").upsert(batch, { onConflict: "pams_pin", ignoreDuplicates: false });
-    if (error) return reply(req, 500, { error: "Watchdog could not cache the prepared mailing addresses", code: "CACHE_WRITE_FAILED" });
-  }
-
-  for (let i = 0; i < records.length; i += 500) {
-    const members = records.slice(i, i + 500).map((row: any) => ({
-      user_id: authData.user.id,
-      dynamic_list_id: list.id,
-      pams_pin: row.pams_pin,
-      generation,
-      matched_at: new Date().toISOString(),
-    }));
-    const { error } = await admin.from("agent_dynamic_list_properties").insert(members);
-    if (error) {
-      await admin.from("agent_dynamic_list_properties").delete().eq("dynamic_list_id", list.id).eq("generation", generation);
-      return reply(req, 500, { error: "Watchdog could not persist the complete farm property set", code: "MATERIALIZATION_WRITE_FAILED" });
-    }
-  }
-
-  const snapshot = definition(list);
-  const capacityLimited = sourceCount > capacity;
-  const status = capacityLimited ? "ready_capacity_limited" : "ready";
-  const materializedAt = new Date().toISOString();
-  const detail = capacityLimited
-    ? `${targetCount} of ${sourceCount} matches are available under the ${tier} plan.`
-    : `${targetCount} properties prepared from the live NJ statewide parcel source.`;
-
-  const { error: metaError } = await admin.from("agent_dynamic_list_materializations").upsert({
-    dynamic_list_id: list.id,
-    user_id: authData.user.id,
-    generation,
-    definition_snapshot: snapshot,
-    source_count: sourceCount,
-    materialized_count: targetCount,
-    source_complete: !capacityLimited,
-    capacity_limited: capacityLimited,
-    status,
-    source_name: sourceName,
-    detail,
-    materialized_at: materializedAt,
-    updated_at: materializedAt,
-  }, { onConflict: "dynamic_list_id" });
-
-  if (metaError) {
-    await admin.from("agent_dynamic_list_properties").delete().eq("dynamic_list_id", list.id).eq("generation", generation);
-    return reply(req, 500, { error: "Watchdog could not finalize the durable farm set", code: "MATERIALIZATION_FINALIZE_FAILED" });
-  }
-
-  await admin.from("agent_dynamic_list_properties").delete().eq("dynamic_list_id", list.id).neq("generation", generation);
-  await admin.from("agent_dynamic_lists").update({
-    last_count: sourceCount,
-    last_checked_at: materializedAt,
-    updated_at: materializedAt,
-  }).eq("id", list.id).eq("user_id", authData.user.id);
-  await admin.rpc("record_municipal_delivery", {
-    p_user_id: authData.user.id,
-    p_delivery_id: deliveryId,
-    p_rows: targetCount,
-  });
-
-  return reply(req, 200, {
-    list_id: list.id,
-    label: list.name,
-    plan: tier,
-    status,
-    source_count: sourceCount,
-    materialized_count: targetCount,
-    source_complete: !capacityLimited,
-    capacity_limited: capacityLimited,
-    generation,
-    materialized_at: materializedAt,
-    source: sourceName,
-  });
+Deno.serve(async(req:Request)=>{if(req.method==='OPTIONS')return new Response('ok',{headers:cors(req)});if(req.method!=='POST')return reply(req,405,{error:'POST required'});const origin=req.headers.get('origin')||'';if(origin&&!allowedOrigins.has(origin))return reply(req,403,{error:'Origin not allowed'});const auth=req.headers.get('authorization')||'';if(!auth.startsWith('Bearer '))return reply(req,401,{error:'Sign in required',code:'AUTH_REQUIRED'});
+ const url=Deno.env.get('SUPABASE_URL')||'',anon=Deno.env.get('SUPABASE_ANON_KEY')||'',service=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')||'';const uc=createClient(url,anon,{global:{headers:{Authorization:auth}},auth:{persistSession:false}}),admin=createClient(url,service,{auth:{persistSession:false,autoRefreshToken:false}});const{data:authData,error:authError}=await uc.auth.getUser();if(authError||!authData.user)return reply(req,401,{error:'Session could not be verified',code:'AUTH_REQUIRED'});
+ let body:any={};try{body=await req.json()}catch{return reply(req,400,{error:'Invalid JSON'})}const listId=clean(body?.list_id,80),runId=clean(body?.run_id,80);if(!/^[0-9a-f-]{36}$/i.test(listId))return reply(req,400,{error:'A valid saved farm is required'});
+ const{data:list,error:listError}=await admin.from('agent_dynamic_lists').select('*').eq('id',listId).eq('user_id',authData.user.id).single();if(listError||!list)return reply(req,404,{error:'Saved farm not found'});const{data:plan}=await admin.rpc('watchdog_effective_plan',{p_user_id:authData.user.id}),{data:limits}=await admin.rpc('agent_plan_limits',{p_plan:plan||'standard'});const tier=String(plan||'standard'),capacity=Math.max(0,Number(limits?.properties||0)),requestLimit=Math.max(1,Number(limits?.requests_5m||20));if(capacity<1)return reply(req,403,{error:'Saved farm materialization requires an Agent or professional plan.',code:'PLAN_REQUIRED'});
+ const criteria=list.criteria&&typeof list.criteria==='object'?list.criteria:{},intel=criteria.intelligence_filters&&typeof criteria.intelligence_filters==='object'?criteria.intelligence_filters:{},filters=criteria.filters&&typeof criteria.filters==='object'?criteria.filters:{},needsCompleteScan=hasKeys(intel)||Object.prototype.hasOwnProperty.call(filters,'sale_year_min')||Object.prototype.hasOwnProperty.call(filters,'sale_year_max'),scopeType=clean(list.scope_type,20).toLowerCase(),scopeValue=clean(list.scope_value);if(!['municipality','county','zip','radius','polygon'].includes(scopeType))return reply(req,400,{error:'This saved list type is not eligible for direct-mail materialization yet.',code:'UNSUPPORTED_SCOPE'});
+ const classes=Array.isArray(criteria.property_classes)?criteria.property_classes.map((x:unknown)=>clean(x,4)):[],where=buildWhere(classes,filters,scopeType,scopeValue),common:Record<string,string>={f:'json',where};if(scopeType==='radius'){const center=await geocode(scopeValue);if(!center)return reply(req,404,{error:'Farm center address could not be geocoded',code:'LOCATION_NOT_FOUND'});Object.assign(common,{geometry:`${center.lon},${center.lat}`,geometryType:'esriGeometryPoint',inSR:'4326',spatialRel:'esriSpatialRelIntersects',distance:String(Math.max(.1,Math.min(num(criteria.radius_miles)||2,50))),units:'esriSRUnit_StatuteMile'})}else if(scopeType==='polygon'){const rings=criteria?.polygon?.rings;if(!Array.isArray(rings)||!rings.length||!Array.isArray(rings[0])||rings[0].length<4)return reply(req,400,{error:'Saved farm polygon is invalid',code:'INVALID_POLYGON'});Object.assign(common,{geometry:JSON.stringify({rings,spatialReference:{wkid:4326}}),geometryType:'esriGeometryPolygon',inSR:'4326',spatialRel:'esriSpatialRelIntersects'})}
+ const deliveryId=crypto.randomUUID();const{data:quota,error:quotaError}=await admin.rpc('consume_municipal_quota',{p_user_id:authData.user.id,p_endpoint:'materialize-dynamic-list',p_limit:requestLimit,p_rows:0,p_delivery_id:deliveryId});if(quotaError)return reply(req,503,{error:'Materialization quota could not be checked',code:'SERVICE_UNAVAILABLE'});if(!quota?.allowed)return reply(req,429,{error:'Data refresh limit reached. Try again after the usage window resets.',code:'AGENT_QUOTA_REQUESTS',reset_at:quota?.reset_at});
+ const sourceName='NJ Office of GIS statewide Parcels and MOD-IV Composite via Watchdog',outFields='PAMS_PIN,PCLBLOCK,PCLLOT,PCLQCODE,COUNTY,MUN_NAME,PROP_CLASS,PROP_LOC,ZIP_CODE,ZIP5,LAND_VAL,IMPRVT_VAL,NET_VALUE,LAST_YR_TX,BLDG_DESC,CALC_ACRE,YR_CONSTR,SALE_PRICE,DEED_DATE,SALES_CODE,DWELL,COMM_DWELL',snapshot=definition(list);
+ if(!needsCompleteScan){const countP=new URLSearchParams({...common,returnCountOnly:'true'}),cr=await fetch(`${NJOGIS}?${countP}`);if(!cr.ok)return reply(req,503,{error:'NJ statewide parcel service is temporarily unavailable',code:'SERVICE_UNAVAILABLE'});const cj=await cr.json();if(cj.error)return reply(req,503,{error:'NJ statewide parcel count failed',code:'SERVICE_UNAVAILABLE'});const sourceCount=Math.max(0,Number(cj.count||0)),targetCount=Math.min(sourceCount,capacity),generation=crypto.randomUUID(),unique=new Map<string,any>();for(let offset=0;offset<targetCount;offset+=1000){const pageSize=Math.min(1000,targetCount-offset),p=new URLSearchParams({...common,outFields,returnGeometry:'false',resultOffset:String(offset),resultRecordCount:String(pageSize),orderByFields:'MUN_NAME ASC, PROP_LOC ASC, PAMS_PIN ASC'}),rr=await fetch(`${NJOGIS}?${p}`);if(!rr.ok)return reply(req,503,{error:'NJ parcel materialization stopped before completion',code:'SERVICE_UNAVAILABLE'});const j=await rr.json();if(j.error)return reply(req,503,{error:'NJ parcel materialization query failed',code:'SERVICE_UNAVAILABLE'});const raw=j.features||[],batch=raw.map((f:any)=>normalize(f.attributes||{})).filter((r:any)=>r.pams_pin);for(const row of batch)unique.set(row.pams_pin,row);if(raw.length<pageSize&&offset+raw.length<targetCount)return reply(req,503,{error:'NJ parcel service returned an incomplete page; the previous durable farm set was preserved.',code:'INCOMPLETE_UPSTREAM_PAGE'})}if(unique.size!==targetCount)return reply(req,503,{error:'The statewide parcel source did not return the complete expected property-key set; the previous durable farm set was preserved.',code:'INCOMPLETE_PROPERTY_SET',expected:targetCount,received:unique.size});const records=Array.from(unique.values());try{await cacheRows(admin,records);await insertMembers(admin,authData.user.id,list.id,generation,records)}catch(e){await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).eq('generation',generation);return reply(req,500,{error:e instanceof Error?e.message:'Materialization write failed'})}const materializedAt=new Date().toISOString(),capacityLimited=sourceCount>capacity,status=capacityLimited?'ready_capacity_limited':'ready',detail=capacityLimited?`${targetCount} of ${sourceCount} complete source matches are available under the ${tier} plan.`:`${targetCount} properties prepared from the complete live NJ statewide parcel source.`;const{error:me}=await admin.from('agent_dynamic_list_materializations').upsert({dynamic_list_id:list.id,user_id:authData.user.id,generation,definition_snapshot:snapshot,source_count:sourceCount,materialized_count:targetCount,source_complete:true,capacity_limited:capacityLimited,status,source_name:sourceName,detail,materialized_at:materializedAt,updated_at:materializedAt},{onConflict:'dynamic_list_id'});if(me){await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).eq('generation',generation);return reply(req,500,{error:'Watchdog could not finalize the durable farm set',code:'MATERIALIZATION_FINALIZE_FAILED'})}await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).neq('generation',generation);await admin.from('agent_dynamic_lists').update({last_count:sourceCount,last_checked_at:materializedAt,updated_at:materializedAt}).eq('id',list.id).eq('user_id',authData.user.id);await admin.rpc('record_municipal_delivery',{p_user_id:authData.user.id,p_delivery_id:deliveryId,p_rows:targetCount});return reply(req,200,{list_id:list.id,label:list.name,plan:tier,status,source_count:sourceCount,materialized_count:targetCount,source_complete:true,capacity_limited:capacityLimited,generation,materialized_at:materializedAt,source:sourceName})}
+ let run:any=null;if(runId){const q=await admin.from('agent_dynamic_list_materialization_runs').select('*').eq('id',runId).eq('dynamic_list_id',list.id).eq('user_id',authData.user.id).maybeSingle();run=q.data;if(!run||run.status!=='scanning')return reply(req,409,{error:'This materialization scan is no longer active.',code:'SCAN_NOT_ACTIVE'});if(JSON.stringify(run.definition_snapshot)!==JSON.stringify(snapshot)){await failRun(admin,run,'Saved farm definition changed during scan.');return reply(req,409,{error:'The saved farm changed during preparation. Start again.',code:'SCAN_DEFINITION_CHANGED'})}}else{const old=await admin.from('agent_dynamic_list_materialization_runs').select('id,generation').eq('dynamic_list_id',list.id).eq('user_id',authData.user.id).eq('status','scanning');for(const x of old.data||[]){await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).eq('generation',x.generation);await admin.from('agent_dynamic_list_materialization_runs').update({status:'abandoned',detail:'Superseded by a new complete scan.',updated_at:new Date().toISOString(),completed_at:new Date().toISOString()}).eq('id',x.id)}const countP=new URLSearchParams({...common,returnCountOnly:'true'}),cr=await fetch(`${NJOGIS}?${countP}`);if(!cr.ok)return reply(req,503,{error:'NJ statewide parcel service is temporarily unavailable',code:'SERVICE_UNAVAILABLE'});const cj=await cr.json();if(cj.error)return reply(req,503,{error:'NJ statewide candidate count failed',code:'SERVICE_UNAVAILABLE'});const ins=await admin.from('agent_dynamic_list_materialization_runs').insert({dynamic_list_id:list.id,user_id:authData.user.id,generation:crypto.randomUUID(),definition_snapshot:snapshot,candidate_count:Math.max(0,Number(cj.count||0)),scanned_count:0,matched_count:0,status:'scanning',detail:'Complete statewide candidate scan in progress.',source_name:sourceName}).select('*').single();if(ins.error)return reply(req,500,{error:'Watchdog could not start the complete farm scan',code:'SCAN_START_FAILED'});run=ins.data}
+ const remaining=Math.max(0,Number(run.candidate_count)-Number(run.scanned_count));if(remaining===0){const now=new Date().toISOString(),sourceCount=Number(run.matched_count||0),stored=(await admin.from('agent_dynamic_list_properties').select('*',{count:'exact',head:true}).eq('dynamic_list_id',list.id).eq('generation',run.generation)).count||0,expected=Math.min(sourceCount,capacity);if(stored!==expected){await failRun(admin,run,'Stored membership count did not match the complete scan.');return reply(req,503,{error:'Complete scan membership verification failed; the previous durable farm set was preserved.',code:'SCAN_MEMBERSHIP_MISMATCH'})}const cap=sourceCount>capacity,status=cap?'ready_capacity_limited':'ready';const{error:me}=await admin.from('agent_dynamic_list_materializations').upsert({dynamic_list_id:list.id,user_id:authData.user.id,generation:run.generation,definition_snapshot:snapshot,source_count:sourceCount,materialized_count:stored,source_complete:true,capacity_limited:cap,status,source_name:sourceName,detail:cap?`${stored} of ${sourceCount} complete source matches are available under the ${tier} plan.`:`${stored} properties prepared after scanning all ${run.candidate_count} statewide candidates.`,materialized_at:now,updated_at:now},{onConflict:'dynamic_list_id'});if(me){await failRun(admin,run,'Final materialization metadata could not be written.');return reply(req,500,{error:'Watchdog could not finalize the complete scan',code:'MATERIALIZATION_FINALIZE_FAILED'})}await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).neq('generation',run.generation);await admin.from('agent_dynamic_list_materialization_runs').update({status:'complete',detail:'Complete statewide scan materialized.',updated_at:now,completed_at:now}).eq('id',run.id);await admin.from('agent_dynamic_lists').update({last_count:sourceCount,last_checked_at:now,updated_at:now}).eq('id',list.id).eq('user_id',authData.user.id);return reply(req,200,{list_id:list.id,label:list.name,plan:tier,status,source_count:sourceCount,materialized_count:stored,source_complete:true,capacity_limited:cap,generation:run.generation,materialized_at:now,source:sourceName,candidate_count:run.candidate_count,scanned_count:run.scanned_count})}
+ const pageSize=Math.min(PAGE_SIZE,remaining),p=new URLSearchParams({...common,outFields,returnGeometry:'false',resultOffset:String(run.scanned_count),resultRecordCount:String(pageSize),orderByFields:'MUN_NAME ASC, PROP_LOC ASC, PAMS_PIN ASC'}),rr=await fetch(`${NJOGIS}?${p}`);if(!rr.ok){await failRun(admin,run,'NJ parcel page request failed.');return reply(req,503,{error:'NJ parcel scan stopped before completion; the previous durable farm set was preserved.',code:'SERVICE_UNAVAILABLE'})}const j=await rr.json();if(j.error){await failRun(admin,run,'NJ parcel page returned an error.');return reply(req,503,{error:'NJ parcel scan failed; the previous durable farm set was preserved.',code:'SERVICE_UNAVAILABLE'})}const raw=j.features||[];if(raw.length<pageSize&&Number(run.scanned_count)+raw.length<Number(run.candidate_count)){await failRun(admin,run,'Upstream candidate page was incomplete.');return reply(req,503,{error:'NJ parcel service returned an incomplete page; the previous durable farm set was preserved.',code:'INCOMPLETE_UPSTREAM_PAGE'})}const rows=raw.map((f:any)=>normalize(f.attributes||{})).filter((r:any)=>r.pams_pin),saleFiltered=rows.filter(r=>salePass(r,filters));let matched=saleFiltered;if(hasKeys(intel)){const enriched=await metricsFor(admin,saleFiltered);matched=enriched.filter(x=>intelPass(x.metrics,intel)).map(x=>x.row)}const oldMatched=Number(run.matched_count||0),remainingCapacity=Math.max(0,capacity-Math.min(oldMatched,capacity)),keep=matched.slice(0,remainingCapacity);try{await cacheRows(admin,keep);await insertMembers(admin,authData.user.id,list.id,run.generation,keep)}catch(e){await failRun(admin,run,e instanceof Error?e.message:'Materialization write failed');return reply(req,500,{error:'Watchdog could not persist the complete farm scan',code:'MATERIALIZATION_WRITE_FAILED'})}const scanned=Number(run.scanned_count)+raw.length,matchedCount=oldMatched+matched.length,now=new Date().toISOString();await admin.from('agent_dynamic_list_materialization_runs').update({scanned_count:scanned,matched_count:matchedCount,updated_at:now,detail:`Scanned ${scanned} of ${run.candidate_count} statewide candidates.`}).eq('id',run.id);await admin.rpc('record_municipal_delivery',{p_user_id:authData.user.id,p_delivery_id:deliveryId,p_rows:keep.length});if(scanned>=Number(run.candidate_count)){run={...run,scanned_count:scanned,matched_count:matchedCount};const sourceCount=matchedCount,stored=(await admin.from('agent_dynamic_list_properties').select('*',{count:'exact',head:true}).eq('dynamic_list_id',list.id).eq('generation',run.generation)).count||0,expected=Math.min(sourceCount,capacity);if(stored!==expected){await failRun(admin,run,'Stored membership count did not match the complete scan.');return reply(req,503,{error:'Complete scan membership verification failed; the previous durable farm set was preserved.',code:'SCAN_MEMBERSHIP_MISMATCH'})}const cap=sourceCount>capacity,status=cap?'ready_capacity_limited':'ready';const{error:me}=await admin.from('agent_dynamic_list_materializations').upsert({dynamic_list_id:list.id,user_id:authData.user.id,generation:run.generation,definition_snapshot:snapshot,source_count:sourceCount,materialized_count:stored,source_complete:true,capacity_limited:cap,status,source_name:sourceName,detail:cap?`${stored} of ${sourceCount} complete source matches are available under the ${tier} plan.`:`${stored} properties prepared after scanning all ${scanned} statewide candidates.`,materialized_at:now,updated_at:now},{onConflict:'dynamic_list_id'});if(me){await failRun(admin,run,'Final materialization metadata could not be written.');return reply(req,500,{error:'Watchdog could not finalize the complete scan',code:'MATERIALIZATION_FINALIZE_FAILED'})}await admin.from('agent_dynamic_list_properties').delete().eq('dynamic_list_id',list.id).neq('generation',run.generation);await admin.from('agent_dynamic_list_materialization_runs').update({status:'complete',detail:'Complete statewide scan materialized.',updated_at:now,completed_at:now}).eq('id',run.id);await admin.from('agent_dynamic_lists').update({last_count:sourceCount,last_checked_at:now,updated_at:now}).eq('id',list.id).eq('user_id',authData.user.id);return reply(req,200,{list_id:list.id,label:list.name,plan:tier,status,source_count:sourceCount,materialized_count:stored,source_complete:true,capacity_limited:cap,generation:run.generation,materialized_at:now,source:sourceName,candidate_count:run.candidate_count,scanned_count:scanned})}return reply(req,202,{list_id:list.id,label:list.name,plan:tier,status:'scanning',run_id:run.id,generation:run.generation,candidate_count:run.candidate_count,scanned_count:scanned,matched_count:matchedCount,next_offset:scanned,source_complete:false,source:sourceName})
 });
