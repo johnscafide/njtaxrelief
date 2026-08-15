@@ -23,8 +23,8 @@
         <label>Who's signing in?
           <select name="actor"><option value="john">John</option><option value="wife">Wife</option></select>
         </label>
-        <label>Shared Backoffice key<input name="key" type="password" autocomplete="current-password" minlength="14" required></label>
-        <label id="bo-auth-confirm-wrap" hidden>Confirm shared key<input name="confirm" type="password" autocomplete="new-password" minlength="14"></label>
+        <label>Shared Backoffice key<input name="key" type="password" autocomplete="off" data-lpignore="true" data-1p-ignore="true" minlength="14" required></label>
+        <label id="bo-auth-confirm-wrap" hidden>Confirm shared key<input name="confirm" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" minlength="14"></label>
         <p class="bo-auth-dev" id="bo-dev-hint" hidden>First-time setup is locked to an existing Watchdog developer session. <button type="button" id="bo-signin-dev">Sign in to Watchdog</button></p>
         <div id="bo-auth-error" class="bo-form-error" role="alert"></div>
         <button class="bo-button bo-button-primary bo-auth-submit" id="bo-auth-submit" type="submit">Unlock Backoffice</button>
@@ -112,5 +112,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice.js" defer></script>
+  <script src="/property/backoffice/backoffice-recovery.js" defer></script>
 </body>
 </html>
