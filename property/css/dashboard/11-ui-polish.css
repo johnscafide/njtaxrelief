@@ -16,6 +16,183 @@
 .tm-dashboard-body { animation: tmReveal .25s ease both; }
 .tm-dashboard-body .tm-property:first-child { margin-top: 16px; }
 @keyframes tmReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+/* Dashboard sidebar polish: one navy surface, clearer hierarchy, subtle motion. */
+.db-sidebar {
+  background: #0f2748 !important;
+}
+
+.db-side-section {
+  border-top-color: rgba(255,255,255,.11);
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+
+.db-side-section + .db-side-section {
+  position: relative;
+}
+
+.db-side-section + .db-side-section::before {
+  background: linear-gradient(90deg, rgba(69,197,190,.34), rgba(255,255,255,.05) 52%, transparent);
+  content: '';
+  height: 1px;
+  left: 10px;
+  position: absolute;
+  right: 10px;
+  top: -1px;
+}
+
+.db-side-label {
+  color: #7690ae;
+  margin-bottom: 10px;
+}
+
+.db-sidebar .pn,
+.db-side-link,
+.db-side-account button,
+.db-side-group-toggle {
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+  transition:
+    background-color .18s ease,
+    color .18s ease,
+    transform .18s ease,
+    box-shadow .18s ease;
+}
+
+.db-sidebar .pn:hover,
+.db-side-link:hover,
+.db-side-account button:hover,
+.db-side-group-toggle:hover {
+  background: rgba(255,255,255,.055);
+  color: #fff;
+  transform: translateX(2px);
+}
+
+.db-sidebar .pn.on,
+.db-side-link.on {
+  background: rgba(7,132,134,.16) !important;
+  box-shadow: inset 3px 0 0 #45c5be;
+  color: #fff;
+}
+
+.db-sidebar .pn.on::after,
+.db-side-link.on::after {
+  background: radial-gradient(circle, rgba(69,197,190,.22), transparent 70%);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.db-side-group {
+  border-radius: 12px;
+  margin: 5px 0;
+  overflow: hidden;
+  transition: background-color .2s ease, box-shadow .2s ease;
+}
+
+body.db-sidebar-expanded .db-side-group.open {
+  background: rgba(255,255,255,.025);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.07);
+}
+
+body.db-sidebar-expanded .db-side-group.open > .db-side-group-toggle {
+  background: transparent;
+  color: #fff;
+}
+
+body.db-sidebar-expanded .db-side-group.open > .db-side-group-toggle > i:first-child {
+  color: #45c5be;
+}
+
+.db-side-submenu {
+  border-top: 1px solid transparent;
+}
+
+body.db-sidebar-expanded .db-side-group.open .db-side-submenu {
+  border-top-color: rgba(255,255,255,.06);
+}
+
+.db-side-submenu > div {
+  padding: 4px 8px 8px 12px;
+}
+
+.db-side-submenu .db-side-link {
+  border-radius: 8px;
+  color: #aebed1;
+  margin: 2px 0 2px 17px;
+  padding: 9px 10px 9px 15px;
+  width: calc(100% - 17px);
+}
+
+.db-side-submenu .db-side-link::before {
+  background: rgba(124,151,181,.34);
+  height: calc(100% + 4px);
+  left: -8px;
+  top: -2px;
+}
+
+.db-side-submenu .db-side-link::after {
+  background: #0f2748;
+  border: 1px solid rgba(124,151,181,.5);
+  border-radius: 50%;
+  content: '';
+  height: 6px;
+  left: -10.5px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+  width: 6px;
+}
+
+.db-side-submenu .db-side-link:hover,
+.db-side-submenu .db-side-link.on {
+  background: rgba(255,255,255,.05);
+}
+
+.db-side-submenu .db-side-link:hover::before,
+.db-side-submenu .db-side-link.on::before {
+  background: #45c5be;
+}
+
+.db-side-submenu .db-side-link:hover::after,
+.db-side-submenu .db-side-link.on::after {
+  background: #45c5be;
+  border-color: #45c5be;
+  box-shadow: 0 0 0 4px rgba(69,197,190,.11);
+}
+
+.db-side-chevron {
+  transition: transform .24s cubic-bezier(.2,.8,.2,1), color .18s ease;
+}
+
+.db-side-group.open .db-side-chevron {
+  color: #45c5be !important;
+}
+
+body.db-sidebar-expanded .db-side-submenu > div {
+  animation: dbSidebarSubmenuReveal .22s ease both;
+}
+
+@keyframes dbSidebarSubmenuReveal {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .tm-dashboard-disclosure > summary > i, .tm-dashboard-body { animation: none; transition: none; }
+  .tm-dashboard-disclosure > summary > i,
+  .tm-dashboard-body,
+  .db-sidebar .pn,
+  .db-side-link,
+  .db-side-account button,
+  .db-side-group,
+  .db-side-group-toggle,
+  .db-side-chevron,
+  .db-side-submenu > div {
+    animation: none !important;
+    transition: none !important;
+  }
 }
