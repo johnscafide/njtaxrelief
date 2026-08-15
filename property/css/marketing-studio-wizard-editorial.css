@@ -30,6 +30,10 @@ body[data-ms-wizard="customize"] #creative-studio.mw-customize-source{margin:0!i
 body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>.ms-eyebrow,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>h2,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>p,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-topbar{display:none!important}
 body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-grid>section:not(#ms-production-v2){display:none!important}
 body[data-ms-wizard="customize"] #ms-production-v2{border-radius:20px!important}
+body[data-ms-wizard="customize"] .mw-customize-wait{min-height:520px;display:grid;place-items:center;align-content:center;gap:8px;text-align:center;color:#7a8495;background:#fff;border:1px solid var(--mw-line);border-radius:20px}
+body[data-ms-wizard="customize"] .mw-customize-wait i{font-size:24px;color:var(--mw-blue);margin-bottom:6px}
+body[data-ms-wizard="customize"] .mw-customize-wait b{font:800 20px 'Plus Jakarta Sans';color:var(--mw-ink)}
+body[data-ms-wizard="customize"] .mw-customize-wait span{font-size:15px}
 body[data-ms-wizard="customize"] .ms3-topbar{padding:24px 28px}
 body[data-ms-wizard="customize"] .ms3-topbar h2{font-size:27px}
 body[data-ms-wizard="customize"] .ms3-inspector{padding:24px 22px}
