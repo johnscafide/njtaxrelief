@@ -2,6 +2,10 @@
 body[data-ms-wizard] .mw-stage{max-width:1380px}
 body[data-ms-wizard] .mw-stage-head{margin-bottom:30px}
 body[data-ms-wizard] .mw-stage-head p{font-size:18px;line-height:1.55;max-width:860px}
+body[data-ms-wizard] .mw-stage-head h1{position:relative;display:inline-block}
+body[data-ms-wizard] .mw-stage-head h1:after{content:'';position:absolute;left:1px;bottom:-7px;width:74px;height:5px;border-radius:999px;background:#ef7a4d;transform:rotate(-1.5deg)}
+body[data-ms-wizard] .mw-kicker{font-weight:800;letter-spacing:.11em}
+body[data-ms-wizard] .mw-kicker i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#e9f1ff;color:#2f6fed;font-size:10px}
 body[data-ms-wizard] .mw-content{font-size:16px;line-height:1.55}
 body[data-ms-wizard] .mw-content p{font-size:16px;line-height:1.55}
 body[data-ms-wizard] .mw-content label{font-size:13px}
@@ -14,41 +18,45 @@ body[data-ms-wizard="audience"] #ms-discovery{min-height:470px!important;display
 body[data-ms-wizard="audience"] #ms-discovery .msd-head{padding:48px 44px 28px!important}
 body[data-ms-wizard="audience"] #ms-discovery .msd-search{grid-template-columns:minmax(360px,1fr) 170px auto!important;gap:28px!important;max-width:1100px!important;width:100%!important;align-items:end!important}
 body[data-ms-wizard="audience"] #ms-discovery .msd-search label{font-size:14px!important;gap:9px!important}
-body[data-ms-wizard="audience"] #ms-discovery .msd-search input,body[data-ms-wizard="audience"] #ms-discovery .msd-search select{height:auto!important;min-height:56px!important;border:0!important;border-bottom:2px solid #cfd6e2!important;border-radius:0!important;background:transparent!important;padding:8px 0 10px!important;font:700 21px/1.2 'Plus Jakarta Sans',sans-serif!important;color:var(--mw-ink)!important;box-shadow:none!important;transition:border-color .15s ease!important}
-body[data-ms-wizard="audience"] #ms-discovery .msd-search input::placeholder{color:#9aa4b2!important;font-weight:600!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-search input,body[data-ms-wizard="audience"] #ms-discovery .msd-search select{height:auto!important;min-height:56px!important;border:0!important;border-bottom:2px solid #cfd6e2!important;border-radius:0!important;background:transparent!important;padding:8px 0 10px!important;font:650 21px/1.2 'Plus Jakarta Sans',sans-serif!important;color:var(--mw-ink)!important;box-shadow:none!important;transition:border-color .15s ease!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-search input::placeholder{color:#9aa4b2!important;font-weight:500!important}
 body[data-ms-wizard="audience"] #ms-discovery .msd-search input:focus,body[data-ms-wizard="audience"] #ms-discovery .msd-search select:focus{outline:0!important;border-bottom-color:var(--mw-blue)!important}
 body[data-ms-wizard="audience"] #ms-discovery .msd-search .ms-primary{height:58px!important;padding:0 24px!important;border-radius:12px!important;font-size:16px!important}
 body[data-ms-wizard="audience"] #ms-discovery .msd-town-help{font-size:12px!important;margin-top:0!important}
-body[data-ms-wizard="audience"] #ms-discovery .msd-town-suggestions{gap:8px!important;margin-top:9px!important}
-body[data-ms-wizard="audience"] #ms-discovery .msd-town-suggestions button{padding:8px 13px!important;font-size:12px!important}
-body[data-ms-wizard="audience"] #ms-discovery .msd-results{padding:12px 44px 44px!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-town-suggestions{gap:8px!important;margin-top:9px!important;min-height:38px!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-town-suggestions button{padding:8px 13px!important;font-size:12px!important;font-weight:650!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-results{position:relative!important;margin-top:0!important;padding:12px 44px 44px!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-town-notice{grid-column:1/-1!important;justify-self:start!important;display:inline-flex!important;align-items:center!important;gap:7px!important;width:auto!important;margin:0 0 2px!important;padding:6px 9px!important;border:0!important;border-radius:999px!important;background:#fff4ee!important;color:#9b4d30!important;font-size:11px!important;line-height:1.2!important;box-shadow:none!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-town-notice b{font-weight:750!important}
 body[data-ms-wizard="audience"] #ms-discovery .ms-empty{min-height:180px!important;font-size:17px!important;line-height:1.55!important;max-width:640px!important;margin:0 auto!important}
 
-/* Customize: make the editor feel like direct typography editing, not a CRM form. */
+/* Customize: keep the production tool compact and precise; the postcard is the visual focus. */
 body[data-ms-wizard="customize"] .mw-content{min-height:650px}
 body[data-ms-wizard="customize"] #creative-studio.mw-customize-source{margin:0!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
-body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>.ms-eyebrow,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>h2,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>p,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-topbar{display:none!important}
-body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-grid>section:not(#ms-production-v2){display:none!important}
-body[data-ms-wizard="customize"] #ms-production-v2{border-radius:20px!important}
-body[data-ms-wizard="customize"] .mw-customize-wait{min-height:520px;display:grid;place-items:center;align-content:center;gap:8px;text-align:center;color:#7a8495;background:#fff;border:1px solid var(--mw-line);border-radius:20px}
-body[data-ms-wizard="customize"] .mw-customize-wait i{font-size:24px;color:var(--mw-blue);margin-bottom:6px}
-body[data-ms-wizard="customize"] .mw-customize-wait b{font:800 20px 'Plus Jakarta Sans';color:var(--mw-ink)}
-body[data-ms-wizard="customize"] .mw-customize-wait span{font-size:15px}
-body[data-ms-wizard="customize"] .ms3-topbar{padding:24px 28px}
-body[data-ms-wizard="customize"] .ms3-topbar h2{font-size:27px}
-body[data-ms-wizard="customize"] .ms3-inspector{padding:24px 22px}
-body[data-ms-wizard="customize"] .ms3-inspector-head h3{font-size:20px}
-body[data-ms-wizard="customize"] .ms3-inspector>label,body[data-ms-wizard="customize"] .ms3-inspector-grid label{font-size:12px!important;gap:4px!important;margin-bottom:18px!important;color:#697386!important;text-transform:uppercase!important;letter-spacing:.055em!important}
-body[data-ms-wizard="customize"] .ms3-inspector input,body[data-ms-wizard="customize"] .ms3-inspector textarea,body[data-ms-wizard="customize"] .ms3-inspector select{border:0!important;border-bottom:1.5px solid #d5dae3!important;border-radius:0!important;background:transparent!important;padding:8px 0 10px!important;box-shadow:none!important;color:#172033!important;font:700 17px/1.42 'Source Sans 3',sans-serif!important;transition:border-color .15s ease!important}
-body[data-ms-wizard="customize"] .ms3-inspector textarea{min-height:82px!important;resize:vertical!important}
+body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>.ms-eyebrow,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>h2,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source>p,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-topbar,body[data-ms-wizard="customize"] #creative-studio.mw-customize-source .msc-grid{display:none!important}
+body[data-ms-wizard="customize"] #ms-production-v2{border-radius:18px!important;box-shadow:0 7px 24px rgba(24,34,52,.07)!important}
+body[data-ms-wizard="customize"] .mw-customize-wait,body[data-ms-wizard="recipients"] .mw-customize-wait{min-height:420px;display:grid;place-items:center;align-content:center;gap:8px;text-align:center;color:#7a8495;background:#fff;border:1px solid var(--mw-line);border-radius:20px}
+body[data-ms-wizard="customize"] .mw-customize-wait i,body[data-ms-wizard="recipients"] .mw-customize-wait i{font-size:24px;color:var(--mw-blue);margin-bottom:6px}
+body[data-ms-wizard="customize"] .mw-customize-wait b,body[data-ms-wizard="recipients"] .mw-customize-wait b{font:700 19px 'Plus Jakarta Sans';color:var(--mw-ink)}
+body[data-ms-wizard="customize"] .mw-customize-wait span,body[data-ms-wizard="recipients"] .mw-customize-wait span{font-size:15px}
+body[data-ms-wizard="customize"] .ms3-topbar{padding:18px 22px}
+body[data-ms-wizard="customize"] .ms3-topbar h2{font-size:22px;font-weight:700}
+body[data-ms-wizard="customize"] .ms3-inspector{padding:20px 18px}
+body[data-ms-wizard="customize"] .ms3-inspector-head h3{font-size:17px;font-weight:700}
+body[data-ms-wizard="customize"] .ms3-inspector>label,body[data-ms-wizard="customize"] .ms3-inspector-grid label{font-size:11px!important;gap:4px!important;margin-bottom:15px!important;color:#697386!important;text-transform:none!important;letter-spacing:0!important;font-weight:600!important}
+body[data-ms-wizard="customize"] .ms3-inspector input,body[data-ms-wizard="customize"] .ms3-inspector textarea,body[data-ms-wizard="customize"] .ms3-inspector select{border:0!important;border-bottom:1px solid #d5dae3!important;border-radius:0!important;background:transparent!important;padding:7px 0 9px!important;box-shadow:none!important;color:#172033!important;font:500 15px/1.42 'Source Sans 3',sans-serif!important;transition:border-color .15s ease!important}
+body[data-ms-wizard="customize"] .ms3-inspector textarea{min-height:68px!important;resize:vertical!important}
 body[data-ms-wizard="customize"] .ms3-inspector input:focus,body[data-ms-wizard="customize"] .ms3-inspector textarea:focus,body[data-ms-wizard="customize"] .ms3-inspector select:focus{outline:0!important;border-bottom-color:var(--mw-blue)!important}
-body[data-ms-wizard="customize"] .ms3-front-copy p{font-size:17px}
-body[data-ms-wizard="customize"] .ms3-cta{font-size:15px;padding:12px 16px}
-body[data-ms-wizard="customize"] .ms3-front-footer{font-size:12px}
+body[data-ms-wizard="customize"] .ms3-tools button{font-weight:600!important}
+body[data-ms-wizard="customize"] .ms3-front-copy p{font-size:15px}
+body[data-ms-wizard="customize"] .ms3-cta{font-size:14px;padding:10px 14px}
+body[data-ms-wizard="customize"] .ms3-front-footer{font-size:11px}
 body[data-ms-wizard="customize"] [contenteditable="true"]{cursor:text}
-body[data-ms-wizard="customize"] [contenteditable="true"]:focus{outline:2px solid rgba(47,111,237,.22)!important;outline-offset:4px!important;border-radius:4px}
+body[data-ms-wizard="customize"] [contenteditable="true"]:focus{outline:2px solid rgba(47,111,237,.18)!important;outline-offset:3px!important;border-radius:4px}
 
-/* Recipients/review: increase useful content size without creating oversized dashboard cards. */
+/* Recipient parent shell is only a bootstrap host; show the focused row builder when ready. */
+body[data-ms-wizard="recipients"] #ms-mailing-workbench.mw-recipient-source>*:not(#mw-recipient-wait){display:none!important}
+body[data-ms-wizard="recipients"] #ms3-recipient-builder{background:#fff;border:1px solid var(--mw-line);border-radius:20px;padding:24px}
 body[data-ms-wizard="recipients"] .ms3-recipient-table td{font-size:13px!important;padding:13px 14px!important}
 body[data-ms-wizard="recipients"] .ms3-recipient-table th{font-size:10px!important;padding:11px 14px!important}
 body[data-ms-wizard="recipients"] .ms3-search input{font-size:14px!important;padding-top:11px!important;padding-bottom:11px!important}
@@ -65,5 +73,5 @@ body[data-ms-wizard="review"] .mw-content h2,body[data-ms-wizard="review"] .mw-c
  body[data-ms-wizard="audience"] #ms-discovery .msd-search{grid-template-columns:1fr!important}
  body[data-ms-wizard="audience"] #ms-discovery .msd-search input,body[data-ms-wizard="audience"] #ms-discovery .msd-search select{font-size:18px!important}
  body[data-ms-wizard="audience"] #ms-discovery .msd-results{padding:10px 22px 28px!important}
- body[data-ms-wizard="customize"] .ms3-inspector input,body[data-ms-wizard="customize"] .ms3-inspector textarea,body[data-ms-wizard="customize"] .ms3-inspector select{font-size:16px!important}
+ body[data-ms-wizard="customize"] .ms3-inspector input,body[data-ms-wizard="customize"] .ms3-inspector textarea,body[data-ms-wizard="customize"] .ms3-inspector select{font-size:15px!important}
 }
