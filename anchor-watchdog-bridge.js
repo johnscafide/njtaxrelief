@@ -121,3 +121,91 @@
   }
   window.AnchorWatchdog = { hydrate:hydrate };
 })();
+
+// After the estimator's existing OTP verification succeeds, its normal verified
+// EmailJS lead send is mirrored into the private Backoffice. The Backoffice
+// capture endpoint independently checks for a recent verified OTP, so no
+// privileged ingest secret is exposed to browser code.
+(function () {
+  'use strict';
+
+  var CAPTURE_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/verify-email';
+  var CAPTURE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+
+  function funnelTrack(name) {
+    try {
+      if (window.AnchorFunnel && typeof window.AnchorFunnel.track === 'function') {
+        window.AnchorFunnel.track(name, { source: 'anchor-estimator' });
+      }
+    } catch (_) {}
+  }
+
+  function isVerifiedAnchorLead(params) {
+    var topic = String((params || {}).topic || '');
+    return /\[VERIFIED\]/i.test(topic) && /ANCHOR Estimator/i.test(topic);
+  }
+
+  function capture(params) {
+    if (!params || !params.email) return;
+
+    var lead = {
+      name: params.name || '',
+      email: params.email || '',
+      phone: params.phone || '',
+      address: params.address || params.town || '',
+      tenure: params.tenure || params.lead_type || '',
+      household_income: params.income_bracket || params.finance || '',
+      program: 'ANCHOR Estimator',
+      summary: params.topic || '',
+      notes: params.message || ''
+    };
+
+    fetch(CAPTURE_URL, {
+      method: 'POST',
+      keepalive: true,
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': CAPTURE_KEY,
+        'Authorization': 'Bearer ' + CAPTURE_KEY
+      },
+      body: JSON.stringify({
+        action: 'capture_verified_lead',
+        email: lead.email,
+        lead: lead
+      })
+    }).then(function (res) {
+      if (!res.ok) {
+        return res.json().catch(function () { return {}; }).then(function (body) {
+          throw new Error(body.error || ('Backoffice capture failed (' + res.status + ')'));
+        });
+      }
+      return res.json();
+    }).then(function () {
+      funnelTrack('anchor_backoffice_captured');
+    }).catch(function (err) {
+      console.warn('Watchdog Backoffice capture:', err && err.message ? err.message : err);
+      funnelTrack('anchor_backoffice_capture_failed');
+    });
+  }
+
+  function install() {
+    if (!window.emailjs || typeof window.emailjs.send !== 'function') return false;
+    if (window.emailjs.__watchdogBackofficeWrapped) return true;
+
+    var originalSend = window.emailjs.send.bind(window.emailjs);
+    window.emailjs.send = function (serviceId, templateId, templateParams, options) {
+      if (isVerifiedAnchorLead(templateParams)) capture(templateParams);
+      return originalSend(serviceId, templateId, templateParams, options);
+    };
+    window.emailjs.__watchdogBackofficeWrapped = true;
+    return true;
+  }
+
+  if (!install()) {
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      if (install() || tries >= 40) clearInterval(timer);
+    }, 250);
+  }
+})();
