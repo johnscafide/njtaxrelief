@@ -61,7 +61,7 @@ async function init(){
  $('#settings-close').onclick=()=>closeDialog('#settings-dialog');$('#google-form').onsubmit=saveGoogle;$('#rotate-form').onsubmit=rotateKey;
  $('#lead-search').oninput=e=>{searchTerm=e.target.value.trim().toLowerCase();renderList()};$('#lead-filter').onchange=e=>{activeFilter=e.target.value;renderList()};
  $('#bulk-assign').onclick=()=>assign(Array.from(selectedIds),$('#bulk-owner').value);$('#bulk-export').onclick=()=>exportCsv($('#bulk-owner').value,Array.from(selectedIds));$('#export-john').onclick=()=>exportCsv('john');$('#export-wife').onclick=()=>exportCsv('wife');
- try{const status=await api('status');if(status.setup_required){setAuthMode(true);lock();return}if(token){try{const s=await api('session');actor=s.actor;integrations=s.integrations||integrations;unlock();await loadLeads();return}catch{lock()}}setAuthMode(false);lock()}catch(ex){setAuthMode(false);lock();$('#bo-auth-error').textContent=ex.message||'Backoffice service is unavailable.'}
+ try{if(token){try{const s=await api('session');actor=s.actor;integrations=s.integrations||integrations;unlock();await loadLeads();return}catch{}}const status=await api('status');if(status.setup_required){setAuthMode(true);lock();return}setAuthMode(false);lock()}catch(ex){setAuthMode(false);lock();$('#bo-auth-error').textContent=ex.message||'Backoffice service is unavailable.'}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
