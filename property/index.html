@@ -558,46 +558,24 @@
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- FAQ TEASER -->
 <section class="section">
   <div class="section-inner">
-<h2 class="lp-h2">Common questions</h2>
-    <div style="/* max-width:800px; */margin:0 auto;">
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Where does this data come from? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>The New Jersey Office of GIS publishes a statewide parcel layer joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the system municipal tax assessors actually work in. Public data, refreshed roughly once a year in late spring or early summer. Aerial imagery and parcel boundaries render from Esri World Imagery.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Does this tell me if a home is for sale? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>No. Live listing status lives in the MLS, which is a licensed feed and not public data. This page reads public assessment records only. The one thing it can tell you is when a <strong>deed was recorded recently</strong>, meaning the property changed hands, and that comes straight from the state file. If you want current listing status on a specific property, <a href="/index.html#contact">ask me directly</a>. I have MLS access and can check it in about 30 seconds.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Why is the owner name missing? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>Owner names are stripped from the public version of this dataset under Daniel&rsquo;s Law, which restricts disclosure of certain personal information in New Jersey. Property characteristics, assessments, and tax figures are still public.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Is the tax figure my current bill? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>No. It is the prior year billed amount from the most recent published file. Rates are set annually, so your current bill will be different. Treat it as a solid ballpark. For the exact current figure, check your municipal tax collector.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Who pays the transfer fee when I sell? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>The seller pays the general realty transfer fee at closing, on a graduated schedule tied to sale price. A change that caught a lot of people off guard: for contracts executed on or after July 10, 2025, residential sales over $1,000,000 carry a graduated percent fee that is now the <strong>seller&rsquo;s</strong> responsibility instead of the buyer&rsquo;s, and it applies to the entire sale price, not just the amount above a million. Sellers 62 and over, or who are blind or disabled, may qualify for a partial exemption on Form RTF-1. The net proceeds calculator accounts for all of it.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">My address did not come up. Why? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>Usually one of four things. Newly built homes may not be in the parcel file yet. Condominium units sometimes sit under a parent parcel. Properties billed as multiple lots together appear only once. Or the address needs the town and zip added. Try the full address first, then try without the unit number.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Am I paying too much? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>Compare the effective rate in your results against neighbors on the same street. If yours is noticeably higher for a similar home, either your assessment is out of line or you're missing a deduction you qualify for. Either one is fixable, and both are worth 10 minutes to check.</p></div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-question" onclick="plFaq(this)">Do I qualify for ANCHOR or Stay NJ? <span class="faq-arrow"><i class="fas fa-chevron-down"></i></span></div>
-        <div class="faq-answer"><p>Very possibly. ANCHOR pays homeowners up to $1,500 and renters up to $700. Stay NJ pays seniors 65 and over up to $6,500. Most people who qualify never file for it. The <a href="/anchor-estimator.html">free estimator</a> takes about 90 seconds and tells you exactly what you're leaving on the table.</p></div>
-      </div>
+    <h2 class="lp-h2">Common questions</h2>
+    <div class="faq-teaser">
+      <p>Where the data comes from, why owner names are blank, what changed with the transfer fee, whether ANCHOR and Stay NJ stack. It's all on the FAQ page.</p>
+      <a href="/property/faq.html" class="faq-teaser-btn">Visit the FAQ page <i class="fas fa-arrow-right"></i></a>
     </div>
   </div>
 </section>
+
+<style>
+.faq-teaser{max-width:620px;margin:0 auto;text-align:center;padding:36px 28px;border:1px solid var(--border);border-radius:16px;background:#fff;}
+.faq-teaser p{margin:0 0 20px;color:var(--text);font-size:15.5px;line-height:1.6;}
+.faq-teaser-btn{display:inline-flex;align-items:center;gap:9px;background:var(--navy);color:#fff;font-weight:700;font-size:14.5px;padding:13px 24px;border-radius:10px;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;}
+.faq-teaser-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(14,34,72,.22);}
+.faq-teaser-btn i{font-size:12px;}
+</style>
 
 
 <!-- INSIGHTS -->
