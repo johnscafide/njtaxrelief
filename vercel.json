@@ -18,8 +18,6 @@
     {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
   ],
   "rewrites": [
-    {"source":"/bo","destination":"/property/bo/index.html"},
-    {"source":"/bo/","destination":"/property/bo/index.html"},
     {"source":"/property/insights/:slug.html","destination":"/api/insight?slug=:slug"},
     {"source":"/property/plays/agents/:slug/","destination":"/api/play?profession=agents&slug=:slug"},
     {"source":"/property/plays/mortgage/:slug/","destination":"/api/play?profession=mortgage&slug=:slug"},
