@@ -1,0 +1,10 @@
+(function(){'use strict';
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));let timer;
+function miniStats(){const brand=$('.ms-brand'),overview=$('.ms-overview');if(!brand||!overview||$('.ms4-workspace-mini'))return;const vals=$$('.ms-stat',overview).map(x=>({n:$('b',x)?.textContent?.trim()||'0',l:$('span',x)?.textContent?.trim()||''}));const campaigns=vals.find(x=>/campaign/i.test(x.l))?.n||'0',handoff=vals.find(x=>/handoff/i.test(x.l))?.n||'0';const box=document.createElement('div');box.className='ms4-workspace-mini';box.title='Campaign workspace summary';box.innerHTML=`<span><b>${campaigns}</b> campaigns</span><span><b>${handoff}</b> selected</span>`;brand.appendChild(box)}
+function promoteCreative(){const creative=$('#creative-studio'),grid=$('.ms-grid');if(!creative||!grid||creative.parentElement!==grid)return;const discovery=$('#ms-discovery');if(discovery&&discovery.parentElement===grid)discovery.insertAdjacentElement('afterend',creative);else grid.prepend(creative)}
+function trimStart(){const start=$('#ms4-start');if(!start)return;const h=$('h2',start),p=$('.ms4-start-head p',start);if(h)h.textContent='Start a direct-mail campaign';if(p)p.textContent='Choose an audience or jump straight into the postcard studio. Everything else appears when you need it.'}
+function relabel(){const guide=$('.ms4-guide-copy h2');if(guide)guide.textContent='Design, target and mail postcards';const copy=$('.ms4-guide-copy p');if(copy)copy.textContent='The Design Studio is your workspace. Audience and campaign tools connect into it.'}
+function enhance(){miniStats();promoteCreative();trimStart();relabel()}
+function init(){enhance();const app=$('#ms-app');if(app)new MutationObserver(()=>{clearTimeout(timer);timer=setTimeout(enhance,180)}).observe(app,{childList:true,subtree:true})}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,30));else setTimeout(init,30);
+})();
