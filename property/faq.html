@@ -68,8 +68,8 @@
 </script>
 </head>
 <body>
-<!-- SITE NAV -->
-<header class="wd-nav" id="wd-nav" style="position: sticky; top: 0; z-index: 1000; background-color: var(--bg); box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+<!-- SITE NAV -->x
+<header class="wd-nav" id="wd-nav" style="position: sticky; top: 0; z-index: 1000; background-color: var(--bg);">
   <div class="wd-nav-in">
     <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
       <i class="fas fa-bars"></i><span>Menu</span>
@@ -118,6 +118,16 @@
   .faqp-search input::placeholder{color:#1f1f1f;opacity:1;}
   .faqp-search input:focus{outline:none;}
   .faqp-search button{display:flex;align-items:center;justify-content:center;width:42px;height:42px;min-width:42px;background:transparent;border:2px solid #1f1f1f;border-radius:50%;color:#1f1f1f;font-size:20px;cursor:pointer;}
+
+  .wd-nav{background:transparent !important;box-shadow:none !important;}
+  .wd-nav .wd-public-trigger,
+  .wd-nav .wd-public-trigger i,
+  .wd-nav .wd-public-trigger span,
+  .wd-nav .wd-logo,
+  .wd-nav .wd-logo i,
+  .wd-nav a,
+  .wd-nav button{color:#1a2332 !important;text-shadow:none !important;}
+  .wd-nav .wd-public-trigger{border-color:rgba(26,35,50,.26) !important;}
 
   .faqp-wrap{max-width:1120px;margin:0 auto;padding:44px 24px 70px;display:grid;grid-template-columns:400px 1fr;gap:44px;align-items:start;}
   .faqp-side{position:sticky;top:90px;display:flex;flex-direction:column;gap:10px;}
