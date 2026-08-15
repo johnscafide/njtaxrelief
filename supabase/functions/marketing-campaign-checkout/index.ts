@@ -20,6 +20,8 @@ Deno.serve(async(req)=>{
   const uc=createClient(url,anon,{global:{headers:{Authorization:auth}},auth:{persistSession:false}}),admin=createClient(url,service,{auth:{persistSession:false}});
   const{data:{user},error:authError}=await uc.auth.getUser();
   if(authError||!user)return reply(req,401,{error:'Session could not be verified'});
+  const {data:isTest}=await admin.rpc('is_watchdog_test_account',{p_user_id:user.id});
+  if(isTest)return reply(req,403,{error:'Sandbox accounts cannot create real campaign billing.',code:'WATCHDOG_TEST_NO_REAL_SPEND'});
   const access=await uc.rpc('marketing_studio_bootstrap');
   if(access.error)return reply(req,403,{error:'Marketing Studio access required'});
   const plan=clean(access.data?.plan,30);
