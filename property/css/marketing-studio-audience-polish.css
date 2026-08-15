@@ -1,0 +1,62 @@
+/* Direct Mail Step 1 polish. Loaded last on the Audience page. */
+body[data-ms-wizard="audience"] .mw-stage{max-width:1480px;padding:42px 52px 58px}
+body[data-ms-wizard="audience"] .mw-stage-head{margin-bottom:24px}
+body[data-ms-wizard="audience"] .mw-stage-head p{display:none}
+body[data-ms-wizard="audience"] #ms-discovery.msa-shell{padding:32px!important;border-radius:24px!important}
+body[data-ms-wizard="audience"] .msa-intro{align-items:start;padding:0 0 22px;gap:32px}
+body[data-ms-wizard="audience"] .msa-intro h2{margin:4px 0 0;font-size:25px;line-height:1.2}
+body[data-ms-wizard="audience"] .msa-intro p,
+body[data-ms-wizard="audience"] .msa-mode small,
+body[data-ms-wizard="audience"] .msa-panel-head p{display:none}
+body[data-ms-wizard="audience"] .msa-limit{align-self:start;min-width:176px}
+body[data-ms-wizard="audience"] .msa-limit select{height:50px}
+body[data-ms-wizard="audience"] .msa-mode-grid{gap:14px;margin-bottom:30px}
+body[data-ms-wizard="audience"] .msa-mode{min-height:82px;padding:18px;align-items:center;border-radius:17px}
+body[data-ms-wizard="audience"] .msa-mode span{gap:0}
+body[data-ms-wizard="audience"] .msa-mode b{font-size:14px;line-height:1.25}
+body[data-ms-wizard="audience"] .msa-work{padding:30px;border-radius:22px;min-height:390px}
+body[data-ms-wizard="audience"] .msa-panel-head{margin-bottom:20px}
+body[data-ms-wizard="audience"] .msa-panel-head h3{margin:5px 0 0;font-size:22px}
+body[data-ms-wizard="audience"] .msa-map-controls{gap:18px}
+body[data-ms-wizard="audience"] .msa-filter-row{margin:18px 0}
+body[data-ms-wizard="audience"] .msa-map-layout{gap:18px}
+body[data-ms-wizard="audience"] .msa-map,
+body[data-ms-wizard="audience"] .msa-map-list{border-radius:17px}
+body[data-ms-wizard="audience"] .msa-map-empty span{display:none}
+body[data-ms-wizard="audience"] .msa-empty{padding:30px}
+
+body[data-ms-wizard="audience"] .ms-credit-banner{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:18px;align-items:center;margin:0 0 28px;padding:24px 26px;border:0;border-radius:22px;background:#fff4cf;color:#283348;box-shadow:0 10px 28px rgba(42,50,67,.08)}
+body[data-ms-wizard="audience"] .ms-credit-banner>i{width:58px;height:58px;border-radius:18px;background:#fff;color:#2f6fed;font-size:22px;box-shadow:0 6px 18px rgba(31,47,76,.09)}
+body[data-ms-wizard="audience"] .ms-credit-banner>div{display:grid;gap:5px}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-kicker{font:800 10px 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a5a00}
+body[data-ms-wizard="audience"] .ms-credit-banner b{font:800 23px/1.15 'Plus Jakarta Sans',sans-serif;color:#172033}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-tiers{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-tiers strong{display:inline-flex;align-items:center;min-height:30px;padding:5px 10px;border-radius:999px;background:#fff;font:800 12px 'Plus Jakarta Sans',sans-serif;color:#263349}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-note{font-size:12px;color:#6b6250}
+body[data-ms-wizard="audience"] .ms-credit-banner>a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 15px;border-radius:11px;background:#172033;color:#fff;font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap}
+body[data-ms-wizard="audience"] .ms-credit-banner>small{font-size:12px;font-weight:800;color:#385d48;white-space:nowrap}
+body[data-ms-wizard="audience"] .ms-credit-banner.active{background:#e8f5ec}
+body[data-ms-wizard="audience"] .ms-credit-banner.active .ms-credit-kicker{color:#24754b}
+body[data-ms-wizard="audience"] .ms-credit-banner.active>i{color:#24754b}
+
+@media(max-width:980px){
+  body[data-ms-wizard="audience"] .mw-stage{padding:28px 24px 42px}
+  body[data-ms-wizard="audience"] #ms-discovery.msa-shell{padding:26px!important}
+  body[data-ms-wizard="audience"] .ms-credit-banner{grid-template-columns:56px 1fr;padding:20px 22px}
+  body[data-ms-wizard="audience"] .ms-credit-banner>a,
+  body[data-ms-wizard="audience"] .ms-credit-banner>small{grid-column:2;justify-self:start}
+}
+@media(max-width:620px){
+  body[data-ms-wizard="audience"] .mw-stage{padding:20px 14px 32px}
+  body[data-ms-wizard="audience"] #ms-discovery.msa-shell{padding:18px!important;border-radius:18px!important}
+  body[data-ms-wizard="audience"] .msa-intro{grid-template-columns:1fr;gap:14px}
+  body[data-ms-wizard="audience"] .msa-limit{max-width:none;width:100%}
+  body[data-ms-wizard="audience"] .msa-mode-grid{margin-right:-18px;margin-bottom:22px}
+  body[data-ms-wizard="audience"] .msa-mode{min-width:210px;min-height:76px;padding:15px}
+  body[data-ms-wizard="audience"] .msa-work{padding:18px}
+  body[data-ms-wizard="audience"] .ms-credit-banner{grid-template-columns:48px 1fr;gap:13px;padding:18px;border-radius:18px}
+  body[data-ms-wizard="audience"] .ms-credit-banner>i{width:46px;height:46px;border-radius:14px;font-size:18px}
+  body[data-ms-wizard="audience"] .ms-credit-banner b{font-size:19px}
+  body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-tiers{gap:6px}
+  body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-tiers strong{font-size:11px}
+}
