@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Lead Intelligence | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/backoffice/backoffice.css">
+</head>
+<body>
+  <div class="bo-app">
+    <aside class="bo-sidebar">
+      <a class="bo-brand" href="/property/dashboard.html" aria-label="Watchdog dashboard">
+        <span class="bo-mark">W</span>
+        <span><b>WATCHDOG</b><small>Backoffice</small></span>
+      </a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a class="active" href="#leads"><span>01</span>Lead Intelligence</a>
+        <a href="#integrations"><span>02</span>Integrations</a>
+        <a href="#activity"><span>03</span>Activity</a>
+      </nav>
+      <div class="bo-sidebar-foot">
+        <span class="bo-private-dot"></span>
+        <div><b>Developer only</b><small>Protected by Supabase RLS</small></div>
+        <a href="/property/dashboard.html">Back to dashboard</a>
+      </div>
+    </aside>
+
+    <main class="bo-main">
+      <header class="bo-topbar">
+        <div>
+          <span class="bo-kicker">OPERATIONS / LEADS</span>
+          <h1>Lead Intelligence</h1>
+          <p>One private queue for Watchdog leads, verification, enrichment and CRM delivery.</p>
+        </div>
+        <div class="bo-top-actions">
+          <button class="bo-button bo-button-quiet" id="bo-refresh" type="button">Refresh</button>
+          <button class="bo-button bo-button-primary" id="bo-add" type="button">+ Add lead</button>
+        </div>
+      </header>
+
+      <section class="bo-stats" aria-label="Lead summary">
+        <article><span>Total leads</span><strong id="stat-total">—</strong><small>all sources</small></article>
+        <article><span>Needs review</span><strong id="stat-review">—</strong><small>verification or processing</small></article>
+        <article><span>CRM synced</span><strong id="stat-synced">—</strong><small>BoldTrail records</small></article>
+        <article><span>High intent</span><strong id="stat-high-intent">—</strong><small>intent 40+</small></article>
+      </section>
+
+      <section class="bo-integrations" id="integrations">
+        <div class="bo-section-head">
+          <div><span>PIPELINE</span><h2>Automation connections</h2></div>
+          <small>Providers stay disabled until credentials are configured server-side.</small>
+        </div>
+        <div class="bo-integration-grid">
+          <article>
+            <div class="bo-provider-icon">A</div>
+            <div><b>Address validation</b><span>Google Address Validation</span></div>
+            <em class="pending">Not connected</em>
+          </article>
+          <article>
+            <div class="bo-provider-icon">I</div>
+            <div><b>Identity cross-check</b><span>Licensed enrichment provider</span></div>
+            <em class="pending">Not connected</em>
+          </article>
+          <article>
+            <div class="bo-provider-icon">B</div>
+            <div><b>BoldTrail CRM</b><span>Contact, hashtags and notes</span></div>
+            <em class="pending">Not connected</em>
+          </article>
+          <article>
+            <div class="bo-provider-icon">W</div>
+            <div><b>Secure ingest</b><span>Supabase Edge Function</span></div>
+            <em id="ingest-status" class="pending">Credential required</em>
+          </article>
+        </div>
+      </section>
+
+      <section class="bo-workspace" id="leads">
+        <div class="bo-queue">
+          <div class="bo-queue-head">
+            <div><span>LEAD QUEUE</span><h2>Incoming</h2></div>
+            <span id="queue-count" class="bo-count">0</span>
+          </div>
+          <div class="bo-filters">
+            <label class="bo-search"><span class="sr-only">Search leads</span><input id="lead-search" type="search" placeholder="Search name, email, phone or address"></label>
+            <select id="lead-filter" aria-label="Filter leads">
+              <option value="all">All statuses</option>
+              <option value="attention">Needs attention</option>
+              <option value="new">New</option>
+              <option value="synced">CRM synced</option>
+              <option value="high-intent">Intent 40+</option>
+            </select>
+          </div>
+          <div id="lead-list" class="bo-lead-list" aria-live="polite">
+            <div class="bo-loading">Loading leads…</div>
+          </div>
+        </div>
+
+        <div class="bo-detail" id="lead-detail">
+          <div class="bo-empty-detail">
+            <span>LEAD DETAIL</span>
+            <h2>Select a lead</h2>
+            <p>Submitted information stays separate from standardized and third-party data so you can always see what the consumer actually provided.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bo-activity" id="activity">
+        <div class="bo-section-head">
+          <div><span>AUDIT</span><h2>How this backoffice handles lead data</h2></div>
+        </div>
+        <div class="bo-principles">
+          <article><b>Original stays original</b><p>Consumer-submitted address, phone and email are never silently replaced by enriched values.</p></article>
+          <article><b>Server-side credentials</b><p>CRM and enrichment secrets are never stored in browser code or committed to GitHub.</p></article>
+          <article><b>Controlled enrichment</b><p>Third-party matches are treated as supporting intelligence, not as proof of marketing consent.</p></article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="lead-dialog" class="bo-dialog">
+    <form id="lead-form" method="dialog">
+      <div class="bo-dialog-head">
+        <div><span>MANUAL INGEST</span><h2>Add a lead</h2><p>Useful for testing the pipeline before automated sources are connected.</p></div>
+        <button type="button" class="bo-close" id="lead-dialog-close" aria-label="Close">×</button>
+      </div>
+      <div class="bo-form-grid">
+        <label class="wide">Full name<input name="full_name" autocomplete="name" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email"></label>
+        <label>Phone<input name="phone" autocomplete="tel"></label>
+        <label class="wide">Submitted address<input name="submitted_address" autocomplete="street-address"></label>
+        <label>Tenure<select name="tenure"><option value="">Unknown</option><option>Homeowner</option><option>Renter</option></select></label>
+        <label>Household income<input name="household_income" placeholder="Under $150,000"></label>
+        <label>Program<input name="program" value="ANCHOR Estimator"></label>
+        <label>Intent score<input name="intent_score" type="number" min="0" max="100" step="1"></label>
+        <label>Estimated benefit<input name="estimated_benefit" type="number" min="0" step="0.01" placeholder="1500"></label>
+        <label class="wide">Source<input name="source" value="manual"></label>
+        <label class="wide">Notes<textarea name="notes" rows="3" placeholder="Internal notes only"></textarea></label>
+      </div>
+      <div class="bo-dialog-actions">
+        <span id="lead-form-error" role="alert"></span>
+        <button type="button" class="bo-button bo-button-quiet" id="lead-dialog-cancel">Cancel</button>
+        <button type="submit" class="bo-button bo-button-primary" id="lead-save">Save lead</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="bo-toast" class="bo-toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice.js" defer></script>
+</body>
+</html>
