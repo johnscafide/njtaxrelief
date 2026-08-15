@@ -61,8 +61,8 @@
         <div class="bo-section-head"><div><span>PIPELINE</span><h2>Connections & exports</h2></div><small>Credentials stay server-side. CSV export remains available even if direct CRM API access is added later.</small></div>
         <div class="bo-integration-grid">
           <article><div class="bo-provider-icon">G</div><div><b>Google Address Validation</b><span>Standardize and verify submitted addresses</span></div><em id="google-status" class="pending">Connect API key</em><button type="button" class="bo-card-action" id="google-configure" onclick="document.getElementById('bo-settings').click()">Configure</button></article>
-          <article><div class="bo-provider-icon">J</div><div><b>John BoldTrail</b><span>Download import-ready lead CSV</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-john">Export new</button></article>
-          <article><div class="bo-provider-icon">W</div><div><b>Wife BoldTrail</b><span>Separate assignment and export history</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-wife">Export new</button></article>
+         <article><div class="bo-provider-icon">J</div><div><b>John BoldTrail</b><span>Direct sync or import-ready CSV</span></div><em id="john-boldtrail-status" class="pending">Not connected</em><button type="button" class="bo-card-action" id="export-john">Export CSV</button></article>
+          <article><div class="bo-provider-icon">W</div><div><b>Wife BoldTrail</b><span>Direct sync or import-ready CSV</span></div><em id="wife-boldtrail-status" class="pending">Not connected</em><button type="button" class="bo-card-action" id="export-wife">Export CSV</button></article>
           <article><div class="bo-provider-icon">S</div><div><b>Backoffice security</b><span>Watchdog developer authentication + expiring sessions</span></div><em id="secure-status" class="connected">Developer gated</em><button type="button" class="bo-card-action" disabled>Developer access</button></article>
         </div>
       </section>
@@ -70,9 +70,8 @@
       <section class="bo-bulk" id="bulk-actions">
         <b id="bulk-count">Select leads</b><span>Assign selected to</span>
         <select id="bulk-owner"><option value="john">John</option><option value="wife">Wife</option></select>
-        <button class="bo-button bo-button-quiet" id="bulk-assign" type="button" disabled>Assign</button>
-        <button class="bo-button bo-button-primary" id="bulk-export" type="button" disabled>Export selected CSV</button>
-      </section>
+        <button class="bo-button bo-button-quiet" id="bulk-export" type="button" disabled>Export selected CSV</button>
+        <button class="bo-button bo-button-primary" id="bulk-sync-boldtrail" type="button" disabled>Sync selected to BoldTrail</button>      </section>
 
       <section class="bo-workspace" id="leads">
         <div class="bo-queue">
