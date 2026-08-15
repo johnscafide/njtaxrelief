@@ -1,0 +1,48 @@
+/* Direct Mail 4.0 visual system. Loaded last on every wizard page. */
+body[data-ms-wizard] .mw-stage{max-width:1480px;padding:42px 52px 58px}
+body[data-ms-wizard] .mw-stage-head{margin-bottom:24px}
+body[data-ms-wizard] .mw-stage-head p{display:none!important}
+body[data-ms-wizard] .mw-stage-head h1{font-size:clamp(34px,4vw,56px)!important}
+body[data-ms-wizard] .mw-content>.ms-card,body[data-ms-wizard] .mw-content>section{border:0!important;border-radius:24px!important;box-shadow:0 12px 34px rgba(22,35,58,.07)!important}
+body[data-ms-wizard] .mw-nav{margin-top:26px}
+body[data-ms-wizard] .mw-side-note{display:none!important}
+body[data-ms-wizard] .ms-credit-banner{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:18px;align-items:center;margin:0 0 28px;padding:24px 26px;border:0!important;border-radius:22px!important;background:#fff4cf!important;color:#283348;box-shadow:0 10px 28px rgba(42,50,67,.08)!important}
+body[data-ms-wizard] .ms-credit-banner>i{width:58px;height:58px;border-radius:18px;background:#fff;color:#2f6fed;font-size:22px;display:grid;place-items:center;box-shadow:0 6px 18px rgba(31,47,76,.09)}
+body[data-ms-wizard] .ms-credit-banner>div{display:grid;gap:5px}
+body[data-ms-wizard] .ms-credit-banner .ms-credit-kicker{font:800 10px 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7a5a00}
+body[data-ms-wizard] .ms-credit-banner b{font:800 23px/1.15 'Plus Jakarta Sans',sans-serif;color:#172033}
+body[data-ms-wizard] .ms-credit-banner .ms-credit-tiers{display:flex;gap:9px;flex-wrap:wrap;margin-top:4px}
+body[data-ms-wizard] .ms-credit-banner .ms-credit-tiers strong{display:inline-flex;align-items:center;min-height:30px;padding:5px 10px;border-radius:999px;background:#fff;font:800 12px 'Plus Jakarta Sans',sans-serif;color:#263349}
+body[data-ms-wizard] .ms-credit-banner .ms-credit-note{font-size:12px;color:#6b6250}
+body[data-ms-wizard] .ms-credit-banner>a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 15px;border-radius:11px;background:#172033;color:#fff;font-size:12px;font-weight:800;text-decoration:none;white-space:nowrap}
+body[data-ms-wizard] .ms-credit-banner>small{font-size:12px;font-weight:800;color:#385d48;white-space:nowrap}
+body[data-ms-wizard] .ms-credit-banner.active{background:#e8f5ec!important}
+body[data-ms-wizard] .ms-credit-banner.active .ms-credit-kicker,body[data-ms-wizard] .ms-credit-banner.active>i{color:#24754b}
+body[data-ms-wizard="audience"] #ms-discovery.msa-shell{padding:32px!important;border-radius:24px!important}
+body[data-ms-wizard="audience"] .msa-intro{align-items:start;padding:0 0 22px;gap:32px}
+body[data-ms-wizard="audience"] .msa-intro h2{margin:4px 0 0;font-size:25px;line-height:1.2}
+body[data-ms-wizard="audience"] .msa-intro p,body[data-ms-wizard="audience"] .msa-panel-head p{display:none!important}
+body[data-ms-wizard="audience"] .msa-limit{align-self:start;min-width:176px}
+body[data-ms-wizard="audience"] .msa-limit select{height:50px}
+body[data-ms-wizard="audience"] .msa-mode-grid{gap:14px;margin-bottom:30px}
+body[data-ms-wizard="audience"] .msa-mode{min-height:78px;padding:18px;align-items:center;border-radius:17px;display:flex;gap:12px}
+body[data-ms-wizard="audience"] .msa-mode b{font-size:14px;line-height:1.25}
+body[data-ms-wizard="audience"] .msa-work{padding:30px;border-radius:22px;min-height:390px}
+body[data-ms-wizard="design"] .mw-template-chooser{background:#fff;padding:28px;border-radius:24px}
+body[data-ms-wizard="design"] .mw-choice-grid{gap:18px}
+body[data-ms-wizard="design"] .mw-choice{min-height:210px;padding:24px;border:0;background:#f9fafc;box-shadow:inset 0 0 0 1px #e8ebf0}
+body[data-ms-wizard="design"] .mw-choice i{width:54px;height:54px;font-size:22px}
+body[data-ms-wizard="design"] .mw-choice b{font-size:20px}
+body[data-ms-wizard="design"] .mw-choice span{font-size:13px}
+body[data-ms-wizard="design"] .pcmplus-tabs{margin-bottom:22px}
+body[data-ms-wizard="design"] #ms-pcm-sandbox{border:0!important;box-shadow:none!important;background:#f7f9fc!important}
+body[data-ms-wizard="design"] .ms-pcm-design-gallery{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:18px!important}
+body[data-ms-wizard="design"] .ms-pcm-design-card{border:0!important;border-radius:18px!important;overflow:hidden;box-shadow:0 7px 22px rgba(21,33,55,.08)!important;background:#fff!important}
+body[data-ms-wizard="design"] .ms-pcm-design-media{min-height:260px!important;border-radius:0!important}
+body[data-ms-wizard="design"] .ms-pcm-design-media img{width:100%;height:260px;object-fit:contain;background:#f2f5f9}
+body[data-ms-wizard="design"] .ms-pcm-design-copy{padding:18px!important}
+body[data-ms-wizard="design"] .ms-pcm-design-copy h5{font-size:18px!important}
+body[data-ms-wizard="customize"] #ms-production-v2,body[data-ms-wizard="recipients"] #ms3-recipient-builder,body[data-ms-wizard="review"] .mw-content>section{border-radius:24px!important}
+body[data-ms-wizard="review"] .mw-content{display:grid;gap:18px}
+@media(max-width:1100px){body[data-ms-wizard] .mw-stage{padding:32px 28px 48px}body[data-ms-wizard="design"] .ms-pcm-design-gallery{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){body[data-ms-wizard] .mw-stage{padding:22px 14px 36px}body[data-ms-wizard] .ms-credit-banner{grid-template-columns:48px 1fr;gap:13px;padding:18px;border-radius:18px!important}body[data-ms-wizard] .ms-credit-banner>i{width:46px;height:46px;border-radius:14px;font-size:18px}body[data-ms-wizard] .ms-credit-banner b{font-size:19px}body[data-ms-wizard] .ms-credit-banner>a,body[data-ms-wizard] .ms-credit-banner>small{grid-column:2;justify-self:start}body[data-ms-wizard="audience"] #ms-discovery.msa-shell{padding:18px!important;border-radius:18px!important}body[data-ms-wizard="audience"] .msa-intro{grid-template-columns:1fr;gap:14px}body[data-ms-wizard="audience"] .msa-limit{max-width:none;width:100%}body[data-ms-wizard="audience"] .msa-mode-grid{margin-right:-18px;margin-bottom:22px}body[data-ms-wizard="audience"] .msa-mode{min-width:190px;min-height:72px;padding:15px}body[data-ms-wizard="audience"] .msa-work{padding:18px}body[data-ms-wizard="design"] .mw-template-chooser{padding:18px}body[data-ms-wizard="design"] .ms-pcm-design-gallery{grid-template-columns:1fr!important}}
