@@ -16,6 +16,8 @@
     {"source":"/property/towns/:path*","destination":"/towns/:path*","permanent":true},
     {"source":"/insights.html","destination":"/property/insights/","permanent":true},
     {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
+    {"source":"/bo","destination":"/property/backoffice/","permanent":false},
+    {"source":"/bo/","destination":"/property/backoffice/","permanent":false}  
   ],
   "rewrites": [
     {"source":"/property/insights/:slug.html","destination":"/api/insight?slug=:slug"},
