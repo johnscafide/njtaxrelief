@@ -34,14 +34,14 @@ function num(value: unknown) {
 }
 
 function saleYear(value: unknown) {
-  const text = String(value ?? "");
-  const full = text.match(/(19|20)\d{2}/);
-  if (full) return Number(full[0]);
+  const text = String(value ?? "").trim();
   if (/^\d{6}$/.test(text)) {
-    const year = Number(text.slice(-2));
-    return year + (year > 50 ? 1900 : 2000);
+    const yy = Number(text.slice(0, 2));
+    const currentYY = new Date().getFullYear() % 100;
+    return yy <= currentYY ? 2000 + yy : 1900 + yy;
   }
-  return null;
+  const full = text.match(/(19|20)\d{2}/);
+  return full ? Number(full[0]) : null;
 }
 
 function normalize(attributes: any, geometry: any) {
@@ -236,6 +236,8 @@ Deno.serve(async (req) => {
           source: "NJ Office of GIS statewide Parcels and MOD-IV Composite",
           purpose: "marketing_audience_map_preview",
           cached_at: now,
+          deed_date_format: "YYMMDD",
+          deed_parser_version: 2,
         },
       }));
       const { error: cacheError } = await admin.from("property_lookups").upsert(cache, { onConflict: "pams_pin" });
