@@ -14,33 +14,53 @@ function paint(message){
   if(title)title.textContent='Watchdog Backoffice';
   if(copy)copy.textContent='Authentication is temporarily disabled. Backoffice opens automatically.';
   if(status&&message)status.textContent=message;
-  if(secure){secure.textContent='Open access';secure.className='pending'}
+  if(secure){
+    secure.textContent='Open access';
+    secure.className='pending';
+  }
 }
 
-async function sessionStillWorks(token){
-  if(!token)return false;
+async function sessionStillWorks(sessionToken){
+  if(!sessionToken)return false;
   try{
-    const res=await fetch(BACKOFFICE_API,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({action:'session'})});
+    const res=await fetch(BACKOFFICE_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+sessionToken},
+      body:JSON.stringify({action:'session'})
+    });
     return res.ok;
-  }catch{return false}
+  }catch{
+    return false;
+  }
 }
 
 async function openPublicSession(){
   if(working)return;
   working=true;
   const btn=$('#bo-dev-login');
-  if(btn){btn.disabled=true;btn.textContent='Opening Backoffice…'}
+  if(btn){btn.disabled=true;btn.textContent='Opening Backoffice…';}
   try{
     paint('Opening Backoffice…');
-    const res=await fetch(SESSION_API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({actor:'john'})});
-    let data={};try{data=await res.json()}catch{}
+    const res=await fetch(SESSION_API,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({actor:'john'})
+    });
+    let data={};
+    try{data=await res.json();}catch{}
     if(!res.ok||!data.token)throw new Error(data.error||'Could not open Backoffice.');
     sessionStorage.setItem(SESSION_KEY,data.token);
     location.reload();
   }catch(ex){
     paint(ex.message||'Backoffice could not open.');
-    if(btn){btn.textContent='Try again';btn.disabled=false;btn.onclick=openPublicSession}
-  }finally{working=false}
+    if(btn){
+      btn.textContent='Try again';
+      btn.disabled=false;
+      btn.onclick=openPublicSession;
+    }
+  }finally{
+    working=false;
+  }
 }
 
 async function install(){
@@ -50,14 +70,12 @@ async function install(){
   if(rotate)rotate.hidden=true;
   paint('Opening Backoffice…');
 
-  const secure=$('#secure-status');
-  if(secure){
-    const observer=new MutationObserver(()=>paint());
-    observer.observe(secure,{subtree:true,childList:true,characterData:true,attributes:true});
+  const existing=sessionStorage.getItem(SESSION_KEY)||'';
+  if(await sessionStillWorks(existing)){
+    paint('Loading leads…');
+    return;
   }
 
-  const existing=sessionStorage.getItem(SESSION_KEY)||'';
-  if(await sessionStillWorks(existing))return;
   sessionStorage.removeItem(SESSION_KEY);
   await openPublicSession();
 }
