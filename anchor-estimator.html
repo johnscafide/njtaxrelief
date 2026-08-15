@@ -986,6 +986,29 @@
   cursor:pointer;padding:4px 6px;}
 .est-verify-bar-close:hover{color:#1a3a6b;}
 body.est-verify-bar-open{padding-bottom:88px;}
+
+/* ── Third-party disclosure consent bar ── */
+.est-consent-bar{position:fixed;left:0;right:0;bottom:0;z-index:950;
+  background:#0e2248;color:#fff;
+  box-shadow:0 -8px 28px rgba(14,34,72,.28);
+  transform:translateY(110%);transition:transform .3s ease;}
+.est-consent-bar.show{transform:translateY(0);}
+.est-consent-bar-inner{max-width:1100px;margin:0 auto;padding:16px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.est-consent-bar-copy{display:flex;align-items:flex-start;gap:12px;flex:1;min-width:260px;}
+.est-consent-bar-copy i{font-size:18px;color:#c9a227;margin-top:2px;flex-shrink:0;}
+.est-consent-bar-text{font-size:13px;line-height:1.55;color:#dde4f0;}
+.est-consent-bar-text strong{color:#fff;}
+.est-consent-bar-action{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.est-consent-bar-action .est-btn-back{background:transparent;border:1px solid #4a5b80;color:#c3cfe4;
+  padding:11px 16px;border-radius:8px;}
+.est-consent-bar-action .est-btn-back:hover{background:rgba(255,255,255,.06);}
+.est-consent-bar-action .est-btn-next{padding:11px 18px;white-space:nowrap;}
+@media (max-width:640px){
+  .est-consent-bar-inner{padding:14px;flex-direction:column;align-items:stretch;}
+  .est-consent-bar-action{width:100%;}
+  .est-consent-bar-action button{flex:1;justify-content:center;}
+}
 @media (max-width:640px){
   .est-verify-bar-inner{padding:12px 14px;gap:10px;}
   .est-verify-bar-action{width:100%;justify-content:space-between;}
@@ -1027,6 +1050,22 @@ body.est-verify-bar-open{padding-bottom:88px;}
   </div>
   <div class="est-side-cta"><i class="fas fa-house"></i> List With Heather</div>
 </a>
+
+<!-- THIRD-PARTY DISCLOSURE CONSENT BAR (replaces the old anchor-estimator-consent.html page) -->
+<div class="est-consent-bar" id="est-consent-bar" role="dialog" aria-live="polite">
+  <div class="est-consent-bar-inner">
+    <div class="est-consent-bar-copy">
+      <i class="fas fa-circle-info"></i>
+      <div class="est-consent-bar-text">
+        This is an independent, third-party estimator built by a licensed NJ tax professional and real estate agent. It is <strong>not operated by, affiliated with, or endorsed by the State of New Jersey</strong> or the NJ Division of Taxation. Estimates here are unofficial; file your actual ANCHOR/Stay NJ benefit through the state.
+      </div>
+    </div>
+    <div class="est-consent-bar-action">
+      <button type="button" class="est-btn-back" id="est-consent-reject" onclick="estConsentReject()">Reject</button>
+      <button type="button" class="est-btn-next gold" id="est-consent-accept" onclick="estConsentAccept()">Accept &amp; Continue</button>
+    </div>
+  </div>
+</div>
 
 <!-- STICKY EMAIL VERIFICATION BAR (replaces the old full-screen step) -->
 <div class="est-verify-bar" id="est-verify-bar" role="dialog" aria-live="polite">
@@ -1773,6 +1812,32 @@ body.est-verify-bar-open{padding-bottom:88px;}
     if (bar) bar.classList.remove('show');
     document.body.classList.remove('est-verify-bar-open');
   };
+
+  // ── THIRD-PARTY DISCLOSURE CONSENT BAR ────────────
+  var CONSENT_KEY = 'anchorEstimatorConsent';
+
+  function estInitConsentBar() {
+    var accepted;
+    try { accepted = localStorage.getItem(CONSENT_KEY); } catch (e) { accepted = null; }
+    if (accepted === 'accepted') return;
+    var bar = document.getElementById('est-consent-bar');
+    if (bar) bar.classList.add('show');
+  }
+
+  window.estConsentAccept = function() {
+    try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch (e) {}
+    var bar = document.getElementById('est-consent-bar');
+    if (bar) bar.classList.remove('show');
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_disclosure_accepted', {});
+  };
+
+  window.estConsentReject = function() {
+    try { localStorage.setItem(CONSENT_KEY, 'rejected'); } catch (e) {}
+    if (window.AnchorFunnel) window.AnchorFunnel.track('anchor_disclosure_rejected', {});
+    window.location.href = 'https://www.nj.gov/treasury/taxation/relief.shtml';
+  };
+
+  estInitConsentBar();
 
   // ── EMAIL VERIFICATION GATE ───────────────────────
 
