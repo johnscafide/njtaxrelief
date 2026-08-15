@@ -962,6 +962,35 @@
 .est-linkbtn{background:none;border:none;padding:0;cursor:pointer;
   font:inherit;font-size:13px;color:#1a3a6b;text-decoration:underline;}
 .est-linkbtn[disabled]{color:#a0a7b4;cursor:default;text-decoration:none;}
+
+/* ── Sticky bottom verification bar (replaces the old full-screen step) ── */
+.est-verify-bar{position:fixed;left:0;right:0;bottom:0;z-index:900;
+  background:#fff;border-top:1px solid #d5dae3;
+  box-shadow:0 -8px 28px rgba(14,34,72,.14);
+  transform:translateY(110%);transition:transform .3s ease;}
+.est-verify-bar.show{transform:translateY(0);}
+.est-verify-bar-inner{max-width:1100px;margin:0 auto;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;}
+.est-verify-bar-copy{display:flex;align-items:center;gap:12px;min-width:240px;flex:1;}
+.est-verify-bar-copy i{font-size:20px;color:#c9a227;flex-shrink:0;}
+.est-verify-bar-title{font-size:14.5px;font-weight:700;color:#1a3a6b;line-height:1.35;}
+.est-verify-bar-sub{font-size:12.5px;color:#5a6070;margin-top:2px;min-height:16px;}
+.est-verify-bar-sub.err{color:#c0392b;}
+.est-verify-bar-sub.ok{color:#1e7d46;}
+.est-verify-bar-action{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.est-code-input.bar{width:140px;max-width:140px;font-size:20px;padding:10px 8px;
+  letter-spacing:.28em;text-indent:.28em;}
+.est-verify-bar-action .est-btn-next{padding:11px 18px;white-space:nowrap;}
+.est-verify-bar-action .est-linkbtn{font-size:13px;}
+.est-verify-bar-close{background:none;border:none;color:#8a93a6;font-size:16px;
+  cursor:pointer;padding:4px 6px;}
+.est-verify-bar-close:hover{color:#1a3a6b;}
+body.est-verify-bar-open{padding-bottom:88px;}
+@media (max-width:640px){
+  .est-verify-bar-inner{padding:12px 14px;gap:10px;}
+  .est-verify-bar-action{width:100%;justify-content:space-between;}
+  .est-code-input.bar{flex:1;min-width:0;width:auto;}
+}
 </style>
   <!-- Microsoft Clarity -->
   <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>
@@ -998,6 +1027,30 @@
   </div>
   <div class="est-side-cta"><i class="fas fa-house"></i> List With Heather</div>
 </a>
+
+<!-- STICKY EMAIL VERIFICATION BAR (replaces the old full-screen step) -->
+<div class="est-verify-bar" id="est-verify-bar" role="dialog" aria-live="polite">
+  <div class="est-verify-bar-inner">
+    <div class="est-verify-bar-copy">
+      <i class="fas fa-envelope-circle-check"></i>
+      <div>
+        <div class="est-verify-bar-title" id="est-verify-target">Check your email for a code</div>
+        <div class="est-verify-bar-sub" id="est-verify-msg"></div>
+      </div>
+    </div>
+    <div class="est-verify-bar-action">
+      <input class="est-code-input bar" id="est-code" type="text" inputmode="numeric"
+             autocomplete="one-time-code" maxlength="6" placeholder="000000">
+      <button class="est-btn-next gold" id="est-verify-btn" onclick="estVerifyCheck()">
+        <i class="fas fa-lock-open"></i> Unlock
+      </button>
+      <button type="button" class="est-linkbtn" id="est-resend" onclick="estVerifySend(false)">Resend</button>
+      <button type="button" class="est-verify-bar-close" onclick="estCloseVerifyBar()" aria-label="Close">
+        <i class="fas fa-xmark"></i>
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- DEADLINE COUNTDOWN ALERT -->
 <div class="est-deadline-bar">
@@ -1262,34 +1315,6 @@
         <div class="est-nav" style="margin-top:20px;">
           <button class="est-btn-back" onclick="estBack(6)"><i class="fas fa-arrow-left"></i> Back</button>
           <button class="est-btn-next gold" onclick="estSubmit()"><i class="fas fa-chart-bar"></i> See My Benefit</button>
-        </div>
-      </div>
-
-      <!-- Step 6.5: Email verification -->
-      <div class="est-step" id="est-step6v">
-        <div class="est-q">Check your email</div>
-        <div class="est-hint">We sent a 6-digit code. Enter it to unlock your estimate.</div>
-
-        <div class="est-lead-wrap">
-          <div class="est-verify-target" id="est-verify-target"></div>
-
-          <div class="est-code-row">
-            <input class="est-code-input" id="est-code" type="text" inputmode="numeric"
-                   autocomplete="one-time-code" maxlength="6" placeholder="000000">
-          </div>
-
-          <div class="est-verify-msg" id="est-verify-msg"></div>
-
-          <button class="est-btn-next gold" id="est-verify-btn"
-                  style="width:100%;justify-content:center;" onclick="estVerifyCheck()">
-            <i class="fas fa-lock-open"></i> Verify &amp; See My Benefit
-          </button>
-
-          <div class="est-verify-links">
-            <button type="button" class="est-linkbtn" id="est-resend" onclick="estVerifySend(false)">Resend code</button>
-            <span class="est-verify-sep">&middot;</span>
-            <button type="button" class="est-linkbtn" onclick="showStep(6)">Wrong email?</button>
-          </div>
         </div>
       </div>
 
@@ -1733,8 +1758,20 @@
     if (codeEl) { codeEl.value = ''; codeEl.classList.remove('err'); }
     estVerifyMsg('', '');
 
-    showStep('6v');
+    estShowVerifyBar();
     estVerifySend(true);
+  };
+
+  window.estShowVerifyBar = function() {
+    var bar = document.getElementById('est-verify-bar');
+    if (bar) bar.classList.add('show');
+    document.body.classList.add('est-verify-bar-open');
+  };
+
+  window.estCloseVerifyBar = function() {
+    var bar = document.getElementById('est-verify-bar');
+    if (bar) bar.classList.remove('show');
+    document.body.classList.remove('est-verify-bar-open');
   };
 
   // ── EMAIL VERIFICATION GATE ───────────────────────
@@ -1743,7 +1780,7 @@
     var el = document.getElementById('est-verify-msg');
     if (!el) return;
     el.textContent = text || '';
-    el.className = 'est-verify-msg' + (kind ? ' ' + kind : '');
+    el.className = 'est-verify-bar-sub' + (kind ? ' ' + kind : '');
   }
 
   window.estVerifySend = function(initial) {
@@ -1827,6 +1864,7 @@
   // ── RESULT DELIVERY (runs only after a verified code) ────
 
   function estDeliverResult() {
+    estCloseVerifyBar();
     var L = pendingLead || {};
     var incomeLabel = answers.income === 'low' ? 'Under $150,000'
                     : (answers.income === 'mid' ? '$150,001\u2013$250,000' : 'Over $250,000');
