@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Lead Intelligence | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/backoffice/backoffice.css">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-secure.css">
+</head>
+<body>
+  <section class="bo-auth" id="bo-auth" hidden>
+    <div class="bo-auth-card">
+      <a class="bo-auth-brand" href="/property/"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Backoffice</small></span></a>
+      <span class="bo-kicker" id="bo-auth-kicker">BACKOFFICE</span>
+      <h1 id="bo-auth-title">Watchdog Backoffice</h1>
+      <p id="bo-auth-copy">Authentication is temporarily disabled. Backoffice opens automatically.</p>
+      <form id="bo-auth-form" data-mode="login" hidden>
+        <label>Who's signing in?
+          <select name="actor"><option value="john">John</option><option value="wife">Wife</option></select>
+        </label>
+        <label>Shared Backoffice key<input name="key" type="password" autocomplete="off" minlength="14"></label>
+        <label id="bo-auth-confirm-wrap" hidden>Confirm shared key<input name="confirm" type="password" autocomplete="new-password" minlength="14"></label>
+        <p class="bo-auth-dev" id="bo-dev-hint" hidden><button type="button" id="bo-signin-dev">Sign in to Watchdog</button></p>
+        <div id="bo-auth-error" class="bo-form-error" role="alert"></div>
+        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-auth-submit" type="submit">Unlock Backoffice</button>
+      </form>
+      <div id="bo-dev-access">
+        <p id="bo-dev-access-status" style="margin:0 0 16px;color:#617184">Opening Backoffice…</p>
+        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-dev-login" type="button">Try again</button>
+      </div>
+      <small class="bo-auth-foot">Temporary open-access troubleshooting mode.</small>
+    </div>
+  </section>
+
+  <div class="bo-app" id="bo-app" hidden>
+    <aside class="bo-sidebar">
+      <a class="bo-brand" href="/property/dashboard.html" aria-label="Watchdog dashboard"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice"><a class="active" href="#leads"><span>01</span>Lead Intelligence</a><a href="#integrations"><span>02</span>Integrations</a><a href="#activity"><span>03</span>Activity</a></nav>
+      <div class="bo-sidebar-foot"><span class="bo-private-dot"></span><div><b>Backoffice session</b><small>Session as <span id="bo-actor">—</span></small></div><button type="button" id="bo-logout">Reset session</button></div>
+    </aside>
+
+    <main class="bo-main">
+      <header class="bo-topbar">
+        <div><span class="bo-kicker">OPERATIONS / LEADS</span><h1>Lead Intelligence</h1><p>One queue for Watchdog leads, Google address validation and two BoldTrail export workflows.</p></div>
+        <div class="bo-top-actions"><button class="bo-button bo-button-quiet" id="bo-settings" type="button">Settings</button><button class="bo-button bo-button-quiet" id="bo-refresh" type="button">Refresh</button><button class="bo-button bo-button-primary" id="bo-add" type="button">+ Add lead</button></div>
+      </header>
+
+      <section class="bo-stats" aria-label="Lead summary">
+        <article><span>Total leads</span><strong id="stat-total">—</strong><small>all sources</small></article>
+        <article><span>Needs review</span><strong id="stat-review">—</strong><small>address or processing</small></article>
+        <article><span>CSV exported</span><strong id="stat-exported">—</strong><small>BoldTrail handoffs</small></article>
+        <article><span>High intent</span><strong id="stat-high-intent">—</strong><small>intent 40+</small></article>
+      </section>
+
+      <section class="bo-integrations" id="integrations">
+        <div class="bo-section-head"><div><span>PIPELINE</span><h2>Connections & exports</h2></div><small>Credentials stay server-side. CSV export remains available even if direct CRM API access is added later.</small></div>
+        <div class="bo-integration-grid">
+          <article><div class="bo-provider-icon">G</div><div><b>Google Address Validation</b><span>Standardize and verify submitted addresses</span></div><em id="google-status" class="pending">Connect API key</em><button type="button" class="bo-card-action" id="google-configure" onclick="document.getElementById('bo-settings').click()">Configure</button></article>
+          <article><div class="bo-provider-icon">J</div><div><b>John BoldTrail</b><span>Download import-ready lead CSV</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-john">Export new</button></article>
+          <article><div class="bo-provider-icon">W</div><div><b>Wife BoldTrail</b><span>Separate assignment and export history</span></div><em class="connected">CSV ready</em><button type="button" class="bo-card-action" id="export-wife">Export new</button></article>
+          <article><div class="bo-provider-icon">S</div><div><b>Backoffice access</b><span>Authentication temporarily disabled for troubleshooting</span></div><em id="secure-status" class="pending">Open access</em><button type="button" class="bo-card-action" disabled>Temporary</button></article>
+        </div>
+      </section>
+
+      <section class="bo-bulk" id="bulk-actions">
+        <b id="bulk-count">Select leads</b><span>Assign selected to</span>
+        <select id="bulk-owner"><option value="john">John</option><option value="wife">Wife</option></select>
+        <button class="bo-button bo-button-quiet" id="bulk-assign" type="button" disabled>Assign</button>
+        <button class="bo-button bo-button-primary" id="bulk-export" type="button" disabled>Export selected CSV</button>
+      </section>
+
+      <section class="bo-workspace" id="leads">
+        <div class="bo-queue">
+          <div class="bo-queue-head"><div><span>LEAD QUEUE</span><h2>Incoming</h2></div><span id="queue-count" class="bo-count">0</span></div>
+          <div class="bo-filters">
+            <label class="bo-search"><span class="sr-only">Search leads</span><input id="lead-search" type="search" placeholder="Search name, email, phone or address"></label>
+            <select id="lead-filter" aria-label="Filter leads"><option value="all">All leads</option><option value="attention">Needs attention</option><option value="new">New</option><option value="exported">CSV exported</option><option value="high-intent">Intent 40+</option><option value="unassigned">Unassigned</option><option value="john">John</option><option value="wife">Wife</option></select>
+          </div>
+          <div id="lead-list" class="bo-lead-list" aria-live="polite"><div class="bo-loading">Loading leads…</div></div>
+        </div>
+        <div class="bo-detail" id="lead-detail"><div class="bo-empty-detail"><span>LEAD DETAIL</span><h2>Select a lead</h2><p>Submitted information stays separate from Google-standardized and third-party data.</p></div></div>
+      </section>
+
+      <section class="bo-activity" id="activity">
+        <div class="bo-section-head"><div><span>AUDIT</span><h2>Backoffice rules</h2></div></div>
+        <div class="bo-principles"><article><b>Original stays original</b><p>Consumer-submitted contact data is preserved even when Google returns a standardized address.</p></article><article><b>Separate CRM ownership</b><p>Every lead can be unassigned, assigned to John, or assigned to Wife before export.</p></article><article><b>Export history</b><p>Each generated CSV is logged with its profile, included leads and timestamp so duplicate exports are visible.</p></article></div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="lead-dialog" class="bo-dialog">
+    <form id="lead-form">
+      <div class="bo-dialog-head"><div><span>MANUAL INGEST</span><h2>Add a lead</h2><p>Google validation runs automatically when connected and an address is supplied.</p></div><button type="button" class="bo-close" id="lead-dialog-close" aria-label="Close">×</button></div>
+      <div class="bo-form-grid">
+        <label class="wide">Full name<input name="full_name" autocomplete="name"></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>Phone<input name="phone" autocomplete="tel"></label><label class="wide">Submitted address<input name="submitted_address" autocomplete="street-address" placeholder="Street, city, NJ ZIP"></label><label>Assign to<select name="crm_owner"><option value="unassigned">Unassigned</option><option value="john">John</option><option value="wife">Wife</option></select></label><label>Tenure<select name="tenure"><option value="">Unknown</option><option>Homeowner</option><option>Renter</option></select></label><label>Household income<input name="household_income" placeholder="Under $150,000"></label><label>Program<input name="program" value="ANCHOR Estimator"></label><label>Intent score<input name="intent_score" type="number" min="0" max="100"></label><label>Estimated benefit<input name="estimated_benefit" type="number" min="0" step="0.01" placeholder="1500"></label><label class="wide">Source<input name="source" value="manual"></label><label class="wide">Notes<textarea name="notes" rows="3"></textarea></label>
+      </div>
+      <div class="bo-dialog-actions"><span id="lead-form-error" role="alert"></span><button type="button" class="bo-button bo-button-quiet" id="lead-dialog-cancel">Cancel</button><button type="submit" class="bo-button bo-button-primary" id="lead-save">Save lead</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="settings-dialog" class="bo-dialog bo-settings-dialog">
+    <div class="bo-dialog-shell">
+      <div class="bo-dialog-head"><div><span>PRIVATE SETTINGS</span><h2>Backoffice connections</h2><p>Secrets are sent directly to the server and stored in Supabase Vault.</p></div><button type="button" class="bo-close" id="settings-close" aria-label="Close">×</button></div>
+      <div id="settings-error" class="bo-form-error" role="alert"></div>
+      <form id="google-form" class="bo-settings-section"><div><b>Google Address Validation</b><p>Paste the Google Maps Platform API key. It must be the single 39-character key beginning with AIza.</p></div><label>Google API key<input type="text" name="google_key" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="AIza…" minlength="39" maxlength="39" pattern="AIza[0-9A-Za-z_-]{35}" required></label><button class="bo-button bo-button-primary" id="google-save" type="submit">Save Google key</button></form>
+      <div class="bo-settings-section"><div><b>Backoffice access</b><p>Authentication is temporarily disabled while the Backoffice is being tested.</p></div></div>
+      <form id="rotate-form" class="bo-settings-section" hidden><div><b>Shared Backoffice key</b><p>Password access is temporarily disabled.</p></div><label>New shared key<input type="password" name="new_key" minlength="14" autocomplete="new-password"></label><label>Confirm new key<input type="password" name="confirm_key" minlength="14" autocomplete="new-password"></label><button class="bo-button bo-button-quiet" type="submit">Rotate shared key</button></form>
+    </div>
+  </dialog>
+
+  <div id="bo-toast" class="bo-toast" role="status" aria-live="polite"></div>
+  <script src="/property/backoffice/backoffice-dev-auth.js" defer></script>
+  <script src="/property/backoffice/backoffice.js" defer></script>
+</body>
+</html>
