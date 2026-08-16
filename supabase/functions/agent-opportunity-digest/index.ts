@@ -67,7 +67,7 @@ Deno.serve(async request => {
     if (!email || !top.length) { result.skipped++; continue; }
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
       service_id: serviceId, template_id: templateId, user_id: publicKey, accessToken: privateKey,
-      template_params: { to_email: email, subject: `Your ${top.length} Watchdog property reasons this week`, opportunity_count: top.length, digest_rows: digestHtml(top), desk_url: "https://njpropertytaxrelief.com/property/agent-desk.html", compliance_note: "Property changes are not seller predictions. Review the source and your lawful contact basis before outreach." }
+      template_params: { to_email: email, subject: `Your ${top.length} Watchdog property reasons this week`, opportunity_count: top.length, digest_rows: digestHtml(top), desk_url: "https://njpropertytaxrelief.com/property/agent-desk", compliance_note: "Property changes are not seller predictions. Review the source and your lawful contact basis before outreach." }
     }) });
     if (!response.ok) { result.failed++; continue; }
     await admin.from("agent_digest_preferences").update({ last_sent_at: now.toISOString(), updated_at: now.toISOString() }).eq("user_id", pref.user_id);
