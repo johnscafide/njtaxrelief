@@ -3,7 +3,7 @@
   "captured_at": "2026-08-16",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
-    "agent-opportunity-digest": {"version": 14, "sha256": "fa1de66129dd0b9d0523acac805348c935dc771ca6af7047dea3a06e9ff1a365", "verify_jwt": true, "tracking": "source_snapshot"},
+    "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
     "backoffice-api": {"version": 8, "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-dev-login": {"version": 5, "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
