@@ -17,7 +17,7 @@
     var params = new URLSearchParams();
     params.set('access', kind);
     params.set('return', location.pathname + location.search + location.hash);
-    return '/property/dashboard.html?' + params.toString();
+    return '/property/dashboard?' + params.toString();
   }
   function reveal() {
     document.documentElement.classList.remove('access-pending');
