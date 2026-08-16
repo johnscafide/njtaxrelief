@@ -14,7 +14,6 @@ async function fetchRows(key:string,where:string,limit='50000'){
 }
 async function parcelRows(row:any){
   const tc=treasury(row),block=esc(row?.block),lot=esc(row?.lot);
-  // Never fall back to a municipal aggregate for a property-level marker.
   if(!/^\d{4}$/.test(tc)||!block||!lot)return [];
   return fetchRows('parcel|'+tc+'|'+block+'|'+lot,`treasurycode='${tc}' AND block='${block}' AND lot='${lot}'`,'5000');
 }
