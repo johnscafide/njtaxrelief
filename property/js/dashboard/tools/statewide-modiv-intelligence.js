@@ -82,7 +82,7 @@ window.toolStatewideModivIntelligence = function (record) {
   var advanced = SIGNALS.filter(function (signal) { return signal[3] === 'pro_plus'; }).map(function (signal) { return tile(record, profile, signal); }).join('');
   return '<div class="mi-panel"><div class="mi-head"><div><span>2026 MOD-IV MUNICIPAL BASELINE</span><h3>' + esc(profile.name) + '</h3><p>' +
     Number(profile.property_count || 0).toLocaleString() + ' parcel records condensed into comparable town-level signals. Percentile means higher or lower than other municipalities—it does not mean better or worse.</p></div>' +
-    '<a href="/property/data-methodology.html">Methodology <i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="mi-grid">' + basic + '</div>' +
+    '<a href="/property/data-methodology">Methodology <i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="mi-grid">' + basic + '</div>' +
     (proPlus ? '<div class="mi-sub"><b>Pro+ diagnostics</b><span>Deeper distribution, turnover, composition and assessment signals.</span></div><div class="mi-grid mi-advanced">' + advanced + '</div>' :
       '<div class="mi-locked"><i class="fas fa-layer-group"></i><div><b>18 deeper Pro+ municipal signals</b><span>Distribution, turnover, property-class mix, age exposure and sale-assessment context are available in Pro+.</span></div></div>') +
     '<p class="mi-note"><b>Source:</b> New Jersey Division of Taxation 2026 MOD-IV. Reported tax uses the latest populated annual-tax field in this release. Recorded sale fields are not represented as verified arm\'s-length SR-1A sales.</p></div>';
