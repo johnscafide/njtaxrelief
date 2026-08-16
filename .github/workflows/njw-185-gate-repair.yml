@@ -1,0 +1,44 @@
+name: NJW-185 gate repair
+
+on:
+  push:
+    branches:
+      - agent/njw-185-public-routes
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-185-public-routes
+          fetch-depth: 0
+      - name: Replace stale global release test with route-specific contracts
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('.github/workflows/njw-185-self-cutover.yml')
+          s=p.read_text(encoding='utf-8')
+          old='          node verify-release.mjs\n'
+          new='''          for r in exempt-pilot fairness public-report report town-compare; do\n            test -s "property/$r/index.html"\n            test ! -e "property/$r.html"\n            grep -q "\\\"source\\\":\\\"/property/$r\\\",\\\"destination\\\":\\\"/property/$r/index.html\\\"" vercel.json\n          done\n          grep -q "property/fairness/index.html" verify-release.mjs\n          grep -q "property/town-compare/index.html" verify-release.mjs\n'''
+          if s.count(old)!=1:
+              raise SystemExit(f'Expected one stale gate command, found {s.count(old)}')
+          s=s.replace(old,new,1)
+          cleanup='          rm -f .github/workflows/njw-185-route-audit.yml .github/workflows/njw-185-self-cutover.yml\n'
+          cleanup_new='          rm -f .github/workflows/njw-185-route-audit.yml .github/workflows/njw-185-self-cutover.yml .github/workflows/njw-185-gate-repair.yml property/.njw185-trigger\n'
+          if s.count(cleanup)!=1:
+              raise SystemExit(f'Expected one cleanup command, found {s.count(cleanup)}')
+          p.write_text(s.replace(cleanup,cleanup_new,1),encoding='utf-8')
+      - name: Commit repaired gate
+        run: |
+          set -euo pipefail
+          git diff --check
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/workflows/njw-185-self-cutover.yml
+          git commit -m "Use targeted NJW-185 route validation"
+          git push origin HEAD:agent/njw-185-public-routes
