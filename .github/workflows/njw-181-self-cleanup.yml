@@ -1,0 +1,64 @@
+name: NJW-181 self-cleanup
+
+on:
+  push:
+    branches:
+      - agent/njw-181-public-nav-cleanup-v2
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-181-public-nav-cleanup-v2
+          fetch-depth: 0
+      - name: Remove only obsolete sticky navigation block
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('property/index.html')
+          s = p.read_text(encoding='utf-8')
+          block = '''    <nav class="ssearch-nav">
+                <a href="/property/dashboard"><i class="fas fa-table-columns"></i><span>My Properties</span></a>
+                <a href="/property/home"><i class="fas fa-heart"></i><span>Watchlist</span></a>
+                <a href="/property/dashboard#saved"><i class="fas fa-bookmark"></i><span>Saved</span></a>
+                <a class="pro-link" href="/property/pro"><i class="fas fa-briefcase"></i><span>Pro Hub</span></a>
+              </nav>
+          '''
+          # Normalize the indentation from the current source before matching.
+          candidates = [
+              block,
+              '''    <nav class="ssearch-nav">
+      <a href="/property/dashboard"><i class="fas fa-table-columns"></i><span>My Properties</span></a>
+      <a href="/property/home"><i class="fas fa-heart"></i><span>Watchlist</span></a>
+      <a href="/property/dashboard#saved"><i class="fas fa-bookmark"></i><span>Saved</span></a>
+      <a class="pro-link" href="/property/pro"><i class="fas fa-briefcase"></i><span>Pro Hub</span></a>
+    </nav>
+'''
+          ]
+          matches = [b for b in candidates if b in s]
+          if len(matches) != 1:
+              raise SystemExit(f'Expected exactly one known ssearch-nav block shape, found {len(matches)}')
+          if s.count('<nav class="ssearch-nav">') != 1:
+              raise SystemExit('Expected exactly one ssearch-nav element in property/index.html')
+          p.write_text(s.replace(matches[0], '', 1), encoding='utf-8')
+      - name: Verify scope and remove temporary workflow
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only)" = "property/index.html"
+          ! grep -q '<nav class="ssearch-nav">' property/index.html
+          rm .github/workflows/njw-181-self-cleanup.yml
+          git diff --check
+      - name: Commit clean one-file result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add property/index.html .github/workflows/njw-181-self-cleanup.yml
+          git commit -m "Remove obsolete sticky navigation block"
+          git push origin HEAD:agent/njw-181-public-nav-cleanup-v2
