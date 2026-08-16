@@ -1,0 +1,44 @@
+name: NJW-183 minimize production inventory diff
+
+on:
+  push:
+    branches:
+      - agent/njw-183-watchdog-automation-clean-url
+
+permissions:
+  contents: write
+
+jobs:
+  minimize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-183-watchdog-automation-clean-url
+          fetch-depth: 0
+      - name: Restore main formatting and replace only watchdog fingerprint
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+          base=subprocess.check_output(['git','show','origin/main:supabase/functions/PRODUCTION-INVENTORY.json'],text=True)
+          old='    "watchdog-automation": {"version": 11, "sha256": "c214eb9d135bfcc02dc3367728aa682dbdda8a5ce9b60b61add7204d8086f8e8", "verify_jwt": false, "tracking": "source_snapshot"},'
+          new='    "watchdog-automation": {"version": 12, "sha256": "872067bee87d864718c5b04721fa3ff59a6a6678aeee729b67ef8a6220317e67", "verify_jwt": false, "tracking": "source_snapshot"},'
+          if base.count(old) != 1:
+              raise SystemExit(f'Expected one main watchdog inventory row, found {base.count(old)}')
+          Path('supabase/functions/PRODUCTION-INVENTORY.json').write_text(base.replace(old,new,1),encoding='utf-8')
+      - name: Verify exact scope and self-remove
+        run: |
+          set -euo pipefail
+          git diff --check
+          test "$(git diff --name-only | tr '\n' ' ')" = "supabase/functions/PRODUCTION-INVENTORY.json "
+          rm .github/workflows/njw-183-inventory-minimize.yml
+      - name: Commit minimal inventory diff
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supabase/functions/PRODUCTION-INVENTORY.json .github/workflows/njw-183-inventory-minimize.yml
+          git commit -m "Minimize watchdog automation inventory diff"
+          git push origin HEAD:agent/njw-183-watchdog-automation-clean-url
