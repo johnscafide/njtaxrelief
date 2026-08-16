@@ -31,6 +31,7 @@ jobs:
               '/property/data-use.html': '/property/data-use',
           }
           root_orphans = {'index.html', 'sidemenu.html', 'terms.html'}
+          approved_root_consumers = {'scripts/generate_town_pages.py', 'sitemap.xml'}
           def excluded(path):
               return (
                   path == 'vercel.json'
@@ -40,8 +41,8 @@ jobs:
                   or path in root_orphans
                   or path.startswith('.github/workflows/njw-183-')
               )
-          def live_property_consumer(path):
-              return path.startswith('property/') and not excluded(path)
+          def live_consumer(path):
+              return (path.startswith('property/') and not excluded(path)) or path in approved_root_consumers
           def grep_files(pattern):
               p = subprocess.run(['git','grep','-I','-l','-F','--',pattern], text=True, capture_output=True)
               if p.returncode not in (0,1):
@@ -53,11 +54,11 @@ jobs:
               for path in grep_files(old):
                   if excluded(path):
                       continue
-                  if not live_property_consumer(path):
-                      raise SystemExit(f'UNCLASSIFIED NON-PROPERTY REFERENCE: {path} contains {old}')
+                  if not live_consumer(path):
+                      raise SystemExit(f'UNCLASSIFIED REFERENCE: {path} contains {old}')
                   initial.add(path)
 
-          print(f'Normalizing {len(initial)} classified live property consumers')
+          print(f'Normalizing {len(initial)} classified live consumers')
           for path in sorted(initial):
               print('  ' + path)
               p = Path(path)
@@ -68,7 +69,6 @@ jobs:
               if updated != text:
                   p.write_text(updated, encoding='utf-8')
 
-          # Add clean routes using the exact proven Dashboard/Home/Account pattern without reformatting the file.
           vp = Path('vercel.json')
           v = vp.read_text(encoding='utf-8')
           route_names = ['privacy','terms','refunds','data-methodology','data-use']
@@ -90,7 +90,6 @@ jobs:
               v = v.replace(anchor, anchor + addition, 1)
           vp.write_text(v, encoding='utf-8')
 
-          # After normalization, every remaining old-route hit must be an explicitly deferred category or Vercel's required legacy redirect.
           for old in replacements:
               for path in grep_files(old):
                   if not excluded(path):
