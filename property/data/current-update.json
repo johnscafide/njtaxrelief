@@ -18,5 +18,5 @@
     {"area":"Data integrity","state":"passed","detail":"No new proprietary score formulas were invented. Fields without a connected provider remain explicitly identified as provider gaps so provider coverage can be expanded systematically."}
   ],
   "links":["/property/data-workbench.html","/property/data-center.html","/property/updates.html"],
-  "files":["property/data-workbench.html","property/js/data-workbench-provider-status.js","property/js/data-workbench-enhancements.js","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json","supabase:data_center_provider_coverage","supabase:bulk_metric_cache"]
+  "files":["property/data-workbench/index.html","property/js/data-workbench-provider-status.js","property/js/data-workbench-enhancements.js","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json","supabase:data_center_provider_coverage","supabase:bulk_metric_cache"]
 }
