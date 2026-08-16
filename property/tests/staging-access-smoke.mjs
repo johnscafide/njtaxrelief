@@ -9,7 +9,7 @@ if (/njpropertytaxrelief\.com$/i.test(new URL(base).hostname) && !/staging|previ
 }
 
 const protectedRoutes = [
-  '/property/dashboard.html', '/property/pulse.html', '/property/marker.html',
+  '/property/dashboard', '/property/pulse.html', '/property/marker.html',
   '/property/developer-data.html', '/property/updates.html', '/property/data-center.html',
   '/property/scan.html', '/property/verification-diagnostics.html'
 ];
@@ -19,7 +19,7 @@ const failures = [];
 for (const route of protectedRoutes) {
   await page.goto(base + route, { waitUntil: 'networkidle' });
   const url = page.url();
-  if (!url.includes('/property/dashboard.html?access=signin')) failures.push(`${route} did not redirect an anonymous visitor to sign-in: ${url}`);
+  if (!url.includes('/property/dashboard?access=signin')) failures.push(`${route} did not redirect an anonymous visitor to sign-in: ${url}`);
 }
 await browser.close();
 if (failures.length) throw new Error(failures.join('\n'));

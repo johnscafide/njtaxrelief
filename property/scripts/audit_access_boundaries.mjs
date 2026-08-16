@@ -71,7 +71,7 @@ check('no service credentials in browser property files', clientSecrets.length =
 
 const mobileCss = read('property/css/mobile-app.css');
 const mobileMenuCss = read('property/css/mobile-menu.css');
-for (const file of ['property/dashboard.html', 'property/home.html']) {
+for (const file of ['property/dashboard/index.html', 'property/home/index.html']) {
   const page = read(file);
   check(`${file} uses responsive viewport`, /name=["']viewport["']/.test(page), 'Mobile reflow contract');
   check(`${file} loads mobile menu styling`, page.includes('/property/css/mobile-menu.css'), 'Mobile menu remains styled on customer pages');

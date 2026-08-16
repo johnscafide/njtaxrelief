@@ -104,14 +104,14 @@ if (!read('property/js/dashboard/tools/professional-due-diligence.js').includes(
 if (!read('property/js/dashboard/home/index.js').includes('toolProfessionalWorkflows(r)')) throw new Error('Professional closing workflows are missing from Home');
 const markerRegistry = JSON.parse(read('property/data/marker-registry.json'));
 if (markerRegistry.summary.total !== 324 || markerRegistry.markers.length !== 324) throw new Error('Marker registry tally changed unexpectedly');
-if (!read('property/home.html').includes('marker-intelligence.css') || !read('property/home.html').includes('marker-intelligence.js')) throw new Error('Home marker intelligence is not loaded');
+if (!read('property/home/index.html').includes('marker-intelligence.css') || !read('property/home/index.html').includes('marker-intelligence.js')) throw new Error('Home marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('data-marker-id')) throw new Error('Home data-marker links are missing');
 if (!read('property/marker.html').includes('marker-detail.js')) throw new Error('Universal marker detail page is incomplete');
 if (!read('property/data-center.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('compactHomeSection')) throw new Error('Home progressive-disclosure signals are missing');
 if (!read('property/css/home/05-marker-experience.css').includes('border-left-width:0!important')) throw new Error('Home report rails returned');
 if (!read('property/index.html').includes('/property/pro.html#plans')) throw new Error('Public Pricing link is missing');
-if (!read('property/home.html').includes('plan-context.js') || !read('property/dashboard.html').includes('plan-context.js')) throw new Error('Developer View As integration is missing');
+if (!read('property/home/index.html').includes('plan-context.js') || !read('property/dashboard/index.html').includes('plan-context.js')) throw new Error('Developer View As integration is missing');
 if (!read('property/js/dashboard/index.js').includes("typeof window.paintPercentile === 'function'")) throw new Error('Paid/developer lazy-tool login guard is missing');
 if (!read('property/data-center.html').includes('data-plan-auto="true"')) throw new Error('Standalone Data Center plan initialization is missing');
 const proprietaryBacklog = JSON.parse(read('property/data/proprietary-marker-backlog.json'));
@@ -119,8 +119,8 @@ if (proprietaryBacklog.professions.length !== 9 || proprietaryBacklog.profession
 const saasPipeline = JSON.parse(read('property/data/saas-platform-pipeline.json'));
 if (saasPipeline.items.length < 15) throw new Error('Professional SaaS pipeline is incomplete');
 if (!menu.includes('/property/data-center.html')) throw new Error('Data Center navigation link is missing');
-if (!read('property/home.html').includes('hm-mobile-intel-overlay') || !read('property/home.html').includes('mobile-app.css')) throw new Error('Home mobile app treatment is missing');
-if (!read('property/dashboard.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
+if (!read('property/home/index.html').includes('hm-mobile-intel-overlay') || !read('property/home/index.html').includes('mobile-app.css')) throw new Error('Home mobile app treatment is missing');
+if (!read('property/dashboard/index.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
 if (!read('property/js/dashboard/home/index.js').includes("class=\"ai ai-mobile\"")) throw new Error('Home Agent Intel mobile sheet is missing');
 if (!menu.includes('db-side-group-toggle') || !menu.includes('db-side-mobile')) throw new Error('Responsive drill-down navigation is missing');
 if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
@@ -128,7 +128,7 @@ if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band 
 if (!read('supabase/functions/request-verify-code/index.ts').includes('api.emailjs.com/api/v1.0/email/send')) throw new Error('EmailJS administrator delivery is missing');
 if (!read('property/js/lookup.js').includes("kind === 'home' && window.NJPTRVerification")) throw new Error('Lookup does not offer verification after claiming a home');
 if (!read('property/js/dashboard/home/index.js').includes('window.dbVerify = function')) throw new Error('Home verification action is missing');
-if (!read('property/dashboard.html').includes('ownership-verification.js') || !read('property/home.html').includes('ownership-verification.js')) throw new Error('Shared ownership verification is not loaded');
+if (!read('property/dashboard/index.html').includes('ownership-verification.js') || !read('property/home/index.html').includes('ownership-verification.js')) throw new Error('Shared ownership verification is not loaded');
 const budgetPressure = JSON.parse(read('property/data/budget-pressure.json'));
 if (!budgetPressure.municipalities || Object.keys(budgetPressure.municipalities).length < 560) throw new Error('Municipal Budget Pressure coverage is incomplete');
 if (!read('property/js/dashboard/index.js').includes('budgetPressureSummary(r)')) throw new Error('Dashboard Budget Pressure integration is missing');

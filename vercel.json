@@ -13,12 +13,17 @@
     {"source":"/1092chews-DNU.html","destination":"/property/","permanent":true},
     {"source":"/1092-chews-DNU.html","destination":"/property/","permanent":true},
     {"source":"/btc-old.html","destination":"/btc.html","permanent":true},
+    {"source":"/property/dashboard.html","destination":"/property/dashboard","permanent":true},
+    {"source":"/property/home.html","destination":"/property/home","permanent":true},
+    {"source":"/property/dashboard/index.html","destination":"/property/dashboard","permanent":true},
+    {"source":"/property/home/index.html","destination":"/property/home","permanent":true},
     {"source":"/property/towns/:path*","destination":"/towns/:path*","permanent":true},
     {"source":"/insights.html","destination":"/property/insights/","permanent":true},
     {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
-
   ],
   "rewrites": [
+    {"source":"/property/dashboard","destination":"/property/dashboard/index.html"},
+    {"source":"/property/home","destination":"/property/home/index.html"},
     {"source":"/property/insights/:slug.html","destination":"/api/insight?slug=:slug"},
     {"source":"/property/plays/agents/:slug/","destination":"/api/play?profession=agents&slug=:slug"},
     {"source":"/property/plays/mortgage/:slug/","destination":"/api/play?profession=mortgage&slug=:slug"},
@@ -39,6 +44,8 @@
     ]},
     {"source":"/property/(.*).json","headers":[{"key":"Cache-Control","value":"public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"}]},
     {"source":"/property/css/(.*).css","headers":[{"key":"Cache-Control","value":"public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"}]},
+    {"source":"/property/dashboard","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
+    {"source":"/property/home","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
     {"source":"/property/(.*).html","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
     {"source":"/property/marketing-studio-(.*).html","headers":[{"key":"Cache-Control","value":"private, max-age=0, no-cache, no-store, must-revalidate"}]},
     {"source":"/property/css/marketing-studio-(.*).css","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]},
