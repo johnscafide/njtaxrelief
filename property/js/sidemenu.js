@@ -118,7 +118,7 @@
   function load() {
     loadFlood();
     var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
-    return fetch('/property/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
+    return fetch('/property/partials/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
   }
 
   window.njptrSideMenuReady = document.readyState === 'loading' ? new Promise(function (resolve) { document.addEventListener('DOMContentLoaded', function () { load().then(resolve); }, { once: true }); }) : load();
