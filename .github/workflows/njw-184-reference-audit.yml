@@ -1,0 +1,50 @@
+name: NJW-184 reference audit
+
+on:
+  push:
+    branches:
+      - agent/njw-184-zero-relative-routes
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Classify old route consumers
+        shell: python
+        run: |
+          import subprocess
+          routes=['agent-desk','data-center','data-workbench','developer-data','diagnostics','farm-builder','farm-map','market-list','marketing-plan','report-builder','report-studio','scan','tools','updates','verification-diagnostics','workbench']
+          def grep(old):
+              p=subprocess.run(['git','grep','-I','-n','-F','--',old],text=True,capture_output=True)
+              if p.returncode not in (0,1): raise SystemExit(p.stderr)
+              return p.stdout.splitlines()
+          def cat(path):
+              if path=='vercel.json': return 'VERCEL'
+              if path.startswith('property/towns/') or path.startswith('towns/'): return 'TOWNS'
+              if path.startswith('property/property/'): return 'DEAD_NESTED'
+              if path=='property/data/versions.json' or path=='versions.json': return 'HISTORY'
+              if path.startswith('supabase/functions/'): return 'SUPABASE'
+              if path.startswith('property/'): return 'LIVE_PROPERTY'
+              if path.startswith('.github/') or path.startswith('scripts/') or path in {'sitemap.xml','verify-release.mjs'}: return 'LIVE_SUPPORT'
+              return 'OTHER'
+          all_rows=[]
+          for r in routes:
+              old=f'/property/{r}.html'
+              rows=grep(old)
+              print(f'=== {old} lines={len(rows)} ===')
+              grouped={}
+              for line in rows:
+                  path=line.split(':',1)[0]
+                  grouped.setdefault(cat(path),set()).add(path)
+                  all_rows.append((r,path,cat(path)))
+              for category in sorted(grouped):
+                  files=sorted(grouped[category])
+                  print(f'  {category}: files={len(files)}')
+                  if category in {'LIVE_PROPERTY','LIVE_SUPPORT','SUPABASE','OTHER'}:
+                      for f in files: print('    '+f)
+                  else:
+                      for f in files[:5]: print('    sample:'+f)
+          live=sorted({p for _,p,c in all_rows if c in {'LIVE_PROPERTY','LIVE_SUPPORT','SUPABASE','OTHER'}})
+          print(f'NJW184_LIVE_FILES={len(live)}')
+          print('NJW184_REFERENCE_AUDIT_END')
