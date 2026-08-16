@@ -979,7 +979,7 @@
   }
 
   window.dbUpgrade = function () {
-    location.href = '/property/pro.html#plans';
+    location.href = '/property/pro#plans';
   };
 
   window.dbWantPro = function () {
@@ -1167,7 +1167,7 @@ function brief() {
       s.push(
         briefPoint(
           'Working at a larger scale? ' +
-          '<a href="/property/pro.html"><b>Compare Pro+</b></a> for ' +
+          '<a href="/property/pro"><b>Compare Pro+</b></a> for ' +
           'municipality-wide prospecting, 1,000+ record enrichment, ' +
           'proprietary signals, and direct system access.',
           'brief-point-upgrade'
@@ -1242,7 +1242,7 @@ function brief() {
       (c && c.testable) ? 'fa-circle-check' : 'fa-wave-square';
     var market = c && Number.isFinite(+c.market) ? money(rnd(+c.market)) : '&mdash;';
     var paid = isPro();
-    var tierLink = paid ? '' : '<a class="pr-tier upgrade" href="/property/pro.html"><i class="fas fa-star"></i>Upgrade to Pro</a>';
+    var tierLink = paid ? '' : '<a class="pr-tier upgrade" href="/property/pro"><i class="fas fa-star"></i>Upgrade to Pro</a>';
 
     return '<div class="pr-item" style="--card-i:' + (index || 0) + '">' +
       '<article class="pr-card ' + tone + (commercial ? ' commercial' : '') + (picked.indexOf(r.id) > -1 ? ' picked' : '') + '">' +

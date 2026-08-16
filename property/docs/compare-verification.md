@@ -12,7 +12,7 @@ For each vendor:
 2. Verify user/seat limits, exports, monitored properties, API availability and material feature claims.
 3. Prefer bounded language such as “hundreds of criteria” unless an exact number is explicitly published and dated.
 4. Update the visible `Verified <month> <year>` note near pricing.
-5. Confirm Watchdog's own published catalog still matches `/property/pro.html`.
+5. Confirm Watchdog's own published catalog still matches `/property/pro`.
 6. Confirm canonical, Open Graph, Twitter and structured-data metadata remain present.
 7. Confirm competitor cross-links and Watchdog pricing links work.
 8. Record the review date and source pages in the commit message / release note.

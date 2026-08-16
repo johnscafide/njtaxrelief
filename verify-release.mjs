@@ -110,7 +110,7 @@ if (!read('property/marker.html').includes('marker-detail.js')) throw new Error(
 if (!read('property/data-center.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('compactHomeSection')) throw new Error('Home progressive-disclosure signals are missing');
 if (!read('property/css/home/05-marker-experience.css').includes('border-left-width:0!important')) throw new Error('Home report rails returned');
-if (!read('property/index.html').includes('/property/pro.html#plans')) throw new Error('Public Pricing link is missing');
+if (!read('property/index.html').includes('/property/pro#plans')) throw new Error('Public Pricing link is missing');
 if (!read('property/home/index.html').includes('plan-context.js') || !read('property/dashboard/index.html').includes('plan-context.js')) throw new Error('Developer View As integration is missing');
 if (!read('property/js/dashboard/index.js').includes("typeof window.paintPercentile === 'function'")) throw new Error('Paid/developer lazy-tool login guard is missing');
 if (!read('property/data-center.html').includes('data-plan-auto="true"')) throw new Error('Standalone Data Center plan initialization is missing');

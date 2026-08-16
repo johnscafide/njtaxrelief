@@ -134,7 +134,7 @@
     var value=q.get('value'),note=q.get('note');if(value){$('mk-reading').hidden=false;$('mk-reading').innerHTML='<div><span>Current reading</span><b>'+esc(value)+'</b></div>'+(note?'<div><span>Context</span><small>'+esc(note)+'</small></div>':'');}
     $('mk-sources').innerHTML=sourceHTML(sourceList(m,rich,{all:sources,byId:byId},reg));
     $('mk-refresh').innerHTML=refresh?'<i class="fas fa-clock-rotate-left"></i><div><b>'+esc(label(refresh.cadence))+' refresh contract</b><span>'+esc(refresh.rule)+' Trigger: '+esc(String(refresh.trigger||'').replace(/_/g,' '))+'.</span></div>':'';
-    $('mk-related').innerHTML=(rich.related||[]).map(function(rid){var z=reg.markers.find(function(v){return v.id===rid;});return'<a href="/property/marker.html?id='+encodeURIComponent(rid)+'">'+esc(z?z.label:rid)+'</a>';}).join('')||'<span class="mk-empty">Related markers are curated as their source relationships are validated.</span>';
+    $('mk-related').innerHTML=(rich.related||[]).map(function(rid){var z=reg.markers.find(function(v){return v.id===rid;});return'<a href="/property/marker?id='+encodeURIComponent(rid)+'">'+esc(z?z.label:rid)+'</a>';}).join('')||'<span class="mk-empty">Related markers are curated as their source relationships are validated.</span>';
     var pin=q.get('pin');if(pin)$('mk-back').href='/property/home?pin='+encodeURIComponent(pin);
   }).catch(function(e){$('mk-title').textContent='Data marker not found';$('mk-intro').textContent='The marker identifier is missing or no longer available.';console.error(e);});
 })();
