@@ -1,0 +1,125 @@
+name: NJW-183 targeted route normalization
+
+on:
+  push:
+    branches:
+      - agent/njw-183-legal-public-routes
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-183-legal-public-routes
+          fetch-depth: 0
+      - name: Normalize only classified active references and Vercel routes
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          replacements = {
+              '/property/privacy.html': '/property/privacy',
+              '/property/terms.html': '/property/terms',
+              '/property/refunds.html': '/property/refunds',
+              '/property/data-methodology.html': '/property/data-methodology',
+              '/property/data-use.html': '/property/data-use',
+          }
+          allowed = {
+              'property/privacy/index.html',
+              'property/terms/index.html',
+              'property/refunds/index.html',
+              'property/data-methodology/index.html',
+              'property/data-use/index.html',
+              'property/footer.html',
+              'property/index.html',
+              'property/nav.html',
+              'property/sidemenu.html',
+              'property/scripts/generate_town_pages.py',
+              'property/faq/index.html',
+              'property/js/billing-client.js',
+              'property/docs/pro-plus-data-center-spec.md',
+          }
+          root_orphans = {'index.html', 'sidemenu.html', 'terms.html'}
+          def excluded(path):
+              return (
+                  path == 'vercel.json'
+                  or path == 'property/data/versions.json'
+                  or path.startswith('property/property/')
+                  or path.startswith('property/towns/')
+                  or path in root_orphans
+                  or path.startswith('.github/workflows/njw-183-')
+              )
+          def grep_files(pattern):
+              p = subprocess.run(['git','grep','-I','-l','-F','--',pattern], text=True, capture_output=True)
+              if p.returncode not in (0,1):
+                  raise SystemExit(p.stderr)
+              return [x for x in p.stdout.splitlines() if x]
+
+          initial = set()
+          for old in replacements:
+              for path in grep_files(old):
+                  if not excluded(path):
+                      initial.add(path)
+                      if path not in allowed:
+                          raise SystemExit(f'UNCLASSIFIED ACTIVE REFERENCE: {path} contains {old}')
+
+          for path in sorted(initial):
+              p = Path(path)
+              text = p.read_text(encoding='utf-8')
+              updated = text
+              for old, new in replacements.items():
+                  updated = updated.replace(old, new)
+              if updated != text:
+                  p.write_text(updated, encoding='utf-8')
+
+          # Add clean routes using the exact proven Dashboard/Home/Account pattern without reformatting the file.
+          vp = Path('vercel.json')
+          v = vp.read_text(encoding='utf-8')
+          route_names = ['privacy','terms','refunds','data-methodology','data-use']
+          if any(f'/property/{r}/index.html' in v for r in route_names):
+              raise SystemExit('NJW-183 Vercel routes unexpectedly already present')
+          legacy = ''.join(f'    {{"source":"/property/{r}.html","destination":"/property/{r}","permanent":true}},\n' for r in route_names)
+          direct = ''.join(f'    {{"source":"/property/{r}/index.html","destination":"/property/{r}","permanent":true}},\n' for r in route_names)
+          rewrites = ''.join(f'    {{"source":"/property/{r}","destination":"/property/{r}/index.html"}},\n' for r in route_names)
+          headers = ''.join(f'    {{"source":"/property/{r}","headers":[{{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}}]}},\n' for r in route_names)
+          anchors = [
+              ('    {"source":"/property/pulse.html","destination":"/property/pulse","permanent":true},\n', legacy),
+              ('    {"source":"/property/pulse/index.html","destination":"/property/pulse","permanent":true},\n', direct),
+              ('    {"source":"/property/pulse","destination":"/property/pulse/index.html"},\n', rewrites),
+              ('    {"source":"/property/pulse","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},\n', headers),
+          ]
+          for anchor, addition in anchors:
+              if v.count(anchor) != 1:
+                  raise SystemExit(f'Expected one Vercel anchor, found {v.count(anchor)}: {anchor.strip()}')
+              v = v.replace(anchor, anchor + addition, 1)
+          vp.write_text(v, encoding='utf-8')
+
+          # After normalization, every remaining old-route hit must be an explicitly deferred category or Vercel's required legacy redirect.
+          for old in replacements:
+              for path in grep_files(old):
+                  if not excluded(path):
+                      raise SystemExit(f'UNEXPECTED RESIDUAL ACTIVE REFERENCE: {path} contains {old}')
+
+          print('NJW183_TARGETED_NORMALIZATION_PASS')
+      - name: Remove temporary audit/workflow files and verify scope
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/njw-183-reference-audit.yml .github/workflows/njw-183-self-cleanup.yml
+          git diff --check
+          ! git diff --name-only | grep -E '^(property/towns/|property/property/)'
+          echo 'Changed working-tree files:'
+          git diff --name-only
+      - name: Commit targeted result
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Normalize legal and public data policy clean routes"
+          git push origin HEAD:agent/njw-183-legal-public-routes
