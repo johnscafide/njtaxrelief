@@ -184,7 +184,7 @@
             <div class="wds-product-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=80&w=1200&auto=format&fit=crop')"><span class="wds-product-badge blue">Dashboard</span></div>
             <div class="wds-card-body"><h3>Your Watchdog workspace</h3><p>Track saved properties, review signals and keep the homes that matter in one place.</p><div class="wds-card-foot"><b>Built for repeat use</b><span class="wds-card-go">Open <i class="fas fa-arrow-right"></i></span></div></div>
           </a>
-          <a class="wds-product-card right" href="/property/marketing-studio.html">
+          <a class="wds-product-card right" href="/property/marketing-studio">
             <div class="wds-product-photo" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=82')"><span class="wds-product-badge">Marketing Studio</span></div>
             <div class="wds-card-body"><h3>Turn insight into outreach</h3><p>Build audiences, campaigns and property-driven marketing from the same workspace.</p><div class="wds-card-foot"><b>Agent workspace</b><span class="wds-card-go">View studio <i class="fas fa-arrow-right"></i></span></div></div>
           </a>
@@ -219,14 +219,14 @@
             <h3>Unified dashboard</h3><p>Track properties, signals and the numbers that changed without rebuilding the story every time.</p>
             <div class="wds-ui-chart"><div class="wds-ui-chip">+12% activity</div><div class="wds-ui-grid"><div class="wds-ui-line"></div></div></div>
           </a>
-          <a class="wds-bento-card dark" href="/property/marketing-studio.html">
+          <a class="wds-bento-card dark" href="/property/marketing-studio">
             <h3>Marketing Studio</h3><p>Take a property-driven audience from idea to campaign while keeping the workflow organized.</p>
             <div class="wds-network"><i class="wds-orbit o1"></i><i class="wds-orbit o2"></i><span class="wds-node n1">Audience</span><span class="wds-node n2">Creative</span><span class="wds-node n3">Campaign</span></div>
           </a>
           <a class="wds-bento-card tall" href="/property/home">
             <div class="wds-report-photo"></div><div class="wds-price-tags"><span class="p1">Tax history</span><span class="p2">Assessment</span><span class="p3">Equity signal</span></div><div class="wds-report-copy"><span class="wds-pill">Property report</span><h3>One home. More context.</h3><p>See the pieces that can change a property decision, together.</p></div>
           </a>
-          <a class="wds-bento-card wide" href="/property/marketing-studio.html">
+          <a class="wds-bento-card wide" href="/property/marketing-studio">
             <div class="wds-wide-copy"><span class="wds-pill pink">Professional workflow</span><h3>From property records to real outreach</h3><p>Use Watchdog intelligence to build more relevant homeowner conversations, reports and campaigns.</p><span class="wds-card-go">Launch Marketing Studio <i class="fas fa-arrow-right"></i></span></div>
             <div class="wds-mail-preview"><div class="wds-mail-head"><i class="fas fa-dog"></i>Watchdog property update</div><div class="wds-mail-photo"></div><div class="wds-mail-bars"><i></i><i></i><i></i></div></div>
           </a>
