@@ -1,0 +1,120 @@
+name: Architecture production browser validation
+
+on:
+  push:
+    branches:
+      - agent/architecture-production-browser-validation
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Validate production routes, redirects, navigation and access gate
+        env:
+          BASE_URL: https://njpropertytaxrelief.com
+        run: |
+          node - <<'JS'
+          const assert = require('node:assert/strict');
+          const { chromium } = require('playwright');
+          const base = process.env.BASE_URL;
+          const clean = ['dashboard','home','account','pro','marker','pulse'];
+          const browser = await chromium.launch({headless:true});
+
+          async function redirectChain(response) {
+            const chain = [];
+            let req = response.request();
+            while (req.redirectedFrom()) {
+              const prev = req.redirectedFrom();
+              const prevResponse = await prev.response();
+              chain.unshift({ url: prev.url(), status: prevResponse && prevResponse.status() });
+              req = prev;
+            }
+            return chain;
+          }
+
+          const staticContext = await browser.newContext({ javaScriptEnabled: false });
+          const staticPage = await staticContext.newPage();
+          for (const route of clean) {
+            const response = await staticPage.goto(`${base}/property/${route}`, {waitUntil:'domcontentloaded', timeout:30000});
+            assert(response, `No response for clean ${route}`);
+            assert.equal(response.status(), 200, `Clean ${route} status`);
+            assert.equal(new URL(staticPage.url()).pathname, `/property/${route}`, `Clean ${route} final pathname`);
+          }
+
+          for (const route of clean) {
+            for (const legacy of [`/property/${route}.html`, `/property/${route}/index.html`]) {
+              const response = await staticPage.goto(`${base}${legacy}?routecheck=1#deep`, {waitUntil:'domcontentloaded', timeout:30000});
+              assert(response, `No response for ${legacy}`);
+              assert.equal(response.status(), 200, `Final response for ${legacy}`);
+              const final = new URL(staticPage.url());
+              assert.equal(final.pathname, `/property/${route}`, `${legacy} clean pathname`);
+              assert.equal(final.searchParams.get('routecheck'), '1', `${legacy} query preserved`);
+              assert.equal(final.hash, '#deep', `${legacy} hash preserved`);
+              const chain = await redirectChain(response);
+              assert(chain.length >= 1, `${legacy} must redirect`);
+              assert.equal(chain[0].status, 308, `${legacy} must use permanent 308`);
+            }
+          }
+
+          const manifestResponse = await staticContext.request.get(`${base}/property/manifest.webmanifest`);
+          assert.equal(manifestResponse.status(), 200, 'manifest status');
+          const manifest = await manifestResponse.json();
+          assert.equal(manifest.start_url, '/property/dashboard', 'PWA start_url must use clean dashboard route');
+          await staticContext.close();
+
+          const desktop = await browser.newContext({viewport:{width:1440,height:1000}});
+          const desktopPage = await desktop.newPage();
+          await desktopPage.goto(`${base}/property/`, {waitUntil:'networkidle', timeout:30000});
+          assert.equal(await desktopPage.locator('#wd-nav').count(), 1, 'desktop modern nav exists');
+          assert.equal(await desktopPage.locator('nav.ssearch-nav').count(), 0, 'obsolete sticky nav absent');
+          assert.equal(await desktopPage.locator('#ssearch').count(), 1, 'sticky search remains');
+          const navBox = await desktopPage.locator('#wd-nav').boundingBox();
+          assert(navBox && navBox.width > 500 && navBox.height > 30, 'desktop nav has visible layout box');
+          await desktopPage.evaluate(() => window.scrollTo(0, Math.max(1200, document.body.scrollHeight * 0.35)));
+          await desktopPage.waitForTimeout(500);
+          assert(await desktopPage.locator('#ssearch').evaluate(el => el.classList.contains('on')), 'sticky search activates after scroll');
+          const stickyBox = await desktopPage.locator('#ssearch').boundingBox();
+          assert(stickyBox && stickyBox.width > 500, 'desktop sticky search has visible layout box');
+          await desktop.close();
+
+          const mobile = await browser.newContext({viewport:{width:390,height:844}, isMobile:true, hasTouch:true});
+          const mobilePage = await mobile.newPage();
+          await mobilePage.goto(`${base}/property/`, {waitUntil:'networkidle', timeout:30000});
+          assert.equal(await mobilePage.locator('nav.ssearch-nav').count(), 0, 'obsolete sticky nav absent on mobile');
+          const trigger = mobilePage.locator('#wd-menu-trigger');
+          assert.equal(await trigger.count(), 1, 'mobile menu trigger exists');
+          assert(await trigger.isVisible(), 'mobile menu trigger visible');
+          const triggerBox = await trigger.boundingBox();
+          assert(triggerBox && triggerBox.width >= 40 && triggerBox.height >= 40, 'mobile menu trigger has usable target');
+          await trigger.click();
+          await mobilePage.waitForTimeout(250);
+          const sheet = mobilePage.locator('#wd-main-sheet');
+          assert.equal(await sheet.count(), 1, 'mobile main sheet exists');
+          assert(await sheet.isVisible(), 'mobile main sheet opens');
+          await mobile.close();
+
+          const authContext = await browser.newContext({viewport:{width:1280,height:900}});
+          const authPage = await authContext.newPage();
+          const visited = [];
+          authPage.on('framenavigated', frame => { if (frame === authPage.mainFrame()) visited.push(frame.url()); });
+          await authPage.goto(`${base}/property/marketing-studio.html?campaign=routecheck#creative-studio`, {waitUntil:'domcontentloaded', timeout:30000});
+          await authPage.waitForURL(url => url.pathname === '/property/dashboard' && url.searchParams.get('access') === 'signin', {timeout:20000});
+          const authFinal = new URL(authPage.url());
+          assert.equal(authFinal.pathname, '/property/dashboard', 'signed-out Marketing Studio returns to dashboard');
+          assert.equal(authFinal.searchParams.get('access'), 'signin', 'signed-out Marketing Studio identifies sign-in requirement');
+          assert((authFinal.searchParams.get('return') || '').includes('/property/marketing-studio.html'), 'Marketing Studio return target preserved');
+          assert(!visited.some(url => /marketing-studio-(audience|customize)\.html/.test(url)), 'router must not reveal destination page before access gate');
+          await authContext.close();
+
+          await browser.close();
+          console.log('ARCHITECTURE_PRODUCTION_BROWSER_VALIDATION_PASS');
+          JS
