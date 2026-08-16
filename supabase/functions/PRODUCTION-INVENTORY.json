@@ -36,7 +36,7 @@
     "production-api": {"version": 12, "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99", "verify_jwt": true, "tracking": "fingerprint_only"},
     "public-report-share": {"version": 7, "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2", "verify_jwt": false, "tracking": "fingerprint_only"},
     "report-platform-event": {"version": 13, "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068", "verify_jwt": true, "tracking": "source_snapshot"},
-    "report-share": {"version": 12, "sha256": "45f86fd7e4e781275a54b8fe768443f1d95a26a2cd7ecedfa3bbf418b897e152", "verify_jwt": false, "tracking": "source_snapshot"},
+    "report-share": {"version": 13, "sha256": "b7bc4f9b345c4fb5486e333b7fa4726be3e524ac2039670ccbd44fea9b249118", "verify_jwt": false, "tracking": "source_snapshot"},
     "request-verify-code": {"version": 26, "sha256": "ab54292e3ef495676b7b496bece829bab73d0f60d9fd3e0979da90b306e8ecf6", "verify_jwt": true, "tracking": "source_snapshot"},
     "source-monitor-ingest": {"version": 20, "sha256": "660e65e0756e726539184cba2f90f29dffb96f6cdcd370476c56a74a2265465a", "verify_jwt": true, "tracking": "source_snapshot"},
     "stripe-webhook": {"version": 22, "sha256": "dfe592aba78aa823fefcbba6546d21af7bd84d33a7ed979430274b99fefc9c28", "verify_jwt": false, "tracking": "fingerprint_only"},
