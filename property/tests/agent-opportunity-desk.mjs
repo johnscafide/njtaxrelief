@@ -3,7 +3,7 @@ import vm from 'node:vm';
 
 const root = new URL('../../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
-const html = read('property/agent-desk.html');
+const html = read('property/agent-desk/index.html');
 const js = read('property/js/agent-desk.js');
 const sql = read('supabase/migrations/20260809213000_agent_opportunity_desk.sql');
 const digest = read('supabase/functions/agent-opportunity-digest/index.ts');
