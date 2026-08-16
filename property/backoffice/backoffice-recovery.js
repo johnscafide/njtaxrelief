@@ -86,7 +86,7 @@ function install(){
     }
   };
   $('#bo-recovery-signin').onclick=()=>{
-    location.href='/property/dashboard.html?access=signin&return=%2Fproperty%2Fbackoffice%2F';
+    location.href='/property/dashboard?access=signin&return=%2Fproperty%2Fbackoffice%2F';
   };
   $('#bo-recovery-form').onsubmit=async(e)=>{
     e.preventDefault();

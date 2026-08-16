@@ -991,7 +991,7 @@
       address: (rows[0] && rows[0].address) || 'Not provided',
       message: ['Wants to know when Watchdog Pro opens.',
                 'Properties saved: ' + rows.length,
-                'Source: /property/dashboard.html'].join('\n')
+                'Source: /property/dashboard'].join('\n')
     });
     plModalNote('Noted', '<p>We will let you know. Nothing changes on your account in the meantime.</p>' +
       '<button class="db-btn" onclick="plCloseNote()">Close</button>');
@@ -1453,7 +1453,7 @@ function brief() {
   }
 
   function reportLink(r) {
-    return '/property/home.html?pin=' + encodeURIComponent(r.pams_pin || '');
+    return '/property/home?pin=' + encodeURIComponent(r.pams_pin || '');
   }
 
   // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
@@ -1658,7 +1658,7 @@ function brief() {
           (cases ? '<div class="hot"><b>' + cases + '</b><span>with an appeal case</span></div>' : '') +
         '</div>' +
         '<div class="pf-list">' + scored.map(function (x) {
-          return '<a class="pf-i" href="/property/home.html?pin=' + encodeURIComponent(x.r.pams_pin || '') + '" ' +
+          return '<a class="pf-i" href="/property/home?pin=' + encodeURIComponent(x.r.pams_pin || '') + '" ' +
             'onmouseenter="pfHi(\'' + esc(x.r.pams_pin) + '\',1)" ' +
             'onmouseleave="pfHi(\'' + esc(x.r.pams_pin) + '\',0)">' +
             '<span class="pf-s ' + x.w.band + '">' + x.w.score + '</span>' +
@@ -2339,7 +2339,7 @@ function brief() {
       town: (rows[0] && rows[0].town) || 'Not provided',
       address: (rows[0] && rows[0].address) || 'Not provided',
       message: ['Appeal review requested from the dashboard.', 'Properties flagged:']
-        .concat(list).concat(['Source: /property/dashboard.html']).join('\n')
+        .concat(list).concat(['Source: /property/dashboard']).join('\n')
     });
     plModalNote('On it', '<p>An agent will review those and get back to you within one business day.</p>' +
       '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
@@ -2351,7 +2351,7 @@ function brief() {
       topic: '\u2b50 DASHBOARD question about ' + address,
       tenure: 'Homeowner', lead_type: 'Homeowner', finance: 'Not provided',
       town: 'Not provided', address: address,
-      message: ['Question from the dashboard about ' + address, 'Source: /property/dashboard.html'].join('\n')
+      message: ['Question from the dashboard about ' + address, 'Source: /property/dashboard'].join('\n')
     });
     plModalNote('Message sent', '<p>An agent will get back to you about <b>' + esc(address) + '</b> within one business day.</p>' +
       '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>');
@@ -2359,7 +2359,7 @@ function brief() {
 
   window.dbLeadGen = function (kind, address) {
     var seller=kind==='seller';
-    send({name:name(),email:plUser.email,phone:profile.phone||'Not provided',topic:'⭐ WATCHDOG '+(seller?'Seller strategy request':'Buyer strategy request'),tenure:seller?'Homeowner':'Buyer',lead_type:seller?'Seller lead':'Buyer lead',finance:'Not provided',town:'Not provided',address:address||'Not provided',message:[seller?'Seller strategy request from dashboard.':'Buyer strategy request from dashboard.','Property: '+(address||'Not provided'),'Source: /property/dashboard.html'].join('\n')});
+    send({name:name(),email:plUser.email,phone:profile.phone||'Not provided',topic:'⭐ WATCHDOG '+(seller?'Seller strategy request':'Buyer strategy request'),tenure:seller?'Homeowner':'Buyer',lead_type:seller?'Seller lead':'Buyer lead',finance:'Not provided',town:'Not provided',address:address||'Not provided',message:[seller?'Seller strategy request from dashboard.':'Buyer strategy request from dashboard.','Property: '+(address||'Not provided'),'Source: /property/dashboard'].join('\n')});
     plModalNote(seller?'Seller strategy':'Buyer strategy','<p>'+(seller?'An agent will pair the Watchdog tax story with current comps and a listing plan.':'An agent will pair the Watchdog diligence with live market context and an offer plan.')+'</p><p><b>No obligation and no pressure.</b></p>');
   };
   window.watchdogScoreHistory = function (r, markerId) {

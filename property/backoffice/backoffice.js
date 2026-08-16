@@ -58,7 +58,7 @@ async function rotateKey(e){e.preventDefault();const fd=new FormData(e.currentTa
 async function logout(){try{await api('logout')}catch{}lock();setAuthMode(false)}
 function on(sel,evt,fn){const el=$(sel);if(el)el[evt]=fn}
 async function init(){
- on('#bo-auth-form','onsubmit',submitAuth);on('#bo-signin-dev','onclick',()=>{location.href='/property/dashboard.html?access=signin&return=%2Fproperty%2Fbackoffice%2F'});
+ on('#bo-auth-form','onsubmit',submitAuth);on('#bo-signin-dev','onclick',()=>{location.href='/property/dashboard?access=signin&return=%2Fproperty%2Fbackoffice%2F'});
  on('#bo-refresh','onclick',()=>loadLeads(false));on('#bo-add','onclick',()=>openDialog('#lead-dialog'));on('#bo-logout','onclick',logout);on('#bo-settings','onclick',openSettings);
  on('#lead-dialog-close','onclick',()=>closeDialog('#lead-dialog'));on('#lead-dialog-cancel','onclick',()=>closeDialog('#lead-dialog'));on('#lead-form','onsubmit',saveLead);
  on('#settings-close','onclick',()=>closeDialog('#settings-dialog'));on('#google-form','onsubmit',saveGoogle);on('#rotate-form','onsubmit',rotateKey);

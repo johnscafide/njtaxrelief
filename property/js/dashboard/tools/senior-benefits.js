@@ -128,7 +128,7 @@
         '<p class="tl-p">Working out where a specific household lands needs two figures, and they are both ' +
         'optional in your profile: <b>your birth year and your household income</b>. Every threshold in these ' +
         'programs is a hard cutoff, so a range cannot answer it.</p>' +
-        '<a class="tl-btn" href="/property/dashboard.html#profile">Add them to your profile</a>');
+        '<a class="tl-btn" href="/property/dashboard#profile">Add them to your profile</a>');
     }
 
     var b = seniorBenefits(tax, income, age, yrs, profile.freeze_base ? +profile.freeze_base : null);

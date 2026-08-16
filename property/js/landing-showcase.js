@@ -135,7 +135,7 @@
             <div class="wds-feature-item active">
               <span class="wds-num">02</span><h3>Predictive signals</h3>
               <p>Watchdog layers your records with trend and fairness signals so you can spot changes before they become expensive surprises.</p>
-              <a class="wds-feature-link" href="/property/dashboard.html">Explore the dashboard <i class="fas fa-arrow-right"></i></a>
+              <a class="wds-feature-link" href="/property/dashboard">Explore the dashboard <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="wds-feature-item">
               <span class="wds-num">03</span><h3>Actionable recommendations</h3>
@@ -176,11 +176,11 @@
         <h2 class="wds-center-title">Featured workspace tools, <em>built to work together</em></h2>
         <p class="wds-center-copy">Start with a property, keep an eye on what changes, then use the same intelligence across reporting, client work and marketing.</p>
         <div class="wds-product-stage">
-          <a class="wds-product-card left" href="/property/home.html">
+          <a class="wds-product-card left" href="/property/home">
             <div class="wds-product-photo" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=80&w=1200&auto=format&fit=crop')"><span class="wds-product-badge green">Property Report</span></div>
             <div class="wds-card-body"><h3>Property intelligence report</h3><p>Tax, assessment, market, appeal and benefit context in one detailed property view.</p><div class="wds-card-foot"><b>One property, full context</b><span class="wds-card-go">Explore <i class="fas fa-arrow-right"></i></span></div></div>
           </a>
-          <a class="wds-product-card main" href="/property/dashboard.html">
+          <a class="wds-product-card main" href="/property/dashboard">
             <div class="wds-product-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=80&w=1200&auto=format&fit=crop')"><span class="wds-product-badge blue">Dashboard</span></div>
             <div class="wds-card-body"><h3>Your Watchdog workspace</h3><p>Track saved properties, review signals and keep the homes that matter in one place.</p><div class="wds-card-foot"><b>Built for repeat use</b><span class="wds-card-go">Open <i class="fas fa-arrow-right"></i></span></div></div>
           </a>
@@ -215,7 +215,7 @@
         <p class="wds-center-copy">Watchdog is designed to keep the property record, the homeowner decision and the professional workflow connected instead of scattered across separate tools.</p>
 
         <div class="wds-bento">
-          <a class="wds-bento-card" href="/property/dashboard.html">
+          <a class="wds-bento-card" href="/property/dashboard">
             <h3>Unified dashboard</h3><p>Track properties, signals and the numbers that changed without rebuilding the story every time.</p>
             <div class="wds-ui-chart"><div class="wds-ui-chip">+12% activity</div><div class="wds-ui-grid"><div class="wds-ui-line"></div></div></div>
           </a>
@@ -223,7 +223,7 @@
             <h3>Marketing Studio</h3><p>Take a property-driven audience from idea to campaign while keeping the workflow organized.</p>
             <div class="wds-network"><i class="wds-orbit o1"></i><i class="wds-orbit o2"></i><span class="wds-node n1">Audience</span><span class="wds-node n2">Creative</span><span class="wds-node n3">Campaign</span></div>
           </a>
-          <a class="wds-bento-card tall" href="/property/home.html">
+          <a class="wds-bento-card tall" href="/property/home">
             <div class="wds-report-photo"></div><div class="wds-price-tags"><span class="p1">Tax history</span><span class="p2">Assessment</span><span class="p3">Equity signal</span></div><div class="wds-report-copy"><span class="wds-pill">Property report</span><h3>One home. More context.</h3><p>See the pieces that can change a property decision, together.</p></div>
           </a>
           <a class="wds-bento-card wide" href="/property/marketing-studio.html">
@@ -238,7 +238,7 @@
       <div class="wds-wrap">
         <div class="wds-end-card">
           <div><span>Start with one address</span><h3>See what Watchdog knows about a property.</h3></div>
-          <div class="wds-end-actions"><a class="wds-btn" href="#pl-addr" data-wds-focus-search><i class="fas fa-magnifying-glass"></i> Search a property</a><a class="wds-btn light" href="/property/dashboard.html">Open dashboard</a></div>
+          <div class="wds-end-actions"><a class="wds-btn" href="#pl-addr" data-wds-focus-search><i class="fas fa-magnifying-glass"></i> Search a property</a><a class="wds-btn light" href="/property/dashboard">Open dashboard</a></div>
         </div>
         <p class="wds-disclosure">Watchdog uses public property and tax records for educational property intelligence. It is not a government website, appraisal, legal opinion or individualized tax advice. Verify important decisions with the appropriate public agency or qualified professional.</p>
       </div>
