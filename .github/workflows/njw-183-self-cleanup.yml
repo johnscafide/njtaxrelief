@@ -38,6 +38,7 @@ jobs:
                   or path == 'property/data/versions.json'
                   or path.startswith('property/property/')
                   or path.startswith('property/towns/')
+                  or path.startswith('towns/')
                   or path.startswith('supabase/functions/')
                   or path in root_orphans
                   or path.startswith('.github/workflows/njw-183-')
@@ -102,7 +103,7 @@ jobs:
           set -euo pipefail
           rm -f .github/workflows/njw-183-reference-audit.yml .github/workflows/njw-183-self-cleanup.yml
           git diff --check
-          ! git diff --name-only | grep -E '^(property/towns/|property/property/|supabase/functions/)'
+          ! git diff --name-only | grep -E '^(property/towns/|towns/|property/property/|supabase/functions/)'
           echo 'Changed working-tree files:'
           git diff --name-only
       - name: Commit targeted result
