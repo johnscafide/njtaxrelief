@@ -47,7 +47,7 @@ const required = [
   'property/js/data-center.js',
   'property/css/data-center.css',
   'property/css/mobile-app.css',
-  'property/marker.html',
+  'property/marker/index.html',
   'property/css/marker-intelligence.css',
   'property/css/home/05-marker-experience.css',
   'property/js/marker-intelligence.js',
@@ -106,7 +106,7 @@ const markerRegistry = JSON.parse(read('property/data/marker-registry.json'));
 if (markerRegistry.summary.total !== 324 || markerRegistry.markers.length !== 324) throw new Error('Marker registry tally changed unexpectedly');
 if (!read('property/home/index.html').includes('marker-intelligence.css') || !read('property/home/index.html').includes('marker-intelligence.js')) throw new Error('Home marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('data-marker-id')) throw new Error('Home data-marker links are missing');
-if (!read('property/marker.html').includes('marker-detail.js')) throw new Error('Universal marker detail page is incomplete');
+if (!read('property/marker/index.html').includes('marker-detail.js')) throw new Error('Universal marker detail page is incomplete');
 if (!read('property/data-center.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('compactHomeSection')) throw new Error('Home progressive-disclosure signals are missing');
 if (!read('property/css/home/05-marker-experience.css').includes('border-left-width:0!important')) throw new Error('Home report rails returned');
@@ -123,7 +123,7 @@ if (!read('property/home/index.html').includes('hm-mobile-intel-overlay') || !re
 if (!read('property/dashboard/index.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
 if (!read('property/js/dashboard/home/index.js').includes("class=\"ai ai-mobile\"")) throw new Error('Home Agent Intel mobile sheet is missing');
 if (!menu.includes('db-side-group-toggle') || !menu.includes('db-side-mobile')) throw new Error('Responsive drill-down navigation is missing');
-if (!read('property/pro.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
+if (!read('property/pro/index.html').includes('Data Center')) throw new Error('Pro+ Data Center integration is missing');
 if (read('property/js/dashboard/tools/town-intelligence.js').includes("row.band + '\"'")) throw new Error('Town Intelligence can still emit an undefined class');
 if (!read('supabase/functions/request-verify-code/index.ts').includes('api.emailjs.com/api/v1.0/email/send')) throw new Error('EmailJS administrator delivery is missing');
 if (!read('property/js/lookup.js').includes("kind === 'home' && window.NJPTRVerification")) throw new Error('Lookup does not offer verification after claiming a home');
