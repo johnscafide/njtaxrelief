@@ -1,0 +1,48 @@
+name: NJW-183 Watchdog automation inventory refresh
+
+on:
+  push:
+    branches:
+      - agent/njw-183-watchdog-automation-clean-url
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-183-watchdog-automation-clean-url
+          fetch-depth: 0
+      - name: Update deployed watchdog-automation fingerprint only
+        shell: python
+        run: |
+          from pathlib import Path
+          import json
+          p=Path('supabase/functions/PRODUCTION-INVENTORY.json')
+          data=json.loads(p.read_text(encoding='utf-8'))
+          row=data['functions']['watchdog-automation']
+          if row.get('version') != 11 or row.get('sha256') != 'c214eb9d135bfcc02dc3367728aa682dbdda8a5ce9b60b61add7204d8086f8e8':
+              raise SystemExit('Unexpected pre-refresh watchdog-automation inventory fingerprint')
+          row['version']=12
+          row['sha256']='872067bee87d864718c5b04721fa3ff59a6a6678aeee729b67ef8a6220317e67'
+          row['verify_jwt']=False
+          row['tracking']='source_snapshot'
+          p.write_text(json.dumps(data,indent=2)+"\n",encoding='utf-8')
+      - name: Verify scope and self-remove
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only)" = "supabase/functions/PRODUCTION-INVENTORY.json"
+          git diff --check
+          rm .github/workflows/njw-183-watchdog-inventory.yml
+      - name: Commit inventory refresh
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supabase/functions/PRODUCTION-INVENTORY.json .github/workflows/njw-183-watchdog-inventory.yml
+          git commit -m "Refresh watchdog automation production fingerprint"
+          git push origin HEAD:agent/njw-183-watchdog-automation-clean-url
