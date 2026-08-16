@@ -132,8 +132,8 @@ function townIntelligenceCard(property) {
       (!rate ? 'Rate history unavailable' : (rate.cagr >= 0 ? '+' : '') + (rate.cagr * 100).toFixed(1) + '% per year') +
       '</b><span>' + tiEsc(rateText) + '</span></div></div>' +
     '<p class="ti-limit">Fairness measures consistency inside the municipality. It does not mean taxes are low, and it does not decide whether this property has an appeal.</p>' +
-    '<div class="ti-links"><a href="/property/fairness.html?district=' + encodeURIComponent(row.district) + '">Open shareable town report</a>' +
-      '<a href="/property/town-compare.html?towns=' + encodeURIComponent(row.district) + '">Compare this town</a></div>' +
+    '<div class="ti-links"><a href="/property/fairness?district=' + encodeURIComponent(row.district) + '">Open shareable town report</a>' +
+      '<a href="/property/town-compare?towns=' + encodeURIComponent(row.district) + '">Compare this town</a></div>' +
   '</div>';
 }
 

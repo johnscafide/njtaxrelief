@@ -201,7 +201,7 @@
             <div class="wds-glass-row">
               <div class="wds-glass"><h4>Smart property lookup</h4><p>Search any New Jersey address and move from the public record into a useful property analysis.</p><a href="#pl-addr" data-wds-focus-search>Find a property <i class="fas fa-arrow-right"></i></a></div>
               <div class="wds-glass"><h4>Benefit intelligence</h4><p>Connect the property picture with ANCHOR, Stay NJ and the relief programs that can affect a household.</p><a href="/anchor-estimator.html">Check benefits <i class="fas fa-arrow-right"></i></a></div>
-              <div class="wds-glass"><h4>Appeal &amp; equity signals</h4><p>Understand assessment fairness, market value context and when a number deserves a closer look.</p><a href="/property/fairness.html">Explore fairness <i class="fas fa-arrow-right"></i></a></div>
+              <div class="wds-glass"><h4>Appeal &amp; equity signals</h4><p>Understand assessment fairness, market value context and when a number deserves a closer look.</p><a href="/property/fairness">Explore fairness <i class="fas fa-arrow-right"></i></a></div>
             </div>
           </div>
         </div>

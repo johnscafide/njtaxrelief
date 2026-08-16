@@ -6,7 +6,7 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const exists = relative => fs.existsSync(path.join(root, relative));
 
 const required = [
-  'property/fairness.html', 'property/town-compare.html', 'property/sidemenu.html',
+  'property/fairness/index.html', 'property/town-compare/index.html', 'property/sidemenu.html',
   'property/js/dashboard/tools/town-intelligence.js',
   'property/js/dashboard/tools/town-risk-matrix.js',
   'property/js/dashboard/tools/tax-pressure-simulator.js',
@@ -70,7 +70,7 @@ required.forEach(file => { if (!exists(file)) throw new Error('Missing release f
 const dashboard = read('property/js/dashboard/index.js');
 const home = read('property/js/dashboard/home/index.js');
 const menu = read('property/sidemenu.html');
-const fairness = read('property/fairness.html');
+const fairness = read('property/fairness/index.html');
 
 for (const marker of ['townIntelSummary(r)', 'townIntelAgentPoints()', 'toolTownRiskMatrix()', "Town fairness (0-100)"]) {
   if (!dashboard.includes(marker)) throw new Error('Dashboard integration missing: ' + marker);
@@ -78,7 +78,7 @@ for (const marker of ['townIntelSummary(r)', 'townIntelAgentPoints()', 'toolTown
 for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pressure-simulator'", 'toolAddedOmitted(r)', 'toolFarmland(r)', 'toolExemptPilot(r)', 'toolProfessionalDueDiligence(r)']) {
   if (!home.includes(marker)) throw new Error('Home integration missing: ' + marker);
 }
-if (!menu.includes('/property/fairness.html') || !menu.includes('/property/town-compare.html')) {
+if (!menu.includes('/property/fairness') || !menu.includes('/property/town-compare')) {
   throw new Error('Shared menu links are missing');
 }
 if (!menu.includes('/property/updates')) throw new Error('Updates & roadmap menu link is missing');

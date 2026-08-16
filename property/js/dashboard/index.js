@@ -1545,7 +1545,7 @@ function brief() {
         (fastest.t.trajectory.cagr >= 0 ? '+' : '') + (fastest.t.trajectory.cagr * 100).toFixed(1) + '% per year.</span></p>' : '') +
       (pressure ? '<p><i class="fas fa-building-columns"></i><span><strong>' + esc(pressure.r.address) + '</strong> has the highest municipal budget pressure in this list at ' + pressure.b.score + '/100 (' + pressure.b.band + ').</span></p>' : '') +
       (pilot && pilot.x.pilot_count ? '<p><i class="fas fa-landmark"></i><span><strong>' + esc(pilot.r.address) + '</strong> is in a town reporting ' + pilot.x.pilot_count + ' PILOT agreement' + (pilot.x.pilot_count === 1 ? '' : 's') + ', covering ' + (pilot.x.pilot_value_share * 100).toFixed(1) + '% of assessed value.</span></p>' : '') +
-      '<a href="/property/town-compare.html">Compare municipalities</a></div>';
+      '<a href="/property/town-compare">Compare municipalities</a></div>';
   }
 
 
