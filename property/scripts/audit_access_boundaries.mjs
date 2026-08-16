@@ -29,8 +29,8 @@ const protectedPages = [
   ['property/tools/comparable-properties/index.html', 'developer'],
   ['property/tools/market-value/index.html', 'developer'],
   ['property/tools/neighborhood-comparison/index.html', 'developer'],
-  ['property/pulse.html', 'standard'],
-  ['property/marker.html', 'standard'],
+  ['property/pulse/index.html', 'standard'],
+  ['property/marker/index.html', 'standard'],
   ['property/workbench.html', 'pro']
 ];
 

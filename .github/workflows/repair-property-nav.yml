@@ -27,7 +27,7 @@ jobs:
               'id="wd-profile-sheet"',
               '/property/dashboard',
               '/property/home',
-              '/property/pro.html',
+              '/property/pro',
           ]
           missing = [x for x in required if x not in s]
           if missing:

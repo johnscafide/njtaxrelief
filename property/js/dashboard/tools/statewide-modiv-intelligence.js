@@ -57,7 +57,7 @@ function formatValue(key, value) {
 function markerLink(record, key, signal, profile) {
   var value = formatValue(key, signal.value);
   var note = profile.name + ' · ' + (signal.state_percentile != null ? signal.state_percentile + 'th percentile statewide' : 'municipal baseline');
-  return '/property/marker.html?id=' + encodeURIComponent('modiv_intel.' + key) + '&pin=' + encodeURIComponent(record.pams_pin || '') + '&value=' + encodeURIComponent(value) + '&note=' + encodeURIComponent(note);
+  return '/property/marker?id=' + encodeURIComponent('modiv_intel.' + key) + '&pin=' + encodeURIComponent(record.pams_pin || '') + '&value=' + encodeURIComponent(value) + '&note=' + encodeURIComponent(note);
 }
 function tile(record, profile, spec) {
   var key = spec[0], signal = profile.signals && profile.signals[key];

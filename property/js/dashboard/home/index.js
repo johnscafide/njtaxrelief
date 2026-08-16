@@ -1756,7 +1756,7 @@
 
   function markerHref(markerId, value, note) {
     var pin = current && current.pams_pin ? current.pams_pin : '';
-    return '/property/marker.html?id=' + encodeURIComponent(markerId) + '&pin=' + encodeURIComponent(pin) +
+    return '/property/marker?id=' + encodeURIComponent(markerId) + '&pin=' + encodeURIComponent(pin) +
       '&value=' + encodeURIComponent(String(value || '')) + '&note=' + encodeURIComponent(String(note || ''));
   }
 
