@@ -3657,7 +3657,7 @@
   // their own auth id. There is no policy anywhere that lets one user read
   // another's saved properties, and the anon key has no table access at all.
   // ══════════════════════════════════════════════
-  var DASHBOARD_URL = '/property/dashboard.html';
+  var DASHBOARD_URL = '/property/dashboard';
   var sb = null, plUser = null;
 
   function authReady() {
@@ -3779,11 +3779,11 @@
     r.innerHTML = plUser
       ? '<a href="/property/pro.html#plans">Pricing</a>' +
         '<a href="/property/pro.html">Pro Hub</a>' +
-        '<a href="/property/dashboard.html">My Properties</a>' +
+        '<a href="/property/dashboard">My Properties</a>' +
         '<button onclick="plSignOut()">Sign out</button>'
       : '<a href="/property/pro.html#plans">Pricing</a>' +
         '<a href="/property/pro.html">Pro Hub</a>' +
-        '<a href="/property/dashboard.html">My Properties</a>' +
+        '<a href="/property/dashboard">My Properties</a>' +
         '<button onclick="plSignInPrompt()">Sign in</button>';
   }
 

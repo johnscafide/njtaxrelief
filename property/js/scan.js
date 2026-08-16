@@ -83,7 +83,7 @@
       '<h3>' + esc(title) + '</h3>' + html + '</div>';
     n.classList.add('open');
   };
-  window.plSignInPrompt = function () { window.location.href = '/property/dashboard.html'; };
+  window.plSignInPrompt = function () { window.location.href = '/property/dashboard'; };
 
   // ── reference data ──
   function loadRef() {
@@ -260,7 +260,7 @@
   }
   window.scQuickAdd = function (index, event) {
     if (event) event.stopPropagation();
-    if (!plUser) { window.location.href = '/property/dashboard.html'; return; }
+    if (!plUser) { window.location.href = '/property/dashboard'; return; }
     var h = sortedHits()[index]; if (!h) return;
     var pin = prospectPin(h);
     if (savedPins[pin] || savingPins[pin]) { refreshQuickButtons(pin); return; }

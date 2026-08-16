@@ -85,7 +85,7 @@
     var topic = seller ? 'Seller strategy request' : 'Buyer strategy request';
     sendLead({ name:name(), email:plUser&&plUser.email, phone:(profile&&profile.phone)||'Not provided', topic:'⭐ WATCHDOG '+topic,
       tenure:seller?'Homeowner':'Buyer', lead_type:seller?'Seller lead':'Buyer lead', finance:'Not provided', town:(current&&current.town)||'Not provided', address:address||'Not provided',
-      message:[topic+' from Watchdog.', 'Property: '+(address||'Not provided'), 'Source: /property/home.html'].join('\n') }).catch(function(e){ console.warn(e); });
+      message:[topic+' from Watchdog.', 'Property: '+(address||'Not provided'), 'Source: /property/home'].join('\n') }).catch(function(e){ console.warn(e); });
     plModalNote(seller?'Let’s talk through the sale':'Let’s talk through the purchase','<p>'+(seller?'An agent will pair the Watchdog property story with current comparable sales and a practical listing plan.':'An agent will pair the Watchdog diligence with current listings, comps and an offer strategy.')+'</p><p><b>No obligation and no pressure.</b></p>');
   };
   window.dbAskAbout = function (address) { window.dbLeadGen(current&&current.kind==='home'?'seller':'buyer', address); };
@@ -811,7 +811,7 @@
   }
 
   function reportLink(r) {
-    return '/property/home.html?pin=' + encodeURIComponent(r.pams_pin || '');
+    return '/property/home?pin=' + encodeURIComponent(r.pams_pin || '');
   }
 
   // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
@@ -1345,7 +1345,7 @@
   }
 
   window.hmSwitch = function (pin) {
-    history.replaceState({}, '', '/property/home.html?pin=' + encodeURIComponent(pin));
+    history.replaceState({}, '', '/property/home?pin=' + encodeURIComponent(pin));
     current = rows.filter(function (r) { return r.pams_pin === pin; })[0] || rows[0];
     OPEN = {};
     paintReport();
@@ -1819,7 +1819,7 @@
     }
     if (r.verify_level !== 'mail' && r.kind === 'home') {
       p.push(['fa-badge-check', '',
-        'Ownership is not verified on this one yet, which is worth doing before anything is filed. <a class="ai-verify-action" href="/property/dashboard.html#profile">Verify ownership</a>']);
+        'Ownership is not verified on this one yet, which is worth doing before anything is filed. <a class="ai-verify-action" href="/property/dashboard#profile">Verify ownership</a>']);
     }
     if (!p.length) return '';
     return '<ul class="ai-pts">' + p.map(function (x) {

@@ -119,7 +119,7 @@
     var access=x[0]||{},reg=x[1],id=q.get('id'),rich=(x[2].markers||{})[id]||{},formula=(x[6].markers||{})[id],refresh=(x[7].markers||[]).find(function(v){return v.marker_id===id;}),m=reg.markers.find(function(v){return v.id===id;});
     if(!m)throw Error('Unknown marker');
     if(!formula&&m.formula)formula={formula:m.formula,range:m.unit||''};
-    if(m.tier!=='standard'&&!access.developer){location.replace('/property/dashboard.html?access=restricted');return;}
+    if(m.tier!=='standard'&&!access.developer){location.replace('/property/dashboard?access=restricted');return;}
     var sources=[].concat(x[3].datasets||[],x[4].sources||[],x[5].sources||[]),byId={};sources.forEach(function(s){byId[s.id]=s;});
     document.title=m.label+' | Watchdog Data';$('mk-title').textContent=m.label;$('mk-crumb').textContent=label(m.category)+' · '+label(m.scope);
     $('mk-intro').textContent=rich.plain||m.description||'A Watchdog data marker with plan, profession and provenance metadata.';
@@ -135,6 +135,6 @@
     $('mk-sources').innerHTML=sourceHTML(sourceList(m,rich,{all:sources,byId:byId},reg));
     $('mk-refresh').innerHTML=refresh?'<i class="fas fa-clock-rotate-left"></i><div><b>'+esc(label(refresh.cadence))+' refresh contract</b><span>'+esc(refresh.rule)+' Trigger: '+esc(String(refresh.trigger||'').replace(/_/g,' '))+'.</span></div>':'';
     $('mk-related').innerHTML=(rich.related||[]).map(function(rid){var z=reg.markers.find(function(v){return v.id===rid;});return'<a href="/property/marker.html?id='+encodeURIComponent(rid)+'">'+esc(z?z.label:rid)+'</a>';}).join('')||'<span class="mk-empty">Related markers are curated as their source relationships are validated.</span>';
-    var pin=q.get('pin');if(pin)$('mk-back').href='/property/home.html?pin='+encodeURIComponent(pin);
+    var pin=q.get('pin');if(pin)$('mk-back').href='/property/home?pin='+encodeURIComponent(pin);
   }).catch(function(e){$('mk-title').textContent='Data marker not found';$('mk-intro').textContent='The marker identifier is missing or no longer available.';console.error(e);});
 })();
