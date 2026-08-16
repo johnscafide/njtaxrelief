@@ -1,0 +1,27 @@
+name: NJW-183 reference audit
+
+on:
+  push:
+    branches:
+      - agent/njw-183-legal-public-routes
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit retired legal/public route references
+        shell: bash
+        run: |
+          set -u
+          echo 'NJW183_AUDIT_BEGIN'
+          for p in privacy terms refunds data-methodology data-use; do
+            echo "=== /property/$p.html ==="
+            git grep -I -n -F -- "/property/$p.html" || true
+          done
+          echo '=== moved page relative dependency check ==='
+          for f in property/privacy/index.html property/terms/index.html property/refunds/index.html property/data-methodology/index.html property/data-use/index.html; do
+            echo "--- $f"
+            grep -Eo '(href|src)="[^"]+"' "$f" | grep -vE '="(/|https?:|mailto:|#)' || true
+          done
+          echo 'NJW183_AUDIT_END'
