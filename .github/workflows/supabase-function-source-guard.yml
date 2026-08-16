@@ -27,7 +27,7 @@ jobs:
               exit 1
             }
           done
-          grep -q "provider-family resolver v10" supabase/functions/workbench-hydrate/index.ts
+          grep -q "provider-family resolver v15" supabase/functions/workbench-hydrate/index.ts
       - name: Verify full deployed inventory is fingerprinted
         shell: python
         run: |
