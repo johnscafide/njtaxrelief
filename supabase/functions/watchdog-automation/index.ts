@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const fields=["address","town","county","block","lot","assessed","last_year_tax","effective_rate","watchdog_value","verified","verify_level"];
-const sourceUrl="https://njpropertytaxrelief.com/property/data-methodology.html";
+const sourceUrl="https://njpropertytaxrelief.com/property/data-methodology";
 function stable(v:unknown){return JSON.stringify(v,Object.keys(v as Record<string,unknown>).sort());}
 async function sha(v:string){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(v));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,"0")).join("");}
 function materiality(k:string,a:unknown,b:unknown){if(["assessed","last_year_tax","watchdog_value"].includes(k)){const old=Number(a)||0,next=Number(b)||0,pct=old?Math.abs(next-old)/old:1;return pct>=.05?"action":pct>=.01?"material":"informational";}return ["verified","verify_level"].includes(k)?"material":"informational";}
