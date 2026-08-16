@@ -6,7 +6,7 @@ const read = relative => fs.readFileSync(path.join(root, relative), 'utf8');
 const exists = relative => fs.existsSync(path.join(root, relative));
 
 const required = [
-  'property/fairness/index.html', 'property/town-compare/index.html', 'property/sidemenu.html',
+  'property/fairness/index.html', 'property/town-compare/index.html', 'property/partials/sidemenu.html',
   'property/js/dashboard/tools/town-intelligence.js',
   'property/js/dashboard/tools/town-risk-matrix.js',
   'property/js/dashboard/tools/tax-pressure-simulator.js',
@@ -69,7 +69,7 @@ required.forEach(file => { if (!exists(file)) throw new Error('Missing release f
 
 const dashboard = read('property/js/dashboard/index.js');
 const home = read('property/js/dashboard/home/index.js');
-const menu = read('property/sidemenu.html');
+const menu = read('property/partials/sidemenu.html');
 const fairness = read('property/fairness/index.html');
 
 for (const marker of ['townIntelSummary(r)', 'townIntelAgentPoints()', 'toolTownRiskMatrix()', "Town fairness (0-100)"]) {
