@@ -1,6 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "trailingSlash": false,
   "functions": {
     "api/sales-by-district.js": {
       "includeFiles": "property/sales-*.json",
