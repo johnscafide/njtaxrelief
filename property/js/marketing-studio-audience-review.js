@@ -203,7 +203,7 @@ async function saveAndContinue(go){
  const old=b?.innerHTML;if(b){b.disabled=true;b.textContent='Saving audience…'}
  try{
   await rpc('marketing_audience_hub_apply_keys',{p_campaign_id:campaign(),p_property_keys:[...S.selected],p_source_type:'audience_review',p_source_ref:'refined',p_source_label:`Refined · ${S.sourceLabel}`,p_limit:Math.max(S.selected.size,1),p_qualification_summary:{reviewed:true,original_count:S.keys.length,selected_count:S.selected.size,filtered_count:S.total,source_label:S.sourceLabel,filters:S.filters,search:S.search}});
-  toast('Audience saved.');if(go)setTimeout(()=>location.href=`/property/marketing-studio-design.html?campaign=${encodeURIComponent(campaign())}`,220);
+  toast('Audience saved.');if(go)setTimeout(()=>location.href=`/property/marketing-studio/design?campaign=${encodeURIComponent(campaign())}`,220);
  }catch(e){toast(e?.message||'Could not save this audience.')}
  finally{if(b?.isConnected){b.disabled=false;b.innerHTML=old||'Save audience & continue';updateCount()}}
 }

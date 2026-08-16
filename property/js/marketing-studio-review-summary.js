@@ -3,7 +3,7 @@ const $=(s,r=document)=>r.querySelector(s);const esc=v=>String(v??'').replace(/[
 let client=null,id='';
 async function rpc(name,args={}){const r=await client.rpc(name,args);if(r.error)throw r.error;return r.data}
 function money(c){return c==null?'Not quoted':'$'+(Number(c||0)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}
-function route(step){return `/property/marketing-studio-${step}.html?campaign=${encodeURIComponent(id)}`}
+function route(step){return `/property/marketing-studio/${step}?campaign=${encodeURIComponent(id)}`}
 function asset(state){const m=state?.metadata||{};return m.front_url||m.thumbnail_url||m.back_url||''}
 function safeMeta(d){return{name:d?.name||'',type:d?.type||'',size:d?.size||'',orientation:d?.orientation||'',status:d?.status||'',thumbnail_url:d?.thumbnail_url||'',front_url:d?.front_url||'',back_url:d?.back_url||'',proof_url:d?.proof_url||'',variable_count:Number(d?.variable_count||d?.variables?.length||0),provider_editability:d?.provider_editability||''}}
 async function refreshPcmState(pcm){if(!pcm?.design_id)return pcm||{};try{const r=await client.functions.invoke('pcm-sandbox-catalog',{body:{action:'design.detail',design_id:String(pcm.design_id)}});if(r.error||!r.data?.design)return pcm;return await rpc('marketing_select_pcm_design',{p_campaign_id:id,p_design_id:String(pcm.design_id),p_metadata:safeMeta(r.data.design)})}catch(e){console.warn('[Final Review] PCM detail refresh unavailable',e);return pcm}}

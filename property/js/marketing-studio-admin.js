@@ -12,7 +12,7 @@ function bind(){$$('[data-days]').forEach(b=>b.onclick=async()=>{days=Number(b.d
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 async function loadCustomers(){customers=await rpc('marketing_direct_mail_admin_customers',{p_limit:500,p_offset:0,p_segment:segment})}
 async function load(){[summary,orders]=await Promise.all([rpc('marketing_direct_mail_admin_summary',{p_days:days}),rpc('marketing_direct_mail_admin_orders',{p_limit:100,p_offset:0})]);await loadCustomers();render()}
-function fail(e){const root=$('#direct-mail-admin');root.innerHTML=`<div class="dmaa-error"><i class="fas fa-lock"></i><h2>Developer access required</h2><p>${e?.message||'This page is restricted to Watchdog developers.'}</p><a href="/property/marketing-studio.html">Back to Marketing Studio</a></div>`}
+function fail(e){const root=$('#direct-mail-admin');root.innerHTML=`<div class="dmaa-error"><i class="fas fa-lock"></i><h2>Developer access required</h2><p>${e?.message||'This page is restricted to Watchdog developers.'}</p><a href="/property/marketing-studio">Back to Marketing Studio</a></div>`}
 async function init(){try{await window.njptrAccessReady;client=window.NJPTRAccess.client();await load()}catch(e){fail(e)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(init,0));else setTimeout(init,0);
 })();

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
-const page=read('property/marketing-studio.html');
+const page=read('property/marketing-studio/customize/index.html');
 assert.match(page,/data-access-require="agent"/,'Marketing Studio must remain Agent+.');
 assert.match(page,/marketing-studio-creative\.js/,'Creative Studio must load in Marketing Studio.');
 assert.match(page,/marketing-studio-creative\.css/,'Creative Studio styles must load.');
