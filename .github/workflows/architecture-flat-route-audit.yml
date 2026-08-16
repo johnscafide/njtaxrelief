@@ -1,0 +1,32 @@
+name: Architecture flat route audit
+
+on:
+  push:
+    branches:
+      - agent/architecture-flat-route-audit
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Classify top-level property HTML routes
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          for p in sorted(Path('property').glob('*.html')):
+              s=p.read_text(encoding='utf-8',errors='replace')
+              attrs=[]
+              for m in re.finditer(r'(?:href|src)=["\']([^"\']+)',s,re.I):
+                  u=m.group(1).strip()
+                  if not (u.startswith('/') or u.startswith('http://') or u.startswith('https://') or u.startswith('#') or u.startswith('mailto:') or u.startswith('tel:') or u.startswith('javascript:') or u.startswith('data:')):
+                      attrs.append(u)
+              access=re.search(r'data-access-require=["\']([^"\']+)',s,re.I)
+              canon=re.search(r'<link[^>]+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)',s,re.I)
+              if not canon:
+                  canon=re.search(r'<link[^>]+href=["\']([^"\']+)["\'][^>]+rel=["\']canonical["\']',s,re.I)
+              print(f'ROUTE|{p.as_posix()}|bytes={p.stat().st_size}|access={access.group(1) if access else "-"}|canonical={canon.group(1) if canon else "-"}|relative={len(attrs)}')
+              for u in sorted(set(attrs))[:12]:
+                  print(f'  REL|{u}')
+          print('ARCHITECTURE_FLAT_ROUTE_AUDIT_END')
