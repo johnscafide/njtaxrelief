@@ -1,0 +1,44 @@
+name: NJW-184 Agent digest inventory refresh
+
+on:
+  push:
+    branches:
+      - agent/njw-184-agent-digest-clean-route
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-184-agent-digest-clean-route
+          fetch-depth: 0
+      - name: Update exactly one deployed fingerprint row
+        shell: python
+        run: |
+          from pathlib import Path
+          p=Path('supabase/functions/PRODUCTION-INVENTORY.json')
+          s=p.read_text(encoding='utf-8')
+          old='    "agent-opportunity-digest": {"version": 14, "sha256": "fa1de66129dd0b9d0523acac805348c935dc771ca6af7047dea3a06e9ff1a365", "verify_jwt": true, "tracking": "source_snapshot"},'
+          new='    "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},'
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected one old digest fingerprint row, found {s.count(old)}')
+          p.write_text(s.replace(old,new,1),encoding='utf-8')
+      - name: Verify exact scope and self-remove
+        run: |
+          set -euo pipefail
+          test "$(git diff --name-only)" = "supabase/functions/PRODUCTION-INVENTORY.json"
+          git diff --check
+          rm .github/workflows/njw-184-agent-digest-inventory.yml
+      - name: Commit minimal inventory update
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supabase/functions/PRODUCTION-INVENTORY.json .github/workflows/njw-184-agent-digest-inventory.yml
+          git commit -m "Refresh Agent digest production fingerprint"
+          git push origin HEAD:agent/njw-184-agent-digest-clean-route
