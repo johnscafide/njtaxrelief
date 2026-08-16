@@ -1,0 +1,47 @@
+name: NJW-184 production access diagnostic
+
+on:
+  push:
+    branches:
+      - agent/njw-184-production-validation
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Diagnose signed-out protected-route outcomes
+        env:
+          BASE_URL: https://njpropertytaxrelief.com
+        run: |
+          node --input-type=module - <<'JS'
+          import { chromium } from 'playwright';
+          const base=process.env.BASE_URL;
+          const routes=['agent-desk','data-center','data-workbench','developer-data','diagnostics','farm-builder','farm-map','market-list','marketing-plan','report-builder','report-studio','scan','tools','updates','verification-diagnostics','workbench'];
+          const browser=await chromium.launch({headless:true});
+          for(const route of routes){
+            const ctx=await browser.newContext({viewport:{width:1280,height:900}});
+            const p=await ctx.newPage();
+            const errors=[];
+            p.on('pageerror',e=>errors.push(String(e)));
+            p.on('console',m=>{if(m.type()==='error')errors.push('console:'+m.text())});
+            try{
+              await p.goto(`${base}/property/${route}?routecheck=1`,{waitUntil:'domcontentloaded',timeout:30000});
+              await p.waitForTimeout(8000);
+              console.log(`ACCESS|${route}|${p.url()}|errors=${errors.slice(0,3).join(' || ')}`);
+            }catch(e){
+              console.log(`ACCESS_ERROR|${route}|${p.url()}|${String(e)}|errors=${errors.slice(0,3).join(' || ')}`);
+            }
+            await ctx.close();
+          }
+          await browser.close();
+          console.log('NJW184_ACCESS_DIAGNOSTIC_END');
+          JS
