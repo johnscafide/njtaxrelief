@@ -61,7 +61,7 @@ Deno.serve(async (req: Request) => {
   if (consumeError || !consumed) return json(req, 401, { error: "Invalid or expired sandbox token" });
 
   const email = String(consumed.desired_email || "").trim().toLowerCase();
-  const redirectTo = String(consumed.redirect_to || "https://njpropertytaxrelief.com/property/dashboard.html");
+  const redirectTo = String(consumed.redirect_to || "https://njpropertytaxrelief.com/property/dashboard");
   if (!email || !isAllowedRedirect(redirectTo)) {
     await admin.from("watchdog_test_auth_events").insert({ token_id: consumed.id, event_type: "bootstrap_rejected", metadata: { reason: "invalid_config" } });
     return json(req, 403, { error: "Sandbox bootstrap configuration rejected" });
