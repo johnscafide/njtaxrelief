@@ -1,0 +1,68 @@
+name: NJW-183 production route validation
+
+on:
+  push:
+    branches:
+      - agent/njw-183-production-validation
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Validate NJW-183 production routes
+        env:
+          BASE_URL: https://njpropertytaxrelief.com
+        run: |
+          node --input-type=module - <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+          const base=process.env.BASE_URL;
+          const routes=['privacy','terms','refunds','data-methodology','data-use'];
+          const browser=await chromium.launch({headless:true});
+          const context=await browser.newContext({javaScriptEnabled:false});
+          const page=await context.newPage();
+
+          async function chain(response){
+            const out=[]; let req=response.request();
+            while(req.redirectedFrom()){
+              const prev=req.redirectedFrom();
+              const r=await prev.response();
+              out.unshift({url:prev.url(),status:r&&r.status()});
+              req=prev;
+            }
+            return out;
+          }
+
+          for(const route of routes){
+            let response=await page.goto(`${base}/property/${route}`,{waitUntil:'domcontentloaded',timeout:30000});
+            assert(response,`No clean response for ${route}`);
+            assert.equal(response.status(),200,`Clean ${route} status`);
+            assert.equal(new URL(page.url()).pathname,`/property/${route}`,`Clean ${route} pathname`);
+            const canonical=await page.locator('link[rel="canonical"]').getAttribute('href').catch(()=>null);
+            if(canonical) assert.equal(new URL(canonical).pathname,`/property/${route}`,`${route} canonical pathname`);
+
+            for(const legacy of [`/property/${route}.html`,`/property/${route}/index.html`]){
+              response=await page.goto(`${base}${legacy}?routecheck=1#deep`,{waitUntil:'domcontentloaded',timeout:30000});
+              assert(response,`No legacy response for ${legacy}`);
+              assert.equal(response.status(),200,`Final ${legacy} status`);
+              const final=new URL(page.url());
+              assert.equal(final.pathname,`/property/${route}`,`${legacy} final clean pathname`);
+              assert.equal(final.searchParams.get('routecheck'),'1',`${legacy} query preserved`);
+              assert.equal(final.hash,'#deep',`${legacy} hash preserved`);
+              const redirects=await chain(response);
+              assert(redirects.length>=1,`${legacy} must redirect`);
+              assert.equal(redirects[0].status,308,`${legacy} first redirect must be 308`);
+            }
+          }
+          await browser.close();
+          console.log('NJW183_PRODUCTION_ROUTE_VALIDATION_PASS');
+          JS
