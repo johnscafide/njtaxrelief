@@ -25,8 +25,8 @@ jobs:
               "WatchdogPublicNav.open('profile')",
               'id="wd-main-sheet"',
               'id="wd-profile-sheet"',
-              '/property/dashboard.html',
-              '/property/home.html',
+              '/property/dashboard',
+              '/property/home',
               '/property/pro.html',
           ]
           missing = [x for x in required if x not in s]
