@@ -14,16 +14,16 @@ const checks = [];
 function check(name, ok, note) { checks.push({ name, ok: !!ok, note }); }
 
 const protectedPages = [
-  ['property/developer-data.html', 'developer'],
-  ['property/updates.html', 'developer'],
-  ['property/verification-diagnostics.html', 'developer'],
-  ['property/scan.html', 'developer'],
-  ['property/data-center.html', 'pro_plus'],
-  ['property/data-workbench.html', 'agent'],
+  ['property/developer-data/index.html', 'developer'],
+  ['property/updates/index.html', 'developer'],
+  ['property/verification-diagnostics/index.html', 'developer'],
+  ['property/scan/index.html', 'developer'],
+  ['property/data-center/index.html', 'pro_plus'],
+  ['property/data-workbench/index.html', 'agent'],
   ['property/marketing-studio.html', 'agent'],
   ['property/property-analysis.html', 'developer'],
   ['property/dashboards.html', 'developer'],
-  ['property/diagnostics.html', 'developer'],
+  ['property/diagnostics/index.html', 'developer'],
   ['property/tools/assessment-fairness/index.html', 'developer'],
   ['property/tools/appeal-potential/index.html', 'developer'],
   ['property/tools/comparable-properties/index.html', 'developer'],
@@ -31,7 +31,7 @@ const protectedPages = [
   ['property/tools/neighborhood-comparison/index.html', 'developer'],
   ['property/pulse/index.html', 'standard'],
   ['property/marker/index.html', 'standard'],
-  ['property/workbench.html', 'pro']
+  ['property/workbench/index.html', 'pro']
 ];
 
 for (const [file, level] of protectedPages) {

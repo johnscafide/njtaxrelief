@@ -5,7 +5,7 @@ const root = new URL('../../', import.meta.url);
 const read = file => fs.readFileSync(new URL(file, root), 'utf8');
 const migration = read('supabase/migrations/20260809233000_watchdog_v045_control_plane.sql');
 const edge = read('supabase/functions/municipal-data/index.ts');
-const agentHtml = read('property/agent-desk.html');
+const agentHtml = read('property/agent-desk/index.html');
 const agentJs = read('property/js/agent-control.js');
 const agentDeskJs = read('property/js/agent-desk.js');
 const nav = read('property/sidemenu.html');

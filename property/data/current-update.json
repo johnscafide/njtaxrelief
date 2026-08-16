@@ -17,6 +17,6 @@
     {"area":"Workbench status UX","state":"shipped","detail":"Added a provider-status client layer that distinguishes resolved values, trusted scores awaiting computation, provider gaps and entitlement blocks, with source/checked-time details available on cell hover."},
     {"area":"Data integrity","state":"passed","detail":"No new proprietary score formulas were invented. Fields without a connected provider remain explicitly identified as provider gaps so provider coverage can be expanded systematically."}
   ],
-  "links":["/property/data-workbench.html","/property/data-center.html","/property/updates.html"],
-  "files":["property/data-workbench.html","property/js/data-workbench-provider-status.js","property/js/data-workbench-enhancements.js","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json","supabase:data_center_provider_coverage","supabase:bulk_metric_cache"]
+  "links":["/property/data-workbench","/property/data-center","/property/updates"],
+  "files":["property/data-workbench/index.html","property/js/data-workbench-provider-status.js","property/js/data-workbench-enhancements.js","supabase/functions/workbench-hydrate/index.ts","property/data/current-update.json","supabase:data_center_provider_coverage","supabase:bulk_metric_cache"]
 }

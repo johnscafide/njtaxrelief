@@ -36,7 +36,7 @@
 
   function openAgentControl(event) {
     if (event) event.preventDefault();
-    var url = '/property/agent-desk.html?standalone=1';
+    var url = '/property/agent-desk?standalone=1';
     var overlay = openingOverlay();
     var features = 'popup=yes,width=1600,height=980,resizable=yes,scrollbars=yes,toolbar=no,location=no,menubar=no,status=no';
     var win = window.open(url, 'watchdogAgentControl', features);
@@ -89,7 +89,7 @@
     container.querySelectorAll('[data-nav-page]').forEach(function (item) { var active = item.getAttribute('data-nav-page') === current; item.classList.toggle('on', active); if (active) item.setAttribute('aria-current', 'page'); else item.removeAttribute('aria-current'); });
     restoreGroups(container); activateSearch(container);
     container.addEventListener('click', function (event) {
-      var agentLink = event.target.closest('a[data-nav-page="agent-desk"],a[href="/property/agent-desk.html"]');
+      var agentLink = event.target.closest('a[data-nav-page="agent-desk"],a[href="/property/agent-desk"]');
       if (agentLink) { openAgentControl(event); toggleMobileMenu(false); return; }
       var control = event.target.closest('[data-side-action]'); if (control) runAction(control.getAttribute('data-side-action'), event);
     });

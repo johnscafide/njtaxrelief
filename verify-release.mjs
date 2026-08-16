@@ -12,11 +12,11 @@ const required = [
   'property/js/dashboard/tools/tax-pressure-simulator.js',
   'property/js/town-compare/index.js',
   'property/css/dashboard/07-town-intelligence.css', 'property/css/town-compare.css',
-  'property/updates.html', 'property/css/updates.css', 'property/js/updates.js',
+  'property/updates/index.html', 'property/css/updates.css', 'property/js/updates.js',
   'property/data/versions.json',
   'property/js/dashboard/tools/assessment-drift.js',
   'property/css/dashboard/08-time-machine.css',
-  'property/verification-diagnostics.html',
+  'property/verification-diagnostics/index.html',
   'property/js/verification-diagnostics.js',
   'property/data/source-registry.json',
   'property/data/data-freshness.json',
@@ -43,7 +43,7 @@ const required = [
   'property/scripts/build_exempt_pilot.py',
   'property/data/marker-registry.json',
   'property/scripts/build_marker_registry.py',
-  'property/data-center.html',
+  'property/data-center/index.html',
   'property/js/data-center.js',
   'property/css/data-center.css',
   'property/css/mobile-app.css',
@@ -81,8 +81,8 @@ for (const marker of ['townIntelligenceCard(r)', 'toolTaxPressure(r)', "'tax-pre
 if (!menu.includes('/property/fairness.html') || !menu.includes('/property/town-compare.html')) {
   throw new Error('Shared menu links are missing');
 }
-if (!menu.includes('/property/updates.html')) throw new Error('Updates & roadmap menu link is missing');
-if (!menu.includes('/property/verification-diagnostics.html')) throw new Error('Verification status menu link is missing');
+if (!menu.includes('/property/updates')) throw new Error('Updates & roadmap menu link is missing');
+if (!menu.includes('/property/verification-diagnostics')) throw new Error('Verification status menu link is missing');
 if (!fairness.includes("townIntelAll()") || !fairness.includes('fi-detail')) {
   throw new Error('Fairness Index does not use shared Town Intelligence');
 }
@@ -107,18 +107,18 @@ if (markerRegistry.summary.total !== 324 || markerRegistry.markers.length !== 32
 if (!read('property/home/index.html').includes('marker-intelligence.css') || !read('property/home/index.html').includes('marker-intelligence.js')) throw new Error('Home marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('data-marker-id')) throw new Error('Home data-marker links are missing');
 if (!read('property/marker/index.html').includes('marker-detail.js')) throw new Error('Universal marker detail page is incomplete');
-if (!read('property/data-center.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
+if (!read('property/data-center/index.html').includes('marker-intelligence.js')) throw new Error('Data Center marker intelligence is not loaded');
 if (!read('property/js/dashboard/home/index.js').includes('compactHomeSection')) throw new Error('Home progressive-disclosure signals are missing');
 if (!read('property/css/home/05-marker-experience.css').includes('border-left-width:0!important')) throw new Error('Home report rails returned');
 if (!read('property/index.html').includes('/property/pro#plans')) throw new Error('Public Pricing link is missing');
 if (!read('property/home/index.html').includes('plan-context.js') || !read('property/dashboard/index.html').includes('plan-context.js')) throw new Error('Developer View As integration is missing');
 if (!read('property/js/dashboard/index.js').includes("typeof window.paintPercentile === 'function'")) throw new Error('Paid/developer lazy-tool login guard is missing');
-if (!read('property/data-center.html').includes('data-plan-auto="true"')) throw new Error('Standalone Data Center plan initialization is missing');
+if (!read('property/data-center/index.html').includes('data-plan-auto="true"')) throw new Error('Standalone Data Center plan initialization is missing');
 const proprietaryBacklog = JSON.parse(read('property/data/proprietary-marker-backlog.json'));
 if (proprietaryBacklog.professions.length !== 9 || proprietaryBacklog.professions.some(p => p.markers.length !== 10)) throw new Error('Professional proprietary-marker backlog is incomplete');
 const saasPipeline = JSON.parse(read('property/data/saas-platform-pipeline.json'));
 if (saasPipeline.items.length < 15) throw new Error('Professional SaaS pipeline is incomplete');
-if (!menu.includes('/property/data-center.html')) throw new Error('Data Center navigation link is missing');
+if (!menu.includes('/property/data-center')) throw new Error('Data Center navigation link is missing');
 if (!read('property/home/index.html').includes('hm-mobile-intel-overlay') || !read('property/home/index.html').includes('mobile-app.css')) throw new Error('Home mobile app treatment is missing');
 if (!read('property/dashboard/index.html').includes('mobile-app.css')) throw new Error('Dashboard mobile app treatment is missing');
 if (!read('property/js/dashboard/home/index.js').includes("class=\"ai ai-mobile\"")) throw new Error('Home Agent Intel mobile sheet is missing');
