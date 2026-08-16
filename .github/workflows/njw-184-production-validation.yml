@@ -1,0 +1,95 @@
+name: NJW-184 production route validation
+
+on:
+  push:
+    branches:
+      - agent/njw-184-production-validation
+
+jobs:
+  chromium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Validate NJW-184 production routes and access gates
+        env:
+          BASE_URL: https://njpropertytaxrelief.com
+        run: |
+          node --input-type=module - <<'JS'
+          import assert from 'node:assert/strict';
+          import { chromium } from 'playwright';
+
+          const base=process.env.BASE_URL;
+          const routes=['agent-desk','data-center','data-workbench','developer-data','diagnostics','farm-builder','farm-map','market-list','marketing-plan','report-builder','report-studio','scan','tools','updates','verification-diagnostics','workbench'];
+          const browser=await chromium.launch({headless:true});
+
+          async function chain(response){
+            const out=[]; let req=response.request();
+            while(req.redirectedFrom()){
+              const prev=req.redirectedFrom();
+              const r=await prev.response();
+              out.unshift({url:prev.url(),status:r&&r.status()});
+              req=prev;
+            }
+            return out;
+          }
+
+          const staticContext=await browser.newContext({javaScriptEnabled:false});
+          const page=await staticContext.newPage();
+          for(const route of routes){
+            let response=await page.goto(`${base}/property/${route}`,{waitUntil:'domcontentloaded',timeout:30000});
+            assert(response,`No clean response for ${route}`);
+            assert.equal(response.status(),200,`Clean ${route} status`);
+            assert.equal(new URL(page.url()).pathname,`/property/${route}`,`Clean ${route} pathname`);
+
+            for(const legacy of [`/property/${route}.html`,`/property/${route}/index.html`]){
+              response=await page.goto(`${base}${legacy}?routecheck=1#deep`,{waitUntil:'domcontentloaded',timeout:30000});
+              assert(response,`No legacy response for ${legacy}`);
+              assert.equal(response.status(),200,`Final ${legacy} status`);
+              const final=new URL(page.url());
+              assert.equal(final.pathname,`/property/${route}`,`${legacy} final clean pathname`);
+              assert.equal(final.searchParams.get('routecheck'),'1',`${legacy} query preserved`);
+              assert.equal(final.hash,'#deep',`${legacy} hash preserved`);
+              const redirects=await chain(response);
+              assert(redirects.length>=1,`${legacy} must redirect`);
+              assert.equal(redirects[0].status,308,`${legacy} first redirect must be 308`);
+            }
+          }
+
+          for(const route of ['data-center','data-workbench']){
+            const r=await staticContext.request.get(`${base}/property/${route}`,{maxRedirects:0});
+            assert.equal(r.status(),200,`${route} clean status for header check`);
+            assert.match(r.headers()['x-robots-tag']||'',/noindex/i,`${route} clean route preserves X-Robots noindex`);
+          }
+          await staticContext.close();
+
+          const protectedRoutes=['agent-desk','data-center','data-workbench','developer-data','diagnostics','farm-builder','farm-map','market-list','marketing-plan','report-builder','report-studio','scan','updates','verification-diagnostics','workbench'];
+          for(const route of protectedRoutes){
+            const ctx=await browser.newContext({viewport:{width:1280,height:900}});
+            const p=await ctx.newPage();
+            await p.goto(`${base}/property/${route}?routecheck=1`,{waitUntil:'domcontentloaded',timeout:30000});
+            await p.waitForURL(url => url.pathname==='/property/dashboard' && url.searchParams.get('access')==='signin',{timeout:20000});
+            const final=new URL(p.url());
+            assert.equal(final.pathname,'/property/dashboard',`${route} signed-out destination`);
+            assert.equal(final.searchParams.get('access'),'signin',`${route} sign-in requirement`);
+            const ret=final.searchParams.get('return')||'';
+            assert(ret.includes(`/property/${route}`),`${route} return target remains clean route`);
+            await ctx.close();
+          }
+
+          const tools=await browser.newContext({viewport:{width:1280,height:900}});
+          const toolsPage=await tools.newPage();
+          await toolsPage.goto(`${base}/property/tools`,{waitUntil:'domcontentloaded',timeout:30000});
+          await toolsPage.waitForURL(url => url.pathname==='/property/dashboard' && url.searchParams.get('access')==='signin',{timeout:20000});
+          await tools.close();
+
+          await browser.close();
+          console.log('NJW184_PRODUCTION_ROUTE_VALIDATION_PASS');
+          JS
