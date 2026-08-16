@@ -16,11 +16,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Verify rollback-critical resolver snapshots exist
+      - name: Verify rollback-critical source snapshots exist
         shell: bash
         run: |
           set -euo pipefail
-          required=(workbench-hydrate workbench-baseline workbench-refresh)
+          required=(
+            workbench-hydrate
+            workbench-baseline
+            workbench-refresh
+            report-share
+            google-ads-oauth-start
+            google-ads-oauth-callback
+            marketing-campaign-checkout
+            paddle-webhook
+          )
           for fn in "${required[@]}"; do
             test -s "supabase/functions/$fn/index.ts" || {
               echo "::error::Missing rollback-critical source: supabase/functions/$fn/index.ts"
@@ -28,24 +37,53 @@ jobs:
             }
           done
           grep -q "provider-family resolver v15" supabase/functions/workbench-hydrate/index.ts
-      - name: Verify full deployed inventory is fingerprinted
+          grep -q "/property/report?token=" supabase/functions/report-share/index.ts
+          grep -q "/property/marketing-studio" supabase/functions/google-ads-oauth-start/index.ts
+          grep -q "/property/marketing-studio" supabase/functions/google-ads-oauth-callback/index.ts
+          grep -q "/property/marketing-studio/review" supabase/functions/marketing-campaign-checkout/index.ts
+      - name: Verify deployed inventory fingerprints and source snapshots
         shell: python
         run: |
-          import json, pathlib, sys
-          p=pathlib.Path('supabase/functions/PRODUCTION-INVENTORY.json')
-          data=json.loads(p.read_text())
-          required={
+          import json, pathlib, re, sys
+
+          p = pathlib.Path('supabase/functions/PRODUCTION-INVENTORY.json')
+          data = json.loads(p.read_text(encoding='utf-8'))
+          required = {
             'workbench-hydrate','workbench-baseline','workbench-refresh','workbench-score','workbench-provider-registry',
             'farm-intelligence-scan','farm-map-query','bulk-marker-hydrate','production-api','insights-publish',
-            'public-report-share','stripe-webhook'
+            'public-report-share','stripe-webhook','report-share','google-ads-oauth-start','google-ads-oauth-callback',
+            'marketing-campaign-checkout','paddle-webhook'
           }
-          funcs=data.get('functions',{})
-          missing=sorted(required-set(funcs))
-          bad=sorted(k for k in required if not funcs.get(k,{}).get('sha256') or not funcs.get(k,{}).get('version'))
-          if missing or bad:
-            print('Missing inventory:',missing)
-            print('Missing version/hash:',bad)
+          funcs = data.get('functions', {})
+          missing = sorted(required - set(funcs))
+          bad = []
+          for name in required:
+            item = funcs.get(name, {})
+            sha = str(item.get('sha256', ''))
+            if not item.get('version') or not re.fullmatch(r'[0-9a-f]{64}', sha):
+              bad.append(name)
+
+          snapshot_errors = []
+          for name, item in sorted(funcs.items()):
+            if item.get('tracking') != 'source_snapshot':
+              continue
+            source = pathlib.Path('supabase/functions') / name / 'index.ts'
+            if not source.is_file() or source.stat().st_size == 0:
+              snapshot_errors.append(f'{name}: source_snapshot missing index.ts')
+            if not item.get('version'):
+              snapshot_errors.append(f'{name}: source_snapshot missing version')
+            if not re.fullmatch(r'[0-9a-f]{64}', str(item.get('sha256', ''))):
+              snapshot_errors.append(f'{name}: source_snapshot missing/invalid sha256')
+            if 'verify_jwt' not in item:
+              snapshot_errors.append(f'{name}: source_snapshot missing verify_jwt')
+
+          if missing or bad or snapshot_errors:
+            print('Missing inventory:', missing)
+            print('Missing/invalid version/hash:', sorted(bad))
+            print('Source snapshot errors:', snapshot_errors)
             sys.exit(1)
-          print(f"Tracked {len(funcs)} deployed function fingerprints; {len(required)} NJW-141 critical entries verified.")
+
+          snapshots = sum(1 for item in funcs.values() if item.get('tracking') == 'source_snapshot')
+          print(f"Tracked {len(funcs)} deployed function fingerprints; {len(required)} NJW-141 critical entries verified; {snapshots} source snapshots guarded.")
       - name: Enforce Git-first deployment policy
         run: test -s supabase/functions/DEPLOYMENT-POLICY.md

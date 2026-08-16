@@ -107,14 +107,17 @@ assert.match(controlsMigration, /revoke all on public\.marketing_performance_rol
 
 const paddle = read('supabase/functions/paddle-webhook/index.ts');
 const signatureRead = paddle.indexOf("req.headers.get('Paddle-Signature')");
-const signatureCheck = paddle.indexOf('await verifyPaddleSignature(raw, signature, secret)');
+const signatureCheck = paddle.indexOf('await verify(raw,sig,secret)');
 const serviceClient = paddle.indexOf("createClient(Deno.env.get('SUPABASE_URL')!");
 const entitlementWrite = paddle.indexOf("from('account_entitlements').upsert");
 assert.ok(signatureRead >= 0 && signatureCheck > signatureRead,
   'Paddle-Signature must be read and verified.');
 assert.ok(serviceClient > signatureCheck && entitlementWrite > signatureCheck,
   'No Paddle service-role client or entitlement write may be reached before signature verification.');
-assert.match(paddle, /safeEqual\(/, 'Paddle webhook signatures must use a timing-safe comparison.');
+assert.match(paddle, /d\|=a\.charCodeAt\(i\)\^b\.charCodeAt\(i\)/,
+  'Paddle webhook signatures must use a timing-safe comparison.');
+assert.match(paddle, /sigs\.some\(x=>eq\(x\.toLowerCase\(\),dig\)\)/,
+  'Paddle HMAC verification must compare the computed digest through the timing-safe helper.');
 assert.match(paddle, /PADDLE_WEBHOOK_TOLERANCE_SECONDS/, 'Paddle webhook replay tolerance must be enforced.');
 
 const entitlement = read('supabase/migrations/20260805233000_saas_entitlements_audit.sql');
