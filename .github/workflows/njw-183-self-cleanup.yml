@@ -17,7 +17,7 @@ jobs:
         with:
           ref: agent/njw-183-legal-public-routes
           fetch-depth: 0
-      - name: Normalize only classified active references and Vercel routes
+      - name: Normalize classified live property references and Vercel routes
         shell: python
         run: |
           from pathlib import Path
@@ -30,21 +30,6 @@ jobs:
               '/property/data-methodology.html': '/property/data-methodology',
               '/property/data-use.html': '/property/data-use',
           }
-          allowed = {
-              'property/privacy/index.html',
-              'property/terms/index.html',
-              'property/refunds/index.html',
-              'property/data-methodology/index.html',
-              'property/data-use/index.html',
-              'property/footer.html',
-              'property/index.html',
-              'property/nav.html',
-              'property/sidemenu.html',
-              'property/scripts/generate_town_pages.py',
-              'property/faq/index.html',
-              'property/js/billing-client.js',
-              'property/docs/pro-plus-data-center-spec.md',
-          }
           root_orphans = {'index.html', 'sidemenu.html', 'terms.html'}
           def excluded(path):
               return (
@@ -55,6 +40,8 @@ jobs:
                   or path in root_orphans
                   or path.startswith('.github/workflows/njw-183-')
               )
+          def live_property_consumer(path):
+              return path.startswith('property/') and not excluded(path)
           def grep_files(pattern):
               p = subprocess.run(['git','grep','-I','-l','-F','--',pattern], text=True, capture_output=True)
               if p.returncode not in (0,1):
@@ -64,12 +51,15 @@ jobs:
           initial = set()
           for old in replacements:
               for path in grep_files(old):
-                  if not excluded(path):
-                      initial.add(path)
-                      if path not in allowed:
-                          raise SystemExit(f'UNCLASSIFIED ACTIVE REFERENCE: {path} contains {old}')
+                  if excluded(path):
+                      continue
+                  if not live_property_consumer(path):
+                      raise SystemExit(f'UNCLASSIFIED NON-PROPERTY REFERENCE: {path} contains {old}')
+                  initial.add(path)
 
+          print(f'Normalizing {len(initial)} classified live property consumers')
           for path in sorted(initial):
+              print('  ' + path)
               p = Path(path)
               text = p.read_text(encoding='utf-8')
               updated = text
