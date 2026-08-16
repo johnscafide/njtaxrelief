@@ -1,0 +1,150 @@
+name: NJW-184 guarded zero-relative route cutover
+
+on:
+  push:
+    branches:
+      - agent/njw-184-zero-relative-routes
+
+permissions:
+  contents: write
+
+jobs:
+  cutover:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/njw-184-zero-relative-routes
+          fetch-depth: 0
+      - name: Move routes and normalize classified consumers
+        shell: python
+        run: |
+          from pathlib import Path
+          import subprocess
+
+          routes = [
+            'agent-desk','data-center','data-workbench','developer-data','diagnostics',
+            'farm-builder','farm-map','market-list','marketing-plan','report-builder',
+            'report-studio','scan','tools','updates','verification-diagnostics','workbench'
+          ]
+          url_map = {f'/property/{r}.html': f'/property/{r}' for r in routes}
+
+          def run(*args):
+              p=subprocess.run(args,text=True,capture_output=True)
+              if p.returncode: raise SystemExit(p.stderr or p.stdout)
+              return p.stdout
+          def grep_files(pattern):
+              p=subprocess.run(['git','grep','-I','-l','-F','--',pattern],text=True,capture_output=True)
+              if p.returncode not in (0,1): raise SystemExit(p.stderr)
+              return [x for x in p.stdout.splitlines() if x]
+          def excluded(path):
+              return (
+                path == 'vercel.json'
+                or path in {'property/data/versions.json','versions.json','UPLOAD-FIRST.txt','sidemenu.html','property-audit-fixes_1.patch'}
+                or path.startswith('property/property/')
+                or path.startswith('property/towns/')
+                or path.startswith('towns/')
+                or path.startswith('supabase/functions/')
+                or path.startswith('.github/workflows/njw-184-')
+              )
+          def allowed_live(path):
+              return (
+                (path.startswith('property/') and not excluded(path))
+                or path in {'verify-release.mjs','scripts/validate-static-seo.js','sitemap.xml'}
+              )
+
+          # Guard physical sources/targets before touching anything.
+          for r in routes:
+              src=Path(f'property/{r}.html')
+              dst=Path(f'property/{r}/index.html')
+              if not src.is_file(): raise SystemExit(f'Missing source route: {src}')
+              if dst.exists(): raise SystemExit(f'Target already exists: {dst}')
+
+          # Normalize active URL consumers before moving the source files.
+          consumers=set()
+          for old in url_map:
+              for path in grep_files(old):
+                  if excluded(path): continue
+                  if not allowed_live(path): raise SystemExit(f'UNCLASSIFIED ACTIVE URL REFERENCE: {path} contains {old}')
+                  consumers.add(path)
+          print(f'Normalizing {len(consumers)} classified live/support URL consumers')
+          for path in sorted(consumers):
+              p=Path(path); text=p.read_text(encoding='utf-8'); updated=text
+              for old,new in url_map.items(): updated=updated.replace(old,new)
+              if updated != text: p.write_text(updated,encoding='utf-8')
+
+          # Move webpage files byte-preservingly after URL normalization of any self-links.
+          for r in routes:
+              Path(f'property/{r}').mkdir(parents=True,exist_ok=True)
+              run('git','mv',f'property/{r}.html',f'property/{r}/index.html')
+
+          # Update only known filesystem-contract readers from flat physical paths to new index paths.
+          physical_contracts = [
+            Path('property/scripts/audit_access_boundaries.mjs'),
+            Path('verify-release.mjs')
+          ]
+          for p in physical_contracts:
+              text=p.read_text(encoding='utf-8'); updated=text
+              for r in routes:
+                  for quote in ("'", '"'):
+                      updated=updated.replace(f"{quote}property/{r}.html{quote}", f"{quote}property/{r}/index.html{quote}")
+              if updated != text: p.write_text(updated,encoding='utf-8')
+
+          # Proven clean-route routing pattern. Preserve existing page caching semantics.
+          vp=Path('vercel.json'); v=vp.read_text(encoding='utf-8')
+          if any(f'/property/{r}/index.html' in v for r in routes):
+              raise SystemExit('One or more NJW-184 clean routes unexpectedly already exist in vercel.json')
+          legacy=''.join(f'    {{"source":"/property/{r}.html","destination":"/property/{r}","permanent":true}},\n' for r in routes)
+          direct=''.join(f'    {{"source":"/property/{r}/index.html","destination":"/property/{r}","permanent":true}},\n' for r in routes)
+          rewrites=''.join(f'    {{"source":"/property/{r}","destination":"/property/{r}/index.html"}},\n' for r in routes)
+          cache=''.join(f'    {{"source":"/property/{r}","headers":[{{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}}]}},\n' for r in routes)
+          anchors=[
+            ('    {"source":"/property/data-use.html","destination":"/property/data-use","permanent":true},\n',legacy),
+            ('    {"source":"/property/data-use/index.html","destination":"/property/data-use","permanent":true},\n',direct),
+            ('    {"source":"/property/data-use","destination":"/property/data-use/index.html"},\n',rewrites),
+            ('    {"source":"/property/data-use","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},\n',cache),
+          ]
+          for anchor,addition in anchors:
+              if v.count(anchor)!=1: raise SystemExit(f'Vercel anchor count {v.count(anchor)} for {anchor.strip()}')
+              v=v.replace(anchor,anchor+addition,1)
+          # Preserve explicit noindex response headers on the two routes that already had them.
+          noindex=(
+            '    {"source":"/property/data-workbench","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},\n'
+            '    {"source":"/property/data-center","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},\n'
+          )
+          anchor='    {"source":"/property/data-workbench.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},\n'
+          if v.count(anchor)!=1: raise SystemExit('Could not locate existing data-workbench noindex header anchor')
+          v=v.replace(anchor,anchor+noindex,1)
+          vp.write_text(v,encoding='utf-8')
+
+          # Verify moved routes and eliminate all non-deferred legacy URL/path consumers.
+          for r in routes:
+              if Path(f'property/{r}.html').exists(): raise SystemExit(f'Flat source remains: {r}')
+              if not Path(f'property/{r}/index.html').is_file(): raise SystemExit(f'Moved route missing: {r}')
+          for r in routes:
+              needle=f'property/{r}.html'
+              for path in grep_files(needle):
+                  if excluded(path): continue
+                  # Vercel intentionally retains the legacy redirect source.
+                  if path=='vercel.json': continue
+                  raise SystemExit(f'UNEXPECTED ACTIVE LEGACY PATH REFERENCE: {path} contains {needle}')
+
+          print('NJW184_ROUTE_CUTOVER_PASS')
+      - name: Run architecture-specific static checks
+        run: |
+          set -euo pipefail
+          git diff --check
+          node property/scripts/audit_access_boundaries.mjs
+          ! git diff --name-only | grep -E '^(property/towns/|towns/|property/property/|supabase/functions/)'
+          echo 'Changed files:'
+          git diff --name-only
+      - name: Remove temporary NJW-184 workflows and commit
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/njw-184-reference-audit.yml .github/workflows/njw-184-self-cutover.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Migrate zero-relative professional and internal routes"
+          git push origin HEAD:agent/njw-184-zero-relative-routes
