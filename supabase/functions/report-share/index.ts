@@ -36,6 +36,6 @@ Deno.serve(async(req)=>{
     const raw=token(),expires=new Date(Date.now()+days*86400000).toISOString();
     const {error}=await userClient.from("professional_report_shares").insert({report_id:v.report_id,version_id:v.id,user_id:user.id,token_hash:await hash(raw),expires_at:expires});
     if(error)throw error;
-    return json({url:`https://njpropertytaxrelief.com/property/report.html?token=${encodeURIComponent(raw)}`,expires_at:expires},201);
+    return json({url:`https://njpropertytaxrelief.com/property/report?token=${encodeURIComponent(raw)}`,expires_at:expires},201);
   }catch(e){console.error(e);return json({error:"Request could not be completed"},500);}
 });
