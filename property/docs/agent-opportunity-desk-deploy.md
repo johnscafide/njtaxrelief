@@ -42,7 +42,7 @@ The Action calls the function hourly. The function itself evaluates each user's 
 
 ## Verification
 
-1. Sign in as Pro and open `/property/agent-desk.html`.
+1. Sign in as Pro and open `/property/agent-desk`.
 2. Import two saved properties and a CSV row.
 3. Confirm another account cannot read the imported records.
 4. Open an evidence drawer and confirm source, timestamp, four score components, limitation, and conversation starter.

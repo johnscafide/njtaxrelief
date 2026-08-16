@@ -109,7 +109,7 @@
       ['Public-source', summary.public_source], ['Watchdog-derived', summary.proprietary_derived]
     ] : [['Roadmap projects', data.roadmap.length]]).map(function (item) {
       return '<div class="uv-stat"><b>' + item[1] + '</b><span>' + item[0] + '</span></div>';
-    }).join('') + (summary ? '<a class="uv-marker-link" href="/property/data-center.html">Open marker catalog <i class="fas fa-arrow-right"></i></a>' : '');
+    }).join('') + (summary ? '<a class="uv-marker-link" href="/property/data-center">Open marker catalog <i class="fas fa-arrow-right"></i></a>' : '');
     $('uv-projects').innerHTML = data.roadmap.map(function (project) {
       return '<article class="uv-project"><div class="uv-priority"><b>' + project.priority + '</b><span>priority</span></div><div><h2>' + esc(project.title) + '</h2><p>' + esc(project.why) + '</p><div class="uv-deliverables">' +
         project.deliverables.map(function (item) { return '<span>' + esc(item) + '</span>'; }).join('') + '</div></div><div class="uv-badges"><span class="uv-ready">' + esc(project.readiness) + '</span><span class="uv-effort">' + esc(project.effort) + ' effort</span><span class="uv-effort">' + esc(project.category) + '</span></div></article>';

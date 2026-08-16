@@ -10,8 +10,8 @@ if (/njpropertytaxrelief\.com$/i.test(new URL(base).hostname) && !/staging|previ
 
 const protectedRoutes = [
   '/property/dashboard', '/property/pulse', '/property/marker',
-  '/property/developer-data.html', '/property/updates.html', '/property/data-center.html',
-  '/property/scan.html', '/property/verification-diagnostics.html'
+  '/property/developer-data', '/property/updates', '/property/data-center',
+  '/property/scan', '/property/verification-diagnostics'
 ];
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage({ viewport: { width: 390, height: 844 } });

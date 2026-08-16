@@ -8,8 +8,8 @@
     "prune_after_days_without_impressions": 90,
     "gated_paths_excluded": [
       "/property/growth/",
-      "/property/data-workbench.html",
-      "/property/data-center.html"
+      "/property/data-workbench",
+      "/property/data-center"
     ]
   },
   "clusters": {
