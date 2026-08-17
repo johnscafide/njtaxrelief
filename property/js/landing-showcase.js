@@ -28,10 +28,12 @@
 
   appendStyle('/property/css/landing-guided.css', 'wd-landing-guided-css');
 
-  appendScript('/property/js/landing-showcase-core.js', 'wd-showcase-core-script', function () {
-    appendScript('/property/js/landing-guided.js', 'wd-landing-guided-script', function () {
-      appendScript('/property/js/landing-polish.js', 'wd-landing-polish-script', function () {
-        appendScript('/property/js/landing-compare-table.js', 'wd-landing-compare-table-script');
+  appendScript('/property/js/landing-preview-safety.js', 'wd-landing-preview-safety-script', function () {
+    appendScript('/property/js/landing-showcase-core.js', 'wd-showcase-core-script', function () {
+      appendScript('/property/js/landing-guided.js', 'wd-landing-guided-script', function () {
+        appendScript('/property/js/landing-polish.js', 'wd-landing-polish-script', function () {
+          appendScript('/property/js/landing-compare-table.js', 'wd-landing-compare-table-script');
+        });
       });
     });
   });
