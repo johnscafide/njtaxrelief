@@ -209,6 +209,14 @@
   }
 
   Object.assign(window, { clamp01, watchdogScore, WD_VERDICT, wdBadge, wdBreakdown, toolCard });
+
+  // Dashboard-only progressive enhancement. The file has no cache-busting
+  // query-string version and is intentionally isolated from Home/Agent Control.
+  if (document.body && document.body.getAttribute('data-sidebar-page') === 'dashboard') {
+    import('../dashboard-workspace.js').catch(function (error) {
+      console.error('Modern dashboard workspace could not load:', error);
+    });
+  }
 })();
 
 export {};
