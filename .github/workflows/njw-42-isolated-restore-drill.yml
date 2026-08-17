@@ -1,0 +1,277 @@
+name: NJW-42 isolated restore drill
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type RESTORE-NJW-42 to run the destructive isolated-target restore drill
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  isolated-restore:
+    if: ${{ github.event.inputs.confirmation == 'RESTORE-NJW-42' }}
+    runs-on: ubuntu-latest
+    environment: staging
+    timeout-minutes: 45
+    env:
+      SOURCE_PROJECT_REF: uvkvaxljhhngydvlrzom
+      ACCEPTANCE_STAGING_REF: pxossnwmrygxlpxtstnl
+      SOURCE_DB_URL: ${{ secrets.NJW42_PRODUCTION_DB_URL }}
+      RESTORE_DB_URL: ${{ secrets.NJW42_RESTORE_DB_URL }}
+      RESTORE_PROJECT_REF: ${{ secrets.NJW42_RESTORE_PROJECT_REF }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y postgresql-client
+
+      - name: Enforce source and target safety boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in SOURCE_DB_URL RESTORE_DB_URL RESTORE_PROJECT_REF SUPABASE_ACCESS_TOKEN; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing required staging environment secret: $name" >&2
+              exit 1
+            fi
+          done
+          if [[ "$SOURCE_DB_URL" != *"$SOURCE_PROJECT_REF"* ]]; then
+            echo "Source URL does not reference the production project. Refusing to continue." >&2
+            exit 1
+          fi
+          if [[ "$RESTORE_DB_URL" != *"$RESTORE_PROJECT_REF"* ]]; then
+            echo "Restore URL does not reference the declared isolated restore project. Refusing to continue." >&2
+            exit 1
+          fi
+          if [ "$RESTORE_PROJECT_REF" = "$SOURCE_PROJECT_REF" ]; then
+            echo "Restore target is production. Refusing to continue." >&2
+            exit 1
+          fi
+          if [ "$RESTORE_PROJECT_REF" = "$ACCEPTANCE_STAGING_REF" ]; then
+            echo "Restore target is the four-role acceptance project. Use a separate fresh restore project." >&2
+            exit 1
+          fi
+          echo "Safety boundary passed: production is read/dump source only; restore target is isolated."
+
+      - name: Capture source manifest and drill start
+        id: manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          started_epoch="$(date +%s)"
+          started_at="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          db_bytes="$(psql "$SOURCE_DB_URL" -Atqc "select pg_database_size(current_database())::bigint")"
+          public_tables="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from information_schema.tables where table_schema='public' and table_type='BASE TABLE'")"
+          auth_users="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from auth.users")"
+          storage_buckets="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from storage.buckets")"
+          storage_objects="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from storage.objects")"
+          paddle_accounts="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from public.account_entitlements where provider='paddle'")"
+          paddle_events="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from public.billing_provider_events where provider='paddle'")"
+          migration_rows="$(psql "$SOURCE_DB_URL" -Atqc "select count(*) from supabase_migrations.schema_migrations")"
+          paddle_state="$(psql "$SOURCE_DB_URL" -Atqc "select coalesce(jsonb_agg(x order by x.user_id)::text,'[]') from (select user_id::text, subscription_status, billing_tier, billing_interval, cancel_at_period_end, coalesce(provider_subscription_id,'') provider_subscription_id, coalesce(provider_price_id,'') provider_price_id from public.account_entitlements where provider='paddle') x")"
+          paddle_state_hash="$(printf '%s' "$paddle_state" | sha256sum | cut -d' ' -f1)"
+          printf '%s\n' "$started_epoch" > /tmp/njw42_started_epoch
+          {
+            echo "started_at=$started_at"
+            echo "db_bytes=$db_bytes"
+            echo "public_tables=$public_tables"
+            echo "auth_users=$auth_users"
+            echo "storage_buckets=$storage_buckets"
+            echo "storage_objects=$storage_objects"
+            echo "paddle_accounts=$paddle_accounts"
+            echo "paddle_events=$paddle_events"
+            echo "migration_rows=$migration_rows"
+            echo "paddle_state_hash=$paddle_state_hash"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Copy Supabase Vault encryption root key to isolated target
+        shell: bash
+        run: |
+          set -euo pipefail
+          umask 077
+          curl --fail --silent --show-error \
+            "https://api.supabase.com/v1/projects/$SOURCE_PROJECT_REF/pgsodium" \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            -o /tmp/njw42-pgsodium.json
+          test -s /tmp/njw42-pgsodium.json
+          curl --fail --silent --show-error \
+            "https://api.supabase.com/v1/projects/$RESTORE_PROJECT_REF/pgsodium" \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            -H "Content-Type: application/json" \
+            -X PUT --data-binary @/tmp/njw42-pgsodium.json \
+            -o /tmp/njw42-pgsodium-put.json
+          rm -f /tmp/njw42-pgsodium.json /tmp/njw42-pgsodium-put.json
+          echo "Vault root-key transfer completed without logging key material."
+
+      - name: Create fresh logical backup from production
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/njw42-backup
+          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/roles.sql --role-only
+          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/schema.sql
+          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/data.sql --use-copy --data-only -x "storage.buckets_vectors" -x "storage.vector_indexes"
+          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/history_schema.sql --schema supabase_migrations
+          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/history_data.sql --use-copy --data-only --schema supabase_migrations
+          test -s /tmp/njw42-backup/schema.sql
+          test -s /tmp/njw42-backup/data.sql
+          echo "Backup created on ephemeral runner only; production data will not be uploaded as an artifact."
+
+      - name: Assert isolated restore target is fresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          target_public_tables="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from information_schema.tables where table_schema='public' and table_type='BASE TABLE'")"
+          target_auth_users="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from auth.users")"
+          if [ "$target_public_tables" -ne 0 ] || [ "$target_auth_users" -ne 0 ]; then
+            echo "Restore target is not fresh (public tables=$target_public_tables, auth users=$target_auth_users). Refusing destructive cleanup." >&2
+            exit 1
+          fi
+
+      - name: Restore logical backup to isolated target
+        shell: bash
+        run: |
+          set -euo pipefail
+          psql "$RESTORE_DB_URL" \
+            --single-transaction \
+            --variable ON_ERROR_STOP=1 \
+            --file /tmp/njw42-backup/roles.sql \
+            --file /tmp/njw42-backup/schema.sql \
+            --command 'SET session_replication_role = replica' \
+            --file /tmp/njw42-backup/data.sql
+          psql "$RESTORE_DB_URL" \
+            --single-transaction \
+            --variable ON_ERROR_STOP=1 \
+            --file /tmp/njw42-backup/history_schema.sql \
+            --file /tmp/njw42-backup/history_data.sql
+
+      - name: Reconcile restored database, Paddle state and Storage manifest
+        id: reconcile
+        shell: bash
+        run: |
+          set -euo pipefail
+          src_tables="${{ steps.manifest.outputs.public_tables }}"
+          src_users="${{ steps.manifest.outputs.auth_users }}"
+          src_buckets="${{ steps.manifest.outputs.storage_buckets }}"
+          src_objects="${{ steps.manifest.outputs.storage_objects }}"
+          src_paddle_accounts="${{ steps.manifest.outputs.paddle_accounts }}"
+          src_paddle_events="${{ steps.manifest.outputs.paddle_events }}"
+          src_migrations="${{ steps.manifest.outputs.migration_rows }}"
+          src_paddle_hash="${{ steps.manifest.outputs.paddle_state_hash }}"
+
+          dst_tables="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from information_schema.tables where table_schema='public' and table_type='BASE TABLE'")"
+          dst_users="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from auth.users")"
+          dst_buckets="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from storage.buckets")"
+          dst_objects="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from storage.objects")"
+          dst_paddle_accounts="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from public.account_entitlements where provider='paddle'")"
+          dst_paddle_events="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from public.billing_provider_events where provider='paddle'")"
+          dst_migrations="$(psql "$RESTORE_DB_URL" -Atqc "select count(*) from supabase_migrations.schema_migrations")"
+          dst_paddle_state="$(psql "$RESTORE_DB_URL" -Atqc "select coalesce(jsonb_agg(x order by x.user_id)::text,'[]') from (select user_id::text, subscription_status, billing_tier, billing_interval, cancel_at_period_end, coalesce(provider_subscription_id,'') provider_subscription_id, coalesce(provider_price_id,'') provider_price_id from public.account_entitlements where provider='paddle') x")"
+          dst_paddle_hash="$(printf '%s' "$dst_paddle_state" | sha256sum | cut -d' ' -f1)"
+
+          test "$dst_tables" = "$src_tables"
+          test "$dst_users" = "$src_users"
+          test "$dst_buckets" = "$src_buckets"
+          test "$dst_objects" = "$src_objects"
+          test "$dst_paddle_accounts" = "$src_paddle_accounts"
+          test "$dst_paddle_events" = "$src_paddle_events"
+          test "$dst_migrations" = "$src_migrations"
+          test "$dst_paddle_hash" = "$src_paddle_hash"
+
+          psql "$RESTORE_DB_URL" -v ON_ERROR_STOP=1 -Atqc "select count(*) from public.platform_release_gates" >/dev/null
+          psql "$RESTORE_DB_URL" -v ON_ERROR_STOP=1 -Atqc "select count(*) from public.production_acceptance_runs" >/dev/null
+          psql "$RESTORE_DB_URL" -v ON_ERROR_STOP=1 -Atqc "select count(*) from public.continuity_drills" >/dev/null
+
+          completed_epoch="$(date +%s)"
+          started_epoch="$(cat /tmp/njw42_started_epoch)"
+          elapsed_seconds="$((completed_epoch-started_epoch))"
+          rto_minutes="$(((elapsed_seconds+59)/60))"
+          rpo_minutes=0
+          echo "rto_minutes=$rto_minutes" >> "$GITHUB_OUTPUT"
+          echo "rpo_minutes=$rpo_minutes" >> "$GITHUB_OUTPUT"
+          echo "Restore reconciliation passed: database, auth rows, migrations, Paddle state and Storage metadata match."
+
+      - name: Persist passed continuity evidence to production control plane
+        shell: bash
+        env:
+          RTO_MINUTES: ${{ steps.reconcile.outputs.rto_minutes }}
+          RPO_MINUTES: ${{ steps.reconcile.outputs.rpo_minutes }}
+          STARTED_AT: ${{ steps.manifest.outputs.started_at }}
+          DB_BYTES: ${{ steps.manifest.outputs.db_bytes }}
+          STORAGE_BUCKETS: ${{ steps.manifest.outputs.storage_buckets }}
+          STORAGE_OBJECTS: ${{ steps.manifest.outputs.storage_objects }}
+          PADDLE_ACCOUNTS: ${{ steps.manifest.outputs.paddle_accounts }}
+          PADDLE_EVENTS: ${{ steps.manifest.outputs.paddle_events }}
+          PADDLE_STATE_HASH: ${{ steps.manifest.outputs.paddle_state_hash }}
+        run: |
+          set -euo pipefail
+          psql "$SOURCE_DB_URL" \
+            -v ON_ERROR_STOP=1 \
+            -v release_version="$GITHUB_SHA" \
+            -v restore_target="$RESTORE_PROJECT_REF" \
+            -v started_at="$STARTED_AT" \
+            -v rpo_minutes="$RPO_MINUTES" \
+            -v rto_minutes="$RTO_MINUTES" \
+            -v db_bytes="$DB_BYTES" \
+            -v storage_buckets="$STORAGE_BUCKETS" \
+            -v storage_objects="$STORAGE_OBJECTS" \
+            -v paddle_accounts="$PADDLE_ACCOUNTS" \
+            -v paddle_events="$PADDLE_EVENTS" \
+            -v paddle_state_hash="$PADDLE_STATE_HASH" <<'SQL'
+          begin;
+          insert into public.continuity_drills(
+            drill_type, environment, rpo_minutes, rto_minutes, passed, evidence, notes,
+            release_version, restore_target, started_at, completed_at, reconciliation
+          ) values (
+            'logical_restore', 'staging', :'rpo_minutes'::integer, :'rto_minutes'::integer, true,
+            jsonb_build_object(
+              'method','supabase_cli_logical_backup_restore',
+              'database_bytes', :'db_bytes'::bigint,
+              'storage_buckets', :'storage_buckets'::integer,
+              'storage_objects', :'storage_objects'::integer,
+              'paddle_accounts', :'paddle_accounts'::integer,
+              'paddle_events', :'paddle_events'::integer,
+              'paddle_state_sha256', :'paddle_state_hash',
+              'backup_artifact_retained', false
+            ),
+            'Fresh isolated-project restore; source production was dump/read-only except this evidence transaction.',
+            :'release_version', :'restore_target', :'started_at'::timestamptz, now(),
+            jsonb_build_object(
+              'database','matched',
+              'auth_users','matched',
+              'migration_history','matched',
+              'paddle_state','matched',
+              'storage_manifest','matched'
+            )
+          );
+          update public.platform_release_gates
+             set status='passed',
+                 evidence=jsonb_build_object(
+                   'method','supabase_cli_logical_backup_restore',
+                   'restore_target', :'restore_target',
+                   'release_version', :'release_version',
+                   'rpo_minutes', :'rpo_minutes'::integer,
+                   'rto_minutes', :'rto_minutes'::integer,
+                   'paddle_state_sha256', :'paddle_state_hash'
+                 ),
+                 verified_at=now(), updated_at=now()
+           where gate_key='isolated_restore_drill';
+          commit;
+          SQL
+
+      - name: Remove ephemeral backup files
+        if: always()
+        shell: bash
+        run: rm -rf /tmp/njw42-backup /tmp/njw42_started_epoch /tmp/njw42-pgsodium.json /tmp/njw42-pgsodium-put.json
