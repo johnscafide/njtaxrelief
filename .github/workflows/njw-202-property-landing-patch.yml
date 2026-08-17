@@ -8,6 +8,7 @@ on:
       - scripts/njw_202_patch_property_landing.py
       - scripts/njw_202_patch_property_landing_v2.py
       - scripts/njw_202_patch_property_landing_v3.py
+      - scripts/njw_202_patch_property_landing_v4.py
       - .github/workflows/njw-202-property-landing-patch.yml
 
 permissions:
@@ -23,14 +24,14 @@ jobs:
           ref: agent/njw-202-property-landing-review
           fetch-depth: 0
       - name: Apply reviewed source changes
-        run: python scripts/njw_202_patch_property_landing_v3.py
+        run: python scripts/njw_202_patch_property_landing_v4.py
       - name: Verify expected landing changes
         run: |
           grep -q '<b>564</b><span>Municipalities</span>' property/index.html
           grep -q 'Where does this property tax data come from?' property/index.html
           grep -q 'class="lp-proof-strip"' property/index.html
           grep -q "we'll show you what it's worth in dollars" property/index.html
-          grep -q 'General appeal deadline' property/index.html
+          grep -q 'Days to general appeal deadline' property/index.html
           ! grep -q 'south-jersey-weekend-events-august-15-16-2026.html' property/index.html
       - name: Commit patched source
         run: |
@@ -40,6 +41,6 @@ jobs:
           fi
           git config user.name "Watchdog Build"
           git config user.email "actions@users.noreply.github.com"
-          git add property/index.html property/js/lookup.js
+          git add property/index.html
           git commit -m "NJW-202 apply landing credibility review"
           git push origin HEAD:agent/njw-202-property-landing-review
