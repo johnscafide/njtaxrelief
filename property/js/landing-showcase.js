@@ -18,6 +18,8 @@
   }
 
   appendScript('/property/js/landing-showcase-core.js', 'wd-showcase-core-script', function () {
-    appendScript('/property/js/landing-polish.js', 'wd-landing-polish-script');
+    appendScript('/property/js/landing-polish.js', 'wd-landing-polish-script', function () {
+      appendScript('/property/js/landing-compare-table.js', 'wd-landing-compare-table-script');
+    });
   });
 })();
