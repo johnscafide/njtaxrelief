@@ -84,3 +84,9 @@ verify_jwt = true
 
 [functions.intelligence-calibration-admin]
 verify_jwt = true
+
+[functions.intelligence-analyst]
+verify_jwt = true
+
+[functions.intelligence-learning]
+verify_jwt = true
