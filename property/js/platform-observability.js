@@ -4,6 +4,12 @@
   var path=location.pathname.replace(/\/+$/,'');
   var enabled=path==='/property/dashboard'||path==='/property/home'||path==='/property/agent-desk'||path==='/property/data-workbench';
   if(!enabled)return;
-  if(!window.__wdSemanticContextLoader){window.__wdSemanticContextLoader=true;var semantic=document.createElement('script');semantic.src='/property/js/watchdog-semantic-context.js';semantic.defer=true;semantic.setAttribute('data-watchdog-semantic-context','1');document.head.appendChild(semantic);}
-  if(!window.__wdContextIntelligenceLoader){window.__wdContextIntelligenceLoader=true;var context=document.createElement('script');context.src='/property/js/watchdog-intelligence-context.js';context.defer=true;context.setAttribute('data-watchdog-context-intelligence','1');document.head.appendChild(context);}
+  function load(src,flag,attr){
+    if(window[flag])return;window[flag]=true;
+    var s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');document.head.appendChild(s);
+  }
+  load('/property/js/watchdog-semantic-context.js','__wdSemanticContextLoader','data-watchdog-semantic-context');
+  load('/property/js/watchdog-intelligence-context.js','__wdContextIntelligenceLoader','data-watchdog-context-intelligence');
+  load('/property/js/watchdog-scenario.js','__wdScenarioLoader','data-watchdog-scenario');
+  load('/property/js/watchdog-page-context.js','__wdPageContextLoader','data-watchdog-page-context');
 })();
