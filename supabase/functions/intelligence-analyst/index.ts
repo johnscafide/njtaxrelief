@@ -1,8 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ANALYST_VERSION="watchdog-analyst-v3";
-const TOOL_VERSION="watchdog-analyst-tools-v2";
+const ANALYST_VERSION="watchdog-analyst-v4-semantic-context";
+const TOOL_VERSION="watchdog-analyst-tools-v3-semantic";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const DAILY_LIMIT:Record<string,number>={pro:75,pro_plus:300,teams:1500,developer:10000};
@@ -33,13 +33,62 @@ function route(prompt:string,context:O){
   else if(/\b(score history|historical score|score trend)\b/.test(p))tool="get_score_history";
   else if(/\b(source|formula|lineage|where did|why flagged|why this)\b/.test(p))tool="inspect_lineage";
   else if(/\b(changed|changes|what changed|update history)\b/.test(p)&&!/\b(rank|top|find|priority|prioritize)\b/.test(p))tool="get_property_changes";
+  else{
+    const factIntent=/\b(property facts?|what do (?:you|we) know|tell me about|property details?|assessment|assessed value|annual tax|property tax|taxes|sale price|last sale|sale date|municipality|county|block|lot|property class|permit|certificate|flood|wetland|tideland|uniformity|appeal|budget|levy|revaluation)\b/.test(p);
+    const analysisIntent=/\b(analy(?:ze|sis)|rank|priority|prioritize|flag|opportunit|review queue|closing review|change intelligence|anomaly|which .*needs attention|what deserves attention)\b/.test(p);
+    if(factIntent&&!analysisIntent)tool="get_property_facts";
+  }
   if(/\b(closing|permit|title|due diligence|transaction exception)\b/.test(p))model="closing_review";
   else if(/\b(change intelligence|recent changes|material changes|changed properties)\b/.test(p))model="property_change_priority";
   const m=p.match(/\b(?:top|find|show|rank)\s+(\d{1,3})\b/);
   return{tool,model,limit:Math.max(1,Math.min(Number(m?.[1]||10),50)),farm:/\bfarm\b/.test(p),savedView:/\b(saved view|workbench view)\b/.test(p)&&!!context.saved_view_id,compare:/\bcompare\b/.test(p)};
 }
+function semanticPacks(prompt:string,model:string,context:O){
+  const p=prompt.toLowerCase(),packs=new Set<string>(["identity"]),section=clean(context?.section,80).toLowerCase();
+  if(/assessment|assessed|tax|chapter.?123/.test(p)||section==="assessment")packs.add("assessment_tax");
+  if(/sale|market|price|deed/.test(p))packs.add("sale_market");
+  if(/appeal|uniformity|chapter.?123|common level/.test(p))packs.add("appeal_uniformity");
+  if(/permit|closing|title|certificate|due diligence|deed notice/.test(p)||section==="closing")packs.add("permits_closing");
+  if(/flood|wetland|tideland|environment|contamin|highlands|pinelands|ust/.test(p)||section==="closing")packs.add("environment_risk");
+  if(/municipal|budget|levy|tax pressure|revaluation|fiscal/.test(p))packs.add("municipal_pressure");
+  if(model==="assessment_anomaly"){packs.add("assessment_tax");packs.add("sale_market");packs.add("appeal_uniformity")}
+  if(model==="closing_review"){packs.add("permits_closing");packs.add("environment_risk");packs.add("sale_market")}
+  if(model==="property_change_priority"){packs.add("sale_market");packs.add("municipal_pressure");packs.add("agent_opportunity")}
+  if(packs.size===1){packs.add("assessment_tax");packs.add("sale_market");packs.add("municipal_pressure")}
+  return[...packs];
+}
+async function semanticContext(url:string,pub:string,auth:string,pins:string[],packs:string[]){
+  const call=await fetch(`${url}/functions/v1/intelligence-semantic-context`,{method:"POST",headers:{Authorization:auth,apikey:pub,"Content-Type":"application/json"},body:JSON.stringify({pams_pins:pins.slice(0,5),packs})});
+  const data=await call.json().catch(()=>({}));
+  if(!call.ok)return{ok:false,status:call.status,error:clean(data?.error||`Semantic context failed (${call.status})`,400),data:null};
+  return{ok:true,status:call.status,error:null,data};
+}
+function factValue(v:unknown){if(v===null||v===undefined)return"not available";if(typeof v==="number")return Number.isInteger(v)?v.toLocaleString("en-US"):v.toLocaleString("en-US",{maximumFractionDigits:4});if(typeof v==="boolean")return v?"yes":"no";if(typeof v==="object"){try{return clean(JSON.stringify(v),240)}catch{return"structured value"}}return clean(v,240)}
+function semanticLineage(data:O){return{contract_version:data?.contract_version||null,engine_version:data?.engine_version||null,authority_policy:data?.authority_policy||null,registry_version:data?.registry_version||null,facts_hashes:(Array.isArray(data?.snapshots)?data.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null,retrieval_hash:s.retrieval_hash||null,cache_hit:Boolean(s.cache_hit)}))}}
+function addSemanticFacts(base:O,data:O,maxPerProperty=6){
+  const snaps=Array.isArray(data?.snapshots)?data.snapshots:[],preferred=["property.assessed_value","property.annual_tax","property.sale_price","property.sale_date","property.municipality","property.county"],extra:string[]=[];
+  for(const snap of snaps.slice(0,5)){
+    const items=Array.isArray(snap?.markers)?snap.markers:[],byId=new Map(items.map((m:O)=>[m.id,m])),chosen:O[]=[];
+    for(const id of preferred){const m=byId.get(id);if(m?.state==="available"&&!chosen.includes(m))chosen.push(m)}
+    for(const m of items.filter((x:O)=>x?.state==="available").sort((a:O,b:O)=>Number(b.authority_rank||0)-Number(a.authority_rank||0)))if(chosen.length<maxPerProperty&&!chosen.includes(m))chosen.push(m);
+    const label=clean(snap.address||snap.pams_pin||"Property",180);for(const m of chosen.slice(0,maxPerProperty))extra.push(`${label}: ${clean(m.label||m.id,140)} = ${factValue(m.value)}. Source: ${clean(m.source||m.source_id||"governed source",180)}; ${clean(m.truth_class||"resolved value",80)}; authority ${Number(m.authority_rank||0)}/100.`)
+  }
+  base.evidence=uniq([...(Array.isArray(base.evidence)?base.evidence:[]),...extra]);base.semantic_context=semanticLineage(data);return base;
+}
 function deterministic(tool:string,result:O){
   const evidence:string[]=[],missing:string[]=[],caveats:string[]=[],suggested:string[]=[],sources:{label:string,url:string|null}[]=[];
+  if(tool==="get_property_facts"){
+    const data=result.semantic_context||result,snaps=Array.isArray(data?.snapshots)?data.snapshots:[];
+    for(const snap of snaps.slice(0,5)){
+      const label=clean(snap.address||snap.pams_pin||"Property",180),items=Array.isArray(snap?.markers)?snap.markers:[],available=items.filter((m:O)=>m?.state==="available").sort((a:O,b:O)=>Number(b.authority_rank||0)-Number(a.authority_rank||0)||clean(a.label).localeCompare(clean(b.label)));
+      for(const m of available.slice(0,18)){evidence.push(`${label}: ${clean(m.label||m.id,160)} = ${factValue(m.value)}. Source: ${clean(m.source||m.source_id||"governed source",180)}; ${clean(m.truth_class||"resolved value",80)}; authority ${Number(m.authority_rank||0)}/100.`);}
+      for(const m of items.filter((x:O)=>x?.state!=="available").slice(0,8))missing.push(`${label}: ${clean(m.label||m.id,160)} (${clean(m.state||"missing",100)}).`);
+    }
+    const availableCount=snaps.reduce((n:number,s:O)=>n+Number(s.available_count||0),0),missingCount=snaps.reduce((n:number,s:O)=>n+Number(s.missing_count||0),0);
+    caveats.push("These are governed property facts and Watchdog-derived markers. Missing or unavailable evidence remains explicit.");
+    caveats.push("Source-authority policy preserves source observations and does not let AI silently replace source truth.");
+    return{conclusion:snaps.length?`Watchdog resolved ${availableCount} governed values across ${snaps.length} propert${snaps.length===1?"y":"ies"}, with ${missingCount} values unavailable or not resolved in this semantic scope.`:"No governed property snapshot was resolved. Watchdog did not fill the gap with a guess.",evidence,missing_evidence:uniq(missing),caveats,suggested_actions:["run_intelligence_model","review_evidence"],sources:[],semantic_context:semanticLineage(data)};
+  }
   if(tool==="run_intelligence_model"){
     const findings=Array.isArray(result.findings)?result.findings:[];
     for(const f of findings.slice(0,5)){
@@ -52,7 +101,8 @@ function deterministic(tool:string,result:O){
     }
     if(result.warning)caveats.push(clean(result.warning,400));
     caveats.push("Scores rank governed evidence for review. They are not valuations, legal conclusions, seller predictions, or guaranteed outcomes.");
-    return{conclusion:findings.length?`Watchdog found ${findings.length} evidence-backed review finding${findings.length===1?"":"s"}. The strongest findings are shown first.`:"No evidence-backed finding was produced for this governed scope. Watchdog did not fill the gap with a guess.",evidence,missing_evidence:uniq(missing),caveats:uniq(caveats),suggested_actions:uniq(suggested),sources:[...new Map(sources.map(x=>[x.url,x])).values()]};
+    const base:O={conclusion:findings.length?`Watchdog found ${findings.length} evidence-backed review finding${findings.length===1?"":"s"}. The strongest findings are shown first.`:"No evidence-backed finding was produced for this governed scope. Watchdog did not fill the gap with a guess.",evidence,missing_evidence:uniq(missing),caveats:uniq(caveats),suggested_actions:uniq(suggested),sources:[...new Map(sources.map(x=>[x.url,x])).values()]};
+    return result.semantic_context?addSemanticFacts(base,result.semantic_context,5):base;
   }
   if(tool==="get_score_history"){
     const rows=Array.isArray(result.rows)?result.rows:[];
@@ -106,14 +156,18 @@ Deno.serve(async(req:Request)=>{
   if(blocked){const response={conclusion:blocked,evidence:[],missing_evidence:[],caveats:["Watchdog did not run a property tool for this request."],suggested_actions:[],sources:[]};await admin.from("intelligence_analyst_messages").insert({session_id:sessionId,user_id:user.id,role:"assistant",content:response,prompt_key:promptRow.prompt_key,prompt_version:promptRow.version,tool_contract_version:TOOL_VERSION,status:"refused"});await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",metadata:{status:"refused",reason:"guardrail",analyst_version:ANALYST_VERSION}});return out(req,200,{ok:true,session_id:sessionId,status:"refused",provider_status:"not_called",response})}
   const routed=route(prompt,{...safeObj(session?.context),...context}),pins=uniq((Array.isArray(context.pams_pins)?context.pams_pins:[]).map((x:unknown)=>clean(x,100))).slice(0,100),started=Date.now();let result:O={},toolStatus="complete";
   try{
-    if(routed.tool==="run_intelligence_model"){
+    if(routed.tool==="get_property_facts"){
+      if(!pins.length)throw new Error("Load or select a governed property before asking Watchdog for property facts.");const factPins=pins.slice(0,routed.compare?5:1),sem=await semanticContext(url,pub,auth,factPins,semanticPacks(prompt,routed.model,context));if(!sem.ok)throw new Error(sem.error);result={semantic_context:sem.data};
+      const hashes=(Array.isArray(sem.data?.snapshots)?sem.data.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null}));await admin.from("intelligence_analyst_sessions").update({context:{...safeObj(session?.context),...context,last_semantic_facts:hashes,last_semantic_contract:sem.data?.contract_version||null},updated_at:new Date().toISOString()}).eq("id",sessionId).eq("user_id",user.id);
+    }else if(routed.tool==="run_intelligence_model"){
       let fn=routed.model==="closing_review"?"intelligence-closing-run-preview":routed.model==="property_change_priority"?"intelligence-change-run-preview":"intelligence-assessment-run-preview";let payload:O;
       if(routed.savedView){fn="intelligence-workbench-view-preview";payload={model_key:routed.model,scope_id:clean(context.saved_view_id,80),limit:routed.limit}}
       else if(routed.farm)payload={model_key:routed.model,scope_type:"farm",scope_value:{source:"watchdog_analyst"},limit:routed.limit};
       else{if(!pins.length)throw new Error("Load or select governed Workbench properties before asking Watchdog to analyze them.");payload={model_key:routed.model,scope_type:pins.length===1?"property":"custom",scope_value:{source:"watchdog_analyst",compare:routed.compare},pams_pins:pins,limit:routed.limit}}
       const call=await fetch(`${url}/functions/v1/${fn}`,{method:"POST",headers:{Authorization:auth,apikey:pub,"Content-Type":"application/json"},body:JSON.stringify(payload)});result=await call.json().catch(()=>({}));if(!call.ok)throw new Error(clean(result.error||`Intelligence tool failed (${call.status})`,400));
+      if(pins.length&&!routed.farm&&!routed.savedView){const sem=await semanticContext(url,pub,auth,pins.slice(0,5),semanticPacks(prompt,routed.model,context));if(sem.ok)result.semantic_context=sem.data;else result.semantic_context_error=sem.error}
       const runId=clean(result.run_id,80);let ids:string[]=[];if(runId){const q=await admin.from("intelligence_findings").select("id").eq("run_id",runId).eq("user_id",user.id).order("rank",{ascending:true}).limit(100);ids=(q.data||[]).map((x:O)=>String(x.id))}
-      await admin.from("intelligence_analyst_sessions").update({context:{...safeObj(session?.context),...context,last_run_id:runId||null,last_finding_ids:ids,last_model_key:result?.model?.key||routed.model,last_model_version:result?.model?.version||null},updated_at:new Date().toISOString()}).eq("id",sessionId).eq("user_id",user.id);
+      await admin.from("intelligence_analyst_sessions").update({context:{...safeObj(session?.context),...context,last_run_id:runId||null,last_finding_ids:ids,last_model_key:result?.model?.key||routed.model,last_model_version:result?.model?.version||null,last_semantic_contract:result.semantic_context?.contract_version||null,last_semantic_facts:(Array.isArray(result.semantic_context?.snapshots)?result.semantic_context.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null}))},updated_at:new Date().toISOString()}).eq("id",sessionId).eq("user_id",user.id);
     }else if(routed.tool==="get_score_history"){
       const pin=pins[0];if(!pin)throw new Error("Select one property first.");const q=await admin.from("score_observations").select("marker_id,score,observed_on,observed_at,model_version,evidence_coverage,formula").eq("user_id",user.id).eq("pams_pin",pin).order("observed_at",{ascending:false}).limit(25);if(q.error)throw q.error;result={rows:q.data||[],pams_pin:pin};
     }else if(routed.tool==="get_property_changes"){
@@ -129,11 +183,11 @@ Deno.serve(async(req:Request)=>{
       }
     }
   }catch(error){toolStatus="failed";result={error:clean((error as any)?.message||error,500)}}
-  const latency=Date.now()-started,toolCall=await admin.from("intelligence_tool_calls").insert({session_id:sessionId,message_id:userMessage.data?.id||null,user_id:user.id,tool_name:routed.tool,tool_version:TOOL_VERSION,arguments:{model:routed.model,pams_pin_count:pins.length,farm:routed.farm,saved_view:routed.savedView,compare:routed.compare,limit:routed.limit},result_summary:toolStatus==="complete"?{run_id:result.run_id||null,finding_count:result.finding_count??null,artifact_type:result.artifact_type||null,artifact_id:result.artifact_id||null,row_count:Array.isArray(result.rows)?result.rows.length:null}:{error:result.error},status:toolStatus,duration_ms:latency}).select("id").single();
+  const latency=Date.now()-started,toolCall=await admin.from("intelligence_tool_calls").insert({session_id:sessionId,message_id:userMessage.data?.id||null,user_id:user.id,tool_name:routed.tool,tool_version:TOOL_VERSION,arguments:{model:routed.model,pams_pin_count:pins.length,farm:routed.farm,saved_view:routed.savedView,compare:routed.compare,limit:routed.limit,semantic_packs:routed.tool==="get_property_facts"?semanticPacks(prompt,routed.model,context):null},result_summary:toolStatus==="complete"?{run_id:result.run_id||null,finding_count:result.finding_count??null,artifact_type:result.artifact_type||null,artifact_id:result.artifact_id||null,row_count:Array.isArray(result.rows)?result.rows.length:null,semantic_contract:result.semantic_context?.contract_version||null,semantic_snapshot_count:Array.isArray(result.semantic_context?.snapshots)?result.semantic_context.snapshots.length:null}:{error:result.error},status:toolStatus,duration_ms:latency}).select("id").single();
   if(toolStatus!=="complete"){
     const response={conclusion:"Watchdog could not complete that approved operation.",evidence:[],missing_evidence:[result.error],caveats:["No factual conclusion was generated from a failed tool call."],suggested_actions:[],sources:[]};await admin.from("intelligence_analyst_messages").insert({session_id:sessionId,user_id:user.id,role:"assistant",content:response,prompt_key:promptRow.prompt_key,prompt_version:promptRow.version,tool_contract_version:TOOL_VERSION,status:"failed"});await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",latency_ms:latency,metadata:{status:"failed",tool:routed.tool,analyst_version:ANALYST_VERSION}});return out(req,200,{ok:false,session_id:sessionId,status:"failed",tool:{name:routed.tool,version:TOOL_VERSION,id:toolCall.data?.id||null},provider_status:"not_called",response});
   }
   const base=deterministic(routed.tool,result),provider=await optionalProse(promptRow,prompt,base),messageStatus=provider.status==="complete"?"complete":"provider_unavailable",assistant=await admin.from("intelligence_analyst_messages").insert({session_id:sessionId,user_id:user.id,role:"assistant",content:provider.response,provider:provider.provider,model:provider.model,prompt_key:promptRow.prompt_key,prompt_version:promptRow.version,tool_contract_version:TOOL_VERSION,status:messageStatus}).select("id").single();
-  await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",provider:provider.provider,model:provider.model,request_units:1,input_tokens:Number(provider.usage?.input_tokens||0)||null,output_tokens:Number(provider.usage?.output_tokens||0)||null,latency_ms:Date.now()-started,metadata:{status:messageStatus,tool:routed.tool,tool_version:TOOL_VERSION,prompt_version:promptRow.version,analyst_version:ANALYST_VERSION,provider_retries:provider.retries||0}});
+  await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",provider:provider.provider,model:provider.model,request_units:1,input_tokens:Number(provider.usage?.input_tokens||0)||null,output_tokens:Number(provider.usage?.output_tokens||0)||null,latency_ms:Date.now()-started,metadata:{status:messageStatus,tool:routed.tool,tool_version:TOOL_VERSION,prompt_version:promptRow.version,analyst_version:ANALYST_VERSION,provider_retries:provider.retries||0,semantic_contract:base.semantic_context?.contract_version||null}});
   return out(req,200,{ok:true,session_id:sessionId,message_id:assistant.data?.id||null,status:messageStatus,provider_status:provider.status,provider:provider.provider,model:provider.model,prompt:{key:promptRow.prompt_key,version:promptRow.version},tool:{name:routed.tool,version:TOOL_VERSION,id:toolCall.data?.id||null},response:provider.response,provider_retries:provider.retries||0,provider_error:provider.error||null});
 });
