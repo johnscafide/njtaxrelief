@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE_VERSION = "watchdog-intelligence-preview-v1";
+const ENGINE_VERSION = "watchdog-intelligence-preview-v2";
 const ALLOWED_ORIGINS = new Set([
   "https://njpropertytaxrelief.com",
   "https://www.njpropertytaxrelief.com",
@@ -20,6 +20,13 @@ type Feature = {
   source_url?: string;
   observed_at?: string;
   explanation?: string;
+  normalization?: {
+    feature_version?: number;
+    transform_type?: string;
+    direction?: string;
+    detail?: Record<string, unknown>;
+  } | null;
+  cohort?: Record<string, unknown> | null;
 };
 type Candidate = { pams_pin?: string; address?: string; features?: Record<string, Feature> };
 
@@ -59,7 +66,7 @@ function namedEnv(jsonName: string, legacyName: string) {
       const parsed = JSON.parse(raw);
       if (parsed?.default) return String(parsed.default);
     } catch (_) {
-      // Fall through to the legacy key while Watchdog completes the key migration.
+      // Fall through to legacy keys while the platform key migration is completed.
     }
   }
   return Deno.env.get(legacyName) || "";
@@ -67,7 +74,11 @@ function namedEnv(jsonName: string, legacyName: string) {
 function canonical(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonical);
   if (value && typeof value === "object") {
-    return Object.fromEntries(Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => [k, canonical(v)]));
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([k, v]) => [k, canonical(v)]),
+    );
   }
   return value;
 }
@@ -80,6 +91,30 @@ function isAvailable(feature: Feature | undefined) {
   if (!feature) return false;
   if (feature.status && feature.status !== "available") return false;
   return numeric(feature.score) !== null;
+}
+function safeObject(value: unknown, maxBytes = 8000): Record<string, unknown> {
+  if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+  try {
+    const text = JSON.stringify(value);
+    if (text.length > maxBytes) return {};
+    return value as Record<string, unknown>;
+  } catch (_) {
+    return {};
+  }
+}
+function provenance(feature: Feature | undefined) {
+  const normalization = feature?.normalization && typeof feature.normalization === "object"
+    ? {
+        feature_version: numeric(feature.normalization.feature_version),
+        transform_type: clean(feature.normalization.transform_type, 100) || null,
+        direction: clean(feature.normalization.direction, 80) || null,
+        detail: safeObject(feature.normalization.detail, 4000),
+      }
+    : null;
+  const cohort = feature?.cohort && typeof feature.cohort === "object"
+    ? safeObject(feature.cohort, 6000)
+    : null;
+  return { normalization, cohort };
 }
 
 Deno.serve(async (req: Request) => {
@@ -110,23 +145,54 @@ Deno.serve(async (req: Request) => {
     return json(req, 400, { error: "Invalid JSON" });
   }
 
-  const modelKey = clean(body?.model_key, 100);
-  const scopeType = clean(body?.scope_type || "custom", 40);
-  const scopeValue = body?.scope_value && typeof body.scope_value === "object" ? body.scope_value : {};
-  const requestedPrompt = clean(body?.requested_prompt, 1200) || null;
+  if (Array.isArray(body?.candidates)) {
+    return json(req, 400, { error: "Direct candidate scoring is disabled. A trusted evidence_batch_id is required." });
+  }
+
+  const evidenceBatchId = clean(body?.evidence_batch_id, 80);
   const requestedLimit = Math.max(1, Math.min(Number(body?.limit || 50), 100));
-  const candidates = (Array.isArray(body?.candidates) ? body.candidates : []).slice(0, 250) as Candidate[];
-  if (!modelKey) return json(req, 400, { error: "model_key is required" });
-  if (!SCOPE_TYPES.has(scopeType)) return json(req, 400, { error: "Unsupported scope_type" });
-  if (!candidates.length) return json(req, 400, { error: "At least one candidate is required" });
+  if (!evidenceBatchId) return json(req, 400, { error: "evidence_batch_id is required" });
+
+  const { data: batch, error: batchError } = await admin
+    .from("intelligence_evidence_batches")
+    .select("id,user_id,model_key,model_version,source_kind,source_manifest,normalization_manifest,cohort_manifest,candidates,facts_hash,candidate_count,expires_at,consumed_at")
+    .eq("id", evidenceBatchId)
+    .eq("user_id", user.id)
+    .maybeSingle();
+  if (batchError || !batch) return json(req, 404, { error: "Trusted evidence batch not found" });
+  if (batch.consumed_at) return json(req, 409, { error: "Trusted evidence batch has already been consumed" });
+  if (new Date(String(batch.expires_at)).getTime() <= Date.now()) return json(req, 409, { error: "Trusted evidence batch expired" });
+
+  const candidates = (Array.isArray(batch.candidates) ? batch.candidates : []).slice(0, 250) as Candidate[];
+  if (!candidates.length || Number(batch.candidate_count || 0) !== candidates.length) {
+    return json(req, 409, { error: "Trusted evidence batch candidate manifest is invalid" });
+  }
+
+  const batchPayload = {
+    model_key: batch.model_key,
+    model_version: batch.model_version,
+    source_kind: batch.source_kind,
+    source_manifest: batch.source_manifest || {},
+    normalization_manifest: batch.normalization_manifest || {},
+    cohort_manifest: batch.cohort_manifest || {},
+    candidates,
+  };
+  const recomputedBatchHash = await sha256(batchPayload);
+  if (recomputedBatchHash !== String(batch.facts_hash || "")) {
+    return json(req, 409, { error: "Trusted evidence batch failed integrity verification" });
+  }
 
   const [{ data: entitlement }, { data: profile }, { data: model, error: modelError }] = await Promise.all([
     admin.from("account_entitlements").select("plan_tier,billing_tier,subscription_status").eq("user_id", user.id).maybeSingle(),
     admin.from("profiles").select("account_role").eq("id", user.id).maybeSingle(),
-    admin.from("intelligence_models").select("model_key,label,objective,minimum_plan,version,status,calibration_state,signal_config,profession_scope").eq("model_key", modelKey).maybeSingle(),
+    admin.from("intelligence_model_versions")
+      .select("model_key,label,objective,minimum_plan,version,status,calibration_state,signal_config,profession_scope")
+      .eq("model_key", batch.model_key)
+      .eq("version", batch.model_version)
+      .maybeSingle(),
   ]);
-  if (modelError || !model) return json(req, 404, { error: "Intelligence model not found" });
-  if (!["preview", "live"].includes(String(model.status))) return json(req, 409, { error: "Intelligence model is not runnable" });
+  if (modelError || !model) return json(req, 404, { error: "Intelligence model version not found" });
+  if (!["preview", "live"].includes(String(model.status))) return json(req, 409, { error: "Intelligence model version is not runnable" });
 
   const plan = String(profile?.account_role || "") === "developer" ? "developer" : String(entitlement?.plan_tier || "standard");
   if ((PLAN_RANK[plan] ?? 0) < (PLAN_RANK[String(model.minimum_plan)] ?? 99)) {
@@ -143,18 +209,31 @@ Deno.serve(async (req: Request) => {
 
   const configuredWeight = scoreSignals.reduce((sum, signal) => sum + Number(signal.weight || 0), 0);
   const minimumCoverage = clamp(Number(config.minimum_evidence_coverage ?? 0));
-  const recommendedActions = Array.isArray(config.recommended_actions) ? config.recommended_actions.map((x: unknown) => clean(x, 80)).filter(Boolean) : ["review_evidence"];
+  const recommendedActions = Array.isArray(config.recommended_actions)
+    ? config.recommended_actions.map((x: unknown) => clean(x, 80)).filter(Boolean)
+    : ["review_evidence"];
+
+  const sourceManifest = safeObject(batch.source_manifest, 50000);
+  const normalizationManifest = safeObject(batch.normalization_manifest, 50000);
+  const cohortManifest = safeObject(batch.cohort_manifest, 50000);
+  const sourceScopeType = clean(sourceManifest.scope_type || body?.scope_type || "custom", 40);
+  const scopeType = SCOPE_TYPES.has(sourceScopeType) ? sourceScopeType : "custom";
+  const scopeValue = safeObject(sourceManifest.scope_value || body?.scope_value, 20000);
+  const requestedPrompt = clean(body?.requested_prompt, 1200) || null;
 
   const runInsert = await admin.from("intelligence_runs").insert({
     user_id: user.id,
     model_key: model.model_key,
     model_version: model.version,
+    evidence_batch_id: batch.id,
     scope_type: scopeType,
     scope_value: scopeValue,
     requested_prompt: requestedPrompt,
     status: "running",
     candidate_count: candidates.length,
     engine_version: ENGINE_VERSION,
+    normalization_manifest: normalizationManifest,
+    cohort_manifest: cohortManifest,
     started_at: new Date().toISOString(),
   }).select("id").single();
   if (runInsert.error || !runInsert.data?.id) return json(req, 503, { error: "Could not start Intelligence run" });
@@ -173,7 +252,15 @@ Deno.serve(async (req: Request) => {
       for (const signal of scoreSignals) {
         const feature = features[signal.id];
         if (!isAvailable(feature)) {
-          missingEvidence.push({ signal_id: signal.id, role: signal.role || "score", weight: signal.weight, reason: clean(feature?.status || "missing", 80) });
+          const p = provenance(feature);
+          missingEvidence.push({
+            signal_id: signal.id,
+            role: signal.role || "score",
+            weight: signal.weight,
+            reason: clean(feature?.status || "missing", 80),
+            normalization: p.normalization,
+            cohort: p.cohort,
+          });
           continue;
         }
         const featureScore = clamp(Number(feature!.score));
@@ -181,6 +268,7 @@ Deno.serve(async (req: Request) => {
         const contribution = featureScore * weight;
         availableWeight += weight;
         weightedScore += contribution;
+        const p = provenance(feature);
         const item = {
           signal_id: signal.id,
           role: signal.role || "score",
@@ -192,6 +280,8 @@ Deno.serve(async (req: Request) => {
           source_url: clean(feature?.source_url, 600) || null,
           observed_at: clean(feature?.observed_at, 80) || null,
           explanation: clean(feature?.explanation, 500) || null,
+          normalization: p.normalization,
+          cohort: p.cohort,
         };
         evidence.push(item);
         contributions.push(item);
@@ -200,9 +290,17 @@ Deno.serve(async (req: Request) => {
       for (const signal of confidenceSignals) {
         const feature = features[signal.id];
         if (!isAvailable(feature)) {
-          missingEvidence.push({ signal_id: signal.id, role: "confidence", reason: clean(feature?.status || "missing", 80) });
+          const p = provenance(feature);
+          missingEvidence.push({
+            signal_id: signal.id,
+            role: "confidence",
+            reason: clean(feature?.status || "missing", 80),
+            normalization: p.normalization,
+            cohort: p.cohort,
+          });
           continue;
         }
+        const p = provenance(feature);
         evidence.push({
           signal_id: signal.id,
           role: "confidence",
@@ -212,15 +310,24 @@ Deno.serve(async (req: Request) => {
           source_url: clean(feature?.source_url, 600) || null,
           observed_at: clean(feature?.observed_at, 80) || null,
           explanation: clean(feature?.explanation, 500) || null,
+          normalization: p.normalization,
+          cohort: p.cohort,
         });
       }
 
       if (availableWeight <= 0) continue;
       const score = clamp(weightedScore / availableWeight);
       const evidenceCoverage = configuredWeight > 0 ? clamp((availableWeight / configuredWeight) * 100) : 0;
-      const confidenceValues = confidenceSignals.map((signal) => features[signal.id]).filter(isAvailable).map((feature) => clamp(Number(feature!.score)));
-      const confidenceSignalMean = confidenceValues.length ? confidenceValues.reduce((a, b) => a + b, 0) / confidenceValues.length : null;
-      let confidence = confidenceSignalMean === null ? evidenceCoverage : evidenceCoverage * 0.7 + confidenceSignalMean * 0.3;
+      const confidenceValues = confidenceSignals
+        .map((signal) => features[signal.id])
+        .filter(isAvailable)
+        .map((feature) => clamp(Number(feature!.score)));
+      const confidenceSignalMean = confidenceValues.length
+        ? confidenceValues.reduce((a, b) => a + b, 0) / confidenceValues.length
+        : null;
+      let confidence = confidenceSignalMean === null
+        ? evidenceCoverage
+        : evidenceCoverage * 0.7 + confidenceSignalMean * 0.3;
       const limitedEvidence = evidenceCoverage < minimumCoverage;
       if (limitedEvidence) confidence = Math.min(confidence, 49);
       confidence = clamp(confidence);
@@ -228,19 +335,34 @@ Deno.serve(async (req: Request) => {
       const factPayload = {
         model_key: model.model_key,
         model_version: model.version,
-        candidate: { pams_pin: clean(candidate?.pams_pin, 100) || null, address: clean(candidate?.address, 300) || null },
-        evidence: evidence.map((item) => ({ signal_id: item.signal_id, score: item.score, value: item.value, source_key: item.source_key, observed_at: item.observed_at })),
+        evidence_batch_hash: batch.facts_hash,
+        candidate: {
+          pams_pin: clean(candidate?.pams_pin, 100) || null,
+          address: clean(candidate?.address, 300) || null,
+        },
+        evidence: evidence.map((item) => ({
+          signal_id: item.signal_id,
+          score: item.score,
+          value: item.value,
+          source_key: item.source_key,
+          observed_at: item.observed_at,
+          normalization: item.normalization,
+          cohort: item.cohort,
+        })),
         missing_evidence: missingEvidence,
       };
       const factsHash = await sha256(factPayload);
-      const whyNow = contributions.sort((a, b) => b.contribution - a.contribution).slice(0, 3).map((item) => ({
-        signal_id: item.signal_id,
-        score: item.score,
-        weight: item.weight,
-        contribution: item.contribution,
-        value: item.value,
-        explanation: item.explanation,
-      }));
+      const whyNow = contributions
+        .sort((a, b) => b.contribution - a.contribution)
+        .slice(0, 3)
+        .map((item) => ({
+          signal_id: item.signal_id,
+          score: item.score,
+          weight: item.weight,
+          contribution: item.contribution,
+          value: item.value,
+          explanation: item.explanation,
+        }));
 
       scored.push({
         user_id: user.id,
@@ -262,7 +384,12 @@ Deno.serve(async (req: Request) => {
       });
     }
 
-    scored.sort((a, b) => b.score - a.score || b.confidence - a.confidence || String(a.pams_pin || a.property_address || "").localeCompare(String(b.pams_pin || b.property_address || "")));
+    scored.sort((a, b) =>
+      b.score - a.score ||
+      b.confidence - a.confidence ||
+      String(a.pams_pin || a.property_address || "").localeCompare(String(b.pams_pin || b.property_address || ""))
+    );
+
     const findings = scored.slice(0, requestedLimit).map((item, index) => ({
       run_id: runId,
       user_id: item.user_id,
@@ -287,17 +414,34 @@ Deno.serve(async (req: Request) => {
       const insertFindings = await admin.from("intelligence_findings").insert(findings);
       if (insertFindings.error) throw insertFindings.error;
     }
-    const runFactsHash = await sha256({ model_key: model.model_key, model_version: model.version, scope_type: scopeType, scope_value: scopeValue, candidate_hashes: scored.map((item) => item.facts_hash) });
-    await admin.from("intelligence_runs").update({
-      status: "complete",
-      finding_count: findings.length,
-      facts_hash: runFactsHash,
-      completed_at: new Date().toISOString(),
-    }).eq("id", runId);
+
+    const runFactsHash = await sha256({
+      model_key: model.model_key,
+      model_version: model.version,
+      evidence_batch_hash: batch.facts_hash,
+      scope_type: scopeType,
+      scope_value: scopeValue,
+      candidate_hashes: scored.map((item) => item.facts_hash),
+    });
+
+    const completedAt = new Date().toISOString();
+    const [runUpdate, batchUpdate] = await Promise.all([
+      admin.from("intelligence_runs").update({
+        status: "complete",
+        finding_count: findings.length,
+        facts_hash: runFactsHash,
+        completed_at: completedAt,
+      }).eq("id", runId),
+      admin.from("intelligence_evidence_batches").update({ consumed_at: completedAt }).eq("id", batch.id).is("consumed_at", null),
+    ]);
+    if (runUpdate.error) throw runUpdate.error;
+    if (batchUpdate.error) throw batchUpdate.error;
 
     return json(req, 200, {
       ok: true,
       run_id: runId,
+      evidence_batch_id: batch.id,
+      evidence_batch_hash: batch.facts_hash,
       engine_version: ENGINE_VERSION,
       model: {
         key: model.model_key,
@@ -307,6 +451,7 @@ Deno.serve(async (req: Request) => {
         calibration_state: model.calibration_state,
         validated: model.calibration_state === "calibrated" && model.status === "live",
       },
+      source_kind: batch.source_kind,
       candidate_count: candidates.length,
       scored_count: scored.length,
       finding_count: findings.length,
@@ -315,7 +460,9 @@ Deno.serve(async (req: Request) => {
         ...finding,
         limited_evidence: scored[index]?.limited_evidence ?? false,
       })),
-      warning: model.calibration_state === "calibrated" ? null : "Preview model: deterministic output is not yet calibrated or predictive.",
+      warning: model.calibration_state === "calibrated"
+        ? null
+        : "Preview model: deterministic output is not yet calibrated or predictive.",
     });
   } catch (error) {
     await admin.from("intelligence_runs").update({
