@@ -132,10 +132,12 @@
   var CAPTURE_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/verify-email';
   var CAPTURE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
-  function funnelTrack(name) {
+  function funnelTrack(name, params) {
     try {
       if (window.AnchorFunnel && typeof window.AnchorFunnel.track === 'function') {
-        window.AnchorFunnel.track(name, { source: 'anchor-estimator' });
+        var data = params || {};
+        data.source = 'anchor-estimator';
+        window.AnchorFunnel.track(name, data);
       }
     } catch (_) {}
   }
@@ -148,6 +150,22 @@
   function capture(params) {
     if (!params || !params.email) return;
 
+    var context = {};
+    try {
+      if (window.AnchorFunnel && typeof window.AnchorFunnel.leadContext === 'function') {
+        context = window.AnchorFunnel.leadContext() || {};
+      }
+    } catch (_) {}
+
+    var addressEl = document.getElementById('est-address');
+    var googleSelected = context.googleAddressSelected === true ||
+      !!(addressEl && addressEl.dataset && addressEl.dataset.googleAddress === '1');
+    var googlePlaceId = String(
+      context.googlePlaceId ||
+      (addressEl && addressEl.dataset ? addressEl.dataset.googlePlaceId : '') ||
+      ''
+    ).trim();
+
     var lead = {
       name: params.name || '',
       email: params.email || '',
@@ -157,7 +175,14 @@
       household_income: params.income_bracket || params.finance || '',
       program: 'ANCHOR Estimator',
       summary: params.topic || '',
-      notes: params.message || ''
+      notes: params.message || '',
+      referral_source: context.selfReportedSource || '',
+      referral_source_detail: context.selfReportedSourceDetail || '',
+      google_address_selected: googleSelected,
+      google_place_id: googlePlaceId,
+      anchor_session_id: context.sessionId || '',
+      first_touch: context.firstTouch || null,
+      last_touch: context.lastTouch || null
     };
 
     fetch(CAPTURE_URL, {
@@ -181,7 +206,10 @@
       }
       return res.json();
     }).then(function () {
-      funnelTrack('anchor_backoffice_captured');
+      funnelTrack('anchor_backoffice_captured', {
+        referral_source: lead.referral_source || '',
+        google_address: googleSelected
+      });
     }).catch(function (err) {
       console.warn('Watchdog Backoffice capture:', err && err.message ? err.message : err);
       funnelTrack('anchor_backoffice_capture_failed');
