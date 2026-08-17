@@ -4,7 +4,7 @@
 var PROD_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
 var PROD_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 var CACHE_MS=120000;
-var state={client:null,lastKey:'',lastAt:0,lastData:null,timer:null,running:false};
+var state={client:null,lastKey:'',lastAt:0,lastData:null,timer:null,running:false,queued:null};
 
 function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uniq(values){return Array.from(new Set((values||[]).map(function(v){return String(v||'').trim();}).filter(Boolean)));}
@@ -50,7 +50,7 @@ async function contextFromPage(){
   if(pins.length===1)scope='property';
   return{surface:s,scope_type:scope,pams_pins:pins,context_key:s+':'+pins.slice().sort().join('|'),limit:s==='agent_control'?30:12};
 }
-function keyFor(ctx){return[ctx.surface,ctx.scope_type,(ctx.pams_pins||[]).slice().sort().join(','),ctx.limit||''].join('|');}
+function keyFor(ctx){return[ctx.surface,ctx.scope_type,ctx.context_key||'',ctx.section||'',(ctx.models||[]).slice().sort().join(','),(ctx.pams_pins||[]).slice().sort().join(','),ctx.limit||''].join('|');}
 function hostFor(s){
   if(s==='dashboard')return document.getElementById('db-panel-main');
   if(s==='home')return document.getElementById('hm-body')&&document.getElementById('hm-body').parentNode;
@@ -71,6 +71,7 @@ function mount(s){
 }
 function bandLabel(b){return b==='act_now'?'Act now':b==='this_week'?'This week':'Watch';}
 function modelIcon(k){return k==='property_change_priority'?'fa-arrows-rotate':k==='closing_review'?'fa-file-circle-check':'fa-chart-line';}
+function sectionLabel(section){return section==='assessment'?'Assessment & tax':section==='closing'?'Closing & diligence':section==='change'?'Changes & history':section==='compare'?'Compare':'this view';}
 function summarySentence(data){
   var s=data.summary||{},parts=[];
   if(s.act_now)parts.push(s.act_now+' act now');
@@ -84,7 +85,7 @@ function render(data,ctx){
   if(!suggestions.length){root.innerHTML='';root.hidden=true;return;}
   root.hidden=false;
   var top=suggestions.slice(0,ctx.surface==='agent_control'?5:3);
-  root.innerHTML='<div class="wdcx-head"><div><span>WATCHDOG INTELLIGENCE</span><h2>What deserves attention here</h2><p>'+esc(summarySentence(data))+'</p></div><button type="button" class="wdcx-toggle" aria-expanded="true">Hide</button></div><div class="wdcx-items">'+top.map(function(item){return'<article class="wdcx-item" data-wdcx-id="'+esc(item.suggestion_id)+'"><div class="wdcx-score"><b>'+Math.round(clamp(item.score,0,100))+'</b><span>'+esc(bandLabel(item.attention_band))+'</span></div><div class="wdcx-copy"><div class="wdcx-model"><i class="fas '+modelIcon(item.model_key)+'"></i>'+esc(item.model_label)+'</div><h3>'+esc(item.property_address||item.pams_pin||'Property review')+'</h3><p>'+esc(item.why_now)+'</p><div class="wdcx-meta"><span>'+Math.round(clamp(item.confidence,0,100))+'% confidence</span><span>'+Math.round(clamp(item.evidence_coverage,0,100))+'% evidence</span>'+(item.limited_evidence?'<span>Limited evidence</span>':'')+'</div></div><div class="wdcx-actions"><button type="button" data-wdcx-open="'+esc(item.suggestion_id)+'">Why Watchdog?</button>'+(item.pams_pin?'<a href="/property/home?pin='+encodeURIComponent(item.pams_pin)+'">Open property</a>':'')+'</div></article>';}).join('')+'</div>'+(suggestions.length>top.length?'<button type="button" class="wdcx-more">+'+(suggestions.length-top.length)+' more current suggestions</button>':'');
+  root.innerHTML='<div class="wdcx-head"><div><span>WATCHDOG INTELLIGENCE</span><h2>What deserves attention in '+esc(sectionLabel(ctx.section))+'</h2><p>'+esc(summarySentence(data))+'</p></div><button type="button" class="wdcx-toggle" aria-expanded="true">Hide</button></div><div class="wdcx-items">'+top.map(function(item){return'<article class="wdcx-item" data-wdcx-id="'+esc(item.suggestion_id)+'"><div class="wdcx-score"><b>'+Math.round(clamp(item.score,0,100))+'</b><span>'+esc(bandLabel(item.attention_band))+'</span></div><div class="wdcx-copy"><div class="wdcx-model"><i class="fas '+modelIcon(item.model_key)+'"></i>'+esc(item.model_label)+'</div><h3>'+esc(item.property_address||item.pams_pin||'Property review')+'</h3><p>'+esc(item.why_now)+'</p><div class="wdcx-meta"><span>'+Math.round(clamp(item.confidence,0,100))+'% confidence</span><span>'+Math.round(clamp(item.evidence_coverage,0,100))+'% evidence</span>'+(item.limited_evidence?'<span>Limited evidence</span>':'')+'</div></div><div class="wdcx-actions"><button type="button" data-wdcx-open="'+esc(item.suggestion_id)+'">Why Watchdog?</button>'+(item.pams_pin?'<a href="/property/home?pin='+encodeURIComponent(item.pams_pin)+'">Open property</a>':'')+'</div></article>';}).join('')+'</div>'+(suggestions.length>top.length?'<button type="button" class="wdcx-more">+'+(suggestions.length-top.length)+' more current suggestions</button>':'');
   var toggle=root.querySelector('.wdcx-toggle');if(toggle)toggle.onclick=function(){var items=root.querySelector('.wdcx-items'),more=root.querySelector('.wdcx-more'),expanded=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',expanded?'false':'true');toggle.textContent=expanded?'Show':'Hide';if(items)items.hidden=expanded;if(more)more.hidden=expanded;};
   root.querySelectorAll('[data-wdcx-open]').forEach(function(btn){btn.onclick=function(){var id=btn.dataset.wdcxOpen,item=suggestions.find(function(x){return x.suggestion_id===id;});if(item)openDrawer(item);};});
   var more=root.querySelector('.wdcx-more');if(more)more.onclick=function(){openQueue(suggestions);};
@@ -105,8 +106,8 @@ function openDrawer(item){
 function openQueue(items){var body=drawerShell('Current Watchdog suggestions',items.length+' evidence-backed findings in this context');body.innerHTML='<div class="wdcx-queue">'+items.map(function(item){return'<button type="button" data-id="'+esc(item.suggestion_id)+'"><b>'+Math.round(clamp(item.score,0,100))+'</b><span><strong>'+esc(item.property_address||item.pams_pin||item.model_label)+'</strong><small>'+esc(item.model_label)+' · '+esc(bandLabel(item.attention_band))+' · '+Math.round(clamp(item.confidence,0,100))+'% confidence</small></span></button>';}).join('')+'</div>';body.querySelectorAll('[data-id]').forEach(function(btn){btn.onclick=function(){var item=items.find(function(x){return x.suggestion_id===btn.dataset.id;});if(item)openDrawer(item);};});}
 async function analyze(input){
   var sb=client();if(!sb)return null;var ctx=input||await contextFromPage();if(!ctx||((ctx.scope_type!=='farm')&&!(ctx.pams_pins||[]).length))return null;
-  var k=keyFor(ctx),now=Date.now();if(state.lastKey===k&&state.lastData&&now-state.lastAt<CACHE_MS){render(state.lastData,ctx);return state.lastData;}if(state.running)return null;state.running=true;
-  try{var res=await sb.functions.invoke('intelligence-context-suggestions',{body:ctx});if(res.error)throw res.error;state.lastKey=k;state.lastAt=Date.now();state.lastData=res.data;render(res.data,ctx);window.dispatchEvent(new CustomEvent('watchdog:context-suggestions',{detail:{context:ctx,data:res.data}}));return res.data;}catch(error){console.warn('Watchdog Context Intelligence unavailable:',error&&error.message||error);return null;}finally{state.running=false;}
+  var k=keyFor(ctx),now=Date.now();if(state.lastKey===k&&state.lastData&&now-state.lastAt<CACHE_MS){render(state.lastData,ctx);return state.lastData;}if(state.running){state.queued=ctx;return null;}state.running=true;
+  try{var res=await sb.functions.invoke('intelligence-context-suggestions',{body:ctx});if(res.error)throw res.error;state.lastKey=k;state.lastAt=Date.now();state.lastData=res.data;render(res.data,ctx);window.dispatchEvent(new CustomEvent('watchdog:context-suggestions',{detail:{context:ctx,data:res.data}}));return res.data;}catch(error){console.warn('Watchdog Context Intelligence unavailable:',error&&error.message||error);return null;}finally{state.running=false;if(state.queued){var queued=state.queued;state.queued=null;setTimeout(function(){analyze(queued);},10);}}
 }
 function schedule(delay){clearTimeout(state.timer);state.timer=setTimeout(function(){analyze();},delay==null?350:delay);}
 function observe(){var target=document.getElementById('db-main')||document.getElementById('hm-main')||document.getElementById('ad-app')||document.querySelector('main')||document.body;if(!target)return;new MutationObserver(function(){schedule(600);}).observe(target,{childList:true,subtree:true});}
