@@ -18,6 +18,7 @@ async function hash(v:unknown){const d=await crypto.subtle.digest("SHA-256",new 
 function filterObject(v:unknown){if(!v||typeof v!=="object"||Array.isArray(v))return{} as Record<string,unknown>;return v as Record<string,unknown>}
 function numeric(v:unknown){const n=Number(v);return Number.isFinite(n)?n:null}
 function active(v:unknown){return v!==null&&v!==undefined&&v!==""&&v!==false&&Number(v)!==0}
+function runnerFor(modelKey:string){if(modelKey==="property_change_priority")return"intelligence-change-run-preview";if(modelKey==="closing_review")return"intelligence-closing-run-preview";return"intelligence-run-preview"}
 function passFilters(row:any,f:Record<string,unknown>){
   if(f.town&&String(row.town||"").toLowerCase().indexOf(String(f.town).toLowerCase())<0)return false;
   if(f.county&&String(row.county||"").toLowerCase().indexOf(String(f.county).toLowerCase())<0)return false;
@@ -54,7 +55,11 @@ Deno.serve(async(req:Request)=>{
 
   if(String(view.source_type)!=="saved"){
     if(keys.length)return out(req,409,{error:`Filtered Workbench source '${clean(view.source_type,60)}' is not yet supported by the deterministic saved-view adapter.`,source_type:view.source_type});
-    const rr=await fetch(`${url}/functions/v1/intelligence-run-preview`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({model_key:modelKey,scope_type:"workbench_view",scope_id:view.id,scope_value:{source:"intelligence_workbench_view_adapter"},limit:body?.limit||50})});
+    const downstream=runnerFor(modelKey);let requestBody:any;
+    if(downstream==="intelligence-run-preview")requestBody={model_key:modelKey,scope_type:"workbench_view",scope_id:view.id,scope_value:{source:"intelligence_workbench_view_adapter"},limit:body?.limit||50};
+    else if(String(view.source_type)==="farm")requestBody={scope_type:"farm",scope_value:{source:"intelligence_workbench_view_adapter",workbench_view_id:view.id,workbench_view_name:view.name},limit:body?.limit||50};
+    else return out(req,409,{error:`Model '${modelKey}' cannot yet resolve unfiltered Workbench source '${clean(view.source_type,60)}' without an exact property population.`,source_type:view.source_type});
+    const rr=await fetch(`${url}/functions/v1/${downstream}`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify(requestBody)});
     const payload=await rr.json().catch(()=>({}));return out(req,rr.status,{...payload,view_adapter_engine:ENGINE});
   }
 
@@ -69,8 +74,8 @@ Deno.serve(async(req:Request)=>{
   if(!filteredPins.length)return out(req,200,{ok:true,model_key:modelKey,findings:[],finding_count:0,candidate_count:0,resolved_scope:{type:"workbench_view",id:view.id,name:view.name,source_type:view.source_type,filters},filter_manifest:filterManifest,warning:"No saved properties match this Workbench view."});
   if(filteredPins.length>MAX_PREVIEW_CANDIDATES)return out(req,409,{error:"The exact filtered Workbench population exceeds the current deterministic preview candidate limit. Watchdog refused to truncate the population.",filtered_count:filteredPins.length,preview_limit:MAX_PREVIEW_CANDIDATES,filter_manifest:filterManifest});
 
-  const downstream=modelKey==="property_change_priority"?"intelligence-change-run-preview":"intelligence-run-preview",scopeValue={source:"workbench_view_filter_adapter",requested_scope_type:"workbench_view",id:view.id,name:view.name,source_type:view.source_type,source_id:view.source_id||null,filters,sort_config:view.sort_config||{},page_size:view.page_size,filter_manifest:filterManifest};
-  const requestBody=downstream==="intelligence-change-run-preview"?{scope_type:"custom",scope_value:scopeValue,pams_pins:filteredPins,limit:body?.limit||50,requested_prompt:clean(body?.requested_prompt,1200)||null}:{model_key:modelKey,scope_type:"custom",scope_value:scopeValue,pams_pins:filteredPins,limit:body?.limit||50,requested_prompt:clean(body?.requested_prompt,1200)||null};
+  const downstream=runnerFor(modelKey),scopeValue={source:"workbench_view_filter_adapter",requested_scope_type:"workbench_view",id:view.id,name:view.name,source_type:view.source_type,source_id:view.source_id||null,filters,sort_config:view.sort_config||{},page_size:view.page_size,filter_manifest:filterManifest};
+  const requestBody=downstream==="intelligence-run-preview"?{model_key:modelKey,scope_type:"custom",scope_value:scopeValue,pams_pins:filteredPins,limit:body?.limit||50,requested_prompt:clean(body?.requested_prompt,1200)||null}:{scope_type:"custom",scope_value:scopeValue,pams_pins:filteredPins,limit:body?.limit||50,requested_prompt:clean(body?.requested_prompt,1200)||null};
   const rr=await fetch(`${url}/functions/v1/${downstream}`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify(requestBody)}),payload=await rr.json().catch(()=>({}));
   return out(req,rr.status,{...payload,view_adapter_engine:ENGINE,resolved_scope:{type:"workbench_view",id:view.id,name:view.name,source_type:view.source_type,filters,filtered_count:filteredPins.length},filter_manifest:filterManifest});
 });
