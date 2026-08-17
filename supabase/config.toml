@@ -60,3 +60,6 @@ verify_jwt = true
 
 [functions.intelligence-run-preview]
 verify_jwt = true
+
+[functions.intelligence-calibration-admin]
+verify_jwt = true
