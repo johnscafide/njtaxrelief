@@ -50,6 +50,7 @@
     }
   </style>
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+  <link rel="stylesheet" href="/property/css/landing-review.css">
 
 <script type="application/ld+json">
 {
@@ -248,6 +249,15 @@
   </div>
 </div>
 
+<section class="lp-proof-strip" aria-label="New Jersey property data coverage and sources">
+  <div class="lp-proof-inner">
+    <div class="lp-proof-stat"><strong>564</strong><span>NJ municipalities</span></div>
+    <div class="lp-proof-stat"><strong>131,244</strong><span>SR1A verified sales on file</span></div>
+    <div class="lp-proof-stat"><strong>55.2%</strong><span>Statewide median assessment ratio</span></div>
+    <div class="lp-proof-source"><span>Built from New Jersey public records, including Division of Taxation sales and equalization data.</span><a href="/property/data-methodology">See the methodology <i class="fas fa-arrow-right"></i></a></div>
+  </div>
+</section>
+
 <!-- STATUS STRIP -->
 <!--<section class="section" style="padding-top:20px;padding-bottom:10px;">
   <div class="section-inner">
@@ -323,7 +333,7 @@
         <div class="lp-body">
           <h3>Your local real estate agents</h3>
           <p class="lp-agent-role">South Jersey real estate</p>
-          <p>Most agents can tell you what your home is worth. We also read the assessment, because one of us has spent 15 plus years preparing New Jersey tax returns.</p>
+          <p>Most agents can tell you what your home is worth. We also read the assessment and bring more than 15 years of New Jersey tax-return preparation experience to the conversation.</p>
           <span class="lp-go">Work with us <i class="fas fa-arrow-right"></i></span>
           <p class="lp-agent-lic">John Scafide, NJ License #2079591 &middot; Heather Scafide, NJ License #2192318 &middot; The McKenty Team at Opus Elite Real Estate</p>
         </div>
@@ -436,7 +446,7 @@
 <!-- HOW IT WORKS -->
 <section class="section section-alt">
   <div class="section-inner">
-    <!-- <h2 class="lp-h2">How it works</h2> -->
+    <h2 class="lp-h2">How it works</h2>
     <div class="lp-steps">
       <div class="lp-step">
         <div class="lp-step-n">1</div>
@@ -451,7 +461,7 @@
       <div class="lp-step">
         <div class="lp-step-n">3</div>
         <h3>Find out if you have a case</h3>
-        <p>We apply the same Chapter 123 test a county board uses. If it's worth appealing, I'll tell you what it's worth in dollars.</p>
+        <p>We apply the same Chapter 123 test a county board uses. If it's worth appealing, we'll show you what it's worth in dollars.</p>
       </div>
     </div>
   </div>
@@ -555,21 +565,51 @@
     </div>
 
     <div class="info-box" style="margin-top:34px; border:none;">
-      <h4><i class="fas fa-lightbulb"></i> The number that decides an appeal</h4>
+      <h3><i class="fas fa-lightbulb"></i> The number that decides an appeal</h3>
       <p>New Jersey's Chapter 123 rule sets a permitted range around the common level ratio, and your assessment either falls inside that range or it doesn't. Watchdog shows you the published ratio, the sales evidence behind it, and where you land. Before you file, double check the current numbers against the county's official instructions, and if the case is close, get a second set of eyes from someone who does this for a living.</p>
     </div>
   </div>
 </section>
 
 <!-- FAQ TEASER -->
-<section class="section">
-  <div class="section-inner">
-    <h2 class="lp-h2">Common questions</h2>
-    <div class="faq-teaser">
-      <p>Where the data comes from, why owner names are blank, what changed with the transfer fee, whether ANCHOR and Stay NJ stack. It's all on the FAQ page.</p>
-      <a href="/property/faq.html" class="faq-teaser-btn">Visit the FAQ page <i class="fas fa-arrow-right"></i></a>
-    </div>
+<section class="landing-faq" aria-labelledby="landing-faq-title">
+  <h2 id="landing-faq-title">Common questions</h2>
+  <p class="landing-faq-intro">Quick answers to the questions people ask most about New Jersey property records, assessments and appeals.</p>
+  <div class="landing-faq-grid">
+    <details class="landing-faq-item">
+      <summary>Where does this property tax data come from?</summary>
+      <p>It comes from the New Jersey Office of GIS statewide parcel layer, joined to the Division of Taxation MOD-IV assessment records. MOD-IV is the same system municipal tax assessors use. The data is refreshed once a year, typically in late spring or early summer.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>Does this show whether a home is for sale?</summary>
+      <p>No. Live listing status in New Jersey comes from the MLS, which is a licensed feed and not public data. This tool reads public assessment records only. It can show when a deed was recorded recently, meaning the property changed hands, but it cannot tell you whether a home is currently listed for sale. For that, contact a licensed agent with MLS access.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>Why is the owner name blank?</summary>
+      <p>Owner names are removed from the public version of this data under Daniel's Law, New Jersey legislation restricting public disclosure of certain personal information. Property details and tax figures remain public.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>Is the tax amount shown my current bill?</summary>
+      <p>No. The figure shown is the prior year billed amount from the most recent published assessment file. Your current year bill will differ because municipal tax rates are set annually. Use it as a reliable ballpark, not an exact current figure.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>What is the difference between assessed value and market value in New Jersey?</summary>
+      <p>Assessed value is the figure your municipality uses to calculate your tax bill. Market value is what the home would sell for today. They are linked by the municipal equalization ratio. Dividing your assessment by that ratio gives the market value your town is implying. If your home would realistically sell for less than that number, you may have grounds for a tax appeal.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>Can I appeal my New Jersey property tax assessment?</summary>
+      <p>Yes. New Jersey property owners can appeal their assessment to the county board of taxation, generally by April 1, or by May 1 in a municipality that went through a revaluation or reassessment. Under the Chapter 123 rule an assessment is upheld if it falls within 15 percent above the ratio applied to true market value, so an appeal succeeds when credible comparable sales place market value meaningfully below what the assessment implies.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>Who pays the realty transfer fee when selling a home in New Jersey?</summary>
+      <p>The seller pays the general realty transfer fee at closing, calculated on a graduated schedule based on the sale price. For contracts fully executed on or after July 10, 2025, residential sales over one million dollars also carry a graduated percent fee that is now paid by the seller rather than the buyer, and it applies to the entire sale price rather than only the amount above one million. Sellers who are 62 or older, blind, or permanently disabled may qualify for a partial exemption using Form RTF-1.</p>
+    </details>
+    <details class="landing-faq-item">
+      <summary>What are block and lot numbers?</summary>
+      <p>Block and lot are how New Jersey municipalities identify individual parcels of land on the official tax map. They are needed for tax appeals, deed searches, permit applications, and title work. A qualifier code is added for condominium units and certain subdivided properties.</p>
+    </details>
   </div>
+  <p class="landing-faq-more">Looking for ANCHOR, Stay NJ or more detailed property-record answers? <a href="/property/faq.html">Read the full FAQ <i class="fas fa-arrow-right"></i></a></p>
 </section>
 
 <style>
@@ -587,21 +627,15 @@
     <h2 class="lp-h2">Latest Watchdog insights</h2>
     <div class="ins-grid">
 
-      <a class="ins-lead" href="/property/insights/south-jersey-weekend-events-august-15-16-2026.html" aria-label="Read this weekend's South Jersey community events Insight">
-        <div class="ins-photo" style="background-image:url('https://images.unsplash.com/photo-1488459716781-31db52582fe9?auto=format&fit=crop&w=1800&q=82')"></div>
-        <span class="ins-kicker">Around New Jersey</span>
-        <h3>What is happening in South Jersey this weekend? 7 local stops for August 15 and 16</h3>
-        <p>From a major Collingswood arts festival to free music in Sewell and Sunday markets, here are several community events worth knowing about this weekend.</p>
+      <a class="ins-lead" href="/property/insights/south-jersey-housing-market-summer-2026.html" aria-label="Read the South Jersey housing market Insight">
+        <div class="ins-photo" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=82')"></div>
+        <span class="ins-kicker">Housing Market</span>
+        <h3>South Jersey home prices are still rising, but the market is starting to look different</h3>
+        <p>Prices remain elevated, but the pace, inventory and negotiating environment are changing. See the South Jersey signals homeowners, buyers and sellers should be watching.</p>
         <em>Read Insight</em>
       </a>
 
       <div class="ins-list">
-        <a href="/property/insights/south-jersey-housing-market-summer-2026.html">
-          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=82')"></div>
-          <div><span class="ins-kicker">Housing Market</span>
-            <h4>South Jersey home prices are still rising, but the market is starting to look different</h4>
-            <em>Read Insight</em></div>
-        </a>
         <a href="/property/insights/anchor-benefit-confirmation-letter-2026.html">
           <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1716065145743-62b57bf0d3b8?auto=format&fit=crop&w=1800&q=82')"></div>
           <div><span class="ins-kicker">2025 ANCHOR</span>
@@ -624,10 +658,10 @@
         <span id="ins-asof">From the state’s own records</span>
       </div>
       <div class="ins-stats">
-        <div><i class="fas fa-building-columns"></i><div><b>565</b><span>Municipalities</span></div></div>
+        <div><i class="fas fa-building-columns"></i><div><b>564</b><span>Municipalities</span></div></div>
         <div><i class="fas fa-file-signature"></i><div><b>131,244</b><span>Verified sales on file</span></div></div>
         <div><i class="fas fa-percent"></i><div><b>55.2%</b><span>Median assessment to market ratio</span></div></div>
-        <div><i class="fas fa-calendar-day"></i><div><b id="ins-days">-</b><span>Days to the appeal deadline</span></div></div>
+        <div><i class="fas fa-calendar-day"></i><div><b id="ins-days">227</b><span>Days to general appeal deadline</span></div></div>
       </div>
       <div class="ins-src">Source: NJ Division of Taxation SR1A verified sales and the Table of Equalized Valuations.
         <a href="/property/">Check your own address</a></div>
