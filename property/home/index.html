@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Property Report | NJ Property Tax Relief</title>
+<title>Property Home | Watchdog Property Intelligence</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://njpropertytaxrelief.com/property/home">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
@@ -14,15 +14,17 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
-<link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
-<link rel="stylesheet" href="/property/css/dashboard.css?v=20260810a">
-<link rel="stylesheet" href="/property/css/home.css?v=20260807h">
-<link rel="stylesheet" href="/property/css/mobile-app.css?v=20260810a">
-<link rel="stylesheet" href="/property/css/mobile-menu.css?v=20260807f">
-<link rel="manifest" href="/property/manifest.webmanifest"><meta name="theme-color" content="#102a4c">
-<link rel="stylesheet" href="/property/css/marker-intelligence.css?v=20260805a">
-<link rel="stylesheet" href="/property/css/plan-context.css?v=20260807e">
-<link rel="stylesheet" href="/property/css/professional-workflows.css?v=20260807a">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/css/home.css">
+<link rel="stylesheet" href="/property/css/mobile-app.css">
+<link rel="stylesheet" href="/property/css/mobile-menu.css">
+<link rel="stylesheet" href="/property/css/marker-intelligence.css">
+<link rel="stylesheet" href="/property/css/plan-context.css">
+<link rel="stylesheet" href="/property/css/professional-workflows.css">
+<link rel="stylesheet" href="/property/css/home/home-2027.css">
+<link rel="manifest" href="/property/manifest.webmanifest">
+<meta name="theme-color" content="#f3f6fb">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -33,14 +35,14 @@
 
 <section class="hm-loading-screen" id="hm-loading" aria-live="polite">
   <div class="pl-spin"></div>
-  <div><b>Opening your property report</b><span>Loading the workspace and current property records.</span></div>
+  <div><b>Opening Property Home</b><span>Loading your property intelligence and current records.</span></div>
 </section>
 
 <section class="gate" id="hm-gate" style="display:none;">
   <div class="gate-mark"><i class="fas fa-dog"></i></div>
   <span class="gate-kicker">Watchdog workspace</span>
-  <h1>Your property report is ready when you are.</h1>
-  <p>Sign in to open the detailed assessment, appeal, benefit and buyer analysis for your saved property.</p>
+  <h1>Your Property Home is ready when you are.</h1>
+  <p>Sign in to open assessment, appeal, benefit, ownership and buyer intelligence for your saved property.</p>
   <div class="gate-actions">
     <button class="db-btn" onclick="plSignInPrompt()"><i class="fas fa-right-to-bracket"></i> Sign in to your workspace</button>
     <a class="gate-back" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up a property</a>
@@ -53,31 +55,50 @@
     <div id="property-side-menu" aria-live="polite"></div>
 
     <div class="db-workspace" id="report-top">
-      <header class="top">
-        <div class="top-in">
-          <div class="who">
-            <div id="hm-avatar"></div>
-            <div>
-              <span class="top-eyebrow">Property intelligence report</span>
-              <h1 id="hm-hi">Your property</h1>
-              <span id="hm-email"></span>
-              <div class="db-stat" id="hm-stat"></div>
-            </div>
+      <header class="top hm27-topbar">
+        <div class="top-in hm27-top-in">
+          <div class="hm27-brand-side">
+            <button id="hm27-menu" class="hm27-menu" type="button" aria-label="Open navigation"><i class="fas fa-bars"></i></button>
+            <a class="hm27-brand" href="/property/dashboard">
+              <span class="hm27-brand-mark"><i class="fas fa-dog"></i></span>
+              <span class="hm27-brand-copy"><b>Watchdog</b><small>PROPERTY INTELLIGENCE</small></span>
+            </a>
           </div>
-          <div class="top-acts">
-            <button class="hm-head-action" type="button" onclick="hmGlossary()"><i class="fas fa-book"></i><span>Glossary</span></button>
-            <button class="hm-head-action" type="button" onclick="window.print()"><i class="fas fa-print"></i><span>Print</span></button>
-            <a class="db-add" href="/property/" aria-label="Add property"><i class="fas fa-plus"></i><span class="db-add-full">Add property</span><span class="db-add-short">Add</span></a>
+
+          <div class="hm27-top-right">
+            <div class="hm27-date">
+              <i class="far fa-calendar-days"></i>
+              <span><b id="hm27-date-label">Today</b><small id="hm27-day-label"></small></span>
+            </div>
+            <button class="hm27-weather" type="button" title="Current conditions for this property">
+              <i id="hm27-weather-icon" class="fas fa-cloud-sun"></i>
+              <span><b id="hm27-weather-temp">Weather</b><small id="hm27-weather-label">Local conditions</small></span>
+            </button>
+            <button id="hm27-notify" class="hm27-notify" type="button" aria-label="Property notifications">
+              <i class="far fa-bell"></i><span id="hm27-notify-badge" class="hm27-badge" hidden></span>
+            </button>
+            <button id="hm27-profile" class="hm27-profile" type="button" aria-label="Open profile menu">
+              <span id="hm27-avatar"></span><i class="fas fa-chevron-down"></i>
+            </button>
+          </div>
+
+          <div class="hm27-compat" aria-hidden="true">
+            <div id="hm-avatar"></div><h1 id="hm-hi">Your property</h1><span id="hm-email"></span><div id="hm-stat"></div>
           </div>
         </div>
       </header>
 
       <div class="hm-top">
         <div class="hm-top-in">
-          <a class="hm-back" href="/property/dashboard"><i class="fas fa-chevron-left"></i> All properties</a>
+          <a class="hm-back" href="/property/dashboard"><i class="fas fa-chevron-left"></i> Dashboard</a>
           <label class="hm-switch-label" for="hm-switch">Viewing</label>
           <select id="hm-switch" onchange="hmSwitch(this.value)" aria-label="Choose a saved property"></select>
-          <span class="hm-saved"><i class="fas fa-circle-check"></i> Saved to your workspace</span>
+          <span class="hm-saved"><i class="fas fa-circle-check"></i> Monitored by Watchdog</span>
+          <div class="hm27-page-actions">
+            <a class="hm27-action primary" href="/property/"><i class="fas fa-plus"></i> Add Property</a>
+            <button class="hm27-action" type="button" onclick="hmGlossary()"><i class="fas fa-book"></i> Glossary</button>
+            <button class="hm27-action" type="button" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+          </div>
         </div>
       </div>
 
@@ -86,28 +107,24 @@
   </div>
 </main>
 
-<div class="mobile-intel-overlay hm-mobile-intel" id="hm-mobile-intel-overlay" aria-hidden="true"
-  onclick="if(event.target===this)hmIntelClose()">
+<div class="mobile-intel-overlay hm-mobile-intel" id="hm-mobile-intel-overlay" aria-hidden="true" onclick="if(event.target===this)hmIntelClose()">
   <section class="mobile-intel-sheet" role="dialog" aria-modal="true" aria-labelledby="hm-mobile-intel-title">
     <div class="mobile-intel-bar" aria-hidden="true"></div>
-    <button class="mobile-intel-close" type="button" onclick="hmIntelClose()" aria-label="Close Agent Intel">
-      <i class="fas fa-xmark"></i>
-    </button>
+    <button class="mobile-intel-close" type="button" onclick="hmIntelClose()" aria-label="Close Agent Intel"><i class="fas fa-xmark"></i></button>
     <div id="hm-mobile-intel-content"></div>
   </section>
 </div>
 
-<button class="db-to-top" id="db-to-top" type="button" onclick="hmScrollTop()" aria-label="Back to top">
-  <i class="fas fa-arrow-up"></i>
-</button>
+<button class="db-to-top" id="db-to-top" type="button" onclick="hmScrollTop()" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/plan-context.js?v=20260807e"></script>
-<script src="/property/js/ownership-verification.js?v=20260805a"></script>
-<script src="/property/js/sidemenu.js?v=20260809f"></script>
-<script src="/property/js/pwa.js?v=20260807a"></script>
-<script type="module" src="/property/js/dashboard/home/index.js?v=20260809e"></script>
-<script src="/property/js/marker-intelligence.js?v=20260805a" defer></script>
-<script src="/property/js/platform-observability.js?v=20260809a"></script>
+<script src="/property/js/plan-context.js"></script>
+<script src="/property/js/ownership-verification.js"></script>
+<script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/pwa.js"></script>
+<script type="module" src="/property/js/dashboard/home/index.js"></script>
+<script src="/property/js/dashboard/home/home-2027.js"></script>
+<script src="/property/js/marker-intelligence.js" defer></script>
+<script src="/property/js/platform-observability.js"></script>
 </body>
 </html>
