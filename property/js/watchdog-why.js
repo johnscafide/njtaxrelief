@@ -3,6 +3,19 @@
 
 const $=(s,r=document)=>r.querySelector(s);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FALLBACK_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
+const FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+let fallbackClient=null;
+let installTimer=null;
+
+function ensureCss(){
+  if(document.querySelector('link[data-watchdog-why-css]'))return;
+  const link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='/property/css/watchdog-why.css';
+  link.dataset.watchdogWhyCss='true';
+  document.head.appendChild(link);
+}
 
 function client(){
   try{
@@ -13,7 +26,10 @@ function client(){
     const dashboard=window.NJDashboard?.client?.();
     if(dashboard)return dashboard;
   }catch(_){}
-  return null;
+  if(fallbackClient)return fallbackClient;
+  if(!window.supabase?.createClient)return null;
+  fallbackClient=window.supabase.createClient(FALLBACK_URL,FALLBACK_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
+  return fallbackClient;
 }
 
 function safeUrl(value){
@@ -81,6 +97,16 @@ function renderError(message,status){
   $('[data-wdwhy-close]',host)?.addEventListener('click',close);
 }
 
+async function resolvePin(sb,pin,address){
+  if(pin)return pin;
+  if(!address)return'';
+  try{
+    const {data,error}=await sb.from('saved_properties').select('pams_pin').eq('address',address).not('pams_pin','is',null).limit(1).maybeSingle();
+    if(error)return'';
+    return String(data?.pams_pin||'').trim();
+  }catch(_){return'';}
+}
+
 async function propertyContext(sb,pin,existing){
   if(existing&&(existing.municipality||existing.county||existing.property_class))return existing;
   try{
@@ -111,11 +137,13 @@ function render(data,context){
 }
 
 async function open(options){
-  const pin=String(options?.pamsPin||options?.pams_pin||'').trim(),address=String(options?.address||'').trim();
+  let pin=String(options?.pamsPin||options?.pams_pin||'').trim();
+  const address=String(options?.address||'').trim();
   shell(address||pin||'Property review');
-  if(!pin){renderError('This property does not have a governed PAMS PIN available for Intelligence review.',400);return;}
   const sb=client();
   if(!sb){renderError('Your signed-in Watchdog session is not available on this page.',401);return;}
+  pin=await resolvePin(sb,pin,address);
+  if(!pin){renderError('Watchdog could not resolve a governed PAMS PIN for this saved property.',400);return;}
   try{
     const r=await sb.functions.invoke('intelligence-assessment-run-preview',{body:{model_key:'assessment_anomaly',scope_type:'property',scope_value:{source:'watchdog_why',surface:String(options?.surface||'unknown').slice(0,80)},pams_pins:[pin],limit:1}});
     if(r.error){
@@ -129,6 +157,69 @@ async function open(options){
   }catch(e){renderError(e?.message||'The governed Intelligence service could not complete this review.',Number(e?.status||0));}
 }
 
+function triggerHtml(address,pin,surface,label,cls){
+  const button=document.createElement('button');
+  button.type='button';
+  button.className=cls||'wdwhy-trigger';
+  button.dataset.watchdogWhy='true';
+  button.dataset.address=address||'';
+  button.dataset.pamsPin=pin||'';
+  button.dataset.surface=surface||location.pathname;
+  button.innerHTML=`<i class="fas fa-dog"></i> ${esc(label||'Why Watchdog?')}`;
+  return button;
+}
+
+function pinFromHref(href){
+  try{return new URL(href,location.origin).searchParams.get('pin')||'';}catch(_){return'';}
+}
+
+function installDashboard(){
+  document.querySelectorAll('.pr-item').forEach(item=>{
+    const actions=item.querySelector('.pr-card-actions');
+    if(!actions||actions.querySelector('[data-watchdog-why]'))return;
+    const address=String(item.querySelector('.pr-card h3')?.textContent||'').trim();
+    if(!address)return;
+    actions.appendChild(triggerHtml(address,'','dashboard','Why Watchdog?','wdwhy-menu-trigger'));
+  });
+  document.querySelectorAll('.cmp3 .ch').forEach(cell=>{
+    if(cell.querySelector('[data-watchdog-why]'))return;
+    const address=String(cell.querySelector('b')?.textContent||'').trim();
+    if(!address)return;
+    cell.appendChild(triggerHtml(address,'','compare','Why Watchdog?','wdwhy-compare-trigger'));
+  });
+}
+
+function installAgentControl(){
+  document.querySelectorAll('.ad-card').forEach(card=>{
+    const actions=card.querySelector('.ad-card-actions');
+    if(!actions||actions.querySelector('[data-watchdog-why]'))return;
+    const link=card.querySelector('.ad-address-link');
+    const address=String(link?.textContent||'').replace(/\s*→\s*$/,'').trim();
+    const pin=pinFromHref(link?.getAttribute('href')||'');
+    if(!address&&!pin)return;
+    actions.appendChild(triggerHtml(address,pin,'agent-control','Why Watchdog flagged this','wdwhy-agent-trigger'));
+  });
+  const focus=$('#ad-focus');
+  const focusActions=focus?.querySelector('.ad-focus-actions');
+  if(focusActions&&!focusActions.querySelector('[data-watchdog-why]')){
+    const link=focus.querySelector('.ad-focus-main a');
+    const address=String(link?.textContent||'').split(' · ')[0].trim();
+    const pin=pinFromHref(link?.getAttribute('href')||'');
+    if(address||pin)focusActions.appendChild(triggerHtml(address,pin,'agent-control-focus','Why Watchdog?','wdwhy-agent-trigger'));
+  }
+}
+
+function installSurfaceButtons(){
+  const page=String(document.body?.dataset?.sidebarPage||'');
+  if(page==='dashboard')installDashboard();
+  if(page==='agent-desk')installAgentControl();
+}
+
+function scheduleInstall(){
+  clearTimeout(installTimer);
+  installTimer=setTimeout(installSurfaceButtons,60);
+}
+
 function delegated(e){
   const trigger=e.target.closest('[data-watchdog-why]');
   if(!trigger)return;
@@ -137,6 +228,9 @@ function delegated(e){
   open({pamsPin:trigger.dataset.pamsPin,address:trigger.dataset.address,surface:trigger.dataset.surface||document.body?.dataset?.sidebarPage||location.pathname});
 }
 
+ensureCss();
 document.addEventListener('click',delegated);
-window.WatchdogWhy={open,close};
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installSurfaceButtons,{once:true});else installSurfaceButtons();
+new MutationObserver(scheduleInstall).observe(document.documentElement,{childList:true,subtree:true});
+window.WatchdogWhy={open,close,install:installSurfaceButtons};
 })();
