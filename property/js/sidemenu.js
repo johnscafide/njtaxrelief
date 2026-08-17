@@ -27,7 +27,7 @@
   function openingOverlay() {
     var old = document.getElementById('wd-agent-opening'); if (old) old.remove();
     var node = document.createElement('div'); node.id = 'wd-agent-opening';
-    node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace…</span></div>';
+    node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace...</span></div>';
     node.style.cssText = 'position:fixed;inset:0;z-index:250000;background:rgba(238,243,246,.94);display:grid;place-items:center;font-family:"Source Sans 3",sans-serif;color:#102a4c;backdrop-filter:blur(8px)';
     var card=node.firstElementChild; card.style.cssText='display:grid;justify-items:center;gap:10px;background:#fff;border:1px solid #dce5ec;border-radius:20px;padding:34px 42px;box-shadow:0 24px 70px rgba(16,42,76,.18)';
     card.querySelector('i').style.cssText='font-size:24px;color:#088d8d'; card.querySelector('b').style.cssText='font:800 22px "Plus Jakarta Sans",sans-serif'; card.querySelector('span').style.cssText='color:#68788f';
@@ -111,12 +111,22 @@
     var s = document.createElement('script'); s.id = 'wd-flood-script'; s.src = '/property/js/flood-intelligence.js'; s.defer = true; document.head.appendChild(s);
   }
 
+  function loadWhyWatchdog() {
+    if (window.WatchdogWhy || document.getElementById('wd-why-script')) return;
+    var s = document.createElement('script');
+    s.id = 'wd-why-script';
+    s.src = '/property/js/watchdog-why.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
   document.addEventListener('njptr:plan-change', function (event) { paintDeveloperLinks(!!(event.detail && event.detail.developer)); paintPlanNavigation(); });
   document.addEventListener('watchdog:developer-confirmed', function () { paintDeveloperLinks(true); });
   document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
     loadFlood();
+    loadWhyWatchdog();
     var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
     return fetch('/property/partials/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
   }
