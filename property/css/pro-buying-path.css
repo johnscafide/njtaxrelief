@@ -1,0 +1,68 @@
+/* Watchdog Pro buying path — static conversion-layer styles.
+   Static HTML + CSS keep pricing, proof and buyer answers visible to crawlers before JS runs. */
+.pro-fast-price{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:690px}
+.pro-fast-price a{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:72px;padding:14px 16px;border:1px solid rgba(16,41,75,.09);border-radius:18px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px);text-decoration:none;color:var(--pro-ink);transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+.pro-fast-price a:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(26,43,64,.09);border-color:rgba(7,132,134,.22)}
+.pro-fast-price span{display:block;color:#79838d;font:800 8px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.pro-fast-price b{display:block;margin-top:7px;font:800 16px/1 "Plus Jakarta Sans",sans-serif}
+.pro-fast-price strong{font:800 27px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em;white-space:nowrap}
+.pro-fast-price strong small{font-size:10px;color:#77818c;letter-spacing:0}
+.pro-fast-price-note{max-width:690px;margin:9px 0 0;color:#77818b;font-size:11px}
+.pro-price-jump{display:inline-flex;align-items:center;gap:8px;margin-top:16px;color:#475464;text-decoration:none;font:800 10px "Plus Jakarta Sans",sans-serif}
+.pro-price-jump i{color:var(--pro-teal)}
+.pro-price-float{position:fixed;right:22px;bottom:22px;z-index:9000;display:flex;align-items:center;gap:9px;padding:12px 15px;border-radius:999px;background:#10294b;color:#fff;text-decoration:none;font:800 10px "Plus Jakarta Sans",sans-serif;box-shadow:0 18px 44px rgba(16,41,75,.24);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .24s ease,transform .24s ease}
+.pro-price-float.show{opacity:1;transform:none;pointer-events:auto}
+.pro-price-float b{color:#80ddd1}
+.pro-price-float i{font-size:9px}
+.pro-origin{padding:86px 0;background:linear-gradient(135deg,#f8faf8,#eef6f4);border-bottom:1px solid rgba(16,19,24,.05)}
+.pro-origin-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.28fr);gap:72px;align-items:center}
+.pro-origin-stamp{min-height:290px;border-radius:28px;background:linear-gradient(145deg,#10294b,#0f5863);color:#fff;padding:34px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 24px 70px rgba(19,45,66,.16);position:relative;overflow:hidden}
+.pro-origin-stamp:after{content:"NJ";position:absolute;right:-10px;bottom:-38px;font:800 150px/1 "Plus Jakarta Sans",sans-serif;color:rgba(255,255,255,.055);letter-spacing:-.08em}
+.pro-origin-stamp span{color:#8ee2d8;font:800 9px "Plus Jakarta Sans",sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.pro-origin-stamp strong{font:700 34px/1.03 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em;max-width:330px}
+.pro-origin-stamp small{color:#bdd0d9;font-size:11px;max-width:330px;line-height:1.45}
+.pro-origin-copy h2{margin:0;font:650 clamp(42px,4.2vw,67px)/.96 "Plus Jakarta Sans",sans-serif;letter-spacing:-.06em}
+.pro-origin-copy p{margin:22px 0 0;max-width:760px;color:#68737d;font-size:18px;line-height:1.58}
+.pro-origin-points{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.pro-origin-points span{display:flex;align-items:center;gap:7px;padding:9px 11px;border-radius:999px;background:#fff;color:#56636d;font-size:10px;font-weight:800}
+.pro-origin-points i{color:var(--pro-teal)}
+.pro-role-outcome{margin-top:22px!important;padding:14px 16px;border-radius:14px;background:#10294b;color:#fff!important;font-size:13px!important;line-height:1.42!important;font-weight:700}
+.pro-role-outcome i{color:#80ddd1;margin-right:8px}
+.pro-capability-surface{padding-top:92px!important;padding-bottom:92px!important}
+.pro-capability-surface .pro-section-head{max-width:880px;margin-bottom:34px}
+.pro-capability-surface .pro-feature-columns{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.pro-capability-surface .pro-feature-col{transform:none!important;min-height:0;padding:22px;border-radius:18px}
+.pro-capability-surface .pro-feature-col span:nth-of-type(n+7){display:none}
+.pro-capability-surface .pro-feature-col span{padding:8px 0;font-size:11px}
+.pro-capability-more{margin:26px auto 0;max-width:830px;text-align:center;color:#7b858e;font-size:12px;line-height:1.5}
+.pro-capability-more b{color:#3e4b57}
+.pro-capability-surface .pro-feature-river{margin-top:32px}
+.pro-price-secondary{display:block;margin-top:10px;text-align:center;color:#73808c;font:800 9px "Plus Jakarta Sans",sans-serif;text-decoration:none}
+.pro-price-secondary[hidden]{display:none!important}
+.plus .pro-price-secondary{color:#a9b5c1}
+.pro-price-secondary:hover{text-decoration:underline}
+.pro-price-band .pro-price-cta[data-billing-plan]{text-decoration:none}
+.pro-price-band .pro-price-cta[data-billing-plan]:after{content:"Self-serve";position:absolute;right:18px;top:16px;padding:5px 7px;border-radius:999px;background:rgba(7,132,134,.08);color:#078486;font:800 7px "Plus Jakarta Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.pro-price-band{overflow:visible!important}
+.pro-checkout-note{max-width:850px;margin:22px auto 0;padding:12px 16px;border-radius:14px;background:rgba(255,255,255,.72);border:1px solid rgba(16,41,75,.09);color:#66737f;text-align:center;font-size:12px;line-height:1.5}
+.pro-checkout-note i{color:var(--pro-teal);margin-right:7px}
+.pro-after-buy{background:#fff;padding:100px 0}
+.pro-after-buy-head{max-width:820px}
+.pro-after-buy-head h2{margin:0;font:650 clamp(44px,4.6vw,70px)/.96 "Plus Jakarta Sans",sans-serif;letter-spacing:-.06em}
+.pro-after-buy-head p{margin:18px 0 0;color:#6f7882;font-size:17px;line-height:1.5}
+.pro-after-buy-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:42px}
+.pro-after-buy-card{position:relative;min-height:260px;padding:28px;border-radius:24px;background:#f5f6f5;overflow:hidden}
+.pro-after-buy-card:nth-child(2){background:#eef7f5}
+.pro-after-buy-card:nth-child(3){background:#10294b;color:#fff}
+.pro-after-buy-card>span{display:inline-flex;width:34px;height:34px;border-radius:50%;align-items:center;justify-content:center;background:#fff;color:var(--pro-teal);font:800 9px "Plus Jakarta Sans",sans-serif}
+.pro-after-buy-card h3{margin:52px 0 0;font:800 23px/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.04em}
+.pro-after-buy-card p{margin:12px 0 0;color:#707b84;font-size:13px;line-height:1.5}
+.pro-after-buy-card:nth-child(3) p{color:#b7c5d1}
+.pro-after-buy-card i{position:absolute;right:24px;top:26px;color:#8bded4;font-size:20px}
+.pro-after-buy-foot{margin-top:18px;color:#7b858e;font-size:11px}
+.pro-after-buy-foot b{color:#3f4b55}
+.pro-faq-card.new-buyer-question{background:linear-gradient(145deg,#f8fbfa,#eef7f5)}
+.pro-story .pro-app-top>b{white-space:nowrap}
+@media(max-width:1100px){.pro-origin-grid{grid-template-columns:1fr}.pro-origin-stamp{min-height:230px}.pro-capability-surface .pro-feature-columns{grid-template-columns:1fr 1fr}.pro-after-buy-grid{grid-template-columns:1fr}.pro-after-buy-card{min-height:210px}}
+@media(max-width:720px){.pro-fast-price{grid-template-columns:1fr;max-width:none}.pro-fast-price a{min-height:62px}.pro-fast-price strong{font-size:24px}.pro-origin{padding:66px 0}.pro-origin-grid{gap:28px}.pro-origin-copy h2{font-size:42px}.pro-capability-surface .pro-feature-columns{grid-template-columns:1fr}.pro-price-float{right:12px;left:12px;bottom:12px;justify-content:center}.pro-after-buy{padding:76px 0}.pro-after-buy-head h2{font-size:42px}.pro-price-band .pro-price-cta[data-billing-plan]:after{display:none}.pro-checkout-note{margin-top:16px;text-align:left}}
+@media(prefers-reduced-motion:reduce){.pro-price-float,.pro-fast-price a{transition:none!important}}
