@@ -56,6 +56,11 @@ assert.match(
 );
 assert.match(
   migration,
+  /create policy "entitled users read provider coverage summary"[\s\S]*?to authenticated[\s\S]*?using \(public\.can_use_data_workbench\(auth\.uid\(\)\)\)/i,
+  'The invoker view must have an explicit entitled-user RLS policy on its base table.'
+);
+assert.match(
+  migration,
   /revoke all on public\.data_center_provider_coverage from anon/i,
   'Anonymous users must not gain provider coverage access while the view is converted.'
 );
