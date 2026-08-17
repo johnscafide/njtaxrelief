@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE="watchdog-intelligence-preview-v2";
+const ENGINE="watchdog-intelligence-preview-v3";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const SCOPES=new Set(["property","saved","farm","workbench_view","municipality","county","custom"]);
@@ -76,7 +76,7 @@ Deno.serve(async(req:Request)=>{
       const factsHash=await hash(fact),whyNow=contrib.sort((a:any,b:any)=>b.contribution-a.contribution).slice(0,3).map((e:any)=>({signal_id:e.signal_id,score:e.score,weight:e.weight,contribution:e.contribution,value:e.value,explanation:e.explanation}));
       scored.push({user_id:user.id,pams_pin:clean(c?.pams_pin,100)||null,property_address:clean(c?.address,300)||null,opportunity_type:String(model.objective||model.model_key),score:round(score),confidence:round(confidence),evidence_coverage:round(coverage),potential_impact:{},why_now:whyNow,evidence,missing_evidence:missing,recommended_actions:actions,narrative:null,narrative_status:"not_requested",facts_hash:factsHash,limited_evidence:limited});
     }
-    scored.sort((a,b)=>b.score-a.score||b.confidence-a.confidence||String(a.pams_pin||a.property_address||"").localeCompare(String(b.pams_pin||b.property_address||"")));
+    scored.sort((a,b)=>Number(a.limited_evidence)-Number(b.limited_evidence)||b.score-a.score||b.confidence-a.confidence||String(a.pams_pin||a.property_address||"").localeCompare(String(b.pams_pin||b.property_address||"")));
     const limit=Math.max(1,Math.min(Number(body?.limit||50),100)),findings=scored.slice(0,limit).map((x,i)=>({run_id:runId,user_id:x.user_id,pams_pin:x.pams_pin,property_address:x.property_address,opportunity_type:x.opportunity_type,rank:i+1,score:x.score,confidence:x.confidence,evidence_coverage:x.evidence_coverage,potential_impact:x.potential_impact,why_now:x.why_now,evidence:x.evidence,missing_evidence:x.missing_evidence,recommended_actions:x.recommended_actions,narrative:x.narrative,narrative_status:x.narrative_status,facts_hash:x.facts_hash}));
     if(findings.length){const ins=await admin.from("intelligence_findings").insert(findings);if(ins.error)throw ins.error}
     const runHash=await hash({model_key:model.model_key,model_version:model.version,evidence_batch_hash:batch.facts_hash,scope_type:scopeType,scope_value:scopeValue,candidate_hashes:scored.map(x=>x.facts_hash)}),done=new Date().toISOString();
