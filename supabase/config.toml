@@ -67,6 +67,9 @@ verify_jwt = true
 [functions.intelligence-run-preview]
 verify_jwt = true
 
+[functions.intelligence-assessment-run-preview]
+verify_jwt = true
+
 [functions.intelligence-change-run-preview]
 verify_jwt = true
 
@@ -74,6 +77,9 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.intelligence-workbench-view-preview]
+verify_jwt = true
+
+[functions.intelligence-property-context]
 verify_jwt = true
 
 [functions.intelligence-calibration-admin]
