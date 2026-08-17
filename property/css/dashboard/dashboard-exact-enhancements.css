@@ -1,0 +1,107 @@
+/* Watchdog Dashboard refinements · resizable data workspace */
+
+/* Keep the screenshot layout readable while allowing each card to own its footprint. */
+.wd4-grid{grid-auto-flow:dense!important;}
+.wd4-card[data-card-id]{grid-column:span var(--wd5-x,4)!important;grid-row:span var(--wd5-y,2)!important;min-height:0!important;}
+
+/* The original generated design intentionally used very small table/support type.
+   These overrides keep the same proportions while making the information easier to read. */
+.wd4-card-title{font-size:14px!important;}
+.wd4-card-title .fa-circle-info{font-size:10px!important;}
+.wd4-kpi-foot{font-size:9.5px!important;}
+.wd4-score-meta span{font-size:8.5px!important;}
+.wd4-score-meta b{font-size:12px!important;}
+.wd4-chart-legend span{font-size:9px!important;}
+.wd4-line-chart text{font-size:8px!important;}
+.wd4-muni-table th{font-size:8.5px!important;}
+.wd4-muni-table td{font-size:9.3px!important;}
+.wd4-activity-row{font-size:9px!important;}
+.wd4-activity-row.head{font-size:8.5px!important;}
+.wd4-weather-location{font-size:10px!important;}
+.wd4-weather-meta span,.wd4-forecast span{font-size:8px!important;}
+.wd4-weather-meta b{font-size:12px!important;}
+.wd4-forecast b{font-size:8.5px!important;}
+
+/* Larger bottom portfolio strip. */
+.wd4-summary{grid-template-columns:42px minmax(0,1fr) auto!important;gap:12px!important;padding:10px 14px!important;}
+.wd4-summary-icon{width:42px!important;height:42px!important;border-radius:12px!important;font-size:15px!important;}
+.wd4-summary-copy span{font-size:10px!important;font-weight:600;}
+.wd4-summary-copy strong{font-size:23px!important;margin-top:2px!important;}
+.wd4-summary-meta b{font-size:10px!important;}
+.wd4-summary-meta small{font-size:8px!important;}
+
+/* Resizing is deliberately unobtrusive until the user hovers or turns layout mode on. */
+.wd5-resize-handle{position:absolute;right:8px;bottom:8px;width:27px;height:27px;border:1px solid #dbe3ee;border-radius:8px;background:rgba(255,255,255,.94);color:#7f8da2;display:grid;place-items:center;cursor:nwse-resize;opacity:0;pointer-events:none;z-index:520;box-shadow:0 4px 12px rgba(28,45,73,.08);transition:opacity .15s ease,color .15s ease,background .15s ease;}
+.wd5-resize-handle i{font-size:9px;}
+.wd4-card:hover>.wd5-resize-handle,body.wd4-layout-mode .wd5-resize-handle{opacity:1;pointer-events:auto;}
+.wd5-resize-handle:hover{background:#edf3ff;color:#2f6df6;}
+body.wd5-resizing{user-select:none;cursor:nwse-resize;}
+body.wd5-resizing .wd4-card{transition:none!important;}
+
+/* Allow chart/list content to actually use the extra x/y space a user gives it. */
+.wd4-chart-card{display:flex;flex-direction:column;}
+.wd4-score-trend .wd4-line-chart,.wd4-tax-value .wd4-line-chart{height:auto!important;min-height:165px;flex:1;}
+.wd4-activity-list{min-height:0;overflow:auto;flex:1;padding-right:3px;}
+.wd4-activity-row{min-height:40px!important;}
+.wd4-municipality{overflow:auto;}
+
+/* Corrected NJ map sits above the original Leaflet canvas. */
+.wd5-map{position:absolute;inset:0;z-index:2;background:#edf3fb;}
+.wd5-map .leaflet-control-attribution{font-size:7px!important;}
+.wd5-map .leaflet-control-zoom{margin-top:16px!important;margin-right:16px!important;}
+
+/* Additional data-rich cards. */
+.wd5-extra-kpi{padding:15px 16px;}
+.wd5-extra-kpi .wd5-kpi-icon{position:absolute;right:14px;top:13px;width:30px;height:30px;border-radius:9px;background:#eef4ff;color:#2f6df6;display:grid;place-items:center;font-size:12px;}
+.wd5-extra-kpi .wd5-kpi-label{display:block;color:#52627a;font-size:13px;font-weight:700;padding-right:36px;}
+.wd5-extra-kpi strong{display:block;color:#14213d;font-size:31px;line-height:1;letter-spacing:-.05em;margin-top:14px;font-variant-numeric:tabular-nums;}
+.wd5-extra-kpi small{display:block;color:#8592a4;font-size:9.5px;margin-top:7px;}
+
+.wd5-properties{display:flex;flex-direction:column;padding:15px 16px 10px;}
+.wd5-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-right:30px;}
+.wd5-card-head h3{margin:0;color:#23334d;font-size:14px;letter-spacing:-.015em;}
+.wd5-card-head a{color:#2f6df6;text-decoration:none;font-size:9.5px;font-weight:700;}
+.wd5-properties-wrap{min-height:0;overflow:auto;flex:1;margin-top:12px;border-top:1px solid #edf1f6;}
+.wd5-properties-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.wd5-properties-table th{position:sticky;top:0;z-index:2;background:#fff;color:#7f8da0;font-size:9px;font-weight:600;text-align:left;padding:9px 7px;border-bottom:1px solid #e8edf4;}
+.wd5-properties-table td{color:#44556d;font-size:10px;padding:10px 7px;border-bottom:1px solid #f0f3f7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.wd5-properties-table td:first-child{color:#243650;font-weight:650;}
+.wd5-score-pill{display:inline-flex;min-width:34px;height:22px;align-items:center;justify-content:center;border-radius:999px;background:#edf3ff;color:#2f6df6;font-size:9px;font-weight:800;}
+.wd5-score-pill.good{background:#e9f8f0;color:#18a966;}.wd5-score-pill.risk{background:#fff0f2;color:#e34f5f;}.wd5-score-pill.watch{background:#fff6e5;color:#d58a00;}
+
+.wd5-county{padding:15px 16px;display:flex;flex-direction:column;}
+.wd5-county-list{display:grid;gap:10px;margin-top:14px;overflow:auto;min-height:0;}
+.wd5-county-row{display:grid;grid-template-columns:minmax(80px,1fr) minmax(90px,1.8fr) auto;align-items:center;gap:9px;}
+.wd5-county-row span{font-size:10px;color:#4f6077;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.wd5-county-track{height:8px;background:#edf2f7;border-radius:999px;overflow:hidden;}
+.wd5-county-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#78a0ff,#2f6df6);}
+.wd5-county-row b{font-size:9px;color:#30445f;font-variant-numeric:tabular-nums;}
+
+/* Marketing Studio card: useful navigation, not an unrelated banner. */
+.wd5-marketing{padding:0;overflow:hidden;background:linear-gradient(135deg,#182e61 0%,#254fba 58%,#6b68ef 100%);border-color:transparent;color:#fff;}
+.wd5-marketing-link{height:100%;display:grid;grid-template-columns:minmax(0,1fr) 150px;align-items:center;gap:16px;padding:19px 20px;color:#fff;text-decoration:none;position:relative;overflow:hidden;}
+.wd5-marketing-link:before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.08);right:-45px;top:-70px;}
+.wd5-marketing-copy{position:relative;z-index:2;}.wd5-marketing-copy small{font-size:8px;letter-spacing:.14em;font-weight:800;opacity:.72;}.wd5-marketing-copy h3{font-size:21px;letter-spacing:-.035em;margin:7px 0 5px;}.wd5-marketing-copy p{font-size:10px;line-height:1.45;margin:0;max-width:360px;color:rgba(255,255,255,.77);}.wd5-marketing-cta{display:inline-flex;align-items:center;gap:7px;margin-top:13px;font-size:10px;font-weight:800;}
+.wd5-marketing-art{position:relative;z-index:2;height:94px;display:grid;grid-template-columns:repeat(3,1fr);gap:7px;align-items:end;}
+.wd5-marketing-art i{display:block;border-radius:10px 10px 4px 4px;background:rgba(255,255,255,.91);box-shadow:0 10px 20px rgba(7,19,48,.2);}.wd5-marketing-art i:nth-child(1){height:59px;opacity:.78}.wd5-marketing-art i:nth-child(2){height:88px}.wd5-marketing-art i:nth-child(3){height:70px;opacity:.88}
+
+/* Sponsored mortgage card. */
+.wd5-sponsor{padding:0;overflow:hidden;background:linear-gradient(135deg,#f8fbff,#eef5ff);}
+.wd5-sponsor-link{height:100%;display:grid;grid-template-columns:112px minmax(0,1fr);gap:15px;align-items:center;padding:14px 17px;color:inherit;text-decoration:none;}
+.wd5-sponsor-photo{height:100%;min-height:118px;border-radius:13px;background-color:#dfe8f5;background-position:center 22%;background-size:cover;box-shadow:inset 0 0 0 1px rgba(25,50,85,.05);}
+.wd5-sponsor-copy{min-width:0;}.wd5-sponsored-label{display:inline-flex;align-items:center;gap:5px;color:#7d8a9c;font-size:7.5px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;}.wd5-sponsored-label i{width:6px;height:6px;border-radius:50%;background:#18a966;}.wd5-sponsor-copy h3{font-size:18px;letter-spacing:-.035em;margin:7px 0 3px;color:#17253e;}.wd5-sponsor-role{font-size:10px;color:#4d6079;font-weight:650;}.wd5-sponsor-company{font-size:9px;color:#7b889a;margin-top:5px;line-height:1.35;}.wd5-sponsor-nmls{font-size:8px;color:#95a0af;margin-top:7px;}.wd5-sponsor-cta{display:inline-flex;align-items:center;gap:6px;color:#245fdc;font-size:9.5px;font-weight:800;margin-top:10px;}
+
+/* Widget menu additions. */
+.wd5-widget-option{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:40px;border-top:1px solid var(--wd4-line-soft);font-size:9px;}
+.wd5-widget-option button{height:27px;border:1px solid var(--wd4-line);border-radius:7px;background:#fff;color:#35506f;font-size:8px;font-weight:700;cursor:pointer;}
+
+@media(max-width:1400px){
+  .wd4-card[data-card-id]{grid-column:span min(var(--wd5-x,4),12)!important;}
+}
+@media(max-width:1000px){
+  .wd5-marketing-link{grid-template-columns:1fr 105px}.wd5-sponsor-link{grid-template-columns:86px 1fr}.wd5-sponsor-photo{min-height:100px}
+}
+@media(max-width:720px){
+  .wd4-card[data-card-id]{grid-column:1/-1!important;grid-row:auto!important;min-height:150px!important;}
+  .wd5-resize-handle{display:none!important}.wd5-properties{min-height:360px!important}.wd5-marketing,.wd5-sponsor{min-height:220px!important}.wd5-marketing-link{grid-template-columns:1fr}.wd5-marketing-art{display:none}.wd5-sponsor-link{grid-template-columns:90px 1fr}.wd4-summary-copy span{font-size:11px!important}.wd4-summary-meta small{font-size:9px!important}
+}
