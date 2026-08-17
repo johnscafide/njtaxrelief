@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE_VERSION = "watchdog-intelligence-normalize-preview-v1";
+const ENGINE_VERSION = "watchdog-intelligence-normalize-preview-v2";
 const ALLOWED_ORIGINS = new Set([
   "https://njpropertytaxrelief.com",
   "https://www.njpropertytaxrelief.com",
@@ -55,9 +55,20 @@ function percentileMidrank(values: number[], raw: number, lowQ = 0, highQ = 1) {
   for (const v of sorted) { const w = Math.max(lo, Math.min(hi, v)); if (w < x) lower++; else if (w === x) equal++; }
   return { score: clamp(((lower + equal * 0.5) / sorted.length) * 100), low: lo, high: hi, sample_size: sorted.length };
 }
-function transform(def: any, rawValue: unknown, cohortValues: unknown[], cohortDef: any) {
+function transform(def: any, rawValue: unknown, cohortValues: unknown[], cohortDef: any, rawMap: Record<string, unknown>) {
   const cfg = def.config || {};
   if (def.status === "draft") return { status: "definition_draft", score: null, detail: {} };
+
+  const guardKey = clean(cfg.guard_source_key, 140);
+  if (guardKey) {
+    const guardValue = numeric(rawMap[guardKey]);
+    if (guardValue === null) return { status: "guard_missing", score: null, detail: { guard_source_key: guardKey, reason: clean(cfg.guard_reason, 240) || "Guard evidence is missing" } };
+    const guardMin = numeric(cfg.guard_min), guardMax = numeric(cfg.guard_max);
+    if ((guardMin !== null && guardValue < guardMin) || (guardMax !== null && guardValue > guardMax)) {
+      return { status: "guard_failed", score: null, detail: { guard_source_key: guardKey, guard_value: guardValue, guard_min: guardMin, guard_max: guardMax, reason: clean(cfg.guard_reason, 240) || "Feature guard failed" } };
+    }
+  }
+
   if (def.transform_type === "identity_0_100") {
     const n = numeric(rawValue); return n === null ? { status: "missing", score: null, detail: {} } : { status: "available", score: clamp(n), detail: {} };
   }
@@ -69,6 +80,13 @@ function transform(def: any, rawValue: unknown, cohortValues: unknown[], cohortD
   }
   if (def.transform_type === "distance_from_target") {
     const n = numeric(rawValue), target = Number(cfg.target ?? 0), delta = Math.max(Number(cfg.full_attention_delta || 1), 0.000001); return n === null ? { status: "missing", score: null, detail: {} } : { status: "available", score: clamp((Math.abs(n - target) / delta) * 100), detail: { target, full_attention_delta: delta } };
+  }
+  if (def.transform_type === "numeric_decay") {
+    const value = numeric(rawValue); if (value === null) return { status: "missing", score: null, detail: {} };
+    const points = Array.isArray(cfg.breakpoints) ? cfg.breakpoints.slice().sort((a: any, b: any) => Number(a.max) - Number(b.max)) : [];
+    const point = points.find((p: any) => value <= Number(p.max));
+    const score = point ? Number(point.score) : Number(cfg.older_score ?? 0);
+    return { status: "available", score: clamp(score), detail: { numeric_value: value, matched_max: point ? Number(point.max) : null } };
   }
   if (def.transform_type === "categorical_map") {
     const key = clean(rawValue, 80).toLowerCase(); const mapped = numeric(cfg[key]); return mapped === null ? { status: key ? "unmapped_category" : "missing", score: null, detail: { category: key || null } } : { status: "available", score: clamp(mapped), detail: { category: key } };
@@ -136,7 +154,7 @@ Deno.serve(async (req: Request) => {
   const normalizationManifest: Record<string, unknown> = {};
   const cohortManifest: Record<string, unknown> = {};
   for (const [key, def] of defs) {
-    normalizationManifest[key] = { version: def.version, source_key: def.source_key, transform_type: def.transform_type, status: def.status, direction: def.direction };
+    normalizationManifest[key] = { version: def.version, source_key: def.source_key, transform_type: def.transform_type, status: def.status, direction: def.direction, guard_source_key: def.config?.guard_source_key || null };
     if (def.cohort_key) {
       const c = cohortMap.get(`${def.cohort_key}:${def.cohort_version}`);
       if (c) cohortManifest[def.cohort_key] = { version: c.version, dimensions: c.dimensions, minimum_sample_size: c.minimum_sample_size, fallback_chain: c.fallback_chain };
@@ -154,7 +172,7 @@ Deno.serve(async (req: Request) => {
       const sourceKey = String(def.source_key);
       const rawValue = raw[sourceKey];
       const cohortDef = def.cohort_key ? cohortMap.get(`${def.cohort_key}:${def.cohort_version}`) : null;
-      const result = transform(def, rawValue, cohorts[featureKey] || cohorts[sourceKey] || [], cohortDef);
+      const result = transform(def, rawValue, cohorts[featureKey] || cohorts[sourceKey] || [], cohortDef, raw);
       const meta = sourceMeta[sourceKey] || sourceMeta[featureKey] || {};
       features[featureKey] = {
         status: result.status,
