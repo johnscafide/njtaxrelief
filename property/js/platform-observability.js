@@ -14,5 +14,6 @@
   load('/property/js/watchdog-semantic-alerts.js','__wdSemanticAlertsLoader','data-watchdog-semantic-alerts');
   load('/property/js/watchdog-assessment-scenario.js','__wdAssessmentScenarioLoader','data-watchdog-assessment-scenario');
   load('/property/js/watchdog-page-context.js','__wdPageContextLoader','data-watchdog-page-context');
+  if(path==='/property/home')load('/property/js/watchdog-home-semantic-bridge.js','__wdHomeSemanticBridgeLoader','data-watchdog-home-semantic');
   if(path==='/property/data-workbench')load('/property/js/watchdog-analyst-scenario-bridge.js','__wdAnalystScenarioBridgeLoader','data-watchdog-analyst-scenario');
 })();
