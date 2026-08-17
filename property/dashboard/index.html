@@ -18,6 +18,22 @@
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-exact-enhancements.css">
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-exact-interactions.css">
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-workspace-polish.css">
+  <style>
+    .wd4-card[data-card-id="property-home-link"]{grid-column:span 5!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="town-compare-link"]{grid-column:span 6!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="fairness-link"]{grid-column:span 5!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="change-link"]{grid-column:span 6!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="agent-link"]{grid-column:span 5!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="appeal-link"]{grid-column:span 5!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="workbench-link"]{grid-column:span 6!important;grid-row:span 3!important}
+    .wd4-card[data-card-id="summary-gap"]{grid-column:span 8!important;grid-row:span 2!important}
+    @media(max-width:1000px){
+      .wd4-card[data-card-id="property-home-link"],.wd4-card[data-card-id="fairness-link"],.wd4-card[data-card-id="agent-link"],.wd4-card[data-card-id="appeal-link"]{grid-column:span 6!important}
+    }
+    @media(max-width:720px){
+      .wd4-card[data-card-id="summary-gap"]{grid-column:1/-1!important;grid-row:auto!important}
+    }
+  </style>
 </head>
 <body data-sidebar-page="dashboard">
   <main id="wd4-root" hidden aria-live="polite"></main>
