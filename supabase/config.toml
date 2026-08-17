@@ -57,3 +57,6 @@ verify_jwt = true
 
 [functions.intelligence-normalize-preview]
 verify_jwt = true
+
+[functions.intelligence-run-preview]
+verify_jwt = true
