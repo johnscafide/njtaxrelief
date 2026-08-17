@@ -8,7 +8,6 @@
 @import url("/property/css/lookup/08-search-corrections-v2.css");
 @import url("/property/css/lookup/09-search-corrections-v3.css");
 
-
 /* NJW-101 main search input focus normalization */
 .pl-input:focus,
 #pl-addr:focus {
@@ -17,4 +16,9 @@
 }
 .pl-input-wrap:focus-within {
   outline: none !important;
+}
+
+/* NJW-117 follow-up: recently viewed should sit on the same off-white page paper. */
+.wd-recent-landing {
+  background: var(--bg) !important;
 }
