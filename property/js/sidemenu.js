@@ -2,9 +2,23 @@
   'use strict';
 
   var targetId = 'property-side-menu';
+  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account'];
 
   function pageName() { return document.body.getAttribute('data-sidebar-page') || ''; }
   function isMobile() { return window.matchMedia && window.matchMedia('(max-width: 760px)').matches; }
+
+  function loadModernSecondaryShell() {
+    if (modernSecondaryPages.indexOf(pageName()) < 0) return false;
+    ['/property/css/app-shell-2027.css','/property/css/secondary-pages-2027.css'].forEach(function (href) {
+      if (document.querySelector('link[href="' + href + '"]')) return;
+      var link = document.createElement('link'); link.rel = 'stylesheet'; link.href = href; document.head.appendChild(link);
+    });
+    if (!document.querySelector('script[src="/property/js/app-shell-2027.js"]')) {
+      var script = document.createElement('script'); script.src = '/property/js/app-shell-2027.js'; script.defer = true; document.body.appendChild(script);
+    }
+    var target = document.getElementById(targetId); if (target) target.innerHTML = '';
+    return true;
+  }
 
   function paintToggle() {
     var button = document.getElementById('db-sidebar-toggle'); if (!button) return;
@@ -116,6 +130,7 @@
   document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
+    if (loadModernSecondaryShell()) return Promise.resolve(true);
     loadFlood();
     var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
     return fetch('/property/partials/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
