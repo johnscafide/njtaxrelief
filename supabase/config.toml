@@ -58,6 +58,10 @@ verify_jwt = true
 [functions.workbench-derived]
 verify_jwt = false
 
+# Watchdog Intelligence production-eligible function manifest.
+# Self-test, diagnostic, bootstrap, debug, and preview-account helpers are
+# intentionally absent and must never be bulk-promoted from staging.
+
 [functions.intelligence-score-preview]
 verify_jwt = true
 
@@ -92,4 +96,40 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.intelligence-learning-admin]
+verify_jwt = true
+
+[functions.intelligence-job-submit]
+verify_jwt = true
+
+# The population worker is not browser-callable. JWT gateway verification is
+# disabled because the function authenticates one-time worker tokens, the
+# production automation secret, or an authenticated developer session itself.
+[functions.intelligence-job-worker]
+verify_jwt = false
+
+[functions.intelligence-team]
+verify_jwt = true
+
+[functions.intelligence-team-job-submit]
+verify_jwt = true
+
+[functions.intelligence-operations-admin]
+verify_jwt = true
+
+[functions.intelligence-context-suggestions]
+verify_jwt = true
+
+[functions.intelligence-semantic-context]
+verify_jwt = true
+
+[functions.intelligence-scenario-preview]
+verify_jwt = true
+
+[functions.intelligence-scenario-from-prompt]
+verify_jwt = true
+
+[functions.intelligence-analyst-scenario]
+verify_jwt = true
+
+[functions.intelligence-context-event]
 verify_jwt = true
