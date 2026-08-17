@@ -83,7 +83,32 @@
     .wds-glass-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.wds-glass{background:rgba(255,255,255,.82);border:1px solid rgba(255,255,255,.94);backdrop-filter:blur(13px);border-radius:18px;padding:21px 20px;box-shadow:0 10px 30px rgba(23,30,41,.06)}.wds-glass h4{margin:0 0 8px;font:700 18px/1.15 "Plus Jakarta Sans",sans-serif;letter-spacing:-.028em}.wds-glass p{margin:0;color:#5f6570;font-size:13px;line-height:1.42;min-height:55px}.wds-glass a{display:flex;align-items:center;justify-content:space-between;margin-top:14px;padding-top:12px;border-top:1px solid rgba(16,19,24,.08);font-size:12px;font-weight:800}.wds-glass a i{width:24px;height:24px;border:1px solid rgba(16,19,24,.11);border-radius:50%;display:grid;place-items:center;font-size:8px}
 
     .wds-bento{display:grid;grid-template-columns:1fr 1fr .96fr;grid-template-rows:310px 254px;gap:18px;margin-top:58px}.wds-bento-card{border-radius:25px;overflow:hidden;background:#fff;position:relative;padding:28px;box-shadow:0 15px 42px rgba(18,24,34,.055)}.wds-bento-card h3{margin:0 0 8px;font:700 20px/1.12 "Plus Jakarta Sans",sans-serif;letter-spacing:-.035em}.wds-bento-card p{margin:0;color:#777c85;font-size:13px;line-height:1.45;max-width:360px}.wds-bento-card.dark{background:linear-gradient(150deg,#36373a,#1d1e21);color:#fff}.wds-bento-card.dark p{color:#cfd2d7}.wds-bento-card.tall{grid-column:3;grid-row:1 / span 2;padding:0}.wds-bento-card.wide{grid-column:1 / span 2;grid-row:2;background:linear-gradient(120deg,#fff0cf,#ffd7dc 51%,#eed7ff)}
-    .wds-ui-chart{position:absolute;left:28px;right:28px;bottom:22px;height:150px;border-radius:17px;background:#fbfbfc;border:1px solid #eff0f2;padding:18px;overflow:hidden}.wds-ui-grid{height:80px;position:relative;background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#eef0f3 20px)}.wds-ui-line{position:absolute;inset:15px 0 4px;background:linear-gradient(155deg,transparent 0 24%,#ff4c82 24.6% 25.6%,transparent 26.2% 48%,#ff4c82 48.6% 49.6%,transparent 50.2% 70%,#ff4c82 70.6% 71.6%,transparent 72.2%);opacity:.9}.wds-ui-chip{position:absolute;right:16px;top:14px;padding:6px 8px;border-radius:8px;background:#ffe7f1;color:#9e2b58;font-size:9px;font-weight:800}
+    .wds-ui-chart{position:absolute;left:28px;right:28px;bottom:22px;height:150px;border-radius:17px;background:#fbfbfc;border:1px solid #eff0f2;padding:18px;overflow:hidden}.wds-ui-grid{height:80px;position:relative;background:repeating-linear-gradient(to bottom,transparent 0,transparent 19px,#eef0f3 20px)}.wds-ui-line{position:absolute;inset:15px 0 4px;background:linear-gradient(155deg,transparent 0 24%,#ff4c82 24.6% 25.6%,transparent 26.2% 48%,#ff4c82 48.6% 49.6%,transparent 50.2% 70%,#ff4c82 70.6% 71.6%,transparent 72.2%);opacity:.9}.wds-ui-chip{position:absolute;right:16px;top:14px;padding:6px 8px;border-radius:8px;background:#ffe7f1;color:#9e2b58;font-size:9px;font-weight:800;z-index:2}
+    .wds-ui-svg{display:block;width:100%;height:82px}
+    .wds-ui-svg line{stroke:#eef0f3;stroke-width:1}
+    .wds-ui-area{fill:rgba(255,76,130,.12)}
+    .wds-ui-stroke{fill:none;stroke:#ff4c82;stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+    .wds-ui-dot{fill:#ff4c82;stroke:#fff;stroke-width:2}
+    .wds-ui-legend{display:flex;justify-content:space-between;margin-top:7px;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#9aa0a8}
+    .wds-cmp{margin:52px auto 0;max-width:900px;text-align:left;background:#fff;border-radius:25px;overflow:hidden;box-shadow:0 15px 42px rgba(18,24,34,.055)}
+    .wds-cmp-head,.wds-cmp-row{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,.85fr) minmax(0,.85fr);align-items:center;gap:12px}
+    .wds-cmp-head{padding:22px 26px 16px;border-bottom:1px solid #eef0f2}
+    .wds-cmp-us,.wds-cmp-them{text-align:center;font:800 12px "Plus Jakarta Sans",sans-serif;letter-spacing:.05em;text-transform:uppercase}
+    .wds-cmp-us{color:#0e2248}.wds-cmp-us i{margin-right:5px;color:#ff4c82}
+    .wds-cmp-them{color:#9aa0a8}
+    .wds-cmp-row{padding:15px 26px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#3d434c}
+    .wds-cmp-row b,.wds-cmp-row em{text-align:center;font-style:normal;font-size:13px}
+    .wds-cmp-row b{font-weight:800;color:#0e2248}
+    .wds-cmp-row em{color:#9aa0a8;font-weight:600}
+    .wds-cmp-row b.y i{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:50%;background:#0e2248;color:#fff;font-size:11px}
+    .wds-cmp-row em.n i{display:inline-flex;align-items:center;justify-content:center;width:23px;height:23px;border-radius:50%;background:#f1f2f4;color:#a8aeb6;font-size:11px}
+    .wds-cmp-foot{padding:22px 26px 26px;background:#fbfbfc}
+    .wds-cmp-foot p{margin:0 0 12px;font-size:13px;line-height:1.55;color:#777c85;max-width:620px}
+    .wds-cmp-foot a{font:800 13.5px "Plus Jakarta Sans",sans-serif;color:#0e2248;text-decoration:none}
+    .wds-cmp-foot a:hover{text-decoration:underline}
+    .wds-cmp-foot a i{margin-left:5px;font-size:11px}
+    @media(max-width:640px){.wds-cmp-head,.wds-cmp-row{grid-template-columns:minmax(0,1fr) 62px 62px;gap:8px;padding-left:16px;padding-right:16px}.wds-cmp-row{font-size:13px}.wds-cmp-row b,.wds-cmp-row em{font-size:11px}.wds-cmp-us,.wds-cmp-them{font-size:9px}.wds-cmp-foot{padding:18px 16px 22px}}
+    .wds-bento-card.dark h3{color:#fff}
     .wds-network{position:absolute;inset:94px 25px 22px;border-radius:20px;background:radial-gradient(circle at 50% 50%,rgba(120,91,255,.6),rgba(52,44,82,.18) 38%,transparent 62%)}.wds-orbit{position:absolute;border:1px solid rgba(196,186,255,.26);border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}.wds-orbit.o1{width:210px;height:130px}.wds-orbit.o2{width:160px;height:190px;transform:translate(-50%,-50%) rotate(45deg)}.wds-node{position:absolute;padding:7px 9px;border-radius:999px;background:rgba(255,255,255,.92);color:#333746;font-size:8px;font-weight:800;box-shadow:0 5px 16px rgba(0,0,0,.18)}.wds-node.n1{left:10%;top:45%}.wds-node.n2{right:8%;top:30%}.wds-node.n3{right:24%;bottom:12%}
     .wds-report-photo{position:absolute;inset:0;background-image:linear-gradient(to bottom,rgba(255,255,255,.1),rgba(255,255,255,.04) 47%,rgba(246,247,244,.94) 78%),url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=82&w=1200&auto=format&fit=crop');background-size:cover;background-position:center}.wds-report-copy{position:absolute;z-index:2;left:25px;right:25px;bottom:25px;text-align:center}.wds-report-copy .wds-pill{margin-bottom:12px;background:#eff0e9}.wds-report-copy h3{font-size:26px}.wds-price-tags span{position:absolute;z-index:2;background:rgba(255,255,255,.88);padding:7px 9px;border-radius:8px;font-size:9px;font-weight:800;box-shadow:0 6px 18px rgba(32,39,48,.1)}.wds-price-tags .p1{top:48%;left:12%}.wds-price-tags .p2{top:40%;right:8%}.wds-price-tags .p3{top:58%;right:27%}
     .wds-mail-preview{position:absolute;right:20px;top:28px;width:47%;height:200px;transform:rotate(5deg);background:#fff;border-radius:17px;box-shadow:0 14px 40px rgba(73,42,70,.12);padding:14px}.wds-mail-head{display:flex;align-items:center;gap:8px;font:800 9px/1 "Plus Jakarta Sans",sans-serif}.wds-mail-head i{color:var(--wds-teal)}.wds-mail-photo{height:92px;border-radius:10px;margin-top:10px;background:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=700&q=80') center/cover}.wds-mail-bars{margin-top:9px}.wds-mail-bars i{display:block;height:6px;border-radius:5px;background:#eceef0;margin:5px 0}.wds-mail-bars i:first-child{width:70%;background:#24272d}.wds-wide-copy{position:relative;z-index:2;width:49%;padding-top:5px}.wds-wide-copy h3{font-size:28px;margin-top:3px}.wds-wide-copy p{font-size:14px}.wds-wide-copy .wds-card-go{margin-top:24px}
@@ -120,10 +145,8 @@
   main.innerHTML = `
     <section class="wds-section wds-tight">
       <div class="wds-wrap">
-        <div class="wds-eyebrows"><span class="wds-pill">Property intelligence</span><span class="wds-pill pink">Watchdog</span></div>
         <div class="wds-headrow">
           <h2 class="wds-title">Data-driven property <em>intelligence</em></h2>
-          <p class="wds-lede">Watchdog turns New Jersey property records into a clearer view of assessments, taxes, market context, benefits and the signals that may deserve your attention.</p>
         </div>
 
         <div class="wds-feature">
@@ -172,9 +195,7 @@
 
     <section class="wds-section wds-center">
       <div class="wds-wrap">
-        <div class="wds-eyebrows"><span class="wds-pill blue">Inside Watchdog</span></div>
         <h2 class="wds-center-title">Featured workspace tools, <em>built to work together</em></h2>
-        <p class="wds-center-copy">Start with a property, keep an eye on what changes, then use the same intelligence across reporting, client work and marketing.</p>
         <div class="wds-product-stage">
           <a class="wds-product-card left" href="/property/home">
             <div class="wds-product-photo" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=80&w=1200&auto=format&fit=crop')"><span class="wds-product-badge green">Property Report</span></div>
@@ -210,14 +231,20 @@
 
     <section class="wds-section wds-center">
       <div class="wds-wrap">
-        <div class="wds-eyebrows"><span class="wds-pill pink">One connected workspace</span></div>
         <h2 class="wds-center-title">From a single home to a full pipeline, <em>stay in context</em></h2>
-        <p class="wds-center-copy">Watchdog is designed to keep the property record, the homeowner decision and the professional workflow connected instead of scattered across separate tools.</p>
 
         <div class="wds-bento">
           <a class="wds-bento-card" href="/property/dashboard">
             <h3>Unified dashboard</h3><p>Track properties, signals and the numbers that changed without rebuilding the story every time.</p>
-            <div class="wds-ui-chart"><div class="wds-ui-chip">+12% activity</div><div class="wds-ui-grid"><div class="wds-ui-line"></div></div></div>
+            <div class="wds-ui-chart"><div class="wds-ui-chip">3 properties tracked</div>
+              <svg class="wds-ui-svg" viewBox="0 0 320 96" preserveAspectRatio="none" aria-hidden="true">
+                <line x1="0" y1="20" x2="320" y2="20"></line><line x1="0" y1="48" x2="320" y2="48"></line><line x1="0" y1="76" x2="320" y2="76"></line>
+                <path class="wds-ui-area" d="M0,72 L53,66 L107,58 L160,49 L213,38 L267,30 L320,18 L320,96 L0,96 Z"></path>
+                <path class="wds-ui-stroke" d="M0,72 L53,66 L107,58 L160,49 L213,38 L267,30 L320,18"></path>
+                <circle class="wds-ui-dot" cx="320" cy="18" r="4"></circle>
+              </svg>
+              <div class="wds-ui-legend"><span>Assessed value</span><span>2019 &ndash; 2026</span></div>
+            </div>
           </a>
           <a class="wds-bento-card dark" href="/property/marketing-studio">
             <h3>Marketing Studio</h3><p>Take a property-driven audience from idea to campaign while keeping the workflow organized.</p>
@@ -230,6 +257,34 @@
             <div class="wds-wide-copy"><span class="wds-pill pink">Professional workflow</span><h3>From property records to real outreach</h3><p>Use Watchdog intelligence to build more relevant homeowner conversations, reports and campaigns.</p><span class="wds-card-go">Launch Marketing Studio <i class="fas fa-arrow-right"></i></span></div>
             <div class="wds-mail-preview"><div class="wds-mail-head"><i class="fas fa-dog"></i>Watchdog property update</div><div class="wds-mail-photo"></div><div class="wds-mail-bars"><i></i><i></i><i></i></div></div>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wds-section wds-center">
+      <div class="wds-wrap">
+        <h2 class="wds-center-title">Not your average <em>data pull</em></h2>
+        <div class="wds-cmp">
+          <div class="wds-cmp-head">
+            <div class="wds-cmp-label"></div>
+            <div class="wds-cmp-us"><i class="fas fa-dog"></i> Watchdog</div>
+            <div class="wds-cmp-them">Most data brokers</div>
+          </div>
+          <div class="wds-cmp-row"><span>Built for one state, in depth</span><b>New Jersey only</b><em>50 states, thin</em></div>
+          <div class="wds-cmp-row"><span>Chapter 123 appeal math</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+          <div class="wds-cmp-row"><span>State-verified SR-1A sales</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+          <div class="wds-cmp-row"><span>Assessment uniformity &amp; revaluation risk</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+          <div class="wds-cmp-row"><span>ANCHOR, Stay NJ &amp; Senior Freeze context</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+          <div class="wds-cmp-row"><span>Every figure carries its source and date</span><b class="y"><i class="fas fa-check"></i></b><em>Varies</em></div>
+          <div class="wds-cmp-row"><span>Sells homeowner contact data</span><b>Never</b><em>Core product</em></div>
+          <div class="wds-cmp-row"><span>Skip tracing &amp; phone append</span><b>Not offered</b><em>Usually included</em></div>
+          <div class="wds-cmp-row"><span>Predicts a homeowner&rsquo;s intent</span><b>No, facts only</b><em>&ldquo;Motivation scores&rdquo;</em></div>
+          <div class="wds-cmp-row"><span>Free homeowner tier</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+          <div class="wds-cmp-row"><span>Annual contract required</span><b>No</b><em>Often</em></div>
+          <div class="wds-cmp-foot">
+            <p>Watchdog is a New Jersey property intelligence tool, not a lead list. We go deep on public assessment, tax and sales records rather than wide on personal data.</p>
+            <a href="/property/compare">See the full vendor-by-vendor comparison <i class="fas fa-arrow-right"></i></a>
+          </div>
         </div>
       </div>
     </section>
