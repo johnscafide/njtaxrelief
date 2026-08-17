@@ -2,7 +2,7 @@
   'use strict';
 
   var targetId = 'property-side-menu';
-  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account','data-workbench'];
+  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account','data-workbench','data-center'];
 
   function pageName() { return document.body.getAttribute('data-sidebar-page') || ''; }
   function isMobile() { return window.matchMedia && window.matchMedia('(max-width: 760px)').matches; }
