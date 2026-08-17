@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE_VERSION = "watchdog-intelligence-normalize-preview-v2";
+const ENGINE_VERSION = "watchdog-intelligence-normalize-preview-v3-missing-date-safe";
 const ALLOWED_ORIGINS = new Set([
   "https://njpropertytaxrelief.com",
   "https://www.njpropertytaxrelief.com",
@@ -31,7 +31,7 @@ function json(req: Request, status: number, payload: unknown) {
   return new Response(JSON.stringify(payload), { status, headers: { ...cors(req), "Content-Type": "application/json", "Cache-Control": "private, no-store" } });
 }
 function clean(value: unknown, max = 300) { return String(value ?? "").replace(/[<>]/g, "").trim().slice(0, max); }
-function numeric(value: unknown) { const n = Number(value); return Number.isFinite(n) ? n : null; }
+function numeric(value: unknown) { if (value === null || value === undefined || value === "") return null; const n = Number(value); return Number.isFinite(n) ? n : null; }
 function clamp(value: number, min = 0, max = 100) { return Math.max(min, Math.min(max, value)); }
 function round(value: number, places = 2) { const f = 10 ** places; return Math.round(value * f) / f; }
 function namedEnv(jsonName: string, legacyName: string) {
@@ -93,6 +93,7 @@ function transform(def: any, rawValue: unknown, cohortValues: unknown[], cohortD
   }
   if (def.transform_type === "recency_decay") {
     const time = new Date(String(rawValue || "")); if (!Number.isFinite(time.getTime())) return { status: "missing", score: null, detail: {} };
+    if (time.getTime() > Date.now() + 300000) return { status: "future_timestamp", score: null, detail: { observed_time: time.toISOString() } };
     const days = Math.max(0, (Date.now() - time.getTime()) / 86400000);
     const points = Array.isArray(cfg.breakpoints) ? cfg.breakpoints.slice().sort((a: any, b: any) => Number(a.days) - Number(b.days)) : [];
     const point = points.find((p: any) => days <= Number(p.days));
@@ -154,7 +155,7 @@ Deno.serve(async (req: Request) => {
   const normalizationManifest: Record<string, unknown> = {};
   const cohortManifest: Record<string, unknown> = {};
   for (const [key, def] of defs) {
-    normalizationManifest[key] = { version: def.version, source_key: def.source_key, transform_type: def.transform_type, status: def.status, direction: def.direction, guard_source_key: def.config?.guard_source_key || null };
+    normalizationManifest[key] = { version: def.version, source_key: def.source_key, transform_type: def.transform_type, status: def.status, direction: def.direction, guard_source_key: def.config?.guard_source_key || null, guard_min: def.config?.guard_min ?? null, guard_max: def.config?.guard_max ?? null };
     if (def.cohort_key) {
       const c = cohortMap.get(`${def.cohort_key}:${def.cohort_version}`);
       if (c) cohortManifest[def.cohort_key] = { version: c.version, dimensions: c.dimensions, minimum_sample_size: c.minimum_sample_size, fallback_chain: c.fallback_chain };
