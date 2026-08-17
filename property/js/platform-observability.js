@@ -10,6 +10,7 @@
   }
   load('/property/js/watchdog-semantic-context.js','__wdSemanticContextLoader','data-watchdog-semantic-context');
   load('/property/js/watchdog-intelligence-context.js','__wdContextIntelligenceLoader','data-watchdog-context-intelligence');
+  load('/property/js/watchdog-context-feedback.js','__wdContextFeedbackLoader','data-watchdog-context-feedback');
   load('/property/js/watchdog-scenario.js','__wdScenarioLoader','data-watchdog-scenario');
   load('/property/js/watchdog-semantic-alerts.js','__wdSemanticAlertsLoader','data-watchdog-semantic-alerts');
   load('/property/js/watchdog-assessment-scenario.js','__wdAssessmentScenarioLoader','data-watchdog-assessment-scenario');
