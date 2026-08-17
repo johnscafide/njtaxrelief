@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Verify Standard, Pro, Pro+ and developer authorization
+      - name: Verify anonymous, Standard, Pro and Pro+ authorization
         env:
           STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
           STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
@@ -22,6 +22,13 @@ jobs:
           WATCHDOG_TEST_PRO_PASSWORD: ${{ secrets.WATCHDOG_TEST_PRO_PASSWORD }}
           WATCHDOG_TEST_PRO_PLUS_EMAIL: ${{ secrets.WATCHDOG_TEST_PRO_PLUS_EMAIL }}
           WATCHDOG_TEST_PRO_PLUS_PASSWORD: ${{ secrets.WATCHDOG_TEST_PRO_PLUS_PASSWORD }}
-          WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
-          WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
+          RELEASE_GATE_EVIDENCE_PATH: release-gate-evidence.json
+          RELEASE_VERSION: ${{ github.sha }}
         run: node property/tests/authenticated-release-gate.mjs
+      - name: Upload sanitized release-gate evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: authenticated-release-gate-evidence
+          path: release-gate-evidence.json
+          if-no-files-found: error
+          retention-days: 30
