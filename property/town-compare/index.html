@@ -13,33 +13,19 @@
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
 <link rel="stylesheet" href="/property/css/dashboard.css?v=20260805i">
 <link rel="stylesheet" href="/property/css/town-compare.css?v=20260805a">
+<link rel="stylesheet" href="/property/css/app-shell-2027.css">
+<link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
 </head>
 <body data-sidebar-page="town-compare">
-<main id="tc-main">
-  <div class="db-shell">
-    <div id="property-side-menu" aria-live="polite"></div>
-    <div class="db-workspace">
-      <header class="top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-code-compare"></i></div><div>
-        <span class="top-eyebrow">Statewide data &middot; free</span><h1>Compare municipalities</h1>
-        <span>Fairness, assessment currency, tax-rate direction and budget pressure</span></div></div>
-        <div class="top-acts"><a class="db-add" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a></div>
-      </div></header>
-      <div class="wrap tc-wrap">
-        <div class="db-page-head"><div><span>Town Intelligence</span><h2>Put up to four New Jersey towns side by side</h2>
-          <p>Compare how evenly each town assesses, where its tax rate has been moving, and whether levy, ratable and municipal-budget trends are creating fiscal pressure.</p></div></div>
-        <section class="tc-picker">
-          <label for="tc-town-search">Add a municipality</label>
-          <div class="tc-picker-row"><input id="tc-town-search" type="search" list="tc-town-list" autocomplete="off" placeholder="Type a town name"><datalist id="tc-town-list"></datalist><span class="tc-or">or</span><select id="tc-town" aria-label="Choose a municipality from the full list"><option value="">Choose from all towns</option></select><button id="tc-add" type="button"><i class="fas fa-plus"></i> Add</button></div>
-          <div class="tc-selected" id="tc-selected"></div>
-        </section>
-        <div class="db-loading-panel" id="tc-loading"><div class="pl-spin"></div><div><b>Loading town intelligence</b><span>Preparing statewide rankings and tax-rate histories.</span></div></div>
-        <div id="tc-output"></div>
-        <section class="tc-limit"><i class="fas fa-circle-info"></i><p><b>Read these measures separately.</b> A high fairness score means assessments are relatively consistent inside that municipality. Budget Pressure compares reported fiscal conditions statewide. Neither measure forecasts a specific property bill.</p></section>
-      </div>
-    </div>
-  </div>
-</main>
+<main id="tc-main"><div class="db-shell"><div id="property-side-menu" aria-live="polite"></div><div class="db-workspace">
+<header class="top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-code-compare"></i></div><div><span class="top-eyebrow">Statewide data · free</span><h1>Compare municipalities</h1><span>Fairness, assessment currency, tax-rate direction and budget pressure</span></div></div><div class="top-acts"><a class="db-add" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span></a></div></div></header>
+<div class="wrap tc-wrap"><div class="db-page-head"><div><span>Town Intelligence</span><h2>Put up to four New Jersey towns side by side</h2><p>Compare how evenly each town assesses, where its tax rate has been moving, and whether levy, ratable and municipal-budget trends are creating fiscal pressure.</p></div></div>
+<section class="tc-picker"><label for="tc-town-search">Add a municipality</label><div class="tc-picker-row"><input id="tc-town-search" type="search" list="tc-town-list" autocomplete="off" placeholder="Type a town name"><datalist id="tc-town-list"></datalist><span class="tc-or">or</span><select id="tc-town" aria-label="Choose a municipality from the full list"><option value="">Choose from all towns</option></select><button id="tc-add" type="button"><i class="fas fa-plus"></i> Add</button></div><div class="tc-selected" id="tc-selected"></div></section>
+<div class="db-loading-panel" id="tc-loading"><div class="pl-spin"></div><div><b>Loading town intelligence</b><span>Preparing statewide rankings and tax-rate histories.</span></div></div><div id="tc-output"></div>
+<section class="tc-limit"><i class="fas fa-circle-info"></i><p><b>Read these measures separately.</b> A high fairness score means assessments are relatively consistent inside that municipality. Budget Pressure compares reported fiscal conditions statewide. Neither measure forecasts a specific property bill.</p></section>
+</div></div></div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/sidemenu.js?v=20260809f"></script>
 <script type="module" src="/property/js/town-compare/index.js?v=20260805b"></script>
-</body>
-</html>
+<script src="/property/js/app-shell-2027.js"></script>
+</body></html>
