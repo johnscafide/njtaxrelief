@@ -52,6 +52,12 @@ verify_jwt = false
 [functions.marketing-direct-mail-launch]
 verify_jwt = true
 
+[functions.workbench-hydrate]
+verify_jwt = true
+
+[functions.workbench-derived]
+verify_jwt = false
+
 [functions.intelligence-score-preview]
 verify_jwt = true
 
@@ -62,6 +68,9 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.intelligence-change-run-preview]
+verify_jwt = true
+
+[functions.intelligence-closing-run-preview]
 verify_jwt = true
 
 [functions.intelligence-workbench-view-preview]
