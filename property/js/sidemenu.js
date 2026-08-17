@@ -2,7 +2,7 @@
   'use strict';
 
   var targetId = 'property-side-menu';
-  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account'];
+  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account','data-workbench'];
 
   function pageName() { return document.body.getAttribute('data-sidebar-page') || ''; }
   function isMobile() { return window.matchMedia && window.matchMedia('(max-width: 760px)').matches; }
@@ -16,7 +16,8 @@
     if (!document.querySelector('script[src="/property/js/app-shell-2027.js"]')) {
       var script = document.createElement('script'); script.src = '/property/js/app-shell-2027.js'; script.defer = true; document.body.appendChild(script);
     }
-    var target = document.getElementById(targetId); if (target) target.innerHTML = '';
+    var target = document.getElementById(targetId); if (target) { target.innerHTML = ''; target.hidden = true; }
+    document.body.classList.remove('db-sidebar-expanded','wd-mobile-menu-open');
     return true;
   }
 
