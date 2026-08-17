@@ -6,7 +6,7 @@ This document classifies the Supabase Security Advisor `security_definer_view`, 
 
 ## Remediated in NJW-167
 
-- `workbench_provider_registry_summary` — **authenticated Data Workbench read**. Convert from security-definer view to `security_invoker=true`; give authenticated callers only the three base columns needed by the summary and continue to rely on Data Workbench RLS.
+- `workbench_provider_registry_summary` — **authenticated Data Workbench read**. Convert from security-definer view to `security_invoker=true`; the base `data_center_provider_coverage` table currently has RLS enabled with no policy, so add an explicit entitled-user SELECT policy and grant authenticated callers only the three base columns needed by the summary.
 - `watchdog_effective_plan(uuid)` — **service/internal helper**. Revoke browser execution. Authenticated browser code must use an owner-scoped entitlement API instead of passing an arbitrary UUID.
 - `can_use_data_workbench(uuid)` — **authenticated owner-scoped entitlement helper**. It must remain executable because RLS policies depend on it, but authenticated callers are restricted to `auth.uid()`; only service-role requests may evaluate an explicit target UUID.
 - `save_public_watchdog_score_cache(jsonb)` — **service-only global write**. Revoke `PUBLIC`, `anon`, and `authenticated`; retain `service_role` only.
@@ -98,13 +98,13 @@ The Security Advisor flags these because signed-in users can execute a definer f
 ## Advisor findings outside NJW-167
 
 - `auth_leaked_password_protection` remains a separate Auth configuration item in the NJW-35/NJW-42 sequence.
-- `rls_enabled_no_policy` INFO findings are not evidence of exposure by themselves. Many affected tables are intentionally service-only/closed. Their explicit-policy/operational review belongs to the later targeted security/production-readiness tickets rather than this definer-permission migration.
+- Most `rls_enabled_no_policy` INFO findings are not evidence of exposure by themselves. Many affected tables are intentionally service-only/closed. Their explicit-policy/operational review belongs to the later targeted security/production-readiness tickets rather than this definer-permission migration. `data_center_provider_coverage` is the exception in this work because converting its summary view to security-invoker requires an explicit entitled-user read policy.
 
 ## Production acceptance for this audit
 
 After the migration is merged and applied, verify:
 
-1. `workbench_provider_registry_summary` is `security_invoker=true`, `anon` cannot select it, and entitled authenticated Data Workbench callers retain the minimum underlying column access required by the view.
+1. `workbench_provider_registry_summary` is `security_invoker=true`, `anon` cannot select it, and entitled authenticated Data Workbench callers retain the minimum underlying column access required by the view through the new explicit RLS policy.
 2. `watchdog_effective_plan(uuid)` is not executable by `anon` or `authenticated`, and remains executable by `service_role`.
 3. `can_use_data_workbench(uuid)` remains authenticated-callable but rejects a target UUID other than `auth.uid()`; service-role callers retain explicit-target support.
 4. `save_public_watchdog_score_cache(jsonb)` is executable only by server/service roles, not `PUBLIC`, `anon`, or `authenticated`.
