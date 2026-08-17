@@ -51,3 +51,6 @@ verify_jwt = false
 
 [functions.marketing-direct-mail-launch]
 verify_jwt = true
+
+[functions.intelligence-score-preview]
+verify_jwt = true
