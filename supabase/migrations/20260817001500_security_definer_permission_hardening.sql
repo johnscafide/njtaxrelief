@@ -76,8 +76,8 @@ revoke execute on function public.marketing_direct_mail_quote(uuid,integer,text,
 grant execute on function public.marketing_direct_mail_quote(uuid,integer,text,text,text) to authenticated, service_role;
 
 -- 4) The provider-registry summary must evaluate permissions/RLS as the caller.
--- Give authenticated callers only the three base columns required to compute this
--- summary; the existing RLS policy still gates rows through can_use_data_workbench(auth.uid()).
+-- The base table previously had RLS enabled with no SELECT policy, so establish an
+-- explicit entitled-user policy and grant only the three columns used by the view.
 alter view public.workbench_provider_registry_summary set (security_invoker = true);
 revoke select on public.workbench_provider_registry_summary from public, anon;
 grant select on public.workbench_provider_registry_summary to authenticated, service_role;
@@ -85,6 +85,13 @@ grant select on public.workbench_provider_registry_summary to authenticated, ser
 revoke all on public.data_center_provider_coverage from anon;
 grant select (provider_kind, value_status, bulk_capable)
   on public.data_center_provider_coverage to authenticated;
+
+drop policy if exists "entitled users read provider coverage summary" on public.data_center_provider_coverage;
+create policy "entitled users read provider coverage summary"
+on public.data_center_provider_coverage
+for select
+to authenticated
+using (public.can_use_data_workbench(auth.uid()));
 
 -- service_role remains the unrestricted server-side reader/writer for this table.
 grant select on public.data_center_provider_coverage to service_role;
