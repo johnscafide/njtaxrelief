@@ -120,7 +120,6 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p /tmp/njw42-backup
-          supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/roles.sql --role-only
           supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/schema.sql
           supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/data.sql --use-copy --data-only -x "storage.buckets_vectors" -x "storage.vector_indexes"
           supabase db dump --db-url "$SOURCE_DB_URL" -f /tmp/njw42-backup/history_schema.sql --schema supabase_migrations
@@ -144,10 +143,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          # Supabase-managed roles already exist on every hosted project and include
+          # reserved roles such as supabase_admin that a normal postgres connection
+          # cannot ALTER. Production and the isolated target role inventories are
+          # expected to be platform-managed, so restore application schema/data only.
           psql "$RESTORE_DB_URL" \
             --single-transaction \
             --variable ON_ERROR_STOP=1 \
-            --file /tmp/njw42-backup/roles.sql \
             --file /tmp/njw42-backup/schema.sql \
             --command 'SET session_replication_role = replica' \
             --file /tmp/njw42-backup/data.sql
