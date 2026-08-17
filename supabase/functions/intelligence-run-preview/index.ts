@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE="watchdog-intelligence-orchestrator-preview-v1";
+const ENGINE="watchdog-intelligence-orchestrator-preview-v2";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const SCOPES=new Set(["property","custom"]);
@@ -36,9 +36,12 @@ Deno.serve(async(req:Request)=>{
   const plan=String(profile?.account_role||"")==="developer"?"developer":String(ent?.plan_tier||"standard");if((RANK[plan]??0)<(RANK[String(model.minimum_plan)]??99))return out(req,403,{error:`${model.minimum_plan} plan required`,minimum_plan:model.minimum_plan});
   const cfg=model.signal_config&&typeof model.signal_config==="object"?model.signal_config:{},featureKeys=[...new Set((Array.isArray(cfg.signals)?cfg.signals:[]).map((s:any)=>clean(s?.id,140)).filter(Boolean))];if(!featureKeys.length)return out(req,409,{error:"Model has no feature contract"});
 
-  const {data:defRows,error:de}=await admin.from("intelligence_feature_versions").select("feature_key,version,source_key,transform_type,cohort_key,cohort_version,status").in("feature_key",featureKeys).in("status",["preview","live","draft"]).order("version",{ascending:false});
+  const {data:defRows,error:de}=await admin.from("intelligence_feature_versions").select("feature_key,version,source_key,transform_type,cohort_key,cohort_version,config,status").in("feature_key",featureKeys).in("status",["preview","live","draft"]).order("version",{ascending:false});
   if(de)return out(req,503,{error:"Feature registry unavailable"});const defs=new Map<string,any>();for(const d of defRows||[])if(!defs.has(String(d.feature_key)))defs.set(String(d.feature_key),d);
-  const sourceKeys=[...new Set(featureKeys.map(k=>defs.get(k)?.source_key).filter(Boolean).map((x:unknown)=>clean(x,140)))];
+  const sourceKeys=[...new Set([
+    ...featureKeys.map(k=>defs.get(k)?.source_key),
+    ...[...defs.values()].map((d:any)=>d?.config?.guard_source_key)
+  ].filter(Boolean).map((x:unknown)=>clean(x,140)))];
   if(sourceKeys.some(k=>k.startsWith("event.")))return out(req,409,{error:"This preview source adapter does not yet support change-event models"});
 
   const hydrate=await fetch(`${url}/functions/v1/workbench-hydrate`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({pams_pins:pins,marker_ids:sourceKeys})});
@@ -61,7 +64,10 @@ Deno.serve(async(req:Request)=>{
   }
 
   const normalizeCandidates:any[]=[],resolvedCohorts:Record<string,unknown>={};
-  for(const pin of pins){const row=recordMap.get(pin);if(!row)continue;const raw:Record<string,unknown>={},source_meta:Record<string,unknown>={},cohorts:Record<string,unknown[]>={};for(const fk of featureKeys){const def=defs.get(fk);if(!def)continue;const sk=String(def.source_key),value=hydrated?.markers?.[pin]?.[sk],m=hydrated?.meta?.[pin]?.[sk]||{};if(value!==undefined&&value!==null)raw[sk]=value;source_meta[sk]={source_key:sk,source_url:m?.source_url||null,observed_at:m?.observed_at||m?.checked_at||hydrated?.checked_at||null,explanation:m?.source||m?.explanation||null};if(def.cohort_key){const cr=await resolveCohort(fk,def,row);cohorts[fk]=cr.values;if(cr.resolution){const rk=[def.cohort_key,row?.town||"",row?.county||"",row?.prop_class||""].join("|");resolvedCohorts[rk]=cr.resolution}}}
+  for(const pin of pins){
+    const row=recordMap.get(pin);if(!row)continue;const raw:Record<string,unknown>={},source_meta:Record<string,unknown>={},cohorts:Record<string,unknown[]>={};
+    for(const sk of sourceKeys){const value=hydrated?.markers?.[pin]?.[sk],m=hydrated?.meta?.[pin]?.[sk]||{};if(value!==undefined&&value!==null)raw[sk]=value;source_meta[sk]={source_key:sk,source_url:m?.source_url||null,observed_at:m?.observed_at||m?.checked_at||hydrated?.checked_at||null,explanation:m?.source||m?.explanation||null}}
+    for(const fk of featureKeys){const def=defs.get(fk);if(!def)continue;if(def.cohort_key){const cr=await resolveCohort(fk,def,row);cohorts[fk]=cr.values;if(cr.resolution){const rk=[def.cohort_key,row?.town||"",row?.county||"",row?.prop_class||""].join("|");resolvedCohorts[rk]=cr.resolution}}}
     normalizeCandidates.push({pams_pin:pin,address:row?.address||null,raw,cohorts,source_meta});
   }
   if(!normalizeCandidates.length)return out(req,409,{error:"No candidates remained after governed hydration"});
