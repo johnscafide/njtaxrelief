@@ -108,3 +108,24 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadRuntime, { once: true }); else loadRuntime();
 })();
+
+/* NJW-212: the property landing showcase is page-scoped and intentionally booted
+   from an already-loaded stable runtime so the legacy HTML remains the no-JS fallback. */
+(function () {
+  'use strict';
+  var path = (window.location.pathname || '').replace(/\/+$/, '');
+  if (path !== '/property' && path !== '/property/index.html') return;
+  function bootLanding() {
+    if (document.getElementById('wd-landing-showcase-loader')) return;
+    var script = document.createElement('script');
+    script.id = 'wd-landing-showcase-loader';
+    script.src = '/property/js/landing-showcase.js';
+    script.async = false;
+    document.body.appendChild(script);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootLanding, { once: true });
+  } else {
+    bootLanding();
+  }
+})();
