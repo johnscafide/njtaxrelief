@@ -430,7 +430,6 @@
       <div class="wds-wrap">
         <div class="wds-wow-head wds-polish-reveal">
           <h2>The moment each professional says,<br><em>“I need this.”</em></h2>
-          <p>Same New Jersey property intelligence. Four very different reasons it becomes part of the daily workflow.</p>
         </div>
 
         <div class="wds-wow-grid">

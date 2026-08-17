@@ -172,7 +172,6 @@
       <div class="wds-wrap">
         <div class="wds-center-head wds-reveal">
           <h2>More than a lookup.<br><em>A property intelligence system.</em></h2>
-          <p>Use the free tools. Keep the deeper layers when you need them.</p>
         </div>
 
         <div class="wds-bento">

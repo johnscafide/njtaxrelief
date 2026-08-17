@@ -25,7 +25,7 @@
           <div class="wds-cmp-title">
             <div>
               <h2>Watchdog vs.<br><em>the other guys.</em></h2>
-              <p>The feature-by-feature view you asked for, with the detailed vendor comparisons one click deeper.</p>
+              <p>Watchdog is built to be the most accurate, complete and actionable property data tool for New Jersey. Compare us with the national data brokers.</p>
             </div>
             <a href="/property/compare">Full vendor comparison <i class="fas fa-arrow-right"></i></a>
           </div>
