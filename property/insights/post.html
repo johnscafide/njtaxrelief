@@ -1,1 +1,263 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="index,follow"><title id="t">NJ Property Tax Insight | Watchdog</title><meta id="d" name="description" content="New Jersey property tax insight."><link id="c" rel="canonical" href="https://njpropertytaxrelief.com/property/insights/"><meta id="ogt" property="og:title" content="NJ Property Tax Insight"><meta id="ogd" property="og:description" content="New Jersey property tax insight."><meta id="ogu" property="og:url" content="https://njpropertytaxrelief.com/property/insights/"><meta property="og:type" content="article"><meta name="twitter:card" content="summary_large_image"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet"><style>*{box-sizing:border-box}body{margin:0;font-family:"Source Sans 3",sans-serif;color:#17263a}.p-shell{max-width:780px;margin:auto;padding:0 24px}.p-nav{padding:22px 0;display:flex;justify-content:space-between}.p-nav a{font-weight:800;color:#102a4c;text-decoration:none}.p-head{padding:45px 0 28px}.p-k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#078486;font-weight:800}.p-head h1{font:700 clamp(34px,5vw,52px)/1.08 "Playfair Display",serif;margin:10px 0 15px}.p-dek{font-size:20px;line-height:1.55;color:#637287}.p-meta{font-size:13px;color:#85909c}.p-hero{width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:16px 0 30px}.p-body{font-size:18px;line-height:1.8}.p-body h2{font:800 25px "Plus Jakarta Sans",sans-serif;margin:38px 0 10px}.p-body a{color:#0b6570}.p-faq{margin:45px 0;border-top:1px solid #dde5ea;padding-top:25px}.p-faq h2{font:800 24px "Plus Jakarta Sans",sans-serif}.p-faq h3{font-size:17px;margin:22px 0 6px}.p-cta{margin:50px 0 80px;padding:28px;background:#102a4c;color:#fff;border-radius:16px;text-align:center}.p-cta a{display:inline-block;margin-top:10px;background:#fff;color:#102a4c;padding:11px 18px;border-radius:8px;font-weight:800;text-decoration:none}.p-state{text-align:center;padding:90px 20px;color:#66758a}</style></head><body><div class="p-shell"><nav class="p-nav"><a href="/property/">Watchdog</a><a href="/property/insights/">All insights</a></nav><div id="state" class="p-state">Loading insight…</div><article id="a" hidden><header class="p-head"><span class="p-k" id="k"></span><h1 id="h"></h1><p class="p-dek" id="dek"></p><div class="p-meta"><span id="author"></span> · <span id="date"></span> · <span id="read"></span></div></header><img id="hero" class="p-hero" alt=""><div id="body" class="p-body"></div><section id="faq" class="p-faq" hidden><h2>Frequently asked questions</h2><div id="faql"></div></section><div class="p-cta"><strong>Check your own property record</strong><br>Assessment, tax and property context for any New Jersey address.<br><a href="/property/">Open Watchdog</a></div></article></div><script>(function(){var U='https://uvkvaxljhhngydvlrzom.supabase.co',K='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',q=new URLSearchParams(location.search),slug=q.get('slug')||((location.pathname.match(/\/property\/insights\/([a-z0-9-]+)\.html$/i)||[])[1]);function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}if(!slug){document.getElementById('state').textContent='Insight not found.';return}fetch(U+'/rest/v1/insights_articles?slug=eq.'+encodeURIComponent(slug)+'&published=eq.true&select=*',{headers:{apikey:K,Authorization:'Bearer '+K}}).then(function(r){if(!r.ok)throw Error();return r.json()}).then(function(rows){if(!rows.length)throw Error();var x=rows[0],desc=x.meta_description||x.dek,can='https://njpropertytaxrelief.com/property/insights/'+x.slug+'.html';document.title=x.title+' | Watchdog';document.getElementById('d').content=desc;document.getElementById('c').href=can;document.getElementById('ogt').content=x.title;document.getElementById('ogd').content=desc;document.getElementById('ogu').content=can;document.getElementById('k').textContent=x.kicker;document.getElementById('h').textContent=x.title;document.getElementById('dek').textContent=x.dek;document.getElementById('author').textContent=x.author||'Watchdog';document.getElementById('date').textContent=new Date(x.published_at).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});document.getElementById('read').textContent=(x.reading_minutes||5)+' min read';var im=document.getElementById('hero');if(x.hero_image_url){im.src=x.hero_image_url;im.alt=x.hero_image_alt||x.title}else im.hidden=true;document.getElementById('body').innerHTML=x.body_html||'';var fq=Array.isArray(x.faq)?x.faq:[];if(fq.length){document.getElementById('faq').hidden=false;document.getElementById('faql').innerHTML=fq.map(function(f){return'<div><h3>'+esc(f.q)+'</h3><p>'+esc(f.a)+'</p></div>'}).join('')}var ld={'@context':'https://schema.org','@type':'Article',headline:x.title,description:desc,datePublished:x.published_at,dateModified:x.updated_at||x.published_at,mainEntityOfPage:can,author:{'@type':'Person',name:x.author||'Watchdog'},publisher:{'@type':'Organization',name:'Watchdog Property Intelligence'}};var s=document.createElement('script');s.type='application/ld+json';s.textContent=JSON.stringify(ld);document.head.appendChild(s);document.getElementById('state').hidden=true;document.getElementById('a').hidden=false}).catch(function(){document.getElementById('state').innerHTML='That insight could not be found. <a href="/property/insights/">Browse all insights</a>.'})})();</script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="index,follow">
+    <title id="t">NJ Property Tax Insight | Watchdog</title>
+    <meta id="d" name="description" content="New Jersey property tax insight.">
+    <link id="c" rel="canonical" href="https://njpropertytaxrelief.com/property/insights/">
+    <meta id="ogt" property="og:title" content="NJ Property Tax Insight">
+    <meta id="ogd" property="og:description" content="New Jersey property tax insight.">
+    <meta id="ogu" property="og:url" content="https://njpropertytaxrelief.com/property/insights/">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: "Source Sans 3", sans-serif;
+            color: #17263a;
+        }
+        .p-shell {
+            max-width: 780px;
+            margin: auto;
+            padding: 0 24px;
+        }
+        .p-nav {
+            padding: 22px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .p-nav a {
+            font-weight: 800;
+            color: #102a4c;
+            text-decoration: none;
+        }
+        .p-head {
+            padding: 45px 0 28px;
+        }
+        .p-k {
+            font-size: 11px;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: #078486;
+            font-weight: 800;
+        }
+        .p-head h1 {
+            font: 700 clamp(34px, 5vw, 52px)/1.08 "Playfair Display", serif;
+            margin: 10px 0 15px;
+        }
+        .p-dek {
+            font-size: 20px;
+            line-height: 1.55;
+            color: #637287;
+        }
+        .p-meta {
+            font-size: 13px;
+            color: #85909c;
+        }
+        .p-hero {
+            width: 100%;
+            border-radius: 16px;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            margin: 16px 0 30px;
+        }
+        .p-body {
+            font-size: 18px;
+            line-height: 1.8;
+        }
+        .p-body h2 {
+            font: 800 25px "Plus Jakarta Sans", sans-serif;
+            margin: 38px 0 10px;
+        }
+        .p-body a {
+            color: #0b6570;
+        }
+        .p-faq {
+            margin: 45px 0;
+            border-top: 1px solid #dde5ea;
+            padding-top: 25px;
+        }
+        .p-faq h2 {
+            font: 800 24px "Plus Jakarta Sans", sans-serif;
+        }
+        .p-faq h3 {
+            font-size: 17px;
+            margin: 22px 0 6px;
+        }
+        .p-cta {
+            margin: 50px 0 80px;
+            padding: 28px;
+            background: #102a4c;
+            color: #fff;
+            border-radius: 16px;
+            text-align: center;
+        }
+        .p-cta a {
+            display: inline-block;
+            margin-top: 10px;
+            background: #fff;
+            color: #102a4c;
+            padding: 11px 18px;
+            border-radius: 8px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+        .p-state {
+            text-align: center;
+            padding: 90px 20px;
+            color: #66758a;
+        }
+    </style>
+</head>
+<body>
+    <div class="p-shell">
+        <nav class="p-nav">
+            <a href="/property/">Watchdog</a>
+            <a href="/property/insights/">All insights</a>
+        </nav>
+        <div id="state" class="p-state">Loading insight…</div>
+        <article id="a" hidden>
+            <header class="p-head">
+                <span class="p-k" id="k"></span>
+                <h1 id="h"></h1>
+                <p class="p-dek" id="dek"></p>
+                <div class="p-meta">
+                    <span id="author"></span> · <span id="date"></span> · <span id="read"></span>
+                </div>
+            </header>
+            <img id="hero" class="p-hero" alt="">
+            <div id="body" class="p-body"></div>
+            <section id="faq" class="p-faq" hidden>
+                <h2>Frequently asked questions</h2>
+                <div id="faql"></div>
+            </section>
+            <div class="p-cta">
+                <strong>Check your own property record</strong><br>
+                Assessment, tax and property context for any New Jersey address.<br>
+                <a href="/property/">Open Watchdog</a>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        (function() {
+            const API_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+            const API_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+            const params = new URLSearchParams(location.search);
+            const slug = params.get('slug') || ((location.pathname.match(/\/property\/insights\/([a-z0-9-]+)\.html$/i) || [])[1]);
+
+            function escapeHtml(s) {
+                return String(s == null ? '' : s).replace(/[&<>"']/g, function(c) {
+                    return {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '"': '&quot;',
+                        "'": '&#39;'
+                    }[c];
+                });
+            }
+
+            if (!slug) {
+                document.getElementById('state').textContent = 'Insight not found.';
+                return;
+            }
+
+            fetch(API_URL + '/rest/v1/insights_articles?slug=eq.' + encodeURIComponent(slug) + '&published=eq.true&select=*', {
+                headers: {
+                    apikey: API_KEY,
+                    Authorization: 'Bearer ' + API_KEY
+                }
+            })
+                .then(function(r) {
+                    if (!r.ok) throw Error();
+                    return r.json();
+                })
+                .then(function(rows) {
+                    if (!rows.length) throw Error();
+                    const article = rows[0];
+                    const description = article.meta_description || article.dek;
+                    const canonicalUrl = 'https://njpropertytaxrelief.com/property/insights/' + article.slug + '.html';
+
+                    // Update meta tags
+                    document.title = article.title + ' | Watchdog';
+                    document.getElementById('d').content = description;
+                    document.getElementById('c').href = canonicalUrl;
+                    document.getElementById('ogt').content = article.title;
+                    document.getElementById('ogd').content = description;
+                    document.getElementById('ogu').content = canonicalUrl;
+
+                    // Update article content
+                    document.getElementById('k').textContent = article.kicker;
+                    document.getElementById('h').textContent = article.title;
+                    document.getElementById('dek').textContent = article.dek;
+                    document.getElementById('author').textContent = article.author || 'Watchdog';
+                    document.getElementById('date').textContent = new Date(article.published_at).toLocaleDateString('en-US', {
+                        month: 'long',
+                        day: 'numeric',
+                        year: 'numeric'
+                    });
+                    document.getElementById('read').textContent = (article.reading_minutes || 5) + ' min read';
+
+                    // Update hero image
+                    const heroImg = document.getElementById('hero');
+                    if (article.hero_image_url) {
+                        heroImg.src = article.hero_image_url;
+                        heroImg.alt = article.hero_image_alt || article.title;
+                    } else {
+                        heroImg.hidden = true;
+                    }
+
+                    // Update body content
+                    document.getElementById('body').innerHTML = article.body_html || '';
+
+                    // Update FAQ section
+                    const faqs = Array.isArray(article.faq) ? article.faq : [];
+                    if (faqs.length) {
+                        document.getElementById('faq').hidden = false;
+                        document.getElementById('faql').innerHTML = faqs.map(function(f) {
+                            return '<div><h3>' + escapeHtml(f.q) + '</h3><p>' + escapeHtml(f.a) + '</p></div>';
+                        }).join('');
+                    }
+
+                    // Add JSON-LD schema
+                    const jsonLd = {
+                        '@context': 'https://schema.org',
+                        '@type': 'Article',
+                        headline: article.title,
+                        description: description,
+                        datePublished: article.published_at,
+                        dateModified: article.updated_at || article.published_at,
+                        mainEntityOfPage: canonicalUrl,
+                        author: {
+                            '@type': 'Person',
+                            name: article.author || 'Watchdog'
+                        },
+                        publisher: {
+                            '@type': 'Organization',
+                            name: 'Watchdog Property Intelligence'
+                        }
+                    };
+                    const script = document.createElement('script');
+                    script.type = 'application/ld+json';
+                    script.textContent = JSON.stringify(jsonLd);
+                    document.head.appendChild(script);
+
+                    // Show article, hide loading state
+                    document.getElementById('state').hidden = true;
+                    document.getElementById('a').hidden = false;
+                })
+                .catch(function() {
+                    document.getElementById('state').innerHTML = 'That insight could not be found. <a href="/property/insights/">Browse all insights</a>.';
+                });
+        })();
+    </script>
+</body>
+</html>
