@@ -13,19 +13,22 @@ function sb(){
   clientRef=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:String(cfg.storageKey||'sb-uvkvaxljhhngydvlrzom-auth-token')}});
   return clientRef;
 }
-function cacheKey(pins,packs){return pins.slice().sort().join(',')+'|'+packs.slice().sort().join(',');}
+function cacheKey(pins,packs,markerIds){return pins.slice().sort().join(',')+'|packs:'+packs.slice().sort().join(',')+'|markers:'+markerIds.slice().sort().join(',');}
 async function get(options){
   options=options||{};
-  var pins=uniq(options.pams_pins||options.pins).slice(0,25),packs=uniq(options.packs&&options.packs.length?options.packs:['identity','assessment_tax','sale_market']);
-  if(!pins.length)return null;
-  var key=cacheKey(pins,packs),old=cache.get(key),now=Date.now();
+  var pins=uniq(options.pams_pins||options.pins).slice(0,25),markerIds=uniq(options.marker_ids||options.markers).slice(0,100),packs;
+  if(Array.isArray(options.packs))packs=uniq(options.packs);
+  else packs=markerIds.length?[]:['identity','assessment_tax','sale_market'];
+  if(!pins.length||(!packs.length&&!markerIds.length))return null;
+  var key=cacheKey(pins,packs,markerIds),old=cache.get(key),now=Date.now();
   if(!options.force&&old&&now-old.at<TTL)return old.data;
   var c=sb();if(!c)return null;
   try{
-    var res=await c.functions.invoke('intelligence-semantic-context',{body:{pams_pins:pins,packs:packs}});
+    var body={pams_pins:pins,packs:packs,marker_ids:markerIds,force:Boolean(options.force)};
+    var res=await c.functions.invoke('intelligence-semantic-context',{body:body});
     if(res.error)throw res.error;
     cache.set(key,{at:now,data:res.data});
-    window.dispatchEvent(new CustomEvent('watchdog:semantic-context',{detail:{pins:pins,packs:packs,data:res.data}}));
+    window.dispatchEvent(new CustomEvent('watchdog:semantic-context',{detail:{pins:pins,packs:packs,marker_ids:markerIds,data:res.data}}));
     return res.data;
   }catch(error){console.warn('Watchdog Semantic Context unavailable:',error&&error.message||error);return null;}
 }
@@ -35,5 +38,5 @@ function value(snap,id,fallback){var m=marker(snap,id);return m&&m.state==='avai
 function available(snap){return snap&&Array.isArray(snap.markers)?snap.markers.filter(function(m){return m.state==='available';}):[];}
 function missing(snap){return snap&&Array.isArray(snap.markers)?snap.markers.filter(function(m){return m.state!=='available';}):[];}
 function clear(){cache.clear();}
-window.WatchdogSemanticContext={get:get,snapshot:snapshot,marker:marker,value:value,available:available,missing:missing,clear:clear,packs:['identity','assessment_tax','sale_market','appeal_uniformity','permits_closing','environment_risk','municipal_pressure','agent_opportunity']};
+window.WatchdogSemanticContext={get:get,snapshot:snapshot,marker:marker,value:value,available:available,missing:missing,clear:clear,packs:['identity','assessment_tax','sale_market','appeal_uniformity','permits_closing','environment_risk','municipal_pressure','agent_opportunity'],contract:'watchdog-semantic-snapshot-v5',direct_marker_contract:'semantic-direct-markers-v1'};
 })();
