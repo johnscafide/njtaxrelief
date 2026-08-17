@@ -90,20 +90,11 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
 
 <header class="in-hero">
   <div class="in-shell">
-    <span>NJ Property Tax Insights</span>
-    <h1>Know what changed before it costs you.</h1>
-    <p>Property-tax relief updates, assessment explainers, state policy changes and practical property intelligence built for New Jersey homeowners and professionals.</p>
+    <center><h1>Insights</h1></center>
   </div>
 </header>
 
 <main class="in-shell">
-  <div class="in-filters">
-    <span class="in-filter">Watchdog</span>
-    <span class="in-filter">Tax relief</span>
-    <span class="in-filter">Property taxes</span>
-    <span class="in-filter">NJ state news</span>
-    <span class="in-filter">Community</span>
-  </div>
   <section class="in-grid" id="insights-grid"><div class="in-empty">Loading latest insights…</div></section>
 </main>
 
@@ -118,7 +109,7 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
       g.innerHTML=rows.map(function(a){
         return '<a class="in-card" href="/property/insights/'+encodeURIComponent(a.slug)+'.html">'
           +(a.hero_image_url?'<img loading="lazy" src="'+e(a.hero_image_url)+'" alt="'+e(a.hero_image_alt||a.title)+'">':'')
-          +'<div class="in-body"><span class="in-kicker">'+e(a.kicker)+'</span><h2>'+e(a.title)+'</h2><p>'+e(a.dek)+'</p>'
+          +'<div class="in-body"><span class="in-kicker">'+e(a.kicker)+'</span><h2>'+e(a.title)
           +'<div class="in-meta">'+new Date(a.published_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' · '+(a.reading_minutes||5)+' min read</div></div></a>';
       }).join('') || '<div class="in-empty">New insights are being prepared.</div>';
     })
