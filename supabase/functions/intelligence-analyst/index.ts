@@ -1,8 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ANALYST_VERSION="watchdog-analyst-v4-semantic-context";
-const TOOL_VERSION="watchdog-analyst-tools-v3-semantic";
+const ANALYST_VERSION="watchdog-analyst-v5-conflict-history";
+const TOOL_VERSION="watchdog-analyst-tools-v4-conflict-history";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const DAILY_LIMIT:Record<string,number>={pro:75,pro_plus:300,teams:1500,developer:10000};
@@ -64,7 +64,18 @@ async function semanticContext(url:string,pub:string,auth:string,pins:string[],p
   return{ok:true,status:call.status,error:null,data};
 }
 function factValue(v:unknown){if(v===null||v===undefined)return"not available";if(typeof v==="number")return Number.isInteger(v)?v.toLocaleString("en-US"):v.toLocaleString("en-US",{maximumFractionDigits:4});if(typeof v==="boolean")return v?"yes":"no";if(typeof v==="object"){try{return clean(JSON.stringify(v),240)}catch{return"structured value"}}return clean(v,240)}
-function semanticLineage(data:O){return{contract_version:data?.contract_version||null,engine_version:data?.engine_version||null,authority_policy:data?.authority_policy||null,registry_version:data?.registry_version||null,facts_hashes:(Array.isArray(data?.snapshots)?data.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null,retrieval_hash:s.retrieval_hash||null,cache_hit:Boolean(s.cache_hit)}))}}
+function semanticLineage(data:O){return{contract_version:data?.contract_version||null,engine_version:data?.engine_version||null,observation_contract_version:data?.observation_contract_version||null,authority_policy:data?.authority_policy||null,conflict_summary:data?.conflict_summary||{count:0,markers:[]},registry_version:data?.registry_version||null,facts_hashes:(Array.isArray(data?.snapshots)?data.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null,retrieval_hash:s.retrieval_hash||null,cache_hit:Boolean(s.cache_hit),conflict_count:Number(s.conflict_count||0)}))}}
+function conflictLines(data:O,max=8){
+  const out:string[]=[];
+  for(const snap of (Array.isArray(data?.snapshots)?data.snapshots:[]).slice(0,5)){
+    const label=clean(snap.address||snap.pams_pin||"Property",180);
+    for(const m of (Array.isArray(snap?.markers)?snap.markers:[]).filter((x:O)=>x?.conflict_state==="conflict").slice(0,max)){
+      const alternatives=(Array.isArray(m.observations)?m.observations:[]).filter((o:O)=>!(o.value===m.value&&clean(o.source,180)===clean(m.source,180))).slice(0,3).map((o:O)=>`${factValue(o.value)} from ${clean(o.source||o.observation_kind||"another governed observation",160)} (authority ${Number(o.authority_rank||0)}/100)`);
+      out.push(`${label}: ${clean(m.label||m.id,150)} has competing governed observations. Canonical ${factValue(m.value)} from ${clean(m.source||"governed source",170)} (authority ${Number(m.authority_rank||0)}/100) was selected${alternatives.length?`; alternatives preserved: ${alternatives.join("; ")}`:""}.`);
+    }
+  }
+  return out.slice(0,max);
+}
 function addSemanticFacts(base:O,data:O,maxPerProperty=6){
   const snaps=Array.isArray(data?.snapshots)?data.snapshots:[],preferred=["property.assessed_value","property.annual_tax","property.sale_price","property.sale_date","property.municipality","property.county"],extra:string[]=[];
   for(const snap of snaps.slice(0,5)){
@@ -73,7 +84,10 @@ function addSemanticFacts(base:O,data:O,maxPerProperty=6){
     for(const m of items.filter((x:O)=>x?.state==="available").sort((a:O,b:O)=>Number(b.authority_rank||0)-Number(a.authority_rank||0)))if(chosen.length<maxPerProperty&&!chosen.includes(m))chosen.push(m);
     const label=clean(snap.address||snap.pams_pin||"Property",180);for(const m of chosen.slice(0,maxPerProperty))extra.push(`${label}: ${clean(m.label||m.id,140)} = ${factValue(m.value)}. Source: ${clean(m.source||m.source_id||"governed source",180)}; ${clean(m.truth_class||"resolved value",80)}; authority ${Number(m.authority_rank||0)}/100.`)
   }
-  base.evidence=uniq([...(Array.isArray(base.evidence)?base.evidence:[]),...extra]);base.semantic_context=semanticLineage(data);return base;
+  const conflicts=conflictLines(data);
+  base.evidence=uniq([...(Array.isArray(base.evidence)?base.evidence:[]),...extra,...conflicts]);
+  if(conflicts.length)base.caveats=uniq([...(Array.isArray(base.caveats)?base.caveats:[]),"One or more governed markers had competing observations. Watchdog used the canonical value selected by its published source-authority policy and preserved the alternatives."]);
+  base.semantic_context=semanticLineage(data);return base;
 }
 function deterministic(tool:string,result:O){
   const evidence:string[]=[],missing:string[]=[],caveats:string[]=[],suggested:string[]=[],sources:{label:string,url:string|null}[]=[];
@@ -84,10 +98,12 @@ function deterministic(tool:string,result:O){
       for(const m of available.slice(0,18)){evidence.push(`${label}: ${clean(m.label||m.id,160)} = ${factValue(m.value)}. Source: ${clean(m.source||m.source_id||"governed source",180)}; ${clean(m.truth_class||"resolved value",80)}; authority ${Number(m.authority_rank||0)}/100.`);}
       for(const m of items.filter((x:O)=>x?.state!=="available").slice(0,8))missing.push(`${label}: ${clean(m.label||m.id,160)} (${clean(m.state||"missing",100)}).`);
     }
-    const availableCount=snaps.reduce((n:number,s:O)=>n+Number(s.available_count||0),0),missingCount=snaps.reduce((n:number,s:O)=>n+Number(s.missing_count||0),0);
+    const conflicts=conflictLines(data),availableCount=snaps.reduce((n:number,s:O)=>n+Number(s.available_count||0),0),missingCount=snaps.reduce((n:number,s:O)=>n+Number(s.missing_count||0),0);
+    evidence.push(...conflicts);
     caveats.push("These are governed property facts and Watchdog-derived markers. Missing or unavailable evidence remains explicit.");
     caveats.push("Source-authority policy preserves source observations and does not let AI silently replace source truth.");
-    return{conclusion:snaps.length?`Watchdog resolved ${availableCount} governed values across ${snaps.length} propert${snaps.length===1?"y":"ies"}, with ${missingCount} values unavailable or not resolved in this semantic scope.`:"No governed property snapshot was resolved. Watchdog did not fill the gap with a guess.",evidence,missing_evidence:uniq(missing),caveats,suggested_actions:["run_intelligence_model","review_evidence"],sources:[],semantic_context:semanticLineage(data)};
+    if(conflicts.length)caveats.push(`${conflicts.length} competing governed marker observation${conflicts.length===1?" was":"s were"} present in this semantic scope. Canonical values were selected deterministically and alternatives remain in lineage.`);
+    return{conclusion:snaps.length?`Watchdog resolved ${availableCount} governed values across ${snaps.length} propert${snaps.length===1?"y":"ies"}, with ${missingCount} values unavailable or not resolved in this semantic scope${conflicts.length?` and ${conflicts.length} governed data conflict${conflicts.length===1?"":"s"}`:""}.`:"No governed property snapshot was resolved. Watchdog did not fill the gap with a guess.",evidence:uniq(evidence),missing_evidence:uniq(missing),caveats:uniq(caveats),suggested_actions:["run_intelligence_model","review_evidence"],sources:[],semantic_context:semanticLineage(data)};
   }
   if(tool==="run_intelligence_model"){
     const findings=Array.isArray(result.findings)?result.findings:[];
@@ -106,7 +122,7 @@ function deterministic(tool:string,result:O){
   }
   if(tool==="get_score_history"){
     const rows=Array.isArray(result.rows)?result.rows:[];
-    return{conclusion:rows.length?`I found ${rows.length} recorded Watchdog score observation${rows.length===1?"":"s"}.`:"No user-linked Watchdog score history is available for this property yet.",evidence:rows.slice(0,10).map((x:O)=>`${clean(x.marker_id||"Watchdog score",120)}: ${clean(x.score,40)} on ${clean(x.observed_on||x.observed_at,40)}.`),missing_evidence:rows.length?[]:["Historical score observations are not available for this user/property combination."],caveats:["Historical observations keep the formula and model version recorded at the time."],suggested_actions:["review_evidence"],sources:[]};
+    return{conclusion:rows.length?`I found ${rows.length} recorded Watchdog score observation${rows.length===1?"":"s"} for this property.`:"No recorded Watchdog score history is available for this property yet.",evidence:rows.slice(0,10).map((x:O)=>`${clean(x.marker_id||"Watchdog score",120)}: ${clean(x.score,40)} on ${clean(x.observed_at,40)}${x.model_version?` · model ${clean(x.model_version,100)}`:""}.`),missing_evidence:rows.length?[]:["Historical score observations are not available for this property/marker history."],caveats:["Score observations are global property/marker history in the current data contract, not private user-owned records.","Historical observations keep the model version recorded at the time."],suggested_actions:["review_evidence"],sources:[]};
   }
   if(tool==="get_property_changes"){
     const rows=Array.isArray(result.rows)?result.rows:[];for(const x of rows){const u=safeUrl(x.source_url);if(u)sources.push({label:clean(x.title||x.event_type||"Source",140),url:u})}
@@ -169,7 +185,7 @@ Deno.serve(async(req:Request)=>{
       const runId=clean(result.run_id,80);let ids:string[]=[];if(runId){const q=await admin.from("intelligence_findings").select("id").eq("run_id",runId).eq("user_id",user.id).order("rank",{ascending:true}).limit(100);ids=(q.data||[]).map((x:O)=>String(x.id))}
       await admin.from("intelligence_analyst_sessions").update({context:{...safeObj(session?.context),...context,last_run_id:runId||null,last_finding_ids:ids,last_model_key:result?.model?.key||routed.model,last_model_version:result?.model?.version||null,last_semantic_contract:result.semantic_context?.contract_version||null,last_semantic_facts:(Array.isArray(result.semantic_context?.snapshots)?result.semantic_context.snapshots:[]).map((s:O)=>({pams_pin:s.pams_pin,facts_hash:s.facts_hash||s.snapshot_hash||null}))},updated_at:new Date().toISOString()}).eq("id",sessionId).eq("user_id",user.id);
     }else if(routed.tool==="get_score_history"){
-      const pin=pins[0];if(!pin)throw new Error("Select one property first.");const q=await admin.from("score_observations").select("marker_id,score,observed_on,observed_at,model_version,evidence_coverage,formula").eq("user_id",user.id).eq("pams_pin",pin).order("observed_at",{ascending:false}).limit(25);if(q.error)throw q.error;result={rows:q.data||[],pams_pin:pin};
+      const pin=pins[0];if(!pin)throw new Error("Select one property first.");const q=await admin.from("score_observations").select("marker_id,score,observed_at,model_version").eq("pams_pin",pin).order("observed_at",{ascending:false}).limit(25);if(q.error)throw q.error;result={rows:q.data||[],pams_pin:pin,history_scope:"global_property_marker"};
     }else if(routed.tool==="get_property_changes"){
       const pin=pins[0];if(!pin)throw new Error("Select one property first.");const q=await admin.from("property_update_events").select("event_type,severity,title,summary,occurred_at,marker_id,old_value,new_value,delta_numeric,source_url").eq("user_id",user.id).eq("pams_pin",pin).order("occurred_at",{ascending:false}).limit(50);if(q.error)throw q.error;result={rows:q.data||[],pams_pin:pin};
     }else{
@@ -183,11 +199,11 @@ Deno.serve(async(req:Request)=>{
       }
     }
   }catch(error){toolStatus="failed";result={error:clean((error as any)?.message||error,500)}}
-  const latency=Date.now()-started,toolCall=await admin.from("intelligence_tool_calls").insert({session_id:sessionId,message_id:userMessage.data?.id||null,user_id:user.id,tool_name:routed.tool,tool_version:TOOL_VERSION,arguments:{model:routed.model,pams_pin_count:pins.length,farm:routed.farm,saved_view:routed.savedView,compare:routed.compare,limit:routed.limit,semantic_packs:routed.tool==="get_property_facts"?semanticPacks(prompt,routed.model,context):null},result_summary:toolStatus==="complete"?{run_id:result.run_id||null,finding_count:result.finding_count??null,artifact_type:result.artifact_type||null,artifact_id:result.artifact_id||null,row_count:Array.isArray(result.rows)?result.rows.length:null,semantic_contract:result.semantic_context?.contract_version||null,semantic_snapshot_count:Array.isArray(result.semantic_context?.snapshots)?result.semantic_context.snapshots.length:null}:{error:result.error},status:toolStatus,duration_ms:latency}).select("id").single();
+  const latency=Date.now()-started,toolCall=await admin.from("intelligence_tool_calls").insert({session_id:sessionId,message_id:userMessage.data?.id||null,user_id:user.id,tool_name:routed.tool,tool_version:TOOL_VERSION,arguments:{model:routed.model,pams_pin_count:pins.length,farm:routed.farm,saved_view:routed.savedView,compare:routed.compare,limit:routed.limit,semantic_packs:routed.tool==="get_property_facts"?semanticPacks(prompt,routed.model,context):null},result_summary:toolStatus==="complete"?{run_id:result.run_id||null,finding_count:result.finding_count??null,artifact_type:result.artifact_type||null,artifact_id:result.artifact_id||null,row_count:Array.isArray(result.rows)?result.rows.length:null,history_scope:result.history_scope||null,semantic_contract:result.semantic_context?.contract_version||null,semantic_conflict_count:Number(result.semantic_context?.conflict_summary?.count||0),semantic_snapshot_count:Array.isArray(result.semantic_context?.snapshots)?result.semantic_context.snapshots.length:null}:{error:result.error},status:toolStatus,duration_ms:latency}).select("id").single();
   if(toolStatus!=="complete"){
     const response={conclusion:"Watchdog could not complete that approved operation.",evidence:[],missing_evidence:[result.error],caveats:["No factual conclusion was generated from a failed tool call."],suggested_actions:[],sources:[]};await admin.from("intelligence_analyst_messages").insert({session_id:sessionId,user_id:user.id,role:"assistant",content:response,prompt_key:promptRow.prompt_key,prompt_version:promptRow.version,tool_contract_version:TOOL_VERSION,status:"failed"});await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",latency_ms:latency,metadata:{status:"failed",tool:routed.tool,analyst_version:ANALYST_VERSION}});return out(req,200,{ok:false,session_id:sessionId,status:"failed",tool:{name:routed.tool,version:TOOL_VERSION,id:toolCall.data?.id||null},provider_status:"not_called",response});
   }
   const base=deterministic(routed.tool,result),provider=await optionalProse(promptRow,prompt,base),messageStatus=provider.status==="complete"?"complete":"provider_unavailable",assistant=await admin.from("intelligence_analyst_messages").insert({session_id:sessionId,user_id:user.id,role:"assistant",content:provider.response,provider:provider.provider,model:provider.model,prompt_key:promptRow.prompt_key,prompt_version:promptRow.version,tool_contract_version:TOOL_VERSION,status:messageStatus}).select("id").single();
-  await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",provider:provider.provider,model:provider.model,request_units:1,input_tokens:Number(provider.usage?.input_tokens||0)||null,output_tokens:Number(provider.usage?.output_tokens||0)||null,latency_ms:Date.now()-started,metadata:{status:messageStatus,tool:routed.tool,tool_version:TOOL_VERSION,prompt_version:promptRow.version,analyst_version:ANALYST_VERSION,provider_retries:provider.retries||0,semantic_contract:base.semantic_context?.contract_version||null}});
+  await admin.from("intelligence_usage_events").insert({user_id:user.id,plan_tier:plan,event_type:"analyst_request",provider:provider.provider,model:provider.model,request_units:1,input_tokens:Number(provider.usage?.input_tokens||0)||null,output_tokens:Number(provider.usage?.output_tokens||0)||null,latency_ms:Date.now()-started,metadata:{status:messageStatus,tool:routed.tool,tool_version:TOOL_VERSION,prompt_version:promptRow.version,analyst_version:ANALYST_VERSION,provider_retries:provider.retries||0,semantic_contract:base.semantic_context?.contract_version||null,semantic_conflict_count:Number(base.semantic_context?.conflict_summary?.count||0)}});
   return out(req,200,{ok:true,session_id:sessionId,message_id:assistant.data?.id||null,status:messageStatus,provider_status:provider.status,provider:provider.provider,model:provider.model,prompt:{key:promptRow.prompt_key,version:promptRow.version},tool:{name:routed.tool,version:TOOL_VERSION,id:toolCall.data?.id||null},response:provider.response,provider_retries:provider.retries||0,provider_error:provider.error||null});
 });
