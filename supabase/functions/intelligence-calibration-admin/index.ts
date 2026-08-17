@@ -125,7 +125,6 @@ async function summary(admin: any, setId: string) {
     reviewed_cases: reviewed,
     true_positives: tp,
     true_negatives: tn,
-    false_posititives: undefined,
     false_positives: fp,
     false_negatives: fn,
     uncertain_cases: uncertain,
@@ -139,7 +138,6 @@ async function summary(admin: any, setId: string) {
     computed_at: new Date().toISOString(),
   };
 
-  delete (row as any).false_posititives;
   const upsert = await admin.from("intelligence_calibration_summaries").upsert(row);
   if (upsert.error) throw upsert.error;
   return { set, summary: row, total_cases: (cases || []).length, engine: ENGINE };
