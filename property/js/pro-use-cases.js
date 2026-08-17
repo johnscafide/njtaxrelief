@@ -1,1 +1,60 @@
-(function(){'use strict';function build(){if(location.pathname.indexOf('/property/pro')!==0)return;if(document.getElementById('wd-use-cases'))return;var plans=document.getElementById('plans');if(!plans)return;var s=document.createElement('section');s.id='wd-use-cases';s.innerHTML='<div class="wd-uc"><p class="wd-uc-eye">Professional workflows</p><h2>What professionals actually do with Watchdog</h2><div class="wd-uc-grid"><article><h3>Residential agents</h3><p>Monitor property changes and turn sourced records into better homeowner conversations.</p><a href="/property/plays/assessment-change/">Assessment change</a> · <a href="/property/plays/permit-complete/">Permit follow-up</a></article><article><h3>Mortgage professionals</h3><p>Review assessment and tax context alongside a client property.</p><a href="/property/insights/equalization-ratios.html">Equalization ratios</a></article><article><h3>Attorneys and tax professionals</h3><p>Move from property screening to a documented evidence review.</p><a href="/property/plays/appeal-window-farm/">Appeal workflow</a></article><article><h3>Investors</h3><p>Compare property tax and assessment context before deeper diligence.</p><a href="/property/insights/reassessment.html">Reassessment context</a></article></div></div>';var st=document.createElement('style');st.textContent='#wd-use-cases{padding:60px 20px;background:#fff}.wd-uc{max-width:1180px;margin:auto;text-align:center}.wd-uc-eye{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#078486;font-weight:800}.wd-uc h2{font:800 32px "Plus Jakarta Sans",sans-serif}.wd-uc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:left;margin-top:26px}.wd-uc-grid article{border:1px solid #dfe6ec;border-radius:14px;padding:22px}.wd-uc-grid h3{font:800 17px "Plus Jakarta Sans",sans-serif}.wd-uc-grid p{color:#66758a;line-height:1.55}.wd-uc-grid a{font-weight:700;color:#102a4c}@media(max-width:850px){.wd-uc-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.wd-uc-grid{grid-template-columns:1fr}}';document.head.appendChild(st);plans.insertAdjacentElement('afterend',s)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build()})();
+(function(){
+  'use strict';
+
+  var path=(window.location.pathname||'').replace(/\/+$/,'');
+  if(path!=='/property/pro')return;
+
+  function qs(sel,root){return (root||document).querySelector(sel);}
+
+  window.WatchdogProCadence=window.WatchdogProCadence||function(){
+    var active=qs('[data-cadence].active');
+    return active&&active.dataset.cadence==='monthly'?'monthly':'yearly';
+  };
+
+  function stickyPriceShortcut(){
+    if(qs('#pro-price-float'))return;
+    var link=document.createElement('a');
+    link.className='pro-price-float';
+    link.id='pro-price-float';
+    link.href='#pricing';
+    link.innerHTML='Plans from <b>$59/mo</b> <span>View pricing</span> <i class="fas fa-arrow-down"></i>';
+    document.body.appendChild(link);
+
+    var hero=qs('.pro-hero');
+    var pricing=qs('#pricing');
+    var ticking=false;
+    function update(){
+      ticking=false;
+      if(!hero||!pricing)return;
+      var heroBottom=hero.getBoundingClientRect().bottom;
+      var priceTop=pricing.getBoundingClientRect().top;
+      link.classList.toggle('show',heroBottom<80&&priceTop>window.innerHeight*.55);
+    }
+    function onScroll(){
+      if(ticking)return;
+      ticking=true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll);
+    update();
+  }
+
+  function trackFastPath(){
+    document.addEventListener('click',function(e){
+      var jump=e.target.closest('[data-price-jump],[data-fast-plan]');
+      if(!jump)return;
+      if(typeof window.gtag==='function')window.gtag('event','pro_price_fast_path',{
+        location:jump.dataset.priceJump||'hero_strip',
+        plan:jump.dataset.fastPlan||''
+      });
+    });
+  }
+
+  function init(){
+    stickyPriceShortcut();
+    trackFastPath();
+  }
+
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();

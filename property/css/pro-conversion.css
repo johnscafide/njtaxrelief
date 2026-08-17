@@ -1,0 +1,46 @@
+/* NJW-197 conversion layer. Intentionally isolated from the core Pro presentation styles. */
+:root{--pro-marker:#ffed00}
+.pro-marker{position:relative;display:inline;padding:0 .08em;background:linear-gradient(180deg,transparent 57%,rgba(255,237,0,.9) 57%,rgba(255,237,0,.9) 91%,transparent 91%);color:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.pro-roi{background:#fff}
+.pro-workflow-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pro-workflow-card{position:relative;min-height:330px;padding:34px;border-radius:26px;background:var(--pro-paper);overflow:hidden}
+.pro-workflow-card>i{width:52px;height:52px;border-radius:16px;background:#fff;color:var(--pro-teal);display:grid;place-items:center;font-size:17px;box-shadow:0 12px 30px rgba(24,39,52,.06)}
+.pro-workflow-step{position:absolute;right:28px;top:25px;color:#c6cdd1;font:800 34px/1 "DM Mono",monospace;letter-spacing:-.08em}
+.pro-workflow-card h3{margin:64px 0 0;font:800 27px/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em}
+.pro-workflow-card p{margin:14px 0 0;color:var(--pro-muted);font-size:15px;line-height:1.55}
+.pro-workflow-note{display:flex;align-items:flex-start;gap:9px;margin:18px 0 0;color:#7b838b;font-size:11px;line-height:1.45}.pro-workflow-note i{color:var(--pro-teal);margin-top:2px}
+.pro-platform-compare{background:linear-gradient(145deg,#eef7f5,#f7f4ed)}
+.pro-platform-grid{display:grid;grid-template-columns:minmax(0,1fr) 64px minmax(0,1fr);gap:18px;align-items:center}
+.pro-platform-side{position:relative;min-height:410px;padding:38px;border-radius:28px;background:rgba(255,255,255,.78);border:1px solid rgba(255,255,255,.94);box-shadow:0 20px 54px rgba(27,44,48,.06)}
+.pro-platform-side.watchdog{background:linear-gradient(145deg,#10294b,#0c5b67);color:#fff;border-color:rgba(255,255,255,.12);box-shadow:0 28px 70px rgba(16,41,75,.2)}
+.pro-platform-side>span{color:#7c8791;font:800 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase}.pro-platform-side.watchdog>span{color:#85ded3}
+.pro-platform-side h3{margin:13px 0 0;font:800 37px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}
+.pro-platform-side ul{list-style:none;padding:0;margin:34px 0 0;display:grid;gap:16px}.pro-platform-side li{display:flex;align-items:flex-start;gap:12px;color:#68737d;font-size:14px;line-height:1.4}.pro-platform-side.watchdog li{color:#c3d2df}.pro-platform-side li i{width:25px;height:25px;flex:0 0 25px;border-radius:50%;display:grid;place-items:center;background:#e7f3f0;color:var(--pro-teal);font-size:8px}.pro-platform-side.watchdog li i{background:rgba(128,221,209,.13);color:#80ddd1}
+.pro-platform-arrow{width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--pro-teal);box-shadow:0 12px 30px rgba(28,45,47,.08)}
+.pro-coming-badge{position:absolute;right:28px;top:26px;display:inline-flex;align-items:center;gap:7px;padding:9px 11px;border-radius:999px;background:rgba(255,237,0,.95);color:#17202a;font:800 8px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.035em;text-transform:uppercase}
+.pro-platform-note{margin:18px 0 0;color:#6d787f;font-size:11px}
+.pro-price-cta{text-decoration:none!important}
+.pro-billing-faq{background:#fff}
+.pro-faq-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.pro-faq-card{padding:30px;border-radius:24px;background:var(--pro-paper)}
+.pro-faq-card>i{width:44px;height:44px;border-radius:14px;background:#fff;color:var(--pro-teal);display:grid;place-items:center}
+.pro-faq-card h3{margin:24px 0 0;font:800 21px/1.08 "Plus Jakarta Sans",sans-serif;letter-spacing:-.035em}
+.pro-faq-card p{margin:11px 0 0;color:var(--pro-muted);font-size:14px;line-height:1.55}
+.pro-demo{background:#0e1721;color:#fff;overflow:hidden;isolation:isolate}
+.pro-demo:before{content:"";position:absolute;width:760px;height:760px;right:-230px;bottom:-390px;border-radius:50%;background:radial-gradient(circle,rgba(31,166,160,.24),transparent 68%);z-index:-1}
+.pro-demo-grid{display:grid;grid-template-columns:minmax(0,.72fr) minmax(560px,1.28fr);gap:80px;align-items:start}
+.pro-demo-copy{position:sticky;top:110px}
+.pro-demo-copy h2{margin:17px 0 0;font:600 clamp(48px,5vw,78px)/.94 "Plus Jakarta Sans",sans-serif;letter-spacing:-.065em}.pro-demo-copy h2 em{font-family:"Playfair Display",serif;font-weight:500;letter-spacing:-.035em}.pro-demo-copy p{margin:22px 0 0;max-width:560px;color:#aeb9c5;font-size:17px;line-height:1.55}.pro-demo-copy>a{display:inline-flex;align-items:center;gap:8px;margin-top:25px;color:#80ddd1;text-decoration:none;font:800 11px "Plus Jakarta Sans",sans-serif}
+.pro-demo-proof{display:grid;gap:10px;margin-top:28px}.pro-demo-proof span{display:flex;align-items:center;gap:10px;color:#c7d0d8;font-size:11px;font-weight:700}.pro-demo-proof i{width:30px;height:30px;border-radius:9px;background:#182532;color:#80ddd1;display:grid;place-items:center;font-size:9px}
+.pro-demo-form{padding:34px;border-radius:28px;background:#fff;color:var(--pro-ink);box-shadow:0 34px 90px rgba(0,0,0,.22)}
+.pro-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.pro-demo-form label{display:grid;gap:7px}.pro-demo-form label>span{color:#57636d;font:800 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.045em;text-transform:uppercase}
+.pro-demo-form input,.pro-demo-form select,.pro-demo-form textarea{width:100%;border:1px solid #dfe4e8;border-radius:13px;background:#f9fafb;color:#17202a;padding:13px 14px;font:600 14px/1.35 "Source Sans 3",sans-serif;outline:none;transition:border-color .2s ease,box-shadow .2s ease,background .2s ease}.pro-demo-form select{min-height:48px}.pro-demo-form textarea{resize:vertical;min-height:128px}.pro-demo-form input:focus,.pro-demo-form select:focus,.pro-demo-form textarea:focus{background:#fff;border-color:#58aaa8;box-shadow:0 0 0 4px rgba(7,132,134,.09)}
+.pro-form-wide{grid-column:1/-1}
+.pro-demo-submit{width:100%;min-height:55px;margin-top:20px;border:0;border-radius:999px;background:var(--pro-navy);color:#fff;display:flex;align-items:center;justify-content:center;gap:9px;font:800 11px "Plus Jakarta Sans",sans-serif;cursor:pointer;box-shadow:0 14px 32px rgba(16,41,75,.19);transition:transform .2s ease,opacity .2s ease}.pro-demo-submit:hover{transform:translateY(-2px)}.pro-demo-submit:disabled{opacity:.58;cursor:wait;transform:none}
+.pro-form-status{min-height:20px;margin:12px 0 0;text-align:center;font-size:12px;font-weight:700}.pro-form-status.success{color:#167149}.pro-form-status.error{color:#b13b38}
+.pro-form-privacy{margin:8px auto 0;max-width:650px;color:#8a949d;font-size:10px;line-height:1.45;text-align:center}
+.pro-honeypot{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:1100px){.pro-workflow-grid{grid-template-columns:1fr}.pro-workflow-card{min-height:240px}.pro-workflow-card h3{margin-top:42px}.pro-platform-grid{grid-template-columns:1fr}.pro-platform-arrow{margin:auto;transform:rotate(90deg)}.pro-demo-grid{grid-template-columns:1fr;gap:46px}.pro-demo-copy{position:relative;top:auto}.pro-faq-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.pro-platform-side{padding:28px;min-height:auto}.pro-coming-badge{position:relative;right:auto;top:auto;margin-bottom:24px}.pro-platform-side h3{font-size:32px}.pro-faq-grid{grid-template-columns:1fr}.pro-demo-form{padding:24px;border-radius:22px}.pro-form-grid{grid-template-columns:1fr}.pro-form-wide{grid-column:auto}.pro-demo-copy h2{font-size:46px}}
+@media(prefers-reduced-motion:reduce){.pro-demo-submit{transition:none!important}}

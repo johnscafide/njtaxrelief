@@ -1,0 +1,40 @@
+/* NJW-202 landing review refinements. Stable asset path; no query-string versioning. */
+.lp-proof-strip{background:#fff;border-top:1px solid rgba(16,41,75,.06);border-bottom:1px solid rgba(16,41,75,.08)}
+.lp-proof-inner{width:min(1320px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(250px,1.35fr);align-items:stretch}
+.lp-proof-stat,.lp-proof-source{min-height:96px;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(16,41,75,.07)}
+.lp-proof-stat strong{font:800 clamp(24px,2.5vw,34px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em;color:#10294b}
+.lp-proof-stat span{margin-top:7px;color:#6f7a85;font:700 10px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:.035em;text-transform:uppercase}
+.lp-proof-source{border-right:0;background:linear-gradient(135deg,#f6faf9,#eef7f5)}
+.lp-proof-source span{color:#56636f;font-size:12px;line-height:1.4;font-weight:700}
+.lp-proof-source a{display:inline-flex;align-items:center;gap:7px;margin-top:8px;color:#087f82;text-decoration:none;font:800 10px/1.2 "Plus Jakarta Sans",sans-serif}
+.lp-proof-source a:hover{text-decoration:underline}
+
+.landing-faq{max-width:1060px;margin:0 auto;padding:76px 20px 92px}
+.landing-faq>h2{margin:0;color:#10294b;font:800 clamp(34px,4vw,52px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}
+.landing-faq>.landing-faq-intro{max-width:760px;margin:14px 0 28px;color:#697580;font-size:16px;line-height:1.55}
+.landing-faq-grid{display:grid;gap:10px}
+.landing-faq-item{border:1px solid rgba(16,41,75,.1);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(16,41,75,.035)}
+.landing-faq-item summary{position:relative;display:block;padding:20px 56px 20px 22px;cursor:pointer;list-style:none;color:#1f344b;font:800 14px/1.35 "Plus Jakarta Sans",sans-serif}
+.landing-faq-item summary::-webkit-details-marker{display:none}
+.landing-faq-item summary:after{content:"+";position:absolute;right:20px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;display:grid;place-items:center;background:#eef7f5;color:#087f82;font:800 18px/1 "Plus Jakarta Sans",sans-serif}
+.landing-faq-item[open] summary:after{content:"−"}
+.landing-faq-item p{margin:0;padding:0 22px 22px;color:#63717d;font-size:14px;line-height:1.65;max-width:920px}
+.landing-faq-more{margin:24px 0 0;color:#6b7782;font-size:13px}
+.landing-faq-more a{color:#087f82;font-weight:800;text-decoration:none}
+.landing-faq-more a:hover{text-decoration:underline}
+
+@media(max-width:900px){
+  .lp-proof-inner{grid-template-columns:repeat(3,1fr)}
+  .lp-proof-source{grid-column:1/-1;min-height:76px;border-top:1px solid rgba(16,41,75,.07)}
+  .lp-proof-stat:nth-child(3){border-right:0}
+}
+@media(max-width:640px){
+  .lp-proof-inner{width:min(100% - 24px,1320px);grid-template-columns:1fr 1fr}
+  .lp-proof-stat{min-height:82px;padding:17px 15px}
+  .lp-proof-stat:nth-child(2){border-right:0}
+  .lp-proof-stat:nth-child(3){grid-column:1/-1;border-top:1px solid rgba(16,41,75,.07)}
+  .lp-proof-source{padding:17px 15px}
+  .landing-faq{padding:60px 16px 76px}
+  .landing-faq-item summary{padding:18px 52px 18px 18px}
+  .landing-faq-item p{padding:0 18px 20px}
+}
