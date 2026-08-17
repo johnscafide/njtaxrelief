@@ -4,7 +4,7 @@ This directory is the versioned review surface for the Watchdog Intelligence pro
 
 ## Purpose
 
-The review page exists so Phases 1-6 can be reviewed from an official Vercel Preview deployment without merging the Intelligence feature branch into production or changing the production Supabase project.
+The review page exists so the Watchdog Intelligence release candidate can be reviewed from an official Vercel Preview deployment without merging the Intelligence feature branch into production or changing the production Supabase project.
 
 The review surface is `noindex,nofollow` and uses representative data from staging acceptance evidence. It does not claim that preview/uncalibrated models are production-ready.
 
@@ -18,6 +18,8 @@ Because the loader reads the feature branch at runtime, updates to this review p
 
 The deployment must target **preview**, never production.
 
+Git-triggered Preview builds are expected to run automatically for the feature branch. If a prior deployment was canceled by an Ignored Build Step, create a new Preview deployment after correcting the project setting rather than assuming the old canceled deployment will restart itself.
+
 ## What the review covers
 
 - Phase 1: foundation, evidence contract, immutable model versions, RLS/trust premise
@@ -26,10 +28,12 @@ The deployment must target **preview**, never production.
 - Phase 4: Ask Watchdog / governed Analyst tool boundary and fail-soft deterministic behavior
 - Phase 5: Opportunity Value, outcome capture and bounded first-party preference learning
 - Phase 6: population jobs, caching, Daily Intelligence, Teams, Cron scheduling, quotas and developer operations
+- Phase 7: page-native context, proactive suggestions and governed feedback instrumentation
+- Phase 8: Semantic Snapshot, direct governed marker addressing and deterministic scenario context
 - Human calibration gates and production-promotion status
 
 ## Safety boundary
 
 This review page is not the production application. It must not contain production service-role credentials, hidden bypass tokens, private customer data, or an authentication bypass to production/staging databases.
 
-Actual production promotion remains governed by the Phase 2 calibration gate and the Phase 6 promotion/rollback runbook.
+Actual production promotion remains governed by the Phase 2 calibration gate and the production promotion/rollback runbook.
