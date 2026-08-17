@@ -11,7 +11,7 @@
 <link rel="shortcut icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css">
@@ -51,9 +51,7 @@
 </section>
 
 <main id="hm-main" style="display:none;">
-  <div class="db-shell">
-    <div id="property-side-menu" aria-live="polite"></div>
-
+  <div class="db-shell hm27-shell">
     <div class="db-workspace" id="report-top">
       <header class="top hm27-topbar">
         <div class="top-in hm27-top-in">
@@ -105,6 +103,29 @@
       <div id="hm-body"></div>
     </div>
   </div>
+
+  <aside class="hm27-nav" id="hm27-nav" aria-hidden="true">
+    <button class="hm27-nav-backdrop" type="button" data-hm27="nav-close" aria-label="Close menu"></button>
+    <div class="hm27-nav-panel">
+      <div class="hm27-nav-head">
+        <a class="hm27-brand" href="/property/dashboard">
+          <span class="hm27-brand-mark"><i class="fas fa-dog"></i></span>
+          <span class="hm27-brand-copy"><b>Watchdog</b><small>PROPERTY INTELLIGENCE</small></span>
+        </a>
+        <button class="hm27-nav-close" type="button" data-hm27="nav-close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button>
+      </div>
+      <nav class="hm27-nav-links">
+        <a href="/property/dashboard"><i class="fas fa-table-columns"></i><span>Dashboard</span></a>
+        <a class="active" href="/property/home"><i class="fas fa-heart"></i><span>Home / Watchlist</span></a>
+        <a href="/property/pulse"><i class="fas fa-wave-square"></i><span>Change Intelligence</span></a>
+        <a href="/property/agent-desk"><i class="fas fa-bullseye"></i><span>Agent Control</span></a>
+        <a href="/property/data-center"><i class="fas fa-database"></i><span>Data Center</span></a>
+        <a href="/property/pro"><i class="fas fa-briefcase"></i><span>Professional Hub</span></a>
+        <a href="/property/account"><i class="fas fa-user-gear"></i><span>Account</span></a>
+      </nav>
+      <div class="hm27-nav-foot"><button type="button" data-hm27="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button></div>
+    </div>
+  </aside>
 </main>
 
 <div class="mobile-intel-overlay hm-mobile-intel" id="hm-mobile-intel-overlay" aria-hidden="true" onclick="if(event.target===this)hmIntelClose()">
@@ -120,7 +141,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/plan-context.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
-<script src="/property/js/sidemenu.js"></script>
 <script src="/property/js/pwa.js"></script>
 <script type="module" src="/property/js/dashboard/home/index.js"></script>
 <script src="/property/js/dashboard/home/home-2027.js"></script>
