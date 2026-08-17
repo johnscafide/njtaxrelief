@@ -217,10 +217,10 @@
             <div class="wds-compare-board">
               <div class="wds-town-card town-a"><span>Town 01</span><strong>Washington Township</strong><small>Example comparison view</small></div>
               <div class="wds-compare-metrics">
-                <div><span>Assessment fairness</span><i><b style="--a:86%;--b:70%"></b><em></em></i></div>
-                <div><span>Assessment currency</span><i><b style="--a:68%;--b:91%"></b><em></em></i></div>
-                <div><span>Tax direction</span><i><b style="--a:61%;--b:77%"></b><em></em></i></div>
-                <div><span>Market context</span><i><b style="--a:82%;--b:74%"></b><em></em></i></div>
+                <div><span>Assessment fairness</span><i style="--a:86%;--b:70%"><b></b><em></em></i></div>
+                <div><span>Assessment currency</span><i style="--a:68%;--b:91%"><b></b><em></em></i></div>
+                <div><span>Tax direction</span><i style="--a:61%;--b:77%"><b></b><em></em></i></div>
+                <div><span>Market context</span><i style="--a:82%;--b:74%"><b></b><em></em></i></div>
               </div>
               <div class="wds-town-card town-b"><span>Town 02</span><strong>Cherry Hill</strong><small>Example comparison view</small></div>
               <div class="wds-compare-sweep" aria-hidden="true"></div>
