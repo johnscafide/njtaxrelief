@@ -104,6 +104,7 @@ assert(Number(stripeSessionBefore.amount_total) === 5900, `Agent monthly test Ch
 
 fs.mkdirSync(evidenceDir, { recursive: true });
 
+let browserCompletion = null;
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage();
@@ -118,17 +119,54 @@ try {
         autocomplete: node.getAttribute('autocomplete'),
         placeholder: node.getAttribute('placeholder'),
         aria_label: node.getAttribute('aria-label'),
+        checked: node.getAttribute('type') === 'radio' || node.getAttribute('type') === 'checkbox' ? Boolean(node.checked) : undefined,
         radio_label: node.getAttribute('type') === 'radio'
           ? (node.closest('label')?.innerText || node.parentElement?.innerText || '').trim().slice(0, 120)
           : null
-      })).slice(0, 30)).catch(() => []);
+      })).slice(0, 40)).catch(() => []);
+      const statusLines = await frame.locator('body').evaluate(node => String(node.innerText || '')
+        .split(/\n+/)
+        .map(line => line.trim())
+        .filter(line => line && /(required|invalid|incomplete|failed|error|declin|phone|address|country|postal|zip|captcha|verify)/i.test(line))
+        .slice(0, 25)).catch(() => []);
       frames.push({
         url_host: (() => { try { return new URL(frame.url()).hostname; } catch { return ''; } })(),
         input_count: inputs.length,
-        inputs
+        inputs,
+        status_lines: statusLines
       });
     }
     return frames;
+  }
+
+  async function writeCheckoutDiagnostic(label, stripeSession = null, currentEntitlement = null) {
+    let urlHost = '';
+    let urlPath = '';
+    try {
+      const current = new URL(page.url());
+      urlHost = current.hostname;
+      urlPath = current.pathname;
+    } catch {}
+    const diagnostics = await checkoutDiagnostics();
+    fs.writeFileSync(
+      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
+      JSON.stringify({
+        generated_at: new Date().toISOString(),
+        label,
+        browser: { url_host: urlHost, url_path: urlPath },
+        stripe_session: stripeSession ? {
+          status: stripeSession.status || null,
+          payment_status: stripeSession.payment_status || null,
+          has_subscription: Boolean(stripeSession.subscription)
+        } : null,
+        entitlement: currentEntitlement ? {
+          plan_tier: currentEntitlement.plan_tier || null,
+          billing_tier: currentEntitlement.billing_tier || null,
+          subscription_status: currentEntitlement.subscription_status || null
+        } : null,
+        frames: diagnostics
+      }, null, 2)
+    );
   }
 
   async function findVisible(selectors, label, required = true, timeoutMs = 30000) {
@@ -143,13 +181,8 @@ try {
       }
       await delay(400);
     }
-
     if (!required) return null;
-    const diagnostics = await checkoutDiagnostics();
-    fs.writeFileSync(
-      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
-      JSON.stringify({ generated_at: new Date().toISOString(), label, frames: diagnostics }, null, 2)
-    );
+    await writeCheckoutDiagnostic(label);
     fail(`Stripe Checkout field not found after ${timeoutMs}ms: ${label}`);
   }
 
@@ -182,11 +215,7 @@ try {
 
   const cardSelected = await selectCardPaymentMethod();
   if (!cardSelected) {
-    const diagnostics = await checkoutDiagnostics();
-    fs.writeFileSync(
-      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
-      JSON.stringify({ generated_at: new Date().toISOString(), label: 'card payment method', frames: diagnostics }, null, 2)
-    );
+    await writeCheckoutDiagnostic('card payment method');
     fail('Stripe Checkout Card payment method was not found.');
   }
 
@@ -235,7 +264,37 @@ try {
     'button:has-text("Pay")'
   ], 'Checkout submit button', true, 30000);
   await submit.click();
-  await page.waitForURL(url => url.toString().includes('/property/account') && url.toString().includes('checkout=success'), { timeout: 90000 });
+
+  // The signed Stripe webhook and Checkout Session are the authoritative state.
+  // Browser return navigation is useful evidence, but it is not the entitlement
+  // authority and must not be the sole acceptance signal.
+  const started = Date.now();
+  let lastSession = null;
+  let lastEntitlement = null;
+  while (Date.now() - started < 35000) {
+    lastSession = await stripeGet(`/checkout/sessions/${encodeURIComponent(checkout.payload.session_id)}?expand[]=subscription`);
+    lastEntitlement = await entitlement();
+    const subscriptionId = typeof lastSession.subscription === 'string' ? lastSession.subscription : lastSession.subscription?.id;
+    const urlSucceeded = page.url().includes('/property/account') && page.url().includes('checkout=success');
+    const sessionCompleted = lastSession.status === 'complete' && (lastSession.payment_status === 'paid' || lastSession.payment_status === 'no_payment_required') && Boolean(subscriptionId);
+    const entitlementGranted = lastEntitlement?.plan_tier === 'agent' && lastEntitlement?.billing_tier === 'agent';
+    if (sessionCompleted || entitlementGranted) {
+      browserCompletion = {
+        redirect_observed: urlSucceeded,
+        session_status: lastSession.status,
+        payment_status: lastSession.payment_status,
+        entitlement_observed: entitlementGranted,
+        elapsed_ms: Date.now() - started
+      };
+      break;
+    }
+    await delay(1000);
+  }
+
+  if (!browserCompletion) {
+    await writeCheckoutDiagnostic('Checkout remained incomplete after submit', lastSession, lastEntitlement);
+    fail(`Stripe Checkout did not complete after submit. Session=${lastSession?.status || 'unknown'}/${lastSession?.payment_status || 'unknown'}; entitlement=${lastEntitlement?.plan_tier || 'unknown'}.`);
+  }
 } finally {
   await browser.close();
 }
@@ -277,7 +336,15 @@ const evidence = {
   controlled_user_tag: tag(userId),
   checkout_session_tag: tag(checkout.payload.session_id),
   subscription_tag: tag(subscriptionId),
-  checkout: { tier: 'agent', cadence: 'monthly', amount_cents: 5900, completed: true },
+  checkout: {
+    tier: 'agent',
+    cadence: 'monthly',
+    amount_cents: 5900,
+    completed: true,
+    redirect_observed: Boolean(browserCompletion?.redirect_observed),
+    session_status: browserCompletion?.session_status || stripeSessionAfter.status,
+    payment_status: browserCompletion?.payment_status || stripeSessionAfter.payment_status
+  },
   grant: {
     plan_tier: granted.value.plan_tier,
     billing_tier: granted.value.billing_tier,
