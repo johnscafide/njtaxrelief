@@ -78,6 +78,19 @@
       "rationale": "Incident handling needs defined severity, ownership, mitigation, verification, communication, and privacy-safe evidence collection before a real incident occurs.",
       "residual_risk": "A documented runbook is not sufficient evidence of operational effectiveness until exercises and real response records are retained.",
       "next_step": "Schedule and document a tabletop incident-response exercise and track remediation items."
+    },
+    {
+      "id": "WCR-2026-08-18-006",
+      "date": "2026-08-18",
+      "title": "Material connector governance established",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "NJDPA", "ISO/IEC 27001", "ISO/IEC 27701"],
+      "control_area": "Vendor and connector risk management",
+      "status": "implemented",
+      "action": "Created a material connector register with a reusable review record, risk-tier guidance, current inventory seed, and explicit rule that being referenced in the repository does not by itself establish production-live status.",
+      "evidence": ["property/docs/compliance/CONNECTOR-REGISTER.md"],
+      "rationale": "Watchdog must be able to add, replace, or retire data and service connectors without losing control of data flows, credentials, permissions, retention, privacy scope, or vendor risk.",
+      "residual_risk": "The initial inventory is seeded from current repository and policy evidence; each connector still requires explicit live-status verification and completion of its detailed review record.",
+      "next_step": "Verify production status and complete risk-review fields for Tier 1 connectors first, beginning with authentication, hosting, payments, and any connector processing non-public customer information."
     }
   ]
 }
