@@ -7,6 +7,13 @@ on:
     paths:
       - '.github/workflows/hosted-visual-acceptance.yml'
       - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/dashboard/**'
+      - 'property/home/**'
+      - 'property/agent-desk/**'
+      - 'property/data-workbench/**'
+      - 'property/intelligence/**'
+      - 'property/js/**'
+      - 'property/css/**'
   workflow_dispatch:
 
 permissions:
