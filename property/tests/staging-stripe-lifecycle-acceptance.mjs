@@ -20,14 +20,31 @@ function isExplicitEdgeRuntimeFailure(response, text, payload) {
   return code.startsWith('SUPABASE_EDGE_RUNTIME_') || body.includes('SUPABASE_EDGE_RUNTIME_');
 }
 
+function normalizeStripeDeclineFixture(url, init) {
+  if (!url.startsWith('https://api.stripe.com/v1/customers/')) return init;
+  if (String(init?.method || 'GET').toUpperCase() !== 'POST') return init;
+  if (!(init?.body instanceof URLSearchParams)) return init;
+  if (init.body.get('source') !== 'tok_chargeDeclined') return init;
+
+  // Stripe does not allow a normal issuer-decline card to be attached to a
+  // Customer. Its documented `tok_chargeCustomerFail` fixture attaches
+  // successfully and then declines the subsequent charge, which is exactly the
+  // revenue-recovery state this acceptance test is intended to exercise.
+  const body = new URLSearchParams(init.body);
+  body.set('source', 'tok_chargeCustomerFail');
+  console.log('Using Stripe decline-after-attach fixture for staging revenue-recovery acceptance.');
+  return { ...init, body };
+}
+
 globalThis.fetch = async function watchdogStagingResilientFetch(input, init) {
   const url = requestUrl(input);
+  const normalizedInit = normalizeStripeDeclineFixture(url, init);
   const isStagingEdgeCall = Boolean(stagingFunctionsPrefix) && url.startsWith(stagingFunctionsPrefix);
-  if (!isStagingEdgeCall) return originalFetch(input, init);
+  if (!isStagingEdgeCall) return originalFetch(input, normalizedInit);
 
   let lastResponse = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    const response = await originalFetch(input, init);
+    const response = await originalFetch(input, normalizedInit);
     lastResponse = response;
     if (response.ok) return response;
 
