@@ -58,6 +58,17 @@ verify_jwt = true
 [functions.workbench-derived]
 verify_jwt = false
 
+[functions.submit-support-request]
+verify_jwt = true
+
+[functions.export-my-data]
+verify_jwt = true
+
+# Public status intentionally exposes only sanitized aggregate service state.
+# It never returns incident titles, routes, request IDs, metadata, or billing state.
+[functions.public-platform-status]
+verify_jwt = false
+
 # Watchdog Intelligence production-eligible function manifest.
 # Self-test, diagnostic, bootstrap, debug, and preview-account helpers are
 # intentionally absent and must never be bulk-promoted from staging.
