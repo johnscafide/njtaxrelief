@@ -18,6 +18,9 @@ function allowedOrigin(req: Request) {
   return DEFAULT_SITE;
 }
 
+// Public catalog data is intentionally environment-neutral. Checkout resolves
+// the actual Stripe Price ID server-side from Edge Function secrets so a
+// staging deployment can never inherit a Live Price ID from this endpoint.
 const catalog = {
   provider: 'stripe',
   currency: 'USD',
@@ -27,18 +30,18 @@ const catalog = {
   plans: {
     agent: {
       label: 'Agent',
-      monthly: { amount: 59, price_id: 'price_1U5qPZAgYeNIcesFuC2gKGTz', lookup_key: 'watchdog_agent_monthly' },
-      yearly: { amount: 590, price_id: 'price_1U5qPjAgYeNIcesFCXaHoU0c', lookup_key: 'watchdog_agent_yearly' }
+      monthly: { amount: 59, lookup_key: 'watchdog_agent_monthly' },
+      yearly: { amount: 590, lookup_key: 'watchdog_agent_yearly' }
     },
     pro: {
       label: 'Pro',
-      monthly: { amount: 129, price_id: 'price_1U5qPyAgYeNIcesFy57ssZsV', lookup_key: 'watchdog_pro_monthly' },
-      yearly: { amount: 1290, price_id: 'price_1U5qQAAgYeNIcesF6UOsmwAX', lookup_key: 'watchdog_pro_yearly' }
+      monthly: { amount: 129, lookup_key: 'watchdog_pro_monthly' },
+      yearly: { amount: 1290, lookup_key: 'watchdog_pro_yearly' }
     },
     pro_plus: {
       label: 'Pro+',
-      monthly: { amount: 399, price_id: 'price_1U5qQKAgYeNIcesFmQqrWROC', lookup_key: 'watchdog_pro_plus_monthly' },
-      yearly: { amount: 3990, price_id: 'price_1U5qQUAgYeNIcesFOSN8JZjR', lookup_key: 'watchdog_pro_plus_yearly' }
+      monthly: { amount: 399, lookup_key: 'watchdog_pro_plus_monthly' },
+      yearly: { amount: 3990, lookup_key: 'watchdog_pro_plus_yearly' }
     }
   }
 };
