@@ -1,25 +1,25 @@
 // NJW-47: the estimator still contains legacy constants for its original
 // calculator-use project. Keep those literals inert for compatibility and
-// route only that tiny counter surface through the primary Watchdog project.
+// route only that tiny counter surface through the primary Watchdog Edge API.
 (function () {
   'use strict';
   if (window.__watchdogAnchorUsageConsolidated || typeof window.fetch !== 'function') return;
   window.__watchdogAnchorUsageConsolidated = true;
 
   var LEGACY_USAGE = 'https://afagpnyjxomuvpfviycm.supabase.co/rest/v1/calculator_uses';
-  var PRIMARY = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+  var PRIMARY_USAGE = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-usage';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var originalFetch = window.fetch.bind(window);
 
-  function rpc(name) {
-    return originalFetch(PRIMARY + '/rest/v1/rpc/' + name, {
+  function usage(action) {
+    return originalFetch(PRIMARY_USAGE, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': KEY,
         'Authorization': 'Bearer ' + KEY
       },
-      body: '{}'
+      body: JSON.stringify({ action: action })
     });
   }
 
@@ -28,10 +28,10 @@
     if (String(url).indexOf(LEGACY_USAGE) !== 0) return originalFetch(input, init);
     var method = String((init && init.method) || 'GET').toUpperCase();
     if (method === 'HEAD' || method === 'GET') {
-      return rpc('anchor_calculator_weekly_count').then(function (response) {
+      return usage('count').then(function (response) {
         if (!response.ok) return response;
-        return response.json().then(function (count) {
-          var n = Math.max(0, Number(count) || 0);
+        return response.json().then(function (body) {
+          var n = Math.max(0, Number(body && body.count) || 0);
           return new Response(null, {
             status: 200,
             headers: { 'content-range': '*/' + n, 'cache-control': 'no-store' }
@@ -39,7 +39,7 @@
         });
       });
     }
-    if (method === 'POST') return rpc('record_anchor_calculator_use');
+    if (method === 'POST') return usage('record');
     return Promise.resolve(new Response(null, { status: 405 }));
   };
 })();
