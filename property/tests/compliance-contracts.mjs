@@ -11,6 +11,7 @@ const requiredFiles = [
   'property/docs/compliance/README.md',
   'property/docs/compliance/CONTROL-REGISTER.md',
   'property/docs/compliance/DECISION-LOG.md',
+  'property/docs/compliance/CONNECTOR-REGISTER.md',
   'property/data/compliance-log.json',
   'property/compliance/index.html',
   'property/js/compliance.js',
@@ -65,6 +66,23 @@ const register = read('property/docs/compliance/CONTROL-REGISTER.md');
 for (const name of ['SOC 2', 'NIST', 'OWASP ASVS', 'WCAG 2.2', 'PCI DSS', 'NJDPA', 'ISO/IEC 27001']) {
   assert.match(register, new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Control register must include ${name}.`);
 }
+assert.match(register, /CONNECTOR-REGISTER\.md/,
+  'Material connector governance must remain linked from the control register.');
+
+const connectors = read('property/docs/compliance/CONNECTOR-REGISTER.md');
+for (const field of [
+  'Data transmitted to provider',
+  'Data classification',
+  'Scopes/permissions',
+  'Provider retention/deletion behavior',
+  'Privacy policy impact',
+  'Offboarding procedure',
+  'Residual risks'
+]) {
+  assert.match(connectors, new RegExp(field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Connector review template must include ${field}.`);
+}
+assert.match(connectors, /does not mean it is production-live/i,
+  'Connector register must distinguish observed integrations from verified production-live integrations.');
 
 const charter = read('property/docs/compliance/README.md');
 assert.match(charter, /daily compliance task must complete at least one substantive readiness improvement/i);
