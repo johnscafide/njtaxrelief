@@ -31,6 +31,10 @@ assert(manifest.safety?.explicit_production_authorization_required === true, 'Pr
 assert(manifest.safety?.customer_visibility_last === true, 'Customer visibility must remain the final Gate 5 action.');
 assert(manifest.safety?.stripe_mutations_in_this_manifest === false, 'Intelligence promotion manifest must not mutate Stripe.');
 assert(manifest.safety?.schema_down_migrations_are_not_the_primary_rollback === true, 'Rollback must prefer operational stop/forward fix over destructive down-migrations.');
+assert(Array.isArray(manifest.technical_promotion_prerequisites) && manifest.technical_promotion_prerequisites.length >= 5, 'Manifest must distinguish technical promotion prerequisites.');
+assert(Array.isArray(manifest.commercial_public_launch_gates) && manifest.commercial_public_launch_gates.length >= 3, 'Manifest must distinguish commercial/public launch gates.');
+assert(manifest.commercial_public_launch_gates.some((x) => /Free plan/i.test(x) && /leaked-password/i.test(x)), 'Manifest must document the accepted Supabase Free-plan leaked-password limitation.');
+assert(manifest.commercial_public_launch_gates.some((x) => /Live billing lifecycle/i.test(x) && /paid enrollment/i.test(x)), 'Manifest must keep Live billing as a separate paid-enrollment gate.');
 
 const migrations = manifest.migrations?.apply_in_order || [];
 assert(migrations.length === 43, `Expected 43 allowlisted production migrations, found ${migrations.length}.`);
@@ -53,7 +57,11 @@ for (const required of [
   assert(!migrations.includes(required), `Reconcile-only entitlement migration must not be in automatic apply order: ${required}`);
   assert(exists(`supabase/migrations/${required}`), `Reconciliation source missing: ${required}`);
 }
-assert((manifest.migrations?.known_newer_production_entitlement_versions_to_preserve || []).length >= 8, 'Manifest must record the newer production entitlement migration lineage to preserve.');
+const productionEntitlementVersions = new Set(manifest.migrations?.known_newer_production_entitlement_versions_to_preserve || []);
+for (const requiredVersion of ['20260818214156', '20260818234619']) {
+  assert(productionEntitlementVersions.has(requiredVersion), `Manifest must preserve current production entitlement migration ${requiredVersion}.`);
+}
+assert(productionEntitlementVersions.size === 2, 'Manifest entitlement lineage should contain the two currently observed production entitlement migrations, not stale staging/release IDs.');
 
 const functions = manifest.edge_functions?.deploy_allowlist || [];
 assert(functions.length === 23, `Expected 23 production-eligible Intelligence functions, found ${functions.length}.`);
@@ -95,6 +103,7 @@ assert((manifest.rollback_stop_order || []).some((x) => /worker_url/i.test(x) &&
 assert(/explicit production authorization/i.test(runbook), 'Runbook must require explicit production authorization.');
 assert(/customer visibility/i.test(runbook) && /last/i.test(runbook), 'Runbook must keep customer visibility last.');
 assert(/does not configure, charge, refund, test or otherwise mutate Stripe/i.test(runbook), 'Runbook must explicitly separate Stripe from Intelligence promotion.');
+assert(/Free plan/i.test(runbook) && /leaked-password/i.test(runbook), 'Runbook must document the accepted Supabase Free-plan limitation.');
 assert(/provider-unavailable/i.test(evidence), 'Certification evidence must record the Analyst provider-unavailable test.');
 assert(/stale-lock recovery/i.test(evidence), 'Certification evidence must record stale-lock recovery.');
 assert(/global cron stop\/restore/i.test(evidence), 'Certification evidence must record global scheduler stop/restore.');
