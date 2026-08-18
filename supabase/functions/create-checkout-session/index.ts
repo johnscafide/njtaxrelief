@@ -1,19 +1,192 @@
 import { createClient } from '@supabase/supabase-js';
-const cors={'Access-Control-Allow-Origin':'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, apikey, content-type'};
-const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{...cors,'Content-Type':'application/json'}});
-const paddleBase=()=>Deno.env.get('PADDLE_ENVIRONMENT')==='sandbox'?'https://sandbox-api.paddle.com':'https://api.paddle.com';
-const PRICES={agent:{monthly:'pri_01kzp7mcvs46mmcdwyxd0sjvne',yearly:'pri_01kzp7kwcfzs9znjwwj24zgdb6'},pro:{monthly:'pri_01kzp7jhcsk07k47dtvrmaxvjh',yearly:'pri_01kzp7hwtx1qp946ftnmj4xpqc'},pro_plus:{monthly:'pri_01kzp7h2mw9waf3exfsee8jxsb',yearly:'pri_01kzp7fmg7ksff6sjg054mqbe4'},teams:{monthly:'pri_01kzp7e6vsmsbjyw36mxgvww1b'}} as const;
-const PLANS={agent:'pro',pro:'pro_plus',pro_plus:'pro_plus',teams:'pro_plus'} as const;
-const CAP={agent:25,pro:250,pro_plus:2500,teams:10000} as const;
-async function paddle(path:string,init:RequestInit={}){const key=Deno.env.get('PADDLE_API_KEY');if(!key)throw new Error('Paddle is not configured yet');const r=await fetch(paddleBase()+path,{...init,headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json',...(init.headers||{})}});const p=await r.json().catch(()=>({}));if(!r.ok){console.error('PADDLE_API_ERROR',JSON.stringify({path,status:r.status,environment:Deno.env.get('PADDLE_ENVIRONMENT')||'production',payload:p}));const detail=p?.error?.detail||p?.error?.type||'Paddle request failed';const e=new Error(detail);(e as any).paddle_status=r.status;(e as any).paddle_payload=p;throw e}return p?.data;}
-Deno.serve(async(req)=>{if(req.method==='OPTIONS')return new Response('ok',{headers:cors});if(req.method!=='POST')return json({error:'Method not allowed'},405);
- const auth=req.headers.get('Authorization');if(!auth)return json({error:'Sign in required',code:'SIGN_IN_REQUIRED'},401);const url=Deno.env.get('SUPABASE_URL')!,anon=Deno.env.get('SUPABASE_ANON_KEY')!,service=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;const uc=createClient(url,anon,{global:{headers:{Authorization:auth}}}),admin=createClient(url,service);const {data:{user},error}=await uc.auth.getUser();if(error||!user)return json({error:'Sign in required',code:'SIGN_IN_REQUIRED'},401);const {data:isTest}=await admin.rpc('is_watchdog_test_account',{p_user_id:user.id});if(isTest)return json({error:'Sandbox accounts cannot create or modify real billing.',code:'WATCHDOG_TEST_NO_REAL_SPEND'},403);
- const body=await req.json().catch(()=>({}));const tier=String(body?.tier||body?.plan||'').toLowerCase() as keyof typeof PRICES;const cadence=(String(body?.cadence||'yearly').toLowerCase()==='monthly'?'monthly':'yearly') as 'monthly'|'yearly';if(!PRICES[tier])return json({error:'Choose Agent, Pro, Pro+, or Teams',code:'INVALID_PLAN'},400);if(tier==='teams'&&cadence!=='monthly')return json({error:'Teams is monthly only',code:'INVALID_CADENCE'},400);const price=(PRICES[tier] as Record<string,string>)[cadence];if(!price)return json({error:'Billing price is not configured yet',code:'PRICE_NOT_CONFIGURED'},503);const clientToken=Deno.env.get('PADDLE_CLIENT_TOKEN');if(!clientToken)return json({error:'Paddle Checkout is not configured yet',code:'CLIENT_TOKEN_MISSING'},503);
- const {data:ent}=await admin.from('account_entitlements').select('plan_tier,billing_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status').eq('user_id',user.id).maybeSingle();const customerId=ent?.provider==='paddle'?ent.provider_customer_id:null;
- if(customerId&&ent?.provider_subscription_id&&['active','trialing','past_due','paused'].includes(ent.subscription_status||'')){
-   if(ent.provider_price_id===price){try{const portal=await paddle(`/customers/${encodeURIComponent(customerId)}/portal-sessions`,{method:'POST',body:JSON.stringify({subscription_ids:[ent.provider_subscription_id]})});return json({url:portal?.urls?.general?.overview,destination:'portal',provider:'paddle'});}catch(e){console.error('CHECKOUT_PORTAL_ERROR',e);return json({error:e instanceof Error?e.message:'Could not open billing portal',code:'PADDLE_PORTAL_ERROR'},502);}}
-   if(['active','trialing'].includes(ent.subscription_status||'')){try{const sub=await paddle(`/subscriptions/${encodeURIComponent(ent.provider_subscription_id)}`,{method:'PATCH',body:JSON.stringify({items:[{price_id:price,quantity:1}],proration_billing_mode:'prorated_immediately'})});await admin.from('access_audit_log').insert({user_id:user.id,event_type:'billing.subscription_plan_change_requested',resource_type:'subscription',resource_id:ent.provider_subscription_id,required_plan:PLANS[tier],allowed:true,metadata:{provider:'paddle',from_tier:ent.billing_tier,to_tier:tier,cadence,price_id:price}});return json({provider:'paddle',destination:'plan_change',plan_change_requested:true,subscription_id:sub?.id||ent.provider_subscription_id,requested_tier:tier,requested_cadence:cadence});}catch(e){console.error('CHECKOUT_PLAN_CHANGE_ERROR',e);return json({error:e instanceof Error?e.message:'Could not change subscription plan',code:'PADDLE_PLAN_CHANGE_ERROR'},502);}}
-   try{const portal=await paddle(`/customers/${encodeURIComponent(customerId)}/portal-sessions`,{method:'POST',body:JSON.stringify({subscription_ids:[ent.provider_subscription_id]})});return json({url:portal?.urls?.general?.overview,destination:'portal',provider:'paddle'});}catch(e){console.error('CHECKOUT_FALLBACK_PORTAL_ERROR',e);return json({error:e instanceof Error?e.message:'Could not open billing portal',code:'PADDLE_PORTAL_ERROR'},502);}
- }
- try{const transaction=await paddle('/transactions',{method:'POST',body:JSON.stringify({items:[{price_id:price,quantity:1}],collection_mode:'automatic',...(customerId?{customer_id:customerId}:{}),custom_data:{watchdog_user_id:user.id,billing_tier:tier,plan_tier:PLANS[tier],billing_interval:cadence,property_capacity:CAP[tier],product:'watchdog'},checkout:{url:'https://njpropertytaxrelief.com/property/account?checkout=success'}})});await admin.from('access_audit_log').insert({user_id:user.id,event_type:'billing.checkout_created',resource_type:'transaction',resource_id:transaction?.id,required_plan:PLANS[tier],allowed:true,metadata:{provider:'paddle',billing_tier:tier,cadence,price_id:price}});return json({provider:'paddle',transaction_id:transaction?.id,client_token:clientToken,environment:Deno.env.get('PADDLE_ENVIRONMENT')==='sandbox'?'sandbox':'production',tier,cadence});}catch(e){console.error('CHECKOUT_TRANSACTION_ERROR',e);return json({error:e instanceof Error?e.message:'Could not create checkout',code:'PADDLE_TRANSACTION_ERROR'},502);}
+import Stripe from 'stripe';
+
+const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
+type Tier = keyof typeof CAPACITY;
+type Cadence = 'monthly' | 'yearly';
+
+function allowedOrigin(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  try {
+    const url = new URL(origin);
+    const host = url.hostname.toLowerCase();
+    if (
+      host === 'njpropertytaxrelief.com' ||
+      host === 'www.njpropertytaxrelief.com' ||
+      host === 'watchdogre.com' ||
+      host === 'www.watchdogre.com' ||
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host.endsWith('.vercel.app')
+    ) return origin;
+  } catch (_) {}
+  return DEFAULT_SITE;
+}
+
+function cors(req: Request) {
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin(req),
+    'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Vary': 'Origin'
+  };
+}
+
+function json(req: Request, body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json' } });
+}
+
+function checkoutMode() {
+  const explicit = String(Deno.env.get('BILLING_CHECKOUT_MODE') || '').trim().toLowerCase();
+  if (['closed', 'controlled', 'open'].includes(explicit)) return explicit;
+  return Deno.env.get('BILLING_CHECKOUT_ENABLED') === 'true' ? 'open' : 'closed';
+}
+
+function controlledUsers() {
+  return new Set(String(Deno.env.get('BILLING_CONTROLLED_USER_IDS') || '').split(',').map(v => v.trim()).filter(Boolean));
+}
+
+function priceFor(tier: Tier, cadence: Cadence) {
+  const names: Record<Tier, Record<Cadence, string>> = {
+    agent: {
+      monthly: 'STRIPE_PRICE_AGENT_MONTHLY',
+      yearly: 'STRIPE_PRICE_AGENT_YEARLY'
+    },
+    pro: {
+      monthly: 'STRIPE_PRICE_PRO_MONTHLY',
+      yearly: 'STRIPE_PRICE_PRO_YEARLY'
+    },
+    pro_plus: {
+      monthly: 'STRIPE_PRICE_PRO_PLUS_MONTHLY',
+      yearly: 'STRIPE_PRICE_PRO_PLUS_YEARLY'
+    }
+  };
+  const configured = Deno.env.get(names[tier][cadence]);
+  if (configured) return configured;
+  if (tier === 'pro' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO') || null;
+  if (tier === 'pro_plus' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO_PLUS') || null;
+  return null;
+}
+
+Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(req) });
+  if (req.method !== 'POST') return json(req, { error: 'Method not allowed' }, 405);
+
+  const auth = req.headers.get('Authorization');
+  if (!auth) return json(req, { error: 'Sign in required', code: 'SIGN_IN_REQUIRED' }, 401);
+
+  const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+  const anonKey = Deno.env.get('SUPABASE_ANON_KEY')!;
+  const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+  const userClient = createClient(supabaseUrl, anonKey, { global: { headers: { Authorization: auth } } });
+  const admin = createClient(supabaseUrl, serviceKey);
+  const { data: { user }, error: userError } = await userClient.auth.getUser();
+  if (userError || !user) return json(req, { error: 'Sign in required', code: 'SIGN_IN_REQUIRED' }, 401);
+
+  const mode = checkoutMode();
+  if (mode === 'closed') return json(req, { error: 'Paid enrollment is not open yet.', code: 'BILLING_ENROLLMENT_CLOSED' }, 503);
+  if (mode === 'controlled' && !controlledUsers().has(user.id)) {
+    return json(req, { error: 'Paid enrollment is currently limited to controlled launch accounts.', code: 'BILLING_CONTROLLED_ONLY' }, 403);
+  }
+
+  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  if (!stripeKey) return json(req, { error: 'Stripe Checkout is not configured yet.', code: 'STRIPE_NOT_CONFIGURED' }, 503);
+  const liveMode = stripeKey.startsWith('sk_live_');
+  const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
+  if (liveMode && isTest) {
+    return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+  }
+
+  const body = await req.json().catch(() => ({}));
+  const rawTier = String(body?.tier || body?.plan || '').toLowerCase();
+  if (rawTier === 'teams') return json(req, { error: 'Teams enrollment is not open yet.', code: 'TEAMS_ENROLLMENT_CLOSED' }, 409);
+  if (!['agent', 'pro', 'pro_plus', 'pro+'].includes(rawTier)) {
+    return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
+  }
+  const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
+  const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
+  const priceId = priceFor(tier, cadence);
+  if (!priceId) return json(req, { error: 'That Stripe price is not configured in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
+
+  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
+  const { data: entitlement, error: entitlementError } = await admin
+    .from('account_entitlements')
+    .select('plan_tier,billing_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
+    .eq('user_id', user.id)
+    .maybeSingle();
+  if (entitlementError) return json(req, { error: 'Could not read billing state.', code: 'ENTITLEMENT_READ_FAILED' }, 500);
+
+  const hasLiveLikeSubscription = ['active', 'trialing', 'past_due', 'paused'].includes(entitlement?.subscription_status || '');
+  if (entitlement?.provider === 'paddle' && entitlement?.provider_subscription_id && hasLiveLikeSubscription) {
+    return json(req, {
+      error: 'This account still has a legacy Paddle subscription. Contact Watchdog support before starting Stripe billing so you are not charged twice.',
+      code: 'LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED'
+    }, 409);
+  }
+
+  if (entitlement?.provider === 'stripe' && entitlement?.provider_customer_id && entitlement?.provider_subscription_id && hasLiveLikeSubscription) {
+    try {
+      const site = String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+      const portal = await stripe.billingPortal.sessions.create({
+        customer: entitlement.provider_customer_id,
+        return_url: `${site}/property/account/`
+      });
+      await admin.from('access_audit_log').insert({
+        user_id: user.id,
+        event_type: 'billing.existing_subscription_redirected_to_portal',
+        resource_type: 'subscription',
+        resource_id: entitlement.provider_subscription_id,
+        required_plan: tier,
+        allowed: true,
+        metadata: { provider: 'stripe', requested_tier: tier, requested_cadence: cadence, current_price_id: entitlement.provider_price_id }
+      });
+      return json(req, { provider: 'stripe', destination: 'portal', url: portal.url });
+    } catch (error) {
+      console.error('STRIPE_PORTAL_FROM_CHECKOUT_ERROR', error);
+      return json(req, { error: 'Could not open Stripe billing management.', code: 'STRIPE_PORTAL_ERROR' }, 502);
+    }
+  }
+
+  const site = String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+  const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
+  const metadata = {
+    supabase_user_id: user.id,
+    watchdog_user_id: user.id,
+    product: 'watchdog_subscription',
+    billing_tier: tier,
+    plan_tier: tier,
+    billing_interval: cadence,
+    property_capacity: String(CAPACITY[tier])
+  };
+
+  try {
+    const session = await stripe.checkout.sessions.create({
+      mode: 'subscription',
+      line_items: [{ price: priceId, quantity: 1 }],
+      ...(customerId ? { customer: customerId } : user.email ? { customer_email: user.email } : {}),
+      client_reference_id: user.id,
+      metadata,
+      subscription_data: { metadata },
+      success_url: `${site}/property/account/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${site}/property/account/?checkout=cancelled`,
+      billing_address_collection: 'auto',
+      ...(Deno.env.get('STRIPE_AUTOMATIC_TAX') === 'true' ? { automatic_tax: { enabled: true } } : {})
+    });
+
+    await admin.from('access_audit_log').insert({
+      user_id: user.id,
+      event_type: 'billing.checkout_created',
+      resource_type: 'checkout_session',
+      resource_id: session.id,
+      required_plan: tier,
+      allowed: true,
+      metadata: { provider: 'stripe', billing_tier: tier, cadence, price_id: priceId, checkout_mode: mode, livemode: liveMode }
+    });
+
+    return json(req, { provider: 'stripe', destination: 'checkout', url: session.url, session_id: session.id, tier, cadence });
+  } catch (error) {
+    console.error('STRIPE_CHECKOUT_ERROR', error);
+    return json(req, { error: error instanceof Error ? error.message : 'Could not create Stripe Checkout.', code: 'STRIPE_CHECKOUT_ERROR' }, 502);
+  }
 });
