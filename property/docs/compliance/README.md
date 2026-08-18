@@ -27,7 +27,7 @@ This repository does **not** claim that Watchdog is SOC 2 audited, ISO certified
 5. Existing controls should be reused and strengthened instead of creating parallel compliance-only systems.
 6. High-risk gaps take priority over badge acquisition.
 7. The scheduled compliance program runs at least twice daily and each session must complete at least one substantive readiness improvement; a session may complete as many related improvements as are useful and safe.
-8. Material decisions and accepted risks are recorded in `DECISION-LOG.md` and reflected in the developer-only Compliance Center through `property/data/compliance-log.json`.
+8. Material decisions and accepted risks are recorded in `DECISION-LOG.md` and reflected in the developer-only Compliance Center through the API-only evidence module `api/_compliance-data.js`.
 9. Framework mappings are maintained in `CONTROL-REGISTER.md`.
 10. Formal audits are deferred until core production workflows, billing, material connectors and access architecture are substantially stable.
 11. Detailed website compliance evidence must require authenticated Watchdog developer access; search engines, public account tiers and anonymous callers must not receive the operational evidence feed.
@@ -35,6 +35,8 @@ This repository does **not** claim that Watchdog is SOC 2 audited, ISO certified
 ## Protected Compliance Center
 
 `/property/compliance` is an internal developer operations surface. The page is marked `noindex`, `nofollow`, `noarchive` and `nosnippet`, is gated by the Watchdog developer entitlement check, and loads its evidence through `/api/compliance-log` only after the server independently verifies the caller's authenticated Watchdog developer session. Unauthorized API callers receive a non-descriptive not-found response.
+
+Detailed evidence is not stored under the `/property/` static webroot. The server endpoint reads `api/_compliance-data.js`; the previous web-addressable `property/data/compliance-log.json` copy was removed.
 
 The repository itself is currently public, so compliance artifacts committed to Git must remain sanitized even though the website surface is protected. Never treat repository access controls as a substitute for redaction of secrets, customer information or exploit-enabling operational detail.
 
