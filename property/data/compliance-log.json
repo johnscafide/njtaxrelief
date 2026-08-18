@@ -1,6 +1,6 @@
 {
   "program": "Watchdog Compliance Readiness",
-  "version": 1,
+  "version": 2,
   "updated_at": "2026-08-18",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
@@ -12,14 +12,8 @@
       "frameworks": ["SOC 2", "NIST CSF 2.0", "OWASP ASVS 5.0", "ISO/IEC 27001"],
       "control_area": "Governance and evidence management",
       "status": "implemented",
-      "action": "Established a permanent Watchdog compliance-readiness program with a control register, decision log, website Compliance Center, evidence requirements, and a daily improvement cadence.",
-      "evidence": [
-        "property/docs/compliance/README.md",
-        "property/docs/compliance/CONTROL-REGISTER.md",
-        "property/docs/compliance/DECISION-LOG.md",
-        "property/compliance/index.html",
-        "property/tests/compliance-contracts.mjs"
-      ],
+      "action": "Established a permanent Watchdog compliance-readiness program with a control register, decision log, website Compliance Center, evidence requirements, and a recurring improvement cadence.",
+      "evidence": ["property/docs/compliance/README.md", "property/docs/compliance/CONTROL-REGISTER.md", "property/docs/compliance/DECISION-LOG.md", "property/compliance/index.html", "property/tests/compliance-contracts.mjs"],
       "rationale": "Compliance should be engineered into the product while architecture is still evolving rather than treated as a one-time certification project after launch.",
       "residual_risk": "The program is internally managed and has not yet been independently audited or certified.",
       "next_step": "Continue mapping existing production controls to framework requirements and close high-risk gaps before engaging an external auditor."
@@ -45,10 +39,7 @@
       "control_area": "Secure development and access control",
       "status": "implemented",
       "action": "Mapped the existing access-boundary and security-contract CI suite as evidence for authorization, webhook authentication, pricing authority, CORS restrictions, RLS/entitlement boundaries, security headers, and other application-security controls.",
-      "evidence": [
-        ".github/workflows/access-boundary-audit.yml",
-        "property/tests/security-contracts.mjs"
-      ],
+      "evidence": [".github/workflows/access-boundary-audit.yml", "property/tests/security-contracts.mjs"],
       "rationale": "Automated security assertions executed during code changes provide stronger repeatable evidence than policy statements alone.",
       "residual_risk": "Static contract tests do not replace dynamic vulnerability testing, independent penetration testing, or complete ASVS verification.",
       "next_step": "Expand evidence coverage to dependency, secret, code-scanning, accessibility, and dynamic application-security controls."
@@ -91,6 +82,32 @@
       "rationale": "Watchdog must be able to add, replace, or retire data and service connectors without losing control of data flows, credentials, permissions, retention, privacy scope, or vendor risk.",
       "residual_risk": "The initial inventory is seeded from current repository and policy evidence; each connector still requires explicit live-status verification and completion of its detailed review record.",
       "next_step": "Verify production status and complete risk-review fields for Tier 1 connectors first, beginning with authentication, hosting, payments, and any connector processing non-public customer information."
+    },
+    {
+      "id": "WCR-2026-08-18-007",
+      "date": "2026-08-18",
+      "title": "Compliance evidence delivery moved behind server-side developer verification",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "OWASP ASVS 5.0", "ISO/IEC 27001"],
+      "control_area": "Access control and evidence confidentiality",
+      "status": "implemented",
+      "action": "Changed the Compliance Center so detailed evidence is requested from a server endpoint that independently validates the signed-in Watchdog session and developer entitlement before returning the evidence feed; unauthorized callers receive a non-descriptive not-found response and responses are non-cacheable.",
+      "evidence": ["api/compliance-log.js", "property/js/compliance.js", "property/compliance/index.html", "property/tests/compliance-contracts.mjs"],
+      "rationale": "Client-side hiding alone is not a sufficient boundary for an internal governance surface because a guessed resource URL should not return the operational evidence feed to an anonymous or non-developer caller.",
+      "residual_risk": "The GitHub repository is currently public, so committed compliance artifacts must remain sanitized and must never contain secrets, customer data or exploit-enabling detail.",
+      "next_step": "Review whether the repository itself should eventually become private and continue separating public trust information from internal operational evidence."
+    },
+    {
+      "id": "WCR-2026-08-18-008",
+      "date": "2026-08-18",
+      "title": "Compliance improvement cadence expanded to twice daily",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "ISO/IEC 27001"],
+      "control_area": "Continuous monitoring and governance",
+      "status": "implemented",
+      "action": "Expanded the recurring compliance-readiness cadence to 1:00 AM and 12:00 PM Eastern Time every day, requiring at least one substantive improvement per session while allowing multiple related improvements whenever useful and safe.",
+      "evidence": ["property/docs/compliance/README.md"],
+      "rationale": "A minimum-only once-daily cadence could become artificially narrow; two review windows with permission to complete multiple related controls better matches an actively evolving SaaS platform.",
+      "residual_risk": "Automation frequency does not by itself prove operating effectiveness; completed work still requires useful evidence and periodic human review.",
+      "next_step": "Use the scheduled sessions to prioritize high-risk gaps and accumulate evidence that will later support readiness assessments and independent audits."
     }
   ]
 }
