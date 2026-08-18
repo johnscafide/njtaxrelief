@@ -6,13 +6,20 @@ on:
       - main
     paths:
       - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/tests/ops-selfservice-acceptance.mjs'
       - 'property/dashboard/**'
       - 'property/home/**'
       - 'property/agent-desk/**'
       - 'property/data-workbench/**'
       - 'property/intelligence/**'
+      - 'property/account/**'
+      - 'property/support/**'
+      - 'property/status/**'
       - 'property/js/**'
       - 'property/css/**'
+      - 'supabase/functions/submit-support-request/**'
+      - 'supabase/functions/export-my-data/**'
+      - 'supabase/functions/public-platform-status/**'
   workflow_dispatch:
     inputs:
       ref:
@@ -100,6 +107,9 @@ jobs:
               raise SystemExit('Safety rewrite touched no files; refusing to run.')
           print(f'Rewrote {touched} frontend files to staging inside runner workspace only.')
           PY
+
+      - name: Verify operations self-service endpoints
+        run: node property/tests/ops-selfservice-acceptance.mjs
 
       - name: Install Playwright
         run: |
