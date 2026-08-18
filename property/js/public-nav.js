@@ -1,5 +1,11 @@
 (function(){
   'use strict';
+  var previewHost=location.hostname==='localhost'||location.hostname==='127.0.0.1'||/\.vercel\.app$/i.test(location.hostname);
+  if(previewHost&&window.supabase&&typeof window.supabase.createClient==='function'&&!window.supabase.__watchdogPreviewWrapped){
+    var originalCreateClient=window.supabase.createClient.bind(window.supabase),stagingUrl='https://pxossnwmrygxlpxtstnl.supabase.co',stagingKey='sb_publishable_2knfdj4MRsPEtQpPbQ54ew_S5KngOcl',stagingStorage='sb-pxossnwmrygxlpxtstnl-auth-token';
+    window.supabase.createClient=function(url,key,options){var out=Object.assign({},options||{});out.auth=Object.assign({},(options&&options.auth)||{},{storageKey:stagingStorage});if(String(url||'').indexOf('uvkvaxljhhngydvlrzom')!==-1)return originalCreateClient(stagingUrl,stagingKey,out);return originalCreateClient(url,key,out);};
+    try{Object.defineProperty(window.supabase,'__watchdogPreviewWrapped',{value:true});}catch(_error){}
+  }
   var user=null, lastFocus=null;
   var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
   function q(id){return document.getElementById(id);}
