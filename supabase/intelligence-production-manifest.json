@@ -1,12 +1,14 @@
 {
   "manifest_version": "watchdog-intelligence-production-v1",
-  "created_at": "2026-08-18T22:58:00Z",
+  "created_at": "2026-08-18T23:50:00Z",
   "release_candidate": {
     "pull_request": 63,
     "branch": "feature/watchdog-intelligence-foundation",
-    "source_head_observed": "6c3d57bf8665a25015f7572fb830df836759c67e",
+    "source_head_observed": "223e425fc04b96c2e46d8a3f1a7cd5abe4310a0e",
+    "main_sha_reconciled": "d70f563d58cc62931d5d4936b751d469c3495327",
     "production_project_ref": "uvkvaxljhhngydvlrzom",
-    "staging_project_ref": "pxossnwmrygxlpxtstnl"
+    "staging_project_ref": "pxossnwmrygxlpxtstnl",
+    "source_head_note": "Provenance only. Freeze and record the exact final PR head immediately before production promotion."
   },
   "safety": {
     "explicit_production_authorization_required": true,
@@ -15,12 +17,19 @@
     "stripe_mutations_in_this_manifest": false,
     "schema_down_migrations_are_not_the_primary_rollback": true
   },
-  "external_prerequisites": [
-    "Controlled Live billing lifecycle gate is passed in its separate workstream.",
-    "Supabase Auth leaked-password protection is enabled and the advisor warning is cleared.",
-    "External counsel, insurance and data-rights launch items are documented.",
-    "External uptime alert owner and channel are assigned.",
-    "PR #63 is frozen and reconciled against current main immediately before promotion."
+  "technical_promotion_prerequisites": [
+    "PR #63 is frozen and reconciled against current main immediately before promotion.",
+    "Production Intelligence is confirmed unpromoted or any partial state is explicitly reconciled before Gate 5.",
+    "Customer-facing Intelligence visibility remains disabled while migrations, functions and canary acceptance run.",
+    "An isolated restore/backup checkpoint and rollback owner are available.",
+    "The external uptime alert owner and incident channel are assigned.",
+    "The population scheduler remains fail-closed until the environment-local watchdog_intelligence_worker_url Vault entry is intentionally created."
+  ],
+  "commercial_public_launch_gates": [
+    "Controlled Live billing lifecycle is a separate commercial gate. It may remain closed during a non-public technical Intelligence promotion/canary, but must pass before opening broad new paid enrollment.",
+    "Supabase Auth leaked-password protection is unavailable on the current Free plan and is documented as an accepted platform-plan limitation in NJW-35. If the organization upgrades to Pro or above, enable it and rerun the advisor before broad paid enrollment.",
+    "Counsel, insurance, entity/liability and data-rights review remain external business-governance gates for broad commercial launch; repository code cannot substitute for those reviews.",
+    "Teams self-service remains commercially gated until separately authorized."
   ],
   "migrations": {
     "apply_in_order": [
@@ -71,22 +80,16 @@
     "reconcile_only_do_not_reapply_blindly": [
       {
         "file": "20260818213000_watchdog_full_tier_entitlement_contract.sql",
-        "reason": "Production already has newer normalized entitlement helper migrations; compare object definitions instead of replacing newer RPC contracts."
+        "reason": "Production already contains the live entitlement contract. Compare object definitions instead of replacing the current production RPC contract."
       },
       {
         "file": "20260818214500_watchdog_standard_entitlement_access_fix.sql",
-        "reason": "Production already has newer entitlement/access helper migrations; validate behavior and preserve the newer production object contract."
+        "reason": "Production already contains the live Standard entitlement access fix. Validate behavior and preserve the current production object contract."
       }
     ],
     "known_newer_production_entitlement_versions_to_preserve": [
-      "20260818215834",
-      "20260818220133",
-      "20260818220137",
-      "20260818220559",
-      "20260818221438",
-      "20260818223355",
-      "20260818223916",
-      "20260818224258"
+      "20260818214156",
+      "20260818234619"
     ]
   },
   "edge_functions": {
@@ -154,8 +157,9 @@
   "preflight": [
     "Freeze the exact PR #63 head and reconcile it against current main.",
     "Verify production Intelligence tables/functions targeted by this manifest are still unpromoted or reconcile any partial prior state.",
-    "Verify current production get_my_entitlement and has_watchdog_plan preserve Standard, Agent, Pro, Pro+, Teams and Developer behavior; do not replace newer helper definitions with older branch SQL.",
-    "Confirm all external prerequisites above are satisfied.",
+    "Verify current production get_my_entitlement and has_watchdog_plan preserve Standard, Agent, Pro, Pro+, Teams and Developer behavior; do not replace current production helper definitions with older branch SQL.",
+    "Confirm all technical promotion prerequisites above are satisfied.",
+    "Confirm any commercial/public launch gates that remain open are enforced by keeping paid enrollment or customer visibility closed as applicable.",
     "Confirm customer-facing Intelligence visibility remains off.",
     "Confirm worker scheduler is fail-closed until the production worker URL Vault entry is intentionally created.",
     "Capture pre-promotion production security and performance advisor snapshots.",
