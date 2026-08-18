@@ -61,6 +61,14 @@ verify_jwt = true
 [functions.workbench-derived]
 verify_jwt = false
 
+# Privacy-minimized first-party analytics. Anonymous ingestion has a strict
+# event/property allowlist and no PII fields. The report is developer-only.
+[functions.product-analytics]
+verify_jwt = false
+
+[functions.product-analytics-report]
+verify_jwt = true
+
 # These customer self-service functions validate the bearer token with
 # Supabase Auth inside the function. Gateway verification remains disabled so
 # missing/expired auth produces deterministic fail-closed 401 responses rather
