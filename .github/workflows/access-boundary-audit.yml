@@ -30,6 +30,8 @@ jobs:
         run: node property/tests/entitlement-tier-contract.mjs
       - name: Verify Property Home score history contract
         run: node property/tests/property-score-history-contract.mjs
+      - name: Verify page-native Intelligence shell contracts
+        run: node property/tests/page-native-intelligence-contract.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
       - name: Verify SECURITY DEFINER permission contracts
