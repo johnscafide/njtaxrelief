@@ -15,11 +15,13 @@ on:
       - 'property/account/**'
       - 'property/support/**'
       - 'property/status/**'
+      - 'property/scan/**'
       - 'property/js/**'
       - 'property/css/**'
       - 'supabase/functions/submit-support-request/**'
       - 'supabase/functions/export-my-data/**'
       - 'supabase/functions/public-platform-status/**'
+      - 'supabase/functions/appeal-prospect-scan/**'
   workflow_dispatch:
     inputs:
       ref:
@@ -41,6 +43,8 @@ jobs:
     env:
       STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
       STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      WATCHDOG_TEST_STANDARD_EMAIL: ${{ secrets.WATCHDOG_TEST_STANDARD_EMAIL }}
+      WATCHDOG_TEST_STANDARD_PASSWORD: ${{ secrets.WATCHDOG_TEST_STANDARD_PASSWORD }}
       WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
       WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
       VISUAL_BASE_URL: http://127.0.0.1:4173
@@ -63,6 +67,8 @@ jobs:
           set -euo pipefail
           test -n "$STAGING_SUPABASE_URL"
           test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
+          test -n "$WATCHDOG_TEST_STANDARD_EMAIL"
+          test -n "$WATCHDOG_TEST_STANDARD_PASSWORD"
           test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
           test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
 
@@ -108,7 +114,7 @@ jobs:
           print(f'Rewrote {touched} frontend files to staging inside runner workspace only.')
           PY
 
-      - name: Verify operations self-service endpoints
+      - name: Verify operations and server Scanner boundaries
         run: node property/tests/ops-selfservice-acceptance.mjs
 
       - name: Install Playwright
