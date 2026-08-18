@@ -26,6 +26,8 @@ jobs:
           python-version: '3.12'
       - name: Verify protected-route and entitlement contracts
         run: node property/scripts/audit_access_boundaries.mjs
+      - name: Verify full commercial entitlement ladder
+        run: node property/tests/entitlement-tier-contract.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
       - name: Verify SECURITY DEFINER permission contracts
