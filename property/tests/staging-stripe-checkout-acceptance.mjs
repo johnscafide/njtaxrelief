@@ -117,7 +117,10 @@ try {
         name: node.getAttribute('name'),
         autocomplete: node.getAttribute('autocomplete'),
         placeholder: node.getAttribute('placeholder'),
-        aria_label: node.getAttribute('aria-label')
+        aria_label: node.getAttribute('aria-label'),
+        radio_label: node.getAttribute('type') === 'radio'
+          ? (node.closest('label')?.innerText || node.parentElement?.innerText || '').trim().slice(0, 120)
+          : null
       })).slice(0, 30)).catch(() => []);
       frames.push({
         url_host: (() => { try { return new URL(frame.url()).hostname; } catch { return ''; } })(),
@@ -150,10 +153,41 @@ try {
     fail(`Stripe Checkout field not found after ${timeoutMs}ms: ${label}`);
   }
 
+  async function selectCardPaymentMethod(timeoutMs = 15000) {
+    const started = Date.now();
+    while (Date.now() - started < timeoutMs) {
+      for (const frame of page.frames()) {
+        const radio = frame.getByRole('radio', { name: /card/i }).first();
+        if (await radio.count() && await radio.isVisible().catch(() => false)) {
+          const checked = await radio.isChecked().catch(() => false);
+          if (!checked) {
+            await radio.check({ force: true }).catch(async () => {
+              await radio.click({ force: true });
+            });
+          }
+          await delay(900);
+          return true;
+        }
+      }
+      await delay(300);
+    }
+    return false;
+  }
+
   async function fill(selectors, label, value, required = true) {
     const locator = await findVisible(selectors, label, required);
     if (!locator) return;
     await locator.fill(value);
+  }
+
+  const cardSelected = await selectCardPaymentMethod();
+  if (!cardSelected) {
+    const diagnostics = await checkoutDiagnostics();
+    fs.writeFileSync(
+      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
+      JSON.stringify({ generated_at: new Date().toISOString(), label: 'card payment method', frames: diagnostics }, null, 2)
+    );
+    fail('Stripe Checkout Card payment method was not found.');
   }
 
   await fill([
