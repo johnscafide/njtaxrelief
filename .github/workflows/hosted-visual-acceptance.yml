@@ -1,0 +1,138 @@
+name: Hosted visual acceptance
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/dashboard/**'
+      - 'property/home/**'
+      - 'property/agent-desk/**'
+      - 'property/data-workbench/**'
+      - 'property/intelligence/**'
+      - 'property/js/**'
+      - 'property/css/**'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to visually validate
+        required: true
+        default: feature/watchdog-intelligence-foundation
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  authenticated-visual-acceptance:
+    name: authenticated-visual-acceptance
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: staging
+    env:
+      STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
+      STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
+      WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
+      VISUAL_BASE_URL: http://127.0.0.1:4173
+      VISUAL_EVIDENCE_DIR: visual-acceptance-evidence
+
+    steps:
+      - name: Checkout release candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event.pull_request.head.sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Verify safety boundary and rewrite checkout to staging only
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$STAGING_SUPABASE_URL"
+          test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
+          test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
+          test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
+
+          if [[ "$STAGING_SUPABASE_URL" == *"uvkvaxljhhngydvlrzom"* ]]; then
+            echo "Refusing visual acceptance against production Supabase."
+            exit 1
+          fi
+
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          production_ref = 'uvkvaxljhhngydvlrzom'
+          production_url = f'https://{production_ref}.supabase.co'
+          production_key = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa'
+          staging_url = os.environ['STAGING_SUPABASE_URL'].rstrip('/')
+          staging_key = os.environ['STAGING_SUPABASE_PUBLISHABLE_KEY']
+          host = urlparse(staging_url).hostname or ''
+          staging_ref = host.split('.')[0]
+
+          if not staging_ref or staging_ref == production_ref:
+              raise SystemExit('Invalid staging project boundary; refusing to run.')
+
+          touched = 0
+          for root in (Path('property'),):
+              for file in root.rglob('*'):
+                  if not file.is_file() or file.suffix.lower() not in {'.html', '.js', '.mjs'}:
+                      continue
+                  try:
+                      text = file.read_text(encoding='utf-8')
+                  except UnicodeDecodeError:
+                      continue
+                  updated = text.replace(production_url, staging_url)
+                  updated = updated.replace(production_key, staging_key)
+                  updated = updated.replace(production_ref, staging_ref)
+                  if updated != text:
+                      file.write_text(updated, encoding='utf-8')
+                      touched += 1
+
+          if touched == 0:
+              raise SystemExit('Safety rewrite touched no files; refusing to run.')
+          print(f'Rewrote {touched} frontend files to staging inside runner workspace only.')
+          PY
+
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+
+      - name: Start local release-candidate server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/watchdog-visual-server.log 2>&1 &
+          echo $! > /tmp/watchdog-visual-server.pid
+          for i in {1..20}; do
+            if curl --fail --silent http://127.0.0.1:4173/property/dashboard/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/watchdog-visual-server.log || true
+          exit 1
+
+      - name: Run authenticated desktop and mobile acceptance
+        run: node property/tests/hosted-visual-acceptance.mjs
+
+      - name: Upload visual evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hosted-visual-acceptance-evidence
+          path: visual-acceptance-evidence
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Show local server log on failure
+        if: failure()
+        run: cat /tmp/watchdog-visual-server.log || true
