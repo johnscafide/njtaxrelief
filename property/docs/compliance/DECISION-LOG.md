@@ -18,7 +18,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 - `property/docs/compliance/README.md`
 - `property/docs/compliance/CONTROL-REGISTER.md`
-- `property/data/compliance-log.json`
+- `api/_compliance-data.js`
 - `property/compliance/index.html`
 - `property/tests/compliance-contracts.mjs`
 
@@ -90,11 +90,11 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Reasoning:** Compliance evidence must be specific enough to prove what happened without becoming a secondary security risk.
 
-**Implementation:** The Compliance Center is developer-gated in the Watchdog UI, is marked `noindex,nofollow`, and displays a sanitized structured log. The underlying repository remains the source of truth.
+**Implementation:** The Compliance Center is developer-gated in the Watchdog UI, is marked `noindex,nofollow,noarchive,nosnippet`, and displays a sanitized structured log. The underlying repository remains the source of truth.
 
 **Residual risk:** Because the repository is public, all committed compliance artifacts must continue to be written as public-safe records even when the UI is developer-gated.
 
-**Next action:** Add CI checks that validate required log structure and prohibit obvious secret patterns in compliance artifacts.
+**Next action:** Keep automated checks validating required log structure and rejecting obvious secret patterns in compliance artifacts.
 
 ---
 
@@ -106,11 +106,12 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Reasoning:** A browser-only gate can prevent normal navigation but does not stop a caller from requesting a known static evidence URL directly. Internal governance information should require an authenticated developer decision on the server as well.
 
-**Implementation:** `/property/compliance` remains developer-gated and excluded from indexing. Detailed log data is loaded through `/api/compliance-log`; the endpoint validates the Watchdog bearer session and developer entitlement before returning data, disables caching, opts out of indexing/snippets, and returns a non-descriptive not-found response to unauthorized callers.
+**Implementation:** `/property/compliance` remains developer-gated and excluded from indexing. Detailed log data is loaded through `/api/compliance-log`; the endpoint validates the Watchdog bearer session and developer entitlement before returning data, disables caching, opts out of indexing/snippets, and returns a non-descriptive not-found response to unauthorized callers. The previous static `/property/data/compliance-log.json` file was removed from the webroot and the structured evidence now lives in the API-side module `api/_compliance-data.js`.
 
 **Evidence:**
 
 - `api/compliance-log.js`
+- `api/_compliance-data.js`
 - `property/js/compliance.js`
 - `property/compliance/index.html`
 - `property/tests/compliance-contracts.mjs`
