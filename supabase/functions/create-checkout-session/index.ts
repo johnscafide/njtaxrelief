@@ -3,20 +3,6 @@ import Stripe from 'stripe';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
-const LIVE_PRICES = {
-  agent: {
-    monthly: 'price_1U5qPZAgYeNIcesFuC2gKGTz',
-    yearly: 'price_1U5qPjAgYeNIcesFCXaHoU0c'
-  },
-  pro: {
-    monthly: 'price_1U5qPyAgYeNIcesFy57ssZsV',
-    yearly: 'price_1U5qQAAgYeNIcesF6UOsmwAX'
-  },
-  pro_plus: {
-    monthly: 'price_1U5qQKAgYeNIcesFmQqrWROC',
-    yearly: 'price_1U5qQUAgYeNIcesFOSN8JZjR'
-  }
-} as const;
 type Tier = keyof typeof CAPACITY;
 type Cadence = 'monthly' | 'yearly';
 
@@ -48,19 +34,36 @@ function cors(req: Request) {
 }
 
 function json(req: Request, body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+  });
 }
 
 function checkoutMode() {
-  // This key is intentionally Stripe-cutover-specific. Legacy Paddle launch
-  // flags cannot accidentally open Live Stripe enrollment.
-  const explicit = String(Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') || '').trim().toLowerCase();
+  // BILLING_CHECKOUT_MODE is environment-neutral so the identical artifact can
+  // be exercised in staging before production. STRIPE_LIVE_CHECKOUT_MODE is
+  // accepted only as a temporary production migration fallback.
+  const explicit = String(
+    Deno.env.get('BILLING_CHECKOUT_MODE') ||
+    Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') ||
+    ''
+  ).trim().toLowerCase();
   if (['closed', 'controlled', 'open'].includes(explicit)) return explicit;
   return 'closed';
 }
 
 function controlledUsers() {
-  return new Set(String(Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') || '').split(',').map(v => v.trim()).filter(Boolean));
+  return new Set(
+    String(
+      Deno.env.get('BILLING_CONTROLLED_USER_IDS') ||
+      Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') ||
+      ''
+    )
+      .split(',')
+      .map(v => v.trim())
+      .filter(Boolean)
+  );
 }
 
 function priceFor(tier: Tier, cadence: Cadence) {
@@ -80,9 +83,12 @@ function priceFor(tier: Tier, cadence: Cadence) {
   };
   const configured = Deno.env.get(names[tier][cadence]);
   if (configured) return configured;
-  if (tier === 'pro' && cadence === 'monthly' && Deno.env.get('STRIPE_PRICE_PRO')) return Deno.env.get('STRIPE_PRICE_PRO')!;
-  if (tier === 'pro_plus' && cadence === 'monthly' && Deno.env.get('STRIPE_PRICE_PRO_PLUS')) return Deno.env.get('STRIPE_PRICE_PRO_PLUS')!;
-  return LIVE_PRICES[tier][cadence];
+  // Temporary compatibility only for the two historical monthly names. Annual
+  // prices and Agent never fall back. There are deliberately no hard-coded
+  // Live Price IDs here: staging and production must each configure their own.
+  if (tier === 'pro' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO') || null;
+  if (tier === 'pro_plus' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO_PLUS') || null;
+  return null;
 }
 
 Deno.serve(async (req) => {
@@ -109,6 +115,11 @@ Deno.serve(async (req) => {
   const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
   if (!stripeKey) return json(req, { error: 'Stripe Checkout is not configured yet.', code: 'STRIPE_NOT_CONFIGURED' }, 503);
   const liveMode = stripeKey.startsWith('sk_live_');
+  const testMode = stripeKey.startsWith('sk_test_');
+  if (!liveMode && !testMode) {
+    return json(req, { error: 'Stripe Checkout key mode is not recognized.', code: 'STRIPE_KEY_MODE_INVALID' }, 503);
+  }
+
   const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
   if (liveMode && isTest) {
     return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
@@ -123,6 +134,9 @@ Deno.serve(async (req) => {
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
   const priceId = priceFor(tier, cadence);
+  if (!priceId) {
+    return json(req, { error: 'That Stripe price is not configured in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
+  }
 
   const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
   const { data: entitlement, error: entitlementError } = await admin
@@ -196,10 +210,25 @@ Deno.serve(async (req) => {
       resource_id: session.id,
       required_plan: tier,
       allowed: true,
-      metadata: { provider: 'stripe', billing_tier: tier, cadence, price_id: priceId, checkout_mode: mode, livemode: liveMode }
+      metadata: {
+        provider: 'stripe',
+        billing_tier: tier,
+        cadence,
+        price_id: priceId,
+        checkout_mode: mode,
+        stripe_mode: liveMode ? 'live' : 'test'
+      }
     });
 
-    return json(req, { provider: 'stripe', destination: 'checkout', url: session.url, session_id: session.id, tier, cadence });
+    return json(req, {
+      provider: 'stripe',
+      destination: 'checkout',
+      url: session.url,
+      session_id: session.id,
+      tier,
+      cadence,
+      stripe_mode: liveMode ? 'live' : 'test'
+    });
   } catch (error) {
     console.error('STRIPE_CHECKOUT_ERROR', error);
     return json(req, { error: error instanceof Error ? error.message : 'Could not create Stripe Checkout.', code: 'STRIPE_CHECKOUT_ERROR' }, 502);
