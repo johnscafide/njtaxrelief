@@ -2,9 +2,24 @@
   'use strict';
 
   var targetId = 'property-side-menu';
+  var modernSecondaryPages = ['town-compare','fairness','pulse','scan','account','data-workbench','data-center'];
 
   function pageName() { return document.body.getAttribute('data-sidebar-page') || ''; }
   function isMobile() { return window.matchMedia && window.matchMedia('(max-width: 760px)').matches; }
+
+  function loadModernSecondaryShell() {
+    if (modernSecondaryPages.indexOf(pageName()) < 0) return false;
+    ['/property/css/app-shell-2027.css','/property/css/secondary-pages-2027.css'].forEach(function (href) {
+      if (document.querySelector('link[href="' + href + '"]')) return;
+      var link = document.createElement('link'); link.rel = 'stylesheet'; link.href = href; document.head.appendChild(link);
+    });
+    if (!document.querySelector('script[src="/property/js/app-shell-2027.js"]')) {
+      var script = document.createElement('script'); script.src = '/property/js/app-shell-2027.js'; script.defer = true; document.body.appendChild(script);
+    }
+    var target = document.getElementById(targetId); if (target) { target.innerHTML = ''; target.hidden = true; }
+    document.body.classList.remove('db-sidebar-expanded','wd-mobile-menu-open');
+    return true;
+  }
 
   function paintToggle() {
     var button = document.getElementById('db-sidebar-toggle'); if (!button) return;
@@ -27,7 +42,7 @@
   function openingOverlay() {
     var old = document.getElementById('wd-agent-opening'); if (old) old.remove();
     var node = document.createElement('div'); node.id = 'wd-agent-opening';
-    node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace...</span></div>';
+    node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace…</span></div>';
     node.style.cssText = 'position:fixed;inset:0;z-index:250000;background:rgba(238,243,246,.94);display:grid;place-items:center;font-family:"Source Sans 3",sans-serif;color:#102a4c;backdrop-filter:blur(8px)';
     var card=node.firstElementChild; card.style.cssText='display:grid;justify-items:center;gap:10px;background:#fff;border:1px solid #dce5ec;border-radius:20px;padding:34px 42px;box-shadow:0 24px 70px rgba(16,42,76,.18)';
     card.querySelector('i').style.cssText='font-size:24px;color:#088d8d'; card.querySelector('b').style.cssText='font:800 22px "Plus Jakarta Sans",sans-serif'; card.querySelector('span').style.cssText='color:#68788f';
@@ -125,8 +140,9 @@
   document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
-    loadFlood();
     loadWhyWatchdog();
+    if (loadModernSecondaryShell()) return Promise.resolve(true);
+    loadFlood();
     var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
     return fetch('/property/partials/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
   }
