@@ -58,11 +58,15 @@ verify_jwt = true
 [functions.workbench-derived]
 verify_jwt = false
 
+# These customer self-service functions validate the bearer token with
+# Supabase Auth inside the function. Gateway verification remains disabled so
+# missing/expired auth produces deterministic fail-closed 401 responses rather
+# than opaque gateway errors.
 [functions.submit-support-request]
-verify_jwt = true
+verify_jwt = false
 
 [functions.export-my-data]
-verify_jwt = true
+verify_jwt = false
 
 # Public status intentionally exposes only sanitized aggregate service state.
 # It never returns incident titles, routes, request IDs, metadata, or billing state.
