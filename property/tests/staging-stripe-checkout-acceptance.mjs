@@ -15,6 +15,7 @@ const evidenceDir = process.env.BILLING_EVIDENCE_DIR || 'billing-staging-evidenc
 function fail(message) { throw new Error(message); }
 function assert(condition, message) { if (!condition) fail(message); }
 function tag(value) { return crypto.createHash('sha256').update(String(value || '')).digest('hex').slice(0, 12); }
+function delay(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 assert(supabaseUrl.startsWith('https://'), 'Missing/invalid STAGING_SUPABASE_URL.');
 const stagingRef = new URL(supabaseUrl).hostname.split('.')[0];
@@ -101,29 +102,104 @@ assert(stripeSessionBefore.metadata?.billing_tier === 'agent', 'Checkout metadat
 assert(stripeSessionBefore.metadata?.billing_interval === 'monthly', 'Checkout metadata does not identify monthly cadence.');
 assert(Number(stripeSessionBefore.amount_total) === 5900, `Agent monthly test Checkout total expected 5900 cents; found ${stripeSessionBefore.amount_total}.`);
 
+fs.mkdirSync(evidenceDir, { recursive: true });
+
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage();
   await page.goto(checkout.payload.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  async function fill(selector, value, required = true) {
-    const locator = page.locator(selector).first();
-    const count = await locator.count();
-    if (!count) {
-      if (required) fail(`Stripe Checkout field not found: ${selector}`);
-      return;
+  async function checkoutDiagnostics() {
+    const frames = [];
+    for (const frame of page.frames()) {
+      const inputs = await frame.locator('input').evaluateAll(nodes => nodes.map(node => ({
+        type: node.getAttribute('type'),
+        name: node.getAttribute('name'),
+        autocomplete: node.getAttribute('autocomplete'),
+        placeholder: node.getAttribute('placeholder'),
+        aria_label: node.getAttribute('aria-label')
+      })).slice(0, 30)).catch(() => []);
+      frames.push({
+        url_host: (() => { try { return new URL(frame.url()).hostname; } catch { return ''; } })(),
+        input_count: inputs.length,
+        inputs
+      });
     }
+    return frames;
+  }
+
+  async function findVisible(selectors, label, required = true, timeoutMs = 30000) {
+    const started = Date.now();
+    while (Date.now() - started < timeoutMs) {
+      for (const frame of page.frames()) {
+        for (const selector of selectors) {
+          const locator = frame.locator(selector).first();
+          if (!await locator.count()) continue;
+          if (await locator.isVisible().catch(() => false)) return locator;
+        }
+      }
+      await delay(400);
+    }
+
+    if (!required) return null;
+    const diagnostics = await checkoutDiagnostics();
+    fs.writeFileSync(
+      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
+      JSON.stringify({ generated_at: new Date().toISOString(), label, frames: diagnostics }, null, 2)
+    );
+    fail(`Stripe Checkout field not found after ${timeoutMs}ms: ${label}`);
+  }
+
+  async function fill(selectors, label, value, required = true) {
+    const locator = await findVisible(selectors, label, required);
+    if (!locator) return;
     await locator.fill(value);
   }
 
-  await fill('input[name="cardNumber"], input[autocomplete="cc-number"]', '4242424242424242');
-  await fill('input[name="cardExpiry"], input[autocomplete="cc-exp"]', '1234');
-  await fill('input[name="cardCvc"], input[autocomplete="cc-csc"]', '123');
-  await fill('input[name="billingName"], input[autocomplete="cc-name"]', 'Watchdog Staging', false);
-  await fill('input[name="billingPostalCode"], input[autocomplete="postal-code"]', '08091', false);
+  await fill([
+    'input[name="cardNumber"]',
+    'input[name="number"]',
+    'input[autocomplete="cc-number"]',
+    'input[aria-label*="card number" i]',
+    'input[placeholder*="card number" i]'
+  ], 'card number', '4242424242424242');
 
-  const submit = page.locator('button[type="submit"]').first();
-  assert(await submit.count(), 'Stripe Checkout submit button not found.');
+  await fill([
+    'input[name="cardExpiry"]',
+    'input[name="expiry"]',
+    'input[autocomplete="cc-exp"]',
+    'input[aria-label*="expir" i]',
+    'input[placeholder*="MM / YY" i]',
+    'input[placeholder*="MM/YY" i]'
+  ], 'card expiry', '1234');
+
+  await fill([
+    'input[name="cardCvc"]',
+    'input[name="cvc"]',
+    'input[autocomplete="cc-csc"]',
+    'input[aria-label*="security code" i]',
+    'input[aria-label*="cvc" i]',
+    'input[placeholder*="CVC" i]'
+  ], 'card CVC', '123');
+
+  await fill([
+    'input[name="billingName"]',
+    'input[autocomplete="cc-name"]',
+    'input[aria-label*="name on card" i]'
+  ], 'billing name', 'Watchdog Staging', false, 5000);
+
+  await fill([
+    'input[name="billingPostalCode"]',
+    'input[autocomplete="postal-code"]',
+    'input[aria-label*="postal" i]',
+    'input[aria-label*="zip" i]'
+  ], 'billing postal code', '08091', false, 5000);
+
+  const submit = await findVisible([
+    'button[type="submit"]',
+    'button:has-text("Subscribe")',
+    'button:has-text("Pay")'
+  ], 'Checkout submit button', true, 30000);
   await submit.click();
   await page.waitForURL(url => url.toString().includes('/property/account') && url.toString().includes('checkout=success'), { timeout: 90000 });
 } finally {
@@ -136,7 +212,7 @@ async function pollEntitlement(predicate, label, timeoutMs = 90000) {
   while (Date.now() - started < timeoutMs) {
     last = await entitlement();
     if (predicate(last)) return { value: last, elapsed_ms: Date.now() - started };
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    await delay(2000);
   }
   fail(`${label} did not arrive before timeout. Last entitlement: ${JSON.stringify(last)}`);
 }
@@ -159,7 +235,6 @@ const canceled = await pollEntitlement(
   'Signed Stripe cancellation downgrade'
 );
 
-fs.mkdirSync(evidenceDir, { recursive: true });
 const evidence = {
   generated_at: new Date().toISOString(),
   environment: 'staging',
