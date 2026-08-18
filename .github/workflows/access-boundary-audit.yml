@@ -28,6 +28,8 @@ jobs:
         run: node property/scripts/audit_access_boundaries.mjs
       - name: Verify full commercial entitlement ladder
         run: node property/tests/entitlement-tier-contract.mjs
+      - name: Verify Intelligence production promotion manifest
+        run: node property/tests/intelligence-production-manifest-contract.mjs
       - name: Verify governed score-observation readers
         run: node property/tests/score-observations-schema-contract.mjs
       - name: Verify Property Home score history contract
