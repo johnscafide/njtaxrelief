@@ -26,7 +26,10 @@ const surfaces = [
   { key: 'home', path: '/property/home/' },
   { key: 'agent-control', path: '/property/agent-desk/' },
   { key: 'data-workbench', path: '/property/data-workbench/' },
-  { key: 'calibration-admin', path: '/property/intelligence/calibration/' }
+  { key: 'calibration-admin', path: '/property/intelligence/calibration/' },
+  { key: 'account', path: '/property/account/' },
+  { key: 'support', path: '/property/support/' },
+  { key: 'status', path: '/property/status/' }
 ];
 
 const viewports = [
