@@ -57,7 +57,7 @@ const token = signIn.body.access_token;
 
 const entitlement = await rpc(token, 'get_my_entitlement');
 const row = entitlement.body?.[0];
-if (!entitlement.response.ok || row?.plan_tier !== 'pro_plus' || row?.subscription_status !== 'active' || row?.account_role !== 'developer') {
+if (!entitlement.response.ok || row?.plan_tier !== 'developer' || row?.subscription_status !== 'active' || row?.account_role !== 'developer') {
   throw new Error(`Developer entitlement mismatch: ${JSON.stringify(entitlement.body)}`);
 }
 
@@ -92,8 +92,10 @@ if (!cleanup.response.ok) {
 }
 
 evidence.role_results.developer = {
-  entitlement: 'pro_plus',
+  entitlement: 'developer',
   subscription_status: 'active',
+  account_role: 'developer',
+  paid_plan_bypass: 'verified_via_pro_plus_rls_write',
   developer: true,
   pro_plus_write: 'allowed',
   cleanup: 'passed'
@@ -102,5 +104,5 @@ evidence.passed = true;
 evidence.completed_at = new Date().toISOString();
 
 await writeFile(evidencePath, JSON.stringify(evidence, null, 2) + '\n', 'utf8');
-console.log('Developer release gate passed: Developer identity, entitlement bypass and Pro+ RLS boundary verified.');
+console.log('Developer release gate passed: Developer identity, paid-plan bypass and Pro+ RLS boundary verified.');
 console.log(`Sanitized evidence written to ${evidencePath}.`);
