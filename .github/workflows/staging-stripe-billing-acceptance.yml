@@ -21,7 +21,7 @@ jobs:
     name: stripe-staging-test-mode
     if: ${{ github.event.inputs.confirmation == 'STRIPE-STAGING-ONLY' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
     environment: staging
     env:
       PRODUCTION_SUPABASE_REF: uvkvaxljhhngydvlrzom
@@ -128,28 +128,8 @@ jobs:
           supabase functions deploy create-portal-session --project-ref "$STAGING_SUPABASE_REF"
           supabase functions deploy stripe-webhook --project-ref "$STAGING_SUPABASE_REF" --no-verify-jwt
 
-      - name: Install Playwright
-        run: |
-          npm install --no-save playwright@1.55.0
-          npx playwright install --with-deps chromium
-
-      - name: Start local success/cancel target
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/watchdog-billing-server.log 2>&1 &
-          echo $! > /tmp/watchdog-billing-server.pid
-          for i in {1..20}; do
-            if curl --fail --silent http://127.0.0.1:4173/property/account/ >/dev/null; then
-              exit 0
-            fi
-            sleep 1
-          done
-          cat /tmp/watchdog-billing-server.log || true
-          exit 1
-
-      - name: Run test-mode Checkout and signed-webhook preflight
-        run: node property/tests/staging-stripe-checkout-acceptance.mjs
+      - name: Run deterministic test-mode Checkout session and signed-webhook lifecycle
+        run: node property/tests/staging-stripe-lifecycle-acceptance.mjs
 
       - name: Upload sanitized staging billing evidence
         if: always()
@@ -169,4 +149,3 @@ jobs:
             supabase secrets set --project-ref "$STAGING_SUPABASE_REF" BILLING_CHECKOUT_MODE="closed"
           fi
           rm -f "$STRIPE_PROVISION_OUTPUT"
-          rm -f /tmp/watchdog-billing-server.pid /tmp/watchdog-billing-server.log
