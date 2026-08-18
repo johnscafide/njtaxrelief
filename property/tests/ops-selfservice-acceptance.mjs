@@ -45,7 +45,11 @@ checks.push({ name: 'public platform status', passed: status.response.ok && ['op
 const exportResult = await callFunction('export-my-data', { token, body: {} });
 checks.push({ name: 'authenticated data export', passed: exportResult.response.ok && exportResult.data?.account?.email === email && exportResult.data?.data && Object.prototype.hasOwnProperty.call(exportResult.data.data, 'profile'), status: exportResult.response.status });
 
-// Exercise authentication and validation without leaving a synthetic support row behind.
+// Customer self-service functions validate the bearer token with Supabase Auth
+// inside the function. This test requires deterministic fail-closed 401s for
+// anonymous requests rather than relying on gateway-specific error behavior.
+// Exercise support authentication + payload validation without leaving a
+// synthetic support row behind in staging.
 const supportValidation = await callFunction('submit-support-request', {
   token,
   body: { category: 'technical', priority: 'normal', subject: 'x', message: 'too short' }
