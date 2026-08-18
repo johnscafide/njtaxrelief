@@ -13,8 +13,9 @@
 
 | ID | Control area | Framework mapping | Status | Current evidence | Primary gap / next action |
 |---|---|---|---|---|---|
-| WCR-GOV-001 | Compliance governance | SOC 2, NIST CSF Govern, ISO 27001 | Implemented | `property/docs/compliance/README.md`, `property/data/compliance-log.json` | Continue daily evidence collection and assign owners as team grows. |
+| WCR-GOV-001 | Compliance governance | SOC 2, NIST CSF Govern, ISO 27001 | Implemented | `property/docs/compliance/README.md`, `api/_compliance-data.js` | Continue twice-daily evidence collection and assign owners as team grows. |
 | WCR-GOV-002 | Certification claim control | SOC 2, ISO 27001, consumer protection | Implemented | Compliance charter and automated compliance contracts | Extend claim review to marketing/release copy if certification language is ever introduced. |
+| WCR-GOV-003 | Internal compliance evidence access | SOC 2 Security/Confidentiality, NIST Protect, OWASP ASVS, ISO 27001 | Implemented | `api/compliance-log.js`, `api/_compliance-data.js`, `property/js/compliance.js`, `property/tests/compliance-contracts.mjs` | Keep operational evidence out of the static `/property/` webroot and reassess repository visibility before storing richer external audit evidence. |
 | WCR-SDLC-001 | Authorization boundary testing | SOC 2 Security, OWASP ASVS Access Control, NIST Protect | Implemented | `.github/workflows/access-boundary-audit.yml`, `property/scripts/audit_access_boundaries.mjs` | Add dynamic authenticated-route verification where static assertions are insufficient. |
 | WCR-SDLC-002 | Application security contracts | SOC 2 Security, OWASP ASVS, NIST Protect | Implemented | `property/tests/security-contracts.mjs` | Expand coverage for dependency, secret and code scanning and maintain ASVS requirement-level mapping. |
 | WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material connector and infrastructure component. |
