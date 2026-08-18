@@ -1,0 +1,30 @@
+name: Developer release gate
+
+on:
+  workflow_dispatch:
+
+jobs:
+  developer-boundary:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Developer authorization boundary
+        env:
+          STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
+          STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+          WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
+          WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
+          RELEASE_GATE_EVIDENCE_PATH: developer-release-gate-evidence.json
+          RELEASE_VERSION: ${{ github.sha }}
+        run: node property/tests/developer-release-gate.mjs
+      - name: Upload sanitized Developer evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: developer-release-gate-evidence
+          path: developer-release-gate-evidence.json
+          if-no-files-found: error
+          retention-days: 30

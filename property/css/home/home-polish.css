@@ -1,0 +1,311 @@
+/* Property Home polish pass: stable full-width drill-downs and corrected Agent Intel. */
+
+/* Any legacy/top-level analysis module that does not have an explicit grid rule
+   should never collapse into a single 12-column track. */
+.hm-wrap > :not(.hm-figs):not(.ai):not(.sec):not(.sec2):not(.hm-secbar):not(.hm-acts):not(.hm-lede):not(.hm-commercial-note) {
+  grid-column: 1 / -1 !important;
+  min-width: 0 !important;
+}
+
+/* Core score cards remain compact, but live in a proper full-width row. */
+.hm-wrap > .sc-cards {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+.hm-wrap > .sc-cards .sc-c {
+  min-width: 0 !important;
+  min-height: 166px !important;
+  border-radius: 18px !important;
+  padding: 18px 20px !important;
+  box-shadow: var(--hm-shadow) !important;
+}
+.hm-wrap > .sc-cards .sc-main {
+  width: 100% !important;
+  text-align: left !important;
+}
+
+/* Agent Intel: remove the inherited pill radius that created the giant circle. */
+.hm-wrap > .ai {
+  grid-column: 1 / -1 !important;
+  display: grid !important;
+  grid-template-columns: 230px minmax(0, 1fr) !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 1px solid var(--hm-line) !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  overflow: hidden !important;
+  box-shadow: var(--hm-shadow) !important;
+}
+.hm-wrap > .ai::before,
+.hm-wrap > .ai::after,
+.hm-wrap > .ai .ai-h::before,
+.hm-wrap > .ai .ai-h::after {
+  content: none !important;
+  display: none !important;
+}
+.hm-wrap > .ai .ai-h {
+  position: static !important;
+  grid-column: 1 !important;
+  grid-row: 1 / span 2 !important;
+  min-height: 100% !important;
+  margin: 0 !important;
+  padding: 26px 22px !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: linear-gradient(155deg, #153661 0%, #1d4d82 100%) !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 13px !important;
+  color: #fff !important;
+}
+.hm-wrap > .ai .ai-h img {
+  width: 50px !important;
+  height: 50px !important;
+  flex: 0 0 50px !important;
+  border: 2px solid rgba(255,255,255,.92) !important;
+  border-radius: 50% !important;
+  box-shadow: 0 6px 18px rgba(0,0,0,.16) !important;
+}
+.hm-wrap > .ai .ai-h b {
+  display: block !important;
+  margin-top: 2px !important;
+  font: 800 18px/1.2 "Plus Jakarta Sans", sans-serif !important;
+  color: #fff !important;
+}
+.hm-wrap > .ai .ai-h span {
+  display: block !important;
+  margin-top: 4px !important;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+  color: #c5d5eb !important;
+}
+.hm-wrap > .ai > .hm-lede {
+  grid-column: 2 !important;
+  margin: 0 !important;
+  padding: 26px 30px 14px !important;
+  max-width: none !important;
+  font-size: 17px !important;
+  line-height: 1.65 !important;
+  color: #30435e !important;
+}
+.hm-wrap > .ai > .ai-pts {
+  grid-column: 2 !important;
+  margin: 0 30px 24px !important;
+  padding: 0 !important;
+  border-top: 1px solid var(--hm-line) !important;
+}
+.hm-wrap > .ai > .ai-pts li {
+  padding: 12px 0 !important;
+  font-size: 14.5px !important;
+  line-height: 1.55 !important;
+}
+
+/* Core fact cards: give captions enough room and keep text from collapsing. */
+.hm-figs dd em {
+  display: block !important;
+  margin-top: 6px !important;
+  line-height: 1.35 !important;
+  white-space: normal !important;
+  letter-spacing: 0 !important;
+}
+
+/* Explore your property goes back to a clean drill-down list rather than a card wall. */
+.hm-wrap > .hm-secbar {
+  grid-column: 1 / -1 !important;
+  margin: 14px 0 0 !important;
+  padding: 20px 4px 10px !important;
+  border-bottom: 1px solid #cfd8e5 !important;
+  align-items: flex-end !important;
+}
+.hm-secbar h2 {
+  margin: 0 0 5px !important;
+  font: 800 24px/1.15 "Plus Jakarta Sans", sans-serif !important;
+  letter-spacing: -.035em !important;
+  color: var(--hm-ink) !important;
+  text-transform: none !important;
+}
+.hm-secbar p {
+  margin: 0 !important;
+  font-size: 14px !important;
+  color: var(--hm-muted) !important;
+}
+#hm-all {
+  height: 40px !important;
+  padding: 0 13px !important;
+  border: 1px solid var(--hm-line) !important;
+  border-radius: 11px !important;
+  background: #fff !important;
+  color: #4f6078 !important;
+  font-weight: 800 !important;
+}
+
+.hm-wrap > .sec2,
+#sec-fair,#sec-kept,#sec-farmland,#sec-reval,#sec-town,#sec-file,#sec-owed,#sec-buy,#sec-diligence,#sec-compare,#sec-trend,#sec-history {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--hm-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+.hm-wrap > .sec2:hover,
+.hm-wrap > .sec2.open {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: var(--hm-line) !important;
+}
+.sec2-h,
+.sec2.open > .sec2-h {
+  width: 100% !important;
+  min-height: 0 !important;
+  padding: 18px 4px !important;
+  border: 0 !important;
+  background: transparent !important;
+  display: grid !important;
+  grid-template-columns: 42px minmax(0,1fr) 18px !important;
+  gap: 14px !important;
+  align-items: center !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+.sec2-h:hover .sec2-t { color: var(--hm-blue) !important; }
+.sec2-icon-tile {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  background: #eef4ff !important;
+  color: var(--hm-blue) !important;
+  display: grid !important;
+  place-items: center !important;
+  font-size: 16px !important;
+}
+.sec2-copy {
+  min-width: 0 !important;
+  display: grid !important;
+  grid-template-columns: minmax(210px, 300px) minmax(0,1fr) !important;
+  grid-template-rows: auto auto !important;
+  column-gap: 28px !important;
+  align-items: center !important;
+}
+.sec2-kicker {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  margin: 0 0 3px !important;
+  font: 800 9.5px/1.2 "Plus Jakarta Sans", sans-serif !important;
+  letter-spacing: .10em !important;
+  text-transform: uppercase !important;
+  color: #91a0b3 !important;
+}
+.sec2-t {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  min-width: 0 !important;
+  font: 800 16px/1.25 "Plus Jakarta Sans", sans-serif !important;
+  letter-spacing: -.02em !important;
+  color: var(--hm-ink) !important;
+}
+.sec2-s {
+  grid-column: 2 !important;
+  grid-row: 1 / span 2 !important;
+  min-width: 0 !important;
+  font-size: 13.5px !important;
+  line-height: 1.45 !important;
+  color: #74849b !important;
+  text-align: left !important;
+}
+.sec2-c {
+  justify-self: end !important;
+  color: #93a1b4 !important;
+  font-size: 11px !important;
+}
+.sec2-b {
+  display: none !important;
+  padding: 2px 4px 26px 60px !important;
+}
+.sec2.open .sec2-b { display: block !important; }
+.sec2-pro {
+  max-width: none !important;
+  margin-bottom: 18px !important;
+  padding: 13px 15px !important;
+  border-left: 3px solid #8da0b7 !important;
+  border-radius: 0 9px 9px 0 !important;
+  background: #f7f9fc !important;
+}
+
+/* Profile popover: preserve notifications/menu exactly as-is, but make profile clean and readable. */
+#hm27-profile-pop {
+  width: min(390px, calc(100vw - 28px)) !important;
+  padding: 10px !important;
+  background: #fff !important;
+  border: 1px solid var(--hm-line) !important;
+  border-radius: 20px !important;
+  color: var(--hm-ink) !important;
+}
+#hm27-profile-pop header {
+  background: #fff !important;
+  color: var(--hm-ink) !important;
+}
+#hm27-profile-pop nav {
+  display: grid !important;
+  gap: 4px !important;
+  padding: 8px 0 2px !important;
+  background: #fff !important;
+}
+#hm27-profile-pop nav a,
+#hm27-profile-pop nav .hm27-menu-row {
+  min-height: 60px !important;
+  padding: 10px 11px !important;
+  border: 0 !important;
+  border-radius: 13px !important;
+  background: #fff !important;
+  color: var(--hm-ink) !important;
+}
+#hm27-profile-pop nav a:hover,
+#hm27-profile-pop nav .hm27-menu-row:hover {
+  background: #f4f7fb !important;
+}
+#hm27-profile-pop nav a > i,
+#hm27-profile-pop nav .hm27-menu-row > i {
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 11px !important;
+  background: #edf3ff !important;
+  color: var(--hm-blue) !important;
+}
+#hm27-profile-pop nav b { color: var(--hm-ink) !important; }
+#hm27-profile-pop nav small { color: var(--hm-muted) !important; }
+
+@media (max-width: 1180px) {
+  .hm-wrap > .sc-cards { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .sec2-copy { grid-template-columns: minmax(190px,260px) minmax(0,1fr) !important; column-gap: 20px !important; }
+}
+@media (max-width: 820px) {
+  .hm-wrap > .ai { grid-template-columns: 1fr !important; }
+  .hm-wrap > .ai .ai-h { grid-column: 1 !important; grid-row: auto !important; min-height: auto !important; }
+  .hm-wrap > .ai > .hm-lede,
+  .hm-wrap > .ai > .ai-pts { grid-column: 1 !important; }
+  .hm-wrap > .ai > .hm-lede { padding: 20px 18px 10px !important; }
+  .hm-wrap > .ai > .ai-pts { margin: 0 18px 18px !important; }
+  .sec2-copy { grid-template-columns: 1fr !important; grid-template-rows: auto auto auto !important; }
+  .sec2-kicker { grid-column: 1 !important; grid-row: 1 !important; }
+  .sec2-t { grid-column: 1 !important; grid-row: 2 !important; }
+  .sec2-s { grid-column: 1 !important; grid-row: 3 !important; margin-top: 5px !important; }
+  .sec2-b { padding-left: 4px !important; }
+}
+@media (max-width: 560px) {
+  .hm-wrap > .sc-cards { grid-template-columns: 1fr !important; }
+  .hm-secbar { align-items: flex-start !important; flex-direction: column !important; }
+}
