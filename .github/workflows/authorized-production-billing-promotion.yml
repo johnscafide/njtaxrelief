@@ -65,3 +65,5 @@ jobs:
           printf '%s' "$RESPONSE" | jq -e '.plans.pro_plus.monthly.amount_cents == 39900' >/dev/null
           printf '%s' "$RESPONSE" | jq -e '.plans.pro_plus.yearly.amount_cents == 399000' >/dev/null
           echo "Production billing catalog exact-price contract passed."
+
+# Authorized by owner in ChatGPT on 2026-08-18; this second commit triggers the registered one-shot workflow.
