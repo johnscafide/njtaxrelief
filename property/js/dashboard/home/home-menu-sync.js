@@ -10,6 +10,23 @@
   var db=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
   var profile={},entitlement=null;
 
+  function loadScript(src){
+    if(document.querySelector('script[src="'+src+'"]')) return Promise.resolve();
+    return new Promise(function(resolve,reject){
+      var s=document.createElement('script');s.src=src;s.async=false;s.onload=resolve;s.onerror=function(){reject(new Error('Could not load '+src));};document.head.appendChild(s);
+    });
+  }
+  function loadIntelligenceRuntime(){
+    var assets=[
+      '/property/js/watchdog-intelligence-context.js',
+      '/property/js/watchdog-semantic-context.js',
+      '/property/js/watchdog-page-context.js',
+      '/property/js/watchdog-home-semantic-bridge.js',
+      '/property/js/watchdog-context-feedback.js'
+    ];
+    return assets.reduce(function(p,src){return p.then(function(){return loadScript(src);});},Promise.resolve()).catch(function(error){console.warn('Watchdog Home Intelligence runtime unavailable:',error&&error.message||error);});
+  }
+
   function plan(v){
     v=String(v||'').toLowerCase().replace(/\+/g,'_plus').replace(/[^a-z_]/g,'');
     if(v==='free') v='standard';
@@ -51,6 +68,7 @@
   }
 
   function boot(){
+    loadIntelligenceRuntime();
     render();
     db.auth.getSession().then(function(res){
       var user=res&&res.data&&res.data.session&&res.data.session.user;
