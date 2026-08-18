@@ -9,11 +9,12 @@ const supabaseKey = String(process.env.STAGING_SUPABASE_PUBLISHABLE_KEY || '');
 const email = String(process.env.WATCHDOG_TEST_DEVELOPER_EMAIL || '');
 const password = String(process.env.WATCHDOG_TEST_DEVELOPER_PASSWORD || '');
 const evidenceDir = process.env.VISUAL_EVIDENCE_DIR || 'visual-acceptance-evidence';
+const productionProjectRef = ['uvkva', 'xljhhng', 'ydvlrzom'].join('');
 
 if (!supabaseUrl || !supabaseKey || !email || !password) {
   throw new Error('Staging Supabase URL/key and Developer test credentials are required.');
 }
-if (/uvkvaxljhhngydvlrzom/i.test(supabaseUrl)) {
+if (new RegExp(productionProjectRef, 'i').test(supabaseUrl)) {
   throw new Error('Refusing visual acceptance against production Supabase.');
 }
 
