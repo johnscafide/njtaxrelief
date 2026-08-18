@@ -141,6 +141,12 @@ jobs:
           cat /tmp/watchdog-visual-server.log || true
           exit 1
 
+      - name: Verify release-candidate property page has no fatal script error
+        env:
+          PUBLIC_PROPERTY_URL: http://127.0.0.1:4173/property/
+          PUBLIC_PROPERTY_LABEL: release-candidate
+        run: node property/tests/public-property-production-smoke.mjs
+
       - name: Run authenticated desktop and mobile acceptance
         run: node property/tests/hosted-visual-acceptance.mjs
 
