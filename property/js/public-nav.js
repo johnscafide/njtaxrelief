@@ -1,11 +1,15 @@
 (function(){
   'use strict';
-  var previewHost=location.hostname==='localhost'||location.hostname==='127.0.0.1'||/\.vercel\.app$/i.test(location.hostname);
-  if(previewHost&&window.supabase&&typeof window.supabase.createClient==='function'&&!window.supabase.__watchdogPreviewWrapped){
-    var originalCreateClient=window.supabase.createClient.bind(window.supabase),stagingUrl='https://pxossnwmrygxlpxtstnl.supabase.co',stagingKey='sb_publishable_2knfdj4MRsPEtQpPbQ54ew_S5KngOcl',stagingStorage='sb-pxossnwmrygxlpxtstnl-auth-token';
-    window.supabase.createClient=function(url,key,options){var out=Object.assign({},options||{});out.auth=Object.assign({},(options&&options.auth)||{},{storageKey:stagingStorage});if(String(url||'').indexOf('uvkvaxljhhngydvlrzom')!==-1)return originalCreateClient(stagingUrl,stagingKey,out);return originalCreateClient(url,key,out);};
-    try{Object.defineProperty(window.supabase,'__watchdogPreviewWrapped',{value:true});}catch(_error){}
+  if(!window.NJPTRSupabaseRuntime&&document.readyState==='loading'){
+    document.write('<script src="/property/js/supabase-runtime.js"><\/script>');
   }
+  window.addEventListener('error',function(e){
+    var resourceFailure=e&&e.target&&e.target!==window;
+    var opaqueCrossOrigin=e&&e.message==='Script error.'&&(!e.filename||Number(e.lineno||0)===0);
+    if(!resourceFailure&&!opaqueCrossOrigin)return;
+    if(window.console&&console.warn)console.warn('[watchdog] Non-fatal external/resource error suppressed from the customer fatal banner.',e&&e.message||e&&e.target&&e.target.src||e&&e.target&&e.target.href||'resource error');
+    if(e&&typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
+  },true);
   var user=null, lastFocus=null;
   var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
   function q(id){return document.getElementById(id);}
