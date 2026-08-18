@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compliance Readiness | Watchdog</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Developer-only Watchdog compliance readiness, control evidence, decisions and daily improvement log.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/css/compliance.css">
+</head>
+<body data-sidebar-page="compliance" data-access-require="developer">
+<main>
+  <div class="db-shell">
+    <div id="property-side-menu"></div>
+    <div class="db-workspace">
+      <header class="top">
+        <div class="top-in">
+          <div class="who">
+            <div class="db-noav"><i class="fas fa-shield-halved"></i></div>
+            <div><span class="top-eyebrow">DEVELOPER · TRUST &amp; COMPLIANCE</span><h1>Compliance Readiness</h1><span>Security, privacy, accessibility and assurance evidence for Watchdog.</span></div>
+          </div>
+        </div>
+      </header>
+
+      <section class="cr-shell" id="cr-app" hidden>
+        <div class="cr-hero">
+          <div>
+            <span class="cr-kicker">READINESS, NOT BADGES</span>
+            <h2>Build the evidence before the audit.</h2>
+            <p>Watchdog is engineering toward recognized security and compliance frameworks while the platform evolves. This center records what changed, why it changed, the evidence that proves it, and what remains.</p>
+          </div>
+          <div class="cr-assurance"><i class="fas fa-circle-info"></i><div><b>No independent certification is claimed.</b><span id="cr-claim">Loading assurance status…</span></div></div>
+        </div>
+
+        <div class="cr-stats" id="cr-stats" aria-label="Compliance readiness summary"></div>
+
+        <section class="cr-panel">
+          <div class="cr-panel-head"><div><span class="cr-eyebrow">FRAMEWORK COVERAGE</span><h3>Readiness map</h3></div><p>Internal tracking only. A mapped control is not the same as third-party certification.</p></div>
+          <div class="cr-frameworks" id="cr-frameworks"></div>
+        </section>
+
+        <section class="cr-panel">
+          <div class="cr-panel-head"><div><span class="cr-eyebrow">DECISION &amp; CHANGE LOG</span><h3>Evidence trail</h3></div><div class="cr-filters"><input id="cr-search" type="search" placeholder="Search decisions, evidence or frameworks" aria-label="Search compliance log"><select id="cr-status" aria-label="Filter by status"><option value="">All statuses</option><option value="implemented">Implemented</option><option value="accepted-plan">Accepted plan</option><option value="partial">Partial</option><option value="planned">Planned</option></select></div></div>
+          <div class="cr-log" id="cr-log"></div>
+          <div class="cr-empty" id="cr-empty" hidden>No compliance entries match this filter.</div>
+        </section>
+
+        <section class="cr-panel cr-principles">
+          <div class="cr-panel-head"><div><span class="cr-eyebrow">OPERATING RULES</span><h3>How this program works</h3></div></div>
+          <div class="cr-rule-grid">
+            <article><i class="fas fa-file-circle-check"></i><b>Evidence required</b><p>Every material compliance improvement should point to repeatable evidence, not just a written promise.</p></article>
+            <article><i class="fas fa-plug-circle-check"></i><b>Connectors are reviewed</b><p>New material integrations are security, privacy, credential, retention and vendor-risk changes.</p></article>
+            <article><i class="fas fa-user-shield"></i><b>Public-safe records</b><p>Logs never contain customer data, secrets, tokens, private keys or unnecessarily exploitable detail.</p></article>
+            <article><i class="fas fa-arrows-rotate"></i><b>Continuous improvement</b><p>The daily compliance task must advance a real control, assessment, test, evidence item or remediation.</p></article>
+          </div>
+        </section>
+      </section>
+
+      <section class="cr-denied" id="cr-denied">
+        <i class="fas fa-lock"></i><h2>Developer access only</h2><p>This governance surface is not part of customer accounts.</p><a href="/property/dashboard">Return to Dashboard</a>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script>
+<script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/compliance.js"></script>
+</body>
+</html>
