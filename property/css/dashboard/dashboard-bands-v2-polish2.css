@@ -1,0 +1,168 @@
+/* dashboard-bands-v2-polish2.css
+   Round two. Load LAST, after dashboard-bands-v2-polish.css.
+*/
+
+/* --- Greentree ad, matching the .hd-ad unit on /property/ --------------- */
+
+body.wdv2-mounted .wd4-card.wd5-sponsor.wdv2-gt,
+body.wdv2-mounted .wdv2-primary-rail .wd5-sponsor.partner-desk.wdv2-gt{
+  background: linear-gradient(150deg, #14361f, #1e6b3a 70%) !important;
+  border: 0 !important;
+  border-top: 3px solid #b8972a !important;
+  border-radius: 12px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  color: #fff !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+.wdv2-gt-link{
+  display: block;
+  position: relative;
+  padding: 18px 18px 16px;
+  text-decoration: none;
+  color: #fff;
+  transition: filter .16s ease;
+}
+.wdv2-gt-link:hover{ filter: brightness(1.07); }
+.wdv2-gt-tag{
+  position: absolute; top: 10px; right: 12px;
+  font-size: 9px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .08em; color: rgba(255,255,255,.5);
+}
+.wdv2-gt-link > img{
+  width: 54px; height: 54px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 2px solid #b8972a;
+  display: block; margin-bottom: 12px;
+}
+.wdv2-gt-body b{
+  display: block; font-size: 14.5px; font-weight: 500;
+  color: #fff; line-height: 1.3; margin-bottom: 6px;
+}
+.wdv2-gt-body span{
+  display: block; font-size: 12px; color: #bfe0cb; line-height: 1.5;
+}
+.wdv2-gt-body em{
+  display: inline-block; font-style: normal;
+  font-size: 12.5px; font-weight: 700; color: #f0d87a; margin-top: 10px;
+}
+.wdv2-gt-body em i{ font-size: 10px; margin-left: 4px; }
+.wdv2-gt-body small{
+  display: block; margin-top: 12px;
+  font-size: 8.5px; line-height: 1.45; color: rgba(255,255,255,.45);
+}
+
+/* Dark mode: the unit is already dark, leave it alone */
+html[data-wdv2-theme="dark"] body.wdv2-mounted .wd4-card.wd5-sponsor.wdv2-gt{
+  background: linear-gradient(150deg, #102b18, #1a5c32 70%) !important;
+}
+
+/* --- Free-tier bar: fixed, not sticky ---------------------------------- */
+
+.wdv2-sponsor-bar.wdv2-sponsor-bar-fixed{
+  position: fixed !important;
+  left: 0; right: 0; bottom: 0;
+  z-index: 900;
+  height: auto !important;
+  min-height: 72px;
+  padding: 0 !important;
+  border-top: 3px solid #b8972a !important;
+  background: linear-gradient(150deg, #14361f, #1e6b3a 70%) !important;
+  box-shadow: 0 -8px 24px rgba(14,32,20,.18) !important;
+  display: block !important;
+}
+.wdv2-sponsor-bar-fixed .wd5-sponsor{
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+/* Horizontal layout for the bar version of the green unit */
+.wdv2-sponsor-bar-fixed .wdv2-gt-link{
+  display: grid !important;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px !important;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+.wdv2-sponsor-bar-fixed .wdv2-gt-link > img{
+  width: 48px !important; height: 48px !important; margin: 0 !important;
+}
+.wdv2-sponsor-bar-fixed .wdv2-gt-body{ min-width: 0; }
+.wdv2-sponsor-bar-fixed .wdv2-gt-body b{
+  font-size: 13px !important; margin-bottom: 2px !important;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.wdv2-sponsor-bar-fixed .wdv2-gt-body span{
+  font-size: 11px !important;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.wdv2-sponsor-bar-fixed .wdv2-gt-body small{ display: none !important; }
+.wdv2-sponsor-bar-fixed .wdv2-gt-body em{
+  margin: 0 !important;
+  position: absolute; right: 24px; top: 50%; transform: translateY(-50%);
+}
+.wdv2-sponsor-bar-fixed .wdv2-gt-tag{ top: 4px; right: 10px; font-size: 8px; }
+
+body.wdv2-has-sponsor-bar .wd4-canvas,
+body.wdv2-has-sponsor-bar.wdv2-mounted .wd4-canvas{ padding-bottom: 104px !important; }
+
+@media (max-width: 768px){
+  .wdv2-sponsor-bar-fixed .wdv2-gt-link{ grid-template-columns: 40px minmax(0,1fr); padding: 8px 12px !important; }
+  .wdv2-sponsor-bar-fixed .wdv2-gt-body span{ display: none !important; }
+  .wdv2-sponsor-bar-fixed .wdv2-gt-body em{ position: static; transform: none; display: block; margin-top: 3px !important; }
+  body.wdv2-has-sponsor-bar .wd4-canvas{ padding-bottom: 96px !important; }
+}
+
+/* --- Duplicate activity badge ------------------------------------------ */
+
+.wdv2-dupe-count{
+  display: inline-flex; align-items: center;
+  margin-left: 7px; padding: 1px 6px;
+  border-radius: 999px; background: #eef2f8;
+  color: #64748b; font-size: 9px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Safe mode: bands failed to rebuild, keep the legacy grid readable -- */
+
+body.wdv2-safe-mode #wd4-grid{
+  display: grid !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  grid-auto-rows: auto !important;
+  gap: 16px !important;
+  align-items: start !important;
+}
+body.wdv2-safe-mode #wd4-grid > .wd4-card[data-card-id]{
+  grid-row: auto !important;
+  grid-column: span 4 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  align-self: start !important;
+  position: relative !important;
+}
+body.wdv2-safe-mode #wd4-grid > [data-card-id="map"]{ grid-column: span 8 !important; min-height: 320px !important; }
+body.wdv2-safe-mode #wd4-grid > [data-card-id="activity"]{ grid-column: span 4 !important; }
+body.wdv2-safe-mode #wd4-grid > [data-card-id="properties"]{ grid-column: 1 / -1 !important; }
+body.wdv2-safe-mode #wd4-grid > .wd4-kpi{ grid-column: span 2 !important; }
+@media (max-width: 1280px){
+  body.wdv2-safe-mode #wd4-grid > .wd4-card[data-card-id]{ grid-column: span 6 !important; }
+}
+@media (max-width: 768px){
+  body.wdv2-safe-mode #wd4-grid > .wd4-card[data-card-id]{ grid-column: 1 / -1 !important; }
+}
+
+/* --- Single-property edge cases ---------------------------------------- */
+
+/* A donut with one slice reads better as a plain figure, but the ring is
+   fine — just stop the legend from stretching across dead space. */
+body.wdv2-mounted .wdv2-donut-legend:only-child{ max-width: 320px; }
+
+/* Municipality card with one row should not leave 200px of blank */
+body.wdv2-mounted [data-card-id="municipality"] .wd4-muni-table tbody:empty:after,
+body.wdv2-mounted [data-card-id="municipality"] .wd4-muni-table tbody tr:only-child ~ .wdv2-none{
+  content: none;
+}
