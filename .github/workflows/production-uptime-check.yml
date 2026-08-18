@@ -1,6 +1,11 @@
 name: Production uptime check
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/production-uptime-check.yml'
   workflow_dispatch:
   schedule:
     - cron: '*/15 * * * *'
