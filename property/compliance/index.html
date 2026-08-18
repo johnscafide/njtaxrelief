@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Compliance Readiness | Watchdog</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#f5f7fb">
+<meta name="description" content="Developer-only Watchdog compliance readiness and assurance evidence.">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/css/compliance.css">
+</head>
+<body class="cr-page" data-sidebar-page="compliance" data-access-require="developer">
+<main>
+  <div class="db-shell cr-db-shell">
+    <div id="property-side-menu"></div>
+    <div class="db-workspace cr-workspace">
+      <header class="cr-topbar">
+        <div class="cr-top-left">
+          <a class="cr-brand" href="/property/dashboard" aria-label="Watchdog dashboard">
+            <span class="cr-brand-mark"><i class="fas fa-dog"></i></span>
+            <span class="cr-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span>
+          </a>
+          <span class="cr-top-divider" aria-hidden="true"></span>
+          <div class="cr-top-title"><b>Compliance Readiness</b><span>Trust, security &amp; assurance operations</span></div>
+        </div>
+        <div class="cr-top-right">
+          <span class="cr-private"><i class="fas fa-lock"></i> Developer protected</span>
+          <a class="cr-dashboard-link" href="/property/dashboard"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        </div>
+      </header>
+
+      <section class="cr-welcome" id="cr-app" hidden>
+        <div class="cr-welcome-copy">
+          <span class="cr-kicker">DEVELOPER · TRUST &amp; COMPLIANCE</span>
+          <h1>Compliance Readiness <span>Control evidence, decisions and continuous improvement.</span></h1>
+        </div>
+        <div class="cr-welcome-actions"><span class="cr-state"><i class="fas fa-shield-halved"></i> Readiness in progress</span></div>
+
+        <div class="cr-canvas">
+          <section class="cr-hero">
+            <div class="cr-card cr-hero-main">
+              <span class="cr-eyebrow">READINESS, NOT BADGES</span>
+              <h2>Build the evidence before the audit.</h2>
+              <p>Watchdog is engineering toward recognized security, privacy, accessibility and assurance frameworks while the platform evolves. Every material change should leave a useful evidence trail.</p>
+            </div>
+            <div class="cr-card cr-assurance"><i class="fas fa-circle-info"></i><div><b>No independent certification is claimed.</b><span id="cr-claim">Loading assurance status…</span></div></div>
+          </section>
+
+          <div class="cr-stats" id="cr-stats" aria-label="Compliance readiness summary"></div>
+
+          <section class="cr-card cr-panel">
+            <div class="cr-panel-head"><div><span class="cr-eyebrow">FRAMEWORK COVERAGE</span><h3>Readiness map</h3></div><p>Internal tracking only. A mapped control is not the same as third-party certification.</p></div>
+            <div class="cr-frameworks" id="cr-frameworks"></div>
+          </section>
+
+          <section class="cr-card cr-panel">
+            <div class="cr-panel-head"><div><span class="cr-eyebrow">DECISION &amp; CHANGE LOG</span><h3>Evidence trail</h3></div><div class="cr-filters"><input id="cr-search" type="search" placeholder="Search decisions, evidence or frameworks" aria-label="Search compliance log"><select id="cr-status" aria-label="Filter by status"><option value="">All statuses</option><option value="implemented">Implemented</option><option value="accepted-plan">Accepted plan</option><option value="partial">Partial</option><option value="planned">Planned</option></select></div></div>
+            <div class="cr-log" id="cr-log"></div>
+            <div class="cr-empty" id="cr-empty" hidden>No compliance entries match this filter.</div>
+          </section>
+
+          <section class="cr-card cr-panel cr-principles">
+            <div class="cr-panel-head"><div><span class="cr-eyebrow">OPERATING RULES</span><h3>How this program works</h3></div></div>
+            <div class="cr-rule-grid">
+              <article><i class="fas fa-file-circle-check"></i><b>Evidence required</b><p>Material improvements point to repeatable evidence, not just a written promise.</p></article>
+              <article><i class="fas fa-plug-circle-check"></i><b>Connectors are reviewed</b><p>New integrations trigger security, privacy, credential, retention and vendor-risk review.</p></article>
+              <article><i class="fas fa-user-shield"></i><b>Protected operations</b><p>Detailed evidence loads only after the server verifies a Watchdog developer session.</p></article>
+              <article><i class="fas fa-arrows-rotate"></i><b>Continuous improvement</b><p>Each scheduled session advances at least one substantive control, assessment, test or remediation.</p></article>
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script>
+<script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/compliance.js"></script>
+</body>
+</html>

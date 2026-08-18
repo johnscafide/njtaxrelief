@@ -1,0 +1,113 @@
+module.exports = {
+  "program": "Watchdog Compliance Readiness",
+  "version": 2,
+  "updated_at": "2026-08-18",
+  "status": "readiness-in-progress",
+  "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
+  "entries": [
+    {
+      "id": "WCR-2026-08-18-001",
+      "date": "2026-08-18",
+      "title": "Compliance readiness program established",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "OWASP ASVS 5.0", "ISO/IEC 27001"],
+      "control_area": "Governance and evidence management",
+      "status": "implemented",
+      "action": "Established a permanent Watchdog compliance-readiness program with a control register, decision log, website Compliance Center, evidence requirements, and a recurring improvement cadence.",
+      "evidence": ["property/docs/compliance/README.md", "property/docs/compliance/CONTROL-REGISTER.md", "property/docs/compliance/DECISION-LOG.md", "property/compliance/index.html", "property/tests/compliance-contracts.mjs"],
+      "rationale": "Compliance should be engineered into the product while architecture is still evolving rather than treated as a one-time certification project after launch.",
+      "residual_risk": "The program is internally managed and has not yet been independently audited or certified.",
+      "next_step": "Continue mapping existing production controls to framework requirements and close high-risk gaps before engaging an external auditor."
+    },
+    {
+      "id": "WCR-2026-08-18-002",
+      "date": "2026-08-18",
+      "title": "Formal certification deferred until production architecture stabilizes",
+      "frameworks": ["SOC 2", "ISO/IEC 27001", "ISO/IEC 27701", "ISO/IEC 42001"],
+      "control_area": "Assurance strategy",
+      "status": "accepted-plan",
+      "action": "Documented the decision to build toward audit readiness now while deferring paid formal audits and certifications until core production workflows, billing, material data connectors, and access architecture are substantially stable.",
+      "evidence": ["property/docs/compliance/DECISION-LOG.md"],
+      "rationale": "Auditing a rapidly changing architecture creates avoidable rework and can produce evidence that no longer represents the production system.",
+      "residual_risk": "Enterprise prospects may request assurance reports before Watchdog has completed an independent examination.",
+      "next_step": "Define objective readiness gates for a SOC 2 readiness assessment and later Type I/Type II examination."
+    },
+    {
+      "id": "WCR-2026-08-18-003",
+      "date": "2026-08-18",
+      "title": "Existing security CI recognized as audit evidence",
+      "frameworks": ["SOC 2", "OWASP ASVS 5.0", "NIST CSF 2.0"],
+      "control_area": "Secure development and access control",
+      "status": "implemented",
+      "action": "Mapped the existing access-boundary and security-contract CI suite as evidence for authorization, webhook authentication, pricing authority, CORS restrictions, RLS/entitlement boundaries, security headers, and other application-security controls.",
+      "evidence": [".github/workflows/access-boundary-audit.yml", "property/tests/security-contracts.mjs"],
+      "rationale": "Automated security assertions executed during code changes provide stronger repeatable evidence than policy statements alone.",
+      "residual_risk": "Static contract tests do not replace dynamic vulnerability testing, independent penetration testing, or complete ASVS verification.",
+      "next_step": "Expand evidence coverage to dependency, secret, code-scanning, accessibility, and dynamic application-security controls."
+    },
+    {
+      "id": "WCR-2026-08-18-004",
+      "date": "2026-08-18",
+      "title": "Deployment source-of-truth policy mapped to change management",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "ISO/IEC 27001"],
+      "control_area": "Change management",
+      "status": "implemented",
+      "action": "Recognized the existing Git-as-source-of-truth Edge Function policy, production fingerprint reconciliation, and inventory requirements as formal change-management evidence.",
+      "evidence": ["supabase/functions/DEPLOYMENT-POLICY.md"],
+      "rationale": "Production changes must be traceable to reviewed source and reversible without relying on undocumented dashboard edits.",
+      "residual_risk": "Connector and infrastructure changes outside Edge Functions still need the same evidence discipline.",
+      "next_step": "Extend change-control evidence requirements to all material production connectors and infrastructure configuration."
+    },
+    {
+      "id": "WCR-2026-08-18-005",
+      "date": "2026-08-18",
+      "title": "Incident response and telemetry minimization mapped",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "ISO/IEC 27001", "NJDPA"],
+      "control_area": "Incident response and privacy",
+      "status": "implemented",
+      "action": "Mapped the existing incident response runbook and telemetry sanitization rules into the compliance control inventory.",
+      "evidence": ["property/docs/incident-response-runbook.md"],
+      "rationale": "Incident handling needs defined severity, ownership, mitigation, verification, communication, and privacy-safe evidence collection before a real incident occurs.",
+      "residual_risk": "A documented runbook is not sufficient evidence of operational effectiveness until exercises and real response records are retained.",
+      "next_step": "Schedule and document a tabletop incident-response exercise and track remediation items."
+    },
+    {
+      "id": "WCR-2026-08-18-006",
+      "date": "2026-08-18",
+      "title": "Material connector governance established",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "NJDPA", "ISO/IEC 27001", "ISO/IEC 27701"],
+      "control_area": "Vendor and connector risk management",
+      "status": "implemented",
+      "action": "Created a material connector register with a reusable review record, risk-tier guidance, current inventory seed, and explicit rule that being referenced in the repository does not by itself establish production-live status.",
+      "evidence": ["property/docs/compliance/CONNECTOR-REGISTER.md"],
+      "rationale": "Watchdog must be able to add, replace, or retire data and service connectors without losing control of data flows, credentials, permissions, retention, privacy scope, or vendor risk.",
+      "residual_risk": "The initial inventory is seeded from current repository and policy evidence; each connector still requires explicit live-status verification and completion of its detailed review record.",
+      "next_step": "Verify production status and complete risk-review fields for Tier 1 connectors first, beginning with authentication, hosting, payments, and any connector processing non-public customer information."
+    },
+    {
+      "id": "WCR-2026-08-18-007",
+      "date": "2026-08-18",
+      "title": "Compliance evidence delivery moved behind server-side developer verification",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "OWASP ASVS 5.0", "ISO/IEC 27001"],
+      "control_area": "Access control and evidence confidentiality",
+      "status": "implemented",
+      "action": "Changed the Compliance Center so detailed evidence is requested from a server endpoint that independently validates the signed-in Watchdog session and developer entitlement before returning the evidence feed; unauthorized callers receive a non-descriptive not-found response and responses are non-cacheable.",
+      "evidence": ["api/compliance-log.js", "property/js/compliance.js", "property/compliance/index.html", "property/tests/compliance-contracts.mjs"],
+      "rationale": "Client-side hiding alone is not a sufficient boundary for an internal governance surface because a guessed resource URL should not return the operational evidence feed to an anonymous or non-developer caller.",
+      "residual_risk": "The GitHub repository is currently public, so committed compliance artifacts must remain sanitized and must never contain secrets, customer data or exploit-enabling detail.",
+      "next_step": "Review whether the repository itself should eventually become private and continue separating public trust information from internal operational evidence."
+    },
+    {
+      "id": "WCR-2026-08-18-008",
+      "date": "2026-08-18",
+      "title": "Compliance improvement cadence expanded to twice daily",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "ISO/IEC 27001"],
+      "control_area": "Continuous monitoring and governance",
+      "status": "implemented",
+      "action": "Expanded the recurring compliance-readiness cadence to 1:00 AM and 12:00 PM Eastern Time every day, requiring at least one substantive improvement per session while allowing multiple related improvements whenever useful and safe.",
+      "evidence": ["property/docs/compliance/README.md"],
+      "rationale": "A minimum-only once-daily cadence could become artificially narrow; two review windows with permission to complete multiple related controls better matches an actively evolving SaaS platform.",
+      "residual_risk": "Automation frequency does not by itself prove operating effectiveness; completed work still requires useful evidence and periodic human review.",
+      "next_step": "Use the scheduled sessions to prioritize high-risk gaps and accumulate evidence that will later support readiness assessments and independent audits."
+    }
+  ]
+};

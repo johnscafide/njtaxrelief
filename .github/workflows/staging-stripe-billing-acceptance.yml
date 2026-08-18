@@ -1,0 +1,151 @@
+name: Staging Stripe billing acceptance
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type STRIPE-STAGING-ONLY to provision and run test-mode billing acceptance
+        required: true
+        type: string
+      ref:
+        description: Git ref to validate
+        required: true
+        default: feature/watchdog-intelligence-foundation
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  stripe-staging:
+    name: stripe-staging-test-mode
+    if: ${{ github.event.inputs.confirmation == 'STRIPE-STAGING-ONLY' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: staging
+    env:
+      PRODUCTION_SUPABASE_REF: uvkvaxljhhngydvlrzom
+      STAGING_SUPABASE_REF: pxossnwmrygxlpxtstnl
+      STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
+      STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      WATCHDOG_TEST_STANDARD_EMAIL: ${{ secrets.WATCHDOG_TEST_STANDARD_EMAIL }}
+      WATCHDOG_TEST_STANDARD_PASSWORD: ${{ secrets.WATCHDOG_TEST_STANDARD_PASSWORD }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+      STRIPE_TEST_SECRET_KEY: ${{ secrets.STRIPE_TEST_SECRET_KEY }}
+      STRIPE_PROVISION_OUTPUT: /tmp/watchdog-stripe-staging-provision.json
+      BILLING_EVIDENCE_DIR: billing-staging-evidence
+      BILLING_PUBLIC_SITE_URL: http://127.0.0.1:4173
+
+    steps:
+      - name: Checkout release candidate
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Set up Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Enforce test-only safety boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in STAGING_SUPABASE_URL STAGING_SUPABASE_PUBLISHABLE_KEY WATCHDOG_TEST_STANDARD_EMAIL WATCHDOG_TEST_STANDARD_PASSWORD SUPABASE_ACCESS_TOKEN STRIPE_TEST_SECRET_KEY; do
+            if [ -z "${!name:-}" ]; then
+              echo "Missing required staging environment secret: $name" >&2
+              exit 1
+            fi
+          done
+          if [[ "$STAGING_SUPABASE_URL" != *"$STAGING_SUPABASE_REF"* ]]; then
+            echo "Configured URL is not the declared Watchdog staging project." >&2
+            exit 1
+          fi
+          if [[ "$STAGING_SUPABASE_URL" == *"$PRODUCTION_SUPABASE_REF"* ]]; then
+            echo "Refusing Stripe acceptance against production Supabase." >&2
+            exit 1
+          fi
+          if [[ "$STRIPE_TEST_SECRET_KEY" != sk_test_* ]]; then
+            echo "Refusing to run: STRIPE_TEST_SECRET_KEY is not an sk_test_ key." >&2
+            exit 1
+          fi
+          echo "Safety boundary passed: Stripe test/Sandbox mode + Watchdog staging Supabase only."
+
+      - name: Provision or reconcile Stripe test catalog, webhook and Portal
+        run: node property/scripts/provision_stripe_staging.mjs
+
+      - name: Resolve controlled staging identity and push Edge Function secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s "$STRIPE_PROVISION_OUTPUT"
+          WEBHOOK_SECRET="$(jq -r '.webhook.signing_secret' "$STRIPE_PROVISION_OUTPUT")"
+          AGENT_MONTHLY="$(jq -r '.prices.agent_monthly' "$STRIPE_PROVISION_OUTPUT")"
+          AGENT_YEARLY="$(jq -r '.prices.agent_yearly' "$STRIPE_PROVISION_OUTPUT")"
+          PRO_MONTHLY="$(jq -r '.prices.pro_monthly' "$STRIPE_PROVISION_OUTPUT")"
+          PRO_YEARLY="$(jq -r '.prices.pro_yearly' "$STRIPE_PROVISION_OUTPUT")"
+          PRO_PLUS_MONTHLY="$(jq -r '.prices.pro_plus_monthly' "$STRIPE_PROVISION_OUTPUT")"
+          PRO_PLUS_YEARLY="$(jq -r '.prices.pro_plus_yearly' "$STRIPE_PROVISION_OUTPUT")"
+          test "$WEBHOOK_SECRET" != "null"
+          echo "::add-mask::$WEBHOOK_SECRET"
+
+          LOGIN_JSON="$(curl --fail --silent --show-error \
+            "$STAGING_SUPABASE_URL/auth/v1/token?grant_type=password" \
+            -H "apikey: $STAGING_SUPABASE_PUBLISHABLE_KEY" \
+            -H "Content-Type: application/json" \
+            --data-binary "$(jq -nc --arg e "$WATCHDOG_TEST_STANDARD_EMAIL" --arg p "$WATCHDOG_TEST_STANDARD_PASSWORD" '{email:$e,password:$p}')")"
+          CONTROLLED_USER_ID="$(printf '%s' "$LOGIN_JSON" | jq -r '.user.id')"
+          test -n "$CONTROLLED_USER_ID"
+          test "$CONTROLLED_USER_ID" != "null"
+
+          supabase secrets set --project-ref "$STAGING_SUPABASE_REF" \
+            STRIPE_SECRET_KEY="$STRIPE_TEST_SECRET_KEY" \
+            STRIPE_WEBHOOK_SIGNING_SECRET="$WEBHOOK_SECRET" \
+            STRIPE_PRICE_AGENT_MONTHLY="$AGENT_MONTHLY" \
+            STRIPE_PRICE_AGENT_YEARLY="$AGENT_YEARLY" \
+            STRIPE_PRICE_PRO_MONTHLY="$PRO_MONTHLY" \
+            STRIPE_PRICE_PRO_YEARLY="$PRO_YEARLY" \
+            STRIPE_PRICE_PRO_PLUS_MONTHLY="$PRO_PLUS_MONTHLY" \
+            STRIPE_PRICE_PRO_PLUS_YEARLY="$PRO_PLUS_YEARLY" \
+            PUBLIC_SITE_URL="$BILLING_PUBLIC_SITE_URL" \
+            BILLING_CHECKOUT_MODE="controlled" \
+            BILLING_CONTROLLED_USER_IDS="$CONTROLLED_USER_ID"
+
+          echo "Controlled staging billing identity resolved and secret configuration pushed without logging secret values."
+
+      - name: Deploy current billing functions to staging
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$STAGING_SUPABASE_REF" != "$PRODUCTION_SUPABASE_REF"
+          supabase functions deploy billing-price-catalog --project-ref "$STAGING_SUPABASE_REF" --no-verify-jwt
+          supabase functions deploy create-checkout-session --project-ref "$STAGING_SUPABASE_REF"
+          supabase functions deploy create-portal-session --project-ref "$STAGING_SUPABASE_REF"
+          supabase functions deploy stripe-webhook --project-ref "$STAGING_SUPABASE_REF" --no-verify-jwt
+
+      - name: Run deterministic test-mode Checkout session and signed-webhook lifecycle
+        run: node property/tests/staging-stripe-lifecycle-acceptance.mjs
+
+      - name: Upload sanitized staging billing evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: staging-stripe-billing-evidence
+          path: billing-staging-evidence
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Return staging enrollment to closed
+        if: always()
+        shell: bash
+        run: |
+          set +e
+          if [ -n "${SUPABASE_ACCESS_TOKEN:-}" ]; then
+            supabase secrets set --project-ref "$STAGING_SUPABASE_REF" BILLING_CHECKOUT_MODE="closed"
+          fi
+          rm -f "$STRIPE_PROVISION_OUTPUT"
