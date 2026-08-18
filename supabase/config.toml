@@ -69,6 +69,11 @@ verify_jwt = false
 [functions.product-analytics-report]
 verify_jwt = true
 
+# Public ANCHOR usage counter accepts only count/record actions and performs
+# table access server-side; raw usage rows remain unavailable to browser roles.
+[functions.anchor-usage]
+verify_jwt = false
+
 # These customer self-service functions validate the bearer token with
 # Supabase Auth inside the function. Gateway verification remains disabled so
 # missing/expired auth produces deterministic fail-closed 401 responses rather
