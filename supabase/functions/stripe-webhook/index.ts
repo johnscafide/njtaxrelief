@@ -10,16 +10,24 @@ type BillingTier = 'agent' | 'pro' | 'pro_plus';
 type BillingInterval = 'monthly' | 'yearly';
 type PriceConfig = { id: string; tier: BillingTier; interval: BillingInterval; capacity: number };
 
+const LIVE_PRICE_DEFAULTS = {
+  agent_monthly: 'price_1U5qPZAgYeNIcesFuC2gKGTz',
+  agent_yearly: 'price_1U5qPjAgYeNIcesFCXaHoU0c',
+  pro_monthly: 'price_1U5qPyAgYeNIcesFy57ssZsV',
+  pro_yearly: 'price_1U5qQAAgYeNIcesF6UOsmwAX',
+  pro_plus_monthly: 'price_1U5qQKAgYeNIcesFmQqrWROC',
+  pro_plus_yearly: 'price_1U5qQUAgYeNIcesFOSN8JZjR'
+} as const;
+
 function priceCatalog(): PriceConfig[] {
-  const rows: Array<PriceConfig | null> = [
-    Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY') ? { id: Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY')!, tier: 'agent', interval: 'monthly', capacity: 25 } : null,
-    Deno.env.get('STRIPE_PRICE_AGENT_YEARLY') ? { id: Deno.env.get('STRIPE_PRICE_AGENT_YEARLY')!, tier: 'agent', interval: 'yearly', capacity: 25 } : null,
-    (Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO')) ? { id: (Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO'))!, tier: 'pro', interval: 'monthly', capacity: 250 } : null,
-    Deno.env.get('STRIPE_PRICE_PRO_YEARLY') ? { id: Deno.env.get('STRIPE_PRICE_PRO_YEARLY')!, tier: 'pro', interval: 'yearly', capacity: 250 } : null,
-    (Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO_PLUS')) ? { id: (Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO_PLUS'))!, tier: 'pro_plus', interval: 'monthly', capacity: 2500 } : null,
-    Deno.env.get('STRIPE_PRICE_PRO_PLUS_YEARLY') ? { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_YEARLY')!, tier: 'pro_plus', interval: 'yearly', capacity: 2500 } : null
+  return [
+    { id: Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY') || LIVE_PRICE_DEFAULTS.agent_monthly, tier: 'agent', interval: 'monthly', capacity: 25 },
+    { id: Deno.env.get('STRIPE_PRICE_AGENT_YEARLY') || LIVE_PRICE_DEFAULTS.agent_yearly, tier: 'agent', interval: 'yearly', capacity: 25 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO') || LIVE_PRICE_DEFAULTS.pro_monthly, tier: 'pro', interval: 'monthly', capacity: 250 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_YEARLY') || LIVE_PRICE_DEFAULTS.pro_yearly, tier: 'pro', interval: 'yearly', capacity: 250 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO_PLUS') || LIVE_PRICE_DEFAULTS.pro_plus_monthly, tier: 'pro_plus', interval: 'monthly', capacity: 2500 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_YEARLY') || LIVE_PRICE_DEFAULTS.pro_plus_yearly, tier: 'pro_plus', interval: 'yearly', capacity: 2500 }
   ];
-  return rows.filter((row): row is PriceConfig => Boolean(row));
 }
 
 function configForPrice(priceId?: string | null) {
