@@ -1,4 +1,4 @@
-const complianceLog = require('../property/data/compliance-log.json');
+const complianceLog = require('./_compliance-data');
 
 const SUPABASE_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
