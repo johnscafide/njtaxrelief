@@ -2,9 +2,17 @@ name: Authenticated release gate
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'property/tests/authenticated-release-gate.mjs'
+      - 'supabase/migrations/*plan_boundary.sql'
+      - '.github/workflows/authenticated-release-gate.yml'
 
 jobs:
   plan-and-rls-boundary:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -12,7 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Verify anonymous, Standard, Pro and Pro+ authorization
+      - name: Verify anonymous and all five commercial authorization tiers
         env:
           STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
           STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
@@ -26,9 +34,10 @@ jobs:
           RELEASE_VERSION: ${{ github.sha }}
         run: node property/tests/authenticated-release-gate.mjs
       - name: Upload sanitized release-gate evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: authenticated-release-gate-evidence
           path: release-gate-evidence.json
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
