@@ -2,25 +2,29 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createRequire } from 'node:module';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const read = (relative) => fs.readFileSync(path.join(root, relative), 'utf8');
 const exists = (relative) => fs.existsSync(path.join(root, relative));
+const requireFromHere = createRequire(import.meta.url);
 
 const requiredFiles = [
   'property/docs/compliance/README.md',
   'property/docs/compliance/CONTROL-REGISTER.md',
   'property/docs/compliance/DECISION-LOG.md',
   'property/docs/compliance/CONNECTOR-REGISTER.md',
-  'property/data/compliance-log.json',
   'property/compliance/index.html',
   'property/js/compliance.js',
   'property/css/compliance.css',
-  'api/compliance-log.js'
+  'api/compliance-log.js',
+  'api/_compliance-data.js'
 ];
 requiredFiles.forEach((relative) => assert.equal(exists(relative), true, `Missing compliance artifact: ${relative}`));
+assert.equal(exists('property/data/compliance-log.json'), false,
+  'Detailed compliance evidence must not be stored as a static file under the public property webroot.');
 
-const data = JSON.parse(read('property/data/compliance-log.json'));
+const data = requireFromHere('../../api/_compliance-data.js');
 assert.equal(data.program, 'Watchdog Compliance Readiness');
 assert.equal(data.status, 'readiness-in-progress');
 assert.match(String(data.certification_claim || ''), /No .*certification|No .*claim|No independent/i,
@@ -67,9 +71,10 @@ assert.match(page, /No independent certification is claimed/i, 'Compliance Cente
 const client = read('property/js/compliance.js');
 assert.match(client, /DATA_URL\s*=\s*['"]\/api\/compliance-log['"]/, 'Compliance UI must load evidence from the protected API.');
 assert.match(client, /Authorization:\s*['"]Bearer ['"]\s*\+\s*token/, 'Compliance UI must send the authenticated developer bearer token.');
-assert.doesNotMatch(client, /DATA_URL\s*=\s*['"]\/property\/data\/compliance-log\.json['"]/, 'Compliance UI must not fetch the static evidence JSON directly.');
+assert.doesNotMatch(client, /\/property\/data\/compliance-log\.json/, 'Compliance UI must not reference a static evidence JSON URL.');
 
 const api = read('api/compliance-log.js');
+assert.match(api, /require\(['"]\.\/_compliance-data['"]\)/, 'Compliance API must read its data from the API-only module.');
 assert.match(api, /is_watchdog_developer/, 'Compliance API must verify Watchdog developer status server-side.');
 assert.match(api, /Authorization/, 'Compliance API must require the authenticated bearer session.');
 assert.match(api, /private, no-store/, 'Compliance API responses must not be cacheable.');
@@ -102,5 +107,7 @@ const charter = read('property/docs/compliance/README.md');
 assert.match(charter, /at least one substantive readiness improvement/i);
 assert.match(charter, /new material connector/i);
 assert.match(charter, /No website or sales copy may claim a certification/i);
+assert.match(charter, /server independently verifies/i,
+  'Compliance charter must document the protected evidence delivery boundary.');
 
 console.log('Watchdog compliance evidence contracts passed.');
