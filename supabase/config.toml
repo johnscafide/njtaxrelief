@@ -73,6 +73,12 @@ verify_jwt = false
 [functions.public-platform-status]
 verify_jwt = false
 
+# The Appeal Prospect Scanner performs its own Auth + Pro+ entitlement check
+# before reading fixed Watchdog public-source assets and returning a governed
+# ranked result. There is no anonymous/client-side fallback computation.
+[functions.appeal-prospect-scan]
+verify_jwt = false
+
 # Watchdog Intelligence production-eligible function manifest.
 # Self-test, diagnostic, bootstrap, debug, and preview-account helpers are
 # intentionally absent and must never be bulk-promoted from staging.
