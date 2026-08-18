@@ -33,22 +33,21 @@ async function jsonFetch(url, options = {}) {
   return { response, payload };
 }
 
-async function stripeGet(pathname) {
-  const { response, payload } = await jsonFetch(`https://api.stripe.com/v1${pathname}`, {
-    headers: { Authorization: `Bearer ${stripeKey}` }
-  });
-  if (!response.ok) fail(`Stripe GET ${pathname} failed: ${payload?.error?.message || response.status}`);
+async function stripeRequest(method, pathname, entries = []) {
+  const options = { method, headers: { Authorization: `Bearer ${stripeKey}` } };
+  if (method !== 'GET' && method !== 'DELETE') {
+    const body = new URLSearchParams();
+    for (const [key, value] of entries) body.append(key, String(value));
+    options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+    options.body = body;
+  }
+  const { response, payload } = await jsonFetch(`https://api.stripe.com/v1${pathname}`, options);
+  if (!response.ok) fail(`Stripe ${method} ${pathname} failed: ${payload?.error?.message || response.status}`);
   return payload;
 }
-
-async function stripeDelete(pathname) {
-  const { response, payload } = await jsonFetch(`https://api.stripe.com/v1${pathname}`, {
-    method: 'DELETE',
-    headers: { Authorization: `Bearer ${stripeKey}` }
-  });
-  if (!response.ok) fail(`Stripe DELETE ${pathname} failed: ${payload?.error?.message || response.status}`);
-  return payload;
-}
+const stripeGet = pathname => stripeRequest('GET', pathname);
+const stripePost = (pathname, entries) => stripeRequest('POST', pathname, entries);
+const stripeDelete = pathname => stripeRequest('DELETE', pathname);
 
 const login = await jsonFetch(`${supabaseUrl}/auth/v1/token?grant_type=password`, {
   method: 'POST',
@@ -74,6 +73,17 @@ async function entitlement() {
   return Array.isArray(payload) ? payload[0] : payload;
 }
 
+async function pollEntitlement(predicate, label, timeoutMs = 90000) {
+  const started = Date.now();
+  let last = null;
+  while (Date.now() - started < timeoutMs) {
+    last = await entitlement();
+    if (predicate(last)) return { value: last, elapsed_ms: Date.now() - started };
+    await delay(1500);
+  }
+  fail(`${label} did not arrive before timeout. Last entitlement: ${JSON.stringify(last)}`);
+}
+
 const before = await entitlement();
 assert(before?.plan_tier === 'standard', `Controlled checkout fixture must begin Standard; found ${before?.plan_tier || 'none'}.`);
 
@@ -94,269 +104,165 @@ assert(checkout.payload?.destination === 'checkout', 'Checkout did not create a 
 assert(checkout.payload?.stripe_mode === 'test', 'Checkout was not explicitly in Stripe test mode.');
 assert(checkout.payload?.url && checkout.payload?.session_id, 'Checkout response missing URL/session ID.');
 
-const stripeSessionBefore = await stripeGet(`/checkout/sessions/${encodeURIComponent(checkout.payload.session_id)}?expand[]=line_items`);
-assert(stripeSessionBefore.livemode === false, 'Stripe Checkout Session unexpectedly reports livemode=true.');
-assert(stripeSessionBefore.mode === 'subscription', 'Stripe Checkout Session is not subscription mode.');
-assert(stripeSessionBefore.client_reference_id === userId, 'Checkout client_reference_id does not match controlled staging user.');
-assert(stripeSessionBefore.metadata?.billing_tier === 'agent', 'Checkout metadata does not identify Agent tier.');
-assert(stripeSessionBefore.metadata?.billing_interval === 'monthly', 'Checkout metadata does not identify monthly cadence.');
-assert(Number(stripeSessionBefore.amount_total) === 5900, `Agent monthly test Checkout total expected 5900 cents; found ${stripeSessionBefore.amount_total}.`);
+const stripeSession = await stripeGet(`/checkout/sessions/${encodeURIComponent(checkout.payload.session_id)}?expand[]=line_items`);
+assert(stripeSession.livemode === false, 'Stripe Checkout Session unexpectedly reports livemode=true.');
+assert(stripeSession.mode === 'subscription', 'Stripe Checkout Session is not subscription mode.');
+assert(stripeSession.client_reference_id === userId, 'Checkout client_reference_id does not match controlled staging user.');
+assert(stripeSession.metadata?.billing_tier === 'agent', 'Checkout metadata does not identify Agent tier.');
+assert(stripeSession.metadata?.billing_interval === 'monthly', 'Checkout metadata does not identify monthly cadence.');
+assert(Number(stripeSession.amount_total) === 5900, `Agent monthly test Checkout total expected 5900 cents; found ${stripeSession.amount_total}.`);
+const agentMonthlyPriceId = stripeSession.line_items?.data?.[0]?.price?.id || stripeSession.line_items?.data?.[0]?.price;
+assert(agentMonthlyPriceId, 'Checkout Session did not expose its Agent monthly Price ID.');
 
 fs.mkdirSync(evidenceDir, { recursive: true });
 
-let browserCompletion = null;
+// Hosted Checkout browser smoke. We deliberately stop before programmatic
+// submission because Stripe may present a human hCaptcha challenge. CI must not
+// attempt to bypass Stripe anti-bot controls. The server-side test lifecycle
+// below exercises real Stripe test charges and signed webhooks deterministically.
+let checkoutSmoke = { card_method: false, card_fields: false, submit_button: false };
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage();
   await page.goto(checkout.payload.url, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-  async function checkoutDiagnostics() {
-    const frames = [];
-    for (const frame of page.frames()) {
-      const inputs = await frame.locator('input').evaluateAll(nodes => nodes.map(node => ({
-        type: node.getAttribute('type'),
-        name: node.getAttribute('name'),
-        autocomplete: node.getAttribute('autocomplete'),
-        placeholder: node.getAttribute('placeholder'),
-        aria_label: node.getAttribute('aria-label'),
-        checked: node.getAttribute('type') === 'radio' || node.getAttribute('type') === 'checkbox' ? Boolean(node.checked) : undefined,
-        radio_label: node.getAttribute('type') === 'radio'
-          ? (node.closest('label')?.innerText || node.parentElement?.innerText || '').trim().slice(0, 120)
-          : null
-      })).slice(0, 40)).catch(() => []);
-      const statusLines = await frame.locator('body').evaluate(node => String(node.innerText || '')
-        .split(/\n+/)
-        .map(line => line.trim())
-        .filter(line => line && /(required|invalid|incomplete|failed|error|declin|phone|address|country|postal|zip|captcha|verify)/i.test(line))
-        .slice(0, 25)).catch(() => []);
-      frames.push({
-        url_host: (() => { try { return new URL(frame.url()).hostname; } catch { return ''; } })(),
-        input_count: inputs.length,
-        inputs,
-        status_lines: statusLines
-      });
-    }
-    return frames;
-  }
-
-  async function writeCheckoutDiagnostic(label, stripeSession = null, currentEntitlement = null) {
-    let urlHost = '';
-    let urlPath = '';
-    try {
-      const current = new URL(page.url());
-      urlHost = current.hostname;
-      urlPath = current.pathname;
-    } catch {}
-    const diagnostics = await checkoutDiagnostics();
-    fs.writeFileSync(
-      path.join(evidenceDir, 'stripe-checkout-dom-diagnostic.json'),
-      JSON.stringify({
-        generated_at: new Date().toISOString(),
-        label,
-        browser: { url_host: urlHost, url_path: urlPath },
-        stripe_session: stripeSession ? {
-          status: stripeSession.status || null,
-          payment_status: stripeSession.payment_status || null,
-          has_subscription: Boolean(stripeSession.subscription)
-        } : null,
-        entitlement: currentEntitlement ? {
-          plan_tier: currentEntitlement.plan_tier || null,
-          billing_tier: currentEntitlement.billing_tier || null,
-          subscription_status: currentEntitlement.subscription_status || null
-        } : null,
-        frames: diagnostics
-      }, null, 2)
-    );
-  }
-
-  async function findVisible(selectors, label, required = true, timeoutMs = 30000) {
+  async function findVisible(selectors, label, timeoutMs = 30000) {
     const started = Date.now();
     while (Date.now() - started < timeoutMs) {
       for (const frame of page.frames()) {
         for (const selector of selectors) {
           const locator = frame.locator(selector).first();
-          if (!await locator.count()) continue;
-          if (await locator.isVisible().catch(() => false)) return locator;
-        }
-      }
-      await delay(400);
-    }
-    if (!required) return null;
-    await writeCheckoutDiagnostic(label);
-    fail(`Stripe Checkout field not found after ${timeoutMs}ms: ${label}`);
-  }
-
-  async function selectCardPaymentMethod(timeoutMs = 15000) {
-    const started = Date.now();
-    while (Date.now() - started < timeoutMs) {
-      for (const frame of page.frames()) {
-        const radio = frame.getByRole('radio', { name: /card/i }).first();
-        if (await radio.count() && await radio.isVisible().catch(() => false)) {
-          const checked = await radio.isChecked().catch(() => false);
-          if (!checked) {
-            await radio.check({ force: true }).catch(async () => {
-              await radio.click({ force: true });
-            });
-          }
-          await delay(900);
-          return true;
+          if (await locator.count() && await locator.isVisible().catch(() => false)) return locator;
         }
       }
       await delay(300);
     }
-    return false;
+    fail(`Stripe Checkout field not found after ${timeoutMs}ms: ${label}`);
   }
 
-  async function fill(selectors, label, value, required = true) {
-    const locator = await findVisible(selectors, label, required);
-    if (!locator) return;
-    await locator.fill(value);
-  }
-
-  const cardSelected = await selectCardPaymentMethod();
-  if (!cardSelected) {
-    await writeCheckoutDiagnostic('card payment method');
-    fail('Stripe Checkout Card payment method was not found.');
-  }
-
-  await fill([
-    'input[name="cardNumber"]',
-    'input[name="number"]',
-    'input[autocomplete="cc-number"]',
-    'input[aria-label*="card number" i]',
-    'input[placeholder*="card number" i]'
-  ], 'card number', '4242424242424242');
-
-  await fill([
-    'input[name="cardExpiry"]',
-    'input[name="expiry"]',
-    'input[autocomplete="cc-exp"]',
-    'input[aria-label*="expir" i]',
-    'input[placeholder*="MM / YY" i]',
-    'input[placeholder*="MM/YY" i]'
-  ], 'card expiry', '1234');
-
-  await fill([
-    'input[name="cardCvc"]',
-    'input[name="cvc"]',
-    'input[autocomplete="cc-csc"]',
-    'input[aria-label*="security code" i]',
-    'input[aria-label*="cvc" i]',
-    'input[placeholder*="CVC" i]'
-  ], 'card CVC', '123');
-
-  await fill([
-    'input[name="billingName"]',
-    'input[autocomplete="cc-name"]',
-    'input[aria-label*="name on card" i]'
-  ], 'billing name', 'Watchdog Staging', false, 5000);
-
-  await fill([
-    'input[name="billingPostalCode"]',
-    'input[autocomplete="postal-code"]',
-    'input[aria-label*="postal" i]',
-    'input[aria-label*="zip" i]'
-  ], 'billing postal code', '08091', false, 5000);
-
-  const submit = await findVisible([
-    'button[type="submit"]',
-    'button:has-text("Subscribe")',
-    'button:has-text("Pay")'
-  ], 'Checkout submit button', true, 30000);
-  await submit.click();
-
-  // The signed Stripe webhook and Checkout Session are the authoritative state.
-  // Browser return navigation is useful evidence, but it is not the entitlement
-  // authority and must not be the sole acceptance signal.
-  const started = Date.now();
-  let lastSession = null;
-  let lastEntitlement = null;
-  while (Date.now() - started < 35000) {
-    lastSession = await stripeGet(`/checkout/sessions/${encodeURIComponent(checkout.payload.session_id)}?expand[]=subscription`);
-    lastEntitlement = await entitlement();
-    const subscriptionId = typeof lastSession.subscription === 'string' ? lastSession.subscription : lastSession.subscription?.id;
-    const urlSucceeded = page.url().includes('/property/account') && page.url().includes('checkout=success');
-    const sessionCompleted = lastSession.status === 'complete' && (lastSession.payment_status === 'paid' || lastSession.payment_status === 'no_payment_required') && Boolean(subscriptionId);
-    const entitlementGranted = lastEntitlement?.plan_tier === 'agent' && lastEntitlement?.billing_tier === 'agent';
-    if (sessionCompleted || entitlementGranted) {
-      browserCompletion = {
-        redirect_observed: urlSucceeded,
-        session_status: lastSession.status,
-        payment_status: lastSession.payment_status,
-        entitlement_observed: entitlementGranted,
-        elapsed_ms: Date.now() - started
-      };
-      break;
+  let cardRadio = null;
+  const radioStarted = Date.now();
+  while (!cardRadio && Date.now() - radioStarted < 15000) {
+    for (const frame of page.frames()) {
+      const candidate = frame.getByRole('radio', { name: /card/i }).first();
+      if (await candidate.count() && await candidate.isVisible().catch(() => false)) {
+        cardRadio = candidate;
+        break;
+      }
     }
-    await delay(1000);
+    if (!cardRadio) await delay(300);
   }
+  assert(cardRadio, 'Stripe Checkout Card payment method was not found.');
+  if (!await cardRadio.isChecked().catch(() => false)) {
+    await cardRadio.check({ force: true }).catch(() => cardRadio.click({ force: true }));
+    await delay(700);
+  }
+  checkoutSmoke.card_method = true;
 
-  if (!browserCompletion) {
-    await writeCheckoutDiagnostic('Checkout remained incomplete after submit', lastSession, lastEntitlement);
-    fail(`Stripe Checkout did not complete after submit. Session=${lastSession?.status || 'unknown'}/${lastSession?.payment_status || 'unknown'}; entitlement=${lastEntitlement?.plan_tier || 'unknown'}.`);
-  }
+  await findVisible(['input[name="cardNumber"]', 'input[autocomplete="cc-number"]'], 'card number');
+  await findVisible(['input[name="cardExpiry"]', 'input[autocomplete="cc-exp"]'], 'card expiry');
+  await findVisible(['input[name="cardCvc"]', 'input[autocomplete="cc-csc"]'], 'card CVC');
+  checkoutSmoke.card_fields = true;
+
+  await findVisible(['button[type="submit"]', 'button:has-text("Subscribe")', 'button:has-text("Pay")'], 'Checkout submit button');
+  checkoutSmoke.submit_button = true;
 } finally {
   await browser.close();
 }
 
-async function pollEntitlement(predicate, label, timeoutMs = 90000) {
-  const started = Date.now();
-  let last = null;
-  while (Date.now() - started < timeoutMs) {
-    last = await entitlement();
-    if (predicate(last)) return { value: last, elapsed_ms: Date.now() - started };
-    await delay(2000);
+let testCustomer = null;
+let testSubscription = null;
+try {
+  // Stripe's reusable test PaymentMethod avoids entering raw card data in CI.
+  // Creating the subscription still generates the same subscription/invoice
+  // webhooks that Watchdog relies on for server-authoritative entitlement state.
+  testCustomer = await stripePost('/customers', [
+    ['email', email],
+    ['name', 'Watchdog Staging Billing Acceptance'],
+    ['payment_method', 'pm_card_visa'],
+    ['invoice_settings[default_payment_method]', 'pm_card_visa'],
+    ['metadata[supabase_user_id]', userId],
+    ['metadata[watchdog_user_id]', userId],
+    ['metadata[watchdog_environment]', 'staging_test'],
+    ['metadata[purpose]', 'billing_acceptance']
+  ]);
+  assert(testCustomer?.id && testCustomer.livemode === false, 'Stripe test Customer was not created safely in test mode.');
+
+  testSubscription = await stripePost('/subscriptions', [
+    ['customer', testCustomer.id],
+    ['items[0][price]', agentMonthlyPriceId],
+    ['default_payment_method', 'pm_card_visa'],
+    ['collection_method', 'charge_automatically'],
+    ['payment_behavior', 'error_if_incomplete'],
+    ['payment_settings[payment_method_types][]', 'card'],
+    ['metadata[supabase_user_id]', userId],
+    ['metadata[watchdog_user_id]', userId],
+    ['metadata[product]', 'watchdog_subscription'],
+    ['metadata[billing_tier]', 'agent'],
+    ['metadata[plan_tier]', 'agent'],
+    ['metadata[billing_interval]', 'monthly'],
+    ['metadata[property_capacity]', '25'],
+    ['metadata[watchdog_environment]', 'staging_test']
+  ]);
+  assert(testSubscription?.id, 'Stripe test subscription was not created.');
+  assert(testSubscription.livemode === false, 'Stripe test subscription unexpectedly reports livemode=true.');
+  assert(['active', 'trialing'].includes(testSubscription.status), `Stripe test subscription expected active/trialing; found ${testSubscription.status}.`);
+
+  const granted = await pollEntitlement(
+    row => row?.plan_tier === 'agent' && row?.billing_tier === 'agent' && Number(row?.property_capacity) === 25 && ['active', 'trialing', 'past_due'].includes(row?.subscription_status),
+    'Signed Stripe webhook Agent grant'
+  );
+
+  await stripeDelete(`/subscriptions/${encodeURIComponent(testSubscription.id)}`);
+  const canceled = await pollEntitlement(
+    row => row?.plan_tier === 'standard' && row?.subscription_status === 'canceled',
+    'Signed Stripe cancellation downgrade'
+  );
+
+  const evidence = {
+    generated_at: new Date().toISOString(),
+    environment: 'staging',
+    supabase_ref: stagingRef,
+    stripe_mode: 'test',
+    controlled_user_tag: tag(userId),
+    checkout_session_tag: tag(checkout.payload.session_id),
+    customer_tag: tag(testCustomer.id),
+    subscription_tag: tag(testSubscription.id),
+    hosted_checkout_smoke: {
+      tier: 'agent',
+      cadence: 'monthly',
+      amount_cents: 5900,
+      session_status: stripeSession.status,
+      payment_status: stripeSession.payment_status,
+      card_method_rendered: checkoutSmoke.card_method,
+      card_fields_rendered: checkoutSmoke.card_fields,
+      submit_button_rendered: checkoutSmoke.submit_button,
+      automated_submit_skipped_for_human_verification_boundary: true
+    },
+    api_lifecycle: {
+      subscription_status: testSubscription.status,
+      payment_method_fixture: 'pm_card_visa'
+    },
+    grant: {
+      plan_tier: granted.value.plan_tier,
+      billing_tier: granted.value.billing_tier,
+      subscription_status: granted.value.subscription_status,
+      property_capacity: granted.value.property_capacity,
+      webhook_wait_ms: granted.elapsed_ms
+    },
+    cleanup: {
+      plan_tier: canceled.value.plan_tier,
+      subscription_status: canceled.value.subscription_status,
+      webhook_wait_ms: canceled.elapsed_ms
+    }
+  };
+  fs.writeFileSync(path.join(evidenceDir, 'stripe-checkout-preflight.json'), JSON.stringify(evidence, null, 2));
+  console.log('Stripe staging preflight PASSED: hosted Checkout rendered correctly; test API subscription -> signed Agent grant -> signed cancellation downgrade.');
+} finally {
+  if (testSubscription?.id) {
+    await stripeDelete(`/subscriptions/${encodeURIComponent(testSubscription.id)}`).catch(() => null);
   }
-  fail(`${label} did not arrive before timeout. Last entitlement: ${JSON.stringify(last)}`);
+  if (testCustomer?.id) {
+    await stripeDelete(`/customers/${encodeURIComponent(testCustomer.id)}`).catch(() => null);
+  }
 }
-
-const granted = await pollEntitlement(
-  row => row?.plan_tier === 'agent' && row?.billing_tier === 'agent' && Number(row?.property_capacity) === 25 && ['active', 'trialing', 'past_due'].includes(row?.subscription_status),
-  'Signed Stripe webhook Agent grant'
-);
-
-const stripeSessionAfter = await stripeGet(`/checkout/sessions/${encodeURIComponent(checkout.payload.session_id)}?expand[]=subscription`);
-const subscriptionId = typeof stripeSessionAfter.subscription === 'string' ? stripeSessionAfter.subscription : stripeSessionAfter.subscription?.id;
-assert(subscriptionId, 'Completed Checkout has no subscription ID.');
-
-// Immediate test-mode cleanup also proves the signed customer.subscription.deleted
-// path returns access to Standard. Scheduled Portal cancellation is covered by the
-// broader lifecycle workflow, not this fast preflight.
-await stripeDelete(`/subscriptions/${encodeURIComponent(subscriptionId)}`);
-const canceled = await pollEntitlement(
-  row => row?.plan_tier === 'standard' && row?.subscription_status === 'canceled',
-  'Signed Stripe cancellation downgrade'
-);
-
-const evidence = {
-  generated_at: new Date().toISOString(),
-  environment: 'staging',
-  supabase_ref: stagingRef,
-  stripe_mode: 'test',
-  controlled_user_tag: tag(userId),
-  checkout_session_tag: tag(checkout.payload.session_id),
-  subscription_tag: tag(subscriptionId),
-  checkout: {
-    tier: 'agent',
-    cadence: 'monthly',
-    amount_cents: 5900,
-    completed: true,
-    redirect_observed: Boolean(browserCompletion?.redirect_observed),
-    session_status: browserCompletion?.session_status || stripeSessionAfter.status,
-    payment_status: browserCompletion?.payment_status || stripeSessionAfter.payment_status
-  },
-  grant: {
-    plan_tier: granted.value.plan_tier,
-    billing_tier: granted.value.billing_tier,
-    subscription_status: granted.value.subscription_status,
-    property_capacity: granted.value.property_capacity,
-    webhook_wait_ms: granted.elapsed_ms
-  },
-  cleanup: {
-    plan_tier: canceled.value.plan_tier,
-    subscription_status: canceled.value.subscription_status,
-    webhook_wait_ms: canceled.elapsed_ms
-  }
-};
-fs.writeFileSync(path.join(evidenceDir, 'stripe-checkout-preflight.json'), JSON.stringify(evidence, null, 2));
-console.log('Stripe staging Checkout preflight PASSED: test-mode Agent purchase -> signed entitlement grant -> signed cancellation downgrade.');
