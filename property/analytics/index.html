@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en" data-access-require="agent" data-developer-only="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Watchdog Product Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <style>
+    :root{--ink:#10294b;--muted:#6d7989;--line:#e5eaef;--paper:#f6f8fa;--teal:#087f7a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#15202b;font-family:"Source Sans 3",Arial,sans-serif}.pa-shell{max-width:1320px;margin:0 auto;padding:38px 24px 70px}.pa-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}.pa-kicker{font:800 11px/1.2 "Plus Jakarta Sans";letter-spacing:.14em;color:var(--teal)}h1{font:800 36px/1.05 "Plus Jakarta Sans";letter-spacing:-.04em;color:var(--ink);margin:7px 0 7px}.pa-head p{margin:0;color:var(--muted);font-size:16px}.pa-back{color:var(--ink);font-weight:700;text-decoration:none}.pa-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.pa-card,.pa-panel{background:#fff;border-radius:18px;box-shadow:0 10px 32px rgba(16,41,75,.06)}.pa-card{padding:20px}.pa-label{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.pa-value{font:800 30px/1 "Plus Jakarta Sans";color:var(--ink);margin-top:10px}.pa-sub{font-size:13px;color:var(--muted);margin-top:8px}.pa-panels{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.pa-panel{padding:22px;min-width:0}.pa-panel h2{font:800 18px/1.2 "Plus Jakarta Sans";color:var(--ink);margin:0 0 16px}.pa-table{width:100%;border-collapse:collapse;font-size:13px}.pa-table th,.pa-table td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.pa-table th{font-size:11px;text-transform:uppercase;color:var(--muted)}.pa-table td.num,.pa-table th.num{text-align:right}.pa-empty{padding:28px;color:var(--muted);text-align:center}.pa-note{margin-top:18px;background:#eef7f6;border-radius:14px;padding:15px 17px;color:#38504e;font-size:13px}.pa-error{background:#fff0f0;color:#8b2626;border-radius:14px;padding:16px;margin-bottom:18px;display:none}@media(max-width:900px){.pa-grid{grid-template-columns:repeat(2,1fr)}.pa-panels{grid-template-columns:1fr}.pa-head{align-items:flex-start;flex-direction:column}}@media(max-width:520px){.pa-shell{padding:24px 14px 50px}.pa-grid{grid-template-columns:1fr 1fr}.pa-value{font-size:25px}h1{font-size:30px}}
+  </style>
+</head>
+<body data-plan-auto="true">
+  <main class="pa-shell">
+    <header class="pa-head">
+      <div><div class="pa-kicker">DEVELOPER · WEEKLY REVIEW</div><h1>Product Analytics</h1><p>Activation, usage, acquisition and retention without individual behavioral profiles.</p></div>
+      <a class="pa-back" href="/property/dashboard/"><i class="fas fa-arrow-left"></i> Dashboard</a>
+    </header>
+    <div id="pa-error" class="pa-error"></div>
+    <section class="pa-grid" id="pa-summary"><div class="pa-card"><div class="pa-label">Loading</div><div class="pa-value">…</div></div></section>
+    <section class="pa-panels">
+      <div class="pa-panel"><h2>Activation funnel · recent days</h2><div id="pa-funnel" class="pa-empty">Loading…</div></div>
+      <div class="pa-panel"><h2>Top tools · 90 days</h2><div id="pa-tools" class="pa-empty">Loading…</div></div>
+      <div class="pa-panel"><h2>Acquisition · 90 days</h2><div id="pa-acquisition" class="pa-empty">Loading…</div></div>
+      <div class="pa-panel"><h2>Retention cohorts</h2><div id="pa-retention" class="pa-empty">Loading…</div></div>
+    </section>
+    <div class="pa-note"><b>Privacy boundary:</b> this page reads aggregate product analytics only. It does not expose names, emails, addresses, search text, phone numbers, IP addresses or property-level behavioral profiles. Payment-provider lifecycle certification remains governed by the billing launch gate rather than duplicated here.</div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script>
+    (function(){
+      'use strict';
+      function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+      function num(v){return Number(v||0).toLocaleString();}
+      function table(headers,rows){if(!rows.length)return '<div class="pa-empty">No data yet.</div>';return '<table class="pa-table"><thead><tr>'+headers.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>';}
+      function td(v,n){return '<td'+(n?' class="num"':'')+'>'+esc(v)+'</td>';}
+      function sumBy(rows,key){var m={};rows.forEach(function(r){var k=r[key]||'unknown';m[k]=(m[k]||0)+Number(r.events||0);});return Object.entries(m).sort(function(a,b){return b[1]-a[1];});}
+      async function load(){
+        try{
+          var client=window.NJPTRSupabaseRuntime.createClient();
+          var result=await client.functions.invoke('product-analytics-report',{body:{}});
+          if(result.error||!result.data||!result.data.ok)throw new Error((result.data&&result.data.error)||(result.error&&result.error.message)||'Analytics report unavailable');
+          var d=result.data,s=d.summary||{},latest=s.latest_day||{};
+          document.getElementById('pa-summary').innerHTML=[
+            ['Product events',num(s.total_product_events),'Privacy-minimized first-party events'],
+            ['Latest visitors',num(latest.visitors),'Most recent captured day'],
+            ['Latest activated',num(latest.activated_visitors),'Tool, lookup, marker or export activity'],
+            ['Active subscriptions',num(s.active_subscription_count),'Aggregate current paid/trial states']
+          ].map(function(x){return '<div class="pa-card"><div class="pa-label">'+esc(x[0])+'</div><div class="pa-value">'+esc(x[1])+'</div><div class="pa-sub">'+esc(x[2])+'</div></div>';}).join('');
+          var funnel=(d.funnel||[]).slice(0,14).map(function(r){return '<tr>'+td(r.day)+td(num(r.visitors),1)+td(num(r.activated_visitors),1)+td(num(r.upgrade_intent),1)+td(num(r.checkout_starts),1)+'</tr>';});
+          document.getElementById('pa-funnel').innerHTML=table(['Day','Visitors','Activated','Upgrade intent','Checkout'],funnel);
+          var tools=sumBy(d.tool_usage||[],'tool').slice(0,15).map(function(r){return '<tr>'+td(r[0])+td(num(r[1]),1)+'</tr>';});
+          document.getElementById('pa-tools').innerHTML=table(['Tool','Events'],tools);
+          var acq=(d.acquisition||[]).slice(0,20).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(num(r.visitors),1)+td(num(r.activated),1)+'</tr>';});
+          document.getElementById('pa-acquisition').innerHTML=table(['Source','Medium','Visitors','Activated'],acq);
+          var retention=(d.retention||[]).slice(0,30).map(function(r){return '<tr>'+td(r.cohort_week)+td('Week '+r.week_number)+td(num(r.retained_visitors),1)+'</tr>';});
+          document.getElementById('pa-retention').innerHTML=table(['Cohort','Age','Retained'],retention);
+        }catch(error){var box=document.getElementById('pa-error');box.style.display='block';box.textContent=error.message||String(error);}
+      }
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
+    })();
+  </script>
+</body>
+</html>
