@@ -343,15 +343,36 @@ async function recordSubscriptionBillingSignal(
   return { user_id: entitlement.user_id, recorded: eventType };
 }
 
+function isMissingMarketingPaymentsLedger(error: any) {
+  const code = String(error?.code || '').toUpperCase();
+  const message = [error?.message, error?.details, error?.hint]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase();
+  const namesLedger = message.includes('marketing_payments');
+  const missingRelation =
+    code === '42P01' ||
+    code === 'PGRST205' ||
+    message.includes('does not exist') ||
+    message.includes('schema cache');
+  return namesLedger && missingRelation;
+}
+
 async function recordRefund(charge: Stripe.Charge) {
   const pi = typeof charge.payment_intent === 'string' ? charge.payment_intent : charge.payment_intent?.id || null;
   if (pi) {
-    const { data: payment, error } = await service
+    const lookup = await service
       .from('marketing_payments')
       .select('id,user_id,campaign_id,amount_cents,metadata')
       .contains('metadata', { payment_intent_id: pi })
       .maybeSingle();
-    if (error) throw error;
+
+    if (lookup.error && !isMissingMarketingPaymentsLedger(lookup.error)) throw lookup.error;
+    if (lookup.error) {
+      console.warn('STRIPE_REFUND_MARKETING_LEDGER_UNAVAILABLE', lookup.error.code || 'unknown');
+    }
+
+    const payment = lookup.error ? null : lookup.data;
     if (payment) {
       const refunded = Number(charge.amount_refunded || 0);
       const status = refunded >= Number((payment.metadata?.amount_due_cents ?? payment.amount_cents) || 0)
