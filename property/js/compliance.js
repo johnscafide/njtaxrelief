@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var DATA_URL = '/property/data/compliance-log.json';
+  var DATA_URL = '/api/compliance-log';
   var app = document.getElementById('cr-app');
   var claim = document.getElementById('cr-claim');
   var stats = document.getElementById('cr-stats');
@@ -62,7 +62,7 @@
       '<p><b>Action:</b> ' + esc(entry.action) + '</p>' +
       '<div class="cr-evidence"><b>Evidence</b><ul>' + evidence + '</ul></div>' +
       '<div class="cr-details"><div class="cr-detail"><b>Rationale</b><span>' + esc(entry.rationale) + '</span></div><div class="cr-detail"><b>Residual risk</b><span>' + esc(entry.residual_risk) + '</span></div></div>' +
-      '<div class="cr-detail" style="margin-top:12px"><b>Next step</b><span>' + esc(entry.next_step) + '</span></div>' +
+      '<div class="cr-detail cr-next"><b>Next step</b><span>' + esc(entry.next_step) + '</span></div>' +
       '</article>';
   }
 
@@ -86,7 +86,17 @@
   }
 
   function load() {
-    return fetch(DATA_URL, { credentials: 'same-origin', cache: 'no-store' }).then(function (response) {
+    var authClient = window.NJPTRAccess && window.NJPTRAccess.client ? window.NJPTRAccess.client() : null;
+    if (!authClient) return Promise.reject(new Error('Authentication client unavailable'));
+    return authClient.auth.getSession().then(function (result) {
+      var token = result && result.data && result.data.session && result.data.session.access_token;
+      if (!token) throw new Error('Developer session unavailable');
+      return fetch(DATA_URL, {
+        credentials: 'same-origin',
+        cache: 'no-store',
+        headers: { Authorization: 'Bearer ' + token }
+      });
+    }).then(function (response) {
       if (!response.ok) throw new Error('Compliance log request returned ' + response.status);
       return response.json();
     }).then(function (data) {
