@@ -1,11 +1,10 @@
 name: Hosted visual acceptance
 
 on:
-  push:
+  pull_request:
     branches:
-      - feature/watchdog-intelligence-foundation
+      - main
     paths:
-      - '.github/workflows/hosted-visual-acceptance.yml'
       - 'property/tests/hosted-visual-acceptance.mjs'
       - 'property/dashboard/**'
       - 'property/home/**'
@@ -15,6 +14,12 @@ on:
       - 'property/js/**'
       - 'property/css/**'
   workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref to visually validate
+        required: true
+        default: feature/watchdog-intelligence-foundation
+        type: string
 
 permissions:
   contents: read
@@ -22,6 +27,7 @@ permissions:
 jobs:
   authenticated-visual-acceptance:
     name: authenticated-visual-acceptance
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: staging
@@ -36,6 +42,8 @@ jobs:
     steps:
       - name: Checkout release candidate
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event.pull_request.head.sha }}
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -50,10 +58,12 @@ jobs:
           test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
           test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
           test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
+
           if [[ "$STAGING_SUPABASE_URL" == *"uvkvaxljhhngydvlrzom"* ]]; then
             echo "Refusing visual acceptance against production Supabase."
             exit 1
           fi
+
           python3 - <<'PY'
           import os
           from pathlib import Path
@@ -64,7 +74,11 @@ jobs:
           production_key = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa'
           staging_url = os.environ['STAGING_SUPABASE_URL'].rstrip('/')
           staging_key = os.environ['STAGING_SUPABASE_PUBLISHABLE_KEY']
-          staging_ref = urlparse(staging_url).hostname.split('.')[0]
+          host = urlparse(staging_url).hostname or ''
+          staging_ref = host.split('.')[0]
+
+          if not staging_ref or staging_ref == production_ref:
+              raise SystemExit('Invalid staging project boundary; refusing to run.')
 
           touched = 0
           for root in (Path('property'),):
