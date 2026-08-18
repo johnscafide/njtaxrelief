@@ -120,9 +120,9 @@ let testCustomer = null;
 let testSubscription = null;
 fs.mkdirSync(evidenceDir, { recursive: true });
 try {
-  // Use Stripe's test token to create a disposable card source on this exact
-  // test account. Do not depend on convenience PaymentMethod IDs such as
-  // pm_card_visa, which are not guaranteed to resolve in every test account.
+  // Stripe's Customer API accepts a test token in `source`. Creating the
+  // disposable card on this exact test account avoids relying on convenience
+  // PaymentMethod aliases that may not resolve in every sandbox/test account.
   testCustomer = await stripePost('/customers', [
     ['email', email],
     ['name', 'Watchdog Staging Billing Acceptance'],
