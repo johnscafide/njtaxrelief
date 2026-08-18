@@ -121,10 +121,21 @@ assert(webhook.secret?.startsWith('whsec_'), 'Stripe did not return a webhook si
 result.webhook = { id: webhook.id, url: webhook.url, status: webhook.status, signing_secret: webhook.secret };
 
 let portals = await stripe('GET', '/billing_portal/configurations?active=true&limit=100');
-let portal = portals.data.find(c => c.features?.subscription_cancel?.enabled && c.features?.payment_method_update?.enabled && c.features?.invoice_history?.enabled && c.features?.subscription_update?.enabled);
+let portal = portals.data.find(c =>
+  c.livemode === false &&
+  c.metadata?.application === 'watchdog' &&
+  c.metadata?.environment === 'staging' &&
+  c.features?.subscription_cancel?.enabled &&
+  c.features?.payment_method_update?.enabled &&
+  c.features?.invoice_history?.enabled &&
+  c.features?.subscription_update?.enabled
+);
 if (!portal) {
-  portal = await stripe('POST', '/billing_portal/configurations', [
+  const portalEntries = [
     ['business_profile[headline]', 'Watchdog partners with Stripe for staging billing'],
+    ['metadata[application]', 'watchdog'],
+    ['metadata[environment]', 'staging'],
+    ['metadata[catalog_version]', '2026-08-18'],
     ['features[customer_update][enabled]', 'true'],
     ['features[customer_update][allowed_updates][]', 'email'],
     ['features[customer_update][allowed_updates][]', 'address'],
@@ -136,7 +147,27 @@ if (!portal) {
     ['features[subscription_update][enabled]', 'true'],
     ['features[subscription_update][default_allowed_updates][]', 'price'],
     ['features[subscription_update][proration_behavior]', 'always_invoice']
-  ]);
+  ];
+
+  // Stripe requires the explicit product/price allowlist whenever Customer
+  // Portal subscription price changes are enabled. Keep the staging Portal
+  // restricted to the six Watchdog test prices created/reconciled above.
+  plans.forEach((plan, index) => {
+    portalEntries.push([
+      `features[subscription_update][products][${index}][product]`,
+      result.products[plan.tier]
+    ]);
+    portalEntries.push([
+      `features[subscription_update][products][${index}][prices][]`,
+      result.prices[`${plan.tier}_monthly`]
+    ]);
+    portalEntries.push([
+      `features[subscription_update][products][${index}][prices][]`,
+      result.prices[`${plan.tier}_yearly`]
+    ]);
+  });
+
+  portal = await stripe('POST', '/billing_portal/configurations', portalEntries);
 }
 assert(portal.livemode === false, 'Billing Portal configuration unexpectedly reports livemode=true.');
 result.portal = { id: portal.id, active: portal.active };
