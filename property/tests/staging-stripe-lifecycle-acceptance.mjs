@@ -120,25 +120,30 @@ let testCustomer = null;
 let testSubscription = null;
 fs.mkdirSync(evidenceDir, { recursive: true });
 try {
+  // Use Stripe's test token to create a disposable card source on this exact
+  // test account. Do not depend on convenience PaymentMethod IDs such as
+  // pm_card_visa, which are not guaranteed to resolve in every test account.
   testCustomer = await stripePost('/customers', [
     ['email', email],
     ['name', 'Watchdog Staging Billing Acceptance'],
-    ['payment_method', 'pm_card_visa'],
-    ['invoice_settings[default_payment_method]', 'pm_card_visa'],
+    ['source', 'tok_visa'],
     ['metadata[supabase_user_id]', userId],
     ['metadata[watchdog_user_id]', userId],
     ['metadata[watchdog_environment]', 'staging_test'],
     ['metadata[purpose]', 'billing_acceptance']
   ]);
   assert(testCustomer?.id && testCustomer.livemode === false, 'Stripe test Customer was not created safely in test mode.');
+  const testSourceId = typeof testCustomer.default_source === 'string'
+    ? testCustomer.default_source
+    : testCustomer.default_source?.id;
+  assert(testSourceId, 'Stripe test Customer did not receive a default card source from tok_visa.');
 
   testSubscription = await stripePost('/subscriptions', [
     ['customer', testCustomer.id],
     ['items[0][price]', agentMonthlyPriceId],
-    ['default_payment_method', 'pm_card_visa'],
+    ['default_source', testSourceId],
     ['collection_method', 'charge_automatically'],
     ['payment_behavior', 'error_if_incomplete'],
-    ['payment_settings[payment_method_types][]', 'card'],
     ['metadata[supabase_user_id]', userId],
     ['metadata[watchdog_user_id]', userId],
     ['metadata[product]', 'watchdog_subscription'],
@@ -184,7 +189,8 @@ try {
     },
     api_lifecycle: {
       created_subscription_status: testSubscription.status,
-      payment_method_fixture: 'pm_card_visa'
+      payment_fixture: 'tok_visa_customer_source',
+      disposable_source_created: true
     },
     grant: {
       plan_tier: granted.value.plan_tier,
