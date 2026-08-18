@@ -15,7 +15,8 @@ const requiredFiles = [
   'property/data/compliance-log.json',
   'property/compliance/index.html',
   'property/js/compliance.js',
-  'property/css/compliance.css'
+  'property/css/compliance.css',
+  'api/compliance-log.js'
 ];
 requiredFiles.forEach((relative) => assert.equal(exists(relative), true, `Missing compliance artifact: ${relative}`));
 
@@ -59,8 +60,21 @@ for (const pattern of [
 
 const page = read('property/compliance/index.html');
 assert.match(page, /data-access-require="developer"/, 'Compliance Center must remain developer-gated.');
-assert.match(page, /name="robots" content="noindex,nofollow"/, 'Compliance Center must remain noindex/nofollow.');
+assert.match(page, /name="robots" content="[^"]*noindex[^"]*nofollow/i, 'Compliance Center must remain noindex/nofollow.');
+assert.match(page, /noarchive/i, 'Compliance Center must opt out of search-engine caching.');
 assert.match(page, /No independent certification is claimed/i, 'Compliance Center must display a clear assurance disclaimer.');
+
+const client = read('property/js/compliance.js');
+assert.match(client, /DATA_URL\s*=\s*['"]\/api\/compliance-log['"]/, 'Compliance UI must load evidence from the protected API.');
+assert.match(client, /Authorization:\s*['"]Bearer ['"]\s*\+\s*token/, 'Compliance UI must send the authenticated developer bearer token.');
+assert.doesNotMatch(client, /DATA_URL\s*=\s*['"]\/property\/data\/compliance-log\.json['"]/, 'Compliance UI must not fetch the static evidence JSON directly.');
+
+const api = read('api/compliance-log.js');
+assert.match(api, /is_watchdog_developer/, 'Compliance API must verify Watchdog developer status server-side.');
+assert.match(api, /Authorization/, 'Compliance API must require the authenticated bearer session.');
+assert.match(api, /private, no-store/, 'Compliance API responses must not be cacheable.');
+assert.match(api, /noindex, nofollow, noarchive, nosnippet/, 'Compliance API must explicitly opt out of indexing and snippets.');
+assert.match(api, /status\(404\)/, 'Unauthorized compliance evidence requests should not advertise a protected resource.');
 
 const register = read('property/docs/compliance/CONTROL-REGISTER.md');
 for (const name of ['SOC 2', 'NIST', 'OWASP ASVS', 'WCAG 2.2', 'PCI DSS', 'NJDPA', 'ISO/IEC 27001']) {
@@ -85,7 +99,7 @@ assert.match(connectors, /does not mean it is production-live/i,
   'Connector register must distinguish observed integrations from verified production-live integrations.');
 
 const charter = read('property/docs/compliance/README.md');
-assert.match(charter, /daily compliance task must complete at least one substantive readiness improvement/i);
+assert.match(charter, /at least one substantive readiness improvement/i);
 assert.match(charter, /new material connector/i);
 assert.match(charter, /No website or sales copy may claim a certification/i);
 
