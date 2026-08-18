@@ -3,6 +3,20 @@ import Stripe from 'stripe';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
+const LIVE_PRICES = {
+  agent: {
+    monthly: 'price_1U5qPZAgYeNIcesFuC2gKGTz',
+    yearly: 'price_1U5qPjAgYeNIcesFCXaHoU0c'
+  },
+  pro: {
+    monthly: 'price_1U5qPyAgYeNIcesFy57ssZsV',
+    yearly: 'price_1U5qQAAgYeNIcesF6UOsmwAX'
+  },
+  pro_plus: {
+    monthly: 'price_1U5qQKAgYeNIcesFmQqrWROC',
+    yearly: 'price_1U5qQUAgYeNIcesFOSN8JZjR'
+  }
+} as const;
 type Tier = keyof typeof CAPACITY;
 type Cadence = 'monthly' | 'yearly';
 
@@ -34,13 +48,15 @@ function cors(req: Request) {
 }
 
 function json(req: Request, body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(body), { status, headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 }
 
 function checkoutMode() {
   const explicit = String(Deno.env.get('BILLING_CHECKOUT_MODE') || '').trim().toLowerCase();
   if (['closed', 'controlled', 'open'].includes(explicit)) return explicit;
-  return Deno.env.get('BILLING_CHECKOUT_ENABLED') === 'true' ? 'open' : 'closed';
+  // Never inherit a legacy billing flag into the Stripe cutover. A production
+  // environment must explicitly choose controlled/open after lifecycle evidence.
+  return 'closed';
 }
 
 function controlledUsers() {
@@ -64,9 +80,9 @@ function priceFor(tier: Tier, cadence: Cadence) {
   };
   const configured = Deno.env.get(names[tier][cadence]);
   if (configured) return configured;
-  if (tier === 'pro' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO') || null;
-  if (tier === 'pro_plus' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO_PLUS') || null;
-  return null;
+  if (tier === 'pro' && cadence === 'monthly' && Deno.env.get('STRIPE_PRICE_PRO')) return Deno.env.get('STRIPE_PRICE_PRO')!;
+  if (tier === 'pro_plus' && cadence === 'monthly' && Deno.env.get('STRIPE_PRICE_PRO_PLUS')) return Deno.env.get('STRIPE_PRICE_PRO_PLUS')!;
+  return LIVE_PRICES[tier][cadence];
 }
 
 Deno.serve(async (req) => {
@@ -107,7 +123,6 @@ Deno.serve(async (req) => {
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
   const priceId = priceFor(tier, cadence);
-  if (!priceId) return json(req, { error: 'That Stripe price is not configured in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
 
   const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
   const { data: entitlement, error: entitlementError } = await admin
@@ -171,7 +186,7 @@ Deno.serve(async (req) => {
       success_url: `${site}/property/account/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}/property/account/?checkout=cancelled`,
       billing_address_collection: 'auto',
-      ...(Deno.env.get('STRIPE_AUTOMATIC_TAX') === 'true' ? { automatic_tax: { enabled: true } } : {})
+      integration_identifier: 'watchdog_web_kqrmxpta'
     });
 
     await admin.from('access_audit_log').insert({
