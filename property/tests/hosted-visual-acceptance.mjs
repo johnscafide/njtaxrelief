@@ -27,6 +27,7 @@ const surfaces = [
   { key: 'agent-control', path: '/property/agent-desk/' },
   { key: 'data-workbench', path: '/property/data-workbench/' },
   { key: 'calibration-admin', path: '/property/intelligence/calibration/' },
+  { key: 'appeal-scanner', path: '/property/scan/' },
   { key: 'account', path: '/property/account/' },
   { key: 'support', path: '/property/support/' },
   { key: 'status', path: '/property/status/' }
