@@ -1,13 +1,17 @@
 (function () {
   'use strict';
 
-  var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
-  var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var FALLBACK_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+  var FALLBACK_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var client;
 
   function sb() {
     if (client) return client;
-    client = window.supabase.createClient(URL, KEY, { auth: {
+    if (window.NJPTRSupabaseRuntime) {
+      client = window.NJPTRSupabaseRuntime.createClient();
+      return client;
+    }
+    client = window.supabase.createClient(FALLBACK_URL, FALLBACK_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
       flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token'
     }});
