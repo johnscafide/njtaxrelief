@@ -139,6 +139,19 @@
   }
 
   /* =========================================================================
+     3b. Marketing Studio keeps its gradient treatment.
+         The CSS also targets [data-card-id="marketing"] directly, so the
+         card is styled even if this never runs. Belt and braces.
+     ========================================================================= */
+  function restoreMarketing() {
+    var card = q('[data-card-id="marketing"]');
+    if (!card) return;
+    card.classList.add('wdv2-marketing-card');
+    var link = q('.wd5-marketing-link', card);
+    if (link) link.classList.add('wdv2-marketing-link');
+  }
+
+  /* =========================================================================
      4. County Tax Exposure donut, with an honest state for single-county
      ========================================================================= */
   function readCounties(card) {
@@ -472,6 +485,7 @@
     pinPartner();
     styleSponsor();
     fixSponsorBar();
+    restoreMarketing();
     upgradeCard();
     fixScoreSpark();
     trimRateCaption();

@@ -793,6 +793,7 @@ body.wdv2-mounted .wdv2-partner-close{ display: none !important; }
    9. MARKETING STUDIO + UPGRADE TO PRO
    --------------------------------------------------------------------------- */
 
+body.wdv2-mounted .wd4-card[data-card-id="marketing"],
 body.wdv2-mounted .wd4-card.wdv2-marketing-card{
   background: linear-gradient(135deg, #1d3fa0, #4b6ef5) !important;
   border-color: transparent !important;
@@ -800,16 +801,23 @@ body.wdv2-mounted .wd4-card.wdv2-marketing-card{
   padding: 0 !important;
   overflow: hidden !important;
 }
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-link,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-link{ color: #fff !important; height: 100% !important; position: relative; }
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-link:before,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-link:before{
   content: ""; position: absolute; width: 200px; height: 200px;
   right: -70px; top: -90px; border-radius: 50%;
   background: rgba(255,255,255,.09); pointer-events: none;
 }
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-copy small,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-copy small{ color: rgba(255,255,255,.75) !important; }
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-copy h3,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-copy h3,
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-cta,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-cta{ color: #fff !important; }
+body.wdv2-mounted [data-card-id="marketing"] .wd5-marketing-art i,
 body.wdv2-mounted .wdv2-marketing-card .wd5-marketing-art i{ background: rgba(255,255,255,.8) !important; }
+body.wdv2-mounted [data-card-id="marketing"] .wd4-card-title,
 body.wdv2-mounted .wdv2-marketing-card .wd4-card-title{ color: rgba(255,255,255,.8) !important; }
 
 /* Upgrade to Pro */
