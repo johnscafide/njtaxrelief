@@ -9,12 +9,18 @@ function client(){
 }
 function validPin(v){v=String(v||'').trim();return /^\d{4}_.+/.test(v)?v:''}
 function currentPin(){var select=document.getElementById('hm-switch'),fromSelect=select&&validPin(select.value);if(fromSelect)return fromSelect;try{return validPin(new URLSearchParams(location.search).get('pin'))}catch(_e){return''}}
-function publish(reason){var pin=currentPin();if(!pin)return;if(pin===lastPin&&reason!=='force')return;lastPin=pin;window.dispatchEvent(new CustomEvent('watchdog:property-context',{detail:{surface:'home',scope_type:'property',pams_pins:[pin],pams_pin:pin,section:window.WatchdogPageContext&&window.WatchdogPageContext.section?window.WatchdogPageContext.section():'overview',context_key:'home:'+pin,reason:reason||'property'}}));}
+function publish(reason){var pin=currentPin();if(!pin)return;if(pin===lastPin&&reason!=='force')return;lastPin=pin;window.dispatchEvent(new CustomEvent('watchdog:property-context',{detail:{surface:'home',scope_type:'property',pams_pins:[pin],pams_pin:pin,section:window.WatchdogPageContext&&window.WatchdogPageContext.section?window.WatchdogPageContext.section():'overview',context_key:'home:'+pin,reason:reason||'property',authoritative:true}}));}
 function installHistory(){
   window.watchdogScoreHistory=function(r,markerId){
     var sb=client(),pin=validPin(r&&r.pams_pin),marker=String(markerId||'watchdog.score').trim();
     if(!sb||!pin||!marker)return Promise.resolve([]);
-    return sb.from('score_observations').select('marker_id,score,observed_at,model_version').eq('pams_pin',pin).eq('marker_id',marker).order('observed_at',{ascending:true}).limit(240).then(function(result){if(result.error)throw result.error;return result.data||[];});
+    return sb.from('score_observations')
+      .select('pams_pin,marker_id,score,observed_at,model_version')
+      .eq('pams_pin',pin)
+      .eq('marker_id',marker)
+      .order('observed_at',{ascending:true})
+      .limit(365)
+      .then(function(result){if(result.error)throw result.error;return result.data||[];});
   };
   installed=true;
 }
@@ -27,6 +33,6 @@ function boot(){
   setTimeout(function(){installHistory();publish('boot')},50);
   setTimeout(function(){installHistory();publish('settled')},900);
 }
-window.WatchdogHomeSemanticBridge={publish:function(){publish('force')},scoreHistory:function(r,markerId){return window.watchdogScoreHistory(r,markerId)},contract:'global-property-marker-history-v1'};
+window.WatchdogHomeSemanticBridge={publish:function(){publish('force')},scoreHistory:function(r,markerId){return window.watchdogScoreHistory(r,markerId)},contract:'global-property-marker-history-v2'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
