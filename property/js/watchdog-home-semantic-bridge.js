@@ -1,11 +1,16 @@
 (function(){
 'use strict';
 if(window.__wdHomeSemanticBridge)return;window.__wdHomeSemanticBridge=true;
-var installed=false,lastPin='';
+var installed=false,lastPin='',clientRef=null;
+var PROD_URL='https://uvkvaxljhhngydvlrzom.supabase.co',PROD_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 function client(){
-  try{var a=window.NJPTRAccess&&window.NJPTRAccess.client&&window.NJPTRAccess.client();if(a)return a}catch(_e){}
-  try{var d=window.NJDashboard&&window.NJDashboard.client&&window.NJDashboard.client();if(d)return d}catch(_e){}
-  return null;
+  if(clientRef)return clientRef;
+  try{var a=window.NJPTRAccess&&window.NJPTRAccess.client&&window.NJPTRAccess.client();if(a){clientRef=a;return a}}catch(_e){}
+  try{var d=window.NJDashboard&&window.NJDashboard.client&&window.NJDashboard.client();if(d){clientRef=d;return d}}catch(_e){}
+  if(!window.supabase||!window.supabase.createClient)return null;
+  var cfg=window.WatchdogIntelligenceConfig||{};
+  clientRef=window.supabase.createClient(String(cfg.supabaseUrl||PROD_URL),String(cfg.publishableKey||PROD_KEY),{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:String(cfg.storageKey||'sb-uvkvaxljhhngydvlrzom-auth-token')}});
+  return clientRef;
 }
 function validPin(v){v=String(v||'').trim();return /^\d{4}_.+/.test(v)?v:''}
 function currentPin(){var select=document.getElementById('hm-switch'),fromSelect=select&&validPin(select.value);if(fromSelect)return fromSelect;try{return validPin(new URLSearchParams(location.search).get('pin'))}catch(_e){return''}}
