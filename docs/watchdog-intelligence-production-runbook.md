@@ -1,116 +1,220 @@
 # Watchdog Intelligence production runbook
 
-This runbook promotes the staged Watchdog Intelligence stack without changing the evidence contract or silently changing model behavior.
+This runbook governs production promotion of the complete Watchdog Intelligence release candidate in PR #63. It covers the deterministic model/calibration layer, Data Workbench and governed actions, population/Daily/Teams infrastructure, page-native Context Intelligence, Semantic Snapshot, deterministic scenarios, Watchdog Analyst, and production operations controls.
 
-## Promotion order
+Production promotion is intentionally fail-closed. Merging code is not the same as launching Intelligence to customers.
 
-1. Apply the Intelligence migrations in timestamp order. The Phase 6 migrations are additive and create population jobs, cache, digests, organization boundaries, worker claiming, browser-independent dispatch, and team run lineage.
-2. Deploy the governed Edge Functions before exposing the new UI:
-   - `intelligence-normalize-preview`
-   - `intelligence-score-preview`
-   - `intelligence-assessment-run-preview`
-   - `intelligence-closing-run-preview`
-   - `intelligence-change-run-preview`
-   - `intelligence-workbench-view-preview`
-   - `intelligence-property-context`
-   - `intelligence-analyst`
-   - `intelligence-learning`
-   - `intelligence-job-submit`
-   - `intelligence-job-worker`
-   - `intelligence-team`
-   - `intelligence-team-job-submit`
-   - `intelligence-operations-admin`
-3. Keep `intelligence-job-worker` with JWT verification disabled only because the function performs its own authorization. It accepts a short-lived one-time job token, the existing Watchdog automation secret, or a developer JWT. All other customer-facing Intelligence functions require JWT verification.
-4. Configure `OPENAI_API_KEY` only if AI prose is being enabled. Watchdog Analyst remains functional in deterministic mode when this key is absent. Configure `WATCHDOG_ANALYST_MODEL` to a supported model only after verifying the API model name and pricing. Do not infer provider cost when there is no versioned pricing record.
-5. Configure a high-entropy `WATCHDOG_AUTOMATION_SECRET` for manual operational use. Scheduled population dispatch does not place this secret in SQL or browser code.
-6. Schedule browser-independent population dispatch in production with `pg_cron` and the production Supabase function URL. Example:
+## Release gates before promotion
+
+Do not expose customer-facing Intelligence until every applicable launch gate is green:
+
+1. The exact release-candidate head has current authenticated desktop/mobile acceptance and access-boundary acceptance.
+2. Assessment calibration remains above the governed minimums: at least 25 genuine human-reviewed cases, precision >=70%, recall >=60%, and false-positive rate <=30%.
+3. The real production billing provider has passed controlled Live lifecycle acceptance. Sandbox/history is not a substitute for Live evidence.
+4. The feature branch is synchronized with current `main` and the final diff is reviewed.
+5. A fresh production schema, extension, function, advisor, entitlement, and rollback baseline is recorded.
+6. Required production extensions and secrets are configured deliberately without copying staging values.
+7. Production promotion is explicitly authorized before migrations, Edge Functions, worker/scheduler activation, or customer visibility are changed.
+8. Existing continuity/restore, legal, support, and platform release gates are not bypassed by the Intelligence release.
+
+If any gate is unresolved, keep PR #63 draft/unlaunched and keep production Intelligence fail-closed.
+
+## Production allowlist
+
+`property/intelligence/PRODUCTION-MANIFEST.md` is the authoritative production allowlist. Do not bulk-copy staging functions, fixtures, self-tests, test users, or staging secrets.
+
+### JWT-required Intelligence functions
+
+Deploy only reviewed production-eligible functions, including:
+
+- `intelligence-score-preview`
+- `intelligence-normalize-preview`
+- `intelligence-run-preview`
+- `intelligence-assessment-run-preview`
+- `intelligence-change-run-preview`
+- `intelligence-closing-run-preview`
+- `intelligence-workbench-view-preview`
+- `intelligence-property-context`
+- `intelligence-calibration-admin`
+- `intelligence-analyst`
+- `intelligence-learning`
+- `intelligence-learning-admin`
+- `intelligence-job-submit`
+- `intelligence-team`
+- `intelligence-team-job-submit`
+- `intelligence-operations-admin`
+- `intelligence-context-suggestions`
+- `intelligence-semantic-context`
+- `intelligence-scenario-preview`
+- `intelligence-scenario-from-prompt`
+- `intelligence-analyst-scenario`
+- `intelligence-context-event`
+
+The gateway JWT settings must match `supabase/config.toml` at promotion time.
+
+### Population worker custom authentication
+
+`intelligence-job-worker` is the only production-eligible Intelligence function with gateway `verify_jwt=false`.
+
+It is not an anonymous browser API. It must authorize every request through one of the reviewed internal boundaries:
+
+1. a matching non-expired one-time worker token hash, consumed on use;
+2. the production automation/worker secret boundary; or
+3. an authenticated Developer JWT verified inside the function.
+
+Never weaken this worker into a publicly callable unauthenticated endpoint.
+
+### Staging-only helpers
+
+Never promote staging self-test, bootstrap, fixture, debug, diagnostic, or disposable-account helpers. `intelligence-preview-review-user` is disabled with HTTP 410 and is not production eligible.
+
+## Model and evidence boundary
+
+Assessment Anomaly v5 is the current calibrated candidate. Historical model versions remain immutable for reproduction and rollback.
+
+Property-level and population-level scoring must consume the pinned model version's governed feature/cohort policy. Do not reintroduce hard-coded worker logic for sale eligibility, sale-recency confidence, cohort minimums/fallbacks, or tax-rate winsorization.
+
+Human calibration rows are staging audit evidence. They are not production seed data.
+
+Watchdog findings must preserve model version, facts hash, evidence coverage, source lineage, and downstream action lineage. Missing or conflicting evidence remains explicit.
+
+## Semantic source-truth boundary
+
+Semantic Snapshot is the governed factual boundary for page-native Intelligence, Analyst factual questions, and deterministic scenarios.
+
+- Competing observations are preserved.
+- Canonical observations are selected deterministically by the published source-authority policy and recency rules.
+- AI does not choose source truth.
+- Unknown, planned, invalid, unavailable, and conflicting markers remain explicit rather than being filled with generated values.
+- Scenario calculations consume canonical governed observations plus explicit user assumptions.
+
+## Analyst and scenario boundary
+
+Watchdog Analyst remains usable in deterministic mode without an LLM provider.
+
+- The LLM may provide optional prose/orchestration only.
+- It does not receive raw database credentials.
+- It does not write arbitrary SQL or perform arbitrary HTTP requests.
+- Approved Watchdog tools perform factual operations.
+- Financial scenario assumptions are parsed and calculated deterministically.
+- Missing required assumptions return an explicit needs-assumptions state; values are not guessed.
+- Stateful tool calls are not automatically replayed.
+
+Configure `OPENAI_API_KEY` and `WATCHDOG_ANALYST_MODEL` only if optional prose is intentionally enabled and the selected model/version has been verified.
+
+## Environment-specific scheduler configuration
+
+The recurring population dispatcher must not hard-code a Supabase project URL in a migration or shared SQL definition.
+
+Each environment stores its own worker configuration in Supabase Vault. Production configuration is created deliberately during the authorized promotion window.
+
+Required production secret names include:
+
+- `watchdog_intelligence_worker_url`
+- `watchdog_intelligence_worker_token`
+
+The worker URL value must use the production project only, for example:
+
+`https://<production-project-ref>.supabase.co/functions/v1/intelligence-job-worker`
+
+The reviewed scheduler path calls:
 
 ```sql
-select cron.schedule(
-  'watchdog-intelligence-production-dispatch',
-  '*/10 * * * *',
-  $$select public.dispatch_due_intelligence(
-    'https://YOUR_PRODUCTION_PROJECT.supabase.co/functions/v1/intelligence-job-worker',
-    5
-  );$$
-);
+select private.watchdog_dispatch_intelligence_cron(5);
 ```
 
-`dispatch_due_intelligence` generates a one-time worker token, stores only its SHA-256 hash, expires it after five minutes, and sends the raw token directly to the worker through `pg_net`.
+The private wrapper resolves the environment-specific worker URL from Vault. If required configuration is absent, dispatch must remain fail-closed rather than falling back to another environment.
 
-7. Deploy the stable frontend asset paths. Do not add `?v=` cache-busting parameters or versioned copies of Watchdog JavaScript/CSS files.
-8. Verify the developer Operations page before opening the feature to customers. A promotion is blocked if the model version, evidence coverage, failure rate, schedule health, or source lineage cannot be inspected.
+Keep recurring scheduler intake disabled until the direct production worker smoke test passes. Enable one controlled scheduled dispatch, verify the stop path, then enable recurring work only after acceptance.
+
+## Promotion sequence
+
+Customer visibility is the last step.
+
+1. Confirm all external and internal release gates are green, including real Live billing acceptance.
+2. Confirm the exact release-candidate head and current `main`; review the final compare/diff.
+3. Capture a fresh production preflight: schema, migration history, extensions, deployed functions, auth/entitlement state, advisor output, scheduler state, and rollback controls.
+4. Confirm the current production backup/restore evidence remains acceptable.
+5. Install only required database extensions deliberately. Keep recurring work disabled.
+6. Apply repository migrations in timestamp order and stop on any error.
+7. Verify migration history, tables, constraints, indexes, RLS, triggers, routines, model registry, current model pointer, and fail-closed scheduler wrapper.
+8. Configure production-only secrets deliberately. Do not copy staging values.
+9. Deploy only the Edge Functions in `property/intelligence/PRODUCTION-MANIFEST.md` with the pinned auth settings.
+10. Re-run security/performance advisors and compare the result with the pre-promotion baseline.
+11. Run Developer-only property smoke: Semantic Snapshot -> Assessment / Closing / Change -> finding lineage -> Analyst deterministic mode -> deterministic scenario.
+12. Run Standard / Pro / Pro+ / Teams / Developer entitlement smoke tests.
+13. Re-test Teams organization RLS with owner/member/viewer/outsider identities.
+14. Run one small direct population job with recurring scheduler still disabled.
+15. Verify job state, cache behavior, Daily digest, usage/quota telemetry, and Operations visibility.
+16. Configure/verify the production worker URL/token and run one controlled scheduled-dispatch acceptance.
+17. Prove the scheduler stop/disable path immediately after that acceptance.
+18. Test deterministic Intelligence with the optional LLM provider intentionally unavailable.
+19. Perform the rollback drill appropriate to the release candidate.
+20. Enable recurring work only if scheduler acceptance is clean.
+21. Enable calibrated customer visibility last.
+22. Record the production acceptance evidence and only then mark the release launched.
+
+If deployment architecture requires code to merge before some production smoke steps, use release configuration/visibility controls that keep Intelligence inaccessible until every remaining gate passes. Do not equate “merged” with “launched.”
 
 ## Plan boundaries
 
-- Pro: property-level Assessment Intelligence, Watchdog Analyst, Opportunity Value and outcome learning.
-- Pro+: browser-independent population jobs, saved/scheduled Intelligence scopes, Change Intelligence and Daily Intelligence.
-- Teams: explicit organization membership, shared population scopes/runs/findings, and role-based read/write boundaries.
-- Developer: model calibration, operations, diagnostics and worker controls.
+- Standard: no paid Intelligence entitlement.
+- Pro: property-level Assessment Intelligence and approved Pro tools.
+- Pro+: population/scheduled Intelligence, Change Intelligence, Daily Intelligence, and approved Pro+ tools.
+- Teams: explicit organization membership and governed shared scopes/runs/findings with role-based boundaries.
+- Developer: calibration, operations, diagnostics, and release controls.
 
-The database remains the enforcement boundary. Frontend plan labels are not trusted authorization.
-
-## Daily Intelligence behavior
-
-A scheduled scope resolves its governed property population on the server. The job pins the model version and scope fingerprint, processes the population in resumable batches, records job events, and writes a completed immutable run. A facts fingerprint and model/version key are used for caching. If the governed facts are unchanged, the prior run is reused and the digest records that no material change occurred. The browser is not part of this execution path.
-
-Daily digests compare the current run with the previous run for the same monitored scope/model and separate:
-
-- new findings
-- strengthened findings
-- weakened findings
-- removed findings
-- missing-evidence changes
-- the current recommended review queue
-
-These are review-priority changes, not predictions that an owner will transact.
-
-## Teams boundary
-
-Team sharing is explicit. A user is not placed into a team based on brokerage, email domain, CRM identity, property ownership, or any inferred relationship. Shared scopes, jobs, caches, digests, runs and findings carry an `organization_id`. RLS permits reading shared Intelligence only when the current authenticated user is an explicit organization member. Viewer roles cannot submit shared jobs.
-
-## AI boundary
-
-The LLM is optional prose and orchestration. It never receives raw database credentials and it never writes SQL. Approved Watchdog tools perform the factual operations. Deterministic output is available if the provider is unavailable. Stateful Watchdog tool calls are not automatically retried. The optional provider prose call has one bounded retry for transient transport/429/5xx failures.
-
-The Analyst refuses protected-class housing targeting, inferred seller intent or personal distress, and guarantees. User-entered financial assumptions remain labeled as scenarios and do not change Watchdog scores or facts.
+The database/server entitlement contract is the enforcement boundary. Frontend labels and View As presentation are not trusted authorization.
 
 ## Monitoring gates
 
 Before customer rollout, verify at minimum:
 
-- no new Supabase security-advisor errors from Intelligence objects
-- population job failure rate is acceptable for the staged workload
-- no stale running jobs beyond the worker lease threshold
-- P95 population completion time is within the product target for representative scopes
-- evidence coverage is visible and limited-evidence findings remain labeled
-- Analyst token usage and provider status are visible
-- provider cost is shown only when an explicit versioned cost record exists
-- scheduled scopes advance `next_run_at` after both computed runs and cache hits
-- organization members can read shared runs/findings and non-members cannot
-- model/version/facts lineage remains queryable after downstream Case, Report, Watchlist and value/outcome actions
+- no unexplained new Supabase security-advisor errors from the promoted objects;
+- population job failure rate is acceptable for the controlled production smoke workload;
+- no stale running jobs beyond the worker lease threshold;
+- representative completion latency is acceptable;
+- evidence coverage and missing-evidence labels remain visible;
+- source conflicts preserve all governed observations and canonical selection lineage;
+- Analyst provider state/token usage is visible when applicable;
+- provider cost is shown only when an explicit versioned cost record exists;
+- scheduled scopes advance after both computed runs and cache hits;
+- Teams members can read allowed shared runs/findings and outsiders cannot;
+- model/version/facts lineage remains queryable after Case, Report, Watchlist, feedback, and value/outcome actions;
+- public Support/Status surfaces remain privacy-safe and operational.
 
 ## Rollback
 
-1. Unschedule the production dispatcher:
+Rollback is fail-closed and non-destructive.
 
-```sql
-select cron.unschedule('watchdog-intelligence-production-dispatch');
-```
-
-2. Pause scheduled scopes without deleting their history:
-
-```sql
-update public.intelligence_scopes
-set is_scheduled=false, next_run_at=null, updated_at=now()
-where is_scheduled=true;
-```
-
-3. Mark queued/partial jobs canceled if they should not resume. Do not delete completed runs, findings, outcome events, feedback, evidence batches, or value snapshots.
-4. Revert the frontend deployment to remove customer entry points.
-5. If a model is the problem, demote the affected model/version in the governed registry rather than rewriting historical findings. Historical findings keep their pinned model version and facts hash.
-6. Leave additive tables in place unless a later reviewed migration removes them. Dropping audit/history tables is not part of an emergency frontend rollback.
+1. Disable customer-visible Intelligence entry points/feature visibility.
+2. Stop new recurring work by unscheduling/disabling the Intelligence Cron job or removing the environment-specific worker URL from Vault.
+3. Prevent new population submissions while preserving historical governed runs/findings for audit.
+4. Mark queued/partial jobs canceled only when they should not resume; do not delete completed history.
+5. Redeploy the prior known-good Edge Function versions when an API/worker regression caused the incident.
+6. Demote the affected model/version pointer rather than rewriting historical findings.
+7. Preserve evidence batches, facts hashes, calibration history, outcomes, feedback, Semantic Snapshot lineage, and completed runs.
+8. Use a forward corrective migration for schema fixes rather than editing production migration history.
+9. Re-run advisor checks and the smallest deterministic smoke test before re-enabling submissions, scheduler activity, or customer visibility.
 
 ## Production acceptance record
 
-Record the deployed Git commit, Supabase migration versions, Edge Function versions, model/version states, cron job ID, representative population benchmark, security-advisor result, and the reviewer who approved production promotion. This creates a reproducible boundary between staging acceptance and customer rollout.
+Record at minimum:
+
+- deployed Git commit;
+- merge/release timestamp;
+- Supabase migration versions;
+- deployed Edge Function versions and auth settings;
+- model/version states;
+- Semantic Snapshot/scenario/Analyst contract versions;
+- entitlement smoke results;
+- Teams RLS smoke results;
+- representative property/population smoke evidence;
+- Cron job ID and controlled scheduler acceptance;
+- security/performance advisor delta;
+- rollback/stop-path verification;
+- Live billing lifecycle evidence reference;
+- backup/restore evidence reference;
+- person explicitly authorizing production promotion.
+
+This creates a reproducible boundary between staging acceptance, merged code, and actual customer launch.
