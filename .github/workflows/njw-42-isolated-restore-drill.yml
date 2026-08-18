@@ -237,7 +237,7 @@ jobs:
             drill_type, environment, rpo_minutes, rto_minutes, passed, evidence, notes,
             release_version, restore_target, started_at, completed_at, reconciliation
           ) values (
-            'logical_restore', 'staging', :'rpo_minutes'::integer, :'rto_minutes'::integer, true,
+            'restore_rehearsal', 'staging', :'rpo_minutes'::integer, :'rto_minutes'::integer, true,
             jsonb_build_object(
               'method','supabase_cli_logical_backup_restore',
               'database_bytes', :'db_bytes'::bigint,
