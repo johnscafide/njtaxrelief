@@ -38,7 +38,7 @@
     if (!hero.querySelector('.wdg-hero-lead')) {
       var lead = document.createElement('p');
       lead.className = 'wdg-hero-lead';
-      lead.textContent = 'See assessments, taxes, sales and property signals behind the address. Understand what they mean.';
+      lead.textContent = 'See assessments, taxes, sales and property signals behind the address. <br>Understand what they mean.';
       search.parentNode.insertBefore(lead, search);
     }
 
