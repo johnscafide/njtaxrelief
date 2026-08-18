@@ -1,80 +1,160 @@
-# Watchdog Paddle billing setup
+# Watchdog Stripe billing setup
 
-Watchdog v0.47 uses Paddle as its billing provider. Customer-facing plan names are Free, Agent, Professional and Firm / API. The stable authorization tiers remain `standard`, `pro`, `pro_plus` and `teams`, so existing RLS and route guards do not need a risky rename. All credentials, Price IDs, entitlement changes and webhook verification stay server-side in Supabase Edge Functions.
+Stripe is the selected production subscription provider for Watchdog. New paid enrollment uses Stripe-hosted Checkout, verified Stripe webhooks, and Stripe Customer Portal. Paddle is legacy-only during migration and must not create new Watchdog subscriptions.
 
-## Secrets
+The customer-facing paid tiers are distinct server authorization tiers:
 
-Set these only in Supabase Edge Function secrets:
+| Offer | Server tier | Monthly | Yearly | Property capacity |
+| --- | --- | ---: | ---: | ---: |
+| Standard | `standard` | $0 | $0 | base/free limits |
+| Agent | `agent` | $59 | $590 | 25 |
+| Pro | `pro` | $129 | $1,290 | 250 |
+| Pro+ | `pro_plus` | $399 | $3,990 | 2,500 |
+| Teams | `teams` | Not open | Not open | gated |
 
-- `PADDLE_API_KEY`
-- `PADDLE_CLIENT_TOKEN` — Paddle.js client-side token for the matching Sandbox/Live environment; intentionally safe for client use but stored here to keep environment selection server-owned
-- `PADDLE_WEBHOOK_SECRET`
-- `PADDLE_PRICE_AGENT_MONTHLY`
-- `PADDLE_PRICE_AGENT_YEARLY`
-- `PADDLE_PRICE_PROFESSIONAL_MONTHLY`
-- `PADDLE_PRICE_PROFESSIONAL_YEARLY`
-- `PADDLE_ENVIRONMENT` — `sandbox` while testing, then `live`
-- `BILLING_CHECKOUT_ENABLED` — keep `false` until the full sandbox lifecycle passes
+Teams enrollment remains intentionally closed until the separate Teams sales/contracting path is approved.
 
-`PADDLE_PRICE_PRO` and `PADDLE_PRICE_PRO_PLUS` are accepted only as temporary monthly migration fallbacks. A yearly checkout never falls back to a monthly Price ID.
+## Environment secrets
 
-### Customer-facing catalog
+Configure these only as Supabase Edge Function secrets. Test/staging and Live values must never be mixed.
 
-| Offer | Authorization tier | Monthly | Yearly default |
-| --- | --- | ---: | ---: |
-| Free | `standard` | $0 | $0 |
-| Agent | `pro` | $29 | $290 |
-| Professional | `pro_plus` | $349 | $3,490 |
-| Firm / API | `teams` | $1,000+ | Contract |
+Required:
 
-Annual prices include two months at no additional cost. Firm / API checkout deliberately returns `FIRM_GATED` until team administration, contracting and usage controls are released.
+- `STRIPE_SECRET_KEY`
+- `STRIPE_WEBHOOK_SIGNING_SECRET`
+- `STRIPE_PRICE_AGENT_MONTHLY`
+- `STRIPE_PRICE_AGENT_YEARLY`
+- `STRIPE_PRICE_PRO_MONTHLY`
+- `STRIPE_PRICE_PRO_YEARLY`
+- `STRIPE_PRICE_PRO_PLUS_MONTHLY`
+- `STRIPE_PRICE_PRO_PLUS_YEARLY`
+- `PUBLIC_SITE_URL`
+- `BILLING_CHECKOUT_MODE`
 
-### Current Sandbox migration mapping
+Controlled-launch support:
 
-These IDs are environment-specific identifiers, not credentials. The Edge Functions still read them from server environment variables so Sandbox and Live can never be mixed accidentally.
+- `BILLING_CONTROLLED_USER_IDS` — comma-separated Supabase user IDs permitted while checkout mode is `controlled`
 
-- `PADDLE_PRICE_AGENT_MONTHLY=pri_01kzhtgke8bync5tjrgxged792`
-- `PADDLE_PRICE_PROFESSIONAL_MONTHLY=pri_01kzhtev36x06eaadc3t9qa1am`
-- Create separate Sandbox annual Price IDs for `PADDLE_PRICE_AGENT_YEARLY` and `PADDLE_PRICE_PROFESSIONAL_YEARLY`.
-- `PADDLE_ENVIRONMENT=sandbox`
-- `BILLING_CHECKOUT_ENABLED=false` until the acceptance gate passes
+Optional:
 
-Optional: `PADDLE_WEBHOOK_TOLERANCE_SECONDS` (defaults to Paddle SDK-compatible 5 seconds) and `PADDLE_API_BASE` for controlled testing.
+- `STRIPE_AUTOMATIC_TAX=true` only after the tax/compliance decision is complete and the Stripe Tax configuration is intentionally enabled
 
-Never place an API key, webhook secret, Supabase service-role key, or Paddle customer/subscription identifier in `/property` JavaScript.
+`BILLING_CHECKOUT_MODE` is the launch kill switch:
+
+- `closed` — no new paid Checkout sessions
+- `controlled` — only allowlisted launch/test user IDs can create Checkout sessions
+- `open` — public paid enrollment
+
+If `BILLING_CHECKOUT_MODE` is absent, the legacy `BILLING_CHECKOUT_ENABLED=true` value maps to `open`; otherwise enrollment defaults closed. Prefer the explicit three-state mode going forward.
+
+## Current verified Stripe Live catalog
+
+These Price IDs are identifiers, not credentials. Edge Functions still read them from environment variables so staging/test and Live cannot be mixed accidentally.
+
+- Agent monthly: `price_1SxwPKDOt5Ix0LdnrrHAri8Q`
+- Agent yearly: `price_1SxwPKDOt5Ix0LdnP4zVDBJC`
+- Pro monthly: `price_1SxwPLDOt5Ix0LdnhQVndeYA`
+- Pro yearly: `price_1SxwPLDOt5Ix0LdnSBpPlTAf`
+- Pro+ monthly: `price_1SxwPMDOt5Ix0LdnfCDOuYee`
+- Pro+ yearly: `price_1SxwPMDOt5Ix0LdnEDcLGdPV`
+
+Do not put Stripe secret keys, webhook signing secrets, Supabase service-role keys, or customer/subscription IDs in `/property` JavaScript.
+
+## Server entitlement contract
+
+Apply `supabase/migrations/20260818213000_watchdog_full_tier_entitlement_contract.sql` before activating Stripe subscriptions in production.
+
+It does three things:
+
+1. widens `account_entitlements.plan_tier` to `standard`, `agent`, `pro`, `pro_plus`, and `teams`;
+2. reconciles legacy coarse `plan_tier` values from the precise `billing_tier` where available; and
+3. replaces `has_watchdog_plan()` with the full ordered server ladder and fail-closed handling for unknown requested plans.
+
+The browser is not the entitlement authority. Paid access changes only after a verified provider webhook persists the server entitlement.
 
 ## Deploy order
 
-1. Apply `supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql`.
-2. Configure monthly and yearly recurring Agent and Professional Prices in Paddle Sandbox.
-3. Configure Paddle's default payment link so API-created transactions receive a `checkout.url`.
-4. Add the secrets above with sandbox values and keep checkout disabled.
-5. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
-6. Deploy `paddle-webhook` with JWT verification disabled. Paddle authenticates this endpoint with its `Paddle-Signature`; the function verifies the raw body HMAC before processing it.
-7. Create a Paddle notification destination at `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/paddle-webhook` for subscription lifecycle events (`created`, `updated`, `activated`, `trialing`, `past_due`, `paused`, `resumed`, `canceled`) plus `transaction.completed`.
-8. Set `BILLING_CHECKOUT_ENABLED=true` only in Sandbox and test: new Agent monthly, Agent yearly, Professional monthly, Professional yearly, Portal, upgrade, downgrade, cancellation scheduled at period end, `past_due`, resume, and duplicate/out-of-order webhook delivery.
-9. Confirm `account_entitlements` changes only from the verified webhook and `billing_provider_events` records the provider event once.
-10. Turn checkout back off, replace every Sandbox credential and Price ID with its Live counterpart, repeat the controlled four-offer live test, perform entitlement reconciliation and a restore drill, then intentionally open enrollment.
+1. Keep production `BILLING_CHECKOUT_MODE=closed`.
+2. Apply the full-tier entitlement migration in staging and run the role/access suite.
+3. Configure Stripe test-mode secrets and six test-mode recurring Price IDs in staging.
+4. Deploy `create-checkout-session` and `create-portal-session` with JWT verification enabled.
+5. Deploy `stripe-webhook` with gateway JWT verification disabled; Stripe authenticates it with `Stripe-Signature`, which the function verifies against the raw request body.
+6. Create a staging/test Stripe webhook destination for the staging Supabase `stripe-webhook` function.
+7. Configure Stripe Customer Portal in test mode for subscription cancellation and allowed plan/interval changes.
+8. Set staging `BILLING_CHECKOUT_MODE=controlled` and allow only controlled staging identities.
+9. Complete the staging lifecycle and entitlement acceptance below.
+10. Return staging checkout to `closed` if no more testing is needed.
+11. During an explicitly authorized production window, capture the production preflight and apply the entitlement migration.
+12. Configure the six verified Live Price IDs, Live Stripe secret key, and the Live webhook signing secret in production.
+13. Create the Live Stripe webhook endpoint and Live Customer Portal configuration.
+14. Set production `BILLING_CHECKOUT_MODE=controlled` with exactly the controlled Live acceptance user ID(s).
+15. Complete the controlled Live lifecycle, reconcile Stripe to `account_entitlements`, verify rollback/restore evidence, and run the role/access suite.
+16. Only after every launch gate is green, intentionally change production `BILLING_CHECKOUT_MODE=open`.
 
-## Production opening gate
+## Webhook events
 
-Do not turn on public Live enrollment merely because the UI is ready. All of the following must be recorded first:
+The Stripe webhook endpoint should deliver at minimum:
 
-- four recurring Live Price IDs are configured and independently verified;
-- a controlled Live purchase, webhook grant, portal visit, upgrade, downgrade and cancellation pass;
-- all four authorization roles pass route and RLS acceptance checks;
-- Paddle subscriptions reconcile to `account_entitlements` with no unexplained differences;
-- the production backup/restore evidence drill passes;
-- Firm / API remains gated unless the separate team-controls acceptance plan is complete.
+- `checkout.session.completed`
+- `customer.subscription.created`
+- `customer.subscription.updated`
+- `customer.subscription.deleted`
+- `invoice.payment_succeeded`
+- `invoice.payment_failed`
+- `charge.refunded`
 
-Paddle Customer Portal URLs are created on demand. They are temporary and are never cached or hard-coded into Watchdog pages.
+The same endpoint also supports existing Marketing Studio Checkout lifecycle events. Do not create a second entitlement writer.
 
-## Entitlement behavior
+Duplicate Stripe event IDs are ignored after the first processed event. Subscription entitlement writes also compare provider event time so an older subscription event cannot overwrite a newer persisted Stripe state.
 
-- `active` / `trialing`: paid access is granted according to the mapped Price ID.
-- `past_due`: billing state is retained so recovery can happen through Paddle; route authorization can be tightened later if business policy requires immediate suspension.
-- `paused` / `canceled`: `get_my_entitlement()` resolves the customer to Standard access.
-- Developer access is a separate server role and is never granted by checkout.
-- “View As” is visual QA only; it cannot change RLS, entitlement RPCs or paid route authorization.
+Unknown Stripe subscription Price IDs fail closed to Standard/no paid access. `incomplete`, `incomplete_expired`, `unpaid`, and unknown subscription states also fail closed instead of being converted to `past_due` access.
 
-Official Paddle references used for this implementation: Overlay Checkout/build checkout, webhook signature verification, subscription provisioning, Customer Portal sessions, Transactions and custom data in the Paddle Developer documentation.
+## Customer Portal behavior
+
+Existing Stripe subscribers are routed to Stripe Customer Portal rather than creating a duplicate subscription. Configure the Portal to expose only the Watchdog products/prices that are approved for self-service switching.
+
+Legacy Paddle customers may still open their Paddle portal while migration is underway, but `create-checkout-session` refuses to start a Stripe subscription for an account that still has a live-like Paddle subscription. This prevents accidental double billing.
+
+## Required staging acceptance
+
+For each entitlement assertion, test both the RPC result and protected route/RLS behavior.
+
+1. Standard cannot access Agent, Pro, or Pro+ server-gated features.
+2. Agent can access Agent features but cannot satisfy Pro or Pro+ checks.
+3. Pro can access Agent + Pro but cannot satisfy Pro+.
+4. Pro+ can access Agent + Pro + Pro+.
+5. Developer remains independent of billing and passes all developer gates.
+6. Create Agent monthly via Stripe Checkout; verified webhook grants exactly `agent` with capacity 25.
+7. Switch Agent monthly/yearly through Portal without creating a second active subscription.
+8. Upgrade to Pro and Pro+; access changes only after signed webhook receipt.
+9. Downgrade and verify the Stripe subscription/Portal policy produces the intended effective date and server entitlement.
+10. Schedule cancellation, reverse it, then complete cancellation and verify Standard access after the provider state changes.
+11. Produce a failed invoice/past-due state and verify recovery behavior through Portal.
+12. Exercise an unpaid/incomplete state and verify paid access fails closed.
+13. Refund a controlled payment and record the refund evidence. A refund does not silently invent a subscription state; subscription cancellation/state remains provider-driven.
+14. Replay a duplicate webhook and an older out-of-order subscription event; neither may corrupt the newer entitlement.
+15. Reconcile Stripe subscriptions/customers/prices against `account_entitlements` with no unexplained differences.
+
+## Controlled Live acceptance before public sales
+
+Public enrollment is blocked until one carefully controlled Live lifecycle produces evidence for:
+
+- real Live Checkout purchase;
+- signed webhook entitlement grant;
+- Customer Portal access;
+- monthly/yearly switch;
+- upgrade and downgrade behavior;
+- scheduled cancellation and reactivation/cancellation completion;
+- payment failure/recovery;
+- refund evidence;
+- duplicate and out-of-order webhook resilience;
+- Agent/Pro/Pro+/Developer route + RLS acceptance;
+- Stripe-to-database reconciliation;
+- production rollback/stop path;
+- current continuity/restore evidence.
+
+Keep `BILLING_CHECKOUT_MODE=controlled` for this test. Public sales start only when the release record is complete and the mode is intentionally changed to `open`.
+
+## Paddle retirement
+
+Do not delete historical Paddle customer/subscription/event data needed for audit or support. Paddle may remain available only for legacy portal access during migration. It must not be used for new enrollment after the Stripe cutover.
