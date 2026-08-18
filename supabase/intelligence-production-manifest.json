@@ -1,0 +1,194 @@
+{
+  "manifest_version": "watchdog-intelligence-production-v1",
+  "created_at": "2026-08-18T22:58:00Z",
+  "release_candidate": {
+    "pull_request": 63,
+    "branch": "feature/watchdog-intelligence-foundation",
+    "source_head_observed": "6c3d57bf8665a25015f7572fb830df836759c67e",
+    "production_project_ref": "uvkvaxljhhngydvlrzom",
+    "staging_project_ref": "pxossnwmrygxlpxtstnl"
+  },
+  "safety": {
+    "explicit_production_authorization_required": true,
+    "production_intelligence_expected_unpromoted_before_gate_5": true,
+    "customer_visibility_last": true,
+    "stripe_mutations_in_this_manifest": false,
+    "schema_down_migrations_are_not_the_primary_rollback": true
+  },
+  "external_prerequisites": [
+    "Controlled Live billing lifecycle gate is passed in its separate workstream.",
+    "Supabase Auth leaked-password protection is enabled and the advisor warning is cleared.",
+    "External counsel, insurance and data-rights launch items are documented.",
+    "External uptime alert owner and channel are assigned.",
+    "PR #63 is frozen and reconciled against current main immediately before promotion."
+  ],
+  "migrations": {
+    "apply_in_order": [
+      "20260817033000_watchdog_intelligence_foundation_v1.sql",
+      "20260817034500_watchdog_intelligence_model_fk_index.sql",
+      "20260817040500_watchdog_intelligence_preview_scoring_config.sql",
+      "20260817042000_watchdog_intelligence_immutable_model_versions.sql",
+      "20260817043500_watchdog_intelligence_normalization_registry.sql",
+      "20260817044000_watchdog_intelligence_normalization_indexes.sql",
+      "20260817050500_watchdog_intelligence_trusted_evidence_batches.sql",
+      "20260817054500_watchdog_intelligence_calibration_control_plane.sql",
+      "20260817061000_watchdog_intelligence_assessment_model_v3.sql",
+      "20260817063000_watchdog_intelligence_phase4_phase5_control_plane.sql",
+      "20260817064500_watchdog_intelligence_learning_reset_boundary.sql",
+      "20260817065500_watchdog_intelligence_phase45_fk_indexes.sql",
+      "20260817071000_watchdog_intelligence_phase6_scale.sql",
+      "20260817072000_watchdog_intelligence_phase6_claim_jobs.sql",
+      "20260817072100_watchdog_intelligence_property_change_v3.sql",
+      "20260817073000_watchdog_intelligence_phase6_browser_dispatch.sql",
+      "20260817073500_watchdog_intelligence_phase6_daily_cache_digest.sql",
+      "20260817074000_watchdog_intelligence_calibration_fk_index.sql",
+      "20260817074100_watchdog_intelligence_phase6_team_run_lineage.sql",
+      "20260817074500_watchdog_intelligence_phase6_fk_indexes.sql",
+      "20260817080000_watchdog_intelligence_saved_view_filter_support.sql",
+      "20260817082000_watchdog_intelligence_closing_formula_registry.sql",
+      "20260817084000_watchdog_intelligence_closing_plan_alignment.sql",
+      "20260817085000_watchdog_intelligence_evidence_source_contract.sql",
+      "20260817090000_watchdog_intelligence_assessment_v4_date_sanity.sql",
+      "20260817091000_watchdog_intelligence_assessment_derived_inputs.sql",
+      "20260817091500_watchdog_intelligence_formula_engine_alignment.sql",
+      "20260817114500_watchdog_intelligence_org_security_hardening.sql",
+      "20260817115000_watchdog_intelligence_phase6_quota_guards.sql",
+      "20260817115500_watchdog_intelligence_phase6_worker_token_hash_alignment.sql",
+      "20260817120000_watchdog_intelligence_phase6_finding_context.sql",
+      "20260817120500_watchdog_intelligence_phase6_terminal_job_cleanup.sql",
+      "20260817120708_watchdog_intelligence_phase6_scheduler.sql",
+      "20260817120850_watchdog_intelligence_phase6_advisor_hardening.sql",
+      "20260817121000_watchdog_intelligence_phase6_assessment_date_sanity_guard.sql",
+      "20260817121503_watchdog_intelligence_phase6_environment_safe_scheduler.sql",
+      "20260817142200_watchdog_intelligence_semantic_cache.sql",
+      "20260817142500_watchdog_intelligence_semantic_cache_user_scope.sql",
+      "20260817155300_watchdog_intelligence_assessment_date_guard_source_year.sql",
+      "20260817175500_watchdog_intelligence_assessment_v5_calibrated_review_window.sql",
+      "20260818151000_watchdog_prelaunch_fk_index_hardening.sql",
+      "20260818221624_watchdog_teams_org_plan_boundary.sql",
+      "20260818221753_watchdog_agent_workbench_plan_boundary.sql"
+    ],
+    "reconcile_only_do_not_reapply_blindly": [
+      {
+        "file": "20260818213000_watchdog_full_tier_entitlement_contract.sql",
+        "reason": "Production already has newer normalized entitlement helper migrations; compare object definitions instead of replacing newer RPC contracts."
+      },
+      {
+        "file": "20260818214500_watchdog_standard_entitlement_access_fix.sql",
+        "reason": "Production already has newer entitlement/access helper migrations; validate behavior and preserve the newer production object contract."
+      }
+    ],
+    "known_newer_production_entitlement_versions_to_preserve": [
+      "20260818215834",
+      "20260818220133",
+      "20260818220137",
+      "20260818220559",
+      "20260818221438",
+      "20260818223355",
+      "20260818223916",
+      "20260818224258"
+    ]
+  },
+  "edge_functions": {
+    "deploy_allowlist": [
+      { "name": "intelligence-score-preview", "verify_jwt": true },
+      { "name": "intelligence-normalize-preview", "verify_jwt": true },
+      { "name": "intelligence-run-preview", "verify_jwt": true },
+      { "name": "intelligence-assessment-run-preview", "verify_jwt": true },
+      { "name": "intelligence-change-run-preview", "verify_jwt": true },
+      { "name": "intelligence-closing-run-preview", "verify_jwt": true },
+      { "name": "intelligence-workbench-view-preview", "verify_jwt": true },
+      { "name": "intelligence-property-context", "verify_jwt": true },
+      { "name": "intelligence-calibration-admin", "verify_jwt": true },
+      { "name": "intelligence-analyst", "verify_jwt": true },
+      { "name": "intelligence-learning", "verify_jwt": true },
+      { "name": "intelligence-learning-admin", "verify_jwt": true },
+      { "name": "intelligence-job-submit", "verify_jwt": true },
+      { "name": "intelligence-job-worker", "verify_jwt": false },
+      { "name": "intelligence-team", "verify_jwt": true },
+      { "name": "intelligence-team-job-submit", "verify_jwt": true },
+      { "name": "intelligence-operations-admin", "verify_jwt": true },
+      { "name": "intelligence-context-suggestions", "verify_jwt": true },
+      { "name": "intelligence-semantic-context", "verify_jwt": true },
+      { "name": "intelligence-scenario-preview", "verify_jwt": true },
+      { "name": "intelligence-scenario-from-prompt", "verify_jwt": true },
+      { "name": "intelligence-analyst-scenario", "verify_jwt": true },
+      { "name": "intelligence-context-event", "verify_jwt": true }
+    ],
+    "explicitly_excluded_staging_or_diagnostic_functions": [
+      "intelligence-preview-review",
+      "intelligence-preview-acceptance",
+      "intelligence-analyst-selftest",
+      "intelligence-workbench-selftest",
+      "intelligence-phase6-selftest",
+      "intelligence-recalibrate",
+      "intelligence-analyst-smoke",
+      "intelligence-analyst-finaltest",
+      "intelligence-analyst-v5-selftest",
+      "intelligence-analyst-certification"
+    ]
+  },
+  "configuration": {
+    "required_vault_entries": [
+      {
+        "name": "watchdog_intelligence_worker_url",
+        "production_value_shape": "https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/intelligence-job-worker",
+        "purpose": "Server-side scheduler dispatch destination; absent value keeps recurring Intelligence disabled."
+      }
+    ],
+    "optional_edge_secrets": [
+      {
+        "name": "OPENAI_API_KEY",
+        "purpose": "Optional Analyst prose rewrite only; deterministic governed Intelligence must remain functional without it."
+      },
+      {
+        "name": "WATCHDOG_ANALYST_MODEL",
+        "purpose": "Optional prose-model override; never a source of truth."
+      },
+      {
+        "name": "WATCHDOG_AUTOMATION_SECRET",
+        "purpose": "Optional manual/automation worker authorization path; scheduled jobs use one-time worker tokens."
+      }
+    ]
+  },
+  "preflight": [
+    "Freeze the exact PR #63 head and reconcile it against current main.",
+    "Verify production Intelligence tables/functions targeted by this manifest are still unpromoted or reconcile any partial prior state.",
+    "Verify current production get_my_entitlement and has_watchdog_plan preserve Standard, Agent, Pro, Pro+, Teams and Developer behavior; do not replace newer helper definitions with older branch SQL.",
+    "Confirm all external prerequisites above are satisfied.",
+    "Confirm customer-facing Intelligence visibility remains off.",
+    "Confirm worker scheduler is fail-closed until the production worker URL Vault entry is intentionally created.",
+    "Capture pre-promotion production security and performance advisor snapshots.",
+    "Capture an exact database backup/restore checkpoint and rollback owner."
+  ],
+  "post_deploy_smoke_matrix": {
+    "standard": ["baseline property facts allowed", "Agent Data Workbench saved-view write denied", "Pro+ Data Center write denied", "Teams organization write denied"],
+    "agent": ["Agent Data Workbench saved-view write allowed", "Pro property Intelligence denied where required", "Pro+ Data Center write denied", "Teams organization write denied"],
+    "pro": ["Agent Data Workbench allowed", "property-level Intelligence and Analyst allowed", "Pro+ Data Center/population write denied", "Teams organization write denied"],
+    "pro_plus": ["Agent Data Workbench allowed", "property-level Intelligence allowed", "Data Center and population Intelligence allowed", "Teams organization write denied"],
+    "teams": ["Agent Data Workbench allowed", "Pro and Pro+ Intelligence allowed", "Data Center/population allowed", "organization/team workspace CRUD allowed"],
+    "developer": ["developer operational bypass remains explicit and audited"]
+  },
+  "runtime_acceptance": [
+    "Run one deterministic property-level Intelligence request with evidence lineage.",
+    "Run Watchdog Analyst and verify the approved tool, evidence, missing evidence and suggested actions persist even if the prose provider is unavailable.",
+    "Run one deterministic scenario with explicit assumptions.",
+    "Submit one controlled Pro+ population job and verify queue → worker → run → findings → Daily Intelligence lineage.",
+    "Repeat the same scheduled scope/day and verify idempotent no-duplicate behavior.",
+    "Verify stale worker locks are reclaimable after the configured timeout.",
+    "Verify a controlled failing job retries with backoff and reaches terminal failed state after max retries.",
+    "Verify per-scope scheduling can be disabled and the global cron job can be deactivated/restored.",
+    "Re-run authenticated desktop/mobile acceptance and the access-boundary suite.",
+    "Re-run Supabase security/performance advisors and review only the delta."
+  ],
+  "rollback_stop_order": [
+    "Keep customer-facing Intelligence visibility off or turn it off first if it was enabled during a controlled canary.",
+    "Deactivate the watchdog-intelligence-dispatch cron job.",
+    "Disable scheduled Intelligence scopes if a queue must be frozen.",
+    "Remove or disable the watchdog_intelligence_worker_url Vault entry to make recurring dispatch fail closed.",
+    "Cancel only queued/running controlled rollout jobs; preserve completed run/finding evidence for audit.",
+    "Redeploy the last accepted Edge Function revisions if a function regression caused the rollback.",
+    "Prefer forward-fix/additive schema reconciliation over destructive down-migrations; restore the isolated backup only for a true data-integrity incident.",
+    "Re-run role, advisor, uptime and deterministic-Intelligence checks before resuming scheduler or customer visibility."
+  ]
+}
