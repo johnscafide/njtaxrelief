@@ -52,15 +52,15 @@ function json(req: Request, body: unknown, status = 200) {
 }
 
 function checkoutMode() {
-  const explicit = String(Deno.env.get('BILLING_CHECKOUT_MODE') || '').trim().toLowerCase();
+  // This key is intentionally Stripe-cutover-specific. Legacy Paddle launch
+  // flags cannot accidentally open Live Stripe enrollment.
+  const explicit = String(Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') || '').trim().toLowerCase();
   if (['closed', 'controlled', 'open'].includes(explicit)) return explicit;
-  // Never inherit a legacy billing flag into the Stripe cutover. A production
-  // environment must explicitly choose controlled/open after lifecycle evidence.
   return 'closed';
 }
 
 function controlledUsers() {
-  return new Set(String(Deno.env.get('BILLING_CONTROLLED_USER_IDS') || '').split(',').map(v => v.trim()).filter(Boolean));
+  return new Set(String(Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') || '').split(',').map(v => v.trim()).filter(Boolean));
 }
 
 function priceFor(tier: Tier, cadence: Cadence) {
