@@ -137,7 +137,7 @@
             '<div class="wdg-evidence-item"><i class="fas fa-link"></i><div><b>Sources stay attached</b><span>Important values remain traceable to the public source or governed formula behind them.</span></div></div>',
             '<div class="wdg-evidence-item"><i class="fas fa-calculator"></i><div><b>Calculations are labeled</b><span>A Watchdog-derived value is not presented as though a government agency published it.</span></div></div>',
             '<div class="wdg-evidence-item"><i class="fas fa-signal"></i><div><b>Confidence follows the evidence</b><span>Coverage and missing inputs affect how strongly a result should be read.</span></div></div>',
-            '<div class="wdg-evidence-item"><i class="fas fa-circle-minus"></i><div><b>No evidence, no invented answer</b><span>If a defensible value cannot be produced, Watchdog can leave it unavailable instead of guessing.</span></div></div>',
+            '<div class="wdg-evidence-item"><i class="fas fa-circle-minus"></i><div><b>Only defensible values</b><span>If a defensible value cannot be produced, Watchdog can leave it unavailable instead of guessing.</span></div></div>',
           '</div>',
         '</div>',
       '</div>'
