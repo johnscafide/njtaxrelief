@@ -49,16 +49,16 @@ If `BILLING_CHECKOUT_MODE` is absent, the legacy `BILLING_CHECKOUT_ENABLED=true`
 
 ## Current verified Stripe Live catalog
 
-These Price IDs are identifiers, not credentials. Edge Functions still read them from environment variables so staging/test and Live cannot be mixed accidentally.
+Verified against the connected Stripe Live account on August 18, 2026. These Price IDs are identifiers, not credentials. Configure them as production environment values; staging must use separate Stripe test-mode Price IDs.
 
-- Agent monthly: `price_1SxwPKDOt5Ix0LdnrrHAri8Q`
-- Agent yearly: `price_1SxwPKDOt5Ix0LdnP4zVDBJC`
-- Pro monthly: `price_1SxwPLDOt5Ix0LdnhQVndeYA`
-- Pro yearly: `price_1SxwPLDOt5Ix0LdnSBpPlTAf`
-- Pro+ monthly: `price_1SxwPMDOt5Ix0LdnfCDOuYee`
-- Pro+ yearly: `price_1SxwPMDOt5Ix0LdnEDcLGdPV`
+- Agent monthly: `price_1U5qPZAgYeNIcesFuC2gKGTz`
+- Agent yearly: `price_1U5qPjAgYeNIcesFCXaHoU0c`
+- Pro monthly: `price_1U5qPyAgYeNIcesFy57ssZsV`
+- Pro yearly: `price_1U5qQAAgYeNIcesF6UOsmwAX`
+- Pro+ monthly: `price_1U5qQKAgYeNIcesFmQqrWROC`
+- Pro+ yearly: `price_1U5qQUAgYeNIcesFOSN8JZjR`
 
-Do not put Stripe secret keys, webhook signing secrets, Supabase service-role keys, or customer/subscription IDs in `/property` JavaScript.
+The production runtime should prefer environment configuration. Do not use Live Price identifiers as staging defaults, and never put Stripe secret keys, webhook signing secrets, Supabase service-role keys, or customer/subscription IDs in `/property` JavaScript.
 
 ## Server entitlement contract
 
