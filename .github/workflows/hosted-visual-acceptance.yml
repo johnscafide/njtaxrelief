@@ -7,6 +7,7 @@ on:
     paths:
       - 'property/tests/hosted-visual-acceptance.mjs'
       - 'property/tests/ops-selfservice-acceptance.mjs'
+      - 'property/tests/public-property-production-smoke.mjs'
       - 'property/dashboard/**'
       - 'property/home/**'
       - 'property/agent-desk/**'
@@ -121,6 +122,9 @@ jobs:
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+
+      - name: Verify production property page has no fatal script error
+        run: node property/tests/public-property-production-smoke.mjs
 
       - name: Start local release-candidate server
         shell: bash
