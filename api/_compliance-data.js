@@ -1,6 +1,6 @@
 module.exports = {
   "program": "Watchdog Compliance Readiness",
-  "version": 3,
+  "version": 4,
   "updated_at": "2026-08-19",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
@@ -121,6 +121,19 @@ module.exports = {
       "rationale": "A written runbook alone does not demonstrate that the response sequence is coherent when applied to a realistic incident; exercising it produces operating evidence and exposes gaps before a real event.",
       "residual_risk": "The tabletop does not measure real-world response speed, staging recovery performance, provider coordination or independent effectiveness.",
       "next_step": "Add a reusable incident record template, define provisional RTO/RPO targets, and conduct a future connector or credential-revocation exercise."
+    },
+    {
+      "id": "WCR-2026-08-19-002",
+      "date": "2026-08-19",
+      "title": "Seven no-cost readiness tracks activated",
+      "frameworks": ["OWASP ASVS 5.0", "NIST CSF 2.0", "WCAG 2.2 AA", "PCI DSS", "NJDPA", "SOC 2", "ISO/IEC 27001"],
+      "control_area": "Security, privacy, accessibility and assurance readiness",
+      "status": "implemented",
+      "action": "Activated all seven zero-cost readiness tracks: ASVS Level 2 baseline mapping, NIST Current/Target Profile, WCAG 2.2 AA evidence program, TLS/HSTS measurement, PCI scope documentation, NJDPA data-protection assessment discipline, and a factual public Security & Trust Center. Added CI evidence generators and claim-boundary tests, and reconciled the public privacy policy's financial-data classification with the New Jersey statute.",
+      "evidence": ["property/docs/compliance/SEVEN-TRACK-SPRINT-2026-08-19.md", "property/docs/compliance/ASVS-5-L2-BASELINE.md", "property/docs/compliance/NIST-CSF-2-PROFILE.md", "property/docs/compliance/WCAG-2.2-AA-BASELINE.md", "property/docs/compliance/TLS-SECURITY-BASELINE.md", "property/docs/compliance/PCI-SCOPE-MEMO.md", "property/docs/compliance/NJDPA-DATA-PROTECTION-ASSESSMENT.md", "property/trust/index.html", ".github/workflows/zero-cost-compliance-readiness.yml"],
+      "rationale": "The strongest use of a zero-dollar budget is to build controls, repeatable evidence, accurate public claims and audit-ready documentation now, leaving only genuinely independent validation for a later paid phase.",
+      "residual_risk": "Several tracks remain readiness programs rather than completed external assurance: ASVS requirement-level verification, manual/authenticated accessibility testing, final PCI merchant validation and ASV scanning, external TLS grading, and independent SOC/ISO/security testing remain incomplete.",
+      "next_step": "Use the twice-daily cadence to review generated accessibility/TLS evidence, begin requirement-level ASVS verification, build the NIST risk register, inventory payment/data fields and expand manual/authenticated WCAG evidence."
     }
   ]
 };
