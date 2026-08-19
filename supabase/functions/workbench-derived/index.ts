@@ -2,7 +2,7 @@ declare const Deno: any;
 // @ts-ignore remote runtime import
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ENGINE_VERSION = 'watchdog-derived-v12-score-products';
+const ENGINE_VERSION = 'watchdog-derived-v13-ratio-floor';
 const CHAPTER123_PROVIDER = 'chapter123-provider-v3';
 const SR1A_SUBJECT_PROVIDER = 'sr1a-subject-provider-v1';
 const SR1A_SUMMARY_URL = 'https://njpropertytaxrelief.com/property/sr1a-ratios.json';
@@ -153,7 +153,7 @@ Deno.serve(async (req: Request) => {
       if (memo.has(id)) return memo.get(id); const def: any = defMap.get(id); if (!def || stack.has(id)) return null; stack.add(id);
       const value = (dep: string) => (defMap.has(dep) ? evalId(dep) : rawValue(dep)); const cfg = def.config || {}; let v: any = null;
       if (def.operation === 'year_delta') { const x = value(cfg.dep); let year = num(x); if (cfg.date_year && !year) { const match = String(x || '').match(/(19|20)\d{2}/); if (match) year = Number(match[0]); } if (year && year > 1600) v = new Date().getUTCFullYear() - year; }
-      else if (def.operation === 'ratio') { const numerator = num(value(cfg.num)), denominator = num(value(cfg.den)); if (numerator != null && denominator != null) { if (denominator === 0) v = cfg.zero_as_100 && numerator === 0 ? 100 : null; else v = round(numerator / denominator * Number(cfg.scale ?? 1), Number(cfg.precision ?? 3)); } }
+      else if (def.operation === 'ratio') { const numerator = num(value(cfg.num)), denominator = num(value(cfg.den)); if (numerator != null && denominator != null) { const denominatorFloor = num(cfg.den_min); const effectiveDenominator = denominatorFloor == null ? denominator : Math.max(denominator, denominatorFloor); if (effectiveDenominator === 0) v = cfg.zero_as_100 && numerator === 0 ? 100 : null; else v = round(numerator / effectiveDenominator * Number(cfg.scale ?? 1), Number(cfg.precision ?? 3)); } }
       else if (def.operation === 'completeness') { const requirements: any[] = Array.isArray(cfg.requirements) ? cfg.requirements : (def.dependencies || []); if (requirements.length) { const ok = (q: any) => { if (cfg.mode === 'checked' && typeof q === 'string') return defMap.has(q) ? present(value(q)) : checked(q); if (typeof q === 'string') return present(value(q)); if (q?.all) return q.all.every((x: string) => present(value(x))); if (q?.ratio) { const a = num(value(q.ratio[0])), z = num(value(q.ratio[1])); return a != null && z != null && z !== 0; } return false; }; v = Math.round(requirements.filter(ok).length / requirements.length * 100); } }
       else if (def.operation === 'inverse') { const x = num(value(cfg.dep)); if (x != null) v = clamp(100 - x); }
       else if (def.operation === 'permit_closure') { const permits = num(value('preflight.permit_count')), open = num(value('preflight.open_permit_count')); if (permits != null || open != null) { if ((permits || 0) <= 0) v = (open || 0) > 0 ? 0 : 100; else v = Math.round((1 - Math.min((open || 0) / permits!, 1)) * 100); } }
