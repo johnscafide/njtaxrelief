@@ -9,7 +9,7 @@
     "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-recover": {"version": 4, "sha256": "585b06cb36319483b52a2fc94767c6d5c2ee167346a5192029d92095a13f4441", "verify_jwt": false, "tracking": "fingerprint_only"},
     "bulk-marker-hydrate": {"version": 7, "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "chapter123-provider": {"version": 3, "sha256": "7a4d95e3a3584651ff8907e1af95e2f3213e3a2fbbb58c32988b852ac4c67a8", "verify_jwt": false, "tracking": "source_snapshot"},
+    "chapter123-provider": {"version": 3, "sha256": "7a4d95e3a3584651ff2cafbf20977b20af79af4f70893f1e1db4915d083af8df", "verify_jwt": false, "tracking": "source_snapshot"},
     "create-checkout-session": {"version": 31, "sha256": "a5ec53482b67b72b86ee6d0e7bcafdd707e3910a6971dfcffb7b4dcf197ebb7b", "verify_jwt": true, "tracking": "source_snapshot"},
     "create-portal-session": {"version": 19, "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c", "verify_jwt": true, "tracking": "source_snapshot"},
     "developer-sandbox-bootstrap": {"version": 5, "sha256": "5a7b06e2ed537ebe1071827e8d9dd168f1a426d5bfe28909f03420f4fe4de6ac", "verify_jwt": true, "tracking": "fingerprint_only"},
