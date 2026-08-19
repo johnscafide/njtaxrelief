@@ -10,6 +10,8 @@ must(adapter.includes("buyer_research")&&adapter.includes("listing_farm")&&adapt
 must(adapter.includes('Seller motivation, willingness to transact and private life circumstances are never inferred.'),'farm lens must prohibit seller-intent inference');
 must(adapter.includes('ROI, rent, rehab cost and exit value are not invented'),'investment lens must prohibit invented deal economics');
 must(adapter.includes('watchdog:intent-updated')&&adapter.includes('watchdog:intent-ready'),'adapter must consume new and rehydrated confirmed intent');
+must(adapter.includes("event_type:'analysis_adaptation'")&&adapter.includes("fact_class:'derived'")&&adapter.includes('decision_question')&&adapter.includes('safety_boundary'),'every applied Analyst lens must append a reconstructable derived decision event');
+must(adapter.includes('lastLoggedKey')&&adapter.includes("contextKey+'|'+state.job"),'analysis-adaptation logging must deduplicate rerenders without erasing history');
 must(ready.includes("intelligence_intent_states")&&ready.includes("active_job_confidence")&&ready.includes("watchdog:intent-ready"),'reload bridge must restore confirmed Context Graph state');
 must(clear.includes("wd-intent-context.is-question")&&clear.includes("watchdog:intent-cleared"),'context correction must clear stale job analysis');
 must(loader.includes('watchdog-intent-analysis-adapter.js')&&loader.includes('watchdog-intent-ready-bridge.js')&&loader.includes('watchdog-intent-clear-bridge.js'),'loader must wire the full adaptation lifecycle');
