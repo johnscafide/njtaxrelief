@@ -4,6 +4,37 @@ This runbook governs production promotion of the complete Watchdog Intelligence 
 
 Production promotion is intentionally fail-closed. Merging code is not the same as launching Intelligence to customers.
 
+## Current production status — Gate 5 accepted 2026-08-18
+
+The **technical/private production Intelligence promotion is complete and accepted**. This does not mean public customer launch is complete.
+
+Verified production state:
+
+- PR #63 is merged to `main` at merge commit `5060324381d2035d11e1e8b2e2674109b6a72faf`.
+- All 43 migrations in the reviewed Intelligence production manifest are present/reconciled in production.
+- All **23/23** production-allowlisted Intelligence Edge Functions are deployed on the accepted bundle/auth boundaries.
+- `pg_cron`, Vault and the required `pg_net` runtime dependency are available for the reviewed environment-safe dispatcher.
+- Vault contains the production worker URL by name; values are not logged into release evidence.
+- Production Cron job `2` runs `select private.watchdog_dispatch_intelligence_cron(5);` every five minutes.
+- Controlled population canary job `443fc535-5789-495e-8dcc-61680584cae0` completed after exercising resumable retry recovery, processed one governed property and produced one finding/run `a8c40272-b199-402f-ab4b-6fad1de9410e` with worker `watchdog-population-worker-v3-governed-assessment-features`.
+- Identical cache canary `c87cf0a6-9785-4a6d-96e9-9099a8426a03` returned `cache_hit` and reused the accepted run/facts lineage.
+- The scheduler stop path was explicitly proven by disabling Cron job `2`, verifying it inactive, then re-enabling the same job at the reviewed cadence.
+- A redundant Data Workbench catch-all RLS policy discovered by the post-promotion Advisor was removed; the granular owner/team policies using `can_use_data_workbench()` remain the single authorization path. Forward migration: `20260819014000_watchdog_data_workbench_view_policy_dedup.sql`.
+- Fresh Performance Advisor output contains **zero WARN-level findings**; remaining entries are informational unused-index observations only.
+- Security Advisor findings remain classified against `docs/property/security-definer-audit-2026-08-17.md`. Public score/telemetry and signed-in owner/plan-gated SECURITY DEFINER functions remain intentional product API boundaries. Fail-closed service tables remain closed.
+- Supabase leaked-password protection is intentionally deferred on the current Free plan by owner decision and is not an initial-launch blocker. Revisit after at least 10 new users (NJW-217).
+- The canary sandbox identity was disabled, Auth-banned and stripped of active sessions/refresh tokens after acceptance; governed run/finding evidence remains for audit.
+- Durable acceptance record: `2026-08-18-intelligence-production-gate5-canary`, id `ca422fa6-41fa-4419-887e-de4b2b31f70a`.
+- Release gate `intelligence.production_gate5` is **passed**.
+
+Still intentionally closed:
+
+- customer Intelligence visibility;
+- paid enrollment;
+- Stripe Live webhook.
+
+The remaining public paid-launch gates are the production Stripe Live secret/signing-secret configuration plus controlled real-money lifecycle evidence, and external legal/insurance review. Customer visibility remains last.
+
 ## Release gates before promotion
 
 Do not expose customer-facing Intelligence until every applicable launch gate is green:
@@ -17,7 +48,7 @@ Do not expose customer-facing Intelligence until every applicable launch gate is
 7. Production promotion is explicitly authorized before migrations, Edge Functions, worker/scheduler activation, or customer visibility are changed.
 8. Existing continuity/restore, legal, support, and platform release gates are not bypassed by the Intelligence release.
 
-If any gate is unresolved, keep PR #63 draft/unlaunched and keep production Intelligence fail-closed.
+The technical/private promotion portion of these controls has now passed as recorded above. If a remaining public-launch gate is unresolved, keep customer visibility fail-closed.
 
 ## Production allowlist
 
