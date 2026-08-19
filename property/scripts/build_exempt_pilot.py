@@ -189,12 +189,18 @@ def build_abatements(abstract):
             "abated_share": share,
         }
     ranked = percentile_map(districts, "abated_share")
-    median = sorted(shares)[len(shares) // 2] if shares else 0
+    positive_shares = sorted(share for share in shares if share > 0)
+    if positive_shares:
+        mid = len(positive_shares) // 2
+        median = (positive_shares[mid] if len(positive_shares) % 2
+                  else (positive_shares[mid - 1] + positive_shares[mid]) / 2)
+    else:
+        median = 0
     for code, pct in ranked.items():
         districts[code]["percentile"] = pct
         districts[code]["vs_median"] = districts[code]["abated_share"] / median if median else 0
     return {
-        "_readme": "2025 statewide partial exemption/abatement values rebuilt from the NJ Abstract of Ratables.",
+        "_readme": "2025 statewide partial exemption/abatement values rebuilt from the NJ Abstract of Ratables. vs_median uses the statewide median among municipalities with positive abatement share so the benchmark is not collapsed by the majority-zero distribution.",
         "source": "NJ Division of Taxation 2025 Abstract of Ratables, column 3",
         "statewide_median_share": median,
         "districts": districts,
