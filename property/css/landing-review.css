@@ -13,7 +13,7 @@ body.hood-on .landing-faq,
 body.hood-on .section:has(.ins-grid),
 body.hood-on .section:has(.gt-banner){display:none!important}
 
-body.wd-consumer-mode .pl-hero{min-height:390px;padding-top:92px;padding-bottom:76px}
+body.wd-consumer-mode .pl-hero{min-height:390px;padding-top:92px;padding-bottom:76px;position:relative;z-index:20;overflow:visible}
 body.wd-consumer-mode .pl-hero h1{max-width:820px;margin-left:auto;margin-right:auto;font-size:clamp(2.25rem,5.1vw,3.65rem);letter-spacing:-.045em}
 body.wd-consumer-mode .pl-input{font-size:17px}
 
@@ -30,7 +30,7 @@ body.wd-consumer-mode .wd-nav.solid .wd-nav-in{padding-top:11px;padding-bottom:1
 .wd-section-link,.wd-directory-more a,.wd-guide-all{display:inline-flex;align-items:center;gap:9px;color:#087f82;text-decoration:none;font-size:16px;font-weight:800;white-space:nowrap}
 .wd-section-link:hover,.wd-directory-more a:hover,.wd-guide-all:hover{text-decoration:underline;text-underline-offset:4px}
 
-.wd-consumer-recents{background:#fff;padding:34px 0 54px;border-bottom:1px solid #e8ecec}
+.wd-consumer-recents{background:#fff;padding:34px 0 54px;border-bottom:1px solid #e8ecec;position:relative;z-index:1}
 .wd-property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .wd-property-card,.wd-free-card,.wd-empty-card{min-width:0;border-radius:24px;overflow:hidden;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
 .wd-property-card{background:#f6f8f8;color:#172234}
