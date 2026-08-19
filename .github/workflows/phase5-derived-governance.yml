@@ -5,6 +5,9 @@ on:
     paths:
       - 'property/data/marker-registry.json'
       - 'property/data/derived-marker-formulas.json'
+      - 'property/data/db-governed-status.json'
+      - 'supabase/functions/workbench-derived/**'
+      - 'supabase/migrations/**'
       - 'scripts/build-derived-governance.js'
       - '.github/workflows/phase5-derived-governance.yml'
   workflow_dispatch:
@@ -29,6 +32,7 @@ jobs:
           const g=require('./property/data/derived-marker-governance.json');
           if(g.summary.untriaged!==0)throw new Error('Untriaged derived markers remain: '+g.summary.untriaged);
           if(g.summary.total_derived!==g.summary.live+g.summary.blocked+g.summary.retired)throw new Error('Governance totals do not reconcile');
+          if(!g.governance_status_snapshot)throw new Error('Database-first governance status snapshot is missing');
           console.log(g.summary);
           NODE
       - name: Commit governance artifact when changed
