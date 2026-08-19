@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ENGINE="watchdog-intelligence-closing-adapter-preview-v1";
+const ENGINE="watchdog-intelligence-closing-adapter-preview-v2-source-aware";
 const MODEL_KEY="closing_review";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
@@ -12,6 +12,7 @@ const env=(j:string,l:string)=>{const raw=Deno.env.get(j)||"";if(raw){try{const 
 function canon(v:unknown):unknown{if(Array.isArray(v))return v.map(canon);if(v&&typeof v==="object")return Object.fromEntries(Object.entries(v as Record<string,unknown>).sort(([a],[b])=>a.localeCompare(b)).map(([k,x])=>[k,canon(x)]));return v}
 async function hash(v:unknown){const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(canon(v))));return [...new Uint8Array(d)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function safeObj(v:unknown,max=30000){if(!v||typeof v!=="object"||Array.isArray(v))return{};try{return JSON.stringify(v).length<=max?v as Record<string,unknown>:{} }catch{return{}}}
+function availableValue(v:unknown){return v!==undefined&&v!==null&&v!==""}
 
 Deno.serve(async(req:Request)=>{
   if(req.method==="OPTIONS")return new Response("ok",{headers:cors(req)});
@@ -36,19 +37,33 @@ Deno.serve(async(req:Request)=>{
 
   const cfg=model.signal_config&&typeof model.signal_config==="object"?model.signal_config:{},featureKeys=[...new Set((Array.isArray(cfg.signals)?cfg.signals:[]).map((s:any)=>clean(s?.id,140)).filter(Boolean))];if(!featureKeys.length)return out(req,409,{error:"Closing Review has no feature contract"});
   const {data:defRows,error:de}=await admin.from("intelligence_feature_versions").select("feature_key,version,source_key,transform_type,config,status").in("feature_key",featureKeys).in("status",["preview","live","draft"]).order("version",{ascending:false});if(de)return out(req,503,{error:"Feature registry unavailable"});
-  const defs=new Map<string,any>();for(const d of defRows||[])if(!defs.has(String(d.feature_key)))defs.set(String(d.feature_key),d);const sourceKeys=[...new Set(featureKeys.map(k=>clean(defs.get(k)?.source_key,140)).filter(Boolean))];if(sourceKeys.length!==featureKeys.length)return out(req,409,{error:"Closing Review feature registry is incomplete"});
+  const defs=new Map<string,any>();for(const d of defRows||[])if(!defs.has(String(d.feature_key)))defs.set(String(d.feature_key),d);
+  const sourceKeys=[...new Set(featureKeys.map(k=>clean(defs.get(k)?.source_key,140)).filter(Boolean))];if(sourceKeys.length!==featureKeys.length)return out(req,409,{error:"Closing Review feature registry is incomplete"});
+  const derivedKeys=sourceKeys.filter(k=>k.startsWith("watchdog."));
+  const rawKeys=sourceKeys.filter(k=>!k.startsWith("watchdog."));
 
-  const dr=await fetch(`${url}/functions/v1/workbench-derived`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({pams_pins:pins,marker_ids:sourceKeys})}),derived=await dr.json().catch(()=>({}));if(!dr.ok)return out(req,dr.status,{error:"Governed Closing Review derivation failed",detail:clean(derived?.error,300)||null});
-  const records=Array.isArray(derived?.records)?derived.records:[],recordMap=new Map(records.map((r:any)=>[String(r.pams_pin),r])),candidates:any[]=[];
-  for(const pin of pins){const row=recordMap.get(pin),raw:Record<string,unknown>={},source_meta:Record<string,unknown>={};for(const sk of sourceKeys){const value=derived?.markers?.[pin]?.[sk],m=derived?.meta?.[pin]?.[sk]||{};if(value!==undefined&&value!==null)raw[sk]=value;source_meta[sk]={source_key:sk,status:m?.status||"unknown",source_url:m?.source_url||null,observed_at:m?.observed_at||m?.checked_at||null,provider_kind:m?.provider_kind||"derived_governed",engine_version:m?.engine_version||derived?.engine_version||null,formula:m?.formula||null,dependencies:Array.isArray(m?.dependencies)?m.dependencies:[],explanation:m?.explanation||null}}
+  const derivedPromise=derivedKeys.length?fetch(`${url}/functions/v1/workbench-derived`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({pams_pins:pins,marker_ids:derivedKeys})}):Promise.resolve(null);
+  const rawPromise=rawKeys.length?fetch(`${url}/functions/v1/workbench-hydrate`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({pams_pins:pins,marker_ids:rawKeys})}):Promise.resolve(null);
+  const [dr,hr]=await Promise.all([derivedPromise,rawPromise]);
+  const derived=dr?await dr.json().catch(()=>({})):{};if(dr&&!dr.ok)return out(req,dr.status,{error:"Governed Closing Review derivation failed",detail:clean(derived?.error,300)||null});
+  const hydrated=hr?await hr.json().catch(()=>({})):{};if(hr&&!hr.ok)return out(req,hr.status,{error:"Governed Closing Review source hydration failed",detail:clean(hydrated?.error,300)||null});
+
+  const records=[...(Array.isArray(derived?.records)?derived.records:[]),...(Array.isArray(hydrated?.records)?hydrated.records:[])],recordMap=new Map(records.map((r:any)=>[String(r.pams_pin),r])),candidates:any[]=[];
+  for(const pin of pins){
+    const row=recordMap.get(pin),raw:Record<string,unknown>={},source_meta:Record<string,unknown>={};
+    for(const sk of sourceKeys){
+      const fromDerived=derivedKeys.includes(sk),source=fromDerived?derived:hydrated,value=source?.markers?.[pin]?.[sk],m=source?.meta?.[pin]?.[sk]||{};
+      if(availableValue(value))raw[sk]=value;
+      source_meta[sk]={source_key:sk,status:m?.status||"unknown",source_url:m?.source_url||null,observed_at:m?.observed_at||m?.checked_at||null,provider_kind:m?.provider_kind||(fromDerived?"derived_governed":"authoritative_source"),engine_version:m?.engine_version||(fromDerived?derived?.engine_version:null)||null,formula:m?.formula||null,dependencies:Array.isArray(m?.dependencies)?m.dependencies:[],explanation:m?.source||m?.explanation||null};
+    }
     candidates.push({pams_pin:pin,address:row?.address||null,raw,cohorts:{},source_meta});
   }
 
   const nr=await fetch(`${url}/functions/v1/intelligence-normalize-preview`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({candidates,feature_keys:featureKeys})}),normalized=await nr.json().catch(()=>({}));if(!nr.ok)return out(req,nr.status,{error:"Closing Review normalization failed",detail:clean(normalized?.error,300)||null});const normalizedCandidates=Array.isArray(normalized?.candidates)?normalized.candidates:[];if(!normalizedCandidates.length)return out(req,409,{error:"Closing Review normalizer produced no candidates"});
 
-  const sourceManifest={scope_type:scopeType,scope_value:scopeValue,derived_engine_version:derived?.engine_version||null,derived_marker_ids:sourceKeys,pams_pin_hash:await hash(pins.slice().sort()),candidate_count:normalizedCandidates.length};
-  const normalizationManifest=safeObj(normalized?.normalization_manifest,50000),cohortManifest=safeObj(normalized?.cohort_manifest,30000),batchPayload={model_key:model.model_key,model_version:model.version,source_kind:"workbench_derived",source_manifest:sourceManifest,normalization_manifest:normalizationManifest,cohort_manifest:cohortManifest,candidates:normalizedCandidates},batchHash=await hash(batchPayload);
-  const {data:batch,error:bi}=await admin.from("intelligence_evidence_batches").insert({user_id:user.id,model_key:model.model_key,model_version:model.version,source_kind:"workbench_derived",source_manifest:sourceManifest,normalization_manifest:normalizationManifest,cohort_manifest:cohortManifest,candidates:normalizedCandidates,facts_hash:batchHash,candidate_count:normalizedCandidates.length}).select("id").single();if(bi||!batch?.id)return out(req,503,{error:"Could not seal trusted Closing Review evidence batch"});
+  const sourceManifest={scope_type:scopeType,scope_value:scopeValue,derived_engine_version:derived?.engine_version||null,derived_marker_ids:derivedKeys,raw_marker_ids:rawKeys,hydration_provider_versions:hydrated?.provider_versions||{},pams_pin_hash:await hash(pins.slice().sort()),candidate_count:normalizedCandidates.length};
+  const normalizationManifest=safeObj(normalized?.normalization_manifest,50000),cohortManifest=safeObj(normalized?.cohort_manifest,30000),batchPayload={model_key:model.model_key,model_version:model.version,source_kind:"governed_mixed_sources",source_manifest:sourceManifest,normalization_manifest:normalizationManifest,cohort_manifest:cohortManifest,candidates:normalizedCandidates},batchHash=await hash(batchPayload);
+  const {data:batch,error:bi}=await admin.from("intelligence_evidence_batches").insert({user_id:user.id,model_key:model.model_key,model_version:model.version,source_kind:"governed_mixed_sources",source_manifest:sourceManifest,normalization_manifest:normalizationManifest,cohort_manifest:cohortManifest,candidates:normalizedCandidates,facts_hash:batchHash,candidate_count:normalizedCandidates.length}).select("id").single();if(bi||!batch?.id)return out(req,503,{error:"Could not seal trusted Closing Review evidence batch"});
   const sr=await fetch(`${url}/functions/v1/intelligence-score-preview`,{method:"POST",headers:{Authorization:auth,apikey:publishable,"Content-Type":"application/json"},body:JSON.stringify({evidence_batch_id:batch.id,limit:body?.limit||50,requested_prompt:clean(body?.requested_prompt,1200)||null})}),scored=await sr.json().catch(()=>({}));if(!sr.ok)return out(req,sr.status,{error:"Closing Review scoring failed",detail:clean(scored?.error,300)||null,evidence_batch_id:batch.id});
-  return out(req,200,{...scored,pipeline_engine:ENGINE,scope:{type:scopeType,value:scopeValue},derived:{engine_version:derived?.engine_version||null,marker_ids:sourceKeys},normalization:{engine_version:normalized?.engine_version||null,feature_count:normalized?.feature_count||0}});
+  return out(req,200,{...scored,pipeline_engine:ENGINE,scope:{type:scopeType,value:scopeValue},sources:{derived_engine_version:derived?.engine_version||null,derived_marker_ids:derivedKeys,raw_marker_ids:rawKeys,hydration_provider_versions:hydrated?.provider_versions||{}},normalization:{engine_version:normalized?.engine_version||null,feature_count:normalized?.feature_count||0}});
 });
