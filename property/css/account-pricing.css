@@ -121,7 +121,7 @@
 .ac-cadence button[aria-pressed="true"] { background: #fff; color: #102a4c; box-shadow: 0 4px 14px rgba(15,42,76,.1); }
 .ac-cadence em { margin-left: 5px; color: #087d55; font-size: 10px; font-style: normal; }
 
-.ac-price-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.ac-price-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; align-items: stretch; }
 .ac-price-card { position: relative; display: flex; min-width: 0; flex-direction: column; padding: 22px; border: 1px solid #dce5ed; border-radius: 18px; background: #fff; }
 .ac-price-card.featured { border-color: #55bab8; box-shadow: 0 14px 34px rgba(4,143,145,.12); }
 .ac-price-card.current { border-color: #078e91; background: #f3fbfa; }
@@ -132,9 +132,9 @@
 .ac-price-head h3 { margin: 3px 0 0; color: #102a4c; font-size: 22px; }
 .ac-price-head em { padding: 4px 8px; border-radius: 99px; background: #dff4ef; color: #087d55; font-size: 10px; font-style: normal; font-weight: 800; white-space: nowrap; }
 .ac-price { display: flex; gap: 5px; align-items: baseline; margin-top: 22px; }
-.ac-price b { color: #102a4c; font-size: clamp(29px, 3vw, 40px); line-height: 1; letter-spacing: -.045em; }
+.ac-price b { color: #102a4c; font-size: clamp(27px, 2.5vw, 38px); line-height: 1; letter-spacing: -.045em; }
 .ac-price span, .ac-price-card > small { color: #738196; }
-.ac-price-card > p { min-height: 70px; color: #53657c; line-height: 1.5; }
+.ac-price-card > p { min-height: 88px; color: #53657c; line-height: 1.5; }
 .ac-price-card ul { flex: 1; margin: 0 0 20px; padding: 0; list-style: none; }
 .ac-price-card li { display: flex; gap: 8px; margin: 9px 0; color: #3c506a; font-size: 13px; line-height: 1.4; }
 .ac-price-card li i { margin-top: 3px; color: #078e91; }
@@ -143,7 +143,12 @@
 .ac-pricing-note { display: flex; gap: 10px; margin: 20px 0 0; color: #63738a; font-size: 13px; }
 .ac-pricing-note i { margin-top: 3px; color: #078e91; }
 
-@media (max-width: 1280px) {
+@media (max-width: 1500px) {
+  .ac-price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ac-price-card > p { min-height: 56px; }
+}
+
+@media (max-width: 1000px) {
   .ac-price-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ac-price-card > p { min-height: 48px; }
 }
