@@ -3651,11 +3651,12 @@
   }
 
   // ══════════════════════════════════════════════
-  // ACCOUNTS  ·  Supabase auth, Google and Facebook
+  // ACCOUNTS · canonical Watchdog auth runtime
   //
-  // Everything a signed in user saves lives behind row level security keyed to
-  // their own auth id. There is no policy anywhere that lets one user read
-  // another's saved properties, and the anon key has no table access at all.
+  // The property lookup may observe a session and save member data, but it no
+  // longer owns signup UI, magic links, provider buttons or Google One Tap.
+  // Every sign-in entry goes through /property/onboarding/ and the shared
+  // supabase-runtime.js provider configuration.
   // ══════════════════════════════════════════════
   var DASHBOARD_URL = '/property/dashboard';
   var sb = null, plUser = null;
@@ -3663,62 +3664,29 @@
   function authReady() {
     if (sb) return true;
     if (window.__njwSB) { sb = window.__njwSB; return true; }
-    if (typeof window.supabase === 'undefined' || !LEDGER_URL || !LEDGER_KEY) return false;
-    sb = window.supabase.createClient(LEDGER_URL, LEDGER_KEY, {
-      auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
-    });
-    window.__njwSB = sb;
-    return true;
-  }
-
-
-  // ══════════════════════════════════════════════
-  // GOOGLE ONE TAP
-  //
-  // Immediate, but not a redirect. A hard bounce to Google on page load would
-  // break the promise that you can look up any address without an account, and
-  // Google's crawler cannot follow it either, so the whole site would drop out
-  // of search.
-  //
-  // One Tap shows the account chooser within a second of load, signs the person
-  // in without leaving the page, and dismisses if they are not interested.
-  // Google suppresses it for two hours after a dismissal, which is their rule,
-  // not ours.
-  // ══════════════════════════════════════════════
-  var GOOGLE_CLIENT_ID = '500529228851-m70vsghofv8g16hr6uavls7v9palb3u4.apps.googleusercontent.com';
-
-  function initOneTap() {
-    if (plUser || !authReady()) return;
-    if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) return;
+    if (!window.NJPTRSupabaseRuntime || typeof window.NJPTRSupabaseRuntime.createClient !== 'function') return false;
     try {
-      google.accounts.id.initialize({
-        client_id: GOOGLE_CLIENT_ID,
-        callback: function (res) {
-          if (!res || !res.credential) return;
-          sb.auth.signInWithIdToken({ provider: 'google', token: res.credential })
-            .then(function (r) {
-              if (r.error) { console.warn('[watchdog] one tap:', r.error.message); return; }
-              plUser = r.data && r.data.user;
-              paintAuthBtn();
-              applyGates();
-              toast('Signed in');
-              if (typeof gtag === 'function') gtag('event', 'login', { method: 'one_tap' });
-            });
-        },
-        auto_select: true,             // straight back in for a returning visitor
-        cancel_on_tap_outside: false,
-        context: 'signin',
-        itp_support: true
-      });
-      google.accounts.id.prompt();
-    } catch (e) { console.warn('[watchdog] one tap unavailable:', e); }
+      sb = window.NJPTRSupabaseRuntime.createClient();
+      window.__njwSB = sb;
+      return true;
+    } catch (error) {
+      console.warn('[watchdog] canonical auth runtime unavailable:', error && error.message || error);
+      return false;
+    }
   }
 
-  window.plOneTapReady = function () {
-    // wait for the session check so we never prompt someone already signed in
-    if (plUser === undefined) { setTimeout(window.plOneTapReady, 300); return; }
-    initOneTap();
-  };
+  function openCanonicalSignIn() {
+    var next = location.pathname + location.search + location.hash;
+    if (window.WatchdogAuth && typeof window.WatchdogAuth.openSignIn === 'function') {
+      window.WatchdogAuth.openSignIn(next);
+      return;
+    }
+    if (window.NJPTRSupabaseRuntime && typeof window.NJPTRSupabaseRuntime.openOnboarding === 'function') {
+      window.NJPTRSupabaseRuntime.openOnboarding(next);
+      return;
+    }
+    location.href = '/property/onboarding/?next=' + encodeURIComponent(next);
+  }
 
   function plInitAuth() {
     if (!authReady()) { paintAuthBtn(); return; }
@@ -3726,13 +3694,9 @@
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
       paintAuthBtn();
       applyGates();
-      if (!plUser) setTimeout(initOneTap, 700);
-      // OAuth returns with a hash. Clean it so the address stays shareable.
-      if (location.hash.indexOf('access_token') > -1) {
-        history.replaceState(null, '', location.pathname + location.search);
-      }
+      if (location.hash.indexOf('access_token') > -1) history.replaceState(null, '', location.pathname + location.search);
     });
-    sb.auth.onAuthStateChange(function (_e, session) {
+    sb.auth.onAuthStateChange(function (_event, session) {
       plUser = session ? session.user : null;
       paintAuthBtn();
       applyGates();
@@ -3742,174 +3706,74 @@
 
   function userName() {
     if (!plUser) return '';
-    var m = plUser.user_metadata || {};
-    return m.full_name || m.name || (plUser.email || '').split('@')[0] || 'there';
+    var meta = plUser.user_metadata || {};
+    return meta.full_name || meta.name || (plUser.email || '').split('@')[0] || 'there';
   }
+
   function userAvatar() {
-    var m = (plUser && plUser.user_metadata) || {};
-    return m.avatar_url || m.picture || '';
+    var meta = (plUser && plUser.user_metadata) || {};
+    return meta.avatar_url || meta.picture || '';
   }
 
   function paintHeroAuth() {
-    var h = el('pl-heroauth');
-    if (!h) return;
+    var host = el('pl-heroauth');
+    if (!host) return;
     if (plUser) {
-      var av = userAvatar();
-      h.innerHTML =
+      var avatar = userAvatar();
+      host.innerHTML =
         '<a class="heroauth-btn" href="' + DASHBOARD_URL + '">' +
-          (av ? '<img src="' + esc(av) + '" alt="">' : '<i class="fas fa-table-columns"></i>') +
+          (avatar ? '<img src="' + esc(avatar) + '" alt="">' : '<i class="fas fa-table-columns"></i>') +
           'My properties</a>' +
         '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#wishlist">Wishlist</a>' +
         '<a class="heroauth-link nav" href="' + DASHBOARD_URL + '#saved">Saved</a>' +
         '<a class="heroauth-link nav pro" href="/property/pro">Pro Hub</a>' +
         '<button class="heroauth-link" onclick="plSignOut()">Sign out</button>';
     } else {
-      h.innerHTML =
-        '<button class="heroauth-btn ghost" onclick="plSignInPrompt()">' +
-          '<i class="fas fa-right-to-bracket"></i>Sign in to save properties</button>';
+      host.innerHTML = '<button class="heroauth-btn ghost" onclick="plSignInPrompt()"><i class="fas fa-right-to-bracket"></i>Sign in to save properties</button>';
     }
   }
 
   function paintNav() {
-    if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.setUser === 'function') {
-      window.WatchdogPublicNav.setUser(plUser);
-    }
-    var r = elReal('wd-right');
-    if (!r) return;
-    r.innerHTML = plUser
-      ? '<a href="/property/pro#plans">Pricing</a>' +
-        '<a href="/property/pro">Pro Hub</a>' +
-        '<a href="/property/dashboard">My Properties</a>' +
-        '<button onclick="plSignOut()">Sign out</button>'
-      : '<a href="/property/pro#plans">Pricing</a>' +
-        '<a href="/property/pro">Pro Hub</a>' +
-        '<a href="/property/dashboard">My Properties</a>' +
-        '<button onclick="plSignInPrompt()">Sign in</button>';
+    if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.setUser === 'function') window.WatchdogPublicNav.setUser(plUser);
+    var right = elReal('wd-right');
+    if (!right) return;
+    right.innerHTML = plUser
+      ? '<a href="/property/pro#plans">Pricing</a><a href="/property/pro">Pro Hub</a><a href="/property/dashboard">My Properties</a><button onclick="plSignOut()">Sign out</button>'
+      : '<a href="/property/pro#plans">Pricing</a><a href="/property/pro">Pro Hub</a><a href="/property/dashboard">My Properties</a><button onclick="plSignInPrompt()">Sign in</button>';
   }
 
   function paintAuthBtn() {
     paintNav();
     paintHeroAuth();
-    var b = el('pl-authbtn');
-    if (!b) return;
+    var button = el('pl-authbtn');
+    if (!button) return;
     if (plUser) {
-      var av = userAvatar();
-      b.innerHTML = (av ? '<img src="' + esc(av) + '" alt="" class="auth-av">' : '<i class="fas fa-user"></i>') +
-        '<span>' + esc(userName().split(' ')[0]) + '</span>';
-      b.onclick = plDashboard;
-      b.title = 'Your saved properties';
+      var avatar = userAvatar();
+      button.innerHTML = (avatar ? '<img src="' + esc(avatar) + '" alt="" class="auth-av">' : '<i class="fas fa-user"></i>') + '<span>' + esc(userName().split(' ')[0]) + '</span>';
+      button.onclick = plDashboard;
+      button.title = 'Your saved properties';
     } else {
-      b.innerHTML = '<i class="fas fa-right-to-bracket"></i><span>Sign in</span>';
-      b.onclick = plSignInPrompt;
-      b.title = 'Save properties to your account';
+      button.innerHTML = '<i class="fas fa-right-to-bracket"></i><span>Sign in</span>';
+      button.onclick = plSignInPrompt;
+      button.title = 'Save properties to your account';
     }
   }
 
-  window.plSignInPrompt = function () {
-    if (!authReady()) {
-      plModalNote('Sign in unavailable',
-        '<p>Accounts are not switched on for this site yet. You can still use everything on this page, ' +
-        'and anything you save is kept in this browser.</p>');
-      return;
-    }
-    plModalNote('Save this property to your account',
-      '<p>Create a free account and you can claim your own home, keep a watchlist of others, ' +
-      'and see how their assessments and tax bills move over time. No password to remember.</p>' +
-      '<div class="auth-magic">' +
-        '<label for="auth-email">Email me a sign in link</label>' +
-        '<div class="auth-magic-row">' +
-          '<input id="auth-email" type="email" placeholder="you@email.com" autocomplete="email" ' +
-            'onkeydown="if(event.key===\'Enter\')plMagicLink()">' +
-          '<button onclick="plMagicLink()">Send link</button>' +
-        '</div>' +
-        '<div class="auth-magic-note">No password to create or remember. Click the link in the email and you are in.</div>' +
-      '</div>' +
-      '<div class="auth-or"><span>or</span></div>' +
-      '<div class="auth-btns">' +
-        '<button class="auth-btn google" onclick="plOAuth(\'google\')">' +
-          '<svg viewBox="0 0 24 24" width="19" height="19"><path fill="#4285F4" d="M22.6 12.2c0-.8-.1-1.4-.2-2H12v3.9h6c-.1 1-.8 2.5-2.2 3.5v2.7h3.5c2-1.9 3.3-4.7 3.3-8.1z"/><path fill="#34A853" d="M12 23c2.9 0 5.4-1 7.2-2.7l-3.5-2.7c-1 .7-2.2 1.1-3.7 1.1-2.8 0-5.2-1.9-6.1-4.5H2.3v2.8C4.1 20.6 7.8 23 12 23z"/><path fill="#FBBC05" d="M5.9 14.2c-.2-.7-.4-1.4-.4-2.2s.1-1.5.4-2.2V7H2.3C1.5 8.5 1 10.2 1 12s.5 3.5 1.3 5l3.6-2.8z"/><path fill="#EA4335" d="M12 5.4c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.4 2.1 14.9 1 12 1 7.8 1 4.1 3.4 2.3 7l3.6 2.8C6.8 7.3 9.2 5.4 12 5.4z"/></svg>' +
-          'Continue with Google</button>' +
-        '<button class="auth-btn facebook" onclick="plOAuth(\'facebook\')">' +
-          '<i class="fab fa-facebook-f"></i> Continue with Facebook</button>' +
-      '</div>' +
-      '<div class="auth-fine">We only receive your name, email, and profile photo. ' +
-      'Your saved properties are visible to you and nobody else, not even to me. We never post anything to your account, ' +
-      'and we do not sell or share your information.</div>');
-  };
-
-
-  window.plMagicLink = function () {
-    if (!authReady()) { plSignInPrompt(); return; }
-    var box = el('auth-email');
-    var email = box ? (box.value || '').trim() : '';
-    if (!email || email.indexOf('@') < 1 || email.indexOf('.') < 3) {
-      toast('Please enter a valid email address');
-      if (box) box.focus();
-      return;
-    }
-    sb.auth.signInWithOtp({
-      email: email,
-      options: { emailRedirectTo: location.origin + location.pathname }
-    }).then(function (res) {
-      if (res && res.error) {
-        var m = String(res.error.message || '');
-        plModalNote('Could not send the link',
-          '<p>' + (/rate|limit|seconds/i.test(m)
-            ? 'That is a few too many requests in a short window. Give it a minute and try again.'
-            : 'Something went wrong sending that email. It is not you.') + '</p>' +
-          '<div class="auth-fine">' + esc(m) + '</div>');
-        return;
-      }
-      plModalNote('Check your email',
-        '<div style="text-align:center;padding:8px 0 4px;">' +
-          '<div style="font-size:42px;color:var(--navy);margin-bottom:12px;"><i class="fas fa-envelope-open-text"></i></div>' +
-          '<p>I sent a sign in link to <b>' + esc(email) + '</b>. Click it and you will land right back here, signed in.</p>' +
-          '<p style="font-size:13.5px;color:#8a93a6;">The link is good for one hour. If it does not turn up in a couple of minutes, ' +
-          'check your spam folder, since a first email from a new sender often lands there.</p>' +
-          '<button class="plm-rbtn" onclick="plCloseNote()">Got it</button>' +
-        '</div>');
-      if (typeof gtag === 'function') gtag('event', 'auth_magic_link');
-    });
-  };
-
-  window.plOAuth = function (provider) {
-    if (!authReady()) return;
-    var pretty = provider === 'google' ? 'Google' : 'Facebook';
-    sb.auth.signInWithOAuth({
-      provider: provider,
-      options: { redirectTo: location.origin + location.pathname }
-    }).then(function (res) {
-      // A provider that has not been switched on returns
-      // "Unsupported provider: provider is not enabled". Never show a visitor
-      // a raw error payload; tell them plainly and give them another way in.
-      if (res && res.error) {
-        var m = String(res.error.message || '');
-        var notEnabled = /not enabled|unsupported provider/i.test(m);
-        plModalNote(notEnabled ? pretty + ' sign in is not switched on yet' : 'Sign in did not work',
-          '<p>' + (notEnabled
-            ? pretty + ' sign in is still being set up on our end. Nothing is wrong with your account.'
-            : 'Something went wrong on the way to ' + pretty + '. It is not you.') + '</p>' +
-          '<p>Everything on this page works without an account, and anything you save is kept in this browser in the meantime. ' +
-          'If you want your properties tracked properly, just <a href="#" onclick="plCloseNote();plOpenForm(\'track\');return false;">send them to me</a> ' +
-          'and I will set it up by hand.</p>' +
-          '<div class="auth-fine">Technical detail, in case you tell me about it: ' + esc(m) + '</div>');
-        if (typeof gtag === 'function') gtag('event', 'auth_error', { provider: provider });
-      }
-    }).catch(function (e) {
-      plModalNote('Sign in did not work',
-        '<p>Something went wrong reaching ' + pretty + '. Everything on this page still works without an account.</p>' +
-        '<div class="auth-fine">' + esc(String(e && e.message || e)) + '</div>');
-    });
-  };
+  window.plSignInPrompt = openCanonicalSignIn;
 
   window.plSignOut = function () {
-    if (!sb) return;
+    if (!authReady()) return;
     sb.auth.signOut().then(function () {
       plUser = null;
       paintAuthBtn();
       applyGates();
       plCloseNote();
     });
+  };
+
+  window.plDashboard = function () {
+    if (!plUser) { openCanonicalSignIn(); return; }
+    window.location.href = DASHBOARD_URL;
   };
 
   // ── save / claim from the property panel ──
