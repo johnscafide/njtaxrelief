@@ -14,7 +14,7 @@
     "create-portal-session": {"version": 19, "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c", "verify_jwt": true, "tracking": "source_snapshot"},
     "developer-sandbox-bootstrap": {"version": 5, "sha256": "5a7b06e2ed537ebe1071827e8d9dd168f1a426d5bfe28909f03420f4fe4de6ac", "verify_jwt": true, "tracking": "fingerprint_only"},
     "farm-intelligence-scan": {"version": 8, "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "farm-map-query": {"version": 7, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad67ace7b70229901d", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "farm-map-query": {"version": 7, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad6d64e38253ab04e5f9c", "verify_jwt": true, "tracking": "fingerprint_only"},
     "get-platform-health": {"version": 14, "sha256": "9f81718f21f0ecb67caf27708159022c9078338e6ba3eae4bbd8e2859ec9c678", "verify_jwt": true, "tracking": "source_snapshot"},
     "google-ads-oauth-callback": {"version": 7, "sha256": "e984943f469e170b8451d2a4ad054bf32dd5a3c977a0084506dd44a16e65bba7", "verify_jwt": false, "tracking": "source_snapshot"},
     "google-ads-oauth-start": {"version": 7, "sha256": "e8179bf79f122b270b43e1e5ca7e5245264922bba17741e635f1e9d167ba7e0e", "verify_jwt": true, "tracking": "source_snapshot"},
