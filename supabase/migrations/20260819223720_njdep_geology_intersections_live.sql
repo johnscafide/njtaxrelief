@@ -1,0 +1,76 @@
+insert into public.data_center_provider_coverage
+  (marker_id, scopes, provider_key, value_status, source_keys, last_verified_at, notes, provider_kind, source_fields, calculation_key, freshness_seconds, cache_policy, bulk_capable)
+values
+  (
+    'geology.historic_fill_hit',
+    array['property']::text[],
+    'njdep_geology_spatial_v1',
+    'live',
+    array['njdep-geology-live']::text[],
+    now(),
+    'Authoritative NJDEP Geology screening fact: the representative Watchdog parcel point intersects the mapped Historic Fill layer (Geology MapServer layer 22). This is a map-screening result, not a parcel-wide geotechnical or subsurface condition determination.',
+    'authoritative_spatial_reference',
+    array['Geology/MapServer/22','representative_parcel_point_intersects']::text[],
+    'spatial-preflight-v10-csrr-exact-controls',
+    21600,
+    'external_live',
+    false
+  ),
+  (
+    'geology.acid_producing_soil_hit',
+    array['property']::text[],
+    'njdep_geology_spatial_v1',
+    'live',
+    array['njdep-geology-live']::text[],
+    now(),
+    'Authoritative NJDEP Geology screening fact: the representative Watchdog parcel point intersects the Potential Acid Producing Soils layer (Geology MapServer layer 27). This is a map-screening result, not a parcel-wide soil or construction finding.',
+    'authoritative_spatial_reference',
+    array['Geology/MapServer/27','representative_parcel_point_intersects']::text[],
+    'spatial-preflight-v10-csrr-exact-controls',
+    21600,
+    'external_live',
+    false
+  ),
+  (
+    'geology.bedrock_outcrop_hit',
+    array['property']::text[],
+    'njdep_geology_spatial_v1',
+    'live',
+    array['njdep-geology-live']::text[],
+    now(),
+    'Authoritative NJDEP Geology screening fact: the representative Watchdog parcel point intersects the mapped Bedrock Outcrop layer (Geology MapServer layer 16). This is a map-screening result, not a parcel-wide bedrock or site-engineering conclusion.',
+    'authoritative_spatial_reference',
+    array['Geology/MapServer/16','representative_parcel_point_intersects']::text[],
+    'spatial-preflight-v10-csrr-exact-controls',
+    21600,
+    'external_live',
+    false
+  ),
+  (
+    'geology.soil_mapping_hit',
+    array['property']::text[],
+    'njdep_geology_spatial_v1',
+    'live',
+    array['njdep-geology-live']::text[],
+    now(),
+    'Authoritative NJDEP Geology screening fact: the representative Watchdog parcel point is covered by the NJDEP-published SSURGO Soils Data layer (Geology MapServer layer 11). This confirms mapped source coverage at the parcel location, not a soil suitability conclusion.',
+    'authoritative_spatial_reference',
+    array['Geology/MapServer/11','representative_parcel_point_intersects']::text[],
+    'spatial-preflight-v10-csrr-exact-controls',
+    21600,
+    'external_live',
+    false
+  )
+on conflict (marker_id) do update set
+  scopes=excluded.scopes,
+  provider_key=excluded.provider_key,
+  value_status=excluded.value_status,
+  source_keys=excluded.source_keys,
+  last_verified_at=excluded.last_verified_at,
+  notes=excluded.notes,
+  provider_kind=excluded.provider_kind,
+  source_fields=excluded.source_fields,
+  calculation_key=excluded.calculation_key,
+  freshness_seconds=excluded.freshness_seconds,
+  cache_policy=excluded.cache_policy,
+  bulk_capable=excluded.bulk_capable;
