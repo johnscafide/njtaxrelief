@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-19T15:41:00Z",
+  "captured_at": "2026-08-19T16:06:00Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -44,6 +44,7 @@
     "verify-email": {"version": 29, "sha256": "e0d30c008ea637f3d025f93fee83db14cb58466d7e08b2c0a13a5fbf9daa21a6", "verify_jwt": true, "tracking": "existing_or_external"},
     "watchdog-automation": {"version": 12, "sha256": "872067bee87d864718c5b04721fa3ff59a6a6678aeee729b67ef8a6220317e67", "verify_jwt": false, "tracking": "source_snapshot"},
     "watchdog-test-auth": {"version": 5, "sha256": "88a47c2385911155999caac45339714d195c7000f11ccd455924e71e08e99c0b", "verify_jwt": false, "tracking": "fingerprint_only"},
+    "intelligence-source-fact-watch": {"version": 4, "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-derived": {"version": 18, "sha256": "57be5b513507e680aa81ce748b7d9ffe303112adb9ee91ed484aaff34a6d2b0a", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-hydrate": {"version": 27, "sha256": "f356a828472c27dff845f69692cbedca0e60464fd2f4da4ac88bfaa41319bf1d", "verify_jwt": true, "tracking": "source_snapshot"},
