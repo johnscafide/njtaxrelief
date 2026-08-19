@@ -3,6 +3,34 @@
 if(window.__WATCHDOG_DIRECT_CRM__)return;window.__WATCHDOG_DIRECT_CRM__=true;
 var db=null,provider=null,history=[],busy=false,reconnectMode=false,observer=null;
 var $=function(id){return document.getElementById(id);};
+function installIntegrationTransport(){
+  try{
+    var rt=window.NJPTRSupabaseRuntime;
+    if(!rt||!rt.createClient||!rt.url||!rt.key)return;
+    var client=rt.createClient();
+    if(!client||client.__watchdogIntegrationTransport)return;
+    var fx=client.functions;
+    if(!fx||typeof fx.invoke!=='function')return;
+    try{Object.defineProperty(client,'functions',{value:fx,configurable:true});}catch(_){return;}
+    var original=fx.invoke.bind(fx);
+    fx.invoke=async function(name,opts){
+      name=String(name||'');
+      if(!/^integration-(gateway|key-manager|provider-manager)$/.test(name))return original(name,opts);
+      var sessionResult=await client.auth.getSession();
+      var session=sessionResult&&sessionResult.data&&sessionResult.data.session;
+      var token=session&&session.access_token;
+      if(!token)return{data:null,error:new Error('Sign in required')};
+      try{
+        var response=await window.fetch(rt.url+'/functions/v1/'+name,{method:'POST',headers:{apikey:rt.key,authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(opts&&opts.body||{})});
+        if(!response.ok){var edgeError=new Error('Edge Function returned a non-2xx status code');edgeError.context=response;return{data:null,error:edgeError};}
+        var data=await response.json().catch(function(){return null;});
+        return{data:data,error:null};
+      }catch(networkError){return{data:null,error:networkError};}
+    };
+    try{Object.defineProperty(client,'__watchdogIntegrationTransport',{value:true,configurable:true});}catch(_){}
+  }catch(_){}
+}
+installIntegrationTransport();
 function show(id,on){var n=$(id);if(n)n.hidden=!on;}
 function text(id,v){var n=$(id);if(n)n.textContent=v;}
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
