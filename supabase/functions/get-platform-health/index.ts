@@ -1,58 +1,227 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.55.0';
 
-const cors = { 'Access-Control-Allow-Origin': 'https://njpropertytaxrelief.com', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type' };
-const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } });
+const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+
+function allowedOrigin(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  try {
+    const host = new URL(origin).hostname.toLowerCase();
+    if (
+      host === 'njpropertytaxrelief.com' ||
+      host === 'www.njpropertytaxrelief.com' ||
+      host === 'watchdogre.com' ||
+      host === 'www.watchdogre.com' ||
+      host === 'localhost' ||
+      host === '127.0.0.1' ||
+      host.endsWith('.vercel.app')
+    ) return origin;
+  } catch (_) {}
+  return DEFAULT_SITE;
+}
+
+function cors(req: Request) {
+  return {
+    'Access-Control-Allow-Origin': allowedOrigin(req),
+    'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Vary': 'Origin'
+  };
+}
+
+function json(req: Request, body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+  });
+}
+
+function envPresent(name: string) {
+  return Boolean(String(Deno.env.get(name) || '').trim());
+}
 
 Deno.serve(async (req) => {
-  if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
-  if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(req) });
+  if (req.method !== 'POST') return json(req, { error: 'Method not allowed' }, 405);
+
   const auth = req.headers.get('Authorization');
-  if (!auth) return json({ error: 'Sign in required' }, 401);
-  const url = Deno.env.get('SUPABASE_URL')!, anon = Deno.env.get('SUPABASE_ANON_KEY')!, service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+  if (!auth) return json(req, { error: 'Sign in required' }, 401);
+
+  const url = Deno.env.get('SUPABASE_URL')!;
+  const anon = Deno.env.get('SUPABASE_ANON_KEY')!;
+  const service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
   const userClient = createClient(url, anon, { global: { headers: { Authorization: auth } } });
   const admin = createClient(url, service);
+
   const { data: { user } } = await userClient.auth.getUser();
-  if (!user) return json({ error: 'Sign in required' }, 401);
+  if (!user) return json(req, { error: 'Sign in required' }, 401);
   const { data: profile } = await admin.from('profiles').select('account_role').eq('id', user.id).maybeSingle();
-  if (profile?.account_role !== 'developer') return json({ error: 'Developer access required' }, 403);
+  if (profile?.account_role !== 'developer') return json(req, { error: 'Developer access required' }, 403);
 
   const since = new Date(Date.now() - 7 * 86400000).toISOString();
-  const [telemetry, incidents, billingEvents, billingAudit] = await Promise.all([
-    admin.from('access_audit_log').select('event_type,resource_id,metadata,created_at').like('event_type', 'platform.%').gte('created_at', since).order('created_at', { ascending: false }).limit(100),
-    admin.from('platform_incidents').select('id,title,severity,status,signal_type,route,event_count,last_seen_at,release').order('last_seen_at', { ascending: false }).limit(50),
-    admin.from('billing_provider_events').select('event_type,occurred_at,result').eq('provider', 'paddle').order('occurred_at', { ascending: false }).limit(250),
-    admin.from('access_audit_log').select('event_type,created_at,metadata').like('event_type', 'billing.%').order('created_at', { ascending: false }).limit(250)
+  const [telemetry, incidents, stripeEvents, billingAudit, releaseGate, entitlements] = await Promise.all([
+    admin.from('access_audit_log')
+      .select('event_type,resource_id,metadata,created_at')
+      .like('event_type', 'platform.%')
+      .gte('created_at', since)
+      .order('created_at', { ascending: false })
+      .limit(100),
+    admin.from('platform_incidents')
+      .select('id,title,severity,status,signal_type,route,event_count,last_seen_at,release')
+      .order('last_seen_at', { ascending: false })
+      .limit(50),
+    admin.from('billing_webhook_events')
+      .select('stripe_event_id,event_type,processed_at,result')
+      .order('processed_at', { ascending: false })
+      .limit(250),
+    admin.from('access_audit_log')
+      .select('event_type,created_at,metadata')
+      .like('event_type', 'billing.%')
+      .order('created_at', { ascending: false })
+      .limit(250),
+    admin.from('platform_release_gates')
+      .select('gate_key,status,evidence,verified_at,updated_at')
+      .eq('gate_key', 'live_billing_lifecycle')
+      .maybeSingle(),
+    admin.from('account_entitlements')
+      .select('subscription_status,billing_tier,billing_interval,provider')
+      .eq('provider', 'stripe')
+      .limit(1000)
   ]);
-  if (telemetry.error) return json({ error: 'Reliability events could not be loaded' }, 500);
-  if (incidents.error && incidents.error.code !== '42P01') return json({ error: 'Incidents could not be loaded' }, 500);
 
-  const rows = telemetry.data || [], cutoff = Date.now() - 86400000;
-  const counts: Record<string, number> = { last_24h: 0, last_7d: rows.length, client_errors: 0, slow_pages: 0, open_incidents: 0, critical_incidents: 0 };
-  rows.forEach((row) => { if (new Date(row.created_at).getTime() >= cutoff) counts.last_24h++; if (row.event_type !== 'platform.slow_page') counts.client_errors++; else counts.slow_pages++; });
-  (incidents.data || []).forEach((row) => { if (row.status !== 'resolved') { counts.open_incidents++; if (row.severity === 'critical') counts.critical_incidents++; } });
+  if (telemetry.error) return json(req, { error: 'Reliability events could not be loaded' }, 500);
+  if (incidents.error && incidents.error.code !== '42P01') return json(req, { error: 'Incidents could not be loaded' }, 500);
+  if (stripeEvents.error && stripeEvents.error.code !== '42P01') return json(req, { error: 'Stripe webhook events could not be loaded' }, 500);
+  if (billingAudit.error) return json(req, { error: 'Billing audit events could not be loaded' }, 500);
 
-  const eventTypes = new Set((billingEvents.data || []).map((row) => row.event_type));
+  const rows = telemetry.data || [];
+  const cutoff = Date.now() - 86400000;
+  const counts: Record<string, number> = {
+    last_24h: 0,
+    last_7d: rows.length,
+    client_errors: 0,
+    slow_pages: 0,
+    open_incidents: 0,
+    critical_incidents: 0
+  };
+  rows.forEach((row) => {
+    if (new Date(row.created_at).getTime() >= cutoff) counts.last_24h++;
+    if (row.event_type !== 'platform.slow_page') counts.client_errors++;
+    else counts.slow_pages++;
+  });
+  (incidents.data || []).forEach((row) => {
+    if (row.status !== 'resolved') {
+      counts.open_incidents++;
+      if (row.severity === 'critical') counts.critical_incidents++;
+    }
+  });
+
+  const webhookTypes = new Set((stripeEvents.data || []).map((row) => row.event_type));
   const auditTypes = new Set((billingAudit.data || []).map((row) => row.event_type));
-  const statuses = new Set((billingEvents.data || []).map((row) => row.result?.status).filter(Boolean));
-  const environment = Deno.env.get('PADDLE_ENVIRONMENT') === 'production' ? 'production' : 'sandbox';
-  const billing = {
-    environment,
-    checks: [
-      { id: 'checkout', label: 'Authenticated checkout created', passed: auditTypes.has('billing.checkout_created') || eventTypes.has('transaction.completed') },
-      { id: 'purchase', label: 'Signed purchase webhook processed', passed: eventTypes.has('transaction.completed') },
-      { id: 'portal', label: 'Customer Portal opened', passed: auditTypes.has('billing.portal_opened') || auditTypes.has('billing.existing_subscription_redirected_to_portal') },
-      { id: 'plan_change', label: 'Plan change webhook processed', passed: auditTypes.has('billing.subscription_plan_change_requested') && eventTypes.has('subscription.updated') },
-      { id: 'cancel_resume', label: 'Cancellation or resume processed', passed: eventTypes.has('subscription.updated') },
-      { id: 'past_due', label: 'Past-due behavior observed', passed: statuses.has('past_due') },
-      { id: 'paused', label: 'Paused behavior observed', passed: eventTypes.has('subscription.paused') || statuses.has('paused') },
-      { id: 'canceled', label: 'Cancellation completion observed', passed: eventTypes.has('subscription.canceled') || statuses.has('canceled') },
-      { id: 'live_cycle', label: 'Live paid lifecycle completed', passed: environment === 'production' && eventTypes.has('transaction.completed') }
-    ],
-    latest_event_at: billingEvents.data?.[0]?.occurred_at || null
+  const entitlementStatuses = new Set((entitlements.data || []).map((row) => row.subscription_status).filter(Boolean));
+  const gate = releaseGate.data || null;
+  const checkoutMode = String(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') || 'closed').trim().toLowerCase();
+  const priceSecretNames = [
+    'STRIPE_PRICE_AGENT_MONTHLY',
+    'STRIPE_PRICE_AGENT_YEARLY',
+    'STRIPE_PRICE_PRO_MONTHLY',
+    'STRIPE_PRICE_PRO_YEARLY',
+    'STRIPE_PRICE_PRO_PLUS_MONTHLY',
+    'STRIPE_PRICE_PRO_PLUS_YEARLY'
+  ];
+  const configuredPriceSecrets = priceSecretNames.filter(envPresent).length;
+  const secretReadiness = {
+    stripe_secret_configured: envPresent('STRIPE_SECRET_KEY'),
+    webhook_secret_configured: envPresent('STRIPE_WEBHOOK_SIGNING_SECRET'),
+    price_secrets_configured: configuredPriceSecrets,
+    price_secrets_required: priceSecretNames.length,
+    ready_for_controlled_acceptance:
+      envPresent('STRIPE_SECRET_KEY') &&
+      envPresent('STRIPE_WEBHOOK_SIGNING_SECRET') &&
+      configuredPriceSecrets === priceSecretNames.length
   };
 
-  return json({
-    generated_at: new Date().toISOString(), release: '0.42.0', counts,
-    events: rows.slice(0, 50), incidents: incidents.data || [], billing
+  const checks = [
+    {
+      id: 'configuration',
+      label: 'Stripe production secrets configured',
+      passed: secretReadiness.ready_for_controlled_acceptance
+    },
+    {
+      id: 'checkout',
+      label: 'Authenticated Stripe Checkout created',
+      passed: auditTypes.has('billing.checkout_created')
+    },
+    {
+      id: 'purchase',
+      label: 'Signed subscription purchase processed',
+      passed:
+        webhookTypes.has('checkout.session.completed') ||
+        webhookTypes.has('customer.subscription.created')
+    },
+    {
+      id: 'portal',
+      label: 'Stripe Customer Portal opened',
+      passed:
+        auditTypes.has('billing.portal_opened') ||
+        auditTypes.has('billing.existing_subscription_redirected_to_portal')
+    },
+    {
+      id: 'plan_change',
+      label: 'Subscription update processed',
+      passed: webhookTypes.has('customer.subscription.updated')
+    },
+    {
+      id: 'cancel_resume',
+      label: 'Cancellation / resume lifecycle processed',
+      passed:
+        webhookTypes.has('customer.subscription.deleted') ||
+        webhookTypes.has('customer.subscription.resumed') ||
+        webhookTypes.has('customer.subscription.updated')
+    },
+    {
+      id: 'past_due',
+      label: 'Payment failure / past-due behavior observed',
+      passed: webhookTypes.has('invoice.payment_failed') || entitlementStatuses.has('past_due')
+    },
+    {
+      id: 'recovery',
+      label: 'Payment recovery observed',
+      passed: webhookTypes.has('invoice.paid')
+    },
+    {
+      id: 'refund',
+      label: 'Refund webhook processed',
+      passed: webhookTypes.has('charge.refunded')
+    },
+    {
+      id: 'live_cycle',
+      label: 'Controlled Live billing lifecycle accepted',
+      passed: gate?.status === 'passed'
+    }
+  ];
+
+  const billing = {
+    provider: 'stripe',
+    environment: 'production',
+    checkout_mode: ['closed', 'controlled', 'open'].includes(checkoutMode) ? checkoutMode : 'closed',
+    secrets: secretReadiness,
+    checks,
+    gate: gate ? {
+      status: gate.status,
+      verified_at: gate.verified_at,
+      updated_at: gate.updated_at
+    } : { status: 'missing', verified_at: null, updated_at: null },
+    webhook_event_count: (stripeEvents.data || []).length,
+    latest_event_at: stripeEvents.data?.[0]?.processed_at || null,
+    stripe_entitlement_count: (entitlements.data || []).length
+  };
+
+  return json(req, {
+    generated_at: new Date().toISOString(),
+    release: '2026-08-18-stripe-launch-health',
+    counts,
+    events: rows.slice(0, 50),
+    incidents: incidents.data || [],
+    billing
   });
 });
