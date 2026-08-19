@@ -144,6 +144,13 @@
     document.querySelectorAll('a[href="/property/"]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_sample_click',{location:link.closest('.pro-hero')?'hero':link.closest('.pro-demo')?'demo':'page'});});});
   }
 
-  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');reveal();story();roleTabs();pricing();heroMotion();demoPrefill();demoForm();sampleTracking();}
+  function loadOutcomeGuidance(){
+    var src='/property/js/plan-outcomes.js';
+    if(window.WatchdogPlanOutcomes){window.WatchdogPlanOutcomes.enhance();return;}
+    if(document.querySelector('script[src="'+src+'"]'))return;
+    var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
+  }
+
+  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');reveal();story();roleTabs();pricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
