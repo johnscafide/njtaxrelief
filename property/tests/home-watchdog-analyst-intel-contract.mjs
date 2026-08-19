@@ -39,7 +39,7 @@ expect(analyst.includes('rather than manufacture urgency'), 'Motivation layer mu
 expect(analyst.includes('Renovation ROI still depends'), 'ROI language must preserve uncertainty and required inputs.');
 expect(analyst.includes('not an appraisal'), 'Appraiser lens must not present Watchdog screening context as an appraisal.');
 expect(analyst.includes('legal or appeal conclusion'), 'Attorney/tax lens must preserve professional-conclusion boundary.');
-expect(analyst.includes('profession personalizes recommendations. It does not change billing or authorization') || analyst.includes('profession personalizes recommendations. It does not change billing or authorization'.replace('profession','Profession')), 'Profession selection must be described as personalization, not authorization.');
+expect(analyst.includes('Your profession personalizes recommendations. It does not change billing or authorization.'), 'Profession selection must be described as personalization, not authorization.');
 
 expect(loader.includes('/property/css/home/watchdog-analyst-intel.css'), 'Loader must install Analyst Intel CSS.');
 expect(loader.includes('/property/js/dashboard/home/watchdog-analyst-intel.js'), 'Loader must install Analyst Intel runtime.');
