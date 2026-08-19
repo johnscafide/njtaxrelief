@@ -16,13 +16,14 @@ function compactContext(root){
   var items=Array.prototype.slice.call(root.querySelectorAll('.wdcx-item'));
   items.forEach(function(item,i){item.classList.toggle('wd-density-extra',i>0)});
   var more=root.querySelector('.wdcx-more');
-  if(more){var existing=text(more),extra=/\+(\d+)/.exec(existing),total=items.length+(extra?Number(extra[1]):0);more.textContent=total>1?'Review all '+total+' current suggestions':'Inspect this suggestion'}
+  if(more){var existing=text(more),extra=/\+(\d+)/.exec(existing),total=items.length+(extra?Number(extra[1]):0),label=total>1?'Review all '+total+' current suggestions':'Inspect this suggestion';if(text(more)!==label)more.textContent=label}
 }
 function reason(card){return short(text(card&&card.querySelector('p')),135)}
 function makeAnalystSummary(panel){
   if(!panel||!supportingSurface())return;
   panel.classList.add('wdai-compact');
-  var old=panel.querySelector('.wdai-compact-summary');if(old)old.remove();
+  var existing=panel.querySelector('.wdai-compact-summary');
+  if(existing){setAnalystExpanded(panel,analystExpanded);var existingButton=existing.querySelector('.wd-density-toggle');if(existingButton){existingButton.setAttribute('aria-expanded',analystExpanded?'true':'false');existingButton.textContent=analystExpanded?'Collapse reasoning':'Inspect reasoning'}return}
   var money=panel.querySelector('.wdai-card.money'),motivation=panel.querySelector('.wdai-card.motivation'),evidence=panel.querySelector('.wdai-card.evidence'),grid=panel.querySelector('.wdai-grid'),next=panel.querySelector('.wdai-next');
   if(!grid||!next)return;
   var reasons=[reason(motivation),reason(money),reason(evidence)].filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,3);
