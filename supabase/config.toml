@@ -137,6 +137,11 @@ verify_jwt = true
 [functions.intelligence-model-repair-readiness]
 verify_jwt = true
 
+# Developer-only non-persisting evaluator for draft model discrimination.
+# It returns aggregate structural statistics only and refuses the current model version.
+[functions.intelligence-model-shadow-evaluate]
+verify_jwt = true
+
 [functions.intelligence-analyst]
 verify_jwt = true
 
