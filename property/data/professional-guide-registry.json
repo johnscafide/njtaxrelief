@@ -1,21 +1,22 @@
 {
   "schema_version": 1,
   "library": "Watchdog Professional Resource Library",
-  "last_full_review": "2026-08-18",
+  "last_full_review": "2026-08-19",
   "audit_cadence": "daily",
   "audit_rule": "Every daily audit must make at least one substantive improvement: a new or corrected authoritative resource, hypothetical example, professional use case, interpretation note, source update, decision-checklist item, or meaningful internal cross-link. Do not add filler merely to satisfy cadence.",
   "example_policy": "Hypothetical examples only. Never use a real residential address in a public profession-guide example.",
   "guides": [
-    {"slug":"real-estate-agents","title":"Real Estate Agents","path":"/property/real-estate-agents/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"mortgage-lenders","title":"Mortgage Lenders","path":"/property/mortgage-lenders/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"tax-attorneys","title":"Tax Attorneys","path":"/property/tax-attorneys/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"title-closing-professionals","title":"Title & Closing Professionals","path":"/property/title-closing-professionals/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"real-estate-appraisers","title":"Real Estate Appraisers","path":"/property/real-estate-appraisers/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"real-estate-investors","title":"Real Estate Investors","path":"/property/real-estate-investors/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"contractors-developers","title":"Contractors & Developers","path":"/property/contractors-developers/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"municipal-professionals","title":"Municipal Professionals","path":"/property/municipal-professionals/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"insurance-risk-professionals","title":"Insurance & Risk Professionals","path":"/property/insurance-risk-professionals/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"property-tax-professionals","title":"Property Tax Professionals","path":"/property/property-tax-professionals/","last_reviewed":"2026-08-18","status":"live"},
-    {"slug":"accountants-cpas","title":"Accountants & CPAs","path":"/property/accountants-cpas/","last_reviewed":"2026-08-18","status":"live"}
+    {"slug":"real-estate-agents","title":"Real Estate Agents","path":"/property/real-estate-agents/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"mortgage-lenders","title":"Mortgage Lenders","path":"/property/mortgage-lenders/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"tax-attorneys","title":"Tax Attorneys","path":"/property/tax-attorneys/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"title-closing-professionals","title":"Title & Closing Professionals","path":"/property/title-closing-professionals/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"real-estate-appraisers","title":"Real Estate Appraisers","path":"/property/real-estate-appraisers/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"real-estate-investors","title":"Real Estate Investors","path":"/property/real-estate-investors/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"contractors-developers","title":"Contractors & Developers","path":"/property/contractors-developers/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"municipal-professionals","title":"Municipal Professionals","path":"/property/municipal-professionals/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"insurance-risk-professionals","title":"Insurance & Risk Professionals","path":"/property/insurance-risk-professionals/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"property-tax-professionals","title":"Property Tax Professionals","path":"/property/property-tax-professionals/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"accountants-cpas","title":"Accountants & CPAs","path":"/property/accountants-cpas/","last_reviewed":"2026-08-19","status":"live"},
+    {"slug":"home-inspectors","title":"Home Inspectors","path":"/property/home-inspectors/","last_reviewed":"2026-08-19","status":"live"}
   ]
 }
