@@ -2,7 +2,7 @@
 
 **Purpose:** Track third-party services and external data connections that can affect Watchdog security, privacy, availability, payment, AI, communications or compliance scope.
 
-**Last updated:** 2026-08-18
+**Last updated:** 2026-08-19
 
 A connector being listed here does not mean it is production-live. Status must be verified and updated as integrations move from planned to configured to live to retired.
 
@@ -27,6 +27,39 @@ A connector being listed here does not mean it is production-live. Status must b
 | Esri / New Jersey public-data services | Public property/geospatial data | privacy policy, `property/docs/data-factory.md` | Observed | Primarily public property/geospatial data; availability and licensing/source integrity remain material. | Terms/licensing, provenance, availability/fallbacks, update cadence, integrity checks and confirmation that account data is not unnecessarily sent. |
 | Stripe | Payments | `supabase/functions/stripe-webhook/index.ts`, security contracts | Observed | Payment events and billing identifiers; card data scope depends on checkout architecture. | PCI scope/SAQ determination, webhook signing/replay controls, least privilege, retention, refunds/disputes, account MFA/access and incident process. |
 | Paddle | Subscription/payment integration | `supabase/functions/paddle-webhook/index.ts`, security contracts | Observed | Subscription/payment events and entitlement changes. | Confirm whether production-active; signature/replay controls, account access, data retention, tax/payment role, offboarding and overlap with Stripe. |
+| Customer CRM / generic webhook connections | Customer-controlled CRM and workflow interoperability | `property/integrations/`, `supabase/functions/integration-*`, `integration_*` tables | Live | Contact identity, relationship/stage/activity context and property associations may enter Watchdog; governed property-change events may leave Watchdog to customer-selected HTTPS endpoints. Tier 1 personal/customer data. | Per-connection scope and consent, hashed inbound token, Vault-backed HMAC, idempotency/replay handling, payload allowlisting, retention/deletion, endpoint ownership, audit, error minimization, rotation/revocation and Intelligence opt-in. |
+| Zapier | Automation / integration marketplace | Phase 2 design in `property/docs/integrations-phase1.md` and NJW-52 | Planned | May relay Watchdog events and customer CRM/workflow context; exact categories depend on customer workflow. | Partner/app review, least-privilege triggers/actions, authentication, disclosures, consent, retention/subprocessors, logs, deletion/offboarding, webhook signing and privacy update. |
+
+## Phase 1 CRM / webhook review record
+
+- **Connector:** Customer CRM / generic webhook connections
+- **Business owner:** Watchdog
+- **Technical owner:** Watchdog
+- **Status:** Live
+- **Approval date:** 2026-08-19
+- **Business purpose:** Provide a secure generic two-way data-exchange boundary so customers can connect CRM and workflow systems without Watchdog storing their CRM password.
+- **Data received from provider:** Allowlisted contact identifier/details, relationship or lead stage, activity timestamp, tags and property associations/context.
+- **Data transmitted to provider:** Customer-subscribed Watchdog events. Phase 1 production event is `property.signal.changed` with governed property-change context.
+- **Data classification:** Personal, Internal and Public property intelligence. CRM/contact context is treated as Tier 1 personal/customer data.
+- **Customer/account data involved:** Yes.
+- **Authentication method:** Signed-in Watchdog JWT for connection management; random per-connection inbound token for external webhook senders; HMAC-SHA256 for outbound delivery verification; internal Vault-backed token for scheduled delivery worker execution.
+- **Credentials/secrets location:** Inbound token is shown once and only its SHA-256 hash is stored. Outbound HMAC secrets and the internal worker token are stored in Supabase Vault.
+- **Scopes/permissions and least-privilege justification:** `crm.context.ingest` is required for inbound CRM context. `intelligence.context.read` is optional and disabled by default. CRM write scopes are reserved for future phases and are not exercised by the Phase 1 generic bridge.
+- **Webhook authentication/replay controls:** Per-connection token authentication inbound; stable event/idempotency keys; unique event constraints; signed outbound timestamp/body; receiving systems are expected to verify HMAC and de-duplicate the `Idempotency-Key`.
+- **Encryption expectations:** Outbound destinations must use public HTTPS. Redirects are not followed. Local/private-looking destinations are rejected.
+- **Provider retention/deletion behavior:** Varies by customer-selected destination. Customers remain responsible for the receiving provider's retention and processing settings.
+- **Watchdog retention/deletion behavior:** Watchdog retains normalized CRM context, audit records and delivery history needed to operate the integration. Arbitrary raw CRM payload bodies are not stored as the normalized CRM context record. A formal retention schedule must be finalized before broad external connector expansion.
+- **Subprocessors/onward transfers reviewed:** Customer chooses the destination in Phase 1. Zapier, Make and each named direct CRM connector require their own review before Watchdog represents them as supported named providers.
+- **Privacy policy impact:** CRM/integration data-category language should be added before broad public launch of named integrations.
+- **Data protection assessment required:** To determine before named CRM connector/public Zapier launch.
+- **Security/assurance evidence reviewed:** Staging trigger queue test; Vault secret round-trip; staging scheduler-to-worker HTTP 200; production scheduler-to-worker HTTP 200; Supabase security advisor review.
+- **Availability/failure behavior:** Delivery worker runs every minute; up to five attempts with increasing backoff; 8-second outbound timeout; delivery/response/error history retained; customers can pause or revoke a connection.
+- **Incident/security contact path:** Watchdog security/operations process; integration audit and delivery history provide connection-level evidence.
+- **Offboarding procedure:** Revoke connection, clear inbound token hash and outbound secret reference, delete Vault signing secret, cancel pending deliveries and stop future trigger fan-out.
+- **Credential revocation test:** Rotation and revocation paths are implemented; revocation removes usable credentials and cancels pending deliveries.
+- **Reviewer/approval:** Watchdog internal implementation review, 2026-08-19.
+- **Residual risks / accepted exceptions:** Generic HTTPS destination ownership is not independently proven in Phase 1. Private/local destinations and redirects are blocked; endpoint-verification challenge/response can be added before broader embedded marketplace use.
+- **Next review date or trigger:** Before public Zapier publication, before any named direct CRM integration, or on a material scope/retention/authentication change.
 
 ## Required review record for every new material connector
 
