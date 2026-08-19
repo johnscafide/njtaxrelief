@@ -1,6 +1,7 @@
-/* TEMPORARY CHECKOUT GUARD.
-   Remove this file and its billing-client loader only after NJW-200 verifies the new
-   Paddle Agent/Pro price objects, checkout mappings and webhook mappings in production. */
+/* TEMPORARY PUBLIC CHECKOUT GUARD.
+   Keep Agent and Pro self-serve enrollment routed to the private walkthrough until
+   NJW-42 records controlled Stripe Live lifecycle acceptance and explicitly opens
+   public paid enrollment. Pro+ remains walkthrough-first by product design. */
 (function(){
   'use strict';
   var path=(window.location.pathname||'').replace(/\/+$/,'');
