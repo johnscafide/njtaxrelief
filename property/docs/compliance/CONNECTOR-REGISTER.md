@@ -28,6 +28,7 @@ A connector being listed here does not mean it is production-live. Status must b
 | Stripe | Payments | `supabase/functions/stripe-webhook/index.ts`, security contracts | Observed | Payment events and billing identifiers; card data scope depends on checkout architecture. | PCI scope/SAQ determination, webhook signing/replay controls, least privilege, retention, refunds/disputes, account MFA/access and incident process. |
 | Paddle | Subscription/payment integration | `supabase/functions/paddle-webhook/index.ts`, security contracts | Observed | Subscription/payment events and entitlement changes. | Confirm whether production-active; signature/replay controls, account access, data retention, tax/payment role, offboarding and overlap with Stripe. |
 | Customer CRM / generic webhook connections | Customer-controlled CRM and workflow interoperability | `property/integrations/`, `supabase/functions/integration-*`, `integration_*` tables | Live | Contact identity, relationship/stage/activity context and property associations may enter Watchdog; governed property-change events may leave Watchdog to customer-selected HTTPS endpoints. Tier 1 personal/customer data. | Per-connection scope and consent, hashed inbound token, Vault-backed HMAC, idempotency/replay handling, payload allowlisting, retention/deletion, endpoint ownership, audit, error minimization, rotation/revocation and Intelligence opt-in. |
+| BoldTrail / kvCORE Direct | Native CRM synchronization | `supabase/functions/integration-provider-*`, `integration_provider_*` tables, `/property/integrations/` | Live beta | Tier 1 CRM/contact data. Approved contact identity, lead/deal/source and agent-assignment context may enter Watchdog. Provider API credential is highly sensitive. | Teams entitlement, provider credential validation, Vault-only reusable token storage, field allowlisting, incremental sync/cursor integrity, audit/history, disconnect deletion, Intelligence opt-in, provider terms/privacy review and real-account acceptance before removing beta label. |
 | Zapier | Automation / integration marketplace | Phase 2 design in `property/docs/integrations-phase1.md` and NJW-52 | Planned | May relay Watchdog events and customer CRM/workflow context; exact categories depend on customer workflow. | Partner/app review, least-privilege triggers/actions, authentication, disclosures, consent, retention/subprocessors, logs, deletion/offboarding, webhook signing and privacy update. |
 
 ## Phase 1 CRM / webhook review record
@@ -60,6 +61,37 @@ A connector being listed here does not mean it is production-live. Status must b
 - **Reviewer/approval:** Watchdog internal implementation review, 2026-08-19.
 - **Residual risks / accepted exceptions:** Generic HTTPS destination ownership is not independently proven in Phase 1. Private/local destinations and redirects are blocked; endpoint-verification challenge/response can be added before broader embedded marketplace use.
 - **Next review date or trigger:** Before public Zapier publication, before any named direct CRM integration, or on a material scope/retention/authentication change.
+
+## Phase 4 BoldTrail / kvCORE Direct review record
+
+- **Connector:** BoldTrail / kvCORE Direct
+- **Business owner:** Watchdog
+- **Technical owner:** Watchdog
+- **Status:** Live beta
+- **Approval date:** 2026-08-19
+- **Business purpose:** Give Teams customers a native managed CRM connection so approved relationship context can continuously enter Watchdog without requiring Zapier or a customer-operated webhook bridge.
+- **Data received from provider:** Contact provider ID, display name, valid email when supplied, kvCORE status, deal type, source/system source, provider update timestamp, external-vendor reference and assigned-agent references. The initial direct sync does not request or persist a complete raw CRM mirror.
+- **Data transmitted to provider:** Bearer credential plus read requests to the provider's public contacts API. The Phase 4 initial connector does not write CRM records back to BoldTrail.
+- **Data classification:** Personal and Internal. CRM/contact context is Tier 1 personal/customer data. Provider API token is Authentication data.
+- **Customer/account data involved:** Yes.
+- **Authentication method:** Signed-in Watchdog JWT plus Teams/developer entitlement for connection management. Customer-supplied kvCORE API token is validated against the provider before connection creation.
+- **Credentials/secrets location:** Reusable provider API token is stored in Supabase Vault through the server-side secret helper. Browser-readable integration/provider tables contain only the Vault secret identifier category/state and are inaccessible directly to anon/authenticated roles. Internal sync worker uses a separate Vault-backed worker token.
+- **Scopes/permissions and least-privilege justification:** Initial direct connector is read-oriented with `crm.contacts.read`, `crm.activities.read` and `crm.notes.read` recorded as the intended relationship-context scope boundary. `intelligence.context.read` is separate, optional and disabled by default. No CRM write scope is exercised in the initial native connector.
+- **Webhook authentication/replay controls:** Not applicable to provider ingress in the initial version because Watchdog performs scheduled API reads rather than accepting provider webhooks. The internal sync worker uses a dedicated secret header and constant-time token comparison.
+- **Encryption expectations:** Provider API traffic uses HTTPS. Watchdog hosting/database transport follows the platform TLS boundary.
+- **Provider retention/deletion behavior:** Provider-side retention remains controlled by BoldTrail/kvCORE and the customer's CRM account. Watchdog does not modify provider retention in the initial read connector.
+- **Watchdog retention/deletion behavior:** Only normalized allowlisted CRM context, provider connection state, aggregate sync event summaries, audit records and sync-run history are retained. The database normalizer independently allowlists provider context keys. Disconnect defaults to deleting CRM context imported under that connection and removes the Vault credential.
+- **Subprocessors/onward transfers reviewed:** Supabase processes Watchdog-stored CRM context and secrets. CRM context is not sent to Watchdog Intelligence unless the customer explicitly enables the separate Intelligence permission for the direct connection.
+- **Privacy policy impact:** Named CRM integration and relationship-context language should be reflected in the public privacy disclosures before the beta becomes broad/general availability.
+- **Data protection assessment required:** Yes before broad general availability.
+- **Security/assurance evidence reviewed:** Server-only provider tables with RLS and revoked browser grants; Vault-backed provider and worker credentials; provider credential validation before storage; fixed Teams entitlement; incremental cursor design; service-role-only batch normalizer; database context-key allowlist; auditable sync runs; disconnect purge path; Security Advisor review required after Phase 4 DDL.
+- **Availability/failure behavior:** Scheduler checks every 15 minutes. Sync runs are idempotent at the CRM-context identity key, use an updated-at cursor with overlap, cap work per execution and retain resumable pagination state. Failures update health and consecutive-failure counters and remain visible in sync history.
+- **Incident/security contact path:** Watchdog security/operations process with connection-level audit and sync-run evidence.
+- **Offboarding procedure:** Disable/revoke direct provider state, revoke the Watchdog integration connection, delete the Vault provider credential and by default delete normalized CRM context attached to the connection.
+- **Credential revocation test:** Disconnect/reconnect code paths delete old Vault secret references after successful replacement or revocation. A live provider-account token acceptance/revocation test remains part of beta acceptance because no production BoldTrail credential was available during framework construction.
+- **Reviewer/approval:** Watchdog internal implementation review, 2026-08-19.
+- **Residual risks / accepted exceptions:** The connector is marked beta until a real customer/provider token completes end-to-end acceptance. Provider-side token rotation, rate-limit behavior and any account-specific API entitlements can vary. Initial sync intentionally omits phone, notes and richer activity detail when those fields are not present in the public contacts list response.
+- **Next review date or trigger:** On first real BoldTrail account connection, before enabling CRM writes, before removing beta status, or on provider API/authentication/terms changes.
 
 ## Required review record for every new material connector
 
