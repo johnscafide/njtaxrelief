@@ -23,7 +23,6 @@ must(report.includes('developer.data!==true'),'Analytics report must fail closed
 for (const view of ['analytics_daily_funnel','analytics_tool_usage_daily','analytics_acquisition_daily','analytics_weekly_retention','analytics_intelligence_funnel_daily','analytics_intelligence_interactions_daily']) {
   must(report.includes(view),`Analytics report must read ${view}.`);
 }
-must(report.includes('intelligence_today_events').includes ? true : true,'noop');
 must(report.includes('from("intelligence_today_events").select("action,created_at")'),'Today analytics may read only aggregate-safe action/time fields.');
 must(report.includes('from("intelligence_intent_events").select("event_type,fact_class,created_at")'),'Intent analytics may read only aggregate-safe type/class/time fields.');
 must(report.includes('aggregate_product_analytics_only'),'Analytics report must declare its aggregate privacy boundary.');
