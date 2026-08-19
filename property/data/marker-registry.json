@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T18:37:13.977Z",
+ "generated_at": "2026-08-19T18:41:41.797Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 410,
+   "live": 414,
    "partial": 4,
    "unavailable": 12,
-   "planned": 308
+   "planned": 304
   },
   "retired_phase5": 0
  },
@@ -10149,8 +10149,8 @@
    "professional_reason": "Shows whether the public parcel record is well matched before relying on it.",
    "formula": "parcel_identity_confidence * source_authority_coverage / 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10296,8 +10296,8 @@
    "professional_reason": "Shows which appeal-supporting public evidence remains incomplete.",
    "formula": "100 - evidence_chain_completeness",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10506,8 +10506,8 @@
    "professional_reason": "Flags records requiring manual block/lot/address reconciliation.",
    "formula": "100 - parcel_identity_confidence",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -11640,8 +11640,8 @@
    "professional_reason": "Shows a public assessment-reset consideration for holding-cost scenarios.",
    "formula": "revaluation_reset_exposure",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
