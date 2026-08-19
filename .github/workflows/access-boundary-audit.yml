@@ -46,6 +46,8 @@ jobs:
         run: node property/tests/page-native-intelligence-contract.mjs
       - name: Verify profession-aware Property Home Analyst Intel
         run: node property/tests/home-watchdog-analyst-intel-contract.mjs
+      - name: Verify visible Watchdog Data Graph
+        run: node property/tests/watchdog-data-graph-contract.mjs
       - name: Verify Daily Intelligence Today inbox
         run: node property/tests/intelligence-today-contract.mjs
       - name: Verify billing, verification and measurement security contracts
