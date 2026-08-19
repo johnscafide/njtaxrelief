@@ -32,3 +32,5 @@ must(!intelBlock.includes("'household_income_band'"),'Income band must not be co
 must(!intelBlock.includes("'household_size'"),'Household size must not be copied into Intelligence assumptions.');
 
 console.log('Watchdog Account living profile contract passed.');
+
+if (!controller.includes("if (!document.getElementById('ac-profile-editor')) window.setTimeout(mount,0);")) fail('Account profile observer must ignore mutations caused by the mounted editor itself');

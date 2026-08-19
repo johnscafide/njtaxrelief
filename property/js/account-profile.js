@@ -274,7 +274,9 @@
   function start() {
     var app = document.getElementById('ac-app');
     if (!app) return;
-    observer = new MutationObserver(function () { window.setTimeout(mount,0); });
+    observer = new MutationObserver(function () {
+      if (!document.getElementById('ac-profile-editor')) window.setTimeout(mount,0);
+    });
     observer.observe(app,{ childList:true,subtree:false });
     mount();
     loadProfile(false);
