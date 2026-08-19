@@ -154,3 +154,25 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Residual risk:** A tabletop does not prove real-world response time or external-provider coordination effectiveness.
 
 **Next action:** Add a reusable incident record template, define provisional recovery objectives, and conduct a future connector/credential-revocation exercise.
+
+---
+
+## 2026-08-19 — Establish risk register and expose ASVS identity target gaps
+
+**Decision ID:** WCR-2026-08-19-002  
+**Frameworks:** NIST CSF 2.0 Govern/Identify/Protect, SOC 2 Security, OWASP ASVS 5.0.0 Level 2, ISO/IEC 27001  
+**Decision:** Convert compliance gaps into a maintained cybersecurity risk register and begin requirement-level ASVS verification with authentication, session management, authorization, and OAuth/OIDC rather than treating the ASVS target as a broad narrative alignment claim.
+
+**Reasoning:** NIST CSF 2.0 uses governance and risk outcomes to prioritize security work, and ASVS 5.0.0 contains explicit identity requirements that must be verified individually. The first identity tranche found useful controls already in place, including centralized Supabase runtime configuration, PKCE, constrained continuation URLs, provider feature flags, RLS/entitlement boundaries, and sign-out paths. It also found a material standards gap: repository evidence does not establish that MFA is enforced for every Watchdog user, while ASVS `v5.0.0-6.3.3` is a Level 2 requirement. Provider support for MFA is not treated as evidence that Watchdog enforces it.
+
+**Evidence created:**
+
+- `property/docs/compliance/RISK-REGISTER.md`
+- `property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md`
+- `property/tests/auth-asvs-contract.mjs`
+- `.github/workflows/zero-cost-compliance-readiness.yml`
+- `property/docs/compliance/CONTROL-REGISTER.md`
+
+**Residual risk:** Provider-side production settings, session lifetime, account recovery/linking behavior, recent re-authentication for sensitive changes, active-session termination, and full OAuth/OIDC V10 applicability remain incomplete. The selected ASVS Level 2 target must not be represented as achieved while the MFA requirement remains unresolved.
+
+**Next action:** Complete the ASVS V10 OAuth/OIDC mapping, verify production Supabase identity/session configuration, assess a no-cost MFA enforcement path, create a formal role/plan/resource authorization matrix, and add dynamic negative authorization tests.
