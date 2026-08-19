@@ -219,3 +219,19 @@ verify_jwt = true
 
 [functions.zapier-api]
 verify_jwt = false
+
+# Phase 4 native CRM. Provider management is user-authenticated; the scheduled
+# sync worker validates a dedicated Vault-backed internal token inside the function.
+[functions.integration-provider-manager]
+verify_jwt = true
+
+[functions.integration-provider-sync-worker]
+verify_jwt = false
+
+# Phase 5 CRM-aware Intelligence. Both functions require a signed-in Watchdog
+# session and independently enforce the explicit per-connection Intelligence opt-in.
+[functions.intelligence-crm-context]
+verify_jwt = true
+
+[functions.intelligence-crm-analyst]
+verify_jwt = true
