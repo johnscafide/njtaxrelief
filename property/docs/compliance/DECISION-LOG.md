@@ -133,3 +133,24 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Residual risk:** Frequency does not equal quality; substantive evidence and periodic human review remain required.
 
 **Next action:** Prioritize high-risk technical and governance gaps rather than low-value documentation volume.
+
+---
+
+## 2026-08-19 — Exercise incident response before a real incident
+
+**Decision ID:** WCR-2026-08-19-001  
+**Frameworks:** SOC 2 Security/Availability, NIST CSF 2.0 Respond/Recover, ISO/IEC 27001, OWASP ASVS 5.0  
+**Decision:** Perform and retain a sanitized internal tabletop exercise against the existing incident-response runbook instead of treating the written runbook alone as proof of operational readiness.
+
+**Reasoning:** A control is stronger when the response sequence has been walked through against a plausible multi-user authenticated-workflow incident. The exercise tests classification, ownership, evidence minimization, containment, change reconciliation, authorization verification, customer communication and closure criteria without requiring destructive production activity.
+
+**Evidence created:**
+
+- `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md`
+- `property/docs/compliance/CONTROL-REGISTER.md`
+
+**Findings:** The response sequence is coherent and supported by existing security/change controls. Gaps remain around a standardized incident record template, formal RTO/RPO targets, measured technical recovery timing, and connector-focused response scenarios.
+
+**Residual risk:** A tabletop does not prove real-world response time or external-provider coordination effectiveness.
+
+**Next action:** Add a reusable incident record template, define provisional recovery objectives, and conduct a future connector/credential-revocation exercise.
