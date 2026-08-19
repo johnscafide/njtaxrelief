@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Daily Watchdog Recaps | Watchdog</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#f5f7fb">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/css/recap.css">
+</head>
+<body class="wr-page" data-access-require="developer" data-recap-mode="archive">
+<main class="wr-shell">
+  <header class="wr-topbar">
+    <a class="wr-brand" href="/property/dashboard" aria-label="Watchdog dashboard"><span class="wr-mark"><i class="fas fa-dog"></i></span><span><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></a>
+    <div class="wr-title"><b>Daily Operating Recaps</b><span>What changed, what shipped, what remains, and what matters next.</span></div>
+    <div class="wr-actions"><span class="wr-private"><i class="fas fa-lock"></i> Developer protected</span><a href="/property/dashboard"><i class="fas fa-arrow-left"></i> Dashboard</a></div>
+  </header>
+
+  <section class="wr-hero">
+    <div><span class="wr-kicker">WATCHDOG OPERATING MEMORY</span><h1>One accountable record for every day of work.</h1><p>Daily recaps consolidate ChatGPT work, GitHub changes, Linear progress, Supabase operations, completed items, open work, and the next execution priorities.</p></div>
+    <div class="wr-hero-note"><i class="fas fa-clock-rotate-left"></i><div><b>Daily at 6:00 AM Eastern</b><span>The previous day is summarized and the new day receives a ranked TODO.</span></div></div>
+  </section>
+
+  <section class="wr-panel" id="recap-app" hidden>
+    <div class="wr-panel-head"><div><span class="wr-kicker">ARCHIVE</span><h2>Daily recap history</h2></div><span id="recap-count" class="wr-count"></span></div>
+    <div id="recap-list" class="wr-list"></div>
+  </section>
+
+  <section class="wr-state" id="recap-state"><i class="fas fa-circle-notch fa-spin"></i><b>Loading operating history</b><span>Verifying developer access and retrieving protected recap records.</span></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script>
+<script src="/property/js/recap.js"></script>
+</body>
+</html>
