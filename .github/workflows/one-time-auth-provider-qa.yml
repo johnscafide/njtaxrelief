@@ -1,0 +1,50 @@
+name: One-time social auth provider QA contract
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-auth-provider-qa.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Add social auth provider regression assertions
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const p='property/tests/supabase-runtime-contract.mjs';
+          let s=fs.readFileSync(p,'utf8');
+          const marker="console.log('Supabase runtime rotation-path contract passed.');";
+          if(!s.includes(marker)) throw new Error('Runtime contract marker not found');
+          const block=`// Social auth provider + redirect contract.\nmust(runtime.includes(\"google: { label:'Google', enabled:true }\"),'Google sign-in must remain enabled.');\nmust(runtime.includes(\"facebook: { label:'Facebook', enabled:true }\"),'Facebook sign-in must remain enabled.');\nmust(runtime.includes(\"linkedin_oidc: { label:'LinkedIn', enabled:true }\"),'LinkedIn OIDC sign-in must remain enabled.');\nmust(runtime.includes(\"apple: { label:'Apple', enabled:false }\"),'Apple must remain explicitly deferred/disabled.');\nmust(runtime.includes(\"return Promise.reject(new Error('This sign-in provider is not enabled yet.'))\"),'Disabled providers must fail closed.');\nmust(runtime.includes('request.options.redirectTo = onboardingRedirect(intendedNext)'),'All OAuth sign-ins must return through required Watchdog onboarding.');\nmust(runtime.includes(\"parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0\"),'OAuth next routes must reject cross-origin, non-property and onboarding-loop targets.');\n\n`;
+          if(!s.includes("Google sign-in must remain enabled.")) s=s.replace(marker,block+marker);
+          fs.writeFileSync(p,s);
+          NODE
+      - name: Run auth contracts
+        run: |
+          node --check property/js/supabase-runtime.js
+          node --check property/js/onboarding.js
+          node property/tests/supabase-runtime-contract.mjs
+          node property/tests/onboarding-contract.mjs
+          node property/tests/account-profile-contract.mjs
+      - name: Commit QA contract and remove one-time workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git rm .github/workflows/one-time-auth-provider-qa.yml
+          git add property/tests/supabase-runtime-contract.mjs
+          git commit -m "Harden social auth provider contract"
+          git pull --rebase origin main
+          git push origin HEAD:main
