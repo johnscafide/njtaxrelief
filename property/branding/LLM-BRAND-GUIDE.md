@@ -20,6 +20,7 @@ The product should feel precise, modern, calm, trustworthy, and useful. It shoul
 8. Mobile must feel intentionally designed as an app, not merely stacked desktop content.
 9. Protect developer-only and paid functionality with server-verified access rules, not CSS hiding alone.
 10. Do not add `?v=` query-string version numbers to new CSS or JavaScript references.
+11. **Never use the legacy vertical property sidenav.** New and redesigned pages must use the current Watchdog navigation shell or an approved modern page-specific shell.
 
 ## Canonical colors
 
@@ -113,6 +114,21 @@ Avoid:
 
 Navigation is quiet until active. Active items may use a primary-soft background with blue/dark text. Developer links remain hidden unless developer access is server-confirmed.
 
+### Current shell rule
+
+The old fixed/collapsible dark vertical property sidenav is retired and prohibited. Do not load, copy, recreate, or visually imitate the legacy sidebar defined by `/property/partials/sidemenu.html` or its `.db-sidebar` presentation.
+
+For current product work:
+
+- The Dashboard uses its current 2027 dashboard navigation.
+- Property Home uses its current 2027 Home navigation.
+- Supported secondary pages use `/property/css/app-shell-2027.css` and `/property/js/app-shell-2027.js`.
+- A purpose-built modern header/navigation may be used for a specialized page, but it must not fall back to the retired vertical rail.
+- If a page is not yet migrated to a current shell, render it without the retired sidebar rather than reintroducing legacy navigation.
+- When creating a new route, explicitly choose its current navigation pattern before considering the page complete.
+
+The shared `/property/js/sidemenu.js` intentionally no longer fetches `/property/partials/sidemenu.html`. Do not restore that fallback.
+
 The current brand mark is a Font Awesome dog icon in a 42px rounded tile using a `#183b84` to `#2f6df6` gradient, paired with the Watchdog wordmark.
 
 ## Charts and data
@@ -195,6 +211,7 @@ Ask:
 - Is the main task obvious above the fold?
 - Did I add decoration with no information purpose?
 - Are typography, spacing, color, and radii on-system?
+- Am I using a current navigation shell rather than the retired vertical sidenav?
 - Would a homeowner understand this?
 - Would a professional trust this?
 - Is mobile intentionally designed?
