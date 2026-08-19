@@ -11,6 +11,8 @@ const SERVICES:Record<string,string>={
 };
 const FEMA_NFHL='https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer';
 const GOVERNMENT='https://mapsdep.nj.gov/arcgis/rest/services/Features/Government/MapServer';
+const HUD_OPPORTUNITY_ZONES='https://services.arcgis.com/VTyQ9soqVukalItT/arcgis/rest/services/Opportunity_Zones/FeatureServer';
+const NJDOT_TRANSIT_VILLAGES='https://services.arcgis.com/HggmsDF7UJsNN1FK/ArcGIS/rest/services/TransitVillageBuffersV6/FeatureServer';
 const PRE:Record<string,Spec>={
  'preflight.contaminated_site_500m':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer',layer:'0',distance:500,mode:'count'},
  'preflight.deed_notice_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer',layer:'40',mode:'hit'},
@@ -24,7 +26,9 @@ const PRE:Record<string,Spec>={
  'preflight.wetlands_2012_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer',layer:'2',mode:'hit'},
  'preflight.epa_priority_wetland_hit':{base:'https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer',layer:'79',mode:'hit'},
  'njplus.nj-dca-community-assets.urban_enterprise_zone_status':{base:GOVERNMENT,layer:'24',mode:'hit'},
- 'njplus.nj-dca-community-assets.redevelopment_area_status':{base:GOVERNMENT,layer:'31',mode:'hit'}
+ 'njplus.nj-dca-community-assets.redevelopment_area_status':{base:GOVERNMENT,layer:'31',mode:'hit'},
+ 'njplus.nj-dca-community-assets.opportunity_zone_status':{base:HUD_OPPORTUNITY_ZONES,layer:'13',mode:'hit'},
+ 'njplus.nj-dca-community-assets.transit_village_status':{base:NJDOT_TRANSIT_VILLAGES,layer:'0',mode:'hit'}
 };
 const cache=new Map<string,{at:number,v:any[]}>(),TTL=6*60*60*1000;
 function norm(s:string){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'')}
@@ -35,4 +39,4 @@ function femaValue(fs:any[]){if(!fs.length)return null;const a=fs[0]?.attributes
 export async function njdepObservation(marker:any,row:any):Promise<SpatialObservation>{const lat=Number(row?.lat),lon=Number(row?.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return{status:'dependency_missing',value:null,reason:'parcel_coordinates_unavailable'};const id=String(marker?.id||''),pre=PRE[id];let spec=pre;if(!spec){const base=SERVICES[String(marker?.source_id||'')],layer=String(marker?.source_layer??'');if(!base||!layer)return{status:'provider_missing',value:null,reason:'spatial_provider_mapping_missing'};spec={base,layer,distance:distanceFor(String(marker?.field||''))}}const result=await query(spec,lat,lon);if(!result.ok)return{status:'provider_error',value:null,reason:result.error||'spatial_provider_error'};const fs=result.features,field=String(marker?.field||'');if(spec.mode==='fema'){const v=femaValue(fs);return v==null?{status:'source_checked_no_value',value:null}:{status:'available',value:v}}if(spec.mode==='count'||field.endsWith('_count')||/_(\d+)m$/.test(field))return{status:'available',value:fs.length};if(spec.mode==='hit'||/_hit$|within_/.test(field))return{status:'available',value:fs.length>0};if(!fs.length)return{status:'source_checked_no_value',value:null};const v=pick(fs[0].attributes||{},field);return v===null||v===undefined||v===''?{status:'source_checked_no_value',value:null}:{status:'available',value:v}}
 export async function njdepValue(marker:any,row:any){const result=await njdepObservation(marker,row);return result.status==='available'?result.value:null}
 export function isNjdepMarker(marker:any){return !!PRE[String(marker?.id||'')] || (!!SERVICES[String(marker?.source_id||'')]&&marker?.source_layer!=null)}
-export const NJDEP_PROVIDER_VERSION='spatial-preflight-v7-community-designations';
+export const NJDEP_PROVIDER_VERSION='spatial-preflight-v8-community-designations';
