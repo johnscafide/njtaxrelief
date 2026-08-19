@@ -1,0 +1,31 @@
+name: Closing v7 actionable evidence contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/intelligence/closing-evidence/**'
+      - 'property/js/intelligence-calibration-review.js'
+      - 'property/tests/closing-v7-actionable-contract.mjs'
+      - 'supabase/functions/intelligence-closing-v7-**'
+      - 'supabase/migrations/*closing_v7*'
+      - '.github/workflows/closing-v7-actionable-contract.yml'
+  pull_request:
+    paths:
+      - 'property/intelligence/closing-evidence/**'
+      - 'property/js/intelligence-calibration-review.js'
+      - 'property/tests/closing-v7-actionable-contract.mjs'
+      - 'supabase/functions/intelligence-closing-v7-**'
+      - 'supabase/migrations/*closing_v7*'
+      - '.github/workflows/closing-v7-actionable-contract.yml'
+
+jobs:
+  closing-v7-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Closing v7 actionable evidence safety
+        run: node property/tests/closing-v7-actionable-contract.mjs
