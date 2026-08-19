@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" data-access-require="developer" data-developer-only="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Watchdog Calibration Review</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/intelligence-calibration-review.css">
+</head>
+<body data-plan-auto="true">
+  <main class="cr-shell">
+    <header class="cr-topbar">
+      <a class="cr-brand" href="/property/dashboard"><span class="cr-mark"><i class="fas fa-dog"></i></span><span><b>Watchdog</b><small>CALIBRATION REVIEW</small></span></a>
+      <nav><a href="/property/intelligence/calibration/">Full calibration control</a><a href="/property/logs/2026-08-18/">Sprint log</a></nav>
+    </header>
+
+    <section class="cr-hero">
+      <div>
+        <span class="cr-eyebrow">DEVELOPER ONLY · INDEPENDENT HUMAN REVIEW</span>
+        <h1>Review one case at a time.</h1>
+        <p>Judge the governed evidence first. Watchdog's predicted class and score stay hidden until after you save your independent label, reducing model-answer anchoring.</p>
+      </div>
+      <div id="cr-overall" class="cr-overall" aria-live="polite"><i class="fas fa-circle-notch fa-spin"></i> Loading queues…</div>
+    </section>
+
+    <section class="cr-trust">
+      <i class="fas fa-scale-balanced"></i>
+      <div><b>Your label is the calibration evidence.</b><span>Use <strong>Priority</strong> only when the available evidence independently supports review. Use <strong>Not priority</strong> when it does not. Use <strong>Uncertain</strong> instead of guessing when evidence is insufficient or ambiguous.</span></div>
+    </section>
+
+    <section class="cr-controls">
+      <label>Calibration queue<select id="cr-set" aria-label="Calibration queue"></select></label>
+      <div id="cr-progress" class="cr-progress"></div>
+    </section>
+
+    <section id="cr-stage" class="cr-stage" aria-live="polite">
+      <div class="cr-loading"><i class="fas fa-circle-notch fa-spin"></i><span>Loading governed calibration evidence…</span></div>
+    </section>
+  </main>
+
+  <div id="pl-toast" class="pl-toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/js/intelligence-calibration-review.js"></script>
+</body>
+</html>
