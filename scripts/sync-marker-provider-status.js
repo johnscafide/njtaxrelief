@@ -16,9 +16,7 @@ const trustedObservation=new Set(['watchdog.watchdog_score','watchdog.score','wa
 const preflightLive=new Set(['preflight.contaminated_site_500m','preflight.deed_notice_hit','preflight.cea_hit','preflight.ust_250m','preflight.tidelands_reference_hit','preflight.highlands_hit','preflight.pinelands_hit','preflight.fema_flood_zone','preflight.tidal_cafe_hit','preflight.wetlands_2012_hit','preflight.epa_priority_wetland_hit','preflight.permit_count','preflight.open_permit_count','preflight.latest_permit_date']);
 const dcaPermitFields=new Set(['permit_count','open_permit_count','latest_permit_date','permit_issued_count','certificate_count','latest_certificate_date','permit_type_mix','use_group_mix','authorized_construction_cost','authorized_square_feet','rental_units_gained','sale_units_gained']);
 const dcaDevFields=new Set(['housing_units_authorized','new_housing_units_authorized','office_square_feet_authorized','retail_square_feet_authorized','other_nonresidential_square_feet','construction_cost_authorized','demolitions','certificate_of_occupancy_count','rental_units_created','for_sale_units_created']);
-// 2026-08-19: these 24 municipal signals are served by the v26 Workbench hydrator from the
-// privacy-limited 2026 MOD-IV aggregate release. Keep an explicit field allow-list so a future
-// treasury-modiv-2026 catalog addition cannot become live before its resolver is implemented.
+// 2026-08-19: these 24 municipal signals are served from the privacy-limited 2026 MOD-IV aggregate.
 const modivIntelFields=new Set(['median_assessed_value','assessment_dispersion_iqr_pct','median_annual_tax','tax_dispersion_iqr_pct','median_assessment_change_pct','assessment_growth_positive_share_pct','assessment_change_dispersion_pct','assessment_jump_share_pct','median_land_share_pct','improvement_value_share_pct','residential_parcel_share_pct','commercial_parcel_share_pct','exempt_parcel_share_pct','vacant_parcel_share_pct','farm_parcel_share_pct','recent_sale_turnover_pct','median_building_age','pre_1978_building_share_pct','recent_build_share_pct','median_effective_tax_rate_pct','median_sale_assessment_ratio_pct','sale_assessment_ratio_dispersion_pct','median_parcel_acres','assessed_value_per_acre']);
 const codNotYetLive=new Set(['cod_2016','cod_2017','cod_2018','cod_2019','cod_2020','cod_2021','percentile','volatility']);
 const pilotForecastUnavailable='nj-dca-pilot-forecast';
@@ -43,8 +41,8 @@ function state(m){
   return'planned'
 }
 const c={live:0,planned:0,partial:0,unavailable:0};
-for(const m of j.markers||[]){m.provider_status=state(m);m.provider_contract='workbench-hydrate-v26';c[m.provider_status]++}
-j.provider_summary={...c,total:(j.markers||[]).length,coverage_pct:Number((c.live/Math.max(1,(j.markers||[]).length)*100).toFixed(1)),contract:'workbench-hydrate-v26'};
+for(const m of j.markers||[]){m.provider_status=state(m);m.provider_contract='workbench-hydrate-v27';c[m.provider_status]++}
+j.provider_summary={...c,total:(j.markers||[]).length,coverage_pct:Number((c.live/Math.max(1,(j.markers||[]).length)*100).toFixed(1)),contract:'workbench-hydrate-v27'};
 j.provider_status_definition={live:'A connected resolver can check this marker.',partial:'Resolves only when a supporting record (e.g. a trusted score observation) already exists; blank otherwise.',planned:'Cataloged marker without a connected resolver path.',unavailable:'Connected source does not supply this field, or no authoritative source has been confirmed at all.'};
 fs.writeFileSync(p,JSON.stringify(j,null,2)+'\n');
 console.log(j.provider_summary);
