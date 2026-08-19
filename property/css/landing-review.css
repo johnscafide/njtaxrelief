@@ -1,40 +1,122 @@
-/* NJW-202 landing review refinements. Stable asset path; no query-string versioning. */
-.lp-proof-strip{background:#fff;border-top:1px solid rgba(16,41,75,.06);border-bottom:1px solid rgba(16,41,75,.08)}
-.lp-proof-inner{width:min(1320px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(250px,1.35fr);align-items:stretch}
-.lp-proof-stat,.lp-proof-source{min-height:96px;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid rgba(16,41,75,.07)}
-.lp-proof-stat strong{font:800 clamp(24px,2.5vw,34px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em;color:#10294b}
-.lp-proof-stat span{margin-top:7px;color:#6f7a85;font:700 10px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:.035em;text-transform:uppercase}
-.lp-proof-source{border-right:0;background:linear-gradient(135deg,#f6faf9,#eef7f5)}
-.lp-proof-source span{color:#56636f;font-size:12px;line-height:1.4;font-weight:700}
-.lp-proof-source a{display:inline-flex;align-items:center;gap:7px;margin-top:8px;color:#087f82;text-decoration:none;font:800 10px/1.2 "Plus Jakarta Sans",sans-serif}
-.lp-proof-source a:hover{text-decoration:underline}
+/* NJW-218 — consumer-first /property landing. Stable asset paths only. */
+body.wd-consumer-mode{background:#fff;color:#172234}
+body.wd-consumer-mode .lp-proof-strip,
+body.wd-consumer-mode .section:has(.lp-tools),
+body.wd-consumer-mode .section:has(.pl-brokerband),
+body.wd-consumer-mode .section:has(.lp-paths),
+body.wd-consumer-mode .section:has(.lp-steps),
+body.wd-consumer-mode .section:has(.hv-grid){display:none!important}
+body.wd-consumer-mode #wd-recent-landing{display:none!important}
+body.hood-on .wd-consumer-recents,
+body.hood-on #wd-seo-directory,
+body.hood-on .landing-faq,
+body.hood-on .section:has(.ins-grid),
+body.hood-on .section:has(.gt-banner){display:none!important}
 
-.landing-faq{max-width:1060px;margin:0 auto;padding:76px 20px 92px}
-.landing-faq>h2{margin:0;color:#10294b;font:800 clamp(34px,4vw,52px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}
-.landing-faq>.landing-faq-intro{max-width:760px;margin:14px 0 28px;color:#697580;font-size:16px;line-height:1.55}
-.landing-faq-grid{display:grid;gap:10px}
-.landing-faq-item{border:1px solid rgba(16,41,75,.1);border-radius:18px;background:#fff;overflow:hidden;box-shadow:0 8px 24px rgba(16,41,75,.035)}
-.landing-faq-item summary{position:relative;display:block;padding:20px 56px 20px 22px;cursor:pointer;list-style:none;color:#1f344b;font:800 14px/1.35 "Plus Jakarta Sans",sans-serif}
-.landing-faq-item summary::-webkit-details-marker{display:none}
-.landing-faq-item summary:after{content:"+";position:absolute;right:20px;top:50%;width:28px;height:28px;margin-top:-14px;border-radius:50%;display:grid;place-items:center;background:#eef7f5;color:#087f82;font:800 18px/1 "Plus Jakarta Sans",sans-serif}
-.landing-faq-item[open] summary:after{content:"−"}
-.landing-faq-item p{margin:0;padding:0 22px 22px;color:#63717d;font-size:14px;line-height:1.65;max-width:920px}
-.landing-faq-more{margin:24px 0 0;color:#6b7782;font-size:13px}
-.landing-faq-more a{color:#087f82;font-weight:800;text-decoration:none}
-.landing-faq-more a:hover{text-decoration:underline}
+body.wd-consumer-mode .pl-hero{min-height:390px;padding-top:92px;padding-bottom:76px}
+body.wd-consumer-mode .pl-hero h1{max-width:820px;margin-left:auto;margin-right:auto;font-size:clamp(2.25rem,5.1vw,3.65rem);letter-spacing:-.045em}
+body.wd-consumer-mode .pl-input{font-size:17px}
 
-@media(max-width:900px){
-  .lp-proof-inner{grid-template-columns:repeat(3,1fr)}
-  .lp-proof-source{grid-column:1/-1;min-height:76px;border-top:1px solid rgba(16,41,75,.07)}
-  .lp-proof-stat:nth-child(3){border-right:0}
+.wd-consumer-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
+.wd-section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}
+.wd-section-kicker{display:block;margin-bottom:10px;color:#087f82;font:800 13px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}
+.wd-section-head h2,.wd-directory-head h2,.wd-guide-band h2,.wd-homeowner-links h2{margin:0;color:#10294b;font:800 clamp(30px,4vw,48px)/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.05em}
+.wd-section-link,.wd-directory-more a,.wd-guide-all{display:inline-flex;align-items:center;gap:9px;color:#087f82;text-decoration:none;font-size:16px;font-weight:800;white-space:nowrap}
+.wd-section-link:hover,.wd-directory-more a:hover,.wd-guide-all:hover{text-decoration:underline;text-underline-offset:4px}
+
+.wd-consumer-recents{background:#fff;padding:34px 0 54px;border-bottom:1px solid #e8ecec}
+.wd-property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.wd-property-card,.wd-free-card,.wd-empty-card{min-width:0;border-radius:24px;overflow:hidden;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.wd-property-card{background:#f6f8f8;color:#172234}
+.wd-property-card:hover,.wd-free-card:hover,.wd-empty-card:hover{transform:translateY(-2px)}
+.wd-property-photo{position:relative;height:190px;background:#e8eded;overflow:hidden}
+.wd-property-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.wd-property-card:hover .wd-property-photo img{transform:scale(1.02)}
+.wd-property-placeholder{height:100%;display:grid;place-items:center;color:#6e8087;font-size:38px;background:linear-gradient(145deg,#edf1f1,#dce5e5)}
+.wd-property-label{position:absolute;left:16px;top:16px;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.94);color:#273b4d;font:800 12px/1.1 "Plus Jakarta Sans",sans-serif}
+.wd-property-copy{padding:20px 20px 22px}
+.wd-property-copy h3{margin:0;color:#10294b;font:800 20px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}
+.wd-property-copy p{margin:6px 0 0;color:#60717b;font-size:16px;line-height:1.4}
+.wd-property-facts{display:flex;flex-wrap:wrap;gap:7px 12px;margin-top:16px;color:#52626c;font-size:15px;line-height:1.4}
+.wd-property-facts span+span:before{content:"·";margin-right:12px;color:#9aa6aa}
+.wd-property-open{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:#087f82;font-size:15px}
+.wd-free-card{display:flex;flex-direction:column;justify-content:space-between;min-height:100%;padding:26px;background:#10294b;color:#fff}
+.wd-free-label{display:inline-block;margin-bottom:32px;color:#a8e1dc;font:800 13px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.wd-free-card h3{margin:0;font:800 clamp(24px,2.7vw,32px)/1.08 "Plus Jakarta Sans",sans-serif;letter-spacing:-.04em;color:#fff}
+.wd-free-card p{margin:15px 0 26px;color:#d8e1e8;font-size:17px;line-height:1.55}
+.wd-free-card b{display:inline-flex;align-items:center;gap:9px;color:#fff;font-size:16px}
+.wd-empty-card{display:grid;place-items:center;align-content:center;min-height:320px;padding:30px;background:#f4f7f7;color:#10294b;text-align:center}
+.wd-empty-card i{font-size:28px;color:#087f82;margin-bottom:15px}.wd-empty-card h3{font-size:22px;margin:0}.wd-empty-card p{font-size:16px;line-height:1.5;color:#64737c}
+.wd-card-loading{height:330px;border-radius:24px;background:linear-gradient(90deg,#f1f4f4 20%,#f8fafa 50%,#f1f4f4 80%);background-size:220% 100%;animation:wdLoad 1.4s linear infinite}
+@keyframes wdLoad{to{background-position:-220% 0}}
+
+body.wd-consumer-mode .section:has(.ins-grid){background:#f4f1eb!important;padding:72px 0 78px!important;margin:0!important}
+body.wd-consumer-mode .section:has(.ins-grid)>.section-inner{width:min(1240px,calc(100% - 48px));max-width:none;margin:0 auto;padding:0}
+body.wd-consumer-mode .section:has(.ins-grid) .lp-h2{margin:0;color:#10294b;font:800 clamp(34px,4.5vw,54px)/1.03 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}
+.wd-insights-intro{max-width:700px;margin:14px 0 30px;color:#58666d;font-size:18px;line-height:1.55}
+.wd-insights-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:34px;align-items:start}
+.wd-insight-lead{display:block;color:inherit;text-decoration:none}
+.wd-insight-image{height:430px;border-radius:28px;overflow:hidden;background:#dfe5e4}
+.wd-insight-image img,.wd-insight-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.wd-insight-copy{padding:24px 4px 0}
+.wd-insight-copy span,.wd-insight-list span{color:#087f82;font:800 13px/1.3 "Plus Jakarta Sans",sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.wd-insight-copy h3{max-width:850px;margin:10px 0 12px;color:#132a39;font:800 clamp(29px,3.5vw,43px)/1.08 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em}
+.wd-insight-copy p{max-width:790px;margin:0;color:#58666d;font-size:18px;line-height:1.6}
+.wd-insight-copy b{display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:#087f82;font-size:16px}
+.wd-insight-list{display:flex;flex-direction:column;border-top:1px solid #d9d6cf}
+.wd-insight-list>a:not(.wd-all-insights){display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;padding:18px 0;border-bottom:1px solid #d9d6cf;color:inherit;text-decoration:none}
+.wd-insight-thumb{height:104px;border-radius:16px;overflow:hidden;background:#dfe5e4}
+.wd-insight-list h3{margin:6px 0 5px;color:#132a39;font:800 19px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:-.02em}
+.wd-insight-list p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin:0;color:#667277;font-size:15px;line-height:1.45}
+.wd-all-insights{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 0;color:#087f82;text-decoration:none;font-size:16px;font-weight:800}
+body.wd-consumer-mode .ins-glance{display:none!important}
+
+.wd-seo-directory{padding:82px 0 86px;background:#fff}
+.wd-directory-head{max-width:820px;margin-bottom:42px}
+.wd-directory-head p,.wd-guide-band p{margin:16px 0 0;color:#617078;font-size:18px;line-height:1.6}
+.wd-county-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px;border-top:1px solid #dde4e4}
+.wd-county{padding:28px 0 30px;border-bottom:1px solid #dde4e4;min-width:0}
+.wd-county h3{margin:0 0 16px;font:800 22px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}.wd-county h3 a{color:#10294b;text-decoration:none}.wd-county h3 a:hover{text-decoration:underline;text-underline-offset:4px}
+.wd-town-links{display:flex;flex-direction:column;gap:9px}.wd-town-links a{color:#44545e;text-decoration:none;font-size:16px;line-height:1.4}.wd-town-links a:hover{color:#087f82;text-decoration:underline;text-underline-offset:3px}
+.wd-county-all{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:#087f82;text-decoration:none;font-size:15px;font-weight:800}
+.wd-directory-more{display:flex;justify-content:center;padding:32px 0 0}
+.wd-directory-more a{padding:13px 18px;border-radius:999px;background:#eef7f5}
+.wd-guide-band{margin-top:72px;padding:42px;border-radius:28px;background:#f0f6f5}
+.wd-guide-band>div:first-child{max-width:760px}
+.wd-guide-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;margin-top:28px;border-top:1px solid #d4dfdd}
+.wd-guide-links a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid #d4dfdd;color:#173143;text-decoration:none;font-size:16px;font-weight:700;line-height:1.35}.wd-guide-links a i{font-size:12px;color:#087f82}.wd-guide-links a:hover{color:#087f82}
+.wd-guide-all{margin-top:26px}
+.wd-homeowner-links{margin-top:56px}.wd-homeowner-links>div:first-child{max-width:760px}
+
+body.wd-consumer-mode .landing-faq{max-width:1240px;padding:72px 24px 80px;border-top:1px solid #e1e7e7}
+body.wd-consumer-mode .landing-faq>h2{font-size:clamp(32px,4vw,46px)}
+body.wd-consumer-mode .landing-faq-grid{grid-template-columns:1fr 1fr;gap:12px}
+body.wd-consumer-mode .landing-faq-item{border:0;border-bottom:1px solid #dde4e4;border-radius:0;box-shadow:none}
+body.wd-consumer-mode .landing-faq-item summary{font-size:16px;padding:20px 54px 20px 0}
+body.wd-consumer-mode .landing-faq-item p{font-size:16px;line-height:1.65;padding:0 40px 22px 0}
+body.wd-consumer-mode .landing-faq-more{font-size:16px}
+
+body.wd-consumer-mode .section:has(.gt-banner){padding:12px 0 54px!important}
+body.wd-consumer-mode .gt-banner{border-radius:24px!important}
+body.wd-consumer-mode .gt-headline{font-size:clamp(23px,2.5vw,32px)!important;line-height:1.12!important}
+body.wd-consumer-mode .gt-sub{font-size:16px!important;line-height:1.55!important}
+body.wd-consumer-mode .gt-disc{font-size:14px!important;line-height:1.55!important}
+body.wd-consumer-mode #wd-property-footer .wdf-description,
+body.wd-consumer-mode #wd-property-footer .wdf-legal,
+body.wd-consumer-mode #wd-property-footer .wdf-legal p{font-size:14px!important;line-height:1.6!important}
+
+@media(max-width:980px){
+  .wd-insights-layout{grid-template-columns:1fr}.wd-insight-list{display:grid;grid-template-columns:1fr 1fr;gap:0 22px}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:112px minmax(0,1fr)}.wd-all-insights{grid-column:1/-1}
+  .wd-county-grid{grid-template-columns:1fr 1fr}.wd-guide-links{grid-template-columns:1fr 1fr}
 }
-@media(max-width:640px){
-  .lp-proof-inner{width:min(100% - 24px,1320px);grid-template-columns:1fr 1fr}
-  .lp-proof-stat{min-height:82px;padding:17px 15px}
-  .lp-proof-stat:nth-child(2){border-right:0}
-  .lp-proof-stat:nth-child(3){grid-column:1/-1;border-top:1px solid rgba(16,41,75,.07)}
-  .lp-proof-source{padding:17px 15px}
-  .landing-faq{padding:60px 16px 76px}
-  .landing-faq-item summary{padding:18px 52px 18px 18px}
-  .landing-faq-item p{padding:0 18px 20px}
+@media(max-width:760px){
+  .wd-consumer-wrap,body.wd-consumer-mode .section:has(.ins-grid)>.section-inner{width:min(100% - 30px,1240px)}
+  body.wd-consumer-mode .pl-hero{min-height:360px;padding:86px 15px 64px}.wd-section-head{align-items:flex-start;flex-direction:column;gap:9px}.wd-section-link{white-space:normal}
+  .wd-property-grid{grid-template-columns:1fr}.wd-property-card{display:grid;grid-template-columns:138px minmax(0,1fr)}.wd-property-photo{height:100%;min-height:160px}.wd-property-label{left:10px;top:10px;font-size:11px}.wd-property-copy{padding:17px}.wd-property-copy h3{font-size:18px}.wd-property-facts{font-size:14px}.wd-free-card{min-height:270px}.wd-free-label{margin-bottom:22px}
+  body.wd-consumer-mode .section:has(.ins-grid){padding:58px 0 62px!important}.wd-insight-image{height:280px;border-radius:22px}.wd-insight-copy p{font-size:17px}.wd-insight-list{display:flex}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:104px minmax(0,1fr)}
+  .wd-seo-directory{padding:62px 0 68px}.wd-county-grid{grid-template-columns:1fr}.wd-guide-band{margin-top:54px;padding:28px 22px}.wd-guide-links{grid-template-columns:1fr}.wd-directory-head p,.wd-guide-band p{font-size:17px}
+  body.wd-consumer-mode .landing-faq{padding:58px 16px 68px}.landing-faq-grid{grid-template-columns:1fr!important}
+}
+@media(max-width:480px){
+  .wd-property-card{grid-template-columns:1fr}.wd-property-photo{height:190px}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:92px minmax(0,1fr);gap:14px}.wd-insight-thumb{height:88px}.wd-insight-list p{display:none}.wd-county{padding:24px 0}.wd-guide-band{border-radius:22px}
 }
