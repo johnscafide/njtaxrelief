@@ -5,6 +5,7 @@
   if (path !== '/property' && path !== '/property/index.html') return;
 
   var PARCEL = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
+  var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
   var client = null;
 
   function q(sel, root) { return (root || document).querySelector(sel); }
@@ -30,14 +31,47 @@
   function queryFor(x) {
     return [x.address, x.town, 'NJ', x.zip].filter(Boolean).join(', ');
   }
+  function street(x) {
+    if (!GMAPS_KEY || !x || !x.address) return '';
+    return 'https://maps.googleapis.com/maps/api/streetview?' + new URLSearchParams({
+      size: '640x400',
+      location: queryFor(x),
+      fov: '82',
+      pitch: '4',
+      source: 'outdoor',
+      return_error_code: 'true',
+      key: GMAPS_KEY
+    }).toString();
+  }
   function aerial(x) {
     var lat = Number(x.lat), lon = Number(x.lon);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return '';
+    if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return '';
     var dx = .00145, dy = .001;
     return 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?' + new URLSearchParams({
       bbox: [lon - dx, lat - dy, lon + dx, lat + dy].join(','),
       bboxSR: '4326', imageSR: '3857', size: '760,460', format: 'jpg', f: 'image'
     }).toString();
+  }
+  window.wdLandingPhotoFail = function (img) {
+    if (!img) return;
+    var fallback = img.getAttribute('data-fallback');
+    if (fallback && img.getAttribute('data-fallback-used') !== '1') {
+      img.setAttribute('data-fallback-used', '1');
+      img.src = fallback;
+      return;
+    }
+    var parent = img.parentNode;
+    if (parent) parent.classList.add('no-photo');
+    img.remove();
+  };
+  function propertyPhoto(x) {
+    var primary = street(x), fallback = aerial(x);
+    var placeholder = '<div class="wd-property-placeholder" aria-hidden="true"><i class="fas fa-house"></i><span>Property view unavailable</span></div>';
+    if (!primary && !fallback) return placeholder;
+    var src = primary || fallback;
+    return placeholder + '<img src="' + esc(src) + '"' +
+      (primary && fallback ? ' data-fallback="' + esc(fallback) + '"' : '') +
+      ' alt="Street view of ' + esc(x.address) + '" loading="lazy" decoding="async" onerror="wdLandingPhotoFail(this)">';
   }
   function localRecent(limit) {
     try {
@@ -52,14 +86,12 @@
 
   function propertyCard(x, label) {
     var href = '/property/?address=' + encodeURIComponent(queryFor(x));
-    var img = aerial(x);
     var facts = [];
     if (money(x.assessed)) facts.push('<span>' + esc(money(x.assessed)) + ' assessed</span>');
     if (money(x.last_year_tax)) facts.push('<span>' + esc(money(x.last_year_tax)) + ' annual tax</span>');
     if (x.year_built) facts.push('<span>Built ' + esc(x.year_built) + '</span>');
     return '<a class="wd-property-card" href="' + href + '">' +
-      '<div class="wd-property-photo">' +
-        (img ? '<img src="' + esc(img) + '" alt="Aerial view of ' + esc(x.address) + '" loading="lazy">' : '<div class="wd-property-placeholder"><i class="fas fa-house"></i></div>') +
+      '<div class="wd-property-photo">' + propertyPhoto(x) +
         '<span class="wd-property-label">' + esc(label || 'Property record') + '</span>' +
       '</div>' +
       '<div class="wd-property-copy">' +
@@ -121,7 +153,7 @@
     var params = new URLSearchParams({
       where: "PROP_CLASS = '2' AND NET_VALUE > 100000 AND PROP_LOC IS NOT NULL",
       outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,ZIP5,NET_VALUE,LAST_YR_TX,YR_CONSTR',
-      returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '2', resultOffset: String(offset), f: 'json'
+      returnGeometry: 'false', returnCentroid: 'true', outSR: '4326', resultRecordCount: '2', resultOffset: String(offset), f: 'json'
     });
     return fetch(PARCEL + '?' + params.toString()).then(function (r) { return r.json(); }).then(function (data) {
       return (data.features || []).map(function (f) {
@@ -192,10 +224,10 @@
     ['Atlantic','atlantic'],['Bergen','bergen'],['Burlington','burlington'],['Camden','camden'],['Cape May','cape-may'],['Cumberland','cumberland'],['Essex','essex'],['Gloucester','gloucester'],['Hudson','hudson'],['Hunterdon','hunterdon'],['Mercer','mercer'],['Middlesex','middlesex'],['Monmouth','monmouth'],['Morris','morris'],['Ocean','ocean'],['Passaic','passaic'],['Salem','salem'],['Somerset','somerset'],['Sussex','sussex'],['Union','union'],['Warren','warren']
   ];
   var professionalGuides = [
-    ['Real estate agents','/property/real-estate-agents/'],['Mortgage lenders','/property/mortgage-lenders/'],['Tax attorneys','/property/tax-attorneys/'],['Title & closing professionals','/property/title-closing-professionals/'],['Real estate appraisers','/property/real-estate-appraisers/'],['Real estate investors','/property/real-estate-investors/'],['Contractors & developers','/property/contractors-developers/'],['Municipal professionals','/property/municipal-professionals/'],['Insurance & risk professionals','/property/insurance-risk-professionals/'],['Property tax professionals','/property/property-tax-professionals/'],['Accountants & CPAs','/property/accountants-cpas/']
+    ['Real estate agents','/property/real-estate-agents/'],['Mortgage lenders','/property/mortgage-lenders/'],['Tax attorneys','/property/tax-attorneys/'],['Title & closing professionals','/property/title-closing-professionals/'],['Real estate appraisers','/property/real-estate-appraisers/'],['Real estate investors','/property/real-estate-investors/'],['Contractors & developers','/property/contractors-developers/'],['Municipal professionals','/property/municipal-professionals/'],['Insurance & risk professionals','/property/insurance-risk-professionals/'],['Property tax professionals','/property/property-tax-professionals/'],['Accountants & CPAs','/property/accountants-cpas/'],['Home inspectors','/property/home-inspectors/']
   ];
   var homeownerGuides = [
-    ['ANCHOR benefits','/anchor-program.html'],['Stay NJ & Senior Freeze','/senior-programs.html'],['Property tax appeals','/property-tax-appeal.html'],['Veterans property-tax benefits','/veterans-benefits.html'],['NJ tax calendar','/tax-calendar.html'],['Assessment Fairness Index','/property/fairness'],['Compare New Jersey towns','/property/town-compare'],['How Watchdog uses public data','/property/data-methodology']
+    ['ANCHOR benefits','/anchor-program.html'],['Stay NJ & Senior Freeze','/senior-programs.html'],['Property tax appeals','/property-tax-appeal.html'],['Veterans property-tax benefits','/veterans-benefits.html'],['NJ tax calendar','/tax-calendar.html'],['Assessment Fairness Index','/property/fairness'],['Compare New Jersey towns','/property/town-compare'],['How Watchdog uses public data','/property/data-methodology'],['How to hire a real estate agent','/property/hiring-a-real-estate-agent/']
   ];
 
   function fallbackCountyHtml() {
@@ -242,8 +274,30 @@
     }).catch(function () {});
   }
 
+  function upgradeDesktopNav() {
+    var nav = q('#wd-nav .wd-nav-in');
+    if (!nav || q('.wd-left', nav)) return;
+    var menu = q('#wd-menu-trigger', nav);
+    var logo = q('.wd-logo', nav);
+    var profile = q('#wd-profile-trigger', nav);
+    var left = document.createElement('div');
+    var right = document.createElement('div');
+    left.className = 'wd-left';
+    right.className = 'wd-right';
+    if (menu) left.appendChild(menu);
+    left.insertAdjacentHTML('beforeend', '<a href="/property/dashboard">My Properties</a><a href="/property/insights/">Insights</a><a href="/property/town-compare">Compare towns</a>');
+    right.innerHTML = '<a href="/property/pro#pricing">Pricing</a><a href="/property/free/">Free account</a>';
+    if (profile) right.appendChild(profile);
+    if (logo) logo.remove();
+    nav.textContent = '';
+    nav.appendChild(left);
+    if (logo) nav.appendChild(logo);
+    nav.appendChild(right);
+  }
+
   function placeSections() {
     document.body.classList.add('wd-consumer-mode');
+    upgradeDesktopNav();
     var recentSec = ensureRecentSection();
     var insights = q('.ins-grid');
     var insightSection = insights && insights.closest('.section');
