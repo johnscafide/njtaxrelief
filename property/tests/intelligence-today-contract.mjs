@@ -5,13 +5,15 @@ const files = {
   js: 'property/js/intelligence-today.js',
   css: 'property/css/intelligence-today.css',
   page: 'property/intelligence/daily/index.html',
-  migration: 'supabase/migrations/20260819113000_watchdog_intelligence_today_inbox_events.sql'
+  migration: 'supabase/migrations/20260819113000_watchdog_intelligence_today_inbox_events.sql',
+  hardening: 'supabase/migrations/20260819114000_watchdog_intelligence_today_inbox_privilege_hardening.sql'
 };
 const read = key => fs.readFileSync(files[key], 'utf8');
 const js = read('js');
 const css = read('css');
 const page = read('page');
 const migration = read('migration');
+const hardening = read('hardening');
 const expect = (condition, message) => { if (!condition) throw new Error(message); };
 
 new vm.Script(js, { filename: files.js });
@@ -34,7 +36,9 @@ expect(js.includes("context_key:'daily-intelligence:today'"), 'Today actions nee
 expect(migration.includes('alter table public.intelligence_today_events enable row level security'), 'Today events must have RLS enabled.');
 expect(migration.includes('using ((select auth.uid()) = user_id)'), 'Today event reads must be owner-scoped.');
 expect(migration.includes('with check ((select auth.uid()) = user_id)'), 'Today event inserts must be owner-scoped.');
-expect(migration.includes('revoke update, delete on table public.intelligence_today_events from authenticated'), 'Today history must remain append-only for authenticated users.');
+expect(hardening.includes('revoke all on table public.intelligence_today_events from authenticated'), 'Authenticated privileges must be reset before append-only grants are restored.');
+expect(hardening.includes('grant select, insert on table public.intelligence_today_events to authenticated'), 'Authenticated users must have only SELECT + INSERT table grants.');
+expect(!/grant\s+(?:update|delete|truncate)\b[^;]*authenticated/i.test(hardening), 'Today inbox hardening must not restore mutable authenticated privileges.');
 expect(migration.includes('Never treat client-supplied metadata as property truth or model evidence'), 'Today event metadata must be explicitly non-authoritative.');
 expect(css.includes('.wdi-today-stats'), 'Today inbox needs a visible triage summary.');
 expect(css.includes('.wdi-today-actions'), 'Today inbox needs actionable triage controls.');
@@ -42,4 +46,4 @@ for (const [key, content] of Object.entries({ js, css, page })) {
   expect(!content.includes('?v='), `${files[key]} must not introduce ?v= asset version parameters.`);
 }
 
-console.log('Daily Intelligence Today inbox, RLS, Context Graph, triage, and safety contracts passed.');
+console.log('Daily Intelligence Today inbox, RLS, append-only privileges, Context Graph, triage, and safety contracts passed.');
