@@ -2,12 +2,23 @@ declare const Deno: any;
 // @ts-ignore remote runtime import
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ENGINE_VERSION = 'watchdog-derived-v9-agent-listing';
+const ENGINE_VERSION = 'watchdog-derived-v10-appraisal-evidence';
 const CHAPTER123_PROVIDER = 'chapter123-provider-v3';
+const SR1A_SUMMARY_URL = 'https://njpropertytaxrelief.com/property/sr1a-ratios.json';
+const COUNTY_SALES: Record<string, string> = {
+  '01': 'atlantic', '02': 'bergen', '03': 'burlington', '04': 'camden', '05': 'cape-may',
+  '06': 'cumberland', '07': 'essex', '08': 'gloucester', '09': 'hudson', '10': 'hunterdon',
+  '11': 'mercer', '12': 'middlesex', '13': 'monmouth', '14': 'morris', '15': 'ocean',
+  '16': 'passaic', '17': 'salem', '18': 'somerset', '19': 'sussex', '20': 'union', '21': 'warren',
+};
 const ORIGINS = new Set([
   'https://njpropertytaxrelief.com',
   'https://www.njpropertytaxrelief.com',
 ]);
+
+let sr1aSummaryCache: any = null;
+let sr1aSummaryAt = 0;
+const subjectSalesCache = new Map<string, { loaded_at: number; sales: any[] }>();
 
 function cors(req: Request) {
   const origin = req.headers.get('origin') || '';
@@ -55,6 +66,13 @@ function districtCode(v: any) {
   const s = String(v || '').replace(/\D/g, '');
   return s.length >= 4 ? s.slice(0, 4) : '';
 }
+function countyCode(v: any) {
+  const d = districtCode(v);
+  return d ? d.slice(0, 2) : '';
+}
+function parcelPart(v: any) {
+  return String(v ?? '').replace(/\s+/g, '').replace(/^0+/, '');
+}
 function floodBand(v: any) {
   const zone = String(v || '').toUpperCase();
   if (!zone) return 0;
@@ -89,6 +107,52 @@ function assessmentRatioGapRisk(subjectRatio: any, official: any) {
   if (subject == null || subject <= 0 || publishedPct == null || publishedPct <= 0) return null;
   const published = publishedPct / 100;
   return clamp(Math.abs(subject - published) / 0.20 * 100);
+}
+
+async function loadSr1aSummary() {
+  if (sr1aSummaryCache && Date.now() - sr1aSummaryAt < 21600000) return sr1aSummaryCache;
+  const response = await fetch(SR1A_SUMMARY_URL, { headers: { accept: 'application/json' } });
+  if (!response.ok) throw new Error(`SR-1A summary returned ${response.status}`);
+  const json = await response.json();
+  if (!json?.districts || !/NJ Division of Taxation SR1A/i.test(String(json?.source || ''))) {
+    throw new Error('SR-1A summary signature validation failed');
+  }
+  sr1aSummaryCache = json;
+  sr1aSummaryAt = Date.now();
+  return json;
+}
+
+async function loadSubjectSales(prefix: string) {
+  const slug = COUNTY_SALES[prefix];
+  if (!slug) throw new Error(`Unknown SR-1A county prefix ${prefix}`);
+  const cached = subjectSalesCache.get(prefix);
+  if (cached && Date.now() - cached.loaded_at < 21600000) return cached.sales;
+  const response = await fetch(`https://njpropertytaxrelief.com/property/sales-${slug}.json`, { headers: { accept: 'application/json' } });
+  if (!response.ok) throw new Error(`SR-1A subject sales ${prefix} returned ${response.status}`);
+  const json = await response.json();
+  if (String(json?.county_code || '') !== prefix || !Array.isArray(json?.sales)) {
+    throw new Error(`SR-1A subject sales ${prefix} validation failed`);
+  }
+  subjectSalesCache.set(prefix, { loaded_at: Date.now(), sales: json.sales });
+  return json.sales;
+}
+
+function subjectSaleFor(row: any, pin: string, sales: any[]) {
+  const district = districtCode(pin);
+  const block = parcelPart(row?.block);
+  const lot = parcelPart(row?.lot);
+  if (!district || !block || !lot || !Array.isArray(sales)) return null;
+  let hit: any = null;
+  for (const sale of sales) {
+    if (String(sale?.d || '') !== district) continue;
+    if (parcelPart(sale?.b) !== block || parcelPart(sale?.l) !== lot) continue;
+    const year = num(sale?.y) || 0;
+    const month = num(sale?.m) || 0;
+    const hitYear = num(hit?.y) || 0;
+    const hitMonth = num(hit?.m) || 0;
+    if (!hit || year > hitYear || (year === hitYear && month > hitMonth)) hit = sale;
+  }
+  return hit;
 }
 
 function signal(v: any, transform = 'bool') {
@@ -194,10 +258,15 @@ Deno.serve(async (req: Request) => {
   };
   requested.forEach(walk);
 
-  const needsChapter123 = [...seen].some((id) => {
-    const op = (defMap.get(id) as any)?.operation;
-    return op === 'revaluation_pressure' || op === 'tax_reset_sensitivity';
-  });
+  const operations = [...seen].map((id) => String((defMap.get(id) as any)?.operation || ''));
+  const needsChapter123 = operations.some((op) => [
+    'revaluation_pressure', 'tax_reset_sensitivity', 'assessment_defensibility',
+    'appeal_evidence_strength', 'appeal_opportunity',
+  ].includes(op));
+  const needsEvidenceReferences = operations.some((op) => [
+    'sr1a_subject_square_feet', 'comparable_evidence_reliability', 'assessment_defensibility',
+    'appeal_evidence_strength', 'appeal_opportunity',
+  ].includes(op));
 
   const hydratePromise = fetch(url + '/functions/v1/workbench-hydrate', {
     method: 'POST',
@@ -211,9 +280,21 @@ Deno.serve(async (req: Request) => {
         body: JSON.stringify({ districts: [...new Set(pins.map(districtCode).filter(Boolean))] }),
       })
     : Promise.resolve(null);
+  const evidencePromise = needsEvidenceReferences
+    ? (async () => {
+        const summary = await loadSr1aSummary();
+        const prefixes = [...new Set(pins.map(countyCode).filter(Boolean))];
+        const entries = await Promise.all(prefixes.map(async (prefix) => [prefix, await loadSubjectSales(prefix)] as const));
+        return { summary, countySales: Object.fromEntries(entries) };
+      })()
+    : Promise.resolve(null);
 
-  const [hydrateResponse, chapterResponse] = await Promise.all([hydratePromise, chapterPromise]);
-  if (!hydrateResponse.ok) return out(req, 503, { error: 'Dependency resolver unavailable', status: hydrateResponse.status });
+  const [hydrateResponse, chapterResponse, evidenceReferences] = await Promise.all([hydratePromise, chapterPromise, evidencePromise]).catch((error) => {
+    console.error(error);
+    return [null, null, { error: String((error as Error)?.message || error) }] as any;
+  });
+  if (!hydrateResponse || !hydrateResponse.ok) return out(req, 503, { error: 'Dependency resolver unavailable', status: hydrateResponse?.status || 503 });
+  if ((evidenceReferences as any)?.error) return out(req, 503, { error: 'SR-1A evidence reference unavailable', detail: (evidenceReferences as any).error });
   const hydrated = await hydrateResponse.json();
 
   let chapterDistricts: any = {};
@@ -239,6 +320,12 @@ Deno.serve(async (req: Request) => {
     const rawMeta: any = hydrated.meta?.[pin] || {};
     const memo = new Map<string, any>();
     const stack = new Set<string>();
+    const auxMeta = new Map<string, any>();
+    const district = districtCode(pin);
+    const prefix = countyCode(pin);
+    const sr1aRow = (evidenceReferences as any)?.summary?.districts?.[district] || null;
+    const subjectSales = (evidenceReferences as any)?.countySales?.[prefix] || [];
+    const subjectSale = subjectSaleFor(row, pin, subjectSales);
 
     const rawValue = (dep: string) => {
       const rowValue = ROW[dep]?.(row);
@@ -251,6 +338,11 @@ Deno.serve(async (req: Request) => {
     const checked = (dep: string) => {
       if (present(ROW[dep]?.(row)) || present(rawVals[dep])) return true;
       return ['available', 'source_checked_no_value'].includes(String(rawMeta[dep]?.status || ''));
+    };
+    const evidenceAnchor = () => {
+      const ppsf = num(sr1aRow?.ppsf);
+      const sqft = num(subjectSale?.sf);
+      return ppsf != null && ppsf > 0 && sqft != null && sqft > 0 ? ppsf * sqft : null;
     };
 
     const evalId = (id: string): any => {
@@ -436,6 +528,114 @@ Deno.serve(async (req: Request) => {
             v = Math.round(burdenRisk * 0.34 + clamp(pressure) * 0.23 + clamp(reval) * 0.23 + unevenness * 0.20);
           }
         }
+      } else if (def.operation === 'sr1a_subject_square_feet') {
+        const sqft = num(subjectSale?.sf);
+        if (sqft != null && sqft > 0) {
+          v = Math.round(sqft);
+          auxMeta.set(id, {
+            reference_source: 'NJ Division of Taxation SR-1A verified usable sale record',
+            subject_sale_year: num(subjectSale?.y),
+            subject_sale_month: num(subjectSale?.m),
+          });
+        }
+      } else if (def.operation === 'comparable_evidence_reliability') {
+        const sample = num(value(cfg.sample_size_dep));
+        const p25 = num(value(cfg.p25_dep));
+        const p75 = num(value(cfg.p75_dep));
+        const sqft = num(value(cfg.square_feet_dep));
+        const years = Array.isArray(sr1aRow?.years) ? sr1aRow.years.map((x: any) => Number(x)).filter(Number.isFinite) : [];
+        const latest = years.length ? Math.max(...years) : null;
+        if (sample != null && sample >= 10 && p25 != null && p75 != null && p75 >= p25 && latest != null) {
+          const depth = clamp(sample / 150 * 100);
+          const spread = clamp(100 - Math.max(0, p75 - p25) / 0.35 * 100);
+          const recency = latest >= 2025 ? 100 : latest === 2024 ? 75 : 45;
+          const detail = sqft != null && sqft > 0 ? 100 : 0;
+          v = Math.round(depth * 0.45 + spread * 0.30 + recency * 0.15 + detail * 0.10);
+          auxMeta.set(id, {
+            verified_sale_sample: sample,
+            verified_sale_latest_year: latest,
+            subject_square_feet_present: detail === 100,
+            reference_source: 'NJ Division of Taxation SR-1A verified sales',
+          });
+        }
+      } else if (def.operation === 'assessment_defensibility') {
+        const comparable = num(value(cfg.comparable_dep));
+        const assessed = num(value(cfg.assessed_dep));
+        const coefficient = num(value(cfg.uniformity_dep));
+        const official = chapterDistricts[districtCode(pin)] || null;
+        const anchor = evidenceAnchor();
+        const unevenness = codRisk(coefficient);
+        if (comparable != null && assessed != null && assessed > 0 && coefficient != null && official && anchor != null && unevenness != null) {
+          const supportedUpper = anchor * Number(official.upper) / 100;
+          const withinRange = assessed > supportedUpper ? 15 : 100;
+          const uniformity = 100 - unevenness;
+          v = Math.round(clamp(comparable) * 0.30 + uniformity * 0.25 + withinRange * 0.25 + 100 * 0.20);
+          auxMeta.set(id, {
+            independent_value_anchor: Math.round(anchor),
+            chapter123_upper_supported_assessment: Math.round(supportedUpper),
+            chapter123_within_range: assessed <= supportedUpper,
+            uniformity_transform: 'IAAO COD 15-35 consistency normalization',
+          });
+        }
+      } else if (def.operation === 'appeal_evidence_strength') {
+        const assessed = num(value(cfg.assessed_dep));
+        const sample = num(value(cfg.sample_size_dep));
+        const coefficient = num(value(cfg.uniformity_dep));
+        const prior = num(value(cfg.appeal_outcome_dep));
+        const completeness = num(value(cfg.completeness_dep));
+        const official = chapterDistricts[districtCode(pin)] || null;
+        const anchor = evidenceAnchor();
+        if (assessed != null && assessed > 0 && sample != null && sample >= 10 && coefficient != null && prior != null && completeness != null && official && anchor != null) {
+          const supportedUpper = anchor * Number(official.upper) / 100;
+          const over = Math.max(0, assessed - supportedUpper);
+          const margin = clamp(over / assessed * 500);
+          const depth = clamp(sample / 100 * 100);
+          const uniformityContext = clamp((coefficient - 10) / 15 * 100);
+          v = Math.round(100 * 0.25 + margin * 0.20 + depth * 0.18 + uniformityContext * 0.14 + clamp(prior) * 0.10 + clamp(completeness) * 0.13);
+          auxMeta.set(id, {
+            independent_value_anchor: Math.round(anchor),
+            chapter123_margin_score: Math.round(margin),
+            verified_comparable_depth: Math.round(depth),
+            property_record_completeness: Math.round(clamp(completeness)),
+          });
+        }
+      } else if (def.operation === 'appeal_opportunity') {
+        const assessed = num(value(cfg.assessed_dep));
+        const annualTax = num(value(cfg.tax_dep));
+        const coefficient = num(value(cfg.uniformity_dep));
+        const prior = num(value(cfg.appeal_outcome_dep));
+        const evidence = num(value(cfg.evidence_dep));
+        const official = chapterDistricts[districtCode(pin)] || null;
+        const anchor = evidenceAnchor();
+        const parts: { weight: number; score: number; key: string }[] = [];
+        let chapterMarginFraction: number | null = null;
+        if (assessed != null && assessed > 0 && official && anchor != null) {
+          const supportedUpper = anchor * Number(official.upper) / 100;
+          chapterMarginFraction = Math.max(0, assessed - supportedUpper) / assessed;
+          const hasCase = assessed > supportedUpper;
+          parts.push({ weight: 35, score: hasCase ? 70 + Math.min(30, chapterMarginFraction * 300) : 0, key: 'chapter123_position' });
+        }
+        if (evidence != null) parts.push({ weight: 25, score: clamp(evidence), key: 'evidence_file_strength' });
+        const inverseConsistency = codRisk(coefficient);
+        if (inverseConsistency != null) parts.push({ weight: 15, score: inverseConsistency, key: 'inverse_assessment_consistency' });
+        if (prior != null) parts.push({ weight: 10, score: clamp(prior), key: 'county_appeal_outcomes' });
+        let annualDollars: number | null = null;
+        if (assessed != null && assessed > 0 && annualTax != null && annualTax >= 0 && official && anchor != null) {
+          const fair = anchor * Number(official.ratio) / 100;
+          annualDollars = Math.max(0, assessed - fair) * (annualTax / assessed);
+          parts.push({ weight: 15, score: clamp(annualDollars / 2500 * 100), key: 'annual_dollars_at_stake' });
+        }
+        const available = parts.reduce((sum, part) => sum + part.weight, 0);
+        if (available > 0) {
+          v = Math.round(parts.reduce((sum, part) => sum + part.score * part.weight, 0) / available);
+          auxMeta.set(id, {
+            evidence_coverage: available,
+            available_components: parts.map((part) => part.key),
+            annual_dollars_at_stake: annualDollars == null ? null : Math.round(annualDollars),
+            chapter123_margin_fraction: chapterMarginFraction,
+            assessment_consistency_transform: 'IAAO COD 15-35 risk normalization',
+          });
+        }
       }
 
       stack.delete(id);
@@ -447,12 +647,17 @@ Deno.serve(async (req: Request) => {
       const def: any = defMap.get(id);
       const value = evalId(id);
       if (value !== null && value !== undefined && !Number.isNaN(value)) {
-        const chapterBacked = ['revaluation_pressure', 'tax_reset_sensitivity'].includes(String(def.operation || ''));
+        const operation = String(def.operation || '');
+        const chapterBacked = [
+          'revaluation_pressure', 'tax_reset_sensitivity', 'assessment_defensibility',
+          'appeal_evidence_strength', 'appeal_opportunity',
+        ].includes(operation);
+        const directReference = operation === 'sr1a_subject_square_feet';
         markers[pin][id] = value;
         meta[pin][id] = {
           status: 'available',
-          provider_kind: 'derived_governed',
-          source: 'Watchdog governed formula registry · ' + ENGINE_VERSION,
+          provider_kind: directReference ? 'authoritative_reference' : 'derived_governed',
+          source: directReference ? 'NJ Division of Taxation SR-1A verified usable sale record' : 'Watchdog governed formula registry · ' + ENGINE_VERSION,
           engine_version: ENGINE_VERSION,
           formula: def.formula,
           dependencies: def.dependencies,
@@ -460,15 +665,17 @@ Deno.serve(async (req: Request) => {
           explanation: def.explanation,
           observed_at: now,
           ...(chapterBacked ? { reference_source: 'NJ Division of Taxation 2026 Chapter 123 · ' + CHAPTER123_PROVIDER } : {}),
+          ...(auxMeta.get(id) || {}),
         };
       } else {
         meta[pin][id] = {
           status: 'dependency_missing',
-          provider_kind: 'derived_governed',
-          source: 'Watchdog governed formula registry · ' + ENGINE_VERSION,
+          provider_kind: String(def.operation || '') === 'sr1a_subject_square_feet' ? 'authoritative_reference' : 'derived_governed',
+          source: String(def.operation || '') === 'sr1a_subject_square_feet' ? 'NJ Division of Taxation SR-1A verified usable sale record' : 'Watchdog governed formula registry · ' + ENGINE_VERSION,
           engine_version: ENGINE_VERSION,
           dependencies: def.dependencies,
           checked_at: now,
+          ...(auxMeta.get(id) || {}),
         };
       }
     }
