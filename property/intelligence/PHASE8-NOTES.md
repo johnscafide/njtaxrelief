@@ -1,8 +1,8 @@
 # Watchdog Intelligence Phase 8 notes
 
-Phase 8 creates the governed semantic property context used by page-native Intelligence, deterministic scenarios, and Watchdog Analyst.
+Phase 8 is the governed semantic property context used by page-native Intelligence, deterministic scenarios, Watchdog Analyst, and the visible Property Data Graph.
 
-## Current staging contracts
+## Current contracts
 
 - Semantic Context engine: `watchdog-semantic-context-v7-direct-markers`
 - Semantic Snapshot contract: `watchdog-semantic-snapshot-v5`
@@ -27,7 +27,7 @@ Canonical observation order:
 5. other resolved value
 6. missing
 
-Competing observations are preserved. Canonical values are selected by authority rank, then recency. The losing observations remain attached to the marker and facts hash.
+Competing observations are preserved. Canonical values are selected by authority rank, then recency. Losing observations remain attached to the marker and facts hash.
 
 ## Hashes
 
@@ -43,7 +43,7 @@ Direct marker IDs participate in the cache identity through a stable hash of the
 
 ## Semantic packs
 
-Named packs remain the default low-cost path for normal page context. Current packs:
+Named packs remain the default bounded path for normal page context:
 
 - identity
 - assessment_tax
@@ -54,11 +54,11 @@ Named packs remain the default low-cost path for normal page context. Current pa
 - municipal_pressure
 - agent_opportunity
 
-Pages should request the smallest meaningful pack set rather than loading every marker.
+Pages should request the smallest meaningful pack set for their job. The visible Property Data Graph is a deliberate exception that lazy-loads a broad cross-domain graph view only when the user approaches that section.
 
 ## Direct marker rule
 
-Any marker in the governed registry whose provider status is currently `live` or `partial` can be requested explicitly by marker ID through the same Semantic Context contract, subject to the signed-in user's plan/entitlement and the underlying governed hydrator.
+Any marker in the governed registry whose provider status is `live` or `partial` can be requested explicitly by marker ID through the same Semantic Context contract, subject to the signed-in user's plan/entitlement and the governed hydrator.
 
 Rules:
 
@@ -68,38 +68,37 @@ Rules:
 - unknown marker IDs remain explicit as `unknown_marker`
 - planned/unavailable markers remain explicit with their provider-state reason
 - if no live/partial marker resolves, the service returns a governed 409 rather than inventing a value
-- direct requests still preserve source authority, observations, conflicts, missing states, facts hash, retrieval hash and provider lineage
+- direct requests preserve source authority, observations, conflicts, missing states, facts hash, retrieval hash and provider lineage
 - optional `value_type`, `unit` and `format` metadata are included when present in the governed registry/provider metadata
 
-The registry currently describes 734 markers, including 349 live and 5 partial markers. This does not mean all 734 have live values. Watchdog keeps planned/unavailable provider state explicit rather than pretending the data exists.
+The checked-in registry currently describes 734 marker definitions. Runtime responses report the current registry total and live/partial provider counts. Registry size is never represented as the number of facts available for an individual property.
 
-### Direct-marker staging acceptance
+## Property Data Graph rule
 
-Known governed property `0117_10102_5` was requested with:
+Property Home may expose the governed chain as:
 
-- `property.annual_tax`
-- `property.assessed_value`
-- `fake.marker.never`
+`registry -> selected property context -> source lineage -> deterministic derived layer -> persisted Intelligence models/findings -> governed actions`
 
-Result:
+The graph must obey these rules:
 
-- exactly 2 governed markers selected
-- no semantic packs implicitly loaded
-- fake marker returned as `unknown_marker`
-- annual tax = $6,436.82, authoritative source, authority 100
-- assessed value = $178,900, authoritative source, authority 100
-- first request = cache miss
-- identical repeat = cache hit
-- forced refresh = cache miss
-- facts hash remained exactly stable across initial, cached and forced-refresh requests
+- count only markers whose semantic state is actually `available` as resolved property data
+- display selected-marker count separately from available-marker count
+- display registry universe separately from property-level evidence
+- keep source facts/references, trusted observations, derived signals and other resolved values visibly distinct
+- count source families from resolved marker lineage, not marketing claims
+- count models/findings only from persisted `intelligence_runs` / `intelligence_findings` visible to the authenticated user
+- count actions only from persisted finding `recommended_actions`
+- preserve conflict count, authority-policy version and semantic-contract version
+- refuse placeholder counts when governed semantic context cannot resolve
+- lazy-load the broad graph request near the viewport to avoid turning a trust visualization into a Property Home performance penalty
 
-A normal `assessment_tax` pack request continued to resolve 60 markers and the same $6,436.82 annual-tax source fact, proving pack backward compatibility.
+## Historical direct-marker acceptance
 
-An unknown-only direct request returned 409 `No live or partial governed markers resolved` with the unresolved marker reason rather than hydrating default packs.
+A staging acceptance run used known governed property `0117_10102_5` with `property.annual_tax`, `property.assessed_value`, and an intentionally fake marker. The two real markers resolved as authoritative source facts, the fake marker remained explicitly unresolved, cache behavior was verified, and facts hash remained stable. This historical test remains useful evidence of the direct-marker contract; it is not a current-property claim.
 
 ## Scenario rule
 
-Property tax scenarios require explicit assumptions for municipal levy growth, property assessment growth, and municipal tax-base growth. No financial assumption is invented or silently defaulted.
+Property-tax scenarios require explicit assumptions for municipal levy growth, property assessment growth, and municipal tax-base growth. No financial assumption is invented or silently defaulted.
 
 Current property-tax-share formula:
 
@@ -111,18 +110,16 @@ Natural-language scenario requests are parsed deterministically. Explicit `uncha
 
 ## Analyst rule
 
-Factual property questions use Semantic Context. Analysis/ranking questions use deterministic model runners and then attach bounded Semantic Context. Optional AI prose may rewrite conclusion/caveats for clarity only and cannot add facts, values, probabilities, sources, or actions.
+Factual property questions use Semantic Context. Analysis/ranking questions use deterministic model runners and then attach bounded Semantic Context. Optional AI prose may rewrite conclusions/caveats for clarity only and cannot add facts, values, probabilities, sources, or actions.
 
 Ask Watchdog property-tax scenarios use the audited deterministic scenario bridge. The language model does not parse the assumptions and does not calculate the projection.
 
-Score history follows the current global `score_observations` property/marker contract. It is not treated as private user-owned history.
-
 ## Page-native feedback rule
 
-Proactive Context Intelligence suggestions preserve persisted finding/run lineage. Exposure/open feedback records zero-unit telemetry. Useful, Not relevant and Dismissed feedback reuse the existing immutable Phase 5 learning/outcome path.
+Proactive Context Intelligence suggestions preserve persisted finding/run lineage. Exposure/open feedback records zero-unit telemetry. Useful, Not relevant and Dismissed feedback reuse the existing immutable learning/outcome path.
 
-Feedback may influence the user's learned attention order after sufficient first-party outcomes. It never changes source facts, deterministic formulas, Watchdog scores, confidence, evidence coverage, facts hashes or historical findings.
+Feedback may influence learned attention order after sufficient first-party outcomes. It never changes source facts, deterministic formulas, Watchdog scores, confidence, evidence coverage, facts hashes or historical findings.
 
 ## Production status
 
-All Phase 8 acceptance described here is staging-only. Production has not been promoted.
+Phase 8 semantic context and its production-eligible Intelligence runtime were promoted during the authorized Watchdog Intelligence launch on August 18, 2026. The customer-facing Intelligence release is live subject to plan entitlements and model calibration status. This file no longer treats the production system as staging-only.
