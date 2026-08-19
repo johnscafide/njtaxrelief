@@ -3,7 +3,7 @@
 if(window.__WATCHDOG_SHADOW_LAB__)return;window.__WATCHDOG_SHADOW_LAB__=true;
 var db=null,policies=[],busy=false;
 var $=function(id){return document.getElementById(id);};
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function fmt(v){if(!v)return'Never';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'Never';}
 function eventName(v){return String(v||'event').replace(/[._-]/g,' ').replace(/\b\w/g,function(x){return x.toUpperCase();});}
 function addCss(){if(document.querySelector('link[data-watchdog-shadow-lab]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href='/property/css/integrations-shadow-lab.css';l.dataset.watchdogShadowLab='true';document.head.appendChild(l);}
