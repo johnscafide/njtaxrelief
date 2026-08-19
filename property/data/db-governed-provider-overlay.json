@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-19T22:43:00Z",
+  "captured_at": "2026-08-19T22:59:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "geology.acid_producing_soil_hit": "live",
@@ -24,6 +24,9 @@
     "njplus.njdep-csrr-gis.kcsl_program_interest": "live",
     "njplus.njdep-csrr-gis.kcsl_site_id": "live",
     "njplus.njdep-csrr-gis.ust_facility_reference": "live",
+    "watchdog.chapter123_lower_bound": "live",
+    "watchdog.chapter123_upper_bound": "live",
+    "watchdog.improvement_ratio": "live",
     "watchdog.njplus.brownfield_reuse_context": "live",
     "watchdog.njplus.development_designation_stack": "live",
     "watchdog.njplus.environmental_case_activity": "live",
