@@ -4,8 +4,8 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 type Obj=Record<string,any>;
 const ALLOWED_PLANS=new Set(["pro_plus","teams","developer"]);
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
-const ALLOWED_SCOPES=new Set(["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write"]);
-const DEFAULT_SCOPES=["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write"];
+const ALLOWED_SCOPES=new Set(["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write","intelligence.read","intelligence.run"]);
+const DEFAULT_SCOPES=["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write","intelligence.read","intelligence.run"];
 function namedEnv(jsonName:string,legacyName:string){const raw=Deno.env.get(jsonName)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(legacyName)||"";}
 function cors(req:Request){const o=req.headers.get("origin")||"";const allow=ORIGINS.has(o)||/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(o)?o:"https://njpropertytaxrelief.com";return{"Access-Control-Allow-Origin":allow,"Access-Control-Allow-Headers":"authorization, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"};}
 function reply(req:Request,status:number,payload:unknown){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),"Content-Type":"application/json","Cache-Control":"private, no-store"}});}
