@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T18:14:19.742Z",
+ "generated_at": "2026-08-19T18:15:23.672Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 406,
+   "live": 410,
    "partial": 4,
    "unavailable": 12,
-   "planned": 312
+   "planned": 308
   },
   "retired_phase5": 0
  },
@@ -9092,8 +9092,8 @@
    "professional_reason": "Reduces wrong-parcel risk before professional analysis.",
    "formula": "matched(address, municipality, block, lot, qualifier, PAMS_PIN) / 6 * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -9158,8 +9158,8 @@
    "professional_reason": "Makes missing source support visible before reliance.",
    "formula": "verified_sources / required_evidence_sources * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -9350,8 +9350,8 @@
    "professional_reason": "Combines permit lifecycle and source confidence for collateral files.",
    "formula": "permit_closure_confidence * source_authority_coverage / 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -9476,8 +9476,8 @@
    "professional_reason": "Helps agents recognize when a tax conversation deserves professional review.",
    "formula": "appeal_opportunity_index * evidence_chain_completeness / 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
