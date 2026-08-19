@@ -1,0 +1,86 @@
+{
+  "captured_at": "2026-08-19T21:25:00Z",
+  "production_supabase_project": "uvkvaxljhhngydvlrzom",
+  "customer_model": {
+    "model_key": "closing_review",
+    "version": 2,
+    "status": "preview",
+    "calibration_state": "uncalibrated"
+  },
+  "research_models": [
+    {
+      "version": 5,
+      "state": "rejected_human_validation",
+      "promotion_eligible": false
+    },
+    {
+      "version": 6,
+      "state": "draft_structural_failed",
+      "promotion_eligible": false,
+      "structural_result": {
+        "resolved": 48,
+        "counties": 21,
+        "scorable": 48,
+        "distinct_scores": 4,
+        "unique_feature_vectors": 7,
+        "variable_direct_features": 2
+      }
+    },
+    {
+      "version": 7,
+      "state": "draft_development_sanity",
+      "promotion_eligible": false,
+      "structural_result": {
+        "resolved": 48,
+        "counties": 21,
+        "scorable": 48,
+        "distinct_scores": 9,
+        "unique_feature_vectors": 17,
+        "variable_direct_features": 2
+      },
+      "development_sanity_threshold": 50,
+      "development_sanity_set": {
+        "id": "54b5ec5e-6501-43ad-b2fe-0c6f5eb90ae9",
+        "cases": 10,
+        "unreviewed": 10,
+        "counties": 9,
+        "permit_driven": 5,
+        "recording_driven": 5,
+        "hidden_high": 5,
+        "hidden_low": 5,
+        "overlap_with_prior_closing_cases": 0,
+        "promotion_proof": false
+      }
+    }
+  ],
+  "edge_functions": {
+    "intelligence-closing-v6-structural-shadow": {
+      "version": 1,
+      "verify_jwt": false,
+      "custom_auth": "vault_token_hash",
+      "sha256": "935aa3dd2014584340dc476f4141103f52a35700202aebcbb40492f9af7fa418"
+    },
+    "intelligence-closing-v7-structural-shadow": {
+      "version": 1,
+      "verify_jwt": false,
+      "custom_auth": "vault_token_hash",
+      "sha256": "89ae0fea70eed79c481671562240726140dc60442362b60fb0c3c1be3ce999f9"
+    },
+    "intelligence-closing-v7-sanity-seed": {
+      "version": 2,
+      "verify_jwt": false,
+      "state": "retired_410_stub",
+      "sha256": "957d00beb340893184dbd8b0deaa23e61bee6da1a8396331777d6afa7050fb8f"
+    }
+  },
+  "internal_control": {
+    "intelligence_closing_shadow_control_enabled": false,
+    "browser_execute_grants_on_closing_dispatchers": false
+  },
+  "governance": {
+    "environmental_flood_tidelands_may_create_priority": false,
+    "development_sanity_may_validate_or_promote": false,
+    "final_blinded_holdout_created": false,
+    "next_gate": "complete 10-case development sanity review, analyze usefulness by direct exception family, then freeze a final candidate only if product sanity is acceptable"
+  }
+}
