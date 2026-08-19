@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T21:34:47.721Z",
+ "generated_at": "2026-08-19T21:38:01.853Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 415,
+   "live": 450,
    "partial": 4,
-   "unavailable": 12,
-   "planned": 303
+   "unavailable": 10,
+   "planned": 270
   },
   "retired_phase5": 0
  },
@@ -99,7 +99,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "address",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -124,7 +124,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "municipality",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -149,7 +149,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "county",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -174,7 +174,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "block",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -199,7 +199,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "lot",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -249,7 +249,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "pams_pin",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -349,7 +349,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "assessed_value",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -374,7 +374,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "annual_tax",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -399,7 +399,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "market_value",
    "provider_status": "partial",
-   "provider_note": "Not published at parcel level by the State of New Jersey",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -424,7 +424,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "owner_name",
    "provider_status": "unavailable",
-   "provider_note": "Redacted statewide under Daniel’s Law (P.L. 2021, c.371)",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -499,7 +499,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "deed_book",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -524,7 +524,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "deed_page",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -549,7 +549,7 @@
    "source_id": "nj-parcels-modiv",
    "field": "year_built",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -573,8 +573,8 @@
    ],
    "source_id": "nj-parcels-modiv",
    "field": "square_feet",
-   "provider_status": "unavailable",
-   "provider_note": "Not published at parcel level by the State of New Jersey",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -722,8 +722,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2016",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -746,8 +746,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2017",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -770,8 +770,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2018",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -794,8 +794,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2019",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -818,8 +818,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2020",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -842,8 +842,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2021",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -866,8 +866,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2022",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -890,8 +890,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2023",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -914,8 +914,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2024",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -938,8 +938,8 @@
    ],
    "source_id": "nj-division-taxation",
    "field": "rate_2025",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -961,7 +961,7 @@
    "source_id": "nj-sr1a",
    "field": "ratio",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation SR-1A verified sales",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -983,7 +983,7 @@
    "source_id": "nj-sr1a",
    "field": "sample_size",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation SR-1A verified sales",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -1027,7 +1027,7 @@
    "source_id": "nj-sr1a",
    "field": "p25",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation SR-1A verified sales",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -1049,7 +1049,7 @@
    "source_id": "nj-sr1a",
    "field": "p75",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation SR-1A verified sales",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -1071,7 +1071,7 @@
    "source_id": "nj-sr1a",
    "field": "ppsf",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation SR-1A verified sales",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -5228,7 +5228,7 @@
    "source_id": "nj-tax-court-appeals",
    "field": "latest_win_rate_filed",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation appeal outcomes",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -5471,7 +5471,7 @@
    "source_id": "nj-cod",
    "field": "coefficient",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation assessment uniformity",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6380,8 +6380,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "exempt_value",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6426,8 +6426,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "exempt_nonpilot_value",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6449,8 +6449,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "pilot_count",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6472,8 +6472,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "pilot_billing",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6495,8 +6495,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "pilot_assessed_value",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6541,8 +6541,8 @@
    ],
    "source_id": "nj-abstract-pilot",
    "field": "partial_exemptions_abatements",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6725,8 +6725,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "total_base",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6748,8 +6748,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "net_base",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6771,8 +6771,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "land",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6794,8 +6794,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "improvements",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6817,8 +6817,8 @@
    ],
    "source_id": "nj-tax-abstract",
    "field": "abated",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6911,7 +6911,7 @@
    "source_id": "njdep-dca-live",
    "field": "permit_count",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6935,7 +6935,7 @@
    "source_id": "njdep-dca-live",
    "field": "open_permit_count",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6959,7 +6959,7 @@
    "source_id": "njdep-dca-live",
    "field": "latest_permit_date",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -6983,7 +6983,7 @@
    "source_id": "njdep-dca-live",
    "field": "contaminated_site_500m",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7007,7 +7007,7 @@
    "source_id": "njdep-dca-live",
    "field": "deed_notice_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7031,7 +7031,7 @@
    "source_id": "njdep-dca-live",
    "field": "cea_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7055,7 +7055,7 @@
    "source_id": "njdep-dca-live",
    "field": "ust_250m",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7079,7 +7079,7 @@
    "source_id": "njdep-dca-live",
    "field": "tidelands_reference_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7103,7 +7103,7 @@
    "source_id": "njdep-dca-live",
    "field": "highlands_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7127,7 +7127,7 @@
    "source_id": "njdep-dca-live",
    "field": "pinelands_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7151,7 +7151,7 @@
    "source_id": "njdep-dca-live",
    "field": "fema_flood_zone",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7175,7 +7175,7 @@
    "source_id": "njdep-dca-live",
    "field": "tidal_cafe_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7199,7 +7199,7 @@
    "source_id": "njdep-dca-live",
    "field": "wetlands_2012_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7223,7 +7223,7 @@
    "source_id": "njdep-dca-live",
    "field": "epa_priority_wetland_hit",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12171,7 +12171,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "permit_issued_count",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12197,7 +12197,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "certificate_count",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12223,7 +12223,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "latest_permit_date",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12249,7 +12249,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "latest_certificate_date",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12275,7 +12275,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "permit_type_mix",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12301,7 +12301,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "use_group_mix",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12327,7 +12327,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "authorized_construction_cost",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12353,7 +12353,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "authorized_square_feet",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12379,7 +12379,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "rental_units_gained",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12405,7 +12405,7 @@
    "professional_reason": "Published construction permits data for professional review; verify the official record before reliance.",
    "source_field": "sale_units_gained",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12550,7 +12550,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "housing_units_authorized",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12575,7 +12575,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "new_housing_units_authorized",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12600,7 +12600,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "office_square_feet_authorized",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12625,7 +12625,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "retail_square_feet_authorized",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12650,7 +12650,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "other_nonresidential_square_feet",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12675,7 +12675,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "construction_cost_authorized",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12700,7 +12700,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "demolitions",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12725,7 +12725,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "certificate_of_occupancy_count",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12750,7 +12750,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "rental_units_created",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12775,7 +12775,7 @@
    "professional_reason": "Published development trends data for professional review; verify the official record before reliance.",
    "source_field": "for_sale_units_created",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14121,8 +14121,8 @@
    "field": "opportunity_zone_status",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "opportunity_zone_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14146,8 +14146,8 @@
    "field": "urban_enterprise_zone_status",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "urban_enterprise_zone_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14171,8 +14171,8 @@
    "field": "transit_village_status",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "transit_village_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14196,8 +14196,8 @@
    "field": "redevelopment_area_status",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "redevelopment_area_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14254,8 +14254,8 @@
    "dependencies": [
     "nj-dca-community-assets"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14337,8 +14337,8 @@
    "field": "zoning_map_url",
    "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance.",
    "source_field": "zoning_map_url",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14362,8 +14362,8 @@
    "field": "zoning_ordinance_url",
    "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance.",
    "source_field": "zoning_ordinance_url",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14437,8 +14437,8 @@
    "field": "municipal_zoning_portal",
    "professional_reason": "Published zoning information directory data for professional review; verify the official record before reliance.",
    "source_field": "municipal_zoning_portal",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14753,8 +14753,8 @@
    "field": "pilot_project_assessment",
    "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
    "source_field": "pilot_project_assessment",
-   "provider_status": "unavailable",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15803,8 +15803,8 @@
    "field": "kcsl_case_status",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "kcsl_case_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15830,8 +15830,8 @@
    "field": "kcsl_program_interest",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "kcsl_program_interest",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15911,8 +15911,8 @@
    "field": "kcsl_site_id",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "kcsl_site_id",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -16046,8 +16046,8 @@
    "field": "environmental_layer_vintage",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "environmental_layer_vintage",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -17105,7 +17105,7 @@
    "field": "lot_area_sqft",
    "unit": "square feet",
    "provider_status": "live",
-   "provider_note": "NJOGIS Parcels / MOD-IV Composite",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
