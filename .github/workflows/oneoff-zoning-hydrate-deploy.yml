@@ -6,19 +6,23 @@ on:
       - '.github/workflows/oneoff-zoning-hydrate-deploy.yml'
 
 permissions:
-  contents: read
+  contents: write
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+  PROJECT_REF: uvkvaxljhhngydvlrzom
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    env:
-      SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
-      PROJECT_REF: uvkvaxljhhngydvlrzom
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
+          fetch-depth: 0
+      - name: Rebase onto current main
+        run: git pull --rebase origin main
       - uses: supabase/setup-cli@v1
         with:
           version: latest
@@ -27,8 +31,19 @@ jobs:
         run: |
           set -euo pipefail
           test -n "${SUPABASE_ACCESS_TOKEN:-}"
-      - name: Deploy current governed Workbench hydrator
+          test "$PROJECT_REF" = "uvkvaxljhhngydvlrzom"
+      - name: Deploy exact current governed Workbench hydrator
         shell: bash
         run: |
           set -euo pipefail
           supabase functions deploy workbench-hydrate --project-ref "$PROJECT_REF"
+      - name: Commit deployment evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'deployed_git_sha=%s\ndeployed_at=%s\nprovider=nj-dca-zoning-directory-v1-20260323\n' "$GITHUB_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > supabase/functions/workbench-hydrate/ZONING-DEPLOYED.txt
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add supabase/functions/workbench-hydrate/ZONING-DEPLOYED.txt
+          git commit -m 'Record zoning hydrator production deploy'
+          git push origin HEAD:main
