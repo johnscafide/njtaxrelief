@@ -22,7 +22,7 @@
     google: { label:'Google', enabled:true },
     apple: { label:'Apple', enabled:false },
     facebook: { label:'Facebook', enabled:true },
-    linkedin_oidc: { label:'LinkedIn', enabled:false }
+    linkedin_oidc: { label:'LinkedIn', enabled:true }
   };
   var providerOverrides = window.WATCHDOG_AUTH_PROVIDER_FLAGS || {};
   var providers = {};
