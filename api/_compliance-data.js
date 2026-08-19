@@ -1,6 +1,6 @@
 module.exports = {
   "program": "Watchdog Compliance Readiness",
-  "version": 4,
+  "version": 5,
   "updated_at": "2026-08-19",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
@@ -134,6 +134,19 @@ module.exports = {
       "rationale": "The strongest use of a zero-dollar budget is to build controls, repeatable evidence, accurate public claims and audit-ready documentation now, leaving only genuinely independent validation for a later paid phase.",
       "residual_risk": "Several tracks remain readiness programs rather than completed external assurance: ASVS requirement-level verification, manual/authenticated accessibility testing, final PCI merchant validation and ASV scanning, external TLS grading, and independent SOC/ISO/security testing remain incomplete.",
       "next_step": "Use the twice-daily cadence to review generated accessibility/TLS evidence, begin requirement-level ASVS verification, build the NIST risk register, inventory payment/data fields and expand manual/authenticated WCAG evidence."
+    },
+    {
+      "id": "WCR-2026-08-19-003",
+      "date": "2026-08-19",
+      "title": "Cybersecurity risk register and ASVS identity verification tranche established",
+      "frameworks": ["NIST CSF 2.0", "SOC 2", "OWASP ASVS 5.0.0", "ISO/IEC 27001"],
+      "control_area": "Risk management, authentication, sessions, authorization and OAuth/OIDC",
+      "status": "implemented-with-open-gaps",
+      "action": "Created Watchdog's first formal cybersecurity/compliance risk register and completed the first requirement-level ASVS 5.0.0 identity and authorization tranche. Added automated contracts that preserve the centralized PKCE configuration, same-origin /property/ continuation boundary, session runtime settings, removal of legacy magic-link UI, and default-disabled status of unreviewed authentication providers.",
+      "evidence": ["property/docs/compliance/RISK-REGISTER.md", "property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md", "property/tests/auth-asvs-contract.mjs", ".github/workflows/zero-cost-compliance-readiness.yml", "property/docs/compliance/CONTROL-REGISTER.md"],
+      "rationale": "NIST CSF 2.0 is intended to help organizations understand, assess, prioritize and communicate cybersecurity risk, while ASVS is only useful as an assurance target when individual requirements are mapped to real implementation and tests rather than broad alignment language.",
+      "residual_risk": "Current evidence does not establish enforced MFA for every Watchdog user even though ASVS v5.0.0-6.3.3 is Level 2. Re-authentication for sensitive account changes, active-session termination, provider-side session settings, recovery/account-linking behavior and the full OAuth/OIDC V10 mapping also remain incomplete.",
+      "next_step": "Assess a no-cost MFA enforcement path, complete ASVS V10 mapping, verify production Supabase session/authentication settings, create the role-plan-resource authorization matrix, and add dynamic negative authorization tests."
     }
   ]
 };
