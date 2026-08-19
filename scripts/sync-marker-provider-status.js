@@ -16,8 +16,12 @@ const trustedObservation=new Set(['watchdog.watchdog_score','watchdog.score','wa
 const preflightLive=new Set(['preflight.contaminated_site_500m','preflight.deed_notice_hit','preflight.cea_hit','preflight.ust_250m','preflight.tidelands_reference_hit','preflight.highlands_hit','preflight.pinelands_hit','preflight.fema_flood_zone','preflight.tidal_cafe_hit','preflight.wetlands_2012_hit','preflight.epa_priority_wetland_hit','preflight.permit_count','preflight.open_permit_count','preflight.latest_permit_date']);
 const dcaPermitFields=new Set(['permit_count','open_permit_count','latest_permit_date','permit_issued_count','certificate_count','latest_certificate_date','permit_type_mix','use_group_mix','authorized_construction_cost','authorized_square_feet','rental_units_gained','sale_units_gained']);
 const dcaDevFields=new Set(['housing_units_authorized','new_housing_units_authorized','office_square_feet_authorized','retail_square_feet_authorized','other_nonresidential_square_feet','construction_cost_authorized','demolitions','certificate_of_occupancy_count','rental_units_created','for_sale_units_created']);
-// 2026-08-19: these 24 municipal signals are served from the privacy-limited 2026 MOD-IV aggregate.
 const modivIntelFields=new Set(['median_assessed_value','assessment_dispersion_iqr_pct','median_annual_tax','tax_dispersion_iqr_pct','median_assessment_change_pct','assessment_growth_positive_share_pct','assessment_change_dispersion_pct','assessment_jump_share_pct','median_land_share_pct','improvement_value_share_pct','residential_parcel_share_pct','commercial_parcel_share_pct','exempt_parcel_share_pct','vacant_parcel_share_pct','farm_parcel_share_pct','recent_sale_turnover_pct','median_building_age','pre_1978_building_share_pct','recent_build_share_pct','median_effective_tax_rate_pct','median_sale_assessment_ratio_pct','sale_assessment_ratio_dispersion_pct','median_parcel_acres','assessed_value_per_acre']);
+// v27 municipal-reference provider gates. Explicit allow-lists prevent future catalog additions
+// from becoming live merely because they reuse one of these source IDs.
+const taxRateFields=new Set(Array.from({length:10},(_,i)=>'rate_'+(2016+i)));
+const exemptPilotFields=new Set(['exempt_value','exempt_share','exempt_nonpilot_value','pilot_count','pilot_billing','pilot_assessed_value','pilot_value_share','partial_exemptions_abatements','partial_relief_share','municipal_subsidy','subsidy_budget_share','tax_if_conventional','exempt_percentile','pilot_percentile','subsidy_percentile']);
+const abatementFields=new Set(['total_base','net_base','land','improvements','abated','abated_share','percentile','vs_median']);
 const codNotYetLive=new Set(['cod_2016','cod_2017','cod_2018','cod_2019','cod_2020','cod_2021','percentile','volatility']);
 const pilotForecastUnavailable='nj-dca-pilot-forecast';
 function state(m){
@@ -32,6 +36,9 @@ function state(m){
   if(src==='nj-dca-permits-raw'&&dcaPermitFields.has(f))return'live';
   if(src==='nj-dca-development-trends'&&dcaDevFields.has(f))return'live';
   if(src==='treasury-modiv-2026'&&modivIntelFields.has(f))return'live';
+  if(src==='nj-division-taxation'&&taxRateFields.has(f))return'live';
+  if(src==='nj-abstract-pilot'&&exemptPilotFields.has(f))return'live';
+  if(src==='nj-tax-abstract'&&abatementFields.has(f))return'live';
   if(src==='nj-cod'&&codNotYetLive.has(f))return'planned';
   if(sourceLive.has(src)){
     if(m.origin==='watchdog-derived'||m.proprietary===true)return'planned';
