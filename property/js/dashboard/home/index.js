@@ -33,7 +33,7 @@
   function loadHomeTool(name) {
     if (!homeModulePromises[name]) {
       homeModulePromises[name] = Promise.all((homeModuleDependencies[name] || []).map(loadHomeTool))
-        .then(function () { return import('../tools/' + name + '.js?v=' + HOME_MODULE_VERSION); })
+        .then(function () { return import('../tools/' + name + '.js'); })
         .then(function (module) {
           if (name === 'uniformity') return Promise.all([loadUniformity(), loadAppeals()]).then(function () { return module; });
           if (name === 'abatement-exposure') return loadAbatements().then(function () { return module; });
@@ -1439,7 +1439,7 @@
         '<section class="ai">' +
           '<div class="ai-h">' +
             '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
-            '<div><b>Agent Intel</b><span>Generated from this property\u2019s records</span></div>' +
+            '<div><b>Watchdog Analyst Intel</b><span>Generated from this property\u2019s records</span></div>' +
           '</div>' +
           summarySentence(r, c, u, a) +
           intelPoints(r, c, u, a) +
@@ -1934,7 +1934,7 @@
       var overlay = el('hm-mobile-intel-overlay'), content = el('hm-mobile-intel-content');
       if (!overlay || !content) return;
       content.innerHTML = panel.outerHTML.replace('class="ai"', 'class="ai ai-mobile"')
-        .replace('<b>Agent Intel</b>', '<b id="hm-mobile-intel-title">Agent Intel</b>');
+        .replace('<b>Watchdog Analyst Intel</b>', '<b id="hm-mobile-intel-title">Watchdog Analyst Intel</b>');
       overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
       document.body.classList.add('mobile-intel-open');
       document.querySelectorAll('.db-side-mobile .pn').forEach(function (n) { n.classList.remove('on'); });
