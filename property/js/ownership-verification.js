@@ -109,18 +109,40 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadRuntime, { once: true }); else loadRuntime();
 })();
 
-/* NJW-212: the property landing showcase is page-scoped and intentionally booted
-   from an already-loaded stable runtime so the legacy HTML remains the no-JS fallback. */
+/* NJW-212 / NJW-239: public landing enhancements boot from this already-loaded stable runtime. */
 (function () {
   'use strict';
   var path = (window.location.pathname || '').replace(/\/+$/, '');
   if (path !== '/property' && path !== '/property/index.html') return;
+
+  function bootIntelligence() {
+    if (!document.getElementById('wd-landing-intelligence-css')) {
+      var css = document.createElement('link');
+      css.id = 'wd-landing-intelligence-css';
+      css.rel = 'stylesheet';
+      css.href = '/property/css/landing-intelligence.css';
+      document.head.appendChild(css);
+    }
+    if (document.getElementById('wd-landing-intelligence-loader')) return;
+    var intelligence = document.createElement('script');
+    intelligence.id = 'wd-landing-intelligence-loader';
+    intelligence.src = '/property/js/landing-intelligence.js';
+    intelligence.async = false;
+    document.body.appendChild(intelligence);
+  }
+
   function bootLanding() {
-    if (document.getElementById('wd-landing-showcase-loader')) return;
+    var existing = document.getElementById('wd-landing-showcase-loader');
+    if (existing) {
+      if (existing.dataset.loaded === '1') bootIntelligence();
+      else existing.addEventListener('load', bootIntelligence, { once:true });
+      return;
+    }
     var script = document.createElement('script');
     script.id = 'wd-landing-showcase-loader';
     script.src = '/property/js/landing-showcase.js';
     script.async = false;
+    script.onload = function () { script.dataset.loaded = '1'; bootIntelligence(); };
     document.body.appendChild(script);
   }
   if (document.readyState === 'loading') {
