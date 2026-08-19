@@ -1,5 +1,5 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-const ENGINE_VERSION='watchdog-derived-v4-missing-safe';
+const ENGINE_VERSION='watchdog-derived-v6-fiscal';
 const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
 function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'}}
 function out(req:Request,status:number,p:any){return new Response(JSON.stringify(p),{status,headers:{...cors(req),'Content-Type':'application/json','Cache-Control':'private, no-store'}})}
@@ -10,7 +10,21 @@ function truth(v:any){return v===true||v===1||v==='1'||String(v).toLowerCase()==
 function clamp(v:number,min=0,max=100){return Math.max(min,Math.min(max,v))}
 function round(v:number,p=0){const f=10**p;return Math.round(v*f)/f}
 function floodBand(v:any){const z=String(v||'').toUpperCase();if(!z)return 0;if(/^(A|AE|AH|AO|AR|A99|V|VE)/.test(z))return 100;if(/^(X.*0\.2|B)/.test(z))return 66;if(/^(X|C)/.test(z))return 0;return 33}
-function signal(v:any,t='bool'){if(t==='identity')return clamp(num(v)??0);if(t==='bool')return truth(v)||(num(v)!=null&&Number(v)>0)?100:0;if(t==='flood100')return floodBand(v);const cap=Number(String(t).replace('count',''))||1;return clamp(((num(v)||0)/cap)*100)}
+function positivePct5(v:any){const x=num(v);return x==null?null:clamp(Math.max(0,x)/0.05*100)}
+function collectionScore(v:any){const x=num(v);return x==null?null:clamp((x-0.90)/0.10*100)}
+function inverseDebtShare(v:any){const x=num(v);return x==null?null:clamp(100-x/0.20*100)}
+function signal(v:any,t='bool'){
+ if(t==='identity')return clamp(num(v)??0);
+ if(t==='inverse_identity')return clamp(100-(num(v)??100));
+ if(t==='bool')return truth(v)||(num(v)!=null&&Number(v)>0)?100:0;
+ if(t==='flood100')return floodBand(v);
+ if(t==='positive_pct5')return positivePct5(v)??0;
+ if(t==='inverse_positive_pct5')return 100-(positivePct5(v)??100);
+ if(t==='collection90_100')return collectionScore(v)??0;
+ if(t==='inverse_share20')return inverseDebtShare(v)??0;
+ if(t==='share35'){const x=num(v);return x==null?0:clamp(x/0.35*100)}
+ const cap=Number(String(t).replace('count',''))||1;return clamp(((num(v)||0)/cap)*100)
+}
 const ROW:Record<string,(r:any)=>any>={
  'property.address':r=>r?.address,'property.municipality':r=>r?.town,'property.county':r=>r?.county,'property.zip':r=>r?.zip,'property.block':r=>r?.block,'property.lot':r=>r?.lot,'property.qualifier':r=>r?.qualifier,'property.pams_pin':r=>r?.pams_pin,
  'property.property_class':r=>r?.prop_class,'property.class':r=>r?.prop_class,'property.year_built':r=>r?.year_built,'property.lot_area':r=>r?.acres,'property.acres':r=>r?.acres,'property.units':r=>r?.dwelling_units,
@@ -43,7 +57,10 @@ Deno.serve(async req=>{
      else if(d.operation==='permit_activity'){const pc=num(value('preflight.permit_count')),oc=num(value('preflight.open_permit_count'));if(pc!=null||oc!=null)v=clamp(Math.round(Math.min(pc||0,20)*3+Math.min(oc||0,10)*8))}
      else if(d.operation==='weighted_signals'){const ss:any[]=cfg.signals||[],vals=ss.map(s=>({s,v:value(s.dep)}));if(vals.some(x=>present(x.v)))v=clamp(Math.round(vals.reduce((a,x)=>a+signal(x.v,x.s.transform)*Number(x.s.weight||0)/100,0)))}
      else if(d.operation==='signal_count'||d.operation==='signal_density'){const deps:any[]=d.dependencies||[];if(deps.some(x=>checked(x)||present(value(x)))){const active=deps.filter(x=>x===cfg.flood_dep?floodBand(value(x))>0:(truth(value(x))||(num(value(x))||0)>0)).length;v=d.operation==='signal_count'?active:Math.round(active/deps.length*100)}}
-     else if(d.operation==='weighted_scores'){const items:any[]=(cfg.items||[]).map((s:any)=>({s,v:value(s.dep)})).filter((x:any)=>present(x.v));if(items.length){const w=items.reduce((a:any,x:any)=>a+Number(x.s.weight||0),0);if(w>0)v=Math.round(items.reduce((a:any,x:any)=>a+signal(x.v,x.s.transform)*Number(x.s.weight||0),0)/w)}}
+     else if(d.operation==='weighted_scores'){const configured:any[]=cfg.items||[],items:any[]=configured.map((s:any)=>({s,v:value(s.dep)})).filter((x:any)=>present(x.v));if(items.length&&(!cfg.require_all||items.length===configured.length)){const w=items.reduce((a:any,x:any)=>a+Number(x.s.weight||0),0);if(w>0)v=Math.round(items.reduce((a:any,x:any)=>a+signal(x.v,x.s.transform)*Number(x.s.weight||0),0)/w)}}
+     else if(d.operation==='tax_rate_position'){const rateDefs:any[]=cfg.rate_deps||[],points=rateDefs.map((x:any)=>({year:Number(x.year),rate:num(value(x.dep))})).filter((x:any)=>Number.isFinite(x.year)&&x.rate!=null&&x.rate>0).sort((a:any,b:any)=>a.year-b.year);if(points.length>=3){const first=points[0],last=points[points.length-1],span=last.year-first.year;if(span>=2){const cagr=Math.pow(last.rate/first.rate,1/span)-1;v=Math.round(100-(positivePct5(cagr)??100))}}}
+     else if(d.operation==='municipal_cost_absorption'){const levy=num(value(cfg.levy_dep)),ratable=num(value(cfg.ratable_dep)),collection=num(value(cfg.collection_dep));if(levy!=null&&ratable!=null&&collection!=null){const gap=Math.max(0,levy-ratable),growth=clamp(100-(positivePct5(gap)??100)),collections=collectionScore(collection);if(collections!=null)v=Math.round(growth*0.70+collections*0.30)}}
+     else if(d.operation==='fiscal_resilience'){const pressure=num(value(cfg.pressure_dep)),absorption=num(value(cfg.absorption_dep)),collection=num(value(cfg.collection_dep)),debt=num(value(cfg.debt_dep));if(pressure!=null&&absorption!=null&&collection!=null&&debt!=null){const collections=collectionScore(collection),debtScore=inverseDebtShare(debt);if(collections!=null&&debtScore!=null)v=Math.round(clamp(100-pressure)*0.35+clamp(absorption)*0.30+collections*0.20+debtScore*0.15)}}
      stack.delete(id);memo.set(id,v);return v};
    for(const id of requested){const d:any=defMap.get(id),v=evalId(id);if(v!==null&&v!==undefined&&!Number.isNaN(v)){markers[pin][id]=v;meta[pin][id]={status:'available',provider_kind:'derived_governed',source:'Watchdog governed formula registry · '+ENGINE_VERSION,engine_version:ENGINE_VERSION,formula:d.formula,dependencies:d.dependencies,confidence:d.confidence,explanation:d.explanation,observed_at:now}}else meta[pin][id]={status:'dependency_missing',provider_kind:'derived_governed',source:'Watchdog governed formula registry · '+ENGINE_VERSION,engine_version:ENGINE_VERSION,dependencies:d.dependencies,checked_at:now}}
  }
