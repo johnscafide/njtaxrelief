@@ -22,5 +22,14 @@
 .wd-public-signin{align-items:center;background:#0b898a;border:0;border-radius:14px;color:#fff;cursor:pointer;display:flex;font:800 15px 'Plus Jakarta Sans',sans-serif;gap:10px;justify-content:center;min-height:52px;padding:0 18px;width:100%}
 .wd-public-recent-empty{color:#7d8a9a;font-size:12.5px;line-height:1.5;padding:8px 11px 12px}.wd-public-recent .wd-public-link{align-items:flex-start}.wd-public-recent small{color:#7c8b9b;display:block;font-size:10px;font-weight:600;margin-top:3px}
 body.wd-public-menu-open{overflow:hidden}
+
+/* Landing desktop: keep the hero navigation minimal, then reveal utility links in the sticky bar. */
+@media(min-width:941px){
+  body.wd-consumer-mode .wd-nav:not(.solid) .wd-left>a,
+  body.wd-consumer-mode .wd-nav:not(.solid) .wd-right>a{display:none!important}
+  body.wd-consumer-mode .wd-nav.solid .wd-left>a,
+  body.wd-consumer-mode .wd-nav.solid .wd-right>a{display:inline-flex!important}
+}
+
 @media(max-width:560px){.wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}}
 @media(prefers-reduced-motion:reduce){.wd-public-sheet,.wd-public-backdrop{transition:none}}
