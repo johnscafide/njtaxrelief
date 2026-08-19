@@ -1,0 +1,60 @@
+name: One-off CSRR provider wiring
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-csrr-provider-wire.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Rebase onto current main
+        run: git pull --rebase origin main
+      - name: Wire parcel-grounded CSRR provider safely
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('supabase/functions/workbench-hydrate/index.ts')
+          s=p.read_text()
+          import_anchor="import { zoningDirectoryObservation, isZoningDirectoryMarker, DCA_ZONING_PROVIDER_VERSION } from './zoning-provider.ts';\n"
+          import_line="import { csrrObservation, isCsrrMarker, CSRR_PROVIDER_VERSION } from './csrr-provider.ts';\n"
+          if import_line not in s:
+              if s.count(import_anchor)!=1: raise SystemExit(f'zoning import anchor count={s.count(import_anchor)}')
+              s=s.replace(import_anchor,import_anchor+import_line,1)
+
+          resolver_anchor="if(!fam&&isZoningDirectoryMarker(m)){const zoning=await zoningDirectoryObservation(m,r);fam={v:zoning.value,status:zoning.status,reason:zoning.reason||null,kind:'authoritative_reference',source:zoning.source||('NJ DCA Municipal Zoning directory · '+DCA_ZONING_PROVIDER_VERSION)}}"
+          resolver_line="if(!fam&&isCsrrMarker(m)){const csrr=await csrrObservation(m,r);fam={v:csrr.value,status:csrr.status,reason:csrr.reason||null,kind:'authoritative_reference',source:csrr.source||('NJDEP CSRR · '+CSRR_PROVIDER_VERSION)}}"
+          if resolver_line not in s:
+              if s.count(resolver_anchor)!=1: raise SystemExit(f'zoning resolver anchor count={s.count(resolver_anchor)}')
+              s=s.replace(resolver_anchor,resolver_anchor+resolver_line,1)
+
+          versions_old="provider_versions:{spatial:NJDEP_PROVIDER_VERSION,dca_permits:DCA_PERMIT_PROVIDER_VERSION,dca_zoning:DCA_ZONING_PROVIDER_VERSION,modiv_intelligence:MODIV_INTEL_PROVIDER_VERSION,parcel_source:'njgin-parcels-composite-2026'}"
+          versions_new="provider_versions:{spatial:NJDEP_PROVIDER_VERSION,dca_permits:DCA_PERMIT_PROVIDER_VERSION,dca_zoning:DCA_ZONING_PROVIDER_VERSION,csrr:CSRR_PROVIDER_VERSION,modiv_intelligence:MODIV_INTEL_PROVIDER_VERSION,parcel_source:'njgin-parcels-composite-2026'}"
+          if versions_new not in s:
+              if s.count(versions_old)!=1: raise SystemExit(f'provider_versions anchor count={s.count(versions_old)}')
+              s=s.replace(versions_old,versions_new,1)
+          p.write_text(s)
+          PY
+      - name: Commit exact patch
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- supabase/functions/workbench-hydrate/index.ts; then
+            echo 'No patch needed.'
+            exit 0
+          fi
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add supabase/functions/workbench-hydrate/index.ts
+          git commit -m 'Wire parcel-grounded NJDEP CSRR provider'
+          git push origin HEAD:main
