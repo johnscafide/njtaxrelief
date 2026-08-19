@@ -19,6 +19,7 @@ const PRICE_CATALOG = {
 } as const;
 type Tier = keyof typeof CAPACITY;
 type Cadence = 'monthly' | 'yearly';
+type CheckoutMode = 'closed' | 'controlled' | 'open';
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
@@ -54,27 +55,38 @@ function json(req: Request, body: unknown, status = 200) {
   });
 }
 
-function checkoutMode() {
-  const explicit = String(
-    Deno.env.get('BILLING_CHECKOUT_MODE') ||
-    Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') ||
-    ''
-  ).trim().toLowerCase();
-  if (['closed', 'controlled', 'open'].includes(explicit)) return explicit;
-  return 'closed';
+function validMode(value: unknown): CheckoutMode | null {
+  const normalized = String(value || '').trim().toLowerCase();
+  return ['closed', 'controlled', 'open'].includes(normalized) ? normalized as CheckoutMode : null;
 }
 
-function controlledUsers() {
-  return new Set(
-    String(
-      Deno.env.get('BILLING_CONTROLLED_USER_IDS') ||
-      Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') ||
-      ''
-    )
-      .split(',')
-      .map(v => v.trim())
-      .filter(Boolean)
-  );
+async function releaseControl(admin: any) {
+  // Environment variables remain an emergency/operator override. Normal launch
+  // control lives in the server-owned release gate so it is auditable and can be
+  // changed without rotating a secret or redeploying an Edge Function.
+  const envMode = validMode(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE'));
+  const envUsers = String(Deno.env.get('BILLING_CONTROLLED_USER_IDS') || Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') || '')
+    .split(',').map(v => v.trim()).filter(Boolean);
+
+  const { data, error } = await admin
+    .from('platform_release_gates')
+    .select('status,evidence')
+    .eq('gate_key', 'live_billing_lifecycle')
+    .maybeSingle();
+  if (error) throw error;
+
+  const evidence = data?.evidence && typeof data.evidence === 'object' ? data.evidence : {};
+  const gateMode = validMode((evidence as any).checkout_mode || (evidence as any).public_checkout);
+  const gateUsers = Array.isArray((evidence as any).controlled_user_ids)
+    ? (evidence as any).controlled_user_ids.map((v: unknown) => String(v || '').trim()).filter(Boolean)
+    : [];
+
+  return {
+    mode: envMode || gateMode || 'closed' as CheckoutMode,
+    controlledUsers: new Set(envUsers.length ? envUsers : gateUsers),
+    source: envMode ? 'environment_override' : gateMode ? 'release_gate' : 'fail_closed_default',
+    liveGatePassed: data?.status === 'passed'
+  };
 }
 
 function configuredPriceId(tier: Tier, cadence: Cadence) {
@@ -136,10 +148,20 @@ Deno.serve(async (req) => {
   const { data: { user }, error: userError } = await userClient.auth.getUser();
   if (userError || !user) return json(req, { error: 'Sign in required', code: 'SIGN_IN_REQUIRED' }, 401);
 
-  const mode = checkoutMode();
-  if (mode === 'closed') return json(req, { error: 'Paid enrollment is not open yet.', code: 'BILLING_ENROLLMENT_CLOSED' }, 503);
-  if (mode === 'controlled' && !controlledUsers().has(user.id)) {
+  let control;
+  try {
+    control = await releaseControl(admin);
+  } catch (error) {
+    console.error('BILLING_RELEASE_CONTROL_ERROR', error);
+    return json(req, { error: 'Paid enrollment is not available right now.', code: 'BILLING_RELEASE_CONTROL_ERROR' }, 503);
+  }
+  if (control.mode === 'closed') return json(req, { error: 'Paid enrollment is not open yet.', code: 'BILLING_ENROLLMENT_CLOSED' }, 503);
+  if (control.mode === 'controlled' && !control.controlledUsers.has(user.id)) {
     return json(req, { error: 'Paid enrollment is currently limited to controlled launch accounts.', code: 'BILLING_CONTROLLED_ONLY' }, 403);
+  }
+  // Public mode is only valid after the controlled lifecycle release gate passes.
+  if (control.mode === 'open' && !control.liveGatePassed) {
+    return json(req, { error: 'Paid enrollment is awaiting final Live billing acceptance.', code: 'BILLING_GATE_NOT_PASSED' }, 503);
   }
 
   const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
@@ -202,7 +224,7 @@ Deno.serve(async (req) => {
         resource_id: entitlement.provider_subscription_id,
         required_plan: tier,
         allowed: true,
-        metadata: { provider: 'stripe', requested_tier: tier, requested_cadence: cadence, current_price_id: entitlement.provider_price_id }
+        metadata: { provider: 'stripe', requested_tier: tier, requested_cadence: cadence, current_price_id: entitlement.provider_price_id, checkout_control_source: control.source }
       });
       return json(req, { provider: 'stripe', destination: 'portal', url: portal.url });
     } catch (error) {
@@ -249,7 +271,8 @@ Deno.serve(async (req) => {
         billing_tier: tier,
         cadence,
         price_id: priceId,
-        checkout_mode: mode,
+        checkout_mode: control.mode,
+        checkout_control_source: control.source,
         stripe_mode: liveMode ? 'live' : 'test'
       }
     });
