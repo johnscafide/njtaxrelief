@@ -6,6 +6,7 @@ const files={
   restore:'supabase/migrations/20260819141600_restore_property_change_v3_until_fresh_holdout.sql',
   gate:'supabase/migrations/20260819141700_enforce_failed_model_promotion_gate.sql',
   readiness:'supabase/functions/intelligence-model-repair-readiness/index.ts',
+  shadow:'supabase/functions/intelligence-model-shadow-evaluate/index.ts',
   config:'supabase/config.toml',
   page:'property/intelligence/calibration-review/index.html',
   panel:'property/js/intelligence-model-repair-readiness.js',
@@ -13,7 +14,7 @@ const files={
 };
 for(const p of Object.values(files))if(!fs.existsSync(p))throw new Error(`${p} must exist`);
 const read=p=>fs.readFileSync(p,'utf8');
-const draft=read(files.draft),restore=read(files.restore),gate=read(files.gate),readiness=read(files.readiness),config=read(files.config),page=read(files.page),panel=read(files.panel),css=read(files.css);
+const draft=read(files.draft),restore=read(files.restore),gate=read(files.gate),readiness=read(files.readiness),shadow=read(files.shadow),config=read(files.config),page=read(files.page),panel=read(files.panel),css=read(files.css);
 const expect=(ok,msg)=>{if(!ok)throw new Error(msg)};
 new vm.Script(panel,{filename:files.panel});
 
@@ -51,12 +52,29 @@ expect(!response.includes('pams_pin:'),'Aggregate readiness response must not re
 expect(!response.includes('address:'),'Aggregate readiness response must not return property addresses.');
 expect(/\[functions\.intelligence-model-repair-readiness\][\s\S]*?verify_jwt = true/.test(config),'Repair-readiness endpoint must require JWT at the gateway.');
 
+expect(shadow.includes('account_role')&&shadow.includes('developer'),'Shadow evaluator must require developer role.');
+expect(shadow.includes('Shadow evaluator accepts draft model versions only'),'Shadow evaluator must reject non-draft model versions.');
+expect(shadow.includes('Shadow evaluator refuses the current customer-facing model version'),'Shadow evaluator must refuse the current model pointer.');
+expect(shadow.includes('aggregate_shadow_evaluation_no_property_identifiers'),'Shadow output must declare aggregate/no-property-ID privacy.');
+expect(shadow.includes('persistence:"none"'),'Shadow evaluator must explicitly declare zero persistence.');
+expect(shadow.includes('/functions/v1/workbench-derived')&&shadow.includes('/functions/v1/workbench-hydrate'),'Shadow evaluator must resolve governed derived/raw evidence rather than invent inputs.');
+expect(shadow.includes('structurally_ready_for_fresh_holdout'),'Shadow evaluator must produce a structural holdout readiness decision.');
+expect(shadow.includes('threshold_positive_candidates')&&shadow.includes('threshold_negative_candidates')&&shadow.includes('unique_feature_vectors'),'Shadow readiness must require both threshold classes and diverse feature vectors.');
+expect(shadow.includes('Shadow discrimination is not model validation'),'Shadow evaluator must preserve the calibration boundary.');
+const shadowResponse=shadow.slice(shadow.indexOf('return out(req,200,{'));
+expect(!shadowResponse.includes('pams_pin:'),'Shadow response must not return property identifiers.');
+expect(!shadowResponse.includes('address:'),'Shadow response must not return property addresses.');
+expect(!shadow.includes('intelligence_runs").insert')&&!shadow.includes('intelligence_findings").insert')&&!shadow.includes('intelligence_evidence_batches").insert'),'Shadow evaluator must not persist runs, findings, or trusted evidence batches.');
+expect(/\[functions\.intelligence-model-shadow-evaluate\][\s\S]*?verify_jwt = true/.test(config),'Shadow evaluator must require JWT at the gateway.');
+
 expect(page.includes('/property/css/intelligence-model-repair-readiness.css'),'Calibration Review must load repair-readiness styling.');
 expect(page.includes('/property/js/intelligence-model-repair-readiness.js'),'Calibration Review must load repair-readiness runtime.');
-expect(panel.includes("functions.invoke('intelligence-model-repair-readiness'"),'Repair panel must use the governed developer endpoint.');
+expect(panel.includes("functions.invoke('intelligence-model-repair-readiness'"),'Repair panel must use the governed developer readiness endpoint.');
+expect(panel.includes("functions.invoke('intelligence-model-shadow-evaluate'"),'Repair panel must expose the governed shadow evaluator.');
+expect(panel.includes("model_key:'closing_review',model_version:3")&&panel.includes('sample_size:100'),'Closing shadow UI must target the immutable v3 draft with a bounded sample.');
 expect(panel.includes('fresh holdout actually worth labeling'),'Repair panel must frame the decision around avoiding wasted human labels.');
 expect(panel.includes('Draft vNext designs remain non-runnable and uncalibrated'),'Repair panel must not imply draft readiness equals calibration.');
-expect(css.includes('.cr-repair-model')&&css.includes('.cr-repair-model.ready'),'Repair readiness must have compact blocked/ready visual states.');
+expect(css.includes('.cr-repair-model')&&css.includes('.cr-repair-model.ready')&&css.includes('.cr-repair-shadow-result'),'Repair readiness must have compact blocked/ready and shadow visual states.');
 
-for(const [name,content] of Object.entries({draft,restore,gate,readiness,config,page,panel,css}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
-console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, aggregate readiness, developer UI, fresh-holdout boundary, no ?v=.');
+for(const [name,content] of Object.entries({draft,restore,gate,readiness,shadow,config,page,panel,css}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
+console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, aggregate readiness, non-persisting draft shadow evaluation, developer UI, fresh-holdout boundary, no ?v=.');
