@@ -204,3 +204,12 @@ verify_jwt = false
 
 [functions.integration-delivery-worker]
 verify_jwt = false
+
+# Phase 2 Zapier integration. Key issuance/revocation is user-authenticated;
+# Zapier's runtime uses a dedicated revocable Watchdog key and validates it
+# inside the API boundary, so gateway JWT verification is intentionally off.
+[functions.integration-key-manager]
+verify_jwt = true
+
+[functions.zapier-api]
+verify_jwt = false
