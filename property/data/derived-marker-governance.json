@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-19T19:08:27.654Z",
+  "generated_at": "2026-08-19T19:10:44.527Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -81,6 +81,7 @@
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
     "watchdog.municipal_cost_absorption_score",
+    "watchdog.njplus.housing_supply_delivery_ratio",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -184,6 +185,7 @@
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
     "watchdog.municipal_cost_absorption_score",
+    "watchdog.njplus.housing_supply_delivery_ratio",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -213,8 +215,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values.",
   "summary": {
     "total_derived": 298,
-    "live": 101,
-    "blocked": 197,
+    "live": 102,
+    "blocked": 196,
     "retired": 0,
     "untriaged": 0
   },
@@ -4248,16 +4250,16 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "certificates_of_occupancy / max(housing_units_authorized, 1)",
       "dependencies": [
         "nj-dca-development-trends"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.commercial_buildout_signal",
