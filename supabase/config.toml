@@ -131,6 +131,12 @@ verify_jwt = true
 [functions.intelligence-calibration-diversity]
 verify_jwt = true
 
+# Developer-only aggregate readiness view for immutable model-vNext repair work.
+# It may use owner-scoped property identifiers internally to count unique records,
+# but returns aggregate model/evidence structure only and never returns property IDs.
+[functions.intelligence-model-repair-readiness]
+verify_jwt = true
+
 [functions.intelligence-analyst]
 verify_jwt = true
 
