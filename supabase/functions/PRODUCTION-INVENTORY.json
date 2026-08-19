@@ -1,12 +1,12 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-16T23:48:00Z",
+  "captured_at": "2026-08-19T11:50:47Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
     "backoffice-api": {"version": 8, "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-dev-login": {"version": 5, "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
+    "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cfb2e1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-recover": {"version": 4, "sha256": "585b06cb36319483b52a2fc94767c6d5c2ee167346a5192029d92095a13f4441", "verify_jwt": false, "tracking": "fingerprint_only"},
     "bulk-marker-hydrate": {"version": 7, "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f", "verify_jwt": true, "tracking": "fingerprint_only"},
     "create-checkout-session": {"version": 31, "sha256": "a5ec53482b67b72b86ee6d0e7bcafdd707e3910a6971dfcffb7b4dcf197ebb7b", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -45,8 +45,8 @@
     "watchdog-test-auth": {"version": 5, "sha256": "88a47c2385911155999caac45339714d195c7000f11ccd455924e71e08e99c0b", "verify_jwt": false, "tracking": "fingerprint_only"},
     "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-derived": {"version": 10, "sha256": "a0d52e91e37f71ce5512f003641c818869b8d0248fb7cc93a6348d1b759b9f40", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "workbench-hydrate": {"version": 20, "sha256": "e111a6f34d26286ae8efdc8031faf4478f4740aa444b317250fab0bfa5a47ccf", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-provider-registry": {"version": 10, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "workbench-hydrate": {"version": 26, "sha256": "dd66d852f1cc55c7c6aedbdbd3158af88bd3f148cceb6d040d99547bec5b0e0f", "verify_jwt": true, "tracking": "source_snapshot"},
+    "workbench-provider-registry": {"version": 14, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
     "workbench-refresh": {"version": 8, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-score": {"version": 8, "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8", "verify_jwt": true, "tracking": "fingerprint_only"}
   }
