@@ -49,3 +49,11 @@ function bind(){document.addEventListener('click',function(ev){if(ev.target.clos
 function boot(){shell();bind();loadData();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
+;/* Compact retention cue for entitled Intelligence users. */
+(function(){
+  if(document.querySelector('script[src="/property/js/watchdog-today-nav.js"]'))return;
+  var s=document.createElement('script');
+  s.src='/property/js/watchdog-today-nav.js';
+  s.defer=true;
+  document.head.appendChild(s);
+})();
