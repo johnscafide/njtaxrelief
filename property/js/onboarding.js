@@ -21,9 +21,7 @@
     var raw = new URLSearchParams(location.search).get('next') || '/property/dashboard/';
     try {
       var parsed = new URL(raw, location.origin);
-      if (parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0) {
-        return '/property/dashboard/';
-      }
+      if (parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0) return '/property/dashboard/';
       return parsed.pathname + parsed.search + parsed.hash;
     } catch (_) {
       return '/property/dashboard/';
@@ -34,12 +32,13 @@
     return { value:value, label:label, note:note || '', icon:icon || '' };
   }
 
+  function validEmail(value) {
+    var email = String(value || '').trim();
+    return email.length >= 3 && email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   var steps = [
-    {
-      id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG',
-      title:'More about you.',
-      copy:'A few quick answers help Watchdog open with the property signals, workflows and intelligence that matter most to you.'
-    },
+    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'More about you.', copy:'A few quick answers help Watchdog open with the property signals, workflows and intelligence that matter most to you.' },
     {
       id:'persona', kind:'single', eyebrow:'START HERE', title:'How will you use Watchdog?', required:true,
       options:[
@@ -50,6 +49,11 @@
         choice('investor','Investor','Find and evaluate property opportunities','◫'),
         choice('planning_to_buy','Planning to buy','Research before I make a move','⌕')
       ]
+    },
+    {
+      id:'contact_email', kind:'input', eyebrow:'YOUR ACCOUNT', title:'What email should Watchdog use for you?', required:true,
+      placeholder:'you@example.com', inputType:'email', inputMode:'email', autocomplete:'email', maxLength:254,
+      note:'We save this as your Watchdog contact email. It can be different from the account you used to sign in. Marketing permission is always separate.'
     },
     {
       id:'primary_profession', kind:'single', eyebrow:'YOUR WORK', title:'What best describes your role?', required:true,
@@ -73,87 +77,37 @@
       id:'home_status', kind:'single', eyebrow:'YOUR HOUSEHOLD', title:'What is your current housing situation?', required:true,
       when:function(){ return answers.persona !== 'professional'; },
       options:[
-        choice('own','I own my home','','⌂'),
-        choice('rent','I rent','','□'),
-        choice('own_and_invest','I own + invest','','◫'),
-        choice('rent_and_invest','I rent + own investments','','◇'),
-        choice('planning_to_buy','Planning to buy','','↗'),
-        choice('other','Something else','','…')
+        choice('own','I own my home','','⌂'), choice('rent','I rent','','□'), choice('own_and_invest','I own + invest','','◫'),
+        choice('rent_and_invest','I rent + own investments','','◇'), choice('planning_to_buy','Planning to buy','','↗'), choice('other','Something else','','…')
       ]
     },
-    {
-      id:'location_zip', kind:'input', eyebrow:'YOUR MARKET', title:'What is your main New Jersey ZIP code?', required:true,
-      placeholder:'08081', inputMode:'numeric', maxLength:5,
-      note:'This sets the geographic starting point for your Watchdog experience.'
-    },
-    {
-      id:'markets_text', kind:'input', eyebrow:'YOUR MARKET', title:'Where do you work most often?', required:true,
-      when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
-      placeholder:'Camden County, Gloucester County', maxLength:240,
-      note:'Use towns, counties or ZIP codes. Separate multiple areas with commas.'
-    },
+    { id:'location_zip', kind:'input', eyebrow:'YOUR MARKET', title:'What is your main New Jersey ZIP code?', required:true, placeholder:'08081', inputMode:'numeric', maxLength:5, note:'This sets the geographic starting point for your Watchdog experience.' },
+    { id:'markets_text', kind:'input', eyebrow:'YOUR MARKET', title:'Where do you work most often?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, placeholder:'Camden County, Gloucester County', maxLength:240, note:'Use towns, counties or ZIP codes. Separate multiple areas with commas.' },
     {
       id:'goals', kind:'multi', eyebrow:'YOUR PRIORITIES', title:'What do you want Watchdog to help with?', required:true,
-      options:[
-        choice('monitor_property','Monitor property changes'), choice('lower_property_tax','Understand property taxes'),
-        choice('buy','Buy smarter'), choice('sell','Prepare to sell'), choice('invest','Find opportunities'),
-        choice('client_research','Research for clients'), choice('prospecting','Prospecting / farming'),
-        choice('due_diligence','Property due diligence'), choice('appeals','Assessment / appeal work')
-      ]
+      options:[choice('monitor_property','Monitor property changes'),choice('lower_property_tax','Understand property taxes'),choice('buy','Buy smarter'),choice('sell','Prepare to sell'),choice('invest','Find opportunities'),choice('client_research','Research for clients'),choice('prospecting','Prospecting / farming'),choice('due_diligence','Property due diligence'),choice('appeals','Assessment / appeal work')]
     },
     {
       id:'age_band', kind:'single', eyebrow:'ABOUT YOU', title:'What age range are you in?', required:true,
       note:'We use ranges for product insights. This is never a housing-targeting filter.',
-      options:[
-        choice('18_24','18–24'), choice('25_34','25–34'), choice('35_44','35–44'), choice('45_54','45–54'),
-        choice('55_64','55–64'), choice('65_74','65–74'), choice('75_plus','75+'), choice('prefer_not','Prefer not to say')
-      ]
+      options:[choice('18_24','18–24'),choice('25_34','25–34'),choice('35_44','35–44'),choice('45_54','45–54'),choice('55_64','55–64'),choice('65_74','65–74'),choice('75_plus','75+'),choice('prefer_not','Prefer not to say')]
     },
     {
       id:'household_income_band', kind:'single', eyebrow:'ABOUT YOU', title:'What is your household income range?', required:true,
       note:'A range is enough. Prefer not to say is always an option.',
-      options:[
-        choice('under_50k','Under $50k'), choice('50_99k','$50k–$99k'), choice('100_149k','$100k–$149k'),
-        choice('150_249k','$150k–$249k'), choice('250k_plus','$250k+'), choice('prefer_not','Prefer not to say')
-      ]
+      options:[choice('under_50k','Under $50k'),choice('50_99k','$50k–$99k'),choice('100_149k','$100k–$149k'),choice('150_249k','$150k–$249k'),choice('250k_plus','$250k+'),choice('prefer_not','Prefer not to say')]
     },
-    {
-      id:'household_size_answer', kind:'single', eyebrow:'ABOUT YOU', title:'How many people are in your household?', required:true,
-      note:'This stays first-party profile context and is not used for housing audience targeting.',
-      options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')]
-    },
-    {
-      id:'property_types', kind:'multi', eyebrow:'PROPERTY FOCUS', title:'Which properties matter most to you?', required:true,
-      options:[choice('single_family','Single-family'),choice('condo_townhome','Condo / townhome'),choice('multifamily','Multi-family'),choice('commercial','Commercial'),choice('land','Land'),choice('mixed','A mix of property types')]
-    },
-    {
-      id:'professional_years_band', kind:'single', eyebrow:'YOUR WORK', title:'How long have you worked in your field?', required:true,
-      when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
-      options:[choice('new','Less than 1 year'),choice('1_3','1–3 years'),choice('4_7','4–7 years'),choice('8_15','8–15 years'),choice('16_plus','16+ years')]
-    },
-    {
-      id:'professional_volume_band', kind:'single', eyebrow:'YOUR WORK', title:'About how many clients or transactions touch your workflow each month?', required:true,
-      when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
-      options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')]
-    },
+    { id:'household_size_answer', kind:'single', eyebrow:'ABOUT YOU', title:'How many people are in your household?', required:true, note:'This stays first-party profile context and is not used for housing audience targeting.', options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')] },
+    { id:'property_types', kind:'multi', eyebrow:'PROPERTY FOCUS', title:'Which properties matter most to you?', required:true, options:[choice('single_family','Single-family'),choice('condo_townhome','Condo / townhome'),choice('multifamily','Multi-family'),choice('commercial','Commercial'),choice('land','Land'),choice('mixed','A mix of property types')] },
+    { id:'professional_years_band', kind:'single', eyebrow:'YOUR WORK', title:'How long have you worked in your field?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('new','Less than 1 year'),choice('1_3','1–3 years'),choice('4_7','4–7 years'),choice('8_15','8–15 years'),choice('16_plus','16+ years')] },
+    { id:'professional_volume_band', kind:'single', eyebrow:'YOUR WORK', title:'About how many clients or transactions touch your workflow each month?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')] },
     {
       id:'professional_priorities', kind:'multi', eyebrow:'WATCHDOG INTELLIGENCE', title:'Where should Intelligence help you first?', required:true,
       when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
-      options:[
-        choice('lead_prioritization','Prioritize opportunities'), choice('client_briefs','Build client briefs'),
-        choice('property_change','Catch meaningful property changes'), choice('tax_assessment','Assessment / tax analysis'),
-        choice('listing_prep','Listing preparation'), choice('buyer_diligence','Buyer due diligence'),
-        choice('portfolio_monitoring','Portfolio monitoring'), choice('workflow_automation','Reduce repetitive research')
-      ]
+      options:[choice('lead_prioritization','Prioritize opportunities'),choice('client_briefs','Build client briefs'),choice('property_change','Catch meaningful property changes'),choice('tax_assessment','Assessment / tax analysis'),choice('listing_prep','Listing preparation'),choice('buyer_diligence','Buyer due diligence'),choice('portfolio_monitoring','Portfolio monitoring'),choice('workflow_automation','Reduce repetitive research')]
     },
-    {
-      id:'time_horizon', kind:'single', eyebrow:'TIMING', title:'When do you expect Watchdog to be most useful?', required:true,
-      options:[choice('now','Right now'),choice('0_3_months','Next 3 months'),choice('3_6_months','3–6 months'),choice('6_12_months','6–12 months'),choice('12_plus_months','More than a year'),choice('researching','I’m exploring')]
-    },
-    {
-      id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready to take shape.',
-      copy:'We’ll use the context you confirmed to organize your experience. Property facts and Watchdog scores still come only from governed data and evidence.'
-    }
+    { id:'time_horizon', kind:'single', eyebrow:'TIMING', title:'When do you expect Watchdog to be most useful?', required:true, options:[choice('now','Right now'),choice('0_3_months','Next 3 months'),choice('3_6_months','3–6 months'),choice('6_12_months','6–12 months'),choice('12_plus_months','More than a year'),choice('researching','I’m exploring')] },
+    { id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready to take shape.', copy:'We’ll use the context you confirmed to organize your experience. Property facts and Watchdog scores still come only from governed data and evidence.' }
   ];
 
   function activeSteps() {
@@ -163,8 +117,7 @@
   function optionHtml(step, opt) {
     var selected = step.kind === 'multi' ? ((answers[step.id] || []).indexOf(opt.value) >= 0) : answers[step.id] === opt.value;
     return '<button type="button" class="wd-onboarding-option' + (selected ? ' is-selected' : '') + '" data-choice="' + esc(opt.value) + '">' +
-      (opt.icon ? '<i>' + esc(opt.icon) + '</i>' : '') +
-      '<span>' + esc(opt.label) + (opt.note ? '<small>' + esc(opt.note) + '</small>' : '') + '</span></button>';
+      (opt.icon ? '<i>' + esc(opt.icon) + '</i>' : '') + '<span>' + esc(opt.label) + (opt.note ? '<small>' + esc(opt.note) + '</small>' : '') + '</span></button>';
   }
 
   function tagHtml(step, opt) {
@@ -179,6 +132,7 @@
     if (step.kind === 'input') {
       if (!String(value || '').trim()) return false;
       if (step.id === 'location_zip') return /^\d{5}$/.test(String(value || '').trim());
+      if (step.id === 'contact_email') return validEmail(value);
       return true;
     }
     return value !== undefined && value !== null && value !== '';
@@ -207,7 +161,7 @@
     } else if (step.kind === 'multi') {
       html += '<div class="wd-onboarding-tags">' + step.options.map(function (opt) { return tagHtml(step,opt); }).join('') + '</div>';
     } else if (step.kind === 'input') {
-      html += '<div class="wd-onboarding-field"><input id="wd-onboarding-input" class="wd-onboarding-input" type="text" autocomplete="off" ' +
+      html += '<div class="wd-onboarding-field"><input id="wd-onboarding-input" class="wd-onboarding-input" type="' + esc(step.inputType || 'text') + '" autocomplete="' + esc(step.autocomplete || 'off') + '" ' +
         'inputmode="' + esc(step.inputMode || 'text') + '" maxlength="' + esc(step.maxLength || 240) + '" placeholder="' + esc(step.placeholder || '') + '" value="' + esc(answers[step.id] || '') + '"></div>';
     } else if (step.kind === 'finish') {
       var chips = [];
@@ -279,6 +233,7 @@
     if (!markets.length && answers.location_zip) markets = [String(answers.location_zip)];
     var household = answers.household_size_answer;
     return {
+      contact_email: String(answers.contact_email || '').trim().toLowerCase(),
       persona: answers.persona,
       primary_profession: answers.primary_profession || null,
       home_status: answers.home_status || (answers.persona === 'renter' ? 'rent' : null),
@@ -301,7 +256,7 @@
     saving = true;
     render();
     try {
-      var result = await db.rpc('complete_my_watchdog_onboarding', { payload: payload() });
+      var result = await db.rpc('complete_my_watchdog_onboarding_v2', { payload: payload() });
       if (result.error) throw result.error;
       location.replace(nextPath());
     } catch (error) {
@@ -340,6 +295,7 @@
       var sessionResult = await db.auth.getSession();
       var session = sessionResult && sessionResult.data && sessionResult.data.session;
       if (!session || !session.user) { providerScreen(); return; }
+      if (!answers.contact_email && session.user.email) answers.contact_email = String(session.user.email).trim().toLowerCase();
       var stateResult = await db.rpc('get_my_watchdog_onboarding_state');
       if (stateResult.error) throw stateResult.error;
       var state = Array.isArray(stateResult.data) ? stateResult.data[0] : stateResult.data;
