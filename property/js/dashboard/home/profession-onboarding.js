@@ -17,7 +17,7 @@ function key(){return user?'watchdogProfessionPrompted:'+user.id:'watchdogProfes
 function prompted(){try{return sessionStorage.getItem(key())==='1';}catch(_){return false;}}
 function remember(){try{sessionStorage.setItem(key(),'1');}catch(_){}}
 function close(){var node=document.getElementById('wd-profession-onboarding');if(node)node.remove();document.body.classList.remove('wd-profession-onboarding-open');}
-function emit(value){window.dispatchEvent(new CustomEvent('watchdog:profession-updated',{detail:{profession:value||'',source:'property_home_onboarding'}}));}
+function emit(value){window.dispatchEvent(new CustomEvent('watchdog:profession-updated',{detail:{profession:value||'',source:'property_home_onboarding'}}));setTimeout(function(){if(window.WatchdogHomeAnalystIntel&&window.WatchdogHomeAnalystIntel.refresh)window.WatchdogHomeAnalystIntel.refresh();},20);}
 function open(){
  if(document.getElementById('wd-profession-onboarding'))return;
  var wrap=document.createElement('div');wrap.id='wd-profession-onboarding';wrap.className='wd-profession-onboarding';wrap.setAttribute('role','dialog');wrap.setAttribute('aria-modal','true');wrap.setAttribute('aria-labelledby','wd-profession-title');
