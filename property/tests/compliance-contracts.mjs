@@ -14,6 +14,7 @@ const requiredFiles = [
   'property/docs/compliance/CONTROL-REGISTER.md',
   'property/docs/compliance/DECISION-LOG.md',
   'property/docs/compliance/CONNECTOR-REGISTER.md',
+  'property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md',
   'property/compliance/index.html',
   'property/js/compliance.js',
   'property/css/compliance.css',
@@ -50,6 +51,8 @@ for (const entry of data.entries) {
   assert.ok(String(entry.residual_risk).length >= 20, `${entry.id} must identify residual risk.`);
   assert.ok(String(entry.next_step).length >= 20, `${entry.id} must identify a meaningful next step.`);
 }
+assert.ok(data.entries.some((entry) => entry.id === 'WCR-2026-08-19-001'),
+  'Compliance evidence feed must retain the completed incident-response tabletop entry.');
 
 const serialized = JSON.stringify(data);
 for (const pattern of [
@@ -87,6 +90,15 @@ for (const name of ['SOC 2', 'NIST', 'OWASP ASVS', 'WCAG 2.2', 'PCI DSS', 'NJDPA
 }
 assert.match(register, /CONNECTOR-REGISTER\.md/,
   'Material connector governance must remain linked from the control register.');
+assert.match(register, /WCR-IR-002[\s\S]*INCIDENT-TABLETOP-2026-08-19\.md/,
+  'Control register must retain the completed incident tabletop as operating evidence.');
+
+const tabletop = read('property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md');
+for (const field of ['Purpose', 'Scenario', 'Walkthrough', 'Gaps identified', 'Residual risk', 'Next no-cost actions']) {
+  assert.match(tabletop, new RegExp(field.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Incident tabletop evidence must include ${field}.`);
+}
+assert.doesNotMatch(tabletop, /(?:token|secret|password)\s*[:=]\s*\S+/i,
+  'Incident tabletop evidence must remain sanitized and must not include credentials.');
 
 const connectors = read('property/docs/compliance/CONNECTOR-REGISTER.md');
 for (const field of [
