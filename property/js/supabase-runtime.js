@@ -79,6 +79,26 @@
     return location.origin + '/property/onboarding/?next=' + encodeURIComponent(safeNext(next));
   }
 
+  function openOnboarding(next) {
+    location.assign(onboardingRedirect(next || (location.pathname + location.search + location.hash)));
+  }
+
+  function installLegacySignInBridge() {
+    function routeLegacySignIn() {
+      openOnboarding(location.pathname + location.search + location.hash);
+    }
+    try {
+      Object.defineProperty(window, 'plSignInPrompt', {
+        configurable: true,
+        enumerable: true,
+        get: function () { return routeLegacySignIn; },
+        set: function (legacyHandler) { window.__watchdogLegacySignInPrompt = legacyHandler; }
+      });
+    } catch (_error) {
+      window.plSignInPrompt = routeLegacySignIn;
+    }
+  }
+
   function patchOAuth(instance) {
     if (!instance || !instance.auth || instance.auth.__watchdogOnboardingWrapped) return instance;
     var originalOAuth = instance.auth.signInWithOAuth && instance.auth.signInWithOAuth.bind(instance.auth);
@@ -210,11 +230,13 @@
     storageKey: 'sb-' + selected.ref + '-auth-token',
     createClient: createClient,
     onboardingUrl: onboardingRedirect,
+    openOnboarding: openOnboarding,
     requireOnboarding: startOnboardingGate
   });
 
   window.WatchdogAuth = Object.freeze({
     providers: providers,
+    openSignIn: openOnboarding,
     signIn: function (provider, next) {
       var config = providers[provider];
       if (!config || !config.enabled) return Promise.reject(new Error('This sign-in provider is not enabled yet.'));
@@ -222,6 +244,7 @@
     }
   });
 
+  installLegacySignInBridge();
   watchLegacyAuthUi();
   startOnboardingGate();
 })();
