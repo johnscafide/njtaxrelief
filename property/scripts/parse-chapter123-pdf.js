@@ -33,8 +33,18 @@ if (!input || !fs.existsSync(input)) {
 
 const temp = path.join(os.tmpdir(), `nj-chapter123-${process.pid}.txt`);
 execFileSync('pdftotext', ['-layout', input, temp]);
-const lines = fs.readFileSync(temp, 'utf8').split(/\r?\n/);
+const text = fs.readFileSync(temp, 'utf8');
 fs.rmSync(temp, {force:true});
+
+// Refuse to parse a stale, redirected, or unrelated PDF even if its rows happen
+// to resemble the expected numeric shape.
+if (!/CERTIFICATION OF AVERAGE RATIOS/i.test(text) ||
+    !/COMMON LEVEL RANGES FOR USE IN THE TAX YEAR 2026/i.test(text) ||
+    !/Original Certification\s+October 1, 2025/i.test(text) ||
+    !/January 30, 2026/i.test(text)) {
+  throw new Error('Source validation failed: downloaded PDF is not the amended 2026 NJ Chapter 123 certification');
+}
+const lines = text.split(/\r?\n/);
 
 const rowPattern = /^\s*(\d{4})\s+(.+?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)\s*$/;
 const districts = {};
