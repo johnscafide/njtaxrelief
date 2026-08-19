@@ -14,8 +14,8 @@ must(runtime.includes('instance.auth.signInWithOAuth = function'),'Canonical run
 must(runtime.includes("get_my_watchdog_onboarding_state"),'Protected member routes must check onboarding state.');
 must(runtime.includes("google: { label:'Google', enabled:true }"),'Google must remain enabled.');
 must(runtime.includes("apple: { label:'Apple', enabled:false }"),'Apple must be provider-ready but disabled until credentials exist.');
-must(runtime.includes("facebook: { label:'Facebook', enabled:true }"),'Facebook must be enabled after production provider configuration.');
-must(runtime.includes("linkedin_oidc: { label:'LinkedIn', enabled:false }"),'LinkedIn must be provider-ready but disabled until credentials exist.');
+must(runtime.includes("facebook: { label:'Facebook', enabled:true }"),'Facebook must remain enabled after production provider configuration.');
+must(runtime.includes("linkedin_oidc: { label:'LinkedIn', enabled:true }"),'LinkedIn OIDC must be enabled after production provider configuration.');
 must(runtime.includes("querySelectorAll('.auth-magic')"),'Legacy email/magic-link signup UI must be removed by the shared runtime.');
 must(!runtime.match(/\.js\?v=|\.css\?v=/),'Onboarding runtime must not introduce version-query assets.');
 
