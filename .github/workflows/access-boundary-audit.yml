@@ -58,6 +58,8 @@ jobs:
         run: node property/tests/intelligence-density-contract.mjs
       - name: Verify source freshness and explainability trust contract
         run: node property/tests/trust-freshness-explainability-contract.mjs
+      - name: Verify affordable housing parser integrity
+        run: node property/tests/affordable-housing-parser-contract.mjs
       - name: Verify Intelligence retention integration
         run: node property/tests/intelligence-retention-integration-contract.mjs
       - name: Verify billing, verification and measurement security contracts
