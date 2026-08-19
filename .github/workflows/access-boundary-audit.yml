@@ -52,6 +52,8 @@ jobs:
         run: node property/tests/intelligence-today-contract.mjs
       - name: Verify Intelligence SaaS loading and recovery UX
         run: node property/tests/intelligence-saas-polish-contract.mjs
+      - name: Verify Data Workbench flood request boundary
+        run: node property/tests/flood-request-boundary-contract.mjs
       - name: Verify compact Intelligence footprint
         run: node property/tests/intelligence-density-contract.mjs
       - name: Verify billing, verification and measurement security contracts
