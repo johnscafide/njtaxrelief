@@ -1,0 +1,70 @@
+{
+  "schema_version": "closing-evidence-v1",
+  "updated_at": "2026-08-19T20:55:00Z",
+  "product_rule": "Only direct parcel-specific transaction follow-up evidence may independently create Closing Priority. Missing coverage is never equivalent to a negative finding.",
+  "families": [
+    {
+      "id": "permit_certificate_lifecycle",
+      "authority": "NJ Department of Community Affairs Construction Reporter / raw permit data",
+      "coverage": "statewide_reporting_program",
+      "automation": "live",
+      "parcel_match": "treasury_municipality_code+block+lot",
+      "closing_role": "primary_direct_exception",
+      "negative_semantics": "source_checked_no_value may represent zero observed rows only when the provider request succeeded; it is not municipal code clearance"
+    },
+    {
+      "id": "recording_reference",
+      "authority": "NJOGIS Parcels / MOD-IV composite; county clerk is recording authority",
+      "coverage": "statewide_baseline",
+      "automation": "live_baseline",
+      "parcel_match": "pams_pin",
+      "closing_role": "primary_direct_exception",
+      "negative_semantics": "statewide baseline is not a county title search"
+    },
+    {
+      "id": "county_recorded_liens_notices",
+      "authority": "County Clerk / Register of Deeds and Mortgages",
+      "coverage": "county_fragmented",
+      "automation": "research",
+      "parcel_match": "county_specific",
+      "closing_role": "future_primary_direct_exception",
+      "negative_semantics": "unavailable county coverage must remain unknown"
+    },
+    {
+      "id": "municipal_tax_sale_delinquency",
+      "authority": "Municipal Tax Collector under NJ DCA DLGS tax-sale framework",
+      "coverage": "municipal_fragmented",
+      "automation": "research",
+      "parcel_match": "municipality_specific",
+      "closing_role": "future_primary_direct_exception",
+      "negative_semantics": "no Watchdog record never means taxes are current"
+    },
+    {
+      "id": "code_open_violations",
+      "authority": "Local enforcing agency / municipality; DCA where applicable",
+      "coverage": "mixed_local_state",
+      "automation": "research",
+      "parcel_match": "jurisdiction_specific",
+      "closing_role": "future_primary_direct_exception",
+      "negative_semantics": "no statewide parcel-level feed established"
+    },
+    {
+      "id": "environmental_flood_tidelands",
+      "authority": "NJDEP public GIS + FEMA NFHL",
+      "coverage": "statewide_mapped",
+      "automation": "live",
+      "parcel_match": "coordinates_spatial_intersection",
+      "closing_role": "supporting_context_only",
+      "negative_semantics": "must not independently create Closing Priority"
+    },
+    {
+      "id": "foreclosure_intention_database",
+      "authority": "NJ Department of Community Affairs",
+      "coverage": "statewide",
+      "automation": "prohibited_not_public",
+      "parcel_match": null,
+      "closing_role": "do_not_ingest",
+      "negative_semantics": "confidential source"
+    }
+  ]
+}
