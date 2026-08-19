@@ -1,0 +1,34 @@
+name: One-off zoning hydrate deploy
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-zoning-hydrate-deploy.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+      PROJECT_REF: uvkvaxljhhngydvlrzom
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Validate deployment credential
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${SUPABASE_ACCESS_TOKEN:-}"
+      - name: Deploy current governed Workbench hydrator
+        shell: bash
+        run: |
+          set -euo pipefail
+          supabase functions deploy workbench-hydrate --project-ref "$PROJECT_REF"
