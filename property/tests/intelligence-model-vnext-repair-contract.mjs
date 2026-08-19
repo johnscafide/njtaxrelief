@@ -66,6 +66,10 @@ expect(readiness.includes('semantic_source_fact_candidates')&&readiness.includes
 expect(readiness.includes('source_refresh_events'),'Readiness must continue exposing operational refresh noise separately.');
 expect(readiness.includes('v3_recency_feature_unavailable_in_persisted_evidence'),'Readiness must expose the diagnosed legacy recency mismatch.');
 expect(readiness.includes('vnext_direct_feature_dry_run_required_before_fresh_holdout'),'Closing Review must remain blocked until a non-persisting vNext dry run.');
+expect(readiness.includes('/functions/v1/intelligence-model-shadow-evaluate'),'Repair readiness must delegate structural holdout readiness to the governed shadow evaluator.');
+expect(readiness.includes('readiness_authority')&&readiness.includes('authoritative structural gate'),'Repair readiness must explicitly identify the shadow evaluator as the single structural readiness authority.');
+expect(readiness.includes('structurally_ready_for_fresh_holdout===true'),'Repair readiness must derive fresh-holdout readiness from the shadow evaluator result rather than an approximate local rule.');
+expect(readiness.includes('event_pool_model_window')&&readiness.includes('window_days:windowDays'),'Property Change readiness diagnostics must expose the draft model window separately from broader historical evidence.');
 const response=readiness.slice(readiness.indexOf('return out(req,200,{'));
 expect(!response.includes('pams_pin:'),'Aggregate readiness response must not return property identifiers.');
 expect(!response.includes('address:'),'Aggregate readiness response must not return property addresses.');
@@ -107,4 +111,4 @@ expect(panel.includes('Draft vNext designs remain non-runnable and uncalibrated'
 expect(css.includes('.cr-repair-model')&&css.includes('.cr-repair-model.ready')&&css.includes('.cr-repair-shadow-result'),'Repair readiness must have compact blocked/ready and shadow visual states.');
 
 for(const [name,content] of Object.entries({draft,restore,gate,contextPerf,materialChange,readiness,shadow,config,page,panel,css}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
-console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, Context Graph performance, service-only source-fact change research, aggregate readiness, non-persisting Closing + Property Change shadow evaluation, developer UI, fresh-holdout boundary, no ?v=.');
+console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, Context Graph performance, service-only source-fact change research, authoritative readiness-to-shadow delegation, non-persisting Closing + Property Change shadow evaluation, developer UI, fresh-holdout boundary, no ?v=.');
