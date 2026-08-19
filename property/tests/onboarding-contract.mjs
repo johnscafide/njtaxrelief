@@ -16,6 +16,8 @@ must(runtime.includes("google: { label:'Google', enabled:true }"),'Google must r
 must(runtime.includes("apple: { label:'Apple', enabled:false }"),'Apple must be provider-ready but disabled until credentials exist.');
 must(runtime.includes("facebook: { label:'Facebook', enabled:true }"),'Facebook must remain enabled after production provider configuration.');
 must(runtime.includes("linkedin_oidc: { label:'LinkedIn', enabled:true }"),'LinkedIn OIDC must be enabled after production provider configuration.');
+must(runtime.includes("Object.defineProperty(window, 'plSignInPrompt'"),'Legacy public sign-in triggers must be bridged immediately on cold browsers.');
+must(runtime.includes('openSignIn: openOnboarding'),'Shared auth runtime must expose a direct onboarding sign-in entry.');
 must(runtime.includes("querySelectorAll('.auth-magic')"),'Legacy email/magic-link signup UI must be removed by the shared runtime.');
 must(!runtime.match(/\.js\?v=|\.css\?v=/),'Onboarding runtime must not introduce version-query assets.');
 
