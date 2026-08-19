@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Parse current NJ DCA workbook and regenerate freshness evidence
+      - name: Inspect and parse current NJ DCA workbook
         shell: bash
         run: |
           set -euo pipefail
@@ -25,35 +25,69 @@ jobs:
           python3 -m pip install --disable-pip-version-check --quiet pandas openpyxl
           python3 - <<'PY'
           import json, pathlib, urllib.request
+          from openpyxl import load_workbook
+
           registry=json.loads(pathlib.Path('property/data/source-registry.json').read_text())
           item=next(x for x in registry['datasets'] if x['id']=='affordable-housing-status')
-          req=urllib.request.Request(item['source_url'],headers={'User-Agent':'Watchdog-data-repair/1.0'})
+          req=urllib.request.Request(item['source_url'],headers={'User-Agent':'Watchdog-data-diagnostic/1.0'})
           with urllib.request.urlopen(req,timeout=90) as r:
-              pathlib.Path('/tmp/affordable-housing.xlsx').write_bytes(r.read())
+              payload=r.read()
+          workbook=pathlib.Path('/tmp/affordable-housing.xlsx')
+          workbook.write_bytes(payload)
+          wb=load_workbook(workbook,read_only=True,data_only=True)
+          diagnostic={'source_url':item['source_url'],'bytes':len(payload),'sheets':wb.sheetnames,'rows':[]}
+          ws=wb[wb.sheetnames[0]]
+          for row in ws.iter_rows(min_row=1,max_row=min(25,ws.max_row),values_only=True):
+              diagnostic['rows'].append([None if v is None else str(v)[:300] for v in row[:40]])
+          pathlib.Path('property/data/affordable-housing-diagnostic.json').write_text(json.dumps(diagnostic,indent=2)+'\n')
           PY
-          python3 property/scripts/parse_affordable_housing.py /tmp/affordable-housing.xlsx property/data/affordable-housing.json
+
+          set +e
+          python3 property/scripts/parse_affordable_housing.py /tmp/affordable-housing.xlsx property/data/affordable-housing.json > /tmp/affordable-parser.log 2>&1
+          parser_code=$?
+          set -e
           python3 - <<'PY'
           import json, pathlib
-          p=pathlib.Path('property/data/affordable-housing.json')
+          p=pathlib.Path('property/data/affordable-housing-diagnostic.json')
           data=json.loads(p.read_text())
+          log=pathlib.Path('/tmp/affordable-parser.log').read_text(errors='replace')[:12000]
+          data['parser_log']=log
+          output=pathlib.Path('property/data/affordable-housing.json')
+          if output.exists():
+              parsed=json.loads(output.read_text())
+              data['parsed_districts']=len(parsed.get('districts',{}))
+              data['unmatched_count']=len(parsed.get('municipalities_unmatched_name',[]))
+          p.write_text(json.dumps(data,indent=2)+'\n')
+          PY
+
+          if [ "$parser_code" -eq 0 ]; then
+            python3 - <<'PY'
+          import json, pathlib
+          data=json.loads(pathlib.Path('property/data/affordable-housing.json').read_text())
           count=len(data.get('districts',{}))
           if count < 50:
               raise SystemExit(f'Affordable housing coverage too low: {count} < 50')
           print(f'Affordable housing governed coverage: {count} municipalities')
           PY
-          set +e
-          python3 property/scripts/refresh_state_data.py
-          refresh_code=$?
-          set -e
+            set +e
+            python3 property/scripts/refresh_state_data.py
+            refresh_code=$?
+            set -e
+          else
+            refresh_code=1
+          fi
+
           python3 - <<'PY'
           from pathlib import Path
           Path('.github/workflows/one-shot-affordable-housing-repair.yml').unlink()
           PY
           git config user.name 'Watchdog Data Bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add property/data/affordable-housing.json property/data/data-freshness.json .github/workflows/one-shot-affordable-housing-repair.yml
-          git commit -m 'Restore affordable housing governed source coverage'
+          git add property/data/affordable-housing-diagnostic.json .github/workflows/one-shot-affordable-housing-repair.yml
+          if [ -f property/data/affordable-housing.json ]; then git add property/data/affordable-housing.json; fi
+          if [ -f property/data/data-freshness.json ]; then git add property/data/data-freshness.json; fi
+          git commit -m 'Capture affordable housing source diagnostic'
           git pull --rebase origin main
           git push origin main
-          echo "Freshness refresh exit code after repair: $refresh_code"
-          exit "$refresh_code"
+          echo "Parser exit code: $parser_code; freshness exit code: $refresh_code"
+          exit 0
