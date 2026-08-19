@@ -27,11 +27,14 @@
     }
 
     var secrets = billing.secrets || {};
+    var catalog = billing.catalog || {};
     var checks = billing.checks || [];
     var passed = checks.filter(function (check) { return check.passed; }).length;
     var gateStatus = billing.gate && billing.gate.status || 'missing';
     var ready = gateStatus === 'passed';
     var mode = billing.checkout_mode || 'closed';
+    var catalogResolved = catalog.resolved == null ? secrets.catalog_lookup_resolved || 0 : catalog.resolved;
+    var catalogRequired = catalog.required == null ? secrets.catalog_lookup_required || 6 : catalog.required;
 
     host.innerHTML =
       '<div class="do-billing-head"><div><span>STRIPE LIVE RELEASE</span><h2>' + (ready ? 'Live billing accepted' : 'Controlled billing gate') + '</h2>' +
@@ -39,9 +42,9 @@
       '<div class="do-billing-gate ' + esc(ready ? 'passed' : gateStatus) + '"><i class="fas ' + (ready ? 'fa-circle-check' : 'fa-shield-halved') + '"></i>' + esc(label(gateStatus)) + '</div></div>' +
       '<div class="do-billing-metrics">' +
       '<article><b>' + esc(label(mode)) + '</b><span>Checkout mode</span></article>' +
-      '<article><b>' + (secrets.stripe_secret_configured ? 'Ready' : 'Missing') + '</b><span>Stripe secret</span></article>' +
+      '<article><b>' + (secrets.stripe_secret_configured ? 'Ready' : 'Missing') + '</b><span>Stripe Live key</span></article>' +
       '<article><b>' + (secrets.webhook_secret_configured ? 'Ready' : 'Missing') + '</b><span>Webhook secret</span></article>' +
-      '<article><b>' + esc((secrets.price_secrets_configured || 0) + '/' + (secrets.price_secrets_required || 6)) + '</b><span>Price secrets</span></article>' +
+      '<article><b>' + esc(catalogResolved + '/' + catalogRequired) + '</b><span>Live prices resolved</span></article>' +
       '<article><b>' + esc(billing.webhook_event_count || 0) + '</b><span>Processed Stripe events</span></article>' +
       '<article><b>' + passed + '/' + checks.length + '</b><span>Acceptance checks</span></article>' +
       '</div>' +
