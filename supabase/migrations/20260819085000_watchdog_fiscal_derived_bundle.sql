@@ -1,6 +1,18 @@
 -- Watchdog fiscal derived bundle.
 -- Promotes only formulas whose upstream tax and municipal-finance inputs already resolve through governed providers.
 
+alter table public.derived_formula_registry
+  drop constraint if exists derived_formula_registry_operation_check;
+alter table public.derived_formula_registry
+  add constraint derived_formula_registry_operation_check
+  check (
+    operation is null or operation = any (array[
+      'year_delta','ratio','completeness','inverse','permit_closure','permit_activity',
+      'weighted_signals','signal_count','signal_density','weighted_scores',
+      'tax_rate_position','municipal_cost_absorption','fiscal_resilience'
+    ]::text[])
+  );
+
 insert into public.derived_formula_registry
 (marker_id,engine_version,formula,dependencies,confidence,status,explanation,operation,config)
 values
