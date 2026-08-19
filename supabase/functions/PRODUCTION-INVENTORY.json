@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-19T19:06:00Z",
+  "captured_at": "2026-08-19T19:37:00Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -49,7 +49,7 @@
     "intelligence-closing-holdout-seed": {"version": 2, "sha256": "718a4da2fce21689cd32f8680e3bd7dbfaf858f87f906ef3d20e5f00d58ed8ee", "verify_jwt": true, "tracking": "source_snapshot"},
     "intelligence-source-fact-watch": {"version": 4, "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-derived": {"version": 22, "sha256": "2d0628d5394edba7a28b188d0d8b65f12421b9da0bacc3242fbdd2be0e9aeeb7", "verify_jwt": false, "tracking": "source_snapshot"},
+    "workbench-derived": {"version": 23, "sha256": "93ed002313276e4a5c3d0a8e3a35de8f15c6dfffcd814de7abee9fe86ba30ba5", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-hydrate": {"version": 28, "sha256": "0d1252781a9c7f381524196c1eb5cb6addbfa0618b827e05bef6cac9efee011e", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-provider-registry": {"version": 14, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
     "workbench-refresh": {"version": 8, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
