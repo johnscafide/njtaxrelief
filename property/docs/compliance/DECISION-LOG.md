@@ -159,7 +159,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ## 2026-08-19 — Establish risk register and expose ASVS identity target gaps
 
-**Decision ID:** WCR-2026-08-19-002  
+**Decision ID:** WCR-2026-08-19-003  
 **Frameworks:** NIST CSF 2.0 Govern/Identify/Protect, SOC 2 Security, OWASP ASVS 5.0.0 Level 2, ISO/IEC 27001  
 **Decision:** Convert compliance gaps into a maintained cybersecurity risk register and begin requirement-level ASVS verification with authentication, session management, authorization, and OAuth/OIDC rather than treating the ASVS target as a broad narrative alignment claim.
 
