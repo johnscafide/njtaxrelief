@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-19T19:37:00Z",
+  "captured_at": "2026-08-19T21:31:02Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -35,6 +35,7 @@
     "pcm-webhook": {"version": 5, "sha256": "aeb58a90a1ef1ea87ec71e3e1ae244892c196eeea808c6291253b92360b29a6a", "verify_jwt": false, "tracking": "fingerprint_only"},
     "product-analytics": {"version": 7, "sha256": "124c95d20cde84bebc386a98ca50aaedb2e551ed4f0a44611c8f26dac3156e8e", "verify_jwt": false, "tracking": "fingerprint_only"},
     "production-api": {"version": 12, "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "provider-release-canary": {"version": 2, "sha256": "a1c82c3225bd6f2443ec9b6d125f82bbf62ada831cf1a3262f3e15da98a722c2", "verify_jwt": false, "tracking": "source_snapshot"},
     "public-report-share": {"version": 7, "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2", "verify_jwt": false, "tracking": "fingerprint_only"},
     "report-platform-event": {"version": 13, "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068", "verify_jwt": true, "tracking": "source_snapshot"},
     "report-share": {"version": 13, "sha256": "b7bc4f9b345c4fb5486e333b7fa4726be3e524ac2039670ccbd44fea9b249118", "verify_jwt": false, "tracking": "source_snapshot"},
@@ -49,8 +50,8 @@
     "intelligence-closing-holdout-seed": {"version": 2, "sha256": "718a4da2fce21689cd32f8680e3bd7dbfaf858f87f906ef3d20e5f00d58ed8ee", "verify_jwt": true, "tracking": "source_snapshot"},
     "intelligence-source-fact-watch": {"version": 4, "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-derived": {"version": 23, "sha256": "93ed002313276e4a5c3d0a8e3a35de8f15c6dfffcd814de7abee9fe86ba30ba5", "verify_jwt": false, "tracking": "source_snapshot"},
-    "workbench-hydrate": {"version": 28, "sha256": "0d1252781a9c7f381524196c1eb5cb6addbfa0618b827e05bef6cac9efee011e", "verify_jwt": true, "tracking": "source_snapshot"},
+    "workbench-derived": {"version": 24, "sha256": "c451686b41c2e23db4c9f0bd0e5798bdc01c2c116ba82a25defad4a9c618c715", "verify_jwt": false, "tracking": "source_snapshot"},
+    "workbench-hydrate": {"version": 32, "sha256": "4ea10b07133d503a9f916424e073b0f4fd4656368d5e7d21d2c6c49b3b1fa44f", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-provider-registry": {"version": 14, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
     "workbench-refresh": {"version": 8, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-score": {"version": 8, "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8", "verify_jwt": true, "tracking": "fingerprint_only"}
