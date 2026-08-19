@@ -198,7 +198,7 @@
     var section = grid.closest('.section');
     var heading = section && q('.lp-h2', section);
     if (heading) heading.textContent = 'Latest from Watchdog';
-    if (heading && !q('.wd-insights-intro', section)) heading.insertAdjacentHTML('afterend', '<p class="wd-insights-intro">New Jersey property taxes, housing and public records, explained in plain language.</p>');
+    qa('.wd-insights-intro', section || document).forEach(function (node) { node.remove(); });
     var lead = rows[0], rest = rows.slice(1, 4);
     grid.innerHTML = '<div class="wd-insights-layout">' +
       '<a class="wd-insight-lead" href="' + articleUrl(lead.slug) + '">' +
@@ -218,6 +218,240 @@
       .eq('published', true).order('published_at', { ascending: false }).limit(4)
       .then(function (res) { if (res && res.data) paintInsights(res.data); })
       .catch(function () {});
+  }
+
+  var AD_SLOT = 'property_landing_bottom';
+  var AD_DISCLOSURE_GREENTREE = 'Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.';
+  var AD_DISCLOSURE_JOHN = 'Advertisement. John Scafide is a licensed New Jersey real estate agent, NJ License #2079591, with The McKenty Team at Opus Elite Real Estate. If a property shown on Watchdog is listed by another brokerage, this is not a solicitation of that listing.';
+  var AD_DISCLOSURE_HEATHER = 'Advertisement. Heather Scafide is a licensed New Jersey real estate agent, NJ License #2192318, with The McKenty Team at Opus Elite Real Estate. If a property shown on Watchdog is listed by another brokerage, this is not a solicitation of that listing.';
+  var AD_DISCLOSURE_RELIEF = 'Advertisement for NJPropertyTaxRelief.com. This website is not affiliated with the State of New Jersey or any government agency. Estimates are informational and final eligibility depends on the official program rules and application.';
+  var ADS = [
+    {
+      id: 'greentree-payment-before-house', advertiser: 'Greentree Mortgage', campaign: 'financing_context',
+      eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
+      headline: 'Know the payment before you fall in love with the house.',
+      sub: 'Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.',
+      cta: 'Talk Financing', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=payment_before_house',
+      photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
+    },
+    {
+      id: 'greentree-full-monthly-number', advertiser: 'Greentree Mortgage', campaign: 'financing_context',
+      eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
+      headline: 'Know the full monthly number before you start making offers.',
+      sub: 'Principal and interest are only part of the payment. John Varano can walk through taxes, insurance and escrow so the budget is clear before the search gets serious.',
+      cta: 'Run the Numbers', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=full_monthly_number',
+      photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
+    },
+    {
+      id: 'greentree-comfortable-payment', advertiser: 'Greentree Mortgage', campaign: 'financing_context',
+      eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
+      headline: 'A better home search starts with a payment you are comfortable with.',
+      sub: 'Before you stretch for the next house, see what the monthly payment could look like with taxes and escrow included.',
+      cta: 'Plan the Payment', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=comfortable_payment',
+      photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
+    },
+    {
+      id: 'greentree-payment-matters-more', advertiser: 'Greentree Mortgage', campaign: 'financing_context',
+      eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
+      headline: 'The rate matters. The payment matters more.',
+      sub: 'John Varano can help translate rate, taxes, insurance and escrow into the monthly number you actually have to live with.',
+      cta: 'Talk Financing', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=payment_matters_more',
+      photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
+    },
+    {
+      id: 'greentree-offer-eyes-open', advertiser: 'Greentree Mortgage', campaign: 'financing_context',
+      eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
+      headline: 'Offer with your eyes open, not just your preapproval in hand.',
+      sub: 'A preapproval can tell you what you may qualify for. A payment conversation helps you decide what you actually want to spend each month.',
+      cta: 'Get Payment Context', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=offer_eyes_open',
+      photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
+    },
+    {
+      id: 'john-buyer-mls', advertiser: 'John Scafide Realtor', campaign: 'realtor_buyer',
+      eyebrow: 'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
+      headline: 'Found a property worth watching? See what is actually for sale.',
+      sub: 'Public records tell you about the property. MLS access tells you what you can buy right now. Search New Jersey homes with John Scafide.',
+      cta: 'Search Homes', href: '/search-homes.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_buyer&utm_content=mls_search',
+      photo: '/johnprofile.jpg', alt: 'John Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_JOHN, theme: 'john'
+    },
+    {
+      id: 'john-seller-value', advertiser: 'John Scafide Realtor', campaign: 'realtor_seller',
+      eyebrow: 'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
+      headline: 'Your tax record is one piece of your home’s story. Market value is another.',
+      sub: 'If selling is on your radar, start with a home-value estimate and a real conversation about what today’s market could mean for your move.',
+      cta: 'Check Home Value', href: '/home-value.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_seller&utm_content=home_value',
+      photo: '/johnprofile.jpg', alt: 'John Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_JOHN, theme: 'john'
+    },
+    {
+      id: 'heather-buyer-guidance', advertiser: 'Heather Scafide Realtor', campaign: 'realtor_buyer',
+      eyebrow: 'Heather Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
+      headline: 'Buying a home should feel informed, not rushed.',
+      sub: 'Heather Scafide can help you move from online research to a focused South Jersey home search with a real person on your side.',
+      cta: 'Ask Heather', href: 'mailto:heather@heatherscafide.com?subject=Watchdog%20Buyer%20Inquiry',
+      photo: '/heatherheadshot.png', alt: 'Heather Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_HEATHER, theme: 'heather'
+    },
+    {
+      id: 'heather-seller-strategy', advertiser: 'Heather Scafide Realtor', campaign: 'realtor_seller',
+      eyebrow: 'Heather Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
+      headline: 'Thinking about selling? Start with the facts, then build the plan.',
+      sub: 'Heather Scafide can help you turn property data, timing and your goals into a practical selling strategy.',
+      cta: 'Talk About Selling', href: 'mailto:heather@heatherscafide.com?subject=Watchdog%20Seller%20Inquiry',
+      photo: '/heatherheadshot.png', alt: 'Heather Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_HEATHER, theme: 'heather'
+    },
+    {
+      id: 'relief-check-benefit', advertiser: 'NJ Property Tax Relief', campaign: 'relief_estimator',
+      eyebrow: 'NJ Property Tax Relief · Free estimator',
+      headline: 'Your property tax relief may be worth a few minutes to check.',
+      sub: 'Run the free estimator to see how ANCHOR, Stay NJ and Senior Freeze may fit your household before you assume you do or do not qualify.',
+      cta: 'Estimate My Relief', href: '/anchor-estimator.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=relief_estimator&utm_content=check_benefit',
+      photo: '/favicon.svg', alt: 'NJ Property Tax Relief', disclosure: AD_DISCLOSURE_RELIEF, theme: 'relief', logo: true
+    },
+    {
+      id: 'relief-dont-leave-money', advertiser: 'NJ Property Tax Relief', campaign: 'relief_estimator',
+      eyebrow: 'NJ Property Tax Relief · Free estimator',
+      headline: 'Before you leave property tax relief on the table, run the estimate.',
+      sub: 'New Jersey relief programs can overlap and eligibility can be confusing. Answer a few questions to get a plain-language starting point.',
+      cta: 'Start the Estimator', href: '/anchor-estimator.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=relief_estimator&utm_content=dont_leave_money',
+      photo: '/favicon.svg', alt: 'NJ Property Tax Relief', disclosure: AD_DISCLOSURE_RELIEF, theme: 'relief', logo: true
+    }
+  ];
+  var adState = { current: -1, queue: [], timer: null, visible: false, tracked: false };
+
+  function adTheme(name) {
+    if (name === 'john') return { bg: 'linear-gradient(120deg,#0b1732,#15345f 58%,#24547e)', shadow: 'rgba(8,27,56,.28)', accent: '#e6c355', sub: '#d7e3f2', button: 'linear-gradient(135deg,#e0bb52,#b8972a)', buttonText: '#17203a' };
+    if (name === 'heather') return { bg: 'linear-gradient(120deg,#17243b,#294866 58%,#3b647e)', shadow: 'rgba(17,44,68,.28)', accent: '#f0cf74', sub: '#d9e7ef', button: 'linear-gradient(135deg,#efd07c,#c6a347)', buttonText: '#17203a' };
+    if (name === 'relief') return { bg: 'linear-gradient(120deg,#0b3640,#0d6870 58%,#168d96)', shadow: 'rgba(8,77,83,.28)', accent: '#f0d16c', sub: '#d3eef0', button: 'linear-gradient(135deg,#f0d16c,#c5a23d)', buttonText: '#102d35' };
+    return { bg: 'linear-gradient(120deg,#14361f,#1e6b3a 58%,#2b8a4d)', shadow: 'rgba(16,60,32,.28)', accent: '#e6c355', sub: '#bfe0cb', button: 'linear-gradient(135deg,#e0bb52,#b8972a)', buttonText: '#17203a' };
+  }
+  function promotionParams(ad) {
+    return {
+      creative_name: ad.id,
+      creative_slot: AD_SLOT,
+      promotion_id: ad.id,
+      promotion_name: ad.campaign,
+      items: [{ item_id: ad.id, item_name: ad.headline, item_brand: ad.advertiser, item_category: 'watchdog_internal_ad' }]
+    };
+  }
+  function trackAd(eventName, ad) {
+    if (!ad || typeof window.gtag !== 'function') return;
+    try {
+      window.gtag('event', eventName, {
+        ad_id: ad.id,
+        advertiser: ad.advertiser,
+        campaign: ad.campaign,
+        creative_slot: AD_SLOT,
+        destination: ad.href
+      });
+      if (eventName === 'watchdog_ad_impression') window.gtag('event', 'view_promotion', promotionParams(ad));
+      if (eventName === 'watchdog_ad_click') window.gtag('event', 'select_promotion', promotionParams(ad));
+    } catch (_error) {}
+  }
+  function trackCurrentAdIfVisible() {
+    if (!adState.visible || adState.tracked || adState.current < 0) return;
+    adState.tracked = true;
+    trackAd('watchdog_ad_impression', ADS[adState.current]);
+  }
+  function renderAd(index) {
+    var banner = q('.gt-banner');
+    if (!banner || !ADS[index]) return false;
+    var ad = ADS[index];
+    var inner = q('.gt-banner-inner', banner);
+    var image = q('.gt-photo img', banner);
+    var photo = q('.gt-photo', banner);
+    var eyebrow = q('.gt-eyebrow', banner);
+    var headline = q('.gt-headline', banner);
+    var sub = q('.gt-sub', banner);
+    var cta = q('.gt-cta', banner);
+    var disc = q('.gt-disc', banner);
+    var theme = adTheme(ad.theme);
+
+    adState.current = index;
+    adState.tracked = false;
+    banner.dataset.adId = ad.id;
+    banner.dataset.advertiser = ad.advertiser;
+    banner.dataset.campaign = ad.campaign;
+    banner.href = ad.href;
+    banner.setAttribute('aria-label', ad.advertiser + ': ' + ad.headline);
+    if (/^https?:\/\//i.test(ad.href)) {
+      banner.target = '_blank';
+      banner.rel = 'noopener';
+    } else {
+      banner.removeAttribute('target');
+      banner.removeAttribute('rel');
+    }
+
+    if (photo) photo.style.display = '';
+    if (image) {
+      image.src = ad.photo;
+      image.alt = ad.alt;
+      image.style.display = 'block';
+      image.style.objectFit = ad.logo ? 'contain' : 'cover';
+      image.style.background = ad.logo ? '#fff' : 'transparent';
+      image.style.padding = ad.logo ? '10px' : '0';
+      image.style.borderColor = theme.accent;
+    }
+    if (eyebrow) { eyebrow.textContent = ad.eyebrow; eyebrow.style.color = theme.accent; }
+    if (headline) headline.textContent = ad.headline;
+    if (sub) { sub.textContent = ad.sub; sub.style.color = theme.sub; }
+    if (cta) {
+      cta.innerHTML = esc(ad.cta) + ' <i class="fas fa-arrow-right"></i>';
+      cta.style.background = theme.button;
+      cta.style.color = theme.buttonText;
+    }
+    if (disc) disc.textContent = ad.disclosure;
+    if (inner) {
+      inner.style.background = theme.bg;
+      inner.style.boxShadow = '0 20px 50px ' + theme.shadow;
+      inner.style.borderColor = theme.accent + '59';
+    }
+    trackCurrentAdIfVisible();
+    return true;
+  }
+  function shuffleAds() {
+    var order = ADS.map(function (_ad, index) { return index; });
+    for (var i = order.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = order[i]; order[i] = order[j]; order[j] = tmp;
+    }
+    if (adState.current >= 0 && order.length > 1 && order[0] === adState.current) {
+      var swap = order[0]; order[0] = order[1]; order[1] = swap;
+    }
+    adState.queue = order;
+  }
+  function nextAd() {
+    if (!adState.queue.length) shuffleAds();
+    var next = adState.queue.shift();
+    renderAd(next);
+  }
+  function scheduleAdRotation() {
+    clearTimeout(adState.timer);
+    adState.timer = setTimeout(function () {
+      if (document.visibilityState !== 'hidden') nextAd();
+      scheduleAdRotation();
+    }, 20000 + Math.floor(Math.random() * 10001));
+  }
+  function startAdRotation() {
+    var banner = q('.gt-banner');
+    if (!banner || banner.dataset.wdAdRotator === '1') return;
+    banner.dataset.wdAdRotator = '1';
+    banner.addEventListener('click', function () {
+      if (adState.current >= 0) trackAd('watchdog_ad_click', ADS[adState.current]);
+    });
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.target !== banner) return;
+          adState.visible = entry.isIntersecting && entry.intersectionRatio >= .25;
+          trackCurrentAdIfVisible();
+        });
+      }, { threshold: [0, .25, .5, 1] });
+      observer.observe(banner);
+    } else {
+      adState.visible = true;
+    }
+    shuffleAds();
+    nextAd();
+    scheduleAdRotation();
   }
 
   var counties = [
@@ -276,28 +510,37 @@
 
   function upgradeDesktopNav() {
     var nav = q('#wd-nav .wd-nav-in');
-    if (!nav || q('.wd-left', nav)) return;
+    if (!nav) return;
     var menu = q('#wd-menu-trigger', nav);
     var logo = q('.wd-logo', nav);
     var profile = q('#wd-profile-trigger', nav);
-    var left = document.createElement('div');
-    var right = document.createElement('div');
+    var left = q('.wd-left', nav) || document.createElement('div');
+    var right = q('.wd-right', nav) || document.createElement('div');
     left.className = 'wd-left';
     right.className = 'wd-right';
+    left.textContent = '';
+    right.textContent = '';
     if (menu) left.appendChild(menu);
-    left.insertAdjacentHTML('beforeend', '<a href="/property/dashboard">My Properties</a><a href="/property/insights/">Insights</a><a href="/property/town-compare">Compare towns</a>');
-    right.innerHTML = '<a href="/property/pro#pricing">Pricing</a><a href="/property/free/">Free account</a>';
     if (profile) right.appendChild(profile);
-    if (logo) logo.remove();
     nav.textContent = '';
     nav.appendChild(left);
     if (logo) nav.appendChild(logo);
     nav.appendChild(right);
   }
 
+  function fixFaqLinks() {
+    qa('a').forEach(function (link) {
+      var href = link.getAttribute('href') || '';
+      if (href === '/property/faq.html' || href === 'https://njpropertytaxrelief.com/property/faq.html') {
+        link.setAttribute('href', '/property/faq');
+      }
+    });
+  }
+
   function placeSections() {
     document.body.classList.add('wd-consumer-mode');
     upgradeDesktopNav();
+    qa('.wd-insights-intro').forEach(function (node) { node.remove(); });
     var recentSec = ensureRecentSection();
     var insights = q('.ins-grid');
     var insightSection = insights && insights.closest('.section');
@@ -308,6 +551,7 @@
     var directory = ensureDirectory();
     if (faq && gtSection && faq.nextElementSibling !== gtSection) gtSection.insertAdjacentElement('beforebegin', faq);
     if (directory && faq && directory.nextElementSibling !== faq) directory.insertAdjacentElement('afterend', faq);
+    fixFaqLinks();
   }
 
   function handleSignupQuery() {
@@ -336,6 +580,7 @@
     loadRecent();
     loadInsights();
     loadTownDirectory();
+    startAdRotation();
     handleSignupQuery();
     var sb = getClient();
     if (sb && sb.auth && typeof sb.auth.onAuthStateChange === 'function') {
