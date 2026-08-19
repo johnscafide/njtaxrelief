@@ -2,99 +2,26 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 type Row = Record<string, any>;
-
-const url = Deno.env.get("SUPABASE_URL") || "";
-const publishable = Deno.env.get("SUPABASE_ANON_KEY") || "";
-const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
-
-function allowedOrigin(req: Request) {
-  const origin = req.headers.get("origin") || "";
-  try {
-    const host = new URL(origin).hostname.toLowerCase();
-    if (host === "njpropertytaxrelief.com" || host === "www.njpropertytaxrelief.com" || host === "watchdogre.com" || host === "www.watchdogre.com" || host === "localhost" || host === "127.0.0.1" || host.endsWith(".vercel.app")) return origin;
-  } catch {}
-  return "https://njpropertytaxrelief.com";
-}
-
-function headers(req: Request) {
-  return {
-    "Access-Control-Allow-Origin": allowedOrigin(req),
-    "Access-Control-Allow-Headers": "authorization, apikey, content-type",
-    "Access-Control-Allow-Methods": "GET,POST,OPTIONS",
-    "Content-Type": "application/json",
-    "Cache-Control": "no-store",
-    "Vary": "Origin",
-  };
-}
-
-function json(req: Request, status: number, body: unknown) {
-  return new Response(JSON.stringify(body), { status, headers: headers(req) });
-}
-
-function countBy(rows: Row[], key: string) {
-  const out: Record<string, number> = {};
-  for (const row of rows) {
-    const value = String(row?.[key] || "unknown");
-    out[value] = (out[value] || 0) + 1;
-  }
-  return out;
-}
-
-Deno.serve(async (req: Request) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: headers(req) });
-  if (req.method !== "GET" && req.method !== "POST") return json(req, 405, { error: "Method not allowed" });
-  if (!url || !publishable || !serviceKey) return json(req, 503, { error: "Analytics report configuration incomplete" });
-
-  const auth = req.headers.get("authorization") || "";
-  if (!auth.startsWith("Bearer ")) return json(req, 401, { error: "Sign in required" });
-
-  const userClient = createClient(url, publishable, {
-    global: { headers: { Authorization: auth } },
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
-  const user = await userClient.auth.getUser();
-  if (user.error || !user.data.user) return json(req, 401, { error: "Sign in required" });
-  const developer = await userClient.rpc("is_watchdog_developer");
-  if (developer.error || developer.data !== true) return json(req, 403, { error: "Developer access required" });
-
-  const admin = createClient(url, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
-  const start90 = new Date(Date.now() - 90 * 86400000).toISOString().slice(0, 10);
-  const start30 = new Date(Date.now() - 30 * 86400000).toISOString();
-
-  const [funnel, tools, acquisition, retention, subscriptions, billingEvents, totalEvents] = await Promise.all([
-    admin.from("analytics_daily_funnel").select("day,visitors,activated_visitors,upgrade_intent,checkout_starts,paid_conversions").gte("day", start90).order("day", { ascending: false }).limit(90),
-    admin.from("analytics_tool_usage_daily").select("day,tool,event_name,events,visitors").gte("day", start90).order("day", { ascending: false }).limit(500),
-    admin.from("analytics_acquisition_daily").select("day,source,medium,campaign,visitors,activated,checkout_starts").gte("day", start90).order("day", { ascending: false }).limit(500),
-    admin.from("analytics_weekly_retention").select("cohort_week,week_number,retained_visitors").gte("cohort_week", start90).order("cohort_week", { ascending: false }).limit(500),
-    admin.from("account_entitlements").select("plan_tier,billing_tier,billing_interval,subscription_status,provider,updated_at").in("subscription_status", ["active", "trialing", "past_due", "paused"]),
-    admin.from("access_audit_log").select("event_type,required_plan,created_at").like("event_type", "billing.%").gte("created_at", start30).order("created_at", { ascending: false }).limit(1000),
-    admin.from("watchdog_product_events").select("id", { count: "exact", head: true }),
-  ]);
-
-  for (const result of [funnel, tools, acquisition, retention, subscriptions, billingEvents, totalEvents]) {
-    if (result.error) return json(req, 500, { error: "Could not load one or more analytics aggregates" });
-  }
-
-  const active = subscriptions.data || [];
-  const billing = billingEvents.data || [];
-  const latestDay = (funnel.data || [])[0] || null;
-
-  return json(req, 200, {
-    ok: true,
-    generated_at: new Date().toISOString(),
-    privacy: "aggregate_product_analytics_only",
-    summary: {
-      total_product_events: totalEvents.count || 0,
-      latest_day: latestDay,
-      active_subscription_count: active.length,
-      active_by_plan: countBy(active, "plan_tier"),
-      active_by_provider: countBy(active, "provider"),
-      billing_lifecycle_events_30d: billing.length,
-      billing_events_by_type_30d: countBy(billing, "event_type"),
-    },
-    funnel: funnel.data || [],
-    tool_usage: tools.data || [],
-    acquisition: acquisition.data || [],
-    retention: retention.data || [],
-  });
+const url=Deno.env.get("SUPABASE_URL")||"",publishable=Deno.env.get("SUPABASE_ANON_KEY")||"",serviceKey=Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")||"";
+function allowedOrigin(req:Request){const origin=req.headers.get("origin")||"";try{const host=new URL(origin).hostname.toLowerCase();if(host==="njpropertytaxrelief.com"||host==="www.njpropertytaxrelief.com"||host==="watchdogre.com"||host==="www.watchdogre.com"||host==="localhost"||host==="127.0.0.1"||host.endsWith(".vercel.app"))return origin}catch{}return "https://njpropertytaxrelief.com"}
+function headers(req:Request){return{"Access-Control-Allow-Origin":allowedOrigin(req),"Access-Control-Allow-Headers":"authorization, apikey, content-type","Access-Control-Allow-Methods":"GET,POST,OPTIONS","Content-Type":"application/json","Cache-Control":"no-store","Vary":"Origin"}}
+function json(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:headers(req)})}
+function countBy(rows:Row[],key:string){const out:Record<string,number>={};for(const row of rows){const value=String(row?.[key]||"unknown");out[value]=(out[value]||0)+1}return out}
+Deno.serve(async(req:Request)=>{
+ if(req.method==="OPTIONS")return new Response("ok",{headers:headers(req)});if(req.method!=="GET"&&req.method!=="POST")return json(req,405,{error:"Method not allowed"});if(!url||!publishable||!serviceKey)return json(req,503,{error:"Analytics report configuration incomplete"});
+ const auth=req.headers.get("authorization")||"";if(!auth.startsWith("Bearer "))return json(req,401,{error:"Sign in required"});
+ const userClient=createClient(url,publishable,{global:{headers:{Authorization:auth}},auth:{persistSession:false,autoRefreshToken:false}});const user=await userClient.auth.getUser();if(user.error||!user.data.user)return json(req,401,{error:"Sign in required"});const developer=await userClient.rpc("is_watchdog_developer");if(developer.error||developer.data!==true)return json(req,403,{error:"Developer access required"});
+ const admin=createClient(url,serviceKey,{auth:{persistSession:false,autoRefreshToken:false}}),start90=new Date(Date.now()-90*86400000).toISOString().slice(0,10),start30=new Date(Date.now()-30*86400000).toISOString();
+ const [funnel,tools,acquisition,retention,intelligenceFunnel,intelligenceInteractions,subscriptions,billingEvents,totalEvents]=await Promise.all([
+  admin.from("analytics_daily_funnel").select("day,visitors,activated_visitors,upgrade_intent,checkout_starts,paid_conversions").gte("day",start90).order("day",{ascending:false}).limit(90),
+  admin.from("analytics_tool_usage_daily").select("day,tool,event_name,events,visitors").gte("day",start90).order("day",{ascending:false}).limit(500),
+  admin.from("analytics_acquisition_daily").select("day,source,medium,campaign,visitors,activated,checkout_starts").gte("day",start90).order("day",{ascending:false}).limit(500),
+  admin.from("analytics_weekly_retention").select("cohort_week,week_number,retained_visitors").gte("cohort_week",start90).order("cohort_week",{ascending:false}).limit(500),
+  admin.from("analytics_intelligence_funnel_daily").select("day,intelligence_reached,reasoning_inspectors,action_starters,action_completers,intent_question_viewers,intent_question_answerers,today_triagers,trust_evidence_openers,intelligence_exposures,reasoning_inspections,completed_actions").gte("day",start90).order("day",{ascending:false}).limit(90),
+  admin.from("analytics_intelligence_interactions_daily").select("day,event_name,surface,action,status,events,visitors,sessions").gte("day",start90).order("day",{ascending:false}).limit(1000),
+  admin.from("account_entitlements").select("plan_tier,billing_tier,billing_interval,subscription_status,provider,updated_at").in("subscription_status",["active","trialing","past_due","paused"]),
+  admin.from("access_audit_log").select("event_type,required_plan,created_at").like("event_type","billing.%").gte("created_at",start30).order("created_at",{ascending:false}).limit(1000),admin.from("watchdog_product_events").select("id",{count:"exact",head:true})]);
+ for(const result of [funnel,tools,acquisition,retention,intelligenceFunnel,intelligenceInteractions,subscriptions,billingEvents,totalEvents])if(result.error)return json(req,500,{error:"Could not load one or more analytics aggregates"});
+ const active=subscriptions.data||[],billing=billingEvents.data||[],latestDay=(funnel.data||[])[0]||null;
+ return json(req,200,{ok:true,generated_at:new Date().toISOString(),privacy:"aggregate_product_analytics_only",summary:{total_product_events:totalEvents.count||0,latest_day:latestDay,active_subscription_count:active.length,active_by_plan:countBy(active,"plan_tier"),active_by_provider:countBy(active,"provider"),billing_lifecycle_events_30d:billing.length,billing_events_by_type_30d:countBy(billing,"event_type")},funnel:funnel.data||[],tool_usage:tools.data||[],acquisition:acquisition.data||[],retention:retention.data||[],intelligence_funnel:intelligenceFunnel.data||[],intelligence_interactions:intelligenceInteractions.data||[]});
 });
