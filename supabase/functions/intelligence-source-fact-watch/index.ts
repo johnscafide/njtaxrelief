@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const VERSION="watchdog-source-fact-watch-v1";
+const VERSION="watchdog-source-fact-watch-v2";
 const NJ_PARCELS="https://njogis-newjersey.opendata.arcgis.com/datasets/3e9f5e68c12f47e3b3dbd58201e051b2_0/about";
 const NJ_PARCELS_QUERY="https://services1.arcgis.com/Hrko7wzJ9YVqLO5y/arcgis/rest/services/Parcels_and_MODIV/FeatureServer/0/query";
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
@@ -21,7 +21,9 @@ type O=Record<string,any>;
 const clean=(v:unknown,n=240)=>String(v??"").replace(/[<>]/g,"").trim().slice(0,n);
 const plan=(v:unknown)=>{let p=String(v||"standard").toLowerCase().replace(/\+/g,"_plus").replace(/[^a-z_]/g,"");if(p==="free")p="standard";return PLAN_RANK[p]===undefined?"standard":p};
 const json=(req:Request,status:number,body:unknown)=>new Response(JSON.stringify(body),{status,headers:{"Content-Type":"application/json","Cache-Control":"no-store"}});
-async function sha(v:unknown){const bytes=new TextEncoder().encode(JSON.stringify(v));const digest=await crypto.subtle.digest("SHA-256",bytes);return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function shaBytes(text:string){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(text));return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,"0")).join("")}
+async function shaText(v:unknown){return shaBytes(String(v??""))}
+async function shaValue(v:unknown){return shaBytes(JSON.stringify(v))}
 function value(field:string,raw:unknown){
   if(raw===null||raw===undefined||raw==="")return null;
   if(["LAND_VAL","IMPRVT_VAL","NET_VALUE","LAST_YR_TX","SALE_PRICE"].includes(field)){const n=Number(raw);return Number.isFinite(n)?Number(n.toFixed(2)):null}
@@ -60,7 +62,7 @@ Deno.serve(async(req:Request)=>{
   const admin=createClient(url,secret,{auth:{persistSession:false,autoRefreshToken:false}});
   const token=clean(req.headers.get("x-watchdog-watch-token"),200);if(!token)return json(req,401,{error:"Internal watch token required"});
   const control=await admin.from("intelligence_source_fact_watch_control").select("enabled,token_hash,batch_limit").eq("id",true).maybeSingle();if(control.error||!control.data)return json(req,503,{error:"Watch control unavailable"});
-  if(await sha(token)!==String(control.data.token_hash||""))return json(req,403,{error:"Invalid internal watch token"});
+  if(await shaText(token)!==String(control.data.token_hash||""))return json(req,403,{error:"Invalid internal watch token"});
   if(control.data.enabled!==true)return json(req,202,{ok:true,status:"disabled",version:VERSION});
 
   let body:O={};try{body=await req.json()}catch{}
@@ -85,7 +87,7 @@ Deno.serve(async(req:Request)=>{
     const now=new Date().toISOString(),stateUpserts:O[]=[],candidateUpserts:O[]=[];let baselines=0,unchanged=0,changed=0;
 
     for(const savedRow of savedRows){const row=attrs.get(savedRow.pams_pin);if(!row)continue;
-      for(const marker of MARKERS){const next=value(marker.field,row[marker.field]);if(next===null)continue;const nextHash=await sha(next),key=`${savedRow.user_id}|${savedRow.pams_pin}|${marker.id}`,prior=stateMap.get(key);
+      for(const marker of MARKERS){const next=value(marker.field,row[marker.field]);if(next===null)continue;const nextHash=await shaValue(next),key=`${savedRow.user_id}|${savedRow.pams_pin}|${marker.id}`,prior=stateMap.get(key);
         if(!prior){baselines++;stateUpserts.push({user_id:savedRow.user_id,pams_pin:savedRow.pams_pin,marker_id:marker.id,value_json:next,value_hash:nextHash,source_id:"nj-parcels-modiv",source_ref:NJ_PARCELS,first_observed_at:now,last_changed_at:null,checked_at:now,updated_at:now});continue}
         if(String(prior.value_hash)===nextHash){unchanged++;stateUpserts.push({user_id:savedRow.user_id,pams_pin:savedRow.pams_pin,marker_id:marker.id,value_json:next,value_hash:nextHash,source_id:"nj-parcels-modiv",source_ref:NJ_PARCELS,first_observed_at:prior.first_observed_at,last_changed_at:prior.last_changed_at,checked_at:now,updated_at:now});continue}
         changed++;const candidateKey=`watch:${savedRow.pams_pin}:${marker.id}:${String(prior.value_hash).slice(0,16)}:${nextHash.slice(0,16)}`;
