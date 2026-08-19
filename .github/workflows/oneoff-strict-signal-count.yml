@@ -1,0 +1,68 @@
+name: One-off strict signal-count patch
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-strict-signal-count.yml'
+
+permissions:
+  contents: write
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_PROJECT_REF: uvkvaxljhhngydvlrzom
+
+jobs:
+  patch-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Rebase onto current main
+        run: git pull --rebase origin main
+      - name: Patch strict signal-count behavior safely
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('supabase/functions/workbench-derived/index.ts')
+          s = p.read_text()
+          old_engine = "const ENGINE_VERSION = 'watchdog-derived-v14-source-alias';"
+          new_engine = "const ENGINE_VERSION = 'watchdog-derived-v15-strict-signal-count';"
+          old = "else if (def.operation === 'signal_count' || def.operation === 'signal_density') { const deps: any[] = def.dependencies || []; if (deps.some((dep) => checked(dep) || present(value(dep)))) { const active = deps.filter((dep) => dep === cfg.flood_dep ? floodBand(value(dep)) > 0 : (truth(value(dep)) || (num(value(dep)) || 0) > 0)).length; v = def.operation === 'signal_count' ? active : Math.round(active / deps.length * 100); } }"
+          new = "else if (def.operation === 'signal_count' || def.operation === 'signal_density') { const deps: any[] = def.dependencies || [], readiness = deps.map((dep) => checked(dep) || present(value(dep))), ready = cfg.require_all ? (deps.length > 0 && readiness.every(Boolean)) : readiness.some(Boolean); if (ready) { const active = deps.filter((dep) => dep === cfg.flood_dep ? floodBand(value(dep)) > 0 : (truth(value(dep)) || (num(value(dep)) || 0) > 0)).length; v = def.operation === 'signal_count' ? active : Math.round(active / deps.length * 100); } }"
+          if old_engine in s:
+              if s.count(old_engine) != 1:
+                  raise SystemExit(f'Expected one engine string, found {s.count(old_engine)}')
+              s = s.replace(old_engine, new_engine, 1)
+          elif new_engine not in s:
+              raise SystemExit('Expected engine string not found')
+          if old in s:
+              if s.count(old) != 1:
+                  raise SystemExit(f'Expected one signal-count branch, found {s.count(old)}')
+              s = s.replace(old, new, 1)
+          elif new not in s:
+              raise SystemExit('Neither original nor already-patched signal-count branch was found')
+          p.write_text(s)
+          PY
+      - name: Commit exact patch if needed
+        run: |
+          if git diff --quiet -- supabase/functions/workbench-derived/index.ts; then
+            echo 'Git source already patched.'
+          else
+            git config user.name 'Watchdog Automation'
+            git config user.email 'actions@users.noreply.github.com'
+            git add supabase/functions/workbench-derived/index.ts
+            git commit -m 'Require complete inputs for strict signal counts'
+            git push origin HEAD:main
+          fi
+      - name: Verify production deploy credential
+        run: |
+          test -n "$SUPABASE_ACCESS_TOKEN"
+          test "$SUPABASE_PROJECT_REF" = "uvkvaxljhhngydvlrzom"
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Deploy the exact committed derived engine to production
+        run: supabase functions deploy workbench-derived --project-ref "$SUPABASE_PROJECT_REF"
