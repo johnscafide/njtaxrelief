@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T21:38:23.957Z",
+ "generated_at": "2026-08-19T21:39:54.886Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,9 +27,9 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 450,
+   "live": 449,
    "partial": 4,
-   "unavailable": 10,
+   "unavailable": 11,
    "planned": 270
   },
   "retired_phase5": 0
@@ -14753,7 +14753,7 @@
    "field": "pilot_project_assessment",
    "professional_reason": "Published PILOT financial agreements data for professional review; verify the official record before reliance.",
    "source_field": "pilot_project_assessment",
-   "provider_status": "live",
+   "provider_status": "unavailable",
    "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
