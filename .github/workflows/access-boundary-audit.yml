@@ -68,6 +68,8 @@ jobs:
         run: node property/tests/intelligence-source-fact-watch-contract.mjs
       - name: Verify Semantic Context derived-marker routing
         run: node property/tests/semantic-derived-routing-contract.mjs
+      - name: Verify spatial evidence integrity
+        run: node property/tests/spatial-evidence-integrity-contract.mjs
       - name: Verify source-fact candidate trigger fix
         run: node property/tests/material-change-candidate-trigger-contract.mjs
       - name: Verify Intelligence retention integration
