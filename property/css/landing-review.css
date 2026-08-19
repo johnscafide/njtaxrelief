@@ -1,12 +1,12 @@
 /* NJW-218 — consumer-first /property landing. Stable asset paths only. */
 body.wd-consumer-mode{background:#fff;color:#172234}
-body.wd-consumer-mode .lp-proof-strip,
-body.wd-consumer-mode .section:has(.lp-tools),
-body.wd-consumer-mode .section:has(.pl-brokerband),
-body.wd-consumer-mode .section:has(.lp-paths),
-body.wd-consumer-mode .section:has(.lp-steps),
-body.wd-consumer-mode .section:has(.hv-grid){display:none!important}
-body.wd-consumer-mode #wd-recent-landing{display:none!important}
+.lp-proof-strip,
+.section:has(.lp-tools),
+.section:has(.pl-brokerband),
+.section:has(.lp-paths),
+.section:has(.lp-steps),
+.section:has(.hv-grid),
+#wd-recent-landing{display:none!important}
 body.hood-on .wd-consumer-recents,
 body.hood-on #wd-seo-directory,
 body.hood-on .landing-faq,
