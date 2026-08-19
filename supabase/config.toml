@@ -165,6 +165,17 @@ verify_jwt = false
 [functions.intelligence-closing-v5-holdout-seed]
 verify_jwt = false
 
+# Internal, manual-only aggregate Closing Review v6/v7 structural shadows.
+# Gateway JWT verification is disabled because both functions validate the same
+# environment-local hashed shadow token before service-role access. They exclude
+# prior calibration pins, persist no property-level results, use no human labels,
+# and expose no promotion path.
+[functions.intelligence-closing-v6-structural-shadow]
+verify_jwt = false
+
+[functions.intelligence-closing-v7-structural-shadow]
+verify_jwt = false
+
 # Internal six-hour saved-property source-fact watcher. Gateway JWT verification
 # is disabled because the worker authenticates an environment-local Vault token
 # before any data access. State/run tables remain service-role only.
