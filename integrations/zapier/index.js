@@ -8,6 +8,8 @@ const intelligenceFindingCreated = require('./triggers/intelligence-finding-crea
 const findProperty = require('./searches/find-property');
 const getPropertySnapshot = require('./searches/get-property-snapshot');
 const addToWatchlist = require('./creates/add-to-watchlist');
+const removeFromWatchlist = require('./creates/remove-from-watchlist');
+const runIntelligenceAnalysis = require('./creates/run-intelligence-analysis');
 const attachCrmContext = require('./creates/attach-crm-context');
 
 module.exports = {
@@ -27,6 +29,8 @@ module.exports = {
   },
   creates: {
     [addToWatchlist.key]: addToWatchlist,
+    [removeFromWatchlist.key]: removeFromWatchlist,
+    [runIntelligenceAnalysis.key]: runIntelligenceAnalysis,
     [attachCrmContext.key]: attachCrmContext,
   },
 };
