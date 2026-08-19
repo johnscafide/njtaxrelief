@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const adapter=read('js/dashboard/home/watchdog-intent-analysis-adapter.js');
+const ready=read('js/dashboard/home/watchdog-intent-ready-bridge.js');
+const clear=read('js/dashboard/home/watchdog-intent-clear-bridge.js');
+const loader=read('js/dashboard/home/watchdog-analyst-intel-loader.js');
+const css=read('css/home/watchdog-intent-analysis.css');
+const must=(ok,msg)=>{if(!ok)throw new Error(msg)};
+must(adapter.includes("buyer_research")&&adapter.includes("listing_farm")&&adapter.includes("listing_prep"),'real-estate jobs must change Analyst focus');
+must(adapter.includes('Seller motivation, willingness to transact and private life circumstances are never inferred.'),'farm lens must prohibit seller-intent inference');
+must(adapter.includes('ROI, rent, rehab cost and exit value are not invented'),'investment lens must prohibit invented deal economics');
+must(adapter.includes('watchdog:intent-updated')&&adapter.includes('watchdog:intent-ready'),'adapter must consume new and rehydrated confirmed intent');
+must(ready.includes("intelligence_intent_states")&&ready.includes("active_job_confidence")&&ready.includes("watchdog:intent-ready"),'reload bridge must restore confirmed Context Graph state');
+must(clear.includes("wd-intent-context.is-question")&&clear.includes("watchdog:intent-cleared"),'context correction must clear stale job analysis');
+must(loader.includes('watchdog-intent-analysis-adapter.js')&&loader.includes('watchdog-intent-ready-bridge.js')&&loader.includes('watchdog-intent-clear-bridge.js'),'loader must wire the full adaptation lifecycle');
+must(loader.includes('watchdog-intent-analysis.css')&&css.includes('.wd-job-analysis'),'job-aware analysis styling must load');
+must(!/\.(?:js|css)\?v=/.test(loader),'versioned JS/CSS URLs are forbidden');
+console.log('Home Intent Analysis Adapter contract passed');
