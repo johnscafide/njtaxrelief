@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Brand Center | Watchdog</title>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="bingbot" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#f5f7fb">
+<meta name="description" content="Developer-only Watchdog branding, design-system, content, and implementation standards.">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/dashboard.css">
+<link rel="stylesheet" href="/property/branding/brand-center.css">
+</head>
+<body class="bc-page" data-sidebar-page="branding" data-access-require="developer">
+<main>
+  <div class="db-shell">
+    <div id="property-side-menu"></div>
+    <div class="db-workspace bc-workspace">
+      <header class="bc-topbar">
+        <div class="bc-top-left">
+          <a class="bc-brand" href="/property/dashboard" aria-label="Watchdog dashboard">
+            <span class="bc-brand-mark"><i class="fas fa-dog"></i></span>
+            <span class="bc-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span>
+          </a>
+          <span class="bc-divider" aria-hidden="true"></span>
+          <div class="bc-title"><b>Brand Center</b><span>Identity, product design, content &amp; implementation</span></div>
+        </div>
+        <div class="bc-top-right">
+          <span class="bc-private"><i class="fas fa-lock"></i> Developer protected</span>
+          <a class="bc-top-link" href="/property/dashboard"><i class="fas fa-arrow-left"></i><span>Dashboard</span></a>
+        </div>
+      </header>
+
+      <section id="bc-app" hidden>
+        <div class="bc-main">
+          <section class="bc-hero">
+            <div class="bc-hero-main">
+              <span class="bc-kicker"><i class="fas fa-swatchbook"></i> WATCHDOG BRAND SYSTEM</span>
+              <h1>One source of truth for <span>how Watchdog looks, sounds and behaves.</span></h1>
+              <p>This is the internal handoff for designers, developers, agencies, contractors and AI tools. Use it to keep every Watchdog surface consistent across product UI, public pages, charts, marketing, editorial content and future platforms.</p>
+              <div class="bc-hero-actions">
+                <a class="bc-btn primary" href="#implementation"><i class="fas fa-code"></i> Start building</a>
+                <a class="bc-btn" href="/property/branding/brand-system.json"><i class="fas fa-brackets-curly"></i> Machine spec</a>
+                <a class="bc-btn" href="/property/branding/LLM-BRAND-GUIDE.md"><i class="fas fa-robot"></i> LLM guide</a>
+              </div>
+            </div>
+            <aside class="bc-hero-side">
+              <div class="bc-status-row"><div><b>System status</b><span>Authoritative internal standard</span></div><span class="bc-status-dot" aria-hidden="true"></span></div>
+              <div class="bc-version"><small>Brand system version</small><strong id="bc-version">v1.0.0</strong><span>Updated <span id="bc-updated">2026-08-19</span></span></div>
+              <div class="bc-machine-state" id="bc-machine-state"><i class="fas fa-spinner fa-spin"></i> Loading machine spec</div>
+              <p class="bc-side-note">When an old page conflicts with this system, do not assume the old page wins. Watchdog has several generations of CSS. Use the authority order documented here.</p>
+            </aside>
+          </section>
+
+          <section class="bc-stats" aria-label="Brand system summary">
+            <article class="bc-stat"><small>Visual core</small><b>2 primary fonts</b><span>Plus Jakarta Sans + Inter for new product work.</span></article>
+            <article class="bc-stat"><small>Spacing</small><b>4px base system</b><span>Consistent spacing from compact controls to large layouts.</span></article>
+            <article class="bc-stat"><small>Access</small><b>Developer only</b><span>Route uses the existing server-verified Watchdog developer gate.</span></article>
+            <article class="bc-stat"><small>AI handoff</small><b>Machine readable</b><span>JSON + Markdown rules for LLMs, coding agents and external teams.</span></article>
+          </section>
+
+          <div class="bc-layout">
+            <nav class="bc-localnav" aria-label="Brand center sections">
+              <span class="bc-localnav-label">FOUNDATION</span>
+              <a href="#foundation"><i class="fas fa-compass"></i> Brand foundation</a>
+              <a href="#logo"><i class="fas fa-dog"></i> Logo &amp; identity</a>
+              <a href="#color"><i class="fas fa-palette"></i> Color</a>
+              <a href="#type"><i class="fas fa-font"></i> Typography</a>
+              <span class="bc-localnav-label">SYSTEM</span>
+              <a href="#spacing"><i class="fas fa-ruler-combined"></i> Spacing &amp; shape</a>
+              <a href="#components"><i class="fas fa-cubes"></i> Components</a>
+              <a href="#responsive"><i class="fas fa-mobile-screen"></i> Responsive</a>
+              <a href="#charts"><i class="fas fa-chart-line"></i> Data visualization</a>
+              <a href="#motion"><i class="fas fa-wand-magic-sparkles"></i> Motion</a>
+              <span class="bc-localnav-label">EXPRESSION</span>
+              <a href="#imagery"><i class="fas fa-image"></i> Imagery &amp; icons</a>
+              <a href="#voice"><i class="fas fa-pen-nib"></i> Voice &amp; copy</a>
+              <a href="#accessibility"><i class="fas fa-universal-access"></i> Accessibility</a>
+              <span class="bc-localnav-label">HANDOFF</span>
+              <a href="#implementation"><i class="fas fa-code"></i> Implementation</a>
+              <a href="#llm"><i class="fas fa-robot"></i> LLM instructions</a>
+              <a href="#assets"><i class="fas fa-folder-open"></i> Asset inventory</a>
+              <a href="#governance"><i class="fas fa-shield"></i> Governance</a>
+            </nav>
+
+            <div class="bc-content">
+              <section class="bc-panel" id="foundation" data-search="identity strategy positioning promise product principles agency handoff">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">01 · FOUNDATION</span><h2>What the brand is supposed to feel like</h2><p>Agencies normally begin with positioning, personality and experience principles before they decide how a button looks. These rules are the filter for every visual and content decision.</p></div><span class="bc-panel-tag">Strategy</span></div>
+                <div class="bc-grid four">
+                  <article class="bc-card"><h3>Precise</h3><p>Property data, dates, sources, definitions and limitations should be explicit. Accuracy matters more than cleverness.</p></article>
+                  <article class="bc-card"><h3>Calm</h3><p>Dense information should feel organized, not alarming. Use whitespace and hierarchy rather than visual noise.</p></article>
+                  <article class="bc-card"><h3>Useful</h3><p>Show the useful thing before the sales pitch. The product earns trust by helping first.</p></article>
+                  <article class="bc-card"><h3>Human</h3><p>Homeowners should understand the language while professionals still see enough depth to trust the analysis.</p></article>
+                </div>
+                <div class="bc-grid two" style="margin-top:14px">
+                  <article class="bc-card"><span class="bc-eyebrow">BRAND PROMISE</span><h3>Turn public property data into clear, useful decisions.</h3><p>Watchdog is not simply a database. The value is organizing facts into context people can act on.</p></article>
+                  <article class="bc-card"><span class="bc-eyebrow">EXPERIENCE RULE</span><h3>Consumer simplicity. Professional depth.</h3><p>Use progressive disclosure. A homeowner should never feel buried, while a Pro or Pro+ user should be able to drill into evidence and detail.</p></article>
+                </div>
+                <div class="bc-do-dont" style="margin-top:14px">
+                  <div class="bc-do"><h3><i class="fas fa-circle-check"></i> Watchdog should</h3><ul class="bc-rule-list"><li><i class="fas fa-check"></i><span>Feel like a modern property-intelligence product, not a lead form wrapped in marketing.</span></li><li><i class="fas fa-check"></i><span>Let data and useful actions dominate the first screen.</span></li><li><i class="fas fa-check"></i><span>Use quiet, repeatable UI patterns that scale to hundreds of data points.</span></li></ul></div>
+                  <div class="bc-dont"><h3><i class="fas fa-circle-xmark"></i> Watchdog should not</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>Look like a generic AI SaaS template with glowing gradients and ornamental cards.</span></li><li><i class="fas fa-xmark"></i><span>Overstate confidence where data is stale, inferred or incomplete.</span></li><li><i class="fas fa-xmark"></i><span>Use hype as a substitute for product value.</span></li></ul></div>
+                </div>
+              </section>
+
+              <section class="bc-panel" id="logo" data-search="logo wordmark dog mark safe area identity favicon">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">02 · IDENTITY</span><h2>Logo and brand lockup</h2><p>The current product identity is the dog mark plus the Watchdog wordmark. Until a dedicated vector master is formally approved, the product lockup below is the implementation reference.</p></div><span class="bc-panel-tag">Identity</span></div>
+                <div class="bc-grid two">
+                  <div class="bc-logo-stage"><div class="bc-logo-lockup"><span class="bc-logo-mark"><i class="fas fa-dog"></i></span><span class="bc-logo-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></div></div>
+                  <article class="bc-card"><h3>Construction</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-ruler"></i><span>Standard product mark: 42 × 42px, 12px radius.</span></li><li><i class="fas fa-fill-drip"></i><span>Gradient: <code>#183b84</code> → <code>#2f6df6</code>.</span></li><li><i class="fas fa-font"></i><span>Wordmark: Inter 800, about 21px in the desktop app shell.</span></li><li><i class="fas fa-text-height"></i><span>Descriptor: 8px uppercase with wide tracking.</span></li><li><i class="fas fa-expand"></i><span>Keep at least 25% of the mark width as clear space around the lockup.</span></li></ul></article>
+                </div>
+                <div class="bc-do-dont" style="margin-top:14px"><div class="bc-do"><h3><i class="fas fa-circle-check"></i> Use</h3><ul class="bc-rule-list"><li><i class="fas fa-check"></i><span>The dog mark for Watchdog identity and established Agent Intel brand contexts.</span></li><li><i class="fas fa-check"></i><span>White or very light neutral surfaces around the primary lockup whenever possible.</span></li></ul></div><div class="bc-dont"><h3><i class="fas fa-circle-xmark"></i> Avoid</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>Stretching, skewing, rotating, outlining or applying unrelated effects.</span></li><li><i class="fas fa-xmark"></i><span>Replacing the dog with a generic house icon when representing Watchdog itself.</span></li></ul></div></div>
+              </section>
+
+              <section class="bc-panel" id="color" data-search="colors palette navy blue success warning danger neutral background surface">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">03 · COLOR</span><h2>Canonical product palette</h2><p>Watchdog blue carries action and active state. Navy creates authority. Neutrals do most of the work. Semantic colors mean something and are not decoration.</p></div><span class="bc-panel-tag">Tokens</span></div>
+                <div class="bc-swatches">
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#111d38"></div><div class="bc-swatch-meta"><b>Ink</b><code>#111d38</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#2f6df6"></div><div class="bc-swatch-meta"><b>Primary</b><code>#2f6df6</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#183b84"></div><div class="bc-swatch-meta"><b>Primary dark</b><code>#183b84</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#e9f0ff"></div><div class="bc-swatch-meta"><b>Primary soft</b><code>#e9f0ff</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#f5f7fb"></div><div class="bc-swatch-meta"><b>Background</b><code>#f5f7fb</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#fff"></div><div class="bc-swatch-meta"><b>Surface</b><code>#ffffff</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#31435c"></div><div class="bc-swatch-meta"><b>Text</b><code>#31435c</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#748198"></div><div class="bc-swatch-meta"><b>Muted</b><code>#748198</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#e2e7ef"></div><div class="bc-swatch-meta"><b>Line</b><code>#e2e7ef</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#18a966"></div><div class="bc-swatch-meta"><b>Success</b><code>#18a966</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#f5a20a"></div><div class="bc-swatch-meta"><b>Warning</b><code>#f5a20a</code></div></div>
+                  <div class="bc-swatch"><div class="bc-swatch-color" style="background:#e34f5f"></div><div class="bc-swatch-meta"><b>Danger</b><code>#e34f5f</code></div></div>
+                </div>
+                <p class="bc-footnote">Older public pages contain a navy/gold language. Treat that as a maintained legacy context, not permission to introduce gold into new product UI without a documented reason.</p>
+              </section>
+
+              <section class="bc-panel" id="type" data-search="type typography fonts inter plus jakarta source sans playfair heading body scale">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">04 · TYPOGRAPHY</span><h2>A two-font product system</h2><p>New product work uses Plus Jakarta Sans for display and Inter for body/UI. Existing editorial surfaces may keep their established exceptions until they are redesigned.</p></div><span class="bc-panel-tag">Type</span></div>
+                <div class="bc-type-stack">
+                  <div class="bc-type-sample"><div class="label">PLUS JAKARTA SANS · DISPLAY</div><div class="bc-type-display">Property intelligence without the noise.</div><div class="bc-type-note">Use for major headings, section titles and high-value display numbers.</div></div>
+                  <div class="bc-type-sample"><div class="label">INTER · PRODUCT UI / BODY</div><div class="bc-type-ui">Watchdog organizes property records, assessments, tax signals and professional tools into a clear workspace that is easy to scan.</div><div class="bc-type-note">Use for controls, labels, tables, body copy, navigation and dense product information.</div></div>
+                  <div class="bc-type-sample"><div class="label">EDITORIAL EXCEPTION</div><div class="bc-type-editorial">Editorial serif is an accent, not an app font.</div><div class="bc-type-note">Existing public content may use Playfair Display or Source Sans 3. Do not introduce serif display type into dashboards or data tools.</div></div>
+                </div>
+              </section>
+
+              <section class="bc-panel" id="spacing" data-search="spacing grid radius shadows shape 4px 8px 12px layout">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">05 · SPACING &amp; SHAPE</span><h2>Repeatable geometry</h2><p>A small spacing and radius vocabulary makes separate tools feel like one product. Use the scale before inventing one-off dimensions.</p></div><span class="bc-panel-tag">Layout</span></div>
+                <div class="bc-grid two">
+                  <article class="bc-card"><h3>Spacing scale</h3><div class="bc-token-row"><b>4 / 8px</b><span>Micro gaps, icon spacing</span><div class="bc-token-demo"><div class="bc-space-box" style="width:32px"></div></div></div><div class="bc-token-row"><b>12 / 16px</b><span>Controls, compact cards</span><div class="bc-token-demo"><div class="bc-space-box" style="width:64px"></div></div></div><div class="bc-token-row"><b>20 / 24px</b><span>Card padding, group spacing</span><div class="bc-token-demo"><div class="bc-space-box" style="width:96px"></div></div></div><div class="bc-token-row"><b>32 / 40px</b><span>Page sections and desktop gutters</span><div class="bc-token-demo"><div class="bc-space-box" style="width:120px"></div></div></div><div class="bc-token-row"><b>48 / 64px</b><span>Major editorial or landing-page rhythm</span><div class="bc-token-demo"><div class="bc-space-box" style="width:150px"></div></div></div></article>
+                  <article class="bc-card"><h3>Radius system</h3><div class="bc-token-row"><b>8px</b><span>Compact surfaces</span><div class="bc-token-demo"><div class="bc-radius-demo" style="border-radius:8px"></div></div></div><div class="bc-token-row"><b>10px</b><span>Buttons and inputs</span><div class="bc-token-demo"><div class="bc-radius-demo" style="border-radius:10px"></div></div></div><div class="bc-token-row"><b>12px</b><span>Standard cards/controls</span><div class="bc-token-demo"><div class="bc-radius-demo" style="border-radius:12px"></div></div></div><div class="bc-token-row"><b>18px</b><span>Large panels and drawers</span><div class="bc-token-demo"><div class="bc-radius-demo" style="border-radius:18px"></div></div></div><div class="bc-token-row"><b>999px</b><span>Status/filter pills only</span><div class="bc-token-demo"><div class="bc-radius-demo" style="border-radius:999px"></div></div></div></article>
+                </div>
+                <p class="bc-footnote">Use subtle shadows: <code>0 8px 24px rgba(40,55,82,.045)</code> for everyday elevation. Large menus/modals can use a stronger elevated shadow. Avoid making every card float.</p>
+              </section>
+
+              <section class="bc-panel" id="components" data-search="components buttons inputs cards chips status forms controls navigation">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">06 · COMPONENTS</span><h2>What the system looks like in practice</h2><p>These are reference behaviors, not a separate component library. Reuse the same visual grammar when building new product surfaces.</p></div><span class="bc-panel-tag">UI kit</span></div>
+                <div class="bc-component-lab">
+                  <div class="bc-lab"><div class="bc-lab-label">BUTTON HIERARCHY</div><div class="bc-actions"><button class="bc-demo-btn primary" type="button">View full report</button><button class="bc-demo-btn" type="button">Save property</button><button class="bc-demo-btn tertiary" type="button">Learn more</button></div></div>
+                  <div class="bc-lab"><div class="bc-lab-label">FORM CONTROL</div><label style="display:grid;gap:7px;font-size:10px;font-weight:700">Property address<input class="bc-demo-input" value="123 Main Street, Haddonfield, NJ" aria-label="Property address example"></label></div>
+                  <div class="bc-lab"><div class="bc-lab-label">STATUS</div><div class="bc-demo-statuses"><span class="bc-chip blue"><i class="fas fa-circle-info"></i> Active</span><span class="bc-chip green"><i class="fas fa-circle-check"></i> Verified</span><span class="bc-chip amber"><i class="fas fa-triangle-exclamation"></i> Review</span><span class="bc-chip red"><i class="fas fa-circle-xmark"></i> Error</span></div></div>
+                  <div class="bc-lab"><div class="bc-lab-label">DATA CARD</div><div class="bc-demo-card"><small>ANNUAL PROPERTY TAX</small><strong>$8,412</strong><p>2025 billed amount · NJ Division of Taxation MOD-IV</p></div></div>
+                </div>
+                <div class="bc-do-dont" style="margin-top:14px"><div class="bc-do"><h3><i class="fas fa-circle-check"></i> Component behavior</h3><ul class="bc-rule-list"><li><i class="fas fa-check"></i><span>One obvious primary action per local context.</span></li><li><i class="fas fa-check"></i><span>Cards represent meaningful grouping, not decoration.</span></li><li><i class="fas fa-check"></i><span>Use icon + text where status meaning matters.</span></li></ul></div><div class="bc-dont"><h3><i class="fas fa-circle-xmark"></i> Avoid UI clutter</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>Nested cards inside cards unless the nesting communicates actual hierarchy.</span></li><li><i class="fas fa-xmark"></i><span>Pills for every button, label and piece of metadata.</span></li><li><i class="fas fa-xmark"></i><span>Thick borders, colored side rails and decorative outlines.</span></li></ul></div></div>
+              </section>
+
+              <section class="bc-panel" id="responsive" data-search="responsive mobile tablet desktop breakpoints touch target 52 sticky navigation">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">07 · RESPONSIVE</span><h2>Mobile is a product mode, not a resize</h2><p>Watchdog should behave like a modern web app on a phone. Reorder by task priority, preserve legibility and prevent sticky UI from covering information.</p></div><span class="bc-panel-tag">Mobile first</span></div>
+                <div class="bc-grid four"><article class="bc-card"><h3>1280px+</h3><p>Wide desktop. Use full multi-column layouts when the content benefits.</p></article><article class="bc-card"><h3>1024px</h3><p>Desktop/tablet transition. Reduce rail widths and optional chrome.</p></article><article class="bc-card"><h3>760px</h3><p>Primary mobile breakpoint. Reorder around the user’s next action.</p></article><article class="bc-card"><h3>480px</h3><p>Small phone. Reduce decorative copy before reducing readability.</p></article></div>
+                <ul class="bc-rule-list" style="margin-top:16px"><li><i class="fas fa-hand-pointer"></i><span>Primary mobile controls should preferably provide about 52px of vertical target height.</span></li><li><i class="fas fa-table"></i><span>Dense tables should scroll, summarize or transform. Never compress until the text becomes unreadable.</span></li><li><i class="fas fa-thumbtack"></i><span>Sticky controls must not cover property data, CTAs, map controls or form fields.</span></li><li><i class="fas fa-arrow-down-wide-short"></i><span>Mobile order follows task priority, not desktop DOM order by default.</span></li></ul>
+              </section>
+
+              <section class="bc-panel" id="charts" data-search="charts visualization data colors series axes source freshness legend">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">08 · DATA VISUALIZATION</span><h2>Every chart should answer a question</h2><p>Watchdog is a data product. Charts are evidence, not wallpaper. Use units, time range, source and freshness wherever they materially affect interpretation.</p></div><span class="bc-panel-tag">Data</span></div>
+                <div class="bc-grid three"><article class="bc-card"><h3>Series order</h3><p><code>#2f6df6</code> → <code>#183b84</code> → <code>#748198</code> → semantic colors only when meaningful.</p></article><article class="bc-card"><h3>Directness</h3><p>Prefer direct labels, clear baselines and visible units. Make comparison logic obvious.</p></article><article class="bc-card"><h3>Trust</h3><p>Show the data date/source and distinguish observed values from inferred or modeled values.</p></article></div>
+                <div class="bc-do-dont" style="margin-top:14px"><div class="bc-do"><h3><i class="fas fa-circle-check"></i> Use</h3><ul class="bc-rule-list"><li><i class="fas fa-check"></i><span>Simple lines, bars, areas or scatter plots suited to the question.</span></li><li><i class="fas fa-check"></i><span>Accessible legends and text summaries.</span></li></ul></div><div class="bc-dont"><h3><i class="fas fa-circle-xmark"></i> Avoid</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>3D charts, decorative gradients and rainbow palettes.</span></li><li><i class="fas fa-xmark"></i><span>Red-versus-green-only differentiation.</span></li></ul></div></div>
+              </section>
+
+              <section class="bc-panel" id="motion" data-search="motion animation transition easing reduced motion 160 240 320">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">09 · MOTION</span><h2>Motion explains state change</h2><p>Animation is useful when it shows continuity, reveals hierarchy or confirms an interaction. It is not a requirement for every element entering the viewport.</p></div><span class="bc-panel-tag">Interaction</span></div>
+                <div class="bc-grid three"><article class="bc-card"><h3>Fast · 160ms</h3><p>Hover, micro-state and small opacity transitions.</p></article><article class="bc-card"><h3>Standard · 240ms</h3><p>Menus, panels, cards changing state.</p></article><article class="bc-card"><h3>Deliberate · 320ms</h3><p>Large drawers or transitions where continuity matters.</p></article></div>
+                <p class="bc-footnote">Preferred easing: <code>cubic-bezier(.2,.8,.2,1)</code>. Always preserve full functionality under <code>prefers-reduced-motion</code>.</p>
+              </section>
+
+              <section class="bc-panel" id="imagery" data-search="imagery photography images icons font awesome unsplash new jersey local property">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">10 · IMAGERY &amp; ICONS</span><h2>Use local, credible visual context</h2><p>Photography should support the property story. Iconography should support recognition. Neither should fill empty space simply because a layout feels too quiet.</p></div><span class="bc-panel-tag">Expression</span></div>
+                <div class="bc-grid two"><article class="bc-card"><h3>Photography direction</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-house"></i><span>Real New Jersey homes and property details.</span></li><li><i class="fas fa-map-location-dot"></i><span>Streetscapes, towns, maps and recognizable local context.</span></li><li><i class="fas fa-camera"></i><span>Owned or properly licensed imagery first; Unsplash when appropriate.</span></li></ul></article><article class="bc-card"><h3>Icon direction</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-icons"></i><span>Font Awesome 6 is the primary existing icon library.</span></li><li><i class="fas fa-volume-low"></i><span>Use icons at restrained sizes and only where they improve recognition.</span></li><li><i class="fas fa-dog"></i><span>Reserve the dog mark for brand/Agent Intel contexts already established.</span></li></ul></article></div>
+                <div class="bc-dont" style="margin-top:14px"><h3><i class="fas fa-circle-xmark"></i> Avoid</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>Obvious AI-generated homes, generic handshake imagery, fake dashboards or misleading property images.</span></li><li><i class="fas fa-xmark"></i><span>Implying a stock image depicts the exact property being discussed.</span></li></ul></div>
+              </section>
+
+              <section class="bc-panel" id="voice" data-search="voice writing copy editorial CTA tone wording AI tropes em dash naming">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">11 · VOICE &amp; COPY</span><h2>Plainspoken, specific and credible</h2><p>Watchdog content should sound like a smart person explaining the property facts clearly. The goal is trust and usefulness, not a performance of expertise.</p></div><span class="bc-panel-tag">Content</span></div>
+                <div class="bc-grid three"><article class="bc-card"><h3>Lead with the answer</h3><p>Put the useful fact or action first. Technical context can follow.</p></article><article class="bc-card"><h3>Explain terms</h3><p>Translate tax, assessment, appeal and real-estate language into normal language without dumbing it down.</p></article><article class="bc-card"><h3>State limits</h3><p>If data is annual, delayed, modeled or incomplete, say so near the result that depends on it.</p></article></div>
+                <div class="bc-do-dont" style="margin-top:14px"><div class="bc-do"><h3><i class="fas fa-circle-check"></i> Preferred CTAs</h3><ul class="bc-rule-list"><li><i class="fas fa-arrow-right"></i><span>View property</span></li><li><i class="fas fa-arrow-right"></i><span>Compare towns</span></li><li><i class="fas fa-arrow-right"></i><span>See full report</span></li><li><i class="fas fa-arrow-right"></i><span>Save property</span></li><li><i class="fas fa-arrow-right"></i><span>Upgrade to Pro</span></li></ul></div><div class="bc-dont"><h3><i class="fas fa-circle-xmark"></i> Avoid</h3><ul class="bc-rule-list avoid"><li><i class="fas fa-xmark"></i><span>AI-writing tropes, canned transitions and fake excitement.</span></li><li><i class="fas fa-xmark"></i><span>“Revolutionary,” “game-changing,” “ultimate” and similar hype unless a fact truly supports it.</span></li><li><i class="fas fa-xmark"></i><span>Em dashes in published Watchdog editorial copy.</span></li></ul></div></div>
+              </section>
+
+              <section class="bc-panel" id="accessibility" data-search="accessibility WCAG keyboard focus contrast reduced motion labels charts touch">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">12 · ACCESSIBILITY</span><h2>Target WCAG 2.2 AA</h2><p>Accessibility is part of brand quality. A polished interface that cannot be navigated or understood is not on-brand.</p></div><span class="bc-panel-tag">Required</span></div>
+                <div class="bc-grid four"><article class="bc-card"><h3>Keyboard</h3><p>Visible focus and complete keyboard paths through interactive flows.</p></article><article class="bc-card"><h3>Contrast</h3><p>Readable text and control contrast across normal, hover, focus and disabled states.</p></article><article class="bc-card"><h3>Semantics</h3><p>Real labels, headings, landmarks and meaningful control names.</p></article><article class="bc-card"><h3>Motion</h3><p>Reduced-motion users keep the full experience without unnecessary animation.</p></article></div>
+                <ul class="bc-rule-list" style="margin-top:16px"><li><i class="fas fa-circle-info"></i><span>Never use placeholder text as the only form label.</span></li><li><i class="fas fa-eye"></i><span>Never rely on color alone to communicate status.</span></li><li><i class="fas fa-chart-simple"></i><span>Charts need a readable summary or equivalent text when the information is not otherwise available.</span></li></ul>
+              </section>
+
+              <section class="bc-panel" id="implementation" data-search="implementation CSS variables developer code app shell access guard stable filename no version query">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">13 · IMPLEMENTATION</span><h2>Copy the system, not a random page</h2><p>New surfaces should reuse shared patterns and stable tokens. Page-level exceptions stay exceptions until they are deliberately promoted into the system.</p></div><span class="bc-panel-tag">Developer handoff</span></div>
+                <div class="bc-code"><button class="bc-copy" type="button" data-copy-target="bc-token-code"><i class="fas fa-copy"></i> Copy tokens</button><pre id="bc-token-code">:root {
+  --wd-bg: #f5f7fb;
+  --wd-surface: #ffffff;
+  --wd-ink: #111d38;
+  --wd-text: #31435c;
+  --wd-muted: #748198;
+  --wd-subtle: #8794a7;
+  --wd-line: #e2e7ef;
+  --wd-soft: #edf1f6;
+  --wd-primary: #2f6df6;
+  --wd-primary-dark: #183b84;
+  --wd-primary-soft: #e9f0ff;
+  --wd-success: #18a966;
+  --wd-warning: #f5a20a;
+  --wd-danger: #e34f5f;
+}</pre></div>
+                <div class="bc-grid two" style="margin-top:14px"><article class="bc-card"><h3>Shared references</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-file-code"></i><span><code>/property/css/app-shell-2027.css</code> is the strongest current visual reference for new product chrome.</span></li><li><i class="fas fa-user-shield"></i><span><code>/property/js/access-guard.js</code> owns protected route access.</span></li><li><i class="fas fa-bars"></i><span><code>/property/partials/sidemenu.html</code> owns shared signed-in navigation.</span></li></ul></article><article class="bc-card"><h3>Engineering rules</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-check"></i><span>Prefer shared variables/components over copied page CSS.</span></li><li><i class="fas fa-check"></i><span>Do not introduce a new font, accent, radius or shadow family without updating this system.</span></li><li><i class="fas fa-check"></i><span>Use stable CSS/JS filenames. Do not add <code>?v=</code> query-string version numbers to new references.</span></li></ul></article></div>
+              </section>
+
+              <section class="bc-panel" id="llm" data-search="LLM AI model prompt instructions coding agent Claude Gemini ChatGPT brand context">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">14 · LLM HANDOFF</span><h2>Give another model this context first</h2><p>The full machine-readable spec is more detailed. This prompt is the minimum safe handoff when using another model or coding agent on Watchdog.</p></div><span class="bc-panel-tag">AI ready</span></div>
+                <div class="bc-code light"><button class="bc-copy" type="button" data-copy-target="bc-llm-prompt"><i class="fas fa-copy"></i> Copy prompt</button><pre id="bc-llm-prompt">You are working on Watchdog Property Intelligence. Before changing UI or copy, read /property/branding/brand-system.json and /property/branding/LLM-BRAND-GUIDE.md. Treat them as the brand source of truth unless I explicitly override them. Preserve Watchdog typography, color, spacing, shape, content voice, responsive behavior, accessibility and access-control patterns. Reuse existing shared components before inventing new systems. Do not create generic AI-SaaS styling, excessive gradients/glassmorphism/pills, a third font system, new accent colors, em dashes in published editorial copy, or ?v= query-string versions on new CSS/JS references. If legacy code conflicts with the brand system, flag the conflict and move new work toward the canonical system.</pre></div>
+                <p class="bc-footnote">For exact structured instructions, use <code>/property/branding/brand-system.json</code>. For a human-readable concise handoff, use <code>/property/branding/LLM-BRAND-GUIDE.md</code>.</p>
+              </section>
+
+              <section class="bc-panel" id="assets" data-search="assets files favicon icon manifest CSS JSON markdown logo design source">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">15 · ASSET INVENTORY</span><h2>Where the important brand pieces live</h2><p>This is intentionally an inventory, not a folder of copied assets. Reference the source rather than creating duplicates that drift.</p></div><span class="bc-panel-tag">Files</span></div>
+                <div class="bc-asset-list">
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-brackets-curly"></i></span><div><b>Machine-readable brand system</b><span>/property/branding/brand-system.json</span></div><a href="/property/branding/brand-system.json">Open</a></div>
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-robot"></i></span><div><b>LLM brand guide</b><span>/property/branding/LLM-BRAND-GUIDE.md</span></div><a href="/property/branding/LLM-BRAND-GUIDE.md">Open</a></div>
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-layer-group"></i></span><div><b>Current product shell reference</b><span>/property/css/app-shell-2027.css</span></div><a href="/property/css/app-shell-2027.css">Open</a></div>
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-shield-halved"></i></span><div><b>Protected route access</b><span>/property/js/access-guard.js</span></div><a href="/property/js/access-guard.js">Open</a></div>
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-bars"></i></span><div><b>Signed-in navigation</b><span>/property/partials/sidemenu.html</span></div><a href="/property/partials/sidemenu.html">Open</a></div>
+                  <div class="bc-asset"><span class="bc-asset-icon"><i class="fas fa-icons"></i></span><div><b>Favicon set</b><span>/favicon.svg · /favicon.ico · /favicon-96x96.png · /apple-touch-icon.png</span></div><a href="/favicon.svg">Open</a></div>
+                </div>
+                <p class="bc-footnote">Asset debt: Watchdog currently uses the product HTML/CSS dog lockup as its identity reference. A dedicated approved vector logo package should eventually include SVG, monochrome, reversed, icon-only and social/avatar variants.</p>
+              </section>
+
+              <section class="bc-panel" id="governance" data-search="governance process audit change legacy exception authority agency brand manager review">
+                <div class="bc-panel-head"><div><span class="bc-eyebrow">16 · GOVERNANCE</span><h2>How agencies keep a brand consistent</h2><p>The expensive part of a brand system is not choosing colors. It is governance: defining authority, documenting exceptions and requiring system-level changes to update the source of truth.</p></div><span class="bc-panel-tag">Operating model</span></div>
+                <div class="bc-table-wrap"><table class="bc-table"><thead><tr><th>Layer</th><th>What it governs</th><th>Watchdog source</th><th>Rule</th></tr></thead><tbody><tr><td>Brand strategy</td><td>Positioning, personality, promise, experience principles</td><td>This Brand Center</td><td>Changes should be intentional and rare.</td></tr><tr><td>Visual identity</td><td>Logo, color, typography, imagery direction</td><td>Brand Center + brand-system.json</td><td>New visual language requires a system update.</td></tr><tr><td>Product design system</td><td>Spacing, shape, components, responsive behavior, motion</td><td>brand-system.json + shared CSS</td><td>Reuse before creating one-offs.</td></tr><tr><td>Content system</td><td>Voice, terminology, CTA style, editorial rules</td><td>LLM guide + Brand Center</td><td>Copy should sound recognizably Watchdog.</td></tr><tr><td>Asset library</td><td>Approved logo, favicon, photos, templates</td><td>Source-file inventory</td><td>Reference originals instead of duplicating assets.</td></tr><tr><td>Governance</td><td>Who can change the system and how exceptions work</td><td>Brand Center</td><td>System changes update documentation in the same change.</td></tr></tbody></table></div>
+                <div class="bc-grid two" style="margin-top:14px"><article class="bc-card"><h3>Authority order</h3><ol style="margin:12px 0 0;padding-left:20px;color:var(--bc-muted);font-size:11px;line-height:1.8"><li><code>brand-system.json</code></li><li><code>LLM-BRAND-GUIDE.md</code></li><li>This visual Brand Center</li><li><code>app-shell-2027.css</code></li><li>Legacy page-level CSS</li></ol></article><article class="bc-card"><h3>Before approving a change</h3><ul class="bc-rule-list" style="margin-top:12px"><li><i class="fas fa-check"></i><span>Does it look unmistakably like the same product as Dashboard and Home?</span></li><li><i class="fas fa-check"></i><span>Is the main task obvious before marketing copy?</span></li><li><i class="fas fa-check"></i><span>Does mobile feel intentionally designed?</span></li><li><i class="fas fa-check"></i><span>Did we add decoration with no information purpose?</span></li><li><i class="fas fa-check"></i><span>Are access, keyboard, contrast and reduced-motion requirements preserved?</span></li></ul></article></div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script>
+<script src="/property/js/sidemenu.js"></script>
+<script src="/property/branding/brand-center.js"></script>
+</body>
+</html>
