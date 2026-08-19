@@ -1,0 +1,181 @@
+(function () {
+  'use strict';
+
+  var path = (window.location.pathname || '').replace(/\/+$/, '');
+  if (path !== '/property' && path !== '/property/index.html') return;
+
+  var attempts = 0;
+  var client = null;
+  var resourcesAdded = false;
+
+  function q(sel, root) { return (root || document).querySelector(sel); }
+  function qa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+  function esc(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
+      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
+    });
+  }
+  function num(value, decimals) {
+    var n = Number(value);
+    if (!Number.isFinite(n)) return '—';
+    return n.toLocaleString('en-US', { minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0 });
+  }
+  function pct(value) {
+    var n = Number(value);
+    return Number.isFinite(n) ? Math.max(0, Math.min(100, n)) : 0;
+  }
+  function dateLabel(value) {
+    if (!value) return 'Refreshing';
+    try { return new Intl.DateTimeFormat('en-US', { month:'short', day:'numeric', year:'numeric' }).format(new Date(value + (String(value).length === 10 ? 'T12:00:00' : '')); }
+    catch (_error) { return String(value); }
+  }
+  function timeLabel(value) {
+    if (!value) return '';
+    try { return new Intl.DateTimeFormat('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZone:'America/New_York' }).format(new Date(value)); }
+    catch (_error) { return ''; }
+  }
+  function getClient() {
+    if (client) return client;
+    try {
+      if (window.NJPTRSupabaseRuntime && typeof window.NJPTRSupabaseRuntime.createClient === 'function') client = window.NJPTRSupabaseRuntime.createClient();
+    } catch (_error) {}
+    return client;
+  }
+  function track(name, detail) {
+    try { if (typeof window.gtag === 'function') window.gtag('event', name, detail || {}); } catch (_error) {}
+  }
+
+  function ensureSection() {
+    var existing = document.getElementById('wd-intelligence-glance');
+    if (existing) return existing;
+    var recent = document.getElementById('wd-consumer-recents');
+    var insightGrid = q('.ins-grid');
+    var insights = insightGrid && insightGrid.closest('.section');
+    if (!recent || !insights) return null;
+
+    var sec = document.createElement('section');
+    sec.id = 'wd-intelligence-glance';
+    sec.setAttribute('aria-labelledby', 'wdi-title');
+    sec.innerHTML =
+      '<div class="wdi-shell">' +
+        '<div class="wdi-head">' +
+          '<div><div class="wdi-kicker"><span class="wdi-live-dot"></span> Watchdog Intelligence · live sample</div>' +
+          '<h2 id="wdi-title">What Watchdog is <em>seeing right now.</em></h2>' +
+          '<p class="wdi-lead">A free look at the same evidence-first scoring system used inside paid Watchdog Intelligence. These numbers are read from the current production scoring cohort, not typed into this page.</p></div>' +
+          '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, defensible evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See data methodology <i class="fas fa-arrow-right"></i></a></div>' +
+        '</div>' +
+        '<div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the latest Watchdog scoring and source-monitoring run…</div></div>' +
+      '</div>';
+    recent.insertAdjacentElement('afterend', sec);
+    if (sec.nextElementSibling !== insights) sec.insertAdjacentElement('afterend', insights);
+    return sec;
+  }
+
+  function interpretation(data) {
+    var c = data.cohort || {};
+    var share = Number(c.share_60_plus);
+    var median = Number(c.median_score);
+    var coverage = Number(c.evidence_coverage);
+    var breadth = share >= 50 ? 'broad across this cohort' : (share >= 25 ? 'concentrated rather than universal' : 'limited to a smaller slice of this cohort');
+    var confidence = coverage >= 90 ? 'very strong' : (coverage >= 75 ? 'substantial' : 'still developing');
+    return 'In the current scored cohort, <strong>' + esc(num(share, 1)) + '%</strong> of properties are at 60+ and the median Watchdog Score is <strong>' + esc(num(median, 1)) + '</strong>. The higher-score signal is ' + breadth + '. Average evidence coverage is <strong>' + esc(num(coverage, 1)) + '%</strong>, so the underlying support is ' + confidence + '. Watchdog uses this as a prioritization layer for deeper research, not as a prediction, appraisal or guaranteed outcome.';
+  }
+
+  function signalCard(label, value, note, evidence) {
+    var n = Number(value);
+    return '<article class="wdi-signal"><div class="wdi-signal-top"><b>' + esc(label) + '</b><strong>' + esc(num(n, 1)) + '<small>/100</small></strong></div>' +
+      '<p>' + esc(note) + '</p><div class="wdi-meter" aria-hidden="true"><i style="--wdi-pct:' + pct(n) + '%"></i></div>' +
+      '<span class="wdi-evidence">Evidence coverage: ' + esc(num(evidence, 1)) + '%</span></article>';
+  }
+
+  function render(data) {
+    var host = document.getElementById('wdi-live');
+    if (!host || !data) return;
+    var c = data.cohort || {}, e = data.engine || {}, s = data.signals || {}, w = data.source_watch || {};
+    var tax = s.tax_pressure || {}, rev = s.revaluation_risk || {}, uni = s.uniformity || {};
+    var asof = document.getElementById('wdi-asof');
+    var scope = document.getElementById('wdi-scope');
+    if (asof) asof.textContent = 'Scored ' + dateLabel(data.as_of) + ' · refreshed ' + timeLabel(data.generated_at);
+    if (scope) scope.textContent = num(c.properties) + ' properties · ' + num(c.towns) + ' towns · ' + num(c.counties) + ' counties in the current live scored cohort.';
+
+    host.innerHTML =
+      '<div class="wdi-primary-grid">' +
+        '<article class="wdi-primary"><span class="wdi-label">Freshly scored cohort</span><div class="wdi-number"><strong>' + esc(num(c.properties)) + '</strong><small>properties</small></div><p>Current property-level scores with defensible evidence available for this run.</p><div class="wdi-mini"><span>' + esc(num(c.towns)) + ' towns</span><span>' + esc(num(c.counties)) + ' counties</span><span>' + esc(num(c.evidence_coverage,1)) + '% avg. evidence coverage</span></div></article>' +
+        '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div><p>A six-part property-intelligence score combining tax burden, Chapter 123 fairness, uniformity, revaluation stability, trajectory and appeal recourse.</p></article>' +
+        '<article class="wdi-primary"><span class="wdi-label">Intelligence engine · past 24 hours</span><div class="wdi-number"><strong>' + esc(num(e.candidates_24h)) + '</strong><small>candidates evaluated</small></div><p>' + esc(num(e.findings_24h)) + ' evidence-backed findings across ' + esc(num(e.runs_24h)) + ' completed analyses and ' + esc(num(e.models_24h)) + ' active models.</p></article>' +
+      '</div>' +
+      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Three signals inside the score.</h3><p>These are medians across the current cohort. The direction of a score is context, not a stand-alone recommendation.</p></div>' +
+        '<div class="wdi-signal-grid">' +
+          signalCard('Municipal tax pressure', tax.median_score, 'Published tax-rate direction translated into a normalized pressure signal.', tax.evidence_coverage) +
+          signalCard('Revaluation pressure', rev.median_score, 'Published ratio level, verified SR-1A ratio decay and coefficient of deviation.', rev.evidence_coverage) +
+          signalCard('Assessment uniformity', uni.median_score, 'How consistently the current evidence indicates properties are being assessed relative to one another.', uni.evidence_coverage) +
+        '</div>' +
+      '</div>' +
+      '<div class="wdi-read">' +
+        '<article class="wdi-read-card"><span class="wdi-label">The Watchdog read</span><h3>Evidence first. Interpretation second.</h3><p>' + interpretation(data) + '</p><div class="wdi-note">Live cohort metrics can change as new properties are scored, new official files arrive or Watchdog rejects weak evidence.</div></article>' +
+        '<article class="wdi-read-card"><span class="wdi-label">How Watchdog gets there</span><div class="wdi-method">' +
+          '<div><i class="fas fa-building-columns"></i><span><b>1 · Public facts</b>Parcel, assessment, tax-rate, equalization and verified sales records.</span></div>' +
+          '<div><i class="fas fa-filter"></i><span><b>2 · Evidence checks</b>Non-arm’s-length or unusable records are separated instead of silently treated as normal sales.</span></div>' +
+          '<div><i class="fas fa-calculator"></i><span><b>3 · Governed scoring</b>Six weighted components are calculated; missing inputs are dropped and remaining weights are renormalized.</span></div>' +
+          '<div><i class="fas fa-shield-halved"></i><span><b>4 · Confidence gates</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
+        '</div></article>' +
+      '</div>' +
+      '<div class="wdi-cta"><div><h3>This is the sample. Paid Watchdog Intelligence goes property by property.</h3><p>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
+
+    var plans = document.getElementById('wdi-plans');
+    if (plans) plans.addEventListener('click', function () {
+      track('landing_intelligence_plan_click', { placement:'live_intelligence_glance', cohort_as_of:data.as_of || '', properties:Number(c.properties)||0 });
+    });
+  }
+
+  function renderUnavailable() {
+    var host = document.getElementById('wdi-live');
+    if (!host) return;
+    host.innerHTML = '<div class="wdi-read"><article class="wdi-read-card"><span class="wdi-label">Live metrics refreshing</span><h3>Watchdog will not substitute stale numbers.</h3><p>The current scoring snapshot could not be verified in this browser session, so the numeric sample is withheld. The paid product follows the same rule: unavailable evidence does not quietly become zero, safe or favorable.</p></article><article class="wdi-read-card"><span class="wdi-label">Still available</span><div class="wdi-method"><div><i class="fas fa-book-open"></i><span><b>Methodology</b>See the governed score components and public-data sources.</span></div><div><i class="fas fa-arrow-up-right-dots"></i><span><b>Plans</b>See which Intelligence capabilities are included in paid tiers.</span></div></div></article></div><div class="wdi-cta"><div><h3>Explore Watchdog Intelligence.</h3><p>Property-level intelligence with evidence and confidence attached.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">Methodology</a><a class="wdi-btn primary" href="/property/pro#plans">See plans <i class="fas fa-arrow-right"></i></a></div></div>';
+  }
+
+  var HOMEOWNER_RESOURCES = [
+    ['How to read an NJ property tax bill','/property/how-to-read-nj-property-tax-bill/'],
+    ['Assessed value vs. market value','/property/assessed-value-vs-market-value/'],
+    ['Revaluation & reassessment guide','/property/revaluation-reassessment-guide/'],
+    ['Added assessments after improvements','/property/added-assessments/'],
+    ['Block, lot & qualifier explained','/property/block-lot-qualifier/']
+  ];
+
+  function addResources() {
+    if (resourcesAdded) return true;
+    var host = q('.wd-homeowner-links .wd-guide-links');
+    if (!host) return false;
+    HOMEOWNER_RESOURCES.forEach(function (item) {
+      var exists = qa('a', host).some(function (a) { return (a.getAttribute('href') || '') === item[1]; });
+      if (!exists) host.insertAdjacentHTML('beforeend', '<a href="' + esc(item[1]) + '">' + esc(item[0]) + ' <i class="fas fa-arrow-right"></i></a>');
+    });
+    resourcesAdded = true;
+    return true;
+  }
+
+  function loadMetrics() {
+    var sb = getClient();
+    if (!sb || typeof sb.rpc !== 'function') { renderUnavailable(); return; }
+    sb.rpc('get_public_intelligence_glance').then(function (result) {
+      if (result && !result.error && result.data) render(result.data);
+      else renderUnavailable();
+    }).catch(renderUnavailable);
+  }
+
+  function boot() {
+    attempts += 1;
+    var sec = ensureSection();
+    var resourcesReady = addResources();
+    if (!sec || !resourcesReady) {
+      if (attempts < 80) window.setTimeout(boot, 80);
+      return;
+    }
+    if (sec.dataset.wdiLoaded === '1') return;
+    sec.dataset.wdiLoaded = '1';
+    loadMetrics();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once:true });
+  else boot();
+})();
