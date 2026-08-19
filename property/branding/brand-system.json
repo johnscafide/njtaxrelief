@@ -1,0 +1,327 @@
+{
+  "metadata": {
+    "name": "Watchdog Brand System",
+    "brand": "Watchdog",
+    "product_descriptor": "Property Intelligence",
+    "version": "1.0.0",
+    "status": "authoritative",
+    "updated": "2026-08-19",
+    "owner": "Watchdog product team",
+    "route": "/property/branding/",
+    "audience": ["developer", "designer", "graphic-artist", "copywriter", "agency", "llm"],
+    "authority_order": [
+      "/property/branding/brand-system.json",
+      "/property/branding/LLM-BRAND-GUIDE.md",
+      "/property/branding/index.html",
+      "/property/css/app-shell-2027.css",
+      "legacy page-level CSS"
+    ]
+  },
+  "identity": {
+    "brand_name": "Watchdog",
+    "preferred_descriptor": "Property Intelligence",
+    "long_name": "Watchdog Property Intelligence",
+    "category": "New Jersey property intelligence and real-estate decision software",
+    "brand_promise": "Turn public property data into clear, useful decisions.",
+    "personality": ["precise", "calm", "credible", "modern", "useful", "data-first", "human"],
+    "avoid": ["hype-first", "flashy", "gimmicky", "corporate-jargon-heavy", "AI-looking", "overdecorated", "alarmist"],
+    "experience_principles": [
+      "Show the useful thing before the sales pitch.",
+      "Make dense property data feel understandable, not simplified beyond usefulness.",
+      "Use progressive disclosure for advanced data.",
+      "Professional depth should coexist with homeowner-level clarity.",
+      "Trust is built with sources, dates, definitions, and transparent limitations."
+    ]
+  },
+  "logo": {
+    "current_system": "Font Awesome dog glyph inside a rounded Watchdog blue gradient tile, paired with the Watchdog wordmark.",
+    "icon_class": "fas fa-dog",
+    "standard_mark_px": 42,
+    "standard_radius_px": 12,
+    "gradient": ["#183b84", "#2f6df6"],
+    "wordmark": {
+      "text": "Watchdog",
+      "font_family": "Inter",
+      "font_weight": 800,
+      "desktop_size_px": 21,
+      "letter_spacing_em": -0.04
+    },
+    "descriptor": {
+      "text": "PROPERTY INTELLIGENCE",
+      "size_px": 8,
+      "font_weight": 700,
+      "letter_spacing_em": 0.11,
+      "color": "#8692a6"
+    },
+    "rules": [
+      "Do not stretch, skew, outline, rotate, or add unrelated effects to the mark.",
+      "Do not replace the dog with a generic house icon when the Watchdog brand is being represented.",
+      "Keep adequate clear space around the mark, at least one quarter of the mark width on all sides.",
+      "Use a dedicated vector master asset when one is approved; until then the HTML/CSS product mark is the source of truth."
+    ]
+  },
+  "typography": {
+    "canonical_product": {
+      "display": {"family": "Plus Jakarta Sans", "fallback": "sans-serif", "weights": [600, 700, 800]},
+      "body_ui": {"family": "Inter", "fallback": "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif", "weights": [400, 500, 600, 700, 800]}
+    },
+    "editorial_exceptions": {
+      "Source Sans 3": "Allowed on existing public long-form or lookup experiences while those surfaces are maintained.",
+      "Playfair Display": "Editorial accent only. Do not introduce into dashboards, data tools, controls, forms, or dense SaaS UI."
+    },
+    "scale": {
+      "display_xl": {"size": "clamp(32px, 4vw, 52px)", "line_height": 1.02, "weight": 800, "tracking_em": -0.05},
+      "h1": {"size": "clamp(28px, 3vw, 42px)", "line_height": 1.04, "weight": 800, "tracking_em": -0.045},
+      "h2": {"size": "clamp(24px, 2.4vw, 34px)", "line_height": 1.1, "weight": 800, "tracking_em": -0.03},
+      "h3": {"size": "20px", "line_height": 1.2, "weight": 700, "tracking_em": -0.015},
+      "body_lg": {"size": "16px", "line_height": 1.65, "weight": 400},
+      "body": {"size": "14px", "line_height": 1.55, "weight": 400},
+      "small": {"size": "12px", "line_height": 1.45, "weight": 500},
+      "micro": {"size": "10px", "line_height": 1.35, "weight": 700},
+      "kicker": {"size": "10px", "line_height": 1.2, "weight": 800, "tracking_em": 0.11, "transform": "uppercase"}
+    },
+    "rules": [
+      "Do not use more than two type families on a single product surface.",
+      "Numbers and addresses should be easy to scan and never rely on ultra-light weights.",
+      "Avoid tiny secondary text; mobile explanatory text should normally remain at or above 12px.",
+      "Use bold weight and spacing for hierarchy before introducing extra colors."
+    ]
+  },
+  "colors": {
+    "canonical": {
+      "background": "#f5f7fb",
+      "surface": "#ffffff",
+      "ink": "#111d38",
+      "text": "#31435c",
+      "muted": "#748198",
+      "subtle": "#8794a7",
+      "line": "#e2e7ef",
+      "soft": "#edf1f6",
+      "primary": "#2f6df6",
+      "primary_dark": "#183b84",
+      "primary_soft": "#e9f0ff",
+      "success": "#18a966",
+      "warning": "#f5a20a",
+      "danger": "#e34f5f"
+    },
+    "css_variables": {
+      "--wd-bg": "#f5f7fb",
+      "--wd-surface": "#ffffff",
+      "--wd-ink": "#111d38",
+      "--wd-text": "#31435c",
+      "--wd-muted": "#748198",
+      "--wd-subtle": "#8794a7",
+      "--wd-line": "#e2e7ef",
+      "--wd-soft": "#edf1f6",
+      "--wd-primary": "#2f6df6",
+      "--wd-primary-dark": "#183b84",
+      "--wd-primary-soft": "#e9f0ff",
+      "--wd-success": "#18a966",
+      "--wd-warning": "#f5a20a",
+      "--wd-danger": "#e34f5f"
+    },
+    "usage": {
+      "primary": "Primary CTAs, selected states, meaningful links, active data emphasis.",
+      "success": "Confirmed positive state only.",
+      "warning": "Caution, incomplete data, moderate risk, or attention needed.",
+      "danger": "Errors, destructive actions, severe risk, or negative alert state.",
+      "muted": "Secondary labels and supporting text, not primary content.",
+      "line": "Subtle separation. Prefer whitespace when a border is unnecessary."
+    },
+    "rules": [
+      "Never use semantic red, amber, or green as decoration.",
+      "Do not create rainbow dashboards. Data colors need semantic meaning and legends.",
+      "Use Watchdog blue sparingly enough that primary actions remain obvious.",
+      "New product UI should not introduce a competing brand accent without a documented exception."
+    ]
+  },
+  "spacing": {
+    "base_unit_px": 4,
+    "tokens_px": [4, 8, 12, 16, 20, 24, 32, 40, 48, 64],
+    "page_gutter_desktop_px": 32,
+    "page_gutter_tablet_px": 24,
+    "page_gutter_mobile_px": 16,
+    "section_gap_desktop_px": 32,
+    "card_padding_default_px": 24,
+    "card_padding_compact_px": 16,
+    "rules": [
+      "Use the spacing scale rather than arbitrary 13px, 27px, or 31px gaps unless optical alignment requires it.",
+      "Dense data tables may be tighter, but surrounding page structure should remain spacious.",
+      "Do not solve hierarchy by adding more containers; use spacing first."
+    ]
+  },
+  "shape": {
+    "radii_px": {"xs": 8, "sm": 10, "md": 12, "lg": 18, "pill": 999},
+    "shadows": {
+      "soft": "0 8px 24px rgba(40,55,82,.045)",
+      "control": "0 5px 16px rgba(24,39,67,.035)",
+      "brand_mark": "0 8px 18px rgba(47,109,246,.20)",
+      "elevated": "0 24px 65px rgba(18,36,63,.19)"
+    },
+    "rules": [
+      "Use 10–12px radii for everyday controls and cards.",
+      "Use 18px for large drawers, modals, or major panels.",
+      "Pills are for statuses, compact filters, or tags, not every button.",
+      "Avoid thick borders, colored side stripes, and decorative outlines."
+    ]
+  },
+  "layout": {
+    "desktop_topbar_height_px": 84,
+    "comfortable_content_max_px": 1440,
+    "reading_column_max_px": 780,
+    "minimum_desktop_control_height_px": 42,
+    "minimum_mobile_primary_target_px": 52,
+    "grid": "12-column concept for large compositions; use CSS Grid/Flexbox based on content rather than fixed Bootstrap assumptions.",
+    "breakpoints_px": {"wide": 1280, "desktop": 1024, "mobile": 760, "small_mobile": 480},
+    "responsive_rules": [
+      "Design mobile as an app, not a shrunken desktop.",
+      "Reorder content by task priority on mobile rather than only stacking it.",
+      "Sticky UI must never cover property data, CTAs, or form controls.",
+      "Tables should become scrollable, summarized, or card-based when needed rather than compressing unreadably."
+    ]
+  },
+  "components": {
+    "buttons": {
+      "primary": "Blue fill, white text, 10px radius, 42px+ desktop height and 52px preferred mobile primary height.",
+      "secondary": "White surface, subtle line border, dark text.",
+      "tertiary": "Text/icon treatment with quiet hover background; no unnecessary border.",
+      "destructive": "Danger color only for a genuinely destructive action."
+    },
+    "cards": "White surface, subtle line or soft shadow, 12–18px radius, meaningful internal hierarchy. Avoid nested card-on-card layouts unless the nesting communicates structure.",
+    "inputs": "Clear label, 10px radius, subtle line border, visible focus treatment, error/help text below.",
+    "status": "Use icon + text + semantic color when meaning is important. Never rely on color alone.",
+    "navigation": "Quiet by default, clear active state using primary-soft background and blue/dark text. Developer-only links stay hidden for non-developers.",
+    "data": "Lead with the value, then label/source/date. Units and time periods must be explicit."
+  },
+  "icons": {
+    "primary_library": "Font Awesome 6",
+    "style": "Simple, recognizable, mostly solid icons at restrained sizes.",
+    "rules": [
+      "Use one icon family on a surface.",
+      "Do not use decorative icons beside every sentence.",
+      "Icons supporting critical actions need accessible labels or accompanying text.",
+      "The dog icon is reserved for Watchdog identity and Agent Intel/brand contexts where already established."
+    ]
+  },
+  "imagery": {
+    "direction": ["real New Jersey homes", "streetscapes", "towns", "maps", "property details", "credible local context"],
+    "preferred_sources": ["owned photography", "properly licensed local photography", "Unsplash where appropriate"],
+    "avoid": ["obvious AI-generated houses", "generic handshake imagery", "excessive stock-photo business teams", "fake dashboards", "misleading property imagery"],
+    "rules": [
+      "Photography should support the content, not exist only to fill space.",
+      "Use image crops that preserve the property or local subject.",
+      "Do not imply an image depicts a specific property unless it actually does."
+    ]
+  },
+  "data_visualization": {
+    "principles": [
+      "Answer a question with every chart.",
+      "Use direct labels when practical.",
+      "Show units, time range, source, and freshness.",
+      "Keep comparison baselines honest.",
+      "Use semantic colors consistently across tools."
+    ],
+    "default_series_priority": ["#2f6df6", "#183b84", "#748198", "#18a966", "#f5a20a", "#e34f5f"],
+    "avoid": ["3D charts", "gratuitous gradients", "unlabeled axes", "too many series", "red/green-only differentiation"]
+  },
+  "motion": {
+    "default_duration_ms": {"fast": 160, "standard": 240, "deliberate": 320},
+    "preferred_easing": "cubic-bezier(.2,.8,.2,1)",
+    "rules": [
+      "Motion explains state change, focus, hierarchy, or continuity.",
+      "Do not animate every card on load.",
+      "Avoid perpetual movement in data-heavy workspaces.",
+      "Respect prefers-reduced-motion and preserve full functionality without animation."
+    ]
+  },
+  "content_voice": {
+    "voice": ["plainspoken", "specific", "credible", "helpful", "confident without hype", "locally informed"],
+    "sentence_style": "Short to medium sentences. Lead with the answer or useful fact. Explain technical real-estate and tax terms in normal language.",
+    "naming": {
+      "brand": "Watchdog",
+      "full_brand": "Watchdog Property Intelligence",
+      "avoid_as_primary_brand": ["NJ Property Tax Relief Guide", "WatchDog", "Watch Dog"]
+    },
+    "rules": [
+      "Avoid AI-writing tropes, canned transitions, fake excitement, and generic thought-leadership language.",
+      "Do not use em dashes in published Watchdog editorial copy.",
+      "Do not claim certainty when source data has limits or refresh lag.",
+      "Prefer factual benefits over adjectives such as revolutionary, game-changing, unmatched, or ultimate.",
+      "CTAs should describe the next action: View property, Compare towns, See full report, Save property, Upgrade to Pro.",
+      "When a paid feature is gated, explain the value the user will unlock rather than displaying a dead end."
+    ]
+  },
+  "accessibility": {
+    "target": "WCAG 2.2 AA",
+    "requirements": [
+      "Visible keyboard focus on interactive controls.",
+      "Semantic heading order and landmark structure.",
+      "Labels for form controls; placeholders are not labels.",
+      "Do not rely on color alone for status.",
+      "Touch targets should be generous, with 52px preferred for primary mobile controls.",
+      "Support prefers-reduced-motion.",
+      "Text and controls must maintain sufficient contrast.",
+      "Charts need text equivalents or accessible summaries when information is not otherwise available."
+    ]
+  },
+  "implementation": {
+    "canonical_shared_reference": "/property/css/app-shell-2027.css",
+    "access_guard": "/property/js/access-guard.js",
+    "sidebar": "/property/partials/sidemenu.html",
+    "icon_cdn": "Font Awesome 6.5.x currently used on property surfaces",
+    "new_file_rule": "Use stable CSS and JS filenames. Do not add ?v= query-string version numbers to new references.",
+    "css_rules": [
+      "Prefer shared variables and reusable components over page-specific copies.",
+      "Use mobile-first responsive rules when building new components.",
+      "Do not add a new font, accent color, radius system, or shadow family without updating the brand system.",
+      "Avoid !important except where integration with legacy CSS requires a documented override.",
+      "Do not expose developer-only navigation or internal controls before server-confirmed developer access."
+    ]
+  },
+  "legacy": {
+    "statement": "The repository includes multiple generations of Watchdog and NJPropertyTaxRelief styling. Existing code is evidence of history, not automatic brand authority.",
+    "known_transitional_patterns": [
+      "Older public pages use navy/gold visual language.",
+      "Some public property surfaces use Source Sans 3 and Playfair Display.",
+      "Older dashboards contain stronger glassmorphism, larger shadows, and one-off component rules.",
+      "Some shared CSS imports still contain query-string versioning. Do not copy that pattern into new files."
+    ],
+    "migration_rule": "When materially redesigning a legacy surface, move it toward this system rather than preserving inconsistency for consistency's sake."
+  },
+  "governance": {
+    "change_process": [
+      "Identify whether the requested change is a one-page exception or a system-level change.",
+      "If system-level, update brand-system.json and the visual brand center in the same change.",
+      "Audit desktop, mobile, dark/alternate states if applicable, keyboard focus, and reduced motion.",
+      "Document exceptions and migration impact.",
+      "Do not silently fork tokens inside a page stylesheet."
+    ],
+    "review_questions": [
+      "Does this look unmistakably like the same product as Dashboard and Home?",
+      "Is the main task obvious above the fold?",
+      "Did we add visual decoration that has no information purpose?",
+      "Are typography, spacing, radii, and color using canonical tokens?",
+      "Would a homeowner understand the language?",
+      "Would a professional still trust the depth?",
+      "Does mobile feel intentionally designed?",
+      "Can a keyboard and reduced-motion user complete the task?"
+    ]
+  },
+  "llm_instructions": {
+    "summary": "Before generating or editing Watchdog UI or copy, treat this file as the highest-level brand constraint unless the user explicitly overrides it.",
+    "must_do": [
+      "Preserve Watchdog identity, canonical typography, color, spacing, shape, and content voice.",
+      "Reuse existing shared patterns before creating new systems.",
+      "Keep consumer experiences simple and professional experiences progressively deeper.",
+      "Check mobile, accessibility, and developer/plan access boundaries.",
+      "Flag legacy conflicts rather than blindly copying them."
+    ],
+    "must_not_do": [
+      "Do not invent a third font system or new brand accent.",
+      "Do not produce generic AI SaaS visuals with excessive gradients, glass cards, glowing blobs, or decorative pills.",
+      "Do not expose internal or paid data by hiding it only with CSS.",
+      "Do not use em dashes in published Watchdog editorial copy.",
+      "Do not add query-string version numbers to new CSS or JS file references."
+    ]
+  }
+}
