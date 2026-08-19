@@ -1,6 +1,15 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.55.0';
+import Stripe from 'npm:stripe@18.4.0';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const PRICE_LOOKUPS = [
+  ['watchdog_agent_monthly', 5900, 'month'],
+  ['watchdog_agent_yearly', 59000, 'year'],
+  ['watchdog_pro_monthly', 12900, 'month'],
+  ['watchdog_pro_yearly', 129000, 'year'],
+  ['watchdog_pro_plus_monthly', 39900, 'month'],
+  ['watchdog_pro_plus_yearly', 399000, 'year']
+] as const;
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
@@ -37,6 +46,40 @@ function json(req: Request, body: unknown, status = 200) {
 
 function envPresent(name: string) {
   return Boolean(String(Deno.env.get(name) || '').trim());
+}
+
+async function resolveStripeCatalog(stripeKey: string | undefined) {
+  const state = {
+    resolved: 0,
+    required: PRICE_LOOKUPS.length,
+    ready: false,
+    mode: 'missing',
+    error: null as string | null
+  };
+  if (!stripeKey) return state;
+  state.mode = stripeKey.startsWith('sk_live_') ? 'live' : stripeKey.startsWith('sk_test_') ? 'test' : 'unknown';
+  if (state.mode === 'unknown') {
+    state.error = 'unrecognized_key_mode';
+    return state;
+  }
+
+  try {
+    const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
+    for (const [lookupKey, amount, interval] of PRICE_LOOKUPS) {
+      const prices = await stripe.prices.list({ lookup_keys: [lookupKey], active: true, limit: 10 });
+      const matches = prices.data.filter(price =>
+        price.currency.toLowerCase() === 'usd' &&
+        price.unit_amount === amount &&
+        price.type === 'recurring' &&
+        price.recurring?.interval === interval
+      );
+      if (matches.length === 1) state.resolved++;
+    }
+    state.ready = state.resolved === state.required;
+  } catch (_) {
+    state.error = 'stripe_catalog_lookup_failed';
+  }
+  return state;
 }
 
 Deno.serve(async (req) => {
@@ -120,7 +163,9 @@ Deno.serve(async (req) => {
   const entitlementStatuses = new Set((entitlements.data || []).map((row) => row.subscription_status).filter(Boolean));
   const gate = releaseGate.data || null;
   const checkoutMode = String(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') || 'closed').trim().toLowerCase();
-  const priceSecretNames = [
+  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  const stripeCatalog = await resolveStripeCatalog(stripeKey);
+  const priceOverrideNames = [
     'STRIPE_PRICE_AGENT_MONTHLY',
     'STRIPE_PRICE_AGENT_YEARLY',
     'STRIPE_PRICE_PRO_MONTHLY',
@@ -128,22 +173,26 @@ Deno.serve(async (req) => {
     'STRIPE_PRICE_PRO_PLUS_MONTHLY',
     'STRIPE_PRICE_PRO_PLUS_YEARLY'
   ];
-  const configuredPriceSecrets = priceSecretNames.filter(envPresent).length;
+  const configuredPriceOverrides = priceOverrideNames.filter(envPresent).length;
   const secretReadiness = {
     stripe_secret_configured: envPresent('STRIPE_SECRET_KEY'),
     webhook_secret_configured: envPresent('STRIPE_WEBHOOK_SIGNING_SECRET'),
-    price_secrets_configured: configuredPriceSecrets,
-    price_secrets_required: priceSecretNames.length,
+    price_overrides_configured: configuredPriceOverrides,
+    price_overrides_required: 0,
+    catalog_lookup_resolved: stripeCatalog.resolved,
+    catalog_lookup_required: stripeCatalog.required,
+    stripe_key_mode: stripeCatalog.mode,
     ready_for_controlled_acceptance:
       envPresent('STRIPE_SECRET_KEY') &&
       envPresent('STRIPE_WEBHOOK_SIGNING_SECRET') &&
-      configuredPriceSecrets === priceSecretNames.length
+      stripeCatalog.mode === 'live' &&
+      stripeCatalog.ready
   };
 
   const checks = [
     {
       id: 'configuration',
-      label: 'Stripe production secrets configured',
+      label: 'Stripe Live secrets and six-price catalog ready',
       passed: secretReadiness.ready_for_controlled_acceptance
     },
     {
@@ -205,6 +254,13 @@ Deno.serve(async (req) => {
     environment: 'production',
     checkout_mode: ['closed', 'controlled', 'open'].includes(checkoutMode) ? checkoutMode : 'closed',
     secrets: secretReadiness,
+    catalog: {
+      resolved: stripeCatalog.resolved,
+      required: stripeCatalog.required,
+      ready: stripeCatalog.ready,
+      key_mode: stripeCatalog.mode,
+      error: stripeCatalog.error
+    },
     checks,
     gate: gate ? {
       status: gate.status,
@@ -218,7 +274,7 @@ Deno.serve(async (req) => {
 
   return json(req, {
     generated_at: new Date().toISOString(),
-    release: '2026-08-18-stripe-launch-health',
+    release: '2026-08-18-stripe-launch-health-v2',
     counts,
     events: rows.slice(0, 50),
     incidents: incidents.data || [],
