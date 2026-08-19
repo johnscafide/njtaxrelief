@@ -111,19 +111,6 @@ function exemptionValue(root:any,row:any,field:string,origin:string){
   return {v:covered?(rec[field]??null):null,checked:true,kind,source:'NJ 2025 Abstract of Ratables + DCA 2026 PILOT aggregate · '+MUNICIPAL_REFERENCE_PROVIDER_VERSION};
 }
 
-function pilotForecastValue(root:any,row:any,field:string){
-  if(field!=='pilot_project_assessment')return null;
-  const tc=treasury(row),rec=root?.exemptPilot?.municipalities?.[tc];
-  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind:'authoritative_reference',source:'NJ DCA 2026 PILOT Database and Viewer'};
-  const hasPilot=!!rec?.coverage?.dca_pilot_2026;
-  return {
-    v:hasPilot?(rec.pilot_assessed_value??null):null,
-    checked:true,
-    kind:'authoritative_reference',
-    source:'NJ DCA 2026 PILOT Database and Viewer · Summary By Town assessed value · '+MUNICIPAL_REFERENCE_PROVIDER_VERSION
-  };
-}
-
 function positiveMedianShare(root:any){
   const vals=Object.values(root?.abatements?.districts||{}).map((x:any)=>Number(x?.abated_share)).filter((x:number)=>Number.isFinite(x)&&x>0).sort((a:number,b:number)=>a-b);
   if(!vals.length)return 0;const mid=Math.floor(vals.length/2);return vals.length%2?vals[mid]:(vals[mid-1]+vals[mid])/2
@@ -193,11 +180,10 @@ function developmentField(rows:any[],field:string){
 export async function dcaPermitValue(marker:any,row:any){
   const src=String(marker?.source_id||''),id=String(marker?.id||''),field=String(marker?.field||''),origin=String(marker?.origin||'');
   if(src==='treasury-modiv-2026')return modivIntelValue(row,field);
-  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'||src==='nj-dca-pilot-forecast'){
+  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'){
     const root=await municipalRoots();
     if(src==='nj-division-taxation')return taxRateValue(root,row,field);
     if(src==='nj-abstract-pilot')return exemptionValue(root,row,field,origin);
-    if(src==='nj-dca-pilot-forecast')return pilotForecastValue(root,row,field);
     return abatementValue(root,row,field,origin);
   }
   if(src==='nj-dca-development-trends'){
@@ -211,6 +197,6 @@ export async function dcaPermitValue(marker:any,row:any){
   const v=parcelField(rows,field);return v===undefined?null:{v,checked:true};
 }
 
-export const DCA_PERMIT_PROVIDER_VERSION='nj-dca-permits-development-pilot-live-v3';
+export const DCA_PERMIT_PROVIDER_VERSION='nj-dca-permits-development-live-v2';
 export const MODIV_INTEL_PROVIDER_VERSION='modiv-intelligence-2026-v1';
-export const MUNICIPAL_REFERENCE_PROVIDER_VERSION='nj-municipal-reference-live-v2';
+export const MUNICIPAL_REFERENCE_PROVIDER_VERSION='nj-municipal-reference-live-v1';
