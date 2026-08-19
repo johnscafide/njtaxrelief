@@ -62,6 +62,8 @@ jobs:
         run: node property/tests/affordable-housing-parser-contract.mjs
       - name: Verify calibration holdout diversity guardrail
         run: node property/tests/calibration-diversity-contract.mjs
+      - name: Verify model-vNext repair and promotion gate
+        run: node property/tests/intelligence-model-vnext-repair-contract.mjs
       - name: Verify Intelligence retention integration
         run: node property/tests/intelligence-retention-integration-contract.mjs
       - name: Verify billing, verification and measurement security contracts
