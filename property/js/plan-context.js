@@ -37,7 +37,6 @@
     document.dispatchEvent(new CustomEvent('njptr:plan-change', { detail: Object.assign({}, state) }));
   }
   function setView() {
-    /* Developer plan simulation was retired in NJW-99. Keep the API as a no-op for older callers. */
     state.effective = state.actual;
     apply();
   }
@@ -57,8 +56,10 @@
 
   function autoInit() {
     if (!document.body || document.body.getAttribute('data-plan-auto') !== 'true' || !window.supabase || state.user) return;
-    var client = window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co', 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',
-      { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
+    var client = window.NJPTRSupabaseRuntime
+      ? window.NJPTRSupabaseRuntime.createClient()
+      : window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co', 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',
+        { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     client.auth.getUser().then(function (result) {
       var user = result && result.data && result.data.user;
       if (!user) return;

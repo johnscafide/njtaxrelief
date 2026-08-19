@@ -17,7 +17,7 @@ const protectedPages = [
   ['property/developer-data/index.html', 'developer'],
   ['property/updates/index.html', 'developer'],
   ['property/verification-diagnostics/index.html', 'developer'],
-  ['property/scan/index.html', 'developer'],
+  ['property/scan/index.html', 'pro_plus'],
   ['property/data-center/index.html', 'pro_plus'],
   ['property/data-workbench/index.html', 'agent'],
   ['property/marketing-studio/index.html', 'agent'],
@@ -78,11 +78,18 @@ check('no service credentials in browser property files', clientSecrets.length =
 
 const mobileCss = read('property/css/mobile-app.css');
 const mobileMenuCss = read('property/css/mobile-menu.css');
-for (const file of ['property/dashboard/index.html', 'property/home/index.html']) {
-  const page = read(file);
-  check(`${file} uses responsive viewport`, /name=["']viewport["']/.test(page), 'Mobile reflow contract');
-  check(`${file} loads mobile menu styling`, page.includes('/property/css/mobile-menu.css'), 'Mobile menu remains styled on customer pages');
-}
+const dashboardCss = read('property/css/dashboard/dashboard.css');
+const dashboardPage = read('property/dashboard/index.html');
+const homePage = read('property/home/index.html');
+
+check('property/dashboard/index.html uses responsive viewport', /name=["']viewport["']/.test(dashboardPage), 'Mobile reflow contract');
+check(
+  'property/dashboard/index.html loads responsive dashboard styling',
+  dashboardPage.includes('/property/css/dashboard/dashboard.css') && /@media\(max-width:(?:720|760)px\)/.test(dashboardCss),
+  'The 2027 Dashboard owns its mobile chrome inside the consolidated responsive dashboard stylesheet'
+);
+check('property/home/index.html uses responsive viewport', /name=["']viewport["']/.test(homePage), 'Mobile reflow contract');
+check('property/home/index.html loads mobile menu styling', homePage.includes('/property/css/mobile-menu.css'), 'Shared mobile menu remains styled on customer pages');
 check('primary mobile controls meet generous target sizing', mobileCss.includes('min-height:52px') && mobileMenuCss.includes('min-height:52px'), 'Exceeds WCAG 2.2 AA 24px target minimum for primary controls');
 check('mobile menu has keyboard focus treatment', mobileMenuCss.includes(':focus-visible'), 'Visible keyboard focus');
 check('mobile interactions respect reduced motion', mobileCss.includes('prefers-reduced-motion') && mobileMenuCss.includes('prefers-reduced-motion'), 'Reduced-motion contract');

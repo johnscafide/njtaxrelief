@@ -7,6 +7,9 @@ verify_jwt = true
 [functions.create-portal-session]
 verify_jwt = true
 
+[functions.billing-price-catalog]
+verify_jwt = false
+
 [functions.source-monitor-ingest]
 verify_jwt = true
 
@@ -50,4 +53,120 @@ verify_jwt = true
 verify_jwt = false
 
 [functions.marketing-direct-mail-launch]
+verify_jwt = true
+
+[functions.workbench-hydrate]
+verify_jwt = true
+
+[functions.workbench-derived]
+verify_jwt = false
+
+# Privacy-minimized first-party analytics. Anonymous ingestion has a strict
+# event/property allowlist and no PII fields. The report is developer-only.
+[functions.product-analytics]
+verify_jwt = false
+
+[functions.product-analytics-report]
+verify_jwt = true
+
+# Public ANCHOR usage counter accepts only count/record actions and performs
+# table access server-side; raw usage rows remain unavailable to browser roles.
+[functions.anchor-usage]
+verify_jwt = false
+
+# These customer self-service functions validate the bearer token with
+# Supabase Auth inside the function. Gateway verification remains disabled so
+# missing/expired auth produces deterministic fail-closed 401 responses rather
+# than opaque gateway errors.
+[functions.submit-support-request]
+verify_jwt = false
+
+[functions.export-my-data]
+verify_jwt = false
+
+# Public status intentionally exposes only sanitized aggregate service state.
+# It never returns incident titles, routes, request IDs, metadata, or billing state.
+[functions.public-platform-status]
+verify_jwt = false
+
+# The Appeal Prospect Scanner performs its own Auth + Pro+ entitlement check
+# before reading fixed Watchdog public-source assets and returning a governed
+# ranked result. There is no anonymous/client-side fallback computation.
+[functions.appeal-prospect-scan]
+verify_jwt = false
+
+# Watchdog Intelligence production-eligible function manifest.
+# Self-test, diagnostic, bootstrap, debug, and preview-account helpers are
+# intentionally absent and must never be bulk-promoted from staging.
+
+[functions.intelligence-score-preview]
+verify_jwt = true
+
+[functions.intelligence-normalize-preview]
+verify_jwt = true
+
+[functions.intelligence-run-preview]
+verify_jwt = true
+
+[functions.intelligence-assessment-run-preview]
+verify_jwt = true
+
+[functions.intelligence-change-run-preview]
+verify_jwt = true
+
+[functions.intelligence-closing-run-preview]
+verify_jwt = true
+
+[functions.intelligence-workbench-view-preview]
+verify_jwt = true
+
+[functions.intelligence-property-context]
+verify_jwt = true
+
+[functions.intelligence-calibration-admin]
+verify_jwt = true
+
+[functions.intelligence-analyst]
+verify_jwt = true
+
+[functions.intelligence-learning]
+verify_jwt = true
+
+[functions.intelligence-learning-admin]
+verify_jwt = true
+
+[functions.intelligence-job-submit]
+verify_jwt = true
+
+# The population worker is not browser-callable. JWT gateway verification is
+# disabled because the function authenticates one-time worker tokens, the
+# production automation secret, or an authenticated developer session itself.
+[functions.intelligence-job-worker]
+verify_jwt = false
+
+[functions.intelligence-team]
+verify_jwt = true
+
+[functions.intelligence-team-job-submit]
+verify_jwt = true
+
+[functions.intelligence-operations-admin]
+verify_jwt = true
+
+[functions.intelligence-context-suggestions]
+verify_jwt = true
+
+[functions.intelligence-semantic-context]
+verify_jwt = true
+
+[functions.intelligence-scenario-preview]
+verify_jwt = true
+
+[functions.intelligence-scenario-from-prompt]
+verify_jwt = true
+
+[functions.intelligence-analyst-scenario]
+verify_jwt = true
+
+[functions.intelligence-context-event]
 verify_jwt = true

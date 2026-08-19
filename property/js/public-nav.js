@@ -1,5 +1,15 @@
 (function(){
   'use strict';
+  if(!window.NJPTRSupabaseRuntime&&document.readyState==='loading'){
+    document.write('<script src="/property/js/supabase-runtime.js"><\/script>');
+  }
+  window.addEventListener('error',function(e){
+    var resourceFailure=e&&e.target&&e.target!==window;
+    var opaqueCrossOrigin=e&&e.message==='Script error.'&&(!e.filename||Number(e.lineno||0)===0);
+    if(!resourceFailure&&!opaqueCrossOrigin)return;
+    if(window.console&&console.warn)console.warn('[watchdog] Non-fatal external/resource error suppressed from the customer fatal banner.',e&&e.message||e&&e.target&&e.target.src||e&&e.target&&e.target.href||'resource error');
+    if(e&&typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
+  },true);
   var user=null, lastFocus=null;
   var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
   function q(id){return document.getElementById(id);}

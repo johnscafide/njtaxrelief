@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Watchdog Intelligence Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/css/intelligence.css">
+</head>
+<body>
+  <main class="wi-shell">
+    <header class="wi-top">
+      <div class="wi-brand">
+        <h1>Watchdog Intelligence</h1>
+        <p>Governed property data → deterministic findings → evidence → professional action.</p>
+      </div>
+      <div class="wi-badges">
+        <span class="wi-badge preview">Preview · uncalibrated</span>
+        <span class="wi-badge">Feature branch only</span>
+      </div>
+    </header>
+
+    <section class="wi-ask" aria-labelledby="wi-ask-heading">
+      <div class="wi-ask-head"><strong id="wi-ask-heading">Ask Watchdog</strong><small>Analyst is intentionally disabled until the governed engine is validated.</small></div>
+      <div class="wi-askrow">
+        <input id="wi-question" aria-label="Ask Watchdog" value="Find the properties in my farm that deserve attention first" readonly>
+        <button type="button" disabled>Analyze</button>
+      </div>
+      <div class="wi-chips" aria-label="Example questions">
+        <button class="wi-chip" type="button" data-chip>Find assessment anomalies</button>
+        <button class="wi-chip" type="button" data-chip>What changed?</button>
+        <button class="wi-chip" type="button" data-chip>Find closing risks</button>
+        <button class="wi-chip" type="button" data-chip>Why this property?</button>
+        <button class="wi-chip" type="button" data-chip>Compare this cohort</button>
+      </div>
+    </section>
+
+    <div class="wi-grid">
+      <aside class="wi-panel">
+        <div class="wi-panel-title"><h2>Intelligence Models</h2><small>3 configured</small></div>
+        <div class="wi-models">
+          <button class="wi-model" type="button" data-model="assessment" aria-pressed="true"><b>Assessment Anomaly Finder</b><small>Pro · preview · 60% evidence floor</small></button>
+          <button class="wi-model" type="button" data-model="closing" aria-pressed="false"><b>Closing Review Priority</b><small>Pro · preview · 60% evidence floor</small></button>
+          <button class="wi-model" type="button" data-model="change" aria-pressed="false"><b>Property Change Intelligence</b><small>Pro+ · preview · 50% evidence floor</small></button>
+        </div>
+        <div class="wi-notice"><b>Prototype only.</b> The page does not call an LLM or produce live scores. The staging scorer now exists separately and remains uncalibrated.</div>
+        <div class="wi-callout"><b>Trust rule:</b> a model may rank governed evidence, but it cannot become customer-facing as validated until its calibration gate passes.</div>
+      </aside>
+
+      <section class="wi-panel" aria-labelledby="wi-queue-title">
+        <div class="wi-panel-title"><h2 id="wi-queue-title">Priority Queue</h2><small>Illustrative data</small></div>
+        <div class="wi-summary">
+          <div class="wi-metric"><b>37</b><span>properties flagged</span></div>
+          <div class="wi-metric"><b>12</b><span>high priority</span></div>
+          <div class="wi-metric"><b>82%</b><span>median evidence coverage</span></div>
+          <div class="wi-metric"><b>v1</b><span>preview model version</span></div>
+        </div>
+
+        <article class="wi-finding">
+          <div class="wi-score">87</div>
+          <div><h3>123 Main Street, Washington Township</h3><p>Assessment relationship and tax context differ materially from the current review cohort.</p><div class="wi-tags"><span class="wi-tag">89% evidence</span><span class="wi-tag">91% confidence</span><span class="wi-tag warn">Uncalibrated</span></div></div>
+          <div><button class="wi-action primary" type="button" data-finding="assessment">Why now →</button></div>
+        </article>
+
+        <article class="wi-finding">
+          <div class="wi-score">84</div>
+          <div><h3>55 Oak Avenue, Berlin</h3><p>Multiple due-diligence signals deserve review before a professional conclusion is made.</p><div class="wi-tags"><span class="wi-tag">74% evidence</span><span class="wi-tag">78% confidence</span><span class="wi-tag warn">Uncalibrated</span></div></div>
+          <div><button class="wi-action" type="button" data-finding="closing">View evidence →</button></div>
+        </article>
+
+        <article class="wi-finding">
+          <div class="wi-score">81</div>
+          <div><h3>90 Pine Road, Voorhees</h3><p>A material source-linked record change moved this property higher in the current queue.</p><div class="wi-tags"><span class="wi-tag">92% evidence</span><span class="wi-tag">86% confidence</span><span class="wi-tag">Pro+</span></div></div>
+          <div><button class="wi-action" type="button" data-finding="change">What changed →</button></div>
+        </article>
+      </section>
+
+      <aside class="wi-panel wi-detail" aria-live="polite">
+        <div class="wi-panel-title"><h2>Why this property?</h2><small id="wi-detail-model"></small></div>
+        <h3 id="wi-detail-title" style="margin-top:14px"></h3>
+        <p id="wi-detail-summary" style="color:#667085;margin:6px 0 0"></p>
+        <div class="wi-detail-metrics">
+          <div><b id="wi-detail-score">—</b><span>deterministic score</span></div>
+          <div><b id="wi-detail-confidence">—</b><span>evidence confidence</span></div>
+          <div><b id="wi-detail-coverage">—</b><span>evidence coverage</span></div>
+        </div>
+        <div class="wi-why" id="wi-detail-evidence"></div>
+        <button class="wi-action primary" type="button" data-preview-action>Add to case</button>
+        <button class="wi-action" type="button" data-preview-action>Watch property</button>
+        <button class="wi-action" type="button" data-preview-action>Create report</button>
+        <button class="wi-action" type="button" data-preview-action>Create campaign list</button>
+      </aside>
+    </div>
+  </main>
+  <div class="wi-toast" id="wi-toast" role="status" aria-live="polite"></div>
+  <script src="/property/js/intelligence-preview.js"></script>
+</body>
+</html>

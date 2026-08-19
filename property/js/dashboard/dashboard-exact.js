@@ -145,7 +145,7 @@
     var pins = pinsFor(props), byKey = {};
     state.scoreHistory.forEach(function (r) {
       if (!pins.has(r.pams_pin) || valid(r.score) == null) return;
-      var d = new Date(r.observed_at || r.observed_on);
+      var d = new Date(r.observed_at);
       if (!Number.isFinite(d.getTime())) return;
       var day = d.toISOString().slice(0, 10), key = day + '|' + r.pams_pin;
       var stamp = d.getTime();
@@ -474,7 +474,7 @@
   function fetchData() {
     return client.from('saved_properties').select('id,pams_pin,kind,address,town,county,zip,assessed,last_year_tax,effective_rate,watchdog_value,has_appeal_case,updated_at,created_at,lat,lon,verified').order('created_at',{ascending:false}).then(function(res){state.properties=res&&res.data||[];var pins=unique(state.properties.map(function(p){return p.pams_pin;}));if(!pins.length)return[];return Promise.allSettled([
       client.from('public_watchdog_score_cache').select('pams_pin,watchdog_score,town,county,peer_count,peer_median,computed_at').in('pams_pin',pins),
-      client.from('score_observations').select('pams_pin,marker_id,score,observed_on,observed_at,evidence_coverage').in('pams_pin',pins).in('marker_id',['watchdog.score','watchdog.watchdog_score']).order('observed_at',{ascending:true}).limit(2500),
+      client.from('score_observations').select('pams_pin,marker_id,score,observed_at,model_version').in('pams_pin',pins).in('marker_id',['watchdog.score','watchdog.watchdog_score']).order('observed_at',{ascending:true}).limit(2500),
       client.from('property_update_events').select('pams_pin,event_type,severity,title,occurred_at,delta_numeric,marker_id,old_value,new_value,read_at').in('pams_pin',pins).gte('occurred_at',isoDaysAgo(120)).order('occurred_at',{ascending:false}).limit(3000),
       client.from('property_record_snapshots').select('pams_pin,captured_at,payload').in('pams_pin',pins).order('captured_at',{ascending:true}).limit(3000)
     ]);}).then(function(parts){if(!Array.isArray(parts))return;state.scores=settled(parts[0]);state.scoreHistory=settled(parts[1]);state.changes=settled(parts[2]);state.snapshots=settled(parts[3]);});

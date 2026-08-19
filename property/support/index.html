@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Watchdog Support | Property Intelligence</title>
+  <meta name="description" content="Get help with your Watchdog Property Intelligence account, property data, access or technical issue.">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/operations.css">
+</head>
+<body>
+  <main class="op-shell">
+    <header class="op-top">
+      <a class="op-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+      <nav><a href="/property/">Property lookup</a><a href="/property/status">System status</a><a href="/property/faq">FAQ</a></nav>
+    </header>
+
+    <section class="op-hero">
+      <div class="op-hero-main"><span class="op-kicker"><i class="fas fa-life-ring"></i> Customer support</span><h1>How can we help?</h1><p>Send the affected page, what you expected to happen, and what happened instead. Do not include passwords, payment-card numbers or other sensitive credentials.</p></div>
+      <aside class="op-card op-summary"><div class="op-summary-row"><span class="op-status-dot"></span><div><strong>Support is available</strong><small>We aim to acknowledge account and technical requests within two business days.</small></div></div><div class="op-meta">For payment disputes or account access issues, choose the matching category below.</div></aside>
+    </section>
+
+    <section class="op-grid">
+      <article class="op-card"><h2>Send a support request</h2><p>Signed-in requests are saved to your Watchdog account so the team can investigate without asking you to resend the basic context.</p>
+        <div id="support-gate" class="op-callout">Checking your Watchdog session…</div>
+        <form class="op-form" id="support-form" hidden>
+          <div class="op-form-grid"><label>Category<select id="support-category"><option value="account">Account</option><option value="access">Plan or access</option><option value="data">Property data</option><option value="technical">Technical issue</option><option value="billing">Billing</option><option value="other">Other</option></select></label><label>Priority<select id="support-priority"><option value="normal">Normal</option><option value="high">High, blocking my work</option></select></label></div>
+          <label>Subject<input id="support-subject" maxlength="140" required placeholder="Short description of the issue"></label>
+          <label>What happened?<textarea id="support-message" maxlength="5000" required placeholder="Include the affected page and enough detail for us to reproduce the problem."></textarea></label>
+          <button class="op-btn" id="support-submit" type="submit">Submit request</button><div class="op-note" id="support-note" aria-live="polite"></div>
+        </form>
+      </article>
+
+      <article class="op-card"><h2>Fast answers</h2><p>These pages cover the questions that most often look like support issues.</p><div class="op-help-list"><a href="/property/status"><span>Check platform status</span><i class="fas fa-arrow-right"></i></a><a href="/property/faq"><span>Property and tax FAQ</span><i class="fas fa-arrow-right"></i></a><a href="/property/data-methodology"><span>How Watchdog data works</span><i class="fas fa-arrow-right"></i></a><a href="/property/refunds"><span>Refund and cancellation policy</span><i class="fas fa-arrow-right"></i></a><a href="/property/account"><span>Account and membership</span><i class="fas fa-arrow-right"></i></a></div></article>
+
+      <article class="op-card"><h2>Email support</h2><p>If you cannot sign in, email the Watchdog team from the address associated with your account.</p><div class="op-callout"><b>hello@njpropertytaxrelief.com</b><br>Include only information needed to locate the account or reproduce the issue. Never send a password or full payment-card number.</div></article>
+      <article class="op-card"><h2>What we include automatically</h2><p>Authenticated support requests are associated with your account ID and submission time. The form itself does not attach property records, browser storage, passwords or payment credentials.</p><div class="op-callout">When deeper diagnostics are necessary, support can ask for a page name, sanitized request ID or other limited troubleshooting information.</div></article>
+    </section>
+
+    <footer class="op-footer"><span>Watchdog Property Intelligence</span><span><a href="/property/privacy">Privacy</a> · <a href="/property/terms">Terms</a> · <a href="mailto:hello@njpropertytaxrelief.com">Email</a></span></footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/support.js"></script>
+</body>
+</html>

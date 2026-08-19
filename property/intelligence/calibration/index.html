@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" data-access-require="agent" data-developer-only="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Watchdog Intelligence Calibration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/intelligence-calibration.css">
+</head>
+<body data-plan-auto="true">
+  <main class="ic-shell">
+    <header class="ic-head">
+      <div>
+        <div class="ic-eyebrow">DEVELOPER · WATCHDOG INTELLIGENCE</div>
+        <h1>Calibration Control</h1>
+        <p>Human review gates before any Intelligence model can be treated as validated.</p>
+      </div>
+      <a class="ic-back" href="/property/data-workbench"><i class="fas fa-arrow-left"></i> Data Workbench</a>
+    </header>
+
+    <section class="ic-trust">
+      <div><i class="fas fa-shield-halved"></i></div>
+      <div><b>Passing a calibration gate does not auto-promote a model.</b><span>Calibration records are service-managed. Customer-facing model state remains a separate explicit release decision.</span></div>
+    </section>
+
+    <section id="ic-summary" class="ic-summary" aria-live="polite">
+      <div class="ic-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading calibration sets…</div>
+    </section>
+
+    <section class="ic-workspace">
+      <aside id="ic-sets" class="ic-sets"></aside>
+      <section id="ic-detail" class="ic-detail">
+        <div class="ic-empty"><i class="fas fa-chart-line"></i><h2>Select a calibration set</h2><p>Review its gate, import a governed run, and label individual cases.</p></div>
+      </section>
+    </section>
+  </main>
+  <div id="pl-toast" class="pl-toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/js/intelligence-calibration.js"></script>
+</body>
+</html>

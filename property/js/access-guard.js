@@ -1,15 +1,37 @@
 (function () {
   'use strict';
 
-  var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
-  var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var FALLBACK_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
+  var FALLBACK_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var STAGING_URL = 'https://pxossnwmrygxlpxtstnl.supabase.co';
+  var STAGING_KEY = 'sb_publishable_2knfdj4MRsPEtQpPbQ54ew_S5KngOcl';
+  var STAGING_STORAGE = 'sb-pxossnwmrygxlpxtstnl-auth-token';
+  var hostname = String(location.hostname || '').toLowerCase();
+  var previewHost = hostname === 'localhost' || hostname === '127.0.0.1' || /\.vercel\.app$/.test(hostname);
   var client;
+
+  if (previewHost && window.supabase && typeof window.supabase.createClient === 'function' && !window.supabase.__watchdogPreviewWrapped) {
+    var originalCreateClient = window.supabase.createClient.bind(window.supabase);
+    window.supabase.createClient = function (url, key, options) {
+      var out = Object.assign({}, options || {});
+      out.auth = Object.assign({}, (options && options.auth) || {}, { storageKey: STAGING_STORAGE });
+      if (String(url || '').indexOf('uvkvaxljhhngydvlrzom') !== -1) {
+        return originalCreateClient(STAGING_URL, STAGING_KEY, out);
+      }
+      return originalCreateClient(url, key, out);
+    };
+    try { Object.defineProperty(window.supabase, '__watchdogPreviewWrapped', { value: true }); } catch (_error) {}
+  }
 
   function sb() {
     if (client) return client;
-    client = window.supabase.createClient(URL, KEY, { auth: {
+    if (window.NJPTRSupabaseRuntime) {
+      client = window.NJPTRSupabaseRuntime.createClient();
+      return client;
+    }
+    client = window.supabase.createClient(FALLBACK_URL, FALLBACK_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
-      flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token'
+      flowType: 'pkce', storageKey: previewHost ? STAGING_STORAGE : 'sb-uvkvaxljhhngydvlrzom-auth-token'
     }});
     return client;
   }

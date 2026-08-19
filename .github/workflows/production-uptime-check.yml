@@ -1,0 +1,135 @@
+name: Production uptime check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/production-uptime-check.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '*/15 * * * *'
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: production-uptime-check
+  cancel-in-progress: true
+
+env:
+  WATCHDOG_UPTIME_OWNER: johnscafide
+  WATCHDOG_UPTIME_ISSUE_TITLE: '[Watchdog Uptime] Production availability incident'
+
+jobs:
+  public-web-health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check public Watchdog routes
+        shell: bash
+        run: |
+          set -euo pipefail
+          check() {
+            local url="$1"
+            local expected="$2"
+            local body
+            body="$(mktemp)"
+            echo "Checking ${url}"
+            curl --fail --location --silent --show-error \
+              --connect-timeout 10 --max-time 25 \
+              --retry 2 --retry-delay 2 --retry-all-errors \
+              -H 'User-Agent: Watchdog-Uptime-GitHub-Actions/1.0' \
+              "$url" -o "$body"
+            if ! grep -qi "$expected" "$body"; then
+              echo "Expected marker not found for ${url}: ${expected}"
+              head -c 500 "$body" || true
+              exit 1
+            fi
+            echo "OK ${url}"
+          }
+
+          check 'https://njpropertytaxrelief.com/' 'NJ Property Tax'
+          check 'https://njpropertytaxrelief.com/property/' 'Watchdog'
+
+      - name: Record monitoring boundary
+        if: always()
+        run: |
+          echo 'This monitor checks public HTTP availability and expected page markers only.'
+          echo 'It does not authenticate, inspect customer records, or test billing.'
+          echo 'Scheduled failures open or update one GitHub incident assigned to the launch owner.'
+
+  incident-alert:
+    if: ${{ always() && github.event_name != 'pull_request' }}
+    needs: public-web-health
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Open or update production incident on failure
+        if: ${{ needs.public-web-health.result != 'success' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = process.env.WATCHDOG_UPTIME_ISSUE_TITLE;
+            const assignee = process.env.WATCHDOG_UPTIME_OWNER;
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const now = new Date().toISOString();
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            const existing = issues.find(issue => !issue.pull_request && issue.title === title);
+            const body = [
+              'Production Watchdog public availability check failed.',
+              '',
+              `- Detected: ${now}`,
+              `- Workflow run: ${runUrl}`,
+              '- Checked: https://njpropertytaxrelief.com/ and https://njpropertytaxrelief.com/property/',
+              '- Owner: @' + assignee,
+              '',
+              'Triage the failed route before making a public status claim. This alert contains no customer or billing data.'
+            ].join('\n');
+            if (existing) {
+              await github.rest.issues.createComment({ owner, repo, issue_number: existing.number, body });
+              if (!existing.assignees?.some(user => user.login === assignee)) {
+                await github.rest.issues.addAssignees({ owner, repo, issue_number: existing.number, assignees: [assignee] });
+              }
+              core.info(`Updated uptime incident #${existing.number}`);
+            } else {
+              const created = await github.rest.issues.create({ owner, repo, title, body, assignees: [assignee] });
+              core.info(`Opened uptime incident #${created.data.number}`);
+            }
+
+      - name: Close production incident after recovery
+        if: ${{ needs.public-web-health.result == 'success' }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const title = process.env.WATCHDOG_UPTIME_ISSUE_TITLE;
+            const runUrl = `${context.serverUrl}/${owner}/${repo}/actions/runs/${context.runId}`;
+            const { data: issues } = await github.rest.issues.listForRepo({
+              owner,
+              repo,
+              state: 'open',
+              per_page: 100
+            });
+            const incident = issues.find(issue => !issue.pull_request && issue.title === title);
+            if (!incident) {
+              core.info('No open uptime incident to close.');
+              return;
+            }
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: incident.number,
+              body: `Production availability recovered. Healthy workflow run: ${runUrl}`
+            });
+            await github.rest.issues.update({ owner, repo, issue_number: incident.number, state: 'closed', state_reason: 'completed' });
+            core.info(`Closed recovered uptime incident #${incident.number}`);

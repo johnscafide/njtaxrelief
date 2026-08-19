@@ -6,13 +6,23 @@ on:
       - main
     paths:
       - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/tests/ops-selfservice-acceptance.mjs'
+      - 'property/tests/public-property-production-smoke.mjs'
       - 'property/dashboard/**'
       - 'property/home/**'
       - 'property/agent-desk/**'
       - 'property/data-workbench/**'
       - 'property/intelligence/**'
+      - 'property/account/**'
+      - 'property/support/**'
+      - 'property/status/**'
+      - 'property/scan/**'
       - 'property/js/**'
       - 'property/css/**'
+      - 'supabase/functions/submit-support-request/**'
+      - 'supabase/functions/export-my-data/**'
+      - 'supabase/functions/public-platform-status/**'
+      - 'supabase/functions/appeal-prospect-scan/**'
   workflow_dispatch:
     inputs:
       ref:
@@ -34,6 +44,8 @@ jobs:
     env:
       STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
       STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      WATCHDOG_TEST_STANDARD_EMAIL: ${{ secrets.WATCHDOG_TEST_STANDARD_EMAIL }}
+      WATCHDOG_TEST_STANDARD_PASSWORD: ${{ secrets.WATCHDOG_TEST_STANDARD_PASSWORD }}
       WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
       WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
       VISUAL_BASE_URL: http://127.0.0.1:4173
@@ -56,6 +68,8 @@ jobs:
           set -euo pipefail
           test -n "$STAGING_SUPABASE_URL"
           test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
+          test -n "$WATCHDOG_TEST_STANDARD_EMAIL"
+          test -n "$WATCHDOG_TEST_STANDARD_PASSWORD"
           test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
           test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
 
@@ -101,10 +115,16 @@ jobs:
           print(f'Rewrote {touched} frontend files to staging inside runner workspace only.')
           PY
 
+      - name: Verify operations and server Scanner boundaries
+        run: node property/tests/ops-selfservice-acceptance.mjs
+
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.55.0
           npx playwright install --with-deps chromium
+
+      - name: Verify production property page has no fatal script error
+        run: node property/tests/public-property-production-smoke.mjs
 
       - name: Start local release-candidate server
         shell: bash
@@ -120,6 +140,12 @@ jobs:
           done
           cat /tmp/watchdog-visual-server.log || true
           exit 1
+
+      - name: Verify release-candidate property page has no fatal script error
+        env:
+          PUBLIC_PROPERTY_URL: http://127.0.0.1:4173/property/
+          PUBLIC_PROPERTY_LABEL: release-candidate
+        run: node property/tests/public-property-production-smoke.mjs
 
       - name: Run authenticated desktop and mobile acceptance
         run: node property/tests/hosted-visual-acceptance.mjs

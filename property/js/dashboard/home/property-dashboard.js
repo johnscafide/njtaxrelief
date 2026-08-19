@@ -251,8 +251,7 @@
     var marker = scoreMarker();
     if (!db || !user || !pin || !marker) return Promise.resolve([]);
     return db.from('score_observations')
-      .select('marker_id,score,observed_at,model_version')
-      .eq('user_id', user.id)
+      .select('pams_pin,marker_id,score,observed_at,model_version')
       .eq('pams_pin', pin)
       .eq('marker_id', marker.id)
       .order('observed_at', { ascending: true })

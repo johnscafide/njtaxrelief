@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Watchdog Status | Property Intelligence</title>
+  <meta name="description" content="Current operational status for Watchdog Property Intelligence services.">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/operations.css">
+</head>
+<body>
+  <main class="op-shell">
+    <header class="op-top">
+      <a class="op-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+      <nav><a href="/property/">Property lookup</a><a href="/property/support">Support</a><a href="/property/updates">What's new</a></nav>
+    </header>
+
+    <section class="op-hero">
+      <div class="op-hero-main">
+        <span class="op-kicker"><i class="fas fa-signal"></i> Service health</span>
+        <h1>Watchdog status</h1>
+        <p>A privacy-safe view of Watchdog service health. Internal request identifiers, property data, customer information, billing state and diagnostic payloads are never published here.</p>
+      </div>
+      <aside class="op-card op-summary" aria-live="polite">
+        <div class="op-summary-row"><span class="op-status-dot" id="status-dot"></span><div><strong id="status-title">Checking status…</strong><small id="status-copy">Connecting to Watchdog services</small></div></div>
+        <div class="op-meta" id="status-updated"></div>
+      </aside>
+    </section>
+
+    <section class="op-grid">
+      <article class="op-card"><h2>Services</h2><p>Operational state is derived from Watchdog's sanitized incident control plane.</p><div id="status-components"><div class="op-empty">Loading service health…</div></div></article>
+      <article class="op-card"><h2>Recently resolved</h2><p>Resolved incidents are shown only by broad service component and time.</p><div class="op-history" id="status-history"><div class="op-empty">Loading incident history…</div></div></article>
+      <article class="op-card"><h2>Need help?</h2><p>If something looks wrong with your account or property workspace, send a support request with the affected page and a short description.</p><div class="op-help-list"><a href="/property/support"><span>Contact Watchdog support</span><i class="fas fa-arrow-right"></i></a><a href="/property/faq"><span>Property data FAQ</span><i class="fas fa-arrow-right"></i></a><a href="/property/data-methodology"><span>Data methodology</span><i class="fas fa-arrow-right"></i></a></div></article>
+      <article class="op-card"><h2>How status works</h2><p>Watchdog records sanitized client and service signals, groups recurring failures into incidents, and exposes only a minimal public summary here.</p><div class="op-callout"><b>No property or customer records are part of this feed.</b><br>When a status check cannot be completed, the page reports the state as unknown instead of assuming everything is operational.</div></article>
+    </section>
+
+    <footer class="op-footer"><span>Watchdog Property Intelligence</span><span><a href="/property/privacy">Privacy</a> · <a href="/property/terms">Terms</a> · <a href="/property/support">Support</a></span></footer>
+  </main>
+  <script src="/property/js/status.js"></script>
+</body>
+</html>

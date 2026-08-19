@@ -126,11 +126,21 @@
     var s = document.createElement('script'); s.id = 'wd-flood-script'; s.src = '/property/js/flood-intelligence.js'; s.defer = true; document.head.appendChild(s);
   }
 
+  function loadWhyWatchdog() {
+    if (window.WatchdogWhy || document.getElementById('wd-why-script')) return;
+    var s = document.createElement('script');
+    s.id = 'wd-why-script';
+    s.src = '/property/js/watchdog-why.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
   document.addEventListener('njptr:plan-change', function (event) { paintDeveloperLinks(!!(event.detail && event.detail.developer)); paintPlanNavigation(); });
   document.addEventListener('watchdog:developer-confirmed', function () { paintDeveloperLinks(true); });
   document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
+    loadWhyWatchdog();
     if (loadModernSecondaryShell()) return Promise.resolve(true);
     loadFlood();
     var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
