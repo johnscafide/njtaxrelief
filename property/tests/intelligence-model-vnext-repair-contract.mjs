@@ -57,7 +57,15 @@ expect(shadow.includes('Shadow evaluator accepts draft model versions only'),'Sh
 expect(shadow.includes('Shadow evaluator refuses the current customer-facing model version'),'Shadow evaluator must refuse the current model pointer.');
 expect(shadow.includes('aggregate_shadow_evaluation_no_property_identifiers'),'Shadow output must declare aggregate/no-property-ID privacy.');
 expect(shadow.includes('persistence:"none"'),'Shadow evaluator must explicitly declare zero persistence.');
-expect(shadow.includes('/functions/v1/workbench-derived')&&shadow.includes('/functions/v1/workbench-hydrate'),'Shadow evaluator must resolve governed derived/raw evidence rather than invent inputs.');
+expect(shadow.includes('/functions/v1/workbench-derived')&&shadow.includes('/functions/v1/workbench-hydrate'),'Shadow evaluator must resolve governed property evidence rather than invent inputs.');
+expect(shadow.includes('function changeEventRaw')&&shadow.includes('property_update_events'),'Property Change shadow must build synthetic event-window inputs from governed property update events.');
+expect(shadow.includes('eventSynthetic=new Set(["event.type_priority","event.materiality","event.occurred_at","event.material_event_count_90d","event.distinct_type_count_90d"])'),'Synthetic Property Change event inputs must not be sent to property-marker hydration.');
+expect(shadow.includes('excluded.has(type)'),'Decision-material adapter must enforce the draft excluded-event contract.');
+expect(shadow.includes('"event.type_priority":anchor?clean(anchor.event_type,80):null'),'Event-type priority must come from the newest decision-material event type.');
+expect(shadow.includes('"event.materiality":anchor?clean(anchor.severity,80):null'),'Event materiality must come from the governed event severity.');
+expect(shadow.includes('"event.occurred_at":anchor?.occurred_at||null'),'vNext recency must use the actual occurred-at field.');
+expect(shadow.includes('"event.material_event_count_90d":list.length')&&shadow.includes('"event.distinct_type_count_90d":distinctTypes.size'),'vNext count features must be derived from the filtered material-event window.');
+expect(shadow.includes('material_events:${eventAdapter.summary.material_events}')&&shadow.includes('distinct_material_event_types:${eventAdapter.summary.distinct_material_event_types}'),'Property Change shadow must block holdout readiness when material-event coverage is insufficient.');
 expect(shadow.includes('structurally_ready_for_fresh_holdout'),'Shadow evaluator must produce a structural holdout readiness decision.');
 expect(shadow.includes('threshold_positive_candidates')&&shadow.includes('threshold_negative_candidates')&&shadow.includes('unique_feature_vectors'),'Shadow readiness must require both threshold classes and diverse feature vectors.');
 expect(shadow.includes('Shadow discrimination is not model validation'),'Shadow evaluator must preserve the calibration boundary.');
@@ -71,10 +79,12 @@ expect(page.includes('/property/css/intelligence-model-repair-readiness.css'),'C
 expect(page.includes('/property/js/intelligence-model-repair-readiness.js'),'Calibration Review must load repair-readiness runtime.');
 expect(panel.includes("functions.invoke('intelligence-model-repair-readiness'"),'Repair panel must use the governed developer readiness endpoint.');
 expect(panel.includes("functions.invoke('intelligence-model-shadow-evaluate'"),'Repair panel must expose the governed shadow evaluator.');
-expect(panel.includes("model_key:'closing_review',model_version:3")&&panel.includes('sample_size:100'),'Closing shadow UI must target the immutable v3 draft with a bounded sample.');
+expect(panel.includes("model:'closing_review',version:3")&&panel.includes("model:'property_change_priority',version:4"),'Repair panel must expose both immutable draft shadow paths.');
+expect(panel.includes('sample_size:100'),'Shadow UI must keep evaluation samples bounded.');
+expect(panel.includes('decision-material events'),'Property Change shadow UI must surface the material-event pool rather than generic property counts.');
 expect(panel.includes('fresh holdout actually worth labeling'),'Repair panel must frame the decision around avoiding wasted human labels.');
 expect(panel.includes('Draft vNext designs remain non-runnable and uncalibrated'),'Repair panel must not imply draft readiness equals calibration.');
 expect(css.includes('.cr-repair-model')&&css.includes('.cr-repair-model.ready')&&css.includes('.cr-repair-shadow-result'),'Repair readiness must have compact blocked/ready and shadow visual states.');
 
 for(const [name,content] of Object.entries({draft,restore,gate,readiness,shadow,config,page,panel,css}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
-console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, aggregate readiness, non-persisting draft shadow evaluation, developer UI, fresh-holdout boundary, no ?v=.');
+console.log('Intelligence model-vNext repair contract passed: immutable drafts, safe rollback, DB promotion interlock, aggregate readiness, non-persisting Closing + decision-material Property Change shadow evaluation, developer UI, fresh-holdout boundary, no ?v=.');
