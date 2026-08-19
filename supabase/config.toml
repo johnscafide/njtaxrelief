@@ -155,6 +155,16 @@ verify_jwt = true
 [functions.intelligence-closing-v4-structural-shadow]
 verify_jwt = false
 
+# Internal, manual-only Closing Review v5 validation tools. Both validate the
+# same environment-local Vault token before service-role access. The shadow is
+# aggregate-only; the holdout seeder is one-shot, excludes all prior Closing
+# calibration properties, and cannot alter the customer model pointer or promote.
+[functions.intelligence-closing-v5-structural-shadow]
+verify_jwt = false
+
+[functions.intelligence-closing-v5-holdout-seed]
+verify_jwt = false
+
 # Internal six-hour saved-property source-fact watcher. Gateway JWT verification
 # is disabled because the worker authenticates an environment-local Vault token
 # before any data access. State/run tables remain service-role only.
