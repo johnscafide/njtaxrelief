@@ -176,6 +176,13 @@ verify_jwt = false
 [functions.intelligence-closing-v7-structural-shadow]
 verify_jwt = false
 
+# Internal one-shot development-sanity seeder for Closing v7. It uses the same
+# environment-local hashed shadow token, excludes every prior Closing calibration
+# property, creates only a 10-case non-promotion development set, hides model
+# predictions before save, and cannot validate or promote the model.
+[functions.intelligence-closing-v7-sanity-seed]
+verify_jwt = false
+
 # Internal six-hour saved-property source-fact watcher. Gateway JWT verification
 # is disabled because the worker authenticates an environment-local Vault token
 # before any data access. State/run tables remain service-role only.
