@@ -242,3 +242,11 @@ verify_jwt = true
 
 [functions.intelligence-crm-analyst]
 verify_jwt = true
+
+# Phase 6 verified CRM-to-property resolution. Review actions require a signed-in
+# Teams/developer session; the background worker authenticates a separate Vault token.
+[functions.integration-crm-resolver]
+verify_jwt = true
+
+[functions.integration-crm-resolution-worker]
+verify_jwt = false
