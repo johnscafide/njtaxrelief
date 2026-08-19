@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T22:42:33.563Z",
+ "generated_at": "2026-08-19T22:44:16.069Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -7887,7 +7887,7 @@
    "professional_reason": "Adds an authoritative public-record fact to professional due diligence.",
    "source_layer": "22",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7914,7 +7914,7 @@
    "professional_reason": "Adds an authoritative public-record fact to professional due diligence.",
    "source_layer": "27",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7995,7 +7995,7 @@
    "professional_reason": "Adds an authoritative public-record fact to professional due diligence.",
    "source_layer": "16",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -8076,7 +8076,7 @@
    "professional_reason": "Adds an authoritative public-record fact to professional due diligence.",
    "source_layer": "11",
    "provider_status": "live",
-   "provider_note": "No provider family connected yet",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
