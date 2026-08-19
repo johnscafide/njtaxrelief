@@ -88,10 +88,21 @@
       '<span class="wdi-evidence">Evidence coverage: ' + esc(num(evidence, 1)) + '%</span></article>';
   }
 
+  function weightsHtml(methodology) {
+    methodology = methodology || {};
+    var components = Array.isArray(methodology.score_components) ? methodology.score_components : [];
+    if (!components.length) return '';
+    return components.map(function (component) {
+      var weight = Number(component.weight);
+      return '<div class="wdi-weight"><div class="wdi-weight-top"><b>' + esc(component.label || 'Score component') + '</b><strong>' + esc(num(weight)) + '%</strong></div>' +
+        '<div class="wdi-weight-bar" aria-hidden="true"><i style="--wdi-weight:' + pct(weight * 3.333333) + '%"></i></div></div>';
+    }).join('');
+  }
+
   function render(data) {
     var host = document.getElementById('wdi-live');
     if (!host || !data) return;
-    var c = data.cohort || {}, e = data.engine || {}, s = data.signals || {}, w = data.source_watch || {};
+    var c = data.cohort || {}, e = data.engine || {}, s = data.signals || {}, m = data.methodology || {};
     var tax = s.tax_pressure || {}, rev = s.revaluation_risk || {}, uni = s.uniformity || {};
     var asof = document.getElementById('wdi-asof');
     var scope = document.getElementById('wdi-scope');
@@ -120,11 +131,12 @@
           '<div><i class="fas fa-shield-halved"></i><span><b>4 · Confidence gates</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
         '</div></article>' +
       '</div>' +
+      '<div class="wdi-weights"><div class="wdi-weights-copy"><span class="wdi-label">The score, opened up</span><h3>Exactly what the current Watchdog Score weighs.</h3><p>The live public sample reads these component weights from the governed scoring contract returned by Watchdog, rather than duplicating them as marketing copy.</p><span class="wdi-model">Model: ' + esc(m.score_model || 'current governed model') + '</span></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
       '<div class="wdi-cta"><div><h3>This is the sample. Paid Watchdog Intelligence goes property by property.</h3><p>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
 
     var plans = document.getElementById('wdi-plans');
     if (plans) plans.addEventListener('click', function () {
-      track('landing_intelligence_plan_click', { placement:'live_intelligence_glance', cohort_as_of:data.as_of || '', properties:Number(c.properties)||0 });
+      track('landing_intelligence_plan_click', { placement:'live_intelligence_glance', cohort_as_of:data.as_of || '', properties:Number(c.properties)||0, model:m.score_model || '' });
     });
   }
 
