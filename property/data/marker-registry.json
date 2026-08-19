@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T22:11:39.980Z",
+ "generated_at": "2026-08-19T22:13:07.554Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 449,
+   "live": 453,
    "partial": 4,
    "unavailable": 11,
-   "planned": 270
+   "planned": 266
   },
   "retired_phase5": 0
  },
@@ -15938,8 +15938,8 @@
    "field": "deed_notice_reference",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "deed_notice_reference",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15965,8 +15965,8 @@
    "field": "cea_reference",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "cea_reference",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15992,8 +15992,8 @@
    "field": "ust_facility_reference",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "ust_facility_reference",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -16019,8 +16019,8 @@
    "field": "brownfield_inventory_status",
    "professional_reason": "Published contaminated site remediation GIS data for professional review; verify the official record before reliance.",
    "source_field": "brownfield_inventory_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
