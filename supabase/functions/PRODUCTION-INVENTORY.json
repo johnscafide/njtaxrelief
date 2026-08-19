@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-19T16:06:00Z",
+  "captured_at": "2026-08-19T16:19:00Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -14,7 +14,7 @@
     "create-portal-session": {"version": 19, "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c", "verify_jwt": true, "tracking": "source_snapshot"},
     "developer-sandbox-bootstrap": {"version": 5, "sha256": "5a7b06e2ed537ebe1071827e8d9dd168f1a426d5bfe28909f03420f4fe4de6ac", "verify_jwt": true, "tracking": "fingerprint_only"},
     "farm-intelligence-scan": {"version": 8, "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "farm-map-query": {"version": 7, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad6d64e38253ab04e5f9c", "verify_jwt": true, "tracking": "fingerprint_only"},
+    "farm-map-query": {"version": 7, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad67ace7b70229901d", "verify_jwt": true, "tracking": "fingerprint_only"},
     "get-platform-health": {"version": 14, "sha256": "9f81718f21f0ecb67caf27708159022c9078338e6ba3eae4bbd8e2859ec9c678", "verify_jwt": true, "tracking": "source_snapshot"},
     "google-ads-oauth-callback": {"version": 7, "sha256": "e984943f469e170b8451d2a4ad054bf32dd5a3c977a0084506dd44a16e65bba7", "verify_jwt": false, "tracking": "source_snapshot"},
     "google-ads-oauth-start": {"version": 7, "sha256": "e8179bf79f122b270b43e1e5ca7e5245264922bba17741e635f1e9d167ba7e0e", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -46,7 +46,7 @@
     "watchdog-test-auth": {"version": 5, "sha256": "88a47c2385911155999caac45339714d195c7000f11ccd455924e71e08e99c0b", "verify_jwt": false, "tracking": "fingerprint_only"},
     "intelligence-source-fact-watch": {"version": 4, "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-derived": {"version": 18, "sha256": "57be5b513507e680aa81ce748b7d9ffe303112adb9ee91ed484aaff34a6d2b0a", "verify_jwt": false, "tracking": "source_snapshot"},
+    "workbench-derived": {"version": 19, "sha256": "d458ea76e50deb7e1ff8907e1af95e2f3213e3a2fbbb58c32988b852ac4c67a8", "verify_jwt": false, "tracking": "source_snapshot"},
     "workbench-hydrate": {"version": 27, "sha256": "f356a828472c27dff845f69692cbedca0e60464fd2f4da4ac88bfaa41319bf1d", "verify_jwt": true, "tracking": "source_snapshot"},
     "workbench-provider-registry": {"version": 14, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
     "workbench-refresh": {"version": 8, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
