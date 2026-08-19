@@ -1,0 +1,8 @@
+create index if not exists integration_audit_log_connection_id_idx on public.integration_audit_log(connection_id);
+create index if not exists integration_audit_log_user_id_idx on public.integration_audit_log(user_id);
+create index if not exists integration_crm_context_connection_id_idx on public.integration_crm_context(connection_id);
+create index if not exists integration_crm_property_links_crm_context_id_idx on public.integration_crm_property_links(crm_context_id);
+create index if not exists integration_crm_property_links_reviewed_by_user_id_idx on public.integration_crm_property_links(reviewed_by_user_id);
+create index if not exists integration_deliveries_event_id_idx on public.integration_deliveries(event_id);
+create index if not exists integration_delivery_attempts_user_id_idx on public.integration_delivery_attempts(user_id);
+create index if not exists intelligence_crm_access_log_session_id_idx on public.intelligence_crm_access_log(session_id);
