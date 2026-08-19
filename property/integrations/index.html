@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Integrations | Watchdog</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/app-shell-2027.css">
+  <link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
+  <link rel="stylesheet" href="/property/css/integrations.css">
+  <link rel="manifest" href="/property/manifest.webmanifest">
+  <meta name="theme-color" content="#102a4c">
+</head>
+<body data-sidebar-page="integrations">
+<main class="ig-shell" id="ig-app">
+  <section class="ig-intro">
+    <div>
+      <span class="ig-kicker">INTEGRATION CENTER · PHASE 1</span>
+      <h2>Connect Watchdog to the systems you already use.</h2>
+      <p>Send governed Watchdog property-change events outward, receive normalized CRM context inward, and keep every connection scoped, signed and auditable.</p>
+    </div>
+    <div class="ig-phase"><span>Foundation</span><strong>Phase 1 live</strong><small>Webhook gateway · CRM context · retries</small></div>
+  </section>
+
+  <section class="ig-gate" id="ig-signin" hidden>
+    <i class="fas fa-lock"></i><div><h3>Sign in to manage integrations</h3><p>Your connections and credentials are account-scoped.</p></div><a href="/property/dashboard">Open Dashboard</a>
+  </section>
+  <section class="ig-gate" id="ig-plan-gate" hidden>
+    <i class="fas fa-plug-circle-xmark"></i><div><h3>Integrations require Pro+ or Teams</h3><p>Generic webhooks, CRM context and governed Intelligence access are higher-tier workflow capabilities.</p></div><a href="/property/pro#pricing">Compare plans</a>
+  </section>
+  <section class="ig-gate ig-error" id="ig-error" hidden>
+    <i class="fas fa-triangle-exclamation"></i><div><h3>Integration Center could not load</h3><p id="ig-error-text">Try again from this page.</p></div><button type="button" data-ig-action="reload">Retry</button>
+  </section>
+
+  <div id="ig-workspace" hidden>
+    <section class="ig-stats" aria-label="Integration status">
+      <article><i class="fas fa-link"></i><span><b id="ig-stat-connections">0</b><small>Active connections</small></span></article>
+      <article><i class="fas fa-arrow-right-arrow-left"></i><span><b id="ig-stat-delivered">0</b><small>Delivered events</small></span></article>
+      <article><i class="fas fa-rotate"></i><span><b id="ig-stat-retries">0</b><small>Retries / failures</small></span></article>
+      <article><i class="fas fa-brain"></i><span><b id="ig-stat-intel">0</b><small>Intelligence enabled</small></span></article>
+    </section>
+
+    <section class="ig-grid">
+      <article class="ig-card ig-create-card">
+        <header><div><span>NEW CONNECTION</span><h3>Webhook bridge</h3></div><i class="fas fa-code-branch"></i></header>
+        <p class="ig-muted">Use a Zapier/Make webhook URL, your CRM middleware, or another HTTPS endpoint. No CRM password is stored in Watchdog.</p>
+        <form id="ig-create-form" autocomplete="off">
+          <label>Connection name<input id="ig-name" maxlength="100" required placeholder="My CRM bridge"></label>
+          <label>Direction<select id="ig-direction"><option value="bidirectional">Two-way context + Watchdog events</option><option value="outbound">Watchdog → external system</option><option value="inbound">External system → Watchdog</option></select></label>
+          <label id="ig-outbound-row">Outbound HTTPS URL<input id="ig-outbound-url" type="url" inputmode="url" placeholder="https://hooks.example.com/watchdog"></label>
+          <label>External account label <span>optional</span><input id="ig-account-label" maxlength="120" placeholder="South Jersey CRM"></label>
+          <fieldset><legend>Watchdog events</legend><label class="ig-check"><input id="ig-event-property" type="checkbox" checked><span><b>Property signal changed</b><small>Assessment, tax, value and governed property-change events.</small></span></label></fieldset>
+          <label class="ig-toggle"><input id="ig-intelligence" type="checkbox"><span></span><div><b>Allow Watchdog Intelligence to use CRM context</b><small>Off by default. Enables the explicit <code>intelligence.context.read</code> scope; it does not let AI write back to the CRM.</small></div></label>
+          <button class="ig-primary" id="ig-create" type="submit"><i class="fas fa-plus"></i>Create connection</button>
+          <p class="ig-form-note" id="ig-create-note" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="ig-card ig-contract-card">
+        <header><div><span>PHASE 1 CONTRACT</span><h3>Secure by default</h3></div><i class="fas fa-shield-halved"></i></header>
+        <div class="ig-contract-list">
+          <div><i class="fas fa-key"></i><span><b>Inbound token shown once</b><small>Watchdog stores only its SHA-256 hash.</small></span></div>
+          <div><i class="fas fa-signature"></i><span><b>Every outbound request is signed</b><small>HMAC-SHA256 signature + timestamp + idempotency key.</small></span></div>
+          <div><i class="fas fa-filter"></i><span><b>Normalized CRM context</b><small>Only approved contact/property workflow fields are retained, not arbitrary raw payload dumps.</small></span></div>
+          <div><i class="fas fa-clock-rotate-left"></i><span><b>Automatic retry queue</b><small>Five delivery attempts with delivery and response history.</small></span></div>
+          <div><i class="fas fa-brain"></i><span><b>Intelligence requires an explicit scope</b><small>CRM context remains customer/workflow evidence, separate from governed property truth.</small></span></div>
+        </div>
+        <details><summary>Outbound signature verification</summary><pre><code>signed = HMAC_SHA256(secret, timestamp + "." + rawBody)
+header: X-Watchdog-Signature: v1=&lt;hex&gt;</code></pre></details>
+      </article>
+    </section>
+
+    <section class="ig-section">
+      <div class="ig-section-head"><div><span>YOUR CONNECTIONS</span><h3>Connected workflows</h3></div><button type="button" data-ig-action="refresh"><i class="fas fa-rotate"></i>Refresh</button></div>
+      <div class="ig-empty" id="ig-connections-empty"><i class="fas fa-plug-circle-plus"></i><b>No integrations yet</b><span>Create the first webhook bridge above.</span></div>
+      <div class="ig-connections" id="ig-connections"></div>
+    </section>
+
+    <section class="ig-section">
+      <div class="ig-section-head"><div><span>DELIVERY LOG</span><h3>Recent outbound activity</h3></div><button type="button" data-ig-action="history"><i class="fas fa-clock-rotate-left"></i>Reload log</button></div>
+      <div class="ig-history-wrap"><table class="ig-history"><thead><tr><th>Event</th><th>Connection</th><th>Status</th><th>Attempts</th><th>HTTP</th><th>When</th></tr></thead><tbody id="ig-history"></tbody></table></div>
+      <div class="ig-empty compact" id="ig-history-empty"><i class="fas fa-wave-square"></i><b>No deliveries yet</b><span>Test a connection or wait for a subscribed Watchdog event.</span></div>
+    </section>
+
+    <section class="ig-next">
+      <div><span>NEXT · PHASE 2</span><h3>Zapier-native Watchdog app</h3><p>Phase 1 is the transport layer. Phase 2 turns these contracts into named Zapier triggers and actions so customers can connect CRMs without manually configuring webhook payloads.</p></div><i class="fas fa-arrow-right-long"></i>
+    </section>
+  </div>
+</main>
+
+<div class="ig-modal" id="ig-credentials-modal" hidden>
+  <button class="ig-modal-shade" type="button" data-ig-action="close-credentials" aria-label="Close"></button>
+  <section role="dialog" aria-modal="true" aria-labelledby="ig-credentials-title">
+    <header><div><span>SHOWING ONCE</span><h3 id="ig-credentials-title">Save your connection credentials</h3></div><button type="button" data-ig-action="close-credentials"><i class="fas fa-xmark"></i></button></header>
+    <p>Watchdog will not show these secrets again. Store them in the receiving system's secret manager. You can rotate them later.</p>
+    <div id="ig-credentials-fields"></div>
+    <footer><button class="ig-primary" type="button" data-ig-action="close-credentials">I saved these credentials</button></footer>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/supabase-runtime.js"></script>
+<script src="/property/js/plan-context.js"></script>
+<script src="/property/js/app-shell-2027.js"></script>
+<script src="/property/js/integrations.js"></script>
+<script src="/property/js/pwa.js"></script>
+<script src="/property/js/platform-observability.js"></script>
+</body>
+</html>

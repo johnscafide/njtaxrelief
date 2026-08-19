@@ -1,0 +1,18 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+const root=new URL('../../',import.meta.url);
+const read=(p)=>fs.readFileSync(new URL(p,root),'utf8');
+const gateway=read('supabase/functions/integration-gateway/index.ts');
+const webhook=read('supabase/functions/integration-webhook/index.ts');
+const worker=read('supabase/functions/integration-delivery-worker/index.ts');
+const page=read('property/integrations/index.html');
+assert.match(gateway,/PLANS = new Set\(\["pro_plus","teams","developer"\]\)/,'gateway must keep Pro+ boundary');
+assert.match(gateway,/integration_store_secret/,'outbound signing secret must use Vault helper');
+assert.match(webhook,/sha256\(token\)/,'inbound tokens must be hashed');
+assert.match(webhook,/crm\\\.\(contact\|activity\|lead\|property\)/,'CRM event family must remain allowlisted');
+assert.match(worker,/X-Watchdog-Signature/,'outbound worker must sign deliveries');
+assert.match(worker,/redirect:"manual"/,'outbound worker must not follow redirects');
+assert.match(worker,/RETRY_MINUTES=\[1,5,30,120,720\]/,'retry schedule changed unexpectedly');
+assert.match(page,/data-sidebar-page="integrations"/,'Integration Center page identity missing');
+assert.doesNotMatch(page,/sidemenu\.js/,'Integration Center must not load the legacy sidebar controller');
+console.log('Watchdog integration Phase 1 source contract: PASS');
