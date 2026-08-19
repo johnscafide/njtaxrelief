@@ -1,0 +1,44 @@
+name: One-shot close Watchdog sprint initiative nine
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-close-sprint-nine.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  close-log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconcile Intelligence analytics sprint evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B main origin/main
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          p=Path('property/logs/2026-08-18/index.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<section class="progress"><b>.*?</b></section>', '<section class="progress"><b>8 initiatives complete · #3 model repair requires a fresh holdout · #10 next</b></section>', s, count=1)
+          pattern=r'<article class="item"><header><div class="num">9</div><h2>Usage measurement and Intelligence funnel analytics</h2><span class="state">.*?</span></header>.*?</article>'
+          replacement='''<article class="item"><header><div class="num">9</div><h2>Usage measurement and Intelligence funnel analytics</h2><span class="state">COMPLETE · PRODUCTION</span></header><p>Watchdog can now measure whether Intelligence earns attention and leads to useful interaction without building a second property-behavior profile.</p><ul><li>The existing privacy-minimized first-party collector now recognizes the Intelligence journey: exposure, reasoning inspection, categorized action start, intent-question shown/answered, and Trust/source evidence opens. Dedicated Intelligence and Daily Intelligence surfaces load the same collector directly.</li><li>Browser collection remains disabled by <b>Global Privacy Control</b> and <b>Do Not Track</b>. URLs are reduced to pathname; property query strings are not sent.</li><li>The Intelligence analytics allowlist excludes names, emails, phone numbers, addresses, PAMS PINs, property pins, prompts, search text, user IDs, profession, and free-form Context Graph content.</li><li>Production adds service-role-only <code>analytics_intelligence_funnel_daily</code> and <code>analytics_intelligence_interactions_daily</code> views. Both use security-invoker semantics; explicit verification confirmed <code>anon=false</code>, <code>authenticated=false</code>, <code>service_role=true</code> for SELECT.</li><li>The production product-analytics ingest function is active with the expanded named-event/property allowlist. The developer report remains JWT-protected and verifies <code>is_watchdog_developer()</code> server-side.</li><li>The developer analytics page now shows the Intelligence decision funnel, aggregate Intelligence interactions by product surface, and aggregate successful Today/Intent activity.</li><li>Successful Today and Intent usage is summarized directly from the governed append-only trails using only action/time or event-type/fact-class/time fields. The report does not select user IDs, PAMS PINs, context keys, payloads, evidence refs, addresses or prompts.</li><li>CI now protects the full privacy boundary, service-role-only aggregate views, GPC/DNT behavior, named event allowlists, developer-only reporting, and the no-<code>?v=</code> asset rule.</li><li>Vercel reached production successfully on the current analytics/privacy head and both production analytics Edge Functions were redeployed with their intended JWT settings.</li></ul><p><b>#9 closure:</b> the system can measure whether users reach, inspect and act on Watchdog Intelligence while keeping property-specific research inside the governed operational/Context Graph systems rather than copying it into product analytics.</p></article>'''
+          if not re.search(pattern,s,flags=re.S):
+              raise SystemExit('Sprint #9 article not found; refusing blind rewrite')
+          s=re.sub(pattern,replacement,s,count=1,flags=re.S)
+          p.write_text(s,encoding='utf-8')
+          Path('.github/workflows/one-shot-close-sprint-nine.yml').unlink()
+          PY
+          git config user.name 'Watchdog Release Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/logs/2026-08-18/index.html .github/workflows/one-shot-close-sprint-nine.yml
+          git commit -m 'Close Watchdog sprint initiative nine'
+          git pull --rebase origin main
+          git push origin main
