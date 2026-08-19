@@ -1,9 +1,13 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-19T22:34:00Z",
+  "captured_at": "2026-08-19T22:43:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
+    "geology.acid_producing_soil_hit": "live",
+    "geology.bedrock_outcrop_hit": "live",
+    "geology.historic_fill_hit": "live",
+    "geology.soil_mapping_hit": "live",
     "njplus.nj-dca-community-assets.opportunity_zone_status": "live",
     "njplus.nj-dca-community-assets.redevelopment_area_status": "live",
     "njplus.nj-dca-community-assets.transit_village_status": "live",
