@@ -1,0 +1,32 @@
+name: Watchdog onboarding contract
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'property/onboarding/**'
+      - 'property/css/onboarding.css'
+      - 'property/js/onboarding.js'
+      - 'property/js/supabase-runtime.js'
+      - 'property/tests/onboarding-contract.mjs'
+      - 'supabase/migrations/*required_watchdog_onboarding*.sql'
+      - '.github/workflows/onboarding-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  onboarding-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check property/js/supabase-runtime.js
+          node --check property/js/onboarding.js
+      - name: Verify required onboarding boundaries
+        run: node property/tests/onboarding-contract.mjs
+      - name: Re-run canonical Supabase runtime contract
+        run: node property/tests/supabase-runtime-contract.mjs
