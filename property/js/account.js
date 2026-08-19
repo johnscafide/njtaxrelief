@@ -10,22 +10,35 @@
   var counts = { properties: 0, cases: 0 };
   var $ = function (id) { return document.getElementById(id); };
 
+  // Keep this presentation catalog aligned with the active Stripe Live catalog.
+  // Checkout remains server-authoritative; these values are display-only.
   var plans = {
     agent: {
-      internal: 'pro',
+      internal: 'agent',
       name: 'Agent',
-      monthly: 29,
-      yearly: 290,
-      audience: 'For agents who need a sourced reason to start the right conversation.',
+      monthly: 59,
+      yearly: 590,
+      audience: 'For agents who want sourced property intelligence, opportunity discovery and professional client workflows.',
       features: ['Opportunity Desk and sphere monitoring', 'Professional reports and exports', 'Agent-focused property signals']
     },
-    professional: {
+    pro: {
+      internal: 'pro',
+      name: 'Pro',
+      monthly: 129,
+      yearly: 1290,
+      featured: true,
+      badge: 'PROFESSIONAL WORKSPACE',
+      audience: 'For professionals who need deeper property intelligence and repeatable research tools.',
+      features: ['Expanded professional workbenches', 'Advanced Watchdog intelligence', 'Professional research and governed exports']
+    },
+    pro_plus: {
       internal: 'pro_plus',
-      name: 'Professional',
-      monthly: 349,
-      yearly: 3490,
-      audience: 'For attorneys, lenders, investors and property teams doing repeatable research.',
-      features: ['All professional workbenches', 'Advanced and proprietary markers', 'Bulk research and governed exports']
+      name: 'Pro+',
+      monthly: 399,
+      yearly: 3990,
+      badge: 'MAXIMUM DATA ACCESS',
+      audience: 'For power users who need Watchdog’s deepest data, bulk intelligence and highest-volume professional workflows.',
+      features: ['1,000+ data points and proprietary markers', 'Population and scheduled intelligence', 'Bulk research and advanced governed exports']
     }
   };
 
@@ -42,9 +55,10 @@
   }
 
   function planLabel(value) {
-    if (value === 'pro') return 'Agent';
-    if (value === 'pro_plus') return 'Professional';
-    if (value === 'teams') return 'Firm / API';
+    if (value === 'agent') return 'Agent';
+    if (value === 'pro') return 'Pro';
+    if (value === 'pro_plus') return 'Pro+';
+    if (value === 'teams') return 'Teams';
     if (value === 'developer') return 'Developer';
     return 'Free';
   }
@@ -54,8 +68,13 @@
     return new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
-  function money(value) {
-    return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value);
+  function money(value, decimals) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: decimals ? 2 : 0,
+      maximumFractionDigits: decimals ? 2 : 0
+    }).format(value);
   }
 
   function sb() {
@@ -93,21 +112,26 @@
     return developer ? 'developer' : (entitlement.plan_tier || 'standard');
   }
 
+  function planRank(value) {
+    return { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 }[value] || 0;
+  }
+
   function pricingCard(key, currentPlan, developer) {
     var item = plans[key];
     var active = !developer && currentPlan === item.internal;
     var annual = billingCadence === 'yearly';
     var total = annual ? item.yearly : item.monthly;
     var suffix = annual ? '/year' : '/month';
-    var equivalent = annual ? money(item.yearly / 12) + '/mo effective' : 'Billed monthly';
+    var equivalent = annual ? money(item.yearly / 12, true) + '/mo effective' : 'Billed monthly';
+    var movingDown = planRank(currentPlan) > planRank(item.internal);
     var button = developer
       ? '<button type="button" disabled>Developer access includes this</button>'
       : active
         ? '<button type="button" disabled>Current plan</button>'
-        : '<button type="button" data-billing-plan="' + key + '" data-billing-cadence="' + billingCadence + '">' +
-          (currentPlan === 'pro_plus' && key === 'agent' ? 'Move to Agent' : 'Choose ' + item.name) + '</button>';
-    return '<article class="ac-price-card' + (key === 'professional' ? ' featured' : '') + (active ? ' current' : '') + '">' +
-      (key === 'professional' ? '<span class="ac-popular">FULL PROFESSIONAL DATA</span>' : '') +
+        : '<button type="button" data-billing-plan="' + item.internal + '" data-billing-cadence="' + billingCadence + '">' +
+          (movingDown ? 'Move to ' + item.name : 'Choose ' + item.name) + '</button>';
+    return '<article class="ac-price-card' + (item.featured ? ' featured' : '') + (active ? ' current' : '') + '">' +
+      (item.badge ? '<span class="ac-popular">' + item.badge + '</span>' : '') +
       '<div class="ac-price-head"><div><span>' + item.name.toUpperCase() + '</span><h3>' + item.name + '</h3></div>' +
       (active ? '<em>Current</em>' : '') + '</div>' +
       '<div class="ac-price"><b>' + money(total) + '</b><span>' + suffix + '</span></div>' +
@@ -133,15 +157,15 @@
       '<li><i class="fas fa-check"></i>Core assessment and tax markers</li>' +
       '<li><i class="fas fa-check"></i>Standard alerts and history</li></ul>' +
       (freeCurrent ? '<button type="button" disabled>Current plan</button>' : '<button type="button" data-billing-portal>Manage current plan</button>') +
-      '</article>' + pricingCard('agent', currentPlan, developer) + pricingCard('professional', currentPlan, developer) +
-      '<article class="ac-price-card firm"><div class="ac-price-head"><div><span>FIRM / API</span><h3>Firm / API</h3></div><em>Controlled access</em></div>' +
-      '<div class="ac-price"><b>$1,000+</b><span>/month</span></div><small>Contract and usage based</small>' +
-      '<p>For organizations that need shared controls, API delivery and governed volume.</p><ul>' +
+      '</article>' + pricingCard('agent', currentPlan, developer) + pricingCard('pro', currentPlan, developer) + pricingCard('pro_plus', currentPlan, developer) +
+      '<article class="ac-price-card firm"><div class="ac-price-head"><div><span>TEAMS</span><h3>Teams</h3></div><em>Controlled access</em></div>' +
+      '<div class="ac-price"><b>Custom</b></div><small>10+ seats · enrollment opens separately</small>' +
+      '<p>For organizations that need shared administration, API delivery and governed high-volume workflows.</p><ul>' +
       '<li><i class="fas fa-check"></i>Team administration and audit controls</li>' +
       '<li><i class="fas fa-check"></i>API and high-volume data delivery</li>' +
       '<li><i class="fas fa-check"></i>Implementation and support</li></ul>' +
-      '<button type="button" disabled>Team enrollment coming separately</button></article></div>' +
-      '<p class="ac-pricing-note"><i class="fas fa-shield-halved"></i> Paid access changes only after Paddle sends a verified subscription event. Firm / API enrollment stays gated until team controls are released.</p>' +
+      '<button type="button" disabled>Teams enrollment not open yet</button></article></div>' +
+      '<p class="ac-pricing-note"><i class="fas fa-shield-halved"></i> Paid access changes only after Stripe sends a verified subscription event. Teams enrollment remains gated until its separate launch review is complete.</p>' +
       '</section>';
   }
 
@@ -157,8 +181,8 @@
     $('ac-gate').hidden = true;
     $('ac-app').hidden = false;
     $('ac-app').innerHTML =
-      (success ? '<div class="ac-success"><i class="fas fa-circle-check"></i><div><b>Checkout completed.</b><span>Paddle is confirming your subscription. Access updates when the signed webhook arrives.</span></div></div>' : '') +
-      (pending ? '<div class="ac-success pending"><i class="fas fa-clock"></i><div><b>Plan change requested.</b><span>Your account updates after Paddle confirms the change.</span></div></div>' : '') +
+      (success ? '<div class="ac-success"><i class="fas fa-circle-check"></i><div><b>Checkout completed.</b><span>Stripe is confirming your subscription. Access updates when the signed webhook arrives.</span></div></div>' : '') +
+      (pending ? '<div class="ac-success pending"><i class="fas fa-clock"></i><div><b>Plan change requested.</b><span>Your account updates after Stripe confirms the change.</span></div></div>' : '') +
       '<section class="ac-profile-hero"><div class="ac-avatar">' + esc((data.preferred_name || user.email || 'W').charAt(0).toUpperCase()) + '</div>' +
       '<div><span>PROFILE &amp; SETTINGS</span><h1>' + esc(data.preferred_name || user.user_metadata.full_name || 'Your Watchdog profile') + '</h1>' +
       '<p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p></div>' +
