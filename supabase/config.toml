@@ -126,6 +126,11 @@ verify_jwt = true
 [functions.intelligence-calibration-admin]
 verify_jwt = true
 
+# Developer-only aggregate diagnostic for score/prediction/feature-vector
+# collapse in calibration sets. It never returns property identifiers.
+[functions.intelligence-calibration-diversity]
+verify_jwt = true
+
 [functions.intelligence-analyst]
 verify_jwt = true
 
