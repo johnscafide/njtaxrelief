@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-19T14:06:00.722Z",
+ "generated_at": "2026-08-19T14:11:42.530Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 388,
-   "partial": 5,
+   "live": 391,
+   "partial": 4,
    "unavailable": 12,
-   "planned": 329
+   "planned": 327
   },
   "retired_phase5": 0
  },
@@ -1552,8 +1552,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "revaluation_risk",
-   "provider_status": "partial",
-   "provider_note": "Production Data Center governance marks this trusted-observation marker partial: the path is live, but a value is present only when a governed observation exists for the property.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -7426,8 +7426,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "investor_carry_cost_volatility",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -16881,8 +16881,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "transaction_tax_shock_index",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
