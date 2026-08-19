@@ -1,6 +1,20 @@
-const ALLOWED_ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','http://localhost:3000','http://localhost:5500','http://127.0.0.1:5500']);
-const EVENTS=new Set(['page_view','tool_open','marker_viewed','property_lookup_started','property_lookup_succeeded','export_started','export_completed','upgrade_cta_clicked','checkout_started','subscription_confirmed']);
-const PROPERTY_KEYS=new Set(['marker_id','plan','tool','action','format','source','result_count_bucket','status','billing_period','tier']);
+const ALLOWED_ORIGINS=new Set([
+  'https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com',
+  'https://watchdogre.com','https://www.watchdogre.com',
+  'http://localhost:3000','http://localhost:5500','http://127.0.0.1:5500'
+]);
+const EVENTS=new Set([
+  'page_view','tool_open','marker_viewed','property_lookup_started','property_lookup_succeeded',
+  'export_started','export_completed','upgrade_cta_clicked','checkout_started','subscription_confirmed',
+  'intelligence_exposed','intelligence_reasoning_inspected','intelligence_action_started','intelligence_action_completed',
+  'intent_question_shown','intent_question_answered','intent_question_skipped',
+  'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened',
+  'trust_evidence_opened'
+]);
+const PROPERTY_KEYS=new Set([
+  'marker_id','plan','tool','action','format','source','result_count_bucket','status','billing_period','tier',
+  'surface','interaction','model','intent_status','queue_state','reason_count_bucket'
+]);
 function cors(origin:string){return {'Access-Control-Allow-Origin':ALLOWED_ORIGINS.has(origin)?origin:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'content-type','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin','Content-Type':'application/json'};}
 function s(v:any,n=120){return String(v??'').trim().slice(0,n)}
 function uuid(v:any){return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(v||''))}
