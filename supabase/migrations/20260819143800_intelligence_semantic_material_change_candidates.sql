@@ -144,7 +144,9 @@ begin
       old_num := null; new_num := null; pct := null;
     end;
 
-    candidate_key := 'semantic:' || marker_id || ':' || md5(old_value::text || '>' || new_value::text);
+    -- Include property identity in the dedupe material so identical value changes
+    -- on different properties remain distinct candidates without exposing the key publicly.
+    candidate_key := 'semantic:' || new.pams_pin || ':' || marker_id || ':' || md5(old_value::text || '>' || new_value::text);
 
     insert into public.intelligence_material_change_candidates(
       user_id,pams_pin,marker_id,event_type,materiality,old_value,new_value,
