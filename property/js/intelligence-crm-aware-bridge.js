@@ -11,18 +11,55 @@
     return false;
   }
 
-  function patchClient(client) {
-    if (!client || !client.functions || typeof client.functions.invoke !== 'function' || client.functions.__watchdogCrmAware) return;
-    var original = client.functions.invoke.bind(client.functions);
-    client.functions.invoke = function (name, options) {
+  function routeFunctions(functionsClient) {
+    if (!functionsClient || typeof functionsClient.invoke !== 'function') return functionsClient;
+    if (functionsClient.__watchdogCrmAware) return functionsClient;
+
+    var original = functionsClient.invoke.bind(functionsClient);
+    functionsClient.invoke = function (name, options) {
       if (name === 'intelligence-analyst') {
         var prompt = options && options.body && options.body.prompt;
         if (isCrmPrompt(prompt)) return original('intelligence-crm-analyst', options);
       }
       return original(name, options);
     };
-    try { Object.defineProperty(client.functions, '__watchdogCrmAware', { value: true }); }
-    catch (_error) { client.functions.__watchdogCrmAware = true; }
+
+    try { Object.defineProperty(functionsClient, '__watchdogCrmAware', { value: true }); }
+    catch (_error) { functionsClient.__watchdogCrmAware = true; }
+    return functionsClient;
+  }
+
+  function findFunctionsDescriptor(client) {
+    var proto = client;
+    while (proto) {
+      var descriptor = Object.getOwnPropertyDescriptor(proto, 'functions');
+      if (descriptor && typeof descriptor.get === 'function') return descriptor;
+      proto = Object.getPrototypeOf(proto);
+    }
+    return null;
+  }
+
+  function patchClient(client) {
+    if (!client || client.__watchdogCrmFunctionsGetter) return;
+
+    var descriptor = findFunctionsDescriptor(client);
+    if (!descriptor || typeof descriptor.get !== 'function') {
+      try { routeFunctions(client.functions); } catch (_error) {}
+      return;
+    }
+
+    try {
+      Object.defineProperty(client, 'functions', {
+        configurable: true,
+        enumerable: descriptor.enumerable !== false,
+        get: function () {
+          return routeFunctions(descriptor.get.call(client));
+        }
+      });
+      Object.defineProperty(client, '__watchdogCrmFunctionsGetter', { value: true });
+    } catch (_error) {
+      try { routeFunctions(client.functions); } catch (_ignored) {}
+    }
   }
 
   function sendPrompt(text) {
@@ -73,7 +110,13 @@
 
     enhanceAnalyst();
     if (typeof MutationObserver !== 'undefined' && document.documentElement) {
-      var observer = new MutationObserver(function () { enhanceAnalyst(); });
+      var observer = new MutationObserver(function () {
+        enhanceAnalyst();
+        try {
+          var liveClient = window.NJPTRAccess && window.NJPTRAccess.client ? window.NJPTRAccess.client() : null;
+          patchClient(liveClient);
+        } catch (_error) {}
+      });
       observer.observe(document.documentElement, { childList: true, subtree: true });
     }
   }
