@@ -6,11 +6,16 @@ on:
       - main
     paths:
       - 'property/onboarding/**'
+      - 'property/account/**'
       - 'property/css/onboarding.css'
+      - 'property/css/account-profile.css'
       - 'property/js/onboarding.js'
+      - 'property/js/account-profile.js'
       - 'property/js/supabase-runtime.js'
       - 'property/tests/onboarding-contract.mjs'
+      - 'property/tests/account-profile-contract.mjs'
       - 'supabase/migrations/*required_watchdog_onboarding*.sql'
+      - 'supabase/migrations/*account_profile_preferences*.sql'
       - '.github/workflows/onboarding-contract.yml'
   workflow_dispatch:
 
@@ -26,7 +31,10 @@ jobs:
         run: |
           node --check property/js/supabase-runtime.js
           node --check property/js/onboarding.js
+          node --check property/js/account-profile.js
       - name: Verify required onboarding boundaries
         run: node property/tests/onboarding-contract.mjs
+      - name: Verify living Account profile boundaries
+        run: node property/tests/account-profile-contract.mjs
       - name: Re-run canonical Supabase runtime contract
         run: node property/tests/supabase-runtime-contract.mjs
