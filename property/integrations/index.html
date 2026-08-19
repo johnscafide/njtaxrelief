@@ -18,18 +18,18 @@
 <main class="ig-shell" id="ig-app">
   <section class="ig-intro">
     <div>
-      <span class="ig-kicker">INTEGRATION CENTER · PHASE 1</span>
-      <h2>Connect Watchdog to the systems you already use.</h2>
-      <p>Send governed Watchdog property-change events outward, receive normalized CRM context inward, and keep every connection scoped, signed and auditable.</p>
+      <span class="ig-kicker">INTEGRATION CENTER · PHASE 3</span>
+      <h2>Put Watchdog inside the workflow your business already uses.</h2>
+      <p>Connect automation tools and CRM workflows, control exactly what can move between systems, and decide separately whether Watchdog Intelligence may use CRM context.</p>
     </div>
-    <div class="ig-phase"><span>Foundation</span><strong>Phase 1 live</strong><small>Webhook gateway · CRM context · retries</small></div>
+    <div class="ig-phase"><span>Connected workflows</span><strong>Phase 3 live</strong><small>Zapier keys · webhooks · mapping · Intelligence permissions</small></div>
   </section>
 
   <section class="ig-gate" id="ig-signin" hidden>
-    <i class="fas fa-lock"></i><div><h3>Sign in to manage integrations</h3><p>Your connections and credentials are account-scoped.</p></div><a href="/property/dashboard">Open Dashboard</a>
+    <i class="fas fa-lock"></i><div><h3>Sign in to manage integrations</h3><p>Your connections, keys and permissions are account-scoped.</p></div><a href="/property/dashboard">Open Dashboard</a>
   </section>
   <section class="ig-gate" id="ig-plan-gate" hidden>
-    <i class="fas fa-plug-circle-xmark"></i><div><h3>Integrations require Pro+ or Teams</h3><p>Generic webhooks, CRM context and governed Intelligence access are higher-tier workflow capabilities.</p></div><a href="/property/pro#pricing">Compare plans</a>
+    <i class="fas fa-plug-circle-xmark"></i><div><h3>Integrations require Pro+ or Teams</h3><p>Zapier, two-way CRM context and automation webhooks are professional workflow capabilities.</p></div><a href="/property/pro#pricing">Compare plans</a>
   </section>
   <section class="ig-gate ig-error" id="ig-error" hidden>
     <i class="fas fa-triangle-exclamation"></i><div><h3>Integration Center could not load</h3><p id="ig-error-text">Try again from this page.</p></div><button type="button" data-ig-action="reload">Retry</button>
@@ -38,55 +38,91 @@
   <div id="ig-workspace" hidden>
     <section class="ig-stats" aria-label="Integration status">
       <article><i class="fas fa-link"></i><span><b id="ig-stat-connections">0</b><small>Active connections</small></span></article>
-      <article><i class="fas fa-arrow-right-arrow-left"></i><span><b id="ig-stat-delivered">0</b><small>Delivered events</small></span></article>
-      <article><i class="fas fa-rotate"></i><span><b id="ig-stat-retries">0</b><small>Retries / failures</small></span></article>
-      <article><i class="fas fa-brain"></i><span><b id="ig-stat-intel">0</b><small>Intelligence enabled</small></span></article>
+      <article><i class="fas fa-bolt"></i><span><b id="ig-stat-keys">0</b><small>Active Zapier keys</small></span></article>
+      <article><i class="fas fa-address-book"></i><span><b id="ig-stat-crm">0</b><small>CRM context records</small></span></article>
+      <article><i class="fas fa-triangle-exclamation"></i><span><b id="ig-stat-retries">0</b><small>Delivery issues</small></span></article>
+    </section>
+
+    <section class="ig-feature-grid">
+      <article class="ig-card ig-zapier-card">
+        <header><div><span>WATCHDOG FOR ZAPIER</span><h3>Automation access</h3></div><div class="ig-provider-mark">_</div></header>
+        <p class="ig-muted">The Watchdog Zapier API is live. Create a dedicated key for Zapier, choose only the capabilities that workflow needs, and revoke it at any time.</p>
+        <div class="ig-callout"><i class="fas fa-circle-info"></i><span><b>API contract ready</b><small>Public Zapier directory publication is a separate external review step. Your Watchdog credentials are already self-service here.</small></span></div>
+        <form id="ig-key-form" class="ig-key-form" autocomplete="off">
+          <label>Key label<input id="ig-key-label" maxlength="80" placeholder="Main Zapier workspace" required></label>
+          <fieldset><legend>Allowed capabilities</legend>
+            <label class="ig-check"><input id="ig-key-triggers" type="checkbox" checked><span><b>Receive Watchdog triggers</b><small>Subscribe to property changes, alerts, reports and Intelligence findings.</small></span></label>
+            <label class="ig-check"><input id="ig-key-property" type="checkbox" checked><span><b>Read property intelligence</b><small>Find a property and retrieve the governed Watchdog snapshot.</small></span></label>
+            <label class="ig-check"><input id="ig-key-watchlist" type="checkbox" checked><span><b>Add to Watchlist</b><small>Allow a Zap to save a property to the user's Watchlist.</small></span></label>
+            <label class="ig-check"><input id="ig-key-crm" type="checkbox" checked><span><b>Send CRM context</b><small>Allow a Zap to attach normalized CRM workflow context to Watchdog.</small></span></label>
+          </fieldset>
+          <div class="ig-key-form-actions"><button class="ig-primary" id="ig-create-key" type="submit"><i class="fas fa-key"></i><span id="ig-create-key-label">Create Zapier key</span></button><button id="ig-key-cancel" type="button" data-ig-action="key-edit-cancel" hidden>Cancel edit</button></div>
+          <p class="ig-form-note" id="ig-key-note" aria-live="polite"></p>
+        </form>
+        <div class="ig-subhead"><span>YOUR KEYS</span><button type="button" data-ig-action="refresh-keys"><i class="fas fa-rotate"></i>Refresh</button></div>
+        <div class="ig-empty compact" id="ig-keys-empty"><i class="fas fa-key"></i><b>No Zapier keys yet</b><span>Create one above when you are ready to connect Zapier.</span></div>
+        <div id="ig-keys" class="ig-keys"></div>
+      </article>
+
+      <article class="ig-card ig-context-card">
+        <header><div><span>CRM CONTEXT</span><h3>What Watchdog can understand</h3></div><i class="fas fa-brain"></i></header>
+        <p class="ig-muted">CRM data is treated as customer and workflow context. Watchdog's governed property records remain the property-data source of truth.</p>
+        <div class="ig-context-stats"><div><small>Records received</small><b id="ig-context-records">0</b></div><div><small>Linked to property</small><b id="ig-context-linked">0</b></div><div><small>Latest context sync</small><b id="ig-context-latest">Not yet</b></div></div>
+        <div class="ig-context-rules">
+          <div><i class="fas fa-user-check"></i><span><b>CRM is authoritative for relationship context</b><small>Lead stage, notes-derived workflow state, contact activity and the user's own CRM association.</small></span></div>
+          <div><i class="fas fa-house-circle-check"></i><span><b>Watchdog is authoritative for governed property facts</b><small>Assessment, taxes, property changes, source lineage and derived Watchdog signals.</small></span></div>
+          <div><i class="fas fa-toggle-off"></i><span><b>Intelligence access is separate</b><small>CRM context does not enter Watchdog Intelligence unless the user explicitly enables it on that connection.</small></span></div>
+        </div>
+      </article>
     </section>
 
     <section class="ig-grid">
       <article class="ig-card ig-create-card">
-        <header><div><span>NEW CONNECTION</span><h3>Webhook bridge</h3></div><i class="fas fa-code-branch"></i></header>
-        <p class="ig-muted">Use a Zapier/Make webhook URL, your CRM middleware, or another HTTPS endpoint. No CRM password is stored in Watchdog.</p>
+        <header><div><span>GENERIC CONNECTION</span><h3>Webhook bridge</h3></div><i class="fas fa-code-branch"></i></header>
+        <p class="ig-muted">Use a Zapier/Make webhook URL, CRM middleware, or another public HTTPS endpoint. No CRM password is stored in Watchdog.</p>
         <form id="ig-create-form" autocomplete="off">
-          <label>Connection name<input id="ig-name" maxlength="100" required placeholder="My CRM bridge"></label>
+          <label>Connection name<input id="ig-name" maxlength="100" required placeholder="CRM workflow bridge"></label>
           <label>Direction<select id="ig-direction"><option value="bidirectional">Two-way context + Watchdog events</option><option value="outbound">Watchdog → external system</option><option value="inbound">External system → Watchdog</option></select></label>
           <label id="ig-outbound-row">Outbound HTTPS URL<input id="ig-outbound-url" type="url" inputmode="url" placeholder="https://hooks.example.com/watchdog"></label>
-          <label>External account label <span>optional</span><input id="ig-account-label" maxlength="120" placeholder="South Jersey CRM"></label>
-          <fieldset><legend>Watchdog events</legend><label class="ig-check"><input id="ig-event-property" type="checkbox" checked><span><b>Property signal changed</b><small>Assessment, tax, value and governed property-change events.</small></span></label></fieldset>
-          <label class="ig-toggle"><input id="ig-intelligence" type="checkbox"><span></span><div><b>Allow Watchdog Intelligence to use CRM context</b><small>Off by default. Enables the explicit <code>intelligence.context.read</code> scope; it does not let AI write back to the CRM.</small></div></label>
+          <label>External account label <span>optional</span><input id="ig-account-label" maxlength="120" placeholder="Main CRM account"></label>
+          <fieldset><legend>Watchdog events</legend>
+            <label class="ig-check"><input id="ig-event-property" type="checkbox" checked><span><b>Property signal changed</b><small>Assessment, tax, value and governed property-change events.</small></span></label>
+            <label class="ig-check"><input id="ig-event-watchlist" type="checkbox" checked><span><b>Watchlist alert</b><small>A watched property receives a relevant Watchdog change event.</small></span></label>
+            <label class="ig-check"><input id="ig-event-report" type="checkbox"><span><b>Report ready</b><small>A professional report version is created and ready for workflow use.</small></span></label>
+            <label class="ig-check"><input id="ig-event-intelligence" type="checkbox"><span><b>Intelligence finding created</b><small>A governed Watchdog Intelligence finding is created for the user.</small></span></label>
+          </fieldset>
+          <label class="ig-toggle"><input id="ig-intelligence" type="checkbox"><span></span><div><b>Allow Watchdog Intelligence to use CRM context</b><small>Off by default. This is a read permission only and does not let Intelligence write back to your CRM.</small></div></label>
           <button class="ig-primary" id="ig-create" type="submit"><i class="fas fa-plus"></i>Create connection</button>
           <p class="ig-form-note" id="ig-create-note" aria-live="polite"></p>
         </form>
       </article>
 
       <article class="ig-card ig-contract-card">
-        <header><div><span>PHASE 1 CONTRACT</span><h3>Secure by default</h3></div><i class="fas fa-shield-halved"></i></header>
+        <header><div><span>SECURITY CONTRACT</span><h3>Scoped, revocable, auditable</h3></div><i class="fas fa-shield-halved"></i></header>
         <div class="ig-contract-list">
-          <div><i class="fas fa-key"></i><span><b>Inbound token shown once</b><small>Watchdog stores only its SHA-256 hash.</small></span></div>
-          <div><i class="fas fa-signature"></i><span><b>Every outbound request is signed</b><small>HMAC-SHA256 signature + timestamp + idempotency key.</small></span></div>
-          <div><i class="fas fa-filter"></i><span><b>Normalized CRM context</b><small>Only approved contact/property workflow fields are retained, not arbitrary raw payload dumps.</small></span></div>
-          <div><i class="fas fa-clock-rotate-left"></i><span><b>Automatic retry queue</b><small>Five delivery attempts with delivery and response history.</small></span></div>
-          <div><i class="fas fa-brain"></i><span><b>Intelligence requires an explicit scope</b><small>CRM context remains customer/workflow evidence, separate from governed property truth.</small></span></div>
+          <div><i class="fas fa-key"></i><span><b>Secrets are shown once</b><small>Watchdog retains hashes or server-side secret references, not reusable plaintext credentials in the browser.</small></span></div>
+          <div><i class="fas fa-sliders"></i><span><b>Least-privilege scopes</b><small>Zapier keys and CRM connections expose only the capabilities the user selects.</small></span></div>
+          <div><i class="fas fa-table-columns"></i><span><b>Field mapping is normalized</b><small>Map external CRM paths into a fixed Watchdog contract instead of storing arbitrary raw CRM payloads.</small></span></div>
+          <div><i class="fas fa-clock-rotate-left"></i><span><b>Retry and error history</b><small>Outbound deliveries preserve attempt status, response codes and failures for troubleshooting.</small></span></div>
+          <div><i class="fas fa-brain"></i><span><b>Intelligence permission is explicit</b><small>Each CRM connection has its own auditable, off-by-default Intelligence access switch.</small></span></div>
         </div>
-        <details><summary>Outbound signature verification</summary><pre><code>signed = HMAC_SHA256(secret, timestamp + "." + rawBody)
-header: X-Watchdog-Signature: v1=&lt;hex&gt;</code></pre></details>
       </article>
     </section>
 
     <section class="ig-section">
       <div class="ig-section-head"><div><span>YOUR CONNECTIONS</span><h3>Connected workflows</h3></div><button type="button" data-ig-action="refresh"><i class="fas fa-rotate"></i>Refresh</button></div>
-      <div class="ig-empty" id="ig-connections-empty"><i class="fas fa-plug-circle-plus"></i><b>No integrations yet</b><span>Create the first webhook bridge above.</span></div>
+      <div class="ig-empty" id="ig-connections-empty"><i class="fas fa-plug-circle-plus"></i><b>No webhook connections yet</b><span>Create a bridge above or connect through Zapier.</span></div>
       <div class="ig-connections" id="ig-connections"></div>
     </section>
 
     <section class="ig-section">
       <div class="ig-section-head"><div><span>DELIVERY LOG</span><h3>Recent outbound activity</h3></div><button type="button" data-ig-action="history"><i class="fas fa-clock-rotate-left"></i>Reload log</button></div>
       <div class="ig-history-wrap"><table class="ig-history"><thead><tr><th>Event</th><th>Connection</th><th>Status</th><th>Attempts</th><th>HTTP</th><th>When</th></tr></thead><tbody id="ig-history"></tbody></table></div>
-      <div class="ig-empty compact" id="ig-history-empty"><i class="fas fa-wave-square"></i><b>No deliveries yet</b><span>Test a connection or wait for a subscribed Watchdog event.</span></div>
+      <div class="ig-empty compact" id="ig-history-empty"><i class="fas fa-wave-square"></i><b>No deliveries yet</b><span>Test a webhook connection or wait for a subscribed Watchdog event.</span></div>
     </section>
 
     <section class="ig-next">
-      <div><span>NEXT · PHASE 2</span><h3>Zapier-native Watchdog app</h3><p>Phase 1 is the transport layer. Phase 2 turns these contracts into named Zapier triggers and actions so customers can connect CRMs without manually configuring webhook payloads.</p></div><i class="fas fa-arrow-right-long"></i>
+      <div><span>NEXT · PHASE 4</span><h3>Direct CRM connections where demand proves value.</h3><p>The shared integration layer is now reusable. Phase 4 can add direct OAuth connections for the CRMs customers actually ask for, with lower latency and richer two-way workflows than a generic automation bridge.</p></div><i class="fas fa-arrow-right-long"></i>
     </section>
   </div>
 </main>
@@ -94,10 +130,38 @@ header: X-Watchdog-Signature: v1=&lt;hex&gt;</code></pre></details>
 <div class="ig-modal" id="ig-credentials-modal" hidden>
   <button class="ig-modal-shade" type="button" data-ig-action="close-credentials" aria-label="Close"></button>
   <section role="dialog" aria-modal="true" aria-labelledby="ig-credentials-title">
-    <header><div><span>SHOWING ONCE</span><h3 id="ig-credentials-title">Save your connection credentials</h3></div><button type="button" data-ig-action="close-credentials"><i class="fas fa-xmark"></i></button></header>
-    <p>Watchdog will not show these secrets again. Store them in the receiving system's secret manager. You can rotate them later.</p>
+    <header><div><span>SHOWING ONCE</span><h3 id="ig-credentials-title">Save your credential</h3></div><button type="button" data-ig-action="close-credentials"><i class="fas fa-xmark"></i></button></header>
+    <p id="ig-credentials-copy">Watchdog will not show this secret again. Store it in the receiving system's secure credential field.</p>
     <div id="ig-credentials-fields"></div>
-    <footer><button class="ig-primary" type="button" data-ig-action="close-credentials">I saved these credentials</button></footer>
+    <footer><button class="ig-primary" type="button" data-ig-action="close-credentials">I saved this credential</button></footer>
+  </section>
+</div>
+
+<div class="ig-modal" id="ig-mapping-modal" hidden>
+  <button class="ig-modal-shade" type="button" data-ig-action="close-mapping" aria-label="Close"></button>
+  <section class="ig-map-modal" role="dialog" aria-modal="true" aria-labelledby="ig-mapping-title">
+    <header><div><span>CRM FIELD MAPPING</span><h3 id="ig-mapping-title">Map external fields into Watchdog</h3></div><button type="button" data-ig-action="close-mapping"><i class="fas fa-xmark"></i></button></header>
+    <p>Enter dotted JSON paths from the incoming CRM payload. Leave a field blank to use Watchdog's standard path. Only the normalized fields below are retained.</p>
+    <form id="ig-mapping-form">
+      <input type="hidden" id="ig-mapping-connection">
+      <div class="ig-map-grid">
+        <label>Contact ID<input data-map-key="external_contact_id" placeholder="contact.id"></label>
+        <label>Contact name<input data-map-key="contact_name" placeholder="contact.name"></label>
+        <label>Email<input data-map-key="contact_email" placeholder="contact.email"></label>
+        <label>Phone<input data-map-key="contact_phone" placeholder="contact.phone"></label>
+        <label>Lead stage<input data-map-key="lead_stage" placeholder="contact.lead_stage"></label>
+        <label>Relationship<input data-map-key="relationship" placeholder="contact.relationship"></label>
+        <label>Last activity<input data-map-key="last_activity_at" placeholder="contact.last_activity_at"></label>
+        <label>Tags array<input data-map-key="tags" placeholder="contact.tags"></label>
+        <label>Property reference<input data-map-key="property_ref" placeholder="property.pams_pin"></label>
+        <label>Property address<input data-map-key="property_address" placeholder="property.address"></label>
+        <label>Municipality<input data-map-key="property_municipality" placeholder="property.municipality"></label>
+        <label>County<input data-map-key="property_county" placeholder="property.county"></label>
+        <label>Source updated time<input data-map-key="source_updated_at" placeholder="source_updated_at"></label>
+      </div>
+      <p class="ig-form-note" id="ig-mapping-note" aria-live="polite"></p>
+      <footer><button type="button" data-ig-action="close-mapping">Cancel</button><button class="ig-primary" type="submit"><i class="fas fa-floppy-disk"></i>Save mapping</button></footer>
+    </form>
   </section>
 </div>
 
