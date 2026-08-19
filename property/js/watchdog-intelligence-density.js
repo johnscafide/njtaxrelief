@@ -19,6 +19,14 @@ function compactContext(root){
   if(more){var existing=text(more),extra=/\+(\d+)/.exec(existing),total=items.length+(extra?Number(extra[1]):0),label=total>1?'Review all '+total+' current suggestions':'Inspect this suggestion';if(text(more)!==label)more.textContent=label}
 }
 function reason(card){return short(text(card&&card.querySelector('p')),135)}
+function trustMetrics(card){
+  var value=text(card&&card.querySelector('p'));
+  if(!value)return'';
+  var confidence=/Confidence\s+(\d{1,3})%/i.exec(value),coverage=/Evidence coverage\s+(\d{1,3})%/i.exec(value),parts=[];
+  if(confidence)parts.push('Confidence '+Math.min(100,Number(confidence[1]))+'%');
+  if(coverage)parts.push('Evidence '+Math.min(100,Number(coverage[1]))+'%');
+  return parts.join(' · ');
+}
 function makeAnalystSummary(panel){
   if(!panel||!supportingSurface())return;
   panel.classList.add('wdai-compact');
@@ -29,8 +37,9 @@ function makeAnalystSummary(panel){
   var reasons=[reason(motivation),reason(money),reason(evidence)].filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,3);
   var action=short(text(next.querySelector('h3')),180)||'Open the evidence before deciding what to do next.';
   var headline=reasons[0]||'No high-urgency governed finding is present right now.';
+  var trust=trustMetrics(evidence);
   var summary=document.createElement('section');summary.className='wdai-compact-summary';
-  summary.innerHTML='<div class="wd-density-copy"><span>WATCHDOG DECISION BRIEF</span><h3>'+escapeHtml(headline)+'</h3>'+(reasons.length?'<ul class="wd-density-reasons">'+reasons.map(function(r){return'<li><i class="fas fa-circle-check"></i><span>'+escapeHtml(r)+'</span></li>'}).join('')+'</ul>':'')+'<div class="wd-density-action"><b>Next:</b> '+escapeHtml(action)+'</div></div><button type="button" class="wd-density-toggle" aria-expanded="'+(analystExpanded?'true':'false')+'">'+(analystExpanded?'Collapse reasoning':'Inspect reasoning')+'</button>';
+  summary.innerHTML='<div class="wd-density-copy"><span>WATCHDOG DECISION BRIEF</span><h3>'+escapeHtml(headline)+'</h3>'+(reasons.length?'<ul class="wd-density-reasons">'+reasons.map(function(r){return'<li><i class="fas fa-circle-check"></i><span>'+escapeHtml(r)+'</span></li>'}).join('')+'</ul>':'')+'<div class="wd-density-action"><b>Next:</b> '+escapeHtml(action)+'</div>'+(trust?'<div class="wd-density-trust"><i class="fas fa-shield-halved" aria-hidden="true"></i><span>'+escapeHtml(trust)+'</span><a href="/property/trust/">Trust &amp; sources</a></div>':'')+'</div><button type="button" class="wd-density-toggle" aria-expanded="'+(analystExpanded?'true':'false')+'">'+(analystExpanded?'Collapse reasoning':'Inspect reasoning')+'</button>';
   grid.parentNode.insertBefore(summary,grid);
   setAnalystExpanded(panel,analystExpanded);
   var button=summary.querySelector('.wd-density-toggle');if(button)button.addEventListener('click',function(){analystExpanded=!analystExpanded;setAnalystExpanded(panel,analystExpanded);button.setAttribute('aria-expanded',analystExpanded?'true':'false');button.textContent=analystExpanded?'Collapse reasoning':'Inspect reasoning'})
@@ -46,6 +55,6 @@ function apply(){
 }
 function observe(){var target=document.getElementById('wd4-root')||document.getElementById('hm-body')||document.querySelector('main')||document.body;if(!target)return;new MutationObserver(function(){clearTimeout(timer);timer=setTimeout(apply,90)}).observe(target,{childList:true,subtree:true})}
 function boot(){apply();observe();window.addEventListener('watchdog:context-suggestions',function(){setTimeout(apply,20)});window.addEventListener('watchdog:context-refresh',function(){setTimeout(apply,120)})}
-window.WatchdogIntelligenceDensity={apply:apply,compactContext:compactContext,compactAnalyst:makeAnalystSummary,contract:'watchdog-intelligence-density-v1'};
+window.WatchdogIntelligenceDensity={apply:apply,compactContext:compactContext,compactAnalyst:makeAnalystSummary,contract:'watchdog-intelligence-density-v2-trust-cue'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
