@@ -21,6 +21,21 @@
     return true;
   }
 
+  function suppressLegacySidebar() {
+    var target = document.getElementById(targetId);
+    if (target) {
+      target.innerHTML = '';
+      target.hidden = true;
+      target.style.display = 'none';
+      var shell = target.parentElement;
+      if (shell && shell.classList.contains('db-shell')) shell.style.gridTemplateColumns = 'minmax(0,1fr)';
+    }
+    document.body.classList.remove('db-sidebar-expanded','wd-mobile-menu-open');
+    document.documentElement.classList.add('wd-no-legacy-sidebar');
+    document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready', { detail: { legacySidebar: false } }));
+    return true;
+  }
+
   function paintToggle() {
     var button = document.getElementById('db-sidebar-toggle'); if (!button) return;
     var expanded = document.body.classList.contains('db-sidebar-expanded');
@@ -85,7 +100,7 @@
     var group = button && button.closest('.db-side-group'), submenu = group && group.querySelector('.db-side-submenu'); if (!group || !submenu) return;
     button.setAttribute('aria-expanded', expanded ? 'true' : 'false'); group.classList.toggle('open', expanded);
     if (expanded) submenu.removeAttribute('hidden'); else window.setTimeout(function () { if (!group.classList.contains('open')) submenu.setAttribute('hidden', ''); }, 260);
-    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {} }
+    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {}
   }
 
   function restoreGroups(container) {
@@ -143,8 +158,7 @@
     loadWhyWatchdog();
     if (loadModernSecondaryShell()) return Promise.resolve(true);
     loadFlood();
-    var target = document.getElementById(targetId); if (!target) return Promise.resolve(false);
-    return fetch('/property/partials/sidemenu.html', { credentials: 'same-origin' }).then(function (response) { if (!response.ok) throw new Error('Navigation request returned ' + response.status); return response.text(); }).then(function (markup) { target.innerHTML = markup; activate(target); document.dispatchEvent(new CustomEvent('njptr:sidemenu-ready')); return true; }).catch(function (error) { console.error('Shared navigation could not load:', error); target.innerHTML = '<aside class="db-sidebar db-sidebar-fallback"><a class="db-side-brand" href="/property/dashboard"><span><i class="fas fa-dog"></i></span><div><b>Watchdog</b><small>Open dashboard</small></div></a></aside>'; return false; });
+    return Promise.resolve(suppressLegacySidebar());
   }
 
   window.njptrSideMenuReady = document.readyState === 'loading' ? new Promise(function (resolve) { document.addEventListener('DOMContentLoaded', function () { load().then(resolve); }, { once: true }); }) : load();
