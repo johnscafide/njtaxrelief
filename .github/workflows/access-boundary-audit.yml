@@ -64,6 +64,10 @@ jobs:
         run: node property/tests/calibration-diversity-contract.mjs
       - name: Verify model-vNext repair and promotion gate
         run: node property/tests/intelligence-model-vnext-repair-contract.mjs
+      - name: Verify source-fact watcher safety and idempotency
+        run: node property/tests/intelligence-source-fact-watch-contract.mjs
+      - name: Verify Semantic Context derived-marker routing
+        run: node property/tests/semantic-derived-routing-contract.mjs
       - name: Verify source-fact candidate trigger fix
         run: node property/tests/material-change-candidate-trigger-contract.mjs
       - name: Verify Intelligence retention integration
