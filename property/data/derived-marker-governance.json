@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-19T22:57:25.263Z",
+  "generated_at": "2026-08-19T22:59:39.829Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -57,6 +57,8 @@
     "watchdog.buyer_objection_radar",
     "watchdog.buyer_tax_reset_exposure",
     "watchdog.certificate_closure_rate",
+    "watchdog.chapter123_lower_bound",
+    "watchdog.chapter123_upper_bound",
     "watchdog.closing_exception_priority",
     "watchdog.collateral_tax_reset_sensitivity",
     "watchdog.comparable_evidence_reliability",
@@ -71,6 +73,7 @@
     "watchdog.evidence_chain_completeness",
     "watchdog.fiscal_resilience_score",
     "watchdog.flood_environment_risk_score",
+    "watchdog.improvement_ratio",
     "watchdog.improvement_share_pct",
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor_carry_cost_volatility",
@@ -166,6 +169,8 @@
     "watchdog.buyer_objection_radar",
     "watchdog.buyer_tax_reset_exposure",
     "watchdog.certificate_closure_rate",
+    "watchdog.chapter123_lower_bound",
+    "watchdog.chapter123_upper_bound",
     "watchdog.closing_exception_priority",
     "watchdog.collateral_tax_reset_sensitivity",
     "watchdog.comparable_evidence_reliability",
@@ -180,6 +185,7 @@
     "watchdog.evidence_chain_completeness",
     "watchdog.fiscal_resilience_score",
     "watchdog.flood_environment_risk_score",
+    "watchdog.improvement_ratio",
     "watchdog.improvement_share_pct",
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor_carry_cost_volatility",
@@ -226,8 +232,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 107,
-    "blocked": 191,
+    "live": 110,
+    "blocked": 188,
     "retired": 0,
     "untriaged": 0
   },
@@ -355,14 +361,14 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Independent market value multiplied by the municipality lower Chapter 123 ratio boundary.",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.chapter123_upper_bound",
@@ -377,14 +383,14 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Independent market value multiplied by the municipality upper Chapter 123 ratio boundary; where only the common-level ratio is available, the upper boundary is common-level ratio × 1.15.",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.assessment_drift",
@@ -443,14 +449,14 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Improvement-to-total ratio",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.tax_trajectory",
