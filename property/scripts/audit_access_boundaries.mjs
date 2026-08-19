@@ -54,6 +54,13 @@ check('paid route guard uses server entitlement RPC', guard.includes("rpc('get_m
 check('developer guard redirects unauthenticated users', guard.includes("destination('signin')"), 'Unauthenticated route behavior');
 check('developer guard redirects unauthorized users', guard.includes("destination('restricted')"), 'Unauthorized route behavior');
 
+const sideMenu = read('property/js/sidemenu.js');
+check(
+  'retired vertical sidenav cannot be fetched',
+  !sideMenu.includes("fetch('/property/partials/sidemenu.html'") && !sideMenu.includes('fetch("/property/partials/sidemenu.html"'),
+  'New and unmigrated pages must use a current shell or render without the retired legacy rail'
+);
+
 const entitlement = read('supabase/migrations/20260805235900_billing_saved_views_rls.sql');
 const v040 = read('supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql');
 const revokeAnon = read('supabase/migrations/20260807151500_revoke_anon_internal_entitlement_rpcs.sql');
