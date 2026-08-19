@@ -57,9 +57,13 @@ expect(loader.includes('/property/js/dashboard/home/watchdog-analyst-intel.js'),
 expect(menu.includes('/property/js/dashboard/home/watchdog-analyst-intel-loader.js'), 'Property Home runtime must load Analyst Intel.');
 expect(css.includes('.ai.wdai'), 'Analyst Intel must have scoped Property Home styling.');
 expect(css.includes('.wd-profession-onboarding'), 'Profession onboarding must have a production UI treatment.');
+expect(css.includes('.hm-wrap > .ai.wdai'), 'Analyst Intel must explicitly override legacy Agent Intel container rules.');
+expect(css.includes('display:block !important'), 'Analyst Intel container must beat the legacy display:grid !important rule.');
+expect(css.includes('grid-template-columns:none !important'), 'Analyst Intel must neutralize the legacy 230px + 1fr Agent Intel grid.');
+expect(css.includes('grid-column:1 / -1 !important'), 'Analyst Intel must remain full width in the Property Home grid.');
 
 for (const [key, content] of Object.entries({ analyst, onboarding, loader, menu, css })) {
   expect(!content.includes('?v='), `${files[key]} must not introduce ?v= asset version parameters.`);
 }
 
-console.log('Watchdog Analyst Intel profession, onboarding, evidence, refresh, and asset contracts passed.');
+console.log('Watchdog Analyst Intel profession, onboarding, evidence, refresh, layout, and asset contracts passed.');
