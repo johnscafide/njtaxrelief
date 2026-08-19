@@ -8,14 +8,20 @@ on:
 permissions:
   contents: write
 
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_PROJECT_REF: uvkvaxljhhngydvlrzom
+
 jobs:
-  patch:
+  patch-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
+      - name: Rebase onto current main
+        run: git pull --rebase origin main
       - name: Patch provenance label safely
         run: |
           python - <<'PY'
@@ -25,22 +31,34 @@ jobs:
           old = "(id==='preflight.fema_flood_zone'?'FEMA NFHL public GIS':'NJDEP public GIS')+' · '+NJDEP_PROVIDER_VERSION"
           helper = "function spatialSource(id:string){if(id==='preflight.fema_flood_zone')return 'FEMA NFHL public GIS';if(id==='njplus.nj-dca-community-assets.opportunity_zone_status')return 'HUD Qualified Opportunity Zones';if(id==='njplus.nj-dca-community-assets.transit_village_status')return 'NJDOT Transit Village buffers';if(id==='njplus.nj-dca-community-assets.urban_enterprise_zone_status'||id==='njplus.nj-dca-community-assets.redevelopment_area_status')return 'NJDEP Government GIS';return 'NJDEP public GIS'}\n"
           new = "spatialSource(id)+' · '+NJDEP_PROVIDER_VERSION"
-          if s.count(old) != 1:
-              raise SystemExit(f'Expected exactly one provenance expression, found {s.count(old)}')
-          marker = "const TRUST=new Set(['watchdog.watchdog_score','watchdog.score','watchdog.tax_pressure','watchdog.revaluation_risk','uniformity.score']);\n"
-          if marker not in s:
-              raise SystemExit('TRUST insertion marker not found')
-          s = s.replace(marker, marker + helper, 1).replace(old, new, 1)
-          p.write_text(s)
+          if old in s:
+              if s.count(old) != 1:
+                  raise SystemExit(f'Expected exactly one provenance expression, found {s.count(old)}')
+              marker = "const TRUST=new Set(['watchdog.watchdog_score','watchdog.score','watchdog.tax_pressure','watchdog.revaluation_risk','uniformity.score']);\n"
+              if marker not in s:
+                  raise SystemExit('TRUST insertion marker not found')
+              s = s.replace(marker, marker + helper, 1).replace(old, new, 1)
+              p.write_text(s)
+          elif "function spatialSource(id:string)" not in s or new not in s:
+              raise SystemExit('Neither original nor already-patched provenance pattern was found')
           PY
-      - name: Commit exact patch
+      - name: Commit exact patch if needed
         run: |
           if git diff --quiet -- supabase/functions/workbench-hydrate/index.ts; then
-            echo 'No patch needed.'
-            exit 0
+            echo 'Git source already patched.'
+          else
+            git config user.name 'Watchdog Automation'
+            git config user.email 'actions@users.noreply.github.com'
+            git add supabase/functions/workbench-hydrate/index.ts
+            git commit -m 'Fix spatial provider provenance labels'
+            git push origin HEAD:main
           fi
-          git config user.name 'Watchdog Automation'
-          git config user.email 'actions@users.noreply.github.com'
-          git add supabase/functions/workbench-hydrate/index.ts
-          git commit -m 'Fix spatial provider provenance labels'
-          git push origin HEAD:main
+      - name: Verify production deploy credential
+        run: |
+          test -n "$SUPABASE_ACCESS_TOKEN"
+          test "$SUPABASE_PROJECT_REF" = "uvkvaxljhhngydvlrzom"
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Deploy the exact committed hydrator to production
+        run: supabase functions deploy workbench-hydrate --project-ref "$SUPABASE_PROJECT_REF"
