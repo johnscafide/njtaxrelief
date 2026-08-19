@@ -38,7 +38,7 @@ jobs:
           done
           grep -q "provider-family resolver v18" supabase/functions/workbench-hydrate/index.ts
           grep -q "Parcels_Composite_NJ_WM/FeatureServer/0/query" supabase/functions/workbench-hydrate/index.ts
-          grep -q "spatial-preflight-v6-evidence-states" supabase/functions/workbench-hydrate/environment-provider.ts
+          grep -q "spatial-preflight-v10-csrr-exact-controls" supabase/functions/workbench-hydrate/environment-provider.ts
           grep -q "/property/report?token=" supabase/functions/report-share/index.ts
           grep -q "/property/marketing-studio" supabase/functions/google-ads-oauth-start/index.ts
           grep -q "/property/marketing-studio" supabase/functions/google-ads-oauth-callback/index.ts
