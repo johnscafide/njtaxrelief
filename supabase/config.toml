@@ -186,3 +186,15 @@ verify_jwt = true
 
 [functions.intelligence-context-event]
 verify_jwt = true
+
+# Phase 1 customer integrations. User management requests use Supabase JWT
+# verification; third-party webhooks and the scheduled worker authenticate with
+# dedicated per-connection/internal tokens inside their functions.
+[functions.integration-gateway]
+verify_jwt = true
+
+[functions.integration-webhook]
+verify_jwt = false
+
+[functions.integration-delivery-worker]
+verify_jwt = false
