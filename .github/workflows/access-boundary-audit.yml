@@ -56,6 +56,8 @@ jobs:
         run: node property/tests/flood-request-boundary-contract.mjs
       - name: Verify compact Intelligence footprint
         run: node property/tests/intelligence-density-contract.mjs
+      - name: Verify source freshness and explainability trust contract
+        run: node property/tests/trust-freshness-explainability-contract.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
       - name: Verify compliance evidence contracts
