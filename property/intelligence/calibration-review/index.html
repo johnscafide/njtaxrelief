@@ -20,78 +20,39 @@
     </header>
 
     <section class="cr-hero">
-      <div>
-        <span class="cr-eyebrow">DEVELOPER ONLY · INDEPENDENT HUMAN REVIEW</span>
-        <h1>Review one case at a time.</h1>
-        <p>Judge the governed evidence first. Watchdog's predicted class and score stay hidden until after you save your independent label, reducing model-answer anchoring.</p>
-      </div>
+      <div><span class="cr-eyebrow">DEVELOPER ONLY · INDEPENDENT HUMAN REVIEW</span><h1>Review one case at a time.</h1><p>Judge the governed evidence first. Watchdog's predicted class and score stay hidden until after you save your independent label, reducing model-answer anchoring.</p></div>
       <div id="cr-overall" class="cr-overall" aria-live="polite"><i class="fas fa-circle-notch fa-spin"></i> Loading queues…</div>
     </section>
 
     <section class="cr-example" aria-labelledby="cr-example-title">
-      <header class="cr-example-head">
-        <div>
-          <span class="cr-example-kicker">TRAINING EXAMPLE · COMPLETELY FICTIONAL</span>
-          <h2 id="cr-example-title">How to score a case</h2>
-          <p>This example uses a fake address and invented values only to demonstrate the review method. Do not compare real cases to these exact numbers. Judge whether the evidence shown in each real case independently supports putting that property into the model's review queue.</p>
-        </div>
-        <span class="cr-example-badge">Example answer: PRIORITY</span>
-      </header>
+      <header class="cr-example-head"><div><span class="cr-example-kicker">TRAINING EXAMPLES · COMPLETELY FICTIONAL</span><h2 id="cr-example-title">How to score Priority, Not priority, and Uncertain</h2><p>These fake examples teach the decision rule only. Do not copy their numbers into real cases. Ask one question: does the evidence shown independently justify putting this property into the model's review queue?</p></div></header>
 
-      <div class="cr-example-property">
-        <div><span>FAKE PROPERTY</span><b>123 Sample Oak Lane, Example Township, NJ 08000</b></div>
-        <small>Not a real property. All facts below are illustrative.</small>
-      </div>
-
+      <div class="cr-example-property"><div><span>EXAMPLE 1 · FAKE PROPERTY</span><b>123 Sample Oak Lane, Example Township, NJ 08000</b></div><span class="cr-example-badge">ANSWER: PRIORITY</span></div>
       <div class="cr-example-grid">
-        <section class="cr-example-panel">
-          <span class="cr-example-step">1 · GOVERNED FACTS SHOWN</span>
-          <div class="cr-example-facts">
-            <article><span>Prior assessment</span><b>$285,000</b><small>2025 assessment record</small></article>
-            <article><span>Current assessment</span><b>$352,000</b><small>2026 assessment record</small></article>
-            <article><span>Recent permit</span><b>Roof + structural work</b><small>Permit opened 5 months ago</small></article>
-            <article><span>Permit disposition</span><b>Final status missing</b><small>No governed final inspection result available</small></article>
-          </div>
-        </section>
-
-        <section class="cr-example-panel">
-          <span class="cr-example-step">2 · DERIVED EVIDENCE</span>
-          <div class="cr-example-signals">
-            <article><i class="fas fa-arrow-trend-up"></i><div><b>Assessment changed materially</b><span>The current governed assessment is substantially different from the prior record.</span></div></article>
-            <article><i class="fas fa-hammer"></i><div><b>Property-change evidence exists</b><span>A recent structural-work permit could plausibly explain a material property change.</span></div></article>
-            <article><i class="fas fa-circle-question"></i><div><b>Important evidence is unresolved</b><span>The final permit disposition is missing, so the exact meaning of the change is not established.</span></div></article>
-          </div>
-        </section>
-
-        <section class="cr-example-panel cr-example-answer">
-          <span class="cr-example-step">3 · HUMAN LABEL</span>
-          <div class="cr-example-verdict"><i class="fas fa-flag"></i><div><b>My answer: Priority</b><span>Reason: the available facts independently justify review.</span></div></div>
-          <p><strong>Why:</strong> I am not saying the assessment is wrong, the owner did anything unusual, the property is worth a particular amount, or that there is a legal/closing problem. I am saying there is enough governed evidence to make this property worth a closer human review: a material recorded change, a recent structural permit, and an unresolved final permit status.</p>
-          <p><strong>What would change my answer:</strong> If the evidence showed the assessment change was routine and fully explained by a completed permit with no unresolved issue, I would lean <b>Not priority</b>. If the assessment history or permit facts were missing or contradictory enough that I could not tell whether review was justified, I would choose <b>Uncertain</b>.</p>
-        </section>
+        <section class="cr-example-panel"><span class="cr-example-step">FACTS</span><div class="cr-example-facts"><article><span>Prior assessment</span><b>$285,000</b><small>2025 record</small></article><article><span>Current assessment</span><b>$352,000</b><small>2026 record</small></article><article><span>Recent permit</span><b>Roof + structural work</b><small>Opened 5 months ago</small></article><article><span>Permit disposition</span><b>Final status missing</b><small>No governed final inspection result</small></article></div></section>
+        <section class="cr-example-panel cr-example-answer"><span class="cr-example-step">MY HUMAN LABEL</span><div class="cr-example-verdict"><i class="fas fa-flag"></i><div><b>Priority</b><span>The evidence itself gives a concrete reason for closer review.</span></div></div><p><strong>Why:</strong> a material recorded change, recent structural work, and unresolved permit disposition together justify human review. This does not mean the assessment is wrong, the owner has motivation, the property has a certain value, or a legal problem exists.</p></section>
       </div>
 
-      <div class="cr-example-rule">
-        <b>The shortcut to remember:</b>
-        <span><strong>Priority</strong> = the evidence itself gives a concrete reason for a closer review. <strong>Not priority</strong> = the evidence does not provide a meaningful review reason or the apparent change is adequately explained. <strong>Uncertain</strong> = you cannot responsibly decide from the evidence shown. Never use the hidden Watchdog score as the reason for your label.</span>
+      <div class="cr-example-property"><div><span>EXAMPLE 2 · FAKE PROPERTY</span><b>45 Routine Maple Court, Sample Borough, NJ 08001</b></div><span class="cr-example-badge">ANSWER: NOT PRIORITY</span></div>
+      <div class="cr-example-grid">
+        <section class="cr-example-panel"><span class="cr-example-step">FACTS</span><div class="cr-example-facts"><article><span>Prior assessment</span><b>$310,000</b><small>2025 record</small></article><article><span>Current assessment</span><b>$314,500</b><small>2026 record</small></article><article><span>Permit</span><b>Water heater replacement</b><small>Closed and finaled</small></article><article><span>Other change evidence</span><b>None shown</b><small>No unresolved governed signal</small></article></div></section>
+        <section class="cr-example-panel cr-example-answer"><span class="cr-example-step">MY HUMAN LABEL</span><div class="cr-example-verdict"><i class="fas fa-minus"></i><div><b>Not priority</b><span>The evidence does not provide a meaningful review reason.</span></div></div><p><strong>Why:</strong> the assessment movement is small, the permit is routine and completed, and nothing shown is unresolved or materially unusual. There may always be more information in the world, but based on the evidence actually presented, I would not put this property into the review queue.</p></section>
       </div>
+
+      <div class="cr-example-property"><div><span>EXAMPLE 3 · FAKE PROPERTY</span><b>78 Missing Pine Drive, Demo Township, NJ 08002</b></div><span class="cr-example-badge">ANSWER: UNCERTAIN</span></div>
+      <div class="cr-example-grid">
+        <section class="cr-example-panel"><span class="cr-example-step">FACTS</span><div class="cr-example-facts"><article><span>Prior assessment</span><b>Not available</b><small>Historical value missing</small></article><article><span>Current assessment</span><b>$338,000</b><small>Current record exists</small></article><article><span>Permit signal</span><b>Possible addition</b><small>Source record conflicts with another observation</small></article><article><span>Final disposition</span><b>Unknown</b><small>Missing authoritative resolution</small></article></div></section>
+        <section class="cr-example-panel cr-example-answer"><span class="cr-example-step">MY HUMAN LABEL</span><div class="cr-example-verdict"><i class="fas fa-question"></i><div><b>Uncertain</b><span>I cannot responsibly decide from the evidence shown.</span></div></div><p><strong>Why:</strong> there might be something worth reviewing, but key baseline and permit facts are missing or conflicting. Choosing Priority would require me to assume the unresolved signal is meaningful; choosing Not priority would require me to assume it is harmless. Neither assumption is justified, so Uncertain is the correct label.</p></section>
+      </div>
+
+      <div class="cr-example-rule"><b>The shortcut to remember:</b><span><strong>Priority</strong> = concrete evidence-backed reason for closer review. <strong>Not priority</strong> = evidence is routine, adequately explained, or not meaningful enough for review. <strong>Uncertain</strong> = evidence is too incomplete, conflicting, or ambiguous to responsibly decide. Never use Watchdog's hidden score as the reason for your label.</span></div>
     </section>
 
-    <section class="cr-trust">
-      <i class="fas fa-scale-balanced"></i>
-      <div><b>Your label is the calibration evidence.</b><span>Use <strong>Priority</strong> only when the available evidence independently supports review. Use <strong>Not priority</strong> when it does not. Use <strong>Uncertain</strong> instead of guessing when evidence is insufficient or ambiguous.</span></div>
-    </section>
+    <section class="cr-trust"><i class="fas fa-scale-balanced"></i><div><b>Your label is the calibration evidence.</b><span>Use <strong>Priority</strong> only when the available evidence independently supports review. Use <strong>Not priority</strong> when it does not. Use <strong>Uncertain</strong> instead of guessing when evidence is insufficient or ambiguous.</span></div></section>
 
-    <section class="cr-controls">
-      <label>Calibration queue<select id="cr-set" aria-label="Calibration queue"></select></label>
-      <div id="cr-progress" class="cr-progress"></div>
-    </section>
-
-    <section id="cr-stage" class="cr-stage" aria-live="polite">
-      <div class="cr-loading"><i class="fas fa-circle-notch fa-spin"></i><span>Loading governed calibration evidence…</span></div>
-    </section>
+    <section class="cr-controls"><label>Calibration queue<select id="cr-set" aria-label="Calibration queue"></select></label><div id="cr-progress" class="cr-progress"></div></section>
+    <section id="cr-stage" class="cr-stage" aria-live="polite"><div class="cr-loading"><i class="fas fa-circle-notch fa-spin"></i><span>Loading governed calibration evidence…</span></div></section>
   </main>
-
   <div id="pl-toast" class="pl-toast" role="status" aria-live="polite"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
