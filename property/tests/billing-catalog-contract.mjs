@@ -11,6 +11,7 @@ const pro = read('property/pro/index.html');
 const billingClient = read('property/js/billing-client.js');
 const checkout = read('supabase/functions/create-checkout-session/index.ts');
 const webhook = read('supabase/functions/stripe-webhook/index.ts');
+const health = read('supabase/functions/get-platform-health/index.ts');
 
 const expected = {
   agent: { monthly: 59, yearly: 590, monthlyId: 'price_1U5qPZAgYeNIcesFuC2gKGTz', yearlyId: 'price_1U5qPjAgYeNIcesFCXaHoU0c' },
@@ -47,6 +48,14 @@ expect(checkout.includes("if (rawTier === 'teams')"), 'Checkout no longer explic
 expect(checkout.includes("return 'closed';"), 'Checkout no longer defaults fail-closed.');
 expect(checkout.includes("WATCHDOG_TEST_NO_REAL_SPEND"), 'Checkout no longer protects test accounts from Live spend.');
 
+expect(health.includes("provider: 'stripe'"), 'Developer platform health is not Stripe-authoritative.');
+expect(health.includes("from('billing_webhook_events')"), 'Developer platform health is not reading the Stripe webhook ledger.');
+expect(health.includes(".eq('gate_key', 'live_billing_lifecycle')"), 'Developer platform health is not tied to the Live billing release gate.');
+expect(health.includes("stripe_secret_configured"), 'Developer platform health does not report Stripe secret readiness.');
+expect(health.includes("webhook_secret_configured"), 'Developer platform health does not report webhook-secret readiness.');
+expect(!health.includes("PADDLE_ENVIRONMENT"), 'Developer platform health reverted to Paddle environment detection.');
+expect(!health.includes("eq('provider', 'paddle')"), 'Developer platform health reverted to Paddle event evidence.');
+
 expect(!account.includes('monthly: 29'), 'Legacy Agent $29 pricing returned to Account.');
 expect(!account.includes('yearly: 290'), 'Legacy Agent $290 yearly pricing returned to Account.');
 expect(!account.includes('monthly: 349'), 'Legacy Professional $349 pricing returned to Account.');
@@ -62,4 +71,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Billing catalog contract passed: Account, Pro, Stripe mapping and fail-closed Checkout agree.');
+console.log('Billing catalog contract passed: Account, Pro, Stripe mapping, launch health and fail-closed Checkout agree.');
