@@ -1,5 +1,6 @@
 name: One-off spatial provenance fix
 
+# Re-triggered 2026-08-19 to deploy the current Git-first hydrator with the governed DCA zoning provider.
 on:
   push:
     paths:
