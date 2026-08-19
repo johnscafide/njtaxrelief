@@ -60,4 +60,13 @@ for (const path of ['property/js/supabase-runtime.js','property/js/public-nav.js
   must(!read(path).match(/\.js\?v=|\.css\?v=/),`${path} must not introduce version-query asset URLs.`);
 }
 
+// Social auth provider + redirect contract.
+must(runtime.includes("google: { label:'Google', enabled:true }"),'Google sign-in must remain enabled.');
+must(runtime.includes("facebook: { label:'Facebook', enabled:true }"),'Facebook sign-in must remain enabled.');
+must(runtime.includes("linkedin_oidc: { label:'LinkedIn', enabled:true }"),'LinkedIn OIDC sign-in must remain enabled.');
+must(runtime.includes("apple: { label:'Apple', enabled:false }"),'Apple must remain explicitly deferred/disabled.');
+must(runtime.includes("return Promise.reject(new Error('This sign-in provider is not enabled yet.'))"),'Disabled providers must fail closed.');
+must(runtime.includes('request.options.redirectTo = onboardingRedirect(intendedNext)'),'All OAuth sign-ins must return through required Watchdog onboarding.');
+must(runtime.includes("parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0"),'OAuth next routes must reject cross-origin, non-property and onboarding-loop targets.');
+
 console.log('Supabase runtime rotation-path contract passed.');
