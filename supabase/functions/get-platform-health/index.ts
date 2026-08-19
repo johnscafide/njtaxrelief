@@ -11,6 +11,8 @@ const PRICE_LOOKUPS = [
   ['watchdog_pro_plus_yearly', 399000, 'year']
 ] as const;
 
+type CheckoutMode = 'closed' | 'controlled' | 'open';
+
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
   try {
@@ -46,6 +48,11 @@ function json(req: Request, body: unknown, status = 200) {
 
 function envPresent(name: string) {
   return Boolean(String(Deno.env.get(name) || '').trim());
+}
+
+function validMode(value: unknown): CheckoutMode | null {
+  const normalized = String(value || '').trim().toLowerCase();
+  return ['closed', 'controlled', 'open'].includes(normalized) ? normalized as CheckoutMode : null;
 }
 
 async function resolveStripeCatalog(stripeKey: string | undefined) {
@@ -162,7 +169,11 @@ Deno.serve(async (req) => {
   const auditTypes = new Set((billingAudit.data || []).map((row) => row.event_type));
   const entitlementStatuses = new Set((entitlements.data || []).map((row) => row.subscription_status).filter(Boolean));
   const gate = releaseGate.data || null;
-  const checkoutMode = String(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') || 'closed').trim().toLowerCase();
+  const gateEvidence = gate?.evidence && typeof gate.evidence === 'object' ? gate.evidence as Record<string, any> : {};
+  const envCheckoutMode = validMode(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE'));
+  const checkoutMode = envCheckoutMode || validMode(gateEvidence.checkout_mode || gateEvidence.public_checkout) || 'closed';
+  const checkoutControlSource = envCheckoutMode ? 'environment_override' : validMode(gateEvidence.checkout_mode || gateEvidence.public_checkout) ? 'release_gate' : 'fail_closed_default';
+  const controlledUserCount = Array.isArray(gateEvidence.controlled_user_ids) ? gateEvidence.controlled_user_ids.length : 0;
   const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
   const stripeCatalog = await resolveStripeCatalog(stripeKey);
   const priceOverrideNames = [
@@ -194,6 +205,11 @@ Deno.serve(async (req) => {
       id: 'configuration',
       label: 'Stripe Live secrets and six-price catalog ready',
       passed: secretReadiness.ready_for_controlled_acceptance
+    },
+    {
+      id: 'controlled_access',
+      label: 'Controlled Checkout account selected',
+      passed: checkoutMode === 'controlled' ? controlledUserCount > 0 : checkoutMode === 'open' && gate?.status === 'passed'
     },
     {
       id: 'checkout',
@@ -252,7 +268,9 @@ Deno.serve(async (req) => {
   const billing = {
     provider: 'stripe',
     environment: 'production',
-    checkout_mode: ['closed', 'controlled', 'open'].includes(checkoutMode) ? checkoutMode : 'closed',
+    checkout_mode: checkoutMode,
+    checkout_control_source: checkoutControlSource,
+    controlled_user_count: controlledUserCount,
     secrets: secretReadiness,
     catalog: {
       resolved: stripeCatalog.resolved,
@@ -274,7 +292,7 @@ Deno.serve(async (req) => {
 
   return json(req, {
     generated_at: new Date().toISOString(),
-    release: '2026-08-18-stripe-launch-health-v2',
+    release: '2026-08-18-stripe-launch-health-v3',
     counts,
     events: rows.slice(0, 50),
     incidents: incidents.data || [],
