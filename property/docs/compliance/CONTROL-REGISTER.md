@@ -1,7 +1,7 @@
 # Watchdog Compliance Control Register
 
 **Program status:** Readiness in progress  
-**Last updated:** 2026-08-18  
+**Last updated:** 2026-08-19  
 **Assurance status:** No independent certification or SOC report is claimed by this document.
 
 ## Status key
@@ -22,7 +22,8 @@
 | WCR-IAM-001 | Database row-level access and entitlements | SOC 2 Security, OWASP ASVS Access Control | Implemented | `property/tests/security-contracts.mjs`, Supabase migrations | Add periodic privileged-access review evidence and formal joiner/mover/leaver process as team grows. |
 | WCR-PAY-001 | Signed payment webhooks | SOC 2 Security, OWASP ASVS, PCI DSS | Implemented | Stripe/Paddle checks in `property/tests/security-contracts.mjs` | Complete merchant PCI scope determination and applicable SAQ/ASV requirements before scaled production billing. |
 | WCR-PAY-002 | Server-authoritative pricing | SOC 2 Processing Integrity, OWASP ASVS | Implemented | Marketing checkout security contracts | Maintain tests for every new paid workflow. |
-| WCR-IR-001 | Incident response runbook | SOC 2 Security/Availability, NIST Respond, ISO 27001 | Implemented | `property/docs/incident-response-runbook.md` | Perform and retain evidence from a tabletop exercise. |
+| WCR-IR-001 | Incident response runbook | SOC 2 Security/Availability, NIST Respond, ISO 27001 | Implemented | `property/docs/incident-response-runbook.md` | Maintain the runbook and reconcile future exercises/incidents against it. |
+| WCR-IR-002 | Incident response tabletop exercise | SOC 2 Security/Availability, NIST Respond/Recover, ISO 27001 | Implemented | `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md` | Add a reusable incident record template, define provisional RTO/RPO targets and run a future connector-focused exercise. |
 | WCR-LOG-001 | Privacy-safe reliability telemetry | SOC 2 Privacy, NJDPA, NIST Protect/Detect | Implemented | `property/docs/incident-response-runbook.md` | Verify telemetry providers/configuration against documented minimization requirements. |
 | WCR-PRIV-001 | Privacy notice and consumer rights | NJDPA, SOC 2 Privacy, ISO 27701 | Implemented | `property/privacy/index.html` | Perform periodic data-inventory-to-policy reconciliation as features/connectors change. |
 | WCR-PRIV-002 | Sensitive financial-data consent | NJDPA, SOC 2 Privacy, ISO 27701 | Partial | Privacy policy and product consent design | Create/maintain formal data-protection assessment evidence for sensitive-data workflows. |
