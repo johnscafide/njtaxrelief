@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-19T21:40:00Z",
+  "captured_at": "2026-08-19T22:12:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "njplus.nj-dca-community-assets.opportunity_zone_status": "live",
@@ -12,10 +12,14 @@
     "njplus.nj-dca-zoning-directory.municipal_zoning_portal": "live",
     "njplus.nj-dca-zoning-directory.zoning_map_url": "live",
     "njplus.nj-dca-zoning-directory.zoning_ordinance_url": "live",
+    "njplus.njdep-csrr-gis.brownfield_inventory_status": "live",
+    "njplus.njdep-csrr-gis.cea_reference": "live",
+    "njplus.njdep-csrr-gis.deed_notice_reference": "live",
     "njplus.njdep-csrr-gis.environmental_layer_vintage": "live",
     "njplus.njdep-csrr-gis.kcsl_case_status": "live",
     "njplus.njdep-csrr-gis.kcsl_program_interest": "live",
     "njplus.njdep-csrr-gis.kcsl_site_id": "live",
+    "njplus.njdep-csrr-gis.ust_facility_reference": "live",
     "watchdog.njplus.development_designation_stack": "live"
   }
 }
