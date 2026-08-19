@@ -24,7 +24,8 @@ must(fn.includes('x-watchdog-watch-token'),'Worker must require the internal wat
 must(fn.includes('shaText(token)')&&fn.includes('shaValue(next)'),'Worker must hash auth token as raw text while hashing marker values canonically.');
 must(fn.includes('watchdog_effective_plan'),'Worker must use the authoritative server-side effective-plan contract.');
 must(fn.includes('PLAN_RANK.agent'),'Worker must exclude Standard/Free saved properties from the background paid-property watch.');
-must(fn.includes('NJ_PARCEL_ITEM_ID="3e9f5e68c12f47e3b3dbd58201e051b2"'),'Worker must resolve the official NJ ArcGIS parcel item.');
+must(fn.includes('NJ_PARCEL_ITEM_ID="533599bbfbaa4748bf39faf1375a8a9c"'),'Worker must resolve the current official NJ ArcGIS parcel item.');
+must(!fn.includes('3e9f5e68c12f47e3b3dbd58201e051b2'),'Worker must not regress to the retired/wrong parcel item.');
 must(fn.includes('www.arcgis.com/sharing/rest/content/items')&&fn.includes('resolveParcelQueryUrl'),'Worker must dynamically resolve the current official ArcGIS service instead of hardcoding a brittle FeatureServer path.');
 must(fn.includes('if(!prior){baselines++')&&fn.includes('candidateUpserts.push'),'First observation must be baseline-only and candidate creation must require a prior value.');
 must(fn.includes('if(String(prior.value_hash)===nextHash){unchanged++'),'Unchanged authoritative facts must remain idempotent.');
@@ -37,4 +38,4 @@ must(fn.includes('provider_batches')&&fn.includes('baselines_created')&&fn.inclu
 must(/\[functions\.intelligence-source-fact-watch\][\s\S]*?verify_jwt = false/.test(config),'Gateway JWT verification may be disabled only because the worker performs its own Vault-token authentication.');
 
 for(const [name,content] of Object.entries({migration,fn,config}))must(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
-console.log('Intelligence source-fact watch contract passed: env-safe disablement, Vault token auth, paid-plan gate, official NJ service resolution, baseline-first/idempotent semantics, service-only research candidates, no notifications/findings, six-hour cadence, no ?v=.');
+console.log('Intelligence source-fact watch contract passed: env-safe disablement, Vault token auth, paid-plan gate, current official NJ service resolution, baseline-first/idempotent semantics, service-only research candidates, no notifications/findings, six-hour cadence, no ?v=.');
