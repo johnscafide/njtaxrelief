@@ -1,0 +1,80 @@
+{
+  "manifest_version": "watchdog-closing-v3-fresh-holdout-v1",
+  "captured_at": "2026-08-19T17:32:00Z",
+  "production_project_ref": "uvkvaxljhhngydvlrzom",
+  "model": {
+    "model_key": "closing_review",
+    "draft_version": 3,
+    "draft_status": "draft",
+    "draft_calibration_state": "uncalibrated",
+    "current_customer_version": 2,
+    "current_customer_status": "preview",
+    "current_customer_calibration_state": "uncalibrated"
+  },
+  "structural_shadow": {
+    "sample_requested": 126,
+    "sample_resolved": 126,
+    "sample_scorable": 78,
+    "insufficient_evidence": 48,
+    "counties_in_source_pool": 21,
+    "distinct_scores": 51,
+    "unique_feature_vectors": 51,
+    "variable_score_features": 5,
+    "score_min": 0,
+    "score_max": 75.55,
+    "score_mean": 25.26,
+    "p50": 25.17,
+    "p90": 46.27,
+    "threshold_checks": [
+      {"threshold": 60, "predicted_priority": 1, "predicted_not_priority": 77, "structurally_ready": false},
+      {"threshold": 50, "predicted_priority": 7, "predicted_not_priority": 71, "structurally_ready": true},
+      {"threshold": 45, "predicted_priority": 11, "predicted_not_priority": 67, "structurally_ready": true},
+      {"threshold": 40, "predicted_priority": 17, "predicted_not_priority": 61, "structurally_ready": true}
+    ]
+  },
+  "threshold_decision": {
+    "priority_threshold": 45,
+    "selected_before_human_labels": true,
+    "reason": "Closing v3 has a new score geometry. A threshold of 45 targets approximately the top 14 percent of the statewide scorable source pool and supports a 35-case holdout with five predicted Priority cases without materially changing source prevalence."
+  },
+  "fresh_holdout": {
+    "calibration_set_id": "dac7ead3-46ec-46ab-ab51-2b9d0bf8138e",
+    "required_reviews": 35,
+    "case_count": 35,
+    "unreviewed_at_seed": 35,
+    "predicted_priority_hidden": 5,
+    "predicted_not_priority_hidden": 30,
+    "nj_county_codes_represented": 21,
+    "prior_closing_case_overlap": 0,
+    "reviewer_blind_to_prediction_until_save": true,
+    "reuse_prior_labels": false,
+    "selection": "Deterministic county-diverse hash sampling preserving the source-pool predicted prevalence."
+  },
+  "reviewer_source_acceptance": {
+    "cases_checked": 35,
+    "semantic_context_snapshots": 35,
+    "requested_marker_slots_per_case": 8,
+    "available_marker_observations": 271,
+    "missing_marker_observations": 9,
+    "average_available_markers_per_case": 7.74,
+    "minimum_available_markers_in_a_case": 5,
+    "maximum_available_markers_in_a_case": 8,
+    "fabricate_missing_values": false
+  },
+  "quality_gates": {
+    "minimum_reviewed_cases": 35,
+    "minimum_precision": 0.70,
+    "minimum_recall": 0.60,
+    "maximum_false_positive_rate": 0.30,
+    "uncertain_labels_excluded_from_binary_metrics": true
+  },
+  "safety": {
+    "model_pointer_changed": false,
+    "calibration_state_changed": false,
+    "promotion_action_in_seeder": false,
+    "human_labels_created_by_seeder": false,
+    "write_capable_seeder_retired_after_one_use": true,
+    "retired_seeder_http_status": 410,
+    "write_capable_seeder_git_commit": "96f741aace70f428655f27b2d3b01e2249b6cffa"
+  }
+}
