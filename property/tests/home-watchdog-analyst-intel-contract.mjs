@@ -3,22 +3,27 @@ import vm from 'node:vm';
 
 const files = {
   analyst: 'property/js/dashboard/home/watchdog-analyst-intel.js',
+  intent: 'property/js/dashboard/home/watchdog-intent-context.js',
   onboarding: 'property/js/dashboard/home/profession-onboarding.js',
   loader: 'property/js/dashboard/home/watchdog-analyst-intel-loader.js',
   menu: 'property/js/dashboard/home/home-menu-sync.js',
-  css: 'property/css/home/watchdog-analyst-intel.css'
+  css: 'property/css/home/watchdog-analyst-intel.css',
+  intentCss: 'property/css/home/watchdog-intent-context.css'
 };
 const read = (key) => fs.readFileSync(files[key], 'utf8');
 const analyst = read('analyst');
+const intent = read('intent');
 const onboarding = read('onboarding');
 const loader = read('loader');
 const menu = read('menu');
 const css = read('css');
+const intentCss = read('intentCss');
 
 const fail = (message) => { throw new Error(message); };
 const expect = (condition, message) => { if (!condition) fail(message); };
 
 new vm.Script(analyst, { filename: files.analyst });
+new vm.Script(intent, { filename: files.intent });
 new vm.Script(onboarding, { filename: files.onboarding });
 new vm.Script(loader, { filename: files.loader });
 
@@ -34,6 +39,7 @@ expect(analyst.includes("if (!force && state.lastPin === pinValue"), 'Refresh lo
 
 for (const profession of ['real_estate','investor','attorney','mortgage_lending','appraiser','contractor','property_tax_professional','title_closing','homeowner']) {
   expect(analyst.includes(profession + ':'), `Missing profession lens: ${profession}`);
+  expect(intent.includes(profession + ':['), `Missing intent job map: ${profession}`);
   expect(onboarding.includes("'" + profession + "'"), `Missing profession onboarding choice: ${profession}`);
 }
 for (const label of ['FINANCIAL LENS','MOTIVATION','INNOVATION','EVIDENCE','NEXT BEST ACTION']) {
@@ -45,6 +51,20 @@ expect(analyst.includes('not an appraisal'), 'Appraiser lens must not present Wa
 expect(analyst.includes('legal or appeal conclusion'), 'Attorney/tax lens must preserve professional-conclusion boundary.');
 expect(analyst.includes('Your profession personalizes recommendations. It does not change billing or authorization.'), 'Profession selection must be described as personalization, not authorization.');
 
+expect(intent.includes("from('intelligence_intent_states')"), 'Intent Context must read/write governed current intent state.');
+expect(intent.includes("from('intelligence_intent_events')"), 'Intent Context must append the decision trail.');
+expect(intent.includes("event_type:type,fact_class:factClass"), 'Intent events must explicitly classify event and fact type.');
+expect(intent.includes("fact_class:'hypothesis'" ) === false, 'Intent Context should not hardcode unstructured fact-class payloads.');
+expect(intent.includes("'hypothesis','hypothesis'"), 'Candidate jobs must be logged as hypotheses, not facts.');
+expect(intent.includes("'answer','user_confirmed'"), 'User-selected job must be logged as user-confirmed.');
+expect(intent.includes("'intent_update','user_confirmed'"), 'Confirmed job must create an intent-update event.');
+expect(intent.includes('active_job_confidence:100'), 'Only explicit user selection may reach 100% active-job confidence in this runtime.');
+expect(intent.includes('Multiple plausible professional jobs would materially change the analysis.'), 'Questioning policy must require materially different plausible jobs.');
+expect(intent.includes('without assuming seller intent'), 'Listing-farm context must not manufacture homeowner seller motivation.');
+expect(intent.includes("contextKey='property:'+state.pin"), 'Property Home Intent Context must remain property-scoped.');
+expect(intent.includes("sessionStorage.getItem(key)"), 'Repeated property-open observations must be deduplicated within a session.');
+expect(intent.includes("window.dispatchEvent(new CustomEvent('watchdog:intent-updated'"), 'Confirmed intent must publish a reusable platform event.');
+
 expect(onboarding.includes("from('professional_preferences').select"), 'Property Home onboarding must check the existing explicit profession record.');
 expect(onboarding.includes("from('professional_preferences').upsert"), 'Property Home onboarding must persist the selected profession to the user-owned preference record.');
 expect(onboarding.includes('Use generalized Intel for now'), 'Users must be able to decline exact personalization and continue with generalized Intel.');
@@ -52,8 +72,10 @@ expect(onboarding.includes('does not change your plan, billing, or authorization
 expect(onboarding.includes("sessionStorage.setItem(key(),'1')"), 'Profession prompt must not nag repeatedly during the same session.');
 
 expect(loader.includes('/property/css/home/watchdog-analyst-intel.css'), 'Loader must install Analyst Intel CSS.');
+expect(loader.includes('/property/css/home/watchdog-intent-context.css'), 'Loader must install Intent Context CSS.');
 expect(loader.includes('/property/js/dashboard/home/profession-onboarding.js'), 'Loader must ask profession before exact Property Home Intel.');
 expect(loader.includes('/property/js/dashboard/home/watchdog-analyst-intel.js'), 'Loader must install Analyst Intel runtime.');
+expect(loader.includes('/property/js/dashboard/home/watchdog-intent-context.js'), 'Loader must install governed Intent Context runtime.');
 expect(menu.includes('/property/js/dashboard/home/watchdog-analyst-intel-loader.js'), 'Property Home runtime must load Analyst Intel.');
 expect(css.includes('.ai.wdai'), 'Analyst Intel must have scoped Property Home styling.');
 expect(css.includes('.wd-profession-onboarding'), 'Profession onboarding must have a production UI treatment.');
@@ -61,9 +83,11 @@ expect(css.includes('.hm-wrap > .ai.wdai'), 'Analyst Intel must explicitly overr
 expect(css.includes('display:block !important'), 'Analyst Intel container must beat the legacy display:grid !important rule.');
 expect(css.includes('grid-template-columns:none !important'), 'Analyst Intel must neutralize the legacy 230px + 1fr Agent Intel grid.');
 expect(css.includes('grid-column:1 / -1 !important'), 'Analyst Intel must remain full width in the Property Home grid.');
+expect(intentCss.includes('.wd-intent-context'), 'Intent Context must have a production UI treatment.');
+expect(intentCss.includes('.wd-intent-options'), 'Intent Context must present compact decision choices.');
 
-for (const [key, content] of Object.entries({ analyst, onboarding, loader, menu, css })) {
+for (const [key, content] of Object.entries({ analyst, intent, onboarding, loader, menu, css, intentCss })) {
   expect(!content.includes('?v='), `${files[key]} must not introduce ?v= asset version parameters.`);
 }
 
-console.log('Watchdog Analyst Intel profession, onboarding, evidence, refresh, layout, and asset contracts passed.');
+console.log('Watchdog Analyst Intel profession, onboarding, governed intent, evidence, refresh, layout, and asset contracts passed.');
