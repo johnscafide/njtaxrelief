@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">External event to Watchdog Intelligence orchestration</title>
+<desc id="desc">Flow diagram showing an external lead or CRM event resolving to a governed property, adding it to a Watchlist, running Watchdog Intelligence, enforcing a policy gate, and sending actions back to connected systems.</desc>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f6df6"/></marker><filter id="s"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#183b84" flood-opacity=".08"/></filter></defs>
+<rect width="1600" height="900" fill="#f5f7fb"/>
+<text x="90" y="90" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="800" letter-spacing="2" fill="#2f6df6">INBOUND INTELLIGENCE ORCHESTRATION</text>
+<text x="90" y="142" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="800" fill="#111d38">An outside event can ask Watchdog to think.</text>
+<text x="90" y="181" font-family="Inter,Arial,sans-serif" font-size="19" fill="#748198">The external system supplies context. Watchdog resolves the property, applies its own evidence rules, then decides what may happen next.</text>
+
+<g filter="url(#s)" font-family="Inter,Arial,sans-serif">
+<rect x="70" y="320" width="210" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="330" y="320" width="210" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="590" y="320" width="210" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="850" y="320" width="210" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="1110" y="320" width="210" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="1370" y="320" width="160" height="210" rx="18" fill="#fff" stroke="#e2e7ef"/>
+</g>
+
+<circle cx="175" cy="370" r="30" fill="#e9f0ff"/><text x="175" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">1</text>
+<text x="105" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">External event</text>
+<text x="105" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">CRM lead</text><text x="105" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">form submission</text><text x="105" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">case / deal update</text>
+
+<circle cx="435" cy="370" r="30" fill="#e9f0ff"/><text x="435" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">2</text>
+<text x="365" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Resolve property</text>
+<text x="365" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">address evidence</text><text x="365" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">PAMS / parcel identity</text><text x="365" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">ambiguity stays gated</text>
+
+<circle cx="695" cy="370" r="30" fill="#e9f0ff"/><text x="695" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">3</text>
+<text x="625" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Enroll context</text>
+<text x="625" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">add to Watchlist</text><text x="625" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">attach allowed CRM data</text><text x="625" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">record provenance</text>
+
+<circle cx="955" cy="370" r="30" fill="#e9f0ff"/><text x="955" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">4</text>
+<text x="885" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Run Intelligence</text>
+<text x="885" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">quota-aware job</text><text x="885" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">governed evidence</text><text x="885" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">confidence + reasons</text>
+
+<circle cx="1215" cy="370" r="30" fill="#e9f0ff"/><text x="1215" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">5</text>
+<text x="1145" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Policy gate</text>
+<text x="1145" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">threshold met?</text><text x="1145" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">permission granted?</text><text x="1145" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">human approval?</text>
+
+<circle cx="1450" cy="370" r="30" fill="#e9f0ff"/><text x="1450" y="379" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#2f6df6">6</text>
+<text x="1400" y="430" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Act</text>
+<text x="1400" y="465" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">task</text><text x="1400" y="489" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">message</text><text x="1400" y="513" font-family="Inter,Arial,sans-serif" font-size="14" fill="#31435c">report</text>
+
+<path d="M280 425H330" stroke="#2f6df6" stroke-width="5" marker-end="url(#a)"/><path d="M540 425H590" stroke="#2f6df6" stroke-width="5" marker-end="url(#a)"/><path d="M800 425H850" stroke="#2f6df6" stroke-width="5" marker-end="url(#a)"/><path d="M1060 425H1110" stroke="#2f6df6" stroke-width="5" marker-end="url(#a)"/><path d="M1320 425H1370" stroke="#2f6df6" stroke-width="5" marker-end="url(#a)"/>
+
+<rect x="330" y="610" width="990" height="120" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<text x="365" y="652" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="800" fill="#183b84">THE DIFFERENCE</text>
+<text x="365" y="687" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800" fill="#111d38">Zapier is not being asked to decide what the property means.</text>
+<text x="365" y="716" font-family="Inter,Arial,sans-serif" font-size="16" fill="#748198">It transports intent and actions. Watchdog retains responsibility for property identity, evidence, Intelligence, permissioning, and explainability.</text>
+
+<path d="M1450 545C1450 790 185 790 185 545" fill="none" stroke="#748198" stroke-width="3" stroke-dasharray="9 9" marker-end="url(#a)"/>
+<text x="800" y="805" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#748198">OUTCOMES CAN RETURN AS NORMALIZED CONTEXT FOR THE NEXT INTELLIGENCE CYCLE</text>
+</svg>
