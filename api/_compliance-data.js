@@ -1,7 +1,7 @@
 module.exports = {
   "program": "Watchdog Compliance Readiness",
-  "version": 2,
-  "updated_at": "2026-08-18",
+  "version": 3,
+  "updated_at": "2026-08-19",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
   "entries": [
@@ -108,6 +108,19 @@ module.exports = {
       "rationale": "A minimum-only once-daily cadence could become artificially narrow; two review windows with permission to complete multiple related controls better matches an actively evolving SaaS platform.",
       "residual_risk": "Automation frequency does not by itself prove operating effectiveness; completed work still requires useful evidence and periodic human review.",
       "next_step": "Use the scheduled sessions to prioritize high-risk gaps and accumulate evidence that will later support readiness assessments and independent audits."
+    },
+    {
+      "id": "WCR-2026-08-19-001",
+      "date": "2026-08-19",
+      "title": "Incident-response tabletop exercise completed",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "ISO/IEC 27001", "OWASP ASVS 5.0"],
+      "control_area": "Incident response and recovery",
+      "status": "implemented",
+      "action": "Completed and retained a sanitized internal tabletop exercise for a plausible multi-user authenticated paid-workflow incident, walking through detection, classification, evidence minimization, ownership, containment, authorization verification, source-of-truth reconciliation, communication and closure criteria.",
+      "evidence": ["property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md", "property/docs/incident-response-runbook.md", "property/docs/compliance/CONTROL-REGISTER.md"],
+      "rationale": "A written runbook alone does not demonstrate that the response sequence is coherent when applied to a realistic incident; exercising it produces operating evidence and exposes gaps before a real event.",
+      "residual_risk": "The tabletop does not measure real-world response speed, staging recovery performance, provider coordination or independent effectiveness.",
+      "next_step": "Add a reusable incident record template, define provisional RTO/RPO targets, and conduct a future connector or credential-revocation exercise."
     }
   ]
 };
