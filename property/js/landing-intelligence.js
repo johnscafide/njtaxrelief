@@ -26,7 +26,7 @@
   }
   function dateLabel(value) {
     if (!value) return 'Refreshing';
-    try { return new Intl.DateTimeFormat('en-US', { month:'short', day:'numeric', year:'numeric' }).format(new Date(value + (String(value).length === 10 ? 'T12:00:00' : '')); }
+    try { return new Intl.DateTimeFormat('en-US', { month:'short', day:'numeric', year:'numeric' }).format(new Date(value + (String(value).length === 10 ? 'T12:00:00' : ''))); }
     catch (_error) { return String(value); }
   }
   function timeLabel(value) {
