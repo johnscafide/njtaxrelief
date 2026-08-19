@@ -143,14 +143,14 @@ Deno.serve(async (req: Request) => {
 
   const url = Deno.env.get('SUPABASE_URL') || '';
   const anon = Deno.env.get('SUPABASE_ANON_KEY') || '';
-  const service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
   const userClient = createClient(url, anon, { global: { headers: { Authorization: auth } }, auth: { persistSession: false } });
-  const admin = createClient(url, service, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: who } = await userClient.auth.getUser();
   if (!who.user) return out(req, 401, { error: 'Session invalid' });
 
-  const { data: planData } = await admin.rpc('watchdog_effective_plan', { p_user_id: who.user.id });
-  const plan = String(planData || 'standard');
+  const { data: entitlement, error: entitlementError } = await userClient.rpc('get_my_entitlement');
+  if (entitlementError) return out(req, 503, { error: 'Entitlement resolver unavailable' });
+  const entitlementRow = Array.isArray(entitlement) ? entitlement[0] : entitlement;
+  const plan = String(entitlementRow?.plan_tier || 'standard');
   if (!['pro', 'pro_plus', 'teams', 'developer'].includes(plan)) return out(req, 403, { error: 'Pro plan required' });
 
   let body: any = {};
@@ -164,7 +164,7 @@ Deno.serve(async (req: Request) => {
   const rawIds: string[] = [...new Set<string>((Array.isArray(body.marker_ids) ? body.marker_ids : []).map((x: any) => clean(x)).filter(Boolean))].slice(0, 250);
   if (!pins.length || !rawIds.length) return out(req, 200, { records: [], markers: {}, meta: {}, engine_version: ENGINE_VERSION });
 
-  const { data: defs, error: defErr } = await admin
+  const { data: defs, error: defErr } = await userClient
     .from('derived_formula_registry')
     .select('marker_id,formula,dependencies,confidence,status,explanation,operation,config')
     .eq('status', 'live');
