@@ -30,6 +30,10 @@ function installIntegrationTransport(){
     try{Object.defineProperty(client,'__watchdogIntegrationTransport',{value:true,configurable:true});}catch(_){}
   }catch(_){}
 }
+function loadResolutionModule(){
+  if(!document.querySelector('link[data-watchdog-crm-resolution]')){var link=document.createElement('link');link.rel='stylesheet';link.href='/property/css/integrations-crm-resolution.css';link.dataset.watchdogCrmResolution='true';document.head.appendChild(link);}
+  if(!document.querySelector('script[data-watchdog-crm-resolution]')){var script=document.createElement('script');script.src='/property/js/integrations-crm-resolution.js';script.defer=true;script.dataset.watchdogCrmResolution='true';document.body.appendChild(script);}
+}
 installIntegrationTransport();
 function show(id,on){var n=$(id);if(n)n.hidden=!on;}
 function text(id,v){var n=$(id);if(n)n.textContent=v;}
@@ -65,7 +69,7 @@ function beginReconnect(){if(!provider)return;reconnectMode=true;$('igd-account-
 function cancelReconnect(){reconnectMode=false;$('igd-api-token').value='';show('igd-cancel-reconnect',false);note('igd-connect-note','');render();}
 async function disconnect(){if(!provider||busy)return;if(!confirm('Disconnect BoldTrail? The API token will be deleted from Watchdog Vault and the normalized CRM context imported by this connection will be removed.'))return;setBusy(true);try{await invoke('provider.disconnect',{connection_id:provider.connection_id,purge_context:true});provider=null;history=[];reconnectMode=false;$('igd-api-token').value='';show('igd-history',false);note('igd-connect-note','BoldTrail disconnected. Its stored credential and normalized CRM context were removed.');render();await refreshSharedContext();}catch(err){alert(err.message);}finally{setBusy(false);}}
 async function action(btn){var a=btn.dataset.directAction;if(a==='sync'){await syncNow();return;}if(a==='reconnect'){beginReconnect();return;}if(a==='cancel-reconnect'){cancelReconnect();return;}if(a==='disconnect'){await disconnect();return;}if(a==='history'){show('igd-history',true);setBusy(true);try{await loadHistory();}catch(err){alert(err.message);}finally{setBusy(false);}return;}if(a==='close-history'){show('igd-history',false);return;}}
-async function boot(){var root=$('igd-native');if(!root)return;try{db=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null;if(!db)return;var s=await db.auth.getSession(),session=s&&s.data&&s.data.session;if(!session)return;try{var state=await loadProvider();show('igd-direct-workspace',true);show('igd-lock',false);if(state.plan)root.dataset.plan=state.plan;}catch(err){if(/Teams|Native CRM connections require/i.test(err.message)){show('igd-lock',true);show('igd-direct-workspace',false);return;}throw err;}}catch(err){show('igd-direct-workspace',true);note('igd-connect-note',err.message,true);}}
+async function boot(){var root=$('igd-native');if(!root)return;try{db=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null;if(!db)return;var s=await db.auth.getSession(),session=s&&s.data&&s.data.session;if(!session)return;try{var state=await loadProvider();show('igd-direct-workspace',true);show('igd-lock',false);if(state.plan)root.dataset.plan=state.plan;loadResolutionModule();}catch(err){if(/Teams|Native CRM connections require/i.test(err.message)){show('igd-lock',true);show('igd-direct-workspace',false);return;}throw err;}}catch(err){show('igd-direct-workspace',true);note('igd-connect-note',err.message,true);}}
 document.addEventListener('submit',function(e){if(e.target&&e.target.id==='igd-connect-form')connect(e);});
 document.addEventListener('change',function(e){if(e.target&&e.target.id==='igd-intel')setIntelligence(e.target);});
 document.addEventListener('click',function(e){var b=e.target.closest('[data-direct-action]');if(b)action(b);});
