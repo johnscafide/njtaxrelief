@@ -2,8 +2,9 @@ name: One-off zoning hydrate deploy
 
 on:
   push:
+    branches: [main]
     paths:
-      - '.github/workflows/oneoff-zoning-hydrate-deploy.yml'
+      - 'supabase/functions/workbench-hydrate/**'
 
 permissions:
   contents: write
