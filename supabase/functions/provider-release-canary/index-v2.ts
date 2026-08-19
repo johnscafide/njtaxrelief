@@ -8,18 +8,18 @@ const admin=createClient(URL,SERVICE,{auth:{persistSession:false,autoRefreshToke
 const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
 
 type AvailabilityExpectation={pin:string;marker_ids:string[]};
-type Scenario={fn:string;body:any;expect_available?:AvailabilityExpectation};
+type Scenario={fn:string;body:any;expect_available?:AvailabilityExpectation[]};
 const SCENARIOS:Record<string,Scenario>={
   zoning_v31:{fn:'workbench-hydrate',body:{pams_pins:['0102_139_15'],marker_ids:['njplus.nj-dca-zoning-directory.zoning_map_url','njplus.nj-dca-zoning-directory.zoning_ordinance_url','njplus.nj-dca-zoning-directory.municipal_zoning_portal']}},
   designation_stack_v15:{fn:'workbench-derived',body:{pams_pins:['0102_139_15'],marker_ids:['watchdog.njplus.development_designation_stack']}},
   csrr_v1:{fn:'workbench-hydrate',body:{pams_pins:['0505_824.02_12'],marker_ids:['njplus.njdep-csrr-gis.kcsl_case_status','njplus.njdep-csrr-gis.kcsl_program_interest','njplus.njdep-csrr-gis.kcsl_site_id','njplus.njdep-csrr-gis.environmental_layer_vintage']}},
-  csrr_controls_v2:{fn:'workbench-hydrate',body:{pams_pins:['0505_410.01_36.01'],marker_ids:['njplus.njdep-csrr-gis.deed_notice_reference','njplus.njdep-csrr-gis.cea_reference','njplus.njdep-csrr-gis.ust_facility_reference','njplus.njdep-csrr-gis.brownfield_inventory_status']},expect_available:{pin:'0505_410.01_36.01',marker_ids:['njplus.njdep-csrr-gis.deed_notice_reference','njplus.njdep-csrr-gis.cea_reference','njplus.njdep-csrr-gis.ust_facility_reference','njplus.njdep-csrr-gis.brownfield_inventory_status']}}
+  csrr_controls_v2:{fn:'workbench-hydrate',body:{pams_pins:['0102_830_10','0505_824.02_12'],marker_ids:['njplus.njdep-csrr-gis.deed_notice_reference','njplus.njdep-csrr-gis.cea_reference','njplus.njdep-csrr-gis.ust_facility_reference','njplus.njdep-csrr-gis.brownfield_inventory_status']},expect_available:[{pin:'0102_830_10',marker_ids:['njplus.njdep-csrr-gis.deed_notice_reference','njplus.njdep-csrr-gis.ust_facility_reference','njplus.njdep-csrr-gis.brownfield_inventory_status']},{pin:'0505_824.02_12',marker_ids:['njplus.njdep-csrr-gis.cea_reference']}]}
 };
 function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'content-type, apikey, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'}}
 function json(req:Request,status:number,payload:any){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, private'}})}
 async function sha256Hex(value:string){const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 async function cleanup(userId:string){await admin.from('watchdog_test_accounts').delete().eq('user_id',userId);await admin.from('account_entitlements').delete().eq('user_id',userId);await admin.from('profiles').delete().eq('id',userId);await admin.auth.admin.deleteUser(userId)}
-function availabilityAssertion(scenario:Scenario,payload:any){const expected=scenario.expect_available;if(!expected)return{ok:true,missing:[] as string[]};const missing=expected.marker_ids.filter((id)=>String(payload?.meta?.[expected.pin]?.[id]?.status||'')!=='available'||payload?.markers?.[expected.pin]?.[id]===null||payload?.markers?.[expected.pin]?.[id]===undefined);return{ok:missing.length===0,missing}}
+function availabilityAssertion(scenario:Scenario,payload:any){const expected=scenario.expect_available||[];if(!expected.length)return{ok:true,missing:[] as string[]};const missing:string[]=[];for(const check of expected){for(const id of check.marker_ids){if(String(payload?.meta?.[check.pin]?.[id]?.status||'')!=='available'||payload?.markers?.[check.pin]?.[id]===null||payload?.markers?.[check.pin]?.[id]===undefined)missing.push(`${check.pin}:${id}`)}}return{ok:missing.length===0,missing}}
 Deno.serve(async(req:Request)=>{
   if(req.method==='OPTIONS')return new Response('ok',{headers:cors(req)});if(req.method!=='POST')return json(req,405,{error:'POST required'});
   let body:any={};try{body=await req.json()}catch{return json(req,400,{error:'Invalid JSON'})}
