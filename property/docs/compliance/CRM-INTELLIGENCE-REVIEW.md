@@ -1,6 +1,6 @@
 # CRM-Aware Watchdog Intelligence Review
 
-**Status:** Production foundation live, signed-in UI acceptance pending  
+**Status:** Production accepted for initial CRM-aware Intelligence release  
 **Review date:** 2026-08-19  
 **Related issues:** NJW-227, NJW-228, NJW-52
 
@@ -83,6 +83,24 @@ The access log does not store the CRM payload or raw prompt text.
 
 The normal integration audit log also records `intelligence.crm_context.read` events.
 
+## Signed-in production acceptance
+
+A real signed-in Data Workbench request on 2026-08-19 asked: `Do I have a verified CRM relationship for these properties?`
+
+The accepted production result confirmed:
+
+- CRM Analyst routing succeeded after correcting the Supabase functions-client bridge.
+- `get_crm_context` ran in `property` mode against 28 governed properties.
+- 1,456 CRM records were authorized for Intelligence under the active BoldTrail connection.
+- Zero CRM records were returned for the selected property scope because zero verified CRM-to-property links exist.
+- The tool call completed successfully in approximately 1.0 second.
+- `external_prose_provider` was false.
+- The metadata-only CRM access log captured the connection, property-scope count, returned-field contract and timestamp.
+- Intelligence usage telemetry recorded the developer plan, `watchdog-crm-analyst-v2`, `watchdog-crm-tools-v1`, one request unit and `not_called_crm_privacy_boundary` provider status.
+- The assistant response correctly stated that Watchdog would not infer a property relationship from a person's name.
+
+This closes the initial signed-in Phase 5 acceptance.
+
 ## Security controls
 
 - `integration_crm_property_links` has RLS enabled and no direct anon/authenticated read or write grants.
@@ -104,7 +122,6 @@ Supabase Security Advisor reports the expected informational `RLS enabled, no po
 - Provider returned to idle with no last error.
 - `records_synced_total` now represents current unique normalized context rows rather than cumulative repeat upsert operations.
 
-## Remaining acceptance
+## Remaining lifecycle acceptance
 
-1. Send one real CRM-specific question through the signed-in Ask Watchdog UI and verify the `get_crm_context` tool call, CRM access-log row and usage telemetry.
-2. Keep BoldTrail token replacement and destructive disconnect/revocation testing as a separate controlled Phase 4 lifecycle acceptance step. Do not disconnect a live customer CRM solely to manufacture test evidence.
+BoldTrail token replacement and destructive disconnect/revocation remain separate controlled Phase 4 lifecycle acceptance steps. Do not disconnect a live customer CRM solely to manufacture test evidence.
