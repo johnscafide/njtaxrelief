@@ -1,9 +1,9 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const VERSION="watchdog-source-fact-watch-v2";
-const NJ_PARCELS="https://njogis-newjersey.opendata.arcgis.com/datasets/3e9f5e68c12f47e3b3dbd58201e051b2_0/about";
-const NJ_PARCELS_QUERY="https://services1.arcgis.com/Hrko7wzJ9YVqLO5y/arcgis/rest/services/Parcels_and_MODIV/FeatureServer/0/query";
+const VERSION="watchdog-source-fact-watch-v4";
+const NJ_PARCEL_ITEM_ID="533599bbfbaa4748bf39faf1375a8a9c";
+const NJ_PARCELS="https://newjersey.maps.arcgis.com/home/item.html?id=533599bbfbaa4748bf39faf1375a8a9c";
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const FIELDS=["PAMS_PIN","LAND_VAL","IMPRVT_VAL","NET_VALUE","LAST_YR_TX","SALE_PRICE","DEED_DATE","DEED_BOOK","DEED_PAGE"];
 const MARKERS=[
@@ -40,10 +40,19 @@ function materiality(marker:string,event:string,oldValue:unknown,newValue:unknow
   if(marker==="property.annual_tax"||marker.includes("assessment"))return"medium";
   return"low";
 }
-async function providerBatch(pins:string[]){
+async function resolveParcelQueryUrl(){
+  const metaUrl=`https://www.arcgis.com/sharing/rest/content/items/${NJ_PARCEL_ITEM_ID}?f=json`;
+  const r=await fetch(metaUrl,{headers:{Accept:"application/json"},signal:AbortSignal.timeout(10000)});if(!r.ok)throw new Error(`NJ parcel item metadata HTTP ${r.status}`);
+  const data=await r.json(),base=clean(data?.url,500).replace(/\/+$/,"");
+  if(!/^https:\/\//i.test(base)||!/arcgis\/rest\/services\//i.test(base))throw new Error("NJ parcel item did not resolve to an ArcGIS service");
+  if(/\/(FeatureServer|MapServer)\/\d+$/i.test(base))return `${base}/query`;
+  if(/\/(FeatureServer|MapServer)$/i.test(base))return `${base}/0/query`;
+  throw new Error("NJ parcel item service URL has an unsupported shape");
+}
+async function providerBatch(queryUrl:string,pins:string[]){
   const where=`PAMS_PIN IN (${pins.map(p=>`'${p.replace(/'/g,"''")}'`).join(",")})`;
   const form=new URLSearchParams({f:"json",where,outFields:FIELDS.join(","),returnGeometry:"false",resultRecordCount:String(Math.max(100,pins.length*3))});
-  const r=await fetch(NJ_PARCELS_QUERY,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:form.toString(),signal:AbortSignal.timeout(20000)});
+  const r=await fetch(queryUrl,{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:form.toString(),signal:AbortSignal.timeout(20000)});
   if(!r.ok)throw new Error(`NJ parcel provider HTTP ${r.status}`);
   const data=await r.json();if(data?.error)throw new Error(`NJ parcel provider error ${clean(data.error?.message||data.error?.code,160)}`);
   return Array.isArray(data?.features)?data.features.map((f:O)=>f?.attributes||{}):[];
@@ -79,8 +88,8 @@ Deno.serve(async(req:Request)=>{
     const savedRows=[...dedup.values()],pins=[...new Set(savedRows.map(r=>r.pams_pin))];
     if(!pins.length){await finish("complete",{eligible_users:0,eligible_properties:0});return json(req,200,{ok:true,status:"complete",version:VERSION,eligible_users:0,eligible_properties:0,baselines_created:0,changed_observations:0,candidates_created:0})}
 
-    const attrs=new Map<string,O>();let providerBatches=0;
-    for(let i=0;i<pins.length;i+=35){const part=pins.slice(i,i+35),rows=await providerBatch(part);providerBatches++;for(const row of rows){const pin=clean(row.PAMS_PIN,100);if(pin)attrs.set(pin,row)}}
+    const queryUrl=await resolveParcelQueryUrl(),attrs=new Map<string,O>();let providerBatches=0;
+    for(let i=0;i<pins.length;i+=35){const part=pins.slice(i,i+35),rows=await providerBatch(queryUrl,part);providerBatches++;for(const row of rows){const pin=clean(row.PAMS_PIN,100);if(pin)attrs.set(pin,row)}}
 
     const existing=await admin.from("intelligence_source_fact_watch_state").select("user_id,pams_pin,marker_id,value_json,value_hash,first_observed_at,last_changed_at").in("user_id",[...new Set(savedRows.map(r=>r.user_id))]).in("pams_pin",pins).limit(10000);if(existing.error)throw existing.error;
     const stateMap=new Map<string,O>();for(const row of existing.data||[])stateMap.set(`${row.user_id}|${row.pams_pin}|${row.marker_id}`,row);
