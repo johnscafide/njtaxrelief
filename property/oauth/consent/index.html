@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Authorize Integration | Watchdog</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/oauth-consent.css">
+  <meta name="theme-color" content="#102a4c">
+</head>
+<body>
+  <main class="oauth-shell">
+    <a class="oauth-brand" href="/property/" aria-label="Watchdog home"><span class="oauth-mark"><i class="fas fa-shield-dog"></i></span><span><b>WATCHDOG</b><small>Property Intelligence</small></span></a>
+
+    <section class="oauth-card" id="oauth-loading">
+      <div class="oauth-spinner"></div><h1>Preparing authorization</h1><p>Watchdog is verifying the integration request.</p>
+    </section>
+
+    <section class="oauth-card" id="oauth-signin" hidden>
+      <span class="oauth-kicker">SECURE CONNECTION</span><h1>Sign in to Watchdog</h1><p class="oauth-lead">Continue with the Watchdog account you want to connect. Your Watchdog password is never shared with the requesting app.</p>
+      <button class="oauth-google" id="oauth-google" type="button"><i class="fab fa-google"></i>Continue with Google</button>
+      <div class="oauth-or"><span>or</span></div>
+      <form id="oauth-email-form"><label>Email address<input id="oauth-email" type="email" autocomplete="email" required placeholder="you@example.com"></label><button class="oauth-primary" type="submit">Email me a sign-in link</button></form>
+      <p class="oauth-note" id="oauth-signin-note" aria-live="polite"></p>
+    </section>
+
+    <section class="oauth-card" id="oauth-consent" hidden>
+      <span class="oauth-kicker">WATCHDOG AUTHORIZATION</span>
+      <div class="oauth-app-row"><span class="oauth-app-icon"><i class="fas fa-bolt"></i></span><div><small>Requesting application</small><h1 id="oauth-client-name">Zapier</h1></div></div>
+      <p class="oauth-lead"><b id="oauth-client-inline">This application</b> wants permission to connect to your Watchdog account.</p>
+      <div class="oauth-user"><i class="fas fa-circle-user"></i><div><small>Signed in as</small><b id="oauth-user-email">—</b></div></div>
+      <div class="oauth-permissions"><h2>What this connection can do</h2><div><i class="fas fa-envelope"></i><span><b>Identify your Watchdog account</b><small>Uses your Watchdog account identity to connect the correct Pro+ or Teams workspace.</small></span></div><div><i class="fas fa-link"></i><span><b>Use approved integration endpoints</b><small>Zapier can subscribe to supported Watchdog events and request governed property snapshots. It does not receive unrestricted database access.</small></span></div><div><i class="fas fa-brain"></i><span><b>Keep CRM Intelligence separate</b><small>CRM context is not automatically exposed to Watchdog Intelligence by this authorization. Intelligence access remains separately controlled.</small></span></div></div>
+      <details class="oauth-details"><summary>OAuth request details</summary><dl><dt>Requested scopes</dt><dd id="oauth-scopes">—</dd><dt>Redirect URI</dt><dd id="oauth-redirect">—</dd></dl></details>
+      <div class="oauth-plan-warning" id="oauth-plan-warning" hidden><i class="fas fa-lock"></i><div><b>Pro+ or Teams required</b><span>Your current plan cannot authorize external Watchdog integrations.</span></div><a href="/property/pro#pricing">Compare plans</a></div>
+      <div class="oauth-actions"><button class="oauth-secondary" id="oauth-deny" type="button">Cancel</button><button class="oauth-primary" id="oauth-approve" type="button"><i class="fas fa-check"></i>Authorize connection</button></div>
+      <p class="oauth-note" id="oauth-consent-note" aria-live="polite"></p>
+    </section>
+
+    <section class="oauth-card oauth-error" id="oauth-error" hidden>
+      <i class="fas fa-triangle-exclamation"></i><h1>Authorization could not continue</h1><p id="oauth-error-text">The authorization request is invalid or expired.</p><a href="/property/integrations/">Open Integration Center</a>
+    </section>
+
+    <footer class="oauth-footer"><span><i class="fas fa-lock"></i> Watchdog authorization</span><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/oauth-consent.js"></script>
+</body>
+</html>
