@@ -1,0 +1,166 @@
+/* Brand Center shell isolation and responsive hardening.
+   This file intentionally overrides legacy dashboard workspace rules.
+   The Brand Center must never inherit the retired vertical sidenav layout. */
+
+html,body.bc-page{width:100%;max-width:100%;overflow-x:hidden}
+body.bc-page main,
+body.bc-page .db-shell,
+body.bc-page .bc-workspace,
+body.bc-page #bc-app{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;margin:0!important}
+body.bc-page .db-shell{grid-template-columns:none!important;min-height:100vh!important}
+body.bc-page #property-side-menu{display:none!important;width:0!important;min-width:0!important;max-width:0!important;height:0!important;overflow:hidden!important}
+body.bc-page .bc-workspace{position:relative!important;left:auto!important;right:auto!important;transform:none!important;padding:0!important;background:var(--bc-bg,#f5f7fb)!important}
+
+/* The Brand Center owns its header; no dashboard-shell dimensions may constrain it. */
+body.bc-page .bc-topbar{width:100%!important;max-width:none!important;margin:0!important}
+body.bc-page .bc-top-left{min-width:0!important}
+body.bc-page .bc-brand-copy,
+body.bc-page .bc-title{min-width:0}
+body.bc-page .bc-main{width:100%!important;max-width:1520px!important;margin:0 auto!important}
+body.bc-page .bc-hero,
+body.bc-page .bc-stats,
+body.bc-page .bc-layout,
+body.bc-page .bc-content,
+body.bc-page .bc-panel{min-width:0}
+body.bc-page .bc-hero-main,
+body.bc-page .bc-hero-side,
+body.bc-page .bc-stat,
+body.bc-page .bc-panel,
+body.bc-page .bc-card{max-width:100%}
+body.bc-page .bc-hero h1,
+body.bc-page .bc-hero p,
+body.bc-page .bc-panel h2,
+body.bc-page .bc-card,
+body.bc-page pre,
+body.bc-page code{overflow-wrap:anywhere}
+body.bc-page img,
+body.bc-page svg,
+body.bc-page canvas{max-width:100%}
+
+@media (max-width:1100px){
+  body.bc-page .bc-main{padding:24px 22px 64px!important}
+  body.bc-page .bc-hero{grid-template-columns:minmax(0,1fr)!important}
+  body.bc-page .bc-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.bc-page .bc-layout{grid-template-columns:190px minmax(0,1fr)!important;gap:16px!important}
+  body.bc-page .bc-grid.four{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.bc-page .bc-swatches{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+
+@media (max-width:760px){
+  body.bc-page .bc-topbar{
+    position:sticky!important;
+    top:0!important;
+    z-index:900!important;
+    min-height:0!important;
+    padding:12px 16px!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+    align-items:stretch!important;
+  }
+  body.bc-page .bc-top-left{
+    width:100%!important;
+    display:grid!important;
+    grid-template-columns:auto 1px minmax(0,1fr)!important;
+    gap:10px!important;
+    align-items:center!important;
+  }
+  body.bc-page .bc-brand{gap:8px!important;min-width:0!important}
+  body.bc-page .bc-brand-mark{width:38px!important;height:38px!important;border-radius:11px!important;flex:0 0 38px!important}
+  body.bc-page .bc-brand-copy strong{font-size:18px!important;white-space:nowrap!important}
+  body.bc-page .bc-brand-copy small{font-size:7px!important;letter-spacing:.08em!important;white-space:nowrap!important}
+  body.bc-page .bc-divider{height:30px!important}
+  body.bc-page .bc-title b{font-size:12px!important;white-space:nowrap!important}
+  body.bc-page .bc-title span{font-size:9px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+  body.bc-page .bc-top-right{
+    width:100%!important;
+    display:flex!important;
+    justify-content:flex-start!important;
+    align-items:center!important;
+    gap:7px!important;
+    flex-wrap:wrap!important;
+    margin:0!important;
+  }
+  body.bc-page .bc-private,
+  body.bc-page .bc-top-link{min-height:34px!important;padding:0 10px!important;font-size:9px!important}
+
+  body.bc-page .bc-main{padding:18px 14px 54px!important}
+  body.bc-page .bc-hero{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important;margin-bottom:14px!important}
+  body.bc-page .bc-hero-main{min-height:0!important;padding:26px 20px!important;border-radius:17px!important;justify-content:flex-start!important}
+  body.bc-page .bc-hero-main:after{width:210px!important;height:210px!important;right:-95px!important;top:-85px!important}
+  body.bc-page .bc-kicker{font-size:9px!important;margin-bottom:10px!important}
+  body.bc-page .bc-hero h1{font-size:clamp(31px,9vw,43px)!important;line-height:1.02!important;letter-spacing:-.05em!important;max-width:100%!important}
+  body.bc-page .bc-hero p{font-size:14px!important;line-height:1.6!important;margin-top:14px!important}
+  body.bc-page .bc-hero-actions{display:grid!important;grid-template-columns:1fr!important;gap:8px!important;margin-top:20px!important}
+  body.bc-page .bc-btn{width:100%!important;min-height:46px!important;font-size:11px!important}
+  body.bc-page .bc-hero-side{padding:20px!important;border-radius:17px!important;gap:14px!important}
+
+  body.bc-page .bc-stats{grid-template-columns:minmax(0,1fr)!important;gap:9px!important;margin-bottom:14px!important}
+  body.bc-page .bc-stat{padding:16px!important}
+
+  body.bc-page .bc-layout{display:block!important}
+  body.bc-page .bc-localnav{
+    position:sticky!important;
+    top:111px!important;
+    z-index:250!important;
+    width:calc(100vw - 28px)!important;
+    max-width:100%!important;
+    margin:0 0 14px!important;
+    padding:7px!important;
+    display:flex!important;
+    gap:5px!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    max-height:none!important;
+    white-space:nowrap!important;
+    scrollbar-width:none!important;
+    border-radius:12px!important;
+  }
+  body.bc-page .bc-localnav::-webkit-scrollbar{display:none!important}
+  body.bc-page .bc-localnav-label{display:none!important}
+  body.bc-page .bc-localnav a{flex:0 0 auto!important;padding:9px 10px!important;font-size:9px!important}
+  body.bc-page .bc-content{gap:14px!important}
+  body.bc-page .bc-panel{padding:20px 16px!important;border-radius:16px!important;scroll-margin-top:170px!important}
+  body.bc-page .bc-panel-head{display:block!important;margin-bottom:16px!important}
+  body.bc-page .bc-panel-tag{display:inline-flex!important;margin-top:10px!important}
+  body.bc-page .bc-panel h2{font-size:clamp(23px,7vw,31px)!important}
+  body.bc-page .bc-panel-head p{font-size:12px!important}
+
+  body.bc-page .bc-grid,
+  body.bc-page .bc-grid.two,
+  body.bc-page .bc-grid.four,
+  body.bc-page .bc-component-lab,
+  body.bc-page .bc-do-dont{grid-template-columns:minmax(0,1fr)!important}
+  body.bc-page .bc-swatches{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  body.bc-page .bc-token-row{grid-template-columns:minmax(0,1fr)!important;gap:6px!important}
+  body.bc-page .bc-token-demo{justify-content:flex-start!important}
+  body.bc-page .bc-logo-stage{min-height:160px!important;padding:20px 14px!important}
+  body.bc-page .bc-logo-lockup{gap:9px!important}
+  body.bc-page .bc-logo-mark{width:52px!important;height:52px!important;border-radius:15px!important;font-size:20px!important}
+  body.bc-page .bc-logo-copy strong{font-size:24px!important}
+  body.bc-page .bc-logo-copy small{font-size:7px!important}
+  body.bc-page .bc-code{padding:46px 14px 16px!important}
+  body.bc-page .bc-code pre{font-size:10px!important;line-height:1.55!important;white-space:pre-wrap!important;word-break:break-word!important}
+}
+
+@media (max-width:480px){
+  body.bc-page .bc-topbar{padding:10px 12px!important}
+  body.bc-page .bc-top-left{grid-template-columns:minmax(0,1fr)!important;gap:5px!important}
+  body.bc-page .bc-divider{display:none!important}
+  body.bc-page .bc-brand{width:max-content!important}
+  body.bc-page .bc-title{padding-left:46px!important;margin-top:-4px!important}
+  body.bc-page .bc-title span{display:none!important}
+  body.bc-page .bc-top-right{padding-left:46px!important}
+  body.bc-page .bc-private,
+  body.bc-page .bc-top-link{flex:0 1 auto!important}
+  body.bc-page .bc-main{padding:14px 10px 44px!important}
+  body.bc-page .bc-hero-main{padding:22px 16px!important}
+  body.bc-page .bc-hero h1{font-size:clamp(29px,10vw,39px)!important}
+  body.bc-page .bc-hero-side{padding:16px!important}
+  body.bc-page .bc-swatches{grid-template-columns:minmax(0,1fr)!important}
+  body.bc-page .bc-localnav{top:139px!important;width:calc(100vw - 20px)!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body.bc-page *,body.bc-page *::before,body.bc-page *::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
