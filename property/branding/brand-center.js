@@ -1,6 +1,16 @@
 (function(){
   'use strict';
 
+  function ensureLayoutCss(){
+    var href='/property/branding/brand-center-layout-fix.css';
+    if(document.querySelector('link[href="'+href+'"]')) return;
+    var link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=href;
+    document.head.appendChild(link);
+  }
+  ensureLayoutCss();
+
   function $(selector, root){ return (root || document).querySelector(selector); }
   function $$(selector, root){ return Array.from((root || document).querySelectorAll(selector)); }
 
