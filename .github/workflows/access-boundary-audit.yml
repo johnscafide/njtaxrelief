@@ -62,6 +62,8 @@ jobs:
         run: node property/tests/affordable-housing-parser-contract.mjs
       - name: Verify calibration holdout diversity guardrail
         run: node property/tests/calibration-diversity-contract.mjs
+      - name: Verify calibration independence guard
+        run: node property/tests/calibration-independence-contract.mjs
       - name: Verify model-vNext repair and promotion gate
         run: node property/tests/intelligence-model-vnext-repair-contract.mjs
       - name: Verify Closing v3 fresh holdout safety
