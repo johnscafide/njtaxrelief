@@ -8,12 +8,15 @@ This runbook is the final technical path from the current fail-closed billing st
 - New-subscription provider: Stripe
 - Active products: Watchdog Agent, Watchdog Pro, Watchdog Pro+
 - Active Live recurring catalog:
-  - Agent monthly: `$59` — `price_1U5qPZAgYeNIcesFuC2gKGTz`
-  - Agent yearly: `$590` — `price_1U5qPjAgYeNIcesFCXaHoU0c`
-  - Pro monthly: `$129` — `price_1U5qPyAgYeNIcesFy57ssZsV`
-  - Pro yearly: `$1,290` — `price_1U5qQAAgYeNIcesF6UOsmwAX`
-  - Pro+ monthly: `$399` — `price_1U5qQKAgYeNIcesFmQqrWROC`
-  - Pro+ yearly: `$3,990` — `price_1U5qQUAgYeNIcesFOSN8JZjR`
+  - Agent monthly: `$59` — lookup key `watchdog_agent_monthly`
+  - Agent yearly: `$590` — lookup key `watchdog_agent_yearly`
+  - Pro monthly: `$129` — lookup key `watchdog_pro_monthly`
+  - Pro yearly: `$1,290` — lookup key `watchdog_pro_yearly`
+  - Pro+ monthly: `$399` — lookup key `watchdog_pro_plus_monthly`
+  - Pro+ yearly: `$3,990` — lookup key `watchdog_pro_plus_yearly`
+- `create-checkout-session` v38 resolves the active environment's Price through Stripe by lookup key and requires one unique active USD recurring Price with the expected amount and interval.
+- The six historical `STRIPE_PRICE_*` variables remain optional overrides only. They are not required for normal Checkout.
+- `get-platform-health` v20 independently requires a Live Stripe key and verifies all six lookup-key prices before configuration can pass.
 - Stripe webhook endpoint: `we_1U1xCXAgYeNIcesFdsgxEtPO`
 - Production webhook target: `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/stripe-webhook`
 - Webhook endpoint remains disabled until the production signing secret is configured.
@@ -23,39 +26,50 @@ This runbook is the final technical path from the current fail-closed billing st
 
 ## 1. Configure production Supabase secrets
 
-Enter secrets **directly in the Supabase production project**. Do not place secret values in GitHub, source files, Linear, chat, screenshots, or release notes.
+Enter secret values **directly in the Supabase production project**. Do not place secret values in GitHub, source files, Linear, chat, screenshots, or release notes.
 
-Required secret values:
+The only Stripe secret values required for the current implementation are:
 
 - `STRIPE_SECRET_KEY` — production Stripe secret key (`sk_live_…`)
 - `STRIPE_WEBHOOK_SIGNING_SECRET` — signing secret for webhook endpoint `we_1U1xCXAgYeNIcesFdsgxEtPO`
-- `STRIPE_PRICE_AGENT_MONTHLY=price_1U5qPZAgYeNIcesFuC2gKGTz`
-- `STRIPE_PRICE_AGENT_YEARLY=price_1U5qPjAgYeNIcesFCXaHoU0c`
-- `STRIPE_PRICE_PRO_MONTHLY=price_1U5qPyAgYeNIcesFy57ssZsV`
-- `STRIPE_PRICE_PRO_YEARLY=price_1U5qQAAgYeNIcesF6UOsmwAX`
-- `STRIPE_PRICE_PRO_PLUS_MONTHLY=price_1U5qQKAgYeNIcesFmQqrWROC`
-- `STRIPE_PRICE_PRO_PLUS_YEARLY=price_1U5qQUAgYeNIcesFOSN8JZjR`
+
+Controlled-launch configuration is also required:
+
 - `BILLING_CHECKOUT_MODE=controlled`
 - `BILLING_CONTROLLED_USER_IDS=<production user UUID selected for the controlled real-charge acceptance>`
-- `PUBLIC_SITE_URL=https://njpropertytaxrelief.com`
+- `PUBLIC_SITE_URL=https://njpropertytaxrelief.com` is recommended; if omitted, the production site URL is the built-in default.
 
 Do **not** set `BILLING_CHECKOUT_MODE=open` yet.
 
+Optional Price overrides are supported for emergency/environment-specific use, but should normally be omitted so Checkout resolves Stripe's active lookup-key catalog itself:
+
+- `STRIPE_PRICE_AGENT_MONTHLY`
+- `STRIPE_PRICE_AGENT_YEARLY`
+- `STRIPE_PRICE_PRO_MONTHLY`
+- `STRIPE_PRICE_PRO_YEARLY`
+- `STRIPE_PRICE_PRO_PLUS_MONTHLY`
+- `STRIPE_PRICE_PRO_PLUS_YEARLY`
+
 The controlled acceptance account must be a real production account that is intentionally approved for the test and is **not** registered in Watchdog's disposable/test-account registry. Production Checkout refuses Live charges for Watchdog test accounts.
 
-## 2. Confirm secret readiness without exposing values
+## 2. Confirm readiness without exposing values
 
-Use the Developer-only platform health surface backed by `get-platform-health`.
+Use Developer → Data Operations → **Stripe Live Release**, backed by `get-platform-health`.
 
-The function reports booleans/counts only:
+The function reports safe state only:
 
-- Stripe secret configured
-- webhook signing secret configured
-- 6/6 price secrets configured
+- Stripe secret configured: yes/no
+- Stripe key mode: live/test/missing
+- webhook signing secret configured: yes/no
+- active Stripe lookup-key prices resolved: `0/6` through `6/6`
 - controlled/open/closed Checkout mode
+- processed Stripe event count
+- each lifecycle acceptance check
 - `live_billing_lifecycle` release-gate state
 
 It never returns a Stripe secret value.
+
+Configuration passes only when the key is Live, the signing secret exists, and all six expected lookup-key Prices resolve uniquely with the expected USD amount and recurrence.
 
 Stop if readiness is not complete.
 
@@ -198,7 +212,7 @@ Public enrollment is the final billing change:
 
 1. confirm controlled Live lifecycle gate is passed;
 2. confirm Vercel/GitHub production source is green;
-3. confirm Developer platform health is green;
+3. confirm Developer Stripe Live Release health is green;
 4. confirm legal/business launch decision is recorded separately;
 5. set `BILLING_CHECKOUT_MODE=open` in production Supabase;
 6. remove the temporary Agent/Pro public checkout guard;
