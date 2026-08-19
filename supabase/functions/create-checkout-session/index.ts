@@ -3,6 +3,20 @@ import Stripe from 'stripe';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
+const PRICE_CATALOG = {
+  agent: {
+    monthly: { lookup_key: 'watchdog_agent_monthly', amount: 5900 },
+    yearly: { lookup_key: 'watchdog_agent_yearly', amount: 59000 }
+  },
+  pro: {
+    monthly: { lookup_key: 'watchdog_pro_monthly', amount: 12900 },
+    yearly: { lookup_key: 'watchdog_pro_yearly', amount: 129000 }
+  },
+  pro_plus: {
+    monthly: { lookup_key: 'watchdog_pro_plus_monthly', amount: 39900 },
+    yearly: { lookup_key: 'watchdog_pro_plus_yearly', amount: 399000 }
+  }
+} as const;
 type Tier = keyof typeof CAPACITY;
 type Cadence = 'monthly' | 'yearly';
 
@@ -41,9 +55,6 @@ function json(req: Request, body: unknown, status = 200) {
 }
 
 function checkoutMode() {
-  // BILLING_CHECKOUT_MODE is environment-neutral so the identical artifact can
-  // be exercised in staging before production. STRIPE_LIVE_CHECKOUT_MODE is
-  // accepted only as a temporary production migration fallback.
   const explicit = String(
     Deno.env.get('BILLING_CHECKOUT_MODE') ||
     Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE') ||
@@ -66,7 +77,7 @@ function controlledUsers() {
   );
 }
 
-function priceFor(tier: Tier, cadence: Cadence) {
+function configuredPriceId(tier: Tier, cadence: Cadence) {
   const names: Record<Tier, Record<Cadence, string>> = {
     agent: {
       monthly: 'STRIPE_PRICE_AGENT_MONTHLY',
@@ -81,14 +92,33 @@ function priceFor(tier: Tier, cadence: Cadence) {
       yearly: 'STRIPE_PRICE_PRO_PLUS_YEARLY'
     }
   };
-  const configured = Deno.env.get(names[tier][cadence]);
+  const configured = String(Deno.env.get(names[tier][cadence]) || '').trim();
   if (configured) return configured;
-  // Temporary compatibility only for the two historical monthly names. Annual
-  // prices and Agent never fall back. There are deliberately no hard-coded
-  // Live Price IDs here: staging and production must each configure their own.
-  if (tier === 'pro' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO') || null;
-  if (tier === 'pro_plus' && cadence === 'monthly') return Deno.env.get('STRIPE_PRICE_PRO_PLUS') || null;
+  if (tier === 'pro' && cadence === 'monthly') return String(Deno.env.get('STRIPE_PRICE_PRO') || '').trim() || null;
+  if (tier === 'pro_plus' && cadence === 'monthly') return String(Deno.env.get('STRIPE_PRICE_PRO_PLUS') || '').trim() || null;
   return null;
+}
+
+async function resolvePriceId(stripe: Stripe, tier: Tier, cadence: Cadence) {
+  const override = configuredPriceId(tier, cadence);
+  if (override) return override;
+
+  const expected = PRICE_CATALOG[tier][cadence];
+  const result = await stripe.prices.list({
+    lookup_keys: [expected.lookup_key],
+    active: true,
+    limit: 10
+  });
+  const matches = result.data.filter(price =>
+    price.currency.toLowerCase() === 'usd' &&
+    price.unit_amount === expected.amount &&
+    price.type === 'recurring' &&
+    price.recurring?.interval === (cadence === 'monthly' ? 'month' : 'year')
+  );
+  if (matches.length !== 1) {
+    throw new Error(`Expected exactly one active Stripe Price for ${expected.lookup_key}; found ${matches.length}.`);
+  }
+  return matches[0].id;
 }
 
 Deno.serve(async (req) => {
@@ -133,12 +163,16 @@ Deno.serve(async (req) => {
   }
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
-  const priceId = priceFor(tier, cadence);
-  if (!priceId) {
-    return json(req, { error: 'That Stripe price is not configured in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
+  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
+
+  let priceId: string;
+  try {
+    priceId = await resolvePriceId(stripe, tier, cadence);
+  } catch (error) {
+    console.error('STRIPE_PRICE_RESOLUTION_ERROR', error);
+    return json(req, { error: 'That Stripe price could not be resolved safely in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
   }
 
-  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
   const { data: entitlement, error: entitlementError } = await admin
     .from('account_entitlements')
     .select('plan_tier,billing_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
