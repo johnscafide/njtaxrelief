@@ -236,7 +236,8 @@
       if (authUpdate.error) throw authUpdate.error;
       currentUser = authUpdate.data.user || currentUser;
       await loadProfile(true);
-      if (note) note.textContent = 'Saved. Watchdog Intelligence has refreshed your approved context.';
+      var freshNote = document.getElementById('acp-note');
+      if (freshNote) freshNote.textContent = 'Saved. Watchdog Intelligence has refreshed your approved context.';
     } catch (error) {
       if (note) note.textContent = error && error.message || 'Could not save your Watchdog profile.';
     } finally {
