@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Watchdog autonomous property operations fabric</title>
+<desc id="desc">Concept diagram for a future policy-constrained network of specialized Watchdog workers that observe evidence, resolve identity, assess risk, simulate workflows, enforce compliance, and coordinate external actions through Zapier.</desc>
+<defs><filter id="s"><feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#183b84" flood-opacity=".10"/></filter><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2f6df6"/></marker></defs>
+<rect width="1600" height="900" fill="#f5f7fb"/>
+<text x="90" y="90" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="800" letter-spacing="2" fill="#2f6df6">MOONSHOT CONCEPT</text>
+<text x="90" y="142" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="800" fill="#111d38">Autonomous Property Operations Fabric</text>
+<text x="90" y="181" font-family="Inter,Arial,sans-serif" font-size="19" fill="#748198">Specialized workers collaborate, but policy and evidence remain in control.</text>
+
+<g filter="url(#s)"><circle cx="800" cy="450" r="155" fill="#183b84"/><circle cx="800" cy="450" r="122" fill="#fff"/><circle cx="800" cy="450" r="96" fill="#e9f0ff"/></g>
+<text x="800" y="424" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="800" letter-spacing="1" fill="#2f6df6">POLICY KERNEL</text>
+<text x="800" y="459" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="800" fill="#111d38">Watchdog</text>
+<text x="800" y="487" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="15" fill="#31435c">permissions · evidence · thresholds</text>
+
+<g filter="url(#s)" font-family="Inter,Arial,sans-serif">
+<rect x="105" y="275" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/><rect x="105" y="500" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="430" y="180" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/><rect x="430" y="615" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="900" y="180" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/><rect x="900" y="615" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/>
+<rect x="1225" y="275" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/><rect x="1225" y="500" width="270" height="150" rx="18" fill="#fff" stroke="#e2e7ef"/>
+</g>
+
+<text x="135" y="316" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 01</text><text x="135" y="350" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Evidence Collector</text><text x="135" y="382" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Finds changes, freshness, source gaps.</text>
+<text x="135" y="541" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 02</text><text x="135" y="575" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Identity Resolver</text><text x="135" y="607" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Reconciles property candidates safely.</text>
+<text x="460" y="221" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 03</text><text x="460" y="255" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Risk Assessor</text><text x="460" y="287" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Scores materiality and confidence.</text>
+<text x="460" y="656" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 04</text><text x="460" y="690" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Workflow Simulator</text><text x="460" y="722" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Runs shadow Zaps before writes.</text>
+<text x="930" y="221" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 05</text><text x="930" y="255" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Compliance Gate</text><text x="930" y="287" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Blocks actions outside policy.</text>
+<text x="930" y="656" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 06</text><text x="930" y="690" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Outcome Learner</text><text x="930" y="722" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Calibrates from approved results.</text>
+<text x="1255" y="316" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 07</text><text x="1255" y="350" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Action Conductor</text><text x="1255" y="382" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Routes work through Zapier.</text>
+<text x="1255" y="541" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#2f6df6">WORKER 08</text><text x="1255" y="575" font-family="Inter,Arial,sans-serif" font-size="21" font-weight="800" fill="#111d38">Client Communicator</text><text x="1255" y="607" font-family="Inter,Arial,sans-serif" font-size="14" fill="#748198">Drafts explainable next steps.</text>
+
+<path d="M375 350C500 350 585 390 650 420" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/><path d="M375 575C500 565 585 520 650 485" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/>
+<path d="M650 330C690 350 720 375 735 405" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/><path d="M650 615C695 580 720 540 738 500" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/>
+<path d="M950 330C910 350 885 375 866 405" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/><path d="M950 615C905 580 880 540 862 500" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/>
+<path d="M1225 350C1100 350 1015 390 950 420" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/><path d="M1225 575C1100 565 1015 520 950 485" fill="none" stroke="#2f6df6" stroke-width="3" marker-end="url(#a)"/>
+
+<rect x="235" y="800" width="1130" height="55" rx="18" fill="#fff" stroke="#e2e7ef"/><text x="800" y="834" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="700" fill="#31435c">Autonomy is earned by evidence quality, reversibility, policy scope, and observed reliability, not by simply adding more AI.</text>
+</svg>
