@@ -64,6 +64,8 @@ jobs:
         run: node property/tests/calibration-diversity-contract.mjs
       - name: Verify model-vNext repair and promotion gate
         run: node property/tests/intelligence-model-vnext-repair-contract.mjs
+      - name: Verify Closing v3 fresh holdout safety
+        run: node property/tests/closing-v3-fresh-holdout-contract.mjs
       - name: Verify source-fact watcher safety and idempotency
         run: node property/tests/intelligence-source-fact-watch-contract.mjs
       - name: Verify Semantic Context derived-marker routing
