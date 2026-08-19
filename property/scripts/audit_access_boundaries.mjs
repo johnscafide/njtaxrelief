@@ -17,6 +17,7 @@ const protectedPages = [
   ['property/developer-data/index.html', 'developer'],
   ['property/updates/index.html', 'developer'],
   ['property/verification-diagnostics/index.html', 'developer'],
+  ['property/branding/index.html', 'developer'],
   ['property/scan/index.html', 'pro_plus'],
   ['property/data-center/index.html', 'pro_plus'],
   ['property/data-workbench/index.html', 'agent'],
