@@ -1,0 +1,2 @@
+-- Watchdog agent/listing decision bundle.
+-- Applied to production as watchdog_agent_listing_decision_bundle on 2026-08-19.
