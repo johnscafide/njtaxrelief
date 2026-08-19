@@ -23,7 +23,8 @@
       '/property/js/watchdog-page-context.js',
       '/property/js/watchdog-home-semantic-bridge.js',
       '/property/js/watchdog-context-feedback.js',
-      '/property/js/dashboard/home/watchdog-analyst-intel-loader.js'
+      '/property/js/dashboard/home/watchdog-analyst-intel-loader.js',
+      '/property/js/dashboard/home/watchdog-data-graph.js'
     ];
     return assets.reduce(function(p,src){return p.then(function(){return loadScript(src);});},Promise.resolve()).catch(function(error){console.warn('Watchdog Home Intelligence runtime unavailable:',error&&error.message||error);});
   }
