@@ -6,7 +6,7 @@
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
     "backoffice-api": {"version": 8, "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-dev-login": {"version": 5, "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cfb2e1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
+    "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
     "backoffice-recover": {"version": 4, "sha256": "585b06cb36319483b52a2fc94767c6d5c2ee167346a5192029d92095a13f4441", "verify_jwt": false, "tracking": "fingerprint_only"},
     "bulk-marker-hydrate": {"version": 7, "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f", "verify_jwt": true, "tracking": "fingerprint_only"},
     "create-checkout-session": {"version": 31, "sha256": "a5ec53482b67b72b86ee6d0e7bcafdd707e3910a6971dfcffb7b4dcf197ebb7b", "verify_jwt": true, "tracking": "source_snapshot"},
