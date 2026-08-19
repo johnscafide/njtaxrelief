@@ -114,8 +114,8 @@
 
   function paintDeveloperLinks(show) { document.querySelectorAll('.developer-only').forEach(function (node) { node.hidden = !show; }); }
   function paintPlanNavigation() {
-    var plan = window.NJPTRPlan && window.NJPTRPlan.state ? window.NJPTRPlan.state() : null, paid = !!(plan && (plan.effective === 'pro' || plan.effective === 'pro_plus' || plan.effective === 'developer')), planLabel = document.getElementById('db-side-plan');
-    if (planLabel) { var effective = plan && plan.effective ? plan.effective : 'standard'; planLabel.textContent = effective === 'pro_plus' ? 'Pro+ plan' : effective === 'developer' ? 'Developer access' : effective === 'pro' ? 'Pro plan' : 'Standard plan'; }
+    var plan = window.NJPTRPlan && window.NJPTRPlan.state ? window.NJPTRPlan.state() : null, paid = !!(plan && ['agent','pro','pro_plus','teams','developer'].indexOf(plan.effective) >= 0), planLabel = document.getElementById('db-side-plan');
+    if (planLabel) { var effective = plan && plan.effective ? plan.effective : 'standard'; planLabel.textContent = effective === 'agent' ? 'Agent plan' : effective === 'pro_plus' ? 'Pro+ plan' : effective === 'teams' ? 'Teams plan' : effective === 'developer' ? 'Developer access' : effective === 'pro' ? 'Pro plan' : 'Standard plan'; }
     document.querySelectorAll('.db-side-mobile [data-nav-page="pro"]').forEach(function (node) { var label = node.querySelector('span'); if (label) label.textContent = paid ? 'Tools' : 'Pro'; node.setAttribute('aria-label', paid ? 'Professional tools' : 'Pro plans'); });
     document.querySelectorAll('.wd-mobile-pro-link').forEach(function (node) { var title = node.querySelector('b'), note = node.querySelector('small'); if (paid) { if (title) title.textContent = 'Professional tools'; if (note) note.textContent = 'Your plan workspace'; } else { if (title) title.textContent = 'Explore Pro'; if (note) note.textContent = 'Professional tools and workflows'; } });
     document.querySelectorAll('.paid-only').forEach(function (node) { node.hidden = !paid; });
