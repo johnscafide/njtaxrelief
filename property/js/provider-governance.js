@@ -2,7 +2,7 @@
 // Provider status is governed server-side. Static marker-registry status is the offline fallback;
 // signed-in users are reconciled against workbench-provider-registry, which is database-first.
 // Do not reintroduce client-side provider heuristics: that caused the 2026-08-14 status drift audit.
-const HYDRATOR_CONTRACT='workbench-hydrate-v26';
+const HYDRATOR_CONTRACT='workbench-hydrate-v27';
 const SB_URL='https://uvkvaxljhhngydvlrzom.supabase.co',SB_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 let runtimeSb=null;
 function status(m){return (m&&m.provider_status)||'planned'}
