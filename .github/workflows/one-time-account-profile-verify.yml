@@ -1,0 +1,40 @@
+name: One-time Account profile verification
+
+on:
+  push:
+    paths:
+      - '.github/workflows/one-time-account-profile-verify.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify JavaScript syntax
+        run: |
+          node --check property/js/account-profile.js
+          node --check property/js/onboarding.js
+          node --check property/js/supabase-runtime.js
+      - name: Verify profile contracts
+        run: |
+          node property/tests/account-profile-contract.mjs
+          node property/tests/onboarding-contract.mjs
+          node property/tests/supabase-runtime-contract.mjs
+      - name: Remove one-time verifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git rm .github/workflows/one-time-account-profile-verify.yml
+          git commit -m "Remove one-time Account profile verifier"
+          git pull --rebase origin main
+          git push origin HEAD:main
