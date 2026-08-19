@@ -50,6 +50,8 @@ jobs:
         run: node property/tests/watchdog-data-graph-contract.mjs
       - name: Verify Daily Intelligence Today inbox
         run: node property/tests/intelligence-today-contract.mjs
+      - name: Verify Intelligence SaaS loading and recovery UX
+        run: node property/tests/intelligence-saas-polish-contract.mjs
       - name: Verify billing, verification and measurement security contracts
         run: node property/tests/security-contracts.mjs
       - name: Verify compliance evidence contracts
