@@ -18,6 +18,18 @@
   var previewHost = hostname === 'localhost' || hostname === '127.0.0.1' || /\.vercel\.app$/.test(hostname);
   var selected = previewHost ? staging : production;
   var client = null;
+  var providerDefaults = {
+    google: { label:'Google', enabled:true },
+    apple: { label:'Apple', enabled:false },
+    facebook: { label:'Facebook', enabled:false },
+    linkedin_oidc: { label:'LinkedIn', enabled:false }
+  };
+  var providerOverrides = window.WATCHDOG_AUTH_PROVIDER_FLAGS || {};
+  var providers = {};
+
+  Object.keys(providerDefaults).forEach(function (key) {
+    providers[key] = Object.assign({}, providerDefaults[key], providerOverrides[key] || {});
+  });
 
   function runtimeOptions(base) {
     var out = Object.assign({}, base || {});
@@ -50,11 +62,44 @@
     return out;
   }
 
+  function safeNext(value) {
+    var fallback = String(location.pathname || '/property/dashboard/') + String(location.search || '') + String(location.hash || '');
+    try {
+      var parsed = new URL(value || fallback, location.origin);
+      if (parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0) {
+        return '/property/dashboard/';
+      }
+      return parsed.pathname + parsed.search + parsed.hash;
+    } catch (_error) {
+      return '/property/dashboard/';
+    }
+  }
+
+  function onboardingRedirect(next) {
+    return location.origin + '/property/onboarding/?next=' + encodeURIComponent(safeNext(next));
+  }
+
+  function patchOAuth(instance) {
+    if (!instance || !instance.auth || instance.auth.__watchdogOnboardingWrapped) return instance;
+    var originalOAuth = instance.auth.signInWithOAuth && instance.auth.signInWithOAuth.bind(instance.auth);
+    if (!originalOAuth) return instance;
+
+    instance.auth.signInWithOAuth = function (args) {
+      var request = Object.assign({}, args || {});
+      request.options = Object.assign({}, request.options || {});
+      var intendedNext = request.options.redirectTo || (location.pathname + location.search + location.hash);
+      request.options.redirectTo = onboardingRedirect(intendedNext);
+      return originalOAuth(request);
+    };
+    try { Object.defineProperty(instance.auth, '__watchdogOnboardingWrapped', { value:true }); } catch (_error) { instance.auth.__watchdogOnboardingWrapped = true; }
+    return instance;
+  }
+
   if (window.supabase && typeof window.supabase.createClient === 'function' && !window.supabase.__watchdogRuntimeWrapped) {
     var originalCreateClient = window.supabase.createClient.bind(window.supabase);
     window.supabase.createClient = function (url, key, options) {
       var known = knownConfigForUrl(url);
-      if (known) return originalCreateClient(selected.url, selected.key, runtimeOptions(options));
+      if (known) return patchOAuth(originalCreateClient(selected.url, selected.key, runtimeOptions(options)));
       return originalCreateClient(url, key, options);
     };
     try { Object.defineProperty(window.supabase, '__watchdogRuntimeWrapped', { value: true }); } catch (_error) {}
@@ -83,8 +128,77 @@
     if (!window.supabase || typeof window.supabase.createClient !== 'function') {
       throw new Error('Supabase client library unavailable');
     }
-    client = window.supabase.createClient(selected.url, selected.key, runtimeOptions());
+    client = patchOAuth(window.supabase.createClient(selected.url, selected.key, runtimeOptions()));
     return client;
+  }
+
+  function isProtectedMemberPath() {
+    var path = String(location.pathname || '').replace(/\/+$/, '');
+    if (path.indexOf('/property/onboarding') === 0) return false;
+    return /^\/property\/(dashboard|home|account|agent-control|agent-desk|analytics|integrations|marketing-studio|pro-hub|data-center|backoffice|pulse|compare|reports|watchlist)(?:\/|$)/.test(path);
+  }
+
+  function clearGate() {
+    document.documentElement.removeAttribute('data-watchdog-onboarding');
+    var style = document.getElementById('watchdog-onboarding-gate-style');
+    if (style) style.remove();
+  }
+
+  function startOnboardingGate() {
+    if (!isProtectedMemberPath()) return;
+    document.documentElement.setAttribute('data-watchdog-onboarding','pending');
+    var style = document.createElement('style');
+    style.id = 'watchdog-onboarding-gate-style';
+    style.textContent = 'html[data-watchdog-onboarding="pending"] body{visibility:hidden!important}';
+    (document.head || document.documentElement).appendChild(style);
+
+    var guardClient;
+    try { guardClient = createClient(); } catch (_error) { clearGate(); return; }
+    guardClient.auth.getSession().then(function (result) {
+      var session = result && result.data && result.data.session;
+      if (!session || !session.user) { clearGate(); return null; }
+      return guardClient.rpc('get_my_watchdog_onboarding_state').then(function (stateResult) {
+        if (stateResult.error) {
+          console.warn('[Watchdog] onboarding gate unavailable:', stateResult.error.message || stateResult.error);
+          clearGate();
+          return;
+        }
+        var state = Array.isArray(stateResult.data) ? stateResult.data[0] : stateResult.data;
+        if (!state || !state.completed) {
+          location.replace(onboardingRedirect(location.pathname + location.search + location.hash));
+          return;
+        }
+        clearGate();
+      });
+    }).catch(function (error) {
+      console.warn('[Watchdog] onboarding gate check failed:', error && error.message || error);
+      clearGate();
+    });
+  }
+
+  function stripLegacyEmailSignup(scope) {
+    var host = scope && scope.querySelectorAll ? scope : document;
+    host.querySelectorAll('.auth-magic').forEach(function (node) { node.remove(); });
+    host.querySelectorAll('button[onclick*="plMagicLink"],button[onclick*="signInWithOtp"]').forEach(function (node) {
+      var wrap = node.closest('.auth-magic') || node.closest('form');
+      if (wrap && /sign in link|magic link|email/i.test(wrap.textContent || '')) wrap.remove();
+      else node.remove();
+    });
+    host.querySelectorAll('.auth-or').forEach(function (node) { node.remove(); });
+  }
+
+  function watchLegacyAuthUi() {
+    function clean() { stripLegacyEmailSignup(document); }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean, { once:true });
+    else clean();
+    if (typeof MutationObserver !== 'undefined' && document.documentElement) {
+      var observer = new MutationObserver(function (records) {
+        for (var i=0;i<records.length;i++) {
+          if (records[i].addedNodes && records[i].addedNodes.length) { clean(); break; }
+        }
+      });
+      observer.observe(document.documentElement, { childList:true, subtree:true });
+    }
   }
 
   window.NJPTRSupabaseRuntime = Object.freeze({
@@ -94,6 +208,20 @@
     environment: selected.environment,
     isPreview: previewHost,
     storageKey: 'sb-' + selected.ref + '-auth-token',
-    createClient: createClient
+    createClient: createClient,
+    onboardingUrl: onboardingRedirect,
+    requireOnboarding: startOnboardingGate
   });
+
+  window.WatchdogAuth = Object.freeze({
+    providers: providers,
+    signIn: function (provider, next) {
+      var config = providers[provider];
+      if (!config || !config.enabled) return Promise.reject(new Error('This sign-in provider is not enabled yet.'));
+      return createClient().auth.signInWithOAuth({ provider:provider, options:{ redirectTo:safeNext(next) } });
+    }
+  });
+
+  watchLegacyAuthUi();
+  startOnboardingGate();
 })();
