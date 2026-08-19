@@ -2,7 +2,7 @@ declare const Deno: any;
 // @ts-ignore remote runtime import
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const ENGINE_VERSION = 'watchdog-derived-v8-reset-conversation';
+const ENGINE_VERSION = 'watchdog-derived-v9-agent-listing';
 const CHAPTER123_PROVIDER = 'chapter123-provider-v3';
 const ORIGINS = new Set([
   'https://njpropertytaxrelief.com',
@@ -79,6 +79,10 @@ function codRisk(v: any) {
   const x = num(v);
   return x == null ? null : clamp((x - 15) / 20 * 100);
 }
+function sampleDepth150(v: any) {
+  const x = num(v);
+  return x == null ? null : clamp(Math.max(0, x) / 150 * 100);
+}
 function assessmentRatioGapRisk(subjectRatio: any, official: any) {
   const subject = num(subjectRatio);
   const publishedPct = num(official?.ratio);
@@ -97,6 +101,9 @@ function signal(v: any, transform = 'bool') {
   if (transform === 'collection90_100') return collectionScore(v) ?? 0;
   if (transform === 'inverse_share20') return inverseDebtShare(v) ?? 0;
   if (transform === 'cod_risk') return codRisk(v) ?? 0;
+  if (transform === 'cod_consistency') return 100 - (codRisk(v) ?? 100);
+  if (transform === 'sample_depth150') return sampleDepth150(v) ?? 0;
+  if (transform === 'inverse_sample_depth150') return 100 - (sampleDepth150(v) ?? 100);
   if (transform === 'share35') {
     const x = num(v);
     return x == null ? 0 : clamp(x / 0.35 * 100);
@@ -319,6 +326,12 @@ Deno.serve(async (req: Request) => {
           const weight = items.reduce((sum: number, x: any) => sum + Number(x.s.weight || 0), 0);
           if (weight > 0) v = Math.round(items.reduce((sum: number, x: any) => sum + signal(x.v, x.s.transform) * Number(x.s.weight || 0), 0) / weight);
         }
+      } else if (def.operation === 'max_scores') {
+        const configured: any[] = cfg.items || [];
+        const items = configured.map((s: any) => ({ s, v: value(s.dep) })).filter((x: any) => present(x.v));
+        if (items.length && (!cfg.require_all || items.length === configured.length)) {
+          v = Math.round(Math.max(...items.map((x: any) => signal(x.v, x.s.transform))));
+        }
       } else if (def.operation === 'tax_rate_position') {
         const rateDefs: any[] = cfg.rate_deps || [];
         const points = rateDefs
@@ -406,6 +419,23 @@ Deno.serve(async (req: Request) => {
         const official = chapterDistricts[districtCode(pin)] || null;
         const gapRisk = assessmentRatioGapRisk(subjectRatio, official);
         if (base != null && gapRisk != null) v = Math.round(clamp(base) * gapRisk / 100);
+      } else if (def.operation === 'marketability_drag') {
+        const annualTax = num(value(cfg.tax_dep));
+        const assessed = num(value(cfg.assessed_dep));
+        const verifiedRatio = num(value(cfg.verified_ratio_dep));
+        const sampleSize = num(value(cfg.sample_size_dep));
+        const pressure = num(value(cfg.pressure_dep));
+        const reval = num(value(cfg.reval_dep));
+        const coefficient = num(value(cfg.uniformity_dep));
+        if (annualTax != null && annualTax >= 0 && assessed != null && assessed > 0 && verifiedRatio != null && verifiedRatio > 0 && sampleSize != null && sampleSize >= 10 && pressure != null && reval != null && coefficient != null) {
+          const marketValue = assessed / verifiedRatio;
+          const effectiveBurden = marketValue > 0 ? annualTax / marketValue : null;
+          const unevenness = codRisk(coefficient);
+          if (effectiveBurden != null && unevenness != null) {
+            const burdenRisk = clamp((effectiveBurden - 0.012) / (0.036 - 0.012) * 100);
+            v = Math.round(burdenRisk * 0.34 + clamp(pressure) * 0.23 + clamp(reval) * 0.23 + unevenness * 0.20);
+          }
+        }
       }
 
       stack.delete(id);
