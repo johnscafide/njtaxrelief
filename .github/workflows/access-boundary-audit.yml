@@ -28,6 +28,8 @@ jobs:
         run: node property/scripts/audit_access_boundaries.mjs
       - name: Verify full commercial entitlement ladder
         run: node property/tests/entitlement-tier-contract.mjs
+      - name: Verify outcome-based plan ladder
+        run: node property/tests/plan-outcomes-contract.mjs
       - name: Verify billing catalog and checkout consistency
         run: node property/tests/billing-catalog-contract.mjs
       - name: Verify Intelligence production promotion manifest
