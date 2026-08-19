@@ -67,7 +67,11 @@ expect(billingClient.includes("if(x==='pro_plus'||x==='pro+')return{tier:'pro_pl
 
 expect(checkout.includes("['agent', 'pro', 'pro_plus', 'pro+']"), 'Checkout accepted-tier contract drifted.');
 expect(checkout.includes("if (rawTier === 'teams')"), 'Checkout no longer explicitly gates Teams enrollment.');
-expect(checkout.includes("return 'closed';"), 'Checkout no longer defaults fail-closed.');
+expect(checkout.includes("mode: envMode || gateMode || 'closed'"), 'Checkout no longer defaults fail-closed through server release control.');
+expect(checkout.includes(".eq('gate_key', 'live_billing_lifecycle')"), 'Checkout is not reading the server-owned Live billing release gate.');
+expect(checkout.includes("control.mode === 'open' && !control.liveGatePassed"), 'Checkout can open publicly without the Live billing gate passing.');
+expect(checkout.includes('controlled_user_ids'), 'Checkout no longer supports the server-owned controlled user allowlist.');
+expect(checkout.includes('environment_override'), 'Checkout no longer preserves an emergency environment override path.');
 expect(checkout.includes("WATCHDOG_TEST_NO_REAL_SPEND"), 'Checkout no longer protects test accounts from Live spend.');
 expect(checkout.includes('stripe.prices.list'), 'Checkout no longer resolves its active environment catalog through Stripe.');
 expect(checkout.includes('matches.length !== 1'), 'Checkout no longer fails closed when a Stripe lookup key is ambiguous.');
@@ -79,6 +83,8 @@ expect(health.includes('stripe_secret_configured'), 'Developer platform health d
 expect(health.includes('webhook_secret_configured'), 'Developer platform health does not report webhook-secret readiness.');
 expect(health.includes('catalog_lookup_resolved'), 'Developer platform health does not report server-side Stripe catalog resolution.');
 expect(health.includes("stripeCatalog.mode === 'live'"), 'Developer platform health does not require a Live Stripe key for production acceptance.');
+expect(health.includes('checkout_control_source'), 'Developer platform health does not expose safe Checkout control provenance.');
+expect(health.includes('controlled_user_count'), 'Developer platform health does not report controlled allowlist readiness.');
 expect(!health.includes('PADDLE_ENVIRONMENT'), 'Developer platform health reverted to Paddle environment detection.');
 expect(!health.includes("eq('provider', 'paddle')"), 'Developer platform health reverted to Paddle event evidence.');
 
@@ -97,4 +103,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Billing catalog contract passed: Account, Pro, Stripe lookup resolution, launch health and fail-closed Checkout agree.');
+console.log('Billing catalog contract passed: Account, Pro, Stripe lookup resolution, server-owned release control, launch health and fail-closed Checkout agree.');
