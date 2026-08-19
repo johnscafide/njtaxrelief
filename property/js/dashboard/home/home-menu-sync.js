@@ -25,7 +25,8 @@
       '/property/js/watchdog-context-feedback.js',
       '/property/js/dashboard/home/watchdog-analyst-intel-loader.js',
       '/property/js/watchdog-intelligence-density.js',
-      '/property/js/dashboard/home/watchdog-data-graph.js'
+      '/property/js/dashboard/home/watchdog-data-graph.js',
+      '/property/js/watchdog-today-nav.js'
     ];
     return assets.reduce(function(p,src){return p.then(function(){return loadScript(src);});},Promise.resolve()).catch(function(error){console.warn('Watchdog Home Intelligence runtime unavailable:',error&&error.message||error);});
   }
@@ -68,6 +69,7 @@
     items.push(item('/property/pro','fa-briefcase','Professional Hub'));
     items.push(item('/property/account','fa-user-gear','Account'));
     nav.innerHTML=items.join('');
+    if(window.WatchdogTodayNav&&window.WatchdogTodayNav.refresh)window.WatchdogTodayNav.refresh();
   }
 
   function boot(){
