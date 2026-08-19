@@ -1,0 +1,19 @@
+{
+  "name": "watchdog-zapier-integration",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Watchdog property intelligence integration for Zapier",
+  "homepage": "https://njpropertytaxrelief.com/property/",
+  "main": "index.js",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "zapier-platform test",
+    "validate": "zapier-platform validate"
+  },
+  "dependencies": {
+    "zapier-platform-core": "18.5.1"
+  },
+  "devDependencies": {
+    "zapier-platform-cli": "18.5.1"
+  }
+}
