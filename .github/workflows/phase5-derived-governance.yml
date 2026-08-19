@@ -6,6 +6,7 @@ on:
       - 'property/data/marker-registry.json'
       - 'property/data/derived-marker-formulas.json'
       - 'property/data/db-governed-status.json'
+      - 'property/data/db-governed-provider-overlay.json'
       - 'supabase/functions/workbench-derived/**'
       - 'supabase/migrations/**'
       - 'scripts/build-derived-governance.js'
@@ -33,6 +34,7 @@ jobs:
           if(g.summary.untriaged!==0)throw new Error('Untriaged derived markers remain: '+g.summary.untriaged);
           if(g.summary.total_derived!==g.summary.live+g.summary.blocked+g.summary.retired)throw new Error('Governance totals do not reconcile');
           if(!g.governance_status_snapshot)throw new Error('Database-first governance status snapshot is missing');
+          if(!g.governance_status_overlay)throw new Error('Latest provider-status overlay is missing');
           console.log(g.summary);
           NODE
       - name: Commit governance artifact when changed
