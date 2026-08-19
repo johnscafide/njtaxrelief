@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-19T22:32:17.142Z",
+  "generated_at": "2026-08-19T22:34:33.304Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -82,7 +82,11 @@
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
     "watchdog.municipal_cost_absorption_score",
+    "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
+    "watchdog.njplus.environmental_case_activity",
+    "watchdog.njplus.environmental_record_resolution",
+    "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
@@ -187,7 +191,11 @@
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
     "watchdog.municipal_cost_absorption_score",
+    "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
+    "watchdog.njplus.environmental_case_activity",
+    "watchdog.njplus.environmental_record_resolution",
+    "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
@@ -218,8 +226,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 103,
-    "blocked": 195,
+    "live": 107,
+    "blocked": 191,
     "retired": 0,
     "untriaged": 0
   },
@@ -5083,16 +5091,16 @@
         "investor",
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "coverage(kcsl_case_status, remediation_phase, remediation_status, deed_notice_reference)",
       "dependencies": [
         "njdep-csrr-gis"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.environmental_case_activity",
@@ -5109,16 +5117,16 @@
         "investor",
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "weighted(remediation_phase, remediation_status, source_freshness)",
       "dependencies": [
         "njdep-csrr-gis"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.brownfield_reuse_context",
@@ -5135,16 +5143,16 @@
         "investor",
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "weighted(brownfield_inventory_status, remediation_status, redevelopment_area_status)",
       "dependencies": [
         "njdep-csrr-gis"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.environmental_source_currency",
@@ -5161,16 +5169,16 @@
         "investor",
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "age(environmental_layer_vintage)",
       "dependencies": [
         "njdep-csrr-gis"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "modiv_intel.median_assessed_value",
