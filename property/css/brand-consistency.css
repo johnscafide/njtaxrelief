@@ -119,13 +119,33 @@ body.wdx-modern :is(button,input,select,textarea){
 .hm-wrap>.sec p,.hm-wrap>.sec li{font-size:14px!important}
 .hm27-action,.hm-back{font-size:14px!important}
 
-/* Current secondary shell: consistent minimum control size and readable navigation. */
+/* Current secondary shell: consistent control size and readable chrome. */
 body.wdx-modern .wdx-btn,
 body.wdx-modern .wdx-menu,
 body.wdx-modern .wdx-icon,
 body.wdx-modern .wdx-user{min-height:42px}
+body.wdx-modern .wdx-btn{font-size:13px!important}
+body.wdx-modern .wdx-date span,
+body.wdx-modern .wdx-weather span{font-size:12px!important}
 body.wdx-modern .wdx-kicker{font-size:10px}
 body.wdx-modern .wdx-pagebar p{font-size:14px;line-height:1.55}
+
+/* Dashboard-derived profile/notification chrome was historically much smaller on secondary pages.
+   Preserve compact badges/timestamps, but keep actual labels and actions readable. */
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop header small{font-size:12px!important;line-height:1.35!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop header>button{font-size:12px!important;min-height:36px!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav b{font-size:13px!important;line-height:1.3!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav small{font-size:12px!important;line-height:1.4!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-out{font-size:12px!important;min-height:42px!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note b{font-size:12px!important;line-height:1.35!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note small{font-size:12px!important;line-height:1.4!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note em{font-size:10px!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-nfoot{font-size:12px!important;min-height:44px!important}
+
+/* If legacy shared components surface inside a current app shell, canonical product type wins. */
+body:is(.wd4-mounted,.hm-dashboard-page,.wdx-modern) .pre-body h3{
+  font-family:"Plus Jakarta Sans",Inter,sans-serif!important;
+}
 
 /* Numeric data should scan like financial/product data. */
 body.wd4-mounted :is(.wd4-kpi-value,.wd4-summary strong,.wd4-muni-table td),
@@ -149,6 +169,10 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   .wd4-nav-panel,.hm27-nav-panel{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important;width:auto!important;border-radius:18px!important}
   .wd4-nav-links a,.hm27-nav-links a{min-height:52px!important;font-size:15px!important}
   .wd4-add-btn,.wd4-export-btn,.hm27-action{min-height:52px!important}
+  body.wdx-modern .wdx-btn{min-height:48px!important;font-size:14px!important}
+  body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav a,
+  body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav button,
+  body:is(.wd4-mounted,.wdx-modern) .wd6-note{min-height:52px!important}
 }
 
 @media (prefers-reduced-motion:reduce){
