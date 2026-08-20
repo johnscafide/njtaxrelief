@@ -1,7 +1,7 @@
 # Watchdog Compliance Control Register
 
 **Program status:** Readiness in progress  
-**Last updated:** 2026-08-19  
+**Last updated:** 2026-08-20  
 **Assurance status:** No independent certification or SOC report is claimed by this document.
 
 ## Status key
@@ -21,14 +21,14 @@
 | WCR-SDLC-001 | Authorization boundary testing | SOC 2 Security, OWASP ASVS Access Control, NIST Protect | Implemented | `.github/workflows/access-boundary-audit.yml`, `property/scripts/audit_access_boundaries.mjs` | Add dynamic authenticated-route verification where static assertions are insufficient. |
 | WCR-SDLC-002 | Application security contracts / ASVS readiness | SOC 2 Security, OWASP ASVS 5.0.0 Level 2, NIST Protect | Partial | `property/tests/security-contracts.mjs`, `property/docs/compliance/ASVS-5-L2-BASELINE.md`, `property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md`, `property/tests/auth-asvs-contract.mjs` | Continue requirement-level mapping; resolve or transparently retain the Level 2 MFA gap; complete OAuth/OIDC V10 mapping. |
 | WCR-AUTH-001 | Central OAuth/session security baseline | OWASP ASVS V6/V7/V10, NIST Protect, SOC 2 Security | Partial | `property/js/supabase-runtime.js`, `property/tests/auth-asvs-contract.mjs`, ASVS identity tranche | Verify provider-side production settings, session lifetime, recovery/account-linking behavior, and MFA enforcement. |
-| WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material connector and infrastructure component. |
+| WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material production connector and infrastructure component. |
 | WCR-IAM-001 | Database row-level access and entitlements | SOC 2 Security, OWASP ASVS Access Control | Implemented | `property/tests/security-contracts.mjs`, Supabase migrations | Add periodic privileged-access review evidence and formal joiner/mover/leaver process as team grows. |
 | WCR-PAY-001 | Signed payment webhooks | SOC 2 Security, OWASP ASVS, PCI DSS | Implemented | Stripe/Paddle checks in `property/tests/security-contracts.mjs` | Maintain signature/replay/deduplication tests for every active payment provider. |
 | WCR-PAY-002 | Server-authoritative pricing | SOC 2 Processing Integrity, OWASP ASVS | Implemented | Marketing/subscription checkout security contracts | Maintain tests for every new paid workflow. |
 | WCR-PCI-001 | PCI scope and SAQ readiness | PCI DSS, SOC 2 Security/Processing Integrity | Partial | `property/docs/compliance/PCI-SCOPE-MEMO.md`, `supabase/functions/create-checkout-session/index.ts` | Verify every live SAQ A eligibility criterion; required ASV validation remains an external dependency. |
 | WCR-TLS-001 | HTTPS/TLS/HSTS evidence | SOC 2 Security, NIST Protect, OWASP ASVS Secure Communication | Partial | `property/docs/compliance/TLS-SECURITY-BASELINE.md`, `property/scripts/tls_readiness_check.mjs`, `vercel.json` | Review generated production evidence and retain a dated free SSL Labs result without treating it as certification. |
 | WCR-IR-001 | Incident response runbook | SOC 2 Security/Availability, NIST Respond, ISO 27001 | Implemented | `property/docs/incident-response-runbook.md` | Maintain the runbook and reconcile future exercises/incidents against it. |
-| WCR-IR-002 | Incident response tabletop exercise | SOC 2 Security/Availability, NIST Respond/Recover, ISO 27001 | Implemented | `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md`, `property/docs/compliance/INCIDENT-RECORD-TEMPLATE.md` | Define provisional RTO/RPO targets and run a future connector-focused exercise. |
+| WCR-IR-002 | Incident response tabletop exercise | SOC 2 Security/Availability, NIST Respond/Recover, ISO 27001 | Implemented | `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md`, `property/docs/compliance/INCIDENT-RECORD-TEMPLATE.md` | Run a future connector/credential-revocation exercise. |
 | WCR-LOG-001 | Privacy-safe reliability telemetry | SOC 2 Privacy, NJDPA, NIST Protect/Detect | Implemented | `property/docs/incident-response-runbook.md` | Verify telemetry providers/configuration against documented minimization requirements. |
 | WCR-PRIV-001 | Privacy notice and consumer rights | NJDPA, SOC 2 Privacy, ISO 27701 | Implemented | `property/privacy/index.html`, `property/docs/compliance/NJDPA-DATA-PROTECTION-ASSESSMENT.md` | Periodically reconcile the public policy against the field-level inventory, retention behavior and material connector changes. |
 | WCR-PRIV-002 | Optional profile data minimization and consent | NJDPA, SOC 2 Privacy, ISO 27701 | Partial | Product consent design and `property/docs/compliance/NJDPA-DATA-PROTECTION-ASSESSMENT.md` | Build field-level purpose/retention/transfer inventory and verify deletion/withdrawal behavior against the live product. |
@@ -38,41 +38,16 @@
 | WCR-TRUST-001 | Public security/trust transparency | Consumer transparency, SOC 2 communication support | Implemented | `property/trust/index.html`, `property/tests/seven-readiness-contracts.mjs` | Extend the Trust Center link into shared public footer/navigation and keep every public claim evidence-backed. |
 | WCR-VULN-001 | Vulnerability management | SOC 2 Security, NIST Identify/Protect/Detect, OWASP ASVS | Partial | Security contract CI | Verify/enable dependency alerts, secret scanning, push protection and code scanning; establish remediation SLAs. |
 | WCR-PEN-001 | Independent penetration test | SOC 2 Security, OWASP ASVS | External validation pending | None yet | Perform once production architecture and material connectors are substantially stable and budget exists. |
-| WCR-BCP-001 | Backup/restore testing | SOC 2 Availability, NIST Recover, ISO 27001 | Partial | `.github/workflows/njw-42-isolated-restore-drill.yml` | Review latest drill evidence, recovery objectives and production coverage. |
+| WCR-BCP-001 | Backup/restore testing | SOC 2 Availability, NIST Recover, ISO 27001 | Partial | `.github/workflows/njw-42-isolated-restore-drill.yml`, `property/docs/compliance/RECOVERY-OBJECTIVES-2026-08-20.md` | Review a dated successful restore drill against provisional RTO/RPO and close component coverage gaps. |
+| WCR-BCP-002 | Recovery objectives and prioritization | SOC 2 Availability, NIST Recover, ISO 27001 | Implemented | `property/docs/compliance/RECOVERY-OBJECTIVES-2026-08-20.md` | Validate objectives with repeated measured drills before making any external availability commitment. |
 | WCR-AI-001 | AI governance | ISO 42001, NIST Govern, SOC 2 Processing Integrity/Privacy | Planned | Product architecture and compliance charter | Inventory AI uses, model/data flows, human review requirements, prohibited uses and evaluation evidence as AI features mature. |
 | WCR-SOC-001 | SOC 2 readiness assessment | SOC 2 | Planned | This control register and linked evidence | Engage readiness assessor only after core workflows, billing, access architecture and material connectors stabilize and budget permits. |
 | WCR-ISO-001 | ISO/IEC 27001 certification readiness | ISO/IEC 27001 | Planned | NIST/SOC-aligned controls will provide reusable evidence | Reassess commercial need after SOC 2 readiness matures and budget permits. |
 
 ## Required connector review fields
 
-Every new material connector should eventually have a dated record containing:
-
-- business purpose and owner;
-- data received and data transmitted;
-- data classification, including personal or sensitive data;
-- authentication/credential method and rotation/revocation process;
-- permissions/scopes and least-privilege justification;
-- storage locations and retention/deletion behavior;
-- subprocessors or onward transfers where relevant;
-- encryption expectations;
-- webhook/signature/replay controls where applicable;
-- failure modes and incident contact path;
-- privacy-policy/DPA impact;
-- security documentation or assurance reports reviewed;
-- production approval decision and reviewer;
-- offboarding/revocation procedure.
+Every new material connector should eventually have a dated record containing business purpose/owner, data flows/classification, credential and least-privilege controls, retention/deletion, onward transfers, encryption, webhook controls, failure/incident path, privacy impact, assurance reviewed, production approval, and offboarding/revocation.
 
 ## Audit-readiness gate
 
-A formal SOC 2 readiness engagement should be considered when all of the following are substantially true:
-
-1. Core authentication and entitlement architecture is stable.
-2. Primary billing flow is live and its PCI scope is documented.
-3. Material production data connectors are known and inventoried.
-4. Privileged access and change management operate consistently.
-5. Incident response and recovery controls have been exercised.
-6. Vulnerability management is operating with evidence and remediation expectations.
-7. Privacy data-flow and high-risk-processing assessments reflect the live product.
-8. Accessibility testing covers representative public and authenticated journeys.
-9. ASVS Level 2 applicability/evidence mapping is substantially complete, including an explicit resolution of the MFA requirement.
-10. Compliance evidence has accumulated over time rather than being reconstructed immediately before an audit.
+A formal SOC 2 readiness engagement should be considered when core authentication/entitlements are stable; billing and PCI scope are documented; material connectors are inventoried; privileged access/change management operate consistently; incident response and recovery have measured evidence; vulnerability management operates with remediation expectations; privacy assessments reflect the live product; accessibility covers representative journeys; ASVS Level 2 mapping is substantially complete including MFA disposition; and evidence has accumulated over time.
