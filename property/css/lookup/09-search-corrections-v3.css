@@ -4,6 +4,21 @@
 body.hood-on .njw-filterbar{z-index:10!important;}
 body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-bottom:0!important;padding-bottom:0!important;}
 
+/* Property-list mode has no hero behind the public nav, so use the solid treatment. */
+body.hood-on .wd-nav{
+  background:rgba(255,255,255,.98)!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 rgba(14,34,72,.10),0 4px 18px rgba(14,34,72,.07)!important;
+}
+body.hood-on .wd-nav a,
+body.hood-on .wd-nav button,
+body.hood-on .wd-nav .wd-logo{
+  color:#0e2248!important;
+  text-shadow:none!important;
+}
+body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
+
 /* White heart halo, no black drop shadow. */
 #pl-hood .hd-heart{
   text-shadow:0 0 2px rgba(255,255,255,1),0 1px 5px rgba(255,255,255,.96),0 0 10px rgba(255,255,255,.72)!important;
