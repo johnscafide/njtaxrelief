@@ -18,6 +18,24 @@
     }).catch(function(e){console.error('Fragment load failed',e);});
   }
 
+  function sourceProof(){
+    var origin=document.getElementById('pro-origin');
+    if(!origin||document.getElementById('pro-source-proof'))return;
+    var section=document.createElement('section');
+    section.className='pro-section pro-source-proof pro-reveal';
+    section.id='pro-source-proof';
+    section.setAttribute('aria-labelledby','pro-source-proof-title');
+    section.innerHTML='<div class="pro-wrap">'+
+      '<div class="pro-section-head"><h2 id="pro-source-proof-title">Source transparency before the sale.</h2><p>Watchdog shows the public-record basis behind professional signals and says when the evidence is too thin to support a reliable read.</p></div>'+
+      '<div class="pro-mini-proof"><span><b>564</b> New Jersey municipalities</span><span><b>131,244</b> SR1A verified sales on file</span><span><b>55.2%</b> statewide median assessment-to-market ratio</span></div>'+
+      '<div class="pro-origin-grid">'+
+        '<div class="pro-origin-stamp"><span>Verified sourcing</span><strong>Evidence beside the answer.</strong><small>Watchdog uses New Jersey Division of Taxation SR1A verified sales and equalization context from the Table of Equalized Valuations where the governed model calls for it.</small></div>'+
+        '<div class="pro-origin-copy"><h2>Know what supports the result.</h2><p>Watchdog distinguishes source facts, normalized fields, derived markers and screening signals. When the evidence is too thin, the product should decline to manufacture a number.</p><div class="pro-origin-points"><span><i class="fas fa-file-signature"></i> SR1A verified sales</span><span><i class="fas fa-scale-balanced"></i> Equalization context</span><span><i class="fas fa-circle-check"></i> Confidence + missingness</span><span><i class="fas fa-link"></i> Source lineage</span></div><p>Public-record screening is decision support. It is not a formal appraisal, legal opinion, title determination or tax-appeal conclusion.</p><a class="pro-btn pro-btn-quiet" href="/property/data-methodology">Read the data methodology <i class="fas fa-arrow-right"></i></a></div>'+
+      '</div>'+
+    '</div>';
+    origin.insertAdjacentElement('afterend',section);
+  }
+
   function reveal(){
     var nodes=Array.prototype.slice.call(document.querySelectorAll('.pro-reveal'));
     if(!nodes.length)return;
@@ -151,6 +169,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');reveal();story();roleTabs();pricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');sourceProof();reveal();story();roleTabs();pricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
