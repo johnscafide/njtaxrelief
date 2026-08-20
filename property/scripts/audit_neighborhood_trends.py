@@ -36,20 +36,23 @@ def main():
     wb = load_workbook(temp, read_only=True, data_only=True)
     sheets = []
     for ws in wb.worksheets:
+        is_municipality = ws.title == "Data by Municipality"
+        max_col = ws.max_column if is_municipality else min(ws.max_column or 1, 60)
+        max_row = 10 if is_municipality else 25
         sample = []
-        for row in ws.iter_rows(min_row=1, max_row=25, max_col=min(ws.max_column or 1, 60), values_only=True):
+        for row in ws.iter_rows(min_row=1, max_row=max_row, max_col=max_col, values_only=True):
             sample.append([clean(v) for v in row])
         sheets.append({
             "name": ws.title,
             "max_row": ws.max_row,
             "max_column": ws.max_column,
-            "sample_first_25_rows": sample,
+            "sample_rows": sample,
         })
     wb.close()
     temp.unlink(missing_ok=True)
 
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": SOURCE,
         "source_bytes": len(response.content),
