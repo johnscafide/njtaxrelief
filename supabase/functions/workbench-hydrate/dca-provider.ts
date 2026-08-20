@@ -60,6 +60,13 @@ const NEIGHBORHOOD_FIELDS=new Set([
 const NEIGHBORHOOD_DERIVED_FIELDS=new Set([
   'population_change','housing_unit_change','rental_cost_change','home_value_change','employment_density','neighborhood_trend_year'
 ]);
+const MUNICIPAL_HOUSING_PROFILE_FIELDS=new Set([
+  'housing_stock','owner_occupied_share','renter_occupied_share','vacancy_rate',
+  'median_gross_rent','median_home_value','housing_cost_burden_share','household_growth'
+]);
+const MUNICIPAL_HOUSING_PROFILE_DERIVED_FIELDS=new Set([
+  'owner_occupied_share','renter_occupied_share','vacancy_rate','household_growth'
+]);
 
 function esc(v:any){return String(v??'').replace(/'/g,"''").trim()}
 function num(v:any){const x=Number(v);return Number.isFinite(x)?x:0}
@@ -164,6 +171,15 @@ function neighborhoodTrendValue(root:any,row:any,field:string){
   return {v:rec?.[field]??null,checked:true,kind,source:'NJ DCA 2026 Neighborhood Trends Database · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};
 }
 
+function municipalHousingProfileValue(root:any,row:any,field:string){
+  if(!MUNICIPAL_HOUSING_PROFILE_FIELDS.has(field))return null;
+  const tc=treasury(row),rec=root?.neighborhoodTrends?.municipalities?.[tc];
+  const kind=MUNICIPAL_HOUSING_PROFILE_DERIVED_FIELDS.has(field)?'derived_governed':'authoritative_reference';
+  const source='NJ DCA 2026 Neighborhood Trends Database · exact municipal housing compatibility · '+MUNICIPAL_HOUSING_PROVIDER_VERSION;
+  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind,source};
+  return {v:rec?.[field]??null,checked:true,kind,source};
+}
+
 async function parcelRows(row:any){
   const tc=treasury(row),block=esc(row?.block),lot=esc(row?.lot);
   if(!/^\d{4}$/.test(tc)||!block||!lot)return [];
@@ -214,12 +230,13 @@ function developmentField(rows:any[],field:string){
 export async function dcaPermitValue(marker:any,row:any){
   const src=String(marker?.source_id||''),id=String(marker?.id||''),field=String(marker?.field||''),origin=String(marker?.origin||'');
   if(src==='treasury-modiv-2026')return modivIntelValue(row,field);
-  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'||src==='nj-dca-affordable-housing'||src==='nj-dca-neighborhood-trends'){
+  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'||src==='nj-dca-affordable-housing'||src==='nj-dca-neighborhood-trends'||src==='nj-dca-municipal-housing-profile'){
     const root=await municipalRoots();
     if(src==='nj-division-taxation')return taxRateValue(root,row,field);
     if(src==='nj-abstract-pilot')return exemptionValue(root,row,field,origin);
     if(src==='nj-tax-abstract')return abatementValue(root,row,field,origin);
     if(src==='nj-dca-affordable-housing')return affordableHousingValue(root,row,field);
+    if(src==='nj-dca-municipal-housing-profile')return municipalHousingProfileValue(root,row,field);
     return neighborhoodTrendValue(root,row,field);
   }
   if(src==='nj-dca-development-trends'){
