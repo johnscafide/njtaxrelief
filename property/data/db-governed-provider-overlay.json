@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-20T22:08:00Z",
+  "captured_at": "2026-08-20T22:36:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -24,6 +24,14 @@
     "njplus.nj-dca-community-assets.redevelopment_area_status": "live",
     "njplus.nj-dca-community-assets.transit_village_status": "live",
     "njplus.nj-dca-community-assets.urban_enterprise_zone_status": "live",
+    "njplus.nj-dca-municipal-housing-profile.household_growth": "live",
+    "njplus.nj-dca-municipal-housing-profile.housing_cost_burden_share": "live",
+    "njplus.nj-dca-municipal-housing-profile.housing_stock": "live",
+    "njplus.nj-dca-municipal-housing-profile.median_gross_rent": "live",
+    "njplus.nj-dca-municipal-housing-profile.median_home_value": "live",
+    "njplus.nj-dca-municipal-housing-profile.owner_occupied_share": "live",
+    "njplus.nj-dca-municipal-housing-profile.renter_occupied_share": "live",
+    "njplus.nj-dca-municipal-housing-profile.vacancy_rate": "live",
     "njplus.nj-dca-neighborhood-trends.employment_density": "live",
     "njplus.nj-dca-neighborhood-trends.home_value_change": "live",
     "njplus.nj-dca-neighborhood-trends.household_income": "live",
