@@ -65,6 +65,45 @@
   body.wdv2-mounted .wdv2-freshness{white-space:normal;min-width:0}
   body.wdv2-mounted .wdv2-filter-chip{max-width:100%}
 
+  /* Finger-safe dashboard card/map interactions. Desktop defaults are 25-36px. */
+  body.wdv2-mounted .wd4-card-menu{
+    width:44px;
+    height:44px;
+    right:4px;
+    top:4px;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .wd4-map-handle{
+    width:44px;
+    height:44px;
+    min-width:44px;
+    border-radius:11px;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .leaflet-control-zoom a{
+    width:44px!important;
+    height:44px!important;
+    line-height:42px!important;
+    font-size:20px!important;
+  }
+  body.wdv2-mounted .wd4-map-legend{
+    left:10px;
+    bottom:10px;
+    min-width:0;
+    max-width:calc(100% - 20px);
+    padding:10px 12px;
+  }
+  body.wdv2-mounted .wd4-map-legend div{
+    min-height:30px;
+    grid-template-columns:10px minmax(0,1fr) auto;
+    gap:8px;
+    font-size:11px;
+  }
+  body.wdv2-mounted .wd4-map-legend b{font-size:11px}
+  body.wdv2-mounted .wd4-map-legend i{width:9px;height:9px}
+
   /* The loading state must match the real mobile shell, otherwise first paint overflows before mount. */
   .wdv2-skel-top{height:68px;padding:0 12px;gap:10px}
   .wdv2-skel-top i{width:44px;height:44px;border-radius:11px}
@@ -88,5 +127,6 @@
   body.wdv2-mounted .wd4-welcome{padding-left:12px!important;padding-right:12px!important}
   body.wdv2-mounted .wd4-canvas{padding-left:10px!important;padding-right:10px!important}
   body.wdv2-mounted .wdv2-rail{margin-left:12px;margin-right:12px}
+  body.wdv2-mounted .wd4-map-legend{left:8px;bottom:8px;max-width:calc(100% - 16px)}
   .wdv2-skel-top b{display:none}
 }
