@@ -120,12 +120,17 @@ The old fixed/collapsible dark vertical property sidenav is retired and prohibit
 
 For current product work:
 
+- `/property/css/brand-consistency.css` is the canonical cross-app styling layer for current Watchdog product shells.
+- `/property/js/brand-consistency-runtime.js` owns the canonical signed-in navigation inventory and brand synchronization.
+- `/property/js/sidemenu.js` routes supported secondary pages into the current shell and must never fetch the retired sidebar partial.
 - The Dashboard uses its current 2027 dashboard navigation.
 - Property Home uses its current 2027 Home navigation.
-- Supported secondary pages use `/property/css/app-shell-2027.css` and `/property/js/app-shell-2027.js`.
+- Supported secondary pages use `/property/css/app-shell-2027.css` and `/property/js/app-shell-2027.js` underneath the shared consistency layer.
 - A purpose-built modern header/navigation may be used for a specialized page, but it must not fall back to the retired vertical rail.
 - If a page is not yet migrated to a current shell, render it without the retired sidebar rather than reintroducing legacy navigation.
 - When creating a new route, explicitly choose its current navigation pattern before considering the page complete.
+
+Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Compare, Assessment Fairness, Change Intelligence, Agent Control, Appeal Scanner, Data Workbench, Data Center, Professional Hub, and Account.
 
 The shared `/property/js/sidemenu.js` intentionally no longer fetches `/property/partials/sidemenu.html`. Do not restore that fallback.
 
