@@ -1,0 +1,2 @@
+create index if not exists integration_outcome_verification_candidates_outcome_event_idx
+on public.integration_outcome_verification_candidates(outcome_event_id);
