@@ -6,9 +6,11 @@ function must(value,message){ if(!value) throw new Error(message); }
 const runtime=read('property/js/supabase-runtime.js');
 const page=read('property/onboarding/index.html');
 const onboarding=read('property/js/onboarding.js');
+const emailAuth=read('property/js/onboarding-email-auth.js');
 const css=read('property/css/onboarding.css');
 const migration=read('supabase/migrations/20260819150000_required_watchdog_onboarding_v1.sql');
 const contactMigration=read('supabase/migrations/20260819190000_watchdog_onboarding_contact_email_v2.sql');
+const otpTemplate=read('supabase/templates/watchdog-email-otp.html');
 
 must(runtime.includes("'/property/onboarding/?next='"),'OAuth runtime must route through the onboarding page.');
 must(runtime.includes('instance.auth.signInWithOAuth = function'),'Canonical runtime must wrap every known Watchdog OAuth client.');
@@ -23,15 +25,27 @@ must(runtime.includes("querySelectorAll('.auth-magic')"),'Legacy email/magic-lin
 must(!runtime.match(/\.js\?v=|\.css\?v=/),'Onboarding runtime must not introduce version-query assets.');
 
 must(page.includes('/property/js/onboarding.js'),'Onboarding page must load the dedicated survey controller.');
+must(page.includes('/property/js/onboarding-email-auth.js'),'Onboarding page must load the passwordless email controller.');
 must(page.includes('/property/css/onboarding.css'),'Onboarding page must load its dedicated visual layer.');
+must(page.includes("Watchdog's <a href=\"/property/terms\""),'Authentication must present linked Watchdog Terms at the point of sign-in.');
 must(!/sign in link|magic link/i.test(page),'Onboarding page must not offer email magic-link signup.');
 must(css.includes('.wd-onboarding-card'),'Onboarding must render as the dedicated overlay/card experience.');
+
+must(emailAuth.includes('db.auth.signInWithOtp'),'Email fallback must use native Supabase passwordless OTP.');
+must(emailAuth.includes('shouldCreateUser: true'),'Email OTP must create a real Supabase account for new verified users.');
+must(emailAuth.includes('db.auth.verifyOtp'),'Email code entry must verify through Supabase Auth.');
+must(emailAuth.includes("type: 'email'"),'Email OTP verification must use the email verification type.');
+must(emailAuth.includes("autocomplete=\"one-time-code\""),'Email code input must expose one-time-code autocomplete semantics.');
+must(emailAuth.includes('window.location.reload()'),'Successful email verification must re-enter the canonical onboarding session gate.');
+must(!/signInWithPassword|password\s*:/i.test(emailAuth),'Email fallback must remain passwordless.');
+must(otpTemplate.includes('{{ .Token }}'),'Watchdog OTP email template must render the Supabase six-digit token.');
+must(!otpTemplate.includes('{{ .ConfirmationURL }}'),'Watchdog OTP email template must not fall back to a magic link.');
 
 must(onboarding.includes("id:'contact_email'"),'Onboarding must ask the member to confirm a contact email.');
 must(onboarding.includes("autocomplete:'email'"),'Contact email input must use email autocomplete semantics.');
 must(onboarding.includes('Marketing permission is always separate'),'Onboarding must keep contact email separate from marketing consent.');
 must(onboarding.includes("complete_my_watchdog_onboarding_v2"),'Survey completion must use the contact-email-aware governed completion RPC.');
-must(onboarding.includes('session.user.email'),'Social-login email should prefill the contact email when available.');
+must(onboarding.includes('session.user.email'),'Authenticated email should prefill the contact email when available.');
 must(onboarding.includes("Prefer not to say"),'Sensitive demographic steps must include a Prefer not to say path.');
 must(onboarding.includes("professional_priorities"),'Professional workflow priorities must be captured.');
 must(onboarding.includes("professional_volume_band"),'Professional workflow volume must be captured.');

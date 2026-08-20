@@ -3,6 +3,7 @@
 
   var root = document.getElementById('wd-onboarding-root');
   var progress = document.getElementById('wd-onboarding-progress');
+  var footer = document.getElementById('wd-onboarding-footer');
   if (!root || !window.NJPTRSupabaseRuntime) return;
 
   var db = window.NJPTRSupabaseRuntime.createClient();
@@ -15,6 +16,16 @@
     return String(value == null ? '' : value).replace(/[&<>\"]/g, function (c) {
       return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '\"':'&quot;' }[c];
     });
+  }
+
+  function setMode(mode) {
+    var authMode = mode === 'auth';
+    document.body.classList.toggle('wd-auth-view', authMode);
+    if (footer) {
+      footer.textContent = authMode
+        ? 'We only use your sign-in to secure your account and save your Watchdog properties.'
+        : 'Your answers are saved to your Watchdog profile and kept separate from governed property-source facts.';
+    }
   }
 
   function nextPath() {
@@ -38,7 +49,7 @@
   }
 
   var steps = [
-    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'More about you.', copy:'A few quick answers help Watchdog open with the property signals, workflows and intelligence that matter most to you.' },
+    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'Make Watchdog yours.', copy:'A few quick answers help Watchdog prioritize the property signals, workflows and intelligence that matter most to you.' },
     {
       id:'persona', kind:'single', eyebrow:'START HERE', title:'How will you use Watchdog?', required:true,
       options:[
@@ -107,7 +118,7 @@
       options:[choice('lead_prioritization','Prioritize opportunities'),choice('client_briefs','Build client briefs'),choice('property_change','Catch meaningful property changes'),choice('tax_assessment','Assessment / tax analysis'),choice('listing_prep','Listing preparation'),choice('buyer_diligence','Buyer due diligence'),choice('portfolio_monitoring','Portfolio monitoring'),choice('workflow_automation','Reduce repetitive research')]
     },
     { id:'time_horizon', kind:'single', eyebrow:'TIMING', title:'When do you expect Watchdog to be most useful?', required:true, options:[choice('now','Right now'),choice('0_3_months','Next 3 months'),choice('3_6_months','3–6 months'),choice('6_12_months','6–12 months'),choice('12_plus_months','More than a year'),choice('researching','I’m exploring')] },
-    { id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready to take shape.', copy:'We’ll use the context you confirmed to organize your experience. Property facts and Watchdog scores still come only from governed data and evidence.' }
+    { id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready.', copy:'We’ll use the context you confirmed to organize your experience. Property facts and Watchdog scores still come only from governed data and evidence.' }
   ];
 
   function activeSteps() {
@@ -146,6 +157,7 @@
   }
 
   function render() {
+    setMode('onboarding');
     visibleSteps = activeSteps();
     if (stepIndex >= visibleSteps.length) stepIndex = visibleSteps.length - 1;
     var step = visibleSteps[stepIndex];
@@ -270,16 +282,33 @@
     }
   }
 
+  function providerIcon(provider) {
+    var icon = 'fa-circle-user';
+    var family = 'fas';
+    if (provider === 'google') { family = 'fab'; icon = 'fa-google'; }
+    else if (provider === 'facebook') { family = 'fab'; icon = 'fa-facebook-f'; }
+    else if (provider === 'linkedin_oidc') { family = 'fab'; icon = 'fa-linkedin-in'; }
+    else if (provider === 'apple') { family = 'fab'; icon = 'fa-apple'; }
+    return '<span class="wd-auth-icon ' + esc(provider) + '" aria-hidden="true"><i class="' + family + ' ' + icon + '"></i></span>';
+  }
+
   function providerScreen() {
+    setMode('auth');
     var auth = window.WatchdogAuth;
     var providers = auth && auth.providers ? auth.providers : { google:{ label:'Google', enabled:true } };
     var buttons = Object.keys(providers).filter(function (key) { return providers[key] && providers[key].enabled; }).map(function (key) {
       var p = providers[key];
-      return '<button class="wd-auth-provider" type="button" data-provider="' + esc(key) + '"><span class="wd-auth-icon">' + esc((p.label || key).charAt(0)) + '</span>Continue with ' + esc(p.label || key) + '</button>';
+      return '<button class="wd-auth-provider" type="button" data-provider="' + esc(key) + '">' +
+        providerIcon(key) + '<span class="wd-auth-provider-label">Continue with ' + esc(p.label || key) + '</span><span class="wd-auth-arrow" aria-hidden="true"><i class="fas fa-arrow-right"></i></span></button>';
     }).join('');
     root.className = 'wd-onboarding-stage';
+    root.setAttribute('aria-busy','false');
     progress.style.width = '4%';
-    root.innerHTML = '<p class="wd-onboarding-step">WATCHDOG ACCOUNT</p><h1>Sign in to begin.</h1><p class="wd-onboarding-copy">Your Watchdog setup starts immediately after secure sign in.</p><div class="wd-auth-panel">' + buttons + '</div>';
+    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">YOUR WATCHDOG</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Keep your properties in one place, watch their tax and property data, and see what changes.</p></div>' +
+      '<div class="wd-auth-panel">' + buttons + '</div>' +
+      '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-sparkles"></i> Personalized intelligence</span></div>' +
+      '<p class="wd-auth-reassurance"><strong>Free. No card required.</strong> Property search stays free without an account.</p>' +
+      '<a class="wd-auth-return" href="/property/"><i class="fas fa-arrow-left"></i> Keep searching without an account</a>';
     root.querySelectorAll('[data-provider]').forEach(function (button) {
       button.addEventListener('click', function () {
         var provider = button.getAttribute('data-provider');
@@ -302,6 +331,7 @@
       if (state && state.completed) { location.replace(nextPath()); return; }
       render();
     } catch (error) {
+      setMode('onboarding');
       root.className = 'wd-onboarding-stage';
       root.innerHTML = '<p class="wd-onboarding-step">WATCHDOG</p><h2>We couldn’t load setup.</h2><p class="wd-onboarding-copy">Refresh the page to try again.</p><div class="wd-onboarding-error is-visible">' + esc(error && error.message || 'Unknown setup error') + '</div>';
     }
