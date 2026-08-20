@@ -7,8 +7,9 @@
   "main": "index.js",
   "engines": { "node": ">=22" },
   "scripts": {
-    "test": "zapier-platform test",
-    "validate": "zapier-platform validate"
+    "test": "node --test test/*.test.js",
+    "validate": "zapier-platform validate",
+    "verify": "npm test && npm run validate"
   },
   "dependencies": {
     "zapier-platform-core": "18.5.1"
