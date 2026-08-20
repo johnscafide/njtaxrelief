@@ -70,6 +70,13 @@ def pct_share(part, whole):
     return round(p / w * 100, 2)
 
 
+def percent_cell(value):
+    x = num(value)
+    if x is None:
+        return None
+    return round(x * 100 if abs(x) <= 1 else x, 2)
+
+
 def rounded(value, digits=2):
     x = num(value)
     return None if x is None else round(x, digits)
@@ -197,7 +204,7 @@ def main():
             "vacancy_rate": pct_share(vacant, housing),
             "median_gross_rent": rounded(row[c["rent_current"]], 0),
             "median_home_value": rounded(row[c["home_value_current"]], 0),
-            "housing_cost_burden_share": rounded(row[c["housing_cost_burden_current"]], 2),
+            "housing_cost_burden_share": percent_cell(row[c["housing_cost_burden_current"]]),
             "household_growth": pct_change(row[c["households_2000"]], row[c["households_current"]]),
         }
         out[district] = record
@@ -231,7 +238,7 @@ def main():
             "vacancy_rate": "vacant units divided by housing units, percent",
             "median_gross_rent": "2020-24 median gross rent, dollars",
             "median_home_value": "2020-24 median home value, dollars",
-            "housing_cost_burden_share": "2020-24 percent of households housing cost-burdened",
+            "housing_cost_burden_share": "2020-24 percent of households housing cost-burdened; workbook percentage cells normalized to 0-100",
             "household_growth": "percent change: 2000 households to 2020-24 estimate",
         },
         "excluded_catalog_fields": {
