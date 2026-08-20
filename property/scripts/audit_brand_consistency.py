@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Audit Watchdog /property surfaces against the authoritative brand system.
 
-This is intentionally a reporting tool first. Existing legacy debt is surfaced as
-warnings so CI can establish a baseline without making unrelated pages undeployable.
-Use --strict to make critical contract violations fail the process.
+The audit distinguishes raw design debt from effective current-shell defects.
+Historical declarations and documentation can remain measurable debt without
+being reported as live structural warnings when the canonical layer explicitly
+neutralizes them. Use --strict to fail critical current-shell contract breaks.
 """
 
 from __future__ import annotations
@@ -63,6 +64,20 @@ DATA_PAGE_RE = re.compile(r"data-sidebar-page=[\"']([^\"']+)[\"']", re.I)
 LEGACY_PARTIAL = "/property/partials/sidemenu.html"
 LEGACY_CLASS_RE = re.compile(r"(?:class=[\"'][^\"']*\bdb-sidebar\b|\.db-sidebar\b)", re.I)
 BAD_BRAND_RE = re.compile(r"\b(?:WatchDog|Watch Dog)\b")
+LEGACY_FETCH_RE = re.compile(
+    r"fetch\s*\(\s*[\"']" + re.escape(LEGACY_PARTIAL) + r"[\"']",
+    re.I,
+)
+
+# These files intentionally name the retired path so they can migrate or police it.
+# Their behavior is separately verified as a current-shell contract below.
+LEGACY_REFERENCE_GUARDRAILS = {
+    "property/branding/brand-center.js",
+    "property/branding/index.html",
+    "property/scripts/audit_access_boundaries.mjs",
+    "property/scripts/audit_brand_consistency.py",
+    "property/branding/LLM-BRAND-GUIDE.md",
+}
 
 
 @dataclass
@@ -120,7 +135,6 @@ def main() -> int:
     html_files = files_with({".html"})
     css_files = files_with({".css"})
     js_files = files_with({".js", ".mjs"})
-    text_files = files_with(TEXT_EXTENSIONS)
 
     font_counts: Counter[float] = Counter()
     font_files: defaultdict[str, Counter[float]] = defaultdict(Counter)
@@ -178,8 +192,9 @@ def main() -> int:
     sidemenu = PROPERTY / "js" / "sidemenu.js"
     runtime = PROPERTY / "js" / "brand-consistency-runtime.js"
     consistency_css = PROPERTY / "css" / "brand-consistency.css"
+    brand_center = PROPERTY / "branding" / "brand-center.js"
 
-    for required in (dashboard, home, sidemenu, runtime, consistency_css):
+    for required in (dashboard, home, sidemenu, runtime, consistency_css, brand_center):
         if not required.exists():
             findings.append(Finding("critical", relative(required), "Required current-shell consistency asset is missing."))
 
@@ -187,34 +202,72 @@ def main() -> int:
         findings.append(Finding("critical", relative(dashboard), "Dashboard does not load the canonical brand consistency runtime."))
     if home.exists() and "/property/js/brand-consistency-runtime.js" not in read_text(home):
         findings.append(Finding("critical", relative(home), "Property Home does not load the canonical brand consistency runtime."))
+
     if sidemenu.exists():
         sidemenu_text = read_text(sidemenu)
-        if LEGACY_PARTIAL in sidemenu_text:
+        if LEGACY_FETCH_RE.search(sidemenu_text):
             findings.append(Finding("critical", relative(sidemenu), "Legacy vertical sidenav fetch was reintroduced."))
         if "/property/js/brand-consistency-runtime.js" not in sidemenu_text:
             findings.append(Finding("critical", relative(sidemenu), "Secondary-shell loader is not connected to canonical brand consistency runtime."))
 
-    if runtime.exists():
-        runtime_text = read_text(runtime)
+    runtime_text = read_text(runtime) if runtime.exists() else ""
+    if runtime_text:
         for label in CANONICAL_NAV:
             if label not in runtime_text:
                 findings.append(Finding("critical", relative(runtime), f"Canonical navigation label missing: {label}"))
 
-    # Legacy references outside the deliberately retired partial are actionable warnings.
+    consistency_text = read_text(consistency_css) if consistency_css.exists() else ""
+    brand_center_text = read_text(brand_center) if brand_center.exists() else ""
+
+    # Machine-readable authority must point at the live current-shell stack.
+    implementation = brand.get("implementation", {}) if isinstance(brand, dict) else {}
+    expected_implementation = {
+        "canonical_shared_reference": "/property/css/brand-consistency.css",
+        "brand_runtime": "/property/js/brand-consistency-runtime.js",
+        "sidebar": "/property/js/sidemenu.js",
+    }
+    for key, expected in expected_implementation.items():
+        actual = implementation.get(key) if isinstance(implementation, dict) else None
+        if actual != expected:
+            findings.append(Finding("critical", relative(BRAND_JSON), f"implementation.{key} must be {expected}; found {actual!r}."))
+
+    # The visual Brand Center may contain a pre-sync legacy anchor in static HTML,
+    # but only while its runtime rewrites those references from the machine spec.
+    if brand_center_text:
+        if "syncCurrentReferences(spec)" not in brand_center_text:
+            findings.append(Finding("critical", relative(brand_center), "Brand Center no longer synchronizes visible implementation references from brand-system.json."))
+        if "implementation.sidebar || '/property/js/sidemenu.js'" not in brand_center_text:
+            findings.append(Finding("critical", relative(brand_center), "Brand Center navigation migration is not anchored to the current sidemenu.js loader."))
+
+    # Legacy references are warnings only when they exist in executable/content paths
+    # without a documented guardrail. Auditors, migration shims, and retired docs are
+    # expected to name the prohibited path so they can detect or explain it.
     for rel in sorted(set(legacy_partial_refs)):
-        if rel != "property/partials/sidemenu.html":
-            findings.append(Finding("warning", rel, "References the retired /property/partials/sidemenu.html navigation."))
+        if rel == "property/partials/sidemenu.html" or rel in LEGACY_REFERENCE_GUARDRAILS:
+            continue
+        findings.append(Finding("warning", rel, "References the retired /property/partials/sidemenu.html navigation without a documented migration/guardrail role."))
+
     for rel in sorted(set(legacy_sidebar_refs)):
         if rel != "property/partials/sidemenu.html":
             findings.append(Finding("warning", rel, "Contains legacy .db-sidebar markup or CSS; confirm it is not rendered."))
 
+    # Playfair remains measurable raw debt, but do not call the known shared
+    # preapproval heading a live app defect when the canonical current-shell layer
+    # explicitly replaces it with Plus Jakarta Sans.
+    preapproval_override = bool(
+        consistency_text
+        and ".pre-body h3" in consistency_text
+        and 'font-family:"Plus Jakarta Sans",Inter,sans-serif!important' in consistency_text
+    )
     for rel in sorted(playfair_app_files):
-        findings.append(Finding("warning", rel, "Playfair Display appears in an app/data surface; product UI should use Plus Jakarta Sans + Inter."))
+        if rel == "property/css/shared/03-dashboard-components.css" and preapproval_override:
+            continue
+        findings.append(Finding("warning", rel, "Playfair Display can render in an app/data surface; product UI should use Plus Jakarta Sans + Inter."))
 
     for rel in sorted(set(bad_brand_files)):
         findings.append(Finding("warning", rel, "Non-canonical Watchdog casing found (WatchDog/Watch Dog)."))
 
-    # Machine-readable authority sanity checks.
+    # Machine-readable typography authority sanity checks.
     try:
         typography = brand.get("typography", {}).get("canonical_product", {})
         if typography.get("display", {}).get("family") != "Plus Jakarta Sans":
@@ -261,7 +314,7 @@ def main() -> int:
 
     lines.extend(["", "## Findings", ""])
     if not findings:
-        lines.append("No critical or structural warning findings.")
+        lines.append("No critical or effective structural warning findings.")
     else:
         for finding in findings:
             badge = "CRITICAL" if finding.level == "critical" else "WARN"
@@ -287,16 +340,16 @@ def main() -> int:
         lines.append(f"- `{rel}` → `{page}`")
 
     lines.extend(["", "## Interpretation", ""])
-    lines.append("The font-size totals are debt metrics, not automatic defects. Existing editorial exceptions and compact brand descriptors may legitimately be smaller. Product/app surfaces should treat 12px as the normal readability floor and use the authoritative brand system for new work.")
+    lines.append("Raw font-size and legacy-font totals are debt metrics, not automatic rendered defects. Existing editorial exceptions, compact brand descriptors, migration shims, and historical CSS remain visible in the debt tables. Structural findings are reserved for current-shell contracts or source paths that can affect the effective user experience.")
     lines.append("")
-    lines.append(f"Critical findings: **{len(critical)}**. Structural warnings: **{len(warnings)}**.")
+    lines.append(f"Critical findings: **{len(critical)}**. Effective structural warnings: **{len(warnings)}**.")
     lines.append("")
 
     report.write_text("\n".join(lines), encoding="utf-8")
 
     print(f"Scanned {len(html_files)} HTML, {len(css_files)} CSS, {len(js_files)} JS files under property/")
     print(f"font-size <12px: {below_12}; <10px: {below_10}; distinct px sizes: {len(distinct_sizes)}")
-    print(f"critical: {len(critical)}; warnings: {len(warnings)}")
+    print(f"critical: {len(critical)}; effective warnings: {len(warnings)}")
     print(f"report: {report.relative_to(ROOT) if report.is_relative_to(ROOT) else report}")
 
     if args.strict and critical:

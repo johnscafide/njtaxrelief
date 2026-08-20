@@ -73,6 +73,50 @@
     });
   }
 
+  function syncCurrentReferences(spec){
+    var implementation = spec && spec.implementation ? spec.implementation : {};
+    var retiredNav = '/property/partials/sidemenu.html';
+    var currentNav = implementation.sidebar || '/property/js/sidemenu.js';
+    var consistencyCss = implementation.canonical_shared_reference || '/property/css/brand-consistency.css';
+    var brandRuntime = implementation.brand_runtime || '/property/js/brand-consistency-runtime.js';
+
+    $$('code,.bc-asset span,.bc-asset a').forEach(function(node){
+      if (node.textContent && node.textContent.trim() === retiredNav) node.textContent = currentNav;
+    });
+    $$('a[href="'+retiredNav+'"]').forEach(function(link){ link.setAttribute('href', currentNav); });
+    $$('.bc-rule-list li span').forEach(function(node){
+      if (!node.textContent || node.textContent.indexOf(retiredNav) < 0) return;
+      node.textContent = node.textContent.replace(retiredNav, currentNav).replace('owns shared signed-in navigation', 'routes shared signed-in navigation into the current app shell');
+    });
+
+    var sharedRef = $('.bc-asset b');
+    if (sharedRef && !document.querySelector('[data-bc-current-layer]')) {
+      var list = $('.bc-asset-list');
+      if (list) {
+        var row = document.createElement('div');
+        row.className = 'bc-asset';
+        row.setAttribute('data-bc-current-layer','');
+        row.innerHTML = '<span class="bc-asset-icon"><i class="fas fa-palette"></i></span><div><b>Canonical app consistency layer</b><span></span></div><a>Open</a>';
+        row.querySelector('span span, div span');
+        var pathNode = row.querySelector('div span');
+        var link = row.querySelector('a');
+        if (pathNode) pathNode.textContent = consistencyCss;
+        if (link) link.setAttribute('href', consistencyCss);
+        list.insertBefore(row, list.firstChild);
+
+        var runtimeRow = document.createElement('div');
+        runtimeRow.className = 'bc-asset';
+        runtimeRow.setAttribute('data-bc-current-layer','runtime');
+        runtimeRow.innerHTML = '<span class="bc-asset-icon"><i class="fas fa-arrows-rotate"></i></span><div><b>Canonical brand/navigation runtime</b><span></span></div><a>Open</a>';
+        var runtimePath = runtimeRow.querySelector('div span');
+        var runtimeLink = runtimeRow.querySelector('a');
+        if (runtimePath) runtimePath.textContent = brandRuntime;
+        if (runtimeLink) runtimeLink.setAttribute('href', brandRuntime);
+        list.insertBefore(runtimeRow, row.nextSibling);
+      }
+    }
+  }
+
   function loadMachineSpec(){
     var state = $('#bc-machine-state');
     return fetch('/property/branding/brand-system.json', {cache:'no-store'}).then(function(response){
@@ -86,7 +130,8 @@
       var version = $('#bc-version');
       var updated = $('#bc-updated');
       if (version && spec.metadata) version.textContent = 'v' + (spec.metadata.version || '1.0.0');
-      if (updated && spec.metadata) updated.textContent = spec.metadata.updated || '2026-08-19';
+      if (updated && spec.metadata) updated.textContent = spec.metadata.updated || '2026-08-20';
+      syncCurrentReferences(spec);
       window.WatchdogBrandSystem = spec;
       return spec;
     }).catch(function(error){
