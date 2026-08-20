@@ -2,7 +2,7 @@ const { api } = require('../common');
 module.exports = {
   key: 'get_property_snapshot',
   noun: 'Property Snapshot',
-  display: { label: 'Get Governed Property Snapshot', description: 'Gets Watchdog-governed property facts and the latest Watchdog Score without owner/person data.' },
+  display: { label: 'Find Governed Property Snapshot', description: 'Finds Watchdog-governed property facts and the latest Watchdog Score without owner/person data.' },
   operation: {
     inputFields: [{ key: 'pams_pin', label: 'PAMS PIN', type: 'string', required: true }],
     perform: async (z, bundle) => [await api(z, bundle, 'property.snapshot', bundle.inputData)],
