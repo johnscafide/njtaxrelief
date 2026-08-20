@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-20T23:48:49.345Z",
+  "generated_at": "2026-08-20T23:51:06.847Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -49,6 +49,7 @@
     "modiv_intel.vacant_parcel_share_pct",
     "uniformity.score",
     "watchdog.agent.client_brief_completeness",
+    "watchdog.agent.offer_question_density",
     "watchdog.appeal_evidence_strength",
     "watchdog.appeal_opportunity_index",
     "watchdog.appraisal_record_completeness",
@@ -58,6 +59,8 @@
     "watchdog.assessment_surprise_index",
     "watchdog.assessment_to_sale_ratio",
     "watchdog.attorney.appeal_evidence_gap",
+    "watchdog.attorney.land_use_exception_stack",
+    "watchdog.attorney.public_notice_density",
     "watchdog.building_age_years",
     "watchdog.buyer_objection_radar",
     "watchdog.buyer_tax_reset_exposure",
@@ -67,10 +70,13 @@
     "watchdog.closing_exception_priority",
     "watchdog.collateral_tax_reset_sensitivity",
     "watchdog.comparable_evidence_reliability",
+    "watchdog.constraint_stack_count",
     "watchdog.consumer.home_cost_clarity",
     "watchdog.consumer.ownership_record_confidence",
     "watchdog.consumer.public_record_completeness",
     "watchdog.contractor.construction_record_gap",
+    "watchdog.contractor.preconstruction_question_set",
+    "watchdog.contractor.site_preflight_completeness",
     "watchdog.development_constraint_density",
     "watchdog.due_diligence_signal_count",
     "watchdog.effective_tax_rate",
@@ -80,6 +86,8 @@
     "watchdog.flood_environment_risk_score",
     "watchdog.improvement_ratio",
     "watchdog.improvement_share_pct",
+    "watchdog.insurance.mapped_hazard_overlap",
+    "watchdog.insurance.physical_record_coverage",
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor_carry_cost_volatility",
     "watchdog.land_share_pct",
@@ -89,6 +97,7 @@
     "watchdog.listing_friction_index",
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
+    "watchdog.municipal.municipal_source_coverage",
     "watchdog.municipal_cost_absorption_score",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
@@ -96,6 +105,8 @@
     "watchdog.njplus.environmental_record_resolution",
     "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
+    "watchdog.njplus.municipal_housing_evidence_depth",
+    "watchdog.njplus.neighborhood_trend_freshness",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -114,8 +125,10 @@
     "watchdog.tax_pressure",
     "watchdog.tax_to_assessment_rate",
     "watchdog.tax_trend_position",
+    "watchdog.title.municipal_search_scope",
     "watchdog.title.parcel_match_variance",
     "watchdog.title.recording_reference_completeness",
+    "watchdog.title.title_land_constraint_mix",
     "watchdog.title_constraint_stack",
     "watchdog.transaction_diligence_completion",
     "watchdog.transaction_tax_shock_index",
@@ -166,6 +179,7 @@
     "modiv_intel.vacant_parcel_share_pct",
     "uniformity.score",
     "watchdog.agent.client_brief_completeness",
+    "watchdog.agent.offer_question_density",
     "watchdog.appeal_evidence_strength",
     "watchdog.appeal_opportunity_index",
     "watchdog.appraisal_record_completeness",
@@ -175,6 +189,8 @@
     "watchdog.assessment_surprise_index",
     "watchdog.assessment_to_sale_ratio",
     "watchdog.attorney.appeal_evidence_gap",
+    "watchdog.attorney.land_use_exception_stack",
+    "watchdog.attorney.public_notice_density",
     "watchdog.building_age_years",
     "watchdog.buyer_objection_radar",
     "watchdog.buyer_tax_reset_exposure",
@@ -184,10 +200,13 @@
     "watchdog.closing_exception_priority",
     "watchdog.collateral_tax_reset_sensitivity",
     "watchdog.comparable_evidence_reliability",
+    "watchdog.constraint_stack_count",
     "watchdog.consumer.home_cost_clarity",
     "watchdog.consumer.ownership_record_confidence",
     "watchdog.consumer.public_record_completeness",
     "watchdog.contractor.construction_record_gap",
+    "watchdog.contractor.preconstruction_question_set",
+    "watchdog.contractor.site_preflight_completeness",
     "watchdog.development_constraint_density",
     "watchdog.due_diligence_signal_count",
     "watchdog.effective_tax_rate",
@@ -197,6 +216,8 @@
     "watchdog.flood_environment_risk_score",
     "watchdog.improvement_ratio",
     "watchdog.improvement_share_pct",
+    "watchdog.insurance.mapped_hazard_overlap",
+    "watchdog.insurance.physical_record_coverage",
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor_carry_cost_volatility",
     "watchdog.land_share_pct",
@@ -206,6 +227,7 @@
     "watchdog.listing_friction_index",
     "watchdog.market_value_estimate",
     "watchdog.marketability_drag_index",
+    "watchdog.municipal.municipal_source_coverage",
     "watchdog.municipal_cost_absorption_score",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
@@ -213,6 +235,8 @@
     "watchdog.njplus.environmental_record_resolution",
     "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
+    "watchdog.njplus.municipal_housing_evidence_depth",
+    "watchdog.njplus.neighborhood_trend_freshness",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -231,8 +255,10 @@
     "watchdog.tax_pressure",
     "watchdog.tax_to_assessment_rate",
     "watchdog.tax_trend_position",
+    "watchdog.title.municipal_search_scope",
     "watchdog.title.parcel_match_variance",
     "watchdog.title.recording_reference_completeness",
+    "watchdog.title.title_land_constraint_mix",
     "watchdog.title_constraint_stack",
     "watchdog.transaction_diligence_completion",
     "watchdog.transaction_tax_shock_index",
@@ -242,8 +268,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 115,
-    "blocked": 183,
+    "live": 128,
+    "blocked": 170,
     "retired": 0,
     "untriaged": 0
   },
@@ -1317,14 +1343,14 @@
         "contractor",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Development-constraint stack count",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.investor_carry_cost_volatility",
@@ -2686,14 +2712,14 @@
       "professions": [
         "attorney"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(wetlands, historic, open_space, tidelands, highlands, pinelands)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.attorney.closing_record_aging",
@@ -2754,14 +2780,14 @@
       "professions": [
         "attorney"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(deed_notice, CEA, historic, open_space, tidelands)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.attorney.case_file_source_freshness",
@@ -2839,14 +2865,14 @@
       "professions": [
         "title"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(tidelands, open_space, historic, wetlands_LOI)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.title.recording_reference_completeness",
@@ -2941,14 +2967,14 @@
       "professions": [
         "title"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "coverage(municipal_search_items, parcel_context)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.agent.listing_tax_talking_point",
@@ -3009,14 +3035,14 @@
       "professions": [
         "agent"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(permit, flood, environmental, title questions)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.agent.seller_tax_story_stability",
@@ -3468,14 +3494,14 @@
       "professions": [
         "contractor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "present(site_constraint_fields) / required_site_fields * 100",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.contractor.permit_sequence_clarity",
@@ -3587,14 +3613,14 @@
       "professions": [
         "contractor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(water, geology, wetlands, historic, permit questions)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.contractor.development_timeline_uncertainty",
@@ -3944,14 +3970,14 @@
       "professions": [
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "present(municipal_source_fields) / required_municipal_fields * 100",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.municipal.fiscal_monitor_priority",
@@ -3978,14 +4004,14 @@
       "professions": [
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "count(flood, wetlands, contaminated, geology, water_protection)",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.insurance.flood_evidence_freshness",
@@ -4080,14 +4106,14 @@
       "professions": [
         "insurance"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "present(physical_risk_fields) / required_risk_fields * 100",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.insurance.site_review_escalation",
@@ -4509,16 +4535,16 @@
         "municipal",
         "attorney"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "coverage(profile_fields)",
       "dependencies": [
         "nj-dca-municipal-housing-profile"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.affordable_supply_coverage",
@@ -5081,16 +5107,16 @@
         "municipal",
         "attorney"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "age(neighborhood_trend_year)",
       "dependencies": [
         "nj-dca-neighborhood-trends"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.environmental_record_resolution",

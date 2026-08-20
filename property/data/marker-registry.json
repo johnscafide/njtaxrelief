@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-20T23:48:49.343Z",
+ "generated_at": "2026-08-20T23:51:06.845Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 487,
+   "live": 500,
    "partial": 4,
    "unavailable": 11,
-   "planned": 232
+   "planned": 219
   },
   "retired_phase5": 0
  },
@@ -7406,8 +7406,8 @@
    ],
    "source_id": "watchdog-professional",
    "field": "constraint_stack_count",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10359,8 +10359,8 @@
    "professional_reason": "Identifies overlapping mapped land-use programs for counsel review.",
    "formula": "count(wetlands, historic, open_space, tidelands, highlands, pinelands)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10443,8 +10443,8 @@
    "professional_reason": "Counts distinct public notice types, not legal encumbrances.",
    "formula": "count(deed_notice, CEA, historic, open_space, tidelands)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10548,8 +10548,8 @@
    "professional_reason": "Makes the types of mapped public constraints scannable.",
    "formula": "count(tidelands, open_space, historic, wetlands_LOI)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10674,8 +10674,8 @@
    "professional_reason": "Shows the breadth of public municipal-search items reviewed.",
    "formula": "coverage(municipal_search_items, parcel_context)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -10758,8 +10758,8 @@
    "professional_reason": "Counts pre-offer diligence questions—not defects or deal outcomes.",
    "formula": "count(permit, flood, environmental, title questions)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -11325,8 +11325,8 @@
    "professional_reason": "Shows whether public site-screening inputs are complete before design spend.",
    "formula": "present(site_constraint_fields) / required_site_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -11472,8 +11472,8 @@
    "professional_reason": "Counts public diligence questions before work begins.",
    "formula": "count(water, geology, wetlands, historic, permit questions)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -11913,8 +11913,8 @@
    "professional_reason": "Shows how much of a municipal snapshot has published support.",
    "formula": "present(municipal_source_fields) / required_municipal_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -11955,8 +11955,8 @@
    "professional_reason": "Counts distinct public mapping contexts; it is not an insurance eligibility decision.",
    "formula": "count(flood, wetlands, contaminated, geology, water_protection)",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12081,8 +12081,8 @@
    "professional_reason": "Shows completeness of public physical-risk inputs.",
    "formula": "present(physical_risk_fields) / required_risk_fields * 100",
    "unit": "score / 100",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13594,8 +13594,8 @@
    "dependencies": [
     "nj-dca-municipal-housing-profile"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15776,8 +15776,8 @@
    "dependencies": [
     "nj-dca-neighborhood-trends"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
