@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 const proof = fs.readFileSync('supabase/migrations/20260820130218_integration_proof_reference_contract.sql','utf8');
 const fix = fs.readFileSync('supabase/migrations/20260820133715_integration_proof_reference_pgcrypto_schema_fix.sql','utf8');
 const passport = fs.readFileSync('supabase/migrations/20260820134053_integration_property_passport_prototype.sql','utf8');
+const proofIndex = fs.readFileSync('supabase/migrations/20260820134300_integration_proof_reference_proof_id_index.sql','utf8');
 const doc = fs.readFileSync('property/docs/integrations/PROPERTY-PASSPORT-RD.md','utf8');
 
 function has(text, needle, label){ assert.ok(text.includes(needle), label); }
@@ -15,6 +16,8 @@ has(proof, 'alter table public.integration_automation_proof_references enable ro
 has(proof, 'revoke all on public.integration_automation_proof_references from anon,authenticated', 'browser roles must not receive direct proof-reference table access');
 has(proof, "'execution_allowed',false", 'proof references must not authorize execution');
 has(proof, 'user_id=v_user', 'proof reconstruction must remain user scoped');
+has(proofIndex, 'integration_automation_proof_refs_proof_id_idx', 'proof-reference foreign key must have a covering index');
+has(proofIndex, 'integration_automation_proof_references(proof_id)', 'proof-reference proof_id index must cover the foreign key');
 
 has(fix, "extensions.digest(convert_to(v_proof.envelope::text,'UTF8'),'sha256')", 'pgcrypto digest must be explicitly schema-qualified');
 assert.ok(!fix.includes('set search_path=public,private,extensions'), 'do not broaden SECURITY DEFINER search path merely for pgcrypto');
