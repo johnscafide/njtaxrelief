@@ -28,7 +28,7 @@
 ### Searches
 
 1. Find Property
-2. Get Governed Property Snapshot
+2. Find Governed Property Snapshot
 
 ### Actions
 
@@ -36,6 +36,22 @@
 2. Remove Property from Watchlist
 3. Send CRM Context to Watchdog
 4. Run Watchdog Intelligence for Property
+
+## Engineering preflight completed
+
+Completed in-repository before Zapier-side certification:
+
+- [x] Connector version pinned to `1.1.0`.
+- [x] Node runtime requirement pinned to Node 22+ and Zapier CLI/core pinned to `18.5.1`.
+- [x] Removed the recursive `npm test -> zapier-platform test -> npm test` configuration. `npm test` now runs Node's built-in test runner directly.
+- [x] Added publication contract tests for the 4 trigger / 2 search / 4 action catalog, API-key auth boundary, REST Hook lifecycle, output-key uniqueness and trigger sample/output parity.
+- [x] Added `.github/workflows/zapier-connector-contract.yml` as a dedicated Node 22 test/validation gate.
+- [x] Replaced the generic REST Hook output-field union with event-specific schemas for all four instant triggers.
+- [x] Matched static trigger samples to the current production Watchdog event generator contracts.
+- [x] Renamed the second search display label to `Find Governed Property Snapshot` to follow Zapier search naming guidance without changing its stable internal key.
+- [x] Updated the public Watchdog Zapier support guide to use the same search name.
+
+These checks reduce publication risk, but they do not substitute for Zapier's own validation, live-Zap history checks, user-demand checks, or App Directory review.
 
 ## Launch copy
 
@@ -77,28 +93,62 @@ Never ask a customer to email a Watchdog API key to support.
 | Trigger | Report Ready | ☐ | ☐ | ☐ | |
 | Trigger | Intelligence Finding Created | ☐ | ☐ | ☐ | Requires Intelligence read permission |
 | Search | Find Property | ☐ | ☐ | ☐ | |
-| Search | Get Governed Property Snapshot | ☐ | ☐ | ☐ | |
+| Search | Find Governed Property Snapshot | ☐ | ☐ | ☐ | |
 | Action | Add Property to Watchlist | ☐ | ☐ | ☐ | |
 | Action | Remove Property from Watchlist | ☐ | ☐ | ☐ | |
 | Action | Send CRM Context to Watchdog | ☐ | ☐ | ☐ | Context is non-authoritative |
 | Action | Run Watchdog Intelligence for Property | ☐ | ☐ | ☐ | Requires Intelligence run permission |
 
-## Developer Platform gate
+## Closure gates — remaining before NJW-233 can be Done
 
-- [ ] Authenticate Zapier Platform CLI in the developer environment.
+### A. Zapier Developer Platform
+
+- [ ] Authenticate the Zapier Platform CLI in the developer environment.
 - [ ] Register or link the Watchdog integration.
-- [ ] Confirm Node/tooling versions required by the current connector.
-- [ ] Run connector tests.
-- [ ] Run connector validation.
-- [ ] Push version 1.1.0.
-- [ ] Confirm every public item is visible with intentional naming/help text.
-- [ ] Confirm sample data contract for all REST Hook triggers.
-- [ ] Confirm multiple REST Hook subscriptions can coexist and unsubscribe independently.
+- [ ] Run `zapier-platform test` against the linked integration environment.
+- [ ] Run Zapier's current validation/publishing checks and clear all blocking Errors and Publishing Tasks.
+- [ ] Push connector version `1.1.0`.
+- [ ] Confirm every public trigger/search/action appears with the intended label, help text, inputs and outputs in the Zap editor.
+
+### B. Live trigger certification
+
+- [ ] Confirm static/fallback samples are a subset of the corresponding live result shape.
+- [ ] Confirm live REST Hook result fields respect each trigger's output-field definition.
+- [ ] Confirm ISO-8601 dates in real Zap History runs.
+- [ ] Confirm multiple subscriptions for the same Watchdog account can coexist.
+- [ ] Confirm disabling one Zap unsubscribes only its own REST Hook subscription.
+- [ ] Confirm retry/delivery behavior does not create duplicate user-visible results.
+
+### C. Live Zap evidence for all 10 public surfaces
+
+- [ ] Turn on at least one live Zap for every visible trigger, search and action.
+- [ ] Produce and retain at least one successful Zap History run for every visible trigger, search and action.
 - [ ] Complete the live-Zap certification matrix above.
-- [ ] Prepare support/test credentials through the approved Watchdog account process.
-- [ ] Prepare app branding and listing metadata.
-- [ ] Recruit beta users required for publication eligibility.
-- [ ] Submit when all external publication gates are satisfied.
+- [ ] Run permission-negative cases, especially `intelligence.read`, `intelligence.run`, revoked keys and insufficient plan access.
+- [ ] Preserve Watchdog event/job/delivery IDs alongside Zap History evidence for reviewability.
+
+### D. Publication/support package
+
+- [ ] Publish or finalize clear public API documentation covering the Watchdog API surfaces used by the integration.
+- [ ] Finalize support article, troubleshooting copy and account-connection instructions.
+- [ ] Create a non-expiring, fully functional Zapier review/demo account through the approved Watchdog account process.
+- [ ] Verify app name, category, description, homepage, logo, connection label and support ownership in Zapier.
+- [ ] Verify legal/publishing metadata and applicable Zapier Partner/Developer terms are accepted.
+- [ ] Remove `noindex` from the public Zapier help page when it is appropriate for public discovery.
+
+### E. Demand and external testing
+
+- [ ] Recruit at least three distinct users with live Zaps using the integration.
+- [ ] Confirm each qualifying live Zap has a recent successful run.
+- [ ] Gather beta feedback and correct any setup or field-mapping friction before submission.
+
+### F. Submission and closure
+
+- [ ] Submit Watchdog for Zapier for Zapier review when all blocking checks are clear.
+- [ ] Respond to any Zapier review findings without weakening Watchdog authorization, truth boundaries, plan limits or idempotency.
+- [ ] Only call the app publicly listed after Zapier actually approves/publishes it.
+- [ ] Update Watchdog public copy from private-beta/developer-preparation language when publication status changes.
+- [ ] Attach final certification evidence to NJW-233 and mark it Done only after the external publication gate has actually been reached or passed.
 
 ## Launch blockers that must not be papered over
 
