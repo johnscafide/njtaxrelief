@@ -1,20 +1,13 @@
 const { api } = require('../common');
 
-const outputFields = [
+const baseOutputFields = [
   { key: 'id', label: 'Event ID' },
   { key: 'event_type', label: 'Event Type' },
   { key: 'event_key', label: 'Event Key' },
   { key: 'occurred_at', label: 'Occurred At', type: 'datetime' },
-  { key: 'data__pams_pin', label: 'PAMS PIN' },
-  { key: 'data__property_address', label: 'Property Address' },
-  { key: 'data__title', label: 'Title' },
-  { key: 'data__summary', label: 'Summary' },
-  { key: 'data__severity', label: 'Severity' },
-  { key: 'data__score', label: 'Watchdog / Finding Score', type: 'number' },
-  { key: 'data__confidence', label: 'Confidence', type: 'number' },
 ];
 
-const makeRestHook = ({ key, noun, name, description, eventType, sample }) => ({
+const makeRestHook = ({ key, noun, name, description, eventType, sample, outputFields = [] }) => ({
   key,
   noun,
   display: {
@@ -37,7 +30,7 @@ const makeRestHook = ({ key, noun, name, description, eventType, sample }) => ({
       return result.items || [];
     },
     sample,
-    outputFields,
+    outputFields: [...baseOutputFields, ...outputFields],
   },
 });
 
