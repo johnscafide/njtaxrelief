@@ -104,6 +104,18 @@
   body.wdv2-mounted .wd4-map-legend b{font-size:11px}
   body.wdv2-mounted .wd4-map-legend i{width:9px;height:9px}
 
+  /* Agent Intel is a modal sheet on mobile; its dismiss control must be finger-safe. */
+  body.wdv2-mounted .mobile-intel-close,
+  body .mobile-intel-overlay .mobile-intel-close{
+    width:44px;
+    height:44px;
+    min-width:44px;
+    min-height:44px;
+    right:8px;
+    top:10px;
+    touch-action:manipulation;
+  }
+
   /* Add Property becomes a phone-native sheet instead of a desktop modal compressed into the viewport. */
   body.wdv2-mounted .wd7-add-modal{
     width:calc(100vw - 20px);
