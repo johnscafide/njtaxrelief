@@ -1,0 +1,61 @@
+name: One-shot DCA municipal housing exact source build
+
+on:
+  push:
+    branches: [agent/mhpd-neighborhood-exact-20260820]
+    paths:
+      - 'property/scripts/build_neighborhood_trends.py'
+      - '.github/workflows/one-shot-mhpd-neighborhood-build.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source dependencies
+        run: python -m pip install --disable-pip-version-check --quiet requests openpyxl
+      - name: Build governed DCA municipality artifact
+        run: python property/scripts/build_neighborhood_trends.py --output property/data/neighborhood-trends.json
+      - name: Validate exact housing compatibility contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=json.loads(Path('property/data/neighborhood-trends.json').read_text())
+          expected={
+            'housing_stock','owner_occupied_share','renter_occupied_share','vacancy_rate',
+            'median_gross_rent','median_home_value','housing_cost_burden_share','household_growth'
+          }
+          if p.get('schema_version') != 2:
+              raise SystemExit(f"expected schema_version=2, got {p.get('schema_version')}")
+          if p.get('municipalities_matched') != 564:
+              raise SystemExit(f"expected 564 municipalities, got {p.get('municipalities_matched')}")
+          fields=set((p.get('field_contract') or {}).keys())
+          if not expected <= fields:
+              raise SystemExit(f"missing field contracts: {sorted(expected-fields)}")
+          for district,row in (p.get('municipalities') or {}).items():
+              for field in expected:
+                  if field not in row:
+                      raise SystemExit(f"{district} missing {field}")
+          excluded=(p.get('municipal_housing_profile_compatibility') or {}).get('excluded_fields') or {}
+          if set(excluded) != {'eviction_rate','housing_production'}:
+              raise SystemExit(f"unexpected excluded MHP fields: {excluded}")
+          print('validated', p['municipalities_matched'], 'municipalities and', len(expected), 'exact/deterministic fields')
+          PY
+      - name: Commit source artifact and remove one-shot workflow
+        run: |
+          rm .github/workflows/one-shot-mhpd-neighborhood-build.yml
+          git config user.name 'Watchdog Source Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- property/data/neighborhood-trends.json .github/workflows/one-shot-mhpd-neighborhood-build.yml
+          git commit -m '[source-build] Add exact municipal housing compatibility fields'
+          git pull --rebase origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
