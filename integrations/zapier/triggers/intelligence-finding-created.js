@@ -1,9 +1,41 @@
 const makeRestHook = require('./rest-hook');
+
 module.exports = makeRestHook({
   key: 'intelligence_finding_created',
   noun: 'Intelligence Finding',
   name: 'Intelligence Finding Created',
   description: 'Triggers when Watchdog Intelligence creates a new governed finding.',
   eventType: 'intelligence.finding.created',
-  sample: { id: 'sample-finding', event_type: 'intelligence.finding.created', occurred_at: '2026-08-19T15:45:00Z', data: { finding_id: '00000000-0000-0000-0000-000000000002', pams_pin: 'sample-pin', property_address: '100 Sample Ave, Sample, NJ', opportunity_type: 'assessment_review', score: 82, confidence: 88, evidence_coverage: 91 } },
+  sample: {
+    id: 'sample-finding',
+    event_type: 'intelligence.finding.created',
+    event_key: 'intelligence_finding:sample-finding',
+    occurred_at: '2026-08-19T15:45:00Z',
+    data: {
+      finding_id: '00000000-0000-0000-0000-000000000002',
+      run_id: '00000000-0000-0000-0000-000000000005',
+      pams_pin: 'sample-pin',
+      property_address: '100 Sample Ave, Sample, NJ',
+      opportunity_type: 'assessment_review',
+      rank: 1,
+      score: 82,
+      confidence: 88,
+      evidence_coverage: 91,
+      narrative: 'The governed evidence supports a higher-priority assessment review.',
+      created_at: '2026-08-19T15:45:00Z',
+    },
+  },
+  outputFields: [
+    { key: 'data__finding_id', label: 'Finding ID' },
+    { key: 'data__run_id', label: 'Intelligence Run ID' },
+    { key: 'data__pams_pin', label: 'PAMS PIN' },
+    { key: 'data__property_address', label: 'Property Address' },
+    { key: 'data__opportunity_type', label: 'Opportunity Type' },
+    { key: 'data__rank', label: 'Finding Rank', type: 'integer' },
+    { key: 'data__score', label: 'Finding Score', type: 'number' },
+    { key: 'data__confidence', label: 'Confidence', type: 'number' },
+    { key: 'data__evidence_coverage', label: 'Evidence Coverage', type: 'number' },
+    { key: 'data__narrative', label: 'Finding Narrative' },
+    { key: 'data__created_at', label: 'Finding Created At', type: 'datetime' },
+  ],
 });
