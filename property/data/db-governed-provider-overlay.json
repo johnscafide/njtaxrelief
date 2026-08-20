@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-20T23:49:46.142462Z",
+  "captured_at": "2026-08-20T23:56:09.375751Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -51,6 +51,7 @@
     "njplus.njdep-csrr-gis.kcsl_program_interest": "live",
     "njplus.njdep-csrr-gis.kcsl_site_id": "live",
     "njplus.njdep-csrr-gis.ust_facility_reference": "live",
+    "uniformity.cod_2022": "live",
     "watchdog.agent.offer_question_density": "live",
     "watchdog.attorney.land_use_exception_stack": "live",
     "watchdog.attorney.public_notice_density": "live",
