@@ -1,0 +1,34 @@
+name: Integration Phase 9 Shadow Contract
+
+on:
+  push:
+    paths:
+      - 'supabase/migrations/20260819214600_integration_phase9_shadow_policy_foundation.sql'
+      - 'supabase/migrations/20260819222157_integration_phase9_evidence_relationship_proof.sql'
+      - 'supabase/migrations/20260820094603_integration_proof_explorer_outcomes_approvals.sql'
+      - 'property/js/integrations-shadow-lab.js'
+      - 'property/tests/integration-phase9-shadow-contract.mjs'
+      - '.github/workflows/integration-phase9-shadow-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/migrations/20260819214600_integration_phase9_shadow_policy_foundation.sql'
+      - 'supabase/migrations/20260819222157_integration_phase9_evidence_relationship_proof.sql'
+      - 'supabase/migrations/20260820094603_integration_proof_explorer_outcomes_approvals.sql'
+      - 'property/js/integrations-shadow-lab.js'
+      - 'property/tests/integration-phase9-shadow-contract.mjs'
+      - '.github/workflows/integration-phase9-shadow-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check Phase 9 shadow contract
+        run: node property/tests/integration-phase9-shadow-contract.mjs
