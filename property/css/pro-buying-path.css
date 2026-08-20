@@ -110,4 +110,102 @@
   .wd-pro-page .pro-fast-price a{gap:10px}
   .wd-pro-page .pro-fast-price strong{font-size:23px}
 }
+
+/* NJW-246 mobile certification — Run 020.
+   Preserve the Pro walkthrough and professional-role content, but stop rendering a
+   miniature desktop application on phones. These overrides remain mobile-only. */
+@media(max-width:720px){
+  .wd-pro-page .pro-story{padding-top:42px;padding-bottom:88px}
+  .wd-pro-page .pro-story-step{padding:48px 0;min-height:auto}
+  .wd-pro-page .pro-story-step>span{font-size:12px;line-height:1.25;letter-spacing:.07em}
+  .wd-pro-page .pro-story-step h3{font-size:clamp(32px,9vw,40px);line-height:1.02}
+  .wd-pro-page .pro-story-step p{font-size:16px;line-height:1.55}
+  .wd-pro-page .pro-app-shell{border-radius:20px;transform:none}
+  .wd-pro-page .pro-app-top{height:50px;grid-template-columns:minmax(0,1fr);padding:0 12px}
+  .wd-pro-page .pro-dots,.wd-pro-page .pro-app-top>b{display:none}
+  .wd-pro-page .pro-app-top>span{height:34px;padding:0 10px;font-size:12px;line-height:1.25;justify-content:flex-start;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .wd-pro-page .pro-app-tabs{height:auto;min-height:48px;justify-content:flex-start;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:6px 8px;gap:4px;-webkit-overflow-scrolling:touch}
+  .wd-pro-page .pro-app-tabs span{flex:0 0 auto;min-height:36px;display:flex;align-items:center;padding:8px 11px;font-size:12px;line-height:1.2;white-space:nowrap;scroll-snap-align:start}
+  .wd-pro-page .pro-screen-stack{height:500px}
+  .wd-pro-page .pro-stage-caption{gap:10px 16px;margin-top:14px;font-size:12px;line-height:1.35}
+
+  .wd-pro-page .mock-property{grid-template-columns:1fr}
+  .wd-pro-page .mock-property aside{display:none}
+  .wd-pro-page .mock-main{padding:18px}
+  .wd-pro-page .mock-title small{font-size:12px;line-height:1.2}
+  .wd-pro-page .mock-title strong{font-size:22px;line-height:1.15}
+  .wd-pro-page .mock-title em{font-size:13px;line-height:1.3}
+  .wd-pro-page .mock-hero-card{grid-template-columns:1fr;margin-top:16px;padding:16px}
+  .wd-pro-page .mock-house{display:none}
+  .wd-pro-page .mock-hero-card span{font-size:12px;line-height:1.2}
+  .wd-pro-page .mock-hero-card b{font-size:25px;line-height:1.1}
+  .wd-pro-page .mock-hero-card small{font-size:13px;line-height:1.35}
+  .wd-pro-page .mock-metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .wd-pro-page .mock-metrics>div{padding:13px 10px}
+  .wd-pro-page .mock-metrics span{font-size:11px;line-height:1.2}
+  .wd-pro-page .mock-metrics b{font-size:18px;line-height:1.15}
+
+  .wd-pro-page .mock-score{padding:24px;grid-template-columns:1fr;gap:18px;align-content:start}
+  .wd-pro-page .mock-score-ring{width:150px;height:150px;box-shadow:inset 0 0 0 16px #f7fafb}
+  .wd-pro-page .mock-score-ring strong{font-size:46px}
+  .wd-pro-page .mock-score-ring span{font-size:11px;line-height:1.2}
+  .wd-pro-page .mock-score-read small,.wd-pro-page .mock-watch-head small,.wd-pro-page .mock-research-head small{font-size:12px;line-height:1.2}
+  .wd-pro-page .mock-score-read h4{font-size:20px;line-height:1.18}
+  .wd-pro-page .mock-evidence{left:24px;right:24px;bottom:20px;gap:6px;flex-wrap:wrap}
+  .wd-pro-page .mock-evidence span{padding:8px 9px;font-size:12px;line-height:1.2}
+
+  .wd-pro-page .mock-watch,.wd-pro-page .mock-research{padding:22px}
+  .wd-pro-page .mock-watch-head strong,.wd-pro-page .mock-research-head strong{font-size:22px;line-height:1.15}
+  .wd-pro-page .mock-alert{grid-template-columns:44px minmax(0,1fr);gap:12px;padding:13px}
+  .wd-pro-page .mock-alert>i{width:44px;height:44px}
+  .wd-pro-page .mock-alert b{font-size:14px;line-height:1.25}
+  .wd-pro-page .mock-alert span{font-size:13px;line-height:1.3}
+  .wd-pro-page .mock-alert em{grid-column:2;font-size:11px;line-height:1.2}
+  .wd-pro-page .mock-file-grid{grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}
+  .wd-pro-page .mock-file-grid article{min-height:128px;padding:14px}
+  .wd-pro-page .mock-file-grid i{width:44px;height:44px}
+  .wd-pro-page .mock-file-grid b{font-size:14px;line-height:1.25}
+  .wd-pro-page .mock-file-grid span{font-size:12px;line-height:1.3}
+
+  .wd-pro-page .mock-action{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:22px;align-content:center}
+  .wd-pro-page .mock-action-line{display:none}
+  .wd-pro-page .mock-action-node{width:auto;height:110px;transform:none!important}
+  .wd-pro-page .mock-action-node span{width:32px;height:32px;font-size:12px}
+  .wd-pro-page .mock-action-node b{font-size:14px;line-height:1.2}
+  .wd-pro-page .mock-action-node small{font-size:12px;line-height:1.2}
+
+  /* Role tabs are useful on mobile, but five equal desktop columns are not. Keep the
+     switcher as a horizontally scrollable, snap-aligned tab row with real touch targets. */
+  .wd-pro-page .pro-role-switcher{padding:6px;border-radius:22px}
+  .wd-pro-page .pro-role-tabs{display:flex;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;gap:6px;padding:5px;-webkit-overflow-scrolling:touch}
+  .wd-pro-page .pro-role-tabs button{flex:0 0 auto;min-width:148px;min-height:48px;padding:0 14px;font-size:14px;line-height:1.25;scroll-snap-align:start;touch-action:manipulation}
+  .wd-pro-page .pro-role-panel{padding:22px 16px 18px;gap:26px}
+  .wd-pro-page .pro-role-copy>span{font-size:12px;line-height:1.2;letter-spacing:.08em}
+  .wd-pro-page .pro-role-copy h3{font-size:34px;line-height:1.03}
+  .wd-pro-page .pro-role-copy p{font-size:15px;line-height:1.55}
+  .wd-pro-page .pro-role-outcome{font-size:14px!important;line-height:1.5!important}
+  .wd-pro-page .pro-role-pills b{padding:9px 10px;font-size:12px;line-height:1.2}
+  .wd-pro-page .pro-role-copy>a{min-height:44px;font-size:14px;line-height:1.3;touch-action:manipulation}
+  .wd-pro-page .pro-role-visual{min-height:0;padding:22px 14px;border-radius:20px}
+  .wd-pro-page .role-queue{width:100%;transform:none}
+  .wd-pro-page .role-queue span{min-height:58px;padding:14px;grid-template-columns:12px minmax(0,1fr);gap:10px}
+  .wd-pro-page .role-queue b{font-size:14px;line-height:1.25}
+  .wd-pro-page .role-queue em{grid-column:2;font-size:12px;line-height:1.2}
+  .wd-pro-page .role-case,.wd-pro-page .role-payment{width:100%;padding:22px}
+  .wd-pro-page .role-case span,.wd-pro-page .role-payment>span,.wd-pro-page .role-bars em{font-size:12px;line-height:1.2}
+  .wd-pro-page .role-case small,.wd-pro-page .role-payment small,.wd-pro-page .role-payment em{font-size:13px;line-height:1.35}
+  .wd-pro-page .role-comps{width:100%;gap:8px}
+  .wd-pro-page .role-comps span{padding:16px}
+  .wd-pro-page .role-comps b{font-size:12px;line-height:1.25}
+  .wd-pro-page .role-bars{width:100%;height:220px;padding:26px 20px}
+}
+@media(max-width:420px){
+  .wd-pro-page .pro-screen-stack{height:520px}
+  .wd-pro-page .mock-metrics{grid-template-columns:1fr}
+  .wd-pro-page .mock-file-grid{grid-template-columns:1fr 1fr}
+  .wd-pro-page .pro-role-tabs button{min-width:138px}
+  .wd-pro-page .pro-role-panel{padding-inline:12px}
+  .wd-pro-page .pro-role-copy h3{font-size:31px}
+  .wd-pro-page .role-comps{grid-template-columns:1fr}
+}
 @media(prefers-reduced-motion:reduce){.pro-price-float,.pro-fast-price a{transition:none!important}}
