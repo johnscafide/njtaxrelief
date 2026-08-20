@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-20T22:36:00Z",
+  "captured_at": "2026-08-20T23:49:46.142462Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -51,13 +51,26 @@
     "njplus.njdep-csrr-gis.kcsl_program_interest": "live",
     "njplus.njdep-csrr-gis.kcsl_site_id": "live",
     "njplus.njdep-csrr-gis.ust_facility_reference": "live",
+    "watchdog.agent.offer_question_density": "live",
+    "watchdog.attorney.land_use_exception_stack": "live",
+    "watchdog.attorney.public_notice_density": "live",
     "watchdog.chapter123_lower_bound": "live",
     "watchdog.chapter123_upper_bound": "live",
+    "watchdog.constraint_stack_count": "live",
+    "watchdog.contractor.preconstruction_question_set": "live",
+    "watchdog.contractor.site_preflight_completeness": "live",
     "watchdog.improvement_ratio": "live",
+    "watchdog.insurance.mapped_hazard_overlap": "live",
+    "watchdog.insurance.physical_record_coverage": "live",
+    "watchdog.municipal.municipal_source_coverage": "live",
     "watchdog.njplus.brownfield_reuse_context": "live",
     "watchdog.njplus.development_designation_stack": "live",
     "watchdog.njplus.environmental_case_activity": "live",
     "watchdog.njplus.environmental_record_resolution": "live",
-    "watchdog.njplus.environmental_source_currency": "live"
+    "watchdog.njplus.environmental_source_currency": "live",
+    "watchdog.njplus.municipal_housing_evidence_depth": "live",
+    "watchdog.njplus.neighborhood_trend_freshness": "live",
+    "watchdog.title.municipal_search_scope": "live",
+    "watchdog.title.title_land_constraint_mix": "live"
   }
 }
