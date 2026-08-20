@@ -1,163 +1,188 @@
 # Watchdog Automation Proof Contract
 
-Status: R&D contract, non-executing
-Date: 2026-08-19
+Status: R&D milestone accepted, non-executing
+Date: 2026-08-20
 Tracks: NJW-236, Watchdog Automation Fabric
 
 ## Purpose
 
-A consequential Watchdog automation should be reconstructable after the fact. It should be possible to answer: what property was involved, what changed, which evidence existed, which Intelligence model evaluated it, which policy version matched, what approval applied, what external work was proposed or executed, and whether a retry represented the same governed event.
+A consequential Watchdog automation should be reconstructable after the fact. It should be possible to answer: what property was involved, what changed, which evidence existed, which Intelligence model evaluated it, which policy version matched, what approval applied, what external work was proposed, and whether a retry represented the same governed event.
 
-This document defines the first contract for **Proof-Carrying Automation** and the identity layer that supports it, the **Watchdog Property Passport**.
+This document defines the first accepted contract for **Proof-Carrying Automation** and the identity layer that supports it, the **Watchdog Property Passport**.
 
-The current production platform does not yet execute policy-driven external actions. Phase 9 is shadow-only. This contract therefore begins as a projection/audit format and must not be interpreted as authorization to create an external write path.
+Policy-driven external execution remains disabled. Phase 9 is shadow-only. This contract is therefore a provenance, verification and reconstruction layer. It is not authorization to create an external write path.
 
 ## Core rule
 
 **No meaningful automation without a reconstructable proof chain.**
 
-A proof envelope references governed records. It does not copy every source payload into every downstream system.
+A proof envelope references governed records. It does not copy every source payload into downstream systems.
 
-## Proof envelope v0.1
+## Production proof envelope
 
-```json
-{
-  "schema_version": "watchdog.automation.proof.v0.1",
-  "proof_id": "uuid",
-  "created_at": "timestamp",
-  "property": {
-    "passport_id": "uuid-or-null",
-    "pams_pin": "governed-property-id",
-    "municipality_code": "string-or-null",
-    "block": "string-or-null",
-    "lot": "string-or-null",
-    "qualifier": "string-or-null"
-  },
-  "event": {
-    "event_id": "integration_events.id",
-    "event_type": "intelligence.finding.created",
-    "event_key": "stable-source-key",
-    "occurred_at": "timestamp",
-    "source": "watchdog"
-  },
-  "intelligence": {
-    "job_id": "uuid-or-null",
-    "run_id": "uuid-or-null",
-    "finding_id": "uuid-or-null",
-    "model_key": "string-or-null",
-    "model_version_id": "uuid-or-null",
-    "prompt_version": "string-or-null",
-    "score": 0,
-    "confidence": 0,
-    "reason_codes": []
-  },
-  "evidence": {
-    "evidence_ids": [],
-    "source_ids": [],
-    "freshness_as_of": "timestamp-or-null",
-    "authority_summary": []
-  },
-  "policy": {
-    "policy_id": "integration_automation_policies.id",
-    "policy_group_id": "uuid",
-    "version": 1,
-    "mode": "shadow",
-    "evaluation_id": "integration_policy_evaluations.id",
-    "result": "matched",
-    "reasons": [],
-    "autonomy_tier": 0,
-    "required_approval": "human"
-  },
-  "action": {
-    "shadow_action_id": "integration_shadow_actions.id-or-null",
-    "action_type": "create_crm_task",
-    "target_system": "crm_via_zapier",
-    "external_write": true,
-    "execution_allowed": false,
-    "blocked_reason": "shadow_mode_no_execution"
-  },
-  "approval": {
-    "approval_id": null,
-    "actor_type": null,
-    "actor_id": null,
-    "approved_at": null
-  },
-  "delivery": {
-    "delivery_id": "integration_deliveries.id-or-null",
-    "idempotency_key": "original-integration-event-id",
-    "attempt_no": null,
-    "manual_replay_count": null
-  },
-  "outcome": {
-    "outcome_event_ids": [],
-    "observed_at": null,
-    "result": null
-  }
-}
-```
+Production `integration_automation_proofs` currently retains the complete Watchdog-side reconstruction envelope. The envelope contains these top-level sections:
 
-## Required invariants
+- property
+- event
+- intelligence
+- evidence
+- relationship
+- policy
+- authorization
+- delivery
+- generated timestamp and schema/proof type
 
-1. `event.event_id` is immutable.
-2. Retries and manual replay preserve the original event identity. They do not mint a replacement event just to resend the same work.
-3. `policy.version` is immutable once evaluated. A policy change creates a new version.
+It does **not** denormalize CRM contact names, email addresses or phone numbers into the proof.
+
+### Required invariants
+
+1. The original integration event ID is immutable.
+2. Retries and manual replay preserve the original event identity and idempotency identity.
+3. A policy version is immutable once evaluated. A policy change creates a new version.
 4. Shadow mode always records `execution_allowed=false`.
-5. Evidence references are identifiers with freshness/authority metadata. Missing evidence must remain missing.
-6. CRM relationship context never becomes governed property truth merely because it appears in the proof chain.
-7. An approval record, when introduced, must identify the exact policy version and action payload approved.
-8. A downstream system may retain the proof ID and event ID instead of receiving the entire evidence graph.
+5. An approval decision does not independently grant execution. Phase 9 approvals remain `execution_allowed=false` at the database level.
+6. Evidence references retain freshness and authority metadata. Missing evidence remains missing.
+7. CRM relationship context does not become governed property truth merely because it appears in the proof chain.
+8. External systems should normally retain an opaque Watchdog proof reference, not the complete internal evidence graph.
+
+## External disclosure contract: `watchdog-proof-ref/v1`
+
+External systems receive a minimal proof reference shaped for provenance rather than data replication.
+
+The opaque identifier format is:
+
+`wdp_<32 lowercase hex characters>`
+
+The external-minimal representation may include:
+
+- opaque proof reference
+- SHA-256 digest of the stored Watchdog proof envelope
+- governed PAMS PIN
+- source event type and occurrence time
+- Intelligence opportunity type, score, confidence, evidence coverage and model/version
+- evidence count, governed-evidence ratio and newest observation time
+- policy group/version/result/reason codes/approval requirement
+- verified relationship status/method/time
+- latest approval status
+- `execution_allowed=false`
+
+It intentionally excludes:
+
+- CRM contact name
+- email
+- phone
+- raw CRM payload
+- complete evidence payloads
+- internal relationship IDs
+- complete policy decision JSON
+- secrets, credentials or webhook signing material
+
+A full Watchdog-side reconstruction is available only through the authenticated/entitled reconstruction path and remains user-owned.
+
+## Proof integrity
+
+A proof reference stores a SHA-256 digest of the complete Watchdog proof envelope. Reconstruction recomputes that digest from the stored proof.
+
+The required verification result is:
+
+`digest_valid=true`
+
+A digest mismatch must never be treated as verified provenance.
+
+## Production acceptance: proof-carrying automation
+
+A real Phase 9 shadow decision was used for the first acceptance run.
+
+Proof:
+- proof ID: `9ab5a847-0228-4030-9cb5-4cd850112057`
+- external proof reference: `wdp_af4a16cb40fe42ffa743a994f7b4c149`
+- digest: `60977102e2d24c39b8e41c3cc5fe09642376334503ed2f828ed6895332b5c087`
+
+The external-minimal representation successfully exposed only the approved disclosure fields while keeping `execution_allowed=false`.
+
+Starting from only the opaque proof reference, Watchdog successfully reconstructed:
+
+1. the original integration event and idempotency identity
+2. governed PAMS property identity
+3. Intelligence finding, run, model and version
+4. governed evidence references and freshness/authority metadata
+5. the verified CRM-to-property relationship state
+6. policy group, immutable version and evaluation result
+7. approval state
+8. the original no-execution authorization state
+
+The reconstructed stored envelope re-hashed to the same digest with `digest_valid=true`.
+
+No external delivery was created during this acceptance. That is intentional: this milestone proves an export-safe provenance reference and Watchdog-side reconstruction without expanding automation authority.
 
 ## Watchdog Property Passport v0.1
 
-The Property Passport is a durable identity record for the property, not a consumer profile and not a PII warehouse.
+The Property Passport is a durable property identity construct, not a consumer profile and not a PII warehouse.
 
-### Identity fields
+The first implementation is computed from governed/current Watchdog records instead of creating another standalone personal-data store.
 
-- Watchdog passport ID
-- governed PAMS PIN
-- municipality / district identifier
-- block
-- lot
-- qualifier
-- unit identity when the authoritative source distinguishes units
-- current normalized situs address
-- governed historical situs-address aliases
-- governed parcel/provider identifiers with source and effective dates
-- identity-resolution confidence and reason codes
-- merge/split/supersession references where supported by authoritative evidence
+### Canonical identity rules
 
-### Relationship references
+- canonical key: exact PAMS PIN
+- exact PAMS PIN is required for policy-usable resolution
+- CRM address cannot become canonical property truth
+- fuzzy address resolution is disabled
+- person-name matching is disabled
+- unresolved identity fails closed
+- ambiguous identity fails closed
+- unit/qualifier conflicts fail closed
+- historical aliases remain unavailable until supported by governed historical identity evidence
 
-The passport may reference, but should not duplicate, verified relationship records such as:
+### Evidence classes currently considered
 
-- CRM context record ID
-- CRM-to-property link ID
-- provider connection ID
-- relationship resolution status
-- verification evidence ID
+- governed property lookup records
+- user-owned saved property records
+- user-owned Intelligence findings
+- verified CRM-to-property relationship records
+- automation proof records
+- verified ownership-verification records when present
 
-It should not promote a person's name, phone number, email address or inferred identity into the parcel truth record.
+The Passport may expose relationship state and verification method, but it does not infer ownership from a CRM relationship.
 
-## Passport resolution order
+### Identity states
 
-1. Exact governed parcel identifier
-2. Exact municipality + block + lot + qualifier
-3. Governed provider parcel identifier already linked to Watchdog identity
-4. Normalized address candidate with authoritative corroboration
-5. Ambiguous candidate set requiring review
+`resolved`
+: One consistent identity exists across the available exact source classes. It may be used as property identity context for policy evaluation.
 
-Fail closed when multiple plausible properties remain.
+`ambiguous`
+: Multiple normalized addresses or block/lot/qualifier identities exist for the same exact key. It fails closed and is not policy-usable.
 
-## Proposed storage boundary
+`unresolved`
+: No exact supporting Watchdog source class is present. It fails closed and is not policy-usable.
 
-Future implementation should separate:
+## Production acceptance: Property Passport
 
-- `property_passports`: durable parcel identity
-- `property_passport_aliases`: historical/current governed identifiers
-- `automation_proof_envelopes`: compact immutable proof metadata
-- existing evidence/finding/model/policy/delivery tables: authoritative referenced records
+A real proof-linked property was evaluated:
 
-Do not duplicate complete evidence payloads into the proof table unless retention and sensitivity rules explicitly require it.
+- PAMS PIN `2122_57_13`
+- passport ID `wdp_prop_b0e311d0a10516474e25d907`
+- identity status `resolved`
+- identity usable for policy: true
+- exact source classes: 4
+- distinct normalized addresses: 1
+- distinct block/lot/qualifier identities: 1
+- verified CRM relationships: 1
+- verified ownership relationships: 0
+- automation proofs: 1
+- execution allowed: false
+
+The canonical parcel resolved to one consistent situs address and block/lot identity. The CRM relationship remained a relationship record; no ownership conclusion was inferred.
+
+A deliberately nonexistent exact PAMS PIN was also tested. It produced:
+
+- identity status `unresolved`
+- zero source classes
+- zero relationships
+- zero proofs
+- `identity_usable_for_policy=false`
+- `execution_allowed=false`
+
+No naturally ambiguous user parcel was present in the current production corpus during this milestone, so ambiguity behavior is structurally enforced but has not yet been demonstrated with a genuine conflicting production parcel.
 
 ## Threat model
 
@@ -165,41 +190,90 @@ Do not duplicate complete evidence payloads into the proof table unless retentio
 
 Risk: a downstream CRM field is mistaken for authoritative property evidence.
 
-Control: source class and evidence IDs remain explicit; CRM context is marked contextual.
+Controls:
+- external proof is a Watchdog-generated reference
+- governed source classes remain explicit internally
+- CRM relationship is contextual only
+- CRM address cannot become canonical Passport truth
+
+### Proof tampering
+
+Risk: a downstream activity references provenance that no longer matches the stored Watchdog decision.
+
+Controls:
+- opaque proof reference
+- stored SHA-256 digest
+- reconstruction recomputes the digest
+- mismatched digest is not valid provenance
+
+### Reference enumeration
+
+Risk: a user attempts to reconstruct another user's proof by guessing references.
+
+Controls:
+- opaque random reference
+- proof-reference table is not directly readable by browser roles
+- reconstruction requires authentication, entitlement and matching `user_id`
 
 ### Replay ambiguity
 
 Risk: a manual retry looks like a second independent business event.
 
-Control: preserve original event ID and idempotency key; increment attempt/replay metadata.
+Control: preserve original event ID and idempotency identity; attempt/replay metadata is separate.
 
 ### Policy drift
 
-Risk: months later, the current policy differs from the policy that made the decision.
+Risk: the current policy differs from the one that made the historical decision.
 
-Control: every proof envelope pins policy ID + immutable version.
+Control: every proof pins policy group, policy ID and immutable version/evaluation.
 
 ### Identity collision
 
-Risk: a normalized address resolves to the wrong parcel/unit.
+Risk: an address resolves to the wrong parcel or unit.
 
-Control: Passport resolution fails closed on unresolved ambiguity and stores reason codes.
+Controls:
+- exact PAMS key is canonical
+- fuzzy resolution cannot independently make a Passport policy-usable
+- multiple address or block/lot/qualifier identities fail closed
 
 ### Excess PII propagation
 
-Risk: automation proof becomes another customer-data warehouse.
+Risk: the proof or Passport becomes another customer-data warehouse.
 
-Control: reference relationship records; do not denormalize unnecessary person fields into the proof envelope.
+Controls:
+- external proof contains no CRM contact identity fields
+- Passport contains property identity and relationship-state metadata, not CRM contact records
+- complete proof remains Watchdog-side
+- downstream systems should store the opaque proof reference, not copy the proof graph
 
-## First prototype acceptance
+### Approval confusion
 
-NJW-236 should not be marked complete until one real Watchdog shadow-policy evaluation can be reconstructed from:
+Risk: `approved` is interpreted as permission to execute.
 
-1. property identity
-2. original integration event
-3. Intelligence/finding references when applicable
-4. policy version + evaluation
-5. projected action
-6. replay/idempotency identity when delivery applies
+Control: the Phase 9 approval schema forces `execution_allowed=false`; proof and Passport contracts do not create an execution adapter.
 
-The reconstruction must work without trusting a downstream CRM description as the source of truth.
+## Access and security position
+
+The public-schema proof/passport RPCs are intentionally callable by authenticated users because they power user-facing Pro+/Teams functionality. Each function checks:
+
+- `auth.uid()`
+- Watchdog automation entitlement
+- user ownership of the underlying proof/reference where applicable
+
+The proof-reference table has RLS enabled and browser roles do not have direct table access.
+
+Supabase's security advisor therefore reports the authenticated SECURITY DEFINER RPCs as warnings by design. This is not treated as an advisor-clean state. The project also retains unrelated pre-existing security warnings and leaked-password protection remains disabled.
+
+## R&D milestone result
+
+The first NJW-236 milestone is accepted because one real existing Watchdog shadow workflow can now:
+
+1. generate an internal proof without exposing secrets or unnecessary person data
+2. issue an external-minimal opaque provenance reference
+3. reconstruct the exact source event, property, Intelligence, evidence, relationship, policy and approval context from that reference
+4. verify proof integrity with a digest
+5. resolve the governed property through the Property Passport
+6. fail closed on an unresolved property identity
+7. preserve `execution_allowed=false` throughout
+
+This milestone does **not** approve public API availability or autonomous external writes. Those require separate security, product and autonomy gates.
