@@ -1,9 +1,41 @@
 const makeRestHook = require('./rest-hook');
+
 module.exports = makeRestHook({
   key: 'property_signal_changed',
   noun: 'Property Signal',
   name: 'Property Signal Changed',
   description: 'Triggers when a governed Watchdog property signal changes.',
   eventType: 'property.signal.changed',
-  sample: { id: 'sample-signal', event_type: 'property.signal.changed', occurred_at: '2026-08-19T15:45:00Z', data: { pams_pin: 'sample-pin', title: 'Property signal changed', severity: 'medium', summary: 'A governed property signal changed.' } },
+  sample: {
+    id: 'sample-signal',
+    event_type: 'property.signal.changed',
+    event_key: 'property_update:sample-signal',
+    occurred_at: '2026-08-19T15:45:00Z',
+    data: {
+      pams_pin: 'sample-pin',
+      source_event_type: 'property.marker.changed',
+      severity: 'medium',
+      title: 'Property signal changed',
+      summary: 'A governed property signal changed.',
+      marker_id: 'property.assessed_value',
+      old_value: '300000',
+      new_value: '325000',
+      delta_numeric: 25000,
+      source_url: 'https://example.com/source',
+      occurred_at: '2026-08-19T15:45:00Z',
+    },
+  },
+  outputFields: [
+    { key: 'data__pams_pin', label: 'PAMS PIN' },
+    { key: 'data__source_event_type', label: 'Source Event Type' },
+    { key: 'data__severity', label: 'Severity' },
+    { key: 'data__title', label: 'Title' },
+    { key: 'data__summary', label: 'Summary' },
+    { key: 'data__marker_id', label: 'Marker ID' },
+    { key: 'data__old_value', label: 'Old Value' },
+    { key: 'data__new_value', label: 'New Value' },
+    { key: 'data__delta_numeric', label: 'Numeric Delta', type: 'number' },
+    { key: 'data__source_url', label: 'Source URL' },
+    { key: 'data__occurred_at', label: 'Signal Occurred At', type: 'datetime' },
+  ],
 });
