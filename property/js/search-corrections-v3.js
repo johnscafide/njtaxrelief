@@ -6,6 +6,7 @@
   var SB_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
   var SB_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var client=null,scoreBusy=false,lastScoreSig='';
+  var googleSubmitKey='',googleSubmitAt=0;
 
   function sb(){
     if(client)return client;
@@ -142,7 +143,39 @@
     if(art.parentNode!==right)right.appendChild(art);if(art!==right.lastElementChild)right.appendChild(art);
   }
 
-  function scan(){installSliders();ensureMenus();scoreCards();fixScrollEnd();}
+  /* Property-search UX: the landing Intelligence sample is not part of list results. */
+  function ensureSearchUxStyle(){
+    if(document.getElementById('njw-property-search-ux-style'))return;
+    var style=document.createElement('style');
+    style.id='njw-property-search-ux-style';
+    style.textContent='body.hood-on #wd-intelligence-glance{display:none!important;}';
+    (document.head||document.documentElement).appendChild(style);
+  }
+
+  /* A confirmed Google selection should behave like pressing the search arrow once. */
+  function maybeSubmitGoogleSelection(input){
+    if(!input||input.dataset.googleAddress!=='1')return;
+    var placeId=String(input.dataset.googlePlaceId||'').trim();
+    var value=String(input.value||'').trim();
+    if(!placeId||!value)return;
+    var now=Date.now(),key=placeId+'|'+value;
+    if(key===googleSubmitKey&&now-googleSubmitAt<1500)return;
+    googleSubmitKey=key;googleSubmitAt=now;
+    window.setTimeout(function(){
+      if(typeof window.plLookup==='function')window.plLookup();
+    },0);
+  }
+  function watchGoogleAddressInputs(){
+    ['pl-addr','ss-addr'].forEach(function(id){
+      var input=document.getElementById(id);
+      if(!input||input.dataset.njwGoogleAutoSubmit==='1')return;
+      input.dataset.njwGoogleAutoSubmit='1';
+      var observer=new MutationObserver(function(){maybeSubmitGoogleSelection(input);});
+      observer.observe(input,{attributes:true,attributeFilter:['data-google-address','data-google-place-id']});
+    });
+  }
+
+  function scan(){ensureSearchUxStyle();watchGoogleAddressInputs();installSliders();ensureMenus();scoreCards();fixScrollEnd();}
   installGlobalSearch();
   var __njwV3MaxWait=null;
   var obs=new MutationObserver(function(){
