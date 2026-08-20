@@ -37,5 +37,14 @@ body.wd-public-menu-open{overflow:hidden}
   body.wd-consumer-mode .wd-nav.solid .wd-public-trigger{display:inline-flex!important;visibility:visible!important;opacity:1!important}
 }
 
-@media(max-width:560px){.wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}}
+/* Mobile certification 2026-08-19: the sticky search and the solid app header
+   were both fixed at top:0, allowing the higher-z search to cover navigation.
+   Offset only mobile/tablet sticky search below the measured header height. */
+@media(max-width:940px){
+  body.wd-consumer-mode .ssearch{top:72px}
+}
+@media(max-width:560px){
+  body.wd-consumer-mode .ssearch{top:78px}
+  .wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}
+}
 @media(prefers-reduced-motion:reduce){.wd-public-sheet,.wd-public-backdrop{transition:none}}
