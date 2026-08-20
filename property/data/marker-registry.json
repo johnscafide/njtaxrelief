@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-20T22:07:10.879Z",
+ "generated_at": "2026-08-20T22:13:21.944Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 473,
+   "live": 479,
    "partial": 4,
    "unavailable": 11,
-   "planned": 246
+   "planned": 240
   },
   "retired_phase5": 0
  },
@@ -13618,8 +13618,8 @@
    "field": "affordable_units_total",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "affordable_units_total",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13642,8 +13642,8 @@
    "field": "affordable_units_rental",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "affordable_units_rental",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13666,8 +13666,8 @@
    "field": "affordable_units_for_sale",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "affordable_units_for_sale",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13738,8 +13738,8 @@
    "field": "low_income_households",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "low_income_households",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13762,8 +13762,8 @@
    "field": "moderate_income_households",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "moderate_income_households",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13834,8 +13834,8 @@
    "field": "affordable_housing_reporting_status",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "affordable_housing_reporting_status",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
