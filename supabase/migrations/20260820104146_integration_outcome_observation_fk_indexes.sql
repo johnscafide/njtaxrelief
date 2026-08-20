@@ -1,0 +1,3 @@
+create index if not exists integration_outcome_observations_connection_idx on public.integration_outcome_observations(connection_id);
+create index if not exists integration_outcome_observations_link_idx on public.integration_outcome_observations(crm_property_link_id) where crm_property_link_id is not null;
+create index if not exists integration_outcome_observations_outcome_idx on public.integration_outcome_observations(outcome_event_id) where outcome_event_id is not null;
