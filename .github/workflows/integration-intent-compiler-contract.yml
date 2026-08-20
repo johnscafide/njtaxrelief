@@ -1,0 +1,33 @@
+name: Integration Intent Compiler Contract
+
+on:
+  push:
+    paths:
+      - 'supabase/migrations/20260820135730_integration_intent_compiler_autonomy_tiers_v01.sql'
+      - 'supabase/migrations/20260820135902_integration_intent_compiler_v02_appeal_draft_composition.sql'
+      - 'property/docs/automation/INTENT-TO-AUTOMATION-CONTRACT.md'
+      - 'property/tests/integration-intent-compiler-contract.mjs'
+      - '.github/workflows/integration-intent-compiler-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/migrations/20260820135730_integration_intent_compiler_autonomy_tiers_v01.sql'
+      - 'supabase/migrations/20260820135902_integration_intent_compiler_v02_appeal_draft_composition.sql'
+      - 'property/docs/automation/INTENT-TO-AUTOMATION-CONTRACT.md'
+      - 'property/tests/integration-intent-compiler-contract.mjs'
+      - '.github/workflows/integration-intent-compiler-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check compiler and autonomy invariants
+        run: node property/tests/integration-intent-compiler-contract.mjs
