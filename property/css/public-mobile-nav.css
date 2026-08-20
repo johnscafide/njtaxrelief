@@ -58,6 +58,9 @@ body.wd-public-menu-open{overflow:hidden}
 @media(max-width:560px){
   body.wd-consumer-mode .ssearch{top:78px}
   .wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}
+  body.wd-consumer-mode .ssearch-brand{height:48px!important;min-width:44px!important;width:44px!important}
+  body.wd-consumer-mode .ssearch-geo{height:44px!important;min-width:44px!important;width:44px!important}
+  body.wd-consumer-mode .ssearch-go{height:46px!important;min-width:46px!important;width:46px!important}
 }
 
 /* Mobile certification 2026-08-19 run 003: the legacy landing footer reduced
