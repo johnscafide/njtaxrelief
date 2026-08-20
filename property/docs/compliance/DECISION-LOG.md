@@ -14,13 +14,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Reasoning:** Watchdog is still adding major workflows, integrations and data sources. Controls built during development are cheaper and more reliable than controls retrofitted immediately before an audit. Starting now also creates historical evidence for change management, access control, incident response, privacy and recovery practices.
 
-**Evidence created:**
-
-- `property/docs/compliance/README.md`
-- `property/docs/compliance/CONTROL-REGISTER.md`
-- `api/_compliance-data.js`
-- `property/compliance/index.html`
-- `property/tests/compliance-contracts.mjs`
+**Evidence created:** `property/docs/compliance/README.md`, `property/docs/compliance/CONTROL-REGISTER.md`, `api/_compliance-data.js`, `property/compliance/index.html`, `property/tests/compliance-contracts.mjs`.
 
 **Residual risk:** Internal readiness work is not equivalent to independent assurance.
 
@@ -48,13 +42,9 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Frameworks:** SOC 2, NIST CSF 2.0, NJDPA, ISO/IEC 27001, ISO/IEC 27701  
 **Decision:** Adding a new material third-party connector must trigger a security/privacy/vendor/data-flow review rather than being treated as a normal feature-only change.
 
-**Reasoning:** Connectors can change data flows, credential exposure, retention, subprocessors, privacy obligations, incident dependencies and compliance scope. Public-data connectors generally present less risk than integrations that transmit account, financial, communications, CRM, voice, AI or payment information, but each material integration must be classified rather than assumed safe.
+**Reasoning:** Connectors can change data flows, credential exposure, retention, subprocessors, privacy obligations, incident dependencies and compliance scope. Each material integration must be classified rather than assumed safe.
 
-**Minimum review fields:** Business purpose, data in/out, classification, credentials, scopes, retention, encryption, subprocessors, webhook/auth controls, privacy/DPA impact, assurance evidence, failure/incident path, offboarding and production approval.
-
-**Residual risk:** Existing integrations need to be backfilled into the future vendor/connector inventory.
-
-**Next action:** Create the vendor and connector inventory and review template.
+**Residual risk:** Existing integrations need to be backfilled into the vendor/connector inventory.
 
 ---
 
@@ -64,21 +54,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Frameworks:** SOC 2, OWASP ASVS 5.0, NIST CSF 2.0  
 **Decision:** Treat repeatable CI security assertions as audit evidence and expand them over time instead of maintaining a separate compliance-only test suite that duplicates product security controls.
 
-**Current evidence includes:**
-
-- `.github/workflows/access-boundary-audit.yml`
-- `property/tests/security-contracts.mjs`
-- Supabase RLS/entitlement migration assertions
-- payment webhook signature assertions
-- CORS/origin restrictions
-- server-authoritative pricing assertions
-- deployment security header assertions
-
-**Reasoning:** A control executed automatically during changes is stronger and easier to reproduce than a narrative saying the control exists.
-
 **Residual risk:** Static assertions do not replace penetration testing, dynamic scanning, dependency/secret scanning or complete OWASP ASVS verification.
-
-**Next action:** Expand the compliance evidence map and add missing technical verification categories.
 
 ---
 
@@ -86,15 +62,9 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Decision ID:** WCR-2026-08-18-005  
 **Frameworks:** SOC 2, NJDPA, NIST CSF 2.0, ISO/IEC 27001  
-**Decision:** Maintain a detailed website-accessible developer Compliance Center and repository decision log, but prohibit security evidence from containing secrets, customer information, raw tokens or unnecessarily exploitable implementation detail.
+**Decision:** Maintain detailed developer compliance evidence while prohibiting credentials, customer information, raw tokens or unnecessarily exploitable implementation detail.
 
-**Reasoning:** Compliance evidence must be specific enough to prove what happened without becoming a secondary security risk.
-
-**Implementation:** The Compliance Center is developer-gated in the Watchdog UI, is marked `noindex,nofollow,noarchive,nosnippet`, and displays a sanitized structured log. The underlying repository remains the source of truth.
-
-**Residual risk:** Because the repository is public, all committed compliance artifacts must continue to be written as public-safe records even when the UI is developer-gated.
-
-**Next action:** Keep automated checks validating required log structure and rejecting obvious secret patterns in compliance artifacts.
+**Residual risk:** Because the repository is public, committed compliance artifacts must remain public-safe records.
 
 ---
 
@@ -104,21 +74,9 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Frameworks:** SOC 2, NIST CSF 2.0, OWASP ASVS 5.0, ISO/IEC 27001  
 **Decision:** Do not rely on client-side hiding as the only access boundary for the Compliance Center evidence feed.
 
-**Reasoning:** A browser-only gate can prevent normal navigation but does not stop a caller from requesting a known static evidence URL directly. Internal governance information should require an authenticated developer decision on the server as well.
+**Implementation:** Detailed log data is loaded through `/api/compliance-log`, which validates the Watchdog bearer session and developer entitlement; the previous static webroot evidence file was removed.
 
-**Implementation:** `/property/compliance` remains developer-gated and excluded from indexing. Detailed log data is loaded through `/api/compliance-log`; the endpoint validates the Watchdog bearer session and developer entitlement before returning data, disables caching, opts out of indexing/snippets, and returns a non-descriptive not-found response to unauthorized callers. The previous static `/property/data/compliance-log.json` file was removed from the webroot and the structured evidence now lives in the API-side module `api/_compliance-data.js`.
-
-**Evidence:**
-
-- `api/compliance-log.js`
-- `api/_compliance-data.js`
-- `property/js/compliance.js`
-- `property/compliance/index.html`
-- `property/tests/compliance-contracts.mjs`
-
-**Residual risk:** The repository itself remains public, so committed records must remain sanitized regardless of website protection.
-
-**Next action:** Revisit repository visibility before richer external audit evidence or penetration-test materials are stored in Git.
+**Residual risk:** The repository itself remains public, so committed records must remain sanitized.
 
 ---
 
@@ -126,13 +84,9 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Decision ID:** WCR-2026-08-18-007  
 **Frameworks:** SOC 2, NIST CSF 2.0, ISO/IEC 27001  
-**Decision:** Run the recurring compliance-readiness workflow at approximately 1:00 AM and 12:00 PM Eastern Time every day indefinitely. Each session must complete at least one substantive improvement and may complete multiple related improvements when appropriate.
+**Decision:** Each compliance session must complete at least one substantive improvement and may complete multiple related improvements when appropriate.
 
-**Reasoning:** The objective is continuous risk reduction and evidence accumulation, not satisfying an artificial one-item quota. Two daily review windows better match an actively changing SaaS platform and increase the chance that security/compliance work evolves with product development.
-
-**Residual risk:** Frequency does not equal quality; substantive evidence and periodic human review remain required.
-
-**Next action:** Prioritize high-risk technical and governance gaps rather than low-value documentation volume.
+**Reasoning:** The objective is continuous risk reduction and evidence accumulation, not satisfying an artificial one-item quota.
 
 ---
 
@@ -140,20 +94,11 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Decision ID:** WCR-2026-08-19-001  
 **Frameworks:** SOC 2 Security/Availability, NIST CSF 2.0 Respond/Recover, ISO/IEC 27001, OWASP ASVS 5.0  
-**Decision:** Perform and retain a sanitized internal tabletop exercise against the existing incident-response runbook instead of treating the written runbook alone as proof of operational readiness.
+**Decision:** Perform and retain sanitized internal tabletop exercises rather than treating a written runbook alone as proof of operational readiness.
 
-**Reasoning:** A control is stronger when the response sequence has been walked through against a plausible multi-user authenticated-workflow incident. The exercise tests classification, ownership, evidence minimization, containment, change reconciliation, authorization verification, customer communication and closure criteria without requiring destructive production activity.
-
-**Evidence created:**
-
-- `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md`
-- `property/docs/compliance/CONTROL-REGISTER.md`
-
-**Findings:** The response sequence is coherent and supported by existing security/change controls. Gaps remain around a standardized incident record template, formal RTO/RPO targets, measured technical recovery timing, and connector-focused response scenarios.
+**Evidence:** `property/docs/compliance/INCIDENT-TABLETOP-2026-08-19.md`.
 
 **Residual risk:** A tabletop does not prove real-world response time or external-provider coordination effectiveness.
-
-**Next action:** Add a reusable incident record template, define provisional recovery objectives, and conduct a future connector/credential-revocation exercise.
 
 ---
 
@@ -161,18 +106,28 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 **Decision ID:** WCR-2026-08-19-003  
 **Frameworks:** NIST CSF 2.0 Govern/Identify/Protect, SOC 2 Security, OWASP ASVS 5.0.0 Level 2, ISO/IEC 27001  
-**Decision:** Convert compliance gaps into a maintained cybersecurity risk register and begin requirement-level ASVS verification with authentication, session management, authorization, and OAuth/OIDC rather than treating the ASVS target as a broad narrative alignment claim.
+**Decision:** Convert compliance gaps into a maintained cybersecurity risk register and begin requirement-level ASVS verification with authentication, session management, authorization, and OAuth/OIDC.
 
-**Reasoning:** NIST CSF 2.0 uses governance and risk outcomes to prioritize security work, and ASVS 5.0.0 contains explicit identity requirements that must be verified individually. The first identity tranche found useful controls already in place, including centralized Supabase runtime configuration, PKCE, constrained continuation URLs, provider feature flags, RLS/entitlement boundaries, and sign-out paths. It also found a material standards gap: repository evidence does not establish that MFA is enforced for every Watchdog user, while ASVS `v5.0.0-6.3.3` is a Level 2 requirement. Provider support for MFA is not treated as evidence that Watchdog enforces it.
+**Evidence:** `property/docs/compliance/RISK-REGISTER.md`, `property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md`, `property/tests/auth-asvs-contract.mjs`.
+
+**Residual risk:** MFA enforcement, provider-side settings, session lifecycle and full OAuth/OIDC applicability remain incomplete.
+
+---
+
+## 2026-08-20 — Establish field-level privacy inventory and minimize demographic/profile use
+
+**Decision ID:** WCR-2026-08-20-002  
+**Frameworks:** NJDPA, SOC 2 Privacy/Confidentiality, NIST CSF Govern/Identify/Protect, ISO/IEC 27701  
+**Decision:** Maintain a field-level personal-data inventory for Watchdog onboarding and treat optional demographic/financial-profile fields as elevated privacy data even where they do not meet a statutory sensitive-data definition. Do not use demographic answers for housing audience targeting, eligibility decisions, protected-trait inference, or alteration of source facts.
+
+**Reasoning:** The onboarding schema now contains meaningful first-party context including persona, housing status, age band, household income band, household size, ZIP, goals and professional context. A generic statement that Watchdog stores “profile data” is insufficient for minimization, deletion, connector review, or privacy-policy reconciliation. The schema already provides useful controls: own-row RLS, anonymous revocation, bounded payloads, allow-listed values, `prefer_not` choices, and an explicit database prohibition on demographic housing targeting. The compliance program now records those controls at field level and requires future connectors to identify exact fields transferred.
 
 **Evidence created:**
 
-- `property/docs/compliance/RISK-REGISTER.md`
-- `property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md`
-- `property/tests/auth-asvs-contract.mjs`
-- `.github/workflows/zero-cost-compliance-readiness.yml`
+- `property/docs/compliance/PERSONAL-DATA-INVENTORY-2026-08-20.md`
+- `supabase/migrations/20260819150000_required_watchdog_onboarding_v1.sql`
 - `property/docs/compliance/CONTROL-REGISTER.md`
 
-**Residual risk:** Provider-side production settings, session lifetime, account recovery/linking behavior, recent re-authentication for sensitive changes, active-session termination, and full OAuth/OIDC V10 applicability remain incomplete. The selected ASVS Level 2 target must not be represented as achieved while the MFA requirement remains unresolved.
+**Residual risk:** Repository evidence does not yet prove every production copy, analytics/log event, backup, downstream Intelligence consumer, deletion path, or third-party transfer. The `responses` JSON snapshot duplicates structured profile data and therefore increases retention/deletion surface.
 
-**Next action:** Complete the ASVS V10 OAuth/OIDC mapping, verify production Supabase identity/session configuration, assess a no-cost MFA enforcement path, create a formal role/plan/resource authorization matrix, and add dynamic negative authorization tests.
+**Next action:** Verify that `intelligence_personalization=false` is honored by every downstream consumer, trace account/profile deletion across both structured columns and `responses`, define provisional retention periods, and extend the inventory to analytics/logs/backups and connector transfers.
