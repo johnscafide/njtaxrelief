@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-20T21:58:25.239Z",
+ "generated_at": "2026-08-20T21:59:44.680Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 465,
+   "live": 473,
    "partial": 4,
    "unavailable": 11,
-   "planned": 254
+   "planned": 246
   },
   "retired_phase5": 0
  },
@@ -13714,8 +13714,8 @@
    "field": "affordable_trust_fund_balance",
    "professional_reason": "Published affordable housing monitoring data for professional review; verify the official record before reliance.",
    "source_field": "affordable_trust_fund_balance",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15448,8 +15448,8 @@
    "field": "population_change",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "population_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15472,8 +15472,8 @@
    "field": "employment_density",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "employment_density",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15496,8 +15496,8 @@
    "field": "household_income",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "household_income",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15520,8 +15520,8 @@
    "field": "home_value_change",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "home_value_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15592,8 +15592,8 @@
    "field": "rental_cost_change",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "rental_cost_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15616,8 +15616,8 @@
    "field": "housing_unit_change",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "housing_unit_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15664,8 +15664,8 @@
    "field": "neighborhood_trend_year",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "neighborhood_trend_year",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
