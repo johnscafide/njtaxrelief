@@ -1,0 +1,27 @@
+name: Marketing Creative Learning Contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/js/marketing-studio-creative-learning.js'
+      - 'property/css/marketing-studio-creative-learning.css'
+      - 'property/marketing-studio/design/index.html'
+      - 'property/tests/marketing-creative-learning-contract.mjs'
+      - 'supabase/migrations/20260820182004_marketing_creative_outcome_learning_v1.sql'
+      - 'supabase/migrations/20260820201837_marketing_creative_learning_snapshot_privacy_v1.sql'
+      - '.github/workflows/marketing-creative-learning-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run privacy and learning contract
+        run: node property/tests/marketing-creative-learning-contract.mjs
