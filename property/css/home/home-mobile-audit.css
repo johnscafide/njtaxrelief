@@ -212,6 +212,134 @@
   body.hm-dashboard-page .hm27-notice-foot{
     padding:8px 10px max(4px,env(safe-area-inset-bottom))!important;
   }
+
+  /* Agent Intel is valuable on mobile, but its compact desktop density is not. Preserve the content and promote it to a readable sheet. */
+  body.hm-dashboard-page .hm-mobile-intel .mobile-intel-sheet{
+    max-height:calc(100dvh - max(18px,env(safe-area-inset-top)))!important;
+    padding-left:18px!important;
+    padding-right:18px!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .mobile-intel-close{
+    min-width:44px!important;
+    min-height:44px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-title>span,
+  body.hm-dashboard-page .hm-mobile-intel .wd-density-copy>span{
+    font-size:12px!important;
+    line-height:1.3!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-title h2{
+    font-size:20px!important;
+    line-height:1.2!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-title p,
+  body.hm-dashboard-page .hm-mobile-intel .wdai-role-prompt p,
+  body.hm-dashboard-page .hm-mobile-intel .wdai-card p,
+  body.hm-dashboard-page .hm-mobile-intel .wd-density-action{
+    font-size:14px!important;
+    line-height:1.5!important;
+    -webkit-line-clamp:unset!important;
+    overflow:visible!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-persona small{
+    font-size:11px!important;
+    line-height:1.3!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-persona b,
+  body.hm-dashboard-page .hm-mobile-intel .wdai-role-set,
+  body.hm-dashboard-page .hm-mobile-intel .wd-density-trust{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wd-density-reasons li{
+    max-width:none!important;
+    font-size:13px!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wd-density-toggle,
+  body.hm-dashboard-page .hm-mobile-intel button,
+  body.hm-dashboard-page .hm-mobile-intel select{
+    min-height:44px;
+    font-size:14px!important;
+    line-height:1.25!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel select{
+    max-width:100%;
+    font-size:16px!important;
+  }
+
+  /* Long Property Home drill-downs stay complete, but mobile typography and wrapping take priority over desktop density. */
+  body.hm-dashboard-page .hm-kind{
+    font-size:12px!important;
+    line-height:1.3!important;
+  }
+
+  body.hm-dashboard-page .sc-l,
+  body.hm-dashboard-page .sec2-pro b{
+    font-size:12px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .sc-v,
+  body.hm-dashboard-page .sec2-pro span{
+    font-size:14px!important;
+    line-height:1.5!important;
+  }
+
+  body.hm-dashboard-page .hm-secbar h2{
+    font-size:13px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .sec2-h{
+    min-height:56px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .sec2-t{
+    min-width:0;
+    font-size:16px!important;
+    line-height:1.3!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .sec2-b,
+  body.hm-dashboard-page .sec2-b *{
+    max-width:100%;
+  }
+
+  body.hm-dashboard-page .sec2-b p,
+  body.hm-dashboard-page .sec2-b li,
+  body.hm-dashboard-page .sec2-b dd,
+  body.hm-dashboard-page .sec2-b td,
+  body.hm-dashboard-page .sec2-b th,
+  body.hm-dashboard-page .sec2-b a{
+    overflow-wrap:anywhere;
+    word-break:normal;
+  }
+
+  body.hm-dashboard-page .sec2-b table{
+    display:block;
+    width:100%;
+    max-width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
 }
 
 @media (max-width: 480px){
@@ -237,5 +365,15 @@
 
   body.hm-dashboard-page .hm27-action.primary{
     grid-column:1 / -1;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-head,
+  body.hm-dashboard-page .hm-mobile-intel .wdai-compact .wdai-head{
+    grid-template-columns:1fr!important;
+  }
+
+  body.hm-dashboard-page .hm-mobile-intel .wdai-persona{
+    width:100%;
+    max-width:100%;
   }
 }
