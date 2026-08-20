@@ -1,0 +1,34 @@
+name: CRM resolution enrichment contract
+
+on:
+  push:
+    paths:
+      - 'supabase/functions/integration-crm-resolution-worker/**'
+      - 'supabase/functions/integration-crm-resolver/**'
+      - 'supabase/migrations/*integration_crm_missing_zip*'
+      - 'property/js/integrations-crm-resolution.js'
+      - 'property/docs/compliance/CRM-RESOLUTION-GOLD-SET-2026-08-19.md'
+      - 'property/tests/crm-resolution-enrichment-contract.mjs'
+      - '.github/workflows/crm-resolution-enrichment-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/integration-crm-resolution-worker/**'
+      - 'supabase/functions/integration-crm-resolver/**'
+      - 'supabase/migrations/*integration_crm_missing_zip*'
+      - 'property/js/integrations-crm-resolution.js'
+      - 'property/docs/compliance/CRM-RESOLUTION-GOLD-SET-2026-08-19.md'
+      - 'property/tests/crm-resolution-enrichment-contract.mjs'
+      - '.github/workflows/crm-resolution-enrichment-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/crm-resolution-enrichment-contract.mjs
