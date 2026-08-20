@@ -4,19 +4,17 @@ on:
   push:
     paths:
       - 'supabase/migrations/20260820130218_integration_proof_reference_contract.sql'
-      - 'supabase/migrations/20260820133715_integration_proof_reference_pgcrypto_schema_fix.sql'
-      - 'supabase/migrations/20260820134053_integration_property_passport_prototype.sql'
       - 'supabase/migrations/20260820134300_integration_proof_reference_proof_id_index.sql'
-      - 'property/docs/integrations/PROPERTY-PASSPORT-RD.md'
+      - 'supabase/migrations/20260820135500_integration_proof_reference_passport_repairs.sql'
+      - 'property/docs/automation/AUTOMATION-PROOF-CONTRACT.md'
       - 'property/tests/integration-proof-passport-contract.mjs'
       - '.github/workflows/integration-proof-passport-contract.yml'
   pull_request:
     paths:
       - 'supabase/migrations/20260820130218_integration_proof_reference_contract.sql'
-      - 'supabase/migrations/20260820133715_integration_proof_reference_pgcrypto_schema_fix.sql'
-      - 'supabase/migrations/20260820134053_integration_property_passport_prototype.sql'
       - 'supabase/migrations/20260820134300_integration_proof_reference_proof_id_index.sql'
-      - 'property/docs/integrations/PROPERTY-PASSPORT-RD.md'
+      - 'supabase/migrations/20260820135500_integration_proof_reference_passport_repairs.sql'
+      - 'property/docs/automation/AUTOMATION-PROOF-CONTRACT.md'
       - 'property/tests/integration-proof-passport-contract.mjs'
       - '.github/workflows/integration-proof-passport-contract.yml'
   workflow_dispatch:
@@ -27,6 +25,7 @@ permissions:
 jobs:
   contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
