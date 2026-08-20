@@ -38,11 +38,13 @@ module.exports = async function handler(req, res) {
     const action = clean(body.action || '', 50);
     const campaignId = clean(body.campaign_id || '', 80);
     if (!campaignId) return res.status(400).json({ error: 'campaign_id is required.' });
+    console.info('watchdog-designs-creative action', action, campaignId.slice(0, 8), user.id.slice(0, 8));
 
     if (action === 'approve_active') {
       const result = await jsonFetch(`${SUPABASE_URL}/rest/v1/rpc/marketing_approve_active_studio_creative`, {
         method: 'POST', headers: userHeaders(token), body: JSON.stringify({ p_campaign_id: campaignId })
       });
+      console.info('watchdog-designs-creative approved', campaignId.slice(0, 8));
       return res.status(200).json({ ok: true, brand: 'Watchdog Designs', result });
     }
 
