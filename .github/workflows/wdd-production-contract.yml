@@ -1,0 +1,29 @@
+name: WDD Production Contract
+on:
+  pull_request:
+    paths:
+      - 'property/marketing-studio/customize/index.html'
+      - 'property/js/marketing-studio-wdd-geometry-acceptance.js'
+      - 'property/css/marketing-studio-wdd-geometry-acceptance.css'
+      - 'api/watchdog-designs-provider.js'
+      - 'supabase/migrations/*wdd_provider_mapping_proof_contract*.sql'
+      - 'property/tests/wdd-production-contract.mjs'
+  push:
+    branches: [main]
+    paths:
+      - 'property/marketing-studio/customize/index.html'
+      - 'property/js/marketing-studio-wdd-geometry-acceptance.js'
+      - 'property/css/marketing-studio-wdd-geometry-acceptance.css'
+      - 'api/watchdog-designs-provider.js'
+      - 'supabase/migrations/*wdd_provider_mapping_proof_contract*.sql'
+      - 'property/tests/wdd-production-contract.mjs'
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/wdd-production-contract.mjs
