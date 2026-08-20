@@ -198,5 +198,24 @@
   body.wdv2-mounted .wd4-canvas{padding-left:10px!important;padding-right:10px!important}
   body.wdv2-mounted .wdv2-rail{margin-left:12px;margin-right:12px}
   body.wdv2-mounted .wd4-map-legend{left:8px;bottom:8px;max-width:calc(100% - 16px)}
+
+  /* Narrow-phone readability: desktop metadata is 10-13px and becomes hard to scan on dense cards. */
+  body.wdv2-mounted .brief{font-size:14px;line-height:1.6}
+  body.wdv2-mounted .pr-sub{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+  body.wdv2-mounted .pr-line{font-size:15px;line-height:1.6}
+  body.wdv2-mounted .fig dt{font-size:12px;line-height:1.35}
+  body.wdv2-mounted .fig dd em{font-size:12px;line-height:1.4}
+  body.wdv2-mounted .pr-acts{gap:8px}
+  body.wdv2-mounted .pr-acts a,
+  body.wdv2-mounted .pr-acts button{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    padding:8px 10px;
+    font-size:14px;
+    line-height:1.25;
+    touch-action:manipulation;
+  }
+
   .wdv2-skel-top b{display:none}
 }
