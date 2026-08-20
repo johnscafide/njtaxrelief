@@ -1,0 +1,34 @@
+name: Property brand consistency audit
+
+on:
+  push:
+    branches:
+      - main
+      - brand-consistency-audit-2026-08-20
+    paths:
+      - 'property/**'
+      - '.github/workflows/property-brand-consistency-audit.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'property/**'
+      - '.github/workflows/property-brand-consistency-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit all property branding surfaces
+        run: python property/scripts/audit_brand_consistency.py --report brand-consistency-report.md --strict
+      - name: Upload brand consistency report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brand-consistency-report
+          path: brand-consistency-report.md
+          if-no-files-found: warn

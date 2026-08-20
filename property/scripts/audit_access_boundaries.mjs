@@ -81,7 +81,34 @@ function walk(dir) {
   }
 }
 walk('property');
-const clientSecrets = browserFiles.filter((file) => /service_role|SUPABASE_SERVICE_ROLE_KEY/i.test(fs.readFileSync(file, 'utf8')));
+
+function decodeJwtRole(token) {
+  try {
+    const payload = token.split('.')[1];
+    if (!payload) return null;
+    const normalized = payload.replace(/-/g, '+').replace(/_/g, '/');
+    const padded = normalized.padEnd(Math.ceil(normalized.length / 4) * 4, '=');
+    const decoded = JSON.parse(Buffer.from(padded, 'base64').toString('utf8'));
+    return typeof decoded?.role === 'string' ? decoded.role : null;
+  } catch {
+    return null;
+  }
+}
+
+function containsServiceCredential(body) {
+  // Human-readable documentation may legitimately mention "service_role".
+  // Flag actual secret material instead: secret-format keys, populated secret
+  // assignments, or JWTs whose decoded role is explicitly service_role.
+  if (/\bsb_secret_[A-Za-z0-9_-]{20,}\b/.test(body)) return true;
+
+  const assignment = /(?:SUPABASE_SERVICE_ROLE_KEY|SUPABASE_SECRET_KEY|service_role(?:_key)?)\s*(?:=|:)\s*["'`]([^"'`\s<>{}]{16,})["'`]/ig;
+  if (assignment.test(body)) return true;
+
+  const jwtTokens = body.match(/\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\b/g) || [];
+  return jwtTokens.some((token) => decodeJwtRole(token) === 'service_role');
+}
+
+const clientSecrets = browserFiles.filter((file) => containsServiceCredential(fs.readFileSync(file, 'utf8')));
 check('no service credentials in browser property files', clientSecrets.length === 0, clientSecrets.length ? clientSecrets.map((f) => path.relative(root, f)).join(', ') : 'Publishable client key only');
 
 const mobileCss = read('property/css/mobile-app.css');

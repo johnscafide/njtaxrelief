@@ -58,9 +58,9 @@
     var old = document.getElementById('wd-agent-opening'); if (old) old.remove();
     var node = document.createElement('div'); node.id = 'wd-agent-opening';
     node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace…</span></div>';
-    node.style.cssText = 'position:fixed;inset:0;z-index:250000;background:rgba(238,243,246,.94);display:grid;place-items:center;font-family:"Source Sans 3",sans-serif;color:#102a4c;backdrop-filter:blur(8px)';
-    var card=node.firstElementChild; card.style.cssText='display:grid;justify-items:center;gap:10px;background:#fff;border:1px solid #dce5ec;border-radius:20px;padding:34px 42px;box-shadow:0 24px 70px rgba(16,42,76,.18)';
-    card.querySelector('i').style.cssText='font-size:24px;color:#088d8d'; card.querySelector('b').style.cssText='font:800 22px "Plus Jakarta Sans",sans-serif'; card.querySelector('span').style.cssText='color:#68788f';
+    node.style.cssText = 'position:fixed;inset:0;z-index:250000;background:rgba(238,243,246,.94);display:grid;place-items:center;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#102a4c;backdrop-filter:blur(8px)';
+    var card=node.firstElementChild; card.style.cssText='display:grid;justify-items:center;gap:10px;background:#fff;border:1px solid #dce5ec;border-radius:18px;padding:34px 42px;box-shadow:0 24px 65px rgba(18,36,63,.19)';
+    card.querySelector('i').style.cssText='font-size:24px;color:#2f6df6'; card.querySelector('b').style.cssText='font:800 22px "Plus Jakarta Sans",sans-serif'; card.querySelector('span').style.cssText='color:#748198';
     document.body.appendChild(node); return node;
   }
 
@@ -100,7 +100,7 @@
     var group = button && button.closest('.db-side-group'), submenu = group && group.querySelector('.db-side-submenu'); if (!group || !submenu) return;
     button.setAttribute('aria-expanded', expanded ? 'true' : 'false'); group.classList.toggle('open', expanded);
     if (expanded) submenu.removeAttribute('hidden'); else window.setTimeout(function () { if (!group.classList.contains('open')) submenu.setAttribute('hidden', ''); }, 260);
-    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {}
+    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {} }
   }
 
   function restoreGroups(container) {
@@ -150,11 +150,20 @@
     document.head.appendChild(s);
   }
 
+  function loadBrandConsistency() {
+    if (window.WatchdogBrandConsistency || document.querySelector('script[src="/property/js/brand-consistency-runtime.js"]')) return;
+    var s = document.createElement('script');
+    s.src = '/property/js/brand-consistency-runtime.js';
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
   document.addEventListener('njptr:plan-change', function (event) { paintDeveloperLinks(!!(event.detail && event.detail.developer)); paintPlanNavigation(); });
   document.addEventListener('watchdog:developer-confirmed', function () { paintDeveloperLinks(true); });
   document.addEventListener('keydown', function (event) { if (event.key === 'Escape') toggleMobileMenu(false); });
 
   function load() {
+    loadBrandConsistency();
     loadWhyWatchdog();
     if (loadModernSecondaryShell()) return Promise.resolve(true);
     loadFlood();
