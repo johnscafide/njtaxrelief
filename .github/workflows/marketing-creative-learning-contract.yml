@@ -9,6 +9,7 @@ on:
       - 'property/tests/marketing-creative-learning-contract.mjs'
       - 'supabase/migrations/20260820182004_marketing_creative_outcome_learning_v1.sql'
       - 'supabase/migrations/20260820201837_marketing_creative_learning_snapshot_privacy_v1.sql'
+      - 'supabase/migrations/20260820202430_marketing_creative_learning_fk_indexes.sql'
       - '.github/workflows/marketing-creative-learning-contract.yml'
   workflow_dispatch:
 
