@@ -19,9 +19,104 @@
     touch-action:manipulation;
   }
 
+  body.hm-dashboard-page .hm27-nav-head .hm27-brand-copy small{
+    font-size:11px!important;
+    line-height:1.2!important;
+  }
+
   body.hm-dashboard-page .hm27-nav-links a,
   body.hm-dashboard-page .hm27-nav-foot button{
-    min-height:44px;
+    min-height:48px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm27-nav-links a{
+    padding:12px 14px!important;
+    font-size:15px!important;
+    line-height:1.3!important;
+  }
+
+  body.hm-dashboard-page .hm27-nav-links a i{
+    width:22px!important;
+    font-size:15px!important;
+  }
+
+  body.hm-dashboard-page .hm27-nav-foot button{
+    height:auto!important;
+    font-size:14px!important;
+    line-height:1.3!important;
+  }
+
+  /* The desktop selector command strip becomes a mobile command stack instead of being compressed. */
+  body.hm-dashboard-page .hm-top-in{
+    padding:16px 16px 12px!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-areas:
+      "back saved"
+      "label label"
+      "switch switch"
+      "actions actions"!important;
+    gap:10px!important;
+    align-items:center!important;
+  }
+
+  body.hm-dashboard-page .hm-back{
+    grid-area:back;
+    min-height:44px!important;
+    width:max-content;
+    max-width:100%;
+    font-size:14px!important;
+    line-height:1.3!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm-switch-label{
+    grid-area:label;
+    margin-top:2px!important;
+    font-size:12px!important;
+    line-height:1.25!important;
+  }
+
+  body.hm-dashboard-page #hm-switch{
+    grid-area:switch;
+    width:100%!important;
+    max-width:none!important;
+    height:48px!important;
+    min-height:48px!important;
+    font-size:16px!important;
+    line-height:1.3!important;
+  }
+
+  body.hm-dashboard-page .hm-saved{
+    grid-area:saved;
+    justify-self:end!important;
+    max-width:46vw;
+    font-size:13px!important;
+    line-height:1.3!important;
+    text-align:right;
+    white-space:normal!important;
+  }
+
+  body.hm-dashboard-page .hm27-page-actions{
+    grid-area:actions;
+    width:100%;
+    display:grid!important;
+    grid-template-columns:minmax(0,1.3fr) repeat(2,minmax(0,1fr));
+    gap:8px!important;
+    justify-self:stretch!important;
+  }
+
+  body.hm-dashboard-page .hm27-action{
+    min-width:0;
+    min-height:44px!important;
+    height:auto!important;
+    padding:10px 12px!important;
+    justify-content:center;
+    font-size:14px!important;
+    line-height:1.25!important;
+    white-space:normal!important;
+    text-align:center;
     touch-action:manipulation;
   }
 
@@ -116,5 +211,31 @@
 
   body.hm-dashboard-page .hm27-notice-foot{
     padding:8px 10px max(4px,env(safe-area-inset-bottom))!important;
+  }
+}
+
+@media (max-width: 480px){
+  body.hm-dashboard-page .hm-top-in{
+    grid-template-columns:1fr!important;
+    grid-template-areas:
+      "back"
+      "saved"
+      "label"
+      "switch"
+      "actions"!important;
+  }
+
+  body.hm-dashboard-page .hm-saved{
+    justify-self:start!important;
+    max-width:none;
+    text-align:left;
+  }
+
+  body.hm-dashboard-page .hm27-page-actions{
+    grid-template-columns:1fr 1fr!important;
+  }
+
+  body.hm-dashboard-page .hm27-action.primary{
+    grid-column:1 / -1;
   }
 }
