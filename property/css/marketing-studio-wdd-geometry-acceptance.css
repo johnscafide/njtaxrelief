@@ -1,0 +1,4 @@
+body.wdd-composer-v2 .ms3-canvas.show-front .ms3-front{display:block!important}
+body.wdd-composer-v2 .ms3-canvas.show-front .ms3-back{display:none!important}
+body.wdd-composer-v2 .ms3-canvas.show-back .ms3-front{display:none!important}
+body.wdd-composer-v2 .ms3-canvas.show-back .ms3-back{display:block!important;padding:0!important;background:#fff!important}

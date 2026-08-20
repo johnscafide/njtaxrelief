@@ -1,0 +1,96 @@
+name: WDD Production Contract
+on:
+  pull_request:
+    paths:
+      - 'property/marketing-studio/customize/index.html'
+      - 'property/js/marketing-studio-wdd-geometry-acceptance.js'
+      - 'property/css/marketing-studio-wdd-geometry-acceptance.css'
+      - 'api/watchdog-designs-provider.js'
+      - 'supabase/migrations/*wdd_provider_mapping_proof_contract*.sql'
+      - 'property/tests/wdd-production-contract.mjs'
+      - 'property/tests/wdd-hosted-geometry-acceptance.mjs'
+  push:
+    branches: [main]
+    paths:
+      - 'property/marketing-studio/customize/index.html'
+      - 'property/js/marketing-studio-wdd-geometry-acceptance.js'
+      - 'property/css/marketing-studio-wdd-geometry-acceptance.css'
+      - 'api/watchdog-designs-provider.js'
+      - 'supabase/migrations/*wdd_provider_mapping_proof_contract*.sql'
+      - 'property/tests/wdd-production-contract.mjs'
+      - 'property/tests/wdd-hosted-geometry-acceptance.mjs'
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/wdd-production-contract.mjs
+
+  authenticated-geometry:
+    if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: staging
+    env:
+      STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
+      STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
+      WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
+      WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
+      VISUAL_BASE_URL: http://127.0.0.1:4173
+      VISUAL_EVIDENCE_DIR: visual-acceptance-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Verify staging boundary and rewrite frontend
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$STAGING_SUPABASE_URL"
+          test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
+          test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
+          test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
+          if [[ "$STAGING_SUPABASE_URL" == *"uvkvaxljhhngydvlrzom"* ]]; then echo "Refusing production Supabase"; exit 1; fi
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          from urllib.parse import urlparse
+          prod='uvkvaxljhhngydvlrzom'; prod_url=f'https://{prod}.supabase.co'; prod_key='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa'
+          staging=os.environ['STAGING_SUPABASE_URL'].rstrip('/'); key=os.environ['STAGING_SUPABASE_PUBLISHABLE_KEY']; ref=(urlparse(staging).hostname or '').split('.')[0]
+          if not ref or ref==prod: raise SystemExit('Invalid staging boundary')
+          touched=0
+          for file in Path('property').rglob('*'):
+            if not file.is_file() or file.suffix.lower() not in {'.html','.js','.mjs'}: continue
+            try: text=file.read_text(encoding='utf-8')
+            except UnicodeDecodeError: continue
+            updated=text.replace(prod_url,staging).replace(prod_key,key).replace(prod,ref)
+            if updated!=text: file.write_text(updated,encoding='utf-8'); touched+=1
+          if touched==0: raise SystemExit('Staging rewrite touched no files')
+          print(f'Rewrote {touched} files to staging inside runner only.')
+          PY
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Start local release-candidate server
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/wdd-geometry-server.log 2>&1 &
+          for i in {1..20}; do curl --fail --silent http://127.0.0.1:4173/property/marketing-studio/customize/ >/dev/null && exit 0; sleep 1; done
+          cat /tmp/wdd-geometry-server.log || true; exit 1
+      - name: Run signed-in Front Back Front Back Front acceptance
+        run: node property/tests/wdd-hosted-geometry-acceptance.mjs
+      - name: Upload WDD geometry evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wdd-geometry-acceptance-evidence
+          path: visual-acceptance-evidence
+          if-no-files-found: warn
+          retention-days: 30
