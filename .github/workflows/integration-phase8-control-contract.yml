@@ -1,0 +1,42 @@
+name: Integration Phase 8 Control Contract
+
+on:
+  push:
+    paths:
+      - 'supabase/functions/integration-delivery-worker/index.ts'
+      - 'supabase/migrations/20260819212400_integration_phase8_operations_control_plane.sql'
+      - 'supabase/migrations/20260819213700_integration_phase8_operations_rpc.sql'
+      - 'supabase/migrations/20260820123600_integration_phase8_provider_control_schema.sql'
+      - 'supabase/migrations/20260820123700_integration_phase8_provider_control_rpcs.sql'
+      - 'supabase/migrations/20260820123800_integration_phase8_replay_control_enforcement.sql'
+      - 'supabase/migrations/20260820123900_integration_phase8_provider_health_trigger.sql'
+      - 'property/js/integrations-automation-fabric.js'
+      - 'property/tests/integration-phase8-control-contract.mjs'
+      - '.github/workflows/integration-phase8-control-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/integration-delivery-worker/index.ts'
+      - 'supabase/migrations/20260819212400_integration_phase8_operations_control_plane.sql'
+      - 'supabase/migrations/20260819213700_integration_phase8_operations_rpc.sql'
+      - 'supabase/migrations/20260820123600_integration_phase8_provider_control_schema.sql'
+      - 'supabase/migrations/20260820123700_integration_phase8_provider_control_rpcs.sql'
+      - 'supabase/migrations/20260820123800_integration_phase8_replay_control_enforcement.sql'
+      - 'supabase/migrations/20260820123900_integration_phase8_provider_health_trigger.sql'
+      - 'property/js/integrations-automation-fabric.js'
+      - 'property/tests/integration-phase8-control-contract.mjs'
+      - '.github/workflows/integration-phase8-control-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check Phase 8 control contract
+        run: node property/tests/integration-phase8-control-contract.mjs
