@@ -24,4 +24,97 @@
     min-height:44px;
     touch-action:manipulation;
   }
+
+  /* Profile and notification popovers must behave like mobile sheets, not desktop menus. */
+  body.hm-dashboard-page .hm27-pop{
+    left:8px!important;
+    right:8px!important;
+    top:calc(68px + env(safe-area-inset-top))!important;
+    width:auto!important;
+    max-width:none!important;
+    max-height:calc(100dvh - 84px - env(safe-area-inset-top) - env(safe-area-inset-bottom))!important;
+    overflow:hidden!important;
+    padding-bottom:max(10px,env(safe-area-inset-bottom))!important;
+  }
+
+  body.hm-dashboard-page .hm27-pop header small{
+    font-size:12px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page #hm27-profile-pop nav a,
+  body.hm-dashboard-page #hm27-profile-pop nav .hm27-menu-row{
+    min-height:56px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page #hm27-profile-pop nav span b{
+    font-size:14px!important;
+  }
+
+  body.hm-dashboard-page #hm27-profile-pop nav span small{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+
+  body.hm-dashboard-page .hm27-pop-signout,
+  body.hm-dashboard-page .hm27-read,
+  body.hm-dashboard-page .hm27-notice-foot{
+    min-height:44px!important;
+    font-size:13px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm27-read{
+    min-width:64px;
+    padding:0 10px!important;
+  }
+
+  body.hm-dashboard-page #hm27-notice-pop{
+    display:flex!important;
+    flex-direction:column!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice-list{
+    flex:1 1 auto;
+    min-height:0;
+    max-height:none!important;
+    overflow-y:auto!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  body.hm-dashboard-page .hm27-notice{
+    min-height:64px!important;
+    padding:11px 10px!important;
+    touch-action:manipulation;
+  }
+
+  body.hm-dashboard-page .hm27-notice span b{
+    font-size:13px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice span small{
+    font-size:12px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice span em{
+    font-size:11px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice-empty b{
+    font-size:14px!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice-empty small{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+
+  body.hm-dashboard-page .hm27-notice-foot{
+    padding:8px 10px max(4px,env(safe-area-inset-bottom))!important;
+  }
 }
