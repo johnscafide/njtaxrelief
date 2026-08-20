@@ -59,4 +59,16 @@ body.wd-public-menu-open{overflow:hidden}
   body.wd-consumer-mode .ssearch{top:78px}
   .wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}
 }
+
+/* Mobile certification 2026-08-19 run 003: the legacy landing footer reduced
+   important navigation to small inline text. Give every footer destination a
+   phone-sized touch target without changing the desktop footer layout. */
+@media(max-width:540px){
+  body.wd-consumer-mode #wd-property-footer .wdf-link,
+  body.wd-consumer-mode #wd-property-footer .wdf-legal-link,
+  body.wd-consumer-mode #wd-property-footer .wdf-bottom-link{align-items:center!important;display:flex!important;font-size:14px!important;line-height:1.35!important;min-height:44px!important;padding:4px 0!important;width:100%!important}
+  body.wd-consumer-mode #wd-property-footer .wdf-legal-links,
+  body.wd-consumer-mode #wd-property-footer .wdf-bottom-links{align-items:stretch!important;display:flex!important;flex-direction:column!important;gap:2px!important;width:100%!important}
+  body.wd-consumer-mode #wd-property-footer .wdf-social-link{align-items:center!important;display:inline-flex!important;height:44px!important;justify-content:center!important;min-height:44px!important;min-width:44px!important;width:44px!important}
+}
 @media(prefers-reduced-motion:reduce){.wd-public-sheet,.wd-public-backdrop{transition:none}}
