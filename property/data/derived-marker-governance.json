@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-20T10:07:14.773Z",
+  "generated_at": "2026-08-20T10:09:08.958Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -9,6 +9,11 @@
     "abatement.abated_share",
     "abatement.percentile",
     "abatement.vs_median",
+    "budget.levy_base_gap",
+    "budget.pressure_band",
+    "budget.pressure_score",
+    "budget.structural_imbalance",
+    "budget.structural_imbalance_share",
     "exemption.exempt_percentile",
     "exemption.exempt_share",
     "exemption.municipal_subsidy",
@@ -121,6 +126,11 @@
     "abatement.abated_share",
     "abatement.percentile",
     "abatement.vs_median",
+    "budget.levy_base_gap",
+    "budget.pressure_band",
+    "budget.pressure_score",
+    "budget.structural_imbalance",
+    "budget.structural_imbalance_share",
     "exemption.exempt_percentile",
     "exemption.exempt_share",
     "exemption.municipal_subsidy",
@@ -232,8 +242,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 110,
-    "blocked": 188,
+    "live": 115,
+    "blocked": 183,
     "retired": 0,
     "untriaged": 0
   },
@@ -779,14 +789,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Structural budget imbalance",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "budget.structural_imbalance_share",
@@ -801,14 +811,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Structural imbalance share",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "budget.levy_base_gap",
@@ -823,14 +833,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Levy/base growth gap",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "budget.pressure_score",
@@ -845,14 +855,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Municipal budget-pressure score",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "budget.pressure_band",
@@ -867,14 +877,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Municipal budget-pressure band",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "exemption.exempt_share",
