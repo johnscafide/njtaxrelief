@@ -340,6 +340,63 @@
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
   }
+
+  /* Final hero and risk-summary pass: preserve evidence, promote labels that were desktop-dense on phones. */
+  body.hm-dashboard-page .hm-id p{
+    font-size:15px!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .hm-val span{
+    font-size:13px!important;
+    line-height:1.4!important;
+  }
+
+  body.hm-dashboard-page .hm-figs{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px 18px!important;
+  }
+
+  body.hm-dashboard-page .hm-figs > div{
+    min-width:0;
+  }
+
+  body.hm-dashboard-page .hm-figs dt{
+    font-size:12px!important;
+    line-height:1.35!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .hm-figs dd{
+    font-size:20px!important;
+    line-height:1.2!important;
+    overflow-wrap:anywhere;
+  }
+
+  body.hm-dashboard-page .hm-figs dd em{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+
+  body.hm-dashboard-page .rv-score span,
+  body.hm-dashboard-page .rr-h{
+    font-size:12px!important;
+    line-height:1.35!important;
+  }
+
+  body.hm-dashboard-page .rv-m-h{
+    font-size:13px!important;
+    line-height:1.4!important;
+    flex-wrap:wrap;
+  }
+
+  body.hm-dashboard-page .tipbox{
+    font-size:14px!important;
+    line-height:1.5!important;
+    max-width:calc(100vw - 32px)!important;
+  }
 }
 
 @media (max-width: 480px){
@@ -375,5 +432,9 @@
   body.hm-dashboard-page .hm-mobile-intel .wdai-persona{
     width:100%;
     max-width:100%;
+  }
+
+  body.hm-dashboard-page .hm-figs{
+    grid-template-columns:1fr!important;
   }
 }
