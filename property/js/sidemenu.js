@@ -100,7 +100,7 @@
     var group = button && button.closest('.db-side-group'), submenu = group && group.querySelector('.db-side-submenu'); if (!group || !submenu) return;
     button.setAttribute('aria-expanded', expanded ? 'true' : 'false'); group.classList.toggle('open', expanded);
     if (expanded) submenu.removeAttribute('hidden'); else window.setTimeout(function () { if (!group.classList.contains('open')) submenu.setAttribute('hidden', ''); }, 260);
-    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {}
+    if (remember) { try { localStorage.setItem('watchdogNavGroup:' + group.getAttribute('data-side-group'), expanded ? '1' : '0'); } catch (_) {} }
   }
 
   function restoreGroups(container) {
