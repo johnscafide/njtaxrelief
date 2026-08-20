@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-20T21:59:00Z",
+  "captured_at": "2026-08-20T22:08:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -13,7 +13,13 @@
     "geology.bedrock_outcrop_hit": "live",
     "geology.historic_fill_hit": "live",
     "geology.soil_mapping_hit": "live",
+    "njplus.nj-dca-affordable-housing.affordable_housing_reporting_status": "live",
     "njplus.nj-dca-affordable-housing.affordable_trust_fund_balance": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_for_sale": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_rental": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_total": "live",
+    "njplus.nj-dca-affordable-housing.low_income_households": "live",
+    "njplus.nj-dca-affordable-housing.moderate_income_households": "live",
     "njplus.nj-dca-community-assets.opportunity_zone_status": "live",
     "njplus.nj-dca-community-assets.redevelopment_area_status": "live",
     "njplus.nj-dca-community-assets.transit_village_status": "live",
