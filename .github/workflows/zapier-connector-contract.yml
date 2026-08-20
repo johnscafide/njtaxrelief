@@ -1,0 +1,44 @@
+name: Zapier Connector Contract
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'integrations/zapier/**'
+      - '.github/workflows/zapier-connector-contract.yml'
+  pull_request:
+    paths:
+      - 'integrations/zapier/**'
+      - '.github/workflows/zapier-connector-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-zapier-connector:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: integrations/zapier
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: integrations/zapier/package-lock.json
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run publication contract tests
+        run: npm test
+
+      - name: Validate Zapier app schema
+        run: npm run validate
