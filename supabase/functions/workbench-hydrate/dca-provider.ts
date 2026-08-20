@@ -1,13 +1,15 @@
 // NJ public-data resolver used by Workbench hydration.
 // Serves DCA construction permits/development, 2026 MOD-IV municipal intelligence,
 // NJ Division of Taxation general tax rates, Abstract-of-Ratables abatements,
-// and the combined statewide exemption/PILOT aggregate.
+// the combined statewide exemption/PILOT aggregate, and governed DCA housing context.
 const API='https://data.nj.gov/resource/w9se-dmra.json';
 const BASE='https://njpropertytaxrelief.com';
 const MODIV_API=BASE+'/property/data/statewide-intelligence.json';
 const TAX_RATES_API=BASE+'/property/tax-rates.json';
 const EXEMPT_API=BASE+'/property/data/exempt-pilot.json';
 const ABATEMENTS_API=BASE+'/property/abatements.json';
+const AFFORDABLE_API=BASE+'/property/data/affordable-housing.json';
+const NEIGHBORHOOD_API=BASE+'/property/data/neighborhood-trends.json';
 
 const cache=new Map<string,{at:number,rows:any[]}>();
 const TTL=30*60*1000;
@@ -43,6 +45,17 @@ const EXEMPT_PILOT_ONLY=new Set([
 
 const ABATEMENT_FIELDS=new Set(['total_base','net_base','land','improvements','abated','abated_share','percentile','vs_median']);
 const ABATEMENT_DERIVED_FIELDS=new Set(['abated_share','percentile','vs_median']);
+const AFFORDABLE_FIELDS=new Set([
+  'affordable_housing_reporting_status','affordable_trust_fund_balance','affordable_units_for_sale',
+  'affordable_units_rental','affordable_units_total','low_income_households','moderate_income_households'
+]);
+const NEIGHBORHOOD_FIELDS=new Set([
+  'population_change','housing_unit_change','rental_cost_change','home_value_change',
+  'household_income','employment_density','neighborhood_trend_year'
+]);
+const NEIGHBORHOOD_DERIVED_FIELDS=new Set([
+  'population_change','housing_unit_change','rental_cost_change','home_value_change','employment_density','neighborhood_trend_year'
+]);
 
 function esc(v:any){return String(v??'').replace(/'/g,"''").trim()}
 function num(v:any){const x=Number(v);return Number.isFinite(x)?x:0}
@@ -70,8 +83,8 @@ async function modivRoot(){
 
 async function municipalRoots(){
   if(municipalRootCache&&Date.now()-municipalRootAt<MUNICIPAL_TTL)return municipalRootCache;
-  const [taxRates,exemptPilot,abatements]=await Promise.all([
-    fetchJson(TAX_RATES_API),fetchJson(EXEMPT_API),fetchJson(ABATEMENTS_API)
+  const [taxRates,exemptPilot,abatements,affordableHousing,neighborhoodTrends]=await Promise.all([
+    fetchJson(TAX_RATES_API),fetchJson(EXEMPT_API),fetchJson(ABATEMENTS_API),fetchJson(AFFORDABLE_API),fetchJson(NEIGHBORHOOD_API)
   ]);
   const rateIndex:Record<string,any>={};
   for(const [key,row] of Object.entries(taxRates?.rates||{})){
@@ -81,7 +94,7 @@ async function municipalRoots(){
     const collapsed=collapseDuplicateType(normMunicipality(m[1]))+'|'+normCounty(m[2]);
     if(!rateIndex[collapsed])rateIndex[collapsed]=row;
   }
-  municipalRootCache={taxRates,exemptPilot,abatements,rateIndex};municipalRootAt=Date.now();return municipalRootCache
+  municipalRootCache={taxRates,exemptPilot,abatements,affordableHousing,neighborhoodTrends,rateIndex};municipalRootAt=Date.now();return municipalRootCache
 }
 
 async function modivIntelValue(row:any,field:string){
@@ -128,6 +141,22 @@ function abatementValue(root:any,row:any,field:string,origin:string){
     v=median>0&&Number.isFinite(share)?share/median:0;
   }
   return {v,checked:true,kind,source:'NJ Division of Taxation 2025 Abstract of Ratables · '+MUNICIPAL_REFERENCE_PROVIDER_VERSION};
+}
+
+function affordableHousingValue(root:any,row:any,field:string){
+  if(!AFFORDABLE_FIELDS.has(field))return null;
+  const tc=treasury(row),rec=root?.affordableHousing?.districts?.[tc];
+  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting'};
+  const v=field==='affordable_housing_reporting_status'?rec?.reporting_status:rec?.[field];
+  return {v:v??null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};
+}
+
+function neighborhoodTrendValue(root:any,row:any,field:string){
+  if(!NEIGHBORHOOD_FIELDS.has(field))return null;
+  const tc=treasury(row),rec=root?.neighborhoodTrends?.municipalities?.[tc];
+  const kind=NEIGHBORHOOD_DERIVED_FIELDS.has(field)?'derived_governed':'authoritative_reference';
+  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind,source:'NJ DCA 2026 Neighborhood Trends Database'};
+  return {v:rec?.[field]??null,checked:true,kind,source:'NJ DCA 2026 Neighborhood Trends Database · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};
 }
 
 async function parcelRows(row:any){
@@ -180,11 +209,13 @@ function developmentField(rows:any[],field:string){
 export async function dcaPermitValue(marker:any,row:any){
   const src=String(marker?.source_id||''),id=String(marker?.id||''),field=String(marker?.field||''),origin=String(marker?.origin||'');
   if(src==='treasury-modiv-2026')return modivIntelValue(row,field);
-  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'){
+  if(src==='nj-division-taxation'||src==='nj-abstract-pilot'||src==='nj-tax-abstract'||src==='nj-dca-affordable-housing'||src==='nj-dca-neighborhood-trends'){
     const root=await municipalRoots();
     if(src==='nj-division-taxation')return taxRateValue(root,row,field);
     if(src==='nj-abstract-pilot')return exemptionValue(root,row,field,origin);
-    return abatementValue(root,row,field,origin);
+    if(src==='nj-tax-abstract')return abatementValue(root,row,field,origin);
+    if(src==='nj-dca-affordable-housing')return affordableHousingValue(root,row,field);
+    return neighborhoodTrendValue(root,row,field);
   }
   if(src==='nj-dca-development-trends'){
     const rows=await municipalRows(row);if(!rows.length)return {v:null,checked:true};
@@ -200,3 +231,4 @@ export async function dcaPermitValue(marker:any,row:any){
 export const DCA_PERMIT_PROVIDER_VERSION='nj-dca-permits-development-live-v2';
 export const MODIV_INTEL_PROVIDER_VERSION='modiv-intelligence-2026-v1';
 export const MUNICIPAL_REFERENCE_PROVIDER_VERSION='nj-municipal-reference-live-v1';
+export const MUNICIPAL_HOUSING_PROVIDER_VERSION='nj-dca-housing-context-live-v1';
