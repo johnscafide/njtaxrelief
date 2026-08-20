@@ -54,6 +54,8 @@ body.wd-public-menu-open{overflow:hidden}
   body.wd-consumer-mode .plm-bar-actions{flex:1 1 auto;justify-content:flex-end;gap:0;min-width:0}
   body.wd-consumer-mode .plm-barbtn{flex:0 0 44px;height:44px;justify-content:center;padding:0}
   body.wd-consumer-mode .plm-barbtn i{font-size:16px}
+  /* Run 005: explainer/comparison overlays used a 34px close target. */
+  body.wd-consumer-mode .plm-note-x{height:44px;min-height:44px;min-width:44px;width:44px}
 }
 @media(max-width:560px){
   body.wd-consumer-mode .ssearch{top:78px}
