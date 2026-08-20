@@ -43,6 +43,18 @@ body.wd-public-menu-open{overflow:hidden}
 @media(max-width:940px){
   body.wd-consumer-mode .ssearch{top:72px}
 }
+
+/* Mobile certification 2026-08-19 run 002: compact the property-details
+   toolbar so 320px phones keep Back + Save + Share + Sign in + More visible.
+   Every icon remains a minimum 44px touch target; desktop is unaffected. */
+@media(max-width:700px){
+  body.wd-consumer-mode .plm-bar{gap:2px;padding:8px 8px}
+  body.wd-consumer-mode .plm-back{flex:0 0 44px;height:44px;justify-content:center;overflow:hidden;padding:0;font-size:0;white-space:nowrap}
+  body.wd-consumer-mode .plm-back i{font-size:16px;margin:0}
+  body.wd-consumer-mode .plm-bar-actions{flex:1 1 auto;justify-content:flex-end;gap:0;min-width:0}
+  body.wd-consumer-mode .plm-barbtn{flex:0 0 44px;height:44px;justify-content:center;padding:0}
+  body.wd-consumer-mode .plm-barbtn i{font-size:16px}
+}
 @media(max-width:560px){
   body.wd-consumer-mode .ssearch{top:78px}
   .wd-nav-in{padding:15px 17px!important}.wd-public-trigger{border-radius:50%!important;height:48px;min-height:48px;padding:0!important;width:48px}.wd-public-trigger span{display:none}.wd-logo{font-size:20px!important}.wd-logo i{font-size:21px}.wd-public-profile img{height:34px;width:34px}.wd-public-sheet{border-radius:0 26px 26px 0;padding-top:calc(18px + env(safe-area-inset-top));width:94vw}.wd-public-sheet.right{border-radius:26px 0 0 26px}
