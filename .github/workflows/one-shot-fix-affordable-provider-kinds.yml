@@ -1,0 +1,74 @@
+name: One-shot fix Affordable Housing provider kinds
+on:
+  push:
+    branches: [agent/fix-affordable-provider-kinds-20260820]
+    paths:
+      - '.github/workflows/one-shot-fix-affordable-provider-kinds.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: agent/fix-affordable-provider-kinds-20260820
+      - name: Apply exact provenance corrections
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          provider = Path('supabase/functions/workbench-hydrate/dca-provider.ts')
+          text = provider.read_text()
+          anchor = "const AFFORDABLE_FIELDS=new Set([\n  'affordable_housing_reporting_status','affordable_trust_fund_balance','affordable_units_for_sale',\n  'affordable_units_rental','affordable_units_total','low_income_households','moderate_income_households'\n]);\n"
+          addition = anchor + "const AFFORDABLE_DERIVED_FIELDS=new Set([\n  'affordable_housing_reporting_status','affordable_units_for_sale','affordable_units_rental',\n  'affordable_units_total','low_income_households','moderate_income_households'\n]);\n"
+          if text.count(anchor) != 1:
+              raise SystemExit(f'Affordable field anchor count={text.count(anchor)}')
+          text = text.replace(anchor, addition, 1)
+
+          old = "function affordableHousingValue(root:any,row:any,field:string){\n  if(!AFFORDABLE_FIELDS.has(field))return null;\n  const tc=treasury(row),rec=root?.affordableHousing?.districts?.[tc];\n  if(!/^\\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting'};\n  const v=field==='affordable_housing_reporting_status'?rec?.reporting_status:rec?.[field];\n  return {v:v??null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};\n}\n"
+          new = "function affordableHousingValue(root:any,row:any,field:string){\n  if(!AFFORDABLE_FIELDS.has(field))return null;\n  const tc=treasury(row),rec=root?.affordableHousing?.districts?.[tc];\n  const kind=AFFORDABLE_DERIVED_FIELDS.has(field)?'derived_governed':'authoritative_reference';\n  if(!/^\\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind,source:'NJ DCA affordable housing municipal status reporting'};\n  const v=field==='affordable_housing_reporting_status'?rec?.reporting_status:rec?.[field];\n  return {v:v??null,checked:true,kind,source:'NJ DCA affordable housing municipal status reporting · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};\n}\n"
+          if text.count(old) != 1:
+              raise SystemExit(f'Affordable resolver anchor count={text.count(old)}')
+          provider.write_text(text.replace(old, new, 1))
+
+          canary = Path('supabase/functions/provider-release-canary/index-v2.ts')
+          c = canary.read_text()
+          start = c.index('  affordable_housing_v1:')
+          end = c.index('  neighborhood_trends_v1:', start)
+          block = c[start:end]
+          derived_ids = [
+              'affordable_housing_reporting_status',
+              'affordable_units_for_sale',
+              'affordable_units_rental',
+              'affordable_units_total',
+              'low_income_households',
+              'moderate_income_households',
+          ]
+          for short in derived_ids:
+              marker = f"njplus.nj-dca-affordable-housing.{short}"
+              old_kind = f"'{marker}':'authoritative_reference'"
+              new_kind = f"'{marker}':'derived_governed'"
+              if block.count(old_kind) != 1:
+                  raise SystemExit(f'Expected one authoritative canary kind for {marker}, found {block.count(old_kind)}')
+              block = block.replace(old_kind, new_kind, 1)
+          trust = "'njplus.nj-dca-affordable-housing.affordable_trust_fund_balance':'authoritative_reference'"
+          if block.count(trust) != 1:
+              raise SystemExit('Trust-fund authoritative canary contract missing')
+          c = c[:start] + block + c[end:]
+          canary.write_text(c)
+
+          workflow = Path('.github/workflows/one-shot-fix-affordable-provider-kinds.yml')
+          workflow.unlink()
+          PY
+
+          git diff --check
+          git diff -- supabase/functions/workbench-hydrate/dca-provider.ts supabase/functions/provider-release-canary/index-v2.ts
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- supabase/functions/workbench-hydrate/dca-provider.ts supabase/functions/provider-release-canary/index-v2.ts .github/workflows/one-shot-fix-affordable-provider-kinds.yml
+          git commit -m 'Agent: correct Affordable Housing provider provenance'
+          git push origin HEAD:agent/fix-affordable-provider-kinds-20260820
