@@ -1,0 +1,92 @@
+/* NJW-246 mobile certification override for /property/dashboard.
+   Intentionally isolated to phone/tablet widths. Desktop dashboard is unchanged. */
+
+@media (max-width: 768px){
+  /* Keep the app header usable instead of squeezing desktop utility chips into a phone row. */
+  body.wdv2-mounted .wd4-topbar{
+    height:68px;
+    min-height:68px;
+    padding:0 12px;
+    gap:10px;
+  }
+  body.wdv2-mounted .wd4-top-left,
+  body.wdv2-mounted .wd4-top-right{gap:8px;min-width:0}
+  body.wdv2-mounted .wd4-menu-btn{width:44px;height:44px;min-width:44px;border-radius:11px}
+  body.wdv2-mounted .wd4-brand-mark{width:40px;height:40px;border-radius:11px}
+  body.wdv2-mounted .wd4-brand-copy{display:none}
+  body.wdv2-mounted .wd4-date-chip,
+  body.wdv2-mounted .wd4-weather-chip{display:none}
+  body.wdv2-mounted .wd4-icon-btn{width:44px;height:44px;min-width:44px}
+  body.wdv2-mounted .wd4-user{padding:2px;margin-left:0}
+  body.wdv2-mounted .wd4-user > i{display:none}
+  body.wdv2-mounted .wd4-avatar{width:40px;height:40px}
+
+  /* Welcome/actions become a vertical mobile workspace instead of a compressed desktop toolbar. */
+  body.wdv2-mounted .wd4-welcome{
+    min-height:0;
+    padding:16px 14px 12px!important;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    align-items:start;
+    gap:12px;
+  }
+  body.wdv2-mounted .wd4-welcome-copy{min-width:0}
+  body.wdv2-mounted .wd4-welcome-copy h1{font-size:22px;line-height:1.12;margin-bottom:6px;overflow-wrap:anywhere}
+  body.wdv2-mounted .wd4-welcome-copy h1 span{font-size:18px}
+  body.wdv2-mounted .wd4-welcome-actions,
+  body.wdv2-mounted .wd4-page-actions{
+    width:100%;
+    justify-content:flex-start;
+    gap:8px!important;
+    flex-wrap:wrap;
+  }
+  body.wdv2-mounted .wd4-filter-select{min-height:44px;font-size:12px;max-width:100%}
+  body.wdv2-mounted .wd4-add-btn,
+  body.wdv2-mounted .wd4-export-btn,
+  body.wdv2-mounted .wd4-grid-btn,
+  body.wdv2-mounted .wd7-add-property{min-height:44px}
+
+  /* Reduce desktop gutters and prevent the status rail from forcing horizontal overflow. */
+  body.wdv2-mounted .wd4-canvas{padding:0 12px 88px!important}
+  body.wdv2-mounted .wdv2-rail{
+    margin:0 14px 14px;
+    padding:0 0 12px;
+    display:grid;
+    grid-template-columns:minmax(0,1fr);
+    gap:10px;
+  }
+  body.wdv2-mounted .wdv2-rail-left,
+  body.wdv2-mounted .wdv2-rail-right{
+    width:100%;
+    min-width:0;
+    flex-wrap:wrap;
+    gap:8px 12px;
+  }
+  body.wdv2-mounted .wdv2-freshness{white-space:normal;min-width:0}
+  body.wdv2-mounted .wdv2-filter-chip{max-width:100%}
+
+  /* The loading state must match the real mobile shell, otherwise first paint overflows before mount. */
+  .wdv2-skel-top{height:68px;padding:0 12px;gap:10px}
+  .wdv2-skel-top i{width:44px;height:44px;border-radius:11px}
+  .wdv2-skel-top b{width:92px;height:20px}
+  .wdv2-skel-top span{display:none}
+  .wdv2-skel-welcome{padding:16px 14px 12px;display:block}
+  .wdv2-skel-welcome>div{flex-wrap:wrap}
+  .wdv2-skel-welcome>div:last-child{margin-top:12px}
+  .wdv2-skel-welcome i{max-width:100%}
+  .wdv2-skel-rail{padding:0 14px 12px;gap:8px;flex-wrap:wrap}
+  .wdv2-skel-kpis,
+  .wdv2-skel-analysis,
+  .wdv2-skel-primary{grid-template-columns:1fr;padding:0 12px 12px;gap:12px}
+  .wdv2-skel-primary aside{gap:12px}
+  .wdv2-skel-table{margin:0 12px;height:300px}
+}
+
+@media (max-width: 420px){
+  body.wdv2-mounted .wd4-topbar{padding:0 10px}
+  body.wdv2-mounted .wd4-brand-mark{display:none}
+  body.wdv2-mounted .wd4-welcome{padding-left:12px!important;padding-right:12px!important}
+  body.wdv2-mounted .wd4-canvas{padding-left:10px!important;padding-right:10px!important}
+  body.wdv2-mounted .wdv2-rail{margin-left:12px;margin-right:12px}
+  .wdv2-skel-top b{display:none}
+}
