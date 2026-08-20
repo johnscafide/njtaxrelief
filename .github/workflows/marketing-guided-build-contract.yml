@@ -1,0 +1,28 @@
+name: Marketing Guided Build Contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/js/marketing-studio-guided-build.js'
+      - 'property/css/marketing-studio-guided-build.css'
+      - 'property/marketing-studio/design/index.html'
+      - 'property/marketing-studio/customize/index.html'
+      - 'property/marketing-studio/recipients/index.html'
+      - 'property/marketing-studio/review/index.html'
+      - 'property/tests/marketing-guided-build-contract.mjs'
+      - '.github/workflows/marketing-guided-build-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run guided build safety contract
+        run: node property/tests/marketing-guided-build-contract.mjs
