@@ -26,7 +26,10 @@ assert.match(js,/The guided flow will not silently create or change a creative/)
 assert.doesNotMatch(js,/\.functions\.invoke|\bfetch\s*\(/i);
 assert.doesNotMatch(js,/marketing_save_creative|marketing_approve_creative|marketing_prepare_direct_mail_recipients|marketing_studio_quote|marketing_create_checkout|marketing_approve_direct_mail_launch|marketing_set_automation_state|marketing_launch|submit_order|purchase_postage|payment_intent/i);
 assert.match(js,/const save=\$\('#msc-save,\[data-pv-save\]'\)/);
-assert.doesNotMatch(js,/\.click\(\).*msc-quote|\.click\(\).*msc-fund|\.click\(\).*msc-launch/i);
+const programmaticClicks=js.match(/\.click\(\)/g)||[];
+assert.equal(programmaticClicks.length,1,'guided layer may programmatically click only the existing Save Creative control');
+assert.match(js,/if\(save\)\{save\.click\(\);scheduleRefresh/);
+assert.doesNotMatch(js,/\$\('#msc-(?:quote|fund|launch|launch-approve)'\)\.click\(/i);
 for(const [page,source] of Object.entries(html)){
   assert.match(source,/marketing-studio-guided-build\.css/,`${page} must load guided build CSS`);
   assert.match(source,/marketing-studio-guided-build\.js/,`${page} must load guided build JS`);
