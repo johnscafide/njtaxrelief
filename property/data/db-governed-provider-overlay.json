@@ -1,9 +1,14 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-19T22:59:00Z",
+  "captured_at": "2026-08-20T10:08:00Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
+    "budget.levy_base_gap": "live",
+    "budget.pressure_band": "live",
+    "budget.pressure_score": "live",
+    "budget.structural_imbalance": "live",
+    "budget.structural_imbalance_share": "live",
     "geology.acid_producing_soil_hit": "live",
     "geology.bedrock_outcrop_hit": "live",
     "geology.historic_fill_hit": "live",
