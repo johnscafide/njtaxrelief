@@ -4,9 +4,6 @@ body.igcc-enabled:not([data-igcc-view="advanced"]) #ig-workspace>.ig-stats{displ
 body.igcc-enabled[data-igcc-view="overview"] .igcc-surface{display:none!important}
 body.igcc-enabled[data-igcc-view="connections"] .igcc-surface:not([data-igcc-surface="connections"]){display:none!important}
 body.igcc-enabled[data-igcc-view="automations"] .igcc-surface:not([data-igcc-surface="automations"]){display:none!important}
-body.igcc-enabled[data-igcc-view="advanced"] .igcc-surface{display:block}
-body.igcc-enabled[data-igcc-view="advanced"] .igcc-surface.ig-feature-grid,
-body.igcc-enabled[data-igcc-view="advanced"] .igcc-surface.ig-grid{display:grid}
 .igcc{margin:0 0 22px;padding:0;color:var(--igcc-text)}
 .igcc-top{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:16px}
 .igcc-kicker{display:block;margin-bottom:7px;font-size:10px;font-weight:900;letter-spacing:.13em;color:var(--igcc-blue)}
