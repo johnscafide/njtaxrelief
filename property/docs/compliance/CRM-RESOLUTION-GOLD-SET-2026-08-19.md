@@ -10,11 +10,11 @@ Watchdog now has a real human-reviewed CRM-to-property resolution sample from th
 
 Current production state:
 
-- **27 relationships are explicitly human verified**;
-- all 27 originated from the deterministic candidate rule: exact normalized street address + exact five-digit ZIP + governed NJ parcel evidence;
-- all 27 are tagged `human_verified_gold` after reconciling older review metadata;
+- **105 relationships are explicitly human verified**;
+- all 105 originated from the deterministic candidate rule: exact normalized street address + exact five-digit ZIP + governed NJ parcel evidence;
+- all 105 are tagged `human_verified_gold` in relationship evidence;
 - no verified relationship used contact-name matching, owner-name similarity, seller-intent inference or ownership inference;
-- there are currently **0 human-rejected relationships**, so the 27/27 acceptance history must not be treated as universal precision proof.
+- there are currently **0 human-rejected relationships**, so the all-positive review history must not be treated as universal precision proof.
 
 The gold set is regression evidence and human-review evidence. It is not permission to silently auto-verify future address candidates.
 
@@ -36,7 +36,7 @@ Requirements:
 
 ## Missing-ZIP candidate rule
 
-A second candidate-only rule is now implemented for a New Jersey CRM address that does not contain a usable ZIP:
+A second candidate-only rule is implemented for a New Jersey CRM address that does not contain a usable ZIP:
 
 `njogis_zip_enriched_exact_street_spatial_parcel`
 
@@ -55,24 +55,32 @@ The rule may create a review candidate only when all of the following are true:
 
 Any failed dependency produces no relationship candidate. The rule never falls back to mailing-city equals municipality and never uses a person's name.
 
-Unique enriched candidates use a lower evidence confidence than native exact-ZIP candidates and still require explicit human review.
+Unique enriched candidates use a lower evidence confidence than native exact-ZIP candidates and still require explicit human review. Auto verification remains disabled.
 
 ## Missing-ZIP shadow acceptance
 
-The rule was tested against the current human gold set by deliberately withholding ZIP evidence and asking the NJOGIS geocoder to recover it.
+### Historical candidate-production evidence
 
-Latest 27-case shadow result:
+An earlier missing-ZIP cohort found **12 unique deterministic shadow candidates out of 22 unresolved records**, with **0 ambiguous matches**. Before those records were reprocessed in production, fresh BoldTrail contact-detail data supplied ZIPs. The controlled production rerun therefore used the stronger existing exact-ZIP route for those records rather than the enrichment route. This proves the enrichment path can recover additional deterministic candidates, but it is not a claim that a live human-reviewed relationship was created by the enrichment route itself.
 
-- gold cases: **27**;
-- geocoder-eligible cases: **25**;
-- same governed parcel reproduced: **23**;
-- safe fail-closed cases: **4**;
-- wrong parcel candidates: **0**;
-- reproduction rate: **85.19%**.
+### Full-current-gold closeout regression — 2026-08-20
 
-The four misses were not promoted to alternate parcels. Two did not produce a usable geocoder candidate, one geocoded point returned no parcel, and one intersected a parcel whose governed address failed the exact street/ZIP check. Those outcomes demonstrate the intended fail-closed behavior.
+The enrichment rule was rerun against **all 105 current human-verified gold relationships** by deliberately withholding ZIP evidence and asking NJOGIS to recover it.
 
-An earlier missing-ZIP cohort found 12 unique shadow candidates out of 22 unresolved records with zero ambiguous matches. Before those records were reprocessed in production, fresh BoldTrail contact detail supplied ZIPs, so the 12 live candidates ultimately used the existing exact-ZIP rule instead. Therefore the missing-ZIP branch has passed shadow acceptance but should **not** be described as having a completed live human-review acceptance yet.
+Results at closeout:
+
+- gold cases queued: **105**;
+- geocoder eligible: **85**;
+- same governed parcel reproduced: **76**;
+- wrong unique parcel candidates among completed parcel responses: **0**;
+- ambiguous exact parcel candidates among completed parcel responses: **0**;
+- completed parcel responses with no exact parcel: **7**;
+- remaining non-eligible cases failed at geocoder/ZIP/street gates rather than being mapped to an alternate parcel;
+- two parcel HTTP responses remained unavailable at the observation point and were not counted as successful or alternate matches.
+
+The lower reproduction rate is acceptable for this candidate-only enrichment path because the safety objective is fail-closed behavior, not maximum recall. No completed gold case produced a wrong unique parcel.
+
+The live missing-ZIP cohort at this closeout snapshot contained only 10 unresolved records. Five passed the geocoder gate, none produced a unique exact parcel, and none were ambiguous. They therefore correctly remained unresolved.
 
 ## Automation gate
 
@@ -83,14 +91,14 @@ For the original exact-address method and the missing-ZIP enrichment method:
 - auto verification: **disabled**;
 - minimum human reviews before policy reconsideration: **50**;
 - maximum acceptable false-positive rate for a future reviewed release: **1%**;
-- reaching 50 reviews does not enable automatic verification;
+- reaching the review threshold does not enable automatic verification;
 - a later explicit engineering/security review is required before any policy change.
 
 The lack of rejected examples is itself a reason to keep automation disabled. A useful future evaluation set needs both confirmed and rejected examples.
 
 ## Why the gold links matter
 
-These links are the first real regression examples for CRM-aware Watchdog Intelligence. They can test whether future match logic continues to resolve the same properties without changing the user's verified relationship state.
+These links are regression examples for CRM-aware Watchdog Intelligence. They test whether future match logic continues to resolve the same properties without changing the user's verified relationship state.
 
 The gold set must never be used as permission to:
 
@@ -104,7 +112,7 @@ The gold set must never be used as permission to:
 
 The background resolver skips existing non-candidate relationship rows. Verified and rejected relationships survive subsequent rescans rather than being deleted and regenerated.
 
-The current resolver also writes future review outcomes as:
+The current resolver writes future review outcomes as:
 
 - `human_verified_gold` for human-verified address candidates;
 - `human_rejected_gold` for rejected address candidates;
