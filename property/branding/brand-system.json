@@ -3,9 +3,9 @@
     "name": "Watchdog Brand System",
     "brand": "Watchdog",
     "product_descriptor": "Property Intelligence",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "status": "authoritative",
-    "updated": "2026-08-19",
+    "updated": "2026-08-20",
     "owner": "Watchdog product team",
     "route": "/property/branding/",
     "audience": ["developer", "designer", "graphic-artist", "copywriter", "agency", "llm"],
@@ -13,6 +13,8 @@
       "/property/branding/brand-system.json",
       "/property/branding/LLM-BRAND-GUIDE.md",
       "/property/branding/index.html",
+      "/property/css/brand-consistency.css",
+      "/property/js/brand-consistency-runtime.js",
       "/property/css/app-shell-2027.css",
       "legacy page-level CSS"
     ]
@@ -265,9 +267,11 @@
     ]
   },
   "implementation": {
-    "canonical_shared_reference": "/property/css/app-shell-2027.css",
+    "canonical_shared_reference": "/property/css/brand-consistency.css",
+    "brand_runtime": "/property/js/brand-consistency-runtime.js",
+    "secondary_shell_reference": "/property/css/app-shell-2027.css",
     "access_guard": "/property/js/access-guard.js",
-    "sidebar": "/property/partials/sidemenu.html",
+    "sidebar": "/property/js/sidemenu.js",
     "icon_cdn": "Font Awesome 6.5.x currently used on property surfaces",
     "new_file_rule": "Use stable CSS and JS filenames. Do not add ?v= query-string version numbers to new references.",
     "css_rules": [
