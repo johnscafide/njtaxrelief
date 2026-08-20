@@ -154,6 +154,75 @@
   body.wdv2-mounted .wd7-match-metrics strong{font-size:18px}
   body.wdv2-mounted .wd7-match-metrics small{font-size:9px}
 
+  /* Profile, notification, invite, and widget overlays must remain readable and finger-safe on phones. */
+  body.wdv2-mounted .wd6-pop{
+    right:10px!important;
+    top:76px!important;
+    width:calc(100vw - 20px)!important;
+    max-height:calc(100dvh - 88px);
+  }
+  body.wdv2-mounted .wd6-pop header{padding:14px 14px 12px}
+  body.wdv2-mounted .wd6-pop header b{font-size:14px}
+  body.wdv2-mounted .wd6-pop header small{font-size:11px}
+  body.wdv2-mounted .wd6-pop header>button{
+    min-width:44px;
+    min-height:44px;
+    padding:8px 10px;
+    font-size:12px;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .wd6-pop nav a,
+  body.wdv2-mounted .wd6-pop nav button{
+    min-height:52px;
+    padding:8px 9px;
+  }
+  body.wdv2-mounted .wd6-pop nav b{font-size:13px}
+  body.wdv2-mounted .wd6-pop nav small{font-size:11px}
+  body.wdv2-mounted .wd6-out,
+  body.wdv2-mounted .wd6-nfoot{
+    min-height:44px;
+    font-size:12px;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .wd6-note{min-height:58px;padding:11px 14px}
+  body.wdv2-mounted .wd6-note b{font-size:12px}
+  body.wdv2-mounted .wd6-note small{font-size:11px}
+  body.wdv2-mounted .wd6-note em{font-size:10px}
+  body.wdv2-mounted .wd4-widget-pop{
+    width:calc(100vw - 20px)!important;
+    max-height:calc(100dvh - 20px)!important;
+    padding:22px 16px calc(20px + env(safe-area-inset-bottom))!important;
+  }
+  body.wdv2-mounted .wd4-widget-pop h3{font-size:20px!important}
+  body.wdv2-mounted .wd4-widget-pop>p{font-size:13px!important}
+  body.wdv2-mounted .wd4-widget-option,
+  body.wdv2-mounted .wd5-widget-option{min-height:58px!important;font-size:13px!important}
+  body.wdv2-mounted .wd4-widget-option button,
+  body.wdv2-mounted .wd5-widget-option button,
+  body.wdv2-mounted .wd6-wclose,
+  body.wdv2-mounted .wd6-x{
+    min-width:44px;
+    min-height:44px;
+    height:44px!important;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .wd6-wclose{width:44px;right:12px;top:12px}
+  body.wdv2-mounted .wd6-x{width:44px;right:12px;top:12px}
+  body.wdv2-mounted .wd6-invite{
+    width:calc(100vw - 20px);
+    max-height:calc(100dvh - 20px);
+    overflow:auto;
+    padding:22px 16px calc(20px + env(safe-area-inset-bottom));
+    overscroll-behavior:contain;
+  }
+  body.wdv2-mounted .wd6-invite h2{font-size:22px;margin-right:52px}
+  body.wdv2-mounted .wd6-invite>p{font-size:13px}
+  body.wdv2-mounted .wd6-invite label{font-size:11px}
+  body.wdv2-mounted .wd6-invite input{height:48px;font-size:14px}
+  body.wdv2-mounted .wd6-invite>div button,
+  body.wdv2-mounted .wd6-invite footer a,
+  body.wdv2-mounted .wd6-invite footer button{min-height:48px;height:auto;font-size:12px}
+
   /* Fixed sponsor/upgrade rail must sit above iOS home indicator and reserve matching content space. */
   body.wdv2-mounted .wdv2-sponsor-bar.wdv2-sponsor-bar-fixed{
     padding-bottom:env(safe-area-inset-bottom)!important;
