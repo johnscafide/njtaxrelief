@@ -31,8 +31,7 @@
     return path||'dashboard';
   }
 
-  function markup(){
-    var page=currentPage();
+  function markup(page){
     return items.map(function(item){
       var active=page===item.page?' class="active" aria-current="page"':'';
       return '<a'+active+' href="'+item.href+'"><i class="fas '+item.icon+'" aria-hidden="true"></i><span>'+item.label+'</span></a>';
@@ -40,17 +39,25 @@
   }
 
   function syncNavigation(){
-    var html=markup();
+    var page=currentPage();
+    var signature='v1:'+page;
+    var html=markup(page);
     document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(function(nav){
-      if(nav.getAttribute('data-wd-brand-nav')==='1'&&nav.innerHTML===html)return;
+      if(nav.getAttribute('data-wd-brand-nav')===signature)return;
       nav.innerHTML=html;
-      nav.setAttribute('data-wd-brand-nav','1');
+      nav.setAttribute('data-wd-brand-nav',signature);
+    });
+  }
+
+  function setText(selector,value){
+    document.querySelectorAll(selector).forEach(function(n){
+      if(n.textContent!==value)n.textContent=value;
     });
   }
 
   function syncBrand(){
-    document.querySelectorAll('.wd4-brand-copy strong').forEach(function(n){n.textContent='Watchdog';});
-    document.querySelectorAll('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small').forEach(function(n){n.textContent='PROPERTY INTELLIGENCE';});
+    setText('.wd4-brand-copy strong','Watchdog');
+    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INTELLIGENCE');
   }
 
   function run(){ensureStyle();syncNavigation();syncBrand();}
