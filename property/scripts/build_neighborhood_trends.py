@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Build governed municipal Neighborhood Trends values from the official 2026 NJ DCA workbook.
+"""Build governed municipal Neighborhood Trends and housing-profile values from the official 2026 NJ DCA workbook.
 
 Only fields with an exact municipality-level source contract are emitted. The catalog's
-commute-mode mix, median real-estate tax, and walkability-score markers are intentionally
-not synthesized from unlike fields.
+commute-mode mix, median real-estate tax, walkability score, eviction rate, and generic
+housing-production markers are intentionally not synthesized from unlike fields.
 """
 from __future__ import annotations
 
@@ -51,10 +51,9 @@ def num(value):
     if value is None or value == "--" or value == "-":
         return None
     try:
-        x = float(value)
+        return float(value)
     except (TypeError, ValueError):
         return None
-    return x
 
 
 def pct_change(old, new):
@@ -62,6 +61,13 @@ def pct_change(old, new):
     if a is None or b is None or a <= 0:
         return None
     return round((b / a - 1) * 100, 2)
+
+
+def pct_share(part, whole):
+    p, w = num(part), num(whole)
+    if p is None or w is None or w <= 0:
+        return None
+    return round(p / w * 100, 2)
 
 
 def rounded(value, digits=2):
@@ -102,7 +108,7 @@ def main():
     wb = load_workbook(temp, read_only=True, data_only=True)
     ws = wb["Data by Municipality"]
     rows_iter = ws.iter_rows(values_only=True)
-    next(rows_iter)  # section labels
+    next(rows_iter)
     metric_row = list(next(rows_iter))
     period_row = list(next(rows_iter))
 
@@ -118,14 +124,20 @@ def main():
     required = {
         "land_area_2020": ("Land Area (in square miles)", "2020 Census"),
         "population_2000": ("Population", "2000"),
-        "population_current": ("Population", "2020-24 Estimate"),
+        "population_current": ("Population", CURRENT_LABEL),
+        "households_2000": ("Households", "2000"),
+        "households_current": ("Households", CURRENT_LABEL),
         "housing_2000": ("Housing Units", "2000"),
-        "housing_current": ("Housing Units", "2020-24 Estimate"),
+        "housing_current": ("Housing Units", CURRENT_LABEL),
+        "owner_current": ("Owner Occupied Units", CURRENT_LABEL),
+        "renter_current": ("Renter-Occupied Units", CURRENT_LABEL),
+        "vacant_current": ("Vacant Units", CURRENT_LABEL),
         "rent_2000": ("Median Gross Rent", "2000"),
-        "rent_current": ("Median Gross Rent", "2020-24 Estimate"),
+        "rent_current": ("Median Gross Rent", CURRENT_LABEL),
         "home_value_2000": ("Median Home Value", "2000"),
-        "home_value_current": ("Median Home Value", "2020-24 Estimate"),
-        "household_income": ("Median Household Income", "2020-24 Estimate"),
+        "home_value_current": ("Median Home Value", CURRENT_LABEL),
+        "housing_cost_burden_current": ("% of Households Housing Cost-Burdened", CURRENT_LABEL),
+        "household_income": ("Median Household Income", CURRENT_LABEL),
         "jobs_2023": ("Total Jobs in Municipality", "2023"),
     }
     missing = {key: pair for key, pair in required.items() if pair not in columns}
@@ -162,6 +174,11 @@ def main():
 
         land = num(row[c["land_area_2020"]])
         jobs = num(row[c["jobs_2023"]])
+        housing = num(row[c["housing_current"]])
+        owner = num(row[c["owner_current"]])
+        renter = num(row[c["renter_current"]])
+        occupied = None if owner is None or renter is None else owner + renter
+        vacant = num(row[c["vacant_current"]])
         base = municipalities.get(district, {})
         record = {
             "district": district,
@@ -174,6 +191,14 @@ def main():
             "household_income": rounded(row[c["household_income"]], 0),
             "employment_density": round(jobs / land, 2) if jobs is not None and land and land > 0 else None,
             "neighborhood_trend_year": 2024,
+            "housing_stock": rounded(housing, 0),
+            "owner_occupied_share": pct_share(owner, occupied),
+            "renter_occupied_share": pct_share(renter, occupied),
+            "vacancy_rate": pct_share(vacant, housing),
+            "median_gross_rent": rounded(row[c["rent_current"]], 0),
+            "median_home_value": rounded(row[c["home_value_current"]], 0),
+            "housing_cost_burden_share": rounded(row[c["housing_cost_burden_current"]], 2),
+            "household_growth": pct_change(row[c["households_2000"]], row[c["households_current"]]),
         }
         out[district] = record
 
@@ -186,7 +211,7 @@ def main():
         raise RuntimeError(f"Too many unmatched municipalities ({len(unmatched)}): {unmatched[:20]}")
 
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "NJ DCA 2026 Neighborhood Trends Database",
         "source_url": SOURCE,
@@ -200,11 +225,21 @@ def main():
             "household_income": "2020-24 median household income, dollars",
             "employment_density": "2023 total jobs divided by 2020 Census land area, jobs per square mile",
             "neighborhood_trend_year": "2024, endpoint of current 2020-24 ACS estimate window",
+            "housing_stock": "2020-24 estimated housing units",
+            "owner_occupied_share": "owner-occupied units divided by owner+renter occupied units, percent",
+            "renter_occupied_share": "renter-occupied units divided by owner+renter occupied units, percent",
+            "vacancy_rate": "vacant units divided by housing units, percent",
+            "median_gross_rent": "2020-24 median gross rent, dollars",
+            "median_home_value": "2020-24 median home value, dollars",
+            "housing_cost_burden_share": "2020-24 percent of households housing cost-burdened",
+            "household_growth": "percent change: 2000 households to 2020-24 estimate",
         },
         "excluded_catalog_fields": {
             "commute_mode_mix": "No exact municipality-level commute-mode mix field in the 2026 workbook contract.",
             "real_estate_tax_median": "No exact municipality-level median real-estate-tax field in the 2026 workbook contract.",
             "walkability_score": "Workbook publishes percent walking to work, not the catalog's walkability-score semantic.",
+            "eviction_rate": "No municipality eviction-rate field was established in this workbook contract.",
+            "housing_production": "Catalog semantic is not exact enough to alias to housing-unit change or age-of-stock fields.",
         },
         "municipalities_matched": len(out),
         "unmatched": unmatched,
