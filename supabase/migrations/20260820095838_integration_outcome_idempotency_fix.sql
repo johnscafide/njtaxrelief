@@ -1,0 +1,2 @@
+drop index if exists public.intelligence_outcome_events_outcome_key_uidx;
+create unique index if not exists intelligence_outcome_events_outcome_key_uidx on public.intelligence_outcome_events(outcome_key);
