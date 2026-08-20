@@ -49,6 +49,10 @@ const AFFORDABLE_FIELDS=new Set([
   'affordable_housing_reporting_status','affordable_trust_fund_balance','affordable_units_for_sale',
   'affordable_units_rental','affordable_units_total','low_income_households','moderate_income_households'
 ]);
+const AFFORDABLE_DERIVED_FIELDS=new Set([
+  'affordable_housing_reporting_status','affordable_units_for_sale','affordable_units_rental',
+  'affordable_units_total','low_income_households','moderate_income_households'
+]);
 const NEIGHBORHOOD_FIELDS=new Set([
   'population_change','housing_unit_change','rental_cost_change','home_value_change',
   'household_income','employment_density','neighborhood_trend_year'
@@ -146,9 +150,10 @@ function abatementValue(root:any,row:any,field:string,origin:string){
 function affordableHousingValue(root:any,row:any,field:string){
   if(!AFFORDABLE_FIELDS.has(field))return null;
   const tc=treasury(row),rec=root?.affordableHousing?.districts?.[tc];
-  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting'};
+  const kind=AFFORDABLE_DERIVED_FIELDS.has(field)?'derived_governed':'authoritative_reference';
+  if(!/^\d{4}$/.test(tc)||!rec)return {v:null,checked:true,kind,source:'NJ DCA affordable housing municipal status reporting'};
   const v=field==='affordable_housing_reporting_status'?rec?.reporting_status:rec?.[field];
-  return {v:v??null,checked:true,kind:'authoritative_reference',source:'NJ DCA affordable housing municipal status reporting · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};
+  return {v:v??null,checked:true,kind,source:'NJ DCA affordable housing municipal status reporting · '+MUNICIPAL_HOUSING_PROVIDER_VERSION};
 }
 
 function neighborhoodTrendValue(root:any,row:any,field:string){
