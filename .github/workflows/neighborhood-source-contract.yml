@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - agent/neighborhood-source-build-20260820
+      - agent/data-center-batch1-20260820
     paths:
       - property/scripts/audit_neighborhood_trends.py
       - property/scripts/build_neighborhood_trends.py
