@@ -5,11 +5,13 @@ on:
     branches:
       - data-center-cod-2018-2021-upload-20260821
     paths:
+      - property/data/cod/historical-cod-2018-2021.zlib.b64
       - property/data/cod/historical-cod-2018-2021.json
       - property/scripts/activate_historical_cod_2018_2021.py
       - .github/workflows/activate-historical-cod-2018-2021.yml
   pull_request:
     paths:
+      - property/data/cod/historical-cod-2018-2021.zlib.b64
       - property/data/cod/historical-cod-2018-2021.json
       - property/scripts/activate_historical_cod_2018_2021.py
       - .github/workflows/activate-historical-cod-2018-2021.yml
@@ -41,19 +43,22 @@ jobs:
         run: |
           python - <<'PY'
           import json
+          h=json.load(open('property/data/cod/historical-cod-2018-2021.json'))
           u=json.load(open('property/uniformity.json'))
+          assert h['district_count']==564
+          assert h['district_year_count']==2256
           a=u['districts']['0101']
           assert a['series']=={'2022':18.09,'2023':18.94,'2024':16.28,'2025':16.71}, a['series']
           assert a['volatility']==1.06
           assert a['historical_series']=={'2018':12.81,'2019':12.89,'2020':11.46,'2021':12.51}
-          print({'current_series':a['series'],'volatility':a['volatility'],'historical':a['historical_series']})
+          print({'districts':h['district_count'],'district_years':h['district_year_count'],'current_series':a['series'],'volatility':a['volatility'],'historical':a['historical_series']})
           PY
       - name: Commit generated activation
         if: github.event_name == 'push'
         run: |
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
-          git add -- property/uniformity.json property/data/cod/SOURCE-MANIFEST.md supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts
+          git add -- property/data/cod/historical-cod-2018-2021.json property/uniformity.json property/data/cod/SOURCE-MANIFEST.md supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts
           if git diff --cached --quiet; then
             echo "No generated activation changes"
           else
