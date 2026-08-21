@@ -1,0 +1,81 @@
+/* NJW-246 Run 034 — Marketing Studio Audience Review mobile certification layer.
+   Loaded only at <=720px. Desktop behavior remains unchanged. */
+
+body[data-ms-wizard="audience-review"] .msar-shell{padding:16px!important;border-radius:16px!important;min-width:0;max-width:100%}
+body[data-ms-wizard="audience-review"] .msar-head{gap:12px;margin-bottom:18px}
+body[data-ms-wizard="audience-review"] .msar-head>div>span{font-size:12px;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-head h2{font-size:22px;line-height:1.25}
+body[data-ms-wizard="audience-review"] .msar-head p{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-count b{font-size:30px}
+body[data-ms-wizard="audience-review"] .msar-count span{font-size:13px}
+body[data-ms-wizard="audience-review"] .msar-count small{font-size:12px;line-height:1.4}
+
+body[data-ms-wizard="audience-review"] .msar-tools{padding:14px;gap:12px}
+body[data-ms-wizard="audience-review"] .msar-tools label{font-size:13px;line-height:1.35}
+body[data-ms-wizard="audience-review"] .msar-tools input,
+body[data-ms-wizard="audience-review"] .msar-tools select{height:48px;min-height:48px;font-size:16px}
+body[data-ms-wizard="audience-review"] .msar-tools>button,
+body[data-ms-wizard="audience-review"] .msar-filter-button{height:48px;min-height:48px;font-size:14px;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-filter-button b{min-width:24px;height:24px;font-size:11px;line-height:24px}
+
+body[data-ms-wizard="audience-review"] .msar-filter-head>div>span,
+body[data-ms-wizard="audience-review"] .msar-quick-presets>span,
+body[data-ms-wizard="audience-review"] .msar-filter-summary>span,
+body[data-ms-wizard="audience-review"] .msar-insights span{font-size:12px!important;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-filter-head h3{font-size:20px;line-height:1.25}
+body[data-ms-wizard="audience-review"] .msar-filter-head p{font-size:14px;line-height:1.45}
+body[data-ms-wizard="audience-review"] .msar-filter-head>button{width:44px;height:44px;flex:0 0 44px;font-size:22px;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-quick-presets button,
+body[data-ms-wizard="audience-review"] .msar-chipline button{min-height:44px;padding:10px 13px!important;font-size:13px!important;line-height:1.25;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-chipline>span{font-size:12px!important;line-height:1.35}
+body[data-ms-wizard="audience-review"] .msar-filter-sections legend{font-size:15px!important;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-range-grid label{font-size:12px!important;line-height:1.35!important}
+body[data-ms-wizard="audience-review"] .msar-range-grid label>div>b{font-size:12px!important}
+body[data-ms-wizard="audience-review"] .msar-range-grid input{height:48px!important;min-height:48px!important;font-size:16px!important;padding:0 12px!important}
+body[data-ms-wizard="audience-review"] .msar-filter-sections fieldset>small{font-size:13px!important;line-height:1.45!important}
+body[data-ms-wizard="audience-review"] .msar-checkline{font-size:13px!important;line-height:1.4!important;align-items:flex-start!important}
+body[data-ms-wizard="audience-review"] .msar-checkline input{width:20px!important;height:20px!important;flex:0 0 20px!important;margin-top:1px}
+body[data-ms-wizard="audience-review"] .msar-filter-footer button{min-height:48px!important;font-size:14px!important;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-filter-summary b{font-size:12px;padding:8px 10px;line-height:1.3;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-insights{gap:10px}
+body[data-ms-wizard="audience-review"] .msar-insights>div{padding:14px}
+body[data-ms-wizard="audience-review"] .msar-insights b{font-size:18px;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-insights small{font-size:12px;line-height:1.4}
+
+/* Preserve the evidence-rich table, but make it a deliberate contained mobile scroller instead of shrinking it. */
+body[data-ms-wizard="audience-review"] .msar-table-wrap{max-width:100%;overflow:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;border-radius:14px}
+body[data-ms-wizard="audience-review"] .msar-table{min-width:1120px;font-size:13px}
+body[data-ms-wizard="audience-review"] .msar-table th{padding:12px 10px;font-size:11px;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-table td{padding:13px 10px;font-size:13px;line-height:1.4}
+body[data-ms-wizard="audience-review"] .msar-table td b{font-size:14px;line-height:1.35}
+body[data-ms-wizard="audience-review"] .msar-table td small{font-size:12px;line-height:1.35}
+body[data-ms-wizard="audience-review"] .msar-table .check{position:sticky;left:0;z-index:3;width:52px;min-width:52px;background:#fff}
+body[data-ms-wizard="audience-review"] .msar-table thead .check{z-index:5;background:#f6f8fb}
+body[data-ms-wizard="audience-review"] .msar-table input[type=checkbox]{width:22px;height:22px}
+body[data-ms-wizard="audience-review"] .msar-inspect{min-height:44px;padding:9px 12px;font-size:13px;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-loading{padding:28px 18px!important;font-size:14px;line-height:1.45}
+
+body[data-ms-wizard="audience-review"] .msar-bulk{gap:8px;margin:14px 0}
+body[data-ms-wizard="audience-review"] .msar-bulk button{min-height:44px;padding:9px 12px;font-size:13px;line-height:1.25;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-bulk span{font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-detail-head span{font-size:12px;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-detail-head h3{font-size:19px;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-detail-head p{font-size:14px;line-height:1.45;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-detail-head button{width:44px;height:44px;flex:0 0 44px;font-size:22px;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-detail-grid span{font-size:12px;line-height:1.3}
+body[data-ms-wizard="audience-review"] .msar-detail-grid b{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
+body[data-ms-wizard="audience-review"] .msar-detail-note{font-size:13px;line-height:1.45}
+
+body[data-ms-wizard="audience-review"] .msar-pages{gap:8px;max-width:100%;overflow:auto;overscroll-behavior-x:contain;padding-bottom:2px}
+body[data-ms-wizard="audience-review"] .msar-pages button,
+body[data-ms-wizard="audience-review"] .msar-pages select{height:44px;min-height:44px;font-size:13px;flex:0 0 auto;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .msar-pages span{font-size:13px;white-space:nowrap}
+body[data-ms-wizard="audience-review"] .msar-foot>.ms-primary{min-height:48px;font-size:15px;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] :is(button,a,input,select):focus-visible{outline:3px solid rgba(47,111,237,.35);outline-offset:2px}
+
+@media(max-width:420px){
+  body[data-ms-wizard="audience-review"] .msar-shell{padding:14px!important}
+  body[data-ms-wizard="audience-review"] .msar-insights{grid-template-columns:1fr}
+  body[data-ms-wizard="audience-review"] .msar-detail-grid{grid-template-columns:1fr}
+  body[data-ms-wizard="audience-review"] .msar-filter-footer>div{display:grid!important;grid-template-columns:1fr;width:100%}
+}
