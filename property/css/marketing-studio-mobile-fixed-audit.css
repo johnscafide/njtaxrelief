@@ -1,0 +1,67 @@
+/* Watchdog Mobile Audit — Marketing Studio Customize fixed/sticky surfaces
+   Loaded only at <=700px. Safe-area and touch corrections for mobile chrome.
+   Desktop presentation remains untouched. */
+
+@media (max-width: 700px) {
+  body[data-ms-wizard="customize"] .mw-top {
+    height: auto;
+    min-height: calc(68px + env(safe-area-inset-top));
+    padding-top: env(safe-area-inset-top);
+    padding-left: max(14px, env(safe-area-inset-left));
+    padding-right: max(14px, env(safe-area-inset-right));
+  }
+
+  body[data-ms-wizard="customize"] .mw-stage {
+    padding-left: max(12px, env(safe-area-inset-left));
+    padding-right: max(12px, env(safe-area-inset-right));
+  }
+
+  body[data-ms-wizard="customize"] .mw-nav a,
+  body[data-ms-wizard="customize"] .mw-nav button {
+    min-width: 44px;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px;
+    font-size: 14px;
+    line-height: 1.2;
+    touch-action: manipulation;
+  }
+
+  body[data-ms-wizard="customize"] .mw-nav a:focus-visible,
+  body[data-ms-wizard="customize"] .mw-nav button:focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
+
+  /* Shared toasts can otherwise sit inside the iPhone home-indicator region. */
+  body[data-ms-wizard="customize"] .pl-toast,
+  body[data-ms-wizard="customize"] .ms-toast {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    max-width: none;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 620px) {
+  /* The wizard footer is sticky on phones. Give it home-indicator clearance and
+     keep the navigation visually separate from the creative working surface. */
+  body[data-ms-wizard="customize"] .mw-nav {
+    z-index: 45;
+    padding-top: 10px !important;
+    padding-bottom: calc(10px + env(safe-area-inset-bottom)) !important;
+    padding-left: max(0px, env(safe-area-inset-left)) !important;
+    padding-right: max(0px, env(safe-area-inset-right)) !important;
+    margin-bottom: calc(-1 * env(safe-area-inset-bottom));
+  }
+
+  body[data-ms-wizard="customize"] .mw-nav a,
+  body[data-ms-wizard="customize"] .mw-nav button {
+    font-size: 15px;
+  }
+}
