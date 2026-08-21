@@ -1,4 +1,4 @@
-/* NJW-246 Run 031-032 — Marketing Studio Audience mobile certification layer.
+/* NJW-246 Run 031-034 — Marketing Studio Audience mobile certification layer.
    Loaded only at <=720px so desktop behavior remains unchanged. */
 
 body[data-ms-wizard="audience"] .msa-intro h2,
@@ -99,6 +99,32 @@ body[data-ms-wizard="audience"] .mw-nav{padding-bottom:max(10px,env(safe-area-in
 body[data-ms-wizard="audience"] .mw-nav a,
 body[data-ms-wizard="audience"] .mw-nav button{min-height:48px;font-size:15px;line-height:1.2;touch-action:manipulation}
 
+/* Run 034 — Mobile loading/error recovery and dynamic-content overflow certification. */
+body[data-ms-wizard="audience"] #ms-app,
+body[data-ms-wizard="audience"] #ms-discovery,
+body[data-ms-wizard="audience"] .msa-shell,
+body[data-ms-wizard="audience"] .msa-work,
+body[data-ms-wizard="audience"] .msa-panel-head,
+body[data-ms-wizard="audience"] .msa-source,
+body[data-ms-wizard="audience"] .msa-smart-card,
+body[data-ms-wizard="audience"] .msa-property-source{min-width:0;max-width:100%}
+body[data-ms-wizard="audience"] .msa-source h4,
+body[data-ms-wizard="audience"] .msa-source p,
+body[data-ms-wizard="audience"] .msa-smart-card h4,
+body[data-ms-wizard="audience"] .msa-smart-card p,
+body[data-ms-wizard="audience"] .msa-property-source span,
+body[data-ms-wizard="audience"] .msa-property-source small,
+body[data-ms-wizard="audience"] .msa-empty{overflow-wrap:anywhere;word-break:normal}
+body[data-ms-wizard="audience"] .msa-empty{padding:24px 16px;font-size:14px;line-height:1.5;min-height:72px;display:grid;place-items:center}
+body[data-ms-wizard="audience"] .ms-loading{min-height:min(62dvh,520px);padding:28px 20px;text-align:center;font-size:15px;line-height:1.5;display:grid;place-items:center;align-content:center;gap:12px}
+body[data-ms-wizard="audience"] .ms-loading i{font-size:22px}
+body[data-ms-wizard="audience"] .msa-mobile-recovery{width:min(100%,460px);margin:clamp(18px,6dvh,52px) auto;padding:24px 20px calc(24px + env(safe-area-inset-bottom));border-radius:20px;background:#f8fafc;text-align:center;display:grid;justify-items:center;gap:10px;box-sizing:border-box}
+body[data-ms-wizard="audience"] .msa-mobile-recovery i{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#eaf1ff;color:#2f6fed;font-size:20px}
+body[data-ms-wizard="audience"] .msa-mobile-recovery h2{margin:2px 0 0;font:800 20px/1.25 'Plus Jakarta Sans',sans-serif;letter-spacing:-.025em;color:#172033}
+body[data-ms-wizard="audience"] .msa-mobile-recovery p{margin:0;max-width:34ch;font-size:15px;line-height:1.5;color:#667085}
+body[data-ms-wizard="audience"] .msa-mobile-recovery button{width:100%;min-height:48px;margin-top:6px;font-size:15px;touch-action:manipulation}
+body[data-ms-wizard="audience"] .msa-mobile-recovery small{font-size:12px;line-height:1.4;color:#8792a5}
+
 @media(max-width:420px){
   body[data-ms-wizard="audience"] .msa-smart-presets{grid-template-columns:1fr}
   body[data-ms-wizard="audience"] .msa-town-actions{grid-template-columns:1fr}
@@ -108,4 +134,5 @@ body[data-ms-wizard="audience"] .mw-nav button{min-height:48px;font-size:15px;li
   body[data-ms-wizard="audience"] .msa-save-area-form>div{display:grid;grid-template-columns:1fr}
   body[data-ms-wizard="audience"] .msa-save-area-form button{width:100%}
   body[data-ms-wizard="audience"] .msa-saved-area-state{align-items:flex-start;gap:10px;flex-wrap:wrap}
+  body[data-ms-wizard="audience"] .msa-mobile-recovery{margin:14px auto;padding:22px 16px calc(22px + env(safe-area-inset-bottom));border-radius:16px}
 }
