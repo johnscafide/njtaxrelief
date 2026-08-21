@@ -1,0 +1,56 @@
+name: MOD-IV longitudinal v2 release
+
+on:
+  push:
+    branches:
+      - data-center-modiv-longitudinal-runtime-20260821
+    paths:
+      - property/scripts/build_modiv_longitudinal_v2.py
+      - .github/workflows/modiv-longitudinal-v2-release.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: modiv-longitudinal-v2-release
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install archive/source clients
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq p7zip-full
+          python -m pip install --disable-pip-version-check requests
+          7z | head -n 3
+      - name: Build and publish candidate release
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: >-
+          python property/scripts/build_modiv_longitudinal_v2.py
+          --publish
+          --release-id treasury-modiv-2021-2026-v2
+          --diagnostic property/data/modiv-longitudinal-build-summary-v2.json
+      - name: Verify release build contract
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('property/data/modiv-longitudinal-build-summary-v2.json'))
+          assert d['source_years']==[2021,2022,2023,2024,2025,2026]
+          assert all(d['source_rows'][str(y)]>1_000_000 for y in d['source_years'])
+          assert all(d['districts_by_year'][str(y)]>=560 for y in d['source_years'])
+          assert d['district_count']>=560
+          assert d['source_rows_total']>18_000_000
+          assert d['conflicting_duplicates_total']==0
+          assert d['privacy_contract']['safe_fields_only'] is True
+          print({k:d[k] for k in ('release_id','source_rows','districts_by_year','district_count','source_rows_total','parcel_records_across_partitions')})
+          PY
