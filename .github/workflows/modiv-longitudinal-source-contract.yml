@@ -1,0 +1,58 @@
+name: MOD-IV longitudinal source contract
+
+on:
+  push:
+    branches:
+      - data-center-modiv-longitudinal-20260821
+    paths:
+      - property/scripts/audit_modiv_longitudinal.py
+      - .github/workflows/modiv-longitudinal-source-contract.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: modiv-longitudinal-source-contract-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit-official-archives:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install source client
+        run: python -m pip install --disable-pip-version-check requests
+      - name: Audit official Treasury MOD-IV archives
+        run: python property/scripts/audit_modiv_longitudinal.py --output property/data/modiv-longitudinal-diagnostic.json
+      - name: Verify privacy-safe diagnostic contract
+        run: |
+          python - <<'PY'
+          import json
+          p='property/data/modiv-longitudinal-diagnostic.json'
+          d=json.load(open(p))
+          assert [x['year'] for x in d['years']] == [2021,2022,2023,2024,2025,2026]
+          assert all(x['valid_record_count'] > 1000000 for x in d['years'])
+          assert all(x['district_count'] >= 560 for x in d['years'])
+          assert all(d['privacy_contract'][k] is False for k in ['raw_archives_persisted','owner_names_retained','mailing_addresses_retained','social_security_numbers_retained','mortgage_account_numbers_retained'])
+          assert d['privacy_contract']['safe_fields_only'] is True
+          forbidden=('owner_name','street_address','city_state','social_security','mortgage_account')
+          raw=open(p,encoding='utf-8').read().lower()
+          assert not any(token in raw for token in forbidden)
+          print({x['year']:(x['valid_record_count'],x['district_count'],len(x['control_rows'])) for x in d['years']})
+          PY
+      - name: Commit source diagnostic
+        run: |
+          git config user.name "Watchdog Source Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- property/data/modiv-longitudinal-diagnostic.json
+          if git diff --cached --quiet; then
+            echo "No diagnostic changes"
+          else
+            git commit -m "[source-build] Audit Treasury MOD-IV longitudinal archives"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
