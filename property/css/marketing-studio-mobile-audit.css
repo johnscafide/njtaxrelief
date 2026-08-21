@@ -287,6 +287,115 @@ body[data-ms-wizard="customize"] [data-wdd-review-approve="true"]:focus-visible{
   outline-offset:3px;
 }
 
+/* Run 026 — brand/media controls are operational UI, not miniature desktop chrome.
+   Preserve the asset workflow, but make uploads, metadata, destructive controls,
+   and library choices readable and finger-safe on phones. */
+body[data-ms-wizard="customize"] .wddbm-hero{
+  gap:16px;
+  padding:20px 16px;
+}
+body[data-ms-wizard="customize"] .wddbm-hero h2{
+  font-size:21px;
+  line-height:1.2;
+}
+body[data-ms-wizard="customize"] .wddbm-hero p{
+  font-size:15px;
+  line-height:1.5;
+}
+body[data-ms-wizard="customize"] .wddbm-status{
+  min-height:48px;
+  padding:10px 12px;
+}
+body[data-ms-wizard="customize"] .wddbm-status b{
+  font-size:13px;
+}
+body[data-ms-wizard="customize"] .wddbm-status span{
+  font-size:12px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .wddbm-fields,
+body[data-ms-wizard="customize"] .wddbm-assets{
+  padding:18px 14px;
+}
+body[data-ms-wizard="customize"] .wddbm-section-head>span{
+  font-size:12px;
+  line-height:1.3;
+}
+body[data-ms-wizard="customize"] .wddbm-section-head h3{
+  font-size:17px;
+  line-height:1.3;
+}
+body[data-ms-wizard="customize"] .wddbm-section-head p{
+  font-size:13px;
+  line-height:1.45;
+}
+body[data-ms-wizard="customize"] .wddbm-form label,
+body[data-ms-wizard="customize"] .wddbm-controls label{
+  font-size:13px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .wddbm-form input,
+body[data-ms-wizard="customize"] .wddbm-form textarea,
+body[data-ms-wizard="customize"] .wddbm-controls select{
+  min-height:48px;
+  padding:11px 12px;
+  font-size:16px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .wddbm-form textarea{
+  min-height:104px;
+}
+body[data-ms-wizard="customize"] .wddbm-color>div{
+  min-height:48px;
+}
+body[data-ms-wizard="customize"] .wddbm-color code,
+body[data-ms-wizard="customize"] .wddbm-save-row small{
+  font-size:12px;
+  line-height:1.45;
+}
+body[data-ms-wizard="customize"] .wddbm-save-row .ms-primary,
+body[data-ms-wizard="customize"] .wddbm-upload,
+body[data-ms-wizard="customize"] .wddbm-asset-actions button,
+body[data-ms-wizard="customize"] .wddbm-thumb button{
+  min-width:44px;
+  min-height:44px;
+  font-size:13px!important;
+  line-height:1.2;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .wddbm-upload{
+  padding:10px 12px!important;
+}
+body[data-ms-wizard="customize"] .wddbm-asset-meta b,
+body[data-ms-wizard="customize"] .wddbm-asset-head b{
+  font-size:13px;
+  line-height:1.3;
+}
+body[data-ms-wizard="customize"] .wddbm-asset-meta small,
+body[data-ms-wizard="customize"] .wddbm-asset-head small,
+body[data-ms-wizard="customize"] .wddbm-empty-media{
+  font-size:12px;
+  line-height:1.4;
+}
+body[data-ms-wizard="customize"] .wddbm-asset-meta small{
+  white-space:normal;
+  overflow:visible;
+  text-overflow:clip;
+  overflow-wrap:anywhere;
+}
+body[data-ms-wizard="customize"] .wddbm-asset-head>span{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+}
+body[data-ms-wizard="customize"] .wddbm-thumb button{
+  top:6px;
+  right:6px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+}
+
 @media(max-width:420px){
   body[data-ms-wizard="customize"].wd-studio-visual-active .ms3-canvas,
   body[data-ms-wizard="customize"] .wd-studio-visual-active .ms3-canvas{
@@ -307,5 +416,14 @@ body[data-ms-wizard="customize"] [data-wdd-review-approve="true"]:focus-visible{
   body[data-ms-wizard="customize"] [data-pv-approve],
   body[data-ms-wizard="customize"] [data-wdd-review-approve="true"]{
     width:100%;
+  }
+  body[data-ms-wizard="customize"] .wddbm-asset-grid,
+  body[data-ms-wizard="customize"] .wddbm-library-grid{
+    grid-template-columns:1fr;
+  }
+  body[data-ms-wizard="customize"] .wddbm-save-row .ms-primary,
+  body[data-ms-wizard="customize"] .wddbm-upload{
+    width:100%;
+    justify-content:center;
   }
 }
