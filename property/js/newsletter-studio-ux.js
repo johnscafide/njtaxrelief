@@ -5,6 +5,8 @@ window.__WATCHDOG_NEWSLETTER_STUDIO_UX__=true;
 var $=function(id){return document.getElementById(id);};
 var initialized=false,userToggledConnections=false,timer=null;
 
+function put(node,value){if(node&&node.textContent!==value)node.textContent=value;}
+function putHtml(node,value){if(node&&node.innerHTML!==value)node.innerHTML=value;}
 function statusConnected(id){
   var value=(($(id)||{}).textContent||'').trim().toLowerCase();
   return value==='connected'||value.indexOf('connected ·')===0;
@@ -15,9 +17,12 @@ function linkedCount(){
 }
 function setNext(title,copy,label,href,icon){
   var t=$('nl-next-title'),c=$('nl-next-copy'),a=$('nl-next-action');
-  if(t)t.textContent=title;
-  if(c)c.textContent=copy;
-  if(a){a.href=href;a.innerHTML='<span>'+label+'</span><i class="fas '+icon+'"></i>';}
+  put(t,title);
+  put(c,copy);
+  if(a){
+    if(a.getAttribute('href')!==href)a.setAttribute('href',href);
+    putHtml(a,'<span>'+label+'</span><i class="fas '+icon+'"></i>');
+  }
 }
 function update(){
   var workspace=$('nl-workspace');
@@ -28,17 +33,15 @@ function update(){
   var panel=$('nl-connections-panel');
   var summary=$('nl-connections-summary');
 
-  if(summary){
-    if(crm&&kit)summary.textContent='CRM connected · Kit connected';
-    else if(!crm&&!kit)summary.textContent='BoldTrail and Kit still need setup';
-    else if(!crm)summary.textContent='BoldTrail still needs to be connected';
-    else summary.textContent='Kit still needs to be connected';
-  }
+  if(crm&&kit)put(summary,'CRM connected · Kit connected');
+  else if(!crm&&!kit)put(summary,'BoldTrail and Kit still need setup');
+  else if(!crm)put(summary,'BoldTrail still needs to be connected');
+  else put(summary,'Kit still needs to be connected');
 
   if(panel&&!initialized){
     panel.open=!crm||!kit;
     initialized=true;
-  }else if(panel&&!userToggledConnections&&(!crm||!kit)){
+  }else if(panel&&!userToggledConnections&&(!crm||!kit)&&!panel.open){
     panel.open=true;
   }
 
