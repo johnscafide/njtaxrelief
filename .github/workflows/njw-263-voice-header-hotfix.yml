@@ -1,0 +1,43 @@
+name: NJW-263 Voice header hotfix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/njw-263-voice-header-hotfix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Enable same-origin microphone and spoken-brief playback
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'vercel.json';
+          let text = fs.readFileSync(path, 'utf8');
+          const oldPolicy = 'geolocation=(self), camera=(), microphone=()';
+          const newPolicy = 'geolocation=(self), camera=(), microphone=(self)';
+          if (!text.includes(oldPolicy)) throw new Error('Expected microphone policy was not found');
+          text = text.replace(oldPolicy, newPolicy);
+          const oldCsp = "frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; worker-src 'self' blob:;";
+          const newCsp = "frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; media-src 'self' blob: data:; worker-src 'self' blob:;";
+          if (!text.includes(oldCsp)) throw new Error('Expected CSP segment was not found');
+          text = text.replace(oldCsp, newCsp);
+          JSON.parse(text);
+          fs.writeFileSync(path, text);
+          NODE
+      - name: Commit header fix
+        run: |
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add vercel.json
+          git diff --cached --check
+          git commit -m 'NJW-263: enable same-origin Voice permissions'
+          git push origin HEAD:main
