@@ -1,6 +1,8 @@
 (function(){
   'use strict';
-  var source='/property/docs/whitepapers/WATCHDOG-ZAPIER-INTELLIGENCE-WHITEPAPER.md';
+  var fallback='/property/docs/whitepapers/WATCHDOG-ZAPIER-INTELLIGENCE-WHITEPAPER.md';
+  var configured=document.body&&document.body.getAttribute('data-whitepaper-source');
+  var source=(configured&&configured.charAt(0)==='/')?configured:fallback;
   var article=document.getElementById('wp-article');
   var state=document.getElementById('wp-reader-state');
   var toc=document.getElementById('wp-toc-links');
@@ -25,9 +27,7 @@
     });
   }
   function normalizeMarkdown(md){
-    return String(md||'')
-      .replace(/\.\/assets\//g,'/property/docs/whitepapers/assets/')
-      .replace(/https:\/\/github\.com\/johnscafide\/njtaxrelief\/blob\/main\/property\/docs\/whitepapers\/WATCHDOG-ZAPIER-INTELLIGENCE-WHITEPAPER\.md/g,source);
+    return String(md||'').replace(/\.\/assets\//g,'/property/docs/whitepapers/assets/');
   }
   function render(md){
     if(!window.marked||typeof window.marked.parse!=='function')throw new Error('Markdown renderer unavailable');
