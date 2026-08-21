@@ -131,3 +131,24 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Residual risk:** Repository evidence does not yet prove every production copy, analytics/log event, backup, downstream Intelligence consumer, deletion path, or third-party transfer. The `responses` JSON snapshot duplicates structured profile data and therefore increases retention/deletion surface.
 
 **Next action:** Verify that `intelligence_personalization=false` is honored by every downstream consumer, trace account/profile deletion across both structured columns and `responses`, define provisional retention periods, and extend the inventory to analytics/logs/backups and connector transfers.
+
+---
+
+## 2026-08-21 — Preserve global logout semantics and make session residual risk explicit
+
+**Decision ID:** WCR-2026-08-21-001  
+**Frameworks:** OWASP ASVS 5.0.0 Session Management, NIST CSF 2.0 Protect, SOC 2 Security, ISO/IEC 27001  
+**Decision:** Treat ordinary Watchdog account sign-out as a global session-revocation action and prevent first-party frontend code from silently narrowing it to a current-device-only or “other sessions” scope. At the same time, explicitly document that revoking refresh-token-backed sessions does not instantly invalidate an already-issued access JWT before its expiry.
+
+**Reasoning:** Supabase JavaScript documents `signOut()` as global by default. That gives Watchdog stronger account-level logout behavior without paid infrastructure, but it is easy for a future implementation to weaken the behavior with an explicit local scope. A regression test now scans first-party application JavaScript for that change and for obvious browser-console token logging. The control is useful only if its limitation is equally explicit: already-issued access tokens may remain usable until expiry, so future high-risk actions may need current-session validation and/or AAL2 rather than trusting JWT possession alone.
+
+**Evidence created:**
+
+- `property/docs/compliance/SESSION-SECURITY-BASELINE-2026-08-21.md`
+- `property/tests/session-security-contract.mjs`
+- `.github/workflows/zero-cost-compliance-readiness.yml`
+- `property/docs/compliance/CONTROL-REGISTER.md`
+
+**Residual risk:** Watchdog still lacks retained evidence of enforced MFA/AAL2, production JWT expiry configuration, maximum session lifetime/inactivity timeout, and complete consolidation of older direct Supabase client configurations.
+
+**Next action:** Inventory direct auth client configurations, capture non-secret production JWT-expiry evidence, determine a no-cost TOTP MFA path, and classify sensitive actions that should require current-session/AAL2 checks.
