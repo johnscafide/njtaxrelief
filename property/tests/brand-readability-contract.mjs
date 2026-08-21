@@ -8,10 +8,18 @@ const css = read('property/css/brand-consistency.css');
 const runtime = read('property/js/brand-consistency-runtime.js');
 const agentShell = read('property/js/agent-control-shell-2027.js');
 const agentReadability = read('property/css/agent-control-readability.css');
+const agentDiscover = read('property/css/agent-discover.css');
+const agentHardening = read('property/css/agent-hardening.css');
 const brandCenter = read('property/branding/brand-center.js');
 const llmGuide = read('property/branding/LLM-BRAND-GUIDE.md');
 const brand = JSON.parse(read('property/branding/brand-system.json'));
 const rawTinyAgentOverride = /font-size\s*:\s*(?:[0-9](?:\.\d+)?|1[01](?:\.\d+)?)px/i.test(agentReadability);
+const sub12PixelType = (text) => {
+  const values = [];
+  for (const match of text.matchAll(/font-size\s*:\s*([0-9]+(?:\.[0-9]+)?)px/gi)) values.push(Number(match[1]));
+  for (const match of text.matchAll(/font\s*:[^;{}]*?\s([0-9]+(?:\.[0-9]+)?)px(?:\/|\s|;)/gi)) values.push(Number(match[1]));
+  return values.filter((value) => value < 12);
+};
 
 const checks = [
   ['canonical body UI font', css.includes('font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important')],
@@ -35,6 +43,8 @@ const checks = [
   ['Agent Control desktop controls use readable floor', agentReadability.includes('min-height:42px!important') && agentReadability.includes('font-size:13px!important')],
   ['Agent Control mobile form controls avoid browser zoom', agentReadability.includes('min-height:48px!important') && agentReadability.includes('font-size:16px!important')],
   ['Agent Control numeric data uses tabular numerals', agentReadability.includes('font-variant-numeric:tabular-nums')],
+  ['Agent Discover source uses shared type scale without raw sub-12px text', agentDiscover.includes('var(--fs-2xs)') && sub12PixelType(agentDiscover).length === 0],
+  ['Agent plan/assessment source uses shared type scale without raw sub-12px text', agentHardening.includes('var(--fs-2xs)') && sub12PixelType(agentHardening).length === 0],
   ['brand spec version advanced', brand.metadata?.version === '1.1.0' && brand.metadata?.updated === '2026-08-20'],
   ['brand spec names consistency CSS', brand.implementation?.canonical_shared_reference === '/property/css/brand-consistency.css'],
   ['brand spec names consistency runtime', brand.implementation?.brand_runtime === '/property/js/brand-consistency-runtime.js'],
