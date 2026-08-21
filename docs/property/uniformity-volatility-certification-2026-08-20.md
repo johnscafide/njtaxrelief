@@ -58,3 +58,5 @@ This document is evidence only. It does not make the marker LIVE. Production pro
 6. Phase 5 canonical regeneration confirms the new count.
 
 `uniformity.score`, `uniformity.percentile`, and COD 2016-2021 remain outside this certification.
+
+Release-trigger note: this branch update intentionally exercises the scoped volatility patch workflow now that the workflow is present on the default branch.
