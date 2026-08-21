@@ -33,9 +33,31 @@ jobs:
           python-version: '3.12'
       - name: Install PDF source reader
         run: python -m pip install --disable-pip-version-check requests pdfplumber
+      - name: Build complete 564-district identity map
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          counties={
+            '01':'ATLANTIC','02':'BERGEN','03':'BURLINGTON','04':'CAMDEN','05':'CAPE MAY','06':'CUMBERLAND','07':'ESSEX',
+            '08':'GLOUCESTER','09':'HUDSON','10':'HUNTERDON','11':'MERCER','12':'MIDDLESEX','13':'MONMOUTH','14':'MORRIS',
+            '15':'OCEAN','16':'PASSAIC','17':'SALEM','18':'SOMERSET','19':'SUSSEX','20':'UNION','21':'WARREN'
+          }
+          tax=json.load(open('tax-data.json'))
+          assert len(tax)==564, len(tax)
+          districts={}
+          for code,row in tax.items():
+            assert len(code)==4 and code[:2] in counties, code
+            districts[code]={'name':row['name'],'county':counties[code[:2]]}
+          out=Path('.tmp/historical-cod-identity.json')
+          out.parent.mkdir(exist_ok=True)
+          out.write_text(json.dumps({'districts':districts},sort_keys=True),encoding='utf-8')
+          print({'districts':len(districts)})
+          PY
       - name: Parse official county deviation PDFs
         run: >-
           python property/scripts/build_historical_cod_2016_2017.py
+          --uniformity .tmp/historical-cod-identity.json
           --output property/data/cod/historical-cod-2016-2017.json
           --diagnostic property/data/cod/historical-cod-2016-2017-diagnostic.json
       - name: Verify exact statewide identity contract
