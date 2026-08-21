@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-21T00:05:13.736Z",
+  "generated_at": "2026-08-21T11:12:23.682Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -48,6 +48,7 @@
     "modiv_intel.tax_dispersion_iqr_pct",
     "modiv_intel.vacant_parcel_share_pct",
     "uniformity.score",
+    "uniformity.volatility",
     "watchdog.agent.client_brief_completeness",
     "watchdog.agent.offer_question_density",
     "watchdog.appeal_evidence_strength",
@@ -178,6 +179,7 @@
     "modiv_intel.tax_dispersion_iqr_pct",
     "modiv_intel.vacant_parcel_share_pct",
     "uniformity.score",
+    "uniformity.volatility",
     "watchdog.agent.client_brief_completeness",
     "watchdog.agent.offer_question_density",
     "watchdog.appeal_evidence_strength",
@@ -268,8 +270,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 128,
-    "blocked": 170,
+    "live": 129,
+    "blocked": 169,
     "retired": 0,
     "untriaged": 0
   },
@@ -793,14 +795,14 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Uniformity volatility",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "budget.structural_imbalance",
