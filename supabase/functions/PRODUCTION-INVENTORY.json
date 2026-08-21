@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-19T21:31:02Z",
+  "captured_at": "2026-08-21T00:03:00Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
@@ -35,7 +35,7 @@
     "pcm-webhook": {"version": 5, "sha256": "aeb58a90a1ef1ea87ec71e3e1ae244892c196eeea808c6291253b92360b29a6a", "verify_jwt": false, "tracking": "fingerprint_only"},
     "product-analytics": {"version": 7, "sha256": "124c95d20cde84bebc386a98ca50aaedb2e551ed4f0a44611c8f26dac3156e8e", "verify_jwt": false, "tracking": "fingerprint_only"},
     "production-api": {"version": 12, "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "provider-release-canary": {"version": 2, "sha256": "a1c82c3225bd6f2443ec9b6d125f82bbf62ada831cf1a3262f3e15da98a722c2", "verify_jwt": false, "tracking": "source_snapshot"},
+    "provider-release-canary": {"version": 12, "sha256": "42f27b96bd35c69cd84d2fceaacdcde1eb7dd88d12deca15176015e4351f5f77", "verify_jwt": false, "tracking": "source_snapshot"},
     "public-report-share": {"version": 7, "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2", "verify_jwt": false, "tracking": "fingerprint_only"},
     "report-platform-event": {"version": 13, "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068", "verify_jwt": true, "tracking": "source_snapshot"},
     "report-share": {"version": 13, "sha256": "b7bc4f9b345c4fb5486e333b7fa4726be3e524ac2039670ccbd44fea9b249118", "verify_jwt": false, "tracking": "source_snapshot"},
