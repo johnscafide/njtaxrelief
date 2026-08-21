@@ -24,6 +24,17 @@ Therefore the canonical Class 2 segmented COD is the sixth numeric/dash token af
 - Source index: https://www.nj.gov/treasury/taxation/lpt/statdata.shtml
 - PDF: https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf
 
+A fresh deterministic parse of the official PDF on 2026-08-20 produced **564 district records**. Non-null segmented Class 2 COD coverage is:
+
+| Year | Districts with published Class 2 COD | Statewide district records |
+| --- | ---: | ---: |
+| 2022 | 554 | 564 |
+| 2023 | 555 | 564 |
+| 2024 | 555 | 564 |
+| 2025 | 553 | 564 |
+
+The six district codes absent from the current `property/uniformity.json` convenience artifact are `0262`, `0402`, `0433`, `1326`, `1923`, and `2021`. In the official 2022–2025 publication, all six have `-` for segmented Class 2 COD in every year. Their absence therefore represents all-null rows, not lost published COD values. The canonical runtime still fails closed for those districts instead of synthesizing zero.
+
 Control row, Absecon City district `0101`:
 
 | Year | Segmented Class 2 COD |
@@ -50,6 +61,8 @@ Until an official NJ Division publication for a missing year is recovered and pa
 
 ## Volatility boundary
 
-The stored `volatility` field was independently reproduced across a broad Atlantic County sample as the population standard deviation of the available annual COD series, rounded to two decimal places. Example district `0101`: `pstdev([18.09, 18.94, 16.28, 16.71]) = 1.06` after two-decimal rounding.
+The stored `volatility` field is exactly reproducible as the **population standard deviation of all available, non-null annual COD values**, using JavaScript `Number` arithmetic and JavaScript-style rounding to two decimals. A statewide reconciliation reproduced the stored value for **558 / 558** districts that have at least one available COD value. The six all-null districts have no volatility dependency set and therefore must remain missing.
 
-`uniformity.volatility` is not promoted by this source manifest alone. Production runtime must expose it as `provider_kind=derived_governed` and pass an authenticated exact-value canary before governance promotion. The existing `nj-cod` family currently classifies the stored field as `authoritative_reference`, so the marker remains blocked pending that runtime semantic correction.
+Example district `0101`: population SD of `[18.09, 18.94, 16.28, 16.71]` rounds to `1.06`. District `1345` is the binary-floating-point edge case: `[4.74, 5.27]` produces approximately `0.2649999999999997`, which JavaScript rounds to the stored `0.26` at two decimals.
+
+`uniformity.volatility` is not promoted by formula reproduction alone. Production runtime must expose it as `provider_kind=derived_governed` and pass an authenticated exact-value canary before governance promotion. The existing `nj-cod` family currently classifies the stored field as `authoritative_reference`, so the marker remains blocked pending that runtime semantic correction.
