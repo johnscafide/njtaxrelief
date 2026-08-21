@@ -1,4 +1,4 @@
-/* NJW-246 Run 034 — Marketing Studio Audience Review mobile certification layer.
+/* NJW-246 Run 034–035 — Marketing Studio Audience Review mobile certification layer.
    Loaded only at <=720px. Desktop behavior remains unchanged. */
 
 body[data-ms-wizard="audience-review"] .msar-shell{padding:16px!important;border-radius:16px!important;min-width:0;max-width:100%}
@@ -65,6 +65,7 @@ body[data-ms-wizard="audience-review"] .msar-detail-head button{width:44px;heigh
 body[data-ms-wizard="audience-review"] .msar-detail-grid span{font-size:12px;line-height:1.3}
 body[data-ms-wizard="audience-review"] .msar-detail-grid b{font-size:14px;line-height:1.35;overflow-wrap:anywhere}
 body[data-ms-wizard="audience-review"] .msar-detail-note{font-size:13px;line-height:1.45}
+body[data-ms-wizard="audience-review"] #msar-detail:focus{outline:3px solid rgba(47,111,237,.28);outline-offset:4px}
 
 body[data-ms-wizard="audience-review"] .msar-pages{gap:8px;max-width:100%;overflow:auto;overscroll-behavior-x:contain;padding-bottom:2px}
 body[data-ms-wizard="audience-review"] .msar-pages button,
@@ -72,6 +73,12 @@ body[data-ms-wizard="audience-review"] .msar-pages select{height:44px;min-height
 body[data-ms-wizard="audience-review"] .msar-pages span{font-size:13px;white-space:nowrap}
 body[data-ms-wizard="audience-review"] .msar-foot>.ms-primary{min-height:48px;font-size:15px;touch-action:manipulation}
 body[data-ms-wizard="audience-review"] :is(button,a,input,select):focus-visible{outline:3px solid rgba(47,111,237,.35);outline-offset:2px}
+
+/* Run 035: fixed wizard controls must stay above phone gesture areas. */
+body[data-ms-wizard="audience-review"] .mw-nav{bottom:0!important;padding-top:10px!important;padding-bottom:max(10px,env(safe-area-inset-bottom))!important}
+body[data-ms-wizard="audience-review"] .mw-nav a,
+body[data-ms-wizard="audience-review"] .mw-nav button{min-height:48px!important;font-size:15px!important;line-height:1.2;touch-action:manipulation}
+body[data-ms-wizard="audience-review"] .mw-stage{padding-bottom:max(32px,calc(20px + env(safe-area-inset-bottom)))!important}
 
 @media(max-width:420px){
   body[data-ms-wizard="audience-review"] .msar-shell{padding:14px!important}
