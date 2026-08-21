@@ -1,0 +1,279 @@
+/* NJW-75 — Watchdog invite/share refresh.
+   Keeps the referral behavior intact while making the entry point and modal
+   larger, clearer and visually consistent with the Watchdog app surface. */
+
+/* Keep Invite others discoverable in the account drawer without turning it
+   into a second primary navigation style. */
+#wd6-profile [data-wd-stable="invite"]{
+  background:#f4f7fc;
+}
+#wd6-profile [data-wd-stable="invite"]:hover{
+  background:#edf3ff;
+}
+#wd6-profile [data-wd-stable="invite"] > i{
+  background:#e7efff;
+  color:#2f6df6;
+}
+
+/* Share overlay */
+.wd6-shade{
+  background:rgba(11,24,44,.48);
+  backdrop-filter:blur(5px);
+  -webkit-backdrop-filter:blur(5px);
+  transition:opacity .18s ease;
+}
+
+.wd6-invite{
+  width:min(760px,calc(100vw - 40px));
+  max-height:min(88vh,780px);
+  overflow:auto;
+  padding:32px;
+  border:1px solid #dce4ed;
+  border-radius:24px;
+  background:#fff;
+  box-shadow:0 32px 90px rgba(17,35,62,.28);
+  scrollbar-gutter:stable;
+}
+
+.wd6-invite.open{
+  transform:translate(-50%,-50%) scale(1);
+}
+
+.wd6-x{
+  right:18px;
+  top:18px;
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:#eef3f9;
+  color:#52647c;
+  font-size:17px;
+  display:grid;
+  place-items:center;
+  z-index:4;
+  transition:background .16s ease,color .16s ease,transform .16s ease;
+}
+.wd6-x:hover{
+  background:#e4ebf4;
+  color:#1f3553;
+  transform:translateY(-1px);
+}
+
+/* The existing eyebrow, title and helper copy become one solid Watchdog hero.
+   No decorative gradient: the app surface stays restrained and professional. */
+.wd6-invite > small{
+  display:block;
+  margin:0;
+  padding:30px 36px 0;
+  border-radius:18px 18px 0 0;
+  background:#132f57;
+  color:#9ec0ff;
+  font-size:11px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:.15em;
+}
+
+.wd6-invite h2{
+  margin:0;
+  padding:28px 36px 12px;
+  background:#132f57;
+  color:#fff;
+  font-size:clamp(36px,4.5vw,46px);
+  line-height:1.03;
+  letter-spacing:-.045em;
+  font-weight:700;
+}
+
+.wd6-invite > p{
+  margin:0 0 28px;
+  padding:0 36px 34px;
+  border-radius:0 0 18px 18px;
+  background:#132f57;
+  color:#dce6f3;
+  font-size:15px;
+  line-height:1.55;
+}
+
+.wd6-invite label{
+  display:block;
+  margin:0 0 8px;
+  color:#52647c;
+  font-size:12px;
+  line-height:1.25;
+  font-weight:800;
+}
+
+.wd6-invite > div{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 148px;
+  gap:10px;
+}
+
+.wd6-invite input{
+  width:100%;
+  min-width:0;
+  height:56px;
+  border:1px solid #d8e1ec;
+  border-radius:13px;
+  padding:0 16px;
+  background:#f7f9fc;
+  color:#40536d;
+  font-size:14px;
+  line-height:1;
+}
+.wd6-invite input:focus{
+  border-color:#8fb0f7;
+  box-shadow:0 0 0 3px rgba(47,109,246,.12);
+  outline:none;
+}
+
+.wd6-invite > div button{
+  height:56px;
+  border:1px solid #17325d;
+  border-radius:13px;
+  background:#17325d;
+  color:#fff;
+  padding:0 18px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  transition:background .16s ease,border-color .16s ease,transform .16s ease;
+}
+.wd6-invite > div button:hover{
+  background:#102849;
+  border-color:#102849;
+  transform:translateY(-1px);
+}
+
+.wd6-invite footer{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.wd6-invite footer a,
+.wd6-invite footer button{
+  min-height:54px;
+  height:auto;
+  border:1px solid #d8e1ec;
+  border-radius:13px;
+  background:#fff;
+  color:#314660;
+  text-decoration:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:12px 16px;
+  font-size:14px;
+  line-height:1.2;
+  font-weight:800;
+  cursor:pointer;
+  transition:background .16s ease,border-color .16s ease,transform .16s ease;
+}
+.wd6-invite footer a:hover,
+.wd6-invite footer button:hover{
+  background:#f5f8fc;
+  border-color:#c8d4e3;
+  transform:translateY(-1px);
+}
+
+.wd6-invite > em{
+  display:block;
+  margin-top:16px;
+  color:#8a97a9;
+  font-size:11px;
+  line-height:1.35;
+  font-style:normal;
+}
+
+.wd6-invite button:focus-visible,
+.wd6-invite a:focus-visible{
+  box-shadow:0 0 0 3px rgba(47,109,246,.18);
+}
+
+@media (max-width:768px){
+  .wd6-invite{
+    width:calc(100vw - 20px);
+    max-height:calc(100dvh - 20px);
+    padding:18px;
+    border-radius:20px;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .wd6-x{
+    right:12px;
+    top:12px;
+    width:44px;
+    height:44px;
+  }
+
+  .wd6-invite > small{
+    padding:24px 22px 0;
+    border-radius:16px 16px 0 0;
+    font-size:10px;
+  }
+
+  .wd6-invite h2{
+    margin:0;
+    padding:24px 22px 10px;
+    font-size:30px;
+    line-height:1.06;
+  }
+
+  .wd6-invite > p{
+    margin:0 0 22px;
+    padding:0 22px 24px;
+    border-radius:0 0 16px 16px;
+    font-size:14px;
+    line-height:1.5;
+  }
+
+  .wd6-invite label{
+    font-size:12px;
+  }
+
+  .wd6-invite > div,
+  .wd6-invite footer{
+    grid-template-columns:1fr;
+  }
+
+  .wd6-invite input,
+  .wd6-invite > div button{
+    min-height:52px;
+    height:52px;
+    font-size:14px;
+  }
+
+  .wd6-invite footer a,
+  .wd6-invite footer button{
+    min-height:52px;
+    font-size:14px;
+  }
+
+  .wd6-invite > em{
+    font-size:11px;
+  }
+}
+
+@media (max-width:420px){
+  .wd6-invite{
+    padding:14px;
+  }
+
+  .wd6-invite > small{
+    padding:22px 18px 0;
+  }
+
+  .wd6-invite h2{
+    padding:22px 18px 10px;
+    font-size:28px;
+  }
+
+  .wd6-invite > p{
+    padding:0 18px 22px;
+  }
+}
