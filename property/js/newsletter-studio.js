@@ -6,14 +6,15 @@ var $=function(id){return document.getElementById(id);};
 function show(id,on){var n=$(id);if(n)n.hidden=!on;}
 function text(id,v){var n=$(id);if(n)n.textContent=v==null?'':String(v);}
 function fmt(v){if(!v)return'Not yet';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'Not yet';}
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
 function note(id,msg,error){var n=$(id);if(!n)return;n.textContent=msg||'';n.classList.toggle('error',!!error);}
 function setBusy(on){busy=!!on;document.querySelectorAll('#nl-workspace button,#nl-workspace input,#nl-workspace select,#nl-workspace textarea').forEach(function(n){n.disabled=busy;});}
 async function call(fn,action,body){
   if(!db)throw new Error('Watchdog connection unavailable');
   var s=await db.auth.getSession(),session=s&&s.data&&s.data.session,token=session&&session.access_token;if(!token)throw new Error('Sign in required');
   var rt=window.NJPTRSupabaseRuntime;if(!rt||!rt.url||!rt.key)throw new Error('Watchdog runtime unavailable');
-  var r=await fetch(rt.url+'/functions/v1/'+fn,{method:'POST',headers:{apikey:rt.key,authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(Object.assign({action:action},body||{}))});
+  var gatewayAction=action;if(action==='status')gatewayAction=fn==='newsletter-beta-crm'?'crm.status':'email.status';
+  var r=await fetch(rt.url+'/functions/v1/tmp-boldtrail-probe',{method:'POST',headers:{apikey:rt.key,authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(Object.assign({action:gatewayAction},body||{}))});
   var d=await r.json().catch(function(){return{};});if(!r.ok)throw Object.assign(new Error(d.error||'Request failed'),{status:r.status,data:d});return d;
 }
 function status(node,value){if(!node)return;node.className='nl-status';node.textContent=value;if(/connected|ready/i.test(value))node.classList.add('good');else if(/sync|pending/i.test(value))node.classList.add('warn');else if(/error|attention|degraded/i.test(value))node.classList.add('bad');}
