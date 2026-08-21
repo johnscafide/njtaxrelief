@@ -14,7 +14,7 @@ jobs:
         with:
           ref: agent/uniformity-volatility-20260820
           fetch-depth: 0
-      - name: Patch runtime, canary, and formula contract
+      - name: Patch runtime and authenticated canary contract
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -38,26 +38,12 @@ jobs:
           if s.count(old) != 1: raise SystemExit(f'canary scenario anchor count={s.count(old)}')
           p.write_text(s.replace(old, new))
 
-          p = Path('property/data/derived-marker-formulas.json')
-          s = p.read_text()
-          old = '''    "uniformity.volatility": {
-      "range": "Derived property-intelligence metric; interpretation follows the marker description",
-      "formula": "Derived from the cited authoritative inputs for this marker. Uniformity volatility"
-    },'''
-          new = '''    "uniformity.volatility": {
-      "range": "0+ coefficient-of-deviation points; higher means more year-to-year dispersion in the published residential COD series",
-      "formula": "Population standard deviation of all available non-null annual segmented Class 2 COD values in the governed NJ Division of Taxation series, using JavaScript Number arithmetic and Math.round(sd * 100) / 100"
-    },'''
-          if s.count(old) != 1: raise SystemExit(f'formula disclosure anchor count={s.count(old)}')
-          p.write_text(s.replace(old, new))
-
-          # The final runtime PR removes this temporary workflow from main.
           Path('.github/workflows/patch-uniformity-volatility.yml').unlink()
           PY
       - name: Commit scoped patch to feature branch
         run: |
           git config user.name "Watchdog Automation"
           git config user.email "actions@users.noreply.github.com"
-          git add -- supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts property/data/derived-marker-formulas.json .github/workflows/patch-uniformity-volatility.yml
+          git add -- supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts .github/workflows/patch-uniformity-volatility.yml
           git commit -m "Certify executable uniformity volatility semantics"
           git push origin HEAD:agent/uniformity-volatility-20260820
