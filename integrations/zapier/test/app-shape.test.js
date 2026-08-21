@@ -49,6 +49,8 @@ test('keeps self-service API key authentication as the v1 boundary', () => {
   assert.equal(App.authentication.type, 'custom');
   assert.equal(App.authentication.fields.some((field) => field.key === 'apiKey'), true);
   assert.equal(typeof App.authentication.test, 'function');
+  assert.equal(App.authentication.connectionLabel, '{{key_label}}');
+  assert.equal(App.authentication.connectionLabel.includes('apiKey'), false);
   assert.equal(Array.isArray(App.beforeRequest), true);
   assert.equal(App.beforeRequest.length > 0, true);
 });
