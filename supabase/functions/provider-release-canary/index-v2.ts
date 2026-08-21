@@ -13,6 +13,7 @@ type ValueExpectation={pin:string;values:Record<string,string|number|boolean>};
 type ProviderKindExpectation={pin:string;kinds:Record<string,string>};
 type SourceExpectation={pin:string;sources:Record<string,string>};
 type Scenario={fn:string;body:any;expect_available?:AvailabilityExpectation[];expect_missing?:MissingExpectation[];expect_values?:ValueExpectation[];expect_provider_kinds?:ProviderKindExpectation[];expect_sources?:SourceExpectation[]};
+type DerivedExactMetadata={pin:string;values:Record<string,string|number|boolean>;kinds?:Record<string,string>;sources?:Record<string,string>};
 const SCENARIOS:Record<string,Scenario>={
   zoning_v31:{fn:'workbench-hydrate',body:{pams_pins:['0102_139_15'],marker_ids:['njplus.nj-dca-zoning-directory.zoning_map_url','njplus.nj-dca-zoning-directory.zoning_ordinance_url','njplus.nj-dca-zoning-directory.municipal_zoning_portal']}},
   designation_stack_v15:{fn:'workbench-derived',body:{pams_pins:['0102_139_15'],marker_ids:['watchdog.njplus.development_designation_stack']}},
@@ -31,6 +32,18 @@ function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-
 function json(req:Request,status:number,payload:any){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, private'}})}
 async function sha256Hex(value:string){const digest=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value));return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,'0')).join('')}
 async function cleanup(userId:string){await admin.from('watchdog_test_accounts').delete().eq('user_id',userId);await admin.from('account_entitlements').delete().eq('user_id',userId);await admin.from('profiles').delete().eq('id',userId);await admin.auth.admin.deleteUser(userId)}
+function derivedExactScenario(metadata:any):Scenario|null{
+  const cfg=metadata?.derived_exact as DerivedExactMetadata|undefined;
+  if(!cfg||typeof cfg!=='object')return null;
+  const pin=String(cfg.pin||'').trim();
+  const values=cfg.values&&typeof cfg.values==='object'&&!Array.isArray(cfg.values)?cfg.values:null;
+  if(!pin||!values)return null;
+  const ids=Object.keys(values).filter(id=>/^[A-Za-z0-9_.-]{1,160}$/.test(id));
+  if(!ids.length||ids.length>25||ids.length!==Object.keys(values).length)return null;
+  const kinds=cfg.kinds&&typeof cfg.kinds==='object'&&!Array.isArray(cfg.kinds)?Object.fromEntries(Object.entries(cfg.kinds).filter(([id,v])=>ids.includes(id)&&typeof v==='string')):{};
+  const sources=cfg.sources&&typeof cfg.sources==='object'&&!Array.isArray(cfg.sources)?Object.fromEntries(Object.entries(cfg.sources).filter(([id,v])=>ids.includes(id)&&typeof v==='string')):{};
+  return{fn:'workbench-derived',body:{pams_pins:[pin],marker_ids:ids},expect_available:[{pin,marker_ids:ids}],expect_values:[{pin,values}],expect_provider_kinds:Object.keys(kinds).length?[{pin,kinds}]:undefined,expect_sources:Object.keys(sources).length?[{pin,sources}]:undefined};
+}
 function semanticAssertion(scenario:Scenario,payload:any){
   const missing:string[]=[];
   for(const check of scenario.expect_available||[]){for(const id of check.marker_ids){if(String(payload?.meta?.[check.pin]?.[id]?.status||'')!=='available'||payload?.markers?.[check.pin]?.[id]===null||payload?.markers?.[check.pin]?.[id]===undefined)missing.push(`${check.pin}:${id}`)}}
@@ -47,8 +60,9 @@ function semanticAssertion(scenario:Scenario,payload:any){
 Deno.serve(async(req:Request)=>{
   if(req.method==='OPTIONS')return new Response('ok',{headers:cors(req)});if(req.method!=='POST')return json(req,405,{error:'POST required'});
   let body:any={};try{body=await req.json()}catch{return json(req,400,{error:'Invalid JSON'})}
-  const token=String(body?.token||'').trim(),scenarioKey=String(body?.scenario||'').trim(),scenario=SCENARIOS[scenarioKey];if(!scenario||!/^[A-Za-z0-9_-]{40,160}$/.test(token))return json(req,401,{error:'Invalid release canary request'});
-  const hash=await sha256Hex(token),now=new Date().toISOString();const {data:gate,error:gateError}=await admin.from('watchdog_test_bootstrap_tokens').update({used_at:now}).eq('token_hash',hash).is('used_at',null).gt('expires_at',now).contains('metadata',{purpose:'provider_release_canary',scenario:scenarioKey}).select('id,desired_email').maybeSingle();if(gateError||!gate)return json(req,401,{error:'Invalid or expired release canary token'});
+  const token=String(body?.token||'').trim(),scenarioKey=String(body?.scenario||'').trim(),staticScenario=SCENARIOS[scenarioKey],isDerivedExact=scenarioKey==='derived_exact_v1';if((!staticScenario&&!isDerivedExact)||!/^[A-Za-z0-9_-]{40,160}$/.test(token))return json(req,401,{error:'Invalid release canary request'});
+  const hash=await sha256Hex(token),now=new Date().toISOString();const {data:gate,error:gateError}=await admin.from('watchdog_test_bootstrap_tokens').update({used_at:now}).eq('token_hash',hash).is('used_at',null).gt('expires_at',now).contains('metadata',{purpose:'provider_release_canary',scenario:scenarioKey}).select('id,desired_email,metadata').maybeSingle();if(gateError||!gate)return json(req,401,{error:'Invalid or expired release canary token'});
+  const scenario=staticScenario||(isDerivedExact?derivedExactScenario(gate.metadata):null);if(!scenario)return json(req,401,{error:'Invalid release canary contract'});
   const email=String(gate.desired_email||'').trim().toLowerCase();let userId='';
   try{
     const {data:link,error:linkError}=await admin.auth.admin.generateLink({type:'magiclink',email});const hashed=String(link?.properties?.hashed_token||'');userId=String(link?.user?.id||'');if(linkError||!hashed||!userId)throw new Error('sandbox_link_generation_failed');
