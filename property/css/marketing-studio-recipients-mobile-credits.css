@@ -1,0 +1,125 @@
+/* Watchdog mobile certification — Recipients Direct Mail credit surface.
+   Route-scoped and loaded only at <=720px so shared desktop credit UI is unchanged. */
+@media (max-width:720px){
+  body[data-ms-wizard="recipients"] .ms-credit-banner{
+    grid-template-columns:44px minmax(0,1fr);
+    gap:12px;
+    align-items:start;
+    padding:14px;
+    border-radius:16px;
+    min-width:0;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner>i{
+    width:44px;
+    height:44px;
+    border-radius:12px;
+    font-size:17px;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner>div{
+    min-width:0;
+    gap:4px;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner b{
+    font-size:15px;
+    line-height:1.35;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner span,
+  body[data-ms-wizard="recipients"] .ms-credit-note{
+    font-size:13px;
+    line-height:1.45;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-kicker{
+    font-size:12px;
+    line-height:1.3;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-tiers{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 10px;
+    margin-top:2px;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-tiers strong{
+    font-size:12px;
+    line-height:1.35;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner small,
+  body[data-ms-wizard="recipients"] .ms-credit-banner a{
+    grid-column:2;
+    justify-self:start;
+    white-space:normal;
+    overflow-wrap:anywhere;
+    font-size:13px;
+    line-height:1.35;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner a{
+    display:inline-flex;
+    align-items:center;
+    min-height:44px;
+    padding:8px 2px;
+    font-size:14px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-banner a:focus-visible{
+    outline:3px solid rgba(47,111,237,.28);
+    outline-offset:3px;
+    border-radius:8px;
+  }
+
+  /* Credit review can appear later in the wizard flow. Keep all financial
+     context, but prevent its desktop microtype from becoming unreadable. */
+  body[data-ms-wizard="recipients"] .ms-credit-review{
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:16px;
+    border-radius:16px;
+    min-width:0;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review>div:first-child>span{
+    font-size:12px;
+    line-height:1.3;
+    letter-spacing:.08em;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review h3{
+    font-size:20px;
+    line-height:1.25;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review p{
+    max-width:none;
+    font-size:14px;
+    line-height:1.55;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;
+    min-width:0;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals>span{
+    min-width:0;
+    padding:10px;
+    border-radius:12px;
+    background:rgba(255,255,255,.62);
+    text-align:left;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals small{
+    font-size:12px;
+    line-height:1.3;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals b{
+    font-size:15px;
+    line-height:1.25;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals .due b{
+    font-size:20px;
+  }
+}
+
+@media (max-width:420px){
+  body[data-ms-wizard="recipients"] .ms-credit-review-totals{
+    grid-template-columns:1fr;
+  }
+}
