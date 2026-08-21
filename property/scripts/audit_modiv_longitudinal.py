@@ -161,7 +161,19 @@ def main() -> None:
         "years": [],
     }
     for year in years:
-        result["years"].append(audit_year(year, args.timeout))
+        try:
+            row = audit_year(year, args.timeout)
+        except Exception as exc:  # diagnostic must survive a bad source year
+            row = {
+                "year": year,
+                "url": URL.format(year=year),
+                "error_type": type(exc).__name__,
+                "error": str(exc)[:500],
+                "valid_record_count": 0,
+                "district_count": 0,
+                "control_rows": [],
+            }
+        result["years"].append(row)
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -169,9 +181,10 @@ def main() -> None:
     print(json.dumps({
         "output": str(output),
         "years": years,
-        "records": {str(row["year"]): row["valid_record_count"] for row in result["years"]},
-        "districts": {str(row["year"]): row["district_count"] for row in result["years"]},
-        "control_matches": {str(row["year"]): len(row["control_rows"]) for row in result["years"]},
+        "records": {str(row["year"]): row.get("valid_record_count", 0) for row in result["years"]},
+        "districts": {str(row["year"]): row.get("district_count", 0) for row in result["years"]},
+        "control_matches": {str(row["year"]): len(row.get("control_rows", [])) for row in result["years"]},
+        "errors": {str(row["year"]): row.get("error") for row in result["years"] if row.get("error")},
     }, indent=2))
 
 
