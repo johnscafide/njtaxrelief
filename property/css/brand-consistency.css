@@ -178,3 +178,163 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
 @media (prefers-reduced-motion:reduce){
   .wd4-nav-panel,.hm27-nav-panel,.wd4-card,.hm27-menu{transition:none!important}
 }
+
+/* NJW-73/74/75: bounded Agent Control readability + token convergence.
+   Structure, entitlements and workflow behavior remain unchanged. */
+body.wdx-modern[data-sidebar-page="agent-desk"]{
+  --ac27-bg:var(--wd-bg);
+  --ac27-card:var(--wd-surface);
+  --ac27-ink:var(--wd-ink);
+  --ac27-muted:var(--wd-muted);
+  --ac27-line:var(--wd-line);
+  --ac27-soft:var(--wd-soft);
+  --ac27-blue:var(--wd-primary);
+  --ac27-blue-soft:var(--wd-primary-soft);
+  --ac27-green:var(--wd-success);
+  --ac27-amber:var(--wd-warning);
+  --ac27-red:var(--wd-danger);
+  --ad-navy:var(--wd-primary-dark);
+  --ad-teal:var(--wd-primary);
+  --ad-ink:var(--wd-ink);
+  --ad-muted:var(--wd-muted);
+  --ad-line:var(--wd-line);
+  --ad-soft:var(--wd-soft);
+  --ad-gold:var(--wd-warning);
+  --ad-red:var(--wd-danger);
+  --ad-green:var(--wd-success);
+}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-overview{
+  background:var(--wd-primary-dark)!important;
+  box-shadow:var(--wd-shadow-soft)!important;
+}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-overview:after{display:none!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-focus{background:var(--wd-surface)!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-funnel-stage>i>em{background:var(--wd-primary)!important}
+
+/* 12px floor for dense labels/meta. */
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+  .ad-overview>div:first-child>span,
+  .ad-overview-meta span,
+  .ad-overview-meta small,
+  .ad-cap-head span,
+  .ad-cap-row small,
+  .ad-focus-label>span,
+  .ad-focus-label small,
+  .ad-stat span,
+  .ad-stat small,
+  .ad-discover header span,
+  .ad-quick-plays small,
+  .ad-dynamic-card>div:nth-child(2)>small,
+  .ad-dynamic-count span,
+  .ad-list-form label,
+  .ad-list-pages span,
+  .ad-territory-panel header span,
+  .ad-funnel-panel header span,
+  .ad-territory small,
+  .ad-funnel-stage small,
+  .ad-funnel-note,
+  .ad-list-head span,
+  .ad-list-head small,
+  .ad-queue,
+  .ad-card-meta,
+  .ad-side>section>span,
+  .ad-switch,
+  .ad-boundary p,
+  .ad-evidence-score span,
+  .ad-control-error span
+){font-size:var(--fs-2xs)!important;line-height:1.4!important}
+
+/* 13-14px readable body/supporting text. */
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+  .ad-overview p,
+  .ad-cap-row>div,
+  .ad-focus-main h3,
+  .ad-focus-main p,
+  .ad-discover header p,
+  .ad-dynamic-card>div:nth-child(2)>span,
+  .ad-list-empty span,
+  .ad-territory b,
+  .ad-territory span,
+  .ad-territory-empty b,
+  .ad-territory-empty p,
+  .ad-address,
+  .ad-side p,
+  .ad-coverage-row,
+  .ad-boundary b,
+  .ad-modal-card p,
+  .ad-saved-row,
+  .ad-evidence-section p,
+  .ad-evidence-section li,
+  .ad-control-loading
+){font-size:var(--fs-xs)!important;line-height:1.5!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+  .ad-quick-plays b,
+  .ad-dynamic-card>div:nth-child(2)>b,
+  .ad-reason
+){font-size:var(--fs-sm)!important;line-height:1.45!important}
+
+/* Dense controls stay compact without dropping below standard SaaS readability. */
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+  .ac27-tabs a,
+  .ac27-actions button,
+  .ad-cap-head a,
+  .ad-focus-actions button,
+  .ad-focus-actions a,
+  .ad-discover header button,
+  .ad-list-form button,
+  .ad-dynamic-card button,
+  .ad-list-open,
+  .ad-territory-panel header button,
+  .ad-funnel-panel header select,
+  .ad-territory button,
+  .ad-tabs button,
+  .ad-control-right input,
+  .ad-control-right select,
+  #ad-sort,
+  .ad-card-actions button,
+  .ad-card-actions a,
+  .ad-outcome,
+  .ad-load-more,
+  .ad-side button,
+  .ad-import-tabs button,
+  .ad-control-error button
+){font-size:var(--fs-xs)!important;min-height:42px!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(.ad-list-form input,.ad-list-form select){font-size:var(--fs-sm)!important;min-height:42px!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-control-right label{height:auto!important;min-height:42px!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ac27-actions .ac27-icon{width:42px!important;min-width:42px!important}
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(.ad-modal-x,.ad-drawer>aside>button){width:42px!important;height:42px!important}
+
+/* Financial/data numerics align by digit for faster scanning. */
+body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+  .ad-overview-meta b,
+  .ad-stat b,
+  .ad-focus-score b,
+  .ad-score b,
+  .ad-dynamic-count b,
+  .ad-funnel-stage b,
+  .ad-evidence-score b,
+  .ad-card-meta
+){font-variant-numeric:tabular-nums}
+body.wdx-modern[data-sidebar-page="agent-desk"] .ad-funnel-stage b{min-width:3ch;text-align:right}
+
+@media (max-width:760px){
+  body.wdx-modern[data-sidebar-page="agent-desk"] :is(
+    .ac27-tabs a,
+    .ac27-actions button,
+    .ad-focus-actions button,
+    .ad-focus-actions a,
+    .ad-discover header button,
+    .ad-list-form button,
+    .ad-dynamic-card button,
+    .ad-list-open,
+    .ad-territory button,
+    .ad-tabs button,
+    .ad-card-actions button,
+    .ad-card-actions a,
+    .ad-outcome,
+    .ad-load-more,
+    .ad-side button
+  ){min-height:48px!important}
+  body.wdx-modern[data-sidebar-page="agent-desk"] .ac27-actions .ad-import-open{min-height:52px!important}
+  body.wdx-modern[data-sidebar-page="agent-desk"] :is(.ad-list-form input,.ad-list-form select,.ad-control-right input,.ad-control-right select,#ad-sort){min-height:48px!important;font-size:var(--fs-sm)!important}
+}
