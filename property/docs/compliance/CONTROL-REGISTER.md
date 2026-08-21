@@ -1,7 +1,7 @@
 # Watchdog Compliance Control Register
 
 **Program status:** Readiness in progress  
-**Last updated:** 2026-08-20  
+**Last updated:** 2026-08-21  
 **Assurance status:** No independent certification or SOC report is claimed by this document.
 
 ## Status key
@@ -21,7 +21,8 @@
 | WCR-SDLC-001 | Authorization boundary testing | SOC 2 Security, OWASP ASVS Access Control, NIST Protect | Implemented | `.github/workflows/access-boundary-audit.yml`, `property/scripts/audit_access_boundaries.mjs` | Add dynamic authenticated-route verification where static assertions are insufficient. |
 | WCR-SDLC-002 | Application security contracts / ASVS readiness | SOC 2 Security, OWASP ASVS 5.0.0 Level 2, NIST Protect | Partial | `property/tests/security-contracts.mjs`, `property/docs/compliance/ASVS-5-L2-BASELINE.md`, `property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md`, `property/tests/auth-asvs-contract.mjs` | Continue requirement-level mapping; resolve or transparently retain the Level 2 MFA gap; complete OAuth/OIDC V10 mapping. |
 | WCR-AUTH-001 | Central OAuth/session security baseline | OWASP ASVS V6/V7/V10, NIST Protect, SOC 2 Security | Partial | `property/js/supabase-runtime.js`, `property/tests/auth-asvs-contract.mjs`, ASVS identity tranche | Verify provider-side production settings, session lifetime, recovery/account-linking behavior, and MFA enforcement. |
-| WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material production connector and infrastructure component. |
+| WCR-AUTH-002 | Session lifecycle and logout regression control | OWASP ASVS Session Management, NIST Protect, SOC 2 Security, ISO 27001 | Implemented | `property/docs/compliance/SESSION-SECURITY-BASELINE-2026-08-21.md`, `property/tests/session-security-contract.mjs`, `.github/workflows/zero-cost-compliance-readiness.yml` | Inventory direct Supabase client configurations, capture JWT expiry evidence, and classify sensitive actions requiring current-session/AAL2 checks. |
+| WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material connector and infrastructure component. |
 | WCR-IAM-001 | Database row-level access and entitlements | SOC 2 Security, OWASP ASVS Access Control | Implemented | `property/tests/security-contracts.mjs`, Supabase migrations | Add periodic privileged-access review evidence and formal joiner/mover/leaver process as team grows. |
 | WCR-PAY-001 | Signed payment webhooks | SOC 2 Security, OWASP ASVS, PCI DSS | Implemented | Stripe/Paddle checks in `property/tests/security-contracts.mjs` | Maintain signature/replay/deduplication tests for every active payment provider. |
 | WCR-PAY-002 | Server-authoritative pricing | SOC 2 Processing Integrity, OWASP ASVS | Implemented | Marketing/subscription checkout security contracts | Maintain tests for every new paid workflow. |
