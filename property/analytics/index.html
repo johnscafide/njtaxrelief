@@ -16,13 +16,14 @@
 <body data-plan-auto="true">
   <main class="shell">
     <header class="head">
-      <div><div class="kicker">DEVELOPER · SAAS COMMAND CENTER</div><h1>Watchdog Analytics</h1><p>Traffic, growth, activation, product usage, acquisition, retention, Intelligence adoption and subscription health from first-party production data.</p></div>
+      <div><div class="kicker">DEVELOPER · SAAS COMMAND CENTER</div><h1>Watchdog Analytics</h1><p>External customer and visitor analytics by default. Owner, internal agent, developer and test traffic is classified separately and excluded from business KPIs.</p></div>
       <div class="actions"><a class="back" href="/property/dashboard/"><i class="fas fa-arrow-left"></i> Dashboard</a><button id="refresh" class="btn primary"><i class="fas fa-rotate"></i> Refresh</button></div>
     </header>
 
     <div class="toolbar">
       <div class="toolbar-group" id="ranges"><span class="toolbar-label">Range</span><button class="chip" data-hours="24">24H</button><button class="chip" data-hours="168">7D</button><button class="chip active" data-hours="720">30D</button><button class="chip" data-hours="2160">90D</button><button class="chip" data-hours="8760">1Y</button></div>
       <div class="toolbar-group" id="grains"><span class="toolbar-label">Group</span><button class="chip" data-grain="hour">Hour</button><button class="chip active" data-grain="day">Day</button><button class="chip" data-grain="week">Week</button><button class="chip" data-grain="month">Month</button></div>
+      <div class="toolbar-group"><span class="tag"><i class="fas fa-filter"></i> EXTERNAL ONLY</span></div>
       <div class="live"><span class="dot"></span><span id="freshness">Loading production data…</span></div>
     </div>
 
@@ -30,22 +31,23 @@
     <section class="metrics" id="metrics"><div class="card"><div class="label">Loading</div><div class="value">…</div></div></section>
 
     <section class="panels">
-      <div class="panel wide"><div class="panel-head"><div><h2>Traffic trend</h2><p>Exact unique visitors and sessions inside each selected time bucket.</p></div><span class="tag"><i class="fas fa-chart-line"></i> LIVE EVENTS</span></div><div id="traffic-chart" class="empty">Loading…</div></div>
-      <div class="panel"><h2>User growth</h2><p>Registered-account creation over the selected period. No user identities are returned to this page.</p><div id="growth-chart" class="empty">Loading…</div></div>
-      <div class="panel"><h2>Activation funnel</h2><p>Unique visitors across the selected range, not summed daily uniques.</p><div id="funnel" class="empty">Loading…</div></div>
-      <div class="panel"><h2>Top pages</h2><p>Where product attention is actually going.</p><div id="pages" class="empty">Loading…</div></div>
-      <div class="panel"><h2>Top tools</h2><p>Tool opens, marker views, lookups and exports.</p><div id="tools" class="empty">Loading…</div></div>
-      <div class="panel"><h2>Acquisition</h2><p>Source, medium and campaign quality for the selected range.</p><div id="acquisition" class="empty">Loading…</div></div>
-      <div class="panel"><h2>Event mix</h2><p>Which product behaviors generate the most activity.</p><div id="events" class="empty">Loading…</div></div>
-      <div class="panel wide"><div class="panel-head"><div><h2>Accounts & subscription health</h2><p>Registered users, onboarding, plans and current billing states.</p></div><span class="tag"><i class="fas fa-users"></i> AGGREGATE ONLY</span></div><div id="account-health" class="empty">Loading…</div><div id="plans" style="margin-top:14px"></div></div>
-      <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel · recent days</h2><p>Did people reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
-      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Governed decision activity · 30 days</h2><p>Append-only Today and Intent decision events from governed production trails.</p><div id="governed" class="empty">Loading…</div></div>
-      <div class="panel wide"><h2>Retention cohorts</h2><p>Weekly activated-visitor retention. This remains the long-term signal for whether product use is recurring.</p><div id="retention" class="empty">Loading…</div></div>
+      <div class="panel wide"><div class="panel-head"><div><h2>Traffic trend</h2><p>External account users and anonymous external visitors only.</p></div><span class="tag"><i class="fas fa-chart-line"></i> LIVE EVENTS</span></div><div id="traffic-chart" class="empty">Loading…</div></div>
+      <div class="panel"><h2>User growth</h2><p>External registered-account creation. Internal accounts are removed.</p><div id="growth-chart" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Activation funnel</h2><p>Unique external visitors across the selected range, not summed daily uniques.</p><div id="funnel" class="empty">Loading…</div></div>
+      <div class="panel wide"><div class="panel-head"><div><h2>Audience separation</h2><p>See who is counted in business KPIs and which internal traffic is excluded.</p></div><span class="tag"><i class="fas fa-user-shield"></i> IDENTITY-FREE CLASSES</span></div><div id="audience" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Top pages</h2><p>Where external product attention is actually going.</p><div id="pages" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Top tools</h2><p>External tool opens, marker views, lookups and exports.</p><div id="tools" class="empty">Loading…</div></div>
+      <div class="panel wide"><h2>Acquisition detail</h2><p>Session source, campaign, specific referrer path when the browser supplies it, landing page and paid-click source. Raw third-party query strings are not stored.</p><div id="acquisition" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Event mix</h2><p>Which external product behaviors generate the most activity.</p><div id="events" class="empty">Loading…</div></div>
+      <div class="panel wide"><div class="panel-head"><div><h2>Accounts & subscription health</h2><p>External registered users, onboarding, plans and current billing states.</p></div><span class="tag"><i class="fas fa-users"></i> INTERNAL EXCLUDED</span></div><div id="account-health" class="empty">Loading…</div><div id="plans" style="margin-top:14px"></div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel · recent days</h2><p>Did external users reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Governed decision activity · 30 days</h2><p>External-account Today and Intent decision events from governed production trails.</p><div id="governed" class="empty">Loading…</div></div>
+      <div class="panel wide"><h2>Retention cohorts</h2><p>Weekly external activated-visitor retention.</p><div id="retention" class="empty">Loading…</div></div>
       <div class="panel"><h2>Billing lifecycle</h2><p>Provider lifecycle events captured in the selected range. MRR is deliberately not guessed when interval/amount data is incomplete.</p><div id="billing" class="empty">Loading…</div></div>
       <div class="panel"><h2>Data quality & freshness</h2><p>Know whether you are looking at current, trustworthy instrumentation.</p><div id="quality" class="empty">Loading…</div></div>
     </section>
 
-    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. It does not expose names, emails, addresses, PAMS PINs, search text, prompts, phone numbers, IP addresses, or property-level behavioral profiles. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
+    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. Event rows use audience classes rather than names or emails. Acquisition stores a sanitized referrer origin + pathname when the browser makes it available, plus UTM fields, landing path and paid-click provider. It does not store raw third-party referrer query strings, search text, prompts, addresses, PAMS PINs, phone numbers or IP addresses. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -69,33 +71,38 @@
     function defaultGrain(hours){if(hours<=48)return 'hour';if(hours<=2160)return 'day';if(hours<=4380)return 'week';return 'month';}
     function countRows(obj){return Object.entries(obj||{}).sort(function(a,b){return Number(b[1])-Number(a[1]);});}
     function render(d){
-      var s=d.snapshot||{},t=s.traffic||{},u=s.users||{},f=s.funnel||{},on=s.onboarding||{},sub=s.subscriptions||{},billing=s.billing||{};
-      document.getElementById('freshness').textContent='Last event '+time(t.last_event)+' · Report '+time(d.generated_at);
+      var s=d.snapshot||{},t=s.traffic||{},u=s.users||{},f=s.funnel||{},on=s.onboarding||{},sub=s.subscriptions||{},billing=s.billing||{},aud=s.audience_breakdown||[],byClass={};
+      aud.forEach(function(r){byClass[r.audience_class]=r;});
+      var anon=byClass.external_visitor||{},acct=byClass.external_account||{};
+      document.getElementById('freshness').textContent='External-only · Last event '+time(t.last_event)+' · Report '+time(d.generated_at);
       document.getElementById('metrics').innerHTML=[
-        card('Visitors',n(t.visitors),'Unique first-party visitors in range'),
+        card('External visitors',n(t.visitors),'Owner, agents and test traffic excluded'),
+        card('Account visitors',n(acct.visitors),'Signed-in external visitor IDs in range'),
+        card('Anonymous visitors',n(anon.visitors),'External visitor IDs not tied to an account'),
         card('Sessions',n(t.sessions),ratio(t.sessions,t.visitors)+' sessions / visitor'),
         card('Product events',n(t.events),ratio(t.events,t.sessions)+' events / session'),
         card('Page views',n(t.page_views),ratio(t.page_views,t.sessions)+' pages / session'),
-        card('Registered users',n(u.registered_total),n(u.new_registered)+' new in range'),
-        card('Active registered',n(u.active_registered),'Seen during selected range'),
+        card('Registered users',n(u.registered_total),n(u.new_registered)+' new external accounts in range'),
+        card('Active registered',n(u.active_registered),'External accounts seen during selected range'),
         card('Activation rate',pct(f.activated,f.reached),n(f.activated)+' activated / '+n(f.reached)+' reached'),
-        card('Upgrade intent',pct(f.upgrade_intent,f.reached),n(f.upgrade_intent)+' unique visitors'),
+        card('Upgrade intent',pct(f.upgrade_intent,f.reached),n(f.upgrade_intent)+' unique external visitors'),
         card('Checkout rate',pct(f.checkout_starts,f.reached),n(f.checkout_starts)+' checkout starters'),
         card('Paid conversion',pct(f.paid_conversions,f.reached),n(f.paid_conversions)+' tracked confirmations'),
-        card('Onboarding complete',pct(on.completed_total,u.registered_total),n(on.completed_total)+' of '+n(u.registered_total)+' registered'),
+        card('Onboarding complete',pct(on.completed_total,u.registered_total),n(on.completed_total)+' of '+n(u.registered_total)+' external accounts'),
         card('Active subscriptions',n(sub.active_total),n(sub.canceling)+' canceling · '+n(sub.past_due)+' past due')
       ].join('');
       var series=d.series||[],growth=d.user_growth||[];
-      document.getElementById('traffic-chart').innerHTML=bars(series,'visitors','')+'<div class="chart-meta"><span class="legend"><span class="swatch"></span>Visitors by '+esc(state.grain)+'</span><span>'+n(series.reduce(function(a,r){return a+Number(r.events||0);},0))+' bucketed events</span><span>'+n(series.length)+' buckets</span></div>';
-      document.getElementById('growth-chart').innerHTML=bars(growth,'signups','secondary')+'<div class="chart-meta"><span class="legend"><span class="swatch blue"></span>New accounts by '+esc(state.grain)+'</span><span>'+n(u.new_registered)+' exact signups in range</span></div>';
+      document.getElementById('traffic-chart').innerHTML=bars(series,'visitors','')+'<div class="chart-meta"><span class="legend"><span class="swatch"></span>External visitors by '+esc(state.grain)+'</span><span>'+n(series.reduce(function(a,r){return a+Number(r.events||0);},0))+' bucketed events</span><span>'+n(series.length)+' buckets</span></div>';
+      document.getElementById('growth-chart').innerHTML=bars(growth,'signups','secondary')+'<div class="chart-meta"><span class="legend"><span class="swatch blue"></span>New external accounts by '+esc(state.grain)+'</span><span>'+n(u.new_registered)+' exact signups in range</span></div>';
       var funnelSteps=[['Reached',f.reached,'100%'],['Activated',f.activated,pct(f.activated,f.reached)],['Upgrade intent',f.upgrade_intent,pct(f.upgrade_intent,f.reached)],['Checkout',f.checkout_starts,pct(f.checkout_starts,f.reached)],['Paid',f.paid_conversions,pct(f.paid_conversions,f.reached)]];
       document.getElementById('funnel').innerHTML='<div class="funnel">'+funnelSteps.map(function(x){return '<div class="step"><span class="label">'+esc(x[0])+'</span><strong>'+n(x[1])+'</strong><small>'+esc(x[2])+' of reached</small></div>';}).join('')+'</div>';
+      document.getElementById('audience').innerHTML=table(['Audience class','Counted in KPIs','Visitors','Sessions','Events'],aud.map(function(r){var external=r.audience_class==='external_visitor'||r.audience_class==='external_account';return '<tr>'+td(pretty(r.audience_class))+td(external?'Yes':'No')+td(n(r.visitors),1)+td(n(r.sessions),1)+td(n(r.events),1)+'</tr>';}));
       document.getElementById('pages').innerHTML=table(['Page','Views','Visitors','Sessions'],(s.top_pages||[]).map(function(r){return '<tr>'+td(r.path)+td(n(r.events),1)+td(n(r.visitors),1)+td(n(r.sessions),1)+'</tr>';}));
       document.getElementById('tools').innerHTML=table(['Tool','Events','Visitors'],(s.top_tools||[]).map(function(r){return '<tr>'+td(pretty(r.tool))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
-      document.getElementById('acquisition').innerHTML=table(['Source','Medium','Campaign','Visitors','Activated','Checkout'],(s.acquisition||[]).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(r.campaign)+td(n(r.visitors),1)+td(n(r.activated),1)+td(n(r.checkout_starts),1)+'</tr>';}));
+      document.getElementById('acquisition').innerHTML=table(['Source','Medium','Campaign','Specific referrer','Landing page','Paid signal','Visitors','Activated','Checkout'],(s.acquisition||[]).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(r.campaign)+td(r.source_url)+td(r.landing_path)+td(pretty(r.click_source))+td(n(r.visitors),1)+td(n(r.activated),1)+td(n(r.checkout_starts),1)+'</tr>';}));
       document.getElementById('events').innerHTML=table(['Event','Events','Visitors'],(s.top_events||[]).map(function(r){return '<tr>'+td(pretty(r.event_name))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
       document.getElementById('account-health').innerHTML='<div class="health">'+[
-        ['Registered',u.registered_total,'all accounts'],['New',u.new_registered,'selected range'],['Active',u.active_registered,'last seen in range'],['Profile complete',u.completed_profiles_total,'all time'],['Onboarded',on.completed_total,'all time'],['Onboarded now',on.completed_in_range,'selected range'],['Subscriptions',sub.active_total,'active/trial/past due/paused'],['Canceling',sub.canceling,'cancel at period end']
+        ['Registered',u.registered_total,'external accounts'],['New',u.new_registered,'selected range'],['Active',u.active_registered,'last seen in range'],['Profile complete',u.completed_profiles_total,'external only'],['Onboarded',on.completed_total,'external only'],['Onboarded now',on.completed_in_range,'selected range'],['Subscriptions',sub.active_total,'external active/trial/past due/paused'],['Canceling',sub.canceling,'cancel at period end']
       ].map(function(x){return '<div class="health-item"><span>'+esc(x[0])+'</span><b>'+n(x[1])+'</b><span>'+esc(x[2])+'</span></div>';}).join('')+'</div>';
       document.getElementById('plans').innerHTML=table(['Plan','Billing tier','Interval','Status','Provider','Accounts'],(s.plan_breakdown||[]).map(function(r){return '<tr>'+td(pretty(r.plan_tier))+td(pretty(r.billing_tier))+td(pretty(r.billing_interval))+td(pretty(r.subscription_status))+td(pretty(r.provider))+td(n(r.accounts),1)+'</tr>';}));
       var intel=(d.intelligence_funnel||[])[0]||{};
@@ -105,9 +112,9 @@
       var sum=d.summary||{},gov=countRows(sum.today_actions_by_type_30d).map(function(r){return ['Today · '+pretty(r[0]),r[1]];}).concat(countRows(sum.intent_events_by_type_30d).map(function(r){return ['Intent · '+pretty(r[0]),r[1]];}));
       document.getElementById('governed').innerHTML=table(['Governed event','30-day count'],gov.map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
       document.getElementById('retention').innerHTML=table(['Cohort','Week','Retained visitors'],(d.retention||[]).slice(0,60).map(function(r){return '<tr>'+td(r.cohort_week)+td('Week '+r.week_number)+td(n(r.retained_visitors),1)+'</tr>';}));
-      document.getElementById('billing').innerHTML='<div class="health"><div class="health-item"><span>Lifecycle events</span><b>'+n(billing.lifecycle_events)+'</b><span>selected range</span></div><div class="health-item"><span>Trials</span><b>'+n(sub.trials)+'</b><span>current</span></div><div class="health-item"><span>Past due</span><b>'+n(sub.past_due)+'</b><span>current</span></div><div class="health-item"><span>Interval unknown</span><b>'+n(sub.interval_unknown)+'</b><span>MRR not guessed</span></div></div>'+table(['Provider','Event','Count'],(s.billing_events||[]).map(function(r){return '<tr>'+td(pretty(r.provider))+td(pretty(r.event_type))+td(n(r.events),1)+'</tr>';}));
-      var last=t.last_event?Date.now()-new Date(t.last_event).getTime():Infinity,healthy=last<6*3600000;
-      document.getElementById('quality').innerHTML='<div class="health"><div class="health-item"><span>Collector</span><b>'+(healthy?'Fresh':'Check')+'</b><span>'+esc(time(t.last_event))+'</span></div><div class="health-item"><span>Privacy mode</span><b>Aggregate</b><span>No identity profiles</span></div><div class="health-item"><span>Range</span><b>'+n(d.range&&d.range.hours)+'</b><span>hours</span></div><div class="health-item"><span>Granularity</span><b>'+esc(pretty(d.range&&d.range.grain))+'</b><span>'+n(series.length)+' buckets</span></div></div><div class="status"><b>Instrumentation note:</b> subscription revenue is withheld when the current entitlement record lacks normalized billing interval/amount data. That is safer than displaying a fabricated MRR.</div>';
+      document.getElementById('billing').innerHTML='<div class="health"><div class="health-item"><span>Lifecycle events</span><b>'+n(billing.lifecycle_events)+'</b><span>provider ledger</span></div><div class="health-item"><span>Trials</span><b>'+n(sub.trials)+'</b><span>external current</span></div><div class="health-item"><span>Past due</span><b>'+n(sub.past_due)+'</b><span>external current</span></div><div class="health-item"><span>Interval unknown</span><b>'+n(sub.interval_unknown)+'</b><span>MRR not guessed</span></div></div>'+table(['Provider','Event','Count'],(s.billing_events||[]).map(function(r){return '<tr>'+td(pretty(r.provider))+td(pretty(r.event_type))+td(n(r.events),1)+'</tr>';}));
+      var last=t.last_event?Date.now()-new Date(t.last_event).getTime():Infinity,healthy=last<6*3600000,internalVisitors=aud.filter(function(r){return String(r.audience_class).indexOf('internal_')===0;}).reduce(function(a,r){return a+Number(r.visitors||0);},0);
+      document.getElementById('quality').innerHTML='<div class="health"><div class="health-item"><span>Collector</span><b>'+(healthy?'Fresh':'Check')+'</b><span>'+esc(time(t.last_event))+'</span></div><div class="health-item"><span>Audience mode</span><b>External</b><span>'+n(internalVisitors)+' internal visitor IDs excluded</span></div><div class="health-item"><span>Range</span><b>'+n(d.range&&d.range.hours)+'</b><span>hours</span></div><div class="health-item"><span>Granularity</span><b>'+esc(pretty(d.range&&d.range.grain))+'</b><span>'+n(series.length)+' buckets</span></div></div><div class="status"><b>Classification note:</b> verified owner, internal agent, developer and test accounts are excluded. When an internal browser is recognized after sign-in, prior events from that same visitor ID are reclassified retroactively. <b>Attribution note:</b> browsers may intentionally provide only an origin for some cross-site referrers; Watchdog shows the full origin + pathname whenever the browser supplies it and combines that with UTMs, landing path and paid-click source.</div>';
     }
     async function load(){
       var box=document.getElementById('error');box.style.display='none';document.getElementById('refresh').disabled=true;document.getElementById('freshness').textContent='Loading production data…';
