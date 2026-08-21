@@ -4,81 +4,128 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Watchdog Product Analytics</title>
+  <title>Watchdog Analytics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/property/css/shared.css">
   <style>
-    :root{--ink:#10294b;--muted:#6d7989;--line:#e5eaef;--paper:#f6f8fa;--teal:#087f7a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#15202b;font-family:"Source Sans 3",Arial,sans-serif}.pa-shell{max-width:1320px;margin:0 auto;padding:38px 24px 70px}.pa-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:28px}.pa-kicker{font:800 11px/1.2 "Plus Jakarta Sans";letter-spacing:.14em;color:var(--teal)}h1{font:800 36px/1.05 "Plus Jakarta Sans";letter-spacing:-.04em;color:var(--ink);margin:7px 0 7px}.pa-head p{margin:0;color:var(--muted);font-size:16px}.pa-back{color:var(--ink);font-weight:700;text-decoration:none}.pa-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.pa-card,.pa-panel{background:#fff;border-radius:18px;box-shadow:0 10px 32px rgba(16,41,75,.06)}.pa-card{padding:20px}.pa-label{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}.pa-value{font:800 30px/1 "Plus Jakarta Sans";color:var(--ink);margin-top:10px}.pa-sub{font-size:13px;color:var(--muted);margin-top:8px}.pa-panels{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.pa-panel{padding:22px;min-width:0}.pa-panel.wide{grid-column:1/-1}.pa-panel h2{font:800 18px/1.2 "Plus Jakarta Sans";color:var(--ink);margin:0 0 5px}.pa-panel>p{margin:0 0 15px;color:var(--muted);font-size:13px}.pa-table{width:100%;border-collapse:collapse;font-size:13px}.pa-table th,.pa-table td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.pa-table th{font-size:11px;text-transform:uppercase;color:var(--muted)}.pa-table td.num,.pa-table th.num{text-align:right}.pa-empty{padding:28px;color:var(--muted);text-align:center}.pa-note{margin-top:18px;background:#eef7f6;border-radius:14px;padding:15px 17px;color:#38504e;font-size:13px}.pa-error{background:#fff0f0;color:#8b2626;border-radius:14px;padding:16px;margin-bottom:18px;display:none}.pa-intel-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:#ecf7f6;color:#087f7a;font-size:10px;font-weight:800;margin-bottom:8px}@media(max-width:900px){.pa-grid{grid-template-columns:repeat(2,1fr)}.pa-panels{grid-template-columns:1fr}.pa-panel.wide{grid-column:auto}.pa-head{align-items:flex-start;flex-direction:column}}@media(max-width:520px){.pa-shell{padding:24px 14px 50px}.pa-grid{grid-template-columns:1fr 1fr}.pa-value{font-size:25px}h1{font-size:30px}}
+    :root{--ink:#10294b;--muted:#6d7989;--line:#e6ebef;--paper:#f5f7f9;--teal:#087f7a;--green:#1b7f5b;--amber:#9a6b12;--red:#a53a3a;--soft:#eef7f6}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#17212b;font-family:"Source Sans 3",Arial,sans-serif}.shell{max-width:1480px;margin:0 auto;padding:34px 24px 72px}.head{display:flex;align-items:flex-start;justify-content:space-between;gap:24px;margin-bottom:22px}.kicker{font:800 11px/1.2 "Plus Jakarta Sans";letter-spacing:.14em;color:var(--teal)}h1{font:800 38px/1.05 "Plus Jakarta Sans";letter-spacing:-.045em;color:var(--ink);margin:7px 0 8px}.head p{margin:0;color:var(--muted);font-size:16px;max-width:820px}.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.btn,.chip{border:0;background:#fff;color:var(--ink);border-radius:11px;padding:10px 13px;font:700 13px/1 "Source Sans 3";cursor:pointer;box-shadow:0 5px 18px rgba(16,41,75,.06)}.btn:hover,.chip:hover{transform:translateY(-1px)}.btn.primary{background:var(--ink);color:#fff}.back{color:var(--ink);font-weight:700;text-decoration:none}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;background:#fff;border-radius:16px;padding:12px 14px;margin-bottom:16px;box-shadow:0 8px 28px rgba(16,41,75,.05)}.toolbar-group{display:flex;align-items:center;gap:7px;flex-wrap:wrap}.toolbar-label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-right:3px}.chip.active{background:var(--ink);color:#fff}.live{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}.dot{width:8px;height:8px;border-radius:50%;background:#3aae7a;box-shadow:0 0 0 4px rgba(58,174,122,.12)}.error{background:#fff0f0;color:#8b2626;border-radius:14px;padding:16px;margin-bottom:16px;display:none}.metrics{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:18px}.card,.panel{background:#fff;border-radius:17px;box-shadow:0 8px 28px rgba(16,41,75,.055)}.card{padding:18px;min-width:0}.label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.055em}.value{font:800 29px/1 "Plus Jakarta Sans";color:var(--ink);margin-top:9px;white-space:nowrap}.sub{font-size:12px;color:var(--muted);margin-top:7px;line-height:1.35}.panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.panel{padding:21px;min-width:0}.panel.wide{grid-column:1/-1}.panel h2{font:800 18px/1.25 "Plus Jakarta Sans";color:var(--ink);margin:0}.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:5px}.panel p{margin:5px 0 14px;color:var(--muted);font-size:13px}.tag{display:inline-flex;align-items:center;gap:6px;padding:5px 8px;border-radius:999px;background:var(--soft);color:var(--teal);font-size:10px;font-weight:800}.chart-wrap{overflow-x:auto;padding:8px 0 2px}.bars{height:190px;min-width:460px;display:flex;align-items:flex-end;gap:4px;border-bottom:1px solid var(--line);padding:0 2px}.bar{flex:1;min-width:3px;max-width:26px;background:linear-gradient(180deg,#15958f,#087f7a);border-radius:5px 5px 0 0;position:relative;opacity:.88}.bar.secondary{background:linear-gradient(180deg,#537095,#18395f)}.bar:hover{opacity:1}.chart-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:12px}.legend{display:inline-flex;align-items:center;gap:6px}.swatch{width:9px;height:9px;border-radius:3px;background:var(--teal)}.swatch.blue{background:#18395f}.funnel{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:14px}.step{background:#f7f9fb;border-radius:13px;padding:13px}.step strong{display:block;font:800 23px/1 "Plus Jakarta Sans";color:var(--ink);margin-top:6px}.step small{display:block;color:var(--muted);margin-top:6px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:13px}.table th,.table td{padding:9px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;white-space:nowrap}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.table .num{text-align:right;font-variant-numeric:tabular-nums}.empty{padding:28px;color:var(--muted);text-align:center}.health{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.health-item{background:#f7f9fb;border-radius:13px;padding:13px}.health-item b{display:block;color:var(--ink);font:800 21px/1 "Plus Jakarta Sans";margin-top:5px}.health-item span{color:var(--muted);font-size:12px}.note{margin-top:17px;background:#eef7f6;border-radius:14px;padding:15px 17px;color:#38504e;font-size:13px;line-height:1.45}.status{font-size:12px;color:var(--muted);margin-top:8px}.status b{color:var(--ink)}@media(max-width:1180px){.metrics{grid-template-columns:repeat(3,1fr)}}@media(max-width:900px){.panels{grid-template-columns:1fr}.panel.wide{grid-column:auto}.head{flex-direction:column}.metrics{grid-template-columns:repeat(2,1fr)}.funnel{grid-template-columns:repeat(2,1fr)}.toolbar{align-items:flex-start;flex-direction:column}.health{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.shell{padding:22px 13px 50px}h1{font-size:31px}.metrics{grid-template-columns:1fr 1fr}.value{font-size:25px}.panel{padding:17px}.funnel{grid-template-columns:1fr 1fr}.actions{width:100%;justify-content:space-between}.toolbar{padding:11px}.chip{padding:9px 10px}}
   </style>
 </head>
 <body data-plan-auto="true">
-  <main class="pa-shell">
-    <header class="pa-head">
-      <div><div class="pa-kicker">DEVELOPER · WEEKLY REVIEW</div><h1>Product Analytics</h1><p>Activation, Intelligence usefulness, acquisition and retention without individual behavioral profiles.</p></div>
-      <a class="pa-back" href="/property/dashboard/"><i class="fas fa-arrow-left"></i> Dashboard</a>
+  <main class="shell">
+    <header class="head">
+      <div><div class="kicker">DEVELOPER · SAAS COMMAND CENTER</div><h1>Watchdog Analytics</h1><p>Traffic, growth, activation, product usage, acquisition, retention, Intelligence adoption and subscription health from first-party production data.</p></div>
+      <div class="actions"><a class="back" href="/property/dashboard/"><i class="fas fa-arrow-left"></i> Dashboard</a><button id="refresh" class="btn primary"><i class="fas fa-rotate"></i> Refresh</button></div>
     </header>
-    <div id="pa-error" class="pa-error"></div>
-    <section class="pa-grid" id="pa-summary"><div class="pa-card"><div class="pa-label">Loading</div><div class="pa-value">…</div></div></section>
-    <section class="pa-panels">
-      <div class="pa-panel"><h2>Activation funnel · recent days</h2><div id="pa-funnel" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel"><span class="pa-intel-tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2>Decision funnel · recent days</h2><p>Did users reach Intelligence, inspect its reasoning, and move toward an action?</p><div id="pa-intelligence" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel"><span class="pa-intel-tag"><i class="fas fa-route"></i> CONTEXT</span><h2>Governed decision activity · 30 days</h2><p>Successful Today and Intent events summarized directly from their append-only governed trails, without property identifiers or payloads.</p><div id="pa-governed" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel"><span class="pa-intel-tag"><i class="fas fa-layer-group"></i> SURFACES</span><h2>Where Intelligence earns attention</h2><p>Aggregate interactions by product surface. No address or property identifier is recorded here.</p><div id="pa-intel-surfaces" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel"><h2>Top tools · 90 days</h2><div id="pa-tools" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel"><h2>Acquisition · 90 days</h2><div id="pa-acquisition" class="pa-empty">Loading…</div></div>
-      <div class="pa-panel wide"><h2>Retention cohorts</h2><div id="pa-retention" class="pa-empty">Loading…</div></div>
+
+    <div class="toolbar">
+      <div class="toolbar-group" id="ranges"><span class="toolbar-label">Range</span><button class="chip" data-hours="24">24H</button><button class="chip" data-hours="168">7D</button><button class="chip active" data-hours="720">30D</button><button class="chip" data-hours="2160">90D</button><button class="chip" data-hours="8760">1Y</button></div>
+      <div class="toolbar-group" id="grains"><span class="toolbar-label">Group</span><button class="chip" data-grain="hour">Hour</button><button class="chip active" data-grain="day">Day</button><button class="chip" data-grain="week">Week</button><button class="chip" data-grain="month">Month</button></div>
+      <div class="live"><span class="dot"></span><span id="freshness">Loading production data…</span></div>
+    </div>
+
+    <div id="error" class="error"></div>
+    <section class="metrics" id="metrics"><div class="card"><div class="label">Loading</div><div class="value">…</div></div></section>
+
+    <section class="panels">
+      <div class="panel wide"><div class="panel-head"><div><h2>Traffic trend</h2><p>Exact unique visitors and sessions inside each selected time bucket.</p></div><span class="tag"><i class="fas fa-chart-line"></i> LIVE EVENTS</span></div><div id="traffic-chart" class="empty">Loading…</div></div>
+      <div class="panel"><h2>User growth</h2><p>Registered-account creation over the selected period. No user identities are returned to this page.</p><div id="growth-chart" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Activation funnel</h2><p>Unique visitors across the selected range, not summed daily uniques.</p><div id="funnel" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Top pages</h2><p>Where product attention is actually going.</p><div id="pages" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Top tools</h2><p>Tool opens, marker views, lookups and exports.</p><div id="tools" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Acquisition</h2><p>Source, medium and campaign quality for the selected range.</p><div id="acquisition" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Event mix</h2><p>Which product behaviors generate the most activity.</p><div id="events" class="empty">Loading…</div></div>
+      <div class="panel wide"><div class="panel-head"><div><h2>Accounts & subscription health</h2><p>Registered users, onboarding, plans and current billing states.</p></div><span class="tag"><i class="fas fa-users"></i> AGGREGATE ONLY</span></div><div id="account-health" class="empty">Loading…</div><div id="plans" style="margin-top:14px"></div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel</h2><p>Did people reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Today & Intent activity</h2><p>Append-only governed decision events over the last 30 days.</p><div id="governed" class="empty">Loading…</div></div>
+      <div class="panel wide"><h2>Retention cohorts</h2><p>Weekly activated-visitor retention. This remains the long-term signal for whether product use is recurring.</p><div id="retention" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Billing lifecycle</h2><p>Provider lifecycle events captured in the selected range. MRR is deliberately not guessed when interval/amount data is incomplete.</p><div id="billing" class="empty">Loading…</div></div>
+      <div class="panel"><h2>Data quality & freshness</h2><p>Know whether you are looking at current, trustworthy instrumentation.</p><div id="quality" class="empty">Loading…</div></div>
     </section>
-    <div class="pa-note"><b>Privacy boundary:</b> this page reads aggregate product analytics and aggregate counts from governed Intent/Today trails. It does not expose names, emails, addresses, PAMS PINs, search text, prompts, phone numbers, IP addresses, intent payloads, or property-level behavioral profiles. Global Privacy Control and Do Not Track disable the browser collector. Payment-provider lifecycle certification remains governed by the billing launch gate rather than duplicated here.</div>
+
+    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. It reports traffic, registered-account counts, plan/billing state and product behavior without returning names, emails, addresses, phone numbers, PAMS PINs, prompts, IP addresses or property-level behavioral profiles. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
   </main>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script>
-    (function(){
-      'use strict';
-      function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-      function num(v){return Number(v||0).toLocaleString();}
-      function pct(a,b){a=Number(a||0);b=Number(b||0);return b?Math.round(a/b*100)+'%':'—';}
-      function table(headers,rows){if(!rows.length)return '<div class="pa-empty">No data yet.</div>';return '<table class="pa-table"><thead><tr>'+headers.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table>';}
-      function td(v,n){return '<td'+(n?' class="num"':'')+'>'+esc(v)+'</td>';}
-      function sumBy(rows,key){var m={};rows.forEach(function(r){var k=r[key]||'unknown';m[k]=(m[k]||0)+Number(r.events||0);});return Object.entries(m).sort(function(a,b){return b[1]-a[1];});}
-      function countRows(obj){return Object.entries(obj||{}).sort(function(a,b){return Number(b[1])-Number(a[1]);});}
-      async function load(){
-        try{
-          var client=window.NJPTRSupabaseRuntime.createClient();
-          var result=await client.functions.invoke('product-analytics-report',{body:{}});
-          if(result.error||!result.data||!result.data.ok)throw new Error((result.data&&result.data.error)||(result.error&&result.error.message)||'Analytics report unavailable');
-          var d=result.data,s=d.summary||{},latest=s.latest_day||{},intel=(d.intelligence_funnel||[])[0]||{};
-          document.getElementById('pa-summary').innerHTML=[
-            ['Product events',num(s.total_product_events),'Privacy-minimized first-party events'],
-            ['Latest visitors',num(latest.visitors),'Most recent captured day'],
-            ['Intelligence reached',num(intel.intelligence_reached),'Latest measured Intelligence day'],
-            ['Reasoning inspect rate',pct(intel.reasoning_inspectors,intel.intelligence_reached),'Inspectors ÷ people reaching Intelligence'],
-            ['Intent answer rate',pct(intel.intent_question_answerers,intel.intent_question_viewers),'Answers ÷ intent-question viewers'],
-            ['Today actions · 30d',num(s.today_actions_30d),'Persisted governed triage actions'],
-            ['Intent events · 30d',num(s.intent_events_30d),'Persisted governed Context Graph events'],
-            ['Active subscriptions',num(s.active_subscription_count),'Aggregate current paid/trial states']
-          ].map(function(x){return '<div class="pa-card"><div class="pa-label">'+esc(x[0])+'</div><div class="pa-value">'+esc(x[1])+'</div><div class="pa-sub">'+esc(x[2])+'</div></div>';}).join('');
-          var funnel=(d.funnel||[]).slice(0,14).map(function(r){return '<tr>'+td(r.day)+td(num(r.visitors),1)+td(num(r.activated_visitors),1)+td(num(r.upgrade_intent),1)+td(num(r.checkout_starts),1)+'</tr>';});
-          document.getElementById('pa-funnel').innerHTML=table(['Day','Visitors','Activated','Upgrade intent','Checkout'],funnel);
-          var intRows=(d.intelligence_funnel||[]).slice(0,14).map(function(r){return '<tr>'+td(r.day)+td(num(r.intelligence_reached),1)+td(num(r.reasoning_inspectors),1)+td(num(r.action_starters),1)+td(num(r.intent_question_viewers),1)+td(num(r.intent_question_answerers),1)+td(num(r.trust_evidence_openers),1)+'</tr>';});
-          document.getElementById('pa-intelligence').innerHTML=table(['Day','Reached','Reasoning','Action starts','Question shown','Answered','Trust'],intRows);
-          var governed=countRows(s.today_actions_by_type_30d).map(function(r){return '<tr>'+td('Today · '+r[0])+td(num(r[1]),1)+'</tr>';}).concat(countRows(s.intent_events_by_type_30d).map(function(r){return '<tr>'+td('Intent · '+r[0])+td(num(r[1]),1)+'</tr>';}));
-          document.getElementById('pa-governed').innerHTML=table(['Governed event','30-day count'],governed);
-          var surfaces=sumBy(d.intelligence_interactions||[],'surface').slice(0,15).map(function(r){return '<tr>'+td(r[0])+td(num(r[1]),1)+'</tr>';});
-          document.getElementById('pa-intel-surfaces').innerHTML=table(['Surface','Interactions'],surfaces);
-          var tools=sumBy(d.tool_usage||[],'tool').slice(0,15).map(function(r){return '<tr>'+td(r[0])+td(num(r[1]),1)+'</tr>';});
-          document.getElementById('pa-tools').innerHTML=table(['Tool','Events'],tools);
-          var acq=(d.acquisition||[]).slice(0,20).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(num(r.visitors),1)+td(num(r.activated),1)+'</tr>';});
-          document.getElementById('pa-acquisition').innerHTML=table(['Source','Medium','Visitors','Activated'],acq);
-          var retention=(d.retention||[]).slice(0,30).map(function(r){return '<tr>'+td(r.cohort_week)+td('Week '+r.week_number)+td(num(r.retained_visitors),1)+'</tr>';});
-          document.getElementById('pa-retention').innerHTML=table(['Cohort','Age','Retained'],retention);
-        }catch(error){var box=document.getElementById('pa-error');box.style.display='block';box.textContent=error.message||String(error);}
-      }
-      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
-    })();
+  (function(){
+    'use strict';
+    var state={hours:720,grain:'day'};
+    function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+    function n(v,d){var x=Number(v||0);return Number.isFinite(x)?x.toLocaleString(undefined,{maximumFractionDigits:d==null?0:d}):'0';}
+    function pct(a,b){a=Number(a||0);b=Number(b||0);return b?(a/b*100).toFixed(a/b*100<10?1:0)+'%':'—';}
+    function ratio(a,b){a=Number(a||0);b=Number(b||0);return b?(a/b).toFixed(1):'—';}
+    function pretty(v){return String(v||'').replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});}
+    function time(v){if(!v)return 'No events yet';var d=new Date(v);return isNaN(d)?String(v):d.toLocaleString();}
+    function td(v,num){return '<td'+(num?' class="num"':'')+'>'+esc(v)+'</td>';}
+    function table(headers,rows){if(!rows||!rows.length)return '<div class="empty">No data in this range.</div>';return '<div class="table-wrap"><table class="table"><thead><tr>'+headers.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';}
+    function card(label,value,sub){return '<div class="card"><div class="label">'+esc(label)+'</div><div class="value">'+esc(value)+'</div><div class="sub">'+esc(sub||'')+'</div></div>';}
+    function bars(rows,key,klass){if(!rows.length)return '<div class="empty">No time-series data in this range.</div>';var vals=rows.map(function(r){return Number(r[key]||0);}),max=Math.max.apply(Math,vals.concat([1]));return '<div class="chart-wrap"><div class="bars">'+rows.map(function(r,i){var h=Math.max(2,Math.round(vals[i]/max*100));return '<div class="bar '+(klass||'')+'" style="height:'+h+'%" title="'+esc(time(r.bucket)+' · '+n(vals[i]))+'"></div>';}).join('')+'</div></div>';}
+    function activeControls(){document.querySelectorAll('#ranges .chip').forEach(function(b){b.classList.toggle('active',Number(b.dataset.hours)===state.hours);});document.querySelectorAll('#grains .chip').forEach(function(b){b.classList.toggle('active',b.dataset.grain===state.grain);});}
+    function defaultGrain(hours){if(hours<=48)return 'hour';if(hours<=2160)return 'day';if(hours<=4380)return 'week';return 'month';}
+    function countRows(obj){return Object.entries(obj||{}).sort(function(a,b){return Number(b[1])-Number(a[1]);});}
+    function render(d){
+      var s=d.snapshot||{},t=s.traffic||{},u=s.users||{},f=s.funnel||{},on=s.onboarding||{},sub=s.subscriptions||{},billing=s.billing||{};
+      document.getElementById('freshness').textContent='Last event '+time(t.last_event)+' · Report '+time(d.generated_at);
+      document.getElementById('metrics').innerHTML=[
+        card('Visitors',n(t.visitors),'Unique first-party visitors in range'),
+        card('Sessions',n(t.sessions),ratio(t.sessions,t.visitors)+' sessions / visitor'),
+        card('Product events',n(t.events),ratio(t.events,t.sessions)+' events / session'),
+        card('Page views',n(t.page_views),ratio(t.page_views,t.sessions)+' pages / session'),
+        card('Registered users',n(u.registered_total),n(u.new_registered)+' new in range'),
+        card('Active registered',n(u.active_registered),'Seen during selected range'),
+        card('Activation rate',pct(f.activated,f.reached),n(f.activated)+' activated / '+n(f.reached)+' reached'),
+        card('Upgrade intent',pct(f.upgrade_intent,f.reached),n(f.upgrade_intent)+' unique visitors'),
+        card('Checkout rate',pct(f.checkout_starts,f.reached),n(f.checkout_starts)+' checkout starters'),
+        card('Paid conversion',pct(f.paid_conversions,f.reached),n(f.paid_conversions)+' tracked confirmations'),
+        card('Onboarding complete',pct(on.completed_total,u.registered_total),n(on.completed_total)+' of '+n(u.registered_total)+' registered'),
+        card('Active subscriptions',n(sub.active_total),n(sub.canceling)+' canceling · '+n(sub.past_due)+' past due')
+      ].join('');
+      var series=d.series||[],growth=d.user_growth||[];
+      document.getElementById('traffic-chart').innerHTML=bars(series,'visitors','')+'<div class="chart-meta"><span class="legend"><span class="swatch"></span>Visitors by '+esc(state.grain)+'</span><span>'+n(series.reduce(function(a,r){return a+Number(r.events||0);},0))+' bucketed events</span><span>'+n(series.length)+' buckets</span></div>';
+      document.getElementById('growth-chart').innerHTML=bars(growth,'signups','secondary')+'<div class="chart-meta"><span class="legend"><span class="swatch blue"></span>New accounts by '+esc(state.grain)+'</span><span>'+n(u.new_registered)+' exact signups in range</span></div>';
+      var funnelSteps=[['Reached',f.reached,'100%'],['Activated',f.activated,pct(f.activated,f.reached)],['Upgrade intent',f.upgrade_intent,pct(f.upgrade_intent,f.reached)],['Checkout',f.checkout_starts,pct(f.checkout_starts,f.reached)],['Paid',f.paid_conversions,pct(f.paid_conversions,f.reached)]];
+      document.getElementById('funnel').innerHTML='<div class="funnel">'+funnelSteps.map(function(x){return '<div class="step"><span class="label">'+esc(x[0])+'</span><strong>'+n(x[1])+'</strong><small>'+esc(x[2])+' of reached</small></div>';}).join('')+'</div>';
+      document.getElementById('pages').innerHTML=table(['Page','Views','Visitors','Sessions'],(s.top_pages||[]).map(function(r){return '<tr>'+td(r.path)+td(n(r.events),1)+td(n(r.visitors),1)+td(n(r.sessions),1)+'</tr>';}));
+      document.getElementById('tools').innerHTML=table(['Tool','Events','Visitors'],(s.top_tools||[]).map(function(r){return '<tr>'+td(pretty(r.tool))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
+      document.getElementById('acquisition').innerHTML=table(['Source','Medium','Campaign','Visitors','Activated','Checkout'],(s.acquisition||[]).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(r.campaign)+td(n(r.visitors),1)+td(n(r.activated),1)+td(n(r.checkout_starts),1)+'</tr>';}));
+      document.getElementById('events').innerHTML=table(['Event','Events','Visitors'],(s.top_events||[]).map(function(r){return '<tr>'+td(pretty(r.event_name))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
+      document.getElementById('account-health').innerHTML='<div class="health">'+[
+        ['Registered',u.registered_total,'all accounts'],['New',u.new_registered,'selected range'],['Active',u.active_registered,'last seen in range'],['Profile complete',u.completed_profiles_total,'all time'],['Onboarded',on.completed_total,'all time'],['Onboarded now',on.completed_in_range,'selected range'],['Subscriptions',sub.active_total,'active/trial/past due/paused'],['Canceling',sub.canceling,'cancel at period end']
+      ].map(function(x){return '<div class="health-item"><span>'+esc(x[0])+'</span><b>'+n(x[1])+'</b><span>'+esc(x[2])+'</span></div>';}).join('')+'</div>';
+      document.getElementById('plans').innerHTML=table(['Plan','Billing tier','Interval','Status','Provider','Accounts'],(s.plan_breakdown||[]).map(function(r){return '<tr>'+td(pretty(r.plan_tier))+td(pretty(r.billing_tier))+td(pretty(r.billing_interval))+td(pretty(r.subscription_status))+td(pretty(r.provider))+td(n(r.accounts),1)+'</tr>';}));
+      var intel=(d.intelligence_funnel||[])[0]||{};
+      document.getElementById('intelligence').innerHTML=table(['Metric','Latest measured day'],[
+        ['Reached',intel.intelligence_reached],['Reasoning inspectors',intel.reasoning_inspectors],['Action starters',intel.action_starters],['Action completers',intel.action_completers],['Intent question viewers',intel.intent_question_viewers],['Intent answerers',intel.intent_question_answerers],['Trust evidence openers',intel.trust_evidence_openers]
+      ].map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
+      var sum=d.summary||{},gov=countRows(sum.today_actions_by_type_30d).map(function(r){return ['Today · '+pretty(r[0]),r[1]];}).concat(countRows(sum.intent_events_by_type_30d).map(function(r){return ['Intent · '+pretty(r[0]),r[1]];}));
+      document.getElementById('governed').innerHTML=table(['Governed event','30-day count'],gov.map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
+      document.getElementById('retention').innerHTML=table(['Cohort','Week','Retained visitors'],(d.retention||[]).slice(0,60).map(function(r){return '<tr>'+td(r.cohort_week)+td('Week '+r.week_number)+td(n(r.retained_visitors),1)+'</tr>';}));
+      document.getElementById('billing').innerHTML='<div class="health"><div class="health-item"><span>Lifecycle events</span><b>'+n(billing.lifecycle_events)+'</b><span>selected range</span></div><div class="health-item"><span>Trials</span><b>'+n(sub.trials)+'</b><span>current</span></div><div class="health-item"><span>Past due</span><b>'+n(sub.past_due)+'</b><span>current</span></div><div class="health-item"><span>Interval unknown</span><b>'+n(sub.interval_unknown)+'</b><span>MRR not guessed</span></div></div>'+table(['Provider','Event','Count'],(s.billing_events||[]).map(function(r){return '<tr>'+td(pretty(r.provider))+td(pretty(r.event_type))+td(n(r.events),1)+'</tr>';}));
+      var last=t.last_event?Date.now()-new Date(t.last_event).getTime():Infinity,healthy=last<6*3600000;
+      document.getElementById('quality').innerHTML='<div class="health"><div class="health-item"><span>Collector</span><b>'+(healthy?'Fresh':'Check')+'</b><span>'+esc(time(t.last_event))+'</span></div><div class="health-item"><span>Privacy mode</span><b>Aggregate</b><span>No identity profiles</span></div><div class="health-item"><span>Range</span><b>'+n(d.range&&d.range.hours)+'</b><span>hours</span></div><div class="health-item"><span>Granularity</span><b>'+esc(pretty(d.range&&d.range.grain))+'</b><span>'+n(series.length)+' buckets</span></div></div><div class="status"><b>Instrumentation note:</b> subscription revenue is withheld when the current entitlement record lacks normalized billing interval/amount data. That is safer than displaying a fabricated MRR.</div>';
+    }
+    async function load(){
+      var box=document.getElementById('error');box.style.display='none';document.getElementById('refresh').disabled=true;document.getElementById('freshness').textContent='Loading production data…';
+      try{
+        var client=window.NJPTRSupabaseRuntime.createClient(),session=await client.auth.getSession();
+        if(!session.data||!session.data.session)throw new Error('Sign in is required to load developer analytics.');
+        var result=await client.functions.invoke('product-analytics-report',{body:{range_hours:state.hours,grain:state.grain}});
+        if(result.error||!result.data||!result.data.ok)throw new Error((result.data&&result.data.error)||(result.error&&result.error.message)||'Analytics report unavailable');
+        render(result.data);
+      }catch(err){box.style.display='block';box.textContent=(err&&err.message)||String(err);document.getElementById('freshness').textContent='Analytics load failed';}
+      finally{document.getElementById('refresh').disabled=false;}
+    }
+    document.getElementById('ranges').addEventListener('click',function(e){var b=e.target.closest('[data-hours]');if(!b)return;state.hours=Number(b.dataset.hours);state.grain=defaultGrain(state.hours);activeControls();load();});
+    document.getElementById('grains').addEventListener('click',function(e){var b=e.target.closest('[data-grain]');if(!b)return;state.grain=b.dataset.grain;activeControls();load();});
+    document.getElementById('refresh').addEventListener('click',load);
+    activeControls();
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',load);else load();
+  })();
   </script>
 </body>
 </html>
