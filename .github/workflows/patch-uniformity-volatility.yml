@@ -4,13 +4,18 @@ on:
     branches: [agent/uniformity-volatility-20260820]
     paths:
       - '.github/workflows/patch-uniformity-volatility.yml'
+  pull_request:
+    branches: [main]
 permissions:
   contents: write
 jobs:
   patch:
+    if: github.event_name == 'push' || github.head_ref == 'agent/uniformity-volatility-20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Patch runtime, canary, and formula contract
         run: |
           python - <<'PY'
@@ -55,5 +60,4 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git add -- supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts property/data/derived-marker-formulas.json .github/workflows/patch-uniformity-volatility.yml
           git commit -m "Certify executable uniformity volatility semantics"
-          git push
-# retrigger
+          git push origin HEAD:${{ github.head_ref || github.ref_name }}
