@@ -1,0 +1,34 @@
+/* Keep every public property-address lookup on the same canonical search UI. */
+body.hood-on #njw-filterbar .njw-search-slot{
+  flex:1 1 460px;
+  min-width:260px;
+  max-width:720px;
+}
+body.hood-on #njw-filterbar .njw-search-slot .hd-searchbox[data-watchdog-search-replaced="1"]{
+  display:none!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search{
+  display:flex!important;
+  width:100%;
+  max-width:none;
+  min-width:0;
+  margin:0;
+}
+
+/* Results and other solid Watchdog navigation states need a visible divider. */
+.wd-nav.solid,
+body.nav-solid .wd-nav,
+body.hood-on .wd-nav{
+  border-bottom:1px solid #d9e1e8!important;
+}
+body.hood-on .wd-nav{
+  box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
+}
+
+@media(max-width:900px){
+  body.hood-on #njw-filterbar .njw-search-slot{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:none;
+  }
+}
