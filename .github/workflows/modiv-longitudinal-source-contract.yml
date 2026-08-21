@@ -6,10 +6,14 @@ on:
       - data-center-modiv-longitudinal-20260821
     paths:
       - property/scripts/audit_modiv_longitudinal.py
+      - property/scripts/build_modiv_longitudinal.py
+      - property/data/modiv-longitudinal/SOURCE-MANIFEST.md
+      - supabase/migrations/20260821143000_modiv_longitudinal_private_storage.sql
       - .github/workflows/modiv-longitudinal-source-contract.yml
   pull_request:
     paths:
       - property/scripts/audit_modiv_longitudinal.py
+      - property/scripts/build_modiv_longitudinal.py
       - property/data/modiv-longitudinal/SOURCE-MANIFEST.md
       - supabase/migrations/20260821143000_modiv_longitudinal_private_storage.sql
       - .github/workflows/modiv-longitudinal-source-contract.yml
@@ -23,9 +27,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  audit-official-archives:
+  audit-and-materialize:
     runs-on: ubuntu-latest
-    timeout-minutes: 35
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -42,28 +46,48 @@ jobs:
           p='property/data/modiv-longitudinal-diagnostic.json'
           d=json.load(open(p))
           assert [x['year'] for x in d['years']] == [2021,2022,2023,2024,2025,2026]
+          assert all(x.get('error') is None for x in d['years']), d['years']
           assert all(x['valid_record_count'] > 1000000 for x in d['years'])
           assert all(x['district_count'] >= 560 for x in d['years'])
           assert all(d['privacy_contract'][k] is False for k in ['raw_archives_persisted','owner_names_retained','mailing_addresses_retained','social_security_numbers_retained','mortgage_account_numbers_retained'])
           assert d['privacy_contract']['safe_fields_only'] is True
-          forbidden=('owner_name','street_address','city_state','social_security','mortgage_account')
-          raw=open(p,encoding='utf-8').read().lower()
-          assert not any(token in raw for token in forbidden)
+          allowed={'district_code','block','lot','qualifier','record_id','transaction_date','property_class','assessment_code','land_value','improvement_value','net_value','exemption_codes','old_property_id_present','prior_year_net_value'}
+          for year in d['years']:
+            for row in year.get('control_rows',[]):
+              assert set(row).issubset(allowed), (year['year'], set(row)-allowed)
           print({x['year']:(x['valid_record_count'],x['district_count'],len(x['control_rows'])) for x in d['years']})
           PY
-      - name: Commit source diagnostic
+      - name: Build privacy-minimized district partitions
+        run: python property/scripts/build_modiv_longitudinal.py --diagnostic property/data/modiv-longitudinal-build-summary.json
+      - name: Verify materialization contract
+        run: |
+          python - <<'PY'
+          import json
+          p='property/data/modiv-longitudinal-build-summary.json'
+          d=json.load(open(p))
+          assert d['source_years'] == [2021,2022,2023,2024,2025,2026]
+          assert d['district_count'] >= 560
+          assert d['source_rows_total'] > 6000000
+          assert d['parcel_records_across_partitions'] > 1000000
+          assert d['conflicting_duplicates_total'] == 0
+          assert d['privacy_contract']['safe_fields_only'] is True
+          print(d)
+          PY
+      - name: Publish candidate to private Supabase Storage
+        if: github.event_name == 'push'
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python property/scripts/build_modiv_longitudinal.py --publish --diagnostic property/data/modiv-longitudinal-build-summary.json
+      - name: Commit privacy-safe diagnostics
         if: always() && github.event_name == 'push'
         run: |
-          if [ ! -f property/data/modiv-longitudinal-diagnostic.json ]; then
-            echo "No diagnostic artifact was produced"
-            exit 0
-          fi
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
-          git add -- property/data/modiv-longitudinal-diagnostic.json
+          git add -- property/data/modiv-longitudinal-diagnostic.json property/data/modiv-longitudinal-build-summary.json || true
           if git diff --cached --quiet; then
             echo "No diagnostic changes"
           else
-            git commit -m "[source-build] Audit Treasury MOD-IV longitudinal archives"
+            git commit -m "[source-build] Materialize Treasury MOD-IV longitudinal release"
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
