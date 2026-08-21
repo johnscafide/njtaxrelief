@@ -6,13 +6,14 @@ var EVENTS=new Set([
  'intent_question_shown','intent_question_answered','intent_question_skipped',
  'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened','trust_evidence_opened'
 ]);
+var OWN_HOSTS=new Set(['njpropertytaxrelief.com','www.njpropertytaxrelief.com','watchdogre.com','www.watchdogre.com']);
 if(navigator.globalPrivacyControl===true||navigator.doNotTrack==='1')return;
 function uuid(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c==='x'?r:(r&3|8);return v.toString(16)});}
 function safeStore(store,key,make){try{var v=store.getItem(key);if(!v){v=make();store.setItem(key,v)}return v}catch(_){return make()}}
 var visitor=safeStore(localStorage,'wd_visitor_id',uuid),session=safeStore(sessionStorage,'wd_session_id',uuid),sentPage=false,seen=new Set(),accessToken='';
 function clean(v,n){return String(v||'').trim().slice(0,n||120)}
 function pathOnly(v){try{var u=new URL(v,location.origin);return u.pathname.slice(0,240)}catch(_){return location.pathname.slice(0,240)}}
-function referrerInfo(){try{if(!document.referrer)return{host:'',url:''};var u=new URL(document.referrer);if(!/^https?:$/.test(u.protocol))return{host:'',url:''};return{host:u.hostname.slice(0,120),url:(u.origin+u.pathname).slice(0,500)}}catch(_){return{host:'',url:''}}}
+function referrerInfo(){try{if(!document.referrer)return{host:'',url:''};var u=new URL(document.referrer),host=u.hostname.toLowerCase();if(!/^https?:$/.test(u.protocol)||OWN_HOSTS.has(host))return{host:'',url:''};return{host:host.slice(0,120),url:(u.origin+u.pathname).slice(0,500)}}catch(_){return{host:'',url:''}}}
 function clickSource(q){if(q.has('gclid')||q.has('gbraid')||q.has('wbraid'))return'google_ads';if(q.has('fbclid'))return'meta_ads';if(q.has('msclkid'))return'microsoft_ads';if(q.has('ttclid'))return'tiktok_ads';if(q.has('li_fat_id'))return'linkedin_ads';return''}
 function makeTouch(store,key){try{var old=JSON.parse(store.getItem(key)||'null');if(old)return old}catch(_){}
  var q=new URLSearchParams(location.search),r=referrerInfo(),t={utm_source:clean(q.get('utm_source'),80),utm_medium:clean(q.get('utm_medium'),80),utm_campaign:clean(q.get('utm_campaign'),120),utm_content:clean(q.get('utm_content'),120),utm_term:clean(q.get('utm_term'),120),referrer_host:r.host,referrer_url:r.url,landing_path:pathOnly(location.href),click_source:clickSource(q),captured_at:new Date().toISOString()};
