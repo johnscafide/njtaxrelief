@@ -12,6 +12,7 @@ function must(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+must(dashboardLoader.includes('/property/js/access-guard.js'), 'Dashboard Voice must expose the established signed-in client contract before loading Voice.');
 must(dashboardLoader.includes('/property/js/watchdog-contextual-analyst.js'), 'Dashboard must load the shared contextual Analyst.');
 must(dashboardLoader.includes('/property/js/watchdog-intelligence-voice-browser.js'), 'Dashboard must load the browser Voice layer.');
 must(dashboardLoader.includes('/property/js/watchdog-dashboard-voice.js'), 'Dashboard must load its contextual Voice bridge.');
