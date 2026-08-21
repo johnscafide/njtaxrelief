@@ -1,0 +1,237 @@
+/* Watchdog Mobile Audit — Marketing Studio customize workspace
+   Mobile-only certification layer. Loaded by customize/index.html at <=700px.
+   Keeps desktop and print-art geometry unchanged while making the editor chrome
+   readable, touch-safe, and usable as a pan/zoom creative workspace. */
+
+body[data-ms-wizard="customize"] .ms3-topbar{
+  padding:14px 12px;
+  gap:12px;
+}
+body[data-ms-wizard="customize"] .ms3-topbar h2{
+  font-size:20px;
+  line-height:1.2;
+}
+body[data-ms-wizard="customize"] .ms3-viewbar{
+  width:100%;
+  gap:6px;
+  flex-wrap:nowrap;
+  overflow-x:auto;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  padding-bottom:2px;
+}
+body[data-ms-wizard="customize"] .ms3-viewbar button{
+  min-width:48px;
+  min-height:44px;
+  padding:10px 12px;
+  font-size:14px;
+  line-height:1.2;
+  touch-action:manipulation;
+  flex:0 0 auto;
+}
+body[data-ms-wizard="customize"] .ms3-viewbar b{
+  min-width:50px;
+  font-size:13px;
+  flex:0 0 auto;
+}
+body[data-ms-wizard="customize"] .ms3-viewbar span{
+  flex:0 0 1px;
+}
+
+/* Desktop tool rail becomes a mobile command strip rather than tiny icon buttons. */
+body[data-ms-wizard="customize"] .ms3-tools{
+  gap:6px;
+  padding:8px 10px;
+  scroll-snap-type:x proximity;
+  overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+}
+body[data-ms-wizard="customize"] .ms3-tools button{
+  min-width:92px;
+  min-height:52px;
+  padding:8px 10px;
+  gap:5px;
+  font-size:13px;
+  line-height:1.2;
+  scroll-snap-align:start;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .ms3-tools button i{
+  font-size:18px;
+}
+body[data-ms-wizard="customize"] .ms3-stage-meta{
+  font-size:13px;
+  line-height:1.4;
+  gap:8px 12px;
+}
+
+/* Preserve true creative geometry. On phones the canvas is a controlled pan/zoom
+   viewport instead of shrinking the postcard until its designed copy is unreadable. */
+body[data-ms-wizard="customize"].wd-studio-visual-active .ms3-canvas-wrap,
+body[data-ms-wizard="customize"] .wd-studio-visual-active .ms3-canvas-wrap{
+  width:100%!important;
+  min-height:410px!important;
+  padding:10px!important;
+  display:block!important;
+  overflow:auto!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-x pan-y;
+  scrollbar-gutter:auto!important;
+}
+body[data-ms-wizard="customize"].wd-studio-visual-active .ms3-canvas,
+body[data-ms-wizard="customize"] .wd-studio-visual-active .ms3-canvas{
+  width:560px!important;
+  min-width:560px!important;
+  max-width:none!important;
+  margin:0 auto;
+  transform-origin:center top!important;
+}
+
+/* Inspector becomes a readable mobile form surface. */
+body[data-ms-wizard="customize"] .ms3-inspector{
+  padding:16px 12px calc(18px + env(safe-area-inset-bottom));
+}
+body[data-ms-wizard="customize"] .ms3-inspector-head h3{
+  font-size:18px;
+  line-height:1.25;
+}
+body[data-ms-wizard="customize"] .ms3-size-chip{
+  min-height:32px;
+  display:inline-flex;
+  align-items:center;
+  font-size:12px;
+  padding:6px 10px;
+}
+body[data-ms-wizard="customize"] .ms3-inspector>label,
+body[data-ms-wizard="customize"] .ms3-inspector-grid label{
+  gap:6px;
+  margin-bottom:14px;
+  font-size:13px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .ms3-inspector input,
+body[data-ms-wizard="customize"] .ms3-inspector textarea,
+body[data-ms-wizard="customize"] .ms3-inspector select,
+body[data-ms-wizard="customize"] .ms3-search input{
+  min-height:48px;
+  padding:11px 12px;
+  font-size:16px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .ms3-inspector textarea{
+  min-height:104px;
+}
+body[data-ms-wizard="customize"] .ms3-inspector-actions button{
+  min-height:48px;
+  font-size:14px;
+  line-height:1.2;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .ms3-inspector-note{
+  font-size:13px;
+  line-height:1.5;
+}
+
+body[data-ms-wizard="customize"] .ms3-drawer-head b{
+  font-size:15px;
+}
+body[data-ms-wizard="customize"] .ms3-drawer-head small{
+  font-size:13px;
+  line-height:1.4;
+}
+body[data-ms-wizard="customize"] .ms3-template{
+  flex-basis:156px;
+  min-height:132px;
+  padding:10px;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .ms3-template strong{
+  font-size:14px;
+  line-height:1.25;
+}
+body[data-ms-wizard="customize"] .ms3-template small{
+  font-size:11px;
+  line-height:1.3;
+}
+
+/* Composer controls are editor UI, not print artwork: raise them to SaaS-mobile norms. */
+body[data-ms-wizard="customize"] .wddc-controls{
+  padding:12px;
+}
+body[data-ms-wizard="customize"] .wddc-controls-head span,
+body[data-ms-wizard="customize"] .wddc-label,
+body[data-ms-wizard="customize"] .wddc-controls>label{
+  font-size:12px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .wddc-controls-head h4{
+  font-size:16px;
+  line-height:1.25;
+}
+body[data-ms-wizard="customize"] .wddc-controls-head>button,
+body[data-ms-wizard="customize"] .wddc-choice,
+body[data-ms-wizard="customize"] .wddc-pills button{
+  min-height:44px;
+  font-size:13px;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .wddc-choice b{
+  font-size:13px;
+}
+body[data-ms-wizard="customize"] .wddc-choice small{
+  font-size:12px;
+  line-height:1.35;
+}
+body[data-ms-wizard="customize"] .wddc-controls input[type=text],
+body[data-ms-wizard="customize"] .wddc-controls input:not([type]),
+body[data-ms-wizard="customize"] .wddc-controls textarea{
+  min-height:48px;
+  padding:11px 12px;
+  font-size:16px;
+  line-height:1.4;
+}
+body[data-ms-wizard="customize"] .wddc-controls textarea{
+  min-height:96px;
+}
+body[data-ms-wizard="customize"] .wddc-save-state,
+body[data-ms-wizard="customize"] .wddc-handoff-note{
+  font-size:13px;
+  line-height:1.5;
+}
+
+/* Recipient controls stay reachable/readable if surfaced in the customize flow. */
+body[data-ms-wizard="customize"] .ms3-filter-tabs button,
+body[data-ms-wizard="customize"] .ms3-recipient-footer button,
+body[data-ms-wizard="customize"] .ms3-exclude,
+body[data-ms-wizard="customize"] .ms3-include{
+  min-height:44px;
+  font-size:13px;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="customize"] .ms3-recipient-tools>label:last-child,
+body[data-ms-wizard="customize"] .ms3-recipient-counts span,
+body[data-ms-wizard="customize"] .ms3-recipient-footer{
+  font-size:12px;
+  line-height:1.4;
+}
+body[data-ms-wizard="customize"] .ms3-recipient-tools select{
+  min-height:44px;
+  font-size:16px;
+}
+
+@media(max-width:420px){
+  body[data-ms-wizard="customize"].wd-studio-visual-active .ms3-canvas,
+  body[data-ms-wizard="customize"] .wd-studio-visual-active .ms3-canvas{
+    width:520px!important;
+    min-width:520px!important;
+  }
+  body[data-ms-wizard="customize"].wd-studio-visual-active .ms3-canvas-wrap,
+  body[data-ms-wizard="customize"] .wd-studio-visual-active .ms3-canvas-wrap{
+    min-height:382px!important;
+  }
+  body[data-ms-wizard="customize"] .ms3-inspector-grid,
+  body[data-ms-wizard="customize"] .ms3-inspector-actions{
+    grid-template-columns:1fr;
+  }
+}
