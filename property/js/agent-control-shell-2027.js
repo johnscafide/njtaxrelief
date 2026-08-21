@@ -4,6 +4,27 @@
   if(window.__WD_AGENT_CONTROL_2027__)return;
   window.__WD_AGENT_CONTROL_2027__=true;
 
+  var BRAND_STYLE='/property/css/brand-consistency.css';
+  var READABILITY_STYLE='/property/css/agent-control-readability.css';
+  var BRAND_RUNTIME='/property/js/brand-consistency-runtime.js';
+
+  function ensureStyle(href){
+    if(document.querySelector('link[href="'+href+'"]'))return;
+    var link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=href;
+    document.head.appendChild(link);
+  }
+
+  function ensureBrandAssets(){
+    ensureStyle(BRAND_STYLE);
+    ensureStyle(READABILITY_STYLE);
+    if(window.__WATCHDOG_BRAND_CONSISTENCY__||document.querySelector('script[src="'+BRAND_RUNTIME+'"]'))return;
+    var script=document.createElement('script');
+    script.src=BRAND_RUNTIME;
+    document.body.appendChild(script);
+  }
+
   function decorate(){
     var bar=document.querySelector('.wdx-pagebar');
     if(!bar)return false;
@@ -21,6 +42,7 @@
     if(nav){
       nav.querySelectorAll('.wd4-nav-links a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='/property/agent-desk');});
     }
+    if(window.WatchdogBrandConsistency&&typeof window.WatchdogBrandConsistency.sync==='function')window.WatchdogBrandConsistency.sync();
     return true;
   }
 
@@ -42,6 +64,7 @@
   }
 
   function boot(){
+    ensureBrandAssets();
     var tries=0;
     (function settle(){
       tries++;
@@ -50,5 +73,6 @@
       if(!ok&&tries<30)setTimeout(settle,40);
     })();
   }
+  ensureBrandAssets();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
