@@ -6,6 +6,11 @@ module.exports = async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed.' });
   }
 
+  const promoEndsAt = Date.parse('2026-09-19T00:00:00Z');
+  if (Date.now() >= promoEndsAt) {
+    return res.status(200).json({ ok: false, blocked_by_watchdog_promo_cutoff: true });
+  }
+
   let helperToken = '';
   let helperError = '';
   let gatewayStatus = null;
@@ -29,7 +34,7 @@ module.exports = async function handler(req, res) {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${helperToken}`,
-          'ai-model-id': 'fish-audio/s2.1-pro-free',
+          'ai-model-id': 'fish-audio/s2.1-pro',
           'ai-gateway-protocol-version': '0.0.1',
           'Content-Type': 'application/json',
         },
@@ -61,6 +66,7 @@ module.exports = async function handler(req, res) {
     audio_present: audioPresent,
     provider_error: providerError,
     protocol_version: '0.0.1',
-    model: 'fish-audio/s2.1-pro-free',
+    watchdog_promo_cutoff_utc: '2026-09-19T00:00:00Z',
+    model: 'fish-audio/s2.1-pro',
   });
 };
