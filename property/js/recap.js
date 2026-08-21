@@ -41,16 +41,24 @@ function handoffButton(key,index){
   return '<button type="button" class="wr-handoff" data-handoff-section="'+esc(key)+'" data-handoff-index="'+index+'" title="Copy the prepared Watchdog handoff prompt and open your ChatGPT Project"><i class="fas fa-arrow-up-right-from-square"></i><span>Handoff</span><small>Prompt ready</small></button>';
 }
 
+function isCompleted(item){return String(item&&item.status||'').toLowerCase()==='completed';}
+
+function completedBadge(item){
+  var when=item&&item.completed_on?' title="Completed '+esc(fmtDate(item.completed_on))+'"':'';
+  return '<span class="wr-completed-badge"'+when+'><i class="fas fa-circle-check" aria-hidden="true"></i> Completed</span>';
+}
+
 function renderItems(key,items){
   if(!Array.isArray(items)||!items.length)return '';
   var meta=sectionMeta[key]||[key,'fa-circle'];
   var todo=key==='todo';
   return '<section class="wr-section '+(todo?'wr-todo':'')+'"><div class="wr-section-head"><span class="wr-section-icon"><i class="fas '+meta[1]+'"></i></span><h2>'+meta[0]+'</h2>'+(key==='in_progress'||key==='todo'?'<span class="wr-section-note"><i class="fas fa-bolt"></i> Ready for handoff</span>':'')+'</div><div class="wr-items">'+items.map(function(item,index){
+    var done=isCompleted(item);
     if(todo){
-      return '<article class="wr-item wr-item-actionable"><span class="wr-rank">'+esc(item.rank||index+1)+'</span><div class="wr-item-main"><b>'+esc(item.item||'')+'</b>'+issueLinks(item)+'</div>'+handoffButton(key,index)+'</article>';
+      return '<article class="wr-item wr-item-actionable'+(done?' wr-log-completed':'')+'"><span class="wr-rank">'+esc(item.rank||index+1)+'</span><div class="wr-item-main"><b>'+esc(item.item||'')+'</b>'+issueLinks(item)+'</div>'+(done?completedBadge(item):handoffButton(key,index))+'</article>';
     }
     var label=item.area||item.priority||'';
-    return '<article class="wr-item '+(key==='in_progress'?'wr-item-actionable':'')+'"><div class="wr-item-main"><div class="wr-item-top">'+(label?'<span class="wr-area">'+esc(label)+'</span>':'')+'<b>'+esc(item.title||item.item||'')+'</b></div>'+(item.detail?'<p>'+esc(item.detail)+'</p>':'')+issueLinks(item)+'</div>'+handoffButton(key,index)+'</article>';
+    return '<article class="wr-item '+(key==='in_progress'?'wr-item-actionable':'')+(done?' wr-log-completed':'')+'"><div class="wr-item-main"><div class="wr-item-top">'+(label?'<span class="wr-area">'+esc(label)+'</span>':'')+'<b>'+esc(item.title||item.item||'')+'</b></div>'+(item.detail?'<p>'+esc(item.detail)+'</p>':'')+issueLinks(item)+'</div>'+(done?completedBadge(item):handoffButton(key,index))+'</article>';
   }).join('')+'</div></section>';
 }
 
@@ -186,6 +194,7 @@ function launchHandoff(section,index){
   var items=currentRow[section];
   if(!Array.isArray(items)||!items[index])return;
   var item=items[index];
+  if(isCompleted(item))return;
   var prompt=handoffPrompt(section,item,index);
   var projectUrl=savedProjectUrl();
   if(projectUrl){
