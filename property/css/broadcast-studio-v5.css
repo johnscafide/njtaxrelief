@@ -1,5 +1,5 @@
 /* NJW-264 Phase 4: compact providers + progressive productivity controls. */
-.nl-newbie-polish .nl-provider-strip{display:flex!important;justify-content:flex-end;align-items:center;gap:0!important;margin:-8px 0 10px auto!important;max-width:680px;min-height:28px;background:transparent!important;border:0!important;padding:0!important}
+.nl-newbie-polish .nl-provider-strip{display:flex!important;justify-content:flex-end;align-items:center;gap:0!important;margin:10px 0 10px auto!important;max-width:680px;min-height:28px;background:transparent!important;border:0!important;padding:0!important}
 .nl-newbie-polish .nl-provider-brand{display:inline-flex!important;min-height:26px!important;height:26px!important;width:auto!important;gap:6px!important;padding:0 12px!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;cursor:pointer}
 .nl-newbie-polish .nl-provider-brand+.nl-provider-brand{border-left:1px solid #d9e1e6!important}
 .nl-newbie-polish .nl-provider-label{font-size:7.5px!important;letter-spacing:.9px!important;color:#87939d!important}
