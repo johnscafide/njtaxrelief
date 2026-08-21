@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/newsletter-studio.css">
   <link rel="stylesheet" href="/property/css/newsletter-studio-ux.css">
+  <link rel="stylesheet" href="/property/css/newsletter-brand-kit.css">
 </head>
 <body>
   <main class="nl-shell" id="nl-app">
@@ -18,7 +19,7 @@
       <div>
         <span class="nl-kicker">MARKETING STUDIO · PRIVATE BETA</span>
         <h1>Newsletter Studio</h1>
-        <p>Create newsletters from your Watchdog workspace using your own CRM contacts and your own Kit account.</p>
+        <p>Design, brand and send newsletters from your Watchdog workspace using your own CRM contacts and your own Kit account.</p>
       </div>
       <div class="nl-head-actions">
         <a href="/property/account/" class="nl-btn ghost"><i class="fas fa-user-circle"></i> Account</a>
@@ -88,7 +89,7 @@
             <div id="nl-crm-connected" hidden>
               <div class="nl-connected-banner">
                 <span><i class="fas fa-circle-check"></i></span>
-                <div><b>BoldTrail is already connected to Watchdog.</b><small id="nl-crm-connected-copy">Your existing CRM sync is available to Newsletter Studio. No new credentials are needed.</small></div>
+                <div><b>BoldTrail is already connected to Watchdog.</b><small id="nl-crm-connected-copy">Your existing CRM sync is available to Newsletter Studio. No new BoldTrail credentials are needed.</small></div>
               </div>
               <div class="nl-metrics three"><div><small>CRM contacts</small><b id="nl-crm-total">0</b></div><div><small>With email</small><b id="nl-crm-email">0</b></div><div><small>Last sync</small><b id="nl-crm-last">Not yet</b></div></div>
               <p class="nl-callout"><i class="fas fa-shield-halved"></i> A contact having an email address does not automatically make that contact newsletter-eligible. Watchdog keeps CRM presence separate from email consent.</p>
@@ -123,7 +124,7 @@
             <div id="nl-kit-connected" hidden>
               <div class="nl-connected-banner">
                 <span><i class="fas fa-circle-check"></i></span>
-                <div><b>Your Kit account is connected.</b><small>Newsletter Studio can now create drafts in this Kit account only.</small></div>
+                <div><b>Your Kit account is connected.</b><small>Newsletter Studio can create, schedule and send through this Kit account only.</small></div>
               </div>
               <div class="nl-account"><div><small>Kit account</small><b id="nl-kit-account">Connected</b><span id="nl-kit-plan"></span></div><button class="nl-btn small" id="nl-kit-health" type="button">Check connection</button></div>
               <div class="nl-sender" id="nl-sender-box"><small>Default sender</small><b id="nl-default-sender">Set a sender</b><span id="nl-sender-verification"></span></div>
@@ -168,5 +169,6 @@
   <script src="/property/js/supabase-runtime.js"></script>
   <script src="/property/js/newsletter-studio.js"></script>
   <script src="/property/js/newsletter-studio-ux.js"></script>
+  <script src="/property/js/newsletter-brand-kit.js"></script>
 </body>
 </html>
