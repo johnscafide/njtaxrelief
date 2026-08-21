@@ -1,21 +1,19 @@
 name: Patch uniformity volatility
 on:
   push:
-    branches: [agent/uniformity-volatility-20260820]
+    branches: [main]
     paths:
       - '.github/workflows/patch-uniformity-volatility.yml'
-  pull_request:
-    branches: [main]
 permissions:
   contents: write
 jobs:
   patch:
-    if: github.event_name == 'push' || github.head_ref == 'agent/uniformity-volatility-20260820'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
+          ref: agent/uniformity-volatility-20260820
+          fetch-depth: 0
       - name: Patch runtime, canary, and formula contract
         run: |
           python - <<'PY'
@@ -27,6 +25,7 @@ jobs:
           new = "function uniformityValue(row:any,field:string){if(!row)return null;const f=String(field||''),m=f.match(/^cod_(\\d{4})$/);if(m)return row.series?.[m[1]]??null;if(f==='volatility'){const vals=Object.values(row.series||{}).map(n).filter(x=>x!=null) as number[];if(!vals.length)return null;const mean=vals.reduce((a,b)=>a+b,0)/vals.length,variance=vals.reduce((sum,x)=>sum+(x-mean)**2,0)/vals.length;return Math.round(Math.sqrt(variance)*100)/100}if(f==='latest_year')return row.latest_year??null;if(f==='latest')return row.latest??null;return row[f]??null}"
           if s.count(old) != 1: raise SystemExit(f'uniformityValue anchor count={s.count(old)}')
           s = s.replace(old, new)
+
           old = "if(src==='nj-cod'){const row=root.uniformity?.districts?.[String(r.pams_pin||'').slice(0,4)];return{v:uniformityValue(row,field),kind:'authoritative_reference',source:'NJ Division of Taxation assessment uniformity'}}"
           new = "if(src==='nj-cod'){const row=root.uniformity?.districts?.[String(r.pams_pin||'').slice(0,4)],derived=field==='volatility';return{v:uniformityValue(row,field),kind:derived?'derived_governed':'authoritative_reference',source:derived?'Watchdog population standard deviation over NJ Division of Taxation segmented Class 2 COD series':'NJ Division of Taxation assessment uniformity'}}"
           if s.count(old) != 1: raise SystemExit(f'nj-cod family anchor count={s.count(old)}')
@@ -52,12 +51,13 @@ jobs:
           if s.count(old) != 1: raise SystemExit(f'formula disclosure anchor count={s.count(old)}')
           p.write_text(s.replace(old, new))
 
+          # The final runtime PR removes this temporary workflow from main.
           Path('.github/workflows/patch-uniformity-volatility.yml').unlink()
           PY
-      - name: Commit scoped patch
+      - name: Commit scoped patch to feature branch
         run: |
           git config user.name "Watchdog Automation"
           git config user.email "actions@users.noreply.github.com"
           git add -- supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts property/data/derived-marker-formulas.json .github/workflows/patch-uniformity-volatility.yml
           git commit -m "Certify executable uniformity volatility semantics"
-          git push origin HEAD:${{ github.head_ref || github.ref_name }}
+          git push origin HEAD:agent/uniformity-volatility-20260820
