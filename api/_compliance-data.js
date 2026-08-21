@@ -1,7 +1,7 @@
 module.exports = {
   "program": "Watchdog Compliance Readiness",
-  "version": 5,
-  "updated_at": "2026-08-19",
+  "version": 6,
+  "updated_at": "2026-08-21",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
   "entries": [
@@ -147,6 +147,19 @@ module.exports = {
       "rationale": "NIST CSF 2.0 is intended to help organizations understand, assess, prioritize and communicate cybersecurity risk, while ASVS is only useful as an assurance target when individual requirements are mapped to real implementation and tests rather than broad alignment language.",
       "residual_risk": "Current evidence does not establish enforced MFA for every Watchdog user even though ASVS v5.0.0-6.3.3 is Level 2. Re-authentication for sensitive account changes, active-session termination, provider-side session settings, recovery/account-linking behavior and the full OAuth/OIDC V10 mapping also remain incomplete.",
       "next_step": "Assess a no-cost MFA enforcement path, complete ASVS V10 mapping, verify production Supabase session/authentication settings, create the role-plan-resource authorization matrix, and add dynamic negative authorization tests."
+    },
+    {
+      "id": "WCR-2026-08-21-001",
+      "date": "2026-08-21",
+      "title": "Session lifecycle and global logout regression control established",
+      "frameworks": ["OWASP ASVS 5.0.0", "NIST CSF 2.0", "SOC 2", "ISO/IEC 27001"],
+      "control_area": "Session management and authentication",
+      "status": "implemented-with-open-gaps",
+      "action": "Established a formal Watchdog session-security baseline and CI regression test that preserves centralized PKCE, persistent-session and auto-refresh behavior, prevents first-party frontend code from silently narrowing ordinary account logout to local or other-session scopes, and flags obvious browser-console token logging patterns.",
+      "evidence": ["property/docs/compliance/SESSION-SECURITY-BASELINE-2026-08-21.md", "property/tests/session-security-contract.mjs", ".github/workflows/zero-cost-compliance-readiness.yml", "property/docs/compliance/CONTROL-REGISTER.md", "property/docs/compliance/DECISION-LOG.md"],
+      "rationale": "Supabase JavaScript uses global logout by default, so Watchdog can preserve a stronger all-session revocation behavior at no added cost. The same control must explicitly acknowledge that already-issued access JWTs can remain valid until expiry, which means future high-risk actions may require current-session validation or AAL2 rather than relying only on token possession.",
+      "residual_risk": "MFA/AAL2 enforcement is not yet proven, production JWT-expiry/session-timeout settings are not retained as evidence, already-issued access JWTs can survive until expiry, and older direct Supabase client configurations can drift from the centralized runtime.",
+      "next_step": "Inventory direct auth client configurations, capture non-secret production JWT-expiry evidence, assess a no-cost TOTP MFA path, and classify sensitive actions that should require current-session or AAL2 checks."
     }
   ]
 };
