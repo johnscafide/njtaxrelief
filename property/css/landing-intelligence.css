@@ -2,7 +2,6 @@
 #wd-intelligence-glance{padding:34px 34px 88px;background:#f7f8f6;color:#10294b}
 #wd-intelligence-glance *{box-sizing:border-box}
 .wdi-shell{max-width:1680px;margin:0 auto;border-radius:34px;overflow:hidden;background:#071f39;box-shadow:0 32px 80px rgba(8,31,57,.14);position:relative}
-.wdi-shell:before{content:"";position:absolute;width:560px;height:560px;border:1px solid rgba(76,190,196,.16);border-radius:50%;right:-160px;top:-290px;box-shadow:0 0 0 90px rgba(76,190,196,.035),0 0 0 180px rgba(76,190,196,.025);pointer-events:none}
 .wdi-head{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:42px;padding:52px 58px 34px;color:#fff}
 .wdi-kicker{display:flex;align-items:center;gap:10px;color:#64d2d4;text-transform:uppercase;font:800 12px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.11em;margin-bottom:16px}.wdi-live-dot{width:8px;height:8px;border-radius:50%;background:#64d2d4;box-shadow:0 0 0 6px rgba(100,210,212,.12)}
 .wdi-head h2{font:800 clamp(38px,4.2vw,68px)/.98 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em;margin:0;max-width:900px}.wdi-head h2 em{font-family:"Playfair Display",serif;font-weight:500;color:#d8b94d}.wdi-lead{font-size:18px;line-height:1.65;color:#c8d7e5;margin:22px 0 0;max-width:780px}
@@ -15,7 +14,9 @@
 .wdi-cta{display:flex;align-items:center;justify-content:space-between;gap:28px;background:linear-gradient(105deg,#078486,#0d6f78);padding:32px 58px;color:#fff}.wdi-cta h3{font:800 24px "Plus Jakarta Sans",sans-serif;margin:0 0 5px}.wdi-cta p{margin:0;color:#d5eeee;font-size:14px}.wdi-cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.wdi-btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;padding:13px 18px;font:800 13px "Plus Jakarta Sans",sans-serif;text-decoration:none;white-space:nowrap}.wdi-btn.primary{background:#fff;color:#0b6670}.wdi-btn.secondary{border:1px solid rgba(255,255,255,.35);color:#fff}
 .wdi-loading{padding:42px 58px;color:#bdd0df;font-size:15px}.wdi-loading i{margin-right:8px}
 .wdi-note{font-size:11.5px;color:#8897a4;line-height:1.55;margin-top:14px}
-/* More breathing room between Insights heading and editorial hero */
-.wd-consumer-mode .ins-grid{margin-top:34px!important}
+/* Index visual polish: separate Insights title from its hero and center the town directory. */
+html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin:34px 0 0!important}
+.wd-seo-directory .wd-county{text-align:center}
+.wd-seo-directory .wd-town-links{align-items:center}
 @media(max-width:980px){.wdi-head,.wdi-read,.wdi-weights{grid-template-columns:1fr}.wdi-stamp{border-left:0;border-top:1px solid rgba(255,255,255,.15);padding:22px 0 0}.wdi-primary-grid{grid-template-columns:1fr}.wdi-signal-grid{grid-template-columns:1fr}.wdi-signals-head{align-items:start;flex-direction:column}.wdi-signals-head p{text-align:left}.wdi-cta{align-items:flex-start;flex-direction:column}.wdi-cta-actions{justify-content:flex-start}}
-@media(max-width:700px){#wd-intelligence-glance{padding:22px 14px 64px}.wdi-shell{border-radius:24px}.wdi-head,.wdi-signals,.wdi-read,.wdi-weights,.wdi-cta{padding-left:22px;padding-right:22px}.wdi-head{padding-top:34px}.wdi-primary{padding:24px 22px}.wdi-head h2{font-size:39px}.wdi-lead{font-size:16px}.wdi-weight-grid{grid-template-columns:1fr}.wdi-weight-rule{grid-column:auto}.wdi-cta-actions,.wdi-btn{width:100%}.wdi-btn{justify-content:center}.wd-consumer-mode .ins-grid{margin-top:24px!important}}
+@media(max-width:700px){#wd-intelligence-glance{padding:22px 14px 64px}.wdi-shell{border-radius:24px}.wdi-head,.wdi-signals,.wdi-read,.wdi-weights,.wdi-cta{padding-left:22px;padding-right:22px}.wdi-head{padding-top:34px}.wdi-primary{padding:24px 22px}.wdi-head h2{font-size:39px}.wdi-lead{font-size:16px}.wdi-weight-grid{grid-template-columns:1fr}.wdi-weight-rule{grid-column:auto}.wdi-cta-actions,.wdi-btn{width:100%}.wdi-btn{justify-content:center}html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin-top:24px!important}}
