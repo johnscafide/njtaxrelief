@@ -1,0 +1,125 @@
+/* Watchdog Mobile Audit Run 029 — Marketing Studio Customize modal/sheet certification.
+   Loaded only at <=700px so desktop modal behavior remains untouched. */
+body[data-ms-wizard="customize"].wd-mobile-modal-open{
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+
+body[data-ms-wizard="customize"] .ms-modal{
+  place-items:end stretch;
+  padding:max(12px, env(safe-area-inset-top)) 0 0;
+  overscroll-behavior:contain;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card{
+  width:100%;
+  max-width:none;
+  max-height:calc(100dvh - max(12px, env(safe-area-inset-top)));
+  margin:0;
+  padding:18px 16px calc(20px + env(safe-area-inset-bottom));
+  border-radius:22px 22px 0 0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-head{
+  position:sticky;
+  top:-18px;
+  z-index:2;
+  margin:-18px -16px 12px;
+  padding:18px 16px 12px;
+  gap:12px;
+  background:#fff;
+  border-bottom:1px solid var(--ms-line, #e7eaee);
+}
+
+body[data-ms-wizard="customize"] .ms-modal-head h2{
+  margin:4px 0 0;
+  font-size:21px;
+  line-height:1.2;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-head button[data-close],
+body[data-ms-wizard="customize"] .ms-modal-head button{
+  width:44px;
+  height:44px;
+  min-width:44px;
+  min-height:44px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border-radius:12px;
+  font-size:28px;
+  line-height:1;
+  touch-action:manipulation;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card > p{
+  font-size:15px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-eyebrow{
+  font-size:12px;
+  line-height:1.3;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-step{
+  min-height:64px;
+  grid-template-columns:44px minmax(0, 1fr) auto;
+  gap:12px;
+  padding:12px;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-step em{
+  width:44px;
+  height:44px;
+  font-size:14px;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-step b{
+  font-size:14px;
+  line-height:1.3;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-step small{
+  font-size:12px;
+  line-height:1.4;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-card .ms-warning{
+  font-size:14px;
+  line-height:1.5;
+}
+
+body[data-ms-wizard="customize"] .ms-modal-head button:focus-visible,
+body[data-ms-wizard="customize"] .ms-modal-card a:focus-visible,
+body[data-ms-wizard="customize"] .ms-modal-card button:focus-visible,
+body[data-ms-wizard="customize"] .ms-modal-card input:focus-visible,
+body[data-ms-wizard="customize"] .ms-modal-card select:focus-visible,
+body[data-ms-wizard="customize"] .ms-modal-card textarea:focus-visible{
+  outline:3px solid currentColor;
+  outline-offset:3px;
+}
+
+@media(max-width:420px){
+  body[data-ms-wizard="customize"] .ms-modal-card{
+    padding-left:14px;
+    padding-right:14px;
+  }
+  body[data-ms-wizard="customize"] .ms-modal-head{
+    margin-left:-14px;
+    margin-right:-14px;
+    padding-left:14px;
+    padding-right:14px;
+  }
+  body[data-ms-wizard="customize"] .ms-modal-card .ms-step{
+    grid-template-columns:44px minmax(0, 1fr);
+  }
+  body[data-ms-wizard="customize"] .ms-modal-card .ms-step > small:last-child{
+    grid-column:2;
+  }
+}
