@@ -17,9 +17,12 @@
       <div>
         <span class="nl-kicker">MARKETING STUDIO · PRIVATE BETA</span>
         <h1>Newsletter Studio</h1>
-        <p>Connect your own CRM and email service. Watchdog keeps each account, audience, sender and campaign private to your login.</p>
+        <p>Your CRM, your Kit account, your sender identity. Watchdog connects the pieces without sharing credentials, contacts or campaigns between users.</p>
       </div>
-      <div class="nl-head-actions"><a href="/property/dashboard/" class="nl-btn ghost"><i class="fas fa-arrow-left"></i> Dashboard</a><button class="nl-btn" id="nl-refresh" type="button"><i class="fas fa-rotate"></i> Refresh</button></div>
+      <div class="nl-head-actions">
+        <a href="/property/dashboard/" class="nl-btn ghost"><i class="fas fa-arrow-left"></i> Dashboard</a>
+        <button class="nl-btn" id="nl-refresh" type="button"><i class="fas fa-rotate"></i> Refresh</button>
+      </div>
     </header>
 
     <section class="nl-notice" id="nl-signin" hidden><i class="fas fa-lock"></i><div><b>Sign in to Watchdog</b><span>Newsletter Studio connections are stored against your Watchdog account.</span></div><a href="/property/signin/">Sign in</a></section>
@@ -27,48 +30,85 @@
     <section class="nl-notice error" id="nl-error" hidden><i class="fas fa-triangle-exclamation"></i><div><b>Newsletter Studio could not load</b><span id="nl-error-copy"></span></div></section>
 
     <div id="nl-workspace" hidden>
+      <section class="nl-setup-overview" aria-label="Newsletter Studio setup status">
+        <article class="nl-setup-item" id="nl-setup-crm">
+          <span class="nl-setup-icon"><i class="fas fa-address-book"></i></span>
+          <div><small>1 · CRM</small><b id="nl-setup-crm-title">Checking BoldTrail</b><span id="nl-setup-crm-copy">Looking for an existing Watchdog CRM sync.</span></div>
+        </article>
+        <article class="nl-setup-item" id="nl-setup-kit">
+          <span class="nl-setup-icon"><i class="fas fa-envelope"></i></span>
+          <div><small>2 · EMAIL SERVICE</small><b id="nl-setup-kit-title">Connect your Kit</b><span id="nl-setup-kit-copy">Each user connects their own Kit credentials.</span></div>
+        </article>
+        <article class="nl-setup-item" id="nl-setup-ready">
+          <span class="nl-setup-icon"><i class="fas fa-wand-magic-sparkles"></i></span>
+          <div><small>3 · NEWSLETTER</small><b id="nl-setup-ready-title">Finish setup</b><span id="nl-setup-ready-copy">Connect Kit to unlock newsletter drafting.</span></div>
+        </article>
+      </section>
+
       <section class="nl-pipeline" aria-label="Newsletter connection pipeline">
-        <article><span class="step">1</span><div><small>CRM</small><b id="nl-pipe-crm">Connect BoldTrail</b></div></article>
+        <article><span class="step">1</span><div><small>CRM</small><b id="nl-pipe-crm">Checking BoldTrail</b></div></article>
         <i class="fas fa-arrow-right"></i>
         <article><span class="step">2</span><div><small>Email service</small><b id="nl-pipe-email">Connect Kit</b></div></article>
         <i class="fas fa-arrow-right"></i>
         <article><span class="step">3</span><div><small>Audience</small><b id="nl-pipe-audience">Not reconciled</b></div></article>
         <i class="fas fa-arrow-right"></i>
-        <article><span class="step">4</span><div><small>Newsletter</small><b>Draft in Kit</b></div></article>
+        <article><span class="step">4</span><div><small>Newsletter</small><b id="nl-pipe-newsletter">Kit required</b></div></article>
       </section>
 
       <section class="nl-grid two">
         <article class="nl-card" id="nl-crm-card">
-          <header><div><span class="nl-eyebrow">CRM CONNECTION</span><h2>BoldTrail / kvCORE</h2></div><span class="nl-status" id="nl-crm-status">Not connected</span></header>
+          <header><div><span class="nl-eyebrow">CRM CONNECTION</span><h2>BoldTrail / kvCORE</h2></div><span class="nl-status" id="nl-crm-status">Checking</span></header>
+
           <div id="nl-crm-connect">
-            <p>Use your own BoldTrail API token. Watchdog validates it, stores it in Vault and syncs normalized contact context every 15 minutes.</p>
+            <div class="nl-setup-callout">
+              <span class="nl-callout-icon"><i class="fas fa-plug"></i></span>
+              <div><b>BoldTrail is not connected to this Watchdog login yet.</b><span>Add your own BoldTrail API token once. Watchdog validates it, stores it securely and starts the first contact sync automatically.</span></div>
+            </div>
             <form id="nl-crm-form" autocomplete="off">
               <label>Account label <small>optional</small><input id="nl-crm-label" maxlength="120" placeholder="My BoldTrail CRM"></label>
-              <label>BoldTrail API token<input id="nl-crm-token" type="password" autocomplete="new-password" minlength="20" maxlength="5000" required placeholder="Paste your token"></label>
-              <button class="nl-btn primary" type="submit"><i class="fas fa-link"></i> Connect BoldTrail</button>
+              <label>BoldTrail API token<input id="nl-crm-token" type="password" autocomplete="new-password" minlength="20" maxlength="5000" required placeholder="Paste your BoldTrail token"></label>
+              <div class="nl-credential-note"><i class="fas fa-shield-halved"></i><span>Your token is validated server-side and stored in Supabase Vault. Watchdog does not display it again after save.</span></div>
+              <button class="nl-btn primary" type="submit"><i class="fas fa-link"></i> Connect & start sync</button>
               <span class="nl-form-note" id="nl-crm-note"></span>
             </form>
           </div>
+
           <div id="nl-crm-connected" hidden>
+            <div class="nl-connected-banner">
+              <span><i class="fas fa-circle-check"></i></span>
+              <div><b>BoldTrail is already connected to Watchdog.</b><small id="nl-crm-connected-copy">Your existing CRM sync is available to Newsletter Studio. No new credentials are needed.</small></div>
+            </div>
             <div class="nl-metrics three"><div><small>CRM contacts</small><b id="nl-crm-total">0</b></div><div><small>With email</small><b id="nl-crm-email">0</b></div><div><small>Last sync</small><b id="nl-crm-last">Not yet</b></div></div>
-            <p class="nl-callout"><i class="fas fa-shield-halved"></i> A contact having an email address does not automatically make that contact newsletter-eligible.</p>
+            <p class="nl-callout"><i class="fas fa-shield-halved"></i> A contact having an email address does not automatically make that contact newsletter-eligible. Watchdog keeps CRM presence separate from email consent.</p>
             <div class="nl-actions"><button class="nl-btn" id="nl-crm-sync" type="button"><i class="fas fa-arrows-rotate"></i> Sync now</button><button class="nl-btn danger" id="nl-crm-disconnect" type="button"><i class="fas fa-unlink"></i> Disconnect</button></div>
             <span class="nl-form-note" id="nl-crm-status-note"></span>
           </div>
         </article>
 
         <article class="nl-card" id="nl-kit-card">
-          <header><div><span class="nl-eyebrow">EMAIL SERVICE</span><h2>Kit</h2></div><span class="nl-status" id="nl-kit-status">Not connected</span></header>
+          <header><div><span class="nl-eyebrow">EMAIL SERVICE · REQUIRED</span><h2>Your Kit account</h2></div><span class="nl-status" id="nl-kit-status">Not connected</span></header>
+
           <div id="nl-kit-connect">
-            <p>For this private beta, connect with a Kit V4 API key. Public customer integrations will use OAuth instead of asking users for API keys.</p>
+            <div class="nl-setup-callout kit">
+              <span class="nl-callout-icon"><i class="fas fa-key"></i></span>
+              <div><b>Enter your own Kit credentials.</b><span>Every Newsletter Studio user connects a separate Kit account. For this private beta, Watchdog uses a Kit V4 API key; the public version will move to OAuth.</span></div>
+            </div>
             <form id="nl-kit-form" autocomplete="off">
-              <label>Kit V4 API key<input id="nl-kit-key" type="password" autocomplete="new-password" minlength="16" maxlength="5000" required placeholder="Paste your Kit API key"></label>
-              <div class="nl-field-row"><label>Sender name<input id="nl-sender-name" maxlength="120" placeholder="Your name"></label><label>Sender email <small>optional</small><input id="nl-sender-email" type="email" maxlength="254" placeholder="you@yourdomain.com"></label></div>
-              <button class="nl-btn primary" type="submit"><i class="fas fa-envelope-circle-check"></i> Connect Kit</button>
+              <label>Kit V4 API key
+                <div class="nl-password-wrap"><input id="nl-kit-key" type="password" autocomplete="new-password" minlength="16" maxlength="5000" required placeholder="Paste your Kit V4 API key"><button type="button" class="nl-password-toggle" id="nl-kit-key-toggle" aria-label="Show Kit API key"><i class="fas fa-eye"></i></button></div>
+              </label>
+              <div class="nl-field-row"><label>Sender name <small>optional</small><input id="nl-sender-name" maxlength="120" placeholder="Your name"></label><label>Sender email <small>optional</small><input id="nl-sender-email" type="email" maxlength="254" placeholder="you@yourdomain.com"></label></div>
+              <div class="nl-credential-note"><i class="fas fa-lock"></i><span>The Kit key is encrypted server-side and never returned to the browser after connection.</span></div>
+              <button class="nl-btn primary" type="submit"><i class="fas fa-envelope-circle-check"></i> Connect my Kit account</button>
               <span class="nl-form-note" id="nl-kit-note"></span>
             </form>
           </div>
+
           <div id="nl-kit-connected" hidden>
+            <div class="nl-connected-banner">
+              <span><i class="fas fa-circle-check"></i></span>
+              <div><b>Your Kit account is connected.</b><small>Newsletter Studio can now create drafts in this Kit account only.</small></div>
+            </div>
             <div class="nl-account"><div><small>Kit account</small><b id="nl-kit-account">Connected</b><span id="nl-kit-plan"></span></div><button class="nl-btn small" id="nl-kit-health" type="button">Check connection</button></div>
             <div class="nl-sender" id="nl-sender-box"><small>Default sender</small><b id="nl-default-sender">Set a sender</b><span id="nl-sender-verification"></span></div>
             <form id="nl-sender-form" class="nl-inline-form"><input id="nl-new-sender-name" maxlength="120" placeholder="Sender name"><input id="nl-new-sender-email" type="email" maxlength="254" placeholder="you@yourdomain.com" required><button class="nl-btn" type="submit">Save sender</button></form>
@@ -78,15 +118,17 @@
         </article>
       </section>
 
-      <section class="nl-card nl-audience-card">
+      <section class="nl-card nl-audience-card" id="nl-audience-card">
         <header><div><span class="nl-eyebrow">AUDIENCE BRIDGE</span><h2>BoldTrail → Kit</h2><p>Watchdog links CRM contacts to subscribers that already exist in your own Kit account. It does not automatically upload every CRM email address.</p></div><button class="nl-btn primary" id="nl-reconcile" type="button"><i class="fas fa-link"></i> Reconcile existing subscribers</button></header>
+        <div class="nl-gate" id="nl-audience-gate"><i class="fas fa-lock"></i><span>Connect BoldTrail and Kit to reconcile your audience.</span></div>
         <div class="nl-metrics four"><div><small>CRM emails</small><b id="nl-aud-crm">0</b></div><div><small>Linked to Kit</small><b id="nl-aud-linked">0</b></div><div><small>Eligible</small><b id="nl-aud-eligible">0</b></div><div><small>Suppressed / inactive</small><b id="nl-aud-suppressed">0</b></div></div>
         <div class="nl-result" id="nl-reconcile-result" hidden></div>
       </section>
 
       <section class="nl-grid compose">
-        <article class="nl-card">
-          <header><div><span class="nl-eyebrow">NEWSLETTER</span><h2>Create a Kit draft</h2><p>Build inside Watchdog, then review the provider draft before sending. Scheduling requires a separate explicit approval.</p></div></header>
+        <article class="nl-card" id="nl-compose-card">
+          <header><div><span class="nl-eyebrow">NEWSLETTER</span><h2>Create a Kit draft</h2><p>Build inside Watchdog, then review the provider draft before sending. Newsletter Studio does not live-send from this screen.</p></div></header>
+          <div class="nl-gate" id="nl-compose-gate"><i class="fas fa-lock"></i><span>Connect your Kit account to unlock newsletter drafting.</span></div>
           <form id="nl-broadcast-form">
             <label>Subject<input id="nl-subject" maxlength="180" required placeholder="South Jersey market update"></label>
             <label>Preview text<input id="nl-preview" maxlength="240" placeholder="A quick update for this month..."></label>
