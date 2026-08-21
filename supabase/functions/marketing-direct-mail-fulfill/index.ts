@@ -79,6 +79,42 @@ async function hash(text: string) {
   return Array.from(new Uint8Array(bytes)).map((value) => value.toString(16).padStart(2, '0')).join('');
 }
 
+function reportedCount(value: unknown) {
+  if (value === null || value === undefined || value === '') return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) && parsed >= 0 ? Math.trunc(parsed) : null;
+}
+
+function providerRecipientOutcome(output: any, expectedRecipientCount: number) {
+  const successfulOrders = Array.isArray(output?.successfulOrders) ? output.successfulOrders : [];
+  const failedOrders = Array.isArray(output?.failedOrders) ? output.failedOrders : [];
+  const orders = [...successfulOrders, ...failedOrders];
+  const sumReported = (key: string) => {
+    let reported = false;
+    let total = 0;
+    for (const order of orders) {
+      const value = reportedCount(order?.[key]);
+      if (value === null) continue;
+      reported = true;
+      total += value;
+    }
+    return reported ? total : null;
+  };
+  const acceptedRecipientCount = sumReported('successfulRecipientCount');
+  const rejectedRecipientCount = sumReported('failedRecipientCount');
+  const reconciliationRequired = failedOrders.length > 0
+    || (rejectedRecipientCount !== null && rejectedRecipientCount > 0)
+    || (acceptedRecipientCount !== null && acceptedRecipientCount !== expectedRecipientCount);
+  return {
+    successful_order_count: successfulOrders.length,
+    failed_order_count: failedOrders.length,
+    expected_recipient_count: expectedRecipientCount,
+    provider_accepted_recipient_count: acceptedRecipientCount,
+    provider_rejected_recipient_count: rejectedRecipientCount,
+    recipient_count_reconciliation_required: reconciliationRequired,
+  };
+}
+
 Deno.serve(async (req) => {
   if (req.method !== 'POST') return reply(405, { error: 'Method not allowed' });
   if ((req.headers.get('Authorization') || '') !== `Bearer ${SERVICE}`) {
@@ -261,7 +297,13 @@ Deno.serve(async (req) => {
     await admin.from('marketing_provider_jobs').select('*').eq('idempotency_key', idempotencyKey).maybeSingle()
   ).data;
   if (job && ['submitted', 'pending', 'processing', 'live', 'mailed', 'delivered', 'completed'].includes(job.status)) {
-    return reply(200, { job, idempotent_replay: true });
+    const reconciliationRequired = Boolean(job.response_summary?.recipient_count_reconciliation_required);
+    return reply(reconciliationRequired ? 202 : 200, {
+      job,
+      idempotent_replay: true,
+      submitted: !reconciliationRequired,
+      reconciliation_required: reconciliationRequired,
+    });
   }
 
   const jobData = {
@@ -370,8 +412,8 @@ Deno.serve(async (req) => {
 
     const batch = clean(output?.batchID, 160) || null;
     const orderId = clean(output?.successfulOrders?.[0]?.orderID, 160) || null;
-    const failedOrders = Array.isArray(output?.failedOrders) ? output.failedOrders.length : 0;
-    if (failedOrders && !(Array.isArray(output?.successfulOrders) && output.successfulOrders.length)) {
+    const outcome = providerRecipientOutcome(output, recipients.data.length);
+    if (outcome.failed_order_count && !outcome.successful_order_count) {
       throw new Error('PCM did not accept the production order');
     }
 
@@ -384,8 +426,12 @@ Deno.serve(async (req) => {
         response_summary: {
           batch_id: batch,
           order_id: orderId,
-          successful_orders: Array.isArray(output?.successfulOrders) ? output.successfulOrders.length : 0,
-          failed_orders: failedOrders,
+          successful_orders: outcome.successful_order_count,
+          failed_orders: outcome.failed_order_count,
+          expected_recipient_count: outcome.expected_recipient_count,
+          provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
+          provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
+          recipient_count_reconciliation_required: outcome.recipient_count_reconciliation_required,
           provider_order_status: 'pending',
           initial_launch_contract: true,
         },
@@ -397,6 +443,23 @@ Deno.serve(async (req) => {
       .single();
 
     await admin.from('marketing_launch_approvals').update({ status: 'consumed', consumed_at: now }).eq('id', approval.id);
+
+    if (outcome.recipient_count_reconciliation_required) {
+      return reply(202, {
+        submitted: false,
+        provider_submission_detected: Boolean(orderId || batch || outcome.successful_order_count),
+        reconciliation_required: true,
+        code: 'PROVIDER_RECIPIENT_RECONCILIATION_REQUIRED',
+        job: done.data,
+        provider: { batch_id: batch, order_id: orderId, initial_status: 'pending' },
+        expected_recipient_count: outcome.expected_recipient_count,
+        provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
+        provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
+        failed_order_count: outcome.failed_order_count,
+        credit_reconciliation_required: creditCents > 0,
+      });
+    }
+
     await admin.from('marketing_campaigns').update({ status: 'live', launched_at: now, updated_at: now }).eq('id', campaignId).eq('user_id', payment.user_id);
     await admin.from('marketing_events').insert({
       user_id: payment.user_id,
@@ -410,6 +473,8 @@ Deno.serve(async (req) => {
         batch_id: batch,
         order_id: orderId,
         recipient_count: recipients.data.length,
+        provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
+        provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
         product_type: product,
         size_label: INITIAL_PCM_SIZE,
         mail_class: INITIAL_PCM_MAIL_CLASS,
@@ -425,6 +490,8 @@ Deno.serve(async (req) => {
       job: done.data,
       provider: { batch_id: batch, order_id: orderId, initial_status: 'pending' },
       recipient_count: recipients.data.length,
+      provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
+      provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
       format: { size_label: INITIAL_PCM_SIZE, mail_class: INITIAL_PCM_MAIL_CLASS },
     });
   } catch (error) {
