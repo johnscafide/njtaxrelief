@@ -20,6 +20,7 @@ import shutil
 import tempfile
 import zipfile
 from collections import OrderedDict, defaultdict
+from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable
@@ -33,6 +34,7 @@ SOURCE_INDEX = "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml"
 LAYOUT_URL = "https://www.nj.gov/treasury/taxation/pdf/lpt/modivlayout.pdf"
 SOURCE_ID = "nj-dca-modiv-longitudinal"
 SCHEMA_VERSION = 1
+BUCKET = "modiv-longitudinal"
 
 SLICES = {
     "district_code": (0, 4),
@@ -87,7 +89,7 @@ def parse_safe(line: str, year: int):
         "lv": clean_num(get("land_value")),
         "iv": clean_num(get("improvement_value")),
         "nv": clean_num(get("net_value")),
-        "ex": [line[i:i+1].strip() for i in EXEMPTION_CODE_OFFSETS if line[i:i+1].strip()],
+        "ex": [line[i : i + 1].strip() for i in EXEMPTION_CODE_OFFSETS if line[i : i + 1].strip()],
     }
 
 
@@ -96,7 +98,6 @@ class DistrictSpool:
         self.root = root
         self.max_open = max_open
         self.handles: OrderedDict[str, object] = OrderedDict()
-        self.counts = defaultdict(int)
 
     def write(self, record: dict) -> None:
         district = record["d"]
@@ -105,11 +106,9 @@ class DistrictSpool:
             if len(self.handles) >= self.max_open:
                 _, old = self.handles.popitem(last=False)
                 old.close()
-            path = self.root / f"{district}.jsonl"
-            handle = path.open("a", encoding="utf-8")
+            handle = (self.root / f"{district}.jsonl").open("a", encoding="utf-8")
         self.handles[district] = handle
         handle.write(json.dumps(record, separators=(",", ":")) + "\n")
-        self.counts[district] += 1
 
     def close(self) -> None:
         for handle in self.handles.values():
@@ -140,6 +139,13 @@ def iter_archive(year: int, timeout: int) -> Iterable[dict]:
 
 def parcel_key(row: dict) -> str:
     return f"{row['b']}|{row['l']}|{row['q']}"
+
+
+def write_deterministic_gzip_json(output: Path, payload: dict) -> None:
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("wb") as raw:
+        with gzip.GzipFile(filename="", mode="wb", fileobj=raw, compresslevel=6, mtime=0) as gz:
+            gz.write(json.dumps(payload, separators=(",", ":"), sort_keys=True).encode("utf-8"))
 
 
 def build_partition(path: Path, district: str, years: list[int], output: Path) -> dict:
@@ -184,24 +190,20 @@ def build_partition(path: Path, district: str, years: list[int], output: Path) -
         "record_count": len(records),
         "records": records,
     }
-    output.parent.mkdir(parents=True, exist_ok=True)
-    with gzip.open(output, "wt", encoding="utf-8", compresslevel=6, mtime=0) as gz:
-        json.dump(payload, gz, separators=(",", ":"), sort_keys=True)
-    digest = hashlib.sha256(output.read_bytes()).hexdigest()
+    write_deterministic_gzip_json(output, payload)
     return {
         "district_code": district,
         "parcel_count": len(records),
-        "spooled_rows": sum(len(v) for v in parcels.values()),
         "duplicate_rows": duplicates,
         "conflicting_duplicates": conflicts,
         "bytes_gzip": output.stat().st_size,
-        "sha256": digest,
+        "sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
         "filename": output.name,
     }
 
 
-def storage_upload(project_url: str, service_key: str, bucket: str, object_path: str, local: Path, content_type: str) -> None:
-    url = project_url.rstrip("/") + "/storage/v1/object/" + quote(bucket, safe="") + "/" + quote(object_path, safe="/")
+def storage_upload(project_url: str, service_key: str, object_path: str, local: Path, content_type: str) -> None:
+    url = project_url.rstrip("/") + "/storage/v1/object/" + quote(BUCKET, safe="") + "/" + quote(object_path, safe="/")
     headers = {
         "Authorization": f"Bearer {service_key}",
         "apikey": service_key,
@@ -252,28 +254,36 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix="watchdog-modiv-spool-") as td:
         spool_root = Path(td)
         spool = DistrictSpool(spool_root)
-        source_counts = {}
-        total_source_rows = 0
+        source_counts: dict[str, int] = {}
         for year in years:
             count = 0
             for row in iter_archive(year, args.timeout):
                 spool.write(row)
                 count += 1
             source_counts[str(year)] = count
-            total_source_rows += count
             print(f"{year}: {count:,} safe source rows")
         spool.close()
 
         partitions = []
         for path in sorted(spool_root.glob("*.jsonl")):
-            district = path.stem
-            if not re.fullmatch(r"\d{4}", district):
-                continue
-            partitions.append(build_partition(path, district, years, output_dir / "district" / f"{district}.json.gz"))
+            if re.fullmatch(r"\d{4}", path.stem):
+                partitions.append(build_partition(path, path.stem, years, output_dir / "district" / f"{path.stem}.json.gz"))
 
     if len(partitions) < 560:
         raise RuntimeError(f"Expected at least 560 district partitions, found {len(partitions)}")
+    if any(x["conflicting_duplicates"] for x in partitions):
+        raise RuntimeError("Conflicting parcel-year records are not publishable")
+
+    total_source_rows = sum(source_counts.values())
     parcel_total = sum(x["parcel_count"] for x in partitions)
+    privacy = {
+        "raw_archives_persisted": False,
+        "owner_names_retained": False,
+        "mailing_addresses_retained": False,
+        "social_security_numbers_retained": False,
+        "mortgage_account_numbers_retained": False,
+        "safe_fields_only": True,
+    }
     manifest = {
         "schema_version": SCHEMA_VERSION,
         "source_id": SOURCE_ID,
@@ -286,21 +296,23 @@ def main() -> None:
         "source_rows_total": total_source_rows,
         "district_count": len(partitions),
         "parcel_records_across_partitions": parcel_total,
-        "privacy_contract": {
-            "raw_archives_persisted": False,
-            "owner_names_retained": False,
-            "mailing_addresses_retained": False,
-            "social_security_numbers_retained": False,
-            "mortgage_account_numbers_retained": False,
-            "safe_fields_only": True,
-        },
+        "privacy_contract": privacy,
         "partitions": partitions,
     }
     manifest_path = output_dir / "manifest.json"
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
     diagnostic = Path(args.diagnostic)
     diagnostic.parent.mkdir(parents=True, exist_ok=True)
-    diagnostic.write_text(json.dumps({k: v for k, v in manifest.items() if k != "partitions"} | {
+    diagnostic.write_text(json.dumps({
+        "schema_version": SCHEMA_VERSION,
+        "source_id": SOURCE_ID,
+        "release_id": release_id,
+        "source_years": years,
+        "source_row_counts": source_counts,
+        "source_rows_total": total_source_rows,
+        "district_count": len(partitions),
+        "parcel_records_across_partitions": parcel_total,
         "partition_size_bytes": {
             "min": min(x["bytes_gzip"] for x in partitions),
             "max": max(x["bytes_gzip"] for x in partitions),
@@ -308,6 +320,7 @@ def main() -> None:
         },
         "duplicate_rows_total": sum(x["duplicate_rows"] for x in partitions),
         "conflicting_duplicates_total": sum(x["conflicting_duplicates"] for x in partitions),
+        "privacy_contract": privacy,
     }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
     if args.publish:
@@ -318,10 +331,10 @@ def main() -> None:
         prefix = f"releases/{release_id}"
         for idx, partition in enumerate(partitions, 1):
             local = output_dir / "district" / partition["filename"]
-            storage_upload(project_url, service_key, "modiv-longitudinal", f"{prefix}/district/{partition['filename']}", local, "application/gzip")
+            storage_upload(project_url, service_key, f"{prefix}/district/{partition['filename']}", local, "application/gzip")
             if idx % 50 == 0:
                 print(f"uploaded {idx}/{len(partitions)} district partitions")
-        storage_upload(project_url, service_key, "modiv-longitudinal", f"{prefix}/manifest.json", manifest_path, "application/json")
+        storage_upload(project_url, service_key, f"{prefix}/manifest.json", manifest_path, "application/json")
         upsert_release(project_url, service_key, {
             "release_id": release_id,
             "storage_prefix": prefix,
@@ -335,12 +348,11 @@ def main() -> None:
                 "source_row_counts": source_counts,
                 "parcel_records_across_partitions": parcel_total,
                 "manifest_sha256": hashlib.sha256(manifest_path.read_bytes()).hexdigest(),
-                "privacy_contract": manifest["privacy_contract"],
+                "privacy_contract": privacy,
             },
             "status": "candidate",
-            "built_at": "now()",
+            "built_at": datetime.now(timezone.utc).isoformat(),
         })
-        # PostgREST cannot interpret now() as a timestamptz literal; patch built_at separately by DB default/update later.
         print(f"published candidate release {release_id}")
 
     print(json.dumps({
