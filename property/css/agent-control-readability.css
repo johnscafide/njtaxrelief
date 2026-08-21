@@ -1,0 +1,160 @@
+/* Watchdog Agent Control readability convergence
+   Authority: /property/branding/brand-system.json
+   Loaded last by agent-control-shell-2027.js so active Agent Control UI can
+   converge without rewriting the legacy cascade in one risky pass. */
+
+html body.wdx-modern{
+  --wdx-bg:var(--wd-bg,#f5f7fb);
+  --wdx-card:var(--wd-surface,#fff);
+  --wdx-ink:var(--wd-ink,#111d38);
+  --wdx-muted:var(--wd-muted,#748198);
+  --wdx-line:var(--wd-line,#e2e7ef);
+  --wdx-soft:var(--wd-soft,#edf1f6);
+  --wdx-blue:var(--wd-primary,#2f6df6);
+  --wdx-blue-soft:var(--wd-primary-soft,#e9f0ff);
+  --wdx-green:var(--wd-success,#18a966);
+  --wdx-amber:var(--wd-warning,#f5a20a);
+  --wdx-red:var(--wd-danger,#e34f5f);
+  --ac27-bg:var(--wd-bg,#f5f7fb);
+  --ac27-card:var(--wd-surface,#fff);
+  --ac27-ink:var(--wd-ink,#111d38);
+  --ac27-muted:var(--wd-muted,#748198);
+  --ac27-line:var(--wd-line,#e2e7ef);
+  --ac27-soft:var(--wd-soft,#edf1f6);
+  --ac27-blue:var(--wd-primary,#2f6df6);
+  --ac27-blue-soft:var(--wd-primary-soft,#e9f0ff);
+  --ac27-green:var(--wd-success,#18a966);
+  --ac27-amber:var(--wd-warning,#f5a20a);
+  --ac27-red:var(--wd-danger,#e34f5f);
+  --ad-navy:var(--wd-primary-dark,#183b84);
+  --ad-teal:var(--wd-primary,#2f6df6);
+  --ad-ink:var(--wd-ink,#111d38);
+  --ad-muted:var(--wd-muted,#748198);
+  --ad-line:var(--wd-line,#e2e7ef);
+  --ad-soft:var(--wd-bg,#f5f7fb);
+  --ad-gold:var(--wd-warning,#f5a20a);
+  --ad-red:var(--wd-danger,#e34f5f);
+  --ad-green:var(--wd-success,#18a966);
+}
+
+html body.wdx-modern .ad-shell{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+}
+
+/* Active work-navigation text and controls are readable without changing layout structure. */
+html body.wdx-modern .ac27-tabs a,
+html body.wdx-modern .ac27-actions button{
+  min-height:42px!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+}
+
+/* Supporting information that affects a professional decision never renders as microcopy. */
+html body.wdx-modern .ad-shell small,
+html body.wdx-modern .ad-overview-meta small,
+html body.wdx-modern .ad-cap-row>div,
+html body.wdx-modern .ad-focus-main h3,
+html body.wdx-modern .ad-focus-main p,
+html body.wdx-modern .ad-stat span,
+html body.wdx-modern .ad-discover header p,
+html body.wdx-modern .ad-quick-plays b,
+html body.wdx-modern .ad-dynamic-card>div:nth-child(2)>b,
+html body.wdx-modern .ad-dynamic-card>div:nth-child(2)>span,
+html body.wdx-modern .ad-dynamic-count span,
+html body.wdx-modern .ad-territory b,
+html body.wdx-modern .ad-territory span,
+html body.wdx-modern .ad-territory-empty b,
+html body.wdx-modern .ad-territory-empty p,
+html body.wdx-modern .ad-funnel-stage>div,
+html body.wdx-modern .ad-funnel-note,
+html body.wdx-modern .ad-list-head small,
+html body.wdx-modern .ad-card-meta,
+html body.wdx-modern .ad-queue{
+  font-size:12px!important;
+  line-height:1.4!important;
+}
+
+/* Kicker/category labels stay compact, but not below the product readability floor. */
+html body.wdx-modern .ad-overview>div:first-child>span,
+html body.wdx-modern .ad-cap-head span,
+html body.wdx-modern .ad-focus-label>span,
+html body.wdx-modern .ad-discover header span,
+html body.wdx-modern .ad-territory-panel header span,
+html body.wdx-modern .ad-funnel-panel header span,
+html body.wdx-modern .ad-list-head span,
+html body.wdx-modern .ad-side>section>span,
+html body.wdx-modern .ad-modal-card>span{
+  font-size:12px!important;
+  line-height:1.25!important;
+}
+
+/* Primary workflow controls use the canonical desktop interaction floor. */
+html body.wdx-modern :is(
+  .ad-focus-actions button,
+  .ad-focus-actions a,
+  .ad-discover header button,
+  .ad-list-form button,
+  .ad-dynamic-card button,
+  .ad-list-open,
+  .ad-territory-panel header button,
+  .ad-funnel-panel header select,
+  .ad-territory button,
+  .ad-tabs button,
+  .ad-control-right input,
+  .ad-control-right select,
+  #ad-sort,
+  .ad-card-actions button,
+  .ad-card-actions a,
+  .ad-side button,
+  .ad-load-more
+){
+  min-height:42px!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+}
+
+/* Financial/property numbers align consistently for fast scanning. */
+html body.wdx-modern :is(
+  .ad-overview-meta b,
+  .ad-stat b,
+  .ad-score b,
+  .ad-focus-score b,
+  .ad-dynamic-count b,
+  .ad-funnel-stage b,
+  .ad-evidence-score b,
+  .ad-card-meta,
+  table td,
+  [data-value]
+){
+  font-variant-numeric:tabular-nums;
+}
+
+/* Preserve the stronger mobile touch baseline instead of letting desktop overrides shrink it. */
+@media (max-width:760px){
+  html body.wdx-modern .ac27-tabs a,
+  html body.wdx-modern .ac27-actions button,
+  html body.wdx-modern :is(
+    .ad-focus-actions button,
+    .ad-focus-actions a,
+    .ad-discover header button,
+    .ad-list-form button,
+    .ad-dynamic-card button,
+    .ad-list-open,
+    .ad-territory-panel header button,
+    .ad-tabs button,
+    .ad-card-actions button,
+    .ad-card-actions a,
+    .ad-side button,
+    .ad-load-more
+  ){
+    min-height:48px!important;
+    font-size:14px!important;
+  }
+  html body.wdx-modern .ad-control-right input,
+  html body.wdx-modern .ad-control-right select,
+  html body.wdx-modern #ad-sort,
+  html body.wdx-modern .ad-funnel-panel header select{
+    min-height:48px!important;
+    font-size:16px!important;
+  }
+}
