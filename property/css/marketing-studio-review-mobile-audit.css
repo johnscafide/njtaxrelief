@@ -84,11 +84,42 @@
   body[data-ms-wizard="review"] .wd-review-handoff-note{font-size:14px;line-height:1.5;align-items:flex-start;flex-wrap:wrap}
   body[data-ms-wizard="review"] .wd-review-handoff-note a{margin-left:0;width:100%;min-height:44px;display:inline-flex;align-items:center;font-size:14px;touch-action:manipulation}
 
+  /* The shared wizard nav becomes sticky at <=620px. Review is the final
+     conversion step, so its Back/Next controls must clear the iPhone gesture
+     area and remain comfortably tappable instead of inheriting desktop padding. */
+  body[data-ms-wizard="review"] .mw-nav{
+    gap:10px;
+  }
+  body[data-ms-wizard="review"] .mw-nav a,
+  body[data-ms-wizard="review"] .mw-nav button{
+    min-height:48px;
+    padding:11px 14px;
+    font-size:15px;
+    line-height:1.2;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    touch-action:manipulation;
+  }
+
   body[data-ms-wizard="review"] a:focus-visible,
   body[data-ms-wizard="review"] button:focus-visible,
   body[data-ms-wizard="review"] select:focus-visible{
     outline:3px solid rgba(47,111,237,.28);
     outline-offset:3px;
+  }
+}
+
+@media (max-width:620px){
+  body[data-ms-wizard="review"] .mw-nav{
+    margin-left:calc(-1 * max(12px,env(safe-area-inset-left)));
+    margin-right:calc(-1 * max(12px,env(safe-area-inset-right)));
+    padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;
+    bottom:0;
+    z-index:45;
+  }
+  body[data-ms-wizard="review"] .mw-stage{
+    padding-bottom:calc(28px + env(safe-area-inset-bottom));
   }
 }
 
