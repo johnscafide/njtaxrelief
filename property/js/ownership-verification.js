@@ -94,12 +94,15 @@
   }
   function loadRuntime() {
     loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css');
+    loadCss('watchdog-search-uniformity-css','/property/css/search-uniformity.css');
     loadScript('njw96-search-runtime', '/property/js/search-refresh-runtime.js', function () {
       loadScript('njw96-search-finalize', '/property/js/search-refresh-finalize.js', function () {
         loadScript('njw96-search-polish', '/property/js/search-polish-runtime.js', function () {
           loadScript('njw96-search-corrections', '/property/js/search-corrections.js', function () {
             loadScript('njw96-search-corrections-v2', '/property/js/search-corrections-v2.js', function () {
-              loadScript('njw96-search-corrections-v3', '/property/js/search-corrections-v3.js');
+              loadScript('njw96-search-corrections-v3', '/property/js/search-corrections-v3.js', function () {
+                loadScript('watchdog-search-uniformity', '/property/js/search-uniformity-runtime.js');
+              });
             });
           });
         });
