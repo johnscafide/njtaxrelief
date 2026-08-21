@@ -38,17 +38,17 @@ jobs:
           python - <<'PY'
           import json
           from pathlib import Path
-          counties={
-            '01':'ATLANTIC','02':'BERGEN','03':'BURLINGTON','04':'CAMDEN','05':'CAPE MAY','06':'CUMBERLAND','07':'ESSEX',
-            '08':'GLOUCESTER','09':'HUDSON','10':'HUNTERDON','11':'MERCER','12':'MIDDLESEX','13':'MONMOUTH','14':'MORRIS',
-            '15':'OCEAN','16':'PASSAIC','17':'SALEM','18':'SOMERSET','19':'SUSSEX','20':'UNION','21':'WARREN'
-          }
-          tax=json.load(open('tax-data.json'))
-          assert len(tax)==564, len(tax)
+          manifest=json.load(open('towns/town-manifest.json'))
+          pages=manifest.get('pages',[])
+          assert manifest.get('total_towns')==564, manifest.get('total_towns')
+          assert len(pages)==564, len(pages)
           districts={}
-          for code,row in tax.items():
-            assert len(code)==4 and code[:2] in counties, code
-            districts[code]={'name':row['name'],'county':counties[code[:2]]}
+          for row in pages:
+            code=str(row['district']).zfill(4)
+            assert len(code)==4 and code.isdigit(), code
+            assert code not in districts, code
+            districts[code]={'name':row['name'],'county':row['county']}
+          assert len(districts)==564
           out=Path('.tmp/historical-cod-identity.json')
           out.parent.mkdir(exist_ok=True)
           out.write_text(json.dumps({'districts':districts},sort_keys=True),encoding='utf-8')
