@@ -27,15 +27,40 @@ jobs:
           node-version: 22
       - name: Build complete derived-marker governance
         run: node scripts/build-derived-governance.js
-      - name: Verify zero untriaged derived markers
+      - name: Verify zero untriaged derived markers and registry parity
         run: |
           node - <<'NODE'
           const g=require('./property/data/derived-marker-governance.json');
+          const r=require('./property/data/marker-registry.json');
           if(g.summary.untriaged!==0)throw new Error('Untriaged derived markers remain: '+g.summary.untriaged);
           if(g.summary.total_derived!==g.summary.live+g.summary.blocked+g.summary.retired)throw new Error('Governance totals do not reconcile');
           if(!g.governance_status_snapshot)throw new Error('Database-first governance status snapshot is missing');
           if(!g.governance_status_overlay)throw new Error('Latest provider-status overlay is missing');
-          console.log(g.summary);
+          const rows=Array.isArray(r.markers)?r.markers:[];
+          const seen=new Set();
+          const duplicates=[];
+          const byId=new Map();
+          for(const row of rows){
+            const id=String(row&&row.id||'');
+            if(!id)throw new Error('Canonical marker without id');
+            if(seen.has(id))duplicates.push(id);
+            seen.add(id);
+            byId.set(id,row);
+          }
+          if(duplicates.length)throw new Error('Duplicate canonical marker ids: '+[...new Set(duplicates)].sort().join(', '));
+          const drift=[];
+          for(const item of g.markers||[]){
+            const expected=item.provider_status_override || (item.governance_status==='live'?'live':null);
+            if(!expected)continue;
+            const row=byId.get(item.marker_id);
+            if(!row)drift.push(item.marker_id+':missing');
+            else if(String(row.provider_status||'')!==expected)drift.push(item.marker_id+':'+String(row.provider_status||'unset')+'!='+expected);
+          }
+          if(drift.length)throw new Error('Canonical marker registry diverges from governed derived state: '+drift.slice(0,30).join(', ')+(drift.length>30?' … +'+(drift.length-30):''));
+          const summary=r.summary&&r.summary.provider_status||{};
+          const counted=rows.reduce((acc,row)=>{const key=String(row.provider_status||'planned');acc[key]=(acc[key]||0)+1;return acc;},{});
+          for(const key of ['live','partial','planned','unavailable'])if(Number(summary[key]||0)!==Number(counted[key]||0))throw new Error('Registry provider_status summary drift for '+key+': summary='+Number(summary[key]||0)+' actual='+Number(counted[key]||0));
+          console.log(g.summary, counted);
           NODE
       - name: Commit governance artifact when changed
         run: |
