@@ -1,8 +1,11 @@
 /* Keep every public property-address lookup on the same canonical search UI. */
+body.hood-on #njw-filterbar{
+  margin-top:14px!important;
+}
 body.hood-on #njw-filterbar .njw-search-slot{
-  flex:0 1 600px;
+  flex:0 1 500px;
   min-width:260px;
-  max-width:600px;
+  max-width:500px;
 }
 body.hood-on #njw-filterbar .njw-search-slot .hd-searchbox[data-watchdog-search-replaced="1"]{
   display:none!important;
@@ -13,6 +16,22 @@ body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property
   max-width:none;
   min-width:0;
   margin:0;
+  padding:4px 5px 4px 4px!important;
+  box-shadow:0 6px 18px rgba(14,34,72,.14),0 1px 4px rgba(14,34,72,.08)!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-input{
+  padding:10px 8px!important;
+  font-size:15.5px!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-geo{
+  width:36px!important;
+  height:36px!important;
+  font-size:15px!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-search-btn{
+  width:40px!important;
+  height:40px!important;
+  font-size:15px!important;
 }
 
 /* Results and other solid Watchdog navigation states need a visible divider. */
@@ -25,14 +44,26 @@ body.hood-on .wd-nav{
   box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
 }
 
+/* The public solid nav sits at z-index 6200. Property detail panels must sit
+   above it so the modal toolbar and top of the property page are never hidden. */
+.plm-backdrop{
+  z-index:7600!important;
+}
+.plm{
+  z-index:7601!important;
+}
+
 @media(max-width:1280px) and (min-width:901px){
   body.hood-on #njw-filterbar .njw-search-slot{
-    flex-basis:520px;
-    max-width:520px;
+    flex-basis:440px;
+    max-width:440px;
   }
 }
 
 @media(max-width:900px){
+  body.hood-on #njw-filterbar{
+    margin-top:8px!important;
+  }
   body.hood-on #njw-filterbar .njw-search-slot{
     flex:1 1 auto;
     min-width:0;
