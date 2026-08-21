@@ -18,8 +18,8 @@ Deno.serve(async(req:Request)=>{
  const admin=createClient(url,serviceKey,{auth:{persistSession:false,autoRefreshToken:false}});
  const [snapshot,series,userGrowth,funnel,tools,acquisition,retention,intelligenceFunnel,intelligenceInteractions,todayActions,intentEvents,subscriptions,billingEvents,totalEvents]=await Promise.all([
   admin.rpc("watchdog_analytics_snapshot",{p_hours:rangeHours}),
-  admin.from("analytics_product_timeseries").select("grain,bucket,events,visitors,sessions,page_views,activated_visitors,upgrade_intent,checkout_starts,paid_conversions").eq("grain",bucketGrain).gte("bucket",startIso).order("bucket",{ascending:true}).limit(500),
-  admin.from("analytics_user_growth_timeseries").select("grain,bucket,signups,marketing_optins,completed_profiles").eq("grain",bucketGrain).gte("bucket",startIso).order("bucket",{ascending:true}).limit(500),
+  admin.from("analytics_product_timeseries").select("grain,bucket,events,visitors,sessions,page_views,activated_visitors,upgrade_intent,checkout_starts,paid_conversions").eq("grain",bucketGrain).gte("bucket",startIso).order("bucket",{ascending:true}).limit(9000),
+  admin.from("analytics_user_growth_timeseries").select("grain,bucket,signups,marketing_optins,completed_profiles").eq("grain",bucketGrain).gte("bucket",startIso).order("bucket",{ascending:true}).limit(9000),
   admin.from("analytics_daily_funnel").select("day,visitors,activated_visitors,upgrade_intent,checkout_starts,paid_conversions").gte("day",start90).order("day",{ascending:false}).limit(90),
   admin.from("analytics_tool_usage_daily").select("day,tool,event_name,events,visitors").gte("day",start90).order("day",{ascending:false}).limit(500),
   admin.from("analytics_acquisition_daily").select("day,source,medium,campaign,visitors,activated,checkout_starts").gte("day",start90).order("day",{ascending:false}).limit(500),
