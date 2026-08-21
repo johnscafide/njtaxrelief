@@ -14,4 +14,5 @@ module.exports = {
     },
   ],
   test,
+  connectionLabel: '{{key_label}}',
 };
