@@ -71,3 +71,15 @@ The stored `volatility` field is exactly reproducible as the **population standa
 Example district `0101`: population SD of `[18.09, 18.94, 16.28, 16.71]` rounds to `1.06`. District `1345` is the binary-floating-point edge case: `[4.74, 5.27]` produces approximately `0.2649999999999997`, which JavaScript rounds to the stored `0.26` at two decimals.
 
 `uniformity.volatility` was subsequently promoted on 2026-08-21 after production runtime classified it as `provider_kind=derived_governed` and an authenticated exact-value canary passed. Missing COD inputs are still not synthesized.
+
+
+## January 2022 statewide historical recovery
+
+- Official publication: State of New Jersey, Department of the Treasury, Division of Taxation, **Coefficients of Deviation - A Measure of Property Assessment Uniformity - 2021 Data**, updated January 2022.
+- Preserved source PDF SHA-256: `b1be9418d34c111c81bdc14352053b63d049a4420659f47aa4ba94ead457ee52`.
+- PDF metadata: 58 pages; title `2021 Coefficients of Deviation`; NJ Division of Taxation author; created 2022-01-27.
+- Statewide contract: 564 four-digit C/D districts x 4 years (2018-2021) = 2,256 district-year rows.
+- Canonical metric: **Segmented by Class / Property Class 2** coefficient of deviation.
+- `0.00` is stored as null only when the official Class 2 sales count is zero. A published `0.00` with one or more Class 2 sales is preserved as a real zero.
+- Absecon City (`0101`) control: 2018 `12.81`, 2019 `12.89`, 2020 `11.46`, 2021 `12.51`.
+- Historical years are stored separately from the current 2022-2025 `series` so the already-certified current-period volatility marker does not silently change formula semantics.
