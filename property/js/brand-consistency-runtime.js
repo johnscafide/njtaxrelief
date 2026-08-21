@@ -4,6 +4,8 @@
   window.__WATCHDOG_BRAND_CONSISTENCY__=true;
 
   var STYLE='/property/css/brand-consistency.css';
+  var INVITE_STYLE='/property/css/watchdog-invite.css';
+  var INVITE_RUNTIME='/property/js/watchdog-invite.js';
   var items=[
     {page:'dashboard',href:'/property/dashboard',icon:'fa-table-columns',label:'Dashboard'},
     {page:'home',href:'/property/home',icon:'fa-house',label:'Property Home'},
@@ -18,10 +20,21 @@
     {page:'account',href:'/property/account',icon:'fa-user-gear',label:'Account'}
   ];
 
-  function ensureStyle(){
-    if(document.querySelector('link[href="'+STYLE+'"]'))return;
+  function ensureStylesheet(href){
+    if(document.querySelector('link[href="'+href+'"]'))return;
     var l=document.createElement('link');
-    l.rel='stylesheet';l.href=STYLE;document.head.appendChild(l);
+    l.rel='stylesheet';l.href=href;document.head.appendChild(l);
+  }
+
+  function ensureStyle(){ensureStylesheet(STYLE);}
+
+  function ensureInviteAssets(){
+    ensureStylesheet(INVITE_STYLE);
+    if(window.__WATCHDOG_INVITE_RUNTIME__||document.querySelector('script[src="'+INVITE_RUNTIME+'"]'))return;
+    var s=document.createElement('script');
+    s.src=INVITE_RUNTIME;
+    s.defer=true;
+    document.head.appendChild(s);
   }
 
   function currentPage(){
@@ -60,7 +73,7 @@
     setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INTELLIGENCE');
   }
 
-  function run(){ensureStyle();syncNavigation();syncBrand();}
+  function run(){ensureStyle();ensureInviteAssets();syncNavigation();syncBrand();}
 
   var scheduled=false;
   function schedule(){
