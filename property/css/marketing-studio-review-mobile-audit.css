@@ -1,0 +1,94 @@
+@media (max-width:720px){
+  body[data-ms-wizard="review"] .msfr-head,
+  body[data-ms-wizard="review"] .msfr-design,
+  body[data-ms-wizard="review"] .msfr-side section,
+  body[data-ms-wizard="review"] .msfr-checks,
+  body[data-ms-wizard="review"] .ms-commerce-panel{
+    border-radius:18px;
+  }
+  body[data-ms-wizard="review"] .msfr-head>div>span,
+  body[data-ms-wizard="review"] .msfr-section-head>div>span,
+  body[data-ms-wizard="review"] .msfr-stats span,
+  body[data-ms-wizard="review"] .msfr-recipient-grid span,
+  body[data-ms-wizard="review"] .msfr-lines span,
+  body[data-ms-wizard="review"] .mscp-head>div>span,
+  body[data-ms-wizard="review"] .mscp-config span,
+  body[data-ms-wizard="review"] .mscp-price span{
+    font-size:12px;
+    line-height:1.35;
+  }
+  body[data-ms-wizard="review"] .msfr-head p,
+  body[data-ms-wizard="review"] .msfr-art-empty span,
+  body[data-ms-wizard="review"] .msfr-side section>small,
+  body[data-ms-wizard="review"] .msfr-check small,
+  body[data-ms-wizard="review"] .msfr-footnote,
+  body[data-ms-wizard="review"] .ms-commerce-panel>small,
+  body[data-ms-wizard="review"] .mscp-head p{
+    font-size:14px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="review"] .msfr-sandbox b,
+  body[data-ms-wizard="review"] .msfr-sandbox span,
+  body[data-ms-wizard="review"] .msfr-stats small,
+  body[data-ms-wizard="review"] .msfr-design-meta,
+  body[data-ms-wizard="review"] .msfr-check b,
+  body[data-ms-wizard="review"] .msfr-lines b,
+  body[data-ms-wizard="review"] .mscp-state,
+  body[data-ms-wizard="review"] .mscp-config b{
+    font-size:13px;
+    line-height:1.4;
+  }
+  body[data-ms-wizard="review"] .msfr-section-head>a,
+  body[data-ms-wizard="review"] .msfr-section-head>button,
+  body[data-ms-wizard="review"] .msfr-actions a,
+  body[data-ms-wizard="review"] .msfr-actions button,
+  body[data-ms-wizard="review"] .mscp-actions button{
+    min-height:48px;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="review"] .mscp-config select{
+    min-height:48px;
+    font-size:16px;
+    padding-inline:12px;
+  }
+  body[data-ms-wizard="review"] .msfr-stats b,
+  body[data-ms-wizard="review"] .msfr-design-meta,
+  body[data-ms-wizard="review"] .msfr-lines b,
+  body[data-ms-wizard="review"] .mscp-price b{
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+  body[data-ms-wizard="review"] .msfr-stats b,
+  body[data-ms-wizard="review"] .msfr-stats small{
+    white-space:normal;
+    overflow:visible;
+    text-overflow:clip;
+  }
+  body[data-ms-wizard="review"] .msfr-art{
+    min-height:0;
+    max-height:58dvh;
+    overflow:auto;
+    overscroll-behavior:contain;
+  }
+  body[data-ms-wizard="review"] .msfr-art img{
+    max-height:52dvh;
+  }
+  body[data-ms-wizard="review"] [data-commerce-quote][aria-busy="true"],
+  body[data-ms-wizard="review"] [data-commerce-checkout][aria-busy="true"]{
+    cursor:progress;
+  }
+  body[data-ms-wizard="review"] [data-commerce-quote]:focus-visible,
+  body[data-ms-wizard="review"] [data-commerce-checkout]:focus-visible,
+  body[data-ms-wizard="review"] .msfr-actions a:focus-visible,
+  body[data-ms-wizard="review"] .msfr-actions button:focus-visible{
+    outline:3px solid #2f6fed;
+    outline-offset:3px;
+  }
+}
+@media (max-width:420px){
+  body[data-ms-wizard="review"] .msfr-art{max-height:52dvh}
+  body[data-ms-wizard="review"] .msfr-art img{max-height:46dvh}
+  body[data-ms-wizard="review"] .mscp-head,
+  body[data-ms-wizard="review"] .msfr-section-head{gap:10px}
+}
