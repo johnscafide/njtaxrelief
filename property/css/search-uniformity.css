@@ -1,8 +1,8 @@
 /* Keep every public property-address lookup on the same canonical search UI. */
 body.hood-on #njw-filterbar .njw-search-slot{
-  flex:1 1 460px;
+  flex:0 1 600px;
   min-width:260px;
-  max-width:720px;
+  max-width:600px;
 }
 body.hood-on #njw-filterbar .njw-search-slot .hd-searchbox[data-watchdog-search-replaced="1"]{
   display:none!important;
@@ -23,6 +23,13 @@ body.hood-on .wd-nav{
 }
 body.hood-on .wd-nav{
   box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
+}
+
+@media(max-width:1280px) and (min-width:901px){
+  body.hood-on #njw-filterbar .njw-search-slot{
+    flex-basis:520px;
+    max-width:520px;
+  }
 }
 
 @media(max-width:900px){
