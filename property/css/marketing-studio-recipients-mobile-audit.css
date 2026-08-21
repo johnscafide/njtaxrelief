@@ -1,0 +1,75 @@
+/* Watchdog mobile certification layer — Marketing Studio Recipients.
+   Loaded only for <=720px from the Recipients route. */
+@media (max-width:720px){
+  body[data-ms-wizard="recipients"] .mw-stage{padding-left:max(14px,env(safe-area-inset-left));padding-right:max(14px,env(safe-area-inset-right));padding-bottom:calc(36px + env(safe-area-inset-bottom))}
+  body[data-ms-wizard="recipients"] .mw-stage-head p{font-size:15px;line-height:1.55}
+  body[data-ms-wizard="recipients"] .mw-kicker{font-size:12px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .mw-progress{font-size:13px;line-height:1.4}
+  body[data-ms-wizard="recipients"] .mw-progress b{font-size:14px}
+
+  /* Recipient source selector: preserve every source, but make the selection
+     workflow finger-safe and readable instead of compressing desktop copy. */
+  body[data-ms-wizard="recipients"] .ms-recipient-sources{padding:16px;border-radius:16px}
+  body[data-ms-wizard="recipients"] .ms-source-head{display:grid;gap:14px}
+  body[data-ms-wizard="recipients"] .ms-source-head>div>span{font-size:12px;line-height:1.2;letter-spacing:.1em}
+  body[data-ms-wizard="recipients"] .ms-source-head h3{font-size:21px;line-height:1.2}
+  body[data-ms-wizard="recipients"] .ms-source-head p{font-size:15px;line-height:1.55}
+  body[data-ms-wizard="recipients"] .ms-source-toggle{width:100%;min-height:48px;padding:12px 16px;font-size:15px;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] .ms-source-toggle b{min-width:24px;height:24px;font-size:12px}
+  body[data-ms-wizard="recipients"] .ms-source-item{grid-template-columns:40px minmax(0,1fr);gap:12px;min-height:64px;padding:12px 13px;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] .ms-source-check{width:40px;height:40px;font-size:15px}
+  body[data-ms-wizard="recipients"] .ms-source-copy b{font-size:15px;line-height:1.3;white-space:normal;overflow:visible;text-overflow:clip}
+  body[data-ms-wizard="recipients"] .ms-source-copy small{font-size:13px;line-height:1.45;white-space:normal;overflow:visible;text-overflow:clip}
+  body[data-ms-wizard="recipients"] .ms-source-item em{grid-column:2;justify-self:start;margin-top:-4px;font-size:12px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms-source-drawer{grid-template-columns:1fr;gap:16px}
+  body[data-ms-wizard="recipients"] .ms-source-group h4{font-size:13px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms-source-empty{font-size:14px;line-height:1.5;padding:18px}
+  body[data-ms-wizard="recipients"] .ms-source-preparing{font-size:14px;line-height:1.45;padding:12px 14px}
+  body[data-ms-wizard="recipients"] .ms-source-badges{gap:6px}
+  body[data-ms-wizard="recipients"] .ms-source-badges span,
+  body[data-ms-wizard="recipients"] .ms-source-badges small{font-size:11px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms-source-badges span{padding:4px 8px}
+  body[data-ms-wizard="recipients"] .ms-source-toast{right:max(14px,env(safe-area-inset-right));left:max(14px,env(safe-area-inset-left));bottom:calc(14px + env(safe-area-inset-bottom));max-width:none;font-size:14px;line-height:1.45;padding:13px 15px;overflow-wrap:anywhere}
+
+  /* Mailing preflight is decision-critical evidence. Keep all checks and label
+     information, but convert the dense desktop microtype to SaaS-mobile scale. */
+  body[data-ms-wizard="recipients"] .ms3-mail-preflight{margin:16px 0 18px;padding:15px;border-radius:16px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-head{display:grid;gap:10px;margin-bottom:14px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-head span{font-size:12px;line-height:1.3;letter-spacing:.08em}
+  body[data-ms-wizard="recipients"] .ms3-preflight-head h4{font-size:20px;line-height:1.25}
+  body[data-ms-wizard="recipients"] .ms3-preflight-head em{justify-self:start;font-size:12px;line-height:1.3;padding:8px 11px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-grid{grid-template-columns:1fr;gap:14px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics,
+  body[data-ms-wizard="recipients"] .ms3-preflight-rules{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics>div{padding:13px;border-radius:12px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics span{font-size:12px;line-height:1.25;letter-spacing:.025em}
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics b{font-size:22px;line-height:1.15;margin-top:5px;overflow-wrap:anywhere}
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics small{font-size:12px;line-height:1.35;margin-top:4px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-rule{min-height:52px;padding:10px 11px;gap:9px;align-items:flex-start}
+  body[data-ms-wizard="recipients"] .ms3-preflight-rule>i{font-size:15px;margin-top:2px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-rule b{font-size:13px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms3-preflight-rule small{font-size:12px;line-height:1.35;white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:anywhere}
+  body[data-ms-wizard="recipients"] .ms3-preflight-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:13px}
+  body[data-ms-wizard="recipients"] .ms3-preflight-actions button{width:100%;min-height:48px;padding:11px 14px;font-size:15px;line-height:1.25;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] .ms3-label-card{padding:14px;border-radius:13px}
+  body[data-ms-wizard="recipients"] .ms3-label-card>span{font-size:12px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms3-label-card>div{margin-top:10px;padding:14px;overflow-wrap:anywhere}
+  body[data-ms-wizard="recipients"] .ms3-label-card b,
+  body[data-ms-wizard="recipients"] .ms3-label-card strong{font-size:14px;line-height:1.35}
+  body[data-ms-wizard="recipients"] .ms3-label-card small{font-size:13px;line-height:1.4}
+  body[data-ms-wizard="recipients"] .ms3-label-empty,
+  body[data-ms-wizard="recipients"] .ms3-preflight-error{min-height:120px;font-size:14px;line-height:1.5;padding:18px}
+
+  /* Sticky wizard navigation must remain outside the iPhone gesture area. */
+  body[data-ms-wizard="recipients"] .mw-nav{bottom:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom))!important}
+  body[data-ms-wizard="recipients"] .mw-nav a,
+  body[data-ms-wizard="recipients"] .mw-nav button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1.2;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] :is(.ms-source-toggle,.ms-source-item,.ms3-preflight-actions button,.mw-nav a,.mw-nav button):focus-visible{outline:3px solid rgba(47,111,237,.28);outline-offset:2px}
+}
+
+@media (max-width:420px){
+  body[data-ms-wizard="recipients"] .ms3-preflight-metrics,
+  body[data-ms-wizard="recipients"] .ms3-preflight-rules{grid-template-columns:1fr}
+  body[data-ms-wizard="recipients"] .ms-source-head h3{font-size:20px}
+  body[data-ms-wizard="recipients"] .ms-source-item{grid-template-columns:40px minmax(0,1fr)}
+}
