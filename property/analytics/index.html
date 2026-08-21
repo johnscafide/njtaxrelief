@@ -38,14 +38,14 @@
       <div class="panel"><h2>Acquisition</h2><p>Source, medium and campaign quality for the selected range.</p><div id="acquisition" class="empty">Loading…</div></div>
       <div class="panel"><h2>Event mix</h2><p>Which product behaviors generate the most activity.</p><div id="events" class="empty">Loading…</div></div>
       <div class="panel wide"><div class="panel-head"><div><h2>Accounts & subscription health</h2><p>Registered users, onboarding, plans and current billing states.</p></div><span class="tag"><i class="fas fa-users"></i> AGGREGATE ONLY</span></div><div id="account-health" class="empty">Loading…</div><div id="plans" style="margin-top:14px"></div></div>
-      <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel</h2><p>Did people reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
-      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Today & Intent activity</h2><p>Append-only governed decision events over the last 30 days.</p><div id="governed" class="empty">Loading…</div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel · recent days</h2><p>Did people reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Governed decision activity · 30 days</h2><p>Append-only Today and Intent decision events from governed production trails.</p><div id="governed" class="empty">Loading…</div></div>
       <div class="panel wide"><h2>Retention cohorts</h2><p>Weekly activated-visitor retention. This remains the long-term signal for whether product use is recurring.</p><div id="retention" class="empty">Loading…</div></div>
       <div class="panel"><h2>Billing lifecycle</h2><p>Provider lifecycle events captured in the selected range. MRR is deliberately not guessed when interval/amount data is incomplete.</p><div id="billing" class="empty">Loading…</div></div>
       <div class="panel"><h2>Data quality & freshness</h2><p>Know whether you are looking at current, trustworthy instrumentation.</p><div id="quality" class="empty">Loading…</div></div>
     </section>
 
-    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. It reports traffic, registered-account counts, plan/billing state and product behavior without returning names, emails, addresses, phone numbers, PAMS PINs, prompts, IP addresses or property-level behavioral profiles. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
+    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. It does not expose names, emails, addresses, PAMS PINs, search text, prompts, phone numbers, IP addresses, or property-level behavioral profiles. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
