@@ -137,8 +137,40 @@
     );
   }
 
+  function installBootstrapRecovery() {
+    const app = document.getElementById('ms-app');
+    if (!app) return;
+
+    let recoveryTimer = window.setTimeout(() => {
+      const loading = app.querySelector('.ms-loading');
+      const readySurface = app.querySelector('#ms-discovery, .msa-shell');
+      if (!loading || readySurface || app.querySelector('.msa-mobile-recovery')) return;
+
+      app.innerHTML = '<section class="msa-mobile-recovery" role="alert" aria-labelledby="msa-mobile-recovery-title">' +
+        '<i class="fas fa-triangle-exclamation" aria-hidden="true"></i>' +
+        '<h2 id="msa-mobile-recovery-title">Audience did not finish opening.</h2>' +
+        '<p>Your campaign may still be loading, or the current campaign context could not be restored. Retry the Audience step to reconnect it safely.</p>' +
+        '<button type="button" class="ms-primary" id="msa-mobile-retry">Retry Audience</button>' +
+        '<small>Your saved campaign data is not changed by retrying.</small>' +
+        '</section>';
+
+      const retry = document.getElementById('msa-mobile-retry');
+      if (retry) retry.addEventListener('click', () => window.location.reload());
+    }, 9000);
+
+    const observer = new MutationObserver(() => {
+      if (app.querySelector('#ms-discovery, .msa-shell')) {
+        window.clearTimeout(recoveryTimer);
+        recoveryTimer = 0;
+        observer.disconnect();
+      }
+    });
+    observer.observe(app, { childList: true, subtree: true });
+  }
+
   const app = document.getElementById('ms-app') || document.body;
   const pageObserver = new MutationObserver(scan);
   pageObserver.observe(app, { childList: true, subtree: true });
   scan();
+  installBootstrapRecovery();
 })();
