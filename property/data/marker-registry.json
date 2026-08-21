@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-20T23:51:06.845Z",
+ "generated_at": "2026-08-21T00:05:13.735Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -5786,7 +5786,7 @@
    "source_id": "nj-cod",
    "field": "cod_2022",
    "provider_status": "live",
-   "provider_note": "NJ Division of Taxation assessment uniformity",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
