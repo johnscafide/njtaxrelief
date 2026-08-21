@@ -1,0 +1,233 @@
+/* NJW-246 Run 031 — Marketing Studio Audience mobile certification layer.
+   Loaded only at <=720px so desktop behavior remains unchanged. */
+
+body[data-ms-wizard="audience"] .msa-intro h2,
+body[data-ms-wizard="audience"] .msa-panel-head h3{
+  line-height:1.25;
+}
+
+body[data-ms-wizard="audience"] .msa-limit label,
+body[data-ms-wizard="audience"] .msa-map-controls label,
+body[data-ms-wizard="audience"] .msa-town-grid>label,
+body[data-ms-wizard="audience"] .msa-advanced-grid label{
+  font-size:13px;
+  line-height:1.35;
+}
+
+body[data-ms-wizard="audience"] .msa-limit small,
+body[data-ms-wizard="audience"] .msa-panel-head>div>span,
+body[data-ms-wizard="audience"] .msa-filter-row>span,
+body[data-ms-wizard="audience"] .msa-list-head span,
+body[data-ms-wizard="audience"] .msa-list-head small,
+body[data-ms-wizard="audience"] .msa-smart-card span,
+body[data-ms-wizard="audience"] .msa-source span,
+body[data-ms-wizard="audience"] .msa-smart-card>div:last-child>small,
+body[data-ms-wizard="audience"] .msa-source-side>small,
+body[data-ms-wizard="audience"] .msa-smart-presets small,
+body[data-ms-wizard="audience"] .msa-property-source small{
+  font-size:12px;
+  line-height:1.4;
+}
+
+body[data-ms-wizard="audience"] .msa-mode small,
+body[data-ms-wizard="audience"] .msa-property small,
+body[data-ms-wizard="audience"] .msa-smart-card p,
+body[data-ms-wizard="audience"] .msa-source p,
+body[data-ms-wizard="audience"] .msa-smart-summary{
+  font-size:13px;
+  line-height:1.45;
+}
+
+body[data-ms-wizard="audience"] .msa-mode b,
+body[data-ms-wizard="audience"] .msa-property b,
+body[data-ms-wizard="audience"] .msa-smart-card h4,
+body[data-ms-wizard="audience"] .msa-source h4,
+body[data-ms-wizard="audience"] .msa-smart-presets b,
+body[data-ms-wizard="audience"] .msa-property-source span{
+  font-size:14px;
+  line-height:1.35;
+}
+
+/* Prevent iOS focus zoom and give the primary audience form normal SaaS field sizing. */
+body[data-ms-wizard="audience"] .msa-limit select,
+body[data-ms-wizard="audience"] .msa-map-controls input,
+body[data-ms-wizard="audience"] .msa-map-controls select,
+body[data-ms-wizard="audience"] .msa-town-grid input,
+body[data-ms-wizard="audience"] .msa-advanced-grid input{
+  min-height:48px;
+  height:48px;
+  font-size:16px;
+}
+
+/* Mode selection remains horizontally discoverable, but each option is now a real touch card. */
+body[data-ms-wizard="audience"] .msa-mode{
+  min-height:88px;
+  min-width:230px;
+  padding:16px;
+  scroll-snap-align:start;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="audience"] .msa-mode i{
+  width:44px;
+  height:44px;
+  flex:0 0 44px;
+  font-size:18px;
+}
+
+/* Filters are operational controls; do not render them as desktop micro-chips. */
+body[data-ms-wizard="audience"] .msa-chip{
+  min-height:44px;
+  padding:10px 14px;
+  font-size:13px;
+  line-height:1.2;
+  touch-action:manipulation;
+}
+
+/* Town autocomplete becomes a finger-safe suggestion surface. */
+body[data-ms-wizard="audience"] .msa-town-options{
+  top:78px;
+  max-height:min(44dvh,340px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+}
+body[data-ms-wizard="audience"] .msa-town-options button{
+  min-height:48px;
+  padding:12px 14px;
+  font-size:14px;
+  line-height:1.35;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="audience"] .msa-town-options small{
+  padding:12px 14px;
+  font-size:13px;
+  line-height:1.4;
+}
+
+/* Property results are decision rows, not tiny checkbox lines. */
+body[data-ms-wizard="audience"] .msa-property{
+  min-height:56px;
+  padding:12px;
+  align-items:flex-start;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="audience"] .msa-property input{
+  width:20px;
+  height:20px;
+  margin-top:1px;
+  flex:0 0 20px;
+}
+body[data-ms-wizard="audience"] .msa-map-empty b{
+  font-size:15px;
+}
+body[data-ms-wizard="audience"] .msa-map-empty span{
+  display:block;
+  font-size:13px;
+  line-height:1.45;
+  max-width:28ch;
+}
+
+/* Preserve Smart Audience capability but convert desktop-density presets to readable mobile cards. */
+body[data-ms-wizard="audience"] .msa-smart-presets{
+  grid-template-columns:1fr 1fr;
+}
+body[data-ms-wizard="audience"] .msa-smart-presets button{
+  min-height:88px;
+  padding:14px;
+  gap:7px;
+  touch-action:manipulation;
+}
+body[data-ms-wizard="audience"] .msa-smart-presets i{
+  font-size:20px;
+}
+
+body[data-ms-wizard="audience"] .msa-smart-card,
+body[data-ms-wizard="audience"] .msa-source{
+  padding:16px;
+  gap:12px;
+}
+body[data-ms-wizard="audience"] .msa-smart-card button,
+body[data-ms-wizard="audience"] .msa-source button,
+body[data-ms-wizard="audience"] .msa-property-source button,
+body[data-ms-wizard="audience"] .msa-actions button,
+body[data-ms-wizard="audience"] .msa-town-actions button,
+body[data-ms-wizard="audience"] .msa-input-button button{
+  min-height:48px;
+  font-size:14px;
+  touch-action:manipulation;
+}
+
+body[data-ms-wizard="audience"] .msa-property-source{
+  padding:18px;
+  gap:14px;
+}
+body[data-ms-wizard="audience"] .msa-property-source>i{
+  width:48px;
+  height:48px;
+  font-size:20px;
+}
+body[data-ms-wizard="audience"] .msa-property-source b{
+  font-size:24px;
+  line-height:1.15;
+}
+
+body[data-ms-wizard="audience"] .msa-check{
+  min-height:48px;
+  font-size:14px;
+  line-height:1.35;
+}
+body[data-ms-wizard="audience"] .msa-check input{
+  width:20px!important;
+  height:20px!important;
+  flex:0 0 20px;
+}
+
+/* Credit status is important conversion context, so keep it and make it readable. */
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-kicker{
+  font-size:12px;
+  line-height:1.3;
+}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-note,
+body[data-ms-wizard="audience"] .ms-credit-banner>small{
+  font-size:13px;
+  line-height:1.4;
+  white-space:normal;
+}
+body[data-ms-wizard="audience"] .ms-credit-banner .ms-credit-tiers strong{
+  min-height:36px;
+  font-size:12px;
+}
+body[data-ms-wizard="audience"] .ms-credit-banner>a{
+  min-height:48px;
+  font-size:14px;
+}
+
+/* Keep Leaflet legal attribution compact, but do not let it become illegible. */
+body[data-ms-wizard="audience"] .leaflet-control-attribution{
+  font-size:10px!important;
+  line-height:1.3;
+}
+
+body[data-ms-wizard="audience"] :is(button,a,input,select):focus-visible{
+  outline:3px solid rgba(47,111,237,.35);
+  outline-offset:2px;
+}
+
+@media(max-width:420px){
+  body[data-ms-wizard="audience"] .msa-smart-presets{
+    grid-template-columns:1fr;
+  }
+  body[data-ms-wizard="audience"] .msa-town-actions{
+    grid-template-columns:1fr;
+  }
+  body[data-ms-wizard="audience"] .msa-mode{
+    min-width:min(86vw,280px);
+  }
+  body[data-ms-wizard="audience"] .msa-work{
+    padding:15px;
+  }
+  body[data-ms-wizard="audience"] .msa-map{
+    height:min(58dvh,390px);
+    min-height:300px;
+  }
+}
