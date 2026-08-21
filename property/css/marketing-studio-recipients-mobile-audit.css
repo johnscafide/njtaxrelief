@@ -60,11 +60,53 @@
   body[data-ms-wizard="recipients"] .ms3-label-empty,
   body[data-ms-wizard="recipients"] .ms3-preflight-error{min-height:120px;font-size:14px;line-height:1.5;padding:18px}
 
+  /* Recipient production list: the desktop 5-column / 780px table is useful on
+     large screens but forces repeated horizontal scanning on phones. Preserve
+     every field and action, but present each recipient as a vertical review card. */
+  body[data-ms-wizard="recipients"] .ms3-recipient-builder{margin-top:18px;padding-top:18px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-head{gap:12px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-head .ms-eyebrow{font-size:12px;line-height:1.3;letter-spacing:.08em}
+  body[data-ms-wizard="recipients"] .ms3-recipient-head h4{font-size:20px!important;line-height:1.25!important}
+  body[data-ms-wizard="recipients"] .ms3-recipient-counts{gap:8px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-counts span{min-height:48px;padding:9px 12px;font-size:13px;line-height:1.3;display:flex;align-items:center;gap:5px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-counts b{font-size:18px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-tools{grid-template-columns:1fr;gap:10px;margin:16px 0 12px}
+  body[data-ms-wizard="recipients"] .ms3-search input{min-height:48px;padding:11px 12px 11px 38px;font-size:16px;line-height:1.3}
+  body[data-ms-wizard="recipients"] .ms3-search i{left:13px;font-size:15px}
+  body[data-ms-wizard="recipients"] .ms3-filter-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible}
+  body[data-ms-wizard="recipients"] .ms3-filter-tabs button{min-height:44px;padding:9px 10px;font-size:14px;line-height:1.2;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] .ms3-recipient-tools>label:last-child{font-size:12px;line-height:1.3;gap:5px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-tools select{min-height:44px;padding:9px 11px;font-size:16px;background:#fff}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table-wrap{overflow:visible;border:0;background:transparent}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table{display:block;width:100%;min-width:0;border-collapse:separate}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table thead{display:none}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table tbody{display:grid;gap:12px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table tr{display:grid;gap:0;border:1px solid #e4e7ec;border-radius:14px;background:#fff;overflow:hidden;opacity:1}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table tr.is-excluded{opacity:.72;background:#f9fafb}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td{display:grid;grid-template-columns:minmax(108px,.42fr) minmax(0,1fr);gap:12px;align-items:start;padding:11px 13px;border-top:1px solid #f0f2f5;font-size:14px;line-height:1.4;min-width:0;overflow-wrap:anywhere}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:first-child{border-top:0}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td::before{font-size:12px;line-height:1.3;font-weight:800;color:#667085;text-transform:uppercase;letter-spacing:.04em}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:nth-child(1)::before{content:"Recipient / property"}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:nth-child(2)::before{content:"Mailing address"}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:nth-child(3)::before{content:"Validation"}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:nth-child(4)::before{content:"Source"}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td:nth-child(5)::before{content:"Action"}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td b{font-size:14px;line-height:1.35;min-width:0}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td small{font-size:12px;line-height:1.4;margin-top:3px;min-width:0;overflow-wrap:anywhere}
+  body[data-ms-wizard="recipients"] .ms3-status{font-size:12px;line-height:1.2;padding:6px 9px;justify-self:start}
+  body[data-ms-wizard="recipients"] .ms3-exclude,
+  body[data-ms-wizard="recipients"] .ms3-include{width:100%;min-height:44px;padding:9px 12px;font-size:14px;line-height:1.2;touch-action:manipulation}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td[colspan]{display:block;padding:18px;font-size:14px;line-height:1.5;text-align:center}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td[colspan]::before{content:none}
+  body[data-ms-wizard="recipients"] .ms3-recipient-footer{gap:10px;margin-top:12px;font-size:13px;line-height:1.4}
+  body[data-ms-wizard="recipients"] .ms3-recipient-footer>div{gap:8px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-footer button{min-height:44px;padding:9px 12px;font-size:14px;touch-action:manipulation}
+
   /* Sticky wizard navigation must remain outside the iPhone gesture area. */
   body[data-ms-wizard="recipients"] .mw-nav{bottom:0;padding:10px 0 calc(10px + env(safe-area-inset-bottom))!important}
   body[data-ms-wizard="recipients"] .mw-nav a,
   body[data-ms-wizard="recipients"] .mw-nav button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1.2;touch-action:manipulation}
-  body[data-ms-wizard="recipients"] :is(.ms-source-toggle,.ms-source-item,.ms3-preflight-actions button,.mw-nav a,.mw-nav button):focus-visible{outline:3px solid rgba(47,111,237,.28);outline-offset:2px}
+  body[data-ms-wizard="recipients"] :is(.ms-source-toggle,.ms-source-item,.ms3-preflight-actions button,.ms3-filter-tabs button,.ms3-exclude,.ms3-include,.ms3-recipient-footer button,.mw-nav a,.mw-nav button):focus-visible{outline:3px solid rgba(47,111,237,.28);outline-offset:2px}
 }
 
 @media (max-width:420px){
@@ -72,4 +114,7 @@
   body[data-ms-wizard="recipients"] .ms3-preflight-rules{grid-template-columns:1fr}
   body[data-ms-wizard="recipients"] .ms-source-head h3{font-size:20px}
   body[data-ms-wizard="recipients"] .ms-source-item{grid-template-columns:40px minmax(0,1fr)}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td{grid-template-columns:1fr;gap:5px;padding:12px 13px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-table td::before{font-size:11px}
+  body[data-ms-wizard="recipients"] .ms3-recipient-footer>div{display:grid;grid-template-columns:1fr 1fr;width:100%}
 }
