@@ -1,0 +1,7 @@
+/* NJW-246 Run 033 — Audience mobile autocomplete accessibility states.
+   Loaded only at <=720px. */
+body[data-ms-wizard="audience"] .msa-town-options[role="listbox"] button[role="option"]{outline:none}
+body[data-ms-wizard="audience"] .msa-town-options[role="listbox"] button[role="option"][aria-selected="true"]{background:rgba(47,111,237,.1);box-shadow:inset 3px 0 0 #2f6fed}
+body[data-ms-wizard="audience"] .msa-town-options[aria-busy="true"]{min-height:48px}
+body[data-ms-wizard="audience"] .msa-mobile-autocomplete-status{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+body[data-ms-wizard="audience"] :is(#msa-town,#msa-smart-town)[aria-expanded="true"]{border-color:rgba(47,111,237,.65);box-shadow:0 0 0 3px rgba(47,111,237,.12)}
