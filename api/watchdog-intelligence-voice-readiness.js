@@ -5,8 +5,14 @@ module.exports = async function handler(req, res) {
     res.setHeader('Allow', 'GET');
     return res.status(405).json({ error: 'Method not allowed.' });
   }
+
   let helperToken = '';
   let helperError = '';
+  let gatewayStatus = null;
+  let gatewayOk = false;
+  let audioPresent = false;
+  let providerError = null;
+
   try {
     const { getVercelOidcToken } = await import('@vercel/oidc');
     helperToken = await getVercelOidcToken({
@@ -16,13 +22,43 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     helperError = String(error?.message || error || '').slice(0, 180);
   }
+
+  if (helperToken) {
+    try {
+      const response = await fetch('https://ai-gateway.vercel.sh/v4/ai/speech-model', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${helperToken}`,
+          'ai-model-id': 'fish-audio/s2.1-pro-free',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: 'Watchdog provider verification.', outputFormat: 'mp3' }),
+      });
+      gatewayStatus = response.status;
+      const text = await response.text();
+      let body = null;
+      try { body = text ? JSON.parse(text) : null; } catch { body = null; }
+      gatewayOk = response.ok;
+      audioPresent = Boolean(body && typeof body === 'object' && typeof body.audio === 'string' && body.audio.length > 20);
+      if (!response.ok) {
+        const value = body && typeof body === 'object'
+          ? (body?.error?.message || body?.message || body?.error || body?.detail)
+          : text;
+        providerError = String(value || `Gateway request failed (${response.status})`).replace(/[<>]/g, '').slice(0, 240);
+      }
+    } catch (error) {
+      providerError = String(error?.message || error || '').replace(/[<>]/g, '').slice(0, 240);
+    }
+  }
+
   return res.status(200).json({
     ok: true,
-    ai_gateway_api_key_present: Boolean(process.env.AI_GATEWAY_API_KEY),
-    vercel_oidc_token_env_present: Boolean(process.env.VERCEL_OIDC_TOKEN),
     vercel_oidc_helper_token_present: Boolean(helperToken),
     vercel_oidc_helper_error: helperError || null,
-    watchdog_voice_enabled: String(process.env.WATCHDOG_VOICE_ENABLED || 'true').toLowerCase() !== 'false',
-    supabase_service_role_present: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY),
+    gateway_status: gatewayStatus,
+    gateway_ok: gatewayOk,
+    audio_present: audioPresent,
+    provider_error: providerError,
+    model: 'fish-audio/s2.1-pro-free',
   });
 };
