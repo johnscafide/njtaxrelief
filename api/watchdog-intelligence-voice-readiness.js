@@ -30,6 +30,7 @@ module.exports = async function handler(req, res) {
         headers: {
           Authorization: `Bearer ${helperToken}`,
           'ai-model-id': 'fish-audio/s2.1-pro-free',
+          'ai-gateway-protocol-version': '0.0.1',
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ text: 'Watchdog provider verification.', outputFormat: 'mp3' }),
@@ -59,6 +60,7 @@ module.exports = async function handler(req, res) {
     gateway_ok: gatewayOk,
     audio_present: audioPresent,
     provider_error: providerError,
+    protocol_version: '0.0.1',
     model: 'fish-audio/s2.1-pro-free',
   });
 };
