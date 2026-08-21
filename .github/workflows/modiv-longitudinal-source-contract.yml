@@ -3,6 +3,7 @@ name: MOD-IV longitudinal source contract
 on:
   push:
     branches:
+      - main
       - data-center-modiv-longitudinal-20260821
     paths:
       - property/scripts/audit_modiv_longitudinal.py
@@ -57,7 +58,14 @@ jobs:
               assert set(row).issubset(allowed), (year['year'], set(row)-allowed)
           print({x['year']:(x['valid_record_count'],x['district_count'],len(x['control_rows'])) for x in d['years']})
           PY
-      - name: Build privacy-minimized district partitions
+      - name: Materialize candidate release
+        if: github.event_name == 'push'
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python property/scripts/build_modiv_longitudinal.py --publish --diagnostic property/data/modiv-longitudinal-build-summary.json
+      - name: Build partitions without publishing on PR checks
+        if: github.event_name == 'pull_request'
         run: python property/scripts/build_modiv_longitudinal.py --diagnostic property/data/modiv-longitudinal-build-summary.json
       - name: Verify materialization contract
         run: |
@@ -73,14 +81,8 @@ jobs:
           assert d['privacy_contract']['safe_fields_only'] is True
           print(d)
           PY
-      - name: Publish candidate to private Supabase Storage
-        if: github.event_name == 'push'
-        env:
-          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: python property/scripts/build_modiv_longitudinal.py --publish --diagnostic property/data/modiv-longitudinal-build-summary.json
       - name: Commit privacy-safe diagnostics
-        if: always() && github.event_name == 'push'
+        if: always() && github.event_name == 'push' && github.ref_name != 'main'
         run: |
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
