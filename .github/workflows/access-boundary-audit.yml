@@ -88,6 +88,8 @@ jobs:
         run: node property/tests/compliance-contracts.mjs
       - name: Verify SECURITY DEFINER permission contracts
         run: node property/tests/security-definer-contracts.mjs
+      - name: Verify Watchdog Intelligence Voice contract
+        run: node property/tests/watchdog-intelligence-voice-contract.mjs
       - name: Verify Marketing Studio creative and launch contracts
         run: node property/tests/marketing-creative-contracts.mjs
       - name: Verify Marketing Studio visual renderer
