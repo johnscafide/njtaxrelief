@@ -15,6 +15,13 @@
 <link rel="stylesheet" href="/property/css/shared.css">
 <link rel="stylesheet" href="/property/css/dashboard.css">
 <link rel="stylesheet" href="/property/css/recap.css">
+<style>
+.wr-completion-alert{width:min(1180px,calc(100% - 36px));margin:22px auto 0;padding:16px 18px;border:2px solid #c62828;border-radius:18px;background:#fff1f1;color:#8f1d1d;display:flex;align-items:flex-start;gap:12px;box-shadow:0 10px 28px rgba(198,40,40,.10)}
+.wr-completion-alert i{margin-top:2px;font-size:19px}.wr-completion-alert div{display:grid;gap:3px}.wr-completion-alert b{font:800 15px "Plus Jakarta Sans",sans-serif}.wr-completion-alert span{font-size:13px;line-height:1.5;color:#7c2d2d}
+.wr-item.wr-log-completed{background:#fff1f1;border:2px solid #dc6b6b;box-shadow:0 8px 22px rgba(170,35,35,.08)}
+.wr-log-completed .wr-rank{background:#b42318}.wr-completed-badge{min-width:132px;border-radius:14px;background:#b42318;color:#fff;padding:11px 14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:800 12px "Plus Jakarta Sans",sans-serif;letter-spacing:.03em;text-transform:uppercase}
+@media(max-width:800px){.wr-completion-alert{width:min(100% - 20px,1180px);margin:10px auto 0;border-radius:16px}.wr-completed-badge{width:100%;min-width:0}}
+</style>
 </head>
 <body class="wr-page" data-access-require="developer" data-recap-mode="detail" data-recap-date="2026-08-20">
 <main class="wr-shell">
@@ -23,6 +30,10 @@
     <div class="wr-title"><b>Daily Operating Recap</b><span>August 20, 2026</span></div>
     <div class="wr-actions"><span class="wr-private"><i class="fas fa-lock"></i> Developer protected</span><a href="/property/logs/recap"><i class="fas fa-calendar-days"></i> All recaps</a></div>
   </header>
+  <aside class="wr-completion-alert" aria-label="Completed follow-up">
+    <i class="fas fa-circle-check" aria-hidden="true"></i>
+    <div><b>COMPLETED AUGUST 21 · Backlog hygiene + canonical Insights workflow</b><span>The duplicate daily SEO cleanup is complete. NJW-261 was closed as Duplicate, NJW-146 remains superseded, and NJW-247 is now the single canonical Watchdog Insights editorial workflow.</span></div>
+  </aside>
   <section class="wr-detail-head" id="recap-detail-head" hidden>
     <span class="wr-kicker">AUGUST 20, 2026</span>
     <h1 id="recap-headline"></h1><p id="recap-summary"></p><div id="recap-system-chips" class="wr-chips"></div>
@@ -33,5 +44,27 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/access-guard.js"></script>
 <script src="/property/js/recap.js"></script>
+<script>
+(function(){
+  var needle='Maintain backlog hygiene:';
+  var host=document.getElementById('recap-detail');
+  if(!host)return;
+  function decorate(){
+    host.querySelectorAll('.wr-item').forEach(function(card){
+      if(card.textContent.indexOf(needle)===-1||card.classList.contains('wr-log-completed'))return;
+      card.classList.add('wr-log-completed');
+      var handoff=card.querySelector('.wr-handoff');
+      if(handoff){
+        var badge=document.createElement('span');
+        badge.className='wr-completed-badge';
+        badge.innerHTML='<i class="fas fa-circle-check"></i> Completed';
+        handoff.replaceWith(badge);
+      }
+    });
+  }
+  new MutationObserver(decorate).observe(host,{childList:true,subtree:true});
+  decorate();
+})();
+</script>
 </body>
 </html>
