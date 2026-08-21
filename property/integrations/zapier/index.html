@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Watchdog for Zapier | Setup & Support</title>
-  <meta name="robots" content="noindex,follow">
+  <title>Watchdog for Zapier | Setup, API & Support</title>
+  <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#f5f7fb">
-  <meta name="description" content="Setup, permissions, triggers, actions and troubleshooting for Watchdog for Zapier.">
+  <meta name="description" content="Setup, API reference, permissions, triggers, searches, actions and troubleshooting for Watchdog for Zapier.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -20,6 +20,7 @@
     </a>
     <nav class="wp-top-actions" aria-label="Zapier guide actions">
       <a href="/property/integrations/"><i class="fas fa-plug"></i><span>Integration Center</span></a>
+      <a href="#api"><i class="fas fa-code"></i><span>API reference</span></a>
       <a class="primary" href="/property/pro#pricing"><i class="fas fa-layer-group"></i><span>Plans</span></a>
     </nav>
   </header>
@@ -29,14 +30,15 @@
       <div class="wp-hero-main">
         <span class="wp-kicker"><i class="fas fa-bolt"></i> WATCHDOG FOR ZAPIER</span>
         <h1>Put governed property intelligence <span>inside your existing workflow.</span></h1>
-        <p>Watchdog for Zapier connects property changes, Watchlists, reports, CRM context and approved Watchdog Intelligence actions to the business systems you already use. This page is the setup and support guide for the current connector.</p>
+        <p>Watchdog for Zapier connects property changes, Watchlists, reports, CRM context and approved Watchdog Intelligence actions to the business systems you already use. This page documents the current production connector and its API contract.</p>
         <div class="wp-hero-actions">
           <a class="wp-btn primary" href="/property/integrations/"><i class="fas fa-key"></i> Open Integration Center</a>
           <a class="wp-btn" href="#setup"><i class="fas fa-list-check"></i> Setup guide</a>
+          <a class="wp-btn" href="#api"><i class="fas fa-code"></i> API reference</a>
         </div>
       </div>
       <aside class="wp-hero-side">
-        <span class="wp-status" style="color:#f5a20a">Developer / private-beta preparation</span>
+        <span class="wp-status" style="color:#f5a20a">Private integration · publishing certification in progress</span>
         <div class="wp-side-stat"><b>4</b><span>Instant Watchdog triggers.</span></div>
         <div class="wp-side-stat"><b>2</b><span>Property searches.</span></div>
         <div class="wp-side-stat"><b>4</b><span>Governed actions, including Watchlist and Intelligence workflows.</span></div>
@@ -49,7 +51,7 @@
         <article class="wp-roadmap-item"><small>STEP 1</small><b>Open Integration Center</b><span>Sign in to Watchdog and open the Integration Center.</span></article>
         <article class="wp-roadmap-item"><small>STEP 2</small><b>Create a Zapier key</b><span>Name the key and select only the capabilities your workflows need.</span></article>
         <article class="wp-roadmap-item"><small>STEP 3</small><b>Copy it once</b><span>Copy the key when Watchdog displays it. Treat it like a password.</span></article>
-        <article class="wp-roadmap-item"><small>STEP 4</small><b>Connect in Zapier</b><span>Add a Watchdog account in Zapier and paste the key when prompted.</span></article>
+        <article class="wp-roadmap-item"><small>STEP 4</small><b>Connect in Zapier</b><span>Add a Watchdog account in Zapier and paste the key only in Zapier's authentication form.</span></article>
       </div>
     </section>
 
@@ -60,25 +62,80 @@
       <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">ACTIONS</span></div><h3>Send work back to Watchdog</h3><p><strong>Add / Remove Property from Watchlist</strong><br>Keep a user's monitored set synchronized with workflow decisions.</p><p><strong>Send CRM Context to Watchdog</strong><br>Attach normalized workflow context without turning CRM data into property truth.</p><p><strong>Run Watchdog Intelligence for Property</strong><br>Queue an approved Intelligence model using the user's normal plan, quota and idempotency rules.</p></div></article>
     </section>
 
+    <div class="wp-section-head" id="api"><div><h2>Production API reference</h2><p>The Zapier connector uses one HTTPS production endpoint with explicit action contracts. The API key belongs only in authentication, never in a trigger, search or action field.</p></div></div>
+    <section class="wp-roadmap">
+      <div class="wp-roadmap-grid">
+        <article class="wp-roadmap-item"><small>ENDPOINT</small><b><code>POST /functions/v1/zapier-api</code></b><span>Production host: <code>uvkvaxljhhngydvlrzom.supabase.co</code>. Requests and responses use JSON.</span></article>
+        <article class="wp-roadmap-item"><small>AUTHENTICATION</small><b><code>X-Watchdog-Key</code></b><span>Use a self-service key beginning with <code>wdg_zap_</code>. Revoked or unknown keys return HTTP 401.</span></article>
+        <article class="wp-roadmap-item"><small>PLAN BOUNDARY</small><b>Pro+ or Teams</b><span>Connector access is server-enforced. An ineligible account returns HTTP 403 before the requested action runs.</span></article>
+        <article class="wp-roadmap-item"><small>CONNECTION LABEL</small><b>Key label, never key secret</b><span>Zapier identifies the connection using the non-secret label returned by Watchdog's authentication test.</span></article>
+      </div>
+    </section>
+
+    <div class="wp-section-head"><div><h2>Authentication and trigger actions</h2><p>These actions support account validation and the complete REST Hook lifecycle.</p></div></div>
+    <section class="wp-grid">
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">AUTH</span></div><h3><code>auth.test</code></h3><p><strong>Scope:</strong> <code>zapier.auth</code></p><p>Returns the connected Watchdog account ID, plan, non-secret key label and granted capabilities. The key itself is never returned.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">HOOK</span></div><h3><code>trigger.subscribe</code></h3><p><strong>Scope:</strong> <code>triggers.manage</code>. Intelligence findings also require <code>intelligence.read</code>.</p><p><strong>Inputs:</strong> <code>event_type</code>, Zapier-provided public HTTPS <code>target_url</code>.</p><p>Creates an isolated Watchdog subscription for that Zap and returns its subscription ID and status.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">HOOK</span></div><h3><code>trigger.unsubscribe</code></h3><p><strong>Scope:</strong> <code>triggers.manage</code>.</p><p><strong>Input:</strong> <code>subscription_id</code>.</p><p>Revokes only the subscription owned by the same user and integration key, and cancels its pending delivery work.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">SAMPLE</span></div><h3><code>trigger.sample</code></h3><p><strong>Scope:</strong> <code>triggers.manage</code>. Intelligence findings also require <code>intelligence.read</code>.</p><p><strong>Input:</strong> <code>event_type</code>.</p><p>Returns recent governed events for the connected account, or a publication-safe fallback sample when no real event exists yet.</p></div></article>
+    </section>
+
+    <div class="wp-section-head"><div><h2>Supported trigger event types</h2><p>REST Hook subscriptions reject event types outside this production allowlist.</p></div></div>
+    <section class="wp-roadmap">
+      <div class="wp-roadmap-grid">
+        <article class="wp-roadmap-item"><small>EVENT</small><b><code>property.signal.changed</code></b><span>A governed property signal materially changed.</span></article>
+        <article class="wp-roadmap-item"><small>EVENT</small><b><code>watchlist.alert</code></b><span>A Watchlist alert is available for the connected account.</span></article>
+        <article class="wp-roadmap-item"><small>EVENT</small><b><code>report.ready</code></b><span>A requested Watchdog report reached ready state.</span></article>
+        <article class="wp-roadmap-item"><small>EVENT</small><b><code>intelligence.finding.created</code></b><span>A governed Intelligence finding was created. Explicit <code>intelligence.read</code> permission is required.</span></article>
+      </div>
+    </section>
+
+    <div class="wp-section-head"><div><h2>Property and Watchlist actions</h2><p>Property reads use Watchdog-governed records. Missing property values remain null rather than being inferred.</p></div></div>
+    <section class="wp-grid">
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">SEARCH</span></div><h3><code>property.find</code></h3><p><strong>Scope:</strong> <code>property.read</code>.</p><p><strong>Inputs:</strong> either <code>pams_pin</code> or street-address <code>query</code>; optional <code>town</code>.</p><p>Returns up to 10 governed property matches with public parcel, location, assessment and tax fields.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">SEARCH</span></div><h3><code>property.snapshot</code></h3><p><strong>Scope:</strong> <code>property.read</code>.</p><p><strong>Input:</strong> required <code>pams_pin</code>.</p><p>Returns the governed property snapshot and latest Watchdog Score when available. Owner/person fields are excluded.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">ACTION</span></div><h3><code>watchlist.add</code></h3><p><strong>Scope:</strong> <code>watchlist.write</code>.</p><p><strong>Inputs:</strong> required <code>pams_pin</code>; optional <code>nickname</code> and <code>notes</code>.</p><p>Adds or updates the property in the connected account's Watchlist.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">ACTION</span></div><h3><code>watchlist.remove</code></h3><p><strong>Scope:</strong> <code>watchlist.write</code>.</p><p><strong>Input:</strong> required <code>pams_pin</code>.</p><p>Removes that property from the connected account's Watchlist and reports whether a row was removed.</p></div></article>
+    </section>
+
+    <div class="wp-section-head"><div><h2>CRM context and Intelligence actions</h2><p>External CRM context stays separate from governed property truth. Intelligence jobs remain subject to plan limits, supported-model controls and idempotency.</p></div></div>
+    <section class="wp-grid">
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">ACTION</span></div><h3><code>crm.context.attach</code></h3><p><strong>Scope:</strong> <code>crm.context.write</code>.</p><p><strong>Required:</strong> <code>external_contact_id</code>.</p><p><strong>Optional:</strong> <code>pams_pin</code>, property address, contact name/email/phone, lead stage, relationship, last activity timestamp and tags.</p><p>Stores normalized user-authorized workflow context. It does not replace or silently edit governed Watchdog property facts.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><div class="wp-card-meta"><span class="wp-pill">ACTION</span></div><h3><code>intelligence.run</code></h3><p><strong>Scope:</strong> <code>intelligence.run</code>.</p><p><strong>Required:</strong> <code>pams_pin</code>, <code>model_key</code>. Optional stable <code>source_event_id</code> improves retry idempotency.</p><p><strong>Supported models:</strong> <code>assessment_anomaly</code> and <code>property_change_priority</code>.</p><p>Queues one governed property Intelligence job subject to daily and concurrent plan quotas. Unsupported models are rejected.</p></div></article>
+    </section>
+
+    <div class="wp-section-head"><div><h2>HTTP behavior</h2><p>Errors are returned as JSON with a human-readable <code>error</code> field. Zapier should surface the failure rather than silently treating it as success.</p></div></div>
+    <section class="wp-roadmap">
+      <div class="wp-roadmap-grid">
+        <article class="wp-roadmap-item"><small>400</small><b>Invalid request</b><span>Missing required input, unsupported trigger event, invalid JSON or unknown action.</span></article>
+        <article class="wp-roadmap-item"><small>401</small><b>Authentication failed</b><span>The Watchdog Zapier key is missing, invalid or revoked.</span></article>
+        <article class="wp-roadmap-item"><small>403</small><b>Permission denied</b><span>The account plan or key scope does not permit the requested operation.</span></article>
+        <article class="wp-roadmap-item"><small>404</small><b>Resource not found</b><span>The requested governed property or owned subscription was not found.</span></article>
+        <article class="wp-roadmap-item"><small>409</small><b>Governed operation rejected</b><span>An unsupported or unavailable governed Intelligence model was requested.</span></article>
+        <article class="wp-roadmap-item"><small>429</small><b>Plan quota reached</b><span>The daily or concurrent Intelligence limit for the connected plan was reached.</span></article>
+        <article class="wp-roadmap-item"><small>503</small><b>Service dependency unavailable</b><span>A required Watchdog database or service operation could not complete safely.</span></article>
+      </div>
+    </section>
+
     <div class="wp-section-head"><div><h2>Permissions and data boundaries</h2><p>A connection should receive only the capabilities it needs.</p></div></div>
     <section class="wp-roadmap">
       <div class="wp-roadmap-grid">
-        <article class="wp-roadmap-item"><small>TRIGGER ACCESS</small><b>Receive Watchdog events</b><span>Required for REST Hook subscriptions and event delivery.</span></article>
-        <article class="wp-roadmap-item"><small>PROPERTY ACCESS</small><b>Read governed snapshots</b><span>Allows property search and snapshot retrieval.</span></article>
-        <article class="wp-roadmap-item"><small>CRM CONTEXT</small><b>Write normalized context</b><span>External relationship/workflow context remains separate from governed property facts.</span></article>
-        <article class="wp-roadmap-item"><small>INTELLIGENCE</small><b>Read and run separately</b><span>Receiving findings and launching analyses are separate explicit permissions.</span></article>
+        <article class="wp-roadmap-item"><small>TRIGGER ACCESS</small><b>Receive Watchdog events</b><span><code>triggers.manage</code> controls REST Hook subscriptions and samples. Intelligence findings separately require <code>intelligence.read</code>.</span></article>
+        <article class="wp-roadmap-item"><small>PROPERTY ACCESS</small><b>Read governed snapshots</b><span><code>property.read</code> allows property search and snapshot retrieval without owner/person fields.</span></article>
+        <article class="wp-roadmap-item"><small>CRM CONTEXT</small><b>Write normalized context</b><span><code>crm.context.write</code> stores user-authorized workflow context separately from governed property facts.</span></article>
+        <article class="wp-roadmap-item"><small>INTELLIGENCE</small><b>Read and run separately</b><span><code>intelligence.read</code> and <code>intelligence.run</code> are separate explicit permissions.</span></article>
       </div>
     </section>
 
     <div class="wp-section-head"><div><h2>Troubleshooting</h2><p>Most connection issues fall into a small number of categories.</p></div></div>
     <section class="wp-grid">
       <article class="wp-card"><div class="wp-card-body"><h3>Authentication fails</h3><p>Create a new key from Integration Center and reconnect the Watchdog account. Do not email or paste a reusable key into support messages.</p></div></article>
-      <article class="wp-card"><div class="wp-card-body"><h3>A trigger never fires</h3><p>Confirm the Zap is enabled, the Watchdog key still has trigger permission, and the event is actually enabled for that connection. Intelligence findings also require explicit Intelligence read access.</p></div></article>
-      <article class="wp-card"><div class="wp-card-body"><h3>An Intelligence action is rejected</h3><p>Confirm Intelligence run permission, a supported model, a valid governed property identifier, and available plan quota. Retrying the same external event should use a stable source event or idempotency identifier.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><h3>A trigger never fires</h3><p>Confirm the Zap is enabled, the Watchdog key still has <code>triggers.manage</code>, and the event is enabled for that connection. Intelligence findings also require <code>intelligence.read</code>.</p></div></article>
+      <article class="wp-card"><div class="wp-card-body"><h3>An Intelligence action is rejected</h3><p>Confirm <code>intelligence.run</code>, a supported model, a valid governed property identifier, and available plan quota. Retrying the same external event should use a stable source event ID.</p></div></article>
     </section>
 
     <section class="wp-roadmap" style="margin-top:32px">
-      <div class="wp-section-head" style="margin:0"><div><h2>Current launch status</h2><p>The production Watchdog connector surface exists, but this page does not claim a public Zapier App Directory listing before Zapier-side certification and publication are complete.</p></div><a class="wp-btn primary" href="/property/integrations/">Manage integrations</a></div>
+      <div class="wp-section-head" style="margin:0"><div><h2>Current launch status</h2><p>The production Watchdog connector and public API documentation exist. The Zapier integration remains private while live-Zap history, real-user demand, review-account setup and Zapier Developer Platform publishing certification are completed. This page does not claim an App Directory listing before Zapier approves it.</p></div><a class="wp-btn primary" href="/property/integrations/">Manage integrations</a></div>
     </section>
   </main>
 </body>
