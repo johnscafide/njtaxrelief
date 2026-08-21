@@ -10,6 +10,7 @@ on:
       - 'supabase/functions/workbench-derived/**'
       - 'supabase/migrations/**'
       - 'scripts/build-derived-governance.js'
+      - 'scripts/sync-marker-provider-status.js'
       - '.github/workflows/phase5-derived-governance.yml'
   workflow_dispatch:
 permissions:
@@ -62,6 +63,25 @@ jobs:
           for(const key of ['live','partial','planned','unavailable'])if(Number(summary[key]||0)!==Number(counted[key]||0))throw new Error('Registry provider_status summary drift for '+key+': summary='+Number(summary[key]||0)+' actual='+Number(counted[key]||0));
           console.log(g.summary, counted);
           NODE
+      - name: Verify legacy provider-status sync preserves governed overlay
+        run: |
+          cp property/data/marker-registry.json /tmp/marker-registry.phase5.json
+          node scripts/sync-marker-provider-status.js
+          node - <<'NODE'
+          const base=require('./property/data/db-governed-status.json').statuses||{};
+          const overlay=require('./property/data/db-governed-provider-overlay.json').statuses||{};
+          const expected={...base,...overlay};
+          const registry=require('./property/data/marker-registry.json');
+          const byId=new Map((registry.markers||[]).map(row=>[String(row.id||''),String(row.provider_status||'')]));
+          const drift=[];
+          for(const [id,status] of Object.entries(expected)){
+            if(!byId.has(id))continue;
+            if(byId.get(id)!==status)drift.push(id+':'+byId.get(id)+'!='+status);
+          }
+          if(drift.length)throw new Error('Legacy provider sync regressed governed DB status: '+drift.slice(0,30).join(', ')+(drift.length>30?' … +'+(drift.length-30):''));
+          console.log('Legacy provider sync preserved '+Object.keys(expected).length+' governed snapshot/overlay statuses where canonical markers exist.');
+          NODE
+          mv /tmp/marker-registry.phase5.json property/data/marker-registry.json
       - name: Commit governance artifact when changed
         run: |
           if git diff --quiet -- property/data/marker-registry.json property/data/derived-marker-governance.json; then
