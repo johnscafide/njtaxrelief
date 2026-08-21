@@ -3,7 +3,7 @@
 if(window.__WATCHDOG_NEWSLETTER_STUDIO_UX__)return;
 window.__WATCHDOG_NEWSLETTER_STUDIO_UX__=true;
 var $=function(id){return document.getElementById(id);};
-var initialized=false,userToggledConnections=false,timer=null;
+var initialized=false,userToggledConnections=false,timer=null,deliveryBusy=false,pendingDelivery=null;
 
 function put(node,value){if(node&&node.textContent!==value)node.textContent=value;}
 function putHtml(node,value){if(node&&node.innerHTML!==value)node.innerHTML=value;}
@@ -17,65 +17,144 @@ function linkedCount(){
 }
 function setNext(title,copy,label,href,icon){
   var t=$('nl-next-title'),c=$('nl-next-copy'),a=$('nl-next-action');
-  put(t,title);
-  put(c,copy);
-  if(a){
-    if(a.getAttribute('href')!==href)a.setAttribute('href',href);
-    putHtml(a,'<span>'+label+'</span><i class="fas '+icon+'"></i>');
-  }
+  put(t,title);put(c,copy);
+  if(a){if(a.getAttribute('href')!==href)a.setAttribute('href',href);putHtml(a,'<span>'+label+'</span><i class="fas '+icon+'"></i>');}
+}
+function composeReadyCopy(){
+  var gate=$('nl-compose-gate');
+  if(!gate||!statusConnected('nl-kit-status'))return;
+  var html='<i class="fas fa-circle-check"></i><span>Kit is connected. Save a draft, schedule it, or send it from Watchdog without opening Kit.</span>';
+  putHtml(gate,html);gate.classList.add('ready');
 }
 function update(){
-  var workspace=$('nl-workspace');
-  if(!workspace||workspace.hidden)return;
-  var crm=statusConnected('nl-crm-status');
-  var kit=statusConnected('nl-kit-status');
-  var linked=linkedCount();
-  var panel=$('nl-connections-panel');
-  var summary=$('nl-connections-summary');
+  var workspace=$('nl-workspace');if(!workspace||workspace.hidden)return;
+  var crm=statusConnected('nl-crm-status'),kit=statusConnected('nl-kit-status'),linked=linkedCount();
+  var panel=$('nl-connections-panel'),summary=$('nl-connections-summary');
 
   if(crm&&kit)put(summary,'CRM connected · Kit connected');
   else if(!crm&&!kit)put(summary,'BoldTrail and Kit still need setup');
   else if(!crm)put(summary,'BoldTrail still needs to be connected');
   else put(summary,'Kit still needs to be connected');
 
-  if(panel&&!initialized){
-    panel.open=!crm||!kit;
-    initialized=true;
-  }else if(panel&&!userToggledConnections&&(!crm||!kit)&&!panel.open){
-    panel.open=true;
-  }
+  if(panel&&!initialized){panel.open=!crm||!kit;initialized=true;}
+  else if(panel&&!userToggledConnections&&(!crm||!kit)&&!panel.open){panel.open=true;}
 
-  if(!crm){
-    setNext('Connect your CRM','BoldTrail is the missing piece for this account. Connect it once and Watchdog will start the first contact sync.','Connect BoldTrail','#nl-connections-panel','fa-arrow-right');
-  }else if(!kit){
-    setNext('Connect your Kit account','Your CRM is ready. Add your personal Kit V4 key to unlock newsletter drafting.','Connect Kit','#nl-connections-panel','fa-arrow-right');
-  }else if(linked<1){
-    setNext('Match your newsletter audience','Both services are connected. Compare your existing Kit subscribers with your BoldTrail contacts before creating the first newsletter.','Match audience','#nl-audience-card','fa-users');
-  }else{
-    setNext('Create your newsletter',linked.toLocaleString()+' existing Kit subscribers are already linked to your CRM context. You are ready to build the next draft.','Create newsletter','#nl-compose-card','fa-pen-to-square');
-  }
+  if(!crm)setNext('Connect your CRM','BoldTrail is the missing piece for this account. Connect it once and Watchdog will start the first contact sync.','Connect BoldTrail','#nl-connections-panel','fa-arrow-right');
+  else if(!kit)setNext('Connect your Kit account','Your CRM is ready. Add your personal Kit V4 key to unlock newsletter drafting and sending.','Connect Kit','#nl-connections-panel','fa-arrow-right');
+  else if(linked<1)setNext('Match your newsletter audience','Both services are connected. Compare your existing Kit subscribers with your BoldTrail contacts before creating the first newsletter.','Match audience','#nl-audience-card','fa-users');
+  else setNext('Create your newsletter',linked.toLocaleString()+' existing Kit subscribers are linked to your CRM context. Build, schedule, or send the next newsletter without leaving Watchdog.','Create newsletter','#nl-compose-card','fa-pen-to-square');
+
+  composeReadyCopy();
 }
-function scheduleUpdate(){
-  window.clearTimeout(timer);
-  timer=window.setTimeout(update,35);
-}
+function scheduleUpdate(){window.clearTimeout(timer);timer=window.setTimeout(update,35);}
 function openConnectionsIfNeeded(e){
-  var link=e.target.closest('a');
-  if(!link||link.getAttribute('href')!=='#nl-connections-panel')return;
-  var panel=$('nl-connections-panel');
-  if(panel){panel.open=true;userToggledConnections=true;}
+  var link=e.target.closest('a');if(!link||link.getAttribute('href')!=='#nl-connections-panel')return;
+  var panel=$('nl-connections-panel');if(panel){panel.open=true;userToggledConnections=true;}
+}
+
+function injectDeliveryUi(){
+  var form=$('nl-broadcast-form');if(!form||$('nl-delivery-actions'))return;
+  var original=form.querySelector('.nl-compose-actions');
+  if(!original)return;
+  var draft=original.querySelector('button[type="submit"]');
+  if(draft){draft.classList.remove('primary');draft.innerHTML='<i class="fas fa-file-lines"></i> Save draft';}
+  var wrap=document.createElement('div');
+  wrap.id='nl-delivery-actions';wrap.className='nl-delivery-actions';
+  wrap.innerHTML='<div class="nl-delivery-intro"><div><span class="nl-eyebrow">DELIVERY</span><b>Finish it in Watchdog</b><small>Save a draft, schedule a future send, or queue it to send now through your connected Kit account.</small></div><span class="nl-delivery-safe"><i class="fas fa-shield-check"></i> Final confirmation required</span></div>'+
+    '<div class="nl-delivery-buttons"><button class="nl-btn" id="nl-schedule-send" type="button"><i class="fas fa-calendar-clock"></i> Schedule</button><button class="nl-btn primary nl-send-now" id="nl-send-now" type="button"><i class="fas fa-paper-plane"></i> Send now</button></div>';
+  original.insertBefore(wrap,original.firstChild);
+
+  var card=$('nl-compose-card');
+  var heading=card&&card.querySelector('header h2'),copy=card&&card.querySelector('header p');
+  put(heading,'Build & send a newsletter');
+  put(copy,'Write and preview it here, then save a draft, schedule it, or send it through your connected Kit account.');
+
+  var dialog=document.createElement('dialog');dialog.id='nl-delivery-dialog';dialog.className='nl-delivery-dialog';
+  dialog.innerHTML='<form method="dialog" class="nl-delivery-modal" id="nl-delivery-modal">'+
+    '<div class="nl-delivery-modal-head"><span class="nl-delivery-modal-icon"><i class="fas fa-paper-plane"></i></span><div><span class="nl-eyebrow">FINAL REVIEW</span><h3 id="nl-delivery-title">Send newsletter?</h3><p id="nl-delivery-copy">Review the destination before Watchdog hands this broadcast to Kit.</p></div></div>'+
+    '<div class="nl-delivery-review"><div><small>Subject</small><b id="nl-review-subject">—</b></div><div><small>Audience</small><b id="nl-review-audience">—</b></div><div><small>Sender</small><b id="nl-review-sender">—</b></div></div>'+
+    '<label class="nl-schedule-field" id="nl-schedule-field" hidden>Send date & time <span>Your current device time zone</span><input id="nl-schedule-at" type="datetime-local"></label>'+
+    '<div class="nl-delivery-warning" id="nl-delivery-warning"><i class="fas fa-circle-exclamation"></i><span>After Kit starts sending, a broadcast cannot be recalled from recipient inboxes.</span></div>'+
+    '<span class="nl-form-note" id="nl-delivery-note"></span>'+
+    '<div class="nl-delivery-modal-actions"><button class="nl-btn" value="cancel" id="nl-delivery-cancel">Cancel</button><button class="nl-btn primary" type="button" id="nl-delivery-confirm"><i class="fas fa-paper-plane"></i> Confirm send</button></div>'+
+    '</form>';
+  document.body.appendChild(dialog);
+}
+
+async function providerCall(action,body){
+  var rt=window.NJPTRSupabaseRuntime;if(!rt||!rt.url||!rt.key||!rt.createClient)throw new Error('Watchdog connection unavailable');
+  var db=rt.createClient(),s=await db.auth.getSession(),session=s&&s.data&&s.data.session,token=session&&session.access_token;
+  if(!token)throw new Error('Your Watchdog session has expired. Open Account and sign in again.');
+  var r=await fetch(rt.url+'/functions/v1/tmp-boldtrail-probe',{method:'POST',headers:{apikey:rt.key,authorization:'Bearer '+token,'content-type':'application/json'},body:JSON.stringify(Object.assign({action:action},body||{}))});
+  var d=await r.json().catch(function(){return{};});if(!r.ok)throw new Error(d.error||'Request failed');return d;
+}
+function cleanText(v){return String(v||'').trim();}
+function selectedAudience(){
+  var type=$('nl-target-type'),id=$('nl-target-id'),targetType=type&&type.value||'',targetId=Number(id&&id.value||0),label='All Kit subscribers';
+  if(targetType){
+    if(!targetId)throw new Error('Choose a '+targetType+' before sending.');
+    var option=id&&id.options&&id.selectedIndex>=0?id.options[id.selectedIndex]:null;
+    label=(targetType==='tag'?'Tag: ':'Segment: ')+(option?option.textContent:'Selected audience');
+  }
+  return{type:targetType||null,id:targetId||null,label:label,all:!targetType};
+}
+function formPayload(){
+  var subject=cleanText($('nl-subject')&&$('nl-subject').value),content=cleanText($('nl-content')&&$('nl-content').value),preview=cleanText($('nl-preview')&&$('nl-preview').value);
+  if(!subject)throw new Error('Add a subject before sending.');if(!content)throw new Error('Add newsletter content before sending.');
+  var audience=selectedAudience();return{subject:subject,content:content,preview_text:preview,audience:audience};
+}
+function senderLabel(){var v=cleanText($('nl-default-sender')&&$('nl-default-sender').textContent);return v&&v!=='Set a sender'?v:'Kit default sender';}
+function defaultScheduleValue(){
+  var d=new Date(Date.now()+10*60000),pad=function(n){return String(n).padStart(2,'0');};
+  return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());
+}
+function openDelivery(mode){
+  if(deliveryBusy)return;
+  try{var data=formPayload();pendingDelivery={mode:mode,data:data};}
+  catch(err){var n=$('nl-broadcast-note');if(n){n.textContent=err.message;n.classList.add('error');}return;}
+  var dialog=$('nl-delivery-dialog');if(!dialog)return;
+  put($('nl-review-subject'),pendingDelivery.data.subject);put($('nl-review-audience'),pendingDelivery.data.audience.label);put($('nl-review-sender'),senderLabel());
+  var schedule=mode==='schedule';$('nl-schedule-field').hidden=!schedule;
+  if(schedule&&!$('nl-schedule-at').value)$('nl-schedule-at').value=defaultScheduleValue();
+  put($('nl-delivery-title'),schedule?'Schedule this newsletter?':'Send this newsletter now?');
+  put($('nl-delivery-copy'),schedule?'Choose the send time below. Watchdog will schedule the broadcast directly in Kit.':'Watchdog will queue this broadcast with Kit immediately. Delivery normally begins shortly after confirmation.');
+  putHtml($('nl-delivery-confirm'),schedule?'<i class="fas fa-calendar-check"></i> Schedule newsletter':'<i class="fas fa-paper-plane"></i> Send newsletter');
+  put($('nl-delivery-note'),'');$('nl-delivery-note').classList.remove('error');
+  if(typeof dialog.showModal==='function')dialog.showModal();else if(window.confirm((schedule?'Schedule':'Send')+' "'+pendingDelivery.data.subject+'" to '+pendingDelivery.data.audience.label+'?'))confirmDelivery();
+}
+async function confirmDelivery(){
+  if(deliveryBusy||!pendingDelivery)return;
+  var mode=pendingDelivery.mode,data=pendingDelivery.data,sendAt;
+  if(mode==='schedule'){
+    var raw=$('nl-schedule-at')&&$('nl-schedule-at').value;if(!raw){put($('nl-delivery-note'),'Choose a send date and time.');$('nl-delivery-note').classList.add('error');return;}
+    var d=new Date(raw);if(!Number.isFinite(d.getTime())||d.getTime()<Date.now()+120000){put($('nl-delivery-note'),'Choose a time at least two minutes from now.');$('nl-delivery-note').classList.add('error');return;}sendAt=d.toISOString();
+  }else sendAt=new Date(Date.now()+120000).toISOString();
+
+  deliveryBusy=true;var confirmBtn=$('nl-delivery-confirm'),cancel=$('nl-delivery-cancel');if(confirmBtn)confirmBtn.disabled=true;if(cancel)cancel.disabled=true;
+  put($('nl-delivery-note'),mode==='schedule'?'Scheduling with Kit…':'Queueing with Kit…');$('nl-delivery-note').classList.remove('error');
+  try{
+    var status=await providerCall('email.status'),sender=(status.senders||[]).find(function(s){return s.is_default;})||(status.senders||[])[0]||null;
+    var payload={subject:data.subject,preview_text:data.preview_text,content:data.content,email_address:sender&&sender.email_address||null,target_type:data.audience.type,target_mode:'all',target_ids:data.audience.id?[data.audience.id]:[],send_at:sendAt,confirm_send:true,confirm_all_subscribers:data.audience.all===true};
+    var result=await providerCall('broadcast.create',payload),dialog=$('nl-delivery-dialog');if(dialog&&dialog.open)dialog.close();
+    var note=$('nl-broadcast-note');if(note){note.classList.remove('error');note.textContent=mode==='schedule'?'Newsletter scheduled for '+new Date(sendAt).toLocaleString()+'.':'Newsletter queued to send. Kit will begin delivery shortly.';}
+    var form=$('nl-broadcast-form');if(form)form.reset();var preview=$('nl-email-preview');if(preview)preview.innerHTML='<p>Your newsletter preview will appear as you type.</p>';put($('nl-preview-subject'),'Your subject');put($('nl-preview-preheader'),'Preview text will appear here.');
+    pendingDelivery=null;window.setTimeout(function(){var r=$('nl-refresh');if(r)r.click();},800);
+    return result;
+  }catch(err){put($('nl-delivery-note'),err.message||'Kit could not schedule this broadcast.');$('nl-delivery-note').classList.add('error');}
+  finally{deliveryBusy=false;if(confirmBtn)confirmBtn.disabled=false;if(cancel)cancel.disabled=false;}
+}
+function deliveryClick(e){
+  var b=e.target.closest('button');if(!b)return;
+  if(b.id==='nl-send-now'){e.preventDefault();openDelivery('now');}
+  else if(b.id==='nl-schedule-send'){e.preventDefault();openDelivery('schedule');}
+  else if(b.id==='nl-delivery-confirm'){e.preventDefault();confirmDelivery();}
 }
 function boot(){
-  var panel=$('nl-connections-panel');
-  if(panel)panel.addEventListener('toggle',function(){if(initialized)userToggledConnections=true;});
-  document.addEventListener('click',openConnectionsIfNeeded);
-  var workspace=$('nl-workspace');
-  if(workspace){
-    new MutationObserver(scheduleUpdate).observe(workspace,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
-  }
-  update();
-  window.setTimeout(update,250);
-  window.setTimeout(update,1000);
+  var panel=$('nl-connections-panel');if(panel)panel.addEventListener('toggle',function(){if(initialized)userToggledConnections=true;});
+  document.addEventListener('click',openConnectionsIfNeeded);document.addEventListener('click',deliveryClick);
+  injectDeliveryUi();
+  var workspace=$('nl-workspace');if(workspace)new MutationObserver(scheduleUpdate).observe(workspace,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class']});
+  update();window.setTimeout(update,250);window.setTimeout(update,1000);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
