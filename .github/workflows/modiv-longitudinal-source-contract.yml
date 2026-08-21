@@ -7,6 +7,12 @@ on:
     paths:
       - property/scripts/audit_modiv_longitudinal.py
       - .github/workflows/modiv-longitudinal-source-contract.yml
+  pull_request:
+    paths:
+      - property/scripts/audit_modiv_longitudinal.py
+      - property/data/modiv-longitudinal/SOURCE-MANIFEST.md
+      - supabase/migrations/20260821143000_modiv_longitudinal_private_storage.sql
+      - .github/workflows/modiv-longitudinal-source-contract.yml
   workflow_dispatch:
 
 permissions:
@@ -46,6 +52,7 @@ jobs:
           print({x['year']:(x['valid_record_count'],x['district_count'],len(x['control_rows'])) for x in d['years']})
           PY
       - name: Commit source diagnostic
+        if: github.event_name == 'push'
         run: |
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
