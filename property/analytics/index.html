@@ -47,7 +47,7 @@
       <div class="panel"><h2>Data quality & freshness</h2><p>Know whether you are looking at current, trustworthy instrumentation.</p><div id="quality" class="empty">Loading…</div></div>
     </section>
 
-    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. Event rows use audience classes rather than names or emails. Acquisition stores a sanitized referrer origin + pathname when the browser makes it available, plus UTM fields, landing path and paid-click provider. It does not store raw third-party referrer query strings, search text, prompts, addresses, PAMS PINs, phone numbers or IP addresses. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
+    <div class="note"><b>Privacy boundary:</b> Watchdog Analytics is developer-only and aggregate-first. Event rows use audience classes rather than identities. It does not expose names, emails, addresses, PAMS PINs, search text, prompts, phone numbers or IP addresses. Acquisition stores a sanitized referrer origin + pathname when the browser makes it available, plus UTM fields, landing path and paid-click provider. It does not store raw third-party referrer query strings. Global Privacy Control and Do Not Track continue to disable the browser collector.</div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
