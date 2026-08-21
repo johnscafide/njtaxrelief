@@ -6,9 +6,12 @@ const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const css = read('property/css/brand-consistency.css');
 const runtime = read('property/js/brand-consistency-runtime.js');
+const agentShell = read('property/js/agent-control-shell-2027.js');
+const agentReadability = read('property/css/agent-control-readability.css');
 const brandCenter = read('property/branding/brand-center.js');
 const llmGuide = read('property/branding/LLM-BRAND-GUIDE.md');
 const brand = JSON.parse(read('property/branding/brand-system.json'));
+const rawTinyAgentOverride = /font-size\s*:\s*(?:[0-9](?:\.\d+)?|1[01](?:\.\d+)?)px/i.test(agentReadability);
 
 const checks = [
   ['canonical body UI font', css.includes('font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important')],
@@ -24,6 +27,14 @@ const checks = [
   ['current app reduced motion', css.includes('@media (prefers-reduced-motion:reduce)')],
   ['canonical navigation includes Property Home', runtime.includes("label:'Property Home'")],
   ['canonical navigation includes Professional Hub', runtime.includes("label:'Professional Hub'")],
+  ['Agent Control loads canonical brand CSS', agentShell.includes("BRAND_STYLE='/property/css/brand-consistency.css'") && agentShell.includes('ensureStyle(BRAND_STYLE)')],
+  ['Agent Control loads final readability overlay', agentShell.includes("READABILITY_STYLE='/property/css/agent-control-readability.css'") && agentShell.includes('ensureStyle(READABILITY_STYLE)')],
+  ['Agent Control loads canonical brand runtime', agentShell.includes("BRAND_RUNTIME='/property/js/brand-consistency-runtime.js'")],
+  ['Agent Control aliases local accents to canonical tokens', agentReadability.includes('--ad-teal:var(--wd-primary,#2f6df6)') && agentReadability.includes('--ad-red:var(--wd-danger,#e34f5f)') && agentReadability.includes('--ad-green:var(--wd-success,#18a966)')],
+  ['Agent Control supporting text floor is 12px', agentReadability.includes('font-size:12px!important') && !rawTinyAgentOverride],
+  ['Agent Control desktop controls use readable floor', agentReadability.includes('min-height:42px!important') && agentReadability.includes('font-size:13px!important')],
+  ['Agent Control mobile form controls avoid browser zoom', agentReadability.includes('min-height:48px!important') && agentReadability.includes('font-size:16px!important')],
+  ['Agent Control numeric data uses tabular numerals', agentReadability.includes('font-variant-numeric:tabular-nums')],
   ['brand spec version advanced', brand.metadata?.version === '1.1.0' && brand.metadata?.updated === '2026-08-20'],
   ['brand spec names consistency CSS', brand.implementation?.canonical_shared_reference === '/property/css/brand-consistency.css'],
   ['brand spec names consistency runtime', brand.implementation?.brand_runtime === '/property/js/brand-consistency-runtime.js'],
