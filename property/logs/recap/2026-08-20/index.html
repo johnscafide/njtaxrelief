@@ -34,6 +34,10 @@
     <i class="fas fa-circle-check" aria-hidden="true"></i>
     <div><b>COMPLETED AUGUST 21 · Backlog hygiene + canonical Insights workflow</b><span>The duplicate daily SEO cleanup is complete. NJW-261 was closed as Duplicate, NJW-146 remains superseded, and NJW-247 is now the single canonical Watchdog Insights editorial workflow.</span></div>
   </aside>
+  <aside class="wr-completion-alert" aria-label="Completed typography follow-up">
+    <i class="fas fa-circle-check" aria-hidden="true"></i>
+    <div><b>COMPLETED AUGUST 21 · Priority #4 typography/token consistency batch</b><span>Agent Control now inherits the canonical Watchdog token palette, keeps readable 12px+ working text and 42px+ desktop controls through the authoritative app layer, uses tabular numerics, and moves its Discover and plan modules onto the shared rem scale. NJW-73, NJW-74 and NJW-75 remain In Progress for the broader product-wide legacy debt.</span></div>
+  </aside>
   <section class="wr-detail-head" id="recap-detail-head" hidden>
     <span class="wr-kicker">AUGUST 20, 2026</span>
     <h1 id="recap-headline"></h1><p id="recap-summary"></p><div id="recap-system-chips" class="wr-chips"></div>
@@ -46,18 +50,23 @@
 <script src="/property/js/recap.js"></script>
 <script>
 (function(){
-  var needle='Maintain backlog hygiene:';
+  var completions=[
+    {needle:'Maintain backlog hygiene:',label:'Completed'},
+    {needle:'Reduce product-wide typography/token inconsistency',label:'Completed batch'}
+  ];
   var host=document.getElementById('recap-detail');
   if(!host)return;
   function decorate(){
     host.querySelectorAll('.wr-item').forEach(function(card){
-      if(card.textContent.indexOf(needle)===-1||card.classList.contains('wr-log-completed'))return;
+      if(card.classList.contains('wr-log-completed'))return;
+      var match=completions.find(function(item){return card.textContent.indexOf(item.needle)!==-1;});
+      if(!match)return;
       card.classList.add('wr-log-completed');
       var handoff=card.querySelector('.wr-handoff');
       if(handoff){
         var badge=document.createElement('span');
         badge.className='wr-completed-badge';
-        badge.innerHTML='<i class="fas fa-circle-check"></i> Completed';
+        badge.innerHTML='<i class="fas fa-circle-check"></i> '+match.label;
         handoff.replaceWith(badge);
       }
     });
