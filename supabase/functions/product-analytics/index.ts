@@ -48,12 +48,10 @@ Deno.serve(async(req)=>{
     const verified=await admin.auth.getUser(token);
     const user=verified.data?.user;
     if(user){
-      const [internal,profile]=await Promise.all([
-        admin.from('analytics_internal_accounts').select('internal_class').eq('user_id',user.id).maybeSingle(),
-        admin.from('profiles').select('account_role').eq('id',user.id).maybeSingle()
-      ]);
-      const explicit=String(internal.data?.internal_class||'');
-      audience=AUDIENCE_CLASSES.has(explicit)?explicit:(String(profile.data?.account_role||'')==='developer'?'internal_developer':'external_account');
+      const classified=await admin.rpc('watchdog_analytics_class_for_identity',{p_identity:user.id});
+      const resolved=String(classified.data||'');
+      if(!classified.error&&AUDIENCE_CLASSES.has(resolved))audience=resolved;
+      else if(classified.error)console.error('analytics audience classification failed',classified.error.message);
       const now=new Date().toISOString();
       await admin.from('analytics_visitor_classes').upsert({visitor_id:b.visitor_id,audience_class:audience,updated_at:now},{onConflict:'visitor_id'});
       await admin.from('watchdog_product_events').update({audience_class:audience}).eq('visitor_id',b.visitor_id).neq('audience_class',audience);
