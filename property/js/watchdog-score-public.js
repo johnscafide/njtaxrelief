@@ -65,7 +65,13 @@
     var year = years[years.length - 1];
     var value = row[String(year)];
     if (!value || !Number(value.ratio)) return null;
-    return { year: year, ratio: Number(value.ratio) / 100, lower: Number(value.lower) / 100, upper: Number(value.upper) / 100 };
+    return { year: year, ratio: Number(value.ratio) / 100, lower: Number(value.lower) / 100, upper: Math.min(Number(value.upper) / 100, 1) };
+  }
+
+  function revaluationDistrict(record, data) {
+    var d = district(record);
+    if (!d || !data || !data.districts) return false;
+    return Number(data.tax_year) === new Date().getFullYear() && !!data.districts[d];
   }
 
   function add(detail, key, value, note) {
@@ -84,37 +90,56 @@
     };
   }
 
-  function overassessmentPosition(record, assessed, ratio) {
-    var fair = null;
-    var basis = '';
+  function overassessmentPosition(record, assessed, official, isRevaluationYear) {
     var sale = Number(record.verifiedSale);
     var saleYear = Number(record.verifiedSaleYear);
     var appreciation = Number(record.valuation && record.valuation.appreciation);
     var nowYear = new Date().getFullYear();
 
-    if (sale > 1000 && saleYear > 1900 && ratio > 0) {
+    if (sale > 1000 && saleYear > 1900) {
       var years = Math.max(0, Math.min(12, nowYear - saleYear));
       if (!Number.isFinite(appreciation)) appreciation = 0;
       var supportedMarket = sale * Math.pow(1 + appreciation, years);
-      fair = supportedMarket * ratio;
-      basis = 'verified sale carried forward to the current assessment ratio';
-    } else if (record.appeal && Number(record.appeal.peerMed) > 0) {
-      fair = Number(record.appeal.peerMed);
-      basis = 'comparable nearby assessment evidence';
+
+      if (isRevaluationYear) {
+        var revalGap = (assessed - supportedMarket) / Math.max(supportedMarket, 1);
+        var revalScore = revalGap <= 0 ? 1 : Core.clamp01(1 - revalGap / 0.30) * 0.5;
+        return {
+value: revalScore,
+note: revalGap > 0
+  ? money(assessed - supportedMarket) + ' above supported market value in a revaluation/reassessment year; Chapter 123 range does not apply'
+  : 'at or below supported market value in a revaluation/reassessment year; Chapter 123 range does not apply'
+        };
+      }
+
+      if (official && official.ratio > 0) {
+        var fair = supportedMarket * official.ratio;
+        var upperRatio = official.upper != null ? Math.min(official.upper, 1) : Math.min(official.ratio * 1.15, 1);
+        var limit = supportedMarket * upperRatio;
+        var over = (assessed - limit) / Math.max(limit, 1);
+        var score = over <= 0
+? Core.clamp01(1 - ((assessed - fair) / Math.max(fair, 1)) * 0.5)
+: Core.clamp01(1 - over / 0.30) * 0.5;
+        return {
+value: score,
+note: assessed > limit
+  ? money(assessed - limit) + ' above the certified Chapter 123 upper limit using state-verified sale evidence'
+  : 'within the certified Chapter 123 corridor using state-verified sale evidence'
+        };
+      }
     }
 
-    if (!(fair > 0)) return null;
-    var limit = fair * 1.15;
-    var over = (assessed - limit) / limit;
-    var score = over <= 0
-      ? Core.clamp01(1 - ((assessed - fair) / Math.max(fair, 1)) * 0.5)
-      : Core.clamp01(1 - over / 0.30) * 0.5;
-    return {
-      value: score,
-      note: assessed > limit
-        ? money(assessed - limit) + ' above the Chapter 123 screening limit using ' + basis
-        : 'within the Chapter 123 screening cushion using ' + basis
-    };
+    if (record.appeal && Number(record.appeal.peerMed) > 0) {
+      var peer = Number(record.appeal.peerMed);
+      var peerGap = (assessed - peer) / Math.max(peer, 1);
+      var peerScore = peerGap <= 0 ? 1 : Core.clamp01(1 - peerGap / 0.30) * 0.5;
+      return {
+        value: peerScore,
+        note: (peerGap > 0 ? money(assessed - peer) + ' above' : 'at or below') +
+' comparable nearby assessments; peer evidence only, not a Chapter 123 test'
+      };
+    }
+    return null;
   }
 
   function stability(record, official, uniformity) {
@@ -153,7 +178,7 @@
     };
   }
 
-  function evaluate(record, uniformityData, appealsData, officialData) {
+  function evaluate(record, uniformityData, appealsData, officialData, revaluationData) {
     if (!record || !Core) return null;
     var detail = {};
     var assessed = Number(record.assessed || record.assessed_value);
@@ -164,6 +189,7 @@
     var u = uniformityData && uniformityData.districts && d ? uniformityData.districts[d] : null;
     var a = appealsData && appealsData.counties ? appealsData.counties[countyCode(record)] : null;
     var official = latestOfficial(record, officialData);
+    var isRevaluationYear = revaluationDistrict(record, revaluationData);
 
     // B - Burden
     if (assessed > 0 && tax > 0 && ratio > 0) {
@@ -176,7 +202,7 @@
     }
 
     // O - Overassessment Position. Peer comparison is evidence here, never a standalone Watchdog Score.
-    var over = assessed > 0 && ratio > 0 ? overassessmentPosition(record, assessed, ratio) : null;
+    var over = assessed > 0 ? overassessmentPosition(record, assessed, official, isRevaluationYear) : null;
     add(detail, 'fairness', over && over.value, over && over.note || 'needs verified sale or comparable assessment evidence');
 
     // U - Uniformity
@@ -273,10 +299,11 @@
     Promise.all([
       loadJSON('/property/uniformity.json'),
       loadJSON('/property/appeals.json'),
-      loadJSON('/equalization-ratios.json')
+      loadJSON('/equalization-ratios.json'),
+      loadJSON('/property/revaluation-reassessment-2026.json')
     ]).then(function (data) {
       if (token !== generation) return;
-      var score = evaluate(record, data[0], data[1], data[2]);
+      var score = evaluate(record, data[0], data[1], data[2], data[3]);
       if (score) render(score);
       quarantineLegacyPeerScore();
       if (attempt < 24 && (!score || score.covered < 0.999 || !record.appeal || !record.valuation)) {

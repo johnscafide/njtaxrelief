@@ -650,10 +650,10 @@
     // property's own gap, and no one publishes the three together.
     var c = chapter123(r);
     var ev = null;
-    if (c && c.testable && c.hasCase && c.saving) {
-      var p = L.win_rate_decided ? L.win_rate_decided / 100 : L.win_rate_filed / 100;
-      // a sloppier roll is a friendlier roll for an appellant
-      if (u) p = Math.max(0.05, Math.min(0.95, p * (u.coefficient > 20 ? 1.12 : u.coefficient < 10 ? 0.88 : 1)));
+    if (c && c.testable && c.hasCase && c.saving && L.win_rate_filed != null) {
+      // Expected value uses the outcome of every filed appeal. The merits-only
+      // decided rate excludes dismissals and withdrawals and is context, not odds.
+      var p = L.win_rate_filed / 100;
       ev = { p: p, gross: c.saving * 5, net: (c.saving * 5 * p) - 25 };
     }
 
@@ -696,7 +696,7 @@
 
       '<div class="tl-fine">A win means the assessment came down, either revised by the board or stipulated by ' +
       'agreement before hearing. Most successful appeals settle, so counting only board revisions would ' +
-      'understate this badly. Withdrawals and dismissals are excluded from the decided rate. ' +
+      'understate this badly. The filed rate is the headline probability used in expected value. The decided-on-the-merits rate is shown separately because it excludes withdrawals and dismissals. ' +
       'The average successful appeal in ' + a.county.toLowerCase() + ' cut ' +
       (L.avg_reduction_per_win ? money(L.avg_reduction_per_win) : 'an unrecorded amount') +
       ' off the assessed value, though that figure is dominated by commercial cases and a house will be far less. ' +
