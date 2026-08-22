@@ -1,5 +1,6 @@
-/* Property Home legacy copy bridge.
-   Product-facing "Analyst Intel" copy is now branded Watchdog Intelligence. */
+/* Property Home Watchdog Intelligence branding bridge.
+   Customer-facing Intelligence copy uses the canonical product name, gradient wordmark,
+   and the rotating Intelligence border on Intelligence-specific surfaces. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND__)return;
@@ -8,19 +9,33 @@ window.__WATCHDOG_HOME_INTELLIGENCE_BRAND__=true;
 var replacements=[
   [/WATCHDOG ANALYST INTEL/g,'WATCHDOG INTELLIGENCE'],
   [/Watchdog Analyst Intel/g,'Watchdog Intelligence'],
-  [/Profession-aware Intel/g,'Profession-aware Intelligence'],
-  [/generalized Intel/g,'generalized Intelligence'],
-  [/Generalized Intel/g,'Generalized Intelligence'],
-  [/EXACT INTEL/g,'WATCHDOG INTELLIGENCE']
+  [/Profession-aware Intel/g,'Watchdog Intelligence'],
+  [/profession-aware Intel/g,'Watchdog Intelligence'],
+  [/generalized Intel/g,'generalized Watchdog Intelligence'],
+  [/Generalized Intel/g,'Generalized Watchdog Intelligence'],
+  [/PERSONALIZATION REQUIRED FOR EXACT INTEL/g,'PERSONALIZE WATCHDOG INTELLIGENCE'],
+  [/EXACT INTEL/g,'WATCHDOG INTELLIGENCE'],
+  [/exact Intel/g,'Watchdog Intelligence'],
+  [/Personalize my Intel/g,'Personalize Watchdog Intelligence'],
+  [/Use generalized Intelligence for now/g,'Use generalized Watchdog Intelligence for now']
 ];
+var brandPhrase=/Watchdog Intelligence/i;
 
+function ensureBrandStyle(){
+  if(document.querySelector('link[data-watchdog-intelligence-brand-signature]'))return;
+  var link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='/property/css/home/home-watchdog-intelligence-brand.css';
+  link.setAttribute('data-watchdog-intelligence-brand-signature','1');
+  document.head.appendChild(link);
+}
 function relevant(node){
   var el=node && (node.nodeType===1?node:node.parentElement);
   if(!el)return false;
-  if(el.closest('[data-watchdog-analyst-intel],.wdai,[class*="wdai"],[id*="wdai"]'))return true;
+  if(el.closest('[data-watchdog-analyst-intel],.wdai,[class*="wdai"],[id*="wdai"],.wd-home-voice-entry,.wd-intelligence-gate'))return true;
   var dialog=el.closest('[role="dialog"],.modal,[class*="modal"]');
   if(!dialog)return false;
-  return /ANALYST INTEL|Profession-aware Intel|generalized Intel|EXACT INTEL/i.test(dialog.textContent||'');
+  return /ANALYST INTEL|Profession-aware Intel|generalized Intel|EXACT INTEL|Watchdog Intelligence/i.test(dialog.textContent||'');
 }
 function replaceText(node){
   if(!node || node.nodeType!==3 || !relevant(node))return;
@@ -43,16 +58,68 @@ function replaceAttrs(root){
     });
   });
 }
+function skipBrandNode(node){
+  var parent=node && node.parentElement;
+  if(!parent)return true;
+  if(parent.closest('.wd-intelligence-brand-text,[data-no-intelligence-brand]'))return true;
+  return !!parent.closest('script,style,noscript,textarea,select,option');
+}
+function brandText(node){
+  if(!node || node.nodeType!==3 || skipBrandNode(node))return;
+  var value=node.nodeValue||'';
+  if(!brandPhrase.test(value))return;
+  var parts=value.split(/(Watchdog Intelligence)/gi);
+  if(parts.length<2)return;
+  var frag=document.createDocumentFragment();
+  parts.forEach(function(part){
+    if(!part)return;
+    if(part.toLowerCase()==='watchdog intelligence'){
+      var span=document.createElement('span');
+      span.className='wd-intelligence-brand-text';
+      span.textContent=part;
+      frag.appendChild(span);
+    }else frag.appendChild(document.createTextNode(part));
+  });
+  node.parentNode.replaceChild(frag,node);
+}
+function decorateSurfaces(root){
+  var surfaces=[];
+  if(root && root.nodeType===1)surfaces.push(root);
+  if(root && root.querySelectorAll){
+    surfaces=surfaces.concat(Array.prototype.slice.call(root.querySelectorAll('[role="dialog"],.modal,[class*="modal"],.wdai-role-prompt,.wd-intelligence-gate-card')));
+  }
+  surfaces.forEach(function(surface){
+    if(!surface || !brandPhrase.test(surface.textContent||''))return;
+    surface.classList.add('wd-intelligence-frame','wd-intelligence-modal-frame');
+  });
+}
+function brandVisiblePhrases(root){
+  root=root||document.body;
+  if(!root)return;
+  if(root.nodeType===3){brandText(root);return;}
+  var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  var nodes=[],node;
+  while((node=walker.nextNode()))nodes.push(node);
+  nodes.forEach(brandText);
+}
 function sweep(root){
   root=root||document.body;
   if(!root)return;
-  if(root.nodeType===3){replaceText(root);return;}
+  if(root.nodeType===3){
+    replaceText(root);
+    brandText(root);
+    return;
+  }
   var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
-  var node;
-  while((node=walker.nextNode()))replaceText(node);
+  var nodes=[],node;
+  while((node=walker.nextNode()))nodes.push(node);
+  nodes.forEach(replaceText);
   replaceAttrs(root);
+  decorateSurfaces(root);
+  brandVisiblePhrases(root);
 }
 function boot(){
+  ensureBrandStyle();
   sweep(document.body);
   new MutationObserver(function(mutations){
     mutations.forEach(function(mutation){
@@ -61,5 +128,6 @@ function boot(){
   }).observe(document.body,{childList:true,subtree:true});
 }
 
+ensureBrandStyle();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();

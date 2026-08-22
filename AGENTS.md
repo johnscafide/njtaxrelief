@@ -67,8 +67,21 @@ These instructions are persistent project rules for any ChatGPT, Codex, automati
   - ROBUST Framework
   - Watchdog Index
   - Watchdog Atlas
+  - Watchdog Intelligence
 - Preferred methodology phrase: **"The Watchdog Score, powered by the ROBUST Framework."**
 - Do not call it a "ROBUST Score."
+
+## Watchdog Intelligence brand signature
+
+These are persistent product-brand rules for every agent, automation, and future Watchdog chat.
+
+- The canonical product name is **Watchdog Intelligence**. Do not introduce customer-facing replacements such as "Watchdog Intel," "Analyst Intel," "Watchdog Analyst Intel," or standalone "Intel" when referring to this product family.
+- Subfeatures keep the master name attached. Examples: **Watchdog Intelligence Voice**, **Watchdog Intelligence Brief**, and **Watchdog Intelligence add-on**.
+- Any customer-facing UI surface primarily representing Watchdog Intelligence must use the Intelligence visual signature: a rounded white surface with the rotating cyan → blue → violet → magenta border treatment already established on Dashboard and Property Home. Respect `prefers-reduced-motion`.
+- Whenever the literal words **Watchdog Intelligence** appear in customer-facing HTML UI, render those words with the Intelligence spectrum treatment rather than a flat single color. Reuse the shared `wd-intelligence-brand-text` treatment or its current centralized successor instead of inventing one-off gradients.
+- Do not apply gradient text where HTML styling is impossible or inappropriate, such as source-code identifiers, plain-text logs, accessibility labels, database values, or Markdown-only technical documentation. In those contexts, still use the exact canonical words **Watchdog Intelligence**.
+- Do not weaken accessibility to achieve the brand effect. Preserve readable fallbacks for print, reduced-motion behavior, focus states, and screen-reader labels.
+- New Intelligence cards, dialogs, sheets, upsell gates, onboarding prompts, Voice surfaces, and profession-personalization surfaces must inherit this branding automatically whenever practical; do not require each future page to rediscover the styling independently.
 
 ## Concurrency rule
 
