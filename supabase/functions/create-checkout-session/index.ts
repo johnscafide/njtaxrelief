@@ -2,6 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const PRODUCTION_HOSTS = new Set([
+  'njpropertytaxrelief.com',
+  'www.njpropertytaxrelief.com',
+  'watchdogindex.com',
+  'www.watchdogindex.com'
+]);
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
 const PRICE_CATALOG = {
   agent: {
@@ -27,16 +33,24 @@ function allowedOrigin(req: Request) {
     const url = new URL(origin);
     const host = url.hostname.toLowerCase();
     if (
-      host === 'njpropertytaxrelief.com' ||
-      host === 'www.njpropertytaxrelief.com' ||
-      host === 'watchdogindex.com' ||
-      host === 'www.watchdogindex.com' ||
+      PRODUCTION_HOSTS.has(host) ||
       host === 'localhost' ||
       host === '127.0.0.1' ||
       host.endsWith('.vercel.app')
     ) return origin;
   } catch (_) {}
   return DEFAULT_SITE;
+}
+
+function requestSite(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  try {
+    const url = new URL(origin);
+    if (url.protocol === 'https:' && PRODUCTION_HOSTS.has(url.hostname.toLowerCase())) {
+      return `${url.protocol}//${url.host}`;
+    }
+  } catch (_) {}
+  return String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
 }
 
 function cors(req: Request) {
@@ -212,7 +226,7 @@ Deno.serve(async (req) => {
 
   if (entitlement?.provider === 'stripe' && entitlement?.provider_customer_id && entitlement?.provider_subscription_id && hasLiveLikeSubscription) {
     try {
-      const site = String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+      const site = requestSite(req);
       const portal = await stripe.billingPortal.sessions.create({
         customer: entitlement.provider_customer_id,
         return_url: `${site}/property/account/`
@@ -224,7 +238,7 @@ Deno.serve(async (req) => {
         resource_id: entitlement.provider_subscription_id,
         required_plan: tier,
         allowed: true,
-        metadata: { provider: 'stripe', requested_tier: tier, requested_cadence: cadence, current_price_id: entitlement.provider_price_id, checkout_control_source: control.source }
+        metadata: { provider: 'stripe', requested_tier: tier, requested_cadence: cadence, current_price_id: entitlement.provider_price_id, checkout_control_source: control.source, return_site: site }
       });
       return json(req, { provider: 'stripe', destination: 'portal', url: portal.url });
     } catch (error) {
@@ -233,7 +247,7 @@ Deno.serve(async (req) => {
     }
   }
 
-  const site = String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+  const site = requestSite(req);
   const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
   const metadata = {
     supabase_user_id: user.id,
@@ -273,7 +287,8 @@ Deno.serve(async (req) => {
         price_id: priceId,
         checkout_mode: control.mode,
         checkout_control_source: control.source,
-        stripe_mode: liveMode ? 'live' : 'test'
+        stripe_mode: liveMode ? 'live' : 'test',
+        return_site: site
       }
     });
 
