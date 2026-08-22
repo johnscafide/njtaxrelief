@@ -4,6 +4,19 @@ Long-form product, architecture, and research documents that describe the intend
 
 ## Current
 
+### The Watchdog Score
+
+Foundational methodology, governance, and long-range product paper for the Watchdog Score and derived-marker system. Covers the current six-component property tax-position model, evidence and confidence rules, canonical score versioning, geographic expansion from property to municipality/county/state, longitudinal Score + Confidence + Momentum, civic and political neutrality, fair-housing safeguards, anti-gaming controls, research validation, and the 5–10 year distribution strategy:
+
+[`WATCHDOG-SCORE-MARKERS-WHITEPAPER.md`](./WATCHDOG-SCORE-MARKERS-WHITEPAPER.md)
+
+Primary related roadmap:
+
+- Linear `NJW-102` - canonical municipal-score re-scope and legacy peer-score cleanup.
+- Linear `NJW-106` - flagship derived-marker methodology coverage.
+- Linear `NJW-192` - deterministic scoring, evidence, cohorts and calibration architecture.
+- Linear `NJW-144`, `NJW-208`, `NJW-210`, `NJW-249` - marker governance, score history and outcome validation dependencies.
+
 ### Watchdog Intelligence Voice
 
 Living whitepaper covering governed speech, contextual conversation, narrated intelligence, safe spoken commands, plan packaging, browser/provider architecture, privacy, telemetry, accessibility, and future voice-triggered automation:
