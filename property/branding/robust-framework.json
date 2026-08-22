@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-08-22",
+  "status": "canonical_brand_contract",
+  "platform": "Watchdog",
+  "score_product": "Watchdog Score",
+  "framework": {
+    "name": "ROBUST Framework",
+    "version": "ROBUST-v1",
+    "preferred_phrase": "The Watchdog Score is powered by the ROBUST Framework.",
+    "short_phrase": "One score. Six dimensions. ROBUST.",
+    "explanation_phrase": "Watchdog tells you where you stand. ROBUST tells you why.",
+    "public_hub": "/property/robust/",
+    "methodology": "/property/whitepapers/watchdog-score/"
+  },
+  "naming_hierarchy": [
+    "Watchdog",
+    "Watchdog Score",
+    "ROBUST Framework",
+    "ROBUST dimensions",
+    "governed markers and source evidence"
+  ],
+  "dimensions": [
+    {
+      "letter": "R",
+      "key": "recourse",
+      "name": "Recourse",
+      "current_property_weight": 10,
+      "micro_definition": "Paths and evidence for review.",
+      "route": "/property/robust/recourse/"
+    },
+    {
+      "letter": "O",
+      "key": "fairness",
+      "public_key": "overassessment_position",
+      "name": "Overassessment Position",
+      "current_property_weight": 20,
+      "micro_definition": "Assessment versus supported value.",
+      "route": "/property/robust/overassessment-position/",
+      "compatibility_note": "The current score implementation retains the internal key fairness. Public presentation must use O - Overassessment Position."
+    },
+    {
+      "letter": "B",
+      "key": "burden",
+      "name": "Burden",
+      "current_property_weight": 30,
+      "micro_definition": "Taxes relative to property value.",
+      "route": "/property/robust/burden/"
+    },
+    {
+      "letter": "U",
+      "key": "uniformity",
+      "name": "Uniformity",
+      "current_property_weight": 15,
+      "micro_definition": "Consistency across the assessment system.",
+      "route": "/property/robust/uniformity/",
+      "legacy_surface_note": "COD-driven surfaces historically labeled Assessment Fairness belong conceptually under U - Uniformity."
+    },
+    {
+      "letter": "S",
+      "key": "stability",
+      "name": "Stability",
+      "current_property_weight": 15,
+      "micro_definition": "Pressure for reassessment or structural change.",
+      "route": "/property/robust/stability/"
+    },
+    {
+      "letter": "T",
+      "key": "trajectory",
+      "name": "Trajectory",
+      "current_property_weight": 10,
+      "micro_definition": "Direction of the property's tax position.",
+      "route": "/property/robust/trajectory/"
+    }
+  ],
+  "current_property_weights_total": 100,
+  "rules": [
+    "Do not rename the Watchdog Score to ROBUST Score.",
+    "Always write O as Overassessment Position, not merely Overassessment.",
+    "Do not use ROBUST as a desirability label for a home, person, neighborhood, municipality, county or government.",
+    "Do not change current weights or formulas as a branding-only change.",
+    "Keep experimental or fallback scores outside the unqualified Watchdog Score and ROBUST names unless they pass the canonical score contract.",
+    "Keep protected-class and demographic characteristics out of the core score.",
+    "When a COD-driven surface is touched, use U - Uniformity language instead of naming COD itself Assessment Fairness.",
+    "Public score explanations should expose the six dimensions in R-O-B-U-S-T order when practical."
+  ],
+  "current_score_implementation": "/property/js/dashboard/tools/watchdog-score.js",
+  "canonical_whitepaper_source": "/property/docs/whitepapers/WATCHDOG-SCORE-MARKERS-WHITEPAPER.md",
+  "linear_program": "NJW-270"
+}
