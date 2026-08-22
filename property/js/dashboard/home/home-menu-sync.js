@@ -59,7 +59,7 @@
       item('/property/dashboard','fa-table-columns','Dashboard'),
       item('/property/home','fa-house','Property Home',true),
       item('/property/town-compare','fa-code-compare','Town Compare'),
-      item('/property/fairness','fa-scale-balanced','Assessment Fairness'),
+      item('/property/robust/','fa-gauge-high','ROBUST Framework'),
       item('/property/pulse','fa-wave-square','Change Intelligence')
     ];
     if(isAgent()) items.push(item('/property/agent-desk','fa-bullseye','Agent Control'));
