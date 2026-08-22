@@ -40,6 +40,7 @@ Deno.serve(async(req)=>{
   const admin=createClient(url,key,{auth:{persistSession:false,autoRefreshToken:false}});
 
   let audience='external_visitor';
+  let authUserId:string|null=null;
   const known=await admin.from('analytics_visitor_classes').select('audience_class').eq('visitor_id',b.visitor_id).maybeSingle();
   if(!known.error&&AUDIENCE_CLASSES.has(String(known.data?.audience_class||'')))audience=String(known.data.audience_class);
 
@@ -49,6 +50,7 @@ Deno.serve(async(req)=>{
     const verified=await admin.auth.getUser(token);
     const user=verified.data?.user;
     if(user){
+      authUserId=user.id;
       const classified=await admin.rpc('watchdog_analytics_class_for_identity',{p_identity:user.id});
       const resolved=String(classified.data||'');
       if(!classified.error&&AUDIENCE_CLASSES.has(resolved))audience=resolved;
@@ -64,6 +66,7 @@ Deno.serve(async(req)=>{
     const presence=await admin.from('watchdog_live_presence').upsert({
       session_id:b.session_id,
       visitor_id:b.visitor_id,
+      user_id:authUserId,
       audience_class:audience,
       path:pathOnly(b.path,240),
       last_seen:now,
