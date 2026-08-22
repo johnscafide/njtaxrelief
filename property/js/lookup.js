@@ -790,7 +790,8 @@
   // published ratio that is not.
   // ══════════════════════════════════════════════
 
-  var DEFAULT_APPRECIATION = 0.05;   // only used when sales cannot tell us
+  // No assumed appreciation rate. If verified sales cannot measure a trend,
+  // Watchdog applies no time-growth adjustment and labels the evidence gap.
   var liveRatioCache = {};
 
   // DEED_DATE is not one format. Across counties it arrives as MMDDYY,
@@ -918,11 +919,11 @@
     }
     var appr, apprMeasured = false;
     if (np >= 2) { appr = d / np; apprMeasured = true; }
-    else { appr = DEFAULT_APPRECIATION; }
+    else { appr = 0; }
     if (apprMeasured && appr < 0 && win.length < 120) {
       // a falling market is possible, but not on a thin sample. Do not let
       // noise reverse the correction.
-      appr = DEFAULT_APPRECIATION; apprMeasured = false;
+      appr = 0; apprMeasured = false;
     }
     appr = Math.max(-0.06, Math.min(0.20, appr));
 
@@ -1216,6 +1217,7 @@
   // ══════════════════════════════════════════════
 
   var officialRatios = null;
+  var chapter123DistrictCache = Object.create(null);
   var revaluationTable = null;
 
   function loadRevaluations() {
@@ -1244,6 +1246,36 @@
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (j) { officialRatios = (j && j.ratios) ? j.ratios : {}; })
       .catch(function () { officialRatios = {}; });
+  }
+
+  // Primary statutory ratio source: the deployed statewide Chapter 123 provider.
+  // It parses and validates the official 2026 NJ Treasury certification for all
+  // 564 taxing districts, keyed by the first four digits of PAMS_PIN.
+  function certifiedChapter123Ratio(record) {
+    var code = districtCode(record);
+    if (!code) return Promise.resolve(null);
+    if (chapter123DistrictCache[code]) return Promise.resolve(chapter123DistrictCache[code]);
+    var url = LEDGER_URL.replace(/\/+$/, '') + '/functions/v1/chapter123-provider?district=' + encodeURIComponent(code);
+    return xfetch(url, 9000)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) {
+        var row = j && j.data;
+        var pct = row && +row.ratio;
+        if (!pct || pct <= 0 || pct > 200) return null;
+        var out = {
+          ratio: pct / 100,
+          lower: row.lower != null ? +row.lower / 100 : null,
+          upper: row.upper != null ? Math.min(+row.upper / 100, 1) : null,
+          year: +(j.tax_year || 2026), source: 'official',
+          district: code, municipality: row.municipality || '', county: row.county || '',
+          providerVersion: j.provider_version || 'chapter123-provider',
+          sourceId: j.source_id || 'nj-division-taxation-ch123-2026',
+          sourceUrl: j.source_url || ''
+        };
+        chapter123DistrictCache[code] = out;
+        return out;
+      })
+      .catch(function () { return null; });
   }
 
   // Look up the published ratio for this town, newest year available.
@@ -1383,9 +1415,13 @@
     // zero when nominal transfers are mixed in, which quietly kills the
     // adjustment exactly when it is needed most.
     var localD = localDrift(comps, thisYear, R.ratio);
+    var localTrendMeasured = localD != null && Math.abs(localD) > 0.015;
     var drift = (apprHint != null) ? apprHint
-              : (localD != null && Math.abs(localD) > 0.015) ? localD
-              : DEFAULT_APPRECIATION;
+              : localTrendMeasured ? localD
+              : 0;
+    var appreciationSource = (apprHint != null) ? 'verified-sr1a-trend'
+                           : localTrendMeasured ? 'nearby-recorded-sales'
+                           : 'none';
     var timeFactor = 1, yearsStale = 0;
     if (R.source !== 'live' && R.source !== 'sr1a') {
       var now2 = new Date();
@@ -1424,11 +1460,13 @@
       method: R.source,
       mid: mid, lo: mid * (1 - band), hi: mid * (1 + band),
       ratio: R.ratio, ratioLower: R.lower, ratioUpper: R.upper,
-      ratioYear: R.year, ratioSource: R.source,
+      ratioYear: R.year, ratioSource: R.source, ratioDistrict: R.district || null,
+      ratioProviderVersion: R.providerVersion || null, ratioSourceId: R.sourceId || null,
       drift: drift, timeFactor: timeFactor, yearsStale: yearsStale, calibration: cal,
       ratioN: R.n || null, ratioMonths: R.months || null,
-      appreciation: (R.appreciation != null ? R.appreciation : drift),
-      apprMeasured: !!R.apprMeasured, medSaleAge: R.medSaleAge || null,
+      appreciation: (R.appreciation != null && R.apprMeasured ? R.appreciation : drift),
+      appreciationSource: (R.appreciation != null && R.apprMeasured) ? 'live-ratio-sales' : appreciationSource,
+      apprMeasured: !!R.apprMeasured || appreciationSource !== 'none', medSaleAge: R.medSaleAge || null,
       ratioScope: R.scope || null, ratioStats: R.stats || null,
       adjFactor: adj.factor, adjNotes: adj.notes,
       n: compCount, confidence: conf,
@@ -1700,7 +1738,7 @@
     // A statutory appeal screen needs independent market-value evidence.
     // Peer assessments are useful context, but they are not true market value
     // and must never be put through the Chapter 123 corridor.
-    var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
+    var appr = (v && v.appreciation != null) ? v.appreciation : 0;
     var thisYear = new Date().getFullYear();
     var evidence = [], anchors = [];
     var verifiedSale = +current.verifiedSale || 0;
@@ -1711,7 +1749,9 @@
       var carried = verifiedSale * Math.pow(1 + appr, yrs);
       evidence.push({ kind: 'verified-sale', value: carried,
         label: 'State-verified sale of ' + money(verifiedSale) + ' in ' + verifiedSaleYear +
-     ', carried forward ' + yrs + ' years at ' + (appr * 100).toFixed(1) + '% a year' });
+          (Math.abs(appr) > 0.0001
+            ? ', carried forward ' + yrs + ' years at the measured ' + (appr * 100).toFixed(1) + '% annual trend'
+            : ', with no appreciation adjustment because no defensible market trend was available') });
       anchors.push(carried);
     }
 
@@ -1731,7 +1771,7 @@
       }
     }
 
-    var official = officialRatio(current.town, current.county);
+    var official = current.certifiedRatio || officialRatio(current.town, current.county);
     var reval = revaluationStatus(current);
     var hasMarketAnchor = anchors.length > 0;
 
@@ -2235,7 +2275,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
             : '') + '</div>' +
         '<div><b>Sale price appreciation applied</b>: ' +
           (val && val.appreciation != null
-            ? (val.appreciation * 100).toFixed(2) + '%/yr ' + (val.apprMeasured ? '(measured from this town)' : '(DEFAULT, town too sparse to measure)') +
+            ? (val.appreciation * 100).toFixed(2) + '%/yr (' + esc(val.appreciationSource || 'none') + ')' +
+              (val.appreciationSource === 'none' ? ' — no trend adjustment because evidence was insufficient' : '') +
               ', median sale age ' + (val.medSaleAge != null ? val.medSaleAge.toFixed(2) + ' yrs' : '?')
             : 'n/a') + '</div>' +
         '<div><b>Calibration factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +
@@ -2999,7 +3040,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     // everything below runs after the panel is already on screen
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
 
-    var offR = officialRatio(current.town, current.county);
+    var staticOffR = officialRatio(current.town, current.county);
     // townRatio used to run here as well. It queried the same municipality as
     // liveRatio, 2,000 records, for a figure liveRatio already produces more
     // accurately. Dropping it removes a whole request and 2,000 records from
@@ -3012,9 +3053,12 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     Promise.all([
       gatherComps(geo.lat, geo.lon, current.town),
       verifiedComps(p, subject),
-      subjectFromSR1A(p)
+      subjectFromSR1A(p),
+      certifiedChapter123Ratio(p)
     ]).then(function (res) {
-      var comps = res[0] || [], verified = res[1] || [], own = res[2];
+      var comps = res[0] || [], verified = res[1] || [], own = res[2], certified = res[3] || null;
+      current.certifiedRatio = certified;
+      var offR = certified || staticOffR;
       // If the state has a verified sale on this exact parcel, take its living
       // space and its confirmed sale price. Both are better than what the
       // parcel layer gives us.
