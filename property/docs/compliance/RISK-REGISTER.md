@@ -2,7 +2,7 @@
 
 **Program:** Watchdog `/property/`  
 **Created:** 2026-08-19  
-**Last reviewed:** 2026-08-20  
+**Last reviewed:** 2026-08-22  
 **Budget constraint:** $0 internal readiness  
 **Framework mapping:** NIST CSF 2.0, SOC 2, OWASP ASVS 5.0.0, ISO/IEC 27001, NJDPA, PCI DSS, WCAG 2.2 AA
 
@@ -32,11 +32,12 @@ Likelihood and impact are Low / Medium / High. Priority is Low / Medium / High /
 | WR-012 | AI-derived insights may create privacy, accuracy, provenance, or automated-decision risks as Watchdog Intelligence expands. | GV.RM, GV.PO, ID.RA | ISO 42001; SOC 2; NJDPA | Medium | High | High | Compliance charter; source-fact and evidence patterns | Mitigate: inventory AI use cases, input/output data classes, human-review boundaries, prohibited uses, provenance, and evaluation evidence before higher-risk use. |
 | WR-013 | Repository visibility may expose sanitized-but-useful implementation details if richer audit evidence, vulnerability reports, or provider reports are later committed. | GV.RM, PR.DS | SOC 2 Confidentiality; ISO 27001 | Medium | Medium-High | High | Protected Compliance Center API; rule against secrets/exploit-enabling evidence | Avoid: keep sensitive evidence out of public webroot/repo; reassess repository/private evidence store before external reports or detailed vulnerabilities are retained. |
 | WR-014 | Security and compliance claims could exceed actual evidence, creating customer, contractual, or regulatory risk. | GV.PO, GV.OV | SOC 2; consumer protection; WCAG; PCI | Low | High | High | Trust Center disclaimers, claim-guard tests, control register | Mitigate: retain automated claim checks and require evidence/scope/date before any conformance or certification language. |
+| WR-015 | Privileged human or machine access can remain broader or longer-lived than necessary if developer roles, provider-console administrators, backoffice sessions, and service-role-backed server paths are not periodically reconciled. | GV.RR, ID.AM, PR.AA | SOC 2 Security; OWASP ASVS Access Control; ISO 27001 | Medium | High | High | Server-side developer RPC, self-promotion trigger protection, owner RLS, bounded/revocable backoffice sessions, privileged-access baseline, review template and CI contracts | Mitigate: perform first identity-level privileged-access review; establish joiner/mover/leaver and break-glass procedures; classify service-role-backed functions by caller authorization; continue MFA/AAL2 work for privileged humans. |
 
 ## Review discipline
 
-New material connectors, auth providers, payment flows, AI features, or sensitive-data workflows trigger review. `Implemented` controls do not automatically close risks. Closed risks remain with closure evidence. Paid external-validation dependencies remain open/monitored under the $0 constraint. Ratings change when evidence changes.
+New material connectors, auth providers, payment flows, AI features, sensitive-data workflows, privileged access classes, or service-role-backed administrative paths trigger review. `Implemented` controls do not automatically close risks. Closed risks remain with closure evidence. Paid external-validation dependencies remain open/monitored under the $0 constraint. Ratings change when evidence changes.
 
 ## Immediate priorities
 
-Identity and authorization remain foundational priorities. Recovery risk WR-010 now has explicit provisional objectives but remains High until repeated measured evidence demonstrates that critical tiers can actually meet them. Accessibility, privacy, vulnerability management, and recovery remain parallel high-value work.
+Identity, privileged access, and authorization remain foundational priorities. Recovery risk WR-010 now has explicit provisional objectives but remains High until repeated measured evidence demonstrates that critical tiers can actually meet them. Privileged-access risk WR-015 remains High until identity-level provider/application reviews and service-role caller classifications are retained. Accessibility, privacy, vulnerability management, and recovery remain parallel high-value work.
