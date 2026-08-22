@@ -6,12 +6,14 @@ const graphPath='property/js/dashboard/home/watchdog-data-graph.js';
 const cssPath='property/css/home/watchdog-data-graph.css';
 const loaderPath='property/js/dashboard/home/home-menu-sync.js';
 const semanticPath='property/js/watchdog-semantic-context.js';
+const semanticFunctionPath='supabase/functions/intelligence-semantic-context/index.ts';
 
-for (const p of [graphPath,cssPath,loaderPath,semanticPath]) assert.equal(fs.existsSync(p),true,`${p} must exist`);
+for (const p of [graphPath,cssPath,loaderPath,semanticPath,semanticFunctionPath]) assert.equal(fs.existsSync(p),true,`${p} must exist`);
 const graph=fs.readFileSync(graphPath,'utf8');
 const css=fs.readFileSync(cssPath,'utf8');
 const loader=fs.readFileSync(loaderPath,'utf8');
 const semantic=fs.readFileSync(semanticPath,'utf8');
+const semanticFunction=fs.readFileSync(semanticFunctionPath,'utf8');
 new vm.Script(graph,{filename:graphPath});
 new vm.Script(semantic,{filename:semanticPath});
 
@@ -43,6 +45,10 @@ assert.match(graph,/analyst\.insertAdjacentElement\('afterend',host\)/,'Data Gra
 assert.match(css,/#wd-property-data-graph\{grid-column:1\/-1!important/,'Graph must own full Property Home content width');
 assert.match(css,/wdg-details\[hidden\]/,'Graph details disclosure must support an accessible hidden state');
 assert.match(graph,/aria-expanded/,'Graph details disclosure must expose expansion state');
+assert.match(semanticFunction,/https:\/\/watchdogindex\.com/,'Semantic Context must allow the current Watchdog production origin');
+assert.match(semanticFunction,/https:\/\/www\.watchdogindex\.com/,'Semantic Context must allow the www Watchdog production origin');
+assert.match(semanticFunction,/http:\/\/127\.0\.0\.1:4173/,'Semantic Context must allow the isolated hosted-acceptance origin');
+assert.match(semanticFunction,/REGISTRY_URL="https:\/\/watchdogindex\.com\/property\/data\/marker-registry\.json"/,'Semantic Context must load the marker registry from the current Watchdog domain');
 for(const [path,content] of [[graphPath,graph],[cssPath,css],[loaderPath,loader],[semanticPath,semantic]]) assert.equal(/\?v=/.test(content),false,`${path} must not introduce version query strings`);
 
-console.log('Watchdog Data Graph lineage, truthful counting, lazy-load, placement and asset contract passed');
+console.log('Watchdog Data Graph lineage, truthful counting, production-origin, lazy-load, placement and asset contract passed');
