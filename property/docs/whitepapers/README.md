@@ -6,12 +6,22 @@ Long-form product, architecture, and research documents that describe the intend
 
 ### The Watchdog Score
 
-Foundational methodology, governance, and long-range product paper for the Watchdog Score and derived-marker system. Covers the current six-component property tax-position model, evidence and confidence rules, canonical score versioning, geographic expansion from property to municipality/county/state, longitudinal Score + Confidence + Momentum, civic and political neutrality, fair-housing safeguards, anti-gaming controls, research validation, and the 5–10 year distribution strategy:
+Foundational methodology, governance, brand, and long-range product paper for the Watchdog Score and derived-marker system. The six-component property methodology is officially branded as the **ROBUST Framework**:
+
+- **R** - Recourse
+- **O** - Overassessment Position
+- **B** - Burden
+- **U** - Uniformity
+- **S** - Stability
+- **T** - Trajectory
+
+**Watchdog Score** remains the product/result; **ROBUST Framework** is the branded methodology and explanatory system underneath it. The paper covers the current property tax-position weights, evidence and confidence rules, canonical score versioning, geographic expansion from property to municipality/county/state, longitudinal Score + Confidence + Momentum, civic and political neutrality, fair-housing safeguards, anti-gaming controls, research validation, brand governance, and the 5–10 year distribution strategy:
 
 [`WATCHDOG-SCORE-MARKERS-WHITEPAPER.md`](./WATCHDOG-SCORE-MARKERS-WHITEPAPER.md)
 
 Primary related roadmap:
 
+- Linear `NJW-270` - canonical Watchdog Score, ROBUST Framework, geographic hierarchy, validation and distribution standard.
 - Linear `NJW-102` - canonical municipal-score re-scope and legacy peer-score cleanup.
 - Linear `NJW-106` - flagship derived-marker methodology coverage.
 - Linear `NJW-192` - deterministic scoring, evidence, cohorts and calibration architecture.
@@ -45,4 +55,4 @@ Architecture illustrations:
 
 ## Governance
 
-Whitepapers describe architecture, product direction, and research bets. They do not override production security policy or code. When implementation status differs from a whitepaper, record and manage the work in Linear and update the document rather than presenting future work as shipped.
+Whitepapers describe architecture, product direction, research bets, and governed brand language. They do not override production security policy or code. When implementation status differs from a whitepaper, record and manage the work in Linear and update the document rather than presenting future work as shipped.
