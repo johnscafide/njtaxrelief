@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-22T08:39:00-04:00",
+  "captured_at": "2026-08-22T12:56:20-04:00",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -20,8 +20,14 @@
     "njplus.nj-dca-affordable-housing.affordable_units_total": "live",
     "njplus.nj-dca-affordable-housing.low_income_households": "live",
     "njplus.nj-dca-affordable-housing.moderate_income_households": "live",
+    "njplus.nj-dca-community-assets.bus_terminal_access": "live",
+    "njplus.nj-dca-community-assets.college_access": "live",
+    "njplus.nj-dca-community-assets.hospital_access": "live",
+    "njplus.nj-dca-community-assets.library_access": "live",
     "njplus.nj-dca-community-assets.opportunity_zone_status": "live",
+    "njplus.nj-dca-community-assets.park_access": "live",
     "njplus.nj-dca-community-assets.redevelopment_area_status": "live",
+    "njplus.nj-dca-community-assets.transit_station_access": "live",
     "njplus.nj-dca-community-assets.transit_village_status": "live",
     "njplus.nj-dca-community-assets.urban_enterprise_zone_status": "live",
     "njplus.nj-dca-modiv-longitudinal.assessment_history_depth": "live",
