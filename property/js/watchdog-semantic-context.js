@@ -25,7 +25,7 @@ async function get(options){
   var c=sb();if(!c)return null;
   try{
     var body={pams_pins:pins,packs:packs,marker_ids:markerIds,force:Boolean(options.force)};
-    var res=await c.functions.invoke('intelligence-semantic-context-browser',{body:body});
+    var res=await c.functions.invoke('intelligence-semantic-context',{body:body});
     if(res.error)throw res.error;
     cache.set(key,{at:now,data:res.data});
     window.dispatchEvent(new CustomEvent('watchdog:semantic-context',{detail:{pins:pins,packs:packs,marker_ids:markerIds,data:res.data}}));
