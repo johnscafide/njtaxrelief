@@ -3,110 +3,52 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#10294b">
   <title>Watchdog Developer · Command Center</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/property/css/shared.css">
   <style>
-    :root{--navy:#10294b;--ink:#152331;--muted:#68798a;--paper:#f4f7f9;--card:#fff;--line:#e3e9ee;--teal:#087f7a;--teal-soft:#eaf6f4;--blue-soft:#eef3fa;--amber-soft:#fff6df;--shadow:0 14px 42px rgba(16,41,75,.07)}
-    *{box-sizing:border-box}
-    html.access-pending body{visibility:hidden}
-    body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Sans 3",Arial,sans-serif}
-    a{color:inherit}
-    .dev-shell{max-width:1440px;margin:0 auto;padding:34px 24px 72px}
-    .dev-topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px}
-    .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-    .brand-mark{width:42px;height:42px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:18px}
-    .brand-copy strong{display:block;font:800 15px/1.1 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.02em}
-    .brand-copy span{display:block;margin-top:3px;color:var(--muted);font-size:12px}
-    .top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}
-    .top-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border-radius:12px;padding:10px 13px;font-weight:700;font-size:13px;box-shadow:0 5px 18px rgba(16,41,75,.05)}
-    .hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(320px,.6fr);gap:20px;margin-bottom:20px}
-    .hero-main,.hero-side{background:#fff;border-radius:26px;box-shadow:var(--shadow)}
-    .hero-main{padding:34px}
-    .kicker{display:flex;align-items:center;gap:8px;color:var(--teal);font:800 11px/1.2 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}
-    h1{margin:10px 0 11px;font:800 clamp(34px,5vw,58px)/.98 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.055em;max-width:880px}
-    .hero-main p{margin:0;max-width:800px;color:var(--muted);font-size:17px;line-height:1.55}
-    .hero-side{padding:24px;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
-    .status-pill{display:inline-flex;align-items:center;gap:7px;width:max-content;border-radius:999px;background:var(--teal-soft);color:var(--teal);padding:7px 10px;font-size:11px;font-weight:800}
-    .hero-side h2{margin:8px 0 5px;font:800 20px/1.15 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy)}
-    .hero-side p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-    .mini-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-    .mini-links a{text-decoration:none;border-radius:12px;background:var(--paper);padding:10px 11px;font-size:12px;font-weight:700;color:var(--navy)}
-    .metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}
-    .metric{background:#fff;border-radius:18px;padding:18px 19px;box-shadow:0 8px 28px rgba(16,41,75,.05)}
-    .metric-label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
-    .metric-value{margin-top:8px;font:800 29px/1 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy)}
-    .metric-note{margin-top:5px;color:var(--muted);font-size:12px}
-    .controls{position:sticky;top:10px;z-index:20;background:rgba(244,247,249,.94);backdrop-filter:blur(14px);padding:10px 0 14px;margin-bottom:12px}
-    .search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
-    .search-box{position:relative}
-    .search-box i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8a9aaa}
-    .search-box input{width:100%;height:48px;border:0;outline:none;border-radius:16px;background:#fff;padding:0 16px 0 44px;color:var(--ink);font:600 14px "Source Sans 3",Arial,sans-serif;box-shadow:0 7px 24px rgba(16,41,75,.05)}
-    .view-button{height:48px;border:0;border-radius:16px;background:var(--navy);color:#fff;padding:0 16px;font:700 13px "Source Sans 3",Arial,sans-serif;cursor:pointer}
-    .filters{display:flex;gap:7px;overflow:auto;padding:10px 1px 2px;scrollbar-width:none}
-    .filters::-webkit-scrollbar{display:none}
-    .filter{white-space:nowrap;border:0;border-radius:999px;background:#fff;color:#5d6f80;padding:8px 11px;font:700 11px "Source Sans 3",Arial,sans-serif;cursor:pointer}
-    .filter.active{background:var(--navy);color:#fff}
-    .section{margin-top:25px}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 2px 11px}
-    .section-head h2{margin:0;font:800 20px/1.2 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.025em}
-    .section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}
-    .section-count{color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}
-    .route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
-    .route{background:#fff;border-radius:18px;padding:17px;box-shadow:0 7px 24px rgba(16,41,75,.045);display:flex;flex-direction:column;min-height:164px}
-    .route-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-    .route-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--blue-soft);color:var(--navy);flex:0 0 auto}
-    .badge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:5px 7px;border-radius:999px;background:var(--paper);color:#6b7c8d;white-space:nowrap}
-    .badge.dev{background:var(--teal-soft);color:var(--teal)}
-    .badge.public{background:var(--blue-soft);color:#42658d}
-    .badge.source{background:var(--amber-soft);color:#8c651b}
-    .route h3{margin:12px 0 4px;font:800 15px/1.25 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.015em}
-    .route p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.45;flex:1}
-    .path{font:600 10.5px/1.35 ui-monospace,SFMono-Regular,Consolas,monospace;color:#7c8b99;word-break:break-all;margin-bottom:12px}
-    .route-actions{display:flex;align-items:center;gap:8px;margin-top:auto}
-    .open{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--teal);font-size:12px;font-weight:800}
-    .copy{margin-left:auto;border:0;background:transparent;color:#8796a4;cursor:pointer;padding:5px;font-size:12px}
-    .empty{display:none;background:#fff;border-radius:20px;padding:34px;text-align:center;color:var(--muted)}
-    .footnote{margin-top:30px;padding:18px 20px;background:#fff;border-radius:18px;color:var(--muted);font-size:12.5px;line-height:1.55;box-shadow:0 7px 24px rgba(16,41,75,.04)}
-    .footnote strong{color:var(--navy)}
-    @media(max-width:1050px){.hero{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:650px){.dev-shell{padding:20px 14px 50px}.dev-topbar{align-items:flex-start}.brand-copy span{display:none}.top-link span{display:none}.hero-main{padding:24px 20px}.hero-side{padding:20px}.metrics{grid-template-columns:1fr 1fr}.metric{padding:15px}.metric-value{font-size:24px}.search-row{grid-template-columns:1fr}.view-button{display:none}.route-grid{grid-template-columns:1fr}.controls{top:0}.section-head{align-items:flex-start}.section-count{padding-top:3px}}
+    :root{--navy:#10294b;--ink:#152331;--muted:#68798a;--paper:#f4f7f9;--card:#fff;--line:#e3e9ee;--teal:#087f7a;--teal-soft:#eaf6f4;--blue-soft:#eef3fa;--amber-soft:#fff6df;--violet-soft:#f3efff;--shadow:0 14px 42px rgba(16,41,75,.07)}
+    *{box-sizing:border-box}html.access-pending body{visibility:hidden}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Sans 3",Arial,sans-serif}a{color:inherit}.dev-shell{max-width:1440px;margin:0 auto;padding:34px 24px 72px}.dev-topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:30px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand-mark{width:42px;height:42px;border-radius:14px;background:var(--navy);color:#fff;display:grid;place-items:center;font-size:18px}.brand-copy strong{display:block;font:800 15px/1.1 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.02em}.brand-copy span{display:block;margin-top:3px;color:var(--muted);font-size:12px}.top-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}.top-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border-radius:12px;padding:10px 13px;font-weight:700;font-size:13px;box-shadow:0 5px 18px rgba(16,41,75,.05)}.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(340px,.65fr);gap:20px;margin-bottom:20px}.hero-main,.hero-side{background:#fff;border-radius:26px;box-shadow:var(--shadow)}.hero-main{padding:34px}.kicker{display:flex;align-items:center;gap:8px;color:var(--teal);font:800 11px/1.2 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase}h1{margin:10px 0 11px;font:800 clamp(34px,5vw,58px)/.98 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.055em;max-width:880px}.hero-main p{margin:0;max-width:840px;color:var(--muted);font-size:17px;line-height:1.55}.hero-side{padding:24px;display:flex;flex-direction:column;gap:16px}.status-pill{display:inline-flex;align-items:center;gap:7px;width:max-content;border-radius:999px;background:var(--teal-soft);color:var(--teal);padding:7px 10px;font-size:11px;font-weight:800}.hero-side h2{margin:2px 0 3px;font:800 20px/1.15 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy)}.hero-side p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.domain-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.domain-fact{background:var(--paper);border-radius:13px;padding:11px}.domain-fact small{display:block;color:var(--muted);font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.domain-fact b{display:block;margin-top:4px;color:var(--navy);font-size:12px;line-height:1.25}.mini-links{display:grid;grid-template-columns:1fr 1fr;gap:8px}.mini-links a{text-decoration:none;border-radius:12px;background:var(--paper);padding:10px 11px;font-size:12px;font-weight:700;color:var(--navy)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:20px}.metric{background:#fff;border-radius:18px;padding:18px 19px;box-shadow:0 8px 28px rgba(16,41,75,.05)}.metric-label{color:var(--muted);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.metric-value{margin-top:8px;font:800 29px/1 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy)}.metric-note{margin-top:5px;color:var(--muted);font-size:12px}.controls{position:sticky;top:10px;z-index:20;background:rgba(244,247,249,.94);backdrop-filter:blur(14px);padding:10px 0 14px;margin-bottom:12px}.search-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.search-box{position:relative}.search-box i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#8a9aaa}.search-box input{width:100%;height:48px;border:0;outline:none;border-radius:16px;background:#fff;padding:0 16px 0 44px;color:var(--ink);font:600 14px "Source Sans 3",Arial,sans-serif;box-shadow:0 7px 24px rgba(16,41,75,.05)}.view-button{height:48px;border:0;border-radius:16px;background:var(--navy);color:#fff;padding:0 16px;font:700 13px "Source Sans 3",Arial,sans-serif;cursor:pointer}.filters{display:flex;gap:7px;overflow:auto;padding:10px 1px 2px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filter{white-space:nowrap;border:0;border-radius:999px;background:#fff;color:#5d6f80;padding:8px 11px;font:700 11px "Source Sans 3",Arial,sans-serif;cursor:pointer}.filter.active{background:var(--navy);color:#fff}.section{margin-top:25px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:0 2px 11px}.section-head h2{margin:0;font:800 20px/1.2 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.025em}.section-head p{margin:4px 0 0;color:var(--muted);font-size:13px}.section-count{color:var(--muted);font-size:12px;font-weight:700;white-space:nowrap}.route-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}.route{background:#fff;border-radius:18px;padding:17px;box-shadow:0 7px 24px rgba(16,41,75,.045);display:flex;flex-direction:column;min-height:164px}.route-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.route-icon{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;background:var(--blue-soft);color:var(--navy);flex:0 0 auto}.badge{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:5px 7px;border-radius:999px;background:var(--paper);color:#6b7c8d;white-space:nowrap}.badge.dev{background:var(--teal-soft);color:var(--teal)}.badge.public{background:var(--blue-soft);color:#42658d}.badge.source{background:var(--amber-soft);color:#8c651b}.badge.system{background:var(--violet-soft);color:#6452a7}.route h3{margin:12px 0 4px;font:800 15px/1.25 "Plus Jakarta Sans",Arial,sans-serif;color:var(--navy);letter-spacing:-.015em}.route p{margin:0 0 12px;color:var(--muted);font-size:12.5px;line-height:1.45;flex:1}.path{font:600 10.5px/1.35 ui-monospace,SFMono-Regular,Consolas,monospace;color:#7c8b99;word-break:break-all;margin-bottom:12px}.route-actions{display:flex;align-items:center;gap:8px;margin-top:auto}.open{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--teal);font-size:12px;font-weight:800}.copy{margin-left:auto;border:0;background:transparent;color:#8796a4;cursor:pointer;padding:5px;font-size:12px}.empty{display:none;background:#fff;border-radius:20px;padding:34px;text-align:center;color:var(--muted)}.footnote{margin-top:30px;padding:18px 20px;background:#fff;border-radius:18px;color:var(--muted);font-size:12.5px;line-height:1.55;box-shadow:0 7px 24px rgba(16,41,75,.04)}.footnote strong{color:var(--navy)}.footnote code{font-size:11px}@media(max-width:1050px){.hero{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(2,1fr)}.route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.dev-shell{padding:20px 14px 50px}.dev-topbar{align-items:flex-start}.brand-copy span{display:none}.top-link span{display:none}.hero-main{padding:24px 20px}.hero-side{padding:20px}.domain-grid{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.metric{padding:15px}.metric-value{font-size:24px}.search-row{grid-template-columns:1fr}.view-button{display:none}.route-grid{grid-template-columns:1fr}.controls{top:0}.section-head{align-items:flex-start}.section-count{padding-top:3px}}
   </style>
 </head>
 <body>
   <main class="dev-shell">
     <header class="dev-topbar">
-      <a class="brand" href="/property/developer/" aria-label="Watchdog Developer home">
-        <span class="brand-mark"><i class="fas fa-code"></i></span>
-        <span class="brand-copy"><strong>Watchdog Developer</strong><span>Platform command center</span></span>
+      <a class="brand" href="/developer" aria-label="Watchdog Developer home">
+        <span class="brand-mark"><i class="fas fa-dog"></i></span>
+        <span class="brand-copy"><strong>Watchdog</strong><span>Developer · Command Center</span></span>
       </a>
       <nav class="top-actions" aria-label="Developer shortcuts">
-        <a class="top-link" href="/property/logs/recap/"><i class="fas fa-calendar-check"></i><span>Daily recaps</span></a>
-        <a class="top-link" href="/property/analytics/"><i class="fas fa-chart-line"></i><span>Analytics</span></a>
-        <a class="top-link" href="/property/dashboard/"><i class="fas fa-arrow-up-right-from-square"></i><span>Dashboard</span></a>
+        <a class="top-link" href="/logs/recap"><i class="fas fa-calendar-check"></i><span>Daily recaps</span></a>
+        <a class="top-link" href="/analytics"><i class="fas fa-chart-line"></i><span>Analytics</span></a>
+        <a class="top-link" href="/dashboard"><i class="fas fa-arrow-up-right-from-square"></i><span>Dashboard</span></a>
       </nav>
     </header>
 
     <section class="hero">
       <div class="hero-main">
-        <div class="kicker"><i class="fas fa-shield-halved"></i> Developer only · complete platform map</div>
-        <h1>Everything Watchdog, from one page.</h1>
-        <p>This is the internal sitemap for the Watchdog brand and platform: product surfaces, Intelligence operations, data tooling, analytics, integrations, whitepapers, Trust Center, security and compliance, branding, logs, recaps, QA, and the public SEO surface.</p>
+        <div class="kicker"><i class="fas fa-shield-halved"></i> Developer only · Watchdog platform map</div>
+        <h1>Watchdog Developer Command Center.</h1>
+        <p>One governed map for the Watchdog platform: current product surfaces, Watchdog Intelligence, the Watchdog Score and ROBUST Framework, analytics, integrations, whitepapers, Trust Center, compliance, branding, logs, recaps, launch routing and the canonical public SEO surface on <strong>www.watchdogindex.com</strong>.</p>
       </div>
       <aside class="hero-side">
-        <div>
-          <span class="status-pill"><i class="fas fa-circle-check"></i> Developer role verified</span>
-          <h2>Navigation, not a security shortcut.</h2>
-          <p>Each destination keeps its own authorization boundary. This page is the unified map for approved developer accounts.</p>
+        <span class="status-pill"><i class="fas fa-circle-check"></i> Developer role verified</span>
+        <div><h2>Domain transfer reflected.</h2><p><strong>Watchdog</strong> remains the master brand. WatchdogIndex.com is the production domain, not a rename to “Watchdog Index.” Clean root URLs are public; <code>/property/</code> remains the repository implementation namespace.</p></div>
+        <div class="domain-grid">
+          <div class="domain-fact"><small>Canonical host</small><b>www.watchdogindex.com</b></div>
+          <div class="domain-fact"><small>Public URL model</small><b>Clean root-level routes</b></div>
+          <div class="domain-fact"><small>Master brand</small><b>Watchdog</b></div>
+          <div class="domain-fact"><small>Legacy coexistence</small><b>NJPropertyTaxRelief.com stays separate</b></div>
         </div>
         <div class="mini-links">
-          <a href="/property/trust/"><i class="fas fa-shield-heart"></i> Trust Center</a>
-          <a href="/property/whitepapers/"><i class="fas fa-file-lines"></i> Whitepapers</a>
-          <a href="/property/logs/"><i class="fas fa-clock-rotate-left"></i> Build Logs</a>
-          <a href="/property/developer-data/"><i class="fas fa-database"></i> Developer Data</a>
+          <a href="/trust"><i class="fas fa-shield-heart"></i> Trust Center</a>
+          <a href="/whitepapers"><i class="fas fa-file-lines"></i> Whitepapers</a>
+          <a href="/logs"><i class="fas fa-clock-rotate-left"></i> Build Logs</a>
+          <a href="/developer-data"><i class="fas fa-database"></i> Developer Data</a>
         </div>
       </aside>
     </section>
@@ -114,13 +56,13 @@
     <section class="metrics" aria-label="Sitemap summary">
       <div class="metric"><div class="metric-label">Visible links</div><div class="metric-value" id="metric-visible">—</div><div class="metric-note">Current filtered inventory</div></div>
       <div class="metric"><div class="metric-label">Internal routes</div><div class="metric-value" id="metric-internal">—</div><div class="metric-note">Curated Watchdog operations</div></div>
-      <div class="metric"><div class="metric-label">Public sitemap</div><div class="metric-value" id="metric-public">—</div><div class="metric-note" id="public-note">Loading sitemap.xml…</div></div>
+      <div class="metric"><div class="metric-label">Public sitemap</div><div class="metric-value" id="metric-public">—</div><div class="metric-note" id="public-note">Loading Watchdog sitemap…</div></div>
       <div class="metric"><div class="metric-label">Categories</div><div class="metric-value" id="metric-categories">—</div><div class="metric-note">Searchable workstreams</div></div>
     </section>
 
     <section class="controls" aria-label="Sitemap controls">
       <div class="search-row">
-        <label class="search-box" aria-label="Search developer sitemap"><i class="fas fa-magnifying-glass"></i><input id="search" type="search" autocomplete="off" placeholder="Search pages, paths, whitepapers, logs, Intelligence, trust…"></label>
+        <label class="search-box" aria-label="Search developer sitemap"><i class="fas fa-magnifying-glass"></i><input id="search" type="search" autocomplete="off" placeholder="Search pages, clean routes, ROBUST, Intelligence, logs, domain, trust…"></label>
         <button class="view-button" id="clear" type="button"><i class="fas fa-rotate-left"></i>&nbsp; Reset view</button>
       </div>
       <div class="filters" id="filters" aria-label="Sitemap categories"></div>
@@ -129,7 +71,7 @@
     <div id="sections"></div>
     <div class="empty" id="empty"><i class="fas fa-magnifying-glass"></i><br><br>No matching Watchdog pages.</div>
 
-    <footer class="footnote"><strong>Coverage model:</strong> internal developer/admin/documentation destinations are curated below because they are intentionally excluded from public SEO indexing. Public customer and SEO routes are merged in live from <code>/property/sitemap.xml</code>. If the XML sitemap cannot load, the internal command center remains available and the public count is marked unavailable.</footer>
+    <footer class="footnote"><strong>Coverage model:</strong> developer/admin/documentation destinations are curated because they are intentionally excluded from public indexing. Public routes are merged live from the host-specific <code>https://www.watchdogindex.com/sitemap.xml</code>. The NJPropertyTaxRelief.com sitemaps remain separate by design. Repository source files can still live under <code>/property/</code>; customer-facing Watchdog URLs use the clean root namespace.</footer>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -141,37 +83,55 @@
     var GH='https://github.com/johnscafide/njtaxrelief/blob/main/';
     var categories={
       'Developer Core':{icon:'fa-code',description:'Privileged command, data, operations and workspace surfaces.'},
-      'Analytics & Growth':{icon:'fa-chart-line',description:'Product analytics, growth, marketing operations and editorial administration.'},
+      'Domain, Brand & Launch':{icon:'fa-earth-americas',description:'Canonical host, clean-route architecture, launch governance, robots and sitemap controls.'},
+      'Analytics & Growth':{icon:'fa-chart-line',description:'Product analytics, growth, Broadcasts, newsletters, marketing operations and editorial administration.'},
       'Trust, Security & Compliance':{icon:'fa-shield-halved',description:'Trust Center, security controls, privacy, risk and compliance evidence.'},
-      'Whitepapers & Research':{icon:'fa-file-lines',description:'Published internal research, strategic whitepapers and source material.'},
-      'Watchdog Intelligence':{icon:'fa-wand-magic-sparkles',description:'Intelligence operations, learning, calibration, daily reviews and team tooling.'},
-      'Integrations':{icon:'fa-plug',description:'CRM/Zapier integration surfaces, contracts and publishing guidance.'},
-      'Logs & Recaps':{icon:'fa-clock-rotate-left',description:'Build history, daily business recaps, mobile audits and Data Center audit trails.'},
-      'Brand & Creative':{icon:'fa-pen-ruler',description:'Brand standards, creative operations and design system references.'},
+      'Score, ROBUST & Methodology':{icon:'fa-gauge-high',description:'Watchdog Score product, ROBUST Framework dimensions and governed methodology.'},
+      'Whitepapers & Research':{icon:'fa-file-lines',description:'Internal research, strategic whitepapers and canonical source material.'},
+      'Watchdog Intelligence':{icon:'fa-wand-magic-sparkles',description:'Watchdog Intelligence operations, Voice, learning, calibration and daily review tooling.'},
+      'Integrations':{icon:'fa-plug',description:'CRM, Kit, BoldTrail, Zapier and provider integration surfaces and contracts.'},
+      'Logs & Recaps':{icon:'fa-clock-rotate-left',description:'Build history, daily operating recaps, mobile audits and Data Center audit trails.'},
+      'Brand & Creative':{icon:'fa-pen-ruler',description:'Brand standards, creative operations and design-system references.'},
       'QA, Runbooks & Engineering':{icon:'fa-flask',description:'Engineering runbooks, release verification, incident handling and technical doctrine.'},
-      'Product & Customer Surfaces':{icon:'fa-window-maximize',description:'Primary app surfaces developers routinely inspect and certify.'},
-      'Public / SEO Sitemap':{icon:'fa-globe',description:'Every route currently advertised through the public property sitemap.xml.'}
+      'Product & Customer Surfaces':{icon:'fa-window-maximize',description:'Primary Watchdog app surfaces developers routinely inspect and certify.'},
+      'Public / SEO Sitemap':{icon:'fa-globe',description:'Canonical public Watchdog routes advertised by www.watchdogindex.com/sitemap.xml.'}
     };
     function route(category,title,path,description,kind,external){return{category:category,title:title,path:path,description:description||'',kind:kind||'developer',external:!!external};}
     var routes=[
-      route('Developer Core','Developer Command Center','/property/developer/','This complete developer-only Watchdog sitemap and launchpad.'),
-      route('Developer Core','Developer Data','/property/developer-data/','Developer-only marker, data and internal platform visibility.'),
-      route('Developer Core','Backoffice','/property/backoffice/','Secured backoffice operations and recovery tooling.'),
-      route('Developer Core','Data Center','/property/data-center/','Watchdog data marker workspace and source coverage operations.'),
-      route('Developer Core','Workbench','/property/workbench/','Internal workbench for governed property and platform workflows.'),
-      route('Developer Core','Report Builder','/property/report-builder/','Report construction and internal report workflow surface.'),
-      route('Developer Core','Farm Builder','/property/farm-builder/','Professional farm-building workflow and data surface.'),
-      route('Developer Core','Agent Desk','/property/agent-desk/','Professional agent workspace used for product verification.'),
+      route('Developer Core','Developer Command Center','/developer','This developer-only Watchdog sitemap and launchpad.'),
+      route('Developer Core','Developer Data','/developer-data','Developer marker, data and platform visibility.'),
+      route('Developer Core','Backoffice','/backoffice','Secured backoffice operations and recovery tooling.'),
+      route('Developer Core','Data Center','/data-center','Watchdog data marker workspace and source-coverage operations.'),
+      route('Developer Core','Data Workbench','/data-workbench','Governed data workbench and provider inspection surface.'),
+      route('Developer Core','Workbench','/workbench','Internal governed property and platform workflow surface.'),
+      route('Developer Core','Report Builder','/report-builder','Report construction and internal report workflow surface.'),
+      route('Developer Core','Farm Builder','/farm-builder','Professional farm-building workflow and data surface.'),
+      route('Developer Core','Agent Desk','/agent-desk','Professional agent workspace used for product verification.'),
+      route('Developer Core','Agent Control','/agent-control','Agent-oriented control and workflow surface.'),
 
-      route('Analytics & Growth','Product Analytics','/property/analytics/','Privacy-minimized activation, Intelligence, acquisition and retention analytics.'),
-      route('Analytics & Growth','Growth Center','/property/growth/','Growth operations command surface.'),
-      route('Analytics & Growth','Growth Run','/property/growth/run.html','Execute or inspect a growth run.'),
-      route('Analytics & Growth','Growth Results','/property/growth/results.html','Review growth run output and results.'),
-      route('Analytics & Growth','Marketing Plan','/property/marketing-plan/','Watchdog marketing planning and execution surface.'),
-      route('Analytics & Growth','Marketing Studio Admin','/property/marketing-studio/admin/','Developer/admin controls for Watchdog Designs / Marketing Studio.'),
-      route('Analytics & Growth','Insights Admin','/property/insights/admin.html','Editorial administration for Watchdog Insights.'),
+      route('Domain, Brand & Launch','Canonical Watchdog Site','https://www.watchdogindex.com/','Canonical production host for the Watchdog platform.','public',true),
+      route('Domain, Brand & Launch','Watchdog Sitemap','/sitemap.xml','Host-specific canonical Watchdog sitemap using clean root URLs.','system'),
+      route('Domain, Brand & Launch','Watchdog robots.txt','/robots.txt','Host-specific crawler contract pointing at the Watchdog sitemap.','system'),
+      route('Domain, Brand & Launch','Primary Domain Launch Decision',GH+'property/docs/watchdog-domain-launch-decision.md','Accepted domain, coexistence and launch evidence.','source',true),
+      route('Domain, Brand & Launch','Domain Cutover Runbook',GH+'property/docs/watchdog-domain-cutover-runbook.md','Canonical migration, verification and rollback runbook.','source',true),
+      route('Domain, Brand & Launch','Brand Architecture',GH+'property/docs/watchdog-brand-architecture.md','Master-brand and product naming hierarchy.','source',true),
+      route('Domain, Brand & Launch','Repository Agent Rules',GH+'AGENTS.md','Persistent Watchdog domain, branding, concurrency and operating rules.','source',true),
+      route('Domain, Brand & Launch','Clean Route Adapter',GH+'api/watchdog-index-page.js','Host-aware root route and canonical metadata adapter.','source',true),
+      route('Domain, Brand & Launch','Routing Middleware',GH+'middleware.js','WatchdogIndex host routing and system-file interception.','source',true),
+      route('Domain, Brand & Launch','Sitemap Endpoint Source',GH+'api/watchdog-index-sitemap.js','Host-specific public sitemap implementation.','source',true),
 
-      route('Trust, Security & Compliance','Trust Center','/property/trust/','Watchdog Trust Center and public-facing assurance surface.'),
+      route('Analytics & Growth','Product Analytics','/analytics','Privacy-minimized activation, Watchdog Intelligence, acquisition and retention analytics.'),
+      route('Analytics & Growth','Growth Center','/growth','Growth operations command surface.'),
+      route('Analytics & Growth','Growth Run','/growth/run','Execute or inspect a growth run.'),
+      route('Analytics & Growth','Growth Results','/growth/results','Review growth run output and results.'),
+      route('Analytics & Growth','Marketing Plan','/marketing-plan','Watchdog marketing planning and execution surface.'),
+      route('Analytics & Growth','Marketing Studio Admin','/marketing-studio/admin','Developer/admin controls for Watchdog Marketing Studio.'),
+      route('Analytics & Growth','Marketing Studio Review','/marketing-studio/review','Review and preflight surface for Marketing Studio output.'),
+      route('Analytics & Growth','Newsletter Studio','/newsletter-studio','New user-scoped newsletter workflow and provider-aware production surface.'),
+      route('Analytics & Growth','Insights Admin','/insights/admin','Editorial administration for Watchdog Insights.'),
+      route('Analytics & Growth','Marketing Studio Kit Architecture',GH+'docs/marketing-studio-email-kit.md','Kit newsletter integration architecture and operating notes.','source',true),
+
+      route('Trust, Security & Compliance','Trust Center','/trust','Watchdog Trust Center and public assurance surface.','public'),
       route('Trust, Security & Compliance','Compliance Control Register',GH+'property/docs/compliance/CONTROL-REGISTER.md','Control inventory and evidence register.','source',true),
       route('Trust, Security & Compliance','Risk Register',GH+'property/docs/compliance/RISK-REGISTER.md','Current compliance and operational risk register.','source',true),
       route('Trust, Security & Compliance','Compliance Program README',GH+'property/docs/compliance/README.md','Index and operating guidance for compliance evidence.','source',true),
@@ -180,69 +140,95 @@
       route('Trust, Security & Compliance','PCI Scope Memo',GH+'property/docs/compliance/PCI-SCOPE-MEMO.md','Payment-card scope and Stripe boundary documentation.','source',true),
       route('Trust, Security & Compliance','Connector Register',GH+'property/docs/compliance/CONNECTOR-REGISTER.md','Connector inventory and governance reference.','source',true),
       route('Trust, Security & Compliance','Personal Data Inventory',GH+'property/docs/compliance/PERSONAL-DATA-INVENTORY-2026-08-20.md','Current personal-data inventory and boundaries.','source',true),
+      route('Trust, Security & Compliance','Privileged Access Baseline',GH+'property/docs/compliance/PRIVILEGED-ACCESS-BASELINE-2026-08-22.md','Current privileged-access baseline and review evidence.','source',true),
+      route('Trust, Security & Compliance','Service Role Privilege Inventory',GH+'property/docs/compliance/SERVICE-ROLE-PRIVILEGE-INVENTORY-2026-08-22.md','Service-role privilege inventory and governance evidence.','source',true),
       route('Trust, Security & Compliance','Access Boundary Audit',GH+'property/docs/access-boundary-audit.md','Audit of customer, professional and developer access boundaries.','source',true),
-      route('Trust, Security & Compliance','ASVS Auth / Session / AuthZ Tranche',GH+'property/docs/compliance/ASVS-AUTH-SESSION-AUTHZ-TRANCHE-2026-08-19.md','Authentication, session and authorization verification evidence.','source',true),
 
-      route('Whitepapers & Research','Whitepaper Library','/property/whitepapers/','Developer-only index of Watchdog whitepapers and strategic research.'),
-      route('Whitepapers & Research','Zapier × Watchdog Intelligence','/property/whitepapers/zapier-watchdog-intelligence/','Integration manual and whitepaper for the Zapier / Watchdog Intelligence future state.'),
-      route('Whitepapers & Research','Zapier Whitepaper Source',GH+'property/docs/whitepapers/WATCHDOG-ZAPIER-INTELLIGENCE-WHITEPAPER.md','Canonical markdown source for the Zapier whitepaper.','source',true),
-      route('Whitepapers & Research','Whitepapers Source Index',GH+'property/docs/whitepapers/README.md','Repository index for whitepaper source material.','source',true),
+      route('Score, ROBUST & Methodology','ROBUST Framework','/robust','Public explanation of the Watchdog Score’s six governed dimensions.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Recourse','/robust/recourse','Recourse dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Overassessment Position','/robust/overassessment-position','Overassessment Position dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Burden','/robust/burden','Burden dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Uniformity','/robust/uniformity','Uniformity dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Stability','/robust/stability','Stability dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST · Trajectory','/robust/trajectory','Trajectory dimension explanation.','public'),
+      route('Score, ROBUST & Methodology','ROBUST Calibration Evidence',GH+'property/docs/ROBUST-V1-CALIBRATION-2026-08-22.md','Calibration methodology and August 22 evidence package.','source',true),
+      route('Score, ROBUST & Methodology','ROBUST Brand Contract',GH+'property/branding/robust-framework.json','Canonical ROBUST naming and presentation contract.','source',true),
 
-      route('Watchdog Intelligence','Intelligence','/property/intelligence/','Watchdog Intelligence overview and operations surface.'),
-      route('Watchdog Intelligence','Intelligence Team','/property/intelligence/team/','Team-level Intelligence review and collaboration.'),
-      route('Watchdog Intelligence','Intelligence Daily','/property/intelligence/daily/','Daily Intelligence operating review.'),
-      route('Watchdog Intelligence','Learning','/property/intelligence/learning/','Developer-only learning and model-repair operations.'),
-      route('Watchdog Intelligence','Calibration','/property/intelligence/calibration/','Developer-only calibration workspace.'),
-      route('Watchdog Intelligence','Calibration Review','/property/intelligence/calibration-review/','Human review and governance for calibration decisions.'),
-      route('Watchdog Intelligence','Intelligence Density Doctrine',GH+'property/intelligence/INTELLIGENCE-DENSITY-DOCTRINE.md','Product doctrine governing Intelligence density and presentation.','source',true),
-      route('Watchdog Intelligence','Phase 6 Runbook',GH+'property/intelligence/PHASE6-RUNBOOK.md','Operational runbook for Intelligence Phase 6.','source',true),
+      route('Whitepapers & Research','Whitepaper Library','/whitepapers','Developer-only index of Watchdog whitepapers and strategic research.'),
+      route('Whitepapers & Research','Watchdog Score + ROBUST Whitepaper','/whitepapers/watchdog-score','New foundational developer whitepaper for the Score, ROBUST and governed marker system.'),
+      route('Whitepapers & Research','Watchdog Intelligence Voice Whitepaper','/whitepapers/watchdog-intelligence-voice','New developer whitepaper for Voice strategy, architecture and governance.'),
+      route('Whitepapers & Research','Zapier × Watchdog Intelligence','/whitepapers/zapier-watchdog-intelligence','Integration manual and whitepaper for Zapier and Watchdog Intelligence.'),
+      route('Whitepapers & Research','Watchdog Score Whitepaper Source',GH+'property/docs/whitepapers/WATCHDOG-SCORE-MARKERS-WHITEPAPER.md','Canonical Watchdog Score and marker whitepaper source.','source',true),
+      route('Whitepapers & Research','Voice Whitepaper Source',GH+'property/docs/whitepapers/WATCHDOG-INTELLIGENCE-VOICE-WHITEPAPER.md','Canonical Watchdog Intelligence Voice whitepaper source.','source',true),
+      route('Whitepapers & Research','Zapier Whitepaper Source',GH+'property/docs/whitepapers/WATCHDOG-ZAPIER-INTELLIGENCE-WHITEPAPER.md','Canonical Zapier whitepaper source.','source',true),
+      route('Whitepapers & Research','Whitepapers Source Index',GH+'property/docs/whitepapers/README.md','Repository index for current whitepaper source material.','source',true),
 
-      route('Integrations','Integrations Center','/property/integrations/','Watchdog integration management and user-facing integration surface.'),
-      route('Integrations','Zapier Integration','/property/integrations/zapier/','Zapier connection and integration experience.'),
+      route('Watchdog Intelligence','Watchdog Intelligence','/intelligence','Watchdog Intelligence overview and operations surface.'),
+      route('Watchdog Intelligence','Intelligence Team','/intelligence/team','Team-level Watchdog Intelligence review and collaboration.'),
+      route('Watchdog Intelligence','Intelligence Daily','/intelligence/daily','Daily Watchdog Intelligence operating review.'),
+      route('Watchdog Intelligence','Learning','/intelligence/learning','Developer-only learning and model-repair operations.'),
+      route('Watchdog Intelligence','Calibration','/intelligence/calibration','Developer-only calibration workspace.'),
+      route('Watchdog Intelligence','Calibration Review','/intelligence/calibration-review','Human review and governance for calibration decisions.'),
+      route('Watchdog Intelligence','Watchdog Intelligence Voice API',GH+'api/watchdog-intelligence-voice.js','Voice API entrypoint.','source',true),
+      route('Watchdog Intelligence','Voice Core',GH+'api/watchdog-intelligence-voice-core.js','Voice core runtime and governance implementation.','source',true),
+      route('Watchdog Intelligence','Intelligence Density Doctrine',GH+'property/intelligence/INTELLIGENCE-DENSITY-DOCTRINE.md','Product doctrine governing Watchdog Intelligence density and presentation.','source',true),
+      route('Watchdog Intelligence','Phase 6 Runbook',GH+'property/intelligence/PHASE6-RUNBOOK.md','Operational runbook for Watchdog Intelligence Phase 6.','source',true),
+
+      route('Integrations','Integrations Center','/integrations','Watchdog integration management and user-facing integration surface.'),
+      route('Integrations','Zapier Integration','/integrations/zapier','Zapier connection and integration experience.'),
       route('Integrations','Zapier Connector README',GH+'integrations/zapier/README.md','Connector implementation and development guidance.','source',true),
       route('Integrations','Zapier Publishing Checklist',GH+'integrations/zapier/PUBLISHING-CHECKLIST.md','Publishing and verification checklist for the Zapier connector.','source',true),
       route('Integrations','Integrations Phase 1',GH+'property/docs/integrations-phase1.md','Architecture and implementation notes for the integration foundation.','source',true),
 
-      route('Logs & Recaps','Build Logs','/property/logs/','Developer-only implementation and verification history.'),
-      route('Logs & Recaps','Daily Recaps','/property/logs/recap/','Daily Watchdog work recap and next-day TODO index.'),
-      route('Logs & Recaps','August 20 Recap','/property/logs/recap/2026-08-20/','Daily Watchdog recap for August 20, 2026.'),
-      route('Logs & Recaps','August 19 Recap','/property/logs/recap/2026-08-19/','Daily Watchdog recap for August 19, 2026.'),
-      route('Logs & Recaps','August 18 Recap','/property/logs/recap/2026-08-18/','Daily Watchdog recap for August 18, 2026.'),
-      route('Logs & Recaps','August 19 Build Log','/property/logs/2026-08-19/','Permanent hourly improvement loop and implementation history.'),
-      route('Logs & Recaps','August 18 Build Log','/property/logs/2026-08-18/','Intelligence improvement sprint and launch-hardening history.'),
-      route('Logs & Recaps','Mobile Audit Logs','/property/logs/mobile-audit/','Continuous mobile responsiveness audit and certification history.'),
-      route('Logs & Recaps','Data Center Logs','/property/logs/data-center/','Data Center source, marker and certification logs.'),
+      route('Logs & Recaps','Build Logs','/logs','Developer implementation and verification history.'),
+      route('Logs & Recaps','Daily Recaps','/logs/recap','Daily Watchdog operating recap and ranked TODO archive.'),
+      route('Logs & Recaps','August 21 Recap','/logs/recap/2026-08-21','Daily Watchdog recap for August 21, 2026.'),
+      route('Logs & Recaps','August 20 Recap','/logs/recap/2026-08-20','Daily Watchdog recap for August 20, 2026.'),
+      route('Logs & Recaps','August 19 Recap','/logs/recap/2026-08-19','Daily Watchdog recap for August 19, 2026.'),
+      route('Logs & Recaps','August 18 Recap','/logs/recap/2026-08-18','Daily Watchdog recap for August 18, 2026.'),
+      route('Logs & Recaps','August 19 Build Log','/logs/2026-08-19','Permanent implementation history for August 19.'),
+      route('Logs & Recaps','August 18 Build Log','/logs/2026-08-18','Watchdog Intelligence improvement and launch-hardening history.'),
+      route('Logs & Recaps','Mobile Audit Logs','/logs/mobile-audit','Continuous mobile responsiveness audit and certification history.'),
+      route('Logs & Recaps','Data Center Logs','/logs/data-center','Data Center source, marker and certification logs.'),
 
-      route('Brand & Creative','Brand Center','/property/branding/','Developer-only source of truth for visual identity, typography, color and spacing.'),
+      route('Brand & Creative','Brand Center','/branding','Developer source of truth for visual identity, typography, color and spacing.'),
       route('Brand & Creative','LLM Brand Guide',GH+'property/branding/LLM-BRAND-GUIDE.md','Brand instructions designed for developers, designers and AI systems.','source',true),
       route('Brand & Creative','Brand Center README',GH+'property/branding/README.md','Brand Center operating guide and file map.','source',true),
       route('Brand & Creative','Marketing Studio Provider Adapters',GH+'docs/marketing-studio-provider-adapters.md','Provider adapter architecture for creative operations.','source',true),
 
       route('QA, Runbooks & Engineering','Incident Response Runbook',GH+'property/docs/incident-response-runbook.md','Response procedure for production incidents.','source',true),
+      route('QA, Runbooks & Engineering','Stripe Live Acceptance Runbook',GH+'property/docs/stripe-live-acceptance-runbook.md','Controlled live-billing acceptance and evidence procedure.','source',true),
+      route('QA, Runbooks & Engineering','Billing Launch Status',GH+'property/docs/billing-launch-status.md','Current billing gate and launch status.','source',true),
       route('QA, Runbooks & Engineering','Product Analytics Engineering Notes',GH+'docs/analytics/NJW-88-product-analytics.md','Implementation and privacy contract for product analytics.','source',true),
       route('QA, Runbooks & Engineering','Release Verification Script',GH+'verify-release.mjs','Repository release verification entry point.','source',true),
 
-      route('Product & Customer Surfaces','Watchdog Home','/property/','Primary public Watchdog entry point.','public'),
-      route('Product & Customer Surfaces','Dashboard','/property/dashboard/','Core signed-in Watchdog dashboard.','public'),
-      route('Product & Customer Surfaces','Property Home','/property/home/','Individual property intelligence workspace.','public'),
-      route('Product & Customer Surfaces','Account','/property/account/','Authentication, profile and account management surface.','public'),
-      route('Product & Customer Surfaces','Compare','/property/compare/','Property comparison workflow.','public')
+      route('Product & Customer Surfaces','Watchdog Home','/','Primary public Watchdog entry point.','public'),
+      route('Product & Customer Surfaces','Dashboard','/dashboard','Core signed-in Watchdog dashboard.'),
+      route('Product & Customer Surfaces','Property Home','/home','Individual property intelligence workspace.'),
+      route('Product & Customer Surfaces','Account','/account','Authentication, profile, integrations and self-service account management surface.'),
+      route('Product & Customer Surfaces','Compare','/compare','Property comparison workflow.'),
+      route('Product & Customer Surfaces','Pricing / Pro','/pro','Watchdog plans and paid feature packaging.','public'),
+      route('Product & Customer Surfaces','Professionals','/professionals','Professional entry and resource surface.','public'),
+      route('Product & Customer Surfaces','Real Estate Agents','/real-estate-agents','Real-estate professional resource surface.','public'),
+      route('Product & Customer Surfaces','Home Inspectors','/home-inspectors','Home-inspector professional resource surface.','public'),
+      route('Product & Customer Surfaces','Fairness','/fairness','Public assessment-uniformity and fairness surface.','public'),
+      route('Product & Customer Surfaces','Town Compare','/town-compare','Public municipality comparison surface.','public'),
+      route('Product & Customer Surfaces','Insights','/insights','Watchdog editorial and research publication surface.','public')
     ];
 
     var state={query:'',category:'All'};
     var sectionsEl=document.getElementById('sections'),filtersEl=document.getElementById('filters'),searchEl=document.getElementById('search'),emptyEl=document.getElementById('empty');
     function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-    function labelFor(kind){return kind==='source'?'Source':kind==='public'?'Public':'Developer';}
-    function badgeFor(kind){return kind==='source'?'source':kind==='public'?'public':'dev';}
+    function labelFor(kind){return kind==='source'?'Source':kind==='public'?'Public':kind==='system'?'System':'Developer';}
+    function badgeFor(kind){return kind==='source'?'source':kind==='public'?'public':kind==='system'?'system':'dev';}
     function searchable(r){return [r.category,r.title,r.path,r.description,r.kind].join(' ').toLowerCase();}
     function visibleRoutes(){var q=state.query.trim().toLowerCase();return routes.filter(function(r){return(state.category==='All'||r.category===state.category)&&(!q||searchable(r).indexOf(q)!==-1);});}
     function renderFilters(){var ordered=['All'].concat(Object.keys(categories));filtersEl.innerHTML=ordered.map(function(c){var count=c==='All'?routes.length:routes.filter(function(r){return r.category===c;}).length;return '<button type="button" class="filter'+(state.category===c?' active':'')+'" data-category="'+esc(c)+'">'+esc(c)+' · '+count+'</button>';}).join('');filtersEl.querySelectorAll('.filter').forEach(function(btn){btn.addEventListener('click',function(){state.category=btn.dataset.category;render();});});}
     function render(){var visible=visibleRoutes(),grouped={};visible.forEach(function(r){(grouped[r.category]||(grouped[r.category]=[])).push(r);});var html='';Object.keys(categories).forEach(function(name){var list=grouped[name]||[];if(!list.length)return;var meta=categories[name];html+='<section class="section"><header class="section-head"><div><h2><i class="fas '+esc(meta.icon)+'"></i> '+esc(name)+'</h2><p>'+esc(meta.description)+'</p></div><span class="section-count">'+list.length+' link'+(list.length===1?'':'s')+'</span></header><div class="route-grid">';list.forEach(function(r){var target=r.external?' target="_blank" rel="noopener noreferrer"':'';html+='<article class="route"><div class="route-top"><span class="route-icon"><i class="fas '+esc(meta.icon)+'"></i></span><span class="badge '+badgeFor(r.kind)+'">'+labelFor(r.kind)+'</span></div><h3>'+esc(r.title)+'</h3><p>'+esc(r.description)+'</p><div class="path">'+esc(r.path)+'</div><div class="route-actions"><a class="open" href="'+esc(r.path)+'"'+target+'>Open <i class="fas fa-arrow-up-right-from-square"></i></a><button class="copy" type="button" data-copy="'+esc(r.path)+'" title="Copy path"><i class="far fa-copy"></i></button></div></article>';});html+='</div></section>';});sectionsEl.innerHTML=html;emptyEl.style.display=visible.length?'none':'block';document.getElementById('metric-visible').textContent=visible.length.toLocaleString();document.querySelectorAll('[data-copy]').forEach(function(btn){btn.addEventListener('click',function(){var value=btn.getAttribute('data-copy');navigator.clipboard&&navigator.clipboard.writeText(value).then(function(){var icon=btn.querySelector('i');icon.className='fas fa-check';setTimeout(function(){icon.className='far fa-copy';},1000);});});});renderFilters();}
-    async function importPublicSitemap(){var note=document.getElementById('public-note');try{var res=await fetch('/property/sitemap.xml',{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);var text=await res.text(),xml=new DOMParser().parseFromString(text,'application/xml'),locs=Array.from(xml.querySelectorAll('loc')).map(function(n){return(n.textContent||'').trim();}).filter(Boolean),known=new Set(routes.map(function(r){return r.path;})),added=0;locs.forEach(function(loc){try{var u=new URL(loc,location.origin),path=u.pathname+(u.search||'');if(!path.startsWith('/property'))return;if(known.has(path)||known.has(path.replace(/index\.html$/,'')))return;var bits=u.pathname.replace(/^\/property\/?/,'').replace(/\/$/,'').split('/').filter(Boolean),title=bits.length?bits.map(function(v){return v.replace(/[-_]+/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});}).join(' · '):'Watchdog Home';routes.push(route('Public / SEO Sitemap',title,path,'Public route imported from property/sitemap.xml.','public'));known.add(path);added++;}catch(_error){}});document.getElementById('metric-public').textContent=locs.length.toLocaleString();note.textContent=added+' additional public routes merged';render();}catch(error){document.getElementById('metric-public').textContent='—';note.textContent='Public sitemap unavailable';render();}}
+    function cleanPath(path){var p=String(path||'/').replace(/\/index\.html$/i,'').replace(/\.html$/i,'');if(p.length>1)p=p.replace(/\/+$/,'');return p||'/';}
+    async function importPublicSitemap(){var note=document.getElementById('public-note');try{var res=await fetch('/sitemap.xml',{cache:'no-store'});if(!res.ok)throw new Error('HTTP '+res.status);var text=await res.text(),xml=new DOMParser().parseFromString(text,'application/xml'),locs=Array.from(xml.querySelectorAll('loc')).map(function(n){return(n.textContent||'').trim();}).filter(Boolean),known=new Set(routes.map(function(r){return r.path;})),added=0;locs.forEach(function(loc){try{var u=new URL(loc,location.origin);if(u.hostname!=='www.watchdogindex.com'&&u.hostname!==location.hostname)return;var path=cleanPath(u.pathname);if(known.has(path))return;var bits=path.replace(/^\//,'').split('/').filter(Boolean),title=bits.length?bits.map(function(v){return decodeURIComponent(v).replace(/[-_]+/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase();});}).join(' · '):'Watchdog Home';routes.push(route('Public / SEO Sitemap',title,path,'Canonical public route imported from the Watchdog sitemap.','public'));known.add(path);added++;}catch(_error){}});document.getElementById('metric-public').textContent=locs.length.toLocaleString();note.textContent=added+' additional canonical routes merged';render();}catch(error){document.getElementById('metric-public').textContent='—';note.textContent='Watchdog sitemap unavailable';render();}}
     function updateStaticMetrics(){document.getElementById('metric-internal').textContent=routes.filter(function(r){return r.category!=='Public / SEO Sitemap'&&r.kind!=='public';}).length.toLocaleString();document.getElementById('metric-categories').textContent=Object.keys(categories).length.toLocaleString();}
-    searchEl.addEventListener('input',function(){state.query=searchEl.value;render();});
-    document.getElementById('clear').addEventListener('click',function(){state.query='';state.category='All';searchEl.value='';render();});
-    updateStaticMetrics();render();importPublicSitemap();
+    searchEl.addEventListener('input',function(){state.query=searchEl.value;render();});document.getElementById('clear').addEventListener('click',function(){state.query='';state.category='All';searchEl.value='';render();});updateStaticMetrics();render();importPublicSitemap();
   })();
   </script>
 </body>
