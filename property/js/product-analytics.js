@@ -4,13 +4,13 @@ var EVENTS=new Set([
  'page_view','tool_open','marker_viewed','property_lookup_started','property_lookup_succeeded','export_started','export_completed','upgrade_cta_clicked','checkout_started','subscription_confirmed',
  'intelligence_exposed','intelligence_reasoning_inspected','intelligence_action_started','intelligence_action_completed',
  'intent_question_shown','intent_question_answered','intent_question_skipped',
- 'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened','trust_evidence_opened'
+ 'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened','trust_evidence_opened','presence_heartbeat'
 ]);
-var OWN_HOSTS=new Set(['njpropertytaxrelief.com','www.njpropertytaxrelief.com','watchdogre.com','www.watchdogre.com']);
+var OWN_HOSTS=new Set(['njpropertytaxrelief.com','www.njpropertytaxrelief.com','watchdogre.com','www.watchdogre.com','watchdogindex.com','www.watchdogindex.com']);
 if(navigator.globalPrivacyControl===true||navigator.doNotTrack==='1')return;
 function uuid(){return (crypto&&crypto.randomUUID)?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=Math.random()*16|0,v=c==='x'?r:(r&3|8);return v.toString(16)});}
 function safeStore(store,key,make){try{var v=store.getItem(key);if(!v){v=make();store.setItem(key,v)}return v}catch(_){return make()}}
-var visitor=safeStore(localStorage,'wd_visitor_id',uuid),session=safeStore(sessionStorage,'wd_session_id',uuid),sentPage=false,seen=new Set(),accessToken='';
+var visitor=safeStore(localStorage,'wd_visitor_id',uuid),session=safeStore(sessionStorage,'wd_session_id',uuid),sentPage=false,seen=new Set(),accessToken='',heartbeatTimer=null;
 function clean(v,n){return String(v||'').trim().slice(0,n||120)}
 function pathOnly(v){try{var u=new URL(v,location.origin);return u.pathname.slice(0,240)}catch(_){return location.pathname.slice(0,240)}}
 function referrerInfo(){try{if(!document.referrer)return{host:'',url:''};var u=new URL(document.referrer),host=u.hostname.toLowerCase();if(!/^https?:$/.test(u.protocol)||OWN_HOSTS.has(host))return{host:'',url:''};return{host:host.slice(0,120),url:(u.origin+u.pathname).slice(0,500)}}catch(_){return{host:'',url:''}}}
@@ -32,9 +32,11 @@ function once(key,name,props){if(seen.has(key))return;seen.add(key);track(name,p
 function reasonBucket(node){var n=node?node.querySelectorAll('.wd-density-reasons li').length:0;return n<=0?'0':n===1?'1':n===2?'2':'3'}
 function scanIntelligence(root){root=root||document;var surface=surfaceFromPath();root.querySelectorAll&&root.querySelectorAll('.wdai-compact-summary').forEach(function(el){once('exposed:analyst:'+surface,'intelligence_exposed',{surface:surface,source:'analyst_brief',reason_count_bucket:reasonBucket(el)})});root.querySelectorAll&&root.querySelectorAll('.wdcx-item').forEach(function(){once('exposed:context:'+surface,'intelligence_exposed',{surface:surface,source:'context_suggestion'})});root.querySelectorAll&&root.querySelectorAll('.wd-intent-context.is-question').forEach(function(){once('intent-question:'+surface,'intent_question_shown',{surface:surface,intent_status:'unconfirmed'})});root.querySelectorAll&&root.querySelectorAll('.wdi-today').forEach(function(){once('exposed:today:'+surface,'intelligence_exposed',{surface:surface,source:'today_inbox'})})}
 function actionCategory(el){var action=el.getAttribute&&el.getAttribute('data-today-action');if(action)return action==='reviewed'?'review_property':action;var href=(el.getAttribute&&el.getAttribute('href')||'').toLowerCase();if(href.includes('/property/home'))return'open_property';if(href.includes('/property/data-workbench'))return'open_workbench';if(href.includes('/property/trust'))return'open_trust';if(href.includes('/property/compare'))return'compare';if(/export|download/i.test(el.textContent||''))return'export';return'other'}
+function heartbeat(){if(document.visibilityState==='hidden')return;track('presence_heartbeat',{surface:surfaceFromPath(),tool:toolFromPath()})}
+function startHeartbeat(){heartbeat();clearInterval(heartbeatTimer);heartbeatTimer=setInterval(heartbeat,60000);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible')heartbeat()});}
 window.WatchdogAnalytics={track:track,visitorId:function(){return visitor},sessionId:function(){return session}};
 window.addEventListener('watchdog:analytics',function(e){var d=e.detail||{};track(d.event_name||d.name,d.properties||d)});
-function auto(){if(sentPage)return;sentPage=true;var t=toolFromPath(),surface=surfaceFromPath();track('page_view',{surface:surface});if(t&&t!=='pricing'&&t!=='other')track('tool_open',{tool:t,surface:surface});
+function auto(){if(sentPage)return;sentPage=true;var t=toolFromPath(),surface=surfaceFromPath();track('page_view',{surface:surface});if(t&&t!=='pricing'&&t!=='other')track('tool_open',{tool:t,surface:surface});startHeartbeat();
  scanIntelligence(document);
  new MutationObserver(function(mutations){mutations.forEach(function(m){Array.prototype.forEach.call(m.addedNodes||[],function(n){if(n&&n.nodeType===1){scanIntelligence(n);if(n.matches&&n.matches('.wdai-compact-summary,.wdcx-item,.wd-intent-context.is-question,.wdi-today'))scanIntelligence(n.parentNode||document)}})})}).observe(document.documentElement,{childList:true,subtree:true});
  document.addEventListener('click',function(e){var el=e.target.closest('a,button,[data-marker-id]');if(!el)return;

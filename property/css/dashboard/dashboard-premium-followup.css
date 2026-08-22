@@ -1,0 +1,54 @@
+/* Watchdog Dashboard Premium follow-up: fixed-size cards, default history replacement, full-width free upgrade. */
+
+/* Core dashboard CSS still contains a higher-specificity rule that can resurrect expand controls.
+   This layer wins that cascade and makes the curated dashboard genuinely fixed-size. */
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card .wdv2-expand,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card.wdv2-card-m .wdv2-expand,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card.wdv2-card-l .wdv2-expand,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wdv2-expand,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wdv2-drag-handle,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-resize-handle,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card-menu,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-map-handle,
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-drag-handle]{display:none!important}
+
+/* Live Site Activity replaces Snapshot/Tax vs Value in the default analysis row. */
+body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"].wd-premium-analytics-card{
+  grid-column:span 6!important;
+  height:232px!important;
+  min-height:232px!important;
+  padding:20px!important;
+}
+body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid{
+  margin-top:38px;
+  gap:22px;
+}
+body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid strong{font-size:28px}
+body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid span{font-size:11px}
+
+/* Free/Standard upgrade CTA is a deliberate full-width bridge after the map row. */
+.wdv2-upgrade-band{
+  display:grid!important;
+  grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  gap:14px!important;
+  width:100%!important;
+}
+body.wdv2-mounted .wdv2-upgrade-band>.wdv2-upgrade,
+body.wdv2-mounted .wdv2-upgrade-band>[data-card-id="upgrade-pro"]{
+  grid-column:1/-1!important;
+  width:100%!important;
+  min-height:154px!important;
+  height:auto!important;
+  margin:0!important;
+}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-link{min-height:154px;padding:22px 28px!important}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy h3{font-size:24px!important;line-height:1.08!important}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy p{max-width:760px!important;font-size:12px!important;line-height:1.55!important}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-price{padding-right:18px!important}
+
+@media(max-width:768px){
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"].wd-premium-analytics-card{grid-column:1/-1!important;height:190px!important;min-height:190px!important}
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid{margin-top:24px;gap:10px}
+  body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-link{grid-template-columns:1fr!important;padding:20px!important}
+  body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-price{text-align:left!important;padding:0!important}
+}
