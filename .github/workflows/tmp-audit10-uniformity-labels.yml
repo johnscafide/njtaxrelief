@@ -1,0 +1,110 @@
+name: Temporary audit 10 uniformity labels
+
+on:
+  push:
+    branches:
+      - watchdog/njw-216-score-history-regression-2026-08-22
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  patch-audit-10:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          fetch-depth: 0
+      - name: Correct published-vs-derived COD wording
+        shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+        run: |
+          if git log -1 --pretty=%B | grep -q '\[audit10-applied\]'; then
+            echo 'Audit 10 wording already applied.'
+            exit 0
+          fi
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          def replace_all(path, replacements):
+              p = Path(path)
+              s = p.read_text()
+              for label, old, new in replacements:
+                  count = s.count(old)
+                  if count != 1:
+                      raise SystemExit(f'{path} {label}: expected 1 match, found {count}')
+                  s = s.replace(old, new, 1)
+              p.write_text(s)
+
+          intro_old = """      '<p class=\"tl-p\">Your town\\u2019s equalization ratio says whether it assesses <em>high or low</em>. ' +
+      'This says whether it assesses <em>fairly</em>. It is the average percentage by which individual ' +
+      'assessments in ' + esc(u.name) + ' stray from the town\\u2019s own standard, and New Jersey publishes ' +
+      'it every year in a ninety page PDF nobody opens.</p>' +"""
+          intro_new = """      '<p class=\"tl-p\">Your town\\u2019s equalization ratio says whether it assesses <em>high or low</em>. ' +
+      'New Jersey separately publishes an annual residential coefficient of deviation (COD), which measures how far individual ' +
+      'assessment-to-sale ratios stray from the town\\u2019s own standard. Watchdog builds the uniformity score below from that published annual series.</p>' +"""
+          say_old = """          'Its residential coefficient of deviation is <b>' + u.coefficient + '</b>. ' +
+          'The professional standard is 15 or below. ' +"""
+          say_new = """          'Its latest state-published residential COD was <b>' + u.latest + '</b> in ' + u.latest_year + '. ' +
+          'The professional benchmark is 15 or below. Watchdog\\u2019s derived multi-year COD indicator is <b>' + u.coefficient + '</b>. ' +"""
+          fine_old = """      '<div class=\"tl-fine\">Coefficient of deviation, class 2 residential, from the NJ Division of Taxation ' +
+      'Measures of Property Assessment Uniformity. Weighted toward recent years, adjusted for volatility and ' +
+      'sample size. A high coefficient does not by itself win an appeal, but it is the condition that makes ' +
+      'one arguable.</div>');"""
+          fine_new = """      '<div class=\"tl-fine\">Source series: annual class 2 residential coefficients of deviation from the NJ Division of Taxation ' +
+      'Measures of Property Assessment Uniformity. The displayed latest COD is the state-published annual value. ' +
+      'The multi-year COD indicator and 0-100 uniformity score are Watchdog calculations that weight recent years and adjust for volatility and sample size. ' +
+      'A high COD does not by itself establish an appeal.</div>');"""
+
+          for path in ['property/js/dashboard/tools/uniformity.js', 'property/js/dashboard/home/index.js']:
+              replace_all(path, [
+                  ('intro', intro_old, intro_new),
+                  ('headline', say_old, say_new),
+                  ('fine print', fine_old, fine_new),
+              ])
+
+          replace_all('property/js/watchdog-score-public.js', [(
+              'uniformity note',
+              "          'municipal coefficient ' + Number(u.coefficient).toFixed(2) + ', residential standard is 15');",
+              "          'Watchdog multi-year COD indicator ' + Number(u.coefficient).toFixed(2) +\n          (u.latest != null ? '; latest state-published residential COD ' + Number(u.latest).toFixed(2) + ' (' + u.latest_year + ')' : '') +\n          '; professional COD benchmark is 15 or below');"
+          )])
+
+          p = Path('property/uniformity.json')
+          data = json.loads(p.read_text())
+          readme = data.get('_readme') or []
+          marker = 'FIELD SEMANTICS:'
+          if marker not in readme:
+              readme.extend([
+                  '',
+                  marker,
+                  "  'latest' is the latest annual class 2 residential COD published by NJ.",
+                  "  'coefficient' is Watchdog's derived multi-year COD indicator, weighted toward",
+                  '  recent years and used as an input to the Watchdog uniformity score. It is not',
+                  '  a separately published NJ statistic.'
+              ])
+              data['_readme'] = readme
+          p.write_text(json.dumps(data, indent=1) + '\n')
+
+          for path in ['property/js/dashboard/tools/uniformity.js', 'property/js/dashboard/home/index.js', 'property/js/watchdog-score-public.js']:
+              s = Path(path).read_text()
+              if 'Its residential coefficient of deviation is <b>' in s:
+                  raise SystemExit(f'{path}: stale COD wording remains')
+          if "latest state-published residential COD" not in Path('property/js/watchdog-score-public.js').read_text():
+              raise SystemExit('score public COD provenance wording missing')
+          PY
+          node --check property/js/dashboard/tools/uniformity.js
+          node --check property/js/dashboard/home/index.js
+          node --check property/js/watchdog-score-public.js
+          python -m json.tool property/uniformity.json >/dev/null
+          git diff --check
+          git config user.name 'Watchdog Launch Audit'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/js/dashboard/tools/uniformity.js property/js/dashboard/home/index.js property/js/watchdog-score-public.js property/uniformity.json
+          git commit -m '[audit10-applied] Clarify published COD versus Watchdog uniformity indicator'
+          git push origin HEAD:${TARGET_BRANCH}
