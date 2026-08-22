@@ -100,7 +100,11 @@ export async function modivLongitudinalObservation(admin:any,marker:any,row:any)
   if(!/^\d{4}$/.test(district)||!block||!lot)return{value:null,status:'source_checked_no_value',reason:'Exact district/block/lot parcel identity is incomplete.',providerKind:'authoritative_reference',source};
   const partition=await districtPartition(admin,release,district);
   if(!partition)return{value:null,status:'provider_error',reason:'Certified MOD-IV district partition could not be read or validated.',providerKind:'authoritative_reference',source};
-  const record=partition.records?.[`${block}|${lot}|${qualifier}`];
-  if(!record)return{value:null,status:'source_checked_no_value',reason:'Exact parcel identity is absent from the certified annual MOD-IV release.',providerKind:'authoritative_reference',source};
+  const recordKey=`${block}|${lot}|${qualifier}`;
+  const record=partition.records?.[recordKey];
+  if(!record){
+    console.warn('modiv_longitudinal_identity_miss',JSON.stringify({district,requested_key:recordKey,schema_version:partition?.schema_version,record_count:partition?.record_count,sample_keys:Object.keys(partition.records||{}).slice(0,8)}));
+    return{value:null,status:'source_checked_no_value',reason:'Exact parcel identity is absent from the certified annual MOD-IV release.',providerKind:'authoritative_reference',source};
+  }
   return{value:valueFor(record,field),status:'available',providerKind:'authoritative_reference',source};
 }
