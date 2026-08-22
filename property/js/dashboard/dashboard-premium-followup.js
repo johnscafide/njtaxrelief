@@ -87,8 +87,8 @@
     if(chip){
       var b=q('b',chip);if(b)b.textContent=count+' active now';
       var avatars=q('.wd-live-avatars',chip);if(avatars){
-        avatars.innerHTML='';
-        urls.forEach(function(url){var img=document.createElement('img');img.src=url;img.alt='';img.loading='lazy';img.decoding='async';img.referrerPolicy='no-referrer';img.setAttribute('aria-hidden','true');avatars.appendChild(img);});
+        var markup=urls.map(function(url){return'<img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" aria-hidden="true">';}).join('');
+        if(avatars.innerHTML!==markup)avatars.innerHTML=markup;
       }
       chip.title='Active visitors seen in the last '+windowMin+' minutes. Up to five signed-in account photos are shown; names and account identifiers are not exposed here.';
     }
@@ -114,18 +114,16 @@
       var sessionRes=await db.auth.getSession(),user=sessionRes&&sessionRes.data&&sessionRes.data.session&&sessionRes.data.session.user;
       if(!user){crm.loaded=true;return;}crm.userId=user.id;
       var results=await Promise.allSettled([
-        db.from('integration_provider_connections').select('provider,sync_status,sync_enabled,last_success_at,records_synced_total').eq('user_id',user.id).eq('sync_enabled',true),
-        db.from('integration_crm_context').select('id',{count:'exact',head:true}).eq('user_id',user.id),
+        db.rpc('get_my_crm_dashboard_summary'),
         db.from('dashboard_layout_preferences').select('layout').eq('user_id',user.id).maybeSingle()
       ]);
-      var connections=results[0].status==='fulfilled'&&!results[0].value.error&&Array.isArray(results[0].value.data)?results[0].value.data:[];
-      var count=results[1].status==='fulfilled'&&!results[1].value.error?Number(results[1].value.count)||0:0;
-      var primary=connections.slice().sort(function(a,b){return new Date(b.last_success_at||0)-new Date(a.last_success_at||0);})[0]||null;
-      crm.connected=!!(count>0||primary&&(primary.last_success_at||Number(primary.records_synced_total)>0));
-      crm.count=count||(primary?Number(primary.records_synced_total)||0:0);
-      crm.provider=primary&&primary.provider||'';
-      crm.lastSuccess=primary&&primary.last_success_at||null;
-      var layout=results[2].status==='fulfilled'&&results[2].value.data&&results[2].value.data.layout||{};
+      var summary=results[0].status==='fulfilled'&&!results[0].value.error?results[0].value.data:null;
+      summary=Array.isArray(summary)?summary[0]:summary;
+      crm.connected=!!(summary&&summary.connected);
+      crm.count=summary?Number(summary.contact_count)||0:0;
+      crm.provider=summary&&summary.provider||'';
+      crm.lastSuccess=summary&&summary.last_success_at||null;
+      var layout=results[1].status==='fulfilled'&&results[1].value.data&&results[1].value.data.layout||{};
       var remote=layout&&layout[CRM_PREF_KEY];
       var local=null;try{local=localStorage.getItem(CRM_PREF_KEY);}catch(_){ }
       if(local==='hidden')crm.visible=false;else if(local==='visible')crm.visible=true;else if(remote&&typeof remote.hidden==='boolean')crm.visible=!remote.hidden;
@@ -143,15 +141,17 @@
     }).catch(function(){});
   }
 
+  function crmCardMarkup(){return'<a class="wd-crm-count-link" href="/property/integrations" aria-label="Open CRM integrations"><span class="wd-premium-card-head"><span>CRM contacts</span><em>'+esc(providerLabel(crm.provider))+'</em></span><span class="wd-crm-count-main"><strong>'+crm.count.toLocaleString('en-US')+'</strong><span>synced contacts</span></span><small>'+esc(relativeTime(crm.lastSuccess))+'</small></a>';}
   function renderCrmCard(){
-    qa('[data-card-id="crm-count"]').forEach(function(node){node.remove();});
-    if(!crm.loaded||!crm.connected||!crm.visible)return;
+    var card=q('[data-card-id="crm-count"]');
+    if(!crm.loaded||!crm.connected||!crm.visible){if(card)card.remove();return;}
     var dash=q('#wdv2-dash'),band=q('.wdv2-band[data-band="premium"]');
     if(!dash)return;
     if(!band){band=document.createElement('section');band.className='wdv2-band wd-premium-band';band.dataset.band='premium';var portfolio=q('[data-band="portfolio"]',dash);dash.insertBefore(band,portfolio||q('[data-band="secondary"]',dash)||null);}
-    var card=document.createElement('section');card.className='wd4-card wd-premium-analytics-card wdv2-card-s wdv2-span-3 wd-crm-count-card';card.dataset.cardId='crm-count';
-    card.innerHTML='<a class="wd-crm-count-link" href="/property/integrations" aria-label="Open CRM integrations"><span class="wd-premium-card-head"><span>CRM contacts</span><em>'+esc(providerLabel(crm.provider))+'</em></span><span class="wd-crm-count-main"><strong>'+crm.count.toLocaleString('en-US')+'</strong><span>synced contacts</span></span><small>'+esc(relativeTime(crm.lastSuccess))+'</small></a>';
-    band.appendChild(card);band.hidden=false;
+    if(!card){card=document.createElement('section');card.className='wd4-card wd-premium-analytics-card wdv2-card-s wdv2-span-3 wd-crm-count-card';card.dataset.cardId='crm-count';band.appendChild(card);}
+    else if(card.parentElement!==band)band.appendChild(card);
+    var markup=crmCardMarkup();if(card.innerHTML!==markup)card.innerHTML=markup;
+    card.hidden=false;band.hidden=false;
   }
 
   function renderCrmSetting(){
