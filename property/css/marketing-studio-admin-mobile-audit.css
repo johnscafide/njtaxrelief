@@ -1,0 +1,24 @@
+@media (max-width:720px){
+  .dmaa-top{padding-top:max(14px,env(safe-area-inset-top));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right));display:grid;gap:12px}
+  .dmaa-top nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
+  .dmaa-top nav a{min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#f2f5f8;font-size:14px;line-height:1.2}
+  .dmaa-top>a span{font-size:11px}
+  #direct-mail-admin{padding-bottom:max(24px,env(safe-area-inset-bottom))}
+  .dmaa-loading{padding:56px 18px;font-size:15px;line-height:1.5}
+  .dmaa-mobile-status{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:#eef4ff;color:#244b8a;font-size:14px;line-height:1.45;font-weight:700}
+  #direct-mail-admin[aria-busy="true"] .dmaa-period button,
+  #direct-mail-admin[aria-busy="true"] .dmaa-segment,
+  #direct-mail-admin[aria-busy="true"] [data-segment-select]{opacity:.58;pointer-events:none}
+  .dmaa-period button,.dmaa-segment,.dmaa-tools select,.dmaa-tools input{min-height:44px}
+  .dmaa-tools select,.dmaa-tools input{font-size:16px}
+  .dmaa-error{margin:28px 0;padding:24px 18px}
+  .dmaa-error h2{font-size:20px;line-height:1.2}
+  .dmaa-error p{font-size:15px;line-height:1.5}
+  .dmaa-retry{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:10px;padding:0 18px;border:0;border-radius:11px;background:#172033;color:#fff;font-size:15px;font-weight:800;text-decoration:none;cursor:pointer;touch-action:manipulation}
+  .dmaa-retry:focus-visible,.dmaa-period button:focus-visible,.dmaa-segment:focus-visible,.dmaa-top nav a:focus-visible{outline:3px solid #2f6fed;outline-offset:2px}
+  #pl-toast.dmaa-toast-active{position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:80;display:block;max-width:none;padding:12px 14px;border-radius:12px;background:#172033;color:#fff;font-size:14px;line-height:1.4;font-weight:700;box-shadow:0 12px 30px rgba(18,32,55,.2);overflow-wrap:anywhere}
+}
+@media (max-width:440px){
+  .dmaa-top>a b{font-size:16px}
+  .dmaa-top nav{grid-template-columns:1fr}
+}
