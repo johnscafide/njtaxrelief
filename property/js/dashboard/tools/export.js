@@ -1,18 +1,15 @@
-/* Lazy dashboard module: export. Generated from the original dashboard without calculation changes. */
+/* Lazy dashboard module: export. Professional parcel exports use the canonical ROBUST score contract. */
 (function () {
   'use strict';
   function toolExport() {
     if (!rows.length) return '';
     return toolCard('Export for your attorney or agent', 'fa-file-export',
-      '<p class="tl-p">A clean parcel sheet with block, lot, PAMS PIN, assessment, the town ratio, and the ' +
-      'Chapter 123 upper limit worked out for each property. This is the format a tax attorney or a county board ' +
-      'actually wants, and it saves an hour of transcription.</p>' +
+      '<p class="tl-p">A clean parcel sheet with the canonical ROBUST Watchdog Score, evidence coverage, block, lot, PAMS PIN, assessment, town ratio, Uniformity and Chapter 123 context for each property.</p>' +
       '<div class="ex-btns">' +
         '<button class="tl-btn" onclick="dbExportCSV()"><i class="fas fa-file-csv"></i> Download CSV</button>' +
         '<button class="tl-btn ghost" onclick="dbExportPrint()"><i class="fas fa-print"></i> Printable sheet</button>' +
       '</div>' +
-      '<div class="tl-fine">Figures are drawn from public assessment records and the state equalization table. ' +
-      'Verify against the municipal record before filing anything.</div>');
+      '<div class="tl-fine">Watchdog Score fields use ROBUST-v1 only. Missing dimensions lower evidence coverage and are never replaced with a fallback score. Verify source records before filing anything.</div>');
   }
 
   function exportRows() {
@@ -24,13 +21,19 @@
       var upper = fair ? fair * 1.15 : null;
       var town = typeof townIntelFor === 'function' ? townIntelFor(r) : null;
       var budget = typeof budgetPressureFor === 'function' ? budgetPressureFor(r) : null;
+      var wd = typeof watchdogScore === 'function' ? watchdogScore(r) : null;
+      var canonical = wd && wd.modelVersion === 'ROBUST-v1' ? wd : null;
       return {
         Address: r.address || '', Town: r.town || '', County: r.county || '', Zip: r.zip || '',
         Block: r.block || '', Lot: r.lot || '', PAMS_PIN: r.pams_pin || '',
+        Watchdog_Score: canonical ? canonical.score : '',
+        Watchdog_Score_Model: canonical ? canonical.modelVersion : '',
+        Watchdog_Score_Evidence_Coverage_Pct: canonical ? Math.round(canonical.covered * 100) : '',
+        Watchdog_Score_Confidence: canonical ? canonical.confidence : '',
         Assessed: r.assessed || '', Annual_Tax: r.last_year_tax || '',
         Effective_Rate_Pct: r.effective_rate || '',
-        Town_Fairness_Score: town ? town.score : '',
-        Town_Statewide_Rank: town ? town.stateRank : '',
+        Town_Uniformity_Score: town ? town.score : '',
+        Town_Statewide_Uniformity_Rank: town ? town.stateRank : '',
         Town_Rate_Trend_Pct_Per_Year: town && town.trajectory ? (town.trajectory.cagr * 100).toFixed(2) : '',
         Municipal_Budget_Pressure_Score: budget ? budget.score : '',
         Municipal_Budget_Pressure_Band: budget ? budget.band : '',
@@ -70,21 +73,22 @@
     var d = exportRows();
     var w = window.open('', '_blank');
     if (!w) { toast('Allow popups to print'); return; }
-    var head = ['Address', 'Town', 'Block', 'Lot', 'PAMS_PIN', 'Assessed', 'Annual_Tax',
-                'Town_Fairness_Score', 'Town_Statewide_Rank', 'Town_Rate_Trend_Pct_Per_Year',
+    var head = ['Address', 'Town', 'Block', 'Lot', 'PAMS_PIN',
+                'Watchdog_Score', 'Watchdog_Score_Model', 'Watchdog_Score_Evidence_Coverage_Pct', 'Watchdog_Score_Confidence',
+                'Assessed', 'Annual_Tax', 'Town_Uniformity_Score', 'Town_Statewide_Uniformity_Rank', 'Town_Rate_Trend_Pct_Per_Year',
                 'Municipal_Budget_Pressure_Score', 'Municipal_Budget_Pressure_Band',
                 'Town_Ratio_Pct', 'Supported_Assessment', 'Ch123_Upper_Limit', 'Appeal_Indicated'];
     w.document.write('<html><head><title>NJ parcel sheet</title><style>' +
       'body{font-family:system-ui,sans-serif;padding:28px;color:#1a1a2e}' +
       'h1{font-size:19px;margin:0 0 4px}.sub{font-size:12px;color:#666;margin-bottom:18px}' +
-      'table{width:100%;border-collapse:collapse;font-size:11px}' +
+      'table{width:100%;border-collapse:collapse;font-size:10px}' +
       'th{background:#0e2248;color:#fff;padding:7px;text-align:left}' +
       'td{padding:6px 7px;border-bottom:1px solid #ddd}' +
       'tr:nth-child(even) td{background:#f7f8fa}' +
       '.y{color:#c0392b;font-weight:700}' +
       '.f{margin-top:18px;font-size:10.5px;color:#666;line-height:1.6}' +
       '</style></head><body>' +
-      '<h1>New Jersey parcel sheet</h1>' +
+      '<h1>New Jersey parcel sheet · ROBUST-v1</h1>' +
       '<div class="sub">Prepared ' + new Date().toLocaleDateString() + ' for ' + esc(plUser.email || '') +
       ' via njpropertytaxrelief.com</div>' +
       '<table><thead><tr>' + head.map(function (h) { return '<th>' + h.replace(/_/g, ' ') + '</th>'; }).join('') +
@@ -97,17 +101,11 @@
         }).join('') + '</tr>';
       }).join('') +
       '</tbody></table>' +
-      '<div class="f">Figures drawn from the NJ Office of GIS parcel layer joined to Division of Taxation MOD-IV records, ' +
-      'and the NJ Division of Taxation Table of Equalized Valuations. Chapter 123 upper limit is the supported assessment ' +
-      'times 1.15. Estimates only; verify against the municipal record before filing. ' +
-      'Prepared by John Scafide, Licensed NJ Real Estate Agent #2079591, The McKenty Team at Opus Elite Real Estate.</div>' +
+      '<div class="f">Watchdog Score is the canonical ROBUST-v1 tax-position signal: Recourse 10%, Overassessment Position 20%, Burden 30%, Uniformity 15%, Stability 15%, Trajectory 10%. Missing evidence lowers coverage and remaining weights are renormalized. It is not a home, neighborhood or person desirability grade. Other figures are drawn from New Jersey public assessment, sales, uniformity and equalization sources. Verify source records before filing.</div>' +
       '</body></html>');
     w.document.close();
     setTimeout(function () { w.print(); }, 400);
   };
-
-
-  // ══════════════════════════════════════════════
 
   Object.assign(window, { toolExport, exportRows });
 })();
