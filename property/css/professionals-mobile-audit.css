@@ -1,0 +1,85 @@
+/* Watchdog professional library mobile audit — Run 063 */
+@media (max-width: 840px) {
+  .pg-nav {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  .pg-nav .pg-wrap {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    padding: 8px 0 10px;
+  }
+
+  .pg-brand {
+    min-height: 44px;
+    font-size: 15px;
+  }
+
+  .pg-brand i {
+    width: 40px;
+    height: 40px;
+  }
+
+  .pg-links {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    padding: 1px 0 2px;
+  }
+
+  .pg-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pg-links a,
+  .pg-links a:not(.pg-nav-cta) {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0 13px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid var(--pg-line);
+    color: #41556c;
+    font-size: 14px;
+    line-height: 1.2;
+    scroll-snap-align: start;
+    touch-action: manipulation;
+  }
+
+  .pg-links .pg-nav-cta {
+    background: var(--pg-navy);
+    border-color: var(--pg-navy);
+    color: #fff !important;
+  }
+
+  .pg-links a:focus-visible,
+  .pg-brand:focus-visible,
+  .pg-btn:focus-visible,
+  .pg-hub-card:focus-visible,
+  .pg-resource:focus-visible {
+    outline: 3px solid rgba(11, 133, 134, .3);
+    outline-offset: 2px;
+  }
+}
+
+@media (max-width: 620px) {
+  .pg-nav .pg-wrap {
+    min-height: 0;
+  }
+
+  .pg-links a,
+  .pg-links a:not(.pg-nav-cta) {
+    min-height: 46px;
+    font-size: 14px;
+  }
+}
