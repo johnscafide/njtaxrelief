@@ -1,3 +1,20 @@
+alter table public.derived_formula_registry
+  drop constraint if exists derived_formula_registry_operation_check;
+
+alter table public.derived_formula_registry
+  add constraint derived_formula_registry_operation_check
+  check (
+    operation is null or operation = any (array[
+      'year_delta','ratio','completeness','inverse','permit_closure','permit_activity',
+      'weighted_signals','signal_count','signal_density','weighted_scores','max_scores',
+      'product_scores','tax_rate_position','municipal_cost_absorption','fiscal_resilience',
+      'revaluation_pressure','transaction_tax_shock','investor_carry_volatility',
+      'tax_reset_sensitivity','marketability_drag','sr1a_subject_square_feet',
+      'comparable_evidence_reliability','assessment_defensibility','appeal_evidence_strength',
+      'appeal_opportunity','source_alias','chapter123_field','ordered_history'
+    ]::text[])
+  );
+
 do $block$
 begin
   if exists (
