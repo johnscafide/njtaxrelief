@@ -2,6 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
 const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const PRODUCTION_HOSTS = new Set([
+  'njpropertytaxrelief.com',
+  'www.njpropertytaxrelief.com',
+  'watchdogindex.com',
+  'www.watchdogindex.com'
+]);
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
@@ -9,16 +15,24 @@ function allowedOrigin(req: Request) {
     const url = new URL(origin);
     const host = url.hostname.toLowerCase();
     if (
-      host === 'njpropertytaxrelief.com' ||
-      host === 'www.njpropertytaxrelief.com' ||
-      host === 'watchdogindex.com' ||
-      host === 'www.watchdogindex.com' ||
+      PRODUCTION_HOSTS.has(host) ||
       host === 'localhost' ||
       host === '127.0.0.1' ||
       host.endsWith('.vercel.app')
     ) return origin;
   } catch (_) {}
   return DEFAULT_SITE;
+}
+
+function requestSite(req: Request) {
+  const origin = req.headers.get('origin') || '';
+  try {
+    const url = new URL(origin);
+    if (url.protocol === 'https:' && PRODUCTION_HOSTS.has(url.hostname.toLowerCase())) {
+      return `${url.protocol}//${url.host}`;
+    }
+  } catch (_) {}
+  return String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
 }
 
 function cors(req: Request) {
@@ -72,7 +86,7 @@ Deno.serve(async (req) => {
   if (entitlementError) return json(req, { error: 'Could not read billing state.', code: 'ENTITLEMENT_READ_FAILED' }, 500);
   if (!entitlement?.provider_customer_id) return json(req, { error: 'No billing account exists yet.', code: 'NO_BILLING_ACCOUNT' }, 409);
 
-  const site = String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+  const site = requestSite(req);
 
   try {
     let portalUrl: string | null = null;
@@ -102,7 +116,7 @@ Deno.serve(async (req) => {
       resource_type: 'billing_customer',
       resource_id: entitlement.provider_customer_id,
       allowed: true,
-      metadata: { provider }
+      metadata: { provider, return_site: site }
     });
 
     return json(req, { url: portalUrl, provider });
