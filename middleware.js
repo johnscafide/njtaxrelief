@@ -22,11 +22,24 @@ function rewriteCleanPage(request, publicPath) {
   return rewrite(destination);
 }
 
+function rewriteWatchdogSystemFile(request, apiPath) {
+  return rewrite(new URL(apiPath, request.url));
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
 
   if (host !== WATCHDOG_HOST) return next();
+
+  // WatchdogIndex has its own canonical crawl contract. Keep the legacy
+  // NJPropertyTaxRelief robots/sitemaps untouched for the separate legacy site.
+  if (url.pathname === '/robots.txt') {
+    return rewriteWatchdogSystemFile(request, '/api/watchdog-index-robots');
+  }
+  if (url.pathname === '/sitemap.xml') {
+    return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
+  }
 
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
   if (url.pathname === '/property' || url.pathname === '/property/') {
