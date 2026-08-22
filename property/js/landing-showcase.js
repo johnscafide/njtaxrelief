@@ -2,7 +2,9 @@
   'use strict';
 
   var path = (window.location.pathname || '').replace(/\/+$/, '');
-  if (path !== '/property' && path !== '/property/index.html') return;
+  var host = String(window.location.hostname || '').toLowerCase();
+  var cleanWatchdogRoot = (host === 'www.watchdogindex.com' || host === 'watchdogindex.com') && path === '';
+  if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   var PARCEL = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
   var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
