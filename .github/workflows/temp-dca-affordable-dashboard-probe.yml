@@ -65,7 +65,7 @@ jobs:
           PY
       - name: Commit generated snapshot to PR branch
         run: |
-          if git diff --quiet -- supabase/functions/workbench-hydrate/zoning-contact-data.json; then
+          if [ -z "$(git status --porcelain -- supabase/functions/workbench-hydrate/zoning-contact-data.json)" ]; then
             echo 'Snapshot already current'
             exit 0
           fi
