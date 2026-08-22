@@ -15,6 +15,13 @@ function ensureAssets(){
     css.setAttribute('data-watchdog-home-ad-quarter','1');
     document.head.appendChild(css);
   }
+  if(!document.querySelector('script[data-watchdog-home-intelligence-brand]')){
+    var brand=document.createElement('script');
+    brand.src='/property/js/dashboard/home/home-watchdog-intelligence-brand.js';
+    brand.async=false;
+    brand.setAttribute('data-watchdog-home-intelligence-brand','1');
+    document.body.appendChild(brand);
+  }
   if(!document.querySelector('script[data-watchdog-home-intelligence]')){
     var intelligence=document.createElement('script');
     intelligence.src='/property/js/dashboard/home/home-watchdog-intelligence.js';
