@@ -3,6 +3,7 @@ import { next, rewrite } from '@vercel/functions';
 const WATCHDOG_HOST = 'www.watchdogindex.com';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
+const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
 
 function isReservedRootPath(pathname) {
   return RESERVED_ROOT_PREFIXES.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
@@ -37,7 +38,7 @@ export default function middleware(request) {
   if (url.pathname === '/robots.txt') {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-robots');
   }
-  if (url.pathname === '/sitemap.xml') {
+  if (SITEMAP_FILE.test(url.pathname)) {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
   }
 
