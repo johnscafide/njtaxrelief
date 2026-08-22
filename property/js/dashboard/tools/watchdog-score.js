@@ -83,17 +83,26 @@ import '../../watchdog-score-core.js';
     }
 
     // T - Trajectory, 10
-    if (s && r._lastSale && r._lastSaleYear && r.assessed) {
-      var implied = r.assessed / r._lastSale;
+    // Raw MOD-IV deed fields can contain nominal $1/$100 transfers. They are
+    // not evidence of market trajectory. Until a stronger verified-sale flag
+    // is available in this Dashboard record shape, require a plausible sale
+    // amount and year or drop T and let evidence coverage fall honestly.
+    var lastSale = Number(r._lastSale);
+    var lastSaleYear = Number(r._lastSaleYear);
+    var currentYear = new Date().getFullYear();
+    var defensibleSale = Number.isFinite(lastSale) && lastSale > 40000 &&
+      Number.isFinite(lastSaleYear) && lastSaleYear >= 1900 && lastSaleYear <= currentYear;
+    if (s && defensibleSale && r.assessed) {
+      var implied = r.assessed / lastSale;
       var rel = implied / s.ratio;
       var traj = rel < 0.85 ? clamp01(0.35 + rel * 0.4)
                : rel > 1.15 ? clamp01(1.15 - (rel - 1) * 0.8)
                : 1;
       add('trajectory', traj,
-          'assessed at ' + (implied * 100).toFixed(0) + '% of its own sale, town runs ' +
+          'assessed at ' + (implied * 100).toFixed(0) + '% of its defensible sale, town runs ' +
           (s.ratio * 100).toFixed(0) + '%');
     } else {
-      add('trajectory', null, 'no verified sale on record');
+      add('trajectory', null, 'needs a defensible sale on record; nominal deed transfers are excluded');
     }
 
     // R - Recourse, 10
