@@ -12,6 +12,7 @@ const URLS = {
 const SCORE_ID = "watchdog.watchdog_score";
 const SCORE_MODEL = "ROBUST-v1";
 const SIGNAL_MODEL = "workbench-signals-v2.1.0";
+const SUBJECT_MODEL = "sr1a-subject-provider-v1";
 const OBS_IDS = [SCORE_ID, "watchdog.tax_pressure", "watchdog.revaluation_risk", "uniformity.score"];
 
 function cors(req) {
@@ -45,9 +46,11 @@ function canonicalPin(pin) {
   const p = String(pin || "").trim(), parts = p.split("_");
   return parts.length < 3 ? p : [parts[0], stripZero(parts[1]), stripZero(parts[2]), ...parts.slice(3)].join("_");
 }
-function district(pin) { return String(pin || "").slice(0, 4); }
-function countyCode(pin) { return String(pin || "").slice(0, 2); }
+function district(pin) { return String(pin || "").replace(/\D/g, "").slice(0, 4); }
+function countyCode(pin) { return district(pin).slice(0, 2); }
 function norm(value) { return String(value || "").toUpperCase().replace(/\s+/g, " ").trim(); }
+function parcelPart(value) { return String(value ?? "").replace(/\s+/g, "").replace(/^0+/, "").toUpperCase(); }
+function qualifierPart(value) { return String(value ?? "").trim().replace(/\s+/g, "").toUpperCase(); }
 function confidence(coverage) { return coverage >= 85 ? "high" : coverage >= 60 ? "medium" : "low"; }
 function verdict(score) {
   if (score >= 80) return "Strong tax position";
@@ -63,6 +66,7 @@ function medianLatest(series) {
   const pct = row && typeof row === "object" ? num(row.ratio) : num(row);
   return pct && pct > 0 ? { ratio: pct / 100, year: years[years.length - 1], upper: row?.upper ? num(row.upper) / 100 : null } : null;
 }
+
 let sourceCache = null, sourceCacheAt = 0;
 async function sources() {
   if (sourceCache && Date.now() - sourceCacheAt < 3600000) return sourceCache;
@@ -87,6 +91,22 @@ function ratioFor(src, town, county) {
   if (!hit) for (const key of keys) if (norm(key) === townKey) { hit = ratios[key]; break; }
   return hit ? medianLatest(hit) : null;
 }
+async function subjectEvidence(admin, rows) {
+  const subjects = (rows || []).map(row => ({
+    key: String(row.pams_pin || ""),
+    district: district(row.pams_pin),
+    block: parcelPart(row.block),
+    lot: parcelPart(row.lot),
+    qualifier: qualifierPart(row.qualifier)
+  })).filter(subject => subject.key && subject.district.length === 4 && subject.block && subject.lot);
+  const records = new Map();
+  for (let i = 0; i < subjects.length; i += 400) {
+    const { data, error } = await admin.rpc("lookup_sr1a_subject_evidence", { p_subjects: subjects.slice(i, i + 400) });
+    if (error) throw error;
+    for (const row of data || []) records.set(String(row.request_key), row);
+  }
+  return records;
+}
 function marketValue(row, src, stored) {
   const verified = sr1aFor(src.sr1a, row.pams_pin);
   if (verified && num(row.assessed_value)) return { v: Number(row.assessed_value) / Number(verified.ratio), ratio: Number(verified.ratio), n: Number(verified.n), src: "verified" };
@@ -110,16 +130,35 @@ function usableSale(row, verified) {
 }
 function chapter123(row, market, stored, sr1a) {
   if (!market || !num(row.assessed_value)) return null;
-  let independent = null, basis = null;
+  let independent = null, basis = null, independentSource = null;
   const saved = num(stored);
   if (saved && Math.abs(saved - market.v) / market.v > 0.001) {
     independent = saved;
     basis = "comparable sales from the saved property record";
+    independentSource = "saved_comparable_value";
+  } else if (sr1a && num(sr1a.ppsf) && num(row.subject_living_space)) {
+    independent = Number(sr1a.ppsf) * Number(row.subject_living_space);
+    basis = "municipal median verified-sale PPSF × governed subject living area";
+    independentSource = "nj_sr1a_subject_living_space";
   }
-  const result = { market: market.v, ratio: market.ratio, src: market.src, n: market.n, testable: false, hasCase: false, indep: independent, basis };
+  const subjectEvidence = num(row.subject_living_space) ? {
+    source: "NJ Division of Taxation SR-1A verified usable sale index",
+    provider_version: SUBJECT_MODEL,
+    living_space: Number(row.subject_living_space),
+    match_quality: row.subject_match_quality || null
+  } : null;
+  const result = {
+    market: market.v, ratio: market.ratio, src: market.src, n: market.n,
+    testable: false, hasCase: false, indep: independent, basis,
+    independent_source: independentSource, subject_evidence: subjectEvidence
+  };
   if (independent == null || market.ratio == null) return result;
   const fair = independent * market.ratio, limit = fair * 1.15;
-  result.testable = true; result.fair = fair; result.limit = limit; result.over = Number(row.assessed_value) - limit; result.hasCase = result.over > 0;
+  result.testable = true;
+  result.fair = fair;
+  result.limit = limit;
+  result.over = Number(row.assessed_value) - limit;
+  result.hasCase = result.over > 0;
   return result;
 }
 function revalRadar(row, src) {
@@ -166,8 +205,20 @@ function robustScore(row, src, stored) {
   if (c123?.testable && c123.limit) {
     const assessed = Number(row.assessed_value), over = (assessed - c123.limit) / c123.limit;
     const position = over <= 0 ? clamp01(1 - (assessed - c123.fair) / Math.max(c123.fair, 1) * .5) : clamp01(1 - over / .30) * .5;
-    add("fairness", 20, position, { public_name: "Overassessment Position", fair: c123.fair, limit: c123.limit, independent_value: c123.indep, basis: c123.basis });
-  } else add("fairness", 20, null, { public_name: "Overassessment Position", reason: "independent value evidence unavailable" });
+    add("fairness", 20, position, {
+      public_name: "Overassessment Position",
+      fair: c123.fair,
+      limit: c123.limit,
+      independent_value: c123.indep,
+      basis: c123.basis,
+      independent_source: c123.independent_source,
+      subject_evidence: c123.subject_evidence
+    });
+  } else add("fairness", 20, null, {
+    public_name: "Overassessment Position",
+    reason: "independent value evidence unavailable",
+    subject_evidence: c123?.subject_evidence || null
+  });
   if (uniformity && num(uniformity.coefficient) != null) add("uniformity", 15, 1 - clamp01((Number(uniformity.coefficient) - 7) / 23), { coefficient: Number(uniformity.coefficient), uniformity_score: num(uniformity.score) });
   else add("uniformity", 15, null, { reason: "uniformity evidence unavailable" });
   if (stability && num(stability.score) != null) add("stability", 15, 1 - clamp01(stability.score / 100), stability);
@@ -202,42 +253,109 @@ Deno.serve(async req => {
   if (!pins.length) return out(req, 200, { markers: {}, meta: {}, summary: { requested: 0, scored: 0 }, framework: "ROBUST", model_version: SCORE_MODEL });
   const aliases = new Map(pins.map(pin => [pin, canonicalPin(pin)])), queryPins = [...new Set([...pins, ...aliases.values()])], src = await sources();
   const [{ data: rows, error: propertyError }, { data: saved }] = await Promise.all([
-    admin.from("property_lookups").select("pams_pin,town,county,assessed_value,last_year_tax,last_sale_price,last_sale_year,history").in("pams_pin", queryPins),
+    admin.from("property_lookups").select("pams_pin,town,county,block,lot,qualifier,assessed_value,last_year_tax,last_sale_price,last_sale_year,history").in("pams_pin", queryPins),
     admin.from("saved_properties").select("pams_pin,watchdog_value").eq("user_id", authData.user.id).in("pams_pin", queryPins)
   ]);
   if (propertyError) return out(req, 503, { error: "Property warehouse unavailable" });
+
+  let subjectByPin = new Map(), subjectEvidenceStatus = "available";
+  try {
+    subjectByPin = await subjectEvidence(admin, rows || []);
+  } catch (error) {
+    subjectEvidenceStatus = "unavailable";
+    console.error("SR-1A subject evidence lookup failed:", error);
+  }
+
   const byPin = new Map((rows || []).map(row => [String(row.pams_pin), row])), savedByPin = new Map((saved || []).map(row => [String(row.pams_pin), row.watchdog_value]));
   const markers = {}, meta = {}, inserts = [], now = new Date().toISOString(), today = now.slice(0, 10);
-  let scored = 0;
+  let scored = 0, subjectMatches = 0, subjectLivingSpaceMatches = 0;
   for (const requestedPin of pins) {
     const canonical = aliases.get(requestedPin) || requestedPin, row = byPin.get(requestedPin) || byPin.get(canonical);
     markers[requestedPin] = {}; meta[requestedPin] = {};
     if (!row) continue;
+
+    const sourcePin = String(row.pams_pin || "");
+    const subject = subjectByPin.get(sourcePin) || subjectByPin.get(canonical) || subjectByPin.get(requestedPin) || null;
+    if (subject) subjectMatches++;
+    if (subject && num(subject.living_space)) {
+      row.subject_living_space = Number(subject.living_space);
+      row.subject_match_quality = subject.match_quality || null;
+      subjectLivingSpaceMatches++;
+    }
     row.pams_pin = canonical;
-    const stored = savedByPin.get(requestedPin) ?? savedByPin.get(canonical) ?? null, wd = robustScore(row, src, stored), uniformity = uniFor(src.uniformity, canonical), revaluation = revalRadar(row, src), tax = taxSeries(src.tax, row.town, row.county), pressure = tax ? taxPressure(tax.series) : null, market = marketValue(row, src, stored);
+
+    const stored = savedByPin.get(requestedPin) ?? savedByPin.get(canonical) ?? null,
+      wd = robustScore(row, src, stored),
+      uniformity = uniFor(src.uniformity, canonical),
+      revaluation = revalRadar(row, src),
+      tax = taxSeries(src.tax, row.town, row.county),
+      pressure = tax ? taxPressure(tax.series) : null,
+      market = marketValue(row, src, stored);
+
     if (market?.v) {
       markers[requestedPin]["watchdog.market_value_estimate"] = Math.round(market.v);
-      meta[requestedPin]["watchdog.market_value_estimate"] = { status: "available", provider_kind: "canonical_intelligence", source: market.src === "verified" ? "NJ verified SR-1A sales ratio" : market.src === "published" ? "NJ published equalization ratio" : "stored comparable-sale estimate", observed_at: now, model_version: SIGNAL_MODEL };
+      meta[requestedPin]["watchdog.market_value_estimate"] = {
+        status: "available", provider_kind: "canonical_intelligence",
+        source: market.src === "verified" ? "NJ verified SR-1A sales ratio" : market.src === "published" ? "NJ published equalization ratio" : "stored comparable-sale estimate",
+        observed_at: now, model_version: SIGNAL_MODEL
+      };
     }
+
     const values = { "uniformity.score": num(uniformity?.score), "watchdog.revaluation_risk": num(revaluation?.score), "watchdog.tax_pressure": num(pressure?.score), [SCORE_ID]: num(wd?.score) };
     for (const id of OBS_IDS) {
       const value = values[id], isScore = id === SCORE_ID, modelVersion = isScore ? SCORE_MODEL : SIGNAL_MODEL;
-      if (value == null) { meta[requestedPin][id] = { status: "not_computed", provider_kind: isScore ? "canonical_watchdog_score" : "canonical_signal", framework: isScore ? "ROBUST" : null, model_version: modelVersion }; continue; }
+      if (value == null) {
+        meta[requestedPin][id] = { status: "not_computed", provider_kind: isScore ? "canonical_watchdog_score" : "canonical_signal", framework: isScore ? "ROBUST" : null, model_version: modelVersion };
+        continue;
+      }
       markers[requestedPin][id] = value;
       let inputs = { canonical_pams_pin: canonical, town: row.town, county: row.county };
       if (id === "uniformity.score") inputs = { ...inputs, coefficient: num(uniformity?.coefficient), source_year: uniformity?.latest_year ?? null, volatility: num(uniformity?.volatility), sales: num(uniformity?.sales) };
       if (id === "watchdog.revaluation_risk") inputs = { ...inputs, ...revaluation };
       if (id === "watchdog.tax_pressure") inputs = { ...inputs, ...pressure, tax_rate_key: tax?.key ?? null };
-      if (isScore) inputs = { ...inputs, framework: "ROBUST", components: wd?.detail, coverage_weight: wd?.coverage, confidence: wd?.confidence, verdict: wd?.verdict, market: wd?.market, chapter123: wd?.chapter };
-      meta[requestedPin][id] = { status: "available", provider_kind: isScore ? "canonical_watchdog_score" : "canonical_signal", source: isScore ? "Watchdog Score powered by the ROBUST Framework" : "Watchdog governed signal engine", framework: isScore ? "ROBUST" : null, model_version: modelVersion, evidence_coverage: isScore ? wd?.coverage ?? null : 100, confidence: isScore ? wd?.confidence ?? null : "high", observed_at: now };
-      inserts.push({ user_id: authData.user.id, pams_pin: requestedPin, marker_id: id, score: value, observed_on: today, observed_at: now, model_version: modelVersion, evidence_coverage: isScore ? wd?.coverage ?? 0 : 100, inputs, formula: isScore ? "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. Trajectory requires a defensible sale signal." : id === "watchdog.revaluation_risk" ? "Revaluation pressure from published ratio level, verified SR-1A ratio decay and coefficient of deviation." : id === "uniformity.score" ? "Sourced assessment-uniformity score." : "Municipal tax pressure signal." });
+      if (isScore) inputs = {
+        ...inputs, framework: "ROBUST", components: wd?.detail, coverage_weight: wd?.coverage,
+        confidence: wd?.confidence, verdict: wd?.verdict, market: wd?.market, chapter123: wd?.chapter,
+        subject_evidence_status: subjectEvidenceStatus
+      };
+      meta[requestedPin][id] = {
+        status: "available", provider_kind: isScore ? "canonical_watchdog_score" : "canonical_signal",
+        source: isScore ? "Watchdog Score powered by the ROBUST Framework" : "Watchdog governed signal engine",
+        framework: isScore ? "ROBUST" : null, model_version: modelVersion,
+        evidence_coverage: isScore ? wd?.coverage ?? null : 100, confidence: isScore ? wd?.confidence ?? null : "high",
+        observed_at: now
+      };
+      inserts.push({
+        user_id: authData.user.id, pams_pin: requestedPin, marker_id: id, score: value,
+        observed_on: today, observed_at: now, model_version: modelVersion,
+        evidence_coverage: isScore ? wd?.coverage ?? 0 : 100, inputs,
+        formula: isScore
+          ? "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. O may use governed SR-1A subject living area with municipal verified-sale PPSF when available. Trajectory requires a defensible sale signal."
+          : id === "watchdog.revaluation_risk"
+            ? "Revaluation pressure from published ratio level, verified SR-1A ratio decay and coefficient of deviation."
+            : id === "uniformity.score"
+              ? "Sourced assessment-uniformity score."
+              : "Municipal tax pressure signal."
+      });
     }
     if (wd) scored++;
   }
+
   if (inserts.length) {
     await admin.from("score_observations").delete().eq("user_id", authData.user.id).eq("observed_on", today).in("pams_pin", pins).in("marker_id", OBS_IDS);
     const { error } = await admin.from("score_observations").insert(inserts);
     if (error) return out(req, 503, { error: "ROBUST scores calculated but could not be recorded", code: "SCORE_WRITE_FAILED" });
   }
-  return out(req, 200, { markers, meta, summary: { requested: pins.length, scored, observations_written: inserts.length }, framework: "ROBUST", model_version: SCORE_MODEL, signal_model_version: SIGNAL_MODEL, legacy_alias: "retired", checked_at: now });
+
+  return out(req, 200, {
+    markers, meta,
+    summary: {
+      requested: pins.length, scored, observations_written: inserts.length,
+      subject_evidence_status: subjectEvidenceStatus,
+      subject_matches: subjectMatches,
+      subject_living_space_matches: subjectLivingSpaceMatches
+    },
+    framework: "ROBUST", model_version: SCORE_MODEL, signal_model_version: SIGNAL_MODEL,
+    subject_model_version: SUBJECT_MODEL, legacy_alias: "retired", checked_at: now
+  });
 });
