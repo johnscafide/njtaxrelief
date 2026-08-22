@@ -105,8 +105,10 @@ export async function modivLongitudinalObservation(admin:any,marker:any,row:any)
   const recordKey=`${block}|${lot}|${qualifier}`;
   const record=partition.records?.[recordKey];
   if(!record){
-    const sampleKeys=Object.keys(partition.records||{}).slice(0,12);
-    const diagnostic=pin===DIAGNOSTIC_PIN?` Diagnostic: schema=${String(partition?.schema_version)}, record_count=${String(partition?.record_count)}, requested=${recordKey}, sample_keys=${sampleKeys.join(';')}.`:'';
+    const keys=Object.keys(partition.records||{});
+    const sampleKeys=keys.slice(0,8);
+    const targetKeys=keys.filter((key:string)=>key.startsWith('00025 ')).slice(0,24);
+    const diagnostic=pin===DIAGNOSTIC_PIN?` Diagnostic: schema=${String(partition?.schema_version)}, record_count=${String(partition?.record_count)}, requested=${recordKey}, sample_keys=${sampleKeys.join(';')}, target_block_keys=${targetKeys.join(';')}.`:'';
     return{value:null,status:'source_checked_no_value',reason:`Exact parcel identity is absent from the certified annual MOD-IV release.${diagnostic}`,providerKind:'authoritative_reference',source};
   }
   return{value:valueFor(record,field),status:'available',providerKind:'authoritative_reference',source};
