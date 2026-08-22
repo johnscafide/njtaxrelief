@@ -1,0 +1,177 @@
+/* Watchdog mobile certification layer — Agent Control
+   Mobile/tablet only. Preserve desktop behavior and desktop information architecture. */
+
+@media (max-width:760px){
+  html body.wdx-modern .ac27-worknav{
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+  }
+
+  /* Keep every workspace reachable and readable instead of shrinking the desktop labels. */
+  html body.wdx-modern .ac27-tabs{
+    gap:8px;
+    scroll-snap-type:x proximity;
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  html body.wdx-modern .ac27-tabs a{
+    min-height:48px!important;
+    padding:0 14px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    scroll-snap-align:start;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ac27-actions{
+    gap:8px;
+  }
+  html body.wdx-modern .ac27-actions .ad-import-open{
+    min-height:48px!important;
+    min-width:0;
+    padding:0 14px!important;
+    font-size:14px!important;
+    touch-action:manipulation;
+  }
+  /* The 560px desktop-derived rule hid this label and removed the button's accessible name. */
+  html body.wdx-modern .ac27-actions .ac27-label{
+    display:inline!important;
+  }
+  html body.wdx-modern .ac27-actions .ac27-icon{
+    flex:0 0 48px!important;
+    width:48px!important;
+    min-width:48px!important;
+    min-height:48px!important;
+    padding:0!important;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ac27-actions .ac27-icon i{
+    font-size:15px!important;
+  }
+
+  /* Primary summary copy follows the mobile SaaS readability floor. */
+  html body.wdx-modern .ad-overview p{
+    font-size:15px!important;
+    line-height:1.55!important;
+  }
+  html body.wdx-modern .ad-overview-meta span{
+    font-size:13px!important;
+    line-height:1.35!important;
+  }
+  html body.wdx-modern .ad-overview-meta small{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+
+  /* Re-present the sphere importer as a phone-native bottom sheet, not a squeezed desktop dialog. */
+  html body.wdx-modern #ad-import-modal{
+    place-items:end center!important;
+    padding:max(8px,env(safe-area-inset-top)) env(safe-area-inset-right) 0 env(safe-area-inset-left)!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-card{
+    width:100%!important;
+    max-width:760px!important;
+    max-height:calc(100dvh - max(8px,env(safe-area-inset-top)))!important;
+    border-radius:20px 20px 0 0!important;
+    padding:58px 20px calc(20px + env(safe-area-inset-bottom))!important;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-x{
+    top:10px!important;
+    right:max(12px,env(safe-area-inset-right))!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    display:grid!important;
+    place-items:center;
+    font-size:16px!important;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-card>span{
+    font-size:12px!important;
+    line-height:1.3!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-card h2{
+    font-size:23px!important;
+    line-height:1.15!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-card p,
+  html body.wdx-modern #ad-import-modal .ad-csv-format{
+    font-size:15px!important;
+    line-height:1.5!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-import-tabs{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:6px;
+  }
+  html body.wdx-modern #ad-import-modal .ad-import-tabs button{
+    min-height:48px!important;
+    padding:8px 10px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-tools{
+    gap:12px;
+    align-items:center;
+    flex-wrap:wrap;
+    font-size:14px;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-tools label{
+    min-height:44px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+  html body.wdx-modern #ad-import-modal input[type="checkbox"]{
+    width:22px!important;
+    height:22px!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-row{
+    min-height:56px;
+    font-size:14px!important;
+    line-height:1.4!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-row small,
+  html body.wdx-modern #ad-import-modal #ad-import-csv>small,
+  html body.wdx-modern #ad-import-modal .ad-import-status{
+    font-size:13px!important;
+    line-height:1.45!important;
+  }
+  html body.wdx-modern #ad-import-modal #ad-csv{
+    min-height:180px;
+    font-size:16px!important;
+    line-height:1.5!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-import-submit{
+    min-height:48px!important;
+    font-size:15px!important;
+    line-height:1.25!important;
+    touch-action:manipulation;
+  }
+
+  html body.wdx-modern :is(.ac27-tabs a,.ac27-actions button,#ad-import-modal button,#ad-import-modal textarea):focus-visible{
+    outline:3px solid rgba(47,109,246,.38)!important;
+    outline-offset:2px!important;
+  }
+}
+
+@media (max-width:420px){
+  html body.wdx-modern .ac27-actions{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 48px 48px;
+  }
+  html body.wdx-modern #ad-import-modal .ad-modal-card{
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-row{
+    grid-template-columns:auto minmax(0,1fr)!important;
+  }
+  html body.wdx-modern #ad-import-modal .ad-saved-row>:last-child{
+    grid-column:2;
+    justify-self:start;
+  }
+}
