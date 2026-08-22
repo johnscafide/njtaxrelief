@@ -101,7 +101,6 @@
     touch-action: manipulation;
   }
 
-  /* Preserve every governed marker field, but replace the desktop table with mobile review cards. */
   body[data-sidebar-page="data-center"] .dc-table-wrap {
     max-height: none !important;
     overflow: visible !important;
@@ -235,7 +234,6 @@
     text-align: center !important;
   }
 
-  /* Built result sheets remain genuinely tabular; contain their horizontal scroll inside the module. */
   body[data-sidebar-page="data-center"] .dc-results {
     max-width: 100% !important;
     overflow: auto !important;
@@ -253,6 +251,138 @@
     outline: 3px solid rgba(47, 109, 246, .35) !important;
     outline-offset: 2px !important;
   }
+
+  body.dc-mobile-dialog-open {
+    overflow: hidden !important;
+  }
+
+  .dc-mobile-dialog-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 10050;
+    display: flex;
+    align-items: flex-end;
+    background: rgba(10, 24, 43, .54);
+    padding: max(12px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 0 max(10px, env(safe-area-inset-left));
+  }
+
+  .dc-mobile-dialog {
+    width: 100%;
+    max-height: min(88dvh, 720px);
+    overflow: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    background: #fff;
+    border-radius: 22px 22px 0 0;
+    padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+    box-shadow: 0 -18px 60px rgba(10, 24, 43, .24);
+  }
+
+  .dc-mobile-dialog-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .dc-mobile-dialog-kicker {
+    display: block;
+    margin-bottom: 4px;
+    color: #6f7f94;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+  }
+
+  .dc-mobile-dialog h2 {
+    margin: 0;
+    color: #14243a;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .dc-mobile-dialog-copy {
+    margin: 12px 0 18px;
+    color: #4d6078;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .dc-mobile-dialog-close {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 12px;
+    background: #eef3f8;
+    color: #26384f;
+    font-size: 18px;
+  }
+
+  .dc-mobile-dialog-form label {
+    display: grid;
+    gap: 7px;
+    color: #53657c;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .dc-mobile-dialog-form input,
+  .dc-mobile-dialog-form select {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 12px;
+    border: 1px solid #cbd6e2;
+    border-radius: 12px;
+    background: #fff;
+    color: #14243a;
+    font-size: 16px;
+  }
+
+  .dc-mobile-dialog-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .dc-mobile-dialog-actions button {
+    min-height: 48px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 800;
+    touch-action: manipulation;
+  }
+
+  .dc-mobile-dialog-cancel {
+    border: 1px solid #cbd6e2;
+    background: #fff;
+    color: #2e4058;
+  }
+
+  .dc-mobile-dialog-primary {
+    border: 1px solid #1f5fd3;
+    background: #1f5fd3;
+    color: #fff;
+  }
+
+  .dc-mobile-status {
+    position: fixed;
+    z-index: 10060;
+    left: max(14px, env(safe-area-inset-left));
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    padding: 13px 14px;
+    border-radius: 14px;
+    background: #14243a;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.45;
+    box-shadow: 0 16px 40px rgba(10, 24, 43, .24);
+  }
+
+  .dc-mobile-status[data-tone="success"] { background: #176846; }
+  .dc-mobile-status[data-tone="error"] { background: #8e2b2b; }
 }
 
 @media (max-width: 420px) {
@@ -269,5 +399,9 @@
   body[data-sidebar-page="data-center"] .dc-view-actions > * {
     width: 100% !important;
     max-width: none !important;
+  }
+
+  .dc-mobile-dialog-actions {
+    grid-template-columns: 1fr;
   }
 }
