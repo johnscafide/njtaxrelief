@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-22T12:38:36.056Z",
+ "generated_at": "2026-08-22T12:39:15.884Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 510,
+   "live": 512,
    "partial": 4,
    "unavailable": 11,
-   "planned": 209
+   "planned": 207
   },
   "retired_phase5": 0
  },
@@ -5653,8 +5653,8 @@
    ],
    "source_id": "nj-cod",
    "field": "cod_2016",
-   "provider_status": "planned",
-   "provider_note": "Requires re-running parse_cod.py against pre-2022 COD publications",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -5675,8 +5675,8 @@
    ],
    "source_id": "nj-cod",
    "field": "cod_2017",
-   "provider_status": "planned",
-   "provider_note": "Requires re-running parse_cod.py against pre-2022 COD publications",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
