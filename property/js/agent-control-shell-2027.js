@@ -7,7 +7,9 @@
   var BRAND_STYLE='/property/css/brand-consistency.css';
   var READABILITY_STYLE='/property/css/agent-control-readability.css';
   var MOBILE_AUDIT_STYLE='/property/css/agent-control-mobile-audit.css';
+  var EVIDENCE_MOBILE_STYLE='/property/css/agent-control-evidence-mobile.css';
   var BRAND_RUNTIME='/property/js/brand-consistency-runtime.js';
+  var EVIDENCE_MOBILE_RUNTIME='/property/js/agent-control-evidence-mobile.js';
 
   function ensureStyle(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
@@ -17,10 +19,19 @@
     document.head.appendChild(link);
   }
 
+  function ensureScript(src){
+    if(document.querySelector('script[src="'+src+'"]'))return;
+    var script=document.createElement('script');
+    script.src=src;
+    document.body.appendChild(script);
+  }
+
   function ensureBrandAssets(){
     ensureStyle(BRAND_STYLE);
     ensureStyle(READABILITY_STYLE);
     ensureStyle(MOBILE_AUDIT_STYLE);
+    ensureStyle(EVIDENCE_MOBILE_STYLE);
+    ensureScript(EVIDENCE_MOBILE_RUNTIME);
     if(window.__WATCHDOG_BRAND_CONSISTENCY__||document.querySelector('script[src="'+BRAND_RUNTIME+'"]'))return;
     var script=document.createElement('script');
     script.src=BRAND_RUNTIME;
