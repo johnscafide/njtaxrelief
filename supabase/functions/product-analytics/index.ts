@@ -4,6 +4,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 const ALLOWED_ORIGINS=new Set([
   'https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com',
   'https://watchdogre.com','https://www.watchdogre.com',
+  'https://watchdogindex.com','https://www.watchdogindex.com',
   'http://localhost:3000','http://localhost:5500','http://127.0.0.1:5500'
 ]);
 const EVENTS=new Set([
@@ -12,7 +13,7 @@ const EVENTS=new Set([
   'intelligence_exposed','intelligence_reasoning_inspected','intelligence_action_started','intelligence_action_completed',
   'intent_question_shown','intent_question_answered','intent_question_skipped',
   'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened',
-  'trust_evidence_opened'
+  'trust_evidence_opened','presence_heartbeat'
 ]);
 const PROPERTY_KEYS=new Set([
   'marker_id','plan','tool','action','format','source','result_count_bucket','status','billing_period','tier',
@@ -20,7 +21,7 @@ const PROPERTY_KEYS=new Set([
 ]);
 const AUDIENCE_CLASSES=new Set(['external_visitor','external_account','internal_owner','internal_agent','internal_developer','internal_test']);
 const CLICK_SOURCES=new Set(['google_ads','meta_ads','microsoft_ads','tiktok_ads','linkedin_ads','other_paid']);
-function cors(origin:string){return {'Access-Control-Allow-Origin':ALLOWED_ORIGINS.has(origin)?origin:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'content-type, authorization, apikey, x-client-info','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin','Content-Type':'application/json'};}
+function cors(origin:string){return {'Access-Control-Allow-Origin':ALLOWED_ORIGINS.has(origin)?origin:'https://watchdogindex.com','Access-Control-Allow-Headers':'content-type, authorization, apikey, x-client-info','Access-Control-Allow-Methods':'POST,OPTIONS','Vary':'Origin','Content-Type':'application/json'};}
 function s(v:any,n=120){return String(v??'').trim().slice(0,n)}
 function uuid(v:any){return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(v||''))}
 function pathOnly(v:any,n=240){return s(v,n).split(/[?#]/,1)[0]}
@@ -56,6 +57,20 @@ Deno.serve(async(req)=>{
       await admin.from('analytics_visitor_classes').upsert({visitor_id:b.visitor_id,audience_class:audience,updated_at:now},{onConflict:'visitor_id'});
       await admin.from('watchdog_product_events').update({audience_class:audience}).eq('visitor_id',b.visitor_id).neq('audience_class',audience);
     }
+  }
+
+  if(b.event_name==='presence_heartbeat'){
+    const now=new Date().toISOString();
+    const presence=await admin.from('watchdog_live_presence').upsert({
+      session_id:b.session_id,
+      visitor_id:b.visitor_id,
+      audience_class:audience,
+      path:pathOnly(b.path,240),
+      last_seen:now,
+      updated_at:now
+    },{onConflict:'session_id'});
+    if(presence.error){console.error('presence heartbeat failed',presence.error.message);return new Response('{"error":"presence_failed"}',{status:500,headers:cors(origin)})}
+    return new Response('{"ok":true}',{status:202,headers:cors(origin)});
   }
 
   let props:any={};
