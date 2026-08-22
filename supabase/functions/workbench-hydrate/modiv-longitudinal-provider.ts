@@ -13,6 +13,7 @@ const SUPPORTED_FIELDS=new Set([
   'assessment_record_years',
 ]);
 const SOURCE_LABEL='NJ Division of Taxation annual MOD-IV assessment lists';
+const DIAGNOSTIC_PIN='0101_25.01_10';
 
 type CacheEntry={at:number;payload:any};
 let releaseCache:CacheEntry|null=null;
@@ -95,7 +96,8 @@ export async function modivLongitudinalObservation(admin:any,marker:any,row:any)
   if(!release)return{value:null,status:'dependency_missing',reason:'No certified live MOD-IV longitudinal source release is available.',providerKind:'authoritative_reference',source:SOURCE_LABEL};
   const source=sourceFor(release.release_id);
   if(!SUPPORTED_FIELDS.has(field))return{value:null,status:'dependency_missing',reason:'Marker semantics are not certified by the annual MOD-IV longitudinal source contract.',providerKind:'authoritative_reference',source};
-  const district=String(row?.pams_pin||'').slice(0,4);
+  const pin=String(row?.pams_pin||'');
+  const district=pin.slice(0,4);
   const block=normComponent(row?.block),lot=normComponent(row?.lot),qualifier=normComponent(row?.qualifier);
   if(!/^\d{4}$/.test(district)||!block||!lot)return{value:null,status:'source_checked_no_value',reason:'Exact district/block/lot parcel identity is incomplete.',providerKind:'authoritative_reference',source};
   const partition=await districtPartition(admin,release,district);
@@ -103,8 +105,9 @@ export async function modivLongitudinalObservation(admin:any,marker:any,row:any)
   const recordKey=`${block}|${lot}|${qualifier}`;
   const record=partition.records?.[recordKey];
   if(!record){
-    console.warn('modiv_longitudinal_identity_miss',JSON.stringify({district,requested_key:recordKey,schema_version:partition?.schema_version,record_count:partition?.record_count,sample_keys:Object.keys(partition.records||{}).slice(0,8)}));
-    return{value:null,status:'source_checked_no_value',reason:'Exact parcel identity is absent from the certified annual MOD-IV release.',providerKind:'authoritative_reference',source};
+    const sampleKeys=Object.keys(partition.records||{}).slice(0,12);
+    const diagnostic=pin===DIAGNOSTIC_PIN?` Diagnostic: schema=${String(partition?.schema_version)}, record_count=${String(partition?.record_count)}, requested=${recordKey}, sample_keys=${sampleKeys.join(';')}.`:'';
+    return{value:null,status:'source_checked_no_value',reason:`Exact parcel identity is absent from the certified annual MOD-IV release.${diagnostic}`,providerKind:'authoritative_reference',source};
   }
   return{value:valueFor(record,field),status:'available',providerKind:'authoritative_reference',source};
 }
