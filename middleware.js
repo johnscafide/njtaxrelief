@@ -3,6 +3,7 @@ import { next, rewrite } from '@vercel/functions';
 const WATCHDOG_HOST = 'www.watchdogindex.com';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
+const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
 
 function isReservedRootPath(pathname) {
   return RESERVED_ROOT_PREFIXES.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
@@ -22,11 +23,24 @@ function rewriteCleanPage(request, publicPath) {
   return rewrite(destination);
 }
 
+function rewriteWatchdogSystemFile(request, apiPath) {
+  return rewrite(new URL(apiPath, request.url));
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
 
   if (host !== WATCHDOG_HOST) return next();
+
+  // WatchdogIndex has its own canonical crawl contract. Keep the legacy
+  // NJPropertyTaxRelief robots/sitemaps untouched for the separate legacy site.
+  if (url.pathname === '/robots.txt') {
+    return rewriteWatchdogSystemFile(request, '/api/watchdog-index-robots');
+  }
+  if (SITEMAP_FILE.test(url.pathname)) {
+    return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
+  }
 
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
   if (url.pathname === '/property' || url.pathname === '/property/') {

@@ -84,6 +84,19 @@ These are persistent product-brand rules for every agent, automation, and future
 - Do not weaken accessibility to achieve the brand effect. Preserve readable fallbacks for print, reduced-motion behavior, focus states, and screen-reader labels.
 - New Intelligence cards, dialogs, sheets, upsell gates, onboarding prompts, Voice surfaces, and profession-personalization surfaces must inherit this branding automatically whenever practical; do not require each future page to rediscover the styling independently.
 
+## Operational logs and recaps
+
+These rules apply to every new Watchdog build log, audit log, operating recap, handoff prompt, implementation summary, and internal navigation surface created after the WatchdogIndex domain cutover.
+
+- Use **Watchdog** as the platform/master brand. Do not rename the platform to "Watchdog Index" in logs, recaps, handoffs, automation output, or operating documentation.
+- Treat **https://www.watchdogindex.com** as the canonical Watchdog production host whenever a Watchdog URL is included.
+- Use clean root-level Watchdog URLs in new navigation, handoff links, recap links, and operational references, for example `/dashboard`, `/developer`, `/logs`, `/logs/recap`, and `/logs/recap/YYYY-MM-DD`.
+- Use `/property/...` only when explicitly referring to a physical repository/source path, implementation asset, or compatibility path. A physical file such as `property/logs/recap/YYYY-MM-DD/index.html` should be described as serving the clean Watchdog URL `https://www.watchdogindex.com/logs/recap/YYYY-MM-DD`.
+- Do not rewrite old historical evidence merely to make it look current. Preserve historical hostnames and paths when they document what actually existed at that time, and label them as historical/legacy when useful.
+- **NJPropertyTaxRelief.com remains a separate active site.** Do not describe the WatchdogIndex cutover as a wholesale rename or migration of that separate site.
+- When a log or recap discusses the domain transition itself, distinguish the platform brand (**Watchdog**), the domain (**WatchdogIndex.com**), and the product family (**Watchdog Index**) correctly.
+- New sitemap, crawler, canonical, SEO, share, and public-route evidence for Watchdog should use `www.watchdogindex.com` unless the evidence is intentionally validating coexistence or a legacy path.
+
 ## Concurrency rule
 
 Multiple Watchdog chats and automations may edit this repository concurrently.
