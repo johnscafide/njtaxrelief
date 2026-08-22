@@ -309,3 +309,382 @@
   .hm-wrap > .sc-cards { grid-template-columns: 1fr !important; }
   .hm-secbar { align-items: flex-start !important; flex-direction: column !important; }
 }
+
+/* --------------------------------------------------------------------------
+   2026-08-22 premium single-property composition
+   The NJW-214 dashboard is no longer stacked above the original report. This
+   file now owns the final visual pass for one Street View-led property page.
+   -------------------------------------------------------------------------- */
+body.hm-dashboard-page {
+  --hm-page-pad: clamp(16px, 2.15vw, 34px);
+  --hm-gap: clamp(12px, 1.25vw, 20px);
+  --hm-premium-shadow: 0 18px 55px rgba(27, 48, 78, .09);
+  --hm-premium-shadow-soft: 0 10px 30px rgba(27, 48, 78, .065);
+  font-size: clamp(15px, calc(14.2px + .18vw), 17px) !important;
+  background:
+    radial-gradient(circle at 92% 2%, rgba(45,109,246,.055), transparent 27rem),
+    #f4f7fb !important;
+}
+
+/* Keep the utility shell useful without letting it dominate the paid content. */
+.hm27-topbar {
+  height: clamp(68px, 5.4vw, 84px) !important;
+  box-shadow: 0 1px 0 rgba(16,33,63,.04) !important;
+}
+.hm27-top-in {
+  padding-inline: var(--hm-page-pad) !important;
+}
+.hm27-menu {
+  width: clamp(44px, 3.4vw, 54px) !important;
+  height: clamp(44px, 3.4vw, 54px) !important;
+  border-radius: 15px !important;
+  font-size: clamp(18px, 1.45vw, 22px) !important;
+}
+.hm27-brand-mark {
+  width: clamp(44px, 3.35vw, 52px) !important;
+  height: clamp(44px, 3.35vw, 52px) !important;
+}
+.hm27-brand-copy b {
+  font-size: clamp(20px, 1.6vw, 25px) !important;
+}
+.hm27-date {
+  padding-inline: clamp(14px, 1.6vw, 24px) !important;
+}
+.hm27-date b { font-size: clamp(13px, 1vw, 15px) !important; }
+.hm27-date small { font-size: clamp(11px, .78vw, 12px) !important; }
+
+.hm-top-in {
+  padding: clamp(14px, 1.4vw, 20px) var(--hm-page-pad) clamp(12px, 1.1vw, 16px) !important;
+  grid-template-columns: auto auto minmax(240px, 520px) 1fr auto !important;
+  gap: clamp(8px, .9vw, 13px) !important;
+}
+.hm-back,
+#hm-switch,
+.hm27-action {
+  min-height: 44px !important;
+  font-size: clamp(13px, .9vw, 15px) !important;
+}
+
+/* Street View is the hero. The identity card is intentionally quiet and
+   editorial, so the image and the property itself feel like the product. */
+.hm-hero {
+  padding: 0 var(--hm-page-pad) clamp(10px, 1vw, 14px) !important;
+}
+.hm-hero-in {
+  grid-template-columns: minmax(0, 1.45fr) minmax(360px, .78fr) !important;
+  gap: var(--hm-gap) !important;
+}
+.hm-shot {
+  height: clamp(330px, 31vw, 520px) !important;
+  border-radius: clamp(20px, 1.5vw, 26px) !important;
+  border: 1px solid rgba(209,219,232,.92) !important;
+  box-shadow: var(--hm-premium-shadow) !important;
+  background-position: center 50% !important;
+  overflow: hidden !important;
+}
+.hm-id {
+  padding: clamp(26px, 3vw, 52px) !important;
+  border-radius: clamp(20px, 1.5vw, 26px) !important;
+  border: 1px solid rgba(216,224,235,.96) !important;
+  box-shadow: var(--hm-premium-shadow-soft) !important;
+  justify-content: center !important;
+}
+.hm-kind {
+  margin-bottom: clamp(14px, 1.2vw, 20px) !important;
+  padding: 8px 11px !important;
+  border-radius: 999px !important;
+  font-size: clamp(10px, .7vw, 11px) !important;
+  letter-spacing: .09em !important;
+  text-transform: uppercase !important;
+}
+.hm-id h1 {
+  max-width: 14ch !important;
+  margin-bottom: clamp(10px, 1vw, 14px) !important;
+  font-size: clamp(31px, 3.55vw, 60px) !important;
+  line-height: .99 !important;
+  letter-spacing: -.055em !important;
+  overflow-wrap: anywhere !important;
+}
+.hm-id p {
+  margin: 0 !important;
+  font-size: clamp(14px, 1.05vw, 18px) !important;
+  line-height: 1.55 !important;
+  color: #70819a !important;
+}
+.hm-val {
+  margin-top: clamp(24px, 2.2vw, 34px) !important;
+  padding-top: clamp(20px, 1.8vw, 28px) !important;
+}
+.hm-val b {
+  font-size: clamp(38px, 3.9vw, 64px) !important;
+  line-height: .98 !important;
+}
+.hm-val span {
+  margin-top: 9px !important;
+  font-size: clamp(13px, .95vw, 16px) !important;
+  line-height: 1.45 !important;
+}
+
+.hm-wrap,
+.wrap {
+  padding: clamp(10px, 1vw, 16px) var(--hm-page-pad) clamp(40px, 4vw, 64px) !important;
+}
+.hm-wrap {
+  gap: var(--hm-gap) !important;
+}
+
+/* Four decision metrics only. Detail metrics still exist in the analysis tools
+   below, but they no longer compete with the first screen. */
+.hm-wrap > .hm-figs {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: clamp(10px, 1vw, 15px) !important;
+}
+.hm-figs > .hm-detail-metric {
+  display: none !important;
+}
+.hm-figs > div {
+  min-height: clamp(108px, 8.8vw, 132px) !important;
+  padding: clamp(17px, 1.45vw, 23px) !important;
+  border-radius: 19px !important;
+  border-color: #dfe6ef !important;
+  box-shadow: var(--hm-premium-shadow-soft) !important;
+}
+.hm-figs dt {
+  margin-bottom: 9px !important;
+  font-size: clamp(10px, .72vw, 11.5px) !important;
+  letter-spacing: .105em !important;
+}
+.hm-figs dd {
+  font-size: clamp(24px, 2.05vw, 34px) !important;
+  line-height: 1.05 !important;
+}
+.hm-figs dd em {
+  margin-top: 7px !important;
+  font-size: clamp(12px, .84vw, 14px) !important;
+}
+
+/* Analyst Intel reads like a paid briefing, not a widget. */
+.hm-wrap > .ai {
+  grid-template-columns: minmax(210px, 255px) minmax(0, 1fr) !important;
+  border-radius: clamp(20px, 1.45vw, 24px) !important;
+  border-color: #dce4ee !important;
+  box-shadow: var(--hm-premium-shadow) !important;
+}
+.hm-wrap > .ai .ai-h {
+  padding: clamp(24px, 2vw, 34px) !important;
+  background:
+    radial-gradient(circle at 25% 10%, rgba(45,109,246,.28), transparent 15rem),
+    linear-gradient(150deg, #0d294d 0%, #143b68 55%, #164e78 100%) !important;
+}
+.hm-wrap > .ai .ai-h b {
+  font-size: clamp(16px, 1.25vw, 20px) !important;
+}
+.hm-wrap > .ai .ai-h span {
+  font-size: clamp(12px, .82vw, 13.5px) !important;
+}
+.hm-wrap > .ai > .hm-lede {
+  padding: clamp(24px, 2.25vw, 36px) clamp(24px, 2.45vw, 40px) 14px !important;
+  font-size: clamp(16px, 1.18vw, 19px) !important;
+  line-height: 1.62 !important;
+}
+.hm-wrap > .ai > .ai-pts {
+  margin: 0 clamp(24px, 2.45vw, 40px) clamp(22px, 2vw, 34px) !important;
+}
+.hm-wrap > .ai > .ai-pts li {
+  padding: clamp(10px, .95vw, 14px) 0 !important;
+  font-size: clamp(14px, .96vw, 16px) !important;
+}
+
+/* Score cards/charts get the same surface language as the hero. */
+.hm-wrap > .sc-cards {
+  gap: clamp(10px, 1vw, 15px) !important;
+}
+.hm-wrap > .sc-cards .sc-c,
+.hm-wrap > .sec {
+  border: 1px solid #dfe6ef !important;
+  border-radius: 20px !important;
+  box-shadow: var(--hm-premium-shadow-soft) !important;
+}
+.hm-wrap > .sc-cards .sc-c {
+  min-height: clamp(145px, 11vw, 178px) !important;
+  padding: clamp(18px, 1.5vw, 24px) !important;
+}
+.hm-wrap > .sec h4 {
+  font-size: clamp(16px, 1.15vw, 19px) !important;
+}
+.hm-wrap > .sec p,
+.hm-wrap > .sec li {
+  font-size: clamp(14px, .94vw, 16px) !important;
+}
+
+.hm-wrap > .hm-secbar {
+  margin-top: clamp(18px, 2vw, 30px) !important;
+  padding: clamp(18px, 1.8vw, 26px) 3px 12px !important;
+  border-bottom-color: #d6dee9 !important;
+}
+.hm-secbar h2 {
+  font-size: clamp(22px, 1.8vw, 30px) !important;
+}
+.hm-secbar p {
+  font-size: clamp(13px, .95vw, 15px) !important;
+}
+.sec2-h,
+.sec2.open > .sec2-h {
+  min-height: clamp(74px, 5.3vw, 88px) !important;
+  padding: clamp(15px, 1.2vw, 20px) 4px !important;
+  grid-template-columns: clamp(42px, 3.2vw, 50px) minmax(0,1fr) 20px !important;
+  gap: clamp(12px, 1vw, 16px) !important;
+}
+.sec2-icon-tile {
+  width: clamp(42px, 3.2vw, 50px) !important;
+  height: clamp(42px, 3.2vw, 50px) !important;
+  border-radius: 14px !important;
+  font-size: clamp(15px, 1.05vw, 18px) !important;
+}
+.sec2-kicker { font-size: clamp(9.5px, .67vw, 11px) !important; }
+.sec2-t { font-size: clamp(15px, 1.08vw, 18px) !important; }
+.sec2-s { font-size: clamp(13px, .92vw, 15px) !important; }
+.sec2-b {
+  padding: 4px 4px clamp(24px, 2vw, 34px) clamp(56px, 4.25vw, 68px) !important;
+}
+
+/* Tablet: preserve the image-first hierarchy and avoid miniature SaaS type. */
+@media (max-width: 1120px) {
+  .hm-hero-in {
+    grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr) !important;
+  }
+  .hm-id h1 { font-size: clamp(32px, 4.4vw, 50px) !important; }
+  .hm-wrap > .hm-figs { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+  .hm-wrap > .sc-cards { grid-template-columns: repeat(2, minmax(0,1fr)) !important; }
+}
+
+@media (max-width: 900px) {
+  .hm27-date { display: none !important; }
+  .hm-top-in {
+    grid-template-columns: auto 1fr auto !important;
+  }
+  .hm-switch-label { display: none !important; }
+  #hm-switch { grid-column: 2 !important; width: 100% !important; }
+  .hm-saved { display: none !important; }
+  .hm27-page-actions { grid-column: 3 !important; }
+  .hm27-page-actions .hm27-action:not(.primary) { display: none !important; }
+  .hm-hero-in {
+    grid-template-columns: 1fr !important;
+  }
+  .hm-shot {
+    height: clamp(300px, 55vw, 430px) !important;
+  }
+  .hm-id {
+    padding: clamp(24px, 4.5vw, 38px) !important;
+  }
+  .hm-id h1 {
+    max-width: 18ch !important;
+    font-size: clamp(34px, 7vw, 54px) !important;
+  }
+  .hm-wrap > .ai {
+    grid-template-columns: 1fr !important;
+  }
+  .hm-wrap > .ai .ai-h {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+    min-height: auto !important;
+  }
+  .hm-wrap > .ai > .hm-lede,
+  .hm-wrap > .ai > .ai-pts {
+    grid-column: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body.hm-dashboard-page {
+    --hm-page-pad: clamp(14px, 4.2vw, 20px);
+    --hm-gap: 12px;
+  }
+  .hm27-topbar { height: 66px !important; }
+  .hm27-brand-copy small { display: none !important; }
+  .hm27-brand-mark { width: 42px !important; height: 42px !important; }
+  .hm27-brand-copy b { font-size: 20px !important; }
+  .hm27-notify { width: 42px !important; height: 42px !important; margin-left: 2px !important; }
+  .hm27-profile { margin-left: 4px !important; }
+  .hm27-profile img,
+  .hm27-avatar-fallback { width: 40px !important; height: 40px !important; }
+  .hm-top-in {
+    padding-top: 10px !important;
+    grid-template-columns: auto minmax(0,1fr) !important;
+  }
+  .hm-back {
+    width: 44px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    font-size: 0 !important;
+  }
+  .hm-back i { font-size: 14px !important; margin: 0 !important; }
+  #hm-switch { grid-column: 2 !important; min-width: 0 !important; }
+  .hm27-page-actions { display: none !important; }
+  .hm-shot {
+    height: clamp(245px, 62vw, 330px) !important;
+    border-radius: 19px !important;
+  }
+  .hm-id {
+    border-radius: 19px !important;
+    padding: 24px 22px !important;
+  }
+  .hm-kind { margin-bottom: 13px !important; }
+  .hm-id h1 {
+    max-width: none !important;
+    font-size: clamp(29px, 9.5vw, 42px) !important;
+    line-height: 1.02 !important;
+  }
+  .hm-id p {
+    font-size: 14px !important;
+  }
+  .hm-val {
+    margin-top: 20px !important;
+    padding-top: 18px !important;
+  }
+  .hm-val b {
+    font-size: clamp(36px, 12vw, 50px) !important;
+  }
+  .hm-val span { font-size: 13px !important; }
+  .hm-wrap > .hm-figs {
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 10px !important;
+  }
+  .hm-figs > div {
+    min-height: 104px !important;
+    padding: 16px !important;
+    border-radius: 16px !important;
+  }
+  .hm-figs dd { font-size: clamp(22px, 7.4vw, 29px) !important; }
+  .hm-wrap > .ai { border-radius: 18px !important; }
+  .hm-wrap > .ai .ai-h { padding: 20px 18px !important; }
+  .hm-wrap > .ai > .hm-lede { padding: 20px 18px 10px !important; font-size: 16px !important; }
+  .hm-wrap > .ai > .ai-pts { margin: 0 18px 18px !important; }
+  .hm-wrap > .sc-cards { grid-template-columns: 1fr !important; }
+  .hm-wrap > .sc-cards .sc-c { min-height: 136px !important; }
+  .hm-wrap > .hm-secbar {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  .sec2-h,
+  .sec2.open > .sec2-h {
+    grid-template-columns: 44px minmax(0,1fr) 18px !important;
+    min-height: 78px !important;
+    padding: 15px 0 !important;
+  }
+  .sec2-copy {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    row-gap: 2px !important;
+  }
+  .sec2-kicker { grid-column: 1 !important; grid-row: 1 !important; }
+  .sec2-t { grid-column: 1 !important; grid-row: 2 !important; font-size: 15px !important; }
+  .sec2-s { grid-column: 1 !important; grid-row: 3 !important; margin-top: 4px !important; font-size: 13px !important; }
+  .sec2-b { padding-left: 0 !important; }
+}
+
+@media (max-width: 380px) {
+  .hm27-brand-copy { display: none !important; }
+  .hm-wrap > .hm-figs { grid-template-columns: 1fr !important; }
+}

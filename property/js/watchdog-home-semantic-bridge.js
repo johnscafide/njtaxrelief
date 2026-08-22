@@ -21,10 +21,10 @@ function installHistory(){
     var sb=client(),pin=validPin(r&&r.pams_pin),marker=String(markerId||CANONICAL_SCORE).trim(),model=String(modelVersion||CANONICAL_MODEL).trim();
     if(!sb||!pin||marker!==CANONICAL_SCORE||model!==CANONICAL_MODEL)return Promise.resolve([]);
     return sb.from('score_observations')
-      .select('pams_pin,marker_id,score,observed_at,observed_on,model_version,evidence_coverage')
+      .select('pams_pin,marker_id,score,observed_at,model_version')
       .eq('pams_pin',pin)
-      .eq('marker_id',CANONICAL_SCORE)
-      .eq('model_version',CANONICAL_MODEL)
+      .eq('marker_id',marker)
+      .eq('model_version',model)
       .order('observed_at',{ascending:true})
       .limit(365)
       .then(function(result){if(result.error)throw result.error;return result.data||[];});
