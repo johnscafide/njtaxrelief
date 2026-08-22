@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-22T11:41:55.167Z",
+  "generated_at": "2026-08-22T11:47:50.787Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -101,6 +101,7 @@
     "watchdog.municipal.municipal_source_coverage",
     "watchdog.municipal_cost_absorption_score",
     "watchdog.njplus.affordable_supply_coverage",
+    "watchdog.njplus.assessment_change_trace",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
     "watchdog.njplus.environmental_case_activity",
@@ -233,6 +234,7 @@
     "watchdog.municipal.municipal_source_coverage",
     "watchdog.municipal_cost_absorption_score",
     "watchdog.njplus.affordable_supply_coverage",
+    "watchdog.njplus.assessment_change_trace",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
     "watchdog.njplus.environmental_case_activity",
@@ -272,8 +274,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 130,
-    "blocked": 168,
+    "live": 131,
+    "blocked": 167,
     "retired": 0,
     "untriaged": 0
   },
@@ -4944,16 +4946,16 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "ordered(assessment_land_history, assessment_improvement_history, assessment_total_history)",
       "dependencies": [
         "nj-dca-modiv-longitudinal"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.parcel_record_volatility",
