@@ -20,5 +20,13 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install --disable-pip-version-check requests
-      - name: Probe public NJ DCA Power BI semantic queries
+      - name: Probe public NJ DCA source contract
         run: python property/scripts/probe_dca_affordable_powerbi.py
+      - name: Upload source probe artifact
+        if: ${{ hashFiles('property/data/*-probe.json') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: dca-source-probe
+          path: property/data/*-probe.json
+          if-no-files-found: error
+          retention-days: 1
