@@ -6,6 +6,7 @@
 
   var BRAND_STYLE='/property/css/brand-consistency.css';
   var READABILITY_STYLE='/property/css/agent-control-readability.css';
+  var MOBILE_AUDIT_STYLE='/property/css/agent-control-mobile-audit.css';
   var BRAND_RUNTIME='/property/js/brand-consistency-runtime.js';
 
   function ensureStyle(href){
@@ -19,6 +20,7 @@
   function ensureBrandAssets(){
     ensureStyle(BRAND_STYLE);
     ensureStyle(READABILITY_STYLE);
+    ensureStyle(MOBILE_AUDIT_STYLE);
     if(window.__WATCHDOG_BRAND_CONSISTENCY__||document.querySelector('script[src="'+BRAND_RUNTIME+'"]'))return;
     var script=document.createElement('script');
     script.src=BRAND_RUNTIME;
