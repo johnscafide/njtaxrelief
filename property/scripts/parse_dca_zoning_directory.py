@@ -15,7 +15,7 @@ import json
 import re
 import urllib.request
 import zipfile
-from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from xml.etree import ElementTree as ET
 
@@ -134,6 +134,15 @@ def fetch_source(url: str) -> tuple[bytes, str | None]:
         return response.read(), response.headers.get("Last-Modified")
 
 
+def _source_timestamp(last_modified: str | None) -> str | None:
+    if not last_modified:
+        return None
+    try:
+        return parsedate_to_datetime(last_modified).isoformat().replace("+00:00", "Z")
+    except Exception:
+        return last_modified
+
+
 def build_artifact(blob: bytes, source_url: str, last_modified: str | None) -> dict:
     records = parse_workbook(blob)
     by_code: dict[str, dict] = {}
@@ -164,9 +173,10 @@ def build_artifact(blob: bytes, source_url: str, last_modified: str | None) -> d
     )
     phone_count = sum(1 for row in by_code.values() if row["zoning_office_contact"].get("phone"))
     email_count = sum(1 for row in by_code.values() if row["zoning_office_contact"].get("email_or_contact_page"))
+    source_timestamp = _source_timestamp(last_modified)
     return {
         "schema_version": 1,
-        "generated_at": datetime.now(timezone.utc).isoformat().replace("+00:00", "Z"),
+        "generated_at": source_timestamp,
         "source": source_url,
         "source_sha256": hashlib.sha256(blob).hexdigest(),
         "source_last_modified": last_modified,
