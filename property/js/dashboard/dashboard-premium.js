@@ -1,0 +1,153 @@
+/* Watchdog Dashboard Premium Value Layer
+   Additive, plan-aware dashboard refinement loaded after the core dashboard. */
+(function(){
+  'use strict';
+  if(window.__watchdogDashboardPremium)return;
+  window.__watchdogDashboardPremium=true;
+
+  var SUPABASE_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
+  var SUPABASE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var PREF_KEY='watchdog_premium_dashboard_v1';
+  var GEO_CACHE_KEY='watchdog_dashboard_geo_v1';
+  var THEME_KEY='watchdog_dashboard_theme';
+  var NJ_GEOCODE='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+  var NJ_BOUNDS={west:-75.62,north:41.38,east:-73.85,south:38.88};
+  var RANK={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
+  var client=null,state={user:null,profile:{},entitlement:null,plan:'standard',properties:[],scores:[],changes:[],outreach:[],live:null,newsletter:null,prefs:null,mapResolvedCount:null};
+  var booting=false,booted=false,observer=null,mapInstance=null,mutationTimer=null,presenceTimer=null;
+
+  var CUSTOM_WIDGETS=[
+    {id:'live-activity',label:'Live site activity',min:'standard',defaultOn:true},
+    {id:'watchlist-momentum',label:'Watchlist momentum',min:'pro',defaultOn:true},
+    {id:'data-health',label:'Data health',min:'pro_plus',defaultOn:true},
+    {id:'newsletter-analytics',label:'Newsletter analytics',min:'developer',defaultOn:true,comingSoon:true},
+    {id:'portfolio-exposure',label:'Portfolio exposure',min:'pro_plus',defaultOn:false},
+    {id:'outreach-queue',label:'Outreach queue',min:'pro',defaultOn:false},
+    {id:'change-velocity',label:'Change velocity',min:'pro',defaultOn:false}
+  ];
+
+  function q(s,r){return(r||document).querySelector(s);}
+  function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}
+  function n(v){v=Number(v);return Number.isFinite(v)?v:0;}
+  function valid(v){v=Number(v);return Number.isFinite(v)?v:null;}
+  function money(v){v=n(v);var a=Math.abs(v);if(a>=1e9)return'$'+(v/1e9).toFixed(2).replace(/\.00$/,'')+'B';if(a>=1e6)return'$'+(v/1e6).toFixed(a>=1e7?1:2).replace(/\.00$/,'').replace(/\.0$/,'')+'M';return'$'+Math.round(v).toLocaleString('en-US');}
+  function unique(a){return Array.from(new Set((a||[]).filter(Boolean)));}
+  function plan(v){v=String(v||'').toLowerCase().replace(/\+/g,'_plus').replace(/[^a-z_]/g,'');if(v==='free')v='standard';return Object.prototype.hasOwnProperty.call(RANK,v)?v:'standard';}
+  function can(t){return RANK[state.plan]>=RANK[plan(t)];}
+  function isDeveloper(){return state.plan==='developer';}
+  function delay(ms){return new Promise(function(resolve){setTimeout(resolve,ms);});}
+
+  function getClient(){
+    if(client)return client;
+    try{if(window.NJPTRSupabaseRuntime&&typeof window.NJPTRSupabaseRuntime.createClient==='function')client=window.NJPTRSupabaseRuntime.createClient();}catch(_){ }
+    if(!client&&window.supabase)client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
+    return client;
+  }
+
+  function defaultPrefs(){return{hidden:CUSTOM_WIDGETS.filter(function(w){return !w.defaultOn;}).map(function(w){return w.id;}),snapshotDefaultApplied:false,theme:null};}
+  function mergePrefs(remote){
+    var p=defaultPrefs();
+    if(remote&&typeof remote==='object'){if(Array.isArray(remote.hidden))p.hidden=remote.hidden.slice();if(remote.snapshotDefaultApplied)p.snapshotDefaultApplied=true;if(remote.theme==='light'||remote.theme==='dark')p.theme=remote.theme;}
+    try{var local=JSON.parse(localStorage.getItem(PREF_KEY)||'null');if(local&&typeof local==='object'){if(Array.isArray(local.hidden))p.hidden=local.hidden.slice();if(local.snapshotDefaultApplied)p.snapshotDefaultApplied=true;if(local.theme==='light'||local.theme==='dark')p.theme=local.theme;}}catch(_){ }
+    state.prefs=p;
+  }
+  function persistPrefs(){
+    if(!state.prefs)return;
+    try{localStorage.setItem(PREF_KEY,JSON.stringify(state.prefs));}catch(_){ }
+    var db=getClient();if(!db||!state.user)return;
+    db.from('dashboard_layout_preferences').select('layout').eq('user_id',state.user.id).maybeSingle().then(function(res){
+      var layout=res&&res.data&&res.data.layout&&typeof res.data.layout==='object'?res.data.layout:{};
+      layout[PREF_KEY]={hidden:state.prefs.hidden,snapshotDefaultApplied:state.prefs.snapshotDefaultApplied,theme:state.prefs.theme,updated_at:new Date().toISOString()};
+      return db.from('dashboard_layout_preferences').upsert({user_id:state.user.id,layout:layout,updated_at:new Date().toISOString()},{onConflict:'user_id'});
+    }).catch(function(){});
+  }
+
+  async function loadData(){
+    var db=getClient();if(!db)return false;
+    var sessionRes=await db.auth.getSession(),session=sessionRes&&sessionRes.data&&sessionRes.data.session;if(!session||!session.user)return false;
+    state.user=session.user;
+    var base=await Promise.allSettled([
+      db.from('profiles').select('id,full_name,display_name,avatar_url,photo_url,role,roles,pro_agent,plan,plan_tier,account_role').eq('id',state.user.id).maybeSingle(),
+      db.rpc('get_my_entitlement'),
+      db.from('saved_properties').select('id,pams_pin,address,town,county,zip,assessed,last_year_tax,effective_rate,watchdog_value,has_appeal_case,lat,lon,verified,updated_at,created_at').eq('user_id',state.user.id).order('created_at',{ascending:false}),
+      db.from('dashboard_layout_preferences').select('layout').eq('user_id',state.user.id).maybeSingle(),
+      db.rpc('get_watchdog_live_presence')
+    ]);
+    state.profile=base[0].status==='fulfilled'&&base[0].value.data||{};
+    var ent=base[1].status==='fulfilled'&&base[1].value.data||null;state.entitlement=Array.isArray(ent)?ent[0]:ent;
+    state.properties=base[2].status==='fulfilled'&&!base[2].value.error&&Array.isArray(base[2].value.data)?base[2].value.data:[];
+    var remoteLayout=base[3].status==='fulfilled'&&base[3].value.data&&base[3].value.data.layout||{};mergePrefs(remoteLayout[PREF_KEY]);
+    var live=base[4].status==='fulfilled'&&base[4].value.data||null;state.live=Array.isArray(live)?live[0]:live;
+    if(plan(state.profile.account_role)==='developer'||plan(state.entitlement&&state.entitlement.account_role)==='developer')state.plan='developer';else state.plan=plan((state.entitlement&&state.entitlement.plan_tier)||state.profile.plan_tier||state.profile.plan);
+    var pins=unique(state.properties.map(function(p){return p.pams_pin;})),extra=[];
+    if(pins.length){
+      extra.push(db.from('public_watchdog_score_cache').select('pams_pin,watchdog_score,peer_median,town,county,computed_at').in('pams_pin',pins));
+      extra.push(db.from('property_update_events').select('pams_pin,event_type,severity,title,occurred_at,read_at,delta_numeric,minimum_plan').in('pams_pin',pins).gte('occurred_at',new Date(Date.now()-90*86400000).toISOString()).order('occurred_at',{ascending:false}).limit(3000));
+    }else{extra.push(Promise.resolve({data:[]}));extra.push(Promise.resolve({data:[]}));}
+    extra.push(db.from('agent_opportunity_actions').select('pams_pin,action_state,outcome,snoozed_until,first_opened_at,touched_at,updated_at').eq('user_id',state.user.id).limit(1000));
+    if(isDeveloper())extra.push(Promise.allSettled([
+      db.from('marketing_email_broadcasts').select('status,provider_key,send_at,created_at').eq('user_id',state.user.id).limit(500),
+      db.from('marketing_email_contact_links').select('id',{count:'exact',head:true}).eq('user_id',state.user.id),
+      db.from('marketing_email_drafts').select('id',{count:'exact',head:true}).eq('user_id',state.user.id)
+    ]));else extra.push(Promise.resolve(null));
+    var more=await Promise.allSettled(extra);
+    state.scores=more[0].status==='fulfilled'&&Array.isArray(more[0].value.data)?more[0].value.data:[];
+    state.changes=more[1].status==='fulfilled'&&Array.isArray(more[1].value.data)?more[1].value.data:[];
+    state.outreach=more[2].status==='fulfilled'&&Array.isArray(more[2].value.data)?more[2].value.data:[];
+    if(isDeveloper()&&more[3].status==='fulfilled'&&more[3].value){var nr=more[3].value;state.newsletter={broadcasts:nr[0]&&nr[0].status==='fulfilled'&&Array.isArray(nr[0].value.data)?nr[0].value.data:[],contacts:nr[1]&&nr[1].status==='fulfilled'?n(nr[1].value.count):0,drafts:nr[2]&&nr[2].status==='fulfilled'?n(nr[2].value.count):0};}
+    return true;
+  }
+
+  function userFirstName(){var raw=state.profile.display_name||state.profile.full_name||state.user&&state.user.user_metadata&&(state.user.user_metadata.full_name||state.user.user_metadata.name)||'';raw=String(raw||'').trim();return raw?raw.split(/\s+/)[0]:'there';}
+  function greeting(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
+  function applyHeader(){
+    var welcome=q('.wd4-welcome-copy h1'),welcomeText=greeting()+', '+userFirstName()+'.';if(welcome&&(welcome.textContent||'').trim()!==welcomeText)welcome.textContent=welcomeText;
+    var settings=q('[data-action="widgets"]');if(settings){var icon=q('i',settings);if(icon)icon.className='fas fa-gear';var label=q('span',settings);if(label&&label.textContent!=='Widgets')label.textContent='Widgets';settings.setAttribute('aria-label','Dashboard settings');settings.title='Dashboard settings';}
+    qa('[data-action="layout"],.wdv2-drag-handle,.wdv2-expand,.wd5-resize-handle,.wd4-card-menu,.wd4-map-handle').forEach(function(el){el.remove();});qa('.wd4-card').forEach(function(card){card.classList.remove('wdv2-expanded');card.draggable=false;card.removeAttribute('draggable');});addThemeToggle();paintPresence();
+  }
+  function currentTheme(){var explicit=state.prefs&&state.prefs.theme;try{explicit=explicit||localStorage.getItem(THEME_KEY);}catch(_){ }if(explicit==='dark'||explicit==='light')return explicit;var dom=document.documentElement.getAttribute('data-wdv2-theme');if(dom==='dark'||dom==='light')return dom;return window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}
+  function applyTheme(theme,persist){theme=theme==='dark'?'dark':'light';document.documentElement.setAttribute('data-wdv2-theme',theme);if(state.prefs)state.prefs.theme=theme;try{localStorage.setItem(THEME_KEY,theme);}catch(_){ }var btn=q('#wd-premium-theme-toggle');if(btn){btn.setAttribute('aria-label',theme==='dark'?'Switch to light mode':'Switch to dark mode');btn.title=btn.getAttribute('aria-label');var i=q('i',btn);if(i)i.className=theme==='dark'?'fas fa-sun':'fas fa-moon';}if(persist)persistPrefs();}
+  function addThemeToggle(){var actions=q('.wd4-page-actions');if(!actions)return;var btn=q('#wd-premium-theme-toggle');if(!btn){btn=document.createElement('button');btn.type='button';btn.id='wd-premium-theme-toggle';btn.className='wd4-grid-btn wd-premium-theme-toggle';btn.innerHTML='<i class="fas fa-moon"></i>';btn.addEventListener('click',function(){applyTheme(currentTheme()==='dark'?'light':'dark',true);});var exp=q('[data-action="export"]',actions);actions.insertBefore(btn,exp||actions.firstChild);}applyTheme(currentTheme(),false);}
+  function paintPresence(){var actions=q('.wd4-page-actions');if(!actions)return;var count=n(state.live&&state.live.active_sessions),windowMin=n(state.live&&state.live.window_minutes)||5;var chip=q('#wd-live-presence');if(!chip){chip=document.createElement('div');chip.id='wd-live-presence';chip.className='wd-live-presence';actions.insertBefore(chip,actions.firstChild);}var dots='';for(var i=0;i<Math.min(count,4);i++)dots+='<i aria-hidden="true"></i>';var markup='<span class="wd-live-dot"></span><b>'+count+' active now</b><span class="wd-live-avatars">'+dots+'</span>';if(chip.innerHTML!==markup)chip.innerHTML=markup;var title='Privacy-preserving active sessions in the last '+windowMin+' minutes. No identities are exposed.';if(chip.title!==title)chip.title=title;}
+
+  function tagIntelligence(){qa('.wd-contextual-voice-entry,.wd-watchlist-intent,[data-watchdog-intelligence]').forEach(function(el){el.classList.add('wd-intelligence-premium');});var voice=q('.wd-contextual-voice-entry>div>span');if(voice&&/WATCHDOG VOICE/i.test(voice.textContent||''))voice.textContent='WATCHDOG INTELLIGENCE · VOICE';var research=q('.wd-watchlist-intent>div>span');if(research&&/WATCHLIST RESEARCH CONTEXT/i.test(research.textContent||''))research.textContent='WATCHDOG INTELLIGENCE · RESEARCH CONTEXT';}
+  function scoreMap(){var out={};state.scores.forEach(function(r){var v=valid(r.watchdog_score);if(r.pams_pin&&v!=null)out[r.pams_pin]=v;});return out;}
+  function fixOpportunities(){var card=q('[data-card-id="opportunities"]');if(!card)return;var total=state.properties.length,flagged=state.properties.filter(function(p){return!!p.has_appeal_case;}).length,share=total?Math.round(flagged/total*100):0;card.classList.add('wd-premium-opportunities');card.innerHTML='<div class="wd-premium-card-head"><span>Appeals / Opportunities</span><i class="fas fa-circle-info" title="Saved properties currently carrying an appeal/opportunity flag."></i></div><div class="wd-premium-opportunity-main"><strong>'+flagged+'</strong><span>Active</span></div><div class="wd-premium-opportunity-meta"><span>Flagged saved properties</span><b>'+flagged+' of '+total+'</b></div><div class="wd-premium-meter" aria-label="'+share+' percent of saved properties flagged"><i style="width:'+share+'%"></i></div>';}
+
+  function normalizeTown(v){return String(v||'Unknown').toUpperCase().replace(/\b(TOWNSHIP|TWNSHP|TOWNSHP)\b/g,'TWP').replace(/\bBOROUGH\b/g,'BORO').replace(/[^A-Z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
+  function townLabel(v){return normalizeTown(v).toLowerCase().replace(/\b[a-z]/g,function(c){return c.toUpperCase();});}
+  function rebuildMunicipality(){var card=q('[data-card-id="municipality"]');if(!card)return;var sm=scoreMap(),groups={};state.properties.forEach(function(p){var key=normalizeTown(p.town),g=groups[key]||(groups[key]={label:townLabel(p.town||key),count:0,tax:0,scores:[]});g.count++;g.tax+=n(p.last_year_tax);if(valid(sm[p.pams_pin])!=null)g.scores.push(sm[p.pams_pin]);});var rows=Object.keys(groups).map(function(k){var g=groups[k];g.score=g.scores.length?g.scores.reduce(function(a,b){return a+b;},0)/g.scores.length:null;return g;}).sort(function(a,b){return b.tax-a.tax;});card.classList.remove('wdv2-card-m','wdv2-span-4','wdv2-span-6','wdv2-span-8');card.classList.add('wdv2-card-l','wdv2-span-12','wd-premium-municipality');card.innerHTML='<div class="wd-premium-card-head"><span>By Municipality</span><small>'+rows.length+' municipalities · '+state.properties.length+' properties</small></div><div class="wd-premium-muni-wrap"><table class="wd-premium-muni-table"><thead><tr><th>Municipality</th><th>Score</th><th>Properties</th><th>Tax Load</th></tr></thead><tbody>'+rows.map(function(g){var s=g.score==null?'—':Math.round(g.score),bar=g.score==null?0:Math.max(4,Math.min(100,g.score));return'<tr tabindex="0"><td>'+esc(g.label)+'</td><td><span>'+s+'</span><i><b style="width:'+bar+'%"></b></i></td><td>'+g.count+'</td><td>'+money(g.tax)+'</td></tr>';}).join('')+'</tbody></table></div>';}
+
+  function readGeoCache(){try{return JSON.parse(localStorage.getItem(GEO_CACHE_KEY)||'{}')||{};}catch(_){return{};}}
+  function saveGeoCache(cache){try{localStorage.setItem(GEO_CACHE_KEY,JSON.stringify(cache));}catch(_){ }}
+  function validNj(lat,lon){return Number.isFinite(lat)&&Number.isFinite(lon)&&lat>=NJ_BOUNDS.south&&lat<=NJ_BOUNDS.north&&lon>=NJ_BOUNDS.west&&lon<=NJ_BOUNDS.east;}
+  async function njGeocode(p){var query=[p.address,p.town,'NJ',p.zip].filter(Boolean).join(', ');if(!query)return null;var params=new URLSearchParams({SingleLine:query,outSR:'4326',maxLocations:'1',f:'json'});try{var res=await fetch(NJ_GEOCODE+'?'+params.toString());if(!res.ok)return null;var data=await res.json(),c=data&&data.candidates&&data.candidates[0];if(!c||!c.location)return null;var lat=Number(c.location.y),lon=Number(c.location.x),score=Number(c.score)||0;if(score<80||!validNj(lat,lon))return null;return{lat:lat,lon:lon,score:score,matched:c.address||query};}catch(_){return null;}}
+  async function resolveMapPoints(){var cache=readGeoCache(),resolved=[],missing=[];state.properties.forEach(function(p){var lat=valid(p.lat),lon=valid(p.lon),key=p.pams_pin||[p.address,p.town,p.zip].join('|');if(lat!=null&&lon!=null&&validNj(lat,lon)){resolved.push(Object.assign({},p,{_lat:lat,_lon:lon,_geo:'saved'}));return;}var c=cache[key];if(c&&validNj(Number(c.lat),Number(c.lon))){resolved.push(Object.assign({},p,{_lat:Number(c.lat),_lon:Number(c.lon),_geo:'cache'}));return;}missing.push({p:p,key:key});});for(var i=0;i<missing.length;i+=4){var batch=missing.slice(i,i+4),hits=await Promise.all(batch.map(function(item){return njGeocode(item.p).then(function(g){return{item:item,g:g};});}));hits.forEach(function(hit){if(!hit.g)return;cache[hit.item.key]={lat:hit.g.lat,lon:hit.g.lon,score:hit.g.score,matched:hit.g.matched,at:new Date().toISOString()};resolved.push(Object.assign({},hit.item.p,{_lat:hit.g.lat,_lon:hit.g.lon,_geo:'nj_geocoder'}));});if(i+4<missing.length)await delay(90);}saveGeoCache(cache);return resolved;}
+  async function rebuildMap(){var card=q('[data-card-id="map"]'),old=card&&q('#wd4-map',card);if(!card||!old||!window.L)return;var points=await resolveMapPoints();if(!document.body.contains(card))return;state.mapResolvedCount=points.length;if(mapInstance){try{mapInstance.remove();}catch(_){ }mapInstance=null;}var fresh=document.createElement('div');fresh.id='wd4-map';fresh.className='wd4-map';fresh.dataset.premiumMap='1';old.replaceWith(fresh);var L=window.L,map=L.map(fresh,{zoomControl:false,attributionControl:true,scrollWheelZoom:true});mapInstance=map;window.__watchdogPremiumDashboardMap=map;L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap &copy; CARTO'}).addTo(map);L.control.zoom({position:'topright'}).addTo(map);var sm=scoreMap(),bounds=[];points.forEach(function(p){var score=valid(sm[p.pams_pin]),cls=p.has_appeal_case?'good':score!=null&&score<45?'risk':score!=null&&score<65?'monitor':'neutral';var icon=L.divIcon({className:'',html:'<div class="wd4-map-marker '+cls+'"></div>',iconSize:[17,17],iconAnchor:[8,8]});var marker=L.marker([p._lat,p._lon],{icon:icon}).addTo(map);marker.bindTooltip('<b>'+esc(p.address||'Property')+'</b><br>'+esc(p.town||'')+(score!=null?'<br>Watchdog Score '+Math.round(score):''));bounds.push([p._lat,p._lon]);});if(bounds.length===1)map.setView(bounds[0],14);else if(bounds.length>1)map.fitBounds(bounds,{padding:[35,35],maxZoom:13});else map.setView([40.0583,-74.4057],8);var legend=q('.wd4-map-legend',card);if(legend){var note=q('.wd-premium-map-coverage',legend);if(!note){note=document.createElement('span');note.className='wd-premium-map-coverage';legend.appendChild(note);}note.textContent=points.length+' of '+state.properties.length+' saved properties mapped'+(points.length<state.properties.length?' · '+(state.properties.length-points.length)+' need location':'');}var health=q('[data-card-id="data-health"]');if(health&&can('pro_plus'))health.replaceWith(premiumCard(CUSTOM_WIDGETS[2],dataHealthBody()));setTimeout(function(){try{map.invalidateSize();}catch(_){ }},80);}
+
+  function widgetVisible(id){return state.prefs&&state.prefs.hidden.indexOf(id)<0;}
+  function lockedMarkup(def){var label=def.min==='pro_plus'?'Pro+ Exclusive':'Pro Exclusive';if(def.comingSoon)return'<div class="wd-premium-locked"><div class="wd-premium-placeholder"><i></i><i></i><i></i></div><div class="wd-premium-lock-overlay"><span>Coming Soon</span><b>'+esc(def.label)+'</b><small>Newsletter Marketing is being prepared for Watchdog.</small></div></div>';return'<div class="wd-premium-locked"><div class="wd-premium-placeholder"><i></i><i></i><i></i></div><div class="wd-premium-lock-overlay"><span>'+label+'</span><b>Unlock '+esc(def.label)+'</b><a href="/property/pro">Upgrade to '+(def.min==='pro_plus'?'Pro+':'Pro')+'</a></div></div>';}
+  function premiumCard(def,body){var card=document.createElement('section'),badge=def.comingSoon&&!isDeveloper()?'SOON':def.min==='pro_plus'?'PRO+':def.min==='developer'?'DEV':def.min==='pro'?'PRO':'';card.className='wd4-card wd-premium-analytics-card wdv2-card-s wdv2-span-3';card.dataset.cardId=def.id;card.dataset.premiumWidget=def.id;card.innerHTML='<div class="wd-premium-card-head"><span>'+esc(def.label)+'</span>'+(badge?'<em>'+esc(badge)+'</em>':'')+'</div>'+(body||'');return card;}
+  function liveBody(){var active=n(state.live&&state.live.active_sessions),changesToday=state.changes.filter(function(r){return new Date(r.occurred_at).toDateString()===new Date().toDateString();}).length;return'<div class="wd-premium-stat-grid"><div><strong>'+active+'</strong><span>Active now</span></div><div><strong>'+state.properties.length+'</strong><span>Saved properties</span></div><div><strong>'+changesToday+'</strong><span>Changes today</span></div></div>';}
+  function momentumBody(){var now=Date.now(),week=7*86400000,weekChanges=state.changes.filter(function(r){return new Date(r.occurred_at).getTime()>=now-week;}),high=weekChanges.filter(function(r){return /high|critical|urgent/i.test(String(r.severity||''));}),moved=unique(weekChanges.map(function(r){return r.pams_pin;}));return'<div class="wd-premium-stat-grid"><div><strong>'+weekChanges.length+'</strong><span>7-day changes</span></div><div><strong>'+high.length+'</strong><span>High priority</span></div><div><strong>'+moved.length+'</strong><span>Properties moved</span></div></div>';}
+  function dataHealthBody(){var total=state.properties.length||1,sm=scoreMap(),mapped=state.mapResolvedCount==null?state.properties.filter(function(p){return valid(p.lat)!=null&&valid(p.lon)!=null;}).length:state.mapResolvedCount,scored=state.properties.filter(function(p){return valid(sm[p.pams_pin])!=null;}).length,complete=state.properties.filter(function(p){return n(p.assessed)>0&&n(p.last_year_tax)>0&&n(p.watchdog_value)>0;}).length,coverage=Math.round(((mapped+scored+complete)/(total*3))*100);return'<div class="wd-premium-health"><strong>'+coverage+'%</strong><span>Portfolio data coverage</span><div><b>'+mapped+'/'+total+' mapped</b><b>'+scored+'/'+total+' scored</b><b>'+complete+'/'+total+' financially complete</b></div></div>';}
+  function exposureBody(){var assessed=0,tax=0,over=0;state.properties.forEach(function(p){assessed+=n(p.assessed);tax+=n(p.last_year_tax);var a=n(p.assessed),v=n(p.watchdog_value);if(a>0&&v>0&&a>v)over+=(a-v);});return'<div class="wd-premium-stat-grid"><div><strong>'+money(assessed)+'</strong><span>Total assessment</span></div><div><strong>'+money(tax)+'</strong><span>Annual tax</span></div><div><strong>'+money(over)+'</strong><span>Potential over-assessment</span></div></div>';}
+  function outreachBody(){var open=state.outreach.filter(function(r){return !/done|complete|dismissed|closed/i.test(String(r.action_state||''));}),snoozed=open.filter(function(r){return r.snoozed_until&&new Date(r.snoozed_until)>new Date();}),touched=state.outreach.filter(function(r){return r.touched_at&&new Date(r.touched_at).getTime()>=Date.now()-7*86400000;});return'<div class="wd-premium-stat-grid"><div><strong>'+open.length+'</strong><span>Open actions</span></div><div><strong>'+snoozed.length+'</strong><span>Snoozed</span></div><div><strong>'+touched.length+'</strong><span>Touched 7d</span></div></div>';}
+  function velocityBody(){var now=Date.now(),w=7*86400000,curr=state.changes.filter(function(r){var t=new Date(r.occurred_at).getTime();return t>=now-w;}),prev=state.changes.filter(function(r){var t=new Date(r.occurred_at).getTime();return t>=now-2*w&&t<now-w;}),delta=prev.length?Math.round((curr.length-prev.length)/prev.length*100):(curr.length?100:0);return'<div class="wd-premium-velocity"><strong>'+curr.length+'</strong><span>changes this week</span><b class="'+(delta>=0?'up':'down')+'">'+(delta>=0?'↑ ':'↓ ')+Math.abs(delta)+'% vs prior week</b></div>';}
+  function newsletterBody(){var d=state.newsletter||{broadcasts:[],contacts:0,drafts:0},sent=d.broadcasts.filter(function(r){return /sent|delivered|completed/i.test(String(r.status||''));}).length;return'<div class="wd-premium-stat-grid"><div><strong>'+d.broadcasts.length+'</strong><span>Broadcasts</span></div><div><strong>'+sent+'</strong><span>Sent</span></div><div><strong>'+d.contacts+'</strong><span>Synced contacts</span></div></div><small class="wd-premium-card-note">'+d.drafts+' draft'+(d.drafts===1?'':'s')+' in progress</small>';}
+  function bodyFor(def){if(def.comingSoon&&!isDeveloper())return lockedMarkup(def);if(!can(def.min))return lockedMarkup(def);if(def.id==='live-activity')return liveBody();if(def.id==='watchlist-momentum')return momentumBody();if(def.id==='data-health')return dataHealthBody();if(def.id==='portfolio-exposure')return exposureBody();if(def.id==='outreach-queue')return outreachBody();if(def.id==='change-velocity')return velocityBody();if(def.id==='newsletter-analytics')return newsletterBody();return'';}
+
+  function renderPremiumWidgets(){var dash=q('#wdv2-dash');if(!dash)return;var band=q('[data-band="premium"]',dash);if(!band){band=document.createElement('section');band.className='wdv2-band wd-premium-band';band.dataset.band='premium';var portfolio=q('[data-band="portfolio"]',dash);dash.insertBefore(band,portfolio||q('[data-band="secondary"]',dash)||null);}band.innerHTML='';CUSTOM_WIDGETS.forEach(function(def){if(widgetVisible(def.id))band.appendChild(premiumCard(def,bodyFor(def)));});band.hidden=!band.children.length;}
+  function applySnapshotDefault(){if(!state.prefs||state.prefs.snapshotDefaultApplied)return;var snapshotToggle=q('[data-wdv2-toggle="taxvalue"]');if(snapshotToggle&&snapshotToggle.classList.contains('on')){try{snapshotToggle.click();}catch(_){var card=q('[data-card-id="taxvalue"]');if(card)card.hidden=true;}}else{var tax=q('[data-card-id="taxvalue"]');if(tax)tax.hidden=true;}var municipalityToggle=q('[data-wdv2-toggle="municipality"]');if(municipalityToggle&&!municipalityToggle.classList.contains('on')){try{municipalityToggle.click();}catch(_){var muni=q('[data-card-id="municipality"]');if(muni)muni.hidden=false;}}state.prefs.snapshotDefaultApplied=true;persistPrefs();}
+  function enhanceSettings(){var modal=q('#wdv2-widget-modal'),grid=modal&&q('.wdv2-widget-grid',modal);if(!modal||!grid)return;var desc=q('.wdv2-widget-head p',modal),copy='Show or hide dashboard cards. Card sizes and layout are curated for clarity and cannot be resized.';if(desc&&desc.textContent!==copy)desc.textContent=copy;var theme=q('.wdv2-theme',modal);if(theme)theme.remove();var wrap=q('[data-wd-premium-settings]',grid);if(!wrap){wrap=document.createElement('div');wrap.dataset.wdPremiumSettings='1';wrap.className='wd-premium-settings';wrap.innerHTML='<h3>Premium analytics</h3>'+CUSTOM_WIDGETS.map(function(def){var on=widgetVisible(def.id),tag=def.comingSoon?'Coming Soon':def.min==='pro_plus'?'Pro+':def.min==='pro'?'Pro':def.min==='developer'?'Developer':'';return'<div class="wdv2-widget-row"><span>'+esc(def.label)+(tag?'<small>'+esc(tag)+'</small>':'')+'</span><button class="wdv2-switch '+(on?'on':'')+'" type="button" data-premium-toggle="'+def.id+'" aria-pressed="'+on+'"><i></i></button></div>';}).join('');grid.appendChild(wrap);qa('[data-premium-toggle]',wrap).forEach(function(btn){btn.addEventListener('click',function(){var id=btn.dataset.premiumToggle,i=state.prefs.hidden.indexOf(id);if(i>=0)state.prefs.hidden.splice(i,1);else state.prefs.hidden.push(id);persistPrefs();renderPremiumWidgets();syncPremiumSettings();});});}syncPremiumSettings();applySnapshotDefault();}
+  function syncPremiumSettings(){var wrap=q('[data-wd-premium-settings]');if(!wrap)return;qa('[data-premium-toggle]',wrap).forEach(function(btn){var on=widgetVisible(btn.dataset.premiumToggle);btn.classList.toggle('on',on);btn.setAttribute('aria-pressed',String(on));});}
+  function lockSizing(){qa('.wdv2-expand,.wdv2-drag-handle,.wd5-resize-handle,.wd4-card-menu,.wd4-map-handle').forEach(function(x){x.remove();});qa('.wd4-card').forEach(function(c){c.classList.remove('wdv2-expanded','wdv2-dragging','wdv2-drop-target');c.draggable=false;c.removeAttribute('draggable');});var arrange=q('[data-action="layout"]');if(arrange)arrange.remove();}
+  function paintAll(){applyHeader();tagIntelligence();fixOpportunities();rebuildMunicipality();renderPremiumWidgets();enhanceSettings();lockSizing();}
+
+  async function refreshPresence(){var db=getClient();if(!db||!state.user)return;try{var res=await db.rpc('get_watchdog_live_presence'),live=res&&res.data||null;state.live=Array.isArray(live)?live[0]:live;paintPresence();var card=q('[data-card-id="live-activity"]');if(card&&can('standard'))card.replaceWith(premiumCard(CUSTOM_WIDGETS[0],liveBody()));}catch(_){ }}
+  function maintainPremiumSurface(){if(!booted||!q('#wdv2-dash'))return;applyHeader();tagIntelligence();lockSizing();enhanceSettings();if(!q('[data-band="premium"]'))renderPremiumWidgets();if(!q('[data-card-id="opportunities"].wd-premium-opportunities'))fixOpportunities();if(!q('[data-card-id="municipality"].wd-premium-municipality'))rebuildMunicipality();if(!q('#wd4-map[data-premium-map="1"]'))rebuildMap();}
+  async function boot(){if(booting||booted)return;var dash=q('#wdv2-dash');if(!dash||!document.body.classList.contains('wdv2-mounted'))return;booting=true;var ok=await loadData();if(!ok){booting=false;return;}paintAll();booted=true;booting=false;rebuildMap();if(observer)observer.disconnect();observer=new MutationObserver(function(){clearTimeout(mutationTimer);mutationTimer=setTimeout(maintainPremiumSurface,70);});observer.observe(document.getElementById('wd4-root')||document.body,{childList:true,subtree:true});clearInterval(presenceTimer);presenceTimer=setInterval(refreshPresence,60000);}
+  function start(){var tries=0,t=setInterval(function(){tries++;if(q('#wdv2-dash')&&document.body.classList.contains('wdv2-mounted')){clearInterval(t);boot();}else if(tries>80)clearInterval(t);},100);window.addEventListener('watchdog:context-refresh',function(){setTimeout(function(){tagIntelligence();maintainPremiumSurface();},50);});}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
+})();
