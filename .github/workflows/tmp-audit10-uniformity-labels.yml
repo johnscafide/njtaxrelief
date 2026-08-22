@@ -1,6 +1,9 @@
 name: Temporary audit 10 uniformity labels
 
 on:
+  push:
+    branches:
+      - watchdog/njw-216-score-history-regression-2026-08-22
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
@@ -10,17 +13,16 @@ permissions:
 
 jobs:
   patch-audit-10:
-    if: ${{ github.event.pull_request.head.ref == 'watchdog/njw-216-score-history-regression-2026-08-22' && !contains(github.event.pull_request.head.sha, 'never') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.ref }}
+          ref: ${{ github.event.pull_request.head.ref || github.ref_name }}
           fetch-depth: 0
       - name: Correct published-vs-derived COD wording
         shell: bash
         env:
-          TARGET_BRANCH: ${{ github.event.pull_request.head.ref }}
+          TARGET_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
         run: |
           if git log -1 --pretty=%B | grep -q '\[audit10-applied\]'; then
             echo 'Audit 10 wording already applied.'
