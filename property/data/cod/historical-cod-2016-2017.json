@@ -1,0 +1,7976 @@
+{
+  "coverage": {
+    "2016": {
+      "current_districts": 564,
+      "missing_cod": 14,
+      "positive_class_2_sales": 555,
+      "published_non_null_cod": 550,
+      "published_real_zero_with_sales": 0
+    },
+    "2017": {
+      "current_districts": 564,
+      "missing_cod": 8,
+      "positive_class_2_sales": 556,
+      "published_non_null_cod": 556,
+      "published_real_zero_with_sales": 3
+    }
+  },
+  "current_district_count": 564,
+  "districts": {
+    "0101": {
+      "class_2_sales": {
+        "2016": 66,
+        "2017": 77
+      },
+      "county": "ATLANTIC",
+      "name": "Absecon City",
+      "series": {
+        "2016": 14.02,
+        "2017": 14.45
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "ABSECON CITY"
+    },
+    "0102": {
+      "class_2_sales": {
+        "2016": 159,
+        "2017": 182
+      },
+      "county": "ATLANTIC",
+      "name": "Atlantic City City",
+      "series": {
+        "2016": 30.08,
+        "2017": 22.81
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "ATLANTIC CITY CITY"
+    },
+    "0103": {
+      "class_2_sales": {
+        "2016": 239,
+        "2017": 298
+      },
+      "county": "ATLANTIC",
+      "name": "Brigantine City",
+      "series": {
+        "2016": 13.7,
+        "2017": 13.57
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "BRIGANTINE CITY"
+    },
+    "0104": {
+      "class_2_sales": {
+        "2016": 30,
+        "2017": 24
+      },
+      "county": "ATLANTIC",
+      "name": "Buena Borough",
+      "series": {
+        "2016": 17.36,
+        "2017": 17.05
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "BUENA BORO"
+    },
+    "0105": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 23
+      },
+      "county": "ATLANTIC",
+      "name": "Buena Vista Township",
+      "series": {
+        "2016": 9.99,
+        "2017": 10.61
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "BUENA VISTA TWP"
+    },
+    "0106": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 1
+      },
+      "county": "ATLANTIC",
+      "name": "Corbin City",
+      "series": {
+        "2016": null,
+        "2017": 11.0
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "CORBIN CITY CITY"
+    },
+    "0107": {
+      "class_2_sales": {
+        "2016": 16,
+        "2017": 22
+      },
+      "county": "ATLANTIC",
+      "name": "Egg Harbor City",
+      "series": {
+        "2016": 18.61,
+        "2017": 15.93
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "EGG HARBOR CITY"
+    },
+    "0108": {
+      "class_2_sales": {
+        "2016": 259,
+        "2017": 360
+      },
+      "county": "ATLANTIC",
+      "name": "Egg Harbor Township",
+      "series": {
+        "2016": 11.48,
+        "2017": 11.18
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "EGG HARBOR TWP"
+    },
+    "0109": {
+      "class_2_sales": {
+        "2016": 14,
+        "2017": 8
+      },
+      "county": "ATLANTIC",
+      "name": "Estell Manor City",
+      "series": {
+        "2016": 13.12,
+        "2017": 14.2
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "ESTELL MANOR CITY"
+    },
+    "0110": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 6
+      },
+      "county": "ATLANTIC",
+      "name": "Folsom Borough",
+      "series": {
+        "2016": 16.57,
+        "2017": 14.63
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "FOLSOM BORO"
+    },
+    "0111": {
+      "class_2_sales": {
+        "2016": 273,
+        "2017": 309
+      },
+      "county": "ATLANTIC",
+      "name": "Galloway Township",
+      "series": {
+        "2016": 11.11,
+        "2017": 12.38
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "GALLOWAY TWP"
+    },
+    "0112": {
+      "class_2_sales": {
+        "2016": 153,
+        "2017": 201
+      },
+      "county": "ATLANTIC",
+      "name": "Hamilton Township",
+      "series": {
+        "2016": 11.59,
+        "2017": 10.4
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "HAMILTON TWP"
+    },
+    "0113": {
+      "class_2_sales": {
+        "2016": 90,
+        "2017": 112
+      },
+      "county": "ATLANTIC",
+      "name": "Hammonton Town",
+      "series": {
+        "2016": 11.0,
+        "2017": 10.64
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "HAMMONTON TOWN"
+    },
+    "0114": {
+      "class_2_sales": {
+        "2016": 81,
+        "2017": 86
+      },
+      "county": "ATLANTIC",
+      "name": "Linwood City",
+      "series": {
+        "2016": 15.12,
+        "2017": 13.81
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "LINWOOD CITY"
+    },
+    "0115": {
+      "class_2_sales": {
+        "2016": 44,
+        "2017": 50
+      },
+      "county": "ATLANTIC",
+      "name": "Longport Borough",
+      "series": {
+        "2016": 13.89,
+        "2017": 14.79
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "LONGPORT BORO"
+    },
+    "0116": {
+      "class_2_sales": {
+        "2016": 223,
+        "2017": 249
+      },
+      "county": "ATLANTIC",
+      "name": "Margate City",
+      "series": {
+        "2016": 15.26,
+        "2017": 13.65
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "MARGATE CITY CITY"
+    },
+    "0117": {
+      "class_2_sales": {
+        "2016": 22,
+        "2017": 37
+      },
+      "county": "ATLANTIC",
+      "name": "Mullica Township",
+      "series": {
+        "2016": 23.36,
+        "2017": 25.81
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "MULLICA TWP"
+    },
+    "0118": {
+      "class_2_sales": {
+        "2016": 65,
+        "2017": 73
+      },
+      "county": "ATLANTIC",
+      "name": "Northfield City",
+      "series": {
+        "2016": 13.12,
+        "2017": 11.84
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "NORTHFIELD CITY"
+    },
+    "0119": {
+      "class_2_sales": {
+        "2016": 71,
+        "2017": 60
+      },
+      "county": "ATLANTIC",
+      "name": "Pleasantville City",
+      "series": {
+        "2016": 18.33,
+        "2017": 29.46
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "PLEASANTVILLE CITY"
+    },
+    "0120": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 0
+      },
+      "county": "ATLANTIC",
+      "name": "Port Republic City",
+      "series": {
+        "2016": 8.61,
+        "2017": null
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "PORT REPUBLIC CITY"
+    },
+    "0121": {
+      "class_2_sales": {
+        "2016": 108,
+        "2017": 100
+      },
+      "county": "ATLANTIC",
+      "name": "Somers Point City",
+      "series": {
+        "2016": 10.97,
+        "2017": 11.69
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "SOMERS POINT CITY"
+    },
+    "0122": {
+      "class_2_sales": {
+        "2016": 188,
+        "2017": 90
+      },
+      "county": "ATLANTIC",
+      "name": "Ventnor City",
+      "series": {
+        "2016": 21.76,
+        "2017": 16.14
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "VENTNOR CITY"
+    },
+    "0123": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 6
+      },
+      "county": "ATLANTIC",
+      "name": "Weymouth Township",
+      "series": {
+        "2016": 12.12,
+        "2017": 10.36
+      },
+      "source_file": "devatl.pdf",
+      "source_name": "WEYMOUTH TWP"
+    },
+    "0201": {
+      "class_2_sales": {
+        "2016": 76,
+        "2017": 83
+      },
+      "county": "BERGEN",
+      "name": "Allendale Borough",
+      "series": {
+        "2016": 7.02,
+        "2017": 9.61
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ALLENDALE BORO"
+    },
+    "0202": {
+      "class_2_sales": {
+        "2016": 19,
+        "2017": 11
+      },
+      "county": "BERGEN",
+      "name": "Alpine Borough",
+      "series": {
+        "2016": 13.9,
+        "2017": 19.55
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ALPINE BORO"
+    },
+    "0203": {
+      "class_2_sales": {
+        "2016": 206,
+        "2017": 182
+      },
+      "county": "BERGEN",
+      "name": "Bergenfield Borough",
+      "series": {
+        "2016": 11.74,
+        "2017": 11.41
+      },
+      "source_file": "devber.pdf",
+      "source_name": "BERGENFIELD BORO"
+    },
+    "0204": {
+      "class_2_sales": {
+        "2016": 34,
+        "2017": 50
+      },
+      "county": "BERGEN",
+      "name": "Bogota Borough",
+      "series": {
+        "2016": 11.67,
+        "2017": 11.92
+      },
+      "source_file": "devber.pdf",
+      "source_name": "BOGOTA BORO"
+    },
+    "0205": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 16
+      },
+      "county": "BERGEN",
+      "name": "Carlstadt Borough",
+      "series": {
+        "2016": 12.46,
+        "2017": 14.53
+      },
+      "source_file": "devber.pdf",
+      "source_name": "CARLSTADT BORO"
+    },
+    "0206": {
+      "class_2_sales": {
+        "2016": 189,
+        "2017": 185
+      },
+      "county": "BERGEN",
+      "name": "Cliffside Park Borough",
+      "series": {
+        "2016": 10.78,
+        "2017": 10.67
+      },
+      "source_file": "devber.pdf",
+      "source_name": "CLIFFSIDE PARK BORO"
+    },
+    "0207": {
+      "class_2_sales": {
+        "2016": 91,
+        "2017": 93
+      },
+      "county": "BERGEN",
+      "name": "Closter Borough",
+      "series": {
+        "2016": 10.79,
+        "2017": 8.51
+      },
+      "source_file": "devber.pdf",
+      "source_name": "CLOSTER BORO"
+    },
+    "0208": {
+      "class_2_sales": {
+        "2016": 86,
+        "2017": 116
+      },
+      "county": "BERGEN",
+      "name": "Cresskill Borough",
+      "series": {
+        "2016": 13.31,
+        "2017": 15.76
+      },
+      "source_file": "devber.pdf",
+      "source_name": "CRESSKILL BORO"
+    },
+    "0209": {
+      "class_2_sales": {
+        "2016": 59,
+        "2017": 56
+      },
+      "county": "BERGEN",
+      "name": "Demarest Borough",
+      "series": {
+        "2016": 13.04,
+        "2017": 11.84
+      },
+      "source_file": "devber.pdf",
+      "source_name": "DEMAREST BORO"
+    },
+    "0210": {
+      "class_2_sales": {
+        "2016": 133,
+        "2017": 152
+      },
+      "county": "BERGEN",
+      "name": "Dumont Borough",
+      "series": {
+        "2016": 11.75,
+        "2017": 10.65
+      },
+      "source_file": "devber.pdf",
+      "source_name": "DUMONT BORO"
+    },
+    "0211": {
+      "class_2_sales": {
+        "2016": 98,
+        "2017": 101
+      },
+      "county": "BERGEN",
+      "name": "Elmwood Park Borough",
+      "series": {
+        "2016": 9.74,
+        "2017": 8.48
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ELMWOOD PARK BORO"
+    },
+    "0212": {
+      "class_2_sales": {
+        "2016": 53,
+        "2017": 75
+      },
+      "county": "BERGEN",
+      "name": "East Rutherford Borough",
+      "series": {
+        "2016": 11.08,
+        "2017": 10.64
+      },
+      "source_file": "devber.pdf",
+      "source_name": "E RUTHERFORD BORO"
+    },
+    "0213": {
+      "class_2_sales": {
+        "2016": 186,
+        "2017": 203
+      },
+      "county": "BERGEN",
+      "name": "Edgewater Borough",
+      "series": {
+        "2016": 10.58,
+        "2017": 12.01
+      },
+      "source_file": "devber.pdf",
+      "source_name": "EDGEWATER BORO"
+    },
+    "0214": {
+      "class_2_sales": {
+        "2016": 75,
+        "2017": 52
+      },
+      "county": "BERGEN",
+      "name": "Emerson Borough",
+      "series": {
+        "2016": 9.44,
+        "2017": 10.06
+      },
+      "source_file": "devber.pdf",
+      "source_name": "EMERSON BORO"
+    },
+    "0215": {
+      "class_2_sales": {
+        "2016": 176,
+        "2017": 213
+      },
+      "county": "BERGEN",
+      "name": "Englewood City",
+      "series": {
+        "2016": 11.21,
+        "2017": 13.73
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ENGLEWOOD CITY"
+    },
+    "0216": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 62
+      },
+      "county": "BERGEN",
+      "name": "Englewood Cliffs Borough",
+      "series": {
+        "2016": 5.33,
+        "2017": 10.2
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ENGLEWOOD CLIFFS BORO"
+    },
+    "0217": {
+      "class_2_sales": {
+        "2016": 277,
+        "2017": 281
+      },
+      "county": "BERGEN",
+      "name": "Fair Lawn Borough",
+      "series": {
+        "2016": 10.64,
+        "2017": 10.67
+      },
+      "source_file": "devber.pdf",
+      "source_name": "FAIRLAWN BORO"
+    },
+    "0218": {
+      "class_2_sales": {
+        "2016": 61,
+        "2017": 71
+      },
+      "county": "BERGEN",
+      "name": "Fairview Borough",
+      "series": {
+        "2016": 14.38,
+        "2017": 12.42
+      },
+      "source_file": "devber.pdf",
+      "source_name": "FAIRVIEW BORO"
+    },
+    "0219": {
+      "class_2_sales": {
+        "2016": 310,
+        "2017": 320
+      },
+      "county": "BERGEN",
+      "name": "Fort Lee Borough",
+      "series": {
+        "2016": 11.92,
+        "2017": 12.82
+      },
+      "source_file": "devber.pdf",
+      "source_name": "FORT LEE BORO"
+    },
+    "0220": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 107
+      },
+      "county": "BERGEN",
+      "name": "Franklin Lakes Borough",
+      "series": {
+        "2016": 11.51,
+        "2017": 13.34
+      },
+      "source_file": "devber.pdf",
+      "source_name": "FRANKLIN LAKES BORO"
+    },
+    "0221": {
+      "class_2_sales": {
+        "2016": 121,
+        "2017": 141
+      },
+      "county": "BERGEN",
+      "name": "Garfield City",
+      "series": {
+        "2016": 13.11,
+        "2017": 14.17
+      },
+      "source_file": "devber.pdf",
+      "source_name": "GARFIELD CITY"
+    },
+    "0222": {
+      "class_2_sales": {
+        "2016": 131,
+        "2017": 109
+      },
+      "county": "BERGEN",
+      "name": "Glen Rock Borough",
+      "series": {
+        "2016": 8.22,
+        "2017": 9.64
+      },
+      "source_file": "devber.pdf",
+      "source_name": "GLEN ROCK BORO"
+    },
+    "0223": {
+      "class_2_sales": {
+        "2016": 104,
+        "2017": 131
+      },
+      "county": "BERGEN",
+      "name": "Hackensack City",
+      "series": {
+        "2016": 10.01,
+        "2017": 11.59
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HACKENSACK CITY"
+    },
+    "0224": {
+      "class_2_sales": {
+        "2016": 56,
+        "2017": 72
+      },
+      "county": "BERGEN",
+      "name": "Harrington Park Borough",
+      "series": {
+        "2016": 10.87,
+        "2017": 9.7
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HARRINGTON PARK BORO"
+    },
+    "0225": {
+      "class_2_sales": {
+        "2016": 88,
+        "2017": 43
+      },
+      "county": "BERGEN",
+      "name": "Hasbrouck Heights Borough",
+      "series": {
+        "2016": 10.73,
+        "2017": 10.03
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HASBROUCK HGHTS BORO"
+    },
+    "0226": {
+      "class_2_sales": {
+        "2016": 35,
+        "2017": 48
+      },
+      "county": "BERGEN",
+      "name": "Haworth Borough",
+      "series": {
+        "2016": 8.95,
+        "2017": 10.67
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HAWORTH BORO"
+    },
+    "0227": {
+      "class_2_sales": {
+        "2016": 103,
+        "2017": 109
+      },
+      "county": "BERGEN",
+      "name": "Hillsdale Borough",
+      "series": {
+        "2016": 10.03,
+        "2017": 10.39
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HILLSDALE BORO"
+    },
+    "0228": {
+      "class_2_sales": {
+        "2016": 59,
+        "2017": 58
+      },
+      "county": "BERGEN",
+      "name": "Ho-Ho-Kus Borough",
+      "series": {
+        "2016": 9.57,
+        "2017": 10.62
+      },
+      "source_file": "devber.pdf",
+      "source_name": "HOHOKUS BORO"
+    },
+    "0229": {
+      "class_2_sales": {
+        "2016": 61,
+        "2017": 75
+      },
+      "county": "BERGEN",
+      "name": "Leonia Borough",
+      "series": {
+        "2016": 8.67,
+        "2017": 8.94
+      },
+      "source_file": "devber.pdf",
+      "source_name": "LEONIA BORO"
+    },
+    "0230": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 25
+      },
+      "county": "BERGEN",
+      "name": "Little Ferry Borough",
+      "series": {
+        "2016": 7.37,
+        "2017": 6.36
+      },
+      "source_file": "devber.pdf",
+      "source_name": "LITTLE FERRY BORO"
+    },
+    "0231": {
+      "class_2_sales": {
+        "2016": 111,
+        "2017": 126
+      },
+      "county": "BERGEN",
+      "name": "Lodi Borough",
+      "series": {
+        "2016": 11.5,
+        "2017": 11.7
+      },
+      "source_file": "devber.pdf",
+      "source_name": "LODI BORO"
+    },
+    "0232": {
+      "class_2_sales": {
+        "2016": 113,
+        "2017": 166
+      },
+      "county": "BERGEN",
+      "name": "Lyndhurst Township",
+      "series": {
+        "2016": 12.28,
+        "2017": 13.27
+      },
+      "source_file": "devber.pdf",
+      "source_name": "LYNDHURST TWP"
+    },
+    "0233": {
+      "class_2_sales": {
+        "2016": 355,
+        "2017": 323
+      },
+      "county": "BERGEN",
+      "name": "Mahwah Township",
+      "series": {
+        "2016": 9.64,
+        "2017": 8.46
+      },
+      "source_file": "devber.pdf",
+      "source_name": "MAHWAH TWP"
+    },
+    "0234": {
+      "class_2_sales": {
+        "2016": 73,
+        "2017": 99
+      },
+      "county": "BERGEN",
+      "name": "Maywood Borough",
+      "series": {
+        "2016": 10.23,
+        "2017": 9.9
+      },
+      "source_file": "devber.pdf",
+      "source_name": "MAYWOOD BORO"
+    },
+    "0235": {
+      "class_2_sales": {
+        "2016": 86,
+        "2017": 73
+      },
+      "county": "BERGEN",
+      "name": "Midland Park Borough",
+      "series": {
+        "2016": 11.48,
+        "2017": 9.2
+      },
+      "source_file": "devber.pdf",
+      "source_name": "MIDLAND PARK BORO"
+    },
+    "0236": {
+      "class_2_sales": {
+        "2016": 91,
+        "2017": 90
+      },
+      "county": "BERGEN",
+      "name": "Montvale Borough",
+      "series": {
+        "2016": 9.53,
+        "2017": 9.53
+      },
+      "source_file": "devber.pdf",
+      "source_name": "MONTVALE BORO"
+    },
+    "0237": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 4
+      },
+      "county": "BERGEN",
+      "name": "Moonachie Borough",
+      "series": {
+        "2016": 9.03,
+        "2017": 13.92
+      },
+      "source_file": "devber.pdf",
+      "source_name": "MOONACHIE BORO"
+    },
+    "0238": {
+      "class_2_sales": {
+        "2016": 90,
+        "2017": 118
+      },
+      "county": "BERGEN",
+      "name": "New Milford Borough",
+      "series": {
+        "2016": 9.49,
+        "2017": 10.5
+      },
+      "source_file": "devber.pdf",
+      "source_name": "NEW MILFORD BORO"
+    },
+    "0239": {
+      "class_2_sales": {
+        "2016": 106,
+        "2017": 39
+      },
+      "county": "BERGEN",
+      "name": "North Arlington Borough",
+      "series": {
+        "2016": 11.99,
+        "2017": 9.16
+      },
+      "source_file": "devber.pdf",
+      "source_name": "NORTH ARLINGTON BORO"
+    },
+    "0240": {
+      "class_2_sales": {
+        "2016": 42,
+        "2017": 54
+      },
+      "county": "BERGEN",
+      "name": "Northvale Borough",
+      "series": {
+        "2016": 15.05,
+        "2017": 12.75
+      },
+      "source_file": "devber.pdf",
+      "source_name": "NORTHVALE BORO"
+    },
+    "0241": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 59
+      },
+      "county": "BERGEN",
+      "name": "Norwood Borough",
+      "series": {
+        "2016": 12.75,
+        "2017": 13.19
+      },
+      "source_file": "devber.pdf",
+      "source_name": "NORWOOD BORO"
+    },
+    "0242": {
+      "class_2_sales": {
+        "2016": 125,
+        "2017": 129
+      },
+      "county": "BERGEN",
+      "name": "Oakland Borough",
+      "series": {
+        "2016": 10.32,
+        "2017": 9.4
+      },
+      "source_file": "devber.pdf",
+      "source_name": "OAKLAND BORO"
+    },
+    "0243": {
+      "class_2_sales": {
+        "2016": 66,
+        "2017": 75
+      },
+      "county": "BERGEN",
+      "name": "Old Tappan Borough",
+      "series": {
+        "2016": 8.97,
+        "2017": 9.4
+      },
+      "source_file": "devber.pdf",
+      "source_name": "OLD TAPPAN BORO"
+    },
+    "0244": {
+      "class_2_sales": {
+        "2016": 88,
+        "2017": 23
+      },
+      "county": "BERGEN",
+      "name": "Oradell Borough",
+      "series": {
+        "2016": 9.74,
+        "2017": 10.95
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ORADELL BORO"
+    },
+    "0245": {
+      "class_2_sales": {
+        "2016": 153,
+        "2017": 207
+      },
+      "county": "BERGEN",
+      "name": "Palisades Park Borough",
+      "series": {
+        "2016": 9.76,
+        "2017": 12.26
+      },
+      "source_file": "devber.pdf",
+      "source_name": "PALISADES PARK BORO"
+    },
+    "0246": {
+      "class_2_sales": {
+        "2016": 197,
+        "2017": 233
+      },
+      "county": "BERGEN",
+      "name": "Paramus Borough",
+      "series": {
+        "2016": 10.02,
+        "2017": 8.47
+      },
+      "source_file": "devber.pdf",
+      "source_name": "PARAMUS BORO"
+    },
+    "0247": {
+      "class_2_sales": {
+        "2016": 99,
+        "2017": 109
+      },
+      "county": "BERGEN",
+      "name": "Park Ridge Borough",
+      "series": {
+        "2016": 9.65,
+        "2017": 11.86
+      },
+      "source_file": "devber.pdf",
+      "source_name": "PARK RIDGE BORO"
+    },
+    "0248": {
+      "class_2_sales": {
+        "2016": 68,
+        "2017": 189
+      },
+      "county": "BERGEN",
+      "name": "Ramsey Borough",
+      "series": {
+        "2016": 7.48,
+        "2017": 8.68
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RAMSEY BORO"
+    },
+    "0249": {
+      "class_2_sales": {
+        "2016": 69,
+        "2017": 85
+      },
+      "county": "BERGEN",
+      "name": "Ridgefield Borough",
+      "series": {
+        "2016": 12.43,
+        "2017": 10.77
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RIDGEFIELD BORO"
+    },
+    "0250": {
+      "class_2_sales": {
+        "2016": 65,
+        "2017": 74
+      },
+      "county": "BERGEN",
+      "name": "Ridgefield Park Village",
+      "series": {
+        "2016": 15.26,
+        "2017": 13.14
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RIDGEFIELD PARK TWP"
+    },
+    "0251": {
+      "class_2_sales": {
+        "2016": 301,
+        "2017": 315
+      },
+      "county": "BERGEN",
+      "name": "Ridgewood Village",
+      "series": {
+        "2016": 10.27,
+        "2017": 10.84
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RIDGEWOOD VILLAGE"
+    },
+    "0252": {
+      "class_2_sales": {
+        "2016": 105,
+        "2017": 112
+      },
+      "county": "BERGEN",
+      "name": "River Edge Borough",
+      "series": {
+        "2016": 12.32,
+        "2017": 10.24
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RIVEREDGE BORO"
+    },
+    "0253": {
+      "class_2_sales": {
+        "2016": 97,
+        "2017": 102
+      },
+      "county": "BERGEN",
+      "name": "River Vale Township",
+      "series": {
+        "2016": 9.73,
+        "2017": 9.07
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RIVERVALE TWP"
+    },
+    "0254": {
+      "class_2_sales": {
+        "2016": 54,
+        "2017": 61
+      },
+      "county": "BERGEN",
+      "name": "Rochelle Park Township",
+      "series": {
+        "2016": 9.04,
+        "2017": 10.57
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ROCHELLE PARK TWP"
+    },
+    "0255": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 3
+      },
+      "county": "BERGEN",
+      "name": "Rockleigh Borough",
+      "series": {
+        "2016": null,
+        "2017": 15.76
+      },
+      "source_file": "devber.pdf",
+      "source_name": "ROCKLEIGH BORO"
+    },
+    "0256": {
+      "class_2_sales": {
+        "2016": 185,
+        "2017": 187
+      },
+      "county": "BERGEN",
+      "name": "Rutherford Borough",
+      "series": {
+        "2016": 12.7,
+        "2017": 13.47
+      },
+      "source_file": "devber.pdf",
+      "source_name": "RUTHERFORD BORO"
+    },
+    "0257": {
+      "class_2_sales": {
+        "2016": 122,
+        "2017": 32
+      },
+      "county": "BERGEN",
+      "name": "Saddle Brook Township",
+      "series": {
+        "2016": 12.51,
+        "2017": 11.63
+      },
+      "source_file": "devber.pdf",
+      "source_name": "SADDLE BROOK TWP"
+    },
+    "0258": {
+      "class_2_sales": {
+        "2016": 34,
+        "2017": 25
+      },
+      "county": "BERGEN",
+      "name": "Saddle River Borough",
+      "series": {
+        "2016": 16.42,
+        "2017": 20.4
+      },
+      "source_file": "devber.pdf",
+      "source_name": "SADDLE RIVER BORO"
+    },
+    "0259": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 2
+      },
+      "county": "BERGEN",
+      "name": "South Hackensack Township",
+      "series": {
+        "2016": null,
+        "2017": 24.28
+      },
+      "source_file": "devber.pdf",
+      "source_name": "SO HACKENSACK TWP"
+    },
+    "0260": {
+      "class_2_sales": {
+        "2016": 304,
+        "2017": 317
+      },
+      "county": "BERGEN",
+      "name": "Teaneck Township",
+      "series": {
+        "2016": 11.98,
+        "2017": 12.42
+      },
+      "source_file": "devber.pdf",
+      "source_name": "TEANECK TWP"
+    },
+    "0261": {
+      "class_2_sales": {
+        "2016": 182,
+        "2017": 178
+      },
+      "county": "BERGEN",
+      "name": "Tenafly Borough",
+      "series": {
+        "2016": 10.34,
+        "2017": 10.09
+      },
+      "source_file": "devber.pdf",
+      "source_name": "TENAFLY BORO"
+    },
+    "0262": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 0
+      },
+      "county": "BERGEN",
+      "name": "Teterboro Borough",
+      "series": {
+        "2016": null,
+        "2017": null
+      },
+      "source_file": "devber.pdf",
+      "source_name": "TETERBORO BORO"
+    },
+    "0263": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 97
+      },
+      "county": "BERGEN",
+      "name": "Upper Saddle River Borough",
+      "series": {
+        "2016": 33.94,
+        "2017": 10.62
+      },
+      "source_file": "devber.pdf",
+      "source_name": "UPPER SADDLE RIV BORO"
+    },
+    "0264": {
+      "class_2_sales": {
+        "2016": 115,
+        "2017": 105
+      },
+      "county": "BERGEN",
+      "name": "Waldwick Borough",
+      "series": {
+        "2016": 10.59,
+        "2017": 10.56
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WALDWICK BORO"
+    },
+    "0265": {
+      "class_2_sales": {
+        "2016": 38,
+        "2017": 66
+      },
+      "county": "BERGEN",
+      "name": "Wallington Borough",
+      "series": {
+        "2016": 11.77,
+        "2017": 13.05
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WALLINGTON BORO"
+    },
+    "0266": {
+      "class_2_sales": {
+        "2016": 102,
+        "2017": 96
+      },
+      "county": "BERGEN",
+      "name": "Washington Township",
+      "series": {
+        "2016": 11.67,
+        "2017": 11.7
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WASHINGTON TWP"
+    },
+    "0267": {
+      "class_2_sales": {
+        "2016": 99,
+        "2017": 36
+      },
+      "county": "BERGEN",
+      "name": "Westwood Borough",
+      "series": {
+        "2016": 10.2,
+        "2017": 10.03
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WESTWOOD BORO"
+    },
+    "0268": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 17
+      },
+      "county": "BERGEN",
+      "name": "Woodcliff Lake Borough",
+      "series": {
+        "2016": 7.97,
+        "2017": 14.19
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WOODCLIFF LAKE BORO"
+    },
+    "0269": {
+      "class_2_sales": {
+        "2016": 69,
+        "2017": 39
+      },
+      "county": "BERGEN",
+      "name": "Wood-Ridge Borough",
+      "series": {
+        "2016": 14.39,
+        "2017": 11.61
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WOOD RIDGE BORO"
+    },
+    "0270": {
+      "class_2_sales": {
+        "2016": 162,
+        "2017": 173
+      },
+      "county": "BERGEN",
+      "name": "Wyckoff Township",
+      "series": {
+        "2016": 10.0,
+        "2017": 10.17
+      },
+      "source_file": "devber.pdf",
+      "source_name": "WYCKOFF TWP"
+    },
+    "0301": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 6
+      },
+      "county": "BURLINGTON",
+      "name": "Bass River Township",
+      "series": {
+        "2016": 7.82,
+        "2017": 10.21
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BASS RIVER TWP"
+    },
+    "0302": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 10
+      },
+      "county": "BURLINGTON",
+      "name": "Beverly City",
+      "series": {
+        "2016": 10.58,
+        "2017": 14.44
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BEVERLY CITY"
+    },
+    "0303": {
+      "class_2_sales": {
+        "2016": 32,
+        "2017": 39
+      },
+      "county": "BURLINGTON",
+      "name": "Bordentown City",
+      "series": {
+        "2016": 13.76,
+        "2017": 10.96
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BORDENTOWN CITY"
+    },
+    "0304": {
+      "class_2_sales": {
+        "2016": 104,
+        "2017": 114
+      },
+      "county": "BURLINGTON",
+      "name": "Bordentown Township",
+      "series": {
+        "2016": 9.62,
+        "2017": 8.42
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BORDENTOWN TWP"
+    },
+    "0305": {
+      "class_2_sales": {
+        "2016": 67,
+        "2017": 73
+      },
+      "county": "BURLINGTON",
+      "name": "Burlington City",
+      "series": {
+        "2016": 15.67,
+        "2017": 17.87
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BURLINGTON CITY"
+    },
+    "0306": {
+      "class_2_sales": {
+        "2016": 153,
+        "2017": 60
+      },
+      "county": "BURLINGTON",
+      "name": "Burlington Township",
+      "series": {
+        "2016": 11.77,
+        "2017": 9.3
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "BURLINGTON TWP"
+    },
+    "0307": {
+      "class_2_sales": {
+        "2016": 56,
+        "2017": 69
+      },
+      "county": "BURLINGTON",
+      "name": "Chesterfield Township",
+      "series": {
+        "2016": 7.36,
+        "2017": 7.91
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "CHESTERFIELD TWP"
+    },
+    "0308": {
+      "class_2_sales": {
+        "2016": 151,
+        "2017": 157
+      },
+      "county": "BURLINGTON",
+      "name": "Cinnaminson Township",
+      "series": {
+        "2016": 11.45,
+        "2017": 9.76
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "CINNAMINSON TWP"
+    },
+    "0309": {
+      "class_2_sales": {
+        "2016": 32,
+        "2017": 33
+      },
+      "county": "BURLINGTON",
+      "name": "Delanco Township",
+      "series": {
+        "2016": 7.04,
+        "2017": 10.28
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "DELANCO TWP"
+    },
+    "0310": {
+      "class_2_sales": {
+        "2016": 136,
+        "2017": 163
+      },
+      "county": "BURLINGTON",
+      "name": "Delran Township",
+      "series": {
+        "2016": 9.4,
+        "2017": 11.5
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "DELRAN TWP"
+    },
+    "0311": {
+      "class_2_sales": {
+        "2016": 39,
+        "2017": 37
+      },
+      "county": "BURLINGTON",
+      "name": "Eastampton Township",
+      "series": {
+        "2016": 7.9,
+        "2017": 8.14
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "EASTAMPTON TWP"
+    },
+    "0312": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 49
+      },
+      "county": "BURLINGTON",
+      "name": "Edgewater Park Township",
+      "series": {
+        "2016": 17.94,
+        "2017": 17.54
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "EDGEWATER PARK TWP"
+    },
+    "0313": {
+      "class_2_sales": {
+        "2016": 447,
+        "2017": 519
+      },
+      "county": "BURLINGTON",
+      "name": "Evesham Township",
+      "series": {
+        "2016": 9.97,
+        "2017": 9.79
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "EVESHAM TWP"
+    },
+    "0314": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 6
+      },
+      "county": "BURLINGTON",
+      "name": "Fieldsboro Borough",
+      "series": {
+        "2016": 9.81,
+        "2017": 3.08
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "FIELDSBORO BORO"
+    },
+    "0315": {
+      "class_2_sales": {
+        "2016": 114,
+        "2017": 122
+      },
+      "county": "BURLINGTON",
+      "name": "Florence Township",
+      "series": {
+        "2016": 8.21,
+        "2017": 8.46
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "FLORENCE TWP"
+    },
+    "0316": {
+      "class_2_sales": {
+        "2016": 59,
+        "2017": 59
+      },
+      "county": "BURLINGTON",
+      "name": "Hainesport Township",
+      "series": {
+        "2016": 8.82,
+        "2017": 10.25
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "HAINESPORT TWP"
+    },
+    "0317": {
+      "class_2_sales": {
+        "2016": 85,
+        "2017": 110
+      },
+      "county": "BURLINGTON",
+      "name": "Lumberton Township",
+      "series": {
+        "2016": 12.46,
+        "2017": 12.77
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "LUMBERTON TWP"
+    },
+    "0318": {
+      "class_2_sales": {
+        "2016": 109,
+        "2017": 121
+      },
+      "county": "BURLINGTON",
+      "name": "Mansfield Township",
+      "series": {
+        "2016": 10.86,
+        "2017": 8.72
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MANSFIELD TWP"
+    },
+    "0319": {
+      "class_2_sales": {
+        "2016": 95,
+        "2017": 111
+      },
+      "county": "BURLINGTON",
+      "name": "Maple Shade Township",
+      "series": {
+        "2016": 11.47,
+        "2017": 8.94
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MAPLE SHADE TWP"
+    },
+    "0320": {
+      "class_2_sales": {
+        "2016": 254,
+        "2017": 290
+      },
+      "county": "BURLINGTON",
+      "name": "Medford Township",
+      "series": {
+        "2016": 8.28,
+        "2017": 9.45
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MEDFORD TWP"
+    },
+    "0321": {
+      "class_2_sales": {
+        "2016": 44,
+        "2017": 61
+      },
+      "county": "BURLINGTON",
+      "name": "Medford Lakes Borough",
+      "series": {
+        "2016": 10.59,
+        "2017": 9.93
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MEDFORD LAKES BORO"
+    },
+    "0322": {
+      "class_2_sales": {
+        "2016": 189,
+        "2017": 217
+      },
+      "county": "BURLINGTON",
+      "name": "Moorestown Township",
+      "series": {
+        "2016": 11.53,
+        "2017": 12.79
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MOORESTOWN TWP"
+    },
+    "0323": {
+      "class_2_sales": {
+        "2016": 76,
+        "2017": 67
+      },
+      "county": "BURLINGTON",
+      "name": "Mount Holly Township",
+      "series": {
+        "2016": 11.32,
+        "2017": 13.8
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MT HOLLY TWP"
+    },
+    "0324": {
+      "class_2_sales": {
+        "2016": 665,
+        "2017": 669
+      },
+      "county": "BURLINGTON",
+      "name": "Mount Laurel Township",
+      "series": {
+        "2016": 9.52,
+        "2017": 9.53
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "MT LAUREL TWP"
+    },
+    "0325": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 4
+      },
+      "county": "BURLINGTON",
+      "name": "New Hanover Township",
+      "series": {
+        "2016": 17.17,
+        "2017": 14.0
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "NEW HANOVER TWP"
+    },
+    "0326": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 19
+      },
+      "county": "BURLINGTON",
+      "name": "North Hanover Township",
+      "series": {
+        "2016": 8.71,
+        "2017": 5.06
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "NO HANOVER TWP"
+    },
+    "0327": {
+      "class_2_sales": {
+        "2016": 89,
+        "2017": 94
+      },
+      "county": "BURLINGTON",
+      "name": "Palmyra Borough",
+      "series": {
+        "2016": 12.34,
+        "2017": 12.45
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "PALMYRA BORO"
+    },
+    "0328": {
+      "class_2_sales": {
+        "2016": 3,
+        "2017": 6
+      },
+      "county": "BURLINGTON",
+      "name": "Pemberton Borough",
+      "series": {
+        "2016": 4.51,
+        "2017": 16.17
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "PEMBERTON BORO"
+    },
+    "0329": {
+      "class_2_sales": {
+        "2016": 138,
+        "2017": 79
+      },
+      "county": "BURLINGTON",
+      "name": "Pemberton Township",
+      "series": {
+        "2016": 16.07,
+        "2017": 11.2
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "PEMBERTON TWP"
+    },
+    "0330": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 62
+      },
+      "county": "BURLINGTON",
+      "name": "Riverside Township",
+      "series": {
+        "2016": 13.81,
+        "2017": 15.57
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "RIVERSIDE TWP"
+    },
+    "0331": {
+      "class_2_sales": {
+        "2016": 27,
+        "2017": 23
+      },
+      "county": "BURLINGTON",
+      "name": "Riverton Borough",
+      "series": {
+        "2016": 13.91,
+        "2017": 12.11
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "RIVERTON BORO"
+    },
+    "0332": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 57
+      },
+      "county": "BURLINGTON",
+      "name": "Shamong Township",
+      "series": {
+        "2016": 7.66,
+        "2017": 7.08
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "SHAMONG TWP"
+    },
+    "0333": {
+      "class_2_sales": {
+        "2016": 138,
+        "2017": 178
+      },
+      "county": "BURLINGTON",
+      "name": "Southampton Township",
+      "series": {
+        "2016": 11.77,
+        "2017": 14.82
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "SOUTHAMPTON TWP"
+    },
+    "0334": {
+      "class_2_sales": {
+        "2016": 33,
+        "2017": 23
+      },
+      "county": "BURLINGTON",
+      "name": "Springfield Township",
+      "series": {
+        "2016": 11.49,
+        "2017": 16.89
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "SPRINGFIELD TWP"
+    },
+    "0335": {
+      "class_2_sales": {
+        "2016": 48,
+        "2017": 62
+      },
+      "county": "BURLINGTON",
+      "name": "Tabernacle Township",
+      "series": {
+        "2016": 8.29,
+        "2017": 11.7
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "TABERNACLE TWP"
+    },
+    "0336": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 3
+      },
+      "county": "BURLINGTON",
+      "name": "Washington Township",
+      "series": {
+        "2016": 3.68,
+        "2017": 9.01
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "WASHINGTON TWP"
+    },
+    "0337": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 101
+      },
+      "county": "BURLINGTON",
+      "name": "Westampton Township",
+      "series": {
+        "2016": 8.95,
+        "2017": 7.75
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "WESTAMPTON TWP"
+    },
+    "0338": {
+      "class_2_sales": {
+        "2016": 219,
+        "2017": 273
+      },
+      "county": "BURLINGTON",
+      "name": "Willingboro Township",
+      "series": {
+        "2016": 14.83,
+        "2017": 16.51
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "WILLINGBORO TWP"
+    },
+    "0339": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 8
+      },
+      "county": "BURLINGTON",
+      "name": "Woodland Township",
+      "series": {
+        "2016": 11.11,
+        "2017": 7.9
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "WOODLAND TWP"
+    },
+    "0340": {
+      "class_2_sales": {
+        "2016": 2,
+        "2017": 3
+      },
+      "county": "BURLINGTON",
+      "name": "Wrightstown Borough",
+      "series": {
+        "2016": 10.92,
+        "2017": 23.5
+      },
+      "source_file": "devbur.pdf",
+      "source_name": "WRIGHTSTOWN BORO"
+    },
+    "0401": {
+      "class_2_sales": {
+        "2016": 89,
+        "2017": 83
+      },
+      "county": "CAMDEN",
+      "name": "Audubon Borough",
+      "series": {
+        "2016": 14.29,
+        "2017": 14.67
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "AUDUBON BORO"
+    },
+    "0402": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 0
+      },
+      "county": "CAMDEN",
+      "name": "Audubon Park Borough",
+      "series": {
+        "2016": null,
+        "2017": null
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "AUDUBON PARK BORO"
+    },
+    "0403": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 27
+      },
+      "county": "CAMDEN",
+      "name": "Barrington Borough",
+      "series": {
+        "2016": 12.32,
+        "2017": 10.02
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "BARRINGTON BORO"
+    },
+    "0404": {
+      "class_2_sales": {
+        "2016": 55,
+        "2017": 86
+      },
+      "county": "CAMDEN",
+      "name": "Bellmawr Borough",
+      "series": {
+        "2016": 11.49,
+        "2017": 10.04
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "BELLMAWR BORO"
+    },
+    "0405": {
+      "class_2_sales": {
+        "2016": 82,
+        "2017": 77
+      },
+      "county": "CAMDEN",
+      "name": "Berlin Borough",
+      "series": {
+        "2016": 7.37,
+        "2017": 9.02
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "BERLIN BORO"
+    },
+    "0406": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 38
+      },
+      "county": "CAMDEN",
+      "name": "Berlin Township",
+      "series": {
+        "2016": 8.04,
+        "2017": 14.39
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "BERLIN TWP"
+    },
+    "0407": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 5
+      },
+      "county": "CAMDEN",
+      "name": "Brooklawn Borough",
+      "series": {
+        "2016": 6.02,
+        "2017": 7.36
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "BROOKLAWN BORO"
+    },
+    "0408": {
+      "class_2_sales": {
+        "2016": 126,
+        "2017": 91
+      },
+      "county": "CAMDEN",
+      "name": "Camden City",
+      "series": {
+        "2016": 20.03,
+        "2017": 17.11
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "CAMDEN CITY"
+    },
+    "0409": {
+      "class_2_sales": {
+        "2016": 763,
+        "2017": 680
+      },
+      "county": "CAMDEN",
+      "name": "Cherry Hill Township",
+      "series": {
+        "2016": 12.29,
+        "2017": 13.66
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "CHERRY HILL TWNSHP"
+    },
+    "0410": {
+      "class_2_sales": {
+        "2016": 3,
+        "2017": 3
+      },
+      "county": "CAMDEN",
+      "name": "Chesilhurst Borough",
+      "series": {
+        "2016": 5.08,
+        "2017": 13.28
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "CHESILHURST BORO"
+    },
+    "0411": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 24
+      },
+      "county": "CAMDEN",
+      "name": "Clementon Borough",
+      "series": {
+        "2016": 11.67,
+        "2017": 11.8
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "CLEMENTON BORO"
+    },
+    "0412": {
+      "class_2_sales": {
+        "2016": 154,
+        "2017": 108
+      },
+      "county": "CAMDEN",
+      "name": "Collingswood Borough",
+      "series": {
+        "2016": 10.81,
+        "2017": 11.33
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "COLLINGSWOOD BORO"
+    },
+    "0413": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 19
+      },
+      "county": "CAMDEN",
+      "name": "Gibbsboro Borough",
+      "series": {
+        "2016": 14.64,
+        "2017": 8.79
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "GIBBSBORO BORO"
+    },
+    "0414": {
+      "class_2_sales": {
+        "2016": 58,
+        "2017": 46
+      },
+      "county": "CAMDEN",
+      "name": "Gloucester City City",
+      "series": {
+        "2016": 14.78,
+        "2017": 16.84
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "GLOUCESTER CITY"
+    },
+    "0415": {
+      "class_2_sales": {
+        "2016": 540,
+        "2017": 524
+      },
+      "county": "CAMDEN",
+      "name": "Gloucester Township",
+      "series": {
+        "2016": 8.76,
+        "2017": 8.51
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "GLOUCESTER TWP"
+    },
+    "0416": {
+      "class_2_sales": {
+        "2016": 161,
+        "2017": 144
+      },
+      "county": "CAMDEN",
+      "name": "Haddon Township",
+      "series": {
+        "2016": 12.14,
+        "2017": 12.94
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "HADDON TWP"
+    },
+    "0417": {
+      "class_2_sales": {
+        "2016": 189,
+        "2017": 171
+      },
+      "county": "CAMDEN",
+      "name": "Haddonfield Borough",
+      "series": {
+        "2016": 9.07,
+        "2017": 9.47
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "HADDONFIELD BORO"
+    },
+    "0418": {
+      "class_2_sales": {
+        "2016": 102,
+        "2017": 82
+      },
+      "county": "CAMDEN",
+      "name": "Haddon Heights Borough",
+      "series": {
+        "2016": 10.01,
+        "2017": 9.0
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "HADDON HEIGHTS BORO"
+    },
+    "0419": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 1
+      },
+      "county": "CAMDEN",
+      "name": "Hi-nella Borough",
+      "series": {
+        "2016": null,
+        "2017": 0.0
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "HI NELLA BORO"
+    },
+    "0420": {
+      "class_2_sales": {
+        "2016": 16,
+        "2017": 5
+      },
+      "county": "CAMDEN",
+      "name": "Laurel Springs Borough",
+      "series": {
+        "2016": 12.41,
+        "2017": 15.87
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "LAUREL SPRINGS BORO"
+    },
+    "0421": {
+      "class_2_sales": {
+        "2016": 10,
+        "2017": 10
+      },
+      "county": "CAMDEN",
+      "name": "Lawnside Borough",
+      "series": {
+        "2016": 13.89,
+        "2017": 7.58
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "LAWNSIDE BORO"
+    },
+    "0422": {
+      "class_2_sales": {
+        "2016": 71,
+        "2017": 72
+      },
+      "county": "CAMDEN",
+      "name": "Lindenwold Borough",
+      "series": {
+        "2016": 14.03,
+        "2017": 15.77
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "LINDENWOLD BORO"
+    },
+    "0423": {
+      "class_2_sales": {
+        "2016": 38,
+        "2017": 42
+      },
+      "county": "CAMDEN",
+      "name": "Magnolia Borough",
+      "series": {
+        "2016": 11.04,
+        "2017": 6.92
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "MAGNOLIA BORO"
+    },
+    "0424": {
+      "class_2_sales": {
+        "2016": 22,
+        "2017": 26
+      },
+      "county": "CAMDEN",
+      "name": "Merchantville Borough",
+      "series": {
+        "2016": 11.76,
+        "2017": 10.94
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "MERCHANTVILLE BORO"
+    },
+    "0425": {
+      "class_2_sales": {
+        "2016": 31,
+        "2017": 39
+      },
+      "county": "CAMDEN",
+      "name": "Mount Ephraim Borough",
+      "series": {
+        "2016": 10.87,
+        "2017": 9.76
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "MOUNT EPHRAIM BORO"
+    },
+    "0426": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 37
+      },
+      "county": "CAMDEN",
+      "name": "Oaklyn Borough",
+      "series": {
+        "2016": 10.62,
+        "2017": 13.24
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "OAKLYN BORO"
+    },
+    "0427": {
+      "class_2_sales": {
+        "2016": 181,
+        "2017": 145
+      },
+      "county": "CAMDEN",
+      "name": "Pennsauken Township",
+      "series": {
+        "2016": 9.8,
+        "2017": 10.1
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "PENNSAUKEN TWP"
+    },
+    "0428": {
+      "class_2_sales": {
+        "2016": 70,
+        "2017": 14
+      },
+      "county": "CAMDEN",
+      "name": "Pine Hill Borough",
+      "series": {
+        "2016": 11.22,
+        "2017": 9.25
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "PINE HILL BORO"
+    },
+    "0430": {
+      "class_2_sales": {
+        "2016": 58,
+        "2017": 56
+      },
+      "county": "CAMDEN",
+      "name": "Runnemede Borough",
+      "series": {
+        "2016": 10.93,
+        "2017": 8.58
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "RUNNEMEDE BORO"
+    },
+    "0431": {
+      "class_2_sales": {
+        "2016": 52,
+        "2017": 36
+      },
+      "county": "CAMDEN",
+      "name": "Somerdale Borough",
+      "series": {
+        "2016": 11.85,
+        "2017": 12.21
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "SOMERDALE BORO"
+    },
+    "0432": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 48
+      },
+      "county": "CAMDEN",
+      "name": "Stratford Borough",
+      "series": {
+        "2016": 9.2,
+        "2017": 9.77
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "STRATFORD BORO"
+    },
+    "0433": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 0
+      },
+      "county": "CAMDEN",
+      "name": "Tavistock Borough",
+      "series": {
+        "2016": null,
+        "2017": null
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "TAVISTOCK BORO"
+    },
+    "0434": {
+      "class_2_sales": {
+        "2016": 288,
+        "2017": 315
+      },
+      "county": "CAMDEN",
+      "name": "Voorhees Township",
+      "series": {
+        "2016": 10.46,
+        "2017": 10.96
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "VOORHEES TWP"
+    },
+    "0435": {
+      "class_2_sales": {
+        "2016": 75,
+        "2017": 79
+      },
+      "county": "CAMDEN",
+      "name": "Waterford Township",
+      "series": {
+        "2016": 9.62,
+        "2017": 9.18
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "WATERFORD TWP"
+    },
+    "0436": {
+      "class_2_sales": {
+        "2016": 252,
+        "2017": 322
+      },
+      "county": "CAMDEN",
+      "name": "Winslow Township",
+      "series": {
+        "2016": 8.38,
+        "2017": 8.85
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "WINSLOW TWP"
+    },
+    "0437": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 6
+      },
+      "county": "CAMDEN",
+      "name": "Woodlynne Borough",
+      "series": {
+        "2016": 4.07,
+        "2017": 15.43
+      },
+      "source_file": "devcam.pdf",
+      "source_name": "WOODLYNNE BORO"
+    },
+    "0501": {
+      "class_2_sales": {
+        "2016": 192,
+        "2017": 236
+      },
+      "county": "CAPE MAY",
+      "name": "Avalon Borough",
+      "series": {
+        "2016": 15.2,
+        "2017": 13.72
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "AVALON BORO"
+    },
+    "0502": {
+      "class_2_sales": {
+        "2016": 145,
+        "2017": 117
+      },
+      "county": "CAPE MAY",
+      "name": "Cape May City",
+      "series": {
+        "2016": 12.6,
+        "2017": 12.9
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "CAPE MAY CITY"
+    },
+    "0503": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 26
+      },
+      "county": "CAPE MAY",
+      "name": "Cape May Point Borough",
+      "series": {
+        "2016": 13.17,
+        "2017": 11.18
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "CAPE MAY POINT BORO"
+    },
+    "0504": {
+      "class_2_sales": {
+        "2016": 49,
+        "2017": 39
+      },
+      "county": "CAPE MAY",
+      "name": "Dennis Township",
+      "series": {
+        "2016": 10.45,
+        "2017": 9.4
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "DENNIS TWP"
+    },
+    "0505": {
+      "class_2_sales": {
+        "2016": 391,
+        "2017": 409
+      },
+      "county": "CAPE MAY",
+      "name": "Lower Township",
+      "series": {
+        "2016": 13.28,
+        "2017": 11.3
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "LOWER TWP"
+    },
+    "0506": {
+      "class_2_sales": {
+        "2016": 192,
+        "2017": 195
+      },
+      "county": "CAPE MAY",
+      "name": "Middle Township",
+      "series": {
+        "2016": 10.61,
+        "2017": 10.24
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "MIDDLE TWP"
+    },
+    "0507": {
+      "class_2_sales": {
+        "2016": 127,
+        "2017": 315
+      },
+      "county": "CAPE MAY",
+      "name": "North Wildwood City",
+      "series": {
+        "2016": 8.97,
+        "2017": 9.88
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "NORTH WILDWOOD CITY"
+    },
+    "0508": {
+      "class_2_sales": {
+        "2016": 629,
+        "2017": 665
+      },
+      "county": "CAPE MAY",
+      "name": "Ocean City City",
+      "series": {
+        "2016": 8.59,
+        "2017": 8.33
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "OCEAN CITY CITY"
+    },
+    "0509": {
+      "class_2_sales": {
+        "2016": 115,
+        "2017": 237
+      },
+      "county": "CAPE MAY",
+      "name": "Sea Isle City",
+      "series": {
+        "2016": 6.48,
+        "2017": 8.67
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "SEA ISLE CITY CITY"
+    },
+    "0510": {
+      "class_2_sales": {
+        "2016": 96,
+        "2017": 142
+      },
+      "county": "CAPE MAY",
+      "name": "Stone Harbor Borough",
+      "series": {
+        "2016": 14.5,
+        "2017": 13.81
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "STONE HARBOR BORO"
+    },
+    "0511": {
+      "class_2_sales": {
+        "2016": 120,
+        "2017": 104
+      },
+      "county": "CAPE MAY",
+      "name": "Upper Township",
+      "series": {
+        "2016": 9.23,
+        "2017": 7.56
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "UPPER TWP"
+    },
+    "0512": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 27
+      },
+      "county": "CAPE MAY",
+      "name": "West Cape May Borough",
+      "series": {
+        "2016": 13.75,
+        "2017": 12.35
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "WEST CAPE MAY BORO"
+    },
+    "0513": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 16
+      },
+      "county": "CAPE MAY",
+      "name": "West Wildwood Borough",
+      "series": {
+        "2016": 7.56,
+        "2017": 15.47
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "WEST WILDWOOD BORO"
+    },
+    "0514": {
+      "class_2_sales": {
+        "2016": 181,
+        "2017": 175
+      },
+      "county": "CAPE MAY",
+      "name": "Wildwood City",
+      "series": {
+        "2016": 10.14,
+        "2017": 10.19
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "WILDWOOD CITY"
+    },
+    "0515": {
+      "class_2_sales": {
+        "2016": 188,
+        "2017": 224
+      },
+      "county": "CAPE MAY",
+      "name": "Wildwood Crest Borough",
+      "series": {
+        "2016": 11.37,
+        "2017": 11.44
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "WILDWOOD CREST BORO"
+    },
+    "0516": {
+      "class_2_sales": {
+        "2016": 2,
+        "2017": 3
+      },
+      "county": "CAPE MAY",
+      "name": "Woodbine Borough",
+      "series": {
+        "2016": 9.34,
+        "2017": 11.97
+      },
+      "source_file": "devcap.pdf",
+      "source_name": "WOODBINE BORO"
+    },
+    "0601": {
+      "class_2_sales": {
+        "2016": 49,
+        "2017": 46
+      },
+      "county": "CUMBERLAND",
+      "name": "Bridgeton City",
+      "series": {
+        "2016": 14.92,
+        "2017": 17.33
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "BRIDGETON CITY"
+    },
+    "0602": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 19
+      },
+      "county": "CUMBERLAND",
+      "name": "Commercial Township",
+      "series": {
+        "2016": 11.87,
+        "2017": 10.85
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "COMMERCIAL TWP"
+    },
+    "0603": {
+      "class_2_sales": {
+        "2016": 10,
+        "2017": 13
+      },
+      "county": "CUMBERLAND",
+      "name": "Deerfield Township",
+      "series": {
+        "2016": 15.71,
+        "2017": 12.92
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "DEERFIELD TWP"
+    },
+    "0604": {
+      "class_2_sales": {
+        "2016": 2,
+        "2017": 9
+      },
+      "county": "CUMBERLAND",
+      "name": "Downe Township",
+      "series": {
+        "2016": 18.2,
+        "2017": 28.96
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "DOWNE TWP"
+    },
+    "0605": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 14
+      },
+      "county": "CUMBERLAND",
+      "name": "Fairfield Township",
+      "series": {
+        "2016": 9.07,
+        "2017": 15.7
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "FAIRFIELD TWP"
+    },
+    "0606": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 0
+      },
+      "county": "CUMBERLAND",
+      "name": "Greenwich Township",
+      "series": {
+        "2016": 14.39,
+        "2017": null
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "GREENWICH TWP"
+    },
+    "0607": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 15
+      },
+      "county": "CUMBERLAND",
+      "name": "Hopewell Township",
+      "series": {
+        "2016": 16.53,
+        "2017": 9.41
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "HOPEWELL TWP"
+    },
+    "0608": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 23
+      },
+      "county": "CUMBERLAND",
+      "name": "Lawrence Township",
+      "series": {
+        "2016": 7.87,
+        "2017": 9.1
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "LAWRENCE TWP"
+    },
+    "0609": {
+      "class_2_sales": {
+        "2016": 11,
+        "2017": 13
+      },
+      "county": "CUMBERLAND",
+      "name": "Maurice River Township",
+      "series": {
+        "2016": 10.59,
+        "2017": 9.05
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "MAURICE RIVER TWP"
+    },
+    "0610": {
+      "class_2_sales": {
+        "2016": 166,
+        "2017": 174
+      },
+      "county": "CUMBERLAND",
+      "name": "Millville City",
+      "series": {
+        "2016": 16.7,
+        "2017": 19.21
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "MILLVILLE CITY"
+    },
+    "0611": {
+      "class_2_sales": {
+        "2016": 3,
+        "2017": 3
+      },
+      "county": "CUMBERLAND",
+      "name": "Shiloh Borough",
+      "series": {
+        "2016": 10.13,
+        "2017": 30.94
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "SHILOH BORO"
+    },
+    "0612": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 4
+      },
+      "county": "CUMBERLAND",
+      "name": "Stow Creek Township",
+      "series": {
+        "2016": 18.81,
+        "2017": 3.0
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "STOW CREEK TWP"
+    },
+    "0613": {
+      "class_2_sales": {
+        "2016": 46,
+        "2017": 63
+      },
+      "county": "CUMBERLAND",
+      "name": "Upper Deerfield Township",
+      "series": {
+        "2016": 10.17,
+        "2017": 10.29
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "UPPER DEERFIELD TWP"
+    },
+    "0614": {
+      "class_2_sales": {
+        "2016": 335,
+        "2017": 329
+      },
+      "county": "CUMBERLAND",
+      "name": "Vineland City",
+      "series": {
+        "2016": 14.51,
+        "2017": 12.5
+      },
+      "source_file": "devcum.pdf",
+      "source_name": "VINELAND CITY"
+    },
+    "0701": {
+      "class_2_sales": {
+        "2016": 171,
+        "2017": 160
+      },
+      "county": "ESSEX",
+      "name": "Belleville Township",
+      "series": {
+        "2016": 10.57,
+        "2017": 11.85
+      },
+      "source_file": "devess.pdf",
+      "source_name": "BELLEVILLE TWP"
+    },
+    "0702": {
+      "class_2_sales": {
+        "2016": 327,
+        "2017": 381
+      },
+      "county": "ESSEX",
+      "name": "Bloomfield Township",
+      "series": {
+        "2016": 12.47,
+        "2017": 10.42
+      },
+      "source_file": "devess.pdf",
+      "source_name": "BLOOMFIELD TWP"
+    },
+    "0703": {
+      "class_2_sales": {
+        "2016": 90,
+        "2017": 28
+      },
+      "county": "ESSEX",
+      "name": "Caldwell Borough",
+      "series": {
+        "2016": 11.15,
+        "2017": 9.37
+      },
+      "source_file": "devess.pdf",
+      "source_name": "CALDWELL BORO TWP"
+    },
+    "0704": {
+      "class_2_sales": {
+        "2016": 120,
+        "2017": 101
+      },
+      "county": "ESSEX",
+      "name": "Cedar Grove Township",
+      "series": {
+        "2016": 8.56,
+        "2017": 8.34
+      },
+      "source_file": "devess.pdf",
+      "source_name": "CEDAR GROVE TWP"
+    },
+    "0705": {
+      "class_2_sales": {
+        "2016": 121,
+        "2017": 148
+      },
+      "county": "ESSEX",
+      "name": "East Orange City",
+      "series": {
+        "2016": 25.96,
+        "2017": 22.09
+      },
+      "source_file": "devess.pdf",
+      "source_name": "EAST ORANGE CITY"
+    },
+    "0706": {
+      "class_2_sales": {
+        "2016": 42,
+        "2017": 10
+      },
+      "county": "ESSEX",
+      "name": "Essex Fells Borough",
+      "series": {
+        "2016": 7.07,
+        "2017": 5.98
+      },
+      "source_file": "devess.pdf",
+      "source_name": "ESSEX FELLS TWP"
+    },
+    "0707": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 76
+      },
+      "county": "ESSEX",
+      "name": "Fairfield Township",
+      "series": {
+        "2016": 9.34,
+        "2017": 10.61
+      },
+      "source_file": "devess.pdf",
+      "source_name": "FAIRFIELD TWP"
+    },
+    "0708": {
+      "class_2_sales": {
+        "2016": 84,
+        "2017": 97
+      },
+      "county": "ESSEX",
+      "name": "Glen Ridge Borough",
+      "series": {
+        "2016": 11.23,
+        "2017": 12.18
+      },
+      "source_file": "devess.pdf",
+      "source_name": "GLEN RIDGE TWP"
+    },
+    "0709": {
+      "class_2_sales": {
+        "2016": 58,
+        "2017": 30
+      },
+      "county": "ESSEX",
+      "name": "Irvington Township",
+      "series": {
+        "2016": 11.2,
+        "2017": 10.83
+      },
+      "source_file": "devess.pdf",
+      "source_name": "IRVINGTON TWP"
+    },
+    "0710": {
+      "class_2_sales": {
+        "2016": 378,
+        "2017": 341
+      },
+      "county": "ESSEX",
+      "name": "Livingston Township",
+      "series": {
+        "2016": 10.73,
+        "2017": 10.6
+      },
+      "source_file": "devess.pdf",
+      "source_name": "LIVINGSTON TWP"
+    },
+    "0711": {
+      "class_2_sales": {
+        "2016": 240,
+        "2017": 113
+      },
+      "county": "ESSEX",
+      "name": "Maplewood Township",
+      "series": {
+        "2016": 12.41,
+        "2017": 10.87
+      },
+      "source_file": "devess.pdf",
+      "source_name": "MAPLEWOOD TWP"
+    },
+    "0712": {
+      "class_2_sales": {
+        "2016": 298,
+        "2017": 123
+      },
+      "county": "ESSEX",
+      "name": "Millburn Township",
+      "series": {
+        "2016": 12.4,
+        "2017": 10.84
+      },
+      "source_file": "devess.pdf",
+      "source_name": "MILLBURN TWP"
+    },
+    "0713": {
+      "class_2_sales": {
+        "2016": 354,
+        "2017": 417
+      },
+      "county": "ESSEX",
+      "name": "Montclair Township",
+      "series": {
+        "2016": 14.16,
+        "2017": 13.41
+      },
+      "source_file": "devess.pdf",
+      "source_name": "MONTCLAIR TWP"
+    },
+    "0714": {
+      "class_2_sales": {
+        "2016": 791,
+        "2017": 895
+      },
+      "county": "ESSEX",
+      "name": "Newark City",
+      "series": {
+        "2016": 37.88,
+        "2017": 34.35
+      },
+      "source_file": "devess.pdf",
+      "source_name": "NEWARK CITY"
+    },
+    "0715": {
+      "class_2_sales": {
+        "2016": 68,
+        "2017": 62
+      },
+      "county": "ESSEX",
+      "name": "North Caldwell Borough",
+      "series": {
+        "2016": 8.76,
+        "2017": 10.35
+      },
+      "source_file": "devess.pdf",
+      "source_name": "NORTH CALDWELL TWP"
+    },
+    "0716": {
+      "class_2_sales": {
+        "2016": 202,
+        "2017": 247
+      },
+      "county": "ESSEX",
+      "name": "Nutley Township",
+      "series": {
+        "2016": 9.67,
+        "2017": 10.8
+      },
+      "source_file": "devess.pdf",
+      "source_name": "NUTLEY TWP"
+    },
+    "0717": {
+      "class_2_sales": {
+        "2016": 30,
+        "2017": 35
+      },
+      "county": "ESSEX",
+      "name": "City of Orange Township",
+      "series": {
+        "2016": 12.8,
+        "2017": 18.78
+      },
+      "source_file": "devess.pdf",
+      "source_name": "ORANGE CITY TWP"
+    },
+    "0718": {
+      "class_2_sales": {
+        "2016": 46,
+        "2017": 47
+      },
+      "county": "ESSEX",
+      "name": "Roseland Borough",
+      "series": {
+        "2016": 9.34,
+        "2017": 9.32
+      },
+      "source_file": "devess.pdf",
+      "source_name": "ROSELAND BORO"
+    },
+    "0719": {
+      "class_2_sales": {
+        "2016": 239,
+        "2017": 81
+      },
+      "county": "ESSEX",
+      "name": "South Orange Village Township",
+      "series": {
+        "2016": 15.43,
+        "2017": 11.53
+      },
+      "source_file": "devess.pdf",
+      "source_name": "SOUTH ORANGE VILLAGE TWP"
+    },
+    "0720": {
+      "class_2_sales": {
+        "2016": 169,
+        "2017": 214
+      },
+      "county": "ESSEX",
+      "name": "Verona Township",
+      "series": {
+        "2016": 11.1,
+        "2017": 9.88
+      },
+      "source_file": "devess.pdf",
+      "source_name": "VERONA TWP"
+    },
+    "0721": {
+      "class_2_sales": {
+        "2016": 100,
+        "2017": 93
+      },
+      "county": "ESSEX",
+      "name": "West Caldwell Township",
+      "series": {
+        "2016": 7.21,
+        "2017": 9.64
+      },
+      "source_file": "devess.pdf",
+      "source_name": "WEST CALDWELL TWP"
+    },
+    "0722": {
+      "class_2_sales": {
+        "2016": 457,
+        "2017": 491
+      },
+      "county": "ESSEX",
+      "name": "West Orange Township",
+      "series": {
+        "2016": 9.96,
+        "2017": 11.37
+      },
+      "source_file": "devess.pdf",
+      "source_name": "WEST ORANGE TWP"
+    },
+    "0801": {
+      "class_2_sales": {
+        "2016": 65,
+        "2017": 49
+      },
+      "county": "GLOUCESTER",
+      "name": "Clayton Borough",
+      "series": {
+        "2016": 13.41,
+        "2017": 11.0
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "CLAYTON BORO"
+    },
+    "0802": {
+      "class_2_sales": {
+        "2016": 235,
+        "2017": 250
+      },
+      "county": "GLOUCESTER",
+      "name": "Deptford Township",
+      "series": {
+        "2016": 8.7,
+        "2017": 7.54
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "DEPTFORD TWP"
+    },
+    "0803": {
+      "class_2_sales": {
+        "2016": 115,
+        "2017": 129
+      },
+      "county": "GLOUCESTER",
+      "name": "East Greenwich Township",
+      "series": {
+        "2016": 7.93,
+        "2017": 7.76
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "EAST GREENWICH TWP"
+    },
+    "0804": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 21
+      },
+      "county": "GLOUCESTER",
+      "name": "Elk Township",
+      "series": {
+        "2016": 10.33,
+        "2017": 11.81
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "ELK TWP"
+    },
+    "0805": {
+      "class_2_sales": {
+        "2016": 90,
+        "2017": 119
+      },
+      "county": "GLOUCESTER",
+      "name": "Franklin Township",
+      "series": {
+        "2016": 10.45,
+        "2017": 14.08
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "FRANKLIN TWP"
+    },
+    "0806": {
+      "class_2_sales": {
+        "2016": 152,
+        "2017": 176
+      },
+      "county": "GLOUCESTER",
+      "name": "Glassboro Borough",
+      "series": {
+        "2016": 10.5,
+        "2017": 10.33
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "GLASSBORO BORO"
+    },
+    "0807": {
+      "class_2_sales": {
+        "2016": 36,
+        "2017": 40
+      },
+      "county": "GLOUCESTER",
+      "name": "Greenwich Township",
+      "series": {
+        "2016": 9.79,
+        "2017": 10.45
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "GREENWICH TWP"
+    },
+    "0808": {
+      "class_2_sales": {
+        "2016": 138,
+        "2017": 44
+      },
+      "county": "GLOUCESTER",
+      "name": "Harrison Township",
+      "series": {
+        "2016": 8.41,
+        "2017": 4.9
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "HARRISON TWP"
+    },
+    "0809": {
+      "class_2_sales": {
+        "2016": 67,
+        "2017": 59
+      },
+      "county": "GLOUCESTER",
+      "name": "Logan Township",
+      "series": {
+        "2016": 8.47,
+        "2017": 9.94
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "LOGAN TWP"
+    },
+    "0810": {
+      "class_2_sales": {
+        "2016": 152,
+        "2017": 133
+      },
+      "county": "GLOUCESTER",
+      "name": "Mantua Township",
+      "series": {
+        "2016": 9.85,
+        "2017": 10.13
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "MANTUA TWP"
+    },
+    "0811": {
+      "class_2_sales": {
+        "2016": 261,
+        "2017": 249
+      },
+      "county": "GLOUCESTER",
+      "name": "Monroe Township",
+      "series": {
+        "2016": 10.65,
+        "2017": 10.89
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "MONROE TWP"
+    },
+    "0812": {
+      "class_2_sales": {
+        "2016": 29,
+        "2017": 17
+      },
+      "county": "GLOUCESTER",
+      "name": "National Park Borough",
+      "series": {
+        "2016": 10.12,
+        "2017": 12.16
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "NATIONAL PARK BORO"
+    },
+    "0813": {
+      "class_2_sales": {
+        "2016": 18,
+        "2017": 12
+      },
+      "county": "GLOUCESTER",
+      "name": "Newfield Borough",
+      "series": {
+        "2016": 7.58,
+        "2017": 11.51
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "NEWFIELD BORO"
+    },
+    "0814": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 23
+      },
+      "county": "GLOUCESTER",
+      "name": "Paulsboro Borough",
+      "series": {
+        "2016": 12.44,
+        "2017": 15.94
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "PAULSBORO BORO"
+    },
+    "0815": {
+      "class_2_sales": {
+        "2016": 84,
+        "2017": 73
+      },
+      "county": "GLOUCESTER",
+      "name": "Pitman Borough",
+      "series": {
+        "2016": 11.36,
+        "2017": 12.76
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "PITMAN BORO"
+    },
+    "0816": {
+      "class_2_sales": {
+        "2016": 19,
+        "2017": 23
+      },
+      "county": "GLOUCESTER",
+      "name": "South Harrison Township",
+      "series": {
+        "2016": 7.87,
+        "2017": 13.88
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "SO HARRISON TWP"
+    },
+    "0817": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 34
+      },
+      "county": "GLOUCESTER",
+      "name": "Swedesboro Borough",
+      "series": {
+        "2016": 9.88,
+        "2017": 10.8
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "SWEDESBORO BORO"
+    },
+    "0818": {
+      "class_2_sales": {
+        "2016": 475,
+        "2017": 448
+      },
+      "county": "GLOUCESTER",
+      "name": "Washington Township",
+      "series": {
+        "2016": 8.55,
+        "2017": 8.48
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WASHINGTON TWP"
+    },
+    "0819": {
+      "class_2_sales": {
+        "2016": 20,
+        "2017": 32
+      },
+      "county": "GLOUCESTER",
+      "name": "Wenonah Borough",
+      "series": {
+        "2016": 7.28,
+        "2017": 10.89
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WENONAH BORO"
+    },
+    "0820": {
+      "class_2_sales": {
+        "2016": 188,
+        "2017": 195
+      },
+      "county": "GLOUCESTER",
+      "name": "West Deptford Township",
+      "series": {
+        "2016": 9.0,
+        "2017": 9.46
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WEST DEPTFORD TWP"
+    },
+    "0821": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 27
+      },
+      "county": "GLOUCESTER",
+      "name": "Westville Borough",
+      "series": {
+        "2016": 11.64,
+        "2017": 16.55
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WESTVILLE BORO"
+    },
+    "0822": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 74
+      },
+      "county": "GLOUCESTER",
+      "name": "Woodbury City",
+      "series": {
+        "2016": 10.4,
+        "2017": 12.18
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WOODBURY CITY"
+    },
+    "0823": {
+      "class_2_sales": {
+        "2016": 28,
+        "2017": 17
+      },
+      "county": "GLOUCESTER",
+      "name": "Woodbury Heights Borough",
+      "series": {
+        "2016": 8.34,
+        "2017": 12.72
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WOODBURY HEIGHTS BO"
+    },
+    "0824": {
+      "class_2_sales": {
+        "2016": 105,
+        "2017": 129
+      },
+      "county": "GLOUCESTER",
+      "name": "Woolwich Township",
+      "series": {
+        "2016": 7.18,
+        "2017": 8.69
+      },
+      "source_file": "devglo.pdf",
+      "source_name": "WOOLWICH TWP"
+    },
+    "0901": {
+      "class_2_sales": {
+        "2016": 353,
+        "2017": 427
+      },
+      "county": "HUDSON",
+      "name": "Bayonne City",
+      "series": {
+        "2016": 21.15,
+        "2017": 19.11
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "BAYONNE CITY"
+    },
+    "0902": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 2
+      },
+      "county": "HUDSON",
+      "name": "East Newark Borough",
+      "series": {
+        "2016": 18.42,
+        "2017": 13.59
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "EAST NEWARK BORO"
+    },
+    "0903": {
+      "class_2_sales": {
+        "2016": 123,
+        "2017": 121
+      },
+      "county": "HUDSON",
+      "name": "Guttenberg Town",
+      "series": {
+        "2016": 14.73,
+        "2017": 15.21
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "GUTTENBERG TOWN"
+    },
+    "0904": {
+      "class_2_sales": {
+        "2016": 70,
+        "2017": 67
+      },
+      "county": "HUDSON",
+      "name": "Harrison Town",
+      "series": {
+        "2016": 14.81,
+        "2017": 18.73
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "HARRISON TOWN"
+    },
+    "0905": {
+      "class_2_sales": {
+        "2016": 1013,
+        "2017": 900
+      },
+      "county": "HUDSON",
+      "name": "Hoboken City",
+      "series": {
+        "2016": 9.06,
+        "2017": 8.76
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "HOBOKEN CITY"
+    },
+    "0906": {
+      "class_2_sales": {
+        "2016": 1811,
+        "2017": 1985
+      },
+      "county": "HUDSON",
+      "name": "Jersey City City",
+      "series": {
+        "2016": 36.17,
+        "2017": 35.23
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "JERSEY CITY CITY"
+    },
+    "0907": {
+      "class_2_sales": {
+        "2016": 120,
+        "2017": 130
+      },
+      "county": "HUDSON",
+      "name": "Kearny Town",
+      "series": {
+        "2016": 9.05,
+        "2017": 10.89
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "KEARNY TOWN"
+    },
+    "0908": {
+      "class_2_sales": {
+        "2016": 353,
+        "2017": 380
+      },
+      "county": "HUDSON",
+      "name": "North Bergen Township",
+      "series": {
+        "2016": 21.19,
+        "2017": 21.99
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "NORTH BERGEN TWP"
+    },
+    "0909": {
+      "class_2_sales": {
+        "2016": 168,
+        "2017": 174
+      },
+      "county": "HUDSON",
+      "name": "Secaucus Town",
+      "series": {
+        "2016": 11.95,
+        "2017": 12.59
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "SECAUCUS TOWN"
+    },
+    "0910": {
+      "class_2_sales": {
+        "2016": 218,
+        "2017": 244
+      },
+      "county": "HUDSON",
+      "name": "Union City City",
+      "series": {
+        "2016": 20.0,
+        "2017": 21.44
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "UNION CITY CITY"
+    },
+    "0911": {
+      "class_2_sales": {
+        "2016": 150,
+        "2017": 175
+      },
+      "county": "HUDSON",
+      "name": "Weehawken Township",
+      "series": {
+        "2016": 17.26,
+        "2017": 15.56
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "WEEHAWKEN TWP"
+    },
+    "0912": {
+      "class_2_sales": {
+        "2016": 138,
+        "2017": 174
+      },
+      "county": "HUDSON",
+      "name": "West New York Town",
+      "series": {
+        "2016": 26.08,
+        "2017": 22.59
+      },
+      "source_file": "devhud.pdf",
+      "source_name": "WEST NEW YORK TOWN"
+    },
+    "1001": {
+      "class_2_sales": {
+        "2016": 32,
+        "2017": 45
+      },
+      "county": "HUNTERDON",
+      "name": "Alexandria Township",
+      "series": {
+        "2016": 12.03,
+        "2017": 7.28
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "ALEXANDRIA TWP"
+    },
+    "1002": {
+      "class_2_sales": {
+        "2016": 33,
+        "2017": 42
+      },
+      "county": "HUNTERDON",
+      "name": "Bethlehem Township",
+      "series": {
+        "2016": 8.34,
+        "2017": 10.16
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "BETHLEHEM TWP"
+    },
+    "1003": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 7
+      },
+      "county": "HUNTERDON",
+      "name": "Bloomsbury Borough",
+      "series": {
+        "2016": null,
+        "2017": 10.17
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "BLOOMSBURY BORO"
+    },
+    "1004": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 11
+      },
+      "county": "HUNTERDON",
+      "name": "Califon Borough",
+      "series": {
+        "2016": 8.17,
+        "2017": 8.16
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "CALIFON BORO"
+    },
+    "1005": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 14
+      },
+      "county": "HUNTERDON",
+      "name": "Clinton Town",
+      "series": {
+        "2016": 6.69,
+        "2017": 4.87
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "CLINTON TOWN"
+    },
+    "1006": {
+      "class_2_sales": {
+        "2016": 138,
+        "2017": 138
+      },
+      "county": "HUNTERDON",
+      "name": "Clinton Township",
+      "series": {
+        "2016": 4.88,
+        "2017": 5.22
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "CLINTON TWP"
+    },
+    "1007": {
+      "class_2_sales": {
+        "2016": 22,
+        "2017": 31
+      },
+      "county": "HUNTERDON",
+      "name": "Delaware Township",
+      "series": {
+        "2016": 10.23,
+        "2017": 8.77
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "DELAWARE TWP"
+    },
+    "1008": {
+      "class_2_sales": {
+        "2016": 26,
+        "2017": 25
+      },
+      "county": "HUNTERDON",
+      "name": "East Amwell Township",
+      "series": {
+        "2016": 8.63,
+        "2017": 10.85
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "EAST AMWELL TWP"
+    },
+    "1009": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 5
+      },
+      "county": "HUNTERDON",
+      "name": "Flemington Borough",
+      "series": {
+        "2016": 9.15,
+        "2017": 13.19
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "FLEMINGTON BORO"
+    },
+    "1010": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 27
+      },
+      "county": "HUNTERDON",
+      "name": "Franklin Township",
+      "series": {
+        "2016": 8.32,
+        "2017": 7.99
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "FRANKLIN TWP"
+    },
+    "1011": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 10
+      },
+      "county": "HUNTERDON",
+      "name": "Frenchtown Borough",
+      "series": {
+        "2016": 13.33,
+        "2017": 8.49
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "FRENCHTOWN BORO"
+    },
+    "1012": {
+      "class_2_sales": {
+        "2016": 26,
+        "2017": 21
+      },
+      "county": "HUNTERDON",
+      "name": "Glen Gardner Borough",
+      "series": {
+        "2016": 8.92,
+        "2017": 6.4
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "GLEN GARDNER BORO"
+    },
+    "1013": {
+      "class_2_sales": {
+        "2016": 11,
+        "2017": 15
+      },
+      "county": "HUNTERDON",
+      "name": "Hampton Borough",
+      "series": {
+        "2016": 8.52,
+        "2017": 5.98
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "HAMPTON BORO"
+    },
+    "1014": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 55
+      },
+      "county": "HUNTERDON",
+      "name": "High Bridge Borough",
+      "series": {
+        "2016": 11.48,
+        "2017": 10.94
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "HIGH BRIDGE BORO"
+    },
+    "1015": {
+      "class_2_sales": {
+        "2016": 36,
+        "2017": 49
+      },
+      "county": "HUNTERDON",
+      "name": "Holland Township",
+      "series": {
+        "2016": 10.72,
+        "2017": 9.64
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "HOLLAND TWP"
+    },
+    "1016": {
+      "class_2_sales": {
+        "2016": 31,
+        "2017": 26
+      },
+      "county": "HUNTERDON",
+      "name": "Kingwood Township",
+      "series": {
+        "2016": 9.04,
+        "2017": 8.9
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "KINGWOOD TWP"
+    },
+    "1017": {
+      "class_2_sales": {
+        "2016": 29,
+        "2017": 24
+      },
+      "county": "HUNTERDON",
+      "name": "Lambertville City",
+      "series": {
+        "2016": 10.46,
+        "2017": 10.36
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "LAMBERTVILLE CITY"
+    },
+    "1018": {
+      "class_2_sales": {
+        "2016": 27,
+        "2017": 8
+      },
+      "county": "HUNTERDON",
+      "name": "Lebanon Borough",
+      "series": {
+        "2016": 6.87,
+        "2017": 5.11
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "LEBANON BORO"
+    },
+    "1019": {
+      "class_2_sales": {
+        "2016": 46,
+        "2017": 50
+      },
+      "county": "HUNTERDON",
+      "name": "Lebanon Township",
+      "series": {
+        "2016": 10.31,
+        "2017": 10.94
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "LEBANON TWP"
+    },
+    "1020": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 12
+      },
+      "county": "HUNTERDON",
+      "name": "Milford Borough",
+      "series": {
+        "2016": 13.2,
+        "2017": 13.49
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "MILFORD BORO"
+    },
+    "1021": {
+      "class_2_sales": {
+        "2016": 241,
+        "2017": 297
+      },
+      "county": "HUNTERDON",
+      "name": "Raritan Township",
+      "series": {
+        "2016": 6.98,
+        "2017": 6.93
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "RARITAN TWP"
+    },
+    "1022": {
+      "class_2_sales": {
+        "2016": 171,
+        "2017": 154
+      },
+      "county": "HUNTERDON",
+      "name": "Readington Township",
+      "series": {
+        "2016": 8.04,
+        "2017": 10.06
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "READINGTON TWP"
+    },
+    "1023": {
+      "class_2_sales": {
+        "2016": 3,
+        "2017": 5
+      },
+      "county": "HUNTERDON",
+      "name": "Stockton Borough",
+      "series": {
+        "2016": 5.31,
+        "2017": 13.55
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "STOCKTON BORO"
+    },
+    "1024": {
+      "class_2_sales": {
+        "2016": 55,
+        "2017": 67
+      },
+      "county": "HUNTERDON",
+      "name": "Tewksbury Township",
+      "series": {
+        "2016": 13.54,
+        "2017": 13.75
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "TEWKSBURY TWP"
+    },
+    "1025": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 59
+      },
+      "county": "HUNTERDON",
+      "name": "Union Township",
+      "series": {
+        "2016": 9.35,
+        "2017": 10.7
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "UNION TWP"
+    },
+    "1026": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 8
+      },
+      "county": "HUNTERDON",
+      "name": "West Amwell Township",
+      "series": {
+        "2016": 12.9,
+        "2017": 4.29
+      },
+      "source_file": "devhun.pdf",
+      "source_name": "WEST AMWELL TWP"
+    },
+    "1101": {
+      "class_2_sales": {
+        "2016": 268,
+        "2017": 300
+      },
+      "county": "MERCER",
+      "name": "East Windsor Township",
+      "series": {
+        "2016": 10.04,
+        "2017": 9.77
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "EAST WINDSOR TWP"
+    },
+    "1102": {
+      "class_2_sales": {
+        "2016": 239,
+        "2017": 313
+      },
+      "county": "MERCER",
+      "name": "Ewing Township",
+      "series": {
+        "2016": 12.95,
+        "2017": 14.87
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "EWING TWP"
+    },
+    "1103": {
+      "class_2_sales": {
+        "2016": 284,
+        "2017": 723
+      },
+      "county": "MERCER",
+      "name": "Hamilton Township",
+      "series": {
+        "2016": 11.32,
+        "2017": 11.71
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "HAMILTON TWP"
+    },
+    "1104": {
+      "class_2_sales": {
+        "2016": 39,
+        "2017": 47
+      },
+      "county": "MERCER",
+      "name": "Hightstown Borough",
+      "series": {
+        "2016": 10.24,
+        "2017": 8.85
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "HIGHTSTOWN BORO"
+    },
+    "1105": {
+      "class_2_sales": {
+        "2016": 22,
+        "2017": 24
+      },
+      "county": "MERCER",
+      "name": "Hopewell Borough",
+      "series": {
+        "2016": 9.54,
+        "2017": 10.62
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "HOPEWELL BORO"
+    },
+    "1106": {
+      "class_2_sales": {
+        "2016": 222,
+        "2017": 240
+      },
+      "county": "MERCER",
+      "name": "Hopewell Township",
+      "series": {
+        "2016": 11.3,
+        "2017": 12.07
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "HOPEWELL TWP"
+    },
+    "1107": {
+      "class_2_sales": {
+        "2016": 262,
+        "2017": 314
+      },
+      "county": "MERCER",
+      "name": "Lawrence Township",
+      "series": {
+        "2016": 8.35,
+        "2017": 9.74
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "LAWRENCE TWP"
+    },
+    "1108": {
+      "class_2_sales": {
+        "2016": 35,
+        "2017": 46
+      },
+      "county": "MERCER",
+      "name": "Pennington Borough",
+      "series": {
+        "2016": 10.15,
+        "2017": 11.07
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "PENNINGTON BORO"
+    },
+    "1111": {
+      "class_2_sales": {
+        "2016": 224,
+        "2017": 167
+      },
+      "county": "MERCER",
+      "name": "Trenton City",
+      "series": {
+        "2016": 22.25,
+        "2017": 26.64
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "TRENTON CITY"
+    },
+    "1112": {
+      "class_2_sales": {
+        "2016": 210,
+        "2017": 222
+      },
+      "county": "MERCER",
+      "name": "Robbinsville Township",
+      "series": {
+        "2016": 8.62,
+        "2017": 7.71
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "ROBBINSVILLE TWP"
+    },
+    "1113": {
+      "class_2_sales": {
+        "2016": 362,
+        "2017": 351
+      },
+      "county": "MERCER",
+      "name": "West Windsor Township",
+      "series": {
+        "2016": 7.0,
+        "2017": 7.77
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "WEST WINDSOR TWP"
+    },
+    "1114": {
+      "class_2_sales": {
+        "2016": 285,
+        "2017": 252
+      },
+      "county": "MERCER",
+      "name": "Princeton",
+      "series": {
+        "2016": 10.37,
+        "2017": 10.94
+      },
+      "source_file": "devmer.pdf",
+      "source_name": "PRINCETON"
+    },
+    "1201": {
+      "class_2_sales": {
+        "2016": 120,
+        "2017": 51
+      },
+      "county": "MIDDLESEX",
+      "name": "Carteret Borough",
+      "series": {
+        "2016": 13.41,
+        "2017": 15.72
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "CARTERET BORO"
+    },
+    "1202": {
+      "class_2_sales": {
+        "2016": 39,
+        "2017": 49
+      },
+      "county": "MIDDLESEX",
+      "name": "Cranbury Township",
+      "series": {
+        "2016": 7.36,
+        "2017": 8.32
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "CRANBURY TWP"
+    },
+    "1203": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 67
+      },
+      "county": "MIDDLESEX",
+      "name": "Dunellen Borough",
+      "series": {
+        "2016": 15.48,
+        "2017": 19.42
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "DUNELLEN BORO"
+    },
+    "1204": {
+      "class_2_sales": {
+        "2016": 477,
+        "2017": 514
+      },
+      "county": "MIDDLESEX",
+      "name": "East Brunswick Township",
+      "series": {
+        "2016": 10.74,
+        "2017": 11.48
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "EAST BRUNSWICK TWP"
+    },
+    "1205": {
+      "class_2_sales": {
+        "2016": 753,
+        "2017": 901
+      },
+      "county": "MIDDLESEX",
+      "name": "Edison Township",
+      "series": {
+        "2016": 12.45,
+        "2017": 13.21
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "EDISON TWP"
+    },
+    "1206": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 33
+      },
+      "county": "MIDDLESEX",
+      "name": "Helmetta Borough",
+      "series": {
+        "2016": 8.07,
+        "2017": 7.82
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "HELMETTA BORO"
+    },
+    "1207": {
+      "class_2_sales": {
+        "2016": 83,
+        "2017": 95
+      },
+      "county": "MIDDLESEX",
+      "name": "Highland Park Borough",
+      "series": {
+        "2016": 14.01,
+        "2017": 13.98
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "HIGHLAND PARK BORO"
+    },
+    "1208": {
+      "class_2_sales": {
+        "2016": 39,
+        "2017": 61
+      },
+      "county": "MIDDLESEX",
+      "name": "Jamesburg Borough",
+      "series": {
+        "2016": 7.49,
+        "2017": 11.82
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "JAMESBURG BORO"
+    },
+    "1209": {
+      "class_2_sales": {
+        "2016": 510,
+        "2017": 635
+      },
+      "county": "MIDDLESEX",
+      "name": "Old Bridge Township",
+      "series": {
+        "2016": 9.98,
+        "2017": 11.51
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "OLD BRIDGE TWP"
+    },
+    "1210": {
+      "class_2_sales": {
+        "2016": 129,
+        "2017": 140
+      },
+      "county": "MIDDLESEX",
+      "name": "Metuchen Borough",
+      "series": {
+        "2016": 9.73,
+        "2017": 9.23
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "METUCHEN BORO"
+    },
+    "1211": {
+      "class_2_sales": {
+        "2016": 134,
+        "2017": 124
+      },
+      "county": "MIDDLESEX",
+      "name": "Middlesex Borough",
+      "series": {
+        "2016": 18.04,
+        "2017": 17.21
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "MIDDLESEX BORO"
+    },
+    "1212": {
+      "class_2_sales": {
+        "2016": 46,
+        "2017": 95
+      },
+      "county": "MIDDLESEX",
+      "name": "Milltown Borough",
+      "series": {
+        "2016": 12.77,
+        "2017": 12.3
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "MILLTOWN BORO"
+    },
+    "1213": {
+      "class_2_sales": {
+        "2016": 661,
+        "2017": 702
+      },
+      "county": "MIDDLESEX",
+      "name": "Monroe Township",
+      "series": {
+        "2016": 12.68,
+        "2017": 12.7
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "MONROE TWP"
+    },
+    "1214": {
+      "class_2_sales": {
+        "2016": 119,
+        "2017": 62
+      },
+      "county": "MIDDLESEX",
+      "name": "New Brunswick City",
+      "series": {
+        "2016": 19.48,
+        "2017": 9.11
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "NEW BRUNSWICK CITY"
+    },
+    "1215": {
+      "class_2_sales": {
+        "2016": 220,
+        "2017": 298
+      },
+      "county": "MIDDLESEX",
+      "name": "North Brunswick Township",
+      "series": {
+        "2016": 11.39,
+        "2017": 12.87
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "NORTH BRUNSWICK TWP"
+    },
+    "1216": {
+      "class_2_sales": {
+        "2016": 126,
+        "2017": 163
+      },
+      "county": "MIDDLESEX",
+      "name": "Perth Amboy City",
+      "series": {
+        "2016": 11.91,
+        "2017": 13.88
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "PERTH AMBOY CITY"
+    },
+    "1217": {
+      "class_2_sales": {
+        "2016": 308,
+        "2017": 345
+      },
+      "county": "MIDDLESEX",
+      "name": "Piscataway Township",
+      "series": {
+        "2016": 9.89,
+        "2017": 8.9
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "PISCATAWAY TWP"
+    },
+    "1218": {
+      "class_2_sales": {
+        "2016": 84,
+        "2017": 292
+      },
+      "county": "MIDDLESEX",
+      "name": "Plainsboro Township",
+      "series": {
+        "2016": 5.55,
+        "2017": 6.47
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "PLAINSBORO TWP"
+    },
+    "1219": {
+      "class_2_sales": {
+        "2016": 246,
+        "2017": 354
+      },
+      "county": "MIDDLESEX",
+      "name": "Sayreville Borough",
+      "series": {
+        "2016": 8.84,
+        "2017": 11.09
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SAYREVILLE BORO"
+    },
+    "1220": {
+      "class_2_sales": {
+        "2016": 64,
+        "2017": 102
+      },
+      "county": "MIDDLESEX",
+      "name": "South Amboy City",
+      "series": {
+        "2016": 10.16,
+        "2017": 11.47
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SOUTH AMBOY CITY"
+    },
+    "1221": {
+      "class_2_sales": {
+        "2016": 378,
+        "2017": 424
+      },
+      "county": "MIDDLESEX",
+      "name": "South Brunswick Township",
+      "series": {
+        "2016": 7.1,
+        "2017": 7.85
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SOUTH BRUNSWICK TWP"
+    },
+    "1222": {
+      "class_2_sales": {
+        "2016": 162,
+        "2017": 197
+      },
+      "county": "MIDDLESEX",
+      "name": "South Plainfield Borough",
+      "series": {
+        "2016": 12.65,
+        "2017": 13.61
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SOUTH PLAINFIELD BORO"
+    },
+    "1223": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 117
+      },
+      "county": "MIDDLESEX",
+      "name": "South River Borough",
+      "series": {
+        "2016": 14.12,
+        "2017": 15.26
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SOUTH RIVER BORO"
+    },
+    "1224": {
+      "class_2_sales": {
+        "2016": 66,
+        "2017": 59
+      },
+      "county": "MIDDLESEX",
+      "name": "Spotswood Borough",
+      "series": {
+        "2016": 10.69,
+        "2017": 13.36
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "SPOTSWOOD BORO"
+    },
+    "1225": {
+      "class_2_sales": {
+        "2016": 681,
+        "2017": 734
+      },
+      "county": "MIDDLESEX",
+      "name": "Woodbridge Township",
+      "series": {
+        "2016": 13.65,
+        "2017": 15.32
+      },
+      "source_file": "devmid.pdf",
+      "source_name": "WOODBRIDGE TWP"
+    },
+    "1301": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 5
+      },
+      "county": "MONMOUTH",
+      "name": "Allenhurst Borough",
+      "series": {
+        "2016": 14.54,
+        "2017": 8.02
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ALLENHURST BORO"
+    },
+    "1302": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 22
+      },
+      "county": "MONMOUTH",
+      "name": "Allentown Borough",
+      "series": {
+        "2016": 5.58,
+        "2017": 9.08
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ALLENTOWN BORO"
+    },
+    "1303": {
+      "class_2_sales": {
+        "2016": 75,
+        "2017": 79
+      },
+      "county": "MONMOUTH",
+      "name": "Asbury Park City",
+      "series": {
+        "2016": 8.15,
+        "2017": 13.96
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ASBURY PARK CITY"
+    },
+    "1304": {
+      "class_2_sales": {
+        "2016": 65,
+        "2017": 75
+      },
+      "county": "MONMOUTH",
+      "name": "Atlantic Highlands Borough",
+      "series": {
+        "2016": 14.35,
+        "2017": 11.86
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ATLANTIC HIGHLANDS"
+    },
+    "1305": {
+      "class_2_sales": {
+        "2016": 10,
+        "2017": 33
+      },
+      "county": "MONMOUTH",
+      "name": "Avon-by-the-Sea Borough",
+      "series": {
+        "2016": 8.88,
+        "2017": 11.56
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "AVON BY THE SEA BORO"
+    },
+    "1306": {
+      "class_2_sales": {
+        "2016": 75,
+        "2017": 39
+      },
+      "county": "MONMOUTH",
+      "name": "Belmar Borough",
+      "series": {
+        "2016": 15.77,
+        "2017": 10.67
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "BELMAR BORO"
+    },
+    "1307": {
+      "class_2_sales": {
+        "2016": 31,
+        "2017": 20
+      },
+      "county": "MONMOUTH",
+      "name": "Bradley Beach Borough",
+      "series": {
+        "2016": 12.78,
+        "2017": 10.73
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "BRADLEY BEACH BORO"
+    },
+    "1308": {
+      "class_2_sales": {
+        "2016": 29,
+        "2017": 37
+      },
+      "county": "MONMOUTH",
+      "name": "Brielle Borough",
+      "series": {
+        "2016": 8.08,
+        "2017": 7.42
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "BRIELLE BORO"
+    },
+    "1309": {
+      "class_2_sales": {
+        "2016": 32,
+        "2017": 53
+      },
+      "county": "MONMOUTH",
+      "name": "Colts Neck Township",
+      "series": {
+        "2016": 9.19,
+        "2017": 7.19
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "COLTS NECK TOWNSHIP"
+    },
+    "1310": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 10
+      },
+      "county": "MONMOUTH",
+      "name": "Deal Borough",
+      "series": {
+        "2016": 17.56,
+        "2017": 18.59
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "DEAL BORO"
+    },
+    "1311": {
+      "class_2_sales": {
+        "2016": 55,
+        "2017": 51
+      },
+      "county": "MONMOUTH",
+      "name": "Eatontown Borough",
+      "series": {
+        "2016": 10.64,
+        "2017": 9.85
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "EATONTOWN BORO"
+    },
+    "1312": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 4
+      },
+      "county": "MONMOUTH",
+      "name": "Englishtown Borough",
+      "series": {
+        "2016": 2.73,
+        "2017": 4.41
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ENGLISHTOWN BORO"
+    },
+    "1313": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 47
+      },
+      "county": "MONMOUTH",
+      "name": "Fair Haven Borough",
+      "series": {
+        "2016": 10.61,
+        "2017": 7.89
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "FAIR HAVEN BORO"
+    },
+    "1314": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 4
+      },
+      "county": "MONMOUTH",
+      "name": "Farmingdale Borough",
+      "series": {
+        "2016": null,
+        "2017": 9.25
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "FARMINGDALE BORO"
+    },
+    "1315": {
+      "class_2_sales": {
+        "2016": 79,
+        "2017": 32
+      },
+      "county": "MONMOUTH",
+      "name": "Freehold Borough",
+      "series": {
+        "2016": 10.42,
+        "2017": 9.86
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "FREEHOLD BORO"
+    },
+    "1316": {
+      "class_2_sales": {
+        "2016": 116,
+        "2017": 127
+      },
+      "county": "MONMOUTH",
+      "name": "Freehold Township",
+      "series": {
+        "2016": 6.53,
+        "2017": 7.38
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "FREEHOLD TWP"
+    },
+    "1317": {
+      "class_2_sales": {
+        "2016": 28,
+        "2017": 98
+      },
+      "county": "MONMOUTH",
+      "name": "Highlands Borough",
+      "series": {
+        "2016": 12.13,
+        "2017": 12.39
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "HIGHLANDS BORO"
+    },
+    "1318": {
+      "class_2_sales": {
+        "2016": 61,
+        "2017": 66
+      },
+      "county": "MONMOUTH",
+      "name": "Holmdel Township",
+      "series": {
+        "2016": 6.41,
+        "2017": 7.31
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "HOLMDEL TWP"
+    },
+    "1319": {
+      "class_2_sales": {
+        "2016": 228,
+        "2017": 215
+      },
+      "county": "MONMOUTH",
+      "name": "Howell Township",
+      "series": {
+        "2016": 8.78,
+        "2017": 7.95
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "HOWELL TWP"
+    },
+    "1320": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 8
+      },
+      "county": "MONMOUTH",
+      "name": "Interlaken Borough",
+      "series": {
+        "2016": 4.96,
+        "2017": 9.96
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "INTERLAKEN BORO"
+    },
+    "1321": {
+      "class_2_sales": {
+        "2016": 51,
+        "2017": 59
+      },
+      "county": "MONMOUTH",
+      "name": "Keansburg Borough",
+      "series": {
+        "2016": 15.94,
+        "2017": 17.67
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "KEANSBURG BORO"
+    },
+    "1322": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 19
+      },
+      "county": "MONMOUTH",
+      "name": "Keyport Borough",
+      "series": {
+        "2016": 11.14,
+        "2017": 11.69
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "KEYPORT BORO"
+    },
+    "1323": {
+      "class_2_sales": {
+        "2016": 38,
+        "2017": 42
+      },
+      "county": "MONMOUTH",
+      "name": "Little Silver Borough",
+      "series": {
+        "2016": 10.61,
+        "2017": 6.79
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "LITTLE SILVER BORO"
+    },
+    "1324": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 4
+      },
+      "county": "MONMOUTH",
+      "name": "Loch Arbour Village",
+      "series": {
+        "2016": null,
+        "2017": 6.38
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "LOCH ARBOUR VILLAGE"
+    },
+    "1325": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 136
+      },
+      "county": "MONMOUTH",
+      "name": "Long Branch City",
+      "series": {
+        "2016": 10.8,
+        "2017": 11.79
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "LONG BRANCH CITY"
+    },
+    "1326": {
+      "class_2_sales": {
+        "2016": 144,
+        "2017": 163
+      },
+      "county": "MONMOUTH",
+      "name": "Manalapan Township",
+      "series": {
+        "2016": 5.95,
+        "2017": 6.12
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MANALAPAN TWP"
+    },
+    "1327": {
+      "class_2_sales": {
+        "2016": 34,
+        "2017": 98
+      },
+      "county": "MONMOUTH",
+      "name": "Manasquan Borough",
+      "series": {
+        "2016": 9.66,
+        "2017": 10.82
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MANASQUAN BORO"
+    },
+    "1328": {
+      "class_2_sales": {
+        "2016": 129,
+        "2017": 467
+      },
+      "county": "MONMOUTH",
+      "name": "Marlboro Township",
+      "series": {
+        "2016": 8.54,
+        "2017": 8.08
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MARLBORO TWP"
+    },
+    "1329": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 36
+      },
+      "county": "MONMOUTH",
+      "name": "Matawan Borough",
+      "series": {
+        "2016": 8.72,
+        "2017": 9.82
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MATAWAN BORO"
+    },
+    "1330": {
+      "class_2_sales": {
+        "2016": 70,
+        "2017": 80
+      },
+      "county": "MONMOUTH",
+      "name": "Aberdeen Township",
+      "series": {
+        "2016": 6.22,
+        "2017": 7.34
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ABERDEEN TWP"
+    },
+    "1331": {
+      "class_2_sales": {
+        "2016": 294,
+        "2017": 272
+      },
+      "county": "MONMOUTH",
+      "name": "Middletown Township",
+      "series": {
+        "2016": 10.65,
+        "2017": 9.91
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MIDDLETOWN TWP"
+    },
+    "1332": {
+      "class_2_sales": {
+        "2016": 43,
+        "2017": 95
+      },
+      "county": "MONMOUTH",
+      "name": "Millstone Township",
+      "series": {
+        "2016": 6.54,
+        "2017": 8.49
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MILLSTONE TWP"
+    },
+    "1333": {
+      "class_2_sales": {
+        "2016": 37,
+        "2017": 40
+      },
+      "county": "MONMOUTH",
+      "name": "Monmouth Beach Borough",
+      "series": {
+        "2016": 12.4,
+        "2017": 11.55
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "MONMOUTH BEACH BORO"
+    },
+    "1334": {
+      "class_2_sales": {
+        "2016": 114,
+        "2017": 109
+      },
+      "county": "MONMOUTH",
+      "name": "Neptune Township",
+      "series": {
+        "2016": 11.46,
+        "2017": 10.91
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "NEPTUNE TWP"
+    },
+    "1335": {
+      "class_2_sales": {
+        "2016": 19,
+        "2017": 25
+      },
+      "county": "MONMOUTH",
+      "name": "Neptune City Borough",
+      "series": {
+        "2016": 8.45,
+        "2017": 6.33
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "NEPTUNE CITY BORO"
+    },
+    "1336": {
+      "class_2_sales": {
+        "2016": 90,
+        "2017": 89
+      },
+      "county": "MONMOUTH",
+      "name": "Tinton Falls Borough",
+      "series": {
+        "2016": 6.31,
+        "2017": 6.03
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "TINTON FALLS BORO"
+    },
+    "1337": {
+      "class_2_sales": {
+        "2016": 295,
+        "2017": 120
+      },
+      "county": "MONMOUTH",
+      "name": "Ocean Township",
+      "series": {
+        "2016": 10.89,
+        "2017": 10.05
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "OCEAN TWP"
+    },
+    "1338": {
+      "class_2_sales": {
+        "2016": 60,
+        "2017": 75
+      },
+      "county": "MONMOUTH",
+      "name": "Oceanport Borough",
+      "series": {
+        "2016": 10.35,
+        "2017": 10.75
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "OCEANPORT BORO"
+    },
+    "1339": {
+      "class_2_sales": {
+        "2016": 72,
+        "2017": 61
+      },
+      "county": "MONMOUTH",
+      "name": "Hazlet Township",
+      "series": {
+        "2016": 10.36,
+        "2017": 7.65
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "HAZLET TWP"
+    },
+    "1340": {
+      "class_2_sales": {
+        "2016": 56,
+        "2017": 66
+      },
+      "county": "MONMOUTH",
+      "name": "Red Bank Borough",
+      "series": {
+        "2016": 9.68,
+        "2017": 9.73
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "RED BANK BORO"
+    },
+    "1341": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 3
+      },
+      "county": "MONMOUTH",
+      "name": "Roosevelt Borough",
+      "series": {
+        "2016": 8.44,
+        "2017": 11.33
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "ROOSEVELT BORO"
+    },
+    "1342": {
+      "class_2_sales": {
+        "2016": 47,
+        "2017": 39
+      },
+      "county": "MONMOUTH",
+      "name": "Rumson Borough",
+      "series": {
+        "2016": 11.52,
+        "2017": 12.5
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "RUMSON BORO"
+    },
+    "1343": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 15
+      },
+      "county": "MONMOUTH",
+      "name": "Sea Bright Borough",
+      "series": {
+        "2016": 13.45,
+        "2017": 9.2
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SEA BRIGHT BORO"
+    },
+    "1344": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 19
+      },
+      "county": "MONMOUTH",
+      "name": "Sea Girt Borough",
+      "series": {
+        "2016": 11.25,
+        "2017": 10.78
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SEA GIRT BORO"
+    },
+    "1345": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 18
+      },
+      "county": "MONMOUTH",
+      "name": "Shrewsbury Borough",
+      "series": {
+        "2016": 5.93,
+        "2017": 4.6
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SHREWSBURY BORO"
+    },
+    "1346": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 7
+      },
+      "county": "MONMOUTH",
+      "name": "Shrewsbury Township",
+      "series": {
+        "2016": null,
+        "2017": 3.42
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SHREWSBURY TWP"
+    },
+    "1347": {
+      "class_2_sales": {
+        "2016": 11,
+        "2017": 15
+      },
+      "county": "MONMOUTH",
+      "name": "Lake Como Borough",
+      "series": {
+        "2016": 10.43,
+        "2017": 10.15
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "LAKE COMO"
+    },
+    "1348": {
+      "class_2_sales": {
+        "2016": 74,
+        "2017": 35
+      },
+      "county": "MONMOUTH",
+      "name": "Spring Lake Borough",
+      "series": {
+        "2016": 14.64,
+        "2017": 8.02
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SPRING LAKE BORO"
+    },
+    "1349": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 33
+      },
+      "county": "MONMOUTH",
+      "name": "Spring Lake Heights Borough",
+      "series": {
+        "2016": 9.38,
+        "2017": 8.81
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "SPRING LAKE HEIGHTS"
+    },
+    "1350": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 9
+      },
+      "county": "MONMOUTH",
+      "name": "Union Beach Borough",
+      "series": {
+        "2016": 16.32,
+        "2017": 8.88
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "UNION BEACH BORO"
+    },
+    "1351": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 17
+      },
+      "county": "MONMOUTH",
+      "name": "Upper Freehold Township",
+      "series": {
+        "2016": 5.98,
+        "2017": 6.16
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "UPPER FREEHOLD TWP"
+    },
+    "1352": {
+      "class_2_sales": {
+        "2016": 150,
+        "2017": 352
+      },
+      "county": "MONMOUTH",
+      "name": "Wall Township",
+      "series": {
+        "2016": 9.3,
+        "2017": 9.18
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "WALL TWP"
+    },
+    "1353": {
+      "class_2_sales": {
+        "2016": 28,
+        "2017": 36
+      },
+      "county": "MONMOUTH",
+      "name": "West Long Branch Borough",
+      "series": {
+        "2016": 11.42,
+        "2017": 8.8
+      },
+      "source_file": "devmon.pdf",
+      "source_name": "WEST LONG BRANCH BORO"
+    },
+    "1401": {
+      "class_2_sales": {
+        "2016": 78,
+        "2017": 74
+      },
+      "county": "MORRIS",
+      "name": "Boonton Town",
+      "series": {
+        "2016": 7.64,
+        "2017": 9.3
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "BOONTON TOWN"
+    },
+    "1402": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 50
+      },
+      "county": "MORRIS",
+      "name": "Boonton Township",
+      "series": {
+        "2016": 12.62,
+        "2017": 11.26
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "BOONTON TWP"
+    },
+    "1403": {
+      "class_2_sales": {
+        "2016": 102,
+        "2017": 97
+      },
+      "county": "MORRIS",
+      "name": "Butler Borough",
+      "series": {
+        "2016": 10.74,
+        "2017": 9.41
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "BUTLER BORO"
+    },
+    "1404": {
+      "class_2_sales": {
+        "2016": 114,
+        "2017": 156
+      },
+      "county": "MORRIS",
+      "name": "Chatham Borough",
+      "series": {
+        "2016": 11.1,
+        "2017": 12.22
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "CHATHAM BORO"
+    },
+    "1405": {
+      "class_2_sales": {
+        "2016": 154,
+        "2017": 149
+      },
+      "county": "MORRIS",
+      "name": "Chatham Township",
+      "series": {
+        "2016": 10.34,
+        "2017": 10.58
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "CHATHAM TWP"
+    },
+    "1406": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 5
+      },
+      "county": "MORRIS",
+      "name": "Chester Borough",
+      "series": {
+        "2016": 1.89,
+        "2017": 3.41
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "CHESTER BORO"
+    },
+    "1407": {
+      "class_2_sales": {
+        "2016": 67,
+        "2017": 85
+      },
+      "county": "MORRIS",
+      "name": "Chester Township",
+      "series": {
+        "2016": 9.19,
+        "2017": 10.73
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "CHESTER TWP"
+    },
+    "1408": {
+      "class_2_sales": {
+        "2016": 109,
+        "2017": 225
+      },
+      "county": "MORRIS",
+      "name": "Denville Township",
+      "series": {
+        "2016": 7.59,
+        "2017": 9.15
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "DENVILLE TWP"
+    },
+    "1409": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 68
+      },
+      "county": "MORRIS",
+      "name": "Dover Town",
+      "series": {
+        "2016": 6.79,
+        "2017": 9.98
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "DOVER TOWN"
+    },
+    "1410": {
+      "class_2_sales": {
+        "2016": 81,
+        "2017": 82
+      },
+      "county": "MORRIS",
+      "name": "East Hanover Township",
+      "series": {
+        "2016": 9.6,
+        "2017": 8.41
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "EAST HANOVER TWP"
+    },
+    "1411": {
+      "class_2_sales": {
+        "2016": 111,
+        "2017": 101
+      },
+      "county": "MORRIS",
+      "name": "Florham Park Borough",
+      "series": {
+        "2016": 10.34,
+        "2017": 11.35
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "FLORHAM PARK BORO"
+    },
+    "1412": {
+      "class_2_sales": {
+        "2016": 156,
+        "2017": 147
+      },
+      "county": "MORRIS",
+      "name": "Hanover Township",
+      "series": {
+        "2016": 7.16,
+        "2017": 10.05
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "HANOVER TWP"
+    },
+    "1413": {
+      "class_2_sales": {
+        "2016": 42,
+        "2017": 45
+      },
+      "county": "MORRIS",
+      "name": "Harding Township",
+      "series": {
+        "2016": 20.57,
+        "2017": 22.04
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "HARDING TWP"
+    },
+    "1414": {
+      "class_2_sales": {
+        "2016": 99,
+        "2017": 86
+      },
+      "county": "MORRIS",
+      "name": "Jefferson Township",
+      "series": {
+        "2016": 9.82,
+        "2017": 9.32
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "JEFFERSON TWP"
+    },
+    "1415": {
+      "class_2_sales": {
+        "2016": 127,
+        "2017": 39
+      },
+      "county": "MORRIS",
+      "name": "Kinnelon Borough",
+      "series": {
+        "2016": 14.39,
+        "2017": 17.34
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "KINNELON BORO"
+    },
+    "1416": {
+      "class_2_sales": {
+        "2016": 108,
+        "2017": 136
+      },
+      "county": "MORRIS",
+      "name": "Lincoln Park Borough",
+      "series": {
+        "2016": 7.17,
+        "2017": 8.27
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "LINCOLN PARK BORO"
+    },
+    "1417": {
+      "class_2_sales": {
+        "2016": 177,
+        "2017": 173
+      },
+      "county": "MORRIS",
+      "name": "Madison Borough",
+      "series": {
+        "2016": 10.06,
+        "2017": 11.19
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MADISON BORO"
+    },
+    "1418": {
+      "class_2_sales": {
+        "2016": 55,
+        "2017": 65
+      },
+      "county": "MORRIS",
+      "name": "Mendham Borough",
+      "series": {
+        "2016": 9.4,
+        "2017": 8.9
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MENDHAM BORO"
+    },
+    "1419": {
+      "class_2_sales": {
+        "2016": 76,
+        "2017": 66
+      },
+      "county": "MORRIS",
+      "name": "Mendham Township",
+      "series": {
+        "2016": 13.01,
+        "2017": 9.45
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MENDHAM TWP"
+    },
+    "1420": {
+      "class_2_sales": {
+        "2016": 48,
+        "2017": 43
+      },
+      "county": "MORRIS",
+      "name": "Mine Hill Township",
+      "series": {
+        "2016": 7.64,
+        "2017": 8.9
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MINE HILL TWP"
+    },
+    "1421": {
+      "class_2_sales": {
+        "2016": 226,
+        "2017": 240
+      },
+      "county": "MORRIS",
+      "name": "Montville Township",
+      "series": {
+        "2016": 9.17,
+        "2017": 8.98
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MONTVILLE TWP"
+    },
+    "1422": {
+      "class_2_sales": {
+        "2016": 118,
+        "2017": 271
+      },
+      "county": "MORRIS",
+      "name": "Morris Township",
+      "series": {
+        "2016": 7.28,
+        "2017": 8.1
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MORRIS TWP"
+    },
+    "1423": {
+      "class_2_sales": {
+        "2016": 69,
+        "2017": 77
+      },
+      "county": "MORRIS",
+      "name": "Morris Plains Borough",
+      "series": {
+        "2016": 10.72,
+        "2017": 9.4
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MORRIS PLAINS BORO"
+    },
+    "1424": {
+      "class_2_sales": {
+        "2016": 140,
+        "2017": 172
+      },
+      "county": "MORRIS",
+      "name": "Morristown Town",
+      "series": {
+        "2016": 16.65,
+        "2017": 14.61
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MORRISTOWN TOWN"
+    },
+    "1425": {
+      "class_2_sales": {
+        "2016": 72,
+        "2017": 65
+      },
+      "county": "MORRIS",
+      "name": "Mountain Lakes Borough",
+      "series": {
+        "2016": 12.86,
+        "2017": 14.99
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MOUNTAIN LAKES BORO"
+    },
+    "1426": {
+      "class_2_sales": {
+        "2016": 95,
+        "2017": 80
+      },
+      "county": "MORRIS",
+      "name": "Mount Arlington Borough",
+      "series": {
+        "2016": 11.05,
+        "2017": 10.78
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MOUNT ARLINGTON BOR"
+    },
+    "1427": {
+      "class_2_sales": {
+        "2016": 195,
+        "2017": 222
+      },
+      "county": "MORRIS",
+      "name": "Mount Olive Township",
+      "series": {
+        "2016": 8.01,
+        "2017": 8.72
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "MOUNT OLIVE TWP"
+    },
+    "1428": {
+      "class_2_sales": {
+        "2016": 23,
+        "2017": 26
+      },
+      "county": "MORRIS",
+      "name": "Netcong Borough",
+      "series": {
+        "2016": 12.2,
+        "2017": 13.21
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "NETCONG BORO"
+    },
+    "1429": {
+      "class_2_sales": {
+        "2016": 439,
+        "2017": 490
+      },
+      "county": "MORRIS",
+      "name": "Parsippany-Troy Hills Township",
+      "series": {
+        "2016": 8.79,
+        "2017": 9.7
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "PARSIPPANY TR HLS TWP"
+    },
+    "1430": {
+      "class_2_sales": {
+        "2016": 40,
+        "2017": 38
+      },
+      "county": "MORRIS",
+      "name": "Long Hill Township",
+      "series": {
+        "2016": 8.21,
+        "2017": 8.63
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "LONG HILL TWP"
+    },
+    "1431": {
+      "class_2_sales": {
+        "2016": 150,
+        "2017": 134
+      },
+      "county": "MORRIS",
+      "name": "Pequannock Township",
+      "series": {
+        "2016": 9.17,
+        "2017": 9.09
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "PEQUANNOCK TWP"
+    },
+    "1432": {
+      "class_2_sales": {
+        "2016": 242,
+        "2017": 95
+      },
+      "county": "MORRIS",
+      "name": "Randolph Township",
+      "series": {
+        "2016": 10.44,
+        "2017": 8.32
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "RANDOLPH TWP"
+    },
+    "1433": {
+      "class_2_sales": {
+        "2016": 75,
+        "2017": 77
+      },
+      "county": "MORRIS",
+      "name": "Riverdale Borough",
+      "series": {
+        "2016": 7.57,
+        "2017": 7.32
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "RIVERDALE BORO"
+    },
+    "1434": {
+      "class_2_sales": {
+        "2016": 53,
+        "2017": 51
+      },
+      "county": "MORRIS",
+      "name": "Rockaway Borough",
+      "series": {
+        "2016": 12.98,
+        "2017": 9.25
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "ROCKAWAY BORO"
+    },
+    "1435": {
+      "class_2_sales": {
+        "2016": 341,
+        "2017": 341
+      },
+      "county": "MORRIS",
+      "name": "Rockaway Township",
+      "series": {
+        "2016": 11.57,
+        "2017": 12.01
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "ROCKAWAY TWP"
+    },
+    "1436": {
+      "class_2_sales": {
+        "2016": 274,
+        "2017": 308
+      },
+      "county": "MORRIS",
+      "name": "Roxbury Township",
+      "series": {
+        "2016": 10.5,
+        "2017": 12.36
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "ROXBURY TWP"
+    },
+    "1437": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 12
+      },
+      "county": "MORRIS",
+      "name": "Victory Gardens Borough",
+      "series": {
+        "2016": 9.8,
+        "2017": 6.89
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "VICTORY GARDENS BORO"
+    },
+    "1438": {
+      "class_2_sales": {
+        "2016": 169,
+        "2017": 163
+      },
+      "county": "MORRIS",
+      "name": "Washington Township",
+      "series": {
+        "2016": 7.96,
+        "2017": 8.35
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "WASHINGTON TWP"
+    },
+    "1439": {
+      "class_2_sales": {
+        "2016": 17,
+        "2017": 22
+      },
+      "county": "MORRIS",
+      "name": "Wharton Borough",
+      "series": {
+        "2016": 9.18,
+        "2017": 8.44
+      },
+      "source_file": "devmor.pdf",
+      "source_name": "WHARTON BORO"
+    },
+    "1501": {
+      "class_2_sales": {
+        "2016": 33,
+        "2017": 32
+      },
+      "county": "OCEAN",
+      "name": "Barnegat Light Borough",
+      "series": {
+        "2016": 8.97,
+        "2017": 14.07
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BARNEGAT LIGHT BORO"
+    },
+    "1502": {
+      "class_2_sales": {
+        "2016": 23,
+        "2017": 18
+      },
+      "county": "OCEAN",
+      "name": "Bay Head Borough",
+      "series": {
+        "2016": 15.81,
+        "2017": 15.43
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BAY HEAD BORO"
+    },
+    "1503": {
+      "class_2_sales": {
+        "2016": 71,
+        "2017": 34
+      },
+      "county": "OCEAN",
+      "name": "Beach Haven Borough",
+      "series": {
+        "2016": 12.64,
+        "2017": 6.94
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BEACH HAVEN BORO"
+    },
+    "1504": {
+      "class_2_sales": {
+        "2016": 37,
+        "2017": 123
+      },
+      "county": "OCEAN",
+      "name": "Beachwood Borough",
+      "series": {
+        "2016": 8.07,
+        "2017": 9.46
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BEACHWOOD BORO"
+    },
+    "1505": {
+      "class_2_sales": {
+        "2016": 908,
+        "2017": 933
+      },
+      "county": "OCEAN",
+      "name": "Berkeley Township",
+      "series": {
+        "2016": 17.85,
+        "2017": 17.22
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BERKELEY TWP"
+    },
+    "1506": {
+      "class_2_sales": {
+        "2016": 925,
+        "2017": 1100
+      },
+      "county": "OCEAN",
+      "name": "Brick Township",
+      "series": {
+        "2016": 14.12,
+        "2017": 13.9
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BRICK TWP"
+    },
+    "1507": {
+      "class_2_sales": {
+        "2016": 1257,
+        "2017": 1415
+      },
+      "county": "OCEAN",
+      "name": "Toms River Township",
+      "series": {
+        "2016": 13.77,
+        "2017": 14.51
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "TOMS RIVER TWP"
+    },
+    "1508": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 13
+      },
+      "county": "OCEAN",
+      "name": "Eagleswood Township",
+      "series": {
+        "2016": 9.22,
+        "2017": 11.22
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "EAGLESWOOD TWP"
+    },
+    "1509": {
+      "class_2_sales": {
+        "2016": 30,
+        "2017": 25
+      },
+      "county": "OCEAN",
+      "name": "Harvey Cedars Borough",
+      "series": {
+        "2016": 12.71,
+        "2017": 12.72
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "HARVEY CEDARS BORO"
+    },
+    "1510": {
+      "class_2_sales": {
+        "2016": 26,
+        "2017": 26
+      },
+      "county": "OCEAN",
+      "name": "Island Heights Borough",
+      "series": {
+        "2016": 19.71,
+        "2017": 15.07
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "ISLAND HEIGHTS BORO"
+    },
+    "1511": {
+      "class_2_sales": {
+        "2016": 745,
+        "2017": 888
+      },
+      "county": "OCEAN",
+      "name": "Jackson Township",
+      "series": {
+        "2016": 12.43,
+        "2017": 12.15
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "JACKSON TWP"
+    },
+    "1512": {
+      "class_2_sales": {
+        "2016": 305,
+        "2017": 361
+      },
+      "county": "OCEAN",
+      "name": "Lacey Township",
+      "series": {
+        "2016": 10.89,
+        "2017": 10.78
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LACEY TWP"
+    },
+    "1513": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 3
+      },
+      "county": "OCEAN",
+      "name": "Lakehurst Borough",
+      "series": {
+        "2016": 15.89,
+        "2017": 8.25
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LAKEHURST BORO"
+    },
+    "1514": {
+      "class_2_sales": {
+        "2016": 870,
+        "2017": 323
+      },
+      "county": "OCEAN",
+      "name": "Lakewood Township",
+      "series": {
+        "2016": 17.05,
+        "2017": 10.53
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LAKEWOOD TWP"
+    },
+    "1515": {
+      "class_2_sales": {
+        "2016": 66,
+        "2017": 62
+      },
+      "county": "OCEAN",
+      "name": "Lavallette Borough",
+      "series": {
+        "2016": 16.25,
+        "2017": 13.02
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LAVALLETTE BORO"
+    },
+    "1516": {
+      "class_2_sales": {
+        "2016": 252,
+        "2017": 387
+      },
+      "county": "OCEAN",
+      "name": "Little Egg Harbor Township",
+      "series": {
+        "2016": 11.26,
+        "2017": 11.23
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LITTLE EGG HARBOR TWP"
+    },
+    "1517": {
+      "class_2_sales": {
+        "2016": 217,
+        "2017": 290
+      },
+      "county": "OCEAN",
+      "name": "Long Beach Township",
+      "series": {
+        "2016": 12.47,
+        "2017": 12.27
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "LONG BEACH TWP"
+    },
+    "1518": {
+      "class_2_sales": {
+        "2016": 551,
+        "2017": 633
+      },
+      "county": "OCEAN",
+      "name": "Manchester Township",
+      "series": {
+        "2016": 13.05,
+        "2017": 13.64
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "MANCHESTER TWP"
+    },
+    "1519": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 18
+      },
+      "county": "OCEAN",
+      "name": "Mantoloking Borough",
+      "series": {
+        "2016": 15.03,
+        "2017": 13.97
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "MANTOLOKING BORO"
+    },
+    "1520": {
+      "class_2_sales": {
+        "2016": 100,
+        "2017": 139
+      },
+      "county": "OCEAN",
+      "name": "Ocean Township",
+      "series": {
+        "2016": 12.48,
+        "2017": 10.02
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "OCEAN TWP"
+    },
+    "1521": {
+      "class_2_sales": {
+        "2016": 9,
+        "2017": 27
+      },
+      "county": "OCEAN",
+      "name": "Ocean Gate Borough",
+      "series": {
+        "2016": 16.94,
+        "2017": 13.69
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "OCEAN GATE BORO"
+    },
+    "1522": {
+      "class_2_sales": {
+        "2016": 34,
+        "2017": 35
+      },
+      "county": "OCEAN",
+      "name": "Pine Beach Borough",
+      "series": {
+        "2016": 10.5,
+        "2017": 11.77
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "PINE BEACH BORO"
+    },
+    "1523": {
+      "class_2_sales": {
+        "2016": 60,
+        "2017": 83
+      },
+      "county": "OCEAN",
+      "name": "Plumsted Township",
+      "series": {
+        "2016": 11.9,
+        "2017": 9.03
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "PLUMSTED TWP"
+    },
+    "1524": {
+      "class_2_sales": {
+        "2016": 270,
+        "2017": 303
+      },
+      "county": "OCEAN",
+      "name": "Point Pleasant Borough",
+      "series": {
+        "2016": 11.9,
+        "2017": 11.53
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "POINT PLEASANT BORO"
+    },
+    "1525": {
+      "class_2_sales": {
+        "2016": 93,
+        "2017": 71
+      },
+      "county": "OCEAN",
+      "name": "Point Pleasant Beach Borough",
+      "series": {
+        "2016": 12.6,
+        "2017": 11.44
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "PT PLEASANT BEACH BORO"
+    },
+    "1526": {
+      "class_2_sales": {
+        "2016": 40,
+        "2017": 54
+      },
+      "county": "OCEAN",
+      "name": "Seaside Heights Borough",
+      "series": {
+        "2016": 11.26,
+        "2017": 13.39
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "SEASIDE HEIGHTS BORO"
+    },
+    "1527": {
+      "class_2_sales": {
+        "2016": 43,
+        "2017": 60
+      },
+      "county": "OCEAN",
+      "name": "Seaside Park Borough",
+      "series": {
+        "2016": 12.37,
+        "2017": 14.39
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "SEASIDE PARK BORO"
+    },
+    "1528": {
+      "class_2_sales": {
+        "2016": 42,
+        "2017": 34
+      },
+      "county": "OCEAN",
+      "name": "Ship Bottom Borough",
+      "series": {
+        "2016": 11.26,
+        "2017": 11.44
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "SHIP BOTTOM BORO"
+    },
+    "1529": {
+      "class_2_sales": {
+        "2016": 10,
+        "2017": 21
+      },
+      "county": "OCEAN",
+      "name": "South Toms River Borough",
+      "series": {
+        "2016": 13.85,
+        "2017": 10.05
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "SOUTH TOMS RIVER BORO"
+    },
+    "1530": {
+      "class_2_sales": {
+        "2016": 373,
+        "2017": 476
+      },
+      "county": "OCEAN",
+      "name": "Stafford Township",
+      "series": {
+        "2016": 9.66,
+        "2017": 10.74
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "STAFFORD TWP"
+    },
+    "1531": {
+      "class_2_sales": {
+        "2016": 60,
+        "2017": 87
+      },
+      "county": "OCEAN",
+      "name": "Surf City Borough",
+      "series": {
+        "2016": 11.71,
+        "2017": 11.3
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "SURF CITY BORO"
+    },
+    "1532": {
+      "class_2_sales": {
+        "2016": 30,
+        "2017": 38
+      },
+      "county": "OCEAN",
+      "name": "Tuckerton Borough",
+      "series": {
+        "2016": 12.69,
+        "2017": 15.32
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "TUCKERTON BORO"
+    },
+    "1533": {
+      "class_2_sales": {
+        "2016": 252,
+        "2017": 300
+      },
+      "county": "OCEAN",
+      "name": "Barnegat Township",
+      "series": {
+        "2016": 7.99,
+        "2017": 9.49
+      },
+      "source_file": "devoce.pdf",
+      "source_name": "BARNEGAT TWP"
+    },
+    "1601": {
+      "class_2_sales": {
+        "2016": 56,
+        "2017": 84
+      },
+      "county": "PASSAIC",
+      "name": "Bloomingdale Borough",
+      "series": {
+        "2016": 16.0,
+        "2017": 12.27
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "BLOOMINGDALE BORO"
+    },
+    "1602": {
+      "class_2_sales": {
+        "2016": 546,
+        "2017": 578
+      },
+      "county": "PASSAIC",
+      "name": "Clifton City",
+      "series": {
+        "2016": 9.35,
+        "2017": 10.22
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "CLIFTON CITY"
+    },
+    "1603": {
+      "class_2_sales": {
+        "2016": 53,
+        "2017": 52
+      },
+      "county": "PASSAIC",
+      "name": "Haledon Borough",
+      "series": {
+        "2016": 13.91,
+        "2017": 13.15
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "HALEDON BORO"
+    },
+    "1604": {
+      "class_2_sales": {
+        "2016": 168,
+        "2017": 162
+      },
+      "county": "PASSAIC",
+      "name": "Hawthorne Borough",
+      "series": {
+        "2016": 12.9,
+        "2017": 12.3
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "HAWTHORNE BORO"
+    },
+    "1605": {
+      "class_2_sales": {
+        "2016": 85,
+        "2017": 89
+      },
+      "county": "PASSAIC",
+      "name": "Little Falls Township",
+      "series": {
+        "2016": 7.61,
+        "2017": 9.96
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "LITTLE FALLS TWP"
+    },
+    "1606": {
+      "class_2_sales": {
+        "2016": 73,
+        "2017": 88
+      },
+      "county": "PASSAIC",
+      "name": "North Haledon Borough",
+      "series": {
+        "2016": 10.34,
+        "2017": 10.16
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "NORTH HALEDON BORO"
+    },
+    "1607": {
+      "class_2_sales": {
+        "2016": 49,
+        "2017": 185
+      },
+      "county": "PASSAIC",
+      "name": "Passaic City",
+      "series": {
+        "2016": 19.39,
+        "2017": 17.48
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "PASSAIC CITY"
+    },
+    "1608": {
+      "class_2_sales": {
+        "2016": 448,
+        "2017": 192
+      },
+      "county": "PASSAIC",
+      "name": "Paterson City",
+      "series": {
+        "2016": 18.75,
+        "2017": 22.76
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "PATERSON CITY"
+    },
+    "1609": {
+      "class_2_sales": {
+        "2016": 123,
+        "2017": 147
+      },
+      "county": "PASSAIC",
+      "name": "Pompton Lakes Borough",
+      "series": {
+        "2016": 15.1,
+        "2017": 15.82
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "POMPTON LAKES BORO"
+    },
+    "1610": {
+      "class_2_sales": {
+        "2016": 23,
+        "2017": 35
+      },
+      "county": "PASSAIC",
+      "name": "Prospect Park Borough",
+      "series": {
+        "2016": 16.64,
+        "2017": 12.33
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "PROSPECT PARK BORO"
+    },
+    "1611": {
+      "class_2_sales": {
+        "2016": 122,
+        "2017": 118
+      },
+      "county": "PASSAIC",
+      "name": "Ringwood Borough",
+      "series": {
+        "2016": 9.1,
+        "2017": 10.55
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "RINGWOOD BORO"
+    },
+    "1612": {
+      "class_2_sales": {
+        "2016": 97,
+        "2017": 93
+      },
+      "county": "PASSAIC",
+      "name": "Totowa Borough",
+      "series": {
+        "2016": 11.87,
+        "2017": 11.43
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "TOTOWA BORO"
+    },
+    "1613": {
+      "class_2_sales": {
+        "2016": 143,
+        "2017": 143
+      },
+      "county": "PASSAIC",
+      "name": "Wanaque Borough",
+      "series": {
+        "2016": 11.66,
+        "2017": 8.99
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "WANAQUE BORO"
+    },
+    "1614": {
+      "class_2_sales": {
+        "2016": 502,
+        "2017": 567
+      },
+      "county": "PASSAIC",
+      "name": "Wayne Township",
+      "series": {
+        "2016": 10.64,
+        "2017": 11.06
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "WAYNE TWP"
+    },
+    "1615": {
+      "class_2_sales": {
+        "2016": 296,
+        "2017": 316
+      },
+      "county": "PASSAIC",
+      "name": "West Milford Township",
+      "series": {
+        "2016": 13.13,
+        "2017": 11.33
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "WEST MILFORD TWP"
+    },
+    "1616": {
+      "class_2_sales": {
+        "2016": 94,
+        "2017": 105
+      },
+      "county": "PASSAIC",
+      "name": "Woodland Park Borough",
+      "series": {
+        "2016": 7.43,
+        "2017": 8.08
+      },
+      "source_file": "devpas.pdf",
+      "source_name": "WOODLAND PARK BORO"
+    },
+    "1701": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 28
+      },
+      "county": "SALEM",
+      "name": "Alloway Township",
+      "series": {
+        "2016": 6.82,
+        "2017": 9.52
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "ALLOWAY TOWNSHIP"
+    },
+    "1702": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 9
+      },
+      "county": "SALEM",
+      "name": "Elmer Borough",
+      "series": {
+        "2016": 8.53,
+        "2017": 17.75
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "ELMER BORO"
+    },
+    "1703": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 10
+      },
+      "county": "SALEM",
+      "name": "Elsinboro Township",
+      "series": {
+        "2016": 13.65,
+        "2017": 13.51
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "ELSINBORO TWP"
+    },
+    "1704": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 17
+      },
+      "county": "SALEM",
+      "name": "Lower Alloways Creek Township",
+      "series": {
+        "2016": 9.08,
+        "2017": 25.44
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "LOWER ALLOWAY CREEK TWP"
+    },
+    "1705": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 3
+      },
+      "county": "SALEM",
+      "name": "Mannington Township",
+      "series": {
+        "2016": 14.0,
+        "2017": 11.14
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "MANNINGTON TWP"
+    },
+    "1706": {
+      "class_2_sales": {
+        "2016": 8,
+        "2017": 7
+      },
+      "county": "SALEM",
+      "name": "Oldmans Township",
+      "series": {
+        "2016": 10.57,
+        "2017": 14.58
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "OLDMANS TWP"
+    },
+    "1707": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 8
+      },
+      "county": "SALEM",
+      "name": "Penns Grove Borough",
+      "series": {
+        "2016": 28.83,
+        "2017": 20.18
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "PENNS GROVE BORO"
+    },
+    "1708": {
+      "class_2_sales": {
+        "2016": 92,
+        "2017": 91
+      },
+      "county": "SALEM",
+      "name": "Pennsville Township",
+      "series": {
+        "2016": 11.69,
+        "2017": 16.79
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "PENNSVILLE TWP"
+    },
+    "1709": {
+      "class_2_sales": {
+        "2016": 24,
+        "2017": 27
+      },
+      "county": "SALEM",
+      "name": "Pilesgrove Township",
+      "series": {
+        "2016": 8.61,
+        "2017": 15.83
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "PILESGROVE TWP"
+    },
+    "1710": {
+      "class_2_sales": {
+        "2016": 40,
+        "2017": 40
+      },
+      "county": "SALEM",
+      "name": "Pittsgrove Township",
+      "series": {
+        "2016": 10.73,
+        "2017": 12.4
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "PITTSGROVE TWP"
+    },
+    "1711": {
+      "class_2_sales": {
+        "2016": 20,
+        "2017": 11
+      },
+      "county": "SALEM",
+      "name": "Quinton Township",
+      "series": {
+        "2016": 15.82,
+        "2017": 20.67
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "QUINTON TWP"
+    },
+    "1712": {
+      "class_2_sales": {
+        "2016": 12,
+        "2017": 6
+      },
+      "county": "SALEM",
+      "name": "Salem City",
+      "series": {
+        "2016": 29.67,
+        "2017": 28.75
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "SALEM CITY"
+    },
+    "1713": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 41
+      },
+      "county": "SALEM",
+      "name": "Carneys Point Township",
+      "series": {
+        "2016": 16.77,
+        "2017": 14.3
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "CARNEYS POINT TOWNSHIP"
+    },
+    "1714": {
+      "class_2_sales": {
+        "2016": 16,
+        "2017": 13
+      },
+      "county": "SALEM",
+      "name": "Upper Pittsgrove Township",
+      "series": {
+        "2016": 16.67,
+        "2017": 14.86
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "UPPER PITTSGROVE TWP"
+    },
+    "1715": {
+      "class_2_sales": {
+        "2016": 29,
+        "2017": 32
+      },
+      "county": "SALEM",
+      "name": "Woodstown Borough",
+      "series": {
+        "2016": 12.11,
+        "2017": 12.35
+      },
+      "source_file": "devsal.pdf",
+      "source_name": "WOODSTOWN BORO"
+    },
+    "1801": {
+      "class_2_sales": {
+        "2016": 70,
+        "2017": 65
+      },
+      "county": "SOMERSET",
+      "name": "Bedminster Township",
+      "series": {
+        "2016": 4.91,
+        "2017": 3.52
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BEDMINSTER TWP"
+    },
+    "1802": {
+      "class_2_sales": {
+        "2016": 152,
+        "2017": 150
+      },
+      "county": "SOMERSET",
+      "name": "Bernards Township",
+      "series": {
+        "2016": 3.57,
+        "2017": 3.61
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BERNARDS TWP"
+    },
+    "1803": {
+      "class_2_sales": {
+        "2016": 33,
+        "2017": 32
+      },
+      "county": "SOMERSET",
+      "name": "Bernardsville Borough",
+      "series": {
+        "2016": 6.31,
+        "2017": 8.98
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BERNARDSVILLE BORO"
+    },
+    "1804": {
+      "class_2_sales": {
+        "2016": 20,
+        "2017": 29
+      },
+      "county": "SOMERSET",
+      "name": "Bound Brook Borough",
+      "series": {
+        "2016": 11.47,
+        "2017": 9.41
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BOUND BROOK BORO"
+    },
+    "1805": {
+      "class_2_sales": {
+        "2016": 74,
+        "2017": 52
+      },
+      "county": "SOMERSET",
+      "name": "Branchburg Township",
+      "series": {
+        "2016": 4.71,
+        "2017": 5.72
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BRANCHBURG TWP"
+    },
+    "1806": {
+      "class_2_sales": {
+        "2016": 193,
+        "2017": 155
+      },
+      "county": "SOMERSET",
+      "name": "Bridgewater Township",
+      "series": {
+        "2016": 10.94,
+        "2017": 7.83
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "BRIDGEWATER TWP"
+    },
+    "1807": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 1
+      },
+      "county": "SOMERSET",
+      "name": "Far Hills Borough",
+      "series": {
+        "2016": 1.64,
+        "2017": 0.0
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "FAR HILLS BORO"
+    },
+    "1808": {
+      "class_2_sales": {
+        "2016": 222,
+        "2017": 299
+      },
+      "county": "SOMERSET",
+      "name": "Franklin Township",
+      "series": {
+        "2016": 6.36,
+        "2017": 7.43
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "FRANKLIN TWP"
+    },
+    "1809": {
+      "class_2_sales": {
+        "2016": 31,
+        "2017": 26
+      },
+      "county": "SOMERSET",
+      "name": "Green Brook Township",
+      "series": {
+        "2016": 8.85,
+        "2017": 5.73
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "GREEN BROOK TWP"
+    },
+    "1810": {
+      "class_2_sales": {
+        "2016": 174,
+        "2017": 156
+      },
+      "county": "SOMERSET",
+      "name": "Hillsborough Township",
+      "series": {
+        "2016": 6.6,
+        "2017": 6.34
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "HILLSBOROUGH TWP"
+    },
+    "1811": {
+      "class_2_sales": {
+        "2016": 33,
+        "2017": 106
+      },
+      "county": "SOMERSET",
+      "name": "Manville Borough",
+      "series": {
+        "2016": 13.38,
+        "2017": 10.97
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "MANVILLE BORO"
+    },
+    "1812": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 1
+      },
+      "county": "SOMERSET",
+      "name": "Millstone Borough",
+      "series": {
+        "2016": 4.39,
+        "2017": 0.0
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "MILLSTONE BORO"
+    },
+    "1813": {
+      "class_2_sales": {
+        "2016": 298,
+        "2017": 325
+      },
+      "county": "SOMERSET",
+      "name": "Montgomery Township",
+      "series": {
+        "2016": 9.13,
+        "2017": 10.98
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "MONTGOMERY TWP"
+    },
+    "1814": {
+      "class_2_sales": {
+        "2016": 118,
+        "2017": 163
+      },
+      "county": "SOMERSET",
+      "name": "North Plainfield Borough",
+      "series": {
+        "2016": 13.61,
+        "2017": 12.01
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "NORTH PLAINFIELD BORO"
+    },
+    "1815": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 7
+      },
+      "county": "SOMERSET",
+      "name": "Peapack and Gladstone Borough",
+      "series": {
+        "2016": 7.22,
+        "2017": 7.7
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "PEAPACK GLADSTONE BORO"
+    },
+    "1816": {
+      "class_2_sales": {
+        "2016": 59,
+        "2017": 44
+      },
+      "county": "SOMERSET",
+      "name": "Raritan Borough",
+      "series": {
+        "2016": 14.5,
+        "2017": 8.8
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "RARITAN BORO"
+    },
+    "1817": {
+      "class_2_sales": {
+        "2016": 4,
+        "2017": 0
+      },
+      "county": "SOMERSET",
+      "name": "Rocky Hill Borough",
+      "series": {
+        "2016": 3.21,
+        "2017": null
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "ROCKY HILL BORO"
+    },
+    "1818": {
+      "class_2_sales": {
+        "2016": 84,
+        "2017": 79
+      },
+      "county": "SOMERSET",
+      "name": "Somerville Borough",
+      "series": {
+        "2016": 11.01,
+        "2017": 9.93
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "SOMERVILLE BORO"
+    },
+    "1819": {
+      "class_2_sales": {
+        "2016": 19,
+        "2017": 35
+      },
+      "county": "SOMERSET",
+      "name": "South Bound Brook Borough",
+      "series": {
+        "2016": 11.63,
+        "2017": 9.73
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "SO BOUND BROOK BORO"
+    },
+    "1820": {
+      "class_2_sales": {
+        "2016": 43,
+        "2017": 50
+      },
+      "county": "SOMERSET",
+      "name": "Warren Township",
+      "series": {
+        "2016": 5.47,
+        "2017": 6.66
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "WARREN TWP"
+    },
+    "1821": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 27
+      },
+      "county": "SOMERSET",
+      "name": "Watchung Borough",
+      "series": {
+        "2016": 6.02,
+        "2017": 5.06
+      },
+      "source_file": "devsom.pdf",
+      "source_name": "WATCHUNG BORO"
+    },
+    "1901": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 2
+      },
+      "county": "SUSSEX",
+      "name": "Andover Borough",
+      "series": {
+        "2016": null,
+        "2017": 7.84
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "ANDOVER BORO"
+    },
+    "1902": {
+      "class_2_sales": {
+        "2016": 27,
+        "2017": 72
+      },
+      "county": "SUSSEX",
+      "name": "Andover Township",
+      "series": {
+        "2016": 6.31,
+        "2017": 11.37
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "ANDOVER TWP"
+    },
+    "1903": {
+      "class_2_sales": {
+        "2016": 1,
+        "2017": 3
+      },
+      "county": "SUSSEX",
+      "name": "Branchville Borough",
+      "series": {
+        "2016": 13.69,
+        "2017": 19.02
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "BRANCHVILLE BORO"
+    },
+    "1904": {
+      "class_2_sales": {
+        "2016": 72,
+        "2017": 68
+      },
+      "county": "SUSSEX",
+      "name": "Byram Township",
+      "series": {
+        "2016": 9.25,
+        "2017": 8.76
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "BYRAM TWP"
+    },
+    "1905": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 46
+      },
+      "county": "SUSSEX",
+      "name": "Frankford Township",
+      "series": {
+        "2016": 10.79,
+        "2017": 13.82
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "FRANKFORD TWP"
+    },
+    "1906": {
+      "class_2_sales": {
+        "2016": 27,
+        "2017": 27
+      },
+      "county": "SUSSEX",
+      "name": "Franklin Borough",
+      "series": {
+        "2016": 10.58,
+        "2017": 11.35
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "FRANKLIN BORO"
+    },
+    "1907": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 18
+      },
+      "county": "SUSSEX",
+      "name": "Fredon Township",
+      "series": {
+        "2016": 9.79,
+        "2017": 6.29
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "FREDON TWP"
+    },
+    "1908": {
+      "class_2_sales": {
+        "2016": 29,
+        "2017": 33
+      },
+      "county": "SUSSEX",
+      "name": "Green Township",
+      "series": {
+        "2016": 8.58,
+        "2017": 9.24
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "GREEN TWP"
+    },
+    "1909": {
+      "class_2_sales": {
+        "2016": 28,
+        "2017": 36
+      },
+      "county": "SUSSEX",
+      "name": "Hamburg Borough",
+      "series": {
+        "2016": 8.6,
+        "2017": 7.71
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "HAMBURG BORO"
+    },
+    "1910": {
+      "class_2_sales": {
+        "2016": 36,
+        "2017": 39
+      },
+      "county": "SUSSEX",
+      "name": "Hampton Township",
+      "series": {
+        "2016": 7.02,
+        "2017": 6.87
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "HAMPTON TWP"
+    },
+    "1911": {
+      "class_2_sales": {
+        "2016": 134,
+        "2017": 151
+      },
+      "county": "SUSSEX",
+      "name": "Hardyston Township",
+      "series": {
+        "2016": 14.39,
+        "2017": 9.91
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "HARDYSTON TWP"
+    },
+    "1912": {
+      "class_2_sales": {
+        "2016": 129,
+        "2017": 194
+      },
+      "county": "SUSSEX",
+      "name": "Hopatcong Borough",
+      "series": {
+        "2016": 11.8,
+        "2017": 11.79
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "HOPATCONG BORO"
+    },
+    "1913": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 13
+      },
+      "county": "SUSSEX",
+      "name": "Lafayette Township",
+      "series": {
+        "2016": 7.36,
+        "2017": 11.13
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "LAFAYETTE TWP"
+    },
+    "1914": {
+      "class_2_sales": {
+        "2016": 20,
+        "2017": 26
+      },
+      "county": "SUSSEX",
+      "name": "Montague Township",
+      "series": {
+        "2016": 9.2,
+        "2017": 7.91
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "MONTAGUE TWP"
+    },
+    "1915": {
+      "class_2_sales": {
+        "2016": 48,
+        "2017": 58
+      },
+      "county": "SUSSEX",
+      "name": "Newton Town",
+      "series": {
+        "2016": 8.19,
+        "2017": 11.21
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "NEWTON TOWN"
+    },
+    "1916": {
+      "class_2_sales": {
+        "2016": 11,
+        "2017": 11
+      },
+      "county": "SUSSEX",
+      "name": "Ogdensburg Borough",
+      "series": {
+        "2016": 7.27,
+        "2017": 7.33
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "OGDENSBURG BORO"
+    },
+    "1917": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 18
+      },
+      "county": "SUSSEX",
+      "name": "Sandyston Township",
+      "series": {
+        "2016": 8.55,
+        "2017": 8.64
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "SANDYSTON TWP"
+    },
+    "1918": {
+      "class_2_sales": {
+        "2016": 86,
+        "2017": 291
+      },
+      "county": "SUSSEX",
+      "name": "Sparta Township",
+      "series": {
+        "2016": 6.26,
+        "2017": 8.48
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "SPARTA TWP"
+    },
+    "1919": {
+      "class_2_sales": {
+        "2016": 35,
+        "2017": 40
+      },
+      "county": "SUSSEX",
+      "name": "Stanhope Borough",
+      "series": {
+        "2016": 9.2,
+        "2017": 7.7
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "STANHOPE BORO"
+    },
+    "1920": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 25
+      },
+      "county": "SUSSEX",
+      "name": "Stillwater Township",
+      "series": {
+        "2016": 15.39,
+        "2017": 8.94
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "STILLWATER TWP"
+    },
+    "1921": {
+      "class_2_sales": {
+        "2016": 7,
+        "2017": 18
+      },
+      "county": "SUSSEX",
+      "name": "Sussex Borough",
+      "series": {
+        "2016": 10.39,
+        "2017": 14.07
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "SUSSEX BORO"
+    },
+    "1922": {
+      "class_2_sales": {
+        "2016": 242,
+        "2017": 243
+      },
+      "county": "SUSSEX",
+      "name": "Vernon Township",
+      "series": {
+        "2016": 13.41,
+        "2017": 10.97
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "VERNON TWP"
+    },
+    "1923": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 0
+      },
+      "county": "SUSSEX",
+      "name": "Walpack Township",
+      "series": {
+        "2016": null,
+        "2017": null
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "WALPACK TWP"
+    },
+    "1924": {
+      "class_2_sales": {
+        "2016": 74,
+        "2017": 67
+      },
+      "county": "SUSSEX",
+      "name": "Wantage Township",
+      "series": {
+        "2016": 11.5,
+        "2017": 10.9
+      },
+      "source_file": "devsus.pdf",
+      "source_name": "WANTAGE TWP"
+    },
+    "2001": {
+      "class_2_sales": {
+        "2016": 147,
+        "2017": 128
+      },
+      "county": "UNION",
+      "name": "Berkeley Heights Township",
+      "series": {
+        "2016": 10.6,
+        "2017": 11.11
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "BERKELEY HEIGHTS TWP"
+    },
+    "2002": {
+      "class_2_sales": {
+        "2016": 144,
+        "2017": 167
+      },
+      "county": "UNION",
+      "name": "Clark Township",
+      "series": {
+        "2016": 11.87,
+        "2017": 13.0
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "CLARK TWP"
+    },
+    "2003": {
+      "class_2_sales": {
+        "2016": 236,
+        "2017": 262
+      },
+      "county": "UNION",
+      "name": "Cranford Township",
+      "series": {
+        "2016": 11.71,
+        "2017": 11.26
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "CRANFORD TWP"
+    },
+    "2004": {
+      "class_2_sales": {
+        "2016": 293,
+        "2017": 413
+      },
+      "county": "UNION",
+      "name": "Elizabeth City",
+      "series": {
+        "2016": 19.84,
+        "2017": 20.44
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "ELIZABETH CITY"
+    },
+    "2005": {
+      "class_2_sales": {
+        "2016": 108,
+        "2017": 98
+      },
+      "county": "UNION",
+      "name": "Fanwood Borough",
+      "series": {
+        "2016": 14.5,
+        "2017": 15.88
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "FANWOOD BORO"
+    },
+    "2006": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 38
+      },
+      "county": "UNION",
+      "name": "Garwood Borough",
+      "series": {
+        "2016": 12.85,
+        "2017": 15.55
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "GARWOOD BORO"
+    },
+    "2007": {
+      "class_2_sales": {
+        "2016": 113,
+        "2017": 128
+      },
+      "county": "UNION",
+      "name": "Hillside Township",
+      "series": {
+        "2016": 12.34,
+        "2017": 15.3
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "HILLSIDE TWP"
+    },
+    "2008": {
+      "class_2_sales": {
+        "2016": 67,
+        "2017": 60
+      },
+      "county": "UNION",
+      "name": "Kenilworth Borough",
+      "series": {
+        "2016": 11.02,
+        "2017": 14.46
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "KENILWORTH BORO"
+    },
+    "2009": {
+      "class_2_sales": {
+        "2016": 240,
+        "2017": 275
+      },
+      "county": "UNION",
+      "name": "Linden City",
+      "series": {
+        "2016": 12.33,
+        "2017": 11.98
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "LINDEN CITY"
+    },
+    "2010": {
+      "class_2_sales": {
+        "2016": 71,
+        "2017": 69
+      },
+      "county": "UNION",
+      "name": "Mountainside Borough",
+      "series": {
+        "2016": 11.49,
+        "2017": 12.24
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "MOUNTAINSIDE BORO"
+    },
+    "2011": {
+      "class_2_sales": {
+        "2016": 102,
+        "2017": 99
+      },
+      "county": "UNION",
+      "name": "New Providence Borough",
+      "series": {
+        "2016": 8.69,
+        "2017": 8.68
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "NEW PROVIDENCE BORO"
+    },
+    "2012": {
+      "class_2_sales": {
+        "2016": 148,
+        "2017": 215
+      },
+      "county": "UNION",
+      "name": "Plainfield City",
+      "series": {
+        "2016": 13.95,
+        "2017": 15.08
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "PLAINFIELD CITY"
+    },
+    "2013": {
+      "class_2_sales": {
+        "2016": 131,
+        "2017": 173
+      },
+      "county": "UNION",
+      "name": "Rahway City",
+      "series": {
+        "2016": 11.11,
+        "2017": 12.35
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "RAHWAY CITY"
+    },
+    "2014": {
+      "class_2_sales": {
+        "2016": 106,
+        "2017": 135
+      },
+      "county": "UNION",
+      "name": "Roselle Borough",
+      "series": {
+        "2016": 17.24,
+        "2017": 22.8
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "ROSELLE BORO"
+    },
+    "2015": {
+      "class_2_sales": {
+        "2016": 41,
+        "2017": 116
+      },
+      "county": "UNION",
+      "name": "Roselle Park Borough",
+      "series": {
+        "2016": 10.3,
+        "2017": 10.64
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "ROSELLE PARK BORO"
+    },
+    "2016": {
+      "class_2_sales": {
+        "2016": 276,
+        "2017": 322
+      },
+      "county": "UNION",
+      "name": "Scotch Plains Township",
+      "series": {
+        "2016": 13.93,
+        "2017": 13.43
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "SCOTCH PLAINS TWP"
+    },
+    "2017": {
+      "class_2_sales": {
+        "2016": 178,
+        "2017": 140
+      },
+      "county": "UNION",
+      "name": "Springfield Township",
+      "series": {
+        "2016": 13.01,
+        "2017": 12.21
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "SPRINGFIELD TWP"
+    },
+    "2018": {
+      "class_2_sales": {
+        "2016": 204,
+        "2017": 230
+      },
+      "county": "UNION",
+      "name": "Summit City",
+      "series": {
+        "2016": 12.56,
+        "2017": 12.24
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "SUMMIT CITY"
+    },
+    "2019": {
+      "class_2_sales": {
+        "2016": 429,
+        "2017": 450
+      },
+      "county": "UNION",
+      "name": "Union Township",
+      "series": {
+        "2016": 11.15,
+        "2017": 10.77
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "UNION TWP"
+    },
+    "2020": {
+      "class_2_sales": {
+        "2016": 439,
+        "2017": 421
+      },
+      "county": "UNION",
+      "name": "Westfield Town",
+      "series": {
+        "2016": 15.3,
+        "2017": 15.33
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "WESTFIELD TOWN"
+    },
+    "2021": {
+      "class_2_sales": {
+        "2016": 0,
+        "2017": 0
+      },
+      "county": "UNION",
+      "name": "Winfield Township",
+      "series": {
+        "2016": null,
+        "2017": null
+      },
+      "source_file": "devuni.pdf",
+      "source_name": "WINFIELD TWP"
+    },
+    "2101": {
+      "class_2_sales": {
+        "2016": 113,
+        "2017": 124
+      },
+      "county": "WARREN",
+      "name": "Allamuchy Township",
+      "series": {
+        "2016": 8.75,
+        "2017": 8.99
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "ALLAMUCHY TWP"
+    },
+    "2102": {
+      "class_2_sales": {
+        "2016": 15,
+        "2017": 11
+      },
+      "county": "WARREN",
+      "name": "Alpha Borough",
+      "series": {
+        "2016": 9.62,
+        "2017": 13.5
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "ALPHA BORO"
+    },
+    "2103": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 18
+      },
+      "county": "WARREN",
+      "name": "Belvidere Town",
+      "series": {
+        "2016": 24.68,
+        "2017": 17.4
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "BELVIDERE TOWN"
+    },
+    "2104": {
+      "class_2_sales": {
+        "2016": 35,
+        "2017": 39
+      },
+      "county": "WARREN",
+      "name": "Blairstown Township",
+      "series": {
+        "2016": 11.57,
+        "2017": 9.26
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "BLAIRSTOWN TWP"
+    },
+    "2105": {
+      "class_2_sales": {
+        "2016": 25,
+        "2017": 22
+      },
+      "county": "WARREN",
+      "name": "Franklin Township",
+      "series": {
+        "2016": 8.01,
+        "2017": 8.83
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "FRANKLIN TWP"
+    },
+    "2106": {
+      "class_2_sales": {
+        "2016": 6,
+        "2017": 16
+      },
+      "county": "WARREN",
+      "name": "Frelinghuysen Township",
+      "series": {
+        "2016": 8.3,
+        "2017": 10.24
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "FRELINGHUYSEN TWP"
+    },
+    "2107": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 45
+      },
+      "county": "WARREN",
+      "name": "Greenwich Township",
+      "series": {
+        "2016": 8.76,
+        "2017": 8.62
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "GREENWICH TWP"
+    },
+    "2108": {
+      "class_2_sales": {
+        "2016": 54,
+        "2017": 71
+      },
+      "county": "WARREN",
+      "name": "Hackettstown Town",
+      "series": {
+        "2016": 9.24,
+        "2017": 9.82
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "HACKETTSTOWN TOWN"
+    },
+    "2109": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 16
+      },
+      "county": "WARREN",
+      "name": "Hardwick Township",
+      "series": {
+        "2016": 8.22,
+        "2017": 10.54
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "HARDWICK TWP"
+    },
+    "2110": {
+      "class_2_sales": {
+        "2016": 11,
+        "2017": 16
+      },
+      "county": "WARREN",
+      "name": "Harmony Township",
+      "series": {
+        "2016": 12.79,
+        "2017": 20.55
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "HARMONY TWP"
+    },
+    "2111": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 17
+      },
+      "county": "WARREN",
+      "name": "Hope Township",
+      "series": {
+        "2016": 11.66,
+        "2017": 14.57
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "HOPE TWP"
+    },
+    "2112": {
+      "class_2_sales": {
+        "2016": 57,
+        "2017": 67
+      },
+      "county": "WARREN",
+      "name": "Independence Township",
+      "series": {
+        "2016": 7.61,
+        "2017": 7.43
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "INDEPENDENCE TWP"
+    },
+    "2113": {
+      "class_2_sales": {
+        "2016": 13,
+        "2017": 21
+      },
+      "county": "WARREN",
+      "name": "Knowlton Township",
+      "series": {
+        "2016": 8.23,
+        "2017": 10.39
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "KNOWLTON TWP"
+    },
+    "2114": {
+      "class_2_sales": {
+        "2016": 21,
+        "2017": 24
+      },
+      "county": "WARREN",
+      "name": "Liberty Township",
+      "series": {
+        "2016": 13.38,
+        "2017": 11.83
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "LIBERTY TWP"
+    },
+    "2115": {
+      "class_2_sales": {
+        "2016": 87,
+        "2017": 88
+      },
+      "county": "WARREN",
+      "name": "Lopatcong Township",
+      "series": {
+        "2016": 10.37,
+        "2017": 9.65
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "LOPATCONG TWP"
+    },
+    "2116": {
+      "class_2_sales": {
+        "2016": 43,
+        "2017": 42
+      },
+      "county": "WARREN",
+      "name": "Mansfield Township",
+      "series": {
+        "2016": 10.52,
+        "2017": 10.24
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "MANSFIELD TWP"
+    },
+    "2117": {
+      "class_2_sales": {
+        "2016": 5,
+        "2017": 22
+      },
+      "county": "WARREN",
+      "name": "Oxford Township",
+      "series": {
+        "2016": 11.83,
+        "2017": 7.44
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "OXFORD TWP"
+    },
+    "2119": {
+      "class_2_sales": {
+        "2016": 71,
+        "2017": 78
+      },
+      "county": "WARREN",
+      "name": "Phillipsburg Town",
+      "series": {
+        "2016": 13.87,
+        "2017": 14.17
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "PHILLIPSBURG TOWN"
+    },
+    "2120": {
+      "class_2_sales": {
+        "2016": 20,
+        "2017": 28
+      },
+      "county": "WARREN",
+      "name": "Pohatcong Township",
+      "series": {
+        "2016": 14.94,
+        "2017": 13.73
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "POHATCONG TWP"
+    },
+    "2121": {
+      "class_2_sales": {
+        "2016": 48,
+        "2017": 51
+      },
+      "county": "WARREN",
+      "name": "Washington Borough",
+      "series": {
+        "2016": 10.2,
+        "2017": 14.7
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "WASHINGTON BORO"
+    },
+    "2122": {
+      "class_2_sales": {
+        "2016": 30,
+        "2017": 61
+      },
+      "county": "WARREN",
+      "name": "Washington Township",
+      "series": {
+        "2016": 9.58,
+        "2017": 10.5
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "WASHINGTON TWP"
+    },
+    "2123": {
+      "class_2_sales": {
+        "2016": 37,
+        "2017": 35
+      },
+      "county": "WARREN",
+      "name": "White Township",
+      "series": {
+        "2016": 10.96,
+        "2017": 11.54
+      },
+      "source_file": "devwar.pdf",
+      "source_name": "WHITE TWP"
+    }
+  },
+  "metric": "segmented_class_2_cod",
+  "missing_value_policy": "Blank COD remains null; printed 0.00 with zero Class 2 sales is null; printed 0.00 with positive Class 2 sales is preserved as zero.",
+  "retired_source_identity": "PINE VALLEY BOROUGH / CAMDEN",
+  "schema_version": 1,
+  "source_agency": "State of New Jersey Department of the Treasury, Division of Taxation",
+  "source_edition": "2017 county tables covering 2014-2017",
+  "source_id": "nj-division-taxation-cod-2017-county-tables",
+  "source_municipality_count": 565,
+  "source_sha256": {
+    "devatl.pdf": "900e8751e99eb34f5b3aa6bc24fd12fc289504e0833af0f2d03a447257aa13fc",
+    "devber.pdf": "676269e07ceaa773a70d35b4de7eb37fa5ee7177ba0ba288566716b23b093b45",
+    "devbur.pdf": "ff8ed6c37b62f728420582840a62f54b41bbae58f2b601c01539d5a7cc933bdb",
+    "devcam.pdf": "33a090bafb381b098d860ce70644593456bead758b467b04db5d13257f13db23",
+    "devcap.pdf": "b1b995579580b5302179c6a447685fdb25370011e84ee38b5a7baa824b7de5d3",
+    "devcum.pdf": "59de0b5db8fe7db5247129779ac58b5b877590bf43bf099a8da5cd38983a0605",
+    "devess.pdf": "ada1a039a7656fa62abf61d69b623815f2e14efa3158fa4416158dfd13876238",
+    "devglo.pdf": "789af10b09d3a0d4c79a4bd650412af24b8def356cfe85452294708686ce1f33",
+    "devhud.pdf": "92561e30690019d30f4052b74acd949de938ff04e8e235a96eea63784bf36831",
+    "devhun.pdf": "324e09d022d85303aed2b0ba2d21186e393589a2a4d2d9111482677b78324e61",
+    "devmer.pdf": "0cb23551699f936f60dfcb3f3d3dcbc38ebbaf1e2c4a36890ab82241bb9d1fc5",
+    "devmid.pdf": "eaee5172e613c009b175de78465fa39b55e48a24cf793b20103d475f898f8cab",
+    "devmon.pdf": "2350dd032c47637ae5183a193d55404ebde2abddc66ac2c64c48ac4bfc15dcac",
+    "devmor.pdf": "c1420ae154179e59ad566b168e08aa30b3dcc433d0340fa3fb058e9f83b630ad",
+    "devoce.pdf": "8473fc580f3b3206d9a7d0d03c3d0279f88b679a5acd49822dcdcae2ac8481f2",
+    "devpas.pdf": "d6f3771c23e57f1d8b64cc2e9baf5bc593bb4ed79b87bdf163260bc043db7a39",
+    "devsal.pdf": "446853eb6d9a05be51c952fbf8c0bded89e526934a6b5cea78c02fc4814dea9b",
+    "devsom.pdf": "384ac4f761b30908c2c6b1171a0050436387786cddc52b169ef551732c1fab6d",
+    "devsus.pdf": "3602e046f1b6ac1d227f0caed0b65602011d509b41f8f42f4f41659a712af760",
+    "devuni.pdf": "f0878e263f29f1b7bc9e3fa4645ead8fc54b2b6a5ff1a22ba4fedf457c5b8687",
+    "devwar.pdf": "c7947f9e7255ffa9bcd6f5a9839a4152171ebe01a5979b532de0711819a6fb86"
+  },
+  "source_title": "Measures of Property Assessment Uniformity in New Jersey Taxing Districts - Coefficients of Deviation",
+  "source_urls": {
+    "devatl.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devatl.pdf",
+    "devber.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devber.pdf",
+    "devbur.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devbur.pdf",
+    "devcam.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devcam.pdf",
+    "devcap.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devcap.pdf",
+    "devcum.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devcum.pdf",
+    "devess.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devess.pdf",
+    "devglo.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devglo.pdf",
+    "devhud.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devhud.pdf",
+    "devhun.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devhun.pdf",
+    "devmer.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devmer.pdf",
+    "devmid.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devmid.pdf",
+    "devmon.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devmon.pdf",
+    "devmor.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devmor.pdf",
+    "devoce.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devoce.pdf",
+    "devpas.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devpas.pdf",
+    "devsal.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devsal.pdf",
+    "devsom.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devsom.pdf",
+    "devsus.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devsus.pdf",
+    "devuni.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devuni.pdf",
+    "devwar.pdf": "https://www.nj.gov/treasury/taxation/pdf/lpt/devwar.pdf"
+  },
+  "years": [
+    2016,
+    2017
+  ]
+}

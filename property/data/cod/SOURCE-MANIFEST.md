@@ -83,3 +83,43 @@ Example district `0101`: population SD of `[18.09, 18.94, 16.28, 16.71]` rounds 
 - `0.00` is stored as null only when the official Class 2 sales count is zero. A published `0.00` with one or more Class 2 sales is preserved as a real zero.
 - Absecon City (`0101`) control: 2018 `12.81`, 2019 `12.89`, 2020 `11.46`, 2021 `12.51`.
 - Historical years are stored separately from the current 2022-2025 `series` so the already-certified current-period volatility marker does not silently change formula semantics.
+
+
+## October 2017 county-table recovery for 2016-2017
+
+- Official publisher: State of New Jersey, Department of the Treasury, Division of Taxation.
+- Publication family: **Measures of Property Assessment Uniformity in New Jersey Taxing Districts - Coefficients of Deviation**.
+- Source edition: 21 official county PDFs created October 2017 and covering 2014-2017.
+- Canonical Watchdog metric: **Segmented by Class / Property Class 2 (Residential) coefficient of deviation**.
+- Historical source plane: 565 municipality records. Current Watchdog identity plane: 564 districts.
+- The sole retired historical identity is Pine Valley Borough, Camden County. Its 2014-2017 table is entirely blank, so it is excluded rather than merged into a current municipality.
+- Missing rule: blank COD remains null. Printed `0.00` with zero Class 2 sales is null; printed `0.00` with positive Class 2 sales is preserved as an actual zero.
+- 2016 current-district coverage: 550 published COD values / 564 districts; 14 source-missing.
+- 2017 current-district coverage: 556 published COD values / 564 districts; 8 source-missing.
+- Absecon City (`0101`) control: 2016 `14.02`, 2017 `14.45`.
+- Hi-Nella Borough (`0419`) source-semantics control: 2016 is blank with one Class 2 sale and remains null; 2017 is printed `0.00` with one Class 2 sale and remains the real value `0.00`.
+- The legacy 2016-2017 artifact is separate from both the January 2022 historical artifact and the current 2022-2025 series. `uniformity.volatility` therefore keeps its already-certified current-period formula semantics.
+
+Source-file SHA-256:
+
+- `devatl.pdf`: `900e8751e99eb34f5b3aa6bc24fd12fc289504e0833af0f2d03a447257aa13fc`
+- `devber.pdf`: `676269e07ceaa773a70d35b4de7eb37fa5ee7177ba0ba288566716b23b093b45`
+- `devbur.pdf`: `ff8ed6c37b62f728420582840a62f54b41bbae58f2b601c01539d5a7cc933bdb`
+- `devcam.pdf`: `33a090bafb381b098d860ce70644593456bead758b467b04db5d13257f13db23`
+- `devcap.pdf`: `b1b995579580b5302179c6a447685fdb25370011e84ee38b5a7baa824b7de5d3`
+- `devcum.pdf`: `59de0b5db8fe7db5247129779ac58b5b877590bf43bf099a8da5cd38983a0605`
+- `devess.pdf`: `ada1a039a7656fa62abf61d69b623815f2e14efa3158fa4416158dfd13876238`
+- `devglo.pdf`: `789af10b09d3a0d4c79a4bd650412af24b8def356cfe85452294708686ce1f33`
+- `devhud.pdf`: `92561e30690019d30f4052b74acd949de938ff04e8e235a96eea63784bf36831`
+- `devhun.pdf`: `324e09d022d85303aed2b0ba2d21186e393589a2a4d2d9111482677b78324e61`
+- `devmer.pdf`: `0cb23551699f936f60dfcb3f3d3dcbc38ebbaf1e2c4a36890ab82241bb9d1fc5`
+- `devmid.pdf`: `eaee5172e613c009b175de78465fa39b55e48a24cf793b20103d475f898f8cab`
+- `devmon.pdf`: `2350dd032c47637ae5183a193d55404ebde2abddc66ac2c64c48ac4bfc15dcac`
+- `devmor.pdf`: `c1420ae154179e59ad566b168e08aa30b3dcc433d0340fa3fb058e9f83b630ad`
+- `devoce.pdf`: `8473fc580f3b3206d9a7d0d03c3d0279f88b679a5acd49822dcdcae2ac8481f2`
+- `devpas.pdf`: `d6f3771c23e57f1d8b64cc2e9baf5bc593bb4ed79b87bdf163260bc043db7a39`
+- `devsal.pdf`: `446853eb6d9a05be51c952fbf8c0bded89e526934a6b5cea78c02fc4814dea9b`
+- `devsom.pdf`: `384ac4f761b30908c2c6b1171a0050436387786cddc52b169ef551732c1fab6d`
+- `devsus.pdf`: `3602e046f1b6ac1d227f0caed0b65602011d509b41f8f42f4f41659a712af760`
+- `devuni.pdf`: `f0878e263f29f1b7bc9e3fa4645ead8fc54b2b6a5ff1a22ba4fedf457c5b8687`
+- `devwar.pdf`: `c7947f9e7255ffa9bcd6f5a9839a4152171ebe01a5979b532de0711819a6fb86`

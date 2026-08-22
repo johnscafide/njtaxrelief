@@ -1,0 +1,76 @@
+name: Activate October 2017 historical COD
+
+on:
+  push:
+    branches:
+      - data-center-cod-2016-2017-20260822
+    paths:
+      - property/scripts/build_legacy_cod_2016_2017.py
+      - .github/workflows/activate-historical-cod-2016-2017.yml
+  pull_request:
+    paths:
+      - property/scripts/build_legacy_cod_2016_2017.py
+      - property/data/cod/historical-cod-2016-2017.json
+      - supabase/functions/workbench-hydrate/index.ts
+      - supabase/functions/provider-release-canary/index-v2.ts
+      - property/data/cod/SOURCE-MANIFEST.md
+      - .github/workflows/activate-historical-cod-2016-2017.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: activate-historical-cod-2016-2017-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  activate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install deterministic PDF parser
+        run: pip install 'pdfplumber==0.11.9'
+      - name: Restore current uniformity model
+        run: |
+          git fetch origin main
+          git checkout origin/main -- property/uniformity.json
+      - name: Recover and reconcile official 2016-2017 COD
+        run: python property/scripts/build_legacy_cod_2016_2017.py
+      - name: Validate source semantics and runtime isolation
+        run: |
+          python - <<'PY'
+          import json
+          h=json.load(open('property/data/cod/historical-cod-2016-2017.json'))
+          assert h['source_municipality_count']==565
+          assert h['current_district_count']==564
+          assert len(h['districts'])==564
+          assert h['districts']['0101']['series']=={'2016':14.02,'2017':14.45}
+          assert h['districts']['0419']['series']=={'2016':None,'2017':0.0}
+          assert h['districts']['0419']['class_2_sales']=={'2016':1,'2017':1}
+          assert h['coverage']['2016']['published_non_null_cod']==550
+          assert h['coverage']['2017']['published_non_null_cod']==556
+          assert h['coverage']['2017']['published_real_zero_with_sales']==3
+          print({'coverage':h['coverage'],'absecon':h['districts']['0101'],'hi_nella':h['districts']['0419']})
+          PY
+          git diff --exit-code origin/main -- property/uniformity.json
+          grep -F "codLegacy:BASE+'/property/data/cod/historical-cod-2016-2017.json'" supabase/functions/workbench-hydrate/index.ts
+          grep -F "uniformity_history_v3" supabase/functions/provider-release-canary/index-v2.ts
+      - name: Commit generated activation
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "Watchdog Source Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- property/data/cod/historical-cod-2016-2017.json property/uniformity.json property/data/cod/SOURCE-MANIFEST.md supabase/functions/workbench-hydrate/index.ts supabase/functions/provider-release-canary/index-v2.ts
+          if git diff --cached --quiet; then
+            echo "No generated activation changes"
+          else
+            git commit -m "[source-build] Recover 2016-2017 statewide COD"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
