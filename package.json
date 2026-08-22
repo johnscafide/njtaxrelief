@@ -4,6 +4,7 @@
     "node": "24.x"
   },
   "dependencies": {
+    "@vercel/functions": "3.9.3",
     "@vercel/oidc": "3.8.5"
   }
 }
