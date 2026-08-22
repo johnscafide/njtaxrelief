@@ -3,12 +3,15 @@ const assert = require('assert');
 
 const html = fs.readFileSync('property/dashboard/index.html','utf8');
 const js = fs.readFileSync('property/js/dashboard/dashboard-premium-followup.js','utf8');
-const css = fs.readFileSync('property/css/dashboard/dashboard-premium-followup.css','utf8');
+const css = fs.readFileSync('property/css/dashboard/dashboard-premium-followup-20260822c.css','utf8');
 const presenceMigration = fs.readFileSync('supabase/migrations/20260822215000_dashboard_live_presence_avatars.sql','utf8');
 const crmMigration = fs.readFileSync('supabase/migrations/20260822215500_dashboard_crm_summary.sql','utf8');
 
-assert(html.includes('dashboard-premium-followup.css?v=20260822c'));
-assert(html.includes('dashboard-premium-followup.js?v=20260822c'));
+assert(html.includes('/property/css/dashboard/dashboard-premium-20260822.css'));
+assert(html.includes('/property/css/dashboard/dashboard-premium-followup-20260822c.css'));
+assert(html.includes('/property/js/dashboard/dashboard-premium.js'));
+assert(html.includes('/property/js/dashboard/dashboard-premium-followup.js'));
+assert(!html.includes('?v='));
 assert(js.includes("watchdog_dashboard_surface_defaults_v3"));
 assert(js.includes('[data-wdv2-toggle="taxvalue"]'));
 assert(js.includes('[data-premium-toggle="live-activity"]'));
