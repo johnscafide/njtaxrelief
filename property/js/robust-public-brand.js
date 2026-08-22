@@ -5,6 +5,24 @@
 
   function text(node,value){if(node&&node.textContent!==value)node.textContent=value;}
 
+  function loadScript(id,src,done){
+    var existing=document.getElementById(id);
+    if(existing){if(done){if(existing.dataset.loaded==='1')done();else existing.addEventListener('load',done,{once:true});}return;}
+    var s=document.createElement('script');
+    s.id=id;s.src=src;s.async=false;
+    s.addEventListener('load',function(){s.dataset.loaded='1';if(done)done();},{once:true});
+    document.head.appendChild(s);
+  }
+
+  function loadCanonicalScore(){
+    function loadPublic(){
+      if(window.WatchdogScorePublic)return;
+      loadScript('wd-public-score-script','/property/js/watchdog-score-public.js');
+    }
+    if(window.WatchdogScoreCore){loadPublic();return;}
+    loadScript('wd-score-core-script','/property/js/watchdog-score-core.js',loadPublic);
+  }
+
   function syncPublicMenu(){
     var sheet=document.getElementById('wd-main-sheet');
     if(!sheet)return;
@@ -57,7 +75,8 @@
   var scheduled=false;
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;sync();});}
 
+  loadCanonicalScore();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogROBUSTBrand={sync:sync};
+  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore};
 })();
