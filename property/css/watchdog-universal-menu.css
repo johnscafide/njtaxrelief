@@ -1,46 +1,246 @@
-/* Universal Watchdog navigation and profile chrome. Dashboard is the visual source of truth. */
-:root{--wdum-ink:#111d38;--wdum-muted:#748198;--wdum-line:#e2e7ef;--wdum-soft:#edf1f6;--wdum-blue:#2f6df6;--wdum-blue-soft:#eef4ff;--wdum-font:Inter,"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+/* Universal Watchdog navigation and profile chrome.
+   This file is the final visual authority for index, Dashboard, Property Home
+   and supported app-shell menu chrome. */
+:root{
+  --wdum-ink:#111d38;
+  --wdum-muted:#748198;
+  --wdum-line:#e2e7ef;
+  --wdum-soft:#edf1f6;
+  --wdum-blue:#2f6df6;
+  --wdum-blue-soft:#eef4ff;
+  --wdum-font:Inter,"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
 
-/* Shared brand */
-.wd-universal-brand{display:flex!important;align-items:center!important;gap:11px!important;min-width:0!important;color:var(--wdum-ink)!important;text-decoration:none!important;font-family:var(--wdum-font)!important}
-.wd-universal-brand-mark{width:42px;height:42px;flex:0 0 42px;border-radius:12px;background:linear-gradient(145deg,#183b84,#2f6df6);color:#fff;display:grid;place-items:center;box-shadow:0 8px 18px rgba(47,109,246,.2);font-size:17px}
-.wd-universal-brand-copy{display:grid;line-height:1.04;min-width:0}.wd-universal-brand-copy strong{font-size:21px;font-weight:800;letter-spacing:-.04em;color:var(--wdum-ink)}.wd-universal-brand-copy small{font-size:8px;color:#8692a6;letter-spacing:.11em;font-weight:800;margin-top:4px;white-space:nowrap}
+/* ---------- one brand treatment ---------- */
+.wd-universal-brand,
+.wd4-nav-head .wd4-brand,
+.hm27-nav-head .hm27-brand{
+  display:flex!important;
+  align-items:center!important;
+  gap:11px!important;
+  min-width:0!important;
+  color:var(--wdum-ink)!important;
+  text-decoration:none!important;
+  font-family:var(--wdum-font)!important;
+}
+.wd-universal-brand-mark,
+.wd4-nav-head .wd4-brand-mark,
+.hm27-nav-head .hm27-brand-mark{
+  width:42px!important;
+  height:42px!important;
+  flex:0 0 42px!important;
+  border-radius:12px!important;
+  background:linear-gradient(145deg,#183b84,#2f6df6)!important;
+  color:#fff!important;
+  display:grid!important;
+  place-items:center!important;
+  box-shadow:0 8px 18px rgba(47,109,246,.2)!important;
+  font-size:17px!important;
+}
+.wd-universal-brand-copy,
+.wd4-nav-head .wd4-brand-copy,
+.hm27-nav-head .hm27-brand-copy{display:grid!important;line-height:1.04!important;min-width:0!important}
+.wd-universal-brand-copy strong,
+.wd4-nav-head .wd4-brand-copy strong,
+.hm27-nav-head .hm27-brand-copy b{font:800 21px/1.04 var(--wdum-font)!important;letter-spacing:-.04em!important;color:var(--wdum-ink)!important}
+.wd-universal-brand-copy small,
+.wd4-nav-head .wd4-brand-copy small,
+.hm27-nav-head .hm27-brand-copy small{font:800 8px/1 var(--wdum-font)!important;color:#8692a6!important;letter-spacing:.11em!important;margin-top:4px!important;white-space:nowrap!important}
 
-/* Public left menu becomes the Dashboard floating drawer. */
-.wd-public-sheet.wd-universal-public-nav{left:14px!important;right:auto!important;top:14px!important;bottom:14px!important;width:min(355px,calc(100vw - 28px))!important;height:auto!important;max-height:none!important;background:#fff!important;border:1px solid var(--wdum-line)!important;border-radius:18px!important;box-shadow:0 28px 80px rgba(18,34,60,.18)!important;padding:18px!important;overflow:hidden!important;transform:translateX(calc(-100% - 30px))!important;transition:transform .24s cubic-bezier(.2,.8,.2,1),visibility .24s!important;font-family:var(--wdum-font)!important;display:flex!important;flex-direction:column!important}
+/* ---------- one drawer geometry ---------- */
+.wd-public-sheet.wd-universal-public-nav{
+  position:fixed!important;
+  left:14px!important;
+  right:auto!important;
+  top:14px!important;
+  bottom:14px!important;
+  width:min(355px,calc(100vw - 28px))!important;
+  height:auto!important;
+  max-height:none!important;
+  background:#fff!important;
+  border:1px solid var(--wdum-line)!important;
+  border-radius:18px!important;
+  box-shadow:0 28px 80px rgba(18,34,60,.18)!important;
+  padding:18px!important;
+  overflow:hidden!important;
+  transform:translateX(calc(-100% - 30px))!important;
+  transition:transform .24s cubic-bezier(.2,.8,.2,1),visibility .24s!important;
+  font-family:var(--wdum-font)!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
 .wd-public-sheet.wd-universal-public-nav.open{transform:none!important}
-.wd-universal-nav-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:22px;flex:0 0 auto}
-.wd-universal-close{width:40px!important;height:40px!important;flex:0 0 40px!important;border:0!important;border-radius:50%!important;background:#f1f4f8!important;color:#53657d!important;display:grid!important;place-items:center!important;cursor:pointer!important;font-size:16px!important}
-/* Root styles.css still has a historical unscoped `nav { ... }` rule. Reset every
-   container-level property here so that rule can never leak into the universal drawer. */
-.wd-universal-nav-links{display:grid!important;gap:5px!important;overflow-y:auto!important;overscroll-behavior:contain!important;scrollbar-width:none!important;padding:0 1px 4px!important;min-height:0!important;width:100%!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important;background:#fff!important;position:static!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;z-index:auto!important;box-shadow:none!important;transform:none!important}
-.wd-universal-nav-links::-webkit-scrollbar{display:none}
-.wd-universal-nav-links a{display:flex!important;align-items:center!important;gap:12px!important;min-height:48px!important;border-radius:11px!important;padding:11px 13px!important;text-decoration:none!important;color:#43556d!important;font:700 14px/1.2 var(--wdum-font)!important;transition:background .15s,color .15s!important}
-.wd-universal-nav-links a:hover,.wd-universal-nav-links a.active{background:var(--wdum-blue-soft)!important;color:#244f9d!important}.wd-universal-nav-links a i{width:20px!important;flex:0 0 20px!important;text-align:center!important;color:#7589a3!important;font-size:15px!important}.wd-universal-nav-links a.active i{color:var(--wdum-blue)!important}
-.wd-universal-nav-foot{margin-top:auto;border-top:1px solid var(--wdum-soft);padding-top:12px;flex:0 0 auto}.wd-universal-nav-foot button{width:100%;min-height:44px;border:0;background:#f4f6f9;border-radius:10px;color:#53657b;display:flex;align-items:center;gap:10px;padding:0 13px;font:700 12px var(--wdum-font);cursor:pointer}.wd-universal-nav-foot button:hover{background:#eef2f6;color:#1f3654}
+.wd4-nav-panel,.hm27-nav-panel{
+  left:14px!important;
+  right:auto!important;
+  top:14px!important;
+  bottom:14px!important;
+  width:min(355px,calc(100vw - 28px))!important;
+  height:auto!important;
+  max-height:none!important;
+  background:#fff!important;
+  border:1px solid var(--wdum-line)!important;
+  border-radius:18px!important;
+  box-shadow:0 28px 80px rgba(18,34,60,.18)!important;
+  padding:18px!important;
+  overflow:hidden!important;
+  display:flex!important;
+  flex-direction:column!important;
+  font-family:var(--wdum-font)!important;
+}
 
-/* Public profile becomes a compact Dashboard-style account popover. */
-.wd-public-sheet.right.wd-universal-public-profile{left:auto!important;right:14px!important;top:82px!important;bottom:auto!important;width:min(390px,calc(100vw - 28px))!important;height:auto!important;max-height:calc(100vh - 96px)!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:17px!important;box-shadow:0 24px 65px rgba(18,36,63,.19)!important;padding:0!important;overflow:auto!important;transform:translateY(-8px) scale(.985)!important;transform-origin:top right!important;opacity:0!important;visibility:hidden!important;transition:.16s!important;font-family:var(--wdum-font)!important}
+.wd-universal-nav-head,.wd4-nav-head,.hm27-nav-head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:14px!important;
+  padding:0!important;
+  margin:0 0 22px!important;
+  border:0!important;
+  min-height:42px!important;
+  flex:0 0 auto!important;
+}
+.wd-universal-close,.wd4-nav-close,.hm27-nav-close{
+  width:40px!important;
+  height:40px!important;
+  flex:0 0 40px!important;
+  border:0!important;
+  border-radius:50%!important;
+  background:#f1f4f8!important;
+  color:#53657d!important;
+  box-shadow:none!important;
+  display:grid!important;
+  place-items:center!important;
+  cursor:pointer!important;
+  font-size:16px!important;
+}
+
+/* Root styles.css contains a historical global nav rule. Reset every container
+   property and apply the exact same density to all three menu implementations. */
+.wd-universal-nav-links,.wd4-nav-links,.hm27-nav-links{
+  display:grid!important;
+  gap:5px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain!important;
+  scrollbar-width:none!important;
+  padding:0 1px 4px!important;
+  min-height:0!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:#fff!important;
+  position:static!important;
+  inset:auto!important;
+  top:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  left:auto!important;
+  z-index:auto!important;
+  box-shadow:none!important;
+  transform:none!important;
+  flex:1 1 auto!important;
+}
+.wd-universal-nav-links::-webkit-scrollbar,.wd4-nav-links::-webkit-scrollbar,.hm27-nav-links::-webkit-scrollbar{display:none}
+.wd-universal-nav-links a,.wd4-nav-links a,.hm27-nav-links a{
+  display:flex!important;
+  align-items:center!important;
+  gap:12px!important;
+  min-height:48px!important;
+  padding:11px 13px!important;
+  border:0!important;
+  border-radius:11px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  text-decoration:none!important;
+  color:#43556d!important;
+  font:700 14px/1.2 var(--wdum-font)!important;
+  transition:background .15s,color .15s!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+.wd-universal-nav-links a:hover,.wd-universal-nav-links a.active,
+.wd4-nav-links a:hover,.wd4-nav-links a.active,
+.hm27-nav-links a:hover,.hm27-nav-links a.active{background:var(--wdum-blue-soft)!important;color:#244f9d!important}
+.wd-universal-nav-links a i,.wd4-nav-links a i,.hm27-nav-links a i{
+  width:20px!important;
+  flex:0 0 20px!important;
+  text-align:center!important;
+  color:#7589a3!important;
+  font-size:15px!important;
+}
+.wd-universal-nav-links a.active i,.wd4-nav-links a.active i,.hm27-nav-links a.active i{color:var(--wdum-blue)!important}
+
+/* Sign out belongs to Profile / Account. The main drawer only keeps a sign-in
+   affordance for anonymous visitors. */
+.wd4-nav-foot,.hm27-nav-foot{display:none!important}
+.wd-universal-nav-foot{margin-top:auto!important;border-top:1px solid var(--wdum-soft)!important;padding-top:12px!important;flex:0 0 auto!important}
+.wd-universal-nav-foot:has([data-wd-universal="signout"]){display:none!important}
+.wd-universal-nav-foot button{width:100%!important;min-height:44px!important;border:0!important;background:#f4f6f9!important;border-radius:10px!important;color:#53657b!important;display:flex!important;align-items:center!important;gap:10px!important;padding:0 13px!important;font:700 12px var(--wdum-font)!important;cursor:pointer!important}
+.wd-universal-nav-foot button:hover{background:#eef2f6!important;color:#1f3654!important}
+
+/* ---------- public profile ---------- */
+.wd-public-sheet.right.wd-universal-public-profile{
+  left:auto!important;right:14px!important;top:82px!important;bottom:auto!important;
+  width:min(390px,calc(100vw - 28px))!important;height:auto!important;max-height:calc(100vh - 96px)!important;
+  background:#fff!important;border:1px solid #dfe6ef!important;border-radius:17px!important;
+  box-shadow:0 24px 65px rgba(18,36,63,.19)!important;padding:0!important;overflow:auto!important;
+  transform:translateY(-8px) scale(.985)!important;transform-origin:top right!important;
+  opacity:0!important;visibility:hidden!important;transition:.16s!important;font-family:var(--wdum-font)!important;
+}
 .wd-public-sheet.right.wd-universal-public-profile.open{transform:none!important;opacity:1!important;visibility:visible!important}
-.wd-public-sheet.right.wd-universal-public-profile > .wd-public-sheet-head{display:none!important}
+.wd-public-sheet.right.wd-universal-public-profile>.wd-public-sheet-head{display:none!important}
 #wd-profile-content.wd-universal-profile{padding:0!important}
 .wd-universal-profile-close{position:absolute!important;right:12px!important;top:10px!important;z-index:5!important;width:34px!important;height:34px!important;border:0!important;border-radius:50%!important;background:#f1f4f8!important;color:#53657d!important;display:grid!important;place-items:center!important;cursor:pointer!important}
 
 /* Same profile anatomy is injected into public, Dashboard and Property Home. */
 .wd-universal-profile{font-family:var(--wdum-font)!important;color:var(--wdum-ink)!important}
-.wd-universal-profile>header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:17px 18px 14px!important;border-bottom:1px solid var(--wdum-soft)!important;background:#fff!important;min-height:72px!important}.wd-public-sheet .wd-universal-profile>header{padding-right:52px!important}
-.wd-universal-profile>header>span{display:grid!important;gap:3px!important;min-width:0!important}.wd-universal-profile>header b{font-size:13px!important;color:#1d2e48!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wd-universal-profile>header small{font-size:9px!important;color:#8995a6!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wd-universal-profile>header>i{font-style:normal!important;font-size:8px!important;color:var(--wdum-blue)!important;background:#edf3ff!important;border-radius:999px!important;padding:6px 9px!important;white-space:nowrap!important;font-weight:700!important}
-/* The profile menu also uses semantic <nav>, so protect it from the same legacy global rule. */
+.wd-universal-profile>header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:17px 18px 14px!important;border-bottom:1px solid var(--wdum-soft)!important;background:#fff!important;min-height:72px!important}
+.wd-public-sheet .wd-universal-profile>header{padding-right:52px!important}
+.wd-universal-profile>header>span{display:grid!important;gap:3px!important;min-width:0!important}
+.wd-universal-profile>header b{font-size:13px!important;color:#1d2e48!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wd-universal-profile>header small{font-size:9px!important;color:#8995a6!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wd-universal-profile>header>i{font-style:normal!important;font-size:8px!important;color:var(--wdum-blue)!important;background:#edf3ff!important;border-radius:999px!important;padding:6px 9px!important;white-space:nowrap!important;font-weight:700!important}
 .wd-universal-profile>nav{display:grid!important;padding:7px!important;background:#fff!important;position:static!important;inset:auto!important;top:auto!important;right:auto!important;bottom:auto!important;left:auto!important;z-index:auto!important;box-shadow:none!important;transform:none!important;width:auto!important;max-width:none!important;margin:0!important;border:0!important;border-radius:0!important}
 .wd-universal-profile>nav a,.wd-universal-profile>nav button{border:0!important;background:transparent!important;text-decoration:none!important;color:#31435c!important;display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;gap:11px!important;align-items:center!important;text-align:left!important;padding:9px!important;border-radius:11px!important;cursor:pointer!important;font-family:var(--wdum-font)!important;width:100%!important;min-height:54px!important}
-.wd-universal-profile>nav a:hover,.wd-universal-profile>nav button:hover{background:#f3f6fa!important}.wd-universal-profile>nav>a>i,.wd-universal-profile>nav>button>i{width:40px!important;height:40px!important;border-radius:10px!important;background:#edf3ff!important;color:var(--wdum-blue)!important;display:grid!important;place-items:center!important;font-size:13px!important}.wd-universal-profile>nav span{display:grid!important;gap:3px!important;min-width:0!important}.wd-universal-profile>nav b{font-size:12px!important;color:#31435c!important}.wd-universal-profile>nav small{font-size:9px!important;color:#8995a6!important;line-height:1.35!important}
-.wd-universal-profile>.wd-universal-signout{width:calc(100% - 14px)!important;margin:0 7px 7px!important;min-height:44px!important;border:0!important;border-top:1px solid var(--wdum-soft)!important;background:#fff!important;color:#66758a!important;text-align:left!important;padding:0 12px!important;border-radius:9px!important;font:700 10px var(--wdum-font)!important;cursor:pointer!important}.wd-universal-profile>.wd-universal-signout:hover{background:#f7f9fb!important;color:#d84b52!important}
+.wd-universal-profile>nav a:hover,.wd-universal-profile>nav button:hover{background:#f3f6fa!important}
+.wd-universal-profile>nav>a>i,.wd-universal-profile>nav>button>i{width:40px!important;height:40px!important;border-radius:10px!important;background:#edf3ff!important;color:var(--wdum-blue)!important;display:grid!important;place-items:center!important;font-size:13px!important}
+.wd-universal-profile>nav span{display:grid!important;gap:3px!important;min-width:0!important}
+.wd-universal-profile>nav b{font-size:12px!important;color:#31435c!important}
+.wd-universal-profile>nav small{font-size:9px!important;color:#8995a6!important;line-height:1.35!important}
+.wd-universal-profile>.wd-universal-signout{width:calc(100% - 14px)!important;margin:0 7px 7px!important;min-height:44px!important;border:0!important;border-top:1px solid var(--wdum-soft)!important;background:#fff!important;color:#66758a!important;text-align:left!important;padding:0 12px!important;border-radius:9px!important;font:700 10px var(--wdum-font)!important;cursor:pointer!important}
+.wd-universal-profile>.wd-universal-signout:hover{background:#f7f9fb!important;color:#d84b52!important}
 #wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{width:min(355px,calc(100vw - 28px))!important;overflow:hidden!important}
 
-/* Universal invite action opened from the shared profile menu. */
-.wd-universal-invite-shade{position:fixed;inset:0;border:0;background:rgba(15,29,50,.36);backdrop-filter:blur(3px);opacity:0;pointer-events:none;z-index:9700;transition:.16s}.wd-universal-invite-shade.open{opacity:1;pointer-events:auto}
-.wd-universal-invite{position:fixed;left:50%;top:50%;width:min(570px,calc(100vw - 34px));transform:translate(-50%,-47%) scale(.98);background:#fff;border:1px solid #dce4ed;border-radius:20px;box-shadow:0 30px 90px rgba(17,35,62,.24);padding:28px;z-index:9800;opacity:0;visibility:hidden;transition:.18s;font-family:var(--wdum-font);color:var(--wdum-ink)}.wd-universal-invite.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
-.wd-universal-invite-x{position:absolute;right:17px;top:16px;width:34px;height:34px;border:0;border-radius:50%;background:#eff3f7;color:#607087;cursor:pointer}.wd-universal-invite>small{font-size:8px;font-weight:900;letter-spacing:.15em;color:var(--wdum-blue)}.wd-universal-invite h2{font-size:24px;letter-spacing:-.045em;color:#172641;margin:7px 40px 7px 0}.wd-universal-invite>p{font-size:11px;color:#768397;line-height:1.5;margin:0 0 20px}.wd-universal-invite label{display:block;font-size:8px;font-weight:800;color:#66758b;margin-bottom:6px}.wd-universal-invite>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}.wd-universal-invite input{min-width:0;height:43px;border:1px solid #dce4ee;border-radius:10px;padding:0 12px;background:#f8fafc;color:#475a72;font-size:9px}.wd-universal-invite>div button{height:43px;border:0;border-radius:10px;background:#172f55;color:#fff;padding:0 14px;font-size:9px;font-weight:800;cursor:pointer}.wd-universal-invite footer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.wd-universal-invite footer a,.wd-universal-invite footer button{height:42px;border:1px solid #dce4ee;border-radius:10px;background:#fff;color:#354960;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font-size:9px;font-weight:800;cursor:pointer}.wd-universal-invite>em{display:block;margin-top:13px;color:#98a3b1;font-size:7px;font-style:normal}
+/* ---------- invite ---------- */
+.wd-universal-invite-shade{position:fixed;inset:0;border:0;background:rgba(15,29,50,.36);backdrop-filter:blur(3px);opacity:0;pointer-events:none;z-index:9700;transition:.16s}
+.wd-universal-invite-shade.open{opacity:1;pointer-events:auto}
+.wd-universal-invite{position:fixed;left:50%;top:50%;width:min(570px,calc(100vw - 34px));transform:translate(-50%,-47%) scale(.98);background:#fff;border:1px solid #dce4ed;border-radius:20px;box-shadow:0 30px 90px rgba(17,35,62,.24);padding:28px;z-index:9800;opacity:0;visibility:hidden;transition:.18s;font-family:var(--wdum-font);color:var(--wdum-ink)}
+.wd-universal-invite.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
+.wd-universal-invite-x{position:absolute;right:17px;top:16px;width:34px;height:34px;border:0;border-radius:50%;background:#eff3f7;color:#607087;cursor:pointer}
+.wd-universal-invite>small{font-size:8px;font-weight:900;letter-spacing:.15em;color:var(--wdum-blue)}
+.wd-universal-invite h2{font-size:24px;letter-spacing:-.045em;color:#172641;margin:7px 40px 7px 0}
+.wd-universal-invite>p{font-size:11px;color:#768397;line-height:1.5;margin:0 0 20px}
+.wd-universal-invite label{display:block;font-size:8px;font-weight:800;color:#66758b;margin-bottom:6px}
+.wd-universal-invite>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+.wd-universal-invite input{min-width:0;height:43px;border:1px solid #dce4ee;border-radius:10px;padding:0 12px;background:#f8fafc;color:#475a72;font-size:9px}
+.wd-universal-invite>div button{height:43px;border:0;border-radius:10px;background:#172f55;color:#fff;padding:0 14px;font-size:9px;font-weight:800;cursor:pointer}
+.wd-universal-invite footer{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.wd-universal-invite footer a,.wd-universal-invite footer button{height:42px;border:1px solid #dce4ee;border-radius:10px;background:#fff;color:#354960;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:7px;font-size:9px;font-weight:800;cursor:pointer}
+.wd-universal-invite>em{display:block;margin-top:13px;color:#98a3b1;font-size:7px;font-style:normal}
 
-@media(max-width:760px){.wd-public-sheet.wd-universal-public-nav{left:10px!important;top:10px!important;bottom:10px!important;width:calc(100vw - 20px)!important;padding:16px!important}.wd-universal-nav-links a{min-height:52px!important;font-size:15px!important;padding:12px 13px!important}.wd-public-sheet.right.wd-universal-public-profile{right:10px!important;top:70px!important;width:calc(100vw - 20px)!important;max-height:calc(100vh - 80px)!important}.wd-universal-profile>nav a,.wd-universal-profile>nav button{min-height:58px!important}.wd-universal-profile>nav b{font-size:13px!important}.wd-universal-profile>nav small{font-size:10px!important}.wd-universal-invite{padding:23px 18px}.wd-universal-invite>div,.wd-universal-invite footer{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){.wd-public-sheet.wd-universal-public-nav,.wd-public-sheet.right.wd-universal-public-profile,.wd-universal-invite,.wd-universal-invite-shade{transition:none!important}}
+@media(max-width:760px){
+  .wd-public-sheet.wd-universal-public-nav,.wd4-nav-panel,.hm27-nav-panel{left:10px!important;right:auto!important;top:10px!important;bottom:10px!important;width:calc(100vw - 20px)!important;padding:16px!important}
+  /* Keep the exact same 14px / 48px menu density on phones and tablets. */
+  .wd-universal-nav-links a,.wd4-nav-links a,.hm27-nav-links a{min-height:48px!important;font-size:14px!important;padding:11px 13px!important}
+  .wd-public-sheet.right.wd-universal-public-profile{right:10px!important;top:70px!important;width:calc(100vw - 20px)!important;max-height:calc(100vh - 80px)!important}
+  .wd-universal-profile>nav a,.wd-universal-profile>nav button{min-height:58px!important}
+  .wd-universal-profile>nav b{font-size:13px!important}.wd-universal-profile>nav small{font-size:10px!important}
+  .wd-universal-invite{padding:23px 18px}.wd-universal-invite>div,.wd-universal-invite footer{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .wd-public-sheet.wd-universal-public-nav,.wd4-nav-panel,.hm27-nav-panel,.wd-public-sheet.right.wd-universal-public-profile,.wd-universal-invite,.wd-universal-invite-shade{transition:none!important}
+}

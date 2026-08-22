@@ -1,6 +1,10 @@
 /* Watchdog Today navigation cue.
    Compact return-to-work affordance for Pro+/Teams/Developer only.
-   Counts owner-visible governed Daily Intelligence items without copying property identifiers into analytics. */
+   Counts owner-visible governed Daily Intelligence items without copying property identifiers into analytics.
+
+   IMPORTANT: the canonical Watchdog drawer is owned exclusively by
+   watchdog-universal-menu.js. This helper may enhance legacy side-primary
+   navigation only; it must never mutate .wd4-nav-links or .hm27-nav-links. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_TODAY_NAV__)return;
@@ -11,7 +15,7 @@ var state={client:null,eligible:false,open:0,loaded:false,timer:null};
 function plan(v){v=String(v||'standard').toLowerCase().replace(/\+/g,'_plus').replace(/[^a-z_]/g,'');return RANK[v]==null?'standard':v}
 function client(){if(state.client)return state.client;try{if(window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient){state.client=window.NJPTRSupabaseRuntime.createClient();return state.client}}catch(_e){}if(window.supabase&&window.supabase.createClient){state.client=window.supabase.createClient('https://uvkvaxljhhngydvlrzom.supabase.co','sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});return state.client}return null}
 function ensureCss(){var href='/property/css/watchdog-today-nav.css';if(document.querySelector('link[href="'+href+'"]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l)}
-function navs(){return Array.prototype.slice.call(document.querySelectorAll('.wd4-nav-links,.hm27-nav-links,.db-side-primary'))}
+function navs(){return Array.prototype.slice.call(document.querySelectorAll('.db-side-primary')).filter(function(nav){return !nav.hasAttribute('data-wd-universal')&&!nav.closest('.wd-universal-public-nav,.wd4-nav,.hm27-nav')})}
 function anchorFor(nav){return nav.querySelector('a[href="/property/home"],a[href="/property/home/"]')}
 function markup(){var active=/\/property\/intelligence\/daily\/?$/.test(location.pathname);return '<a class="wd-today-nav'+(active?' active on':'')+'" data-wd-today-nav href="/property/intelligence/daily/"><i class="fas fa-inbox" aria-hidden="true"></i><span>Today</span><em class="wd-today-badge" hidden></em></a>'}
 function trackReturn(link){if(!link||link.dataset.wdTodayTracked==='1')return;link.dataset.wdTodayTracked='1';link.addEventListener('click',function(){window.dispatchEvent(new CustomEvent('watchdog:analytics',{detail:{event_name:'intelligence_action_started',properties:{surface:'navigation',action:'open_today',status:state.open>0?'open_items':'caught_up'}}}))})}
@@ -19,8 +23,9 @@ function mount(){ensureCss();navs().forEach(function(nav){var existing=nav.query
 function latestEventMap(rows){var map=new Map();(rows||[]).forEach(function(e){var key=String(e.digest_id||'')+'|'+String(e.model_key||'')+'|'+String(e.pams_pin||'');if(!map.has(key))map.set(key,e)});return map}
 function openCount(digests,events){var seen=new Set(),map=latestEventMap(events),open=0;for(var i=0;i<(digests||[]).length;i++){var d=digests[i],queue=Array.isArray(d.recommended_queue)?d.recommended_queue:[];for(var j=0;j<queue.length;j++){var pin=String(queue[j]&&queue[j].pams_pin||'').trim(),model=String(d.model_key||'intelligence'),dedupe=model+'|'+pin;if(!pin||seen.has(dedupe))continue;seen.add(dedupe);var key=String(d.id||'')+'|'+model+'|'+pin,e=map.get(key);if(!e){open++;continue}if(e.action==='reopened'){open++;continue}if(e.action==='snoozed'){var until=e.snooze_until?new Date(e.snooze_until).getTime():0;if(!(until>Date.now()))open++;continue}if(e.action!=='reviewed'&&e.action!=='dismissed')open++}}return open}
 async function load(){var c=client();if(!c)return;try{var auth=await c.auth.getUser(),user=auth&&auth.data&&auth.data.user;if(!user){state.eligible=false;mount();return}var ent=await c.rpc('get_my_entitlement'),raw=ent&&ent.data,record=Array.isArray(raw)?raw[0]:raw,current=record&&record.account_role==='developer'?'developer':plan(record&&record.plan_tier);state.eligible=RANK[current]>=RANK.pro_plus;if(!state.eligible){state.open=0;mount();return}var result=await Promise.all([c.from('intelligence_daily_digests').select('id,model_key,digest_date,recommended_queue,created_at').order('digest_date',{ascending:false}).order('created_at',{ascending:false}).limit(20),c.from('intelligence_today_events').select('digest_id,pams_pin,model_key,action,snooze_until,created_at').order('created_at',{ascending:false}).limit(500)]);if(result[0].error||result[1].error)throw(result[0].error||result[1].error);state.open=openCount(result[0].data||[],result[1].data||[]);state.loaded=true;mount()}catch(error){console.warn('Watchdog Today nav unavailable:',error&&error.message||error);state.open=0;mount()}}
-function observe(){var root=document.body;if(!root)return;new MutationObserver(function(){clearTimeout(state.timer);state.timer=setTimeout(mount,80)}).observe(root,{childList:true,subtree:true})}
+function mutationMayContainLegacyNav(records){for(var i=0;i<records.length;i++){var added=records[i].addedNodes||[];for(var j=0;j<added.length;j++){var n=added[j];if(!n||n.nodeType!==1)continue;if((n.matches&&n.matches('.db-side-primary'))||(n.querySelector&&n.querySelector('.db-side-primary')))return true}}return false}
+function observe(){var root=document.body;if(!root||typeof MutationObserver==='undefined')return;new MutationObserver(function(records){if(!mutationMayContainLegacyNav(records))return;clearTimeout(state.timer);state.timer=setTimeout(mount,80)}).observe(root,{childList:true,subtree:true})}
 function boot(){mount();observe();load();document.addEventListener('visibilitychange',function(){if(!document.hidden)load()});window.addEventListener('focus',function(){load()})}
-window.WatchdogTodayNav={refresh:load,openCount:openCount,state:function(){return{eligible:state.eligible,open:state.open,loaded:state.loaded}},contract:'watchdog-today-nav-v2-return-analytics'};
+window.WatchdogTodayNav={refresh:load,openCount:openCount,state:function(){return{eligible:state.eligible,open:state.open,loaded:state.loaded}},contract:'watchdog-today-nav-v3-universal-safe'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();

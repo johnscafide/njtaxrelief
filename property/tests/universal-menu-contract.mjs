@@ -10,6 +10,8 @@ const publicNav = read('property/js/public-nav.js');
 const brandRuntime = read('property/js/brand-consistency-runtime.js');
 const dashboard = read('property/dashboard/index.html');
 const home = read('property/home/index.html');
+const homeMenu = read('property/js/dashboard/home/home-menu-sync.js');
+const todayNav = read('property/js/watchdog-today-nav.js');
 const sidemenu = read('property/js/sidemenu.js');
 const css = read('property/css/watchdog-universal-menu.css');
 
@@ -17,6 +19,8 @@ const css = read('property/css/watchdog-universal-menu.css');
 new Function(universal);
 new Function(publicNav);
 new Function(brandRuntime);
+new Function(homeMenu);
+new Function(todayNav);
 
 const canonical = [
   ['dashboard', 'Dashboard'],
@@ -56,14 +60,37 @@ assert(dashboard.includes('/property/js/brand-consistency-runtime.js'), 'Dashboa
 assert(home.includes('/property/js/brand-consistency-runtime.js'), 'Property Home is not connected to shared menu runtime');
 assert(sidemenu.includes('loadBrandConsistency'), 'Secondary-page shell is not connected to shared menu runtime');
 
+// Property Home used to fetch entitlement state and overwrite .hm27-nav-links with
+// hardcoded /property routes after the universal menu had already rendered. It is
+// now an Intelligence asset loader only.
+assert(homeMenu.includes('Navigation is owned exclusively by /property/js/watchdog-universal-menu.js'), 'Property Home menu loader is not delegated to the universal menu');
+assert(!homeMenu.includes("document.querySelector('.hm27-nav-links')"), 'Property Home reintroduced a second nav renderer');
+assert(!homeMenu.includes('nav.innerHTML='), 'Property Home is rewriting universal nav markup');
+
+// Today used to observe and mutate the same universal nav nodes, causing a
+// remove/reinsert MutationObserver loop and visible flashing. It may enhance only
+// legacy .db-side-primary navigation now.
+assert(todayNav.includes("document.querySelectorAll('.db-side-primary')"), 'Today helper is not scoped to legacy navigation');
+assert(!todayNav.includes("document.querySelectorAll('.wd4-nav-links"), 'Today helper is mutating Dashboard universal navigation');
+assert(!todayNav.includes("document.querySelectorAll('.hm27-nav-links"), 'Today helper is mutating Property Home universal navigation');
+assert(todayNav.includes("contract:'watchdog-today-nav-v3-universal-safe'"), 'Today helper universal-safe contract is missing');
+
 assert(css.includes('.wd-public-sheet.wd-universal-public-nav'), 'Public Dashboard-style drawer CSS is missing');
+assert(css.includes('.wd4-nav-panel,.hm27-nav-panel'), 'App drawers are not governed by universal CSS');
 assert(css.includes('.wd-public-sheet.right.wd-universal-public-profile'), 'Public Dashboard-style profile CSS is missing');
 assert(css.includes('.wd-universal-profile>nav'), 'Shared profile row styling is missing');
 
+// One exact drawer density must win on public, Dashboard and Property Home.
+assert(css.includes('.wd-universal-nav-links a,.wd4-nav-links a,.hm27-nav-links a{'), 'Universal row selector does not cover all menu surfaces');
+assert(css.includes('min-height:48px!important'), 'Universal menu row height drifted from 48px');
+assert(css.includes('font:700 14px/1.2 var(--wdum-font)!important'), 'Universal menu typography drifted from 14px');
+assert(css.includes('width:min(355px,calc(100vw - 28px))!important'), 'Universal drawer width drifted');
+assert(css.includes('Keep the exact same 14px / 48px menu density on phones and tablets.'), 'Mobile/tablet menu density is no longer explicitly locked');
+
 // Root styles.css contains a historical global `nav { ... }` selector. Universal
-// semantic nav elements must fully reset container chrome so that global rule can
-// never turn the drawer/profile navy, sticky, shadowed, or elevated again.
-const drawerRule = css.match(/\.wd-universal-nav-links\{([^}]*)\}/)?.[1] || '';
+// semantic nav elements must fully reset container chrome so it cannot turn the
+// menu navy, sticky, shadowed or elevated again.
+const drawerRule = css.match(/\.wd-universal-nav-links,.wd4-nav-links,.hm27-nav-links\{([^}]*)\}/)?.[1] || '';
 const profileRule = css.match(/\.wd-universal-profile>nav\{([^}]*)\}/)?.[1] || '';
 for (const [name, rule] of [['drawer', drawerRule], ['profile', profileRule]]) {
   assert(rule.includes('background:#fff!important'), `Universal ${name} nav must force a white background`);
@@ -72,5 +99,11 @@ for (const [name, rule] of [['drawer', drawerRule], ['profile', profileRule]]) {
   assert(rule.includes('box-shadow:none!important'), `Universal ${name} nav must reset global nav shadow`);
   assert(rule.includes('transform:none!important'), `Universal ${name} nav must reset inherited nav transforms`);
 }
+
+// Main-drawer Sign out is redundant with Profile/Account and must stay hidden;
+// the profile's canonical sign-out action remains present.
+assert(css.includes('.wd4-nav-foot,.hm27-nav-foot{display:none!important}'), 'App main drawers still expose duplicate Sign out');
+assert(css.includes('.wd-universal-nav-foot:has([data-wd-universal="signout"]){display:none!important}'), 'Public main drawer still exposes duplicate Sign out');
+assert(css.includes('.wd-universal-profile>.wd-universal-signout'), 'Profile Sign out was removed instead of the duplicate main-menu action');
 
 console.log('Universal Watchdog menu contract: PASS');
