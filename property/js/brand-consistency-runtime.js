@@ -4,76 +4,30 @@
   window.__WATCHDOG_BRAND_CONSISTENCY__=true;
 
   var STYLE='/property/css/brand-consistency.css';
-  var INVITE_STYLE='/property/css/watchdog-invite.css';
-  var INVITE_RUNTIME='/property/js/watchdog-invite.js';
-  var items=[
-    {page:'dashboard',href:'/property/dashboard',icon:'fa-table-columns',label:'Dashboard'},
-    {page:'home',href:'/property/home',icon:'fa-house',label:'Property Home'},
-    {page:'town-compare',href:'/property/town-compare',icon:'fa-code-compare',label:'Town Compare'},
-    {page:'robust',href:'/property/robust/',icon:'fa-gauge-high',label:'ROBUST Framework'},
-    {page:'pulse',href:'/property/pulse',icon:'fa-wave-square',label:'Change Intelligence'},
-    {page:'agent-desk',href:'/property/agent-desk',icon:'fa-bullseye',label:'Agent Control'},
-    {page:'scan',href:'/property/scan',icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'},
-    {page:'data-workbench',href:'/property/data-workbench',icon:'fa-table-list',label:'Data Workbench'},
-    {page:'data-center',href:'/property/data-center',icon:'fa-database',label:'Data Center'},
-    {page:'pro',href:'/property/pro',icon:'fa-briefcase',label:'Professional Hub'},
-    {page:'account',href:'/property/account',icon:'fa-user-gear',label:'Account'}
-  ];
+  var UNIVERSAL='/property/js/watchdog-universal-menu.js';
 
   function ensureStylesheet(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
-    var l=document.createElement('link');
-    l.rel='stylesheet';l.href=href;document.head.appendChild(l);
+    var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);
   }
-
-  function ensureStyle(){ensureStylesheet(STYLE);}
-
-  function ensureInviteAssets(){
-    ensureStylesheet(INVITE_STYLE);
-    if(window.__WATCHDOG_INVITE_RUNTIME__||document.querySelector('script[src="'+INVITE_RUNTIME+'"]'))return;
-    var s=document.createElement('script');
-    s.src=INVITE_RUNTIME;
-    s.defer=true;
-    document.head.appendChild(s);
+  function ensureUniversal(){
+    if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.refresh();return;}
+    if(document.querySelector('script[src="'+UNIVERSAL+'"]'))return;
+    var s=document.createElement('script');s.src=UNIVERSAL;s.defer=true;document.head.appendChild(s);
   }
-
-  function currentPage(){
-    var p=(document.body&&document.body.getAttribute('data-sidebar-page'))||'';
-    if(p)return p;
-    var path=location.pathname.replace(/\/+$/,'').split('/').pop();
-    return path||'dashboard';
-  }
-
-  function markup(page){
-    return items.map(function(item){
-      var active=page===item.page?' class="active" aria-current="page"':'';
-      return '<a'+active+' href="'+item.href+'"><i class="fas '+item.icon+'" aria-hidden="true"></i><span>'+item.label+'</span></a>';
-    }).join('');
-  }
-
-  function syncNavigation(){
-    var page=currentPage();
-    var signature='v2:'+page;
-    var html=markup(page);
-    document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(function(nav){
-      if(nav.getAttribute('data-wd-brand-nav')===signature)return;
-      nav.innerHTML=html;
-      nav.setAttribute('data-wd-brand-nav',signature);
-    });
-  }
-
   function setText(selector,value){
-    document.querySelectorAll(selector).forEach(function(n){
-      if(n.textContent!==value)n.textContent=value;
-    });
+    document.querySelectorAll(selector).forEach(function(n){if(n.textContent!==value)n.textContent=value;});
   }
-
   function syncBrand(){
     setText('.wd4-brand-copy strong','Watchdog');
     setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INTELLIGENCE');
   }
-
-  function run(){ensureStyle();ensureInviteAssets();syncNavigation();syncBrand();}
+  function run(){
+    ensureStylesheet(STYLE);
+    ensureUniversal();
+    syncBrand();
+    if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();
+  }
 
   var scheduled=false;
   function schedule(){
@@ -84,7 +38,20 @@
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run,{once:true});
   else run();
 
-  var observer=new MutationObserver(schedule);
-  observer.observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogBrandConsistency={sync:run,items:items.slice()};
+  if(typeof MutationObserver!=='undefined'&&document.documentElement){
+    new MutationObserver(function(records){
+      for(var i=0;i<records.length;i++){
+        var nodes=records[i].addedNodes||[];
+        for(var j=0;j<nodes.length;j++){
+          var n=nodes[j];
+          if(n&&n.nodeType===1&&((n.matches&&n.matches('.wd4-brand-copy,.hm27-brand-copy,.wdx-brand-copy,.wd4-nav-links,.hm27-nav-links'))||(n.querySelector&&n.querySelector('.wd4-brand-copy,.hm27-brand-copy,.wdx-brand-copy,.wd4-nav-links,.hm27-nav-links')))){schedule();return;}
+        }
+      }
+    }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+
+  window.WatchdogBrandConsistency={
+    sync:run,
+    items:function(){return window.WatchdogUniversalMenu?window.WatchdogUniversalMenu.items():[];}
+  };
 })();

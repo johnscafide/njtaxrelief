@@ -1,4 +1,4 @@
-name: Repair property sticky nav
+name: Validate universal Watchdog navigation
 on:
   push:
     branches: [main]
@@ -7,16 +7,20 @@ on:
 permissions:
   contents: read
 jobs:
-  repair:
+  navigation-contract:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Validate current property navigation contract
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate universal menu source of truth
+        run: node property/tests/universal-menu-contract.mjs
+      - name: Validate public menu hooks remain available
         shell: python
         run: |
           from pathlib import Path
-          p = Path('property/index.html')
-          s = p.read_text(encoding='utf-8')
+          source = Path('property/index.html').read_text(encoding='utf-8')
           required = [
               'id="wd-nav"',
               'id="wd-menu-trigger"',
@@ -25,19 +29,13 @@ jobs:
               "WatchdogPublicNav.open('profile')",
               'id="wd-main-sheet"',
               'id="wd-profile-sheet"',
-              '/property/dashboard',
-              '/property/home',
-              '/property/pro',
+              '/property/js/public-nav.js',
           ]
-          missing = [x for x in required if x not in s]
+          missing = [token for token in required if token not in source]
           if missing:
-              raise SystemExit('property navigation contract missing: ' + ', '.join(missing))
-          legacy = [
-              'ssearch-menu-trigger',
-              'ssearch-profile-trigger',
-              '<nav class="ssearch-nav">',
-          ]
-          present = [x for x in legacy if x in s]
+              raise SystemExit('public navigation hooks missing: ' + ', '.join(missing))
+          legacy = ['ssearch-menu-trigger', 'ssearch-profile-trigger', '<nav class="ssearch-nav">']
+          present = [token for token in legacy if token in source]
           if present:
-              raise SystemExit('obsolete sticky nav markup remains: ' + ', '.join(present))
-          print('Property navigation contract is current and no legacy sticky-nav repair is required.')
+              raise SystemExit('obsolete sticky navigation remains: ' + ', '.join(present))
+          print('Public navigation hooks and universal runtime contract are current.')

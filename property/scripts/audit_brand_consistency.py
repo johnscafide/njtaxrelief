@@ -27,6 +27,7 @@ APP_PAGE_NAMES = {
     "home",
     "town-compare",
     "fairness",
+    "robust",
     "pulse",
     "scan",
     "account",
@@ -40,7 +41,7 @@ CANONICAL_NAV = [
     "Dashboard",
     "Property Home",
     "Town Compare",
-    "Assessment Fairness",
+    "ROBUST Framework",
     "Change Intelligence",
     "Agent Control",
     "Appeal Scanner",
@@ -191,10 +192,11 @@ def main() -> int:
     home = PROPERTY / "home" / "index.html"
     sidemenu = PROPERTY / "js" / "sidemenu.js"
     runtime = PROPERTY / "js" / "brand-consistency-runtime.js"
+    universal_menu = PROPERTY / "js" / "watchdog-universal-menu.js"
     consistency_css = PROPERTY / "css" / "brand-consistency.css"
     brand_center = PROPERTY / "branding" / "brand-center.js"
 
-    for required in (dashboard, home, sidemenu, runtime, consistency_css, brand_center):
+    for required in (dashboard, home, sidemenu, runtime, universal_menu, consistency_css, brand_center):
         if not required.exists():
             findings.append(Finding("critical", relative(required), "Required current-shell consistency asset is missing."))
 
@@ -211,10 +213,13 @@ def main() -> int:
             findings.append(Finding("critical", relative(sidemenu), "Secondary-shell loader is not connected to canonical brand consistency runtime."))
 
     runtime_text = read_text(runtime) if runtime.exists() else ""
-    if runtime_text:
+    universal_text = read_text(universal_menu) if universal_menu.exists() else ""
+    if runtime_text and "/property/js/watchdog-universal-menu.js" not in runtime_text:
+        findings.append(Finding("critical", relative(runtime), "Brand consistency runtime is not connected to the universal Watchdog menu source."))
+    if universal_text:
         for label in CANONICAL_NAV:
-            if label not in runtime_text:
-                findings.append(Finding("critical", relative(runtime), f"Canonical navigation label missing: {label}"))
+            if label not in universal_text:
+                findings.append(Finding("critical", relative(universal_menu), f"Canonical navigation label missing: {label}"))
 
     consistency_text = read_text(consistency_css) if consistency_css.exists() else ""
     brand_center_text = read_text(brand_center) if brand_center.exists() else ""
