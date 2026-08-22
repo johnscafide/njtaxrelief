@@ -213,7 +213,7 @@ function rebrandIntelligence(panel){
   var main=panel.querySelector(':scope > .wdai-main');
   if(main)main.classList.add('wd-intelligence-frame');
   var brand=panel.querySelector('.wdai-title > span');
-  if(brand)brand.textContent='WATCHDOG INTELLIGENCE';
+  if(brand && String(brand.textContent || '').trim()!=='WATCHDOG INTELLIGENCE')brand.textContent='WATCHDOG INTELLIGENCE';
   var roleLine=panel.querySelector('.wdai-role-set span');
   if(roleLine){
     Array.prototype.slice.call(roleLine.childNodes).forEach(function(node){
