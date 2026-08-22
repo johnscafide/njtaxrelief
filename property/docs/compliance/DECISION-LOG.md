@@ -152,3 +152,25 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 **Residual risk:** Watchdog still lacks retained evidence of enforced MFA/AAL2, production JWT expiry configuration, maximum session lifetime/inactivity timeout, and complete consolidation of older direct Supabase client configurations.
 
 **Next action:** Inventory direct auth client configurations, capture non-secret production JWT-expiry evidence, determine a no-cost TOTP MFA path, and classify sensitive actions that should require current-session/AAL2 checks.
+
+---
+
+## 2026-08-22 — Establish privileged-access governance and periodic review discipline
+
+**Decision ID:** WCR-2026-08-22-001  
+**Frameworks:** SOC 2 Security, NIST CSF 2.0 Govern/Protect, OWASP ASVS 5.0 Access Control, ISO/IEC 27001  
+**Decision:** Treat privileged human accounts, machine/service credentials, internal developer roles, and Tier 1 provider-console access as separately reviewable privilege classes. Preserve server-side developer authorization and browser self-promotion protections with automated contracts, and require a recurring identity-level access review outside the public repository.
+
+**Reasoning:** Repository evidence already demonstrates important technical controls: server-managed role/plan fields, owner-bound RLS, a server-side `is_watchdog_developer()` authorization function, independent server checks for internal APIs, and bounded/revocable backoffice privileged sessions. Those controls prevent several privilege-escalation paths, but they do not prove who currently holds provider-console or developer access, whether every privilege remains necessary, or whether departed/stale access has been removed. SOC 2/ISO-style access governance requires operating evidence, not only code-level role enforcement.
+
+**Evidence created:**
+
+- `property/docs/compliance/PRIVILEGED-ACCESS-BASELINE-2026-08-22.md`
+- `property/docs/compliance/PRIVILEGED-ACCESS-REVIEW-TEMPLATE.md`
+- `property/tests/privileged-access-contract.mjs`
+- `.github/workflows/zero-cost-compliance-readiness.yml`
+- `property/docs/compliance/CONTROL-REGISTER.md`
+
+**Residual risk:** The first identity-level review of Watchdog developer accounts and GitHub/Supabase/Vercel/payment-provider administrator memberships has not yet been retained. MFA/AAL2 for privileged human access is also not yet proven, and emergency/break-glass access is not formally documented.
+
+**Next action:** Perform the first private identity-level access review, retain only a sanitized count/status summary in the compliance evidence, inventory service-role-backed functions for caller authorization, and establish joiner/mover/leaver plus break-glass procedures.
