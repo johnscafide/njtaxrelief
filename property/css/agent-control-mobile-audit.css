@@ -152,7 +152,117 @@
     touch-action:manipulation;
   }
 
-  html body.wdx-modern :is(.ac27-tabs a,.ac27-actions button,#ad-import-modal button,#ad-import-modal textarea):focus-visible{
+  /* Run 054: queue/search and opportunity actions are core mobile workflow, not desktop micro-controls. */
+  html body.wdx-modern .ad-controls{
+    position:static!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:10px!important;
+    padding:12px!important;
+    overflow:visible!important;
+  }
+  html body.wdx-modern .ad-tabs{
+    display:flex!important;
+    gap:8px!important;
+    overflow-x:auto!important;
+    padding:0 0 4px!important;
+    scroll-snap-type:x proximity;
+    overscroll-behavior-inline:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  html body.wdx-modern .ad-tabs::-webkit-scrollbar{display:none}
+  html body.wdx-modern .ad-tabs button{
+    flex:0 0 auto;
+    min-height:48px!important;
+    padding:0 14px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    scroll-snap-align:start;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ad-tabs b{
+    font-size:12px!important;
+    line-height:1!important;
+  }
+  html body.wdx-modern .ad-control-right{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr) minmax(132px,38%)!important;
+    gap:8px!important;
+    margin-top:0!important;
+    min-width:0;
+  }
+  html body.wdx-modern .ad-control-right label{
+    min-width:0!important;
+    min-height:48px!important;
+    height:48px!important;
+    padding:0 12px!important;
+  }
+  html body.wdx-modern .ad-control-right input,
+  html body.wdx-modern .ad-control-right select,
+  html body.wdx-modern #ad-sort{
+    min-width:0!important;
+    min-height:48px!important;
+    height:48px!important;
+    font-size:16px!important;
+    line-height:1.25!important;
+  }
+  html body.wdx-modern .ad-card{
+    padding:16px!important;
+  }
+  html body.wdx-modern .ad-card h3{
+    font-size:18px!important;
+    line-height:1.3!important;
+  }
+  html body.wdx-modern .ad-address,
+  html body.wdx-modern .ad-address-link{
+    font-size:14px!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere;
+  }
+  html body.wdx-modern .ad-reason{
+    font-size:15px!important;
+    line-height:1.55!important;
+  }
+  html body.wdx-modern .ad-card-meta{
+    gap:8px 12px!important;
+    font-size:12px!important;
+    line-height:1.45!important;
+  }
+  html body.wdx-modern .ad-card-actions{
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:8px!important;
+  }
+  html body.wdx-modern .ad-card-actions button,
+  html body.wdx-modern .ad-card-actions a,
+  html body.wdx-modern .ad-card-actions .ad-outcome{
+    width:100%!important;
+    min-width:0!important;
+    min-height:48px!important;
+    padding:8px 10px!important;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px!important;
+    line-height:1.25!important;
+    text-align:center;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ad-card-actions .ad-outcome{
+    display:block;
+    border:1px solid var(--ad-line)!important;
+    border-radius:10px!important;
+    background:#fff!important;
+    color:var(--ad-ink)!important;
+    font-size:16px!important;
+    text-align:left;
+  }
+  html body.wdx-modern .ad-card-actions .dismiss{
+    margin-left:0!important;
+  }
+
+  html body.wdx-modern :is(.ac27-tabs a,.ac27-actions button,#ad-import-modal button,#ad-import-modal textarea,.ad-tabs button,.ad-control-right input,.ad-control-right select,.ad-card-actions button,.ad-card-actions a,.ad-card-actions select):focus-visible{
     outline:3px solid rgba(47,109,246,.38)!important;
     outline-offset:2px!important;
   }
@@ -173,5 +283,24 @@
   html body.wdx-modern #ad-import-modal .ad-saved-row>:last-child{
     grid-column:2;
     justify-self:start;
+  }
+
+  /* Run 054: avoid cramped two-up form/actions on narrow phones. */
+  html body.wdx-modern .ad-control-right,
+  html body.wdx-modern .ad-card-actions{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body.wdx-modern .ad-card-top{
+    grid-template-columns:56px minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  html body.wdx-modern .ad-score{
+    min-height:56px!important;
+  }
+  html body.wdx-modern .ad-queue{
+    grid-column:2!important;
+    justify-self:start!important;
+    font-size:12px!important;
+    line-height:1.25!important;
   }
 }
