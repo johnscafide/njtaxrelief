@@ -5,14 +5,17 @@ on:
     branches: [main]
     paths:
       - 'property/scripts/probe_dca_affordable_powerbi.py'
+      - 'property/scripts/parse_dca_zoning_directory.py'
+      - 'supabase/functions/workbench-hydrate/zoning-contact-data.json'
       - '.github/workflows/probe-dca-affordable-powerbi.yml'
       - '.github/workflows/temp-dca-affordable-dashboard-probe.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   probe:
+    if: ${{ github.head_ref != 'data-center-zoning-contact-status-20260822' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,3 +33,44 @@ jobs:
           path: property/data/*-probe.json
           if-no-files-found: error
           retention-days: 1
+
+  generate_zoning_snapshot:
+    if: ${{ github.head_ref == 'data-center-zoning-contact-status-20260822' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate exact DCA zoning snapshot
+        run: >-
+          python property/scripts/parse_dca_zoning_directory.py
+          --output supabase/functions/workbench-hydrate/zoning-contact-data.json
+      - name: Verify governed source contract
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('supabase/functions/workbench-hydrate/zoning-contact-data.json')
+          data = json.loads(path.read_text())
+          assert data['source_sha256'] == '165b1e0d7b6c14583a88c1f675d91a0e2babd1b4edaa74fa5667906c789da4f9'
+          assert data['municipality_count'] == 564
+          assert data['completeness']['directory_status'] == 564
+          assert data['completeness']['zoning_office_contact_any'] == 564
+          assert data['municipalities']['0101']['zoning_office_contact']['phone'] == '609-641-0663, ext. 113'
+          assert data['municipalities']['0101']['zoning_office_contact']['email_or_contact_page'] == 'mohagan@abseconnj.org'
+          print('DCA zoning snapshot verified: 564/564, source hash exact')
+          PY
+      - name: Commit generated snapshot to PR branch
+        run: |
+          if git diff --quiet -- supabase/functions/workbench-hydrate/zoning-contact-data.json; then
+            echo 'Snapshot already current'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add supabase/functions/workbench-hydrate/zoning-contact-data.json
+          git commit -m 'Generate governed DCA zoning directory snapshot'
+          git push origin HEAD:${{ github.head_ref }}
