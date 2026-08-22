@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "report_id": "ROBUST-v1-calibration-2026-08-22",
+  "generated_on": "2026-08-22",
+  "linear_issue": "NJW-273",
+  "parent_program": "NJW-270",
+  "model": {
+    "score_product": "Watchdog Score",
+    "framework": "ROBUST",
+    "model_version": "ROBUST-v1",
+    "marker_id": "watchdog.watchdog_score",
+    "weights": {
+      "R_recourse": 10,
+      "O_overassessment_position": 20,
+      "B_burden": 30,
+      "U_uniformity": 15,
+      "S_stability": 15,
+      "T_trajectory": 10
+    },
+    "missing_evidence_rule": "omit missing dimensions and renormalize available weights",
+    "confidence_thresholds": {
+      "high_min_coverage": 85,
+      "medium_min_coverage": 60
+    }
+  },
+  "sample": {
+    "canonical_observation_rows": 336,
+    "unique_latest_properties": 212,
+    "counties": 7,
+    "municipalities": 14,
+    "property_classes_including_unknown": 4,
+    "score": {
+      "mean": 60.2,
+      "median": 60,
+      "min": 42,
+      "max": 86
+    },
+    "bands": {
+      "A": 3,
+      "B": 9,
+      "C": 195,
+      "D": 5,
+      "E": 0
+    },
+    "coverage": {
+      "mean": 71.6,
+      "min": 70,
+      "max": 90,
+      "at_least_60": 212,
+      "at_least_70": 212,
+      "at_least_75": 21,
+      "at_least_80": 16,
+      "at_least_85": 16,
+      "at_least_90": 16
+    },
+    "component_availability": {
+      "R": 212,
+      "O": 21,
+      "B": 212,
+      "U": 212,
+      "S": 207,
+      "T": 0
+    }
+  },
+  "reproducibility": {
+    "canonical_rows_tested": 336,
+    "exact_reproductions": 336,
+    "mean_absolute_delta": 0,
+    "max_absolute_delta": 0,
+    "result": "pass"
+  },
+  "weight_perturbation_relative_20_pct": [
+    {"scenario":"R_down20","mean_abs_delta":0.224,"max_abs_delta":0.732,"band_migration_pct":0.0,"rank_corr":1.0,"top10_churn_pct":0.0},
+    {"scenario":"R_up20","mean_abs_delta":0.220,"max_abs_delta":0.722,"band_migration_pct":0.5,"rank_corr":0.99999,"top10_churn_pct":0.0},
+    {"scenario":"O_down20","mean_abs_delta":0.196,"max_abs_delta":3.837,"band_migration_pct":1.4,"rank_corr":0.98176,"top10_churn_pct":0.0},
+    {"scenario":"O_up20","mean_abs_delta":0.192,"max_abs_delta":3.711,"band_migration_pct":0.9,"rank_corr":0.99990,"top10_churn_pct":0.0},
+    {"scenario":"B_down20","mean_abs_delta":1.315,"max_abs_delta":3.576,"band_migration_pct":1.4,"rank_corr":0.99978,"top10_churn_pct":0.0},
+    {"scenario":"B_up20","mean_abs_delta":1.227,"max_abs_delta":3.378,"band_migration_pct":0.9,"rank_corr":0.99991,"top10_churn_pct":0.0},
+    {"scenario":"U_down20","mean_abs_delta":0.359,"max_abs_delta":1.341,"band_migration_pct":0.9,"rank_corr":0.99998,"top10_churn_pct":0.0},
+    {"scenario":"U_up20","mean_abs_delta":0.349,"max_abs_delta":1.330,"band_migration_pct":0.5,"rank_corr":0.99994,"top10_churn_pct":0.0},
+    {"scenario":"S_down20","mean_abs_delta":0.472,"max_abs_delta":1.317,"band_migration_pct":0.9,"rank_corr":1.0,"top10_churn_pct":0.0},
+    {"scenario":"S_up20","mean_abs_delta":0.459,"max_abs_delta":1.306,"band_migration_pct":0.5,"rank_corr":1.0,"top10_churn_pct":0.0},
+    {"scenario":"T_down20","mean_abs_delta":0.0,"max_abs_delta":0.0,"band_migration_pct":0.0,"rank_corr":1.0,"top10_churn_pct":0.0,"note":"Trajectory absent from all sampled properties"},
+    {"scenario":"T_up20","mean_abs_delta":0.0,"max_abs_delta":0.0,"band_migration_pct":0.0,"rank_corr":1.0,"top10_churn_pct":0.0,"note":"Trajectory absent from all sampled properties"}
+  ],
+  "leave_one_component_out": [
+    {"component":"R","mean_abs_delta":1.160,"max_abs_delta":3.774,"band_migration_pct":1.4,"rank_corr":1.0,"top10_churn_pct":0.0},
+    {"component":"O","mean_abs_delta":1.011,"max_abs_delta":20.582,"band_migration_pct":5.7,"rank_corr":0.80143,"top10_churn_pct":4.7},
+    {"component":"B","mean_abs_delta":7.684,"max_abs_delta":20.267,"band_migration_pct":4.2,"rank_corr":0.62874,"top10_churn_pct":7.5},
+    {"component":"U","mean_abs_delta":1.902,"max_abs_delta":6.811,"band_migration_pct":2.8,"rank_corr":0.99990,"top10_churn_pct":0.0},
+    {"component":"S","mean_abs_delta":2.508,"max_abs_delta":6.689,"band_migration_pct":0.9,"rank_corr":0.99999,"top10_churn_pct":0.0},
+    {"component":"T","mean_abs_delta":0.0,"max_abs_delta":0.0,"band_migration_pct":0.0,"rank_corr":1.0,"top10_churn_pct":0.0,"note":"Trajectory absent from all sampled properties"}
+  ],
+  "missing_evidence_stress": {
+    "current_renormalization": {"mean_abs_delta":0.0,"band_migration_pct":0.0,"decision":"keep"},
+    "impute_50": {"mean_abs_delta":2.86,"max_abs_delta":9,"band_migration_pct":1.9,"mean_signed_delta":-2.84},
+    "impute_0": {"mean_abs_delta":17.02,"max_abs_delta":21,"band_migration_pct":94.8,"mean_signed_delta":-17.02},
+    "impute_100": {"mean_abs_delta":11.35,"max_abs_delta":15,"band_migration_pct":93.9,"mean_signed_delta":11.35}
+  },
+  "evidence_gate": {
+    "decision": "defer_numeric_only_gate",
+    "reason": "Coverage percentage alone does not describe score stability. Which ROBUST dimensions are present matters materially, and the observed cohort has no Trajectory evidence and sparse Overassessment Position evidence.",
+    "current_70_pct_cohort_share": 0.9009,
+    "current_75_pct_or_higher_count": 21,
+    "guidance": "Continue exposing evidence coverage and confidence. Develop a composition-aware certification rule before suppressing unqualified Watchdog Scores."
+  },
+  "production_data_available_for_next_phase": {
+    "property_lookups": {"unique_properties":2354,"counties":19,"municipalities":70,"property_classes":7},
+    "sr1a_subject_evidence": {"rows":114859,"districts":557,"counties":21}
+  },
+  "decisions": {
+    "change_weights_now": false,
+    "weights": "keep ROBUST-v1 10/20/30/15/15/10",
+    "missing_evidence": "keep renormalization; do not impute missing dimensions",
+    "numeric_minimum_evidence_gate": "not yet certified",
+    "model_version_change": false,
+    "priority": "build a representative non-writing calibration cohort with real O and T evidence before considering ROBUST-v2"
+  },
+  "limitations": [
+    "Latest-per-property persisted score cohort contains only 212 unique properties.",
+    "The cohort covers 7 counties and 14 municipalities and is geographically skewed.",
+    "Overassessment Position is available on only 21 of 212 unique properties.",
+    "Trajectory is unavailable on all 212 unique properties, so its weight is not calibrated by this report.",
+    "This report measures structural sensitivity, not causal or outcome validity.",
+    "Leave-one-out results describe this observed cohort and are not evidence that any dimension should be removed."
+  ],
+  "runtime_hardening": {
+    "workbench_score_deployed_version": 14,
+    "warehouse_query_regression_fixed": true,
+    "fix": "Removed a nonexistent property_lookups.living_sqft select and the unsupported PPSF fallback. Overassessment Position now remains missing unless a real independent saved comparable value is available.",
+    "post_fix_integrity": {"canonical_rows":336,"invalid_flagship_rows":0,"post_cutover_legacy_alias_rows":0}
+  },
+  "harness": "/property/scripts/robust_score_calibration.sql"
+}
