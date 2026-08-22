@@ -57,7 +57,7 @@ function render() {
   }
   output.innerHTML = `<section class="tc-cards">${rows.map(row => '<div>' + townIntelligenceCard(row.district) + budgetPressureSummary(row.district) + '</div>').join('')}</section>` +
     (rows.length > 1 ? `<div class="pro-wrap tc-table"><table class="pro"><thead><tr><th>Measure</th>${rows.map(row => `<th>${esc(row.name)}</th>`).join('')}</tr></thead><tbody>` +
-      metric('Fairness score',rows,row=>row.score,'high') +
+      metric('U · Uniformity score',rows,row=>row.score,'high') +
       metric('Statewide rank',rows,row=>row.stateRank,'low') +
       metric('County rank',rows,row=>row.countyRank,'low') +
       metric('Coefficient of deviation',rows,row=>row.coefficient == null ? null : row.coefficient,'low') +
