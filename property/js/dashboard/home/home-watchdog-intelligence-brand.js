@@ -1,10 +1,11 @@
 /* Property Home Watchdog Intelligence branding bridge.
-   Customer-facing Intelligence copy uses the canonical product name, gradient wordmark,
-   and the rotating Intelligence border on Intelligence-specific surfaces. */
+   Customer-facing Intelligence copy uses the canonical product name, the Intelligence
+   spectrum on the word "Intelligence", and the rotating border only on dedicated
+   Intelligence surfaces. */
 (function(){
 'use strict';
-if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND__)return;
-window.__WATCHDOG_HOME_INTELLIGENCE_BRAND__=true;
+if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__)return;
+window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__=true;
 
 var replacements=[
   [/WATCHDOG ANALYST INTEL/g,'WATCHDOG INTELLIGENCE'],
@@ -19,7 +20,10 @@ var replacements=[
   [/Personalize my Intel/g,'Personalize Watchdog Intelligence'],
   [/Use generalized Intelligence for now/g,'Use generalized Watchdog Intelligence for now']
 ];
-var brandPhrase=/Watchdog Intelligence/i;
+var intelligenceWord=/\bIntelligence\b/i;
+var intelligenceSurfaceCopy=/Watchdog Intelligence|WATCHDOG INTELLIGENCE|PERSONALIZE WATCHDOG INTELLIGENCE/i;
+var explicitSurfaceSelector='.wdai-role-prompt,.wd-intelligence-gate-card,[data-watchdog-intelligence-modal]';
+var primaryFrameSelector='.wd-home-voice-entry,.wdai-main,.wd-intelligence-gate-card,.wdai-role-prompt,[data-watchdog-intelligence-modal]';
 
 function ensureBrandStyle(){
   if(document.querySelector('link[data-watchdog-intelligence-brand-signature]'))return;
@@ -32,10 +36,7 @@ function ensureBrandStyle(){
 function relevant(node){
   var el=node && (node.nodeType===1?node:node.parentElement);
   if(!el)return false;
-  if(el.closest('[data-watchdog-analyst-intel],.wdai,[class*="wdai"],[id*="wdai"],.wd-home-voice-entry,.wd-intelligence-gate'))return true;
-  var dialog=el.closest('[role="dialog"],.modal,[class*="modal"]');
-  if(!dialog)return false;
-  return /ANALYST INTEL|Profession-aware Intel|generalized Intel|EXACT INTEL|Watchdog Intelligence/i.test(dialog.textContent||'');
+  return !!el.closest('[data-watchdog-analyst-intel],.wdai,[class*="wdai"],[id*="wdai"],.wd-home-voice-entry,.wd-intelligence-gate,[data-watchdog-intelligence-modal]');
 }
 function replaceText(node){
   if(!node || node.nodeType!==3 || !relevant(node))return;
@@ -61,53 +62,79 @@ function replaceAttrs(root){
 function skipBrandNode(node){
   var parent=node && node.parentElement;
   if(!parent)return true;
-  if(parent.closest('.wd-intelligence-brand-text,[data-no-intelligence-brand]'))return true;
+  if(parent.closest('.wd-intelligence-brand-word,[data-no-intelligence-brand]'))return true;
   return !!parent.closest('script,style,noscript,textarea,select,option');
 }
-function brandText(node){
-  if(!node || node.nodeType!==3 || skipBrandNode(node))return;
+function brandWord(node){
+  if(!node || node.nodeType!==3 || skipBrandNode(node) || !relevant(node))return;
   var value=node.nodeValue||'';
-  if(!brandPhrase.test(value))return;
-  var parts=value.split(/(Watchdog Intelligence)/gi);
+  if(!intelligenceWord.test(value))return;
+  var parts=value.split(/(Intelligence)/gi);
   if(parts.length<2)return;
   var frag=document.createDocumentFragment();
   parts.forEach(function(part){
     if(!part)return;
-    if(part.toLowerCase()==='watchdog intelligence'){
+    if(part.toLowerCase()==='intelligence'){
       var span=document.createElement('span');
-      span.className='wd-intelligence-brand-text';
+      span.className='wd-intelligence-brand-word';
       span.textContent=part;
       frag.appendChild(span);
     }else frag.appendChild(document.createTextNode(part));
   });
   node.parentNode.replaceChild(frag,node);
 }
-function decorateSurfaces(root){
+function isGenericDialog(el){
+  return !!(el && el.matches && el.matches('[role="dialog"],.modal,[class*="modal"]'));
+}
+function approvedSurface(el){
+  if(!el || !el.matches)return false;
+  if(el.matches(explicitSurfaceSelector))return true;
+  return isGenericDialog(el) && intelligenceSurfaceCopy.test(el.textContent||'');
+}
+function collectSurfaces(root){
   var surfaces=[];
-  if(root && root.nodeType===1)surfaces.push(root);
+  if(root && root.nodeType===1 && approvedSurface(root))surfaces.push(root);
   if(root && root.querySelectorAll){
-    surfaces=surfaces.concat(Array.prototype.slice.call(root.querySelectorAll('[role="dialog"],.modal,[class*="modal"],.wdai-role-prompt,.wd-intelligence-gate-card')));
+    surfaces=surfaces.concat(Array.prototype.slice.call(root.querySelectorAll(explicitSurfaceSelector)));
+    Array.prototype.forEach.call(root.querySelectorAll('[role="dialog"],.modal,[class*="modal"]'),function(el){
+      if(approvedSurface(el))surfaces.push(el);
+    });
   }
-  surfaces.forEach(function(surface){
-    if(!surface || !brandPhrase.test(surface.textContent||''))return;
+  return surfaces.filter(function(el,index,list){return list.indexOf(el)===index;});
+}
+function decorateSurfaces(root){
+  collectSurfaces(root).forEach(function(surface){
     surface.classList.add('wd-intelligence-frame','wd-intelligence-modal-frame');
   });
 }
-function brandVisiblePhrases(root){
+function cleanupLegacyOverreach(){
+  var body=document.body;
+  if(!body)return;
+  body.classList.remove('wd-intelligence-frame','wd-intelligence-modal-frame');
+  Array.prototype.forEach.call(document.querySelectorAll('.wd-intelligence-modal-frame'),function(el){
+    if(approvedSurface(el))return;
+    el.classList.remove('wd-intelligence-modal-frame');
+    if(!el.matches(primaryFrameSelector))el.classList.remove('wd-intelligence-frame');
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.wd-intelligence-brand-text'),function(el){
+    el.classList.remove('wd-intelligence-brand-text');
+  });
+}
+function brandVisibleWords(root){
   root=root||document.body;
   if(!root)return;
-  if(root.nodeType===3){brandText(root);return;}
+  if(root.nodeType===3){brandWord(root);return;}
   var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   var nodes=[],node;
   while((node=walker.nextNode()))nodes.push(node);
-  nodes.forEach(brandText);
+  nodes.forEach(brandWord);
 }
 function sweep(root){
   root=root||document.body;
   if(!root)return;
   if(root.nodeType===3){
     replaceText(root);
-    brandText(root);
+    brandWord(root);
     return;
   }
   var walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
@@ -116,10 +143,11 @@ function sweep(root){
   nodes.forEach(replaceText);
   replaceAttrs(root);
   decorateSurfaces(root);
-  brandVisiblePhrases(root);
+  brandVisibleWords(root);
 }
 function boot(){
   ensureBrandStyle();
+  cleanupLegacyOverreach();
   sweep(document.body);
   new MutationObserver(function(mutations){
     mutations.forEach(function(mutation){

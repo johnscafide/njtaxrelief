@@ -1,16 +1,40 @@
 /* Watchdog Intelligence product signature.
-   Product-name text uses the Intelligence spectrum; dedicated Intelligence
-   dialogs/cards use the rotating border language established on Home and Dashboard. */
+   Only the word "Intelligence" receives the spectrum text treatment.
+   Dedicated Intelligence dialogs/cards may use the rotating rounded border. */
 
-body.hm-dashboard-page .wd-intelligence-brand-text {
-  display: inline;
+body.hm-dashboard-page .wd-intelligence-brand-word {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
   color: transparent !important;
-  -webkit-text-fill-color: transparent;
-  background: linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  font-weight: inherit;
+  -webkit-text-fill-color: transparent !important;
+  background: linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  font: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
   filter: saturate(1.05);
+}
+
+/* Neutralize the superseded full-phrase treatment if an older DOM survives a
+   hot reload. The current runtime no longer creates this class. */
+body.hm-dashboard-page .wd-intelligence-brand-text {
+  display: inline !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  animation: none !important;
+  color: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
 }
 
 body.hm-dashboard-page .wd-intelligence-modal-frame {
@@ -29,10 +53,10 @@ body.hm-dashboard-page .wdai-role-prompt.wd-intelligence-modal-frame {
   box-shadow: 0 12px 36px rgba(30,57,91,.10),0 0 24px rgba(72,91,255,.06) !important;
 }
 
-body.hm-dashboard-page .wd-home-voice-kicker .wd-intelligence-brand-text,
-body.hm-dashboard-page .wdai-title .wd-intelligence-brand-text,
-body.hm-dashboard-page .wd-intelligence-gate-kicker .wd-intelligence-brand-text {
-  font-weight: 900;
+body.hm-dashboard-page .wd-home-voice-kicker .wd-intelligence-brand-word,
+body.hm-dashboard-page .wdai-title .wd-intelligence-brand-word,
+body.hm-dashboard-page .wd-intelligence-gate-kicker .wd-intelligence-brand-word {
+  font-weight: 900 !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -42,7 +66,7 @@ body.hm-dashboard-page .wd-intelligence-gate-kicker .wd-intelligence-brand-text 
 }
 
 @media print {
-  body.hm-dashboard-page .wd-intelligence-brand-text {
+  body.hm-dashboard-page .wd-intelligence-brand-word {
     color: #087f83 !important;
     -webkit-text-fill-color: #087f83 !important;
     background: none !important;
