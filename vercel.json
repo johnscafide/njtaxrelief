@@ -4,6 +4,10 @@
     "api/sales-by-district.js": {
       "includeFiles": "property/sales-*.json",
       "maxDuration": 10
+    },
+    "api/watchdog-index-entry.js": {
+      "includeFiles": "property/index.html",
+      "maxDuration": 10
     }
   },
   "redirects": [
@@ -120,6 +124,7 @@
     {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
   ],
   "rewrites": [
+    {"source":"/property/","destination":"/api/watchdog-index-entry","has":[{"type":"host","value":"www.watchdogindex.com"}]},
     {"source":"/property/dashboard","destination":"/property/dashboard/index.html"},
     {"source":"/property/home","destination":"/property/home/index.html"},
     {"source":"/property/account","destination":"/property/account/index.html"},
