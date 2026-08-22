@@ -16,6 +16,10 @@
 
   var hostname = String(window.location && window.location.hostname || '').toLowerCase();
   var previewHost = hostname === 'localhost' || hostname === '127.0.0.1' || /\.vercel\.app$/.test(hostname);
+  var cleanWatchdogHost = hostname === 'www.watchdogindex.com' || hostname === 'watchdogindex.com';
+  var routePrefix = cleanWatchdogHost ? '' : '/property';
+  var dashboardPath = routePrefix + '/dashboard/';
+  var onboardingPath = routePrefix + '/onboarding/';
   var selected = previewHost ? staging : production;
   var client = null;
   var providerDefaults = {
@@ -62,21 +66,35 @@
     return out;
   }
 
+  function logicalPath(pathname) {
+    var path = String(pathname || '/');
+    if (cleanWatchdogHost && (path === '/property' || path.indexOf('/property/') === 0)) {
+      path = path.slice('/property'.length) || '/';
+    }
+    return path;
+  }
+
   function safeNext(value) {
-    var fallback = String(location.pathname || '/property/dashboard/') + String(location.search || '') + String(location.hash || '');
+    var fallback = String(location.pathname || dashboardPath) + String(location.search || '') + String(location.hash || '');
     try {
       var parsed = new URL(value || fallback, location.origin);
-      if (parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0) {
-        return '/property/dashboard/';
+      if (parsed.origin !== location.origin) return dashboardPath;
+
+      var path = logicalPath(parsed.pathname);
+      if (cleanWatchdogHost) {
+        if (path === '/onboarding' || path.indexOf('/onboarding/') === 0 || path.indexOf('/api/') === 0) return dashboardPath;
+        return path + parsed.search + parsed.hash;
       }
-      return parsed.pathname + parsed.search + parsed.hash;
+
+      if (path.indexOf('/property/') !== 0 || path.indexOf('/property/onboarding') === 0) return dashboardPath;
+      return path + parsed.search + parsed.hash;
     } catch (_error) {
-      return '/property/dashboard/';
+      return dashboardPath;
     }
   }
 
   function onboardingRedirect(next) {
-    return location.origin + '/property/onboarding/?next=' + encodeURIComponent(safeNext(next));
+    return location.origin + onboardingPath + '?next=' + encodeURIComponent(safeNext(next));
   }
 
   function openOnboarding(next) {
@@ -153,9 +171,9 @@
   }
 
   function isProtectedMemberPath() {
-    var path = String(location.pathname || '').replace(/\/+$/, '');
-    if (path.indexOf('/property/onboarding') === 0) return false;
-    return /^\/property\/(dashboard|home|account|agent-control|agent-desk|analytics|integrations|marketing-studio|pro-hub|data-center|backoffice|pulse|compare|reports|watchlist)(?:\/|$)/.test(path);
+    var path = logicalPath(String(location.pathname || '')).replace(/\/+$/, '');
+    if (path === '/onboarding' || path.indexOf('/onboarding/') === 0) return false;
+    return /^\/(dashboard|home|account|agent-control|agent-desk|analytics|integrations|marketing-studio|pro-hub|data-center|backoffice|pulse|compare|reports|watchlist)(?:\/|$)/.test(path);
   }
 
   function clearGate() {
@@ -227,6 +245,8 @@
     key: selected.key,
     environment: selected.environment,
     isPreview: previewHost,
+    cleanRoutes: cleanWatchdogHost,
+    routePrefix: routePrefix,
     storageKey: 'sb-' + selected.ref + '-auth-token',
     createClient: createClient,
     onboardingUrl: onboardingRedirect,
