@@ -1,12 +1,18 @@
-/* NJW-246 Run 048 — Marketing Studio Direct Mail Analytics mobile certification layer.
+/* NJW-246 Runs 048-049 — Marketing Studio Direct Mail Analytics mobile certification layer.
    Loaded only for <=720px so desktop behavior remains unchanged. */
 @media (max-width:720px){
   body{overflow-x:hidden}
-  .dmaa-top{min-height:64px;padding:10px max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
+  .dmaa-top{height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:calc(10px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
   .dmaa-top>a{min-height:44px;min-width:0;gap:8px}
   .dmaa-top>a i{font-size:20px}
   .dmaa-top>a b{font-size:17px;white-space:nowrap}
   .dmaa-top>a span{font-size:11px;line-height:1.2;padding:6px 8px}
+
+  /* Run 049: the shared <=720px rule hid the only explicit Campaigns/Dashboard nav.
+     Keep both destinations reachable as a compact phone command row instead. */
+  .dmaa-top nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .dmaa-top nav a{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;padding:0 12px;border-radius:10px;background:#f2f5f8;color:#344054;font-size:14px;line-height:1.2;font-weight:800;text-align:center;touch-action:manipulation}
+
   #direct-mail-admin{padding:20px max(14px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
   .dmaa-loading{padding:56px 12px;font-size:15px;line-height:1.5}
   .dmaa-hero{gap:16px;margin-bottom:18px}
@@ -80,7 +86,7 @@
 }
 @media (max-width:440px){
   .dmaa-top>a b{font-size:15px}
-  .dmaa-top>a span{font-size:10px}
+  .dmaa-top>a span{font-size:11px}
   .dmaa-stat{padding:14px}
   .dmaa-table td{grid-template-columns:1fr;gap:4px}
   .dmaa-table td::before{margin-bottom:1px}
