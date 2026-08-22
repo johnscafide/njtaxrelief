@@ -49,6 +49,24 @@ function inverseDebtShare(v: any) { const x = num(v); return x == null ? null : 
 function codRisk(v: any) { const x = num(v); return x == null ? null : clamp((x - 15) / 20 * 100); }
 function sampleDepth150(v: any) { const x = num(v); return x == null ? null : clamp(Math.max(0, x) / 150 * 100); }
 function assessmentRatioGapRisk(subjectRatio: any, official: any) { const subject = num(subjectRatio); const publishedPct = num(official?.ratio); if (subject == null || subject <= 0 || publishedPct == null || publishedPct <= 0) return null; const published = publishedPct / 100; return clamp(Math.abs(subject - published) / 0.20 * 100); }
+function yearObject(v: any) { return v && typeof v === 'object' && !Array.isArray(v) ? v as Record<string, any> : null; }
+function orderedAssessmentHistory(landRaw: any, improvementRaw: any, totalRaw: any) {
+  const land = yearObject(landRaw), improvement = yearObject(improvementRaw), total = yearObject(totalRaw);
+  if (!land && !improvement && !total) return null;
+  const keys = new Set<string>();
+  for (const source of [land, improvement, total]) for (const key of Object.keys(source || {})) if (/^(19|20)\d{2}$/.test(key)) keys.add(key);
+  const years = [...keys].map(Number).filter(Number.isFinite).sort((a, b) => a - b);
+  if (!years.length) return null;
+  return years.map((year) => {
+    const key = String(year);
+    return {
+      year,
+      land: land && Object.prototype.hasOwnProperty.call(land, key) ? num(land[key]) : null,
+      improvement: improvement && Object.prototype.hasOwnProperty.call(improvement, key) ? num(improvement[key]) : null,
+      total: total && Object.prototype.hasOwnProperty.call(total, key) ? num(total[key]) : null,
+    };
+  });
+}
 
 async function loadSr1aSummary() {
   if (sr1aSummaryCache && Date.now() - sr1aSummaryAt < 21600000) return sr1aSummaryCache;
@@ -157,6 +175,7 @@ Deno.serve(async (req: Request) => {
       else if (def.operation === 'completeness') { const requirements: any[] = Array.isArray(cfg.requirements) ? cfg.requirements : (def.dependencies || []); if (requirements.length) { const ok = (q: any) => { if (cfg.mode === 'checked' && typeof q === 'string') return defMap.has(q) ? present(value(q)) : checked(q); if (typeof q === 'string') return present(value(q)); if (q?.all) return q.all.every((x: string) => present(value(x))); if (q?.ratio) { const a = num(value(q.ratio[0])), z = num(value(q.ratio[1])); return a != null && z != null && z !== 0; } return false; }; v = Math.round(requirements.filter(ok).length / requirements.length * 100); } }
       else if (def.operation === 'inverse') { const x = num(value(cfg.dep)); if (x != null) v = clamp(100 - x); }
       else if (def.operation === 'source_alias') { const dep = String(cfg.dep || ''); const x = dep ? value(dep) : null; if (present(x)) { v = x; const depMeta: any = rawMeta[dep] || {}; auxMeta.set(id, { alias_dependency: dep, reference_source: depMeta.source || null, reference_provider_kind: depMeta.provider_kind || null, reference_observed_at: depMeta.observed_at || null, reference_checked_at: depMeta.checked_at || null }); } }
+      else if (def.operation === 'ordered_history') { const landDep = String(cfg.land_dep || ''), improvementDep = String(cfg.improvement_dep || ''), totalDep = String(cfg.total_dep || ''); const trace = orderedAssessmentHistory(landDep ? value(landDep) : null, improvementDep ? value(improvementDep) : null, totalDep ? value(totalDep) : null); if (trace) { v = trace; auxMeta.set(id, { history_years: trace.map((row: any) => row.year), missing_years_synthesized: false, trace_contract: 'actual_source_years_only' }); } }
       else if (def.operation === 'chapter123_field') { const official = chapterDistricts[districtCode(pin)] || null, field = String(cfg.field || ''); if (official && ['ratio','lower','upper'].includes(field)) { const x = num(official[field]); if (x != null) { v = x; auxMeta.set(id, { chapter123_field: field, reference_source: 'NJ Division of Taxation 2026 Chapter 123 · ' + CHAPTER123_PROVIDER }); } } }
       else if (def.operation === 'permit_closure') { const permits = num(value('preflight.permit_count')), open = num(value('preflight.open_permit_count')); if (permits != null || open != null) { if ((permits || 0) <= 0) v = (open || 0) > 0 ? 0 : 100; else v = Math.round((1 - Math.min((open || 0) / permits!, 1)) * 100); } }
       else if (def.operation === 'permit_activity') { const permits = num(value('preflight.permit_count')), open = num(value('preflight.open_permit_count')); if (permits != null || open != null) v = clamp(Math.round(Math.min(permits || 0, 20) * 3 + Math.min(open || 0, 10) * 8)); }
