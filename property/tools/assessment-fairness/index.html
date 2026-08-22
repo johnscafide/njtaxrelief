@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NJ Assessment Fairness Tool</title>
-  <meta name="description" content="See how consistently your New Jersey municipality assesses property values using official coefficient of deviation statistics.">
+  <title>ROBUST U — Assessment Uniformity Tool | Watchdog</title>
+  <meta name="description" content="See how consistently a New Jersey municipality assesses property values using official coefficient of deviation statistics. This is U — Uniformity in the Watchdog ROBUST Framework.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,24 +12,24 @@
 </head>
 <body data-access-require="developer"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/access-guard.js?v=20260807a"></script>
   <header class="af-header">
-    <a href="/property/" class="af-brand">NJ Property Intelligence</a>
-    <a href="/property/" class="af-back">Property Lookup</a>
+    <a href="/property/" class="af-brand">Watchdog Property Intelligence</a>
+    <a href="/property/robust/uniformity/" class="af-back">About U — Uniformity</a>
   </header>
 
   <main>
     <section class="af-hero">
       <div class="af-shell af-hero-grid">
         <div>
-          <p class="af-kicker">Assessment Fairness Tool</p>
+          <p class="af-kicker">ROBUST Framework · U · Uniformity</p>
           <h1>How consistently does your town assess homes?</h1>
-          <p class="af-lead">Choose a New Jersey municipality to turn its official coefficient of deviation into a clear, homeowner-friendly fairness report.</p>
+          <p class="af-lead">Choose a New Jersey municipality to turn its official coefficient of deviation into a clear, homeowner-friendly assessment-consistency report.</p>
         </div>
         <form id="municipalityForm" class="af-search-card">
           <label for="municipalitySelect">Municipality</label>
           <select id="municipalitySelect" required>
             <option value="">Choose a municipality</option>
           </select>
-          <button type="submit">View fairness report</button>
+          <button type="submit">View uniformity report</button>
           <p id="dataStatus" class="af-data-status" aria-live="polite">Loading municipality data…</p>
         </form>
       </div>
@@ -38,12 +38,12 @@
     <section id="report" class="af-report af-shell" hidden>
       <div class="af-report-head">
         <div>
-          <p class="af-kicker">Municipal report</p>
+          <p class="af-kicker">ROBUST U · Municipal context</p>
           <h2 id="reportTitle"></h2>
           <p id="reportMeta" class="af-muted"></p>
         </div>
         <div id="scoreBadge" class="af-score-badge">
-          <span>Fairness score</span>
+          <span>Uniformity score</span>
           <strong id="scoreValue">—</strong>
           <small id="scoreLabel">—</small>
         </div>
@@ -79,7 +79,7 @@
               <p class="af-label">COD history</p>
               <h3>Consistency over time</h3>
             </div>
-            <span class="af-legend">Lower is generally better</span>
+            <span class="af-legend">Lower COD generally means tighter consistency</span>
           </div>
           <div id="chart" class="af-chart" role="img" aria-label="Coefficient of deviation history chart"></div>
         </article>
@@ -89,32 +89,33 @@
           <h3 id="appealTitle"></h3>
           <p id="appealText"></p>
           <div class="af-callout">
-            <strong>Important:</strong> A municipal COD does not prove that one property is over-assessed. It is a screening signal, not an individual valuation.
+            <strong>Important:</strong> U — Uniformity is municipality-wide context. A municipal COD does not prove that one property is overassessed. Individual assessment position belongs under O — Overassessment Position.
           </div>
           <a href="../appeal-potential/" class="af-link-button">Calculate appeal potential</a>
         </article>
       </div>
 
       <article class="af-card af-methodology">
-        <p class="af-label">About the measure</p>
-        <h3>What is coefficient of deviation?</h3>
-        <p>COD measures how closely individual assessment ratios cluster around the municipality's median ratio. A lower COD usually indicates more uniform assessments; a higher COD indicates greater variation. This tool converts that statistical measure into a relative score and plain-language comparison.</p>
+        <p class="af-label">ROBUST methodology</p>
+        <h3>What is Coefficient of Deviation?</h3>
+        <p>COD measures how closely individual assessment ratios cluster around the municipality's median ratio. A lower COD usually indicates more uniform assessments; a higher COD indicates greater variation. This tool converts that statistical measure into a relative consistency score and plain-language comparison.</p>
         <details>
-          <summary>How the score is calculated</summary>
-          <p>The fairness score is a transparent consumer-facing index derived from the municipality's latest COD relative to the range in the loaded dataset. It is not an official state score and should not be presented as one.</p>
+          <summary>How this tool score is calculated</summary>
+          <p>The Uniformity tool score is a transparent consumer-facing index derived from the municipality's latest COD relative to the range in the loaded dataset. It is not an official state score. It also is not necessarily identical to the U component inside every version of the Watchdog Score, which remains governed and versioned separately.</p>
         </details>
+        <p><a href="/property/robust/uniformity/">Read the full U — Uniformity definition, evidence and limitations.</a></p>
       </article>
     </section>
 
     <section id="emptyState" class="af-shell af-empty">
-      <div class="af-empty-icon">NJ</div>
+      <div class="af-empty-icon">U</div>
       <h2>Select a municipality to begin</h2>
-      <p>The report will show its consistency score, statewide comparison, trend, and appeal context.</p>
+      <p>The report will show its consistency score, statewide comparison, trend and appeal context.</p>
     </section>
   </main>
 
   <footer class="af-footer">
-    <div class="af-shell">For educational use. Verify current figures with the New Jersey Division of Taxation before making financial or legal decisions.</div>
+    <div class="af-shell">Watchdog Score · powered by the ROBUST Framework. For educational use. Verify current figures with the New Jersey Division of Taxation before making financial or legal decisions.</div>
   </footer>
   <script src="assessment-fairness.js"></script>
 </body>
