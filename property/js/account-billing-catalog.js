@@ -6,6 +6,7 @@
   var baseUrl = String(runtime.url || FALLBACK_URL).replace(/\/$/, '');
   var catalog = null;
   var loading = false;
+  var observer = null;
 
   function money(value, decimals) {
     return new Intl.NumberFormat('en-US', {
@@ -14,6 +15,12 @@
       minimumFractionDigits: decimals ? 2 : 0,
       maximumFractionDigits: decimals ? 2 : 0
     }).format(Number(value || 0));
+  }
+
+  function setText(node, value) {
+    if (!node) return;
+    var next = String(value == null ? '' : value);
+    if (node.textContent !== next) node.textContent = next;
   }
 
   function planForCard(card) {
@@ -45,17 +52,17 @@
       var price = card.querySelector('.ac-price b');
       var unit = card.querySelector('.ac-price span');
       var note = card.querySelector(':scope > small');
-      if (price) price.textContent = money(amount, false);
-      if (unit) unit.textContent = annual ? '/year' : '/month';
+      setText(price, money(amount, false));
+      setText(unit, annual ? '/year' : '/month');
 
       if (note) {
         if (annual) {
           var monthly = Number(catalog.plans[key].monthly && catalog.plans[key].monthly.amount);
           var effective = amount / 12;
           var savings = Number.isFinite(monthly) ? (monthly * 12) - amount : 0;
-          note.textContent = money(effective, true) + '/mo effective' + (savings > 0 ? ' · save ' + money(savings, false) + '/yr' : '');
+          setText(note, money(effective, true) + '/mo effective' + (savings > 0 ? ' · save ' + money(savings, false) + '/yr' : ''));
         } else {
-          note.textContent = 'Billed monthly';
+          setText(note, 'Billed monthly');
         }
       }
     });
@@ -82,21 +89,36 @@
     });
   }
 
+  function refreshCatalogDisplay() {
+    if (!document.getElementById('membership-options')) return;
+    loadCatalog();
+    applyCatalog();
+  }
+
+  function observeAccountRenders() {
+    var app = document.getElementById('ac-app');
+    if (!app || observer) return;
+    observer = new MutationObserver(function () {
+      refreshCatalogDisplay();
+    });
+    // account.js replaces ac-app's direct children when membership/profile state changes.
+    // Watching only that structural boundary prevents price text updates from retriggering us.
+    observer.observe(app, { childList: true, subtree: false });
+  }
+
   document.addEventListener('click', function (event) {
-    if (event.target.closest('[data-cadence]')) setTimeout(applyCatalog, 0);
+    if (event.target.closest('[data-cadence]')) setTimeout(refreshCatalogDisplay, 0);
   });
 
-  var observer = new MutationObserver(function () {
-    if (document.getElementById('membership-options')) {
-      loadCatalog();
-      applyCatalog();
-    }
-  });
-  observer.observe(document.documentElement, { childList: true, subtree: true });
+  function start() {
+    observeAccountRenders();
+    loadCatalog();
+    refreshCatalogDisplay();
+  }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadCatalog, { once: true });
+    document.addEventListener('DOMContentLoaded', start, { once: true });
   } else {
-    loadCatalog();
+    start();
   }
 })();
