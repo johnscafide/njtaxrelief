@@ -1,42 +1,48 @@
 # Watchdog v0.47 — commerce catalog and workspace repair
 
-## What changed
+> **Historical release record — not current billing authority.** This document records the Paddle-era v0.47 implementation and its then-current prices. It is retained as release chronology. New Watchdog subscriptions are now Stripe-authoritative. For current pricing and launch instructions use `docs/billing-launch-status.md`, `docs/v046-production-readiness.md`, and `docs/stripe-live-acceptance-runbook.md`. Do not configure new Paddle products or use the prices below as current customer-facing pricing.
 
-- Professional Report Builder now accepts the six current profession presets while preserving all seven legacy preset values.
-- Dashboard removes its Leaflet portfolio map when the locked Pro workspace is selected, so map panes cannot cover pricing or upgrade content.
-- Locked Pro content uses document flow instead of a fixed overlay height, with a complete mobile CTA and no clipped feature list.
-- Agent Intel has safer header, body and bottom spacing on desktop and phone layouts.
-- Account & Billing now presents the customer-facing catalog:
+## What changed in v0.47
+
+- Professional Report Builder accepted the six then-current profession presets while preserving all seven legacy preset values.
+- Dashboard removed its Leaflet portfolio map when the locked Pro workspace was selected, so map panes could not cover pricing or upgrade content.
+- Locked Pro content used document flow instead of a fixed overlay height, with a complete mobile CTA and no clipped feature list.
+- Agent Intel received safer header, body and bottom spacing on desktop and phone layouts.
+- Account & Billing at that historical release presented:
   - Free — $0
   - Agent — $29/month or $290/year
   - Professional — $349/month or $3,490/year
   - Firm / API — $1,000+/month, controlled enrollment only
-- Yearly billing is selected by default and represents two free months compared with monthly billing.
-- Paddle checkout and webhook functions distinguish monthly and annual Agent/Professional Price IDs while retaining the stable `standard`, `pro`, `pro_plus` and `teams` authorization tiers.
+- Yearly billing was selected by default and represented two free months compared with monthly billing.
+- Paddle checkout and webhook functions distinguished monthly and annual Agent/Professional Price IDs while retaining the stable authorization-tier concepts then in use.
 
-## Upload paths
+These prices and provider instructions are superseded. Current production pricing is Free / Agent $59 / Pro $129 / Pro+ $399 monthly, with the corresponding yearly catalog defined by the current Stripe billing contract.
 
-All files retain repository-relative paths. Upload the contents of the release ZIP into the repository root, preserving folders.
+## Historical upload paths
 
-## Database deployment
+All files retained repository-relative paths. The historical release ZIP was intended to be uploaded into the repository root, preserving folders.
 
-Apply:
+## Historical database deployment
+
+The v0.47 database instruction was:
 
 ```bash
 supabase db push
 ```
 
-The new migration is additive and compatibility-focused:
+The additive compatibility migration was:
 
 ```text
 supabase/migrations/20260810031500_watchdog_v047_report_preset_compatibility.sql
 ```
 
-It replaces only the `professional_reports_preset_check` constraint and accepts both legacy and current preset values. It does not rewrite existing rows.
+It replaced only the `professional_reports_preset_check` constraint and accepted both legacy and then-current preset values. It did not rewrite existing rows.
 
-## Paddle catalog configuration
+## Historical Paddle catalog configuration — superseded
 
-Create four recurring Prices in Paddle Live and set these Supabase Edge Function secrets:
+The following instructions describe the v0.47 Paddle-era launch path and **must not be executed for new Watchdog subscriptions**.
+
+At that time, the release expected four recurring Paddle prices and these Edge Function secrets:
 
 ```text
 PADDLE_PRICE_AGENT_MONTHLY
@@ -45,7 +51,7 @@ PADDLE_PRICE_PROFESSIONAL_MONTHLY
 PADDLE_PRICE_PROFESSIONAL_YEARLY
 ```
 
-Also confirm the existing Live values for:
+It also expected:
 
 ```text
 PADDLE_API_KEY
@@ -55,27 +61,17 @@ PADDLE_ENVIRONMENT=live
 BILLING_CHECKOUT_ENABLED=false
 ```
 
-Then deploy:
+and deployment of the then-current checkout and Paddle webhook functions.
 
-```bash
-supabase functions deploy create-checkout-session
-supabase functions deploy paddle-webhook --no-verify-jwt
-```
+That provider path is now historical. The remaining Paddle runtime exists only for the existing legacy Paddle subscriber and cannot satisfy the current Stripe Live release gate.
 
-Keep `BILLING_CHECKOUT_ENABLED=false` until the controlled Live acceptance checklist in `supabase/functions/BILLING-SETUP.md` passes. Do not configure a Firm / API Price yet; that enrollment path deliberately remains gated.
+## Historical v0.47 acceptance checklist — superseded
 
-## Required acceptance before public enrollment
+The original release required controlled Paddle purchase, interval change, Professional upgrade, cancellation/reversal, failed/past-due recovery, idempotency checks, role acceptance, Paddle reconciliation, and an isolated restore drill before public enrollment.
 
-1. Buy Agent monthly with a controlled Live account and verify the signed webhook grants `pro`.
-2. Switch to Agent yearly and verify the same subscription changes Price without duplicating the subscription.
-3. Upgrade to Professional monthly and then yearly; verify `pro_plus` only after signed webhook receipt.
-4. Schedule cancellation, reverse it, force a failed/past-due state and verify Portal recovery.
-5. Confirm duplicate and out-of-order notifications do not overwrite newer entitlement state.
-6. Run the persisted Standard, Agent, Professional and Developer role suite.
-7. Reconcile Paddle subscriptions to `account_entitlements` and complete the isolated restore drill.
-8. Only then set `BILLING_CHECKOUT_ENABLED=true` for public traffic.
+Those historical assertions remain useful audit evidence, but the current paid-enrollment acceptance authority is `docs/stripe-live-acceptance-runbook.md` and Linear NJW-42.
 
-## Verification
+## Historical verification commands
 
 ```bash
 node property/tests/v047-commerce-workspace.mjs
@@ -84,3 +80,4 @@ node property/tests/security-contracts.mjs
 node property/scripts/audit_access_boundaries.mjs
 ```
 
+These commands remain release-history checks; they do not by themselves satisfy the current Stripe Live lifecycle gate.
