@@ -285,12 +285,12 @@
   async function install() {
     try {
       await Promise.resolve(window.njptrAccessReady);
-      client = window.NJPTRAccess?.client?.();
+      client = window.NJPTRAccess?.client?.() || window.NJPTRSupabaseRuntime?.createClient?.();
       if (!client) return;
       observePanel();
       const existing = $('#dwa-panel');
       if (existing) installComposeControls(existing);
-    } catch (_) { /* Access guard owns the signed-out experience. */ }
+    } catch (_) { /* Signed-out and unavailable runtime surfaces remain inert. */ }
   }
 
   window.addEventListener('beforeunload', () => {
