@@ -6,6 +6,7 @@ const root = process.cwd();
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
 const css = read('property/css/brand-consistency.css');
 const runtime = read('property/js/brand-consistency-runtime.js');
+const universalMenu = read('property/js/watchdog-universal-menu.js');
 const agentShell = read('property/js/agent-control-shell-2027.js');
 const agentReadability = read('property/css/agent-control-readability.css');
 const agentDiscover = read('property/css/agent-discover.css');
@@ -33,8 +34,10 @@ const checks = [
   ['notification labels readable', css.includes('.wd6-note b{font-size:12px!important') && css.includes('.wd6-note small{font-size:12px!important')],
   ['current app focus visible', css.includes(':focus-visible') && css.includes('outline:2px solid var(--wd-primary)!important')],
   ['current app reduced motion', css.includes('@media (prefers-reduced-motion:reduce)')],
-  ['canonical navigation includes Property Home', runtime.includes("label:'Property Home'")],
-  ['canonical navigation includes Professional Hub', runtime.includes("label:'Professional Hub'")],
+  ['brand runtime delegates navigation to universal source', runtime.includes('/property/js/watchdog-universal-menu.js') && runtime.includes('WatchdogUniversalMenu.refresh')],
+  ['canonical navigation includes Property Home', universalMenu.includes("label:'Property Home'")],
+  ['canonical navigation includes ROBUST Framework', universalMenu.includes("label:'ROBUST Framework'")],
+  ['canonical navigation includes Professional Hub', universalMenu.includes("label:'Professional Hub'")],
   ['Agent Control loads canonical brand CSS', agentShell.includes("BRAND_STYLE='/property/css/brand-consistency.css'") && agentShell.includes('ensureStyle(BRAND_STYLE)')],
   ['Agent Control loads final readability overlay', agentShell.includes("READABILITY_STYLE='/property/css/agent-control-readability.css'") && agentShell.includes('ensureStyle(READABILITY_STYLE)')],
   ['Agent Control loads canonical brand runtime', agentShell.includes("BRAND_RUNTIME='/property/js/brand-consistency-runtime.js'")],
