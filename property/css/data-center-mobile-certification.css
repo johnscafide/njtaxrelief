@@ -1,0 +1,69 @@
+/* Watchdog Data Center final mobile shell certification — Run 063 */
+@media (max-width: 720px) {
+  body[data-sidebar-page="data-center"].wdx-modern .wdx-topbar {
+    height: auto !important;
+    min-height: calc(68px + env(safe-area-inset-top)) !important;
+    padding-top: env(safe-area-inset-top) !important;
+    padding-left: max(14px, env(safe-area-inset-left)) !important;
+    padding-right: max(14px, env(safe-area-inset-right)) !important;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern .wdx-pagebar {
+    padding-left: max(14px, env(safe-area-inset-left)) !important;
+    padding-right: max(14px, env(safe-area-inset-right)) !important;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern .wd4-nav-panel {
+    left: max(8px, env(safe-area-inset-left)) !important;
+    right: max(8px, env(safe-area-inset-right)) !important;
+    top: max(8px, env(safe-area-inset-top)) !important;
+    bottom: max(8px, env(safe-area-inset-bottom)) !important;
+    width: auto !important;
+    max-width: 330px !important;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern .wd4-nav-close {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    touch-action: manipulation;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern .wd4-nav-links a,
+  body[data-sidebar-page="data-center"].wdx-modern .wd4-nav-foot button {
+    min-height: 48px !important;
+    font-size: 14px !important;
+    touch-action: manipulation;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern #wd6-profile,
+  body[data-sidebar-page="data-center"].wdx-modern #wd6-notices {
+    right: max(10px, env(safe-area-inset-right)) !important;
+    left: max(10px, env(safe-area-inset-left)) !important;
+    top: max(76px, calc(env(safe-area-inset-top) + 66px)) !important;
+    width: auto !important;
+    max-height: calc(100dvh - 92px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+    overflow: auto !important;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern #wd6-notices .wd6-nlist {
+    max-height: min(52dvh, 440px) !important;
+  }
+
+  body[data-sidebar-page="data-center"].wdx-modern .wdx-menu,
+  body[data-sidebar-page="data-center"].wdx-modern .wdx-icon,
+  body[data-sidebar-page="data-center"].wdx-modern .wdx-user {
+    min-width: 44px !important;
+    min-height: 44px !important;
+    touch-action: manipulation;
+  }
+}
+
+@media (max-width: 420px) {
+  body[data-sidebar-page="data-center"].wdx-modern .wd4-nav-panel {
+    max-width: none !important;
+  }
+}
