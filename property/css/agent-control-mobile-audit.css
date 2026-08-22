@@ -266,6 +266,125 @@
     outline:3px solid rgba(47,109,246,.38)!important;
     outline-offset:2px!important;
   }
+
+  /* Run 055: Territory Intelligence and Value Created/funnel must be scannable and finger-safe on phones. */
+  html body.wdx-modern .ad-control-plane{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:12px!important;
+  }
+  html body.wdx-modern .ad-territory-panel,
+  html body.wdx-modern .ad-funnel-panel{
+    padding:16px!important;
+  }
+  html body.wdx-modern .ad-territory-panel>header,
+  html body.wdx-modern .ad-funnel-panel>header{
+    gap:10px!important;
+  }
+  html body.wdx-modern .ad-territory-panel h2,
+  html body.wdx-modern .ad-funnel-panel h2{
+    font-size:19px!important;
+    line-height:1.25!important;
+  }
+  html body.wdx-modern .ad-territory-panel header span,
+  html body.wdx-modern .ad-funnel-panel header span{
+    font-size:12px!important;
+    line-height:1.25!important;
+  }
+  html body.wdx-modern .ad-territory-panel header button{
+    min-width:44px!important;
+    min-height:48px!important;
+    height:auto!important;
+    padding:8px 12px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ad-funnel-panel header select{
+    min-width:132px!important;
+    min-height:48px!important;
+    height:48px!important;
+    font-size:16px!important;
+  }
+  html body.wdx-modern .ad-territory{
+    grid-template-columns:44px minmax(0,1fr)!important;
+    gap:10px 12px!important;
+    padding:14px 0!important;
+    align-items:start!important;
+  }
+  html body.wdx-modern .ad-territory>i{
+    width:44px!important;
+    height:44px!important;
+    border-radius:11px!important;
+  }
+  html body.wdx-modern .ad-territory>div{
+    min-width:0;
+  }
+  html body.wdx-modern .ad-territory b{
+    font-size:15px!important;
+    line-height:1.35!important;
+    overflow-wrap:anywhere;
+  }
+  html body.wdx-modern .ad-territory span{
+    font-size:13px!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere;
+  }
+  html body.wdx-modern .ad-territory small{
+    font-size:12px!important;
+    line-height:1.45!important;
+    overflow-wrap:anywhere;
+  }
+  html body.wdx-modern .ad-territory button{
+    grid-row:2;
+    width:100%!important;
+    min-width:0!important;
+    min-height:44px!important;
+    height:auto!important;
+    padding:8px 12px!important;
+    font-size:14px!important;
+    line-height:1.25!important;
+    touch-action:manipulation;
+  }
+  html body.wdx-modern .ad-territory button:nth-last-child(2){
+    grid-column:1;
+  }
+  html body.wdx-modern .ad-territory button:last-child{
+    grid-column:2;
+  }
+  html body.wdx-modern .ad-territory-empty{
+    min-height:72px;
+    gap:12px!important;
+  }
+  html body.wdx-modern .ad-territory-empty b{
+    font-size:15px!important;
+    line-height:1.35!important;
+  }
+  html body.wdx-modern .ad-territory-empty p{
+    font-size:14px!important;
+    line-height:1.5!important;
+  }
+  html body.wdx-modern .ad-funnel{
+    gap:14px!important;
+    margin-top:16px!important;
+  }
+  html body.wdx-modern .ad-funnel-stage>div{
+    gap:12px;
+    font-size:14px!important;
+    line-height:1.35!important;
+  }
+  html body.wdx-modern .ad-funnel-stage>i{
+    height:10px!important;
+    margin:7px 0!important;
+  }
+  html body.wdx-modern .ad-funnel-stage small,
+  html body.wdx-modern .ad-funnel-note{
+    font-size:12px!important;
+    line-height:1.45!important;
+  }
+  html body.wdx-modern :is(.ad-territory-panel button,.ad-funnel-panel select,.ad-territory button):focus-visible{
+    outline:3px solid rgba(47,109,246,.38)!important;
+    outline-offset:2px!important;
+  }
 }
 
 @media (max-width:420px){
@@ -302,5 +421,16 @@
     justify-self:start!important;
     font-size:12px!important;
     line-height:1.25!important;
+  }
+
+  /* Run 055: stack panel header controls when phone width is genuinely constrained. */
+  html body.wdx-modern .ad-territory-panel>header,
+  html body.wdx-modern .ad-funnel-panel>header{
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body.wdx-modern .ad-territory-panel header button,
+  html body.wdx-modern .ad-funnel-panel header select{
+    width:100%!important;
   }
 }
