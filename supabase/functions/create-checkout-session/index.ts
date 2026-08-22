@@ -29,8 +29,8 @@ function allowedOrigin(req: Request) {
     if (
       host === 'njpropertytaxrelief.com' ||
       host === 'www.njpropertytaxrelief.com' ||
-      host === 'watchdogre.com' ||
-      host === 'www.watchdogre.com' ||
+      host === 'watchdogindex.com' ||
+      host === 'www.watchdogindex.com' ||
       host === 'localhost' ||
       host === '127.0.0.1' ||
       host.endsWith('.vercel.app')
