@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "report_id": "ROBUST-v1-evidence-expansion-2026-08-22",
+  "generated_on": "2026-08-22",
+  "linear_issue": "NJW-273",
+  "parent_program": "NJW-270",
+  "model_version": "ROBUST-v1",
+  "purpose": "Record evidence-path expansion discovered and shipped after the initial calibration baseline. This is not a weight change and does not create ROBUST-v2.",
+  "trajectory_substrate": {
+    "warehouse_properties": 2354,
+    "with_sr1a_district_evidence": 2353,
+    "basic_defensible_sale_candidates": 1784,
+    "candidate_pct": 75.8,
+    "candidate_counties": 18,
+    "candidate_municipalities": 54,
+    "candidate_property_classes": 5,
+    "note": "These are candidate prerequisites from warehouse sale fields plus governed district evidence. They are not newly persisted Watchdog Scores."
+  },
+  "overassessment_position_substrate": {
+    "warehouse_properties": 2354,
+    "parcel_keys_tested": 2354,
+    "sr1a_subject_matches": 113,
+    "matches_with_living_space": 112,
+    "exact_qualifier_matches": 83,
+    "unique_parcel_fallbacks": 30,
+    "living_space_match_counties": 8,
+    "saved_independent_value_properties": 21,
+    "overlap_between_saved_and_subject_living_space": 0,
+    "union_independent_evidence_properties": 133,
+    "union_independent_evidence_pct": 5.6,
+    "current_persisted_cohort_subject_audit": {
+      "unique_properties": 212,
+      "warehouse_matches": 209,
+      "sr1a_subject_matches": 10,
+      "matches_with_living_space": 10,
+      "exact_matches": 10,
+      "unique_parcel_fallbacks": 0
+    }
+  },
+  "runtime_change": {
+    "github_commit": "647d5ee256fbe743b6b824279c8f313717fb95ab",
+    "edge_function": "workbench-score",
+    "deployed_version": 15,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "behavior": [
+      "Select block, lot and qualifier from property_lookups.",
+      "Resolve subject evidence through existing service-only lookup_sr1a_subject_evidence RPC in bounded batches.",
+      "Use municipal verified-sale median PPSF multiplied by governed subject living area as an independent value path for O when a subject match is available.",
+      "Store subject source, provider version, living area and match quality in score evidence.",
+      "If subject evidence is unavailable or ambiguous, fail closed for O only; the rest of ROBUST can still score under missing-evidence renormalization.",
+      "Retain saved comparable value as the preferred independent-value path when it is available and meaningfully independent from the ratio-derived market estimate."
+    ]
+  },
+  "governance": {
+    "weights_changed": false,
+    "formula_family_changed": false,
+    "model_version_changed": false,
+    "reason": "The change restores and evidences an intended O input path. It does not alter the ROBUST dimensions or weights. New evidence can legitimately increase evidence coverage on later observations.",
+    "ambiguity_rule": "Ambiguous qualifier matches do not produce subject evidence.",
+    "missing_evidence_rule": "No synthetic O value is created when subject evidence does not resolve."
+  },
+  "next_calibration_action": "Accumulate or dry-run a representative ROBUST-v1 cohort with real Trajectory observations and expanded O evidence, then rerun property/scripts/robust_score_calibration.sql before considering any weight or evidence-gate change."
+}
