@@ -23,7 +23,7 @@ const SCENARIOS:Record<string,Scenario>={
   zoning_contact_status_v1:{
     fn:'workbench-hydrate',
     body:{
-      pams_pins:['0101_1_1'],
+      pams_pins:['0102_139_15'],
       marker_ids:[
         'njplus.nj-dca-zoning-directory.zoning_officer_contact',
         'njplus.nj-dca-zoning-directory.zoning_directory_status'
