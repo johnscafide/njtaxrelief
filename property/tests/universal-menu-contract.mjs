@@ -60,4 +60,17 @@ assert(css.includes('.wd-public-sheet.wd-universal-public-nav'), 'Public Dashboa
 assert(css.includes('.wd-public-sheet.right.wd-universal-public-profile'), 'Public Dashboard-style profile CSS is missing');
 assert(css.includes('.wd-universal-profile>nav'), 'Shared profile row styling is missing');
 
+// Root styles.css contains a historical global `nav { ... }` selector. Universal
+// semantic nav elements must fully reset container chrome so that global rule can
+// never turn the drawer/profile navy, sticky, shadowed, or elevated again.
+const drawerRule = css.match(/\.wd-universal-nav-links\{([^}]*)\}/)?.[1] || '';
+const profileRule = css.match(/\.wd-universal-profile>nav\{([^}]*)\}/)?.[1] || '';
+for (const [name, rule] of [['drawer', drawerRule], ['profile', profileRule]]) {
+  assert(rule.includes('background:#fff!important'), `Universal ${name} nav must force a white background`);
+  assert(rule.includes('position:static!important'), `Universal ${name} nav must reset global sticky positioning`);
+  assert(rule.includes('z-index:auto!important'), `Universal ${name} nav must reset global nav z-index`);
+  assert(rule.includes('box-shadow:none!important'), `Universal ${name} nav must reset global nav shadow`);
+  assert(rule.includes('transform:none!important'), `Universal ${name} nav must reset inherited nav transforms`);
+}
+
 console.log('Universal Watchdog menu contract: PASS');
