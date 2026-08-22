@@ -188,7 +188,7 @@ note: assessed > limit
     var d = district(record);
     var u = uniformityData && uniformityData.districts && d ? uniformityData.districts[d] : null;
     var a = appealsData && appealsData.counties ? appealsData.counties[countyCode(record)] : null;
-    var official = latestOfficial(record, officialData);
+    var official = record.certifiedRatio || latestOfficial(record, officialData);
     var isRevaluationYear = revaluationDistrict(record, revaluationData);
 
     // B - Burden
