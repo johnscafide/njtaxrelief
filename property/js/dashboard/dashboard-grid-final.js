@@ -63,7 +63,7 @@
       navItem('/property/dashboard','fa-table-columns','Dashboard',true),
       navItem('/property/home','fa-house','Property Home'),
       navItem('/property/town-compare','fa-code-compare','Town Compare'),
-      navItem('/property/fairness','fa-scale-balanced','Assessment Fairness'),
+      navItem('/property/robust/','fa-gauge-high','ROBUST Framework'),
       navItem('/property/pulse','fa-wave-square','Change Intelligence')
     ];
     if (access.ready && isAgent()) items.push(navItem('/property/agent-desk','fa-bullseye','Agent Control'));
