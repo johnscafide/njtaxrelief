@@ -108,8 +108,10 @@ function isImplementationPropertyPath(value) {
 function cleanPropertyPath(value) {
   if (isImplementationPropertyPath(value)) return value;
   const { path, suffix } = splitSuffix(value);
+  const preserveTrailingSlash = path.length > '/property'.length && path.endsWith('/');
   let clean = path.replace(/^\/property(?=\/|$)/i, '') || '/';
   clean = normalizePagePath(clean) || clean;
+  if (preserveTrailingSlash && clean !== '/') clean += '/';
   return `${clean}${suffix}`;
 }
 
