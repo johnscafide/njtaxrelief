@@ -15,7 +15,7 @@ values
     array['Zoning Office Phone','Zoning Office Email/Contact Page']::text[],
     null,
     21600,
-    'pinned_reference',
+    'versioned_observation',
     false
   ),
   (
@@ -30,7 +30,7 @@ values
     array['Treasury Municipality Code']::text[],
     null,
     21600,
-    'pinned_reference',
+    'versioned_observation',
     false
   )
 on conflict (marker_id) do update set
