@@ -1,5 +1,6 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
+import { runModivMissingYearCanary } from './modiv-missing-year-helper.ts';
 
 const URL=Deno.env.get('SUPABASE_URL')!;
 const ANON=Deno.env.get('SUPABASE_ANON_KEY')!;
@@ -63,8 +64,9 @@ function semanticAssertion(scenario:Scenario,payload:any){
 Deno.serve(async(req:Request)=>{
   if(req.method==='OPTIONS')return new Response('ok',{headers:cors(req)});if(req.method!=='POST')return json(req,405,{error:'POST required'});
   let body:any={};try{body=await req.json()}catch{return json(req,400,{error:'Invalid JSON'})}
-  const token=String(body?.token||'').trim(),scenarioKey=String(body?.scenario||'').trim(),staticScenario=SCENARIOS[scenarioKey],isDerivedExact=scenarioKey==='derived_exact_v1';if((!staticScenario&&!isDerivedExact)||!/^[A-Za-z0-9_-]{40,160}$/.test(token))return json(req,401,{error:'Invalid release canary request'});
+  const token=String(body?.token||'').trim(),scenarioKey=String(body?.scenario||'').trim(),staticScenario=SCENARIOS[scenarioKey],isDerivedExact=scenarioKey==='derived_exact_v1',isModivMissingYear=scenarioKey==='modiv_longitudinal_missing_year_v1';if((!staticScenario&&!isDerivedExact&&!isModivMissingYear)||!/^[A-Za-z0-9_-]{40,160}$/.test(token))return json(req,401,{error:'Invalid release canary request'});
   const hash=await sha256Hex(token),now=new Date().toISOString();const {data:gate,error:gateError}=await admin.from('watchdog_test_bootstrap_tokens').update({used_at:now}).eq('token_hash',hash).is('used_at',null).gt('expires_at',now).contains('metadata',{purpose:'provider_release_canary',scenario:scenarioKey}).select('id,desired_email,metadata').maybeSingle();if(gateError||!gate)return json(req,401,{error:'Invalid or expired release canary token'});
+  if(isModivMissingYear){const evidence=await runModivMissingYearCanary(admin,gate.id,now);return json(req,evidence.ok?200:502,evidence)}
   const scenario=staticScenario||(isDerivedExact?derivedExactScenario(gate.metadata):null);if(!scenario)return json(req,401,{error:'Invalid release canary contract'});
   const email=String(gate.desired_email||'').trim().toLowerCase();let userId='';
   try{
