@@ -3,7 +3,7 @@
   .dmaa-top nav{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%}
   .dmaa-top nav a{min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#f2f5f8;font-size:14px;line-height:1.2}
   .dmaa-top>a span{font-size:11px}
-  #direct-mail-admin{padding-bottom:max(24px,env(safe-area-inset-bottom))}
+  #direct-mail-admin{padding-bottom:max(24px,env(safe-area-inset-bottom));overflow-x:hidden}
   .dmaa-loading{padding:56px 18px;font-size:15px;line-height:1.5}
   .dmaa-mobile-status{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:#eef4ff;color:#244b8a;font-size:14px;line-height:1.45;font-weight:700}
   #direct-mail-admin[aria-busy="true"] .dmaa-period button,
@@ -11,6 +11,43 @@
   #direct-mail-admin[aria-busy="true"] [data-segment-select]{opacity:.58;pointer-events:none}
   .dmaa-period button,.dmaa-segment,.dmaa-tools select,.dmaa-tools input{min-height:44px}
   .dmaa-tools select,.dmaa-tools input{font-size:16px}
+  .dmaa-hero p{font-size:15px;line-height:1.5}
+  .dmaa-kicker,.dmaa-hero span,.dmaa-stat span{font-size:12px;line-height:1.35}
+  .dmaa-stat small,.dmaa-card-head small{font-size:13px;line-height:1.4}
+  .dmaa-funnel-row span,.dmaa-funnel-row b{font-size:13px}
+  .dmaa-segment span{font-size:13px;line-height:1.4}
+  .dmaa-table-wrap{overflow:visible}
+  .dmaa-table{display:block;min-width:0;width:100%;border-collapse:separate}
+  .dmaa-table thead{display:none}
+  .dmaa-table tbody{display:grid;gap:12px;width:100%}
+  .dmaa-table tbody tr{display:grid;width:100%;padding:14px;background:#f7f9fc;border:1px solid #e8edf4;border-radius:14px;overflow:hidden}
+  .dmaa-table tbody td{display:grid;grid-template-columns:minmax(96px,38%) minmax(0,1fr);gap:10px;align-items:start;width:100%;padding:8px 0;border-bottom:1px solid #e8edf4;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+  .dmaa-table tbody td:last-child{border-bottom:0}
+  .dmaa-table tbody td::before{color:#6d7889;font-size:12px;font-weight:800;line-height:1.4;text-transform:uppercase;letter-spacing:.03em}
+  .dmaa-table tbody td b{font-size:14px;line-height:1.35}
+  .dmaa-table tbody td small{display:block;margin-top:2px;color:#697688;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
+  .dmaa-pill{font-size:12px;line-height:1.25;white-space:normal}
+  tbody[data-customer-rows] td:nth-child(1)::before{content:'Member'}
+  tbody[data-customer-rows] td:nth-child(2)::before{content:'Plan'}
+  tbody[data-customer-rows] td:nth-child(3)::before{content:'Segment'}
+  tbody[data-customer-rows] td:nth-child(4)::before{content:'Campaigns'}
+  tbody[data-customer-rows] td:nth-child(5)::before{content:'Orders'}
+  tbody[data-customer-rows] td:nth-child(6)::before{content:'Pieces'}
+  tbody[data-customer-rows] td:nth-child(7)::before{content:'Spend'}
+  tbody[data-customer-rows] td:nth-child(8)::before{content:'Credit'}
+  tbody[data-customer-rows] td:nth-child(9)::before{content:'Last order'}
+  .dmaa-table-card:last-child tbody td:nth-child(1)::before{content:'Campaign'}
+  .dmaa-table-card:last-child tbody td:nth-child(2)::before{content:'Status'}
+  .dmaa-table-card:last-child tbody td:nth-child(3)::before{content:'Format'}
+  .dmaa-table-card:last-child tbody td:nth-child(4)::before{content:'Size'}
+  .dmaa-table-card:last-child tbody td:nth-child(5)::before{content:'Pieces'}
+  .dmaa-table-card:last-child tbody td:nth-child(6)::before{content:'Retail'}
+  .dmaa-table-card:last-child tbody td:nth-child(7)::before{content:'PCM cost'}
+  .dmaa-table-card:last-child tbody td:nth-child(8)::before{content:'Gross margin'}
+  .dmaa-table-card:last-child tbody td:nth-child(9)::before{content:'Submitted'}
+  .dmaa-table tbody tr:has(.dmaa-empty){display:block;padding:0;background:transparent;border:0}
+  .dmaa-table .dmaa-empty{display:block;padding:24px 12px;border:0;text-align:center;font-size:14px;line-height:1.5}
+  .dmaa-table .dmaa-empty::before{content:none}
   .dmaa-error{margin:28px 0;padding:24px 18px}
   .dmaa-error h2{font-size:20px;line-height:1.2}
   .dmaa-error p{font-size:15px;line-height:1.5}
@@ -21,4 +58,7 @@
 @media (max-width:440px){
   .dmaa-top>a b{font-size:16px}
   .dmaa-top nav{grid-template-columns:1fr}
+  .dmaa-table tbody td{grid-template-columns:1fr;gap:4px}
+  .dmaa-tools{display:grid;grid-template-columns:1fr;width:100%}
+  .dmaa-tools select,.dmaa-tools input{width:100%}
 }
