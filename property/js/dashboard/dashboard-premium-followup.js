@@ -85,7 +85,7 @@
     var windowMin=Number(live.window_minutes)||3,urls=safeAvatarUrls(live);
     var chip=q('#wd-live-presence');
     if(chip){
-      var b=q('b',chip);if(b)b.textContent=count+' active now';
+      var b=q('b',chip);if(b&&b.textContent!==count+' active now')b.textContent=count+' active now';
       var avatars=q('.wd-live-avatars',chip);if(avatars){
         var markup=urls.map(function(url){return'<img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" aria-hidden="true">';}).join('');
         if(avatars.innerHTML!==markup)avatars.innerHTML=markup;
@@ -93,7 +93,7 @@
       chip.title='Active visitors seen in the last '+windowMin+' minutes. Up to five signed-in account photos are shown; names and account identifiers are not exposed here.';
     }
     var card=q('[data-card-id="live-activity"]');
-    if(card){var first=q('.wd-premium-stat-grid>div:first-child strong',card);if(first)first.textContent=String(count);}
+    if(card){var first=q('.wd-premium-stat-grid>div:first-child strong',card);if(first&&first.textContent!==String(count))first.textContent=String(count);}
   }
 
   function getPresenceClient(){
@@ -151,7 +151,7 @@
     if(!card){card=document.createElement('section');card.className='wd4-card wd-premium-analytics-card wdv2-card-s wdv2-span-3 wd-crm-count-card';card.dataset.cardId='crm-count';band.appendChild(card);}
     else if(card.parentElement!==band)band.appendChild(card);
     var markup=crmCardMarkup();if(card.innerHTML!==markup)card.innerHTML=markup;
-    card.hidden=false;band.hidden=false;
+    if(card.hidden)card.hidden=false;if(band.hidden)band.hidden=false;
   }
 
   function renderCrmSetting(){
@@ -164,7 +164,7 @@
       host.appendChild(existing);
       q('[data-crm-toggle="crm-count"]',existing).addEventListener('click',function(){crm.visible=!crm.visible;persistCrmPreference();renderCrmCard();renderCrmSetting();});
     }
-    var btn=q('[data-crm-toggle="crm-count"]',existing);if(btn){btn.classList.toggle('on',crm.visible);btn.setAttribute('aria-pressed',String(crm.visible));}
+    var btn=q('[data-crm-toggle="crm-count"]',existing),pressed=String(crm.visible);if(btn){btn.classList.toggle('on',crm.visible);if(btn.getAttribute('aria-pressed')!==pressed)btn.setAttribute('aria-pressed',pressed);}
   }
 
   function settle(){
