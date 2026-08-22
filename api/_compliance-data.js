@@ -1,7 +1,7 @@
 module.exports = {
   "program": "Watchdog Compliance Readiness",
-  "version": 6,
-  "updated_at": "2026-08-21",
+  "version": 7,
+  "updated_at": "2026-08-22",
   "status": "readiness-in-progress",
   "certification_claim": "Watchdog is building toward independent assurance. No SOC 2, ISO, PCI, WCAG, or other certification/conformance claim is made unless independently established and current.",
   "entries": [
@@ -41,7 +41,7 @@ module.exports = {
       "action": "Mapped the existing access-boundary and security-contract CI suite as evidence for authorization, webhook authentication, pricing authority, CORS restrictions, RLS/entitlement boundaries, security headers, and other application-security controls.",
       "evidence": [".github/workflows/access-boundary-audit.yml", "property/tests/security-contracts.mjs"],
       "rationale": "Automated security assertions executed during code changes provide stronger repeatable evidence than policy statements alone.",
-      "residual_risk": "Static contract tests do not replace dynamic vulnerability testing, independent penetration testing, or complete ASVS verification.",
+      "residual_risk": "Static contract tests do not replace penetration testing, dynamic scanning, dependency/secret scanning or complete OWASP ASVS verification.",
       "next_step": "Expand evidence coverage to dependency, secret, code-scanning, accessibility, and dynamic application-security controls."
     },
     {
@@ -160,6 +160,19 @@ module.exports = {
       "rationale": "Supabase JavaScript uses global logout by default, so Watchdog can preserve a stronger all-session revocation behavior at no added cost. The same control must explicitly acknowledge that already-issued access JWTs can remain valid until expiry, which means future high-risk actions may require current-session validation or AAL2 rather than relying only on token possession.",
       "residual_risk": "MFA/AAL2 enforcement is not yet proven, production JWT-expiry/session-timeout settings are not retained as evidence, already-issued access JWTs can survive until expiry, and older direct Supabase client configurations can drift from the centralized runtime.",
       "next_step": "Inventory direct auth client configurations, capture non-secret production JWT-expiry evidence, assess a no-cost TOTP MFA path, and classify sensitive actions that should require current-session or AAL2 checks."
+    },
+    {
+      "id": "WCR-2026-08-22-001",
+      "date": "2026-08-22",
+      "title": "Privileged access governance and service-role inventory established",
+      "frameworks": ["SOC 2", "NIST CSF 2.0", "OWASP ASVS 5.0.0", "ISO/IEC 27001"],
+      "control_area": "Privileged access, least privilege and machine authorization",
+      "status": "implemented-with-open-gaps",
+      "action": "Established a privileged-access governance baseline, periodic access-review evidence template, initial service-role privilege inventory, and CI regression contracts preserving server-side developer evaluation, browser self-promotion protections, bounded/revocable backoffice sessions, and exclusion of service-role material from browser-delivered assets.",
+      "evidence": ["property/docs/compliance/PRIVILEGED-ACCESS-BASELINE-2026-08-22.md", "property/docs/compliance/PRIVILEGED-ACCESS-REVIEW-TEMPLATE.md", "property/docs/compliance/SERVICE-ROLE-PRIVILEGE-INVENTORY-2026-08-22.md", "property/tests/privileged-access-contract.mjs", ".github/workflows/zero-cost-compliance-readiness.yml", "property/docs/compliance/CONTROL-REGISTER.md", "property/docs/compliance/RISK-REGISTER.md", "property/docs/compliance/DECISION-LOG.md"],
+      "rationale": "Code-level role enforcement is necessary but does not prove that privileged human and machine access remains necessary over time. Audit-ready access governance requires both technical boundaries and periodic operating evidence across application roles, provider consoles, administrative sessions, and service-role-backed functions.",
+      "residual_risk": "The first identity-level provider/application privileged-access review has not yet been retained, MFA/AAL2 for privileged humans is not proven, break-glass procedures are not formalized, and the service-role inventory still requires function-by-function caller-authorization classification.",
+      "next_step": "Perform the first private identity-level access review and retain a sanitized summary, classify high-risk service-role-backed functions by caller authorization, establish joiner/mover/leaver and break-glass procedures, and continue no-cost MFA/AAL2 readiness work."
     }
   ]
 };
