@@ -2,6 +2,7 @@
 'use strict';
 if(window.__wdHomeSemanticBridge)return;window.__wdHomeSemanticBridge=true;
 var installed=false,lastPin='',clientRef=null;
+var CANONICAL_SCORE='watchdog.watchdog_score',CANONICAL_MODEL='ROBUST-v1';
 var PROD_URL='https://uvkvaxljhhngydvlrzom.supabase.co',PROD_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 function client(){
   if(clientRef)return clientRef;
@@ -16,13 +17,14 @@ function validPin(v){v=String(v||'').trim();return /^\d{4}_.+/.test(v)?v:''}
 function currentPin(){var select=document.getElementById('hm-switch'),fromSelect=select&&validPin(select.value);if(fromSelect)return fromSelect;try{return validPin(new URLSearchParams(location.search).get('pin'))}catch(_e){return''}}
 function publish(reason){var pin=currentPin();if(!pin)return;if(pin===lastPin&&reason!=='force')return;lastPin=pin;window.dispatchEvent(new CustomEvent('watchdog:property-context',{detail:{surface:'home',scope_type:'property',pams_pins:[pin],pams_pin:pin,section:window.WatchdogPageContext&&window.WatchdogPageContext.section?window.WatchdogPageContext.section():'overview',context_key:'home:'+pin,reason:reason||'property',authoritative:true}}));}
 function installHistory(){
-  window.watchdogScoreHistory=function(r,markerId){
-    var sb=client(),pin=validPin(r&&r.pams_pin),marker=String(markerId||'watchdog.score').trim();
-    if(!sb||!pin||!marker)return Promise.resolve([]);
+  window.watchdogScoreHistory=function(r,markerId,modelVersion){
+    var sb=client(),pin=validPin(r&&r.pams_pin),marker=String(markerId||CANONICAL_SCORE).trim(),model=String(modelVersion||CANONICAL_MODEL).trim();
+    if(!sb||!pin||marker!==CANONICAL_SCORE||model!==CANONICAL_MODEL)return Promise.resolve([]);
     return sb.from('score_observations')
-      .select('pams_pin,marker_id,score,observed_at,model_version')
+      .select('pams_pin,marker_id,score,observed_at,observed_on,model_version,evidence_coverage')
       .eq('pams_pin',pin)
-      .eq('marker_id',marker)
+      .eq('marker_id',CANONICAL_SCORE)
+      .eq('model_version',CANONICAL_MODEL)
       .order('observed_at',{ascending:true})
       .limit(365)
       .then(function(result){if(result.error)throw result.error;return result.data||[];});
@@ -38,6 +40,6 @@ function boot(){
   setTimeout(function(){installHistory();publish('boot')},50);
   setTimeout(function(){installHistory();publish('settled')},900);
 }
-window.WatchdogHomeSemanticBridge={publish:function(){publish('force')},scoreHistory:function(r,markerId){return window.watchdogScoreHistory(r,markerId)},contract:'global-property-marker-history-v2'};
+window.WatchdogHomeSemanticBridge={publish:function(){publish('force')},scoreHistory:function(r,markerId,modelVersion){return window.watchdogScoreHistory(r,markerId,modelVersion)},scoreContract:{marker_id:CANONICAL_SCORE,framework:'ROBUST',model_version:CANONICAL_MODEL},contract:'global-property-marker-history-v3-robust'};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
