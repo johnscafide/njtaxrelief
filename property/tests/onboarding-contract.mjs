@@ -12,7 +12,7 @@ const migration=read('supabase/migrations/20260819150000_required_watchdog_onboa
 const contactMigration=read('supabase/migrations/20260819190000_watchdog_onboarding_contact_email_v2.sql');
 const otpTemplate=read('supabase/templates/watchdog-email-otp.html');
 
-must(runtime.includes("'/property/onboarding/?next='"),'OAuth runtime must route through the onboarding page.');
+must(runtime.includes("var onboardingPath = routePrefix + '/onboarding/';") && runtime.includes("return location.origin + onboardingPath + '?next='"),'OAuth runtime must route through the onboarding page on both Watchdog domains.');
 must(runtime.includes('instance.auth.signInWithOAuth = function'),'Canonical runtime must wrap every known Watchdog OAuth client.');
 must(runtime.includes("get_my_watchdog_onboarding_state"),'Protected member routes must check onboarding state.');
 must(runtime.includes("google: { label:'Google', enabled:true }"),'Google must remain enabled.');
