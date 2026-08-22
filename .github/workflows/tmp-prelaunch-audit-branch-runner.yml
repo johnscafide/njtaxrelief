@@ -1,25 +1,33 @@
 name: Temporary prelaunch audit branch runner
 
 on:
-  push:
+  pull_request:
     branches:
-      - watchdog/prelaunch-audit-remediation-2026-08-22
+      - main
+    types: [opened, synchronize, reopened]
 
 permissions:
   contents: write
 
 jobs:
   run-branch-remediation:
-    if: ${{ !contains(github.event.head_commit.message, '[audit-remediation-applied]') }}
+    if: ${{ github.event.pull_request.head.ref == 'watchdog/prelaunch-audit-remediation-2026-08-22' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
 
       - name: Execute remediation script stored on branch
         shell: bash
+        env:
+          GITHUB_REF_NAME: ${{ github.event.pull_request.head.ref }}
         run: |
+          if [ -f property/revaluation-reassessment-2026.json ]; then
+            echo "Remediation already applied; nothing to do."
+            exit 0
+          fi
           python - <<'PY'
           from pathlib import Path
           src = Path('.github/workflows/prelaunch-audit-remediation.yml').read_text()
