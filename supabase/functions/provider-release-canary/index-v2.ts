@@ -10,11 +10,11 @@ const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njproperty
 
 type AvailabilityExpectation={pin:string;marker_ids:string[]};
 type MissingExpectation={pin:string;marker_ids:string[];status?:string};
-type ValueExpectation={pin:string;values:Record<string,string|number|boolean>};
+type ValueExpectation={pin:string;values:Record<string,unknown>};
 type ProviderKindExpectation={pin:string;kinds:Record<string,string>};
 type SourceExpectation={pin:string;sources:Record<string,string>};
 type Scenario={fn:string;body:any;expect_available?:AvailabilityExpectation[];expect_missing?:MissingExpectation[];expect_values?:ValueExpectation[];expect_provider_kinds?:ProviderKindExpectation[];expect_sources?:SourceExpectation[]};
-type DerivedExactMetadata={pin:string;values:Record<string,string|number|boolean>;kinds?:Record<string,string>;sources?:Record<string,string>};
+type DerivedExactMetadata={pin:string;values:Record<string,unknown>;kinds?:Record<string,string>;sources?:Record<string,string>};
 const SCENARIOS:Record<string,Scenario>={
   zoning_v31:{fn:'workbench-hydrate',body:{pams_pins:['0102_139_15'],marker_ids:['njplus.nj-dca-zoning-directory.zoning_map_url','njplus.nj-dca-zoning-directory.zoning_ordinance_url','njplus.nj-dca-zoning-directory.municipal_zoning_portal']}},
   designation_stack_v15:{fn:'workbench-derived',body:{pams_pins:['0102_139_15'],marker_ids:['watchdog.njplus.development_designation_stack']}},
@@ -48,13 +48,14 @@ function derivedExactScenario(metadata:any):Scenario|null{
   const sources=cfg.sources&&typeof cfg.sources==='object'&&!Array.isArray(cfg.sources)?Object.fromEntries(Object.entries(cfg.sources).filter(([id,v])=>ids.includes(id)&&typeof v==='string')):{};
   return{fn:'workbench-derived',body:{pams_pins:[pin],marker_ids:ids},expect_available:[{pin,marker_ids:ids}],expect_values:[{pin,values}],expect_provider_kinds:Object.keys(kinds).length?[{pin,kinds}]:undefined,expect_sources:Object.keys(sources).length?[{pin,sources}]:undefined};
 }
+function semanticEqual(got:unknown,want:unknown){return JSON.stringify(got)===JSON.stringify(want)}
 function semanticAssertion(scenario:Scenario,payload:any){
   const missing:string[]=[];
   for(const check of scenario.expect_available||[]){for(const id of check.marker_ids){if(String(payload?.meta?.[check.pin]?.[id]?.status||'')!=='available'||payload?.markers?.[check.pin]?.[id]===null||payload?.markers?.[check.pin]?.[id]===undefined)missing.push(`${check.pin}:${id}`)}}
   const missing_semantics_mismatched:string[]=[];
   for(const check of scenario.expect_missing||[]){for(const id of check.marker_ids){const value=payload?.markers?.[check.pin]?.[id],status=String(payload?.meta?.[check.pin]?.[id]?.status||''),wantStatus=check.status||'source_checked_no_value';if((value!==null&&value!==undefined)||status!==wantStatus)missing_semantics_mismatched.push(`${check.pin}:${id}:expected_status=${wantStatus}:got_status=${status}:got_value=${String(value)}`)}}
   const mismatched:string[]=[];
-  for(const check of scenario.expect_values||[]){for(const [id,want] of Object.entries(check.values)){const got=payload?.markers?.[check.pin]?.[id];if(got!==want)mismatched.push(`${check.pin}:${id}:expected=${String(want)}:got=${String(got)}`)}}
+  for(const check of scenario.expect_values||[]){for(const [id,want] of Object.entries(check.values)){const got=payload?.markers?.[check.pin]?.[id];if(!semanticEqual(got,want))mismatched.push(`${check.pin}:${id}:expected=${JSON.stringify(want)}:got=${JSON.stringify(got)}`)}}
   const provider_kind_mismatched:string[]=[];
   for(const check of scenario.expect_provider_kinds||[]){for(const [id,want] of Object.entries(check.kinds)){const got=String(payload?.meta?.[check.pin]?.[id]?.provider_kind||'');if(got!==want)provider_kind_mismatched.push(`${check.pin}:${id}:expected_provider_kind=${want}:got=${got}`)}}
   const source_mismatched:string[]=[];
