@@ -10,10 +10,15 @@ on:
       - 'property/terms/**'
       - 'property/docs/compliance/**'
       - 'property/js/supabase-runtime.js'
+      - 'property/js/access-guard.js'
+      - 'api/compliance-log.js'
+      - 'supabase/functions/backoffice-api/**'
+      - 'supabase/migrations/**'
       - 'property/tests/public-accessibility-baseline.mjs'
       - 'property/tests/seven-readiness-contracts.mjs'
       - 'property/tests/auth-asvs-contract.mjs'
       - 'property/tests/session-security-contract.mjs'
+      - 'property/tests/privileged-access-contract.mjs'
       - 'property/scripts/tls_readiness_check.mjs'
       - 'vercel.json'
       - '.github/workflows/zero-cost-compliance-readiness.yml'
@@ -35,6 +40,8 @@ jobs:
         run: node property/tests/auth-asvs-contract.mjs
       - name: Verify session lifecycle security contracts
         run: node property/tests/session-security-contract.mjs
+      - name: Verify privileged access governance contracts
+        run: node property/tests/privileged-access-contract.mjs
 
   public-accessibility-baseline:
     runs-on: ubuntu-latest
