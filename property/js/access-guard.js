@@ -8,6 +8,8 @@
   var STAGING_STORAGE = 'sb-pxossnwmrygxlpxtstnl-auth-token';
   var hostname = String(location.hostname || '').toLowerCase();
   var previewHost = hostname === 'localhost' || hostname === '127.0.0.1' || /\.vercel\.app$/.test(hostname);
+  var cleanWatchdogHost = hostname === 'www.watchdogindex.com' || hostname === 'watchdogindex.com';
+  var dashboardPath = cleanWatchdogHost ? '/dashboard' : '/property/dashboard';
   var client;
 
   if (previewHost && window.supabase && typeof window.supabase.createClient === 'function' && !window.supabase.__watchdogPreviewWrapped) {
@@ -35,16 +37,27 @@
     }});
     return client;
   }
+
+  function logicalPath(pathname) {
+    var path = String(pathname || '').replace(/\/+$/, '');
+    if (cleanWatchdogHost && (path === '/property' || path.indexOf('/property/') === 0)) {
+      path = path.slice('/property'.length) || '/';
+    }
+    return path;
+  }
+
   function destination(kind) {
     var params = new URLSearchParams();
     params.set('access', kind);
     params.set('return', location.pathname + location.search + location.hash);
-    return '/property/dashboard?' + params.toString();
+    return dashboardPath + '?' + params.toString();
   }
+
   function reveal() {
     document.documentElement.classList.remove('access-pending');
     document.documentElement.classList.add('access-granted');
   }
+
   function requireAccess(required) {
     required = required || 'standard';
     if (!window.supabase) return Promise.reject(new Error('Authentication library unavailable'));
@@ -78,11 +91,11 @@
     });
   }
 
-  var normalizedPath = location.pathname.replace(/\/+$/, '');
+  var normalizedPath = logicalPath(location.pathname);
   var required = document.documentElement.getAttribute('data-access-require') ||
     (document.body && document.body.getAttribute('data-access-require'));
-  if (normalizedPath === '/property/data-center') required = 'pro_plus';
-  if (normalizedPath === '/property/backoffice') required = null;
+  if (normalizedPath === '/data-center') required = 'pro_plus';
+  if (normalizedPath === '/backoffice') required = null;
   if (required) document.documentElement.classList.add('access-pending');
   window.NJPTRAccess = { require: requireAccess, client: sb };
   window.njptrAccessReady = required ? requireAccess(required) : Promise.resolve({ developer: false });
