@@ -1,7 +1,6 @@
-/* Watchdog Dashboard Premium follow-up: fixed-size cards, default history replacement, full-width free upgrade. */
+/* Watchdog Dashboard Premium follow-up: fixed-size cards, default-off secondary analytics, full-width free upgrade. */
 
-/* Core dashboard CSS still contains a higher-specificity rule that can resurrect expand controls.
-   This layer wins that cascade and makes the curated dashboard genuinely fixed-size. */
+/* Core dashboard CSS still contains higher-specificity rules that can resurrect layout controls. */
 body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card .wdv2-expand,
 body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card.wdv2-card-m .wdv2-expand,
 body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card.wdv2-card-l .wdv2-expand,
@@ -12,43 +11,74 @@ body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card-menu,
 body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-map-handle,
 body[data-sidebar-page="dashboard"].wdv2-mounted [data-drag-handle]{display:none!important}
 
-/* Live Site Activity replaces Snapshot/Tax vs Value in the default analysis row. */
-body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"].wd-premium-analytics-card{
-  grid-column:span 6!important;
-  height:232px!important;
-  min-height:232px!important;
-  padding:20px!important;
+/* Live Site Activity is optional and compact when explicitly enabled in Widgets. */
+body.wdv2-mounted .wdv2-band[data-band="premium"] [data-card-id="live-activity"].wd-premium-analytics-card{
+  grid-column:span 3!important;
+  min-height:104px!important;
+  height:104px!important;
+  padding:16px 18px!important;
 }
-body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid{
-  margin-top:38px;
-  gap:22px;
-}
-body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid strong{font-size:28px}
-body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid span{font-size:11px}
+body.wdv2-mounted .wdv2-band[data-band="premium"] [data-card-id="live-activity"] .wd-premium-stat-grid{margin-top:10px!important;gap:10px!important}
+body.wdv2-mounted .wdv2-band[data-band="premium"] [data-card-id="live-activity"] .wd-premium-stat-grid strong{font-size:20px!important}
+body.wdv2-mounted .wdv2-band[data-band="premium"] [data-card-id="live-activity"] .wd-premium-stat-grid span{font-size:9px!important}
 
-/* Free/Standard upgrade CTA is a deliberate full-width bridge after the map row. */
-.wdv2-upgrade-band{
+/* Free/Standard upgrade CTA is a true edge-to-edge dashboard bridge after the map row. */
+body.wdv2-mounted .wdv2-upgrade-band{
   display:grid!important;
   grid-template-columns:repeat(12,minmax(0,1fr))!important;
+  grid-column:1/-1!important;
   gap:14px!important;
   width:100%!important;
+  max-width:none!important;
+  justify-self:stretch!important;
+  align-self:stretch!important;
 }
 body.wdv2-mounted .wdv2-upgrade-band>.wdv2-upgrade,
 body.wdv2-mounted .wdv2-upgrade-band>[data-card-id="upgrade-pro"]{
   grid-column:1/-1!important;
   width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
   min-height:154px!important;
   height:auto!important;
   margin:0!important;
+  justify-self:stretch!important;
+  align-self:stretch!important;
 }
-body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-link{min-height:154px;padding:22px 28px!important}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-link{
+  width:100%!important;
+  max-width:none!important;
+  min-height:154px!important;
+  padding:22px 28px!important;
+}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy{max-width:none!important}
 body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy h3{font-size:24px!important;line-height:1.08!important}
-body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy p{max-width:760px!important;font-size:12px!important;line-height:1.55!important}
+body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-copy p{max-width:860px!important;font-size:12px!important;line-height:1.55!important}
 body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-price{padding-right:18px!important}
 
+/* Active-now avatars: real signed-in profile photos, capped in JS at five. */
+body.wdv2-mounted #wd-live-presence .wd-live-avatars{display:flex!important;align-items:center!important;margin-left:2px!important}
+body.wdv2-mounted #wd-live-presence .wd-live-avatars img{
+  width:28px!important;height:28px!important;border-radius:50%!important;object-fit:cover!important;
+  border:2px solid var(--wdv2-surface,#fff)!important;background:#dfe8f2!important;display:block!important;
+  margin-left:-7px!important;box-shadow:0 1px 3px rgba(21,39,65,.12)!important;
+}
+body.wdv2-mounted #wd-live-presence .wd-live-avatars img:first-child{margin-left:0!important}
+
+/* CRM card appears only when the signed-in account has synced CRM context. */
+body.wdv2-mounted .wd-crm-count-card{padding:0!important;overflow:hidden!important}
+body.wdv2-mounted .wd-crm-count-link{display:grid!important;grid-template-rows:auto 1fr auto!important;height:100%!important;padding:14px 16px!important;text-decoration:none!important;color:inherit!important}
+body.wdv2-mounted .wd-crm-count-card .wd-premium-card-head{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:8px!important}
+body.wdv2-mounted .wd-crm-count-card .wd-premium-card-head em{font-style:normal!important;font-size:8px!important;font-weight:800!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:var(--wdv2-blue,#2f6df6)!important;background:rgba(47,109,246,.08)!important;border-radius:999px!important;padding:4px 7px!important}
+body.wdv2-mounted .wd-crm-count-main{display:flex!important;align-items:baseline!important;gap:7px!important;margin-top:6px!important;min-width:0!important}
+body.wdv2-mounted .wd-crm-count-main strong{font-size:24px!important;line-height:1!important;letter-spacing:-.04em!important;font-weight:650!important;font-variant-numeric:tabular-nums!important}
+body.wdv2-mounted .wd-crm-count-main span,body.wdv2-mounted .wd-crm-count-card small{font-size:9px!important;color:var(--wdv2-muted,#748198)!important}
+body.wdv2-mounted .wd-crm-setting-row{margin-top:2px!important}
+
 @media(max-width:768px){
-  body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"].wd-premium-analytics-card{grid-column:1/-1!important;height:190px!important;min-height:190px!important}
-  body.wdv2-mounted .wdv2-band[data-band="analysis"] [data-card-id="live-activity"] .wd-premium-stat-grid{margin-top:24px;gap:10px}
+  body.wdv2-mounted .wdv2-band[data-band="premium"] [data-card-id="live-activity"].wd-premium-analytics-card,
+  body.wdv2-mounted .wd-crm-count-card{grid-column:1/-1!important;height:104px!important;min-height:104px!important}
   body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-link{grid-template-columns:1fr!important;padding:20px!important}
   body.wdv2-mounted .wdv2-upgrade-band .wdv2-up-price{text-align:left!important;padding:0!important}
+  body.wdv2-mounted #wd-live-presence .wd-live-avatars img{width:25px!important;height:25px!important}
 }
