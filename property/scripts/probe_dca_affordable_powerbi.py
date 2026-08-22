@@ -4,6 +4,7 @@
 Prints report/page/visual semantic-query metadata needed to identify the published
 municipal LMI cost-burden and HUD-subsidized-unit fields. It does not write any
 production artifact and must not be used as evidence of LIVE marker coverage.
+The workflow runner is intentionally temporary and removed after discovery.
 """
 from __future__ import annotations
 import base64
