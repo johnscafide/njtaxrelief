@@ -31,7 +31,7 @@
   }
 
   function appealCopy(score) {
-    if (score < 45) return ['Stronger reason to investigate', 'The municipal data shows relatively wide assessment variation. That does not establish an individual over-assessment, but it increases the value of comparing your assessment with recent, similar sales and neighboring properties.'];
+    if (score < 45) return ['Stronger reason to investigate', 'The municipal data shows relatively wide assessment variation. That does not establish an individual overassessment, but it increases the value of comparing your assessment with recent, similar sales and neighboring properties.'];
     if (score < 75) return ['Worth a closer look', 'The municipality falls in the middle of the loaded dataset. Homeowners should focus on property-specific evidence rather than relying on the municipal statistic alone.'];
     return ['Municipal consistency looks stronger', 'The municipality compares favorably on assessment uniformity. An appeal may still be justified when the individual assessment exceeds supported market value, but the town-wide statistic alone is not a strong warning signal.'];
   }
@@ -118,7 +118,7 @@
     } catch (error) {
       status.textContent = 'Data could not be loaded. Run the site through a local/server environment, not file://.';
       status.classList.add('is-bad');
-      console.error('Assessment Fairness data load failed:', error);
+      console.error('ROBUST Uniformity data load failed:', error);
     }
   }
 
