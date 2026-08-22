@@ -39,7 +39,10 @@
     "  The page automatically uses the most recent year present.",
     "",
     "VERIFICATION: every row was checked against the state's own arithmetic,",
-    "  lower = ratio x 0.85 and upper = ratio x 1.15. All 168 matched exactly."
+    "  lower = ratio x 0.85 and upper = ratio x 1.15. All 168 matched exactly.",
+    "  Stored upper values mirror the printed certification table. For Chapter 123",
+    "  use, any upper ratio above 100% is legally treated as 100%; the browser",
+    "  applies that cap when it reads the certified corridor."
   ],
   "_source": {
     "document": "Certification of Average Ratios and Common Level Ranges, Tax Year 2026",

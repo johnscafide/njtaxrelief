@@ -327,7 +327,8 @@
 
     Promise.all([
       loadRates().catch(function () {}), loadListings().catch(function () {}),
-      loadRatios().catch(function () {}), loadCalibration().catch(function () {})
+      loadRatios().catch(function () {}), loadCalibration().catch(function () {}),
+      loadRevaluations().catch(function () {})
     ])
       .then(function () { return parcelAt(lat, lon); })
       .then(function (f) {
@@ -396,7 +397,8 @@
       loadListings().catch(function () {}),
       loadRatios().catch(function () {}),
       loadCalibration().catch(function () {}),
-      loadSR1A().catch(function () {})
+      loadSR1A().catch(function () {}),
+      loadRevaluations().catch(function () {})
     ]);
     var capped = Promise.race([
       preload,
@@ -1214,6 +1216,27 @@
   // ══════════════════════════════════════════════
 
   var officialRatios = null;
+  var revaluationTable = null;
+
+  function loadRevaluations() {
+    if (revaluationTable !== null) return Promise.resolve();
+    return xfetch('/property/revaluation-reassessment-2026.json', 6000)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { revaluationTable = (j && j.districts) ? j : { tax_year: 2026, districts: {} }; })
+      .catch(function () { revaluationTable = { tax_year: 2026, districts: {} }; });
+  }
+
+  function revaluationStatus(record) {
+    var pin = record && (record.pin || record.PAMS_PIN) || (current && current.pin) || '';
+    var m = String(pin).match(/^(\d{4})/);
+    var code = m ? m[1] : '';
+    var year = new Date().getFullYear();
+    return {
+      code: code,
+      taxYear: revaluationTable && revaluationTable.tax_year,
+      isCurrentYear: !!(code && revaluationTable && revaluationTable.tax_year === year && revaluationTable.districts && revaluationTable.districts[code])
+    };
+  }
 
   function loadRatios() {
     if (officialRatios !== null) return Promise.resolve();
@@ -1249,7 +1272,7 @@
     if (row && typeof row === 'object') {
       pct = +row.ratio;
       if (row.lower) lower = +row.lower / 100;
-      if (row.upper) upper = +row.upper / 100;
+      if (row.upper) upper = Math.min(+row.upper / 100, 1);
     } else { pct = +row; }
 
     if (!pct || pct <= 0 || pct > 200) return null;
@@ -1674,25 +1697,21 @@
     var host = el('plm-score-sec');
     if (!host) return;
 
-    // The headline value is derived from the assessment, so testing the
-    // assessment against it proves nothing. An appeal needs evidence that did
-    // not come from the assessment. Two independent anchors exist in public
-    // data, and we use whichever we have.
-    //
-    //   A. This property's own last recorded sale, carried forward at the
-    //      appreciation measured in its town. Strongest evidence there is.
-    //   B. What comparable neighbors are assessed at. This is the argument
-    //      homeowners already make out loud: the house next door pays less.
+    // A statutory appeal screen needs independent market-value evidence.
+    // Peer assessments are useful context, but they are not true market value
+    // and must never be put through the Chapter 123 corridor.
     var appr = (v && v.appreciation != null) ? v.appreciation : 0.05;
     var thisYear = new Date().getFullYear();
     var evidence = [], anchors = [];
+    var verifiedSale = +current.verifiedSale || 0;
+    var verifiedSaleYear = +current.verifiedSaleYear || 0;
 
-    if (current.sale > 1000 && current.deedYear && (thisYear - current.deedYear) <= 12) {
-      var yrs = thisYear - current.deedYear;
-      var carried = current.sale * Math.pow(1 + appr, yrs);
-      evidence.push({ kind: 'sale', value: carried,
-        label: 'Sold for ' + money(current.sale) + ' in ' + current.deedYear +
-               ', carried forward ' + yrs + ' years at ' + (appr * 100).toFixed(1) + '% a year' });
+    if (verifiedSale > 1000 && verifiedSaleYear && (thisYear - verifiedSaleYear) <= 12) {
+      var yrs = thisYear - verifiedSaleYear;
+      var carried = verifiedSale * Math.pow(1 + appr, yrs);
+      evidence.push({ kind: 'verified-sale', value: carried,
+        label: 'State-verified sale of ' + money(verifiedSale) + ' in ' + verifiedSaleYear +
+     ', carried forward ' + yrs + ' years at ' + (appr * 100).toFixed(1) + '% a year' });
       anchors.push(carried);
     }
 
@@ -1712,67 +1731,130 @@
       }
     }
 
-    if (!anchors.length && peerMed === null) {
-      trackChapter123Coverage(false, 'neither');
+    var official = officialRatio(current.town, current.county);
+    var reval = revaluationStatus(current);
+    var hasMarketAnchor = anchors.length > 0;
+
+    // Revaluation/reassessment year: Chapter 123's common-level range does not
+    // apply. Assessment is compared directly with supported true market value.
+    if (reval.isCurrentYear && hasMarketAnchor) {
+      var revalMarket = median(anchors);
+      var revalOver = assessed - revalMarket;
+      var revalCase = revalOver > 0;
+      var revalRate = (tax && assessed) ? tax / assessed : null;
+      var revalSaving = (revalCase && revalRate) ? revalOver * revalRate : null;
+
+      current.appeal = Object.assign(current.appeal || {}, {
+        target: revalMarket, limit: revalMarket, overBy: revalOver, hasCase: revalCase,
+        saving: revalSaving, peerMed: peerMed, peerN: peerN,
+        basis: 'verified market-value evidence in a revaluation/reassessment year',
+        statutory: true, chapter123Applicable: false, revaluationYear: true
+      });
+      trackChapter123Coverage(false, 'revaluation-year-not-applicable');
+
+      host.innerHTML =
+        buildDeadlineBanner() +
+        '<h3 class="plm-sec-h">Revaluation-year market value check</h3>' +
+        '<p class="plm-sec-s"><b>Chapter 123 does not apply to this ' + thisYear + ' assessment year.</b> ' +
+        'New Jersey lists this taxing district for implementation of a revaluation or reassessment, so there is no 15 percent common-level cushion. ' +
+        'The assessment is compared directly with supported true market value.</p>' +
+        '<div class="pl-card"><div class="score-rows">' +
+'<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
+evidence.map(function (e) { return '<div class="score-row"><span>' + esc(e.label) + '</span><b>' + money(e.value) + '</b></div>'; }).join('') +
+'<div class="score-row"><span>Supported market value / assessment target</span><b>' + money(revalMarket) + '</b></div>' +
+(revalCase ? '<div class="score-row over"><span>Assessment above supported market value by</span><b>' + money(revalOver) + '</b></div>' : '') +
+        '</div>' +
+        (revalSaving && revalSaving > 150
+? '<div class="score-save"><div class="score-save-n">' + money(revalSaving) + '<span>/yr</span></div>' +
+    '<div class="score-save-l">Estimated annual difference if the assessment were reduced to the supported market value.</div>' +
+    '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">Have John screen the evidence</button></div>'
+: '') +
+        '</div>' +
+        '<div class="score-fine">Informational screening only. This is not legal, tax, appraisal, or certified comparative market analysis advice. ' +
+        'Figures are estimates from public state data and may be incomplete or stale. Verify the revaluation status, filing deadline, and evidence with the municipal assessor or county board of taxation, or with a qualified professional, before filing.</div>';
+      return;
+    }
+
+    // Chapter 123 path: requires both independent market evidence and the
+    // municipality's certified ratio/common-level range.
+    if (hasMarketAnchor && official && official.ratio > 0) {
+      var marketValue = median(anchors);
+      var target = marketValue * official.ratio;
+      var upperRatio = official.upper != null ? Math.min(official.upper, 1) : Math.min(official.ratio * 1.15, 1);
+      var limit = marketValue * upperRatio;
+      var overBy = assessed - limit;
+      var hasCase = overBy > 0;
+      var effRate = (tax && assessed) ? tax / assessed : null;
+      var saving = (hasCase && effRate) ? (assessed - target) * effRate : null;
+
+      current.appeal = Object.assign(current.appeal || {}, {
+        target: target, limit: limit, overBy: overBy, hasCase: hasCase,
+        saving: saving, peerMed: peerMed, peerN: peerN,
+        basis: 'state-verified sale plus certified Chapter 123 corridor',
+        statutory: true, chapter123Applicable: true, revaluationYear: false,
+        ratio: official.ratio, upperRatio: upperRatio, ratioYear: official.year
+      });
+      trackChapter123Coverage(true, 'A-own-sale-certified');
+
+      var rows = '<div class="score-rows">' +
+        '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
+        evidence.map(function (e) { return '<div class="score-row"><span>' + esc(e.label) + '</span><b>' + money(e.value) + '</b></div>'; }).join('') +
+        '<div class="score-row"><span>Certified average ratio, tax year ' + official.year + '</span><b>' + (official.ratio * 100).toFixed(2) + '%</b></div>' +
+        '<div class="score-row"><span>Assessment supported at the certified ratio</span><b>' + money(target) + '</b></div>' +
+        '<div class="score-row"><span>Certified legal upper ratio</span><b>' + (upperRatio * 100).toFixed(2) + '%</b></div>' +
+        '<div class="score-row' + (hasCase ? ' over' : '') + '"><span>Chapter 123 upper limit</span><b>' + money(limit) + '</b></div>' +
+        (hasCase ? '<div class="score-row over"><span>Assessed above that limit by</span><b>' + money(overBy) + '</b></div>' : '') +
+        (peerMed !== null ? '<div class="score-row"><span>Peer median, supporting context only (' + peerN + ' homes)</span><b>' + money(peerMed) + '</b></div>' : '') +
+        '</div>';
+
+      host.innerHTML =
+        buildDeadlineBanner() +
+        '<h3 class="plm-sec-h">Do you have a tax appeal?</h3>' +
+        '<p class="plm-sec-s">This Chapter 123 screen uses independent market-value evidence and the municipality\u2019s certified ' + official.year +
+        ' ratio/common-level range. The state-certified upper ratio is used directly and is legally capped at 100 percent.</p>' +
+        '<div class="pl-card">' +
+buildOpinion(hasCase, overBy, saving, target) + rows +
+(saving && saving > 150
+  ? '<div class="score-save"><div class="score-save-n">' + money(saving) + '<span>/yr</span></div>' +
+      '<div class="score-save-l">Estimated annual saving if the assessment came down to ' + money(target) +
+        '. About <b>' + money(saving * 5) + '</b> over five years.</div>' +
+      '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">Have John screen this appeal</button></div>'
+  : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'appeal\')">Have John double check this</button>') +
+        '</div>' +
+        '<div class="score-fine">Informational screening only. This is not legal, tax, appraisal, or certified comparative market analysis advice. ' +
+        'Figures are estimates from public state data and may be incomplete or stale. A filed appeal needs current comparable sales and the certified ratio/range for the applicable tax year. ' +
+        'Verify the filing deadline and evidence with the municipal assessor or county board of taxation, or with a qualified professional, before filing.</div>';
+      return;
+    }
+
+    // Peer-only evidence path. Never call this Chapter 123, never apply a 15%
+    // corridor, and never project appeal savings from another property's assessment.
+    trackChapter123Coverage(false, peerMed !== null ? 'peer-only' : (hasMarketAnchor ? 'missing-certified-ratio' : 'neither'));
+    if (peerMed === null) {
       host.innerHTML = '';
       return;
     }
 
-    // Where the assessment SHOULD sit, on independent evidence
-    var target = null, basis = '';
-    if (anchors.length) {
-      target = median(anchors) * v.ratio;
-      basis = 'its own sale history';
-    } else {
-      target = peerMed;
-      basis = 'what comparable neighbors are assessed at';
-    }
-    if (peerMed !== null && anchors.length) target = Math.max(target, Math.min(peerMed * 1.25, target * 1.25));
-
-    var limit = target * 1.15;                    // Chapter 123 cushion
-    var overBy = assessed - limit;
-    var hasCase = overBy > 0;
-    var effRate = (tax && assessed) ? tax / assessed : null;
-    var saving = (hasCase && effRate) ? (assessed - target) * effRate : null;
-
+    var peerGap = assessed - peerMed;
+    var peerPct = peerMed ? (peerGap / peerMed) * 100 : 0;
     current.appeal = Object.assign(current.appeal || {}, {
-      target: target, limit: limit, overBy: overBy, hasCase: hasCase,
-      saving: saving, peerMed: peerMed, peerN: peerN, basis: basis
+      target: null, limit: null, overBy: null, hasCase: false, saving: null,
+      peerMed: peerMed, peerN: peerN, basis: 'peer-assessment comparison',
+      statutory: false, chapter123Applicable: null, revaluationYear: !!reval.isCurrentYear
     });
-    trackChapter123Coverage(true, anchors.length ? 'A-own-sale' : 'B-peer-assessments');
-
-    var rows = '<div class="score-rows">' +
-      '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
-      evidence.map(function (e) {
-        return '<div class="score-row"><span>' + esc(e.label) + '</span><b>' + money(e.value) + '</b></div>';
-      }).join('') +
-      (peerMed !== null
-        ? '<div class="score-row"><span>Median assessment of ' + peerN + ' comparable homes nearby</span><b>' + money(peerMed) + '</b></div>'
-        : '') +
-      '<div class="score-row"><span>Assessment the evidence supports</span><b>' + money(target) + '</b></div>' +
-      '<div class="score-row' + (hasCase ? ' over' : '') + '"><span>Chapter 123 upper limit</span><b>' + money(limit) + '</b></div>' +
-      (hasCase ? '<div class="score-row over"><span>Assessed above that limit by</span><b>' + money(overBy) + '</b></div>' : '') +
-      '</div>';
 
     host.innerHTML =
-      buildDeadlineBanner() +
-      '<h3 class="plm-sec-h">Do you have a tax appeal?</h3>' +
-      '<p class="plm-sec-s">Tested against evidence that did not come from the assessment itself: ' + esc(basis) +
-      '. New Jersey gives municipalities a 15 percent cushion under Chapter 123. Above it, the county board is directed to reduce the assessment.</p>' +
-      '<div class="pl-card">' +
-        buildOpinion(hasCase, overBy, saving, target) +
-        rows +
-        (saving && saving > 150
-          ? '<div class="score-save">' +
-              '<div class="score-save-n">' + money(saving) + '<span>/yr</span></div>' +
-              '<div class="score-save-l">Estimated annual saving if the assessment came down to ' + money(target) +
-                '. About <b>' + money(saving * 5) + '</b> over five years.</div>' +
-              '<button class="plm-rbtn" onclick="plOpenForm(\'appeal\')">Have John screen this appeal</button>' +
-            '</div>'
-          : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'appeal\')">Have John double check this</button>') +
-      '</div>' +
-      '<div class="score-fine">Screening only. A filed appeal needs current comparable sales, the municipality\u2019s certified ratio for the tax year, and often an interior inspection. ' +
-      'Deadlines are generally April 1, or May 1 in a town that recently revalued. I prepare these, and I will tell you when a case is not worth filing.</div>';
+      '<h3 class="plm-sec-h">How this assessment compares to similar homes nearby</h3>' +
+      '<p class="plm-sec-s">This is an assessment-comparison signal only. It is <b>not a Chapter 123 test</b>, because neighboring assessments are not independent evidence of true market value. ' +
+      'It can tell you when a property looks unusual enough to investigate, but it cannot establish a statutory appeal limit or savings amount.</p>' +
+      '<div class="pl-card"><div class="score-rows">' +
+        '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
+        '<div class="score-row"><span>Median assessment of ' + peerN + ' similar homes nearby</span><b>' + money(peerMed) + '</b></div>' +
+        '<div class="score-row' + (peerGap > 0 ? ' over' : '') + '"><span>Difference from the peer median</span><b>' +
+(peerGap > 0 ? '+' : '') + money(peerGap) + ' (' + (peerPct > 0 ? '+' : '') + peerPct.toFixed(1) + '%)</b></div>' +
+      '</div></div>' +
+      '<div class="score-fine">Informational comparison only. This is not legal, tax, appraisal, or certified comparative market analysis advice. ' +
+      'Peer assessments can reflect different condition, exemptions, improvements, or assessment history. Verify current records and obtain independent market-value evidence before considering an appeal.</div>';
   }
 
   function trackChapter123Coverage(testable, basis) {
@@ -1941,65 +2023,31 @@
   // upper limit is this assessment".
   // ══════════════════════════════════════════════
   function watchdogScore(assessed, val, comps) {
-    // The valuation is derived from the assessment, so comparing the two tells
-    // us nothing. The only real signal available in public data is how THIS
-    // property is assessed relative to genuinely comparable neighbors.
-    //
-    // Peer group: nearby homes of similar vintage and lot size. If this one
-    // carries a materially higher assessment per comparable home than its
-    // peers do, that is the pattern an appeal is built on.
+    // Legacy peer-comparison helper retained only for compatibility. It is not
+    // a Chapter 123 calculation and it never marks a property as appealable.
     if (!assessed || !comps || comps.length < 10 || !val) return null;
-
     var subjBuilt = (current && current.yearBuilt) ? +current.yearBuilt : 0;
     var subjAcres = (current && current.acres) ? +current.acres : 0;
-
     var peers = comps.filter(function (c) {
       if (!c.assessed || c.assessed < 10000) return false;
       if (subjBuilt && c.built && Math.abs(c.built - subjBuilt) > 18) return false;
       if (subjAcres && c.acres && (c.acres < subjAcres * 0.5 || c.acres > subjAcres * 2.0)) return false;
       return true;
     });
-    if (peers.length < 8) {
-      peers = comps.filter(function (c) { return c.assessed && c.assessed > 10000; });
-    }
+    if (peers.length < 8) peers = comps.filter(function (c) { return c.assessed && c.assessed > 10000; });
     if (peers.length < 8) return null;
-
-    var pa = peers.map(function (c) { return c.assessed; });
-    var medPeer = median(pa);
+    var medPeer = median(peers.map(function (c) { return c.assessed; }));
     if (!medPeer) return null;
-
-    var gap = (assessed - medPeer) / medPeer;      // how far above peers
+    var gap = (assessed - medPeer) / medPeer;
     var score = Math.round(50 + Math.max(-45, Math.min(45, gap * 180)));
-
-    // what the assessment would be at the peer median, and the resulting range
-    var fair = medPeer;
-    var upper = medPeer * 1.15;                     // Chapter 123 style cushion
-
-    var band, label, blurb;
-    if (assessed > upper) {
-      band = 'bad'; label = 'Assessed above its peers';
-      blurb = 'Comparable homes nearby, similar vintage and lot size, carry noticeably lower assessments. ' +
-              'That gap is the pattern a New Jersey appeal is built on. It is not proof, because the public record ' +
-              'cannot see condition or upgrades, but it is worth a real look.';
-    } else if (gap > 0.05) {
-      band = 'warn'; label = 'Slightly above peers';
-      blurb = 'A little higher than comparable homes nearby, but inside the cushion New Jersey allows. ' +
-              'An appeal here would need strong comps to succeed.';
-    } else if (gap < -0.10) {
-      band = 'good'; label = 'Assessed below its peers';
-      blurb = 'This property carries a lower assessment than comparable homes nearby. Good news for the tax bill, ' +
-              'and useful to know before you list.';
-    } else {
-      band = 'ok'; label = 'In line with its peers';
-      blurb = 'The assessment tracks closely with comparable homes nearby. Nothing here suggests an appeal.';
-    }
-
+    var band = gap > 0.15 ? 'bad' : gap > 0.05 ? 'warn' : gap < -0.10 ? 'good' : 'ok';
+    var label = gap > 0.15 ? 'Assessed well above peers' : gap > 0.05 ? 'Slightly above peers' : gap < -0.10 ? 'Assessed below peers' : 'In line with peers';
+    var blurb = 'Peer-assessment comparison only. This can flag an unusual assessment, but it is not a Chapter 123 test and does not establish appeal eligibility or savings.';
     return {
       score: score, band: band, label: label, blurb: blurb,
-      peerCount: peers.length, medPeer: medPeer, fair: fair, upper: upper,
-      over: assessed - upper, overPct: gap,
-      market: val.mid, ratio: val.ratio,
-      appealable: assessed > upper
+      peerCount: peers.length, medPeer: medPeer, fair: medPeer, upper: null,
+      over: assessed - medPeer, overPct: gap, market: val.mid, ratio: val.ratio,
+      appealable: false, peerOnly: true
     };
   }
 
@@ -2030,7 +2078,7 @@
 
     host.innerHTML =
       '<h3 class="plm-sec-h">Watchdog Score</h3>' +
-      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is the comparison a New Jersey appeal turns on.</p>' +
+      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is a peer-assessment signal, not a Chapter 123 statutory test.</p>' +
       '<div class="score-wrap">' +
         '<div class="score-gauge">' +
           '<svg viewBox="0 0 260 150" role="img" aria-label="Watchdog Score ' + sc.score + '">' +
@@ -2053,11 +2101,10 @@
           '<div class="score-rows">' +
             '<div class="score-row"><span>This assessment</span><b>' + money(assessed) + '</b></div>' +
             '<div class="score-row"><span>Median of ' + sc.peerCount + ' comparable homes nearby</span><b>' + money(sc.medPeer) + '</b></div>' +
-            '<div class="score-row"><span>Upper limit before it looks out of line</span><b>' + money(sc.upper) + '</b></div>' +
+            '<div class="score-row"><span>Difference from peer median</span><b>' + (sc.over > 0 ? '+' : '') + money(sc.over) + '</b></div>' +
             (current.valuation && current.valuation.ratioSource === 'official'
               ? '<div class="score-row"><span>Official ratio, tax year ' + current.valuation.ratioYear + '</span><b>' +
                 (current.valuation.ratio * 100).toFixed(2) + '%</b></div>' : '') +
-            (sc.over > 0 ? '<div class="score-row over"><span>Assessed above the limit by</span><b>' + money(sc.over) + '</b></div>' : '') +
           '</div>' +
           (save
             ? '<div class="score-save">' +
@@ -2069,10 +2116,8 @@
             : '<button class="plm-rbtn ghost" style="margin-top:14px;" onclick="plOpenForm(\'value\')">Have John double check this</button>') +
         '</div>' +
       '</div>' +
-      '<div class="score-fine">Screening comparison only, built from public assessment records. It cannot see condition, upgrades, or interior finish, ' +
-      'and those are exactly what an assessor weighs. ' +
-      'A real appeal needs current comparable sales and the municipality\u2019s official equalization ratio for the tax year. ' +
-      'Filing deadlines are generally April 1, or May 1 in a town that recently revalued.</div>';
+      '<div class="score-fine">Peer-comparison screening only. It does not establish a Chapter 123 limit or appeal eligibility. ' +
+      'This is not legal, tax, appraisal, or certified comparative market analysis advice. Verify current records and independent market-value evidence before filing.</div>';
   }
 
   // ══════════════════════════════════════════════
@@ -3315,25 +3360,43 @@
   function appealDeadline() {
     var now = new Date();
     var yr = now.getFullYear();
-    var apr = new Date(yr, 3, 1);                 // April 1
-    if (now > apr) { apr = new Date(yr + 1, 3, 1); }
-    var days = Math.ceil((apr - now) / 864e5);
-    return { date: apr, days: days, year: apr.getFullYear() };
+    var reval = revaluationStatus(current).isCurrentYear;
+    var currentDue = new Date(yr, reval ? 4 : 3, 1);   // May 1 in current-year reval/reassessment towns
+    var due = currentDue;
+    var dueUsesReval = reval;
+    if (now > currentDue) {
+      // The next year's approved list may not exist yet. Do not carry a 2026
+      // revaluation flag into 2027; use the general April 1 date until the next
+      // official list is loaded.
+      due = new Date(yr + 1, 3, 1);
+      dueUsesReval = false;
+    }
+    return {
+      date: due,
+      days: Math.ceil((due - now) / 864e5),
+      year: due.getFullYear(),
+      currentYearRevaluation: reval,
+      currentYearDeadline: currentDue,
+      dueUsesRevaluationRule: dueUsesReval
+    };
   }
 
   function buildDeadlineBanner() {
     var d = appealDeadline();
     var urgent = d.days <= 75;
     var pretty = d.date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    var revalCopy = '';
+    if (d.currentYearRevaluation) {
+      var currentPretty = d.currentYearDeadline.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      revalCopy = '<span>This municipality is on New Jersey\u2019s ' + new Date().getFullYear() + ' approved revaluation/reassessment list. ' +
+        'Chapter 123 does not apply to that assessment year, and the filing deadline for that year is <b>' + currentPretty + '</b>. ' +
+        (d.year > new Date().getFullYear() ? 'The next general deadline shown below defaults to April 1 until the next tax-year list is published.' : '') + '</span>';
+    }
     return '<a href="#" onclick="plOpenForm(\'appeal\');return false;" class="dl-banner' + (urgent ? ' urgent' : '') + '">' +
       '<div class="dl-count"><b>' + d.days + '</b><span>day' + (d.days === 1 ? '' : 's') + ' left</span></div>' +
-      '<div class="dl-text">' +
-        '<b>' + (urgent ? 'The appeal window is closing.' : 'Next appeal deadline: ' + pretty + '.') + '</b>' +
-        '<span>New Jersey assessment appeals are generally due <b>April 1</b>, or <b>May 1</b> in a town that revalued this year. ' +
-        'Miss it and the next chance is a full year and another full tax bill away.</span>' +
-      '</div>' +
-      '<div class="dl-cta">Start my review <i class="fas fa-arrow-right"></i></div>' +
-    '</a>';
+      '<div class="dl-text"><b>' + (urgent ? 'The appeal window is closing.' : 'Next filing date shown: ' + pretty + '.') + '</b>' +
+        (revalCopy || '<span>New Jersey assessment appeals are generally due <b>April 1</b>. A current-year approved revaluation or reassessment moves that year\u2019s deadline to <b>May 1</b>.</span>') +
+      '</div><div class="dl-cta">Start my review <i class="fas fa-arrow-right"></i></div></a>';
   }
 
   // ══════════════════════════════════════════════
