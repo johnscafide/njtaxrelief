@@ -9,7 +9,8 @@ const exists = (relative) => fs.existsSync(path.join(root, relative));
 
 const baseline = 'property/docs/compliance/PRIVILEGED-ACCESS-BASELINE-2026-08-22.md';
 const template = 'property/docs/compliance/PRIVILEGED-ACCESS-REVIEW-TEMPLATE.md';
-for (const file of [baseline, template]) assert.equal(exists(file), true, `Missing privileged access artifact: ${file}`);
+const serviceInventory = 'property/docs/compliance/SERVICE-ROLE-PRIVILEGE-INVENTORY-2026-08-22.md';
+for (const file of [baseline, template, serviceInventory]) assert.equal(exists(file), true, `Missing privileged access artifact: ${file}`);
 
 const migration = read('supabase/migrations/20260805235900_billing_saved_views_rls.sql');
 assert.match(migration, /create or replace function public\.protect_profile_entitlement_fields\(\)/i,
@@ -51,6 +52,24 @@ assert.match(backoffice, /revoked_at/i,
 assert.match(backoffice, /12 \* 60 \* 60 \* 1000/,
   'Backoffice privileged sessions must retain a bounded expiry unless deliberately re-reviewed.');
 
+function walk(dir) {
+  const absolute = path.join(root, dir);
+  if (!fs.existsSync(absolute)) return [];
+  return fs.readdirSync(absolute, { withFileTypes: true }).flatMap((entry) => {
+    const rel = path.join(dir, entry.name);
+    return entry.isDirectory() ? walk(rel) : [rel];
+  });
+}
+const browserAssets = [
+  ...walk('property/js').filter((file) => /\.m?js$/i.test(file)),
+  ...walk('property').filter((file) => /\.html$/i.test(file))
+];
+for (const file of browserAssets) {
+  const source = read(file);
+  assert.doesNotMatch(source, /SUPABASE_SERVICE_ROLE_KEY|service_role\s*[:=]\s*["'][A-Za-z0-9._-]{12,}/i,
+    `Privileged service-role material/reference must not appear in browser-delivered asset: ${file}`);
+}
+
 const baselineText = read(baseline);
 for (const phrase of ['No self-promotion from browser clients', 'Server-side developer evaluation', 'Service-role isolation', 'Least privilege', 'Review cadence']) {
   assert.match(baselineText, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Privileged baseline missing governance rule: ${phrase}`);
@@ -59,6 +78,11 @@ for (const phrase of ['No self-promotion from browser clients', 'Server-side dev
 const templateText = read(template);
 for (const phrase of ['Human privileged access summary', 'Machine privilege summary', 'Joiner / mover / leaver check', 'Application authorization evidence', 'Residual risk']) {
   assert.match(templateText, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Privileged review template missing: ${phrase}`);
+}
+
+const serviceInventoryText = read(serviceInventory);
+for (const phrase of ['Provider-authenticated webhook', 'Authenticated end-user action', 'Developer/admin action', 'Internal scheduled/system job', 'Public ingestion with constrained privilege']) {
+  assert.match(serviceInventoryText, new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'), `Service-role inventory missing classification: ${phrase}`);
 }
 
 console.log('Watchdog privileged access contracts passed.');
