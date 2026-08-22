@@ -21,7 +21,7 @@ Deno.serve(async req=>{
  const legacyScoreAliasRequests=rawMarkers.filter(id=>id===LEGACY_SCORE_ALIAS).length;
  const markers=[...new Set(rawMarkers.map(id=>id===LEGACY_SCORE_ALIAS?CANONICAL_SCORE:id))];
  const providerMarkers=markers.filter(id=>!SCORE_MARKERS.has(id)&&!CLIENT_MARKERS.has(id));
- const routedMarkers={provider:providerMarkers,scores:markers.filter(id=>SCORE_MARKERS.has(id)),client:markers.filter(id=>CLIENT_MARKERS.has(id)};
+ const routedMarkers={provider:providerMarkers,scores:markers.filter(id=>SCORE_MARKERS.has(id)),client:markers.filter(id=>CLIENT_MARKERS.has(id))};
  const scoreContract={marker_id:CANONICAL_SCORE,framework:'ROBUST',model_version:SCORE_MODEL,legacy_alias:LEGACY_SCORE_ALIAS,legacy_alias_status:'retired'};
  if(!pins.length)return out(req,200,{records:[],markers:{},meta:{},phases:[],summary:{requested:0,legacy_score_alias_requests:legacyScoreAliasRequests},routed_markers:routedMarkers,score_contract:scoreContract});
  const phases:any[]=[];let baseline:any=null,hydrate:any=null,scores:any=null;
