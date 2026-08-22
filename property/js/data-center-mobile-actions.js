@@ -132,6 +132,8 @@
   }
 
   function selectedIds() {
+    var chips = Array.from(document.querySelectorAll('#dc-chips [data-remove]')).map(function (node) { return node.dataset.remove; }).filter(Boolean);
+    if (chips.length) return chips;
     return Array.from(document.querySelectorAll('#dc-rows input[data-marker]:checked')).map(function (node) { return node.dataset.marker; });
   }
 
