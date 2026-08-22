@@ -37,12 +37,10 @@ jobs:
           body = src.split(marker, 1)[1]
           out = []
           for line in body.splitlines():
-              if not line:
-                  out.append('')
-              elif line.startswith('          '):
+              if line.startswith('          '):
                   out.append(line[10:])
               else:
-                  break
+                  out.append(line)
           if not out:
               raise SystemExit('remediation run block empty')
           Path('/tmp/watchdog-prelaunch-remediate.sh').write_text('\n'.join(out) + '\n')
