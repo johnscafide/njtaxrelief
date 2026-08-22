@@ -138,6 +138,18 @@ function rewriteNavigationLinks(html) {
     });
 }
 
+function ensureLandingRootClass(html) {
+  return html.replace(/<body\b([^>]*)>/i, (full, attrs) => {
+    if (/\bwd-consumer-mode\b/i.test(attrs)) return full;
+    if (/\bclass\s*=/.test(attrs)) {
+      return full.replace(/\bclass=(["'])(.*?)\1/i, (match, quote, classes) => {
+        return `class=${quote}${classes} wd-consumer-mode${quote}`;
+      });
+    }
+    return `<body${attrs} class="wd-consumer-mode">`;
+  });
+}
+
 function cleanRouteRuntime() {
   return `<script id="watchdog-clean-route-runtime">(function(){
 'use strict';
@@ -242,7 +254,8 @@ module.exports = async function handler(req, res) {
   }
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${publicPath === '/' ? '/' : publicPath}`;
-  const html = setCanonicalMetadata(source.html, canonicalUrl);
+  const sourceHtml = publicPath === '/' ? ensureLandingRootClass(source.html) : source.html;
+  const html = setCanonicalMetadata(sourceHtml, canonicalUrl);
   const upstreamCache = source.response.headers.get('cache-control');
   const upstreamRobots = source.response.headers.get('x-robots-tag');
   const forceNoIndex = NOINDEX_PATH_PREFIXES.some(prefix => publicPath === prefix || publicPath.startsWith(`${prefix}/`));
