@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-22T12:39:15.884Z",
+ "generated_at": "2026-08-22T16:59:01.450Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 512,
+   "live": 518,
    "partial": 4,
    "unavailable": 11,
-   "planned": 207
+   "planned": 201
   },
   "retired_phase5": 0
  },
@@ -13971,8 +13971,8 @@
    "field": "transit_station_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "transit_station_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13996,8 +13996,8 @@
    "field": "bus_terminal_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "bus_terminal_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14021,8 +14021,8 @@
    "field": "hospital_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "hospital_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14046,8 +14046,8 @@
    "field": "college_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "college_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14071,8 +14071,8 @@
    "field": "park_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "park_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14096,8 +14096,8 @@
    "field": "library_access",
    "professional_reason": "Published community assets and designations data for professional review; verify the official record before reliance.",
    "source_field": "library_access",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
