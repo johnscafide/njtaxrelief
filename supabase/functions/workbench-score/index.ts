@@ -112,8 +112,10 @@ function chapter123(row, market, stored, sr1a) {
   if (!market || !num(row.assessed_value)) return null;
   let independent = null, basis = null;
   const saved = num(stored);
-  if (saved && Math.abs(saved - market.v) / market.v > 0.001) { independent = saved; basis = "comparable sales from the saved property record"; }
-  else if (sr1a && num(sr1a.ppsf) && num(row.living_sqft)) { independent = Number(sr1a.ppsf) * Number(row.living_sqft); basis = "median price per square foot in this municipality"; }
+  if (saved && Math.abs(saved - market.v) / market.v > 0.001) {
+    independent = saved;
+    basis = "comparable sales from the saved property record";
+  }
   const result = { market: market.v, ratio: market.ratio, src: market.src, n: market.n, testable: false, hasCase: false, indep: independent, basis };
   if (independent == null || market.ratio == null) return result;
   const fair = independent * market.ratio, limit = fair * 1.15;
@@ -200,7 +202,7 @@ Deno.serve(async req => {
   if (!pins.length) return out(req, 200, { markers: {}, meta: {}, summary: { requested: 0, scored: 0 }, framework: "ROBUST", model_version: SCORE_MODEL });
   const aliases = new Map(pins.map(pin => [pin, canonicalPin(pin)])), queryPins = [...new Set([...pins, ...aliases.values()])], src = await sources();
   const [{ data: rows, error: propertyError }, { data: saved }] = await Promise.all([
-    admin.from("property_lookups").select("pams_pin,town,county,assessed_value,last_year_tax,last_sale_price,last_sale_year,living_sqft,history").in("pams_pin", queryPins),
+    admin.from("property_lookups").select("pams_pin,town,county,assessed_value,last_year_tax,last_sale_price,last_sale_year,history").in("pams_pin", queryPins),
     admin.from("saved_properties").select("pams_pin,watchdog_value").eq("user_id", authData.user.id).in("pams_pin", queryPins)
   ]);
   if (propertyError) return out(req, 503, { error: "Property warehouse unavailable" });
