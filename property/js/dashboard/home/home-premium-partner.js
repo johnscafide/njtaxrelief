@@ -1,15 +1,25 @@
 /* Property Home premium Intel + partner composition.
-   Keeps Analyst Intel intact while presenting it as a compact half-width brief
-   beside the existing Greentree mortgage partner used elsewhere in Watchdog. */
+   Analyst Intel remains primary; the inline Greentree unit is a compact quarter-width rail.
+   A separate rotating sponsor banner is mounted immediately before the official footer. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_PREMIUM_PARTNER__)return;
 window.__WATCHDOG_HOME_PREMIUM_PARTNER__=true;
 var timer=0;
 
+function ensureAssets(){
+  if(!document.querySelector('link[data-watchdog-home-ad-quarter]')){
+    var css=document.createElement('link');
+    css.rel='stylesheet';
+    css.href='/property/css/home/home-ad-quarter.css';
+    css.setAttribute('data-watchdog-home-ad-quarter','1');
+    document.head.appendChild(css);
+  }
+}
+
 function partner(){
   return '<aside class="wdai-partner" aria-label="Sponsored mortgage partner">'+
-    '<a class="wdai-partner-link" href="https://johnvarano.com/" target="_blank" rel="noopener sponsored">'+
+    '<a class="wdai-partner-link" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=property_home_rail" target="_blank" rel="noopener sponsored">'+
       '<div class="wdai-partner-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager at Greentree Mortgage, an HMA Company" loading="lazy"></div>'+
       '<div class="wdai-partner-copy">'+
         '<span class="wdai-partner-label"><i></i> Advertisement · Mortgage partner</span>'+
@@ -22,6 +32,41 @@ function partner(){
       '</div>'+
     '</a>'+
   '</aside>';
+}
+
+function footerAdMarkup(){
+  return '<section class="hm-footer-ad" id="hm-footer-ad" aria-label="Watchdog advertising">'+
+    '<div class="hm-footer-ad-in">'+
+      '<a href="https://johnvarano.com/" target="_blank" rel="noopener sponsored" class="gt-banner" aria-label="Sponsored Watchdog partner">'+
+        '<div class="gt-banner-inner">'+
+          '<div class="gt-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>'+
+          '<div class="gt-text">'+
+            '<div class="gt-eyebrow">Greentree Mortgage, an HMA Company · John Varano, Branch Manager</div>'+
+            '<div class="gt-headline">Know the payment before you fall in love with the house.</div>'+
+            '<div class="gt-sub">Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.</div>'+
+          '</div>'+
+          '<div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>'+
+        '</div>'+
+        '<div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>'+
+      '</a>'+
+    '</div>'+
+  '</section>';
+}
+
+function mountFooterAd(){
+  if(document.getElementById('hm-footer-ad'))return;
+  var footer=document.getElementById('wd-property-footer');
+  if(!footer)return;
+  var box=document.createElement('div');
+  box.innerHTML=footerAdMarkup();
+  footer.parentNode.insertBefore(box.firstElementChild,footer);
+  if(!document.querySelector('script[data-watchdog-home-footer-ads]')){
+    var script=document.createElement('script');
+    script.src='/property/js/dashboard/home/home-footer-ad-rotator.js';
+    script.async=true;
+    script.setAttribute('data-watchdog-home-footer-ads','1');
+    document.body.appendChild(script);
+  }
 }
 
 function mount(){
@@ -50,12 +95,15 @@ function mount(){
 
 function schedule(){clearTimeout(timer);timer=setTimeout(mount,80)}
 function boot(){
+  ensureAssets();
+  mountFooterAd();
   mount();
   var body=document.getElementById('hm-body');
   if(body)new MutationObserver(schedule).observe(body,{childList:true,subtree:true});
   ['watchdog:intent-ready','watchdog:intent-updated','watchdog:context-refresh','watchdog:profession-updated'].forEach(function(name){window.addEventListener(name,schedule)});
 }
 
-window.WatchdogHomePremiumPartner={mount:mount};
+ensureAssets();
+window.WatchdogHomePremiumPartner={mount:mount,mountFooterAd:mountFooterAd};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
