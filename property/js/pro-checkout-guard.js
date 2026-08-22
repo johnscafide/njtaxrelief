@@ -5,7 +5,7 @@
 (function(){
   'use strict';
   var path=(window.location.pathname||'').replace(/\/+$/,'');
-  if(path!=='/property/pro')return;
+  if(path!=='/property/pro'&&path!=='/pro')return;
 
   function cadence(){
     if(typeof window.WatchdogProCadence==='function')return window.WatchdogProCadence();
