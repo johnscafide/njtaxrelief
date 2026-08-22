@@ -1,7 +1,7 @@
 # Watchdog Compliance Control Register
 
 **Program status:** Readiness in progress  
-**Last updated:** 2026-08-21  
+**Last updated:** 2026-08-22  
 **Assurance status:** No independent certification or SOC report is claimed by this document.
 
 ## Status key
@@ -23,7 +23,9 @@
 | WCR-AUTH-001 | Central OAuth/session security baseline | OWASP ASVS V6/V7/V10, NIST Protect, SOC 2 Security | Partial | `property/js/supabase-runtime.js`, `property/tests/auth-asvs-contract.mjs`, ASVS identity tranche | Verify provider-side production settings, session lifetime, recovery/account-linking behavior, and MFA enforcement. |
 | WCR-AUTH-002 | Session lifecycle and logout regression control | OWASP ASVS Session Management, NIST Protect, SOC 2 Security, ISO 27001 | Implemented | `property/docs/compliance/SESSION-SECURITY-BASELINE-2026-08-21.md`, `property/tests/session-security-contract.mjs`, `.github/workflows/zero-cost-compliance-readiness.yml` | Inventory direct Supabase client configurations, capture JWT expiry evidence, and classify sensitive actions requiring current-session/AAL2 checks. |
 | WCR-CHG-001 | Git source of truth / production reconciliation | SOC 2 Change Management, NIST Protect, ISO 27001 | Implemented | `supabase/functions/DEPLOYMENT-POLICY.md`, production inventory controls | Extend equivalent evidence discipline to every material connector and infrastructure component. |
-| WCR-IAM-001 | Database row-level access and entitlements | SOC 2 Security, OWASP ASVS Access Control | Implemented | `property/tests/security-contracts.mjs`, Supabase migrations | Add periodic privileged-access review evidence and formal joiner/mover/leaver process as team grows. |
+| WCR-IAM-001 | Database row-level access and entitlements | SOC 2 Security, OWASP ASVS Access Control | Implemented | `property/tests/security-contracts.mjs`, Supabase migrations | Maintain owner-bound RLS and server-managed entitlement fields; re-review on role-model changes. |
+| WCR-IAM-002 | Privileged access governance baseline | SOC 2 Security, NIST Govern/Protect, OWASP ASVS Access Control, ISO 27001 | Implemented | `property/docs/compliance/PRIVILEGED-ACCESS-BASELINE-2026-08-22.md`, `property/tests/privileged-access-contract.mjs`, `.github/workflows/zero-cost-compliance-readiness.yml` | Perform and retain the first identity-level periodic access review across Watchdog and Tier 1 provider consoles without committing personal identifiers publicly. |
+| WCR-IAM-003 | Periodic privileged access review / joiner-mover-leaver evidence | SOC 2 Security, NIST Govern/Protect, ISO 27001 | Partial | `property/docs/compliance/PRIVILEGED-ACCESS-REVIEW-TEMPLATE.md` | Complete first quarterly review, document provider-console membership evidence privately, establish offboarding checklist and break-glass procedure. |
 | WCR-PAY-001 | Signed payment webhooks | SOC 2 Security, OWASP ASVS, PCI DSS | Implemented | Stripe/Paddle checks in `property/tests/security-contracts.mjs` | Maintain signature/replay/deduplication tests for every active payment provider. |
 | WCR-PAY-002 | Server-authoritative pricing | SOC 2 Processing Integrity, OWASP ASVS | Implemented | Marketing/subscription checkout security contracts | Maintain tests for every new paid workflow. |
 | WCR-PCI-001 | PCI scope and SAQ readiness | PCI DSS, SOC 2 Security/Processing Integrity | Partial | `property/docs/compliance/PCI-SCOPE-MEMO.md`, `supabase/functions/create-checkout-session/index.ts` | Verify every live SAQ A eligibility criterion; required ASV validation remains an external dependency. |
@@ -53,4 +55,4 @@ Every new material connector should eventually have a dated record containing bu
 
 ## Audit-readiness gate
 
-A formal SOC 2 readiness engagement should be considered when core authentication/entitlements are stable; billing and PCI scope are documented; material connectors are inventoried; privileged access/change management operate consistently; incident response and recovery have measured evidence; vulnerability management operates with remediation expectations; privacy assessments reflect the live product; accessibility covers representative journeys; ASVS Level 2 mapping is substantially complete including MFA disposition; and evidence has accumulated over time.
+A formal SOC 2 readiness engagement should be considered when core authentication/entitlements are stable; billing and PCI scope are documented; material connectors are inventoried; privileged access/change management operate consistently with retained periodic review evidence; incident response and recovery have measured evidence; vulnerability management operates with remediation expectations; privacy assessments reflect the live product; accessibility covers representative journeys; ASVS Level 2 mapping is substantially complete including MFA disposition; and evidence has accumulated over time.
