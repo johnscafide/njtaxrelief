@@ -11,6 +11,7 @@
   var MOBILE_FINAL_STYLE='/property/css/agent-control-mobile-final.css';
   var BRAND_RUNTIME='/property/js/brand-consistency-runtime.js';
   var EVIDENCE_MOBILE_RUNTIME='/property/js/agent-control-evidence-mobile.js';
+  var IMPORT_MOBILE_RUNTIME='/property/js/agent-import-mobile-a11y.js';
 
   function ensureStyle(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
@@ -34,6 +35,7 @@
     ensureStyle(EVIDENCE_MOBILE_STYLE);
     ensureStyle(MOBILE_FINAL_STYLE);
     ensureScript(EVIDENCE_MOBILE_RUNTIME);
+    ensureScript(IMPORT_MOBILE_RUNTIME);
     if(window.__WATCHDOG_BRAND_CONSISTENCY__||document.querySelector('script[src="'+BRAND_RUNTIME+'"]'))return;
     var script=document.createElement('script');
     script.src=BRAND_RUNTIME;
