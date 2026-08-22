@@ -2,7 +2,7 @@
   'use strict';
 
   var path=(window.location.pathname||'').replace(/\/+$/,'');
-  if(path!=='/property/pro')return;
+  if(path!=='/property/pro'&&path!=='/pro')return;
 
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
@@ -159,7 +159,7 @@
   }
 
   function sampleTracking(){
-    document.querySelectorAll('a[href="/property/"]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_sample_click',{location:link.closest('.pro-hero')?'hero':link.closest('.pro-demo')?'demo':'page'});});});
+    document.querySelectorAll('a[href="/property/"],a[href="/"]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_sample_click',{location:link.closest('.pro-hero')?'hero':link.closest('.pro-demo')?'demo':'page'});});});
   }
 
   function loadOutcomeGuidance(){
