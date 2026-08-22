@@ -13,7 +13,6 @@ const SUPPORTED_FIELDS=new Set([
   'assessment_record_years',
 ]);
 const SOURCE_LABEL='NJ Division of Taxation annual MOD-IV assessment lists';
-const DIAGNOSTIC_PIN='0101_25.01_10';
 
 type CacheEntry={at:number;payload:any};
 let releaseCache:CacheEntry|null=null;
@@ -30,6 +29,14 @@ function normComponent(input:any){
     return normalizedFrac?`${normalizedWhole}.${normalizedFrac}`:normalizedWhole;
   }
   return value.replace(/\s+/g,' ');
+}
+function treasuryComponent(input:any){
+  const value=normComponent(input);
+  const match=value.match(/^(\d+)\.(\d{1,2})$/);
+  if(!match)return value;
+  const whole=match[1].padStart(5,'0');
+  const fraction=match[2].padEnd(2,'0');
+  return `${whole} ${fraction}`;
 }
 function sourceFor(releaseId:string){return `${SOURCE_LABEL} · ${releaseId}`}
 function orderedYearObject(value:any){
@@ -102,14 +109,9 @@ export async function modivLongitudinalObservation(admin:any,marker:any,row:any)
   if(!/^\d{4}$/.test(district)||!block||!lot)return{value:null,status:'source_checked_no_value',reason:'Exact district/block/lot parcel identity is incomplete.',providerKind:'authoritative_reference',source};
   const partition=await districtPartition(admin,release,district);
   if(!partition)return{value:null,status:'provider_error',reason:'Certified MOD-IV district partition could not be read or validated.',providerKind:'authoritative_reference',source};
-  const recordKey=`${block}|${lot}|${qualifier}`;
-  const record=partition.records?.[recordKey];
-  if(!record){
-    const keys=Object.keys(partition.records||{});
-    const sampleKeys=keys.slice(0,8);
-    const targetKeys=keys.filter((key:string)=>key.startsWith('00025 ')).slice(0,24);
-    const diagnostic=pin===DIAGNOSTIC_PIN?` Diagnostic: schema=${String(partition?.schema_version)}, record_count=${String(partition?.record_count)}, requested=${recordKey}, sample_keys=${sampleKeys.join(';')}, target_block_keys=${targetKeys.join(';')}.`:'';
-    return{value:null,status:'source_checked_no_value',reason:`Exact parcel identity is absent from the certified annual MOD-IV release.${diagnostic}`,providerKind:'authoritative_reference',source};
-  }
+  const normalizedKey=`${block}|${lot}|${qualifier}`;
+  const treasuryKey=`${treasuryComponent(block)}|${treasuryComponent(lot)}|${qualifier}`;
+  const record=partition.records?.[normalizedKey]??partition.records?.[treasuryKey];
+  if(!record)return{value:null,status:'source_checked_no_value',reason:'Exact parcel identity is absent from the certified annual MOD-IV release.',providerKind:'authoritative_reference',source};
   return{value:valueFor(record,field),status:'available',providerKind:'authoritative_reference',source};
 }
