@@ -2,7 +2,9 @@
   'use strict';
 
   var path = (window.location.pathname || '').replace(/\/+$/, '');
-  if (path !== '/property' && path !== '/property/index.html') return;
+  var host = String(window.location.hostname || '').toLowerCase();
+  var cleanWatchdogRoot = (host === 'www.watchdogindex.com' || host === 'watchdogindex.com') && path === '';
+  if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   var attempts = 0;
   var client = null;
