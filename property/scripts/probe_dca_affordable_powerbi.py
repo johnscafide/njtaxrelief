@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
-"""Discovery-only wrapper for the governed DCA zoning-directory parser."""
+"""Discovery-only wrapper for the governed DCA zoning-directory parser.
+
+The generated JSON is uploaded only as a short-lived CI artifact for source review.
+"""
 from __future__ import annotations
 
 import json
