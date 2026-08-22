@@ -80,7 +80,7 @@ async function districtPartition(admin:any,release:any,district:string){
     const payload=await new Response(stream).json();
     if(payload?.source_id!==SOURCE_ID||String(payload?.district_code)!==district||!sameYears(payload?.source_years)||!payload?.records||typeof payload.records!=='object')return null;
     districtCache.set(cacheKey,{at:Date.now(),payload});
-    while(districtCache.size>6){const first=districtCache.keys().next().value;if(!first)break;districtCache.delete(first)}
+    while(districtCache.size>2){const first=districtCache.keys().next().value;if(!first)break;districtCache.delete(first)}
     return payload;
   }catch{return null}
 }
