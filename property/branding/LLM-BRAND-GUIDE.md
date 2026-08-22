@@ -1,6 +1,6 @@
 # Watchdog Brand Guide for LLMs and Coding Agents
 
-Read this before editing any Watchdog page, component, article, dashboard, email template, chart, or marketing surface.
+Read this before editing any Watchdog page, component, article, dashboard, email template, chart, score, or marketing surface.
 
 ## What Watchdog is
 
@@ -21,6 +21,58 @@ The product should feel precise, modern, calm, trustworthy, and useful. It shoul
 9. Protect developer-only and paid functionality with server-verified access rules, not CSS hiding alone.
 10. Do not add `?v=` query-string version numbers to new CSS or JavaScript references.
 11. **Never use the legacy vertical property sidenav.** New and redesigned pages must use the current Watchdog navigation shell or an approved modern page-specific shell.
+12. **Treat ROBUST as part of the Watchdog Score brand contract.** Do not improvise alternate expansions, labels, weights, or a separate “ROBUST Score.”
+
+## Watchdog Score and ROBUST Framework
+
+The canonical naming hierarchy is:
+
+1. **Watchdog** — platform and brand.
+2. **Watchdog Score** — the public 0–100 score/result.
+3. **ROBUST Framework** — the branded methodology and explanation layer beneath the Watchdog Score.
+4. **R / O / B / U / S / T** — the six current property-score dimensions.
+5. Governed markers and source evidence beneath each dimension.
+
+Preferred public language:
+
+- **The Watchdog Score is powered by the ROBUST Framework.**
+- **One score. Six dimensions. ROBUST.**
+- **Watchdog tells you where you stand. ROBUST tells you why.**
+
+The official ROBUST v1 dimensions are:
+
+| Letter | Official name | Current property weight | Micro-definition |
+| --- | --- | ---: | --- |
+| R | Recourse | 10% | Paths and evidence for review. |
+| O | Overassessment Position | 20% | Assessment versus supported value. |
+| B | Burden | 30% | Taxes relative to property value. |
+| U | Uniformity | 15% | Consistency across the assessment system. |
+| S | Stability | 15% | Pressure for reassessment or structural change. |
+| T | Trajectory | 10% | Direction of the property's tax position. |
+
+### ROBUST naming rules
+
+- **O must be written as Overassessment Position**, not simply Overassessment. The word “Position” is required because the metric describes where the assessment sits relative to supported evidence and does not presume a legal or factual overassessment.
+- **U is Uniformity.** Older Watchdog surfaces called municipal COD/assessment-consistency products “Assessment Fairness.” Those COD-driven surfaces belong under U and should use Uniformity language when touched or redesigned.
+- “Assessment fairness” may still appear as ordinary explanatory prose when the concept is broader than a named metric, but it is not a canonical ROBUST dimension name.
+- Keep internal compatibility keys such as `fairness` when changing them would create unnecessary regressions. Map them to the correct public ROBUST name at presentation boundaries.
+- Do not alter weights, formulas, evidence gates, or model behavior merely to make branding cleaner. Methodology changes require versioned validation.
+- ROBUST is not a desirability system. Never call a home, family, neighborhood, municipality, county, or government “ROBUST” as a quality judgment.
+- Protected-class or demographic characteristics are not ROBUST score inputs.
+- Experimental, fallback, prototype, or heuristic scores must not use the unqualified Watchdog Score or ROBUST Framework names unless they satisfy the canonical score contract.
+
+Canonical public routes:
+
+- `/property/robust/`
+- `/property/robust/recourse/`
+- `/property/robust/overassessment-position/`
+- `/property/robust/burden/`
+- `/property/robust/uniformity/`
+- `/property/robust/stability/`
+- `/property/robust/trajectory/`
+- `/property/whitepapers/watchdog-score/`
+
+For exact machine-readable ROBUST names and weights, read `/property/branding/robust-framework.json`.
 
 ## Canonical colors
 
@@ -130,7 +182,7 @@ For current product work:
 - If a page is not yet migrated to a current shell, render it without the retired sidebar rather than reintroducing legacy navigation.
 - When creating a new route, explicitly choose its current navigation pattern before considering the page complete.
 
-Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Compare, Assessment Fairness, Change Intelligence, Agent Control, Appeal Scanner, Data Workbench, Data Center, Professional Hub, and Account.
+Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Compare, ROBUST Framework, Change Intelligence, Agent Control, Appeal Scanner, Data Workbench, Data Center, Professional Hub, and Account.
 
 The shared `/property/js/sidemenu.js` intentionally no longer fetches `/property/partials/sidemenu.html`. Do not restore that fallback.
 
@@ -213,6 +265,9 @@ Protected Watchdog routes use `/property/js/access-guard.js` and server-side Sup
 Ask:
 
 - Does this look like the same product as the current Watchdog Dashboard and Home surfaces?
+- If the Watchdog Score appears, does ROBUST explain the six dimensions correctly?
+- Did I accidentally call municipal COD “Assessment Fairness” instead of U — Uniformity?
+- Did I preserve O — Overassessment Position as a neutral property-specific concept?
 - Is the main task obvious above the fold?
 - Did I add decoration with no information purpose?
 - Are typography, spacing, color, and radii on-system?
@@ -224,10 +279,14 @@ Ask:
 - Does reduced motion still work?
 - Did I accidentally expose internal or paid functionality?
 
-## Machine-readable source
+## Machine-readable sources
 
-For exact tokens and structured rules, read:
+For exact visual tokens and general structured brand rules, read:
 
 `/property/branding/brand-system.json`
 
-When this document and that JSON disagree, the JSON wins unless the user explicitly gives a newer instruction.
+For the Watchdog Score and ROBUST Framework naming contract, read:
+
+`/property/branding/robust-framework.json`
+
+The ROBUST naming contract reflects the August 22, 2026 user-approved brand decision. For score/ROBUST naming it takes precedence over older references to “Assessment Fairness” in the general brand-system JSON until those legacy references are fully removed. Explicit newer user instructions still take precedence over both files.
