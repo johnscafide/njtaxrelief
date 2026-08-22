@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-22T11:06:17.835Z",
+ "generated_at": "2026-08-22T11:07:20.082Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 502,
+   "live": 509,
    "partial": 4,
    "unavailable": 11,
-   "planned": 217
+   "planned": 210
   },
   "retired_phase5": 0
  },
@@ -15070,8 +15070,8 @@
    "field": "assessment_history_depth",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "assessment_history_depth",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15096,8 +15096,8 @@
    "field": "assessment_land_history",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "assessment_land_history",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15122,8 +15122,8 @@
    "field": "assessment_improvement_history",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "assessment_improvement_history",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15148,8 +15148,8 @@
    "field": "assessment_total_history",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "assessment_total_history",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15174,8 +15174,8 @@
    "field": "property_class_history",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "property_class_history",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15200,8 +15200,8 @@
    "field": "exemption_code_history",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "exemption_code_history",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15304,8 +15304,8 @@
    "field": "assessment_record_years",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "assessment_record_years",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
