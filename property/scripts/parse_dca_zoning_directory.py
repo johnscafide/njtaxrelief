@@ -21,6 +21,7 @@ from xml.etree import ElementTree as ET
 
 DEFAULT_SOURCE = "https://www.nj.gov/dca/library/home/Zoning_Information_Directory.xlsx"
 DEFAULT_OUTPUT = Path(__file__).resolve().parents[1] / "data" / "dca-zoning-directory.json"
+EXPECTED_SOURCE_SHA256 = "165b1e0d7b6c14583a88c1f675d91a0e2babd1b4edaa74fa5667906c789da4f9"
 NS = {
     "m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main",
     "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
@@ -144,6 +145,12 @@ def _source_timestamp(last_modified: str | None) -> str | None:
 
 
 def build_artifact(blob: bytes, source_url: str, last_modified: str | None) -> dict:
+    source_sha256 = hashlib.sha256(blob).hexdigest()
+    if source_sha256 != EXPECTED_SOURCE_SHA256:
+        raise RuntimeError(
+            "DCA zoning directory source hash changed; review the new workbook before refreshing governed data "
+            f"(expected {EXPECTED_SOURCE_SHA256}, got {source_sha256})"
+        )
     records = parse_workbook(blob)
     by_code: dict[str, dict] = {}
     for row in records:
@@ -178,7 +185,7 @@ def build_artifact(blob: bytes, source_url: str, last_modified: str | None) -> d
         "schema_version": 1,
         "generated_at": source_timestamp,
         "source": source_url,
-        "source_sha256": hashlib.sha256(blob).hexdigest(),
+        "source_sha256": source_sha256,
         "source_last_modified": last_modified,
         "source_contract": "nj-dca-zoning-directory-2026-v2-contact-status",
         "source_disclaimer": SOURCE_DISCLAIMER,
