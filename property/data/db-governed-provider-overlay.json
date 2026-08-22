@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-21T07:50:00-04:00",
+  "captured_at": "2026-08-22T07:06:31-04:00",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -24,6 +24,13 @@
     "njplus.nj-dca-community-assets.redevelopment_area_status": "live",
     "njplus.nj-dca-community-assets.transit_village_status": "live",
     "njplus.nj-dca-community-assets.urban_enterprise_zone_status": "live",
+    "njplus.nj-dca-modiv-longitudinal.assessment_history_depth": "live",
+    "njplus.nj-dca-modiv-longitudinal.assessment_improvement_history": "live",
+    "njplus.nj-dca-modiv-longitudinal.assessment_land_history": "live",
+    "njplus.nj-dca-modiv-longitudinal.assessment_record_years": "live",
+    "njplus.nj-dca-modiv-longitudinal.assessment_total_history": "live",
+    "njplus.nj-dca-modiv-longitudinal.exemption_code_history": "live",
+    "njplus.nj-dca-modiv-longitudinal.property_class_history": "live",
     "njplus.nj-dca-municipal-housing-profile.household_growth": "live",
     "njplus.nj-dca-municipal-housing-profile.housing_cost_burden_share": "live",
     "njplus.nj-dca-municipal-housing-profile.housing_stock": "live",
