@@ -8,6 +8,7 @@
   var READABILITY_STYLE='/property/css/agent-control-readability.css';
   var MOBILE_AUDIT_STYLE='/property/css/agent-control-mobile-audit.css';
   var EVIDENCE_MOBILE_STYLE='/property/css/agent-control-evidence-mobile.css';
+  var MOBILE_FINAL_STYLE='/property/css/agent-control-mobile-final.css';
   var BRAND_RUNTIME='/property/js/brand-consistency-runtime.js';
   var EVIDENCE_MOBILE_RUNTIME='/property/js/agent-control-evidence-mobile.js';
 
@@ -31,6 +32,7 @@
     ensureStyle(READABILITY_STYLE);
     ensureStyle(MOBILE_AUDIT_STYLE);
     ensureStyle(EVIDENCE_MOBILE_STYLE);
+    ensureStyle(MOBILE_FINAL_STYLE);
     ensureScript(EVIDENCE_MOBILE_RUNTIME);
     if(window.__WATCHDOG_BRAND_CONSISTENCY__||document.querySelector('script[src="'+BRAND_RUNTIME+'"]'))return;
     var script=document.createElement('script');
