@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NJ Property Tax Fairness Index 2026 | Every Town Ranked | NJ Property Tax Relief</title>
-<meta name="description" content="Compare New Jersey municipalities with available assessment-uniformity data, ranked from most to least consistent using state Coefficient of Deviation and verified sale data.">
+<title>NJ Assessment Uniformity Index 2026 | ROBUST U | Watchdog</title>
+<meta name="description" content="Compare New Jersey municipalities with available assessment-uniformity data using state Coefficient of Deviation and verified sale data. Part of U — Uniformity in the ROBUST Framework.">
 <link rel="canonical" href="https://njpropertytaxrelief.com/property/fairness">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -20,7 +20,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
 </head>
-<body data-sidebar-page="fairness">
+<body data-sidebar-page="robust">
 <div class="pl-toast" id="pl-toast"></div>
 
 <main id="fi-main">
@@ -33,15 +33,14 @@
           <div class="who">
             <div class="db-noav"><i class="fas fa-scale-balanced"></i></div>
             <div>
-              <span class="top-eyebrow">Statewide data &middot; free</span>
-              <h1>Fairness Index</h1>
-              <span>558 NJ tax districts with current uniformity data</span>
+              <span class="top-eyebrow">ROBUST Framework &middot; U &middot; statewide data &middot; free</span>
+              <h1>Uniformity Index</h1>
+              <span>558 NJ tax districts with current assessment-consistency data</span>
             </div>
           </div>
           <div class="top-acts">
-            <a class="db-add" href="/property/"><i class="fas fa-magnifying-glass"></i>
-              <span class="db-add-full">Look up your property</span><span class="db-add-short">Lookup</span>
-            </a>
+            <a class="db-add" href="/property/robust/uniformity/"><i class="fas fa-book-open"></i><span class="db-add-full">What U means</span><span class="db-add-short">About U</span></a>
+            <a class="db-add" href="/property/"><i class="fas fa-magnifying-glass"></i><span class="db-add-full">Look up your property</span><span class="db-add-short">Lookup</span></a>
           </div>
         </div>
       </header>
@@ -49,10 +48,9 @@
       <div class="wrap">
         <div class="db-page-head">
           <div>
-            <span>2026 edition</span>
-            <h2>Which NJ towns assess property tax the most evenly?</h2>
-            <p>Built from the Coefficient of Deviation the Division of Taxation publishes for every town,
-            cross-checked against the state's own verified arm's-length sales.</p>
+            <span>2026 edition &middot; U — Uniformity</span>
+            <h2>How consistently do New Jersey municipalities assess property?</h2>
+            <p>Built from the Coefficient of Deviation published by the Division of Taxation and cross-checked against the state's verified arm's-length sales. This is municipal system context, not a finding about any one parcel.</p>
           </div>
         </div>
 
@@ -66,7 +64,7 @@
 
         <div class="db-loading-panel" id="fi-loading">
           <div class="pl-spin"></div>
-          <div><b>Loading statewide town data</b><span>Pulling the latest uniformity and verified sales data.</span></div>
+          <div><b>Loading statewide uniformity data</b><span>Pulling the latest assessment-consistency and verified sales data.</span></div>
         </div>
 
         <div class="db-error-panel" id="fi-error" style="display:none">
@@ -80,12 +78,12 @@
               <tr>
                 <th data-k="rank">#</th>
                 <th data-k="name">Town <span class="car">&#8597;</span></th>
-                <th class="n" data-k="score">Fairness score <span class="car">&#8597;</span></th>
+                <th class="n" data-k="score">Uniformity score <span class="car">&#8597;</span></th>
                 <th class="n" data-k="coefficient">Coeff. of deviation <span class="car">&#8597;</span></th>
                 <th class="n" data-k="drift">Assessment currency <span class="car">&#8597;</span></th>
                 <th class="n" data-k="residential">Residential parcels <span class="car">&#8597;</span></th>
                 <th class="n" data-k="commercial">Commercial parcels <span class="car">&#8597;</span></th>
-                <th data-k="band">Rating</th>
+                <th data-k="band">Consistency</th>
               </tr>
             </thead>
             <tbody id="fi-body"></tbody>
@@ -93,26 +91,16 @@
         </div>
 
         <div class="sec" style="margin-top:26px">
-          <h4><i class="fas fa-circle-info"></i> How the score is built</h4>
-          <p class="tl-p">Seventy percent of each town's score is its Coefficient of Deviation, the Division of
-          Taxation's own measure of how consistently similar properties are assessed relative to each other
-          - the lower the coefficient, the more evenly the tax burden is spread within that town. Thirty
-          percent is an assessment-currency component built from the drift between the town's officially
-          published assessment ratio and the ratio implied by its own recent state-verified sales. The
-          smaller that gap, the more current the town's assessments actually are.</p>
-          <p class="tl-note">A high score means a town assesses its own properties evenly and its numbers are
-          current, not that its tax rate or total tax bill is low. It is not a ranking of towns to move to or
-          avoid; a low score is a reason to check your own assessment against your neighbors', not a verdict
-          on the town.</p>
-          <p class="tl-note"><b>Parcel mix is context, not a score input.</b> Residential and commercial counts
-          are shown because a municipality's property mix can help explain assessment workload and fiscal
-          structure. A correlation does not establish that either property type caused a town's fairness score.</p>
-          <p class="tl-fine">Sources: NJ Division of Taxation Table of Equalized Valuations and Abstract of
-          Ratables (Coefficient of Deviation), and the state's SR1A file of verified arm's-length sales,
-          2024&ndash;2026. Both are republished annually by the state.</p>
+          <h4><i class="fas fa-circle-info"></i> How U — Uniformity is built</h4>
+          <p class="tl-p">Seventy percent of each town's current index is its Coefficient of Deviation, the Division of Taxation's measure of how consistently assessment ratios cluster around the municipality's median ratio. Thirty percent is an assessment-currency component built from the drift between the town's officially published assessment ratio and the ratio implied by recent state-verified sales.</p>
+          <p class="tl-note">A higher result means the measured assessment system is more consistent and its ratio evidence is more current. It does not mean the town has lower taxes, is a better place to live, or that every individual parcel is correctly assessed.</p>
+          <p class="tl-note"><b>O and U answer different questions.</b> O — Overassessment Position examines an individual property against supported value and Chapter 123 context. U — Uniformity measures municipality-wide assessment consistency. A property can be strong on one and pressured on the other.</p>
+          <p class="tl-note"><b>Parcel mix is context, not a score input.</b> Residential and commercial counts are shown because property mix can help explain assessment workload and fiscal structure. A correlation does not establish causation.</p>
+          <p class="tl-fine">Sources: NJ Division of Taxation Table of Equalized Valuations and Abstract of Ratables, including Coefficient of Deviation, plus SR-1A verified arm's-length sales. Methodology is living and versioned.</p>
+          <p><a class="db-btn" href="/property/robust/uniformity/"><i class="fas fa-gauge-high"></i> Learn about U — Uniformity in ROBUST</a></p>
         </div>
 
-        <a class="db-btn fi-cta" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up your own property's full tax report</a>
+        <a class="db-btn fi-cta" href="/property/"><i class="fas fa-magnifying-glass"></i> Look up your property's Watchdog Score</a>
       </div>
     </div>
   </div>
@@ -131,7 +119,7 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
     return score >= 70 ? 'excellent' : score >= 50 ? 'good' : score >= 30 ? 'fair' : 'poor';
   }
   function bandLabel(b) {
-    return { excellent: 'Excellent', good: 'Good', fair: 'Fair', poor: 'Poor' }[b];
+    return { excellent: 'Very consistent', good: 'Consistent', fair: 'Mixed', poor: 'Variable' }[b] || 'Not rated';
   }
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
@@ -208,8 +196,8 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
 
     document.getElementById('fi-count').textContent = filtered.length + ' of ' + rows.length + ' towns';
 
-    document.getElementById('fi-body').innerHTML = filtered.map(function (r, i) {
-      return '<tr tabindex="0" data-district="' + r.district + '" aria-label="Open ' + esc(r.name) + ' town report">' +
+    document.getElementById('fi-body').innerHTML = filtered.map(function (r) {
+      return '<tr tabindex="0" data-district="' + r.district + '" aria-label="Open ' + esc(r.name) + ' town uniformity report">' +
         '<td class="fi-rank">' + r.stateRank + '</td>' +
         '<td class="fi-town"><b>' + esc(r.name) + '</b><span>' + esc(titleCase(r.county)) + ' County</span></td>' +
         '<td class="n fi-score">' + r.score + '</td>' +
@@ -243,10 +231,10 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
 {
   "@context": "https://schema.org",
   "@type": "Dataset",
-  "name": "New Jersey Property Tax Fairness Index 2026",
-  "description": "A ranking of New Jersey tax districts with available property-assessment uniformity data, built from state Coefficient of Deviation and verified sales data.",
+  "name": "New Jersey Assessment Uniformity Index 2026",
+  "description": "A Watchdog ranking of New Jersey tax districts with available assessment-uniformity data, built from state Coefficient of Deviation and verified sales data and identified as U — Uniformity in the ROBUST Framework.",
   "url": "https://njpropertytaxrelief.com/property/fairness",
-  "creator": { "@type": "Organization", "name": "njpropertytaxrelief.com" }
+  "creator": { "@type": "Organization", "name": "Watchdog Property Intelligence" }
 }
 </script>
 
