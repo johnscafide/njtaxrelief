@@ -1,0 +1,300 @@
+/* Property Home · Watchdog Intelligence system
+   Shared visual language for Intelligence surfaces plus the premium Explore card. */
+
+@property --wd-intelligence-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes wd-intelligence-border-rotate {
+  to { --wd-intelligence-angle: 360deg; }
+}
+
+body.hm-dashboard-page .wd-intelligence-frame {
+  --wd-intelligence-angle: 0deg;
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    conic-gradient(from var(--wd-intelligence-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 170deg,#e84bc4 260deg,#15b7c9 360deg) border-box !important;
+  animation: wd-intelligence-border-rotate 7s linear infinite;
+  box-shadow: 0 18px 48px rgba(30,57,91,.09) !important;
+}
+
+/* Voice entry: intentionally visible for every signed-in plan. Entitlement is
+   enforced when the user asks to enter Voice, not by hiding the feature. */
+body.hm-dashboard-page .wd-home-voice-entry {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  width: 100%;
+  min-height: 102px;
+  margin: 0;
+  padding: 20px 22px;
+  border-radius: 22px;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-home-voice-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+body.hm-dashboard-page .wd-home-voice-kicker {
+  font: 800 11px/1.2 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: .105em;
+  text-transform: uppercase;
+  color: #087f83;
+}
+body.hm-dashboard-page .wd-home-voice-title {
+  margin: 0;
+  font: 800 clamp(18px,1.55vw,25px)/1.16 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: -.035em;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-home-voice-sub {
+  margin: 0;
+  max-width: 64ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 500 clamp(12px,.95vw,15px)/1.4 "Source Sans 3",sans-serif;
+  color: #71819a;
+}
+body.hm-dashboard-page .wd-home-voice-button {
+  flex: 0 0 auto;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 15px;
+  background: #087f7d;
+  color: #fff;
+  font: 800 16px/1 "Plus Jakarta Sans",sans-serif;
+  cursor: pointer;
+  transition: transform .16s ease,box-shadow .16s ease,background .16s ease;
+  box-shadow: 0 8px 22px rgba(8,127,125,.16);
+}
+body.hm-dashboard-page .wd-home-voice-button:hover {
+  transform: translateY(-1px);
+  background: #066f6d;
+  box-shadow: 0 12px 28px rgba(8,127,125,.22);
+}
+body.hm-dashboard-page .wd-home-voice-button:focus-visible {
+  outline: 3px solid rgba(36,120,255,.24);
+  outline-offset: 3px;
+}
+body.hm-dashboard-page .wd-home-voice-button[aria-busy="true"] {
+  cursor: wait;
+  opacity: .78;
+}
+body.hm-dashboard-page .wd-home-voice-button i { font-size: 17px; }
+
+/* Watchdog Intelligence card. Keep the professional content hierarchy but give
+   the branded surface the same rotating Intelligence signature as Voice. */
+body.hm-dashboard-page .wdai-main.wd-intelligence-frame {
+  border-radius: clamp(20px,1.45vw,24px) !important;
+}
+body.hm-dashboard-page .wdai-main .wdai-title > span {
+  color: #087f83 !important;
+}
+
+/* Explore is a distinct workspace card instead of disappearing into the page. */
+body.hm-dashboard-page .hm-explore-card {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 8px 0 0;
+  overflow: hidden;
+  border: 1px solid #dfe6ef;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 15px 42px rgba(30,57,91,.065);
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar {
+  margin: 0 !important;
+  padding: 25px 28px 20px !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e8edf3 !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar h2 {
+  margin: 0 0 4px !important;
+  font-size: clamp(22px,1.8vw,30px) !important;
+  letter-spacing: -.04em !important;
+  color: #10294b !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar p {
+  margin: 0 !important;
+  color: #74839a !important;
+  font-size: 14px !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-expand-all {
+  background: #f7f9fc !important;
+  border: 1px solid #dfe6ef !important;
+  border-radius: 12px !important;
+  min-height: 44px !important;
+  padding: 0 15px !important;
+  color: #40516b !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2 {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid #edf1f5 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2:last-child {
+  border-bottom: 0 !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-h {
+  min-height: 92px !important;
+  padding: 16px 24px !important;
+  background: #fff !important;
+  transition: background-color .15s ease !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-h:hover {
+  background: #f9fbfd !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-icon-tile {
+  box-shadow: none !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-copy {
+  min-width: 0;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-s {
+  color: #71819a !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-b,
+body.hm-dashboard-page .hm-explore-card .sec2-body {
+  background: #fbfcfe !important;
+}
+
+/* Entitlement gate */
+body.hm-dashboard-page .wd-intelligence-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(7,21,42,.62);
+  backdrop-filter: blur(6px);
+}
+body.hm-dashboard-page .wd-intelligence-gate.open { display: flex; }
+body.hm-dashboard-page .wd-intelligence-gate-card {
+  width: min(520px,100%);
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 2px solid transparent;
+  border-radius: 24px;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    conic-gradient(from var(--wd-intelligence-angle),#15b7c9,#2478ff,#7857ff,#e84bc4,#15b7c9) border-box;
+  animation: wd-intelligence-border-rotate 7s linear infinite;
+  box-shadow: 0 30px 80px rgba(4,17,39,.3);
+}
+body.hm-dashboard-page .wd-intelligence-gate-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f8;
+  color: #40516b;
+  cursor: pointer;
+}
+body.hm-dashboard-page .wd-intelligence-gate-mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  background: #eaf8f7;
+  color: #087f7d;
+  font-size: 20px;
+}
+body.hm-dashboard-page .wd-intelligence-gate-kicker {
+  display: block;
+  margin-bottom: 7px;
+  font: 800 10px/1.2 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: #087f83;
+}
+body.hm-dashboard-page .wd-intelligence-gate-card h2 {
+  margin: 0 38px 10px 0;
+  font: 800 25px/1.18 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: -.04em;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-intelligence-gate-card p {
+  margin: 0;
+  font: 500 15px/1.55 "Source Sans 3",sans-serif;
+  color: #61728b;
+}
+body.hm-dashboard-page .wd-intelligence-gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+body.hm-dashboard-page .wd-intelligence-gate-actions a,
+body.hm-dashboard-page .wd-intelligence-gate-actions button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 11px;
+  font: 800 13px/1 "Plus Jakarta Sans",sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+body.hm-dashboard-page .wd-intelligence-gate-primary {
+  border: 0;
+  background: #10294b;
+  color: #fff;
+}
+body.hm-dashboard-page .wd-intelligence-gate-secondary {
+  border: 1px solid #dce4ee;
+  background: #fff;
+  color: #10294b;
+}
+
+@media (max-width: 760px) {
+  body.hm-dashboard-page .wd-home-voice-entry {
+    min-height: 0;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 15px;
+    padding: 18px;
+    border-radius: 19px;
+  }
+  body.hm-dashboard-page .wd-home-voice-sub { white-space: normal; }
+  body.hm-dashboard-page .wd-home-voice-button { width: 100%; min-height: 50px; }
+  body.hm-dashboard-page .hm-explore-card { border-radius: 20px; }
+  body.hm-dashboard-page .hm-explore-card .hm-secbar { padding: 20px 18px 16px !important; }
+  body.hm-dashboard-page .hm-explore-card .sec2-h { min-height: 82px !important; padding: 13px 15px !important; }
+  body.hm-dashboard-page .wd-intelligence-gate-card { padding: 25px 21px; border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hm-dashboard-page .wd-intelligence-frame,
+  body.hm-dashboard-page .wd-intelligence-gate-card { animation: none !important; }
+}
+
+@media print {
+  body.hm-dashboard-page .wd-home-voice-entry,
+  body.hm-dashboard-page .wd-intelligence-gate { display: none !important; }
+  body.hm-dashboard-page .wd-intelligence-frame { animation: none !important; border-color: #dce4ee !important; background: #fff !important; }
+}

@@ -1,5 +1,5 @@
-/* Property Home premium Intel + partner composition.
-   Analyst Intel remains primary; the inline Greentree unit is a compact quarter-width rail.
+/* Property Home premium Intelligence + partner composition.
+   Watchdog Intelligence remains primary; the inline Greentree unit is a compact quarter-width rail.
    A separate rotating sponsor banner is mounted immediately before the official footer. */
 (function(){
 'use strict';
@@ -14,6 +14,20 @@ function ensureAssets(){
     css.href='/property/css/home/home-ad-quarter.css';
     css.setAttribute('data-watchdog-home-ad-quarter','1');
     document.head.appendChild(css);
+  }
+  if(!document.querySelector('script[data-watchdog-home-intelligence-brand]')){
+    var brand=document.createElement('script');
+    brand.src='/property/js/dashboard/home/home-watchdog-intelligence-brand.js';
+    brand.async=false;
+    brand.setAttribute('data-watchdog-home-intelligence-brand','1');
+    document.body.appendChild(brand);
+  }
+  if(!document.querySelector('script[data-watchdog-home-intelligence]')){
+    var intelligence=document.createElement('script');
+    intelligence.src='/property/js/dashboard/home/home-watchdog-intelligence.js';
+    intelligence.async=false;
+    intelligence.setAttribute('data-watchdog-home-intelligence','1');
+    document.body.appendChild(intelligence);
   }
 }
 
