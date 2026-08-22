@@ -1,0 +1,24 @@
+name: Temporary DCA affordable dashboard probe
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'property/scripts/probe_dca_affordable_powerbi.py'
+      - '.github/workflows/probe-dca-affordable-powerbi.yml'
+      - '.github/workflows/temp-dca-affordable-dashboard-probe.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests
+      - name: Probe public NJ DCA Power BI semantic queries
+        run: python property/scripts/probe_dca_affordable_powerbi.py
