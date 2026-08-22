@@ -46,8 +46,7 @@ function ensureVoiceDeps(){
   if(window.WatchdogContextualAnalyst && window.WatchdogIntelligenceVoice)return Promise.resolve();
   if(depsPromise)return depsPromise;
   depsPromise=loadScript('/property/js/watchdog-contextual-analyst.js','analyst-js')
-    .then(function(){return loadScript('/property/js/watchdog-intelligence-voice.js','voice-js')})
-    .then(function(){return loadScript('/property/js/watchdog-intelligence-voice-browser.js','voice-browser-js')});
+    .then(function(){return loadScript('/property/js/watchdog-intelligence-voice.js','voice-js')});
   return depsPromise;
 }
 function getClient(){
@@ -188,9 +187,10 @@ async function openVoice(){
       surface:'property_home',
       title:'Ask Watchdog Intelligence',
       kicker:'WATCHDOG INTELLIGENCE',
-      intro:'Ask a focused question about this saved property. Watchdog will keep the current governed property context attached to the conversation.',
+      subtitle:'Ask a focused question about this saved property. Watchdog keeps the governed property context attached.',
+      pams_pins:property.pams_pin ? [property.pams_pin] : [],
+      contextLabel:property.address || 'This saved property',
       context:property,
-      record:property,
       chips:['What needs attention now?','What changed?','Explain the tax and value story','What should I verify next?']
     });
   }catch(_error){
