@@ -10,7 +10,7 @@
     {page:'dashboard',href:'/property/dashboard',icon:'fa-table-columns',label:'Dashboard'},
     {page:'home',href:'/property/home',icon:'fa-house',label:'Property Home'},
     {page:'town-compare',href:'/property/town-compare',icon:'fa-code-compare',label:'Town Compare'},
-    {page:'fairness',href:'/property/fairness',icon:'fa-scale-balanced',label:'Assessment Fairness'},
+    {page:'robust',href:'/property/robust/',icon:'fa-gauge-high',label:'ROBUST Framework'},
     {page:'pulse',href:'/property/pulse',icon:'fa-wave-square',label:'Change Intelligence'},
     {page:'agent-desk',href:'/property/agent-desk',icon:'fa-bullseye',label:'Agent Control'},
     {page:'scan',href:'/property/scan',icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'},
@@ -53,7 +53,7 @@
 
   function syncNavigation(){
     var page=currentPage();
-    var signature='v1:'+page;
+    var signature='v2:'+page;
     var html=markup(page);
     document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(function(nav){
       if(nav.getAttribute('data-wd-brand-nav')===signature)return;
