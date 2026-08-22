@@ -27,21 +27,24 @@ The public/master brand remains **Watchdog**. The domain does not rename the com
 
 ## Migration posture
 
-This is a domain cutover, not a platform move.
+This is a Watchdog application-domain cutover, not a platform move and not a requirement to retire the entire NJPropertyTaxRelief.com site.
 
 The existing Vercel project, GitHub repository, Supabase project, production database, users, entitlements, saved properties, reports, analytics history, markers, Data Center data, integrations and product code remain in place.
 
+The shared Supabase Authentication Site URL may remain `https://njpropertytaxrelief.com` during coexistence. WatchdogIndex is enabled through explicit Additional Redirect URLs, and application OAuth code uses the initiating browser origin. This avoids forcing legacy NJPropertyTaxRelief.com authentication flows to land on WatchdogIndex before migration acceptance.
+
 The migration remains additive until acceptance passes:
 
-1. retain `njpropertytaxrelief.com` during authenticated and provider validation;
+1. retain `njpropertytaxrelief.com` and its current root/content experience during authenticated and provider validation;
 2. keep `watchdogindex.com` and `www.watchdogindex.com` attached to Vercel project `njtaxrelief`;
-3. add the new host to auth, OAuth, Maps/Places, CORS and provider allowlists before removing any old-host allowance;
-4. validate the application on `www.watchdogindex.com`;
-5. converge canonical/public URL generation on `https://www.watchdogindex.com` only after auth and route acceptance;
-6. run the controlled Stripe Live lifecycle against final production return URLs;
-7. persist the billing release-gate pass before public paid checkout opens;
-8. then redirect `njpropertytaxrelief.com` path-for-path to `www.watchdogindex.com` with permanent redirects;
-9. keep ownership of the old domain as an SEO/backlink migration asset.
+3. keep explicit Supabase Auth redirect coverage for both WatchdogIndex hosts while retaining legacy-domain redirect coverage;
+4. add the new hosts to Google Maps/Places browser-key referrer restrictions and any provider allowlists that are actually domain-bound;
+5. validate the Watchdog application on `www.watchdogindex.com`;
+6. route the WatchdogIndex root into the Watchdog application without changing the NJPropertyTaxRelief.com root;
+7. converge Watchdog `/property/*` canonical/public URL generation on `https://www.watchdogindex.com` only after auth, Maps/Places and route acceptance;
+8. run the controlled Stripe Live lifecycle against WatchdogIndex and persist the billing release-gate pass before public paid checkout opens;
+9. migrate or redirect only legacy Watchdog application paths where evidence supports it. Do **not** blanket-redirect the entire NJPropertyTaxRelief.com domain while its tax-relief content remains intentionally active;
+10. keep ownership of the old domain and preserve intentional legacy content, backlinks and search equity.
 
 ## Verified execution state
 
@@ -49,20 +52,36 @@ Vercel now returns:
 
 - `https://watchdogindex.com/` → permanent redirect to `https://www.watchdogindex.com/`;
 - `https://www.watchdogindex.com/` → HTTP 200;
-- `https://www.watchdogindex.com/property/` → HTTP 200 and the Watchdog property application.
+- `https://www.watchdogindex.com/property/` → HTTP 200 and the Watchdog property application;
+- `https://www.watchdogindex.com/property/onboarding/` → HTTP 200.
 
-A routing issue remains before final canonical cutover: the new-domain root currently serves the legacy NJ Property Tax Relief homepage, while the Watchdog entry experience lives at `/property/`. Resolve that routing boundary without rewriting the product or disrupting the old domain before the old-domain redirect stage.
+A routing issue remains before final canonical cutover: the new-domain root currently serves the legacy NJ Property Tax Relief homepage, while the Watchdog entry experience lives at `/property/`. Resolve that boundary with host-specific routing so the old domain root remains intact.
 
 Production Supabase Edge preparation is live and additive:
 
-- `report-share` v18 accepts both old and new Watchdog origins and no longer has a single hard-coded CORS origin;
-- `create-portal-session` v26 accepts both old and new origins;
-- `create-checkout-session` v39 accepts both old and new origins;
+- `report-share` v19 accepts both old and new production origins and generates share URLs from the approved production host that initiated the request;
+- `create-portal-session` v27 accepts both old and new production origins and returns Stripe Portal users to the initiating approved host;
+- `create-checkout-session` v40 accepts both old and new production origins, generates Stripe success/cancel/Portal returns from the initiating approved host, and restores the auditable database-backed `live_billing_lifecycle` release gate after deployed v39 had regressed to environment-only checkout control;
 - the legacy Paddle management path remains management-only for the existing subscriber;
-- public paid checkout remains fail-closed under NJW-42;
-- billing/share canonical return generation has not been irreversibly flipped while auth and root routing remain under validation.
+- public paid checkout remains fail-closed under NJW-42.
 
-The remaining external configuration checks are Supabase Auth URL configuration, Google OAuth/Maps/Places domain restrictions where applicable, then canonical SEO/share/billing URL convergence and old-domain redirects.
+## Remaining provider-bound work
+
+The owner has added WatchdogIndex to Supabase Auth Additional Redirect URLs while intentionally retaining the existing Supabase Site URL.
+
+Repository evidence in `GOOGLE-MAPS-KEY-RESTRICTION.md` still shows the browser Maps key restricted only to:
+
+- `https://njpropertytaxrelief.com/*`
+- `https://www.njpropertytaxrelief.com/*`
+
+Before normal WatchdogIndex traffic is routed into the application, add:
+
+- `https://www.watchdogindex.com/*`
+- `https://watchdogindex.com/*`
+
+Retain the legacy referrers during coexistence.
+
+After Google browser-domain acceptance is evidenced, proceed with host-specific WatchdogIndex root routing, Watchdog canonical/OG/schema migration, authenticated/search/mobile acceptance, and the controlled Stripe lifecycle under NJW-42.
 
 ## Governing runbook
 
