@@ -21,6 +21,14 @@ var replacements=[
 ];
 var brandPhrase=/Watchdog Intelligence/i;
 
+function ensureBrandStyle(){
+  if(document.querySelector('link[data-watchdog-intelligence-brand-signature]'))return;
+  var link=document.createElement('link');
+  link.rel='stylesheet';
+  link.href='/property/css/home/home-watchdog-intelligence-brand.css';
+  link.setAttribute('data-watchdog-intelligence-brand-signature','1');
+  document.head.appendChild(link);
+}
 function relevant(node){
   var el=node && (node.nodeType===1?node:node.parentElement);
   if(!el)return false;
@@ -111,6 +119,7 @@ function sweep(root){
   brandVisiblePhrases(root);
 }
 function boot(){
+  ensureBrandStyle();
   sweep(document.body);
   new MutationObserver(function(mutations){
     mutations.forEach(function(mutation){
@@ -119,5 +128,6 @@ function boot(){
   }).observe(document.body,{childList:true,subtree:true});
 }
 
+ensureBrandStyle();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
