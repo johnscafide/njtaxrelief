@@ -1,1 +1,212 @@
-.wd-watchlist-intent{margin:0 0 14px;padding:18px 20px;border-radius:20px;background:#eef7f6;color:#123b4d;display:flex;gap:18px;justify-content:space-between;align-items:flex-start}.wd-watchlist-intent span{display:block;font-size:10px;font-weight:900;letter-spacing:.12em;color:#0c8782}.wd-watchlist-intent h3{margin:5px 0 6px;font-size:18px;line-height:1.2}.wd-watchlist-intent p{margin:0;color:#5d7484;line-height:1.5;font-size:13px}.wd-watchlist-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.wd-watchlist-options button,.wd-watchlist-intent>[data-wd-watchlist-change],.wd-watchlist-intent button[data-wd-watchlist-change]{border:0;border-radius:12px;background:#fff;padding:9px 12px;color:#17435a;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(16,42,76,.07)}.wd-watchlist-intent.confirmed{background:#edf7f2}.wd-watchlist-intent.confirmed h3{color:#175c47}@media(max-width:760px){.wd-watchlist-intent{margin:0 0 12px;padding:16px;flex-direction:column}.wd-watchlist-options{display:grid;grid-template-columns:1fr;width:100%}.wd-watchlist-options button{text-align:left;width:100%}}
+/* Dashboard research-context surface.
+   Keep this compact once the user has confirmed a job; the unanswered state
+   may expand because the choices are actual work, not decoration. */
+.wd-watchlist-intent{
+  margin:0 0 10px;
+  padding:14px 16px;
+  border:1px solid #dce7e4;
+  border-radius:14px;
+  background:#f7fbf9;
+  color:#123b4d;
+  display:flex;
+  gap:16px;
+  justify-content:space-between;
+  align-items:flex-start;
+  box-shadow:0 1px 2px rgba(15,23,42,.025);
+}
+.wd-watchlist-intent>div{min-width:0}
+.wd-watchlist-intent span{
+  display:block;
+  font-size:10px;
+  line-height:1.2;
+  font-weight:800;
+  letter-spacing:.1em;
+  color:#0c7f7a;
+}
+.wd-watchlist-intent h3{
+  margin:4px 0 5px;
+  font-size:16px;
+  line-height:1.25;
+  letter-spacing:-.015em;
+}
+.wd-watchlist-intent p{
+  margin:0;
+  color:#617687;
+  line-height:1.45;
+  font-size:12px;
+}
+.wd-watchlist-options{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
+.wd-watchlist-options button,
+.wd-watchlist-intent>[data-wd-watchlist-change],
+.wd-watchlist-intent button[data-wd-watchlist-change]{
+  min-height:36px;
+  border:1px solid #dfe7e7;
+  border-radius:9px;
+  background:#fff;
+  padding:7px 11px;
+  color:#17435a;
+  font-size:12px;
+  font-weight:750;
+  cursor:pointer;
+  box-shadow:none;
+  transition:border-color .16s ease,background .16s ease,transform .16s ease;
+}
+.wd-watchlist-options button:hover,
+.wd-watchlist-intent button[data-wd-watchlist-change]:hover{
+  border-color:#bdcecc;
+  background:#fbfdfc;
+}
+.wd-watchlist-options button:focus-visible,
+.wd-watchlist-intent button[data-wd-watchlist-change]:focus-visible{
+  outline:2px solid rgba(12,127,122,.28);
+  outline-offset:2px;
+}
+
+.wd-watchlist-intent.confirmed{
+  min-height:68px;
+  padding:10px 12px;
+  align-items:center;
+  background:#f8fbf9;
+}
+.wd-watchlist-intent.confirmed span{font-size:9px;letter-spacing:.095em}
+.wd-watchlist-intent.confirmed h3{
+  margin:3px 0 2px;
+  color:#175c47;
+  font-size:15px;
+  line-height:1.2;
+}
+.wd-watchlist-intent.confirmed p{
+  max-width:1050px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  font-size:11.5px;
+}
+.wd-watchlist-intent.confirmed button[data-wd-watchlist-change]{
+  flex:none;
+  min-height:34px;
+  padding:6px 10px;
+}
+
+/* Paid-workspace density: the confirmed research context and Voice are one
+   command row on a wide screen instead of two stacked hero cards. */
+@media(min-width:1100px){
+  body[data-sidebar-page="dashboard"] .wd4-intelligence-context-host:has(.wd-watchlist-intent.confirmed){
+    display:grid;
+    grid-template-columns:minmax(0,1.65fr) minmax(320px,.7fr);
+    gap:10px;
+    align-items:stretch;
+    margin:0 0 10px;
+  }
+  body[data-sidebar-page="dashboard"] .wd4-intelligence-context-host:has(.wd-watchlist-intent.confirmed)>.wd-watchlist-intent,
+  body[data-sidebar-page="dashboard"] .wd4-intelligence-context-host:has(.wd-watchlist-intent.confirmed)>.wd-contextual-voice-entry{
+    height:100%;
+    margin:0;
+  }
+}
+
+/* Professional dashboard surface: density, readable type and crisp alignment
+   rather than marketing-page decoration. Scoped here so public pages do not
+   inherit the application treatment. */
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card{
+  border-color:#dfe5eb!important;
+  box-shadow:0 1px 2px rgba(15,23,42,.025)!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card:hover{
+  border-color:#cfd8e2!important;
+  box-shadow:0 3px 10px rgba(15,23,42,.045)!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-card-title,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-kpi-label,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-card-head h3{
+  font-size:13px!important;
+  line-height:20px!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-properties-table td,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-county-row,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-muni-table,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wdv2-empty-line{
+  font-size:12px!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-kpi-value,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-extra-kpi>strong,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-summary-copy strong,
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd5-properties-table td:nth-child(n+3),
+body[data-sidebar-page="dashboard"].wdv2-mounted .wd4-muni-table td:nth-child(n+2){
+  font-variant-numeric:tabular-nums!important;
+  font-feature-settings:"tnum" 1;
+}
+
+/* No longitudinal series yet: keep the honest state, but do not charge the
+   user a full chart's worth of vertical space for it. dashboard-v2.js already
+   marks this card .is-empty when history has fewer than two usable points. */
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty{
+  min-height:118px!important;
+  height:118px!important;
+  padding:14px 18px!important;
+  border-style:solid!important;
+  background:#fff!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wd4-chart-legend,
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wdv2-expand{
+  display:none!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wd4-line-chart{
+  flex:none!important;
+  min-height:0!important;
+  margin-top:8px!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wdv2-empty-line{
+  min-height:42px;
+  height:auto;
+  padding:10px 12px;
+  border:1px dashed #d7e0e8;
+  border-radius:9px;
+  background:#f8fafc;
+  color:#637386;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wdv2-empty-line span{
+  font-size:0;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty .wdv2-empty-line span::after{
+  content:"History needs at least two recorded snapshots. Watchdog will chart it automatically as new records arrive.";
+  font-size:12px;
+  line-height:1.4;
+}
+
+/* Fallback for the short interval before the v2 behaviour layer has converted
+   the legacy inline placeholder into .is-empty. */
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"]:has(>div[style*="height:220px"]){
+  min-height:118px!important;
+  height:118px!important;
+}
+body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"]>div[style*="height:220px"]{
+  height:auto!important;
+  min-height:42px!important;
+  margin-top:8px;
+  padding:10px 12px;
+  display:flex!important;
+  align-items:center;
+  justify-content:flex-start!important;
+  border:1px dashed #d7e0e8;
+  border-radius:9px;
+  background:#f8fafc;
+  color:#637386!important;
+  font-size:12px!important;
+}
+
+@media(max-width:1099px){
+  body[data-sidebar-page="dashboard"] .wd4-intelligence-context-host>.wd-watchlist-intent,
+  body[data-sidebar-page="dashboard"] .wd4-intelligence-context-host>.wd-contextual-voice-entry{margin-bottom:8px}
+}
+@media(max-width:760px){
+  .wd-watchlist-intent{margin:0 0 10px;padding:14px;flex-direction:column}
+  .wd-watchlist-intent.confirmed{align-items:stretch}
+  .wd-watchlist-intent.confirmed p{white-space:normal}
+  .wd-watchlist-options{display:grid;grid-template-columns:1fr;width:100%}
+  .wd-watchlist-options button{text-align:left;width:100%}
+  body[data-sidebar-page="dashboard"].wdv2-mounted [data-card-id="taxvalue"].is-empty{
+    min-height:124px!important;
+    height:auto!important;
+  }
+}
