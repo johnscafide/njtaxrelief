@@ -2,7 +2,7 @@
   'use strict';
 
   var path=(window.location.pathname||'').replace(/\/+$/,'');
-  if(path!=='/property/pro')return;
+  if(path!=='/property/pro'&&path!=='/pro')return;
 
   function qs(sel,root){return (root||document).querySelector(sel);}
 
