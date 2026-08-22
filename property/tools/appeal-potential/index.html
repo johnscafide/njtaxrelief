@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>NJ Property Tax Appeal Potential</title>
-  <meta name="description" content="Screen a New Jersey property for potential assessment appeal indicators using property-specific values and official municipal COD data.">
+  <title>NJ Property Tax Appeal Potential | ROBUST Context | Watchdog</title>
+  <meta name="description" content="Screen a New Jersey property for potential assessment appeal indicators using property-specific values and official municipal consistency data, with context from the ROBUST Framework.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="appeal-potential.css">
 </head>
 <body data-access-require="developer"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/access-guard.js?v=20260807a"></script>
-<header class="ap-header"><a class="ap-brand" href="/property/">NJ Property Intelligence</a><a href="../assessment-fairness/">Assessment Fairness</a></header>
+<header class="ap-header"><a class="ap-brand" href="/property/">Watchdog Property Intelligence</a><a href="/property/robust/">ROBUST Framework</a></header>
 <main>
   <section class="ap-hero">
     <div class="ap-shell">
-      <p class="ap-kicker">Appeal Potential</p>
+      <p class="ap-kicker">ROBUST evidence workflow · O + U + R</p>
       <h1>Is your assessment worth a closer review?</h1>
-      <p>Enter property-specific values and select the municipality. The tool combines the implied assessment ratio with official municipal consistency data to produce an educational screening score.</p>
+      <p>Enter property-specific values and select the municipality. The tool combines individual assessment-position evidence with municipal consistency context to produce an educational screening score.</p>
     </div>
   </section>
 
@@ -44,9 +44,9 @@
       <div class="ap-meter"><div id="meterFill"></div></div>
       <p id="summary" class="ap-summary"></p>
       <div class="ap-stats">
-        <div><span>Implied ratio</span><strong id="ratio">—</strong></div>
-        <div><span>Municipal COD</span><strong id="cod">—</strong></div>
-        <div><span>Confidence</span><strong id="confidence">—</strong></div>
+        <div><span>O · Implied ratio</span><strong id="ratio">—</strong></div>
+        <div><span>U · Municipal COD</span><strong id="cod">—</strong></div>
+        <div><span>Evidence confidence</span><strong id="confidence">—</strong></div>
       </div>
       <h3>Why this result</h3>
       <ul id="reasons"></ul>
@@ -54,15 +54,15 @@
         <h3>Recommended next step</h3>
         <p id="recommendation"></p>
       </div>
-      <div class="ap-warning"><strong>Not a legal determination:</strong> This score does not establish that an assessment is incorrect or that an appeal will succeed. Appeals depend on legally admissible evidence, applicable ratios, deadlines, and local procedures.</div>
+      <div class="ap-warning"><strong>Not a legal determination:</strong> This screening score does not establish that an assessment is incorrect or that an appeal will succeed. R — Recourse is contextual, and actual appeals depend on legally admissible evidence, applicable ratios, deadlines and local procedures.</div>
     </section>
   </section>
 
   <section class="ap-shell ap-method">
-    <article class="ap-card"><p class="ap-label">Transparent model</p><h2>How the score works</h2><p>The engine gives the greatest weight to the property's assessed value relative to its estimated market value. Municipality COD is supporting context. Optional comparable-ratio and revaluation-age inputs add evidence and increase confidence. Missing optional data does not automatically increase the score.</p></article>
+    <article class="ap-card"><p class="ap-label">ROBUST relationship</p><h2>How this workflow fits the framework</h2><p><strong>O — Overassessment Position</strong> is the property-specific assessment-versus-value question. <strong>U — Uniformity</strong> supplies municipality-wide consistency context through COD. <strong>R — Recourse</strong> covers the broader evidence and correction path. This calculator is a supporting workflow, not a replacement formula for those canonical Watchdog Score dimensions.</p><p><a href="/property/robust/overassessment-position/">Learn about O</a> · <a href="/property/robust/uniformity/">Learn about U</a> · <a href="/property/robust/recourse/">Learn about R</a></p></article>
   </section>
 <section class="panel"><h2>Need comparable evidence?</h2><p>Build a manual comparable-sales analysis and bring its median ratio back into this calculator.</p><p><a href="../comparable-properties/">Open Comparable Properties →</a></p></section></main>
-<footer><div class="ap-shell">Educational screening only. Verify assessments, equalization ratios, filing deadlines, and appeal requirements with official New Jersey and county sources.</div></footer>
+<footer><div class="ap-shell">Watchdog Score · powered by the ROBUST Framework. Educational screening only. Verify assessments, equalization ratios, filing deadlines and appeal requirements with official New Jersey and county sources.</div></footer>
 <script src="../../js/property-data-model.js"></script>
 <script src="appeal-potential.js"></script>
 </body>
