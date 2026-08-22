@@ -1,0 +1,86 @@
+/* Watchdog Dashboard Premium Value Layer */
+:root{
+  --wd-premium-blue:#3b82f6;
+  --wd-premium-violet:#8b5cf6;
+  --wd-premium-pink:#ec4899;
+  --wd-premium-cyan:#06b6d4;
+  --wd-premium-green:#10b981;
+}
+
+/* Intelligence should read as a paid product capability, not another card. */
+.wd-intelligence-premium{
+  position:relative!important;
+  isolation:isolate;
+  border-color:transparent!important;
+  box-shadow:0 8px 28px rgba(38,60,90,.06)!important;
+}
+.wd-intelligence-premium::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  padding:1.5px;
+  border-radius:inherit;
+  background:conic-gradient(from 0deg,var(--wd-premium-blue),var(--wd-premium-violet),var(--wd-premium-pink),var(--wd-premium-cyan),var(--wd-premium-green),var(--wd-premium-blue));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+  animation:wd-intelligence-border 7s linear infinite;
+  z-index:3;
+}
+.wd-intelligence-premium::after{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:inherit;
+  box-shadow:0 0 20px rgba(96,109,255,.12),0 0 34px rgba(6,182,212,.08);
+  pointer-events:none;
+  animation:wd-intelligence-glow 3.4s ease-in-out infinite;
+  z-index:-1;
+}
+@keyframes wd-intelligence-border{to{filter:hue-rotate(360deg)}}
+@keyframes wd-intelligence-glow{0%,100%{opacity:.45}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.wd-intelligence-premium::before,.wd-intelligence-premium::after{animation:none!important}}
+
+/* Header controls */
+body[data-sidebar-page="dashboard"] [data-action="layout"],
+body[data-sidebar-page="dashboard"] .wdv2-drag-handle,
+body[data-sidebar-page="dashboard"] .wdv2-expand,
+body[data-sidebar-page="dashboard"] .wd5-resize-handle,
+body[data-sidebar-page="dashboard"] .wd4-card-menu,
+body[data-sidebar-page="dashboard"] .wd4-map-handle{display:none!important}
+.wd-premium-theme-toggle{width:42px!important;padding:0!important}
+.wd-live-presence{height:42px;display:inline-flex;align-items:center;gap:7px;padding:0 11px;border:1px solid var(--wdv2-border,#dde5ee);border-radius:10px;background:var(--wdv2-surface,#fff);color:var(--wdv2-ink,#17233b);font-size:11px;font-weight:700;white-space:nowrap}
+.wd-live-dot{width:7px;height:7px;border-radius:50%;background:#13b97a;box-shadow:0 0 0 4px rgba(19,185,122,.11)}
+.wd-live-avatars{display:flex;margin-left:2px}.wd-live-avatars i{width:19px;height:19px;border-radius:50%;margin-left:-6px;border:2px solid var(--wdv2-surface,#fff);background:linear-gradient(145deg,#d9e7f2,#a7bfd5)}
+
+/* Appeals / opportunities: fixed, readable KPI anatomy. */
+body.wdv2-mounted .wd-premium-opportunities{display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:7px!important;padding:14px 16px!important;overflow:hidden!important}
+.wd-premium-card-head{display:flex;align-items:center;justify-content:space-between;gap:9px;min-height:20px;color:var(--wdv2-muted,#6f7f91);font-size:12px;font-weight:700}
+.wd-premium-card-head>span{min-width:0}.wd-premium-card-head>i{font-size:10px;color:#9aa8b8}.wd-premium-card-head>small{font-size:10px;font-weight:650}.wd-premium-card-head>em{font-style:normal;font-size:9px;letter-spacing:.08em;padding:4px 6px;border-radius:999px;background:#eef4ff;color:#3f66ae}
+.wd-premium-opportunity-main{display:flex;align-items:baseline;gap:9px}.wd-premium-opportunity-main strong{font-size:30px;line-height:1;font-weight:650;letter-spacing:-.04em;font-variant-numeric:tabular-nums}.wd-premium-opportunity-main span{font-size:12px;font-weight:800;color:#0aa96d}
+.wd-premium-opportunity-meta{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--wdv2-muted,#6f7f91);font-size:10px}.wd-premium-opportunity-meta b{font-size:10px;color:var(--wdv2-ink,#17233b);font-variant-numeric:tabular-nums}
+.wd-premium-meter{height:4px;border-radius:999px;background:#edf2f6;overflow:hidden}.wd-premium-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#12b981,#37c997)}
+
+/* Municipality is a full-width analytical surface by default. */
+body.wdv2-mounted [data-card-id="municipality"].wd-premium-municipality{grid-column:1/-1!important;height:340px!important;min-height:340px!important;padding:18px 20px!important}
+.wd-premium-muni-wrap{overflow:auto;min-height:0;flex:1;margin-top:8px;scrollbar-gutter:stable}.wd-premium-muni-table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}.wd-premium-muni-table thead{position:sticky;top:0;z-index:2;background:var(--wdv2-surface,#fff)}.wd-premium-muni-table th{text-align:left;color:var(--wdv2-muted,#6f7f91);font-weight:700;padding:9px 10px;border-bottom:1px solid var(--wdv2-border,#e2e8f0)}.wd-premium-muni-table th:nth-child(n+2),.wd-premium-muni-table td:nth-child(n+2){text-align:right}.wd-premium-muni-table td{padding:10px;border-bottom:1px solid var(--wdv2-border,#edf1f5);color:var(--wdv2-ink,#24344e)}.wd-premium-muni-table tbody tr{cursor:pointer}.wd-premium-muni-table tbody tr:hover{background:rgba(59,130,246,.045)}.wd-premium-muni-table td:nth-child(2)>span{display:inline-block;min-width:26px}.wd-premium-muni-table td:nth-child(2)>i{display:inline-block;width:46px;height:6px;margin-left:6px;border-radius:999px;background:#e7f1ed;vertical-align:middle;overflow:hidden}.wd-premium-muni-table td:nth-child(2)>i>b{display:block;height:100%;background:#16ad73;border-radius:inherit}
+
+/* Premium analytic cards. Layout is curated; user may show/hide, never resize. */
+.wd-premium-band{grid-template-columns:repeat(12,minmax(0,1fr))!important}.wd-premium-analytics-card{grid-column:span 3!important;height:142px!important;min-height:142px!important;padding:16px 17px!important;overflow:hidden!important}.wd-premium-stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}.wd-premium-stat-grid>div{min-width:0}.wd-premium-stat-grid strong{display:block;color:var(--wdv2-ink,#17233b);font-size:21px;line-height:1.05;font-weight:650;letter-spacing:-.035em;font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wd-premium-stat-grid span{display:block;margin-top:5px;color:var(--wdv2-muted,#718096);font-size:9.5px;line-height:1.25}.wd-premium-health{margin-top:12px}.wd-premium-health>strong{font-size:26px;font-weight:650;letter-spacing:-.04em}.wd-premium-health>span{margin-left:8px;color:var(--wdv2-muted,#718096);font-size:10px}.wd-premium-health>div{display:flex;flex-wrap:wrap;gap:5px 10px;margin-top:10px}.wd-premium-health b{font-size:9px;color:var(--wdv2-muted,#718096)}.wd-premium-velocity{margin-top:15px}.wd-premium-velocity strong{font-size:28px;font-weight:650}.wd-premium-velocity span{font-size:10px;color:var(--wdv2-muted,#718096);margin-left:6px}.wd-premium-velocity b{display:block;margin-top:8px;font-size:10px}.wd-premium-velocity b.up{color:#0b9965}.wd-premium-velocity b.down{color:#c54b5b}.wd-premium-card-note{display:block;margin-top:9px;color:var(--wdv2-muted,#718096);font-size:9px}
+
+/* Locked cards render no protected values; the blur is decorative placeholder only. */
+.wd-premium-locked{position:absolute;inset:38px 14px 12px;display:grid;place-items:center}.wd-premium-placeholder{position:absolute;inset:8px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;filter:blur(5px);opacity:.34}.wd-premium-placeholder i{border-radius:9px;background:linear-gradient(145deg,#cfd8e4,#eef2f7)}.wd-premium-lock-overlay{position:relative;z-index:2;text-align:center;display:grid;justify-items:center;gap:4px;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--wdv2-surface,#fff) 84%,transparent);backdrop-filter:blur(7px)}.wd-premium-lock-overlay span{font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#8064be}.wd-premium-lock-overlay b{font-size:11px;color:var(--wdv2-ink,#17233b)}.wd-premium-lock-overlay small{max-width:220px;font-size:9px;line-height:1.3;color:var(--wdv2-muted,#718096)}.wd-premium-lock-overlay a{font-size:9px;font-weight:800;color:#356bd6;text-decoration:none}
+
+/* Map coverage */
+.wd-premium-map-coverage{display:block;margin-top:6px;padding-top:6px;border-top:1px solid rgba(130,145,165,.18);font-size:8.5px!important;line-height:1.3;color:#647589!important}
+
+/* Settings extension */
+.wd-premium-settings{grid-column:1/-1;border-top:1px solid var(--wdv2-border,#e2e8f0);margin-top:6px;padding-top:10px}.wd-premium-settings h3{margin:0 0 8px;font-size:11px;color:var(--wdv2-muted,#718096);text-transform:uppercase;letter-spacing:.08em}.wd-premium-settings .wdv2-widget-row span{display:flex;align-items:center;gap:7px}.wd-premium-settings .wdv2-widget-row small{font-size:8px;padding:3px 5px;border-radius:999px;background:#eef3fa;color:#6f7f91;text-transform:uppercase;letter-spacing:.05em}
+
+/* Dark theme for premium additions */
+html[data-wdv2-theme="dark"] .wd-live-presence{background:#111b2c;border-color:#2a3850;color:#e7eef9}
+html[data-wdv2-theme="dark"] .wd-premium-lock-overlay{background:rgba(18,28,44,.84)}html[data-wdv2-theme="dark"] .wd-premium-placeholder i{background:linear-gradient(145deg,#314057,#182437)}
+
+@media(max-width:1180px){.wd-premium-analytics-card{grid-column:span 6!important}.wd-live-presence{display:none}}
+@media(max-width:768px){.wd-premium-analytics-card{grid-column:1/-1!important;height:142px!important}.wd-premium-stat-grid{gap:8px}.wd-premium-stat-grid strong{font-size:18px}body.wdv2-mounted [data-card-id="municipality"].wd-premium-municipality{height:360px!important;min-height:360px!important;padding:14px!important}.wd-premium-theme-toggle{display:grid!important}}
