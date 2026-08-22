@@ -67,6 +67,9 @@ must(runtime.includes("linkedin_oidc: { label:'LinkedIn', enabled:true }"),'Link
 must(runtime.includes("apple: { label:'Apple', enabled:false }"),'Apple must remain explicitly deferred/disabled.');
 must(runtime.includes("return Promise.reject(new Error('This sign-in provider is not enabled yet.'))"),'Disabled providers must fail closed.');
 must(runtime.includes('request.options.redirectTo = onboardingRedirect(intendedNext)'),'All OAuth sign-ins must return through required Watchdog onboarding.');
-must(runtime.includes("parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0"),'OAuth next routes must reject cross-origin, non-property and onboarding-loop targets.');
+must(runtime.includes('parsed.origin !== location.origin'),'OAuth next routes must reject cross-origin targets.');
+must(runtime.includes("if (cleanWatchdogHost)"),'OAuth next-route validation must explicitly handle clean watchdogindex.com routes.');
+must(runtime.includes("path === '/onboarding' || path.indexOf('/onboarding/') === 0 || path.indexOf('/api/') === 0"),'Clean-route OAuth returns must reject onboarding loops and API destinations.');
+must(runtime.includes("path.indexOf('/property/') !== 0 || path.indexOf('/property/onboarding') === 0"),'Legacy-host OAuth returns must remain restricted to property routes and reject onboarding loops.');
 
 console.log('Supabase runtime rotation-path contract passed.');
