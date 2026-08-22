@@ -1,5 +1,7 @@
 -- Promote only the two exact NJ DCA Zoning Information Directory workbook semantics
 -- proven by authenticated production canary 1951. Do not infer plan/board/currentness fields.
+-- Production application succeeded as promote_dca_zoning_contact_status_v2 after the governed
+-- versioned_observation cache policy passed the provider-registry constraint.
 insert into public.data_center_provider_coverage
   (marker_id, scopes, provider_key, value_status, source_keys, last_verified_at, notes, provider_kind, source_fields, calculation_key, freshness_seconds, cache_policy, bulk_capable)
 values
