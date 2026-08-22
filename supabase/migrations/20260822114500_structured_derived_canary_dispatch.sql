@@ -1,0 +1,107 @@
+create or replace function public.dispatch_derived_exact_canary(
+  p_pin text,
+  p_values jsonb,
+  p_kinds jsonb default '{}'::jsonb,
+  p_sources jsonb default '{}'::jsonb
+)
+returns bigint
+language plpgsql
+set search_path = public, extensions
+as $function$
+declare
+  v_raw text := encode(gen_random_bytes(48), 'hex');
+  v_email text := 'watchdog-derived-canary-' || substr(v_raw,1,10) || '@example.com';
+  v_request_id bigint;
+begin
+  if p_pin is null or p_pin !~ '^[A-Za-z0-9_. -]{1,80}$' then
+    raise exception 'Invalid derived canary pin';
+  end if;
+  if p_values is null or jsonb_typeof(p_values) <> 'object' or p_values = '{}'::jsonb then
+    raise exception 'Derived canary values must be a non-empty object';
+  end if;
+  if coalesce(jsonb_typeof(p_kinds),'object') <> 'object' or coalesce(jsonb_typeof(p_sources),'object') <> 'object' then
+    raise exception 'Derived canary kinds/sources must be objects';
+  end if;
+
+  insert into public.watchdog_test_bootstrap_tokens
+    (token_hash, desired_email, redirect_to, expires_at, metadata)
+  values
+    (encode(digest(v_raw,'sha256'),'hex'),
+     v_email,
+     'https://njpropertytaxrelief.com/property/dashboard',
+     now()+interval '10 minutes',
+     jsonb_build_object(
+       'purpose','provider_release_canary',
+       'scenario','derived_exact_v1',
+       'no_real_spend',true,
+       'derived_exact',jsonb_build_object(
+         'pin',p_pin,
+         'values',p_values,
+         'kinds',coalesce(p_kinds,'{}'::jsonb),
+         'sources',coalesce(p_sources,'{}'::jsonb)
+       )
+     ));
+
+  select net.http_post(
+    url := 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/provider-release-canary',
+    headers := jsonb_build_object('Content-Type','application/json'),
+    body := jsonb_build_object('token',v_raw,'scenario','derived_exact_v1'),
+    timeout_milliseconds := 30000
+  ) into v_request_id;
+
+  return v_request_id;
+end;
+$function$;
+
+revoke all on function public.dispatch_derived_exact_canary(text,jsonb,jsonb,jsonb) from public, anon, authenticated;
+grant execute on function public.dispatch_derived_exact_canary(text,jsonb,jsonb,jsonb) to postgres, service_role;
+
+create or replace function public.dispatch_provider_release_canary(p_scenario text)
+returns bigint
+language plpgsql
+set search_path = public, extensions
+as $function$
+declare
+  v_raw text := encode(gen_random_bytes(48), 'hex');
+  v_email text := 'watchdog-provider-canary-' || substr(v_raw,1,10) || '@example.com';
+  v_request_id bigint;
+begin
+  if p_scenario not in (
+    'zoning_v31',
+    'designation_stack_v15',
+    'csrr_v1',
+    'csrr_controls_v2',
+    'csrr_semantics_v3',
+    'geology_intersections_v1',
+    'model_bounds_v1',
+    'uniformity_history_v1',
+    'uniformity_history_v2',
+    'modiv_longitudinal_v1',
+    'modiv_longitudinal_partial_scan_v1',
+    'modiv_longitudinal_missing_year_v1'
+  ) then
+    raise exception 'Unsupported release canary scenario';
+  end if;
+
+  insert into public.watchdog_test_bootstrap_tokens
+    (token_hash, desired_email, redirect_to, expires_at, metadata)
+  values
+    (encode(digest(v_raw,'sha256'),'hex'),
+     v_email,
+     'https://njpropertytaxrelief.com/property/dashboard',
+     now()+interval '10 minutes',
+     jsonb_build_object('purpose','provider_release_canary','scenario',p_scenario,'no_real_spend',true));
+
+  select net.http_post(
+    url := 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/provider-release-canary',
+    headers := jsonb_build_object('Content-Type','application/json'),
+    body := jsonb_build_object('token',v_raw,'scenario',p_scenario),
+    timeout_milliseconds := 30000
+  ) into v_request_id;
+
+  return v_request_id;
+end;
+$function$;
+
+revoke all on function public.dispatch_provider_release_canary(text) from public, anon, authenticated;
+grant execute on function public.dispatch_provider_release_canary(text) to postgres, service_role;
