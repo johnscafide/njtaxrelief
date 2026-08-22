@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-22T07:06:31-04:00",
+  "captured_at": "2026-08-22T07:45:33-04:00",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -73,6 +73,7 @@
     "watchdog.insurance.physical_record_coverage": "live",
     "watchdog.municipal.municipal_source_coverage": "live",
     "watchdog.njplus.affordable_supply_coverage": "live",
+    "watchdog.njplus.assessment_change_trace": "live",
     "watchdog.njplus.brownfield_reuse_context": "live",
     "watchdog.njplus.development_designation_stack": "live",
     "watchdog.njplus.environmental_case_activity": "live",
