@@ -1,0 +1,42 @@
+name: Temporary prelaunch audit branch runner
+
+on:
+  push:
+    branches:
+      - watchdog/prelaunch-audit-remediation-2026-08-22
+
+permissions:
+  contents: write
+
+jobs:
+  run-branch-remediation:
+    if: ${{ !contains(github.event.head_commit.message, '[audit-remediation-applied]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Execute remediation script stored on branch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src = Path('.github/workflows/prelaunch-audit-remediation.yml').read_text()
+          marker = '        run: |\n'
+          if marker not in src:
+              raise SystemExit('remediation run block not found')
+          body = src.split(marker, 1)[1]
+          out = []
+          for line in body.splitlines():
+              if not line:
+                  out.append('')
+              elif line.startswith('          '):
+                  out.append(line[10:])
+              else:
+                  break
+          if not out:
+              raise SystemExit('remediation run block empty')
+          Path('/tmp/watchdog-prelaunch-remediate.sh').write_text('\n'.join(out) + '\n')
+          PY
+          bash -euxo pipefail /tmp/watchdog-prelaunch-remediate.sh
