@@ -1,0 +1,93 @@
+/* NJW-246 Runs 048-049 — Marketing Studio Direct Mail Analytics mobile certification layer.
+   Loaded only for <=720px so desktop behavior remains unchanged. */
+@media (max-width:720px){
+  body{overflow-x:hidden}
+  .dmaa-top{height:auto;min-height:0;display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:calc(10px + env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) 10px max(14px,env(safe-area-inset-left))}
+  .dmaa-top>a{min-height:44px;min-width:0;gap:8px}
+  .dmaa-top>a i{font-size:20px}
+  .dmaa-top>a b{font-size:17px;white-space:nowrap}
+  .dmaa-top>a span{font-size:11px;line-height:1.2;padding:6px 8px}
+
+  /* Run 049: the shared <=720px rule hid the only explicit Campaigns/Dashboard nav.
+     Keep both destinations reachable as a compact phone command row instead. */
+  .dmaa-top nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .dmaa-top nav a{display:inline-flex;align-items:center;justify-content:center;min-width:0;min-height:44px;padding:0 12px;border-radius:10px;background:#f2f5f8;color:#344054;font-size:14px;line-height:1.2;font-weight:800;text-align:center;touch-action:manipulation}
+
+  #direct-mail-admin{padding:20px max(14px,env(safe-area-inset-right)) calc(28px + env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+  .dmaa-loading{padding:56px 12px;font-size:15px;line-height:1.5}
+  .dmaa-hero{gap:16px;margin-bottom:18px}
+  .dmaa-hero span,.dmaa-kicker{font-size:12px;line-height:1.3;letter-spacing:.09em}
+  .dmaa-hero h1{font-size:28px;line-height:1.12;margin-top:8px}
+  .dmaa-hero p{font-size:15px;line-height:1.5}
+  .dmaa-period{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:5px}
+  .dmaa-period button{min-height:44px;padding:8px 10px;font-size:14px;touch-action:manipulation}
+  .dmaa-stats{gap:10px}
+  .dmaa-stat{padding:15px}
+  .dmaa-stat span{font-size:12px;line-height:1.3}
+  .dmaa-stat b{font-size:22px}
+  .dmaa-stat small{font-size:13px;line-height:1.4}
+  .dmaa-grid{gap:12px;margin-top:12px}
+  .dmaa-card{padding:16px;border-radius:18px}
+  .dmaa-card-head{gap:12px;margin-bottom:14px}
+  .dmaa-card h2{font-size:19px;line-height:1.25}
+  .dmaa-card-head small{font-size:13px;line-height:1.4}
+  .dmaa-funnel-row{grid-template-columns:90px minmax(0,1fr) 44px;gap:8px;min-height:38px}
+  .dmaa-funnel-row span,.dmaa-funnel-row b{font-size:13px;line-height:1.3}
+  .dmaa-segment{min-height:56px;padding:12px 14px;touch-action:manipulation}
+  .dmaa-segment b{font-size:18px}
+  .dmaa-segment span{font-size:13px;line-height:1.35}
+  .dmaa-tools{display:grid;grid-template-columns:1fr;gap:8px;width:100%}
+  .dmaa-tools select,.dmaa-tools input{width:100%;height:48px;min-height:48px;padding:0 12px;font-size:16px}
+
+  /* The nine-column desktop ledgers are decision-heavy. On phones, preserve every field
+     but present each row as a readable card instead of forcing a 920px horizontal table. */
+  .dmaa-table-wrap{overflow:visible}
+  .dmaa-table{display:block;width:100%;min-width:0;border-collapse:separate}
+  .dmaa-table thead{display:none}
+  .dmaa-table tbody{display:grid;gap:12px;width:100%}
+  .dmaa-table tr{display:block;width:100%;background:#f7f9fc;border:1px solid #e8edf4;border-radius:14px;padding:8px 12px;overflow:hidden}
+  .dmaa-table td{display:grid;grid-template-columns:minmax(94px,.72fr) minmax(0,1.28fr);gap:12px;align-items:start;width:100%;padding:9px 0;border-bottom:1px solid #e7ecf2;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+  .dmaa-table td:last-child{border-bottom:0}
+  .dmaa-table td::before{font-size:12px;font-weight:800;line-height:1.35;text-transform:uppercase;letter-spacing:.035em;color:#788496}
+  .dmaa-table td b{font-size:14px;line-height:1.35}
+  .dmaa-table td small{display:block;margin-top:2px;font-size:13px;line-height:1.35;overflow-wrap:anywhere}
+  .dmaa-pill{max-width:100%;white-space:normal;padding:6px 9px;font-size:12px;line-height:1.25}
+  .dmaa-money{font-size:14px}
+  .dmaa-empty{display:block!important;padding:22px 4px!important;border:0!important;background:transparent;text-align:center;font-size:14px!important;line-height:1.5}
+  .dmaa-empty::before{content:none!important}
+
+  /* Customers ledger labels. */
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(1)::before{content:'Member'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(2)::before{content:'Plan'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(3)::before{content:'Segment'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(4)::before{content:'Campaigns'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(5)::before{content:'Orders'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(6)::before{content:'Pieces'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(7)::before{content:'Spend'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(8)::before{content:'Credit'}
+  .dmaa-grid + .dmaa-table-card .dmaa-table td:nth-child(9)::before{content:'Last order'}
+
+  /* Production-order ledger labels. */
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(1)::before{content:'Campaign'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(2)::before{content:'Status'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(3)::before{content:'Format'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(4)::before{content:'Size'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(5)::before{content:'Pieces'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(6)::before{content:'Retail'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(7)::before{content:'PCM cost'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(8)::before{content:'Gross margin'}
+  .dmaa-table-card + .dmaa-table-card .dmaa-table td:nth-child(9)::before{content:'Submitted'}
+
+  .dmaa-error{margin:32px auto;padding:22px 18px}
+  .dmaa-error h2{font-size:20px;line-height:1.25}
+  .dmaa-error p{font-size:15px;line-height:1.5}
+  .dmaa-error a{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:8px;padding:0 16px;font-size:15px;font-weight:800;text-decoration:none}
+  .dmaa-top a:focus-visible,.dmaa-period button:focus-visible,.dmaa-segment:focus-visible,.dmaa-tools select:focus-visible,.dmaa-tools input:focus-visible,.dmaa-error a:focus-visible{outline:3px solid rgba(47,111,237,.35);outline-offset:2px}
+}
+@media (max-width:440px){
+  .dmaa-top>a b{font-size:15px}
+  .dmaa-top>a span{font-size:11px}
+  .dmaa-stat{padding:14px}
+  .dmaa-table td{grid-template-columns:1fr;gap:4px}
+  .dmaa-table td::before{margin-bottom:1px}
+}
