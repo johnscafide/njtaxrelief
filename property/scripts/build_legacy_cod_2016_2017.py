@@ -62,6 +62,26 @@ YEARS = (2014, 2015, 2016, 2017)
 TARGET_YEARS = (2016, 2017)
 LEGAL = {"CITY", "BOROUGH", "TOWNSHIP", "TOWN", "VILLAGE"}
 
+# Explicit one-to-one historical names verified directly in the October 2017
+# Division of Taxation county PDFs. These are aliases, never fuzzy matches.
+HISTORICAL_ALIASES_BY_CODE = {
+    "0212": ("BERGEN", "E RUTHERFORD BOROUGH"),
+    "0217": ("BERGEN", "FAIRLAWN BOROUGH"),
+    "0225": ("BERGEN", "HASBROUCK HGHTS BOROUGH"),
+    "0228": ("BERGEN", "HOHOKUS BOROUGH"),
+    "0252": ("BERGEN", "RIVEREDGE BOROUGH"),
+    "0253": ("BERGEN", "RIVERVALE TOWNSHIP"),
+    "0323": ("BURLINGTON", "MT HOLLY TOWNSHIP"),
+    "0324": ("BURLINGTON", "MT LAUREL TOWNSHIP"),
+    "0326": ("BURLINGTON", "NO HANOVER TOWNSHIP"),
+    "0409": ("CAMDEN", "CHERRY HILL TWNSHP"),
+    "1426": ("MORRIS", "MOUNT ARLINGTON BOR"),
+    "1429": ("MORRIS", "PARSIPPANY TR HLS TOWNSHIP"),
+    "1525": ("OCEAN", "PT PLEASANT BEACH BOROUGH"),
+    "1704": ("SALEM", "LOWER ALLOWAY CREEK TOWNSHIP"),
+    "1815": ("SOMERSET", "PEAPACK GLADSTONE BOROUGH"),
+}
+
 
 def normalize_name(value: str) -> str:
     s = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode().upper()
@@ -210,7 +230,15 @@ def reconcile(source_rows):
         code = str(town["district"]).zfill(4)
         county = str(town["county"]).upper()
         key = (county, normalize_name(str(town["name"])))
-        source = source_exact.get(key)
+        alias_key = HISTORICAL_ALIASES_BY_CODE.get(code)
+        if alias_key is not None:
+            if alias_key[0] != county:
+                raise RuntimeError(f"Historical alias county mismatch for {code}: {alias_key[0]} != {county}")
+            source = source_exact.get(alias_key)
+            if source is None:
+                raise RuntimeError(f"Verified historical alias target missing for {code}: {alias_key}")
+        else:
+            source = source_exact.get(key)
         if source is None:
             unresolved.append((code, town, key))
             continue
