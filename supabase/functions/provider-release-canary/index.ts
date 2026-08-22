@@ -5,7 +5,7 @@ const URL=Deno.env.get('SUPABASE_URL')!;
 const ANON=Deno.env.get('SUPABASE_ANON_KEY')!;
 const SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const admin=createClient(URL,SERVICE,{auth:{persistSession:false,autoRefreshToken:false}});
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','https://watchdogindex.com','https://www.watchdogindex.com']);
 
 type Scenario={fn:string;body:any};
 const SCENARIOS:Record<string,Scenario>={
@@ -17,6 +17,16 @@ const SCENARIOS:Record<string,Scenario>={
         'njplus.nj-dca-zoning-directory.zoning_map_url',
         'njplus.nj-dca-zoning-directory.zoning_ordinance_url',
         'njplus.nj-dca-zoning-directory.municipal_zoning_portal'
+      ]
+    }
+  },
+  zoning_contact_status_v1:{
+    fn:'workbench-hydrate',
+    body:{
+      pams_pins:['0102_139_15'],
+      marker_ids:[
+        'njplus.nj-dca-zoning-directory.zoning_officer_contact',
+        'njplus.nj-dca-zoning-directory.zoning_directory_status'
       ]
     }
   },
