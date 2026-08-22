@@ -1,9 +1,5 @@
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
-const LEGACY_PROPERTY_ORIGINS = [
-  'https://njpropertytaxrelief.com/property/',
-  'https://www.njpropertytaxrelief.com/property/'
-];
 
 const NOINDEX_PATH_PREFIXES = [
   '/data-center',
@@ -14,6 +10,29 @@ const NOINDEX_PATH_PREFIXES = [
   '/insights/admin',
   '/marketing-studio'
 ];
+
+const IMPLEMENTATION_PREFIXES = [
+  '/property/assets/',
+  '/property/css/',
+  '/property/data/',
+  '/property/docs/',
+  '/property/generated/',
+  '/property/js/',
+  '/property/logs/',
+  '/property/partials/',
+  '/property/scripts/',
+  '/property/sql/',
+  '/property/tests/'
+];
+
+const INTERNAL_PROPERTY_FILES = new Set([
+  '/property/footer.html',
+  '/property/nav.html',
+  '/property/sidemenu.html',
+  '/property/manifest.webmanifest'
+]);
+
+const NON_PAGE_EXTENSION = /\.(?:avif|bmp|csv|css|gif|geojson|ico|jpe?g|js|json|map|md|mjs|mp4|otf|pdf|png|py|sql|svg|ts|ttf|txt|webmanifest|webp|woff2?|xml|zip)$/i;
 
 function firstValue(value) {
   return Array.isArray(value) ? value[0] : value;
@@ -65,7 +84,7 @@ function deploymentOrigins() {
 
   for (const raw of candidates) {
     if (!raw) continue;
-    let host = String(raw).trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
+    const host = String(raw).trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
     if (!host || host.toLowerCase() === CANONICAL_HOST || seen.has(host)) continue;
     seen.add(host);
     origins.push(`https://${host}`);
@@ -78,7 +97,16 @@ function splitSuffix(value) {
   return { path: match?.[1] || '/', suffix: match?.[2] || '' };
 }
 
+function isImplementationPropertyPath(value) {
+  const { path } = splitSuffix(value);
+  const lower = path.toLowerCase();
+  if (INTERNAL_PROPERTY_FILES.has(lower)) return true;
+  if (IMPLEMENTATION_PREFIXES.some(prefix => lower.startsWith(prefix))) return true;
+  return NON_PAGE_EXTENSION.test(lower) && !/\.html$/i.test(lower);
+}
+
 function cleanPropertyPath(value) {
+  if (isImplementationPropertyPath(value)) return value;
   const { path, suffix } = splitSuffix(value);
   let clean = path.replace(/^\/property(?=\/|$)/i, '') || '/';
   clean = normalizePagePath(clean) || clean;
@@ -86,21 +114,40 @@ function cleanPropertyPath(value) {
 }
 
 function rewriteAbsolutePropertyUrls(html) {
-  let output = html;
-  for (const origin of LEGACY_PROPERTY_ORIGINS) {
-    output = output.split(origin).join(`${CANONICAL_ORIGIN}/`);
-  }
-  return output;
+  return html.replace(
+    /https:\/\/(?:www\.)?njpropertytaxrelief\.com\/property([^"'<>\s]*)/gi,
+    (full, rest) => {
+      const propertyPath = `/property${rest || '/'}`;
+      if (isImplementationPropertyPath(propertyPath)) return full;
+      return `${CANONICAL_ORIGIN}${cleanPropertyPath(propertyPath)}`;
+    }
+  );
 }
 
 function rewriteNavigationLinks(html) {
   return html
     .replace(/(<a\b[^>]*\bhref=["'])\/property([^"']*)(["'])/gi, (full, start, rest, end) => {
-      return `${start}${cleanPropertyPath(`/property${rest}`)}${end}`;
+      const value = `/property${rest}`;
+      return isImplementationPropertyPath(value) ? full : `${start}${cleanPropertyPath(value)}${end}`;
     })
     .replace(/(<form\b[^>]*\baction=["'])\/property([^"']*)(["'])/gi, (full, start, rest, end) => {
-      return `${start}${cleanPropertyPath(`/property${rest}`)}${end}`;
+      const value = `/property${rest}`;
+      return isImplementationPropertyPath(value) ? full : `${start}${cleanPropertyPath(value)}${end}`;
     });
+}
+
+function cleanRouteRuntime() {
+  return `<script id="watchdog-clean-route-runtime">(function(){
+'use strict';
+var prefixes=['/property/assets/','/property/css/','/property/data/','/property/docs/','/property/generated/','/property/js/','/property/logs/','/property/partials/','/property/scripts/','/property/sql/','/property/tests/'];
+var files={'/property/footer.html':1,'/property/nav.html':1,'/property/sidemenu.html':1,'/property/manifest.webmanifest':1};
+var nonPage=/\\.(?:avif|bmp|csv|css|gif|geojson|ico|jpe?g|js|json|map|md|mjs|mp4|otf|pdf|png|py|sql|svg|ts|ttf|txt|webmanifest|webp|woff2?|xml|zip)$/i;
+function internal(path){var lower=String(path||'').toLowerCase();if(files[lower])return true;for(var i=0;i<prefixes.length;i++)if(lower.indexOf(prefixes[i])===0)return true;return nonPage.test(lower)&&! /\\.html$/i.test(lower);}
+function clean(value){try{var u=new URL(value,location.origin);if(u.origin!==location.origin)return null;if(u.pathname!=='/property'&&u.pathname.indexOf('/property/')!==0)return null;if(internal(u.pathname))return null;var p=u.pathname.slice(9)||'/';p=p.replace(/\\/index\\.html$/i,'/').replace(/\\.html$/i,'');if(p.length>1)p=p.replace(/\\/+$/,'');return p+u.search+u.hash;}catch(_){return null;}}
+function normalize(root){var scope=root&&root.querySelectorAll?root:document;scope.querySelectorAll('a[href]').forEach(function(a){var v=clean(a.getAttribute('href'));if(v!==null)a.setAttribute('href',v);});scope.querySelectorAll('form[action]').forEach(function(f){var v=clean(f.getAttribute('action'));if(v!==null)f.setAttribute('action',v);});}
+function boot(){normalize(document);if(!window.MutationObserver)return;new MutationObserver(function(records){records.forEach(function(r){r.addedNodes&&r.addedNodes.forEach(function(n){if(n.nodeType===1){if(n.matches&&n.matches('a[href],form[action]'))normalize(n.parentNode||n);else normalize(n);}});});}).observe(document.documentElement,{childList:true,subtree:true});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+})();</script>`;
 }
 
 function setCanonicalMetadata(html, canonicalUrl) {
@@ -128,7 +175,7 @@ function setCanonicalMetadata(html, canonicalUrl) {
     .replace(/"item"\s*:\s*"https:\/\/(?:www\.)?njpropertytaxrelief\.com\/"/g, `"item":"${CANONICAL_ORIGIN}/"`)
     .replace(/"url"\s*:\s*"https:\/\/(?:www\.)?njpropertytaxrelief\.com\/property\/"/g, `"url":"${CANONICAL_ORIGIN}/"`);
 
-  return output;
+  return output.replace(/<\/body>/i, `${cleanRouteRuntime()}\n</body>`);
 }
 
 async function fetchSource(publicPath) {
