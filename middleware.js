@@ -4,6 +4,7 @@ const WATCHDOG_HOST = 'www.watchdogindex.com';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
+const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
 const LEGACY_FAQ_PATHS = new Set([
   '/property/faq',
   '/property/faq/',
@@ -24,7 +25,7 @@ function cleanPublicPath(pathname) {
 }
 
 function rewriteCleanPage(request, publicPath) {
-  const destination = new URL('/api/watchdog-index-page', request.url);
+  const destination = new URL('/api/watchdog-index-page-safe', request.url);
   destination.searchParams.set('path', publicPath);
   return rewrite(destination);
 }
@@ -60,10 +61,12 @@ export default function middleware(request) {
     return redirectLegacyFaq(request, url);
   }
 
-  // Watchdog Move is intentionally staged as a root-level, unlinked study surface.
-  // Serve its static index directly instead of sending it through the /property/*
-  // clean-route source loader, which has no /property/move source counterpart.
-  if (url.pathname === '/move' || url.pathname === '/move/') return next();
+  const publicPath = cleanPublicPath(url.pathname);
+
+  // A small set of modern Watchdog pages intentionally live at the repository
+  // root rather than under /property. Let Vercel serve their directory indexes
+  // directly so the canonical clean URL remains /contact, /move, etc.
+  if (ROOT_STATIC_PAGES.has(publicPath)) return next();
 
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
   if (url.pathname === '/property' || url.pathname === '/property/') {
@@ -78,7 +81,9 @@ export default function middleware(request) {
   if (isReservedRootPath(url.pathname) || STATIC_FILE.test(url.pathname)) return next();
 
   // On the dedicated Watchdog domain, extensionless root paths are Watchdog pages.
-  return rewriteCleanPage(request, cleanPublicPath(url.pathname));
+  // The safe loader rejects Vercel authentication/error HTML and returns Watchdog's
+  // branded 404 instead of leaking hosting-provider UI into the customer surface.
+  return rewriteCleanPage(request, publicPath);
 }
 
 export const config = {
