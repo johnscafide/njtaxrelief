@@ -1,6 +1,14 @@
 (function () {
   "use strict";
 
+  function ensureDisclosureStyles() {
+    if (document.getElementById("wd-faq-disclosure-guard")) return;
+    var style = document.createElement("style");
+    style.id = "wd-faq-disclosure-guard";
+    style.textContent = ".faq-item>.faq-answer{display:block!important}.faq-item[hidden],.faq-cat[hidden]{display:none!important}";
+    document.head.appendChild(style);
+  }
+
   function normalize(value) {
     return String(value || "").trim().toLowerCase();
   }
@@ -15,6 +23,7 @@
   }
 
   function initFaqSearch() {
+    ensureDisclosureStyles();
     var input = document.getElementById("faq-search");
     var empty = document.getElementById("faq-empty");
     var status = document.getElementById("faq-status");
