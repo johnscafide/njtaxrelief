@@ -37,6 +37,9 @@
     window.dataLayer=window.dataLayer||[];
     if(typeof window.gtag!=='function') window.gtag=function(){window.dataLayer.push(arguments);};
   }
+  function ensureClarityQueue(){
+    if(typeof window.clarity!=='function') window.clarity=function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};
+  }
   function consentPayload(analytics){
     return {
       ad_storage:'denied',
@@ -53,7 +56,7 @@
     window.gtag('consent',mode||'update',consentPayload(!!analytics));
   }
   function signalClarity(analytics){
-    if(typeof window.clarity!=='function') return;
+    ensureClarityQueue();
     try{
       window.clarity('consentv2',{
         ad_Storage:'denied',
@@ -73,9 +76,7 @@
     document.head.appendChild(script);
   }
   function loadClarity(){
-    if(typeof window.clarity!=='function'){
-      window.clarity=function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};
-    }
+    ensureClarityQueue();
     signalClarity(true);
     if(document.querySelector('script[data-watchdog-consent-clarity],script[src*="clarity.ms/tag/'+CLARITY_ID+'"]')) return;
     var script=document.createElement('script');script.async=true;script.src='https://www.clarity.ms/tag/'+CLARITY_ID;script.setAttribute('data-watchdog-consent-clarity','1');
@@ -158,6 +159,7 @@
   ensureCss();
   ensureGoogleQueue();
   signalGoogle(false,'default');
+  signalClarity(false);
   if(stored) apply(stored.analytics,false);
 
   function ready(){ ensureBanner();ensureModal();appendOnboardingLink();syncControls(); }
