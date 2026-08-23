@@ -23,12 +23,14 @@ on:
       - 'supabase/functions/export-my-data/**'
       - 'supabase/functions/public-platform-status/**'
       - 'supabase/functions/appeal-prospect-scan/**'
+  schedule:
+    - cron: '47 8 * * *'
   workflow_dispatch:
     inputs:
       ref:
         description: Git ref to visually validate
         required: true
-        default: feature/watchdog-intelligence-foundation
+        default: main
         type: string
 
 permissions:
@@ -37,7 +39,7 @@ permissions:
 jobs:
   authenticated-visual-acceptance:
     name: authenticated-visual-acceptance
-    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment: staging
@@ -53,12 +55,12 @@ jobs:
 
     steps:
       - name: Checkout release candidate
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
-          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event_name == 'pull_request' && github.event.pull_request.head.sha || 'main' }}
 
       - name: Set up Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '24'
 
@@ -120,7 +122,7 @@ jobs:
 
       - name: Install Playwright
         run: |
-          npm install --no-save playwright@1.55.0
+          npm install --no-save playwright@1.62.0
           npx playwright install --with-deps chromium
 
       - name: Verify production property page has no fatal script error
@@ -152,7 +154,7 @@ jobs:
 
       - name: Upload visual evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: hosted-visual-acceptance-evidence
           path: visual-acceptance-evidence
