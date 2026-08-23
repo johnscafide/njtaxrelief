@@ -49,6 +49,37 @@ body.md-page .wd-public-profile img{border-color:#dbe4ea!important}
 .wd-public-recent-empty{color:#7d8a9a;font-size:12.5px;line-height:1.5;padding:8px 11px 12px}.wd-public-recent .wd-public-link{align-items:flex-start}.wd-public-recent small{color:#7c8b9b;display:block;font-size:10px;font-weight:600;margin-top:3px}
 body.wd-public-menu-open{overflow:hidden}
 
+/* FAQ: static disclosure + authoritative Watchdog palette. This replaces the
+   old runtime-injected override layer and keeps native <details> usable when
+   JavaScript is unavailable. */
+html body .faqp-hero{padding:42px 24px 40px;background:#fff;border-bottom:1px solid #e2e7ef}
+html body .faqp-hero h1{margin:0;color:#111d38}
+html body .faqp-wrap{padding-top:44px;color:#111d38}
+html body .faqp-wrap .faqp-search{border-color:#cbd5e1}
+html body .faqp-wrap .faqp-search:focus-within{border-color:#2f6df6;box-shadow:0 0 0 3px rgba(47,109,246,.14)}
+html body .faqp-wrap .faqp-search i{color:#2f6df6}
+html body .faqp-wrap .faqp-side-title{color:#748198}
+html body .faqp-wrap .faqp-side>nav{display:flex;flex-direction:column;gap:2px;background:transparent;background-image:none;border:0;border-left:1px solid #e2e7ef;border-radius:0;box-shadow:none;padding:0 0 0 12px;margin:0;min-height:0}
+html body .faqp-wrap .faqp-side>nav>a{display:block;background:transparent;background-image:none;border:0;border-radius:8px;box-shadow:none;color:#111d38;font:700 14px/1.35 'Source Sans 3',Arial,sans-serif;margin:0;padding:8px 10px;text-decoration:none;text-shadow:none}
+html body .faqp-wrap .faqp-side>nav>a:hover,html body .faqp-wrap .faqp-side>nav>a:focus-visible{background:#edf1f6;color:#183b84;outline:2px solid #2f6df6;outline-offset:2px}
+html body .faqp-wrap .faq-cat h2{color:#111d38}
+html body .faqp-wrap .faq-cat-sub{color:#748198}
+html body .faqp-wrap .faq-item{border-color:#e2e7ef;box-shadow:0 8px 26px rgba(40,55,82,.035)}
+html body .faqp-wrap .faq-item[open]{border-color:rgba(47,109,246,.48);box-shadow:0 12px 34px rgba(40,55,82,.06)}
+html body .faqp-wrap .faq-question{color:#111d38;list-style:none}
+html body .faqp-wrap .faq-question::before,html body .faqp-wrap .faq-question::after{content:none;display:none}
+html body .faqp-wrap .faq-question:hover,html body .faqp-wrap .faq-question:focus-visible{background:#edf1f6;color:#111d38;outline:2px solid #2f6df6;outline-offset:-2px}
+html body .faqp-wrap .faq-arrow{border-color:#cbd5e1;color:#183b84}
+html body .faqp-wrap .faq-arrow::after{content:none;display:none}
+html body .faqp-wrap .faq-arrow::before{content:'+';display:block;color:inherit;font-family:Arial,sans-serif;font-size:20px;font-weight:600;line-height:1}
+html body .faqp-wrap .faq-item[open] .faq-arrow{background:#2f6df6;border-color:#2f6df6;color:#fff}
+html body .faqp-wrap details.faq-item>.faq-answer{display:block;border-top-color:#e2e7ef;color:#31435c}
+html body .faqp-wrap .faq-src{color:#748198}
+html body .faqp-wrap .faq-empty{background:#f5f7fb;border-color:#e2e7ef;color:#748198}
+html body .faqp-wrap .faq-note{background:linear-gradient(135deg,#183b84,#2f6df6);box-shadow:0 8px 24px rgba(40,55,82,.08)}
+html body .faqp-wrap .faq-note a{color:#fff}
+html body .faqp-wrap .faq-item[hidden],html body .faqp-wrap .faq-cat[hidden]{display:none}
+
 /* Landing desktop: hero nav stays minimal; the real primary nav becomes the sticky utility bar. */
 @media(min-width:941px){
   body.wd-consumer-mode #ssearch{display:none!important}
@@ -68,6 +99,8 @@ body.wd-public-menu-open{overflow:hidden}
    suppressed; the hero search remains available in-page. */
 @media(max-width:940px){
   body.wd-consumer-mode .ssearch{display:none!important}
+  html body .faqp-wrap .faqp-side>nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-left:0;padding:0}
+  html body .faqp-wrap{padding-top:32px}
 }
 
 /* Mobile certification 2026-08-19 run 002: compact the property-details
@@ -88,6 +121,8 @@ body.wd-public-menu-open{overflow:hidden}
   body.wd-consumer-mode .ssearch-brand{height:48px!important;min-width:44px!important;width:44px!important}
   body.wd-consumer-mode .ssearch-geo{height:44px!important;min-width:44px!important;width:44px!important}
   body.wd-consumer-mode .ssearch-go{height:46px!important;min-width:46px!important;width:46px!important}
+  html body .faqp-hero{padding:28px 18px 30px}
+  html body .faqp-wrap{padding-top:26px}
 }
 
 /* Mobile certification 2026-08-19 run 003: the legacy landing footer reduced
