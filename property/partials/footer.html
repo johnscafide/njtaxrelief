@@ -1,103 +1,358 @@
-<!-- Watchdog universal footer -->
-<style>
-  #wd-property-footer{
-    --wdf-teal:#078486;--wdf-teal-dark:#056b6d;--wdf-navy:#10294b;--wdf-gold:#b89518;
-    --wdf-ink:#1b2a39;--wdf-muted:#64727d;--wdf-border:#dce5e8;--wdf-soft:#f4f8f7;
-    background:#f9fbfb;border-top:1px solid var(--wdf-border);color:var(--wdf-muted);
-    font-family:"Source Sans 3",Arial,sans-serif;margin:0;padding:54px 24px 24px;width:100%;
-  }
-  #wd-property-footer,#wd-property-footer *{box-sizing:border-box}
-  #wd-property-footer a{background:transparent;color:inherit;text-decoration:none;transform:none}
-  #wd-property-footer .wdf-inner{margin:0 auto;max-width:1540px;width:100%}
-  #wd-property-footer .wdf-grid{align-items:start;display:grid;gap:44px;grid-template-columns:minmax(160px,.8fr) minmax(190px,1fr) minmax(220px,1.15fr) minmax(310px,1.65fr)}
-  #wd-property-footer .wdf-heading{color:var(--wdf-navy);font-family:"Plus Jakarta Sans",Arial,sans-serif;font-size:14px;font-weight:800;letter-spacing:.02em;margin:0 0 18px}
-  #wd-property-footer .wdf-column{display:flex;flex-direction:column;gap:11px;min-width:0}
-  #wd-property-footer .wdf-link{align-items:center;color:#344350;display:inline-flex;font-size:14.5px;font-weight:700;gap:8px;line-height:1.35;width:max-content;max-width:100%}
-  #wd-property-footer .wdf-link:hover,#wd-property-footer .wdf-link:focus-visible{color:var(--wdf-teal-dark);text-decoration:underline;text-underline-offset:4px;outline:none}
-  #wd-property-footer .wdf-link i{color:var(--wdf-teal);font-size:13px;width:16px;text-align:center}
-  #wd-property-footer .wdf-external-note{border-left:2px solid rgba(184,149,24,.55);color:#748087;font-size:12.5px;line-height:1.45;margin:4px 0 0;padding:1px 0 1px 11px}
-  #wd-property-footer .wdf-brand{border-left:1px solid var(--wdf-border);padding-left:34px}
-  #wd-property-footer .wdf-logo{align-items:center;color:var(--wdf-navy);display:inline-flex;gap:11px;margin-bottom:17px}
-  #wd-property-footer .wdf-logo:hover,#wd-property-footer .wdf-logo:focus-visible{color:var(--wdf-teal-dark);outline:none}
-  #wd-property-footer .wdf-logo-icon{align-items:center;background:var(--wdf-teal);border-radius:50%;color:#fff;display:inline-flex;flex:0 0 42px;height:42px;justify-content:center;width:42px}
-  #wd-property-footer .wdf-logo-icon i{color:#fff;font-size:18px}
-  #wd-property-footer .wdf-logo-name{display:block;font-family:"Plus Jakarta Sans",Arial,sans-serif;font-size:20px;font-weight:800;letter-spacing:-.5px;line-height:1.05}
-  #wd-property-footer .wdf-tagline{color:#75828c;display:block;font-size:11px;font-weight:700;letter-spacing:.06em;margin-top:3px;text-transform:uppercase}
-  #wd-property-footer .wdf-description{color:#56656f;font-size:14.5px;line-height:1.6;margin:0 0 17px;max-width:540px}
-  #wd-property-footer .wdf-support{align-items:center;background:var(--wdf-navy);border-radius:9px;color:#fff;display:inline-flex;font-size:14px;font-weight:800;gap:8px;padding:10px 13px;width:max-content}
-  #wd-property-footer .wdf-support:hover,#wd-property-footer .wdf-support:focus-visible{background:var(--wdf-teal-dark);color:#fff;outline:none;text-decoration:none}
-  #wd-property-footer .wdf-legal{border-top:1px solid var(--wdf-border);display:flex;gap:28px;justify-content:space-between;margin-top:42px;padding-top:22px}
-  #wd-property-footer .wdf-disclaimer{font-size:12.5px;line-height:1.55;margin:0;max-width:850px}
-  #wd-property-footer .wdf-legal-links{align-items:flex-start;display:flex;flex-wrap:wrap;gap:8px 17px;justify-content:flex-end}
-  #wd-property-footer .wdf-legal-links a{color:#44545f;font-size:12.5px;font-weight:700;white-space:nowrap}
-  #wd-property-footer .wdf-legal-links a:hover,#wd-property-footer .wdf-legal-links a:focus-visible{color:var(--wdf-teal-dark);text-decoration:underline;text-underline-offset:3px;outline:none}
-  #wd-property-footer .wdf-bottom{align-items:center;border-top:1px solid var(--wdf-border);display:flex;font-size:12.5px;gap:20px;justify-content:space-between;margin-top:20px;padding-top:18px}
-  #wd-property-footer .wdf-bottom p{margin:0}
-  #wd-property-footer .wdf-social{display:flex;gap:9px}
-  #wd-property-footer .wdf-social a{align-items:center;border:1px solid #bdcbcf;border-radius:50%;color:var(--wdf-teal-dark);display:inline-flex;height:34px;justify-content:center;width:34px}
-  #wd-property-footer .wdf-social a:hover,#wd-property-footer .wdf-social a:focus-visible{background:var(--wdf-teal);border-color:var(--wdf-teal);color:#fff;outline:none}
-  @media(max-width:980px){#wd-property-footer .wdf-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#wd-property-footer .wdf-brand{border-left:0;border-top:1px solid var(--wdf-border);grid-column:1/-1;padding:28px 0 0}#wd-property-footer .wdf-legal{flex-direction:column}#wd-property-footer .wdf-legal-links{justify-content:flex-start}}
-  @media(max-width:560px){#wd-property-footer{padding:42px 20px 20px}#wd-property-footer .wdf-grid{gap:34px;grid-template-columns:1fr}#wd-property-footer .wdf-brand{grid-column:auto}#wd-property-footer .wdf-bottom{align-items:flex-start;flex-direction:column}}
-</style>
+<!-- Shared Watchdog footer: exact /property/ footer markup -->
+<link rel="stylesheet" href="/property/css/watchdog-footer.css">
 
-<footer id="wd-property-footer" role="contentinfo" aria-label="Watchdog website footer">
-  <div class="wdf-inner">
-    <div class="wdf-grid">
-      <nav class="wdf-column" aria-label="Watchdog product links">
-        <h2 class="wdf-heading">Watchdog</h2>
-        <a class="wdf-link" href="/property/"><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Property Lookup</a>
-        <a class="wdf-link" href="/property/dashboard"><i class="fas fa-table-columns" aria-hidden="true"></i>Dashboard</a>
-        <a class="wdf-link" href="/property/town-compare"><i class="fas fa-route" aria-hidden="true"></i>Town Compare</a>
-        <a class="wdf-link" href="/property/robust"><i class="fas fa-shield-halved" aria-hidden="true"></i>ROBUST Framework</a>
-        <a class="wdf-link" href="/property/pro"><i class="fas fa-briefcase" aria-hidden="true"></i>Plans &amp; Professional</a>
-      </nav>
+<div
+    id="wd-property-footer"
+    role="contentinfo"
+    aria-label="Watchdog website footer"
+>
+    <div class="wdf-inner">
 
-      <nav class="wdf-column" aria-label="Watchdog research and help links">
-        <h2 class="wdf-heading">Research &amp; Help</h2>
-        <a class="wdf-link" href="/property/insights/"><i class="fas fa-newspaper" aria-hidden="true"></i>Insights</a>
-        <a class="wdf-link" href="/property/data-methodology"><i class="fas fa-book-open" aria-hidden="true"></i>Data Methodology</a>
-        <a class="wdf-link" href="/property/faq"><i class="fas fa-circle-question" aria-hidden="true"></i>FAQ</a>
-        <a class="wdf-link" href="/property/support"><i class="fas fa-life-ring" aria-hidden="true"></i>Support</a>
-        <a class="wdf-link" href="/property/status"><i class="fas fa-signal" aria-hidden="true"></i>System Status</a>
-        <a class="wdf-link" href="/property/updates"><i class="fas fa-clock-rotate-left" aria-hidden="true"></i>What's New</a>
-      </nav>
+        <div class="wdf-grid">
 
-      <nav class="wdf-column" aria-label="New Jersey tax relief guide links">
-        <h2 class="wdf-heading">NJ Tax Relief Guides</h2>
-        <a class="wdf-link" href="https://njpropertytaxrelief.com/anchor-estimator.html"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>Benefit Estimator</a>
-        <a class="wdf-link" href="https://njpropertytaxrelief.com/anchor-program.html"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>ANCHOR Program</a>
-        <a class="wdf-link" href="https://njpropertytaxrelief.com/senior-programs.html"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>Stay NJ &amp; Senior Freeze</a>
-        <a class="wdf-link" href="https://njpropertytaxrelief.com/veterans-benefits.html"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>Veterans Benefits</a>
-        <a class="wdf-link" href="https://njpropertytaxrelief.com/property-tax-appeal.html"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>Property Tax Appeals</a>
-        <p class="wdf-external-note">These educational tax-relief guides intentionally open the separate NJPropertyTaxRelief.com resource.</p>
-      </nav>
+            <!-- TAX RELIEF -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Property tax relief links"
+            >
+                <h2 class="wdf-heading">Tax Relief</h2>
 
-      <section class="wdf-brand" aria-label="About Watchdog">
-        <a class="wdf-logo" href="/property/">
-          <span class="wdf-logo-icon" aria-hidden="true"><i class="fas fa-dog"></i></span>
-          <span><span class="wdf-logo-name">Watchdog</span><span class="wdf-tagline">New Jersey Property Intelligence</span></span>
-        </a>
-        <p class="wdf-description">Watchdog turns New Jersey property records into clearer intelligence for homeowners and professionals, with source, freshness, and limitation context kept attached.</p>
-        <a class="wdf-support" href="/property/support"><i class="fas fa-life-ring" aria-hidden="true"></i>Contact Watchdog Support</a>
-      </section>
+                <a
+                    href="/anchor-estimator.html"
+                    class="wdf-link wdf-featured"
+                >
+                    Free Benefit Calculator
+                </a>
+
+                <a href="/anchor-program.html" class="wdf-link">
+                    ANCHOR Program
+                </a>
+
+                <a href="/senior-programs.html" class="wdf-link">
+                    Stay NJ &amp; Senior Freeze
+                </a>
+
+                <a href="/veterans-benefits.html" class="wdf-link">
+                    Veterans Benefits
+                </a>
+
+                <a href="/pas-1-guide.html" class="wdf-link">
+                    PAS-1 Filing Guide
+                </a>
+
+                <a href="/property-tax-appeal.html" class="wdf-link">
+                    Property Tax Appeals
+                </a>
+
+                <a href="/tax-calendar.html" class="wdf-link">
+                    Tax Calendar
+                </a>
+            </div>
+
+            <!-- HOMEOWNER TOOLS -->
+            <div
+                class="wdf-column"
+                role="navigation"
+                aria-label="Homeowner tools"
+            >
+                <h2 class="wdf-heading">Homeowner Tools</h2>
+
+                <a href="/property/" class="wdf-link wdf-featured">
+                    Property Tax Lookup
+                </a>
+
+                <a href="/resources.html" class="wdf-link">
+                    Resources &amp; Terminology
+                </a>
+
+                <a href="/guides.html" class="wdf-link">
+                    Free Downloadable Guides
+                </a>
+
+                <a
+                    href="/home-improvement-abatement.html"
+                    class="wdf-link"
+                >
+                    Renovation Tax Savings
+                </a>
+
+                <a href="/mortgage-calculator.html" class="wdf-link">
+                    Mortgage Calculator
+                </a>
+
+                <a href="/home-value.html" class="wdf-link">
+                    Home Value Estimator
+                </a>
+
+                <a href="/search-homes.html" class="wdf-link">
+                    Search Homes
+                </a>
+
+                <a href="/property/dashboard" class="wdf-link">
+                    My Properties
+                </a>
+
+                <a href="/property/pro" class="wdf-link">
+                    Pro Hub
+                </a>
+            </div>
+
+            <!-- SOUTH JERSEY AND CONTACT -->
+            <div>
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="South Jersey county resources"
+                >
+                    <h2 class="wdf-heading">South Jersey</h2>
+
+                    <a href="/camden-county.html" class="wdf-link">
+                        Camden County
+                    </a>
+
+                    <a href="/gloucester-county.html" class="wdf-link">
+                        Gloucester County
+                    </a>
+
+                    <a href="/burlington-county.html" class="wdf-link">
+                        Burlington County
+                    </a>
+
+                    <a href="/towns/atlantic/index.html" class="wdf-link">
+                        Atlantic County
+                    </a>
+
+                    <a href="/towns/salem/index.html" class="wdf-link">
+                        Salem County
+                    </a>
+                </div>
+
+                <div
+                    class="wdf-column"
+                    role="navigation"
+                    aria-label="Contact Watchdog"
+                >
+                    <h2 class="wdf-heading wdf-subheading">Find Us</h2>
+
+                    <a href="/#contact" class="wdf-link">
+                        <i
+                            class="fas fa-envelope"
+                            aria-hidden="true"
+                        ></i>
+                        Contact Us
+                    </a>
+
+                    <a href="tel:+18564041098" class="wdf-link">
+                        <i
+                            class="fas fa-phone"
+                            aria-hidden="true"
+                        ></i>
+                        856-404-1098
+                    </a>
+
+                    <a
+                        href="mailto:john@johnscafide.com"
+                        class="wdf-link"
+                    >
+                        <i
+                            class="fas fa-at"
+                            aria-hidden="true"
+                        ></i>
+                        Email agent
+                    </a>
+
+                    <div class="wdf-social">
+                        <a
+                            href="https://www.tiktok.com/@thetaxwatchdog"
+                            class="wdf-social-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Watchdog on TikTok"
+                        >
+                            <i
+                                class="fab fa-tiktok"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Facebook"
+                        >
+                            <i
+                                class="fab fa-facebook-f"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="wdf-social-link"
+                            aria-label="Watchdog on Instagram"
+                        >
+                            <i
+                                class="fab fa-instagram"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BRANDING AND DISCLOSURES -->
+            <div class="wdf-brand">
+
+                <a href="/property/" class="wdf-logo">
+                    <span class="wdf-logo-icon" aria-hidden="true">
+                        <i class="fas fa-shield-halved"></i>
+                    </span>
+
+                    <span class="wdf-logo-copy">
+                        <span class="wdf-logo-name">
+                            <span>Watchdog</span>
+                        </span>
+
+                        <span class="wdf-tagline">
+                            Watching out for New Jersey homeowners
+                        </span>
+                    </span>
+                </a>
+
+                <p class="wdf-description">
+                    Watchdog brings New Jersey property-tax records,
+                    homeowner tools, and plain-English property intelligence
+                    into one place. Understand assessments, monitor tax
+                    changes, protect home equity, and make better-informed
+                    housing decisions.
+                </p>
+
+                <div class="wdf-legal">
+                    <p>
+                        Real-estate questions submitted through Watchdog are
+                        handled by licensed New Jersey real-estate
+                        professionals affiliated with Opus Elite Real Estate.
+                        Brokerage services are separate from Watchdog's
+                        educational property-intelligence tools and are offered
+                        in compliance with New Jersey law and federal
+                        fair-housing requirements.
+                    </p>
+
+                    <p>
+                        NJPropertyTaxRelief.com is an independent educational
+                        resource and is not affiliated with or endorsed by the
+                        State of New Jersey, the New Jersey Division of
+                        Taxation, or any county or municipal government.
+                    </p>
+
+                    <p>
+                        Website information, property records, estimates, and
+                        calculators are provided for general educational
+                        purposes only. They do not constitute individualized
+                        tax, legal, financial, appraisal, or accounting advice.
+                        Property information may not reflect the most recent
+                        municipal records. Program rules, eligibility
+                        requirements, deadlines, and benefit amounts may
+                        change.
+                    </p>
+
+                    <p>
+                        Always verify property information and tax-relief
+                        eligibility with the appropriate government agency or
+                        a qualified professional.
+                    </p>
+
+                    <div class="wdf-legal-links">
+                        <a
+                            href="/property/privacy"
+                            class="wdf-legal-link"
+                        >
+                            Privacy Policy
+                        </a>
+
+                        <a href="/property/terms" class="wdf-legal-link">
+                            Terms of Use
+                        </a>
+
+                        <a
+                            href="/accessibility.html"
+                            class="wdf-legal-link"
+                        >
+                            Accessibility
+                        </a>
+
+                        <a href="/#contact" class="wdf-legal-link">
+                            Contact
+                        </a>
+
+                        <a
+                            href="https://www.nj.gov/treasury/taxation/"
+                            class="wdf-legal-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Official NJ Taxation Website
+                            <i
+                                class="fas fa-arrow-up-right-from-square"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+                    </div>
+
+                    <div class="wdf-housing">
+                        <i
+                            class="fas fa-house"
+                            aria-hidden="true"
+                        ></i>
+
+                        <p>
+                            Watchdog supports the Fair Housing Act and Equal
+                            Opportunity Act. Equal Housing Opportunity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="wdf-bottom">
+            <p class="wdf-copyright">
+                Copyright &copy;
+                <span id="wdf-current-year">2026</span>
+                Watchdog / NJPropertyTaxRelief.com. All rights reserved.
+            </p>
+
+            <div class="wdf-bottom-links">
+                <a href="/property/" class="wdf-bottom-link">
+                    Property Lookup
+                </a>
+
+                <a href="/insights.html" class="wdf-bottom-link">
+                    Insights
+                </a>
+
+                <a href="/resources.html" class="wdf-bottom-link">
+                    Resources
+                </a>
+
+                <a href="/#contact" class="wdf-bottom-link">
+                    Talk to an Expert
+                </a>
+            </div>
+        </div>
+
     </div>
+</div>
 
-    <div class="wdf-legal">
-      <p class="wdf-disclaimer">Watchdog is an independent property-intelligence product and is not affiliated with or endorsed by the State of New Jersey, any county, municipality, or public agency. Watchdog information is for research and educational use and does not replace the controlling government record or individualized tax, legal, financial, appraisal, title, lending, engineering, insurance, or accounting advice.</p>
-      <nav class="wdf-legal-links" aria-label="Watchdog legal links">
-        <a href="/property/trust">Trust Center</a>
-        <a href="/property/privacy">Privacy</a>
-        <a href="/property/terms">Terms</a>
-        <a href="/property/data-use">Data Use</a>
-      </nav>
-    </div>
+<script>
+    (function () {
+        var watchdogYear =
+            document.getElementById("wdf-current-year");
 
-    <div class="wdf-bottom">
-      <p>&copy; <span id="wdf-current-year">2026</span> WatchdogIndex.com. All rights reserved.</p>
-      <div class="wdf-social" aria-label="Watchdog social links">
-        <a href="https://www.tiktok.com/@thetaxwatchdog" target="_blank" rel="noopener noreferrer" aria-label="Watchdog on TikTok"><i class="fab fa-tiktok" aria-hidden="true"></i></a>
-      </div>
-    </div>
-  </div>
-</footer>
-<script>(function(){var y=document.getElementById('wdf-current-year');if(y)y.textContent=new Date().getFullYear();})();</script>
+        if (watchdogYear) {
+            watchdogYear.textContent = new Date().getFullYear();
+        }
+    })();
+</script>
