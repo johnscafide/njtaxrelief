@@ -2,6 +2,7 @@
   'use strict';
 
   const API = '/api/watchdog-intelligence-voice';
+  const NARRATION_SRC = '/property/js/watchdog-intelligence-narration.js?v=20260823';
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
 
@@ -13,6 +14,7 @@
   let stopTimer = null;
   let activeAudio = null;
   let activeAudioUrl = '';
+  let narrationPromise = null;
 
   function toast(message) {
     const node = $('#pl-toast');
@@ -20,7 +22,7 @@
     node.textContent = message;
     node.style.display = 'block';
     clearTimeout(window.__wivToast);
-    window.__wivToast = setTimeout(() => { node.style.display = 'none'; }, 4200);
+    window.__wivToast = window.setTimeout(() => { node.style.display = 'none'; }, 4200);
   }
 
   async function accessToken() {
@@ -49,6 +51,20 @@
     if (status && !force) return status;
     status = await voiceRequest({ action: 'status' });
     return status;
+  }
+
+  function ensureNarration() {
+    if (window.WatchdogIntelligenceNarration) return Promise.resolve(window.WatchdogIntelligenceNarration);
+    if (narrationPromise) return narrationPromise;
+    narrationPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = NARRATION_SRC;
+      script.async = true;
+      script.onload = () => window.WatchdogIntelligenceNarration ? resolve(window.WatchdogIntelligenceNarration) : reject(new Error('Watchdog narration contract did not initialize.'));
+      script.onerror = () => reject(new Error('Watchdog narration contract could not load.'));
+      document.head.appendChild(script);
+    });
+    return narrationPromise;
   }
 
   function bytesToBase64(bytes) {
@@ -85,14 +101,47 @@
     });
   }
 
-  function extractBrief(message) {
-    const conclusion = $(':scope > p', message)?.textContent?.trim() || '';
+  function sectionItems(message, label, max) {
     const sections = $$('.dwa-section', message);
-    const read = (label) => {
-      const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === label);
-      return section ? $$('li', section).map((item) => item.textContent.trim()).filter(Boolean) : [];
+    const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === label);
+    return section ? $$('li', section).slice(0, max).map((item) => item.textContent.trim()).filter(Boolean) : [];
+  }
+
+  function sourceLabels(message, max) {
+    const sections = $$('.dwa-section', message);
+    const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === 'sources');
+    return section ? $$('.dwa-source', section).slice(0, max).map((item) => item.textContent.trim()).filter(Boolean) : [];
+  }
+
+  function extractBrief(message) {
+    return {
+      conclusion: $(':scope > p', message)?.textContent?.trim() || '',
+      evidence: sectionItems(message, 'evidence', 8),
+      missing_evidence: sectionItems(message, 'missing evidence', 6),
+      caveats: sectionItems(message, 'caveats', 5),
+      sources: sourceLabels(message, 6),
     };
-    return { conclusion, evidence: read('evidence'), caveats: read('caveats') };
+  }
+
+  function narrationContext(message) {
+    const previous = message.previousElementSibling;
+    const prompt = previous?.classList?.contains('user') ? previous.textContent?.trim() || '' : '';
+    const surface = message.closest('#dwa-panel')?.dataset?.watchdogSurface || '';
+    const tool = message.querySelector('[data-dwa-evidence-note]') ? 'inspect_lineage' : '';
+    return { prompt, surface, tool, hasEvidence: sectionItems(message, 'evidence', 1).length > 0, hasSources: sourceLabels(message, 1).length > 0 };
+  }
+
+  function availableFormatKeys(contract, message) {
+    const context = narrationContext(message);
+    const keys = ['quick', 'professional'];
+    if (context.hasEvidence || context.hasSources || context.tool === 'inspect_lineage') keys.push('evidence');
+    if (/daily|watchlist/.test(context.surface.toLowerCase()) || /what changed|change|changed|latest|material/.test(context.prompt.toLowerCase())) keys.push('changes');
+    return contract.FORMAT_ORDER.filter((key) => keys.includes(key));
+  }
+
+  function selectedFormat(message, contract) {
+    const select = $('[data-dwa-narration-format]', message);
+    return contract.FORMATS[select?.value] ? select.value : 'quick';
   }
 
   async function speak(message, button) {
@@ -100,9 +149,11 @@
       clearPlayback();
       button.disabled = true;
       button.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Preparing';
+      const contract = await ensureNarration();
       const brief = extractBrief(message);
       if (!brief.conclusion) throw new Error('No governed Analyst response is available to read.');
-      const data = await voiceRequest({ action: 'speak', brief });
+      const format = selectedFormat(message, contract);
+      const data = await voiceRequest({ action: 'speak', format, brief });
       const raw = atob(String(data.audio_base64 || ''));
       const bytes = new Uint8Array(raw.length);
       for (let i = 0; i < raw.length; i += 1) bytes[i] = raw.charCodeAt(i);
@@ -132,16 +183,28 @@
     }
   }
 
-  function wireListenButton(message) {
+  async function wireListenButton(message) {
     if (!status?.enabled || !message || message.dataset.voiceWired === 'true') return;
     if (!extractBrief(message).conclusion) return;
+    let contract;
+    try { contract = await ensureNarration(); } catch (_) { return; }
     message.dataset.voiceWired = 'true';
     message.querySelector('.dwa-voice-message-tools')?.remove();
+    const keys = availableFormatKeys(contract, message);
+    const context = narrationContext(message);
+    const defaultFormat = context.tool === 'inspect_lineage' && keys.includes('evidence') ? 'evidence'
+      : /what changed|change|changed|latest|material/.test(context.prompt.toLowerCase()) && keys.includes('changes') ? 'changes'
+        : 'quick';
     const footer = document.createElement('div');
-    footer.className = 'dwa-voice-message-tools';
-    footer.innerHTML = '<button type="button" data-dwa-listen><i class="fas fa-volume-high"></i> Listen</button><span>Spoken brief from the written Watchdog response</span>';
+    footer.className = 'dwa-voice-message-tools dwa-narration-tools';
+    footer.innerHTML = `<label class="dwa-narration-label"><span>Listen as</span><select data-dwa-narration-format aria-label="Choose Watchdog narration format">${keys.map((key) => `<option value="${key}"${key === defaultFormat ? ' selected' : ''}>${contract.FORMATS[key].label}</option>`).join('')}</select></label><button type="button" data-dwa-listen aria-label="${contract.FORMATS[defaultFormat].aria}"><i class="fas fa-volume-high"></i> Listen</button><span class="dwa-narration-note">Spoken only from the written governed response</span>`;
     message.appendChild(footer);
+    const select = $('[data-dwa-narration-format]', footer);
     const button = $('[data-dwa-listen]', footer);
+    select?.addEventListener('change', () => {
+      const format = contract.FORMATS[select.value] || contract.FORMATS.quick;
+      button?.setAttribute('aria-label', format.aria);
+    });
     button.onclick = () => speak(message, button);
   }
 
@@ -210,7 +273,7 @@
       button.innerHTML = '<i class="fas fa-stop"></i> Stop';
       button.onclick = stopRecording;
       setVoiceStatus('Listening. Stop when your question is complete. Maximum 45 seconds.', 'recording');
-      stopTimer = setTimeout(stopRecording, 45000);
+      stopTimer = window.setTimeout(stopRecording, 45000);
     } catch (error) {
       stream?.getTracks?.().forEach((track) => track.stop());
       stream = null;
