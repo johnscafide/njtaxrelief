@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,PCM='https://v3.pcmintegrations.com';
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
-function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
+const ORIGINS=new Set(['https://watchdogindex.com','https://www.watchdogindex.com','https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://www.watchdogindex.com','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
 function reply(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8'}})}
 function clean(v:unknown,max=500){if(v&&typeof v==='object')return'';return String(v??'').trim().replace(/[\u0000-\u001f]/g,'').slice(0,max)}
 function tokenFrom(d:any){return clean(d?.token??d?.accessToken??d?.access_token??d?.code,4000)}
