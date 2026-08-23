@@ -1,6 +1,16 @@
 (function () {
   'use strict';
 
+  function ensureConsentRuntime() {
+    if (window.WatchdogConsent || document.querySelector('script[src="/property/js/watchdog-consent.js"]')) return;
+    var script = document.createElement('script');
+    script.src = '/property/js/watchdog-consent.js';
+    script.async = false;
+    script.setAttribute('data-watchdog-consent-runtime','1');
+    (document.head || document.documentElement).appendChild(script);
+  }
+  ensureConsentRuntime();
+
   var production = {
     ref: 'uvkvaxljhhngydvlrzom',
     url: 'https://uvkvaxljhhngydvlrzom.supabase.co',
