@@ -6,7 +6,9 @@
 --   1. Audit whether property_lookups.last_sale_* agrees with governed SR-1A subject evidence.
 --   2. Quantify the stale-sale risk discovered while attempting to expand Trajectory coverage.
 --   3. Recompute Trajectory only from parcel-matched SR-1A subject sale evidence.
---   4. Keep ROBUST-v1 weights/bands unchanged; missing T continues to be omitted/renormalized.
+--   4. Report exact, unique-parcel, compact-exact and compact-unique match classes separately.
+--   5. Confirm the statewide SR-1A subject index is healthy before classifying unmatched parcels as evidence absence.
+--   6. Keep ROBUST-v1 weights/bands unchanged; missing T continues to be omitted/renormalized.
 
 -- -----------------------------------------------------------------------------
 -- 1. Latest canonical calibration cohort + governed subject matches
@@ -54,7 +56,9 @@ select
   count(*) filter(where s.last_sale_year=m.sale_year) as property_lookup_year_matches,
   count(*) filter(where s.last_sale_price=m.sale_price) as property_lookup_price_matches,
   count(*) filter(where m.match_quality='exact') as exact_parcel_matches,
-  count(*) filter(where m.match_quality='unique_parcel_fallback') as unique_parcel_fallback_matches
+  count(*) filter(where m.match_quality='unique_parcel_fallback') as unique_parcel_fallback_matches,
+  count(*) filter(where m.match_quality='compact_exact') as compact_exact_matches,
+  count(*) filter(where m.match_quality='compact_unique_parcel_fallback') as compact_unique_parcel_fallback_matches
 from matches m
 join subjects s on s.pams_pin=m.request_key;
 
@@ -173,8 +177,77 @@ select
   count(*) as governed_t_properties,
   count(*) filter(where match_quality='exact') as exact_matches,
   count(*) filter(where match_quality='unique_parcel_fallback') as unique_parcel_fallback_matches,
+  count(*) filter(where match_quality='compact_exact') as compact_exact_matches,
+  count(*) filter(where match_quality='compact_unique_parcel_fallback') as compact_unique_parcel_fallback_matches,
   round(avg(trajectory_score),2) as mean_t,
   percentile_cont(.5) within group(order by trajectory_score) as median_t,
   min(trajectory_score) as min_t,
   max(trajectory_score) as max_t
 from strict_t;
+
+-- -----------------------------------------------------------------------------
+-- 4. Whole property warehouse governed subject-evidence coverage
+--    Compact matching is parcel-based only. Do not add sale-price/year matching here.
+-- -----------------------------------------------------------------------------
+with subjects as (
+  select
+    pams_pin,
+    county,
+    prop_class,
+    left(regexp_replace(coalesce(pams_pin,''),'\D','','g'),4) as district,
+    upper(regexp_replace(regexp_replace(coalesce(block,''),'\s+','','g'),'^0+','')) as block,
+    upper(regexp_replace(regexp_replace(coalesce(lot,''),'\s+','','g'),'^0+','')) as lot,
+    upper(regexp_replace(trim(coalesce(qualifier,'')),'\s+','','g')) as qualifier
+  from public.property_lookups
+  where coalesce(block,'')<>'' and coalesce(lot,'')<>''
+), payload as (
+  select jsonb_agg(jsonb_build_object(
+    'key',pams_pin,
+    'district',district,
+    'block',block,
+    'lot',lot,
+    'qualifier',qualifier
+  )) as js
+  from subjects
+), matches as (
+  select m.* from payload p
+  cross join lateral public.lookup_sr1a_subject_evidence(p.js) m
+)
+select
+  (select count(*) from subjects) as warehouse_properties,
+  count(*) as governed_subject_matches,
+  count(*) filter(where match_quality='exact') as exact_matches,
+  count(*) filter(where match_quality='unique_parcel_fallback') as unique_parcel_fallback_matches,
+  count(*) filter(where match_quality='compact_exact') as compact_exact_matches,
+  count(*) filter(where match_quality='compact_unique_parcel_fallback') as compact_unique_parcel_fallback_matches,
+  count(distinct request_key) as unique_matched_properties,
+  count(*)-count(distinct request_key) as duplicate_request_rows
+from matches;
+
+-- -----------------------------------------------------------------------------
+-- 5. Latest statewide SR-1A subject-index health
+--    A healthy source/index plane is required before unmatched parcels are treated as
+--    genuine evidence absence rather than an ingestion failure.
+-- -----------------------------------------------------------------------------
+with latest_per_county as (
+  select distinct on (county_code)
+    county_code,
+    status,
+    source_record_count,
+    indexed_parcel_count,
+    rows_with_living_space,
+    refreshed_at,
+    updated_at,
+    error_text
+  from public.sr1a_subject_index_runs
+  order by county_code,coalesce(refreshed_at,updated_at) desc nulls last
+)
+select
+  count(*) as counties,
+  count(*) filter(where status='ready' and error_text is null) as ready_no_error,
+  sum(source_record_count) as source_records,
+  sum(indexed_parcel_count) as indexed_parcels,
+  sum(rows_with_living_space) as rows_with_living_space,
+  min(refreshed_at) as oldest_latest_refresh,
+  max(refreshed_at) as newest_latest_refresh
+from latest_per_county;
