@@ -4,6 +4,8 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const FEATURE = 'watchdog_intelligence';
 const PLAN_RANK = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
 const DAILY_LIMITS = { transcription: 40, speech: 60 };
+const NARRATION_EVENTS = new Set(['narration_started', 'narration_completed', 'narration_stopped', 'narration_failed']);
+const NARRATION_FORMATS = new Set(['quick', 'professional', 'evidence', 'changes']);
 
 const clean = (value, max = 500) => String(value ?? '').replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 const bearer = (req) => {
@@ -72,6 +74,23 @@ async function insertUsage(row) {
   });
 }
 
+function safeNarrationMetadata(input, packaging) {
+  const value = input && typeof input === 'object' && !Array.isArray(input) ? input : {};
+  const requestedFormat = clean(value.format, 40).toLowerCase();
+  const textChars = Number(value.text_chars);
+  return {
+    browser_native: true,
+    raw_audio_persisted: false,
+    source: 'rendered_governed_analyst_response',
+    packaging,
+    narration_format: NARRATION_FORMATS.has(requestedFormat) ? requestedFormat : null,
+    narration_version: clean(value.narration_version, 80) || null,
+    engine: clean(value.engine, 80) || 'browser_speech_synthesis',
+    text_chars: Number.isFinite(textChars) ? Math.max(0, Math.min(2400, Math.round(textChars))) : null,
+    surface: clean(value.surface, 100) || 'unknown',
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store, max-age=0');
   res.setHeader('Pragma', 'no-cache');
@@ -97,13 +116,33 @@ module.exports = async function handler(req, res) {
 
     const body = req.body && typeof req.body === 'object' ? req.body : {};
     const kind = clean(body.kind, 30).toLowerCase();
+    const packaging = included ? 'included' : 'watchdog_intelligence_add_on';
+
+    if (kind === 'event') {
+      const event = clean(body.event, 40).toLowerCase();
+      if (!NARRATION_EVENTS.has(event)) return res.status(400).json({ error: 'Unsupported browser Voice event.' });
+      await insertUsage({
+        user_id: user.id,
+        plan_tier: plan,
+        event_type: `voice_${event}`,
+        provider: 'browser_web_speech',
+        model: 'browser_speech_synthesis',
+        request_units: 0,
+        input_tokens: 0,
+        output_tokens: 0,
+        latency_ms: 0,
+        metadata: safeNarrationMetadata(body.metadata, packaging),
+      });
+      return res.status(200).json({ ok: true, kind, event });
+    }
+
     if (!['transcription', 'speech'].includes(kind)) return res.status(400).json({ error: 'Unsupported browser Voice usage type.' });
     const eventType = kind === 'speech' ? 'voice_speech' : 'voice_transcription';
     const used = await usageCount(user.id, eventType);
     const limit = DAILY_LIMITS[kind];
     if (used >= limit) return res.status(429).json({ error: 'Voice Intelligence daily usage limit reached.' });
 
-    const packaging = included ? 'included' : 'watchdog_intelligence_add_on';
+    const narrationMetadata = kind === 'speech' ? safeNarrationMetadata(body.metadata, packaging) : null;
     await insertUsage({
       user_id: user.id,
       plan_tier: plan,
@@ -114,10 +153,10 @@ module.exports = async function handler(req, res) {
       input_tokens: 0,
       output_tokens: 0,
       latency_ms: 0,
-      metadata: {
+      metadata: kind === 'speech' ? narrationMetadata : {
         browser_native: true,
         raw_audio_persisted: false,
-        source: kind === 'speech' ? 'rendered_governed_analyst_response' : 'browser_voice_question',
+        source: 'browser_voice_question',
         packaging,
       },
     });
