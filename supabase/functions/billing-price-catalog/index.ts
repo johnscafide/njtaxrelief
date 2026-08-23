@@ -1,4 +1,4 @@
-const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const DEFAULT_SITE = 'https://www.watchdogindex.com';
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
@@ -6,6 +6,8 @@ function allowedOrigin(req: Request) {
     const url = new URL(origin);
     const host = url.hostname.toLowerCase();
     if (
+      host === 'watchdogindex.com' ||
+      host === 'www.watchdogindex.com' ||
       host === 'njpropertytaxrelief.com' ||
       host === 'www.njpropertytaxrelief.com' ||
       host === 'watchdogre.com' ||
@@ -24,9 +26,20 @@ function allowedOrigin(req: Request) {
 const catalog = {
   provider: 'stripe',
   currency: 'USD',
-  catalog_version: '2026-08-18',
+  catalog_version: '2026-08-22',
   teams_available: false,
   tax_collection_enabled: false,
+  intelligence: {
+    regular_add_on_monthly: 12,
+    included_plans: ['pro_plus', 'teams'],
+    promotion: {
+      active: true,
+      label: 'Limited time',
+      eligible_plans: ['agent', 'pro'],
+      price_during_promotion: 0,
+      ends_on: null
+    }
+  },
   plans: {
     agent: {
       label: 'Agent',
