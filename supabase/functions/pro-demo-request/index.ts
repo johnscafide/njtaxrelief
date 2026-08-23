@@ -1,227 +1,41 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-const ORIGIN = Deno.env.get("ALLOWED_ORIGIN") ?? "*";
-const CORS = {
-  "Access-Control-Allow-Origin": ORIGIN,
-  "Access-Control-Allow-Headers": "content-type, apikey, authorization, x-client-info",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Cache-Control": "no-store",
-};
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
+const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+const ANON_KEY = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
+const VOICE_BUCKET = "watchdog-voice-inbox";
+const MAX_VOICE_BYTES = 6 * 1024 * 1024;
+const MAX_VOICE_SECONDS = 90;
+const VOICE_MIMES = new Set(["audio/webm","audio/ogg","audio/mp4","audio/mpeg","audio/wav","audio/x-m4a","audio/aac"]);
+const db = createClient(SUPABASE_URL, SERVICE_KEY, { auth:{ persistSession:false, autoRefreshToken:false } });
 
-const db = createClient(
-  Deno.env.get("SUPABASE_URL")!,
-  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-  { auth: { persistSession: false, autoRefreshToken: false } },
-);
+function str(value:unknown,max=2000){const v=typeof value==="string"?value.trim():value==null?"":String(value).trim();return v.slice(0,max)}
+function nullable(value:unknown,max:number){return str(value,max)||null}
+function email(value:unknown){const v=str(value,254).toLowerCase();return /^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(v)?v:""}
+function slug(value:unknown){return str(value,80).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
+function mime(value:unknown){return str(value,100).toLowerCase().split(";",1)[0]}
+function ip(req:Request){return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim()||req.headers.get("x-real-ip")?.trim()||"unknown"}
+function allowedOrigin(origin:string){if(!origin)return "https://www.watchdogindex.com";try{const u=new URL(origin);if(u.protocol==="http:"&&["localhost","127.0.0.1"].includes(u.hostname))return origin;if(u.protocol!=="https:")return "https://www.watchdogindex.com";if(["watchdogindex.com","www.watchdogindex.com","njpropertytaxrelief.com","www.njpropertytaxrelief.com","njtaxrelief.vercel.app"].includes(u.hostname)||u.hostname.endsWith(".vercel.app"))return origin}catch{}return "https://www.watchdogindex.com"}
+function cors(req:Request){return{"Access-Control-Allow-Origin":allowedOrigin(req.headers.get("origin")||""),"Access-Control-Allow-Headers":"content-type, apikey, authorization, x-client-info","Access-Control-Allow-Methods":"POST, OPTIONS","Access-Control-Max-Age":"86400","Cache-Control":"no-store","Vary":"Origin"}}
+function json(req:Request,body:unknown,status=200){return new Response(JSON.stringify(body),{status,headers:{...cors(req),"Content-Type":"application/json; charset=utf-8"}})}
+async function sha256(value:string){const digest=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(value));return Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("")}
+function token(){const bytes=crypto.getRandomValues(new Uint8Array(32));return btoa(String.fromCharCode(...bytes)).replaceAll("+","-").replaceAll("/","_").replaceAll("=","")}
+function secret(name:string){const value=Deno.env.get(name);if(!value)throw new Error(`missing secret: ${name}`);return value}
 
-function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: { ...CORS, "Content-Type": "application/json" },
-  });
-}
+async function optionalUserId(req:Request){const auth=(req.headers.get("authorization")||"").replace(/^Bearer\s+/i,"").trim();if(!auth||!ANON_KEY||auth===ANON_KEY)return null;const client=createClient(SUPABASE_URL,ANON_KEY,{auth:{persistSession:false,autoRefreshToken:false},global:{headers:{Authorization:`Bearer ${auth}`}}});const result=await client.auth.getUser();return result.data?.user?.id??null}
+async function contactHash(req:Request){return sha256(`${Deno.env.get("WATCHDOG_CONTACT_HASH_SALT")||SERVICE_KEY.slice(-32)}:${ip(req)}`)}
+async function contactLimited(hash:string){const recent=new Date(Date.now()-15*60_000).toISOString(),day=new Date(Date.now()-24*60*60_000).toISOString();const [a,b]=await Promise.all([db.from("watchdog_contact_inbox").select("id",{count:"exact",head:true}).eq("connection_hash",hash).gte("created_at",recent),db.from("watchdog_contact_inbox").select("id",{count:"exact",head:true}).eq("connection_hash",hash).gte("created_at",day)]);if(a.error||b.error)throw new Error("contact rate-limit check failed");return(a.count??0)>=5||(b.count??0)>=20}
 
-function str(value: unknown, max = 2000) {
-  const valueString = typeof value === "string" ? value.trim() : value == null ? "" : String(value).trim();
-  return valueString.slice(0, max);
-}
+async function sendInternalEmail(args:{to:string;reply:string;subject:string;name:string;summary:string;message?:string;requestId:string}){const response=await fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:secret("EMAILJS_SERVICE_ID"),template_id:secret("EMAILJS_TEMPLATE_ID"),user_id:secret("EMAILJS_PUBLIC_KEY"),accessToken:secret("EMAILJS_PRIVATE_KEY"),template_params:{to_email:args.to,email:args.reply,reply_to:args.reply,code:args.summary.slice(0,1800),subject:args.subject,full_name:args.name,message:args.message||"",request_id:args.requestId}})});if(!response.ok)throw new Error(`emailjs ${response.status}: ${(await response.text()).slice(0,200)}`)}
+async function notifyContact(row:{id:string;kind:string;name:string;email:string;phone?:string|null;subject?:string|null;message?:string|null}){const summary=[`WATCHDOG ${row.kind==="voice"?"VOICE MESSAGE":"WEBSITE MESSAGE"}`,`Name: ${row.name}`,`Email: ${row.email}`,row.phone?`Callback: ${row.phone}`:"",row.subject?`Subject: ${row.subject}`:"",`Inbox ID: ${row.id}`,row.kind==="voice"?"A private browser voice message is ready in the developer Communications inbox.":`Message: ${row.message||""}`].filter(Boolean).join("\n");try{await sendInternalEmail({to:secret("VERIFY_ADMIN_EMAIL"),reply:row.email,subject:row.subject||`New Watchdog ${row.kind==="voice"?"voice message":"website message"}`,name:row.name,summary,message:row.message||"",requestId:row.id});return true}catch(error){console.error("contact notification",error);return false}}
 
-function normalizeEmail(value: unknown) {
-  const email = str(value, 254).toLowerCase();
-  return /^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(email) ? email : "";
-}
+async function contactMessage(req:Request,body:Record<string,unknown>){const name=str(body.name,120),mail=email(body.email),phone=nullable(body.phone,40),subject=nullable(body.subject,160),message=str(body.message,4000);if(!name||!mail||!message)return json(req,{error:"Please provide your name, a valid email, and a message."},422);const hash=await contactHash(req);if(await contactLimited(hash))return json(req,{error:"Too many messages from this connection. Please try again later."},429);const inserted=await db.from("watchdog_contact_inbox").insert({kind:"message",channel:"web",status:"new",name,email:mail,phone,subject,message,source_path:nullable(body.source_path??body.sourcePath,500),referrer:nullable(body.referrer,1000),context:{user_agent:str(req.headers.get("user-agent"),400)||null},user_id:await optionalUserId(req),connection_hash:hash}).select("id,kind,name,email,phone,subject,message").single();if(inserted.error||!inserted.data)throw inserted.error||new Error("contact insert failed");return json(req,{ok:true,id:inserted.data.id,notified:await notifyContact(inserted.data)},201)}
 
-function slug(value: unknown) {
-  return str(value, 80).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-}
+async function voiceReserve(req:Request,body:Record<string,unknown>){const name=str(body.name,120),mail=email(body.email),phone=nullable(body.phone,40),subject=nullable(body.subject,160),duration=Math.ceil(Number(body.duration_seconds??body.durationSeconds)),type=mime(body.mime_type??body.mimeType);if(!name||!mail)return json(req,{error:"Please provide your name and a valid email."},422);if(!Number.isFinite(duration)||duration<1||duration>MAX_VOICE_SECONDS)return json(req,{error:"Voice messages must be between 1 and 90 seconds."},422);if(!VOICE_MIMES.has(type))return json(req,{error:"This browser recording format is not supported. Please send a written message instead."},422);const hash=await contactHash(req);if(await contactLimited(hash))return json(req,{error:"Too many messages from this connection. Please try again later."},429);const id=crypto.randomUUID(),now=new Date(),ext:Record<string,string>={"audio/webm":"webm","audio/ogg":"ogg","audio/mp4":"m4a","audio/mpeg":"mp3","audio/wav":"wav","audio/x-m4a":"m4a","audio/aac":"aac"},path=`${now.getUTCFullYear()}/${String(now.getUTCMonth()+1).padStart(2,"0")}/${id}.${ext[type]||"audio"}`,finalize=token(),expires=new Date(Date.now()+20*60_000).toISOString();const inserted=await db.from("watchdog_contact_inbox").insert({id,kind:"voice",channel:"web",status:"pending_upload",name,email:mail,phone,subject,voice_bucket:VOICE_BUCKET,voice_path:path,voice_mime_type:type,voice_duration_seconds:duration,source_path:nullable(body.source_path??body.sourcePath,500),referrer:nullable(body.referrer,1000),context:{user_agent:str(req.headers.get("user-agent"),400)||null},user_id:await optionalUserId(req),connection_hash:hash,upload_token_hash:await sha256(finalize),upload_expires_at:expires});if(inserted.error)throw inserted.error;const signed=await db.storage.from(VOICE_BUCKET).createSignedUploadUrl(path);if(signed.error||!signed.data?.token){await db.from("watchdog_contact_inbox").delete().eq("id",id).eq("status","pending_upload");throw signed.error||new Error("signed upload unavailable")}return json(req,{ok:true,id,bucket:VOICE_BUCKET,path,upload_token:signed.data.token,finalize_token:finalize,expires_at:expires},201)}
 
-async function sha256(value: string) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
-  return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, "0")).join("");
-}
+async function voiceFinalize(req:Request,body:Record<string,unknown>){const id=str(body.id,64),finalize=str(body.finalize_token??body.finalizeToken,256);if(!id||!finalize)return json(req,{error:"Missing voice-message confirmation."},422);const found=await db.from("watchdog_contact_inbox").select("id,kind,status,name,email,phone,subject,voice_path,voice_mime_type,voice_duration_seconds,upload_token_hash,upload_expires_at").eq("id",id).eq("kind","voice").maybeSingle(),row=found.data;if(found.error||!row||row.status!=="pending_upload")return json(req,{error:"That voice-message upload is no longer available."},404);if(!row.upload_expires_at||new Date(row.upload_expires_at).getTime()<Date.now())return json(req,{error:"That voice-message upload expired. Please record it again."},410);if(!row.upload_token_hash||await sha256(finalize)!==row.upload_token_hash)return json(req,{error:"Invalid voice-message confirmation."},403);const parts=String(row.voice_path).split("/"),filename=parts.pop()||"",folder=parts.join("/"),listed=await db.storage.from(VOICE_BUCKET).list(folder,{limit:20,search:filename}),object=listed.data?.find(item=>item.name===filename),size=Number(object?.metadata?.size??0),storedMime=mime(object?.metadata?.mimetype??row.voice_mime_type);if(listed.error||!object||!Number.isFinite(size)||size<1||size>MAX_VOICE_BYTES||!VOICE_MIMES.has(storedMime)){if(object)await db.storage.from(VOICE_BUCKET).remove([String(row.voice_path)]);await db.from("watchdog_contact_inbox").delete().eq("id",id).eq("status","pending_upload");return json(req,{error:"The recording could not be validated. Please record it again."},422)}const updated=await db.from("watchdog_contact_inbox").update({status:"new",voice_size_bytes:size,voice_mime_type:storedMime,upload_token_hash:null,upload_expires_at:null,updated_at:new Date().toISOString()}).eq("id",id).eq("status","pending_upload").select("id,kind,name,email,phone,subject").single();if(updated.error||!updated.data)throw updated.error||new Error("voice finalize failed");return json(req,{ok:true,id,notified:await notifyContact(updated.data)},201)}
 
-function requireSecret(name: string) {
-  const value = Deno.env.get(name);
-  if (!value) throw new Error(`missing secret: ${name}`);
-  return value;
-}
+async function proDemo(req:Request,body:Record<string,unknown>){const fullName=str(body.full_name,120),mail=email(body.email),company=str(body.company,160),role=str(body.role,120),volume=str(body.volume,80),plan=slug(body.plan)||"unsure",cadence=slug(body.cadence)==="monthly"?"monthly":"yearly",message=str(body.message,1500),source=str(body.source,80)||"pro-page",pageUrl=str(body.page_url,500);if(!fullName||!mail||!role||!volume)return json(req,{error:"Name, work email, role and property volume are required."},422);if(!["agent","pro","pro-plus","pro_plus","unsure"].includes(plan))return json(req,{error:"Choose a valid plan interest."},422);const ipTag=(await sha256(ip(req))).slice(0,16),hourAgo=new Date(Date.now()-60*60_000).toISOString(),dayAgo=new Date(Date.now()-24*60*60_000).toISOString(),byEmail=await db.from("backoffice_leads").select("id",{count:"exact",head:true}).eq("source","pro-demo").eq("email",mail).gte("created_at",hourAgo);if(byEmail.error)throw byEmail.error;if((byEmail.count??0)>=3)return json(req,{error:"Too many requests. Please try again later."},429);const byIp=await db.from("backoffice_leads").select("id",{count:"exact",head:true}).eq("source","pro-demo").like("source_event_id",`${ipTag}-%`).gte("created_at",dayAgo);if(byIp.error)throw byIp.error;if((byIp.count??0)>=10)return json(req,{error:"Too many requests from this connection. Please try again later."},429);const normalizedPlan=plan==="pro-plus"?"pro_plus":plan,sourceEventId=`${ipTag}-${crypto.randomUUID()}`,inserted=await db.from("backoffice_leads").insert({source:"pro-demo",source_event_id:sourceEventId,full_name:fullName,email:mail,program:"Watchdog Pro Walkthrough",tags:["watchdog","pro-demo",`plan-${normalizedPlan}`,`cadence-${cadence}`,`role-${slug(role)}`],processing_status:"pending",address_status:"skipped",identity_status:"pending",crm_status:"pending",consent_data:{contact_requested:true,source,submitted_at:new Date().toISOString()},raw_payload:{source,company,role,volume,plan:normalizedPlan,cadence,message,page_url:pageUrl,user_agent:str(req.headers.get("user-agent"),300)},notes:["Private Watchdog Pro walkthrough requested.",`Company/team: ${company||"Not provided"}.`,`Role: ${role}.`,`Approx. properties/month: ${volume}.`,`Plan interest: ${normalizedPlan}.`,`Billing interest: ${cadence}.`,message?`Message: ${message}`:""].filter(Boolean).join(" ")}).select("id").single();if(inserted.error)throw inserted.error;const requestId=String(inserted.data.id);const event=await db.from("backoffice_lead_events").insert({lead_id:requestId,event_type:"pro.walkthrough_requested",status:"pending",provider:"pro-page",details:{plan:normalizedPlan,cadence,role,volume,company}});if(event.error)console.error("pro walkthrough event",event.error);let notified=true;const summary=["WATCHDOG PRO WALKTHROUGH REQUEST",`Name: ${fullName}`,`Email: ${mail}`,`Company: ${company||"Not provided"}`,`Role: ${role}`,`Volume: ${volume}`,`Plan: ${normalizedPlan}`,`Billing interest: ${cadence}`,`Request ID: ${requestId}`,message?`Message: ${message}`:""].filter(Boolean).join("\n");try{await sendInternalEmail({to:secret("VERIFY_ADMIN_EMAIL"),reply:mail,subject:`Watchdog Pro walkthrough: ${fullName}`,name:fullName,summary,message,requestId})}catch(error){notified=false;console.error("pro walkthrough notification",error)}return json(req,{ok:true,request_id:requestId,notified},201)}
 
-async function sendInternalEmail(details: {
-  fullName: string;
-  email: string;
-  company: string;
-  role: string;
-  volume: string;
-  plan: string;
-  cadence: string;
-  message: string;
-  requestId: string;
-}) {
-  const serviceId = requireSecret("EMAILJS_SERVICE_ID");
-  const templateId = requireSecret("EMAILJS_TEMPLATE_ID");
-  const publicKey = requireSecret("EMAILJS_PUBLIC_KEY");
-  const privateKey = requireSecret("EMAILJS_PRIVATE_KEY");
-  const adminEmail = requireSecret("VERIFY_ADMIN_EMAIL");
-
-  const summary = [
-    "WATCHDOG PRO WALKTHROUGH REQUEST",
-    `Name: ${details.fullName}`,
-    `Email: ${details.email}`,
-    `Company: ${details.company || "Not provided"}`,
-    `Role: ${details.role}`,
-    `Volume: ${details.volume}`,
-    `Plan: ${details.plan}`,
-    `Billing interest: ${details.cadence}`,
-    `Request ID: ${details.requestId}`,
-    details.message ? `Message: ${details.message}` : "",
-  ].filter(Boolean).join("\n").slice(0, 1800);
-
-  const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: serviceId,
-      template_id: templateId,
-      user_id: publicKey,
-      accessToken: privateKey,
-      template_params: {
-        to_email: adminEmail,
-        email: details.email,
-        code: summary,
-        subject: `Watchdog Pro walkthrough: ${details.fullName}`,
-        full_name: details.fullName,
-        company: details.company,
-        role: details.role,
-        volume: details.volume,
-        plan: details.plan,
-        cadence: details.cadence,
-        message: details.message,
-        request_id: details.requestId,
-      },
-    }),
-  });
-
-  if (!response.ok) {
-    const detail = (await response.text()).slice(0, 300);
-    throw new Error(`emailjs ${response.status}: ${detail}`);
-  }
-}
-
-Deno.serve(async (req: Request) => {
-  if (req.method === "OPTIONS") return new Response("ok", { headers: CORS });
-  if (req.method !== "POST") return json({ error: "POST only" }, 405);
-
-  let body: Record<string, unknown>;
-  try {
-    body = await req.json();
-  } catch {
-    return json({ error: "Invalid request." }, 400);
-  }
-
-  // Quietly accept bot submissions caught by the honeypot.
-  if (str(body.website, 120)) return json({ ok: true }, 201);
-
-  const fullName = str(body.full_name, 120);
-  const email = normalizeEmail(body.email);
-  const company = str(body.company, 160);
-  const role = str(body.role, 120);
-  const volume = str(body.volume, 80);
-  const plan = slug(body.plan) || "unsure";
-  const cadence = slug(body.cadence) === "monthly" ? "monthly" : "yearly";
-  const message = str(body.message, 1500);
-  const source = str(body.source, 80) || "pro-page";
-  const pageUrl = str(body.page_url, 500);
-
-  if (!fullName || !email || !role || !volume) {
-    return json({ error: "Name, work email, role and property volume are required." }, 422);
-  }
-  if (!["agent", "pro", "pro-plus", "pro_plus", "unsure"].includes(plan)) {
-    return json({ error: "Choose a valid plan interest." }, 422);
-  }
-
-  const forwarded = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
-  const ipTag = (await sha256(forwarded)).slice(0, 16);
-  const hourAgo = new Date(Date.now() - 60 * 60_000).toISOString();
-  const dayAgo = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
-
-  try {
-    const byEmail = await db.from("backoffice_leads").select("id", { count: "exact", head: true })
-      .eq("source", "pro-demo").eq("email", email).gte("created_at", hourAgo);
-    if (byEmail.error) throw new Error(`rate limit email: ${byEmail.error.message}`);
-    if ((byEmail.count ?? 0) >= 3) return json({ error: "Too many requests. Please try again later." }, 429);
-
-    const byIp = await db.from("backoffice_leads").select("id", { count: "exact", head: true })
-      .eq("source", "pro-demo").like("source_event_id", `${ipTag}-%`).gte("created_at", dayAgo);
-    if (byIp.error) throw new Error(`rate limit connection: ${byIp.error.message}`);
-    if ((byIp.count ?? 0) >= 10) return json({ error: "Too many requests from this connection. Please try again later." }, 429);
-
-    const sourceEventId = `${ipTag}-${crypto.randomUUID()}`;
-    const normalizedPlan = plan === "pro-plus" ? "pro_plus" : plan;
-    const tags = ["watchdog", "pro-demo", `plan-${normalizedPlan}`, `cadence-${cadence}`, `role-${slug(role)}`];
-    const notes = [
-      `Private Watchdog Pro walkthrough requested.`,
-      `Company/team: ${company || "Not provided"}.`,
-      `Role: ${role}.`,
-      `Approx. properties/month: ${volume}.`,
-      `Plan interest: ${normalizedPlan}.`,
-      `Billing interest: ${cadence}.`,
-      message ? `Message: ${message}` : "",
-    ].filter(Boolean).join(" ");
-
-    const inserted = await db.from("backoffice_leads").insert({
-      source: "pro-demo",
-      source_event_id: sourceEventId,
-      full_name: fullName,
-      email,
-      program: "Watchdog Pro Walkthrough",
-      tags,
-      processing_status: "pending",
-      address_status: "skipped",
-      identity_status: "pending",
-      crm_status: "pending",
-      consent_data: {
-        contact_requested: true,
-        source,
-        submitted_at: new Date().toISOString(),
-      },
-      raw_payload: {
-        source,
-        company,
-        role,
-        volume,
-        plan: normalizedPlan,
-        cadence,
-        message,
-        page_url: pageUrl,
-        user_agent: str(req.headers.get("user-agent"), 300),
-      },
-      notes,
-    }).select("id").single();
-
-    if (inserted.error) throw new Error(`lead insert: ${inserted.error.message}`);
-    const requestId = String(inserted.data.id);
-
-    const event = await db.from("backoffice_lead_events").insert({
-      lead_id: requestId,
-      event_type: "pro.walkthrough_requested",
-      status: "pending",
-      provider: "pro-page",
-      details: { plan: normalizedPlan, cadence, role, volume, company },
-    });
-    if (event.error) console.error("pro walkthrough event insert", event.error);
-
-    let notified = true;
-    try {
-      await sendInternalEmail({ fullName, email, company, role, volume, plan: normalizedPlan, cadence, message, requestId });
-    } catch (emailError) {
-      notified = false;
-      console.error("pro walkthrough EmailJS notification", emailError);
-    }
-
-    return json({ ok: true, request_id: requestId, notified }, 201);
-  } catch (error) {
-    console.error("pro-demo-request", error);
-    return json({ error: "Could not submit your request right now. Please try again." }, 500);
-  }
-});
+Deno.serve(async(req:Request)=>{if(req.method==="OPTIONS")return new Response("ok",{headers:cors(req)});if(req.method!=="POST")return json(req,{error:"POST only"},405);const origin=req.headers.get("origin")||"";if(origin&&allowedOrigin(origin)!==origin)return json(req,{error:"Origin not allowed."},403);let body:Record<string,unknown>;try{body=await req.json()}catch{return json(req,{error:"Invalid request."},400)}if(str(body.website,120))return json(req,{ok:true},201);const action=str(body.action,80).toLowerCase();try{if(action==="watchdog_contact_message")return await contactMessage(req,body);if(action==="watchdog_contact_voice_reserve")return await voiceReserve(req,body);if(action==="watchdog_contact_voice_finalize")return await voiceFinalize(req,body);return await proDemo(req,body)}catch(error){console.error("pro-demo-request",action||"pro-demo",error);return json(req,{error:action.startsWith("watchdog_contact_")?"Could not save your message right now. Please try again.":"Could not submit your request right now. Please try again."},500)}});
