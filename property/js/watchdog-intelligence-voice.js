@@ -25,8 +25,35 @@
     window.__wivToast = window.setTimeout(() => { node.style.display = 'none'; }, 4200);
   }
 
+  function resolveClient() {
+    if (client) return client;
+    try {
+      client = window.NJPTRAccess?.client?.() || window.NJPTRSupabaseRuntime?.createClient?.() || null;
+    } catch (_) {
+      client = null;
+    }
+    return client;
+  }
+
+  async function waitForClient() {
+    let runtime = resolveClient();
+    if (runtime) return runtime;
+    try {
+      await Promise.race([
+        Promise.resolve(window.njptrAccessReady),
+        new Promise((resolve) => window.setTimeout(resolve, 800)),
+      ]);
+    } catch (_) { /* The bounded retry below remains authoritative. */ }
+    for (let attempt = 0; attempt < 15 && !runtime; attempt += 1) {
+      runtime = resolveClient();
+      if (!runtime) await new Promise((resolve) => window.setTimeout(resolve, 100));
+    }
+    return runtime;
+  }
+
   async function accessToken() {
-    const session = await client?.auth?.getSession?.();
+    const runtime = await waitForClient();
+    const session = await runtime?.auth?.getSession?.();
     return session?.data?.session?.access_token || '';
   }
 
@@ -346,14 +373,15 @@
   }
 
   async function install() {
+    observePanel();
+    const existing = $('#dwa-panel');
+    if (existing) installComposeControls(existing);
     try {
       await Promise.resolve(window.njptrAccessReady);
-      client = window.NJPTRAccess?.client?.() || window.NJPTRSupabaseRuntime?.createClient?.();
-      if (!client) return;
-      observePanel();
-      const existing = $('#dwa-panel');
-      if (existing) installComposeControls(existing);
-    } catch (_) { /* Signed-out and unavailable runtime surfaces remain inert. */ }
+      resolveClient();
+    } catch (_) {
+      resolveClient();
+    }
   }
 
   window.addEventListener('beforeunload', () => {
