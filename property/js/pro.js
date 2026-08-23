@@ -5,6 +5,7 @@
   if(path!=='/property/pro'&&path!=='/pro')return;
 
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
+  var INTELLIGENCE_CATALOG_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/billing-price-catalog';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
   function trackEvent(name,params){
@@ -96,6 +97,96 @@
     buttons.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.cadence,true);});});set('yearly',false);
   }
 
+  function intelligenceStyles(){
+    if(document.getElementById('pro-intelligence-offer-styles'))return;
+    var style=document.createElement('style');
+    style.id='pro-intelligence-offer-styles';
+    style.textContent='\
+.pro-intelligence-promo{position:relative;overflow:hidden;margin:26px 0 8px;padding:1px;border-radius:18px;background:linear-gradient(115deg,#087f80,#6c5ce7,#d760b5,#087f80);background-size:300% 300%;animation:wdIntelBorder 8s linear infinite}.pro-intelligence-promo:before{content:"";position:absolute;inset:1px;border-radius:17px;background:#fff}.pro-intelligence-promo-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(180px,.65fr) minmax(0,1.8fr) auto;gap:20px;align-items:center;padding:19px 21px}.pro-intelligence-promo-label{font:500 10px/1.3 "DM Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#087f80}.pro-intelligence-promo strong{display:block;font:800 19px/1.2 "Plus Jakarta Sans",sans-serif;color:#10213a}.pro-intelligence-promo p{margin:4px 0 0;color:#59677a;font-size:13px;line-height:1.5}.pro-intelligence-promo-price{text-align:right;white-space:nowrap}.pro-intelligence-promo-price b{display:block;color:#087f80;font:800 15px/1.2 "Plus Jakarta Sans",sans-serif}.pro-intelligence-promo-price small{color:#7b8797;font-size:11px}.pro-intel-plan{margin:14px 0 4px;padding:11px 12px;border:1px solid rgba(8,127,128,.25);border-radius:11px;background:rgba(8,127,128,.06);color:#20334b;font-size:12px;line-height:1.45}.pro-price-band.plus .pro-intel-plan{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:inherit}.pro-intel-plan b{display:block;margin-bottom:2px;color:#087f80;font:700 10px/1.25 "DM Mono",monospace;letter-spacing:.05em;text-transform:uppercase}.pro-price-band.plus .pro-intel-plan b{color:#72d2cc}.pro-intelligence-row>div:first-child{font-weight:700}.pro-intelligence-row .yes{font-size:12px}.pro-platform-note.pro-intelligence-live{color:#33445d}.pro-platform-side.watchdog .pro-coming-badge.pro-intelligence-live-badge{background:rgba(8,127,128,.1);color:#087f80}.pro-faq-card[data-intelligence-faq] i{color:#087f80}@keyframes wdIntelBorder{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}@media(max-width:760px){.pro-intelligence-promo-inner{grid-template-columns:1fr;gap:8px}.pro-intelligence-promo-price{text-align:left}.pro-intelligence-promo strong{font-size:17px}}@media(prefers-reduced-motion:reduce){.pro-intelligence-promo{animation:none}}';
+    document.head.appendChild(style);
+  }
+
+  function renderIntelligenceOffer(catalog){
+    var intelligence=catalog&&catalog.intelligence||{};
+    var promo=intelligence.promotion||{};
+    var regular=Number(intelligence.regular_add_on_monthly||12);
+    if(!Number.isFinite(regular)||regular<=0)regular=12;
+    var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent','pro'];
+    var included=Array.isArray(intelligence.included_plans)?intelligence.included_plans:['pro_plus','teams'];
+    var promoActive=promo.active===true;
+    var promoLabel=String(promo.label||'Limited time');
+    intelligenceStyles();
+
+    var priceHead=document.querySelector('.pro-price-head');
+    if(priceHead&&!document.getElementById('pro-intelligence-promo')){
+      var promoBox=document.createElement('div');
+      promoBox.className='pro-intelligence-promo pro-reveal';
+      promoBox.id='pro-intelligence-promo';
+      promoBox.innerHTML='<div class="pro-intelligence-promo-inner"><div class="pro-intelligence-promo-label">Watchdog Intelligence · '+(promoActive?promoLabel:'Add-on')+'</div><div><strong>'+(promoActive?'Included with paid memberships at no additional charge.':'An optional intelligence layer for Agent and Pro.')+'</strong><p>'+(promoActive?'Agent and Pro normally add Watchdog Intelligence for $'+regular+'/month. During the current promotion, it is included at no additional charge. Pro+ includes Watchdog Intelligence as a base-plan benefit.':'Agent and Pro can add Watchdog Intelligence for $'+regular+'/month. Pro+ includes it at no additional charge.')+'</p></div><div class="pro-intelligence-promo-price"><b>'+(promoActive?'$0 during promotion':'$'+regular+'/month')+'</b><small>'+(promoActive?'Agent + Pro · limited time':'Agent + Pro add-on')+'</small></div></div>';
+      var cadence=priceHead.querySelector('.pro-cadence');
+      if(cadence)cadence.insertAdjacentElement('afterend',promoBox);else priceHead.appendChild(promoBox);
+    }
+
+    ['agent','pro','pro_plus'].forEach(function(plan){
+      var band=document.querySelector('[data-price-band="'+plan+'"]');
+      if(!band)return;
+      var who=band.querySelector('.pro-price-who');
+      if(!who||who.querySelector('.pro-intel-plan'))return;
+      var note=document.createElement('div');
+      note.className='pro-intel-plan';
+      if(included.indexOf(plan)>=0){
+        note.innerHTML='<b>Watchdog Intelligence</b>Included with '+(plan==='pro_plus'?'Pro+':'this plan')+' at no additional charge.';
+      }else if(eligible.indexOf(plan)>=0&&promoActive){
+        note.innerHTML='<b>Watchdog Intelligence · '+promoLabel+'</b>Normally +$'+regular+'/month. Included at no additional charge during the current promotion.';
+      }else if(eligible.indexOf(plan)>=0){
+        note.innerHTML='<b>Watchdog Intelligence</b>Optional +$'+regular+'/month add-on.';
+      }
+      var featureList=who.querySelector('div');
+      if(note.innerHTML){if(featureList)featureList.insertAdjacentElement('beforebegin',note);else who.appendChild(note);}
+    });
+
+    var compare=document.querySelector('.pro-compare-shell');
+    if(compare&&!compare.querySelector('.pro-intelligence-row')){
+      var row=document.createElement('div');
+      row.className='pro-compare-row pro-intelligence-row';
+      row.innerHTML='<div>Watchdog Intelligence</div><div class="dim">—</div><div class="yes">'+(promoActive?'Limited time: included':'$'+regular+'/mo add-on')+'</div><div class="yes">'+(promoActive?'Limited time: included':'$'+regular+'/mo add-on')+'</div><div class="yes">Included</div>';
+      var groups=compare.querySelectorAll('.pro-compare-group');
+      var target=groups.length>1?groups[1]:null;
+      if(target)target.insertAdjacentElement('beforebegin',row);else compare.appendChild(row);
+    }
+
+    var badge=document.querySelector('.pro-platform-side.watchdog .pro-coming-badge');
+    if(badge){badge.classList.add('pro-intelligence-live-badge');badge.innerHTML='<i class="fas fa-wand-magic-sparkles"></i> Watchdog Intelligence · available on paid plans';}
+    var platform=document.querySelector('.pro-platform-side.watchdog');
+    if(platform){
+      var list=platform.querySelector('ul');
+      var last=list&&list.querySelector('li:last-child');
+      if(last)last.innerHTML='<i class="fas fa-check"></i> Watchdog Intelligence for assisted analysis, change monitoring and priority context';
+    }
+    var platformNote=document.querySelector('.pro-platform-note');
+    if(platformNote){platformNote.classList.add('pro-intelligence-live');platformNote.textContent=promoActive?'Watchdog Intelligence is available on paid memberships. Agent and Pro normally add it for $'+regular+'/month, but it is included at no additional charge during the current limited-time promotion. Pro+ includes it as a base-plan benefit.':'Watchdog Intelligence is available on paid memberships. Agent and Pro can add it for $'+regular+'/month; Pro+ includes it as a base-plan benefit.';}
+
+    var faqCards=Array.prototype.slice.call(document.querySelectorAll('.pro-faq-card'));
+    faqCards.forEach(function(card){
+      var heading=card.querySelector('h3');
+      if(!heading||heading.textContent.trim()!=='Is Watchdog AI live now?')return;
+      card.setAttribute('data-intelligence-faq','pricing');
+      heading.textContent='How is Watchdog Intelligence priced?';
+      var icon=card.querySelector('i');if(icon)icon.className='fas fa-wand-magic-sparkles';
+      var copy=card.querySelector('p');
+      if(copy)copy.textContent=promoActive?'Agent and Pro normally add Watchdog Intelligence for $'+regular+'/month. For a limited time, it is included with paid memberships at no additional charge. Pro+ includes it as a base-plan benefit.':'Agent and Pro can add Watchdog Intelligence for $'+regular+'/month. Pro+ includes it at no additional charge.';
+    });
+  }
+
+  function intelligencePricing(){
+    var fallback={intelligence:{regular_add_on_monthly:12,included_plans:['pro_plus','teams'],promotion:{active:true,label:'Limited time',eligible_plans:['agent','pro']}}};
+    renderIntelligenceOffer(fallback);
+    fetch(INTELLIGENCE_CATALOG_ENDPOINT,{method:'GET',headers:{Accept:'application/json'},cache:'no-store'})
+      .then(function(r){if(!r.ok)throw new Error('Billing catalog '+r.status);return r.json();})
+      .then(function(catalog){if(catalog&&catalog.provider==='stripe')renderIntelligenceOffer(catalog);})
+      .catch(function(err){console.warn('Watchdog Intelligence pricing catalog unavailable; using verified fallback.',err);});
+  }
+
   function heroMotion(){
     var orbit=document.querySelector('.pro-orbit');
     if(!orbit||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
@@ -169,6 +260,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');sourceProof();reveal();story();roleTabs();pricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');sourceProof();reveal();story();roleTabs();pricing();intelligencePricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
