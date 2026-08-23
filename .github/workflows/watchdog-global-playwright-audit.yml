@@ -1,0 +1,102 @@
+name: Watchdog global Playwright audit
+
+on:
+  deployment_status:
+  schedule:
+    - cron: '17 8 * * *'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Git ref containing the audit harness
+        required: true
+        default: main
+        type: string
+      scope:
+        description: Audit scope
+        required: true
+        default: all
+        type: choice
+        options:
+          - critical
+          - public
+          - all
+          - targeted
+      paths:
+        description: Comma-separated clean routes when scope is targeted
+        required: false
+        default: ''
+        type: string
+      enforce:
+        description: Fail the workflow when hard visual checks fail
+        required: true
+        default: false
+        type: boolean
+      capture_screenshots:
+        description: Capture a full-page screenshot for every check
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: watchdog-global-playwright-${{ github.event_name }}-${{ github.ref || github.event.deployment.ref || 'main' }}
+  cancel-in-progress: true
+
+jobs:
+  global-visual-audit:
+    name: global-visual-audit
+    if: >-
+      github.event_name != 'deployment_status' ||
+      (github.event.deployment_status.state == 'success' &&
+       (github.event.deployment.environment == 'Production' || github.event.deployment.environment == 'production'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      VISUAL_BASE_URL: https://www.watchdogindex.com
+      VISUAL_EVIDENCE_DIR: global-visual-audit-evidence
+      AUDIT_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || github.event_name == 'schedule' && 'all' || 'critical' }}
+      AUDIT_PATHS: ${{ github.event_name == 'workflow_dispatch' && inputs.paths || '' }}
+      AUDIT_ENFORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.enforce && '1' || '0' }}
+      AUDIT_CAPTURE_SCREENSHOTS: ${{ github.event_name == 'workflow_dispatch' && inputs.capture_screenshots == false && '0' || '1' }}
+
+    steps:
+      - name: Checkout audit harness
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event_name == 'deployment_status' && github.event.deployment.sha || 'main' }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Install Playwright browsers
+        run: |
+          npm install --no-save playwright@1.62.0
+          npx playwright install --with-deps chromium webkit
+
+      - name: Run Watchdog global visual audit
+        run: node property/tests/global-visual-audit.mjs
+
+      - name: Publish audit summary
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f global-visual-audit-evidence/summary.md ]]; then
+            cat global-visual-audit-evidence/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo '## Watchdog global Playwright visual audit' >> "$GITHUB_STEP_SUMMARY"
+            echo '' >> "$GITHUB_STEP_SUMMARY"
+            echo 'The runner ended before it could write summary evidence. Inspect the job log.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload screenshots, traces, and machine-readable evidence
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: watchdog-global-playwright-${{ github.run_id }}
+          path: global-visual-audit-evidence
+          if-no-files-found: warn
+          retention-days: 30
