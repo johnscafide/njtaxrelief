@@ -4,6 +4,10 @@ import path from 'node:path';
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const LEGACY_PROPERTY_ORIGIN = 'https://njpropertytaxrelief.com/property/';
 const WATCHDOG_PROPERTY_ORIGIN = 'https://www.watchdogindex.com/property/';
+const GA_TAG = '  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>\n';
+const GA_CONFIG = '  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-ENP9182L0J\');</script>\n';
+const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>\n';
+const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -22,6 +26,17 @@ function useSharedFooter(source, footer) {
     return source;
   }
   return `${source.slice(0, footerStart)}${footer.trim()}\n\n${source.slice(scriptsStart)}`;
+}
+
+function installConsentFirstAnalytics(source) {
+  if (!source.includes(GA_TAG) || !source.includes(GA_CONFIG) || !source.includes(CLARITY_TAG)) {
+    console.warn('WATCHDOG_CONSENT_ANALYTICS_MARKERS_MISSING');
+    return source;
+  }
+  return source
+    .replace(GA_TAG, CONSENT_TAG)
+    .replace(GA_CONFIG, '')
+    .replace(CLARITY_TAG, '');
 }
 
 function canonicalizeWatchdogHtml(source) {
@@ -58,7 +73,8 @@ export default async function handler(req, res) {
       fs.readFile(sourcePath, 'utf8'),
       fs.readFile(footerPath, 'utf8')
     ]);
-    const html = canonicalizeWatchdogHtml(useSharedFooter(source, sharedFooter));
+    const consentFirst = installConsentFirstAnalytics(source);
+    const html = canonicalizeWatchdogHtml(useSharedFooter(consentFirst, sharedFooter));
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
