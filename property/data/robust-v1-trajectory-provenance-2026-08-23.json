@@ -1,0 +1,100 @@
+{
+  "schema_version": "1.0",
+  "report_id": "ROBUST-v1-trajectory-provenance-2026-08-23",
+  "generated_on": "2026-08-23",
+  "linear_issue": "NJW-273",
+  "parent_program": "NJW-270",
+  "model": {
+    "score_product": "Watchdog Score",
+    "framework": "ROBUST",
+    "model_version": "ROBUST-v1",
+    "marker_id": "watchdog.watchdog_score",
+    "weights": {"R": 10, "O": 20, "B": 30, "U": 15, "S": 15, "T": 10},
+    "weights_changed": false,
+    "bands_changed": false,
+    "missing_evidence_rule_changed": false
+  },
+  "persisted_baseline": {
+    "canonical_rows": 336,
+    "unique_latest_properties": 212,
+    "mean_score": 60.16,
+    "mean_evidence_coverage": 71.63,
+    "component_availability": {"R": 212, "O": 21, "B": 212, "U": 212, "S": 207, "T": 0}
+  },
+  "exploratory_property_lookup_sale_gate": {
+    "status": "rejected_as_governed_calibration_evidence",
+    "candidate_t_properties": 166,
+    "reason": "property_lookups.last_sale_price/last_sale_year do not provide sufficient parcel-level sale provenance for ROBUST Trajectory",
+    "candidate_t_distribution": {"mean": 38.08, "median": 31.5, "min": 0, "max": 100, "below_50": 99, "score_100": 20},
+    "paired_t_effect_on_t_bearing_properties": {
+      "n": 166,
+      "mean_absolute_score_delta": 4.918,
+      "max_absolute_score_delta": 9.498,
+      "rank_correlation_with_vs_without_t": 0.32261,
+      "top_decile_membership_churn_pct": 7.2,
+      "band_migration_pct": 13.9
+    },
+    "sale_age_buckets": [
+      {"bucket": "2024-2026", "n": 8, "mean_t": 53.25, "median_t": 63, "mean_sale_age_years": 0.9},
+      {"bucket": "2020-2023", "n": 26, "mean_t": 85.31, "median_t": 92, "mean_sale_age_years": 4.4},
+      {"bucket": "2015-2019", "n": 22, "mean_t": 31.68, "median_t": 35.5, "mean_sale_age_years": 9.2},
+      {"bucket": "2010-2014", "n": 21, "mean_t": 47.76, "median_t": 39, "mean_sale_age_years": 14.0},
+      {"bucket": "2000-2009", "n": 46, "mean_t": 41.39, "median_t": 51.5, "mean_sale_age_years": 21.4},
+      {"bucket": "pre-2000", "n": 43, "mean_t": 1.70, "median_t": 0, "mean_sale_age_years": 43.6}
+    ]
+  },
+  "sr1a_subject_provenance_audit": {
+    "latest_cohort_subject_matches": 10,
+    "matches_with_verified_sale": 10,
+    "exact_parcel_matches": 10,
+    "unique_parcel_fallback_matches": 0,
+    "property_lookup_exact_sale_matches": 1,
+    "property_lookup_year_matches": 1,
+    "property_lookup_price_matches": 2,
+    "conclusion": "The broad property lookup sale fields cannot be treated as equivalent to governed SR-1A subject-sale evidence."
+  },
+  "strict_governed_subject_sale_cohort": {
+    "trajectory_properties": 10,
+    "trajectory_exact_parcel_matches": 10,
+    "trajectory_distribution": {"mean": 93.7, "median": 100, "min": 68, "max": 100},
+    "overassessment_position": {"persisted": 21, "augmented": 31, "new_sr1a_subject_properties": 10},
+    "score_effect": {
+      "baseline_mean": 60.16,
+      "strict_augmented_mean": 60.52,
+      "mean_absolute_delta": 0.38,
+      "max_absolute_delta": 13,
+      "changed_scores": 10,
+      "band_migrations": 7
+    },
+    "coverage": {
+      "baseline_mean": 71.63,
+      "strict_augmented_mean": 73.04,
+      "full_coverage_properties": 10
+    },
+    "limitation": "Ten exact subject-sale matches are evidence-quality sufficient for a bounded canary, but not representative enough to calibrate the T weight or certify statewide behavior."
+  },
+  "production_hardening": {
+    "decision": "fail_closed_on_unverified_trajectory_sale",
+    "workbench_score_version": 16,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "trajectory_validation_contract": "sr1a_verified_subject_sale_v1",
+    "source": "NJ Division of Taxation SR-1A verified usable sale index",
+    "provider_version": "sr1a-subject-provider-v1",
+    "property_lookup_sale_fallback_removed_from_trajectory": true,
+    "score_model_version_changed": false
+  },
+  "decisions": {
+    "change_weights_now": false,
+    "change_bands_now": false,
+    "change_missing_evidence_rule_now": false,
+    "numeric_only_evidence_gate": "not certified",
+    "trajectory_weight": "keep 10 provisionally; insufficient representative governed T evidence to retune",
+    "next_calibration_requirement": "materially broaden parcel-matched governed SR-1A subject-sale coverage across counties, municipalities and property classes, then rerun bounded perturbation, leave-one-out, band/rank stability and missingness analysis"
+  },
+  "artifacts": {
+    "read_only_harness": "/property/scripts/robust_score_trajectory_provenance_calibration.sql",
+    "regression_contract": "/property/tests/robust-trajectory-evidence-contract.mjs",
+    "scorer": "/supabase/functions/workbench-score/index.ts"
+  }
+}
