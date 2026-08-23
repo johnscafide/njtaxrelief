@@ -1,0 +1,158 @@
+/* Watchdog Intelligence sub-brand + /pro representative product composites
+   Canonical supplement: /property/branding/WATCHDOG-INTELLIGENCE-BRAND.md
+   Keep this layer restrained outside explicit Intelligence surfaces. */
+:root{
+  --wd-intelligence-a:#2f6df6;
+  --wd-intelligence-b:#6c5ce7;
+  --wd-intelligence-c:#d760b5;
+  --wd-intelligence-d:#08a6a7;
+  --wd-intelligence-gradient:linear-gradient(115deg,var(--wd-intelligence-a),var(--wd-intelligence-b),var(--wd-intelligence-c),var(--wd-intelligence-d));
+}
+
+.wd-intelligence-word{
+  display:inline-block;
+  background:var(--wd-intelligence-gradient);
+  background-size:180% 180%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent!important;
+  -webkit-text-fill-color:transparent;
+  font-weight:800;
+}
+
+.wd-intelligence-surface{
+  position:relative;
+  isolation:isolate;
+  border:1px solid transparent!important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    var(--wd-intelligence-gradient) border-box!important;
+}
+
+.wd-intelligence-surface-dark{
+  position:relative;
+  isolation:isolate;
+  border:1px solid transparent!important;
+  background:
+    linear-gradient(#111d38,#111d38) padding-box,
+    var(--wd-intelligence-gradient) border-box!important;
+}
+
+/* Public /pro navigation: preserve the shared nav behavior, but use current Watchdog brand tokens. */
+body.wd-pro-page #wd-property-nav{
+  --wdn-teal:#2f6df6;
+  --wdn-teal-dark:#183b84;
+  --wdn-navy:#111d38;
+  --wdn-gold:#2f6df6;
+  --wdn-text:#31435c;
+  --wdn-muted:#748198;
+  --wdn-border:#e2e7ef;
+  --wdn-soft:#f5f7fb;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+body.wd-pro-page #wd-property-nav .wdn-inner{min-height:84px;max-width:1540px;padding:12px 30px}
+body.wd-pro-page #wd-property-nav .wdn-brand-icon{
+  width:42px;height:42px;flex-basis:42px;border-radius:12px;
+  background:linear-gradient(145deg,#183b84,#2f6df6);
+  box-shadow:0 8px 18px rgba(47,109,246,.20);
+}
+body.wd-pro-page #wd-property-nav .wdn-brand-name{font-family:Inter,sans-serif;font-size:21px;letter-spacing:-.04em}
+body.wd-pro-page #wd-property-nav .wdn-address{font-family:Inter,system-ui,sans-serif}
+body.wd-pro-page #wd-property-nav .wdn-search{border-radius:12px;background:#f7f9fc}
+body.wd-pro-page #wd-property-nav .wdn-search:focus-within{border-color:#2f6df6;box-shadow:0 0 0 3px rgba(47,109,246,.14)}
+
+/* Upgrade the existing Intelligence pricing treatments to the canonical sub-brand. */
+body.wd-pro-page .pro-intelligence-promo{
+  padding:1px!important;
+  background:var(--wd-intelligence-gradient)!important;
+  background-size:220% 220%!important;
+  animation:wdIntelligenceSweep 9s ease infinite!important;
+}
+body.wd-pro-page .pro-intelligence-promo-label{color:#31435c!important}
+body.wd-pro-page .pro-intelligence-promo-price b{color:#2f6df6!important}
+body.wd-pro-page .pro-intel-plan{
+  position:relative;border:1px solid transparent!important;
+  background:linear-gradient(#f8faff,#f8faff) padding-box,var(--wd-intelligence-gradient) border-box!important;
+}
+body.wd-pro-page .pro-price-band.plus .pro-intel-plan{
+  background:linear-gradient(#10294b,#10294b) padding-box,var(--wd-intelligence-gradient) border-box!important;
+}
+body.wd-pro-page .pro-price-band.plus .pro-intel-plan b{color:#a9c2ff!important}
+body.wd-pro-page .pro-intelligence-row>div:first-child,
+body.wd-pro-page .pro-voice-row>div:first-child{font-weight:800}
+body.wd-pro-page .pro-voice-row>div:first-child i{margin-right:7px;color:#6c5ce7}
+
+/* Story-stage product composites. These intentionally combine current product patterns with
+   representative sample data rather than presenting a stale literal screenshot as current UI. */
+body.wd-pro-page .pro-app-shell{border-radius:24px;border-color:#e2e7ef;box-shadow:0 32px 90px rgba(18,36,63,.16),0 5px 18px rgba(18,36,63,.08);font-family:Inter,system-ui,sans-serif}
+body.wd-pro-page .pro-app-top{height:52px;background:#fff;border-bottom:1px solid #e2e7ef}
+body.wd-pro-page .pro-app-top>span{border-color:#e2e7ef;color:#748198;background:#f8fafc}
+body.wd-pro-page .pro-app-tabs{height:48px;border-bottom:1px solid #e2e7ef}
+body.wd-pro-page .pro-app-tabs span{font-family:Inter,sans-serif;font-size:9px}
+body.wd-pro-page .pro-app-tabs span.active{background:#e9f0ff;color:#2f6df6}
+body.wd-pro-page .pro-screen-stack{height:526px;background:#f5f7fb}
+body.wd-pro-page .pro-screen{background:#f5f7fb}
+
+.wd-product-shot{height:100%;display:grid;grid-template-columns:142px minmax(0,1fr);background:#f5f7fb;color:#111d38;overflow:hidden}
+.wd-shot-side{padding:18px 11px 13px;background:#fff;border-right:1px solid #e2e7ef;display:flex;flex-direction:column;gap:4px;min-width:0}
+.wd-shot-brand{display:flex;align-items:center;gap:8px;padding:0 5px 14px;margin-bottom:4px;border-bottom:1px solid #edf1f6}
+.wd-shot-brand i{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(145deg,#183b84,#2f6df6);color:#fff;font-size:11px;box-shadow:0 6px 14px rgba(47,109,246,.18)}
+.wd-shot-brand span{min-width:0}.wd-shot-brand b{display:block;font:800 11px/1 Inter,sans-serif;letter-spacing:-.03em}.wd-shot-brand small{display:block;margin-top:2px;color:#8794a7;font:700 5px/1 Inter,sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.wd-shot-search{height:28px;margin:5px 2px 7px;padding:0 8px;border-radius:8px;background:#f5f7fb;border:1px solid #e2e7ef;display:flex;align-items:center;gap:6px;color:#94a0b2;font-size:7px}
+.wd-shot-nav-label{padding:6px 7px 2px;color:#9aa5b6;font:800 5px/1 Inter,sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.wd-shot-link{min-height:31px;padding:0 8px;border-radius:8px;display:flex;align-items:center;gap:7px;color:#52627a;font-size:7px;font-weight:700}
+.wd-shot-link i{width:13px;color:#8b98aa;text-align:center}.wd-shot-link.on{background:#e9f0ff;color:#2f6df6}.wd-shot-link.on i{color:#2f6df6}
+.wd-shot-plan{margin-top:auto;padding:9px;border-radius:9px;background:#f7f9fc;border:1px solid #edf1f6}.wd-shot-plan b{display:block;font-size:7px}.wd-shot-plan span{display:block;margin-top:2px;color:#8794a7;font-size:6px}
+.wd-shot-main{min-width:0;padding:17px 19px 18px;overflow:hidden}
+.wd-shot-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px}.wd-shot-title small{display:block;color:#748198;font-size:6px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.wd-shot-title strong{display:block;margin-top:3px;font:800 17px/1.08 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.04em}.wd-shot-actions{display:flex;gap:6px}.wd-shot-btn{height:28px;padding:0 10px;border-radius:8px;border:1px solid #e2e7ef;background:#fff;color:#31435c;display:flex;align-items:center;gap:5px;font-size:6px;font-weight:800}.wd-shot-btn.primary{background:#2f6df6;border-color:#2f6df6;color:#fff}
+
+/* Property composite: real property image + current product chrome. */
+.wd-property-hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(170px,.8fr);gap:10px}
+.wd-property-photo{min-height:202px;border-radius:13px;overflow:hidden;position:relative;background:#d9e0e8 url('/1092Chews.jpg') center/cover no-repeat}
+.wd-property-photo:after{content:"Representative property view";position:absolute;left:9px;bottom:9px;padding:5px 7px;border-radius:7px;background:rgba(17,29,56,.78);color:#fff;font-size:5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.wd-property-score{border-radius:13px;background:#fff;border:1px solid #e2e7ef;padding:13px;display:flex;flex-direction:column}.wd-property-score>small{color:#748198;font-size:6px;font-weight:800;letter-spacing:.08em}.wd-score-line{display:flex;align-items:flex-end;gap:8px;margin-top:9px}.wd-score-line b{font:800 42px/.9 "Plus Jakarta Sans",sans-serif;letter-spacing:-.08em}.wd-score-line span{padding-bottom:4px;color:#18a966;font-size:7px;font-weight:800}.wd-property-score p{margin:8px 0 0;color:#65748a;font-size:7px;line-height:1.45}.wd-property-score footer{margin-top:auto;padding-top:10px;border-top:1px solid #edf1f6;display:flex;justify-content:space-between;gap:6px;color:#748198;font-size:6px}.wd-property-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:9px}.wd-property-metrics div{padding:10px;border-radius:10px;background:#fff;border:1px solid #e2e7ef}.wd-property-metrics span{display:block;color:#8794a7;font-size:5px;font-weight:800;text-transform:uppercase}.wd-property-metrics b{display:block;margin-top:5px;font:800 12px/1 "Plus Jakarta Sans",sans-serif}.wd-property-metrics small{display:block;margin-top:3px;color:#748198;font-size:5px}
+
+/* ROBUST score composite. */
+.wd-score-layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:15px;align-items:stretch}
+.wd-score-card{border-radius:14px;background:#fff;border:1px solid #e2e7ef;padding:15px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.wd-score-orb{width:122px;height:122px;border-radius:50%;background:conic-gradient(#2f6df6 0 82%,#e8edf5 82%);display:grid;place-items:center;box-shadow:inset 0 0 0 14px #fff}.wd-score-orb b{font:800 34px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.07em}.wd-score-card strong{margin-top:8px;font-size:8px}.wd-score-card small{margin-top:3px;color:#748198;font-size:6px}
+.wd-robust-card{border-radius:14px;background:#fff;border:1px solid #e2e7ef;padding:13px}.wd-robust-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}.wd-robust-head span{color:#2f6df6;font-size:6px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.wd-robust-head b{display:block;margin-top:4px;font:800 14px/1.05 "Plus Jakarta Sans",sans-serif}.wd-robust-head em{font-style:normal;color:#748198;font-size:6px}.wd-robust-bars{display:grid;gap:7px;margin-top:12px}.wd-robust-row{display:grid;grid-template-columns:18px 92px 1fr 24px;gap:6px;align-items:center;font-size:6px}.wd-robust-row>i{width:18px;height:18px;border-radius:6px;background:#edf3ff;color:#2f6df6;display:grid;place-items:center;font-style:normal;font-weight:900}.wd-robust-row>b{font-size:6px}.wd-robust-row>span{height:6px;border-radius:99px;background:#edf1f6;overflow:hidden}.wd-robust-row>span i{display:block;height:100%;width:var(--v);border-radius:inherit;background:linear-gradient(90deg,#183b84,#2f6df6)}.wd-robust-row>em{font-style:normal;text-align:right;color:#748198;font-size:6px}
+
+/* Change intelligence composite. */
+.wd-change-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:9px}.wd-change-summary div{padding:10px;border-radius:10px;background:#fff;border:1px solid #e2e7ef}.wd-change-summary small{display:block;color:#8794a7;font-size:5px;font-weight:800;text-transform:uppercase}.wd-change-summary b{display:block;margin-top:4px;font:800 15px/1 "Plus Jakarta Sans",sans-serif}.wd-change-feed{display:grid;gap:7px}.wd-change-item{display:grid;grid-template-columns:30px 1fr auto;gap:8px;align-items:center;padding:9px 10px;border-radius:10px;background:#fff;border:1px solid #e2e7ef}.wd-change-item>i{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:#edf3ff;color:#2f6df6;font-size:9px}.wd-change-item b{display:block;font-size:7px}.wd-change-item span{display:block;margin-top:2px;color:#748198;font-size:6px}.wd-change-item em{font-style:normal;padding:4px 6px;border-radius:99px;background:#eef9f4;color:#158553;font-size:5px;font-weight:900;text-transform:uppercase}
+
+/* Data Workbench composite. */
+.wd-workbench-tools{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}.wd-workbench-tools span{padding:5px 7px;border-radius:7px;background:#fff;border:1px solid #e2e7ef;color:#65748a;font-size:5px;font-weight:800}.wd-workbench-grid{border:1px solid #e2e7ef;border-radius:11px;overflow:hidden;background:#fff}.wd-workbench-grid header,.wd-workbench-grid>div{display:grid;grid-template-columns:1.45fr .75fr .75fr .65fr .85fr .65fr;align-items:center;min-height:35px;padding:0 9px;border-bottom:1px solid #edf1f6;font-size:5px}.wd-workbench-grid header{min-height:28px;background:#f7f9fc;color:#8794a7;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.wd-workbench-grid>div:last-child{border-bottom:0}.wd-workbench-grid b{font-size:6px}.wd-workbench-grid em{font-style:normal;color:#2f6df6;font-weight:900}.wd-workbench-proof{display:flex;gap:6px;margin-top:8px}.wd-workbench-proof span{display:flex;align-items:center;gap:5px;color:#65748a;font-size:5px}.wd-workbench-proof i{color:#2f6df6}
+
+/* Watchdog Intelligence + Voice composite. */
+.wd-intel-shot{height:100%;padding:17px;background:#f5f7fb;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(180px,.75fr);gap:10px;color:#111d38}
+.wd-intel-panel{border-radius:15px;padding:1px;background:var(--wd-intelligence-gradient);background-size:220% 220%;animation:wdIntelligenceSweep 9s ease infinite;overflow:hidden}.wd-intel-panel-inner{height:100%;border-radius:14px;background:#fff;padding:14px;display:flex;flex-direction:column}.wd-intel-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.wd-intel-head>div{display:flex;align-items:center;gap:8px}.wd-intel-mark{width:29px;height:29px;border-radius:9px;display:grid;place-items:center;background:linear-gradient(145deg,#183b84,#2f6df6);color:#fff;font-size:10px}.wd-intel-head b{font-size:8px}.wd-intel-head small{display:block;margin-top:1px;color:#8794a7;font-size:5px}.wd-intel-live{padding:4px 6px;border-radius:99px;background:#eef9f4;color:#158553;font-size:5px;font-weight:900}.wd-intel-question{margin-top:13px;padding:9px 10px;border-radius:10px 10px 3px 10px;background:#111d38;color:#fff;align-self:flex-end;max-width:82%;font-size:6px;line-height:1.45}.wd-intel-answer{margin-top:7px;padding:10px;border-radius:3px 10px 10px 10px;background:#f4f7fb;border:1px solid #e2e7ef;font-size:6px;line-height:1.45}.wd-intel-answer b{display:block;margin-bottom:4px;font-size:7px}.wd-intel-sources{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}.wd-intel-sources span{padding:4px 5px;border-radius:6px;background:#fff;border:1px solid #e2e7ef;color:#65748a;font-size:5px}.wd-intel-compose{margin-top:auto;height:34px;border:1px solid #dce3ed;border-radius:10px;display:flex;align-items:center;gap:7px;padding:0 8px;color:#94a0b2;font-size:5px}.wd-intel-compose button{margin-left:auto;width:23px;height:23px;border:0;border-radius:7px;background:#2f6df6;color:#fff;font-size:7px}
+.wd-voice-panel{border-radius:15px;background:#111d38;color:#fff;padding:14px;display:flex;flex-direction:column;overflow:hidden}.wd-voice-panel>small{color:#aebbd0;font-size:5px;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.wd-voice-panel h4{margin:5px 0 0;font:800 15px/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.04em}.wd-voice-panel p{margin:7px 0 0;color:#aebbd0;font-size:6px;line-height:1.45}.wd-voice-wave{height:64px;margin:17px 0 10px;display:flex;align-items:center;justify-content:center;gap:3px}.wd-voice-wave i{display:block;width:3px;height:var(--h);border-radius:99px;background:linear-gradient(#6c5ce7,#d760b5)}.wd-voice-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:auto}.wd-voice-actions span{min-height:31px;border-radius:8px;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(255,255,255,.08);font-size:5px;font-weight:800}.wd-voice-actions span:first-child{background:#fff;color:#111d38}
+
+/* Dedicated ROBUST marketing block inserted into /pro. */
+.wd-robust-section{padding-top:92px!important;padding-bottom:92px!important;background:#fff;border-top:1px solid #edf1f6;border-bottom:1px solid #edf1f6}
+.wd-robust-marketing{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:center}.wd-robust-copy .pro-kicker{color:#2f6df6}.wd-robust-copy h2{margin:13px 0 0;font:700 clamp(40px,4.6vw,68px)/.96 "Plus Jakarta Sans",sans-serif;letter-spacing:-.06em}.wd-robust-copy p{max-width:570px;margin:20px 0 0;color:#65748a;font-size:16px;line-height:1.6}.wd-robust-copy strong{color:#111d38}.wd-robust-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.wd-robust-dimension{min-height:132px;padding:17px;border-radius:14px;background:#f7f9fc;border:1px solid #e2e7ef}.wd-robust-dimension b{width:31px;height:31px;border-radius:9px;background:#e9f0ff;color:#2f6df6;display:grid;place-items:center;font:900 12px/1 "Plus Jakarta Sans",sans-serif}.wd-robust-dimension strong{display:block;margin-top:13px;font:800 13px/1.15 "Plus Jakarta Sans",sans-serif}.wd-robust-dimension span{display:block;margin-top:5px;color:#748198;font-size:11px;line-height:1.35}.wd-robust-dimension em{display:block;margin-top:8px;color:#2f6df6;font:800 9px/1 Inter,sans-serif;font-style:normal}
+
+/* Brand Center sample surface. */
+.bc-intelligence-demo{margin-top:14px;padding:1px;border-radius:18px;background:var(--wd-intelligence-gradient);background-size:220% 220%;animation:wdIntelligenceSweep 9s ease infinite}.bc-intelligence-demo>div{border-radius:17px;background:#fff;padding:22px}.bc-intelligence-demo h3{margin:5px 0 0!important}.bc-intelligence-samples{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}.bc-intelligence-sample{flex:1 1 220px;padding:15px;border-radius:12px;background:#f7f9fc;border:1px solid #e2e7ef}.bc-intelligence-sample small{display:block;color:#748198;font-size:11px;font-weight:700}.bc-intelligence-sample b{display:block;margin-top:6px;color:#111d38;font-size:15px}.bc-intelligence-do{margin-top:15px;color:#53627a;font-size:12px;line-height:1.6}
+
+@keyframes wdIntelligenceSweep{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+@media(max-width:900px){
+  .wd-product-shot{grid-template-columns:110px minmax(0,1fr)}
+  .wd-shot-side{padding-left:8px;padding-right:8px}
+  .wd-property-hero{grid-template-columns:1fr}.wd-property-score{display:none}
+  .wd-score-layout{grid-template-columns:155px 1fr}
+  .wd-intel-shot{grid-template-columns:1fr}.wd-voice-panel{display:none}
+  .wd-robust-marketing{grid-template-columns:1fr;gap:32px}.wd-robust-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  body.wd-pro-page #wd-property-nav .wdn-inner{min-height:72px;padding:9px 16px}
+  body.wd-pro-page #wd-property-nav .wdn-brand-icon{width:38px;height:38px;flex-basis:38px}
+  .wd-product-shot{grid-template-columns:82px minmax(0,1fr)}
+  .wd-shot-brand span,.wd-shot-search,.wd-shot-link span,.wd-shot-plan{display:none}.wd-shot-brand{justify-content:center}.wd-shot-link{justify-content:center;padding:0}.wd-shot-link i{width:auto}
+  .wd-shot-main{padding:13px}.wd-property-photo{min-height:185px}.wd-property-metrics{grid-template-columns:repeat(2,1fr)}
+  .wd-score-layout{grid-template-columns:1fr}.wd-score-card{display:none}.wd-robust-row{grid-template-columns:18px 75px 1fr 22px}
+  .wd-robust-grid{grid-template-columns:repeat(2,1fr)}.wd-robust-dimension{min-height:120px}
+}
+@media(max-width:480px){.wd-robust-grid{grid-template-columns:1fr 1fr}}
+@media(prefers-reduced-motion:reduce){.wd-intelligence-surface,.pro-intelligence-promo,.wd-intel-panel,.bc-intelligence-demo{animation:none!important}}

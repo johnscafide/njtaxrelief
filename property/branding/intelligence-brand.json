@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "name": "Watchdog Intelligence Brand Standard",
+    "status": "authoritative_sub_brand_supplement",
+    "parent": "/property/branding/brand-system.json",
+    "documentation": "/property/branding/WATCHDOG-INTELLIGENCE-BRAND.md",
+    "implementation_css": "/property/css/watchdog-intelligence-brand.css",
+    "effective": "2026-08-23",
+    "version": "1.0.0"
+  },
+  "identity": {
+    "name": "Watchdog Intelligence",
+    "relationship": "governed intelligence capability layer inside Watchdog Property Intelligence",
+    "not_master_brand_replacement": true,
+    "preferred_word_treatment": "gradient on Intelligence",
+    "preferred_major_surface_treatment": "1px intelligence gradient border"
+  },
+  "gradient": {
+    "angle_deg": 115,
+    "stops": ["#2f6df6", "#6c5ce7", "#d760b5", "#08a6a7"],
+    "css": "linear-gradient(115deg,#2f6df6,#6c5ce7,#d760b5,#08a6a7)"
+  },
+  "usage": {
+    "required_when_named": [
+      "render Intelligence with the gradient treatment",
+      "or place the containing Intelligence section/card/callout inside a restrained 1px Intelligence gradient border"
+    ],
+    "preferred_for_major_callouts": "use both gradient word and gradient border",
+    "avoid": [
+      "rainbow treatment across generic Watchdog UI",
+      "using the Intelligence gradient as a semantic risk/status color",
+      "long gradient body copy",
+      "replacing the master Watchdog blue/navy identity",
+      "unrelated glow effects"
+    ],
+    "accessibility_fallback": "Use #111d38 text with the Intelligence gradient border when gradient text is unsupported or contrast is uncertain."
+  },
+  "voice": {
+    "full_name": "Watchdog Intelligence Voice",
+    "relationship": "capability of Watchdog Intelligence, not a standalone SKU",
+    "packaging": {
+      "standard": "unavailable",
+      "agent": "through Watchdog Intelligence entitlement/add-on",
+      "pro": "through Watchdog Intelligence entitlement/add-on",
+      "pro_plus": "included with Watchdog Intelligence",
+      "teams": "included with Watchdog Intelligence where Teams is available"
+    },
+    "evidence_rule": "Written evidence remains authoritative and Voice follows the same authorization, source, entitlement and audit controls as typed Intelligence."
+  },
+  "robust": {
+    "product_name": "Watchdog Score",
+    "framework_name": "ROBUST Framework",
+    "preferred_language": [
+      "The Watchdog Score is powered by the ROBUST Framework.",
+      "One score. Six dimensions. ROBUST."
+    ],
+    "never_call": "ROBUST Score",
+    "dimensions": [
+      {"letter": "R", "name": "Recourse", "weight": 0.10},
+      {"letter": "O", "name": "Overassessment Position", "weight": 0.20},
+      {"letter": "B", "name": "Burden", "weight": 0.30},
+      {"letter": "U", "name": "Uniformity", "weight": 0.15},
+      {"letter": "S", "name": "Stability", "weight": 0.15},
+      {"letter": "T", "name": "Trajectory", "weight": 0.10}
+    ]
+  },
+  "representative_product_imagery": {
+    "hybrid_allowed": true,
+    "rules": [
+      "Use current Watchdog navigation, typography, spacing, colors and feature names.",
+      "Use real or clearly representative imagery and do not imply a sample is a specific property unless it is.",
+      "Do not fabricate unavailable product capabilities.",
+      "Keep sample data clearly representative.",
+      "Preserve the Intelligence signature on Intelligence composites."
+    ]
+  },
+  "classes": {
+    "gradient_word": ".wd-intelligence-word",
+    "light_border_surface": ".wd-intelligence-surface",
+    "dark_border_surface": ".wd-intelligence-surface-dark"
+  }
+}
