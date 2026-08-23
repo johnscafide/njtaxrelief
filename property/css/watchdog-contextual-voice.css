@@ -121,6 +121,38 @@ body[data-sidebar-page="dashboard"] .wd-contextual-voice-open{
 .dwa-narration-label select:focus-visible,.dwa-narration-tools [data-dwa-listen]:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
 .dwa-narration-note{color:#64748b;font-size:10.5px;line-height:1.3}
 
+.dwa-command-gate{
+  margin-top:8px;
+  border:1px solid #d8e2e8;
+  border-radius:12px;
+  padding:12px;
+  background:#f8fafc;
+}
+.dwa-command-gate.reversible{border-color:#b9e1dd;background:#f2fbfa}
+.dwa-command-gate.approval{border-color:#f0d7a6;background:#fff9ec}
+.dwa-command-gate.prohibited{border-color:#efc3c3;background:#fff5f5}
+.dwa-command-gate>strong{display:block;color:#102a4c;font-size:13px;line-height:1.3}
+.dwa-command-gate.prohibited>strong{color:#9f1d1d}
+.dwa-command-gate>p{margin:6px 0 0;color:#425466;font-size:12px;line-height:1.5}
+.dwa-command-gate>small{display:block;margin-top:8px;color:#64748b;font-size:10.5px;line-height:1.4}
+.dwa-command-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dwa-command-confirm,.dwa-command-cancel{
+  min-height:38px;
+  border-radius:9px;
+  padding:0 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.dwa-command-confirm{border:0;background:#0f766e;color:#fff}
+.dwa-command-gate.approval .dwa-command-confirm{background:#8a5a00}
+.dwa-command-cancel{border:1px solid #cbd5e1;background:#fff;color:#334155}
+.dwa-command-confirm:disabled,.dwa-command-cancel:disabled{opacity:.55;cursor:default}
+.dwa-command-confirm:focus-visible,.dwa-command-cancel:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
+.dwa-command-result{margin-top:10px;border-radius:9px;padding:9px 10px;font-size:11px;line-height:1.4}
+.dwa-command-result.reversible{background:#effaf8;color:#155e59}
+.dwa-command-result.approval{background:#fff7e6;color:#7c4a03}
+
 @media(max-width:1099px){
   body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry{margin-bottom:8px}
 }
@@ -133,4 +165,6 @@ body[data-sidebar-page="dashboard"] .wd-contextual-voice-open{
   .dwa-narration-tools{align-items:stretch;flex-direction:column}
   .dwa-narration-label{align-items:flex-start;flex-direction:column;width:100%}
   .dwa-narration-label select,.dwa-narration-tools [data-dwa-listen]{width:100%;max-width:none;min-height:44px}
+  .dwa-command-actions{align-items:stretch;flex-direction:column}
+  .dwa-command-confirm,.dwa-command-cancel{width:100%;min-height:44px}
 }
