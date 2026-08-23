@@ -41,26 +41,34 @@ function sanitizeContactHtml(input) {
     '<a$1href="https://www.watchdogindex.com/contact"$3>Contact Watchdog</a>'
   );
   html = html.replace(
-    /href=(["'])(?:https?:\/\/(?:www\.)?njpropertytaxrelief\.com\/)?(?:index\.html)?#contact\1/gi,
+    /href=(["'])(?:https?:\/\/(?:www\.)?njpropertytaxrelief\.com)?\/?(?:index\.html)?#contact\1/gi,
     'href="https://www.watchdogindex.com/contact"'
   );
   html = html.replace(
     /href=(["'])(?:https?:\/\/(?:www\.)?njpropertytaxrelief\.com\/)?contact\.html\1/gi,
     'href="https://www.watchdogindex.com/contact"'
   );
+  html = html.replace(
+    /href=(["'])https?:\/\/(?:www\.)?johnscafide\.com\/?[^"']*\1/gi,
+    'href="https://www.watchdogindex.com/contact?topic=real-estate"'
+  );
 
   html = html
+    .replace(/is operated by John Scafide, a licensed New Jersey real estate agent \(License #2079591\) with The McKenty Team at Opus Elite Real Estate, and a tax professional\./gi, 'is operated by Watchdog Property Intelligence. Real-estate services are handled by licensed New Jersey real-estate professionals affiliated with Opus Elite Real Estate.')
+    .replace(/John Scafide,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional')
     .replace(/john@johnscafide\.com/gi, 'Contact Watchdog')
     .replace(/heather@heatherscafide\.com/gi, 'Contact Watchdog')
     .replace(/(?:\+?1[\s.-]*)?\(?856\)?[\s.-]*404[\s.-]*1098/g, 'Contact Watchdog')
     .replace(/(?:\+?1[\s.-]*)?\(?856\)?[\s.-]*310[\s.-]*6746/g, 'Contact Watchdog')
     .replace(/(?:\+?1[\s.-]*)?\(?609\)?[\s.-]*540[\s.-]*5505/g, 'Contact Watchdog')
     .replace(/\bJohn Scafide\b/g, 'Watchdog')
+    .replace(/\bJohn or Heather\b/gi, 'the Watchdog team')
     .replace(/\bEmail Agent\b/gi, 'Contact Watchdog')
     .replace(/\bEmail John\b/gi, 'Contact Watchdog')
     .replace(/\bEmail Heather\b/gi, 'Contact Watchdog')
     .replace(/\bSend to John\b/gi, 'Send to Watchdog')
-    .replace(/\bSend to Heather\b/gi, 'Send to Watchdog');
+    .replace(/\bSend to Heather\b/gi, 'Send to Watchdog')
+    .replace(/Watchdog,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional');
 
   if (!/contact-routing-policy\.js/i.test(html)) {
     html = html.replace(/<\/body>/i, `${CONTACT_POLICY_SCRIPT}\n</body>`);
