@@ -92,6 +92,8 @@ jobs:
         run: node property/tests/watchdog-intelligence-voice-contract.mjs
       - name: Verify Watchdog Intelligence structured narration
         run: node property/tests/watchdog-intelligence-narration-contract.mjs
+      - name: Verify Watchdog Intelligence Voice command policy
+        run: node property/tests/watchdog-intelligence-command-policy-contract.mjs
       - name: Verify contextual Dashboard and Today Voice
         run: node property/tests/watchdog-contextual-voice-contract.mjs
       - name: Verify Marketing Studio creative and launch contracts
