@@ -6,6 +6,17 @@
   if (window.__WATCHDOG_SEARCH_UNIFORMITY__) return;
   window.__WATCHDOG_SEARCH_UNIFORMITY__ = true;
 
+  function ensureCityAddressRuntime() {
+    if (window.__WATCHDOG_CITY_ADDRESS_RUNTIME__ || document.getElementById('watchdog-city-address-runtime')) return;
+    var script = document.createElement('script');
+    script.id = 'watchdog-city-address-runtime';
+    script.src = '/property/js/city-address-runtime.js?v=20260823a';
+    script.defer = true;
+    (document.head || document.documentElement).appendChild(script);
+  }
+
+  ensureCityAddressRuntime();
+
   var searchNode = null;
   var homeMarker = null;
   var scanTimer = null;

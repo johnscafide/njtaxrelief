@@ -5,15 +5,24 @@
 
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
+  var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
 
   function ensureStylesheet(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
     var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);
   }
+  function ensureScript(src,id){
+    if(id&&document.getElementById(id))return;
+    if(document.querySelector('script[src="'+src+'"]'))return;
+    var s=document.createElement('script');if(id)s.id=id;s.src=src;s.defer=true;document.head.appendChild(s);
+  }
   function ensureUniversal(){
     if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.refresh();return;}
-    if(document.querySelector('script[src="'+UNIVERSAL+'"]'))return;
-    var s=document.createElement('script');s.src=UNIVERSAL;s.defer=true;document.head.appendChild(s);
+    ensureScript(UNIVERSAL,'watchdog-universal-menu-runtime');
+  }
+  function ensureCityAddress(){
+    if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
+    ensureScript(CITY_ADDRESS,'watchdog-city-address-runtime');
   }
   function setText(selector,value){
     document.querySelectorAll(selector).forEach(function(n){if(n.textContent!==value)n.textContent=value;});
@@ -25,6 +34,7 @@
   function run(){
     ensureStylesheet(STYLE);
     ensureUniversal();
+    ensureCityAddress();
     syncBrand();
     if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();
   }
