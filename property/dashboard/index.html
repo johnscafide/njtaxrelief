@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard | Watchdog Property Intelligence</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#f4f6f8">
-  <link rel="canonical" href="https://watchdogindex.com/property/dashboard">
+  <meta name="theme-color" content="#f5f7fb">
+  <link rel="canonical" href="https://www.watchdogindex.com/dashboard">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
@@ -20,9 +20,27 @@
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-invite-refresh.css">
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-premium-20260822.css">
   <link rel="stylesheet" href="/property/css/dashboard/dashboard-premium-followup-20260822c.css">
+  <style>
+    .wd4-bootstrap-status{min-height:100vh;display:grid;place-items:center;padding:28px;background:#f5f7fb;color:#111d38;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    .wd4-bootstrap-status[hidden]{display:none}
+    .wd4-bootstrap-card{width:min(430px,100%);padding:28px;border:1px solid #e2e7ef;border-radius:18px;background:#fff;box-shadow:0 16px 44px rgba(24,39,67,.08);text-align:center}
+    .wd4-bootstrap-mark{width:48px;height:48px;margin:0 auto 16px;border-radius:13px;display:grid;place-items:center;background:linear-gradient(145deg,#183b84,#2f6df6);color:#fff;box-shadow:0 8px 18px rgba(47,109,246,.20)}
+    .wd4-bootstrap-card h1{margin:0;font:800 24px/1.1 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.035em}
+    .wd4-bootstrap-card p{margin:10px 0 0;color:#748198;font-size:14px;line-height:1.55}
+    .wd4-bootstrap-card button{margin-top:18px;min-height:44px;padding:0 18px;border:0;border-radius:10px;background:#2f6df6;color:#fff;font:700 14px Inter,sans-serif;cursor:pointer}
+  </style>
 </head>
 <body data-sidebar-page="dashboard">
   <main id="wd4-root" hidden aria-live="polite"></main>
+  <section class="wd4-bootstrap-status" id="wd4-bootstrap-status" aria-live="polite" aria-label="Dashboard loading status">
+    <div class="wd4-bootstrap-card">
+      <div class="wd4-bootstrap-mark" aria-hidden="true"><i class="fas fa-dog"></i></div>
+      <h1>Opening Dashboard</h1>
+      <p id="wd4-bootstrap-message">Loading your Watchdog workspace and current property intelligence.</p>
+      <button id="wd4-bootstrap-retry" type="button" hidden>Reload Dashboard</button>
+    </div>
+  </section>
+  <noscript><section class="wd4-bootstrap-status"><div class="wd4-bootstrap-card"><div class="wd4-bootstrap-mark"><i class="fas fa-dog"></i></div><h1>JavaScript is required</h1><p>Watchdog Dashboard needs JavaScript to load your private workspace and property intelligence.</p></div></section></noscript>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -44,5 +62,31 @@
   <script src="/property/js/watchdog-dashboard-v2-intelligence.js"></script>
   <script src="/property/js/dashboard/dashboard-premium.js"></script>
   <script src="/property/js/dashboard/dashboard-premium-followup.js"></script>
+  <script src="/property/js/platform-observability.js"></script>
+  <script>
+  (function(){
+    var root=document.getElementById('wd4-root');
+    var status=document.getElementById('wd4-bootstrap-status');
+    var message=document.getElementById('wd4-bootstrap-message');
+    var retry=document.getElementById('wd4-bootstrap-retry');
+    if(!root||!status)return;
+    var timer;
+    function sync(){
+      if(!root.hidden&&root.childElementCount>0){
+        status.hidden=true;
+        if(timer)clearTimeout(timer);
+        if(observer)observer.disconnect();
+      }
+    }
+    var observer=new MutationObserver(sync);
+    observer.observe(root,{attributes:true,childList:true,subtree:true,attributeFilter:['hidden','class','style']});
+    timer=setTimeout(function(){
+      if(status.hidden)return;
+      if(message)message.textContent='Dashboard did not finish loading. Reload to retry, or use the account menu if the problem continues.';
+      if(retry){retry.hidden=false;retry.addEventListener('click',function(){location.reload();},{once:true});}
+    },12000);
+    sync();
+  })();
+  </script>
 </body>
 </html>
