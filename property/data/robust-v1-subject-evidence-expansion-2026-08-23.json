@@ -1,0 +1,129 @@
+{
+  "report_id": "robust-v1-subject-evidence-expansion-2026-08-23",
+  "issue": "NJW-273",
+  "generated_at": "2026-08-23T14:47:00Z",
+  "mode": "read_only_calibration_plus_governed_resolver_hardening",
+  "model": {
+    "framework": "ROBUST",
+    "model_version": "ROBUST-v1",
+    "weights": {"recourse": 10, "overassessment": 20, "burden": 30, "uniformity": 15, "stability": 15, "trajectory": 10},
+    "bands_changed": false,
+    "weights_changed": false,
+    "missingness_policy_changed": false,
+    "missingness_policy": "omit unavailable dimensions and renormalize remaining weights"
+  },
+  "source_plane": {
+    "table": "public.sr1a_subject_evidence",
+    "source_provider_version": "sr1a-subject-provider-v1",
+    "latest_county_runs": 21,
+    "latest_county_runs_ready_without_error": 21,
+    "source_records": 131244,
+    "indexed_parcels": 114859,
+    "rows_with_living_space": 107943,
+    "latest_refresh_window_utc": {
+      "oldest": "2026-08-23T10:20:01.835Z",
+      "newest": "2026-08-23T10:20:02.518Z"
+    }
+  },
+  "resolver_change": {
+    "migration": "20260823143628_sr1a_compact_parcel_match_v2.sql",
+    "production_migration_version": "20260823143628",
+    "rule": "Exact district/block/lot matching remains first. Decimal punctuation may be removed from block/lot only as a fallback. A compact qualifier-exact match is allowed. A compact qualifier fallback is allowed only when both the SR-1A evidence key and the property warehouse compact key are one-to-one. Sale price/year are never parcel-match fallbacks.",
+    "security": {
+      "security_mode": "invoker",
+      "anonymous_execute": false,
+      "authenticated_execute": false,
+      "service_role_execute": true
+    },
+    "warehouse_subject_matches_before": 113,
+    "warehouse_subject_matches_after": 170,
+    "warehouse_subject_match_gain": 57,
+    "warehouse_subject_match_gain_percent": 50.4,
+    "duplicate_request_mappings_after": 0,
+    "after_match_quality": {
+      "exact": 83,
+      "unique_parcel_fallback": 30,
+      "compact_exact": 43,
+      "compact_unique_parcel_fallback": 14
+    },
+    "compact_match_corroboration": {
+      "compact_matches": 57,
+      "year_built_comparable": 55,
+      "year_built_equal": 55,
+      "assessment_comparable": 57,
+      "assessment_equal": 47,
+      "sale_year_range": [2024, 2026]
+    },
+    "known_unsafe_compact_candidates_excluded": 8
+  },
+  "baseline_reproduction": {
+    "latest_persisted_properties": 212,
+    "exact_score_reproductions_from_persisted_component_scores": 212,
+    "mismatches": 0,
+    "max_absolute_mismatch": 0
+  },
+  "latest_persisted_cohort": {
+    "properties": 212,
+    "governed_subject_matches_before": 10,
+    "governed_subject_matches_after": 13,
+    "new_compact_matches": 3,
+    "geography_after": {
+      "counties": {"CAMDEN": 10, "GLOUCESTER": 3},
+      "towns": {"WINSLOW TWP": 9, "GLOUCESTER TWP": 1, "MONROE TWP": 1, "WASHINGTON TWP": 1, "WOODBURY HEIGHTS BORO": 1}
+    },
+    "property_classes_after": {"2": 13},
+    "trajectory_available_before": 10,
+    "trajectory_available_after": 13,
+    "overassessment_available_before": 31,
+    "overassessment_available_after": 33,
+    "baseline_mean_score": 60.16,
+    "augmented_mean_score": 60.66,
+    "mean_absolute_score_delta": 0.52,
+    "max_absolute_score_delta": 15,
+    "changed_scores": 13,
+    "band_migrations": 8,
+    "baseline_mean_evidence_coverage": 71.63,
+    "augmented_mean_evidence_coverage": 73.37,
+    "full_coverage_properties_before": 10,
+    "full_coverage_properties_after": 13
+  },
+  "governed_subject_subset_after": {
+    "n": 13,
+    "match_quality": {"exact": 10, "compact_exact": 2, "compact_unique_parcel_fallback": 1},
+    "baseline_mean_score": 58.92,
+    "augmented_mean_score": 67.08,
+    "mean_absolute_score_delta": 8.46,
+    "max_absolute_score_delta": 15,
+    "band_migrations": 8,
+    "baseline_mean_coverage": 71.54,
+    "augmented_mean_coverage": 100.0,
+    "trajectory": {"mean": 95.15, "median": 100, "min": 68, "max": 100},
+    "new_overassessment_dimensions": 12
+  },
+  "new_compact_calibration_properties": [
+    {"pams_pin": "0811_101_20.02", "match_quality": "compact_exact", "old_score": 65, "new_score": 74, "delta": 9, "old_coverage": 70, "new_coverage": 100, "new_overassessment_score": 93, "new_trajectory_score": 100},
+    {"pams_pin": "0818_18.02_2_C0105", "match_quality": "compact_unique_parcel_fallback", "old_score": 53, "new_score": 58, "delta": 5, "old_coverage": 90, "new_coverage": 100, "existing_overassessment_score": 0, "new_trajectory_score": 100},
+    {"pams_pin": "0823_40.10_6", "match_quality": "compact_exact", "old_score": 52, "new_score": 67, "delta": 15, "old_coverage": 70, "new_coverage": 100, "new_overassessment_score": 100, "new_trajectory_score": 100}
+  ],
+  "unmatched_boundary": {
+    "warehouse_unmatched_after": 2184,
+    "unmatched_in_a_district_present_in_sr1a": 2183,
+    "unmatched_with_property_lookup_sale_year_2024_2026": 109,
+    "recent_unmatched_property_classes": {"2": 108, "4A": 1},
+    "recent_unmatched_with_same_district_sale_year_price_signature_somewhere_in_sr1a": 24,
+    "sale_signature_unique": 9,
+    "sale_signature_plus_assessment_equal": 0,
+    "decision": "Do not use sale year/price signatures as parcel fallbacks. Manual comparisons showed the unique signatures resolve to different block/lot parcels and materially different property attributes. Remaining unmatched rows are treated as evidence absence unless a future parcel-key normalization is independently proven safe."
+  },
+  "scenario_definition": "Augment only persisted ROBUST-v1 dimensions whose governed evidence is now available through lookup_sr1a_subject_evidence. Preserve existing persisted component scores. Add Trajectory only from governed SR-1A subject sale evidence. Add Overassessment only when the persisted dimension is missing and the existing ROBUST-v1 Chapter 123 evidence path can be evaluated. Recompute with canonical weights and existing missing-dimension renormalization. No score observations are written by calibration queries.",
+  "decision": {
+    "weights": "KEEP",
+    "bands": "KEEP",
+    "missingness_policy": "KEEP",
+    "numeric_only_evidence_gate": "DO_NOT_CERTIFY",
+    "resolver_compact_parcel_normalization": "KEEP_WITH_GUARDS",
+    "sale_signature_fallback": "REJECT",
+    "njw_273_status": "IN_PROGRESS",
+    "reason": "The governed calibration subgroup is now cleaner and larger but remains only 13 class-2 properties concentrated in Camden and Gloucester. It is not representative enough for statewide weight, band, property-class or evidence-gate certification."
+  }
+}
