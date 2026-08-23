@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260823c';
+  var VERSION = '20260823d';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();

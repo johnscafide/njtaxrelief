@@ -89,18 +89,22 @@ assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not ex
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20260823c'"), 'Universal menu asset version was not cache-busted for the promo CSS repair');
+assert(universal.includes("var VERSION = '20260823d'"), 'Universal menu asset version was not cache-busted for the circle-free promo repair');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
 // The graphical treatment itself must live in the canonical external stylesheet.
-// This prevents CSP or inline-style restrictions from degrading the promo into a
-// large blank white profile row while leaving only its text visible.
+// Watchdog design guardrail: decorative circles, orbs, bubble blobs and circular
+// background accents do not belong in plan promos. Functional circular controls
+// elsewhere in the product are intentionally outside this scoped rule.
 assert(css.includes('plan-aware graphical profile promo'), 'External plan-promo stylesheet boundary is missing');
 assert(css.includes('.wd-universal-profile>nav>a.wd-universal-plan-promo{'), 'External graphical promo container CSS is missing');
-assert(css.includes('.wd-universal-plan-promo-pro{background:radial-gradient'), 'Pro graphical promo background is missing');
-assert(css.includes('.wd-universal-plan-promo-plus{background:radial-gradient'), 'Pro+ graphical promo background is missing');
-assert(css.includes('.wd-universal-plan-promo-teams{background:radial-gradient'), 'Teams graphical promo background is missing');
+assert(css.includes('no decorative circles, orbs, bubbles or corner blobs'), 'Plan promo no-circle design guardrail is missing');
+assert(!css.includes('.wd-universal-profile>nav>a.wd-universal-plan-promo:before{'), 'Decorative corner circle returned to plan promo');
+assert(!/wd-universal-plan-promo-(?:pro|plus|teams)\{background:radial-gradient/.test(css), 'Decorative radial circle returned to plan promo backgrounds');
+assert(css.includes('.wd-universal-plan-promo-pro{background:linear-gradient'), 'Pro linear promo background is missing');
+assert(css.includes('.wd-universal-plan-promo-plus{background:linear-gradient'), 'Pro+ linear promo background is missing');
+assert(css.includes('.wd-universal-plan-promo-teams{background:linear-gradient'), 'Teams linear promo background is missing');
 assert(css.includes('.wd-universal-plan-promo-icon'), 'Graphical promo icon styling is missing');
 assert(css.includes('.wd-universal-plan-promo-copy>em'), 'Graphical promo supporting-copy styling is missing');
 assert(css.includes('.wd-universal-plan-promo-cta'), 'Graphical promo CTA styling is missing');
