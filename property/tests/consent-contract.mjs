@@ -7,6 +7,7 @@ const css = read('property/css/watchdog-consent.css');
 const runtime = read('property/js/supabase-runtime.js');
 const observability = read('property/js/platform-observability.js');
 const entry = read('api/watchdog-index-entry.js');
+const cleanRouteAdapter = read('api/watchdog-index-page.js');
 const footer = read('property/partials/footer.html');
 
 assert(consent.includes("watchdog_cookie_preferences_v1"), 'Consent preference storage must be versioned');
@@ -37,6 +38,10 @@ assert(!observability.includes('googletagmanager.com/gtag/js?id='), 'Platform ob
 assert(!observability.includes('clarity.ms/tag/wjeklv0exl'), 'Platform observability still directly loads Clarity');
 assert(entry.includes('installConsentFirstAnalytics'), 'Canonical Watchdog entry does not install consent-first analytics');
 assert(entry.includes('CONSENT_TAG'), 'Canonical Watchdog entry does not inject the consent runtime');
+assert(cleanRouteAdapter.includes('installConsentFirstAnalytics'), 'Clean Watchdog routes do not install consent-first analytics');
+assert(cleanRouteAdapter.includes('CONSENT_SCRIPT'), 'Clean Watchdog routes do not inject the consent runtime');
+assert(cleanRouteAdapter.includes('ensureCookiePreferenceControl'), 'Clean Watchdog routes cannot add a cookie-preferences control');
+assert(cleanRouteAdapter.includes('data-watchdog-cookie-settings'), 'Clean Watchdog route footer control is missing');
 assert(footer.includes('data-watchdog-cookie-settings'), 'Shared footer cannot reopen cookie preferences');
 
 console.log('Watchdog consent contract passed.');
