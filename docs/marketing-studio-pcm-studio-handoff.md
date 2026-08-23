@@ -1,6 +1,6 @@
 # Marketing Studio — Studio to PCM Production Handoff
 
-Status: Watchdog-side Phase C live; PCM asset mutation remains fail-closed pending the vendor contract.
+Status: Watchdog-side Phase C live; PCM asset mutation remains fail-closed pending the remaining vendor contract.
 
 ## Goal
 
@@ -91,6 +91,10 @@ The user can approve the Studio creative and prepare the handoff from this rail.
 
 Once prepared, the artwork stamp changes from Watchdog preview to frozen production candidate while still stating PCM proof is required.
 
+For a saved PCM design, the PCM editor now opens embedded inside Watchdog. The parent page listens for PCM's save `postMessage`, verifies that the message came from the exact iframe window and the origin returned in the current editor URL, verifies that the included `designID` matches the active Watchdog campaign design, then refreshes the provider design/proof automatically. Manual **Refresh from PCM** remains available if the event or provider refresh fails.
+
+PCM confirmed on 2026-08-21 that the editor message includes `designID` and `envelopeType` for Letters. PCM also confirmed that the editor authentication token is refreshed when the editor loads and remains valid for 24 hours. Watchdog requests a fresh editor session whenever the user opens the embedded editor and does not persist the editor URL or token.
+
 ## Review UX
 
 Studio campaigns now receive a Review card showing:
@@ -103,18 +107,25 @@ Studio campaigns now receive a Review card showing:
 
 Review does not convert a Watchdog image into a provider proof. Existing launch gates continue to require real provider design/proof state.
 
-## PCM contract still required
+## PCM contract status
 
-The current PCM adapter exposes catalog/detail/editor-session behavior. Watchdog does not have a verified vendor contract for programmatically uploading the generated asset into a design or mapping it to a specific image slot.
+The current PCM adapter exposes catalog/detail/editor-session behavior.
 
-Do not guess:
+Vendor-confirmed and implemented:
+
+- embedded editor uses browser `postMessage` on save
+- save payload includes `designID`
+- `envelopeType` is included for Letters
+- editor authentication refreshes when the editor loads
+- editor token lifetime is 24 hours
+- Watchdog can treat a verified save message as the trigger to refresh the provider proof
+
+Still vendor-blocked and intentionally fail-closed:
 
 - asset-upload endpoint
-- request schema
-- image-slot identifiers
-- embedded editor postMessage contract
-- save/finish/close events
-- editor token lifetime
-- proof-refresh trigger after an asset change
+- generated-asset request schema
+- image-slot identifiers / mapping contract
+- webhook signature header, algorithm and encoding contract
+- production cancellation endpoint, HTTP method and request schema
 
-When PCM supplies those details, the next connector can consume the frozen handoff package and move its state through `mapped_to_pcm` → `proof_ready` → `proof_approved` without changing the customer-facing Studio source-of-truth model.
+Watchdog must not infer any of the remaining contracts from portal behavior. Live spend remains independently disabled until the separate production vendor gates are certified.
