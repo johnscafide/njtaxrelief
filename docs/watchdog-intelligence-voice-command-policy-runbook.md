@@ -19,19 +19,21 @@ voice or typed user request
   ↓
 visible transcript / Ask Watchdog composer
   ↓
-POST /api/watchdog-intelligence-analyst
-  ↓
-server command classification
-  ├─ prohibited → block before Analyst
-  ├─ reversible, not confirmed → 409 confirmation required
-  ├─ approval-required, not prepared → 409 approval workflow required
-  ├─ approval-required + Prepare for review → rewrite as non-executing proposal
-  └─ neutral/read-only/confirmed reversible → existing governed Analyst
-        ↓
-existing JWT + plan/add-on + Analyst tool + RLS/user-scoping controls
+shared command policy
+  ├─ explicit harmless local read-only target already on screen → local UI action, no Analyst request
+  └─ everything else → POST /api/watchdog-intelligence-analyst
+                         ↓
+                     server command classification
+                       ├─ prohibited → block before Analyst
+                       ├─ reversible, not confirmed → 409 confirmation required
+                       ├─ approval-required, not prepared → 409 approval workflow required
+                       ├─ approval-required + Prepare for review → rewrite as non-executing proposal
+                       └─ neutral/read-only/confirmed reversible → existing governed Analyst
+                             ↓
+                         existing JWT + plan/add-on + Analyst tool + RLS/user-scoping controls
 ```
 
-The same-origin Analyst transport is the command-policy enforcement choke point. Browser UI classification is never authoritative.
+The same-origin Analyst transport is the authoritative command-policy enforcement choke point for any networked Analyst request. Browser classification is allowed only to perform an explicitly harmless local UI action and is never authoritative for writes, external effects, authorization, or approval.
 
 ## Command classes
 
@@ -48,7 +50,8 @@ Policy:
 
 - No confirmation is required for harmless read-only analysis/navigation.
 - Requests that require Analyst reasoning still use the existing governed Analyst.
-- A future local UI navigation action may execute immediately only when the target is explicit and harmless.
+- **Open the evidence / sources / lineage** now executes locally when evidence or sources are already present in the current written Watchdog response: Watchdog focuses that visible section and makes no Analyst request or property action.
+- If the requested evidence is not already present, the local path declines and the request falls back to the governed Analyst instead of inventing or guessing evidence.
 
 ### Reversible internal changes
 
@@ -131,6 +134,7 @@ The contextual Analyst panel must:
 - Never treat a spoken “yes” captured before the explicit gate as confirmation for a pending action.
 - Keep keyboard focus and mobile touch targets accessible.
 - Explicitly state when a result is proposal-only or when confirmation merely released the request into governed tools.
+- For a local read-only evidence action, state that no Analyst request or property action executed.
 
 ## Privacy and evidence
 
@@ -154,7 +158,7 @@ The access-boundary GitHub Actions workflow must run the command-policy contract
 Production checks:
 
 - `property/js/watchdog-intelligence-command-policy.js` serves `watchdog-command-policy-vnext-1` on `www.watchdogindex.com`.
-- `property/js/watchdog-contextual-analyst.js` serves `contextual-analyst-v4-command-gates`.
+- `property/js/watchdog-contextual-analyst.js` serves `contextual-analyst-v4-command-gates` and the local read-only evidence action.
 - `/api/watchdog-intelligence-analyst` remains POST-only and private/no-store.
 - No new runtime error group is attributable to the command-policy transport.
 
