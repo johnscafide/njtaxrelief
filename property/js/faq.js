@@ -1,46 +1,69 @@
 (function () {
   "use strict";
 
-  window.wdFaqToggle = function (el) {
-    var item = el.closest(".faq-item");
-    if (!item) return;
-    item.classList.toggle("active");
-  };
+  function normalize(value) {
+    return String(value || "").trim().toLowerCase();
+  }
+
+  function setCategoryNavigationState(cat, visible) {
+    var link = document.querySelector('[data-faq-nav][href="#' + cat.id + '"]');
+    if (!link) return;
+    link.classList.toggle("is-filtered", !visible);
+    link.setAttribute("aria-hidden", visible ? "false" : "true");
+    if (visible) link.removeAttribute("tabindex");
+    else link.setAttribute("tabindex", "-1");
+  }
 
   function initFaqSearch() {
     var input = document.getElementById("faq-search");
     var empty = document.getElementById("faq-empty");
+    var status = document.getElementById("faq-status");
     if (!input) return;
 
-    input.addEventListener("input", function () {
-      var q = input.value.trim().toLowerCase();
-      var items = document.querySelectorAll(".faq-item");
-      var cats = document.querySelectorAll(".faq-cat");
-      var anyVisible = false;
+    var items = Array.from(document.querySelectorAll(".faq-item"));
+    var cats = Array.from(document.querySelectorAll(".faq-cat"));
+    var total = items.length;
+
+    function applyFilter() {
+      var q = normalize(input.value);
+      var visibleTotal = 0;
 
       items.forEach(function (item) {
-        var text = item.textContent.toLowerCase();
-        var match = !q || text.indexOf(q) !== -1;
-        item.style.display = match ? "" : "none";
-        if (match && q) {
-          item.classList.add("active");
-        } else if (!q) {
-          item.classList.remove("active");
+        var match = !q || normalize(item.textContent).indexOf(q) !== -1;
+        item.hidden = !match;
+        if (match) {
+          visibleTotal += 1;
+          if (q) item.open = true;
+        } else {
+          item.open = false;
         }
-        if (match) anyVisible = true;
+        if (!q) item.open = false;
       });
 
       cats.forEach(function (cat) {
-        var visibleCount = 0;
-        cat.querySelectorAll(".faq-item").forEach(function (item) {
-          if (item.style.display !== "none") visibleCount++;
+        var visible = Array.from(cat.querySelectorAll(".faq-item")).some(function (item) {
+          return !item.hidden;
         });
-        cat.style.display = visibleCount ? "" : "none";
+        cat.hidden = !visible;
+        setCategoryNavigationState(cat, visible);
       });
 
-      if (empty) empty.classList.toggle("show", q.length > 0 && !anyVisible);
-    });
+      if (empty) empty.classList.toggle("show", q.length > 0 && visibleTotal === 0);
+      if (status) {
+        status.textContent = q
+          ? visibleTotal + " of " + total + " FAQ questions match your search."
+          : total + " FAQ questions available.";
+      }
+    }
+
+    input.addEventListener("input", applyFilter);
+    input.addEventListener("search", applyFilter);
+    applyFilter();
   }
 
-  document.addEventListener("DOMContentLoaded", initFaqSearch);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initFaqSearch, { once: true });
+  } else {
+    initFaqSearch();
+  }
 })();
