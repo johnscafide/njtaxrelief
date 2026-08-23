@@ -211,6 +211,124 @@
 .wd-universal-profile>nav span{display:grid!important;gap:3px!important;min-width:0!important}
 .wd-universal-profile>nav b{font-size:12px!important;color:#31435c!important}
 .wd-universal-profile>nav small{font-size:9px!important;color:#8995a6!important;line-height:1.35!important}
+
+/* ---------- plan-aware graphical profile promo ----------
+   This must live in the external canonical stylesheet. Inline style injection is
+   not a reliable visual boundary on every Watchdog surface. */
+.wd-universal-profile>nav>a.wd-universal-plan-promo{
+  position:relative!important;
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr) auto!important;
+  grid-template-rows:auto auto!important;
+  column-gap:11px!important;
+  row-gap:3px!important;
+  align-items:center!important;
+  min-height:88px!important;
+  margin:4px 3px 10px!important;
+  padding:13px 14px!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:16px!important;
+  overflow:hidden!important;
+  color:#fff!important;
+  box-shadow:0 13px 32px rgba(16,41,75,.20)!important;
+  text-decoration:none!important;
+  isolation:isolate!important;
+  transition:transform .16s ease,filter .16s ease,box-shadow .16s ease!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo:before{
+  content:"";
+  position:absolute;
+  width:148px;
+  height:148px;
+  right:-56px;
+  top:-74px;
+  border-radius:50%;
+  background:rgba(255,255,255,.12);
+  box-shadow:0 0 0 24px rgba(255,255,255,.035);
+  z-index:-1;
+  pointer-events:none;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo:after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height:2px;
+  background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.58),rgba(255,255,255,.08));
+  z-index:-1;
+  pointer-events:none;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo:hover{
+  transform:translateY(-1px)!important;
+  filter:saturate(1.08)!important;
+  box-shadow:0 16px 36px rgba(16,41,75,.24)!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo-pro{background:radial-gradient(circle at 82% 22%,rgba(115,173,255,.42),transparent 34%),linear-gradient(135deg,#142c55 0%,#2f6df6 100%)!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo-plus{background:radial-gradient(circle at 84% 20%,rgba(91,222,204,.30),transparent 34%),linear-gradient(135deg,#10294b 0%,#087f7a 100%)!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo-teams{background:radial-gradient(circle at 84% 20%,rgba(157,132,255,.34),transparent 34%),linear-gradient(135deg,#33205e 0%,#5e4bd6 100%)!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-icon{
+  grid-column:1!important;
+  grid-row:1/3!important;
+  width:44px!important;
+  height:44px!important;
+  border-radius:13px!important;
+  background:rgba(255,255,255,.16)!important;
+  border:1px solid rgba(255,255,255,.18)!important;
+  color:#fff!important;
+  display:grid!important;
+  place-items:center!important;
+  align-self:center!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.13)!important;
+  font-size:16px!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-icon>i{color:#fff!important;font-size:16px!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy{
+  grid-column:2!important;
+  grid-row:1/3!important;
+  display:grid!important;
+  gap:2px!important;
+  min-width:0!important;
+  align-content:center!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy>small{
+  color:rgba(255,255,255,.70)!important;
+  font:800 7px/1.15 var(--wdum-font)!important;
+  letter-spacing:.13em!important;
+  text-transform:uppercase!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy>b{
+  color:#fff!important;
+  font:800 14px/1.18 var(--wdum-font)!important;
+  letter-spacing:-.02em!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy>em{
+  display:block!important;
+  color:rgba(255,255,255,.79)!important;
+  font:600 9px/1.32 var(--wdum-font)!important;
+  font-style:normal!important;
+  max-width:190px!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-cta{
+  grid-column:3!important;
+  grid-row:1/3!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  align-self:center!important;
+  gap:6px!important;
+  min-width:76px!important;
+  min-height:31px!important;
+  padding:0 9px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.14)!important;
+  border:1px solid rgba(255,255,255,.14)!important;
+  color:#fff!important;
+  font:800 8px/1 var(--wdum-font)!important;
+  white-space:nowrap!important;
+}
+.wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-cta>i{color:#fff!important;font-size:8px!important}
+
 .wd-universal-profile>nav>.wd-universal-developer-label{display:flex!important;align-items:center!important;gap:7px!important;margin:7px 9px 2px!important;padding:12px 3px 5px!important;border-top:1px solid var(--wdum-soft)!important;color:#087f7a!important;font:800 9px/1 var(--wdum-font)!important;letter-spacing:.1em!important;text-transform:uppercase!important}
 .wd-universal-profile>nav>.wd-universal-developer-label>i{font-size:10px!important}
 .wd-universal-profile>nav>.wd-universal-developer-label>span{display:block!important;color:#087f7a!important}
@@ -244,9 +362,21 @@
   .wd-public-sheet.right.wd-universal-public-profile{right:10px!important;top:70px!important;width:calc(100vw - 20px)!important;max-height:calc(100vh - 80px)!important}
   .wd-universal-profile>nav a,.wd-universal-profile>nav button{min-height:58px!important}
   .wd-universal-profile>nav b{font-size:13px!important}.wd-universal-profile>nav small{font-size:10px!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo{grid-template-columns:42px minmax(0,1fr) auto!important;min-height:90px!important;padding:12px!important;margin:4px 2px 9px!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-icon{width:42px!important;height:42px!important;border-radius:12px!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy>b{font-size:14px!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy>em{font-size:9px!important;max-width:175px!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-cta{min-width:72px!important;padding:0 8px!important}
   #wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{max-height:calc(100vh - 80px)!important}
   .wd-universal-invite{padding:23px 18px}.wd-universal-invite>div,.wd-universal-invite footer{grid-template-columns:1fr}
 }
+@media(max-width:390px){
+  .wd-universal-profile>nav>a.wd-universal-plan-promo{grid-template-columns:40px minmax(0,1fr)!important;grid-template-rows:auto auto!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-icon{width:40px!important;height:40px!important;grid-row:1/3!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-copy{grid-column:2!important;grid-row:1!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo>.wd-universal-plan-promo-cta{grid-column:2!important;grid-row:2!important;justify-self:start!important;min-height:27px!important;margin-top:4px!important}
+}
 @media(prefers-reduced-motion:reduce){
-  .wd-public-sheet.wd-universal-public-nav,.wd4-nav-panel,.hm27-nav-panel,.wd-public-sheet.right.wd-universal-public-profile,.wd-universal-invite,.wd-universal-invite-shade{transition:none!important}
+  .wd-public-sheet.wd-universal-public-nav,.wd4-nav-panel,.hm27-nav-panel,.wd-public-sheet.right.wd-universal-public-profile,.wd-universal-invite,.wd-universal-invite-shade,.wd-universal-profile>nav>a.wd-universal-plan-promo{transition:none!important}
+  .wd-universal-profile>nav>a.wd-universal-plan-promo:hover{transform:none!important}
 }
