@@ -44,6 +44,8 @@ jobs:
         run: node property/tests/score-observations-schema-contract.mjs
       - name: Verify ROBUST Trajectory evidence lineage
         run: node property/tests/robust-trajectory-evidence-contract.mjs
+      - name: Verify SR-1A compact subject-match safety
+        run: node property/tests/sr1a-compact-subject-match-contract.mjs
       - name: Verify Property Home score history contract
         run: node property/tests/property-score-history-contract.mjs
       - name: Verify page-native Intelligence shell contracts
