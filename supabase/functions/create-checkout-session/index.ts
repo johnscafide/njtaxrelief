@@ -25,6 +25,7 @@ const PRICE_CATALOG = {
     yearly: { lookup_key: 'watchdog_pro_plus_yearly', amount: 399000 }
   }
 } as const;
+const MOVE_PRICE = { lookup_key: 'watchdog_move_90_day', amount: 2900 } as const;
 type Tier = keyof typeof CAPACITY;
 type Cadence = 'monthly' | 'yearly';
 type CheckoutMode = 'closed' | 'controlled' | 'open';
@@ -93,9 +94,6 @@ function validMode(value: unknown): CheckoutMode | null {
 }
 
 async function releaseControl(admin: any) {
-  // Environment variables remain an emergency/operator override. Normal launch
-  // control lives in the server-owned release gate so it is auditable and can be
-  // changed without rotating a secret or redeploying an Edge Function.
   const envMode = validMode(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE'));
   const envUsers = String(Deno.env.get('BILLING_CONTROLLED_USER_IDS') || Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') || '')
     .split(',').map(v => v.trim()).filter(Boolean);
@@ -113,6 +111,29 @@ async function releaseControl(admin: any) {
     ? (evidence as any).controlled_user_ids.map((v: unknown) => String(v || '').trim()).filter(Boolean)
     : [];
 
+  return {
+    mode: envMode || gateMode || 'closed' as CheckoutMode,
+    controlledUsers: new Set(envUsers.length ? envUsers : gateUsers),
+    source: envMode ? 'environment_override' : gateMode ? 'release_gate' : 'fail_closed_default',
+    liveGatePassed: data?.status === 'passed'
+  };
+}
+
+async function moveReleaseControl(admin: any) {
+  const envMode = validMode(Deno.env.get('MOVE_CHECKOUT_MODE'));
+  const envUsers = String(Deno.env.get('MOVE_CONTROLLED_USER_IDS') || '')
+    .split(',').map(v => v.trim()).filter(Boolean);
+  const { data, error } = await admin
+    .from('platform_release_gates')
+    .select('status,evidence')
+    .eq('gate_key', 'watchdog_move_paid_checkout')
+    .maybeSingle();
+  if (error) throw error;
+  const evidence = data?.evidence && typeof data.evidence === 'object' ? data.evidence : {};
+  const gateMode = validMode((evidence as any).checkout_mode);
+  const gateUsers = Array.isArray((evidence as any).controlled_user_ids)
+    ? (evidence as any).controlled_user_ids.map((v: unknown) => String(v || '').trim()).filter(Boolean)
+    : [];
   return {
     mode: envMode || gateMode || 'closed' as CheckoutMode,
     controlledUsers: new Set(envUsers.length ? envUsers : gateUsers),
@@ -148,20 +169,34 @@ async function resolvePriceId(stripe: Stripe, tier: Tier, cadence: Cadence) {
   if (override) return override;
 
   const expected = PRICE_CATALOG[tier][cadence];
-  const result = await stripe.prices.list({
-    lookup_keys: [expected.lookup_key],
-    active: true,
-    limit: 10
-  });
+  const result = await stripe.prices.list({ lookup_keys: [expected.lookup_key], active: true, limit: 10 });
   const matches = result.data.filter(price =>
     price.currency.toLowerCase() === 'usd' &&
     price.unit_amount === expected.amount &&
     price.type === 'recurring' &&
     price.recurring?.interval === (cadence === 'monthly' ? 'month' : 'year')
   );
-  if (matches.length !== 1) {
-    throw new Error(`Expected exactly one active Stripe Price for ${expected.lookup_key}; found ${matches.length}.`);
+  if (matches.length !== 1) throw new Error(`Expected exactly one active Stripe Price for ${expected.lookup_key}; found ${matches.length}.`);
+  return matches[0].id;
+}
+
+async function resolveMovePriceId(stripe: Stripe) {
+  const override = String(Deno.env.get('STRIPE_PRICE_WATCHDOG_MOVE') || '').trim();
+  if (override) {
+    const price = await stripe.prices.retrieve(override);
+    if (!price.active || price.currency.toLowerCase() !== 'usd' || price.unit_amount !== MOVE_PRICE.amount || price.type !== 'one_time' || price.recurring) {
+      throw new Error('Configured Watchdog Move Stripe Price does not match the governed one-time $29 price.');
+    }
+    return price.id;
   }
+  const result = await stripe.prices.list({ lookup_keys: [MOVE_PRICE.lookup_key], active: true, limit: 10 });
+  const matches = result.data.filter(price =>
+    price.currency.toLowerCase() === 'usd' &&
+    price.unit_amount === MOVE_PRICE.amount &&
+    price.type === 'one_time' &&
+    !price.recurring
+  );
+  if (matches.length !== 1) throw new Error(`Expected exactly one active Stripe Price for ${MOVE_PRICE.lookup_key}; found ${matches.length}.`);
   return matches[0].id;
 }
 
@@ -180,44 +215,108 @@ Deno.serve(async (req) => {
   const { data: { user }, error: userError } = await userClient.auth.getUser();
   if (userError || !user) return json(req, { error: 'Sign in required', code: 'SIGN_IN_REQUIRED' }, 401);
 
+  const body = await req.json().catch(() => ({}));
+  const requestedProduct = String(body?.product || '').trim().toLowerCase();
+  const rawTier = String(body?.tier || body?.plan || '').toLowerCase();
+  const isMove = requestedProduct === 'watchdog_move' || rawTier === 'move' || rawTier === 'watchdog_move';
+
   let control;
   try {
-    control = await releaseControl(admin);
+    control = isMove ? await moveReleaseControl(admin) : await releaseControl(admin);
   } catch (error) {
-    console.error('BILLING_RELEASE_CONTROL_ERROR', error);
-    return json(req, { error: 'Paid enrollment is not available right now.', code: 'BILLING_RELEASE_CONTROL_ERROR' }, 503);
+    console.error(isMove ? 'MOVE_RELEASE_CONTROL_ERROR' : 'BILLING_RELEASE_CONTROL_ERROR', error);
+    return json(req, { error: isMove ? 'Watchdog Move enrollment is not available right now.' : 'Paid enrollment is not available right now.', code: isMove ? 'MOVE_RELEASE_CONTROL_ERROR' : 'BILLING_RELEASE_CONTROL_ERROR' }, 503);
   }
-  if (control.mode === 'closed') return json(req, { error: 'Paid enrollment is not open yet.', code: 'BILLING_ENROLLMENT_CLOSED' }, 503);
+  if (control.mode === 'closed') return json(req, { error: isMove ? 'Watchdog Move paid enrollment is not open yet.' : 'Paid enrollment is not open yet.', code: isMove ? 'MOVE_ENROLLMENT_CLOSED' : 'BILLING_ENROLLMENT_CLOSED' }, 503);
   if (control.mode === 'controlled' && !control.controlledUsers.has(user.id)) {
-    return json(req, { error: 'Paid enrollment is currently limited to controlled launch accounts.', code: 'BILLING_CONTROLLED_ONLY' }, 403);
+    return json(req, { error: isMove ? 'Watchdog Move enrollment is currently limited to controlled launch accounts.' : 'Paid enrollment is currently limited to controlled launch accounts.', code: isMove ? 'MOVE_CONTROLLED_ONLY' : 'BILLING_CONTROLLED_ONLY' }, 403);
   }
-  // Public mode is only valid after the controlled lifecycle release gate passes.
   if (control.mode === 'open' && !control.liveGatePassed) {
-    return json(req, { error: 'Paid enrollment is awaiting final Live billing acceptance.', code: 'BILLING_GATE_NOT_PASSED' }, 503);
+    return json(req, { error: isMove ? 'Watchdog Move is awaiting final paid lifecycle acceptance.' : 'Paid enrollment is awaiting final Live billing acceptance.', code: isMove ? 'MOVE_GATE_NOT_PASSED' : 'BILLING_GATE_NOT_PASSED' }, 503);
   }
 
   const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
   if (!stripeKey) return json(req, { error: 'Stripe Checkout is not configured yet.', code: 'STRIPE_NOT_CONFIGURED' }, 503);
   const liveMode = stripeKey.startsWith('sk_live_');
   const testMode = stripeKey.startsWith('sk_test_');
-  if (!liveMode && !testMode) {
-    return json(req, { error: 'Stripe Checkout key mode is not recognized.', code: 'STRIPE_KEY_MODE_INVALID' }, 503);
-  }
+  if (!liveMode && !testMode) return json(req, { error: 'Stripe Checkout key mode is not recognized.', code: 'STRIPE_KEY_MODE_INVALID' }, 503);
 
   const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
-  if (liveMode && isTest) {
-    return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+  if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+
+  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
+  const site = requestSite(req);
+
+  if (isMove) {
+    let priceId: string;
+    try {
+      priceId = await resolveMovePriceId(stripe);
+    } catch (error) {
+      console.error('STRIPE_MOVE_PRICE_RESOLUTION_ERROR', error);
+      return json(req, { error: 'The Watchdog Move price could not be resolved safely in this environment.', code: 'MOVE_PRICE_NOT_CONFIGURED' }, 503);
+    }
+
+    const metadata = {
+      supabase_user_id: user.id,
+      watchdog_user_id: user.id,
+      product: 'watchdog_move',
+      duration_days: '90',
+      auto_renew: 'false'
+    };
+
+    try {
+      const session = await stripe.checkout.sessions.create({
+        mode: 'payment',
+        line_items: [{ price: priceId, quantity: 1 }],
+        ...(user.email ? { customer_email: user.email } : {}),
+        client_reference_id: user.id,
+        metadata,
+        payment_intent_data: { metadata },
+        success_url: `${site}/move/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${site}/move/?checkout=cancelled`,
+        billing_address_collection: 'auto',
+        integration_identifier: 'watchdog_web_kqrmxpta'
+      });
+
+      await admin.from('access_audit_log').insert({
+        user_id: user.id,
+        event_type: 'billing.move_checkout_created',
+        resource_type: 'checkout_session',
+        resource_id: session.id,
+        required_plan: 'standard',
+        allowed: true,
+        metadata: {
+          provider: 'stripe',
+          product: 'watchdog_move',
+          duration_days: 90,
+          price_id: priceId,
+          checkout_mode: control.mode,
+          checkout_control_source: control.source,
+          stripe_mode: liveMode ? 'live' : 'test',
+          return_site: site
+        }
+      });
+
+      return json(req, {
+        provider: 'stripe',
+        product: 'watchdog_move',
+        destination: 'checkout',
+        url: session.url,
+        session_id: session.id,
+        duration_days: 90,
+        auto_renew: false,
+        stripe_mode: liveMode ? 'live' : 'test'
+      });
+    } catch (error) {
+      console.error('STRIPE_MOVE_CHECKOUT_ERROR', error);
+      return json(req, { error: error instanceof Error ? error.message : 'Could not create Watchdog Move Checkout.', code: 'STRIPE_MOVE_CHECKOUT_ERROR' }, 502);
+    }
   }
 
-  const body = await req.json().catch(() => ({}));
-  const rawTier = String(body?.tier || body?.plan || '').toLowerCase();
   if (rawTier === 'teams') return json(req, { error: 'Teams enrollment is not open yet.', code: 'TEAMS_ENROLLMENT_CLOSED' }, 409);
-  if (!['agent', 'pro', 'pro_plus', 'pro+'].includes(rawTier)) {
-    return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
-  }
+  if (!['agent', 'pro', 'pro_plus', 'pro+'].includes(rawTier)) return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
-  const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
 
   let priceId: string;
   try {
@@ -244,11 +343,7 @@ Deno.serve(async (req) => {
 
   if (entitlement?.provider === 'stripe' && entitlement?.provider_customer_id && entitlement?.provider_subscription_id && hasLiveLikeSubscription) {
     try {
-      const site = requestSite(req);
-      const portal = await stripe.billingPortal.sessions.create({
-        customer: entitlement.provider_customer_id,
-        return_url: `${site}${accountPath(site)}`
-      });
+      const portal = await stripe.billingPortal.sessions.create({ customer: entitlement.provider_customer_id, return_url: `${site}${accountPath(site)}` });
       await admin.from('access_audit_log').insert({
         user_id: user.id,
         event_type: 'billing.existing_subscription_redirected_to_portal',
@@ -265,7 +360,6 @@ Deno.serve(async (req) => {
     }
   }
 
-  const site = requestSite(req);
   const account = accountPath(site);
   const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
   const metadata = {
@@ -300,25 +394,15 @@ Deno.serve(async (req) => {
       required_plan: tier,
       allowed: true,
       metadata: {
-        provider: 'stripe',
-        billing_tier: tier,
-        cadence,
-        price_id: priceId,
-        checkout_mode: control.mode,
-        checkout_control_source: control.source,
-        stripe_mode: liveMode ? 'live' : 'test',
-        return_site: site
+        provider: 'stripe', billing_tier: tier, cadence, price_id: priceId,
+        checkout_mode: control.mode, checkout_control_source: control.source,
+        stripe_mode: liveMode ? 'live' : 'test', return_site: site
       }
     });
 
     return json(req, {
-      provider: 'stripe',
-      destination: 'checkout',
-      url: session.url,
-      session_id: session.id,
-      tier,
-      cadence,
-      stripe_mode: liveMode ? 'live' : 'test'
+      provider: 'stripe', destination: 'checkout', url: session.url,
+      session_id: session.id, tier, cadence, stripe_mode: liveMode ? 'live' : 'test'
     });
   } catch (error) {
     console.error('STRIPE_CHECKOUT_ERROR', error);
