@@ -239,7 +239,9 @@
     if (q('voice-stop')) q('voice-stop').addEventListener('click', stopRecording);
     if (q('voice-reset')) q('voice-reset').addEventListener('click', function () { resetVoice(true); });
     if (q('voice-send')) q('voice-send').addEventListener('click', sendVoice);
-    switchMode('message');
+    var initialMode = '';
+    try { initialMode = new URLSearchParams(location.search).get('mode') || ''; } catch (_error) {}
+    switchMode(initialMode === 'voice' ? 'voice' : 'message');
   });
 
   window.addEventListener('pagehide', function () { stopStream(); });
