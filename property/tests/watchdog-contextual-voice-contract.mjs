@@ -7,6 +7,7 @@ const todayPage = read('property/intelligence/daily/index.html');
 const todayVoice = read('property/js/watchdog-today-voice.js');
 const contextual = read('property/js/watchdog-contextual-analyst.js');
 const voiceBrowser = read('property/js/watchdog-intelligence-voice-browser.js');
+const analystProxy = read('api/watchdog-intelligence-analyst.js');
 
 function must(condition, message) {
   if (!condition) throw new Error(message);
@@ -37,7 +38,8 @@ must(todayVoice.includes('today_model_key'), 'Today item Voice must preserve mod
 must(todayVoice.includes('data-today-voice-item'), 'Today rows must receive contextual Ask controls.');
 must(!todayVoice.includes('getUserMedia'), 'Today bridge must not implement a second microphone stack.');
 
-must(contextual.includes("client.functions.invoke('intelligence-analyst'"), 'Contextual Voice must route through the existing governed Analyst Edge Function.');
+must(contextual.includes("fetch('/api/watchdog-intelligence-analyst'"), 'Contextual Voice must use the same-origin authenticated Analyst transport.');
+must(contextual.includes('client.auth.getSession()'), 'Contextual Voice must forward the signed-in user JWT to the Analyst transport.');
 must(contextual.includes('session_id:state.sessionId'), 'Contextual follow-up must preserve Analyst session lineage.');
 must(contextual.includes("interaction_surface:'contextual_voice'"), 'Contextual Analyst must identify the interaction surface.');
 must(contextual.includes("panel.id='dwa-panel'"), 'Contextual Analyst must reuse the existing Voice panel contract.');
@@ -56,7 +58,13 @@ must(contextual.includes('Read-only evidence review · No property action was ta
 must(contextual.includes('Review or edit it before submitting.'), 'Evidence review must preserve human control before execution.');
 must(contextual.includes('evidenceInput.value=EVIDENCE_REVIEW_PROMPT'), 'Review evidence must populate the transcript field for user review.');
 must(!contextual.includes('ask(EVIDENCE_REVIEW_PROMPT'), 'Review evidence must never auto-submit the governed follow-up.');
-must(contextual.includes("contract:'contextual-analyst-v2-evidence-review'"), 'Contextual Voice must version the evidence-review interaction contract.');
+must(contextual.includes("contract:'contextual-analyst-v3-evidence-review-proxy'"), 'Contextual Voice must version the evidence-review interaction contract.');
+
+must(analystProxy.includes('/functions/v1/intelligence-analyst'), 'The same-origin transport must forward to the existing governed intelligence-analyst Edge Function.');
+must(analystProxy.includes('Authorization: authorization'), 'The Analyst transport must preserve the user Authorization header.');
+must(analystProxy.includes('apikey: PUBLISHABLE_KEY'), 'The Analyst transport must use only the publishable Supabase key.');
+must(!analystProxy.includes('SERVICE_ROLE'), 'The Analyst transport must not contain a service-role path.');
+must(analystProxy.includes("if (req.method !== 'POST')"), 'The Analyst transport must accept POST only.');
 
 must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Existing browser Voice must remain the speech-recognition implementation.');
 must(voiceBrowser.includes('speechSynthesis'), 'Existing browser Voice must remain the narration implementation.');
