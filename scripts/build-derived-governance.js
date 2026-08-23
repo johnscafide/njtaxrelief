@@ -10,7 +10,7 @@ function read(p){return JSON.parse(fs.readFileSync(p,'utf8'))}
 function countBy(arr,key){const out={};for(const x of arr){const vals=Array.isArray(x[key])?x[key]:[x[key]||'unknown'];for(const v of vals)out[v]=(out[v]||0)+1}return out}
 function label(id){return id.split('.').slice(1).join(' ').replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase())}
 function main(){
- const registry=read(REG),formulaDoc=read(FORM),specs=formulaDoc.markers||{},statusDoc=read(STATUS),overlayDoc=fs.existsSync(OVERLAY)?read(OVERLAY):{statuses:{}},dbStatus={...(statusDoc.statuses||{}),...(overlayDoc.statuses||{})};
+ const registry=read(REG),formulaDoc=read(FORM),specs=formulaDoc.markers||{},statusDoc=read(STATUS),overlayDoc=fs.existsSync(OVERLAY)?read(OVERLAY):{statuses:{},providers:{}},dbStatus={...(statusDoc.statuses||{}),...(overlayDoc.statuses||{})},providerMeta=overlayDoc.providers||{};
  const ids=new Set(registry.markers.map(m=>m.id));
  // DB provider coverage is the production authority. If a formula specification is
  // governed live/partial in the committed DB snapshot but is missing from the static
@@ -26,6 +26,7 @@ function main(){
    const deps=Array.isArray(m.dependencies)?m.dependencies.filter(Boolean):Array.isArray(spec.dependencies)?spec.dependencies.filter(Boolean):[];
    const formula=String(m.formula||spec.formula||'').trim()||null;
    const authoritative=dbStatus[m.id]||null;
+   const provider=providerMeta[m.id]&&typeof providerMeta[m.id]==='object'?providerMeta[m.id]:{};
    let governance_status,reason,provider_status_override=null;
    if(authoritative==='live'){
      governance_status='live';provider_status_override='live';reason='Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.';
@@ -38,7 +39,7 @@ function main(){
    } else{
      governance_status='retired';reason='Retired in Phase 5: no executable definition, formula specification, dependency contract, or production-governed provider state.';retired.add(m.id);
    }
-   triage.push({marker_id:m.id,label:m.label||m.id,source_id:m.source_id||null,tier:m.tier||null,professions:m.professions||[],governance_status,provider_status_override,formula,dependencies:deps,provider_key:authoritative==='live'?'watchdog-derived':TRUSTED_OBSERVATION.has(m.id)?'trusted_observation':null,provider_kind:authoritative==='live'?'derived_governed':TRUSTED_OBSERVATION.has(m.id)?'trusted_observation':null,bulk_capable:authoritative==='live',reason});
+   triage.push({marker_id:m.id,label:m.label||m.id,source_id:m.source_id||null,tier:m.tier||null,professions:m.professions||[],governance_status,provider_status_override,formula,dependencies:deps,provider_key:authoritative==='live'?(provider.provider_key||'watchdog-derived'):TRUSTED_OBSERVATION.has(m.id)?'trusted_observation':null,provider_kind:authoritative==='live'?(provider.provider_kind||'derived_governed'):TRUSTED_OBSERVATION.has(m.id)?'trusted_observation':null,calculation_key:authoritative==='live'?(provider.calculation_key||null):null,provider_source:authoritative==='live'?(provider.source||null):null,bulk_capable:authoritative==='live'?(typeof provider.bulk_capable==='boolean'?provider.bulk_capable:true):false,reason});
  }
  const activeMarkers=registry.markers.filter(m=>!retired.has(m.id)),tmap=new Map(triage.map(x=>[x.marker_id,x]));
  for(const m of activeMarkers){
