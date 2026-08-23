@@ -4,7 +4,6 @@ import path from 'node:path';
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const LEGACY_PROPERTY_ORIGIN = 'https://njpropertytaxrelief.com/property/';
 const WATCHDOG_PROPERTY_ORIGIN = 'https://www.watchdogindex.com/property/';
-const FOOTER_PATH = '/property/partials/footer.html';
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -12,41 +11,6 @@ function requestHost(req) {
     .trim()
     .toLowerCase()
     .replace(/:\d+$/, '');
-}
-
-function deploymentOrigins() {
-  const candidates = [
-    process.env.VERCEL_PROJECT_PRODUCTION_URL,
-    'njtaxrelief.vercel.app',
-    process.env.VERCEL_URL
-  ];
-  const seen = new Set();
-  const origins = [];
-  for (const raw of candidates) {
-    if (!raw) continue;
-    const host = String(raw).trim().replace(/^https?:\/\//i, '').replace(/\/$/, '');
-    if (!host || seen.has(host)) continue;
-    seen.add(host);
-    origins.push(`https://${host}`);
-  }
-  return origins;
-}
-
-async function fetchSharedFooter() {
-  for (const origin of deploymentOrigins()) {
-    try {
-      const response = await fetch(`${origin}${FOOTER_PATH}`, {
-        method: 'GET',
-        redirect: 'follow',
-        headers: { 'User-Agent': 'WatchdogSharedFooter/1.0', Accept: 'text/html,*/*;q=0.2' },
-        signal: AbortSignal.timeout(4000)
-      });
-      if (response.ok) return await response.text();
-    } catch (error) {
-      console.warn('WATCHDOG_SHARED_FOOTER_FETCH_FAILED', origin, String(error?.message || error));
-    }
-  }
-  return '';
 }
 
 function useSharedFooter(source, footer) {
@@ -89,16 +53,17 @@ export default async function handler(req, res) {
 
   try {
     const sourcePath = path.join(process.cwd(), 'property', 'index.html');
+    const footerPath = path.join(process.cwd(), 'property', 'partials', 'footer.html');
     const [source, sharedFooter] = await Promise.all([
       fs.readFile(sourcePath, 'utf8'),
-      fetchSharedFooter()
+      fs.readFile(footerPath, 'utf8')
     ]);
     const html = canonicalizeWatchdogHtml(useSharedFooter(source, sharedFooter));
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=3600');
-    res.setHeader('Link', '<https://www.watchdogindex.com/property/>; rel="canonical"');
+    res.setHeader('Link', '<https://www.watchdogindex.com/>; rel="canonical"');
     res.setHeader('Vary', 'Host');
 
     if (req.method === 'HEAD') return res.end();
