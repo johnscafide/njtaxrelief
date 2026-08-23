@@ -1,5 +1,6 @@
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
+const CONSENT_SCRIPT = '<script src="/property/js/watchdog-consent.js" data-watchdog-consent-runtime="1"></script>';
 
 const NOINDEX_PATH_PREFIXES = [
   '/data-center',
@@ -180,6 +181,42 @@ function normalizeWatchdogFooterIdentity(html) {
     );
 }
 
+function installConsentFirstAnalytics(html) {
+  let output = String(html || '');
+
+  output = output.replace(
+    /<script\b([^>]*)>([\s\S]*?)<\/script>/gi,
+    (full, attrs, body) => {
+      const attributes = String(attrs || '');
+      const scriptBody = String(body || '');
+      const isGaLoader = /googletagmanager\.com\/gtag\/js\?id=G-ENP9182L0J/i.test(attributes);
+      const isGaConfig = /G-ENP9182L0J/i.test(scriptBody) && /\bgtag\s*\(/i.test(scriptBody);
+      const isClarity = /clarity\.ms\/tag/i.test(scriptBody) && /wjeklv0exl/i.test(scriptBody);
+      return isGaLoader || isGaConfig || isClarity ? '' : full;
+    }
+  );
+
+  if (!/watchdog-consent\.js/i.test(output)) {
+    if (/<meta\b[^>]*charset=["']?[^>]+>/i.test(output)) {
+      output = output.replace(/(<meta\b[^>]*charset=["']?[^>]+>)/i, `$1\n  ${CONSENT_SCRIPT}`);
+    } else {
+      output = output.replace(/<head\b([^>]*)>/i, `<head$1>\n  ${CONSENT_SCRIPT}`);
+    }
+  }
+
+  return output;
+}
+
+function ensureCookiePreferenceControl(html) {
+  const output = String(html || '');
+  if (/data-watchdog-cookie-settings/i.test(output)) return output;
+
+  return output.replace(
+    /(<div\b[^>]*class=["'][^"']*\bwdf-legal-links\b[^"']*["'][^>]*>)/i,
+    '$1\n                        <button type="button" class="wdf-legal-link" data-watchdog-cookie-settings>Cookie Preferences</button>'
+  );
+}
+
 function normalizeFaqSchemaQuestions(html) {
   const replacements = new Map([
     ['Can Watchdog connect to my CRM or newsletter provider?', 'What integrations does Watchdog currently support?'],
@@ -232,6 +269,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 
 function setCanonicalMetadata(html, canonicalUrl) {
   let output = rewriteNavigationLinks(rewriteAbsolutePropertyUrls(html));
+  output = ensureCookiePreferenceControl(installConsentFirstAnalytics(output));
 
   const canonicalTag = `<link rel="canonical" href="${canonicalUrl}">`;
   if (/<link\s+rel=["']canonical["'][^>]*>/i.test(output)) {
