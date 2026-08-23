@@ -6,6 +6,39 @@
 if(window.__WATCHDOG_HOME_2027__) return;
 window.__WATCHDOG_HOME_2027__=true;
 
+function ensureAccessibleHeading(){
+  if(document.getElementById('hm-accessible-title'))return;
+  var main=document.getElementById('hm-main');
+  if(!main)return;
+  var h=document.createElement('h1');
+  h.id='hm-accessible-title';
+  h.textContent='Property Home';
+  h.style.position='absolute';
+  h.style.width='1px';
+  h.style.height='1px';
+  h.style.padding='0';
+  h.style.margin='-1px';
+  h.style.overflow='hidden';
+  h.style.clip='rect(0,0,0,0)';
+  h.style.whiteSpace='nowrap';
+  h.style.border='0';
+  main.insertBefore(h,main.firstChild);
+}
+function mountSharedFooter(){
+  var current=document.getElementById('wd-property-footer');
+  if(!current||current.dataset.sharedFooter==='1')return;
+  fetch('/property/partials/footer.html',{credentials:'same-origin'}).then(function(r){if(!r.ok)throw new Error(String(r.status));return r.text();}).then(function(html){
+    var shell=document.createElement('div');shell.innerHTML=html;
+    var next=shell.querySelector('#wd-property-footer');
+    if(!next)throw new Error('shared footer missing');
+    next.dataset.sharedFooter='1';
+    current.replaceWith(next);
+    var year=next.querySelector('#wdf-current-year');if(year)year.textContent=new Date().getFullYear();
+  }).catch(function(){var year=current.querySelector('#wdf-current-year');if(year)year.textContent=new Date().getFullYear();});
+}
+function hydrateStaticChrome(){ensureAccessibleHeading();mountSharedFooter();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hydrateStaticChrome,{once:true});else hydrateStaticChrome();
+
 var URL='https://uvkvaxljhhngydvlrzom.supabase.co';
 var KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 if(!window.supabase) return;
@@ -100,7 +133,7 @@ function bind(){
 }
 
 function boot(){
-  paintDate();ensurePopovers();bind();
+  hydrateStaticChrome();paintDate();ensurePopovers();bind();
   db.auth.getSession().then(function(r){var s=r&&r.data&&r.data.session;if(!s||!s.user)return;user=s.user;return db.from('profiles').select('display_name,full_name,avatar_url,plan,plan_tier,account_role').eq('id',user.id).maybeSingle();}).then(function(r){if(r&&r.data)profile=r.data;paintAvatar();paintProfile();return refreshContext();}).catch(function(){paintNotifications();});
   weatherTimer=setInterval(function(){if(!document.hidden)loadWeather();},10*60*1000);
 }
