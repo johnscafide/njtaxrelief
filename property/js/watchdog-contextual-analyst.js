@@ -4,6 +4,8 @@ if(window.__watchdogContextualAnalyst)return;window.__watchdogContextualAnalyst=
 
 var state={client:null,sessionId:null,context:null,options:null,busy:false,pendingCommands:{},pendingSequence:0};
 var EVIDENCE_REVIEW_PROMPT='Why was this flagged? Show source lineage.';
+var COMMAND_POLICY_SRC='/property/js/watchdog-intelligence-command-policy.js?v=20260823';
+var commandPolicyPromise=null;
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uniq(values){var seen={};return (Array.isArray(values)?values:[]).map(function(v){return String(v||'').trim();}).filter(function(v){if(!v||seen[v])return false;seen[v]=true;return true;});}
@@ -13,6 +15,17 @@ function getClient(){
   try{state.client=window.NJPTRAccess&&window.NJPTRAccess.client&&window.NJPTRAccess.client();}catch(_error){}
   if(!state.client){try{state.client=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient&&window.NJPTRSupabaseRuntime.createClient();}catch(_error){}}
   return state.client;
+}
+function ensureCommandPolicy(){
+  if(window.WatchdogIntelligenceCommandPolicy)return Promise.resolve(window.WatchdogIntelligenceCommandPolicy);
+  if(commandPolicyPromise)return commandPolicyPromise;
+  commandPolicyPromise=new Promise(function(resolve,reject){
+    var script=document.createElement('script');script.src=COMMAND_POLICY_SRC;script.async=true;
+    script.onload=function(){window.WatchdogIntelligenceCommandPolicy?resolve(window.WatchdogIntelligenceCommandPolicy):reject(new Error('Watchdog command policy did not initialize.'));};
+    script.onerror=function(){reject(new Error('Watchdog command policy could not load.'));};
+    document.head.appendChild(script);
+  });
+  return commandPolicyPromise;
 }
 function close(){
   var panel=document.getElementById('dwa-panel'),backdrop=document.getElementById('dwa-backdrop');
@@ -76,9 +89,28 @@ function showBlockedCommand(data){
   var message=data&&data.message?String(data.message):'This command is blocked by Watchdog policy.';
   return appendMessage('assistant','<b>Watchdog</b><div class="dwa-command-gate prohibited" role="alert"><strong>Command blocked</strong><p>'+esc(message)+'</p><small>No request was sent to the governed Analyst and no action was taken.</small></div>');
 }
+async function tryLocalReadOnly(prompt,options){
+  if(options&&options.commandConfirmation)return false;
+  if(!/\bopen\b.{0,25}\b(?:evidence|sources?|lineage)\b/i.test(String(prompt||'')))return false;
+  try{
+    var policy=await ensureCommandPolicy(),decision=policy.classify(prompt);
+    if(decision.class!==policy.CLASSES.read_only||decision.action!=='focus_evidence')return false;
+    var chat=document.getElementById('dwa-chat');if(!chat)return false;
+    var messages=Array.prototype.slice.call(chat.querySelectorAll('.dwa-msg.assistant')).reverse(),target=null;
+    messages.some(function(message){target=message.querySelector('.dwa-section.evidence')||Array.prototype.find.call(message.querySelectorAll('.dwa-section'),function(section){var strong=section.querySelector('strong');return strong&&String(strong.textContent||'').trim().toLowerCase()==='sources';});return !!target;});
+    if(!target)return false;
+    if(!options.suppressUser)appendMessage('user','<p>'+esc(prompt)+'</p>');
+    target.setAttribute('tabindex','-1');target.scrollIntoView({block:'center',behavior:'smooth'});try{target.focus({preventScroll:true});}catch(_error){target.focus();}
+    appendMessage('assistant','<b>Watchdog</b><p>Evidence is open in the current written response.</p><div class="dwa-provider" data-dwa-local-read-only>Read-only navigation · No Analyst request or property action was executed.</div>');
+    var input=document.getElementById('dwa-input');if(input){input.value='';input.focus();}
+    window.dispatchEvent(new CustomEvent('watchdog:intelligence-command-local',{detail:{surface:state.context&&state.context.surface||'unknown',command_class:'read_only',action:'focus_evidence'}}));
+    return true;
+  }catch(_error){return false;}
+}
 async function ask(prompt,options){
   options=options||{};prompt=String(prompt||'').trim();
   if(!prompt||state.busy)return;
+  if(await tryLocalReadOnly(prompt,options))return;
   var client=getClient(),input=document.getElementById('dwa-input'),send=document.getElementById('dwa-send');
   if(!client){appendMessage('assistant','<b>Watchdog</b><p>Watchdog Intelligence is unavailable because the signed-in runtime could not be resolved.</p>');return;}
   state.busy=true;if(send)send.disabled=true;if(input)input.disabled=true;
