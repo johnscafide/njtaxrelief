@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260822b';
+  var VERSION = '20260823a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -35,8 +35,15 @@
     if(v === 'free') v = 'standard';
     return ['standard','agent','pro','pro_plus','teams','developer'].indexOf(v) >= 0 ? v : 'standard';
   }
+  function hasDeveloperRole(){
+    return plan(state.profile.account_role) === 'developer' ||
+      plan(state.entitlement && state.entitlement.account_role) === 'developer';
+  }
+  function isDeveloper(){
+    return !!state.user && state.ready && hasDeveloperRole();
+  }
   function actualPlan(){
-    if(plan(state.profile.account_role) === 'developer' || plan(state.entitlement && state.entitlement.account_role) === 'developer') return 'developer';
+    if(hasDeveloperRole()) return 'developer';
     return plan((state.entitlement && state.entitlement.plan_tier) || state.profile.plan_tier || state.profile.plan);
   }
   function can(required){
@@ -91,6 +98,22 @@
     out.push({key:'account',href:route('/account'),icon:'fa-user-gear',label:'Account'});
     return out;
   }
+  function developerItems(){
+    return [
+      {key:'developer',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
+      {key:'developer-recaps',href:route('/logs/recap'),icon:'fa-calendar-check',label:'Daily Recaps',detail:'Daily operating memory and handoffs'},
+      {key:'developer-analytics',href:route('/analytics'),icon:'fa-chart-line',label:'Analytics',detail:'External product and account KPIs'},
+      {key:'developer-logs',href:route('/logs'),icon:'fa-clock-rotate-left',label:'Build Logs',detail:'Build, verification and audit history'},
+      {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
+    ];
+  }
+  function developerToolsHtml(){
+    if(!isDeveloper()) return '';
+    return '<div class="wd-universal-developer-label"><i class="fas fa-code"></i><span>Developer tools</span></div>' +
+      developerItems().map(function(item){
+        return '<a class="wd-universal-developer-tool" data-wd-developer-tool="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span><b>' + item.label + '</b><small>' + item.detail + '</small></span></a>';
+      }).join('');
+  }
   function activeFor(item,page){
     if(item.key === 'robust') return page === 'robust';
     return item.key === page;
@@ -144,6 +167,7 @@
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
+        developerToolsHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
   }
   function patchProfiles(){
@@ -334,6 +358,7 @@
   window.WatchdogUniversalMenu = {
     version:VERSION,
     items:items,
+    developerItems:developerItems,
     refresh:queue,
     setUser:setUser,
     route:route,
