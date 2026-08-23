@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#10294b">
+  <title>Watchdog Onboarding Preview</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/onboarding.css">
+  <style>
+    body.wd-preview-mode{padding-top:46px}
+    .wd-preview-banner{position:fixed;z-index:1000;left:0;right:0;top:0;min-height:46px;padding:9px 16px;display:flex;align-items:center;justify-content:center;gap:10px;background:#10294b;color:#fff;font:700 12px/1.35 "Source Sans 3",sans-serif;text-align:center;box-shadow:0 4px 16px rgba(16,41,75,.14)}
+    .wd-preview-banner i{color:#d7b65c}
+    .wd-preview-banner strong{font-weight:800}
+    .wd-preview-banner span{opacity:.82;font-weight:600}
+    .wd-preview-banner button{margin-left:8px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.09);color:#fff;padding:5px 10px;font:700 11px/1 "Source Sans 3",sans-serif}
+    .wd-preview-banner button:hover{background:rgba(255,255,255,.16)}
+    .wd-preview-toast{position:fixed;z-index:1100;left:50%;top:64px;transform:translateX(-50%);width:min(620px,calc(100% - 28px));padding:12px 15px;border-radius:14px;background:#fff7e7;color:#645128;border:1px solid rgba(151,118,36,.18);box-shadow:0 14px 34px rgba(16,41,75,.14);font:700 12.5px/1.45 "Source Sans 3",sans-serif;text-align:center}
+    .wd-preview-complete{min-height:520px;padding:44px;display:grid;place-items:center;text-align:center}
+    .wd-preview-complete-inner{width:min(560px,100%)}
+    .wd-preview-complete-icon{width:62px;height:62px;margin:0 auto 18px;border-radius:20px;background:#e9f5f3;color:#087f82;display:grid;place-items:center;font-size:24px}
+    .wd-preview-complete h1{margin:0;color:#10294b;font-size:clamp(34px,6vw,52px);line-height:1;letter-spacing:-.05em}
+    .wd-preview-complete p{margin:16px auto 0;max-width:520px;color:#60717b;font:400 16px/1.6 "Source Sans 3",sans-serif}
+    .wd-preview-complete-actions{margin-top:28px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+    .wd-preview-complete-actions button,.wd-preview-complete-actions a{min-height:46px;padding:0 18px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font:800 12.5px/1 "Plus Jakarta Sans",sans-serif}
+    .wd-preview-complete-actions button{border:0;background:#10294b;color:#fff}
+    .wd-preview-complete-actions a{border:1px solid rgba(16,41,75,.12);background:#fff;color:#10294b}
+    @media(max-width:700px){body.wd-preview-mode{padding-top:58px}.wd-preview-banner{min-height:58px;padding:8px 10px;gap:6px;flex-wrap:wrap}.wd-preview-banner button{margin-left:0}.wd-preview-toast{top:72px}.wd-preview-complete{min-height:calc(100vh - 116px);padding:30px 20px}}
+  </style>
+</head>
+<body class="wd-preview-mode">
+  <div class="wd-preview-banner" role="status">
+    <i class="fas fa-flask" aria-hidden="true"></i>
+    <strong>Preview mode</strong>
+    <span>No sign-in, no data saved, no checkout and no charges.</span>
+    <button type="button" id="wd-preview-restart">Restart preview</button>
+  </div>
+
+  <div class="wd-onboarding-shell">
+    <main class="wd-onboarding-main">
+      <section class="wd-onboarding-card" aria-live="polite" aria-busy="true">
+        <div class="wd-onboarding-progress" aria-hidden="true"><span id="wd-onboarding-progress"></span></div>
+        <div id="wd-onboarding-root" class="wd-onboarding-loading">
+          <div><div class="wd-onboarding-spinner"></div><b>Preparing preview…</b></div>
+        </div>
+        <header class="wd-onboarding-brand" aria-label="Watchdog">
+          <a href="/property/" class="wd-onboarding-brand-link" aria-label="Back to Watchdog property search">
+            <span class="wd-onboarding-mark" aria-hidden="true"><i class="fas fa-dog"></i></span>
+            <span class="wd-onboarding-wordmark">Watchdog</span>
+          </a>
+        </header>
+      </section>
+    </main>
+    <footer class="wd-onboarding-footer" id="wd-onboarding-footer">Preview only. Nothing entered here is written to Watchdog.</footer>
+  </div>
+
+  <script>
+    (function(){
+      'use strict';
+      var fakeUser={id:'watchdog-preview-user',email:'preview@watchdog.example',user_metadata:{full_name:'Preview Member'}};
+      var fakeClient={
+        auth:{
+          getSession:function(){return Promise.resolve({data:{session:{user:fakeUser}},error:null});},
+          signInWithOAuth:function(){return Promise.resolve({data:null,error:new Error('Preview mode does not sign in.')});}
+        },
+        rpc:function(name){
+          if(name==='get_my_watchdog_onboarding_state')return Promise.resolve({data:{completed:false},error:null});
+          if(name==='complete_my_watchdog_onboarding_v2')return Promise.resolve({data:{completed:true},error:null});
+          return Promise.resolve({data:null,error:null});
+        },
+        functions:{
+          invoke:function(){return Promise.resolve({data:null,error:new Error('Preview only: secure Stripe Checkout would open here in the live onboarding flow.')});}
+        }
+      };
+      window.NJPTRSupabaseRuntime=Object.freeze({
+        url:'https://uvkvaxljhhngydvlrzom.supabase.co',
+        routePrefix:'/property',
+        cleanRoutes:false,
+        environment:'preview-demo',
+        createClient:function(){return fakeClient;}
+      });
+      window.WatchdogAuth=Object.freeze({providers:{},signIn:function(){return Promise.reject(new Error('Preview mode'));}});
+    })();
+  </script>
+  <script src="/property/js/onboarding.js"></script>
+  <script>
+    (function(){
+      'use strict';
+      var root=document.getElementById('wd-onboarding-root');
+      var progress=document.getElementById('wd-onboarding-progress');
+      var restart=document.getElementById('wd-preview-restart');
+
+      function clearToast(){var old=document.querySelector('.wd-preview-toast');if(old)old.remove();}
+      function toast(message){clearToast();var box=document.createElement('div');box.className='wd-preview-toast';box.textContent=message;document.body.appendChild(box);window.setTimeout(clearToast,5000);}
+      function reset(){location.reload();}
+      function completePreview(){
+        clearToast();
+        document.body.classList.remove('wd-plan-view','wd-auth-view');
+        if(progress)progress.style.width='100%';
+        root.className='wd-preview-complete';
+        root.innerHTML='<div class="wd-preview-complete-inner"><div class="wd-preview-complete-icon"><i class="fas fa-circle-check"></i></div><p class="wd-onboarding-step">PREVIEW COMPLETE</p><h1>That is the full first-run flow.</h1><p>In the live experience, choosing Free opens the member workspace. Choosing a paid plan opens secure Stripe Checkout once the Live billing release gate is approved. This preview created no account, saved no answers and made no billing request.</p><div class="wd-preview-complete-actions"><button type="button" data-preview-restart><i class="fas fa-rotate-left"></i> Run it again</button><a href="/property/"><i class="fas fa-arrow-left"></i> Back to Watchdog</a></div></div>';
+        var again=root.querySelector('[data-preview-restart]');if(again)again.addEventListener('click',reset);
+      }
+
+      document.addEventListener('click',function(event){
+        var paid=event.target.closest('[data-plan-tier]');
+        if(paid){
+          event.preventDefault();event.stopImmediatePropagation();
+          var tier=paid.getAttribute('data-plan-tier')||'paid';
+          var label=tier==='pro_plus'?'Pro+':tier.charAt(0).toUpperCase()+tier.slice(1);
+          toast('Preview only: choosing '+label+' would open secure Stripe Checkout here. No checkout was started and no charge can occur in this preview.');
+          return;
+        }
+        if(event.target.closest('[data-plan-free]')){
+          event.preventDefault();event.stopImmediatePropagation();completePreview();
+        }
+      },true);
+      if(restart)restart.addEventListener('click',reset);
+    })();
+  </script>
+</body>
+</html>
