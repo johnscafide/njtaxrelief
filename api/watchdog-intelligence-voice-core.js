@@ -1,3 +1,4 @@
+const narration = require('../property/js/watchdog-intelligence-narration.js');
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uvkvaxljhhngydvlrzom.supabase.co';
 const PUBLISHABLE_KEY = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -6,9 +7,8 @@ const VOICE_ENABLED = String(process.env.WATCHDOG_VOICE_ENABLED || 'true').toLow
 const VOICE_ADDON_FEATURE = 'watchdog_intelligence';
 const SPEECH_MODEL = 'fish-audio/s2.1-pro-free';
 const TRANSCRIPTION_MODEL = 'fish-audio/transcribe-1-free';
-const ENGINE_VERSION = 'watchdog-intelligence-voice-pilot-v1';
+const ENGINE_VERSION = 'watchdog-intelligence-voice-vnext-narration-1';
 const MAX_AUDIO_BYTES = 2500000;
-const MAX_SPEECH_CHARS = 2400;
 const DAILY_LIMITS = { voice_transcription: 40, voice_speech: 60 };
 const PLAN_RANK = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
 
@@ -155,20 +155,13 @@ function decodeAudio(base64) {
   }
   return bytes;
 }
-function spokenBrief(brief) {
-  const value = brief && typeof brief === 'object' && !Array.isArray(brief) ? brief : {};
-  const conclusion = clean(value.conclusion, 1000);
-  if (!conclusion) {
-    const error = new Error('A governed Watchdog response is required before speech playback.');
+function spokenBrief(brief, format) {
+  try {
+    return narration.formatBrief(brief, format);
+  } catch (error) {
     error.status = 400;
     throw error;
   }
-  const evidence = Array.isArray(value.evidence) ? value.evidence.map((item) => clean(item, 360)).filter(Boolean).slice(0, 4) : [];
-  const caveats = Array.isArray(value.caveats) ? value.caveats.map((item) => clean(item, 320)).filter(Boolean).slice(0, 2) : [];
-  const parts = ['Watchdog Intelligence brief.', conclusion];
-  if (evidence.length) parts.push(`Key evidence. ${evidence.join(' ')}`);
-  if (caveats.length) parts.push(`Important context. ${caveats.join(' ')}`);
-  return clean(parts.join(' '), MAX_SPEECH_CHARS);
 }
 async function transcribeAudio(audio, mediaType) {
   const started = Date.now();
@@ -221,6 +214,8 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({
         ok: true,
         engine_version: ENGINE_VERSION,
+        narration_version: narration.VERSION,
+        narration_formats: narration.FORMAT_ORDER,
         enabled: VOICE_ENABLED && Boolean(GATEWAY_TOKEN) && allowed,
         configured: Boolean(GATEWAY_TOKEN),
         rollout_enabled: VOICE_ENABLED,
@@ -267,8 +262,8 @@ module.exports = async function handler(req, res) {
 
     if (action === 'speak') {
       await enforceDailyLimit(user.id, 'voice_speech');
-      const text = spokenBrief(body.brief);
-      const { result, latencyMs } = await generateSpeech(text);
+      const rendered = spokenBrief(body.brief, clean(body.format || body?.brief?.format || 'quick', 40).toLowerCase());
+      const { result, latencyMs } = await generateSpeech(rendered.text);
       const audio = base64Payload(result?.audio);
       if (!audio) return res.status(502).json({ error: 'The voice provider returned invalid or empty audio.' });
       const outputBytes = Math.floor(audio.length * 0.75);
@@ -278,9 +273,24 @@ module.exports = async function handler(req, res) {
         eventType: 'voice_speech',
         model: SPEECH_MODEL,
         latencyMs,
-        metadata: { text_chars: text.length, output_bytes_estimate: outputBytes, raw_audio_persisted: false, source: 'rendered_governed_analyst_response', packaging },
+        metadata: {
+          narration_format: rendered.format,
+          narration_version: rendered.version,
+          text_chars: rendered.text.length,
+          output_bytes_estimate: outputBytes,
+          raw_audio_persisted: false,
+          source: rendered.source,
+          packaging,
+        },
       });
-      return res.status(200).json({ ok: true, audio_base64: audio, media_type: 'audio/mpeg', model: SPEECH_MODEL });
+      return res.status(200).json({
+        ok: true,
+        audio_base64: audio,
+        media_type: 'audio/mpeg',
+        model: SPEECH_MODEL,
+        narration_format: rendered.format,
+        narration_version: rendered.version,
+      });
     }
 
     return res.status(400).json({ error: 'Unsupported Voice Intelligence action.' });
