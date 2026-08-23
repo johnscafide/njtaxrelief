@@ -3,6 +3,7 @@
 if(window.__watchdogContextualAnalyst)return;window.__watchdogContextualAnalyst=true;
 
 var state={client:null,sessionId:null,context:null,options:null,busy:false};
+var EVIDENCE_REVIEW_PROMPT='Why was this flagged? Show source lineage.';
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uniq(values){var seen={};return (Array.isArray(values)?values:[]).map(function(v){return String(v||'').trim();}).filter(function(v){if(!v||seen[v])return false;seen[v]=true;return true;});}
@@ -33,12 +34,18 @@ function sourcesSection(items){
     return url?'<a class="dwa-source" href="'+esc(url)+'" target="_blank" rel="noopener">'+esc(label)+'</a>':'<span class="dwa-source">'+esc(label)+'</span>';
   }).join('')+'</div></div>';
 }
+function evidenceWorkflowHtml(toolName){
+  if(toolName==='run_intelligence_model')return '<div class="dwa-chips" data-dwa-evidence-workflow><button type="button" class="dwa-chip" data-contextual-evidence aria-label="Review the evidence and source lineage for this finding">Review evidence</button><small>Seeds a read-only source-lineage follow-up. Review or edit it before submitting.</small></div>';
+  if(toolName==='inspect_lineage')return '<div class="dwa-provider" data-dwa-evidence-note>Read-only evidence review · No property action was taken.</div>';
+  return'';
+}
 function responseHtml(payload){
   var response=payload&&payload.response?payload.response:payload||{};
   var provider=payload&&payload.provider?String(payload.provider):'Watchdog governed Analyst';
   var providerStatus=payload&&payload.provider_status?String(payload.provider_status):'';
+  var toolName=payload&&payload.tool&&payload.tool.name?String(payload.tool.name):'';
   var conclusion=response.conclusion||'Watchdog completed the request.';
-  return '<b>Watchdog</b><p>'+esc(conclusion)+'</p>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+'<div class="dwa-provider" data-dwa-provider-note>Governed Analyst · '+esc(provider)+(providerStatus?' · '+esc(providerStatus):'')+'</div>';
+  return '<b>Watchdog</b><p>'+esc(conclusion)+'</p>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+evidenceWorkflowHtml(toolName)+'<div class="dwa-provider" data-dwa-provider-note>Governed Analyst · '+esc(provider)+(providerStatus?' · '+esc(providerStatus):'')+'</div>';
 }
 function appendMessage(kind,html){
   var chat=document.getElementById('dwa-chat');if(!chat)return null;
@@ -89,6 +96,13 @@ function open(options){
   document.body.appendChild(backdrop);document.body.appendChild(panel);document.documentElement.classList.add('watchdog-contextual-analyst-open');
   backdrop.addEventListener('click',close);panel.querySelector('.dwa-close').addEventListener('click',close);
   panel.querySelectorAll('[data-contextual-chip]').forEach(function(button){button.addEventListener('click',function(){var input=document.getElementById('dwa-input');if(input){input.value=button.dataset.contextualChip||'';input.focus();}});});
+  panel.addEventListener('click',function(event){
+    var target=event.target&&event.target.closest?event.target.closest('[data-contextual-evidence]'):null;
+    if(!target||!panel.contains(target))return;
+    var evidenceInput=document.getElementById('dwa-input');
+    if(evidenceInput){evidenceInput.value=EVIDENCE_REVIEW_PROMPT;evidenceInput.focus();evidenceInput.dispatchEvent(new Event('input',{bubbles:true}));}
+    window.dispatchEvent(new CustomEvent('watchdog:contextual-evidence-review-seeded',{detail:{surface:surface,session_id:state.sessionId||null}}));
+  });
   var input=panel.querySelector('#dwa-input'),send=panel.querySelector('#dwa-send');
   send.addEventListener('click',function(){ask(input.value);});
   input.addEventListener('keydown',function(event){if((event.metaKey||event.ctrlKey)&&event.key==='Enter'){event.preventDefault();ask(input.value);}});
@@ -97,5 +111,5 @@ function open(options){
   window.dispatchEvent(new CustomEvent('watchdog:contextual-analyst-open',{detail:{surface:surface,pams_pins:pins.slice(0,5)}}));
   return panel;
 }
-window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,contract:'contextual-analyst-v1'};
+window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,contract:'contextual-analyst-v2-evidence-review'};
 })();
