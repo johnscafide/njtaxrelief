@@ -222,7 +222,7 @@
     html += '<div class="wd-onboarding-actions">' +
       (stepIndex > 0 ? '<button type="button" class="wd-onboarding-back" data-back>Back</button>' : '<span></span>') +
       '<button type="button" class="wd-onboarding-next" data-next ' + ((!canContinue(step) || saving) && step.kind !== 'intro' ? 'disabled' : '') + '>' +
-      (step.kind === 'finish' ? (saving ? 'Saving your setup…' : 'See membership options') : step.kind === 'intro' ? 'Start' : 'Continue') + '</button></div>';
+      (step.kind === 'finish' ? (saving ? 'Saving your setup…' : 'Continue with Watchdog') : step.kind === 'intro' ? 'Start' : 'Continue') + '</button></div>';
 
     root.innerHTML = html;
     wire(step);
