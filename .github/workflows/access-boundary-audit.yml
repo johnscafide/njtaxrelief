@@ -42,6 +42,8 @@ jobs:
         run: node property/tests/product-analytics-contract.mjs
       - name: Verify governed score-observation readers
         run: node property/tests/score-observations-schema-contract.mjs
+      - name: Verify ROBUST Trajectory evidence lineage
+        run: node property/tests/robust-trajectory-evidence-contract.mjs
       - name: Verify Property Home score history contract
         run: node property/tests/property-score-history-contract.mjs
       - name: Verify page-native Intelligence shell contracts
