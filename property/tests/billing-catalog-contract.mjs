@@ -12,6 +12,8 @@ const billingClient = read('property/js/billing-client.js');
 const checkout = read('supabase/functions/create-checkout-session/index.ts');
 const webhook = read('supabase/functions/stripe-webhook/index.ts');
 const health = read('supabase/functions/get-platform-health/index.ts');
+const onboarding = read('property/js/onboarding.js');
+const onboardingPlans = read('property/css/onboarding-plans.css');
 
 const expected = {
   agent: {
@@ -88,6 +90,22 @@ expect(health.includes('controlled_user_count'), 'Developer platform health does
 expect(!health.includes('PADDLE_ENVIRONMENT'), 'Developer platform health reverted to Paddle environment detection.');
 expect(!health.includes("eq('provider', 'paddle')"), 'Developer platform health reverted to Paddle event evidence.');
 
+expect(onboarding.includes("complete_my_watchdog_onboarding_v2"), 'Onboarding no longer persists its required survey before membership selection.');
+expect(onboarding.includes("await showPlanSelection();"), 'Onboarding no longer transitions from saved profile data into first-run membership selection.');
+expect(onboarding.includes("/functions/v1/billing-price-catalog"), 'Onboarding does not load prices from the server-owned Stripe billing catalog.');
+expect(onboarding.includes("['agent','pro','pro_plus'].map(planCard)"), 'Onboarding paid-first plan set or ordering drifted.');
+expect(onboarding.indexOf("wd-plan-grid") < onboarding.indexOf("wd-plan-free"), 'Onboarding no longer renders paid plans before the Free option.');
+expect(onboarding.includes("db.functions.invoke('create-checkout-session'"), 'Onboarding paid CTA no longer uses the authenticated server checkout function.');
+expect(onboarding.includes("BILLING_ENROLLMENT_CLOSED"), 'Onboarding no longer handles the fail-closed billing release state cleanly.');
+expect(onboarding.includes("Continue with Free"), 'Onboarding no longer preserves a no-card Free continuation path.');
+expect(onboarding.includes("runtime.cleanRoutes"), 'Onboarding next-route handling is not aware of clean WatchdogIndex routes.');
+expect(!onboarding.includes('monthly: 59'), 'Onboarding hard-coded Agent catalog pricing instead of loading it from the server catalog.');
+expect(!onboarding.includes('monthly: 129'), 'Onboarding hard-coded Pro catalog pricing instead of loading it from the server catalog.');
+expect(!onboarding.includes('monthly: 399'), 'Onboarding hard-coded Pro+ catalog pricing instead of loading it from the server catalog.');
+expect(onboardingPlans.includes('grid-template-columns:repeat(3,minmax(0,1fr))'), 'Onboarding paid plan layout lost its desktop three-plan presentation.');
+expect(onboardingPlans.includes('@media(max-width:700px)'), 'Onboarding plan selection lost its mobile layout contract.');
+expect(onboardingPlans.includes('.wd-intelligence-brand-word'), 'Onboarding plan selection lost Watchdog Intelligence brand treatment.');
+
 expect(!account.includes('monthly: 29'), 'Legacy Agent $29 pricing returned to Account.');
 expect(!account.includes('yearly: 290'), 'Legacy Agent $290 yearly pricing returned to Account.');
 expect(!account.includes('monthly: 349'), 'Legacy Professional $349 pricing returned to Account.');
@@ -103,4 +121,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log('Billing catalog contract passed: Account, Pro, Stripe lookup resolution, server-owned release control, launch health and fail-closed Checkout agree.');
+console.log('Billing catalog contract passed: Account, Pro, onboarding, Stripe lookup resolution, server-owned release control, launch health and fail-closed Checkout agree.');
