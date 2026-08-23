@@ -2,7 +2,7 @@
   'use strict';
   var SB_URL='https://uvkvaxljhhngydvlrzom.supabase.co',KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',client=null,root=null,summary=null,rows=[];
   function sb(){return client||(client=window.supabase.createClient(SB_URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}}));}
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function date(v){if(!v)return'Not redeemed';var d=new Date(v);return isNaN(d.getTime())?'Not dated':d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
   function active(row){return row.status==='redeemed'&&row.expires_at&&new Date(row.expires_at)>new Date();}
   function state(row){if(row.status==='issued')return{key:'pending',label:'Pending'};if(active(row))return{key:'active',label:'Active'};return{key:'ended',label:'Ended'};}
