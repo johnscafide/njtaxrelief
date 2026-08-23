@@ -1,4 +1,4 @@
-/* Watchdog professional library mobile audit — Run 063 */
+/* Watchdog professional library mobile audit — Runs 063-064 */
 @media (max-width: 840px) {
   .pg-nav {
     padding-top: env(safe-area-inset-top);
@@ -12,7 +12,7 @@
 
   .pg-brand {
     min-height: 44px;
-    font-size: 15px;
+    font-size: var(--fs-md, .9375rem);
   }
 
   .pg-brand i {
@@ -50,7 +50,7 @@
     background: #fff;
     border: 1px solid var(--pg-line);
     color: #41556c;
-    font-size: 14px;
+    font-size: var(--fs-sm, .875rem);
     line-height: 1.2;
     scroll-snap-align: start;
     touch-action: manipulation;
@@ -62,9 +62,124 @@
     color: #fff !important;
   }
 
+  /* Run 064: complete the professional hub + guide mobile readability pass.
+     Reuse the canonical rem type scale when present and provide the same rem
+     fallback values for editorial pages that do not load the app shell. */
+  .pg-kicker,
+  .pg-eyebrow,
+  .pg-number,
+  .pg-example::before,
+  .pg-resource small,
+  .pg-plan-pills span,
+  .pg-hub-card span,
+  .pg-meta span {
+    font-size: var(--fs-2xs, .75rem);
+    line-height: 1.35;
+  }
+
+  .pg-btn {
+    min-height: 48px;
+    padding: 0 17px;
+    font-size: var(--fs-sm, .875rem);
+    line-height: 1.25;
+    justify-content: center;
+    touch-action: manipulation;
+  }
+
+  .pg-jump .pg-wrap {
+    gap: 8px;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .pg-jump .pg-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pg-jump a {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: var(--fs-xs, .8125rem);
+    line-height: 1.25;
+    scroll-snap-align: start;
+    touch-action: manipulation;
+  }
+
+  .pg-hub-card h2 {
+    font-size: var(--fs-lg, 1.0625rem);
+    line-height: 1.25;
+  }
+
+  .pg-hub-card p,
+  .pg-card p,
+  .pg-resource p,
+  .pg-row span,
+  .pg-check span,
+  .pg-note {
+    font-size: var(--fs-sm, .875rem);
+    line-height: 1.55;
+  }
+
+  .pg-hub-card span,
+  .pg-resource small {
+    font-weight: 800;
+  }
+
+  .pg-card b,
+  .pg-resource b,
+  .pg-row strong {
+    font-size: var(--fs-md, .9375rem);
+    line-height: 1.35;
+  }
+
+  .pg-example p {
+    font-size: var(--fs-sm, .875rem);
+    line-height: 1.55;
+  }
+
+  .pg-check {
+    min-height: 56px;
+  }
+
+  .pg-check i {
+    width: 36px;
+    height: 36px;
+  }
+
+  .pg-related a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 13px;
+    font-size: var(--fs-xs, .8125rem);
+    line-height: 1.25;
+    touch-action: manipulation;
+  }
+
+  .pg-footer .pg-wrap {
+    font-size: var(--fs-xs, .8125rem);
+    line-height: 1.5;
+  }
+
+  .pg-card,
+  .pg-resource,
+  .pg-hub-card,
+  .pg-row span,
+  .pg-check span,
+  .pg-note,
+  .pg-footer .pg-wrap {
+    overflow-wrap: anywhere;
+  }
+
   .pg-links a:focus-visible,
   .pg-brand:focus-visible,
   .pg-btn:focus-visible,
+  .pg-jump a:focus-visible,
+  .pg-related a:focus-visible,
   .pg-hub-card:focus-visible,
   .pg-resource:focus-visible {
     outline: 3px solid rgba(11, 133, 134, .3);
@@ -80,6 +195,55 @@
   .pg-links a,
   .pg-links a:not(.pg-nav-cta) {
     min-height: 46px;
-    font-size: 14px;
+    font-size: var(--fs-sm, .875rem);
+  }
+
+  .pg-hub-card,
+  .pg-card,
+  .pg-resource {
+    padding: 20px;
+  }
+
+  .pg-upgrade h2 {
+    font-size: var(--fs-3xl, 2rem);
+    line-height: 1.1;
+  }
+}
+
+@media (max-width: 420px) {
+  .pg-hero h1 {
+    font-size: 2.25rem;
+    line-height: 1.02;
+  }
+
+  .pg-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .pg-actions .pg-btn {
+    width: 100%;
+  }
+
+  .pg-meta {
+    gap: 7px;
+  }
+
+  .pg-meta span {
+    padding: 7px 9px;
+  }
+
+  .pg-example {
+    padding: 58px 20px 20px;
+    min-height: 0;
+  }
+
+  .pg-example::before {
+    left: 20px;
+    top: 18px;
+  }
+
+  .pg-footer {
+    padding-bottom: calc(34px + env(safe-area-inset-bottom));
   }
 }
