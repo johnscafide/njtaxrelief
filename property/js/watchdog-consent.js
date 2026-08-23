@@ -13,6 +13,7 @@
   var CSS_URL = '/property/css/watchdog-consent.css';
   var stored = readStored();
   var lastFocus = null;
+  var analyticsLoadQueued = false;
 
   function readStored(){
     try{
@@ -83,6 +84,12 @@
     var first=document.getElementsByTagName('script')[0];
     if(first&&first.parentNode) first.parentNode.insertBefore(script,first); else document.head.appendChild(script);
   }
+  function loadAllowedAnalytics(){
+    if(document.readyState!=='loading'){loadGoogle();loadClarity();return;}
+    if(analyticsLoadQueued)return;
+    analyticsLoadQueued=true;
+    document.addEventListener('DOMContentLoaded',function(){analyticsLoadQueued=false;loadGoogle();loadClarity();},{once:true});
+  }
   function clearAnalyticsCookies(){
     var prefixes=['_ga','_gid','_gat','_clck','_clsk'];
     var names=(document.cookie||'').split(';').map(function(v){return v.split('=')[0].trim();}).filter(Boolean);
@@ -98,7 +105,7 @@
     if(save) persist(analytics);
     signalGoogle(analytics,'update');
     signalClarity(analytics);
-    if(analytics){ loadGoogle(); loadClarity(); }
+    if(analytics) loadAllowedAnalytics();
     else clearAnalyticsCookies();
     syncControls();
     hideBanner();
@@ -108,7 +115,7 @@
     var choice=current();
     signalGoogle(choice.analytics,'update');
     signalClarity(choice.analytics);
-    if(choice.analytics){ loadGoogle(); loadClarity(); }
+    if(choice.analytics) loadAllowedAnalytics();
     else clearAnalyticsCookies();
   }
   function privacyHref(){ return '/property/privacy'; }
