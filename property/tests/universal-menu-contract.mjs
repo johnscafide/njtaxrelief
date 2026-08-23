@@ -86,9 +86,12 @@ assert(universal.includes("route('/teams')"), 'Pro+ Teams preview route is missi
 assert(universal.includes('data-wd-plan-promo'), 'Graphical plan promo markup is missing');
 assert(universal.includes('planPromoHtml() +'), 'Plan promo is not injected by the shared profile renderer');
 assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not exposed for verification');
-assert(universal.includes('wd-universal-plan-promo-pro'), 'Pro promo class is missing from shared markup');
-assert(universal.includes('wd-universal-plan-promo-plus'), 'Pro+ promo class is missing from shared markup');
-assert(universal.includes('wd-universal-plan-promo-teams'), 'Teams promo class is missing from shared markup');
+assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
+assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
+assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
+assert(universal.includes("var VERSION = '20260823c'"), 'Universal menu asset version was not cache-busted for the promo CSS repair');
+assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
+assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
 // The graphical treatment itself must live in the canonical external stylesheet.
 // This prevents CSP or inline-style restrictions from degrading the promo into a
