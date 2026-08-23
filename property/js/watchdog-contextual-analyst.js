@@ -65,9 +65,13 @@ async function ask(prompt){
   state.busy=true;if(send)send.disabled=true;if(input)input.disabled=true;
   appendMessage('user','<p>'+esc(prompt)+'</p>');
   try{
-    var result=await client.functions.invoke('intelligence-analyst',{body:{prompt:prompt,session_id:state.sessionId,context:state.context||{}}});
-    if(result.error)throw result.error;
-    var data=result.data||{};if(data.session_id)state.sessionId=String(data.session_id);
+    var sessionResult=await client.auth.getSession();
+    var accessToken=sessionResult&&sessionResult.data&&sessionResult.data.session&&sessionResult.data.session.access_token?String(sessionResult.data.session.access_token):'';
+    if(!accessToken)throw new Error('Sign in required');
+    var response=await fetch('/api/watchdog-intelligence-analyst',{method:'POST',headers:{Authorization:'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,session_id:state.sessionId,context:state.context||{}})});
+    var data=await response.json().catch(function(){return{};});
+    if(!response.ok)throw new Error(data&&data.error?String(data.error):'Watchdog Analyst request failed');
+    if(data.session_id)state.sessionId=String(data.session_id);
     appendMessage('assistant',responseHtml(data));
     if(input){input.value='';input.focus();}
     window.dispatchEvent(new CustomEvent('watchdog:contextual-analyst-response',{detail:{surface:state.context&&state.context.surface||'unknown',session_id:state.sessionId||null}}));
@@ -111,5 +115,5 @@ function open(options){
   window.dispatchEvent(new CustomEvent('watchdog:contextual-analyst-open',{detail:{surface:surface,pams_pins:pins.slice(0,5)}}));
   return panel;
 }
-window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,contract:'contextual-analyst-v2-evidence-review'};
+window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,contract:'contextual-analyst-v3-evidence-review-proxy'};
 })();
