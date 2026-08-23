@@ -1,6 +1,6 @@
 /* Watchdog public contact-routing policy.
-   Keep customer-facing contact paths brand-first: Contact Watchdog or Account Support.
-   Direct staff email addresses and phone numbers must not be exposed as public contact actions. */
+   Customer-facing contact paths are brand-first: Contact Watchdog or Account Support.
+   Direct staff email addresses, phone numbers, personal-name contact links and agent-email actions must not be exposed. */
 (function () {
   'use strict';
   if (window.__WATCHDOG_CONTACT_ROUTING_POLICY__) return;
@@ -58,10 +58,11 @@
         setContactAnchor(anchor, false);
         return;
       }
-      if (/^https?:\/\/(?:www\.)?johnscafide\.com(?:\/|$)/i.test(href)) {
+      if (/^https?:\/\/(?:www\.)?johnscafide\.com(?:\/|$)/i.test(href) || /^https?:\/\/johnscafide\.opuselitesj\.com(?:\/|$)/i.test(href)) {
         anchor.setAttribute('href', CONTACT_URL + '?topic=real-estate');
         anchor.removeAttribute('target');
         anchor.removeAttribute('rel');
+        if (/opuselitesj\.com|johnscafide/i.test(anchor.textContent || '')) anchor.textContent = 'Contact Watchdog';
         return;
       }
       if (/email\s+(?:agent|john|heather)|call\s+(?:john|heather)|book\s+a\s+call/.test(label)) {
@@ -85,6 +86,8 @@
     output = output.replace(/\bJohn will get back to you\b/gi, 'Watchdog will get back to you');
     output = output.replace(/\bHeather will get back to you\b/gi, 'Watchdog will get back to you');
     output = output.replace(/Watchdog,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional');
+    output = output.replace(/\bby emailing\b/gi, 'through');
+    output = output.replace(/\bFor anything else, email\b/gi, 'For anything else, use');
     return output;
   }
 
