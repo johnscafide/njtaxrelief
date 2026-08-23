@@ -18,11 +18,48 @@
   }
   function planForCard(card) {
     var key = String(card && card.dataset && card.dataset.plan || '').trim().toLowerCase().replace(/\+/g,'_plus');
-    return ['agent','pro','pro_plus'].indexOf(key) >= 0 ? key : null;
+    return ['agent','pro','pro_plus','teams'].indexOf(key) >= 0 ? key : null;
   }
   function isYearly() {
     var yearly = document.querySelector('[data-cadence="yearly"]');
     return !yearly || yearly.getAttribute('aria-pressed') === 'true';
+  }
+  function applyIntelligenceOffer(card, key) {
+    var offer = card && card.querySelector('.ac-intel-offer');
+    var intelligence = catalog && catalog.intelligence;
+    if (!offer || !intelligence || !key) return;
+    var promo = intelligence.promotion || {};
+    var eligible = Array.isArray(promo.eligible_plans) && promo.eligible_plans.indexOf(key) >= 0;
+    var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
+    var label = offer.querySelector('span');
+    var price = offer.querySelector('b');
+    var note = offer.querySelector('small');
+
+    if (promo.active === true && eligible) {
+      offer.classList.add('included');
+      offer.setAttribute('aria-label', 'Watchdog Intelligence limited-time promotion');
+      setText(label, 'WATCHDOG INTELLIGENCE · ' + String(promo.label || 'LIMITED TIME').toUpperCase());
+      setText(price, 'Included at no additional charge');
+      setText(note, 'Normally +' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month. Included with paid memberships for a limited time.');
+      return;
+    }
+
+    if (eligible) {
+      offer.classList.remove('included');
+      offer.setAttribute('aria-label', 'Watchdog Intelligence add-on');
+      setText(label, 'WATCHDOG INTELLIGENCE');
+      setText(price, '+' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month');
+      setText(note, 'Optional Watchdog Intelligence add-on for this plan.');
+      return;
+    }
+
+    if (included) {
+      offer.classList.add('included');
+      offer.setAttribute('aria-label', 'Watchdog Intelligence included');
+      setText(label, 'WATCHDOG INTELLIGENCE');
+      setText(price, 'Included at no additional charge');
+      setText(note, key === 'pro_plus' ? 'Included with Pro+ as a base-plan benefit.' : 'Included with this organization plan.');
+    }
   }
   function applyCatalog() {
     if (!catalog || !catalog.plans) return;
@@ -30,7 +67,9 @@
     var cadence = annual ? 'yearly' : 'monthly';
     document.querySelectorAll('#membership-options .ac-price-card[data-plan]').forEach(function (card) {
       var key = planForCard(card);
-      if (!key || !catalog.plans[key] || !catalog.plans[key][cadence]) return;
+      if (!key) return;
+      applyIntelligenceOffer(card, key);
+      if (!catalog.plans[key] || !catalog.plans[key][cadence]) return;
       var amount = Number(catalog.plans[key][cadence].amount);
       if (!Number.isFinite(amount)) return;
       var price = card.querySelector('.ac-price b');
@@ -53,8 +92,13 @@
     loading = true;
     fetch(baseUrl + '/functions/v1/billing-price-catalog', { method:'GET', headers:{Accept:'application/json'}, cache:'no-store' })
       .then(function (response) { if (!response.ok) throw new Error('Billing catalog unavailable'); return response.json(); })
-      .then(function (payload) { if (!payload || payload.provider !== 'stripe' || !payload.plans) throw new Error('Invalid billing catalog'); catalog = payload; applyCatalog(); })
-      .catch(function () { /* account.js carries the last verified display fallback. */ })
+      .then(function (payload) {
+        if (!payload || payload.provider !== 'stripe' || !payload.plans) throw new Error('Invalid billing catalog');
+        catalog = payload;
+        window.WatchdogBillingCatalog = payload;
+        applyCatalog();
+      })
+      .catch(function () { /* account.js carries the normal commercial-price fallback. */ })
       .finally(function () { loading = false; });
   }
   function refreshCatalogDisplay() {
