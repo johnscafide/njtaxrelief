@@ -116,7 +116,7 @@ function marketValue(row, src, stored) {
   return saved && saved > 0 ? { v: saved, ratio: null, n: null, src: "stored" } : null;
 }
 function usableSale(row, verified) {
-  const sale = num(row.last_sale_price), assessed = num(row.assessed_value), year = num(row.last_sale_year);
+  const sale = num(row.subject_sale_price), assessed = num(row.assessed_value), year = num(row.subject_sale_year);
   if (sale == null || sale < 1000 || year == null || year < 1900 || year > new Date().getFullYear() + 1) return false;
   if (assessed != null && assessed > 0) {
     const raw = assessed / sale;
@@ -224,10 +224,19 @@ function robustScore(row, src, stored) {
   if (stability && num(stability.score) != null) add("stability", 15, 1 - clamp01(stability.score / 100), stability);
   else add("stability", 15, null, { reason: "revaluation stability evidence unavailable" });
   if (sr1a && usableSale(row, sr1a) && num(row.assessed_value)) {
-    const sale = Number(row.last_sale_price), implied = Number(row.assessed_value) / sale, relative = implied / Number(sr1a.ratio);
+    const sale = Number(row.subject_sale_price), implied = Number(row.assessed_value) / sale, relative = implied / Number(sr1a.ratio);
     const trajectory = relative < .85 ? clamp01(.35 + relative * .4) : relative > 1.15 ? clamp01(1.15 - (relative - 1) * .8) : 1;
-    add("trajectory", 10, trajectory, { sale, year: Number(row.last_sale_year), implied_ratio: implied, town_verified_ratio: Number(sr1a.ratio), validation: "defensible_sale_guard_v1" });
-  } else add("trajectory", 10, null, { reason: "defensible arm's-length sale evidence unavailable" });
+    add("trajectory", 10, trajectory, {
+      sale,
+      year: Number(row.subject_sale_year),
+      implied_ratio: implied,
+      town_verified_ratio: Number(sr1a.ratio),
+      validation: "sr1a_verified_subject_sale_v1",
+      source: "NJ Division of Taxation SR-1A verified usable sale index",
+      provider_version: SUBJECT_MODEL,
+      match_quality: row.subject_match_quality || null
+    });
+  } else add("trajectory", 10, null, { reason: "governed verified subject-sale evidence unavailable" });
   const winRate = num(appeal?.latest?.win_rate_filed);
   if (winRate != null) add("recourse", 10, clamp01((winRate - 20) / 45), { win_rate_filed: winRate, county: row.county });
   else add("recourse", 10, null, { reason: "appeal recourse evidence unavailable" });
@@ -268,7 +277,7 @@ Deno.serve(async req => {
 
   const byPin = new Map((rows || []).map(row => [String(row.pams_pin), row])), savedByPin = new Map((saved || []).map(row => [String(row.pams_pin), row.watchdog_value]));
   const markers = {}, meta = {}, inserts = [], now = new Date().toISOString(), today = now.slice(0, 10);
-  let scored = 0, subjectMatches = 0, subjectLivingSpaceMatches = 0;
+  let scored = 0, subjectMatches = 0, subjectLivingSpaceMatches = 0, subjectVerifiedSaleMatches = 0;
   for (const requestedPin of pins) {
     const canonical = aliases.get(requestedPin) || requestedPin, row = byPin.get(requestedPin) || byPin.get(canonical);
     markers[requestedPin] = {}; meta[requestedPin] = {};
@@ -276,10 +285,17 @@ Deno.serve(async req => {
 
     const sourcePin = String(row.pams_pin || "");
     const subject = subjectByPin.get(sourcePin) || subjectByPin.get(canonical) || subjectByPin.get(requestedPin) || null;
-    if (subject) subjectMatches++;
+    if (subject) {
+      subjectMatches++;
+      row.subject_match_quality = subject.match_quality || null;
+      if (num(subject.sale_price) != null && num(subject.sale_year) != null) {
+        row.subject_sale_price = Number(subject.sale_price);
+        row.subject_sale_year = Number(subject.sale_year);
+        subjectVerifiedSaleMatches++;
+      }
+    }
     if (subject && num(subject.living_space)) {
       row.subject_living_space = Number(subject.living_space);
-      row.subject_match_quality = subject.match_quality || null;
       subjectLivingSpaceMatches++;
     }
     row.pams_pin = canonical;
@@ -330,7 +346,7 @@ Deno.serve(async req => {
         observed_on: today, observed_at: now, model_version: modelVersion,
         evidence_coverage: isScore ? wd?.coverage ?? 0 : 100, inputs,
         formula: isScore
-          ? "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. O may use governed SR-1A subject living area with municipal verified-sale PPSF when available. Trajectory requires a defensible sale signal."
+          ? "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. O may use governed SR-1A subject living area with municipal verified-sale PPSF when available. Trajectory requires governed SR-1A verified subject-sale evidence and fails closed when it is unavailable."
           : id === "watchdog.revaluation_risk"
             ? "Revaluation pressure from published ratio level, verified SR-1A ratio decay and coefficient of deviation."
             : id === "uniformity.score"
@@ -353,7 +369,8 @@ Deno.serve(async req => {
       requested: pins.length, scored, observations_written: inserts.length,
       subject_evidence_status: subjectEvidenceStatus,
       subject_matches: subjectMatches,
-      subject_living_space_matches: subjectLivingSpaceMatches
+      subject_living_space_matches: subjectLivingSpaceMatches,
+      subject_verified_sale_matches: subjectVerifiedSaleMatches
     },
     framework: "ROBUST", model_version: SCORE_MODEL, signal_model_version: SIGNAL_MODEL,
     subject_model_version: SUBJECT_MODEL, legacy_alias: "retired", checked_at: now
