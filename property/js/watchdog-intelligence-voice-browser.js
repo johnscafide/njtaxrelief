@@ -3,6 +3,7 @@
 
   const VOICE_API = '/api/watchdog-intelligence-voice';
   const USAGE_API = '/api/watchdog-intelligence-voice-browser-usage';
+  const NARRATION_SRC = '/property/js/watchdog-intelligence-narration.js?v=20260823';
   const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const canSpeak = 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance !== 'undefined';
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -14,6 +15,8 @@
   let browserEligible = false;
   let activeUtterance = null;
   let activeListenButton = null;
+  let activeNarration = null;
+  let narrationPromise = null;
 
   function toast(message) {
     const node = $('#pl-toast');
@@ -54,13 +57,33 @@
     return data;
   }
 
-  async function reserve(kind) {
+  async function reserve(kind, metadata) {
     try {
-      return await post(USAGE_API, { kind });
+      return await post(USAGE_API, { kind, metadata: metadata || {} });
     } catch (error) {
       if ([401, 403, 429].includes(Number(error?.status))) throw error;
       return null;
     }
+  }
+
+  async function telemetry(event, metadata) {
+    try {
+      await post(USAGE_API, { kind: 'event', event, metadata: metadata || {} });
+    } catch (_) { /* Telemetry must never block a valid governed Voice interaction. */ }
+  }
+
+  function ensureNarration() {
+    if (window.WatchdogIntelligenceNarration) return Promise.resolve(window.WatchdogIntelligenceNarration);
+    if (narrationPromise) return narrationPromise;
+    narrationPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = NARRATION_SRC;
+      script.async = true;
+      script.onload = () => window.WatchdogIntelligenceNarration ? resolve(window.WatchdogIntelligenceNarration) : reject(new Error('Watchdog narration contract did not initialize.'));
+      script.onerror = () => reject(new Error('Watchdog narration contract could not load.'));
+      document.head.appendChild(script);
+    });
+    return narrationPromise;
   }
 
   function resetVoiceButton() {
@@ -83,7 +106,7 @@
     if (!Recognition) return;
     button.disabled = true;
     try {
-      await reserve('transcription');
+      await reserve('transcription', { engine: 'browser_speech_recognition' });
     } catch (error) {
       resetVoiceButton();
       statusLine(error?.message || 'Voice Intelligence is unavailable.', 'error');
@@ -152,20 +175,47 @@
     }
   }
 
-  function briefText(message) {
-    const conclusion = $(':scope > p', message)?.textContent?.trim() || '';
-    if (!conclusion) return '';
+  function sectionItems(message, label, max) {
     const sections = $$('.dwa-section', message);
-    const sectionItems = (label, max) => {
-      const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === label);
-      return section ? $$('li', section).slice(0, max).map((item) => item.textContent.trim()).filter(Boolean) : [];
+    const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === label);
+    return section ? $$('li', section).slice(0, max).map((item) => item.textContent.trim()).filter(Boolean) : [];
+  }
+
+  function sourceLabels(message, max) {
+    const sections = $$('.dwa-section', message);
+    const section = sections.find((node) => $('strong', node)?.textContent?.trim().toLowerCase() === 'sources');
+    return section ? $$('.dwa-source', section).slice(0, max).map((item) => item.textContent.trim()).filter(Boolean) : [];
+  }
+
+  function extractBrief(message) {
+    return {
+      conclusion: $(':scope > p', message)?.textContent?.trim() || '',
+      evidence: sectionItems(message, 'evidence', 8),
+      missing_evidence: sectionItems(message, 'missing evidence', 6),
+      caveats: sectionItems(message, 'caveats', 5),
+      sources: sourceLabels(message, 6),
     };
-    const evidence = sectionItems('evidence', 4);
-    const caveats = sectionItems('caveats', 2);
-    const parts = ['Watchdog Intelligence brief.', conclusion];
-    if (evidence.length) parts.push(`Key evidence. ${evidence.join(' ')}`);
-    if (caveats.length) parts.push(`Important context. ${caveats.join(' ')}`);
-    return parts.join(' ').replace(/\s+/g, ' ').trim().slice(0, 2400);
+  }
+
+  function narrationContext(message) {
+    const previous = message.previousElementSibling;
+    const prompt = previous?.classList?.contains('user') ? previous.textContent?.trim() || '' : '';
+    const surface = message.closest('#dwa-panel')?.dataset?.watchdogSurface || '';
+    const tool = message.querySelector('[data-dwa-evidence-note]') ? 'inspect_lineage' : '';
+    return { prompt, surface, tool, hasEvidence: sectionItems(message, 'evidence', 1).length > 0, hasSources: sourceLabels(message, 1).length > 0 };
+  }
+
+  function availableFormatKeys(contract, message) {
+    const context = narrationContext(message);
+    const keys = ['quick', 'professional'];
+    if (context.hasEvidence || context.hasSources || context.tool === 'inspect_lineage') keys.push('evidence');
+    if (/daily|watchlist/.test(context.surface.toLowerCase()) || /what changed|change|changed|latest|material/.test(context.prompt.toLowerCase())) keys.push('changes');
+    return contract.FORMAT_ORDER.filter((key) => keys.includes(key));
+  }
+
+  function selectedFormat(message, contract) {
+    const select = $('[data-dwa-narration-format]', message);
+    return contract.FORMATS[select?.value] ? select.value : 'quick';
   }
 
   function resetListen() {
@@ -175,24 +225,41 @@
     }
     activeListenButton = null;
     activeUtterance = null;
+    activeNarration = null;
+  }
+
+  async function stopActiveNarration(reason) {
+    if (!activeListenButton) return;
+    const prior = activeNarration;
+    window.speechSynthesis.cancel();
+    resetListen();
+    if (prior) await telemetry(reason || 'narration_stopped', prior);
   }
 
   async function speakBrowser(button) {
     const message = button.closest('.dwa-msg.assistant');
-    const text = message ? briefText(message) : '';
-    if (!text) {
+    if (!message) return;
+    let contract;
+    try { contract = await ensureNarration(); } catch (error) { toast(error.message); return; }
+    const brief = extractBrief(message);
+    if (!brief.conclusion) {
       toast('No governed Watchdog response is available to read.');
       return;
     }
     if (activeListenButton) {
-      window.speechSynthesis.cancel();
       const same = activeListenButton === button;
-      resetListen();
+      await stopActiveNarration('narration_stopped');
       if (same) return;
     }
+
+    const format = selectedFormat(message, contract);
+    let narration;
+    try { narration = contract.formatBrief(brief, format); } catch (error) { toast(error.message); return; }
+    const context = narrationContext(message);
+    const meta = { format: narration.format, narration_version: narration.version, engine: 'browser_speech_synthesis', text_chars: narration.text.length, surface: context.surface || 'unknown' };
     try {
       button.disabled = true;
-      await reserve('speech');
+      await reserve('speech', meta);
       button.disabled = false;
     } catch (error) {
       button.disabled = false;
@@ -200,26 +267,44 @@
       return;
     }
 
-    const utterance = new SpeechSynthesisUtterance(text);
+    await telemetry('narration_started', meta);
+    const utterance = new SpeechSynthesisUtterance(narration.text);
     utterance.lang = navigator.language || 'en-US';
     utterance.rate = 0.98;
     utterance.pitch = 1;
-    utterance.onend = resetListen;
-    utterance.onerror = resetListen;
+    utterance.onend = () => { telemetry('narration_completed', meta); resetListen(); };
+    utterance.onerror = () => { telemetry('narration_failed', meta); resetListen(); };
     activeUtterance = utterance;
     activeListenButton = button;
+    activeNarration = meta;
     button.innerHTML = '<i class="fas fa-stop"></i> Stop';
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
   }
 
-  function ensureListen(message) {
-    if (!browserEligible || !canSpeak || !message || !briefText(message)) return;
-    if ($('[data-dwa-listen]', message)) return;
+  async function ensureListen(message) {
+    if (!browserEligible || !canSpeak || !message) return;
+    const brief = extractBrief(message);
+    if (!brief.conclusion) return;
+    let contract;
+    try { contract = await ensureNarration(); } catch (_) { return; }
+    message.dataset.voiceWired = 'true';
+    message.querySelector('.dwa-voice-message-tools')?.remove();
+    const keys = availableFormatKeys(contract, message);
+    const context = narrationContext(message);
+    const defaultFormat = context.tool === 'inspect_lineage' && keys.includes('evidence') ? 'evidence'
+      : /what changed|change|changed|latest|material/.test(context.prompt.toLowerCase()) && keys.includes('changes') ? 'changes'
+        : 'quick';
     const footer = document.createElement('div');
-    footer.className = 'dwa-voice-message-tools';
-    footer.innerHTML = '<button type="button" data-dwa-listen><i class="fas fa-volume-high"></i> Listen</button><span>Spoken from the written Watchdog response</span>';
+    footer.className = 'dwa-voice-message-tools dwa-narration-tools';
+    footer.innerHTML = `<label class="dwa-narration-label"><span>Listen as</span><select data-dwa-narration-format aria-label="Choose Watchdog narration format">${keys.map((key) => `<option value="${key}"${key === defaultFormat ? ' selected' : ''}>${contract.FORMATS[key].label}</option>`).join('')}</select></label><button type="button" data-dwa-listen aria-label="${contract.FORMATS[defaultFormat].aria}"><i class="fas fa-volume-high"></i> Listen</button><span class="dwa-narration-note">Spoken only from the written governed response</span>`;
     message.appendChild(footer);
+    const select = $('[data-dwa-narration-format]', footer);
+    const button = $('[data-dwa-listen]', footer);
+    select?.addEventListener('change', () => {
+      const format = contract.FORMATS[select.value] || contract.FORMATS.quick;
+      button?.setAttribute('aria-label', format.aria);
+    });
   }
 
   function wireMessages(root) {
