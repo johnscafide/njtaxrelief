@@ -118,64 +118,59 @@
     intelligenceStyles();
 
     var priceHead=document.querySelector('.pro-price-head');
-    if(priceHead&&!document.getElementById('pro-intelligence-promo')){
-      var promoBox=document.createElement('div');
-      promoBox.className='pro-intelligence-promo pro-reveal';
-      promoBox.id='pro-intelligence-promo';
+    if(priceHead){
+      var promoBox=document.getElementById('pro-intelligence-promo');
+      if(!promoBox){
+        promoBox=document.createElement('div');
+        promoBox.className='pro-intelligence-promo pro-reveal';
+        promoBox.id='pro-intelligence-promo';
+        var cadence=priceHead.querySelector('.pro-cadence');
+        if(cadence)cadence.insertAdjacentElement('afterend',promoBox);else priceHead.appendChild(promoBox);
+      }
       promoBox.innerHTML='<div class="pro-intelligence-promo-inner"><div class="pro-intelligence-promo-label">Watchdog Intelligence · '+(promoActive?promoLabel:'Add-on')+'</div><div><strong>'+(promoActive?'Included with paid memberships at no additional charge.':'An optional intelligence layer for Agent and Pro.')+'</strong><p>'+(promoActive?'Agent and Pro normally add Watchdog Intelligence for $'+regular+'/month. During the current promotion, it is included at no additional charge. Pro+ includes Watchdog Intelligence as a base-plan benefit.':'Agent and Pro can add Watchdog Intelligence for $'+regular+'/month. Pro+ includes it at no additional charge.')+'</p></div><div class="pro-intelligence-promo-price"><b>'+(promoActive?'$0 during promotion':'$'+regular+'/month')+'</b><small>'+(promoActive?'Agent + Pro · limited time':'Agent + Pro add-on')+'</small></div></div>';
-      var cadence=priceHead.querySelector('.pro-cadence');
-      if(cadence)cadence.insertAdjacentElement('afterend',promoBox);else priceHead.appendChild(promoBox);
     }
 
     ['agent','pro','pro_plus'].forEach(function(plan){
       var band=document.querySelector('[data-price-band="'+plan+'"]');
       if(!band)return;
       var who=band.querySelector('.pro-price-who');
-      if(!who||who.querySelector('.pro-intel-plan'))return;
-      var note=document.createElement('div');
-      note.className='pro-intel-plan';
+      if(!who)return;
+      var note=who.querySelector('.pro-intel-plan');
+      if(!note){note=document.createElement('div');note.className='pro-intel-plan';var featureList=who.querySelector('div');if(featureList)featureList.insertAdjacentElement('beforebegin',note);else who.appendChild(note);}
       if(included.indexOf(plan)>=0){
         note.innerHTML='<b>Watchdog Intelligence</b>Included with '+(plan==='pro_plus'?'Pro+':'this plan')+' at no additional charge.';
       }else if(eligible.indexOf(plan)>=0&&promoActive){
         note.innerHTML='<b>Watchdog Intelligence · '+promoLabel+'</b>Normally +$'+regular+'/month. Included at no additional charge during the current promotion.';
       }else if(eligible.indexOf(plan)>=0){
         note.innerHTML='<b>Watchdog Intelligence</b>Optional +$'+regular+'/month add-on.';
+      }else{
+        note.remove();
       }
-      var featureList=who.querySelector('div');
-      if(note.innerHTML){if(featureList)featureList.insertAdjacentElement('beforebegin',note);else who.appendChild(note);}
     });
 
     var compare=document.querySelector('.pro-compare-shell');
-    if(compare&&!compare.querySelector('.pro-intelligence-row')){
-      var row=document.createElement('div');
-      row.className='pro-compare-row pro-intelligence-row';
+    if(compare){
+      var row=compare.querySelector('.pro-intelligence-row');
+      if(!row){row=document.createElement('div');row.className='pro-compare-row pro-intelligence-row';var groups=compare.querySelectorAll('.pro-compare-group');var target=groups.length>1?groups[1]:null;if(target)target.insertAdjacentElement('beforebegin',row);else compare.appendChild(row);}
       row.innerHTML='<div>Watchdog Intelligence</div><div class="dim">—</div><div class="yes">'+(promoActive?'Limited time: included':'$'+regular+'/mo add-on')+'</div><div class="yes">'+(promoActive?'Limited time: included':'$'+regular+'/mo add-on')+'</div><div class="yes">Included</div>';
-      var groups=compare.querySelectorAll('.pro-compare-group');
-      var target=groups.length>1?groups[1]:null;
-      if(target)target.insertAdjacentElement('beforebegin',row);else compare.appendChild(row);
     }
 
     var badge=document.querySelector('.pro-platform-side.watchdog .pro-coming-badge');
     if(badge){badge.classList.add('pro-intelligence-live-badge');badge.innerHTML='<i class="fas fa-wand-magic-sparkles"></i> Watchdog Intelligence · available on paid plans';}
     var platform=document.querySelector('.pro-platform-side.watchdog');
-    if(platform){
-      var list=platform.querySelector('ul');
-      var last=list&&list.querySelector('li:last-child');
-      if(last)last.innerHTML='<i class="fas fa-check"></i> Watchdog Intelligence for assisted analysis, change monitoring and priority context';
-    }
+    if(platform){var list=platform.querySelector('ul');var last=list&&list.querySelector('li:last-child');if(last)last.innerHTML='<i class="fas fa-check"></i> Watchdog Intelligence for assisted analysis, change monitoring and priority context';}
     var platformNote=document.querySelector('.pro-platform-note');
     if(platformNote){platformNote.classList.add('pro-intelligence-live');platformNote.textContent=promoActive?'Watchdog Intelligence is available on paid memberships. Agent and Pro normally add it for $'+regular+'/month, but it is included at no additional charge during the current limited-time promotion. Pro+ includes it as a base-plan benefit.':'Watchdog Intelligence is available on paid memberships. Agent and Pro can add it for $'+regular+'/month; Pro+ includes it as a base-plan benefit.';}
 
-    var faqCards=Array.prototype.slice.call(document.querySelectorAll('.pro-faq-card'));
-    faqCards.forEach(function(card){
-      var heading=card.querySelector('h3');
-      if(!heading||heading.textContent.trim()!=='Is Watchdog AI live now?')return;
-      card.setAttribute('data-intelligence-faq','pricing');
-      heading.textContent='How is Watchdog Intelligence priced?';
-      var icon=card.querySelector('i');if(icon)icon.className='fas fa-wand-magic-sparkles';
-      var copy=card.querySelector('p');
-      if(copy)copy.textContent=promoActive?'Agent and Pro normally add Watchdog Intelligence for $'+regular+'/month. For a limited time, it is included with paid memberships at no additional charge. Pro+ includes it as a base-plan benefit.':'Agent and Pro can add Watchdog Intelligence for $'+regular+'/month. Pro+ includes it at no additional charge.';
-    });
+    var faqCard=document.querySelector('.pro-faq-card[data-intelligence-faq]');
+    if(!faqCard){
+      Array.prototype.slice.call(document.querySelectorAll('.pro-faq-card')).some(function(card){var heading=card.querySelector('h3');if(heading&&heading.textContent.trim()==='Is Watchdog AI live now?'){faqCard=card;card.setAttribute('data-intelligence-faq','pricing');return true;}return false;});
+    }
+    if(faqCard){
+      var heading=faqCard.querySelector('h3');if(heading)heading.textContent='How is Watchdog Intelligence priced?';
+      var icon=faqCard.querySelector('i');if(icon)icon.className='fas fa-wand-magic-sparkles';
+      var copy=faqCard.querySelector('p');if(copy)copy.textContent=promoActive?'Agent and Pro normally add Watchdog Intelligence for $'+regular+'/month. For a limited time, it is included with paid memberships at no additional charge. Pro+ includes it as a base-plan benefit.':'Agent and Pro can add Watchdog Intelligence for $'+regular+'/month. Pro+ includes it at no additional charge.';
+    }
   }
 
   function intelligencePricing(){
