@@ -1,7 +1,7 @@
 {
   "report_id": "robust-v1-governed-subject-cohort-calibration-2026-08-23",
   "issue": "NJW-273",
-  "generated_at": "2026-08-23T14:55:00Z",
+  "generated_at": "2026-08-23T15:00:00Z",
   "mode": "read_only_governed_subject_cohort",
   "writes_to_score_observations": 0,
   "model": {
@@ -19,12 +19,7 @@
     "property_classes": 2,
     "property_class_counts": {"2":167,"4A":3},
     "match_quality": {"exact":83,"unique_parcel_fallback":30,"compact_exact":43,"compact_unique_parcel_fallback":14},
-    "source_assets": [
-      "property/sr1a-ratios.json",
-      "property/uniformity.json",
-      "property/appeals.json",
-      "equalization-ratios.json"
-    ],
+    "source_assets": ["property/sr1a-ratios.json","property/uniformity.json","property/appeals.json","equalization-ratios.json"],
     "source_transport": "Synchronous read-only PostgreSQL http_get against the same canonical assets consumed by workbench-score."
   },
   "baseline": {
@@ -49,39 +44,37 @@
       "OCEAN":{"n":1,"mean_score":88,"mean_coverage":85},
       "PASSAIC":{"n":1,"mean_score":54,"mean_coverage":85}
     },
-    "class_segments": {
-      "2":{"n":167,"mean_score":67.54,"mean_coverage":99.19},
-      "4A":{"n":3,"mean_score":55.0,"mean_coverage":83.33}
-    }
+    "class_segments": {"2":{"n":167,"mean_score":67.54,"mean_coverage":99.19},"4A":{"n":3,"mean_score":55.0,"mean_coverage":83.33}}
   },
   "scenario_definition": {
-    "perturbations": "One component weight at a time is multiplied by 0.8 or 1.2 while all other canonical weights remain unchanged. The ROBUST weighted-average denominator naturally renormalizes available scenario weights, including missing components.",
-    "leave_one_out": "One component weight is set to zero while the remaining available dimensions renormalize exactly as ROBUST-v1 does.",
+    "canonical_harness": "property/scripts/robust_score_calibration.sql",
+    "perturbations": "One target component weight is multiplied by 0.8 or 1.2. All non-target theoretical weights are rescaled proportionally so the theoretical scenario weights sum to 100. Missing dimensions remain omitted and the available scenario weights renormalize.",
+    "leave_one_out": "One component weight is set to zero and all remaining theoretical weights rescale proportionally; this is algebraically equivalent to dropping that dimension and renormalizing remaining available dimensions.",
     "rank_metric": "Pearson correlation of within-scenario descending raw-score ranks against baseline ranks.",
     "top_decile": "Top 17 of 170 properties using descending raw score with pams_pin tie break.",
     "band_metric": "Migration after production-style integer score rounding against the existing 35/50/65/80 boundaries."
   },
   "perturbation_results": {
-    "R_minus20pct":{"mean_abs_delta":0.400,"max_abs_delta":1,"band_migration_pct":0.59,"rank_corr":0.999592,"top_decile_entries":0,"top_decile_exits":0},
-    "R_plus20pct":{"mean_abs_delta":0.359,"max_abs_delta":1,"band_migration_pct":1.18,"rank_corr":0.998871,"top_decile_entries":1,"top_decile_exits":1},
-    "O_minus20pct":{"mean_abs_delta":1.229,"max_abs_delta":3,"band_migration_pct":7.06,"rank_corr":0.989919,"top_decile_entries":1,"top_decile_exits":1},
-    "O_plus20pct":{"mean_abs_delta":1.112,"max_abs_delta":3,"band_migration_pct":11.18,"rank_corr":0.997997,"top_decile_entries":0,"top_decile_exits":0},
-    "B_minus20pct":{"mean_abs_delta":0.829,"max_abs_delta":3,"band_migration_pct":3.53,"rank_corr":0.990204,"top_decile_entries":2,"top_decile_exits":2},
-    "B_plus20pct":{"mean_abs_delta":0.606,"max_abs_delta":3,"band_migration_pct":3.53,"rank_corr":0.995766,"top_decile_entries":1,"top_decile_exits":1},
-    "U_minus20pct":{"mean_abs_delta":0.371,"max_abs_delta":2,"band_migration_pct":0.00,"rank_corr":0.998611,"top_decile_entries":0,"top_decile_exits":0},
-    "U_plus20pct":{"mean_abs_delta":0.382,"max_abs_delta":1,"band_migration_pct":1.18,"rank_corr":0.999157,"top_decile_entries":1,"top_decile_exits":1},
-    "S_minus20pct":{"mean_abs_delta":0.447,"max_abs_delta":1,"band_migration_pct":0.59,"rank_corr":0.999849,"top_decile_entries":0,"top_decile_exits":0},
-    "S_plus20pct":{"mean_abs_delta":0.388,"max_abs_delta":1,"band_migration_pct":0.59,"rank_corr":0.999933,"top_decile_entries":0,"top_decile_exits":0},
-    "T_minus20pct":{"mean_abs_delta":0.500,"max_abs_delta":1,"band_migration_pct":0.00,"rank_corr":0.998246,"top_decile_entries":0,"top_decile_exits":0},
-    "T_plus20pct":{"mean_abs_delta":0.500,"max_abs_delta":1,"band_migration_pct":4.12,"rank_corr":0.997818,"top_decile_entries":0,"top_decile_exits":0}
+    "R_minus20pct":{"mean_abs_delta":0.476,"max_abs_delta":2,"band_migration_pct":1.18,"rank_corr":0.999592,"top_decile_entries":0,"top_decile_exits":0},
+    "R_plus20pct":{"mean_abs_delta":0.424,"max_abs_delta":2,"band_migration_pct":1.18,"rank_corr":0.998683,"top_decile_entries":1,"top_decile_exits":1},
+    "O_minus20pct":{"mean_abs_delta":1.471,"max_abs_delta":4,"band_migration_pct":7.65,"rank_corr":0.984744,"top_decile_entries":1,"top_decile_exits":1},
+    "O_plus20pct":{"mean_abs_delta":1.482,"max_abs_delta":3,"band_migration_pct":11.76,"rank_corr":0.997246,"top_decile_entries":0,"top_decile_exits":0},
+    "B_minus20pct":{"mean_abs_delta":1.076,"max_abs_delta":4,"band_migration_pct":10.59,"rank_corr":0.986121,"top_decile_entries":2,"top_decile_exits":2},
+    "B_plus20pct":{"mean_abs_delta":1.035,"max_abs_delta":5,"band_migration_pct":5.29,"rank_corr":0.985890,"top_decile_entries":1,"top_decile_exits":1},
+    "U_minus20pct":{"mean_abs_delta":0.435,"max_abs_delta":2,"band_migration_pct":0.00,"rank_corr":0.998574,"top_decile_entries":0,"top_decile_exits":0},
+    "U_plus20pct":{"mean_abs_delta":0.459,"max_abs_delta":2,"band_migration_pct":2.35,"rank_corr":0.997450,"top_decile_entries":1,"top_decile_exits":1},
+    "S_minus20pct":{"mean_abs_delta":0.553,"max_abs_delta":1,"band_migration_pct":0.59,"rank_corr":0.999837,"top_decile_entries":0,"top_decile_exits":0},
+    "S_plus20pct":{"mean_abs_delta":0.453,"max_abs_delta":2,"band_migration_pct":0.59,"rank_corr":0.999914,"top_decile_entries":0,"top_decile_exits":0},
+    "T_minus20pct":{"mean_abs_delta":0.529,"max_abs_delta":2,"band_migration_pct":0.59,"rank_corr":0.998167,"top_decile_entries":0,"top_decile_exits":0},
+    "T_plus20pct":{"mean_abs_delta":0.541,"max_abs_delta":1,"band_migration_pct":4.12,"rank_corr":0.997541,"top_decile_entries":0,"top_decile_exits":0}
   },
   "leave_one_out_results": {
     "LOO_R":{"mean_abs_delta":2.200,"max_abs_delta":8,"band_migration_pct":25.29,"rank_corr":0.983742,"top_decile_entries":4,"top_decile_exits":4},
-    "LOO_O":{"mean_abs_delta":7.606,"max_abs_delta":17,"band_migration_pct":54.12,"rank_corr":0.673457,"top_decile_entries":5,"top_decile_exits":5},
+    "LOO_O":{"mean_abs_delta":7.606,"max_abs_delta":17,"band_migration_pct":54.12,"rank_corr":0.673521,"top_decile_entries":5,"top_decile_exits":5},
     "LOO_B":{"mean_abs_delta":5.459,"max_abs_delta":20,"band_migration_pct":32.94,"rank_corr":0.738066,"top_decile_entries":7,"top_decile_exits":7},
     "LOO_U":{"mean_abs_delta":2.276,"max_abs_delta":7,"band_migration_pct":7.65,"rank_corr":0.969789,"top_decile_entries":7,"top_decile_exits":7},
     "LOO_S":{"mean_abs_delta":2.506,"max_abs_delta":6,"band_migration_pct":24.71,"rank_corr":0.994446,"top_decile_entries":2,"top_decile_exits":2},
-    "LOO_T":{"mean_abs_delta":2.806,"max_abs_delta":6,"band_migration_pct":20.59,"rank_corr":0.975324,"top_decile_entries":1,"top_decile_exits":1}
+    "LOO_T":{"mean_abs_delta":2.806,"max_abs_delta":6,"band_migration_pct":20.59,"rank_corr":0.975327,"top_decile_entries":1,"top_decile_exits":1}
   },
   "missingness_and_gate": {
     "coverage_buckets":{"70":2,"80":1,"85":7,"100":160},
@@ -97,8 +90,8 @@
   },
   "decisions": {
     "R_weight":"KEEP 10",
-    "O_weight":"KEEP 20; locally most band-sensitive but ±20% remains rank-stable; LOO confirms substantial unique information",
-    "B_weight":"KEEP 30; ±20% remains stable; LOO confirms substantial unique information",
+    "O_weight":"KEEP 20; most locally band-sensitive but ±20% still preserves rank strongly; leave-one-out confirms substantial unique information",
+    "B_weight":"KEEP 30; ±20% remains strongly rank-stable; leave-one-out confirms substantial unique information",
     "U_weight":"KEEP 15",
     "S_weight":"KEEP 15; statewide validation remains source-footprint limited",
     "T_weight":"KEEP 10; governed cohort now supports meaningful sensitivity without stale parcel-sale fallback",
