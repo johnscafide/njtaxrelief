@@ -58,6 +58,12 @@
         setContactAnchor(anchor, false);
         return;
       }
+      if (/^https?:\/\/(?:www\.)?johnscafide\.com(?:\/|$)/i.test(href)) {
+        anchor.setAttribute('href', CONTACT_URL + '?topic=real-estate');
+        anchor.removeAttribute('target');
+        anchor.removeAttribute('rel');
+        return;
+      }
       if (/email\s+(?:agent|john|heather)|call\s+(?:john|heather)|book\s+a\s+call/.test(label)) {
         setContactAnchor(anchor, false);
       }
@@ -68,7 +74,9 @@
     var output = String(value || '');
     PERSONAL_EMAILS.forEach(function (pattern) { output = output.replace(pattern, 'Contact Watchdog'); });
     PERSONAL_PHONES.forEach(function (pattern) { output = output.replace(pattern, 'Contact Watchdog'); });
+    output = output.replace(/John Scafide,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional');
     output = output.replace(/\bJohn Scafide\b/g, 'Watchdog');
+    output = output.replace(/\bJohn or Heather\b/gi, 'the Watchdog team');
     output = output.replace(/\bEmail Agent\b/gi, 'Contact Watchdog');
     output = output.replace(/\bEmail John\b/gi, 'Contact Watchdog');
     output = output.replace(/\bEmail Heather\b/gi, 'Contact Watchdog');
@@ -76,6 +84,7 @@
     output = output.replace(/\bSend to Heather\b/gi, 'Send to Watchdog');
     output = output.replace(/\bJohn will get back to you\b/gi, 'Watchdog will get back to you');
     output = output.replace(/\bHeather will get back to you\b/gi, 'Watchdog will get back to you');
+    output = output.replace(/Watchdog,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional');
     return output;
   }
 
