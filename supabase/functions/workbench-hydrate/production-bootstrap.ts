@@ -7,11 +7,18 @@
 // - never use wildcard CORS;
 // - do not change the legacy NJPropertyTaxRelief static-data base used by the Workbench module.
 //
+// City compatibility provider:
+// - resolve the familiar property-address locality from the NJ Office of GIS statewide geocoder;
+// - keep parcel/MOD-IV MUN_NAME as the separate taxing municipality;
+// - return marker-level provider status/provenance without synthesizing City from municipality.
+//
 // New Home Warranty compatibility provider:
 // - DCA's latest accessible quarterly tables are county-level, not municipality-level;
 // - enrich only authenticated Pro+/Teams/Developer responses after the certified resolver has enforced entitlement;
 // - direct values come from DCA Q4 2025 preliminary data; exact Q3->Q4 changes/rank are governed derivations;
 // - the unsupported municipality-rank marker remains missing rather than being synthesized.
+
+import { enrichCityAddress } from './city-provider.ts';
 
 const WATCHDOG_INDEX_ORIGINS = new Set([
   'https://watchdogindex.com',
@@ -243,9 +250,11 @@ function applyWatchdogIndexCors(origin: string, response: Response) {
 function withWatchdogIndexCors(handler: Deno.ServeHandler): Deno.ServeHandler {
   return async (request, info) => {
     const origin = request.headers.get('origin') || '';
-    const enrichmentRequest = request.clone();
+    const cityRequest = request.clone();
+    const warrantyRequest = request.clone();
     const baseResponse = await handler(request, info);
-    const enrichedResponse = await enrichNewHomeWarranty(enrichmentRequest, baseResponse);
+    const cityResponse = await enrichCityAddress(cityRequest, baseResponse);
+    const enrichedResponse = await enrichNewHomeWarranty(warrantyRequest, cityResponse);
     return applyWatchdogIndexCors(origin, enrichedResponse);
   };
 }
@@ -266,7 +275,7 @@ Object.defineProperty(Deno, 'serve', {
   value: wrappedServe,
 });
 
-// Keep the current certified Workbench provider graph pinned. This is the same
-// provider graph used by production v49; the wrapper only adds canonical WatchdogIndex CORS
-// and the bounded county-level New Home Warranty provider after entitlement enforcement.
+// Keep the current certified Workbench provider graph pinned. The wrapper adds
+// canonical WatchdogIndex CORS plus bounded City and New Home Warranty providers
+// after the base resolver has enforced authentication and entitlement.
 await import('https://raw.githubusercontent.com/johnscafide/njtaxrelief/666fe7392ae43a8be7b7f2512b76894dc64262a2/supabase/functions/workbench-hydrate/index.ts');
