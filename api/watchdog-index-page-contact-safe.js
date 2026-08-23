@@ -1,0 +1,126 @@
+const WATCHDOG_ORIGIN = 'https://www.watchdogindex.com';
+const VERCEL_AUTH_MARKERS = [
+  /log in to vercel/i,
+  /continue with (?:email|google|github|chatgpt)/i,
+  /continue with saml sso/i,
+  /continue with passkey/i,
+  /_vercel\/sso/i,
+  /vercel\.com\/(?:login|sso)/i
+];
+const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
+
+const WATCHDOG_404 = `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive"><title>Page not found | Watchdog</title><style>body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f4f8f8;color:#10294b;font-family:Arial,sans-serif}.c{max-width:680px;padding:48px 28px;text-align:center;background:#fff;border-radius:24px;box-shadow:0 20px 60px rgba(16,41,75,.1)}h1{font-size:clamp(2rem,7vw,4rem);margin:.3em 0}p{color:#687887;line-height:1.6}a{display:inline-block;margin:8px;padding:13px 18px;border-radius:12px;background:#10294b;color:#fff;text-decoration:none;font-weight:700}</style></head><body><main class="c"><strong>404</strong><h1>That page isn’t here.</h1><p>The link may be outdated or the page may have moved.</p><a href="/">Go to Watchdog</a><a href="/contact">Contact Watchdog</a></main></body></html>`;
+
+function first(value) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+function cleanPath(value) {
+  let path = String(value || '/').trim();
+  if (!path.startsWith('/')) path = '/' + path;
+  path = path.replace(/\/{2,}/g, '/');
+  if (path.length > 1) path = path.replace(/\/+$/, '');
+  return path || '/';
+}
+
+function looksLikeVercelAuth(body) {
+  const sample = String(body || '').slice(0, 240000);
+  return VERCEL_AUTH_MARKERS.some((pattern) => pattern.test(sample));
+}
+
+function sanitizeContactHtml(input) {
+  let html = String(input || '');
+
+  html = html.replace(
+    /<a\b([^>]*?)href=(["'])mailto:(?!\?)[^"']*\2([^>]*)>[\s\S]*?<\/a>/gi,
+    '<a$1href="https://www.watchdogindex.com/contact"$3>Contact Watchdog</a>'
+  );
+  html = html.replace(
+    /<a\b([^>]*?)href=(["'])tel:[^"']*\2([^>]*)>[\s\S]*?<\/a>/gi,
+    '<a$1href="https://www.watchdogindex.com/contact"$3>Contact Watchdog</a>'
+  );
+  html = html.replace(
+    /href=(["'])(?:https?:\/\/(?:www\.)?njpropertytaxrelief\.com\/)?(?:index\.html)?#contact\1/gi,
+    'href="https://www.watchdogindex.com/contact"'
+  );
+  html = html.replace(
+    /href=(["'])(?:https?:\/\/(?:www\.)?njpropertytaxrelief\.com\/)?contact\.html\1/gi,
+    'href="https://www.watchdogindex.com/contact"'
+  );
+
+  html = html
+    .replace(/john@johnscafide\.com/gi, 'Contact Watchdog')
+    .replace(/heather@heatherscafide\.com/gi, 'Contact Watchdog')
+    .replace(/(?:\+?1[\s.-]*)?\(?856\)?[\s.-]*404[\s.-]*1098/g, 'Contact Watchdog')
+    .replace(/(?:\+?1[\s.-]*)?\(?856\)?[\s.-]*310[\s.-]*6746/g, 'Contact Watchdog')
+    .replace(/(?:\+?1[\s.-]*)?\(?609\)?[\s.-]*540[\s.-]*5505/g, 'Contact Watchdog')
+    .replace(/\bJohn Scafide\b/g, 'Watchdog')
+    .replace(/\bEmail Agent\b/gi, 'Contact Watchdog')
+    .replace(/\bEmail John\b/gi, 'Contact Watchdog')
+    .replace(/\bEmail Heather\b/gi, 'Contact Watchdog')
+    .replace(/\bSend to John\b/gi, 'Send to Watchdog')
+    .replace(/\bSend to Heather\b/gi, 'Send to Watchdog');
+
+  if (!/contact-routing-policy\.js/i.test(html)) {
+    html = html.replace(/<\/body>/i, `${CONTACT_POLICY_SCRIPT}\n</body>`);
+  }
+  return html;
+}
+
+function copySafeHeaders(upstream, res) {
+  const contentType = upstream.headers.get('content-type');
+  const cacheControl = upstream.headers.get('cache-control');
+  const contentLanguage = upstream.headers.get('content-language');
+  if (contentType) res.setHeader('Content-Type', contentType);
+  else res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  if (cacheControl) res.setHeader('Cache-Control', cacheControl);
+  if (contentLanguage) res.setHeader('Content-Language', contentLanguage);
+  res.setHeader('X-Watchdog-Route-Guard', 'canonical-contact-policy');
+}
+
+function render404(req, res) {
+  res.statusCode = 404;
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  res.setHeader('X-Watchdog-Route-Guard', 'branded-404');
+  if (req.method === 'HEAD') return res.end();
+  return res.end(WATCHDOG_404);
+}
+
+module.exports = async function handler(req, res) {
+  if (req.method !== 'GET' && req.method !== 'HEAD') {
+    res.statusCode = 405;
+    res.setHeader('Allow', 'GET, HEAD');
+    return res.end('Method not allowed');
+  }
+
+  const publicPath = cleanPath(first(req.query && req.query.path));
+  if (publicPath === '/404') return render404(req, res);
+
+  const upstreamUrl = new URL('/api/watchdog-index-page', WATCHDOG_ORIGIN);
+  upstreamUrl.searchParams.set('path', publicPath);
+
+  try {
+    const upstream = await fetch(upstreamUrl, {
+      method: 'GET',
+      headers: {
+        'user-agent': 'WatchdogContactRouteGuard/1.0',
+        'x-watchdog-internal-route': 'canonical-contact-policy'
+      },
+      redirect: 'follow'
+    });
+    const body = await upstream.text();
+    const rejected = !upstream.ok || looksLikeVercelAuth(body) || /^\s*not found\s*$/i.test(body);
+    if (rejected) return render404(req, res);
+
+    res.statusCode = upstream.status;
+    copySafeHeaders(upstream, res);
+    if (req.method === 'HEAD') return res.end();
+    return res.end(sanitizeContactHtml(body));
+  } catch (error) {
+    console.error('[watchdog-contact-route-guard]', publicPath, error && error.message || error);
+    return render404(req, res);
+  }
+};
