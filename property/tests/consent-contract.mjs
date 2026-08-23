@@ -19,11 +19,13 @@ assert(consent.includes("window.gtag('consent',mode||'update'"), 'Google Consent
 assert(consent.includes("window.clarity('consentv2'"), 'Clarity Consent API V2 is missing');
 assert(consent.includes("analytics_Storage:analytics?'granted':'denied'"), 'Clarity analytics storage consent is missing');
 assert(consent.includes("ad_Storage:'denied'"), 'Clarity ad storage must stay denied');
-assert(consent.includes('Reject optional'), 'Reject optional choice is missing');
-assert(consent.includes('Accept analytics'), 'Accept analytics choice is missing');
+assert(consent.includes('Reject optional cookies'), 'Reject optional cookies choice is missing');
+assert(consent.includes('Accept all cookies'), 'Accept all cookies choice is missing');
 assert(consent.includes('Cookie settings'), 'Cookie settings choice is missing');
-assert(consent.includes('Necessary'), 'Necessary storage disclosure is missing');
-assert(consent.includes('Google Analytics and Microsoft Clarity'), 'Analytics providers are not identified');
+assert(consent.includes('Necessary cookies'), 'Necessary cookies disclosure is missing');
+assert(consent.includes('Optional cookies'), 'Optional cookies disclosure is missing');
+assert(consent.includes('GA_ID'), 'Google Analytics consent implementation is missing');
+assert(consent.includes('CLARITY_ID'), 'Microsoft Clarity consent implementation is missing');
 assert(!consent.includes('supabase.co'), 'Browser cookie choice must not be written to Supabase');
 assert(!consent.includes('user_id'), 'Cookie preference storage must not be linked to a user ID');
 
