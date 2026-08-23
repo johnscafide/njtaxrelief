@@ -44,6 +44,14 @@ assert.match(creativeAdapter,/PCM_LIVE_LAUNCH_ENABLED/,'PCM adapter must retain 
 assert.match(creativeAdapter,/legacy_launch_disabled:true/,'Legacy browser-triggered provider launch must remain disabled.');
 assert.match(creativeAdapter,/live_launch_enabled:false/,'Creative adapter status must not advertise browser-triggered live fulfillment.');
 
+const legacyDirect=read('supabase/functions/pcm-direct-mail/index.ts');
+assert.match(legacyDirect,/LEGACY_PCM_DIRECT_SUBMIT_DISABLED/,'Legacy Data Workbench PCM submit must fail closed.');
+assert.match(legacyDirect,/provider_mutation_called:\s*false/,'Legacy PCM submit response must explicitly report no provider mutation.');
+assert.match(legacyDirect,/order_submission:\s*false/,'Legacy PCM status must not advertise order submission.');
+assert.match(legacyDirect,/authoritative_paid_fulfillment:\s*'marketing-direct-mail-fulfill'/,'Legacy PCM status must point at authoritative service-role fulfillment.');
+assert.doesNotMatch(legacyDirect,/fetch\s*\(/,'Legacy browser PCM adapter must not contain any outbound provider call.');
+assert.doesNotMatch(legacyDirect,/PLACE_ORDER/,'Legacy browser PCM adapter must not retain the old paid-order confirmation path.');
+
 const fulfill=read('supabase/functions/marketing-direct-mail-fulfill/index.ts');
 assert.match(fulfill,/Bearer \$\{SERVICE\}/,'Paid fulfillment must require service-role authorization.');
 assert.match(fulfill,/marketing_payments/,'Paid fulfillment must re-read the server payment ledger.');
@@ -69,4 +77,5 @@ assert.match(schema,/revoke insert,update,delete on public\.marketing_launch_app
 const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
-console.log('Marketing Creative Studio, PCM editor refresh, and touchless paid Direct Mail fulfillment contracts passed.');
+assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
+console.log('Marketing Creative Studio, PCM editor refresh, legacy-submit shutdown, and touchless paid Direct Mail fulfillment contracts passed.');
