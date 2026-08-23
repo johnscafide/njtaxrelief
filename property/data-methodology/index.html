@@ -4,15 +4,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Data Methodology | How Watchdog Builds New Jersey Property Intelligence</title>
-  <meta name="description" content="An extensive guide to Watchdog's New Jersey property-data methodology: public sources, parcel matching, MOD-IV, SR1A, equalization, Chapter 123, permits, spatial screening, derived formulas, confidence, freshness and limitations.">
+  <meta name="description" content="Watchdog's New Jersey property-data methodology: source provenance, parcel matching, MOD-IV, SR1A, Chapter 123, governed formulas, the Watchdog Score and ROBUST Framework, confidence, freshness and limitations.">
   <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large">
-  <link rel="canonical" href="https://njpropertytaxrelief.com/property/data-methodology">
+  <meta name="author" content="Watchdog">
+  <link rel="canonical" href="https://www.watchdogindex.com/data-methodology">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/data-methodology.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <style id="md-ux-polish">
     .md-page .md-hero .md-btn-primary,
     .md-page .md-hero .md-btn-primary:visited {
@@ -110,22 +117,57 @@
     "@context":"https://schema.org",
     "@type":"TechArticle",
     "headline":"How Watchdog Builds New Jersey Property Intelligence",
-    "description":"Watchdog's public data methodology covering source provenance, parcel matching, official New Jersey tax and GIS records, derived calculations, confidence and limitations.",
-    "dateModified":"2026-08-17",
-    "author":{"@type":"Organization","name":"Watchdog Property Intelligence"},
-    "publisher":{"@type":"Organization","name":"Watchdog Property Intelligence"},
-    "mainEntityOfPage":"https://njpropertytaxrelief.com/property/data-methodology"
+    "description":"Watchdog's public data methodology covering source provenance, parcel matching, official New Jersey tax and GIS records, governed derived calculations, the Watchdog Score and ROBUST Framework, confidence and limitations.",
+    "dateModified":"2026-08-23",
+    "author":{"@type":"Organization","name":"Watchdog"},
+    "publisher":{"@type":"Organization","name":"Watchdog"},
+    "mainEntityOfPage":"https://www.watchdogindex.com/data-methodology"
   }
   </script>
 </head>
 <body class="md-page">
-  <div id="md-nav"></div>
+  <!-- SITE NAV: same public Watchdog shell/runtime as / and /faq -->
+  <header class="wd-nav" id="wd-nav">
+    <div class="wd-nav-in">
+      <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+        <i class="fas fa-bars"></i><span>Menu</span>
+      </button>
+      <a class="wd-logo" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+      <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+        <i class="fas fa-user"></i><span>Sign in</span>
+      </button>
+    </div>
+  </header>
+  <div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+  <aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation">
+    <div class="wd-public-sheet-head"><b><i class="fas fa-dog"></i> Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close menu"><i class="fas fa-xmark"></i></button></div>
+    <div class="wd-public-section"><span class="wd-public-label">Property intelligence</span>
+      <a class="wd-public-link" href="/property/"><i class="fas fa-magnifying-glass"></i><span>Property lookup</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/dashboard"><i class="fas fa-table-columns"></i><span>My properties</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/home"><i class="fas fa-heart"></i><span>Watchlist</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/town-compare"><i class="fas fa-route"></i><span>Compare towns</span><i class="fas fa-chevron-right"></i></a>
+    </div>
+    <div class="wd-public-section"><span class="wd-public-label">Tax relief &amp; research</span>
+      <a class="wd-public-link" href="/anchor-estimator.html"><i class="fas fa-hand-holding-dollar"></i><span>ANCHOR &amp; Stay NJ estimator</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/fairness"><i class="fas fa-scale-balanced"></i><span>Assessment fairness</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/data-methodology"><i class="fas fa-book-open"></i><span>Data methodology</span><i class="fas fa-chevron-right"></i></a>
+    </div>
+    <div class="wd-public-section"><span class="wd-public-label">Watchdog</span>
+      <a class="wd-public-link" href="/property/pro"><i class="fas fa-briefcase"></i><span>Professional intelligence</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/pro#plans"><i class="fas fa-tags"></i><span>Plans &amp; pricing</span><i class="fas fa-chevron-right"></i></a>
+      <a class="wd-public-link" href="/property/updates"><i class="fas fa-clock-rotate-left"></i><span>What's new</span><i class="fas fa-chevron-right"></i></a>
+    </div>
+  </aside>
+  <aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+    <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+    <div id="wd-profile-content"></div>
+  </aside>
 
   <header class="md-hero">
     <div class="md-shell">
       <span class="md-kicker"><i class="fas fa-diagram-project"></i> Data methodology</span>
       <h1>How Watchdog builds a <em>property record.</em></h1>
-      <p class="md-hero-lead">Watchdog combines public records from New Jersey agencies into one property record. We identify the parcel, keep the original source attached, standardize the fields, check the data, and calculate Watchdog markers only when the required inputs are available. This page explains each step.</p>
+      <p class="md-hero-lead">Watchdog combines public records from New Jersey agencies into one property record. We identify the parcel, keep the original source attached, standardize the fields, check the data, and calculate governed Watchdog markers only when the required inputs are available. That same source-and-evidence discipline now governs the Watchdog Score through ROBUST-v1. This page explains each step.</p>
       <div class="md-hero-actions">
         <a class="md-btn md-btn-primary" href="#source-registry">View data sources <i class="fas fa-arrow-down"></i></a>
         <a class="md-btn md-btn-ghost" href="#audit">Check a result <i class="fas fa-magnifying-glass"></i></a>
@@ -136,9 +178,9 @@
   <section class="md-proof" aria-label="Watchdog data proof">
     <div class="md-shell md-proof-grid">
       <div class="md-proof-item"><strong>564</strong><span>New Jersey municipalities in the statewide property framework</span></div>
-      <div class="md-proof-item"><strong>131,244</strong><span>SR1A verified sales on file in the current published Watchdog reference set</span></div>
-      <div class="md-proof-item"><strong>103</strong><span>Current provider-to-marker provenance mappings in production governance</span></div>
-      <div class="md-proof-item"><strong>33</strong><span>Live governed derived formulas in the current formula registry</span><a href="#derived">See the formulas <i class="fas fa-arrow-right"></i></a></div>
+      <div class="md-proof-item"><strong>289</strong><span>Governed provider-to-marker provenance mappings in production</span></div>
+      <div class="md-proof-item"><strong>112</strong><span>Live governed formulas across the current versioned formula registry</span></div>
+      <div class="md-proof-item"><strong>6</strong><span>ROBUST dimensions power the canonical property Watchdog Score</span><a href="#robust">See ROBUST <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
@@ -156,6 +198,7 @@
       <a href="#normalization">How records are matched</a>
       <a href="#provenance">How data points are tracked</a>
       <a href="#derived">Watchdog formulas</a>
+      <a href="#robust">Watchdog Score &amp; ROBUST</a>
       <a href="#confidence">Confidence &amp; missing data</a>
       <a href="#freshness">Data freshness</a>
       <a href="#privacy">Privacy &amp; Daniel's Law</a>
@@ -208,9 +251,9 @@
           <div class="md-source-row"><div><b>DCA affordable-housing reporting</b><p>Official reporting page and linked workbook</p></div><div><span class="md-status partial">Partial</span></div><div><b>Annual · municipality</b></div><div><p>The public page and workbook currently present inconsistent vintages in Watchdog's source registry. The marker family is therefore not treated as fully live until the vintage is reconciled.</p></div></div>
           <div class="md-source-row"><div><b>DCA Neighborhood Trends</b><p>2026 workbook</p></div><div><span class="md-status partial">Partial</span></div><div><b>Annual · census tract / neighborhood</b></div><div><p>The source is authoritative, but municipal rollups require a governed tract-to-municipality crosswalk. Watchdog does not treat a tract-level workbook as natively municipal.</p></div></div>
           <div class="md-source-row"><div><b>DCA New Home Warranty reporting</b><p>Quarterly program reporting</p></div><div><span class="md-status partial">Partial</span></div><div><b>Quarterly · municipality / county</b></div><div><p>The reporting program exists, but a current 2026 workbook endpoint was unavailable during the latest source-health check. That source-health failure blocks a full live status.</p></div></div>
-          <div class="md-source-row"><div><b>DCA Community Asset Map</b></div><div><span class="md-status planned">Planned</span></div><div><b>Source-dependent</b></div><div><p>The official map exists. Watchdog will not activate its markers until the authoritative ArcGIS item/layer IDs and normalized mappings are pinned.</p></div></div>
+          <div class="md-source-row"><div><b>DCA Community Asset Map family</b><p>Authoritative community-asset and designation layers</p></div><div><span class="md-status partial">Partial · live subset</span></div><div><b>Source-dependent · property intersection</b></div><div><p>Watchdog now has pinned live property-level intersections for Urban Enterprise Zones, Areas in Need of Redevelopment, current Opportunity Zones and the current Transit Village half-mile buffer. Other community-asset access fields remain planned until their authoritative layers and exact semantics are pinned.</p></div></div>
           <div class="md-source-row"><div><b>DCA Municipal Housing Profile</b></div><div><span class="md-status planned">Planned</span></div><div><b>Annual · municipality</b></div><div><p>The official profile exists, but the current public delivery is a dashboard. A stable machine-readable export and schema must be governed before production use.</p></div></div>
-          <div class="md-source-row"><div><b>DCA zoning directory</b><p>Official directory, not zoning classification data</p></div><div><span class="md-status partial">Partial</span></div><div><b>Manual / irregular</b><p>Directory vintage currently tracked as 2023-03-09.</p></div><div><p>Useful for linking users to official municipal zoning maps or ordinances. It is not used to infer a parcel's zoning classification because DCA does not attest to the timeliness of every linked local document.</p></div></div>
+          <div class="md-source-row"><div><b>DCA zoning directory</b><p>Official directory, map/ordinance links and municipal contact context</p></div><div><span class="md-status partial">Partial · live fields</span></div><div><b>Manual / irregular</b><p>Current governed sources: March 2026 workbook + feature service.</p></div><div><p>Five exact directory fields are currently governed: zoning map URL, zoning ordinance URL, municipal zoning portal, zoning officer contact and directory row status. Watchdog still does not infer a parcel's zoning classification or unverified planning links from those directory records.</p></div></div>
           <div class="md-source-row"><div><b>Statewide DCA “PILOT forecast”</b></div><div><span class="md-status unavailable">Unavailable</span></div><div><b>No confirmed source</b></div><div><p>No authoritative statewide DCA dataset matching that proposed concept has been confirmed. Watchdog keeps it unavailable rather than creating a forecast without a defined source.</p></div></div>
         </div>
         <p class="md-mini">Status reflects Watchdog's production governance and latest source-health review, not a promise that an outside agency endpoint can never change. Source publishers control their own publication schedules, corrections and availability.</p>
@@ -226,6 +269,7 @@
           <article class="md-card"><span class="md-tag">Resolution</span><h3>Parcel keys first</h3><p>Production property resolution uses the PAMS parcel identifier where available, with municipal, block and lot keys supporting source joins. DCA permit matching likewise requires Treasury municipality code plus block and lot for property-level matching.</p></article>
           <article class="md-card"><span class="md-tag">Tax timing</span><h3>Annual tax timing</h3><p>The public property record exposes the latest available annual-tax field from the published parcel/tax data. Municipal rates are set by tax year, so Watchdog labels older or prior-year billed amounts rather than presenting them as a live current-year invoice.</p></article>
         </div>
+        <div class="md-quote"><strong>Longitudinal source plane:</strong> production now has a governed live MOD-IV release spanning tax years 2021 through 2026 for approved historical workflows. That source-plane coverage does not mean every historical Watchdog marker is live or backfilled; marker-level provider and formula evidence still controls.</div>
         <div class="md-quote"><strong>Important:</strong> NJOGIS says the statewide normalized parcels align with Treasury's property-assessment system, but county and municipal governments remain responsible for local parcel stewardship. A newer local record can therefore exist before it reaches the statewide composite.</div>
       </section>
 
@@ -245,12 +289,13 @@
       <section class="md-section" id="chapter123">
         <div class="md-eyebrow"><i class="fas fa-scale-balanced"></i> Chapter 123</div>
         <h2>How Chapter 123 screening works</h2>
-        <p>The Division of Taxation describes the Common Level Range as plus or minus 15% of the taxing district's average ratio and publishes annual Chapter 123 reference tables. Watchdog's governed Chapter 123 markers use the published common-level ratio/range together with parcel assessment and plausible sale evidence to determine whether a property appears above the upper limit.</p>
+        <p>The Division of Taxation publishes annual Chapter 123 Common Level Range reference tables. Watchdog uses the certified common-level ratio and certified range with parcel assessment and defensible market evidence. The current implementation reads the certified upper limit where available, treats a legal upper limit above 100% as 100%, and does not apply the Chapter 123 range in a revaluation or reassessment year.</p>
         <div class="md-formulas">
-          <div class="md-formula"><h3>Assessment-to-sale ratio</h3><div><code>recorded assessment ÷ plausible recorded sale price</code><p>A sale must first be suitable for screening. The ratio is not calculated from a nominal or clearly unusable sale and called evidence.</p></div></div>
-          <div class="md-formula"><h3>Upper-limit comparison</h3><div><code>assessment ratio compared with published Chapter 123 upper limit</code><p>The screen asks whether the relationship between assessment and market evidence sits beyond the permitted range, not whether the tax bill merely feels high.</p></div></div>
-          <div class="md-formula"><h3>Target assessment</h3><div><code>screening-supported assessment when current ratio exceeds the upper limit</code><p>This supports an estimated reduction marker. It is not a promise that a county board will adopt the number.</p></div></div>
-          <div class="md-formula"><h3>Estimated annual tax difference</h3><div><code>screening reduction carried through the property's current tax relationship</code><p>Watchdog labels this as an estimate. A successful appeal, future municipal rate and final tax bill remain outside the screen.</p></div></div>
+          <div class="md-formula"><h3>Assessment-to-sale ratio</h3><div><code>recorded assessment ÷ defensible recorded sale price</code><p>A sale must first be suitable for screening. Nominal, clearly unusable or unsupported sale evidence is not converted into an appeal conclusion.</p></div></div>
+          <div class="md-formula"><h3>Certified upper-limit comparison</h3><div><code>assessment ratio compared with the published Chapter 123 upper limit</code><p>Watchdog uses the certified range rather than manufacturing a legal upper limit from a peer-assessment median. The upper-limit context is capped at 100% where required.</p></div></div>
+          <div class="md-formula"><h3>Revaluation / reassessment guard</h3><div><code>Chapter 123 range logic disabled for the revaluation or reassessment tax year</code><p>Those years follow a different assessment standard. Watchdog does not force ordinary Chapter 123 range logic into that context.</p></div></div>
+          <div class="md-formula"><h3>Target assessment</h3><div><code>screening-supported assessment only when the applicable evidence and rules support the calculation</code><p>If defensible value evidence is absent, the screen stays unsupported rather than substituting nearby assessments as market value.</p></div></div>
+          <div class="md-formula"><h3>Estimated annual tax difference</h3><div><code>supported screening reduction carried through the property's current tax relationship</code><p>Watchdog labels this as an estimate. A successful appeal, future municipal rate and final tax bill remain outside the screen.</p></div></div>
         </div>
         <div class="md-callout"><h3>Chapter 123 screening is not an appeal decision.</h3><p>The State says a taxpayer must prove that an assessment does not fairly represent the applicable true-market-value or Common Level Range standard. Watchdog helps organize the public evidence and identify whether further work is warranted. Filing rules, deadlines, comparable-sale evidence and the county board's judgment still control the actual case.</p></div>
       </section>
@@ -296,12 +341,12 @@
       <section class="md-section" id="provenance">
         <div class="md-eyebrow"><i class="fas fa-fingerprint"></i> Data point tracking</div>
         <h2>How we track each data point</h2>
-        <p>Production governance currently contains 103 provider-to-marker mappings. A mapping can identify the provider type, provider key, source keys, original source fields, calculation key, value status, freshness/cache policy and whether the marker is suitable for bulk workflows. This metadata lets a user trace a value back to the source or formula that produced it.</p>
+        <p>Production governance currently contains <strong>289 provider-to-marker mappings</strong> spanning 28 provider keys. Of those mappings, 285 are currently live, three are partial and one is unavailable. A mapping can identify the provider type, provider key, source keys, original source fields, calculation key, value status, freshness/cache policy and whether the marker is suitable for bulk workflows. This metadata lets a user trace a value back to the source or formula that produced it.</p>
         <div class="md-code"><span class="muted">illustrative provenance record</span><br>{<br>&nbsp;&nbsp;<span class="key">marker</span>: <span class="op">"property.assessed_value"</span>,<br>&nbsp;&nbsp;<span class="key">provider_kind</span>: <span class="op">"authoritative_source"</span>,<br>&nbsp;&nbsp;<span class="key">source_keys</span>: [<span class="op">"NJ MOD-IV"</span>, <span class="op">"NJOGIS Parcels"</span>],<br>&nbsp;&nbsp;<span class="key">source_fields</span>: [<span class="op">"NET_VALUE"</span>],<br>&nbsp;&nbsp;<span class="key">value_status</span>: <span class="op">"live"</span><br>}<br><br><span class="muted">derived markers replace source_fields with a governed calculation/dependency chain where appropriate.</span></div>
         <div class="md-principles">
           <article class="md-card"><span class="md-tag">Field lineage</span><h3>Original field names</h3><p>Product labels can be human-friendly without erasing the source schema. That matters when a professional wants to reconcile a Watchdog value with the underlying government file.</p></article>
           <article class="md-card"><span class="md-tag">Value status</span><h3>Missing source values</h3><p>The property owner-name marker is currently governed as unavailable from the connected statewide public source rather than being reconstructed from another personal-data source.</p></article>
-          <article class="md-card"><span class="md-tag">Calculation key</span><h3>Calculated values</h3><p>Equalized-value and Chapter 123 markers point to calculation keys instead of being presented as raw source fields.</p></article>
+          <article class="md-card"><span class="md-tag">Calculation key</span><h3>Calculated values</h3><p>Equalized-value, Chapter 123 and score markers point to governed calculation keys or formula-registry entries instead of being presented as raw source fields.</p></article>
           <article class="md-card"><span class="md-tag">Delivery freshness</span><h3>Refresh timing</h3><p>A provider's freshness/cache setting controls how Watchdog serves or rechecks a value. It does not mean the State republishes that dataset every 30 minutes, six hours or 24 hours.</p></article>
         </div>
       </section>
@@ -309,7 +354,7 @@
       <section class="md-section" id="derived">
         <div class="md-eyebrow"><i class="fas fa-function"></i> Watchdog formulas</div>
         <h2>How Watchdog calculations work</h2>
-        <p>The current governed formula registry contains 33 live formulas under the <code>watchdog-derived-v3</code> engine family. Each entry records an operation, formula, dependencies, confidence level, status, explanation and configuration. Some are simple ratios. Others combine governed screening inputs. The formula registry is separate from the source registry because the result belongs to Watchdog, not to the publishing agency.</p>
+        <p>The current governed formula registry contains <strong>112 live formulas</strong> across versioned engine families. Thirty-one remain under <code>watchdog-derived-v3</code>; newer governed families cover additional fiscal, revaluation, subject-evidence, score-product, Chapter 123, closing and other production calculations. The canonical property Watchdog Score is registered separately as <code>watchdog.watchdog_score / ROBUST-v1</code>. Each formula entry records its operation, dependencies, confidence, status, explanation and configuration.</p>
         <div class="md-formulas">
           <div class="md-formula"><h3>Assessment per acre</h3><div><code>NET_VALUE ÷ CALC_ACRE</code><p>Normalizes recorded assessment by source acreage.</p></div></div>
           <div class="md-formula"><h3>Assessment-to-sale ratio</h3><div><code>NET_VALUE ÷ SALE_PRICE</code><p>Simple relationship between two published property fields. Suitability of the sale is a separate question.</p></div></div>
@@ -324,19 +369,43 @@
           <div class="md-formula"><h3>Due-diligence signal count</h3><div><code>count(active governed flood, tidal, wetland, title-reference, environmental and jurisdictional screens)</code><p>A triage count. Every underlying signal retains its own meaning and caveat.</p></div></div>
           <div class="md-formula"><h3>Transaction diligence completion</h3><div><code>checked governed preflight sources ÷ required governed preflight sources × 100</code><p>Measures source coverage, not whether a transaction is “ready to close.”</p></div></div>
         </div>
-        <div class="md-callout"><h3>How weighted scores should be read</h3><p>Composite screens can prioritize attention by applying documented weights to governed inputs. The weight describes <strong>Watchdog's triage model</strong>; it does not transform an environmental map, permit record or title-reference screen into a professional determination by the source agency.</p></div>
+        <div class="md-callout"><h3>How weighted scores should be read</h3><p>Composite screens can prioritize attention by applying documented weights to governed inputs. The weight describes <strong>Watchdog's governed model</strong>; it does not transform an environmental map, permit record, source statistic or title-reference screen into a professional determination by the source agency.</p></div>
+      </section>
+
+      <section class="md-section" id="robust">
+        <div class="md-eyebrow"><i class="fas fa-gauge-high"></i> Watchdog Score</div>
+        <h2>Watchdog Score and the ROBUST Framework</h2>
+        <p><strong>The Watchdog Score is powered by the ROBUST Framework.</strong> The current canonical property model is <code>ROBUST-v1</code>, a 0–100 property-tax and assessment context signal organized into six named dimensions. The product is called the Watchdog Score, not the “ROBUST Score.”</p>
+        <div class="md-cards">
+          <article class="md-card"><span class="md-tag">R · 10%</span><h3>Recourse</h3><p>Paths and evidence for review, including governed county appeal context. Appeal-rate evidence uses filed-case context rather than only the subset of cases that reached a decided outcome.</p></article>
+          <article class="md-card"><span class="md-tag">O · 20%</span><h3>Overassessment Position</h3><p>Where the individual assessment sits against independently supported value and applicable Chapter 123 evidence. “Position” is intentional: the dimension does not presume that a property is legally overassessed.</p></article>
+          <article class="md-card"><span class="md-tag">B · 30%</span><h3>Burden</h3><p>Recurring property tax relative to supported/equalized property value.</p></article>
+          <article class="md-card"><span class="md-tag">U · 15%</span><h3>Uniformity</h3><p>Consistency across the local assessment system, using governed residential assessment-dispersion evidence. Uniformity is a system-level concept and is separate from an individual property's Overassessment Position.</p></article>
+          <article class="md-card"><span class="md-tag">S · 15%</span><h3>Stability</h3><p>Assessment-system stability after accounting for governed revaluation or reassessment pressure.</p></article>
+          <article class="md-card"><span class="md-tag">T · 10%</span><h3>Trajectory</h3><p>Direction of the property's tax position using defensible sale/assessment evidence and verified municipal ratio context when the required inputs exist.</p></article>
+        </div>
+        <div class="md-code"><span class="muted">ROBUST-v1 canonical weighting</span><br><span class="key">Watchdog Score</span> <span class="op">=</span> 10% R + 20% O + 30% B + 15% U + 15% S + 10% T<br><span class="muted">missing dimension → omit it; renormalize the remaining available weights; report evidence coverage separately</span></div>
+        <div class="md-principles">
+          <article class="md-card"><span class="md-tag">Score</span><h3>The level signal</h3><p>The 0–100 result under a named model version. Same governed evidence plus the same model/formula version should produce the same result.</p></article>
+          <article class="md-card"><span class="md-tag">Confidence</span><h3>Evidence is separate</h3><p>Coverage and confidence describe how much governed evidence supports the result. Missing dimensions are not filled with a synthetic 0, 50, 100 or other neutral guess.</p></article>
+          <article class="md-card"><span class="md-tag">Calibration</span><h3>ROBUST-v1 remains current</h3><p>Phase 1 sensitivity testing reproduced all 336 persisted canonical observations exactly and did not justify changing the current weights. The observed cohort is not yet representative enough to call the model a final statewide statistical optimum.</p></article>
+          <article class="md-card"><span class="md-tag">Momentum</span><h3>Change stays separate</h3><p>Direction over time belongs in a separately governed change/momentum layer. Watchdog does not force movement into the current level score simply to make the headline number more dynamic.</p></article>
+        </div>
+        <div class="md-callout"><h3>ROBUST is not a desirability, credit or underwriting score.</h3><p>It does not grade a family, neighborhood, municipality, county or government. Protected-class and demographic characteristics are excluded from the core score. The Watchdog Score by itself cannot determine an appeal, appraisal, loan, insurance decision, legal outcome, eligibility decision, steering recommendation or where someone should live.</p></div>
+        <p class="md-mini">Learn more in the <a href="/property/robust/">ROBUST Framework</a> and the living <a href="/property/whitepapers/watchdog-score/">Watchdog Score methodology whitepaper</a>.</p>
       </section>
 
       <section class="md-section" id="confidence">
         <div class="md-eyebrow"><i class="fas fa-signal"></i> Confidence &amp; missing data</div>
         <h2>Missing data stays missing</h2>
-        <p>Confidence describes the quality or completeness of the evidence supporting a result. Missing inputs should lower completeness, reduce confidence, neutralize a dependency or stop a calculation. They should not silently become zero, “no risk,” or “good.”</p>
+        <p>Confidence describes the quality or completeness of the evidence supporting a result. Missing inputs should lower completeness, reduce confidence, neutralize a dependency or stop a calculation. They should not silently become zero, “no risk,” or “good.” For ROBUST-v1, an unavailable dimension is omitted and the remaining available weights are renormalized; evidence coverage remains visible as a separate measure.</p>
         <div class="md-principles">
           <article class="md-card"><span class="md-tag">High confidence</span><h3>Direct source inputs</h3><p>Simple ratios and completeness measures built from present authoritative fields can carry high formula confidence because the operation and dependencies are explicit.</p></article>
           <article class="md-card"><span class="md-tag">Medium confidence</span><h3>Screening data</h3><p>Permit, environmental and composite due-diligence markers are intentionally labeled as screens. Their usefulness is high, but their meaning depends on public-map coverage, matching and professional follow-through.</p></article>
           <article class="md-card"><span class="md-tag">Partial</span><h3>Partial coverage</h3><p>A provider or derived value can be marked partial when coverage, source delivery or required dependencies are incomplete. Partial is not silently promoted to live/full coverage.</p></article>
           <article class="md-card"><span class="md-tag">Unavailable</span><h3>Unavailable data</h3><p>If the connected public source does not expose a usable value, or an authoritative source has not been confirmed, Watchdog can leave the marker unavailable rather than filling the blank from an ungoverned source.</p></article>
         </div>
+        <div class="md-quote"><strong>No numeric-only score certification gate yet:</strong> current ROBUST calibration shows that a coverage percentage alone can hide which dimensions are actually missing. A future qualification rule must consider evidence composition, source quality and recency, and model compatibility in addition to a percentage.</div>
       </section>
 
       <section class="md-section" id="freshness">
@@ -349,8 +418,8 @@
           <article class="md-card"><h3>3. Watchdog source check</h3><p>When Watchdog last checked the governed source endpoint, workbook, API or mapping relationship. A successful check does not rewrite the agency's source vintage.</p></article>
           <article class="md-card"><h3>4. Delivery/cache timing</h3><p>How long Watchdog may reuse a resolved provider value before rechecking it. This is an application policy, not a claim about how often government records change.</p></article>
         </div>
-        <p class="md-copy">Government agencies can correct historical files, replace endpoints, revise GIS layers or publish new tax-year tables. When an authoritative source changes, the source record controls. Watchdog's calculation version tells you how a derived marker was produced; it does not freeze a government fact forever.</p>
-        <div class="md-quote"><strong>Current governance limitation:</strong> Watchdog has architecture for source releases, snapshots, changes and data-quality history, but this public methodology does not claim a complete historical release ledger for every source. Formula versioning and current source/provenance status are live; complete source-by-source historical replay should only be claimed where that history is actually populated.</div>
+        <p class="md-copy">Government agencies can correct historical files, replace endpoints, revise GIS layers or publish new tax-year tables. When an authoritative source changes, the source record controls. Watchdog's calculation/model version tells you how a derived marker was produced; it does not freeze a government fact forever.</p>
+        <div class="md-quote"><strong>Current governance state:</strong> Watchdog now has a live governed MOD-IV longitudinal release covering 2021–2026 and versioned formula/model registries, but this page still does not claim a complete source-by-source historical replay ledger for every provider. Historical replay is claimed only where the required release, snapshot and marker-level evidence is actually populated.</div>
       </section>
 
       <section class="md-section" id="privacy">
@@ -373,6 +442,7 @@
           <div class="md-limit"><b>Not a wetlands delineation</b><span>Mapped wetlands are a reference layer and can differ from site-specific delineation or jurisdictional review.</span></div>
           <div class="md-limit"><b>Not permit clearance</b><span>DCA's raw record feed is not a municipal certificate that a permit is open, closed, compliant or free of local issues.</span></div>
           <div class="md-limit"><b>Not a tax appeal guarantee</b><span>Chapter 123 screening organizes public evidence. County boards, Tax Court and current filing requirements govern the actual appeal.</span></div>
+          <div class="md-limit"><b>Not a credit, lending or insurance decision</b><span>The Watchdog Score and ROBUST dimensions are property-intelligence context and cannot substitute for regulated underwriting, eligibility or carrier/lender requirements.</span></div>
           <div class="md-limit"><b>Not real-time government data</b><span>Each source has its own publication lag and correction cycle. A current Watchdog page can still be displaying the latest available prior-year government field.</span></div>
           <div class="md-limit"><b>Missing does not mean safe</b><span>Unavailable or incomplete source coverage is not interpreted as proof that a risk, permit, lien, condition or constraint does not exist.</span></div>
         </div>
@@ -389,6 +459,7 @@
             <li><strong>Read the source and vintage.</strong> Determine which agency or governed public layer supplied the input and which tax year/report period it represents.</li>
             <li><strong>Inspect the source fields.</strong> For core property data, reconcile fields such as assessment, annual tax, sale/deed references or construction year with the official record where the decision is material.</li>
             <li><strong>For a derived value, inspect dependencies.</strong> A result cannot be stronger than the inputs feeding it. Missing dependencies should be visible as missing/partial, not assumed away.</li>
+            <li><strong>For a Watchdog Score, verify the model and evidence.</strong> The canonical property score is <code>watchdog.watchdog_score / ROBUST-v1</code>; read the R/O/B/U/S/T components together with evidence coverage/confidence instead of treating the headline number as a standalone fact.</li>
             <li><strong>For a spatial screen, open the underlying map or agency record.</strong> The Watchdog intersection tells you where to look next.</li>
             <li><strong>For an appeal, title, environmental, lending or appraisal decision, verify with the authority or qualified professional.</strong> Watchdog shortens the research path; it does not replace the official process.</li>
           </ol>
@@ -399,6 +470,8 @@
         <div class="md-eyebrow"><i class="fas fa-circle-question"></i> FAQ</div>
         <h2>Common questions about the data</h2>
         <div class="md-faq">
+          <details><summary>What is the ROBUST Framework?</summary><p>The Watchdog Score is powered by the ROBUST Framework: Recourse, Overassessment Position, Burden, Uniformity, Stability and Trajectory. ROBUST explains the six dimensions behind the canonical property Watchdog Score; it is not a separate “ROBUST Score.”</p></details>
+          <details><summary>What happens when a ROBUST dimension is missing?</summary><p>The missing dimension is omitted and the remaining available weights are renormalized. Watchdog reports evidence coverage/confidence separately. The current model does not fill missing score evidence with an invented 0, 50, 100 or other neutral value.</p></details>
           <details><summary>Why can Watchdog and a municipal record differ?</summary><p>The statewide source can lag a local assessor, county, recorder or agency update. Government publishers also correct files and layers on different schedules. When a discrepancy matters, the current authoritative agency record controls and Watchdog should be treated as a research layer, not a replacement for that record.</p></details>
           <details><summary>Does “live” mean real-time?</summary><p>No. “Live” is a Watchdog integration status: the source/provider is governed for current production use. The underlying government dataset may publish annually, monthly, quarterly or irregularly. Source vintage and publisher cadence remain separate.</p></details>
           <details><summary>What happens when a source is missing?</summary><p>A missing field should remain missing, reduce a completeness/confidence measure, neutralize a dependent calculation or make the result partial/unavailable. It should not silently become zero or “no issue.”</p></details>
@@ -411,14 +484,18 @@
       <section class="md-section">
         <div class="md-footer-note">
           <h3>Found a source problem or a value that does not match?</h3>
-          <p>Include the property address or parcel identifier, the value in question, the source you compared it with and the date you checked it. <a href="mailto:john@johnscafide.com">Report a data issue</a> or review <a href="/property/updates">Watchdog updates</a>. For official tax, assessment, appeal, permit, environmental or parcel corrections, contact the agency that owns the underlying record.</p>
+          <p>Include the property address or parcel identifier, the value in question, the source you compared it with and the date you checked it. <a href="/property/support">Report a data issue through Watchdog Support</a> or review <a href="/property/updates">Watchdog updates</a>. For official tax, assessment, appeal, permit, environmental or parcel corrections, contact the agency that owns the underlying record.</p>
         </div>
-        <p class="md-mini" style="margin-top:18px">Methodology reviewed August 17, 2026. Watchdog / NJPropertyTaxRelief.com is an independent property-intelligence product and is not affiliated with or endorsed by the State of New Jersey, FEMA, NJDEP, NJDCA, any county or municipality. This page documents the product's current methodology and does not create tax, legal, appraisal, engineering, title, lending or insurance advice.</p>
+        <p class="md-mini" style="margin-top:18px">Methodology reviewed August 23, 2026. Watchdog is an independent property-intelligence product and is not affiliated with or endorsed by the State of New Jersey, FEMA, NJDEP, NJDCA, any county or municipality. This page documents the product's current methodology and does not create tax, legal, appraisal, engineering, title, lending or insurance advice.</p>
       </section>
     </main>
   </div>
 
   <div id="md-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/scripts.js"></script>
+  <script src="/property/js/public-nav.js"></script>
   <script>
     (function(){
       function mount(id,url){
@@ -499,7 +576,6 @@
         update();
       }
 
-      mount('md-nav','/property/partials/nav.html');
       mount('md-footer','/property/partials/footer.html');
 
       if(document.readyState==='loading'){
