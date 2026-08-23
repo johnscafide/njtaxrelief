@@ -33,7 +33,7 @@
   }
 })();
 
-(function(){if(window.__wdProductAnalyticsLoader)return;window.__wdProductAnalyticsLoader=true;var s=document.createElement('script');s.src='/property/js/product-analytics.js';s.async=true;s.setAttribute('data-watchdog-analytics','1');document.head.appendChild(s);})();
+(function(){if(window.__wdProductAnalyticsLoader||window.WatchdogAnalytics||document.querySelector('script[src$="/property/js/product-analytics.js"]'))return;window.__wdProductAnalyticsLoader=true;var s=document.createElement('script');s.src='/property/js/product-analytics.js';s.async=true;s.setAttribute('data-watchdog-analytics','1');document.head.appendChild(s);})();
 (function(){
   var raw=location.pathname.replace(/\/+$/,'')||'/';
   var path=raw.indexOf('/property/')===0?raw.slice('/property'.length):raw;
@@ -53,5 +53,5 @@
   if(path==='/dashboard')load('/property/js/watchdog-dashboard-context-bridge.js','__wdDashboardContextBridgeLoader','data-watchdog-dashboard-context');
   if(path==='/home')load('/property/js/watchdog-home-semantic-bridge.js','__wdHomeSemanticBridgeLoader','data-watchdog-home-semantic');
   if(path==='/agent-desk')load('/property/js/watchdog-agent-context-bridge.js','__wdAgentContextBridgeLoader','data-watchdog-agent-context');
-  if(path==='/data-workbench')load('/property/js/watchdog-analyst-scenario-bridge.js','__wdAnalystScenarioBridgeLoader','data-watchdog-analyst-scenario');
+  if(path==='/data-workbench')load('/property/js/watchdog-analyst-scenario-bridge.js','__wdAnalystScenarioLoader','data-watchdog-analyst-scenario');
 })();
