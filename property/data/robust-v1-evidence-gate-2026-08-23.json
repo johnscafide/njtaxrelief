@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "report_id": "ROBUST-v1-evidence-gate-2026-08-23",
+  "generated_on": "2026-08-23",
+  "linear_issue": "NJW-273",
+  "parent_program": "NJW-270",
+  "model": {
+    "score_product": "Watchdog Score",
+    "framework": "ROBUST",
+    "model_version": "ROBUST-v1",
+    "marker_id": "watchdog.watchdog_score",
+    "weights": {
+      "R_recourse": 10,
+      "O_overassessment_position": 20,
+      "B_burden": 30,
+      "U_uniformity": 15,
+      "S_stability": 15,
+      "T_trajectory": 10
+    },
+    "weights_changed": false,
+    "bands_changed": false,
+    "missing_evidence_rule": "omit missing dimensions and renormalize available weights"
+  },
+  "production_snapshot": {
+    "canonical_rows": 336,
+    "canonical_unique_properties": 212,
+    "legacy_alias_rows_retained_for_history": 345,
+    "legacy_alias_latest_observed_at": "2026-08-21T15:00:36.051Z",
+    "workbench_score_version": 15,
+    "workbench_score_status": "ACTIVE",
+    "workbench_score_verify_jwt": true
+  },
+  "latest_property_cohort": {
+    "unique_properties": 212,
+    "mean_score": 60.16,
+    "mean_evidence_coverage": 71.63,
+    "component_availability": {
+      "R": 212,
+      "O": 21,
+      "B": 212,
+      "U": 212,
+      "S": 207,
+      "T": 0
+    },
+    "component_compositions": [
+      {
+        "composition": "R-BUS-",
+        "coverage": 70,
+        "properties": 191,
+        "mean_score": 59.68,
+        "min_score": 52,
+        "max_score": 65
+      },
+      {
+        "composition": "ROBUS-",
+        "coverage": 90,
+        "properties": 16,
+        "mean_score": 61.19,
+        "min_score": 42,
+        "max_score": 85
+      },
+      {
+        "composition": "ROBU--",
+        "coverage": 75,
+        "properties": 5,
+        "mean_score": 75.2,
+        "min_score": 57,
+        "max_score": 86
+      }
+    ]
+  },
+  "missing_dimension_completion_bounds": {
+    "method": "For each property, retain observed dimension values and complete every currently missing dimension at 0 and at 100. Recalculate on the full 100-point weight base. These are structural extremes, not production imputations.",
+    "results": [
+      {
+        "composition": "R-BUS-",
+        "coverage": 70,
+        "properties": 191,
+        "full_uncertainty_width": 30,
+        "band_stable_under_extremes": 0,
+        "band_stable_pct": 0.0,
+        "band_can_migrate": 191
+      },
+      {
+        "composition": "ROBUS-",
+        "coverage": 90,
+        "properties": 16,
+        "full_uncertainty_width": 10,
+        "band_stable_under_extremes": 5,
+        "band_stable_pct": 31.3,
+        "band_can_migrate": 11
+      },
+      {
+        "composition": "ROBU--",
+        "coverage": 75,
+        "properties": 5,
+        "full_uncertainty_width": 25,
+        "band_stable_under_extremes": 0,
+        "band_stable_pct": 0.0,
+        "band_can_migrate": 5
+      }
+    ]
+  },
+  "segment_evidence": {
+    "reporting_rule": "Only segments with at least 5 observations are reported as calibration evidence.",
+    "segments": [
+      {
+        "type": "county",
+        "segment": "CAMDEN",
+        "n": 196,
+        "mean_score": 59.79,
+        "median_score": 60,
+        "mean_coverage": 70.94,
+        "O_present": 10,
+        "T_present": 0
+      },
+      {
+        "type": "county",
+        "segment": "GLOUCESTER",
+        "n": 11,
+        "mean_score": 59.27,
+        "median_score": 55,
+        "mean_coverage": 80.91,
+        "O_present": 6,
+        "T_present": 0
+      },
+      {
+        "type": "property_class",
+        "segment": "2",
+        "n": 204,
+        "mean_score": 60.15,
+        "median_score": 60,
+        "mean_coverage": 71.35,
+        "O_present": 16,
+        "T_present": 0
+      }
+    ]
+  },
+  "evidence_gate_decision": {
+    "production_gate_changed": false,
+    "decision": "keep_numeric_only_gate_unset",
+    "reason": "The observed cohort shows that equal or higher numeric coverage does not guarantee band stability. Missing-dimension composition materially changes the unresolved score range, and Trajectory remains absent from all persisted latest-property observations.",
+    "candidate_research_rule": "Evaluate future certification using both evidence composition and score/band stability under bounded missing-dimension completion, not coverage percentage alone.",
+    "why_not_enforced_now": [
+      "Trajectory is absent from 212 of 212 latest persisted properties.",
+      "Overassessment Position is present on only 21 of 212 latest persisted properties.",
+      "The cohort is geographically concentrated, with 196 of 212 reportable observations in Camden County.",
+      "Only one property class has enough observations for a stable class-level segment report.",
+      "Extreme completion bounds are a sensitivity control and are not a calibrated empirical distribution for missing dimensions."
+    ]
+  },
+  "score_history_governance_reconciliation": {
+    "client_history_contract": [
+      "pams_pin",
+      "marker_id",
+      "score",
+      "observed_at",
+      "model_version"
+    ],
+    "physical_table_has_additional_internal_legacy_fields": true,
+    "authenticated_select_rls": "auth.uid() = user_id",
+    "client_user_id_filter_required": false,
+    "client_user_id_filter_reason": "Row visibility remains enforced by Supabase RLS. Client readers should use the governed history projection and not duplicate ownership semantics in query code.",
+    "schema_widening_performed": false,
+    "rls_changed": false
+  },
+  "decisions": {
+    "change_weights_now": false,
+    "change_bands_now": false,
+    "change_missing_evidence_rule_now": false,
+    "set_numeric_only_minimum_evidence_gate_now": false,
+    "create_ROBUST_v2_now": false,
+    "next_calibration_priority": "Build a representative non-writing cohort with observed Trajectory and materially broader independent Overassessment Position evidence, then rerun perturbation, leave-one-out, missingness, rank, band and segment tests."
+  },
+  "harness": "/property/scripts/robust_score_evidence_gate_calibration.sql"
+}
