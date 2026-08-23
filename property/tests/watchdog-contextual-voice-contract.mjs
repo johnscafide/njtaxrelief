@@ -7,6 +7,7 @@ const todayPage = read('property/intelligence/daily/index.html');
 const todayVoice = read('property/js/watchdog-today-voice.js');
 const contextual = read('property/js/watchdog-contextual-analyst.js');
 const voiceBrowser = read('property/js/watchdog-intelligence-voice-browser.js');
+const narration = read('property/js/watchdog-intelligence-narration.js');
 const analystProxy = read('api/watchdog-intelligence-analyst.js');
 
 function must(condition, message) {
@@ -69,6 +70,11 @@ must(analystProxy.includes("if (req.method !== 'POST')"), 'The Analyst transport
 must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Existing browser Voice must remain the speech-recognition implementation.');
 must(voiceBrowser.includes('speechSynthesis'), 'Existing browser Voice must remain the narration implementation.');
 must(voiceBrowser.includes('Transcript ready. Review it, then choose Ask Watchdog.'), 'Spoken questions must remain reviewable before submission.');
-must(voiceBrowser.includes("const evidence = sectionItems('evidence', 4);"), 'Narration must reuse evidence from the rendered governed Analyst response.');
+must(voiceBrowser.includes('extractBrief(message)'), 'Narration must extract the rendered governed Analyst response.');
+must(voiceBrowser.includes('contract.formatBrief(brief, format)'), 'Contextual narration must use the shared deterministic narration contract.');
+must(voiceBrowser.includes('data-dwa-narration-format'), 'Contextual narration must expose structured format selection.');
+must(narration.includes("FORMAT_ORDER = ['quick', 'professional', 'evidence', 'changes']"), 'Voice vNext must expose four structured narration formats.');
+must(narration.includes("source: 'rendered_governed_analyst_response'"), 'Narration must remain grounded in the rendered governed response.');
+must(!narration.includes('fetch('), 'Narration formatting must not introduce a separate model/provider call.');
 
 console.log('Watchdog contextual Dashboard + Today Voice contract passed.');
