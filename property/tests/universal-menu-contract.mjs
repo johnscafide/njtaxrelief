@@ -86,9 +86,24 @@ assert(universal.includes("route('/teams')"), 'Pro+ Teams preview route is missi
 assert(universal.includes('data-wd-plan-promo'), 'Graphical plan promo markup is missing');
 assert(universal.includes('planPromoHtml() +'), 'Plan promo is not injected by the shared profile renderer');
 assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not exposed for verification');
-assert(universal.includes('wd-universal-plan-promo-pro'), 'Pro promo visual treatment is missing');
-assert(universal.includes('wd-universal-plan-promo-plus'), 'Pro+ promo visual treatment is missing');
-assert(universal.includes('wd-universal-plan-promo-teams'), 'Teams promo visual treatment is missing');
+assert(universal.includes('wd-universal-plan-promo-pro'), 'Pro promo class is missing from shared markup');
+assert(universal.includes('wd-universal-plan-promo-plus'), 'Pro+ promo class is missing from shared markup');
+assert(universal.includes('wd-universal-plan-promo-teams'), 'Teams promo class is missing from shared markup');
+
+// The graphical treatment itself must live in the canonical external stylesheet.
+// This prevents CSP or inline-style restrictions from degrading the promo into a
+// large blank white profile row while leaving only its text visible.
+assert(css.includes('plan-aware graphical profile promo'), 'External plan-promo stylesheet boundary is missing');
+assert(css.includes('.wd-universal-profile>nav>a.wd-universal-plan-promo{'), 'External graphical promo container CSS is missing');
+assert(css.includes('.wd-universal-plan-promo-pro{background:radial-gradient'), 'Pro graphical promo background is missing');
+assert(css.includes('.wd-universal-plan-promo-plus{background:radial-gradient'), 'Pro+ graphical promo background is missing');
+assert(css.includes('.wd-universal-plan-promo-teams{background:radial-gradient'), 'Teams graphical promo background is missing');
+assert(css.includes('.wd-universal-plan-promo-icon'), 'Graphical promo icon styling is missing');
+assert(css.includes('.wd-universal-plan-promo-copy>em'), 'Graphical promo supporting-copy styling is missing');
+assert(css.includes('.wd-universal-plan-promo-cta'), 'Graphical promo CTA styling is missing');
+assert(css.includes('min-height:88px!important'), 'Desktop graphical promo is no longer compact');
+assert(css.includes('min-height:90px!important'), 'Mobile graphical promo is no longer compact');
+assert(css.includes('@media(max-width:390px)'), 'Small-phone graphical promo fallback is missing');
 
 // Teams is an honest preview page, not a false self-service sales surface.
 assert(teams.includes('<title>Watchdog Teams | Shared Property Intelligence</title>'), 'Teams preview page title is missing');
