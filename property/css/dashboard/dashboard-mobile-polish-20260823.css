@@ -1,0 +1,78 @@
+/* 2026-08-23 mobile dashboard polish: Add Property affordance, compact current-location weather, Voice compose visibility. */
+@media (max-width:768px){
+  body.wdv2-mounted .wd7-add-property{
+    position:relative!important;
+    display:inline-grid!important;
+    place-items:center!important;
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0!important;
+    border:0!important;
+    border-radius:11px!important;
+    background:#2f6df6!important;
+    color:#fff!important;
+    box-shadow:0 7px 18px rgba(47,109,246,.18)!important;
+    overflow:hidden!important;
+    touch-action:manipulation;
+  }
+  body.wdv2-mounted .wd7-add-property i{display:none!important}
+  body.wdv2-mounted .wd7-add-property::before{
+    content:"+";
+    display:block;
+    color:#fff;
+    font:500 30px/1 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    transform:translateY(-1px);
+  }
+  body.wdv2-mounted .wd7-add-property span{
+    position:absolute!important;
+    width:1px!important;
+    height:1px!important;
+    padding:0!important;
+    margin:-1px!important;
+    overflow:hidden!important;
+    clip:rect(0,0,0,0)!important;
+    white-space:nowrap!important;
+    border:0!important;
+  }
+
+  body.wdv2-mounted .wd4-date-chip{display:none!important}
+  body.wdv2-mounted .wd4-weather-chip{
+    display:inline-flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    gap:5px!important;
+    width:auto!important;
+    min-width:54px!important;
+    max-width:68px!important;
+    height:44px!important;
+    min-height:44px!important;
+    padding:0 8px!important;
+    border-radius:12px!important;
+    flex:none!important;
+    overflow:hidden!important;
+  }
+  body.wdv2-mounted .wd4-weather-chip .wd4-weather-icon{font-size:15px!important;flex:none!important}
+  body.wdv2-mounted .wd4-weather-chip>div{display:block!important;min-width:0!important}
+  body.wdv2-mounted .wd4-weather-chip>div strong{
+    display:block!important;
+    font-size:11px!important;
+    line-height:1!important;
+    white-space:nowrap!important;
+  }
+  body.wdv2-mounted .wd4-weather-chip>div span,
+  body.wdv2-mounted .wd4-weather-chip>.fa-chevron-down{display:none!important}
+  body.wdv2-mounted .wd4-top-right{margin-left:auto!important;gap:7px!important}
+
+  .dwa-panel[data-contextual-analyst="true"] .dwa-compose-row>small{order:1;width:100%}
+  .dwa-panel[data-contextual-analyst="true"] .dwa-compose-row>.dwa-voice-button{order:2;width:100%!important;min-height:46px!important}
+  .dwa-panel[data-contextual-analyst="true"] .dwa-compose-row>.dwa-send{order:3;width:100%!important;min-height:46px!important}
+  .dwa-panel[data-contextual-analyst="true"] .dwa-voice-status{font-size:12px!important;line-height:1.45!important}
+}
+
+@media (max-width:420px){
+  body.wdv2-mounted .wd4-weather-chip{min-width:52px!important;max-width:62px!important;padding:0 7px!important}
+  body.wdv2-mounted .wd4-weather-chip .wd4-weather-icon{font-size:14px!important}
+  body.wdv2-mounted .wd4-weather-chip>div strong{font-size:10.5px!important}
+}
