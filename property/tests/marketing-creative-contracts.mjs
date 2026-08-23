@@ -9,7 +9,22 @@ const page=read('property/marketing-studio/customize/index.html');
 assert.match(page,/data-access-require="agent"/,'Marketing Studio must remain Agent+.');
 assert.match(page,/marketing-studio-creative\.js/,'Creative Studio must load in Marketing Studio.');
 assert.match(page,/marketing-studio-creative\.css/,'Creative Studio styles must load.');
+assert.match(page,/marketing-studio-pcm-workspace\.js/,'PCM production workspace must load on Customize.');
 assert.doesNotMatch(page,/\?v=/,'Marketing Studio assets must not use query-string version files.');
+
+const pcmWorkspace=read('property/js/marketing-studio-pcm-workspace.js');
+assert.match(pcmWorkspace,/action:'design\.edit'/,'PCM editor sessions must come from the authenticated server adapter.');
+assert.match(pcmWorkspace,/window\.addEventListener\('message',onEditorMessage\)/,'PCM editor save messages must be observed by the parent page.');
+assert.match(pcmWorkspace,/event\.source!==frame\.contentWindow/,'PCM editor messages must come from the exact embedded iframe window.');
+assert.match(pcmWorkspace,/event\.origin!==editorSession\.origin/,'PCM editor messages must match the origin derived from the returned editor URL.');
+assert.match(pcmWorkspace,/payload\.designID!==String\(state\.design_id\|\|''\)/,'PCM editor messages must match the active campaign design ID.');
+assert.match(pcmWorkspace,/refresh\(null,\{automatic:true\}\)/,'A verified PCM save message must trigger automatic provider proof refresh.');
+assert.match(pcmWorkspace,/data-pcmw-refresh/,'Manual PCM refresh must remain available as a fallback.');
+assert.match(pcmWorkspace,/24 hours/,'Vendor-confirmed PCM editor token lifetime must be surfaced without persisting the token.');
+
+const pcmCatalog=read('supabase/functions/pcm-sandbox-catalog/index.ts');
+assert.match(pcmCatalog,/\/design\/\$\{encodeURIComponent\(id\)\}\/edit/,'PCM editor sessions must use the verified design edit route.');
+assert.match(pcmCatalog,/auth\.startsWith\('Bearer '\)/,'PCM catalog/editor adapter must require authenticated browser access.');
 
 const creative=read('property/js/marketing-studio-creative.js');
 assert.match(creative,/marketing_prepare_direct_mail_recipients/,'Recipients must be materialized server-side before quote/checkout.');
@@ -50,4 +65,5 @@ assert.match(schema,/revoke insert,update,delete on public\.marketing_launch_app
 
 const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
-console.log('Marketing Creative Studio and touchless paid Direct Mail fulfillment contracts passed.');
+assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
+console.log('Marketing Creative Studio, PCM editor refresh, and touchless paid Direct Mail fulfillment contracts passed.');
