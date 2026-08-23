@@ -168,6 +168,54 @@ function removeLandingFaqSchema(html) {
   );
 }
 
+function normalizeWatchdogFooterIdentity(html) {
+  return String(html || '')
+    .replace(
+      /NJPropertyTaxRelief\.com is an independent educational\s+resource and is not affiliated with or endorsed by the\s+State of New Jersey, the New Jersey Division of\s+Taxation, or any county or municipal government\./gi,
+      'Watchdog is an independent property-intelligence resource and is not affiliated with or endorsed by the State of New Jersey, the New Jersey Division of Taxation, or any county or municipal government.'
+    )
+    .replace(
+      /Watchdog\s*\/\s*NJPropertyTaxRelief\.com\. All rights reserved\./gi,
+      'Watchdog Property Intelligence. All rights reserved.'
+    );
+}
+
+function normalizeFaqSchemaQuestions(html) {
+  const replacements = new Map([
+    ['Can Watchdog connect to my CRM or newsletter provider?', 'What integrations does Watchdog currently support?'],
+    ['How do I upgrade or change my Watchdog plan?', 'How do I upgrade or change my plan?'],
+    ['Where does Watchdog property data come from?', 'Where does this data come from?'],
+    ['Can I appeal my New Jersey property tax assessment?', 'Can I appeal my property tax assessment?'],
+    ['Can mortgage lenders, banks and finance professionals use Watchdog?', 'How can mortgage lenders, banks, and finance professionals use Watchdog?'],
+    ['Can real estate investors use Watchdog?', 'How can real estate investors use Watchdog?'],
+    ['Can insurance and risk professionals use Watchdog?', 'How can insurance and risk professionals use Watchdog?']
+  ]);
+
+  return String(html || '').replace(
+    /(<script\b[^>]*\btype=["']application\/ld\+json["'][^>]*>)([\s\S]*?)(<\/script>)/gi,
+    (full, start, rawJson, end) => {
+      try {
+        const data = JSON.parse(rawJson);
+        const nodes = Array.isArray(data?.['@graph']) ? data['@graph'] : [data];
+        let changed = false;
+        for (const node of nodes) {
+          if (node?.['@type'] !== 'FAQPage' || !Array.isArray(node.mainEntity)) continue;
+          for (const entity of node.mainEntity) {
+            if (!entity || entity['@type'] !== 'Question') continue;
+            const replacement = replacements.get(entity.name);
+            if (!replacement) continue;
+            entity.name = replacement;
+            changed = true;
+          }
+        }
+        return changed ? `${start}\n${JSON.stringify(data, null, 2)}\n${end}` : full;
+      } catch (_error) {
+        return full;
+      }
+    }
+  );
+}
+
 function cleanRouteRuntime() {
   return `<script id="watchdog-clean-route-runtime">(function(){
 'use strict';
@@ -272,9 +320,11 @@ module.exports = async function handler(req, res) {
   }
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${publicPath === '/' ? '/' : publicPath}`;
-  const sourceHtml = publicPath === '/'
+  let sourceHtml = publicPath === '/'
     ? removeLandingFaqSchema(ensureLandingRootClass(source.html))
     : source.html;
+  sourceHtml = normalizeWatchdogFooterIdentity(sourceHtml);
+  if (publicPath === '/faq') sourceHtml = normalizeFaqSchemaQuestions(sourceHtml);
   const html = setCanonicalMetadata(sourceHtml, canonicalUrl);
   const upstreamCache = source.response.headers.get('cache-control');
   const upstreamRobots = source.response.headers.get('x-robots-tag');
