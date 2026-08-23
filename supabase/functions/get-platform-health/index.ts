@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.55.0';
 import Stripe from 'npm:stripe@18.4.0';
 
-const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const CANONICAL_SITE = 'https://www.watchdogindex.com';
 const PRICE_LOOKUPS = [
   ['watchdog_agent_monthly', 5900, 'month'],
   ['watchdog_agent_yearly', 59000, 'year'],
@@ -10,14 +10,24 @@ const PRICE_LOOKUPS = [
   ['watchdog_pro_plus_monthly', 39900, 'month'],
   ['watchdog_pro_plus_yearly', 399000, 'year']
 ] as const;
+const PUBLIC_STATUS_ACTIVE_WINDOW_MS = 30 * 60 * 1000;
+const PUBLIC_STATUS_HISTORY_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;
 
 type CheckoutMode = 'closed' | 'controlled' | 'open';
+type PublicIncidentRow = {
+  severity: string | null;
+  status: string | null;
+  last_seen_at: string | null;
+  resolved_at: string | null;
+};
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get('origin') || '';
   try {
     const host = new URL(origin).hostname.toLowerCase();
     if (
+      host === 'watchdogindex.com' ||
+      host === 'www.watchdogindex.com' ||
       host === 'njpropertytaxrelief.com' ||
       host === 'www.njpropertytaxrelief.com' ||
       host === 'watchdogre.com' ||
@@ -27,14 +37,14 @@ function allowedOrigin(req: Request) {
       host.endsWith('.vercel.app')
     ) return origin;
   } catch (_) {}
-  return DEFAULT_SITE;
+  return CANONICAL_SITE;
 }
 
 function cors(req: Request) {
   return {
     'Access-Control-Allow-Origin': allowedOrigin(req),
     'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Vary': 'Origin'
   };
 }
@@ -43,6 +53,17 @@ function json(req: Request, body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: { ...cors(req), 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
+  });
+}
+
+function publicJson(req: Request, body: unknown, status = 200) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      ...cors(req),
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'public, max-age=30, stale-while-revalidate=60'
+    }
   });
 }
 
@@ -89,19 +110,67 @@ async function resolveStripeCatalog(stripeKey: string | undefined) {
   return state;
 }
 
+async function publicStatus(req: Request, admin: ReturnType<typeof createClient>) {
+  const now = Date.now();
+  const historySince = new Date(now - PUBLIC_STATUS_HISTORY_WINDOW_MS).toISOString();
+  const activeSince = now - PUBLIC_STATUS_ACTIVE_WINDOW_MS;
+  const { data, error } = await admin
+    .from('platform_incidents')
+    .select('severity,status,last_seen_at,resolved_at')
+    .gte('last_seen_at', historySince)
+    .order('last_seen_at', { ascending: false })
+    .limit(100);
+
+  if (error && error.code !== '42P01' && error.code !== 'PGRST205') {
+    console.error('public_status_incident_read_failed', { code: error.code });
+    return publicJson(req, {
+      generated_at: new Date().toISOString(),
+      status: 'unknown',
+      components: [],
+      recent_resolved: []
+    }, 503);
+  }
+
+  const rows = (data || []) as PublicIncidentRow[];
+  // platform_incidents are daily aggregation buckets and are not automatically
+  // closed when signals stop. Only recently observed unresolved signals represent
+  // current public service health; older rows remain internal historical evidence.
+  const active = rows.filter(row => {
+    if (row.status === 'resolved' || !row.last_seen_at) return false;
+    const seen = new Date(row.last_seen_at).getTime();
+    return Number.isFinite(seen) && seen >= activeSince;
+  });
+  const hasCritical = active.some(row => String(row.severity || '').toLowerCase() === 'critical');
+  const overall = hasCritical ? 'major_outage' : active.length ? 'degraded' : 'operational';
+  const recentResolved = rows
+    .filter(row => row.status === 'resolved' && row.resolved_at)
+    .sort((a, b) => new Date(b.resolved_at || 0).getTime() - new Date(a.resolved_at || 0).getTime())
+    .slice(0, 5)
+    .map(row => ({ component: 'Watchdog web app', resolved_at: row.resolved_at }));
+
+  return publicJson(req, {
+    generated_at: new Date().toISOString(),
+    status: overall,
+    components: [{ name: 'Watchdog web app', status: overall }],
+    recent_resolved: recentResolved
+  });
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(req) });
+
+  const url = Deno.env.get('SUPABASE_URL')!;
+  const anon = Deno.env.get('SUPABASE_ANON_KEY')!;
+  const service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+  const admin = createClient(url, service);
+
+  if (req.method === 'GET') return publicStatus(req, admin);
   if (req.method !== 'POST') return json(req, { error: 'Method not allowed' }, 405);
 
   const auth = req.headers.get('Authorization');
   if (!auth) return json(req, { error: 'Sign in required' }, 401);
 
-  const url = Deno.env.get('SUPABASE_URL')!;
-  const anon = Deno.env.get('SUPABASE_ANON_KEY')!;
-  const service = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
   const userClient = createClient(url, anon, { global: { headers: { Authorization: auth } } });
-  const admin = createClient(url, service);
-
   const { data: { user } } = await userClient.auth.getUser();
   if (!user) return json(req, { error: 'Sign in required' }, 401);
   const { data: profile } = await admin.from('profiles').select('account_role').eq('id', user.id).maybeSingle();
