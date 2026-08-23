@@ -94,5 +94,14 @@
     "watchdog.title.municipal_search_scope": "live",
     "watchdog.title.title_land_constraint_mix": "live",
     "watchdog.watchdog_score": "live"
+  },
+  "providers": {
+    "watchdog.watchdog_score": {
+      "provider_key": "workbench-score",
+      "provider_kind": "canonical_watchdog_score",
+      "calculation_key": "ROBUST-v1",
+      "source": "Watchdog Score powered by the ROBUST Framework",
+      "bulk_capable": true
+    }
   }
 }
