@@ -6,11 +6,27 @@
   var footer = document.getElementById('wd-onboarding-footer');
   if (!root || !window.NJPTRSupabaseRuntime) return;
 
-  var db = window.NJPTRSupabaseRuntime.createClient();
+  var runtime = window.NJPTRSupabaseRuntime;
+  var db = runtime.createClient();
   var answers = {};
   var visibleSteps = [];
   var stepIndex = 0;
   var saving = false;
+  var planCadence = 'yearly';
+  var planCatalog = null;
+  var planCatalogError = '';
+  var planCheckoutBusy = false;
+  var planCheckoutError = '';
+
+  function ensurePlanStyles() {
+    if (document.getElementById('wd-onboarding-plan-styles')) return;
+    var link = document.createElement('link');
+    link.id = 'wd-onboarding-plan-styles';
+    link.rel = 'stylesheet';
+    link.href = '/property/css/onboarding-plans.css';
+    document.head.appendChild(link);
+  }
+  ensurePlanStyles();
 
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>\"]/g, function (c) {
@@ -20,22 +36,41 @@
 
   function setMode(mode) {
     var authMode = mode === 'auth';
+    var planMode = mode === 'plans';
     document.body.classList.toggle('wd-auth-view', authMode);
+    document.body.classList.toggle('wd-plan-view', planMode);
     if (footer) {
       footer.textContent = authMode
         ? 'We only use your sign-in to secure your account and save your Watchdog properties.'
-        : 'Your answers are saved to your Watchdog profile and kept separate from governed property-source facts.';
+        : planMode
+          ? 'Paid plans use secure Stripe Checkout. Free requires no payment method and can be upgraded anytime.'
+          : 'Your answers are saved to your Watchdog profile and kept separate from governed property-source facts.';
     }
   }
 
+  function dashboardPath() {
+    return String(runtime.routePrefix || '') + '/dashboard/';
+  }
+
   function nextPath() {
-    var raw = new URLSearchParams(location.search).get('next') || '/property/dashboard/';
+    var fallback = dashboardPath();
+    var raw = new URLSearchParams(location.search).get('next') || fallback;
     try {
       var parsed = new URL(raw, location.origin);
-      if (parsed.origin !== location.origin || parsed.pathname.indexOf('/property/') !== 0 || parsed.pathname.indexOf('/property/onboarding') === 0) return '/property/dashboard/';
-      return parsed.pathname + parsed.search + parsed.hash;
+      if (parsed.origin !== location.origin) return fallback;
+
+      var path = parsed.pathname || fallback;
+      if (runtime.cleanRoutes) {
+        if (path === '/property') path = '/';
+        else if (path.indexOf('/property/') === 0) path = path.slice('/property'.length) || '/';
+        if (path === '/onboarding' || path.indexOf('/onboarding/') === 0 || path.indexOf('/api/') === 0) return fallback;
+        return path + parsed.search + parsed.hash;
+      }
+
+      if (path.indexOf('/property/') !== 0 || path.indexOf('/property/onboarding') === 0) return fallback;
+      return path + parsed.search + parsed.hash;
     } catch (_) {
-      return '/property/dashboard/';
+      return fallback;
     }
   }
 
@@ -187,7 +222,7 @@
     html += '<div class="wd-onboarding-actions">' +
       (stepIndex > 0 ? '<button type="button" class="wd-onboarding-back" data-back>Back</button>' : '<span></span>') +
       '<button type="button" class="wd-onboarding-next" data-next ' + ((!canContinue(step) || saving) && step.kind !== 'intro' ? 'disabled' : '') + '>' +
-      (step.kind === 'finish' ? (saving ? 'Personalizing…' : 'Open Watchdog') : step.kind === 'intro' ? 'Start' : 'Continue') + '</button></div>';
+      (step.kind === 'finish' ? (saving ? 'Saving your setup…' : 'See membership options') : step.kind === 'intro' ? 'Start' : 'Continue') + '</button></div>';
 
     root.innerHTML = html;
     wire(step);
@@ -264,13 +299,214 @@
     };
   }
 
+  function money(value, decimals) {
+    var amount = Number(value || 0);
+    return new Intl.NumberFormat('en-US', {
+      style:'currency', currency:'USD',
+      minimumFractionDigits:decimals ? 2 : 0,
+      maximumFractionDigits:decimals ? 2 : 0
+    }).format(amount);
+  }
+
+  function planDefinition(key) {
+    var definitions = {
+      agent: {
+        label:'Agent', kicker:'FOR AGENTS & SOLO PROFESSIONALS',
+        description:'A focused professional workspace for opportunity discovery, monitoring and client-ready property research.',
+        features:['Monitor up to 25 properties','Agent Opportunity Desk','Professional reports and exports']
+      },
+      pro: {
+        label:'Pro', kicker:'PROFESSIONAL WORKSPACE', featured:true, badge:'Most popular',
+        description:'Deeper property intelligence and repeatable research workflows for professionals handling active client work.',
+        features:['Monitor up to 250 properties','Expanded professional workbenches','Advanced research workflows']
+      },
+      pro_plus: {
+        label:'Pro+', kicker:'MAXIMUM DATA ACCESS',
+        description:'Watchdog’s deepest data, bulk intelligence and high-volume workflows for power users.',
+        features:['Monitor up to 2,500 properties','1,000+ data points and proprietary markers','Bulk and scheduled intelligence']
+      }
+    };
+    return definitions[key] || null;
+  }
+
+  function intelligenceCopy(key) {
+    var intelligence = planCatalog && planCatalog.intelligence || {};
+    var promotion = intelligence.promotion || {};
+    var promoEligible = promotion.active === true && Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0;
+    var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
+    var regular = Number(intelligence.regular_add_on_monthly || 12);
+    var brand = 'Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
+
+    if (promoEligible) {
+      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
+    }
+    if (included) {
+      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
+    }
+    if (Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0) {
+      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
+    }
+    return '';
+  }
+
+  function planCard(key) {
+    var definition = planDefinition(key);
+    var plan = planCatalog && planCatalog.plans && planCatalog.plans[key];
+    if (!definition || !plan) return '';
+    var pricing = plan[planCadence];
+    if (!pricing || !Number.isFinite(Number(pricing.amount))) return '';
+    var amount = Number(pricing.amount);
+    var yearly = planCadence === 'yearly';
+    var primary = yearly ? amount / 12 : amount;
+    var priceText = money(primary, yearly && primary % 1 !== 0);
+    var note = yearly
+      ? money(amount, false) + ' billed yearly · two months included'
+      : 'Billed monthly';
+
+    return '<article class="wd-plan-card wd-plan-' + esc(key) + (definition.featured ? ' is-featured' : '') + '" data-plan-card="' + esc(key) + '">' +
+      (definition.badge ? '<span class="wd-plan-badge">' + esc(definition.badge) + '</span>' : '') +
+      '<div class="wd-plan-card-head"><span>' + esc(definition.kicker) + '</span><h3>' + esc(definition.label) + '</h3></div>' +
+      '<p class="wd-plan-description">' + esc(definition.description) + '</p>' +
+      '<div class="wd-plan-price"><b>' + esc(priceText) + '</b><span>/month</span></div>' +
+      '<p class="wd-plan-billing-note">' + esc(note) + '</p>' +
+      '<ul class="wd-plan-features">' + definition.features.map(function (feature) {
+        return '<li><i class="fas fa-check" aria-hidden="true"></i><span>' + esc(feature) + '</span></li>';
+      }).join('') + '</ul>' +
+      intelligenceCopy(key) +
+      '<button type="button" class="wd-plan-choose" data-plan-tier="' + esc(key) + '"' + (planCheckoutBusy ? ' disabled' : '') + '>Choose ' + esc(definition.label) + '<i class="fas fa-arrow-right" aria-hidden="true"></i></button>' +
+      '</article>';
+  }
+
+  function renderPlanSelection() {
+    setMode('plans');
+    progress.style.width = '100%';
+    root.className = 'wd-onboarding-stage wd-plan-stage';
+    root.setAttribute('aria-busy','false');
+
+    if (!planCatalog && !planCatalogError) {
+      root.innerHTML = '<div class="wd-plan-loading"><div class="wd-onboarding-spinner"></div><b>Loading membership options…</b><span>Your Watchdog setup is already saved.</span></div>';
+      return;
+    }
+
+    var paidCards = planCatalog
+      ? ['agent','pro','pro_plus'].map(planCard).filter(Boolean).join('')
+      : '';
+    var catalogNotice = planCatalogError
+      ? '<div class="wd-plan-notice"><i class="fas fa-circle-info" aria-hidden="true"></i><span>Paid plan details are temporarily unavailable. Your account is ready, and you can continue with Free now and upgrade from Account later.</span></div>'
+      : '';
+    var checkoutNotice = planCheckoutError
+      ? '<div class="wd-plan-notice wd-plan-checkout-notice" role="status"><i class="fas fa-shield-halved" aria-hidden="true"></i><span>' + esc(planCheckoutError) + '</span></div>'
+      : '';
+
+    root.innerHTML =
+      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">CHOOSE YOUR MEMBERSHIP</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid workspaces unlock more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
+      (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
+      '</div>' +
+      catalogNotice + checkoutNotice +
+      (paidCards ? '<div class="wd-plan-grid">' + paidCards + '</div>' : '') +
+      '<section class="wd-plan-free" aria-label="Free membership"><div><span>FREE FOREVER</span><h3>Continue with Free</h3><p>Property lookup, watchlist, core assessment and tax markers, standard alerts and history. No payment method required.</p></div><button type="button" data-plan-free' + (planCheckoutBusy ? ' disabled' : '') + '>Continue with Free <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>' +
+      '<p class="wd-plan-secure"><i class="fas fa-lock" aria-hidden="true"></i> Paid plans use secure Stripe Checkout. Watchdog never stores card details.</p>';
+
+    wirePlanSelection();
+  }
+
+  function planCheckoutMessage(code, fallback) {
+    if (code === 'BILLING_ENROLLMENT_CLOSED') return 'Paid enrollment is completing final billing checks. Continue with Free now and upgrade from Account when enrollment opens.';
+    if (code === 'BILLING_CONTROLLED_ONLY') return 'Paid enrollment is currently limited to controlled launch accounts. Continue with Free now and upgrade when enrollment opens for your account.';
+    if (code === 'BILLING_GATE_NOT_PASSED') return 'Paid enrollment is awaiting final Live billing acceptance. Continue with Free now and upgrade from Account once that acceptance is complete.';
+    if (code === 'PRICE_NOT_CONFIGURED') return 'That paid plan is temporarily unavailable for checkout. Continue with Free or try again later.';
+    if (code === 'LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED') return fallback || 'This account needs billing support before starting a new subscription.';
+    return fallback || 'Paid checkout could not be started. You can continue with Free and upgrade later.';
+  }
+
+  async function checkoutErrorPayload(error) {
+    if (error && error.context && typeof error.context.json === 'function') {
+      try { return await error.context.json(); } catch (_) {}
+    }
+    return { error: error && error.message ? error.message : '', code: '' };
+  }
+
+  async function startPaidCheckout(tier) {
+    if (planCheckoutBusy || !planCatalog) return;
+    planCheckoutBusy = true;
+    planCheckoutError = '';
+    renderPlanSelection();
+    try {
+      var result = await db.functions.invoke('create-checkout-session', {
+        body: { tier:tier, cadence:planCadence }
+      });
+      if (result.error) {
+        var payloadError = await checkoutErrorPayload(result.error);
+        throw { watchdogBilling:true, payload:payloadError, original:result.error };
+      }
+      var data = result.data || {};
+      if (!data.url) throw new Error('Secure checkout did not return a destination.');
+      location.assign(data.url);
+    } catch (error) {
+      var detail = error && error.watchdogBilling ? error.payload : null;
+      planCheckoutError = planCheckoutMessage(detail && detail.code, detail && detail.error || error && error.message || '');
+      planCheckoutBusy = false;
+      renderPlanSelection();
+      var notice = root.querySelector('.wd-plan-checkout-notice');
+      if (notice) notice.scrollIntoView({ behavior:'smooth', block:'center' });
+    }
+  }
+
+  function wirePlanSelection() {
+    root.querySelectorAll('[data-plan-cadence]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        if (planCheckoutBusy) return;
+        planCadence = button.getAttribute('data-plan-cadence') === 'monthly' ? 'monthly' : 'yearly';
+        planCheckoutError = '';
+        renderPlanSelection();
+      });
+    });
+    root.querySelectorAll('[data-plan-tier]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        startPaidCheckout(button.getAttribute('data-plan-tier'));
+      });
+    });
+    var free = root.querySelector('[data-plan-free]');
+    if (free) free.addEventListener('click', function () { location.replace(nextPath()); });
+  }
+
+  async function loadPlanCatalog() {
+    planCatalogError = '';
+    try {
+      var response = await fetch(String(runtime.url || '').replace(/\/$/, '') + '/functions/v1/billing-price-catalog', {
+        method:'GET', headers:{ Accept:'application/json' }, cache:'no-store'
+      });
+      if (!response.ok) throw new Error('Billing catalog unavailable');
+      var catalog = await response.json();
+      if (!catalog || catalog.provider !== 'stripe' || !catalog.plans || !catalog.plans.agent || !catalog.plans.pro || !catalog.plans.pro_plus) {
+        throw new Error('Billing catalog invalid');
+      }
+      planCatalog = catalog;
+      window.WatchdogBillingCatalog = catalog;
+    } catch (_) {
+      planCatalog = null;
+      planCatalogError = 'unavailable';
+    }
+    renderPlanSelection();
+  }
+
+  async function showPlanSelection() {
+    saving = false;
+    planCheckoutBusy = false;
+    planCheckoutError = '';
+    planCatalogError = '';
+    setMode('plans');
+    renderPlanSelection();
+    await loadPlanCatalog();
+  }
+
   async function complete() {
     saving = true;
     render();
     try {
       var result = await db.rpc('complete_my_watchdog_onboarding_v2', { payload: payload() });
       if (result.error) throw result.error;
-      location.replace(nextPath());
+      await showPlanSelection();
     } catch (error) {
       saving = false;
       render();
