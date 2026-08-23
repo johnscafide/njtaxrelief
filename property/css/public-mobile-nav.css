@@ -1,4 +1,24 @@
 /* Watchdog public navigation: one app-like shell for landing + search. */
+/* Canonical public-header base. Public pages can load this shared shell without
+   depending on the lookup-page CSS bundle for the core Watchdog nav styling. */
+.wd-nav{position:absolute;top:0;left:0;right:0;z-index:800;background:transparent;transition:background .25s ease,box-shadow .25s ease}
+.wd-nav-in{max-width:1240px;margin:0 auto;padding:20px 26px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.wd-nav a,.wd-nav button{font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:14.5px;font-weight:600;color:#fff;text-decoration:none;background:none;border:none;padding:0;cursor:pointer;white-space:nowrap;text-shadow:0 1px 10px rgba(0,0,0,.45);transition:opacity .15s}
+.wd-nav a:hover,.wd-nav button:hover{opacity:.72}
+.wd-logo{display:inline-flex;align-items:center;gap:9px;justify-self:center;font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:21px!important;font-weight:800!important;letter-spacing:-.03em;text-decoration:none}
+.wd-logo i{color:var(--gold,#b8972a);font-size:22px}
+.wd-nav.solid{position:fixed;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--border,#d9e1e8),0 4px 18px rgba(14,34,72,.07)}
+.wd-nav.solid .wd-nav-in{padding:13px 26px}
+.wd-nav.solid a,.wd-nav.solid button,.wd-nav.solid .wd-logo{color:var(--navy-dark,#10294b);text-shadow:none}
+body.nav-solid .wd-nav{position:sticky;top:0;background:#fff;box-shadow:0 1px 0 var(--border,#d9e1e8)}
+body.nav-solid .wd-nav a,body.nav-solid .wd-nav button,body.nav-solid .wd-logo{color:var(--navy-dark,#10294b);text-shadow:none}
+/* Methodology is a documentation surface, so it uses the same solid public
+   header treatment as FAQ while keeping its existing hero/body design intact. */
+body.md-page .wd-nav{position:sticky;top:0;background:rgba(255,255,255,.98);backdrop-filter:blur(10px);border-bottom:1px solid #d9e1e8;box-shadow:0 4px 18px rgba(14,34,72,.06)}
+body.md-page .wd-nav .wd-nav-in{padding:13px 26px}
+body.md-page .wd-nav a,body.md-page .wd-nav button,body.md-page .wd-nav .wd-logo{color:#10294b;text-shadow:none}
+body.md-page .wd-public-trigger{background:#f5f8fa!important;border-color:#dbe4ea!important}
+body.md-page .wd-public-profile img{border-color:#dbe4ea!important}
 .wd-nav .wd-nav-in{grid-template-columns:1fr auto 1fr}
 .wd-public-trigger{align-items:center!important;border:1px solid rgba(255,255,255,.28);border-radius:999px!important;display:inline-flex!important;gap:8px!important;justify-content:center!important;min-height:44px;padding:0 14px!important;width:max-content}
 .wd-public-trigger i{font-size:17px}
