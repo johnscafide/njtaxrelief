@@ -33,6 +33,14 @@ core = [
  ("lat","Latitude","pro"),("lon","Longitude","pro"),("treasury_code","Treasury municipality code","pro")]
 for f,l,t in core: add('property.'+f,l,'parcel','property',t,'public',['consumer','attorney','title','agent','lender','appraiser','contractor','investor'],'nj-parcels-modiv',field=f)
 
+# City is intentionally separate from municipality. The familiar address locality
+# comes from the NJ Office of GIS statewide geocoder; MUN_NAME remains the taxing jurisdiction.
+add('property.city','City','parcel','property','standard','public',
+    ['consumer','attorney','title','agent','lender','appraiser','contractor','investor'],
+    'nj-ogis-geocoder',
+    'Familiar property address locality returned by the New Jersey Office of GIS statewide geocoder. Distinct from the taxing municipality.',
+    field='city')
+
 # Annual tax rates are individually selectable Data Center columns.
 for y in range(2016,2026):
     add(f'tax.rate_{y}',f'{y} general tax rate','tax','municipality','standard' if y>=2024 else 'pro','public',['consumer','attorney','agent','lender','appraiser','investor','municipal'],'nj-division-taxation')
