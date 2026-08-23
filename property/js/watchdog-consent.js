@@ -11,9 +11,17 @@
   var GA_ID = 'G-ENP9182L0J';
   var CLARITY_ID = 'wjeklv0exl';
   var CSS_URL = '/property/css/watchdog-consent.css';
+  var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
+
+  function ensureContactPolicy(){
+    if(window.WatchdogContactPolicy || document.querySelector('script[src="'+CONTACT_POLICY_URL+'"]')) return;
+    var script=document.createElement('script');script.src=CONTACT_POLICY_URL;script.async=false;script.setAttribute('data-watchdog-contact-policy-runtime','1');
+    (document.head||document.documentElement).appendChild(script);
+  }
+  ensureContactPolicy();
 
   function readStored(){
     try{
