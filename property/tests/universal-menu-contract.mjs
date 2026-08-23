@@ -51,6 +51,29 @@ assert(universal.includes('Invite others'), 'Shared profile menu is missing Invi
 assert(universal.includes('Account &amp; billing'), 'Shared profile menu is missing Account & billing');
 assert(universal.includes('Your saved-home workspace'), 'Shared profile menu is missing Property Home context');
 
+// Developer shortcuts belong to the universal profile menu only and must be
+// unlocked by the internal account_role, never by a paid customer plan tier.
+const developerTools = [
+  ['/developer', 'Developer Command Center'],
+  ['/logs/recap', 'Daily Recaps'],
+  ['/analytics', 'Analytics'],
+  ['/logs', 'Build Logs'],
+  ['/developer-data', 'Data Operations']
+];
+for (const [path, label] of developerTools) {
+  assert(universal.includes(`route('${path}')`), `Developer profile menu is missing ${path}`);
+  assert(universal.includes(`label:'${label}'`), `Developer profile menu is missing ${label}`);
+}
+assert(universal.includes('function hasDeveloperRole()'), 'Developer account-role helper is missing');
+assert(universal.includes("plan(state.profile.account_role) === 'developer'"), 'Developer tools are not gated by profiles.account_role');
+assert(universal.includes('function isDeveloper()'), 'Resolved developer-state helper is missing');
+assert(universal.includes("if(!isDeveloper()) return '';"), 'Developer profile rows are not fail-closed for non-developers');
+assert(universal.includes('developerToolsHtml() +'), 'Developer tools are not injected by the shared profile renderer');
+assert(universal.includes('developerItems:developerItems'), 'Developer tool registry is not exposed from the universal menu');
+assert(css.includes('.wd-universal-developer-label'), 'Developer profile section styling is missing');
+assert(css.includes('.wd-universal-developer-tool'), 'Developer profile tool styling is missing');
+assert(css.includes('max-height:calc(100vh - 96px)!important;overflow:auto!important'), 'App profile popovers cannot scroll when developer tools are present');
+
 assert(publicNav.includes('/property/js/watchdog-universal-menu.js'), 'Public navigation does not load the universal menu');
 assert(publicNav.includes('WatchdogUniversalMenu.setUser'), 'Public auth state is not handed to the universal menu');
 assert(brandRuntime.includes('/property/js/watchdog-universal-menu.js'), 'App brand runtime does not load the universal menu');
