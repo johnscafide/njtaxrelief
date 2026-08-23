@@ -39,6 +39,7 @@ assert.match(creative,/confirm\(/,'Final paid-mail checkout must require an expl
 // Paid fulfillment is intentionally service-to-service after a confirmed checkout; browser
 // code cannot call the fulfillment worker or submit authoritative price/recipient rows.
 const creativeAdapter=read('supabase/functions/marketing-direct-mail-launch/index.ts');
+assert.match(creativeAdapter,/https:\/\/www\.watchdogindex\.com/,'Creative provider adapter must allow the canonical Watchdog browser origin.');
 assert.match(creativeAdapter,/PCM_LIVE_LAUNCH_ENABLED/,'PCM adapter must retain the production-send kill switch configuration.');
 assert.match(creativeAdapter,/legacy_launch_disabled:true/,'Legacy browser-triggered provider launch must remain disabled.');
 assert.match(creativeAdapter,/live_launch_enabled:false/,'Creative adapter status must not advertise browser-triggered live fulfillment.');
