@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-23T15:11:16.526Z",
+  "generated_at": "2026-08-23T15:12:58.090Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -301,6 +301,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -323,6 +325,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -345,6 +349,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Production Data Center governance marks this derived path partial because source or property-level coverage is incomplete."
     },
@@ -367,6 +373,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -389,6 +397,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -411,6 +421,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -433,6 +445,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -455,6 +469,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -477,6 +493,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -499,6 +517,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -521,6 +541,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -543,6 +565,8 @@
       "dependencies": [],
       "provider_key": "trusted_observation",
       "provider_kind": "trusted_observation",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Production Data Center governance marks this trusted-observation marker partial: the path is live, but a value is present only when a governed observation exists for the property."
     },
@@ -565,6 +589,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -587,6 +613,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -609,6 +637,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -631,6 +661,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -653,6 +685,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -675,6 +709,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -697,6 +733,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -719,6 +757,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -741,6 +781,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -763,6 +805,8 @@
       "dependencies": [],
       "provider_key": "trusted_observation",
       "provider_kind": "trusted_observation",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Production Data Center governance marks this trusted-observation marker partial: the path is live, but a value is present only when a governed observation exists for the property."
     },
@@ -785,6 +829,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -807,6 +853,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -829,6 +877,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -851,6 +901,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -873,6 +925,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -895,6 +949,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -917,6 +973,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -939,6 +997,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -961,6 +1021,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -983,6 +1045,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1005,6 +1069,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1027,6 +1093,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1049,6 +1117,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1071,6 +1141,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1093,6 +1165,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1115,6 +1189,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1137,6 +1213,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1159,6 +1237,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1181,6 +1261,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1203,6 +1285,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1225,6 +1309,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1247,6 +1333,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1269,6 +1357,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1291,6 +1381,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1313,6 +1405,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1335,6 +1429,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1357,6 +1453,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1376,6 +1474,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1395,6 +1495,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1415,6 +1517,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1437,6 +1541,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1454,6 +1560,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1471,6 +1579,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1488,6 +1598,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1505,6 +1617,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1522,6 +1636,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1539,6 +1655,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1556,6 +1674,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1573,6 +1693,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1590,6 +1712,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1607,6 +1731,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1625,6 +1751,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1643,6 +1771,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1661,6 +1791,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1680,6 +1812,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1699,6 +1833,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1717,6 +1853,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1735,6 +1873,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1753,6 +1893,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1770,6 +1912,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1788,6 +1932,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1805,6 +1951,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1822,6 +1970,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1839,6 +1989,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1857,6 +2009,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1874,6 +2028,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1892,6 +2048,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1909,6 +2067,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1926,6 +2086,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1943,6 +2105,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1960,6 +2124,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -1977,6 +2143,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -1994,6 +2162,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2011,6 +2181,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2028,6 +2200,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2045,6 +2219,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2062,6 +2238,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2079,6 +2257,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2096,6 +2276,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2113,6 +2295,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2130,6 +2314,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2148,6 +2334,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2165,6 +2353,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2182,6 +2372,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2199,6 +2391,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2216,6 +2410,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2233,6 +2429,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2250,6 +2448,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2267,6 +2467,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2284,6 +2486,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2301,6 +2505,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2318,6 +2524,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2335,6 +2543,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2352,6 +2562,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2369,6 +2581,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2386,6 +2600,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2403,6 +2619,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2420,6 +2638,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2437,6 +2657,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2454,6 +2676,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2471,6 +2695,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2488,6 +2714,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2505,6 +2733,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2522,6 +2752,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2539,6 +2771,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2556,6 +2790,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2573,6 +2809,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2590,6 +2828,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2607,6 +2847,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2624,6 +2866,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2641,6 +2885,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2658,6 +2904,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2675,6 +2923,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2692,6 +2942,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2709,6 +2961,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2726,6 +2980,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2743,6 +2999,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2760,6 +3018,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2777,6 +3037,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2794,6 +3056,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2811,6 +3075,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2828,6 +3094,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2845,6 +3113,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2862,6 +3132,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2879,6 +3151,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2896,6 +3170,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2913,6 +3189,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2930,6 +3208,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2947,6 +3227,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2964,6 +3246,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -2981,6 +3265,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -2998,6 +3284,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3015,6 +3303,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3032,6 +3322,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3049,6 +3341,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3066,6 +3360,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3083,6 +3379,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3100,6 +3398,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3117,6 +3417,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3134,6 +3436,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3151,6 +3455,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3168,6 +3474,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3185,6 +3493,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3202,6 +3512,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3219,6 +3531,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3236,6 +3550,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3253,6 +3569,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3270,6 +3588,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3287,6 +3607,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3304,6 +3626,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3321,6 +3645,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3338,6 +3664,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3355,6 +3683,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3372,6 +3702,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3389,6 +3721,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3406,6 +3740,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3423,6 +3759,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3440,6 +3778,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3457,6 +3797,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3474,6 +3816,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3491,6 +3835,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3508,6 +3854,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3525,6 +3873,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3542,6 +3892,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3559,6 +3911,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3576,6 +3930,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3593,6 +3949,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3610,6 +3968,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3627,6 +3987,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3644,6 +4006,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3661,6 +4025,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3678,6 +4044,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3695,6 +4063,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3712,6 +4082,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3729,6 +4101,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3746,6 +4120,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3763,6 +4139,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -3780,6 +4158,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3797,6 +4177,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3814,6 +4196,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3831,6 +4215,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3848,6 +4234,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3865,6 +4253,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3882,6 +4272,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3899,6 +4291,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3916,6 +4310,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3933,6 +4329,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3950,6 +4348,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3967,6 +4367,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -3984,6 +4386,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4001,6 +4405,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4018,6 +4424,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4035,6 +4443,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4052,6 +4462,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4069,6 +4481,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4086,6 +4500,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4103,6 +4519,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4120,6 +4538,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4137,6 +4557,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4154,6 +4576,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4171,6 +4595,8 @@
       "dependencies": [],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
     },
@@ -4196,6 +4622,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4221,6 +4649,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4246,6 +4676,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4271,6 +4703,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4295,6 +4729,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4319,6 +4755,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4343,6 +4781,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4367,6 +4807,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4390,6 +4832,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4413,6 +4857,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4436,6 +4882,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4459,6 +4907,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4482,6 +4932,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4505,6 +4957,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4528,6 +4982,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4551,6 +5007,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4574,6 +5032,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4597,6 +5057,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4620,6 +5082,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4643,6 +5107,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4667,6 +5133,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4691,6 +5159,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4715,6 +5185,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4739,6 +5211,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4763,6 +5237,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4787,6 +5263,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4811,6 +5289,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4835,6 +5315,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4859,6 +5341,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4883,6 +5367,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4907,6 +5393,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4931,6 +5419,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -4956,6 +5446,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -4981,6 +5473,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5006,6 +5500,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5031,6 +5527,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5054,6 +5552,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5077,6 +5577,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5100,6 +5602,8 @@
       ],
       "provider_key": null,
       "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": false,
       "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     },
@@ -5123,6 +5627,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5149,6 +5655,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5175,6 +5683,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5201,6 +5711,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5227,6 +5739,8 @@
       ],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5250,6 +5764,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5273,6 +5789,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5296,6 +5814,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5319,6 +5839,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5342,6 +5864,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5365,6 +5889,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5388,6 +5914,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5411,6 +5939,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5434,6 +5964,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5457,6 +5989,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5480,6 +6014,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5503,6 +6039,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5526,6 +6064,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5549,6 +6089,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5572,6 +6114,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5595,6 +6139,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5618,6 +6164,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5641,6 +6189,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5664,6 +6214,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5687,6 +6239,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5710,6 +6264,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5733,6 +6289,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5756,6 +6314,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5779,6 +6339,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5799,6 +6361,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5819,6 +6383,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5839,6 +6405,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5858,6 +6426,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5878,6 +6448,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5902,6 +6474,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5926,6 +6500,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5950,6 +6526,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5974,6 +6552,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -5998,6 +6578,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6022,6 +6604,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6048,6 +6632,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6074,6 +6660,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6100,6 +6688,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6126,6 +6716,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6152,6 +6744,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
@@ -6178,6 +6772,8 @@
       "dependencies": [],
       "provider_key": "watchdog-derived",
       "provider_kind": "derived_governed",
+      "calculation_key": null,
+      "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     }
