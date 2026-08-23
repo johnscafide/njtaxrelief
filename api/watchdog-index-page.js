@@ -150,6 +150,24 @@ function ensureLandingRootClass(html) {
   });
 }
 
+function removeLandingFaqSchema(html) {
+  return html.replace(
+    /<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi,
+    (full, attrs, rawJson) => {
+      try {
+        const data = JSON.parse(rawJson);
+        if (!Array.isArray(data?.['@graph'])) return full;
+        const nextGraph = data['@graph'].filter(node => node?.['@type'] !== 'FAQPage');
+        if (nextGraph.length === data['@graph'].length) return full;
+        data['@graph'] = nextGraph;
+        return `<script${attrs}>\n${JSON.stringify(data, null, 2)}\n</script>`;
+      } catch (_error) {
+        return full;
+      }
+    }
+  );
+}
+
 function cleanRouteRuntime() {
   return `<script id="watchdog-clean-route-runtime">(function(){
 'use strict';
@@ -254,7 +272,9 @@ module.exports = async function handler(req, res) {
   }
 
   const canonicalUrl = `${CANONICAL_ORIGIN}${publicPath === '/' ? '/' : publicPath}`;
-  const sourceHtml = publicPath === '/' ? ensureLandingRootClass(source.html) : source.html;
+  const sourceHtml = publicPath === '/'
+    ? removeLandingFaqSchema(ensureLandingRootClass(source.html))
+    : source.html;
   const html = setCanonicalMetadata(sourceHtml, canonicalUrl);
   const upstreamCache = source.response.headers.get('cache-control');
   const upstreamRobots = source.response.headers.get('x-robots-tag');
