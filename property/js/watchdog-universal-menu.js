@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260823a';
+  var VERSION = '20260823b';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -114,6 +114,29 @@
         return '<a class="wd-universal-developer-tool" data-wd-developer-tool="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span><b>' + item.label + '</b><small>' + item.detail + '</small></span></a>';
       }).join('');
   }
+  function planPromo(){
+    if(!state.user || !state.ready || isDeveloper()) return null;
+    var p = actualPlan();
+    if(p === 'standard' || p === 'agent'){
+      return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'UPGRADE WATCHDOG',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'Explore Pro'};
+    }
+    if(p === 'pro'){
+      return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Unlock Pro+',detail:'Higher-scale data, Scanner and advanced workflows.',icon:'fa-bolt',cta:'Explore Pro+'};
+    }
+    if(p === 'pro_plus'){
+      return {key:'teams',tone:'teams',href:route('/teams'),eyebrow:'WORK WITH OTHERS?',title:'Part of a team?',detail:'Preview shared intelligence, seats and team controls.',icon:'fa-users',cta:'Preview Teams'};
+    }
+    return null;
+  }
+  function planPromoHtml(){
+    var promo = planPromo();
+    if(!promo) return '';
+    return '<a class="wd-universal-plan-promo wd-universal-plan-promo-' + promo.tone + '" data-wd-plan-promo="' + promo.key + '" href="' + promo.href + '">' +
+      '<span class="wd-universal-plan-promo-icon"><i class="fas ' + promo.icon + '"></i></span>' +
+      '<span class="wd-universal-plan-promo-copy"><small>' + promo.eyebrow + '</small><b>' + promo.title + '</b><em>' + promo.detail + '</em></span>' +
+      '<span class="wd-universal-plan-promo-cta">' + promo.cta + ' <i class="fas fa-arrow-right"></i></span>' +
+    '</a>';
+  }
   function activeFor(item,page){
     if(item.key === 'robust') return page === 'robust';
     return item.key === page;
@@ -163,6 +186,7 @@
     return close +
       '<header><span><b>' + esc(displayName()) + '</b><small>' + esc(state.user.email || '') + '</small></span><i>' + esc(prettyPlan()) + '</i></header>' +
       '<nav>' +
+        planPromoHtml() +
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
@@ -269,6 +293,13 @@
     link.href = '/property/css/watchdog-universal-menu.css?v=' + VERSION;
     document.head.appendChild(link);
   }
+  function ensurePromoCss(){
+    if(document.getElementById('wd-universal-plan-promo-css')) return;
+    var style = document.createElement('style');
+    style.id = 'wd-universal-plan-promo-css';
+    style.textContent = '.wd-universal-profile>nav>.wd-universal-plan-promo{position:relative!important;display:grid!important;grid-template-columns:38px minmax(0,1fr)!important;gap:10px!important;min-height:94px!important;margin:2px 2px 8px!important;padding:12px!important;border:0!important;border-radius:15px!important;overflow:hidden!important;color:#fff!important;box-shadow:0 12px 28px rgba(16,41,75,.16)!important;text-decoration:none!important;isolation:isolate!important}.wd-universal-profile>nav>.wd-universal-plan-promo:before{content:"";position:absolute;inset:-30% -10% auto auto;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.12);z-index:-1}.wd-universal-profile>nav>.wd-universal-plan-promo:hover{transform:translateY(-1px)!important;filter:saturate(1.05)!important}.wd-universal-plan-promo-pro{background:linear-gradient(135deg,#17365f,#2f6df6)!important}.wd-universal-plan-promo-plus{background:linear-gradient(135deg,#10294b,#087f7a)!important}.wd-universal-plan-promo-teams{background:linear-gradient(135deg,#4d2d78,#2f6df6)!important}.wd-universal-plan-promo-icon{width:38px!important;height:38px!important;border-radius:11px!important;background:rgba(255,255,255,.16)!important;color:#fff!important;display:grid!important;place-items:center!important;font-size:14px!important}.wd-universal-plan-promo-copy{display:grid!important;gap:2px!important;min-width:0!important}.wd-universal-plan-promo-copy small{color:rgba(255,255,255,.72)!important;font:800 7px/1.2 var(--wdum-font)!important;letter-spacing:.12em!important}.wd-universal-plan-promo-copy b{color:#fff!important;font:800 14px/1.2 var(--wdum-font)!important}.wd-universal-plan-promo-copy em{color:rgba(255,255,255,.8)!important;font:600 9px/1.35 var(--wdum-font)!important;font-style:normal!important}.wd-universal-plan-promo-cta{grid-column:1/-1!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;color:#fff!important;font:800 9px/1 var(--wdum-font)!important;margin-top:2px!important}.wd-universal-plan-promo-cta i{font-size:8px!important}.wd-public-sheet.right.wd-universal-public-profile,.wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{max-height:calc(100vh - 96px)!important;overflow:auto!important}@media(max-width:760px){.wd-universal-profile>nav>.wd-universal-plan-promo{min-height:102px!important;margin-bottom:9px!important}.wd-universal-plan-promo-copy b{font-size:15px!important}.wd-universal-plan-promo-copy em{font-size:10px!important}}@media(prefers-reduced-motion:reduce){.wd-universal-profile>nav>.wd-universal-plan-promo{transition:none!important}.wd-universal-profile>nav>.wd-universal-plan-promo:hover{transform:none!important}}';
+    document.head.appendChild(style);
+  }
   function watchTarget(node){
     if(!node || typeof MutationObserver === 'undefined') return;
     if(observed && observed.has(node)) return;
@@ -348,6 +379,7 @@
 
   function boot(){
     ensureCss();
+    ensurePromoCss();
     queue();
     loadAuth();
     if(typeof MutationObserver !== 'undefined' && document.body){
@@ -359,6 +391,7 @@
     version:VERSION,
     items:items,
     developerItems:developerItems,
+    planPromo:planPromo,
     refresh:queue,
     setUser:setUser,
     route:route,

@@ -10,6 +10,7 @@ const publicNav = read('property/js/public-nav.js');
 const brandRuntime = read('property/js/brand-consistency-runtime.js');
 const dashboard = read('property/dashboard/index.html');
 const home = read('property/home/index.html');
+const teams = read('property/teams/index.html');
 const homeMenu = read('property/js/dashboard/home/home-menu-sync.js');
 const todayNav = read('property/js/watchdog-today-nav.js');
 const sidemenu = read('property/js/sidemenu.js');
@@ -73,6 +74,32 @@ assert(universal.includes('developerItems:developerItems'), 'Developer tool regi
 assert(css.includes('.wd-universal-developer-label'), 'Developer profile section styling is missing');
 assert(css.includes('.wd-universal-developer-tool'), 'Developer profile tool styling is missing');
 assert(css.includes('max-height:calc(100vh - 96px)!important;overflow:auto!important'), 'App profile popovers cannot scroll when developer tools are present');
+
+// Customer account menus get one contextual graphical promotion based on the
+// resolved plan. Developer and Teams accounts must never be shown an upsell ad.
+assert(universal.includes('function planPromo()'), 'Plan-aware account promo helper is missing');
+assert(universal.includes("p === 'standard' || p === 'agent'"), 'Standard/Agent to Pro promo gate is missing');
+assert(universal.includes("if(p === 'pro')"), 'Pro to Pro+ promo gate is missing');
+assert(universal.includes("if(p === 'pro_plus')"), 'Pro+ to Teams promo gate is missing');
+assert(universal.includes("if(!state.user || !state.ready || isDeveloper()) return null;"), 'Developer/signed-out promo suppression is missing');
+assert(universal.includes("route('/teams')"), 'Pro+ Teams preview route is missing');
+assert(universal.includes('data-wd-plan-promo'), 'Graphical plan promo markup is missing');
+assert(universal.includes('planPromoHtml() +'), 'Plan promo is not injected by the shared profile renderer');
+assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not exposed for verification');
+assert(universal.includes('wd-universal-plan-promo-pro'), 'Pro promo visual treatment is missing');
+assert(universal.includes('wd-universal-plan-promo-plus'), 'Pro+ promo visual treatment is missing');
+assert(universal.includes('wd-universal-plan-promo-teams'), 'Teams promo visual treatment is missing');
+
+// Teams is an honest preview page, not a false self-service sales surface.
+assert(teams.includes('<title>Watchdog Teams | Shared Property Intelligence</title>'), 'Teams preview page title is missing');
+assert(teams.includes('Watchdog Teams · Preview'), 'Teams page does not visibly identify itself as a preview');
+assert(teams.includes('not a self-service plan for purchase today'), 'Teams page does not disclose current purchase status');
+assert(teams.includes('Seats &amp; invitations'), 'Teams roadmap is missing seat/invite planning');
+assert(teams.includes('Roles &amp; permissions'), 'Teams roadmap is missing role/permission planning');
+assert(teams.includes('Organization integrations'), 'Teams roadmap is missing organization integrations');
+assert(teams.includes('Future Watchdog capabilities'), 'Teams roadmap is missing future-capability positioning');
+assert(teams.includes('/property/js/public-nav.js'), 'Teams page is not connected to the shared public/profile navigation runtime');
+assert(teams.includes('https://www.watchdogindex.com/teams'), 'Teams canonical URL is not on watchdogindex.com');
 
 assert(publicNav.includes('/property/js/watchdog-universal-menu.js'), 'Public navigation does not load the universal menu');
 assert(publicNav.includes('WatchdogUniversalMenu.setUser'), 'Public auth state is not handed to the universal menu');
