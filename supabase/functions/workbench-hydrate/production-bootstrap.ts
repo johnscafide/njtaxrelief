@@ -100,7 +100,7 @@ async function enrichNewHomeWarranty(request: Request, response: Response) {
 
   let requestBody: any = null;
   try {
-    requestBody = await request.clone().json();
+    requestBody = await request.json();
   } catch {
     return response;
   }
@@ -243,8 +243,9 @@ function applyWatchdogIndexCors(origin: string, response: Response) {
 function withWatchdogIndexCors(handler: Deno.ServeHandler): Deno.ServeHandler {
   return async (request, info) => {
     const origin = request.headers.get('origin') || '';
+    const enrichmentRequest = request.clone();
     const baseResponse = await handler(request, info);
-    const enrichedResponse = await enrichNewHomeWarranty(request, baseResponse);
+    const enrichedResponse = await enrichNewHomeWarranty(enrichmentRequest, baseResponse);
     return applyWatchdogIndexCors(origin, enrichedResponse);
   };
 }
