@@ -48,7 +48,19 @@ must(!contextual.includes('ask(options.seed'), 'Seed questions must never auto-s
 must(!contextual.includes('service_role'), 'Contextual browser code must not contain a service-role credential path.');
 must(!contextual.includes('raw_audio'), 'Contextual Analyst shell must not persist raw audio.');
 
+must(contextual.includes("var EVIDENCE_REVIEW_PROMPT='Why was this flagged? Show source lineage.';"), 'Contextual Voice must seed the existing governed inspect-lineage intent rather than create a Voice-only evidence route.');
+must(contextual.includes('data-contextual-evidence'), 'A governed finding must expose the bounded Review evidence workflow.');
+must(contextual.includes("toolName==='run_intelligence_model'"), 'Review evidence must be offered only after a governed Intelligence model response.');
+must(contextual.includes("toolName==='inspect_lineage'"), 'The evidence workflow must identify the existing read-only inspect-lineage tool response.');
+must(contextual.includes('Read-only evidence review · No property action was taken.'), 'Evidence review must make the read-only safety boundary explicit.');
+must(contextual.includes('Review or edit it before submitting.'), 'Evidence review must preserve human control before execution.');
+must(contextual.includes('evidenceInput.value=EVIDENCE_REVIEW_PROMPT'), 'Review evidence must populate the transcript field for user review.');
+must(!contextual.includes('ask(EVIDENCE_REVIEW_PROMPT'), 'Review evidence must never auto-submit the governed follow-up.');
+must(contextual.includes("contract:'contextual-analyst-v2-evidence-review'"), 'Contextual Voice must version the evidence-review interaction contract.');
+
 must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Existing browser Voice must remain the speech-recognition implementation.');
 must(voiceBrowser.includes('speechSynthesis'), 'Existing browser Voice must remain the narration implementation.');
+must(voiceBrowser.includes('Transcript ready. Review it, then choose Ask Watchdog.'), 'Spoken questions must remain reviewable before submission.');
+must(voiceBrowser.includes("const evidence = sectionItems('evidence', 4);"), 'Narration must reuse evidence from the rendered governed Analyst response.');
 
 console.log('Watchdog contextual Dashboard + Today Voice contract passed.');
