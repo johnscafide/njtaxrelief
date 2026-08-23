@@ -60,6 +60,11 @@ export default function middleware(request) {
     return redirectLegacyFaq(request, url);
   }
 
+  // Watchdog Move is intentionally staged as a root-level, unlinked study surface.
+  // Serve its static index directly instead of sending it through the /property/*
+  // clean-route source loader, which has no /property/move source counterpart.
+  if (url.pathname === '/move' || url.pathname === '/move/') return next();
+
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
   if (url.pathname === '/property' || url.pathname === '/property/') {
     return rewrite(new URL('/api/watchdog-index-entry', request.url));
