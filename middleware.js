@@ -4,6 +4,12 @@ const WATCHDOG_HOST = 'www.watchdogindex.com';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
+const LEGACY_FAQ_PATHS = new Set([
+  '/property/faq',
+  '/property/faq/',
+  '/property/faq.html',
+  '/property/faq/index.html'
+]);
 
 function isReservedRootPath(pathname) {
   return RESERVED_ROOT_PREFIXES.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
@@ -27,6 +33,12 @@ function rewriteWatchdogSystemFile(request, apiPath) {
   return rewrite(new URL(apiPath, request.url));
 }
 
+function redirectLegacyFaq(request, url) {
+  const destination = new URL('/faq', request.url);
+  destination.search = url.search;
+  return Response.redirect(destination, 308);
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
@@ -40,6 +52,12 @@ export default function middleware(request) {
   }
   if (SITEMAP_FILE.test(url.pathname)) {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
+  }
+
+  // Retire the former Watchdog FAQ compatibility files on the canonical host.
+  // Preserve query strings and leave the separate legacy host untouched.
+  if (LEGACY_FAQ_PATHS.has(url.pathname)) {
+    return redirectLegacyFaq(request, url);
   }
 
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
