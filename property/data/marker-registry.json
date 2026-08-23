@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status",
- "generated_at": "2026-08-23T15:34:50.354Z",
+ "generated_at": "2026-08-23T15:36:27.562Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 73.4,
   "provider_status": {
-   "live": 521,
+   "live": 530,
    "partial": 4,
-   "unavailable": 11,
-   "planned": 198
+   "unavailable": 12,
+   "planned": 188
   },
   "retired_phase5": 0
  },
@@ -12914,8 +12914,8 @@
    "field": "new_home_warranty_enrollments",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_enrollments",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12938,8 +12938,8 @@
    "field": "new_home_warranty_average_price",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_average_price",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12962,8 +12962,8 @@
    "field": "new_home_warranty_median_price",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_median_price",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -12986,8 +12986,8 @@
    "field": "new_home_warranty_sales_count",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_sales_count",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13010,8 +13010,8 @@
    "field": "new_home_warranty_quarter",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_quarter",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13034,8 +13034,8 @@
    "field": "new_home_warranty_year",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_year",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13058,8 +13058,8 @@
    "field": "new_home_warranty_price_change",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_price_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13082,8 +13082,8 @@
    "field": "new_home_warranty_enrollment_change",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_enrollment_change",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13106,8 +13106,8 @@
    "field": "new_home_warranty_county_rank",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_county_rank",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -13130,8 +13130,8 @@
    "field": "new_home_warranty_municipal_rank",
    "professional_reason": "Published new home warranties data for professional review; verify the official record before reliance.",
    "source_field": "new_home_warranty_municipal_rank",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
+   "provider_status": "unavailable",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
