@@ -11,6 +11,20 @@ const LEGACY_FAQ_PATHS = new Set([
   '/property/faq.html',
   '/property/faq/index.html'
 ]);
+const LEGACY_PUBLIC_REDIRECTS = new Map([
+  ['/property/privacy', '/privacy'],
+  ['/property/privacy/', '/privacy'],
+  ['/property/privacy/index.html', '/privacy'],
+  ['/property/terms', '/terms'],
+  ['/property/terms/', '/terms'],
+  ['/property/terms/index.html', '/terms'],
+  ['/property/support', '/support'],
+  ['/property/support/', '/support'],
+  ['/property/support/index.html', '/support'],
+  ['/property/data-deletion', '/data-deletion'],
+  ['/property/data-deletion/', '/data-deletion'],
+  ['/property/data-deletion/index.html', '/data-deletion']
+]);
 
 function isReservedRootPath(pathname) {
   return RESERVED_ROOT_PREFIXES.some(prefix => pathname === prefix || pathname.startsWith(`${prefix}/`));
@@ -34,8 +48,8 @@ function rewriteWatchdogSystemFile(request, apiPath) {
   return rewrite(new URL(apiPath, request.url));
 }
 
-function redirectLegacyFaq(request, url) {
-  const destination = new URL('/faq', request.url);
+function redirectCanonical(request, url, pathname) {
+  const destination = new URL(pathname, request.url);
   destination.search = url.search;
   return Response.redirect(destination, 308);
 }
@@ -55,10 +69,14 @@ export default function middleware(request) {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
   }
 
-  // Retire the former Watchdog FAQ compatibility files on the canonical host.
-  // Preserve query strings and leave the separate legacy host untouched.
+  // Retire compatibility URLs for public Watchdog pages on the canonical host.
+  // These redirects prevent old /property/* copies from exposing stale contact
+  // details and keep one authoritative customer-facing route for each surface.
   if (LEGACY_FAQ_PATHS.has(url.pathname)) {
-    return redirectLegacyFaq(request, url);
+    return redirectCanonical(request, url, '/faq');
+  }
+  if (LEGACY_PUBLIC_REDIRECTS.has(url.pathname)) {
+    return redirectCanonical(request, url, LEGACY_PUBLIC_REDIRECTS.get(url.pathname));
   }
 
   const publicPath = cleanPublicPath(url.pathname);
@@ -74,7 +92,7 @@ export default function middleware(request) {
   }
 
   // Existing /property/* implementation and compatibility paths remain untouched
-  // until clean-route acceptance passes. Assets and internal fragments rely on them.
+  // unless explicitly canonicalized above. Assets and internal fragments rely on them.
   if (url.pathname.startsWith('/property/')) return next();
 
   // Preserve the legacy tax-relief site's root assets, town pages and API endpoints.
