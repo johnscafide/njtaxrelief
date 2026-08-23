@@ -8,6 +8,7 @@ const todayVoice = read('property/js/watchdog-today-voice.js');
 const contextual = read('property/js/watchdog-contextual-analyst.js');
 const voiceBrowser = read('property/js/watchdog-intelligence-voice-browser.js');
 const narration = read('property/js/watchdog-intelligence-narration.js');
+const commandPolicy = read('property/js/watchdog-intelligence-command-policy.js');
 const analystProxy = read('api/watchdog-intelligence-analyst.js');
 
 function must(condition, message) {
@@ -59,12 +60,28 @@ must(contextual.includes('Read-only evidence review · No property action was ta
 must(contextual.includes('Review or edit it before submitting.'), 'Evidence review must preserve human control before execution.');
 must(contextual.includes('evidenceInput.value=EVIDENCE_REVIEW_PROMPT'), 'Review evidence must populate the transcript field for user review.');
 must(!contextual.includes('ask(EVIDENCE_REVIEW_PROMPT'), 'Review evidence must never auto-submit the governed follow-up.');
-must(contextual.includes("contract:'contextual-analyst-v3-evidence-review-proxy'"), 'Contextual Voice must version the evidence-review interaction contract.');
 
-must(analystProxy.includes('/functions/v1/intelligence-analyst'), 'The same-origin transport must forward to the existing governed intelligence-analyst Edge Function.');
+must(commandPolicy.includes("VERSION='watchdog-command-policy-vnext-1'"), 'Voice commands must use a versioned shared command policy.');
+for (const commandClass of ['read_only','reversible','approval_required','prohibited']) {
+  must(commandPolicy.includes(`${commandClass}:'${commandClass}'`), `Missing governed command class: ${commandClass}.`);
+}
+must(contextual.includes('data-command-confirm'), 'Reversible and consequential contextual commands must expose explicit confirmation controls.');
+must(contextual.includes('data-command-cancel'), 'Command confirmation UX must preserve a cancel path.');
+must(contextual.includes('response.status===409'), 'Contextual Analyst must recognize server-required confirmation before continuing.');
+must(contextual.includes('command_confirmation:options.commandConfirmation'), 'Confirmed/prepare-only state must be sent explicitly to the same-origin command gate.');
+must(contextual.includes('Proposal only · No external'), 'Approval-required flows must state that no external action executed.');
+must(contextual.includes('Voice confirmation is not authorization'), 'Reversible confirmation must explicitly remain distinct from authorization.');
+must(contextual.includes("contract:'contextual-analyst-v4-command-gates'"), 'Contextual Voice must version the command-gated interaction contract.');
+
+must(analystProxy.includes("require('../property/js/watchdog-intelligence-command-policy.js')"), 'The Analyst transport must enforce the shared command policy server-side.');
+must(analystProxy.includes('/functions/v1/intelligence-analyst'), 'The same-origin transport must forward allowed requests to the existing governed intelligence-analyst Edge Function.');
 must(analystProxy.includes('Authorization: authorization'), 'The Analyst transport must preserve the user Authorization header.');
 must(analystProxy.includes('apikey: PUBLISHABLE_KEY'), 'The Analyst transport must use only the publishable Supabase key.');
 must(!analystProxy.includes('SERVICE_ROLE'), 'The Analyst transport must not contain a service-role path.');
+must(analystProxy.includes("policy.class === commandPolicy.CLASSES.prohibited"), 'Prohibited commands must be blocked in the same-origin transport.');
+must(analystProxy.includes("policy.class === commandPolicy.CLASSES.reversible && confirmation !== 'confirmed'"), 'Reversible commands must be gated before Analyst routing.');
+must(analystProxy.includes("policy.class === commandPolicy.CLASSES.approval_required && confirmation !== 'prepare_only'"), 'Consequential commands must require prepare-only mode before Analyst routing.');
+must(analystProxy.includes('Prepare a non-executing proposal'), 'Approval-required requests must be rewritten into a non-executing proposal.');
 must(analystProxy.includes("if (req.method !== 'POST')"), 'The Analyst transport must accept POST only.');
 
 must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Existing browser Voice must remain the speech-recognition implementation.');
