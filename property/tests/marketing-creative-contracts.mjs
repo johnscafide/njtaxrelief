@@ -25,6 +25,8 @@ assert.match(pcmWorkspace,/24 hours/,'Vendor-confirmed PCM editor token lifetime
 const pcmCatalog=read('supabase/functions/pcm-sandbox-catalog/index.ts');
 assert.match(pcmCatalog,/\/design\/\$\{encodeURIComponent\(id\)\}\/edit/,'PCM editor sessions must use the verified design edit route.');
 assert.match(pcmCatalog,/auth\.startsWith\('Bearer '\)/,'PCM catalog/editor adapter must require authenticated browser access.');
+assert.match(pcmCatalog,/https:\/\/www\.watchdogindex\.com/,'PCM catalog/editor adapter must allow the canonical Watchdog browser origin.');
+assert.match(pcmCatalog,/https:\/\/www\.njpropertytaxrelief\.com/,'PCM catalog/editor adapter must preserve the intentional legacy browser origin.');
 
 const creative=read('property/js/marketing-studio-creative.js');
 assert.match(creative,/marketing_prepare_direct_mail_recipients/,'Recipients must be materialized server-side before quote/checkout.');
