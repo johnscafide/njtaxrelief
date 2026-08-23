@@ -2,9 +2,12 @@
   'use strict';
 
   var isPreview = /\.vercel\.app$/i.test(location.hostname);
+  // get-platform-health remains JWT-gated at the Supabase gateway. The public
+  // status GET uses the project anon JWT; the privileged POST path still
+  // requires a real signed-in user and developer role inside the function.
   var project = isPreview
-    ? { url: 'https://pxossnwmrygxlpxtstnl.supabase.co', key: 'sb_publishable_2knfdj4MRsPEtQpPbQ54ew_S5KngOcl' }
-    : { url: 'https://uvkvaxljhhngydvlrzom.supabase.co', key: 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa' };
+    ? { url: 'https://pxossnwmrygxlpxtstnl.supabase.co', key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InB4b3NzbndtcnlneGxweHRzdG5sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODY5MjEyMDgsImV4cCI6MjEwMjQ5NzIwOH0.4FfVH_ZIn26kB0jXhdeih1FKWpO2zoYaecFYxxBortE' }
+    : { url: 'https://uvkvaxljhhngydvlrzom.supabase.co', key: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a3ZheGxqaGhuZ3lkdmxyem9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2Mzg0NjYsImV4cCI6MjA5NzIxNDQ2Nn0.5rTHWQk_4VXDChiU0wOW2BXmTNO-oYjBhUQzFtmA1Wg' };
 
   var labels = {
     operational: ['All systems operational', 'No active Watchdog incidents are currently recorded.'],
@@ -46,7 +49,7 @@
     }).join('') : '<div class="op-empty">No recently resolved incidents to display.</div>';
   }
 
-  fetch(project.url + '/functions/v1/public-platform-status', {
+  fetch(project.url + '/functions/v1/get-platform-health', {
     method: 'GET',
     headers: { apikey: project.key, Authorization: 'Bearer ' + project.key }
   }).then(function (response) {
