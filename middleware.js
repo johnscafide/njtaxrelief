@@ -25,7 +25,7 @@ function cleanPublicPath(pathname) {
 }
 
 function rewriteCleanPage(request, publicPath) {
-  const destination = new URL('/api/watchdog-index-page-safe', request.url);
+  const destination = new URL('/api/watchdog-index-page-contact-safe', request.url);
   destination.searchParams.set('path', publicPath);
   return rewrite(destination);
 }
@@ -81,8 +81,8 @@ export default function middleware(request) {
   if (isReservedRootPath(url.pathname) || STATIC_FILE.test(url.pathname)) return next();
 
   // On the dedicated Watchdog domain, extensionless root paths are Watchdog pages.
-  // The safe loader rejects Vercel authentication/error HTML and returns Watchdog's
-  // branded 404 instead of leaking hosting-provider UI into the customer surface.
+  // The contact-safe loader rejects Vercel authentication/error HTML, strips direct
+  // staff contact data and returns Watchdog's branded 404 for missing routes.
   return rewriteCleanPage(request, publicPath);
 }
 
