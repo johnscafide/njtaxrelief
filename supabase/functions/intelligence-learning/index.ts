@@ -1,8 +1,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const VERSION="watchdog-learning-v3";
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const VERSION="watchdog-learning-v4-canonical-domain";
+const ORIGINS=new Set(["https://watchdogindex.com","https://www.watchdogindex.com","https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const OUTCOMES=new Set(["reviewed","useful","not_relevant","contacted","appointment","client","under_contract","closed","dismissed"]);
 const EVENT_WEIGHT:Record<string,number>={useful:.5,contacted:.6,appointment:1,client:1.25,under_contract:1.5,closed:2,not_relevant:-1,dismissed:-1};
@@ -16,7 +16,7 @@ const PROF_DEFAULTS:Record<string,Record<string,number>>={
   lender:{"watchdog.closing_exception_priority":1.07,"watchdog.title_constraint_stack":1.05,"watchdog.transaction_diligence_completion":1.05,"watchdog.due_diligence_signal_count":1.03}
 };
 type O=Record<string,any>;
-const cors=(r:Request)=>({"Access-Control-Allow-Origin":ORIGINS.has(r.headers.get("origin")||"")?(r.headers.get("origin")||""):"https://njpropertytaxrelief.com","Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"});
+const cors=(r:Request)=>({"Access-Control-Allow-Origin":ORIGINS.has(r.headers.get("origin")||"")?(r.headers.get("origin")||""):"https://www.watchdogindex.com","Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"});
 const json=(r:Request,s:number,p:unknown)=>new Response(JSON.stringify(p),{status:s,headers:{...cors(r),"Content-Type":"application/json","Cache-Control":"private, no-store"}});
 const clean=(v:unknown,n=300)=>String(v??"").replace(/[<>]/g,"").trim().slice(0,n);
 const numeric=(v:unknown)=>{if(v===null||v===undefined||v==="")return null;const n=Number(v);return Number.isFinite(n)?n:null};
@@ -104,6 +104,6 @@ Deno.serve(async(req:Request)=>{
   const aq=await admin.from("intelligence_assumptions").select("objective,profession,assumptions,updated_at").eq("user_id",user.id).eq("objective",objective).maybeSingle();
   let pq=await admin.from("intelligence_preference_profiles").select("user_id,profession,objective,status,sample_size,positive_count,negative_count,default_weights,learned_weights,minimum_evidence,reset_at,last_rebuilt_at,updated_at").eq("user_id",user.id).eq("profession",profession).eq("objective",objective).maybeSingle();if(!pq.data)pq={...pq,data:await rebuildProfile(admin,user.id,profession,objective)} as any;
   const ids=Array.isArray(body.finding_ids)?body.finding_ids.map((x:unknown)=>clean(x,80)).filter(Boolean).slice(0,100):[];let fq=admin.from("intelligence_findings").select("id,run_id,pams_pin,property_address,opportunity_type,score,confidence,evidence_coverage,evidence,facts_hash,created_at").eq("user_id",user.id).order("created_at",{ascending:false}).limit(ids.length?100:30);if(ids.length)fq=fq.in("id",ids);
-  const fr=await fq,assumptions=aq.data?.assumptions||{},current=scenario(assumptions),findings=(fr.data||[]).map((f:O)=>({...f,personalized_priority:personalizedPriority(f,pq.data),scenario:current})).sort((a:O,b:O)=>Number(b.personalized_priority.score)-Number(a.personalized_priority.score)||Number(b.score)-Number(a.score));
+  const fr=await fq,assumptions=aq.data?.assumptions||{},current=scenario(assumptions),findings=(fr.data||[]).map((f:O)=>({...f,personalized_priority:personalizedPriority(f,pq.data),scenario:current})).sort((a:O,b:O)=>Number(b.personalized_priority.score)-Number(a.score)||Number(b.score)-Number(a.score));
   return json(req,200,{ok:true,version:VERSION,plan,profession,objective,assumptions:aq.data||{objective,profession,assumptions:{}},profile:pq.data,findings,warning:"Profession defaults and learned personalization only reorder attention priority. Watchdog scores, source facts, derived metrics, and historical findings remain unchanged."});
 });
