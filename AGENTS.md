@@ -97,6 +97,24 @@ These rules apply to every new Watchdog build log, audit log, operating recap, h
 - When a log or recap discusses the domain transition itself, distinguish the platform brand (**Watchdog**), the domain (**WatchdogIndex.com**), and the product family (**Watchdog Index**) correctly.
 - New sitemap, crawler, canonical, SEO, share, and public-route evidence for Watchdog should use `www.watchdogindex.com` unless the evidence is intentionally validating coexistence or a legacy path.
 
+## Playwright visual certification
+
+Playwright is the canonical browser-level visual verification harness for Watchdog UI work.
+
+- Global runner: `property/tests/global-visual-audit.mjs`.
+- Global workflow: `.github/workflows/watchdog-global-playwright-audit.yml`.
+- Authenticated staging runner: `property/tests/hosted-visual-acceptance.mjs` via `.github/workflows/hosted-visual-acceptance.yml`.
+- Production deployments run the critical visual matrix automatically after a successful production deployment event.
+- A scheduled full-site run executes daily. Full-site discovery combines every live Watchdog sitemap URL with every routable `property/**/index.html` page that is not an audit/log/archive/test artifact.
+- Authenticated staging acceptance also runs daily and must retain its fail-closed staging-only Supabase rewrite. Never point authenticated automation at production Supabase merely to make visual testing easier.
+- Manual global workflow scopes are `critical`, `public`, `all`, and `targeted`. Use `targeted` with explicit clean routes when validating a bounded UI change; use `all` when a change can affect shared navigation, typography, layout, tokens, routing, or other cross-page behavior.
+- Deep/targeted checks cover 320px, 390px, 430px, 768px, 1440px, and mobile WebKit. Global sweeps cover representative mobile Chromium, desktop Chromium, and mobile WebKit so every discovered route is checked without making the full-site job impractically large.
+- The runner records HTTP/navigation failures, public auth-gating, page JavaScript errors, empty public renders, and document-level horizontal overflow as hard failures. It separately records sub-12px text, sub-44px touch targets, clipped text, console errors, and failed requests as review findings.
+- Evidence artifacts include full-page screenshots, machine-readable JSON, a Markdown run summary, and Playwright Trace Viewer ZIPs for failed deep/targeted checks.
+- UI-affecting work should use the freshest relevant Playwright evidence before claiming browser/mobile certification. Do not claim a page is pixel/browser certified only from source inspection when Playwright evidence is available.
+- Do not weaken, exclude, hide, or downgrade a real Playwright finding simply to make a workflow green. Fix the defect or document a specific evidence-backed exception.
+- The global workflow begins in report-only mode for visual findings. Do not turn it into a required deployment gate until the baseline is demonstrably stable and the change is explicitly approved.
+
 ## Concurrency rule
 
 Multiple Watchdog chats and automations may edit this repository concurrently.
