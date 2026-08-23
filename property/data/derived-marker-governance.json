@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-23T15:09:38.950Z",
+  "generated_at": "2026-08-23T15:11:16.526Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -136,6 +136,7 @@
     "watchdog.transaction_diligence_completion",
     "watchdog.transaction_tax_shock_index",
     "watchdog.verified_listing_story_strength",
+    "watchdog.watchdog_score",
     "watchdog.years_since_last_sale"
   ],
   "governed_live_ids": [
@@ -269,13 +270,14 @@
     "watchdog.transaction_diligence_completion",
     "watchdog.transaction_tax_shock_index",
     "watchdog.verified_listing_story_strength",
+    "watchdog.watchdog_score",
     "watchdog.years_since_last_sale"
   ],
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 298,
-    "live": 131,
-    "blocked": 167,
+    "live": 132,
+    "blocked": 166,
     "retired": 0,
     "untriaged": 0
   },
@@ -293,14 +295,14 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Available-input normalized composite: 30% tax burden, 20% Chapter 123 assessment fairness, 15% assessment uniformity, 15% revaluation stability, 10% assessment trajectory, and 10% appeal recourse. Missing components are dropped and remaining weights are renormalized.",
       "dependencies": [],
-      "provider_key": "trusted_observation",
-      "provider_kind": "trusted_observation",
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.fairness_score",
