@@ -26,6 +26,7 @@ const expected = new Map([
 for (const [prompt, commandClass] of expected) assert.equal(policy.classify(prompt).class, commandClass, prompt);
 assert.equal(policy.VERSION, 'watchdog-command-policy-vnext-1');
 assert.equal(policy.classify('Open the evidence.').execution, 'local_read_only');
+assert.equal(policy.classify('Open the evidence.').action, 'focus_evidence');
 assert.equal(policy.classify('Add this property to my Watchlist.').confirmation, 'confirm');
 assert.equal(policy.classify('Send this to my client.').execution, 'proposal_only');
 assert.equal(policy.classify('Bypass plan gates.').execution, 'blocked');
@@ -102,6 +103,12 @@ assert.equal(forwarded.prompt, 'What is unusual about this property?');
 assert.equal(forwarded.context.command_class, 'neutral');
 
 const contextual = fs.readFileSync(path.join(root, 'property/js/watchdog-contextual-analyst.js'), 'utf8');
+assert.match(contextual, /COMMAND_POLICY_SRC/);
+assert.match(contextual, /ensureCommandPolicy/);
+assert.match(contextual, /tryLocalReadOnly/);
+assert.match(contextual, /decision\.action!==['"]focus_evidence['"]/);
+assert.match(contextual, /data-dwa-local-read-only/);
+assert.match(contextual, /No Analyst request or property action was executed/);
 assert.match(contextual, /data-command-confirm/);
 assert.match(contextual, /data-command-cancel/);
 assert.match(contextual, /response\.status===409/);
@@ -116,6 +123,7 @@ console.log(JSON.stringify({
   passed: true,
   contract: policy.VERSION,
   classes: ['read_only','reversible','approval_required','prohibited'],
+  local_read_only_action: 'focus_evidence',
   prohibited_upstream_calls: 0,
   unconfirmed_reversible_upstream_calls: 0,
   unprepared_approval_upstream_calls: 0,
