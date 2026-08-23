@@ -9,44 +9,49 @@
 <link rel="canonical" href="https://www.watchdogindex.com/insights/admin">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  :root { --navy:#1a3a6b; --navy-dark:#0e2248; --gold:#b8972a; --border:#e4e7ee; --text:#1b2436; --muted:#6b7280; --pos:#1c7a4a; --neg:#c0342b; }
-  * { box-sizing: border-box; }
+  :root { --navy:#1a3a6b; --navy-dark:#0e2248; --gold:#b8972a; --border:#e4e7ee; --text:#1b2436; --muted:#6b7280; --pos:#1c7a4a; --neg:#c0342b; --prepared:#315ea8; }
+  * { box-sizing:border-box; }
   .access-pending body { visibility:hidden; }
   body { margin:0; font-family:'Source Sans 3',system-ui,sans-serif; background:#f6f7fa; color:var(--text); }
-  .wrap { max-width: 980px; margin: 0 auto; padding: 36px 22px 80px; }
+  .wrap { max-width:1240px; margin:0 auto; padding:36px 22px 80px; }
   h1 { font-size:22px; color:var(--navy-dark); margin:0 0 22px; }
-  .gate { max-width: 380px; margin: 120px auto; background:#fff; border:1px solid var(--border); border-radius:14px; padding:30px; text-align:center; box-shadow:0 18px 50px rgba(14,34,72,.08); }
+  .gate { max-width:380px; margin:120px auto; background:#fff; border:1px solid var(--border); border-radius:14px; padding:30px; text-align:center; box-shadow:0 18px 50px rgba(14,34,72,.08); }
   .gate p { color:var(--muted); line-height:1.5; font-size:13.5px; margin:0; }
   .gate input { width:100%; padding:11px 13px; font-size:15px; border:1px solid var(--border); border-radius:7px; margin:16px 0 12px; }
-  .gate button, .btn { background:var(--navy); color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:14.5px; font-weight:600; cursor:pointer; }
+  .gate button,.btn { background:var(--navy); color:#fff; border:none; border-radius:8px; padding:11px 18px; font-size:14.5px; font-weight:700; cursor:pointer; }
   .btn.gold { background:var(--gold); color:var(--navy-dark); }
   .btn.ghost { background:#fff; color:var(--navy); border:1px solid var(--border); }
   .btn.danger { background:#fff; color:var(--neg); border:1px solid #f3d2ce; }
+  .btn.compact { padding:7px 11px; font-size:12.5px; border-radius:7px; white-space:nowrap; }
   .btn:disabled { opacity:.55; cursor:not-allowed; }
   .err { color:var(--neg); font-size:13.5px; margin-top:8px; }
   .toolbar { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
   .toolbar h1 { margin:0; }
-  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; border:1px solid var(--border); }
-  th, td { text-align:left; padding:11px 14px; font-size:14px; border-bottom:1px solid var(--border); }
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:12px; overflow:hidden; border:1px solid var(--border); }
+  th,td { text-align:left; padding:13px 16px; font-size:14px; border-bottom:1px solid var(--border); vertical-align:middle; }
   th { font-size:11px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); background:#fafbfc; }
   tr:last-child td { border-bottom:none; }
-  .pill { display:inline-block; font-size:11px; font-weight:700; padding:3px 9px; border-radius:99px; }
+  tr.prepared-row { background:#fbfcff; }
+  .pill { display:inline-block; font-size:11px; font-weight:800; padding:4px 9px; border-radius:99px; }
   .pill.live { background:#eef8f2; color:var(--pos); }
   .pill.draft { background:#f1f2f5; color:var(--muted); }
-  a.rowlink { color:var(--navy); font-weight:600; text-decoration:none; cursor:pointer; }
+  .pill.prepared { background:#edf3ff; color:var(--prepared); }
+  a.rowlink { color:var(--navy); font-weight:700; text-decoration:none; cursor:pointer; }
+  a.rowlink:hover { text-decoration:underline; }
+  .prepared-hint { margin:0 0 14px; color:var(--muted); font-size:13px; line-height:1.5; }
   .editor { display:none; background:#fff; border:1px solid var(--border); border-radius:12px; padding:26px; margin-top:20px; }
   .editor.on { display:block; }
   .field { margin-bottom:16px; }
   .field label { display:block; font-size:12.5px; font-weight:700; color:var(--navy-dark); margin-bottom:5px; }
-  .field input, .field textarea { width:100%; padding:10px 12px; font-size:14.5px; font-family:inherit; border:1px solid var(--border); border-radius:7px; }
+  .field input,.field textarea { width:100%; padding:10px 12px; font-size:14.5px; font-family:inherit; border:1px solid var(--border); border-radius:7px; }
   .field textarea { min-height:90px; resize:vertical; }
-  .field textarea.body { min-height:360px; font-family:ui-monospace,Menlo,monospace; font-size:13px; line-height:1.5; }
+  .field textarea.body { min-height:420px; font-family:ui-monospace,Menlo,monospace; font-size:13px; line-height:1.5; }
   .row2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   .faq-item { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; margin-bottom:8px; align-items:start; }
   .faq-item textarea { min-height:56px; }
   .hint { font-size:12px; color:var(--muted); margin-top:4px; line-height:1.45; }
   .actions { display:flex; gap:10px; margin-top:22px; padding-top:18px; border-top:1px solid var(--border); }
-  .toast { position:fixed; top:18px; right:18px; background:var(--navy-dark); color:#fff; padding:12px 18px; border-radius:8px; font-size:14px; display:none; z-index:99; max-width:min(460px,calc(100vw - 36px)); }
+  .toast { position:fixed; top:18px; right:18px; background:var(--navy-dark); color:#fff; padding:12px 18px; border-radius:8px; font-size:14px; display:none; z-index:99; max-width:min(520px,calc(100vw - 36px)); }
   @media(max-width:720px){.wrap{padding:22px 12px 60px}.row2,.faq-item{grid-template-columns:1fr}.toolbar{align-items:flex-start}.toolbar .btn{white-space:nowrap}table{display:block;overflow:auto}.editor{padding:18px}.actions{flex-wrap:wrap}.gate{margin:70px 12px}}
 </style>
 </head>
@@ -66,6 +71,7 @@
     <h1>Insights admin</h1>
     <button class="btn gold" onclick="openEditor(null)"><i class="fas fa-plus"></i> New article</button>
   </div>
+  <p class="prepared-hint">Prepared editorial drafts from the governed Watchdog workflow appear at the top until they are saved or published into the CMS.</p>
   <table>
     <thead><tr><th>Title</th><th>Kicker</th><th>Status</th><th>Updated</th><th></th></tr></thead>
     <tbody id="list-body"></tbody>
@@ -88,10 +94,8 @@
     </div>
     <div class="field">
       <label>Body (trusted HTML)</label>
-      <textarea id="f-body" class="body" placeholder="<p>Opening paragraph...</p>
-<h2>A subheading</h2>
-<p>More content...</p>"></textarea>
-      <div class="hint">Use source links in the article body. This field renders as trusted editorial HTML, so do not paste untrusted markup.</div>
+      <textarea id="f-body" class="body" placeholder="<p>Opening paragraph...</p>&#10;<h2>A subheading</h2>&#10;<p>More content...</p>"></textarea>
+      <div class="hint">Prepared Watchdog drafts are converted from repository-controlled Markdown into trusted editorial HTML before they enter this editor.</div>
     </div>
     <div class="field">
       <label>FAQ (for answer engines)</label>
@@ -99,9 +103,7 @@
       <button class="btn ghost" onclick="addFaq()" type="button"><i class="fas fa-plus"></i> Add question</button>
     </div>
     <div class="field"><label>Reading minutes (optional)</label><input id="f-reading" type="number" min="1" style="max-width:120px"></div>
-    <div class="field">
-      <label><input type="checkbox" id="f-published" style="width:auto;display:inline-block;margin-right:8px;"> Published (live immediately)</label>
-    </div>
+    <div class="field"><label><input type="checkbox" id="f-published" style="width:auto;display:inline-block;margin-right:8px;"> Published (live immediately)</label></div>
     <div class="actions">
       <button class="btn" id="save-btn" onclick="save()"><i class="fas fa-check"></i> Save</button>
       <button class="btn ghost" onclick="closeEditor()">Cancel</button>
@@ -113,194 +115,137 @@
 <div class="toast" id="toast" role="status"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@15.0.12/marked.min.js"></script>
 <script src="/property/js/access-guard.js"></script>
 <script>
 (function(){
   'use strict';
-  var FN_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/insights-publish';
-  var API_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
-  var PUBLIC_ORIGIN = 'https://www.watchdogindex.com';
-  var pw = null, currentId = null;
+  var FN_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/insights-publish';
+  var API_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var PUBLIC_ORIGIN='https://www.watchdogindex.com';
+  var PREPARED_PATHS=['/property/insights/prepared/robust-framework-watchdog-score.json'];
+  var pw=null,currentId=null;
 
-  function toast(msg) {
-    var t = document.getElementById('toast');
-    t.textContent = msg;
-    t.style.display = 'block';
-    window.setTimeout(function () { t.style.display = 'none'; }, 2800);
-  }
+  function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.style.display='block';window.setTimeout(function(){t.style.display='none';},3200);}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function setValue(id,value){document.getElementById(id).value=value==null?'':value;}
+  function preparedHtml(markdown){if(!window.marked||typeof window.marked.parse!=='function')throw new Error('Prepared-draft renderer unavailable.');return window.marked.parse(String(markdown||''),{gfm:true,breaks:false});}
 
-  function esc(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c];
-    });
-  }
-
-  async function authToken() {
-    if (!window.njptrAccessReady || !window.NJPTRAccess || !window.NJPTRAccess.client) {
-      throw new Error('Watchdog authentication is unavailable.');
-    }
+  async function authToken(){
+    if(!window.njptrAccessReady||!window.NJPTRAccess||!window.NJPTRAccess.client)throw new Error('Watchdog authentication is unavailable.');
     await window.njptrAccessReady;
-    var client = window.NJPTRAccess.client();
-    var result = await client.auth.getSession();
-    var session = result && result.data && result.data.session;
-    if (result && result.error) throw result.error;
-    if (!session || !session.access_token) throw new Error('Developer session unavailable. Sign in to Watchdog again.');
+    var client=window.NJPTRAccess.client();
+    var result=await client.auth.getSession();
+    var session=result&&result.data&&result.data.session;
+    if(result&&result.error)throw result.error;
+    if(!session||!session.access_token)throw new Error('Developer session unavailable. Sign in to Watchdog again.');
     return session.access_token;
   }
 
-  async function call(payload) {
-    var token = await authToken();
-    var body = Object.assign({}, payload, { admin_key: pw });
-    var response = await fetch(FN_URL, {
-      method: 'POST',
-      cache: 'no-store',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + token,
-        'apikey': API_KEY
-      },
-      body: JSON.stringify(body)
-    });
-    var json = await response.json().catch(function () { return {}; });
-    if (!response.ok || !json.ok) throw new Error(json.error || ('Request failed (' + response.status + ')'));
+  async function call(payload){
+    var token=await authToken();
+    var body=Object.assign({},payload,{admin_key:pw});
+    var response=await fetch(FN_URL,{method:'POST',cache:'no-store',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token,'apikey':API_KEY},body:JSON.stringify(body)});
+    var json=await response.json().catch(function(){return{};});
+    if(!response.ok||!json.ok)throw new Error(json.error||('Request failed ('+response.status+')'));
     return json;
   }
 
-  async function unlock() {
-    var button = document.getElementById('gate-button');
-    var err = document.getElementById('gate-err');
-    pw = document.getElementById('gate-pw').value.trim();
-    err.textContent = '';
-    if (!pw) { err.textContent = 'Enter the editorial admin password.'; return; }
-    button.disabled = true;
-    try {
-      var result = await call({ action: 'list' });
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      renderList(result.articles || []);
-    } catch (error) {
-      err.textContent = error.message || 'Unable to unlock Insights admin.';
-    } finally {
-      button.disabled = false;
-    }
+  async function fetchPrepared(path){
+    var response=await fetch(path,{cache:'no-store'});
+    if(!response.ok)throw new Error('Prepared draft unavailable ('+response.status+')');
+    var draft=await response.json();
+    draft.__path=path;
+    return draft;
   }
 
-  function renderList(articles) {
-    document.getElementById('list-body').innerHTML = articles.map(function (a) {
-      var view = a.published
-        ? '<a class="rowlink" href="' + PUBLIC_ORIGIN + '/insights/' + encodeURIComponent(a.slug) + '" target="_blank" rel="noopener noreferrer">View &rarr;</a>'
-        : '';
-      return '<tr><td><a class="rowlink" onclick="openEditor(\'' + esc(a.id) + '\')">' + esc(a.title) + '</a></td>' +
-        '<td>' + esc(a.kicker) + '</td>' +
-        '<td><span class="pill ' + (a.published ? 'live' : 'draft') + '">' + (a.published ? 'Live' : 'Draft') + '</span></td>' +
-        '<td>' + new Date(a.updated_at).toLocaleDateString() + '</td><td>' + view + '</td></tr>';
-    }).join('') || '<tr><td colspan="5" style="color:#999;text-align:center;padding:30px">No articles yet</td></tr>';
+  async function loadPrepared(){
+    var rows=await Promise.all(PREPARED_PATHS.map(function(path){return fetchPrepared(path).catch(function(error){console.warn('Prepared Insights draft unavailable:',path,error);return null;});}));
+    return rows.filter(Boolean);
   }
 
-  function addFaq(q, a) {
-    var div = document.createElement('div');
-    div.className = 'faq-item';
-    div.innerHTML = '<textarea class="faq-q" placeholder="Question">' + esc(q || '') + '</textarea>' +
-      '<textarea class="faq-a" placeholder="Answer">' + esc(a || '') + '</textarea>' +
-      '<button class="btn ghost" type="button" aria-label="Remove FAQ" onclick="this.parentElement.remove()"><i class="fas fa-xmark"></i></button>';
+  async function refreshList(){
+    var result=await call({action:'list'});
+    var prepared=await loadPrepared();
+    renderList(result.articles||[],prepared);
+  }
+
+  async function unlock(){
+    var button=document.getElementById('gate-button'),err=document.getElementById('gate-err');
+    pw=document.getElementById('gate-pw').value.trim();err.textContent='';
+    if(!pw){err.textContent='Enter the editorial admin password.';return;}
+    button.disabled=true;
+    try{await refreshList();document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';}
+    catch(error){err.textContent=error.message||'Unable to unlock Insights admin.';}
+    finally{button.disabled=false;}
+  }
+
+  function renderList(articles,prepared){
+    var existingSlugs=new Set((articles||[]).map(function(a){return String(a.slug||'');}));
+    var preparedRows=(prepared||[]).filter(function(d){return !existingSlugs.has(String(d.slug||''));}).map(function(d){
+      var p=String(d.__path||'');
+      return '<tr class="prepared-row"><td><a class="rowlink" onclick="openPrepared(\''+esc(p)+'\')">'+esc(d.title)+'</a></td>'+ 
+        '<td>'+esc(d.kicker)+'</td><td><span class="pill prepared">Prepared</span></td>'+ 
+        '<td>'+new Date(d.prepared_at||Date.now()).toLocaleDateString()+'</td>'+ 
+        '<td><button class="btn gold compact" onclick="publishPrepared(\''+esc(p)+'\',this)">Publish &rarr;</button></td></tr>';
+    }).join('');
+    var cmsRows=(articles||[]).map(function(a){
+      var view=a.published?'<a class="rowlink" href="'+PUBLIC_ORIGIN+'/insights/'+encodeURIComponent(a.slug)+'" target="_blank" rel="noopener noreferrer">View &rarr;</a>':'';
+      return '<tr><td><a class="rowlink" onclick="openEditor(\''+esc(a.id)+'\')">'+esc(a.title)+'</a></td><td>'+esc(a.kicker)+'</td>'+ 
+        '<td><span class="pill '+(a.published?'live':'draft')+'">'+(a.published?'Live':'Draft')+'</span></td>'+ 
+        '<td>'+new Date(a.updated_at).toLocaleDateString()+'</td><td>'+view+'</td></tr>';
+    }).join('');
+    document.getElementById('list-body').innerHTML=preparedRows+cmsRows||'<tr><td colspan="5" style="color:#999;text-align:center;padding:30px">No articles yet</td></tr>';
+  }
+
+  function addFaq(q,a){
+    var div=document.createElement('div');div.className='faq-item';
+    div.innerHTML='<textarea class="faq-q" placeholder="Question">'+esc(q||'')+'</textarea><textarea class="faq-a" placeholder="Answer">'+esc(a||'')+'</textarea><button class="btn ghost" type="button" aria-label="Remove FAQ" onclick="this.parentElement.remove()"><i class="fas fa-xmark"></i></button>';
     document.getElementById('faq-list').appendChild(div);
   }
 
-  function setValue(id, value) { document.getElementById(id).value = value == null ? '' : value; }
-
-  async function openEditor(id) {
-    currentId = id;
-    document.getElementById('editor').classList.add('on');
-    document.getElementById('faq-list').innerHTML = '';
-    document.getElementById('del-btn').style.display = id ? 'inline-flex' : 'none';
-
-    if (!id) {
-      ['f-title','f-slug','f-kicker','f-dek','f-meta','f-hero','f-hero-alt','f-body','f-reading'].forEach(function (field) { setValue(field, ''); });
-      setValue('f-author', 'Watchdog Staff');
-      document.getElementById('f-published').checked = false;
-      addFaq(); addFaq();
-      document.getElementById('editor').scrollIntoView({ behavior:'smooth', block:'start' });
-      return;
-    }
-
-    try {
-      var result = await call({ action:'get', id:id });
-      var a = result.article;
-      setValue('f-title', a.title);
-      setValue('f-slug', a.slug);
-      setValue('f-kicker', a.kicker);
-      setValue('f-dek', a.dek);
-      setValue('f-meta', a.meta_description);
-      setValue('f-author', a.author || 'Watchdog Staff');
-      setValue('f-hero', a.hero_image_url);
-      setValue('f-hero-alt', a.hero_image_alt);
-      setValue('f-body', a.body_html);
-      setValue('f-reading', a.reading_minutes);
-      document.getElementById('f-published').checked = !!a.published;
-      (a.faq || []).forEach(function (f) { addFaq(f.q, f.a); });
-      if (!a.faq || !a.faq.length) { addFaq(); addFaq(); }
-      document.getElementById('editor').scrollIntoView({ behavior:'smooth', block:'start' });
-    } catch (error) { toast(error.message); }
+  function populate(a,published){
+    setValue('f-title',a.title);setValue('f-slug',a.slug);setValue('f-kicker',a.kicker);setValue('f-dek',a.dek);setValue('f-meta',a.meta_description);setValue('f-author',a.author||'Watchdog Staff');
+    setValue('f-hero',a.hero_image_url);setValue('f-hero-alt',a.hero_image_alt);setValue('f-body',a.body_html!=null?a.body_html:preparedHtml(a.body_markdown));setValue('f-reading',a.reading_minutes);
+    document.getElementById('f-published').checked=!!published;document.getElementById('faq-list').innerHTML='';(a.faq||[]).forEach(function(f){addFaq(f.q,f.a);});if(!a.faq||!a.faq.length){addFaq();addFaq();}
   }
 
-  function closeEditor() {
-    document.getElementById('editor').classList.remove('on');
-    currentId = null;
+  async function openPrepared(path){
+    try{currentId=null;var draft=await fetchPrepared(path);populate(draft,false);document.getElementById('del-btn').style.display='none';document.getElementById('editor').classList.add('on');document.getElementById('editor').scrollIntoView({behavior:'smooth',block:'start'});}
+    catch(error){toast(error.message);}
   }
 
-  async function save() {
-    var button = document.getElementById('save-btn');
-    var faq = Array.from(document.querySelectorAll('.faq-item')).map(function (row) {
-      return { q:row.querySelector('.faq-q').value.trim(), a:row.querySelector('.faq-a').value.trim() };
-    }).filter(function (f) { return f.q && f.a; });
-    var payload = {
-      action:'save',
-      id:currentId || undefined,
-      title:document.getElementById('f-title').value,
-      slug:document.getElementById('f-slug').value,
-      kicker:document.getElementById('f-kicker').value,
-      dek:document.getElementById('f-dek').value,
-      meta_description:document.getElementById('f-meta').value,
-      author:document.getElementById('f-author').value,
-      hero_image_url:document.getElementById('f-hero').value,
-      hero_image_alt:document.getElementById('f-hero-alt').value,
-      body_html:document.getElementById('f-body').value,
-      reading_minutes:document.getElementById('f-reading').value || null,
-      faq:faq,
-      published:document.getElementById('f-published').checked
-    };
-    button.disabled = true;
-    try {
-      var result = await call(payload);
-      toast(payload.published ? ('Saved and published: ' + PUBLIC_ORIGIN + '/insights/' + result.slug) : 'Saved as draft');
-      closeEditor();
-      var list = await call({ action:'list' });
-      renderList(list.articles || []);
-    } catch (error) { toast(error.message); }
-    finally { button.disabled = false; }
+  async function publishPrepared(path,button){
+    button.disabled=true;
+    try{
+      var d=await fetchPrepared(path);
+      var payload={action:'save',title:d.title,slug:d.slug,kicker:d.kicker,dek:d.dek,meta_description:d.meta_description,author:d.author,hero_image_url:d.hero_image_url,hero_image_alt:d.hero_image_alt,body_html:preparedHtml(d.body_markdown),reading_minutes:d.reading_minutes,faq:d.faq||[],published:true};
+      var result=await call(payload);
+      toast('Published: '+PUBLIC_ORIGIN+'/insights/'+result.slug);
+      await refreshList();
+    }catch(error){toast(error.message);}finally{button.disabled=false;}
   }
 
-  async function del() {
-    if (!currentId || !window.confirm('Delete this article permanently?')) return;
-    try {
-      await call({ action:'delete', id:currentId });
-      toast('Deleted');
-      closeEditor();
-      var list = await call({ action:'list' });
-      renderList(list.articles || []);
-    } catch (error) { toast(error.message); }
+  async function openEditor(id){
+    currentId=id;document.getElementById('editor').classList.add('on');document.getElementById('faq-list').innerHTML='';document.getElementById('del-btn').style.display=id?'inline-flex':'none';
+    if(!id){['f-title','f-slug','f-kicker','f-dek','f-meta','f-hero','f-hero-alt','f-body','f-reading'].forEach(function(field){setValue(field,'');});setValue('f-author','Watchdog Staff');document.getElementById('f-published').checked=false;addFaq();addFaq();document.getElementById('editor').scrollIntoView({behavior:'smooth',block:'start'});return;}
+    try{var result=await call({action:'get',id:id});populate(result.article,!!result.article.published);document.getElementById('editor').scrollIntoView({behavior:'smooth',block:'start'});}catch(error){toast(error.message);}
   }
 
-  document.getElementById('gate-pw').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') unlock();
-  });
+  function closeEditor(){document.getElementById('editor').classList.remove('on');currentId=null;}
 
-  window.unlock = unlock;
-  window.openEditor = openEditor;
-  window.closeEditor = closeEditor;
-  window.addFaq = addFaq;
-  window.save = save;
-  window.del = del;
+  async function save(){
+    var button=document.getElementById('save-btn');
+    var faq=Array.from(document.querySelectorAll('.faq-item')).map(function(row){return{q:row.querySelector('.faq-q').value.trim(),a:row.querySelector('.faq-a').value.trim()};}).filter(function(f){return f.q&&f.a;});
+    var payload={action:'save',id:currentId||undefined,title:document.getElementById('f-title').value,slug:document.getElementById('f-slug').value,kicker:document.getElementById('f-kicker').value,dek:document.getElementById('f-dek').value,meta_description:document.getElementById('f-meta').value,author:document.getElementById('f-author').value,hero_image_url:document.getElementById('f-hero').value,hero_image_alt:document.getElementById('f-hero-alt').value,body_html:document.getElementById('f-body').value,reading_minutes:document.getElementById('f-reading').value||null,faq:faq,published:document.getElementById('f-published').checked};
+    button.disabled=true;
+    try{var result=await call(payload);toast(payload.published?('Saved and published: '+PUBLIC_ORIGIN+'/insights/'+result.slug):'Saved as draft');closeEditor();await refreshList();}catch(error){toast(error.message);}finally{button.disabled=false;}
+  }
+
+  async function del(){if(!currentId||!window.confirm('Delete this article permanently?'))return;try{await call({action:'delete',id:currentId});toast('Deleted');closeEditor();await refreshList();}catch(error){toast(error.message);}}
+
+  document.getElementById('gate-pw').addEventListener('keydown',function(event){if(event.key==='Enter')unlock();});
+  window.unlock=unlock;window.openEditor=openEditor;window.openPrepared=openPrepared;window.publishPrepared=publishPrepared;window.closeEditor=closeEditor;window.addFaq=addFaq;window.save=save;window.del=del;
 })();
 </script>
 </body>
