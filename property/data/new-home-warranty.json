@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "source_id": "nj-dca-new-home-warranty",
+  "provider_version": "nj-dca-new-home-warranty-q4-2025-v1",
+  "generated_at": "2026-08-23T15:20:00Z",
+  "source_status": "partial",
+  "authoritative": true,
+  "geography_scope": "county",
+  "join_strategy": "property county -> DCA county; latest accessible official quarter",
+  "refresh_cadence": "quarterly",
+  "latest_accessible_official": {
+    "year": 2025,
+    "quarter": 4,
+    "status": "preliminary",
+    "source_url": "https://www.nj.gov/dca/codes/reporter/2025m/NHW_QTR4_2025_p.pdf"
+  },
+  "comparison_quarter": {
+    "year": 2025,
+    "quarter": 3,
+    "status": "preliminary",
+    "source_url": "https://www.nj.gov/dca/codes/reporter/2025m/NHW_QTR3_2025_p.pdf"
+  },
+  "current_publication_health": {
+    "page_2026": "https://www.nj.gov/dca/codes/reporter/NHW2026.shtml",
+    "q1_2026_pdf": "https://www.nj.gov/dca/codes/reporter/2026m/NHW_QTR1_2026_p.pdf",
+    "q1_2026_pdf_status": 404,
+    "q1_2026_xls": "https://www.nj.gov/dca/codes/reporter/2026m/nhw_qtr1_2026_p.xls",
+    "q1_2026_xls_status": 404,
+    "checked_at": "2026-08-23T15:18:00Z",
+    "note": "The official 2026 quarterly index is live, but its linked Q1 2026 PDF and XLS return 404. Q2-Q4 are not linked on the page. Values therefore remain pinned to the latest accessible official quarter rather than fabricated."
+  },
+  "field_contract": {
+    "direct_authoritative": {
+      "new_home_warranty_enrollments": "DCA column: Number of new houses",
+      "new_home_warranty_average_price": "DCA column: Average sales price",
+      "new_home_warranty_median_price": "DCA column: Median sales price",
+      "new_home_warranty_sales_count": "DCA column: Number of new houses",
+      "new_home_warranty_quarter": "Report header quarter",
+      "new_home_warranty_year": "Report header year"
+    },
+    "derived_governed": {
+      "new_home_warranty_price_change": "100 * (Q4 average sales price - Q3 average sales price) / Q3 average sales price; rounded to 2 decimals",
+      "new_home_warranty_enrollment_change": "100 * (Q4 number of new houses - Q3 number of new houses) / Q3 number of new houses; rounded to 2 decimals",
+      "new_home_warranty_county_rank": "Ordinal 1..21 by Q4 number of new houses descending; Q4 counts are unique"
+    },
+    "unsupported": {
+      "new_home_warranty_municipal_rank": "Official DCA quarterly source is county-level; no municipality-level warranty enrollment rank is published."
+    }
+  },
+  "statewide": {
+    "q3_2025": {
+      "new_houses": 1936,
+      "total_sales_price": 1842130954,
+      "average_sales_price": 951514,
+      "median_sales_price": 780000
+    },
+    "q4_2025": {
+      "new_houses": 1193,
+      "total_sales_price": 1164653398,
+      "average_sales_price": 976239,
+      "median_sales_price": 781363
+    }
+  },
+  "counties": {
+    "ATLANTIC": {"county":"Atlantic","region":"south","new_home_warranty_enrollments":43,"new_home_warranty_average_price":1123566,"new_home_warranty_median_price":879424,"new_home_warranty_sales_count":43,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":27.82,"new_home_warranty_enrollment_change":-49.41,"new_home_warranty_county_rank":13,"dca_average_price_rank":7,"dca_median_price_rank":6,"prior_quarter":{"quarter":3,"year":2025,"enrollments":85,"average_price":879024,"median_price":559529}},
+    "BERGEN": {"county":"Bergen","region":"north","new_home_warranty_enrollments":70,"new_home_warranty_average_price":1683800,"new_home_warranty_median_price":1500000,"new_home_warranty_sales_count":70,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-4.79,"new_home_warranty_enrollment_change":-38.05,"new_home_warranty_county_rank":6,"dca_average_price_rank":1,"dca_median_price_rank":1,"prior_quarter":{"quarter":3,"year":2025,"enrollments":113,"average_price":1768548,"median_price":1550000}},
+    "BURLINGTON": {"county":"Burlington","region":"south","new_home_warranty_enrollments":51,"new_home_warranty_average_price":647611,"new_home_warranty_median_price":628875,"new_home_warranty_sales_count":51,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":10.42,"new_home_warranty_enrollment_change":-15.0,"new_home_warranty_county_rank":10,"dca_average_price_rank":16,"dca_median_price_rank":16,"prior_quarter":{"quarter":3,"year":2025,"enrollments":60,"average_price":586518,"median_price":583668}},
+    "CAMDEN": {"county":"Camden","region":"south","new_home_warranty_enrollments":37,"new_home_warranty_average_price":569702,"new_home_warranty_median_price":503000,"new_home_warranty_sales_count":37,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":17.99,"new_home_warranty_enrollment_change":-52.56,"new_home_warranty_county_rank":14,"dca_average_price_rank":18,"dca_median_price_rank":19,"prior_quarter":{"quarter":3,"year":2025,"enrollments":78,"average_price":482824,"median_price":408740}},
+    "CAPE MAY": {"county":"Cape May","region":"south","new_home_warranty_enrollments":117,"new_home_warranty_average_price":1216357,"new_home_warranty_median_price":770050,"new_home_warranty_sales_count":117,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-15.44,"new_home_warranty_enrollment_change":-20.41,"new_home_warranty_county_rank":3,"dca_average_price_rank":4,"dca_median_price_rank":12,"prior_quarter":{"quarter":3,"year":2025,"enrollments":147,"average_price":1438448,"median_price":940953}},
+    "CUMBERLAND": {"county":"Cumberland","region":"south","new_home_warranty_enrollments":25,"new_home_warranty_average_price":398454,"new_home_warranty_median_price":415000,"new_home_warranty_sales_count":25,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-6.28,"new_home_warranty_enrollment_change":19.05,"new_home_warranty_county_rank":15,"dca_average_price_rank":21,"dca_median_price_rank":21,"prior_quarter":{"quarter":3,"year":2025,"enrollments":21,"average_price":425145,"median_price":415000}},
+    "ESSEX": {"county":"Essex","region":"north","new_home_warranty_enrollments":54,"new_home_warranty_average_price":1130700,"new_home_warranty_median_price":873109,"new_home_warranty_sales_count":54,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-8.02,"new_home_warranty_enrollment_change":-15.62,"new_home_warranty_county_rank":8,"dca_average_price_rank":6,"dca_median_price_rank":7,"prior_quarter":{"quarter":3,"year":2025,"enrollments":64,"average_price":1229240,"median_price":812500}},
+    "GLOUCESTER": {"county":"Gloucester","region":"south","new_home_warranty_enrollments":115,"new_home_warranty_average_price":572415,"new_home_warranty_median_price":531910,"new_home_warranty_sales_count":115,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-3.38,"new_home_warranty_enrollment_change":-21.77,"new_home_warranty_county_rank":4,"dca_average_price_rank":17,"dca_median_price_rank":18,"prior_quarter":{"quarter":3,"year":2025,"enrollments":147,"average_price":592411,"median_price":570110}},
+    "HUDSON": {"county":"Hudson","region":"north","new_home_warranty_enrollments":53,"new_home_warranty_average_price":1122525,"new_home_warranty_median_price":900000,"new_home_warranty_sales_count":53,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":17.64,"new_home_warranty_enrollment_change":-20.9,"new_home_warranty_county_rank":9,"dca_average_price_rank":8,"dca_median_price_rank":4,"prior_quarter":{"quarter":3,"year":2025,"enrollments":67,"average_price":954207,"median_price":845000}},
+    "HUNTERDON": {"county":"Hunterdon","region":"central","new_home_warranty_enrollments":2,"new_home_warranty_average_price":415053,"new_home_warranty_median_price":415053,"new_home_warranty_sales_count":2,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-57.15,"new_home_warranty_enrollment_change":-75.0,"new_home_warranty_county_rank":20,"dca_average_price_rank":20,"dca_median_price_rank":20,"prior_quarter":{"quarter":3,"year":2025,"enrollments":8,"average_price":968649,"median_price":1130400}},
+    "MERCER": {"county":"Mercer","region":"central","new_home_warranty_enrollments":99,"new_home_warranty_average_price":716565,"new_home_warranty_median_price":781363,"new_home_warranty_sales_count":99,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":0.13,"new_home_warranty_enrollment_change":-37.34,"new_home_warranty_county_rank":5,"dca_average_price_rank":15,"dca_median_price_rank":11,"prior_quarter":{"quarter":3,"year":2025,"enrollments":158,"average_price":715635,"median_price":730545}},
+    "MIDDLESEX": {"county":"Middlesex","region":"central","new_home_warranty_enrollments":55,"new_home_warranty_average_price":870399,"new_home_warranty_median_price":759900,"new_home_warranty_sales_count":55,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":1.47,"new_home_warranty_enrollment_change":-49.54,"new_home_warranty_county_rank":7,"dca_average_price_rank":13,"dca_median_price_rank":13,"prior_quarter":{"quarter":3,"year":2025,"enrollments":109,"average_price":857804,"median_price":780000}},
+    "MONMOUTH": {"county":"Monmouth","region":"central","new_home_warranty_enrollments":195,"new_home_warranty_average_price":1098400,"new_home_warranty_median_price":868727,"new_home_warranty_sales_count":195,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":16.49,"new_home_warranty_enrollment_change":-43.48,"new_home_warranty_county_rank":1,"dca_average_price_rank":9,"dca_median_price_rank":8,"prior_quarter":{"quarter":3,"year":2025,"enrollments":345,"average_price":942891,"median_price":834808}},
+    "MORRIS": {"county":"Morris","region":"north","new_home_warranty_enrollments":46,"new_home_warranty_average_price":1031635,"new_home_warranty_median_price":895115,"new_home_warranty_sales_count":46,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-2.47,"new_home_warranty_enrollment_change":-57.01,"new_home_warranty_county_rank":11,"dca_average_price_rank":10,"dca_median_price_rank":5,"prior_quarter":{"quarter":3,"year":2025,"enrollments":107,"average_price":1057769,"median_price":906395}},
+    "OCEAN": {"county":"Ocean","region":"central","new_home_warranty_enrollments":145,"new_home_warranty_average_price":950910,"new_home_warranty_median_price":809000,"new_home_warranty_sales_count":145,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":2.69,"new_home_warranty_enrollment_change":-49.65,"new_home_warranty_county_rank":2,"dca_average_price_rank":11,"dca_median_price_rank":9,"prior_quarter":{"quarter":3,"year":2025,"enrollments":288,"average_price":926031,"median_price":714916}},
+    "PASSAIC": {"county":"Passaic","region":"north","new_home_warranty_enrollments":9,"new_home_warranty_average_price":1134436,"new_home_warranty_median_price":1200000,"new_home_warranty_sales_count":9,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":9.75,"new_home_warranty_enrollment_change":0.0,"new_home_warranty_county_rank":17,"dca_average_price_rank":5,"dca_median_price_rank":2,"prior_quarter":{"quarter":3,"year":2025,"enrollments":9,"average_price":1033611,"median_price":595000}},
+    "SALEM": {"county":"Salem","region":"south","new_home_warranty_enrollments":3,"new_home_warranty_average_price":1334967,"new_home_warranty_median_price":729900,"new_home_warranty_sales_count":3,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":86.94,"new_home_warranty_enrollment_change":-62.5,"new_home_warranty_county_rank":19,"dca_average_price_rank":2,"dca_median_price_rank":15,"prior_quarter":{"quarter":3,"year":2025,"enrollments":8,"average_price":714113,"median_price":720000}},
+    "SOMERSET": {"county":"Somerset","region":"central","new_home_warranty_enrollments":45,"new_home_warranty_average_price":873936,"new_home_warranty_median_price":806695,"new_home_warranty_sales_count":45,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":6.87,"new_home_warranty_enrollment_change":-39.19,"new_home_warranty_county_rank":12,"dca_average_price_rank":12,"dca_median_price_rank":10,"prior_quarter":{"quarter":3,"year":2025,"enrollments":74,"average_price":817729,"median_price":802995}},
+    "SUSSEX": {"county":"Sussex","region":"north","new_home_warranty_enrollments":5,"new_home_warranty_average_price":741176,"new_home_warranty_median_price":743980,"new_home_warranty_sales_count":5,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":39.65,"new_home_warranty_enrollment_change":0.0,"new_home_warranty_county_rank":18,"dca_average_price_rank":14,"dca_median_price_rank":14,"prior_quarter":{"quarter":3,"year":2025,"enrollments":5,"average_price":530772,"median_price":549900}},
+    "UNION": {"county":"Union","region":"north","new_home_warranty_enrollments":23,"new_home_warranty_average_price":1249461,"new_home_warranty_median_price":1000000,"new_home_warranty_sales_count":23,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":15.82,"new_home_warranty_enrollment_change":-41.03,"new_home_warranty_county_rank":16,"dca_average_price_rank":3,"dca_median_price_rank":3,"prior_quarter":{"quarter":3,"year":2025,"enrollments":39,"average_price":1078779,"median_price":879000}},
+    "WARREN": {"county":"Warren","region":"north","new_home_warranty_enrollments":1,"new_home_warranty_average_price":560000,"new_home_warranty_median_price":560000,"new_home_warranty_sales_count":1,"new_home_warranty_quarter":4,"new_home_warranty_year":2025,"new_home_warranty_price_change":-54.28,"new_home_warranty_enrollment_change":-75.0,"new_home_warranty_county_rank":21,"dca_average_price_rank":19,"dca_median_price_rank":17,"prior_quarter":{"quarter":3,"year":2025,"enrollments":4,"average_price":1224975,"median_price":1425000}}
+  }
+}
