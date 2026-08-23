@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  if (document.body) document.body.classList.add('nav-solid');
+  if (!window.WatchdogContactPolicy && !document.querySelector('script[src="/property/js/contact-routing-policy.js"]')) {
+    var contactPolicyScript = document.createElement('script');
+    contactPolicyScript.src = '/property/js/contact-routing-policy.js';
+    contactPolicyScript.async = false;
+    contactPolicyScript.setAttribute('data-watchdog-contact-policy-runtime','1');
+    (document.head || document.documentElement).appendChild(contactPolicyScript);
+  }
+
   var PROD_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var PROD_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var CONTACT_ENDPOINT = PROD_URL + '/functions/v1/pro-demo-request';
@@ -230,6 +239,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
+    if (document.body) document.body.classList.add('nav-solid');
     document.querySelectorAll('[data-contact-mode]').forEach(function (button) {
       button.addEventListener('click', function () { switchMode(button.getAttribute('data-contact-mode')); });
     });
