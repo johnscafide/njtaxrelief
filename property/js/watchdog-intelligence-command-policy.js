@@ -17,7 +17,7 @@
   const testAny=(text,patterns)=>patterns.some((pattern)=>pattern.test(text));
 
   const PROHIBITED=[
-    /\b(?:bypass|disable|ignore|remove|turn off)\b.{0,45}\b(?:rls|row level security|entitlement|plan gate|permission|approval|security|guardrail)\b/i,
+    /\b(?:bypass|disable|ignore|remove|turn off)\b.{0,45}\b(?:rls|row level security|entitlement|plan gates?|permission|approval|security|guardrail)\b/i,
     /\b(?:reveal|show|expose|print|give me)\b.{0,35}\b(?:service role|service[_ -]?role|api key|password|credential|secret|access token|refresh token)\b/i,
     /\b(?:grant|give|make)\b.{0,25}\b(?:admin|administrator|developer|unrestricted)\b.{0,25}\b(?:access|permission|role)?\b/i,
     /\b(?:change|alter|edit|drop|disable)\b.{0,30}\b(?:rls|row level security|entitlement policy|security policy)\b/i,
