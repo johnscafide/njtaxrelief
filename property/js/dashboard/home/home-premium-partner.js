@@ -8,6 +8,13 @@ window.__WATCHDOG_HOME_PREMIUM_PARTNER__=true;
 var timer=0;
 
 function ensureAssets(){
+  if(!document.querySelector('script[data-watchdog-home-hero-intelligence]')){
+    var hero=document.createElement('script');
+    hero.src='/property/js/dashboard/home/home-hero-intelligence.js';
+    hero.async=false;
+    hero.setAttribute('data-watchdog-home-hero-intelligence','1');
+    document.body.appendChild(hero);
+  }
   if(!document.querySelector('link[data-watchdog-home-ad-quarter]')){
     var css=document.createElement('link');
     css.rel='stylesheet';
