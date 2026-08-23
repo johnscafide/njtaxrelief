@@ -1,7 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
-const DEFAULT_SITE = 'https://njpropertytaxrelief.com';
+const CANONICAL_SITE = 'https://www.watchdogindex.com';
+const DEFAULT_SITE = CANONICAL_SITE;
+const WATCHDOG_HOSTS = new Set(['watchdogindex.com', 'www.watchdogindex.com']);
 const PRODUCTION_HOSTS = new Set([
   'njpropertytaxrelief.com',
   'www.njpropertytaxrelief.com',
@@ -42,15 +44,31 @@ function allowedOrigin(req: Request) {
   return DEFAULT_SITE;
 }
 
-function requestSite(req: Request) {
-  const origin = req.headers.get('origin') || '';
+function normalizeSite(value: string) {
   try {
-    const url = new URL(origin);
-    if (url.protocol === 'https:' && PRODUCTION_HOSTS.has(url.hostname.toLowerCase())) {
-      return `${url.protocol}//${url.host}`;
-    }
-  } catch (_) {}
-  return String(Deno.env.get('PUBLIC_SITE_URL') || DEFAULT_SITE).replace(/\/$/, '');
+    const url = new URL(value);
+    const host = url.hostname.toLowerCase();
+    if (url.protocol !== 'https:' || !PRODUCTION_HOSTS.has(host)) return '';
+    if (WATCHDOG_HOSTS.has(host)) return CANONICAL_SITE;
+    return `${url.protocol}//${url.host}`;
+  } catch (_) {
+    return '';
+  }
+}
+
+function requestSite(req: Request) {
+  const originSite = normalizeSite(req.headers.get('origin') || '');
+  if (originSite) return originSite;
+  const configuredSite = normalizeSite(String(Deno.env.get('PUBLIC_SITE_URL') || ''));
+  return configuredSite || DEFAULT_SITE;
+}
+
+function accountPath(site: string) {
+  try {
+    return WATCHDOG_HOSTS.has(new URL(site).hostname.toLowerCase()) ? '/account' : '/property/account/';
+  } catch (_) {
+    return '/account';
+  }
 }
 
 function cors(req: Request) {
@@ -229,7 +247,7 @@ Deno.serve(async (req) => {
       const site = requestSite(req);
       const portal = await stripe.billingPortal.sessions.create({
         customer: entitlement.provider_customer_id,
-        return_url: `${site}/property/account/`
+        return_url: `${site}${accountPath(site)}`
       });
       await admin.from('access_audit_log').insert({
         user_id: user.id,
@@ -248,6 +266,7 @@ Deno.serve(async (req) => {
   }
 
   const site = requestSite(req);
+  const account = accountPath(site);
   const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
   const metadata = {
     supabase_user_id: user.id,
@@ -267,8 +286,8 @@ Deno.serve(async (req) => {
       client_reference_id: user.id,
       metadata,
       subscription_data: { metadata },
-      success_url: `${site}/property/account/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${site}/property/account/?checkout=cancelled`,
+      success_url: `${site}${account}?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${site}${account}?checkout=cancelled`,
       billing_address_collection: 'auto',
       integration_identifier: 'watchdog_web_kqrmxpta'
     });
