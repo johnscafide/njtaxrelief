@@ -52,6 +52,10 @@ function sanitizeContactHtml(input) {
     /href=(["'])https?:\/\/(?:www\.)?johnscafide\.com\/?[^"']*\1/gi,
     'href="https://www.watchdogindex.com/contact?topic=real-estate"'
   );
+  html = html.replace(
+    /For full sales information on this and other properties, visit\s*<a\b[^>]*href=(["'])https?:\/\/johnscafide\.opuselitesj\.com[^"']*\1[^>]*>[^<]*<\/a>\./gi,
+    'For full sales information on this and other properties, <a href="https://www.watchdogindex.com/contact?topic=real-estate">contact Watchdog</a>.'
+  );
 
   html = html
     .replace(/is operated by John Scafide, a licensed New Jersey real estate agent \(License #2079591\) with The McKenty Team at Opus Elite Real Estate, and a tax professional\./gi, 'is operated by Watchdog Property Intelligence. Real-estate services are handled by licensed New Jersey real-estate professionals affiliated with Opus Elite Real Estate.')
@@ -68,7 +72,10 @@ function sanitizeContactHtml(input) {
     .replace(/\bEmail Heather\b/gi, 'Contact Watchdog')
     .replace(/\bSend to John\b/gi, 'Send to Watchdog')
     .replace(/\bSend to Heather\b/gi, 'Send to Watchdog')
-    .replace(/Watchdog,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional');
+    .replace(/Watchdog,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional')
+    .replace(/by emailing\s+(<a[^>]*>Contact Watchdog<\/a>)/gi, 'through $1')
+    .replace(/For anything else, email\s+(<a[^>]*>Contact Watchdog<\/a>)/gi, 'For anything else, use $1')
+    .replace(/<p><strong>Watchdog<\/strong><br>Licensed New Jersey Real Estate Agent #2079591<br>The McKenty Team at Opus Elite Real Estate<br>Email:\s*<a[^>]*>Contact Watchdog<\/a><br>Phone:\s*<a[^>]*>Contact Watchdog<\/a><\/p>/gi, '<p>Use <a href="https://www.watchdogindex.com/contact?topic=privacy">Contact Watchdog</a> for privacy requests, or <a href="https://www.watchdogindex.com/support">Account Support</a> when you are signed in.</p>');
 
   if (!/contact-routing-policy\.js/i.test(html)) {
     html = html.replace(/<\/body>/i, `${CONTACT_POLICY_SCRIPT}\n</body>`);
