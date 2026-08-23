@@ -43,6 +43,10 @@ function main(){
  }
  const activeMarkers=registry.markers.filter(m=>!retired.has(m.id)),tmap=new Map(triage.map(x=>[x.marker_id,x]));
  for(const m of activeMarkers){
+   // NJ DCA's New Home Warranty quarterly tables are county-level. Normalize the
+   // legacy v0.31 municipality scope for both source markers and downstream derived
+   // markers so generated canonical governance cannot overstate source granularity.
+   if(m.source_id==='nj-dca-new-home-warranty'||(Array.isArray(m.dependencies)&&m.dependencies.includes('nj-dca-new-home-warranty')))m.scope='county';
    const t=tmap.get(m.id);
    if(t){
      if(t.governance_status==='live'){m.provider_status=t.provider_status_override||'live';m.provider_note=t.reason}
