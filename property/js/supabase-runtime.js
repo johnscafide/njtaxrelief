@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  /* The public lookup shell loads this runtime synchronously from public-nav.
+     Load the free-first grid imagery translator here so legacy neighborhood
+     card URLs are converted to NJGIN before ownership/lookup spend guards run. */
+  if (!window.__WATCHDOG_FREE_IMAGERY_GRID__ && document.readyState === 'loading') {
+    document.write('<script src="/property/js/free-imagery-grid-runtime.js"><\/script>');
+  }
+
   function ensureConsentRuntime() {
     if (window.WatchdogConsent || document.querySelector('script[src="/property/js/watchdog-consent.js"]')) return;
     var script = document.createElement('script');
