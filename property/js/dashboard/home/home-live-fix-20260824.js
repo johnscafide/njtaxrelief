@@ -45,10 +45,19 @@ function client(){
   return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
  }catch(_e){return null;}
 }
-function forecastFor(lat,lon){
- var key=Number(lat).toFixed(3)+','+Number(lon).toFixed(3),cached=weatherCache[key];
+function weatherAddress(row){
+ return [row&&row.address,row&&(row.city||row.town),'NJ',row&&row.zip].filter(Boolean).join(', ');
+}
+function forecastFor(row){
+ var hasCoords=Number.isFinite(Number(row&&row.lat))&&Number.isFinite(Number(row&&row.lon));
+ var address=weatherAddress(row);
+ var key=hasCoords?(Number(row.lat).toFixed(3)+','+Number(row.lon).toFixed(3)):address.toLowerCase();
+ var cached=weatherCache[key];
  if(cached&&Date.now()-cached.at<10*60*1000)return Promise.resolve(cached.value);
- return fetch('/api/watchdog-weather?lat='+encodeURIComponent(Number(lat).toFixed(4))+'&lon='+encodeURIComponent(Number(lon).toFixed(4)),{headers:{Accept:'application/json'}})
+ var url='/api/watchdog-weather?';
+ if(hasCoords)url+='lat='+encodeURIComponent(Number(row.lat).toFixed(4))+'&lon='+encodeURIComponent(Number(row.lon).toFixed(4));
+ else url+='address='+encodeURIComponent(address);
+ return fetch(url,{headers:{Accept:'application/json'}})
   .then(function(r){if(!r.ok)throw new Error('weather '+r.status);return r.json()})
   .then(function(v){if(v&&v.error)throw new Error(v.error);weatherCache[key]={at:Date.now(),value:v};return v;});
 }
@@ -59,8 +68,8 @@ function refreshWeather(){
   if(token!==weatherToken||!x.data||!x.data.session)return null;
   return c.from('saved_properties').select('lat,lon,address,town,city,zip').eq('pams_pin',pin).maybeSingle();
  }).then(function(x){
-  if(token!==weatherToken||!x||x.error||!x.data||!Number.isFinite(Number(x.data.lat))||!Number.isFinite(Number(x.data.lon)))return null;
-  return forecastFor(x.data.lat,x.data.lon);
+  if(token!==weatherToken||!x||x.error||!x.data||!weatherAddress(x.data))return null;
+  return forecastFor(x.data);
  }).then(function(w){if(token===weatherToken&&w)paintWeather(w.temperature,w.temperatureUnit,w.shortForecast)}).catch(function(){/* weather is supplemental; never block Property Home */});
 }
 
