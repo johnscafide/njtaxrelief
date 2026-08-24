@@ -8,6 +8,8 @@ const GA_TAG = '  <script async src="https://www.googletagmanager.com/gtag/js?id
 const GA_CONFIG = '  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-ENP9182L0J\');</script>\n';
 const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>\n';
 const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
+const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
+const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -37,6 +39,15 @@ function installConsentFirstAnalytics(source) {
     .replace(GA_TAG, CONSENT_TAG)
     .replace(GA_CONFIG, '')
     .replace(CLARITY_TAG, '');
+}
+
+function installFreeGridImagery(source) {
+  if (source.includes('/property/js/free-imagery-grid-runtime.js')) return source;
+  if (!source.includes(OWNERSHIP_TAG)) {
+    console.warn('WATCHDOG_FREE_GRID_IMAGERY_MARKER_MISSING');
+    return source;
+  }
+  return source.replace(OWNERSHIP_TAG, FREE_GRID_TAG + OWNERSHIP_TAG);
 }
 
 function canonicalizeWatchdogHtml(source) {
@@ -74,7 +85,8 @@ export default async function handler(req, res) {
       fs.readFile(footerPath, 'utf8')
     ]);
     const consentFirst = installConsentFirstAnalytics(source);
-    const html = canonicalizeWatchdogHtml(useSharedFooter(consentFirst, sharedFooter));
+    const freeImagery = installFreeGridImagery(consentFirst);
+    const html = canonicalizeWatchdogHtml(useSharedFooter(freeImagery, sharedFooter));
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
