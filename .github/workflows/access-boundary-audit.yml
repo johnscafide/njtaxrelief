@@ -48,6 +48,8 @@ jobs:
         run: node property/tests/sr1a-compact-subject-match-contract.mjs
       - name: Verify free-first property imagery and photo contribution governance
         run: node property/tests/property-imagery-photo-library-contract.mjs
+      - name: Verify Street View spend and free grid fallback
+        run: node property/tests/streetview-cost-guard-contract.mjs
       - name: Verify Property Home score history contract
         run: node property/tests/property-score-history-contract.mjs
       - name: Verify page-native Intelligence shell contracts
