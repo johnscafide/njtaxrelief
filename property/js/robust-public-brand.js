@@ -23,6 +23,15 @@
     loadScript('wd-score-core-script','/property/js/watchdog-score-core.js',loadPublic);
   }
 
+  function loadLandingRecentIntelligence(){
+    var path=(location.pathname||'').replace(/\/+$/,'');
+    var host=String(location.hostname||'').toLowerCase();
+    var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
+    if(path!=='/property'&&path!=='/property/index.html'&&!root)return;
+    if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
+    loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260824a');
+  }
+
   function syncPublicMenu(){
     var sheet=document.getElementById('wd-main-sheet');
     if(!sheet)return;
@@ -76,7 +85,8 @@
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;sync();});}
 
   loadCanonicalScore();
+  loadLandingRecentIntelligence();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore};
+  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence};
 })();
