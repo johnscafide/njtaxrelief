@@ -23,13 +23,23 @@
     loadScript('wd-score-core-script','/property/js/watchdog-score-core.js',loadPublic);
   }
 
-  function loadLandingRecentIntelligence(){
+  function isPropertyLanding(){
     var path=(location.pathname||'').replace(/\/+$/,'');
     var host=String(location.hostname||'').toLowerCase();
     var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
-    if(path!=='/property'&&path!=='/property/index.html'&&!root)return;
+    return path==='/property'||path==='/property/index.html'||root;
+  }
+
+  function loadLandingRecentIntelligence(){
+    if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
     loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260824a');
+  }
+
+  function loadLookupSummaryEnhancements(){
+    if(!isPropertyLanding())return;
+    if(window.__WATCHDOG_LOOKUP_SUMMARY_ENHANCEMENTS__)return;
+    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260824a');
   }
 
   function syncPublicMenu(){
@@ -86,7 +96,8 @@
 
   loadCanonicalScore();
   loadLandingRecentIntelligence();
+  loadLookupSummaryEnhancements();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence};
+  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence,loadLookupSummaryEnhancements:loadLookupSummaryEnhancements};
 })();
