@@ -1,3 +1,121 @@
+/* NJW-10: emergency Google Static Street View cost guard.
+ * Keep passive property surfaces from creating billable Street View Static requests.
+ * This runs before lookup/search/home renderers. Google imagery can be restored later
+ * only behind an explicit single-property user action.
+ */
+(function () {
+  'use strict';
+  if (window.__watchdogStreetViewCostGuard) return;
+
+  var STREET_VIEW = /^https:\/\/maps\.googleapis\.com\/maps\/api\/streetview(?:\?|$)/i;
+  var PLACEHOLDER = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460">' +
+      '<rect width="760" height="460" fill="#eef3f8"/>' +
+      '<path d="M279 245l101-82 101 82v112H413v-72h-66v72h-68z" fill="#9aabc0"/>' +
+      '<path d="M255 247l125-101 125 101" fill="none" stroke="#7f93aa" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<text x="380" y="397" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#51647b">Property image</text>' +
+    '</svg>'
+  );
+
+  var state = window.__watchdogStreetViewCostGuard = {
+    active: true,
+    blocked: 0,
+    installedAt: new Date().toISOString(),
+    reason: 'NJW-10 emergency Static Street View spend control'
+  };
+
+  function isStreetView(value) {
+    return STREET_VIEW.test(String(value || '').replace(/&amp;/g, '&'));
+  }
+
+  function recordBlock() {
+    state.blocked += 1;
+  }
+
+  function safeImageUrl(img, value) {
+    if (!isStreetView(value)) return value;
+    recordBlock();
+    var fallback = img && img.getAttribute ? img.getAttribute('data-fallback') : '';
+    return fallback && !isStreetView(fallback) ? fallback : PLACEHOLDER;
+  }
+
+  function rewriteImageTag(tag) {
+    if (!/maps\.googleapis\.com\/maps\/api\/streetview/i.test(tag)) return tag;
+    var fallbackMatch = tag.match(/\bdata-fallback\s*=\s*(["'])(.*?)\1/i);
+    var fallback = fallbackMatch && fallbackMatch[2] && !isStreetView(fallbackMatch[2]) ? fallbackMatch[2] : PLACEHOLDER;
+    var rewritten = tag.replace(/(\bsrc\s*=\s*)(["'])(https:\/\/maps\.googleapis\.com\/maps\/api\/streetview\?[^"']*)\2/i, function (_all, prefix, quote) {
+      recordBlock();
+      return prefix + quote + fallback + quote;
+    });
+    return rewritten;
+  }
+
+  try {
+    var srcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+    if (srcDescriptor && srcDescriptor.get && srcDescriptor.set) {
+      Object.defineProperty(HTMLImageElement.prototype, 'src', {
+        configurable: srcDescriptor.configurable,
+        enumerable: srcDescriptor.enumerable,
+        get: srcDescriptor.get,
+        set: function (value) { srcDescriptor.set.call(this, safeImageUrl(this, value)); }
+      });
+    }
+  } catch (_srcGuardError) {}
+
+  try {
+    var originalSetAttribute = Element.prototype.setAttribute;
+    Element.prototype.setAttribute = function (name, value) {
+      if (this instanceof HTMLImageElement && String(name).toLowerCase() === 'src') {
+        value = safeImageUrl(this, value);
+      }
+      return originalSetAttribute.call(this, name, value);
+    };
+  } catch (_attributeGuardError) {}
+
+  try {
+    var htmlDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+    if (htmlDescriptor && htmlDescriptor.get && htmlDescriptor.set) {
+      Object.defineProperty(Element.prototype, 'innerHTML', {
+        configurable: htmlDescriptor.configurable,
+        enumerable: htmlDescriptor.enumerable,
+        get: htmlDescriptor.get,
+        set: function (value) {
+          if (typeof value === 'string' && /maps\.googleapis\.com\/maps\/api\/streetview/i.test(value)) {
+            value = value.replace(/<img\b[^>]*>/gi, rewriteImageTag);
+          }
+          htmlDescriptor.set.call(this, value);
+        }
+      });
+    }
+  } catch (_htmlGuardError) {}
+
+  function scrub(root) {
+    if (!root || !root.querySelectorAll) return;
+    var images = root.querySelectorAll('img[src*="maps.googleapis.com/maps/api/streetview"]');
+    Array.prototype.forEach.call(images, function (img) {
+      var current = img.getAttribute('src') || '';
+      if (isStreetView(current)) img.setAttribute('src', safeImageUrl(img, current));
+    });
+  }
+
+  try {
+    var observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        Array.prototype.forEach.call(mutation.addedNodes || [], function (node) {
+          if (!node || node.nodeType !== 1) return;
+          if (node instanceof HTMLImageElement) {
+            var current = node.getAttribute('src') || '';
+            if (isStreetView(current)) node.setAttribute('src', safeImageUrl(node, current));
+          }
+          scrub(node);
+        });
+      });
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
+    scrub(document);
+  } catch (_observerGuardError) {}
+})();
+
 (function () {
   'use strict';
 
