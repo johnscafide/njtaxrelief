@@ -18,6 +18,12 @@
     });
   }
 
+  function loadLiveFix(){
+    return loadScript('/property/js/dashboard/home/home-live-fix-20260824.js?v=20260824c').catch(function(error){
+      console.warn('Watchdog Home live fix unavailable:',error&&error.message||error);
+    });
+  }
+
   function loadIntelligenceRuntime(){
     var assets=[
       '/property/js/watchdog-intelligence-context.js',
@@ -44,9 +50,12 @@
   }
 
   function boot(){
-    loadIntelligenceRuntime();
+    loadLiveFix();
     refreshUniversalMenu();
     document.addEventListener('watchdog:universal-menu-ready',refreshUniversalMenu,{once:true});
+    var startIntelligence=function(){ loadIntelligenceRuntime(); };
+    if('requestIdleCallback' in window) requestIdleCallback(startIntelligence,{timeout:500});
+    else setTimeout(startIntelligence,80);
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot,{once:true});
