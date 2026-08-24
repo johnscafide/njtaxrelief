@@ -1,6 +1,6 @@
--- NJW-143: route the bounded observed-PILOT scenario through its isolated
--- authenticated release canary. Preserve all existing scenario behavior and
--- the service_role/postgres-only dispatcher boundary.
+-- NJW-143: allow the bounded observed-PILOT scenario on the existing
+-- authenticated provider release-canary endpoint. Preserve all existing
+-- scenario behavior and the service_role/postgres-only dispatcher boundary.
 create or replace function public.dispatch_provider_release_canary(p_scenario text)
 returns bigint
 language plpgsql
@@ -10,7 +10,6 @@ declare
   v_raw text := encode(gen_random_bytes(48), 'hex');
   v_email text := 'watchdog-provider-canary-' || substr(v_raw,1,10) || '@example.com';
   v_request_id bigint;
-  v_url text := 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/provider-release-canary';
 begin
   if p_scenario not in (
     'zoning_v31',
@@ -33,10 +32,6 @@ begin
     raise exception 'Unsupported release canary scenario';
   end if;
 
-  if p_scenario = 'pilot_observed_v1' then
-    v_url := 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pilot-provider-release-canary';
-  end if;
-
   insert into public.watchdog_test_bootstrap_tokens
     (token_hash, desired_email, redirect_to, expires_at, metadata)
   values
@@ -47,7 +42,7 @@ begin
      jsonb_build_object('purpose','provider_release_canary','scenario',p_scenario,'no_real_spend',true));
 
   select net.http_post(
-    url := v_url,
+    url := 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/provider-release-canary',
     headers := jsonb_build_object('Content-Type','application/json'),
     body := jsonb_build_object('token',v_raw,'scenario',p_scenario),
     timeout_milliseconds := 30000
