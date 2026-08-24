@@ -5,6 +5,7 @@
 
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
+  var MENU_INTERACTIONS='/property/js/menu-interaction-guard.js?v=20260824a';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
 
@@ -20,6 +21,10 @@
   function ensureUniversal(){
     if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.refresh();return;}
     ensureScript(UNIVERSAL,'watchdog-universal-menu-runtime');
+  }
+  function ensureMenuInteractions(){
+    if(window.__WATCHDOG_MENU_INTERACTION_GUARD__)return;
+    ensureScript(MENU_INTERACTIONS,'watchdog-menu-interaction-guard');
   }
   function ensureCityAddress(){
     if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
@@ -43,6 +48,7 @@
   function run(){
     ensureStylesheet(STYLE);
     ensureUniversal();
+    ensureMenuInteractions();
     ensureCityAddress();
     ensureLandingRecents();
     syncBrand();
