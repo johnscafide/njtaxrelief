@@ -21,7 +21,28 @@
   var user=null, lastFocus=null;
   var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
   function q(id){return document.getElementById(id);}
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function ensureMenuInteractionContract(){
+    if(q('wd-public-menu-interaction-contract'))return;
+    var s=document.createElement('style');
+    s.id='wd-public-menu-interaction-contract';
+    s.textContent='#wd-public-backdrop{z-index:9400!important}#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}#wd-main-sheet.open a,#wd-main-sheet.open button,#wd-profile-sheet.open a,#wd-profile-sheet.open button{pointer-events:auto!important;touch-action:manipulation!important}';
+    (document.head||document.documentElement).appendChild(s);
+  }
+  function bindMenuInteractionContract(){
+    ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
+      var sheet=q(id);if(!sheet||sheet.dataset.wdTapGuard==='1')return;
+      sheet.dataset.wdTapGuard='1';
+      sheet.addEventListener('click',function(e){
+        var closer=e.target&&e.target.closest&&e.target.closest('.wd-public-close,[data-wd-universal="close"]');
+        if(closer){e.preventDefault();close();return;}
+        var link=e.target&&e.target.closest&&e.target.closest('a[href]');
+        if(link)close();
+      });
+    });
+    var back=q('wd-public-backdrop');
+    if(back&&back.dataset.wdTapGuard!=='1'){back.dataset.wdTapGuard='1';back.addEventListener('click',close);}
+  }
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
   function appRoute(path){
     if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.route==='function')return window.WatchdogUniversalMenu.route(path);
     var h=String(location.hostname||'').toLowerCase(),clean=h==='watchdogindex.com'||h==='www.watchdogindex.com',prefix=clean?'':'/property';
@@ -54,6 +75,6 @@
   function loadLandingShowcase(){var path=(window.location.pathname||'').replace(/\/+$/,'');if(path!=='/property'&&path!=='/property/index.html'&&path!==''&&path!=='/index.html')return;if(q('wd-showcase-script'))return;var s=document.createElement('script');s.id='wd-showcase-script';s.src='/property/js/landing-showcase.js';s.async=false;document.head.appendChild(s);}
   function loadRobustBrand(){if(q('wd-robust-brand-script'))return;var s=document.createElement('script');s.id='wd-robust-brand-script';s.src='/property/js/robust-public-brand.js';s.defer=true;document.head.appendChild(s);}
   function loadGoogleAddressAutocomplete(){if(!q('pl-addr')&&!q('ss-addr'))return;if(q('wd-nj-address-autocomplete-script'))return;var s=document.createElement('script');s.id='wd-nj-address-autocomplete-script';s.src='/property/js/nj-address-autocomplete.js';s.async=false;document.head.appendChild(s);}
-  function init(){renderTrigger();renderProfile();renderLandingRecent();watchSearchState();loadFlood();loadLandingShowcase();loadRobustBrand();loadGoogleAddressAutocomplete();document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
+  function init(){ensureMenuInteractionContract();bindMenuInteractionContract();renderTrigger();renderProfile();renderLandingRecent();watchSearchState();loadFlood();loadLandingShowcase();loadRobustBrand();loadGoogleAddressAutocomplete();document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
   window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:setRecent,signIn:signIn,signOut:signOut};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
