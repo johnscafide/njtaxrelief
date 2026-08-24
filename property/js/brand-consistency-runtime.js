@@ -6,6 +6,7 @@
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
+  var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
 
   function ensureStylesheet(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
@@ -24,6 +25,14 @@
     if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
     ensureScript(CITY_ADDRESS,'watchdog-city-address-runtime');
   }
+  function ensureLandingRecents(){
+    var path=(location.pathname||'').replace(/\/+$/,'');
+    var host=String(location.hostname||'').toLowerCase();
+    var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
+    if(path!=='/property'&&path!=='/property/index.html'&&!root)return;
+    if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
+    ensureScript(LANDING_RECENTS,'watchdog-landing-recent-intelligence');
+  }
   function setText(selector,value){
     document.querySelectorAll(selector).forEach(function(n){if(n.textContent!==value)n.textContent=value;});
   }
@@ -35,6 +44,7 @@
     ensureStylesheet(STYLE);
     ensureUniversal();
     ensureCityAddress();
+    ensureLandingRecents();
     syncBrand();
     if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();
   }
