@@ -60,7 +60,8 @@ function rankCandidate(candidate, lat, lon) {
 }
 
 function kartaImageUrl(row) {
-  return row.imageProcUrl || row.image_proc_url || row.fileurlProc || row.fileurlLTh || row.fileurl || row.lth_name || row.name || null;
+  return row.imageProcUrl || row.image_proc_url || row.fileUrlProc || row.fileurlProc ||
+    row.fileUrlLTh || row.fileurlLTh || row.fileUrl || row.fileurl || row.lth_name || row.name || null;
 }
 function absoluteKartaUrl(value) {
   if (!value) return null;
@@ -68,12 +69,19 @@ function absoluteKartaUrl(value) {
   const clean = String(value).replace(/^\/+/, '');
   return clean ? 'https://api.openstreetcam.org/' + clean : null;
 }
+function kartaSourceUrl(lat, lon) {
+  return `https://kartaview.org/map/@${encodeURIComponent(lat)},${encodeURIComponent(lon)},18z`;
+}
 
 async function fetchKarta(lat, lon) {
   const url = KARTAVIEW + '?' + new URLSearchParams({
     lat: String(lat),
     lng: String(lon),
     radius: '140',
+    zoomLevel: '18',
+    join: 'sequence',
+    orderBy: 'id',
+    orderDirection: 'desc',
     page: '1',
     itemsPerPage: '30'
   }).toString();
@@ -92,21 +100,19 @@ async function fetchKarta(lat, lon) {
     return rankCandidate({
       provider: 'kartaview',
       id: String(row.id || row.photoId || row.photo_id || ''),
-      sequence_id: String(row.sequenceId || row.sequence_id || ''),
+      sequence_id: String(row.sequenceId || row.sequence_id || row.sequence?.id || ''),
       sequence_index: String(row.sequenceIndex || row.sequence_index || ''),
       image_url: image,
-      lat: row.lat,
-      lon: row.lng ?? row.lon,
-      heading: row.heading,
-      captured_at: row.shotDate || row.shot_date || row.dateAdded || row.date_added || null,
+      lat: row.lat ?? row.latitude,
+      lon: row.lng ?? row.lon ?? row.longitude,
+      heading: row.heading ?? row.compassAngle ?? row.compass_angle,
+      captured_at: row.shotDate || row.shot_date || row.dateAdded || row.date_added || row.createdAt || null,
       attribution: 'KartaView · CC BY-SA 4.0'
     }, lat, lon);
   }).filter(Boolean).sort((a, b) => a.score - b.score);
   const best = candidates[0];
   if (!best) return null;
-  best.source_url = best.sequence_id
-    ? `https://kartaview.org/details/${encodeURIComponent(best.sequence_id)}/${encodeURIComponent(best.sequence_index || '0')}/track-info`
-    : 'https://kartaview.org/';
+  best.source_url = kartaSourceUrl(best.lat, best.lon);
   delete best.score;
   return best;
 }
