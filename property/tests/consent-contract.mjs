@@ -26,6 +26,11 @@ assert(consent.includes('Necessary cookies'), 'Necessary cookies disclosure is m
 assert(consent.includes('Optional cookies'), 'Optional cookies disclosure is missing');
 assert(consent.includes('GA_ID'), 'Google Analytics consent implementation is missing');
 assert(consent.includes('CLARITY_ID'), 'Microsoft Clarity consent implementation is missing');
+assert(consent.includes("watchdog:'G-EDW7CZV66M'"), 'Watchdog GA4 measurement ID is missing');
+assert(consent.includes("legacy:'G-ENP9182L0J'"), 'Legacy NJPropertyTaxRelief GA4 measurement ID is missing');
+assert(consent.includes("host==='watchdogindex.com'||host==='www.watchdogindex.com'"), 'Watchdog GA4 host routing is missing');
+assert(consent.includes("host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com'"), 'Legacy GA4 host routing is missing');
+assert(consent.includes("if(!GA_ID) return;"), 'Unknown and preview hosts must fail closed instead of loading GA4');
 assert(!consent.includes('supabase.co'), 'Browser cookie choice must not be written to Supabase');
 assert(!consent.includes('user_id'), 'Cookie preference storage must not be linked to a user ID');
 
