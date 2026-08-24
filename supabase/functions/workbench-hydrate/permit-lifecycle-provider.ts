@@ -1,45 +1,26 @@
 const DCA_API = 'https://data.nj.gov/resource/w9se-dmra.json';
-const PROVIDER_VERSION = 'nj-dca-permit-lifecycle-record-match-v1';
+const PROVIDER_VERSION = 'nj-dca-permit-lifecycle-record-state-v2';
 const SOURCE = 'NJ DCA Construction Permit Data (w9se-dmra)';
 const TARGET_SUFFIX = '.open_permit_count';
 const TTL_MS = 30 * 60 * 1000;
 const cache = new Map<string, { at: number; rows: any[]; ok: boolean }>();
 
-function clean(value: unknown) {
-  return String(value ?? '').trim();
-}
-function esc(value: unknown) {
-  return clean(value).replace(/'/g, "''");
-}
+function clean(value: unknown) { return String(value ?? '').trim(); }
+function esc(value: unknown) { return clean(value).replace(/'/g, "''"); }
 function treasuryCode(row: any) {
   const pin = clean(row?.pams_pin).replace(/\D/g, '');
   return pin.slice(0, 4) || clean(row?.cd_code).replace(/\D/g, '').slice(0, 4);
 }
-function normalizePermitNumber(value: unknown) {
-  return clean(value).toUpperCase().replace(/[^A-Z0-9]/g, '');
-}
-function isIssued(row: any) {
-  return clean(row?.status).toUpperCase() === 'P';
-}
-function isCertificate(row: any) {
-  return clean(row?.status).toUpperCase() === 'C';
-}
-function dateValue(value: unknown) {
-  const parsed = Date.parse(clean(value));
-  return Number.isFinite(parsed) ? parsed : null;
-}
-function sameLifecycleKey(row: any) {
-  const permit = normalizePermitNumber(row?.permitno);
-  return permit || '';
-}
+function normalizePermitNumber(value: unknown) { return clean(value).toUpperCase().replace(/[^A-Z0-9]/g, ''); }
+function status(row: any) { return clean(row?.status).toUpperCase(); }
+function isIssued(row: any) { return status(row) === 'P'; }
+function isCertificate(row: any) { return status(row) === 'C'; }
 
 async function fetchParcelRows(propertyRow: any) {
   const tc = treasuryCode(propertyRow);
   const block = esc(propertyRow?.block);
   const lot = esc(propertyRow?.lot);
-  if (!/^\d{4}$/.test(tc) || !block || !lot) {
-    return { ok: true, rows: [], missingKey: true };
-  }
+  if (!/^\d{4}$/.test(tc) || !block || !lot) return { ok: true, rows: [], missingKey: true };
   const key = `${tc}|${block}|${lot}`;
   const existing = cache.get(key);
   if (existing && Date.now() - existing.at < TTL_MS) return { ok: existing.ok, rows: existing.rows, missingKey: false };
@@ -65,10 +46,14 @@ async function fetchParcelRows(propertyRow: any) {
 }
 
 function lifecycleSummary(rows: any[]) {
+  // DCA lifecycle state is carried by the record itself. A status=C record retains
+  // its original permitdate and adds certdate; it is not necessarily paired with a
+  // separate status=P row. Therefore group by permit number and use the latest/most
+  // complete lifecycle state, never parcel-level P-count minus C-count arithmetic.
   const groups = new Map<string, any[]>();
   let unmatchableIssued = 0;
   for (const row of rows) {
-    const key = sameLifecycleKey(row);
+    const key = normalizePermitNumber(row?.permitno);
     if (!key) {
       if (isIssued(row)) unmatchableIssued += 1;
       continue;
@@ -78,26 +63,22 @@ function lifecycleSummary(rows: any[]) {
     groups.set(key, group);
   }
 
-  let issuedPermits = 0;
-  let matchedCertificates = 0;
+  let permitLifecycles = 0;
+  let certifiedLifecycles = 0;
   let verificationCandidates = 0;
   let latestCandidatePermitDate: string | null = null;
 
   for (const group of groups.values()) {
-    const issued = group.filter(isIssued);
-    if (!issued.length) continue;
-    issuedPermits += 1;
-    const certs = group.filter(isCertificate);
-    const earliestIssue = Math.min(...issued.map((row: any) => dateValue(row?.permitdate) ?? Number.MAX_SAFE_INTEGER));
-    const hasMatchingCertificate = certs.some((row: any) => {
-      const certDate = dateValue(row?.certdate);
-      if (certDate === null || earliestIssue === Number.MAX_SAFE_INTEGER) return true;
-      return certDate >= earliestIssue;
-    });
-    if (hasMatchingCertificate) {
-      matchedCertificates += 1;
+    const hasPermitState = group.some((row: any) => isIssued(row) || isCertificate(row));
+    if (!hasPermitState) continue;
+    permitLifecycles += 1;
+    const certified = group.some((row: any) => isCertificate(row) && clean(row?.certdate));
+    if (certified) {
+      certifiedLifecycles += 1;
       continue;
     }
+    const issued = group.filter(isIssued);
+    if (!issued.length) continue;
     verificationCandidates += 1;
     const dates = issued.map((row: any) => clean(row?.permitdate)).filter(Boolean).sort();
     const latest = dates.at(-1) || null;
@@ -105,8 +86,8 @@ function lifecycleSummary(rows: any[]) {
   }
 
   return {
-    issuedPermits,
-    matchedCertificates,
+    permitLifecycles,
+    certifiedLifecycles,
     verificationCandidates,
     unmatchableIssued,
     latestCandidatePermitDate,
@@ -115,19 +96,14 @@ function lifecycleSummary(rows: any[]) {
 
 function recalculateProviderSummary(meta: Record<string, Record<string, any>>) {
   const summary: Record<string, number> = {
-    available: 0,
-    source_checked_no_value: 0,
-    dependency_missing: 0,
-    provider_error: 0,
-    not_computed: 0,
-    provider_missing: 0,
-    not_entitled: 0,
+    available: 0, source_checked_no_value: 0, dependency_missing: 0, provider_error: 0,
+    not_computed: 0, provider_missing: 0, not_entitled: 0,
   };
   for (const pinMeta of Object.values(meta || {})) {
     for (const row of Object.values(pinMeta || {})) {
-      const status = clean((row as any)?.status);
-      if (!(status in summary)) summary[status] = 0;
-      summary[status] += 1;
+      const state = clean((row as any)?.status);
+      if (!(state in summary)) summary[state] = 0;
+      summary[state] += 1;
     }
   }
   return summary;
@@ -193,15 +169,10 @@ export async function enrichPermitLifecycle(request: Request, response: Response
       const summary = lifecycleSummary(fetched.rows);
       payload.markers[pin][markerId] = summary.verificationCandidates;
       payload.meta[pin][markerId] = {
-        status: 'available',
-        provider_kind: 'derived_governed',
-        source: SOURCE,
-        provider_version: PROVIDER_VERSION,
-        scope: 'property',
-        observed_at: new Date().toISOString(),
+        status: 'available', provider_kind: 'derived_governed', source: SOURCE,
+        provider_version: PROVIDER_VERSION, scope: 'property', observed_at: new Date().toISOString(),
         interpretation: 'permit_certificate_verification_candidates_not_legal_open_permits',
-        display_label: 'Permit/certificate verification candidates',
-        lifecycle: summary,
+        display_label: 'Permit/certificate verification candidates', lifecycle: summary,
         limitations: ['most_but_not_all_municipalities', 'monthly_refresh', 'recent_two_months_unreviewed', 'historical_rows_purged'],
       };
     }
