@@ -12,7 +12,7 @@
   var scheduled=false;
 
   function clean(v){return String(v==null?'':v).trim();}
-  function esc(v){return clean(v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function setText(node,value){value=String(value==null?'':value);if(node&&node.textContent!==value)node.textContent=value;}
   function njZip(v){var m=clean(v).match(/\b(0[78]\d{3})(?:-\d{4})?\b/);return m?m[1]:'';}
 
   function ensureStyles(){
@@ -53,11 +53,11 @@
     var n=tile.querySelector('b');
     var score=document.querySelector('#plm-robust-score-sec .wdps-score b');
     if(score&&clean(score.textContent)){
-      n.textContent=clean(score.textContent)+'/100';
+      setText(n,clean(score.textContent)+'/100');
       tile.dataset.ready='1';
       tile.title='Canonical Watchdog Score powered by the ROBUST Framework';
     }else{
-      n.textContent='—';
+      setText(n,'—');
       delete tile.dataset.ready;
       tile.title='Score publishes when governed ROBUST evidence is sufficient';
     }
@@ -69,11 +69,11 @@
     var n=tile.querySelector('b');
     var value=document.querySelector('#plm-estimate .plm-est-hero');
     if(value&&clean(value.textContent)){
-      n.textContent=clean(value.textContent);
+      setText(n,clean(value.textContent));
       tile.dataset.ready='1';
       tile.title='Watchdog Tax Value: appeal-screening estimate, not a listing price or appraisal';
     }else{
-      n.textContent='—';
+      setText(n,'—');
       delete tile.dataset.ready;
       tile.title='Watchdog Tax Value appears when enough defensible sale evidence is available';
     }
@@ -91,11 +91,11 @@
     }
     var score=found&&found.querySelector('.wdps-n');
     if(score&&clean(score.textContent)&&clean(score.textContent)!=='—'){
-      value.textContent=clean(score.textContent)+'/100';
+      setText(value,clean(score.textContent)+'/100');
       tile.dataset.ready='1';
       tile.title='ROBUST B · Burden component. Higher is a more favorable tax-burden position.';
     }else{
-      value.textContent='—';
+      setText(value,'—');
       delete tile.dataset.ready;
       tile.title='ROBUST Burden publishes only when the required governed evidence is available';
     }
@@ -125,7 +125,7 @@
   function syncCity(){
     var box=document.querySelector('#plm .plm-addr');
     var line=box&&box.querySelector(':scope > span');
-    if(!box||!line)return;
+    if(!box||!line||line.dataset.wdCity==='1')return;
     var address=addressText(box),old=clean(line.textContent);
     if(!address||!old)return;
     var municipality=clean(old.split(',')[0]);
@@ -139,7 +139,7 @@
       var cm=old.match(/,\s*([^,\d]+?)\s+County/i);if(cm)county=clean(cm[1]);
       var familiar=[loc.city,'NJ',loc.zip].filter(Boolean).join(' ');
       if(!familiar)return;
-      line.textContent=familiar;
+      setText(line,familiar);
       line.dataset.wdCity='1';
       line.title='Municipality: '+municipality+(county?' · '+county+' County':'');
     });
@@ -158,6 +158,6 @@
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(sync);}
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
-  if(typeof MutationObserver!=='undefined')new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
+  if(typeof MutationObserver!=='undefined')new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
   window.WatchdogLookupSummaryEnhancements={sync:sync};
 })();
