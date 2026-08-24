@@ -1,0 +1,34 @@
+name: Watchdog sitemap contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/watchdog-index-sitemap.js'
+      - 'sitemap-*.xml'
+      - 'property/sitemap.xml'
+      - 'property/tests/watchdog-sitemap-contract.mjs'
+      - '.github/workflows/watchdog-sitemap-contract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'api/watchdog-index-sitemap.js'
+      - 'sitemap-*.xml'
+      - 'property/sitemap.xml'
+      - 'property/tests/watchdog-sitemap-contract.mjs'
+      - '.github/workflows/watchdog-sitemap-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sitemap-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify canonical Watchdog sitemap hygiene
+        run: node property/tests/watchdog-sitemap-contract.mjs
