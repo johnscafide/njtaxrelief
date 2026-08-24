@@ -39,7 +39,7 @@
   function loadLookupSummaryEnhancements(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LOOKUP_SUMMARY_ENHANCEMENTS__)return;
-    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260824a');
+    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260824b');
   }
 
   function syncPublicMenu(){
