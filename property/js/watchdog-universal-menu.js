@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260823d';
+  var VERSION = '20260824a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -88,7 +88,7 @@
       {key:'home',href:route('/home'),icon:'fa-house',label:'Property Home'},
       {key:'town-compare',href:route('/town-compare'),icon:'fa-code-compare',label:'Town Compare'},
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
-      {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Change Intelligence'}
+      {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'}
     ];
     if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});
     if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
