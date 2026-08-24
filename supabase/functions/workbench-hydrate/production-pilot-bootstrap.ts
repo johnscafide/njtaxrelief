@@ -30,7 +30,7 @@ Object.defineProperty(Deno, 'serve', {
   value: wrappedServe,
 });
 
-// Pin the previously deployed/certified production bootstrap exactly. Its
-// relative imports resolve from this immutable commit; this wrapper adds no
-// changes to that graph.
-await import('https://raw.githubusercontent.com/johnscafide/njtaxrelief/eb0c6f08766968447178b71058c0792c243050d9/supabase/functions/workbench-hydrate/production-bootstrap.ts');
+// Pin the reviewed main snapshot that includes the permit-lifecycle syntax
+// repair caught by the deployment gate. Its relative imports resolve from this
+// immutable commit; this wrapper changes no existing provider semantics.
+await import('https://raw.githubusercontent.com/johnscafide/njtaxrelief/933bf3b83e47f87d41920258940e40d55e3f26ad/supabase/functions/workbench-hydrate/production-bootstrap.ts');
