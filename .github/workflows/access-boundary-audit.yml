@@ -46,6 +46,8 @@ jobs:
         run: node property/tests/robust-trajectory-evidence-contract.mjs
       - name: Verify SR-1A compact subject-match safety
         run: node property/tests/sr1a-compact-subject-match-contract.mjs
+      - name: Verify free-first property imagery and photo contribution governance
+        run: node property/tests/property-imagery-photo-library-contract.mjs
       - name: Verify Property Home score history contract
         run: node property/tests/property-score-history-contract.mjs
       - name: Verify page-native Intelligence shell contracts
