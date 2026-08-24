@@ -11,7 +11,12 @@
   var NJ_AERIAL = 'https://maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export';
   var STREET = /^https:\/\/maps\.googleapis\.com\/maps\/api\/streetview(?:\?|$)/i;
   var WORLD_EXPORT = /^https:\/\/services\.arcgisonline\.com\/ArcGIS\/rest\/services\/World_Imagery\/MapServer\/export(?:\?|$)/i;
-  var state = window.WatchdogFreeImageryGrid = { translated: 0, installedAt: new Date().toISOString() };
+  var state = window.WatchdogFreeImageryGrid = {
+    translated: 0,
+    installs: 0,
+    reinforced: false,
+    installedAt: new Date().toISOString()
+  };
 
   function validNj(lat, lon) {
     return Number.isFinite(lat) && Number.isFinite(lon) && lat >= 38.8 && lat <= 41.4 && lon >= -75.7 && lon <= -73.8;
@@ -66,37 +71,41 @@
     });
   }
 
-  try {
-    var srcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
-    if (srcDescriptor && srcDescriptor.get && srcDescriptor.set) {
-      Object.defineProperty(HTMLImageElement.prototype, 'src', {
-        configurable: srcDescriptor.configurable,
-        enumerable: srcDescriptor.enumerable,
-        get: srcDescriptor.get,
-        set: function (value) { srcDescriptor.set.call(this, translate(value)); }
-      });
-    }
-  } catch (_srcError) {}
+  function installHooks() {
+    state.installs += 1;
 
-  try {
-    var previousSetAttribute = Element.prototype.setAttribute;
-    Element.prototype.setAttribute = function (name, value) {
-      if (this instanceof HTMLImageElement && String(name).toLowerCase() === 'src') value = translate(value);
-      return previousSetAttribute.call(this, name, value);
-    };
-  } catch (_attributeError) {}
+    try {
+      var srcDescriptor = Object.getOwnPropertyDescriptor(HTMLImageElement.prototype, 'src');
+      if (srcDescriptor && srcDescriptor.get && srcDescriptor.set) {
+        Object.defineProperty(HTMLImageElement.prototype, 'src', {
+          configurable: srcDescriptor.configurable,
+          enumerable: srcDescriptor.enumerable,
+          get: srcDescriptor.get,
+          set: function (value) { srcDescriptor.set.call(this, translate(value)); }
+        });
+      }
+    } catch (_srcError) {}
 
-  try {
-    var htmlDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
-    if (htmlDescriptor && htmlDescriptor.get && htmlDescriptor.set) {
-      Object.defineProperty(Element.prototype, 'innerHTML', {
-        configurable: htmlDescriptor.configurable,
-        enumerable: htmlDescriptor.enumerable,
-        get: htmlDescriptor.get,
-        set: function (value) { htmlDescriptor.set.call(this, rewriteHtml(value)); }
-      });
-    }
-  } catch (_htmlError) {}
+    try {
+      var previousSetAttribute = Element.prototype.setAttribute;
+      Element.prototype.setAttribute = function (name, value) {
+        if (this instanceof HTMLImageElement && String(name).toLowerCase() === 'src') value = translate(value);
+        return previousSetAttribute.call(this, name, value);
+      };
+    } catch (_attributeError) {}
+
+    try {
+      var htmlDescriptor = Object.getOwnPropertyDescriptor(Element.prototype, 'innerHTML');
+      if (htmlDescriptor && htmlDescriptor.get && htmlDescriptor.set) {
+        Object.defineProperty(Element.prototype, 'innerHTML', {
+          configurable: htmlDescriptor.configurable,
+          enumerable: htmlDescriptor.enumerable,
+          get: htmlDescriptor.get,
+          set: function (value) { htmlDescriptor.set.call(this, rewriteHtml(value)); }
+        });
+      }
+    } catch (_htmlError) {}
+  }
 
   function scrub(root) {
     if (!root || !root.querySelectorAll) return;
@@ -108,6 +117,22 @@
     });
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { scrub(document); }, { once: true });
-  else scrub(document);
+  /* Install immediately for any legacy renderer that runs before parsing ends.
+     The emergency Street View guard is loaded later on the lookup page and wraps
+     these same setters. Reinforce after DOMContentLoaded so this translator is
+     outermost: paid URL -> NJGIN -> spend guard -> browser. */
+  installHooks();
+
+  function reinforce() {
+    if (state.reinforced) return;
+    state.reinforced = true;
+    installHooks();
+    scrub(document);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', reinforce, { once: true });
+  } else {
+    reinforce();
+  }
 })();
