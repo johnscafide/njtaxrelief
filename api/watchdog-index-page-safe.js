@@ -7,6 +7,8 @@ const VERCEL_AUTH_MARKERS = [
   /_vercel\/sso/i,
   /vercel\.com\/(?:login|sso)/i
 ];
+const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
+const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
 
 const WATCHDOG_404 = `<!doctype html>
 <html lang="en">
@@ -71,6 +73,13 @@ function looksLikeVercelAuth(body) {
   return VERCEL_AUTH_MARKERS.some((pattern) => pattern.test(sample));
 }
 
+function installFreeGridImagery(body) {
+  const html = String(body || '');
+  if (html.includes('/property/js/free-imagery-grid-runtime.js')) return html;
+  if (!html.includes(OWNERSHIP_TAG)) return html;
+  return html.replace(OWNERSHIP_TAG, FREE_GRID_TAG + OWNERSHIP_TAG);
+}
+
 function copySafeHeaders(upstream, res) {
   const contentType = upstream.headers.get('content-type');
   const cacheControl = upstream.headers.get('cache-control');
@@ -117,7 +126,7 @@ export default async function handler(req, res) {
       },
       redirect: 'follow'
     });
-    const body = await upstream.text();
+    const body = installFreeGridImagery(await upstream.text());
     const rejected = !upstream.ok || looksLikeVercelAuth(body) || /^\s*not found\s*$/i.test(body);
 
     if (rejected) return render404(req, res);
