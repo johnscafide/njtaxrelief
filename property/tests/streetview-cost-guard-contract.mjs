@@ -20,6 +20,20 @@ assert(guard.includes('__watchdogStreetViewCostGuard'), 'Street View cost guard 
 assert(guard.includes('maps.googleapis.com\\/maps\\/api\\/streetview'), 'Street View guard matcher is missing');
 assert(guard.includes('data-fallback'), 'Street View guard must preserve a non-Google image fallback when available');
 
+const freeGrid = read('property/js/free-imagery-grid-runtime.js');
+const supabaseRuntime = read('property/js/supabase-runtime.js');
+const lookupSource = read('property/js/lookup.js');
+assert(freeGrid.includes('maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export'),
+  'Passive grid imagery must resolve to official NJ Office of GIS imagery');
+assert(freeGrid.includes('DOMContentLoaded') && freeGrid.includes('reinforce') && freeGrid.includes('installHooks()'),
+  'Free imagery translator must reinforce after the Street View guard is installed');
+assert(supabaseRuntime.includes("document.write('<script src=\"/property/js/free-imagery-grid-runtime.js\""),
+  'Public lookup boot must synchronously make the free imagery translator available');
+assert(lookupSource.includes("(a.lat != null && a.lon != null) ? (a.lat + ',' + a.lon)"),
+  'Neighborhood cards must prefer parcel coordinates so paid Street View URLs can be translated without geocoding');
+assert(lookupSource.includes('lat: c.y, lon: c.x'),
+  'Neighborhood parcel rows must retain centroid coordinates for free aerial imagery');
+
 const lookupPage = read('property/index.html');
 const lookupGuard = lookupPage.indexOf('/property/js/ownership-verification.js');
 const lookupRuntime = lookupPage.indexOf('/property/js/lookup.js');
@@ -50,4 +64,4 @@ for (const rel of dashboardScripts) {
     `Current dashboard-loaded script must not create Static Street View requests: ${rel}`);
 }
 
-console.log(`Street View cost guard contract passed. Guarded lookup/home paths and ${dashboardScripts.length} current dashboard scripts checked.`);
+console.log(`Street View spend/fallback contract passed. Lookup grids keep free NJGIN imagery while ${dashboardScripts.length} current dashboard scripts remain free of Static Street View calls.`);
