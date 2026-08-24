@@ -7,6 +7,31 @@
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
+  var PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js';
+
+  /* Property Home previously emitted Google Static Street View as an inline
+     background-image. Image-element guards cannot stop CSS URL fetches, so
+     neutralize that legacy path before the Home renderer inserts it. */
+  function installStreetViewBackgroundGuard(){
+    if(window.__WATCHDOG_STREETVIEW_BACKGROUND_GUARD__)return;
+    window.__WATCHDOG_STREETVIEW_BACKGROUND_GUARD__=true;
+    try{
+      var desc=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');
+      if(!desc||!desc.get||!desc.set)return;
+      Object.defineProperty(Element.prototype,'innerHTML',{
+        configurable:desc.configurable,
+        enumerable:desc.enumerable,
+        get:desc.get,
+        set:function(value){
+          if(typeof value==='string'&&/maps\.googleapis\.com\/maps\/api\/streetview/i.test(value)){
+            value=value.replace(/background-image\s*:\s*url\((['"]?)https:\/\/maps\.googleapis\.com\/maps\/api\/streetview[^)]*\)/gi,'background-image:none');
+          }
+          desc.set.call(this,value);
+        }
+      });
+    }catch(_error){}
+  }
+  installStreetViewBackgroundGuard();
 
   function ensureStylesheet(href){
     if(document.querySelector('link[href="'+href+'"]'))return;
@@ -24,6 +49,10 @@
   function ensureCityAddress(){
     if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
     ensureScript(CITY_ADDRESS,'watchdog-city-address-runtime');
+  }
+  function ensurePropertyImagery(){
+    if(window.__WATCHDOG_PROPERTY_IMAGERY__)return;
+    ensureScript(PROPERTY_IMAGERY,'watchdog-property-imagery-runtime');
   }
   function ensureLandingRecents(){
     var path=(location.pathname||'').replace(/\/+$/,'');
@@ -44,6 +73,7 @@
     ensureStylesheet(STYLE);
     ensureUniversal();
     ensureCityAddress();
+    ensurePropertyImagery();
     ensureLandingRecents();
     syncBrand();
     if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();
