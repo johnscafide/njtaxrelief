@@ -1,4 +1,97 @@
+<style>
+  .wd-footer-house {
+    margin:0 0 34px;
+    padding:22px;
+    border:1px solid rgba(111,154,255,.28);
+    border-radius:18px;
+    background:linear-gradient(145deg,rgba(17,29,56,.98),rgba(24,59,132,.92));
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+  }
+  .wd-footer-house-head {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    margin-bottom:16px;
+  }
+  .wd-footer-house-brand { display:flex; align-items:center; gap:11px; min-width:0; }
+  .wd-footer-house-mark {
+    width:40px;
+    height:40px;
+    flex:0 0 40px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(145deg,#183b84,#2f6df6);
+    color:#fff;
+    font-size:18px;
+    box-shadow:0 8px 20px rgba(47,109,246,.28);
+  }
+  .wd-footer-house-brand strong { display:block; color:#fff; font-size:17px; line-height:1.1; }
+  .wd-footer-house-brand span { display:block; margin-top:3px; color:#b9c8e5; font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+  .wd-footer-house-note { max-width:430px; color:#dbe7ff; font-size:12px; line-height:1.5; text-align:right; }
+  .wd-footer-house-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:11px; }
+  .wd-footer-house-card {
+    display:block;
+    padding:15px;
+    border-radius:13px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.065);
+    color:#fff;
+    text-decoration:none;
+    transition:transform .18s ease,background .18s ease,border-color .18s ease;
+  }
+  .wd-footer-house-card:hover { transform:translateY(-2px); background:rgba(255,255,255,.1); border-color:rgba(133,168,255,.42); }
+  .wd-footer-house-kicker { display:block; margin-bottom:6px; color:#9db9ff; font-size:9px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+  .wd-footer-house-card strong { display:block; color:#fff; font-size:14px; line-height:1.25; }
+  .wd-footer-house-card p { margin:5px 0 0 !important; color:#cbd8f2 !important; font-size:11px !important; line-height:1.45 !important; }
+  .wd-footer-house-arrow { display:inline-flex; align-items:center; gap:5px; margin-top:10px; color:#fff; font-size:10px; font-weight:800; }
+  .wd-footer-intelligence {
+    background:linear-gradient(115deg,#2f6df6,#6c5ce7,#d760b5,#08a6a7);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  @media (max-width:760px) {
+    .wd-footer-house { padding:18px; margin-bottom:28px; }
+    .wd-footer-house-head { align-items:flex-start; flex-direction:column; gap:10px; }
+    .wd-footer-house-note { max-width:none; text-align:left; }
+    .wd-footer-house-grid { grid-template-columns:1fr; }
+  }
+</style>
+
   <div class="footer-inner">
+    <section class="wd-footer-house" aria-label="Explore Watchdog Property Intelligence">
+      <div class="wd-footer-house-head">
+        <div class="wd-footer-house-brand">
+          <span class="wd-footer-house-mark"><i class="fas fa-dog"></i></span>
+          <div><strong>Watchdog</strong><span>Property Intelligence</span></div>
+        </div>
+        <div class="wd-footer-house-note">NJPropertyTaxRelief helps with the program. Watchdog helps you understand the property behind it.</div>
+      </div>
+      <div class="wd-footer-house-grid">
+        <a class="wd-footer-house-card" href="https://www.watchdogindex.com/?utm_source=njpropertytaxrelief&utm_medium=house_promo&utm_campaign=watchdog_cross_promo&utm_content=footer_score" onclick="window.gtag&&gtag('event','watchdog_house_promo_click',{placement:'footer',creative:'score'})">
+          <span class="wd-footer-house-kicker">Watchdog Score</span>
+          <strong>Check your property score.</strong>
+          <p>One score. Six dimensions. ROBUST. See the property in a wider tax, assessment and market context.</p>
+          <span class="wd-footer-house-arrow">Check my property <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a class="wd-footer-house-card" href="https://www.watchdogindex.com/?utm_source=njpropertytaxrelief&utm_medium=house_promo&utm_campaign=watchdog_cross_promo&utm_content=footer_intelligence" onclick="window.gtag&&gtag('event','watchdog_house_promo_click',{placement:'footer',creative:'intelligence'})">
+          <span class="wd-footer-house-kicker">Watchdog Intelligence</span>
+          <strong>Ask more of your property data with Watchdog <span class="wd-footer-intelligence">Intelligence</span>.</strong>
+          <p>Evidence-aware property context designed to help turn public records into clearer questions and decisions.</p>
+          <span class="wd-footer-house-arrow">Explore Watchdog <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a class="wd-footer-house-card" href="https://www.watchdogindex.com/pulse?utm_source=njpropertytaxrelief&utm_medium=house_promo&utm_campaign=watchdog_cross_promo&utm_content=footer_pulse" onclick="window.gtag&&gtag('event','watchdog_house_promo_click',{placement:'footer',creative:'property_pulse'})">
+          <span class="wd-footer-house-kicker">Property Pulse</span>
+          <strong>Know when the property story changes.</strong>
+          <p>Follow meaningful property and source changes without digging through the same public records over and over.</p>
+          <span class="wd-footer-house-arrow">See Property Pulse <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </section>
+
     <div class="footer-grid">
       <div>
         <div class="footer-brand">NJPropertyTax<span>Relief</span>.com</div>

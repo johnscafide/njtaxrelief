@@ -28,7 +28,7 @@ const canonical = [
   ['home', 'Property Home'],
   ['town-compare', 'Town Compare'],
   ['robust', 'ROBUST Framework'],
-  ['pulse', 'Change Intelligence'],
+  ['pulse', 'Property Pulse'],
   ['agent-desk', 'Agent Control'],
   ['scan', 'Appeal Scanner'],
   ['data-workbench', 'Data Workbench'],
@@ -89,7 +89,7 @@ assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not ex
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20260823d'"), 'Universal menu asset version was not cache-busted for the circle-free promo repair');
+assert(universal.includes("var VERSION = '20260824b'"), 'Universal menu asset version is stale');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
