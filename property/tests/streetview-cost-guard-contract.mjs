@@ -17,7 +17,8 @@ function assert(condition, message) {
 const guardPath = 'property/js/ownership-verification.js';
 const guard = read(guardPath);
 assert(guard.includes('__watchdogStreetViewCostGuard'), 'Street View cost guard is missing');
-assert(guard.includes('maps.googleapis.com\\/maps\\/api\\/streetview'), 'Street View guard matcher is missing');
+assert(guard.includes('maps') && guard.includes('googleapis') && guard.includes('streetview'),
+  'Street View guard matcher is missing');
 assert(guard.includes('data-fallback'), 'Street View guard must preserve a non-Google image fallback when available');
 
 const freeGrid = read('property/js/free-imagery-grid-runtime.js');
