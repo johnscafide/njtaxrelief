@@ -16,6 +16,8 @@ jobs:
           node-version: '22'
       - name: Validate universal menu source of truth
         run: node property/tests/universal-menu-contract.mjs
+      - name: Validate public navigation syntax
+        run: node --check property/js/public-nav.js
       - name: Validate public menu hooks remain available
         shell: python
         run: |
@@ -38,4 +40,19 @@ jobs:
           present = [token for token in legacy if token in source]
           if present:
               raise SystemExit('obsolete sticky navigation remains: ' + ', '.join(present))
-          print('Public navigation hooks and universal runtime contract are current.')
+
+          nav = Path('property/js/public-nav.js').read_text(encoding='utf-8')
+          interaction_required = [
+              'wd-public-menu-interaction-contract',
+              '#wd-public-backdrop{z-index:9400!important}',
+              '#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}',
+              '#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important',
+              "sheet.addEventListener('click'",
+              "e.target.closest('a[href]')",
+              'if(link)close()',
+              "back.addEventListener('click',close)",
+          ]
+          interaction_missing = [token for token in interaction_required if token not in nav]
+          if interaction_missing:
+              raise SystemExit('public menu tap contract missing: ' + ', '.join(interaction_missing))
+          print('Public navigation hooks and mobile tap interaction contract are current.')
