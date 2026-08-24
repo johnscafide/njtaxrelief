@@ -8,13 +8,24 @@
 
   var VERSION = 1;
   var STORAGE_KEY = 'watchdog_cookie_preferences_v1';
-  var GA_ID = 'G-ENP9182L0J';
+  var GA_IDS = Object.freeze({
+    watchdog:'G-EDW7CZV66M',
+    legacy:'G-ENP9182L0J'
+  });
   var CLARITY_ID = 'wjeklv0exl';
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
+
+  function googleAnalyticsId(){
+    var host=String(location.hostname||'').toLowerCase().replace(/\.$/,'');
+    if(host==='watchdogindex.com'||host==='www.watchdogindex.com') return GA_IDS.watchdog;
+    if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com') return GA_IDS.legacy;
+    return '';
+  }
+  var GA_ID = googleAnalyticsId();
 
   function ensureContactPolicy(){
     if(window.WatchdogContactPolicy || document.querySelector('script[src="'+CONTACT_POLICY_URL+'"]')) return;
@@ -74,6 +85,7 @@
     }catch(_){}
   }
   function loadGoogle(){
+    if(!GA_ID) return;
     ensureGoogleQueue();
     if(!window.__watchdogGaConfigured){
       window.__watchdogGaConfigured=true;
