@@ -1,0 +1,63 @@
+{
+  "report_id": "robust-v1-calibration-closure-2026-08-24",
+  "issue": "NJW-273",
+  "model_version": "ROBUST-v1",
+  "decision": "CLOSE_CALIBRATION_WITHOUT_MODEL_CHANGE",
+  "production_model_change": "NONE",
+  "weights": {"R":10,"O":20,"B":30,"U":15,"S":15,"T":10},
+  "bands": [35,50,65,80],
+  "missingness_policy": "omit unavailable dimensions and renormalize available weights",
+  "evidence_gate": {
+    "decision": "DO_NOT_ENFORCE_NUMERIC_ONLY_GATE",
+    "reason": "Coverage percentage alone does not encode which ROBUST dimension is absent; current governed evidence supports continuing explicit coverage/confidence reporting and missing-dimension renormalization until statewide source and property-class representation improve."
+  },
+  "acceptance_evidence": {
+    "persisted_baseline": {
+      "latest_unique_properties": 212,
+      "exact_reproductions": 212,
+      "max_abs_delta": 0,
+      "mean_abs_delta": 0,
+      "verified_against_production_on": "2026-08-24"
+    },
+    "governed_subject_cohort": {
+      "properties": 170,
+      "counties": 10,
+      "municipalities": 24,
+      "property_classes": 2,
+      "full_coverage": 160,
+      "mean_evidence_coverage": 98.91,
+      "source_report": "property/data/robust-v1-governed-subject-cohort-calibration-2026-08-23.json"
+    },
+    "scenario_program": {
+      "bounded_weight_perturbations": "complete for all six ROBUST dimensions at -20% and +20% relative target weight",
+      "leave_one_component_out": "complete for all six ROBUST dimensions",
+      "metrics": ["mean_abs_delta","max_abs_delta","band_migration_pct","rank_corr","top_decile_entries","top_decile_exits"],
+      "deterministic_harness": "property/scripts/robust_score_calibration.sql"
+    }
+  },
+  "keep_change_recommendations": {
+    "R_weight": "KEEP 10",
+    "O_weight": "KEEP 20",
+    "B_weight": "KEEP 30",
+    "U_weight": "KEEP 15",
+    "S_weight": "KEEP 15",
+    "T_weight": "KEEP 10",
+    "bands": "KEEP",
+    "missingness": "KEEP",
+    "numeric_only_evidence_gate": "DO NOT ENFORCE"
+  },
+  "known_limitations": [
+    "The governed subject cohort is sale-observed by construction.",
+    "158 of 170 governed cohort properties are in Atlantic, Camden, or Gloucester counties.",
+    "167 of 170 governed cohort properties are class 2 and only 3 are class 4A.",
+    "Stability remains unavailable for some out-of-footprint properties because the canonical equalization asset is not yet statewide."
+  ],
+  "governance": {
+    "robust_weights_changed": false,
+    "bands_changed": false,
+    "score_history_rewritten": false,
+    "missing_values_fabricated": false,
+    "new_model_version_created": false
+  },
+  "status": "COMPLETE"
+}
