@@ -116,7 +116,7 @@ export async function enrichPermitLifecycle(request: Request, response: Response
 
   const requestedIds = [...new Set((Array.isArray(requestBody?.marker_ids) ? requestBody.marker_ids : [])
     .map((value: unknown) => clean(value))
-    .filter((id: string) => id.endsWith(TARGET_SUFFIX) || id === 'preflight.open_permit_count')))] as string[];
+    .filter((id: string) => id.endsWith(TARGET_SUFFIX) || id === 'preflight.open_permit_count'))] as string[];
   if (!requestedIds.length) return response;
 
   let payload: any;
