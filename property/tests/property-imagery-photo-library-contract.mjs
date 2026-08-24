@@ -18,6 +18,7 @@ const runtime = read('property/js/property-imagery-runtime.js');
 const api = read('api/property-imagery.js');
 const migration = read('supabase/migrations/20260824225500_property_photo_library_v1.sql');
 const governance = read('supabase/migrations/20260824225800_property_photo_library_governance_v1.sql');
+const provenance = read('supabase/migrations/20260824230700_property_photo_library_provenance_v1.sql');
 
 assert(brand.includes("PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js'"),
   'Canonical app runtime must load the property imagery runtime');
@@ -67,5 +68,9 @@ assert(governance.includes("visibility = 'contribution'\n        and moderation_
   'Contributors must not be able to self-approve shared photos');
 assert(governance.includes("or (\n    (select auth.uid()) = user_id"),
   'Owner update policy must remain distinct from developer moderation authority');
+assert(provenance.includes("contributor_license_version = 'watchdog-photo-contribution-v1-2026-08-24'"),
+  'Shared contribution must be pinned to the current consent version');
+assert(provenance.includes('property_photos_touch_updated_at'),
+  'Property photo provenance must maintain updated_at automatically');
 
-console.log('Property imagery/photo library contract passed: free-first sources, private uploads, verified opt-in contribution, EXIF stripping and moderation boundaries verified.');
+console.log('Property imagery/photo library contract passed: free-first sources, private uploads, verified opt-in contribution, EXIF stripping, consent provenance and moderation boundaries verified.');
