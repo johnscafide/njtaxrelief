@@ -1,101 +1,26 @@
 /* Property Home physical-device follow-up · 2026-08-24
-   Narrow, non-blocking fixes for mobile header/spacing, selected-property weather,
-   and human-ad attribution. No score, entitlement, or property-data logic changes. */
+   Mobile interaction, spacing, weather and ad attribution fixes. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_LIVE_FIX_20260824__)return;
 window.__WATCHDOG_HOME_LIVE_FIX_20260824__=true;
-
-var SUPABASE_URL='https://uvkvaxljhhngydvlrzom.supabase.co';
-var SUPABASE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
-var cssHref='/property/css/home/home-mobile-live-fix-20260824.css?v=20260824c';
-var weatherToken=0,weatherCache={};
-
-function q(s,r){return (r||document).querySelector(s)}
-function ensureCss(){
- if(document.querySelector('link[data-watchdog-home-live-fix]'))return;
- var l=document.createElement('link');l.rel='stylesheet';l.href=cssHref;l.media='(max-width: 820px)';l.setAttribute('data-watchdog-home-live-fix','1');document.head.appendChild(l);
-}
-function weatherIcon(text){
- var t=String(text||'').toLowerCase();
- if(t.indexOf('thunder')>=0)return'fa-cloud-bolt';
- if(t.indexOf('snow')>=0)return'fa-snowflake';
- if(t.indexOf('rain')>=0||t.indexOf('shower')>=0)return'fa-cloud-rain';
- if(t.indexOf('cloud')>=0)return'fa-cloud-sun';
- if(t.indexOf('clear')>=0||t.indexOf('sun')>=0)return'fa-sun';
- return'fa-cloud-sun';
-}
-function weatherNode(){
- var top=q('.hm27-top-right');if(!top)return null;
- var node=q('.hm27-weather',top);
- if(node)return node;
- node=document.createElement('div');node.className='hm27-weather';node.setAttribute('aria-label','Weather near selected property');node.innerHTML='<i class="fas fa-sun" aria-hidden="true"></i><span><strong>Weather</strong><small>Selected property</small></span>';
- var notify=q('#hm27-notify',top);top.insertBefore(node,notify||top.firstChild);return node;
-}
-function paintWeather(temp,unit,summary){
- var node=weatherNode();if(!node)return;
- var icon=q('i',node),strong=q('strong',node),small=q('small',node);
- if(icon)icon.className='fas '+weatherIcon(summary);
- if(strong)strong.textContent=(temp==null?'Weather':Math.round(Number(temp))+'°'+(unit||'F'));
- if(small)small.textContent=summary||'Selected property';
-}
-function client(){
- try{
-  if(!window.supabase||!window.supabase.createClient)return null;
-  return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}});
- }catch(_e){return null;}
-}
-function weatherAddress(row){
- return [row&&row.address,row&&(row.city||row.town),'NJ',row&&row.zip].filter(Boolean).join(', ');
-}
-function forecastFor(row){
- var hasCoords=Number.isFinite(Number(row&&row.lat))&&Number.isFinite(Number(row&&row.lon));
- var address=weatherAddress(row);
- var key=hasCoords?(Number(row.lat).toFixed(3)+','+Number(row.lon).toFixed(3)):address.toLowerCase();
- var cached=weatherCache[key];
- if(cached&&Date.now()-cached.at<10*60*1000)return Promise.resolve(cached.value);
- var url='/api/watchdog-weather?';
- if(hasCoords)url+='lat='+encodeURIComponent(Number(row.lat).toFixed(4))+'&lon='+encodeURIComponent(Number(row.lon).toFixed(4));
- else url+='address='+encodeURIComponent(address);
- return fetch(url,{headers:{Accept:'application/json'}})
-  .then(function(r){if(!r.ok)throw new Error('weather '+r.status);return r.json()})
-  .then(function(v){if(v&&v.error)throw new Error(v.error);weatherCache[key]={at:Date.now(),value:v};return v;});
-}
-function refreshWeather(){
- var sw=q('#hm-switch'),pin=sw&&sw.value;if(!pin){paintWeather(null,'F','Selected property');return;}
- var token=++weatherToken,c=client();if(!c)return;
- c.auth.getSession().then(function(x){
-  if(token!==weatherToken||!x.data||!x.data.session)return null;
-  return c.from('saved_properties').select('lat,lon,address,town,city,zip').eq('pams_pin',pin).maybeSingle();
- }).then(function(x){
-  if(token!==weatherToken||!x||x.error||!x.data||!weatherAddress(x.data))return null;
-  return forecastFor(x.data);
- }).then(function(w){if(token===weatherToken&&w)paintWeather(w.temperature,w.temperatureUnit,w.shortForecast)}).catch(function(){/* weather is supplemental; never block Property Home */});
-}
-
-function fixJohnAd(root){
- root=root||document;
- var banner=q('.hm-footer-ad .gt-banner',root)||q('.hm-footer-ad .gt-banner');if(!banner)return;
- var img=q('.gt-photo img',banner),href=String(banner.getAttribute('href')||''),isJohn=(img&&/johnprofile/i.test(img.getAttribute('src')||''))||/john_(?:buyer|seller)|home-value|search-homes/i.test(href);
- if(!isJohn)return;
- var eyebrow=q('.gt-eyebrow',banner),disc=q('.gt-disc',banner);
- if(eyebrow&&!/^John Scafide\b/i.test(eyebrow.textContent||''))eyebrow.textContent='John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate';
- if(disc&&(!/^Advertisement\. John Scafide\b/i.test(disc.textContent||'')||/Watchdog is a licensed New Jersey real estate agent/i.test(disc.textContent||'')))disc.textContent='Advertisement. John Scafide is a licensed New Jersey real estate agent, NJ License #2079591, with The McKenty Team at Opus Elite Real Estate. If a property shown on Watchdog is listed by another brokerage, this is not a solicitation of that listing.';
-}
-function watchAd(){
- var footer=q('.hm-footer-ad');if(!footer){setTimeout(watchAd,600);return;}
- fixJohnAd();
- if('MutationObserver'in window)new MutationObserver(function(){fixJohnAd()}).observe(footer,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['src','href']});
-}
-function wireSwitch(){
- var sw=q('#hm-switch');if(!sw)return;
- if(sw.dataset.wdWeatherWired==='1')return;
- sw.dataset.wdWeatherWired='1';sw.addEventListener('change',function(){setTimeout(refreshWeather,0)});refreshWeather();
-}
-function boot(){
- ensureCss();weatherNode();wireSwitch();watchAd();
- var attempts=0,t=setInterval(function(){attempts++;weatherNode();wireSwitch();fixJohnAd();if(attempts>20)clearInterval(t)},350);
-}
-ensureCss();
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
+var SUPABASE_URL='https://uvkvaxljhhngydvlrzom.supabase.co',SUPABASE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+var cssHref='/property/css/home/home-mobile-live-fix-20260824.css?v=20260824d',weatherToken=0,weatherCache={};
+function q(s,r){return(r||document).querySelector(s)}
+function ensureCss(){var old=q('link[data-watchdog-home-live-fix]');if(old&&old.href.indexOf('20260824d')>=0)return;if(old)old.remove();var l=document.createElement('link');l.rel='stylesheet';l.href=cssHref;l.media='(max-width: 820px)';l.setAttribute('data-watchdog-home-live-fix','1');document.head.appendChild(l)}
+function weatherIcon(text){var t=String(text||'').toLowerCase();if(t.indexOf('thunder')>=0)return'fa-cloud-bolt';if(t.indexOf('snow')>=0)return'fa-snowflake';if(t.indexOf('rain')>=0||t.indexOf('shower')>=0)return'fa-cloud-rain';if(t.indexOf('cloud')>=0)return'fa-cloud-sun';if(t.indexOf('clear')>=0||t.indexOf('sun')>=0)return'fa-sun';return'fa-cloud-sun'}
+function weatherNode(){var top=q('.hm27-top-right');if(!top)return null;var node=q('.hm27-weather',top);if(node)return node;node=document.createElement('div');node.className='hm27-weather';node.setAttribute('aria-label','Weather near selected property');node.innerHTML='<i class="fas fa-sun" aria-hidden="true"></i><span><strong>Weather</strong><small>Selected property</small></span>';var notify=q('#hm27-notify',top);top.insertBefore(node,notify||top.firstChild);return node}
+function paintWeather(temp,unit,summary){var node=weatherNode();if(!node)return;var icon=q('i',node),strong=q('strong',node),small=q('small',node);if(icon)icon.className='fas '+weatherIcon(summary);if(strong)strong.textContent=(temp==null?'Weather':Math.round(Number(temp))+'°'+(unit||'F'));if(small)small.textContent=summary||'Selected property'}
+function client(){try{if(!window.supabase||!window.supabase.createClient)return null;return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:'pkce',storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}})}catch(_e){return null}}
+function weatherAddress(row){return[row&&row.address,row&&(row.city||row.town),'NJ',row&&row.zip].filter(Boolean).join(', ')}
+function forecastFor(row){var hasCoords=Number.isFinite(Number(row&&row.lat))&&Number.isFinite(Number(row&&row.lon)),address=weatherAddress(row),key=hasCoords?(Number(row.lat).toFixed(3)+','+Number(row.lon).toFixed(3)):address.toLowerCase(),cached=weatherCache[key];if(cached&&Date.now()-cached.at<600000)return Promise.resolve(cached.value);var url='/api/watchdog-weather?';url+=hasCoords?'lat='+encodeURIComponent(Number(row.lat).toFixed(4))+'&lon='+encodeURIComponent(Number(row.lon).toFixed(4)):'address='+encodeURIComponent(address);return fetch(url,{headers:{Accept:'application/json'}}).then(function(r){if(!r.ok)throw new Error('weather '+r.status);return r.json()}).then(function(v){if(v&&v.error)throw new Error(v.error);weatherCache[key]={at:Date.now(),value:v};return v})}
+function refreshWeather(){var sw=q('#hm-switch'),pin=sw&&sw.value;if(!pin){paintWeather(null,'F','Selected property');return}var token=++weatherToken,c=client();if(!c)return;c.auth.getSession().then(function(x){if(token!==weatherToken||!x.data||!x.data.session)return null;return c.from('saved_properties').select('lat,lon,address,town,city,zip').eq('pams_pin',pin).maybeSingle()}).then(function(x){if(token!==weatherToken||!x||x.error||!x.data||!weatherAddress(x.data))return null;return forecastFor(x.data)}).then(function(w){if(token===weatherToken&&w)paintWeather(w.temperature,w.temperatureUnit,w.shortForecast)}).catch(function(){})}
+function fixJohnAd(root){root=root||document;var banner=q('.hm-footer-ad .gt-banner',root)||q('.hm-footer-ad .gt-banner');if(!banner)return;var img=q('.gt-photo img',banner),href=String(banner.getAttribute('href')||''),isJohn=(img&&/johnprofile/i.test(img.getAttribute('src')||''))||/john_(?:buyer|seller)|home-value|search-homes/i.test(href);if(!isJohn)return;var eyebrow=q('.gt-eyebrow',banner),disc=q('.gt-disc',banner);if(eyebrow&&!/^John Scafide\b/i.test(eyebrow.textContent||''))eyebrow.textContent='John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate';if(disc&&(!/^Advertisement\. John Scafide\b/i.test(disc.textContent||'')||/Watchdog is a licensed New Jersey real estate agent/i.test(disc.textContent||'')))disc.textContent='Advertisement. John Scafide is a licensed New Jersey real estate agent, NJ License #2079591, with The McKenty Team at Opus Elite Real Estate. If a property shown on Watchdog is listed by another brokerage, this is not a solicitation of that listing.'}
+function watchAd(){var footer=q('.hm-footer-ad');if(!footer){setTimeout(watchAd,600);return}fixJohnAd();if('MutationObserver'in window)new MutationObserver(function(){fixJohnAd()}).observe(footer,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['src','href']})}
+function wireSwitch(){var sw=q('#hm-switch');if(!sw||sw.dataset.wdWeatherWired==='1')return;sw.dataset.wdWeatherWired='1';sw.addEventListener('change',function(){setTimeout(refreshWeather,0)});refreshWeather()}
+function openMenu(){var n=q('#hm27-nav');if(!n)return;n.classList.add('open');n.setAttribute('aria-hidden','false');document.body.classList.add('hm-nav-open')}
+function wireMenu(){var menu=q('#hm27-menu');if(!menu||menu.dataset.wdLiveMenu==='1')return;menu.dataset.wdLiveMenu='1';menu.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();openMenu()},true)}
+function wireAccordions(){if(document.documentElement.dataset.wdLiveAccordions==='1')return;document.documentElement.dataset.wdLiveAccordions='1';document.addEventListener('click',function(e){if(!window.matchMedia||!window.matchMedia('(max-width:820px)').matches)return;var h=e.target&&e.target.closest&&e.target.closest('.sec2-h');if(!h)return;var section=h.closest('.sec2');if(!section||!section.id||section.dataset.wdTapBusy==='1')return;e.preventDefault();e.stopImmediatePropagation();var key=section.id.replace(/^sec-/,'');section.dataset.wdTapBusy='1';try{if(typeof window.hmToggle==='function')window.hmToggle(key);else section.classList.toggle('open')}finally{setTimeout(function(){delete section.dataset.wdTapBusy},80)}},true)}
+function boot(){ensureCss();weatherNode();wireSwitch();wireMenu();wireAccordions();watchAd();var attempts=0,t=setInterval(function(){attempts++;weatherNode();wireSwitch();wireMenu();fixJohnAd();if(attempts>30)clearInterval(t)},350)}
+ensureCss();if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
