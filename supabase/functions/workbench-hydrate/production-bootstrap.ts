@@ -12,6 +12,12 @@
 // - keep parcel/MOD-IV MUN_NAME as the separate taxing municipality;
 // - return marker-level provider status/provenance without synthesizing City from municipality.
 //
+// DCA permit lifecycle repair:
+// - replace parcel-level issued-minus-certificate arithmetic for open_permit_count;
+// - group exact DCA rows by permit number and surface unmatched lifecycle rows only as verification candidates;
+// - preserve provider-missing/error/no-value states and DCA coverage/history limitations;
+// - never represent the derived count as a legal determination that a permit is open.
+//
 // New Home Warranty compatibility provider:
 // - DCA's latest accessible quarterly tables are county-level, not municipality-level;
 // - enrich only authenticated Pro+/Teams/Developer responses after the certified resolver has enforced entitlement;
@@ -19,6 +25,7 @@
 // - the unsupported municipality-rank marker remains missing rather than being synthesized.
 
 import { enrichCityAddress } from './city-provider.ts';
+import { enrichPermitLifecycle } from './permit-lifecycle-provider.ts';
 
 const WATCHDOG_INDEX_ORIGINS = new Set([
   'https://watchdogindex.com',
@@ -251,10 +258,12 @@ function withWatchdogIndexCors(handler: Deno.ServeHandler): Deno.ServeHandler {
   return async (request, info) => {
     const origin = request.headers.get('origin') || '';
     const cityRequest = request.clone();
+    const permitLifecycleRequest = request.clone();
     const warrantyRequest = request.clone();
     const baseResponse = await handler(request, info);
     const cityResponse = await enrichCityAddress(cityRequest, baseResponse);
-    const enrichedResponse = await enrichNewHomeWarranty(warrantyRequest, cityResponse);
+    const permitLifecycleResponse = await enrichPermitLifecycle(permitLifecycleRequest, cityResponse);
+    const enrichedResponse = await enrichNewHomeWarranty(warrantyRequest, permitLifecycleResponse);
     return applyWatchdogIndexCors(origin, enrichedResponse);
   };
 }
@@ -276,6 +285,6 @@ Object.defineProperty(Deno, 'serve', {
 });
 
 // Keep the current certified Workbench provider graph pinned. The wrapper adds
-// canonical WatchdogIndex CORS plus bounded City and New Home Warranty providers
-// after the base resolver has enforced authentication and entitlement.
+// canonical WatchdogIndex CORS plus bounded City, record-level DCA permit lifecycle,
+// and New Home Warranty providers after the base resolver has enforced authentication and entitlement.
 await import('https://raw.githubusercontent.com/johnscafide/njtaxrelief/666fe7392ae43a8be7b7f2512b76894dc64262a2/supabase/functions/workbench-hydrate/index.ts');
