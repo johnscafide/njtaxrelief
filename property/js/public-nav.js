@@ -42,7 +42,7 @@
     var back=q('wd-public-backdrop');
     if(back&&back.dataset.wdTapGuard!=='1'){back.dataset.wdTapGuard='1';back.addEventListener('click',close);}
   }
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];});}
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function appRoute(path){
     if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.route==='function')return window.WatchdogUniversalMenu.route(path);
     var h=String(location.hostname||'').toLowerCase(),clean=h==='watchdogindex.com'||h==='www.watchdogindex.com',prefix=clean?'':'/property';
