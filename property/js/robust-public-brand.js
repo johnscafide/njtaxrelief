@@ -42,6 +42,11 @@
     loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260824b');
   }
 
+  function loadMenuInteractionGuard(){
+    if(window.__WATCHDOG_MENU_INTERACTION_GUARD__)return;
+    loadScript('watchdog-menu-interaction-guard','/property/js/menu-interaction-guard.js?v=20260824a');
+  }
+
   function syncPublicMenu(){
     var sheet=document.getElementById('wd-main-sheet');
     if(!sheet)return;
@@ -97,7 +102,8 @@
   loadCanonicalScore();
   loadLandingRecentIntelligence();
   loadLookupSummaryEnhancements();
+  loadMenuInteractionGuard();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence,loadLookupSummaryEnhancements:loadLookupSummaryEnhancements};
+  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence,loadLookupSummaryEnhancements:loadLookupSummaryEnhancements,loadMenuInteractionGuard:loadMenuInteractionGuard};
 })();
