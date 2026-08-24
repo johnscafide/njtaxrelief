@@ -7,6 +7,7 @@
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
+  var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';
   var PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js';
 
   /* Property Home previously emitted Google Static Street View as an inline
@@ -50,6 +51,10 @@
     if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
     ensureScript(CITY_ADDRESS,'watchdog-city-address-runtime');
   }
+  function ensureFreeGridImagery(){
+    if(window.__WATCHDOG_FREE_IMAGERY_GRID__)return;
+    ensureScript(FREE_GRID_IMAGERY,'watchdog-free-imagery-grid-runtime');
+  }
   function ensurePropertyImagery(){
     if(window.__WATCHDOG_PROPERTY_IMAGERY__)return;
     ensureScript(PROPERTY_IMAGERY,'watchdog-property-imagery-runtime');
@@ -73,6 +78,7 @@
     ensureStylesheet(STYLE);
     ensureUniversal();
     ensureCityAddress();
+    ensureFreeGridImagery();
     ensurePropertyImagery();
     ensureLandingRecents();
     syncBrand();
