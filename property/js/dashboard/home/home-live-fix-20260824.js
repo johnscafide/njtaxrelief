@@ -48,11 +48,9 @@ function client(){
 function forecastFor(lat,lon){
  var key=Number(lat).toFixed(3)+','+Number(lon).toFixed(3),cached=weatherCache[key];
  if(cached&&Date.now()-cached.at<10*60*1000)return Promise.resolve(cached.value);
- return fetch('https://api.weather.gov/points/'+encodeURIComponent(Number(lat).toFixed(4)+','+Number(lon).toFixed(4)),{headers:{Accept:'application/geo+json'}})
-  .then(function(r){if(!r.ok)throw new Error('weather points '+r.status);return r.json()})
-  .then(function(p){var u=p&&p.properties&&p.properties.forecastHourly;if(!u)throw new Error('weather forecast unavailable');return fetch(u,{headers:{Accept:'application/geo+json'}})})
-  .then(function(r){if(!r.ok)throw new Error('weather forecast '+r.status);return r.json()})
-  .then(function(j){var f=j&&j.properties&&j.properties.periods&&j.properties.periods[0];if(!f)throw new Error('weather period unavailable');var v={temperature:f.temperature,temperatureUnit:f.temperatureUnit||'F',shortForecast:f.shortForecast||'Local conditions'};weatherCache[key]={at:Date.now(),value:v};return v;});
+ return fetch('/api/watchdog-weather?lat='+encodeURIComponent(Number(lat).toFixed(4))+'&lon='+encodeURIComponent(Number(lon).toFixed(4)),{headers:{Accept:'application/json'}})
+  .then(function(r){if(!r.ok)throw new Error('weather '+r.status);return r.json()})
+  .then(function(v){if(v&&v.error)throw new Error(v.error);weatherCache[key]={at:Date.now(),value:v};return v;});
 }
 function refreshWeather(){
  var sw=q('#hm-switch'),pin=sw&&sw.value;if(!pin){paintWeather(null,'F','Selected property');return;}
