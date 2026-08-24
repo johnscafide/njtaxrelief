@@ -1,0 +1,295 @@
+/* NJW-246 · 2026-08-24 mobile dashboard roomy/readability pass.
+   Loaded only for <=768px. Desktop dashboard is intentionally unchanged. */
+
+@media (max-width:768px){
+  /* Give the phone shell more breathing room instead of reproducing the dense desktop grid. */
+  body.wdv2-mounted .wd4-canvas{
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+  body.wdv2-mounted .wdv2-dash,
+  body.wdv2-mounted .wdv2-band{
+    gap:18px!important;
+  }
+  body.wdv2-mounted .wdv2-band{
+    grid-template-columns:minmax(0,1fr)!important;
+    width:100%!important;
+  }
+  body.wdv2-mounted .wdv2-band > *,
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] > *,
+  body.wdv2-mounted .wdv2-band[data-band="primary"] > *,
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] > *,
+  body.wdv2-mounted .wdv2-band[data-band="portfolio"] > *,
+  body.wdv2-mounted .wdv2-band[data-band="secondary"] > *,
+  body.wdv2-mounted .wdv2-band[data-band="premium"] > *{
+    grid-column:1/-1!important;
+    grid-row:auto!important;
+    width:100%!important;
+    min-width:0!important;
+  }
+  body.wdv2-mounted .wdv2-primary-rail{
+    grid-column:1/-1!important;
+    width:100%!important;
+    height:auto!important;
+    max-height:none!important;
+    gap:18px!important;
+  }
+
+  /* Weather is useful glanceable information, so stop treating it like a tiny utility chip. */
+  body.wdv2-mounted .wd4-weather-chip{
+    display:inline-flex!important;
+    min-width:82px!important;
+    max-width:96px!important;
+    width:auto!important;
+    height:50px!important;
+    min-height:50px!important;
+    padding:0 12px!important;
+    gap:8px!important;
+    border-radius:14px!important;
+    overflow:visible!important;
+  }
+  body.wdv2-mounted .wd4-weather-chip .wd4-weather-icon{
+    font-size:21px!important;
+  }
+  body.wdv2-mounted .wd4-weather-chip > div strong{
+    font-size:14px!important;
+    line-height:1!important;
+    font-weight:750!important;
+  }
+  body.wdv2-mounted .wd4-top-right{gap:9px!important}
+
+  /* The opening workspace should read larger and more intentionally spaced. */
+  body.wdv2-mounted .wd4-welcome{
+    padding:22px 16px 16px!important;
+    gap:16px!important;
+  }
+  body.wdv2-mounted .wd4-welcome-copy h1{
+    font-size:28px!important;
+    line-height:1.08!important;
+  }
+  body.wdv2-mounted .wd4-page-actions,
+  body.wdv2-mounted .wd4-welcome-actions{gap:10px!important}
+  body.wdv2-mounted .wd4-page-actions button,
+  body.wdv2-mounted .wd4-welcome-actions button,
+  body.wdv2-mounted .wd7-add-property{
+    width:48px!important;
+    min-width:48px!important;
+    height:48px!important;
+    min-height:48px!important;
+    border-radius:12px!important;
+  }
+  body.wdv2-mounted .wdv2-rail{
+    margin:0 16px 18px!important;
+    gap:10px!important;
+  }
+  body.wdv2-mounted .wdv2-freshness{
+    font-size:14px!important;
+    line-height:1.4!important;
+  }
+
+  /* KPI cards: one readable card per row. Scrolling is preferable to six compressed tiles. */
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-card{
+    min-height:152px!important;
+    height:auto!important;
+    padding:20px 22px!important;
+    border-radius:18px!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-card-title,
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd-premium-card-head{
+    font-size:15px!important;
+    line-height:1.3!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-kpi-value,
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd-premium-opportunity-main strong{
+    font-size:42px!important;
+    line-height:1!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-kpi-value-row{
+    margin-top:16px!important;
+    gap:12px!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-kpi-status,
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-kpi-foot,
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd-premium-opportunity-meta{
+    font-size:13px!important;
+    line-height:1.4!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="kpis"] .wd4-mini-chart{
+    min-height:44px!important;
+    margin-top:10px!important;
+  }
+
+  /* Larger primary and analysis surfaces get their own lines. */
+  body.wdv2-mounted [data-card-id="map"].wdv2-card-l,
+  body.wdv2-mounted [data-card-id="map"] .wd4-map{
+    height:360px!important;
+    min-height:360px!important;
+  }
+  body.wdv2-mounted [data-card-id="activity"].wdv2-card-l{
+    height:auto!important;
+    min-height:380px!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] .wd4-card{
+    height:auto!important;
+    min-height:330px!important;
+    padding:20px!important;
+    border-radius:18px!important;
+  }
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] .wd4-card-title,
+  body.wdv2-mounted .wdv2-band[data-band="analysis"] .wd5-card-head h3{
+    font-size:16px!important;
+    line-height:1.3!important;
+  }
+  body.wdv2-mounted [data-card-id="municipality"].wd-premium-municipality{
+    height:440px!important;
+    min-height:440px!important;
+    padding:20px!important;
+  }
+  body.wdv2-mounted .wd4-muni-table,
+  body.wdv2-mounted .wd-premium-muni-table{
+    font-size:13px!important;
+  }
+  body.wdv2-mounted .wd4-muni-table th,
+  body.wdv2-mounted .wd4-muni-table td,
+  body.wdv2-mounted .wd-premium-muni-table th,
+  body.wdv2-mounted .wd-premium-muni-table td{
+    padding:13px 12px!important;
+    line-height:1.35!important;
+  }
+
+  /* Premium/connected utility cards were especially cramped in a three-column phone row. */
+  body.wdv2-mounted .wd-premium-analytics-card,
+  body.wdv2-mounted .wd-crm-count-card,
+  body.wdv2-mounted .wdv2-band[data-band="secondary"] .wd4-card{
+    width:100%!important;
+    height:auto!important;
+    min-height:150px!important;
+    padding:20px!important;
+    border-radius:18px!important;
+  }
+  body.wdv2-mounted .wd-premium-stat-grid{
+    gap:16px!important;
+    margin-top:20px!important;
+  }
+  body.wdv2-mounted .wd-premium-stat-grid strong{
+    font-size:26px!important;
+    overflow:visible!important;
+  }
+  body.wdv2-mounted .wd-premium-stat-grid span,
+  body.wdv2-mounted .wd-premium-card-note,
+  body.wdv2-mounted .wd-crm-count-main span,
+  body.wdv2-mounted .wd-crm-count-card small{
+    font-size:12px!important;
+    line-height:1.4!important;
+  }
+  body.wdv2-mounted .wd-crm-count-main strong{font-size:34px!important}
+  body.wdv2-mounted .wdv2-composition{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:16px!important;
+  }
+  body.wdv2-mounted .wdv2-composition-title{grid-column:1/-1!important}
+  body.wdv2-mounted .wdv2-composition-title span{font-size:14px!important}
+  body.wdv2-mounted .wdv2-composition-title strong{font-size:28px!important}
+  body.wdv2-mounted .wdv2-comp-stat span{font-size:12px!important}
+  body.wdv2-mounted .wdv2-comp-stat strong{font-size:26px!important}
+
+  /* Property Portfolio mirrors the readable lookup-table pattern:
+     page scroll vertically, the data surface scrolls horizontally for columns. */
+  body.wdv2-mounted [data-card-id="properties"].wdv2-card-l{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:22px 20px 20px!important;
+    border-radius:18px!important;
+    overflow:hidden!important;
+  }
+  body.wdv2-mounted [data-card-id="properties"] .wd5-card-head,
+  body.wdv2-mounted [data-card-id="properties"] .wd4-chart-head{
+    min-height:34px!important;
+    margin-bottom:8px!important;
+  }
+  body.wdv2-mounted [data-card-id="properties"] .wd5-card-head h3,
+  body.wdv2-mounted [data-card-id="properties"] .wd4-card-title{
+    font-size:17px!important;
+    line-height:1.3!important;
+  }
+  body.wdv2-mounted .wd5-properties-wrap{
+    display:block!important;
+    flex:none!important;
+    width:100%!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow-x:auto!important;
+    overflow-y:hidden!important;
+    margin-top:8px!important;
+    padding:0 0 10px!important;
+    scrollbar-gutter:auto!important;
+    -webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;
+  }
+  body.wdv2-mounted .wd5-properties-table{
+    width:100%!important;
+    min-width:820px!important;
+    table-layout:auto!important;
+    font-variant-numeric:tabular-nums!important;
+  }
+  body.wdv2-mounted .wd5-properties-table thead{
+    position:static!important;
+  }
+  body.wdv2-mounted .wd5-properties-table th{
+    padding:14px 12px!important;
+    font-size:12px!important;
+    line-height:1.25!important;
+    white-space:nowrap!important;
+  }
+  body.wdv2-mounted .wd5-properties-table td{
+    padding:15px 12px!important;
+    font-size:14px!important;
+    line-height:1.3!important;
+    white-space:nowrap!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    max-width:none!important;
+  }
+  body.wdv2-mounted .wd5-properties-table th:first-child,
+  body.wdv2-mounted .wd5-properties-table td:first-child{min-width:190px!important}
+  body.wdv2-mounted .wd5-properties-table th:nth-child(2),
+  body.wdv2-mounted .wd5-properties-table td:nth-child(2){min-width:130px!important}
+  body.wdv2-mounted .wd5-properties-table th:nth-child(3),
+  body.wdv2-mounted .wd5-properties-table td:nth-child(3){min-width:76px!important}
+  body.wdv2-mounted .wdv2-portfolio-footer{
+    margin-top:14px!important;
+    padding-top:14px!important;
+    gap:12px!important;
+    flex-wrap:wrap!important;
+    font-size:12px!important;
+  }
+
+  /* Avoid the skeleton briefly showing the cramped desktop/two-column composition. */
+  .wdv2-skel-kpis,
+  .wdv2-skel-primary,
+  .wdv2-skel-analysis{
+    grid-template-columns:minmax(0,1fr)!important;
+    gap:18px!important;
+    padding-left:16px!important;
+    padding-right:16px!important;
+  }
+}
+
+@media (max-width:420px){
+  body.wdv2-mounted .wd4-canvas{padding-left:14px!important;padding-right:14px!important}
+  body.wdv2-mounted .wd4-weather-chip{
+    min-width:78px!important;
+    max-width:90px!important;
+    height:48px!important;
+    min-height:48px!important;
+    padding:0 10px!important;
+  }
+  body.wdv2-mounted .wd4-weather-chip .wd4-weather-icon{font-size:20px!important}
+  body.wdv2-mounted .wd4-weather-chip > div strong{font-size:13.5px!important}
+  body.wdv2-mounted .wd4-welcome{padding-left:14px!important;padding-right:14px!important}
+  body.wdv2-mounted .wd4-welcome-copy h1{font-size:27px!important}
+  body.wdv2-mounted .wdv2-rail{margin-left:14px!important;margin-right:14px!important}
+}
