@@ -1,6 +1,7 @@
 import { next, rewrite } from '@vercel/functions';
 
 const WATCHDOG_HOST = 'www.watchdogindex.com';
+const INDEXNOW_KEY_PATH = '/01ac3ca151cb7513bdda555fac7e5469.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
@@ -65,6 +66,9 @@ export default function middleware(request) {
 
   // WatchdogIndex has its own canonical crawl contract. Keep the legacy
   // NJPropertyTaxRelief robots/sitemaps untouched for the separate legacy site.
+  if (url.pathname === INDEXNOW_KEY_PATH) {
+    return rewriteWatchdogSystemFile(request, '/api/watchdog-index-indexnow-key');
+  }
   if (url.pathname === '/robots.txt') {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-robots');
   }
