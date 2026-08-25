@@ -1,0 +1,28 @@
+name: Watchdog design tokens
+
+on:
+  pull_request:
+    paths:
+      - 'property/css/**'
+      - 'property/scripts/check_design_tokens.py'
+      - '.github/workflows/watchdog-design-tokens.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'property/css/**'
+      - 'property/scripts/check_design_tokens.py'
+      - '.github/workflows/watchdog-design-tokens.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  token-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Enforce canonical Watchdog gold
+        run: python property/scripts/check_design_tokens.py
