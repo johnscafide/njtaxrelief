@@ -17,7 +17,7 @@
   function loadCanonicalScore(){
     function loadPublic(){
       if(window.WatchdogScorePublic)return;
-      loadScript('wd-public-score-script','/property/js/watchdog-score-public.js');
+      loadScript('wd-public-score-script','/property/js/watchdog-score-public.js?v=20260825-canonical1');
     }
     if(window.WatchdogScoreCore){loadPublic();return;}
     loadScript('wd-score-core-script','/property/js/watchdog-score-core.js',loadPublic);
