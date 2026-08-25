@@ -27,7 +27,9 @@ async function rpc(name,body,config){
     body:JSON.stringify(body)
   });
   if(!response.ok)throw new Error(name+' http '+response.status);
-  const data=await response.json();
+  const text=await response.text();
+  if(!text)return [];
+  const data=JSON.parse(text);
   return Array.isArray(data)?data:[data];
 }
 async function recordSecurityEvent(config,eventType,hash,scope,automationHint,detail){
