@@ -32,13 +32,20 @@ const robotsRes = responseHarness();
 robotsHandler({ method: 'GET', headers: { host: 'www.watchdogindex.com' } }, robotsRes);
 assert.equal(robotsRes.statusCode, 200);
 for (const agent of ['OAI-SearchBot', 'PerplexityBot', 'Applebot', 'Bingbot']) {
-  assert.match(robotsRes.body, new RegExp(`User-agent: ${agent}\\nAllow: /`));
+  assert.match(robotsRes.body, new RegExp(`User-agent: ${agent}`));
 }
+assert.match(robotsRes.body, /User-agent: \*\nAllow: \//);
+assert.match(robotsRes.body, /Disallow: \/account\$/);
+assert.match(robotsRes.body, /Disallow: \/dashboard\$/);
+assert.match(robotsRes.body, /Disallow: \/home\$/);
+assert.doesNotMatch(robotsRes.body, /Disallow: \/home-buying-cost-calculator/);
+assert.doesNotMatch(robotsRes.body, /Disallow: \/home-inspectors/);
 assert.match(robotsRes.body, /Sitemap: https:\/\/www\.watchdogindex\.com\/sitemap\.xml/);
 
 const middleware = await readFile(new URL('../../middleware.js', import.meta.url), 'utf8');
 assert.ok(middleware.includes(`const INDEXNOW_KEY_PATH = '/${keyHandler.INDEXNOW_KEY}.txt';`));
 assert.ok(middleware.includes("'/api/watchdog-index-indexnow-key'"));
+assert.ok(middleware.includes("['/contact.html', '/contact']"), 'legacy contact.html must use an HTTP canonical redirect');
 
 function runSubmit(...args) {
   return spawnSync(process.execPath, ['scripts/indexnow-submit.mjs', '--dry-run', ...args], {
