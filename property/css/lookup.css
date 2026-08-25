@@ -24,12 +24,13 @@
 }
 
 /* Index hero only: use the reliable white Watchdog lockup while the navigation
-   sits over the hero photo. Once the nav becomes solid/white, the shared brand
-   layer resumes control and uses the standard blue-text logo. */
+   sits over the hero photo. Keep the mark compact enough to leave clear visual
+   separation before the hero headline. Once the nav becomes solid/white, the
+   shared brand layer resumes control and uses the standard blue-text logo. */
 body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
-  width: 300px !important;
-  height: 76px !important;
-  max-width: 42vw !important;
+  width: 250px !important;
+  height: 64px !important;
+  max-width: 36vw !important;
   border-radius: 0 !important;
   background-color: transparent !important;
   background-image: url('/property/branding/watchdog-logo-horizontal-white.svg') !important;
@@ -41,17 +42,17 @@ body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
 
 @media (max-width: 760px) {
   body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
-    width: 230px !important;
-    height: 62px !important;
-    max-width: 50vw !important;
+    width: 210px !important;
+    height: 56px !important;
+    max-width: 46vw !important;
   }
 }
 
 @media (max-width: 560px) {
   body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
-    width: 180px !important;
-    height: 54px !important;
-    max-width: 54vw !important;
+    width: 164px !important;
+    height: 48px !important;
+    max-width: 50vw !important;
     padding: 0 !important;
   }
 }
