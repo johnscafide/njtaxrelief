@@ -44,6 +44,9 @@ module.exports = function handler(req, res) {
     'Allow: /',
     '',
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap.xml`,
+    `Sitemap: ${CANONICAL_ORIGIN}/sitemap-alternatives.xml`,
+    `Sitemap: ${CANONICAL_ORIGIN}/sitemap-calculators.xml`,
+    `Sitemap: ${CANONICAL_ORIGIN}/sitemap-statistics.xml`,
     ''
   ].join('\n');
 
