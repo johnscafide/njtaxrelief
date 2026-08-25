@@ -23,27 +23,35 @@
   background: var(--bg) !important;
 }
 
-/* Index hero only: use the transparent white-text Watchdog lockup while the
-   navigation sits over the hero photo. Once the nav becomes solid/white, the
-   shared brand layer resumes control and uses the standard blue-text logo. */
+/* Index hero only: use the reliable white Watchdog lockup while the navigation
+   sits over the hero photo. Once the nav becomes solid/white, the shared brand
+   layer resumes control and uses the standard blue-text logo. */
 body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
-  width: 220px !important;
-  height: 54px !important;
-  max-width: 40vw !important;
+  width: 300px !important;
+  height: 76px !important;
+  max-width: 42vw !important;
   border-radius: 0 !important;
   background-color: transparent !important;
-  background-image: url('/property/branding/watchdog-logo-white-long-trans.png') !important;
+  background-image: url('/property/branding/watchdog-logo-horizontal-white.svg') !important;
   background-position: center !important;
   background-repeat: no-repeat !important;
   background-size: contain !important;
   box-shadow: none !important;
 }
 
+@media (max-width: 760px) {
+  body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
+    width: 230px !important;
+    height: 62px !important;
+    max-width: 50vw !important;
+  }
+}
+
 @media (max-width: 560px) {
   body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
-    width: 190px !important;
-    height: 64px !important;
-    max-width: 58vw !important;
+    width: 180px !important;
+    height: 54px !important;
+    max-width: 54vw !important;
     padding: 0 !important;
   }
 }
