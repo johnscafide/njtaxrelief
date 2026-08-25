@@ -18,7 +18,9 @@ Accepted Live evidence includes:
 - out-of-order webhook handling
 - signed `invoice.payment_failed` acceptance
 
-NJW-42 is complete. The items below are the remaining external/manual controls before broad public paid enrollment.
+NJW-42 is complete. Stripe Customer Portal legal links are user-confirmed configured. External uptime ownership is also closed: the scheduled GitHub monitor names `johnscafide` as owner, opens/updates a GitHub incident on failure, checks canonical WatchdogIndex.com first, and retains NJPropertyTaxRelief.com as an intentional coexistence check.
+
+The four items below are the remaining external/manual controls before broad public paid enrollment.
 
 ## 1. Counsel review
 
@@ -47,6 +49,8 @@ Do not remove the Refund Policy's `subject to counsel review` status until this 
 
 Do not enable Stripe Tax merely to clear the launch checklist. First obtain a tax-advisor determination covering Watchdog's actual product mix.
 
+The detailed adviser handoff is in `property/docs/public-paid-launch-tax-advisor-brief.md`.
+
 Official New Jersey guidance is relevant in two directions:
 
 - NJ Technical Bulletin TB-72 says ordinary SaaS is generally not subject to Sales Tax when customers receive remote access to software and no software is delivered.
@@ -59,52 +63,70 @@ Sources:
 - https://www.nj.gov/treasury/taxation/infoservices.shtml
 - https://nj.gov/treasury/taxation/informationforvendors.shtml
 
-Questions for the tax advisor/accountant:
-
-1. Is Watchdog, or any paid Watchdog tier/feature, a taxable New Jersey information service?
-2. If the product contains both software/workflow functionality and taxable information-service functionality, how should the transaction be characterized or apportioned?
-3. What New Jersey registrations are required before collecting tax?
-4. Does Watchdog currently have physical/economic nexus in any other jurisdiction requiring collection?
-5. What Stripe product tax codes and registrations should be configured if tax collection is required?
-
 Current production posture: automatic tax remains disabled and no Stripe Tax registration should be added until this determination is documented.
 
-## 3. Business/entity and insurance
+## 3. Business/entity separation
 
-Before broad paid launch, document:
+Ask counsel to document, at minimum:
 
-- the legal entity that contracts with subscribers
-- how that entity is separated from brokerage/professional activity
-- an E&O / technology professional liability quote appropriate for property-data / analytics SaaS
-- whether cyber liability should be included or separate
-- effective date and coverage limits if coverage is bound
+1. The legal person/entity that should contract with Watchdog subscribers and appear in Terms, invoices, Stripe and tax registrations.
+2. Whether a separate LLC or other entity should own/operate the Watchdog SaaS rather than having the product contract directly through an individual or brokerage/professional activity.
+3. What agreements, bank/payment-account ownership, intellectual-property assignment, assumed-name/DBA filings, and intercompany/professional-service boundaries are needed to make that separation real rather than cosmetic.
+4. Whether the current real-estate/tax-service references create any licensing, brokerage-supervision, conflict, advertising or disclosure obligations for the SaaS entity.
+5. Whether the current limitation-of-liability and indemnity language is appropriate for the chosen entity structure.
 
-This is not an engineering gate and must not be marked complete from code alone.
+Do not change the operator statement to a new entity until that entity actually exists and has authority to contract.
 
-## 4. Stripe Customer Portal legal links
+## 4. E&O / technology liability insurance
 
-The Live Customer Portal should surface Watchdog's current legal pages:
+Request a quote for a property-data / analytics SaaS business. The quote request should expressly disclose that Watchdog:
+
+- provides subscription property intelligence, monitoring, scores, estimates and reports;
+- aggregates public/third-party property records and generates derived analytical outputs;
+- serves real-estate and other professional users;
+- does not provide a certified appraisal, legal opinion, underwriting decision or consumer report;
+- uses hosted cloud infrastructure and third-party payment/authentication providers;
+- may offer integrations/API capability to higher tiers.
+
+Ask the broker/insurer to answer:
+
+1. Does the policy cover technology E&O / professional liability claims arising from incorrect data, analytical outputs, reports, software errors or service failure?
+2. Is cyber/privacy liability included or separate, and what are the breach-response and incident-response limits?
+3. Are claims involving real-estate professionals, property valuation/analytics, tax-related information, public-record data, AI/automated analytical outputs, or API/integration failures excluded or restricted?
+4. Are defense costs inside or outside the limit?
+5. What retroactive date, deductible/retention, per-claim limit and aggregate limit apply?
+6. Are contractual liability, IP/media liability, regulatory/privacy proceedings and business interruption covered or excluded?
+7. Does the insurer require any changes to Terms, disclaimers, security controls or incident response before binding coverage?
+
+Record the carrier, policy type, effective date, limits, retention and material exclusions before marking this control complete.
+
+## Completed external-operating controls
+
+### Stripe Customer Portal legal links
+
+User-confirmed on 2026-08-25:
 
 - Terms: `https://www.watchdogindex.com/property/terms`
 - Privacy: `https://www.watchdogindex.com/property/privacy`
 
-Verify those links in the Live portal after saving the configuration. Do not change subscription behavior while doing this.
+The Stripe connector became unavailable after the user saved the setting, so release evidence records this as **user-confirmed**, not independently tool-read-back.
 
-## 5. External uptime alert ownership
+### External uptime alert ownership
 
-The production uptime workflow exists, but launch needs a named operational owner and a verified delivery path.
+Passed on 2026-08-25.
 
-Document:
+- Primary owner: `johnscafide`
+- Delivery path: GitHub issue in the Watchdog repository
+- Schedule: every 15 minutes
+- Failure behavior: open or update one production-availability incident and assign the owner
+- Recovery behavior: comment with healthy run and close the incident
+- Canonical surface checked first: `https://www.watchdogindex.com/property/`
+- Intentional coexistence check: `https://njpropertytaxrelief.com/`
+- Workflow: `.github/workflows/production-uptime-check.yml`
 
-- primary alert owner
-- backup owner if applicable
-- delivery destination
-- one successful test alert
-- acknowledgement/escalation expectation
+## Final public cutover
 
-## 6. Final public cutover
-
-Only after the external controls above are resolved or explicitly accepted by the owner:
+Only after the four remaining external controls above are resolved or explicitly accepted by the owner:
 
 1. Confirm `live_billing_lifecycle = passed`.
 2. Change Checkout release mode from `controlled` to `open`.
@@ -120,6 +142,10 @@ Only after the external controls above are resolved or explicitly accepted by th
 
 **Technical billing: PASSED**
 
+**Portal legal links: USER-CONFIRMED**
+
+**Uptime alert ownership: PASSED**
+
 **Public paid enrollment: CONTROLLED / NOT YET OPEN**
 
-Reason: external legal, tax, entity/insurance, portal-link and alert-ownership controls remain outside engineering acceptance.
+Remaining reason: counsel review, entity/liability separation, E&O/technology liability insurance review, and tax-adviser determination/Stripe Tax configuration as applicable.
