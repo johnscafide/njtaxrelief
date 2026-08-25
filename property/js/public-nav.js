@@ -221,6 +221,7 @@
     bindMenuInteractionContract();
     scopeVerifiedSales();
     loadIndexEnhancements();
+    loadScript('wd-paid-launch-script','/property/js/paid-launch-banner.js');
     runAddressFromQuery();
     document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);
     document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
