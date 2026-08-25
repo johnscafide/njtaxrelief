@@ -11,6 +11,7 @@ const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c
 const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
 const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
 const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
+const PAID_LAUNCH_TAG = '  <script defer src="/property/js/paid-launch-banner.js"></script>\n';
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
 const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
 {
@@ -76,6 +77,15 @@ function installFreeGridImagery(source) {
   return source.replace(OWNERSHIP_TAG, FREE_GRID_TAG + OWNERSHIP_TAG);
 }
 
+function installPaidLaunch(source) {
+  if (source.includes('/property/js/paid-launch-banner.js')) return source;
+  if (!source.includes('</head>')) {
+    console.warn('WATCHDOG_PAID_LAUNCH_HEAD_MARKER_MISSING');
+    return source;
+  }
+  return source.replace('</head>', `${PAID_LAUNCH_TAG}</head>`);
+}
+
 function installEntityGraph(source) {
   if (source.includes(`id="${ENTITY_GRAPH_ID}"`)) return source;
   if (!source.includes('</head>')) {
@@ -139,7 +149,8 @@ export default async function handler(req, res) {
     ]);
     const consentFirst = installConsentFirstAnalytics(source);
     const freeImagery = installFreeGridImagery(consentFirst);
-    const html = canonicalizeWatchdogHtml(useSharedFooter(freeImagery, sharedFooter));
+    const canonical = canonicalizeWatchdogHtml(useSharedFooter(freeImagery, sharedFooter));
+    const html = installPaidLaunch(canonical);
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
