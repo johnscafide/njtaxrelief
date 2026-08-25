@@ -11,6 +11,7 @@ const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c
 const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
 const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
 const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
+const PAID_LAUNCH_META = '  <meta name="watchdog-paid-launch" content="2026-09-16">\n';
 const PAID_LAUNCH_TAG = '  <script defer src="/property/js/paid-launch-banner.js"></script>\n';
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
 const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
@@ -78,12 +79,16 @@ function installFreeGridImagery(source) {
 }
 
 function installPaidLaunch(source) {
-  if (source.includes('/property/js/paid-launch-banner.js')) return source;
-  if (!source.includes('</head>')) {
-    console.warn('WATCHDOG_PAID_LAUNCH_HEAD_MARKER_MISSING');
-    return source;
+  if (source.includes('name="watchdog-paid-launch"') && source.includes('/property/js/paid-launch-banner.js')) return source;
+  if (source.includes('</head>')) {
+    return source.replace('</head>', `${PAID_LAUNCH_META}${PAID_LAUNCH_TAG}</head>`);
   }
-  return source.replace('</head>', `${PAID_LAUNCH_TAG}</head>`);
+  if (source.includes('</body>')) {
+    console.warn('WATCHDOG_PAID_LAUNCH_HEAD_MARKER_MISSING_USING_BODY');
+    return source.replace('</body>', `${PAID_LAUNCH_TAG}</body>`);
+  }
+  console.warn('WATCHDOG_PAID_LAUNCH_HTML_MARKERS_MISSING');
+  return `${source}\n${PAID_LAUNCH_TAG}`;
 }
 
 function installEntityGraph(source) {
@@ -157,6 +162,7 @@ export default async function handler(req, res) {
     res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=3600');
     res.setHeader('Link', '<https://www.watchdogindex.com/>; rel="canonical"');
     res.setHeader('Vary', 'Host');
+    res.setHeader('X-Watchdog-Paid-Launch', html.includes('/property/js/paid-launch-banner.js') ? '2026-09-16' : 'missing');
 
     if (req.method === 'HEAD') return res.end();
     return res.end(html);
