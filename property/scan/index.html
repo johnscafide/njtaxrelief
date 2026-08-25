@@ -28,4 +28,38 @@
 <div class="sc-form"><div class="sc-f"><label for="sc-county">County</label><select id="sc-county" onchange="scCounty(this.value)"><option value="">Choose a county</option></select></div><div class="sc-f"><label for="sc-town">Municipality</label><select id="sc-town" disabled><option value="">Choose a county first</option></select></div><div class="sc-f narrow"><label for="sc-years">Sale within</label><select id="sc-years"><option value="2">2 years</option><option value="3" selected>3 years</option><option value="6">All on file</option></select></div><div class="sc-f narrow"><label for="sc-min">Min. saving</label><select id="sc-min"><option value="0">Any</option><option value="250" selected>$250 a year</option><option value="500">$500 a year</option><option value="1000">$1,000 a year</option></select></div><button class="sc-run" onclick="scRun()"><i class="fas fa-magnifying-glass-chart"></i> Run scan</button></div><p class="sc-cov">Verified sales currently on file cover <b>2024 to 2026</b>. New Jersey publishes one sales file per year, so earlier years can be added as they are loaded.</p><div id="sc-out"></div></div>
 </div></div></div></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/access-guard.js?v=20260807a"></script><script src="/property/js/plan-context.js?v=20260807a"></script><script src="/property/js/sidemenu.js?v=20260809f"></script><script src="/property/js/scan.js?v=20260809g"></script>
+<script>
+(function(){
+  'use strict';
+  var params=new URLSearchParams(window.location.search);
+  if(params.get('mode')!=='attorney')return;
+  document.title='Attorney Appeal Pipeline | Professional Hub';
+  var headerTitle=document.querySelector('.top .who h1');
+  var headerMeta=document.querySelector('.top .who h1 + span');
+  var intro=document.querySelector('.sc-intro');
+  var runButton=document.querySelector('.sc-run');
+  if(headerTitle)headerTitle.textContent='Attorney Appeal Pipeline';
+  if(headerMeta)headerMeta.textContent='New Jersey Chapter 123 triage · Pro+';
+  if(intro){
+    var eyebrow=intro.querySelector('.sc-eyebrow');
+    var heading=intro.querySelector('h2');
+    var copy=intro.querySelector('p');
+    if(eyebrow)eyebrow.textContent='Attorney appeal triage';
+    if(heading)heading.textContent='Open the highest-dollar files first.';
+    if(copy)copy.textContent='This view uses governed New Jersey Chapter 123 screening and verified-sale evidence, then ranks returned files by supported estimated annual tax reduction. It does not predict an appeal outcome, calculate or recommend a fee, supply filing deadlines, or identify owner contact data. Every result requires professional legal and factual review before action.';
+  }
+  if(runButton)runButton.innerHTML='<i class="fas fa-scale-balanced"></i> Run attorney triage';
+  var out=document.getElementById('sc-out');
+  var pendingDollarSort=false;
+  if(out&&typeof MutationObserver!=='undefined'){
+    new MutationObserver(function(){
+      if(out.querySelector('.sc-load')){pendingDollarSort=true;return;}
+      if(pendingDollarSort&&out.querySelector('.sc-res')&&typeof window.scSort==='function'){
+        pendingDollarSort=false;
+        window.scSort('saving');
+      }
+    }).observe(out,{childList:true});
+  }
+})();
+</script>
 </body></html>
