@@ -4,7 +4,7 @@ const WATCHDOG_HOST = 'www.watchdogindex.com';
 const INDEXNOW_KEY_PATH = '/c04eb5246cd74475b86188f12c31e21b.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
-const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
+const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
 const LEGACY_FAQ_PATHS = new Set([
   '/property/faq',
@@ -72,9 +72,13 @@ export default function middleware(request) {
   if (url.pathname === '/robots.txt') {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-robots');
   }
-  if (SITEMAP_FILE.test(url.pathname)) {
+  // The primary sitemap is dynamically normalized/aggregated. Typed sitemap
+  // files must pass through unchanged so Search Console can measure each
+  // public cluster independently instead of receiving the aggregate feed.
+  if (url.pathname === '/sitemap.xml') {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
   }
+  if (TYPED_SITEMAP_FILE.test(url.pathname)) return next();
 
   // Retire compatibility URLs for public Watchdog pages on the canonical host.
   // These redirects prevent old /property/* copies from exposing stale contact
