@@ -1,0 +1,49 @@
+{
+  "version": "2026-08-25.1",
+  "canonical_brand": "Watchdog",
+  "canonical_origin": "https://www.watchdogindex.com",
+  "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
+  "platforms": [
+    {"id":"chatgpt","name":"ChatGPT Search","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"OAI-SearchBot"},
+    {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot"},
+    {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Google Search crawling policies"},
+    {"id":"perplexity","name":"Perplexity","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"PerplexityBot"},
+    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot"},
+    {"id":"claude","name":"Claude","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
+    {"id":"grok","name":"Grok","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
+    {"id":"meta_ai","name":"Meta AI","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
+    {"id":"future_answer_engine","name":"Future answer engines","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"adopt only documented crawler/indexing contracts"}
+  ],
+  "scorecard_fields": [
+    "watchdog_mentioned",
+    "watchdog_cited",
+    "canonical_watchdog_url_cited",
+    "watchdog_position_if_ranked",
+    "factual_accuracy",
+    "watchdog_original_data_used",
+    "competing_sources_cited",
+    "notes",
+    "checked_at"
+  ],
+  "prompts": [
+    {"id":"brand-entity","category":"entity","prompt":"What is Watchdog Property Intelligence in New Jersey, and what does it do?","target_urls":["https://www.watchdogindex.com/","https://www.watchdogindex.com/robust"]},
+    {"id":"chapter-123","category":"property-tax-appeals","prompt":"How does New Jersey Chapter 123 work, and how can a homeowner tell whether an assessment may be outside the common level range?","target_urls":["https://www.watchdogindex.com/glossary/chapter-123","https://www.watchdogindex.com/appeal-savings-estimator"]},
+    {"id":"assessed-vs-market","category":"property-tax-basics","prompt":"What is the difference between assessed value and market value for New Jersey property taxes?","target_urls":["https://www.watchdogindex.com/assessed-value-vs-market-value"]},
+    {"id":"revaluation","category":"municipal-change","prompt":"What is the difference between a revaluation and a reassessment in New Jersey?","target_urls":["https://www.watchdogindex.com/revaluation-reassessment-guide","https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list"]},
+    {"id":"tax-rates","category":"municipal-data","prompt":"Where can I compare New Jersey municipal property tax rates and understand what the rates mean?","target_urls":["https://www.watchdogindex.com/town-compare"]},
+    {"id":"buyer-estimate","category":"home-buying","prompt":"How can I estimate the property taxes and carrying costs before buying a home in New Jersey?","target_urls":["https://www.watchdogindex.com/property-tax-estimator","https://www.watchdogindex.com/home-buying-cost-calculator"]},
+    {"id":"senior-relief","category":"tax-relief","prompt":"What New Jersey property tax relief programs should a senior homeowner know about in 2026?","target_urls":["https://www.watchdogindex.com/senior-benefit-estimator","https://www.watchdogindex.com/insights/stay-nj-august-2026-payment-2027-rules"]},
+    {"id":"tax-bill","category":"property-tax-basics","prompt":"How do I read a New Jersey property tax bill and understand the assessment, tax rate, and annual tax?","target_urls":["https://www.watchdogindex.com/how-to-read-nj-property-tax-bill"]},
+    {"id":"professional-tool","category":"commercial-intent","prompt":"What tools are available for New Jersey real estate professionals who need property tax, assessment, municipal, permit, and change intelligence?","target_urls":["https://www.watchdogindex.com/professionals","https://www.watchdogindex.com/pro"]},
+    {"id":"propertyshark-alternative","category":"commercial-comparison","prompt":"What is a good PropertyShark alternative for New Jersey-specific property tax and assessment intelligence?","target_urls":["https://www.watchdogindex.com/alternatives/propertyshark"]},
+    {"id":"propstream-alternative","category":"commercial-comparison","prompt":"What is a good PropStream alternative if most of my property work is in New Jersey and I care about assessment and municipal intelligence?","target_urls":["https://www.watchdogindex.com/alternatives/propstream"]},
+    {"id":"trust-methodology","category":"trust","prompt":"How does Watchdog build and source its New Jersey property intelligence, and what is the ROBUST framework?","target_urls":["https://www.watchdogindex.com/robust","https://www.watchdogindex.com/trust"]}
+  ],
+  "rules": [
+    "Do not claim a platform cited Watchdog unless the citation is directly observable in that platform or an official performance report.",
+    "Do not simulate or fabricate proprietary answer-engine results.",
+    "Prefer canonical https://www.watchdogindex.com URLs in all benchmark evidence.",
+    "Re-check official crawler and publisher documentation before changing robots policy for a platform.",
+    "Treat Bing AI Performance, Search Console, first-party referral telemetry, and direct platform evidence as separate evidence classes."
+  ]
+}
