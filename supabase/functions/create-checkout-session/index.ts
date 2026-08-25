@@ -399,12 +399,14 @@ Deno.serve(async (req) => {
       mode: 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
       ...(customerId ? { customer: customerId } : user.email ? { customer_email: user.email } : {}),
+      ...(customerId ? { customer_update: { address: 'auto' } } : {}),
       client_reference_id: user.id,
       metadata,
       subscription_data: { metadata },
+      automatic_tax: { enabled: true },
       success_url: `${site}${account}?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${site}${account}?checkout=cancelled`,
-      billing_address_collection: 'auto',
+      billing_address_collection: 'required',
       integration_identifier: 'watchdog_web_kqrmxpta'
     });
 
@@ -418,7 +420,8 @@ Deno.serve(async (req) => {
       metadata: {
         provider: 'stripe', billing_tier: tier, cadence, price_id: priceId,
         checkout_mode: control.mode, checkout_control_source: control.source,
-        stripe_mode: liveMode ? 'live' : 'test', return_site: site
+        stripe_mode: liveMode ? 'live' : 'test', return_site: site,
+        automatic_tax: true
       }
     });
 
