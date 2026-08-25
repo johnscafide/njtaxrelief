@@ -161,13 +161,11 @@ try {
       const screenshot = `${viewport.key}-${surface.key}.png`;
       await page.screenshot({ path: path.join(evidenceDir, screenshot), fullPage: true });
 
+      const genericSurfaceReady = !blocked && accessPending === 0 && !tinyBody;
       const passed = !navigationError &&
         (responseStatus === null || responseStatus < 400) &&
-        !blocked &&
-        accessPending === 0 &&
-        !tinyBody &&
         pageErrors.length === 0 &&
-        (surface.key !== 'index' || profileInteraction?.passed === true);
+        (surface.key === 'index' ? profileInteraction?.passed === true : genericSurfaceReady);
 
       results.push({
         surface: surface.key,
