@@ -112,7 +112,9 @@ const expectedClusters = {
     'https://www.watchdogindex.com/nj-property-tax-calendar'
   ],
   'sitemap-statistics.xml': [
-    'https://www.watchdogindex.com/statistics/nj-property-tax-rates-by-town-2026'
+    'https://www.watchdogindex.com/statistics/nj-property-tax-rates-by-town-2026',
+    'https://www.watchdogindex.com/statistics/highest-property-tax-rates-new-jersey-2026',
+    'https://www.watchdogindex.com/statistics/lowest-property-tax-rates-new-jersey-2026'
   ]
 };
 
