@@ -94,7 +94,7 @@
     if(!isPropertyLanding()||document.getElementById('wd-mapless-photo-cta-style'))return;
     var s=document.createElement('style');
     s.id='wd-mapless-photo-cta-style';
-    s.textContent='#plm-photos .wd-mapless-copy{display:none!important}#plm-photos .wd-mapless-photo-note{margin-top:8px!important}#plm-photos .wd-mapless-photo-link{color:#9eece4!important;font-weight:850;text-decoration:underline;text-underline-offset:3px}#plm-photos .wd-mapless-photo-link:hover,#plm-photos .wd-mapless-photo-link:focus-visible{color:#fff!important}';
+    s.textContent='#plm-photos .wd-mapless-copy{display:none!important}#plm-photos .wd-mapless-photo-note{margin-top:8px!important}#plm-photos .wd-mapless-photo-link{color:#9eece4!important;font-weight:850;text-decoration:underline;text-underline-offset:3px}#plm-photos .wd-mapless-photo-link:hover,#plm-photos .wd-mapless-photo-link:focus-visible{color:#fff!important}@media(min-width:701px){#plm-photos{grid-template-columns:minmax(0,1fr)!important;gap:0!important}#plm-photos .wd-mapless-property-hero{grid-column:1/-1!important;width:100%!important}}';
     document.head.appendChild(s);
   }
 
