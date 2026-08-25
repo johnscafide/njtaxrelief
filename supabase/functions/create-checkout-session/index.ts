@@ -235,10 +235,10 @@ Deno.serve(async (req) => {
     return json(req, { error: isMove ? 'Watchdog Move is awaiting final paid lifecycle acceptance.' : 'Paid enrollment is awaiting final Live billing acceptance.', code: isMove ? 'MOVE_GATE_NOT_PASSED' : 'BILLING_GATE_NOT_PASSED' }, 503);
   }
 
-  const stripeKey = Deno.env.get('STRIPE_SECRET_KEY');
+  const stripeKey = String(Deno.env.get('STRIPE_SECRET_KEY') || '').trim();
   if (!stripeKey) return json(req, { error: 'Stripe Checkout is not configured yet.', code: 'STRIPE_NOT_CONFIGURED' }, 503);
-  const liveMode = stripeKey.startsWith('sk_live_');
-  const testMode = stripeKey.startsWith('sk_test_');
+  const liveMode = stripeKey.startsWith('sk_live_') || stripeKey.startsWith('rk_live_');
+  const testMode = stripeKey.startsWith('sk_test_') || stripeKey.startsWith('rk_test_');
   if (!liveMode && !testMode) return json(req, { error: 'Stripe Checkout key mode is not recognized.', code: 'STRIPE_KEY_MODE_INVALID' }, 503);
 
   const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
