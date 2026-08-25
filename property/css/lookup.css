@@ -22,3 +22,28 @@
 .wd-recent-landing {
   background: var(--bg) !important;
 }
+
+/* Index hero only: use the transparent white-text Watchdog lockup while the
+   navigation sits over the hero photo. Once the nav becomes solid/white, the
+   shared brand layer resumes control and uses the standard blue-text logo. */
+body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
+  width: 220px !important;
+  height: 54px !important;
+  max-width: 40vw !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  background-image: url('/property/branding/watchdog-logo-white-long-trans.png') !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: contain !important;
+  box-shadow: none !important;
+}
+
+@media (max-width: 560px) {
+  body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
+    width: 190px !important;
+    height: 64px !important;
+    max-width: 58vw !important;
+    padding: 0 !important;
+  }
+}
