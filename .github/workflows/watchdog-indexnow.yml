@@ -1,0 +1,55 @@
+name: Watchdog IndexNow and crawler contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/watchdog-index-indexnow-key.js'
+      - 'api/watchdog-index-robots.js'
+      - 'middleware.js'
+      - 'scripts/indexnow-submit.mjs'
+      - 'property/tests/watchdog-indexnow-contract.mjs'
+      - '.github/workflows/watchdog-indexnow.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'api/watchdog-index-indexnow-key.js'
+      - 'api/watchdog-index-robots.js'
+      - 'middleware.js'
+      - 'scripts/indexnow-submit.mjs'
+      - 'property/tests/watchdog-indexnow-contract.mjs'
+      - '.github/workflows/watchdog-indexnow.yml'
+  workflow_dispatch:
+    inputs:
+      urls:
+        description: 'Canonical Watchdog URLs changed since IndexNow was enabled (space, comma, or newline separated)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify IndexNow ownership, routing and crawler policy
+        run: node property/tests/watchdog-indexnow-contract.mjs
+
+  submit:
+    if: github.event_name == 'workflow_dispatch'
+    needs: contract
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Submit changed public URLs to IndexNow
+        env:
+          INDEXNOW_URLS: ${{ inputs.urls }}
+        run: node scripts/indexnow-submit.mjs
