@@ -162,10 +162,7 @@ function configuredPriceId(tier: Tier, cadence: Cadence) {
     }
   };
   const configured = String(Deno.env.get(names[tier][cadence]) || '').trim();
-  if (configured) return configured;
-  if (tier === 'pro' && cadence === 'monthly') return String(Deno.env.get('STRIPE_PRICE_PRO') || '').trim() || null;
-  if (tier === 'pro_plus' && cadence === 'monthly') return String(Deno.env.get('STRIPE_PRICE_PRO_PLUS') || '').trim() || null;
-  return null;
+  return configured || null;
 }
 
 function matchesSubscriptionPrice(price: Stripe.Price, tier: Tier, cadence: Cadence) {
@@ -336,21 +333,6 @@ Deno.serve(async (req) => {
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
 
-  let price: Stripe.Price;
-  try {
-    price = await resolvePrice(stripe, tier, cadence);
-  } catch (error) {
-    console.error('STRIPE_PRICE_RESOLUTION_ERROR', error);
-    const code = isStripeAuthError(error) ? 'STRIPE_API_KEY_INVALID' : 'PRICE_NOT_CONFIGURED';
-    const message = code === 'STRIPE_API_KEY_INVALID'
-      ? 'Stripe rejected the configured Checkout API credential.'
-      : 'That Stripe price could not be resolved safely in this environment.';
-    return json(req, { error: message, code }, 503);
-  }
-  const liveMode = price.livemode === true;
-  if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
-  const priceId = price.id;
-
   const { data: entitlement, error: entitlementError } = await admin
     .from('account_entitlements')
     .select('plan_tier,billing_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
@@ -384,6 +366,21 @@ Deno.serve(async (req) => {
       return json(req, { error: 'Could not open Stripe billing management.', code: 'STRIPE_PORTAL_ERROR' }, 502);
     }
   }
+
+  let price: Stripe.Price;
+  try {
+    price = await resolvePrice(stripe, tier, cadence);
+  } catch (error) {
+    console.error('STRIPE_PRICE_RESOLUTION_ERROR', error);
+    const code = isStripeAuthError(error) ? 'STRIPE_API_KEY_INVALID' : 'PRICE_NOT_CONFIGURED';
+    const message = code === 'STRIPE_API_KEY_INVALID'
+      ? 'Stripe rejected the configured Checkout API credential.'
+      : 'That Stripe price could not be resolved safely in this environment.';
+    return json(req, { error: message, code }, 503);
+  }
+  const liveMode = price.livemode === true;
+  if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+  const priceId = price.id;
 
   const account = accountPath(site);
   const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
