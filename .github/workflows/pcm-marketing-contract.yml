@@ -1,0 +1,43 @@
+name: PCM Marketing Studio contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/marketing-studio-pcm-workspace.js'
+      - 'property/js/marketing-studio-creative.js'
+      - 'property/marketing-studio/**'
+      - 'property/tests/marketing-creative-contracts.mjs'
+      - 'supabase/functions/pcm-webhook/**'
+      - 'supabase/functions/pcm-sandbox-catalog/**'
+      - 'supabase/functions/pcm-direct-mail/**'
+      - 'supabase/functions/marketing-direct-mail-launch/**'
+      - 'supabase/functions/marketing-direct-mail-fulfill/**'
+      - 'supabase/functions/stripe-webhook/**'
+      - 'supabase/config.toml'
+      - '.github/workflows/pcm-marketing-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/marketing-studio-pcm-workspace.js'
+      - 'property/js/marketing-studio-creative.js'
+      - 'property/marketing-studio/**'
+      - 'property/tests/marketing-creative-contracts.mjs'
+      - 'supabase/functions/pcm-webhook/**'
+      - 'supabase/functions/pcm-sandbox-catalog/**'
+      - 'supabase/functions/pcm-direct-mail/**'
+      - 'supabase/functions/marketing-direct-mail-launch/**'
+      - 'supabase/functions/marketing-direct-mail-fulfill/**'
+      - 'supabase/functions/stripe-webhook/**'
+      - 'supabase/config.toml'
+      - '.github/workflows/pcm-marketing-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify PCM Marketing Studio safety contract
+        run: node property/tests/marketing-creative-contracts.mjs
