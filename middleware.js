@@ -1,7 +1,7 @@
 import { next, rewrite } from '@vercel/functions';
 
 const WATCHDOG_HOST = 'www.watchdogindex.com';
-const INDEXNOW_KEY_PATH = '/01ac3ca151cb7513bdda555fac7e5469.txt';
+const INDEXNOW_KEY_PATH = '/c04eb5246cd74475b86188f12c31e21b.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const SITEMAP_FILE = /^\/sitemap(?:-[a-z0-9-]+)?\.xml$/i;
