@@ -93,6 +93,10 @@ function validMode(value: unknown): CheckoutMode | null {
   return ['closed', 'controlled', 'open'].includes(normalized) ? normalized as CheckoutMode : null;
 }
 
+function isStripeAuthError(error: unknown) {
+  return Boolean(error && typeof error === 'object' && (error as any).type === 'StripeAuthenticationError');
+}
+
 async function releaseControl(admin: any) {
   const envMode = validMode(Deno.env.get('BILLING_CHECKOUT_MODE') || Deno.env.get('STRIPE_LIVE_CHECKOUT_MODE'));
   const envUsers = String(Deno.env.get('BILLING_CONTROLLED_USER_IDS') || Deno.env.get('STRIPE_LIVE_CONTROLLED_USER_IDS') || '')
@@ -164,30 +168,42 @@ function configuredPriceId(tier: Tier, cadence: Cadence) {
   return null;
 }
 
-async function resolvePriceId(stripe: Stripe, tier: Tier, cadence: Cadence) {
-  const override = configuredPriceId(tier, cadence);
-  if (override) return override;
-
+function matchesSubscriptionPrice(price: Stripe.Price, tier: Tier, cadence: Cadence) {
   const expected = PRICE_CATALOG[tier][cadence];
-  const result = await stripe.prices.list({ lookup_keys: [expected.lookup_key], active: true, limit: 10 });
-  const matches = result.data.filter(price =>
+  return (
+    price.active &&
     price.currency.toLowerCase() === 'usd' &&
     price.unit_amount === expected.amount &&
     price.type === 'recurring' &&
     price.recurring?.interval === (cadence === 'monthly' ? 'month' : 'year')
   );
-  if (matches.length !== 1) throw new Error(`Expected exactly one active Stripe Price for ${expected.lookup_key}; found ${matches.length}.`);
-  return matches[0].id;
 }
 
-async function resolveMovePriceId(stripe: Stripe) {
+async function resolvePrice(stripe: Stripe, tier: Tier, cadence: Cadence) {
+  const override = configuredPriceId(tier, cadence);
+  if (override) {
+    const price = await stripe.prices.retrieve(override);
+    if (!matchesSubscriptionPrice(price, tier, cadence)) {
+      throw new Error(`Configured Stripe Price does not match the governed ${tier} ${cadence} catalog entry.`);
+    }
+    return price;
+  }
+
+  const expected = PRICE_CATALOG[tier][cadence];
+  const result = await stripe.prices.list({ lookup_keys: [expected.lookup_key], active: true, limit: 10 });
+  const matches = result.data.filter(price => matchesSubscriptionPrice(price, tier, cadence));
+  if (matches.length !== 1) throw new Error(`Expected exactly one active Stripe Price for ${expected.lookup_key}; found ${matches.length}.`);
+  return matches[0];
+}
+
+async function resolveMovePrice(stripe: Stripe) {
   const override = String(Deno.env.get('STRIPE_PRICE_WATCHDOG_MOVE') || '').trim();
   if (override) {
     const price = await stripe.prices.retrieve(override);
     if (!price.active || price.currency.toLowerCase() !== 'usd' || price.unit_amount !== MOVE_PRICE.amount || price.type !== 'one_time' || price.recurring) {
       throw new Error('Configured Watchdog Move Stripe Price does not match the governed one-time $29 price.');
     }
-    return price.id;
+    return price;
   }
   const result = await stripe.prices.list({ lookup_keys: [MOVE_PRICE.lookup_key], active: true, limit: 10 });
   const matches = result.data.filter(price =>
@@ -197,7 +213,7 @@ async function resolveMovePriceId(stripe: Stripe) {
     !price.recurring
   );
   if (matches.length !== 1) throw new Error(`Expected exactly one active Stripe Price for ${MOVE_PRICE.lookup_key}; found ${matches.length}.`);
-  return matches[0].id;
+  return matches[0];
 }
 
 Deno.serve(async (req) => {
@@ -237,24 +253,26 @@ Deno.serve(async (req) => {
 
   const stripeKey = String(Deno.env.get('STRIPE_SECRET_KEY') || '').trim();
   if (!stripeKey) return json(req, { error: 'Stripe Checkout is not configured yet.', code: 'STRIPE_NOT_CONFIGURED' }, 503);
-  const liveMode = stripeKey.startsWith('sk_live_') || stripeKey.startsWith('rk_live_');
-  const testMode = stripeKey.startsWith('sk_test_') || stripeKey.startsWith('rk_test_');
-  if (!liveMode && !testMode) return json(req, { error: 'Stripe Checkout key mode is not recognized.', code: 'STRIPE_KEY_MODE_INVALID' }, 503);
-
-  const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
-  if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
 
   const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
   const site = requestSite(req);
+  const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
 
   if (isMove) {
-    let priceId: string;
+    let price: Stripe.Price;
     try {
-      priceId = await resolveMovePriceId(stripe);
+      price = await resolveMovePrice(stripe);
     } catch (error) {
       console.error('STRIPE_MOVE_PRICE_RESOLUTION_ERROR', error);
-      return json(req, { error: 'The Watchdog Move price could not be resolved safely in this environment.', code: 'MOVE_PRICE_NOT_CONFIGURED' }, 503);
+      const code = isStripeAuthError(error) ? 'STRIPE_API_KEY_INVALID' : 'MOVE_PRICE_NOT_CONFIGURED';
+      const message = code === 'STRIPE_API_KEY_INVALID'
+        ? 'Stripe rejected the configured Checkout API credential.'
+        : 'The Watchdog Move price could not be resolved safely in this environment.';
+      return json(req, { error: message, code }, 503);
     }
+    const liveMode = price.livemode === true;
+    if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+    const priceId = price.id;
 
     const metadata = {
       supabase_user_id: user.id,
@@ -318,13 +336,20 @@ Deno.serve(async (req) => {
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
 
-  let priceId: string;
+  let price: Stripe.Price;
   try {
-    priceId = await resolvePriceId(stripe, tier, cadence);
+    price = await resolvePrice(stripe, tier, cadence);
   } catch (error) {
     console.error('STRIPE_PRICE_RESOLUTION_ERROR', error);
-    return json(req, { error: 'That Stripe price could not be resolved safely in this environment.', code: 'PRICE_NOT_CONFIGURED' }, 503);
+    const code = isStripeAuthError(error) ? 'STRIPE_API_KEY_INVALID' : 'PRICE_NOT_CONFIGURED';
+    const message = code === 'STRIPE_API_KEY_INVALID'
+      ? 'Stripe rejected the configured Checkout API credential.'
+      : 'That Stripe price could not be resolved safely in this environment.';
+    return json(req, { error: message, code }, 503);
   }
+  const liveMode = price.livemode === true;
+  if (liveMode && isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
+  const priceId = price.id;
 
   const { data: entitlement, error: entitlementError } = await admin
     .from('account_entitlements')
