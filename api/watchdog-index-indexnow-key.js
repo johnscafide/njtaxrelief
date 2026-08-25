@@ -1,5 +1,5 @@
 const CANONICAL_HOST = 'www.watchdogindex.com';
-const INDEXNOW_KEY = '01ac3ca151cb7513bdda555fac7e5469';
+const INDEXNOW_KEY = 'c04eb5246cd74475b86188f12c31e21b';
 const INDEXNOW_KEY_PATH = `/${INDEXNOW_KEY}.txt`;
 
 function requestHost(req) {
