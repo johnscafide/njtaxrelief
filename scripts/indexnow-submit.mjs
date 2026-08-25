@@ -2,7 +2,7 @@ import process from 'node:process';
 
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
-const INDEXNOW_KEY = '01ac3ca151cb7513bdda555fac7e5469';
+const INDEXNOW_KEY = 'c04eb5246cd74475b86188f12c31e21b';
 const INDEXNOW_KEY_LOCATION = `${CANONICAL_ORIGIN}/${INDEXNOW_KEY}.txt`;
 const INDEXNOW_ENDPOINT = process.env.INDEXNOW_ENDPOINT || 'https://api.indexnow.org/indexnow';
 
