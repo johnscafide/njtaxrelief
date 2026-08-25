@@ -204,11 +204,7 @@
       var m=url.match(/\/property\/sales-([a-z-]+)\.json(?:\?|$)/i);
       if(m&&district&&/^\d{4}$/.test(district)){
         var scoped='/api/sales-by-district?county='+encodeURIComponent(m[1].toLowerCase())+'&district='+encodeURIComponent(district);
-        return original(scoped,init).then(function(r){
-          if(r.ok)return r;
-          district='';try{sessionStorage.removeItem('watchdogCurrentDistrict');}catch(_error){}
-          return original(input,init);
-        }).catch(function(){return original(input,init);});
+        return original(scoped,init);
       }
       return original(input,init);
     };
