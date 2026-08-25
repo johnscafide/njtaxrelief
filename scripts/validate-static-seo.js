@@ -117,7 +117,8 @@ const expectedClusters = {
     'https://www.watchdogindex.com/statistics/lowest-property-tax-rates-new-jersey-2026',
     'https://www.watchdogindex.com/statistics/nj-property-tax-appeal-win-rates-by-county-2026',
     'https://www.watchdogindex.com/statistics/least-uniform-property-assessments-new-jersey-2026',
-    'https://www.watchdogindex.com/statistics/nj-school-tax-levy-share-by-town-2026'
+    'https://www.watchdogindex.com/statistics/nj-school-tax-levy-share-by-town-2026',
+    'https://www.watchdogindex.com/statistics/biggest-property-tax-rate-increases-new-jersey-2026'
   ]
 };
 
