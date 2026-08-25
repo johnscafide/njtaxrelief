@@ -1,0 +1,130 @@
+/* Approved Watchdog logo assets · 2026-08-25
+   Full horizontal lockup where space allows; square mark in constrained UI. */
+
+.wd-nav .wd-logo{
+  width:220px!important;
+  height:54px!important;
+  max-width:30vw!important;
+  flex:0 0 auto!important;
+  position:relative!important;
+  border-radius:14px!important;
+  background-color:rgba(255,255,255,.96)!important;
+  background-image:url('/property/branding/watchdog-logo-horizontal.svg')!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:calc(100% - 16px) auto!important;
+  box-shadow:0 8px 24px rgba(13,42,88,.16)!important;
+  text-shadow:none!important;
+  overflow:hidden!important;
+}
+.wd-nav .wd-logo>i,.wd-nav .wd-logo>span,
+.wd-universal-brand>span,
+.wd4-brand>.wd4-brand-mark,.wd4-brand>.wd4-brand-copy,
+.hm27-brand>.hm27-brand-mark,.hm27-brand>.hm27-brand-copy{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+.wd-nav.solid .wd-logo,
+body.nav-solid .wd-nav .wd-logo,
+body.md-page .wd-nav .wd-logo{
+  background-color:transparent!important;
+  box-shadow:none!important;
+}
+
+/* Canonical product topbars and universal drawers. */
+.wd4-brand,.hm27-brand,.wd-universal-brand{
+  display:block!important;
+  width:224px!important;
+  height:54px!important;
+  min-width:224px!important;
+  flex:0 0 224px!important;
+  position:relative!important;
+  background-image:url('/property/branding/watchdog-logo-horizontal.svg')!important;
+  background-position:left center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
+}
+.wd4-nav-head .wd4-brand,.hm27-nav-head .hm27-brand,.wd-universal-nav-head .wd-universal-brand{
+  width:218px!important;
+  min-width:218px!important;
+  flex-basis:218px!important;
+  height:51px!important;
+}
+
+/* Universal-menu CSS is injected at runtime. These higher-specificity rules keep
+   the approved lockup authoritative even when that later stylesheet arrives. */
+html body .wd4-nav-head .wd4-brand,
+html body .hm27-nav-head .hm27-brand,
+html body .wd-universal-nav-head .wd-universal-brand{
+  width:218px!important;
+  min-width:218px!important;
+  flex:0 0 218px!important;
+  height:51px!important;
+  background-image:url('/property/branding/watchdog-logo-horizontal.svg')!important;
+  background-position:left center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
+}
+html body .wd4-nav-head .wd4-brand-mark,
+html body .wd4-nav-head .wd4-brand-copy,
+html body .hm27-nav-head .hm27-brand-mark,
+html body .hm27-nav-head .hm27-brand-copy,
+html body .wd-universal-nav-head .wd-universal-brand-mark,
+html body .wd-universal-nav-head .wd-universal-brand-copy{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
+/* Compact app/sidebar identity uses the square mark, not a squeezed wordmark. */
+.db-side-brand>span,
+.wd4-bootstrap-mark{
+  background-color:transparent!important;
+  background-image:url('/property/branding/watchdog-mark.svg')!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-size:cover!important;
+  box-shadow:0 8px 18px rgba(47,109,246,.20)!important;
+  overflow:hidden!important;
+}
+.db-side-brand>span i,.wd4-bootstrap-mark i{display:none!important}
+
+@media(max-width:760px){
+  .wd4-brand,.hm27-brand{
+    width:166px!important;
+    min-width:166px!important;
+    flex-basis:166px!important;
+    height:44px!important;
+  }
+}
+
+@media(max-width:560px){
+  .wd-nav .wd-logo{
+    width:48px!important;
+    height:48px!important;
+    max-width:none!important;
+    padding:0!important;
+    border-radius:14px!important;
+    background-color:#fff!important;
+    background-image:url('/property/branding/watchdog-mark.svg')!important;
+    background-size:cover!important;
+    box-shadow:0 6px 18px rgba(11,49,131,.20)!important;
+  }
+  .wd-nav.solid .wd-logo,body.nav-solid .wd-nav .wd-logo,body.md-page .wd-nav .wd-logo{
+    background-color:#fff!important;
+    box-shadow:0 4px 14px rgba(11,49,131,.12)!important;
+  }
+}
