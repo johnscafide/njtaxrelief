@@ -40,7 +40,7 @@ Watchdog audiences are based on governed property intelligence. Do not convert M
 
 ## PCM initial Watchdog launch contract
 
-Vendor behavior below was confirmed directly by PCM Integrations on 2026-08-19 unless a later date is stated. It is the operating contract for the initial Watchdog Direct Mail launch.
+Vendor behavior below was confirmed directly by PCM Integrations on 2026-08-19, 2026-08-21 and 2026-08-24 as noted. It is the operating contract for the initial Watchdog Direct Mail launch.
 
 ### Product scope
 
@@ -58,7 +58,7 @@ Vendor behavior below was confirmed directly by PCM Integrations on 2026-08-19 u
 - If some recipients fail validation, production continues with the valid recipients only.
 - PCM bills Watchdog only for recipients that pass validation. There is no provider refund/credit step for invalid recipients because those pieces are not charged in the first place.
 
-### Order lifecycle
+### Order lifecycle and cancellation
 
 PCM confirmed these order-level statuses:
 
@@ -69,9 +69,14 @@ PCM confirmed these order-level statuses:
 
 Watchdog may normalize `mailing` to the internal aggregate state `mailed`, but the raw PCM status should also be retained.
 
-An order can be edited/cancelled only while the PCM order status is `pending`. Once it becomes `processing`, cancellation is no longer permitted.
+PCM confirmed again on 2026-08-24 that only `pending` orders can be cancelled. The single-order and bulk-cancellation contracts use PCM order ID as the identifier. Cancelling an already-cancelled order returns HTTP 400. PCM stated there is no provider requirement to retrieve order status immediately before calling cancellation because only a pending order will succeed.
 
-PCM's current public API site also states that same-day orders can be cancelled through an API call before the cutoff, but the exact current endpoint, method, auth/request shape and response/idempotency contract are not exposed in the evidence available to Watchdog. Production cancellation therefore remains unavailable until those exact values are documented or directly confirmed. Do not infer them from the portal or marketing copy.
+Vendor documentation references supplied by PCM:
+
+- Single order cancellation: `https://docs.pcmintegrations.com/docs/directmail-api/iuc7kuzptpgwv-cancel-order`
+- Bulk cancellation: `https://docs.pcmintegrations.com/docs/directmail-api/gan0r8uot3zqe-bulk-cancel-orders`
+
+Watchdog's product boundary remains stricter: cancellation will be server-only and must refuse a request unless Watchdog's latest verified aggregate order status is `pending`. The actual outbound cancellation call remains fail-closed until the exact HTTP method/path/auth/body and response contract from the current documentation can be mechanically certified in implementation and tests. Do not infer wire details from the documentation slug or portal behavior.
 
 ### Recipient tracking
 
@@ -108,13 +113,20 @@ Watchdog remains merchant-of-record for the customer-facing charge and must keep
 
 The public PCM receiver remains `verify_jwt=false` because PCM is an external webhook sender, but the function must authenticate the request itself before parsing or reconciling it. The implementation intentionally fails closed until the exact PCM signature secret, signature header, signed input and encoding/algorithm contract are configured.
 
-Do not infer the signature header or representation from examples. Configure these only from PCM's current webhook security documentation or a direct vendor confirmation:
+PCM supplied its current webhook-security documentation on 2026-08-24: `https://docs.pcmintegrations.com/docs/directmail-api/e7k3evogf3sgx-webhook-security`. The same vendor confirmation established two operational facts that are safe to implement independently of signature parsing:
+
+- Watchdog must handle duplicates. PCM may legitimately send more than one webhook for an order/recipient, including repeated Mail Tracking updates.
+- When Watchdog returns a non-2xx response, PCM retries up to three times at approximately 1, 5 and 10 minutes.
+
+The current receiver already treats an exact duplicate event as a successful 2xx acknowledgement and keeps recipient-level tracking separate from aggregate order state. Those semantics remain valid.
+
+Do not infer the signature header or representation from examples or URLs. Configure these only from a mechanically verified current PCM security contract:
 
 - `PCM_WEBHOOK_SIGNATURE_SECRET`
 - `PCM_WEBHOOK_SIGNATURE_HEADER`
 - `PCM_WEBHOOK_SIGNATURE_FORMAT`
 
-Certification must also establish any timestamp/prefix/replay rules and exercise valid, invalid, missing, duplicate and replay cases before this gate is considered closed.
+Certification must still establish the exact header, algorithm, signed bytes, encoding, prefix/timestamp/replay rules and exercise valid, invalid, missing, duplicate and replay cases before this gate is closed.
 
 ### Embedded editor boundary
 
@@ -126,26 +138,43 @@ PCM Technical Account Manager confirmation received 2026-08-21 established the s
 - editor authentication refreshes when the editor loads
 - the editor token remains valid for 24 hours
 
-Watchdog requests a fresh editor session on every open and does not persist the editor URL/token. Parent-window save handling accepts events only from the exact iframe `contentWindow`, exact origin derived from the returned editor URL and matching active `designID`. A verified save triggers provider design/proof refresh. Manual **Refresh from PCM** remains available as fallback.
+Watchdog requests a fresh editor session on every open and does not persist the editor URL/token. Parent-window save handling accepts events only from the exact iframe `contentWindow`, exact origin derived from the returned editor URL and matching active `designID`. A verified save triggers provider design/variable/proof refresh. Manual **Refresh from PCM** remains available as fallback.
 
-### Watchdog Studio visual mapping boundary
+### Design variables and Dynamic Image
 
-PCM's current public materials confirm support for variable image data/custom designs, but that capability statement is not an exact current production mapping contract.
+PCM confirmed on 2026-08-24:
 
-Watchdog Studio artwork is stored in the private `marketing-intelligence-visuals` bucket. Watchdog will not make that bucket public or mint an arbitrary expiring provider URL merely to imitate historical examples.
+- PCM resolves a design variable only when that variable exists in the selected design and the corresponding value is supplied with the order.
+- Design variables are authored with double curly brackets, for example `{{firstname}}`, without spaces or special characters in the key.
+- The Get Design by ID response is the authority for which variables a specific design exposes. Do not invent a variable name that the design did not return.
+- Recipient-level variables and global variables are distinct. If a recipient-level value is absent, PCM can fall back to the corresponding global variable; if neither exists, the variable remains blank.
+- Adding PCM's preconfigured **Dynamic Image** asset creates the exact `{{DynamicImage}}` variable.
+- `DynamicImage` is populated with a publicly accessible image URL when the order is placed.
+- The image should remain accessible for at least the three-business-day PCM processing window and should match the Dynamic Image block's aspect ratio to avoid distortion.
+- Existing PCM designs can be modified to add Dynamic Image.
+
+PCM specifically reported that design `35355` did not expose editable variables beyond the standard address-block variables at the time of the vendor review. Therefore Watchdog must not pretend design 35355 already has a Dynamic Image slot. Customize now detects only the exact provider-returned `DynamicImage` key and tells the user to add the PCM Dynamic Image asset in the embedded editor if the slot is absent.
+
+Watchdog Studio artwork remains in the private `marketing-intelligence-visuals` bucket. This confirmation does not authorize making that bucket public. A production mapping still needs a controlled provider-readable asset-delivery mechanism that keeps the exact approved artwork available for PCM's processing window without weakening storage privacy.
+
+The current paid fulfillment payload intentionally leaves `globalDesignVariables` empty. Newly documented design-variable behavior is not enabled for live fulfillment until the asset-delivery, variable-mapping, proof-retention and live-send path is separately certified.
+
+### Complete artwork and proof retention
+
+PCM also confirmed on 2026-08-24 that Watchdog may generate and freeze complete front/back print-ready artwork itself rather than ask PCM to resolve design variables. In that model Watchdog supplies the completed artwork and must follow PCM's current template dimensions, safe areas and bleed requirements. PCM stated it does not currently enforce a specific maximum image dimension or file size for that complete-artwork use case, and the source artwork should remain accessible through the processing window.
+
+PCM's proof engine is on demand and can generate a proof only while it can still access the underlying assets. PCM recommends generating the authoritative proof as part of the order workflow and storing the result on Watchdog's side. Once production is complete or a source asset is unavailable, PCM may no longer be able to reconstruct the proof.
+
+Accordingly:
+
+- a Watchdog Studio preview is never a PCM production proof
+- proof approval must remain tied to a real provider proof
+- live submission must remain disabled until Watchdog has a certified authoritative-proof retention step for the final mapped artwork
+- Customize may show proof/readiness state but must not claim that a provider proof has been archived when it has not
 
 The service-role-only WDD mapping/proof transition RPCs may record a provider mapping and proof only after a real PCM design mapping exists. They do not create provider designs, upload assets, submit orders or approve proofs.
 
-Before automatic Studio visual mapping can be enabled, PCM must provide or confirm the exact current contract for at least:
-
-- supported design/asset mutation or provider-declared image-variable mechanism
-- exact request schema / variable key semantics
-- image delivery requirements, including whether PCM accepts a URL, upload, asset ID or editor-managed asset
-- accepted MIME types, size/availability requirements and URL lifetime if URL-based
-- how the target provider design/image field is identified without Watchdog guessing a slot name
-- how the authoritative proof is refreshed/read after the mapped asset is saved
-
-Until then the frozen Watchdog Studio package remains `provider_contract_pending` and is never represented as a PCM production proof.
+Until the controlled asset-delivery/mapping + proof-retention path is certified, the frozen Watchdog Studio package remains `provider_contract_pending` and is never represented as a PCM production proof.
 
 ## Adding a provider
 
