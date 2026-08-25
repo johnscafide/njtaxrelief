@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 
 process.env.VERCEL_URL = 'watchdog-sitemap-contract.invalid';
 delete process.env.VERCEL_PROJECT_PRODUCTION_URL;
@@ -58,4 +59,24 @@ const wrongHost = responseHarness();
 await handler({ method: 'GET', headers: { host: 'njpropertytaxrelief.com' } }, wrongHost);
 assert.equal(wrongHost.statusCode, 404, 'canonical Watchdog sitemap must not be served from a legacy host');
 
-console.log(`Watchdog sitemap contract PASS (${locs.length} canonical URLs in fixture run)`);
+// Production routing contract: only the primary /sitemap.xml is rewritten to
+// the dynamic aggregator. Typed feeds must remain real static files so search
+// tools can measure the alternatives/calculators/statistics clusters separately.
+const middleware = readFileSync(new URL('../../middleware.js', import.meta.url), 'utf8');
+assert.match(
+  middleware,
+  /url\.pathname\s*===\s*['"]\/sitemap\.xml['"][\s\S]{0,300}watchdog-index-sitemap/,
+  'primary sitemap must route through the canonical dynamic aggregator'
+);
+assert.match(
+  middleware,
+  /TYPED_SITEMAP_FILE\.test\(url\.pathname\)\)\s*return\s+next\(\)/,
+  'typed sitemap files must bypass the aggregate sitemap rewrite'
+);
+assert.doesNotMatch(
+  middleware,
+  /if\s*\(\s*SITEMAP_FILE\.test\(url\.pathname\)\s*\)[\s\S]{0,300}watchdog-index-sitemap/,
+  'broad sitemap wildcard routing would collapse typed feeds into the aggregate sitemap'
+);
+
+console.log(`Watchdog sitemap contract PASS (${locs.length} canonical URLs in fixture run + typed routing guard)`);
