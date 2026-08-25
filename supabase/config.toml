@@ -58,9 +58,6 @@ verify_jwt = false
 [functions.marketing-direct-mail-launch]
 verify_jwt = true
 
-[functions.marketing-direct-mail-cancel]
-verify_jwt = true
-
 [functions.workbench-hydrate]
 verify_jwt = true
 
