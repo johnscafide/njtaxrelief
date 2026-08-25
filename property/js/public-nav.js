@@ -160,9 +160,9 @@
      intentionally NOT one of them; watchdog-universal-menu.js is the one owner. */
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
-    ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css?v=20260825a');
+    ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
-    loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js?v=20260825-index-clean1');
+    loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
   }
 
