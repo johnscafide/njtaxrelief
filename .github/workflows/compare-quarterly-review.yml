@@ -16,7 +16,11 @@ jobs:
         run: |
           echo "Quarterly Watchdog competitor comparison review is due."
           echo "Follow property/docs/compare-verification.md and verify all vendor comparison and alternative pages against official sources."
-          echo "Re-check dated pricing-intent pages before leaving their verified date in place:"
+          echo "Re-check every dated pricing-intent page under property/pricing before leaving its verified date in place:"
           echo "  - /pricing/propstream"
           echo "  - /pricing/propertyradar"
+          echo "  - /pricing/propertyshark"
+          echo "  - /pricing/attom"
+          echo "  - /pricing/regrid"
+          echo "If a new pricing-intent page has been added, include it in this review list."
           echo "If a public price cannot be verified from a first-party source, remove the number rather than carrying it forward."
