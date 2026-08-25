@@ -25,7 +25,7 @@
     if(q('wd-public-menu-interaction-contract'))return;
     var s=document.createElement('style');
     s.id='wd-public-menu-interaction-contract';
-    s.textContent='#wd-public-backdrop{z-index:9400!important}#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}#wd-main-sheet.open a,#wd-main-sheet.open button,#wd-profile-sheet.open a,#wd-profile-sheet.open button{pointer-events:auto!important;touch-action:manipulation!important}';
+    s.textContent='#wd-public-backdrop{z-index:9400!important}#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}#wd-profile-sheet.open{z-index:2147483646!important;pointer-events:auto!important;isolation:isolate!important}body.wd-profile-menu-open #wd-public-backdrop{pointer-events:none!important}#wd-main-sheet.open a,#wd-main-sheet.open button,#wd-profile-sheet.open #wd-profile-content,#wd-profile-sheet.open .wd-universal-profile,#wd-profile-sheet.open .wd-universal-profile>nav,#wd-profile-sheet.open a,#wd-profile-sheet.open button,#wd-profile-sheet.open *{pointer-events:auto!important;touch-action:manipulation!important}';
     (document.head||document.documentElement).appendChild(s);
   }
   function bindMenuInteractionContract(){
@@ -41,6 +41,18 @@
     });
     var back=q('wd-public-backdrop');
     if(back&&back.dataset.wdTapGuard!=='1'){back.dataset.wdTapGuard='1';back.addEventListener('click',close);}
+  }
+  function bindProfileOutsideGuard(){
+    var root=document.documentElement;
+    if(!root||root.dataset.wdProfileOutsideGuard==='1')return;
+    root.dataset.wdProfileOutsideGuard='1';
+    document.addEventListener('pointerdown',function(e){
+      var sheet=q('wd-profile-sheet');
+      if(!sheet||!sheet.classList.contains('open')||sheet.contains(e.target))return;
+      e.preventDefault();
+      e.stopPropagation();
+      close();
+    },true);
   }
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function appRoute(path){
@@ -64,8 +76,8 @@
   function landingCard(x){var query=recentQuery(x),sub=recentSub(x)||'New Jersey',img=street(x),fallback=aerial(x),value=money(x.assessed),meta=[];if(x.yearBuilt)meta.push('<span>'+esc(x.yearBuilt)+'</span>');if(money(x.tax))meta.push('<span>'+esc(money(x.tax))+' tax</span>');var shot='<div class="hd-shot noimg"><i class="fas fa-house"></i></div>';if(img){shot='<div class="hd-shot"><img src="'+esc(img)+'" alt="Street View of '+esc(x.address)+'" loading="lazy"'+(fallback?' data-fallback="'+esc(fallback)+'"':'')+' onerror="this.onerror=null;var f=this.getAttribute(\'data-fallback\');if(f){this.src=f}else{this.parentNode.classList.add(\'noimg\');this.remove()}"></div>';}return '<a class="hd-card wd-recent-card" href="'+appRoute('/')+'?address='+encodeURIComponent(query)+'" aria-label="Open '+esc(query)+'">'+shot+'<div class="hd-body"><div class="hd-val">'+esc(value||'View property')+'</div><div class="hd-meta">'+meta.join('')+'</div><div class="hd-addr">'+esc(x.address)+'</div><div class="hd-sub">'+esc(sub)+'</div></div></a>';}
   function renderLandingRecent(){var old=q('wd-recent-landing');if(!user||!isLandingState()){if(old)old.remove();return;}var rs=recent().slice(0,3),hero=document.querySelector('.pl-hero');if(!rs.length||!hero){if(old)old.remove();return;}ensureRecentStyles();var sec=old||document.createElement('section');sec.id='wd-recent-landing';sec.className='wd-recent-landing';sec.setAttribute('aria-label','Recently viewed properties');sec.innerHTML='<div class="wd-recent-inner"><div class="wd-recent-head"><h2>Recently viewed</h2><span>Your last '+rs.length+' propert'+(rs.length===1?'y':'ies')+'</span></div><div class="wd-recent-grid">'+rs.map(landingCard).join('')+'</div></div>';if(!old)hero.insertAdjacentElement('afterend',sec);}
   function watchSearchState(){if(!document.body||document.body.__wdRecentStateWatch)return;document.body.__wdRecentStateWatch=true;new MutationObserver(function(mutations){for(var i=0;i<mutations.length;i++){if(mutations[i].attributeName==='class'){renderLandingRecent();break;}}}).observe(document.body,{attributes:true,attributeFilter:['class']});window.addEventListener('popstate',renderLandingRecent);}
-  function open(which){close();lastFocus=document.activeElement;var sheet=q(which==='profile'?'wd-profile-sheet':'wd-main-sheet'),back=q('wd-public-backdrop');if(!sheet||!back)return;if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');back.classList.add('open');document.body.classList.add('wd-public-menu-open');var c=sheet.querySelector('.wd-public-close');if(c)c.focus();}
-  function close(){['wd-main-sheet','wd-profile-sheet'].forEach(function(id){var e=q(id);if(e){e.classList.remove('open');e.setAttribute('aria-hidden','true');}});var b=q('wd-public-backdrop');if(b)b.classList.remove('open');document.body.classList.remove('wd-public-menu-open');if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;}
+  function open(which){close();lastFocus=document.activeElement;var sheet=q(which==='profile'?'wd-profile-sheet':'wd-main-sheet'),back=q('wd-public-backdrop');if(!sheet||!back)return;if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');back.classList.add('open');document.body.classList.add('wd-public-menu-open');document.body.classList.toggle('wd-profile-menu-open',which==='profile');var c=sheet.querySelector('.wd-public-close');if(c)c.focus();}
+  function close(){['wd-main-sheet','wd-profile-sheet'].forEach(function(id){var e=q(id);if(e){e.classList.remove('open');e.setAttribute('aria-hidden','true');}});var b=q('wd-public-backdrop');if(b)b.classList.remove('open');document.body.classList.remove('wd-public-menu-open');document.body.classList.remove('wd-profile-menu-open');if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;}
   function signIn(){close();if(window.WatchdogUniversalMenu){var s=window.WatchdogUniversalMenu.state();window.WatchdogUniversalMenu.setUser(s&&s.user||user);var sign=document.querySelector('[data-wd-universal="signin"]');if(sign){sign.click();return;}}if(typeof window.plSignInPrompt==='function')window.plSignInPrompt();}
   function signOut(){close();if(window.WatchdogUniversalMenu){var out=document.querySelector('[data-wd-universal="signout"]');if(out){out.click();return;}}if(typeof window.plSignOut==='function')window.plSignOut();}
   function setUser(u){user=u||null;if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.setUser(user);renderTrigger();renderProfile();renderLandingRecent();}
@@ -75,6 +87,6 @@
   function loadLandingShowcase(){var path=(window.location.pathname||'').replace(/\/+$/,'');if(path!=='/property'&&path!=='/property/index.html'&&path!==''&&path!=='/index.html')return;if(q('wd-showcase-script'))return;var s=document.createElement('script');s.id='wd-showcase-script';s.src='/property/js/landing-showcase.js';s.async=false;document.head.appendChild(s);}
   function loadRobustBrand(){if(q('wd-robust-brand-script'))return;var s=document.createElement('script');s.id='wd-robust-brand-script';s.src='/property/js/robust-public-brand.js';s.defer=true;document.head.appendChild(s);}
   function loadGoogleAddressAutocomplete(){if(!q('pl-addr')&&!q('ss-addr'))return;if(q('wd-nj-address-autocomplete-script'))return;var s=document.createElement('script');s.id='wd-nj-address-autocomplete-script';s.src='/property/js/nj-address-autocomplete.js';s.async=false;document.head.appendChild(s);}
-  function init(){ensureMenuInteractionContract();bindMenuInteractionContract();renderTrigger();renderProfile();renderLandingRecent();watchSearchState();loadFlood();loadLandingShowcase();loadRobustBrand();loadGoogleAddressAutocomplete();document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
+  function init(){ensureMenuInteractionContract();bindMenuInteractionContract();bindProfileOutsideGuard();renderTrigger();renderProfile();renderLandingRecent();watchSearchState();loadFlood();loadLandingShowcase();loadRobustBrand();loadGoogleAddressAutocomplete();document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
   window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:setRecent,signIn:signIn,signOut:signOut};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
