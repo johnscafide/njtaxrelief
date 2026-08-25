@@ -33,13 +33,13 @@
   function loadLandingRecentIntelligence(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
-    loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260824a');
+    loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260825-mapless1');
   }
 
   function loadLookupSummaryEnhancements(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LOOKUP_SUMMARY_ENHANCEMENTS__)return;
-    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260824b');
+    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260825-mapless1');
   }
 
   function syncPublicMenu(){
