@@ -1,33 +1,56 @@
+/* Watchdog public navigation bridge.
+   The universal menu owns all menu/profile markup and auth state. This file only
+   opens/closes the public sheets, stores recent-property context, and boots the
+   small set of public-page enhancements that are actually needed. */
 (function(){
   'use strict';
+
   if(!window.NJPTRSupabaseRuntime&&document.readyState==='loading'){
     document.write('<script src="/property/js/supabase-runtime.js"><\/script>');
   }
   if(!window.WatchdogUniversalMenu&&document.readyState==='loading'){
     document.write('<script src="/property/js/watchdog-universal-menu.js"><\/script>');
   }
+
+  var lastFocus=null;
+
+  function q(id){return document.getElementById(id);}
+  function clean(v){return String(v==null?'':v).trim();}
+  function isPropertyIndex(){
+    var path=(location.pathname||'').replace(/\/+$/,'');
+    var host=String(location.hostname||'').toLowerCase();
+    var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
+    return path==='/property'||path==='/property/index.html'||root;
+  }
+
+  /* /scripts.js is still present in the legacy HTML template. It used to boot
+     the NJPropertyTaxRelief rebate popup on this Watchdog surface. Suppress that
+     legacy UI before DOMContentLoaded so it cannot create an index-only overlay
+     above or around the account sheet. */
+  function suppressLegacyIndexUi(){
+    if(!isPropertyIndex())return;
+    document.documentElement.classList.add('wd-index-lean-runtime');
+    try{sessionStorage.setItem('rebateModalSeen','true');}catch(_error){}
+    ['rebate-modal','sticky-rebate-link'].forEach(function(id){var node=q(id);if(node)node.remove();});
+  }
+  suppressLegacyIndexUi();
+
   function ensureUniversalMenu(){
     if(window.WatchdogUniversalMenu||document.querySelector('script[src="/property/js/watchdog-universal-menu.js"]'))return;
-    var s=document.createElement('script');s.src='/property/js/watchdog-universal-menu.js';s.defer=true;(document.head||document.documentElement).appendChild(s);
+    var s=document.createElement('script');
+    s.src='/property/js/watchdog-universal-menu.js';
+    s.defer=true;
+    (document.head||document.documentElement).appendChild(s);
   }
-  ensureUniversalMenu();
-  window.addEventListener('error',function(e){
-    var resourceFailure=e&&e.target&&e.target!==window;
-    var opaqueCrossOrigin=e&&e.message==='Script error.'&&(!e.filename||Number(e.lineno||0)===0);
-    if(!resourceFailure&&!opaqueCrossOrigin)return;
-    if(window.console&&console.warn)console.warn('[watchdog] Non-fatal external/resource error suppressed from the customer fatal banner.',e&&e.message||e&&e.target&&e.target.src||e&&e.target&&e.target.href||'resource error');
-    if(e&&typeof e.stopImmediatePropagation==='function')e.stopImmediatePropagation();
-  },true);
-  var user=null, lastFocus=null;
-  var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
-  function q(id){return document.getElementById(id);}
+
   function ensureMenuInteractionContract(){
     if(q('wd-public-menu-interaction-contract'))return;
     var s=document.createElement('style');
     s.id='wd-public-menu-interaction-contract';
-    s.textContent='#wd-public-backdrop{z-index:9400!important}#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}#wd-profile-sheet.open{z-index:2147483646!important;pointer-events:auto!important;isolation:isolate!important}body.wd-profile-menu-open #wd-public-backdrop{pointer-events:none!important}#wd-main-sheet.open a,#wd-main-sheet.open button,#wd-profile-sheet.open #wd-profile-content,#wd-profile-sheet.open .wd-universal-profile,#wd-profile-sheet.open .wd-universal-profile>nav,#wd-profile-sheet.open a,#wd-profile-sheet.open button,#wd-profile-sheet.open *{pointer-events:auto!important;touch-action:manipulation!important}';
+    s.textContent='#wd-public-backdrop{z-index:9400!important}#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important;-webkit-overflow-scrolling:touch!important;overscroll-behavior:contain!important}#wd-profile-sheet.open{z-index:2147483646!important;pointer-events:auto!important;isolation:isolate!important}body.wd-profile-menu-open #wd-public-backdrop{z-index:2147483645!important;pointer-events:auto!important}#wd-main-sheet.open a,#wd-main-sheet.open button,#wd-profile-sheet.open #wd-profile-content,#wd-profile-sheet.open .wd-universal-profile,#wd-profile-sheet.open .wd-universal-profile>nav,#wd-profile-sheet.open a,#wd-profile-sheet.open button,#wd-profile-sheet.open *{pointer-events:auto!important;touch-action:manipulation!important}body.wd-profile-menu-open #rebate-modal,body.wd-profile-menu-open #sticky-rebate-link,body.wd-profile-menu-open .plm-backdrop:not(.open){pointer-events:none!important}';
     (document.head||document.documentElement).appendChild(s);
   }
+
   function bindMenuInteractionContract(){
     ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
       var sheet=q(id);if(!sheet||sheet.dataset.wdTapGuard==='1')return;
@@ -40,53 +63,152 @@
       });
     });
     var back=q('wd-public-backdrop');
-    if(back&&back.dataset.wdTapGuard!=='1'){back.dataset.wdTapGuard='1';back.addEventListener('click',close);}
+    if(back&&back.dataset.wdTapGuard!=='1'){
+      back.dataset.wdTapGuard='1';
+      back.addEventListener('click',close);
+    }
   }
-  function bindProfileOutsideGuard(){
-    var root=document.documentElement;
-    if(!root||root.dataset.wdProfileOutsideGuard==='1')return;
-    root.dataset.wdProfileOutsideGuard='1';
-    document.addEventListener('pointerdown',function(e){
-      var sheet=q('wd-profile-sheet');
-      if(!sheet||!sheet.classList.contains('open')||sheet.contains(e.target))return;
-      e.preventDefault();
-      e.stopPropagation();
-      close();
-    },true);
+
+  function open(which){
+    var profile=which==='profile';
+    var sheet=q(profile?'wd-profile-sheet':'wd-main-sheet');
+    var back=q('wd-public-backdrop');
+    if(!sheet||!back)return;
+    close(false);
+    lastFocus=document.activeElement;
+    if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.refresh==='function')window.WatchdogUniversalMenu.refresh();
+    sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden','false');
+    back.classList.add('open');
+    document.body.classList.add('wd-public-menu-open');
+    document.body.classList.toggle('wd-profile-menu-open',profile);
+    var c=sheet.querySelector('.wd-public-close,[data-wd-universal="close"]');
+    if(c&&c.focus)requestAnimationFrame(function(){c.focus();});
+    document.dispatchEvent(new CustomEvent('watchdog:public-menu-open',{detail:{menu:profile?'profile':'main'}}));
   }
-  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function appRoute(path){
-    if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.route==='function')return window.WatchdogUniversalMenu.route(path);
-    var h=String(location.hostname||'').toLowerCase(),clean=h==='watchdogindex.com'||h==='www.watchdogindex.com',prefix=clean?'':'/property';
-    path=String(path||'/');if(path.charAt(0)!=='/')path='/'+path;return prefix+(path==='/'&&prefix?'/':path);
+
+  function close(restoreFocus){
+    ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
+      var e=q(id);if(!e)return;e.classList.remove('open');e.setAttribute('aria-hidden','true');
+    });
+    var b=q('wd-public-backdrop');if(b)b.classList.remove('open');
+    if(document.body){document.body.classList.remove('wd-public-menu-open','wd-profile-menu-open');}
+    if(restoreFocus!==false&&lastFocus&&lastFocus.focus)lastFocus.focus();
+    lastFocus=null;
   }
-  function recent(){try{return JSON.parse(localStorage.getItem('watchdogRecentProperties')||'[]').slice(0,4);}catch(e){return[];}}
-  function recentQuery(x){return [x.address,x.city||x.town,x.zip].filter(function(v){return String(v||'').trim();}).join(', ');}
-  function recentSub(x){return [x.city||x.town,x.zip].filter(function(v){return String(v||'').trim();}).join(' ');}
-  function money(v){var n=Number(v);return Number.isFinite(n)&&n>0?'$'+Math.round(n).toLocaleString():'';}
-  function aerial(x){var lat=Number(x.lat),lon=Number(x.lon);if(!Number.isFinite(lat)||!Number.isFinite(lon))return'';var dx=.00135,dy=.0009;return 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?'+new URLSearchParams({bbox:[lon-dx,lat-dy,lon+dx,lat+dy].join(','),bboxSR:'4326',imageSR:'3857',size:'640,400',format:'jpg',f:'image'}).toString();}
-  function street(x){if(!GMAPS_KEY)return'';var lat=Number(x.lat),lon=Number(x.lon),loc=Number.isFinite(lat)&&Number.isFinite(lon)?lat+','+lon:[x.address,x.city||x.town,'NJ',x.zip].filter(function(v){return String(v||'').trim();}).join(', ');if(!loc)return'';return 'https://maps.googleapis.com/maps/api/streetview?'+new URLSearchParams({size:'640x400',location:loc,fov:'78',pitch:'6',source:'outdoor',return_error_code:'true',key:GMAPS_KEY}).toString();}
-  function isLandingState(){var p;try{p=new URLSearchParams(window.location.search||'');}catch(e){p=null;}return !(p&&String(p.get('address')||'').trim())&&!document.body.classList.contains('hood-on');}
-  function setRecent(r){if(!r||!r.address)return;var rows=recent().filter(function(x){return x.pin!==r.pin&&x.address!==r.address;});rows.unshift({address:r.address,town:r.town||'',city:r.city||'',zip:r.zip||'',pin:r.pin||'',assessed:r.assessed||'',tax:r.tax||'',yearBuilt:r.yearBuilt||'',lat:r.lat,lon:r.lon,at:new Date().toISOString()});try{localStorage.setItem('watchdogRecentProperties',JSON.stringify(rows.slice(0,8)));}catch(e){}renderProfile();renderLandingRecent();}
-  function displayName(){var m=user&&user.user_metadata||{};return m.full_name||m.name||(user&&user.email||'').split('@')[0]||'Your account';}
-  function avatar(){var m=user&&user.user_metadata||{};return m.avatar_url||m.picture||'';}
-  function renderTrigger(){if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.setUser(user);window.WatchdogUniversalMenu.refresh();return;}var b=q('wd-profile-trigger');if(!b)return;var a=avatar();b.innerHTML=a?'<img src="'+esc(a)+'" alt="">':'<i class="fas fa-user"></i><span>'+(user?'Account':'Sign in')+'</span>';b.setAttribute('aria-label',user?'Open account menu':'Sign in or open account menu');}
-  function renderProfile(){if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.setUser(user);window.WatchdogUniversalMenu.refresh();return;}var host=q('wd-profile-content');if(!host)return;var rs=recent();var recentHtml=rs.length?rs.map(function(x){var query=recentQuery(x),sub=recentSub(x)||'New Jersey';return '<a class="wd-public-link" href="'+appRoute('/')+'?address='+encodeURIComponent(query)+'"><i class="fas fa-clock-rotate-left"></i><span>'+esc(x.address)+'<small>'+esc(sub)+'</small></span><i class="fas fa-chevron-right"></i></a>';}).join(''):'<div class="wd-public-recent-empty">Properties you open will appear here on this device.</div>';if(!user){host.innerHTML='<button class="wd-public-signin" type="button" onclick="WatchdogPublicNav.signIn()"><i class="fab fa-google"></i> Sign in to Watchdog</button><div class="wd-public-section"><span class="wd-public-label">Recently viewed</span><div class="wd-public-recent">'+recentHtml+'</div></div><div class="wd-public-section"><a class="wd-public-link" href="'+appRoute('/account')+'"><i class="fas fa-circle-user"></i><span>Account details</span><i class="fas fa-chevron-right"></i></a></div>';return;}var a=avatar();host.innerHTML='<div class="wd-public-account">'+(a?'<img src="'+esc(a)+'" alt="">':'<div class="avatar">'+esc(displayName().charAt(0).toUpperCase())+'</div>')+'<div><b>'+esc(displayName())+'</b><span>'+esc(user.email||'')+'</span></div></div><div class="wd-public-section"><a class="wd-public-link" href="'+appRoute('/dashboard')+'"><i class="fas fa-house"></i><span>Your home &amp; properties</span><i class="fas fa-chevron-right"></i></a><a class="wd-public-link" href="'+appRoute('/dashboard')+'#profile"><i class="fas fa-user-gear"></i><span>Profile &amp; benefits</span><i class="fas fa-chevron-right"></i></a><a class="wd-public-link" href="'+appRoute('/account')+'"><i class="fas fa-credit-card"></i><span>Account &amp; billing</span><i class="fas fa-chevron-right"></i></a></div><div class="wd-public-section"><span class="wd-public-label">Recently viewed</span><div class="wd-public-recent">'+recentHtml+'</div></div><div class="wd-public-section"><button class="wd-public-link" style="border:0;background:transparent;width:100%;cursor:pointer" type="button" onclick="WatchdogPublicNav.signOut()"><i class="fas fa-arrow-right-from-bracket"></i><span>Sign out</span></button></div>';}
-  function ensureRecentStyles(){if(q('wd-recent-landing-style'))return;var s=document.createElement('style');s.id='wd-recent-landing-style';s.textContent='.wd-recent-landing{padding:34px 0 0;background:#fff}.hood-on .wd-recent-landing{display:none!important}.wd-recent-inner{max-width:1120px;margin:0 auto;padding:0 24px}.wd-recent-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}.wd-recent-head h2{font:800 25px/1.15 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em;color:#10294b;margin:0}.wd-recent-head span{color:#7b8797;font-size:13px}.wd-recent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.wd-recent-card{text-decoration:none!important;min-width:0}.wd-recent-card .hd-shot{height:175px;flex-basis:175px}.wd-recent-card .hd-shot img{display:block;width:100%;height:100%;object-fit:cover}.wd-recent-card .hd-shot.noimg{display:grid;place-items:center;background:linear-gradient(145deg,#e9eef4,#dce5ec);color:#7890a6}.wd-recent-card .hd-shot.noimg:after{display:none}.wd-recent-card .hd-shot.noimg i{font-size:34px}.wd-recent-card .hd-val{font-size:20px}.wd-recent-card .hd-meta:empty{display:none}@media(max-width:760px){.wd-recent-inner{padding:0 16px}.wd-recent-grid{grid-template-columns:1fr;gap:14px}.wd-recent-card{display:grid;grid-template-columns:132px 1fr}.wd-recent-card .hd-shot{height:100%;min-height:132px;flex-basis:auto}.wd-recent-card .hd-body{padding:14px}.wd-recent-head{align-items:flex-start;flex-direction:column;gap:4px}}';document.head.appendChild(s);}
-  function landingCard(x){var query=recentQuery(x),sub=recentSub(x)||'New Jersey',img=street(x),fallback=aerial(x),value=money(x.assessed),meta=[];if(x.yearBuilt)meta.push('<span>'+esc(x.yearBuilt)+'</span>');if(money(x.tax))meta.push('<span>'+esc(money(x.tax))+' tax</span>');var shot='<div class="hd-shot noimg"><i class="fas fa-house"></i></div>';if(img){shot='<div class="hd-shot"><img src="'+esc(img)+'" alt="Street View of '+esc(x.address)+'" loading="lazy"'+(fallback?' data-fallback="'+esc(fallback)+'"':'')+' onerror="this.onerror=null;var f=this.getAttribute(\'data-fallback\');if(f){this.src=f}else{this.parentNode.classList.add(\'noimg\');this.remove()}"></div>';}return '<a class="hd-card wd-recent-card" href="'+appRoute('/')+'?address='+encodeURIComponent(query)+'" aria-label="Open '+esc(query)+'">'+shot+'<div class="hd-body"><div class="hd-val">'+esc(value||'View property')+'</div><div class="hd-meta">'+meta.join('')+'</div><div class="hd-addr">'+esc(x.address)+'</div><div class="hd-sub">'+esc(sub)+'</div></div></a>';}
-  function renderLandingRecent(){var old=q('wd-recent-landing');if(!user||!isLandingState()){if(old)old.remove();return;}var rs=recent().slice(0,3),hero=document.querySelector('.pl-hero');if(!rs.length||!hero){if(old)old.remove();return;}ensureRecentStyles();var sec=old||document.createElement('section');sec.id='wd-recent-landing';sec.className='wd-recent-landing';sec.setAttribute('aria-label','Recently viewed properties');sec.innerHTML='<div class="wd-recent-inner"><div class="wd-recent-head"><h2>Recently viewed</h2><span>Your last '+rs.length+' propert'+(rs.length===1?'y':'ies')+'</span></div><div class="wd-recent-grid">'+rs.map(landingCard).join('')+'</div></div>';if(!old)hero.insertAdjacentElement('afterend',sec);}
-  function watchSearchState(){if(!document.body||document.body.__wdRecentStateWatch)return;document.body.__wdRecentStateWatch=true;new MutationObserver(function(mutations){for(var i=0;i<mutations.length;i++){if(mutations[i].attributeName==='class'){renderLandingRecent();break;}}}).observe(document.body,{attributes:true,attributeFilter:['class']});window.addEventListener('popstate',renderLandingRecent);}
-  function open(which){close();lastFocus=document.activeElement;var sheet=q(which==='profile'?'wd-profile-sheet':'wd-main-sheet'),back=q('wd-public-backdrop');if(!sheet||!back)return;if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();sheet.classList.add('open');sheet.setAttribute('aria-hidden','false');back.classList.add('open');document.body.classList.add('wd-public-menu-open');document.body.classList.toggle('wd-profile-menu-open',which==='profile');var c=sheet.querySelector('.wd-public-close');if(c)c.focus();}
-  function close(){['wd-main-sheet','wd-profile-sheet'].forEach(function(id){var e=q(id);if(e){e.classList.remove('open');e.setAttribute('aria-hidden','true');}});var b=q('wd-public-backdrop');if(b)b.classList.remove('open');document.body.classList.remove('wd-public-menu-open');document.body.classList.remove('wd-profile-menu-open');if(lastFocus&&lastFocus.focus)lastFocus.focus();lastFocus=null;}
-  function signIn(){close();if(window.WatchdogUniversalMenu){var s=window.WatchdogUniversalMenu.state();window.WatchdogUniversalMenu.setUser(s&&s.user||user);var sign=document.querySelector('[data-wd-universal="signin"]');if(sign){sign.click();return;}}if(typeof window.plSignInPrompt==='function')window.plSignInPrompt();}
-  function signOut(){close();if(window.WatchdogUniversalMenu){var out=document.querySelector('[data-wd-universal="signout"]');if(out){out.click();return;}}if(typeof window.plSignOut==='function')window.plSignOut();}
-  function setUser(u){user=u||null;if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.setUser(user);renderTrigger();renderProfile();renderLandingRecent();}
-  (function scopeVerifiedSales(){if(window.__watchdogSalesFetchScoped)return;window.__watchdogSalesFetchScoped=true;var original=window.fetch.bind(window),district='';function rememberFromParcel(response){try{response.clone().json().then(function(data){var f=data&&data.features&&data.features[0],a=f&&f.attributes||{},pin=String(a.PAMS_PIN||'');var d=pin.replace(/\D/g,'').slice(0,4);if(d.length===4){district=d;try{sessionStorage.setItem('watchdogCurrentDistrict',d);}catch(_){}}}).catch(function(){});}catch(_){}}try{district=sessionStorage.getItem('watchdogCurrentDistrict')||'';}catch(_){}window.fetch=function(input,init){var url=typeof input==='string'?input:(input&&input.url)||'';if(/Parcels_Composite_NJ_WM|Framework\/Cadastral/i.test(url)){return original(input,init).then(function(r){rememberFromParcel(r);return r;});}var m=url.match(/\/property\/sales-([a-z-]+)\.json(?:\?|$)/i);if(m&&district&&/^\d{4}$/.test(district)){var scoped='/api/sales-by-district?county='+encodeURIComponent(m[1].toLowerCase())+'&district='+encodeURIComponent(district);return original(scoped,init).then(function(r){if(r.ok)return r;district='';try{sessionStorage.removeItem('watchdogCurrentDistrict');}catch(_){}return original(input,init);}).catch(function(){return original(input,init);});}return original(input,init);};})();
-  function runAddressFromQuery(){var params;try{params=new URLSearchParams(window.location.search||'');}catch(e){return;}var address=(params.get('address')||'').trim();if(!address)return;var attempts=0;function handoff(){attempts+=1;var input=q('pl-addr');if(input&&typeof window.plLookup==='function'){var old=q('wd-recent-landing');if(old)old.remove();input.value=address;window.plLookup();try{var clean=new URL(window.location.href);clean.searchParams.delete('address');window.history.replaceState({},document.title,clean.pathname+clean.search+clean.hash);}catch(e){}return;}if(attempts<80)window.setTimeout(handoff,100);}handoff();}
-  function loadFlood(){if(window.WatchdogFlood||document.getElementById('wd-flood-script'))return;var s=document.createElement('script');s.id='wd-flood-script';s.src='/property/js/flood-intelligence.js';s.defer=true;document.head.appendChild(s);}
-  function loadLandingShowcase(){var path=(window.location.pathname||'').replace(/\/+$/,'');if(path!=='/property'&&path!=='/property/index.html'&&path!==''&&path!=='/index.html')return;if(q('wd-showcase-script'))return;var s=document.createElement('script');s.id='wd-showcase-script';s.src='/property/js/landing-showcase.js';s.async=false;document.head.appendChild(s);}
-  function loadRobustBrand(){if(q('wd-robust-brand-script'))return;var s=document.createElement('script');s.id='wd-robust-brand-script';s.src='/property/js/robust-public-brand.js';s.defer=true;document.head.appendChild(s);}
-  function loadGoogleAddressAutocomplete(){if(!q('pl-addr')&&!q('ss-addr'))return;if(q('wd-nj-address-autocomplete-script'))return;var s=document.createElement('script');s.id='wd-nj-address-autocomplete-script';s.src='/property/js/nj-address-autocomplete.js';s.async=false;document.head.appendChild(s);}
-  function init(){ensureMenuInteractionContract();bindMenuInteractionContract();bindProfileOutsideGuard();renderTrigger();renderProfile();renderLandingRecent();watchSearchState();loadFlood();loadLandingShowcase();loadRobustBrand();loadGoogleAddressAutocomplete();document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});runAddressFromQuery();}
-  window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:setRecent,signIn:signIn,signOut:signOut};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+
+  function setUser(user){
+    if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.setUser==='function'){
+      window.WatchdogUniversalMenu.setUser(user||null);
+      if(typeof window.WatchdogUniversalMenu.refresh==='function')window.WatchdogUniversalMenu.refresh();
+    }
+  }
+
+  function remember(row){
+    if(!row||!clean(row.address))return;
+    var next={
+      address:clean(row.address),town:clean(row.town),city:clean(row.city),zip:clean(row.zip),
+      pin:clean(row.pin||row.pams_pin),assessed:row.assessed||'',tax:row.tax||row.last_year_tax||'',
+      yearBuilt:row.yearBuilt||row.year_built||'',lat:row.lat,lon:row.lon,at:new Date().toISOString()
+    };
+    try{
+      var rows=JSON.parse(localStorage.getItem('watchdogRecentProperties')||'[]');
+      if(!Array.isArray(rows))rows=[];
+      rows=rows.filter(function(x){return clean(x&&x.pin)!==next.pin&&clean(x&&x.address).toUpperCase()!==next.address.toUpperCase();});
+      rows.unshift(next);
+      localStorage.setItem('watchdogRecentProperties',JSON.stringify(rows.slice(0,8)));
+    }catch(_error){}
+    document.dispatchEvent(new CustomEvent('watchdog:recent-property',{detail:next}));
+  }
+
+  function signIn(){
+    close();
+    var control=document.querySelector('[data-wd-universal="signin"]');
+    if(control){control.click();return;}
+    if(typeof window.plSignInPrompt==='function')window.plSignInPrompt();
+  }
+
+  function signOut(){
+    close();
+    var control=document.querySelector('[data-wd-universal="signout"]');
+    if(control){control.click();return;}
+    if(typeof window.plSignOut==='function')window.plSignOut();
+  }
+
+  function loadScript(id,src){
+    if(q(id)||document.querySelector('script[src="'+src+'"]'))return;
+    var s=document.createElement('script');s.id=id;s.src=src;s.defer=true;document.head.appendChild(s);
+  }
+
+  /* Only three index feature runtimes are allowed here. Profile rendering is
+     intentionally NOT one of them; watchdog-universal-menu.js is the one owner. */
+  function loadIndexEnhancements(){
+    if(!isPropertyIndex())return;
+    loadScript('wd-showcase-script','/property/js/landing-showcase.js');
+    loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js?v=20260825-index-clean1');
+    loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
+  }
+
+  function runAddressFromQuery(){
+    if(!isPropertyIndex())return;
+    var params;try{params=new URLSearchParams(window.location.search||'');}catch(_error){return;}
+    var address=clean(params.get('address'));if(!address)return;
+    var attempts=0;
+    function handoff(){
+      attempts+=1;
+      var input=q('pl-addr');
+      if(input&&typeof window.plLookup==='function'){
+        input.value=address;window.plLookup();
+        try{var u=new URL(window.location.href);u.searchParams.delete('address');window.history.replaceState({},document.title,u.pathname+u.search+u.hash);}catch(_error){}
+        return;
+      }
+      if(attempts<80)setTimeout(handoff,100);
+    }
+    handoff();
+  }
+
+  /* Keep the sales request scoping optimization, but leave it separate from
+     navigation state. This has no DOM or pointer-event behavior. */
+  function scopeVerifiedSales(){
+    if(window.__watchdogSalesFetchScoped)return;
+    window.__watchdogSalesFetchScoped=true;
+    var original=window.fetch.bind(window),district='';
+    function rememberDistrict(response){
+      try{response.clone().json().then(function(data){
+        var f=data&&data.features&&data.features[0],a=f&&f.attributes||{},pin=String(a.PAMS_PIN||'');
+        var d=pin.replace(/\D/g,'').slice(0,4);
+        if(d.length===4){district=d;try{sessionStorage.setItem('watchdogCurrentDistrict',d);}catch(_error){}}
+      }).catch(function(){});}catch(_error){}
+    }
+    try{district=sessionStorage.getItem('watchdogCurrentDistrict')||'';}catch(_error){}
+    window.fetch=function(input,init){
+      var url=typeof input==='string'?input:(input&&input.url)||'';
+      if(/Parcels_Composite_NJ_WM|Framework\/Cadastral/i.test(url))return original(input,init).then(function(r){rememberDistrict(r);return r;});
+      var m=url.match(/\/property\/sales-([a-z-]+)\.json(?:\?|$)/i);
+      if(m&&district&&/^\d{4}$/.test(district)){
+        var scoped='/api/sales-by-district?county='+encodeURIComponent(m[1].toLowerCase())+'&district='+encodeURIComponent(district);
+        return original(scoped,init).then(function(r){
+          if(r.ok)return r;
+          district='';try{sessionStorage.removeItem('watchdogCurrentDistrict');}catch(_error){}
+          return original(input,init);
+        }).catch(function(){return original(input,init);});
+      }
+      return original(input,init);
+    };
+  }
+
+  function init(){
+    suppressLegacyIndexUi();
+    ensureUniversalMenu();
+    ensureMenuInteractionContract();
+    bindMenuInteractionContract();
+    scopeVerifiedSales();
+    loadIndexEnhancements();
+    runAddressFromQuery();
+    document.addEventListener('watchdog:universal-menu-ready',bindMenuInteractionContract);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+  }
+
+  window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:remember,signIn:signIn,signOut:signOut};
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
