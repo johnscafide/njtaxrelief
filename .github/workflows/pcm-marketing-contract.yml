@@ -11,9 +11,11 @@ on:
       - 'supabase/functions/pcm-webhook/**'
       - 'supabase/functions/pcm-sandbox-catalog/**'
       - 'supabase/functions/pcm-direct-mail/**'
+      - 'supabase/functions/marketing-provider-status/**'
       - 'supabase/functions/marketing-direct-mail-launch/**'
       - 'supabase/functions/marketing-direct-mail-fulfill/**'
       - 'supabase/functions/stripe-webhook/**'
+      - 'supabase/migrations/*pcm*'
       - 'supabase/config.toml'
       - '.github/workflows/pcm-marketing-contract.yml'
   pull_request:
@@ -25,9 +27,11 @@ on:
       - 'supabase/functions/pcm-webhook/**'
       - 'supabase/functions/pcm-sandbox-catalog/**'
       - 'supabase/functions/pcm-direct-mail/**'
+      - 'supabase/functions/marketing-provider-status/**'
       - 'supabase/functions/marketing-direct-mail-launch/**'
       - 'supabase/functions/marketing-direct-mail-fulfill/**'
       - 'supabase/functions/stripe-webhook/**'
+      - 'supabase/migrations/*pcm*'
       - 'supabase/config.toml'
       - '.github/workflows/pcm-marketing-contract.yml'
 
