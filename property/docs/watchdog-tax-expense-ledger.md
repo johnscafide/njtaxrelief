@@ -2,7 +2,7 @@
 
 _Last updated: 2026-08-25_
 
-This is the working tax-time and business-expense record for Watchdog Property Intelligence LLC. It is intentionally limited to business/accounting facts and does **not** store passwords, document-retrieval access codes, payment credentials, full bank/card numbers, or other one-time secrets.
+This is the working tax-time and business-expense record for Watchdog Property Intelligence LLC. It is intentionally limited to business/accounting facts and does **not** store passwords, document-retrieval access codes, payment credentials, full bank/card numbers, EIN values, SSNs, or other one-time secrets.
 
 ## Entity record
 
@@ -12,7 +12,7 @@ This is the working tax-time and business-expense record for Watchdog Property I
 - State: New Jersey
 - Management posture: single-member / member-managed
 - Primary NAICS used at formation: **513210 — Software Publishers**
-- EIN: pending
+- EIN status: **issued 2026-08-25; IRS CP575G received; value intentionally not stored here**
 - NJ-REG: pending
 - NJ Sales Tax Certificate of Authority: pending
 - Public paid enrollment: controlled until tax registration / remaining launch controls are resolved
@@ -22,6 +22,7 @@ This is the working tax-time and business-expense record for Watchdog Property I
 | Date | Vendor / item | Business purpose | Tax-time category | Amount | Evidence / status |
 |---|---|---|---|---:|---|
 | 2026-08-25 | New Jersey Division of Revenue & Enterprise Services — LLC formation | Formation of Watchdog Property Intelligence LLC | Organizational / startup cost | TBD from actual receipt/charge | Formation completed. NJ statutory LLC certificate-of-formation fee is currently $100; record the actual amount paid, including any card/e-check convenience fee, from the receipt or posted transaction rather than assuming the total. |
+| 2026-08-25 | Internal Revenue Service — EIN application | Federal tax identification for the LLC | Administrative setup | $0 | EIN issued successfully; official CP575G notice received and retained outside the repository. IRS EIN application itself is free. |
 
 ## Items to track going forward
 
