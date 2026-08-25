@@ -92,6 +92,19 @@ assert.match(truthfulPcmCatalog,/webhook_signature_contract_status',\s*'pending_
 assert.match(truthfulPcmCatalog,/live_send_enabled',\s*false/,'PCM runtime capability metadata must not advertise live send.');
 assert.match(truthfulPcmCatalog,/operations\s*=\s*'\["health","quote","validate","submit","status","proof","tracking"\]'/,'PCM executable adapter operations must omit uncertified cancellation.');
 
+const pcmRetentionGate=read('supabase/migrations/20260825231500_pcm_dynamic_image_and_proof_retention_gate.sql');
+assert.match(pcmRetentionGate,/marketing-pcm-proofs/,'PCM authoritative proofs must have a dedicated private archive bucket.');
+assert.match(pcmRetentionGate,/values\([\s\S]*?'marketing-pcm-proofs'[\s\S]*?false,[\s\S]*?26214400/,'PCM proof archive bucket must be private with an explicit file-size boundary.');
+assert.match(pcmRetentionGate,/revoke all on table public\.marketing_pcm_design_certifications from public,anon,authenticated/,'PCM design certifications must remain service-owned.');
+assert.match(pcmRetentionGate,/grant execute on function public\.marketing_record_pcm_design_certification[\s\S]*?to service_role/,'Only service role may record provider design certifications.');
+assert.match(pcmRetentionGate,/environment='live'[\s\S]*?dynamic_image_ready=true[\s\S]*?dynamic_image_variable='DynamicImage'[\s\S]*?expires_at>now\(\)/,'Studio-to-PCM mapping must require a fresh LIVE exact DynamicImage certification.');
+assert.match(pcmRetentionGate,/Mapped provider design must match the campaign current PCM design/,'Studio mapping must bind the certified provider design to the current campaign design.');
+assert.match(pcmRetentionGate,/archive_bucket <> 'marketing-pcm-proofs'/,'Provider proof readiness must require the private Watchdog archive bucket.');
+assert.match(pcmRetentionGate,/archive_sha256 !~ '\^\[0-9a-f\]\{64\}\$'/,'Archived provider proof must carry a SHA-256 digest.');
+assert.match(pcmRetentionGate,/from storage\.objects o[\s\S]*?o\.bucket_id=archive_bucket[\s\S]*?o\.name=archive_path/,'Proof readiness must verify that the archived object actually exists.');
+assert.match(pcmRetentionGate,/Authoritative PCM proof archive object does not exist or is empty/,'Missing or empty archived proof must fail closed.');
+assert.match(pcmRetentionGate,/proof_auto_approved',false/,'Archiving a provider proof must never auto-approve it.');
+
 const webhook=read('supabase/functions/stripe-webhook/index.ts');
 assert.match(webhook,/marketing-direct-mail-fulfill/,'Paid fulfillment handoff must originate from the server Stripe webhook.');
 assert.match(webhook,/Authorization: `Bearer \$\{SERVICE_ROLE\}`/,'Stripe webhook must authenticate the fulfillment handoff service-to-service.');
@@ -106,4 +119,4 @@ const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
-console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, truthful provider capability state, canonical provider-status CORS, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
+console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, LIVE design certification, private proof archive, truthful provider capability state, canonical provider-status CORS, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
