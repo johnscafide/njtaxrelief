@@ -50,6 +50,7 @@ const CURATED_PUBLIC_ROUTES = [
   { path: '/home-inspectors', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.76' },
   { path: '/insights', lastmod: '2026-08-22', changefreq: 'daily', priority: '0.82' },
   { path: '/property-tax-estimator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.80' },
+  { path: '/home-buying-cost-calculator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.80' },
   { path: '/pro', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.78' },
   { path: '/trust', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
   { path: '/robust', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.86' },
