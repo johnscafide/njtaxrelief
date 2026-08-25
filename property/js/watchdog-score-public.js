@@ -1,5 +1,7 @@
 /* Canonical ROBUST Watchdog Score adapter for the public property lookup.
-   The retired peer-gap comparison may contribute evidence to O, but can never become the Watchdog Score itself. */
+   Public property surfaces must never recompute a second unqualified Watchdog
+   Score from a different evidence shape. The governed ROBUST-v1 observation is
+   the single source of truth; if it does not exist, the score remains building. */
 (function (root) {
   'use strict';
   if (root.WatchdogScorePublic) return;
@@ -7,12 +9,11 @@
   var Core = root.WatchdogScoreCore;
   if (!Core) return;
 
-  var BURDEN_BEST = 0.012;
-  var BURDEN_WORST = 0.036;
-  var refs = {};
   var activeRecord = null;
   var generation = 0;
   var hookTimer = null;
+  var client = null;
+  var DETAIL_RPC = 'get_public_property_watchdog_score_details';
 
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
@@ -20,217 +21,85 @@
     });
   }
 
-  function money(value) {
-    var n = Number(value);
-    return Number.isFinite(n) ? '$' + Math.round(n).toLocaleString() : '—';
+  function pinFor(record) {
+    return String(record && (record.pin || record.pams_pin) || '').trim();
   }
 
-  function loadJSON(path) {
-    if (!refs[path]) {
-      refs[path] = fetch(path, { credentials: 'same-origin' }).then(function (response) {
-        if (!response.ok) throw new Error('Reference data unavailable: ' + path);
-        return response.json();
-      }).catch(function () { return null; });
-    }
-    return refs[path];
+  function getClient() {
+    if (client) return client;
+    try {
+      if (root.NJPTRSupabaseRuntime && typeof root.NJPTRSupabaseRuntime.createClient === 'function') {
+        client = root.NJPTRSupabaseRuntime.createClient();
+      }
+      if (!client && root.__njwSB) client = root.__njwSB;
+    } catch (_error) {}
+    return client;
   }
 
-  function district(record) {
-    var match = String(record && record.pin || '').match(/^(\d{4})/);
-    return match ? match[1] : '';
-  }
-
-  function countyCode(record) {
-    return district(record).slice(0, 2);
-  }
-
-  function latestOfficial(record, data) {
-    if (!data || !data.ratios || !record) return null;
-    var town = String(record.town || record.city || '').toUpperCase().trim();
-    var county = String(record.county || '').toUpperCase().trim();
-    var exact = town && county ? town + ' (' + county + ')' : '';
-    var row = exact && data.ratios[exact];
-    if (!row) {
-      Object.keys(data.ratios).some(function (key) {
-        var upper = key.toUpperCase();
-        if (county && upper.slice(-(county.length + 3)) !== '(' + county + ')') return false;
-        if (upper.indexOf(town) !== 0) return false;
-        row = data.ratios[key];
-        return true;
-      });
-    }
-    if (!row) return null;
-    var years = Object.keys(row).map(Number).filter(Number.isFinite).sort(function (a, b) { return a - b; });
-    if (!years.length) return null;
-    var year = years[years.length - 1];
-    var value = row[String(year)];
-    if (!value || !Number(value.ratio)) return null;
-    return { year: year, ratio: Number(value.ratio) / 100, lower: Number(value.lower) / 100, upper: Math.min(Number(value.upper) / 100, 1) };
-  }
-
-  function revaluationDistrict(record, data) {
-    var d = district(record);
-    if (!d || !data || !data.districts) return false;
-    return Number(data.tax_year) === new Date().getFullYear() && !!data.districts[d];
-  }
-
-  function add(detail, key, value, note) {
+  function component(key, value) {
     var meta = Core.DIMENSIONS[key];
-    var normalized = value == null ? null : Core.clamp01(value);
-    detail[key] = {
+    var n = value == null ? null : Number(value);
+    var score = Number.isFinite(n) ? Math.max(0, Math.min(100, Math.round(n))) : null;
+    return {
       key: key,
       publicKey: meta.publicKey,
       letter: meta.letter,
       name: meta.name,
       slug: meta.slug,
       label: meta.letter + ' · ' + meta.name,
-      score: normalized == null ? null : Math.round(normalized * 100),
+      score: score,
       weight: meta.weight,
-      note: note || (normalized == null ? 'evidence not available' : '')
+      note: score == null ? 'evidence not available in the canonical observation' : 'governed ROBUST-v1 observation'
     };
   }
 
-  function overassessmentPosition(record, assessed, official, isRevaluationYear) {
-    var sale = Number(record.verifiedSale);
-    var saleYear = Number(record.verifiedSaleYear);
-    var appreciation = Number(record.valuation && record.valuation.appreciation);
-    var nowYear = new Date().getFullYear();
+  function fromCanonicalRow(row) {
+    if (!row || !Core.isCanonicalVersion(row.model_version || row.modelVersion)) return null;
+    var detail = {
+      recourse: component('recourse', row.recourse_score),
+      fairness: component('fairness', row.overassessment_score),
+      burden: component('burden', row.burden_score),
+      uniformity: component('uniformity', row.uniformity_score),
+      stability: component('stability', row.stability_score),
+      trajectory: component('trajectory', row.trajectory_score)
+    };
+    var score = Core.aggregate(detail);
+    if (!score) return null;
 
-    if (sale > 1000 && saleYear > 1900) {
-      var years = Math.max(0, Math.min(12, nowYear - saleYear));
-      if (!Number.isFinite(appreciation)) appreciation = 0;
-      var supportedMarket = sale * Math.pow(1 + appreciation, years);
+    var governed = Number(row.watchdog_score);
+    if (Number.isFinite(governed)) {
+      score.score = Math.max(0, Math.min(100, Math.round(governed)));
+      score.verdict = Core.verdict(score.score);
+      score.grade = score.score >= 80 ? 'A' : score.score >= 65 ? 'B' : score.score >= 50 ? 'C' : score.score >= 35 ? 'D' : 'E';
+      score.band = score.score >= 65 ? 'good' : score.score >= 45 ? 'mid' : 'bad';
+    }
 
-      if (isRevaluationYear) {
-        var revalGap = (assessed - supportedMarket) / Math.max(supportedMarket, 1);
-        var revalScore = revalGap <= 0 ? 1 : Core.clamp01(1 - revalGap / 0.30) * 0.5;
-        return {
-value: revalScore,
-note: revalGap > 0
-  ? money(assessed - supportedMarket) + ' above supported market value in a revaluation/reassessment year; Chapter 123 range does not apply'
-  : 'at or below supported market value in a revaluation/reassessment year; Chapter 123 range does not apply'
-        };
+    var coverage = Number(row.evidence_coverage);
+    if (Number.isFinite(coverage)) {
+      score.covered = Math.max(0, Math.min(1, coverage > 1 ? coverage / 100 : coverage));
+      score.confidence = Core.confidence(score.covered);
+    }
+    score.framework = 'ROBUST';
+    score.frameworkVersion = Core.VERSION;
+    score.modelVersion = Core.VERSION;
+    score.observedOn = row.observed_on || null;
+    score.observedAt = row.observed_at || null;
+    score.pamsPin = row.pams_pin || null;
+    return score;
+  }
+
+  function fetchCanonical(record) {
+    var pin = pinFor(record);
+    var sb = getClient();
+    if (!pin || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
+    return sb.rpc(DETAIL_RPC, { p_pins: [pin] }).then(function (res) {
+      if (res && res.error) throw res.error;
+      var rows = res && Array.isArray(res.data) ? res.data : [];
+      for (var i = 0; i < rows.length; i++) {
+        if (String(rows[i] && rows[i].pams_pin || '') === pin) return fromCanonicalRow(rows[i]);
       }
-
-      if (official && official.ratio > 0) {
-        var fair = supportedMarket * official.ratio;
-        var upperRatio = official.upper != null ? Math.min(official.upper, 1) : Math.min(official.ratio * 1.15, 1);
-        var limit = supportedMarket * upperRatio;
-        var over = (assessed - limit) / Math.max(limit, 1);
-        var score = over <= 0
-? Core.clamp01(1 - ((assessed - fair) / Math.max(fair, 1)) * 0.5)
-: Core.clamp01(1 - over / 0.30) * 0.5;
-        return {
-value: score,
-note: assessed > limit
-  ? money(assessed - limit) + ' above the certified Chapter 123 upper limit using state-verified sale evidence'
-  : 'within the certified Chapter 123 corridor using state-verified sale evidence'
-        };
-      }
-    }
-
-    if (record.appeal && Number(record.appeal.peerMed) > 0) {
-      var peer = Number(record.appeal.peerMed);
-      var peerGap = (assessed - peer) / Math.max(peer, 1);
-      var peerScore = peerGap <= 0 ? 1 : Core.clamp01(1 - peerGap / 0.30) * 0.5;
-      return {
-        value: peerScore,
-        note: (peerGap > 0 ? money(assessed - peer) + ' above' : 'at or below') +
-' comparable nearby assessments; peer evidence only, not a Chapter 123 test'
-      };
-    }
-    return null;
-  }
-
-  function stability(record, official, uniformity) {
-    var valuation = record && record.valuation;
-    if (!valuation || valuation.ratioSource !== 'sr1a' || !Number(valuation.ratio) || !official) return null;
-    var pub = official.ratio;
-    var ver = Number(valuation.ratio);
-    var coeff = uniformity && Number.isFinite(Number(uniformity.coefficient)) ? Number(uniformity.coefficient) : null;
-    var drift = pub - ver;
-    var level = Core.clamp01((0.85 - pub) / 0.35);
-    var spread = coeff == null ? null : Core.clamp01((coeff - 15) / 20);
-    var decay = Core.clamp01(drift / 0.20);
-    var parts = [[level, 0.45], [decay, 0.25]];
-    if (spread != null) parts.push([spread, 0.30]);
-    var weight = parts.reduce(function (sum, part) { return sum + part[1]; }, 0);
-    var pressure = parts.reduce(function (sum, part) { return sum + part[0] * part[1]; }, 0) / weight;
-    var pressureScore = Math.round(pressure * 100);
-    if (pub >= 0.98) pressureScore = Math.min(pressureScore, 8);
-    return {
-      value: 1 - Core.clamp01(pressureScore / 100),
-      note: 'revaluation pressure ' + pressureScore + ' of 100 from ratio drift' + (coeff == null ? '' : ' and COD')
-    };
-  }
-
-  function trajectory(record, assessed, ratio) {
-    var sale = Number(record.verifiedSale);
-    if (!(sale > 1000) || !(ratio > 0) || !(assessed > 0)) return null;
-    var implied = assessed / sale;
-    var rel = implied / ratio;
-    var value = rel < 0.85 ? Core.clamp01(0.35 + rel * 0.4)
-              : rel > 1.15 ? Core.clamp01(1.15 - (rel - 1) * 0.8)
-              : 1;
-    return {
-      value: value,
-      note: 'assessed at ' + (implied * 100).toFixed(0) + '% of its verified sale; town verified ratio is ' + (ratio * 100).toFixed(0) + '%'
-    };
-  }
-
-  function evaluate(record, uniformityData, appealsData, officialData, revaluationData) {
-    if (!record || !Core) return null;
-    var detail = {};
-    var assessed = Number(record.assessed || record.assessed_value);
-    var tax = Number(record.tax || record.last_year_tax);
-    var valuation = record.valuation || {};
-    var ratio = Number(valuation.ratio);
-    var d = district(record);
-    var u = uniformityData && uniformityData.districts && d ? uniformityData.districts[d] : null;
-    var a = appealsData && appealsData.counties ? appealsData.counties[countyCode(record)] : null;
-    var official = record.certifiedRatio || latestOfficial(record, officialData);
-    var isRevaluationYear = revaluationDistrict(record, revaluationData);
-
-    // B - Burden
-    if (assessed > 0 && tax > 0 && ratio > 0) {
-      var market = assessed / ratio;
-      var effective = tax / market;
-      add(detail, 'burden', (BURDEN_WORST - effective) / (BURDEN_WORST - BURDEN_BEST),
-          '$' + (effective * 1000).toFixed(2) + ' per $1,000 of ratio-implied market value');
-    } else {
-      add(detail, 'burden', null);
-    }
-
-    // O - Overassessment Position. Peer comparison is evidence here, never a standalone Watchdog Score.
-    var over = assessed > 0 ? overassessmentPosition(record, assessed, official, isRevaluationYear) : null;
-    add(detail, 'fairness', over && over.value, over && over.note || 'needs verified sale or comparable assessment evidence');
-
-    // U - Uniformity
-    if (u && u.coefficient != null) {
-      add(detail, 'uniformity', 1 - Core.clamp01((Number(u.coefficient) - 7) / 23),
-          'municipal coefficient ' + Number(u.coefficient).toFixed(2) + ', residential standard is 15');
-    } else {
-      add(detail, 'uniformity', null);
-    }
-
-    // S - Stability
-    var stable = stability(record, official, u);
-    add(detail, 'stability', stable && stable.value, stable && stable.note || 'needs verified sales ratio and published ratio');
-
-    // T - Trajectory
-    var trend = valuation.ratioSource === 'sr1a' ? trajectory(record, assessed, ratio) : null;
-    add(detail, 'trajectory', trend && trend.value, trend && trend.note || 'needs a verified sale on this parcel');
-
-    // R - Recourse
-    if (a && a.latest && a.latest.win_rate_filed != null) {
-      var winRate = Number(a.latest.win_rate_filed);
-      add(detail, 'recourse', Core.clamp01((winRate - 20) / 45),
-          winRate.toFixed(1) + '% of filed appeals reduced in ' + String(a.county || record.county || 'this county').toLowerCase().replace(/\b\w/g, function (c) { return c.toUpperCase(); }) + ' County');
-    } else {
-      add(detail, 'recourse', null);
-    }
-
-    return Core.aggregate(detail);
+      return null;
+    });
   }
 
   function ensureStyles() {
@@ -250,7 +119,8 @@ note: assessed > limit
       '.wdps-grid{display:grid;gap:9px}.wdps-row{display:grid;grid-template-columns:minmax(150px,1fr) minmax(90px,1.1fr) 38px;gap:12px;align-items:center}' +
       '.wdps-label a{font:800 13px/1.25 "Source Sans 3",sans-serif;color:#111d38;text-decoration:none}.wdps-label small{display:block;font:500 11px/1.3 "Source Sans 3",sans-serif;color:#748198;margin-top:2px}' +
       '.wdps-bar{height:8px;border-radius:999px;background:#edf1f6;overflow:hidden}.wdps-bar i{display:block;height:100%;background:#2f6df6;border-radius:inherit}' +
-      '.wdps-n{font:800 13px/1 "Plus Jakarta Sans",sans-serif;text-align:right;color:#183b84}.wdps-row.off{opacity:.58}.wdps-foot{margin-top:17px;padding-top:15px;border-top:1px solid #e2e7ef;font:500 12px/1.55 "Source Sans 3",sans-serif;color:#5d6d82}.wdps-foot a{font-weight:800;color:#183b84}' +
+      '.wdps-n{font:800 13px/1 "Plus Jakarta Sans",sans-serif;text-align:right;color:#183b84}.wdps-row.off{opacity:.58}' +
+      '.wdps-foot{margin-top:17px;padding-top:15px;border-top:1px solid #e2e7ef;font:500 12px/1.55 "Source Sans 3",sans-serif;color:#5d6d82}.wdps-foot a{font-weight:800;color:#183b84}' +
       '@media(max-width:620px){.wdps{padding:18px}.wdps-head{grid-template-columns:1fr 76px}.wdps-score{width:76px;height:76px}.wdps-score b{font-size:28px}.wdps-row{grid-template-columns:1fr 74px 32px}.wdps-label small{grid-column:1/-1}.wdps-bar{height:7px}}';
     document.head.appendChild(style);
   }
@@ -262,7 +132,13 @@ note: assessed > limit
     if (!heading || heading.textContent.trim() !== 'Watchdog Score') return;
     host.setAttribute('data-retired-score-model', 'peer-gap-v1');
     host.innerHTML = '<h3 class="plm-sec-h">O · Overassessment Position evidence</h3>' +
-      '<p class="plm-sec-s">The old peer-only score has been retired. Comparable nearby assessments can still inform the O dimension, but they no longer produce a standalone Watchdog Score. The canonical ROBUST Watchdog Score appears above.</p>';
+      '<p class="plm-sec-s">The old peer-only score has been retired. Comparable nearby assessments may inform evidence, but they do not produce a standalone Watchdog Score. The canonical ROBUST Watchdog Score appears above when a governed observation exists.</p>';
+  }
+
+  function clearCanonicalScore() {
+    var host = document.getElementById('plm-robust-score-sec');
+    if (host) host.remove();
+    quarantineLegacyPeerScore();
   }
 
   function render(score) {
@@ -278,36 +154,58 @@ note: assessed > limit
       anchor.parentNode.insertBefore(host, anchor);
     }
     host.setAttribute('data-score-model', score.modelVersion);
-    host.innerHTML = '<section class="wdps" data-score-model="' + score.modelVersion + '">' +
+    host.innerHTML = '<section class="wdps" data-score-model="' + esc(score.modelVersion) + '">' +
       '<div class="wdps-head"><div><div class="wdps-k">Watchdog Score · ROBUST Framework</div><h3>' + esc(score.verdict) + '</h3>' +
-      '<p class="wdps-sub">One score built from six tax-position dimensions. This is not a home-quality or neighborhood desirability grade.</p></div>' +
-      '<div class="wdps-score"><div><b>' + score.score + '</b><span>/ 100</span></div></div></div>' +
+      '<p class="wdps-sub">One governed score built from six tax-position dimensions. This is not a home-quality or neighborhood desirability grade.</p></div>' +
+      '<div class="wdps-score"><div><b>' + esc(score.score) + '</b><span>/ 100</span></div></div></div>' +
       '<div class="wdps-meta"><span>' + Math.round(score.covered * 100) + '% evidence weight</span><span>' + esc(score.confidence) + ' confidence</span><span>' + esc(score.modelVersion) + '</span></div>' +
       '<div class="wdps-grid">' + Core.ORDER.map(function (key) {
-        var row = score.detail[key];
-        var has = row && row.score != null;
-        return '<div class="wdps-row' + (has ? '' : ' off') + '"><div class="wdps-label"><a href="/property/robust/' + row.slug + '/">' + esc(row.label) + '</a><small>' + esc(row.note || '') + '</small></div>' +
-          '<div class="wdps-bar"><i style="width:' + (has ? row.score : 0) + '%"></i></div><div class="wdps-n">' + (has ? row.score : '—') + '</div></div>';
+        var d = score.detail[key];
+        var has = d && d.score != null;
+        return '<div class="wdps-row' + (has ? '' : ' off') + '">' +
+          '<div class="wdps-label"><a href="/property/robust/' + esc(d.slug) + '/">' + esc(d.label) + '</a><small>' + esc(d.note || '') + '</small></div>' +
+          '<div class="wdps-bar"><i style="width:' + (has ? d.score : 0) + '%"></i></div>' +
+          '<div class="wdps-n">' + (has ? esc(d.score) : '—') + '</div>' +
+        '</div>';
       }).join('') + '</div>' +
-      '<div class="wdps-foot">Missing evidence lowers coverage and confidence. It is never replaced with the retired peer-gap score or a neutral guess. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
+      '<div class="wdps-foot">This is the latest governed ROBUST-v1 observation for this parcel. Missing evidence lowers coverage and is never replaced with a parallel client-side score. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
     quarantineLegacyPeerScore();
     return true;
   }
 
+  function renderWhenReady(score, token, attempt) {
+    if (token !== generation) return;
+    if (render(score)) return;
+    if (attempt < 30) {
+      window.setTimeout(function () { renderWhenReady(score, token, attempt + 1); }, 120);
+    }
+  }
+
   function scoreRecord(record, token, attempt) {
     if (!record || token !== generation) return;
-    Promise.all([
-      loadJSON('/property/uniformity.json'),
-      loadJSON('/property/appeals.json'),
-      loadJSON('/equalization-ratios.json'),
-      loadJSON('/property/revaluation-reassessment-2026.json')
-    ]).then(function (data) {
+    var pin = pinFor(record);
+    if (!pin) {
+      clearCanonicalScore();
+      return;
+    }
+    if (!getClient()) {
+      if (attempt < 40) window.setTimeout(function () { scoreRecord(record, token, attempt + 1); }, 100);
+      return;
+    }
+    fetchCanonical(record).then(function (score) {
       if (token !== generation) return;
-      var score = evaluate(record, data[0], data[1], data[2], data[3]);
-      if (score) render(score);
-      quarantineLegacyPeerScore();
-      if (attempt < 24 && (!score || score.covered < 0.999 || !record.appeal || !record.valuation)) {
-        window.setTimeout(function () { scoreRecord(record, token, attempt + 1); }, 400);
+      if (!score) {
+        clearCanonicalScore();
+        return;
+      }
+      renderWhenReady(score, token, 0);
+    }).catch(function (error) {
+      if (token !== generation) return;
+      if (attempt < 4) {
+        window.setTimeout(function () { scoreRecord(record, token, attempt + 1); }, 350);
+      } else {
+        console.warn('Canonical Watchdog Score unavailable', error);
+        clearCanonicalScore();
       }
     });
   }
@@ -316,6 +214,7 @@ note: assessed > limit
     if (!record) return;
     activeRecord = record;
     generation += 1;
+    clearCanonicalScore();
     scoreRecord(activeRecord, generation, 0);
   }
 
@@ -347,7 +246,13 @@ note: assessed > limit
     new MutationObserver(quarantineLegacyPeerScore).observe(document.documentElement, { childList: true, subtree: true });
   }
 
-  root.WatchdogScorePublic = Object.freeze({ observe: observe, evaluate: evaluate, render: render, quarantineLegacyPeerScore: quarantineLegacyPeerScore });
+  root.WatchdogScorePublic = Object.freeze({
+    observe: observe,
+    evaluate: fromCanonicalRow,
+    render: render,
+    fetchCanonical: fetchCanonical,
+    quarantineLegacyPeerScore: quarantineLegacyPeerScore
+  });
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
   else boot();
 })(typeof window !== 'undefined' ? window : globalThis);
