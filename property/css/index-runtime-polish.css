@@ -1,0 +1,87 @@
+/* Watchdog index-only presentation polish.
+   Loaded by the lean public-nav bridge so the mapless property cards stay
+   visually intentional without another dark panel inside the blue card. */
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{
+  top:58px!important;
+  right:24px!important;
+  min-width:0!important;
+  width:auto!important;
+  height:auto!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  grid-template-columns:36px auto!important;
+  grid-template-rows:auto auto!important;
+  column-gap:10px!important;
+  align-items:center!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score i{
+  grid-row:1 / 3!important;
+  width:36px!important;
+  height:36px!important;
+  border-radius:11px!important;
+  background:rgba(255,255,255,.13)!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  font-size:14px!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score b{
+  align-self:end!important;
+  font:900 48px/.78 "Plus Jakarta Sans",sans-serif!important;
+  letter-spacing:-.075em!important;
+  text-shadow:0 5px 20px rgba(2,15,38,.16)!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score small{
+  align-self:start!important;
+  margin-top:7px!important;
+  color:rgba(255,255,255,.72)!important;
+  font:850 8.5px/1 "Plus Jakarta Sans",sans-serif!important;
+  letter-spacing:.065em!important;
+  text-transform:uppercase!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score.building{
+  min-width:132px!important;
+  grid-template-columns:32px 1fr!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score.building i{
+  width:32px!important;
+  height:32px!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score.building b{
+  font-size:14px!important;
+  line-height:1.05!important;
+  letter-spacing:0!important;
+  text-shadow:none!important;
+}
+html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-robust{
+  left:24px!important;
+  right:24px!important;
+  bottom:18px!important;
+}
+@media(max-width:640px){
+  html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{
+    top:52px!important;
+    right:16px!important;
+    grid-template-columns:31px auto!important;
+    column-gap:8px!important;
+  }
+  html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score i{
+    width:31px!important;
+    height:31px!important;
+    font-size:12px!important;
+  }
+  html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score b{
+    font-size:39px!important;
+  }
+  html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score small{
+    margin-top:6px!important;
+    font-size:7.5px!important;
+  }
+  html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-robust{
+    left:15px!important;
+    right:15px!important;
+    bottom:13px!important;
+  }
+}
