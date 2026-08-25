@@ -23,18 +23,22 @@ assert.match(collector, /if \(!aiSource\) return;/);
 
 assert.match(routeGuard, /ai-referral-analytics\.js/);
 assert.match(routeGuard, /data-watchdog-ai-referral-runtime/);
+assert.match(routeGuard, /AI_REFERRAL_PRIVATE_PREFIXES/);
+assert.match(routeGuard, /'\/analytics'/);
+assert.match(routeGuard, /isAiReferralPublicPath\(publicPath\)/);
 assert.match(routeGuard, /https:\/\/www\.watchdogindex\.com\/#organization/);
 assert.match(routeGuard, /https:\/\/www\.watchdogindex\.com\/#website/);
 
 assert.match(insightApi, /canonical=WATCHDOG_ORIGIN\+'\/insights\/'\+slug/);
-assert.match(insightApi, /'@id':WATCHDOG_ORG/);
+assert.match(insightApi, /const author=\{'@type':'Organization','@id':WATCHDOG_ORG/);
+assert.match(insightApi, /publisher:author/);
 assert.match(insightApi, /'@id':WATCHDOG_SITE/);
 assert.match(insightApi, /isAccessibleForFree:true/);
 
 assert.match(insightsIndex, /rel="canonical" href="https:\/\/www\.watchdogindex\.com\/insights"/);
 assert.match(insightsIndex, /https:\/\/www\.google\.com\/preferences\/source\?q=watchdogindex\.com/);
 assert.match(insightsIndex, /https:\/\/www\.watchdogindex\.com\/#organization/);
-assert.match(insightsIndex, /href="\/insights\/\'+encodeURIComponent\(a\.slug\)\+'"/);
+assert.match(insightsIndex, /href="\/insights\/'\+encodeURIComponent\(a\.slug\)\+'"/);
 
 assert.match(reportFn, /host==="watchdogindex\.com"/);
 assert.match(reportFn, /host==="www\.watchdogindex\.com"/);
