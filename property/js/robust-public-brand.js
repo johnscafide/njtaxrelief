@@ -90,10 +90,36 @@
     }
   }
 
-  function sync(){syncPublicMenu();syncLandingShowcase();}
+  function ensureLookupPhotoCtaStyle(){
+    if(!isPropertyLanding()||document.getElementById('wd-mapless-photo-cta-style'))return;
+    var s=document.createElement('style');
+    s.id='wd-mapless-photo-cta-style';
+    s.textContent='#plm-photos .wd-mapless-copy{display:none!important}#plm-photos .wd-mapless-photo-note{margin-top:8px!important}#plm-photos .wd-mapless-photo-link{color:#9eece4!important;font-weight:850;text-decoration:underline;text-underline-offset:3px}#plm-photos .wd-mapless-photo-link:hover,#plm-photos .wd-mapless-photo-link:focus-visible{color:#fff!important}';
+    document.head.appendChild(s);
+  }
+
+  function syncLookupPhotoCta(){
+    if(!isPropertyLanding())return;
+    ensureLookupPhotoCtaStyle();
+    var hero=document.querySelector('#plm-photos .wd-mapless-property-hero');
+    if(!hero)return;
+    var copy=hero.querySelector('.wd-mapless-copy');
+    if(copy)copy.remove();
+    var note=hero.querySelector('.wd-mapless-photo-note');
+    if(!note)return;
+    var addressNode=hero.querySelector('.wd-mapless-address');
+    var address=addressNode&&addressNode.textContent?addressNode.textContent.trim():'';
+    var href='/home?photo=1'+(address?'&address='+encodeURIComponent(address):'');
+    if(note.dataset.wdPhotoCtaHref===href)return;
+    note.dataset.wdPhotoCtaHref=href;
+    note.innerHTML='<i class="fas fa-camera"></i><span>Own this home? <a class="wd-mapless-photo-link" href="'+href+'">Add a homeowner photo</a></span>';
+  }
+
+  function sync(){syncPublicMenu();syncLandingShowcase();syncLookupPhotoCta();}
   var scheduled=false;
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;sync();});}
 
+  ensureLookupPhotoCtaStyle();
   loadCanonicalScore();
   loadLandingRecentIntelligence();
   loadLookupSummaryEnhancements();
