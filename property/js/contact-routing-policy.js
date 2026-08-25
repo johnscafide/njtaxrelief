@@ -115,8 +115,9 @@
     });
   }
 
-  function replaceAgentRail() {
-    document.querySelectorAll('.plm-agent').forEach(function (rail) {
+  function replaceAgentRail(scope) {
+    var root = scope && scope.querySelectorAll ? scope : document;
+    root.querySelectorAll('.plm-agent').forEach(function (rail) {
       if (rail.getAttribute('data-watchdog-contact-policy') === '1') return;
       var content = String(rail.textContent || '');
       if (!/John|Heather|Email|856[- .()]|johnscafide|heatherscafide/i.test(content + ' ' + rail.innerHTML)) return;
@@ -134,35 +135,36 @@
     });
   }
 
-  function removeDirectAgentImages() {
-    document.querySelectorAll('img[src*="johnprofile"],img[src*="heatherheadshot"]').forEach(function (img) {
+  function removeDirectAgentImages(scope) {
+    var root = scope && scope.querySelectorAll ? scope : document;
+    root.querySelectorAll('img[src*="johnprofile"],img[src*="heatherheadshot"]').forEach(function (img) {
       var container = img.closest('.plm-agent,.prop-agent,.agent-card,.agent-contact');
       if (container) img.remove();
     });
   }
 
-  function normalize(scope) {
-    cleanAnchors(scope || document);
-    cleanText(scope && scope.nodeType ? scope : document.body);
-    cleanMetadata();
-    replaceAgentRail();
-    removeDirectAgentImages();
-  }
-
-  var queued = false;
-  function queueNormalize() {
-    if (queued) return;
-    queued = true;
-    window.requestAnimationFrame(function () {
-      queued = false;
-      normalize(document);
-    });
+  function normalize(scope, includeMetadata) {
+    var root = scope && scope.querySelectorAll ? scope : document;
+    cleanAnchors(root);
+    cleanText(root && root.nodeType ? root : document.body);
+    if (includeMetadata) cleanMetadata();
+    replaceAgentRail(root);
+    removeDirectAgentImages(root);
   }
 
   function boot() {
-    normalize(document);
+    normalize(document, true);
     if (!window.MutationObserver || !document.documentElement) return;
-    new MutationObserver(queueNormalize).observe(document.documentElement, { childList: true, subtree: true });
+    new MutationObserver(function (records) {
+      var scopes = new Set();
+      records.forEach(function (record) {
+        (record.addedNodes || []).forEach(function (node) {
+          if (!node || node.nodeType !== 1) return;
+          scopes.add(node.parentElement || node);
+        });
+      });
+      scopes.forEach(function (scope) { normalize(scope, false); });
+    }).observe(document.documentElement, { childList: true, subtree: true });
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
@@ -171,6 +173,6 @@
   window.WatchdogContactPolicy = Object.freeze({
     contactUrl: CONTACT_URL,
     supportUrl: SUPPORT_URL,
-    refresh: function () { normalize(document); }
+    refresh: function () { normalize(document, true); }
   });
 })();
