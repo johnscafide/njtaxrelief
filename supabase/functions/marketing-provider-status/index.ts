@@ -1,6 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!;
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://watchdogindex.com','https://www.watchdogindex.com','https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
 const PCM_V3='https://v3.pcmintegrations.com';
 const PCM_LOGIN=PCM_V3+'/auth/login';
 const PCM_READ_ONLY_PATHS=['/order','/orders','/batch','/batches','/design','/designs'];
@@ -12,7 +12,7 @@ const defs:Record<string,{required:string[],optional?:string[],perUserOAuth?:boo
  sendgrid:{required:['SENDGRID_API_KEY','SENDGRID_FROM_EMAIL'],optional:['SENDGRID_FROM_NAME'],note:'Permission-based email; sender/domain authentication remains provider-side.'},
  twilio_sms:{required:['TWILIO_ACCOUNT_SID','TWILIO_API_KEY','TWILIO_API_KEY_SECRET','TWILIO_MESSAGING_SERVICE_SID'],note:'Permission-based SMS; consent, suppression and quiet-hour controls remain mandatory.'}
 };
-function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
+function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://www.watchdogindex.com','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
 function reply(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8'}})}
 function configured(key:string){const d=defs[key];if(!d)return{credential_ready:false,per_user_oauth:false};if(key==='pcm'){const sandboxKey=Boolean(Deno.env.get('PCM_SANDBOX_API_KEY'));const secret=Boolean(Deno.env.get('PCM_API_SECRET'));const access=Boolean(Deno.env.get('PCM_ACCESS_TOKEN'));const legacyFlow=Boolean(Deno.env.get('PCM_API_KEY')&&secret);return{credential_ready:access||(sandboxKey&&secret)||legacyFlow,per_user_oauth:false}}const credentialReady=d.required.map(secretName=>Boolean(Deno.env.get(secretName))).every(Boolean);return{credential_ready:credentialReady,per_user_oauth:Boolean(d.perUserOAuth)}}
 function tokenFrom(data:any){return String(data?.token??data?.accessToken??data?.access_token??data?.code??'').trim()}
