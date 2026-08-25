@@ -6,6 +6,10 @@
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
   var VERSION = '20260824b';
+  /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
+     separate asset revision so interaction fixes can invalidate cached chrome
+     immediately without coupling that cache key to the menu data contract. */
+  var CSS_VERSION = '20260825a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -288,10 +292,15 @@
   }
 
   function ensureCss(){
-    if(document.querySelector('link[href^="/property/css/watchdog-universal-menu.css"]')) return;
+    var href = '/property/css/watchdog-universal-menu.css?v=' + CSS_VERSION;
+    var existing = document.querySelector('link[href^="/property/css/watchdog-universal-menu.css"]');
+    if(existing){
+      if(existing.getAttribute('href') !== href) existing.setAttribute('href',href);
+      return;
+    }
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/property/css/watchdog-universal-menu.css?v=' + VERSION;
+    link.href = href;
     document.head.appendChild(link);
   }
   function watchTarget(node){
