@@ -2,6 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const CANONICAL_HOST = 'www.watchdogindex.com';
+const CANONICAL_ORIGIN = 'https://www.watchdogindex.com/';
 const LEGACY_PROPERTY_ORIGIN = 'https://njpropertytaxrelief.com/property/';
 const WATCHDOG_PROPERTY_ORIGIN = 'https://www.watchdogindex.com/property/';
 const GA_TAG = '  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>\n';
@@ -10,6 +11,31 @@ const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c
 const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
 const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
 const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
+const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
+const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.watchdogindex.com/#organization",
+      "name": "Watchdog",
+      "alternateName": "Watchdog Property Intelligence",
+      "url": "https://www.watchdogindex.com/",
+      "description": "New Jersey property intelligence for homeowners and real-estate professionals, combining public-source property evidence with Watchdog-derived decision intelligence.",
+      "areaServed": { "@type": "State", "name": "New Jersey" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.watchdogindex.com/#website",
+      "url": "https://www.watchdogindex.com/",
+      "name": "Watchdog",
+      "publisher": { "@id": "https://www.watchdogindex.com/#organization" },
+      "inLanguage": "en-US"
+    }
+  ]
+}
+</script>\n`;
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -50,9 +76,34 @@ function installFreeGridImagery(source) {
   return source.replace(OWNERSHIP_TAG, FREE_GRID_TAG + OWNERSHIP_TAG);
 }
 
+function installEntityGraph(source) {
+  if (source.includes(`id="${ENTITY_GRAPH_ID}"`)) return source;
+  if (!source.includes('</head>')) {
+    console.warn('WATCHDOG_ENTITY_GRAPH_HEAD_MARKER_MISSING');
+    return source;
+  }
+  return source.replace('</head>', `${ENTITY_GRAPH}</head>`);
+}
+
 function canonicalizeWatchdogHtml(source) {
-  return source
+  const canonicalized = source
     .split(LEGACY_PROPERTY_ORIGIN).join(WATCHDOG_PROPERTY_ORIGIN)
+    .replace(
+      '<link rel="canonical" href="https://www.watchdogindex.com/property/">',
+      `<link rel="canonical" href="${CANONICAL_ORIGIN}">`
+    )
+    .replace(
+      '<meta property="og:url" content="https://www.watchdogindex.com/property/">',
+      `<meta property="og:url" content="${CANONICAL_ORIGIN}">`
+    )
+    .replace(
+      '"@id": "https://www.watchdogindex.com/property/#app"',
+      '"@id": "https://www.watchdogindex.com/#app"'
+    )
+    .replace(
+      '"url": "https://www.watchdogindex.com/property/"',
+      '"url": "https://www.watchdogindex.com/"'
+    )
     .replace(
       '<meta property="og:site_name" content="NJ Property Tax Relief Guide">',
       '<meta property="og:site_name" content="Watchdog">'
@@ -61,6 +112,8 @@ function canonicalizeWatchdogHtml(source) {
       '"item": "https://njpropertytaxrelief.com/"',
       '"item": "https://www.watchdogindex.com/"'
     );
+
+  return installEntityGraph(canonicalized);
 }
 
 export default async function handler(req, res) {
