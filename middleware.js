@@ -5,6 +5,9 @@ const INDEXNOW_KEY_PATH = '/c04eb5246cd74475b86188f12c31e21b.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
+const BULK_SALES_FILE = /^\/property\/sales-[a-z-]+\.json$/i;
+const SALES_API_PATH = '/api/sales-by-district';
+const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
 const ROOT_COMPAT_REDIRECTS = new Map([
   ['/contact.html', '/contact']
@@ -61,9 +64,38 @@ function redirectCanonical(request, url, pathname) {
   return Response.redirect(destination, 308);
 }
 
+function blockedDataResponse(status, message, cacheControl) {
+  return new Response(JSON.stringify({ error: message }), {
+    status,
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': cacheControl,
+      'X-Robots-Tag': 'noindex, nofollow, noarchive',
+      'X-Watchdog-Data-Access': 'scoped-only'
+    }
+  });
+}
+
 export default function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
+  const userAgent = request.headers.get('user-agent') || '';
+
+  // Bulk county sales files remain server-readable for the municipality-scoped
+  // function, but are never delivered as static assets. This applies to every
+  // alias on the deployment, not only the canonical Watchdog host.
+  if (BULK_SALES_FILE.test(url.pathname)) {
+    console.warn('watchdog-data-edge', JSON.stringify({ event: 'bulk_sales_blocked', path: url.pathname }));
+    return blockedDataResponse(404, 'Bulk sales files are not a public delivery surface.', 'public, max-age=300, s-maxage=86400');
+  }
+
+  // Obvious non-browser extraction clients are stopped before function compute.
+  // This is deliberately narrow: normal browsers and legitimate crawlers are not
+  // challenged merely because the underlying records are public.
+  if (url.pathname === SALES_API_PATH && AUTOMATION_UA.test(userAgent)) {
+    console.warn('watchdog-data-edge', JSON.stringify({ event: 'automation_client_blocked', path: url.pathname }));
+    return blockedDataResponse(403, 'Automated bulk extraction is not permitted on this endpoint.', 'no-store');
+  }
 
   if (host !== WATCHDOG_HOST) return next();
 
