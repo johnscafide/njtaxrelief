@@ -101,14 +101,18 @@ function providerStatus(payload: any) {
 }
 
 function providerEventKey(payload: any, rawHash: string) {
-  return clean(
+  const providerId = clean(
     payload?.eventId ??
       payload?.event_id ??
       payload?.webhookId ??
       payload?.webhook_id ??
       payload?.id,
-    180,
-  ) || rawHash;
+    100,
+  );
+  // PCM can resend the same order/recipient webhook as tracking status changes.
+  // Include the exact raw-body hash so a true replay is idempotent while a new
+  // status payload is still processed even if PCM reuses an event identifier.
+  return providerId ? `${providerId}:${rawHash}` : rawHash;
 }
 
 function ids(payload: any) {
@@ -169,6 +173,9 @@ Deno.serve(async (req) => {
       vendor_contract: {
         aggregate_order_statuses: ['pending', 'processing', 'mailing', 'delivered'],
         recipient_tracking_statuses: ['returned', 'delivered', 'redirected', 'en route'],
+        retry_schedule_minutes: [1, 5, 10],
+        exact_payload_duplicates_acknowledged: true,
+        status_updates_processed_separately: true,
       },
     });
   }
@@ -255,6 +262,17 @@ Deno.serve(async (req) => {
     .single();
 
   if (saved.error) {
+    // Handle concurrent retries against the unique(provider_key,event_key)
+    // inbox constraint as an idempotent success instead of causing PCM to
+    // retry the same delivery again.
+    if (saved.error.code === '23505') {
+      return json(200, {
+        accepted: true,
+        duplicate: true,
+        event_key: key,
+        status: 'received',
+      });
+    }
     console.error('PCM_WEBHOOK_INBOX_ERROR', saved.error);
     return json(503, { error: 'Webhook inbox unavailable' });
   }
