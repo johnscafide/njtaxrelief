@@ -1,0 +1,38 @@
+name: NJW-37 anti-scrape contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'middleware.js'
+      - 'api/sales-by-district.js'
+      - 'property/js/public-nav.js'
+      - 'property/terms/index.html'
+      - 'supabase/migrations/20260825230500_njw_37_public_request_rate_limit.sql'
+      - 'property/tests/njw37-anti-scrape-contract.mjs'
+      - '.github/workflows/njw37-anti-scrape-contract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'middleware.js'
+      - 'api/sales-by-district.js'
+      - 'property/js/public-nav.js'
+      - 'property/terms/index.html'
+      - 'supabase/migrations/20260825230500_njw_37_public_request_rate_limit.sql'
+      - 'property/tests/njw37-anti-scrape-contract.mjs'
+      - '.github/workflows/njw37-anti-scrape-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  anti-scrape-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Watchdog anti-scrape delivery and privacy boundaries
+        run: node property/tests/njw37-anti-scrape-contract.mjs
