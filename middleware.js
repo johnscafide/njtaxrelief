@@ -6,6 +6,9 @@ const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
+const ROOT_COMPAT_REDIRECTS = new Map([
+  ['/contact.html', '/contact']
+]);
 const LEGACY_FAQ_PATHS = new Set([
   '/property/faq',
   '/property/faq/',
@@ -79,6 +82,12 @@ export default function middleware(request) {
     return rewriteWatchdogSystemFile(request, '/api/watchdog-index-sitemap');
   }
   if (TYPED_SITEMAP_FILE.test(url.pathname)) return next();
+
+  // Retire old root-level browser redirects in favor of real HTTP canonical
+  // redirects so search engines and assistive technology see one clean route.
+  if (ROOT_COMPAT_REDIRECTS.has(url.pathname)) {
+    return redirectCanonical(request, url, ROOT_COMPAT_REDIRECTS.get(url.pathname));
+  }
 
   // Retire compatibility URLs for public Watchdog pages on the canonical host.
   // These redirects prevent old /property/* copies from exposing stale contact
