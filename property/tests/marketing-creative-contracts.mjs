@@ -34,6 +34,12 @@ assert.match(pcmCatalog,/https:\/\/www\.watchdogindex\.com/,'PCM catalog/editor 
 assert.match(pcmCatalog,/https:\/\/www\.njpropertytaxrelief\.com/,'PCM catalog/editor adapter must preserve the intentional legacy browser origin.');
 assert.match(pcmCatalog,/provider_mutation_called:false/,'PCM catalog/editor reads must remain explicit non-mutation operations.');
 
+const providerStatus=read('supabase/functions/marketing-provider-status/index.ts');
+assert.match(providerStatus,/https:\/\/watchdogindex\.com/,'Marketing provider status must allow the canonical Watchdog apex origin.');
+assert.match(providerStatus,/https:\/\/www\.watchdogindex\.com/,'Marketing provider status must allow the canonical Watchdog www origin.');
+assert.match(providerStatus,/https:\/\/www\.njpropertytaxrelief\.com/,'Marketing provider status must preserve the intentional legacy origin.');
+assert.match(providerStatus,/marketing_studio_bootstrap/,'Marketing provider status must remain behind Marketing Studio access.');
+
 const creative=read('property/js/marketing-studio-creative.js');
 assert.match(creative,/marketing_prepare_direct_mail_recipients/,'Recipients must be materialized server-side before quote/checkout.');
 assert.match(creative,/marketing_approve_creative/,'Creative approval must be explicit.');
@@ -79,6 +85,13 @@ assert.match(pcmWebhook,/same order\/recipient webhook as tracking status change
 assert.match(pcmWebhook,/providerId \? `\$\{providerId\}:\$\{rawHash\}` : rawHash/,'PCM event idempotency key must include the exact raw payload hash when a provider event ID exists.');
 assert.match(pcmWebhook,/saved\.error\.code === '23505'/,'Concurrent exact duplicate webhooks must be acknowledged idempotently instead of triggering another PCM retry.');
 
+const truthfulPcmCatalog=read('supabase/migrations/20260825230500_pcm_contract_state_truthful_capabilities.sql');
+assert.match(truthfulPcmCatalog,/provider_cancel_supported',\s*true/,'PCM catalog may record provider support for cancellation.');
+assert.match(truthfulPcmCatalog,/cancel_contract_status',\s*'pending_wire_certification'/,'PCM cancellation must remain explicitly uncertified in Watchdog.');
+assert.match(truthfulPcmCatalog,/webhook_signature_contract_status',\s*'pending_wire_certification'/,'PCM webhook signature must remain explicitly uncertified until exact wire values are certified.');
+assert.match(truthfulPcmCatalog,/live_send_enabled',\s*false/,'PCM runtime capability metadata must not advertise live send.');
+assert.match(truthfulPcmCatalog,/operations\s*=\s*'\["health","quote","validate","submit","status","proof","tracking"\]'/,'PCM executable adapter operations must omit uncertified cancellation.');
+
 const webhook=read('supabase/functions/stripe-webhook/index.ts');
 assert.match(webhook,/marketing-direct-mail-fulfill/,'Paid fulfillment handoff must originate from the server Stripe webhook.');
 assert.match(webhook,/Authorization: `Bearer \$\{SERVICE_ROLE\}`/,'Stripe webhook must authenticate the fulfillment handoff service-to-service.');
@@ -93,4 +106,4 @@ const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
-console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
+console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, truthful provider capability state, canonical provider-status CORS, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
