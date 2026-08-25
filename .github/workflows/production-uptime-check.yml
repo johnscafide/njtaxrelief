@@ -50,14 +50,18 @@ jobs:
             echo "OK ${url}"
           }
 
-          check 'https://njpropertytaxrelief.com/' 'NJ Property Tax'
-          check 'https://njpropertytaxrelief.com/property/' 'Watchdog'
+          # Canonical Watchdog production surface.
+          check 'https://www.watchdogindex.com/property/' 'Watchdog'
+
+          # Intentional NJPropertyTaxRelief.com coexistence surface.
+          check 'https://njpropertytaxrelief.com/' 'New Jersey property tax relief'
 
       - name: Record monitoring boundary
         if: always()
         run: |
           echo 'This monitor checks public HTTP availability and expected page markers only.'
           echo 'It does not authenticate, inspect customer records, or test billing.'
+          echo 'Canonical WatchdogIndex.com is checked first; NJPropertyTaxRelief.com is retained as an intentional coexistence check.'
           echo 'Scheduled failures open or update one GitHub incident assigned to the launch owner.'
 
   incident-alert:
@@ -89,7 +93,7 @@ jobs:
               '',
               `- Detected: ${now}`,
               `- Workflow run: ${runUrl}`,
-              '- Checked: https://njpropertytaxrelief.com/ and https://njpropertytaxrelief.com/property/',
+              '- Checked: https://www.watchdogindex.com/property/ and https://njpropertytaxrelief.com/',
               '- Owner: @' + assignee,
               '',
               'Triage the failed route before making a public status claim. This alert contains no customer or billing data.'
