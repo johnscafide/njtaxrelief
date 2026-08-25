@@ -1,0 +1,42 @@
+name: Watchdog AI discovery contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/insight.js'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/insights/index.html'
+      - 'property/js/ai-referral-analytics.js'
+      - 'property/data/ai-discovery-benchmark.json'
+      - 'property/analytics/ai-discovery/index.html'
+      - 'property/tests/watchdog-ai-discovery-contract.mjs'
+      - 'supabase/functions/product-analytics-report/index.ts'
+      - '.github/workflows/watchdog-ai-discovery-contract.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'api/insight.js'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/insights/index.html'
+      - 'property/js/ai-referral-analytics.js'
+      - 'property/data/ai-discovery-benchmark.json'
+      - 'property/analytics/ai-discovery/index.html'
+      - 'property/tests/watchdog-ai-discovery-contract.mjs'
+      - 'supabase/functions/product-analytics-report/index.ts'
+      - '.github/workflows/watchdog-ai-discovery-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ai-discovery-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Watchdog AI discovery, publisher and measurement contracts
+        run: node property/tests/watchdog-ai-discovery-contract.mjs
