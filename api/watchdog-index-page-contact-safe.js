@@ -9,6 +9,7 @@ const VERCEL_AUTH_MARKERS = [
 ];
 const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
+const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent-control','/agent-desk','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
 const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
 {
@@ -50,6 +51,10 @@ function cleanPath(value) {
   return path || '/';
 }
 
+function isAiReferralPublicPath(pathname) {
+  return !AI_REFERRAL_PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 function looksLikeVercelAuth(body) {
   const sample = String(body || '').slice(0, 240000);
   return VERCEL_AUTH_MARKERS.some((pattern) => pattern.test(sample));
@@ -62,7 +67,7 @@ function installEntityGraph(input) {
   return html.replace(/<\/head>/i, `${ENTITY_GRAPH}\n</head>`);
 }
 
-function sanitizeContactHtml(input) {
+function sanitizeContactHtml(input, publicPath) {
   let html = String(input || '');
 
   html = html.replace(
@@ -113,7 +118,7 @@ function sanitizeContactHtml(input) {
   if (!/contact-routing-policy\.js/i.test(html)) {
     html = html.replace(/<\/body>/i, `${CONTACT_POLICY_SCRIPT}\n</body>`);
   }
-  if (!/ai-referral-analytics\.js/i.test(html)) {
+  if (isAiReferralPublicPath(publicPath) && !/ai-referral-analytics\.js/i.test(html)) {
     html = html.replace(/<\/body>/i, `${AI_REFERRAL_SCRIPT}\n</body>`);
   }
   return html;
@@ -134,7 +139,7 @@ function render404(req, res) {
   res.statusCode = 404;
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=300');
-  res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow,noarchive');
   res.setHeader('X-Watchdog-Route-Guard', 'branded-404');
   if (req.method === 'HEAD') return res.end();
   return res.end(WATCHDOG_404);
@@ -169,7 +174,7 @@ module.exports = async function handler(req, res) {
     res.statusCode = upstream.status;
     copySafeHeaders(upstream, res);
     if (req.method === 'HEAD') return res.end();
-    let safeBody = sanitizeContactHtml(body);
+    let safeBody = sanitizeContactHtml(body, publicPath);
     if (publicPath === '/') safeBody = installEntityGraph(safeBody);
     return res.end(safeBody);
   } catch (error) {
