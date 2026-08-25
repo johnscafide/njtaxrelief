@@ -8,6 +8,7 @@ const VERCEL_AUTH_MARKERS = [
   /vercel\.com\/(?:login|sso)/i
 ];
 const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
+const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
 const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
 {
@@ -111,6 +112,9 @@ function sanitizeContactHtml(input) {
 
   if (!/contact-routing-policy\.js/i.test(html)) {
     html = html.replace(/<\/body>/i, `${CONTACT_POLICY_SCRIPT}\n</body>`);
+  }
+  if (!/ai-referral-analytics\.js/i.test(html)) {
+    html = html.replace(/<\/body>/i, `${AI_REFERRAL_SCRIPT}\n</body>`);
   }
   return html;
 }
