@@ -3,6 +3,7 @@
    Scope: current product/app shells only. Public/editorial surfaces keep their documented exceptions. */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+@import url('/property/css/watchdog-brand-assets.css?v=20260825a');
 
 :root{
   --wd-bg:#f5f7fb;
