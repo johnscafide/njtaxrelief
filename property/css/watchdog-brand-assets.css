@@ -58,6 +58,37 @@ body.md-page .wd-nav .wd-logo{
   height:51px!important;
 }
 
+/* Universal-menu CSS is injected at runtime. These higher-specificity rules keep
+   the approved lockup authoritative even when that later stylesheet arrives. */
+html body .wd4-nav-head .wd4-brand,
+html body .hm27-nav-head .hm27-brand,
+html body .wd-universal-nav-head .wd-universal-brand{
+  width:218px!important;
+  min-width:218px!important;
+  flex:0 0 218px!important;
+  height:51px!important;
+  background-image:url('/property/branding/watchdog-logo-horizontal.svg')!important;
+  background-position:left center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
+}
+html body .wd4-nav-head .wd4-brand-mark,
+html body .wd4-nav-head .wd4-brand-copy,
+html body .hm27-nav-head .hm27-brand-mark,
+html body .hm27-nav-head .hm27-brand-copy,
+html body .wd-universal-nav-head .wd-universal-brand-mark,
+html body .wd-universal-nav-head .wd-universal-brand-copy{
+  position:absolute!important;
+  width:1px!important;
+  height:1px!important;
+  padding:0!important;
+  margin:-1px!important;
+  overflow:hidden!important;
+  clip:rect(0,0,0,0)!important;
+  white-space:nowrap!important;
+  border:0!important;
+}
+
 /* Compact app/sidebar identity uses the square mark, not a squeezed wordmark. */
 .db-side-brand>span,
 .wd4-bootstrap-mark{
