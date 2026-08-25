@@ -48,13 +48,15 @@ jobs:
               '#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}',
               '#wd-main-sheet.open,#wd-profile-sheet.open{pointer-events:auto!important',
               "sheet.addEventListener('click'",
-              "e.target.closest('a[href]')",
-              'if(link)close()',
+              "e.target.closest('.wd-public-close,[data-wd-universal=\"close\"]')",
               "back.addEventListener('click',close)",
+              "Never hide/translate the sheet during an anchor's activation event.",
           ]
           interaction_missing = [token for token in interaction_required if token not in nav]
           if interaction_missing:
               raise SystemExit('public menu runtime tap contract missing: ' + ', '.join(interaction_missing))
+          if 'if(link)close()' in nav or "closest('a[href]')" in nav:
+              raise SystemExit('public menu runtime must not hide the tapped anchor before WebKit finishes activation')
 
           css = Path('property/css/watchdog-universal-menu.css').read_text(encoding='utf-8')
           css_interaction_required = [
@@ -71,4 +73,4 @@ jobs:
           css_interaction_missing = [token for token in css_interaction_required if token not in css]
           if css_interaction_missing:
               raise SystemExit('canonical profile-menu CSS interaction contract missing: ' + ', '.join(css_interaction_missing))
-          print('Public navigation hooks and redundant runtime/CSS tap interaction contracts are current.')
+          print('Public navigation hooks and WebKit-safe runtime/CSS tap interaction contracts are current.')

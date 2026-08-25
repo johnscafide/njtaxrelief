@@ -6,6 +6,8 @@ on:
       - main
     paths:
       - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/tests/index-profile-webkit-acceptance.mjs'
+      - 'property/tests/index-asset-diet-contract.mjs'
       - 'property/tests/ops-selfservice-acceptance.mjs'
       - 'property/tests/public-property-production-smoke.mjs'
       - 'property/dashboard/**'
@@ -19,6 +21,8 @@ on:
       - 'property/scan/**'
       - 'property/js/**'
       - 'property/css/**'
+      - 'api/watchdog-index-page.js'
+      - 'api/watchdog-index-page-contact-safe.js'
       - 'supabase/functions/submit-support-request/**'
       - 'supabase/functions/export-my-data/**'
       - 'supabase/functions/public-platform-status/**'
@@ -41,7 +45,7 @@ jobs:
     name: authenticated-visual-acceptance
     if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     environment: staging
     env:
       STAGING_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
@@ -117,13 +121,16 @@ jobs:
           print(f'Rewrote {touched} frontend files to staging inside runner workspace only.')
           PY
 
+      - name: Verify Index asset diet contract
+        run: node property/tests/index-asset-diet-contract.mjs
+
       - name: Verify operations and server Scanner boundaries
         run: node property/tests/ops-selfservice-acceptance.mjs
 
       - name: Install Playwright
         run: |
           npm install --no-save playwright@1.62.0
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
 
       - name: Verify production property page has no fatal script error
         run: node property/tests/public-property-production-smoke.mjs
@@ -151,6 +158,9 @@ jobs:
 
       - name: Run authenticated desktop and mobile acceptance
         run: node property/tests/hosted-visual-acceptance.mjs
+
+      - name: Run WebKit mobile Index profile acceptance
+        run: node property/tests/index-profile-webkit-acceptance.mjs
 
       - name: Upload visual evidence
         if: always()

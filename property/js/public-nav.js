@@ -34,10 +34,9 @@
     return path==='/property'||path==='/property/index.html'||root;
   }
 
-  /* /scripts.js is still present in the legacy HTML template. It used to boot
-     the NJPropertyTaxRelief rebate popup on this Watchdog surface. Suppress that
-     legacy UI before DOMContentLoaded so it cannot create an index-only overlay
-     above or around the account sheet. */
+  /* /scripts.js may still be present on legacy mirrors. Suppress the historical
+     NJPropertyTaxRelief rebate UI there; the canonical Watchdog root removes the
+     legacy script entirely in the server-side asset diet. */
   function suppressLegacyIndexUi(){
     if(!isPropertyIndex())return;
     document.documentElement.classList.add('wd-index-lean-runtime');
@@ -74,8 +73,9 @@
       sheet.addEventListener('click',function(e){
         var closer=e.target&&e.target.closest&&e.target.closest('.wd-public-close,[data-wd-universal="close"]');
         if(closer){e.preventDefault();close();return;}
-        var link=e.target&&e.target.closest&&e.target.closest('a[href]');
-        if(link)close();
+        /* Never hide/translate the sheet during an anchor's activation event.
+           Chromium tolerates that pattern, but WebKit/iOS can cancel or lose the
+           navigation when the tapped target disappears before activation ends. */
       });
     });
     var back=q('wd-public-backdrop');

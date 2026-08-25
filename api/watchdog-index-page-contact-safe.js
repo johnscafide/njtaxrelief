@@ -67,6 +67,26 @@ function installEntityGraph(input) {
   return html.replace(/<\/head>/i, `${ENTITY_GRAPH}\n</head>`);
 }
 
+/* Canonical Watchdog pages are already route-normalized by the server adapter.
+   Do not add a second browser MutationObserver to re-normalize every injected
+   profile/menu node. On the canonical root we also drop the historical global
+   `/scripts.js` runtime; lookup.js and the explicit Watchdog runtimes own this
+   surface now. This is the first bounded Index asset-diet step. */
+function applyCanonicalRuntimeDiet(input, publicPath) {
+  let html = String(input || '');
+  html = html.replace(
+    /<script\b[^>]*\bid=["']watchdog-clean-route-runtime["'][^>]*>[\s\S]*?<\/script>\s*/gi,
+    ''
+  );
+  if (publicPath === '/') {
+    html = html.replace(
+      /<script\b[^>]*\bsrc=["']\/scripts\.js["'][^>]*>\s*<\/script>\s*/gi,
+      ''
+    );
+  }
+  return html;
+}
+
 function sanitizeContactHtml(input, publicPath) {
   let html = String(input || '');
 
@@ -175,6 +195,7 @@ module.exports = async function handler(req, res) {
     copySafeHeaders(upstream, res);
     if (req.method === 'HEAD') return res.end();
     let safeBody = sanitizeContactHtml(body, publicPath);
+    safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
     if (publicPath === '/') safeBody = installEntityGraph(safeBody);
     return res.end(safeBody);
   } catch (error) {
