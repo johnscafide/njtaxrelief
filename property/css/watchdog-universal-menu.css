@@ -182,6 +182,28 @@
 .wd-universal-nav-foot button{width:100%!important;min-height:44px!important;border:0!important;background:#f4f6f9!important;border-radius:10px!important;color:#53657b!important;display:flex!important;align-items:center!important;gap:10px!important;padding:0 13px!important;font:700 12px var(--wdum-font)!important;cursor:pointer!important}
 .wd-universal-nav-foot button:hover{background:#eef2f6!important;color:#1f3654!important}
 
+/* Public modal interaction is a canonical CSS contract, not only a runtime
+   patch. This keeps the account sheet tappable above the backdrop even when a
+   page-specific stylesheet or stale JavaScript path loads out of order. */
+#wd-public-backdrop{z-index:9400!important}
+#wd-main-sheet,#wd-profile-sheet{z-index:9500!important;pointer-events:none!important}
+#wd-main-sheet.open,#wd-profile-sheet.open{
+  pointer-events:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  overscroll-behavior:contain!important;
+}
+#wd-profile-sheet.open{
+  isolation:isolate!important;
+}
+#wd-main-sheet.open a,#wd-main-sheet.open button,
+#wd-profile-sheet.open #wd-profile-content,
+#wd-profile-sheet.open .wd-universal-profile,
+#wd-profile-sheet.open .wd-universal-profile>nav,
+#wd-profile-sheet.open a,#wd-profile-sheet.open button{
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+
 /* ---------- public profile ---------- */
 .wd-public-sheet.right.wd-universal-public-profile{
   left:auto!important;right:14px!important;top:82px!important;bottom:auto!important;
