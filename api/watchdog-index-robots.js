@@ -1,5 +1,33 @@
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
+const PRIVATE_ROUTES = [
+  '/account',
+  '/agent-control',
+  '/agent-desk',
+  '/analytics',
+  '/backoffice',
+  '/compare',
+  '/dashboard',
+  '/data-center',
+  '/data-workbench',
+  '/developer',
+  '/developer-data',
+  '/diagnostics',
+  '/farm-builder',
+  '/growth',
+  '/home',
+  '/insights/admin',
+  '/integrations',
+  '/intelligence',
+  '/logs',
+  '/marketing-studio',
+  '/newsletter-studio',
+  '/onboarding',
+  '/report-builder',
+  '/watchlist',
+  '/whitepapers',
+  '/workbench'
+];
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -7,6 +35,19 @@ function requestHost(req) {
     .trim()
     .toLowerCase()
     .replace(/:\d+$/, '');
+}
+
+function privateRouteRules() {
+  const rules = [];
+  for (const route of PRIVATE_ROUTES) {
+    // Use an end anchor for the exact route so a private app path such as
+    // /home does not accidentally block public pages such as
+    // /home-buying-cost-calculator or /home-inspectors.
+    rules.push(`Disallow: ${route}$`);
+    rules.push(`Disallow: ${route}/`);
+    rules.push(`Disallow: ${route}?`);
+  }
+  return rules;
 }
 
 module.exports = function handler(req, res) {
@@ -26,22 +67,16 @@ module.exports = function handler(req, res) {
   const body = [
     '# robots.txt — Watchdog',
     '# Canonical public host: www.watchdogindex.com',
-    '# Search/discovery crawlers are called out explicitly; model-training controls are not changed here.',
+    '# Public search and answer-engine discovery stays open. Private/member/developer application routes are excluded.',
+    '# Model-training permissions for public Watchdog content are not changed by this crawl-boundary update.',
     '',
     'User-agent: OAI-SearchBot',
-    'Allow: /',
-    '',
     'User-agent: PerplexityBot',
-    'Allow: /',
-    '',
     'User-agent: Applebot',
-    'Allow: /',
-    '',
     'User-agent: Bingbot',
-    'Allow: /',
-    '',
     'User-agent: *',
     'Allow: /',
+    ...privateRouteRules(),
     '',
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap.xml`,
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-alternatives.xml`,
