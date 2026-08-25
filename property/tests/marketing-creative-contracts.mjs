@@ -21,12 +21,18 @@ assert.match(pcmWorkspace,/payload\.designID!==String\(state\.design_id\|\|''\)/
 assert.match(pcmWorkspace,/refresh\(null,\{automatic:true\}\)/,'A verified PCM save message must trigger automatic provider proof refresh.');
 assert.match(pcmWorkspace,/data-pcmw-refresh/,'Manual PCM refresh must remain available as a fallback.');
 assert.match(pcmWorkspace,/24 hours/,'Vendor-confirmed PCM editor token lifetime must be surfaced without persisting the token.');
+assert.match(pcmWorkspace,/DynamicImage/,'PCM Dynamic Image readiness must use the exact provider-confirmed variable key.');
+assert.match(pcmWorkspace,/3 business days/,'PCM dynamic artwork availability window must be surfaced.');
+assert.match(pcmWorkspace,/proof engine is on demand/,'PCM on-demand proof retention risk must be surfaced before future live submission.');
+assert.match(pcmWorkspace,/Dynamic image values are not submitted here/,'Customize must not imply that dynamic image data is already wired to live fulfillment.');
+assert.match(pcmWorkspace,/No order, postage purchase, payment, cancellation, or production submission occurs here/,'PCM Customize must remain a non-spend, non-cancellation surface.');
 
 const pcmCatalog=read('supabase/functions/pcm-sandbox-catalog/index.ts');
 assert.match(pcmCatalog,/\/design\/\$\{encodeURIComponent\(id\)\}\/edit/,'PCM editor sessions must use the verified design edit route.');
 assert.match(pcmCatalog,/auth\.startsWith\('Bearer '\)/,'PCM catalog/editor adapter must require authenticated browser access.');
 assert.match(pcmCatalog,/https:\/\/www\.watchdogindex\.com/,'PCM catalog/editor adapter must allow the canonical Watchdog browser origin.');
 assert.match(pcmCatalog,/https:\/\/www\.njpropertytaxrelief\.com/,'PCM catalog/editor adapter must preserve the intentional legacy browser origin.');
+assert.match(pcmCatalog,/provider_mutation_called:false/,'PCM catalog/editor reads must remain explicit non-mutation operations.');
 
 const creative=read('property/js/marketing-studio-creative.js');
 assert.match(creative,/marketing_prepare_direct_mail_recipients/,'Recipients must be materialized server-side before quote/checkout.');
@@ -62,7 +68,12 @@ assert.match(fulfill,/marketing_direct_mail_fulfillment_recipients/,'Paid fulfil
 assert.match(fulfill,/provider_design_id/,'Provider design mapping must be required before fulfillment.');
 assert.match(fulfill,/recipients\.data\.length !== Number\(quote\.quantity\)/,'Paid fulfillment must fail closed if recipient count differs from the paid quote.');
 assert.match(fulfill,/PCM_LIVE_LAUNCH_ENABLED/,'Paid fulfillment must keep the explicit live-send kill switch.');
+assert.match(fulfill,/globalDesignVariables:\s*\[\]/,'Live fulfillment must not start sending newly documented design variables until the mapping is separately certified.');
 assert.doesNotMatch(fulfill,/body\?\.(?:amount|price|retail_cents|recipients)/,'Browser/request payload may not supply authoritative price or recipient data to fulfillment.');
+
+const pcmWebhook=read('supabase/functions/pcm-webhook/index.ts');
+assert.match(pcmWebhook,/PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING/,'PCM webhook receiver must fail closed until the exact signature contract is configured.');
+assert.match(pcmWebhook,/duplicate:\s*true/,'PCM webhook receiver must return a successful duplicate acknowledgement.');
 
 const webhook=read('supabase/functions/stripe-webhook/index.ts');
 assert.match(webhook,/marketing-direct-mail-fulfill/,'Paid fulfillment handoff must originate from the server Stripe webhook.');
@@ -78,4 +89,4 @@ const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
-console.log('Marketing Creative Studio, PCM editor refresh, legacy-submit shutdown, and touchless paid Direct Mail fulfillment contracts passed.');
+console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, legacy-submit shutdown, webhook fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
