@@ -104,8 +104,10 @@
   function render(data) {
     var host = document.getElementById('wdi-live');
     if (!host || !data) return;
-    var c = data.cohort || {}, e = data.engine || {}, s = data.signals || {}, m = data.methodology || {};
+    var c = data.cohort || {}, e = data.engine || {}, w = data.source_watch || {}, s = data.signals || {}, m = data.methodology || {};
     var tax = s.tax_pressure || {}, rev = s.revaluation_risk || {}, uni = s.uniformity || {};
+    var sourceFacts = (Number(w.unchanged_observations) || 0) + (Number(w.changed_observations) || 0);
+    var sourceCopy = num(w.eligible_properties) + ' eligible properties · ' + num(w.provider_records) + ' provider records · ' + num(w.changed_observations) + ' changes detected · ' + num(w.candidates_created) + ' candidates escalated.';
     var asof = document.getElementById('wdi-asof');
     var scope = document.getElementById('wdi-scope');
     if (asof) asof.textContent = 'Scored ' + dateLabel(data.as_of) + ' · refreshed ' + timeLabel(data.generated_at);
@@ -115,7 +117,7 @@
       '<div class="wdi-primary-grid">' +
         '<article class="wdi-primary"><span class="wdi-label">Freshly scored cohort</span><div class="wdi-number"><strong>' + esc(num(c.properties)) + '</strong><small>properties</small></div><p>Current property-level scores with defensible evidence available for this run.</p><div class="wdi-mini"><span>' + esc(num(c.towns)) + ' towns</span><span>' + esc(num(c.counties)) + ' counties</span><span>' + esc(num(c.evidence_coverage,1)) + '% avg. evidence coverage</span></div></article>' +
         '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div><p>A six-part property-intelligence score combining tax burden, Chapter 123 fairness, uniformity, revaluation stability, trajectory and appeal recourse.</p></article>' +
-        '<article class="wdi-primary"><span class="wdi-label">Intelligence engine · past 24 hours</span><div class="wdi-number"><strong>' + esc(num(e.candidates_24h)) + '</strong><small>candidates evaluated</small></div><p>' + esc(num(e.findings_24h)) + ' evidence-backed findings across ' + esc(num(e.runs_24h)) + ' completed analyses and ' + esc(num(e.models_24h)) + ' active models.</p></article>' +
+        '<article class="wdi-primary"><span class="wdi-label">Source monitor · latest run</span><div class="wdi-number"><strong>' + esc(num(sourceFacts)) + '</strong><small>source facts checked</small></div><p>' + esc(sourceCopy) + '</p><div class="wdi-mini"><span>Checked ' + esc(timeLabel(w.completed_at) || 'recently') + '</span><span>' + esc(num(e.runs_24h)) + ' downstream analyses / 24h</span></div></article>' +
       '</div>' +
       '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Three signals inside the score.</h3><p>These are medians across the current cohort. The direction of a score is context, not a stand-alone recommendation.</p></div>' +
         '<div class="wdi-signal-grid">' +
