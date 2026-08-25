@@ -23,9 +23,9 @@ function priceCatalog(): PriceConfig[] {
   return [
     { id: Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY') || LIVE_PRICE_DEFAULTS.agent_monthly, tier: 'agent', interval: 'monthly', capacity: 25 },
     { id: Deno.env.get('STRIPE_PRICE_AGENT_YEARLY') || LIVE_PRICE_DEFAULTS.agent_yearly, tier: 'agent', interval: 'yearly', capacity: 25 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO') || LIVE_PRICE_DEFAULTS.pro_monthly, tier: 'pro', interval: 'monthly', capacity: 250 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || LIVE_PRICE_DEFAULTS.pro_monthly, tier: 'pro', interval: 'monthly', capacity: 250 },
     { id: Deno.env.get('STRIPE_PRICE_PRO_YEARLY') || LIVE_PRICE_DEFAULTS.pro_yearly, tier: 'pro', interval: 'yearly', capacity: 250 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || Deno.env.get('STRIPE_PRICE_PRO_PLUS') || LIVE_PRICE_DEFAULTS.pro_plus_monthly, tier: 'pro_plus', interval: 'monthly', capacity: 2500 },
+    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || LIVE_PRICE_DEFAULTS.pro_plus_monthly, tier: 'pro_plus', interval: 'monthly', capacity: 2500 },
     { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_YEARLY') || LIVE_PRICE_DEFAULTS.pro_plus_yearly, tier: 'pro_plus', interval: 'yearly', capacity: 2500 }
   ];
 }
