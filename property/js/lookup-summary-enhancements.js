@@ -1,7 +1,7 @@
 /* Watchdog property lookup summary enhancements.
    Fills the intentionally open mobile summary cells with governed Watchdog data,
-   adds the ROBUST Burden component to Tax Snapshot, and shows familiar city + ZIP
-   beside the street address while preserving municipality as jurisdiction context. */
+   adds the ROBUST Burden component to Tax Snapshot, shows familiar city + ZIP,
+   and replaces index maps / rendered property imagery with a branded score panel. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_LOOKUP_SUMMARY_ENHANCEMENTS__)return;
@@ -12,6 +12,7 @@
   var scheduled=false;
 
   function clean(v){return String(v==null?'':v).trim();}
+  function esc(v){return clean(v).replace(/[&<>\"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c];});}
   function setText(node,value){value=String(value==null?'':value);if(node&&node.textContent!==value)node.textContent=value;}
   function njZip(v){var m=clean(v).match(/\b(0[78]\d{3})(?:-\d{4})?\b/);return m?m[1]:'';}
 
@@ -25,6 +26,27 @@
       '#plm .wd-pl-proprietary[data-ready="1"]{background:linear-gradient(145deg,#fff,#f4f7fc)}',
       '#plm #plm-kpi-burden .plm-kpi-n{color:#24498b}',
       '#plm .plm-addr>span[data-wd-city="1"]{display:block}',
+      'html.wd-index-mapless #plm-map,html.wd-index-mapless #hd-map,html.wd-index-mapless .leaflet-container{display:none!important;visibility:hidden!important;pointer-events:none!important;max-height:0!important;overflow:hidden!important}',
+      'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
+      '#plm-photos .wd-mapless-property-hero{position:relative;min-height:320px;width:100%;overflow:hidden;display:grid;align-items:stretch;background:radial-gradient(circle at 78% 14%,rgba(92,161,255,.48),transparent 34%),linear-gradient(145deg,#071a35 0%,#123e82 52%,#2468d8 100%);color:#fff}',
+      '#plm-photos .wd-mapless-property-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,8,24,.28))}',
+      '#plm-photos .wd-mapless-property-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:28px;align-items:center;padding:36px clamp(24px,4vw,54px)}',
+      '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.105em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-address{margin:13px 0 7px;color:#fff;font:850 clamp(24px,3.3vw,40px)/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em}',
+      '#plm-photos .wd-mapless-copy{max-width:670px;margin:0;color:rgba(255,255,255,.72);font-size:15px;line-height:1.55}',
+      '#plm-photos .wd-mapless-status{display:inline-flex;margin-top:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}',
+      '#plm-photos .wd-mapless-scorebox{justify-self:end;width:min(100%,330px);padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:24px;background:rgba(4,22,51,.38);box-shadow:0 18px 44px rgba(2,12,31,.24);backdrop-filter:blur(10px)}',
+      '#plm-photos .wd-mapless-scorelabel{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.74);font:850 10px/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-score{display:flex;align-items:flex-end;gap:5px;margin-top:10px;color:#fff;font:900 clamp(46px,7vw,72px)/.86 "Plus Jakarta Sans",sans-serif;letter-spacing:-.07em}',
+      '#plm-photos .wd-mapless-score em{padding-bottom:7px;color:rgba(255,255,255,.55);font:800 14px/1 "Plus Jakarta Sans",sans-serif;font-style:normal;letter-spacing:0}',
+      '#plm-photos .wd-mapless-score.building{font-size:28px;line-height:1;letter-spacing:-.025em}',
+      '#plm-photos .wd-mapless-robust-title{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);color:#9eece4;font:900 10px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.12em}',
+      '#plm-photos .wd-mapless-components{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:10px}',
+      '#plm-photos .wd-mapless-components span{text-align:center;min-width:0;padding:8px 3px;border-radius:10px;background:rgba(255,255,255,.07)}',
+      '#plm-photos .wd-mapless-components b{display:block;color:#9eece4;font:900 9px/1 "Plus Jakarta Sans",sans-serif}',
+      '#plm-photos .wd-mapless-components em{display:block;margin-top:5px;color:#fff;font:850 11px/1 "Plus Jakarta Sans",sans-serif;font-style:normal}',
+      '#plm-photos .wd-mapless-photo-note{grid-column:1/-1;display:flex;align-items:center;gap:9px;margin-top:2px;color:rgba(255,255,255,.62);font-size:12px;line-height:1.4}',
+      '@media(max-width:760px){#plm-photos .wd-mapless-property-hero{min-height:360px}#plm-photos .wd-mapless-property-in{grid-template-columns:1fr;gap:22px;padding:28px 20px}#plm-photos .wd-mapless-scorebox{justify-self:stretch;width:auto}#plm-photos .wd-mapless-score{font-size:58px}}',
       '@media(max-width:640px){#plm .wd-pl-proprietary b{font-size:inherit}}'
     ].join('');
     document.head.appendChild(s);
@@ -47,13 +69,18 @@
     grid.insertAdjacentHTML('beforeend','<div class="plm-kpi wd-pl-proprietary" id="plm-kpi-burden"><div class="plm-kpi-n">—</div><div class="plm-kpi-l">B · Tax burden</div></div>');
   }
 
+  function canonicalScore(){
+    var score=document.querySelector('#plm-robust-score-sec .wdps-score b');
+    var value=score&&clean(score.textContent);
+    return value&&value!=='—'?value:'';
+  }
   function syncWatchdogScore(){
     var tile=document.getElementById('plm-q-watchdog-score');
     if(!tile)return;
     var n=tile.querySelector('b');
-    var score=document.querySelector('#plm-robust-score-sec .wdps-score b');
-    if(score&&clean(score.textContent)){
-      setText(n,clean(score.textContent)+'/100');
+    var value=canonicalScore();
+    if(value){
+      setText(n,value+'/100');
       tile.dataset.ready='1';
       tile.title='Canonical Watchdog Score powered by the ROBUST Framework';
     }else{
@@ -107,6 +134,41 @@
     return'';
   }
 
+  function componentRows(){
+    var order=['R','O','B','U','S','T'];
+    var values=Object.create(null);
+    document.querySelectorAll('#plm-robust-score-sec .wdps-row').forEach(function(row){
+      var label=row.querySelector('.wdps-label a'),score=row.querySelector('.wdps-n');
+      var match=clean(label&&label.textContent).match(/^([ROBUST])\s*·/i);
+      if(match)values[match[1].toUpperCase()]=clean(score&&score.textContent)||'—';
+    });
+    return order.map(function(letter){return{letter:letter,value:values[letter]||'—'};});
+  }
+  function componentsMarkup(rows){
+    return rows.map(function(item){return'<span><b>'+esc(item.letter)+'</b><em>'+esc(item.value)+'</em></span>';}).join('');
+  }
+  function syncBrandedHero(){
+    var photos=document.getElementById('plm-photos');
+    var addrBox=document.querySelector('#plm .plm-addr');
+    if(!photos||!addrBox)return;
+    var address=addressText(addrBox)||'New Jersey property';
+    var score=canonicalScore();
+    var rows=componentRows();
+    var statusNode=photos.querySelector('.plm-tag');
+    var status=clean(statusNode&&statusNode.textContent);
+    var signature=[address,score,status,rows.map(function(x){return x.letter+':'+x.value;}).join(',')].join('|');
+    var existing=photos.querySelector('.wd-mapless-property-hero');
+    if(existing&&existing.dataset.signature===signature)return;
+    photos.querySelectorAll('img').forEach(function(img){try{img.removeAttribute('srcset');img.removeAttribute('data-fallback');img.removeAttribute('src');}catch(_error){}img.remove();});
+    var scoreHtml=score?'<div class="wd-mapless-score">'+esc(score)+'<em>/100</em></div>':'<div class="wd-mapless-score building">Score building</div>';
+    var statusHtml=status?'<span class="wd-mapless-status">'+esc(status)+'</span>':'';
+    photos.innerHTML='<div class="wd-mapless-property-hero" data-signature="'+esc(signature)+'"><div class="wd-mapless-property-in">'+
+      '<div><span class="wd-mapless-kicker"><i class="fas fa-dog"></i> Watchdog Property Intelligence</span><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and governed ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
+      '<div class="wd-mapless-scorebox"><span class="wd-mapless-scorelabel"><i class="fas fa-shield-dog"></i> Watchdog Score</span>'+scoreHtml+'<div class="wd-mapless-robust-title">ROBUST FRAMEWORK</div><div class="wd-mapless-components">'+componentsMarkup(rows)+'</div></div>'+
+      '<div class="wd-mapless-photo-note"><i class="fas fa-camera"></i><span>Owner-submitted property photos are planned as the replacement for third-party rendered imagery.</span></div>'+
+      '</div></div>';
+  }
+
   function geocodeLocality(address,municipality){
     var key=(clean(address)+'|'+clean(municipality)).toUpperCase();
     if(cityCache[key])return cityCache[key];
@@ -142,11 +204,13 @@
       setText(line,familiar);
       line.dataset.wdCity='1';
       line.title='Municipality: '+municipality+(county?' · '+county+' County':'');
+      syncBrandedHero();
     });
   }
 
   function sync(){
     scheduled=false;
+    document.documentElement.classList.add('wd-index-mapless');
     ensureStyles();
     ensureQuickTiles();
     ensureTaxBurden();
@@ -154,10 +218,11 @@
     syncTaxValue();
     syncBurden();
     syncCity();
+    syncBrandedHero();
   }
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(sync);}
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
-  if(typeof MutationObserver!=='undefined')new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
+  if(typeof MutationObserver!=='undefined')new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true,characterData:true});
   window.WatchdogLookupSummaryEnhancements={sync:sync};
 })();
