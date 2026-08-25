@@ -74,6 +74,10 @@ assert.doesNotMatch(fulfill,/body\?\.(?:amount|price|retail_cents|recipients)/,'
 const pcmWebhook=read('supabase/functions/pcm-webhook/index.ts');
 assert.match(pcmWebhook,/PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING/,'PCM webhook receiver must fail closed until the exact signature contract is configured.');
 assert.match(pcmWebhook,/duplicate:\s*true/,'PCM webhook receiver must return a successful duplicate acknowledgement.');
+assert.match(pcmWebhook,/retry_schedule_minutes:\s*\[1,\s*5,\s*10\]/,'PCM vendor retry schedule must be represented exactly as confirmed.');
+assert.match(pcmWebhook,/same order\/recipient webhook as tracking status changes/,'PCM duplicate policy must distinguish legitimate status updates from exact replays.');
+assert.match(pcmWebhook,/providerId \? `\$\{providerId\}:\$\{rawHash\}` : rawHash/,'PCM event idempotency key must include the exact raw payload hash when a provider event ID exists.');
+assert.match(pcmWebhook,/saved\.error\.code === '23505'/,'Concurrent exact duplicate webhooks must be acknowledged idempotently instead of triggering another PCM retry.');
 
 const webhook=read('supabase/functions/stripe-webhook/index.ts');
 assert.match(webhook,/marketing-direct-mail-fulfill/,'Paid fulfillment handoff must originate from the server Stripe webhook.');
@@ -89,4 +93,4 @@ const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
-console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, legacy-submit shutdown, webhook fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
+console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
