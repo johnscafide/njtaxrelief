@@ -2,7 +2,7 @@
   'use strict';
 
   var LAUNCH_LABEL='September 16';
-  var CTA_HREF='/property/pro#launch-list';
+  var CTA_HREF='/pro#launch-list';
   var DISMISS_KEY='watchdog:paid-launch-banner:dismissed:2026-09-16';
 
   function track(name,params){
