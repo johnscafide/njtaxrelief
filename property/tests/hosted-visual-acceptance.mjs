@@ -71,6 +71,7 @@ async function verifyPublicProfileInteraction(page, viewportKey) {
   await sheet.waitFor({ state: 'visible', timeout: 10000 });
   const developerLink = sheet.locator('[data-wd-developer-tool="developer"]').first();
   await developerLink.waitFor({ state: 'visible', timeout: 10000 });
+  await developerLink.scrollIntoViewIfNeeded();
 
   const hitTest = await developerLink.evaluate((el) => {
     const rect = el.getBoundingClientRect();
