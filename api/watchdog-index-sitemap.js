@@ -52,6 +52,7 @@ const CURATED_PUBLIC_ROUTES = [
   { path: '/alternatives/propstream', lastmod: '2026-08-25', changefreq: 'monthly', priority: '0.80' },
   { path: '/alternatives/propertyradar', lastmod: '2026-08-25', changefreq: 'monthly', priority: '0.80' },
   { path: '/alternatives/batchdata', lastmod: '2026-08-25', changefreq: 'monthly', priority: '0.80' },
+  { path: '/alternatives/attom', lastmod: '2026-08-25', changefreq: 'monthly', priority: '0.80' },
   { path: '/property-tax-estimator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.80' },
   { path: '/home-buying-cost-calculator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.80' },
   { path: '/appeal-savings-estimator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.80' },
