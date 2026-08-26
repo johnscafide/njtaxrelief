@@ -3,9 +3,9 @@
 
 NJW-74 identified subtle brand drift plus parallel per-page token namespaces.
 The canonical gold is fixed at #b8972a. The remaining page-local alias families
-(--ad- / --fb- / --do- / --ac27- / --wdx-) are explicitly baselined legacy
-debt, so this check prevents them from spreading while the named files are
-migrated onto shared semantic --wd-* tokens.
+(--ad- / --fb- / --do-) are explicitly baselined legacy debt, so this check
+prevents them from spreading while the named files are migrated onto shared
+semantic --wd-* tokens.
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ CANONICAL_GOLD_ALIAS = "var(--wd-gold-500)"
 HISTORICAL_DRIFT = {"#b8972e", "#b9952f", "#e7c46a"}
 GOLD_DECLARATION = re.compile(r"--gold\s*:\s*([^;\n}]+)", re.IGNORECASE)
 HEX = re.compile(r"#[0-9a-fA-F]{6}")
-LEGACY_PAGE_TOKEN = re.compile(r"--(?:ad|fb|do|ac27|wdx)-[a-z0-9-]+", re.IGNORECASE)
+LEGACY_PAGE_TOKEN = re.compile(r"--(?:ad|fb|do)-[a-z0-9-]+", re.IGNORECASE)
 LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-control-2027.css"),
     pathlib.Path("property/css/agent-control-readability.css"),
@@ -30,7 +30,6 @@ LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-hardening.css"),
     pathlib.Path("property/css/farm-builder.css"),
     pathlib.Path("property/css/developer-data.css"),
-    pathlib.Path("property/css/data-center-mobile-audit.css"),
 }
 
 
