@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>NJ General Tax Rate vs Reported Tax-to-Assessment Rate, 2026 | Watchdog</title>
+  <meta name="description" content="Compare New Jersey towns using the official 2025 General Tax Rate and Watchdog's governed 2026 municipal median reported tax-to-assessment rate, with clear methodology and source limits.">
+  <link rel="canonical" href="https://www.watchdogindex.com/statistics/general-vs-reported-tax-rate-by-town-new-jersey-2026">
+  <meta property="og:title" content="NJ General Tax Rate vs Reported Tax-to-Assessment Rate, 2026 | Watchdog">
+  <meta property="og:description" content="See why a town's bill-setting General Tax Rate and the tax-to-assessment rate observed across its property records can tell different stories.">
+  <meta property="og:url" content="https://www.watchdogindex.com/statistics/general-vs-reported-tax-rate-by-town-new-jersey-2026">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <style>
+    body{margin:0;background:#f7f7f5;color:#171717;font-family:var(--font-sans,Arial,sans-serif)}main{max-width:var(--container-reading,1080px);margin:0 auto;padding:44px 20px 72px}.eyebrow{font-size:var(--fs-2xs,.75rem);font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#806814}h1{font-size:clamp(2.1rem,5vw,4.35rem);line-height:1.03;letter-spacing:-.04em;margin:.35rem 0 1rem;max-width:980px}.lede{font-size:1.12rem;line-height:1.7;max-width:880px;color:#4b4b47}.notice,.card{background:#fff;border:1px solid #e7e5de;border-radius:20px;padding:22px;margin:24px 0;box-shadow:0 12px 32px rgba(0,0,0,.04)}.notice{border-left:5px solid #b8972a}.notice strong{color:#6d5810}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:28px 0 16px}.toolbar input{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9d6cd;border-radius:12px;font:inherit}.toolbar button{padding:12px 15px;border:0;border-radius:12px;background:#171717;color:#fff;font-weight:800;cursor:pointer}.meta{display:flex;gap:16px;flex-wrap:wrap;color:#686862;font-size:.86rem;margin:0 0 15px}.table-wrap{overflow:auto;background:#fff;border:1px solid #e7e5de;border-radius:18px}table{width:100%;border-collapse:collapse;min-width:900px}th,td{padding:13px 14px;border-bottom:1px solid #eeece6;text-align:right}th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}th{position:sticky;top:0;background:#faf9f6;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer}tbody tr:hover{background:#fbfaf7}.num{font-variant-numeric:tabular-nums}.strong{font-weight:800}.copy{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:30px}.copy h2{font-size:1.35rem;margin:0 0 8px}.copy p,.source{line-height:1.68;color:#4f4f4a}.source a{color:#171717;font-weight:800}.small{font-size:.9rem;color:#686862}.navlinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.navlinks a{padding:10px 13px;border-radius:999px;background:#eeeae0;color:#171717;text-decoration:none;font-weight:800}.error{padding:28px;text-align:center;color:#6d2020}@media(max-width:650px){main{padding-top:28px}th,td{padding:11px 10px}.lede{font-size:1.02rem}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Dataset","name":"New Jersey General Tax Rate versus reported tax-to-assessment rate by municipality, 2026 guide","description":"A Watchdog comparison joining the New Jersey Division of Taxation's latest published 2025 municipal General Tax Rates to 2026 aggregate MOD-IV municipal median reported annual-tax-to-current-assessment rates. The MOD-IV measure is not represented as New Jersey's official Effective Tax Rate.","url":"https://www.watchdogindex.com/statistics/general-vs-reported-tax-rate-by-town-new-jersey-2026","temporalCoverage":"2025/2026","spatialCoverage":{"@type":"State","name":"New Jersey"},"creator":{"@type":"Organization","name":"Watchdog"},"isBasedOn":["https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","https://www.nj.gov/treasury/taxation/lpt/GTRhistory.xlsx"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Table","name":"NJ General Tax Rate versus reported tax-to-assessment rate by town"}</script>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Watchdog statistics · New Jersey</div>
+  <h1>General Tax Rate vs reported tax-to-assessment rate by town</h1>
+  <p class="lede">New Jersey's General Tax Rate is the multiplier used to calculate an individual property tax bill. A separate question is what tax-to-assessment relationship is actually visible across the property records in a municipality. This table puts those two governed measures side by side without pretending they are the same statistic.</p>
+
+  <div class="notice"><strong>Important distinction:</strong> the Watchdog column labeled <em>reported tax-to-assessment rate</em> is the median latest-positive annual tax divided by current net assessment across valid 2026 MOD-IV records in that municipality. It is <strong>not</strong> the New Jersey Division of Taxation's official Effective Tax Rate. The State publishes an official General and Effective Tax Rates workbook separately, and Watchdog will not relabel its MOD-IV-derived measure as that State statistic.</div>
+
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search municipality or county" aria-label="Search municipality or county">
+    <button id="download" type="button">Download CSV</button>
+  </div>
+  <div class="meta"><span id="count">Loading governed municipal data…</span><span>General Tax Rate: dollars per $100 assessed value</span><span>Reported tax / assessment: median percent</span></div>
+
+  <div class="table-wrap">
+    <table id="ranking">
+      <thead><tr><th data-key="town">Municipality</th><th data-key="county">County</th><th data-key="general">2025 General Tax Rate</th><th data-key="reported">2026 median reported tax / assessment</th><th data-key="gap">Difference, percentage points</th></tr></thead>
+      <tbody><tr><td colspan="5">Loading governed sources…</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="copy">
+    <section class="card"><h2>Why the numbers can differ</h2><p>The General Tax Rate is applied to taxable assessed value to calculate a bill. Assessment levels, revaluations, exemptions, record timing and the tax vintage present in MOD-IV can change the relationship seen when reported annual tax is divided by current assessment. That is exactly why a raw municipal rate should not be treated as a complete cross-town burden comparison.</p></section>
+    <section class="card"><h2>Why this is not the State Effective Tax Rate</h2><p>New Jersey describes its Effective Tax Rate as a statistical comparison measure that assumes property is assessed at 100 percent of market value. The MOD-IV measure on this page does not make that equalization adjustment. It answers a narrower question: what is the median reported tax-to-current-assessment relationship in the maintained parcel aggregate?</p></section>
+    <section class="card"><h2>What this does not predict</h2><p>The difference between these columns is not an appeal signal, revaluation forecast, fairness score or Watchdog Score component. It does not predict an individual bill. Property-level taxes still depend on the taxable assessment and the applicable General Tax Rate, subject to the official tax record.</p></section>
+  </div>
+
+  <section class="card source">
+    <h2>Sources, vintage and method</h2>
+    <p><strong>General Tax Rate:</strong> <a href="https://www.nj.gov/treasury/taxation/lpt/statdata.shtml" rel="noopener">NJ Division of Taxation, Local Property Tax Statistical Information</a>. As of August 2026, the latest statewide General Tax Rates table listed by the State is tax year 2025.</p>
+    <p><strong>Reported tax-to-assessment rate:</strong> Watchdog's maintained <code>/property/data/statewide-intelligence.json</code>, source ID <code>treasury-modiv-2026</code>. The underlying 2026 MOD-IV release currently has a blank current-year tax field, so the pipeline uses the latest positive reported annual-tax field without fabricating a 2026 tax change. The output used here is municipal aggregate data only.</p>
+    <p><strong>Official Effective Tax Rate:</strong> the State separately publishes a <a href="https://www.nj.gov/treasury/taxation/lpt/GTRhistory.xlsx" rel="noopener">General and Effective Tax Rates by County and Municipality workbook</a>. This page links to that source but does not copy values Watchdog has not yet ingested into a governed product dataset.</p>
+    <p class="small" id="vintage">Loading dataset vintage…</p>
+  </section>
+
+  <div class="navlinks"><a href="/statistics/nj-property-tax-rates-by-town-2026">General tax rates by town</a><a href="/statistics/biggest-property-tax-rate-increases-new-jersey-2026">Biggest rate increases</a><a href="/statistics/average-property-tax-by-county-new-jersey-2026">Average tax by county</a><a href="/towns/">NJ town reports</a></div>
+</main>
+<script>
+let rows=[],sortKey='gap',sortDir=-1,query='';
+const fmtRate=n=>Number(n).toFixed(3);
+const fmtReported=n=>Number(n).toFixed(3)+'%';
+function normName(v){return String(v||'').toUpperCase().replace(/\b(TOWNSHIP|TWP|BOROUGH|BORO|CITY|TOWN|VILLAGE)\b/g,'').replace(/[^A-Z0-9]/g,'');}
+function normCounty(v){return String(v||'').toUpperCase().replace(/\s+COUNTY$/,'').replace(/[^A-Z0-9]/g,'');}
+function splitRateLabel(label){const m=String(label).match(/^(.*?) \(([^)]+)\)$/);return m?{town:m[1],county:m[2]}:{town:String(label),county:''};}
+function townSlug(name){return String(name).toLowerCase().replace(/\b(city|boro|borough|town|twp|township|village)\b/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+function render(){let data=rows.filter(r=>!query||r.town.toLowerCase().includes(query)||r.county.toLowerCase().includes(query));data=[...data].sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];return (typeof av==='string'?av.localeCompare(bv):(av-bv))*sortDir});document.querySelector('#count').textContent=data.length.toLocaleString()+' matched municipalities shown';document.querySelector('#ranking tbody').innerHTML=data.length?data.map(r=>`<tr><td><a href="/towns/${townSlug(r.town)}">${r.town}</a></td><td>${r.county}</td><td class="num strong">${fmtRate(r.general)}</td><td class="num strong">${fmtReported(r.reported)}</td><td class="num">${r.gap>=0?'+':''}${r.gap.toFixed(3)}</td></tr>`).join(''):'<tr><td colspan="5">No municipality matches this filter.</td></tr>';}
+function csv(){const lines=[['Municipality','County','2025 General Tax Rate','2026 median reported tax-to-assessment rate pct','Difference percentage points'],...rows.map(r=>[r.town,r.county,r.general,r.reported,r.gap.toFixed(3)])];return lines.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');}
+async function load(){try{const [rateRes,intelRes]=await Promise.all([fetch('/property/tax-rates.json',{cache:'no-cache'}),fetch('/property/data/statewide-intelligence.json',{cache:'no-cache'})]);if(!rateRes.ok||!intelRes.ok)throw new Error('A governed source file is unavailable');const [rates,intel]=await Promise.all([rateRes.json(),intelRes.json()]);if(intel?.source_id!=='treasury-modiv-2026'||Number(intel?.tax_year)!==2026||!intel?.municipalities)throw new Error('Unexpected statewide intelligence contract');const index=new Map();for(const profile of Object.values(intel.municipalities)){const value=Number(profile?.signals?.median_effective_tax_rate_pct?.value);if(!profile?.name||!profile?.county||!Number.isFinite(value))continue;const key=normCounty(profile.county)+'|'+normName(profile.name);if(!index.has(key))index.set(key,{town:String(profile.name),county:String(profile.county).replace(/\s+County$/i,''),reported:value});}
+rows=Object.entries(rates?.rates||{}).flatMap(([label,years])=>{const general=Number(years?.['2025']);if(!Number.isFinite(general))return[];const bits=splitRateLabel(label),key=normCounty(bits.county)+'|'+normName(bits.town),match=index.get(key);if(!match)return[];return[{town:match.town,county:match.county,general,reported:match.reported,gap:match.reported-general}]});if(rows.length<500)throw new Error('Municipal join coverage fell below the governed safety threshold: '+rows.length+' matches');document.querySelector('#vintage').textContent='Joined '+rows.length.toLocaleString()+' municipalities · MOD-IV aggregate generated '+new Date(intel.generated_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})+' · '+Number(intel.scope_counts?.source_records||0).toLocaleString()+' source records aggregated. No parcel or person rows are exposed by this page.';render()}catch(e){rows=[];document.querySelector('#count').textContent='Comparison unavailable';document.querySelector('#ranking tbody').innerHTML='<tr><td class="error" colspan="5"><b>Comparison unavailable.</b><br>'+String(e.message||e)+'</td></tr>';document.querySelector('#vintage').textContent='Dataset validation failed. Watchdog will not substitute or fabricate missing values.';}}
+document.querySelectorAll('th[data-key]').forEach(th=>th.addEventListener('click',()=>{const key=th.dataset.key;if(sortKey===key)sortDir*=-1;else{sortKey=key;sortDir=key==='town'||key==='county'?1:-1}render()}));document.querySelector('#search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render()});document.querySelector('#download').addEventListener('click',()=>{if(!rows.length)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv()],{type:'text/csv;charset=utf-8'}));a.download='nj-general-vs-reported-tax-rate-by-town-2026.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)});load();
+</script>
+</body>
+</html>
