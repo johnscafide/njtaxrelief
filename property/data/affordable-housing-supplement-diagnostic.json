@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-26T19:57:45.262190+00:00",
+  "source_url": "https://www.nj.gov/dca/dlps/hss/annualreporting/Affordable%20Housing%20Municipal%20Status%20Report%207-1-26.xlsx",
+  "workbook_bytes": 4629572,
+  "sheets": [
+    {
+      "name": "Cover Page",
+      "max_row": 30,
+      "max_column": 8
+    },
+    {
+      "name": " Data Summary - All Projects",
+      "max_row": 80669,
+      "max_column": 45
+    },
+    {
+      "name": "Data Summary - AHTF Data",
+      "max_row": 302021,
+      "max_column": 79
+    }
+  ],
+  "target_hits": {
+    "affordable_units_pipeline": [],
+    "hud_subsidized_units": [],
+    "low_income_cost_burden": []
+  },
+  "target_hit_counts": {
+    "affordable_units_pipeline": 0,
+    "hud_subsidized_units": 0,
+    "low_income_cost_burden": 0
+  }
+}
