@@ -1,7 +1,7 @@
 (function(){
 'use strict';
-const SESSION_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-dev-login';
-const BACKOFFICE_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-api';
+const SESSION_API='/api/watchdog-backoffice-gateway?target=login';
+const BACKOFFICE_API='/api/watchdog-backoffice-gateway?target=api';
 const SESSION_KEY='watchdog-backoffice-session';
 const $=(s,r=document)=>r.querySelector(s);
 let working=false;
