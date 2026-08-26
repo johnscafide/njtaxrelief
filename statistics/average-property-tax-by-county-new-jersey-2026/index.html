@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Average Property Tax by NJ County, 2026 | Watchdog</title>
+  <meta name="description" content="Compare New Jersey counties by average latest-reported annual residential property tax from Watchdog's 2026 statewide MOD-IV aggregate dataset.">
+  <link rel="canonical" href="https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026">
+  <meta property="og:title" content="Average Property Tax by NJ County, 2026">
+  <meta property="og:description" content="A searchable 21-county comparison built from Watchdog's maintained 2026 statewide MOD-IV aggregates.">
+  <meta property="og:url" content="https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <style>
+    body{margin:0;background:#f7f7f5;color:#171717;font-family:var(--font-sans,Arial,sans-serif)}main{max-width:1120px;margin:0 auto;padding:44px 20px 72px}.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#806814}h1{font-size:clamp(2.1rem,5vw,4.5rem);line-height:1.02;letter-spacing:-.04em;margin:.3rem 0 1rem;max-width:930px}.lede{font-size:1.15rem;line-height:1.7;max-width:850px;color:#4b4b47}.notice,.card{background:#fff;border:1px solid #e7e5de;border-radius:20px;padding:22px;margin:24px 0;box-shadow:0 12px 32px rgba(0,0,0,.04)}.notice strong{color:#6d5810}.toolbar{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:28px 0 16px}.toolbar input{flex:1;min-width:240px;padding:12px 14px;border:1px solid #d9d6cd;border-radius:12px;font:inherit}.toolbar button{padding:12px 15px;border:0;border-radius:12px;background:#171717;color:#fff;font-weight:800;cursor:pointer}.table-wrap{overflow:auto;background:#fff;border:1px solid #e7e5de;border-radius:18px}table{width:100%;border-collapse:collapse;min-width:820px}th,td{padding:13px 14px;border-bottom:1px solid #eeece6;text-align:right}th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}th{position:sticky;top:0;background:#faf9f6;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;cursor:pointer}tbody tr:hover{background:#fbfaf7}.rank{font-weight:900}.money{font-variant-numeric:tabular-nums;font-weight:800}.copy{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:30px}.copy h2{font-size:1.35rem;margin:0 0 8px}.copy p{line-height:1.65;color:#4f4f4a}.source-list{line-height:1.7}.source-list a{color:#171717;font-weight:800}.small{font-size:.9rem;color:#686862}.navlinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}.navlinks a{padding:10px 13px;border-radius:999px;background:#eeeae0;color:#171717;text-decoration:none;font-weight:800}.error{padding:28px;text-align:center;color:#6d2020}@media(max-width:650px){main{padding-top:28px}th,td{padding:11px 10px}.lede{font-size:1.03rem}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Dataset","name":"Average Reported Property Tax by New Jersey County, 2026","description":"County-level mean and median latest-positive annual property-tax observations aggregated from the New Jersey Treasury 2026 MOD-IV property assessment release.","url":"https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026","temporalCoverage":"2026","spatialCoverage":{"@type":"State","name":"New Jersey"},"creator":{"@type":"Organization","name":"Watchdog"},"isBasedOn":"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml","distribution":{"@type":"DataDownload","encodingFormat":"text/csv","contentUrl":"https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026"}}
+  </script>
+</head>
+<body>
+<main>
+  <div class="eyebrow">Watchdog statistics · New Jersey</div>
+  <h1>Average property tax by county, 2026</h1>
+  <p class="lede">This ranking compares New Jersey counties using the mean latest-positive annual property-tax amount reported in Watchdog's maintained 2026 statewide MOD-IV aggregate dataset. Median tax is shown beside it so unusually high or low observations do not disappear inside the average.</p>
+
+  <div class="notice"><strong>Data-vintage safeguard:</strong> New Jersey's 2026 MOD-IV county release currently leaves the current-year tax field blank. Watchdog therefore uses the latest positive reported annual-tax field, which is the prior-year tax field in this release. This page does not relabel that underlying tax amount as a newly levied 2026 bill, and it does not estimate missing taxes.</div>
+
+  <div class="toolbar">
+    <input id="search" type="search" placeholder="Search county" aria-label="Search county">
+    <button id="download" type="button">Download CSV</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="ranking">
+      <thead><tr><th data-key="rank">Rank</th><th data-key="county">County</th><th data-key="mean">Average reported annual tax</th><th data-key="median">Median reported annual tax</th><th data-key="count">Valid tax observations</th></tr></thead>
+      <tbody><tr><td colspan="5">Loading governed statewide aggregates…</td></tr></tbody>
+    </table>
+  </div>
+
+  <div class="copy">
+    <section class="card"><h2>Average versus median</h2><p>The average answers the issue's county-comparison question directly. The median is included because county property mixes vary. A small number of unusually expensive or low-tax records can pull an arithmetic mean away from the tax amount experienced by the middle observation.</p></section>
+    <section class="card"><h2>What this does not mean</h2><p>This is not a ranking of tax fairness, service quality, home prices, or Watchdog Score. County averages also do not predict the bill on a particular property. A parcel's taxable assessment and municipal General Tax Rate remain the inputs used to compute its actual bill.</p></section>
+    <section class="card"><h2>Why Watchdog uses one data contract</h2><p>The page reads the same statewide aggregate file produced by Watchdog's 2026 MOD-IV intelligence pipeline. That keeps the public statistics surface aligned with the product instead of maintaining a second hand-edited county dataset.</p></section>
+  </div>
+
+  <section class="card source-list">
+    <h2>Source and methodology</h2>
+    <p><strong>Primary public source family:</strong> <a href="https://www.nj.gov/treasury/taxation/lpt/statdata.shtml" rel="noopener">NJ Division of Taxation, Property Assessment List (MOD-IV)</a>.</p>
+    <p><strong>Watchdog maintained aggregate:</strong> <code>/property/data/statewide-intelligence.json</code>, source ID <code>treasury-modiv-2026</code>. County means use every valid reported tax observation; county medians are exact over valid reported observations. The output contains aggregate statistics only, not person-level or parcel-row exports.</p>
+    <p class="small" id="vintage">Loading dataset vintage…</p>
+  </section>
+
+  <div class="navlinks"><a href="/statistics/average-residential-assessment-by-county-new-jersey-2026">Average assessment by county</a><a href="/statistics/nj-property-tax-rates-by-town-2026">Tax rates by town</a><a href="/statistics/nj-property-tax-appeal-win-rates-by-county-2026">Appeal outcomes by county</a><a href="/property/towns/">NJ town reports</a></div>
+</main>
+<script>
+let rows=[],sortKey='mean',sortDir=-1,query='';
+const fmtMoney=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n);
+const fmtInt=n=>new Intl.NumberFormat('en-US').format(n);
+function ranked(){return [...rows].sort((a,b)=>b.mean-a.mean).map((r,i)=>({...r,rank:i+1}));}
+function render(){let data=ranked().filter(r=>r.county.toLowerCase().includes(query));data.sort((a,b)=>{const av=a[sortKey],bv=b[sortKey];return (typeof av==='string'?av.localeCompare(bv):av-bv)*sortDir});document.querySelector('#ranking tbody').innerHTML=data.length?data.map(r=>`<tr><td class="rank">${r.rank}</td><td>${r.county} County</td><td class="money">${fmtMoney(r.mean)}</td><td class="money">${fmtMoney(r.median)}</td><td>${fmtInt(r.count)}</td></tr>`).join(''):'<tr><td colspan="5">No county matches this filter.</td></tr>';}
+function csv(){const lines=[['Rank','County','Average reported annual tax','Median reported annual tax','Valid tax observations'],...ranked().map(r=>[r.rank,r.county+' County',r.mean,r.median,r.count])];return lines.map(row=>row.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n');}
+async function load(){try{const res=await fetch('/property/data/statewide-intelligence.json',{cache:'no-cache'});if(!res.ok)throw new Error('Statewide aggregate unavailable');const doc=await res.json();if(doc?.source_id!=='treasury-modiv-2026'||Number(doc?.tax_year)!==2026||!doc?.counties)throw new Error('Unexpected statewide aggregate contract');rows=Object.entries(doc.counties).map(([name,p])=>({county:String(p?.county||name).replace(/\s+County$/i,''),mean:Number(p?.distributions?.annual_tax?.mean),median:Number(p?.signals?.median_annual_tax?.value),count:Number(p?.distributions?.annual_tax?.count)})).filter(r=>r.county&&Number.isFinite(r.mean)&&Number.isFinite(r.median)&&Number.isFinite(r.count)&&r.count>0);if(rows.length!==21)throw new Error('Expected 21 county aggregates, received '+rows.length);document.querySelector('#vintage').textContent='Dataset tax year: '+doc.tax_year+' · generated '+new Date(doc.generated_at).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})+' · '+fmtInt(doc.scope_counts?.source_records||0)+' source records aggregated. Refresh cadence follows the maintained statewide MOD-IV pipeline.';render()}catch(e){document.querySelector('#ranking tbody').innerHTML='<tr><td class="error" colspan="5"><b>County ranking unavailable.</b><br>'+String(e.message||e)+'</td></tr>';document.querySelector('#vintage').textContent='Dataset validation failed; Watchdog will not show a fallback ranking.';}}
+document.querySelectorAll('th[data-key]').forEach(th=>th.addEventListener('click',()=>{const key=th.dataset.key;if(sortKey===key)sortDir*=-1;else{sortKey=key;sortDir=key==='county'?1:-1}render()}));document.querySelector('#search').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render()});document.querySelector('#download').addEventListener('click',()=>{if(!rows.length)return;const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv()],{type:'text/csv'}));a.download='nj-average-property-tax-by-county-2026.csv';a.click();URL.revokeObjectURL(a.href)});load();
+</script>
+</body>
+</html>
