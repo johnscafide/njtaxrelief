@@ -34,6 +34,8 @@ jobs:
       - name: Audit official 2025-2035 DCA Fourth Round calculation workbook
         run: python property/scripts/audit_fourth_round_affordable.py --output property/data/fourth-round-affordable-diagnostic.json
       - name: Build governed Fourth Round municipal snapshot
+        id: fourth_round_build
+        continue-on-error: true
         run: python property/scripts/build_fourth_round_affordable.py --output property/data/fourth-round-affordable.json
       - name: Commit diagnostics and governed snapshot
         run: |
@@ -46,3 +48,6 @@ jobs:
             git commit -m "[source-audit] Refresh governed DCA source evidence"
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
+      - name: Enforce Fourth Round publishability gate
+        if: steps.fourth_round_build.outcome != 'success'
+        run: exit 1
