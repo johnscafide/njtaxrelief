@@ -5,12 +5,18 @@ on:
     branches: [main]
     paths:
       - 'property/js/nj-address-autocomplete.js'
+      - 'property/js/nj-address-quality-guard.js'
+      - 'property/js/robust-public-brand.js'
       - 'property/tests/nj-address-autocomplete-contract.mjs'
+      - 'property/tests/nj-address-quality-guard-contract.mjs'
       - '.github/workflows/nj-address-autocomplete-contract.yml'
   pull_request:
     paths:
       - 'property/js/nj-address-autocomplete.js'
+      - 'property/js/nj-address-quality-guard.js'
+      - 'property/js/robust-public-brand.js'
       - 'property/tests/nj-address-autocomplete-contract.mjs'
+      - 'property/tests/nj-address-quality-guard-contract.mjs'
       - '.github/workflows/nj-address-autocomplete-contract.yml'
 
 permissions:
@@ -26,3 +32,5 @@ jobs:
           node-version: '20'
       - name: Verify Watchdog NJ address intelligence autocomplete
         run: node property/tests/nj-address-autocomplete-contract.mjs
+      - name: Verify exact parcel and score-missingness guard
+        run: node property/tests/nj-address-quality-guard-contract.mjs
