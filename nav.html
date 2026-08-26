@@ -61,6 +61,97 @@
     background-clip:text;
     color:transparent;
   }
+
+  /* NJPropertyTaxRelief public-nav polish. Keep this local so legacy page CSS cannot
+     squeeze the header or force the fourth mega-menu column below the fold. */
+  #main-nav .nav-inner {
+    width:100%;
+    max-width:1500px !important;
+    min-height:78px;
+    padding:0 28px !important;
+    gap:12px;
+  }
+  #main-nav .nav-logo {
+    flex:0 0 auto;
+    margin-right:0 !important;
+    padding:0 !important;
+    font-size:20px;
+    letter-spacing:-.025em;
+    white-space:nowrap;
+  }
+  #main-nav .wd-nav-brand {
+    flex:0 0 auto;
+    margin-left:0;
+    padding:7px 10px;
+  }
+  #main-nav .nav-links {
+    margin-left:auto;
+    align-items:center;
+    gap:4px;
+  }
+  #main-nav .nav-links > a:not(.wd-nav-score):not(.nav-cta),
+  #main-nav .mega-trigger {
+    display:flex;
+    align-items:center;
+    gap:7px;
+    min-height:46px;
+    padding:10px 12px !important;
+    border:0 !important;
+    border-radius:10px;
+    line-height:1.25;
+    white-space:nowrap;
+  }
+  #main-nav .nav-links > a:not(.wd-nav-score):not(.nav-cta):hover,
+  #main-nav .mega-trigger:hover {
+    background:rgba(255,255,255,.08);
+  }
+  #main-nav .wd-nav-score,
+  #main-nav .nav-cta {
+    min-height:48px;
+    margin:0 !important;
+    padding:10px 15px !important;
+    border-radius:12px;
+    justify-content:center;
+    line-height:1.2;
+  }
+  #main-nav .nav-cta {
+    margin-left:6px !important;
+    box-shadow:0 7px 20px rgba(0,0,0,.12);
+  }
+  #main-nav .mega-content {
+    padding:28px 0 30px !important;
+  }
+  #main-nav .mega-grid {
+    width:100%;
+    max-width:1450px !important;
+    grid-template-columns:minmax(250px,1.1fr) minmax(200px,.82fr) minmax(210px,.82fr) minmax(300px,1.08fr) !important;
+    gap:28px !important;
+    align-items:start;
+    padding:0 28px !important;
+  }
+  #main-nav .mega-col h4 {
+    margin-bottom:12px;
+  }
+  #main-nav .mega-col > a {
+    padding:7px 0 !important;
+    line-height:1.3;
+  }
+  #main-nav .wd-mega-promo {
+    align-self:stretch;
+    margin:0;
+    padding:18px !important;
+    box-shadow:0 14px 34px rgba(17,29,56,.16);
+  }
+  #main-nav .wd-mega-promo h4 {
+    padding-bottom:10px;
+    border-bottom:1px solid rgba(255,255,255,.16);
+  }
+  #main-nav .wd-mega-promo a {
+    padding:10px 9px !important;
+  }
+  #main-nav .wd-mega-promo strong { font-size:14px; }
+  #main-nav .wd-mega-promo small { font-size:11px; }
+
   .wd-estimator-house-ad { display:none; }
   body:has(#est-content-track) .est-eyebrow::after {
     content:" · Brought to you by Watchdog";
@@ -150,12 +241,50 @@
       font-weight:850;
     }
   }
+  @media (max-width:1280px) {
+    #main-nav .nav-inner { padding:0 20px !important; gap:8px; }
+    #main-nav .nav-logo { font-size:18px; }
+    #main-nav .nav-links > a:not(.wd-nav-score):not(.nav-cta),
+    #main-nav .mega-trigger { padding-left:9px !important; padding-right:9px !important; }
+  }
   @media (max-width:1180px) {
     .wd-nav-brand { display:none; }
     .wd-nav-score { display:none !important; }
   }
+  @media (max-width:992px) {
+    #main-nav .nav-inner { min-height:64px; padding:0 18px !important; }
+    #main-nav .nav-logo { font-size:18px; }
+    #main-nav .nav-links {
+      align-items:stretch;
+      gap:2px;
+      margin-left:0;
+      padding:14px 18px 24px;
+      max-height:calc(100vh - 64px);
+    }
+    #main-nav .nav-links > a:not(.wd-nav-score):not(.nav-cta),
+    #main-nav .mega-trigger {
+      min-height:44px;
+      padding:11px 8px !important;
+      border-radius:8px;
+    }
+    #main-nav .mega-content { padding:6px 0 8px !important; }
+    #main-nav .mega-grid {
+      grid-template-columns:1fr !important;
+      gap:14px !important;
+      padding:0 4px !important;
+    }
+    #main-nav .wd-mega-promo {
+      order:-1;
+      margin:2px 0 4px;
+      padding:14px !important;
+    }
+    #main-nav .nav-cta {
+      width:100%;
+      margin:8px 0 0 !important;
+    }
+  }
   @media (max-width:760px) {
-    .wd-mega-promo { margin-top:8px; }
+    .wd-mega-promo { margin-top:0; }
     body:has(#est-content-track) .est-eyebrow::after {
       display:block;
       content:"Brought to you by Watchdog";

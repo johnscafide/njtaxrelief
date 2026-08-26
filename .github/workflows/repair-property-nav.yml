@@ -18,6 +18,8 @@ jobs:
         run: node property/tests/universal-menu-contract.mjs
       - name: Validate public navigation syntax
         run: node --check property/js/public-nav.js
+      - name: Validate ANCHOR Watchdog bridge syntax
+        run: node --check anchor-watchdog-bridge.js
       - name: Validate public menu hooks remain available
         shell: python
         run: |
