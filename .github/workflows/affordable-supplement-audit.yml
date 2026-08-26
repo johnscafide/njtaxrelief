@@ -9,6 +9,7 @@ on:
       - property/scripts/audit_walkability_source.py
       - property/scripts/audit_commute_mode_source.py
       - property/scripts/audit_fourth_round_affordable.py
+      - property/scripts/build_fourth_round_affordable.py
       - .github/workflows/affordable-supplement-audit.yml
 
 permissions:
@@ -32,14 +33,16 @@ jobs:
         run: python property/scripts/audit_commute_mode_source.py --output property/data/commute-mode-source-diagnostic.json
       - name: Audit official 2025-2035 DCA Fourth Round calculation workbook
         run: python property/scripts/audit_fourth_round_affordable.py --output property/data/fourth-round-affordable-diagnostic.json
-      - name: Commit diagnostics
+      - name: Build governed Fourth Round municipal snapshot
+        run: python property/scripts/build_fourth_round_affordable.py --output property/data/fourth-round-affordable.json
+      - name: Commit diagnostics and governed snapshot
         run: |
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
-          git add -- property/data/affordable-housing-supplement-diagnostic.json property/data/walkability-source-diagnostic.json property/data/commute-mode-source-diagnostic.json property/data/fourth-round-affordable-diagnostic.json
+          git add -- property/data/affordable-housing-supplement-diagnostic.json property/data/walkability-source-diagnostic.json property/data/commute-mode-source-diagnostic.json property/data/fourth-round-affordable-diagnostic.json property/data/fourth-round-affordable.json
           if git diff --cached --quiet; then
-            echo "No diagnostic changes"
+            echo "No source changes"
           else
-            git commit -m "[source-audit] Inspect remaining DCA source semantics"
+            git commit -m "[source-audit] Refresh governed DCA source evidence"
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
