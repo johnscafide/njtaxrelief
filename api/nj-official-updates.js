@@ -132,8 +132,10 @@ function parseIndex(html, source) {
     const url = safeUrl(m[1], source.url);
     if (!url || !source.match.test(url)) continue;
     const direct = stripTags(m[2]);
-    let title = (!direct || direct.length < 18 || direct.length > 240 || GENERIC_LINK.test(direct)) ? headingNear(html, m.index) : direct;
-    title = title.replace(/^Read More about\s+/i, '').trim();
+    let title = /^Read More about\s+/i.test(direct)
+      ? direct.replace(/^Read More about\s+/i, '').trim()
+      : direct;
+    if (!title || title.length < 18 || title.length > 240 || GENERIC_LINK.test(title)) title = headingNear(html, m.index);
     if (!title || title.length < 18 || title.length > 240) continue;
     if (EXCLUDE.test(title) || SPANISH.test(title) || !RELEVANCE.test(title)) continue;
     const publishedAt = dateFromUrl(url) || dateNear(html, m.index);
