@@ -1,6 +1,6 @@
-/* Watchdog farm showcase — shared still-image presentation.
-   The uploaded farming mockup is stored as four lightweight WebP slices so the
-   public pages can use it without shipping a large PNG. Keep the slices together. */
+/* Watchdog farm showcase — compact professional farming callout.
+   Keep the approved Deptford farming still sharp by rendering it at roughly
+   30–40% of the available width with concise professional copy beside it. */
 :root{
   --wd-farm-slice-1:url('/property/assets/farm-watchdog-1.webp');
   --wd-farm-slice-2:url('/property/assets/farm-watchdog-2.webp');
@@ -8,70 +8,155 @@
   --wd-farm-slice-4:url('/property/assets/farm-watchdog-4.webp');
 }
 
-/* Main property index: use the farming workflow as a strong product-proof still
-   after the recent-property experience, without turning the consumer hero into
-   a professional sales page. */
-html.wd-index-lean-runtime #wd-consumer-recents::after{
-  content:"";
-  display:block;
-  width:min(1180px,calc(100% - 48px));
+/* Shared four-slice image treatment. */
+html.wd-index-lean-runtime #wd-consumer-recents::after,
+.pro-role-visual.role-agent,
+body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   aspect-ratio:760/428;
-  margin:44px auto 0;
   border:1px solid rgba(17,29,56,.10);
-  border-radius:26px;
   background-color:#f5f7fb;
   background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4);
   background-size:100% 25%,100% 25%,100% 25%,100% 25%;
   background-position:center 0%,center 33.333%,center 66.667%,center 100%;
   background-repeat:no-repeat;
-  box-shadow:0 24px 60px rgba(17,29,56,.12);
+  box-shadow:0 18px 42px rgba(17,29,56,.11);
 }
 
-/* Pro: replace the generic real-estate queue illustration with an actual
-   Watchdog workflow visual. The copy beside it still explains the use case. */
+/* Main property index: reserve one compact row below recent properties. */
+html.wd-index-lean-runtime #wd-consumer-recents{
+  position:relative;
+  padding-bottom:250px;
+}
+html.wd-index-lean-runtime #wd-consumer-recents::before{
+  content:"Professional plans let you draw and farm exact neighborhoods, then layer Watchdog intelligence to focus on the properties worth attention.";
+  position:absolute;
+  left:24px;
+  bottom:72px;
+  width:min(52%,560px);
+  color:#42546d;
+  font:700 clamp(18px,1.7vw,24px)/1.38 "Plus Jakarta Sans",sans-serif;
+  letter-spacing:-.03em;
+}
+html.wd-index-lean-runtime #wd-consumer-recents::after{
+  content:"";
+  position:absolute;
+  right:24px;
+  bottom:0;
+  display:block;
+  width:min(38%,420px);
+  border-radius:20px;
+}
+
+/* Pro real-estate panel: make farming the whole message, not another dense card. */
+.pro-role-panel[data-role-panel="agent"]{
+  grid-template-columns:minmax(0,1fr) minmax(320px,430px);
+  gap:56px;
+}
+.pro-role-panel[data-role-panel="agent"] .pro-role-copy>*{
+  display:none!important;
+}
+.pro-role-panel[data-role-panel="agent"] .pro-role-copy::before{
+  content:"Farm smarter with Watchdog.";
+  display:block;
+  max-width:620px;
+  color:#101318;
+  font:800 clamp(34px,3vw,50px)/1.02 "Plus Jakarta Sans",sans-serif;
+  letter-spacing:-.055em;
+}
+.pro-role-panel[data-role-panel="agent"] .pro-role-copy::after{
+  content:"Professional plans let you draw a territory, narrow it with Watchdog intelligence, and save the farm for outreach, exports, marketing, or reports.";
+  display:block;
+  max-width:620px;
+  margin-top:18px;
+  color:#6f7580;
+  font:500 17px/1.55 "Source Sans 3",Arial,sans-serif;
+}
 .pro-role-visual.role-agent{
   min-height:0!important;
   height:auto!important;
-  aspect-ratio:760/428;
+  width:100%!important;
+  max-width:430px;
+  justify-self:end;
   padding:0!important;
   overflow:hidden;
-  border:1px solid rgba(16,41,75,.12);
-  border-radius:26px;
-  background-color:#f5f7fb!important;
-  background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4)!important;
-  background-size:100% 25%,100% 25%,100% 25%,100% 25%!important;
-  background-position:center 0%,center 33.333%,center 66.667%,center 100%!important;
-  background-repeat:no-repeat!important;
-  box-shadow:0 24px 58px rgba(16,41,75,.12);
+  border-radius:20px;
 }
 .pro-role-visual.role-agent .role-queue{display:none!important}
 
-/* PropertyRadar comparison: show the concrete NJ farming workflow immediately
-   after the choose-this/choose-that verdict. This selector is intentionally
-   scoped to the PropertyRadar page by its authoritative outbound source link. */
+/* PropertyRadar comparison: keep the verdict cards, then add one concise
+   Watchdog farming row with copy left and the approved image right. */
+body:has(a[href*="propertyradar.com"]) .cmp-verdict::before{
+  content:"For New Jersey professionals, Watchdog adds a focused farming workflow: draw the area, apply intelligence, then save the properties you want to work.";
+  grid-column:1;
+  grid-row:2;
+  align-self:center;
+  margin-top:16px;
+  color:#42546d;
+  font:700 clamp(18px,1.65vw,23px)/1.4 "Plus Jakarta Sans",sans-serif;
+  letter-spacing:-.025em;
+}
 body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   content:"";
-  grid-column:1/-1;
+  grid-column:2;
+  grid-row:2;
+  justify-self:end;
   display:block;
-  width:100%;
-  aspect-ratio:760/428;
-  margin-top:10px;
-  border:1px solid rgba(16,42,76,.12);
-  border-radius:22px;
-  background-color:#f5f7fb;
-  background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4);
-  background-size:100% 25%,100% 25%,100% 25%,100% 25%;
-  background-position:center 0%,center 33.333%,center 66.667%,center 100%;
-  background-repeat:no-repeat;
-  box-shadow:0 22px 54px rgba(16,42,76,.10);
+  width:min(100%,420px);
+  margin-top:16px;
+  border-radius:20px;
+}
+
+@media(max-width:1100px){
+  .pro-role-panel[data-role-panel="agent"]{
+    grid-template-columns:1fr;
+    gap:28px;
+  }
+  .pro-role-visual.role-agent{
+    width:min(100%,420px)!important;
+    margin-left:auto;
+  }
 }
 
 @media(max-width:720px){
-  html.wd-index-lean-runtime #wd-consumer-recents::after{
-    width:calc(100% - 28px);
-    margin-top:30px;
-    border-radius:18px;
+  html.wd-index-lean-runtime #wd-consumer-recents{
+    padding-bottom:330px;
   }
-  .pro-role-visual.role-agent{border-radius:20px}
-  body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{border-radius:16px}
+  html.wd-index-lean-runtime #wd-consumer-recents::before{
+    left:14px;
+    right:14px;
+    bottom:226px;
+    width:auto;
+    font-size:17px;
+    line-height:1.42;
+  }
+  html.wd-index-lean-runtime #wd-consumer-recents::after{
+    right:14px;
+    width:min(calc(100% - 28px),360px);
+    border-radius:16px;
+  }
+  .pro-role-panel[data-role-panel="agent"] .pro-role-copy::before{
+    font-size:34px;
+  }
+  .pro-role-panel[data-role-panel="agent"] .pro-role-copy::after{
+    font-size:15px;
+  }
+  .pro-role-visual.role-agent{
+    width:min(100%,360px)!important;
+    border-radius:16px;
+  }
+  body:has(a[href*="propertyradar.com"]) .cmp-verdict::before,
+  body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
+    grid-column:1/-1;
+  }
+  body:has(a[href*="propertyradar.com"]) .cmp-verdict::before{
+    grid-row:auto;
+    margin-top:22px;
+    font-size:17px;
+  }
+  body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
+    grid-row:auto;
+    width:min(100%,360px);
+    margin-top:10px;
+    border-radius:16px;
+  }
 }
