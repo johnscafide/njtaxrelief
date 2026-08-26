@@ -53,6 +53,29 @@ MIGRATED_CANONICAL_FILES = {
             "font-size:9px",
         },
     },
+    pathlib.Path("property/css/agent-hardening.css"): {
+        "required": {
+            "var(--type-xs)",
+            "var(--type-xl)",
+            "var(--font-ui)",
+            "var(--radius-sm)",
+            "var(--radius-md)",
+            "var(--radius-lg)",
+            "var(--radius-pill)",
+            "var(--wd-navy-950)",
+            "@media(max-width:768px)",
+        },
+        "forbidden": {
+            "Source Sans 3",
+            "--fs-",
+            "var(--navy-dark)",
+            "border-radius:9px",
+            "border-radius:12px",
+            "border-radius:13px",
+            "border-radius:18px",
+            "border-radius:20px",
+        },
+    },
 }
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
