@@ -3,10 +3,11 @@
 
 NJW-74 identified subtle brand drift plus parallel per-page token namespaces.
 The canonical gold is fixed at #b8972a. The remaining page-local alias families
-(--ad- / --fb- / --do-) are explicitly baselined legacy debt, so this check
-prevents them from spreading while the named files are migrated onto shared
-semantic --wd-* tokens. It also locks the canonical token foundation itself so
-container, breakpoint, typography, and brand primitives cannot silently drift.
+(--ad- / --fb-) are explicitly baselined legacy debt; --do-* has been fully
+retired and is now forbidden everywhere. This check prevents legacy namespaces
+from spreading while named files migrate onto shared semantic --wd-* tokens.
+It also locks the canonical token foundation itself so container, breakpoint,
+typography, and brand primitives cannot silently drift.
 """
 from __future__ import annotations
 
@@ -31,7 +32,6 @@ LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-discover.css"),
     pathlib.Path("property/css/agent-hardening.css"),
     pathlib.Path("property/css/farm-builder.css"),
-    pathlib.Path("property/css/developer-data.css"),
 }
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
