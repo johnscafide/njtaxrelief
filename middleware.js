@@ -66,9 +66,30 @@ function legacyWatchdogPath(pathname) {
   return cleanPublicPath(remainder);
 }
 
-function redirectLegacyWatchdogHost(url) {
+function cameFromLegacyNjptr(request) {
+  const referrer = request.headers.get('referer') || '';
+  if (!referrer) return false;
+  try {
+    return LEGACY_NJPTR_HOSTS.has(new URL(referrer).hostname.toLowerCase());
+  } catch (_error) {
+    return false;
+  }
+}
+
+function redirectLegacyWatchdogHost(request, url) {
   const destination = new URL(legacyWatchdogPath(url.pathname), `https://${WATCHDOG_HOST}`);
   destination.search = url.search;
+
+  // Only stamp referral attribution when the browser actually came from an
+  // NJPropertyTaxRelief page. Bookmarks, search-engine visits and old shared
+  // links keep their real acquisition source instead of being misattributed.
+  if (cameFromLegacyNjptr(request) && !destination.searchParams.has('utm_source')) {
+    destination.searchParams.set('utm_source', 'njpropertytaxrelief');
+    destination.searchParams.set('utm_medium', 'referral');
+    destination.searchParams.set('utm_campaign', 'watchdog_cross_site');
+    destination.searchParams.set('utm_content', 'legacy_property_link');
+  }
+
   return Response.redirect(destination, 308);
 }
 
@@ -113,7 +134,7 @@ export default function middleware(request) {
     LEGACY_NJPTR_HOSTS.has(host) &&
     (url.pathname === '/property' || url.pathname === '/property/' || url.pathname.startsWith('/property/'))
   ) {
-    return redirectLegacyWatchdogHost(url);
+    return redirectLegacyWatchdogHost(request, url);
   }
 
   // Bulk county sales files remain server-readable for the municipality-scoped
