@@ -16,6 +16,7 @@ const wrappedServe=((first:unknown,second?:unknown)=>{
 Object.defineProperty(Deno,'serve',{configurable:true,writable:true,value:wrappedServe});
 
 // Add the validated DCA Fourth Round municipal calculation family outside the
-// exact current production bootstrap. This preserves all certified production
-// providers and entitlement checks, and remains independently reversible.
-await import('./production-bootstrap.ts');
+// exact pre-change production bootstrap. The remote import is git-pinned so all
+// existing City, permit lifecycle, New Home Warranty, CORS, entitlement and
+// certified resolver behavior is byte-for-byte the reviewed production graph.
+await import('https://raw.githubusercontent.com/johnscafide/njtaxrelief/9146245565b792901fca4216133706c8a17b8801/supabase/functions/workbench-hydrate/production-bootstrap.ts');
