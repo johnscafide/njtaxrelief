@@ -54,8 +54,7 @@ def num(v: object):
 
 
 def pct(v: object):
-    x = num(v)
-    return None if x is None else x
+    return num(v)
 
 
 def workbook_index(path: Path):
@@ -96,8 +95,8 @@ def workbook_index(path: Path):
 
 def table_rows(pdf_path: Path):
     out = []
+    raw_samples = []
     with pdfplumber.open(pdf_path) as pdf:
-        # Appendix A begins on PDF page 20 (zero-index 19) and runs through page 41.
         for pageno in range(19, min(42, len(pdf.pages))):
             page = pdf.pages[pageno]
             tables = page.extract_tables({
@@ -117,7 +116,8 @@ def table_rows(pdf_path: Path):
                     muni, county = cells[0], cells[1]
                     if not muni or not county or not num(cells[2]):
                         continue
-                    # Appendix A columns are fixed and visible in DCA's published table.
+                    if len(raw_samples) < 12:
+                        raw_samples.append({"page":pageno+1,"cell_count":len(cells),"cells":cells})
                     rec = {
                         "municipality": muni,
                         "county": county,
@@ -134,7 +134,7 @@ def table_rows(pdf_path: Path):
                         "appendix_pdf_page": pageno + 1,
                     }
                     out.append(rec)
-    return out
+    return out, raw_samples
 
 
 def main():
@@ -144,11 +144,11 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     pdf_path = args.output.with_suffix(".pdf")
     xlsx_path = args.output.with_suffix(".xlsx")
-    pdf_path.write_bytes(requests.get(PDF_URL, timeout=180).content)
-    xlsx_path.write_bytes(requests.get(XLSX_URL, timeout=180).content)
+    rp=requests.get(PDF_URL,timeout=180);rp.raise_for_status();pdf_path.write_bytes(rp.content)
+    rx=requests.get(XLSX_URL,timeout=180);rx.raise_for_status();xlsx_path.write_bytes(rx.content)
 
     by_pair = workbook_index(xlsx_path)
-    extracted = table_rows(pdf_path)
+    extracted, raw_samples = table_rows(pdf_path)
     matched = {}
     unmatched = []
     ambiguous = []
@@ -175,35 +175,26 @@ def main():
     if unmatched: errors.append(f"unmatched={len(unmatched)}")
     if ambiguous: errors.append(f"ambiguous={len(ambiguous)}")
     if duplicate: errors.append(f"duplicates={len(duplicate)}")
-
-    # Published statewide control totals from DCA methodology text.
     present_total = sum(x["present_need"] for x in matched.values()) if matched else 0
-    errors += [] if present_total == 65410 else [f"present_total={present_total} expected=65410"]
+    if present_total != 65410: errors.append(f"present_total={present_total} expected=65410")
 
     payload = {
-        "schema_version": 1,
+        "schema_version": 2,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "NJ DCA Fourth Round (2025-2035) Methodology Appendix A + Calculation Workbook identity crosswalk",
-        "source_page": SOURCE_PAGE,
-        "pdf_url": PDF_URL,
-        "workbook_url": XLSX_URL,
+        "source_page": SOURCE_PAGE,"pdf_url":PDF_URL,"workbook_url":XLSX_URL,
         "legal_context": "DCA publishes these calculations as non-binding guidance. Watchdog presents observed DCA calculation values, not a legal determination of municipal obligation.",
         "validation": {
-            "publishable": not errors,
-            "errors": errors,
-            "appendix_rows": len(extracted),
-            "matched_municipalities": len(matched),
-            "present_need_statewide_total": present_total,
-            "unmatched_examples": unmatched[:20],
-            "ambiguous_examples": ambiguous[:20],
-            "duplicate_examples": duplicate[:20],
+            "publishable": not errors,"errors":errors,"appendix_rows":len(extracted),"matched_municipalities":len(matched),
+            "present_need_statewide_total":present_total,"raw_cell_samples":raw_samples,
+            "unmatched_examples":unmatched[:20],"ambiguous_examples":ambiguous[:20],"duplicate_examples":duplicate[:20]
         },
         "municipalities": matched if not errors else {},
     }
-    args.output.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
-    pdf_path.unlink(missing_ok=True); xlsx_path.unlink(missing_ok=True)
-    print(json.dumps(payload["validation"], sort_keys=True))
-    if errors: sys.exit(2)
+    args.output.write_text(json.dumps(payload,separators=(",", ":")),encoding="utf-8")
+    pdf_path.unlink(missing_ok=True);xlsx_path.unlink(missing_ok=True)
+    print(json.dumps(payload["validation"],sort_keys=True))
+    if errors:sys.exit(2)
 
 
 if __name__ == "__main__":
