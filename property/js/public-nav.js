@@ -156,12 +156,12 @@
     var s=document.createElement('script');s.id=id;s.src=src;s.defer=true;document.head.appendChild(s);
   }
 
-  /* Only three index feature runtimes are allowed here. Profile rendering is
-     intentionally NOT one of them; watchdog-universal-menu.js is the one owner. */
+  /* Keep the index surface lean: each runtime here owns one visible concern. */
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
+    loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
   }
