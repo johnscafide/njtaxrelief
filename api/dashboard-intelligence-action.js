@@ -2,8 +2,9 @@ const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABAS
 const PUBLISHABLE_KEY = process.env.SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-const ACTIONS = new Set(['reviewed', 'dismissed', 'assigned', 'unassigned', 'watch']);
+const ACTIONS = new Set(['state', 'reviewed', 'dismissed', 'assigned', 'unassigned', 'watch']);
 const EVENT_MAP = { reviewed: 'reviewed', dismissed: 'dismissed', assigned: 'assigned', unassigned: 'unassigned', watch: 'watch_started' };
+const STATE_EVENTS = ['reviewed', 'dismissed', 'assigned', 'unassigned', 'watch_started'];
 
 const clean = (value, max = 800) => String(value ?? '').replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 const bearer = (req) => {
@@ -32,10 +33,15 @@ async function verifyUser(token) {
   try { return await jsonFetch(`${SUPABASE_URL}/auth/v1/user`, { headers: userHeaders(token) }); } catch { return null; }
 }
 
-async function selectOne(table, params) {
+async function selectMany(table, params) {
   const query = new URLSearchParams(params);
   const data = await jsonFetch(`${SUPABASE_URL}/rest/v1/${table}?${query.toString()}`, { headers: adminHeaders() });
-  return Array.isArray(data) ? data[0] || null : data || null;
+  return Array.isArray(data) ? data : [];
+}
+
+async function selectOne(table, params) {
+  const data = await selectMany(table, params);
+  return data[0] || null;
 }
 
 async function insert(table, row) {
@@ -63,10 +69,22 @@ module.exports = async function handler(req, res) {
     if (!user?.id) return res.status(401).json({ error: 'Sign in required.' });
 
     const body = req.body && typeof req.body === 'object' && !Array.isArray(req.body) ? req.body : {};
-    const findingId = clean(body.finding_id, 80);
     const action = clean(body.action, 30).toLowerCase();
-    if (!findingId) return res.status(400).json({ error: 'finding_id is required.' });
     if (!ACTIONS.has(action)) return res.status(400).json({ error: 'Unsupported dashboard action.' });
+
+    if (action === 'state') {
+      const outcomes = await selectMany('intelligence_outcome_events', {
+        select: 'finding_id,event_type,metadata,occurred_at',
+        user_id: `eq.${user.id}`,
+        event_type: `in.(${STATE_EVENTS.join(',')})`,
+        order: 'occurred_at.desc',
+        limit: '500',
+      });
+      return res.status(200).json({ ok: true, outcomes });
+    }
+
+    const findingId = clean(body.finding_id, 80);
+    if (!findingId) return res.status(400).json({ error: 'finding_id is required.' });
 
     const finding = await selectOne('intelligence_findings', {
       select: 'id,run_id,user_id,pams_pin,property_address,evidence,facts_hash,opportunity_type',
