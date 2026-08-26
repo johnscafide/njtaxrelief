@@ -1,0 +1,1769 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-26T20:38:00.901915+00:00",
+  "source_url": "https://www.nj.gov/dca/dlps/pdf/FourthRoundCalculation_Workbook.xlsx",
+  "workbook_bytes": 35464111,
+  "sheets": [
+    {
+      "name": "Cover",
+      "max_row": 57,
+      "max_column": 13
+    },
+    {
+      "name": "Data Sources",
+      "max_row": 23,
+      "max_column": 4
+    },
+    {
+      "name": "Final Summary",
+      "max_row": 1137,
+      "max_column": 38
+    },
+    {
+      "name": "A. Land Capacity Factor",
+      "max_row": 569,
+      "max_column": 17
+    },
+    {
+      "name": "B. Eq. Nonres. Val. Factor",
+      "max_row": 665,
+      "max_column": 25
+    },
+    {
+      "name": "C. Income Capacity Factor",
+      "max_row": 566,
+      "max_column": 19
+    },
+    {
+      "name": "D. Present Need & Subst. Hsg",
+      "max_row": 779,
+      "max_column": 60
+    },
+    {
+      "name": "E. Qualified Urban Aid Calc.",
+      "max_row": 64,
+      "max_column": 31
+    },
+    {
+      "name": "F. CHAS Table 3 - Overcrowding",
+      "max_row": 597,
+      "max_column": 276
+    },
+    {
+      "name": "G. PUMS Raw Data",
+      "max_row": 402708,
+      "max_column": 21
+    },
+    {
+      "name": "H. CHAS Table 8 - Kitchen & Plm",
+      "max_row": 597,
+      "max_column": 274
+    },
+    {
+      "name": "I. PUMA Overcrowded Share Data",
+      "max_row": 75,
+      "max_column": 9
+    },
+    {
+      "name": "J. PUMA Muni Crosswalk",
+      "max_row": 861,
+      "max_column": 11
+    },
+    {
+      "name": "Releases",
+      "max_row": 3,
+      "max_column": 2
+    }
+  ],
+  "target_hits": {
+    "municipality": [
+      {
+        "sheet": "Cover",
+        "row": 39,
+        "column": 2,
+        "text": "J. PUMA Municipality Crosswalk"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 1,
+        "column": 1,
+        "text": "Final Summary - Fourth Round (2025-35) Obligations by Municipality"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 3,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 7,
+        "text": "Qualified Urban Aid Municipality"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 28,
+        "text": "Sum of Region Units Allocated by Municipality"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 5,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 2,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 15,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 3,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 2,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 1,
+        "column": 1,
+        "text": "Qualified Urban Aid Municipality Calculation"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 4,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 27,
+        "text": "Qualified Urban Aid Municipalities"
+      },
+      {
+        "sheet": "F. CHAS Table 3 - Overcrowding",
+        "row": 3,
+        "column": 6,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "H. CHAS Table 8 - Kitchen & Plm",
+        "row": 3,
+        "column": 4,
+        "text": "Municipality"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 1,
+        "column": 1,
+        "text": "Public Use Microdata Area (PUMA) to Municipality Crosswalk"
+      }
+    ],
+    "county": [
+      {
+        "sheet": "Data Sources",
+        "row": 14,
+        "column": 2,
+        "text": "2010 Total Households by County"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 15,
+        "column": 2,
+        "text": "2020 Total Households by County"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 23,
+        "column": 2,
+        "text": "2012 PUMA to County Subdivision Crosswalk"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 2,
+        "column": 32,
+        "text": "Households by County, 2010 and 2020 Decenniel Censuses"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 1,
+        "text": "County Subdivision FIPS Code"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 4,
+        "text": "County"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 33,
+        "text": "County"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 6,
+        "text": "County"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 3,
+        "text": "County"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 16,
+        "text": "County"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 2,
+        "text": "County Subdivision FIPS"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 4,
+        "text": "County"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 1,
+        "text": "County Subdivision FIPS"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 3,
+        "text": "County"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 2,
+        "text": "County Subdivision FIPS"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 5,
+        "text": "County"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 28,
+        "text": "County"
+      },
+      {
+        "sheet": "F. CHAS Table 3 - Overcrowding",
+        "row": 3,
+        "column": 1,
+        "text": "County"
+      },
+      {
+        "sheet": "F. CHAS Table 3 - Overcrowding",
+        "row": 3,
+        "column": 4,
+        "text": "County Subdivision FIPS"
+      },
+      {
+        "sheet": "G. PUMS Raw Data",
+        "row": 2,
+        "column": 10,
+        "text": "County (FIPS code, identifiable counties only)"
+      },
+      {
+        "sheet": "G. PUMS Raw Data",
+        "row": 3,
+        "column": 10,
+        "text": "countyfip"
+      },
+      {
+        "sheet": "H. CHAS Table 8 - Kitchen & Plm",
+        "row": 3,
+        "column": 1,
+        "text": "County"
+      },
+      {
+        "sheet": "H. CHAS Table 8 - Kitchen & Plm",
+        "row": 3,
+        "column": 3,
+        "text": "County Subdivision FIPS"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 3,
+        "column": 2,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 4,
+        "column": 2,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 5,
+        "column": 2,
+        "text": "Bergen County (South Central)--Hackensack & Englewood (West) Cities"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 6,
+        "column": 2,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 7,
+        "column": 2,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 8,
+        "column": 2,
+        "text": "Bergen County (West Central)--Fair Lawn Borough, Garfield City & Lodi Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 9,
+        "column": 2,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 10,
+        "column": 2,
+        "text": "Bergen County (Northwest)--Ramsey, Oakland & Franklin Lakes Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 11,
+        "column": 2,
+        "text": "Bergen County (North Central)--Bergenfield, Paramus, Dumont & New Milford Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 12,
+        "column": 2,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 13,
+        "column": 2,
+        "text": "Passaic County (Southeast)--Paterson City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 14,
+        "column": 2,
+        "text": "Passaic County (South)--Passaic & Clifton (Southeast) Cities"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 15,
+        "column": 2,
+        "text": "Passaic County (Central)--Hawthorne Borough & Clifton City (Northwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 16,
+        "column": 2,
+        "text": "Passaic County (North)--Ringwood, Wanaque & Pompton Lakes Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 17,
+        "column": 2,
+        "text": "Hudson County (Central)--Jersey City (North)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 18,
+        "column": 2,
+        "text": "Hudson County (Central)--Jersey City (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 19,
+        "column": 2,
+        "text": "Hudson County (North)--West New York, Secaucus & Guttenberg Towns"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 20,
+        "column": 2,
+        "text": "Hudson County (Northeast)--Union City & Hoboken Cities"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 21,
+        "column": 2,
+        "text": "Hudson County (South & West)--Bayonne City, Kearney & Harrison Towns"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 22,
+        "column": 2,
+        "text": "Hunterdon County"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 23,
+        "column": 2,
+        "text": "Middlesex County (Southeast)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 24,
+        "column": 2,
+        "text": "Middlesex County (Southwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 25,
+        "column": 2,
+        "text": "Middlesex County (Northwest)--South Plainfield & Middlesex Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 26,
+        "column": 2,
+        "text": "Middlesex County (North Central)--Metuchen Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 27,
+        "column": 2,
+        "text": "Middlesex County (Northeast)--Carteret Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 28,
+        "column": 2,
+        "text": "Middlesex County (Central)--New Brunswick City, South River & Highland Park Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 29,
+        "column": 2,
+        "text": "Middlesex County (East Central)--Perth Amboy City & Sayreville Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 30,
+        "column": 2,
+        "text": "Somerset County (North & West)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 31,
+        "column": 2,
+        "text": "Somerset County (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 32,
+        "column": 2,
+        "text": "Somerset County (Central)--North Plainfield & Somerville Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 33,
+        "column": 2,
+        "text": "Monmouth County (Southeast)--Tinton Falls Borough (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 34,
+        "column": 2,
+        "text": "Monmouth County (Southwest)--Freehold Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 35,
+        "column": 2,
+        "text": "Monmouth County (East Central)--Long Branch, Asbury Park Cities & Eatontown Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 36,
+        "column": 2,
+        "text": "Monmouth County (Northeast)--Red Bank & Tinton Falls (North) Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 37,
+        "column": 2,
+        "text": "Monmouth County (Northwest)--Keansburg Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 38,
+        "column": 2,
+        "text": "Monmouth County (Central)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 39,
+        "column": 2,
+        "text": "Ocean County (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 40,
+        "column": 2,
+        "text": "Ocean County (Central)--Beachwood Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 41,
+        "column": 2,
+        "text": "Ocean County (North Central)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 42,
+        "column": 2,
+        "text": "Ocean County (Northwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 43,
+        "column": 2,
+        "text": "Ocean County (Northeast)--Point Pleasant Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 44,
+        "column": 2,
+        "text": "Essex County (Southeast)--Newark City (North & East)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 45,
+        "column": 2,
+        "text": "Essex County (Southeast)--Newark City (Southwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 46,
+        "column": 2,
+        "text": "Essex County (Northeast)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 47,
+        "column": 2,
+        "text": "Essex County (South Central)--East Orange City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 48,
+        "column": 2,
+        "text": "Essex County (Northwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 49,
+        "column": 2,
+        "text": "Essex County (Southwest)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 50,
+        "column": 2,
+        "text": "Morris County (North)--Dover Town & Kinnelon Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 51,
+        "column": 2,
+        "text": "Morris County (West)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 52,
+        "column": 2,
+        "text": "Morris County (East)--Lincoln Park Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 53,
+        "column": 2,
+        "text": "Morris County (South)--Morristown Town, Madison & Florham Park Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 54,
+        "column": 2,
+        "text": "Sussex County"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 55,
+        "column": 2,
+        "text": "Warren County"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 56,
+        "column": 2,
+        "text": "Union County (Northeast)--Elizabeth City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 57,
+        "column": 2,
+        "text": "Union County (North Central)--Roselle Park Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 58,
+        "column": 2,
+        "text": "Union County (Northwest)--Summit City & Westfield Town (North)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 59,
+        "column": 2,
+        "text": "Union County (Southwest)--Plainfield City & Westfield Town (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 60,
+        "column": 2,
+        "text": "Union County (Southeast)--Linden, Rahway Cities & Roselle Borough (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 61,
+        "column": 2,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 62,
+        "column": 2,
+        "text": "Burlington County (West Central)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 63,
+        "column": 2,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 64,
+        "column": 2,
+        "text": "Camden County (North)--Camden & Gloucester Cities"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 65,
+        "column": 2,
+        "text": "Camden County (Central)--Lindenwold & Collingswood Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 66,
+        "column": 2,
+        "text": "Camden County (South & West)--Bellmawr & Pine Hill Boroughs"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 67,
+        "column": 2,
+        "text": "Camden County (East Central)--Haddonfield Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 68,
+        "column": 2,
+        "text": "Gloucester County (Northeast)--Woodbury City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 69,
+        "column": 2,
+        "text": "Gloucester County (South & West)--Glassboro Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 70,
+        "column": 2,
+        "text": "Mercer County (West Central)--Trenton City"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 71,
+        "column": 2,
+        "text": "Mercer County (North)--Princeton Borough"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 72,
+        "column": 2,
+        "text": "Mercer County (South)"
+      },
+      {
+        "sheet": "I. PUMA Overcrowded Share Data",
+        "row": 73,
+        "column": 2,
+        "text": "Cumberland County (South)--Vineland & Millville Cities"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 1,
+        "text": "County Code"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 2,
+        "text": "County Subdivision Code (2020)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 3,
+        "text": "County Subdivision FIPS Code"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 7,
+        "text": "County"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 8,
+        "text": "County Subdivision / MCD Name"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 2,
+        "column": 11,
+        "text": "County Subdivision to PUMA Allocation Factor (% of pop.)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 3,
+        "column": 9,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 4,
+        "column": 9,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 5,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 6,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 7,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 8,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 9,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 10,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 11,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 12,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 13,
+        "column": 9,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 14,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 15,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 16,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 17,
+        "column": 9,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 19,
+        "column": 9,
+        "text": "Atlantic County (East)--Atlantic City & Ventnor City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 20,
+        "column": 9,
+        "text": "Atlantic County (Outside Somers Point City)--Pleasantville City & Hammonton Town"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 21,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 22,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 23,
+        "column": 9,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 24,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 25,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 26,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 27,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 28,
+        "column": 9,
+        "text": "Bergen County (West Central)--Fair Lawn Borough, Garfield City & Lodi Borough"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 29,
+        "column": 9,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 30,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 31,
+        "column": 9,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 32,
+        "column": 9,
+        "text": "Bergen County (Northwest)--Ramsey, Oakland & Franklin Lakes Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 33,
+        "column": 9,
+        "text": "Bergen County (West Central)--Fair Lawn Borough, Garfield City & Lodi Borough"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 34,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 35,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 36,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 37,
+        "column": 9,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 38,
+        "column": 9,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 39,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 40,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 41,
+        "column": 9,
+        "text": "Bergen County (North Central)--Bergenfield, Paramus, Dumont & New Milford Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 42,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 43,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 44,
+        "column": 9,
+        "text": "Bergen County (North Central)--Bergenfield, Paramus, Dumont & New Milford Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 45,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 46,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 47,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 48,
+        "column": 9,
+        "text": "Bergen County (Northwest)--Ramsey, Oakland & Franklin Lakes Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 49,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 50,
+        "column": 9,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 51,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 52,
+        "column": 9,
+        "text": "Bergen County (Southeast)--Fort Lee, Cliffside Park & Palisades Park Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 53,
+        "column": 9,
+        "text": "Bergen County (North Central)--Bergenfield, Paramus, Dumont & New Milford Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 54,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 55,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 56,
+        "column": 9,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 57,
+        "column": 9,
+        "text": "Bergen County (South Central)--Hackensack & Englewood (West) Cities"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 58,
+        "column": 9,
+        "text": "Bergen County (East)--Tenafly, Park Ridge & Cresskill Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 59,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 60,
+        "column": 9,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 61,
+        "column": 9,
+        "text": "Bergen County (Central)--Ridgewood Village, Glen Rock & Westwood Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 62,
+        "column": 9,
+        "text": "Bergen County (Southwest)--Rutherford, North Arlington & Hasbrouck Heights Boroughs"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 63,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 64,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 65,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 66,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 67,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 68,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 69,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 70,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 71,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 72,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 73,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 74,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 75,
+        "column": 9,
+        "text": "Burlington County (West Central)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 76,
+        "column": 9,
+        "text": "Burlington County (West Central)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 77,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 78,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 79,
+        "column": 9,
+        "text": "Burlington County (South & East)"
+      },
+      {
+        "sheet": "J. PUMA Muni Crosswalk",
+        "row": 80,
+        "column": 9,
+        "text": "Burlington County (North)--Burlington City"
+      }
+    ],
+    "region": [
+      {
+        "sheet": "Final Summary",
+        "row": 2,
+        "column": 19,
+        "text": "Regional Obligations Calculations - 2010 and 2020 Census"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 5,
+        "text": "Region"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 19,
+        "text": "Region"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 20,
+        "text": "Regional Prospective Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 27,
+        "text": "Region"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 28,
+        "text": "Sum of Region Units Allocated by Municipality"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 32,
+        "text": "Region"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 1,
+        "column": 11,
+        "text": "Regional Developable Land (excl. Qualified Urban Aid)"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 4,
+        "text": "Region"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 8,
+        "text": "% of Region's Developable Land"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 11,
+        "text": "Region"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 4,
+        "text": "Region"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 11,
+        "text": "Share of Region Nonequalized Valuation Change"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 22,
+        "text": "Region"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 1,
+        "column": 16,
+        "text": "Region Income Calculations (Excl. Qualified Urban Aid)"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 5,
+        "text": "Region"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 8,
+        "text": "$100 Below Regional Median HH Income Floor"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 10,
+        "text": "HH Weighted Income Difference % of Region Total"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 12,
+        "text": "Income Difference % of Region Total"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 16,
+        "text": "Region"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 2,
+        "column": 57,
+        "text": "Region Substandard Housing Calculation"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 5,
+        "text": "Region"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 57,
+        "text": "Region"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 60,
+        "text": "% of Regional Housing that is LMI Substandard"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 3,
+        "text": "Region"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 21,
+        "text": "2017-21 Region % of Housing that is LMI Substandard"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 22,
+        "text": "Regional Housing Deficiency Test (% substandard > region % substandard)"
+      },
+      {
+        "sheet": "F. CHAS Table 3 - Overcrowding",
+        "row": 3,
+        "column": 2,
+        "text": "Region"
+      },
+      {
+        "sheet": "G. PUMS Raw Data",
+        "row": 2,
+        "column": 18,
+        "text": "Region income limit"
+      },
+      {
+        "sheet": "H. CHAS Table 8 - Kitchen & Plm",
+        "row": 3,
+        "column": 2,
+        "text": "Region"
+      }
+    ],
+    "present_need": [
+      {
+        "sheet": "Cover",
+        "row": 33,
+        "column": 2,
+        "text": "D. Present Need and Substandard Housing"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 17,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 18,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 19,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 20,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 21,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 22,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 23,
+        "column": 1,
+        "text": "Present Need; Qualified Urban Aid"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 2,
+        "column": 6,
+        "text": "Present Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 6,
+        "text": "Present Need"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 1,
+        "column": 1,
+        "text": "Present Need and Substandard Housing Calculation"
+      },
+      {
+        "sheet": "D. Present Need & Subst. Hsg",
+        "row": 3,
+        "column": 16,
+        "text": "Present Need/Substandard/Deficient Low and Moderate-Income Occupied Units"
+      }
+    ],
+    "prospective_need": [
+      {
+        "sheet": "Data Sources",
+        "row": 14,
+        "column": 1,
+        "text": "Final Summary - Prospective Need"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 15,
+        "column": 1,
+        "text": "Final Summary - Prospective Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 2,
+        "column": 7,
+        "text": "Prospective Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 12,
+        "text": "Prospective Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 13,
+        "text": "Prospective Need >1,000?"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 17,
+        "text": "Prospective Need Obligation with 1,000/20% Cap"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 20,
+        "text": "Regional Prospective Need"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 30,
+        "text": "Gross Prospective Need"
+      }
+    ],
+    "fair_share": [
+      {
+        "sheet": "Cover",
+        "row": 5,
+        "column": 2,
+        "text": "Fair Share Housing Obligations for 2025-2035 (Fourth Round)"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 1,
+        "column": 1,
+        "text": "Final Summary - Fourth Round (2025-35) Obligations by Municipality"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 2,
+        "column": 19,
+        "text": "Regional Obligations Calculations - 2010 and 2020 Census"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 17,
+        "text": "Prospective Need Obligation with 1,000/20% Cap"
+      }
+    ],
+    "land_capacity": [
+      {
+        "sheet": "Cover",
+        "row": 30,
+        "column": 2,
+        "text": "A. Land Capacity Factor"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 5,
+        "column": 2,
+        "text": "2023 Vacant Land Parcels"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 6,
+        "column": 2,
+        "text": "2023 Vacant Land Valuation"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 9,
+        "text": "Land Capacity Factor"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 1,
+        "column": 1,
+        "text": "Land Capacity Factor Calculation"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 1,
+        "column": 11,
+        "text": "Regional Developable Land (excl. Qualified Urban Aid)"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 8,
+        "text": "% of Region's Developable Land"
+      },
+      {
+        "sheet": "A. Land Capacity Factor",
+        "row": 2,
+        "column": 12,
+        "text": "Developable Land"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 9,
+        "text": "2023 Vacant Land Parcels"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 10,
+        "text": "2023 Vacant Land Valuation"
+      },
+      {
+        "sheet": "E. Qualified Urban Aid Calc.",
+        "row": 2,
+        "column": 15,
+        "text": "2023 Avg of % of Parcels and Valuation that is Vacant Land"
+      }
+    ],
+    "income_capacity": [
+      {
+        "sheet": "Cover",
+        "row": 32,
+        "column": 2,
+        "text": "C. Income Capacity Factor"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 12,
+        "column": 1,
+        "text": "Income Capacity Factor"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 13,
+        "column": 1,
+        "text": "Income Capacity Factor"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 10,
+        "text": "Income Capacity Factor"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 1,
+        "column": 1,
+        "text": "Income Capacity Factor Calculation"
+      },
+      {
+        "sheet": "C. Income Capacity Factor",
+        "row": 2,
+        "column": 13,
+        "text": "Income Capacity Factor"
+      }
+    ],
+    "nonresidential": [
+      {
+        "sheet": "Cover",
+        "row": 31,
+        "column": 2,
+        "text": "B. Equalized Nonresidential Valuation Factor"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 8,
+        "column": 1,
+        "text": "Qualified Urban Aid; Equalized Nonresidential Valuation Factor"
+      },
+      {
+        "sheet": "Data Sources",
+        "row": 10,
+        "column": 1,
+        "text": "Qualified Urban Aid; Equalized Nonresidential Valuation Factor"
+      },
+      {
+        "sheet": "Final Summary",
+        "row": 3,
+        "column": 8,
+        "text": "Equalized Nonresidential Valuation Factor"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 2,
+        "column": 1,
+        "text": "Equalized Nonresidential Valuation Factor Calculation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 2,
+        "column": 14,
+        "text": "1999 Nonresidential Valuation Data"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 2,
+        "column": 22,
+        "text": "1999-2023 Change in Equalized Nonresidential Valuation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 8,
+        "text": "2023 Equalized Nonresidential Valuation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 9,
+        "text": "1999 Equalized Nonresidential Valuation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 10,
+        "text": "1999-2023 Change in Equalized Nonresidential Valuation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 20,
+        "text": "1999 Equalized Nonresidential Valuation"
+      },
+      {
+        "sheet": "B. Eq. Nonres. Val. Factor",
+        "row": 3,
+        "column": 23,
+        "text": "1999-2023 Change in Equalized Nonresidential Valuation Less Qualified Urban Aid"
+      }
+    ]
+  },
+  "target_hit_counts": {
+    "municipality": 16,
+    "county": 177,
+    "region": 30,
+    "present_need": 12,
+    "prospective_need": 8,
+    "fair_share": 4,
+    "land_capacity": 11,
+    "income_capacity": 6,
+    "nonresidential": 12
+  },
+  "activation_gate": {
+    "status": "diagnostic_only",
+    "rule": "Do not publish Fourth Round markers until municipality-level rows and exact field semantics are validated against DCA methodology and all 564 municipalities are reconciled."
+  }
+}
