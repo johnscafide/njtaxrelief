@@ -2,9 +2,10 @@
 """Build a governed NJ DCA Fourth Round municipal affordable-housing snapshot.
 
 The extractor reads only the official DCA calculation workbook Final Summary sheet,
-identifies columns from the workbook's own headers, and requires exactly 564 unique
-municipalities before an output is publishable. Failed gates still emit diagnostics
-so source-shape changes can be investigated without weakening the contract.
+identifies municipality fields from the workbook's leaf header row, and requires
+exactly 564 unique municipalities before an output is publishable. Failed gates
+still emit diagnostics so source-shape changes can be investigated without
+weakening the contract.
 """
 from __future__ import annotations
 
@@ -52,13 +53,18 @@ def combined_headers(ws) -> dict[int, str]:
     return out
 
 
-def find_col(headers: dict[int, str], patterns: list[str], required=True):
+def leaf_headers(ws) -> dict[int, str]:
+    row = next(ws.iter_rows(min_row=3, max_row=3, values_only=True))
+    return {i: clean(v) for i, v in enumerate(row)}
+
+
+def find_leaf(headers: dict[int, str], exact: str, required=True):
+    target = clean(exact).lower()
     for idx, text in headers.items():
-        low = text.lower()
-        if all(re.search(p, low, re.I) for p in patterns):
+        if text.lower() == target:
             return idx
     if required:
-        raise RuntimeError(f"Missing required Final Summary header matching {patterns}")
+        raise RuntimeError(f"Missing required Final Summary leaf header: {exact}")
     return None
 
 
@@ -74,22 +80,32 @@ def main():
     tmp.write_bytes(r.content)
     wb = load_workbook(tmp, read_only=True, data_only=True)
     ws = wb["Final Summary"]
-    headers = combined_headers(ws)
+    grouped_headers = combined_headers(ws)
+    leaves = leaf_headers(ws)
 
-    c_fips = find_col(headers, [r"county subdivision fips"])
-    c_muni = find_col(headers, [r"municipality"])
-    c_county = find_col(headers, [r"county"])
-    c_region = find_col(headers, [r"region"], required=False)
-    c_present = find_col(headers, [r"present need"])
-    c_prospective = find_col(headers, [r"prospective need"])
+    c_fips = find_leaf(leaves, "County Subdivision FIPS Code")
+    c_muni = find_leaf(leaves, "Municipality")
+    c_county = find_leaf(leaves, "County")
+    c_region = find_leaf(leaves, "Region", required=False)
+    c_present = find_leaf(leaves, "Present Need")
 
-    optional_specs = {
-        "land_capacity_factor": [r"land capacity", r"factor"],
-        "nonresidential_value_factor": [r"nonresidential", r"factor"],
-        "income_capacity_factor": [r"income capacity", r"factor"],
-        "qualified_urban_aid": [r"qualified urban aid municipality"],
+    # There are two groupings containing the phrase Prospective Need. The actual
+    # municipality obligation leaf header is the exact row-3 "Prospective Need"
+    # column following Average Allocation Factor (column 12 in the current workbook).
+    prospective_candidates = [i for i, text in leaves.items() if text.lower() == "prospective need"]
+    if not prospective_candidates:
+        raise RuntimeError("Missing Final Summary Prospective Need leaf header")
+    c_prospective = prospective_candidates[-1]
+
+    optional_leaf_names = {
+        "land_capacity_factor": "Land Capacity Factor",
+        "nonresidential_value_factor": "Equalized Nonresidential Valuation Factor",
+        "income_capacity_factor": "Income Capacity Factor",
+        "qualified_urban_aid": "Qualified Urban Aid Municipality",
+        "average_allocation_factor": "Average Allocation Factor",
+        "prospective_need_capped": "Prospective Need Obligation with 1,000/20% Cap",
     }
-    optional_cols = {k: find_col(headers, pats, required=False) for k, pats in optional_specs.items()}
+    optional_cols = {k: find_leaf(leaves, name, required=False) for k, name in optional_leaf_names.items()}
 
     municipalities = {}
     duplicates = []
@@ -107,7 +123,6 @@ def main():
             if len(skipped_examples) < 30:
                 skipped_examples.append({"row": excel_row, "fips": fips, "municipality": muni, "county": county})
             continue
-        # Normalize either 5-digit county-subdivision code or 10-digit state+county+subdivision FIPS.
         key = digits[-5:] if len(digits) == 10 else digits
         if key in municipalities:
             duplicates.append({"fips": key, "row": excel_row, "municipality": muni})
@@ -165,7 +180,7 @@ def main():
             "prospective_need": c_prospective + 1,
             **{k: None if v is None else v + 1 for k, v in optional_cols.items()},
         },
-        "final_summary_headers": headers,
+        "final_summary_headers": grouped_headers,
         "municipalities": municipalities if not errors else {},
     }
     args.output.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
