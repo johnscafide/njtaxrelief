@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Fail CI if Watchdog's canonical gold token drifts.
+"""Enforce Watchdog's canonical design-token contract.
 
-NJW-74 identified several near-identical gold values that made the product feel
-visually inconsistent. The active property CSS has converged on #b8972a. This
-check keeps that decision enforceable while the wider token migration continues.
+NJW-74 identified subtle brand drift plus parallel per-page token namespaces.
+The canonical gold is already fixed at #b8972a. The remaining --ad- / --fb- /
+--do- families are legacy debt, so this check prevents them from spreading while
+the named legacy files are migrated onto shared semantic tokens.
 """
 from __future__ import annotations
 
@@ -17,11 +18,18 @@ CANONICAL_GOLD = "#b8972a"
 HISTORICAL_DRIFT = {"#b8972e", "#b9952f", "#e7c46a"}
 GOLD_DECLARATION = re.compile(r"--gold\s*:\s*([^;\n}]+)", re.IGNORECASE)
 HEX = re.compile(r"#[0-9a-fA-F]{6}")
+LEGACY_PAGE_TOKEN = re.compile(r"--(?:ad|fb|do)-[a-z0-9-]+", re.IGNORECASE)
+LEGACY_PAGE_TOKEN_ALLOWLIST = {
+    pathlib.Path("property/css/agent-control-readability.css"),
+    pathlib.Path("property/css/agent-control-mobile-audit.css"),
+    pathlib.Path("property/css/developer-data.css"),
+}
 
 
 def main() -> int:
     failures: list[str] = []
     checked = 0
+    legacy_files: set[pathlib.Path] = set()
 
     for path in sorted(CSS_ROOT.rglob("*.css")):
         text = path.read_text(encoding="utf-8")
@@ -46,15 +54,34 @@ def main() -> int:
                     f"{rel}: --gold must use {CANONICAL_GOLD}; found {value!r}"
                 )
 
+        legacy_matches = sorted(set(LEGACY_PAGE_TOKEN.findall(text)))
+        if legacy_matches:
+            legacy_files.add(rel)
+            if rel not in LEGACY_PAGE_TOKEN_ALLOWLIST:
+                preview = ", ".join(legacy_matches[:5])
+                failures.append(
+                    f"{rel}: legacy page token namespace is forbidden outside the migration allowlist; "
+                    f"found {preview}"
+                )
+
+    stale_allowlist = sorted(LEGACY_PAGE_TOKEN_ALLOWLIST - legacy_files)
+    if stale_allowlist:
+        failures.extend(
+            f"{rel}: remove stale legacy-token allowlist entry after migration"
+            for rel in stale_allowlist
+        )
+
     if failures:
         print("Watchdog design-token contract failed:")
         for failure in failures:
             print(f" - {failure}")
         return 1
 
+    legacy_display = ", ".join(str(path) for path in sorted(legacy_files)) or "none"
     print(
         f"Watchdog design-token contract passed: {checked} CSS files checked; "
-        f"canonical gold is {CANONICAL_GOLD}."
+        f"canonical gold is {CANONICAL_GOLD}; legacy page-token debt is confined to: "
+        f"{legacy_display}."
     )
     return 0
 
