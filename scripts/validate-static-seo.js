@@ -121,7 +121,8 @@ const expectedClusters = {
     'https://www.watchdogindex.com/statistics/biggest-property-tax-rate-increases-new-jersey-2026',
     'https://www.watchdogindex.com/statistics/nj-revaluation-list-2026',
     'https://www.watchdogindex.com/statistics/average-residential-assessment-by-county-new-jersey-2026',
-    'https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026'
+    'https://www.watchdogindex.com/statistics/average-property-tax-by-county-new-jersey-2026',
+    'https://www.watchdogindex.com/statistics/general-vs-reported-tax-rate-by-town-new-jersey-2026'
   ]
 };
 
