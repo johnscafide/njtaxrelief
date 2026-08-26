@@ -65,8 +65,7 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
     node.setAttribute('aria-label','Watchdog paid plans launch announcement');
     node.innerHTML='<div class="wdpl-inner">'+
       '<span class="wdpl-pill"><i class="fas fa-bolt"></i> Paid plans</span>'+
-      '<div class="wdpl-copy"><strong>Agent, Pro &amp; Pro+ are scheduled to open '+LAUNCH_LABEL+'.</strong> <span class="wdpl-date-copy">Join the launch list now.</span></div>'+
-      '<span class="wdpl-plans">Agent $59 · Pro $129 · Pro+ $399 / mo</span>'+
+      '<div class="wdpl-copy"><strong>Professional plans are scheduled to open '+LAUNCH_LABEL+'.</strong> <span class="wdpl-date-copy">Get started for less than $2/day with annual billing.</span></div>'+
       '<a class="wdpl-cta" href="'+CTA_HREF+'" data-paid-launch-cta>Join the launch list <i class="fas fa-arrow-right"></i></a>'+
       '</div><button class="wdpl-close" type="button" aria-label="Dismiss launch announcement"><i class="fas fa-xmark"></i></button>';
     node.querySelector('.wdpl-close').addEventListener('click',dismiss);
