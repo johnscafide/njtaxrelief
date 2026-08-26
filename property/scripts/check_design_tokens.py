@@ -77,6 +77,30 @@ MIGRATED_CANONICAL_FILES = {
         },
     },
 }
+MIGRATED_CANONICAL_JS = {
+    pathlib.Path("property/js/landing-compare-table.js"): {
+        "required": {
+            "var(--type-xs)",
+            "var(--type-sm)",
+            "var(--type-md)",
+            "var(--font-ui)",
+            "var(--font-display)",
+            "var(--radius-pill)",
+            "@media(max-width:1024px)",
+            "@media(max-width:768px)",
+        },
+        "forbidden": {
+            "font-size:7px",
+            "font-size:8px",
+            "font-size:9px",
+            "font-size:10px",
+            "font:800 11px",
+            "font-size:13.5px",
+            "@media(max-width:900px)",
+            "@media(max-width:640px)",
+        },
+    },
+}
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
     '--font-ui: "Plus Jakarta Sans", Arial, sans-serif;',
@@ -123,11 +147,15 @@ def check_token_foundation(failures: list[str]) -> None:
         )
 
 
-def check_migrated_files(failures: list[str]) -> None:
-    for rel, contract in MIGRATED_CANONICAL_FILES.items():
+def check_contract_files(
+    failures: list[str],
+    contracts: dict[pathlib.Path, dict[str, set[str]]],
+    kind: str,
+) -> None:
+    for rel, contract in contracts.items():
         path = ROOT / rel
         if not path.exists():
-            failures.append(f"{rel}: migrated canonical stylesheet is required")
+            failures.append(f"{rel}: migrated canonical {kind} is required")
             continue
         text = path.read_text(encoding="utf-8")
         for required in sorted(contract["required"]):
@@ -144,7 +172,8 @@ def main() -> int:
     legacy_files: set[pathlib.Path] = set()
 
     check_token_foundation(failures)
-    check_migrated_files(failures)
+    check_contract_files(failures, MIGRATED_CANONICAL_FILES, "stylesheet")
+    check_contract_files(failures, MIGRATED_CANONICAL_JS, "script")
 
     for path in sorted(CSS_ROOT.rglob("*.css")):
         text = path.read_text(encoding="utf-8")
