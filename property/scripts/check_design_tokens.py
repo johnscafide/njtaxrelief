@@ -113,6 +113,38 @@ MIGRATED_CANONICAL_FILES = {
             "border-radius: 99px",
         },
     },
+    pathlib.Path("property/css/lookup/03-neighborhood-results.css"): {
+        "required": {
+            "var(--type-xs)",
+            "var(--type-sm)",
+            "var(--type-md)",
+            "var(--type-xl)",
+            "var(--font-ui)",
+            "var(--radius-sm)",
+            "var(--radius-md)",
+            "var(--radius-lg)",
+            "var(--radius-pill)",
+            "var(--shadow-md)",
+            "var(--wd-navy-950)",
+            "@media (max-width: 1024px)",
+            "@media (max-width: 768px)",
+            "@media (max-width: 480px)",
+        },
+        "forbidden": {
+            "font-size: 9px",
+            "font-size: 10px",
+            "font-size: 11.5px",
+            "font-size: 12.5px",
+            "font-size: 13.5px",
+            "font-size: 14.5px",
+            "@media (max-width: 1100px)",
+            "@media (max-width: 900px)",
+            "@media (max-width: 820px)",
+            "@media (max-width: 560px)",
+            "font-family: 'Plus Jakarta Sans'",
+            "border: 2px solid #b8972a",
+        },
+    },
 }
 MIGRATED_CANONICAL_JS = {
     pathlib.Path("property/js/landing-compare-table.js"): {
