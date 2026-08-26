@@ -26,7 +26,7 @@ const SOURCES = [
     name: 'NJDEP',
     agency: 'New Jersey Department of Environmental Protection',
     url: 'https://dep.nj.gov/newsrel/',
-    match: /^https:\/\/dep\.nj\.gov\/newsrel\/(?:26[_-]\d+|[^/?#]+)\/?$/i,
+    match: /^https:\/\/dep\.nj\.gov\/newsrel\/(?!category(?:\/|$)|feed\/?$)[^?#]+\/?$/i,
     weight: 8
   }
 ];
@@ -39,8 +39,9 @@ const TOPICS = [
   ['policy', 'NJ Policy', /\b(state budget|county budget|legislation|law|treasury|municipal|state aid|taxation|economic development|njeda|pilot|payment in lieu of taxes|grant|tax credit)\b/i]
 ];
 
-const RELEVANCE = /\b(property tax(?:es)?|tax relief|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|housing|affordable housing|workforce housing|residential|commercial real estate|office|industrial|warehouse|redevelopment|development|zoning|land use|permit|wetland|flood|site remediation|property|real estate|mortgage|foreclosure|rent|rental|apartments?|multifamily|multi-family|construction|pilot|tax credit|c-pace|realty transfer|mansion tax|municipal|ratable|ratables)\b/i;
+const RELEVANCE = /\b(property tax(?:es)?|tax relief|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|housing|affordable housing|workforce housing|residential|commercial real estate|office|industrial|warehouse|redevelopment|development|zoning|land use|permit|wetland|flood|site remediation|property|real estate|mortgage|foreclosure|rent|rental|apartments?|multifamily|multi-family|construction|pilot|tax credit|c-pace|realty transfer|mansion tax|municipal|ratable|ratables|building|infrastructure|resilience|stormwater|coastal|brownfield|energy efficiency)\b/i;
 const EXCLUDE = /\b(board meeting|public hearing|job posting|career|awards ceremony|youth program|sports|tourism event|museum|restaurant|film premiere|movie|festival)\b/i;
+const GENERIC_LINK = /^(?:read|learn|view|see)\s+more\b|^(?:more|details|continue reading|click here)\b/i;
 
 function decode(input) {
   return String(input || '')
@@ -77,19 +78,30 @@ function dateFromUrl(url) {
   return null;
 }
 function dateNear(html, index) {
-  const text = stripTags(html.slice(Math.max(0, index - 700), Math.min(html.length, index + 180)));
-  const month = text.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(2026)\b/i);
+  const text = stripTags(html.slice(Math.max(0, index - 950), Math.min(html.length, index + 220)));
+  const months = [...text.matchAll(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2}),\s+(2026)\b/gi)];
+  const month = months.length ? months[months.length - 1] : null;
   if (month) {
     const t = Date.parse(`${month[1]} ${month[2]}, ${month[3]} 12:00:00 GMT`);
     if (Number.isFinite(t)) return new Date(t).toISOString();
   }
-  const slash = text.match(/\b(\d{1,2})\/(\d{1,2})\/(2026)\b/);
+  const slashes = [...text.matchAll(/\b(\d{1,2})\/(\d{1,2})\/(2026)\b/g)];
+  const slash = slashes.length ? slashes[slashes.length - 1] : null;
   if (slash) return new Date(`${slash[3]}-${String(slash[1]).padStart(2,'0')}-${String(slash[2]).padStart(2,'0')}T12:00:00Z`).toISOString();
   return null;
 }
+function headingNear(html, index) {
+  const window = html.slice(Math.max(0, index - 2200), index);
+  const headings = [...window.matchAll(/<h[1-4]\b[^>]*>([\s\S]*?)<\/h[1-4]>/gi)];
+  for (let i = headings.length - 1; i >= 0; i--) {
+    const value = stripTags(headings[i][1]);
+    if (value.length >= 18 && value.length <= 240 && !/^all news|press room|news(?:\s*&\s*updates)?$/i.test(value)) return value;
+  }
+  return '';
+}
 function score(title, source, publishedAt) {
   let s = source.weight || 0;
-  const hits = title.match(/\b(property tax(?:es)?|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|affordable housing|housing|redevelopment|zoning|land use|permit|wetland|flood|commercial real estate|c-pace|tax credit|pilot)\b/gi);
+  const hits = title.match(/\b(property tax(?:es)?|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|affordable housing|housing|redevelopment|zoning|land use|permit|wetland|flood|commercial real estate|c-pace|tax credit|pilot|infrastructure|resilience)\b/gi);
   s += hits ? Math.min(10, hits.length * 2) : 0;
   if (publishedAt) {
     const age = Date.now() - new Date(publishedAt).getTime();
@@ -108,9 +120,10 @@ function parseIndex(html, source) {
   let m;
   while ((m = rx.exec(html))) {
     const url = safeUrl(m[1], source.url);
-    const title = stripTags(m[2]);
-    if (!url || !title || title.length < 18 || title.length > 240) continue;
-    if (!source.match.test(url)) continue;
+    if (!url || !source.match.test(url)) continue;
+    const direct = stripTags(m[2]);
+    const title = (!direct || direct.length < 18 || direct.length > 240 || GENERIC_LINK.test(direct)) ? headingNear(html, m.index) : direct;
+    if (!title || title.length < 18 || title.length > 240) continue;
     if (EXCLUDE.test(title) || !RELEVANCE.test(title)) continue;
     const publishedAt = dateFromUrl(url) || dateNear(html, m.index);
     const topic = classify(title);
@@ -137,7 +150,7 @@ async function fetchSource(source) {
       signal: ctl.signal,
       redirect: 'follow',
       headers: {
-        'user-agent': 'WatchdogNJOfficial/1.0 (+https://www.watchdogindex.com)',
+        'user-agent': 'WatchdogNJOfficial/1.1 (+https://www.watchdogindex.com)',
         accept: 'text/html,application/xhtml+xml'
       }
     });
