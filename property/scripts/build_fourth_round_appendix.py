@@ -53,8 +53,17 @@ def num(v: object):
         return None
 
 
-def pct(v: object):
-    return num(v)
+def factor_values(v: object):
+    """Return the four Appendix A allocation-factor percentages from one PDF cell.
+
+    pdfplumber collapses the four visually separate factor columns into one cell,
+    e.g. ``0.97% 1.11% 1.44% 1.17%``. Requiring exactly four tokens prevents a
+    shifted or malformed table row from being silently accepted.
+    """
+    tokens = re.findall(r"-?\d+(?:\.\d+)?%", clean(v))
+    if len(tokens) != 4:
+        return None
+    return [num(token) for token in tokens]
 
 
 def workbook_index(path: Path):
@@ -76,7 +85,8 @@ def workbook_index(path: Path):
         if not muni or not county:
             continue
         fips = re.sub(r"\D", "", clean(row[ci["fips"]]))
-        if len(fips) == 10: fips = fips[-5:]
+        if len(fips) == 10:
+            fips = fips[-5:]
         dca = re.sub(r"\D", "", clean(row[ci["dca_municode"]]))
         rec = {
             "county_subdivision_fips": fips,
@@ -96,6 +106,7 @@ def workbook_index(path: Path):
 def table_rows(pdf_path: Path):
     out = []
     raw_samples = []
+    malformed_factor_rows = []
     with pdfplumber.open(pdf_path) as pdf:
         for pageno in range(19, min(42, len(pdf.pages))):
             page = pdf.pages[pageno]
@@ -109,32 +120,36 @@ def table_rows(pdf_path: Path):
             for table in tables:
                 for row in table or []:
                     cells = [clean(x) for x in (row or [])]
-                    if len(cells) < 12:
+                    if len(cells) < 14:
                         continue
                     if cells[0].lower().startswith("municipality") or "Present Need" in cells[0]:
                         continue
                     muni, county = cells[0], cells[1]
-                    if not muni or not county or not num(cells[2]):
+                    if not muni or not county or num(cells[2]) is None:
                         continue
                     if len(raw_samples) < 12:
-                        raw_samples.append({"page":pageno+1,"cell_count":len(cells),"cells":cells})
+                        raw_samples.append({"page": pageno + 1, "cell_count": len(cells), "cells": cells})
+                    factors = factor_values(cells[5])
+                    if factors is None:
+                        malformed_factor_rows.append({"page": pageno + 1, "municipality": muni, "county": county, "factor_cell": cells[5]})
+                        continue
                     rec = {
                         "municipality": muni,
                         "county": county,
                         "region": num(cells[2]),
                         "present_need": num(cells[3]),
                         "qualified_urban_aid": cells[4] or None,
-                        "nonresidential_value_factor_pct": pct(cells[5]),
-                        "land_capacity_factor_pct": pct(cells[6]),
-                        "income_capacity_factor_pct": pct(cells[7]),
-                        "average_allocation_factor_pct": pct(cells[8]),
-                        "prospective_need": num(cells[9]),
-                        "cap_1000_20pct": num(cells[10]),
-                        "prospective_need_capped": num(cells[11]),
+                        "nonresidential_value_factor_pct": factors[0],
+                        "land_capacity_factor_pct": factors[1],
+                        "income_capacity_factor_pct": factors[2],
+                        "average_allocation_factor_pct": factors[3],
+                        "prospective_need": num(cells[11]),
+                        "cap_1000_20pct": num(cells[12]),
+                        "prospective_need_capped": num(cells[13]),
                         "appendix_pdf_page": pageno + 1,
                     }
                     out.append(rec)
-    return out, raw_samples
+    return out, raw_samples, malformed_factor_rows
 
 
 def main():
@@ -144,11 +159,11 @@ def main():
     args.output.parent.mkdir(parents=True, exist_ok=True)
     pdf_path = args.output.with_suffix(".pdf")
     xlsx_path = args.output.with_suffix(".xlsx")
-    rp=requests.get(PDF_URL,timeout=180);rp.raise_for_status();pdf_path.write_bytes(rp.content)
-    rx=requests.get(XLSX_URL,timeout=180);rx.raise_for_status();xlsx_path.write_bytes(rx.content)
+    rp = requests.get(PDF_URL, timeout=180); rp.raise_for_status(); pdf_path.write_bytes(rp.content)
+    rx = requests.get(XLSX_URL, timeout=180); rx.raise_for_status(); xlsx_path.write_bytes(rx.content)
 
     by_pair = workbook_index(xlsx_path)
-    extracted, raw_samples = table_rows(pdf_path)
+    extracted, raw_samples, malformed_factor_rows = table_rows(pdf_path)
     matched = {}
     unmatched = []
     ambiguous = []
@@ -170,31 +185,49 @@ def main():
         matched[fips] = {**ident, **rec}
 
     errors = []
-    if len(extracted) != EXPECTED: errors.append(f"appendix_rows={len(extracted)} expected={EXPECTED}")
-    if len(matched) != EXPECTED: errors.append(f"matched={len(matched)} expected={EXPECTED}")
-    if unmatched: errors.append(f"unmatched={len(unmatched)}")
-    if ambiguous: errors.append(f"ambiguous={len(ambiguous)}")
-    if duplicate: errors.append(f"duplicates={len(duplicate)}")
+    if malformed_factor_rows:
+        errors.append(f"malformed_factor_rows={len(malformed_factor_rows)}")
+    if len(extracted) != EXPECTED:
+        errors.append(f"appendix_rows={len(extracted)} expected={EXPECTED}")
+    if len(matched) != EXPECTED:
+        errors.append(f"matched={len(matched)} expected={EXPECTED}")
+    if unmatched:
+        errors.append(f"unmatched={len(unmatched)}")
+    if ambiguous:
+        errors.append(f"ambiguous={len(ambiguous)}")
+    if duplicate:
+        errors.append(f"duplicates={len(duplicate)}")
     present_total = sum(x["present_need"] for x in matched.values()) if matched else 0
-    if present_total != 65410: errors.append(f"present_total={present_total} expected=65410")
+    if present_total != 65410:
+        errors.append(f"present_total={present_total} expected=65410")
 
     payload = {
-        "schema_version": 2,
+        "schema_version": 3,
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "source": "NJ DCA Fourth Round (2025-2035) Methodology Appendix A + Calculation Workbook identity crosswalk",
-        "source_page": SOURCE_PAGE,"pdf_url":PDF_URL,"workbook_url":XLSX_URL,
+        "source_page": SOURCE_PAGE,
+        "pdf_url": PDF_URL,
+        "workbook_url": XLSX_URL,
         "legal_context": "DCA publishes these calculations as non-binding guidance. Watchdog presents observed DCA calculation values, not a legal determination of municipal obligation.",
         "validation": {
-            "publishable": not errors,"errors":errors,"appendix_rows":len(extracted),"matched_municipalities":len(matched),
-            "present_need_statewide_total":present_total,"raw_cell_samples":raw_samples,
-            "unmatched_examples":unmatched[:20],"ambiguous_examples":ambiguous[:20],"duplicate_examples":duplicate[:20]
+            "publishable": not errors,
+            "errors": errors,
+            "appendix_rows": len(extracted),
+            "matched_municipalities": len(matched),
+            "present_need_statewide_total": present_total,
+            "raw_cell_samples": raw_samples,
+            "malformed_factor_examples": malformed_factor_rows[:20],
+            "unmatched_examples": unmatched[:20],
+            "ambiguous_examples": ambiguous[:20],
+            "duplicate_examples": duplicate[:20]
         },
         "municipalities": matched if not errors else {},
     }
-    args.output.write_text(json.dumps(payload,separators=(",", ":")),encoding="utf-8")
-    pdf_path.unlink(missing_ok=True);xlsx_path.unlink(missing_ok=True)
-    print(json.dumps(payload["validation"],sort_keys=True))
-    if errors:sys.exit(2)
+    args.output.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
+    pdf_path.unlink(missing_ok=True); xlsx_path.unlink(missing_ok=True)
+    print(json.dumps(payload["validation"], sort_keys=True))
+    if errors:
+        sys.exit(2)
 
 
 if __name__ == "__main__":
