@@ -1,0 +1,48 @@
+{
+  "contract": "watchdog-nj-benefit-stacking-2025-application-2026-v1",
+  "verified_on": "2026-08-26",
+  "application_tax_year": 2025,
+  "filing_deadline": "2026-11-02",
+  "sources": {
+    "anchor": "https://www.nj.gov/treasury/taxation/anchor/calculated.shtml",
+    "senior_freeze": "https://www.nj.gov/treasury/taxation/ptr/",
+    "stay_nj": "https://www.nj.gov/treasury/taxation/staynj/index.shtml",
+    "relief_portal": "https://www.nj.gov/treasury/taxation/relief.shtml"
+  },
+  "anchor": {
+    "homeowner_income_limit": 250000,
+    "tiers": [
+      {"max_income": 150000, "benefit": 1500},
+      {"max_income": 250000, "benefit": 1000}
+    ],
+    "notes": "Homeowner 2025 ANCHOR benefit. Final eligibility depends on principal-residence and program rules."
+  },
+  "senior_freeze": {
+    "age_threshold": 65,
+    "income_2024_max": 168268,
+    "income_2025_max": 172475,
+    "ownership_since": "2022-12-31",
+    "calculation": "Eligible reimbursement is generally the increase above the established eligible base-year property tax, subject to complete continuous eligibility and program review."
+  },
+  "stay_nj": {
+    "age_threshold": 65,
+    "income_max": 200000,
+    "tax_share_target": 0.5,
+    "annualized_caps": [
+      {"max_income": 100000, "cap": 6500},
+      {"max_income": 150000, "cap": 5000},
+      {"max_income": 200000, "cap": 4000}
+    ],
+    "notes": "FY2027 annualized maximums for the 2025 application. State guidance says qualifying taxpayers receive benefits totaling half their property-tax bill up to the income-tier cap; final program allocation is determined by the Division of Taxation."
+  },
+  "global_cap": {
+    "rule": "Total property-tax relief benefits cannot exceed property taxes paid on the principal residence for the same year.",
+    "includes": ["ANCHOR", "Senior Freeze", "Stay NJ", "senior_or_disabled_property_tax_deduction", "veteran_property_tax_deduction"]
+  },
+  "governance": {
+    "not_legal_or_tax_advice": true,
+    "no_future_rule_assumption": true,
+    "age_65_forecast_requires_same_rules_assumption": true,
+    "division_of_taxation_final_determination": true
+  }
+}
