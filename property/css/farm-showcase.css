@@ -1,0 +1,77 @@
+/* Watchdog farm showcase — shared still-image presentation.
+   The uploaded farming mockup is stored as four lightweight WebP slices so the
+   public pages can use it without shipping a large PNG. Keep the slices together. */
+:root{
+  --wd-farm-slice-1:url('/property/assets/farm-watchdog-1.webp');
+  --wd-farm-slice-2:url('/property/assets/farm-watchdog-2.webp');
+  --wd-farm-slice-3:url('/property/assets/farm-watchdog-3.webp');
+  --wd-farm-slice-4:url('/property/assets/farm-watchdog-4.webp');
+}
+
+/* Main property index: use the farming workflow as a strong product-proof still
+   after the recent-property experience, without turning the consumer hero into
+   a professional sales page. */
+html.wd-index-lean-runtime #wd-consumer-recents::after{
+  content:"";
+  display:block;
+  width:min(1180px,calc(100% - 48px));
+  aspect-ratio:760/428;
+  margin:44px auto 0;
+  border:1px solid rgba(17,29,56,.10);
+  border-radius:26px;
+  background-color:#f5f7fb;
+  background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4);
+  background-size:100% 25%,100% 25%,100% 25%,100% 25%;
+  background-position:center 0%,center 33.333%,center 66.667%,center 100%;
+  background-repeat:no-repeat;
+  box-shadow:0 24px 60px rgba(17,29,56,.12);
+}
+
+/* Pro: replace the generic real-estate queue illustration with an actual
+   Watchdog workflow visual. The copy beside it still explains the use case. */
+.pro-role-visual.role-agent{
+  min-height:0!important;
+  height:auto!important;
+  aspect-ratio:760/428;
+  padding:0!important;
+  overflow:hidden;
+  border:1px solid rgba(16,41,75,.12);
+  border-radius:26px;
+  background-color:#f5f7fb!important;
+  background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4)!important;
+  background-size:100% 25%,100% 25%,100% 25%,100% 25%!important;
+  background-position:center 0%,center 33.333%,center 66.667%,center 100%!important;
+  background-repeat:no-repeat!important;
+  box-shadow:0 24px 58px rgba(16,41,75,.12);
+}
+.pro-role-visual.role-agent .role-queue{display:none!important}
+
+/* PropertyRadar comparison: show the concrete NJ farming workflow immediately
+   after the choose-this/choose-that verdict. This selector is intentionally
+   scoped to the PropertyRadar page by its authoritative outbound source link. */
+body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
+  content:"";
+  grid-column:1/-1;
+  display:block;
+  width:100%;
+  aspect-ratio:760/428;
+  margin-top:10px;
+  border:1px solid rgba(16,42,76,.12);
+  border-radius:22px;
+  background-color:#f5f7fb;
+  background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4);
+  background-size:100% 25%,100% 25%,100% 25%,100% 25%;
+  background-position:center 0%,center 33.333%,center 66.667%,center 100%;
+  background-repeat:no-repeat;
+  box-shadow:0 22px 54px rgba(16,42,76,.10);
+}
+
+@media(max-width:720px){
+  html.wd-index-lean-runtime #wd-consumer-recents::after{
+    width:calc(100% - 28px);
+    margin-top:30px;
+    border-radius:18px;
+  }
+  .pro-role-visual.role-agent{border-radius:20px}
+  body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{border-radius:16px}
+}
