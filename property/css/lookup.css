@@ -56,3 +56,11 @@ body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
     padding: 0 !important;
   }
 }
+
+/* Anonymous lookup: do not let these two account-gate cards sit on top of
+   sponsored placements or other free sections. The underlying analysis stays
+   gated because lookup.js only renders it for signed-in users. */
+.gated[data-gate="hood"],
+.gated[data-gate="tradeup"] {
+  display: none !important;
+}
