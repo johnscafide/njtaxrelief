@@ -6,17 +6,25 @@ on:
     paths:
       - 'property/js/nj-address-autocomplete.js'
       - 'property/js/nj-address-quality-guard.js'
+      - 'property/js/public-score-on-demand.js'
+      - 'property/js/public-nav.js'
       - 'property/js/robust-public-brand.js'
+      - 'property/js/watchdog-score-public.js'
       - 'property/tests/nj-address-autocomplete-contract.mjs'
       - 'property/tests/nj-address-quality-guard-contract.mjs'
+      - 'property/tests/public-watchdog-score-on-demand-contract.mjs'
       - '.github/workflows/nj-address-autocomplete-contract.yml'
   pull_request:
     paths:
       - 'property/js/nj-address-autocomplete.js'
       - 'property/js/nj-address-quality-guard.js'
+      - 'property/js/public-score-on-demand.js'
+      - 'property/js/public-nav.js'
       - 'property/js/robust-public-brand.js'
+      - 'property/js/watchdog-score-public.js'
       - 'property/tests/nj-address-autocomplete-contract.mjs'
       - 'property/tests/nj-address-quality-guard-contract.mjs'
+      - 'property/tests/public-watchdog-score-on-demand-contract.mjs'
       - '.github/workflows/nj-address-autocomplete-contract.yml'
 
 permissions:
@@ -34,3 +42,5 @@ jobs:
         run: node property/tests/nj-address-autocomplete-contract.mjs
       - name: Verify exact parcel and score-missingness guard
         run: node property/tests/nj-address-quality-guard-contract.mjs
+      - name: Verify instant public ROBUST score-on-demand contract
+        run: node property/tests/public-watchdog-score-on-demand-contract.mjs
