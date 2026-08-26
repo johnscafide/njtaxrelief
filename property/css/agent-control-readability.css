@@ -38,14 +38,14 @@ html body.wdx-modern{
 }
 
 html body.wdx-modern .ad-shell{
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-family:var(--font-ui)!important;
 }
 
 /* Active work-navigation text and controls are readable without changing layout structure. */
 html body.wdx-modern .ac27-tabs a,
 html body.wdx-modern .ac27-actions button{
   min-height:42px!important;
-  font-size:13px!important;
+  font-size:var(--type-sm)!important;
   line-height:1.25!important;
 }
 
@@ -70,7 +70,7 @@ html body.wdx-modern .ad-funnel-note,
 html body.wdx-modern .ad-list-head small,
 html body.wdx-modern .ad-card-meta,
 html body.wdx-modern .ad-queue{
-  font-size:12px!important;
+  font-size:var(--type-xs)!important;
   line-height:1.4!important;
 }
 
@@ -84,7 +84,7 @@ html body.wdx-modern .ad-funnel-panel header span,
 html body.wdx-modern .ad-list-head span,
 html body.wdx-modern .ad-side>section>span,
 html body.wdx-modern .ad-modal-card>span{
-  font-size:12px!important;
+  font-size:var(--type-xs)!important;
   line-height:1.25!important;
 }
 
@@ -109,7 +109,7 @@ html body.wdx-modern :is(
   .ad-load-more
 ){
   min-height:42px!important;
-  font-size:13px!important;
+  font-size:var(--type-sm)!important;
   line-height:1.25!important;
 }
 
@@ -130,7 +130,7 @@ html body.wdx-modern :is(
 }
 
 /* Preserve the stronger mobile touch baseline instead of letting desktop overrides shrink it. */
-@media (max-width:760px){
+@media (max-width:768px){
   html body.wdx-modern .ac27-tabs a,
   html body.wdx-modern .ac27-actions button,
   html body.wdx-modern :is(
@@ -148,13 +148,13 @@ html body.wdx-modern :is(
     .ad-load-more
   ){
     min-height:48px!important;
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
   }
   html body.wdx-modern .ad-control-right input,
   html body.wdx-modern .ad-control-right select,
   html body.wdx-modern #ad-sort,
   html body.wdx-modern .ad-funnel-panel header select{
     min-height:48px!important;
-    font-size:16px!important;
+    font-size:var(--type-md)!important;
   }
 }
