@@ -51,8 +51,16 @@ function cleanPath(value) {
   return path || '/';
 }
 
+function isPrivateAppPath(pathname) {
+  return AI_REFERRAL_PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+}
+
 function isAiReferralPublicPath(pathname) {
-  return !AI_REFERRAL_PRIVATE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  return !isPrivateAppPath(pathname);
+}
+
+function privateRouteRevision() {
+  return String(process.env.VERCEL_GIT_COMMIT_SHA || process.env.VERCEL_URL || 'private-app');
 }
 
 function looksLikeVercelAuth(body) {
@@ -144,13 +152,18 @@ function sanitizeContactHtml(input, publicPath) {
   return html;
 }
 
-function copySafeHeaders(upstream, res) {
+function copySafeHeaders(upstream, res, publicPath) {
   const contentType = upstream.headers.get('content-type');
   const cacheControl = upstream.headers.get('cache-control');
   const contentLanguage = upstream.headers.get('content-language');
   if (contentType) res.setHeader('Content-Type', contentType);
   else res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  if (cacheControl) res.setHeader('Cache-Control', cacheControl);
+  if (isPrivateAppPath(publicPath)) {
+    res.setHeader('Cache-Control', 'private, no-store, max-age=0');
+    res.setHeader('Pragma', 'no-cache');
+  } else if (cacheControl) {
+    res.setHeader('Cache-Control', cacheControl);
+  }
   if (contentLanguage) res.setHeader('Content-Language', contentLanguage);
   res.setHeader('X-Watchdog-Route-Guard', 'canonical-contact-policy');
 }
@@ -177,13 +190,17 @@ module.exports = async function handler(req, res) {
 
   const upstreamUrl = new URL('/api/watchdog-index-page', WATCHDOG_ORIGIN);
   upstreamUrl.searchParams.set('path', publicPath);
+  if (isPrivateAppPath(publicPath)) {
+    upstreamUrl.searchParams.set('route_rev', privateRouteRevision());
+  }
 
   try {
     const upstream = await fetch(upstreamUrl, {
       method: 'GET',
       headers: {
         'user-agent': 'WatchdogContactRouteGuard/1.0',
-        'x-watchdog-internal-route': 'canonical-contact-policy'
+        'x-watchdog-internal-route': 'canonical-contact-policy',
+        ...(isPrivateAppPath(publicPath) ? { 'cache-control': 'no-cache', pragma: 'no-cache' } : {})
       },
       redirect: 'follow'
     });
@@ -192,7 +209,7 @@ module.exports = async function handler(req, res) {
     if (rejected) return render404(req, res);
 
     res.statusCode = upstream.status;
-    copySafeHeaders(upstream, res);
+    copySafeHeaders(upstream, res, publicPath);
     if (req.method === 'HEAD') return res.end();
     let safeBody = sanitizeContactHtml(body, publicPath);
     safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
