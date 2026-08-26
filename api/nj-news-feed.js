@@ -1,26 +1,27 @@
 'use strict';
 
 const SOURCES = [
-  { name:'NJ Spotlight News', feed:'https://www.njspotlightnews.org/housing/feed/', lane:'Housing & Policy', weight:6 },
-  { name:'NJ Spotlight News', feed:'https://www.njspotlightnews.org/budget/feed/', lane:'Taxes & Budget', weight:6 },
-  { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=217', lane:'Commercial Real Estate', weight:5 },
-  { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=275', lane:'Government & Business', weight:5 },
-  { name:'ROI-NJ', feed:'https://www.roi-nj.com/feed/', lane:'Business & Real Estate', weight:4 },
-  { name:'Jersey Digs', feed:'https://jerseydigs.com/feed/', lane:'Development & Real Estate', weight:4 },
-  { name:'New Jersey Monitor', feed:'https://newjerseymonitor.com/category/housing/feed/', lane:'Housing & Policy', weight:5 },
-  { name:'New Jersey Future', feed:'https://www.njfuture.org/feed/', lane:'Land Use & Housing', weight:4 }
+  { name:'NJ Spotlight News', feed:'https://www.njspotlightnews.org/housing/feed/', lane:'Housing & Policy', scope:'housing', weight:6 },
+  { name:'NJ Spotlight News', feed:'https://www.njspotlightnews.org/budget/feed/', lane:'Taxes & Budget', scope:'tax', weight:7 },
+  { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=217', lane:'Commercial Real Estate', scope:'commercial', weight:6 },
+  { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=275', lane:'Government & Business', scope:'government', weight:5 },
+  { name:'Jersey Digs', feed:'https://jerseydigs.com/feed/', lane:'Development & Real Estate', scope:'development', weight:5 },
+  { name:'New Jersey Business Magazine', feed:'https://njbmagazine.com/feed', lane:'Business & Development', scope:'business', weight:5 }
 ];
 
 const TOPICS = [
-  ['property-tax', 'Property Tax', /\b(property tax|property-tax|assessment|assessed value|reassessment|revaluation|tax appeal|chapter 123|anchor|stay nj|senior freeze|tax relief|equalization table|municipal tax|school tax)\b/i],
-  ['commercial', 'Commercial', /\b(commercial real estate|office|industrial|warehouse|retail property|mixed-use|mixed use|multifamily|multi-family|development site|redevelopment|data center|logistics|CRE)\b/i],
-  ['residential', 'Residential', /\b(home prices?|home sales?|housing market|residential|single-family|single family|condo|min?i?market|mortgage|foreclosure|rent|rental|landlord|tenant|starter home)\b/i],
-  ['development', 'Housing / Development', /\b(housing|affordable housing|development|redevelopment|zoning|land use|planning board|construction|permit|transit-oriented|transit oriented|smart growth|inclusionary)\b/i],
-  ['policy', 'NJ Policy', /\b(budget|legislation|bill|law|governor|treasury|municipal|county|state aid|taxation|economic development|EDA|PILOT|payment in lieu of taxes)\b/i]
+  ['property-tax', 'Property Tax', /\b(property tax(?:es)?|property-tax|assessment|assessed value|reassessment|revaluation|tax appeal|chapter 123|anchor|stay nj|senior freeze|tax relief|equalization|municipal tax|school tax)\b/i],
+  ['commercial', 'Commercial', /\b(commercial real estate|office|industrial|warehouse|retail property|retail center|shopping center|mixed-use|mixed use|multifamily|multi-family|development site|data center|logistics|CRE|lease|leasing)\b/i],
+  ['residential', 'Residential', /\b(home prices?|home sales?|housing market|residential|single-family|single family|condo|townhome|mortgage|foreclosure|rent|rental|landlord|tenant|starter home|apartments?|lofts?)\b/i],
+  ['development', 'Housing / Development', /\b(housing|affordable housing|development|redevelopment|zoning|land use|planning board|construction loan|construction financing|permit|transit-oriented|transit oriented|smart growth|inclusionary)\b/i],
+  ['policy', 'NJ Policy', /\b(state budget|county budget|legislation|property bill|housing bill|treasury|municipal|state aid|taxation|economic development|NJEDA|EDA|PILOT|payment in lieu of taxes)\b/i]
 ];
 
-const RELEVANCE = /\b(property tax|property-tax|tax relief|assessment|reassessment|revaluation|appeal|anchor|stay nj|senior freeze|real estate|housing|home prices?|home sales?|commercial|office|industrial|warehouse|retail|development|redevelopment|zoning|land use|mortgage|foreclosure|rent|rental|multifamily|multi-family|construction|permit|PILOT|affordable housing|municipal|county budget|state budget|property market|taxation|equalization)\b/i;
-const EXCLUDE = /\b(opinion|editorial|sponsored|partner content|advertorial|letters to the editor|sports|celebrity|restaurant review)\b/i;
+const TAX_RELEVANCE = /\b(property tax(?:es)?|property-tax|tax relief|assessment|assessed value|reassessment|revaluation|tax appeal|chapter 123|anchor|stay nj|senior freeze|equalization|realty transfer|mansion tax|municipal tax|school tax)\b/i;
+const HOUSING_RELEVANCE = /\b(housing|affordable housing|home prices?|home sales?|housing market|residential|single-family|single family|condo|townhome|mortgage|foreclosure|rent|rental|landlord|tenant|apartments?|multifamily|multi-family|zoning|land use|redevelopment|development|building conversion|hotel conversion)\b/i;
+const PROPERTY_RELEVANCE = /\b(real estate|property|housing|residential|commercial|office|industrial|warehouse|retail center|shopping center|development|redevelopment|zoning|land use|planning board|construction loan|construction financing|permit|PILOT|affordable housing|multifamily|multi-family|apartments?|lofts?|tower|building|site|parcel|acre|lease|leasing|leased|sale|sells|sold|financing|loan)\b/i;
+const CORE_RELEVANCE = /\b(property tax(?:es)?|tax relief|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|real estate|housing|affordable housing|commercial real estate|residential|office market|industrial|warehouse|redevelopment|zoning|land use|PILOT|property market|realty transfer|mansion tax)\b/i;
+const EXCLUDE = /\b(op-?ed|opinion|editorial|sponsored|partner content|advertorial|commentary|letters? to the editor|sports|celebrity|restaurant review)\b/i;
 
 function decodeXml(input) {
   return String(input || '')
@@ -46,6 +47,14 @@ function tag(block, names) {
   return '';
 }
 
+function tags(block, name) {
+  const out = [];
+  const rx = new RegExp(`<${name}\\b[^>]*>([\\s\\S]*?)<\\/${name}>`, 'gi');
+  let m;
+  while ((m = rx.exec(block))) out.push(stripTags(m[1]));
+  return out;
+}
+
 function linkFrom(block) {
   const rss = tag(block, ['link']);
   if (/^https?:\/\//i.test(rss)) return rss;
@@ -65,17 +74,38 @@ function cleanUrl(value) {
   }
 }
 
-function classify(title, lane) {
-  const hay = `${title} ${lane}`;
-  for (const [id, label, rx] of TOPICS) if (rx.test(hay)) return { id, label };
-  return { id:'property', label:'Property Insights' };
+function relevant(title, source) {
+  if (source.scope === 'tax') return TAX_RELEVANCE.test(title);
+  if (source.scope === 'housing') return HOUSING_RELEVANCE.test(title);
+  if (source.scope === 'commercial' || source.scope === 'development') return PROPERTY_RELEVANCE.test(title);
+  return CORE_RELEVANCE.test(title);
+}
+
+function classify(title, source) {
+  for (const [id, label, rx] of TOPICS) if (rx.test(title)) return { id, label };
+  if (source.scope === 'tax') return { id:'property-tax', label:'Property Tax' };
+  if (source.scope === 'commercial') return { id:'commercial', label:'Commercial' };
+  if (source.scope === 'housing') return { id:'development', label:'Housing / Development' };
+  if (source.scope === 'development') return { id:'development', label:'Housing / Development' };
+  return { id:'policy', label:'NJ Policy' };
 }
 
 function score(title, source) {
   let value = source.weight || 0;
-  const hits = title.match(/\b(property tax|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|real estate|housing|commercial|development|redevelopment|zoning|mortgage|foreclosure|PILOT|affordable housing)\b/gi);
+  const hits = title.match(/\b(property tax(?:es)?|assessment|reassessment|revaluation|tax appeal|anchor|stay nj|senior freeze|real estate|housing|commercial|development|redevelopment|zoning|mortgage|foreclosure|PILOT|affordable housing)\b/gi);
   value += hits ? Math.min(8, hits.length * 2) : 0;
   return value;
+}
+
+function freshness(publishedAt, now) {
+  if (!publishedAt) return 0;
+  const age = now - new Date(publishedAt).getTime();
+  if (!Number.isFinite(age) || age < 0) return 0;
+  if (age <= 2 * 86400000) return 6;
+  if (age <= 7 * 86400000) return 4;
+  if (age <= 14 * 86400000) return 3;
+  if (age <= 30 * 86400000) return 1;
+  return 0;
 }
 
 function normalizeTitle(title) {
@@ -90,10 +120,11 @@ function parseFeed(xml, source) {
   return blocks.map(block => {
     const title = tag(block, ['title']);
     const url = cleanUrl(linkFrom(block));
+    const categories = tags(block, 'category').join(' ');
     const publishedRaw = tag(block, ['pubDate','published','updated','dc:date']);
     const publishedAt = Number.isFinite(new Date(publishedRaw).getTime()) ? new Date(publishedRaw).toISOString() : null;
-    if (!title || !url || EXCLUDE.test(title) || !RELEVANCE.test(`${title} ${source.lane}`)) return null;
-    const topic = classify(title, source.lane);
+    if (!title || !url || EXCLUDE.test(`${title} ${categories}`) || !relevant(title, source)) return null;
+    const topic = classify(title, source);
     return {
       title: title.slice(0, 220),
       url,
@@ -113,17 +144,17 @@ async function fetchOne(source) {
   try {
     const response = await fetch(source.feed, {
       headers: {
-        'user-agent': 'WatchdogNJNews/1.0 (+https://www.watchdogindex.com)',
+        'user-agent': 'WatchdogNJNews/1.1 (+https://www.watchdogindex.com)',
         accept: 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*'
       },
       signal: ctrl.signal,
       redirect: 'follow'
     });
-    if (!response.ok) return { source:source.name, ok:false, status:response.status, items:[] };
+    if (!response.ok) return { source:source.name, lane:source.lane, ok:false, status:response.status, items:[] };
     const text = await response.text();
-    return { source:source.name, ok:true, status:response.status, items:parseFeed(text, source) };
+    return { source:source.name, lane:source.lane, ok:true, status:response.status, items:parseFeed(text, source) };
   } catch (_) {
-    return { source:source.name, ok:false, status:0, items:[] };
+    return { source:source.name, lane:source.lane, ok:false, status:0, items:[] };
   } finally {
     clearTimeout(timer);
   }
@@ -131,23 +162,28 @@ async function fetchOne(source) {
 
 function curate(results) {
   const seen = new Set();
+  const sourceCounts = new Map();
   const now = Date.now();
   const maxAge = 45 * 86400000;
   return results.flatMap(r => r.items)
     .filter(item => !item.publishedAt || (now - new Date(item.publishedAt).getTime()) <= maxAge)
+    .map(item => Object.assign(item, { rank:item.relevance + freshness(item.publishedAt, now) }))
     .sort((a,b) => {
       const ta = a.publishedAt ? new Date(a.publishedAt).getTime() : 0;
       const tb = b.publishedAt ? new Date(b.publishedAt).getTime() : 0;
-      return (b.relevance - a.relevance) || (tb - ta);
+      return (b.rank - a.rank) || (tb - ta);
     })
     .filter(item => {
       const key = normalizeTitle(item.title);
       if (!key || seen.has(key)) return false;
+      const count = sourceCounts.get(item.source) || 0;
+      if (count >= 7) return false;
       seen.add(key);
+      sourceCounts.set(item.source, count + 1);
       return true;
     })
     .slice(0, 24)
-    .sort((a,b) => (new Date(b.publishedAt || 0).getTime() - new Date(a.publishedAt || 0).getTime()) || (b.relevance - a.relevance));
+    .map(({ rank, ...item }) => item);
 }
 
 module.exports = async function handler(req, res) {
@@ -161,8 +197,8 @@ module.exports = async function handler(req, res) {
   const payload = {
     generatedAt: new Date().toISOString(),
     items,
-    sourceHealth: results.map(r => ({ source:r.source, ok:r.ok, status:r.status, itemCount:r.items.length })),
-    policy: 'Curated New Jersey property, tax, housing, development and commercial headlines. Opinion and sponsored headlines are excluded when identifiable. Headlines link to the original publisher.'
+    sourceHealth: results.map(r => ({ source:r.source, lane:r.lane, ok:r.ok, status:r.status, itemCount:r.items.length })),
+    policy: 'Curated New Jersey property, tax, housing, development and commercial headlines. Opinion, sponsored and off-topic material are excluded when identifiable. Headlines link to the original publisher.'
   };
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
