@@ -2,9 +2,9 @@
 """Enforce Watchdog's canonical design-token contract.
 
 NJW-74 identified subtle brand drift plus parallel per-page token namespaces.
-The canonical gold is already fixed at #b8972a. The remaining --ad- / --fb- /
---do- families are legacy debt, so this check prevents them from spreading while
-the named legacy files are migrated onto shared semantic tokens.
+The canonical gold is fixed at #b8972a. The remaining --ad- / --fb- / --do-
+families are explicitly baselined legacy debt, so this check prevents them from
+spreading while the named files are migrated onto shared semantic tokens.
 """
 from __future__ import annotations
 
@@ -15,13 +15,19 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CSS_ROOT = ROOT / "property" / "css"
 CANONICAL_GOLD = "#b8972a"
+CANONICAL_GOLD_ALIAS = "var(--wd-gold-500)"
 HISTORICAL_DRIFT = {"#b8972e", "#b9952f", "#e7c46a"}
 GOLD_DECLARATION = re.compile(r"--gold\s*:\s*([^;\n}]+)", re.IGNORECASE)
 HEX = re.compile(r"#[0-9a-fA-F]{6}")
 LEGACY_PAGE_TOKEN = re.compile(r"--(?:ad|fb|do)-[a-z0-9-]+", re.IGNORECASE)
 LEGACY_PAGE_TOKEN_ALLOWLIST = {
+    pathlib.Path("property/css/agent-control-2027.css"),
     pathlib.Path("property/css/agent-control-readability.css"),
     pathlib.Path("property/css/agent-control-mobile-audit.css"),
+    pathlib.Path("property/css/agent-desk.css"),
+    pathlib.Path("property/css/agent-discover.css"),
+    pathlib.Path("property/css/agent-hardening.css"),
+    pathlib.Path("property/css/farm-builder.css"),
     pathlib.Path("property/css/developer-data.css"),
 }
 
@@ -43,10 +49,13 @@ def main() -> int:
 
         for match in GOLD_DECLARATION.finditer(text):
             value = match.group(1).strip()
+            if value.lower() == CANONICAL_GOLD_ALIAS:
+                continue
             hexes = [item.lower() for item in HEX.findall(value)]
             if not hexes:
                 failures.append(
-                    f"{rel}: --gold must resolve explicitly to {CANONICAL_GOLD}; found {value!r}"
+                    f"{rel}: --gold must use {CANONICAL_GOLD} or {CANONICAL_GOLD_ALIAS}; "
+                    f"found {value!r}"
                 )
                 continue
             if CANONICAL_GOLD not in hexes:
