@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260824b';
+  var VERSION = '20260826a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
@@ -163,11 +163,9 @@
     });
   }
   function publicDrawerHtml(){
+    var footer = state.user ? '' : '<div class="wd-universal-nav-foot"><button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button></div>';
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
-      '<nav class="wd-universal-nav-links" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' +
-      '<div class="wd-universal-nav-foot">' + (state.user ?
-        '<button type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i><span>Sign out</span></button>' :
-        '<button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button>') + '</div>';
+      '<nav class="wd-universal-nav-links" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
   function patchPublicDrawer(){
     var sheet = document.getElementById('wd-main-sheet');
