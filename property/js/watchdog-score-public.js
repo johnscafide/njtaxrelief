@@ -1,7 +1,6 @@
 /* Canonical ROBUST Watchdog Score adapter for the public property lookup.
-   Public property surfaces must never recompute a second unqualified Watchdog
-   Score from a different evidence shape. The governed ROBUST-v1 observation is
-   the single source of truth; if it does not exist, the score remains building. */
+   The governed server-side ROBUST-v1 engine calculates a score on demand as
+   soon as a parcel resolves, then reuses the canonical public cache. */
 (function (root) {
   'use strict';
   if (root.WatchdogScorePublic) return;
@@ -36,7 +35,7 @@
     return client;
   }
 
-  function component(key, value) {
+  function component(key, value, note) {
     var meta = Core.DIMENSIONS[key];
     var n = value == null ? null : Number(value);
     var score = Number.isFinite(n) ? Math.max(0, Math.min(100, Math.round(n))) : null;
@@ -49,35 +48,24 @@
       label: meta.letter + ' · ' + meta.name,
       score: score,
       weight: meta.weight,
-      note: score == null ? 'evidence not available in the canonical observation' : 'governed ROBUST-v1 observation'
+      note: note || (score == null ? 'evidence not available in the canonical calculation' : 'governed ROBUST-v1 evidence')
     };
   }
 
-  function fromCanonicalRow(row) {
-    if (!row || !Core.isCanonicalVersion(row.model_version || row.modelVersion)) return null;
-    var detail = {
-      recourse: component('recourse', row.recourse_score),
-      fairness: component('fairness', row.overassessment_score),
-      burden: component('burden', row.burden_score),
-      uniformity: component('uniformity', row.uniformity_score),
-      stability: component('stability', row.stability_score),
-      trajectory: component('trajectory', row.trajectory_score)
-    };
+  function finalizeScore(detail, row) {
     var score = Core.aggregate(detail);
     if (!score) return null;
-
     var governed = Number(row.watchdog_score);
     if (Number.isFinite(governed)) {
       score.score = Math.max(0, Math.min(100, Math.round(governed)));
-      score.verdict = Core.verdict(score.score);
+      score.verdict = row.verdict || Core.verdict(score.score);
       score.grade = score.score >= 80 ? 'A' : score.score >= 65 ? 'B' : score.score >= 50 ? 'C' : score.score >= 35 ? 'D' : 'E';
       score.band = score.score >= 65 ? 'good' : score.score >= 45 ? 'mid' : 'bad';
     }
-
     var coverage = Number(row.evidence_coverage);
     if (Number.isFinite(coverage)) {
       score.covered = Math.max(0, Math.min(1, coverage > 1 ? coverage / 100 : coverage));
-      score.confidence = Core.confidence(score.covered);
+      score.confidence = row.confidence || Core.confidence(score.covered);
     }
     score.framework = 'ROBUST';
     score.frameworkVersion = Core.VERSION;
@@ -88,7 +76,74 @@
     return score;
   }
 
-  function fetchCanonical(record) {
+  function fromCanonicalRow(row) {
+    if (!row || !Core.isCanonicalVersion(row.model_version || row.modelVersion)) return null;
+    return finalizeScore({
+      recourse: component('recourse', row.recourse_score),
+      fairness: component('fairness', row.overassessment_score),
+      burden: component('burden', row.burden_score),
+      uniformity: component('uniformity', row.uniformity_score),
+      stability: component('stability', row.stability_score),
+      trajectory: component('trajectory', row.trajectory_score)
+    }, row);
+  }
+
+  function fromOnDemandRow(row) {
+    if (!row || !Core.isCanonicalVersion(row.model_version || row.modelVersion) || row.watchdog_score == null) return null;
+    var parts = row.components || {};
+    var detail = {};
+    Core.ORDER.forEach(function (key) {
+      var raw = parts[key] || {};
+      var note = raw.note;
+      if (note && typeof note === 'object') {
+        if (note.reason) note = note.reason;
+        else if (note.source) note = note.source;
+        else note = 'governed ROBUST-v1 evidence';
+      }
+      detail[key] = component(key, raw.score, note);
+    });
+    return finalizeScore(detail, row);
+  }
+
+  function recordForOnDemand(record) {
+    var pin = pinFor(record), parts = pin.split('_');
+    return {
+      pams_pin: pin,
+      town: String(record && (record.town || record.city) || '').trim(),
+      county: String(record && record.county || '').trim(),
+      block: String(record && record.block || parts[1] || '').trim(),
+      lot: String(record && record.lot || parts[2] || '').trim(),
+      qualifier: String(record && (record.qualifier || record.qual) || parts.slice(3).join('_') || '').trim(),
+      assessed_value: Number(record && (record.assessed != null ? record.assessed : record.assessed_value)) || null,
+      last_year_tax: Number(record && (record.tax != null ? record.tax : record.last_year_tax)) || null
+    };
+  }
+
+  function fetchOnDemand(record) {
+    var cfg = root.NJPTRSupabaseRuntime;
+    var row = recordForOnDemand(record);
+    if (!row.pams_pin || !cfg || !cfg.url || !cfg.key || typeof root.fetch !== 'function') return Promise.resolve(null);
+    return root.fetch(cfg.url.replace(/\/+$/, '') + '/functions/v1/workbench-score', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': cfg.key,
+        'x-client-info': 'watchdog-public-property-score/1.0'
+      },
+      body: JSON.stringify({ mode: 'public_score', rows: [row] })
+    }).then(function (response) {
+      if (!response.ok) throw new Error('public score http ' + response.status);
+      return response.json();
+    }).then(function (payload) {
+      var rows = payload && Array.isArray(payload.rows) ? payload.rows : [];
+      for (var i = 0; i < rows.length; i++) {
+        if (String(rows[i] && rows[i].pams_pin || '') === row.pams_pin) return fromOnDemandRow(rows[i]);
+      }
+      return null;
+    });
+  }
+
+  function fetchObservedFallback(record) {
     var pin = pinFor(record);
     var sb = getClient();
     if (!pin || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
@@ -99,6 +154,15 @@
         if (String(rows[i] && rows[i].pams_pin || '') === pin) return fromCanonicalRow(rows[i]);
       }
       return null;
+    });
+  }
+
+  function fetchCanonical(record) {
+    return fetchOnDemand(record).then(function (score) {
+      if (score) return score;
+      return fetchObservedFallback(record);
+    }).catch(function () {
+      return fetchObservedFallback(record).catch(function () { return null; });
     });
   }
 
@@ -132,7 +196,7 @@
     if (!heading || heading.textContent.trim() !== 'Watchdog Score') return;
     host.setAttribute('data-retired-score-model', 'peer-gap-v1');
     host.innerHTML = '<h3 class="plm-sec-h">O · Overassessment Position evidence</h3>' +
-      '<p class="plm-sec-s">The old peer-only score has been retired. Comparable nearby assessments may inform evidence, but they do not produce a standalone Watchdog Score. The canonical ROBUST Watchdog Score appears above when a governed observation exists.</p>';
+      '<p class="plm-sec-s">The old peer-only score has been retired. Comparable nearby assessments may inform evidence, but they do not produce a standalone Watchdog Score. The canonical ROBUST Watchdog Score appears above as soon as the governed calculation completes.</p>';
   }
 
   function clearCanonicalScore() {
@@ -168,7 +232,7 @@
           '<div class="wdps-n">' + (has ? esc(d.score) : '—') + '</div>' +
         '</div>';
       }).join('') + '</div>' +
-      '<div class="wdps-foot">This is the latest governed ROBUST-v1 observation for this parcel. Missing evidence lowers coverage and is never replaced with a parallel client-side score. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
+      '<div class="wdps-foot">Calculated by the governed ROBUST-v1 engine from the best current supported evidence for this parcel. Missing evidence lowers coverage and is never replaced with a parallel client-side score. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
     quarantineLegacyPeerScore();
     return true;
   }
@@ -186,10 +250,6 @@
     var pin = pinFor(record);
     if (!pin) {
       clearCanonicalScore();
-      return;
-    }
-    if (!getClient()) {
-      if (attempt < 40) window.setTimeout(function () { scoreRecord(record, token, attempt + 1); }, 100);
       return;
     }
     fetchCanonical(record).then(function (score) {
