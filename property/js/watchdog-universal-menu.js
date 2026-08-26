@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260826a';
+  var VERSION = '20260824b';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
