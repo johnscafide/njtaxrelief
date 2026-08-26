@@ -65,7 +65,9 @@
   function isScoreRpc(url){return /\/rest\/v1\/rpc\/get_public_realtime_watchdog_scores(?:\?|$)/.test(String(url||''));}
   function responseWith(response,data){
     try{
-      var headers=new Headers(response.headers||{});headers.set('content-type','application/json');
+      var headers=new Headers(response.headers||{});
+      headers.set('content-type','application/json');
+      headers.delete('content-length');
       return new Response(JSON.stringify(data),{status:response.status,statusText:response.statusText,headers:headers});
     }catch(_error){return response;}
   }
