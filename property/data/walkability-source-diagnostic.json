@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "generated_at": "2026-08-26T20:45:03.849484+00:00",
+  "schema_version": 2,
+  "generated_at": "2026-08-26T22:08:45.087010+00:00",
   "source_url": "https://www.nj.gov/dca/dhcr/offices/docs/nrtc/Neighborhood_Trends-Database_2026.xlsx",
   "source_bytes": 14886648,
   "hits": [
@@ -59,5 +59,295 @@
       "text": "% Walking to Work"
     }
   ],
-  "hit_count": 9
+  "hit_count": 9,
+  "municipality_header_window_82_92": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": 82,
+          "text": ""
+        },
+        {
+          "column": 83,
+          "text": ""
+        },
+        {
+          "column": 84,
+          "text": ""
+        },
+        {
+          "column": 85,
+          "text": ""
+        },
+        {
+          "column": 86,
+          "text": "Walkability"
+        },
+        {
+          "column": 87,
+          "text": ""
+        },
+        {
+          "column": 88,
+          "text": "Jobs and Employment"
+        },
+        {
+          "column": 89,
+          "text": ""
+        },
+        {
+          "column": 90,
+          "text": ""
+        },
+        {
+          "column": 91,
+          "text": ""
+        },
+        {
+          "column": 92,
+          "text": ""
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": 82,
+          "text": "Per Capita Income"
+        },
+        {
+          "column": 83,
+          "text": ""
+        },
+        {
+          "column": 84,
+          "text": "Median Household Income"
+        },
+        {
+          "column": 85,
+          "text": ""
+        },
+        {
+          "column": 86,
+          "text": "% Walking to Work"
+        },
+        {
+          "column": 87,
+          "text": ""
+        },
+        {
+          "column": 88,
+          "text": "Unemployment Rate"
+        },
+        {
+          "column": 89,
+          "text": ""
+        },
+        {
+          "column": 90,
+          "text": "Total Jobs in Municipality"
+        },
+        {
+          "column": 91,
+          "text": ""
+        },
+        {
+          "column": 92,
+          "text": "Jobs by Annual Earnings (2023)"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": 82,
+          "text": "2000"
+        },
+        {
+          "column": 83,
+          "text": "2020-24 Estimate"
+        },
+        {
+          "column": 84,
+          "text": "2000"
+        },
+        {
+          "column": 85,
+          "text": "2020-24 Estimate"
+        },
+        {
+          "column": 86,
+          "text": "2000"
+        },
+        {
+          "column": 87,
+          "text": "2020-24 Estimate"
+        },
+        {
+          "column": 88,
+          "text": "2000"
+        },
+        {
+          "column": 89,
+          "text": "2020-24 Estimate"
+        },
+        {
+          "column": 90,
+          "text": "2002"
+        },
+        {
+          "column": 91,
+          "text": "2023"
+        },
+        {
+          "column": 92,
+          "text": "$15,000 or Less"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": 82,
+          "text": "55745"
+        },
+        {
+          "column": 83,
+          "text": "35825"
+        },
+        {
+          "column": 84,
+          "text": "55745"
+        },
+        {
+          "column": 85,
+          "text": "73676"
+        },
+        {
+          "column": 86,
+          "text": "0.014982293652955598"
+        },
+        {
+          "column": 87,
+          "text": "0.014275344785869828"
+        },
+        {
+          "column": 88,
+          "text": "0.06462838677603779"
+        },
+        {
+          "column": 89,
+          "text": "0.05450828980240745"
+        },
+        {
+          "column": 90,
+          "text": "7163"
+        },
+        {
+          "column": 91,
+          "text": "2807"
+        },
+        {
+          "column": 92,
+          "text": "817"
+        }
+      ]
+    }
+  ],
+  "municipality_sample_rows": [
+    {
+      "row": 4,
+      "municipality": "Absecon city",
+      "county": "Atlantic",
+      "columns_82_92": [
+        "55745",
+        "35825",
+        "55745",
+        "73676",
+        "0.014982293652955598",
+        "0.014275344785869828",
+        "0.06462838677603779",
+        "0.05450828980240745",
+        "7163",
+        "2807",
+        "817"
+      ]
+    },
+    {
+      "row": 5,
+      "municipality": "Atlantic City city",
+      "county": "Atlantic",
+      "columns_82_92": [
+        "15402",
+        "26937",
+        "26969",
+        "41028",
+        "0.21032857435617186",
+        "0.11869164980087485",
+        "0.12865464004976532",
+        "0.14453463203463204",
+        "45208",
+        "41534",
+        "6602"
+      ]
+    },
+    {
+      "row": 6,
+      "municipality": "Brigantine city",
+      "county": "Atlantic",
+      "columns_82_92": [
+        "23950",
+        "68635",
+        "44639",
+        "97250",
+        "0.021181001283697046",
+        "0.015437849347883949",
+        "0.045407330464460605",
+        "0.056473489519112206",
+        "1890",
+        "1590",
+        "503"
+      ]
+    },
+    {
+      "row": 7,
+      "municipality": "Buena borough",
+      "county": "Atlantic",
+      "columns_82_92": [
+        "16717",
+        "37922",
+        "35679",
+        "79697",
+        "0.0277602523659306",
+        "0.0028971511347175277",
+        "0.08319280494659921",
+        "0.11378002528445007",
+        "885",
+        "842",
+        "185"
+      ]
+    },
+    {
+      "row": 8,
+      "municipality": "Buena Vista twp.",
+      "county": "Atlantic",
+      "columns_82_92": [
+        "18382",
+        "42952",
+        "43770",
+        "87581",
+        "0.016262566528681254",
+        "0.020850708924103418",
+        "0.06749126109169132",
+        "0.06128278369254739",
+        "1632",
+        "1273",
+        "262"
+      ]
+    }
+  ]
 }
