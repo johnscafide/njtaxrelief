@@ -94,11 +94,11 @@
       }
       #wd-showcase .wds-cmp-title h2{
         margin:0;
-        font:500 clamp(48px,5vw,76px)/.97 "Plus Jakarta Sans",sans-serif;
+        font:500 clamp(48px,5vw,76px)/.97 var(--font-ui);
         letter-spacing:-.062em;
       }
       #wd-showcase .wds-cmp-title h2 em{
-        font-family:"Playfair Display",serif;
+        font-family:var(--font-display);
         font-weight:400;
         font-style:italic;
         letter-spacing:-.035em;
@@ -107,7 +107,7 @@
         max-width:680px;
         margin:17px 0 0;
         color:#717a85;
-        font-size:16px;
+        font-size:var(--type-md);
         line-height:1.52;
       }
       #wd-showcase .wds-cmp-title>a{
@@ -115,11 +115,11 @@
         align-items:center;
         gap:8px;
         padding:13px 16px;
-        border-radius:999px;
+        border-radius:var(--radius-pill);
         background:#10294b;
         color:#fff!important;
         white-space:nowrap;
-        font:800 11px/1 "Plus Jakarta Sans",sans-serif;
+        font:800 var(--type-xs)/1 var(--font-ui);
       }
       #wd-showcase .wds-cmp-table{
         border-top:1px solid #eceff2;
@@ -138,14 +138,14 @@
       }
       #wd-showcase .wds-cmp-label{
         color:#8fa2b9;
-        font:800 9px/1 "Plus Jakarta Sans",sans-serif;
+        font:800 var(--type-xs)/1 var(--font-ui);
         letter-spacing:.1em;
         text-transform:uppercase;
       }
       #wd-showcase .wds-cmp-us,
       #wd-showcase .wds-cmp-them{
         text-align:center;
-        font:800 10px/1 "Plus Jakarta Sans",sans-serif;
+        font:800 var(--type-xs)/1 var(--font-ui);
         letter-spacing:.07em;
         text-transform:uppercase;
       }
@@ -157,7 +157,7 @@
         padding:13px 40px;
         border-top:1px solid #f0f2f4;
         color:#3e4650;
-        font-size:14px;
+        font-size:var(--type-sm);
       }
       #wd-showcase .wds-cmp-row:nth-child(odd){background:#fbfcfc}
       #wd-showcase .wds-cmp-row>span{
@@ -167,7 +167,7 @@
       #wd-showcase .wds-cmp-row em{
         text-align:center;
         font-style:normal;
-        font-size:12px;
+        font-size:var(--type-xs);
       }
       #wd-showcase .wds-cmp-row b{
         color:#10294b;
@@ -185,7 +185,7 @@
         width:26px;
         height:26px;
         border-radius:50%;
-        font-size:10px;
+        font-size:var(--type-xs);
       }
       #wd-showcase .wds-cmp-row b.y i{
         background:#078486;
@@ -207,13 +207,13 @@
       #wd-showcase .wds-cmp-foot b{
         display:block;
         color:#17202b;
-        font:800 16px/1.2 "Plus Jakarta Sans",sans-serif;
+        font:800 var(--type-md)/1.2 var(--font-ui);
       }
       #wd-showcase .wds-cmp-foot p{
         margin:9px 0 0;
         max-width:650px;
         color:#747d87;
-        font-size:13.5px;
+        font-size:var(--type-sm);
         line-height:1.52;
       }
       #wd-showcase .wds-cmp-vendors{
@@ -227,11 +227,11 @@
         align-items:center;
         min-height:32px;
         padding:0 10px;
-        border-radius:999px;
+        border-radius:var(--radius-pill);
         border:1px solid #e0e5e8;
         background:#f7f9fa;
         color:#59636e;
-        font:800 8px/1 "Plus Jakarta Sans",sans-serif;
+        font:800 var(--type-xs)/1 var(--font-ui);
         transition:background .2s ease,color .2s ease,border-color .2s ease;
       }
       #wd-showcase .wds-cmp-vendors a:hover{
@@ -240,7 +240,7 @@
         color:#fff;
       }
 
-      @media(max-width:900px){
+      @media(max-width:1024px){
         #wd-showcase .wds-cmp-title{grid-template-columns:1fr;padding:42px 30px 30px}
         #wd-showcase .wds-cmp-title>a{width:max-content}
         #wd-showcase .wds-cmp-head,
@@ -250,28 +250,28 @@
         #wd-showcase .wds-cmp-foot{grid-template-columns:1fr;padding:30px}
         #wd-showcase .wds-cmp-vendors{justify-content:flex-start}
       }
-      @media(max-width:640px){
+      @media(max-width:768px){
         #wd-showcase .wds-rivals-section{padding-top:82px;padding-bottom:90px}
-        #wd-showcase .wds-cmp-shell{border-radius:24px}
+        #wd-showcase .wds-cmp-shell{border-radius:var(--radius-xl)}
         #wd-showcase .wds-cmp-title{padding:30px 18px 24px}
         #wd-showcase .wds-cmp-title h2{font-size:42px}
-        #wd-showcase .wds-cmp-title p{font-size:14px}
+        #wd-showcase .wds-cmp-title p{font-size:var(--type-sm)}
         #wd-showcase .wds-cmp-head,
         #wd-showcase .wds-cmp-row{
-          grid-template-columns:minmax(0,1fr) 70px 70px;
+          grid-template-columns:minmax(0,1fr) 78px 78px;
           gap:7px;
           padding-left:14px;
           padding-right:14px;
         }
         #wd-showcase .wds-cmp-head{padding-top:16px;padding-bottom:14px}
-        #wd-showcase .wds-cmp-row{min-height:56px;font-size:12px}
+        #wd-showcase .wds-cmp-row{min-height:60px;font-size:var(--type-xs)}
         #wd-showcase .wds-cmp-row b,
-        #wd-showcase .wds-cmp-row em{font-size:9px}
+        #wd-showcase .wds-cmp-row em{font-size:var(--type-xs)}
         #wd-showcase .wds-cmp-us,
-        #wd-showcase .wds-cmp-them{font-size:8px}
-        #wd-showcase .wds-cmp-label{font-size:7px}
+        #wd-showcase .wds-cmp-them{font-size:var(--type-xs);line-height:1.15}
+        #wd-showcase .wds-cmp-label{font-size:var(--type-xs)}
         #wd-showcase .wds-cmp-row b.y i,
-        #wd-showcase .wds-cmp-row em.n i{width:23px;height:23px;font-size:9px}
+        #wd-showcase .wds-cmp-row em.n i{width:24px;height:24px;font-size:var(--type-xs)}
         #wd-showcase .wds-cmp-foot{padding:24px 18px 28px}
       }
     `;
