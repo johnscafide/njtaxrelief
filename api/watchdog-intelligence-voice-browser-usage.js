@@ -44,6 +44,15 @@ async function entitlement(token) {
   return row && typeof row === 'object' ? row : {};
 }
 
+async function developerAccess(token) {
+  try {
+    const data = await jsonFetch(`${SUPABASE_URL}/rest/v1/rpc/is_watchdog_developer`, { method: 'POST', headers: userHeaders(token), body: '{}' });
+    return data === true;
+  } catch {
+    return false;
+  }
+}
+
 async function featureActive(userId) {
   const params = new URLSearchParams({ select: 'status,current_period_end', user_id: `eq.${userId}`, feature_key: `eq.${FEATURE}`, limit: '1' });
   try {
@@ -107,9 +116,9 @@ module.exports = async function handler(req, res) {
     const user = await verifyUser(token);
     if (!user?.id) return res.status(401).json({ error: 'Sign in required.' });
 
-    const access = await entitlement(token);
+    const [access, developer] = await Promise.all([entitlement(token), developerAccess(token)]);
     const accountRole = clean(access?.account_role, 40).toLowerCase();
-    const plan = accountRole === 'developer' ? 'developer' : normalizePlan(access?.plan_tier || 'standard');
+    const plan = developer || accountRole === 'developer' ? 'developer' : normalizePlan(access?.plan_tier || 'standard');
     const included = (PLAN_RANK[plan] ?? 0) >= PLAN_RANK.pro_plus;
     const addon = ['agent', 'pro'].includes(plan) ? await featureActive(user.id) : false;
     if (!(included || addon)) return res.status(403).json({ error: 'Voice Intelligence is not included with this account.' });
