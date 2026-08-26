@@ -3,14 +3,15 @@
 
 The extractor reads only the official DCA calculation workbook Final Summary sheet,
 identifies columns from the workbook's own headers, and requires exactly 564 unique
-municipalities before writing an output. It does not interpret the DCA calculations
-as binding legal determinations.
+municipalities before an output is publishable. Failed gates still emit diagnostics
+so source-shape changes can be investigated without weakening the contract.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import re
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -77,13 +78,11 @@ def main():
 
     c_fips = find_col(headers, [r"county subdivision fips"])
     c_muni = find_col(headers, [r"municipality"])
-    c_county = find_col(headers, [r"county"], required=True)
+    c_county = find_col(headers, [r"county"])
     c_region = find_col(headers, [r"region"], required=False)
     c_present = find_col(headers, [r"present need"])
     c_prospective = find_col(headers, [r"prospective need"])
 
-    # Optional published factor/final fields. These are included only when an exact
-    # header exists in the official Final Summary.
     optional_specs = {
         "land_capacity_factor": [r"land capacity", r"factor"],
         "nonresidential_value_factor": [r"nonresidential", r"factor"],
@@ -94,19 +93,24 @@ def main():
 
     municipalities = {}
     duplicates = []
-    for row in ws.iter_rows(min_row=4, values_only=True):
+    skipped_examples = []
+    candidate_rows = 0
+    for excel_row, row in enumerate(ws.iter_rows(min_row=4, values_only=True), start=4):
         fips = clean(row[c_fips] if c_fips < len(row) else "")
         muni = clean(row[c_muni] if c_muni < len(row) else "")
         county = clean(row[c_county] if c_county < len(row) else "")
         if not fips or not muni or not county:
             continue
+        candidate_rows += 1
         digits = re.sub(r"\D", "", fips)
-        if len(digits) < 5:
+        if len(digits) not in (5, 10):
+            if len(skipped_examples) < 30:
+                skipped_examples.append({"row": excel_row, "fips": fips, "municipality": muni, "county": county})
             continue
-        # County subdivision FIPS is the stable municipal identity in the workbook.
-        key = digits
+        # Normalize either 5-digit county-subdivision code or 10-digit state+county+subdivision FIPS.
+        key = digits[-5:] if len(digits) == 10 else digits
         if key in municipalities:
-            duplicates.append(key)
+            duplicates.append({"fips": key, "row": excel_row, "municipality": muni})
             continue
         rec = {
             "county_subdivision_fips": key,
@@ -122,14 +126,15 @@ def main():
                 rec[field] = clean(value) if field == "qualified_urban_aid" else number(value)
         municipalities[key] = rec
 
-    if duplicates:
-        raise RuntimeError(f"Duplicate municipality FIPS rows in Final Summary: {duplicates[:20]}")
-    if len(municipalities) != EXPECTED_MUNICIPALITIES:
-        raise RuntimeError(f"Fourth Round coverage gate failed: expected {EXPECTED_MUNICIPALITIES}, got {len(municipalities)}")
     missing_present = sum(1 for x in municipalities.values() if x["present_need"] is None)
     missing_prospective = sum(1 for x in municipalities.values() if x["prospective_need"] is None)
+    errors = []
+    if duplicates:
+        errors.append(f"duplicate_fips={len(duplicates)}")
+    if len(municipalities) != EXPECTED_MUNICIPALITIES:
+        errors.append(f"municipality_count={len(municipalities)} expected={EXPECTED_MUNICIPALITIES}")
     if missing_present or missing_prospective:
-        raise RuntimeError(f"Required obligation fields missing: present={missing_present}, prospective={missing_prospective}")
+        errors.append(f"missing_required present={missing_present} prospective={missing_prospective}")
 
     payload = {
         "schema_version": 1,
@@ -138,14 +143,36 @@ def main():
         "source_url": SOURCE_URL,
         "source_page": SOURCE_PAGE,
         "legal_context": "DCA describes these as non-binding calculations/guidance under P.L. 2024, c.2; Watchdog must not present them as legal determinations.",
-        "municipality_count": len(municipalities),
-        "required_field_coverage": {"present_need": len(municipalities)-missing_present, "prospective_need": len(municipalities)-missing_prospective},
+        "validation": {
+            "publishable": not errors,
+            "errors": errors,
+            "candidate_rows": candidate_rows,
+            "municipality_count": len(municipalities),
+            "duplicate_count": len(duplicates),
+            "duplicate_examples": duplicates[:30],
+            "skipped_examples": skipped_examples,
+            "required_field_coverage": {
+                "present_need": len(municipalities)-missing_present,
+                "prospective_need": len(municipalities)-missing_prospective,
+            },
+        },
+        "resolved_columns": {
+            "fips": c_fips + 1,
+            "municipality": c_muni + 1,
+            "county": c_county + 1,
+            "region": None if c_region is None else c_region + 1,
+            "present_need": c_present + 1,
+            "prospective_need": c_prospective + 1,
+            **{k: None if v is None else v + 1 for k, v in optional_cols.items()},
+        },
         "final_summary_headers": headers,
-        "municipalities": municipalities,
+        "municipalities": municipalities if not errors else {},
     }
     args.output.write_text(json.dumps(payload, separators=(",", ":")), encoding="utf-8")
     tmp.unlink(missing_ok=True)
-    print(f"wrote {len(municipalities)} municipalities to {args.output}")
+    print(json.dumps(payload["validation"], sort_keys=True))
+    if errors:
+        sys.exit(2)
 
 
 if __name__ == "__main__":
