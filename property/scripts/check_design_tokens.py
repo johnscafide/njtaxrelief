@@ -32,6 +32,29 @@ LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-discover.css"),
     pathlib.Path("property/css/farm-builder.css"),
 }
+MIGRATED_CANONICAL_FILES = {
+    pathlib.Path("property/css/watchdog-footer.css"): {
+        "required": {
+            '@import url("/property/css/shared/00-design-tokens.css");',
+            "max-width:var(--container-wide)",
+            "font-family:var(--font-ui)",
+            "@media(max-width:1024px)",
+            "@media(max-width:768px)",
+            "@media(max-width:480px)",
+        },
+        "forbidden": {
+            "Source Sans 3",
+            "--wdf-",
+            "max-width:1680px",
+            "max-width:1120px",
+            "max-width:760px",
+            "max-width:540px",
+            "font-size:10px",
+            "font-size:11.5px",
+            "font-size:9px",
+        },
+    },
+}
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
     '--font-ui: "Plus Jakarta Sans", Arial, sans-serif;',
@@ -78,12 +101,28 @@ def check_token_foundation(failures: list[str]) -> None:
         )
 
 
+def check_migrated_files(failures: list[str]) -> None:
+    for rel, contract in MIGRATED_CANONICAL_FILES.items():
+        path = ROOT / rel
+        if not path.exists():
+            failures.append(f"{rel}: migrated canonical stylesheet is required")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for required in sorted(contract["required"]):
+            if required not in text:
+                failures.append(f"{rel}: migrated design contract missing {required!r}")
+        for forbidden in sorted(contract["forbidden"]):
+            if forbidden.lower() in text.lower():
+                failures.append(f"{rel}: migrated design contract forbids {forbidden!r}")
+
+
 def main() -> int:
     failures: list[str] = []
     checked = 0
     legacy_files: set[pathlib.Path] = set()
 
     check_token_foundation(failures)
+    check_migrated_files(failures)
 
     for path in sorted(CSS_ROOT.rglob("*.css")):
         text = path.read_text(encoding="utf-8")
@@ -138,8 +177,8 @@ def main() -> int:
     print(
         f"Watchdog design-token contract passed: {checked} CSS files checked; "
         f"canonical gold is {CANONICAL_GOLD}; token foundation is locked to 4 containers, "
-        f"5 breakpoints, and 2 font roles; legacy page-token debt is confined to: "
-        f"{legacy_display}."
+        f"5 breakpoints, and 2 font roles; migrated surfaces are regression-guarded; "
+        f"legacy page-token debt is confined to: {legacy_display}."
     )
     return 0
 
