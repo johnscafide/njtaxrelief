@@ -71,6 +71,16 @@ async function entitlement(token) {
   const row = Array.isArray(data) ? data[0] : data;
   return row && typeof row === 'object' ? row : {};
 }
+async function developerAccess(token) {
+  try {
+    const data = await jsonFetch(`${SUPABASE_URL}/rest/v1/rpc/is_watchdog_developer`, {
+      method: 'POST', headers: userHeaders(token), body: '{}',
+    });
+    return data === true;
+  } catch (_) {
+    return false;
+  }
+}
 async function featureEntitlement(userId, featureKey) {
   const params = new URLSearchParams({
     select: 'status,current_period_end',
@@ -199,8 +209,8 @@ module.exports = async function handler(req, res) {
     const user = await verifyUser(token);
     if (!user?.id) return res.status(401).json({ error: 'Sign in required.' });
 
-    const access = await entitlement(token);
-    const plan = normalizePlan(access?.plan_tier || 'standard');
+    const [access, developer] = await Promise.all([entitlement(token), developerAccess(token)]);
+    const plan = developer ? 'developer' : normalizePlan(access?.plan_tier || 'standard');
     const included = includedByPlan(plan);
     const addon = ['agent', 'pro'].includes(plan)
       ? await featureEntitlement(user.id, VOICE_ADDON_FEATURE)
