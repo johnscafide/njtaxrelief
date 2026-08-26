@@ -1,6 +1,11 @@
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ORIGINS = new Set(["https://njpropertytaxrelief.com", "https://www.njpropertytaxrelief.com"]);
+const ORIGINS = new Set([
+  "https://njpropertytaxrelief.com",
+  "https://www.njpropertytaxrelief.com",
+  "https://watchdogindex.com",
+  "https://www.watchdogindex.com"
+]);
 const BASE = "https://njpropertytaxrelief.com";
 const URLS = {
   uniformity: BASE + "/property/uniformity.json",
@@ -14,6 +19,11 @@ const SCORE_MODEL = "ROBUST-v1";
 const SIGNAL_MODEL = "workbench-signals-v2.1.0";
 const SUBJECT_MODEL = "sr1a-subject-provider-v1";
 const OBS_IDS = [SCORE_ID, "watchdog.tax_pressure", "watchdog.revaluation_risk", "uniformity.score"];
+const PUBLIC_MAX_ROWS = 8;
+const PUBLIC_CACHE_MS = 24 * 60 * 60 * 1000;
+const PUBLIC_RATE_WINDOW_MS = 60 * 1000;
+const PUBLIC_RATE_MAX = 80;
+const publicRate = new Map<string, { start: number; count: number }>();
 
 function cors(req) {
   const origin = req.headers.get("origin") || "";
@@ -245,19 +255,106 @@ function robustScore(row, src, stored) {
   return { score, coverage: availableWeight, confidence: confidence(availableWeight), verdict: verdict(score), framework: "ROBUST", model_version: SCORE_MODEL, detail, market, chapter: c123, revaluation: stability };
 }
 
+function publicRateAllowed(req) {
+  const key = clean(req.headers.get("x-forwarded-for") || req.headers.get("cf-connecting-ip") || req.headers.get("origin") || "unknown", 120).split(",")[0];
+  const now = Date.now(), entry = publicRate.get(key);
+  if (!entry || now - entry.start >= PUBLIC_RATE_WINDOW_MS) { publicRate.set(key, { start: now, count: 1 }); return true; }
+  entry.count += 1;
+  return entry.count <= PUBLIC_RATE_MAX;
+}
+async function hashPublicFacts(row) {
+  const value = JSON.stringify([row.pams_pin,row.town,row.county,row.block,row.lot,row.qualifier,row.assessed_value,row.last_year_tax]);
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function sanitizePublicRow(raw) {
+  const pams_pin = canonicalPin(raw?.pams_pin);
+  if (!pams_pin) return null;
+  return {
+    pams_pin,
+    town: clean(raw?.town, 100), county: clean(raw?.county, 60),
+    block: clean(raw?.block, 30), lot: clean(raw?.lot, 30), qualifier: clean(raw?.qualifier, 30),
+    assessed_value: num(raw?.assessed_value ?? raw?.assessed ?? raw?.assessment),
+    last_year_tax: num(raw?.last_year_tax ?? raw?.tax)
+  };
+}
+async function handlePublicScore(req, body, admin) {
+  const origin = req.headers.get("origin") || "";
+  if (!ORIGINS.has(origin)) return out(req, 403, { error: "Origin not allowed" });
+  if (!req.headers.get("apikey")) return out(req, 401, { error: "API key required" });
+  if (!publicRateAllowed(req)) return out(req, 429, { error: "Too many score requests" });
+  const input = Array.isArray(body?.rows) ? body.rows.slice(0, PUBLIC_MAX_ROWS) : [];
+  const rows = input.map(sanitizePublicRow).filter(Boolean);
+  if (!rows.length) return out(req, 200, { rows: [], framework: "ROBUST", model_version: SCORE_MODEL, checked_at: new Date().toISOString() });
+
+  const hashes = new Map();
+  await Promise.all(rows.map(async row => hashes.set(row.pams_pin, await hashPublicFacts(row))));
+  const pins = [...new Set(rows.map(row => row.pams_pin))];
+  const { data: cached, error: cacheError } = await admin.from("public_watchdog_score_cache_v1")
+    .select("pams_pin,score,evidence_coverage,confidence,verdict,inputs,model_version,facts_hash,expires_at,computed_at")
+    .in("pams_pin", pins);
+  if (cacheError) return out(req, 503, { error: "Score cache unavailable" });
+  const now = Date.now(), cachedByPin = new Map((cached || []).map(row => [String(row.pams_pin), row]));
+  const result = new Map(), missing = [];
+  for (const row of rows) {
+    const hit = cachedByPin.get(row.pams_pin);
+    if (hit && hit.model_version === SCORE_MODEL && hit.facts_hash === hashes.get(row.pams_pin) && Date.parse(hit.expires_at) > now) {
+      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: Number(hit.score), evidence_coverage: num(hit.evidence_coverage), confidence: hit.confidence, verdict: hit.verdict, model_version: SCORE_MODEL, components: hit.inputs?.components || {}, observed_at: hit.computed_at, source: "robust_public_cache" });
+    } else missing.push(row);
+  }
+
+  if (missing.length) {
+    const src = await sources();
+    let subjects = new Map(), subjectEvidenceStatus = "available";
+    try { subjects = await subjectEvidence(admin, missing); } catch (error) { subjectEvidenceStatus = "unavailable"; console.error("Public ROBUST subject evidence lookup failed", error); }
+    const upserts = [], computedAt = new Date().toISOString(), expiresAt = new Date(Date.now() + PUBLIC_CACHE_MS).toISOString();
+    for (const row of missing) {
+      const subject = subjects.get(row.pams_pin) || null;
+      if (subject) {
+        row.subject_match_quality = subject.match_quality || null;
+        if (num(subject.sale_price) != null && num(subject.sale_year) != null) { row.subject_sale_price = Number(subject.sale_price); row.subject_sale_year = Number(subject.sale_year); }
+        if (num(subject.living_space) != null) row.subject_living_space = Number(subject.living_space);
+      }
+      const wd = robustScore(row, src, null);
+      if (!wd) {
+        result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: null, evidence_coverage: 0, confidence: "low", verdict: null, model_version: SCORE_MODEL, components: {}, source: "insufficient_canonical_evidence" });
+        continue;
+      }
+      const inputs = { canonical_pams_pin: row.pams_pin, town: row.town, county: row.county, framework: "ROBUST", components: wd.detail, coverage_weight: wd.coverage, confidence: wd.confidence, verdict: wd.verdict, market: wd.market, chapter123: wd.chapter, subject_evidence_status: subjectEvidenceStatus };
+      upserts.push({
+        pams_pin: row.pams_pin, model_version: SCORE_MODEL, score: wd.score, evidence_coverage: wd.coverage,
+        confidence: wd.confidence, verdict: wd.verdict, inputs,
+        formula: "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. O may use governed SR-1A subject living area with municipal verified-sale PPSF when available. Trajectory requires governed SR-1A verified subject-sale evidence and fails closed when unavailable.",
+        facts_hash: hashes.get(row.pams_pin), computed_at: computedAt, expires_at: expiresAt
+      });
+      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: wd.score, evidence_coverage: wd.coverage, confidence: wd.confidence, verdict: wd.verdict, model_version: SCORE_MODEL, components: wd.detail, observed_at: computedAt, source: "robust_on_demand" });
+    }
+    if (upserts.length) {
+      const { error } = await admin.from("public_watchdog_score_cache_v1").upsert(upserts, { onConflict: "pams_pin" });
+      if (error) return out(req, 503, { error: "Score calculated but cache write failed", code: "CACHE_WRITE_FAILED" });
+    }
+  }
+  return out(req, 200, { rows: rows.map(row => result.get(row.pams_pin)).filter(Boolean), framework: "ROBUST", model_version: SCORE_MODEL, checked_at: new Date().toISOString() });
+}
+
 Deno.serve(async req => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors(req) });
   if (req.method !== "POST") return out(req, 405, { error: "POST required" });
-  const auth = req.headers.get("authorization") || "", url = Deno.env.get("SUPABASE_URL") || "", anon = Deno.env.get("SUPABASE_ANON_KEY") || "", service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
+  let body = {};
+  try { body = await req.json(); } catch { return out(req, 400, { error: "Invalid JSON" }); }
+
+  const url = Deno.env.get("SUPABASE_URL") || "", anon = Deno.env.get("SUPABASE_ANON_KEY") || "", service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
+  const admin = createClient(url, service, { auth: { persistSession: false, autoRefreshToken: false } });
+  if (body?.mode === "public_score") return handlePublicScore(req, body, admin);
+
+  const auth = req.headers.get("authorization") || "";
   if (!auth.startsWith("Bearer ")) return out(req, 401, { error: "Sign in required" });
   const userClient = createClient(url, anon, { global: { headers: { Authorization: auth } }, auth: { persistSession: false } });
-  const admin = createClient(url, service, { auth: { persistSession: false, autoRefreshToken: false } });
   const { data: authData } = await userClient.auth.getUser();
   if (!authData.user) return out(req, 401, { error: "Session invalid" });
   const { data: planData } = await admin.rpc("watchdog_effective_plan", { p_user_id: authData.user.id }), plan = String(planData || "standard");
   if (rank(plan) < 1) return out(req, 403, { error: "Paid plan required" });
-  let body = {};
-  try { body = await req.json(); } catch { return out(req, 400, { error: "Invalid JSON" }); }
+
   const pins = [...new Set((Array.isArray(body.pams_pins) ? body.pams_pins : []).map(x => clean(x, 80)).filter(Boolean))].slice(0, 1000);
   if (!pins.length) return out(req, 200, { markers: {}, meta: {}, summary: { requested: 0, scored: 0 }, framework: "ROBUST", model_version: SCORE_MODEL });
   const aliases = new Map(pins.map(pin => [pin, canonicalPin(pin)])), queryPins = [...new Set([...pins, ...aliases.values()])], src = await sources();
