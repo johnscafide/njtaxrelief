@@ -6,7 +6,7 @@ const SOURCES = [
   { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=217', lane:'Commercial Real Estate', scope:'commercial', weight:6 },
   { name:'NJBIZ', feed:'https://njbiz.com/feed/?cat=275', lane:'Government & Business', scope:'government', weight:5 },
   { name:'Jersey Digs', feed:'https://jerseydigs.com/feed/', lane:'Development & Real Estate', scope:'development', weight:5 },
-  { name:'New Jersey Business Magazine', feed:'https://njbmagazine.com/feed', lane:'Business & Development', scope:'business', weight:5 }
+  { name:'WBGO', feed:'https://www.wbgo.org/news.rss', lane:'New Jersey Public Media', scope:'government', weight:5 }
 ];
 
 const TOPICS = [
