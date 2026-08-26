@@ -1,3 +1,4 @@
+@import url('/property/css/farm-showcase.css');
 /* Watchdog Pro buying path — static conversion-layer styles.
    Static HTML + CSS keep pricing, proof and buyer answers visible to crawlers before JS runs. */
 .pro-fast-price{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;max-width:690px}
