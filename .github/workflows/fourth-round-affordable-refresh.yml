@@ -23,8 +23,10 @@ jobs:
       - name: Install exact source readers
         run: python -m pip install --disable-pip-version-check requests openpyxl pdfplumber
       - name: Build and validate DCA published Fourth Round snapshot
+        id: build
+        continue-on-error: true
         run: python property/scripts/build_fourth_round_appendix.py --output property/data/fourth-round-affordable-published.json
-      - name: Commit validated snapshot
+      - name: Commit snapshot or gate diagnostics
         run: |
           git config user.name "Watchdog Source Automation"
           git config user.email "actions@users.noreply.github.com"
@@ -32,6 +34,9 @@ jobs:
           if git diff --cached --quiet; then
             echo "No Fourth Round source changes"
           else
-            git commit -m "[source-refresh] Update validated DCA Fourth Round obligations"
+            git commit -m "[source-refresh] Update DCA Fourth Round validation evidence"
             git push origin HEAD:${GITHUB_REF_NAME}
           fi
+      - name: Enforce published-source gate
+        if: steps.build.outcome != 'success'
+        run: exit 1
