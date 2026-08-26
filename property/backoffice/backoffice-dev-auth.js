@@ -1,10 +1,25 @@
 (function(){
 'use strict';
-const SESSION_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-dev-login';
-const BACKOFFICE_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-api';
+const SESSION_API='/api/watchdog-backoffice-gateway?target=login';
+const BACKOFFICE_API='/api/watchdog-backoffice-gateway?target=api';
+const LEGACY_BACKOFFICE_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-api';
 const SESSION_KEY='watchdog-backoffice-session';
 const $=(s,r=document)=>r.querySelector(s);
 let working=false;
+
+// backoffice.js predates the WatchdogIndex.com cutover and still references the
+// Supabase function directly. Keep its behavior intact while routing browser
+// requests through the same-origin canonical gateway, which avoids the old
+// NJPropertyTaxRelief-only CORS boundary without weakening the Edge Function.
+if(window.fetch&&!window.__watchdogBackofficeCanonicalFetch){
+  const nativeFetch=window.fetch.bind(window);
+  window.fetch=function(input,init){
+    const url=typeof input==='string'?input:(input&&input.url)||'';
+    if(String(url).indexOf(LEGACY_BACKOFFICE_API)===0)return nativeFetch(BACKOFFICE_API,init);
+    return nativeFetch(input,init);
+  };
+  window.__watchdogBackofficeCanonicalFetch=true;
+}
 
 function paint(message){
   const title=$('#bo-auth-title');
