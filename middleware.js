@@ -1,6 +1,7 @@
 import { next, rewrite } from '@vercel/functions';
 
 const WATCHDOG_HOST = 'www.watchdogindex.com';
+const LEGACY_NJPTR_HOSTS = new Set(['njpropertytaxrelief.com', 'www.njpropertytaxrelief.com']);
 const INDEXNOW_KEY_PATH = '/c04eb5246cd74475b86188f12c31e21b.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
@@ -48,6 +49,29 @@ function cleanPublicPath(pathname) {
   return path || '/';
 }
 
+function legacyWatchdogPath(pathname) {
+  const raw = String(pathname || '/');
+  if (raw === '/property' || raw === '/property/') return '/';
+
+  const remainder = raw.slice('/property'.length) || '/';
+
+  // Browser-facing legacy Watchdog pages move to the clean canonical route on
+  // watchdogindex.com. Static implementation assets keep /property/ on the new
+  // host so old NJPTR pages cannot accidentally break while the asset tree is
+  // still physically stored under property/ in this shared deployment.
+  if (STATIC_FILE.test(remainder) && !/\.html$/i.test(remainder)) {
+    return '/property' + remainder;
+  }
+
+  return cleanPublicPath(remainder);
+}
+
+function redirectLegacyWatchdogHost(url) {
+  const destination = new URL(legacyWatchdogPath(url.pathname), `https://${WATCHDOG_HOST}`);
+  destination.search = url.search;
+  return Response.redirect(destination, 308);
+}
+
 function rewriteCleanPage(request, publicPath) {
   const destination = new URL('/api/watchdog-index-page-contact-safe', request.url);
   destination.searchParams.set('path', publicPath);
@@ -80,6 +104,17 @@ export default function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
   const userAgent = request.headers.get('user-agent') || '';
+
+  // NJPropertyTaxRelief is no longer a serving host for Watchdog. Every legacy
+  // /property route leaves the old domain before any static file, rewrite or
+  // compatibility route can serve it. Query strings are preserved so report,
+  // search, auth and campaign links survive the domain cutover.
+  if (
+    LEGACY_NJPTR_HOSTS.has(host) &&
+    (url.pathname === '/property' || url.pathname === '/property/' || url.pathname.startsWith('/property/'))
+  ) {
+    return redirectLegacyWatchdogHost(url);
+  }
 
   // Bulk county sales files remain server-readable for the municipality-scoped
   // function, but are never delivered as static assets. This applies to every
