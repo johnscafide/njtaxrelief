@@ -30,6 +30,12 @@
     return path==='/property'||path==='/property/index.html'||root;
   }
 
+  function loadAddressQualityGuard(){
+    if(!isPropertyLanding())return;
+    if(window.__WATCHDOG_NJ_ADDRESS_QUALITY_GUARD__)return;
+    loadScript('watchdog-nj-address-quality-guard','/property/js/nj-address-quality-guard.js');
+  }
+
   function loadLandingRecentIntelligence(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
@@ -120,10 +126,11 @@
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;sync();});}
 
   ensureLookupPhotoCtaStyle();
+  loadAddressQualityGuard();
   loadCanonicalScore();
   loadLandingRecentIntelligence();
   loadLookupSummaryEnhancements();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',sync,{once:true});else sync();
   new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
-  window.WatchdogROBUSTBrand={sync:sync,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence,loadLookupSummaryEnhancements:loadLookupSummaryEnhancements};
+  window.WatchdogROBUSTBrand={sync:sync,loadAddressQualityGuard:loadAddressQualityGuard,loadCanonicalScore:loadCanonicalScore,loadLandingRecentIntelligence:loadLandingRecentIntelligence,loadLookupSummaryEnhancements:loadLookupSummaryEnhancements};
 })();
