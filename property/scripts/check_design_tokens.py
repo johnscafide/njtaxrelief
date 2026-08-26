@@ -29,7 +29,6 @@ LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-control-readability.css"),
     pathlib.Path("property/css/agent-control-mobile-audit.css"),
     pathlib.Path("property/css/agent-desk.css"),
-    pathlib.Path("property/css/agent-discover.css"),
     pathlib.Path("property/css/farm-builder.css"),
 }
 MIGRATED_CANONICAL_FILES = {
