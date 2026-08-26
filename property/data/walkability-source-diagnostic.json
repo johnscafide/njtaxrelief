@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-26T20:00:31.165644+00:00",
+  "source_url": "https://www.nj.gov/dca/dhcr/offices/docs/nrtc/Neighborhood_Trends-Database_2026.xlsx",
+  "source_bytes": 14886648,
+  "hits": [
+    {
+      "sheet": "Data Dictionary",
+      "row": 118,
+      "column": 1,
+      "text": "% Walking to Work"
+    },
+    {
+      "sheet": "Data Dictionary",
+      "row": 118,
+      "column": 2,
+      "text": "% of employed workers age 16 and older walking to work"
+    },
+    {
+      "sheet": "Data by Block Group",
+      "row": 1,
+      "column": 129,
+      "text": "Walkability"
+    },
+    {
+      "sheet": "Data by Block Group",
+      "row": 2,
+      "column": 129,
+      "text": "Walking to Work"
+    },
+    {
+      "sheet": "Data by Block Group",
+      "row": 3,
+      "column": 129,
+      "text": "Number Walking to Work"
+    },
+    {
+      "sheet": "Data by Census Tract",
+      "row": 1,
+      "column": 52,
+      "text": "Walkability"
+    },
+    {
+      "sheet": "Data by Census Tract",
+      "row": 2,
+      "column": 52,
+      "text": "% Walking to Work"
+    },
+    {
+      "sheet": "Data by Municipality",
+      "row": 1,
+      "column": 86,
+      "text": "Walkability"
+    },
+    {
+      "sheet": "Data by Municipality",
+      "row": 2,
+      "column": 86,
+      "text": "% Walking to Work"
+    }
+  ],
+  "hit_count": 9
+}
