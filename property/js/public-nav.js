@@ -162,6 +162,7 @@
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
     loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
+    loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
   }
