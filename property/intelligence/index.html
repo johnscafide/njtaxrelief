@@ -2,54 +2,54 @@
 <html lang="en" class="access-pending" data-access-require="pro">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
-  <title>Watchdog Intelligence</title>
+  <meta name="theme-color" content="#f4f7fb">
+  <title>Watchdog Intelligence | Analyst + Voice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/property/css/intelligence.css">
-  <style>
-    html.access-pending body{visibility:hidden}.wi-launch{max-width:1180px;margin:0 auto}.wi-launch-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:18px}.wi-launch-card{background:#fff;border-radius:24px;padding:24px;box-shadow:0 18px 55px rgba(16,42,76,.08)}.wi-launch-card h2{margin:0 0 8px}.wi-launch-card p{color:#667085;line-height:1.6}.wi-launch-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.wi-launch-actions a{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;text-decoration:none;font-weight:800}.wi-launch-actions .primary{background:#102a4c;color:#fff}.wi-launch-actions .secondary{background:#edf6f6;color:#0b6f70}.wi-launch-list{display:grid;gap:12px;margin-top:16px}.wi-launch-item{padding:14px 16px;border-radius:16px;background:#f7f9fb}.wi-launch-item b{display:block;margin-bottom:4px}.wi-launch-item small{color:#667085}.wi-live{background:#eaf8f4;color:#087b5d}.wi-preview-state{background:#fff4df;color:#925d00}.wi-launch-note{margin-top:18px;padding:14px 16px;border-radius:16px;background:#f5f7fa;color:#596579;font-size:14px}.wi-launch-note b{color:#102a4c}@media(max-width:780px){.wi-launch-grid{grid-template-columns:1fr}.wi-launch-actions a{width:100%}}
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/watchdog-contextual-voice.css">
+  <link rel="stylesheet" href="/property/css/intelligence-console.css">
+  <style>html.access-pending body{visibility:hidden}</style>
 </head>
 <body>
-  <main class="wi-shell wi-launch">
-    <header class="wi-top">
-      <div class="wi-brand">
-        <h1>Watchdog Intelligence</h1>
-        <p>Governed property data → deterministic findings → evidence → professional action.</p>
-      </div>
-      <div class="wi-badges">
-        <span class="wi-badge wi-live">Production live</span>
-        <span class="wi-badge">Pro intelligence</span>
-      </div>
-    </header>
-
-    <div class="wi-launch-grid">
-      <section class="wi-launch-card">
-        <h2>Intelligence is live inside Data Workbench</h2>
-        <p>Use Watchdog Intelligence to turn governed New Jersey property facts into ranked review findings, inspect the source and model lineage behind each finding, ask Watchdog for evidence-grounded explanations, and move findings into cases, watchlists, reports, or approved workflows.</p>
-        <div class="wi-launch-actions">
-          <a class="primary" href="/property/data-workbench">Open Data Workbench</a>
-          <a class="secondary" href="/property/home">Open Watchlist</a>
-        </div>
-        <div class="wi-launch-note"><b>Trust boundary:</b> Watchdog Intelligence ranks and explains governed evidence. It does not replace professional judgment, invent missing records, or turn AI prose into a source of truth.</div>
-      </section>
-
-      <aside class="wi-launch-card">
-        <h2>Current model access</h2>
-        <div class="wi-launch-list">
-          <div class="wi-launch-item"><b>Assessment Anomaly · Pro <span class="wi-badge wi-live">Calibrated v5</span></b><small>Property-level assessment, sale and tax context with evidence coverage and deterministic scoring.</small></div>
-          <div class="wi-launch-item"><b>Watchdog Analyst · Pro <span class="wi-badge wi-live">Live</span></b><small>Evidence-grounded explanations and approved actions. Deterministic mode remains available if the optional prose provider is unavailable.</small></div>
-          <div class="wi-launch-item"><b>Closing Review · Pro+ <span class="wi-badge wi-preview-state">Preview</span></b><small>Due-diligence prioritization remains explicitly preview-labeled while calibration work continues.</small></div>
-          <div class="wi-launch-item"><b>Change Intelligence · Pro+ <span class="wi-badge wi-preview-state">Preview</span></b><small>Population and change-priority workflows remain explicitly preview-labeled while calibration work continues.</small></div>
-        </div>
-      </aside>
+  <main class="wi-shell">
+    <div class="wi-browser" aria-hidden="true">
+      <div class="wi-dots"><i></i><i></i><i></i></div>
+      <div class="wi-address">watchdog / intelligence</div>
+      <div class="wi-status"><i></i> Governed workflow</div>
     </div>
+    <nav class="wi-nav" aria-label="Watchdog workflow">
+      <a href="/property/home">Property</a>
+      <a href="/property/home">Score</a>
+      <a href="/property/home">Watch</a>
+      <a href="/property/data-workbench">Research</a>
+      <a class="active" href="/property/intelligence" aria-current="page">Act</a>
+    </nav>
+    <section class="wi-workspace">
+      <div class="wi-chat-card"><div id="wi-analyst-mount" aria-live="polite"></div></div>
+      <aside class="wi-voice-card">
+        <span>WATCHDOG INTELLIGENCE VOICE</span>
+        <h2>Listen to the Intelligence Brief.</h2>
+        <p>Voice uses the same governed answer and sources. The written result remains visible and authoritative.</p>
+        <div class="wi-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="wi-brief-status"><b id="wi-brief-badge">Waiting for a written brief</b><p id="wi-brief-copy">Ask Watchdog a question. The latest governed written answer can be played here as a voice brief.</p></div>
+        <div class="wi-voice-actions">
+          <button id="wi-play-brief" type="button" disabled><i class="fas fa-play"></i>&nbsp; Play brief</button>
+          <button id="wi-ask-voice" class="secondary" type="button"><i class="fas fa-microphone"></i>&nbsp; Ask Voice</button>
+        </div>
+        <a class="wi-open-full" href="/property/intelligence" target="_top">Open Watchdog Intelligence full screen →</a>
+      </aside>
+    </section>
   </main>
-
+  <div id="pl-toast" role="status" aria-live="polite" style="display:none;position:fixed;left:50%;bottom:18px;z-index:20000;transform:translateX(-50%);padding:10px 14px;border-radius:10px;background:#102a4c;color:#fff;font:700 11px Inter,sans-serif"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/js/product-analytics.js"></script>
+  <script src="/property/js/watchdog-contextual-analyst.js"></script>
+  <script src="/property/js/watchdog-intelligence-voice.js"></script>
+  <script src="/property/js/intelligence-console.js"></script>
 </body>
 </html>
