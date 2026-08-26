@@ -1,0 +1,78 @@
+/* Watchdog canonical design tokens
+   NJW-74: single source of truth for shared brand/UI primitives.
+   This file must load before other shared CSS so legacy sheets can migrate
+   incrementally without changing production behavior in one risky pass. */
+
+:root {
+  /* Brand */
+  --wd-navy-950: #0e2248;
+  --wd-navy-900: #142033;
+  --wd-navy-700: #1456a0;
+  --wd-gold-500: #b8972a;
+  --wd-teal-600: #0f766e;
+  --wd-green-600: #1e8a4a;
+  --wd-red-600: #b42318;
+
+  /* Semantic aliases */
+  --navy-dark: var(--wd-navy-950);
+  --navy: var(--wd-navy-700);
+  --ink: var(--wd-navy-900);
+  --gold: var(--wd-gold-500);
+  --green: var(--wd-green-600);
+  --red: var(--wd-red-600);
+  --text: #1a1a2e;
+  --text-muted: #5d6877;
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --surface-soft: #f7f8fa;
+  --border: #dfe4ea;
+  --info-bg: #eef5ff;
+
+  /* Typography */
+  --font-ui: "Plus Jakarta Sans", Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+  --type-xs: 0.75rem;
+  --type-sm: 0.875rem;
+  --type-md: 1rem;
+  --type-lg: 1.125rem;
+  --type-xl: 1.5rem;
+  --type-2xl: 2rem;
+  --type-3xl: clamp(2.25rem, 5vw, 4rem);
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 10px rgba(14, 34, 72, 0.10);
+  --shadow-md: 0 8px 26px rgba(14, 34, 72, 0.16);
+  --shadow-lg: 0 24px 64px rgba(6, 16, 38, 0.24);
+
+  /* Four governed container widths */
+  --container-narrow: 720px;
+  --container-reading: 1080px;
+  --container-app: 1280px;
+  --container-wide: 1500px;
+
+  /* Breakpoint contract.
+     CSS custom properties cannot be consumed directly in @media conditions;
+     these values are the documented source of truth for CSS/JS migration. */
+  --breakpoint-xs: 480px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1536px;
+}
