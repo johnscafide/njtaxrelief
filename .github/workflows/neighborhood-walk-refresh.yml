@@ -1,0 +1,33 @@
+name: Neighborhood walking-to-work refresh
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - property/scripts/augment_neighborhood_trends_walk.py
+      - .github/workflows/neighborhood-walk-refresh.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests openpyxl
+      - name: Add exact 2020-24 walking-to-work share
+        run: python property/scripts/augment_neighborhood_trends_walk.py --input property/data/neighborhood-trends.json --output property/data/neighborhood-trends.json
+      - name: Commit governed snapshot
+        run: |
+          git config user.name "Watchdog Source Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- property/data/neighborhood-trends.json
+          if ! git diff --cached --quiet; then
+            git commit -m "[source-refresh] Add DCA walking-to-work share"
+            git push origin HEAD:main
+          fi
