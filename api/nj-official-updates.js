@@ -25,7 +25,7 @@ const SOURCES = [
   {
     name: 'NJDEP',
     agency: 'New Jersey Department of Environmental Protection',
-    url: 'https://dep.nj.gov/newsrel/',
+    url: 'https://dep.nj.gov/newsrel/category/2026/',
     match: /^https:\/\/dep\.nj\.gov\/newsrel\/(?!category(?:\/|$)|feed\/?$)[^?#]+\/?$/i,
     weight: 8
   }
