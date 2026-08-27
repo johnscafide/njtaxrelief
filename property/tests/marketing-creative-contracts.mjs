@@ -40,6 +40,13 @@ assert.match(providerStatus,/https:\/\/www\.watchdogindex\.com/,'Marketing provi
 assert.match(providerStatus,/https:\/\/www\.njpropertytaxrelief\.com/,'Marketing provider status must preserve the intentional legacy origin.');
 assert.match(providerStatus,/marketing_studio_bootstrap/,'Marketing provider status must remain behind Marketing Studio access.');
 
+const providerUi=read('property/js/marketing-studio-providers.js');
+assert.match(providerUi,/Latest readiness check failed\. Showing last known read-only provider state/,'Failed provider refreshes must label cached readiness state as stale.');
+assert.match(providerUi,/Last known · \$\{value\}/,'Cached provider badges must be explicitly labeled as last-known after a failed refresh.');
+assert.match(providerUi,/Live mailing gate was not verified by the latest check\. No mail or spend was attempted\./,'Provider refresh failure must not imply a verified live-mail gate or provider mutation.');
+assert.match(providerUi,/role="status" aria-live="polite" aria-atomic="true"/,'Provider readiness fallback must announce state changes accessibly.');
+assert.match(providerUi,/Read-only provider state unavailable\. Try the connection check again\./,'Provider readiness must have a safe no-cache fallback.');
+
 const creative=read('property/js/marketing-studio-creative.js');
 assert.match(creative,/marketing_prepare_direct_mail_recipients/,'Recipients must be materialized server-side before quote/checkout.');
 assert.match(creative,/marketing_approve_creative/,'Creative approval must be explicit.');
@@ -119,4 +126,4 @@ const config=read('supabase/config.toml');
 assert.match(config,/\[functions\.marketing-direct-mail-launch\][\s\S]*?verify_jwt\s*=\s*true/,'Creative provider adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-sandbox-catalog\][\s\S]*?verify_jwt\s*=\s*true/,'PCM catalog/editor adapter must require authenticated JWT access.');
 assert.match(config,/\[functions\.pcm-direct-mail\][\s\S]*?verify_jwt\s*=\s*true/,'Legacy PCM compatibility adapter must remain JWT protected.');
-console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, LIVE design certification, private proof archive, truthful provider capability state, canonical provider-status CORS, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
+console.log('Marketing Creative Studio, PCM editor refresh, Dynamic Image/proof-retention UX, LIVE design certification, private proof archive, truthful provider capability state, stale provider-readiness fallback, canonical provider-status CORS, legacy-submit shutdown, webhook retry/idempotency fail-closed state, and touchless paid Direct Mail fulfillment contracts passed.');
