@@ -5,12 +5,14 @@ on:
     paths:
       - 'property/css/**'
       - 'property/scripts/check_design_tokens.py'
+      - 'property/scripts/check_agent_control_mobile_tokens.py'
       - '.github/workflows/watchdog-design-tokens.yml'
   push:
     branches: [main]
     paths:
       - 'property/css/**'
       - 'property/scripts/check_design_tokens.py'
+      - 'property/scripts/check_agent_control_mobile_tokens.py'
       - '.github/workflows/watchdog-design-tokens.yml'
 
 permissions:
@@ -24,5 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Enforce canonical Watchdog gold
+      - name: Enforce canonical Watchdog design tokens
         run: python property/scripts/check_design_tokens.py
+      - name: Guard Agent Control mobile token contract
+        run: python property/scripts/check_agent_control_mobile_tokens.py
