@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-access-require="pro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Senior Benefit Review | Watchdog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/dashboard.css">
+  <link rel="stylesheet" href="/property/css/plan-context.css">
+  <link rel="stylesheet" href="/property/growth/growth.css">
+  <style>
+    .sb-wrap{display:grid;gap:18px}.sb-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.sb-hero h1{margin:6px 0 8px}.sb-hero p{max-width:880px;margin:0}.sb-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:var(--surface-subtle,#eef5ff);font-weight:800}.sb-notice,.sb-card,.sb-result,.sb-sources{border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.sb-notice{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;background:var(--surface-subtle,#f7f9fc)}.sb-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:18px;align-items:start}.sb-card,.sb-result,.sb-sources{padding:18px}.sb-card h2,.sb-result h2,.sb-sources h2{margin:0 0 6px}.sb-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.sb-field{display:grid;gap:6px}.sb-field.wide{grid-column:1/-1}.sb-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.sb-field input,.sb-field select{width:100%;min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.sb-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.sb-btn{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.sb-btn.primary{background:#0b65d8;color:#fff}.sb-btn.secondary{background:#eef3f8}.sb-summary{display:grid;gap:10px;margin-top:13px}.sb-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start;padding:13px 14px;border-radius:14px;background:#f7f9fc}.sb-line b{display:block}.sb-line small{display:block;margin-top:4px;color:#657386;line-height:1.4}.sb-state{font-weight:900;text-align:right}.sb-state.yes{color:#157248}.sb-state.maybe{color:#996100}.sb-state.no{color:#a23b2c}.sb-priority{padding:15px;border-radius:15px;background:#eef5ff}.sb-priority strong{display:block;font-size:20px}.sb-fine{font-size:var(--type-sm,14px);color:#657386;line-height:1.5}.sb-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.sb-source{padding:14px;border-radius:14px;background:#f7f9fc}.sb-source b{display:block}.sb-source p{margin:5px 0 0;font-size:14px;line-height:1.45}.sb-source a{font-weight:800}.sb-empty{padding:18px;border-radius:14px;background:#f7f9fc;color:#657386}.sb-lock{display:flex;gap:9px;align-items:flex-start;margin-top:13px;padding:12px 13px;border-radius:14px;background:#f7f9fc;font-size:14px;line-height:1.45}
+    @media(max-width:900px){.sb-hero,.sb-grid{grid-template-columns:1fr}.sb-badge{justify-self:start}}@media(max-width:640px){.sb-fields,.sb-source-grid{grid-template-columns:1fr}.sb-field.wide{grid-column:auto}.sb-line{grid-template-columns:1fr}.sb-state{text-align:left}}
+  </style>
+</head>
+<body data-sidebar-page="growth" data-plan-auto="true">
+<main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace sb-wrap">
+  <header class="gc-top sb-hero">
+    <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · HOUSEHOLD-PROVIDED FACTS</span><h1>Senior Benefit Review</h1><p>Prepare a factual PAS-1 review for a household you already know. Watchdog screens current New Jersey rules and puts the Senior Freeze base year first without inferring age, disability, income, ownership, or eligibility from property records.</p></div>
+    <div class="sb-badge"><i class="fas fa-shield-halved"></i> Screen, not eligibility decision</div>
+  </header>
+
+  <section class="sb-notice"><i class="fas fa-user-shield"></i><div><b>This is intentionally not an automated demographic farm.</b> Enter only facts the household supplied to you or that you already lawfully hold for this review. Values entered here stay in this browser session and are not written to Watchdog tables by this page. Do not use public-record names, age guesses, disability inference, income estimates, or neighborhood proxies to decide who qualifies.</div></section>
+
+  <section class="sb-grid">
+    <form id="sb-form" class="sb-card" autocomplete="off">
+      <h2>Household review facts</h2><div class="sb-fine">Unknown is a valid answer. Missing facts produce a manual-review result instead of an invented conclusion.</div>
+      <div class="sb-fields">
+        <label class="sb-field wide"><span>Property / CRM reference (optional)</span><input id="sb-ref" placeholder="123 Main St or your CRM record reference"></label>
+        <label class="sb-field"><span>Age 65+ on Dec. 31, 2025?</span><select id="sb-age"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label class="sb-field"><span>Qualifying federal disability benefit?</span><select id="sb-disability"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label class="sb-field"><span>Owned + lived there since Dec. 31, 2022?</span><select id="sb-owned"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label class="sb-field"><span>Owned + lived there all of 2025?</span><select id="sb-full"><option value="unknown">Unknown</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label class="sb-field"><span>2024 total annual income</span><input id="sb-inc24" inputmode="decimal" placeholder="Required for Senior Freeze"></label>
+        <label class="sb-field"><span>2025 total annual income</span><input id="sb-inc25" inputmode="decimal" placeholder="Used by Senior Freeze + Stay NJ"></label>
+        <label class="sb-field"><span>2025 property tax billed</span><input id="sb-tax" inputmode="decimal" placeholder="Optional, for base-year comparison"></label>
+        <label class="sb-field"><span>Established Senior Freeze base-year tax</span><input id="sb-base" inputmode="decimal" placeholder="Leave blank if unknown"></label>
+      </div>
+      <div class="sb-actions"><button class="sb-btn primary" type="submit"><i class="fas fa-magnifying-glass"></i> Screen review</button><button class="sb-btn secondary" id="sb-clear" type="button">Clear household facts</button></div>
+      <div class="sb-lock"><i class="fas fa-lock"></i><span><b>Privacy boundary:</b> this worksheet does not persist or transmit the entered household facts. The professional remains responsible for consent, CRM permissions, and any outreach rules.</span></div>
+    </form>
+
+    <section class="sb-result" aria-live="polite">
+      <h2>Review result</h2><div id="sb-result"><div class="sb-empty">Enter household-provided facts, then run the screen. Watchdog will show only conclusions supported by those inputs.</div></div>
+      <div class="sb-actions"><button class="sb-btn secondary" id="sb-copy" type="button" disabled><i class="fas fa-copy"></i> Copy review summary</button><a class="sb-btn secondary" style="display:inline-flex;align-items:center;text-decoration:none" href="/property/senior-benefit-estimator/">Open public estimator</a></div>
+    </section>
+  </section>
+
+  <section class="sb-sources"><span>PROVENANCE · CURRENT 2026 FILING GUIDANCE</span><h2>Rules used by this screen</h2><div class="sb-source-grid">
+    <article class="sb-source"><b>Senior Freeze</b><p>Age 65+ or qualifying disability; ownership/residency since Dec. 31, 2022; 2024 income ≤ $168,268 and 2025 income ≤ $172,475. The reimbursement basis is current-year property tax minus the established base-year property tax, subject to full program eligibility.</p><p><a href="https://www.nj.gov/treasury/taxation/ptr/eligibility.shtml" target="_blank" rel="noopener">NJ Division of Taxation eligibility</a></p></article>
+    <article class="sb-source"><b>Stay NJ · 2025 application / FY2027</b><p>Age 65+; owned and lived in the home for all of 2025; income ≤ $200,000. Published annualized maximums are $6,500 up to $100,000 income, $5,000 from $100,000.01–$150,000, and $4,000 from $150,000.01–$200,000.</p><p><a href="https://www.nj.gov/treasury/taxation/staynj/" target="_blank" rel="noopener">NJ Division of Taxation Stay NJ</a></p></article>
+  </div><p class="sb-fine"><b>PAS-1 filing deadline: November 2, 2026.</b> The State determines final eligibility and benefit amounts across Senior Freeze, ANCHOR, and Stay NJ. Program availability and amounts remain subject to State budget appropriations. This workflow does not provide tax or legal advice and does not predict approval.</p></section>
+</div></div></main>
+<div id="pl-toast" class="pl-toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script>
+(function(){'use strict';
+  var $=function(id){return document.getElementById(id)},lastSummary='';
+  function money(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n)}
+  function num(id){var s=$(id).value.trim().replace(/[$,\s]/g,'');if(!s)return null;var n=Number(s);return Number.isFinite(n)&&n>=0?n:null}
+  function tri(id){return $(id).value}
+  function esc(v){return String(v||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function state(label,text,cls,note){return '<div class="sb-line"><div><b>'+esc(label)+'</b><small>'+esc(note)+'</small></div><div class="sb-state '+cls+'">'+esc(text)+'</div></div>'}
+  function stayCap(income){if(income==null)return null;if(income<=100000)return 6500;if(income<=150000)return 5000;if(income<=200000)return 4000;return 0}
+  function screen(e){e.preventDefault();var ref=$('sb-ref').value.trim(),age=tri('sb-age'),dis=tri('sb-disability'),owned=tri('sb-owned'),full=tri('sb-full'),inc24=num('sb-inc24'),inc25=num('sb-inc25'),tax=num('sb-tax'),base=num('sb-base');
+    var freezeAge=age==='yes'||dis==='yes',freezeFactsKnown=(age!=='unknown'||dis!=='unknown')&&owned!=='unknown'&&inc24!=null&&inc25!=null,freezePass=freezeAge&&owned==='yes'&&inc24<=168268&&inc25<=172475;
+    var stayKnown=age!=='unknown'&&full!=='unknown'&&inc25!=null,stayPass=age==='yes'&&full==='yes'&&inc25<=200000,cap=stayCap(inc25),basis=(freezePass&&tax!=null&&base!=null&&tax>base)?tax-base:null;
+    var priority='Complete missing household facts';
+    if(freezePass&&base==null)priority='Senior Freeze base year needs verification';else if(basis!=null)priority='Verify Senior Freeze increase over base year';else if(stayPass)priority='Verify Stay NJ application facts';else if(freezePass)priority='Verify Senior Freeze eligibility details';
+    var html='<div class="sb-summary"><div class="sb-priority"><span>REVIEW PRIORITY</span><strong>'+esc(priority)+'</strong><small>'+(ref?esc(ref):'No property/CRM reference entered')+'</small></div>';
+    if(!freezeFactsKnown)html+=state('Senior Freeze','Manual review','maybe','Required household facts are incomplete; no eligibility conclusion is produced.');else if(freezePass)html+=state('Senior Freeze','Core screen passes','yes',base==null?'The base year is not provided. That is the next fact to verify.':basis!=null?'Entered tax exceeds the entered base year by '+money(basis)+'. The State determines the actual reimbursement.':'Core rules pass, but the entered tax/base figures do not show a positive increase.');else html+=state('Senior Freeze','Core screen does not pass','no','One or more entered age/disability, ownership/residency, or income facts are outside the published core screen.');
+    if(!stayKnown)html+=state('Stay NJ','Manual review','maybe','Age, full-year 2025 ownership/residency, and 2025 income are required for this core screen.');else if(stayPass)html+=state('Stay NJ','Core screen passes','yes','Published FY2027 annualized maximum for the entered income tier: '+money(cap)+'. Final benefit is State-determined with the other PAS-1 programs.');else html+=state('Stay NJ','Core screen does not pass','no','One or more entered age, full-year ownership/residency, or income facts are outside the published core screen.');
+    html+='<div class="sb-line"><div><b>PAS-1 deadline</b><small>One application covers Senior Freeze, ANCHOR, and Stay NJ.</small></div><div class="sb-state">Nov. 2, 2026</div></div></div>';$('sb-result').innerHTML=html;
+    lastSummary='Watchdog Senior Benefit Review'+(ref?' — '+ref:'')+'\nPriority: '+priority+'\nSenior Freeze: '+(!freezeFactsKnown?'manual review':freezePass?'core screen passes':'core screen does not pass')+(basis!=null?' | entered increase over base year '+money(basis):freezePass&&base==null?' | base year needs verification':'')+'\nStay NJ: '+(!stayKnown?'manual review':stayPass?'core screen passes; published annualized max '+money(cap):'core screen does not pass')+'\nPAS-1 deadline: November 2, 2026\nScreen only; NJ Division of Taxation determines eligibility and benefit amounts.';$('sb-copy').disabled=false;
+  }
+  $('sb-form').addEventListener('submit',screen);$('sb-clear').onclick=function(){$('sb-form').reset();$('sb-ref').value='';['sb-inc24','sb-inc25','sb-tax','sb-base'].forEach(function(id){$(id).value=''});$('sb-result').innerHTML='<div class="sb-empty">Enter household-provided facts, then run the screen. Watchdog will show only conclusions supported by those inputs.</div>';lastSummary='';$('sb-copy').disabled=true};$('sb-copy').onclick=function(){if(!lastSummary)return;navigator.clipboard.writeText(lastSummary).then(function(){$('sb-copy').textContent='Copied';setTimeout(function(){$('sb-copy').innerHTML='<i class="fas fa-copy"></i> Copy review summary'},1400)}).catch(function(){window.prompt('Copy review summary',lastSummary)})};
+})();
+</script>
+</body></html>
