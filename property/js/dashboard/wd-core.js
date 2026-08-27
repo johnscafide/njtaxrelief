@@ -77,13 +77,16 @@
     return Promise.allSettled([
       c.rpc('get_my_entitlement'),
       c.rpc('is_watchdog_developer'),
-      c.from('saved_properties').select('id,pams_pin,kind,address,town,county,zip,assessed,last_year_tax,effective_rate,watchdog_value,has_appeal_case,updated_at,created_at,lat,lon,verified').order('created_at', { ascending: false })
+      c.from('saved_properties').select('*').order('created_at', { ascending: false })
     ]).then(function (a) {
       var ent = H.one(a[0]);
       var dev = a[1].status === 'fulfilled' && a[1].value && a[1].value.data === true;
+      var saved = a[2];
+      if (!saved || saved.status !== 'fulfilled') throw (saved && saved.reason) || new Error('Saved properties request failed');
+      if (!saved.value || saved.value.error) throw (saved.value && saved.value.error) || new Error('Saved properties request failed');
       S.entitlement = ent || null;
       S.plan = dev ? 'developer' : normPlan(ent && (ent.plan_tier || ent.plan));
-      S.properties = H.settled(a[2]);
+      S.properties = Array.isArray(saved.value.data) ? saved.value.data : [];
       var pins = H.unique(S.properties.map(function (p) { return p.pams_pin; }));
       if (!pins.length) return [];
       var towns = H.unique(S.properties.map(function (p) { return p.town; }));
