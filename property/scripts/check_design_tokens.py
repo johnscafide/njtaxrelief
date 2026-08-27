@@ -29,7 +29,6 @@ LEGACY_PAGE_TOKEN_ALLOWLIST = {
     pathlib.Path("property/css/agent-control-readability.css"),
     pathlib.Path("property/css/agent-control-mobile-audit.css"),
     pathlib.Path("property/css/agent-desk.css"),
-    pathlib.Path("property/css/farm-builder.css"),
 }
 MIGRATED_CANONICAL_FILES = {
     pathlib.Path("property/css/watchdog-footer.css"): {
@@ -164,6 +163,36 @@ MIGRATED_CANONICAL_FILES = {
             "border-radius:22px",
             "border-radius:20px",
             "box-shadow:0 18px 42px",
+        },
+    },
+    pathlib.Path("property/css/farm-builder.css"): {
+        "required": {
+            "max-width:var(--container-wide)",
+            "var(--font-ui)",
+            "var(--type-xs)",
+            "var(--type-sm)",
+            "var(--type-md)",
+            "var(--text-muted)",
+            "var(--surface-soft)",
+            "var(--border)",
+            "var(--shadow-sm)",
+            "var(--radius-sm)",
+            "var(--radius-md)",
+            "var(--radius-lg)",
+            "var(--radius-xl)",
+            "var(--wd-navy-950)",
+            "var(--wd-teal-600)",
+            "@media(max-width:1024px)",
+            "@media(max-width:768px)",
+        },
+        "forbidden": {
+            "Source Sans 3",
+            "--fb-",
+            "font-size:10px",
+            "font-size:11px",
+            "@media(max-width:1050px)",
+            "@media(max-width:760px)",
+            "max-width:1540px",
         },
     },
 }
