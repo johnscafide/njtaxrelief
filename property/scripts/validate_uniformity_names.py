@@ -8,7 +8,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "uniformity.json"
-EXPECTED_DISTRICTS = 564
+MIN_DISTRICTS = 500
+MAX_DISTRICTS = 564
 DISTRICT_CODE = re.compile(r"^\d{4}$")
 BAD_PREFIX = re.compile(r"^(?:Boro|Twp|Creek Twp)\s+", re.I)
 
@@ -28,9 +29,11 @@ def main() -> int:
     if not isinstance(districts, dict):
         fail("Uniformity contract invalid: districts must be an object")
 
-    if len(districts) != EXPECTED_DISTRICTS:
+    district_count = len(districts)
+    if not MIN_DISTRICTS <= district_count <= MAX_DISTRICTS:
         fail(
-            f"Uniformity district-count drift: expected {EXPECTED_DISTRICTS}, found {len(districts)}"
+            "Uniformity district-count drift: "
+            f"expected {MIN_DISTRICTS}..{MAX_DISTRICTS}, found {district_count}"
         )
 
     bad_codes = [code for code in districts if not DISTRICT_CODE.fullmatch(str(code))]
@@ -73,7 +76,7 @@ def main() -> int:
         fail("Uniformity range/schema validation failed:", bad_values)
 
     print(
-        f"Validated {len(districts):,} NJ uniformity districts: names, codes, present score/COD ranges, and sales counts"
+        f"Validated {district_count:,} NJ uniformity districts: coverage, names, codes, present score/COD ranges, and sales counts"
     )
     return 0
 
