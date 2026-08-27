@@ -1,0 +1,37 @@
+name: One-off MOD-IV record-change governance reconciliation
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneoff-modiv-record-change-governance.yml'
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: {fetch-depth: 0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: node scripts/reconcile-modiv-record-change-static.js
+      - run: node scripts/build-derived-governance.js
+      - name: Verify canonical totals
+        run: |
+          node - <<'NODE'
+          const r=require('./property/data/marker-registry.json');
+          const id='njplus.nj-dca-modiv-longitudinal.parcel_record_change_count';
+          const row=(r.markers||[]).find(x=>x.id===id);
+          if(row?.provider_status!=='live')throw new Error('MOD-IV record-change marker is not live');
+          const c=(r.markers||[]).reduce((a,x)=>{const k=String(x.provider_status||'planned');a[k]=(a[k]||0)+1;return a;},{});
+          if(c.live!==541||c.planned!==187||c.partial!==4||c.unavailable!==12)throw new Error('Unexpected totals '+JSON.stringify(c));
+          console.log(c);
+          NODE
+      - name: Commit snapshots
+        run: |
+          if git diff --quiet -- property/data/db-governed-provider-overlay.json property/data/marker-registry.json property/data/derived-marker-governance.json supabase/functions/PRODUCTION-INVENTORY.json; then exit 0; fi
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add property/data/db-governed-provider-overlay.json property/data/marker-registry.json property/data/derived-marker-governance.json supabase/functions/PRODUCTION-INVENTORY.json
+          git commit -m "[modiv-governance] Reconcile record-change marker"
+          git push
