@@ -11,8 +11,8 @@ function installStyle(){
   s.textContent=[
     'body.hm-dashboard-page .hm-hero.wdfi{padding:16px 22px 18px!important}',
     'body.hm-dashboard-page .wdfi .hm-hero-in{max-width:1180px!important;grid-template-columns:minmax(300px,.82fr) minmax(0,1.18fr)!important;gap:18px!important;align-items:stretch!important}',
-    'body.hm-dashboard-page .wdfi .hm-shot{height:360px!important;min-height:360px!important;max-height:360px!important;border-radius:24px!important}',
-    'body.hm-dashboard-page .wdfi .hm-id{height:360px!important;min-height:360px!important;max-height:360px!important;padding:18px 20px!important;border-radius:24px!important}',
+    'body.hm-dashboard-page .wdfi .hm-shot{height:auto!important;min-height:390px!important;max-height:none!important;border-radius:24px!important}',
+    'body.hm-dashboard-page .wdfi .hm-id{height:auto!important;min-height:390px!important;max-height:none!important;padding:18px 20px!important;border-radius:24px!important}',
     '.wdfi-head{grid-template-columns:44px minmax(0,1fr) auto!important;gap:11px!important;padding-bottom:11px!important}',
     '.wdfi-mark{width:44px!important;height:44px!important;border-radius:14px!important;font-size:17px!important}',
     '.wdfi-title span{margin-bottom:3px!important;padding:4px 7px!important;font-size:8px!important}',
