@@ -1,0 +1,1256 @@
+{
+  "schema_version": 1,
+  "version": "0.38.0",
+  "released": "2026-08-27",
+  "definition": "46 governed municipality markers from the NJ DCA Development Trends Viewer: 34 public-source facts/series and 12 deterministic Watchdog arithmetic markers.",
+  "activation_rule": "New markers enter planned. Live state requires the source artifact, authenticated production canary, provider coverage and static governance reconciliation.",
+  "source_contract": {
+    "source_id": "nj-dca-development-trends",
+    "source_release": "nj-dca-development-trends-2025-08-21-v1",
+    "source_as_of": "2025-08-21",
+    "latest_data_year": 2024,
+    "municipality_count": 564,
+    "source_artifact": "property/data/dca-development-trends-v038.json",
+    "warning": "DCA annual permit/development reporting. Do not interpret these facts as code compliance, zoning approval, legal status, construction completion, appraisal, lending, insurance, eligibility, or transaction determinations."
+  },
+  "markers": [
+    {
+      "id": "njplus.nj-dca-development-trends.latest_data_year",
+      "label": "Development Trends latest data year",
+      "description": "Latest annual data year identified by the NJ DCA Development Trends Viewer active-data metadata.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_data_year",
+      "source_field": "LATEST DATA YEAR",
+      "unit": "year",
+      "professional_reason": "Shows the latest annual data year certified by the NJ DCA Development Trends Viewer."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_housing_units_authorized",
+      "label": "Latest annual housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL HOUSING UNITS - BUILDING PERMITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_housing_units_authorized",
+      "source_field": "TOTAL HOUSING UNITS - BUILDING PERMITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_one_two_family_units_authorized",
+      "label": "Latest annual 1 & 2 family housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL 1&2 FAMILY HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_one_two_family_units_authorized",
+      "source_field": "TOTAL 1&2 FAMILY HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_multifamily_units_authorized",
+      "label": "Latest annual multifamily housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL MULTI-FAMILY HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_multifamily_units_authorized",
+      "source_field": "TOTAL MULTI-FAMILY HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_mixed_use_units_authorized",
+      "label": "Latest annual mixed-use housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL MIXED USE HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_mixed_use_units_authorized",
+      "source_field": "TOTAL MIXED USE HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_new_housing_units_authorized",
+      "label": "Latest annual new-construction housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_new_housing_units_authorized",
+      "source_field": "TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_new_one_two_family_units_authorized",
+      "label": "Latest annual new 1 & 2 family housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL 1&2 FAMILY HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_new_one_two_family_units_authorized",
+      "source_field": "TOTAL 1&2 FAMILY HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_new_multifamily_units_authorized",
+      "label": "Latest annual new multifamily housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL MULTI-FAMILY HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_new_multifamily_units_authorized",
+      "source_field": "TOTAL MULTI-FAMILY HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_new_mixed_use_units_authorized",
+      "label": "Latest annual new mixed-use housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL MIXED USE HOUSING UNITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_new_mixed_use_units_authorized",
+      "source_field": "TOTAL MIXED USE HOUSING UNITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_residential_addition_alteration_units_authorized",
+      "label": "Latest annual residential additions/alterations housing units authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL RESIDENTIAL ADDITIONS/ALTERATIONS - BUILDING PERMITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_residential_addition_alteration_units_authorized",
+      "source_field": "TOTAL RESIDENTIAL ADDITIONS/ALTERATIONS - BUILDING PERMITS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_construction_cost_authorized",
+      "label": "Latest annual construction cost authorized",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: All Construction Costs.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_construction_cost_authorized",
+      "source_field": "All Construction Costs",
+      "unit": "usd",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_residential_new_construction_cost",
+      "label": "Latest annual residential new-construction cost",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Cost- Residential new construction.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_residential_new_construction_cost",
+      "source_field": "Cost- Residential new construction",
+      "unit": "usd",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_residential_addition_alteration_cost",
+      "label": "Latest annual residential additions/alterations cost",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Cost- Residential additions and alterations.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_residential_addition_alteration_cost",
+      "source_field": "Cost- Residential additions and alterations",
+      "unit": "usd",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_nonresidential_new_construction_cost",
+      "label": "Latest annual nonresidential new-construction cost",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Cost- Nonresidential new construction.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_nonresidential_new_construction_cost",
+      "source_field": "Cost- Nonresidential new construction",
+      "unit": "usd",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_nonresidential_addition_alteration_cost",
+      "label": "Latest annual nonresidential additions/alterations cost",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Cost- Nonresidential additions and alterations.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_nonresidential_addition_alteration_cost",
+      "source_field": "Cost- Nonresidential additions and alterations",
+      "unit": "usd",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_office_new_construction_square_feet",
+      "label": "Latest annual office new-construction square feet",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Office Space - New Constr. SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_office_new_construction_square_feet",
+      "source_field": "Office Space - New Constr. SF",
+      "unit": "square_feet",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_office_addition_square_feet",
+      "label": "Latest annual office addition square feet",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Office Space - Additions SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_office_addition_square_feet",
+      "source_field": "Office Space - Additions SF",
+      "unit": "square_feet",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_retail_new_construction_square_feet",
+      "label": "Latest annual retail new-construction square feet",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Retail - New Constr. SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_retail_new_construction_square_feet",
+      "source_field": "Retail - New Constr. SF",
+      "unit": "square_feet",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_retail_addition_square_feet",
+      "label": "Latest annual retail addition square feet",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Retail - Additions SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_retail_addition_square_feet",
+      "source_field": "Retail - Additions SF",
+      "unit": "square_feet",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_total_nonresidential_square_feet",
+      "label": "Latest annual total nonresidential square feet",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Total Nonres. SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_total_nonresidential_square_feet",
+      "source_field": "Total Nonres. SF",
+      "unit": "square_feet",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_demolitions",
+      "label": "Latest annual demolitions",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL DEMOLITIONS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_demolitions",
+      "source_field": "TOTAL DEMOLITIONS",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_one_two_family_demolitions",
+      "label": "Latest annual 1 & 2 family demolitions",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL DEMOLITIONS  - 1&2 Family Units.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_one_two_family_demolitions",
+      "source_field": "TOTAL DEMOLITIONS  - 1&2 Family Units",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_multifamily_demolitions",
+      "label": "Latest annual multifamily demolitions",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL DEMOLITIONS  - Multifamily Units.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_multifamily_demolitions",
+      "source_field": "TOTAL DEMOLITIONS  - Multifamily Units",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_mixed_use_demolitions",
+      "label": "Latest annual mixed-use demolitions",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: TOTAL DEMOLITIONS  - Mixed Use Housing.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_mixed_use_demolitions",
+      "source_field": "TOTAL DEMOLITIONS  - Mixed Use Housing",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_net_housing_unit_change",
+      "label": "Latest annual net housing unit change",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Net Change in Housing Units - TOTAL.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_net_housing_unit_change",
+      "source_field": "Net Change in Housing Units - TOTAL",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_net_one_two_family_unit_change",
+      "label": "Latest annual net 1 & 2 family unit change",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Net Change in Housing Units - 1 & 2 Family.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_net_one_two_family_unit_change",
+      "source_field": "Net Change in Housing Units - 1 & 2 Family",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_net_multifamily_unit_change",
+      "label": "Latest annual net multifamily unit change",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Net Change in Housing Units - Multifamily.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_net_multifamily_unit_change",
+      "source_field": "Net Change in Housing Units - Multifamily",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.latest_annual_net_mixed_use_unit_change",
+      "label": "Latest annual net mixed-use unit change",
+      "description": "NJ DCA Development Trends Viewer 2024 annual municipality fact: Net Change in Housing Units - Mixed-Use.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "latest_annual_net_mixed_use_unit_change",
+      "source_field": "Net Change in Housing Units - Mixed-Use",
+      "unit": "count",
+      "professional_reason": "Published municipality-level development trend fact for professional research; verify the official record before reliance."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024",
+      "label": "Housing Units Authorized history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: TOTAL HOUSING UNITS - BUILDING PERMITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "housing_units_authorized_history_2020_2024",
+      "source_field": "TOTAL HOUSING UNITS - BUILDING PERMITS",
+      "unit": "count",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024",
+      "label": "New Housing Units Authorized history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "new_housing_units_authorized_history_2020_2024",
+      "source_field": "TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS",
+      "unit": "count",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024",
+      "label": "Construction Cost Authorized history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: All Construction Costs.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "construction_cost_authorized_history_2020_2024",
+      "source_field": "All Construction Costs",
+      "unit": "usd",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024",
+      "label": "Total Nonresidential Square Feet history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: Total Nonres. SF.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "total_nonresidential_square_feet_history_2020_2024",
+      "source_field": "Total Nonres. SF",
+      "unit": "square_feet",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.demolitions_history_2020_2024",
+      "label": "Demolitions history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: TOTAL DEMOLITIONS.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "demolitions_history_2020_2024",
+      "source_field": "TOTAL DEMOLITIONS",
+      "unit": "count",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024",
+      "label": "Net Housing Unit Change history, 2020\u20132024",
+      "description": "Exact NJ DCA Development Trends Viewer annual municipality series for 2020\u20132024: Net Change in Housing Units - TOTAL.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "public",
+      "proprietary": false,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "nj-dca-development-trends",
+      "field": "net_housing_unit_change_history_2020_2024",
+      "source_field": "Net Change in Housing Units - TOTAL",
+      "unit": "count",
+      "professional_reason": "Preserves the exact five-year public source series without a trend or risk interpretation."
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_housing_units_authorized",
+      "label": "Five-year total: housing units authorized",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_housing_units_authorized",
+      "formula": "sum(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_housing_units_authorized_delta",
+      "label": "Latest year-over-year change: housing units authorized",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_housing_units_authorized_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_new_housing_units_authorized",
+      "label": "Five-year total: new housing units authorized",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_new_housing_units_authorized",
+      "formula": "sum(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_new_housing_units_authorized_delta",
+      "label": "Latest year-over-year change: new housing units authorized",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_new_housing_units_authorized_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_construction_cost_authorized",
+      "label": "Five-year total: construction cost authorized",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_construction_cost_authorized",
+      "formula": "sum(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
+      ],
+      "unit": "usd",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_construction_cost_authorized_delta",
+      "label": "Latest year-over-year change: construction cost authorized",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_construction_cost_authorized_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
+      ],
+      "unit": "usd",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_total_nonresidential_square_feet",
+      "label": "Five-year total: total nonresidential square feet",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_total_nonresidential_square_feet",
+      "formula": "sum(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
+      ],
+      "unit": "square_feet",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_total_nonresidential_square_feet_delta",
+      "label": "Latest year-over-year change: total nonresidential square feet",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_total_nonresidential_square_feet_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024) - 2023(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
+      ],
+      "unit": "square_feet",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_demolitions",
+      "label": "Five-year total: demolitions",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_demolitions",
+      "formula": "sum(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_demolitions_delta",
+      "label": "Latest year-over-year change: demolitions",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_demolitions_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.demolitions_history_2020_2024) - 2023(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.rolling_5yr_net_housing_unit_change",
+      "label": "Five-year total: net housing unit change",
+      "description": "Exact sum of the 2020\u20132024 NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "rolling_5yr_net_housing_unit_change",
+      "formula": "sum(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "sum",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    },
+    {
+      "id": "watchdog.njplus.latest_yoy_net_housing_unit_change_delta",
+      "label": "Latest year-over-year change: net housing unit change",
+      "description": "Exact 2024 minus 2023 change from the NJ DCA annual source series.",
+      "category": "development",
+      "scope": "municipality",
+      "tier": "pro_plus",
+      "origin": "watchdog-derived",
+      "proprietary": true,
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "source_id": "watchdog-nj-source-v038",
+      "field": "latest_yoy_net_housing_unit_change_delta",
+      "formula": "2024(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024) - 2023(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
+      ],
+      "unit": "count",
+      "professional_reason": "Deterministic arithmetic over the exact governed DCA annual series; not a qualitative momentum, risk, compliance, or legal score.",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "operation": "history_metric",
+      "calculation_config": {
+        "metric": "latest_delta",
+        "years": [
+          2020,
+          2021,
+          2022,
+          2023,
+          2024
+        ]
+      }
+    }
+  ]
+}
