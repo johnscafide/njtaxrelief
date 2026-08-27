@@ -26,25 +26,39 @@
   // ══════════════════════════════════════════════
 
   function packetComps(r, limit) {
-    // The strongest comparables are verified arm's length sales of similar
-    // homes in the same district. Ranked on size, vintage and assessment,
-    // exactly as the report ranks them elsewhere.
+    // County-board evidence is market-value evidence, not assessment evidence.
+    // The SR-1A export contains only sales the State marked usable (arm's length)
+    // by default; keep an explicit NU guard in case a future export includes
+    // non-usable records. Rank only on timing and physical similarity.
     var d = String(r.pams_pin || '').slice(0, 4);
     return countySales(r.county).then(function (all) {
       if (!all || !all.length) return [];
       var TY = new Date().getFullYear();
+      var valuationYear = TY - 1;
       return all.filter(function (x) {
-        return x.d === d && String(x.c).trim() === '2' && x.p > 40000 && x.y >= TY - 3 &&
+        var month = +x.m;
+        var ageMonths = (valuationYear - (+x.y)) * 12 + (10 - month);
+        return x.d === d && String(x.c).trim() === '2' && x.p > 40000 && !x.nu &&
+               month >= 1 && month <= 12 && ageMonths >= 1 && ageMonths <= 36 &&
                !(r.block && String(x.b || '').replace(/^0+/, '') === String(r.block).replace(/^0+/, '') &&
                  String(x.l || '').replace(/^0+/, '') === String(r.lot || '').replace(/^0+/, ''));
       }).map(function (x) {
-        var w = Math.pow(0.75, TY - x.y);
-        if (r._sqft && x.sf) w *= 1 / (1 + Math.pow(Math.abs(x.sf - r._sqft) / Math.max(r._sqft, 400), 2) * 4);
-        if (r._built && x.yb) w *= 1 / (1 + Math.pow(Math.abs(x.yb - r._built) / 20, 2));
-        if (r.assessed && x.av) w *= 1 / (1 + Math.pow(Math.abs(x.av - r.assessed) / Math.max(r.assessed * 0.4, 1), 2));
-        return { a: x.a, b: x.b, l: x.l, p: x.p, y: x.y, m: x.m, av: x.av, sf: x.sf,
-                 yb: x.yb, ppsf: x.ppsf, ratio: x.r, w: w };
-      }).sort(function (a, b) { return b.w - a.w; }).slice(0, limit || 8);
+        var ageMonths = (valuationYear - (+x.y)) * 12 + (10 - (+x.m));
+        var w = Math.pow(0.94, ageMonths);
+        var fit = ['SR-1A usable sale', ageMonths + ' mo before 10/1/' + valuationYear];
+        if (r._sqft && x.sf) {
+          var sizePct = Math.round(Math.abs(x.sf - r._sqft) / Math.max(r._sqft, 1) * 100);
+          w *= 1 / (1 + Math.pow(Math.abs(x.sf - r._sqft) / Math.max(r._sqft, 400), 2) * 4);
+          fit.push(sizePct + '% size gap');
+        }
+        if (r._built && x.yb) {
+          var vintageGap = Math.abs(x.yb - r._built);
+          w *= 1 / (1 + Math.pow(vintageGap / 20, 2));
+          fit.push(vintageGap + ' yr vintage gap');
+        }
+        return { a: x.a, b: x.b, l: x.l, p: x.p, y: x.y, m: x.m, sf: x.sf,
+                 yb: x.yb, ppsf: x.ppsf, ageMonths: ageMonths, fit: fit.join('; '), w: w };
+      }).sort(function (a, b) { return b.w - a.w; }).slice(0, limit || 5);
     }).catch(function () { return []; });
   }
 
@@ -76,8 +90,8 @@
       '<div class="pk-inc"><b>What it contains</b><ul>' +
         '<li>Subject property: block, lot, qualifier, PAMS PIN, class, and the current assessment split ' +
           'between land and improvement</li>' +
-        '<li>Comparable sales the State of New Jersey verified as arm\u2019s length, with square footage and ' +
-          'price per square foot</li>' +
+        '<li>Up to five comparable sales the State of New Jersey verified as usable arm\u2019s length transactions, ' +
+          'ranked by timing and available physical similarity rather than comparable assessments</li>' +
         '<li>The municipal equalization ratio, both the published Director\u2019s Ratio and the ratio measured ' +
           'from verified sales, with the year each applies to</li>' +
         '<li>The Chapter 123 calculation set out line by line</li>' +
@@ -90,15 +104,17 @@
         '<button class="tl-btn pk-go" onclick="pkBuild(\'' + esc(r.pams_pin) + '\')">' +
           '<i class="fas fa-print"></i> Generate packet</button>' +
         '<button class="tl-btn" onclick="pkCSV(\'' + esc(r.pams_pin) + '\')">' +
-          '<i class="fas fa-file-csv"></i> Comparables as CSV</button>' +
+          '<i class="fas fa-file-csv"></i> Comparable candidates as CSV</button>' +
       '</div>' +
       '<div id="' + id + '"></div>' +
 
       '<div class="tl-fine">This is a working document, not a filed pleading. New Jersey requires Form A-1, ' +
-      'the filing fee, and service on the assessor and municipal clerk, none of which this does. Appeals are ' +
-      'generally due April 1, or May 1 in a municipality that revalued. Comparable sales come from the state ' +
-      'SR1A file and are verified arm\u2019s length transactions, but the public record cannot see condition or ' +
-      'interior finish, so every comparable needs a human look before it goes in front of a board.</div>');
+      'the filing fee, and service on the assessor and municipal clerk, none of which this does. Current State ' +
+      'guidance uses April 1 for most counties, May 1 where a revaluation or reassessment was implemented, and ' +
+      'January 15 under the alternate assessment calendar in Burlington, Gloucester and Monmouth Counties. ' +
+      'Verify the current county instructions before filing. Comparable sales come from the State SR-1A file ' +
+      'and are verified usable arm\u2019s length transactions, but public records cannot see condition or interior ' +
+      'finish, so every comparable needs a human look before it goes in front of a board.</div>');
   }
 
   window.pkCSV = function (pin) {
@@ -106,12 +122,12 @@
     for (var i = 0; i < rows.length; i++) if (rows[i].pams_pin === pin) r = rows[i];
     if (!r) return;
     packetComps(r, 25).then(function (cs) {
-      if (!cs.length) { toast('No verified comparables on file for this town'); return; }
-      var head = ['Address','Block','Lot','Sale_Year','Sale_Month','Sale_Price','Assessed',
-                  'Living_SqFt','Year_Built','Price_Per_SqFt','Assessed_Over_Sale'];
+      if (!cs.length) { toast('No verified pre-valuation comparable sales on file for this town'); return; }
+      var head = ['Address','Block','Lot','Sale_Year','Sale_Month','Sale_Price',
+                  'Living_SqFt','Year_Built','Price_Per_SqFt','Months_Before_Valuation','Evidence_Fit'];
       var lines = [head.join(',')].concat(cs.map(function (x) {
-        return [x.a, x.b, x.l, x.y, x.m || '', x.p, x.av || '', x.sf || '', x.yb || '',
-                x.ppsf || '', x.ratio != null ? (x.ratio * 100).toFixed(1) + '%' : ''
+        return [x.a, x.b, x.l, x.y, x.m || '', x.p, x.sf || '', x.yb || '',
+                x.ppsf || '', x.ageMonths, x.fit
         ].map(function (v) {
           v = v == null ? '' : String(v);
           return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
@@ -120,7 +136,7 @@
       var b = new Blob([lines.join('\n')], { type: 'text/csv' }), u = URL.createObjectURL(b);
       var a = document.createElement('a');
       a.href = u;
-      a.download = 'comparables-' + String(r.address).toLowerCase().replace(/[^\w]+/g, '-') + '.csv';
+      a.download = 'comparable-candidates-' + String(r.address).toLowerCase().replace(/[^\w]+/g, '-') + '.csv';
       document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(u);
     });
   };
@@ -134,7 +150,7 @@
     if (host) host.innerHTML = '<div class="tl-wait"><div class="pl-spin" style="margin:0"></div>' +
       '<div>Assembling comparables and sources...</div></div>';
 
-    packetComps(r, 8).then(function (cs) {
+    packetComps(r, 5).then(function (cs) {
       if (host) host.innerHTML = '';
       var w = window.open('', '_blank');
       if (!w) { toast('Allow popups to generate the packet'); return; }
@@ -150,6 +166,7 @@
     var off = ratioFor(r.town, r.county);
     var today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     var TY = new Date().getFullYear();
+    var valuationYear = TY - 1;
 
     function row(k, v, note) {
       return '<tr><th>' + k + '</th><td>' + (v == null || v === '' ? '<span class="na">not on file</span>' : v) +
@@ -163,7 +180,7 @@
         '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '\u2014') + '</td>' +
         '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '\u2014') + '</td>' +
         '<td class="n">' + (x.yb || '\u2014') + '</td>' +
-        '<td class="n">' + (x.av ? money(x.av) : '\u2014') + '</td></tr>';
+        '<td>' + esc(x.fit || '') + '</td></tr>';
     }).join('');
 
     var medPpsf = null, sized = cs.filter(function (x) { return x.ppsf; });
@@ -240,13 +257,18 @@
       (cs.length
         ? '<table class="ct"><thead><tr><th>Address</th><th>Block/Lot</th><th>Sold</th>' +
           '<th class="n">Price</th><th class="n">Sq ft</th><th class="n">$/sq ft</th>' +
-          '<th class="n">Built</th><th class="n">Assessed</th></tr></thead><tbody>' +
+          '<th class="n">Built</th><th>Evidence fit</th></tr></thead><tbody>' +
           compRows + '</tbody></table>' +
-          '<div class="src" style="margin-top:6px;border:none;padding:0">All sales above were verified as ' +
-          'usable arm\u2019s length transactions by the assessing authority and reported to the Division of ' +
-          'Taxation on Form SR-1A. Non-usable transfers, including family conveyances, estate sales and ' +
-          'sheriff\u2019s sales, are excluded at source.</div>'
-        : '<p class="na">No verified comparable sales are on file for this municipality in the period covered.</p>') +
+          '<div class="src" style="margin-top:6px;border:none;padding:0">New Jersey\u2019s current A-1 instructions ' +
+          'permit no more than five comparable sales and state that comparable sales are acceptable market-value ' +
+          'evidence while comparable assessments are not. This packet therefore never ranks or displays a comp ' +
+          'because its assessment resembles the subject. All candidates are same-district Class 2 SR-1A sales ' +
+          'the State marked usable, are limited to the 36 months before the October 1, ' + valuationYear +
+          ' valuation date, and are ranked only by deed timing plus available living-space/year-built similarity. ' +
+          'The compact evidence file preserves deed month, not day, so October ' + valuationYear +
+          ' sales are conservatively excluded rather than risk using a post-valuation transfer. Human review of ' +
+          'condition, location and other material differences remains required.</div>'
+        : '<p class="na">No verified pre-valuation comparable sales are on file for this municipality in the governed period.</p>') +
 
       '<h2>4. Chapter 123 calculation</h2>' +
       (c && c.testable
@@ -292,13 +314,16 @@
       'Measures of Property Assessment Uniformity in New Jersey Taxing Districts. Appeal outcomes: Summary of ' +
       'Property Tax Appeals, filed under N.J.S.A. 54:3-5.1. Owner names are redacted at source under ' +
       'P.L. 2020, c. 125.<br><br>' +
+      '<b>Comparable-evidence boundary.</b> The State\u2019s A-1 instructions require market-value proof as of October 1 ' +
+      'of the pretax year, limit submitted comparable sales to five, and expressly reject comparable assessments ' +
+      'as evidence of value. The candidate ranking above follows that boundary; it is not an appraisal adjustment grid.<br><br>' +
       '<b>Limitations.</b> Public assessment records do not record property condition, interior finish, ' +
       'renovation history or deferred maintenance, and any of those may explain a difference between the ' +
       'subject and a comparable. This document is a working analysis prepared to support professional ' +
       'judgment. It is not a completed appeal, not an appraisal, and not legal advice. Filing requires Form ' +
-      'A-1, the applicable fee, and service on the municipal assessor and clerk. Appeals are generally due ' +
-      'April 1, or May 1 in a municipality that has undergone revaluation or reassessment.<br><br>' +
-      'Generated by njpropertytaxrelief.com.</div>' +
+      'A-1, the applicable fee, and service on the municipal assessor and clerk. Verify the current filing ' +
+      'calendar with the applicable County Board before submission.<br><br>' +
+      'Generated by Watchdog Index at watchdogindex.com.</div>' +
 
       '</body></html>';
   }
