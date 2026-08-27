@@ -105,7 +105,7 @@ assert(browser.includes('Choose Watchdog narration format'), 'Narration format s
 assert(browser.includes('Spoken only from the written governed response'), 'UI must state the governed narration boundary.');
 assert(browser.includes("telemetry('narration_started'"), 'Browser narration must record a started funnel event.');
 assert(browser.includes("telemetry('narration_completed'"), 'Browser narration must record a completed funnel event.');
-assert(browser.includes("telemetry('narration_stopped'"), 'Browser narration must record an explicit stop event.');
+assert(browser.includes("stopActiveNarration('narration_stopped'"), 'Browser narration must record an explicit stop event through the governed stop helper.');
 assert(browser.includes("telemetry('narration_failed'"), 'Browser narration must record a failure event.');
 assert(browser.includes("raw_audio_persisted") === false, 'Browser client must never serialize a raw-audio persistence field or recording payload.');
 assert(!browser.includes('audio_base64'), 'Browser-primary Voice must not upload microphone audio.');
