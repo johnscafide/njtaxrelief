@@ -1,0 +1,25 @@
+name: Watchdog Index distribution contract
+
+on:
+  push:
+    paths:
+      - 'supabase/migrations/*njw_270_watchdog_index_distribution*.sql'
+      - 'property/tests/watchdog-index-distribution-contract.mjs'
+      - '.github/workflows/watchdog-index-distribution-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/migrations/*njw_270_watchdog_index_distribution*.sql'
+      - 'property/tests/watchdog-index-distribution-contract.mjs'
+      - '.github/workflows/watchdog-index-distribution-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify governed distribution contract
+        run: node property/tests/watchdog-index-distribution-contract.mjs
