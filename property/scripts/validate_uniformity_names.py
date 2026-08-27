@@ -18,6 +18,10 @@ def fail(message: str, rows: list[str] | None = None) -> None:
     raise SystemExit(message + details)
 
 
+def numeric_in_range(value: object, low: float, high: float) -> bool:
+    return value is None or (isinstance(value, (int, float)) and low <= float(value) <= high)
+
+
 def main() -> int:
     payload = json.loads(DATA.read_text(encoding="utf-8"))
     districts = payload.get("districts")
@@ -52,15 +56,15 @@ def main() -> int:
         latest = row.get("latest")
         sales = row.get("sales")
 
-        if not isinstance(score, (int, float)) or not 0 <= float(score) <= 100:
+        # Missing evidence is valid and remains null. Only present numeric values
+        # are range-checked so the guard never turns missingness into a fake zero.
+        if not numeric_in_range(score, 0, 100):
             bad_values.append(f"{code}: score={score!r} outside 0..100")
-        if not isinstance(coefficient, (int, float)) or not 0 <= float(coefficient) <= 100:
+        if not numeric_in_range(coefficient, 0, 100):
             bad_values.append(f"{code}: coefficient={coefficient!r} outside 0..100")
-        if latest is not None and (
-            not isinstance(latest, (int, float)) or not 0 <= float(latest) <= 100
-        ):
+        if not numeric_in_range(latest, 0, 100):
             bad_values.append(f"{code}: latest={latest!r} outside 0..100")
-        if not isinstance(sales, int) or sales < 0:
+        if sales is not None and (not isinstance(sales, int) or sales < 0):
             bad_values.append(f"{code}: sales={sales!r} is not a non-negative integer")
 
     if bad_names:
@@ -69,7 +73,7 @@ def main() -> int:
         fail("Uniformity range/schema validation failed:", bad_values)
 
     print(
-        f"Validated {len(districts):,} NJ uniformity districts: names, codes, score/COD ranges, and sales counts"
+        f"Validated {len(districts):,} NJ uniformity districts: names, codes, present score/COD ranges, and sales counts"
     )
     return 0
 
