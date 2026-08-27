@@ -1,0 +1,48 @@
+name: One-off v0.37 affordable housing governance
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneoff-v037-affordable-housing-governance.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: oneoff-v037-affordable-housing-governance
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Reconcile production-certified v0.37 state
+        run: node scripts/reconcile-v037-affordable-housing-governance.js
+      - name: Rebuild derived governance from newest overlay
+        run: node scripts/build-derived-governance.js
+      - name: Assert canonical release counts
+        run: |
+          node - <<'NODE'
+          const r=require('./property/data/marker-registry.json');
+          const c=r.summary&&r.summary.provider_status||{};
+          if((r.markers||[]).length!==775)throw new Error('Expected 775 canonical markers');
+          for(const [k,v] of Object.entries({live:572,partial:4,unavailable:12,planned:187}))if(Number(c[k]||0)!==v)throw new Error(`${k}: ${c[k]} != ${v}`);
+          const ids=(require('./property/data/nj-source-pack-v037.json').markers||[]).map(x=>x.id);
+          const byId=new Map((r.markers||[]).map(x=>[x.id,x]));
+          for(const id of ids)if(byId.get(id)?.provider_status!=='live')throw new Error('v0.37 marker not live: '+id);
+          console.log({total:r.markers.length,provider_status:c});
+          NODE
+      - name: Commit reconciled governance
+        run: |
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/data/db-governed-provider-overlay.json property/data/source-registry.json property/data/marker-registry.json property/data/derived-marker-governance.json supabase/functions/PRODUCTION-INVENTORY.json
+          if git diff --cached --quiet; then echo 'Already current'; exit 0; fi
+          git commit -m '[v037-governance] Reconcile certified affordable housing state'
+          git pull --rebase origin main
+          git push origin HEAD:main
