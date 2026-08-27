@@ -3,8 +3,8 @@
    Loaded by the lean public-nav bridge so the mapless property cards stay
    visually intentional without another dark panel inside the blue card. */
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{
-  top:58px!important;
-  right:24px!important;
+  top:18px!important;
+  right:18px!important;
   min-width:0!important;
   width:auto!important;
   height:auto!important;
@@ -63,8 +63,8 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visu
 }
 @media(max-width:640px){
   html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{
-    top:52px!important;
-    right:16px!important;
+    top:14px!important;
+    right:13px!important;
     grid-template-columns:31px auto!important;
     column-gap:8px!important;
   }
