@@ -1,0 +1,56 @@
+name: DCA Development Trends v0.38 source build
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/development-trends-v038-source-build.yml'
+      - 'property/scripts/build_dca_development_trends_v038.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: development-trends-v038-source-build
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install XLSB reader
+        run: pip install pyxlsb==1.0.10
+      - name: Download certified DCA viewer
+        run: curl -fsSL --retry 3 -o /tmp/Development_Trend_Viewer.xlsb 'https://www.nj.gov/dca/codes/reporter/Development_Trend_Viewer.xlsb'
+      - name: Assert certified upload/source hash
+        run: echo '2ab94e5880e9ee9cd90bed18ef21a7af3c999245b1454c1513cdc35d6239b5ac  /tmp/Development_Trend_Viewer.xlsb' | sha256sum -c -
+      - name: Build source artifact and catalog extension
+        run: python property/scripts/build_dca_development_trends_v038.py --source /tmp/Development_Trend_Viewer.xlsb --apply-registry
+      - name: Assert bounded catalog state
+        run: |
+          python - <<'PY'
+          import json
+          p=json.load(open('property/data/nj-source-pack-v038.json'))
+          a=json.load(open('property/data/dca-development-trends-v038.json'))
+          r=json.load(open('property/data/marker-registry.json'))
+          assert len(p['markers']) == 46
+          assert a['municipality_count'] == 564
+          assert a['latest_data_year'] == 2024
+          assert len(r['markers']) == 821
+          c=r['summary']['provider_status']
+          assert c.get('live') == 572 and c.get('planned') == 233 and c.get('partial') == 4 and c.get('unavailable') == 12, c
+          print({'total':len(r['markers']),'provider_status':c})
+          PY
+      - name: Commit governed source build
+        run: |
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/data/dca-development-trends-v038.json property/data/dca-development-trends-v038-SOURCE-MANIFEST.md property/data/nj-source-pack-v038.json property/data/marker-registry.json
+          if git diff --cached --quiet; then echo 'Already current'; exit 0; fi
+          git commit -m '[v038-source] Build certified DCA Development Trends source'
+          git pull --rebase origin main
+          git push origin HEAD:main
