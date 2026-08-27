@@ -13,13 +13,13 @@
 .pro-role-visual.role-agent,
 body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   aspect-ratio:760/428;
-  border:1px solid rgba(17,29,56,.10);
-  background-color:#f5f7fb;
+  border:1px solid var(--border);
+  background-color:var(--surface-soft);
   background-image:var(--wd-farm-slice-1),var(--wd-farm-slice-2),var(--wd-farm-slice-3),var(--wd-farm-slice-4);
   background-size:100% 25%,100% 25%,100% 25%,100% 25%;
   background-position:center 0%,center 33.333%,center 66.667%,center 100%;
   background-repeat:no-repeat;
-  box-shadow:0 18px 42px rgba(17,29,56,.11);
+  box-shadow:var(--shadow-md);
 }
 
 /* Main property index: exact boundary between Towns and Professional Library. */
@@ -30,32 +30,32 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   align-items:center;
   margin:58px 0 64px;
   padding:52px 0;
-  border-top:1px solid rgba(17,29,56,.08);
-  border-bottom:1px solid rgba(17,29,56,.08);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
 }
 #wd-seo-directory .wd-farm-showcase-copy{
   max-width:560px;
 }
 #wd-seo-directory .wd-farm-showcase-copy .wd-section-kicker{
   display:block;
-  margin-bottom:12px;
+  margin-bottom:var(--space-3);
 }
 #wd-seo-directory .wd-farm-showcase-copy h2{
   margin:0;
-  color:#111d38;
-  font:800 clamp(34px,3.4vw,50px)/1.02 "Plus Jakarta Sans",sans-serif;
+  color:var(--ink);
+  font:800 clamp(34px,3.4vw,50px)/1.02 var(--font-ui);
   letter-spacing:-.055em;
 }
 #wd-seo-directory .wd-farm-showcase-copy p{
   margin:18px 0 0;
   max-width:520px;
-  color:#5f6f83;
-  font:500 17px/1.58 "Source Sans 3",Arial,sans-serif;
+  color:var(--text-muted);
+  font:500 17px/1.58 var(--font-ui);
 }
 #wd-seo-directory .wd-farm-showcase-visual{
   width:100%;
   min-width:0;
-  border-radius:22px;
+  border-radius:var(--radius-xl);
 }
 
 /* Pro real-estate panel: make farming the whole message, not another dense card. */
@@ -70,8 +70,8 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   content:"Farm smarter with Watchdog.";
   display:block;
   max-width:620px;
-  color:#101318;
-  font:800 clamp(34px,3vw,50px)/1.02 "Plus Jakarta Sans",sans-serif;
+  color:var(--ink);
+  font:800 clamp(34px,3vw,50px)/1.02 var(--font-ui);
   letter-spacing:-.055em;
 }
 .pro-role-panel[data-role-panel="agent"] .pro-role-copy::after{
@@ -79,8 +79,8 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   display:block;
   max-width:620px;
   margin-top:18px;
-  color:#6f7580;
-  font:500 17px/1.55 "Source Sans 3",Arial,sans-serif;
+  color:var(--text-muted);
+  font:500 17px/1.55 var(--font-ui);
 }
 .pro-role-visual.role-agent{
   min-height:0!important;
@@ -90,7 +90,7 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   justify-self:end;
   padding:0!important;
   overflow:hidden;
-  border-radius:20px;
+  border-radius:var(--radius-xl);
 }
 .pro-role-visual.role-agent .role-queue{display:none!important}
 
@@ -102,8 +102,8 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::before{
   grid-row:2;
   align-self:center;
   margin-top:16px;
-  color:#42546d;
-  font:700 clamp(18px,1.65vw,23px)/1.4 "Plus Jakarta Sans",sans-serif;
+  color:var(--text-muted);
+  font:700 clamp(18px,1.65vw,23px)/1.4 var(--font-ui);
   letter-spacing:-.025em;
 }
 body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
@@ -114,10 +114,10 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   display:block;
   width:min(100%,420px);
   margin-top:16px;
-  border-radius:20px;
+  border-radius:var(--radius-xl);
 }
 
-@media(max-width:1100px){
+@media(max-width:1024px){
   .pro-role-panel[data-role-panel="agent"]{
     grid-template-columns:1fr;
     gap:28px;
@@ -128,7 +128,7 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   }
 }
 
-@media(max-width:760px){
+@media(max-width:768px){
   #wd-seo-directory .wd-farm-showcase{
     grid-template-columns:1fr;
     gap:24px;
@@ -139,11 +139,11 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
     font-size:34px;
   }
   #wd-seo-directory .wd-farm-showcase-copy p{
-    font-size:16px;
+    font-size:var(--type-md);
   }
   #wd-seo-directory .wd-farm-showcase-visual{
     width:100%;
-    border-radius:16px;
+    border-radius:var(--radius-lg);
   }
   .pro-role-panel[data-role-panel="agent"] .pro-role-copy::before{
     font-size:34px;
@@ -153,7 +153,7 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
   }
   .pro-role-visual.role-agent{
     width:min(100%,360px)!important;
-    border-radius:16px;
+    border-radius:var(--radius-lg);
   }
   body:has(a[href*="propertyradar.com"]) .cmp-verdict::before,
   body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
@@ -168,6 +168,6 @@ body:has(a[href*="propertyradar.com"]) .cmp-verdict::after{
     grid-row:auto;
     width:min(100%,360px);
     margin-top:10px;
-    border-radius:16px;
+    border-radius:var(--radius-lg);
   }
 }
