@@ -1,0 +1,57 @@
+name: Affordable Housing v0.37 Source Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/scripts/build_affordable_housing_v037.py'
+      - 'property/scripts/apply_source_pack_v037.py'
+      - '.github/workflows/affordable-housing-v037-source-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: affordable-housing-v037-source-build
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Download official DCA workbook
+        run: curl -fL --retry 3 --retry-delay 2 'https://www.nj.gov/dca/dlps/hss/annualreporting/Affordable%20Housing%20Municipal%20Status%20Report%207-1-26.xlsx' -o /tmp/dca-affordable-housing.xlsx
+      - name: Build governed artifact and source pack
+        run: python property/scripts/build_affordable_housing_v037.py /tmp/dca-affordable-housing.xlsx
+      - name: Apply catalog extension and semantic corrections
+        run: python property/scripts/apply_source_pack_v037.py
+      - name: Validate source contract
+        run: |
+          python - <<'PY'
+          import json
+          a=json.load(open('property/data/affordable-housing-v037.json'))
+          p=json.load(open('property/data/nj-source-pack-v037.json'))
+          assert a['diagnostics']['municipalities_total']==564
+          assert a['diagnostics']['trust_municipalities']==564
+          assert a['diagnostics']['project_rows']==7896
+          assert len(p['markers'])==31
+          assert a['municipalities']['0324']['reported_affordable_project_count']==59
+          assert a['municipalities']['0324']['projects_with_building_permit']==26
+          assert a['municipalities']['0324']['projects_with_certificate_of_occupancy']==31
+          assert a['municipalities']['0324']['affordable_units_apartment']==517
+          assert a['municipalities']['0324']['ahtf_total_income_since_inception']==16431230.44
+          PY
+      - name: Commit generated governed source artifacts
+        run: |
+          git config user.name 'watchdog-source-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/data/affordable-housing-v037.json property/data/nj-source-pack-v037.json property/data/marker-registry.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m '[v037-source] Reconcile DCA affordable housing workbook'
+          git pull --rebase origin main
+          git push origin HEAD:main
