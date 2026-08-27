@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-27T19:20:34.416Z",
+  "captured_at": "2026-08-27T19:32:15.301Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -113,7 +113,8 @@
     "njplus.nj-dca-fourth-round-affordable.income_capacity_factor_pct": "live",
     "njplus.nj-dca-fourth-round-affordable.average_allocation_factor_pct": "live",
     "njplus.nj-dca-fourth-round-affordable.cap_1000_20pct": "live",
-    "njplus.nj-dca-neighborhood-trends.walking_to_work_share": "live"
+    "njplus.nj-dca-neighborhood-trends.walking_to_work_share": "live",
+    "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count": "live"
   },
   "providers": {
     "watchdog.watchdog_score": {
@@ -255,6 +256,13 @@
       "calculation_key": "nj-dca-neighborhood-trends-walk-2020-24-v1",
       "source": "NJ DCA 2026 Neighborhood Trends Database · % Walking to Work, 2020-24 Estimate · nj-dca-neighborhood-trends-walk-2020-24-v1",
       "bulk_capable": true
+    },
+    "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-modiv-record-change-v1",
+      "source": "Watchdog exact consecutive-year record transition count over NJ Division of Taxation annual MOD-IV assessment lists · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
     }
   }
 }

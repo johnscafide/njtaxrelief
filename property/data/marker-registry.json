@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status+v036",
- "generated_at": "2026-08-27T19:31:32.274Z",
+ "generated_at": "2026-08-27T19:32:15.367Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 74.4,
   "provider_status": {
-   "live": 540,
+   "live": 541,
    "partial": 4,
    "unavailable": 12,
-   "planned": 188
+   "planned": 187
   },
   "retired_phase5": 0
  },
@@ -15259,7 +15259,7 @@
   {
    "id": "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count",
    "label": "Parcel-record change count",
-   "description": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
+   "description": "Count of consecutive observed annual MOD-IV record transitions where at least one retained land, improvement, total, property-class, or exemption-code field changed. Missing source years are not compared.",
    "category": "assessment",
    "scope": "property",
    "tier": "pro_plus",
@@ -15278,9 +15278,9 @@
    "field": "parcel_record_change_count",
    "professional_reason": "Published MOD-IV longitudinal database data for professional review; verify the official record before reliance.",
    "source_field": "parcel_record_change_count",
-   "provider_status": "planned",
-   "provider_note": "No provider family connected yet",
-   "provider_contract": "workbench-hydrate-v15"
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v64"
   },
   {
    "id": "njplus.nj-dca-modiv-longitudinal.assessment_record_years",
