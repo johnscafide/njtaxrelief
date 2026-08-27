@@ -9,6 +9,13 @@ const PRODUCTION_HOSTS = new Set([
   "watchdogindex.com",
   "www.watchdogindex.com"
 ]);
+const ROBUST_SCORE_ID = "watchdog.watchdog_score";
+const ROBUST_MODEL = "ROBUST-v1";
+const CHAPTER123_SOURCE_ID = "nj-chapter123-2026";
+const CHAPTER123_PROVIDER_VERSION = "chapter123-provider-v3";
+const MODIV_SOURCE_ID = "treasury-modiv-2026";
+const MODIV_SNAPSHOT_URL = "https://njpropertytaxrelief.com/property/data/statewide-intelligence.json";
+const HOMEOWNER_CALC_VERSION = "njw62_homeowner_tax_position_v1";
 
 function allowedOrigin(req: Request) {
   const origin = req.headers.get("origin") || "";
@@ -71,15 +78,42 @@ function safeText(value: unknown) {
     .replace(/[^\x09\x0A\x0D\x20-\x7E]/g, "");
 }
 
-function money(value: unknown) {
+function clean(value: unknown, max = 180) {
+  return String(value ?? "").trim().slice(0, max);
+}
+
+function finite(value: unknown): number | null {
+  if (value === null || value === undefined || value === "") return null;
   const n = Number(value);
-  if (!Number.isFinite(n)) return "Not available";
+  return Number.isFinite(n) ? n : null;
+}
+
+function money(value: unknown) {
+  const n = finite(value);
+  if (n == null) return "Not available";
   return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(n);
 }
 
+function percentFraction(value: unknown, digits = 1) {
+  const n = finite(value);
+  return n == null ? "Not available" : `${(n * 100).toFixed(digits)}%`;
+}
+
 function pdfFilename(title: unknown) {
-  const clean = safeText(title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
-  return `${clean || "watchdog-report"}.pdf`;
+  const cleanTitle = safeText(title).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 80);
+  return `${cleanTitle || "watchdog-report"}.pdf`;
+}
+
+function planRank(plan: unknown) {
+  return ({ standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 } as Record<string, number>)[String(plan || "standard")] ?? 0;
+}
+
+function districtCode(pin: unknown) {
+  return clean(pin, 80).replace(/\D/g, "").slice(0, 4);
+}
+
+function evidenceSource(marker_id: string, source: string, source_url: string, captured_at: string, extra: Record<string, unknown> = {}) {
+  return { marker_id, source, source_url, captured_at, ...extra };
 }
 
 type ReportVersion = {
@@ -96,7 +130,9 @@ async function buildPdf(version: ReportVersion) {
   const content = (version.content && typeof version.content === "object") ? version.content as Record<string, any> : {};
   const evidence = (content.evidence_snapshot && typeof content.evidence_snapshot === "object") ? content.evidence_snapshot : {};
   const brand = (content.agent_branding && typeof content.agent_branding === "object") ? content.agent_branding : {};
+  const homeowner = (content.homeowner_one_pager && typeof content.homeowner_one_pager === "object") ? content.homeowner_one_pager : null;
   const net = (content.seller_net_sheet && typeof content.seller_net_sheet === "object") ? content.seller_net_sheet : null;
+  const municipal = (content.municipality_tax_context && typeof content.municipality_tax_context === "object") ? content.municipality_tax_context : null;
   const sources = Array.isArray(version.source_manifest) ? version.source_manifest : [];
 
   const pdf = await PDFDocument.create();
@@ -121,8 +157,8 @@ async function buildPdf(version: ReportVersion) {
     }
   }
 
-  function wrap(text: unknown, size = 10, maxWidth = width, font = regular) {
-    const words = safeText(text).split(/\s+/).filter(Boolean);
+  function wrap(textValue: unknown, size = 10, maxWidth = width, font = regular) {
+    const words = safeText(textValue).split(/\s+/).filter(Boolean);
     const lines: string[] = [];
     let current = "";
     for (const word of words) {
@@ -163,12 +199,14 @@ async function buildPdf(version: ReportVersion) {
     ensure(24);
     page.drawText(safeText(label), { x: margin, y, size: 9, font: regular, color: muted });
     const rendered = safeText(value);
+    const valueFont = strong ? bold : regular;
+    const size = strong ? 11 : 10;
     page.drawText(rendered, {
-      x: pageSize[0] - margin - (strong ? bold : regular).widthOfTextAtSize(rendered, strong ? 11 : 10),
+      x: pageSize[0] - margin - valueFont.widthOfTextAtSize(rendered, size),
       y,
-      size: strong ? 11 : 10,
-      font: strong ? bold : regular,
-      color: strong ? navy : navy
+      size,
+      font: valueFont,
+      color: navy
     });
     y -= 18;
   }
@@ -197,8 +235,25 @@ async function buildPdf(version: ReportVersion) {
   keyValue("Assessed value", money(evidence.assessed));
   keyValue("Recorded annual property tax", money(evidence.last_year_tax));
   keyValue("Watchdog market value", money(evidence.watchdog_value));
-  if (evidence.effective_rate != null) keyValue("Effective tax rate", `${Number(evidence.effective_rate).toFixed(3)}%`);
+  if (finite(evidence.effective_rate) != null) keyValue("Effective tax rate", `${Number(evidence.effective_rate).toFixed(3)}%`);
   rule();
+
+  if (homeowner) {
+    const chapter = homeowner.chapter123 && typeof homeowner.chapter123 === "object" ? homeowner.chapter123 : {};
+    const economics = homeowner.appeal_economics && typeof homeowner.appeal_economics === "object" ? homeowner.appeal_economics : {};
+    text("HOMEOWNER TAX POSITION", { size: 8, font: bold, color: teal, leading: 12 });
+    keyValue("Watchdog Score", finite(homeowner.watchdog_score) == null ? "Not available" : `${Math.round(Number(homeowner.watchdog_score))} / 100`);
+    keyValue("Official 2026 Chapter 123 ratio", finite(chapter.official_ratio_pct) == null ? "Not available" : `${Number(chapter.official_ratio_pct).toFixed(2)}%`);
+    keyValue("Official 2026 upper ratio", finite(chapter.official_upper_pct) == null ? "Not available" : `${Number(chapter.official_upper_pct).toFixed(2)}%`);
+    keyValue("Independent governed value anchor", money(chapter.independent_value_anchor));
+    keyValue("Chapter 123 upper-bound assessment", money(chapter.upper_supported_assessment));
+    keyValue("Assessment above upper bound", money(chapter.gap_amount));
+    keyValue("Assessment gap", percentFraction(chapter.gap_fraction));
+    keyValue("Annual dollars at stake", money(economics.annual_dollars_at_stake), true);
+    y -= 4;
+    text(homeowner.disclaimer || "Screening estimate only. This report does not determine appeal eligibility, legal outcome, exemption status or guaranteed savings.", { size: 8.5, color: muted, leading: 12 });
+    rule();
+  }
 
   if (net) {
     text("SELLER NET SHEET ESTIMATE", { size: 8, font: bold, color: teal, leading: 12 });
@@ -213,6 +268,20 @@ async function buildPdf(version: ReportVersion) {
     y -= 4;
     text("Tax context: the recorded annual property tax shown above is a property snapshot, not a prediction of the buyer's future tax bill. Buyer taxes can change after sale, reassessment, exemption changes or municipal updates.", { size: 8.5, color: muted, leading: 12 });
     text(net.disclaimer || "Estimate only. Confirm all closing figures with the applicable professionals and county recording office.", { size: 8.5, color: muted, leading: 12 });
+    rule();
+  }
+
+  if (municipal) {
+    text("MUNICIPALITY TAX CONTEXT", { size: 8, font: bold, color: teal, leading: 12 });
+    if (municipal.status === "available") {
+      keyValue("Recorded annual property tax", money(municipal.property_annual_tax));
+      keyValue("2026 municipal median annual tax", money(municipal.median_annual_tax));
+      keyValue("Difference vs municipal median", money(municipal.delta_amount), true);
+      if (finite(municipal.delta_fraction) != null) keyValue("Difference vs municipal median (%)", percentFraction(municipal.delta_fraction));
+    } else {
+      text("No governed 2026 municipal median annual-tax value was available for this property. Watchdog did not substitute a proxy.", { size: 8.5, color: muted, leading: 12 });
+    }
+    text(municipal.disclaimer || "Descriptive municipality context only. This is not a forecast of a future buyer tax bill.", { size: 8.5, color: muted, leading: 12 });
     rule();
   }
 
@@ -232,7 +301,7 @@ async function buildPdf(version: ReportVersion) {
   }
 
   rule(10);
-  text("Watchdog reports are point-in-time informational snapshots. Public records and derived analytics can change after publication. Seller net figures are estimates from stated inputs and are not legal, tax, lending, title or closing advice.", { size: 7.5, color: muted, leading: 10 });
+  text("Watchdog reports are point-in-time informational snapshots. Public records and derived analytics can change after publication. Homeowner tax-position figures are screening estimates, and seller net figures are estimates from stated inputs. They are not legal, tax, lending, title or closing advice.", { size: 7.5, color: muted, leading: 10 });
 
   const pages = pdf.getPages();
   pages.forEach((p, i) => {
@@ -241,6 +310,251 @@ async function buildPdf(version: ReportVersion) {
   });
 
   return pdf.save();
+}
+
+async function getPlan(userClient: any) {
+  const { data, error } = await userClient.rpc("get_my_entitlement");
+  if (error) throw new Error("Entitlement resolver unavailable");
+  const row = Array.isArray(data) ? data[0] : data;
+  return clean(row?.plan_tier || "standard", 30);
+}
+
+async function getOwnedProperty(userClient: any, pin: string) {
+  const { data, error } = await userClient
+    .from("saved_properties")
+    .select("pams_pin,address,town,county,block,lot,assessed,last_year_tax,effective_rate,watchdog_value,updated_at")
+    .eq("pams_pin", pin)
+    .maybeSingle();
+  if (error) throw error;
+  return data || null;
+}
+
+async function officialChapter123(url: string, pin: string) {
+  const district = districtCode(pin);
+  if (!/^\d{4}$/.test(district)) return null;
+  const response = await fetch(`${url}/functions/v1/chapter123-provider`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({ districts: [district] })
+  });
+  if (!response.ok) throw new Error("Official Chapter 123 provider unavailable");
+  const payload = await response.json();
+  if (
+    payload?.source_id !== CHAPTER123_SOURCE_ID ||
+    payload?.provider_version !== CHAPTER123_PROVIDER_VERSION ||
+    Number(payload?.district_count) !== 564 ||
+    Number(payload?.county_count) !== 21
+  ) throw new Error("Official Chapter 123 provider validation failed");
+  const row = payload?.districts?.[district] || null;
+  return row ? {
+    district,
+    row,
+    source_url: clean(payload?.source_url, 500),
+    source_observed_at: clean(payload?.source_observed_at, 80),
+    provider_version: payload?.provider_version
+  } : null;
+}
+
+async function homeownerEvidence(req: Request, url: string, anon: string, admin: any, userClient: any, user: any, jwt: string, property: any) {
+  const pin = clean(property?.pams_pin, 80);
+  const refreshStartedAt = new Date(Date.now() - 2000).toISOString();
+  const scoreResponse = await fetch(`${url}/functions/v1/workbench-score`, {
+    method: "POST",
+    headers: { authorization: `Bearer ${jwt}`, apikey: anon, "content-type": "application/json" },
+    body: JSON.stringify({ pams_pins: [pin] })
+  });
+  if (!scoreResponse.ok) {
+    const detail = await scoreResponse.text().catch(() => "");
+    console.error("NJW-62 score refresh failed", scoreResponse.status, detail.slice(0, 400));
+    throw new Error("Watchdog Score evidence refresh unavailable");
+  }
+  const scorePayload = await scoreResponse.json();
+  if (scorePayload?.framework !== "ROBUST" || scorePayload?.model_version !== ROBUST_MODEL) {
+    throw new Error("Watchdog Score evidence validation failed");
+  }
+
+  const chapter = await officialChapter123(url, pin);
+  const { data: observation, error: obsError } = await admin
+    .from("score_observations")
+    .select("score,model_version,evidence_coverage,inputs,formula,observed_at")
+    .eq("user_id", user.id)
+    .eq("pams_pin", pin)
+    .eq("marker_id", ROBUST_SCORE_ID)
+    .gte("observed_at", refreshStartedAt)
+    .order("observed_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (obsError) throw obsError;
+
+  const score = finite(scorePayload?.markers?.[pin]?.[ROBUST_SCORE_ID]);
+  const obsScore = finite(observation?.score);
+  const modelValid = observation?.model_version === ROBUST_MODEL;
+  const inputs = modelValid && observation?.inputs && typeof observation.inputs === "object" ? observation.inputs : {};
+  const anchorInput = inputs?.chapter123 && typeof inputs.chapter123 === "object" ? inputs.chapter123 : {};
+  const independent = finite(anchorInput?.indep);
+  const assessed = finite(property?.assessed);
+  const annualTax = finite(property?.last_year_tax);
+  const officialRatio = finite(chapter?.row?.ratio);
+  const officialLower = finite(chapter?.row?.lower);
+  const officialUpper = finite(chapter?.row?.upper);
+
+  let upperSupported: number | null = null;
+  let gapAmount: number | null = null;
+  let gapFraction: number | null = null;
+  let fairAssessment: number | null = null;
+  let annualDollarsAtStake: number | null = null;
+  if (independent != null && independent > 0 && assessed != null && assessed > 0 && officialRatio != null && officialUpper != null) {
+    upperSupported = independent * (officialUpper / 100);
+    gapAmount = Math.max(0, assessed - upperSupported);
+    gapFraction = gapAmount / assessed;
+    fairAssessment = independent * (officialRatio / 100);
+    if (annualTax != null && annualTax >= 0) {
+      annualDollarsAtStake = Math.max(0, assessed - fairAssessment) * (annualTax / assessed);
+    }
+  }
+
+  const now = new Date().toISOString();
+  const complete = score != null && obsScore != null && modelValid && independent != null && chapter != null && assessed != null && officialRatio != null && officialUpper != null;
+  const homeowner = {
+    status: complete ? "available" : "dependency_missing",
+    pams_pin: pin,
+    assessment: assessed,
+    recorded_annual_tax: annualTax,
+    watchdog_score: score ?? obsScore,
+    watchdog_score_model: ROBUST_MODEL,
+    watchdog_score_evidence_coverage: finite(observation?.evidence_coverage),
+    watchdog_score_confidence: inputs?.confidence || null,
+    watchdog_score_verdict: inputs?.verdict || null,
+    chapter123: {
+      status: chapter && independent != null && assessed != null ? "available" : "dependency_missing",
+      tax_year: 2026,
+      district: chapter?.district || districtCode(pin),
+      municipality: chapter?.row?.municipality || property?.town || null,
+      county: chapter?.row?.county || property?.county || null,
+      official_ratio_pct: officialRatio,
+      official_lower_pct: officialLower,
+      official_upper_pct: officialUpper,
+      official_amended_by_tax_court: chapter?.row?.amended_by_tax_court === true,
+      independent_value_anchor: independent,
+      independent_value_basis: anchorInput?.basis || null,
+      independent_value_source: anchorInput?.independent_source || null,
+      subject_evidence: anchorInput?.subject_evidence || null,
+      upper_supported_assessment: upperSupported == null ? null : Math.round(upperSupported),
+      gap_amount: gapAmount == null ? null : Math.round(gapAmount),
+      gap_fraction: gapFraction,
+      source_id: CHAPTER123_SOURCE_ID,
+      provider_version: CHAPTER123_PROVIDER_VERSION,
+      source_url: chapter?.source_url || null,
+      source_observed_at: chapter?.source_observed_at || null
+    },
+    appeal_economics: {
+      status: annualDollarsAtStake == null ? "dependency_missing" : "available",
+      fair_assessment_at_official_ratio: fairAssessment == null ? null : Math.round(fairAssessment),
+      annual_dollars_at_stake: annualDollarsAtStake == null ? null : Math.round(annualDollarsAtStake),
+      formula_version: HOMEOWNER_CALC_VERSION,
+      formula: "max(0, recorded assessment - independent value anchor × official Chapter 123 common ratio) × recorded annual tax / recorded assessment",
+      guaranteed_savings: false,
+      eligibility_determination: false
+    },
+    refreshed_at: now,
+    disclaimer: "Screening estimate only. Watchdog does not determine appeal eligibility, legal outcome, exemption status or guaranteed savings. Confirm any appeal strategy and filing requirements with the appropriate New Jersey professionals and public authorities."
+  };
+
+  const manifest: Array<Record<string, unknown>> = [
+    evidenceSource(ROBUST_SCORE_ID, "Watchdog Score powered by the ROBUST Framework", "/property/marker?id=watchdog.watchdog_score", now, { model_version: ROBUST_MODEL }),
+    evidenceSource("watchdog.chapter123_upper_bound", "NJ Division of Taxation 2026 Chapter 123 common level range", chapter?.source_url || "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf", chapter?.source_observed_at || now, { source_id: CHAPTER123_SOURCE_ID, provider_version: CHAPTER123_PROVIDER_VERSION }),
+    evidenceSource("watchdog.appeal_opportunity_index", "Watchdog governed homeowner tax-position screening calculation over current ROBUST independent-value evidence and official 2026 Chapter 123", "/property/marker?id=watchdog.appeal_opportunity_index", now, { calculation_version: HOMEOWNER_CALC_VERSION })
+  ];
+  if (anchorInput?.independent_source === "nj_sr1a_subject_living_space") {
+    manifest.push(evidenceSource("watchdog.independent_value_anchor", "NJ Division of Taxation SR-1A verified sales evidence used by ROBUST", "/property/marker?id=watchdog.watchdog_score", observation?.observed_at || now, { basis: anchorInput?.basis || null }));
+  } else if (independent != null) {
+    manifest.push(evidenceSource("watchdog.independent_value_anchor", "Governed independent value anchor saved with the current Watchdog property evidence", "/property/marker?id=watchdog.watchdog_score", observation?.observed_at || now, { basis: anchorInput?.basis || null, independent_source: anchorInput?.independent_source || null }));
+  }
+
+  return { homeowner_one_pager: homeowner, source_manifest: manifest };
+}
+
+async function municipalityTaxEvidence(property: any) {
+  const district = districtCode(property?.pams_pin);
+  const now = new Date().toISOString();
+  if (!/^\d{4}$/.test(district)) {
+    return {
+      municipality_tax_context: {
+        status: "source_checked_no_value",
+        district: null,
+        municipality: property?.town || null,
+        county: property?.county || null,
+        property_annual_tax: finite(property?.last_year_tax),
+        median_annual_tax: null,
+        delta_amount: null,
+        delta_fraction: null,
+        buyer_tax_prediction: false,
+        disclaimer: "Descriptive municipality context only. No governed municipal median was available, so Watchdog did not substitute a proxy or forecast a future buyer tax bill."
+      },
+      source_manifest: []
+    };
+  }
+
+  const response = await fetch(MODIV_SNAPSHOT_URL, { headers: { accept: "application/json" } });
+  if (!response.ok) throw new Error("Governed 2026 MOD-IV municipal snapshot unavailable");
+  const root = await response.json();
+  if (root?.source_id !== MODIV_SOURCE_ID || !root?.municipalities || typeof root.municipalities !== "object") {
+    throw new Error("Governed 2026 MOD-IV municipal snapshot validation failed");
+  }
+  const signal = root?.municipalities?.[district]?.signals?.median_annual_tax || null;
+  const median = finite(signal?.value);
+  const annualTax = finite(property?.last_year_tax);
+  const delta = median != null && annualTax != null ? annualTax - median : null;
+  const deltaFraction = delta != null && median != null && median > 0 ? delta / median : null;
+  const observed = clean(root?.generated_at || root?.observed_at || root?.built_at || signal?.observed_at || now, 80);
+  const available = median != null;
+  return {
+    municipality_tax_context: {
+      status: available ? "available" : "source_checked_no_value",
+      district,
+      municipality: root?.municipalities?.[district]?.municipality || root?.municipalities?.[district]?.name || property?.town || null,
+      county: root?.municipalities?.[district]?.county || property?.county || null,
+      property_annual_tax: annualTax,
+      median_annual_tax: median,
+      delta_amount: delta,
+      delta_fraction: deltaFraction,
+      source_id: MODIV_SOURCE_ID,
+      signal_id: "median_annual_tax",
+      source_url: MODIV_SNAPSHOT_URL,
+      source_observed_at: observed,
+      buyer_tax_prediction: false,
+      disclaimer: available
+        ? "Descriptive municipality context from the governed 2026 MOD-IV municipal median annual-tax signal. This is not a forecast of a future buyer tax bill and does not determine exemption or legal eligibility."
+        : "The governed 2026 MOD-IV source was checked but did not publish a usable municipal median annual-tax value for this property. Watchdog did not substitute a proxy."
+    },
+    source_manifest: [
+      evidenceSource("modiv_intel.median_annual_tax", "Watchdog governed 2026 MOD-IV municipal annual-tax median (Treasury/MOD-IV source contract)", MODIV_SNAPSHOT_URL, observed, { source_id: MODIV_SOURCE_ID, value_status: available ? "available" : "source_checked_no_value" })
+    ]
+  };
+}
+
+async function evidenceAction(req: Request, body: any, url: string, anon: string, admin: any, userClient: any, user: any, jwt: string) {
+  const purpose = clean(body?.purpose, 60);
+  const pin = clean(body?.pams_pin, 80);
+  if (!pin) return json(req, { error: "Saved property required" }, 400);
+  const plan = await getPlan(userClient);
+  if (purpose === "homeowner_one_pager") {
+    if (planRank(plan) < 1) return json(req, { error: "Agent plan required" }, 403);
+  } else if (purpose === "seller_net_sheet") {
+    if (planRank(plan) < 2) return json(req, { error: "Pro plan required" }, 403);
+  } else {
+    return json(req, { error: "Unsupported evidence request" }, 400);
+  }
+
+  const property = await getOwnedProperty(userClient, pin);
+  if (!property) return json(req, { error: "Saved property not found" }, 404);
+
+  if (purpose === "homeowner_one_pager") {
+    const result = await homeownerEvidence(req, url, anon, admin, userClient, user, jwt, property);
+    return json(req, { ...result, plan_tier: plan });
+  }
+  const result = await municipalityTaxEvidence(property);
+  return json(req, { ...result, plan_tier: plan });
 }
 
 Deno.serve(async (req) => {
@@ -296,6 +610,10 @@ Deno.serve(async (req) => {
     if (!user) return json(req, { error: "Authentication required" }, 401);
 
     const body = await req.json();
+    if (body?.action === "evidence") {
+      return await evidenceAction(req, body, url, anon, admin, userClient, user, jwt);
+    }
+
     const { data: v } = await userClient
       .from("professional_report_versions")
       .select("id,report_id,version_no,version_number,content,source_manifest,created_at")
