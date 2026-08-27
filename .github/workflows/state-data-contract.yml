@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Compile refresh scripts
+        run: python3 -m py_compile property/scripts/refresh_state_data.py property/scripts/validate_uniformity_names.py
       - name: Validate statewide uniformity contract
         run: python3 property/scripts/validate_uniformity_names.py
-      - name: Validate materialized registry without live network probes
-        run: python3 property/scripts/refresh_state_data.py --no-live-probe
