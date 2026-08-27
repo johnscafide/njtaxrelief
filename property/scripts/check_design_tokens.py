@@ -145,6 +145,27 @@ MIGRATED_CANONICAL_FILES = {
             "border: 2px solid #b8972a",
         },
     },
+    pathlib.Path("property/css/farm-showcase.css"): {
+        "required": {
+            "var(--font-ui)",
+            "var(--text-muted)",
+            "var(--surface-soft)",
+            "var(--border)",
+            "var(--shadow-md)",
+            "var(--radius-lg)",
+            "var(--radius-xl)",
+            "@media(max-width:1024px)",
+            "@media(max-width:768px)",
+        },
+        "forbidden": {
+            "Source Sans 3",
+            "@media(max-width:1100px)",
+            "@media(max-width:760px)",
+            "border-radius:22px",
+            "border-radius:20px",
+            "box-shadow:0 18px 42px",
+        },
+    },
 }
 MIGRATED_CANONICAL_JS = {
     pathlib.Path("property/js/landing-compare-table.js"): {
