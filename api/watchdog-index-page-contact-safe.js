@@ -60,7 +60,8 @@ function isAiReferralPublicPath(pathname) {
 }
 
 function privateRouteRevision() {
-  return String(process.env.VERCEL_GIT_COMMIT_SHA || process.env.VERCEL_URL || 'private-app');
+  const deploy = String(process.env.VERCEL_GIT_COMMIT_SHA || process.env.VERCEL_URL || 'private-app');
+  return `${deploy}-${Date.now().toString(36)}`;
 }
 
 function looksLikeVercelAuth(body) {
@@ -202,6 +203,7 @@ module.exports = async function handler(req, res) {
         'x-watchdog-internal-route': 'canonical-contact-policy',
         ...(isPrivateAppPath(publicPath) ? { 'cache-control': 'no-cache', pragma: 'no-cache' } : {})
       },
+      cache: isPrivateAppPath(publicPath) ? 'no-store' : 'default',
       redirect: 'follow'
     });
     const body = await upstream.text();
