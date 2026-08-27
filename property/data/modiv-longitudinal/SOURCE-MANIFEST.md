@@ -1,6 +1,7 @@
 # NJ MOD-IV longitudinal source contract
 
 Captured: 2026-08-21
+Updated: 2026-08-27
 
 ## Authoritative source
 
@@ -43,7 +44,7 @@ Watchdog does not automatically bridge a parcel renumbering/subdivision from `OL
 
 ## Safe marker semantics
 
-These seven catalog markers have deterministic source semantics once the partitioned production artifact is built and certified:
+These eight catalog markers now have deterministic source or governed-derived semantics over the certified partitioned production artifact:
 
 1. `njplus.nj-dca-modiv-longitudinal.assessment_history_depth`
    - count of annual Treasury tax-list records found for the exact parcel identity;
@@ -58,19 +59,26 @@ These seven catalog markers have deterministic source semantics once the partiti
 6. `njplus.nj-dca-modiv-longitudinal.exemption_code_history`
    - year-keyed list of the non-blank `EXEMPTION-CODE(1..4)` values;
 7. `njplus.nj-dca-modiv-longitudinal.assessment_record_years`
-   - ascending list of authoritative annual archive years in which the exact parcel identity occurs.
+   - ascending list of authoritative annual archive years in which the exact parcel identity occurs;
+8. `njplus.nj-dca-modiv-longitudinal.parcel_record_change_count`
+   - governed `history_metric` calculation version `watchdog-modiv-record-change-v1`;
+   - counts a consecutive observed annual transition once when **any** retained safe field changes across Land Value, Improvement Value, Net Value, Property Class, or the Exemption Code list;
+   - source-year gaps are never compared or treated as unchanged;
+   - if there is no fully checked consecutive transition, the provider returns no value rather than a synthetic zero;
+   - a zero is valid only after at least one consecutive transition has been fully checked.
 
 A published zero remains zero. An absent parcel/year remains absent; it is never synthesized as zero. History objects are ordered by year in the provider response.
 
+The record-change definition was authenticated-canary certified on 2026-08-27 against parcel `0101_25.01_10`: six certified annual records (2021–2026), five consecutive transitions, all retained fields unchanged, exact result `0`, `provider_kind=derived_governed`.
+
 ## Markers deliberately not certified by this contract
 
-These three remain PLANNED unless a later source contract establishes their exact semantics:
+These two remain PLANNED unless a separate official Added/Omitted Assessment List source is acquired and governed:
 
 - `njplus.nj-dca-modiv-longitudinal.added_assessment_history`
 - `njplus.nj-dca-modiv-longitudinal.omitted_assessment_history`
-- `njplus.nj-dca-modiv-longitudinal.parcel_record_change_count`
 
-The standard 700-character annual Property Assessment List layout does not expose a dedicated added-assessment or omitted-assessment history field. The MOD-IV Handbook describes added/omitted processing as separate list types, so Watchdog will not infer them from ordinary annual assessment movement. `parcel_record_change_count` is also withheld until the exact set of fields constituting a countable record change is formally versioned.
+The standard 700-character annual Property Assessment List layout does not expose dedicated added-assessment or omitted-assessment history fields. The MOD-IV Handbook describes Added, Omitted, Prior Year Added, Omitted-Added, and related processing as separate list/master-file types. The public NJ Division of Taxation statistical-information index currently publishes the ordinary annual Property Assessment List downloads, not a statewide Added/Omitted Assessment List dataset. Watchdog therefore does not infer added/omitted history from ordinary annual assessment movement.
 
 ## Production storage design
 
@@ -87,6 +95,6 @@ No catalog marker becomes LIVE because this manifest, parser, bucket, or build p
 3. production private-storage publication;
 4. authenticated `workbench-hydrate` canary on at least one multi-year parcel;
 5. missing-year semantics canary;
-6. `provider_kind=authoritative_reference` for source-normalized history fields;
+6. source-normalized fields use `provider_kind=authoritative_reference`; governed calculations use an explicit versioned `derived_governed` contract;
 7. provider-coverage migration;
 8. Phase 5 governance regeneration from current production truth.
