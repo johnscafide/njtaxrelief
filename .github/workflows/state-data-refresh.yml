@@ -2,6 +2,8 @@ name: NJ state data refresh
 on:
   workflow_dispatch:
   schedule:
+    # Monthly source-health/materialization pass. The Dec 1 run is the required
+    # pre-tax-season refresh checkpoint; later runs keep source drift visible.
     - cron: "17 10 1 * *"
 permissions:
   contents: write
@@ -15,6 +17,8 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Refresh and validate datasets
         run: python3 property/scripts/refresh_state_data.py --refresh --write-version || echo "refresh_failed=1" >> "$GITHUB_ENV"
+      - name: Validate statewide uniformity contract
+        run: python3 property/scripts/validate_uniformity_names.py || echo "refresh_failed=1" >> "$GITHUB_ENV"
       - name: Preserve validation report
         uses: actions/upload-artifact@v4
         with:
@@ -35,4 +39,4 @@ jobs:
           git add property/data property/uniformity.json property/appeals.json property/tax-rates.json property/sr1a-ratios.json property/sales-*.json
           git commit -m "data: refresh NJ state datasets"
           git push origin "$branch"
-          gh pr create --title "Data: NJ state refresh" --body "Automated refresh with coverage and freshness report. Review before merging." --base main --head "$branch"
+          gh pr create --title "Data: NJ state refresh" --body "Automated refresh with coverage, statewide uniformity-contract validation, and freshness evidence. Review before merging." --base main --head "$branch"
