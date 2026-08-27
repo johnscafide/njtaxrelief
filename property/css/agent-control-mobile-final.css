@@ -1,6 +1,7 @@
 /* Watchdog mobile certification — Agent Control final form/transient pass.
    Mobile/tablet only; desktop behavior and data flows remain unchanged. */
-@media (max-width:760px){
+@import url("/property/css/shared/00-design-tokens.css");
+@media (max-width:768px){
   html body.wdx-modern .ad-discover{
     padding:16px!important;
   }
@@ -11,18 +12,18 @@
   html body.wdx-modern .ad-discover header span,
   html body.wdx-modern .ad-list-head span,
   html body.wdx-modern .ad-side>section>span{
-    font-size:12px!important;
+    font-size:var(--type-xs)!important;
     line-height:1.25!important;
   }
   html body.wdx-modern .ad-discover h2,
   html body.wdx-modern .ad-side h3{
-    font-size:18px!important;
+    font-size:var(--type-lg)!important;
     line-height:1.3!important;
   }
   html body.wdx-modern .ad-discover header p,
   html body.wdx-modern .ad-side p,
   html body.wdx-modern .ad-boundary p{
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.5!important;
   }
   html body.wdx-modern .ad-discover header>button,
@@ -32,7 +33,7 @@
   html body.wdx-modern #ad-import-side{
     min-height:48px!important;
     padding:8px 14px!important;
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.25!important;
     touch-action:manipulation;
   }
@@ -43,7 +44,7 @@
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
     gap:12px!important;
     padding:14px!important;
-    border-radius:12px!important;
+    border-radius:var(--radius-md)!important;
     min-width:0;
   }
   html body.wdx-modern :is(.ad-list-form,#ad-territory-form)[hidden]{display:none!important}
@@ -51,7 +52,7 @@
     display:grid!important;
     gap:6px!important;
     min-width:0;
-    font-size:13px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.35!important;
     font-weight:700!important;
   }
@@ -61,13 +62,13 @@
     min-height:48px!important;
     height:48px!important;
     padding:0 12px!important;
-    font-size:16px!important;
+    font-size:var(--type-md)!important;
     line-height:1.25!important;
   }
   html body.wdx-modern :is(.ad-list-form,#ad-territory-form) button{
     min-height:48px!important;
     padding:8px 14px!important;
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.25!important;
     touch-action:manipulation;
   }
@@ -84,14 +85,14 @@
   }
   html body.wdx-modern .ad-quick-plays b,
   html body.wdx-modern .ad-dynamic-card>div:nth-child(2)>b{
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.3!important;
   }
   html body.wdx-modern .ad-quick-plays small,
   html body.wdx-modern .ad-dynamic-card>div:nth-child(2)>span,
   html body.wdx-modern .ad-dynamic-card>div:nth-child(2)>small,
   html body.wdx-modern .ad-dynamic-count span{
-    font-size:12px!important;
+    font-size:var(--type-xs)!important;
     line-height:1.4!important;
   }
   html body.wdx-modern .ad-dynamic-card{
@@ -104,7 +105,7 @@
     flex:0 0 44px!important;
   }
   html body.wdx-modern .ad-dynamic-count b{
-    font-size:18px!important;
+    font-size:var(--type-lg)!important;
   }
 
   /* Weekly digest is an interactive preference, not small-print. */
@@ -116,7 +117,7 @@
     display:flex!important;
     align-items:center!important;
     gap:10px!important;
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.35!important;
     cursor:pointer;
     touch-action:manipulation;
@@ -131,7 +132,7 @@
   html body.wdx-modern .ad-control-loading,
   html body.wdx-modern .ad-list-head small,
   html body.wdx-modern .ad-gate p{
-    font-size:13px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.45!important;
   }
   html body.wdx-modern .ad-control-loading{
@@ -147,7 +148,7 @@
     padding:22px 18px!important;
   }
   html body.wdx-modern .ad-gate h2{
-    font-size:22px!important;
+    font-size:var(--type-xl)!important;
     line-height:1.2!important;
   }
   html body.wdx-modern .ad-gate a{
@@ -156,7 +157,7 @@
     align-items:center!important;
     justify-content:center!important;
     padding:8px 16px!important;
-    font-size:15px!important;
+    font-size:var(--type-md)!important;
     line-height:1.25!important;
     touch-action:manipulation;
   }
@@ -168,7 +169,7 @@
     max-width:none!important;
     min-height:44px;
     padding:12px 14px!important;
-    font-size:14px!important;
+    font-size:var(--type-sm)!important;
     line-height:1.4!important;
     overflow-wrap:anywhere;
   }
@@ -179,7 +180,7 @@
   }
 }
 
-@media (max-width:420px){
+@media (max-width:480px){
   html body.wdx-modern :is(.ad-list-form,#ad-territory-form){
     grid-template-columns:minmax(0,1fr)!important;
   }
