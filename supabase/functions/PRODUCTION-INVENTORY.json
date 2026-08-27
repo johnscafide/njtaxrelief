@@ -1,59 +1,319 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-21T00:03:00Z",
+  "captured_at": "2026-08-27T19:20:34.416Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
-    "agent-opportunity-digest": {"version": 15, "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f", "verify_jwt": true, "tracking": "source_snapshot"},
-    "backoffice-api": {"version": 8, "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "backoffice-dev-login": {"version": 5, "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "backoffice-lead-ingest": {"version": 4, "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "backoffice-recover": {"version": 4, "sha256": "585b06cb36319483b52a2fc94767c6d5c2ee167346a5192029d92095a13f4441", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "bulk-marker-hydrate": {"version": 7, "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "chapter123-provider": {"version": 3, "sha256": "7a4d95e3a3584651ff2cafbf20977b20af79af4f70893f1e1db4915d083af8df", "verify_jwt": false, "tracking": "source_snapshot"},
-    "create-checkout-session": {"version": 31, "sha256": "a5ec53482b67b72b86ee6d0e7bcafdd707e3910a6971dfcffb7b4dcf197ebb7b", "verify_jwt": true, "tracking": "source_snapshot"},
-    "create-portal-session": {"version": 19, "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c", "verify_jwt": true, "tracking": "source_snapshot"},
-    "developer-sandbox-bootstrap": {"version": 5, "sha256": "5a7b06e2ed537ebe1071827e8d9dd168f1a426d5bfe28909f03420f4fe4de6ac", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "farm-intelligence-scan": {"version": 8, "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "farm-map-query": {"version": 7, "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad6d64e38253ab04e5f9c", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "get-platform-health": {"version": 14, "sha256": "9f81718f21f0ecb67caf27708159022c9078338e6ba3eae4bbd8e2859ec9c678", "verify_jwt": true, "tracking": "source_snapshot"},
-    "google-ads-oauth-callback": {"version": 7, "sha256": "e984943f469e170b8451d2a4ad054bf32dd5a3c977a0084506dd44a16e65bba7", "verify_jwt": false, "tracking": "source_snapshot"},
-    "google-ads-oauth-start": {"version": 7, "sha256": "e8179bf79f122b270b43e1e5ca7e5245264922bba17741e635f1e9d167ba7e0e", "verify_jwt": true, "tracking": "source_snapshot"},
-    "insights-publish": {"version": 19, "sha256": "cb5036e8c019bbf5392374a317624c5e548e3c068abec4c53d6f2b380561584a", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "marketing-audience-map": {"version": 7, "sha256": "79086be8bbb35f27cd2045edc0d9b551a609693b3fc94640c70009ba53240011", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "marketing-campaign-checkout": {"version": 11, "sha256": "34a6222741063cb5b3260a15aa87384fe0b64a02946cb2dc4dc6f2b79e996739", "verify_jwt": true, "tracking": "source_snapshot"},
-    "marketing-direct-mail-fulfill": {"version": 5, "sha256": "de05488d226e2363ba69e236e0175b2cda5924238b14000fda1e7a846c9bee0d", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "marketing-direct-mail-launch": {"version": 7, "sha256": "5cd7b53517c0583f486e996773d3ae1deb51f9ea382069b51239e601ec55985d", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "marketing-provider-status": {"version": 12, "sha256": "6c56a2b3cfb4d5fb22ad20544603fb0f9c30d5a5620b7576e91402177fd4f9ef", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "marketing-track": {"version": 6, "sha256": "0d4f077a2226f2d63019eb54e80a1f7e626a122231c869e269505b352a5ba8c8", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "materialize-dynamic-list": {"version": 6, "sha256": "158d039fdf7ab51bfcad7e3e65e4c29e8014300c3361a3688195d9cb7ae79bf2", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "municipal-data": {"version": 17, "sha256": "c7bcd7f48e2a9efd219f1fe759afe3cc7a5c6f6c719626ad67ace7b70229901d", "verify_jwt": true, "tracking": "source_snapshot"},
-    "paddle-webhook": {"version": 20, "sha256": "a7104ab0b0c8d8aa0ada6c2fbbc8cc7b90b606f48c61c8b4d02712fb8435fdc8", "verify_jwt": false, "tracking": "source_snapshot"},
-    "pcm-direct-mail": {"version": 8, "sha256": "b84463b51cf039fd4d7838981f4ce57861a745902b2d06c877cba1160eeb03e0", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "pcm-sandbox-catalog": {"version": 9, "sha256": "caa1523910a3b4225516b4970b95cb5286e606d025cf0f3dc36c9ef23311e22d", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "pcm-sandbox-certify": {"version": 5, "sha256": "58a3c4aa9dd96de55fdef54c488260a96e50746fadb90fdc6fb2f5bb156bb14f", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "pcm-sandbox-status": {"version": 4, "sha256": "62ddcef14022b7cd18a589fb1652df3664ae0c59ed7887aab1296ea17a7d5e5f", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "pcm-webhook": {"version": 5, "sha256": "aeb58a90a1ef1ea87ec71e3e1ae244892c196eeea808c6291253b92360b29a6a", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "product-analytics": {"version": 7, "sha256": "124c95d20cde84bebc386a98ca50aaedb2e551ed4f0a44611c8f26dac3156e8e", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "production-api": {"version": 12, "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "provider-release-canary": {"version": 12, "sha256": "42f27b96bd35c69cd84d2fceaacdcde1eb7dd88d12deca15176015e4351f5f77", "verify_jwt": false, "tracking": "source_snapshot"},
-    "public-report-share": {"version": 7, "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "report-platform-event": {"version": 13, "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068", "verify_jwt": true, "tracking": "source_snapshot"},
-    "report-share": {"version": 13, "sha256": "b7bc4f9b345c4fb5486e333b7fa4726be3e524ac2039670ccbd44fea9b249118", "verify_jwt": false, "tracking": "source_snapshot"},
-    "request-verify-code": {"version": 26, "sha256": "ab54292e3ef495676b7b496bece829bab73d0f60d9fd3e0979da90b306e8ecf6", "verify_jwt": true, "tracking": "source_snapshot"},
-    "source-monitor-ingest": {"version": 20, "sha256": "660e65e0756e726539184cba2f90f29dffb96f6cdcd370476c56a74a2265465a", "verify_jwt": true, "tracking": "source_snapshot"},
-    "sr1a-subject-indexer": {"version": 2, "sha256": "de7243612d0d5051a86cc618bea8b6f2d0705a05f1311ddc6d87abf7a53e729f", "verify_jwt": false, "tracking": "source_snapshot"},
-    "sr1a-subject-provider": {"version": 1, "sha256": "1b326eee20de1c8f7c194edb0f86d33eb74bf88e8c5c54f687691ff04ecc4448", "verify_jwt": false, "tracking": "source_snapshot"},
-    "stripe-webhook": {"version": 22, "sha256": "dfe592aba78aa823fefcbba6546d21af7bd84d33a7ed979430274b99fefc9c28", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "verify-email": {"version": 29, "sha256": "e0d30c008ea637f3d025f93fee83db14cb58466d7e08b2c0a13a5fbf9daa21a6", "verify_jwt": true, "tracking": "existing_or_external"},
-    "watchdog-automation": {"version": 12, "sha256": "872067bee87d864718c5b04721fa3ff59a6a6678aeee729b67ef8a6220317e67", "verify_jwt": false, "tracking": "source_snapshot"},
-    "watchdog-test-auth": {"version": 5, "sha256": "88a47c2385911155999caac45339714d195c7000f11ccd455924e71e08e99c0b", "verify_jwt": false, "tracking": "fingerprint_only"},
-    "intelligence-closing-holdout-seed": {"version": 2, "sha256": "718a4da2fce21689cd32f8680e3bd7dbfaf858f87f906ef3d20e5f00d58ed8ee", "verify_jwt": true, "tracking": "source_snapshot"},
-    "intelligence-source-fact-watch": {"version": 4, "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d", "verify_jwt": false, "tracking": "source_snapshot"},
-    "workbench-baseline": {"version": 8, "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-derived": {"version": 24, "sha256": "c451686b41c2e23db4c9f0bd0e5798bdc01c2c116ba82a25defad4a9c618c715", "verify_jwt": false, "tracking": "source_snapshot"},
-    "workbench-hydrate": {"version": 32, "sha256": "4ea10b07133d503a9f916424e073b0f4fd4656368d5e7d21d2c6c49b3b1fa44f", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-provider-registry": {"version": 14, "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa", "verify_jwt": true, "tracking": "fingerprint_only"},
-    "workbench-refresh": {"version": 8, "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b", "verify_jwt": true, "tracking": "source_snapshot"},
-    "workbench-score": {"version": 8, "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8", "verify_jwt": true, "tracking": "fingerprint_only"}
+    "agent-opportunity-digest": {
+      "version": 15,
+      "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "backoffice-api": {
+      "version": 8,
+      "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "backoffice-dev-login": {
+      "version": 5,
+      "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "backoffice-lead-ingest": {
+      "version": 4,
+      "sha256": "2e9cf22f89cf9bdd7559b7d1d4ac1ad293a462dbad32c8a1497e8635b3ebebf6",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "backoffice-recover": {
+      "version": 4,
+      "sha256": "585b06cb36319483b52a2fc94767c6d5c2ee167346a5192029d92095a13f4441",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "bulk-marker-hydrate": {
+      "version": 7,
+      "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "chapter123-provider": {
+      "version": 3,
+      "sha256": "7a4d95e3a3584651ff2cafbf20977b20af79af4f70893f1e1db4915d083af8df",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "create-checkout-session": {
+      "version": 31,
+      "sha256": "a5ec53482b67b72b86ee6d0e7bcafdd707e3910a6971dfcffb7b4dcf197ebb7b",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "create-portal-session": {
+      "version": 19,
+      "sha256": "02b91cf486c9fff21228617761b39d1cde11352cae625f7098085c6ff863015c",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "developer-sandbox-bootstrap": {
+      "version": 5,
+      "sha256": "5a7b06e2ed537ebe1071827e8d9dd168f1a426d5bfe28909f03420f4fe4de6ac",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "farm-intelligence-scan": {
+      "version": 8,
+      "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "farm-map-query": {
+      "version": 7,
+      "sha256": "60ef7f9a4b7fd0fbbfa6cf1e14f8854637ea0c94213ad6d64e38253ab04e5f9c",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "get-platform-health": {
+      "version": 14,
+      "sha256": "9f81718f21f0ecb67caf27708159022c9078338e6ba3eae4bbd8e2859ec9c678",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "google-ads-oauth-callback": {
+      "version": 7,
+      "sha256": "e984943f469e170b8451d2a4ad054bf32dd5a3c977a0084506dd44a16e65bba7",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "google-ads-oauth-start": {
+      "version": 7,
+      "sha256": "e8179bf79f122b270b43e1e5ca7e5245264922bba17741e635f1e9d167ba7e0e",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "insights-publish": {
+      "version": 19,
+      "sha256": "cb5036e8c019bbf5392374a317624c5e548e3c068abec4c53d6f2b380561584a",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "marketing-audience-map": {
+      "version": 7,
+      "sha256": "79086be8bbb35f27cd2045edc0d9b551a609693b3fc94640c70009ba53240011",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "marketing-campaign-checkout": {
+      "version": 11,
+      "sha256": "34a6222741063cb5b3260a15aa87384fe0b64a02946cb2dc4dc6f2b79e996739",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "marketing-direct-mail-fulfill": {
+      "version": 5,
+      "sha256": "de05488d226e2363ba69e236e0175b2cda5924238b14000fda1e7a846c9bee0d",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "marketing-direct-mail-launch": {
+      "version": 7,
+      "sha256": "5cd7b53517c0583f486e996773d3ae1deb51f9ea382069b51239e601ec55985d",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "marketing-provider-status": {
+      "version": 12,
+      "sha256": "6c56a2b3cfb4d5fb22ad20544603fb0f9c30d5a5620b7576e91402177fd4f9ef",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "marketing-track": {
+      "version": 6,
+      "sha256": "0d4f077a2226f2d63019eb54e80a1f7e626a122231c869e269505b352a5ba8c8",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "materialize-dynamic-list": {
+      "version": 6,
+      "sha256": "158d039fdf7ab51bfcad7e3e65e4c29e8014300c3361a3688195d9cb7ae79bf2",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "municipal-data": {
+      "version": 17,
+      "sha256": "c7bcd7f48e2a9efd219f1fe759afe3cc7a5c6f6c719626ad67ace7b70229901d",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "paddle-webhook": {
+      "version": 20,
+      "sha256": "a7104ab0b0c8d8aa0ada6c2fbbc8cc7b90b606f48c61c8b4d02712fb8435fdc8",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "pcm-direct-mail": {
+      "version": 8,
+      "sha256": "b84463b51cf039fd4d7838981f4ce57861a745902b2d06c877cba1160eeb03e0",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "pcm-sandbox-catalog": {
+      "version": 9,
+      "sha256": "caa1523910a3b4225516b4970b95cb5286e606d025cf0f3dc36c9ef23311e22d",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "pcm-sandbox-certify": {
+      "version": 5,
+      "sha256": "58a3c4aa9dd96de55fdef54c488260a96e50746fadb90fdc6fb2f5bb156bb14f",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "pcm-sandbox-status": {
+      "version": 4,
+      "sha256": "62ddcef14022b7cd18a589fb1652df3664ae0c59ed7887aab1296ea17a7d5e5f",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "pcm-webhook": {
+      "version": 5,
+      "sha256": "aeb58a90a1ef1ea87ec71e3e1ae244892c196eeea808c6291253b92360b29a6a",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "product-analytics": {
+      "version": 7,
+      "sha256": "124c95d20cde84bebc386a98ca50aaedb2e551ed4f0a44611c8f26dac3156e8e",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "production-api": {
+      "version": 12,
+      "sha256": "8ae407f9d13bdea89fda58e608552c6a2c78218b08a4c589d66edd77bc180d99",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "provider-release-canary": {
+      "version": 29,
+      "sha256": "ad1018cf9c53129c4cf56e553c0b4d700d4bcbd072cd7ceaa3929700fb5b10a6",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "public-report-share": {
+      "version": 7,
+      "sha256": "2885a1154f865aacc80b0e29b535ce7812a5330765f0ae4a42a3d161b6c113a2",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "report-platform-event": {
+      "version": 13,
+      "sha256": "e35fb708cdb675532e38e8e6778abf0d4b4921d4265be2d382f01aa3cf354068",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "report-share": {
+      "version": 13,
+      "sha256": "b7bc4f9b345c4fb5486e333b7fa4726be3e524ac2039670ccbd44fea9b249118",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "request-verify-code": {
+      "version": 26,
+      "sha256": "ab54292e3ef495676b7b496bece829bab73d0f60d9fd3e0979da90b306e8ecf6",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "source-monitor-ingest": {
+      "version": 20,
+      "sha256": "660e65e0756e726539184cba2f90f29dffb96f6cdcd370476c56a74a2265465a",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "sr1a-subject-indexer": {
+      "version": 2,
+      "sha256": "de7243612d0d5051a86cc618bea8b6f2d0705a05f1311ddc6d87abf7a53e729f",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "sr1a-subject-provider": {
+      "version": 1,
+      "sha256": "1b326eee20de1c8f7c194edb0f86d33eb74bf88e8c5c54f687691ff04ecc4448",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "stripe-webhook": {
+      "version": 22,
+      "sha256": "dfe592aba78aa823fefcbba6546d21af7bd84d33a7ed979430274b99fefc9c28",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "verify-email": {
+      "version": 29,
+      "sha256": "e0d30c008ea637f3d025f93fee83db14cb58466d7e08b2c0a13a5fbf9daa21a6",
+      "verify_jwt": true,
+      "tracking": "existing_or_external"
+    },
+    "watchdog-automation": {
+      "version": 12,
+      "sha256": "872067bee87d864718c5b04721fa3ff59a6a6678aeee729b67ef8a6220317e67",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "watchdog-test-auth": {
+      "version": 5,
+      "sha256": "88a47c2385911155999caac45339714d195c7000f11ccd455924e71e08e99c0b",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
+    "intelligence-closing-holdout-seed": {
+      "version": 2,
+      "sha256": "718a4da2fce21689cd32f8680e3bd7dbfaf858f87f906ef3d20e5f00d58ed8ee",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-source-fact-watch": {
+      "version": 4,
+      "sha256": "fa17beff119478f1b898ae52a300c79b1c1a4b8bcf7cf8604187ec00e58b1b6d",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "workbench-baseline": {
+      "version": 8,
+      "sha256": "c54ad5beb9feeeafbe26d88b9b7a0a68f922b0806c8a170dd013c268259d6408",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "workbench-derived": {
+      "version": 24,
+      "sha256": "c451686b41c2e23db4c9f0bd0e5798bdc01c2c116ba82a25defad4a9c618c715",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "workbench-hydrate": {
+      "version": 63,
+      "sha256": "67f7d9043f83f2748ee8508996c3623762c43a67116e6a177c578377e8e9fbf6",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "workbench-provider-registry": {
+      "version": 14,
+      "sha256": "2063ac4e5f6a7add051407a19a0778fbe8eeefe34ba14a1e254313225f11e4fa",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    },
+    "workbench-refresh": {
+      "version": 8,
+      "sha256": "365fbf8d484cdd62869a9655c5002aba17ed361906398db60b50727406ebd12b",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "workbench-score": {
+      "version": 8,
+      "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8",
+      "verify_jwt": true,
+      "tracking": "fingerprint_only"
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status+v036",
- "generated_at": "2026-08-27T19:20:10.245Z",
+ "generated_at": "2026-08-27T19:20:34.478Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 74.4,
   "provider_status": {
-   "live": 530,
+   "live": 540,
    "partial": 4,
    "unavailable": 12,
-   "planned": 198
+   "planned": 188
   },
   "retired_phase5": 0
  },
@@ -17293,8 +17293,10 @@
    "professional_reason": "Compare DCA's published municipal present-need calculation while preserving its non-binding legal status.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.prospective_need",
@@ -17319,8 +17321,10 @@
    "professional_reason": "Review DCA's published prospective-need calculation without treating it as a binding obligation.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.prospective_need_capped",
@@ -17345,8 +17349,10 @@
    "professional_reason": "Use the DCA-published capped calculation as a research input, not a legal conclusion.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.qualified_urban_aid",
@@ -17371,8 +17377,10 @@
    "professional_reason": "Identify the exact DCA-published Urban Aid input used in Fourth Round calculations.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.nonresidential_value_factor_pct",
@@ -17398,8 +17406,10 @@
    "professional_reason": "Inspect an exact published allocation-factor input instead of inferring development capacity.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.land_capacity_factor_pct",
@@ -17425,8 +17435,10 @@
    "professional_reason": "Review DCA's published land-capacity allocation factor without converting it into parcel zoning or buildability advice.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.income_capacity_factor_pct",
@@ -17452,8 +17464,10 @@
    "professional_reason": "Review the exact DCA-published income-capacity allocation factor.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.average_allocation_factor_pct",
@@ -17479,8 +17493,10 @@
    "professional_reason": "Expose DCA's exact combined allocation factor with source provenance.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-fourth-round-affordable.cap_1000_20pct",
@@ -17505,8 +17521,10 @@
    "professional_reason": "Compare the exact cap input used by DCA without interpreting statutory effect.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   },
   {
    "id": "njplus.nj-dca-neighborhood-trends.walking_to_work_share",
@@ -17531,8 +17549,10 @@
    "professional_reason": "Use the exact published commuting statistic rather than an invented walkability score or commute-mode mix.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v63"
   }
  ],
  "provider_summary": {

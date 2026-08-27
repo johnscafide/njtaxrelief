@@ -278,6 +278,16 @@
       "minimum_records": 50,
       "minimum_records_note": "Conservative placeholder -- this report only covers municipalities with a reported project in AHMS, not all 564. Tighten this once the first real run shows an actual count.",
       "cadence": "annual"
+    },
+    {
+      "id": "nj-dca-fourth-round-affordable",
+      "label": "NJ DCA Fourth Round 2025–2035 calculations",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlps/4th_Round_Numbers.shtml",
+      "cadence": "source change / monitored",
+      "live": true,
+      "join": "Treasury municipality code to validated 564-row DCA municipality calculation record",
+      "warning": "DCA publishes the Fourth Round calculations as non-binding guidance. Watchdog presents published values and does not make a legal determination of municipal affordable-housing obligation."
     }
   ]
 }
