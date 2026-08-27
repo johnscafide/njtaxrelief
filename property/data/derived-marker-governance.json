@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-27T21:32:07.306Z",
+  "generated_at": "2026-08-27T22:27:59.548Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -275,9 +275,9 @@
   ],
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
-    "total_derived": 298,
+    "total_derived": 310,
     "live": 132,
-    "blocked": 166,
+    "blocked": 178,
     "retired": 0,
     "untriaged": 0
   },
@@ -6776,6 +6776,318 @@
       "provider_source": null,
       "bulk_capable": true,
       "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_housing_units_authorized",
+      "label": "Five-year total: housing units authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_housing_units_authorized_delta",
+      "label": "Latest year-over-year change: housing units authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_new_housing_units_authorized",
+      "label": "Five-year total: new housing units authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_new_housing_units_authorized_delta",
+      "label": "Latest year-over-year change: new housing units authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_construction_cost_authorized",
+      "label": "Five-year total: construction cost authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_construction_cost_authorized_delta",
+      "label": "Latest year-over-year change: construction cost authorized",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_total_nonresidential_square_feet",
+      "label": "Five-year total: total nonresidential square feet",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_total_nonresidential_square_feet_delta",
+      "label": "Latest year-over-year change: total nonresidential square feet",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024) - 2023(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_demolitions",
+      "label": "Five-year total: demolitions",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_demolitions_delta",
+      "label": "Latest year-over-year change: demolitions",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.demolitions_history_2020_2024) - 2023(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.rolling_5yr_net_housing_unit_change",
+      "label": "Five-year total: net housing unit change",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "sum(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+    },
+    {
+      "marker_id": "watchdog.njplus.latest_yoy_net_housing_unit_change_delta",
+      "label": "Latest year-over-year change: net housing unit change",
+      "source_id": "watchdog-nj-source-v038",
+      "tier": "pro_plus",
+      "professions": [
+        "agent",
+        "lender",
+        "appraiser",
+        "contractor",
+        "investor",
+        "municipal"
+      ],
+      "governance_status": "blocked",
+      "provider_status_override": null,
+      "formula": "2024(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024) - 2023(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
+      "dependencies": [
+        "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
+      ],
+      "provider_key": null,
+      "provider_kind": null,
+      "calculation_key": null,
+      "provider_source": null,
+      "bulk_capable": false,
+      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
     }
   ]
 }
