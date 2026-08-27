@@ -1,0 +1,61 @@
+name: One-off v0.36 provider governance reconciliation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneoff-v036-provider-governance.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply current v0.36 production governance
+        run: node scripts/reconcile-v036-static-governance.js
+      - name: Rebuild derived governance from updated DB overlay
+        run: node scripts/build-derived-governance.js
+      - name: Verify exact v0.36 canonical state
+        run: |
+          node - <<'NODE'
+          const r=require('./property/data/marker-registry.json');
+          const ids=[
+            'njplus.nj-dca-fourth-round-affordable.present_need',
+            'njplus.nj-dca-fourth-round-affordable.prospective_need',
+            'njplus.nj-dca-fourth-round-affordable.prospective_need_capped',
+            'njplus.nj-dca-fourth-round-affordable.qualified_urban_aid',
+            'njplus.nj-dca-fourth-round-affordable.nonresidential_value_factor_pct',
+            'njplus.nj-dca-fourth-round-affordable.land_capacity_factor_pct',
+            'njplus.nj-dca-fourth-round-affordable.income_capacity_factor_pct',
+            'njplus.nj-dca-fourth-round-affordable.average_allocation_factor_pct',
+            'njplus.nj-dca-fourth-round-affordable.cap_1000_20pct',
+            'njplus.nj-dca-neighborhood-trends.walking_to_work_share'
+          ];
+          const byId=new Map((r.markers||[]).map(x=>[x.id,x]));
+          const bad=ids.filter(id=>byId.get(id)?.provider_status!=='live');
+          if(bad.length)throw new Error('v0.36 canonical markers not live: '+bad.join(', '));
+          const counted=(r.markers||[]).reduce((a,x)=>{const k=String(x.provider_status||'planned');a[k]=(a[k]||0)+1;return a;},{});
+          if(Number(counted.live)!==540||Number(counted.planned)!==188||Number(counted.partial)!==4||Number(counted.unavailable)!==12){
+            throw new Error('Unexpected canonical totals after v0.36 reconciliation: '+JSON.stringify(counted));
+          }
+          console.log({ids:ids.length,counted});
+          NODE
+      - name: Commit reconciled snapshots
+        run: |
+          if git diff --quiet -- property/data/db-governed-provider-overlay.json property/data/source-registry.json property/data/marker-registry.json property/data/derived-marker-governance.json supabase/functions/PRODUCTION-INVENTORY.json; then
+            echo 'Static governance is already current.'
+            exit 0
+          fi
+          git config user.name "Watchdog Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add property/data/db-governed-provider-overlay.json property/data/source-registry.json property/data/marker-registry.json property/data/derived-marker-governance.json supabase/functions/PRODUCTION-INVENTORY.json
+          git commit -m "[v036-governance] Reconcile certified source markers"
+          git push
