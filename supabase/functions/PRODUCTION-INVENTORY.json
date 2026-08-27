@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-27T19:32:15.301Z",
+  "captured_at": "2026-08-27T21:32:07.236Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {
@@ -196,8 +196,8 @@
       "tracking": "fingerprint_only"
     },
     "provider-release-canary": {
-      "version": 30,
-      "sha256": "fef6cd0446bcea95818c5f1938ad5d76424f404d0b5aca71d177d25bf3e2e813",
+      "version": 31,
+      "sha256": "2f023582e3614e507701e0847f86490aac6d073b0017b7ab6430d5ceaacd847f",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -292,8 +292,8 @@
       "tracking": "source_snapshot"
     },
     "workbench-hydrate": {
-      "version": 64,
-      "sha256": "babbe9df589441e2e9c6730c26389003eee0f67041c97adc6bb67fa12823a030",
+      "version": 65,
+      "sha256": "82afe85c926832b35aac796e5dd9bd306aa4277502a14438c694b04cface309b",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },

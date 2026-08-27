@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-27T19:32:15.301Z",
+  "captured_at": "2026-08-27T21:32:07.236Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -114,7 +114,38 @@
     "njplus.nj-dca-fourth-round-affordable.average_allocation_factor_pct": "live",
     "njplus.nj-dca-fourth-round-affordable.cap_1000_20pct": "live",
     "njplus.nj-dca-neighborhood-trends.walking_to_work_share": "live",
-    "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count": "live"
+    "njplus.nj-dca-modiv-longitudinal.parcel_record_change_count": "live",
+    "njplus.nj-dca-affordable-housing.reported_affordable_project_count": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_single_family": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_two_family": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_townhouse": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_apartment": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_condo": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_manufactured_home": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_mobile_home": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_type_unknown": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_very_low_income": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_affordability_level_unknown": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_special_needs": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_family": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_age_restricted": "live",
+    "njplus.nj-dca-affordable-housing.projects_with_building_permit": "live",
+    "njplus.nj-dca-affordable-housing.projects_with_certificate_of_occupancy": "live",
+    "njplus.nj-dca-affordable-housing.earliest_affordability_control_start_date": "live",
+    "njplus.nj-dca-affordable-housing.earliest_affordability_control_expiration_date": "live",
+    "njplus.nj-dca-affordable-housing.minimum_affordability_restriction_term_years": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_can_retain_nonresidential_development_fee": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_confirmed": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_no_data_submitted": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_total_income_since_inception": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_total_expenditures_since_inception": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_residential_development_fees": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_nonresidential_development_fees": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_interest_earned": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_municipal_contributions": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_homeownership_assistance": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_rental_assistance": "live",
+    "njplus.nj-dca-affordable-housing.ahtf_new_construction_expenditures": "live"
   },
   "providers": {
     "watchdog.watchdog_score": {
@@ -263,6 +294,223 @@
       "calculation_key": "watchdog-modiv-record-change-v1",
       "source": "Watchdog exact consecutive-year record transition count over NJ Division of Taxation annual MOD-IV assessment lists · treasury-modiv-2021-2026-v2",
       "bulk_capable": false
+    },
+    "njplus.nj-dca-affordable-housing.reported_affordable_project_count": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_single_family": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_two_family": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_townhouse": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_apartment": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_condo": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_manufactured_home": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_mobile_home": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_type_unknown": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_very_low_income": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_affordability_level_unknown": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_special_needs": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_family": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_age_restricted": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.projects_with_building_permit": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.projects_with_certificate_of_occupancy": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.earliest_affordability_control_start_date": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.earliest_affordability_control_expiration_date": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.minimum_affordability_restriction_term_years": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v037-municipal-aggregate",
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_can_retain_nonresidential_development_fee": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_confirmed": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_no_data_submitted": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_total_income_since_inception": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_total_expenditures_since_inception": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_residential_development_fees": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_nonresidential_development_fees": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_interest_earned": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_municipal_contributions": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_homeownership_assistance": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_rental_assistance": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.ahtf_new_construction_expenditures": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA Affordable Housing Municipal Status Report · February 2026 · dca-affordable-housing-v037-feb-2026",
+      "bulk_capable": true
     }
   }
 }

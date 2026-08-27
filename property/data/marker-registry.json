@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status+v037",
- "generated_at": "2026-08-27T21:30:57.001Z",
+ "generated_at": "2026-08-27T21:32:07.304Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 77.5,
   "provider_status": {
-   "live": 541,
+   "live": 572,
    "partial": 4,
    "unavailable": 12,
-   "planned": 218
+   "planned": 187
   },
   "retired_phase5": 0
  },
@@ -17582,8 +17582,10 @@
    "professional_reason": "Count of project rows reported by the municipality in the DCA monitoring workbook; not a comprehensive inventory of all affordable housing.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_single_family",
@@ -17610,8 +17612,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_two_family",
@@ -17638,8 +17642,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_townhouse",
@@ -17666,8 +17672,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_apartment",
@@ -17694,8 +17702,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_condo",
@@ -17722,8 +17732,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_manufactured_home",
@@ -17750,8 +17762,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_mobile_home",
@@ -17778,8 +17792,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_type_unknown",
@@ -17806,8 +17822,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_very_low_income",
@@ -17834,8 +17852,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_affordability_level_unknown",
@@ -17862,8 +17882,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_special_needs",
@@ -17890,8 +17912,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_family",
@@ -17918,8 +17942,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.affordable_units_age_restricted",
@@ -17946,8 +17972,10 @@
    "unit": "units",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.projects_with_building_permit",
@@ -17973,8 +18001,10 @@
    "professional_reason": "Count of DCA project rows with a populated building-permit date. A populated date is not a finding about current construction status.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.projects_with_certificate_of_occupancy",
@@ -18000,8 +18030,10 @@
    "professional_reason": "Count of DCA project rows where Certificate of Occupancy Granted is exactly Y.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.earliest_affordability_control_start_date",
@@ -18028,8 +18060,10 @@
    "unit": "date",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.earliest_affordability_control_expiration_date",
@@ -18056,8 +18090,10 @@
    "unit": "date",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.minimum_affordability_restriction_term_years",
@@ -18084,8 +18120,10 @@
    "unit": "years",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_can_retain_nonresidential_development_fee",
@@ -18111,8 +18149,10 @@
    "professional_reason": "Use the exact DCA-published municipal record as research context; verify the official record before reliance.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_confirmed",
@@ -18138,8 +18178,10 @@
    "professional_reason": "Use the exact DCA-published municipal record as research context; verify the official record before reliance.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_no_data_submitted",
@@ -18165,8 +18207,10 @@
    "professional_reason": "Use the exact DCA-published municipal record as research context; verify the official record before reliance.",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_total_income_since_inception",
@@ -18193,8 +18237,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_total_expenditures_since_inception",
@@ -18221,8 +18267,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_residential_development_fees",
@@ -18249,8 +18297,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_nonresidential_development_fees",
@@ -18277,8 +18327,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_interest_earned",
@@ -18305,8 +18357,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_municipal_contributions",
@@ -18333,8 +18387,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_homeownership_assistance",
@@ -18361,8 +18417,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_rental_assistance",
@@ -18389,8 +18447,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   },
   {
    "id": "njplus.nj-dca-affordable-housing.ahtf_new_construction_expenditures",
@@ -18417,8 +18477,10 @@
    "unit": "USD",
    "proprietary": false,
    "status": "cataloged",
-   "provider_status": "planned",
-   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage."
+   "provider_status": "live",
+   "status_reason": "Governed catalog definition added; live state is controlled by production data_center_provider_coverage.",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
+   "provider_contract": "workbench-hydrate-v65"
   }
  ],
  "provider_summary": {

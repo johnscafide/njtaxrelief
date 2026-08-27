@@ -288,6 +288,16 @@
       "live": true,
       "join": "Treasury municipality code to validated 564-row DCA municipality calculation record",
       "warning": "DCA publishes the Fourth Round calculations as non-binding guidance. Watchdog presents published values and does not make a legal determination of municipal affordable-housing obligation."
+    },
+    {
+      "id": "nj-dca-affordable-housing",
+      "label": "NJ DCA Affordable Housing Municipal Status Report",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
+      "cadence": "annual / source change monitored",
+      "live": true,
+      "join": "Exact 4-digit DCA municipality code to governed project-row aggregation and municipal AHTF record",
+      "warning": "Selected municipality-entered AHMS data; the DCA workbook states it is not comprehensive and is presented as-is without DCA accuracy certification. Watchdog does not infer legal compliance. HUD-subsidized units, LMI cost burden and affordable_units_pipeline remain unavailable from this workbook."
     }
   ]
 }
