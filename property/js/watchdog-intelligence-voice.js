@@ -2,6 +2,7 @@
   'use strict';
 
   const API = '/api/watchdog-intelligence-voice';
+  const USAGE_API = '/api/watchdog-intelligence-voice-browser-usage';
   const NARRATION_SRC = '/property/js/watchdog-intelligence-narration.js?v=20260823';
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -15,6 +16,7 @@
   let activeAudio = null;
   let activeAudioUrl = '';
   let narrationPromise = null;
+  let pendingVoiceQuery = null;
 
   function toast(message) {
     const node = $('#pl-toast');
@@ -57,10 +59,10 @@
     return session?.data?.session?.access_token || '';
   }
 
-  async function voiceRequest(body) {
+  async function authenticatedRequest(url, body) {
     const token = await accessToken();
     if (!token) throw new Error('Sign in is required for Voice Intelligence.');
-    const response = await fetch(API, {
+    const response = await fetch(url, {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
@@ -72,6 +74,63 @@
       throw error;
     }
     return data;
+  }
+
+  async function voiceRequest(body) {
+    return authenticatedRequest(API, body);
+  }
+
+  function normalizedQuestion(value) {
+    return String(value || '').trim().replace(/\s+/g, ' ');
+  }
+
+  function currentSurface() {
+    return $('#dwa-panel')?.dataset?.watchdogSurface || 'unknown';
+  }
+
+  function lifecycleSnapshot(pending) {
+    if (!pending) return null;
+    return {
+      model: String(pending.model || ''),
+      edited: pending.edited === true,
+      reviewedMs: Math.max(0, Number(pending.reviewedMs || 0)),
+      surface: String(pending.surface || currentSurface()),
+      submitted: pending.submitted === true,
+    };
+  }
+
+  function clearPendingVoiceQuery() {
+    pendingVoiceQuery = null;
+  }
+
+  async function reportQueryLifecycle(event, snapshot) {
+    if (!snapshot) return;
+    try {
+      await authenticatedRequest(USAGE_API, {
+        kind: 'event',
+        event,
+        model: snapshot.model,
+        metadata: {
+          edited: snapshot.edited,
+          reviewed_ms: snapshot.reviewedMs,
+          surface: snapshot.surface,
+        },
+      });
+    } catch (_) {
+      /* Evaluation telemetry must never block the governed Analyst workflow. */
+    }
+  }
+
+  function captureVoiceSubmission() {
+    const input = $('#dwa-input');
+    if (!pendingVoiceQuery || pendingVoiceQuery.submitted || !input) return;
+    const submitted = normalizedQuestion(input.value);
+    if (!submitted) return;
+    pendingVoiceQuery.submitted = true;
+    pendingVoiceQuery.edited = submitted !== pendingVoiceQuery.transcript;
+    pendingVoiceQuery.reviewedMs = Date.now() - pendingVoiceQuery.readyAt;
+    pendingVoiceQuery.surface = currentSurface();
+    void reportQueryLifecycle('query_submitted', lifecycleSnapshot(pendingVoiceQuery));
   }
 
   async function loadStatus(force) {
@@ -282,12 +341,23 @@
           const data = await voiceRequest({ action: 'transcribe', media_type: mime.split(';')[0] || mime, audio_base64: await blobToBase64(blob) });
           const input = $('#dwa-input');
           if (input) {
-            input.value = data.text || '';
+            const transcript = String(data.text || '');
+            input.value = transcript;
             input.focus();
             input.dispatchEvent(new Event('input', { bubbles: true }));
+            pendingVoiceQuery = {
+              transcript: normalizedQuestion(transcript),
+              model: String(data.model || ''),
+              readyAt: Date.now(),
+              submitted: false,
+              edited: false,
+              reviewedMs: 0,
+              surface: currentSurface(),
+            };
           }
           setVoiceStatus('Transcript ready. Review it, then choose Ask Watchdog.', 'ready');
         } catch (error) {
+          clearPendingVoiceQuery();
           setVoiceStatus(error?.message || 'Watchdog could not transcribe that recording.', 'error');
         } finally {
           button.disabled = false;
@@ -335,6 +405,16 @@
 
     row.insertBefore(button, $('#dwa-send', row));
     compose.appendChild(statusLine);
+
+    const input = $('#dwa-input', panel);
+    const send = $('#dwa-send', panel);
+    send?.addEventListener('click', captureVoiceSubmission);
+    input?.addEventListener('keydown', (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') captureVoiceSubmission();
+    });
+    input?.addEventListener('input', (event) => {
+      if (event.isTrusted && pendingVoiceQuery?.submitted) clearPendingVoiceQuery();
+    });
 
     try {
       const current = await loadStatus(true);
@@ -384,10 +464,23 @@
     }
   }
 
+  window.addEventListener('watchdog:contextual-analyst-response', () => {
+    const snapshot = lifecycleSnapshot(pendingVoiceQuery);
+    if (!snapshot?.submitted) return;
+    clearPendingVoiceQuery();
+    void reportQueryLifecycle('query_converted', snapshot);
+  });
+  window.addEventListener('watchdog:intelligence-command-local', clearPendingVoiceQuery);
+  window.addEventListener('watchdog:intelligence-command-cancelled', clearPendingVoiceQuery);
+  window.addEventListener('watchdog:contextual-analyst-open', () => {
+    if (pendingVoiceQuery) clearPendingVoiceQuery();
+  });
+
   window.addEventListener('beforeunload', () => {
     clearTimeout(stopTimer);
     stream?.getTracks?.().forEach((track) => track.stop());
     clearPlayback();
+    clearPendingVoiceQuery();
   });
 
   install();
