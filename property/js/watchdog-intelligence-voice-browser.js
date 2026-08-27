@@ -17,6 +17,7 @@
   let activeListenButton = null;
   let activeNarration = null;
   let narrationPromise = null;
+  let pendingVoiceQuery = null;
 
   function toast(message) {
     const node = $('#pl-toast');
@@ -70,6 +71,56 @@
     try {
       await post(USAGE_API, { kind: 'event', event, metadata: metadata || {} });
     } catch (_) { /* Telemetry must never block a valid governed Voice interaction. */ }
+  }
+
+  function normalizedQuestion(value) {
+    return String(value || '').trim().replace(/\s+/g, ' ');
+  }
+
+  function currentSurface() {
+    return $('#dwa-panel')?.dataset?.watchdogSurface || 'unknown';
+  }
+
+  function lifecycleSnapshot(pending) {
+    if (!pending) return null;
+    return {
+      edited: pending.edited === true,
+      reviewedMs: Math.max(0, Number(pending.reviewedMs || 0)),
+      surface: String(pending.surface || currentSurface()),
+      submitted: pending.submitted === true,
+    };
+  }
+
+  function clearPendingVoiceQuery() {
+    pendingVoiceQuery = null;
+  }
+
+  async function queryTelemetry(event, snapshot) {
+    if (!snapshot) return;
+    try {
+      await post(USAGE_API, {
+        kind: 'event',
+        event,
+        model: 'browser_speech_recognition',
+        metadata: {
+          edited: snapshot.edited,
+          reviewed_ms: snapshot.reviewedMs,
+          surface: snapshot.surface,
+        },
+      });
+    } catch (_) { /* Lifecycle telemetry must never block the governed Analyst workflow. */ }
+  }
+
+  function captureVoiceSubmission() {
+    const input = $('#dwa-input');
+    if (!pendingVoiceQuery || pendingVoiceQuery.submitted || !input) return;
+    const submitted = normalizedQuestion(input.value);
+    if (!submitted) return;
+    pendingVoiceQuery.submitted = true;
+    pendingVoiceQuery.edited = submitted !== pendingVoiceQuery.transcript;
+    pendingVoiceQuery.reviewedMs = Date.now() - pendingVoiceQuery.readyAt;
+    pendingVoiceQuery.surface = currentSurface();
+    void queryTelemetry('query_submitted', lifecycleSnapshot(pendingVoiceQuery));
   }
 
   function ensureNarration() {
@@ -156,6 +207,7 @@
       recognition = null;
       resetVoiceButton();
       if (!transcript) {
+        clearPendingVoiceQuery();
         if ($('#dwa-voice-status')?.dataset.state === 'recording') statusLine('No speech was captured. Choose Voice to try again.', 'error');
         return;
       }
@@ -164,12 +216,21 @@
         input.value = transcript;
         input.focus();
         input.dispatchEvent(new Event('input', { bubbles: true }));
+        pendingVoiceQuery = {
+          transcript: normalizedQuestion(transcript),
+          readyAt: Date.now(),
+          submitted: false,
+          edited: false,
+          reviewedMs: 0,
+          surface: currentSurface(),
+        };
       }
       statusLine('Transcript ready. Review it, then choose Ask Watchdog.', 'ready');
     };
 
     try { recognition.start(); } catch (error) {
       recognition = null;
+      clearPendingVoiceQuery();
       resetVoiceButton();
       statusLine(error?.message || 'Browser voice recognition could not start.', 'error');
     }
@@ -334,6 +395,9 @@
   }
 
   document.addEventListener('click', (event) => {
+    const send = event.target.closest?.('#dwa-send');
+    if (send) captureVoiceSubmission();
+
     const voice = event.target.closest?.('#dwa-voice');
     if (voice && Recognition && browserEligible) {
       event.preventDefault();
@@ -348,6 +412,14 @@
       event.stopImmediatePropagation();
       speakBrowser(listen);
     }
+  }, true);
+
+  document.addEventListener('keydown', (event) => {
+    if ((event.metaKey || event.ctrlKey) && event.key === 'Enter' && event.target?.matches?.('#dwa-input')) captureVoiceSubmission();
+  }, true);
+
+  document.addEventListener('input', (event) => {
+    if (event.target?.matches?.('#dwa-input') && event.isTrusted && pendingVoiceQuery?.submitted) clearPendingVoiceQuery();
   }, true);
 
   const observer = new MutationObserver((mutations) => {
@@ -365,8 +437,21 @@
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
+  window.addEventListener('watchdog:contextual-analyst-response', () => {
+    const snapshot = lifecycleSnapshot(pendingVoiceQuery);
+    if (!snapshot?.submitted) return;
+    clearPendingVoiceQuery();
+    void queryTelemetry('query_converted', snapshot);
+  });
+  window.addEventListener('watchdog:intelligence-command-local', clearPendingVoiceQuery);
+  window.addEventListener('watchdog:intelligence-command-cancelled', clearPendingVoiceQuery);
+  window.addEventListener('watchdog:contextual-analyst-open', () => {
+    if (pendingVoiceQuery) clearPendingVoiceQuery();
+  });
+
   window.addEventListener('beforeunload', () => {
     stopRecognition();
+    clearPendingVoiceQuery();
     if (canSpeak) window.speechSynthesis.cancel();
   });
 })();
