@@ -66,6 +66,17 @@
     (document.head||document.documentElement).appendChild(s);
   }
 
+  /* The index CSS is intentionally long-lived in browser cache. Keep the
+     score-corner placement in this revalidated bridge so a normal reload picks
+     up this small layout correction even when an older CSS response is cached. */
+  function ensureIndexScorePlacementContract(){
+    if(!isPropertyIndex()||q('wd-index-score-placement-contract'))return;
+    var s=document.createElement('style');
+    s.id='wd-index-score-placement-contract';
+    s.textContent='html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{top:18px!important;right:18px!important}@media(max-width:640px){html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{top:14px!important;right:13px!important}}';
+    (document.head||document.documentElement).appendChild(s);
+  }
+
   function bindMenuInteractionContract(){
     ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
       var sheet=q(id);if(!sheet||sheet.dataset.wdTapGuard==='1')return;
@@ -160,6 +171,7 @@
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
+    ensureIndexScorePlacementContract();
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
     loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
     loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
