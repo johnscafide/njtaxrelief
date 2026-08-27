@@ -1,6 +1,8 @@
 /* Watchdog privacy preferences.
    Necessary storage supports authentication, security and saved preferences.
-   Optional cookies may load Google Analytics and Microsoft Clarity only. */
+   Google Analytics remains opt-in. Microsoft Clarity may load in cookieless
+   no-consent mode on Watchdog so installation is verifiable without setting
+   optional cookies; full Clarity analytics is enabled only after consent. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_CONSENT__) return;
@@ -12,20 +14,33 @@
     watchdog:'G-EDW7CZV66M',
     legacy:'G-ENP9182L0J'
   });
-  var CLARITY_ID = 'wjeklv0exl';
+  var CLARITY_IDS = Object.freeze({
+    watchdog:'y8g1uivano',
+    legacy:'wjeklv0exl'
+  });
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
 
+  function normalizedHost(){
+    return String(location.hostname||'').toLowerCase().replace(/\.$/,'');
+  }
   function googleAnalyticsId(){
-    var host=String(location.hostname||'').toLowerCase().replace(/\.$/,'');
+    var host=normalizedHost();
     if(host==='watchdogindex.com'||host==='www.watchdogindex.com') return GA_IDS.watchdog;
     if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com') return GA_IDS.legacy;
     return '';
   }
+  function clarityId(){
+    var host=normalizedHost();
+    if(host==='watchdogindex.com'||host==='www.watchdogindex.com') return CLARITY_IDS.watchdog;
+    if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com') return CLARITY_IDS.legacy;
+    return '';
+  }
   var GA_ID = googleAnalyticsId();
+  var CLARITY_ID = clarityId();
 
   function ensureContactPolicy(){
     if(window.WatchdogContactPolicy || document.querySelector('script[src="'+CONTACT_POLICY_URL+'"]')) return;
@@ -76,6 +91,7 @@
     window.gtag('consent',mode||'update',consentPayload(!!analytics));
   }
   function signalClarity(analytics){
+    if(!CLARITY_ID) return;
     ensureClarityQueue();
     try{
       window.clarity('consentv2',{
@@ -96,19 +112,20 @@
     var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);script.setAttribute('data-watchdog-consent-ga','1');
     document.head.appendChild(script);
   }
-  function loadClarity(){
+  function loadClarity(analytics){
+    if(!CLARITY_ID) return;
     ensureClarityQueue();
-    signalClarity(true);
+    signalClarity(!!analytics);
     if(document.querySelector('script[data-watchdog-consent-clarity],script[src*="clarity.ms/tag/'+CLARITY_ID+'"]')) return;
     var script=document.createElement('script');script.async=true;script.src='https://www.clarity.ms/tag/'+CLARITY_ID;script.setAttribute('data-watchdog-consent-clarity','1');
     var first=document.getElementsByTagName('script')[0];
     if(first&&first.parentNode) first.parentNode.insertBefore(script,first); else document.head.appendChild(script);
   }
   function loadAllowedAnalytics(){
-    if(document.readyState!=='loading'){loadGoogle();loadClarity();return;}
+    if(document.readyState!=='loading'){loadGoogle();loadClarity(true);return;}
     if(analyticsLoadQueued)return;
     analyticsLoadQueued=true;
-    document.addEventListener('DOMContentLoaded',function(){analyticsLoadQueued=false;loadGoogle();loadClarity();},{once:true});
+    document.addEventListener('DOMContentLoaded',function(){analyticsLoadQueued=false;loadGoogle();loadClarity(true);},{once:true});
   }
   function clearAnalyticsCookies(){
     var prefixes=['_ga','_gid','_gat','_clck','_clsk'];
@@ -187,6 +204,7 @@
   ensureGoogleQueue();
   signalGoogle(false,'default');
   signalClarity(false);
+  if(CLARITY_ID===CLARITY_IDS.watchdog) loadClarity(!!(stored&&stored.analytics));
   if(stored) apply(stored.analytics,false);
 
   function ready(){ ensureBanner();ensureModal();appendOnboardingLink();syncControls(); }
