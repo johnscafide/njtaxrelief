@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Watchdog Dashboard V2 Preview</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260827b">
+  <style>
+    .demo-top{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:16px;min-height:68px;padding:0 28px;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid #e2e7ef}.demo-brand{display:flex;align-items:center;gap:11px;font:800 18px/1 "Plus Jakarta Sans",sans-serif;color:#0e2248}.demo-mark{width:36px;height:36px;border-radius:11px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#183b84,#2f6df6)}.demo-badge{margin-left:auto;padding:6px 10px;border-radius:999px;background:#e9f0ff;color:#183b84;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}.demo-note{padding:10px 28px;background:#fff8e8;border-bottom:1px solid #f3dfad;color:#77510b;font-size:12px}.demo-note b{color:#5d3d05}.demo-intel{margin:24px 32px 0;background:#fff;border:1px solid #e2e7ef;border-radius:12px;box-shadow:0 8px 24px rgba(40,55,82,.045);overflow:hidden}.demo-intel-head{display:flex;gap:12px;align-items:center;padding:18px 20px;border-bottom:1px solid #edf1f6}.demo-intel-head i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:#e9f0ff;color:#2f6df6}.demo-intel-head h2{margin:0;font:700 16px/1.2 "Plus Jakarta Sans",sans-serif;color:#111d38}.demo-intel-head p{margin:3px 0 0;font-size:12px;color:#748198}.demo-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}.demo-card{padding:18px 20px;border-left:1px solid #edf1f6}.demo-card:first-child{border-left:0}.demo-card small{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#748198}.demo-card h3{margin:8px 0 7px;font:700 14px/1.35 "Plus Jakarta Sans",sans-serif;color:#111d38}.demo-card p{margin:0;font-size:12.5px;line-height:1.55;color:#53637a}.demo-card a{display:inline-block;margin-top:11px;color:#2f6df6;font-size:12px;font-weight:700}.demo-queue{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.demo-q{padding:18px;background:#fff;border:1px solid #e2e7ef;border-radius:12px;box-shadow:0 8px 24px rgba(40,55,82,.04)}.demo-q-top{display:flex;align-items:center;gap:9px}.demo-q-dot{width:9px;height:9px;border-radius:50%;background:#f5a20a}.demo-q.bad .demo-q-dot{background:#e34f5f}.demo-q.ok .demo-q-dot{background:#18a966}.demo-q b{font-size:14px;color:#111d38}.demo-q p{margin:8px 0 0;font-size:12.5px;line-height:1.5;color:#53637a}.demo-q strong{display:block;margin-top:11px;font-size:18px;color:#111d38}.demo-foot{padding:28px 32px 40px;text-align:center;color:#8794a7;font-size:11px}.demo-pull{position:fixed;right:18px;bottom:18px;border:0;border-radius:999px;padding:13px 16px;background:#0e2248;color:#fff;font-weight:700;box-shadow:0 14px 36px rgba(14,34,72,.25)}
+    @media(max-width:900px){.demo-cards,.demo-queue{grid-template-columns:1fr}.demo-card{border-left:0;border-top:1px solid #edf1f6}.demo-card:first-child{border-top:0}.demo-intel{margin-left:16px;margin-right:16px}.demo-top,.demo-note{padding-left:16px;padding-right:16px}}
+  </style>
+</head>
+<body>
+  <header class="demo-top">
+    <div class="demo-brand"><span class="demo-mark"><i class="fas fa-dog"></i></span><span>Watchdog</span></div>
+    <span class="demo-badge">Design preview</span>
+  </header>
+  <div class="demo-note"><b>Preview only.</b> This page uses sample data and bypasses account login so the dashboard design can be reviewed safely.</div>
+
+  <main class="wdd-app">
+    <section class="wdd-standing">
+      <div class="wdd-standing-inner">
+        <div class="wdd-score">
+          <div class="wdd-kicker">Watchdog Score</div>
+          <div class="wdd-score-row"><span class="wdd-score-num">72</span><span class="wdd-score-of">out of 100</span></div>
+          <div class="wdd-score-verdict"><i class="fas fa-circle"></i>Reasonable</div>
+          <div class="wdd-axis"><span class="wdd-axis-track"></span><span class="wdd-axis-fill" style="width:72%"></span><i class="wdd-axis-peer" style="left:66%"></i><i class="wdd-axis-you" style="left:72%"></i></div>
+        </div>
+        <div class="wdd-greet">
+          <h1>Good morning, John</h1>
+          <p class="wdd-read"><b>2 of your 6 saved properties</b> are assessed above what the current verified sales evidence supports. That represents roughly <b>$2,940 a year</b> in tax across those gaps.</p>
+          <div class="wdd-actions">
+            <a class="wdd-btn wdd-btn-primary" href="#"><i class="fas fa-magnifying-glass"></i>Look up a property</a>
+            <button class="wdd-btn" type="button"><i class="fas fa-filter"></i>Gloucester County</button>
+            <button class="wdd-btn" type="button"><i class="fas fa-download"></i>Export CSV</button>
+          </div>
+        </div>
+      </div>
+      <div class="wdd-standline">
+        <div><span>Properties</span><b>6</b></div>
+        <div><span>Market estimate</span><b>$2.14M</b></div>
+        <div><span>Annual tax</span><b>$51,840</b></div>
+        <div><span>Changes, 30 days</span><b>8</b></div>
+      </div>
+    </section>
+
+    <section class="wdd-signals">
+      <div class="wdd-signal"><div class="wdd-signal-k">Assessed vs market</div><div class="wdd-signal-v wdd-warn">107%</div><div class="wdd-signal-n">Portfolio is slightly over the estimate</div></div>
+      <div class="wdd-signal"><div class="wdd-signal-k">Widest gap</div><div class="wdd-signal-v wdd-bad">+18.4%</div><div class="wdd-signal-n">Single property, furthest over</div></div>
+      <div class="wdd-signal"><div class="wdd-signal-k">Tax per $1,000 of value</div><div class="wdd-signal-v">$24.22</div><div class="wdd-signal-n">Comparable across town lines</div></div>
+      <div class="wdd-signal"><div class="wdd-signal-k">Average tax rate</div><div class="wdd-signal-v">3.417</div><div class="wdd-signal-n">Per $100 of assessed value</div></div>
+      <div class="wdd-signal"><div class="wdd-signal-k">Worth reviewing</div><div class="wdd-signal-v wdd-warn">2</div><div class="wdd-signal-n">Flagged in the ledger below</div></div>
+      <div class="wdd-signal"><div class="wdd-signal-k">Dollars represented by gaps</div><div class="wdd-signal-v wdd-ok">$2,940</div><div class="wdd-signal-n">Annual estimate, not guaranteed savings</div></div>
+    </section>
+
+    <div class="wdd-work">
+      <section>
+        <div class="wdd-panel">
+          <div class="wdd-panel-head"><div><h2>Your ledger</h2><p>One place for the properties you are actively watching.</p></div><div class="wdd-fill"></div><div class="wdd-tabs"><button aria-selected="true">Table</button><button aria-selected="false">Map</button></div></div>
+          <div class="wdd-scrollx">
+            <table class="wdd-table">
+              <thead><tr><th>Property</th><th class="wdd-r">Assessed</th><th class="wdd-r">Market est.</th><th class="wdd-r">Gap</th><th class="wdd-r">Annual tax</th><th class="wdd-r">Score</th></tr></thead>
+              <tbody>
+                <tr><td><div class="wdd-addr">Sample Property A<small>Deptford Township · Gloucester</small></div></td><td class="wdd-r">$418,000</td><td class="wdd-r">$353,000</td><td class="wdd-r"><span class="wdd-bad">+18.4%</span><span class="wdd-sub">$1,760 a year</span></td><td class="wdd-r">$10,940</td><td class="wdd-r"><span class="wdd-scorecell wdd-warn"><b>58</b><span class="wdd-scoretrack"><i style="left:58%"></i></span></span></td></tr>
+                <tr><td><div class="wdd-addr">Sample Property B<small>Washington Township · Gloucester</small></div></td><td class="wdd-r">$362,500</td><td class="wdd-r">$340,000</td><td class="wdd-r"><span class="wdd-warn">+6.6%</span><span class="wdd-sub">$1,180 a year</span></td><td class="wdd-r">$9,480</td><td class="wdd-r"><span class="wdd-scorecell wdd-ok"><b>71</b><span class="wdd-scoretrack"><i style="left:71%"></i></span></span></td></tr>
+                <tr><td><div class="wdd-addr">Sample Property C<small>Haddon Township · Camden</small></div></td><td class="wdd-r">$286,000</td><td class="wdd-r">$314,000</td><td class="wdd-r"><span class="wdd-ok">−8.9%</span></td><td class="wdd-r">$8,320</td><td class="wdd-r"><span class="wdd-scorecell wdd-ok"><b>82</b><span class="wdd-scoretrack"><i style="left:82%"></i></span></span></td></tr>
+                <tr><td><div class="wdd-addr">Sample Property D<small>Blackwood · Camden</small></div></td><td class="wdd-r">$311,000</td><td class="wdd-r">$318,000</td><td class="wdd-r"><span class="wdd-ok">−2.2%</span></td><td class="wdd-r">$7,960</td><td class="wdd-r"><span class="wdd-scorecell wdd-ok"><b>76</b><span class="wdd-scoretrack"><i style="left:76%"></i></span></span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <aside class="wdd-rail">
+        <div class="wdd-panel">
+          <div class="wdd-panel-head"><div><h2>What changed</h2><p>8 changes in the last 30 days</p></div></div>
+          <div class="wdd-feed-item is-bad"><span class="wdd-feed-icon"><i class="fas fa-receipt"></i></span><div><b>Assessment-to-market gap widened</b><small>Sample Property A · 2 days ago</small></div></div>
+          <div class="wdd-feed-item is-warn"><span class="wdd-feed-icon"><i class="fas fa-chart-line"></i></span><div><b>Verified market estimate updated</b><small>Sample Property B · 4 days ago</small></div></div>
+          <div class="wdd-feed-item is-ok"><span class="wdd-feed-icon"><i class="fas fa-house"></i></span><div><b>New nearby sale added to evidence</b><small>Sample Property C · 6 days ago</small></div></div>
+          <div class="wdd-feed-item"><span class="wdd-feed-icon"><i class="fas fa-hammer"></i></span><div><b>Permit activity detected nearby</b><small>Sample Property D · 9 days ago</small></div></div>
+        </div>
+        <div class="wdd-panel">
+          <div class="wdd-panel-head"><div><h2>Watchdog Intelligence</h2><p>Context behind the numbers</p></div></div>
+          <div class="wdd-feed-item is-warn"><span class="wdd-feed-icon"><i class="fas fa-bolt"></i></span><div><b>Gloucester County ratios are moving unevenly</b><small>3 municipalities changed materially</small></div></div>
+          <div class="wdd-feed-item"><span class="wdd-feed-icon"><i class="fas fa-gavel"></i></span><div><b>Appeal timing matters more than raw gap size</b><small>Evidence readiness varies by municipality</small></div></div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="demo-intel">
+      <div class="demo-intel-head"><i class="fas fa-newspaper"></i><div><h2>NJ Intelligence Wire</h2><p>Insights and news that can affect property decisions in New Jersey.</p></div></div>
+      <div class="demo-cards">
+        <article class="demo-card"><small>Property tax</small><h3>What a changing equalization ratio can mean for a homeowner</h3><p>A plain-English explanation of why municipal ratios matter and when Watchdog flags a meaningful shift.</p><a href="#">Read insight →</a></article>
+        <article class="demo-card"><small>South Jersey</small><h3>New sales evidence is reshaping several local market estimates</h3><p>Recent verified transactions can change how an assessment looks relative to current market evidence.</p><a href="#">Read insight →</a></article>
+        <article class="demo-card"><small>Watchdog intelligence</small><h3>Three signals worth watching before an appeal conversation</h3><p>Gap size alone is not enough. Evidence coverage, timing and source quality all matter.</p><a href="#">Read insight →</a></article>
+      </div>
+    </section>
+
+    <section class="wdd-queue">
+      <div class="wdd-queue-head"><div><h2>Action queue</h2><p>The dashboard ends with the properties and signals most worth reviewing next.</p></div><div class="wdd-fill"></div><span class="wdd-plan-pill">Professional plan</span></div>
+      <div class="demo-queue">
+        <article class="demo-q bad"><div class="demo-q-top"><span class="demo-q-dot"></span><b>Sample Property A</b></div><p>Assessment sits 18.4% above the current governed market estimate with enough recent sales evidence to justify a closer look.</p><strong>$1,760/yr represented</strong></article>
+        <article class="demo-q"><div class="demo-q-top"><span class="demo-q-dot"></span><b>Sample Property B</b></div><p>The gap is smaller, but recent market movement makes this one worth monitoring before the next assessment cycle.</p><strong>$1,180/yr represented</strong></article>
+        <article class="demo-q ok"><div class="demo-q-top"><span class="demo-q-dot"></span><b>Portfolio status</b></div><p>The other four saved properties currently sit within a normal evidence range. No action is suggested right now.</p><strong>4 properties stable</strong></article>
+      </div>
+    </section>
+
+    <div class="demo-foot">Watchdog Dashboard V2 · static review page · no production account or property data is used here.</div>
+  </main>
+  <button class="demo-pull" type="button"><i class="fas fa-comment-dots"></i>&nbsp; Watchdog Intelligence</button>
+</body>
+</html>
