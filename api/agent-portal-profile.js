@@ -125,6 +125,11 @@ module.exports = async function handler(req, res) {
     if (!profile || typeof profile !== 'object' || Array.isArray(profile)) {
       return res.status(404).json({ available: false });
     }
+    try {
+      await rpc('record_agent_portal_view', { p_slug: slug }, access.config);
+    } catch (analyticsErr) {
+      console.error('agent-portal-profile analytics', analyticsErr && analyticsErr.message || analyticsErr);
+    }
     return res.status(200).json({ available: true, profile });
   } catch (err) {
     console.error('agent-portal-profile', err && err.message || err);
