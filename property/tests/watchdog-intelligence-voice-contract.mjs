@@ -73,7 +73,14 @@ assert(usage.includes("DAILY_LIMITS = { transcription: 40, speech: 60 }"), 'Brow
 for (const event of ['narration_started', 'narration_completed', 'narration_stopped', 'narration_failed']) {
   assert(usage.includes(event), `Browser Voice telemetry must support ${event}.`);
 }
+for (const event of ['query_submitted', 'query_converted']) {
+  assert(usage.includes(event), `Voice lifecycle telemetry must support ${event}.`);
+}
 assert(usage.includes('safeNarrationMetadata'), 'Narration telemetry must pass through a bounded metadata sanitizer.');
+assert(usage.includes('safeQueryLifecycleMetadata'), 'Voice query lifecycle telemetry must pass through a bounded metadata sanitizer.');
+assert(usage.includes("source: 'reviewed_voice_transcript'"), 'Voice query lifecycle telemetry must identify only a reviewed Voice transcript as its source.');
+assert(usage.includes('transcript_content_persisted: false'), 'Voice query lifecycle telemetry must explicitly reject transcript-content persistence.');
+assert(usage.includes('prompt_content_persisted: false'), 'Voice query lifecycle telemetry must explicitly reject prompt-content persistence.');
 assert(!usage.includes('transcript_text'), 'Narration telemetry must not persist transcript text.');
 assert(!usage.includes('answer_text'), 'Narration telemetry must not persist answer text.');
 
@@ -82,6 +89,15 @@ assert(browser.includes("'speechSynthesis' in window"), 'Voice must provide brow
 assert(browser.includes("Transcript ready. Review it, then choose Ask Watchdog."), 'Browser transcription must require user review before Analyst submission.');
 assert(!browser.includes('intelligence-analyst'), 'Browser Voice must never submit directly to Analyst or bypass the existing governed composer.');
 assert(browser.includes("input.value = transcript"), 'Browser recognition must write the transcript into the existing Analyst composer.');
+assert(browser.includes('pendingVoiceQuery'), 'Browser-primary Voice must retain only an in-memory reviewed-transcript lifecycle marker.');
+assert(browser.includes("model: 'browser_speech_recognition'"), 'Browser-primary lifecycle telemetry must identify browser speech recognition without transcript content.');
+assert(browser.includes("queryTelemetry('query_submitted'"), 'Browser-primary Voice must measure reviewed transcript submission.');
+assert(browser.includes("queryTelemetry('query_converted'"), 'Browser-primary Voice must measure conversion only after governed Analyst success.');
+assert(browser.includes("watchdog:contextual-analyst-response"), 'Browser-primary Voice conversion must depend on the existing governed Analyst success event.');
+assert(browser.includes("watchdog:intelligence-command-local"), 'Local read-only Voice commands must clear pending conversion attribution.');
+assert(browser.includes("watchdog:intelligence-command-cancelled"), 'Cancelled Voice commands must clear pending conversion attribution.');
+assert(browser.includes("const send = event.target.closest?.('#dwa-send');"), 'Browser-primary Voice must capture explicit Ask Watchdog submission before command handlers run.');
+assert(browser.includes('event.isTrusted && pendingVoiceQuery?.submitted'), 'A user edit after submission must clear stale Voice conversion attribution.');
 assert(browser.includes('watchdog-intelligence-narration.js'), 'Browser speech must load the shared narration contract.');
 assert(browser.includes('contract.formatBrief(brief, format)'), 'Browser speech must render playback through the shared narration contract.');
 assert(browser.includes('data-dwa-narration-format'), 'Browser Voice must expose a narration-format selector.');
@@ -99,6 +115,9 @@ assert(!browser.includes('.autoplay'), 'Narration must not enable autoplay.');
 
 assert(ui.includes("Transcript ready. Review it, then choose Ask Watchdog."), 'Fish fallback transcript must still require review before Analyst submission.');
 assert(!ui.includes("ask(data.text"), 'Fish fallback transcription must not bypass typed Analyst submission.');
+assert(ui.includes("reportQueryLifecycle('query_submitted'"), 'Fish fallback must measure reviewed transcript submission without content persistence.');
+assert(ui.includes("reportQueryLifecycle('query_converted'"), 'Fish fallback must measure conversion only after governed Analyst success.');
+assert(ui.includes("watchdog:contextual-analyst-response"), 'Fish fallback conversion must depend on the existing governed Analyst success event.');
 assert(ui.includes("extractBrief(message)"), 'Fish fallback spoken playback must remain derived from the written response.');
 assert(ui.includes("action: 'speak', format, brief"), 'Fish fallback must send the selected narration format to the governed server formatter.');
 assert(ui.includes('data-dwa-narration-format'), 'Fish fallback must expose the same narration format selector.');
@@ -143,6 +162,9 @@ console.log(JSON.stringify({
   rollout_kill_switch: true,
   raw_audio_persisted: false,
   transcript_review_before_submit: true,
+  transcript_correction_telemetry: true,
+  analyst_conversion_telemetry: true,
+  transcript_or_prompt_content_persisted: false,
   spoken_response_source: 'governed_written_analyst_response',
   packaging: 'agent_or_pro_with_watchdog_intelligence_addon_or_pro_plus_and_higher',
   underlying_data_model_entitlements_preserved: true
