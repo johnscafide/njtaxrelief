@@ -1,7 +1,9 @@
 // NJW-143 bounded release-canary extension for the v0.36 source pack.
-// v036_sources_v1 is handled locally; every pre-existing scenario delegates
-// unchanged to the exact git-pinned production canary graph.
-import { handleV036Canary } from './v036-sources-canary.ts';
+// v036_sources_v1 is handled by the exact git-pinned helper; every pre-existing
+// scenario delegates unchanged to the exact git-pinned production canary graph.
+const { handleV036Canary } = await import(
+  'https://raw.githubusercontent.com/johnscafide/njtaxrelief/4fba90939e2a96d62fd029245bcc2d8bfa48fe19/supabase/functions/provider-release-canary/v036-sources-canary.ts'
+);
 
 const nativeServe = Deno.serve.bind(Deno);
 
