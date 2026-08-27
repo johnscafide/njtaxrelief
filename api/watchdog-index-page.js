@@ -76,8 +76,8 @@ function pageSourceCandidates(publicPath) {
 
 function deploymentOrigins() {
   const candidates = [
-    process.env.VERCEL_PROJECT_PRODUCTION_URL,
     'njtaxrelief.vercel.app',
+    process.env.VERCEL_PROJECT_PRODUCTION_URL,
     process.env.VERCEL_URL
   ];
   const seen = new Set();
