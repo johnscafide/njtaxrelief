@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Revaluation Radar | Watchdog</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>Revaluation Early Warning | Watchdog</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
@@ -14,130 +12,62 @@
   <link rel="stylesheet" href="/property/css/plan-context.css">
   <link rel="stylesheet" href="/property/growth/growth.css">
   <style>
-    .rr-wrap{display:grid;gap:18px}.rr-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.rr-hero h1{margin:6px 0 8px}.rr-hero p{max-width:900px;margin:0}.rr-badge{display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border-radius:999px;background:#eef5ff;font-weight:800;white-space:nowrap}.rr-notice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:#f7f9fc}.rr-notice i{margin-top:3px}.rr-controls{display:grid;grid-template-columns:1.15fr 1fr 1fr 1.35fr auto;gap:10px;align-items:end}.rr-field{display:grid;gap:6px}.rr-field span{font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}.rr-field input,.rr-field select{width:100%;min-height:44px;border:1px solid #d7dee8;border-radius:12px;background:#fff;padding:0 12px;font:inherit}.rr-export{min-height:44px;border:0;border-radius:12px;padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.rr-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.rr-stat{padding:15px 16px;border-radius:16px;background:#fff;box-shadow:0 8px 24px rgba(20,34,54,.06)}.rr-stat b{display:block;font:800 24px/1.05 'Plus Jakarta Sans',sans-serif}.rr-stat span{display:block;margin-top:5px;font-size:13px}.rr-table-shell{overflow:auto;border-radius:18px;background:#fff;box-shadow:0 8px 26px rgba(20,34,54,.07)}.rr-table{width:100%;border-collapse:collapse;min-width:980px}.rr-table th,.rr-table td{padding:13px 14px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:middle}.rr-table th{position:sticky;top:0;z-index:1;background:#f7f9fc;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.rr-table tr:last-child td{border-bottom:0}.rr-town{font-weight:800}.rr-sub{display:block;margin-top:2px;font-size:12px;color:#657386}.rr-status{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;font-size:12px;font-weight:800;background:#f0f3f7}.rr-status.approved{background:#e9f8ef}.rr-gap.pos{font-weight:800}.rr-empty{padding:28px;text-align:center}.rr-sources{display:grid;gap:12px;padding:18px;border-radius:18px;background:#fff}.rr-sources h2{margin:0}.rr-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rr-source{padding:14px;border-radius:14px;background:#f7f9fc}.rr-source b{display:block}.rr-source p{margin:5px 0 8px;font-size:14px}.rr-source a{font-weight:800}.rr-fine{font-size:13px;color:#647184}.rr-error{padding:18px;border-radius:16px;background:#fff3f3;font-weight:700}
-    @media(max-width:1050px){.rr-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.rr-export{width:100%}.rr-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
-    @media(max-width:700px){.rr-hero{grid-template-columns:1fr;align-items:start}.rr-controls,.rr-stats,.rr-source-grid{grid-template-columns:1fr}.rr-table-shell{margin-left:-4px;margin-right:-4px}.rr-badge{white-space:normal}}
+    .rr-wrap{display:grid;gap:18px}.rr-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.rr-hero h1{margin:6px 0 8px}.rr-hero p{max-width:940px;margin:0}.rr-badge,.rr-tier{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;font-weight:800}.rr-badge{background:var(--surface-subtle,#eef5ff);white-space:nowrap}.rr-notice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius-lg,16px);background:var(--surface-subtle,#f7f9fc)}.rr-controls{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.35fr auto;gap:10px;align-items:end}.rr-field{display:grid;gap:6px}.rr-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.rr-field input,.rr-field select{width:100%;min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.rr-export{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.rr-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.rr-stat{padding:15px 16px;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-sm,0 8px 24px rgba(20,34,54,.06))}.rr-stat b{display:block;font-size:24px}.rr-stat span{display:block;margin-top:5px;font-size:var(--type-sm,14px)}.rr-table-shell{overflow:auto;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.rr-table{width:100%;border-collapse:collapse;min-width:1220px}.rr-table th,.rr-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:top}.rr-table th{position:sticky;top:0;z-index:1;background:#f7f9fc;font-size:var(--type-xs,12px);text-transform:uppercase;letter-spacing:.04em}.rr-town{font-weight:800}.rr-sub,.rr-reason{display:block;margin-top:3px;font-size:var(--type-xs,12px);color:#657386}.rr-tier.known{background:#e9f8ef}.rr-tier.high{background:#fff0ed}.rr-tier.elevated{background:#fff7df}.rr-tier.watch{background:#eef5ff}.rr-tier.lower{background:#f0f3f7}.rr-score{font-weight:900}.rr-sources{display:grid;gap:12px;padding:18px;border-radius:var(--radius-lg,18px);background:#fff}.rr-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rr-source{padding:14px;border-radius:var(--radius-md,14px);background:#f7f9fc}.rr-source b{display:block}.rr-source p,.rr-fine{font-size:var(--type-sm,14px)}.rr-error,.rr-empty{padding:24px;text-align:center}.rr-error{background:#fff3f3;font-weight:700}.rr-model{padding:16px 18px;border-radius:var(--radius-lg,16px);background:#fff}.rr-model ul{margin:8px 0 0;padding-left:20px}.rr-model li{margin:5px 0}
+    @media(max-width:1024px){.rr-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.rr-export{width:100%}.rr-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:768px){.rr-hero,.rr-controls,.rr-stats,.rr-source-grid{grid-template-columns:1fr}.rr-badge{white-space:normal}.rr-table-shell{margin-inline:-4px}}
   </style>
 </head>
 <body data-sidebar-page="growth" data-plan-auto="true">
 <main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace rr-wrap">
   <header class="gc-top rr-hero">
-    <div>
-      <a href="/property/growth/">← Growth Center</a>
-      <span>NJ-ONLY PLAY · MUNICIPAL RESEARCH</span>
-      <h1>Revaluation Radar</h1>
-      <p>Compare the certified 2026 Director/Chapter 123 ratio with current state-verified SR-1A sales evidence, then layer in assessment uniformity and the Division of Taxation's approved 2026 revaluation/reassessment list.</p>
-    </div>
-    <div class="rr-badge"><i class="fas fa-shield-halved"></i> Evidence-first, not predictive</div>
+    <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · MUNICIPAL RESEARCH</span><h1>Revaluation Early Warning</h1><p>Rank municipalities for the next two assessment cycles using certified ratio pressure, verified-sale drift, assessment dispersion, ratio-history direction and municipal budget pressure. Known 2026 approved revaluations/reassessments are separated from the forecast.</p></div>
+    <div class="rr-badge"><i class="fas fa-shield-halved"></i> Watch priority, not a prediction</div>
   </header>
 
-  <section class="rr-notice" aria-label="Important limitation">
-    <i class="fas fa-circle-info"></i>
-    <div><b>This is a research-priority screen, not a revaluation forecast or calendar.</b> “Approved 2026” is shown only when the municipality appears in the Division's current approved revaluation/reassessment file. A positive ratio gap means recent verified residential sales imply a lower assessment-to-market relationship than the certified ratio; it does not mean a revaluation has been ordered.</div>
-  </section>
+  <section class="rr-notice"><i class="fas fa-circle-info"></i><div><b>This is a 12–24 month research-priority model, not a probability or order calendar.</b> It never says a municipality will revalue. The score is a transparent heuristic for where to investigate first. Officially approved 2026 districts are labeled as known status and are not ranked as forecasts.</div></section>
 
-  <section class="rr-controls" aria-label="Radar filters">
+  <section class="rr-controls" aria-label="Early-warning filters">
     <label class="rr-field"><span>Search municipality</span><input id="rr-search" type="search" placeholder="Washington, Cherry Hill, Atlantic City…"></label>
     <label class="rr-field"><span>County</span><select id="rr-county"><option value="">All loaded counties</option></select></label>
-    <label class="rr-field"><span>2026 status</span><select id="rr-status"><option value="">All</option><option value="approved">Approved revaluation/reassessment</option><option value="not-approved">Not on approved list</option></select></label>
-    <label class="rr-field"><span>Sort</span><select id="rr-sort"><option value="gap">Director vs verified-sale gap</option><option value="ratio">Certified ratio, lowest first</option><option value="cod">Coefficient of deviation, highest first</option><option value="sales">Verified sales, highest first</option><option value="town">Municipality A–Z</option></select></label>
+    <label class="rr-field"><span>Watch tier</span><select id="rr-tier"><option value="">All</option><option value="known">Official 2026 status</option><option value="high">Higher watch</option><option value="elevated">Elevated</option><option value="watch">Watch</option><option value="lower">Lower</option></select></label>
+    <label class="rr-field"><span>Sort</span><select id="rr-sort"><option value="score">12–24 month watch score</option><option value="ratio">Certified ratio, lowest first</option><option value="cod">COD, highest first</option><option value="budget">Budget pressure, highest first</option><option value="town">Municipality A–Z</option></select></label>
     <button id="rr-export" class="rr-export" type="button"><i class="fas fa-download"></i> Export CSV</button>
   </section>
 
-  <section class="rr-stats" aria-label="Radar summary">
-    <div class="rr-stat"><b id="rr-visible">—</b><span>municipalities in current view</span></div>
-    <div class="rr-stat"><b id="rr-approved">—</b><span>approved 2026 revaluation/reassessment</span></div>
-    <div class="rr-stat"><b id="rr-gap">—</b><span>largest positive Director/SR-1A gap</span></div>
-    <div class="rr-stat"><b id="rr-coverage">—</b><span>municipalities with joined governed inputs</span></div>
-  </section>
+  <section class="rr-stats"><div class="rr-stat"><b id="rr-visible">—</b><span>municipalities in view</span></div><div class="rr-stat"><b id="rr-high">—</b><span>higher/elevated watch</span></div><div class="rr-stat"><b id="rr-approved">—</b><span>known approved 2026</span></div><div class="rr-stat"><b id="rr-coverage">—</b><span>municipalities with sufficient joined evidence</span></div></section>
 
   <section id="rr-result" class="rr-table-shell" aria-live="polite"><div class="rr-empty">Loading governed New Jersey evidence…</div></section>
 
-  <section class="rr-sources">
-    <div><span>PROVENANCE</span><h2>What this screen actually uses</h2></div>
-    <div class="rr-source-grid">
-      <article class="rr-source"><b>Certified 2026 Chapter 123 / Director ratios</b><p>NJ Division of Taxation certification dated October 1, 2025, as amended January 30, 2026. Watchdog's currently governed file contains all 168 municipalities in Atlantic, Burlington, Camden, Cape May, Cumberland, Gloucester and Salem counties.</p><a href="https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf" target="_blank" rel="noopener">Open state certification ↗</a></article>
-      <article class="rr-source"><b>2026 approved revaluations and reassessments</b><p>NJ Division of Taxation, Property Administration. The parsed governed file records 140 districts recognized for 2026 implementation; this page uses the list as known status, never as a prediction.</p><a href="https://www.nj.gov/treasury/taxation/pdf/lpt/revaluation/2026RevalList.pdf" target="_blank" rel="noopener">Open state approved list ↗</a></article>
-      <article class="rr-source"><b>Verified-sale municipal ratios</b><p>Derived from New Jersey SR-1A records using state-verified usable arm's-length Class 2 residential sales. The current governed build uses 2025 plus 2026 year-to-date evidence and omits thin municipalities rather than guessing.</p><a href="https://www.nj.gov/treasury/taxation/lpt/sr1a.shtml" target="_blank" rel="noopener">Open SR-1A source page ↗</a></article>
-      <article class="rr-source"><b>Assessment uniformity</b><p>Derived from NJ Division of Taxation Measures of Property Assessment Uniformity. The coefficient of deviation is shown as context about consistency across a municipality's assessment roll.</p><a href="https://www.nj.gov/treasury/taxation/lpt/statdata.shtml" target="_blank" rel="noopener">Open state statistical data ↗</a></article>
-    </div>
-    <div class="rr-fine">Coverage is deliberately fail-closed. A municipality appears only when the governed certified-ratio file can be joined to a district with the required municipal evidence. Missing data is omitted rather than filled with a statewide or neighboring-town assumption. No owner identity, contact data, protected-class inference, legal outcome prediction, fee recommendation, or filing deadline is produced here.</div>
-  </section>
+  <section class="rr-model"><b>Model v1 · transparent evidence weights</b><ul><li>30% certified Director/Chapter 123 ratio level</li><li>20% current verified-sale drift versus the certified ratio</li><li>20% assessment dispersion (Coefficient of Deviation)</li><li>15% multi-year certified-ratio direction</li><li>15% governed Municipal Budget Pressure</li></ul><p class="rr-fine">A recent large upward ratio reset is used only as a recency guard and caps the watch score. It is explicitly a ratio-history proxy, not an assertion of an official last-revaluation date. Missing inputs reduce evidence coverage; fewer than four supported components produces no forecast score.</p></section>
+
+  <section class="rr-sources"><div><span>PROVENANCE</span><h2>Evidence boundary</h2></div><div class="rr-source-grid">
+    <article class="rr-source"><b>Certified ratios</b><p>NJ Division of Taxation 2026 Chapter 123 / Director ratios plus Watchdog's maintained multi-year ratio history.</p></article>
+    <article class="rr-source"><b>Verified sales + uniformity</b><p>State SR-1A usable Class 2 sales and NJ Division of Taxation Measures of Property Assessment Uniformity.</p></article>
+    <article class="rr-source"><b>Known 2026 status</b><p>The Division of Taxation approved revaluation/reassessment list is treated as observed status, never model validation or a prediction.</p></article>
+    <article class="rr-source"><b>Municipal fiscal pressure</b><p>Watchdog Municipal Budget Pressure v1.0 from NJ DCA property-tax and User-Friendly Budget filings.</p></article>
+  </div><div class="rr-fine">Current certified-ratio coverage is intentionally bounded to the municipalities in Watchdog's governed ratio file. No statewide, neighboring-town or missing-value substitution is made. No owner/contact data, protected-class inference, legal conclusion, tax-bill forecast or ROBUST/Watchdog Score input is produced by this model.</div></section>
 </div></div></main>
 <div id="pl-toast" class="pl-toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/access-guard.js"></script>
-<script src="/property/js/plan-context.js"></script>
-<script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
 <script>
 (function(){'use strict';
-  var allRows=[], visibleRows=[];
-  var $=function(id){return document.getElementById(id)};
+  var allRows=[],visibleRows=[],$=function(id){return document.getElementById(id)};
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
-  function norm(v){return String(v||'').toUpperCase().replace(/[.,]/g,' ').replace(/TOWNSHIP|TWNSHP/g,'TWP').replace(/BOROUGH/g,'BORO').replace(/\s+/g,' ').trim().replace(/\bCITY CITY$/,'CITY')}
+  function norm(v){return String(v||'').toUpperCase().replace(/[.,]/g,' ').replace(/TOWNSHIP|TWNSHP/g,'TWP').replace(/BOROUGH/g,'BORO').replace(/\s+/g,' ').trim()}
   function base(v){return norm(v).replace(/\s+(CITY|TWP|BORO|TOWN|VILLAGE)$/,'')}
   function parseRatioKey(key){var m=String(key).match(/^(.*) \(([^)]+)\)$/);return m?{town:m[1],county:m[2]}:null}
+  function clamp(v){return Math.max(0,Math.min(1,v))}
+  function num(v){var n=Number(v);return Number.isFinite(n)?n:NaN}
   function fmt(v,d){return Number.isFinite(v)?v.toFixed(d==null?1:d):'—'}
   function pct(v){return Number.isFinite(v)?fmt(v,1)+'%':'—'}
   function csvCell(v){var s=String(v==null?'':v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
-  function setError(message){$('rr-result').innerHTML='<div class="rr-error"><i class="fas fa-triangle-exclamation"></i> '+esc(message)+'</div>'}
-  function render(){
-    var query=$('rr-search').value.trim().toLowerCase(), county=$('rr-county').value, status=$('rr-status').value, sort=$('rr-sort').value;
-    visibleRows=allRows.filter(function(r){
-      if(query && (r.town+' '+r.county).toLowerCase().indexOf(query)<0)return false;
-      if(county && r.county!==county)return false;
-      if(status==='approved'&&!r.approved)return false;
-      if(status==='not-approved'&&r.approved)return false;
-      return true;
-    }).slice();
-    visibleRows.sort(function(a,b){
-      if(sort==='ratio')return a.official-b.official||a.town.localeCompare(b.town);
-      if(sort==='cod')return (Number.isFinite(b.cod)?b.cod:-1)-(Number.isFinite(a.cod)?a.cod:-1)||a.town.localeCompare(b.town);
-      if(sort==='sales')return b.sales-a.sales||a.town.localeCompare(b.town);
-      if(sort==='town')return a.town.localeCompare(b.town);
-      return (Number.isFinite(b.gap)?b.gap:-999)-(Number.isFinite(a.gap)?a.gap:-999)||a.town.localeCompare(b.town);
-    });
-    $('rr-visible').textContent=visibleRows.length.toLocaleString();
-    $('rr-approved').textContent=visibleRows.filter(function(r){return r.approved}).length.toLocaleString();
-    var gaps=visibleRows.map(function(r){return r.gap}).filter(function(v){return Number.isFinite(v)&&v>0});
-    $('rr-gap').textContent=gaps.length?pct(Math.max.apply(Math,gaps)):'—';
-    $('rr-coverage').textContent=allRows.length.toLocaleString();
-    if(!visibleRows.length){$('rr-result').innerHTML='<div class="rr-empty">No municipalities match these filters.</div>';return}
-    $('rr-result').innerHTML='<table class="rr-table"><thead><tr><th>Municipality</th><th>2026 status</th><th>Certified ratio</th><th>Verified-sale ratio</th><th>Gap</th><th>COD</th><th>Verified sales</th></tr></thead><tbody>'+visibleRows.map(function(r){
-      var gapClass=Number.isFinite(r.gap)&&r.gap>0?' pos':'';
-      return '<tr><td><span class="rr-town">'+esc(r.town)+'</span><span class="rr-sub">'+esc(r.county)+' · district '+esc(r.district)+'</span></td><td>'+(r.approved?'<span class="rr-status approved"><i class="fas fa-circle-check"></i> Approved 2026</span>':'<span class="rr-status">Not on current list</span>')+'</td><td>'+pct(r.official)+'</td><td>'+pct(r.verified)+'</td><td class="rr-gap'+gapClass+'">'+(Number.isFinite(r.gap)?(r.gap>0?'+':'')+fmt(r.gap,1)+' pts':'—')+'</td><td>'+fmt(r.cod,2)+'</td><td>'+r.sales.toLocaleString()+'</td></tr>'
-    }).join('')+'</tbody></table>';
-  }
-  function exportCsv(){
-    if(!visibleRows.length)return;
-    var lines=[['Municipality','County','District','Approved 2026 revaluation/reassessment','Certified 2026 ratio pct','Verified-sale ratio pct','Certified minus verified gap points','Coefficient of deviation','Verified sales'].map(csvCell).join(',')];
-    visibleRows.forEach(function(r){lines.push([r.town,r.county,r.district,r.approved?'yes':'no',fmt(r.official,2),fmt(r.verified,2),fmt(r.gap,2),fmt(r.cod,2),r.sales].map(csvCell).join(','))});
-    var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='watchdog-revaluation-radar-2026.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)
-  }
-  async function load(){
-    try{
-      var responses=await Promise.all(['/equalization-ratios.json','/property/sr1a-ratios.json','/property/uniformity.json','/property/revaluation-reassessment-2026.json'].map(function(url){return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(url+' returned '+r.status);return r.json()})}));
-      var equal=responses[0],sr=responses[1],uni=responses[2],approved=responses[3];
-      var exact={},fallback={};
-      Object.keys(uni.districts||{}).forEach(function(district){var u=uni.districts[district]||{},k=norm(u.name)+'|'+norm(u.county),fk=base(u.name)+'|'+norm(u.county);exact[k]=district;if(!fallback[fk])fallback[fk]=[];fallback[fk].push(district)});
-      allRows=[];
-      Object.keys(equal.ratios||{}).forEach(function(label){
-        var parsed=parseRatioKey(label);if(!parsed)return;
-        var district=exact[norm(parsed.town)+'|'+norm(parsed.county)];
-        if(!district){var candidates=fallback[base(parsed.town)+'|'+norm(parsed.county)]||[];if(candidates.length===1)district=candidates[0]}
-        if(!district)return;
-        var u=uni.districts[district]||{},s=(sr.districts||{})[district]||{},years=Object.keys(equal.ratios[label]||{}).filter(function(y){return /^\d{4}$/.test(y)}).sort().reverse(),official=years.length?Number(equal.ratios[label][years[0]].ratio):NaN,verified=Number(s.ratio)*100;
-        if(!Number.isFinite(official))return;
-        allRows.push({district:district,town:u.name||parsed.town,county:String(u.county||parsed.county).toUpperCase(),official:official,verified:Number.isFinite(verified)?verified:NaN,gap:Number.isFinite(verified)?official-verified:NaN,cod:Number(u.coefficient),sales:Number(s.n)||0,approved:!!((approved.districts||{})[district])})
-      });
-      var counties=Array.from(new Set(allRows.map(function(r){return r.county}))).sort();
-      $('rr-county').innerHTML='<option value="">All loaded counties</option>'+counties.map(function(c){return '<option value="'+esc(c)+'">'+esc(c)+'</option>'}).join('');
-      render();
-    }catch(error){console.error('revaluation_radar_load_failed',error);setError('Governed radar evidence could not be loaded. No fallback estimate was substituted.')}
-  }
-  ['rr-search','rr-county','rr-status','rr-sort'].forEach(function(id){$(id).addEventListener(id==='rr-search'?'input':'change',render)});$('rr-export').addEventListener('click',exportCsv);
-  Promise.resolve(window.njptrAccessReady).then(function(ctx){if(ctx&&ctx.user)load()}).catch(function(){setError('Access could not be verified.')});
+  function ratioTrend(history){var years=Object.keys(history||{}).filter(function(y){return /^\d{4}$/.test(y)&&Number.isFinite(num(history[y]&&history[y].ratio))}).sort();if(years.length<2)return {annual:NaN,resetYear:null};var latest=years[years.length-1],oldest=years[Math.max(0,years.length-4)],annual=(num(history[latest].ratio)-num(history[oldest].ratio))/Math.max(1,Number(latest)-Number(oldest)),resetYear=null;for(var i=1;i<years.length;i++){var a=num(history[years[i-1]].ratio),b=num(history[years[i]].ratio);if(Number.isFinite(a)&&Number.isFinite(b)&&b-a>=15&&b>=90)resetYear=Number(years[i])}return {annual:annual,resetYear:resetYear,latestYear:Number(latest)}}
+  function model(row){if(row.approved)return {score:null,tier:'known',label:'Official 2026 status',coverage:1,reasons:['Appears on the Division of Taxation approved 2026 revaluation/reassessment list.']};var inputs=[],reasons=[];if(Number.isFinite(row.official)){var p=clamp((85-row.official)/25);inputs.push([p,.30]);if(p>.15)reasons.push('Certified ratio is '+pct(row.official)+', increasing equalization pressure.')}if(Number.isFinite(row.gap)){var g=clamp(row.gap/15);inputs.push([g,.20]);if(g>.15)reasons.push('Verified sales are '+fmt(row.gap,1)+' points below the certified relationship.')}if(Number.isFinite(row.cod)){var c=clamp((row.cod-15)/15);inputs.push([c,.20]);if(c>.10)reasons.push('Coefficient of deviation is '+fmt(row.cod,2)+', indicating wider assessment dispersion.')}if(Number.isFinite(row.ratioAnnual)){var t=clamp((-row.ratioAnnual)/5);inputs.push([t,.15]);if(t>.10)reasons.push('Certified ratio has been declining about '+fmt(Math.abs(row.ratioAnnual),1)+' points per year in the observed history.')}if(Number.isFinite(row.budgetScore)){var b=clamp(row.budgetScore/100);inputs.push([b,.15]);if(b>.55)reasons.push('Municipal budget pressure is '+Math.round(row.budgetScore)+'/100 ('+esc(row.budgetBand||'elevated')+').')}var coverage=inputs.reduce(function(a,p){return a+p[1]},0);if(inputs.length<4||coverage<.75)return {score:null,tier:'lower',label:'Insufficient evidence',coverage:coverage,reasons:['Fewer than four governed model components are available; no forecast score is produced.']};var score=Math.round(inputs.reduce(function(a,p){return a+p[0]*p[1]},0)/coverage*100);if(row.resetYear&&row.latestYear-row.resetYear<=2){score=Math.min(score,20);reasons.unshift('Recent large upward certified-ratio reset detected in '+row.resetYear+'; used only as a recency guard, not an official revaluation date.')}var tier=score>=70?'high':score>=50?'elevated':score>=30?'watch':'lower';var label={high:'Higher watch',elevated:'Elevated',watch:'Watch',lower:'Lower'}[tier];if(!reasons.length)reasons.push('Current supported indicators remain comparatively restrained.');return {score:score,tier:tier,label:label,coverage:coverage,reasons:reasons.slice(0,3)}}
+  function render(){var q=$('rr-search').value.trim().toLowerCase(),county=$('rr-county').value,tier=$('rr-tier').value,sort=$('rr-sort').value;visibleRows=allRows.filter(function(r){return(!q||(r.town+' '+r.county).toLowerCase().indexOf(q)>=0)&&(!county||r.county===county)&&(!tier||r.model.tier===tier)}).slice();visibleRows.sort(function(a,b){if(sort==='ratio')return a.official-b.official||a.town.localeCompare(b.town);if(sort==='cod')return (b.cod||-1)-(a.cod||-1)||a.town.localeCompare(b.town);if(sort==='budget')return (b.budgetScore||-1)-(a.budgetScore||-1)||a.town.localeCompare(b.town);if(sort==='town')return a.town.localeCompare(b.town);return (b.model.score==null?-1:b.model.score)-(a.model.score==null?-1:a.model.score)||a.town.localeCompare(b.town)});$('rr-visible').textContent=visibleRows.length.toLocaleString();$('rr-high').textContent=visibleRows.filter(function(r){return r.model.tier==='high'||r.model.tier==='elevated'}).length.toLocaleString();$('rr-approved').textContent=visibleRows.filter(function(r){return r.approved}).length.toLocaleString();$('rr-coverage').textContent=allRows.filter(function(r){return r.model.score!=null||r.approved}).length.toLocaleString();if(!visibleRows.length){$('rr-result').innerHTML='<div class="rr-empty">No municipalities match these filters.</div>';return}$('rr-result').innerHTML='<table class="rr-table"><thead><tr><th>Municipality</th><th>12–24 month watch</th><th>Score</th><th>Certified ratio</th><th>Verified gap</th><th>COD</th><th>Ratio trend / yr</th><th>Budget pressure</th><th>Why</th></tr></thead><tbody>'+visibleRows.map(function(r){var m=r.model;return '<tr><td><span class="rr-town">'+esc(r.town)+'</span><span class="rr-sub">'+esc(r.county)+' · district '+esc(r.district)+'</span></td><td><span class="rr-tier '+m.tier+'">'+esc(m.label)+'</span></td><td class="rr-score">'+(m.score==null?'—':m.score)+'</td><td>'+pct(r.official)+'</td><td>'+(Number.isFinite(r.gap)?(r.gap>0?'+':'')+fmt(r.gap,1)+' pts':'—')+'</td><td>'+fmt(r.cod,2)+'</td><td>'+(Number.isFinite(r.ratioAnnual)?(r.ratioAnnual>0?'+':'')+fmt(r.ratioAnnual,1)+' pts':'—')+'</td><td>'+(Number.isFinite(r.budgetScore)?Math.round(r.budgetScore)+'/100':'—')+'</td><td>'+m.reasons.map(function(x){return '<span class="rr-reason">'+esc(x)+'</span>'}).join('')+'</td></tr>'}).join('')+'</tbody></table>'}
+  function exportCsv(){if(!visibleRows.length)return;var head=['Municipality','County','District','Watch tier','Watch score','Approved 2026','Certified ratio pct','Verified-sale gap points','COD','Certified ratio trend points per year','Budget pressure score','Evidence coverage pct','Reasoning'];var lines=[head.map(csvCell).join(',')];visibleRows.forEach(function(r){lines.push([r.town,r.county,r.district,r.model.label,r.model.score==null?'':r.model.score,r.approved?'yes':'no',fmt(r.official,2),fmt(r.gap,2),fmt(r.cod,2),fmt(r.ratioAnnual,2),Number.isFinite(r.budgetScore)?Math.round(r.budgetScore):'',Math.round(r.model.coverage*100),r.model.reasons.join(' | ')].map(csvCell).join(','))});var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='watchdog-revaluation-early-warning-v1.csv';document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url)}
+  async function load(){try{var urls=['/equalization-ratios.json','/property/sr1a-ratios.json','/property/uniformity.json','/property/revaluation-reassessment-2026.json','/property/data/budget-pressure.json'];var responses=await Promise.all(urls.map(function(url){return fetch(url,{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error(url+' returned '+r.status);return r.json()})}));var equal=responses[0],sr=responses[1],uni=responses[2],approved=responses[3],budget=responses[4],exact={},fallback={};Object.keys(uni.districts||{}).forEach(function(d){var u=uni.districts[d]||{},k=norm(u.name)+'|'+norm(u.county),fk=base(u.name)+'|'+norm(u.county);exact[k]=d;if(!fallback[fk])fallback[fk]=[];fallback[fk].push(d)});allRows=[];Object.keys(equal.ratios||{}).forEach(function(label){var parsed=parseRatioKey(label);if(!parsed)return;var district=exact[norm(parsed.town)+'|'+norm(parsed.county)];if(!district){var candidates=fallback[base(parsed.town)+'|'+norm(parsed.county)]||[];if(candidates.length===1)district=candidates[0]}if(!district)return;var history=equal.ratios[label]||{},trend=ratioTrend(history),years=Object.keys(history).filter(function(y){return /^\d{4}$/.test(y)}).sort().reverse(),official=years.length?num(history[years[0]].ratio):NaN,u=uni.districts[district]||{},s=(sr.districts||{})[district]||{},verified=num(s.ratio)*100,b=(budget.municipalities||{})[district]||{},row={district:district,town:u.name||parsed.town,county:String(u.county||parsed.county).toUpperCase(),official:official,verified:verified,gap:Number.isFinite(verified)?official-verified:NaN,cod:num(u.coefficient),sales:num(s.n)||0,approved:!!((approved.districts||{})[district]),ratioAnnual:trend.annual,resetYear:trend.resetYear,latestYear:trend.latestYear,budgetScore:num(b.score),budgetBand:b.band||''};row.model=model(row);allRows.push(row)});var counties=Array.from(new Set(allRows.map(function(r){return r.county}))).sort();$('rr-county').innerHTML='<option value="">All loaded counties</option>'+counties.map(function(c){return '<option value="'+esc(c)+'">'+esc(c)+'</option>'}).join('');render()}catch(error){console.error('revaluation_early_warning_load_failed',error);$('rr-result').innerHTML='<div class="rr-error">Governed early-warning evidence could not be loaded. No fallback estimate was substituted.</div>'}}
+  ['rr-search','rr-county','rr-tier','rr-sort'].forEach(function(id){$(id).addEventListener(id==='rr-search'?'input':'change',render)});$('rr-export').addEventListener('click',exportCsv);Promise.resolve(window.njptrAccessReady).then(function(ctx){if(ctx&&ctx.user)load()}).catch(function(){$('rr-result').innerHTML='<div class="rr-error">Access could not be verified.</div>'});
 })();
 </script>
-</body>
-</html>
+</body></html>
