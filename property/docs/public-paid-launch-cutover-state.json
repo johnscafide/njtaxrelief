@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-08-27",
+  "checkout_mode": "controlled",
+  "explicit_public_cutover": false,
+  "public_enrollment": "closed",
+  "teams_self_service": "closed",
+  "controls": {
+    "billing_engineering": {
+      "status": "passed",
+      "evidence_ref": "supabase:platform_release_gates/live_billing_lifecycle"
+    },
+    "entity_registration": {
+      "status": "recorded_complete",
+      "evidence_ref": "linear:NJW-89:2026-08-25-entity-tax-registration;supabase:platform_release_gates/live_billing_lifecycle",
+      "sensitive_identifiers_in_repo": false
+    },
+    "counsel_review": {
+      "status": "pending",
+      "evidence_ref": null
+    },
+    "insurance_risk": {
+      "status": "pending",
+      "evidence_ref": null
+    },
+    "nj_tax_registration_configuration": {
+      "status": "recorded_complete",
+      "effective_date": "2026-09-16",
+      "evidence_ref": "linear:NJW-89:2026-08-25-stripe-tax;supabase:platform_release_gates/live_billing_lifecycle"
+    },
+    "nj_tax_classification": {
+      "status": "pending",
+      "evidence_ref": null
+    },
+    "nj_tax_live_calculation": {
+      "status": "pending",
+      "not_before": "2026-09-16",
+      "verified_at": null,
+      "evidence_ref": null
+    }
+  },
+  "open_ready": false,
+  "notes": [
+    "This file records the reconciled launch-control posture; it is not external legal, tax, or insurance evidence.",
+    "Checkout must remain controlled while explicit_public_cutover is false or any required external control is unresolved.",
+    "Do not store EIN values, tax portal credentials, payment credentials, privileged legal communications, or policy credentials here."
+  ]
+}
