@@ -12,8 +12,8 @@
     :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:var(--surface-subtle,#f5f6f7);color:var(--text-primary,#15212b);font-family:var(--font-ui,system-ui,sans-serif)}
     .ap-shell{min-height:100vh}.ap-top{background:var(--wd-navy-950,#0b1f2a);color:#fff}.ap-topin{max-width:var(--container-wide,1500px);margin:auto;padding:18px clamp(18px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:18px}.ap-watchdog{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.01em}.ap-watchdog a{color:inherit;text-decoration:none}.ap-badge{font-size:var(--type-xs,12px);opacity:.76}
     .ap-card{max-width:var(--container-wide,1500px);margin:0 auto;padding:28px clamp(18px,4vw,48px) 18px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px}.ap-photo{width:78px;height:78px;border-radius:50%;object-fit:cover;background:#dde4e8}.ap-identity h1{margin:0 0 5px;font-size:clamp(24px,3vw,38px);line-height:1.08}.ap-identity p{margin:3px 0;color:var(--text-muted,#61717d);font-size:var(--type-sm,14px)}.ap-logo{max-height:62px;max-width:180px;object-fit:contain}.ap-contact{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.ap-contact a{display:inline-flex;padding:9px 12px;border-radius:var(--radius-md,10px);background:#fff;border:1px solid var(--border-subtle,#d9e0e4);color:inherit;text-decoration:none;font-size:var(--type-sm,14px);font-weight:700}.ap-disclosure{max-width:var(--container-wide,1500px);margin:0 auto;padding:0 clamp(18px,4vw,48px) 18px;color:var(--text-muted,#61717d);font-size:var(--type-xs,12px)}
-    .ap-lookup{max-width:var(--container-wide,1500px);margin:auto;padding:0 clamp(12px,2vw,24px) 32px}.ap-frame{width:100%;min-height:980px;border:0;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-state{max-width:760px;margin:80px auto;padding:30px;text-align:center;background:#fff;border-radius:var(--radius-lg,16px);box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-state h1{margin-top:0}.ap-state p{color:var(--text-muted,#61717d)}
-    @media(max-width:768px){.ap-topin{padding:14px 18px}.ap-card{grid-template-columns:64px 1fr;padding-top:20px}.ap-photo{width:64px;height:64px}.ap-logo{grid-column:1/-1;max-height:48px}.ap-frame{min-height:1100px;border-radius:12px}.ap-lookup{padding-inline:0}.ap-contact a{font-size:12px}}
+    .ap-lookup,.ap-lead{max-width:var(--container-wide,1500px);margin:auto;padding:0 clamp(12px,2vw,24px) 32px}.ap-frame{width:100%;min-height:980px;border:0;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-lead-card{margin-top:18px;padding:24px;background:#fff;border-radius:var(--radius-lg,16px);box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-lead-card h2{margin:0 0 6px}.ap-lead-card p{margin:0 0 16px;color:var(--text-muted,#61717d)}.ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ap-grid .wide{grid-column:1/-1}.ap-grid label{display:grid;gap:6px;font-size:var(--type-sm,14px);font-weight:700}.ap-grid input{width:100%;padding:12px;border:1px solid var(--border-subtle,#d9e0e4);border-radius:var(--radius-md,10px);font:inherit}.ap-consent{display:flex!important;grid-template-columns:auto 1fr!important;align-items:start;gap:8px!important;font-weight:500!important}.ap-consent input{width:auto;margin-top:3px}.ap-submit{margin-top:14px;padding:12px 16px;border:0;border-radius:var(--radius-md,10px);background:var(--wd-navy-950,#0b1f2a);color:#fff;font:inherit;font-weight:800;cursor:pointer}.ap-submit[disabled]{opacity:.55;cursor:wait}.ap-msg{margin-top:10px;font-size:var(--type-sm,14px)}.ap-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}.ap-state{max-width:760px;margin:80px auto;padding:30px;text-align:center;background:#fff;border-radius:var(--radius-lg,16px);box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-state h1{margin-top:0}.ap-state p{color:var(--text-muted,#61717d)}
+    @media(max-width:768px){.ap-topin{padding:14px 18px}.ap-card{grid-template-columns:64px 1fr;padding-top:20px}.ap-photo{width:64px;height:64px}.ap-logo{grid-column:1/-1;max-height:48px}.ap-frame{min-height:1100px;border-radius:12px}.ap-lookup,.ap-lead{padding-inline:0}.ap-lead-card{border-radius:0}.ap-contact a{font-size:12px}.ap-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -22,40 +22,36 @@
   <main id="portal" hidden>
     <section class="ap-card">
       <img id="photo" class="ap-photo" alt="" hidden>
-      <div class="ap-identity">
-        <h1 id="name">Your local real estate professional</h1>
-        <p id="brokerage"></p><p id="license"></p>
-        <div class="ap-contact"><a id="phone" hidden>Call</a><a id="email" hidden>Email</a></div>
-      </div>
+      <div class="ap-identity"><h1 id="name">Your local real estate professional</h1><p id="brokerage"></p><p id="license"></p><div class="ap-contact"><a id="phone" hidden>Call</a><a id="email" hidden>Email</a></div></div>
       <img id="logo" class="ap-logo" alt="Brokerage logo" hidden>
     </section>
     <p id="disclosure" class="ap-disclosure" hidden></p>
     <section class="ap-lookup" aria-label="Watchdog property lookup"><iframe id="lookup" class="ap-frame" title="Watchdog New Jersey property lookup" loading="eager"></iframe></section>
+    <section class="ap-lead" aria-label="Contact this agent">
+      <form id="leadForm" class="ap-lead-card" novalidate>
+        <h2>Send this property to your agent</h2><p>After checking the property above, share the address and your contact details. Your information goes to this agent's private Watchdog workflow.</p>
+        <div class="ap-grid">
+          <label>Full name<input name="full_name" maxlength="120" autocomplete="name" required></label>
+          <label>Email<input name="email" maxlength="254" type="email" autocomplete="email"></label>
+          <label>Phone<input name="phone" maxlength="40" type="tel" autocomplete="tel"></label>
+          <label class="wide">Property address<input name="address" maxlength="240" autocomplete="street-address" required></label>
+          <label class="ap-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+          <label class="wide ap-consent"><input name="contact_consent" type="checkbox" required><span>I agree that this real estate professional may contact me about this property request. Watchdog does not infer ownership or seller intent from this submission.</span></label>
+        </div>
+        <button class="ap-submit" type="submit">Send to agent</button><div id="leadMsg" class="ap-msg" role="status" aria-live="polite"></div>
+      </form>
+    </section>
   </main>
   <section id="state" class="ap-state"><h1>Loading agent portal…</h1><p>Watchdog is verifying this public portal and its current professional entitlement.</p></section>
 </div>
 <script>
 (function(){
-  const state=document.getElementById('state'), portal=document.getElementById('portal');
-  const path=location.pathname.replace(/\/+$/,'').split('/');
-  const slug=(new URLSearchParams(location.search).get('slug')||path[path.length-1]||'').toLowerCase();
-  const safe=/^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])?$/.test(slug);
-  function text(id,value){if(value)document.getElementById(id).textContent=value}
-  function img(id,value,alt){if(!value)return;const el=document.getElementById(id);el.src=value;el.alt=alt||'';el.hidden=false}
-  function unavailable(){state.innerHTML='<h1>Agent portal unavailable</h1><p>This vanity address is not active. The professional may have changed their portal name or their Watchdog entitlement may no longer be active.</p><p><a href="/property/">Use the public Watchdog property lookup</a></p>'}
+  const state=document.getElementById('state'),portal=document.getElementById('portal'),form=document.getElementById('leadForm'),msg=document.getElementById('leadMsg');
+  const path=location.pathname.replace(/\/+$/,'').split('/');const slug=(new URLSearchParams(location.search).get('slug')||path[path.length-1]||'').toLowerCase();const safe=/^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])?$/.test(slug);
+  function text(id,value){if(value)document.getElementById(id).textContent=value}function img(id,value,alt){if(!value)return;const el=document.getElementById(id);el.src=value;el.alt=alt||'';el.hidden=false}function unavailable(){state.innerHTML='<h1>Agent portal unavailable</h1><p>This vanity address is not active. The professional may have changed their portal name or their Watchdog entitlement may no longer be active.</p><p><a href="/property/">Use the public Watchdog property lookup</a></p>'}
   if(!safe)return unavailable();
-  fetch('/api/agent-portal-profile?slug='+encodeURIComponent(slug),{headers:{Accept:'application/json'}}).then(async r=>({ok:r.ok,body:await r.json().catch(()=>({}))})).then(({ok,body})=>{
-    if(!ok||!body.available||!body.profile)return unavailable();
-    const p=body.profile;
-    text('name',p.display_name); text('brokerage',p.brokerage_name); text('license',p.license_number?'NJ real estate license '+p.license_number:'');
-    img('photo',p.photo_url,p.display_name||'Agent photo'); img('logo',p.brokerage_logo_url,(p.brokerage_name||'Brokerage')+' logo');
-    if(p.business_phone){const el=document.getElementById('phone');el.href='tel:'+String(p.business_phone).replace(/[^+0-9]/g,'');el.textContent=p.business_phone;el.hidden=false}
-    if(p.business_email){const el=document.getElementById('email');el.href='mailto:'+p.business_email;el.textContent=p.business_email;el.hidden=false}
-    if(p.brokerage_disclosure){const el=document.getElementById('disclosure');el.textContent=p.brokerage_disclosure;el.hidden=false}
-    document.title=(p.display_name||'Agent')+' | Watchdog Property Intelligence';
-    document.getElementById('lookup').src='/property/?portal='+encodeURIComponent(slug);
-    state.hidden=true; portal.hidden=false;
-  }).catch(unavailable);
+  fetch('/api/agent-portal-profile?slug='+encodeURIComponent(slug),{headers:{Accept:'application/json'}}).then(async r=>({ok:r.ok,body:await r.json().catch(()=>({}))})).then(({ok,body})=>{if(!ok||!body.available||!body.profile)return unavailable();const p=body.profile;text('name',p.display_name);text('brokerage',p.brokerage_name);text('license',p.license_number?'NJ real estate license '+p.license_number:'');img('photo',p.photo_url,p.display_name||'Agent photo');img('logo',p.brokerage_logo_url,(p.brokerage_name||'Brokerage')+' logo');if(p.business_phone){const el=document.getElementById('phone');el.href='tel:'+String(p.business_phone).replace(/[^+0-9]/g,'');el.textContent=p.business_phone;el.hidden=false}if(p.business_email){const el=document.getElementById('email');el.href='mailto:'+p.business_email;el.textContent=p.business_email;el.hidden=false}if(p.brokerage_disclosure){const el=document.getElementById('disclosure');el.textContent=p.brokerage_disclosure;el.hidden=false}document.title=(p.display_name||'Agent')+' | Watchdog Property Intelligence';document.getElementById('lookup').src='/property/?portal='+encodeURIComponent(slug);state.hidden=true;portal.hidden=false}).catch(unavailable);
+  form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';const fd=new FormData(form),email=String(fd.get('email')||'').trim(),phone=String(fd.get('phone')||'').trim();if(!form.reportValidity()||(!email&&!phone)){msg.textContent='Please add an email address or phone number.';return}const btn=form.querySelector('button');btn.disabled=true;try{const r=await fetch('/api/agent-portal-lead',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({slug,full_name:fd.get('full_name'),email,phone,address:fd.get('address'),website:fd.get('website'),contact_consent:fd.get('contact_consent')==='on'})});const b=await r.json().catch(()=>({}));if(!r.ok)throw new Error(b.error||'Unable to send request.');form.reset();msg.textContent='Sent. This property request is now in the agent’s private Watchdog workflow.'}catch(err){msg.textContent=err.message||'Unable to send request right now.'}finally{btn.disabled=false}});
 })();
 </script>
 </body>
