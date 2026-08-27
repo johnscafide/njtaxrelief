@@ -1,0 +1,41 @@
+name: Watchdog Voice contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/watchdog-intelligence-voice*.js'
+      - 'property/js/watchdog-intelligence-voice*.js'
+      - 'property/js/watchdog-intelligence-narration.js'
+      - 'property/css/watchdog-intelligence-voice.css'
+      - 'property/css/watchdog-contextual-voice.css'
+      - 'property/tests/watchdog-intelligence-voice-contract.mjs'
+      - '.github/workflows/watchdog-voice-contract.yml'
+  pull_request:
+    paths:
+      - 'api/watchdog-intelligence-voice*.js'
+      - 'property/js/watchdog-intelligence-voice*.js'
+      - 'property/js/watchdog-intelligence-narration.js'
+      - 'property/css/watchdog-intelligence-voice.css'
+      - 'property/css/watchdog-contextual-voice.css'
+      - 'property/tests/watchdog-intelligence-voice-contract.mjs'
+      - '.github/workflows/watchdog-voice-contract.yml'
+
+jobs:
+  voice-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Voice JavaScript syntax
+        run: |
+          node --check api/watchdog-intelligence-voice.js
+          node --check api/watchdog-intelligence-voice-core.js
+          node --check api/watchdog-intelligence-voice-browser-usage.js
+          node --check property/js/watchdog-intelligence-voice.js
+          node --check property/js/watchdog-intelligence-voice-browser.js
+          node --check property/js/watchdog-intelligence-narration.js
+      - name: Verify governed Voice contract
+        run: node property/tests/watchdog-intelligence-voice-contract.mjs
