@@ -7,6 +7,7 @@ const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
 const BULK_SALES_FILE = /^\/property\/sales-[a-z-]+\.json$/i;
+const AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
 const SALES_API_PATH = '/api/sales-by-district';
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
@@ -197,6 +198,16 @@ export default function middleware(request) {
   // Keep the proven legacy Watchdog entry available while clean routes are staged.
   if (url.pathname === '/property' || url.pathname === '/property/') {
     return rewrite(new URL('/api/watchdog-index-entry', request.url));
+  }
+
+  // Agent vanity URLs stay public and readable while resolving through the one
+  // noindex portal shell. The slug is passed only to the existing service-owned,
+  // entitlement-aware profile resolver; this rewrite does not weaken that boundary.
+  const agentPortalMatch = url.pathname.match(AGENT_PORTAL_PATH);
+  if (agentPortalMatch) {
+    const destination = new URL('/property/agent/index.html', request.url);
+    destination.searchParams.set('slug', agentPortalMatch[1].toLowerCase());
+    return rewrite(destination);
   }
 
   // Existing /property/* implementation and compatibility paths remain untouched
