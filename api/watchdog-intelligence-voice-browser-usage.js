@@ -5,7 +5,13 @@ const FEATURE = 'watchdog_intelligence';
 const PLAN_RANK = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
 const DAILY_LIMITS = { transcription: 40, speech: 60 };
 const NARRATION_EVENTS = new Set(['narration_started', 'narration_completed', 'narration_stopped', 'narration_failed']);
+const QUERY_LIFECYCLE_EVENTS = new Set(['query_submitted', 'query_converted']);
+const VOICE_EVENTS = new Set([...NARRATION_EVENTS, ...QUERY_LIFECYCLE_EVENTS]);
 const NARRATION_FORMATS = new Set(['quick', 'professional', 'evidence', 'changes']);
+const TRANSCRIPTION_PROVIDERS = new Map([
+  ['fish-audio/transcribe-1-free', 'fish_audio_via_vercel_ai_gateway'],
+  ['browser_speech_recognition', 'browser_web_speech'],
+]);
 
 const clean = (value, max = 500) => String(value ?? '').replace(/[\u0000-\u001f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max);
 const bearer = (req) => {
@@ -100,6 +106,21 @@ function safeNarrationMetadata(input, packaging) {
   };
 }
 
+function safeQueryLifecycleMetadata(input, packaging) {
+  const value = input && typeof input === 'object' && !Array.isArray(input) ? input : {};
+  const reviewedMs = Number(value.reviewed_ms);
+  return {
+    source: 'reviewed_voice_transcript',
+    packaging,
+    edited: value.edited === true,
+    reviewed_ms: Number.isFinite(reviewedMs) ? Math.max(0, Math.min(600000, Math.round(reviewedMs))) : null,
+    surface: clean(value.surface, 100) || 'unknown',
+    raw_audio_persisted: false,
+    transcript_content_persisted: false,
+    prompt_content_persisted: false,
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store, max-age=0');
   res.setHeader('Pragma', 'no-cache');
@@ -129,18 +150,22 @@ module.exports = async function handler(req, res) {
 
     if (kind === 'event') {
       const event = clean(body.event, 40).toLowerCase();
-      if (!NARRATION_EVENTS.has(event)) return res.status(400).json({ error: 'Unsupported browser Voice event.' });
+      if (!VOICE_EVENTS.has(event)) return res.status(400).json({ error: 'Unsupported Voice event.' });
+      const queryLifecycle = QUERY_LIFECYCLE_EVENTS.has(event);
+      const requestedModel = clean(body.model, 100).toLowerCase();
+      const provider = queryLifecycle ? (TRANSCRIPTION_PROVIDERS.get(requestedModel) || 'voice_input_review') : 'browser_web_speech';
+      const model = queryLifecycle ? (TRANSCRIPTION_PROVIDERS.has(requestedModel) ? requestedModel : 'reviewed_voice_transcript') : 'browser_speech_synthesis';
       await insertUsage({
         user_id: user.id,
         plan_tier: plan,
         event_type: `voice_${event}`,
-        provider: 'browser_web_speech',
-        model: 'browser_speech_synthesis',
+        provider,
+        model,
         request_units: 0,
         input_tokens: 0,
         output_tokens: 0,
         latency_ms: 0,
-        metadata: safeNarrationMetadata(body.metadata, packaging),
+        metadata: queryLifecycle ? safeQueryLifecycleMetadata(body.metadata, packaging) : safeNarrationMetadata(body.metadata, packaging),
       });
       return res.status(200).json({ ok: true, kind, event });
     }
