@@ -408,10 +408,10 @@
 
     const input = $('#dwa-input', panel);
     const send = $('#dwa-send', panel);
-    send?.addEventListener('click', captureVoiceSubmission);
+    send?.addEventListener('click', captureVoiceSubmission, true);
     input?.addEventListener('keydown', (event) => {
       if ((event.metaKey || event.ctrlKey) && event.key === 'Enter') captureVoiceSubmission();
-    });
+    }, true);
     input?.addEventListener('input', (event) => {
       if (event.isTrusted && pendingVoiceQuery?.submitted) clearPendingVoiceQuery();
     });
