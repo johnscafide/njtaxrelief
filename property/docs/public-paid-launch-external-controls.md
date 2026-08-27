@@ -1,106 +1,129 @@
 # Watchdog public paid launch: external controls
 
-_Last updated: 2026-08-25_
+_Last reconciled: 2026-08-27_
 
 ## Current release posture
 
-The controlled Stripe Live billing lifecycle is accepted in production. `live_billing_lifecycle` is `passed`, while Checkout remains intentionally `controlled` and public enrollment remains closed.
+The controlled Stripe Live billing lifecycle is accepted in production. Supabase `platform_release_gates.live_billing_lifecycle` is `passed`, while subscription Checkout remains intentionally `controlled` and broad public paid enrollment remains closed.
 
-Accepted Live evidence includes:
+Accepted Live billing evidence includes purchase, signed entitlement reconciliation, cancellation/reactivation, refund, upgrade/downgrade behavior, duplicate/out-of-order webhook handling, failed-payment recovery, and the bounded Agent trial canary. None of that engineering evidence satisfies the external legal, insurance, tax-classification, or public-cutover decisions below.
 
-- new Agent purchase
-- signed entitlement promotion
-- cancellation and reactivation
-- full refund
-- Agent -> Pro upgrade with paid proration
-- Pro -> Agent downgrade with customer credit
-- duplicate webhook idempotency
-- out-of-order webhook handling
-- signed `invoice.payment_failed` acceptance
+## Reconciled operator and registration facts
 
-NJW-42 is complete. Stripe Customer Portal legal links are user-confirmed configured. External uptime ownership is also closed: the scheduled GitHub monitor names `johnscafide` as owner, opens/updates a GitHub incident on failure, checks canonical WatchdogIndex.com first, and retains NJPropertyTaxRelief.com as an intentional coexistence check.
+The launch packet previously described entity separation and New Jersey registration as wholly pending. That is stale.
 
-The four items below are the remaining external/manual controls before broad public paid enrollment.
+The following milestones are recorded in NJW-89 and production release evidence as owner-confirmed operational facts:
 
-## 1. Counsel review
+- legal entity: **Watchdog Property Intelligence LLC**;
+- formation state: New Jersey;
+- formation date: 2026-08-25;
+- EIN notice received on 2026-08-25; the EIN value is intentionally not stored in GitHub, Linear, or release evidence;
+- NJ-REG completed on 2026-08-25;
+- New Jersey Sales Tax Certificate of Authority reported available on 2026-08-25;
+- production release evidence records `entity_structure_status=formed_ein_njreg_sales_tax_registered`.
 
-Have counsel review the production versions of:
+**Control treatment:** the formation/registration milestone is recorded complete. This does **not** mean counsel has approved final operator language, contractual separation, banking/remittance ownership, IP ownership, brokerage boundaries, or the final public legal pages.
 
-- `https://www.watchdogindex.com/property/terms`
-- `https://www.watchdogindex.com/property/privacy`
-- `https://www.watchdogindex.com/property/refunds`
-- `https://www.watchdogindex.com/property/data-use`
-- material product disclaimers and Data Methodology language
-- public-source licensing, redistribution and derived-intelligence posture
-- the relationship between Watchdog software and separately provided real-estate/tax/professional services
+Current public-language review targets still include material operator drift:
 
-Questions to resolve explicitly:
+- Terms currently describe the agreement as being with the “operator of Watchdog Property Intelligence” rather than naming the LLC.
+- Privacy currently identifies John Scafide and Opus Elite Real Estate in its “Who we are” section.
+- Refund Policy is still explicitly labeled `Commercial policy draft — subject to counsel review`.
 
-1. Is the current operator/entity identification correct for a paid SaaS launch?
-2. Should Watchdog operate through a separate LLC or other entity before public paid enrollment?
-3. Are the liability limitation, indemnity, disclaimer and regulated-decision provisions appropriate for the actual product?
-4. Are the current refund/cancellation terms appropriate for monthly and annual subscriptions?
-5. Are privacy-request methods, retention language, analytics disclosures and service-provider disclosures sufficient?
-6. Do any public-source or third-party datasets require additional attribution, contractual limits or redistribution restrictions?
+Do not silently replace those statements based only on this packet. Counsel must resolve the correct final SaaS operator language and the relationship, if any, to separately provided licensed real-estate or tax/professional services.
 
-Do not remove the Refund Policy's `subject to counsel review` status until this review is actually complete.
+## Reconciled New Jersey tax implementation facts
 
-## 2. New Jersey sales-tax / Stripe Tax determination
+The earlier launch packet also described Stripe Tax setup as not yet enabled. That is stale.
 
-Do not enable Stripe Tax merely to clear the launch checklist. First obtain a tax-advisor determination covering Watchdog's actual product mix.
+Current production evidence records:
 
-The detailed adviser handoff is in `property/docs/public-paid-launch-tax-advisor-brief.md`.
+- New Jersey Stripe Tax registration scheduled for the Certificate of Authority effective date **2026-09-16**;
+- subscription Checkout uses `automatic_tax.enabled=true` and requires billing-address collection;
+- production `create-checkout-session` is currently v48 and remains JWT-protected;
+- Agent product tax code `txcd_10701400` was tool-verified in Stripe on 2026-08-25;
+- Pro and Pro+ use of the same tax code was user-confirmed on 2026-08-25;
+- Stripe Tax is intentionally not collecting New Jersey tax before 2026-09-16;
+- the first controlled New Jersey tax calculation remains pending until on or after 2026-09-16.
 
-Official New Jersey guidance is relevant in two directions:
+**Control treatment:** registration/configuration is recorded complete, but it is not a written tax-adviser determination that Watchdog's exact plan mix is taxable as configured. The legal taxability/classification determination remains pending unless a real adviser determination is attached or referenced.
 
-- NJ Technical Bulletin TB-72 says ordinary SaaS is generally not subject to Sales Tax when customers receive remote access to software and no software is delivered.
-- The same guidance says SaaS that is an **information service** is taxable.
-- NJ's Information Services guidance specifically gives access to information such as **property values** and **marketing trends** as examples of taxable information services.
+See `property/docs/public-paid-launch-tax-advisor-brief.md` for the narrowed adviser handoff.
 
-Sources:
+## Remaining blocking controls
 
-- https://www.nj.gov/treasury/taxation/pdf/pubs/tb/tb72.pdf
+### 1. Counsel review and final operator language — PENDING
+
+Counsel must review the production versions of:
+
+- `https://www.watchdogindex.com/property/terms/`
+- `https://www.watchdogindex.com/property/privacy/`
+- `https://www.watchdogindex.com/property/refunds/`
+- `https://www.watchdogindex.com/property/data-use/`
+- material product disclaimers and Data Methodology language;
+- public-source licensing, redistribution, and derived-intelligence posture;
+- the relationship between Watchdog software and separately provided licensed/professional services.
+
+Minimum evidence before this control can pass:
+
+- reviewer or firm;
+- review date;
+- written evidence reference outside public source control when privileged or confidential;
+- clear disposition: approved, approved with specified changes, or not approved;
+- explicit answer on final LLC operator language and brokerage/professional-service separation.
+
+Use `property/docs/public-paid-launch-counsel-insurance-checklist.md` as the intake packet. The packet itself is not approval evidence.
+
+### 2. E&O / technology liability / cyber insurance decision — PENDING
+
+The owner explicitly deferred this as a pre-public-launch task on 2026-08-25. The intended named insured is Watchdog Property Intelligence LLC.
+
+A completion record must show either:
+
+- bound coverage with carrier, coverage type, effective date, limits/retention, and material exclusions summarized with a redacted evidence reference; **or**
+- an explicit owner decision to launch uninsured/partially insured, with the accepted risk written down and any counsel/broker guidance referenced.
+
+Do not mark this control passed merely because a quote was requested.
+
+### 3. Written NJ sales-tax classification — PENDING
+
+Official New Jersey guidance distinguishes ordinary SaaS from taxable information services. It specifically describes paid access to information such as property values and marketing trends as an information-service example, while TB-72 also says most SaaS is not taxable unless it meets the information-service definition.
+
+Current setup already prepares Watchdog to collect tax in New Jersey beginning 2026-09-16. That technical setup is not a substitute for a written classification of the actual Agent, Pro, and Pro+ product mix.
+
+Required evidence:
+
+- adviser/provider identity;
+- determination date and effective date;
+- written evidence reference;
+- plan-by-plan or transaction-level taxability conclusion;
+- confirmation or correction of the selected Stripe Tax product code/treatment;
+- sourcing assumptions and any material multi-state caveat.
+
+Official references used for the handoff:
+
 - https://www.nj.gov/treasury/taxation/infoservices.shtml
-- https://nj.gov/treasury/taxation/informationforvendors.shtml
+- https://www.nj.gov/treasury/taxation/pdf/pubs/sales/anj29.pdf
+- https://www.nj.gov/treasury/taxation/pdf/pubs/tb/tb72.pdf
+- https://www.nj.gov/treasury/taxation/businesses/salestax/
 
-Current production posture: automatic tax remains disabled and no Stripe Tax registration should be added until this determination is documented.
+### 4. First controlled NJ Stripe Tax calculation — PENDING / DATE-BOUND
 
-## 3. Business/entity separation
+Do not run or claim this acceptance before 2026-09-16.
 
-Ask counsel to document, at minimum:
+On or after that date, use a controlled account and verify a New Jersey Checkout calculation without opening public enrollment. Record the Stripe mode, plan/cadence, taxable address state, tax calculation outcome, session/invoice evidence reference, and cleanup/reconciliation result. Avoid copying payment credentials or sensitive registration identifiers into GitHub/Linear.
 
-1. The legal person/entity that should contract with Watchdog subscribers and appear in Terms, invoices, Stripe and tax registrations.
-2. Whether a separate LLC or other entity should own/operate the Watchdog SaaS rather than having the product contract directly through an individual or brokerage/professional activity.
-3. What agreements, bank/payment-account ownership, intellectual-property assignment, assumed-name/DBA filings, and intercompany/professional-service boundaries are needed to make that separation real rather than cosmetic.
-4. Whether the current real-estate/tax-service references create any licensing, brokerage-supervision, conflict, advertising or disclosure obligations for the SaaS entity.
-5. Whether the current limitation-of-liability and indemnity language is appropriate for the chosen entity structure.
+### 5. Explicit public cutover decision — NO-GO
 
-Do not change the operator statement to a new entity until that entity actually exists and has authority to contract.
+Broad public paid enrollment remains unauthorized. An explicit owner decision is required **after** the blocking controls above are satisfied or, where the acceptance criteria permit it, a specific residual risk is expressly accepted and evidenced.
 
-## 4. E&O / technology liability insurance
-
-Request a quote for a property-data / analytics SaaS business. The quote request should expressly disclose that Watchdog:
-
-- provides subscription property intelligence, monitoring, scores, estimates and reports;
-- aggregates public/third-party property records and generates derived analytical outputs;
-- serves real-estate and other professional users;
-- does not provide a certified appraisal, legal opinion, underwriting decision or consumer report;
-- uses hosted cloud infrastructure and third-party payment/authentication providers;
-- may offer integrations/API capability to higher tiers.
-
-Ask the broker/insurer to answer:
-
-1. Does the policy cover technology E&O / professional liability claims arising from incorrect data, analytical outputs, reports, software errors or service failure?
-2. Is cyber/privacy liability included or separate, and what are the breach-response and incident-response limits?
-3. Are claims involving real-estate professionals, property valuation/analytics, tax-related information, public-record data, AI/automated analytical outputs, or API/integration failures excluded or restricted?
-4. Are defense costs inside or outside the limit?
-5. What retroactive date, deductible/retention, per-claim limit and aggregate limit apply?
-6. Are contractual liability, IP/media liability, regulatory/privacy proceedings and business interruption covered or excluded?
-7. Does the insurer require any changes to Terms, disclaimers, security controls or incident response before binding coverage?
-
-Record the carrier, policy type, effective date, limits, retention and material exclusions before marking this control complete.
+The current machine-readable posture is tracked in `property/docs/public-paid-launch-cutover-state.json` and validated by `scripts/verify_public_paid_launch_counsel_insurance_checklist_contract.js`.
 
 ## Completed external-operating controls
+
+### Entity formation and NJ registration milestone
+
+Recorded complete on 2026-08-25 as described above. Sensitive EIN and registration identifiers are intentionally not persisted in GitHub/Linear.
 
 ### Stripe Customer Portal legal links
 
@@ -109,43 +132,46 @@ User-confirmed on 2026-08-25:
 - Terms: `https://www.watchdogindex.com/property/terms`
 - Privacy: `https://www.watchdogindex.com/property/privacy`
 
-The Stripe connector became unavailable after the user saved the setting, so release evidence records this as **user-confirmed**, not independently tool-read-back.
+The release evidence accurately labels this **user-confirmed**, not connector-read-back.
 
 ### External uptime alert ownership
 
 Passed on 2026-08-25.
 
-- Primary owner: `johnscafide`
-- Delivery path: GitHub issue in the Watchdog repository
-- Schedule: every 15 minutes
-- Failure behavior: open or update one production-availability incident and assign the owner
-- Recovery behavior: comment with healthy run and close the incident
-- Canonical surface checked first: `https://www.watchdogindex.com/property/`
-- Intentional coexistence check: `https://njpropertytaxrelief.com/`
-- Workflow: `.github/workflows/production-uptime-check.yml`
+- primary owner: `johnscafide`;
+- delivery path: GitHub incident issue;
+- schedule: every 15 minutes;
+- canonical surface checked first: `https://www.watchdogindex.com/property/`;
+- intentional coexistence check: `https://njpropertytaxrelief.com/`.
 
-## Final public cutover
+## Final public cutover sequence
 
-Only after the four remaining external controls above are resolved or explicitly accepted by the owner:
+Only after the preflight reports no blockers:
 
-1. Confirm `live_billing_lifecycle = passed`.
-2. Change Checkout release mode from `controlled` to `open`.
-3. Keep Teams self-service enrollment closed.
-4. Remove the temporary public Agent/Pro checkout guard.
-5. Deploy from current main with fresh SHAs.
-6. Smoke-test Free -> Agent and Free -> Pro public entry points without completing another unnecessary charge.
-7. Verify Customer Portal, Terms, Privacy, Refund Policy and support links.
-8. Confirm production monitoring and alert ownership.
-9. Record the cutover timestamp and evidence in NJW-89 / NJW-271.
+1. Confirm `live_billing_lifecycle = passed` in production.
+2. Confirm the entity/registration milestone is still recorded complete.
+3. Attach/reference real counsel disposition evidence.
+4. Attach/reference real insurance or accepted-risk evidence.
+5. Attach/reference a written NJ tax classification.
+6. On or after 2026-09-16, pass the controlled NJ Stripe Tax calculation and persist a non-sensitive evidence reference.
+7. Record the explicit owner public-cutover decision.
+8. Re-fetch current `main` and the production release-gate state.
+9. Change subscription Checkout release mode from `controlled` to `open` only after all prior steps are true.
+10. Keep Teams self-service enrollment closed unless separately approved.
+11. Smoke-test public Free -> Agent and Free -> Pro entry points without creating an unnecessary second charge.
+12. Verify Customer Portal, Terms, Privacy, Refund Policy, support links, monitoring, and incident ownership.
+13. Record the cutover timestamp and evidence in NJW-89.
 
 ## Current decision
 
-**Technical billing: PASSED**
-
-**Portal legal links: USER-CONFIRMED**
-
-**Uptime alert ownership: PASSED**
-
-**Public paid enrollment: CONTROLLED / NOT YET OPEN**
-
-Remaining reason: counsel review, entity/liability separation, E&O/technology liability insurance review, and tax-adviser determination/Stripe Tax configuration as applicable.
+| Control | Current state |
+| --- | --- |
+| Technical Stripe Live billing | PASS |
+| Entity formation / EIN / NJ-REG / Sales Tax registration milestone | RECORDED COMPLETE |
+| Stripe Tax subscription-checkout configuration | RECORDED COMPLETE |
+| Counsel / final LLC operator language | PENDING |
+| E&O / technology liability / cyber decision | PENDING |
+| Written NJ sales-tax classification | PENDING |
+| First controlled NJ tax calculation | PENDING until 2026-09-16 |
+| Explicit public cutover | NO-GO |
+| Public paid enrollment | CONTROLLED / NOT OPEN |
