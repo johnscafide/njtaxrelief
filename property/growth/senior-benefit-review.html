@@ -67,7 +67,7 @@
   function state(label,text,cls,note){return '<div class="sb-line"><div><b>'+esc(label)+'</b><small>'+esc(note)+'</small></div><div class="sb-state '+cls+'">'+esc(text)+'</div></div>'}
   function stayCap(income){if(income==null)return null;if(income<=100000)return 6500;if(income<=150000)return 5000;if(income<=200000)return 4000;return 0}
   function screen(e){e.preventDefault();var ref=$('sb-ref').value.trim(),age=tri('sb-age'),dis=tri('sb-disability'),owned=tri('sb-owned'),full=tri('sb-full'),inc24=num('sb-inc24'),inc25=num('sb-inc25'),tax=num('sb-tax'),base=num('sb-base');
-    var freezeAge=age==='yes'||dis==='yes',freezeFactsKnown=(age!=='unknown'||dis!=='unknown')&&owned!=='unknown'&&inc24!=null&&inc25!=null,freezePass=freezeAge&&owned==='yes'&&inc24<=168268&&inc25<=172475;
+    var freezeAge=age==='yes'||dis==='yes',freezeAgeKnown=freezeAge||(age==='no'&&dis==='no'),freezeFactsKnown=freezeAgeKnown&&owned!=='unknown'&&inc24!=null&&inc25!=null,freezePass=freezeAge&&owned==='yes'&&inc24<=168268&&inc25<=172475;
     var stayKnown=age!=='unknown'&&full!=='unknown'&&inc25!=null,stayPass=age==='yes'&&full==='yes'&&inc25<=200000,cap=stayCap(inc25),basis=(freezePass&&tax!=null&&base!=null&&tax>base)?tax-base:null;
     var priority='Complete missing household facts';
     if(freezePass&&base==null)priority='Senior Freeze base year needs verification';else if(basis!=null)priority='Verify Senior Freeze increase over base year';else if(stayPass)priority='Verify Stay NJ application facts';else if(freezePass)priority='Verify Senior Freeze eligibility details';
