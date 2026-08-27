@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en" data-access-require="pro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Added Assessment Watch | Watchdog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/dashboard.css">
+  <link rel="stylesheet" href="/property/css/plan-context.css">
+  <link rel="stylesheet" href="/property/growth/growth.css">
+  <style>
+    .aa-wrap{display:grid;gap:18px}.aa-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.aa-hero h1{margin:6px 0 8px}.aa-hero p{max-width:930px;margin:0}.aa-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:var(--surface-subtle,#eef5ff);font-weight:800}.aa-notice,.aa-panel,.aa-sources{padding:16px 18px;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.aa-notice{display:flex;gap:12px;align-items:flex-start;background:var(--surface-subtle,#f7f9fc)}.aa-controls{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}.aa-field{display:grid;gap:6px}.aa-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.aa-field input,.aa-field select{min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.aa-btn{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.aa-btn.primary{background:#0b65d8;color:#fff}.aa-btn.secondary{background:#eef3f8;color:#10233f}.aa-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.aa-stat{padding:15px 16px;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-sm,0 8px 24px rgba(20,34,54,.06))}.aa-stat b{display:block;font-size:24px}.aa-stat span{display:block;margin-top:5px;font-size:var(--type-sm,14px)}.aa-table-shell{overflow:auto;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.aa-table{width:100%;border-collapse:collapse;min-width:980px}.aa-table th,.aa-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:top}.aa-table th{background:#f7f9fc;font-size:var(--type-xs,12px);text-transform:uppercase;letter-spacing:.04em}.aa-table td.num,.aa-table th.num{text-align:right}.aa-address{font-weight:800}.aa-sub{display:block;margin-top:3px;color:#657386;font-size:var(--type-xs,12px)}.aa-empty,.aa-error{padding:28px;text-align:center}.aa-error{background:#fff3f3;font-weight:700}.aa-sources{display:grid;gap:12px}.aa-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.aa-source{padding:14px;border-radius:var(--radius-md,14px);background:#f7f9fc}.aa-source b{display:block}.aa-source p,.aa-fine{font-size:var(--type-sm,14px);line-height:1.5}.aa-actions{display:flex;gap:10px;flex-wrap:wrap}.aa-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+    @media(max-width:1024px){.aa-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.aa-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:768px){.aa-hero,.aa-controls,.aa-stats,.aa-source-grid{grid-template-columns:1fr}.aa-badge{justify-self:start}}
+  </style>
+</head>
+<body data-sidebar-page="growth" data-plan-auto="true">
+<main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace aa-wrap">
+  <header class="gc-top aa-hero">
+    <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · VERIFIED SALES RESEARCH</span><h1>Added Assessment Watch</h1><p>Surface recent Class 2 sales that look like new construction still assessed near bare-land levels. This reuses Watchdog's existing sale-to-assessment lag classification and keeps new construction separate from stale assessments and land sales.</p></div>
+    <div class="aa-badge"><i class="fas fa-shield-halved"></i> Review candidate, not assessor prediction</div>
+  </header>
+
+  <section class="aa-notice"><i class="fas fa-circle-info"></i><div><b>What this screen means.</b> A candidate is a recent verified sale whose assessment-to-sale ratio is materially below its municipality's current verified-sale norm and whose recorded build year falls within four years of the sale year. That is evidence consistent with new construction awaiting an added assessment, not proof that a notice will issue or a forecast of the final tax bill.</div></section>
+
+  <section class="aa-panel">
+    <div class="aa-controls">
+      <label class="aa-field"><span>County</span><select id="aa-county"><option value="">Choose county</option><option>Atlantic</option><option>Bergen</option><option>Burlington</option><option>Camden</option><option>Cape May</option><option>Cumberland</option><option>Essex</option><option>Gloucester</option><option>Hudson</option><option>Hunterdon</option><option>Mercer</option><option>Middlesex</option><option>Monmouth</option><option>Morris</option><option>Ocean</option><option>Passaic</option><option>Salem</option><option>Somerset</option><option>Sussex</option><option>Union</option><option>Warren</option></select></label>
+      <label class="aa-field"><span>4-digit tax district</span><input id="aa-district" inputmode="numeric" maxlength="4" placeholder="e.g. 0415"></label>
+      <label class="aa-field"><span>Sort</span><select id="aa-sort"><option value="gap">Largest assessment gap</option><option value="recent">Newest sale first</option><option value="ratio">Lowest sale ratio</option><option value="address">Address A–Z</option></select></label>
+      <button id="aa-run" class="aa-btn primary" type="button"><i class="fas fa-magnifying-glass"></i> Run watch</button>
+    </div>
+  </section>
+
+  <section class="aa-stats"><div class="aa-stat"><b id="aa-candidates">—</b><span>added-assessment review candidates</span></div><div class="aa-stat"><b id="aa-sales">—</b><span>recent verified Class 2 sales reviewed</span></div><div class="aa-stat"><b id="aa-ratio">—</b><span>municipal verified-sale ratio</span></div><div class="aa-stat"><b id="aa-gap">—</b><span>largest assessment-gap proxy</span></div></section>
+
+  <section id="aa-result" class="aa-table-shell" aria-live="polite"><div class="aa-empty">Choose a county and four-digit tax district to run the governed watch.</div></section>
+
+  <section class="aa-sources"><div><span>PROVENANCE + BOUNDARY</span><h2>How candidates are classified</h2></div><div class="aa-source-grid">
+    <article class="aa-source"><b>Verified-sale universe</b><p>Uses the municipality-scoped Watchdog sales endpoint backed by NJ Division of Taxation SR-1A records and only Class 2 residential sales meeting the existing price/recency screen.</p></article>
+    <article class="aa-source"><b>New-construction classification</b><p>Matches the existing Sale-to-Assessment Lag Detector: a lagging sale is classified as new construction when a building year exists and is within four years of the sale year. Sales with no building evidence are treated as land/teardown instead.</p></article>
+    <article class="aa-source"><b>Lag threshold</b><p>The candidate screen requires the sale's assessment-to-sale ratio to be below 80% of the municipality's governed verified-sale ratio. The displayed assessment gap is sale price × municipal ratio minus the recorded assessment.</p></article>
+    <article class="aa-source"><b>Tax-impact follow-up</b><p>The gap is an assessment research proxy, not a tax bill. Use the Added Assessment Tax Forecaster with actual municipal tax-rate, ratio, completion-date, and comparable-value evidence before discussing dollar impact.</p></article>
+  </div><div class="aa-actions"><a class="aa-btn secondary aa-link" href="/property/added-assessment-forecaster/"><i class="fas fa-calculator"></i> Open Added Assessment Forecaster</a><a class="aa-btn secondary aa-link" href="https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> NJ Assessors' Handbook</a></div><div class="aa-fine">No owner/contact data is used or produced. This workflow does not predict whether or when an assessor will act, does not determine legal validity, and does not feed ROBUST or the Watchdog Score. Missing ratio or sales evidence fails closed.</div></section>
+</div></div></main>
+<div id="pl-toast" class="pl-toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script>
+(function(){'use strict';
+  var rows=[],$=function(id){return document.getElementById(id)},money=function(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n)};
+  function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+  function countySlug(v){return String(v||'').toLowerCase().replace(/\s+/g,'-').replace(/[^a-z-]/g,'')}
+  function district(v){return String(v||'').replace(/\D/g,'').slice(0,4)}
+  function num(v){var n=Number(v);return Number.isFinite(n)?n:NaN}
+  function lagClass(x,saleYear){if(!x.sf&&!x.yb)return 'land';if(x.yb&&x.yb>=(saleYear||x.y)-4)return 'new';return 'stale'}
+  function render(){var sort=$('aa-sort').value;var view=rows.slice();view.sort(function(a,b){if(sort==='recent')return (b.y||0)-(a.y||0)||String(a.a||'').localeCompare(String(b.a||''));if(sort==='ratio')return (a.r||9)-(b.r||9);if(sort==='address')return String(a.a||'').localeCompare(String(b.a||''));return (b.gap||0)-(a.gap||0)});if(!view.length){$('aa-result').innerHTML='<div class="aa-empty">No supported new-construction candidates were found in the recent verified-sale window for this district.</div>';return}$('aa-result').innerHTML='<table class="aa-table"><thead><tr><th>Property</th><th>Sale</th><th class="num">Price</th><th class="num">Assessed</th><th class="num">Sale ratio</th><th class="num">Build year</th><th class="num">Assessment-gap proxy</th></tr></thead><tbody>'+view.map(function(x){return '<tr><td><span class="aa-address">'+esc(x.a||'Address unavailable')+'</span><span class="aa-sub">Verified Class 2 sale · new-construction classification</span></td><td>'+esc(x.y||'—')+'</td><td class="num">'+money(x.p||0)+'</td><td class="num">'+money(x.av||0)+'</td><td class="num">'+((x.r||0)*100).toFixed(1)+'%</td><td class="num">'+esc(x.yb||'—')+'</td><td class="num"><b>'+money(Math.max(0,x.gap||0))+'</b></td></tr>'}).join('')+'</tbody></table>'}
+  async function run(){var county=countySlug($('aa-county').value),d=district($('aa-district').value);if(!county||d.length!==4){$('aa-result').innerHTML='<div class="aa-error">Choose a county and enter a valid four-digit tax district.</div>';return}$('aa-result').innerHTML='<div class="aa-empty">Reading municipality-scoped verified sales…</div>';rows=[];try{var pair=await Promise.all([fetch('/property/sr1a-ratios.json',{cache:'no-store'}),fetch('/api/sales-by-district?county='+encodeURIComponent(county)+'&district='+encodeURIComponent(d),{cache:'no-store'})]);if(!pair[0].ok||!pair[1].ok)throw new Error('evidence unavailable');var ratios=await pair[0].json(),payload=await pair[1].json(),meta=ratios&&ratios.districts&&ratios.districts[d],ratio=num(meta&&meta.ratio);if(!Number.isFinite(ratio)||ratio<=0)throw new Error('municipal ratio unavailable');var thisYear=new Date().getFullYear(),sales=Array.isArray(payload&&payload.sales)?payload.sales:[],recent=sales.filter(function(x){return String(x&&x.c).trim()==='2'&&num(x.r)>0&&num(x.p)>40000&&num(x.y)>=thisYear-3});rows=recent.filter(function(x){return num(x.r)<ratio*.80&&lagClass(x,num(x.y))==='new'}).map(function(x){var copy=Object.assign({},x);copy.gap=Math.max(0,num(x.p)*ratio-num(x.av||0));return copy});$('aa-candidates').textContent=rows.length.toLocaleString();$('aa-sales').textContent=recent.length.toLocaleString();$('aa-ratio').textContent=(ratio*100).toFixed(1)+'%';$('aa-gap').textContent=rows.length?money(Math.max.apply(null,rows.map(function(x){return x.gap||0}))):'$0';render()}catch(err){$('aa-candidates').textContent='—';$('aa-sales').textContent='—';$('aa-ratio').textContent='—';$('aa-gap').textContent='—';$('aa-result').innerHTML='<div class="aa-error">Required governed sales or municipal-ratio evidence is unavailable for this district. No candidate list is produced.</div>'}}
+  $('aa-run').onclick=run;$('aa-sort').onchange=function(){if(rows.length)render()};
+})();
+</script>
+</body></html>
