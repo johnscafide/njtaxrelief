@@ -41,9 +41,9 @@ Do not merge a refresh PR merely because files changed.
 - `property/data/data-freshness.json` must report `overall_status: passed`.
 - Every materialized dataset must meet its registry minimum.
 - All 21 county sales files must remain present when that source family is refreshed.
-- `property/uniformity.json` must contain exactly 564 four-digit district codes.
+- `property/uniformity.json` must retain statewide coverage within the governed 500–564 district contract, with four-digit district codes. The upper bound is New Jersey's current municipality count; the lower bound matches the source registry's established materialized-coverage floor and preserves legitimate missing evidence instead of fabricating rows.
 - Uniformity town names must not contain parser bleed such as `Boro`, `Twp`, or county-header text.
-- Uniformity score and residential COD fields must stay inside the guarded 0–100 sanity range, and sales counts must be non-negative integers.
+- Present uniformity score and residential COD fields must stay inside the guarded 0–100 sanity range, and present sales counts must be non-negative integers. Null remains valid missing evidence and must never be converted to zero merely to pass validation.
 - Live-service health checks mean the source endpoint responded semantically; they are not parcel-coverage guarantees.
 - Any new source vintage, schema shift, or unexpected municipality-count change must be investigated against the authoritative publisher before changing a validator threshold.
 
