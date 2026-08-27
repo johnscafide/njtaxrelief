@@ -12,20 +12,33 @@
     watchdog:'G-EDW7CZV66M',
     legacy:'G-ENP9182L0J'
   });
-  var CLARITY_ID = 'wjeklv0exl';
+  var CLARITY_IDS = Object.freeze({
+    watchdog:'y8g1uivano',
+    legacy:'wjeklv0exl'
+  });
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
 
+  function analyticsHost(){
+    return String(location.hostname||'').toLowerCase().replace(/\.$/,'');
+  }
   function googleAnalyticsId(){
-    var host=String(location.hostname||'').toLowerCase().replace(/\.$/,'');
+    var host=analyticsHost();
     if(host==='watchdogindex.com'||host==='www.watchdogindex.com') return GA_IDS.watchdog;
     if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com') return GA_IDS.legacy;
     return '';
   }
+  function clarityId(){
+    var host=analyticsHost();
+    if(host==='watchdogindex.com'||host==='www.watchdogindex.com') return CLARITY_IDS.watchdog;
+    if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com') return CLARITY_IDS.legacy;
+    return '';
+  }
   var GA_ID = googleAnalyticsId();
+  var CLARITY_ID = clarityId();
 
   function ensureContactPolicy(){
     if(window.WatchdogContactPolicy || document.querySelector('script[src="'+CONTACT_POLICY_URL+'"]')) return;
@@ -76,6 +89,7 @@
     window.gtag('consent',mode||'update',consentPayload(!!analytics));
   }
   function signalClarity(analytics){
+    if(!CLARITY_ID) return;
     ensureClarityQueue();
     try{
       window.clarity('consentv2',{
@@ -97,6 +111,7 @@
     document.head.appendChild(script);
   }
   function loadClarity(){
+    if(!CLARITY_ID) return;
     ensureClarityQueue();
     signalClarity(true);
     if(document.querySelector('script[data-watchdog-consent-clarity],script[src*="clarity.ms/tag/'+CLARITY_ID+'"]')) return;
