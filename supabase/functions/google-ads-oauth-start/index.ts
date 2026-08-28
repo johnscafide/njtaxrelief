@@ -1,7 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
 const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const CALLBACK=`${URL}/functions/v1/google-ads-oauth-callback`;
+const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||URL).replace(/\/+$/,'');
+const CALLBACK=`${PUBLIC_URL}/functions/v1/google-ads-oauth-callback`;
 const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
 
 function allowedOrigin(req:Request){
