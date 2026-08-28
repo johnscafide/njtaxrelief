@@ -96,7 +96,11 @@
       vector.addTo(map);
       const gl=typeof vector.getMaplibreMap==='function'?vector.getMaplibreMap():null;
       if(!gl){this._failVector('MapLibre map unavailable');return;}
-      const timeout=setTimeout(()=>{if(!settled)this._failVector('OpenFreeMap style timed out');},8000);
+      const timeout=setTimeout(()=>{
+        if(settled)return;
+        settled=true;
+        this._failVector('OpenFreeMap style timed out');
+      },8000);
       gl.once('load',()=>{
         if(settled||this._removed)return;
         settled=true;clearTimeout(timeout);
