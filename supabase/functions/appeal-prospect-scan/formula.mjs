@@ -160,3 +160,57 @@ export function marketAtValuationDate(salePrice, monthsBefore, annualDrift) {
   if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(months) || months <= 0 || !Number.isFinite(drift) || drift <= -1) return null;
   return price * Math.pow(1 + drift, months / 12);
 }
+
+function dateFromMonthDay(taxYear, monthDay) {
+  if (!/^\d{2}-\d{2}$/.test(String(monthDay || ''))) return null;
+  return `${Number(taxYear)}-${monthDay}`;
+}
+
+export function appealDeadlineContext({ countyName, assessed, revaluationOrReassessment, taxYear, deadlineRules }) {
+  const year = Number(taxYear);
+  const assessment = Number(assessed);
+  if (!Number.isInteger(year) || year < 2000 || !Number.isFinite(assessment) || assessment < 0 || !deadlineRules?.rules) return null;
+
+  const countyNameNormalized = county(countyName);
+  const alternate = (deadlineRules.alternate_calendar_counties || []).map(county).includes(countyNameNormalized);
+  const rules = deadlineRules.rules;
+  const countyBoardRule = alternate ? rules.alternate_county_board : rules.traditional_county_board;
+  const traditionalReval = !alternate && revaluationOrReassessment === true;
+  const countyBoardMonthDay = traditionalReval
+    ? countyBoardRule?.municipal_wide_revaluation_or_reassessment_baseline_month_day
+    : countyBoardRule?.baseline_month_day;
+  const directRule = rules.direct_tax_court || {};
+  const directEligible = assessment > Number(directRule.ordinary_assessment_must_exceed);
+  const directMonthDay = alternate
+    ? directRule.alternate_baseline_month_day
+    : traditionalReval
+      ? directRule.traditional_revaluation_or_reassessment_baseline_month_day
+      : directRule.traditional_baseline_month_day;
+
+  return {
+    status: 'verify_current_notice',
+    exact_deadline: null,
+    tax_year: year,
+    calendar: alternate ? 'alternate' : 'traditional',
+    county: countyNameNormalized,
+    revaluation_or_reassessment: revaluationOrReassessment === true,
+    county_board: {
+      statutory_baseline: dateFromMonthDay(year, countyBoardMonthDay),
+      bulk_mailing_days: Number(countyBoardRule?.bulk_mailing_days) || null,
+      choose_later_of_baseline_or_bulk_mailing: countyBoardRule?.choose_later_of_baseline_or_bulk_mailing === true,
+      received_not_postmarked: countyBoardRule?.received_not_postmarked === true,
+    },
+    direct_tax_court: {
+      ordinary_assessment_must_exceed: Number(directRule.ordinary_assessment_must_exceed) || null,
+      eligible_by_assessment_amount: directEligible,
+      statutory_baseline: directEligible ? dateFromMonthDay(year, directMonthDay) : null,
+      bulk_mailing_days: directEligible ? Number(directRule.bulk_mailing_days) || null : null,
+      choose_later_of_baseline_or_bulk_mailing: directEligible && directRule.choose_later_of_baseline_or_bulk_mailing === true,
+    },
+    change_of_assessment_notice_days: Number(rules.change_of_assessment_notice?.days_from_issuance) || null,
+    weekend_or_legal_holiday_moves_to_next_business_day: rules.weekend_or_legal_holiday?.move_to_next_business_day === true,
+    guidance: alternate && revaluationOrReassessment === true
+      ? 'Alternate-calendar revaluation/reassessment: verify the current assessment notice and County Board instructions before presenting a final filing date.'
+      : 'Verify the current assessment notice / certified bulk-mailing date before presenting a final filing date.',
+  };
+}
