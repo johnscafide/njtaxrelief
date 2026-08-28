@@ -7,7 +7,7 @@ const adapter = await read('property/js/farm-map-vector-basemap.js');
 const farmMap = await read('property/js/farm-map.js');
 
 assert.match(page, /farm-map-vector-basemap\.js\?v=20260828a/);
-assert.match(adapter, /maplibre-gl@6\.6\.0\/dist\/maplibre-gl\.js/);
+assert.match(adapter, /maplibre-gl@5\.24\.0\/dist\/maplibre-gl\.js/);
 assert.match(adapter, /@maplibre\/maplibre-gl-leaflet@0\.1\.4\/leaflet-maplibre-gl\.js/);
 assert.match(adapter, /https:\/\/tiles\.openfreemap\.org\/styles\/liberty/);
 assert.match(adapter, /new VectorBasemap\(options\)/);
