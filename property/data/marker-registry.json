@@ -1,6 +1,6 @@
 {
  "schema_version": "1+provider-status+v040",
- "generated_at": "2026-08-28T20:39:05.897Z",
+ "generated_at": "2026-08-28T20:41:41.090Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,8 +27,8 @@
   },
   "percent_of_goal": 113,
   "provider_status": {
-   "live": 1041,
-   "planned": 73,
+   "live": 1044,
+   "planned": 70,
    "unavailable": 16
   },
   "retired_phase5": 0
@@ -1183,8 +1183,8 @@
    ],
    "source_id": "watchdog-models",
    "field": "chapter123_position",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -5607,8 +5607,8 @@
    ],
    "source_id": "nj-cod",
    "field": "percentile",
-   "provider_status": "planned",
-   "provider_note": "Formula intent exists but has not passed executable-definition and dependency validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15397,8 +15397,8 @@
    "dependencies": [
     "nj-dca-modiv-longitudinal"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
