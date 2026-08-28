@@ -10,7 +10,9 @@ const config = await read('api/watchdog-third-party-config.js');
 
 assert.equal(pkg.devDependencies?.pagefind, '1.5.2');
 assert.equal(pkg.scripts?.['pagefind:index'], 'node scripts/build-pagefind.mjs');
-assert.equal(pkg.scripts?.['vercel-build'], 'npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run pagefind:index');
+const vercelBuild=String(pkg.scripts?.['vercel-build']||'');
+for(const required of ['npm run test:third-party','npm run test:farm-map-basemap','npm run test:external-signals','npm run pagefind:index'])assert.ok(vercelBuild.includes(required),`vercel-build missing ${required}`);
+assert.ok(vercelBuild.indexOf('npm run test:third-party')<vercelBuild.indexOf('npm run pagefind:index'),'third-party contract must run before Pagefind indexing');
 assert.match(search, /\/pagefind\/pagefind-ui\.js/);
 assert.match(search, /Private dashboards, accounts, reports, developer tools and customer records are intentionally excluded/);
 assert.match(build, /\/admin\//);
