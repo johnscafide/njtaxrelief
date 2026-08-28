@@ -5,6 +5,9 @@ const read = (file) => readFile(new URL(`../../${file}`, import.meta.url), 'utf8
 const generator = await read('scripts/generate_town_pages.py');
 const cohort = await read('scripts/apply-search-growth-cohort.mjs');
 const performance = await read('scripts/apply-public-performance.mjs');
+const growthUi = await read('scripts/apply-web-signals-growth-ui.mjs');
+const growthReport = await read('supabase/functions/seo-growth-report/index.ts');
+const migration = await read('supabase/migrations/20260828203000_search_growth_measurement.sql');
 const signals = await read('property/analytics/web-signals/index.html');
 const pkg = JSON.parse(await read('package.json'));
 
@@ -52,6 +55,25 @@ assert.match(performance, /w=900&auto=format&fit=crop&q=72/);
 assert.match(performance, /product-analytics\.js/);
 assert.match(performance, /index\.html/);
 assert.match(performance, /property\/index\.html/);
+
+// Weekly movement and acquisition reporting are developer-only and aggregate/privacy scoped.
+assert.equal(pkg.scripts['web-signals-growth:prepare'], 'node scripts/apply-web-signals-growth-ui.mjs');
+assert.match(pkg.scripts['vercel-build'], /web-signals-growth:prepare/);
+assert.match(growthUi, /seo-growth-report/);
+assert.match(growthUi, /Weekly movement/);
+assert.match(growthUi, /Organic acquisition/);
+assert.match(growthUi, /renderWeekly/);
+assert.match(growthUi, /renderOrganic/);
+assert.match(growthReport, /is_watchdog_developer/);
+assert.match(growthReport, /search_console_snapshots/);
+assert.match(growthReport, /weekly_movement/);
+assert.match(growthReport, /analytics_organic_search_conversion_daily/);
+assert.match(growthReport, /no address, property search text, PAMS PIN, or identity/i);
+assert.match(migration, /alter table public\.search_console_snapshots enable row level security/);
+assert.match(migration, /revoke all on public\.search_console_snapshots from anon, authenticated/);
+assert.match(migration, /analytics_organic_search_conversion_daily/);
+assert.match(migration, /audience_class in \('external_visitor','external_account'\)/);
+assert.doesNotMatch(migration, /PAMS_PIN|PROP_LOC|address_text/i);
 
 // SEO rollout keeps existing canonical path construction instead of spawning intent duplicates.
 assert.match(generator, /canonical = SITE \+ "\/" \+ path/);
