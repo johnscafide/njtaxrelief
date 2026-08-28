@@ -1250,8 +1250,9 @@
       "formula": "Derived from the cited authoritative inputs for this marker. Revaluation radar risk"
     },
     "watchdog.investor_screen": {
-      "range": "Derived property-intelligence metric; interpretation follows the marker description",
-      "formula": "Derived from the cited authoritative inputs for this marker. Investor screen score"
+      "range": "0-100 public-record diligence priority; higher means more investor diligence attention, not investment quality",
+      "formula": "Compatibility alias to watchdog.investor.investment_diligence_priority. Canonical score = 40% carry-cost volatility + 30% asset constraint screen + 30% revaluation hold sensitivity; all three governed components are required.",
+      "professional_reason": "Provides one canonical investor-facing public-record diligence screen without making an investment recommendation, valuation, return forecast, or transaction outcome."
     },
     "uniformity.score": {
       "range": "Derived property-intelligence metric; interpretation follows the marker description",

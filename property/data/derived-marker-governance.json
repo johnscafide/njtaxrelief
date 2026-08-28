@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-28T19:16:50.286Z",
+  "generated_at": "2026-08-28T19:17:48.930Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -154,6 +154,7 @@
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor.tax_base_gap_watch",
     "watchdog.investor_carry_cost_volatility",
+    "watchdog.investor_screen",
     "watchdog.land_improvement_outlier",
     "watchdog.land_share_pct",
     "watchdog.land_to_improvement_ratio",
@@ -396,6 +397,7 @@
     "watchdog.investor.revaluation_hold_sensitivity",
     "watchdog.investor.tax_base_gap_watch",
     "watchdog.investor_carry_cost_volatility",
+    "watchdog.investor_screen",
     "watchdog.land_improvement_outlier",
     "watchdog.land_share_pct",
     "watchdog.land_to_improvement_ratio",
@@ -492,8 +494,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 310,
-    "live": 240,
-    "blocked": 70,
+    "live": 241,
+    "blocked": 69,
     "retired": 0,
     "untriaged": 0
   },
@@ -991,16 +993,16 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
-      "formula": "Derived from the cited authoritative inputs for this marker. Investor screen score",
+      "governance_status": "live",
+      "provider_status_override": "live",
+      "formula": "Compatibility alias to watchdog.investor.investment_diligence_priority. Canonical score = 40% carry-cost volatility + 30% asset constraint screen + 30% revaluation hold sensitivity; all three governed components are required.",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-investor-screen-alias",
+      "provider_source": "watchdog.investor.investment_diligence_priority",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "uniformity.score",

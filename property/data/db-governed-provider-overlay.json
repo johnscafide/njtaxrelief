@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-28T17:32:27.726Z",
+  "captured_at": "2026-08-28T19:17:48.870Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -852,7 +852,8 @@
     "watchdog.transaction_diligence_completion": "live",
     "watchdog.transaction_tax_shock_index": "live",
     "watchdog.verified_listing_story_strength": "live",
-    "watchdog.years_since_last_sale": "live"
+    "watchdog.years_since_last_sale": "live",
+    "watchdog.investor_screen": "live"
   },
   "providers": {
     "watchdog.watchdog_score": {
@@ -6796,6 +6797,13 @@
       "provider_kind": "derived_governed",
       "calculation_key": "watchdog-derived-v3",
       "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "watchdog.investor_screen": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-investor-screen-alias",
+      "source": "watchdog.investor.investment_diligence_priority",
       "bulk_capable": true
     }
   }
