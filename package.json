@@ -7,11 +7,12 @@
     "pagefind:index": "node scripts/build-pagefind.mjs",
     "search-growth:cohort": "node scripts/apply-search-growth-cohort.mjs",
     "public-performance:prepare": "node scripts/apply-public-performance.mjs",
+    "web-signals-growth:prepare": "node scripts/apply-web-signals-growth-ui.mjs",
     "test:third-party": "node property/tests/third-party-foundation-contract.mjs",
     "test:farm-map-basemap": "node property/tests/farm-map-vector-basemap-contract.mjs",
     "test:external-signals": "node property/tests/external-web-signals-contract.mjs",
     "test:search-growth": "node property/tests/search-growth-contract.mjs",
-    "vercel-build": "npm run search-growth:cohort && npm run public-performance:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run pagefind:index"
+    "vercel-build": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run pagefind:index"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3",
