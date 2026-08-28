@@ -1,0 +1,73 @@
+name: One-off Investor Screen governance reconciliation
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-investor-screen-governance.yml'
+permissions:
+  contents: write
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Reconcile formula spec and production overlay
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const formulaPath='property/data/derived-marker-formulas.json';
+          const formula=JSON.parse(fs.readFileSync(formulaPath,'utf8'));
+          formula.markers=formula.markers||{};
+          formula.markers['watchdog.investor_screen']={
+            range:'0-100 public-record diligence priority; higher means more investor diligence attention, not investment quality',
+            formula:'Compatibility alias to watchdog.investor.investment_diligence_priority. Canonical score = 40% carry-cost volatility + 30% asset constraint screen + 30% revaluation hold sensitivity; all three governed components are required.',
+            professional_reason:'Provides one canonical investor-facing public-record diligence screen without making an investment recommendation, valuation, return forecast, or transaction outcome.'
+          };
+          fs.writeFileSync(formulaPath,JSON.stringify(formula,null,2)+'\n');
+
+          const overlayPath='property/data/db-governed-provider-overlay.json';
+          const overlay=JSON.parse(fs.readFileSync(overlayPath,'utf8'));
+          overlay.captured_at=new Date().toISOString();
+          overlay.statuses=overlay.statuses||{};
+          overlay.statuses['watchdog.investor_screen']='live';
+          overlay.providers=overlay.providers||{};
+          overlay.providers['watchdog.investor_screen']={
+            provider_key:'watchdog-derived',
+            provider_kind:'derived_governed',
+            calculation_key:'watchdog-derived-v21-investor-screen-alias',
+            source:'watchdog.investor.investment_diligence_priority',
+            bulk_capable:true
+          };
+          fs.writeFileSync(overlayPath,JSON.stringify(overlay,null,2)+'\n');
+          NODE
+          node scripts/build-derived-governance.js
+      - name: Assert Investor Screen is canonical live
+        run: |
+          node <<'NODE'
+          const r=require('./property/data/marker-registry.json');
+          const g=require('./property/data/derived-marker-governance.json');
+          const row=(r.markers||[]).find(x=>x.id==='watchdog.investor_screen');
+          const gov=(g.markers||[]).find(x=>x.marker_id==='watchdog.investor_screen');
+          if(!row||row.provider_status!=='live')throw new Error('Investor Screen is not canonical live');
+          if(!gov||gov.governance_status!=='live')throw new Error('Investor Screen governance is not live');
+          if((r.summary?.provider_status?.planned||0)!==73)throw new Error('Expected 73 planned markers, got '+(r.summary?.provider_status?.planned||0));
+          if((r.summary?.provider_status?.unavailable||0)!==16)throw new Error('Expected 16 unavailable markers, got '+(r.summary?.provider_status?.unavailable||0));
+          console.log({investor_screen:row.provider_status,planned:r.summary.provider_status.planned,unavailable:r.summary.provider_status.unavailable});
+          NODE
+      - name: Refetch main and commit only if concurrency-safe
+        run: |
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo 'main moved during reconciliation; refusing to overwrite'; exit 2; }
+          if git diff --quiet -- property/data/derived-marker-formulas.json property/data/db-governed-provider-overlay.json property/data/marker-registry.json property/data/derived-marker-governance.json; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/data/derived-marker-formulas.json property/data/db-governed-provider-overlay.json property/data/marker-registry.json property/data/derived-marker-governance.json
+          git commit -m '[phase5-governance] Activate Investor Screen alias'
+          git push origin HEAD:main
