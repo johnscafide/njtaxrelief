@@ -9,6 +9,7 @@ import {
   chapter123Screen,
   monthsBeforeValuationDate,
   marketAtValuationDate,
+  appealDeadlineContext,
 } from '../../supabase/functions/appeal-prospect-scan/formula.mjs';
 
 assert.equal(canonicalTown('Atlantic City City'), 'ATLANTIC CITY');
@@ -66,6 +67,39 @@ assert.equal(capped.relief_ratio, 1);
 assert.equal(capped.supported_assessment, 500000);
 assert.equal(chapter123Screen({ market: 300000, assessed: 250000, certified: findCertified(certified, 'Atlantic City', 'Atlantic'), taxRate: null }), null);
 
+const deadlineRules = JSON.parse(fs.readFileSync(new URL('../appeal-deadline-rules.json', import.meta.url), 'utf8'));
+assert.deepEqual(deadlineRules.alternate_calendar_counties.sort(), ['BURLINGTON', 'GLOUCESTER', 'MONMOUTH']);
+
+const traditional = appealDeadlineContext({
+  countyName: 'Atlantic', assessed: 900000, revaluationOrReassessment: false, taxYear: 2026, deadlineRules,
+});
+assert.equal(traditional.calendar, 'traditional');
+assert.equal(traditional.county_board.statutory_baseline, '2026-04-01');
+assert.equal(traditional.direct_tax_court.eligible_by_assessment_amount, false);
+assert.equal(traditional.exact_deadline, null);
+assert.equal(traditional.status, 'verify_current_notice');
+
+const traditionalReval = appealDeadlineContext({
+  countyName: 'Atlantic', assessed: 1500000, revaluationOrReassessment: true, taxYear: 2026, deadlineRules,
+});
+assert.equal(traditionalReval.county_board.statutory_baseline, '2026-05-01');
+assert.equal(traditionalReval.direct_tax_court.statutory_baseline, '2026-05-01');
+
+const alternateAtThreshold = appealDeadlineContext({
+  countyName: 'Gloucester', assessed: 1000000, revaluationOrReassessment: false, taxYear: 2026, deadlineRules,
+});
+assert.equal(alternateAtThreshold.calendar, 'alternate');
+assert.equal(alternateAtThreshold.county_board.statutory_baseline, '2026-01-15');
+assert.equal(alternateAtThreshold.direct_tax_court.eligible_by_assessment_amount, false);
+
+const alternateAboveThreshold = appealDeadlineContext({
+  countyName: 'Gloucester', assessed: 1000001, revaluationOrReassessment: false, taxYear: 2026, deadlineRules,
+});
+assert.equal(alternateAboveThreshold.direct_tax_court.eligible_by_assessment_amount, true);
+assert.equal(alternateAboveThreshold.direct_tax_court.statutory_baseline, '2026-04-01');
+assert.equal(alternateAboveThreshold.county_board.choose_later_of_baseline_or_bulk_mailing, true);
+assert.equal(alternateAboveThreshold.change_of_assessment_notice_days, 45);
+
 const server = fs.readFileSync(new URL('../../supabase/functions/appeal-prospect-scan/index.ts', import.meta.url), 'utf8');
 assert.match(server, /equalization-ratios\.json/);
 assert.match(server, /required_plan:\s*'pro_plus'/);
@@ -77,4 +111,4 @@ assert.doesNotMatch(server, /fair\s*\*\s*1\.15/);
 assert.doesNotMatch(server, /return\s+0\.033/);
 assert.doesNotMatch(server, /currentYear\s*-\s*Number\(sale\?\.y\)/);
 
-console.log('appeal-prospect-scan certified Chapter 123 contract passed');
+console.log('appeal-prospect-scan certified Chapter 123 and deadline-rule contracts passed');
