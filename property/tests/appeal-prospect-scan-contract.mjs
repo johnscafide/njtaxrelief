@@ -121,4 +121,20 @@ assert.doesNotMatch(deadlineUi, /appealDeadlineContext/);
 assert.doesNotMatch(deadlineUi, /setInterval\s*\(/);
 assert.doesNotMatch(deadlineUi, /Date\.now\s*\(\)\s*[-+]/);
 
+const evidenceUi = fs.readFileSync(new URL('../js/scan-evidence-ui.js', import.meta.url), 'utf8');
+assert.match(evidenceUi, /server-authoritative appeal-prospect-scan/);
+assert.match(evidenceUi, /payload\.run\.hits/);
+assert.match(evidenceUi, /Screening evidence only/);
+assert.match(evidenceUi, /does not determine parcel-specific forum eligibility|not a deadline/);
+assert.doesNotMatch(evidenceUi, /chapter123\s*\(/);
+assert.doesNotMatch(evidenceUi, /appealDeadlineContext\s*\(/);
+assert.doesNotMatch(evidenceUi, /setInterval\s*\(/);
+assert.doesNotMatch(evidenceUi, /has_watchdog_plan/);
+
+const scanPage = fs.readFileSync(new URL('../scan/index.html', import.meta.url), 'utf8');
+assert.match(scanPage, /data-access-require="pro_plus"/);
+assert.match(scanPage, /scan-deadline-ui\.js/);
+assert.match(scanPage, /scan-evidence-ui\.js/);
+assert.doesNotMatch(scanPage, /appeal-packet\.js/);
+
 console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, and browser-boundary contracts passed');
