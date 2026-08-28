@@ -1,6 +1,6 @@
 {
- "schema_version": "1+provider-status+v039-planned",
- "generated_at": "2026-08-28T14:47:04.110Z",
+ "schema_version": "1+provider-status+v039",
+ "generated_at": "2026-08-28T14:54:50.197Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
@@ -27,10 +27,10 @@
   },
   "percent_of_goal": 100,
   "provider_status": {
-   "live": 618,
+   "live": 797,
    "partial": 4,
    "unavailable": 12,
-   "planned": 366
+   "planned": 187
   },
   "retired_phase5": 0
  },
@@ -19974,9 +19974,9 @@
    "unit": "ratio",
    "coverage_municipalities": 518,
    "id": "njplus.nj-dca-ufb-2025.rut_tax_collection_pct",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_total_tax_revenue_collections",
@@ -20002,9 +20002,9 @@
    "unit": "currency",
    "coverage_municipalities": 505,
    "id": "njplus.nj-dca-ufb-2025.prior_year_total_tax_revenue_collections",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_total_tax_levy",
@@ -20030,9 +20030,9 @@
    "unit": "currency",
    "coverage_municipalities": 502,
    "id": "njplus.nj-dca-ufb-2025.prior_year_total_tax_levy",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_tax_collection_pct",
@@ -20058,9 +20058,9 @@
    "unit": "ratio",
    "coverage_municipalities": 498,
    "id": "njplus.nj-dca-ufb-2025.prior_year_tax_collection_pct",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_delinquent_taxes",
@@ -20086,9 +20086,9 @@
    "unit": "currency",
    "coverage_municipalities": 507,
    "id": "njplus.nj-dca-ufb-2025.prior_year_delinquent_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_surplus",
@@ -20114,9 +20114,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_surplus",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_local_revenue",
@@ -20142,9 +20142,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_local_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_state_aid",
@@ -20170,9 +20170,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_state_aid",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_uniform_construction_code_fees",
@@ -20198,9 +20198,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_uniform_construction_code_fees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_shared_services_agreements",
@@ -20226,9 +20226,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_shared_services_agreements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_additional_revenue_offset_by_appropriations",
@@ -20254,9 +20254,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_additional_revenue_offset_by_appropriations",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_public_private_revenue",
@@ -20282,9 +20282,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_public_private_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_other_special_items",
@@ -20310,9 +20310,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_other_special_items",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_receipts_from_delinquent_taxes",
@@ -20338,9 +20338,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_receipts_from_delinquent_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_local_tax_for_municipal_purposes",
@@ -20366,9 +20366,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_local_tax_for_municipal_purposes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_minimum_library_tax",
@@ -20394,9 +20394,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_minimum_library_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_open_space_levy_tax",
@@ -20422,9 +20422,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_open_space_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_arts_cultural_levy_tax",
@@ -20450,9 +20450,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_arts_cultural_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_addition_to_local_district_school_tax",
@@ -20478,9 +20478,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_addition_to_local_district_school_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_deficit_general_budget",
@@ -20506,9 +20506,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_deficit_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_realized_revenue_total",
@@ -20534,9 +20534,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.prior_year_realized_revenue_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_surplus",
@@ -20562,9 +20562,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_surplus",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_local_revenue",
@@ -20590,9 +20590,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_local_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_state_aid",
@@ -20618,9 +20618,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_state_aid",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_uniform_construction_code_fees",
@@ -20646,9 +20646,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_uniform_construction_code_fees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_shared_services_agreements",
@@ -20674,9 +20674,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_shared_services_agreements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_additional_revenue_offset_by_appropriations",
@@ -20702,9 +20702,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_additional_revenue_offset_by_appropriations",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_public_private_revenue",
@@ -20730,9 +20730,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_public_private_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_other_special_items",
@@ -20758,9 +20758,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_other_special_items",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_receipts_from_delinquent_taxes",
@@ -20786,9 +20786,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_receipts_from_delinquent_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_local_tax_for_municipal_purposes",
@@ -20814,9 +20814,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_local_tax_for_municipal_purposes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_minimum_library_tax",
@@ -20842,9 +20842,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_minimum_library_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_open_space_levy_tax",
@@ -20870,9 +20870,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_open_space_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_arts_cultural_levy_tax",
@@ -20898,9 +20898,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_arts_cultural_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_addition_to_local_district_school_tax",
@@ -20926,9 +20926,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_addition_to_local_district_school_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_deficit_general_budget",
@@ -20954,9 +20954,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_deficit_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_anticipated_revenue_total",
@@ -20982,9 +20982,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_anticipated_revenue_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_surplus",
@@ -21010,9 +21010,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_surplus",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_local_revenue",
@@ -21038,9 +21038,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_local_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_state_aid",
@@ -21066,9 +21066,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_state_aid",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_uniform_construction_code_fees",
@@ -21094,9 +21094,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_uniform_construction_code_fees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_shared_services_agreements",
@@ -21122,9 +21122,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_shared_services_agreements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_additional_revenue_offset_by_appropriations",
@@ -21150,9 +21150,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_additional_revenue_offset_by_appropriations",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_public_private_revenue",
@@ -21178,9 +21178,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_public_private_revenue",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_other_special_items",
@@ -21206,9 +21206,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_other_special_items",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_receipts_from_delinquent_taxes",
@@ -21234,9 +21234,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_receipts_from_delinquent_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_local_tax_for_municipal_purposes",
@@ -21262,9 +21262,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_local_tax_for_municipal_purposes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_minimum_library_tax",
@@ -21290,9 +21290,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_minimum_library_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_open_space_levy_tax",
@@ -21318,9 +21318,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_open_space_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_arts_cultural_levy_tax",
@@ -21346,9 +21346,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_arts_cultural_levy_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_addition_to_local_district_school_tax",
@@ -21374,9 +21374,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_addition_to_local_district_school_tax",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_deficit_general_budget",
@@ -21402,9 +21402,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_deficit_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_revenue_total",
@@ -21430,9 +21430,9 @@
    "unit": "currency",
    "coverage_municipalities": 551,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_revenue_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_general_government",
@@ -21458,9 +21458,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_general_government",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_land_use_administration",
@@ -21486,9 +21486,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_land_use_administration",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_uniform_construction_code",
@@ -21514,9 +21514,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_uniform_construction_code",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_insurance",
@@ -21542,9 +21542,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_insurance",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_public_safety",
@@ -21570,9 +21570,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_public_safety",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_public_works",
@@ -21598,9 +21598,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_public_works",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_health_human_services",
@@ -21626,9 +21626,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_health_human_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_parks_recreation",
@@ -21654,9 +21654,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_parks_recreation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_education_library",
@@ -21682,9 +21682,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_education_library",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_unclassified",
@@ -21710,9 +21710,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_unclassified",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_utilities_bulk_purchases",
@@ -21738,9 +21738,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_utilities_bulk_purchases",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_landfill_solid_waste_disposal",
@@ -21766,9 +21766,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_landfill_solid_waste_disposal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_contingency",
@@ -21794,9 +21794,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_contingency",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_statutory_expenditures",
@@ -21822,9 +21822,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_statutory_expenditures",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_judgements",
@@ -21850,9 +21850,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_judgements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_shared_services",
@@ -21878,9 +21878,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_shared_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_court_public_defender",
@@ -21906,9 +21906,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_court_public_defender",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_capital",
@@ -21934,9 +21934,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_capital",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_debt",
@@ -21962,9 +21962,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_debt",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_deferred_charges",
@@ -21990,9 +21990,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_deferred_charges",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_debt_type_1_school_district",
@@ -22018,9 +22018,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_debt_type_1_school_district",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_reserve_for_uncollected_taxes",
@@ -22046,9 +22046,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_reserve_for_uncollected_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_surplus_general_budget",
@@ -22074,9 +22074,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_surplus_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "prior_year_modified_appropriation_total",
@@ -22102,9 +22102,9 @@
    "unit": "currency",
    "coverage_municipalities": 548,
    "id": "njplus.nj-dca-ufb-2025.prior_year_modified_appropriation_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_general_government",
@@ -22130,9 +22130,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_general_government",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_land_use_administration",
@@ -22158,9 +22158,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_land_use_administration",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_uniform_construction_code",
@@ -22186,9 +22186,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_uniform_construction_code",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_insurance",
@@ -22214,9 +22214,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_insurance",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_public_safety",
@@ -22242,9 +22242,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_public_safety",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_public_works",
@@ -22270,9 +22270,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_public_works",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_health_human_services",
@@ -22298,9 +22298,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_health_human_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_parks_recreation",
@@ -22326,9 +22326,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_parks_recreation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_education_library",
@@ -22354,9 +22354,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_education_library",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_unclassified",
@@ -22382,9 +22382,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_unclassified",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_utilities_bulk_purchases",
@@ -22410,9 +22410,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_utilities_bulk_purchases",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_landfill_solid_waste_disposal",
@@ -22438,9 +22438,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_landfill_solid_waste_disposal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_contingency",
@@ -22466,9 +22466,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_contingency",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_statutory_expenditures",
@@ -22494,9 +22494,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_statutory_expenditures",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_judgements",
@@ -22522,9 +22522,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_judgements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_shared_services",
@@ -22550,9 +22550,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_shared_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_court_public_defender",
@@ -22578,9 +22578,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_court_public_defender",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_capital",
@@ -22606,9 +22606,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_capital",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_debt",
@@ -22634,9 +22634,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_debt",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_deferred_charges",
@@ -22662,9 +22662,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_deferred_charges",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_debt_type_1_school_district",
@@ -22690,9 +22690,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_debt_type_1_school_district",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_reserve_for_uncollected_taxes",
@@ -22718,9 +22718,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_reserve_for_uncollected_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_surplus_general_budget",
@@ -22746,9 +22746,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_surplus_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_appropriation_total",
@@ -22774,9 +22774,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_appropriation_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_general_government",
@@ -22802,9 +22802,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_general_government",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_land_use_administration",
@@ -22830,9 +22830,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_land_use_administration",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_uniform_construction_code",
@@ -22858,9 +22858,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_uniform_construction_code",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_insurance",
@@ -22886,9 +22886,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_insurance",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_public_safety",
@@ -22914,9 +22914,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_public_safety",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_public_works",
@@ -22942,9 +22942,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_public_works",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_health_human_services",
@@ -22970,9 +22970,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_health_human_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_parks_recreation",
@@ -22998,9 +22998,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_parks_recreation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_education_library",
@@ -23026,9 +23026,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_education_library",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_unclassified",
@@ -23054,9 +23054,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_unclassified",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_utilities_bulk_purchases",
@@ -23082,9 +23082,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_utilities_bulk_purchases",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_landfill_solid_waste_disposal",
@@ -23110,9 +23110,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_landfill_solid_waste_disposal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_contingency",
@@ -23138,9 +23138,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_contingency",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_statutory_expenditures",
@@ -23166,9 +23166,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_statutory_expenditures",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_judgements",
@@ -23194,9 +23194,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_judgements",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_shared_services",
@@ -23222,9 +23222,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_shared_services",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_court_public_defender",
@@ -23250,9 +23250,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_court_public_defender",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_capital",
@@ -23278,9 +23278,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_capital",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_debt",
@@ -23306,9 +23306,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_debt",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_deferred_charges",
@@ -23334,9 +23334,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_deferred_charges",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_debt_type_1_school_district",
@@ -23362,9 +23362,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_debt_type_1_school_district",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_reserve_for_uncollected_taxes",
@@ -23390,9 +23390,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_reserve_for_uncollected_taxes",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_surplus_general_budget",
@@ -23418,9 +23418,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_surplus_general_budget",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "current_year_general_budget_appropriation_total",
@@ -23446,9 +23446,9 @@
    "unit": "currency",
    "coverage_municipalities": 550,
    "id": "njplus.nj-dca-ufb-2025.current_year_general_budget_appropriation_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_full_time_employees",
@@ -23471,9 +23471,9 @@
    "unit": "count",
    "coverage_municipalities": 505,
    "id": "njplus.nj-dca-ufb-2025.total_full_time_employees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_part_time_employees",
@@ -23496,9 +23496,9 @@
    "unit": "count",
    "coverage_municipalities": 518,
    "id": "njplus.nj-dca-ufb-2025.total_part_time_employees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_personnel_cost",
@@ -23521,9 +23521,9 @@
    "unit": "currency",
    "coverage_municipalities": 522,
    "id": "njplus.nj-dca-ufb-2025.total_personnel_cost",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_base_pay",
@@ -23546,9 +23546,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.total_base_pay",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_overtime_other_compensation",
@@ -23571,9 +23571,9 @@
    "unit": "currency",
    "coverage_municipalities": 473,
    "id": "njplus.nj-dca-ufb-2025.total_overtime_other_compensation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_pension_estimate",
@@ -23596,9 +23596,9 @@
    "unit": "currency",
    "coverage_municipalities": 506,
    "id": "njplus.nj-dca-ufb-2025.total_pension_estimate",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_health_benefits_net_cost_share",
@@ -23621,9 +23621,9 @@
    "unit": "currency",
    "coverage_municipalities": 477,
    "id": "njplus.nj-dca-ufb-2025.total_health_benefits_net_cost_share",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "total_employment_taxes_other_benefits",
@@ -23646,9 +23646,9 @@
    "unit": "currency",
    "coverage_municipalities": 500,
    "id": "njplus.nj-dca-ufb-2025.total_employment_taxes_other_benefits",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_local_school",
@@ -23675,9 +23675,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_local_school",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_regional_school",
@@ -23704,9 +23704,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_regional_school",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_utility_fund",
@@ -23733,9 +23733,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_utility_fund",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_authorized",
@@ -23762,9 +23762,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_authorized",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_notes_outstanding",
@@ -23791,9 +23791,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_notes_outstanding",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_bonds_outstanding",
@@ -23820,9 +23820,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_bonds_outstanding",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_loans_other",
@@ -23849,9 +23849,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_loans_other",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_total",
@@ -23878,9 +23878,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_per_capita",
@@ -23907,9 +23907,9 @@
    "unit": "currency_per_capita",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_per_capita",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "gross_debt_deductions",
@@ -23936,9 +23936,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.gross_debt_deductions",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_local_school",
@@ -23965,9 +23965,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.net_debt_local_school",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_regional_school",
@@ -23994,9 +23994,9 @@
    "unit": "currency",
    "coverage_municipalities": 525,
    "id": "njplus.nj-dca-ufb-2025.net_debt_regional_school",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_utility_fund",
@@ -24023,9 +24023,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_utility_fund",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_authorized",
@@ -24052,9 +24052,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_authorized",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_notes_outstanding",
@@ -24081,9 +24081,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_notes_outstanding",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_bonds_outstanding",
@@ -24110,9 +24110,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_bonds_outstanding",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_loans_other",
@@ -24139,9 +24139,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_loans_other",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_total",
@@ -24168,9 +24168,9 @@
    "unit": "currency",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_total",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_per_capita",
@@ -24197,9 +24197,9 @@
    "unit": "currency_per_capita",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_per_capita",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_three_year_avg_property_valuation",
@@ -24226,9 +24226,9 @@
    "unit": "currency",
    "coverage_municipalities": 564,
    "id": "njplus.nj-dca-ufb-2025.net_debt_three_year_avg_property_valuation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "net_debt_share_three_year_avg_property_valuation",
@@ -24255,9 +24255,9 @@
    "unit": "ratio",
    "coverage_municipalities": 519,
    "id": "njplus.nj-dca-ufb-2025.net_debt_share_three_year_avg_property_valuation",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_utility_fund_principal",
@@ -24284,9 +24284,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_utility_fund_principal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_utility_fund_interest",
@@ -24313,9 +24313,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_utility_fund_interest",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_bond_anticipation_notes_principal",
@@ -24342,9 +24342,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_bond_anticipation_notes_principal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_bond_anticipation_notes_interest",
@@ -24371,9 +24371,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_bond_anticipation_notes_interest",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_bonds_principal",
@@ -24400,9 +24400,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_bonds_principal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_bonds_interest",
@@ -24429,9 +24429,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_bonds_interest",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_loans_other_principal",
@@ -24458,9 +24458,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_loans_other_principal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_loans_other_interest",
@@ -24487,9 +24487,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_loans_other_interest",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_principal",
@@ -24516,9 +24516,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_principal",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_interest",
@@ -24545,9 +24545,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_interest",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_current_year_budget_payment",
@@ -24574,9 +24574,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_current_year_budget_payment",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_second_year_budget_payment",
@@ -24603,9 +24603,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_second_year_budget_payment",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_third_year_budget_payment",
@@ -24632,9 +24632,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_third_year_budget_payment",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_future_year_budget_payment",
@@ -24661,9 +24661,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_future_year_budget_payment",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_governmental_guarantees",
@@ -24690,9 +24690,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_governmental_guarantees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_other_guarantees",
@@ -24719,9 +24719,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_other_guarantees",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_capital_equipment_leases",
@@ -24748,9 +24748,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_capital_equipment_leases",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "debt_service_total_other",
@@ -24777,9 +24777,9 @@
    "unit": "currency",
    "coverage_municipalities": 521,
    "id": "njplus.nj-dca-ufb-2025.debt_service_total_other",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "accumulated_absence_gross_days",
@@ -24802,9 +24802,9 @@
    "unit": "days",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.accumulated_absence_gross_days",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "accumulated_absence_compensated_value",
@@ -24827,9 +24827,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.accumulated_absence_compensated_value",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "structural_revenues_at_risk",
@@ -24855,9 +24855,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.structural_revenues_at_risk",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "structural_nonrecurring_appropriation_reductions",
@@ -24883,9 +24883,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.structural_nonrecurring_appropriation_reductions",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "structural_future_year_appropriation_increases",
@@ -24911,9 +24911,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.structural_future_year_appropriation_increases",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "structural_imbalance_offsets",
@@ -24939,9 +24939,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.structural_imbalance_offsets",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   },
   {
    "field": "structural_total_imbalances",
@@ -24967,9 +24967,9 @@
    "unit": "currency",
    "coverage_municipalities": 552,
    "id": "njplus.nj-dca-ufb-2025.structural_total_imbalances",
-   "provider_status": "planned",
-   "provider_note": "Certified NJ DCA UFB 2025 source artifact is committed; production provider and authenticated canary are pending.",
-   "provider_contract": "workbench-hydrate-v039-planned"
+   "provider_status": "live",
+   "provider_note": "Authenticated production canary ufb_v039 request 4120 certified exact 2025 Summary value, provenance, workbook hash and DCA source-quality semantics. DCA states UFB submissions are self-reported and unaudited; missing source cells remain missing rather than synthetic zero.",
+   "provider_contract": "workbench-hydrate-v67"
   }
  ],
  "provider_summary": {

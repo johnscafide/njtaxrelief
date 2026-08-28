@@ -309,5 +309,17 @@
       "join": "Exact 4-digit municipality code to governed 564-municipality annual source artifact",
       "warning": "Viewer as of 2025-08-21; 2024 is the workbook-designated latest published annual data year. 2025 placeholder columns are not treated as published annual observations. Permit/development facts are not legal, zoning, code-compliance, construction-completion, appraisal, lending, insurance, eligibility, or transaction determinations."
     }
+  ],
+  "sources": [
+    {
+      "id": "nj-dca-user-friendly-budget",
+      "label": "NJ DCA User Friendly Budget Database 2025",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://nj.gov/dca/dlgs/programs/mc_budget_docs/UFB%20Database%20-%20FINAL.xlsm",
+      "cadence": "annual / source change monitored",
+      "live": true,
+      "join": "Exact 4-digit municipality code to governed 564-municipality 2025 Summary artifact",
+      "warning": "Official NJ DCA compilation of municipal User Friendly Budget submissions. DCA states the data are self-reported by municipalities and have not been independently audited or verified. Missing submissions and blank/obvious-error cells may have no data. Watchdog v0.39 exposes exact source fields only and does not convert them into a legal, fiscal-health, credit, lending, appraisal, insurance, or eligibility determination."
+    }
   ]
 }
