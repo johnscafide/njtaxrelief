@@ -4,12 +4,13 @@ import { readFile } from 'node:fs/promises';
 const read = (file) => readFile(new URL(`../../${file}`, import.meta.url), 'utf8');
 const page = await read('property/analytics/web-signals/index.html');
 const report = await read('supabase/functions/product-analytics-report/index.ts');
+const growthReport = await read('supabase/functions/seo-growth-report/index.ts');
 const oauthStart = await read('supabase/functions/google-ads-oauth-start/index.ts');
 const oauthCallback = await read('supabase/functions/google-ads-oauth-callback/index.ts');
 const weather = await read('api/watchdog-weather-context.js');
 
 assert.match(page, /data-access-require="developer"/);
-assert.match(page, /external_signals_only:true/);
+assert.match(page, /external_signals_only:true|seo-growth-report/);
 assert.match(page, /provider:'search_console'/);
 assert.match(page, /Weather context provider/);
 assert.match(page, /Search opportunities/);
@@ -32,6 +33,13 @@ assert.match(report, /searchAnalytics\/query/);
 assert.match(report, /dimensions:\['query'\]/);
 assert.match(report, /dimensions:\['page'\]/);
 assert.match(report, /external_signals_only/);
+
+assert.match(growthReport, /product-analytics-report/);
+assert.match(growthReport, /search_console_snapshots/);
+assert.match(growthReport, /weekly_movement/);
+assert.match(growthReport, /analytics_organic_search_conversion_daily/);
+assert.match(growthReport, /Aggregate external sessions only/);
+assert.match(growthReport, /is_watchdog_developer/);
 
 assert.match(oauthStart, /webmasters\.readonly/);
 assert.match(oauthStart, /is_watchdog_developer/);
