@@ -1,6 +1,6 @@
 {
   "project_ref": "uvkvaxljhhngydvlrzom",
-  "captured_at": "2026-08-28T19:34:07.689Z",
+  "captured_at": "2026-08-28T20:41:41.023Z",
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {
@@ -196,8 +196,8 @@
       "tracking": "fingerprint_only"
     },
     "provider-release-canary": {
-      "version": 39,
-      "sha256": "354ac1a562a3159ee631ad6cbd6e71a2fc31fbe3e2b84de4f724bdfe472e4ac6",
+      "version": 41,
+      "sha256": "fcfdda5266d1498690f4dc64a8feea67808893c6cd24fdd7753a2104828ec025",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -232,8 +232,8 @@
       "tracking": "source_snapshot"
     },
     "sr1a-subject-indexer": {
-      "version": 2,
-      "sha256": "de7243612d0d5051a86cc618bea8b6f2d0705a05f1311ddc6d87abf7a53e729f",
+      "version": 9,
+      "sha256": "507eea3392b045c994d5dca82cfb38ba22d61bca7ee3701104f2b8668d272277",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -286,14 +286,14 @@
       "tracking": "source_snapshot"
     },
     "workbench-derived": {
-      "version": 32,
-      "sha256": "699622473aa01470fd99bfa54188c4fccaa49bfea7db0629ed6e28da8ae961eb",
+      "version": 34,
+      "sha256": "94a1363b92b59c2aa3c35afb69afa19344ac3e5b48bf1bb9bdf05dcbbdf63ad4",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
     "workbench-hydrate": {
-      "version": 68,
-      "sha256": "c5881ca06e202b0e19a9e636b5065adc33b98b611a7b783f3bd0d0884b6ea76b",
+      "version": 74,
+      "sha256": "30b73e271e66faf19f3f9d35960f99b500b9cd038c4c75897c7bcaca26da7a4a",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },

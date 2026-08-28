@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-28T19:32:14.694Z",
+  "generated_at": "2026-08-28T20:41:41.093Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -47,6 +47,7 @@
     "modiv_intel.sale_assessment_ratio_dispersion_pct",
     "modiv_intel.tax_dispersion_iqr_pct",
     "modiv_intel.vacant_parcel_share_pct",
+    "uniformity.percentile",
     "uniformity.score",
     "uniformity.volatility",
     "watchdog.agent.buyer_cost_explanation",
@@ -94,6 +95,7 @@
     "watchdog.carry_cost_downside",
     "watchdog.certificate_closure_rate",
     "watchdog.chapter123_lower_bound",
+    "watchdog.chapter123_position",
     "watchdog.chapter123_upper_bound",
     "watchdog.closing_exception_priority",
     "watchdog.collateral_constraint_burden",
@@ -187,6 +189,7 @@
     "watchdog.municipal_fiscal_capacity",
     "watchdog.njplus.affordable_supply_coverage",
     "watchdog.njplus.assessment_change_trace",
+    "watchdog.njplus.assessment_component_shift",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
     "watchdog.njplus.environmental_case_activity",
@@ -290,6 +293,7 @@
     "modiv_intel.sale_assessment_ratio_dispersion_pct",
     "modiv_intel.tax_dispersion_iqr_pct",
     "modiv_intel.vacant_parcel_share_pct",
+    "uniformity.percentile",
     "uniformity.score",
     "uniformity.volatility",
     "watchdog.agent.buyer_cost_explanation",
@@ -337,6 +341,7 @@
     "watchdog.carry_cost_downside",
     "watchdog.certificate_closure_rate",
     "watchdog.chapter123_lower_bound",
+    "watchdog.chapter123_position",
     "watchdog.chapter123_upper_bound",
     "watchdog.closing_exception_priority",
     "watchdog.collateral_constraint_burden",
@@ -430,6 +435,7 @@
     "watchdog.municipal_fiscal_capacity",
     "watchdog.njplus.affordable_supply_coverage",
     "watchdog.njplus.assessment_change_trace",
+    "watchdog.njplus.assessment_component_shift",
     "watchdog.njplus.brownfield_reuse_context",
     "watchdog.njplus.development_designation_stack",
     "watchdog.njplus.environmental_case_activity",
@@ -494,8 +500,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 310,
-    "live": 241,
-    "blocked": 69,
+    "live": 244,
+    "blocked": 66,
     "retired": 0,
     "untriaged": 0
   },
@@ -585,16 +591,16 @@
         "appraiser",
         "investor"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Assessment-to-independent-market-value ratio compared with the municipality common-level ratio and statutory upper limit; the upper limit is normally 115% of the common-level ratio.",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
       "calculation_key": null,
       "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.effective_tax_rate",
@@ -1041,16 +1047,16 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "Derived from the cited authoritative inputs for this marker. Uniformity percentile",
       "dependencies": [],
-      "provider_key": null,
-      "provider_kind": null,
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
       "calculation_key": null,
       "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Formula intent exists but has not passed executable-definition and dependency validation."
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "uniformity.volatility",
@@ -5710,18 +5716,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "normalized(change(land_assessment) - change(improvement_assessment))",
       "dependencies": [
         "nj-dca-modiv-longitudinal"
       ],
-      "provider_key": null,
-      "provider_kind": null,
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
       "calculation_key": null,
       "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.assessment_history_reliability",

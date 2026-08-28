@@ -2,7 +2,7 @@ declare const Deno: any;
 // @ts-ignore remote runtime import
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const INDEXER_VERSION = 'sr1a-subject-indexer-v2';
+const INDEXER_VERSION = 'sr1a-subject-indexer-v3';
 const MIN_REFRESH_MS = 20 * 60 * 60 * 1000;
 const BATCH_SIZE = 500;
 const COUNTY_SALES: Record<string, string> = {
@@ -45,7 +45,7 @@ function newer(a: any, b: any) { const ay = n(a?.y) || 0, by = n(b?.y) || 0, am 
 async function indexCounty(client: any, countyCode: string) {
   const started = Date.now();
   const slug = COUNTY_SALES[countyCode];
-  const sourceUrl = `https://njpropertytaxrelief.com/property/sales-${slug}.json`;
+  const sourceUrl = `https://raw.githubusercontent.com/johnscafide/njtaxrelief/main/property/sales-${slug}.json`;
   const { data: prior } = await client.from('sr1a_subject_index_runs').select('status,refreshed_at,indexed_parcel_count,rows_with_living_space,source_record_count,source_etag,generation_id').eq('county_code', countyCode).maybeSingle();
   const priorAt = prior?.refreshed_at ? Date.parse(prior.refreshed_at) : 0;
   if (prior?.status === 'ready' && priorAt && Date.now() - priorAt < MIN_REFRESH_MS) {
