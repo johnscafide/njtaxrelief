@@ -1,10 +1,11 @@
-import { cp, mkdir, readdir, rm, stat } from 'node:fs/promises';
+import { cp, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import * as pagefind from 'pagefind';
 
 const ROOT = process.cwd();
 const STAGING = path.join(ROOT, '.pagefind-site');
 const OUTPUT = path.join(ROOT, 'pagefind');
+const RUNTIME_TAG = '<script defer src="/property/js/watchdog-third-party.js" data-watchdog-third-party></script>';
 
 const exactPublic = new Set([
   'property/index.html',
@@ -56,6 +57,14 @@ async function walk(dir, base = '') {
   return results;
 }
 
+async function injectRuntime(file) {
+  let html = await readFile(file, 'utf8');
+  if (html.includes('data-watchdog-third-party')) return;
+  if (!/<\/head>/i.test(html)) throw new Error(`Third-party runtime injection missing </head>: ${file}`);
+  html = html.replace(/<\/head>/i, `  ${RUNTIME_TAG}\n</head>`);
+  await writeFile(file, html, 'utf8');
+}
+
 await rm(STAGING, { recursive: true, force: true });
 await rm(OUTPUT, { recursive: true, force: true });
 await mkdir(STAGING, { recursive: true });
@@ -65,6 +74,7 @@ if (!files.length) throw new Error('Pagefind: no eligible public HTML files foun
 
 for (const rel of files) {
   const source = path.join(ROOT, rel);
+  await injectRuntime(source);
   const destination = path.join(STAGING, rel);
   await mkdir(path.dirname(destination), { recursive: true });
   await cp(source, destination);
@@ -84,4 +94,4 @@ await rm(STAGING, { recursive: true, force: true });
 
 const outputStat = await stat(OUTPUT);
 if (!outputStat.isDirectory()) throw new Error('Pagefind output directory was not created.');
-console.log(`Pagefind indexed ${files.length} public HTML files into /pagefind.`);
+console.log(`Pagefind indexed ${files.length} public HTML files into /pagefind and attached the optional public integration runtime.`);
