@@ -1,8 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
-const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+const SUPABASE_URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const PROD_PROJECT_REF='uvkvaxljhhngydvlrzom';
-const DEFAULT_PUBLIC_URL=URL.includes(PROD_PROJECT_REF)?'https://login.watchdogindex.com':URL;
+const DEFAULT_PUBLIC_URL=SUPABASE_URL.includes(PROD_PROJECT_REF)?'https://login.watchdogindex.com':SUPABASE_URL;
 const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||DEFAULT_PUBLIC_URL).replace(/\/+$/,'');
 const CALLBACK=`${PUBLIC_URL}/functions/v1/google-ads-oauth-callback`;
 const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
@@ -10,7 +10,7 @@ const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
 function allowedOrigin(req:Request){
   const origin=req.headers.get('origin')||'';
   try{
-    const host=new URL(origin).hostname.toLowerCase();
+    const host=new globalThis.URL(origin).hostname.toLowerCase();
     if(host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com'||host==='watchdogindex.com'||host==='www.watchdogindex.com'||host==='watchdogre.com'||host==='www.watchdogre.com'||host==='localhost'||host==='127.0.0.1'||host.endsWith('.vercel.app'))return origin;
   }catch{}
   return 'https://www.watchdogindex.com';
@@ -34,7 +34,7 @@ Deno.serve(async(req)=>{
   if(provider===GOOGLE_ADS&&!developerToken)return reply(req,409,{error:'Google Ads is not configured yet',code:'provider_not_connected',provider});
 
   const auth=req.headers.get('Authorization')||'';
-  const client=createClient(URL,ANON,{global:{headers:{Authorization:auth}},auth:{persistSession:false}});
+  const client=createClient(SUPABASE_URL,ANON,{global:{headers:{Authorization:auth}},auth:{persistSession:false}});
   const{data:{user},error}=await client.auth.getUser();
   if(error||!user)return reply(req,401,{error:'Sign in required'});
 
@@ -47,7 +47,7 @@ Deno.serve(async(req)=>{
   }
 
   const state=hex(crypto.getRandomValues(new Uint8Array(32))),stateHash=await sha(state);
-  const service=createClient(URL,SERVICE,{auth:{persistSession:false}});
+  const service=createClient(SUPABASE_URL,SERVICE,{auth:{persistSession:false}});
   const redirectPath=provider===SEARCH_CONSOLE?'/property/analytics/web-signals/':'/property/marketing-studio';
   const{error:insertError}=await service.from('marketing_provider_oauth_states').insert({
     state_hash:stateHash,user_id:user.id,provider_key:provider,redirect_path:redirectPath,
