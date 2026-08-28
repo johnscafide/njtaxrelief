@@ -106,6 +106,10 @@ assert.match(server, /appeal-deadline-rules\.json/);
 assert.match(server, /appealDeadlineContext/);
 assert.match(server, /required_plan:\s*'pro_plus'/);
 assert.match(server, /Access-Control-Allow-Headers[\s\S]*x-client-info/);
+assert.match(server, /SCOPED_SALES_ENDPOINT[\s\S]*api\/sales-by-district/);
+assert.match(server, /scopedSales\(countySlug,\s*district\)/);
+assert.doesNotMatch(server, /sourceJson\(`\/property\/sales-/);
+assert.doesNotMatch(server, /\.filter\(county\s*=>\s*county\.towns\.length\s*>\s*0\)/);
 assert.match(server, /manual_review_required/);
 assert.match(server, /monthsBeforeValuationDate/);
 assert.match(server, /valuationDate/);
@@ -156,4 +160,4 @@ assert.match(scanPage, /scan-evidence-ui\.js/);
 assert.match(scanPage, /scan-case-value-ui\.js/);
 assert.doesNotMatch(scanPage, /appeal-packet\.js/);
 
-console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, evidence, user-supplied case-value, and browser CORS boundaries passed');
+console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, evidence, user-supplied case-value, browser CORS, scoped-sales, and statewide catalog boundaries passed');
