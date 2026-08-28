@@ -1,0 +1,43 @@
+name: Handoff Continuity Contract
+
+on:
+  pull_request:
+    paths:
+      - 'HANDOFF.md'
+      - 'property/docs/supabase-project-boundary.md'
+      - 'property/docs/public-paid-launch-external-controls.md'
+      - 'property/docs/public-paid-launch-counsel-insurance-checklist.md'
+      - 'property/docs/public-paid-launch-cutover-state.json'
+      - 'property/docs/billing-support-runbook.md'
+      - 'property/docs/refresh.md'
+      - 'property/docs/continuity-and-restore.md'
+      - 'scripts/verify_handoff_continuity_contract.js'
+      - '.github/workflows/handoff-continuity-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'HANDOFF.md'
+      - 'property/docs/supabase-project-boundary.md'
+      - 'property/docs/public-paid-launch-external-controls.md'
+      - 'property/docs/public-paid-launch-counsel-insurance-checklist.md'
+      - 'property/docs/public-paid-launch-cutover-state.json'
+      - 'property/docs/billing-support-runbook.md'
+      - 'property/docs/refresh.md'
+      - 'property/docs/continuity-and-restore.md'
+      - 'scripts/verify_handoff_continuity_contract.js'
+      - '.github/workflows/handoff-continuity-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Watchdog operator handoff boundaries
+        run: node scripts/verify_handoff_continuity_contract.js
