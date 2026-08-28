@@ -1,4 +1,11 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.55.0';
+import {
+  buildCertifiedIndex,
+  findCertified,
+  buildTaxRateIndex,
+  findTaxRate,
+  chapter123Screen,
+} from './formula.mjs';
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -10,34 +17,31 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
   headers: { ...cors, 'Content-Type': 'application/json', 'Cache-Control': 'private, no-store' },
 });
 
-const SOURCE_BASE = 'https://njpropertytaxrelief.com/property';
-const FORMULA_VERSION = 'appeal-prospect-scan-server-v1';
+const SOURCE_ROOT = 'https://njpropertytaxrelief.com';
+const FORMULA_VERSION = 'appeal-prospect-scan-server-v2-certified-clr';
+const CHAPTER123_SOURCE = 'https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf';
 const COUNTIES: Record<string, string> = {
   '01':'Atlantic','02':'Bergen','03':'Burlington','04':'Camden','05':'Cape May','06':'Cumberland',
   '07':'Essex','08':'Gloucester','09':'Hudson','10':'Hunterdon','11':'Mercer','12':'Middlesex',
   '13':'Monmouth','14':'Morris','15':'Ocean','16':'Passaic','17':'Salem','18':'Somerset',
   '19':'Sussex','20':'Union','21':'Warren'
 };
+const ALLOWED_MIN_ASSESSMENT = new Set([0, 250000, 500000, 1000000, 2000000, 5000000]);
 
 const cache = new Map<string, { expires: number; value: unknown }>();
 async function sourceJson(path: string, ttlMs = 10 * 60 * 1000) {
-  const key = path;
-  const hit = cache.get(key);
+  const hit = cache.get(path);
   if (hit && hit.expires > Date.now()) return hit.value;
-  const response = await fetch(`${SOURCE_BASE}/${path}`, {
-    headers: { 'User-Agent': 'Watchdog-Server-Scanner/1.0' },
+  const response = await fetch(`${SOURCE_ROOT}${path}`, {
+    headers: { 'User-Agent': 'Watchdog-Server-Scanner/2.0' },
     signal: AbortSignal.timeout(25000),
   });
   if (!response.ok) throw new Error(`source_${response.status}_${path}`);
   const value = await response.json();
-  cache.set(key, { expires: Date.now() + ttlMs, value });
+  cache.set(path, { expires: Date.now() + ttlMs, value });
   return value;
 }
 
-function rateKey(value: unknown) {
-  return String(value || '').toUpperCase().replace(/TOWNSHIP|TWNSHP/g, 'TWP')
-    .replace(/BOROUGH/g, 'BORO').replace(/\s+/g, ' ').trim();
-}
 function clamp(value: number) { return Math.max(0, Math.min(100, Number(value) || 0)); }
 function grade(yearsOld: number) {
   if (yearsOld <= 1) return { k: 'A', t: 'Very strong', w: 'Sale is recent enough to stand on its own.' };
@@ -55,7 +59,7 @@ function opportunity(hit: any, uniformity: any, countyAppeal: any) {
     parts.push({ label, weight, value: clamp(number) });
   };
   add('Sale recency', 30, hit.g.k === 'A' ? 100 : hit.g.k === 'B' ? 82 : hit.g.k === 'C' ? 58 : 32);
-  add('Chapter 123 margin', 30, clamp(hit.over / Math.max(1, hit.av) * 500));
+  add('Certified Chapter 123 margin', 30, clamp(hit.over / Math.max(1, hit.av) * 500));
   if (uniformity) add('Assessment inconsistency', 15, clamp((Number(uniformity.coefficient) - 10) / 15 * 100));
   if (countyAppeal?.latest) add('County outcome context', 10, Number(countyAppeal.latest.win_rate_filed));
   add('Annual dollars at stake', 15, clamp(hit.saving / 2500 * 100));
@@ -66,16 +70,6 @@ function opportunity(hit: any, uniformity: any, countyAppeal: any) {
     band: score == null ? 'No signal' : score >= 75 ? 'High priority' : score >= 55 ? 'Review' : score >= 35 ? 'Developing' : 'Low signal',
     parts,
   };
-}
-function townEffectiveRate(district: string, uniformity: any, taxRates: any) {
-  const town = uniformity?.name || '';
-  const county = COUNTIES[district.slice(0, 2)] || '';
-  const index: Record<string, any> = {};
-  for (const [key, value] of Object.entries(taxRates?.rates || {})) index[rateKey(key)] = value;
-  const series = index[rateKey(`${town} (${county})`)];
-  if (!series) return 0.033;
-  const years = Object.keys(series).filter(year => /^\d{4}$/.test(year)).sort((a, b) => Number(b) - Number(a));
-  return years.length && Number(series[years[0]]) > 0 ? Number(series[years[0]]) / 100 : 0.033;
 }
 
 async function authorize(req: Request) {
@@ -108,87 +102,145 @@ Deno.serve(async (req) => {
   const action = String(input.action || 'scan');
 
   try {
-    const [sr1aJson, uniformityJson] = await Promise.all([
-      sourceJson('sr1a-ratios.json'),
-      sourceJson('uniformity.json'),
+    const [sr1aJson, uniformityJson, equalizationJson] = await Promise.all([
+      sourceJson('/property/sr1a-ratios.json'),
+      sourceJson('/property/uniformity.json'),
+      sourceJson('/equalization-ratios.json'),
     ]);
     const districts = (sr1aJson as any)?.districts || {};
     const uniformity = (uniformityJson as any)?.districts || {};
+    const certifiedIndex = buildCertifiedIndex(equalizationJson as any);
 
     if (action === 'catalog') {
       const counties = Object.keys(COUNTIES).map(code => {
         const towns = Object.keys(districts)
           .filter(district => district.slice(0, 2) === code)
-          .map(district => ({
-            district,
-            name: String(uniformity[district]?.name || district),
-            verified_sales: Number(districts[district]?.n || 0),
-          }))
-          .sort((a, b) => a.name.localeCompare(b.name));
+          .map(district => {
+            const uniformityRow = uniformity[district] || null;
+            const certified = findCertified(certifiedIndex, uniformityRow?.name, uniformityRow?.county || COUNTIES[code]);
+            if (!certified) return null;
+            return {
+              district,
+              name: String(uniformityRow?.name || district),
+              verified_sales: Number(districts[district]?.n || 0),
+              certified_year: certified.year,
+            };
+          })
+          .filter(Boolean)
+          .sort((a: any, b: any) => a.name.localeCompare(b.name));
         return { code, name: COUNTIES[code], towns };
       }).filter(county => county.towns.length > 0);
-      return json({ formula_version: FORMULA_VERSION, counties });
+      return json({
+        formula_version: FORMULA_VERSION,
+        source: { kind: 'NJ certified common-level range', url: CHAPTER123_SOURCE },
+        counties,
+      });
     }
 
     if (action !== 'scan') return json({ error: 'Unsupported action' }, 400);
     const district = String(input.district || '').trim();
     const maxYears = Number(input.max_years);
     const minSaving = Number(input.min_saving);
+    const minAssessment = input.min_assessment == null ? 0 : Number(input.min_assessment);
     if (!/^\d{4}$/.test(district) || !districts[district]) return json({ error: 'Invalid municipality' }, 400);
     if (![2, 3, 6].includes(maxYears)) return json({ error: 'Invalid sale window' }, 400);
     if (![0, 250, 500, 1000].includes(minSaving)) return json({ error: 'Invalid minimum saving' }, 400);
+    if (!ALLOWED_MIN_ASSESSMENT.has(minAssessment)) return json({ error: 'Invalid assessment threshold' }, 400);
 
     const districtSource = districts[district];
-    const countyName = String(districtSource.county || COUNTIES[district.slice(0, 2)] || '').trim();
+    const uniformityRow = uniformity[district] || null;
+    const countyName = String(uniformityRow?.county || districtSource.county || COUNTIES[district.slice(0, 2)] || '').trim();
+    const municipalityName = String(uniformityRow?.name || district).trim();
+    const certified = findCertified(certifiedIndex, municipalityName, countyName);
+    if (!certified) {
+      return json({
+        formula_version: FORMULA_VERSION,
+        result: 'certified_ratio_unavailable',
+        municipality: municipalityName,
+        message: 'No governed certified Chapter 123 common-level range is loaded for this municipality. No substitute ratio was used.',
+      }, 422);
+    }
+
     const countySlug = countyName.toLowerCase().replace(/\s+/g, '-');
     if (!countySlug || !Object.values(COUNTIES).some(name => name.toLowerCase() === countyName.toLowerCase())) {
       return json({ error: 'Unsupported county' }, 400);
     }
 
-    const [appealsJson, taxRatesJson, salesJson] = await Promise.all([
-      sourceJson('appeals.json'),
-      sourceJson('tax-rates.json'),
-      sourceJson(`sales-${countySlug}.json`, 5 * 60 * 1000),
+    const [appealsJson, taxRatesJson, salesJson, revaluationJson] = await Promise.all([
+      sourceJson('/property/appeals.json'),
+      sourceJson('/property/tax-rates.json'),
+      sourceJson(`/property/sales-${countySlug}.json`, 5 * 60 * 1000),
+      sourceJson('/property/revaluation-reassessment-2026.json'),
     ]);
+
+    const taxRateIndex = buildTaxRateIndex(taxRatesJson as any);
+    const taxRate = findTaxRate(taxRateIndex, municipalityName, countyName);
+    if (!taxRate) {
+      return json({
+        formula_version: FORMULA_VERSION,
+        result: 'tax_rate_unavailable',
+        municipality: municipalityName,
+        message: 'No governed general tax rate is loaded for this municipality. Annual dollars at stake were not estimated.',
+      }, 422);
+    }
+
+    const revaluationDistricts = (revaluationJson as any)?.districts || {};
+    if (revaluationDistricts[district] === true && Number((revaluationJson as any)?.tax_year) === certified.year) {
+      return json({
+        formula_version: FORMULA_VERSION,
+        result: 'manual_review_required',
+        municipality: municipalityName,
+        reason: 'approved_revaluation_or_reassessment',
+        tax_year: certified.year,
+        message: 'This municipality appears on the governed approved revaluation/reassessment list for the certified tax year. The automated Chapter 123 screen is disabled here; review current appeal rules and notices manually.',
+      });
+    }
+
     const all = Array.isArray((salesJson as any)?.sales) ? (salesJson as any).sales : [];
     const currentYear = new Date().getUTCFullYear();
-    const ratio = Number(districtSource.ratio);
     const driftRaw = Number(districtSource.drift);
-    const drift = Number.isFinite(driftRaw) && driftRaw > -0.05 && driftRaw < 0.20 ? driftRaw : 0.03;
-    if (!Number.isFinite(ratio) || ratio <= 0 || ratio > 2) return json({ error: 'Municipality ratio unavailable' }, 422);
+    const drift = Number.isFinite(driftRaw) && driftRaw > -0.30 && driftRaw < 0.50 ? driftRaw : null;
+    if (drift == null) {
+      return json({
+        formula_version: FORMULA_VERSION,
+        result: 'market_adjustment_unavailable',
+        municipality: municipalityName,
+        message: 'The governed residential sale-time adjustment is unavailable. No fallback market adjustment was used.',
+      }, 422);
+    }
 
     const pool = all.filter((sale: any) =>
       sale?.d === district && String(sale?.c).trim() === '2' && Number(sale?.p) > 40000 && Number(sale?.av) > 5000 &&
-      (currentYear - Number(sale?.y)) <= maxYears
+      Number(sale?.av) >= minAssessment && (currentYear - Number(sale?.y)) <= maxYears
     );
     if (pool.length < 15) {
       return json({
         formula_version: FORMULA_VERSION,
         result: 'insufficient_sales',
-        municipality: String(uniformity[district]?.name || district),
+        municipality: municipalityName,
         pool: pool.length,
       });
     }
 
-    const uniformityRow = uniformity[district] || null;
     const countyAppeal = (appealsJson as any)?.counties?.[district.slice(0, 2)] || null;
-    const effectiveRate = townEffectiveRate(district, uniformityRow, taxRatesJson);
     const hits: any[] = [];
-
     for (const sale of pool) {
       const age = currentYear - Number(sale.y);
       const market = Number(sale.p) * Math.pow(1 + drift, age);
-      const fair = market * ratio;
-      const limit = fair * 1.15;
-      const assessed = Number(sale.av);
-      if (assessed <= limit) continue;
-      const over = assessed - limit;
-      const saving = (assessed - fair) * effectiveRate;
+      const screened = chapter123Screen({ market, assessed: Number(sale.av), certified, taxRate });
+      if (!screened?.above) continue;
+      const saving = Number(screened.annual_tax_at_stake);
       if (saving < minSaving) continue;
       const hit: any = {
-        a: String(sale.a || ''), b: String(sale.b || ''), l: String(sale.l || ''), y: Number(sale.y),
-        p: Number(sale.p), av: assessed, sf: Number(sale.sf) || null, yb: Number(sale.yb) || null,
-        age, market, fair, limit, over, saving, implied: assessed / Number(sale.p), g: grade(age),
+        a: String(sale.a || ''), b: String(sale.b || ''), l: String(sale.l || ''), y: Number(sale.y), c: '2',
+        p: Number(sale.p), av: Number(sale.av), sf: Number(sale.sf) || null, yb: Number(sale.yb) || null,
+        age, market,
+        fair: screened.supported_assessment,
+        limit: screened.threshold_assessment,
+        over: screened.over,
+        saving,
+        implied: screened.subject_ratio,
+        g: grade(age),
       };
       hit.opportunity = opportunity(hit, uniformityRow, countyAppeal);
       hits.push(hit);
@@ -200,15 +252,25 @@ Deno.serve(async (req) => {
       formula_version: FORMULA_VERSION,
       generated_at: new Date().toISOString(),
       result: 'ok',
+      source: { kind: 'NJ certified common-level range', url: CHAPTER123_SOURCE },
       run: {
         d: district,
-        name: String(uniformityRow?.name || district),
+        name: municipalityName,
         county: COUNTIES[district.slice(0, 2)] || countyName,
-        ratio,
+        certified: {
+          year: certified.year,
+          ratio: certified.ratio / 100,
+          lower: certified.lower / 100,
+          upper: certified.upper / 100,
+          upper_applied: certified.upper_applied / 100,
+          key: certified.key,
+        },
         drift,
-        rate: effectiveRate,
+        rate: taxRate.multiplier,
+        rateYear: taxRate.year,
         maxYears,
         minSaving,
+        minAssessment,
         pool: pool.length,
         from: Math.min(...pool.map((sale: any) => Number(sale.y))),
         to: Math.max(...pool.map((sale: any) => Number(sale.y))),
