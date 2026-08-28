@@ -12,7 +12,7 @@ function allowedOrigin(req:Request){
   }catch{}
   return 'https://www.watchdogindex.com';
 }
-function cors(req:Request){return{'Access-Control-Allow-Origin':allowedOrigin(req),'Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
+function cors(req:Request){return{'Access-Control-Allow-Origin':allowedOrigin(req),'Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
 function reply(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{...cors(req),'Content-Type':'application/json'}})}
 const hex=(b:Uint8Array)=>Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join('');
 async function sha(v:string){return hex(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v))))}
