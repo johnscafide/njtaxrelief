@@ -7,7 +7,8 @@
     "pagefind:index": "node scripts/build-pagefind.mjs",
     "test:third-party": "node property/tests/third-party-foundation-contract.mjs",
     "test:farm-map-basemap": "node property/tests/farm-map-vector-basemap-contract.mjs",
-    "vercel-build": "npm run test:third-party && npm run test:farm-map-basemap && npm run pagefind:index"
+    "test:external-signals": "node property/tests/external-web-signals-contract.mjs",
+    "vercel-build": "npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run pagefind:index"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3",

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Web Signals | Watchdog Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <style>
+    :root{--ink:#10294b;--muted:#6d7989;--paper:#f4f7f9;--teal:#087f7a;--line:#e7edf1;--soft:#eef7f6;--warn:#8a6416;--bad:#a53a3a}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:#182433;font-family:"Source Sans 3",Arial,sans-serif}.shell{max-width:1380px;margin:0 auto;padding:34px 24px 70px}.head{display:flex;justify-content:space-between;gap:22px;align-items:flex-start;margin-bottom:20px}.kicker{font:800 11px "Plus Jakarta Sans";letter-spacing:.14em;color:var(--teal)}h1{font:800 36px/1.05 "Plus Jakarta Sans";letter-spacing:-.04em;color:var(--ink);margin:7px 0 8px}.head p{margin:0;max-width:800px;color:var(--muted);font-size:15px}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:0;border-radius:11px;padding:10px 13px;background:#fff;color:var(--ink);font:800 13px "Source Sans 3";cursor:pointer;text-decoration:none;box-shadow:0 7px 22px rgba(16,41,75,.06)}.btn.primary{background:var(--ink);color:#fff}.btn.teal{background:var(--teal);color:#fff}.btn:disabled{opacity:.55;cursor:not-allowed}.status{background:#fff;border-radius:15px;padding:12px 15px;margin-bottom:16px;color:var(--muted);font-size:13px;box-shadow:0 7px 24px rgba(16,41,75,.05)}.status b{color:var(--ink)}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.panel{background:#fff;border-radius:18px;padding:21px;box-shadow:0 9px 30px rgba(16,41,75,.055);min-width:0}.panel.wide{grid-column:1/-1}.panel-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}.panel h2{font:800 19px/1.2 "Plus Jakarta Sans";color:var(--ink);margin:0}.panel p{color:var(--muted);font-size:13px;line-height:1.45;margin:6px 0 14px}.tag{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--teal);border-radius:999px;padding:5px 8px;font-size:10px;font-weight:800;white-space:nowrap}.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}.card{background:#f6f9fa;border-radius:13px;padding:13px;min-width:0}.card small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;font-weight:800;letter-spacing:.05em}.card b{display:block;color:var(--ink);font:800 22px/1.1 "Plus Jakarta Sans";margin-top:6px}.card em{display:block;color:var(--muted);font-size:11px;font-style:normal;margin-top:5px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:8px 7px;border-bottom:1px solid var(--line);white-space:nowrap}.table th{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.table td.num{text-align:right;font-variant-numeric:tabular-nums}.empty{padding:24px;text-align:center;color:var(--muted)}.notice{border-radius:13px;padding:12px 14px;background:#f7f9fb;color:#526174;font-size:12px;line-height:1.45}.notice.warn{background:#fff8e8;color:var(--warn)}.notice.bad{background:#fff0f0;color:var(--bad)}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.weather-form{display:flex;gap:8px;align-items:end;flex-wrap:wrap}.weather-form label{font-size:11px;color:var(--muted);font-weight:800}.weather-form input{display:block;margin-top:4px;border:1px solid var(--line);border-radius:10px;padding:9px 10px;width:140px;font:600 13px "Source Sans 3"}.forecast{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}.forecast div{background:#f6f9fa;border-radius:12px;padding:11px}.forecast b,.forecast span{display:block}.forecast span{font-size:11px;color:var(--muted);margin-top:4px}.muted{color:var(--muted);font-size:12px}.error{display:none;background:#fff0f0;color:#8b2626;padding:13px 15px;border-radius:13px;margin-bottom:15px}@media(max-width:900px){.grid{grid-template-columns:1fr}.panel.wide{grid-column:auto}.head{flex-direction:column}.cards{grid-template-columns:repeat(2,1fr)}.split{grid-template-columns:1fr}}@media(max-width:560px){.shell{padding:22px 13px 50px}h1{font-size:31px}.cards{grid-template-columns:1fr 1fr}.forecast{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="head">
+    <div><div class="kicker">DEVELOPER · EXTERNAL SIGNALS</div><h1>Search &amp; web performance</h1><p>Operational signals from Google Search Console and PageSpeed/Lighthouse, plus a governed weather-provider check. These sources measure distribution and context; they do not alter Watchdog Score.</p></div>
+    <div class="actions"><a class="btn" href="/property/analytics/"><i class="fas fa-arrow-left"></i> Analytics</a><button class="btn primary" id="refresh"><i class="fas fa-rotate"></i> Refresh signals</button></div>
+  </header>
+  <div id="error" class="error"></div>
+  <div class="status"><b id="freshness">Waiting for developer session…</b><span id="status-detail"></span></div>
+
+  <section class="grid">
+    <article class="panel wide">
+      <div class="panel-head"><div><h2>Google Search Console</h2><p>28-day organic search performance, delayed two days for Google processing. Query and page tables use Google’s top-row Search Analytics results rather than pretending to be an exhaustive export.</p></div><span class="tag"><i class="fab fa-google"></i> READ ONLY</span></div>
+      <div id="gsc-actions" class="actions"></div>
+      <div id="gsc-summary" class="empty">Loading connection state…</div>
+      <div class="split"><div><h3>Top queries</h3><div id="gsc-queries" class="empty">—</div></div><div><h3>Top pages</h3><div id="gsc-pages" class="empty">—</div></div></div>
+    </article>
+
+    <article class="panel wide">
+      <div class="panel-head"><div><h2>PageSpeed / Lighthouse</h2><p>Lab checks for Watchdog’s critical public routes on mobile and desktop. This intentionally does not depend on PSI’s embedded CrUX field-data payload; field performance should move to the dedicated CrUX API if we add it later.</p></div><span class="tag"><i class="fas fa-gauge-high"></i> LAB DATA</span></div>
+      <div id="psi-meta" class="notice">Loading PageSpeed checks…</div>
+      <div id="psi-table" class="empty">Loading…</div>
+    </article>
+
+    <article class="panel wide">
+      <div class="panel-head"><div><h2>Weather context provider</h2><p>Tests the production weather-context boundary with New Jersey coordinates. NOAA/NWS is the free commercial-safe default. Open-Meteo is used only when a commercial customer API key is configured.</p></div><span class="tag"><i class="fas fa-cloud-sun"></i> CONTEXT ONLY</span></div>
+      <div class="weather-form"><label>Latitude<input id="weather-lat" value="39.8274" inputmode="decimal"></label><label>Longitude<input id="weather-lon" value="-75.1527" inputmode="decimal"></label><button class="btn teal" id="weather-check"><i class="fas fa-location-dot"></i> Check Deptford area</button></div>
+      <div id="weather-result" class="notice" style="margin-top:12px">No weather request yet.</div>
+    </article>
+  </section>
+
+  <div class="status" style="margin-top:16px"><b>Governance:</b> Search Console is read-only and developer-only. PageSpeed evaluates public URLs. Weather is contextual and explicitly excluded from property-condition, insurance-risk and Watchdog Score evidence. No user search terms, property addresses, PAMS PINs or identities are sent to these three provider calls from this console.</div>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/supabase-runtime.js"></script>
+<script src="/property/js/access-guard.js"></script>
+<script>
+(function(){
+'use strict';
+var client=null;
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function num(v,d){var n=Number(v);return Number.isFinite(n)?n.toLocaleString(undefined,{maximumFractionDigits:d==null?0:d}):'—';}
+function pct(v){var n=Number(v);return Number.isFinite(n)?(n*100).toFixed(n*100<10?1:0)+'%':'—';}
+function score(v){var n=Number(v);return Number.isFinite(n)?Math.round(n*100):'—';}
+function td(v,cls){return '<td'+(cls?' class="'+cls+'"':'')+'>'+esc(v)+'</td>';}
+function table(headers,rows){if(!rows||!rows.length)return '<div class="empty">No rows returned.</div>';return '<div class="table-wrap"><table class="table"><thead><tr>'+headers.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.join('')+'</tbody></table></div>';}
+function card(label,value,note){return '<div class="card"><small>'+esc(label)+'</small><b>'+esc(value)+'</b><em>'+esc(note||'')+'</em></div>';}
+function renderGsc(g){
+ var actions=document.getElementById('gsc-actions');
+ if(!g||g.status==='not_connected'){
+   actions.innerHTML='<button class="btn teal" id="connect-gsc"><i class="fab fa-google"></i> Connect Search Console</button>';
+   document.getElementById('gsc-summary').innerHTML='<div class="notice warn">Search Console is not connected yet. Authorization requests only the <b>webmasters.readonly</b> scope and stores the refresh token server-side.</div>';
+   document.getElementById('gsc-queries').innerHTML='<div class="empty">Connect to load queries.</div>';
+   document.getElementById('gsc-pages').innerHTML='<div class="empty">Connect to load pages.</div>';
+   document.getElementById('connect-gsc').onclick=connectGsc;return;
+ }
+ if(g.status!=='connected'){
+   actions.innerHTML='<button class="btn teal" id="connect-gsc">Reconnect Search Console</button>';
+   document.getElementById('gsc-summary').innerHTML='<div class="notice bad">'+esc(g.error||'Search Console is unavailable.')+'</div>';
+   document.getElementById('connect-gsc').onclick=connectGsc;return;
+ }
+ actions.innerHTML='<span class="tag"><i class="fas fa-circle-check"></i> '+esc(g.site_url||'Connected')+'</span><button class="btn" id="connect-gsc">Reconnect</button>';
+ document.getElementById('connect-gsc').onclick=connectGsc;
+ var s=g.summary||{},p=g.previous||{},delta=g.delta||{};
+ document.getElementById('gsc-summary').innerHTML='<div class="cards">'+[
+   card('Clicks',num(s.clicks),delta.clicks==null?'28 days':(delta.clicks>=0?'+':'')+num(delta.clicks,1)+'% vs prior'),
+   card('Impressions',num(s.impressions),delta.impressions==null?'28 days':(delta.impressions>=0?'+':'')+num(delta.impressions,1)+'% vs prior'),
+   card('CTR',pct(s.ctr),pct(p.ctr)+' prior'),
+   card('Avg position',num(s.position,1),num(p.position,1)+' prior')
+ ].join('')+'</div><p class="muted">'+esc((g.range&&g.range.start)||'')+' → '+esc((g.range&&g.range.end)||'')+' · '+num((g.sites||[]).length)+' accessible Search Console properties</p>';
+ document.getElementById('gsc-queries').innerHTML=table(['Query','Clicks','Impressions','CTR','Position'],(g.queries||[]).map(function(r){return '<tr>'+td(r.key)+td(num(r.clicks),'num')+td(num(r.impressions),'num')+td(pct(r.ctr),'num')+td(num(r.position,1),'num')+'</tr>';}));
+ document.getElementById('gsc-pages').innerHTML=table(['Page','Clicks','Impressions','CTR','Position'],(g.pages||[]).map(function(r){return '<tr>'+td(r.key)+td(num(r.clicks),'num')+td(num(r.impressions),'num')+td(pct(r.ctr),'num')+td(num(r.position,1),'num')+'</tr>';}));
+}
+function renderPsi(p){
+ if(!p){document.getElementById('psi-meta').className='notice bad';document.getElementById('psi-meta').textContent='PageSpeed response missing.';return;}
+ document.getElementById('psi-meta').className='notice';
+ document.getElementById('psi-meta').innerHTML='Mode: <b>'+esc(p.mode||'keyless')+'</b> · '+esc(p.note||'Lighthouse lab data only.')+' · Checked '+esc(p.checked_at||'');
+ document.getElementById('psi-table').innerHTML=table(['Route','Mode','Perf','A11y','Best','SEO','LCP','CLS','TBT','Status'],(p.results||[]).map(function(r){
+   return '<tr>'+td(r.label)+td(r.strategy)+td(score(r.categories&&r.categories.performance),'num')+td(score(r.categories&&r.categories.accessibility),'num')+td(score(r.categories&&r.categories.best_practices),'num')+td(score(r.categories&&r.categories.seo),'num')+td(r.audits&&r.audits.lcp||'—')+td(r.audits&&r.audits.cls||'—')+td(r.audits&&r.audits.tbt||'—')+td(r.ok?'OK':(r.error||'Failed'))+'</tr>';
+ }));
+}
+async function connectGsc(){
+ try{
+   var b=document.getElementById('connect-gsc');if(b)b.disabled=true;
+   var r=await client.functions.invoke('google-ads-oauth-start',{body:{provider:'search_console'}});
+   if(r.error||!r.data||!r.data.authorization_url)throw new Error((r.data&&r.data.error)||(r.error&&r.error.message)||'Could not start Google authorization');
+   location.assign(r.data.authorization_url);
+ }catch(e){showError(e.message||String(e));var b2=document.getElementById('connect-gsc');if(b2)b2.disabled=false;}
+}
+function showError(message){var b=document.getElementById('error');b.style.display='block';b.textContent=message;}
+async function loadSignals(){
+ var refresh=document.getElementById('refresh');refresh.disabled=true;document.getElementById('error').style.display='none';document.getElementById('freshness').textContent='Loading external signals…';
+ try{
+   var r=await client.functions.invoke('product-analytics-report',{body:{external_signals_only:true}});
+   if(r.error||!r.data||!r.data.ok)throw new Error((r.data&&r.data.error)||(r.error&&r.error.message)||'External signals unavailable');
+   var d=r.data.external_signals||{};renderGsc(d.search_console);renderPsi(d.pagespeed);
+   document.getElementById('freshness').textContent='External signals loaded';document.getElementById('status-detail').textContent=' · '+new Date(r.data.generated_at).toLocaleString();
+ }catch(e){showError(e.message||String(e));document.getElementById('freshness').textContent='External signals failed';}
+ finally{refresh.disabled=false;}
+}
+async function checkWeather(){
+ var b=document.getElementById('weather-check'),out=document.getElementById('weather-result');b.disabled=true;out.className='notice';out.textContent='Checking governed provider…';
+ try{
+   var lat=Number(document.getElementById('weather-lat').value),lon=Number(document.getElementById('weather-lon').value);
+   var r=await fetch('/api/watchdog-weather-context',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:lat,lon:lon})});var d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Weather context unavailable');
+   var now=d.near_term||{},forecast=d.forecast||[];
+   out.innerHTML='<b>'+esc(d.provider_label||d.provider)+'</b><br>'+esc(now.summary||'Provider response received')+(now.temperature!=null?' · '+esc(String(now.temperature))+'°'+esc(now.temperature_unit||''):'')+(now.precipitation_probability!=null?' · '+esc(String(now.precipitation_probability))+'% precip':'')+'<div class="forecast">'+forecast.slice(0,3).map(function(x){return '<div><b>'+esc(x.name||x.day||'Forecast')+'</b><span>'+esc(x.summary||((x.temperature_max!=null?x.temperature_max+'° high':'')+(x.temperature_min!=null?' / '+x.temperature_min+'° low':''))||'Forecast data')+'</span></div>';}).join('')+'</div><p class="muted">'+esc(d.note||'Context only.')+' · Score impact: '+esc(String(d.score_impact))+'</p>';
+ }catch(e){out.className='notice bad';out.textContent=e.message||String(e);}finally{b.disabled=false;}
+}
+Promise.resolve(window.njptrAccessReady).then(function(ctx){if(!ctx||ctx.developer!==true)throw new Error('Developer access required');client=window.NJPTRAccess.client();document.getElementById('refresh').onclick=loadSignals;document.getElementById('weather-check').onclick=checkWeather;var q=new URLSearchParams(location.search);if(q.get('oauth'))document.getElementById('status-detail').textContent=' · Google OAuth: '+q.get('oauth');loadSignals();}).catch(function(e){showError(e.message||String(e));});
+})();
+</script>
+</body>
+</html>
