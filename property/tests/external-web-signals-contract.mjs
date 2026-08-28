@@ -39,6 +39,12 @@ assert.match(oauthCallback, /WATCHDOG_SUPABASE_PUBLIC_URL/);
 assert.match(oauthCallback, /uvkvaxljhhngydvlrzom/);
 assert.match(oauthCallback, /https:\/\/login\.watchdogindex\.com/);
 assert.match(oauthCallback, /redirect_uri:CALLBACK/);
+assert.match(oauthCallback, /state_lookup/);
+assert.match(oauthCallback, /state_consume/);
+assert.match(oauthCallback, /token_network_failed/);
+assert.match(oauthCallback, /callback_failed/);
+assert.match(oauthCallback, /google-oauth-callback-failed/);
+assert.match(oauthCallback, /safeRedirectPath/);
 
 assert.match(weather, /api\.weather\.gov/);
 assert.match(weather, /customer-api\.open-meteo\.com/);
