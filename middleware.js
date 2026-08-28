@@ -122,7 +122,56 @@ function blockedDataResponse(status, message, cacheControl) {
   });
 }
 
-export default function middleware(request) {
+function securityBackend() {
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) throw new Error('security backend unavailable');
+  return { url, key };
+}
+
+async function edgeClientHash(request, key) {
+  const forwarded = String(request.headers.get('x-forwarded-for') || '').split(',')[0].trim();
+  if (!forwarded) return '';
+  const encoder = new TextEncoder();
+  const hmacKey = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(key),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  );
+  const signature = await crypto.subtle.sign('HMAC', hmacKey, encoder.encode(forwarded));
+  return Array.from(new Uint8Array(signature), byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function recordEdgeSecurityEvent(request, eventType, route, automationHint = false) {
+  try {
+    const config = securityBackend();
+    const clientHash = await edgeClientHash(request, config.key);
+    const response = await fetch(`${config.url}/rest/v1/rpc/record_public_request_security_event`, {
+      method: 'POST',
+      headers: {
+        apikey: config.key,
+        Authorization: `Bearer ${config.key}`,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        p_event_type: eventType,
+        p_client_hash: clientHash || null,
+        p_route: route,
+        p_scope: null,
+        p_automation_hint: Boolean(automationHint),
+        p_detail: {}
+      })
+    });
+    if (!response.ok) throw new Error(`security event http ${response.status}`);
+  } catch (error) {
+    console.error('watchdog-data-edge telemetry', error && error.message || error);
+  }
+}
+
+export default async function middleware(request) {
   const url = new URL(request.url);
   const host = url.hostname.toLowerCase();
   const userAgent = request.headers.get('user-agent') || '';
@@ -143,6 +192,7 @@ export default function middleware(request) {
   // alias on the deployment, not only the canonical Watchdog host.
   if (BULK_SALES_FILE.test(url.pathname)) {
     console.warn('watchdog-data-edge', JSON.stringify({ event: 'bulk_sales_blocked', path: url.pathname }));
+    await recordEdgeSecurityEvent(request, 'bulk_sales_blocked', url.pathname, AUTOMATION_UA.test(userAgent));
     return blockedDataResponse(404, 'Bulk sales files are not a public delivery surface.', 'public, max-age=300, s-maxage=86400');
   }
 
@@ -151,6 +201,7 @@ export default function middleware(request) {
   // challenged merely because the underlying records are public.
   if (url.pathname === SALES_API_PATH && AUTOMATION_UA.test(userAgent)) {
     console.warn('watchdog-data-edge', JSON.stringify({ event: 'automation_client_blocked', path: url.pathname }));
+    await recordEdgeSecurityEvent(request, 'automation_client_blocked', url.pathname, true);
     return blockedDataResponse(403, 'Automated bulk extraction is not permitted on this endpoint.', 'no-store');
   }
 
