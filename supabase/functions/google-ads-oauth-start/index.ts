@@ -27,7 +27,7 @@ Deno.serve(async(req)=>{
   const requested=String(input?.provider||'google_ads').toLowerCase();
   const provider=requested==='search_console'||requested===SEARCH_CONSOLE?SEARCH_CONSOLE:GOOGLE_ADS;
   const clientId=Deno.env.get('GOOGLE_ADS_CLIENT_ID'),clientSecret=Deno.env.get('GOOGLE_ADS_CLIENT_SECRET'),developerToken=Deno.env.get('GOOGLE_ADS_DEVELOPER_TOKEN');
-  if(!clientId||!clientSecret)return reply(req,409,{error:'Google OAuth is not configured yet',code:'provider_not_connected',provider});
+  if(!clientId||!clientSecret)return reply(req,provider===SEARCH_CONSOLE?200:409,{error:'Google OAuth is not configured yet',code:'provider_not_connected',provider});
   if(provider===GOOGLE_ADS&&!developerToken)return reply(req,409,{error:'Google Ads is not configured yet',code:'provider_not_connected',provider});
 
   const auth=req.headers.get('Authorization')||'';
