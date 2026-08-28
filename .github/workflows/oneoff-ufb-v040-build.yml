@@ -1,0 +1,54 @@
+name: One-off UFB v040 longitudinal build
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-ufb-v040-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Download certified NJ DCA UFB workbook
+        run: |
+          curl -L --fail --retry 3 --retry-delay 2 -o /tmp/ufb.xlsm 'https://nj.gov/dca/dlgs/programs/mc_budget_docs/UFB%20Database%20-%20FINAL.xlsm'
+          echo '79a59be4c4ab2669d60ebb8072aab5a5775df7025e66cb95a887e1c39ed8ccaa  /tmp/ufb.xlsm' | sha256sum -c -
+      - name: Build governed v040 source artifacts
+        run: python property/scripts/build_ufb_v040_longitudinal.py /tmp/ufb.xlsm --repo-root .
+      - name: Catalog v040 markers as planned
+        run: python property/scripts/apply_source_pack_v040.py
+      - name: Validate bounded catalog state
+        run: |
+          python <<'PY'
+          import json
+          r=json.load(open('property/data/marker-registry.json'))
+          p=json.load(open('property/data/nj-source-pack-v040.json'))
+          m=json.load(open('property/data/ufb-v040/manifest.json'))
+          assert len(p['markers']) == 130
+          assert m['field_count'] == 130 and m['municipality_count'] == 564
+          assert r['summary']['total'] == 1130, r['summary']
+          assert r['summary']['provider_status']['live'] == 797, r['summary']
+          assert r['summary']['provider_status']['planned'] == 317, r['summary']
+          ids={x['id'] for x in r['markers']}
+          assert all(x['id'] in ids for x in p['markers'])
+          assert all(next(y for y in r['markers'] if y['id']==x['id'])['provider_status']=='planned' for x in p['markers'])
+          print(json.dumps(r['summary'],indent=2))
+          PY
+      - name: Commit without overwriting concurrent main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name 'Watchdog release automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add property/data/ufb-v040 property/data/nj-source-pack-v040.json property/data/marker-registry.json
+          git commit -m 'NJW-144 stage 130 UFB longitudinal markers'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
