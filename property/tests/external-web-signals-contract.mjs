@@ -32,7 +32,7 @@ assert.match(oauthCallback, /accessible_sites/);
 
 assert.match(weather, /api\.weather\.gov/);
 assert.match(weather, /customer-api\.open-meteo\.com/);
-assert.doesNotMatch(weather, /api\.open-meteo\.com/);
+assert.doesNotMatch(weather, /https:\/\/api\.open-meteo\.com/);
 assert.match(weather, /OPEN_METEO_API_KEY/);
 assert.match(weather, /score_impact:\s*false/);
 assert.match(weather, /property_condition_evidence:\s*false/);
