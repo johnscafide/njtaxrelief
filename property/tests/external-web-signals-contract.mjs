@@ -14,8 +14,7 @@ assert.match(page, /provider:'search_console'/);
 assert.match(page, /Weather context provider/);
 
 assert.match(report, /pagespeedonline\/v5\/runPagespeed/);
-assert.match(report, /category.*performance/);
-assert.match(report, /best-practices/);
+assert.match(report, /\['performance','accessibility','best-practices','seo'\]/);
 assert.match(report, /Lighthouse lab categories only/);
 assert.doesNotMatch(report, /loadingExperience/);
 assert.match(report, /webmasters\/v3\/sites/);
