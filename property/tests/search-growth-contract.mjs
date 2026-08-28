@@ -3,7 +3,9 @@ import { readFile } from 'node:fs/promises';
 
 const read = (file) => readFile(new URL(`../../${file}`, import.meta.url), 'utf8');
 const generator = await read('scripts/generate_town_pages.py');
+const cohort = await read('scripts/apply-search-growth-cohort.mjs');
 const signals = await read('property/analytics/web-signals/index.html');
+const pkg = JSON.parse(await read('package.json'));
 
 // Evidence-led opportunity queue stays transparent and advisory.
 assert.match(signals, /Search opportunities/);
@@ -24,8 +26,23 @@ assert.match(generator, /Look up a property/);
 assert.match(generator, /Property Tax Records & Assessments \| Watchdog/);
 assert.match(generator, /official assessor, collector and county offices remain the source/);
 
-// SEO rollout keeps the existing canonical path construction instead of spawning intent duplicates.
+// First production cohort is deliberately bounded to Search Console evidence.
+for (const expected of [
+  'allendale-borough.html', 'audubon-borough.html', 'barnegat-light-borough.html',
+  'camden-city.html', 'chesterfield-township.html', 'cliffside-park-borough.html', 'clifton-city.html'
+]) assert.match(cohort, new RegExp(expected.replace('.', '\\.')));
+for (const county of ['bergen', 'burlington', 'camden', 'ocean', 'passaic']) {
+  assert.match(cohort, new RegExp(`towns/${county}/index\\.html`));
+}
+assert.match(cohort, /data-organic-property-lookup/);
+assert.match(cohort, /product-analytics\.js/);
+assert.match(cohort, /official assessor, collector and county offices remain the source/);
+assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
+assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
+
+// SEO rollout keeps existing canonical path construction instead of spawning intent duplicates.
 assert.match(generator, /canonical = SITE \+ "\/" \+ path/);
 assert.doesNotMatch(generator, /assessor-page|tax-collector-page|property-records-page/);
+assert.doesNotMatch(cohort, /assessor-page|tax-collector-page|property-records-page/);
 
 console.log('search growth contract: ok');
