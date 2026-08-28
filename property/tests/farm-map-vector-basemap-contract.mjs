@@ -14,6 +14,7 @@ assert.match(adapter, /new VectorBasemap\(options\)/);
 assert.match(adapter, /this\._fallback=originalTileLayer/);
 assert.match(adapter, /farmBasemap='openfreemap-vector'/);
 assert.match(adapter, /farmBasemap='osm-fallback'/);
+assert.match(adapter, /if\(settled\)return;\s*settled=true;\s*this\._failVector\('OpenFreeMap style timed out'\)/);
 assert.match(adapter, /OpenFreeMap/);
 assert.match(adapter, /OpenStreetMap contributors/);
 assert.match(farmMap, /L\.Control\.Draw/);
