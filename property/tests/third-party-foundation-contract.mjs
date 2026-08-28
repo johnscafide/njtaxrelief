@@ -10,7 +10,7 @@ const config = await read('api/watchdog-third-party-config.js');
 
 assert.equal(pkg.devDependencies?.pagefind, '1.5.2');
 assert.equal(pkg.scripts?.['pagefind:index'], 'node scripts/build-pagefind.mjs');
-assert.equal(pkg.scripts?.['vercel-build'], 'npm run pagefind:index');
+assert.equal(pkg.scripts?.['vercel-build'], 'npm run test:third-party && npm run pagefind:index');
 assert.match(search, /\/pagefind\/pagefind-ui\.js/);
 assert.match(search, /Private dashboards, accounts, reports, developer tools and customer records are intentionally excluded/);
 assert.match(build, /\/admin\//);
