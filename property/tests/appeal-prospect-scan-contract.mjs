@@ -7,6 +7,8 @@ import {
   buildTaxRateIndex,
   findTaxRate,
   chapter123Screen,
+  monthsBeforeValuationDate,
+  marketAtValuationDate,
 } from '../../supabase/functions/appeal-prospect-scan/formula.mjs';
 
 assert.equal(canonicalTown('Atlantic City City'), 'ATLANTIC CITY');
@@ -26,6 +28,13 @@ const rates = buildTaxRateIndex({ rates: {
 } });
 assert.equal(findTaxRate(rates, 'Atlantic City', 'Atlantic')?.multiplier, 0.0338);
 assert.equal(findTaxRate(rates, 'No Such Town', 'Atlantic'), null);
+
+assert.equal(monthsBeforeValuationDate(2025, 9, 2026), 1);
+assert.equal(monthsBeforeValuationDate(2025, 10, 2026), null);
+assert.equal(monthsBeforeValuationDate(2026, 1, 2026), null);
+assert.equal(monthsBeforeValuationDate(2024, 10, 2026), 12);
+assert.equal(Math.round(marketAtValuationDate(300000, 12, 0.05)), 315000);
+assert.equal(marketAtValuationDate(300000, null, 0.05), null);
 
 const hit = chapter123Screen({
   market: 300000,
@@ -61,7 +70,11 @@ const server = fs.readFileSync(new URL('../../supabase/functions/appeal-prospect
 assert.match(server, /equalization-ratios\.json/);
 assert.match(server, /required_plan:\s*'pro_plus'/);
 assert.match(server, /manual_review_required/);
+assert.match(server, /monthsBeforeValuationDate/);
+assert.match(server, /valuationDate/);
+assert.match(server, /saleCutoff/);
 assert.doesNotMatch(server, /fair\s*\*\s*1\.15/);
 assert.doesNotMatch(server, /return\s+0\.033/);
+assert.doesNotMatch(server, /currentYear\s*-\s*Number\(sale\?\.y\)/);
 
 console.log('appeal-prospect-scan certified Chapter 123 contract passed');
