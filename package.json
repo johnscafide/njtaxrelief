@@ -3,8 +3,15 @@
   "engines": {
     "node": "24.x"
   },
+  "scripts": {
+    "pagefind:index": "node scripts/build-pagefind.mjs",
+    "vercel-build": "npm run pagefind:index"
+  },
   "dependencies": {
     "@vercel/functions": "3.9.3",
     "@vercel/oidc": "3.8.5"
+  },
+  "devDependencies": {
+    "pagefind": "1.5.2"
   }
 }
