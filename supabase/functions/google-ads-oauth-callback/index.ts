@@ -1,8 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
-const URL=Deno.env.get('SUPABASE_URL')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+const SUPABASE_URL=Deno.env.get('SUPABASE_URL')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const PROD_PROJECT_REF='uvkvaxljhhngydvlrzom';
-const DEFAULT_PUBLIC_URL=URL.includes(PROD_PROJECT_REF)?'https://login.watchdogindex.com':URL;
+const DEFAULT_PUBLIC_URL=SUPABASE_URL.includes(PROD_PROJECT_REF)?'https://login.watchdogindex.com':SUPABASE_URL;
 const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||DEFAULT_PUBLIC_URL).replace(/\/+$/,'');
 const CALLBACK=`${PUBLIC_URL}/functions/v1/google-ads-oauth-callback`;
 const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
@@ -11,7 +11,7 @@ async function sha(v:string){return hex(new Uint8Array(await crypto.subtle.diges
 function siteFor(path:string){return path.startsWith('/property/analytics')?'https://www.watchdogindex.com':'https://njpropertytaxrelief.com'}
 function fallbackPath(provider:string){return provider===SEARCH_CONSOLE?'/property/analytics/web-signals/':'/property/marketing-studio'}
 function safeRedirectPath(value:unknown,provider:string){const v=String(value||'');return /^\/property\/[a-z0-9/_-]+\/?$/i.test(v)?v:fallbackPath(provider)}
-function go(path:string,params:Record<string,string>){const safe=safeRedirectPath(path,params.provider||GOOGLE_ADS);const u=new URL(siteFor(safe)+safe);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));return new Response(null,{status:302,headers:{Location:u.toString(),'Cache-Control':'no-store'}})}
+function go(path:string,params:Record<string,string>){const safe=safeRedirectPath(path,params.provider||GOOGLE_ADS);const u=new globalThis.URL(siteFor(safe)+safe);Object.entries(params).forEach(([k,v])=>u.searchParams.set(k,v));return new Response(null,{status:302,headers:{Location:u.toString(),'Cache-Control':'no-store'}})}
 function chooseWatchdogSite(entries:any[]){const urls=entries.map(x=>String(x?.siteUrl||'')).filter(Boolean);const preferred=['sc-domain:watchdogindex.com','https://www.watchdogindex.com/','https://watchdogindex.com/','sc-domain:njpropertytaxrelief.com','https://www.njpropertytaxrelief.com/','https://njpropertytaxrelief.com/'];for(const p of preferred)if(urls.includes(p))return p;return urls[0]||null}
 
 async function storeRefreshToken(service:any,connectionId:string,token:any){
@@ -25,14 +25,14 @@ Deno.serve(async(req)=>{
   let stage='request',provider=GOOGLE_ADS,redirect=fallbackPath(provider);
   try{
     if(req.method!=='GET')return new Response('Method not allowed',{status:405});
-    const u=new URL(req.url),state=u.searchParams.get('state')||'',code=u.searchParams.get('code')||'',providerError=u.searchParams.get('error')||'',callbackScope=u.searchParams.get('scope')||'';
+    const u=new globalThis.URL(req.url),state=u.searchParams.get('state')||'',code=u.searchParams.get('code')||'',providerError=u.searchParams.get('error')||'',callbackScope=u.searchParams.get('scope')||'';
     if(callbackScope.includes('webmasters.readonly')){provider=SEARCH_CONSOLE;redirect=fallbackPath(provider)}
     if(!/^[a-f0-9]{64}$/i.test(state))return go(redirect,{provider,oauth:'invalid_state'});
 
     stage='state_hash';
     const stateHash=await sha(state),now=new Date().toISOString();
     stage='service_client';
-    const service=createClient(URL,SERVICE,{auth:{persistSession:false}});
+    const service=createClient(SUPABASE_URL,SERVICE,{auth:{persistSession:false}});
     stage='state_lookup';
     const lookup=await service.from('marketing_provider_oauth_states').select('user_id,redirect_path,provider_key').eq('state_hash',stateHash).in('provider_key',[GOOGLE_ADS,SEARCH_CONSOLE]).is('consumed_at',null).gt('expires_at',now).maybeSingle();
     if(lookup.error||!lookup.data)return go(redirect,{provider,oauth:'expired'});
