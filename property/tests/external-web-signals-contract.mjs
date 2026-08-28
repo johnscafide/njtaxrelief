@@ -12,6 +12,16 @@ assert.match(page, /data-access-require="developer"/);
 assert.match(page, /external_signals_only:true/);
 assert.match(page, /provider:'search_console'/);
 assert.match(page, /Weather context provider/);
+assert.match(page, /Search opportunities/);
+assert.match(page, /function classifyOpportunity\(row\)/);
+assert.match(page, /position>=8&&position<=25/);
+assert.match(page, /CTR opportunity/);
+assert.match(page, /Build authority/);
+assert.match(page, /Defend/);
+assert.match(page, /no query rows returned/i);
+assert.match(page, /never publishes content automatically/i);
+assert.match(page, /Town\/county tax & records section/);
+assert.match(page, /Priority score combines position, impression volume and CTR gap/);
 
 assert.match(report, /pagespeedonline\/v5\/runPagespeed/);
 assert.match(report, /\['performance','accessibility','best-practices','seo'\]/);
