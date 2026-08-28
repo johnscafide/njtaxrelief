@@ -2,13 +2,15 @@
 
 Goal: Google consent and authorization flows should identify the product as **Watchdog** and should no longer present the random Supabase project hostname as the user-facing callback destination.
 
-The approved primary Watchdog production domain is `watchdogindex.com`, with `https://www.watchdogindex.com` as the canonical serving host. The branded Supabase project hostname for authentication and OAuth callbacks should therefore be:
+The approved primary Watchdog production domain is `watchdogindex.com`, with `https://www.watchdogindex.com` as the canonical serving host. The branded Supabase project hostname for authentication and OAuth callbacks is:
 
-`auth.watchdogindex.com`
+`login.watchdogindex.com`
+
+`auth.watchdogindex.com` is intentionally not used because that hostname is already delegated through existing Brevo/Sendinblue NS records. Those records must not be removed as part of this cutover.
 
 ## What the custom domain changes
 
-Supabase custom domains are the supported way to replace `uvkvaxljhhngydvlrzom.supabase.co` in Supabase-hosted Auth/OAuth callback URLs. Supabase permits one custom domain per project. That hostname can serve Auth, Edge Functions, Storage and API routes; it is not an auth-only infrastructure boundary even when the chosen hostname is `auth.watchdogindex.com`.
+Supabase custom domains are the supported way to replace `uvkvaxljhhngydvlrzom.supabase.co` in Supabase-hosted Auth/OAuth callback URLs. Supabase permits one custom domain per project. That hostname can serve Auth, Edge Functions, Storage and API routes; it is not an auth-only infrastructure boundary even when the chosen hostname is `login.watchdogindex.com`.
 
 Supabase custom domains are a paid project add-on for paid organizations. Current documented pricing is $0.0137/hour, approximately $10/month, and it is not covered by the Spend Cap.
 
@@ -26,7 +28,7 @@ Current callback:
 
 Branded callback to add before activation:
 
-`https://auth.watchdogindex.com/auth/v1/callback`
+`https://login.watchdogindex.com/auth/v1/callback`
 
 ### 2. Search Console / Google Ads authorization
 
@@ -38,7 +40,7 @@ Current callback:
 
 Branded callback to add before cutover:
 
-`https://auth.watchdogindex.com/functions/v1/google-ads-oauth-callback`
+`https://login.watchdogindex.com/functions/v1/google-ads-oauth-callback`
 
 The Edge Functions support a `WATCHDOG_SUPABASE_PUBLIC_URL` environment override. Until that variable is configured, they deliberately fall back to the existing `SUPABASE_URL`, so staging this code does not change the live callback prematurely.
 
@@ -58,14 +60,14 @@ Complete Google's brand/app verification when required. A Supabase custom domain
 ## Safe cutover order
 
 1. Enable the Supabase Custom Domain add-on for production project `uvkvaxljhhngydvlrzom`.
-2. Register `auth.watchdogindex.com` in Supabase General Settings → Custom Domains.
-3. In the DNS provider for `watchdogindex.com`, add the requested records. The CNAME should resolve `auth.watchdogindex.com` to `uvkvaxljhhngydvlrzom.supabase.co`; add the Supabase-provided `_acme-challenge` TXT record exactly as supplied.
+2. Register `login.watchdogindex.com` in Supabase General Settings → Custom Domains.
+3. In the DNS provider for `watchdogindex.com`, add the requested records. The CNAME should resolve `login.watchdogindex.com` to `uvkvaxljhhngydvlrzom.supabase.co`; add the Supabase-provided `_acme-challenge` TXT record exactly as supplied.
 4. Reverify the hostname in Supabase and wait for SSL issuance. Do **not** activate it yet.
-5. In the Google OAuth client used by Supabase social sign-in, add `https://auth.watchdogindex.com/auth/v1/callback` while retaining `https://uvkvaxljhhngydvlrzom.supabase.co/auth/v1/callback`.
-6. In the Google OAuth client shared by Search Console / Google Ads authorization, add `https://auth.watchdogindex.com/functions/v1/google-ads-oauth-callback` while retaining `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/google-ads-oauth-callback`.
+5. In the Google OAuth client used by Supabase social sign-in, add `https://login.watchdogindex.com/auth/v1/callback` while retaining `https://uvkvaxljhhngydvlrzom.supabase.co/auth/v1/callback`.
+6. In the Google OAuth client shared by Search Console / Google Ads authorization, add `https://login.watchdogindex.com/functions/v1/google-ads-oauth-callback` while retaining `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/google-ads-oauth-callback`.
 7. Configure Google Auth Platform branding as Watchdog and ensure the appropriate developer/test account is allowed while the app remains in Testing.
-8. Activate `auth.watchdogindex.com` in Supabase. Supabase Auth will begin advertising the custom hostname immediately.
-9. Set the production Edge Function secret/environment variable `WATCHDOG_SUPABASE_PUBLIC_URL=https://auth.watchdogindex.com` so Search Console / Google Ads authorization uses the branded callback as well.
+8. Activate `login.watchdogindex.com` in Supabase. Supabase Auth will begin advertising the custom hostname immediately.
+9. Set the production Edge Function secret/environment variable `WATCHDOG_SUPABASE_PUBLIC_URL=https://login.watchdogindex.com` so Search Console / Google Ads authorization uses the branded callback as well.
 10. Test, in order: email/session continuity, Google social sign-in, logout, Search Console connect, Search Console refresh, Google Ads connect if enabled, and mobile/private-browser flows.
 11. Keep the old Supabase callback URLs registered during the coexistence period. Remove them only after sustained production acceptance and an explicit rollback decision.
 
