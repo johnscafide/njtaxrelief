@@ -25,46 +25,35 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
-            base="origin/${{ github.base_ref }}"
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            git fetch --no-tags --depth=1 origin "$GITHUB_BASE_REF"
+            base="origin/$GITHUB_BASE_REF"
           else
-            before="${{ github.event.before }}"
-            if [[ "$before" == "0000000000000000000000000000000000000000" ]]; then
+            base="${{ github.event.before }}"
+            if [[ -z "$base" || "$base" == "0000000000000000000000000000000000000000" ]]; then
               base="HEAD^"
-            else
-              base="$before"
             fi
           fi
 
-          git diff --unified=0 "$base" "${{ github.sha }}" -- 'property/css/**/*.css' \
-            | python3 -c '
-import re, sys
+          git diff --unified=0 "$base" "$GITHUB_SHA" -- 'property/css/**/*.css' > /tmp/watchdog-css.diff
+          grep '^+' /tmp/watchdog-css.diff | grep -v '^+++' > /tmp/watchdog-css-added.txt || true
 
-bad = []
-path = None
-for raw in sys.stdin:
-    line = raw.rstrip("\n")
-    if line.startswith("+++ b/"):
-        path = line[6:]
-        continue
-    if not line.startswith("+") or line.startswith("+++"):
-        continue
-    added = line[1:]
-    for match in re.finditer(r"font-size\s*:\s*([0-9]+(?:\.[0-9]+)?)px", added, re.I):
-        if float(match.group(1)) < 12:
-            bad.append(f"{path}: added font-size below 12px: {match.group(0)}")
-    if re.search(r"font\s*:[^;]*(?:^|\s)([0-9]+(?:\.[0-9]+)?)px(?:/|\s)", added, re.I):
-        size = float(re.search(r"font\s*:[^;]*(?:^|\s)([0-9]+(?:\.[0-9]+)?)px(?:/|\s)", added, re.I).group(1))
-        if size < 12:
-            bad.append(f"{path}: added font shorthand below 12px: {added.strip()}")
-    if "Source Sans 3" in added:
-        bad.append(f"{path}: added retired UI font Source Sans 3")
+          failed=0
+          micro='([0-9](\.[0-9]+)?|1[01](\.[0-9]+)?)px'
+          if grep -Ein "font-size[[:space:]]*:[[:space:]]*$micro" /tmp/watchdog-css-added.txt; then
+            echo 'New CSS must not add font-size values below the 12px readability floor.'
+            failed=1
+          fi
+          if grep -Ein "font[[:space:]]*:[^;]*[[:space:]]$micro([/[:space:]]|$)" /tmp/watchdog-css-added.txt; then
+            echo 'New CSS must not add font shorthand values below the 12px readability floor.'
+            failed=1
+          fi
+          if grep -Fin 'Source Sans 3' /tmp/watchdog-css-added.txt; then
+            echo 'New CSS must use the canonical Watchdog UI font token, not Source Sans 3.'
+            failed=1
+          fi
 
-if bad:
-    print("Watchdog new-CSS typography contract failed:")
-    for item in bad:
-        print(f" - {item}")
-    sys.exit(1)
-print("Watchdog new-CSS typography contract passed: no new sub-12px text or Source Sans 3 additions.")
-'
+          if [[ "$failed" -ne 0 ]]; then
+            exit 1
+          fi
+          echo 'Watchdog new-CSS typography contract passed: no new sub-12px text or Source Sans 3 additions.'
