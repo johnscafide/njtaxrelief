@@ -4,6 +4,7 @@ import { readFile } from 'node:fs/promises';
 const read = (file) => readFile(new URL(`../../${file}`, import.meta.url), 'utf8');
 const generator = await read('scripts/generate_town_pages.py');
 const cohort = await read('scripts/apply-search-growth-cohort.mjs');
+const performance = await read('scripts/apply-public-performance.mjs');
 const signals = await read('property/analytics/web-signals/index.html');
 const pkg = JSON.parse(await read('package.json'));
 
@@ -39,6 +40,18 @@ assert.match(cohort, /product-analytics\.js/);
 assert.match(cohort, /official assessor, collector and county offices remain the source/);
 assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
 assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
+
+// Mobile performance work targets the measured high-impression surfaces without removing functionality.
+assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
+assert.match(pkg.scripts['vercel-build'], /public-performance:prepare/);
+assert.match(performance, /property\/css\/lookup\/01-search-hero\.css/);
+assert.match(performance, /rel="preload" as="image"/);
+assert.match(performance, /fetchpriority="high"/);
+assert.match(performance, /media="\(max-width: 760px\)"/);
+assert.match(performance, /w=900&auto=format&fit=crop&q=72/);
+assert.match(performance, /product-analytics\.js/);
+assert.match(performance, /index\.html/);
+assert.match(performance, /property\/index\.html/);
 
 // SEO rollout keeps existing canonical path construction instead of spawning intent duplicates.
 assert.match(generator, /canonical = SITE \+ "\/" \+ path/);
