@@ -87,7 +87,7 @@ jobs:
           if(Number(s.live||0)<941) throw new Error(`Expected at least 941 live markers, found ${s.live||0}`);
           if(Number(s.planned||0)>181) throw new Error(`Expected planned <=181, found ${s.planned||0}`);
           if(Number(s.partial||0)>3) throw new Error(`Expected partial <=3, found ${s.partial||0}`);
-          if(Number(s.unavailable||0)>5) throw new Error(`Expected unavailable <=5 after production reconciliation, found ${s.unavailable||0}`);
+          if(Number(s.unavailable||0)!==16) throw new Error(`Expected production-authoritative unavailable count 16, found ${s.unavailable||0}`);
           console.log(JSON.stringify({total:r.summary.total,provider_status:s,certified_targets:targets.length},null,2));
           NODE
             git rm -f --ignore-unmatch \
