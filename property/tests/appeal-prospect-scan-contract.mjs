@@ -131,10 +131,22 @@ assert.doesNotMatch(evidenceUi, /appealDeadlineContext\s*\(/);
 assert.doesNotMatch(evidenceUi, /setInterval\s*\(/);
 assert.doesNotMatch(evidenceUi, /has_watchdog_plan/);
 
+const caseValueUi = fs.readFileSync(new URL('../js/scan-case-value-ui.js', import.meta.url), 'utf8');
+assert.match(caseValueUi, /never supplies a default fee assumption/);
+assert.match(caseValueUi, /server-returned annual tax at stake/);
+assert.match(caseValueUi, /does not save or send these inputs/);
+assert.match(caseValueUi, /annual \* \(assumptions\.feePct \/ 100\) \* assumptions\.years/);
+assert.doesNotMatch(caseValueUi, /localStorage|sessionStorage/);
+assert.doesNotMatch(caseValueUi, /\.functions\.invoke/);
+assert.doesNotMatch(caseValueUi, /has_watchdog_plan/);
+assert.doesNotMatch(caseValueUi, /id=\\?"sc-fee-share\\?"[^>]*\svalue=/);
+assert.doesNotMatch(caseValueUi, /id=\\?"sc-value-horizon\\?"[^>]*\svalue=/);
+
 const scanPage = fs.readFileSync(new URL('../scan/index.html', import.meta.url), 'utf8');
 assert.match(scanPage, /data-access-require="pro_plus"/);
 assert.match(scanPage, /scan-deadline-ui\.js/);
 assert.match(scanPage, /scan-evidence-ui\.js/);
+assert.match(scanPage, /scan-case-value-ui\.js/);
 assert.doesNotMatch(scanPage, /appeal-packet\.js/);
 
-console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, and browser-boundary contracts passed');
+console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, evidence, and user-supplied case-value boundaries passed');
