@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-28T14:54:50.142Z",
+  "captured_at": "2026-08-28T17:20:56.398Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -370,7 +370,137 @@
     "njplus.nj-dca-ufb-2025.structural_nonrecurring_appropriation_reductions": "live",
     "njplus.nj-dca-ufb-2025.structural_future_year_appropriation_increases": "live",
     "njplus.nj-dca-ufb-2025.structural_imbalance_offsets": "live",
-    "njplus.nj-dca-ufb-2025.structural_total_imbalances": "live"
+    "njplus.nj-dca-ufb-2025.structural_total_imbalances": "live",
+    "njplus.nj-dca-ufb-longitudinal.rut_tax_collection_pct_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_total_tax_revenue_collections_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_total_tax_levy_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_tax_collection_pct_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_delinquent_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_surplus_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_local_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_state_aid_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_uniform_construction_code_fees_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_shared_services_agreements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_additional_revenue_offset_by_appropriations_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_public_private_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_other_special_items_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_receipts_from_delinquent_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_local_tax_for_municipal_purposes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_minimum_library_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_open_space_levy_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_addition_to_local_district_school_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_deficit_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_surplus_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_local_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_state_aid_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_uniform_construction_code_fees_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_shared_services_agreements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_additional_revenue_offset_by_appropriations_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_public_private_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_other_special_items_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_receipts_from_delinquent_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_local_tax_for_municipal_purposes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_minimum_library_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_open_space_levy_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_addition_to_local_district_school_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_deficit_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_surplus_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_local_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_state_aid_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_uniform_construction_code_fees_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_shared_services_agreements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_additional_revenue_offset_by_appropriations_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_public_private_revenue_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_other_special_items_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_receipts_from_delinquent_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_local_tax_for_municipal_purposes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_minimum_library_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_open_space_levy_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_addition_to_local_district_school_tax_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_deficit_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_general_government_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_land_use_administration_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_uniform_construction_code_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_insurance_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_public_safety_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_public_works_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_health_human_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_parks_recreation_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_education_library_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_unclassified_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_utilities_bulk_purchases_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_landfill_solid_waste_disposal_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_contingency_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_statutory_expenditures_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_judgements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_shared_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_court_public_defender_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_capital_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_debt_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_deferred_charges_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_debt_type_1_school_district_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_reserve_for_uncollected_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_surplus_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_general_government_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_land_use_administration_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_uniform_construction_code_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_insurance_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_public_safety_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_public_works_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_health_human_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_parks_recreation_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_education_library_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_unclassified_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_utilities_bulk_purchases_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_landfill_solid_waste_disposal_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_contingency_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_statutory_expenditures_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_judgements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_shared_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_court_public_defender_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_capital_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_debt_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_deferred_charges_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_debt_type_1_school_district_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_reserve_for_uncollected_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_surplus_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_general_government_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_land_use_administration_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_uniform_construction_code_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_insurance_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_public_safety_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_public_works_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_health_human_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_parks_recreation_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_education_library_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_unclassified_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_utilities_bulk_purchases_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_landfill_solid_waste_disposal_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_contingency_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_statutory_expenditures_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_judgements_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_shared_services_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_court_public_defender_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_capital_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_debt_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_deferred_charges_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_debt_type_1_school_district_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_reserve_for_uncollected_taxes_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_surplus_general_budget_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_total_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_full_time_employees_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_part_time_employees_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_personnel_cost_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_base_pay_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_overtime_other_compensation_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_pension_estimate_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_health_benefits_net_cost_share_history": "live",
+    "njplus.nj-dca-ufb-longitudinal.total_employment_taxes_other_benefits_history": "live"
   },
   "providers": {
     "watchdog.watchdog_score": {
@@ -2310,6 +2440,916 @@
       "provider_kind": "authoritative_reference",
       "calculation_key": null,
       "source": "NJ DCA User Friendly Budget Database · 2025 Summary · self-reported/unaudited municipal submissions · nj-dca-ufb-2025-2025-10-23-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.rut_tax_collection_pct_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_total_tax_revenue_collections_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_total_tax_levy_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_tax_collection_pct_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_delinquent_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_surplus_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_local_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_state_aid_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_uniform_construction_code_fees_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_shared_services_agreements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_additional_revenue_offset_by_appropriations_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_public_private_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_other_special_items_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_receipts_from_delinquent_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_local_tax_for_municipal_purposes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_minimum_library_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_open_space_levy_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_addition_to_local_district_school_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_deficit_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_realized_revenue_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_surplus_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_local_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_state_aid_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_uniform_construction_code_fees_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_shared_services_agreements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_additional_revenue_offset_by_appropriations_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_public_private_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_other_special_items_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_receipts_from_delinquent_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_local_tax_for_municipal_purposes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_minimum_library_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_open_space_levy_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_addition_to_local_district_school_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_deficit_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_anticipated_revenue_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_surplus_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_local_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_state_aid_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_uniform_construction_code_fees_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_shared_services_agreements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_additional_revenue_offset_by_appropriations_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_public_private_revenue_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_other_special_items_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_receipts_from_delinquent_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_local_tax_for_municipal_purposes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_minimum_library_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_open_space_levy_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_addition_to_local_district_school_tax_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_deficit_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_revenue_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_general_government_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_land_use_administration_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_uniform_construction_code_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_insurance_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_public_safety_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_public_works_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_health_human_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_parks_recreation_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_education_library_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_unclassified_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_utilities_bulk_purchases_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_landfill_solid_waste_disposal_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_contingency_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_statutory_expenditures_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_judgements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_shared_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_court_public_defender_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_capital_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_debt_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_deferred_charges_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_debt_type_1_school_district_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_reserve_for_uncollected_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_surplus_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.prior_year_modified_appropriation_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_general_government_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_land_use_administration_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_uniform_construction_code_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_insurance_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_public_safety_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_public_works_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_health_human_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_parks_recreation_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_education_library_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_unclassified_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_utilities_bulk_purchases_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_landfill_solid_waste_disposal_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_contingency_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_statutory_expenditures_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_judgements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_shared_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_court_public_defender_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_capital_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_debt_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_deferred_charges_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_debt_type_1_school_district_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_reserve_for_uncollected_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_surplus_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_appropriation_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_general_government_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_land_use_administration_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_uniform_construction_code_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_insurance_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_public_safety_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_public_works_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_health_human_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_parks_recreation_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_education_library_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_unclassified_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_utilities_bulk_purchases_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_landfill_solid_waste_disposal_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_contingency_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_statutory_expenditures_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_judgements_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_shared_services_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_court_public_defender_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_capital_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_debt_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_deferred_charges_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_debt_type_1_school_district_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_reserve_for_uncollected_taxes_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_surplus_general_budget_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.current_year_general_budget_appropriation_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_full_time_employees_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_part_time_employees_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_personnel_cost_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_base_pay_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_overtime_other_compensation_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_pension_estimate_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_health_benefits_net_cost_share_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-ufb-longitudinal.total_employment_taxes_other_benefits_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
       "bulk_capable": true
     }
   }
