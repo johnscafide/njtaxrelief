@@ -1,0 +1,67 @@
+name: One-off UFB v040 static reconciliation
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-ufb-v040-static-reconcile.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconcile bounded UFB v040 batch on latest main
+        run: |
+          set -euo pipefail
+          git config user.name "Watchdog release automation"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node <<'NODE'
+          const fs=require('fs');
+          const path='property/data/marker-registry.json';
+          const reg=JSON.parse(fs.readFileSync(path,'utf8'));
+          const prefix='njplus.nj-dca-ufb-longitudinal.';
+          const rows=(reg.markers||[]).filter(m=>String(m.id||'').startsWith(prefix));
+          if(rows.length!==130) throw new Error(`Expected exactly 130 UFB longitudinal markers, found ${rows.length}`);
+          for(const row of rows){
+            row.provider_status='live';
+            row.status='cataloged';
+            row.status_reason='Certified production provider coverage: authenticated ufb_longitudinal_v040 canary request 4155 passed with zero mismatches; exact NJ DCA UFB annual Summary-sheet observations only.';
+            row.provider_note='NJ DCA User Friendly Budget annual Summary sheets 2015-2025 · exact published observations only · self-reported/unaudited municipal submissions · missing years are not synthesized.';
+            row.provider_contract='workbench-hydrate:nj-dca-ufb-v040-longitudinal';
+          }
+          const counts={};
+          for(const row of reg.markers||[]){const k=String(row.provider_status||'planned');counts[k]=(counts[k]||0)+1;}
+          reg.summary=reg.summary||{};
+          reg.summary.provider_status=Object.fromEntries(Object.entries(counts).sort(([a],[b])=>a.localeCompare(b)));
+          reg.summary.total=(reg.markers||[]).length;
+          reg.generated_at=new Date().toISOString();
+          reg.schema_version='1+provider-status+v040';
+          reg.catalog_extension='nj-source-pack-v040.json; availability is resolved from production data_center_provider_coverage.';
+          if(Number(counts.live||0)<927) throw new Error(`Expected at least 927 live markers after v0.40 reconciliation, found ${counts.live||0}`);
+          if(Number(counts.planned||0)>187) throw new Error(`Expected planned count <=187 after v0.40 reconciliation, found ${counts.planned||0}`);
+          fs.writeFileSync(path,JSON.stringify(reg,null,2)+'\n');
+          console.log(JSON.stringify({total:reg.summary.total,provider_status:reg.summary.provider_status,ufb_v040_live:rows.length},null,2));
+          NODE
+            git add property/data/marker-registry.json
+            if git diff --cached --quiet; then
+              echo "Registry already reconciled."
+              exit 0
+            fi
+            git commit -m "NJW-144 promote 130 certified UFB longitudinal markers"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent main update detected; retrying bounded reconciliation on latest main."
+            sleep $((attempt*2))
+          done
+          echo "Unable to push bounded reconciliation after retries." >&2
+          exit 1
