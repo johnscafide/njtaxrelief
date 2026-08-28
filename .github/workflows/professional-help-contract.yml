@@ -1,0 +1,29 @@
+name: Professional Help Contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/help/professional-tools/**'
+      - 'property/help/why-property-cannot-be-tested/**'
+      - 'property/tests/professional-help-contract.mjs'
+      - '.github/workflows/professional-help-contract.yml'
+  pull_request:
+    paths:
+      - 'property/help/professional-tools/**'
+      - 'property/help/why-property-cannot-be-tested/**'
+      - 'property/tests/professional-help-contract.mjs'
+      - '.github/workflows/professional-help-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  professional-help-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Verify self-serve professional help
+        run: node property/tests/professional-help-contract.mjs
