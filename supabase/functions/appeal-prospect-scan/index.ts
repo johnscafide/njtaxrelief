@@ -7,6 +7,7 @@ import {
   chapter123Screen,
   monthsBeforeValuationDate,
   marketAtValuationDate,
+  appealDeadlineContext,
 } from './formula.mjs';
 
 const cors = {
@@ -20,8 +21,9 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 });
 
 const SOURCE_ROOT = 'https://njpropertytaxrelief.com';
-const FORMULA_VERSION = 'appeal-prospect-scan-server-v2-certified-clr';
+const FORMULA_VERSION = 'appeal-prospect-scan-server-v3-certified-clr-deadline-context';
 const CHAPTER123_SOURCE = 'https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf';
+const DEADLINE_RULES_SOURCE = 'https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml';
 const COUNTIES: Record<string, string> = {
   '01':'Atlantic','02':'Bergen','03':'Burlington','04':'Camden','05':'Cape May','06':'Cumberland',
   '07':'Essex','08':'Gloucester','09':'Hudson','10':'Hunterdon','11':'Mercer','12':'Middlesex',
@@ -35,7 +37,7 @@ async function sourceJson(path: string, ttlMs = 10 * 60 * 1000) {
   const hit = cache.get(path);
   if (hit && hit.expires > Date.now()) return hit.value;
   const response = await fetch(`${SOURCE_ROOT}${path}`, {
-    headers: { 'User-Agent': 'Watchdog-Server-Scanner/2.0' },
+    headers: { 'User-Agent': 'Watchdog-Server-Scanner/3.0' },
     signal: AbortSignal.timeout(25000),
   });
   if (!response.ok) throw new Error(`source_${response.status}_${path}`);
@@ -168,12 +170,23 @@ Deno.serve(async (req) => {
       return json({ error: 'Unsupported county' }, 400);
     }
 
-    const [appealsJson, taxRatesJson, salesJson, revaluationJson] = await Promise.all([
+    const [appealsJson, taxRatesJson, salesJson, revaluationJson, deadlineRulesJson] = await Promise.all([
       sourceJson('/property/appeals.json'),
       sourceJson('/property/tax-rates.json'),
       sourceJson(`/property/sales-${countySlug}.json`, 5 * 60 * 1000),
       sourceJson('/property/revaluation-reassessment-2026.json'),
+      sourceJson('/property/appeal-deadline-rules.json'),
     ]);
+
+    const revaluationDistricts = (revaluationJson as any)?.districts || {};
+    const revaluationOrReassessment = revaluationDistricts[district] === true && Number((revaluationJson as any)?.tax_year) === certified.year;
+    const deadlineContext = appealDeadlineContext({
+      countyName,
+      assessed: 0,
+      revaluationOrReassessment,
+      taxYear: certified.year,
+      deadlineRules: deadlineRulesJson as any,
+    });
 
     const taxRateIndex = buildTaxRateIndex(taxRatesJson as any);
     const taxRate = findTaxRate(taxRateIndex, municipalityName, countyName);
@@ -182,19 +195,21 @@ Deno.serve(async (req) => {
         formula_version: FORMULA_VERSION,
         result: 'tax_rate_unavailable',
         municipality: municipalityName,
+        deadline_context: deadlineContext,
         message: 'No governed general tax rate is loaded for this municipality. Annual dollars at stake were not estimated.',
       }, 422);
     }
 
-    const revaluationDistricts = (revaluationJson as any)?.districts || {};
-    if (revaluationDistricts[district] === true && Number((revaluationJson as any)?.tax_year) === certified.year) {
+    if (revaluationOrReassessment) {
       return json({
         formula_version: FORMULA_VERSION,
         result: 'manual_review_required',
         municipality: municipalityName,
         reason: 'approved_revaluation_or_reassessment',
         tax_year: certified.year,
-        message: 'This municipality appears on the governed approved revaluation/reassessment list for the certified tax year. The automated Chapter 123 screen is disabled here; review current appeal rules and notices manually.',
+        deadline_context: deadlineContext,
+        deadline_source: { kind: 'NJ local property tax appeal filing rules', url: DEADLINE_RULES_SOURCE },
+        message: 'This municipality appears on the governed approved revaluation/reassessment list for the certified tax year. The automated Chapter 123 screen is disabled here. Filing-window context is provided only as a baseline; verify the current assessment notice and County Board instructions before relying on any date.',
       });
     }
 
@@ -210,6 +225,7 @@ Deno.serve(async (req) => {
         formula_version: FORMULA_VERSION,
         result: 'market_adjustment_unavailable',
         municipality: municipalityName,
+        deadline_context: deadlineContext,
         message: 'The governed residential sale-time adjustment is unavailable. No fallback market adjustment was used.',
       }, 422);
     }
@@ -225,6 +241,7 @@ Deno.serve(async (req) => {
         result: 'insufficient_sales',
         municipality: municipalityName,
         pool: pool.length,
+        deadline_context: deadlineContext,
       });
     }
 
@@ -262,11 +279,12 @@ Deno.serve(async (req) => {
       generated_at: new Date().toISOString(),
       result: 'ok',
       source: { kind: 'NJ certified common-level range', url: CHAPTER123_SOURCE },
+      deadline_source: { kind: 'NJ local property tax appeal filing rules', url: DEADLINE_RULES_SOURCE },
       run: {
         d: district,
         name: municipalityName,
         county: COUNTIES[district.slice(0, 2)] || countyName,
-        ratio: certified.ratio / 100, // legacy client alias; this is the certified Director average ratio
+        ratio: certified.ratio / 100,
         certified: {
           year: certified.year,
           ratio: certified.ratio / 100,
@@ -283,6 +301,7 @@ Deno.serve(async (req) => {
         maxYears,
         minSaving,
         minAssessment,
+        deadlineContext,
         pool: pool.length,
         from: Math.min(...pool.map((sale: any) => Number(sale.y))),
         to: Math.max(...pool.map((sale: any) => Number(sale.y))),
