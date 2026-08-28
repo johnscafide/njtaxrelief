@@ -1,4 +1,4 @@
-name: One-off Investor alias provenance fix
+name: One-off Investor Screen inventory cleanup
 on:
   push:
     paths:
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: write
 jobs:
-  patch:
+  reconcile:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -15,37 +15,29 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Patch derived-to-derived source alias metadata
+      - name: Start from current main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+      - name: Reconcile production fingerprints and remove this workflow
         run: |
           node <<'NODE'
           const fs=require('fs');
-          const path='supabase/functions/workbench-derived/index.ts';
-          let lines=fs.readFileSync(path,'utf8').split('\n');
-          let availableCount=0, missingCount=0;
-          lines=lines.map(line=>{
-            if(line.includes("const depMeta: any = rawMeta[dep] || {};") && line.includes("auxMeta.set(id")){
-              availableCount++;
-              return line.replace("const depMeta: any = rawMeta[dep] || {};", "const depMeta: any = defMap.has(dep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION, observed_at: now, checked_at: null } : (rawMeta[dep] || {});");
-            }
-            if(line.includes("sourceAlias = operation === 'source_alias'") && line.includes("aliasDep = String(def.config?.dep || '')") && line.includes("rawMeta[aliasDep]")){
-              missingCount++;
-              return line.replace("aliasMeta: any = aliasDep ? (rawMeta[aliasDep] || {}) : {}", "aliasMeta: any = aliasDep ? (defMap.has(aliasDep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION } : (rawMeta[aliasDep] || {})) : {}");
-            }
-            return line;
-          });
-          if(availableCount!==1)throw new Error('Expected one available source_alias metadata line, got '+availableCount);
-          if(missingCount!==1)throw new Error('Expected one missing source_alias metadata line, got '+missingCount);
-          const out=lines.join('\n');
-          if(!out.includes("defMap.has(dep) ? { provider_kind: 'derived_governed'"))throw new Error('available-path provenance patch missing');
-          if(!out.includes("defMap.has(aliasDep) ? { provider_kind: 'derived_governed'"))throw new Error('missing-path provenance patch missing');
-          fs.writeFileSync(path,out);
+          const path='supabase/functions/PRODUCTION-INVENTORY.json';
+          const inv=JSON.parse(fs.readFileSync(path,'utf8'));
+          inv.captured_at=new Date().toISOString();
+          inv.functions=inv.functions||{};
+          inv.functions['provider-release-canary']={...(inv.functions['provider-release-canary']||{}),version:39,sha256:'354ac1a562a3159ee631ad6cbd6e71a2fc31fbe3e2b84de4f724bdfe472e4ac6',verify_jwt:false,tracking:'source_snapshot'};
+          inv.functions['workbench-derived']={...(inv.functions['workbench-derived']||{}),version:32,sha256:'699622473aa01470fd99bfa54188c4fccaa49bfea7db0629ed6e28da8ae961eb',verify_jwt:false,tracking:'source_snapshot'};
+          fs.writeFileSync(path,JSON.stringify(inv,null,2)+'\n');
+          fs.rmSync('.github/workflows/oneoff-investor-alias-provenance-fix.yml');
           NODE
       - name: Refetch main and commit only if safe
         run: |
           git fetch origin main
-          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo 'main moved; refusing overwrite'; exit 2; }
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo 'main moved during inventory reconciliation; refusing overwrite'; exit 2; }
           git config user.name 'Watchdog Automation'
           git config user.email 'actions@users.noreply.github.com'
-          git add supabase/functions/workbench-derived/index.ts
-          git commit -m 'NJW-144 preserve derived alias provenance'
+          git add supabase/functions/PRODUCTION-INVENTORY.json .github/workflows/oneoff-investor-alias-provenance-fix.yml
+          git commit -m 'NJW-144 record Investor Screen production release'
           git push origin HEAD:main
