@@ -1,0 +1,42 @@
+name: One-off Investor alias provenance fix
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-investor-alias-provenance-fix.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patch derived-to-derived source alias metadata
+        run: |
+          node <<'NODE'
+          const fs=require('fs');
+          const path='supabase/functions/workbench-derived/index.ts';
+          let s=fs.readFileSync(path,'utf8');
+          const old1="const depMeta: any = rawMeta[dep] || {}; auxMeta.set(id, { alias_dependency: dep, reference_source: depMeta.source || null, reference_provider_kind: depMeta.provider_kind || null, reference_observed_at: depMeta.observed_at || null, reference_checked_at: depMeta.checked_at || null });";
+          const new1="const depMeta: any = defMap.has(dep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION, observed_at: now, checked_at: null } : (rawMeta[dep] || {}); auxMeta.set(id, { alias_dependency: dep, reference_source: depMeta.source || null, reference_provider_kind: depMeta.provider_kind || null, reference_observed_at: depMeta.observed_at || null, reference_checked_at: depMeta.checked_at || null });";
+          const old2="const aliasMeta: any = aliasDep ? (rawMeta[aliasDep] || {}) : {};";
+          const new2="const aliasMeta: any = aliasDep ? (defMap.has(aliasDep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION } : (rawMeta[aliasDep] || {})) : {};";
+          if(!s.includes(old1))throw new Error('source_alias available-path target not found');
+          if(!s.includes(old2))throw new Error('source_alias missing-path target not found');
+          s=s.replace(old1,new1).replace(old2,new2);
+          fs.writeFileSync(path,s);
+          if((s.match(/provider_kind: 'derived_governed'/g)||[]).length<2)throw new Error('provenance patch assertion failed');
+          NODE
+      - name: Refetch main and commit only if safe
+        run: |
+          git fetch origin main
+          test "$(git rev-parse HEAD)" = "$(git rev-parse origin/main)" || { echo 'main moved; refusing overwrite'; exit 2; }
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add supabase/functions/workbench-derived/index.ts
+          git commit -m 'NJW-144 preserve derived alias provenance'
+          git push origin HEAD:main
