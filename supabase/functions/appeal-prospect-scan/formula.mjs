@@ -140,3 +140,23 @@ export function chapter123Screen({ market, assessed, certified, taxRate }) {
     annual_tax_at_stake: annualTaxAtStake,
   };
 }
+
+export function monthsBeforeValuationDate(saleYear, saleMonth, taxYear) {
+  const sy = Number(saleYear);
+  const sm = Number(saleMonth);
+  const ty = Number(taxYear);
+  if (!Number.isInteger(sy) || !Number.isInteger(sm) || sm < 1 || sm > 12 || !Number.isInteger(ty)) return null;
+  const valuationYear = ty - 1;
+  const months = (valuationYear - sy) * 12 + (10 - sm);
+  // With month-only SR-1A data, exclude October entirely because a sale in that
+  // month cannot be proven to have preceded the October 1 valuation date.
+  return months > 0 ? months : null;
+}
+
+export function marketAtValuationDate(salePrice, monthsBefore, annualDrift) {
+  const price = Number(salePrice);
+  const months = Number(monthsBefore);
+  const drift = Number(annualDrift);
+  if (!Number.isFinite(price) || price <= 0 || !Number.isFinite(months) || months <= 0 || !Number.isFinite(drift) || drift <= -1) return null;
+  return price * Math.pow(1 + drift, months / 12);
+}
