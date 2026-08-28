@@ -10,7 +10,7 @@ const BULK_SALES_FILE = /^\/property\/sales-[a-z-]+\.json$/i;
 const AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
 const SALES_API_PATH = '/api/sales-by-district';
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
-const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/developer/communications']);
+const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/developer/communications']);
 const ROOT_COMPAT_REDIRECTS = new Map([
   ['/contact.html', '/contact']
 ]);
