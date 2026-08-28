@@ -1,0 +1,113 @@
+{
+  "_meta": {
+    "title": "New Jersey local property tax appeal deadline rules",
+    "tax_year": 2026,
+    "source_checked": "2026-08-28",
+    "scope": "Ordinary local property tax assessment appeals. Added/omitted assessment appeals are outside this workflow.",
+    "warning": "This artifact provides filing-window rules and baseline dates, not a parcel-specific legal deadline. A later certified bulk mailing, a Notification of Change of Assessment, weekends/holidays, or another legally controlling notice can change the filing date. Do not show a countdown or final deadline without the required notice evidence.",
+    "authorities": [
+      {
+        "title": "NJ Division of Taxation — Assessment and Appeals",
+        "url": "https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml",
+        "supports": [
+          "April 1 traditional filing baseline",
+          "May 1 municipal-wide revaluation/reassessment baseline",
+          "Burlington, Gloucester, and Monmouth alternate-calendar counties"
+        ]
+      },
+      {
+        "title": "NJ Division of Taxation — Form A-1 Petition of Appeal, filing instructions (6-26)",
+        "url": "https://www.nj.gov/treasury/taxation/pdf/other_forms/lpt/petappl.pdf",
+        "supports": [
+          "County Board petition must be received, not merely postmarked",
+          "April 1 or 45 days after bulk mailing, whichever is later",
+          "January 15 or 45 days after bulk mailing for Burlington, Gloucester, and Monmouth",
+          "45 days after Notification of Change of Assessment",
+          "May 1 for municipal-wide revaluation/reassessment under the traditional calendar",
+          "weekend/legal-holiday extension to next business day"
+        ]
+      },
+      {
+        "title": "N.J.S.A. 54:3-21 as amended by P.L. 2021, c.136",
+        "url": "https://pub.njleg.state.nj.us/Bills/2020/PL21/136_.HTM",
+        "supports": [
+          "traditional County Board: April 1 or 45 days after bulk mailing, whichever is later",
+          "traditional direct Tax Court for assessment over $1,000,000: April 1 or 45 days after bulk mailing, whichever is later",
+          "traditional municipal-wide revaluation/reassessment: May 1",
+          "alternate-calendar County Board: January 15 or 45 days after bulk mailing, whichever is later",
+          "alternate-calendar direct Tax Court for assessment over $1,000,000: April 1 or 45 days after bulk mailing, whichever is later",
+          "45 days after Notification of Change of Assessment"
+        ]
+      },
+      {
+        "title": "NJ Division of Taxation — 2026 Alternate Assessment Calendar",
+        "url": "https://www.nj.gov/treasury/taxation/pdf/pubs/alternateassessmentcalendar.pdf",
+        "supports": [
+          "2026 alternate calendar applies to Burlington, Gloucester, and Monmouth",
+          "January 15 County Board filing baseline"
+        ]
+      },
+      {
+        "title": "NJ Courts — Tax Court Self-Help",
+        "url": "https://www.njcourts.gov/node/499331",
+        "supports": [
+          "direct local property tax appeal eligibility for ordinary assessments over $1,000,000",
+          "45 days from County Board judgment for a Tax Court appeal"
+        ]
+      }
+    ]
+  },
+  "alternate_calendar_counties": [
+    "BURLINGTON",
+    "GLOUCESTER",
+    "MONMOUTH"
+  ],
+  "rules": {
+    "traditional_county_board": {
+      "baseline_month_day": "04-01",
+      "bulk_mailing_days": 45,
+      "choose_later_of_baseline_or_bulk_mailing": true,
+      "municipal_wide_revaluation_or_reassessment_baseline_month_day": "05-01",
+      "received_not_postmarked": true
+    },
+    "alternate_county_board": {
+      "baseline_month_day": "01-15",
+      "bulk_mailing_days": 45,
+      "choose_later_of_baseline_or_bulk_mailing": true,
+      "received_not_postmarked": true,
+      "revaluation_or_reassessment": "Do not infer a May 1 override for an alternate-calendar county from the generic filing form. Verify the current assessment notice and County Board instructions before presenting a final date."
+    },
+    "direct_tax_court": {
+      "ordinary_assessment_must_exceed": 1000000,
+      "traditional_baseline_month_day": "04-01",
+      "traditional_revaluation_or_reassessment_baseline_month_day": "05-01",
+      "alternate_baseline_month_day": "04-01",
+      "bulk_mailing_days": 45,
+      "choose_later_of_baseline_or_bulk_mailing": true,
+      "note": "Eligibility threshold is strictly greater than $1,000,000 for an ordinary assessment under N.J.S.A. 54:3-21."
+    },
+    "change_of_assessment_notice": {
+      "days_from_issuance": 45,
+      "requires_notice_date": true
+    },
+    "county_board_judgment_to_tax_court": {
+      "days_from_service": 45,
+      "requires_judgment_service_date": true
+    },
+    "weekend_or_legal_holiday": {
+      "move_to_next_business_day": true
+    }
+  },
+  "display_policy": {
+    "exact_deadline_requires": [
+      "calendar classification",
+      "appeal forum",
+      "assessment amount when direct Tax Court eligibility is relevant",
+      "current assessment notice / certified bulk-mailing date or evidence that no later-date rule applies",
+      "revaluation/reassessment status",
+      "weekend/legal-holiday adjustment"
+    ],
+    "without_notice_evidence": "Show the statutory baseline and say that the actual filing date must be verified against the current assessment notice / County Board certification. Do not show days remaining.",
+    "revaluation_year_chapter123": "The Chapter 123 common-level-range remedy is not used for the tax year in which a district-wide revaluation/reassessment is implemented. Keep the automated Chapter 123 screen disabled and present deadline context separately as a manual-review aid."
+  }
+}
