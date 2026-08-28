@@ -1,7 +1,8 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
 const URL=Deno.env.get('SUPABASE_URL')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const CALLBACK=`${URL}/functions/v1/google-ads-oauth-callback`;
+const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||URL).replace(/\/+$/,'');
+const CALLBACK=`${PUBLIC_URL}/functions/v1/google-ads-oauth-callback`;
 const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
 const hex=(b:Uint8Array)=>Array.from(b).map(x=>x.toString(16).padStart(2,'0')).join('');
 async function sha(v:string){return hex(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v))))}
