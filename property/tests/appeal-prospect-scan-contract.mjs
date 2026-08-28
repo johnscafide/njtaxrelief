@@ -102,6 +102,8 @@ assert.equal(alternateAboveThreshold.change_of_assessment_notice_days, 45);
 
 const server = fs.readFileSync(new URL('../../supabase/functions/appeal-prospect-scan/index.ts', import.meta.url), 'utf8');
 assert.match(server, /equalization-ratios\.json/);
+assert.match(server, /appeal-deadline-rules\.json/);
+assert.match(server, /appealDeadlineContext/);
 assert.match(server, /required_plan:\s*'pro_plus'/);
 assert.match(server, /manual_review_required/);
 assert.match(server, /monthsBeforeValuationDate/);
