@@ -5,8 +5,8 @@
 
   const OSM_TEMPLATE='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
   const OPENFREEMAP_STYLE='https://tiles.openfreemap.org/styles/liberty';
-  const MAPLIBRE_JS='https://unpkg.com/maplibre-gl@6.6.0/dist/maplibre-gl.js';
-  const MAPLIBRE_CSS='https://unpkg.com/maplibre-gl@6.6.0/dist/maplibre-gl.css';
+  const MAPLIBRE_JS='https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js';
+  const MAPLIBRE_CSS='https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css';
   const LEAFLET_BINDING='https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js';
   const VECTOR_ATTRIBUTION='<a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a> © <a href="https://openmaptiles.org/" target="_blank" rel="noopener">OpenMapTiles</a> · Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>';
   const originalTileLayer=L.tileLayer.bind(L);
