@@ -29,11 +29,15 @@ assert.match(oauthStart, /google_search_console/);
 assert.match(oauthStart, /authorization, x-client-info, apikey, content-type/);
 assert.match(oauthStart, /provider===SEARCH_CONSOLE\?200:409/);
 assert.match(oauthStart, /WATCHDOG_SUPABASE_PUBLIC_URL/);
+assert.match(oauthStart, /uvkvaxljhhngydvlrzom/);
+assert.match(oauthStart, /https:\/\/login\.watchdogindex\.com/);
 assert.match(oauthStart, /google-ads-oauth-callback/);
 assert.match(oauthCallback, /google_search_console/);
 assert.match(oauthCallback, /marketing_store_provider_secret/);
 assert.match(oauthCallback, /accessible_sites/);
 assert.match(oauthCallback, /WATCHDOG_SUPABASE_PUBLIC_URL/);
+assert.match(oauthCallback, /uvkvaxljhhngydvlrzom/);
+assert.match(oauthCallback, /https:\/\/login\.watchdogindex\.com/);
 assert.match(oauthCallback, /redirect_uri:CALLBACK/);
 
 assert.match(weather, /api\.weather\.gov/);
