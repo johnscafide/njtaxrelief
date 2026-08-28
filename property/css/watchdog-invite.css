@@ -1,4 +1,5 @@
-/* Universal Watchdog invite/share component. */
+/* Universal Watchdog invite/share component.
+   NJW-73/NJW-74: canonical Watchdog type, color, radius and breakpoint contract. */
 
 .wd-invite-shade{
   position:fixed;
@@ -6,7 +7,7 @@
   z-index:11980;
   border:0;
   padding:0;
-  background:rgba(11,24,44,.48);
+  background:rgba(14,34,72,.48);
   backdrop-filter:blur(5px);
   -webkit-backdrop-filter:blur(5px);
   opacity:0;
@@ -25,20 +26,20 @@
   left:50%;
   top:50%;
   z-index:11990;
-  width:min(760px,calc(100vw - 40px));
+  width:min(var(--container-narrow),calc(100vw - 40px));
   max-height:min(88vh,780px);
   overflow:auto;
   transform:translate(-50%,-47%) scale(.985);
-  border:1px solid #dce4ed;
-  border-radius:24px;
-  background:#fff;
-  box-shadow:0 32px 90px rgba(17,35,62,.28);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  background:var(--surface);
+  box-shadow:var(--shadow-lg);
   opacity:0;
   visibility:hidden;
   pointer-events:none;
   transition:opacity .18s ease,visibility .18s ease,transform .18s ease;
-  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  color:#172641;
+  font-family:var(--font-ui);
+  color:var(--ink);
   scrollbar-gutter:stable;
 }
 .wd-invite-modal.open{
@@ -56,32 +57,32 @@
   width:44px;
   height:44px;
   border:0;
-  border-radius:12px;
-  background:#eef3f9;
-  color:#52647c;
+  border-radius:var(--radius-md);
+  background:var(--surface-soft);
+  color:var(--text-muted);
   display:grid;
   place-items:center;
-  font-size:17px;
+  font-size:var(--type-lg);
   cursor:pointer;
   transition:background .16s ease,color .16s ease,transform .16s ease;
 }
 .wd-invite-close:hover{
-  background:#e4ebf4;
-  color:#1f3553;
+  background:var(--info-bg);
+  color:var(--navy-dark);
   transform:translateY(-1px);
 }
 
 .wd-invite-hero{
   margin:32px 32px 0;
   padding:30px 36px 34px;
-  border-radius:18px;
-  background:#132f57;
-  color:#fff;
+  border-radius:var(--radius-lg);
+  background:var(--navy-dark);
+  color:var(--surface);
 }
 .wd-invite-hero small{
   display:block;
-  color:#9ec0ff;
-  font-size:11px;
+  color:var(--gold);
+  font-size:var(--type-xs);
   line-height:1;
   font-weight:800;
   letter-spacing:.15em;
@@ -89,8 +90,8 @@
 .wd-invite-hero h2{
   margin:28px 0 12px;
   max-width:620px;
-  color:#fff;
-  font-size:clamp(36px,4.5vw,46px);
+  color:var(--surface);
+  font-size:clamp(2.25rem,4.5vw,3rem);
   line-height:1.03;
   letter-spacing:-.045em;
   font-weight:700;
@@ -98,8 +99,8 @@
 .wd-invite-hero p{
   margin:0;
   max-width:620px;
-  color:#dce6f3;
-  font-size:15px;
+  color:rgba(255,255,255,.86);
+  font-size:var(--type-md);
   line-height:1.55;
 }
 
@@ -109,8 +110,8 @@
 .wd-invite-body label{
   display:block;
   margin:0 0 8px;
-  color:#52647c;
-  font-size:12px;
+  color:var(--text-muted);
+  font-size:var(--type-xs);
   line-height:1.25;
   font-weight:800;
 }
@@ -123,37 +124,37 @@
   width:100%;
   min-width:0;
   height:56px;
-  border:1px solid #d8e1ec;
-  border-radius:13px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
   padding:0 16px;
-  background:#f7f9fc;
-  color:#40536d;
-  font:500 14px/1 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--surface-soft);
+  color:var(--text-muted);
+  font:500 var(--type-sm)/1 var(--font-ui);
 }
 .wd-invite-link-row input:focus{
-  border-color:#8fb0f7;
-  box-shadow:0 0 0 3px rgba(47,109,246,.12);
+  border-color:var(--navy);
+  box-shadow:0 0 0 3px rgba(20,86,160,.12);
   outline:none;
 }
 .wd-invite-link-row button{
   min-height:56px;
-  border:1px solid #17325d;
-  border-radius:13px;
-  background:#17325d;
-  color:#fff;
+  border:1px solid var(--navy-dark);
+  border-radius:var(--radius-md);
+  background:var(--navy-dark);
+  color:var(--surface);
   padding:0 18px;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:8px;
-  font-size:14px;
+  font-size:var(--type-sm);
   font-weight:800;
   cursor:pointer;
   transition:background .16s ease,border-color .16s ease,transform .16s ease;
 }
 .wd-invite-link-row button:hover{
-  background:#102849;
-  border-color:#102849;
+  background:var(--navy);
+  border-color:var(--navy);
   transform:translateY(-1px);
 }
 
@@ -166,17 +167,17 @@
 .wd-invite-actions a,
 .wd-invite-actions button{
   min-height:54px;
-  border:1px solid #d8e1ec;
-  border-radius:13px;
-  background:#fff;
-  color:#314660;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  background:var(--surface);
+  color:var(--ink);
   text-decoration:none;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:9px;
   padding:12px 16px;
-  font-size:14px;
+  font-size:var(--type-sm);
   line-height:1.2;
   font-weight:800;
   cursor:pointer;
@@ -184,15 +185,15 @@
 }
 .wd-invite-actions a:hover,
 .wd-invite-actions button:hover{
-  background:#f5f8fc;
-  border-color:#c8d4e3;
+  background:var(--surface-soft);
+  border-color:var(--navy);
   transform:translateY(-1px);
 }
 .wd-invite-body > em{
   display:block;
   margin-top:16px;
-  color:#8a97a9;
-  font-size:11px;
+  color:var(--text-muted);
+  font-size:var(--type-xs);
   line-height:1.35;
   font-style:normal;
 }
@@ -200,18 +201,18 @@
 .wd-invite-modal button:focus-visible,
 .wd-invite-modal a:focus-visible{
   outline:none;
-  box-shadow:0 0 0 3px rgba(47,109,246,.18);
+  box-shadow:0 0 0 3px rgba(20,86,160,.18);
 }
 
 [data-wd-stable="invite"],
 [data-dash-shell="invite"],
 [data-hm27="invite"]{
-  background:#f4f7fc!important;
+  background:var(--surface-soft)!important;
 }
 [data-wd-stable="invite"]:hover,
 [data-dash-shell="invite"]:hover,
 [data-hm27="invite"]:hover{
-  background:#edf3ff!important;
+  background:var(--info-bg)!important;
 }
 
 body.wd-invite-open{
@@ -222,7 +223,7 @@ body.wd-invite-open{
   .wd-invite-modal{
     width:calc(100vw - 20px);
     max-height:calc(100dvh - 20px);
-    border-radius:20px;
+    border-radius:var(--radius-xl);
     overscroll-behavior:contain;
     -webkit-overflow-scrolling:touch;
   }
@@ -233,18 +234,18 @@ body.wd-invite-open{
   .wd-invite-hero{
     margin:18px 18px 0;
     padding:24px 22px;
-    border-radius:16px;
+    border-radius:var(--radius-lg);
   }
   .wd-invite-hero small{
-    font-size:10px;
+    font-size:var(--type-xs);
   }
   .wd-invite-hero h2{
     margin:24px 0 10px;
-    font-size:30px;
+    font-size:var(--type-2xl);
     line-height:1.06;
   }
   .wd-invite-hero p{
-    font-size:14px;
+    font-size:var(--type-sm);
     line-height:1.5;
   }
   .wd-invite-body{
@@ -260,17 +261,14 @@ body.wd-invite-open{
   .wd-invite-actions button{
     min-height:52px;
     height:auto;
-    font-size:14px;
+    font-size:var(--type-sm);
   }
 }
 
-@media (max-width:420px){
+@media (max-width:480px){
   .wd-invite-hero{
     margin:14px 14px 0;
     padding:22px 18px;
-  }
-  .wd-invite-hero h2{
-    font-size:28px;
   }
   .wd-invite-body{
     padding:20px 14px 18px;
