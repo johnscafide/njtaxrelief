@@ -1,7 +1,9 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
 const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
-const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||URL).replace(/\/+$/,'');
+const PROD_PROJECT_REF='uvkvaxljhhngydvlrzom';
+const DEFAULT_PUBLIC_URL=URL.includes(PROD_PROJECT_REF)?'https://login.watchdogindex.com':URL;
+const PUBLIC_URL=(Deno.env.get('WATCHDOG_SUPABASE_PUBLIC_URL')||DEFAULT_PUBLIC_URL).replace(/\/+$/,'');
 const CALLBACK=`${PUBLIC_URL}/functions/v1/google-ads-oauth-callback`;
 const GOOGLE_ADS='google_ads',SEARCH_CONSOLE='google_search_console';
 
