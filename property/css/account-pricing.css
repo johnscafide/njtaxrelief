@@ -143,7 +143,7 @@
 .ac-pricing-note { display: flex; gap: 10px; margin: 20px 0 0; color: var(--text-muted); font-size: var(--type-sm); }
 .ac-pricing-note i { margin-top: 3px; color: var(--wd-teal-600); }
 
-@media (max-width: 1500px) {
+@media (max-width: 1536px) {
   .ac-price-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .ac-price-card > p { min-height: 56px; }
 }
