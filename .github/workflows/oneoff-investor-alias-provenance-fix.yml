@@ -21,15 +21,15 @@ jobs:
           const fs=require('fs');
           const path='supabase/functions/workbench-derived/index.ts';
           let s=fs.readFileSync(path,'utf8');
-          const old1="const depMeta: any = rawMeta[dep] || {}; auxMeta.set(id, { alias_dependency: dep, reference_source: depMeta.source || null, reference_provider_kind: depMeta.provider_kind || null, reference_observed_at: depMeta.observed_at || null, reference_checked_at: depMeta.checked_at || null });";
-          const new1="const depMeta: any = defMap.has(dep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION, observed_at: now, checked_at: null } : (rawMeta[dep] || {}); auxMeta.set(id, { alias_dependency: dep, reference_source: depMeta.source || null, reference_provider_kind: depMeta.provider_kind || null, reference_observed_at: depMeta.observed_at || null, reference_checked_at: depMeta.checked_at || null });";
-          const old2="const aliasMeta: any = aliasDep ? (rawMeta[aliasDep] || {}) : {};";
-          const new2="const aliasMeta: any = aliasDep ? (defMap.has(aliasDep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION } : (rawMeta[aliasDep] || {})) : {};";
-          if(!s.includes(old1))throw new Error('source_alias available-path target not found');
-          if(!s.includes(old2))throw new Error('source_alias missing-path target not found');
-          s=s.replace(old1,new1).replace(old2,new2);
+          const before1=(s.match(/const depMeta: any = rawMeta\[dep\] \|\| \{\};/g)||[]).length;
+          const before2=(s.match(/const aliasMeta: any = aliasDep \? \(rawMeta\[aliasDep\] \|\| \{\}\) : \{\};/g)||[]).length;
+          if(before1!==1)throw new Error('Expected one available-path source_alias metadata target, got '+before1);
+          if(before2!==1)throw new Error('Expected one missing-path source_alias metadata target, got '+before2);
+          s=s.replace(/const depMeta: any = rawMeta\[dep\] \|\| \{\};/,"const depMeta: any = defMap.has(dep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION, observed_at: now, checked_at: null } : (rawMeta[dep] || {});");
+          s=s.replace(/const aliasMeta: any = aliasDep \? \(rawMeta\[aliasDep\] \|\| \{\}\) : \{\};/,"const aliasMeta: any = aliasDep ? (defMap.has(aliasDep) ? { provider_kind: 'derived_governed', source: 'Watchdog governed formula registry · ' + ENGINE_VERSION } : (rawMeta[aliasDep] || {})) : {};");
+          if(!s.includes("defMap.has(dep) ? { provider_kind: 'derived_governed'"))throw new Error('available-path provenance patch missing');
+          if(!s.includes("defMap.has(aliasDep) ? { provider_kind: 'derived_governed'"))throw new Error('missing-path provenance patch missing');
           fs.writeFileSync(path,s);
-          if((s.match(/provider_kind: 'derived_governed'/g)||[]).length<2)throw new Error('provenance patch assertion failed');
           NODE
       - name: Refetch main and commit only if safe
         run: |
