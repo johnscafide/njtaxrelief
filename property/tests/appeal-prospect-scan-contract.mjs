@@ -113,4 +113,12 @@ assert.doesNotMatch(server, /fair\s*\*\s*1\.15/);
 assert.doesNotMatch(server, /return\s+0\.033/);
 assert.doesNotMatch(server, /currentYear\s*-\s*Number\(sale\?\.y\)/);
 
-console.log('appeal-prospect-scan certified Chapter 123 and deadline-rule contracts passed');
+const deadlineUi = fs.readFileSync(new URL('../js/scan-deadline-ui.js', import.meta.url), 'utf8');
+assert.match(deadlineUi, /deadline_context/);
+assert.match(deadlineUi, /This is not a final filing deadline/);
+assert.match(deadlineUi, /does not show days remaining/);
+assert.doesNotMatch(deadlineUi, /appealDeadlineContext/);
+assert.doesNotMatch(deadlineUi, /setInterval\s*\(/);
+assert.doesNotMatch(deadlineUi, /Date\.now\s*\(\)\s*[-+]/);
+
+console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, and browser-boundary contracts passed');
