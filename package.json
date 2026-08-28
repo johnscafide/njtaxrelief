@@ -5,7 +5,8 @@
   },
   "scripts": {
     "pagefind:index": "node scripts/build-pagefind.mjs",
-    "vercel-build": "npm run pagefind:index"
+    "test:third-party": "node property/tests/third-party-foundation-contract.mjs",
+    "vercel-build": "npm run test:third-party && npm run pagefind:index"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3",
