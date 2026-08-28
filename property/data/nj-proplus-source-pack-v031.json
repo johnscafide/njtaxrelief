@@ -2748,7 +2748,7 @@
       ],
       "source_id": "watchdog-nj-source-v031",
       "field": "assessment_component_shift",
-      "formula": "normalized(change(land_assessment) - change(improvement_assessment))",
+      "formula": "Latest consecutive published MOD-IV transition: normalize the land-share change minus improvement-share change across the full possible -200 to +200 percentage-point differential into 0-100; 50 is unchanged composition; no synthetic years.",
       "professional_reason": "Flags changes in published assessment composition for review.",
       "unit": "score / 100",
       "dependencies": [

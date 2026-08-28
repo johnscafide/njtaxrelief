@@ -1,0 +1,41 @@
+import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
+const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+const admin=createClient(URL,SERVICE,{auth:{persistSession:false,autoRefreshToken:false}});
+const SCENARIO='planned_marker_batch_v1',UNI='uniformity.percentile',CHAPTER='watchdog.chapter123_position',SHIFT='watchdog.njplus.assessment_component_shift',LAND='njplus.nj-dca-modiv-longitudinal.assessment_land_history',IMPROVEMENT='njplus.nj-dca-modiv-longitudinal.assessment_improvement_history',PPSF='sales.ppsf';
+const UNI_PIN='0101_25.01_10',CHAPTER_PIN='0818_242_22',SHIFT_PINS=['0101_25.01_10','0818_242_22','0802_525_1','0802_528_27','0802_528_5'];
+function json(status:number,p:any){return new Response(JSON.stringify(p),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store, private'}})}
+async function hash(v:string){const d=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));return Array.from(new Uint8Array(d)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+async function cleanup(id:string){await admin.from('watchdog_test_accounts').delete().eq('user_id',id);await admin.from('account_entitlements').delete().eq('user_id',id);await admin.from('profiles').delete().eq('id',id);await admin.auth.admin.deleteUser(id)}
+function n(v:any){const x=Number(v);return Number.isFinite(x)?x:null}
+function expectedShift(land:any,improvement:any){if(!land||!improvement||typeof land!=='object'||typeof improvement!=='object')return null;const years=[...new Set([...Object.keys(land),...Object.keys(improvement)].filter(y=>/^(19|20)\d{2}$/.test(y)).map(Number))].sort((a,b)=>a-b);for(let i=years.length-1;i>0;i--){const py=years[i-1],cy=years[i];if(cy!==py+1)continue;const pl=n(land[String(py)]),pi=n(improvement[String(py)]),cl=n(land[String(cy)]),ci=n(improvement[String(cy)]);if(pl==null||pi==null||cl==null||ci==null||pl<0||pi<0||cl<0||ci<0||pl+pi<=0||cl+ci<=0)continue;const prevLand=pl/(pl+pi)*100,prevImp=pi/(pl+pi)*100,curLand=cl/(cl+ci)*100,curImp=ci/(cl+ci)*100,diff=(curLand-prevLand)-(curImp-prevImp);return{value:Math.round(Math.max(0,Math.min(100,50+diff/4))*10)/10,from_year:py,to_year:cy};}return null}
+async function post(path:string,body:any,access?:string){const headers:any={'Content-Type':'application/json'};if(access){headers.Authorization='Bearer '+access;headers.apikey=ANON;}const r=await fetch(URL+'/functions/v1/'+path,{method:'POST',headers,body:JSON.stringify(body)});let p:any={};try{p=await r.json()}catch{}return{ok:r.ok,status:r.status,p}}
+export async function handlePlannedMarkerBatchCanary(req:Request){
+ let body:any={};try{body=await req.json()}catch{return json(400,{error:'Invalid JSON'})}
+ const token=String(body?.token||'').trim();if(String(body?.scenario||'')!==SCENARIO||!/^[A-Za-z0-9_-]{40,160}$/.test(token))return json(401,{error:'Invalid release canary request'});
+ const now=new Date().toISOString();const {data:gate}=await admin.from('watchdog_test_bootstrap_tokens').update({used_at:now}).eq('token_hash',await hash(token)).is('used_at',null).gt('expires_at',now).contains('metadata',{purpose:'provider_release_canary',scenario:SCENARIO}).select('id,desired_email').maybeSingle();if(!gate)return json(401,{error:'Invalid or expired release canary token'});
+ let userId='';
+ try{
+  const {data:link,error:linkError}=await admin.auth.admin.generateLink({type:'magiclink',email:String(gate.desired_email||'')});userId=String(link?.user?.id||'');const hashed=String(link?.properties?.hashed_token||'');if(linkError||!userId||!hashed)throw new Error('sandbox_link_generation_failed');
+  const authClient=createClient(URL,ANON,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});const {data:v,error:ve}=await authClient.auth.verifyOtp({token_hash:hashed,type:'email'});const access=v?.session?.access_token||'';if(ve||!access)throw new Error('sandbox_session_verification_failed');
+  const pr=await admin.from('profiles').upsert({id:userId,email:String(gate.desired_email||''),full_name:'Watchdog NJW-291 Canary',display_name:'Watchdog NJW-291 Canary',account_role:'developer',plan_tier:'standard',plan:'free',profile_complete:true,custom:{watchdog_test_account:true,no_real_spend:true,release_canary:true,scenario:SCENARIO}},{onConflict:'id'});if(pr.error)throw new Error('sandbox_profile_failed');
+  const ta=await admin.from('watchdog_test_accounts').upsert({user_id:userId,label:'NJW-291 Planned Marker Canary',last_bootstrap_at:now,metadata:{no_real_spend:true,scenario:SCENARIO}},{onConflict:'user_id'});if(ta.error)throw new Error('sandbox_account_failed');
+  const started=Date.now(),allPins=[...new Set([UNI_PIN,CHAPTER_PIN,...SHIFT_PINS])];
+  const hydrate=await post('workbench-hydrate',{pams_pins:allPins,marker_ids:[UNI,LAND,IMPROVEMENT,PPSF]},access);
+  const derived=await post('workbench-derived',{pams_pins:allPins,marker_ids:[CHAPTER,SHIFT]},access);
+  const chapter=await post('chapter123-provider',{districts:[CHAPTER_PIN.slice(0,4)]});
+  const subject=await post('sr1a-subject-provider',{subjects:[{key:CHAPTER_PIN,pams_pin:CHAPTER_PIN,district:CHAPTER_PIN.slice(0,4),block:'242',lot:'22',qualifier:''}]});
+  const uniformity=await fetch('https://raw.githubusercontent.com/johnscafide/njtaxrelief/30c8cb8d1d029c4534adbc734ec787eb39e447a0/property/uniformity.json').then(r=>r.json());
+  const mismatches:string[]=[];
+  const expectedUni=uniformity?.districts?.[UNI_PIN.slice(0,4)]?.percentile,actualUni=hydrate.p?.markers?.[UNI_PIN]?.[UNI],uniMeta=hydrate.p?.meta?.[UNI_PIN]?.[UNI]||{};
+  if(!hydrate.ok||Number(actualUni)!==Number(expectedUni)||uniMeta.provider_kind!=='derived_governed')mismatches.push('uniformity_percentile');
+  let shiftControl:any=null;for(const pin of SHIFT_PINS){const exp=expectedShift(hydrate.p?.markers?.[pin]?.[LAND],hydrate.p?.markers?.[pin]?.[IMPROVEMENT]),actual=derived.p?.markers?.[pin]?.[SHIFT],meta=derived.p?.meta?.[pin]?.[SHIFT]||{};if(exp&&actual!==undefined&&meta.status==='available'){const row={pin,expected:exp.value,actual,kind:meta.provider_kind,from_year:exp.from_year,to_year:exp.to_year};if(!shiftControl||Math.abs(exp.value-50)>Math.abs(shiftControl.expected-50))shiftControl=row;}}
+  if(!shiftControl||Number(shiftControl.actual)!==Number(shiftControl.expected)||shiftControl.kind!=='derived_governed')mismatches.push('assessment_component_shift');
+  const cOfficial=chapter.p?.districts?.[CHAPTER_PIN.slice(0,4)],cSubject=subject.p?.records?.[CHAPTER_PIN],ppsf=n(hydrate.p?.markers?.[CHAPTER_PIN]?.[PPSF]),record=(hydrate.p?.records||[]).find((x:any)=>String(x.pams_pin)===CHAPTER_PIN),assessed=n(record?.assessed_value),sf=n(cSubject?.sf),lower=n(cOfficial?.lower),upper=n(cOfficial?.upper);let expectedChapter:any=null,subjectRatio:any=null;
+  if(ppsf&&sf&&assessed&&lower!=null&&upper!=null){subjectRatio=assessed/(ppsf*sf)*100;expectedChapter=subjectRatio<lower?'below_lower_bound':subjectRatio>upper?'above_upper_bound':'within_common_level_range';}
+  const actualChapter=derived.p?.markers?.[CHAPTER_PIN]?.[CHAPTER],chapterMeta=derived.p?.meta?.[CHAPTER_PIN]?.[CHAPTER]||{};
+  if(!derived.ok||!chapter.ok||!subject.ok||!expectedChapter||actualChapter!==expectedChapter||chapterMeta.provider_kind!=='derived_governed')mismatches.push('chapter123_position');
+  const ok=mismatches.length===0;const observations={uniformity:{pin:UNI_PIN,expected:expectedUni,actual:actualUni,kind:uniMeta.provider_kind||null},assessment_component_shift:shiftControl,chapter123:{pin:CHAPTER_PIN,expected:expectedChapter,actual:actualChapter,subject_ratio_pct:subjectRatio==null?null:Math.round(subjectRatio*100)/100,lower,upper,kind:chapterMeta.provider_kind||null,subject_status:subject.p?.meta?.[CHAPTER_PIN]?.status||null}};
+  await admin.from('watchdog_test_auth_events').insert({token_id:gate.id,user_id:userId,event_type:'provider_release_canary',metadata:{scenario:SCENARIO,status_code:ok?200:502,duration_ms:Date.now()-started,assertion_ok:ok,mismatches,observations}});
+  return json(ok?200:502,{ok,scenario:SCENARIO,assertion_ok:ok,mismatches,observations,duration_ms:Date.now()-started});
+ }catch(e){return json(500,{ok:false,scenario:SCENARIO,error:String((e as Error)?.message||e)})}finally{if(userId)await cleanup(userId)}
+}
