@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-28T17:20:56.398Z",
+  "captured_at": "2026-08-28T17:32:27.726Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
     "budget.levy_base_gap": "live",
@@ -62,7 +62,7 @@
     "njplus.nj-dca-new-home-warranty.new_home_warranty_quarter": "live",
     "njplus.nj-dca-new-home-warranty.new_home_warranty_sales_count": "live",
     "njplus.nj-dca-new-home-warranty.new_home_warranty_year": "live",
-    "njplus.nj-dca-pilot-forecast.pilot_project_assessment": "unavailable",
+    "njplus.nj-dca-pilot-forecast.pilot_project_assessment": "live",
     "njplus.nj-dca-zoning-directory.municipal_zoning_portal": "live",
     "njplus.nj-dca-zoning-directory.zoning_directory_status": "live",
     "njplus.nj-dca-zoning-directory.zoning_map_url": "live",
@@ -500,7 +500,359 @@
     "njplus.nj-dca-ufb-longitudinal.total_overtime_other_compensation_history": "live",
     "njplus.nj-dca-ufb-longitudinal.total_pension_estimate_history": "live",
     "njplus.nj-dca-ufb-longitudinal.total_health_benefits_net_cost_share_history": "live",
-    "njplus.nj-dca-ufb-longitudinal.total_employment_taxes_other_benefits_history": "live"
+    "njplus.nj-dca-ufb-longitudinal.total_employment_taxes_other_benefits_history": "live",
+    "abatement.abated": "live",
+    "abatement.abated_share": "live",
+    "abatement.improvements": "live",
+    "abatement.land": "live",
+    "abatement.net_base": "live",
+    "abatement.percentile": "live",
+    "abatement.total_base": "live",
+    "abatement.vs_median": "live",
+    "appeals.latest_assessed_appealed": "live",
+    "appeals.latest_residential": "live",
+    "appeals.latest_total": "live",
+    "appeals.latest_win_rate_filed": "live",
+    "budget.debt_service_share": "live",
+    "budget.net_debt_pct": "live",
+    "exemption.exempt_nonpilot_value": "live",
+    "exemption.exempt_percentile": "live",
+    "exemption.exempt_share": "live",
+    "exemption.exempt_value": "live",
+    "exemption.municipal_subsidy": "live",
+    "exemption.partial_exemptions_abatements": "live",
+    "exemption.partial_relief_share": "live",
+    "exemption.pilot_assessed_value": "live",
+    "exemption.pilot_billing": "live",
+    "exemption.pilot_count": "live",
+    "exemption.pilot_percentile": "live",
+    "exemption.pilot_value_share": "live",
+    "exemption.subsidy_budget_share": "live",
+    "exemption.subsidy_percentile": "live",
+    "exemption.tax_if_conventional": "live",
+    "modiv_intel.assessed_value_per_acre": "live",
+    "modiv_intel.assessment_change_dispersion_pct": "live",
+    "modiv_intel.assessment_dispersion_iqr_pct": "live",
+    "modiv_intel.assessment_growth_positive_share_pct": "live",
+    "modiv_intel.assessment_jump_share_pct": "live",
+    "modiv_intel.commercial_parcel_share_pct": "live",
+    "modiv_intel.exempt_parcel_share_pct": "live",
+    "modiv_intel.farm_parcel_share_pct": "live",
+    "modiv_intel.improvement_value_share_pct": "live",
+    "modiv_intel.median_annual_tax": "live",
+    "modiv_intel.median_assessed_value": "live",
+    "modiv_intel.median_assessment_change_pct": "live",
+    "modiv_intel.median_building_age": "live",
+    "modiv_intel.median_effective_tax_rate_pct": "live",
+    "modiv_intel.median_land_share_pct": "live",
+    "modiv_intel.median_parcel_acres": "live",
+    "modiv_intel.median_sale_assessment_ratio_pct": "live",
+    "modiv_intel.pre_1978_building_share_pct": "live",
+    "modiv_intel.recent_build_share_pct": "live",
+    "modiv_intel.recent_sale_turnover_pct": "live",
+    "modiv_intel.residential_parcel_share_pct": "live",
+    "modiv_intel.sale_assessment_ratio_dispersion_pct": "live",
+    "modiv_intel.tax_dispersion_iqr_pct": "live",
+    "modiv_intel.vacant_parcel_share_pct": "live",
+    "njplus.nj-dca-affordable-housing.affordable_units_pipeline": "unavailable",
+    "njplus.nj-dca-affordable-housing.hud_subsidized_units": "unavailable",
+    "njplus.nj-dca-affordable-housing.low_income_cost_burden": "unavailable",
+    "njplus.nj-dca-development-trends.certificate_of_occupancy_count": "live",
+    "njplus.nj-dca-development-trends.construction_cost_authorized": "live",
+    "njplus.nj-dca-development-trends.demolitions": "live",
+    "njplus.nj-dca-development-trends.for_sale_units_created": "live",
+    "njplus.nj-dca-development-trends.housing_units_authorized": "live",
+    "njplus.nj-dca-development-trends.new_housing_units_authorized": "live",
+    "njplus.nj-dca-development-trends.office_square_feet_authorized": "live",
+    "njplus.nj-dca-development-trends.other_nonresidential_square_feet": "live",
+    "njplus.nj-dca-development-trends.rental_units_created": "live",
+    "njplus.nj-dca-development-trends.retail_square_feet_authorized": "live",
+    "njplus.nj-dca-municipal-housing-profile.eviction_rate": "unavailable",
+    "njplus.nj-dca-municipal-housing-profile.housing_production": "live",
+    "njplus.nj-dca-neighborhood-trends.commute_mode_mix": "unavailable",
+    "njplus.nj-dca-neighborhood-trends.real_estate_tax_median": "live",
+    "njplus.nj-dca-neighborhood-trends.walkability_score": "unavailable",
+    "njplus.nj-dca-permits-raw.authorized_construction_cost": "live",
+    "njplus.nj-dca-permits-raw.authorized_square_feet": "live",
+    "njplus.nj-dca-permits-raw.certificate_count": "live",
+    "njplus.nj-dca-permits-raw.latest_certificate_date": "live",
+    "njplus.nj-dca-permits-raw.latest_permit_date": "live",
+    "njplus.nj-dca-permits-raw.permit_issued_count": "live",
+    "njplus.nj-dca-permits-raw.permit_type_mix": "live",
+    "njplus.nj-dca-permits-raw.rental_units_gained": "live",
+    "njplus.nj-dca-permits-raw.sale_units_gained": "live",
+    "njplus.nj-dca-permits-raw.use_group_mix": "live",
+    "njplus.nj-dca-pilot-forecast.pilot_agreement_count": "live",
+    "njplus.nj-dca-pilot-forecast.pilot_expiration_year": "live",
+    "njplus.nj-dca-pilot-forecast.pilot_forecast_year": "unavailable",
+    "njplus.nj-dca-pilot-forecast.pilot_municipal_share": "unavailable",
+    "njplus.nj-dca-pilot-forecast.pilot_payment_schedule": "unavailable",
+    "njplus.nj-dca-pilot-forecast.pilot_project_count": "live",
+    "njplus.nj-dca-pilot-forecast.pilot_project_type": "live",
+    "njplus.nj-dca-pilot-forecast.pilot_revenue_projection": "unavailable",
+    "njplus.nj-dca-pilot-forecast.pilot_term_remaining": "live",
+    "njplus.nj-dca-zoning-directory.land_use_board_link": "unavailable",
+    "njplus.nj-dca-zoning-directory.master_plan_link": "unavailable",
+    "njplus.nj-dca-zoning-directory.planning_board_link": "unavailable",
+    "njplus.nj-dca-zoning-directory.redevelopment_plan_link": "unavailable",
+    "njplus.nj-dca-zoning-directory.zoning_map_last_checked": "unavailable",
+    "preflight.cea_hit": "live",
+    "preflight.contaminated_site_500m": "live",
+    "preflight.deed_notice_hit": "live",
+    "preflight.epa_priority_wetland_hit": "live",
+    "preflight.fema_flood_zone": "live",
+    "preflight.highlands_hit": "live",
+    "preflight.latest_permit_date": "live",
+    "preflight.open_permit_count": "live",
+    "preflight.permit_count": "live",
+    "preflight.pinelands_hit": "live",
+    "preflight.tidal_cafe_hit": "live",
+    "preflight.tidelands_reference_hit": "live",
+    "preflight.ust_250m": "live",
+    "preflight.wetlands_2012_hit": "live",
+    "property.acres": "live",
+    "property.address": "live",
+    "property.annual_tax": "live",
+    "property.assessed_value": "live",
+    "property.block": "live",
+    "property.city": "live",
+    "property.class": "live",
+    "property.county": "live",
+    "property.deed_book": "live",
+    "property.deed_date": "live",
+    "property.deed_page": "live",
+    "property.improvement_value": "live",
+    "property.land_value": "live",
+    "property.last_sale_price": "live",
+    "property.lot": "live",
+    "property.lot_area_sqft": "live",
+    "property.market_value": "live",
+    "property.municipality": "live",
+    "property.owner_name": "live",
+    "property.pams_pin": "live",
+    "property.square_feet": "live",
+    "property.units": "live",
+    "property.use": "live",
+    "property.year_built": "live",
+    "property.zip": "live",
+    "sales.p25": "live",
+    "sales.p75": "live",
+    "sales.ppsf": "live",
+    "sales.ratio": "live",
+    "sales.sample_size": "live",
+    "tax.rate_2016": "live",
+    "tax.rate_2017": "live",
+    "tax.rate_2018": "live",
+    "tax.rate_2019": "live",
+    "tax.rate_2020": "live",
+    "tax.rate_2021": "live",
+    "tax.rate_2022": "live",
+    "tax.rate_2023": "live",
+    "tax.rate_2024": "live",
+    "tax.rate_2025": "live",
+    "uniformity.cod_2018": "live",
+    "uniformity.cod_2019": "live",
+    "uniformity.cod_2020": "live",
+    "uniformity.cod_2021": "live",
+    "uniformity.coefficient": "live",
+    "uniformity.score": "live",
+    "watchdog.agent.buyer_cost_explanation": "live",
+    "watchdog.agent.buyer_diligence_sequence": "live",
+    "watchdog.agent.client_brief_completeness": "live",
+    "watchdog.agent.listing_change_alert": "live",
+    "watchdog.agent.listing_public_record_readiness": "live",
+    "watchdog.agent.listing_tax_talking_point": "live",
+    "watchdog.agent.market_context_confidence": "live",
+    "watchdog.agent.seller_tax_story_stability": "live",
+    "watchdog.agent.transaction_cost_conversation": "live",
+    "watchdog.appeal_evidence_strength": "live",
+    "watchdog.appeal_opportunity_index": "live",
+    "watchdog.appraisal_record_completeness": "live",
+    "watchdog.appraiser.assessment_composition_context": "live",
+    "watchdog.appraiser.assessment_evidence_alignment": "live",
+    "watchdog.appraiser.comparable_screen_priority": "live",
+    "watchdog.appraiser.market_anchor_refresh": "live",
+    "watchdog.appraiser.parcel_physical_context": "live",
+    "watchdog.appraiser.public_input_gap": "live",
+    "watchdog.appraiser.ratio_stability_context": "live",
+    "watchdog.appraiser.sale_dispersion_watch": "live",
+    "watchdog.appraiser.sale_sample_recency": "live",
+    "watchdog.appraiser.valuation_record_freshness": "live",
+    "watchdog.assessment_defensibility_score": "live",
+    "watchdog.assessment_per_acre": "live",
+    "watchdog.assessment_surprise_index": "live",
+    "watchdog.assessment_to_sale_ratio": "live",
+    "watchdog.assessment_uniformity_reliability": "live",
+    "watchdog.attorney.appeal_evidence_gap": "live",
+    "watchdog.attorney.assessment_argument_specificity": "live",
+    "watchdog.attorney.case_file_source_freshness": "live",
+    "watchdog.attorney.closing_record_aging": "live",
+    "watchdog.attorney.deadline_evidence_collision": "live",
+    "watchdog.attorney.environmental_exception_path": "live",
+    "watchdog.attorney.municipal_record_reliance": "live",
+    "watchdog.attorney.record_exception_sequence": "live",
+    "watchdog.building_age_years": "live",
+    "watchdog.buyer_objection_radar": "live",
+    "watchdog.buyer_tax_reset_exposure": "live",
+    "watchdog.capital_improvement_activity": "live",
+    "watchdog.carry_cost_downside": "live",
+    "watchdog.certificate_closure_rate": "live",
+    "watchdog.chapter123_annual_overpayment": "live",
+    "watchdog.chapter123_assessment_ratio": "live",
+    "watchdog.chapter123_assessment_reduction": "live",
+    "watchdog.chapter123_common_ratio": "live",
+    "watchdog.chapter123_over_upper_pct": "live",
+    "watchdog.chapter123_screen": "live",
+    "watchdog.chapter123_target_assessment": "live",
+    "watchdog.chapter123_upper_limit": "live",
+    "watchdog.closing_clearance_confidence": "live",
+    "watchdog.closing_exception_priority": "live",
+    "watchdog.collateral_constraint_burden": "live",
+    "watchdog.collateral_tax_reset_sensitivity": "live",
+    "watchdog.comparable_depth_score": "live",
+    "watchdog.comparable_evidence_quality": "live",
+    "watchdog.comparable_evidence_reliability": "live",
+    "watchdog.consumer.appeal_question_readiness": "live",
+    "watchdog.consumer.appeal_readiness": "live",
+    "watchdog.consumer.buyer_tax_planning_signal": "live",
+    "watchdog.consumer.home_cost_clarity": "live",
+    "watchdog.consumer.home_improvement_followup": "live",
+    "watchdog.consumer.ownership_record_confidence": "live",
+    "watchdog.consumer.property_change_attention": "live",
+    "watchdog.consumer.public_record_completeness": "live",
+    "watchdog.consumer.sale_context_strength": "live",
+    "watchdog.consumer.tax_change_watch": "live",
+    "watchdog.consumer.tax_relief_pathway_fit": "live",
+    "watchdog.contractor.construction_record_gap": "live",
+    "watchdog.contractor.development_timeline_uncertainty": "live",
+    "watchdog.contractor.ground_condition_attention": "live",
+    "watchdog.contractor.jurisdiction_overlap_watch": "live",
+    "watchdog.contractor.permit_sequence_clarity": "live",
+    "watchdog.contractor.project_screening_confidence": "live",
+    "watchdog.contractor.site_approval_complexity": "live",
+    "watchdog.contractor.site_constraint_change_watch": "live",
+    "watchdog.contractor.water_review_priority": "live",
+    "watchdog.development_constraint_density": "live",
+    "watchdog.due_diligence_signal_count": "live",
+    "watchdog.effective_tax_rate": "live",
+    "watchdog.environmental_collateral_review": "live",
+    "watchdog.environmental_encumbrance_severity": "live",
+    "watchdog.evidence_chain_completeness": "live",
+    "watchdog.exit_liquidity_score": "live",
+    "watchdog.fiscal_intervention_priority": "live",
+    "watchdog.fiscal_resilience_score": "live",
+    "watchdog.flood_context_severity": "live",
+    "watchdog.flood_environment_risk_score": "live",
+    "watchdog.geology_complexity_score": "live",
+    "watchdog.history.observation_count": "live",
+    "watchdog.history.observation_span_days": "live",
+    "watchdog.history.revaluation_risk_delta": "live",
+    "watchdog.history.tax_pressure_delta": "live",
+    "watchdog.history.tax_pressure_trend_30d": "live",
+    "watchdog.history.tax_pressure_volatility": "live",
+    "watchdog.history.uniformity_delta": "live",
+    "watchdog.history.watchdog_score_delta": "live",
+    "watchdog.history.watchdog_score_trend_30d": "live",
+    "watchdog.history.watchdog_score_volatility": "live",
+    "watchdog.improvement_share_pct": "live",
+    "watchdog.insurance.environmental_review_scope": "live",
+    "watchdog.insurance.flood_evidence_freshness": "live",
+    "watchdog.insurance.geology_hazard_context": "live",
+    "watchdog.insurance.historic_constraint_context": "live",
+    "watchdog.insurance.public_risk_source_currency": "live",
+    "watchdog.insurance.risk_context_consistency": "live",
+    "watchdog.insurance.site_review_escalation": "live",
+    "watchdog.insurance.water_protection_context": "live",
+    "watchdog.investor_carry_cost_volatility": "live",
+    "watchdog.investor.asset_constraint_screen": "live",
+    "watchdog.investor.capital_reinvestment_signal": "live",
+    "watchdog.investor.exit_tax_story": "live",
+    "watchdog.investor.hold_cost_stability": "live",
+    "watchdog.investor.investment_diligence_priority": "live",
+    "watchdog.investor.municipal_exposure_diversification": "live",
+    "watchdog.investor.municipal_fiscal_direction": "live",
+    "watchdog.investor.portfolio_evidence_coverage": "live",
+    "watchdog.investor.revaluation_hold_sensitivity": "live",
+    "watchdog.investor.tax_base_gap_watch": "live",
+    "watchdog.land_improvement_outlier": "live",
+    "watchdog.land_share_pct": "live",
+    "watchdog.land_to_improvement_ratio": "live",
+    "watchdog.lender.collateral_completion_watch": "live",
+    "watchdog.lender.collateral_record_gap": "live",
+    "watchdog.lender.escrow_evidence_freshness": "live",
+    "watchdog.lender.insurance_cost_attention": "live",
+    "watchdog.lender.lending_diligence_coverage": "live",
+    "watchdog.lender.municipal_tax_capacity_watch": "live",
+    "watchdog.lender.payment_stability_signal": "live",
+    "watchdog.lender.revaluation_payment_risk": "live",
+    "watchdog.lender.tax_reserve_confidence": "live",
+    "watchdog.lender.tax_shock_explanation_quality": "live",
+    "watchdog.listing_friction_index": "live",
+    "watchdog.listing_tax_burden_percentile": "live",
+    "watchdog.market_anchor_confidence": "live",
+    "watchdog.market_value_estimate": "live",
+    "watchdog.marketability_drag_index": "live",
+    "watchdog.municipal_cost_absorption_score": "live",
+    "watchdog.municipal_fiscal_beta": "live",
+    "watchdog.municipal_fiscal_capacity": "live",
+    "watchdog.municipal.appeal_activity_context": "live",
+    "watchdog.municipal.budget_data_freshness": "live",
+    "watchdog.municipal.collection_resilience_context": "live",
+    "watchdog.municipal.debt_service_attention": "live",
+    "watchdog.municipal.exemption_pressure_watch": "live",
+    "watchdog.municipal.fiscal_monitor_priority": "live",
+    "watchdog.municipal.levy_alignment_score": "live",
+    "watchdog.municipal.ratable_growth_quality": "live",
+    "watchdog.municipal.tax_base_change_signal": "live",
+    "watchdog.njplus.housing_supply_delivery_ratio": "live",
+    "watchdog.offer_diligence_priority": "live",
+    "watchdog.open_permit_gap_presence": "live",
+    "watchdog.parcel_identity_confidence": "live",
+    "watchdog.permit_activity_score": "live",
+    "watchdog.permit_closure_confidence": "live",
+    "watchdog.permit_collateral_completion": "live",
+    "watchdog.permit_latest_record_age_years": "live",
+    "watchdog.permit_record_age_attention": "live",
+    "watchdog.physical_due_diligence_priority": "live",
+    "watchdog.portfolio_data_confidence": "live",
+    "watchdog.predevelopment_review_priority": "live",
+    "watchdog.prelist_readiness_score": "live",
+    "watchdog.preoffer_public_record_risk": "live",
+    "watchdog.property_story_confidence": "live",
+    "watchdog.redevelopment_incentive_exposure": "live",
+    "watchdog.regulatory_constraint_density": "live",
+    "watchdog.regulatory_overlap_score": "live",
+    "watchdog.revaluation_conversation_risk": "live",
+    "watchdog.revaluation_reset_exposure": "live",
+    "watchdog.revaluation_risk": "live",
+    "watchdog.revenue_base_resilience": "live",
+    "watchdog.sale_to_assessment_ratio": "live",
+    "watchdog.score": "live",
+    "watchdog.seller_appeal_opportunity_signal": "live",
+    "watchdog.service_cost_ratable_gap": "live",
+    "watchdog.site_water_constraint_score": "live",
+    "watchdog.source_authority_coverage": "live",
+    "watchdog.tax_appeal_evidence_strength": "live",
+    "watchdog.tax_base_absorption_risk": "live",
+    "watchdog.tax_history_5y_completeness": "live",
+    "watchdog.tax_pressure": "live",
+    "watchdog.tax_to_assessment_rate": "live",
+    "watchdog.tax_trend_position": "live",
+    "watchdog.title_constraint_stack": "live",
+    "watchdog.title_evidence_completeness": "live",
+    "watchdog.title.address_alias_risk": "live",
+    "watchdog.title.closing_clearance_signal": "live",
+    "watchdog.title.closing_source_currency": "live",
+    "watchdog.title.exception_resolution_priority": "live",
+    "watchdog.title.map_notice_overlap": "live",
+    "watchdog.title.parcel_match_variance": "live",
+    "watchdog.title.permit_certificate_gap_age": "live",
+    "watchdog.title.recording_reference_completeness": "live",
+    "watchdog.town_fiscal_story_score": "live",
+    "watchdog.transaction_diligence_completion": "live",
+    "watchdog.transaction_tax_shock_index": "live",
+    "watchdog.verified_listing_story_strength": "live",
+    "watchdog.years_since_last_sale": "live"
   },
   "providers": {
     "watchdog.watchdog_score": {
@@ -514,37 +866,43 @@
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_average_price": {
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_median_price": {
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_sales_count": {
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_quarter": {
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_year": {
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties Q4 2025 preliminary county table · nj-dca-new-home-warranty-q4-2025-v1",
-      "bulk_capable": true
+      "bulk_capable": true,
+      "calculation_key": null
     },
     "njplus.nj-dca-new-home-warranty.new_home_warranty_price_change": {
       "provider_key": "workbench-hydrate",
@@ -571,7 +929,8 @@
       "provider_key": "workbench-hydrate",
       "provider_kind": "authoritative_reference",
       "source": "NJ DCA New Home Warranties quarterly reports",
-      "bulk_capable": false
+      "bulk_capable": false,
+      "calculation_key": null
     },
     "njplus.nj-dca-fourth-round-affordable.present_need": {
       "provider_key": "workbench-hydrate",
@@ -3350,6 +3709,3093 @@
       "provider_kind": "authoritative_reference",
       "calculation_key": null,
       "source": "NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1",
+      "bulk_capable": true
+    },
+    "abatement.abated": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.abated_share": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "abated_share",
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.improvements": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.land": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.net_base": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.percentile": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "percentile",
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.total_base": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "abatement.vs_median": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "abatement_vs_positive_median",
+      "source": "nj-tax-abstract",
+      "bulk_capable": true
+    },
+    "appeals.latest_assessed_appealed": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-tax-court-appeals",
+      "source": "nj-tax-court-appeals",
+      "bulk_capable": true
+    },
+    "appeals.latest_residential": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-tax-court-appeals",
+      "source": "nj-tax-court-appeals",
+      "bulk_capable": true
+    },
+    "appeals.latest_total": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-tax-court-appeals",
+      "source": "nj-tax-court-appeals",
+      "bulk_capable": true
+    },
+    "appeals.latest_win_rate_filed": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "appeals-reference-v1",
+      "source": "NJ Division of Taxation property-tax appeal outcomes",
+      "bulk_capable": true
+    },
+    "budget.debt_service_share": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-budget",
+      "source": "nj-dca-budget",
+      "bulk_capable": true
+    },
+    "budget.levy_base_gap": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "budget-pressure-v1.0",
+      "source": "NJ DCA property-tax filings · Watchdog Municipal Budget Pressure v1.0",
+      "bulk_capable": true
+    },
+    "budget.net_debt_pct": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-budget",
+      "source": "nj-dca-budget",
+      "bulk_capable": true
+    },
+    "budget.pressure_band": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "budget-pressure-v1.0",
+      "source": "Watchdog Municipal Budget Pressure v1.0",
+      "bulk_capable": true
+    },
+    "budget.pressure_score": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "budget-pressure-v1.0",
+      "source": "NJ DCA property-tax filings · NJ DCA User-Friendly Budget filings · Watchdog Municipal Budget Pressure v1.0",
+      "bulk_capable": true
+    },
+    "budget.structural_imbalance": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "budget-pressure-v1.0",
+      "source": "NJ DCA User-Friendly Budget filings · Watchdog Municipal Budget Pressure v1.0",
+      "bulk_capable": true
+    },
+    "budget.structural_imbalance_share": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "budget-pressure-v1.0",
+      "source": "NJ DCA User-Friendly Budget filings · Watchdog Municipal Budget Pressure v1.0",
+      "bulk_capable": true
+    },
+    "exemption.exempt_nonpilot_value": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.exempt_percentile": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "exempt_percentile",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.exempt_share": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "exempt_share",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.exempt_value": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.municipal_subsidy": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "municipal_subsidy",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.partial_exemptions_abatements": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.partial_relief_share": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "partial_relief_share",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.pilot_assessed_value": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.pilot_billing": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.pilot_count": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.pilot_percentile": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "pilot_percentile",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.pilot_value_share": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "pilot_value_share",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.subsidy_budget_share": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "subsidy_budget_share",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.subsidy_percentile": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "subsidy_percentile",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "exemption.tax_if_conventional": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "tax_if_conventional",
+      "source": "nj-abstract-pilot",
+      "bulk_capable": true
+    },
+    "geology.acid_producing_soil_hit": {
+      "provider_key": "njdep_geology_spatial_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v10-csrr-exact-controls",
+      "source": "njdep-geology-live",
+      "bulk_capable": false
+    },
+    "geology.bedrock_outcrop_hit": {
+      "provider_key": "njdep_geology_spatial_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v10-csrr-exact-controls",
+      "source": "njdep-geology-live",
+      "bulk_capable": false
+    },
+    "geology.historic_fill_hit": {
+      "provider_key": "njdep_geology_spatial_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v10-csrr-exact-controls",
+      "source": "njdep-geology-live",
+      "bulk_capable": false
+    },
+    "geology.soil_mapping_hit": {
+      "provider_key": "njdep_geology_spatial_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v10-csrr-exact-controls",
+      "source": "njdep-geology-live",
+      "bulk_capable": false
+    },
+    "modiv_intel.assessed_value_per_acre": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.assessment_change_dispersion_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.assessment_dispersion_iqr_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.assessment_growth_positive_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.assessment_jump_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.commercial_parcel_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.exempt_parcel_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.farm_parcel_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.improvement_value_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_annual_tax": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_assessed_value": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_assessment_change_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_building_age": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_effective_tax_rate_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_land_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_parcel_acres": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.median_sale_assessment_ratio_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.pre_1978_building_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.recent_build_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.recent_sale_turnover_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.residential_parcel_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.sale_assessment_ratio_dispersion_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.tax_dispersion_iqr_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "modiv_intel.vacant_parcel_share_pct": {
+      "provider_key": "treasury_modiv_2026_intelligence_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "modiv-intelligence-2026-v1",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_housing_reporting_status": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-reporting-status",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_trust_fund_balance": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_for_sale": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-project-aggregate",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_pipeline": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_rental": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-project-aggregate",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.affordable_units_total": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-project-aggregate",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.hud_subsidized_units": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-affordable-housing.low_income_cost_burden": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-affordable-housing.low_income_households": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-project-aggregate",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-affordable-housing.moderate_income_households": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "dca-affordable-housing-v3-project-aggregate",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-community-assets.bus_terminal_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.college_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.hospital_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.library_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.opportunity_zone_status": {
+      "provider_key": "hud-opportunity-zone-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v8-community-designations",
+      "source": "nj-dca-community-assets · hud-qualified-opportunity-zones",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.park_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.redevelopment_area_status": {
+      "provider_key": "njdep-government-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v7-community-designations",
+      "source": "nj-dca-community-assets · njdep-government-redevelopment",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.transit_station_access": {
+      "provider_key": "dca-community-assets-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v11-dca-community-access",
+      "source": "nj-dca-community-assets",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.transit_village_status": {
+      "provider_key": "njdot-transit-village-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v8-community-designations",
+      "source": "nj-dca-community-assets · njdot-transit-villages",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-community-assets.urban_enterprise_zone_status": {
+      "provider_key": "njdep-government-spatial",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": "spatial-preflight-v7-community-designations",
+      "source": "nj-dca-community-assets · njdep-government-uez",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.certificate_of_occupancy_count": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.construction_cost_authorized": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.demolitions": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.for_sale_units_created": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.housing_units_authorized": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.new_housing_units_authorized": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.office_square_feet_authorized": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.other_nonresidential_square_feet": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.rental_units_created": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-development-trends.retail_square_feet_authorized": {
+      "provider_key": "dca_development_trends_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-development-trends · nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.assessment_history_depth": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.assessment_improvement_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.assessment_land_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.assessment_record_years": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.assessment_total_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.exemption_code_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-modiv-longitudinal.property_class_history": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-municipal-housing-profile.eviction_rate": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-municipal-housing-profile.household_growth": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-municipal-housing-profile-compat-v1",
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.housing_cost_burden_share": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.housing_production": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-exact-source-aliases",
+      "source": "nj-dca-development-trends",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.housing_stock": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.median_gross_rent": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.median_home_value": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.owner_occupied_share": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-municipal-housing-profile-compat-v1",
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.renter_occupied_share": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-municipal-housing-profile-compat-v1",
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-municipal-housing-profile.vacancy_rate": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-municipal-housing-profile-compat-v1",
+      "source": "nj-dca-municipal-housing-profile · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.commute_mode_mix": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-neighborhood-trends.employment_density": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.home_value_change": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.household_income": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.housing_unit_change": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.neighborhood_trend_year": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.population_change": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.real_estate_tax_median": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-exact-source-aliases",
+      "source": "treasury-modiv-2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.rental_cost_change": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "nj-dca-neighborhood-trends-2026-v1",
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-neighborhood-trends.walkability_score": {
+      "provider_key": "dca_housing_context_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.authorized_construction_cost": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.authorized_square_feet": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.certificate_count": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.latest_certificate_date": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.latest_permit_date": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.permit_issued_count": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.permit_type_mix": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.rental_units_gained": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.sale_units_gained": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-permits-raw.use_group_mix": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_agreement_count": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-pilot-agreement-2026-v2-db",
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_expiration_year": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-pilot-agreement-2026-v2-db",
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_forecast_year": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA PFAF Model 2026",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_municipal_share": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA PILOT Database and Viewer 2026 · NJ DCA PFAF Model 2026",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_payment_schedule": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA PFAF Model 2026",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_project_assessment": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_project_count": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_project_type": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-pilot-agreement-2026-v2-db",
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_revenue_projection": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "NJ DCA PFAF Model 2026",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-pilot-forecast.pilot_term_remaining": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-dca-pilot-agreement-2026-v2-db",
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026",
+      "bulk_capable": true
+    },
+    "njplus.nj-dca-zoning-directory.land_use_board_link": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.master_plan_link": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.municipal_zoning_portal": {
+      "provider_key": "dca_zoning_directory_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-municipal-zoning-20260323",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.planning_board_link": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.redevelopment_plan_link": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.zoning_directory_status": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-zoning-directory-workbook-20260317",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.zoning_map_last_checked": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-municipal-zoning-20260323",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.zoning_map_url": {
+      "provider_key": "dca_zoning_directory_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-municipal-zoning-20260323",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.zoning_officer_contact": {
+      "provider_key": "dca_zoning_directory_v2",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-zoning-directory-workbook-20260317",
+      "bulk_capable": false
+    },
+    "njplus.nj-dca-zoning-directory.zoning_ordinance_url": {
+      "provider_key": "dca_zoning_directory_v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-dca-zoning-directory · dca-municipal-zoning-20260323",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.brownfield_inventory_status": {
+      "provider_key": "njdep_csrr_parcel_v2",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.cea_reference": {
+      "provider_key": "njdep_csrr_parcel_v2",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.deed_notice_reference": {
+      "provider_key": "njdep_csrr_parcel_v2",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.environmental_layer_vintage": {
+      "provider_key": "njdep_csrr_parcel_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.kcsl_case_status": {
+      "provider_key": "njdep_csrr_parcel_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.kcsl_program_interest": {
+      "provider_key": "njdep_csrr_parcel_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.kcsl_site_id": {
+      "provider_key": "njdep_csrr_parcel_v1",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "njplus.njdep-csrr-gis.ust_facility_reference": {
+      "provider_key": "njdep_csrr_parcel_v2",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis · njdep-environmental-njems-srp-preferred-id-24",
+      "bulk_capable": false
+    },
+    "preflight.cea_hit": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep",
+      "bulk_capable": false
+    },
+    "preflight.contaminated_site_500m": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "preflight.deed_notice_hit": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep",
+      "bulk_capable": false
+    },
+    "preflight.epa_priority_wetland_hit": {
+      "provider_key": "spatial_preflight_v5",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-land-live",
+      "bulk_capable": true
+    },
+    "preflight.fema_flood_zone": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "fema-nfhl",
+      "bulk_capable": false
+    },
+    "preflight.highlands_hit": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep",
+      "bulk_capable": false
+    },
+    "preflight.latest_permit_date": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "preflight.open_permit_count": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "preflight.permit_count": {
+      "provider_key": "dca_permits_v2",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-dca-permits-raw",
+      "bulk_capable": false
+    },
+    "preflight.pinelands_hit": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep",
+      "bulk_capable": false
+    },
+    "preflight.tidal_cafe_hit": {
+      "provider_key": "spatial_preflight_v4",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-hydro-live",
+      "bulk_capable": false
+    },
+    "preflight.tidelands_reference_hit": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-hydro-live",
+      "bulk_capable": false
+    },
+    "preflight.ust_250m": {
+      "provider_key": "spatial_preflight_v3",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "preflight.wetlands_2012_hit": {
+      "provider_key": "spatial_preflight_v4",
+      "provider_kind": "authoritative_spatial_reference",
+      "calculation_key": null,
+      "source": "njdep-land-lu",
+      "bulk_capable": false
+    },
+    "property.acres": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.address": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.annual_tax": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.assessed_value": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.block": {
+      "provider_key": "saved_properties",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "property.city": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ Office of GIS statewide geocoder",
+      "bulk_capable": false
+    },
+    "property.class": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.county": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.deed_book": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.deed_date": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.deed_page": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.improvement_value": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.land_value": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.last_sale_price": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.lot": {
+      "provider_key": "saved_properties",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "property.lot_area_sqft": {
+      "provider_key": "workbench_derived",
+      "provider_kind": "derived",
+      "calculation_key": "lot_area_sqft",
+      "source": "NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.market_value": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "NJ MOD-IV · NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "property.municipality": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.owner_name": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "nj-parcels-modiv",
+      "bulk_capable": true
+    },
+    "property.pams_pin": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.square_feet": {
+      "provider_key": "sr1a-subject-provider",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ Division of Taxation SR-1A verified usable subject sales",
+      "bulk_capable": true
+    },
+    "property.units": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.use": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.year_built": {
+      "provider_key": "workbench_resolver",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "property.zip": {
+      "provider_key": "nj_parcel_baseline",
+      "provider_kind": "authoritative_source",
+      "calculation_key": null,
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "sales.p25": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "sr1a-reference-v1",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "sales.p75": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "sr1a-reference-v1",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "sales.ppsf": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "sr1a-reference-v1",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "sales.ratio": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "sr1a-reference-v1",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "sales.sample_size": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "sr1a-reference-v1",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "tax.rate_2016": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2017": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2018": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2019": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2020": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2021": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2022": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2023": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2024": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "tax.rate_2025": {
+      "provider_key": "nj-municipal-reference-live-v1",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": null,
+      "source": "nj-division-taxation",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2016": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - 2017 county tables",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2017": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - 2017 county tables",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2018": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - January 2022 statewide edition",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2019": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - January 2022 statewide edition",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2020": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - January 2022 statewide edition",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2021": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity - January 2022 statewide edition",
+      "bulk_capable": true
+    },
+    "uniformity.cod_2022": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "nj-cod-segmented-class2-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity",
+      "bulk_capable": true
+    },
+    "uniformity.coefficient": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "uniformity-reference-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity",
+      "bulk_capable": true
+    },
+    "uniformity.score": {
+      "provider_key": "workbench-score",
+      "provider_kind": "canonical_score_component",
+      "calculation_key": "workbench-signals-v2.1.0-uniformity",
+      "source": "Watchdog governed signal engine · NJ assessment uniformity source",
+      "bulk_capable": true
+    },
+    "uniformity.volatility": {
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "uniformity-volatility-population-sd-v1",
+      "source": "NJ Division of Taxation Measures of Property Assessment Uniformity",
+      "bulk_capable": false
+    },
+    "watchdog.agent.buyer_cost_explanation": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.transaction_tax_shock_index · watchdog.consumer.home_cost_clarity",
+      "bulk_capable": true
+    },
+    "watchdog.agent.buyer_diligence_sequence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.offer_diligence_priority · watchdog.buyer_objection_radar · watchdog.permit_activity_score",
+      "bulk_capable": true
+    },
+    "watchdog.agent.client_brief_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.agent.listing_change_alert": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-unlock-v1",
+      "source": "score_observations · data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.agent.listing_public_record_readiness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-evidence-confidence",
+      "source": "watchdog.property_story_confidence · watchdog.transaction_diligence_completion",
+      "bulk_capable": true
+    },
+    "watchdog.agent.listing_tax_talking_point": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "watchdog.listing_tax_burden_percentile",
+      "bulk_capable": true
+    },
+    "watchdog.agent.market_context_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.comparable_evidence_quality · watchdog.agent.client_brief_completeness",
+      "bulk_capable": true
+    },
+    "watchdog.agent.offer_question_density": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.agent.seller_tax_story_stability": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.tax_trend_position · watchdog.revaluation_conversation_risk",
+      "bulk_capable": true
+    },
+    "watchdog.agent.transaction_cost_conversation": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.buyer_tax_reset_exposure · watchdog.consumer.home_cost_clarity",
+      "bulk_capable": true
+    },
+    "watchdog.appeal_evidence_strength": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation 2026 Chapter 123 · NJ Division of Taxation Measures of Property Assessment Uniformity · NJ Division of Taxation property-tax appeal outcomes · NJOGIS Parcels / MOD-IV Composite",
+      "bulk_capable": true
+    },
+    "watchdog.appeal_opportunity_index": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation 2026 Chapter 123 · NJ Division of Taxation Measures of Property Assessment Uniformity · NJ Division of Taxation property-tax appeal outcomes · NJOGIS Parcels / MOD-IV Composite",
+      "bulk_capable": true
+    },
+    "watchdog.appraisal_record_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.assessment_composition_context": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.assessment_evidence_alignment": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-evidence-confidence",
+      "source": "watchdog.assessment_defensibility_score · watchdog.comparable_evidence_reliability",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.comparable_screen_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.comparable_evidence_quality · watchdog.appraiser.public_input_gap",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.market_anchor_refresh": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups · watchdog.market_anchor_confidence",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.parcel_physical_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "property.lot_area · property.square_feet · property.year_built · property.property_class",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.public_input_gap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.ratio_stability_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.comparable_evidence_quality · watchdog.appraiser.assessment_evidence_alignment",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.sale_dispersion_watch": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.sale_sample_recency": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.appraiser.valuation_record_freshness": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.assessment_defensibility_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation 2026 Chapter 123 · NJ Division of Taxation Measures of Property Assessment Uniformity",
+      "bulk_capable": true
+    },
+    "watchdog.assessment_per_acre": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "watchdog.assessment_surprise_index": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation property-tax appeal outcomes · NJ Division of Taxation general tax rates · NJ DCA municipal budget and ratable data",
+      "bulk_capable": true
+    },
+    "watchdog.assessment_to_sale_ratio": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.assessment_uniformity_reliability": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.appeal_evidence_gap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-four-category-batch",
+      "source": "Watchdog governed appeal evidence chain",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.assessment_argument_specificity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.tax_appeal_evidence_strength",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.case_file_source_freshness": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.closing_record_aging": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-unlock-v1",
+      "source": "score_observations · data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.deadline_evidence_collision": {
+      "provider_key": "score_observations",
+      "provider_kind": "trusted_observation",
+      "calculation_key": "watchdog-appeal-deadline-collision-v1",
+      "source": "appeal_case_workspaces",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.environmental_exception_path": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.environmental_encumbrance_severity · watchdog.insurance.water_protection_context · watchdog.insurance.geology_hazard_context",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.land_use_exception_stack": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.attorney.municipal_record_reliance": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-evidence-confidence",
+      "source": "watchdog.source_authority_coverage · watchdog.parcel_identity_confidence",
+      "bulk_capable": true
+    },
+    "watchdog.attorney.public_notice_density": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.attorney.record_exception_sequence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.closing_exception_priority",
+      "bulk_capable": true
+    },
+    "watchdog.building_age_years": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "watchdog.buyer_objection_radar": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v9-agent-listing",
+      "source": "NJ DCA municipal budget and tax levy filings · NJ Division of Taxation 2026 Chapter 123 · NJ Division of Taxation assessment uniformity · NJ Division of Taxation property-tax appeal outcomes",
+      "bulk_capable": true
+    },
+    "watchdog.buyer_tax_reset_exposure": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation general tax rates · NJ DCA municipal budget and ratable data",
+      "bulk_capable": true
+    },
+    "watchdog.capital_improvement_activity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.permit_activity_score",
+      "bulk_capable": true
+    },
+    "watchdog.carry_cost_downside": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.investor_carry_cost_volatility",
+      "bulk_capable": true
+    },
+    "watchdog.certificate_closure_rate": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_annual_overpayment": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_assessment_ratio": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_assessment_reduction": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_common_ratio": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_lower_bound": {
+      "provider_key": "chapter123-provider-v3",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "nj-chapter123-2026",
+      "bulk_capable": false
+    },
+    "watchdog.chapter123_over_upper_pct": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_screen": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_target_assessment": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ MOD-IV · NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.chapter123_upper_bound": {
+      "provider_key": "chapter123-provider-v3",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "nj-chapter123-2026",
+      "bulk_capable": false
+    },
+    "watchdog.chapter123_upper_limit": {
+      "provider_key": "workbench_chapter123",
+      "provider_kind": "derived_chapter123",
+      "calculation_key": "chapter123",
+      "source": "NJ SR1A ratios",
+      "bulk_capable": true
+    },
+    "watchdog.closing_clearance_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-four-hard-categories",
+      "source": "Watchdog governed title evidence helpers · Watchdog governed closing exception priority",
+      "bulk_capable": true
+    },
+    "watchdog.closing_exception_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.collateral_constraint_burden": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.contractor.site_approval_complexity",
+      "bulk_capable": true
+    },
+    "watchdog.collateral_tax_reset_sensitivity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ MOD-IV parcel assessment and sale records · NJ SR1A verified sales · NJ Division of Taxation general tax rates · NJ DCA municipal budget and ratable data",
+      "bulk_capable": true
+    },
+    "watchdog.comparable_depth_score": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.comparable_evidence_quality": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-four-hard-categories",
+      "source": "NJ Division of Taxation SR-1A verified sales · NJOGIS Parcels / MOD-IV Composite",
+      "bulk_capable": true
+    },
+    "watchdog.comparable_evidence_reliability": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "watchdog.constraint_stack_count": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.consumer.appeal_question_readiness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.consumer.appeal_readiness",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.appeal_readiness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-four-category-batch",
+      "source": "NJ Division of Taxation Chapter 123 · NJ Division of Taxation SR-1A verified sales · Watchdog governed appeal evidence chain",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.buyer_tax_planning_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.transaction_tax_shock_index · watchdog.buyer_tax_reset_exposure",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.home_cost_clarity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.home_improvement_followup": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-four-category-batch",
+      "source": "Governed public permit records",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.ownership_record_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v12-score-products",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.property_change_attention": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-unlock-v1",
+      "source": "score_observations · intelligence_source_fact_watch_state",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.public_record_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.sale_context_strength": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.tax_change_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.tax_trend_position · budget.pressure_score · watchdog.revaluation_risk",
+      "bulk_capable": true
+    },
+    "watchdog.consumer.tax_relief_pathway_fit": {
+      "provider_key": "score_observations",
+      "provider_kind": "trusted_observation",
+      "calculation_key": "watchdog-tax-relief-inputs-v1",
+      "source": "profiles · saved_properties",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.construction_record_gap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.development_timeline_uncertainty": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-permit-age-v1",
+      "source": "njdep-dca-live · data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.ground_condition_attention": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.insurance.geology_hazard_context",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.jurisdiction_overlap_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-safe-aliases",
+      "source": "watchdog.regulatory_constraint_density",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.permit_sequence_clarity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-narrowed-professional-views",
+      "source": "watchdog.permit_activity_score · watchdog.certificate_closure_rate",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.preconstruction_question_set": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.contractor.project_screening_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-evidence-confidence",
+      "source": "watchdog.contractor.site_preflight_completeness · watchdog.source_authority_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.site_approval_complexity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-four-category-batch",
+      "source": "NJDEP mapped environmental sources · FEMA mapped flood context · NJ public land-use screens",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.site_constraint_change_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-unlock-v1",
+      "source": "intelligence_source_fact_watch_state · data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.contractor.site_preflight_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.contractor.water_review_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-narrowed-professional-views",
+      "source": "watchdog.flood_environment_risk_score",
+      "bulk_capable": true
+    },
+    "watchdog.development_constraint_density": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.due_diligence_signal_count": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.effective_tax_rate": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV · NJ equalization tables",
+      "bulk_capable": true
+    },
+    "watchdog.environmental_collateral_review": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.environmental_encumbrance_severity · watchdog.insurance.water_protection_context",
+      "bulk_capable": true
+    },
+    "watchdog.environmental_encumbrance_severity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.evidence_chain_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ MOD-IV / NJOGIS Parcels · NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation Measures of Property Assessment Uniformity · NJ Division of Taxation property-tax appeal outcomes · NJ Division of Taxation 2026 Chapter 123",
+      "bulk_capable": true
+    },
+    "watchdog.exit_liquidity_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-investor-hard",
+      "source": "Watchdog governed marketability, property evidence, fiscal, and mapped-constraint signals",
+      "bulk_capable": true
+    },
+    "watchdog.fiscal_intervention_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-municipal-priority",
+      "source": "watchdog-derived",
+      "bulk_capable": true
+    },
+    "watchdog.fiscal_resilience_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v6-fiscal",
+      "source": "NJ DCA municipal budget and property-tax filings",
+      "bulk_capable": true
+    },
+    "watchdog.flood_context_severity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.flood_environment_risk_score",
+      "bulk_capable": true
+    },
+    "watchdog.flood_environment_risk_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.geology_complexity_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.contractor.ground_condition_attention",
+      "bulk_capable": true
+    },
+    "watchdog.history.observation_count": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.observation_span_days": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.revaluation_risk_delta": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.tax_pressure_delta": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.tax_pressure_trend_30d": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.tax_pressure_volatility": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.uniformity_delta": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.watchdog_score_delta": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.watchdog_score_trend_30d": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.history.watchdog_score_volatility": {
+      "provider_key": "watchdog-history-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-history-v1",
+      "source": "score_observations",
+      "bulk_capable": true
+    },
+    "watchdog.improvement_ratio": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "nj-parcels-modiv",
+      "bulk_capable": false
+    },
+    "watchdog.improvement_share_pct": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.environmental_review_scope": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-narrowed-professional-views",
+      "source": "watchdog.environmental_encumbrance_severity",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.flood_evidence_freshness": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.geology_hazard_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-insurance-context-aliases",
+      "source": "NJGS/NJDEP geology mapping",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.historic_constraint_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-insurance-context-aliases",
+      "source": "NJDEP/NJ historic-resource mapping",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.mapped_hazard_overlap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.insurance.physical_record_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.insurance.public_risk_source_currency": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.risk_context_consistency": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-four-category-batch",
+      "source": "FEMA · NJDEP mapped environmental and water sources · NJ public geology sources",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.site_review_escalation": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.contractor.site_approval_complexity · watchdog.flood_environment_risk_score",
+      "bulk_capable": true
+    },
+    "watchdog.insurance.water_protection_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-insurance-context-aliases",
+      "source": "NJDEP water/flood mapping",
+      "bulk_capable": true
+    },
+    "watchdog.investor_carry_cost_volatility": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v7-revaluation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation general tax rates · NJ DCA municipal budget and ratable data · NJ Division of Taxation Abstract of Ratables · NJ DCA PILOT data",
+      "bulk_capable": true
+    },
+    "watchdog.investor.asset_constraint_screen": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-safe-aliases",
+      "source": "watchdog.regulatory_constraint_density",
+      "bulk_capable": true
+    },
+    "watchdog.investor.capital_reinvestment_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.permit_activity_score · watchdog.certificate_closure_rate",
+      "bulk_capable": true
+    },
+    "watchdog.investor.exit_tax_story": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.tax_trend_position · watchdog.agent.seller_tax_story_stability",
+      "bulk_capable": true
+    },
+    "watchdog.investor.hold_cost_stability": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.investor_carry_cost_volatility · watchdog.revenue_base_resilience",
+      "bulk_capable": true
+    },
+    "watchdog.investor.investment_diligence_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.investor_carry_cost_volatility · watchdog.investor.asset_constraint_screen · watchdog.investor.revaluation_hold_sensitivity",
+      "bulk_capable": true
+    },
+    "watchdog.investor.municipal_exposure_diversification": {
+      "provider_key": "score_observations",
+      "provider_kind": "trusted_observation",
+      "calculation_key": "watchdog-portfolio-diversification-v1",
+      "source": "saved_properties",
+      "bulk_capable": true
+    },
+    "watchdog.investor.municipal_fiscal_direction": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.revenue_base_resilience · watchdog.municipal_fiscal_beta",
+      "bulk_capable": true
+    },
+    "watchdog.investor.portfolio_evidence_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.portfolio_data_confidence",
+      "bulk_capable": true
+    },
+    "watchdog.investor.revaluation_hold_sensitivity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v12-score-products",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.investor.tax_base_gap_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-tax-base-gap-watch",
+      "source": "watchdog.tax_base_absorption_risk",
+      "bulk_capable": true
+    },
+    "watchdog.land_improvement_outlier": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.land_share_pct": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "watchdog.land_to_improvement_ratio": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.lender.collateral_completion_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.permit_collateral_completion",
+      "bulk_capable": true
+    },
+    "watchdog.lender.collateral_record_gap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.lender.escrow_evidence_freshness": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.lender.insurance_cost_attention": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.flood_environment_risk_score · watchdog.environmental_encumbrance_severity",
+      "bulk_capable": true
+    },
+    "watchdog.lender.lending_diligence_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.lender.municipal_tax_capacity_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.fiscal_resilience_score · watchdog.tax_base_absorption_risk",
+      "bulk_capable": true
+    },
+    "watchdog.lender.payment_stability_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.investor_carry_cost_volatility",
+      "bulk_capable": true
+    },
+    "watchdog.lender.revaluation_payment_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.collateral_tax_reset_sensitivity · watchdog.revaluation_reset_exposure",
+      "bulk_capable": true
+    },
+    "watchdog.lender.tax_reserve_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-tax-history-v1",
+      "source": "nj-municipal-reference-live-v1 · data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.lender.tax_shock_explanation_quality": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "watchdog.transaction_tax_shock_index · watchdog.source_authority_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.listing_friction_index": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ DCA municipal budget and ratable data · NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation coefficients of deviation · NJ Division of Taxation general tax rates · NJ Division of Taxation property-tax appeal outcomes",
+      "bulk_capable": true
+    },
+    "watchdog.listing_tax_burden_percentile": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups",
+      "bulk_capable": true
+    },
+    "watchdog.market_anchor_confidence": {
+      "provider_key": "watchdog-cohort-v1",
+      "provider_kind": "derived_cohort",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "property_lookups · watchdog.source_authority_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.market_value_estimate": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "NJ MOD-IV · NJ Division of Taxation SR-1A verified sales",
+      "bulk_capable": true
+    },
+    "watchdog.marketability_drag_index": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v9-agent-listing",
+      "source": "NJOGIS Parcels / MOD-IV Composite · NJ Division of Taxation SR-1A verified sales · NJ DCA municipal budget and tax levy filings · NJ Division of Taxation 2026 Chapter 123 · NJ Division of Taxation assessment uniformity",
+      "bulk_capable": true
+    },
+    "watchdog.municipal_cost_absorption_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v6-fiscal",
+      "source": "NJ DCA municipal budget and property-tax filings",
+      "bulk_capable": true
+    },
+    "watchdog.municipal_fiscal_beta": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-investor-hard",
+      "source": "NJ DCA municipal budget/ratable data · NJ Division of Taxation Chapter 123 · Watchdog governed fiscal models",
+      "bulk_capable": true
+    },
+    "watchdog.municipal_fiscal_capacity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.fiscal_resilience_score",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.appeal_activity_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-municipal-activity-v1",
+      "source": "nj-tax-court-appeals",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.budget_data_freshness": {
+      "provider_key": "watchdog-source-currency-v1",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.collection_resilience_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-municipal-quality",
+      "source": "NJ DCA municipal budget data",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.debt_service_attention": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-municipal-debt-v1",
+      "source": "nj-dca-budget",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.exemption_pressure_watch": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-municipal-quality",
+      "source": "NJ Division of Taxation Abstract of Ratables · NJ DCA PILOT data",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.fiscal_monitor_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.municipal.levy_alignment_score · watchdog.municipal.exemption_pressure_watch · watchdog.municipal_fiscal_beta",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.levy_alignment_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-safe-aliases",
+      "source": "watchdog.tax_base_absorption_risk",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.municipal_source_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.municipal.ratable_growth_quality": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-municipal-quality",
+      "source": "NJ DCA municipal budget and ratable data",
+      "bulk_capable": true
+    },
+    "watchdog.municipal.tax_base_change_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "budget.ratable_growth · watchdog.tax_base_absorption_risk",
+      "bulk_capable": true
+    },
+    "watchdog.njplus.affordable_supply_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "nj-dca-affordable-housing",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.assessment_change_trace": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "ordered-assessment-history-v1",
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.brownfield_reuse_context": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v15-strict-signal-count",
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.development_designation_stack": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v15-strict-signal-count",
+      "source": "nj-dca-community-assets · hud-qualified-opportunity-zones · njdot-transit-villages · njdep-government-uez · njdep-government-redevelopment",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.environmental_case_activity": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v15-strict-signal-count",
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.environmental_record_resolution": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v15-strict-signal-count",
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.environmental_source_currency": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "authoritative_reference",
+      "calculation_key": "watchdog-derived-v15-strict-signal-count",
+      "source": "njdep-csrr-gis",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.housing_supply_delivery_ratio": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v13-ratio-floor",
+      "source": "nj-dca-development-trends",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.municipal_housing_evidence_depth": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.neighborhood_trend_freshness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.offer_diligence_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v9-agent-listing",
+      "source": "NJOGIS Parcels / MOD-IV Composite · NJ Division of Taxation SR-1A verified sales · Watchdog governed listing-friction formula",
+      "bulk_capable": true
+    },
+    "watchdog.open_permit_gap_presence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-permit-age-v1",
+      "source": "njdep-dca-live",
+      "bulk_capable": true
+    },
+    "watchdog.parcel_identity_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v11-subject-index",
+      "source": "NJ MOD-IV · NJOGIS Parcels",
+      "bulk_capable": true
+    },
+    "watchdog.permit_activity_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.permit_closure_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.permit_collateral_completion": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v12-score-products",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.permit_latest_record_age_years": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-permit-age-v1",
+      "source": "njdep-dca-live",
+      "bulk_capable": true
+    },
+    "watchdog.permit_record_age_attention": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-permit-age-v1",
+      "source": "njdep-dca-live",
+      "bulk_capable": true
+    },
+    "watchdog.physical_due_diligence_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.flood_context_severity · watchdog.environmental_collateral_review · watchdog.insurance.water_protection_context · watchdog.geology_complexity_score",
+      "bulk_capable": true
+    },
+    "watchdog.portfolio_data_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-investor-hard",
+      "source": "NJOGIS/MOD-IV · NJDEP/FEMA/DCA governed public sources · Watchdog source-coverage models",
+      "bulk_capable": true
+    },
+    "watchdog.predevelopment_review_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.development_constraint_density · watchdog.regulatory_overlap_score · watchdog.site_water_constraint_score · watchdog.geology_complexity_score",
+      "bulk_capable": true
+    },
+    "watchdog.prelist_readiness_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v9-agent-listing",
+      "source": "NJOGIS Parcels / MOD-IV Composite · NJ Division of Taxation SR-1A verified sales · Watchdog governed listing-friction formula",
+      "bulk_capable": true
+    },
+    "watchdog.preoffer_public_record_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.property_story_confidence": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.redevelopment_incentive_exposure": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v17-investor-hard",
+      "source": "NJ Division of Taxation Abstract of Ratables · NJ DCA PILOT data",
+      "bulk_capable": true
+    },
+    "watchdog.regulatory_constraint_density": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.regulatory_overlap_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.regulatory_constraint_density",
+      "bulk_capable": true
+    },
+    "watchdog.revaluation_conversation_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation coefficients of deviation",
+      "bulk_capable": true
+    },
+    "watchdog.revaluation_reset_exposure": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v8-reset-conversation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ MOD-IV parcel assessment and sale records · NJ SR1A verified sales · NJ Division of Taxation coefficients of deviation",
+      "bulk_capable": true
+    },
+    "watchdog.revaluation_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v7-revaluation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation coefficients of deviation",
+      "bulk_capable": true
+    },
+    "watchdog.revenue_base_resilience": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-four-hard-categories",
+      "source": "NJ DCA municipal budget and tax levy filings · NJ exemption/PILOT/abatement governed sources",
+      "bulk_capable": true
+    },
+    "watchdog.sale_to_assessment_ratio": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v15-source-alias",
+      "source": "Watchdog Score powered by the ROBUST Framework",
+      "bulk_capable": true
+    },
+    "watchdog.seller_appeal_opportunity_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v12-score-products",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.service_cost_ratable_gap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-municipal-priority",
+      "source": "nj-dca-budget",
+      "bulk_capable": true
+    },
+    "watchdog.site_water_constraint_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.contractor.water_review_priority",
+      "bulk_capable": true
+    },
+    "watchdog.source_authority_coverage": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.tax_appeal_evidence_strength": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-four-hard-categories",
+      "source": "NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation Chapter 123 · NJ Division of Taxation assessment uniformity · NJ property-tax appeal outcomes",
+      "bulk_capable": true
+    },
+    "watchdog.tax_base_absorption_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-tax-base-absorption-risk",
+      "source": "budget.pressure_score",
+      "bulk_capable": true
+    },
+    "watchdog.tax_history_5y_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-tax-history-v1",
+      "source": "nj-municipal-reference-live-v1",
+      "bulk_capable": true
+    },
+    "watchdog.tax_pressure": {
+      "provider_key": "workbench-score",
+      "provider_kind": "canonical_score_component",
+      "calculation_key": "workbench-signals-v2.1.0-tax-pressure",
+      "source": "Watchdog Score powered by ROBUST · NJ general tax-rate series",
+      "bulk_capable": true
+    },
+    "watchdog.tax_to_assessment_rate": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV",
+      "bulk_capable": true
+    },
+    "watchdog.tax_trend_position": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v6-fiscal",
+      "source": "NJ Division of Taxation general tax rates",
+      "bulk_capable": true
+    },
+    "watchdog.title_constraint_stack": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.title_evidence_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v18-four-hard-categories",
+      "source": "NJOGIS Parcels / MOD-IV Composite · NJ DCA zoning directory · Watchdog governed title evidence helpers",
+      "bulk_capable": true
+    },
+    "watchdog.title.address_alias_risk": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.title.parcel_match_variance",
+      "bulk_capable": true
+    },
+    "watchdog.title.closing_clearance_signal": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v19-seven-category-batch",
+      "source": "watchdog.parcel_identity_confidence · watchdog.permit_closure_confidence · watchdog.title_constraint_stack",
+      "bulk_capable": true
+    },
+    "watchdog.title.closing_source_currency": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-source-currency-v1",
+      "source": "data_center_provider_coverage",
+      "bulk_capable": true
+    },
+    "watchdog.title.exception_resolution_priority": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v20-big-closure",
+      "source": "watchdog.title_constraint_stack · watchdog.permit_activity_score · watchdog.environmental_encumbrance_severity",
+      "bulk_capable": true
+    },
+    "watchdog.title.map_notice_overlap": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-cohort-v1",
+      "source": "watchdog.attorney.public_notice_density",
+      "bulk_capable": true
+    },
+    "watchdog.title.municipal_search_scope": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.title.parcel_match_variance": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v12-score-products",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.title.permit_certificate_gap_age": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-permit-age-v1",
+      "source": "njdep-dca-live",
+      "bulk_capable": true
+    },
+    "watchdog.title.recording_reference_completeness": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.title.title_land_constraint_mix": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v16-chapter123-fields",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": false
+    },
+    "watchdog.town_fiscal_story_score": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v21-core-submodels",
+      "source": "watchdog.municipal.collection_resilience_context · watchdog.municipal.ratable_growth_quality · watchdog.municipal.levy_alignment_score",
+      "bulk_capable": true
+    },
+    "watchdog.transaction_diligence_completion": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "Production Data Center provider coverage",
+      "bulk_capable": true
+    },
+    "watchdog.transaction_tax_shock_index": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v7-revaluation",
+      "source": "NJ Division of Taxation 2026 Chapter 123 · NJ SR1A verified sales · NJ Division of Taxation general tax rates · NJ DCA municipal budget and ratable data",
+      "bulk_capable": true
+    },
+    "watchdog.verified_listing_story_strength": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v9-agent-listing",
+      "source": "NJOGIS Parcels / MOD-IV Composite · NJ Division of Taxation SR-1A verified sales · NJ Division of Taxation assessment uniformity",
+      "bulk_capable": true
+    },
+    "watchdog.years_since_last_sale": {
+      "provider_key": "watchdog-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v3",
+      "source": "NJ MOD-IV",
       "bulk_capable": true
     }
   }
