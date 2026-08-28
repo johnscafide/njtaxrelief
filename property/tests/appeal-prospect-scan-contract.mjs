@@ -105,6 +105,7 @@ assert.match(server, /equalization-ratios\.json/);
 assert.match(server, /appeal-deadline-rules\.json/);
 assert.match(server, /appealDeadlineContext/);
 assert.match(server, /required_plan:\s*'pro_plus'/);
+assert.match(server, /Access-Control-Allow-Headers[\s\S]*x-client-info/);
 assert.match(server, /manual_review_required/);
 assert.match(server, /monthsBeforeValuationDate/);
 assert.match(server, /valuationDate/);
@@ -155,4 +156,4 @@ assert.match(scanPage, /scan-evidence-ui\.js/);
 assert.match(scanPage, /scan-case-value-ui\.js/);
 assert.doesNotMatch(scanPage, /appeal-packet\.js/);
 
-console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, evidence, and user-supplied case-value boundaries passed');
+console.log('appeal-prospect-scan certified Chapter 123, deadline-rule, evidence, user-supplied case-value, and browser CORS boundaries passed');
