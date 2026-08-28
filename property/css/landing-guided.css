@@ -1,4 +1,7 @@
+@import url("/property/css/shared/00-design-tokens.css");
+
 /* Watchdog /property guided homepage layer — product proof first, clear homeowner/pro paths */
+/* NJW-73/NJW-74: canonical UI font, 12px readable floor and governed breakpoints. */
 
 /* Hero positioning remains secondary to the address lookup. */
 .wdg-hero-lead {
@@ -7,7 +10,7 @@
   max-width: 720px;
   margin: -10px auto 24px;
   color: rgba(255,255,255,.94);
-  font: 600 clamp(15px,1.55vw,18px)/1.55 "Source Sans 3",Arial,sans-serif;
+  font: 600 clamp(15px,1.55vw,18px)/1.55 var(--font-ui);
   text-shadow: 0 2px 18px rgba(0,0,0,.42);
 }
 .wdg-hero-pro {
@@ -18,11 +21,11 @@
   gap: 8px;
   margin-top: 17px;
   color: rgba(255,255,255,.94) !important;
-  font: 800 12px/1.2 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1.2 var(--font-ui);
   text-decoration: none !important;
   text-shadow: 0 2px 14px rgba(0,0,0,.45);
 }
-.wdg-hero-pro i { font-size: 10px; transition: transform .2s ease; }
+.wdg-hero-pro i { font-size: var(--type-xs); transition: transform .2s ease; }
 .wdg-hero-pro:hover i { transform: translateX(4px); }
 
 /* The new sections intentionally reuse the showcase visual language. */
@@ -36,16 +39,16 @@
   gap: 9px;
   margin-bottom: 18px;
   color: #078486;
-  font: 800 10px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1 var(--font-ui);
   letter-spacing: .11em;
   text-transform: uppercase;
 }
-#wd-showcase .wdg-eyebrow i { font-size: 10px; }
+#wd-showcase .wdg-eyebrow i { font-size: var(--type-xs); }
 #wd-showcase .wdg-head {
   max-width: 920px;
   margin: 0;
   color: #101318;
-  font: 650 clamp(40px,4.7vw,70px)/.98 "Plus Jakarta Sans",sans-serif;
+  font: 650 clamp(40px,4.7vw,70px)/.98 var(--font-ui);
   letter-spacing: -.058em;
 }
 #wd-showcase .wdg-sub {
@@ -84,12 +87,12 @@
   border-radius: 13px;
   background: #e7f4f2;
   color: #078486;
-  font: 800 12px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1 var(--font-ui);
 }
 #wd-showcase .wdg-job h3 {
   margin: 28px 0 0;
   color: #10294b;
-  font: 750 clamp(25px,2.2vw,34px)/1.05 "Plus Jakarta Sans",sans-serif;
+  font: 750 clamp(25px,2.2vw,34px)/1.05 var(--font-ui);
   letter-spacing: -.04em;
 }
 #wd-showcase .wdg-job p {
@@ -109,7 +112,7 @@
   font-weight: 700;
 }
 #wd-showcase .wdg-job li { display: flex; align-items: center; gap: 8px; }
-#wd-showcase .wdg-job li i { color: #078486; font-size: 9px; }
+#wd-showcase .wdg-job li i { color: #078486; font-size: var(--type-xs); }
 
 /* Evidence promise: no invented confidence. */
 #wd-showcase .wdg-evidence { padding-top: 38px; padding-bottom: 104px; }
@@ -145,7 +148,7 @@
   margin: 0;
   max-width: 760px;
   color: #fff;
-  font: 650 clamp(38px,4.1vw,64px)/.98 "Plus Jakarta Sans",sans-serif;
+  font: 650 clamp(38px,4.1vw,64px)/.98 var(--font-ui);
   letter-spacing: -.055em;
 }
 #wd-showcase .wdg-evidence-copy > p {
@@ -165,9 +168,9 @@
   gap: 9px;
   margin-top: 26px;
   color: #fff !important;
-  font: 800 12px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1 var(--font-ui);
 }
-#wd-showcase .wdg-evidence-link i { font-size: 10px; }
+#wd-showcase .wdg-evidence-link i { font-size: var(--type-xs); }
 #wd-showcase .wdg-evidence-list {
   position: relative;
   z-index: 1;
@@ -193,18 +196,18 @@
   border-radius: 11px;
   background: rgba(143,225,216,.13);
   color: #8fe1d8;
-  font-size: 12px;
+  font-size: var(--type-xs);
 }
 #wd-showcase .wdg-evidence-item b {
   display: block;
   color: #fff;
-  font: 800 12px/1.2 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1.2 var(--font-ui);
 }
 #wd-showcase .wdg-evidence-item span {
   display: block;
   margin-top: 4px;
   color: #c2d3de;
-  font-size: 11.5px;
+  font-size: var(--type-xs);
   line-height: 1.38;
 }
 
@@ -238,14 +241,14 @@
   border-radius: 16px;
   background: #e7f4f2;
   color: #078486;
-  font-size: 16px;
+  font-size: var(--type-md);
 }
 #wd-showcase .wdg-path-card.pro .wdg-path-icon { background: rgba(143,225,216,.12); color: #8fe1d8; }
 #wd-showcase .wdg-path-label {
   display: block;
   margin-top: 28px;
   color: #74808d;
-  font: 800 10px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1 var(--font-ui);
   letter-spacing: .11em;
   text-transform: uppercase;
 }
@@ -253,7 +256,7 @@
 #wd-showcase .wdg-path-card h3 {
   margin: 14px 0 0;
   color: #10294b;
-  font: 700 clamp(32px,3.3vw,49px)/1 "Plus Jakarta Sans",sans-serif;
+  font: 700 clamp(32px,3.3vw,49px)/1 var(--font-ui);
   letter-spacing: -.052em;
 }
 #wd-showcase .wdg-path-card.pro h3 { color: #fff; }
@@ -261,7 +264,7 @@
   max-width: 620px;
   margin: 17px 0 0;
   color: #68727d;
-  font-size: 16px;
+  font-size: var(--type-md);
   line-height: 1.55;
 }
 #wd-showcase .wdg-path-card.pro p { color: #d6e2eb; }
@@ -274,7 +277,7 @@
   border-radius: 999px;
   background: #f1f4f5;
   color: #52606d;
-  font-size: 10.5px;
+  font-size: var(--type-xs);
   font-weight: 800;
 }
 #wd-showcase .wdg-path-card.pro .wdg-tags span { background: rgba(255,255,255,.08); color: #e2edf2; }
@@ -288,7 +291,7 @@
   min-height: 46px;
   padding: 0 17px;
   border-radius: 999px;
-  font: 800 11px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 var(--type-xs)/1 var(--font-ui);
 }
 #wd-showcase .wdg-path-primary { background: #10294b; color: #fff !important; }
 #wd-showcase .wdg-path-secondary { color: #10294b !important; border: 1px solid #dbe2e5; }
@@ -305,16 +308,16 @@
 .wdg-reveal { opacity: 0; transform: translateY(24px); transition: opacity .65s cubic-bezier(.2,.75,.25,1),transform .65s cubic-bezier(.2,.75,.25,1); }
 .wdg-reveal.is-visible { opacity: 1; transform: none; }
 
-@media (max-width: 980px) {
+@media (max-width: 1024px) {
   #wd-showcase .wdg-job-grid { grid-template-columns: 1fr; }
   #wd-showcase .wdg-job { min-height: 0; }
   #wd-showcase .wdg-evidence-shell { grid-template-columns: 1fr; gap: 38px; }
   #wd-showcase .wdg-path-grid { grid-template-columns: 1fr; }
   #wd-showcase .wdg-path-card { min-height: 0; }
 }
-@media (max-width: 640px) {
-  .wdg-hero-lead { margin-top: -8px; margin-bottom: 20px; padding: 0 6px; font-size: 14px; }
-  .wdg-hero-pro { margin-top: 14px; font-size: 10.5px; }
+@media (max-width: 768px) {
+  .wdg-hero-lead { margin-top: -8px; margin-bottom: 20px; padding: 0 6px; font-size: var(--type-sm); }
+  .wdg-hero-pro { margin-top: 14px; font-size: var(--type-xs); }
   #wd-showcase .wdg-section { padding: 76px 0; }
   #wd-showcase .wdg-head { font-size: 40px; }
   #wd-showcase .wdg-sub { font-size: 15px; }
