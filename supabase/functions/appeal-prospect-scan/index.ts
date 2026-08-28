@@ -21,7 +21,8 @@ const json = (body: unknown, status = 200) => new Response(JSON.stringify(body),
 });
 
 const SOURCE_ROOT = 'https://njpropertytaxrelief.com';
-const FORMULA_VERSION = 'appeal-prospect-scan-server-v3-certified-clr-deadline-context';
+const SCOPED_SALES_ENDPOINT = 'https://www.watchdogindex.com/api/sales-by-district';
+const FORMULA_VERSION = 'appeal-prospect-scan-server-v4-certified-clr-scoped-sales';
 const CHAPTER123_SOURCE = 'https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf';
 const DEADLINE_RULES_SOURCE = 'https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml';
 const COUNTIES: Record<string, string> = {
@@ -37,12 +38,33 @@ async function sourceJson(path: string, ttlMs = 10 * 60 * 1000) {
   const hit = cache.get(path);
   if (hit && hit.expires > Date.now()) return hit.value;
   const response = await fetch(`${SOURCE_ROOT}${path}`, {
-    headers: { 'User-Agent': 'Watchdog-Server-Scanner/3.0' },
+    headers: { 'User-Agent': 'Watchdog-Server-Scanner/4.0' },
     signal: AbortSignal.timeout(25000),
   });
   if (!response.ok) throw new Error(`source_${response.status}_${path}`);
   const value = await response.json();
   cache.set(path, { expires: Date.now() + ttlMs, value });
+  return value;
+}
+
+async function scopedSales(countySlug: string, district: string, ttlMs = 5 * 60 * 1000) {
+  const cacheKey = `scoped-sales:${countySlug}:${district}`;
+  const hit = cache.get(cacheKey);
+  if (hit && hit.expires > Date.now()) return hit.value as any;
+  const url = `${SCOPED_SALES_ENDPOINT}?county=${encodeURIComponent(countySlug)}&district=${encodeURIComponent(district)}`;
+  const response = await fetch(url, {
+    headers: { 'User-Agent': 'Watchdog-Server-Scanner/4.0', Accept: 'application/json' },
+    signal: AbortSignal.timeout(25000),
+  });
+  if (!response.ok) throw new Error(`scoped_sales_${response.status}_${countySlug}_${district}`);
+  const value = await response.json();
+  if (String(value?.district || '') !== district || String(value?.county || '') !== countySlug || !Array.isArray(value?.sales)) {
+    throw new Error(`scoped_sales_signature_${countySlug}_${district}`);
+  }
+  if (Number.isFinite(Number(value?.count)) && Number(value.count) !== value.sales.length) {
+    throw new Error(`scoped_sales_count_${countySlug}_${district}`);
+  }
+  cache.set(cacheKey, { expires: Date.now() + ttlMs, value });
   return value;
 }
 
@@ -122,18 +144,17 @@ Deno.serve(async (req) => {
           .map(district => {
             const uniformityRow = uniformity[district] || null;
             const certified = findCertified(certifiedIndex, uniformityRow?.name, uniformityRow?.county || COUNTIES[code]);
-            if (!certified) return null;
             return {
               district,
               name: String(uniformityRow?.name || district),
               verified_sales: Number(districts[district]?.n || 0),
-              certified_year: certified.year,
+              certified_year: certified?.year || null,
+              scanner_ready: Boolean(certified),
             };
           })
-          .filter(Boolean)
           .sort((a: any, b: any) => a.name.localeCompare(b.name));
         return { code, name: COUNTIES[code], towns };
-      }).filter(county => county.towns.length > 0);
+      });
       return json({
         formula_version: FORMULA_VERSION,
         source: { kind: 'NJ certified common-level range', url: CHAPTER123_SOURCE },
@@ -173,7 +194,7 @@ Deno.serve(async (req) => {
     const [appealsJson, taxRatesJson, salesJson, revaluationJson, deadlineRulesJson] = await Promise.all([
       sourceJson('/property/appeals.json'),
       sourceJson('/property/tax-rates.json'),
-      sourceJson(`/property/sales-${countySlug}.json`, 5 * 60 * 1000),
+      scopedSales(countySlug, district),
       sourceJson('/property/revaluation-reassessment-2026.json'),
       sourceJson('/property/appeal-deadline-rules.json'),
     ]);
@@ -279,6 +300,13 @@ Deno.serve(async (req) => {
       generated_at: new Date().toISOString(),
       result: 'ok',
       source: { kind: 'NJ certified common-level range', url: CHAPTER123_SOURCE },
+      sales_source: {
+        kind: 'Watchdog municipality-scoped NJ Division of Taxation SR-1A verified usable sales',
+        endpoint: '/api/sales-by-district',
+        county: countySlug,
+        district,
+        rows: all.length,
+      },
       deadline_source: { kind: 'NJ local property tax appeal filing rules', url: DEADLINE_RULES_SOURCE },
       run: {
         d: district,
