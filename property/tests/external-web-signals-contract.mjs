@@ -26,6 +26,7 @@ assert.match(report, /external_signals_only/);
 assert.match(oauthStart, /webmasters\.readonly/);
 assert.match(oauthStart, /is_watchdog_developer/);
 assert.match(oauthStart, /google_search_console/);
+assert.match(oauthStart, /authorization, x-client-info, apikey, content-type/);
 assert.match(oauthCallback, /google_search_console/);
 assert.match(oauthCallback, /marketing_store_provider_secret/);
 assert.match(oauthCallback, /accessible_sites/);
