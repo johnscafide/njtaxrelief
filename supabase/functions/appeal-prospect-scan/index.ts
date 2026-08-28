@@ -257,6 +257,7 @@ Deno.serve(async (req) => {
         d: district,
         name: municipalityName,
         county: COUNTIES[district.slice(0, 2)] || countyName,
+        ratio: certified.ratio / 100, // legacy client alias; this is the certified Director average ratio
         certified: {
           year: certified.year,
           ratio: certified.ratio / 100,
