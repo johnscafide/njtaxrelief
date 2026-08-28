@@ -6,6 +6,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ANALYTICS = '<script src="/property/js/product-analytics.js" defer></script>';
 const TOWN_MARKER = 'data-search-growth="town-tax-records"';
 const COUNTY_MARKER = 'data-search-growth="county-tax-records"';
+const TOWN_INSIGHT_MARKER = 'data-search-growth="town-insight-link"';
+const TOWN_INSIGHT_HREF = '/insights/nj-2026-modiv-property-assessment-files';
 
 const towns = [
   ['towns/bergen/allendale-borough.html', 'Allendale Borough', 'Bergen'],
@@ -31,6 +33,14 @@ function ensureAnalytics(html) {
   return html.replace('</body>', `${ANALYTICS}</body>`);
 }
 
+function ensureTownInsightLink(html) {
+  if (html.includes(TOWN_INSIGHT_MARKER)) return html;
+  const watchdogMarker = '<section class="tp-watchdog">';
+  if (!html.includes(watchdogMarker)) throw new Error('Could not find Watchdog section while attaching town insight link');
+  const related = `<p class="tp-source" ${TOWN_INSIGHT_MARKER}>Related statewide assessment-record context: <a href="${TOWN_INSIGHT_HREF}">what New Jersey’s 2026 property assessment record actually tells you →</a></p>`;
+  return html.replace(watchdogMarker, related + watchdogMarker);
+}
+
 function setMeta(html, selector, value) {
   const attr = selector.startsWith('property:') ? 'property' : 'name';
   const key = selector.replace(/^(?:property:|name:)/, '');
@@ -46,6 +56,7 @@ function setTitle(html, value) {
 
 function patchTown(html, name, county) {
   html = ensureAnalytics(html);
+  html = ensureTownInsightLink(html);
   if (html.includes(TOWN_MARKER)) return html;
 
   const countyHref = `/towns/${county.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/`;
@@ -85,7 +96,7 @@ function patchCounty(html, county) {
 
   const directoryMarker = '<section class="tp-wrap tp-directory">';
   if (!html.includes(directoryMarker)) throw new Error(`Could not find county directory for ${county}`);
-  const intro = `<section class="tp-wrap tp-section" ${COUNTY_MARKER}><p class="tp-kicker">County property intelligence</p><h2>Find ${county} County property-tax and assessment context</h2><p>Choose the municipality that owns the assessment record, or open Watchdog to search a specific address. These pages summarize governed public context; official assessor, collector and county offices remain the source for filings and current balances.</p><div class="tp-actions"><a class="tp-button" href="/property/" data-organic-property-lookup="county_hub">Look up a property</a><a class="tp-text-link" href="/property/insights/">Read Watchdog insights</a></div></section>`;
+  const intro = `<section class="tp-wrap tp-section" ${COUNTY_MARKER}><p class="tp-kicker">County property intelligence</p><h2>Find ${county} County property-tax and assessment context</h2><p>Choose the municipality that owns the assessment record, or open Watchdog to search a specific address. These pages summarize governed public context; official assessor, collector and county offices remain the source for filings and current balances.</p><div class="tp-actions"><a class="tp-button" href="/property/" data-organic-property-lookup="county_hub">Look up a property</a><a class="tp-text-link" href="/insights/">Read Watchdog insights</a></div></section>`;
   html = html.replace(directoryMarker, intro + directoryMarker);
   return html;
 }
@@ -106,4 +117,16 @@ for (const [relative, county] of counties) {
   if (await applyOne(relative, html => patchCounty(html, county))) changed += 1;
 }
 
-console.log(`Search-growth cohort prepared: ${towns.length} towns, ${counties.length} county hubs, ${changed} files changed in build workspace.`);
+const manifest = JSON.parse(await readFile(path.join(ROOT, 'towns/town-manifest.json'), 'utf8'));
+if (!Array.isArray(manifest.pages) || manifest.pages.length !== 564) {
+  throw new Error(`Expected 564 municipality pages in town manifest; got ${manifest.pages?.length ?? 'invalid'}`);
+}
+let townInsightLinksChanged = 0;
+for (const page of manifest.pages) {
+  if (!page?.path || !String(page.path).startsWith('towns/') || !String(page.path).endsWith('.html')) {
+    throw new Error('Invalid municipality path in town manifest');
+  }
+  if (await applyOne(page.path, ensureTownInsightLink)) townInsightLinksChanged += 1;
+}
+
+console.log(`Search-growth cohort prepared: ${towns.length} towns, ${counties.length} county hubs, ${changed} cohort files changed; town insight links added to ${townInsightLinksChanged} build-workspace pages.`);
