@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-08-27T22:27:59.548Z",
+  "generated_at": "2026-08-28T13:16:48.863Z",
   "source_registry": "property/data/marker-registry.json",
   "formula_specs": "property/data/derived-marker-formulas.json",
   "governance_status_snapshot": "property/data/db-governed-status.json",
@@ -108,8 +108,20 @@
     "watchdog.njplus.environmental_record_resolution",
     "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
+    "watchdog.njplus.latest_yoy_construction_cost_authorized_delta",
+    "watchdog.njplus.latest_yoy_demolitions_delta",
+    "watchdog.njplus.latest_yoy_housing_units_authorized_delta",
+    "watchdog.njplus.latest_yoy_net_housing_unit_change_delta",
+    "watchdog.njplus.latest_yoy_new_housing_units_authorized_delta",
+    "watchdog.njplus.latest_yoy_total_nonresidential_square_feet_delta",
     "watchdog.njplus.municipal_housing_evidence_depth",
     "watchdog.njplus.neighborhood_trend_freshness",
+    "watchdog.njplus.rolling_5yr_construction_cost_authorized",
+    "watchdog.njplus.rolling_5yr_demolitions",
+    "watchdog.njplus.rolling_5yr_housing_units_authorized",
+    "watchdog.njplus.rolling_5yr_net_housing_unit_change",
+    "watchdog.njplus.rolling_5yr_new_housing_units_authorized",
+    "watchdog.njplus.rolling_5yr_total_nonresidential_square_feet",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -242,8 +254,20 @@
     "watchdog.njplus.environmental_record_resolution",
     "watchdog.njplus.environmental_source_currency",
     "watchdog.njplus.housing_supply_delivery_ratio",
+    "watchdog.njplus.latest_yoy_construction_cost_authorized_delta",
+    "watchdog.njplus.latest_yoy_demolitions_delta",
+    "watchdog.njplus.latest_yoy_housing_units_authorized_delta",
+    "watchdog.njplus.latest_yoy_net_housing_unit_change_delta",
+    "watchdog.njplus.latest_yoy_new_housing_units_authorized_delta",
+    "watchdog.njplus.latest_yoy_total_nonresidential_square_feet_delta",
     "watchdog.njplus.municipal_housing_evidence_depth",
     "watchdog.njplus.neighborhood_trend_freshness",
+    "watchdog.njplus.rolling_5yr_construction_cost_authorized",
+    "watchdog.njplus.rolling_5yr_demolitions",
+    "watchdog.njplus.rolling_5yr_housing_units_authorized",
+    "watchdog.njplus.rolling_5yr_net_housing_unit_change",
+    "watchdog.njplus.rolling_5yr_new_housing_units_authorized",
+    "watchdog.njplus.rolling_5yr_total_nonresidential_square_feet",
     "watchdog.offer_diligence_priority",
     "watchdog.parcel_identity_confidence",
     "watchdog.permit_activity_score",
@@ -276,8 +300,8 @@
   "principle": "A derived marker is live only when production Data Center governance records a live or partial executable path. Formula intent alone never promotes a marker. Missing dependencies remain missing rather than receiving synthetic neutral values. Database-governed provider status also overrides stale static status for authoritative public-source markers.",
   "summary": {
     "total_derived": 310,
-    "live": 132,
-    "blocked": 178,
+    "live": 144,
+    "blocked": 166,
     "retired": 0,
     "untriaged": 0
   },
@@ -6790,18 +6814,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_housing_units_authorized_delta",
@@ -6816,18 +6840,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.housing_units_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.rolling_5yr_new_housing_units_authorized",
@@ -6842,18 +6866,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_new_housing_units_authorized_delta",
@@ -6868,18 +6892,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.new_housing_units_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.rolling_5yr_construction_cost_authorized",
@@ -6894,18 +6918,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_construction_cost_authorized_delta",
@@ -6920,18 +6944,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024) - 2023(njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.construction_cost_authorized_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.rolling_5yr_total_nonresidential_square_feet",
@@ -6946,18 +6970,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_total_nonresidential_square_feet_delta",
@@ -6972,18 +6996,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024) - 2023(njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.total_nonresidential_square_feet_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.rolling_5yr_demolitions",
@@ -6998,18 +7022,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_demolitions_delta",
@@ -7024,18 +7048,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.demolitions_history_2020_2024) - 2023(njplus.nj-dca-development-trends.demolitions_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.demolitions_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.rolling_5yr_net_housing_unit_change",
@@ -7050,18 +7074,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "sum(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     },
     {
       "marker_id": "watchdog.njplus.latest_yoy_net_housing_unit_change_delta",
@@ -7076,18 +7100,18 @@
         "investor",
         "municipal"
       ],
-      "governance_status": "blocked",
-      "provider_status_override": null,
+      "governance_status": "live",
+      "provider_status_override": "live",
       "formula": "2024(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024) - 2023(njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024)",
       "dependencies": [
         "njplus.nj-dca-development-trends.net_housing_unit_change_history_2020_2024"
       ],
-      "provider_key": null,
-      "provider_kind": null,
-      "calculation_key": null,
-      "provider_source": null,
-      "bulk_capable": false,
-      "reason": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation."
+      "provider_key": "workbench-hydrate",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-dca-development-trends-window-v1",
+      "provider_source": "NJ DCA Development Trends Viewer · as of 2025-08-21 · latest published annual data 2024 · nj-dca-development-trends-2025-08-21-v1",
+      "bulk_capable": true,
+      "reason": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
     }
   ]
 }

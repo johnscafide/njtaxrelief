@@ -298,6 +298,16 @@
       "live": true,
       "join": "Exact 4-digit DCA municipality code to governed project-row aggregation and municipal AHTF record",
       "warning": "Selected municipality-entered AHMS data; the DCA workbook states it is not comprehensive and is presented as-is without DCA accuracy certification. Watchdog does not infer legal compliance. HUD-subsidized units, LMI cost burden and affordable_units_pipeline remain unavailable from this workbook."
+    },
+    {
+      "id": "nj-dca-development-trends-annual-v038",
+      "label": "NJ DCA Development Trends Viewer annual municipality series",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/codes/reporter/Development_Trend_Viewer.xlsb",
+      "cadence": "annual / source change monitored",
+      "live": true,
+      "join": "Exact 4-digit municipality code to governed 564-municipality annual source artifact",
+      "warning": "Viewer as of 2025-08-21; 2024 is the workbook-designated latest published annual data year. 2025 placeholder columns are not treated as published annual observations. Permit/development facts are not legal, zoning, code-compliance, construction-completion, appraisal, lending, insurance, eligibility, or transaction determinations."
     }
   ]
 }
