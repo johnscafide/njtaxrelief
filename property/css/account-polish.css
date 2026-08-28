@@ -1,4 +1,5 @@
-/* Account-specific layout repair after profile photo/self-service additions. */
+/* Account-specific layout repair after profile photo/self-service additions.
+   NJW-73/NJW-74: this surface consumes the canonical Watchdog token layer. */
 body[data-sidebar-page="account"] .wdx-page-actions>.wdx-btn:not(.primary){display:none!important}
 body[data-sidebar-page="account"] #ac-app{display:flex;flex-direction:column;gap:28px}
 body[data-sidebar-page="account"] #ac-app>.ac-success,
@@ -6,34 +7,34 @@ body[data-sidebar-page="account"] #ac-app>.ac-profile-hero,
 body[data-sidebar-page="account"] #ac-app>.ac-section,
 body[data-sidebar-page="account"] #ac-app>.ac-grid,
 body[data-sidebar-page="account"] #ac-app>.ac-card{margin:0!important}
-body[data-sidebar-page="account"] .ac-profile-hero{display:grid!important;grid-template-columns:auto auto minmax(260px,1fr) minmax(220px,280px)!important;align-items:center!important;gap:22px!important;min-height:190px;padding:30px 34px!important;background:linear-gradient(112deg,#102a4c 0%,#173f66 58%,#0b6c7d 100%)!important;box-shadow:0 18px 42px rgba(18,48,78,.14)}
+body[data-sidebar-page="account"] .ac-profile-hero{display:grid!important;grid-template-columns:auto auto minmax(260px,1fr) minmax(220px,280px)!important;align-items:center!important;gap:22px!important;min-height:190px;padding:30px 34px!important;background:linear-gradient(112deg,var(--wd-navy-950) 0%,var(--wd-navy-900) 58%,var(--wd-teal-600) 100%)!important;box-shadow:var(--shadow-md)}
 body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-wrap{grid-column:1;align-self:center}
 body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-tools{grid-column:2;align-self:center;margin:0!important;min-width:132px;gap:8px}
-body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-tools button{min-height:40px;padding:0 13px;border-radius:10px;font-size:11px}
+body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-tools button{min-height:40px;padding:0 13px;border-radius:var(--radius-md);font-size:var(--type-xs)}
 body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-tools button.ghost{min-height:34px;padding:0 10px}
 body[data-sidebar-page="account"] .ac-profile-hero>div:not(.ac-avatar-wrap):not(.ac-avatar-tools):not(.ac-completion){grid-column:3;min-width:0}
-body[data-sidebar-page="account"] .ac-profile-hero h1{font-size:34px;margin:6px 0 8px}
-body[data-sidebar-page="account"] .ac-profile-hero p{font-size:15px;line-height:1.45}
-body[data-sidebar-page="account"] .ac-completion{grid-column:4;justify-self:end;width:100%;max-width:260px;min-width:0;padding:18px 20px;border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(7,35,63,.22)}
-body[data-sidebar-page="account"] .ac-completion b{font-size:30px;line-height:1}
-body[data-sidebar-page="account"] .ac-completion span{display:block;margin-top:8px;color:#dce7f1;font-size:11px;font-weight:800}
+body[data-sidebar-page="account"] .ac-profile-hero h1{font-size:var(--type-2xl);margin:6px 0 8px}
+body[data-sidebar-page="account"] .ac-profile-hero p{font-size:var(--type-md);line-height:1.45}
+body[data-sidebar-page="account"] .ac-completion{grid-column:4;justify-self:end;width:100%;max-width:260px;min-width:0;padding:18px 20px;border:1px solid rgba(255,255,255,.12);border-radius:var(--radius-lg);background:rgba(7,35,63,.22)}
+body[data-sidebar-page="account"] .ac-completion b{font-size:var(--type-2xl);line-height:1}
+body[data-sidebar-page="account"] .ac-completion span{display:block;margin-top:8px;color:#dce7f1;font-size:var(--type-xs);font-weight:800}
 body[data-sidebar-page="account"] .ac-completion i{height:8px;margin-top:13px}
 body[data-sidebar-page="account"] .ac-section,
 body[data-sidebar-page="account"] .ac-card{padding:26px!important}
 body[data-sidebar-page="account"] .acp-editor{overflow:visible}
 
-@media(max-width:1100px){
+@media(max-width:1024px){
   body[data-sidebar-page="account"] .ac-profile-hero{grid-template-columns:auto auto minmax(0,1fr)!important;min-height:0}
   body[data-sidebar-page="account"] .ac-profile-hero>.ac-completion{grid-column:1/-1;justify-self:stretch;max-width:none}
 }
-@media(max-width:720px){
+@media(max-width:768px){
   body[data-sidebar-page="account"] #ac-app{gap:22px}
   body[data-sidebar-page="account"] .ac-profile-hero{grid-template-columns:auto minmax(0,1fr)!important;gap:16px!important;padding:22px!important}
   body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-wrap{grid-column:1}
   body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-tools{grid-column:2;flex-direction:row;flex-wrap:wrap;align-items:center;min-width:0}
   body[data-sidebar-page="account"] .ac-profile-hero>div:not(.ac-avatar-wrap):not(.ac-avatar-tools):not(.ac-completion){grid-column:1/-1}
   body[data-sidebar-page="account"] .ac-profile-hero>.ac-completion{grid-column:1/-1}
-  body[data-sidebar-page="account"] .ac-profile-hero h1{font-size:28px}
+  body[data-sidebar-page="account"] .ac-profile-hero h1{font-size:var(--type-xl)}
   body[data-sidebar-page="account"] .ac-section,
   body[data-sidebar-page="account"] .ac-card{padding:20px!important}
 }
