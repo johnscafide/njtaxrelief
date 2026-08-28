@@ -1,0 +1,93 @@
+name: One-off UFB v040 release hygiene
+
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-ufb-v040-release-hygiene.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconcile provider overlay, inventory, and remove one-off workflows
+        run: |
+          set -euo pipefail
+          git config user.name "Watchdog release automation"
+          git config user.email "actions@users.noreply.github.com"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+            node <<'NODE'
+          const fs=require('fs');
+          const registryPath='property/data/marker-registry.json';
+          const overlayPath='property/data/db-governed-provider-overlay.json';
+          const inventoryPath='supabase/functions/PRODUCTION-INVENTORY.json';
+          const registry=JSON.parse(fs.readFileSync(registryPath,'utf8'));
+          const overlay=JSON.parse(fs.readFileSync(overlayPath,'utf8'));
+          const inventory=JSON.parse(fs.readFileSync(inventoryPath,'utf8'));
+          const prefix='njplus.nj-dca-ufb-longitudinal.';
+          const rows=(registry.markers||[]).filter(m=>String(m.id||'').startsWith(prefix));
+          if(rows.length!==130) throw new Error(`Expected 130 UFB longitudinal markers, found ${rows.length}`);
+          if(rows.some(m=>m.provider_status!=='live')) throw new Error('UFB longitudinal registry batch is not fully live');
+          if(Number(registry?.summary?.provider_status?.live)!==927) throw new Error(`Expected canonical live count 927, found ${registry?.summary?.provider_status?.live}`);
+          overlay.statuses=overlay.statuses||{};
+          const sampleExisting='njplus.nj-dca-ufb-2025.rut_tax_collection_pct';
+          const detailKey=Object.keys(overlay).find(k=>k!=='statuses' && overlay[k] && typeof overlay[k]==='object' && !Array.isArray(overlay[k]) && overlay[k][sampleExisting] && typeof overlay[k][sampleExisting]==='object' && 'provider_key' in overlay[k][sampleExisting]);
+          if(!detailKey) throw new Error('Could not locate provider-detail map in db-governed-provider-overlay.json');
+          const source='NJ DCA User Friendly Budget Database · annual Summary sheets 2015-2025 · self-reported/unaudited municipal submissions · nj-dca-ufb-2015-2025-v1';
+          for(const row of rows){
+            overlay.statuses[row.id]='live';
+            overlay[detailKey][row.id]={
+              provider_key:'workbench-hydrate',
+              provider_kind:'authoritative_reference',
+              calculation_key:null,
+              source,
+              bulk_capable:true
+            };
+          }
+          const now=new Date().toISOString();
+          overlay.captured_at=now;
+          const wh=inventory?.functions?.['workbench-hydrate'];
+          const pc=inventory?.functions?.['provider-release-canary'];
+          if(!wh||!pc) throw new Error('Production inventory target entries are missing');
+          wh.version=68;
+          wh.sha256='c5881ca06e202b0e19a9e636b5065adc33b98b611a7b783f3bd0d0884b6ea76b';
+          wh.verify_jwt=true;
+          pc.version=34;
+          pc.sha256='3923fa77bf7e9c0a2af7247f508dc9dc79a35a71444bc253a2bae0af426fc01b';
+          pc.verify_jwt=false;
+          inventory.captured_at=now;
+          if(Object.keys(overlay.statuses).filter(id=>id.startsWith(prefix)&&overlay.statuses[id]==='live').length!==130) throw new Error('Overlay status reconciliation did not produce 130 live UFB longitudinal rows');
+          if(Object.keys(overlay[detailKey]).filter(id=>id.startsWith(prefix)&&overlay[detailKey][id]?.provider_key==='workbench-hydrate').length!==130) throw new Error('Overlay provider-detail reconciliation did not produce 130 UFB longitudinal rows');
+          fs.writeFileSync(overlayPath,JSON.stringify(overlay,null,2)+'\n');
+          fs.writeFileSync(inventoryPath,JSON.stringify(inventory,null,2)+'\n');
+          console.log(JSON.stringify({canonical_live:927,ufb_longitudinal_live:130,overlay_detail_key:detailKey,workbench_hydrate:wh,provider_release_canary:pc},null,2));
+          NODE
+            git rm -f --ignore-unmatch \
+              .github/workflows/oneoff-derived-900-audit.yml \
+              .github/workflows/oneoff-ufb-longitudinal-normalized-audit.yml \
+              .github/workflows/oneoff-ufb-v040-build.yml \
+              .github/workflows/oneoff-ufb-v040-controls.yml \
+              .github/workflows/oneoff-ufb-v040-static-reconcile.yml \
+              .github/workflows/oneoff-ufb-v040-release-hygiene.yml
+            git add property/data/db-governed-provider-overlay.json supabase/functions/PRODUCTION-INVENTORY.json
+            if git diff --cached --quiet; then
+              echo "Release hygiene already reconciled."
+              exit 0
+            fi
+            git commit -m "NJW-144 finalize 927-live UFB v040 governance"
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            echo "Concurrent main update detected; retrying release hygiene on latest main."
+            sleep $((attempt*2))
+          done
+          echo "Unable to push release hygiene after retries." >&2
+          exit 1
