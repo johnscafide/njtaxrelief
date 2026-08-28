@@ -5,6 +5,8 @@ import {
   buildTaxRateIndex,
   findTaxRate,
   chapter123Screen,
+  monthsBeforeValuationDate,
+  marketAtValuationDate,
 } from './formula.mjs';
 
 const cors = {
@@ -197,7 +199,10 @@ Deno.serve(async (req) => {
     }
 
     const all = Array.isArray((salesJson as any)?.sales) ? (salesJson as any).sales : [];
-    const currentYear = new Date().getUTCFullYear();
+    const taxYear = certified.year;
+    const valuationYear = taxYear - 1;
+    const valuationDate = `${valuationYear}-10-01`;
+    const saleCutoff = `${valuationYear}-09-30`;
     const driftRaw = Number(districtSource.drift);
     const drift = Number.isFinite(driftRaw) && driftRaw > -0.30 && driftRaw < 0.50 ? driftRaw : null;
     if (drift == null) {
@@ -209,10 +214,11 @@ Deno.serve(async (req) => {
       }, 422);
     }
 
-    const pool = all.filter((sale: any) =>
-      sale?.d === district && String(sale?.c).trim() === '2' && Number(sale?.p) > 40000 && Number(sale?.av) > 5000 &&
-      Number(sale?.av) >= minAssessment && (currentYear - Number(sale?.y)) <= maxYears
-    );
+    const pool = all.filter((sale: any) => {
+      const monthsBefore = monthsBeforeValuationDate(sale?.y, sale?.m, taxYear);
+      return sale?.d === district && String(sale?.c).trim() === '2' && Number(sale?.p) > 40000 && Number(sale?.av) > 5000 &&
+        Number(sale?.av) >= minAssessment && monthsBefore != null && monthsBefore <= maxYears * 12;
+    });
     if (pool.length < 15) {
       return json({
         formula_version: FORMULA_VERSION,
@@ -225,8 +231,11 @@ Deno.serve(async (req) => {
     const countyAppeal = (appealsJson as any)?.counties?.[district.slice(0, 2)] || null;
     const hits: any[] = [];
     for (const sale of pool) {
-      const age = currentYear - Number(sale.y);
-      const market = Number(sale.p) * Math.pow(1 + drift, age);
+      const monthsBefore = monthsBeforeValuationDate(sale.y, sale.m, taxYear);
+      if (monthsBefore == null) continue;
+      const age = monthsBefore / 12;
+      const market = marketAtValuationDate(Number(sale.p), monthsBefore, drift);
+      if (!Number.isFinite(market) || market <= 0) continue;
       const screened = chapter123Screen({ market, assessed: Number(sale.av), certified, taxRate });
       if (!screened?.above) continue;
       const saving = Number(screened.annual_tax_at_stake);
@@ -269,6 +278,8 @@ Deno.serve(async (req) => {
         drift,
         rate: taxRate.multiplier,
         rateYear: taxRate.year,
+        valuationDate,
+        saleCutoff,
         maxYears,
         minSaving,
         minAssessment,
