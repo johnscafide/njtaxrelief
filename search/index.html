@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Search Watchdog</title>
+  <meta name="description" content="Search Watchdog guides, New Jersey town intelligence, professional plays, insights and public data methodology.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.watchdogindex.com/search/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css">
+  <style>
+    :root{--navy:#10294b;--teal:#078486;--ink:#192533;--muted:#667686;--paper:#f5f7f8;--white:#fff;--line:#dfe6e9;--shadow:0 18px 55px rgba(16,41,75,.09)}
+    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Sans 3",Arial,sans-serif}.top{background:#fff;border-bottom:1px solid var(--line)}.top-in{max-width:1160px;margin:0 auto;padding:17px 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{color:var(--navy);font:800 19px "Plus Jakarta Sans",Arial,sans-serif;text-decoration:none}.brand span{color:var(--teal)}.back{color:var(--navy);font-weight:700;text-decoration:none}.hero{max-width:1160px;margin:0 auto;padding:64px 22px 22px}.eyebrow{color:var(--teal);font:800 11px "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase}.hero h1{margin:9px 0 11px;color:var(--navy);font:800 clamp(2.4rem,6vw,4rem)/1 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:-.045em}.hero p{margin:0;max-width:720px;color:var(--muted);font-size:17px;line-height:1.55}.shell{max-width:1160px;margin:0 auto;padding:22px 22px 76px}.search-card{background:#fff;border-radius:22px;padding:26px;box-shadow:var(--shadow)}.scope{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.scope span{background:#eef6f5;color:#45615f;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700}.note{margin:18px 0 0;color:var(--muted);font-size:13px;line-height:1.5}.pagefind-ui{--pagefind-ui-scale:1;--pagefind-ui-primary:var(--teal);--pagefind-ui-text:var(--ink);--pagefind-ui-background:#fff;--pagefind-ui-border:#cbd7db;--pagefind-ui-tag:#eef6f5;font-family:"Source Sans 3",Arial,sans-serif}.pagefind-ui__search-input{border-radius:13px!important;font-size:17px!important}.pagefind-ui__result-title{font-family:"Plus Jakarta Sans",Arial,sans-serif!important;color:var(--navy)!important}.pagefind-ui__result-link{color:var(--navy)!important}.pagefind-ui__result-excerpt{color:var(--muted)!important}@media(max-width:600px){.hero{padding-top:42px}.shell{padding-left:13px;padding-right:13px}.search-card{padding:18px;border-radius:18px}.top-in{padding:14px 16px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="top-in"><a class="brand" href="/">Watchdog<span>.</span></a><a class="back" href="/">Property lookup</a></div></header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">Watchdog knowledge search</div>
+      <h1>Search Watchdog</h1>
+      <p>Search public Watchdog intelligence without mixing this with parcel/address lookup. Results cover guides, town intelligence, professional plays, insights, comparisons and methodology.</p>
+    </section>
+    <section class="shell">
+      <div class="search-card">
+        <div class="scope" aria-label="Search scope"><span>New Jersey towns</span><span>Guides + methodology</span><span>Professional plays</span><span>Insights</span><span>Comparisons</span></div>
+        <div id="watchdog-pagefind-search"></div>
+        <p class="note">Looking for a specific property? Use Watchdog's property lookup instead. Private dashboards, accounts, reports, developer tools and customer records are intentionally excluded from this index.</p>
+      </div>
+    </section>
+  </main>
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded',function(){
+      if(typeof window.PagefindUI!=='function'){
+        document.getElementById('watchdog-pagefind-search').textContent='Search is temporarily unavailable.';
+        return;
+      }
+      new PagefindUI({element:'#watchdog-pagefind-search',showSubResults:true,showImages:false,excerptLength:24,resetStyles:false});
+    });
+  </script>
+</body>
+</html>
