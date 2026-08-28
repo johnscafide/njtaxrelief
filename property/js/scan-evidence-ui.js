@@ -1,7 +1,8 @@
 /* Watchdog Attorney Appeal Pipeline evidence brief.
  * Uses only values returned by the server-authoritative appeal-prospect-scan
- * response. It does not recompute Chapter 123, market value, ranking, filing
- * deadlines, fees, represented status, or appeal outcomes in the browser.
+ * response, plus optional case-value assumptions the attorney explicitly entered
+ * in the current browser tab. It does not recompute Chapter 123, market value,
+ * ranking, filing deadlines, represented status, or appeal outcomes.
  */
 (function () {
   'use strict';
@@ -87,6 +88,21 @@
     return '<div class="notice"><b>Filing-window context, not a deadline.</b> ' + esc(parts.join(' ')) + ' Verify the current notice, forum, revaluation/reassessment status, and any weekend/legal-holiday adjustment. No countdown is generated.</div>';
   }
 
+  function caseValueBlock(hit) {
+    var assumptions = window.__watchdogCaseValueAssumptions;
+    if (!assumptions) return '';
+    var feePct = Number(assumptions.feePct);
+    var years = Number(assumptions.years);
+    var annual = Number(hit && hit.saving);
+    if (!Number.isFinite(feePct) || feePct <= 0 || feePct > 100 || !Number.isFinite(years) || years <= 0 || years > 20 || !Number.isFinite(annual) || annual < 0) return '';
+    var workingValue = annual * (feePct / 100) * years;
+    return '<h2>Attorney-supplied case-value working assumptions</h2><table>' +
+      row('Fee share assumption', feePct + '%', 'Entered by the attorney in this browser tab; Watchdog supplied no default fee percentage') +
+      row('Value horizon', years + ' years', 'Entered by the attorney in this browser tab') +
+      row('Working case-value estimate', money(workingValue), 'Annual tax at stake × fee-share assumption × value horizon; not fee advice or a predicted recovery') +
+      '</table>';
+  }
+
   function factors(hit) {
     var parts = hit && hit.opportunity && Array.isArray(hit.opportunity.parts) ? hit.opportunity.parts : [];
     if (!parts.length) return '<p class="muted">No opportunity-factor detail was returned.</p>';
@@ -132,9 +148,10 @@
       row('Opportunity index', score, band) +
       '</table>' +
       '<h2>Opportunity factors</h2>' + factors(hit) +
+      caseValueBlock(hit) +
       '<h2>Filing-window context</h2>' + deadlineBlock(run) +
       '<h2>Provenance</h2><p class="sources">' + esc(sourceNote()) + (sourceUrl ? '<br>Certified Chapter 123 source: ' + esc(sourceUrl) : '') + '</p>' +
-      '<div class="warn"><b>Screening evidence only.</b> This brief is not a filed pleading, legal opinion, appraisal, appeal-outcome prediction, fee recommendation, or final filing-deadline determination. It contains no owner-contact or represented-status conclusion. Public records cannot establish current condition, renovations, interior finish, exemptions, or other facts that require professional review. Confirm the property record and supporting evidence before action.</div>' +
+      '<div class="warn"><b>Screening evidence only.</b> This brief is not a filed pleading, legal opinion, appraisal, appeal-outcome prediction, fee recommendation, or final filing-deadline determination. Any case-value section appears only when the attorney entered working assumptions in the current browser tab. It contains no owner-contact or represented-status conclusion. Public records cannot establish current condition, renovations, interior finish, exemptions, or other facts that require professional review. Confirm the property record and supporting evidence before action.</div>' +
       '</body></html>';
   }
 
