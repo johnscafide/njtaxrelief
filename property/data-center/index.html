@@ -4,7 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Data Center | Watchdog Property Intelligence</title>
-  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Explore Watchdog's governed New Jersey property intelligence catalog, provider coverage and source freshness. Pro+ members can build, save, export and monitor custom property datasets.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://www.watchdogindex.com/property/data-center">
   <meta name="theme-color" content="#f5f7fb">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -22,72 +24,151 @@
   <link rel="stylesheet" href="/property/css/data-center-mobile-results.css" media="(max-width: 720px)">
   <link rel="stylesheet" href="/property/css/data-center-mobile-recovery.css" media="(max-width: 720px)">
   <link rel="stylesheet" href="/property/css/data-center-mobile-certification.css" media="(max-width: 720px)">
+  <link rel="stylesheet" href="/property/css/data-center-public-v2.css?v=20260829a">
 </head>
-<body data-sidebar-page="data-center" data-plan-auto="true" data-access-require="pro_plus">
+<body data-sidebar-page="data-center" data-plan-auto="true">
   <main>
     <div class="db-shell">
       <div id="property-side-menu"></div>
       <div class="db-workspace">
-        <header class="top">
-          <div class="top-in">
-            <div class="who">
-              <div class="db-noav"><i class="fas fa-table-cells-large"></i></div>
-              <div><span class="top-eyebrow">PRO+ · professional intelligence</span><h1>Data Center</h1><span>Build the exact property dataset your work requires.</span></div>
+        <div class="dcv2-page">
+          <section class="dcv2-hero" aria-labelledby="dc-page-title">
+            <span class="dcv2-eyebrow"><i class="fas fa-table-cells-large"></i> Public data transparency · Pro+ workspace</span>
+            <h1 id="dc-page-title">Build, analyze and monitor governed property datasets.</h1>
+            <p>Explore the data Watchdog can actually resolve, see provider coverage and verification freshness, then use Pro+ to apply selected fields to your own saved-property workspace, export results and schedule recurring views.</p>
+            <div class="dcv2-hero-actions">
+              <button class="dcv2-btn primary" type="button" data-dc-tab="build"><i class="fas fa-sliders"></i> Explore the field catalog</button>
+              <a class="dcv2-btn secondary" href="/property/pro"><i class="fas fa-bolt"></i> Data Center with Pro+</a>
             </div>
-          </div>
-        </header>
-        <div class="dc-shell">
-          <aside class="dc-filter">
-            <div class="dc-brand">
-              <span>FIELD CATALOG</span>
-              <h2>Choose your data</h2>
-              <p>Live provider fields are shown by default. Planned and structurally unavailable fields can be revealed for roadmap visibility.</p>
+          </section>
+
+          <nav class="dcv2-tabs" aria-label="Data Center sections">
+            <button class="dcv2-tab" type="button" data-dc-tab="overview" aria-selected="true">Overview</button>
+            <button class="dcv2-tab" type="button" data-dc-tab="build" aria-selected="false">Build Dataset</button>
+            <button class="dcv2-tab" type="button" data-dc-tab="saved" aria-selected="false">Saved Views &amp; Monitoring</button>
+          </nav>
+
+          <section data-dc-panel="overview">
+            <div class="dcv2-kpis" aria-label="Data Center coverage summary">
+              <article class="dcv2-kpi"><b id="dc-kpi-live">—</b><strong>Live governed fields</strong><span>Fields with a production resolver capable of checking a governed source or calculation.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-bulk">—</b><strong>Bulk-ready fields</strong><span>Live fields designed for bounded multi-property workflows rather than one-record checks only.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-verified">—</b><strong>Latest provider verification</strong><span>Most recent governed verification timestamp across the current live provider contract.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-selected">0</b><strong>Fields in your draft</strong><span>Your browser-local field selection. Private values are not loaded until an entitled build is run.</span></article>
             </div>
-            <label>Search<input id="dc-search" type="search" placeholder="assessment, flood, appeal…"></label>
-            <label>Availability<select id="dc-provider-status"><option value="live">Live providers</option><option value="partial">Partial providers</option><option value="planned">Planned roadmap</option><option value="unavailable">Structurally unavailable</option><option value="">All availability states</option></select></label>
-            <label>Profession<select id="dc-prof"><option value="">All professions</option></select></label>
-            <label>Plan preview<select id="dc-tier"><option value="pro_plus">Pro+ · everything</option><option value="pro">Pro</option><option value="standard">Standard</option></select></label>
-            <label>Category<select id="dc-category"><option value="">All categories</option></select></label>
-            <label>Origin<select id="dc-origin"><option value="">Public + derived</option><option value="public">Public source</option><option value="watchdog-derived">Watchdog derived</option></select></label>
-            <button id="dc-clear" type="button">Clear selected fields</button>
-          </aside>
-          <section class="dc-main">
-            <div class="dc-hero">
-              <div>
-                <span>THE GOVERNED DATASET</span>
-                <h2><b id="dc-total">—</b> catalog markers</h2>
-                <p>Source facts and Watchdog proprietary statistics, labeled by profession, access tier and provider availability.</p>
-              </div>
-              <div class="dc-progress"><b id="dc-percent">—</b><span>of 1,000-marker catalog goal</span><i><em id="dc-progress-bar"></em></i></div>
+
+            <div class="dcv2-grid">
+              <article class="dcv2-card">
+                <div class="dcv2-card-head"><div><h2>Coverage by intelligence family</h2><p>See where the catalog is bulk-ready, live for bounded checks, or structurally unavailable. Select a family to jump directly into the builder.</p></div></div>
+                <div id="dc-category-coverage" class="dcv2-coverage"><div class="dc-monitor-empty">Loading governed coverage…</div></div>
+                <div class="dcv2-legend"><span><i></i> Live · bounded use</span><span><i></i> Bulk ready</span><span><i></i> Structurally unavailable</span></div>
+              </article>
+              <article class="dcv2-card">
+                <div class="dcv2-card-head"><div><h2>Source freshness</h2><p>Verification dates are shown separately from data values. A live provider does not imply every parcel has a value.</p></div></div>
+                <div id="dc-source-freshness" class="dcv2-freshness"><div class="dc-monitor-empty">Loading source freshness…</div></div>
+              </article>
             </div>
-            <div class="dc-stats" id="dc-stats"></div>
-            <div class="dc-selected">
-              <div><b id="dc-selected-count">0 fields selected</b><span>Columns appear in selection order</span></div>
-              <div id="dc-chips"></div>
+
+            <div class="dcv2-usecases">
+              <article class="dcv2-usecase"><i class="fas fa-magnifying-glass-chart"></i><h3>Find the signal behind the record</h3><p>Combine tax, assessment, sales, appeal, development, environmental and Watchdog-derived fields instead of reading one metric in isolation.</p></article>
+              <article class="dcv2-usecase"><i class="fas fa-chart-column"></i><h3>Turn rows into analysis</h3><p>Pro+ result sheets automatically summarize coverage, missingness, numerical ranges and categorical concentration before you export.</p></article>
+              <article class="dcv2-usecase"><i class="fas fa-clock-rotate-left"></i><h3>Save and monitor repeat work</h3><p>Persist useful field sets across devices and schedule governed recurring deliveries without exposing your private property workspace publicly.</p></article>
             </div>
-            <div class="dc-table-wrap">
-              <table>
-                <thead><tr><th class="dc-check"></th><th>Marker</th><th>Category</th><th>Scope</th><th>Plan</th><th>Origin</th><th>Professional fit</th></tr></thead>
-                <tbody id="dc-rows"></tbody>
-              </table>
+          </section>
+
+          <section data-dc-panel="build" hidden>
+            <div class="dc-shell">
+              <aside class="dc-filter">
+                <div class="dc-brand">
+                  <span>FIELD CATALOG</span>
+                  <h2>Choose your data</h2>
+                  <p>Public browsing uses the same governed provider-status contract as the workspace. Selecting fields does not load private property values.</p>
+                </div>
+                <label>Search<input id="dc-search" type="search" placeholder="assessment, flood, appeal…" autocomplete="off"></label>
+                <label>Availability<select id="dc-provider-status"><option value="live">Live providers</option><option value="partial">Partial providers</option><option value="planned">Planned roadmap</option><option value="unavailable">Structurally unavailable</option><option value="">All availability states</option></select></label>
+                <label>Profession<select id="dc-prof"><option value="">All professions</option></select></label>
+                <input id="dc-tier" type="hidden" value="pro_plus">
+                <label>Category<select id="dc-category"><option value="">All categories</option></select></label>
+                <label>Origin<select id="dc-origin"><option value="">Public + derived</option><option value="public">Public source</option><option value="watchdog-derived">Watchdog derived</option></select></label>
+                <button id="dc-clear" type="button">Clear selected fields</button>
+              </aside>
+              <section class="dc-main">
+                <div class="dc-build-intro"><h2>Build a governed dataset</h2><p>Browse publicly, inspect field definitions and select the columns that matter. Pro+ is checked again before any account-owned saved property is queried.</p></div>
+                <span id="dc-total" hidden>—</span><span id="dc-percent" hidden>—</span><span id="dc-progress-bar" hidden></span><div id="dc-stats" hidden></div>
+                <div class="dc-selected" id="dc-selected-workspace">
+                  <div><b id="dc-selected-count">0 fields selected</b><span>Columns appear in selection order</span></div>
+                  <div id="dc-chips"></div>
+                </div>
+                <div class="dc-private-gate" id="dc-private-gate">
+                  <div><strong>Public catalog · private workspace</strong><p data-dc-gate-copy>Browse every governed field publicly. Sign in with Pro+ to run these fields against your saved-property workspace.</p></div>
+                  <a class="dcv2-btn" data-dc-gate-action href="/property/pro">Sign in / view Pro+</a>
+                </div>
+                <div class="dc-table-wrap">
+                  <table>
+                    <thead><tr><th class="dc-check">Add</th><th>Marker</th><th>Availability</th><th>Verified</th><th>Bulk</th><th>Category</th><th>Scope</th><th>Origin</th></tr></thead>
+                    <tbody id="dc-rows"></tbody>
+                  </table>
+                </div>
+                <div class="dc-footnote">Live means Watchdog has a governed resolver capable of checking the field; a particular property may still have no source value. Bulk ready means the provider is designed for bounded multi-property workflows. Unavailable means the connected source structurally cannot supply the field. Missing values are never invented.</div>
+              </section>
             </div>
-            <div class="dc-footnote">A live provider means Watchdog has a resolver capable of checking the field; a particular parcel may still have no source value. Planned means the marker is cataloged but not connected. Unavailable means the connected statewide source structurally cannot supply the field.</div>
+          </section>
+
+          <section data-dc-panel="saved" hidden>
+            <div class="dc-saved-shell">
+              <article class="dc-saved-card">
+                <h2>Saved views</h2>
+                <p>Reusable field and filter sets are private to the signed-in Pro+ account and protected by row-level security.</p>
+                <div id="dc-saved-controls"><div class="dc-monitor-empty">Sign in with Pro+ to load saved views.</div></div>
+              </article>
+              <article class="dc-saved-card">
+                <h2>Monitoring &amp; deliveries</h2>
+                <p>Scheduled Data Center deliveries remain private and never expose a customer property portfolio on this public page.</p>
+                <div id="dc-monitor-list" class="dc-monitor-list"><div class="dc-monitor-empty">No delivery schedule loaded.</div></div>
+              </article>
+            </div>
           </section>
         </div>
       </div>
     </div>
   </main>
+
+  <aside id="dc-marker-drawer" class="dc-drawer" aria-hidden="true" aria-label="Marker details">
+    <button class="dc-drawer-close" type="button" data-dc-drawer-close aria-label="Close marker details"><i class="fas fa-xmark"></i></button>
+    <span class="eyebrow" id="dc-drawer-eyebrow">Data field</span>
+    <h2 id="dc-drawer-title">Marker details</h2>
+    <p id="dc-drawer-description"></p>
+    <dl>
+      <dt>Availability</dt><dd id="dc-drawer-status">—</dd>
+      <dt>Last verified</dt><dd id="dc-drawer-verified">—</dd>
+      <dt>Coverage</dt><dd id="dc-drawer-bulk">—</dd>
+      <dt>Scope</dt><dd id="dc-drawer-scope">—</dd>
+      <dt>Origin</dt><dd id="dc-drawer-origin">—</dd>
+      <dt>Access tier</dt><dd id="dc-drawer-tier">—</dd>
+    </dl>
+    <h3>Why it matters</h3><p id="dc-drawer-why"></p>
+    <div class="dc-drawer-actions"><a id="dc-drawer-link" href="/property/marker">Open full field reference</a><button type="button" data-dc-drawer-close>Back to catalog</button></div>
+  </aside>
+
+  <div id="dc-modal-backdrop" class="dc-modal-backdrop" hidden>
+    <div class="dc-modal" role="dialog" aria-modal="true" aria-labelledby="dc-modal-title">
+      <h2 id="dc-modal-title">Data Center</h2><p id="dc-modal-copy"></p><div id="dc-modal-field"></div>
+      <div class="dc-modal-actions"><button type="button" class="secondary" id="dc-modal-cancel">Cancel</button><button type="button" class="primary" id="dc-modal-confirm">Continue</button></div>
+    </div>
+  </div>
+  <div id="dc-toast" class="dc-toast" role="status" aria-live="polite"></div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
   <script src="/property/js/supabase-singleton-bridge.js"></script>
-  <script src="/property/js/access-guard.js"></script>
   <script src="/property/js/plan-context.js"></script>
   <script src="/property/js/sidemenu.js"></script>
   <script src="/property/js/data-center-shell-2027.js"></script>
+  <script src="/property/js/product-analytics.js?v=20260829a"></script>
   <script src="/property/js/marker-intelligence.js" defer></script>
   <script src="/property/js/city-address-runtime.js?v=20260823a"></script>
-  <script src="/property/js/data-center-runtime-v2.js?v=20260824a"></script>
-  <script src="/property/js/data-center-provider-filter.js?v=20260824a"></script>
+  <script src="/property/js/data-center-runtime-v2.js?v=20260829a"></script>
+  <script src="/property/js/data-center-public-v2.js?v=20260829a"></script>
+  <script src="/property/js/data-center-provider-filter.js?v=20260829a"></script>
   <script src="/property/js/data-center-mobile-actions.js?v=20260822a"></script>
   <script src="/property/js/data-center-mobile-results.js?v=20260822a"></script>
   <script src="/property/js/data-center-mobile-recovery.js?v=20260822a"></script>
