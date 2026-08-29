@@ -76,10 +76,11 @@ assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by cou
 assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 
 // The landing-page launch message stays in normal hero flow after search so it never
-// overlays the address field. It renders as one compact, right-aligned launch chip.
+// overlays the address field. It renders as one compact, centered launch chip.
 assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
 assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
-assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px 0 0 auto/);
+assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px auto 0/);
+assert.match(paidLaunch, /@media\(max-width:768px\).*#wd-paid-launch-hero\{width:min\(430px,100%\);margin:12px auto 0/);
 assert.match(paidLaunch, /wdpl-hero-chip/);
 assert.match(paidLaunch, /Professional plans · Sep 16/);
 assert.match(paidLaunch, /Less than \$2\/day annually/);
