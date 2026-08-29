@@ -27,6 +27,7 @@
 #wd-paid-launch-banner .wdpl-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:var(--radius-sm,.5rem);background:transparent;color:#aebbd0;cursor:pointer;display:grid;place-items:center}\
 #wd-paid-launch-banner .wdpl-close:hover,#wd-paid-launch-banner .wdpl-close:focus-visible{background:rgba(255,255,255,.09);color:var(--surface,#fff);outline:none}\
 #wd-paid-launch-banner.wdpl-hero-overlay{position:absolute;left:0;right:0;bottom:0;z-index:8;background:rgba(14,34,72,.10);border-top:1px solid rgba(255,255,255,.14);border-bottom:0;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}\
+body.wd-consumer-mode .pl-search-card{position:relative;z-index:12}\
 #wd-paid-launch-banner.wdpl-hero-overlay .wdpl-inner{min-height:44px;padding:6px 52px 6px 20px}\
 #wd-paid-launch-banner.wdpl-hero-overlay .wdpl-copy{text-shadow:0 1px 8px rgba(0,0,0,.52)}\
 #wd-paid-launch-banner.wdpl-hero-overlay .wdpl-pill{background:rgba(14,34,72,.16);border-color:rgba(255,255,255,.22);color:#eef4ff}\
