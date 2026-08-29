@@ -12,7 +12,8 @@
     "test:farm-map-basemap": "node property/tests/farm-map-vector-basemap-contract.mjs",
     "test:external-signals": "node property/tests/external-web-signals-contract.mjs",
     "test:search-growth": "node property/tests/search-growth-contract.mjs",
-    "vercel-build": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run pagefind:index"
+    "test:insight-linking": "node property/tests/insight-linking-contract.mjs",
+    "vercel-build": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run test:insight-linking && npm run pagefind:index"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3",
