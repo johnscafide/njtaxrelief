@@ -11,9 +11,9 @@
   var ROTATE_MS=12000;
   var FALLBACK_IMAGE='https://images.unsplash.com/photo-1505843795480-5cfb3c03f6ff?auto=format&fit=crop&w=1200&q=78';
   var COUNTIES=[
-    {county:'Atlantic',slug:'atlantic',image:'Atlantic-city-boardwalk-1376851506eVP.jpg'},
+    {county:'Atlantic',slug:'atlantic',image:'Atlantic City boardwalk.jpg'},
     {county:'Bergen',slug:'bergen',image:'2024-10-07 13 34 06 Panoramic view east from the easternmost land point in New Jersey along the banks of the Hudson River just south of the New York State Line within Palisades Interstate Park in Alpine, Bergen County, New Jersey.jpg'},
-    {county:'Burlington',slug:'burlington',image:'Breidenhart (5).JPG'},
+    {county:'Burlington',slug:'burlington',image:'Smithville Historic Park, NJ.jpg'},
     {county:'Camden',slug:'camden',image:'Ru-camden-campus.jpg'},
     {county:'Cape May',slug:'cape-may',image:'Cape may.jpg'},
     {county:'Cumberland',slug:'cumberland',image:'Fortescue Beach, NJ (2), July 2021.jpg'},
@@ -26,7 +26,7 @@
     {county:'Monmouth',slug:'monmouth',image:'Sandy Hook Lighthouse October 2020 002.jpg'},
     {county:'Morris',slug:'morris',image:'Morristown District NJ.JPG'},
     {county:'Ocean',slug:'ocean',image:'NJ LBI Lighthouse 04.JPG'},
-    {county:'Passaic',slug:'passaic',image:'Geat Falls-2 - Passaic River at Patterson NJ.JPG'},
+    {county:'Passaic',slug:'passaic',image:'Great Falls of Paterson New Jersey image number 8.jpg'},
     {county:'Salem',slug:'salem',image:'Salem Nuclear Power Plant.jpg'},
     {county:'Somerset',slug:'somerset',image:'Somerset County Courthouse, Somerville, NJ - historic, looking northeast.jpg'},
     {county:'Sussex',slug:'sussex',image:'2014-08-28 16 25 14 View of High Point Monument from the base in High Point State Park, New Jersey.JPG'},
