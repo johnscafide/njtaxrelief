@@ -6,6 +6,7 @@ const cohort = await read('scripts/apply-search-growth-cohort.mjs');
 const insightLinksMigration = await read('supabase/migrations/20260829144500_insight_entity_links.sql');
 
 // Independent contract so concurrent Search Growth UI tests can evolve without weakening SEO link governance.
+// Kept separate from the broader Search Growth contract so future landing-page work cannot silently drop this gate.
 // Evidence-led internal linking is bounded: every municipality gets one relevant statewide
 // assessment-record Insight at build time, while published Insights link only explicit entities.
 assert.match(cohort, /town-manifest\.json/);
