@@ -58,6 +58,10 @@ for (const county of countySlugs) {
   assert.match(countyIntel, new RegExp(`slug:'${county}'`));
 }
 assert.equal((countyIntel.match(/slug:'/g) || []).length, 21);
+const countyImages = [...countyIntel.matchAll(/\{county:'[^']+',slug:'[^']+',image:'([^']+)'\}/g)].map((match) => match[1]);
+assert.equal(countyImages.length, 21);
+assert.equal(new Set(countyImages).size, 21);
+assert.match(countyIntel, /Special:FilePath/);
 assert.match(countyIntel, /var ROTATE_MS=12000/);
 assert.match(countyIntel, /deck\.slice\(cursor,cursor\+3\)/);
 assert.match(countyIntel, /cursor\+=3/);
@@ -66,15 +70,22 @@ assert.match(countyIntel, /data-search-growth','landing-county-intel/);
 assert.match(countyIntel, /placeImmediatelyAfterRecents/);
 assert.match(countyIntel, /recents\.nextElementSibling!==section/);
 assert.match(countyIntel, /observer\.observe\(document\.body,\{childList:true\}\)/);
-assert.match(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
-assert.match(countyIntel, /Explore New Jersey property-tax records by county/);
+assert.match(countyIntel, /Browse all NJ county reports/);
+assert.doesNotMatch(countyIntel, /County Watchdog intel · rotating statewide/);
+assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by county/);
+assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 
-// The landing-page launch message is part of normal hero flow, not an overlay over search.
+// The landing-page launch message is a tiny bottom-right hero fact rail. Its only
+// landing CTA is "Get started" under the less-than-$2/day fact.
 assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
 assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
+assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:absolute;right:28px;bottom:18px/);
 assert.match(paidLaunch, /Professional plans/);
 assert.match(paidLaunch, /September 16/);
 assert.match(paidLaunch, /Less than \$2\/day/);
+assert.match(paidLaunch, /wdpl-get-started/);
+assert.match(paidLaunch, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-link/);
 assert.doesNotMatch(paidLaunch, /wdpl-hero-overlay/);
 assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
