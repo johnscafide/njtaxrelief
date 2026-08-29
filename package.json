@@ -14,7 +14,8 @@
     "test:search-growth": "node property/tests/search-growth-contract.mjs",
     "test:insight-linking": "node property/tests/insight-linking-contract.mjs",
     "test:data-center": "node property/tests/data-center-public-contract.mjs",
-    "vercel-build": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run test:insight-linking && npm run test:data-center && npm run pagefind:index"
+    "vercel-build:full": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run test:insight-linking && npm run test:data-center && npm run pagefind:index",
+    "vercel-build": "node scripts/vercel-build-once.mjs"
   },
   "dependencies": {
     "@vercel/functions": "3.9.3",
