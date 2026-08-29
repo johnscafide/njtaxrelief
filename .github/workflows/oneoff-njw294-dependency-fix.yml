@@ -1,0 +1,29 @@
+name: One-off NJW-294 dependency fix
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-njw294-dependency-fix.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Patch derived dependency resolution
+        run: node scripts/njw294-dependency-fix.mjs
+      - name: Commit bounded dependency fix
+        run: |
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add supabase/functions/workbench-derived/index.ts supabase/migrations/20260829143000_fix_njw294_dependency_resolution.sql
+          git diff --cached --check
+          git diff --cached --quiet && exit 0
+          git commit -m 'NJW-294 fix certified raw dependency resolution'
+          git pull --rebase origin main
+          git push origin HEAD:main
