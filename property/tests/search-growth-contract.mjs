@@ -47,16 +47,36 @@ assert.match(cohort, /official assessor, collector and county offices remain the
 assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
 assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
 
-// Landing discovery uses the proven county cohort and keeps search interactions above the hero launch overlay.
+// Landing county discovery rotates through all 21 canonical county hubs, three at a time,
+// and is continuously re-anchored immediately after Recent Properties.
 assert.match(publicNav, /landing-county-intel\.js/);
-for (const county of ['bergen', 'burlington', 'camden']) {
-  assert.match(countyIntel, new RegExp(`href:'\\/towns\\/${county}\\/'`));
+const countySlugs = [
+  'atlantic','bergen','burlington','camden','cape-may','cumberland','essex','gloucester','hudson','hunterdon',
+  'mercer','middlesex','monmouth','morris','ocean','passaic','salem','somerset','sussex','union','warren'
+];
+for (const county of countySlugs) {
+  assert.match(countyIntel, new RegExp(`slug:'${county}'`));
 }
+assert.equal((countyIntel.match(/slug:'/g) || []).length, 21);
+assert.match(countyIntel, /var ROTATE_MS=12000/);
+assert.match(countyIntel, /deck\.slice\(cursor,cursor\+3\)/);
+assert.match(countyIntel, /cursor\+=3/);
+assert.match(countyIntel, /Math\.random/);
 assert.match(countyIntel, /data-search-growth','landing-county-intel/);
-assert.match(countyIntel, /placeAfterRecents/);
+assert.match(countyIntel, /placeImmediatelyAfterRecents/);
+assert.match(countyIntel, /recents\.nextElementSibling!==section/);
+assert.match(countyIntel, /observer\.observe\(document\.body,\{childList:true\}\)/);
+assert.match(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 assert.match(countyIntel, /Explore New Jersey property-tax records by county/);
-assert.match(paidLaunch, /wdpl-hero-overlay\{position:absolute;left:0;right:0;bottom:0;z-index:8/);
-assert.match(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
+
+// The landing-page launch message is part of normal hero flow, not an overlay over search.
+assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
+assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
+assert.match(paidLaunch, /Professional plans/);
+assert.match(paidLaunch, /September 16/);
+assert.match(paidLaunch, /Less than \$2\/day/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-overlay/);
+assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
 assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
