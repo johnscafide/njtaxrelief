@@ -275,5 +275,7 @@ export default async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/', '/:path*']
+  matcher: [
+    '/((?!property/js/|property/css/).*)'
+  ]
 };
