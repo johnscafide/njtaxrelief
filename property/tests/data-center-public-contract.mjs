@@ -8,6 +8,8 @@ const runtime = await read('property/js/data-center-runtime-v2.js');
 const publicRuntime = await read('property/js/data-center-public-v2.js');
 const providerFilter = await read('property/js/data-center-provider-filter.js');
 const publicCss = await read('property/css/data-center-public-v2.css');
+const publicNav = await read('property/js/public-nav.js');
+const publicDataCenterLink = await read('property/js/public-data-center-link.js');
 const analyticsClient = await read('property/js/product-analytics.js');
 const analyticsServer = await read('supabase/functions/product-analytics/index.ts');
 const overviewMigration = await read('supabase/migrations/20260829152600_public_data_center_overview_v1.sql');
@@ -26,6 +28,13 @@ assert.doesNotMatch(html, /data-access-require="pro_plus"/);
 assert.doesNotMatch(html, /1,000-marker catalog goal/i);
 assert.doesNotMatch(html, /Plan preview/i);
 assert.doesNotMatch(html, /data-center-mobile-actions\.js/);
+
+// Public navigation makes the transparency surface discoverable regardless of plan state.
+assert.match(publicNav, /public-data-center-link\.js/);
+assert.match(publicDataCenterLink, /\/property\/data-center/);
+assert.match(publicDataCenterLink, /Data Center/);
+assert.match(publicDataCenterLink, /wd-universal-nav-links/);
+assert.match(publicDataCenterLink, /watchdog:universal-menu-ready/);
 
 // Public browsing and trust visuals use a bounded public RPC; no account property data is requested there.
 assert.match(publicRuntime, /get_public_data_center_overview_v1/);
