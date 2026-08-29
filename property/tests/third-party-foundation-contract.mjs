@@ -4,15 +4,26 @@ import { readFile } from 'node:fs/promises';
 const read = (file) => readFile(new URL(`../../${file}`, import.meta.url), 'utf8');
 const pkg = JSON.parse(await read('package.json'));
 const build = await read('scripts/build-pagefind.mjs');
+const buildWrapper = await read('scripts/vercel-build-once.mjs');
 const search = await read('search/index.html');
 const runtime = await read('property/js/watchdog-third-party.js');
 const config = await read('api/watchdog-third-party-config.js');
 
 assert.equal(pkg.devDependencies?.pagefind, '1.5.2');
 assert.equal(pkg.scripts?.['pagefind:index'], 'node scripts/build-pagefind.mjs');
-const vercelBuild=String(pkg.scripts?.['vercel-build']||'');
-for(const required of ['npm run test:third-party','npm run test:farm-map-basemap','npm run test:external-signals','npm run pagefind:index'])assert.ok(vercelBuild.includes(required),`vercel-build missing ${required}`);
-assert.ok(vercelBuild.indexOf('npm run test:third-party')<vercelBuild.indexOf('npm run pagefind:index'),'third-party contract must run before Pagefind indexing');
+const vercelBuild = String(pkg.scripts?.['vercel-build'] || '');
+const vercelBuildFull = String(pkg.scripts?.['vercel-build:full'] || vercelBuild);
+if (pkg.scripts?.['vercel-build:full']) {
+  assert.equal(vercelBuild, 'node scripts/vercel-build-once.mjs');
+  assert.match(buildWrapper, /vercel-build:full/);
+}
+for (const required of ['npm run test:third-party', 'npm run test:farm-map-basemap', 'npm run test:external-signals', 'npm run pagefind:index']) {
+  assert.ok(vercelBuildFull.includes(required), `Vercel full build pipeline missing ${required}`);
+}
+assert.ok(
+  vercelBuildFull.indexOf('npm run test:third-party') < vercelBuildFull.indexOf('npm run pagefind:index'),
+  'third-party contract must run before Pagefind indexing'
+);
 assert.match(search, /\/pagefind\/pagefind-ui\.js/);
 assert.match(search, /Private dashboards, accounts, reports, developer tools and customer records are intentionally excluded/);
 assert.match(build, /\/admin\//);
