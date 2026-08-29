@@ -75,16 +75,18 @@ assert.doesNotMatch(countyIntel, /County Watchdog intel · rotating statewide/);
 assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by county/);
 assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 
-// The landing-page launch message is a tiny bottom-right hero fact rail. Its only
-// landing CTA is "Get started" under the less-than-$2/day fact.
+// The landing-page launch message stays in normal hero flow after search so it never
+// overlays the address field. It renders as one compact, right-aligned launch chip.
 assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
 assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
-assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:absolute;right:28px;bottom:18px/);
-assert.match(paidLaunch, /Professional plans/);
-assert.match(paidLaunch, /September 16/);
-assert.match(paidLaunch, /Less than \$2\/day/);
+assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px 0 0 auto/);
+assert.match(paidLaunch, /wdpl-hero-chip/);
+assert.match(paidLaunch, /Professional plans · Sep 16/);
+assert.match(paidLaunch, /Less than \$2\/day annually/);
 assert.match(paidLaunch, /wdpl-get-started/);
 assert.match(paidLaunch, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-grid/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-stat/);
 assert.doesNotMatch(paidLaunch, /wdpl-hero-link/);
 assert.doesNotMatch(paidLaunch, /wdpl-hero-overlay/);
 assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
