@@ -925,9 +925,9 @@
       "professional_reason": "Provides municipal support context, never household eligibility."
     },
     "watchdog.njplus.housing_program_record_freshness": {
-      "range": "score / 100",
-      "formula": "age(affordable_housing_reporting_status)",
-      "professional_reason": "Shows when published program data should be refreshed before reliance."
+      "range": "0-100 source-record freshness; 100 on the governed workbook release date and 0 at/after the declared annual refresh horizon",
+      "formula": "100 - elapsed whole days since the 2026-07-01 governed DCA Affordable Housing workbook release / 365 * 100, clamped 0-100; municipality reporting-status evidence is required",
+      "professional_reason": "Shows source-record currency against the DCA source family’s declared annual refresh cadence; it does not assert that an underlying housing fact has or has not changed."
     },
     "watchdog.njplus.amenity_access_profile": {
       "range": "score / 100",
@@ -975,9 +975,9 @@
       "professional_reason": "Highlights when published agreement terms approach expiration."
     },
     "watchdog.njplus.pilot_revenue_concentration": {
-      "range": "score / 100",
-      "formula": "pilot_project_assessment / max(municipal_tax_base, 1)",
-      "professional_reason": "Shows public PILOT exposure relative to the published tax base."
+      "range": "percent of DCA 3-year average property valuation; legacy marker ID retained for compatibility",
+      "formula": "NJ DCA aggregate PILOT assessed value / max(NJ DCA UFB 3-year average property valuation, 1) * 100",
+      "professional_reason": "Legacy-ID assessed-value exposure proxy. It compares observed PILOT assessed value with published municipal valuation and is not PILOT revenue, a revenue share, or a revenue forecast."
     },
     "watchdog.njplus.pilot_forecast_confidence": {
       "range": "score / 100",
@@ -995,9 +995,9 @@
       "professional_reason": "Organizes published assessment history for professional review."
     },
     "watchdog.njplus.parcel_record_volatility": {
-      "range": "score / 100",
-      "formula": "normalized(parcel_record_change_count, property_class_history)",
-      "professional_reason": "Shows the amount of public-record movement, not a property-condition finding."
+      "range": "0-100; percent of actual consecutive annual MOD-IV transitions with any retained record-field change",
+      "formula": "parcel_record_change_count / actual consecutive observed property-class transitions * 100; gaps are skipped and no years are synthesized",
+      "professional_reason": "Shows how frequently the parcel public record changed across comparable annual MOD-IV transitions; it is not a property-condition finding."
     },
     "watchdog.njplus.assessment_component_shift": {
       "range": "score / 100",
