@@ -13,11 +13,14 @@ const EVENTS=new Set([
   'intelligence_exposed','intelligence_reasoning_inspected','intelligence_action_started','intelligence_action_completed',
   'intent_question_shown','intent_question_answered','intent_question_skipped',
   'today_item_reviewed','today_item_snoozed','today_item_dismissed','today_item_reopened',
-  'trust_evidence_opened','presence_heartbeat'
+  'trust_evidence_opened','presence_heartbeat',
+  'data_center_tab_viewed','data_center_searched','data_center_filtered','data_center_field_selected',
+  'data_center_build_started','data_center_dataset_built','data_center_view_saved','data_center_export_completed','data_center_delivery_scheduled'
 ]);
 const PROPERTY_KEYS=new Set([
   'marker_id','plan','tool','action','format','source','result_count_bucket','status','billing_period','tier',
-  'surface','interaction','model','intent_status','queue_state','reason_count_bucket'
+  'surface','interaction','model','intent_status','queue_state','reason_count_bucket',
+  'scope','selected_count_bucket','row_count_bucket','filter'
 ]);
 const AUDIENCE_CLASSES=new Set(['external_visitor','external_account','internal_owner','internal_agent','internal_developer','internal_test']);
 const CLICK_SOURCES=new Set(['google_ads','meta_ads','microsoft_ads','tiktok_ads','linkedin_ads','other_paid']);
