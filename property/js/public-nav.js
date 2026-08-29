@@ -227,6 +227,7 @@
   function init(){
     suppressLegacyIndexUi();
     ensureUniversalMenu();
+    loadScript('wd-public-data-center-link-script','/property/js/public-data-center-link.js');
     ensureMenuInteractionContract();
     bindMenuInteractionContract();
     scopeVerifiedSales();
