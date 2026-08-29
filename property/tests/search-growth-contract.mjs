@@ -13,6 +13,8 @@ const publicNav = await read('property/js/public-nav.js');
 const paidLaunch = await read('property/js/paid-launch-banner.js');
 const countyIntel = await read('property/js/landing-county-intel.js');
 const pkg = JSON.parse(await read('package.json'));
+const vercelBuild = String(pkg.scripts?.['vercel-build'] || '');
+const vercelBuildFull = String(pkg.scripts?.['vercel-build:full'] || '');
 
 // Evidence-led opportunity queue stays transparent and advisory.
 assert.match(signals, /Search opportunities/);
@@ -45,7 +47,8 @@ assert.match(cohort, /data-organic-property-lookup/);
 assert.match(cohort, /product-analytics\.js/);
 assert.match(cohort, /official assessor, collector and county offices remain the source/);
 assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
-assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
+assert.equal(vercelBuild, 'node scripts/vercel-build-once.mjs');
+assert.match(vercelBuildFull, /search-growth:cohort/);
 
 // Landing county discovery rotates through all 21 canonical county hubs, three at a time,
 // and is continuously re-anchored immediately after Recent Properties.
@@ -94,7 +97,7 @@ assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{positi
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
 assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
-assert.match(pkg.scripts['vercel-build'], /public-performance:prepare/);
+assert.match(vercelBuildFull, /public-performance:prepare/);
 assert.match(performance, /property\/css\/lookup\/01-search-hero\.css/);
 assert.match(performance, /rel="preload" as="image"/);
 assert.match(performance, /fetchpriority="high"/);
@@ -106,7 +109,7 @@ assert.match(performance, /property\/index\.html/);
 
 // Weekly movement and acquisition reporting are developer-only and aggregate/privacy scoped.
 assert.equal(pkg.scripts['web-signals-growth:prepare'], 'node scripts/apply-web-signals-growth-ui.mjs');
-assert.match(pkg.scripts['vercel-build'], /web-signals-growth:prepare/);
+assert.match(vercelBuildFull, /web-signals-growth:prepare/);
 assert.match(growthUi, /seo-growth-report/);
 assert.match(growthUi, /Weekly movement/);
 assert.match(growthUi, /Organic acquisition/);
