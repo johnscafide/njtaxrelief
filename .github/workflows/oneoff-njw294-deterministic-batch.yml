@@ -1,0 +1,29 @@
+name: One-off NJW-294 deterministic marker batch
+on:
+  push:
+    paths:
+      - '.github/workflows/oneoff-njw294-deterministic-batch.yml'
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build governed NJW-294 source batch
+        run: node scripts/njw294-deterministic-batch.mjs
+      - name: Commit bounded source batch
+        run: |
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add supabase/functions/workbench-derived/index.ts property/data/derived-marker-formulas.json supabase/migrations/20260829141000_prepare_njw294_deterministic_batch.sql supabase/functions/provider-release-canary/njw294-deterministic-batch-canary.ts supabase/functions/provider-release-canary/production-v043-bootstrap.ts docs/property/njw-294-deterministic-batch-certification-2026-08-29.md
+          git diff --cached --check
+          git diff --cached --quiet && exit 0
+          git commit -m 'NJW-294 prepare deterministic marker batch'
+          git pull --rebase origin main
+          git push origin HEAD:main
