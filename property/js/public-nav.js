@@ -177,6 +177,7 @@
     loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
+    loadScript('wd-landing-county-intel-script','/property/js/landing-county-intel.js');
   }
 
   function runAddressFromQuery(){
