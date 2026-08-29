@@ -31,20 +31,21 @@
 #wd-paid-launch-banner .wdpl-cta:hover,#wd-paid-launch-banner .wdpl-cta:focus-visible{filter:brightness(.9);transform:translateY(-1px);outline:none}\
 #wd-paid-launch-banner .wdpl-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:.5rem;background:transparent;color:#aebbd0;cursor:pointer;display:grid;place-items:center}\
 #wd-paid-launch-banner .wdpl-close:hover,#wd-paid-launch-banner .wdpl-close:focus-visible{background:rgba(255,255,255,.09);color:#fff;outline:none}\
-#wd-paid-launch-hero{box-sizing:border-box;width:min(980px,calc(100vw - 48px));margin:34px auto 0;color:#fff;font-family:var(--font-ui,"Plus Jakarta Sans",Arial,sans-serif);position:relative;z-index:4}\
+body.wd-consumer-mode .pl-hero{position:relative}\
+#wd-paid-launch-hero{box-sizing:border-box;position:absolute;right:28px;bottom:18px;z-index:2;width:min(520px,calc(100% - 56px));margin:0;color:#fff;font-family:var(--font-ui,"Plus Jakarta Sans",Arial,sans-serif);pointer-events:none}\
 #wd-paid-launch-hero *{box-sizing:border-box}\
-#wd-paid-launch-hero .wdpl-hero-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;border-radius:20px;background:rgba(4,20,39,.22);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);overflow:hidden;box-shadow:0 12px 34px rgba(3,14,29,.10)}\
-#wd-paid-launch-hero .wdpl-hero-stat{min-width:0;padding:18px 28px;text-align:left;position:relative;text-shadow:0 2px 12px rgba(0,0,0,.42)}\
-#wd-paid-launch-hero .wdpl-hero-stat+.wdpl-hero-stat:before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:rgba(255,255,255,.42)}\
-#wd-paid-launch-hero strong{display:block;color:#fff;font-size:clamp(18px,2vw,25px);font-weight:800;line-height:1.08;letter-spacing:-.035em}\
-#wd-paid-launch-hero span{display:block;margin-top:7px;color:rgba(255,255,255,.88);font-size:14px;font-weight:600;line-height:1.3}\
-#wd-paid-launch-hero .wdpl-hero-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:#fff!important;text-decoration:none;font-size:13px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.5)}\
-#wd-paid-launch-hero .wdpl-hero-link:hover,#wd-paid-launch-hero .wdpl-hero-link:focus-visible{text-decoration:underline;text-underline-offset:4px;outline:none}\
+#wd-paid-launch-hero .wdpl-hero-grid{display:grid;grid-template-columns:1.15fr .72fr 1fr;align-items:stretch;border-radius:12px;background:rgba(4,20,39,.18);border:1px solid rgba(255,255,255,.12);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);overflow:hidden;box-shadow:none}\
+#wd-paid-launch-hero .wdpl-hero-stat{min-width:0;padding:9px 12px;text-align:left;position:relative;text-shadow:0 1px 8px rgba(0,0,0,.42)}\
+#wd-paid-launch-hero .wdpl-hero-stat+.wdpl-hero-stat:before{content:"";position:absolute;left:0;top:22%;bottom:22%;width:1px;background:rgba(255,255,255,.34)}\
+#wd-paid-launch-hero strong{display:block;color:#fff;font-size:13px;font-weight:800;line-height:1.12;letter-spacing:-.02em}\
+#wd-paid-launch-hero span{display:block;margin-top:4px;color:rgba(255,255,255,.78);font-size:9.5px;font-weight:600;line-height:1.25}\
+#wd-paid-launch-hero .wdpl-get-started{display:inline-flex;align-items:center;gap:5px;margin-top:5px;color:#fff!important;text-decoration:none;font-size:10px;font-weight:800;line-height:1.1;pointer-events:auto;text-shadow:0 1px 8px rgba(0,0,0,.48)}\
+#wd-paid-launch-hero .wdpl-get-started:hover,#wd-paid-launch-hero .wdpl-get-started:focus-visible{text-decoration:underline;text-underline-offset:3px;outline:none}\
 body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,46px)}\
 @media(min-width:769px){html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid){position:absolute!important;top:var(--wd-paid-launch-height,46px)!important;right:0!important;bottom:auto!important;left:0!important;height:78px!important;min-height:78px!important;margin:0!important;transform:none!important}html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid) .wd-nav-in{height:78px!important;min-height:78px!important;box-sizing:border-box!important;padding:7px 26px!important;margin:0 auto!important;align-items:center!important;transform:none!important}}\
 #launch-list{display:block;position:relative;top:-18px;visibility:hidden}\
-@media(max-width:768px){#wd-paid-launch-banner .wdpl-inner{min-height:54px;padding:7px 48px 7px 14px;justify-content:flex-start;gap:9px}#wd-paid-launch-banner .wdpl-copy{display:block;font-size:.75rem}#wd-paid-launch-banner .wdpl-pill{display:none}#wd-paid-launch-banner .wdpl-cta{margin-left:auto;padding:8px 10px;font-size:.75rem;white-space:nowrap}#wd-paid-launch-hero{width:min(100% - 28px,980px);margin-top:26px}#wd-paid-launch-hero .wdpl-hero-stat{padding:15px 13px}#wd-paid-launch-hero strong{font-size:16px;letter-spacing:-.02em}#wd-paid-launch-hero span{font-size:11px;margin-top:5px}#wd-paid-launch-hero .wdpl-hero-link{font-size:12px;margin-top:10px}}\
-@media(max-width:480px){#wd-paid-launch-hero .wdpl-hero-grid{border-radius:16px}#wd-paid-launch-hero .wdpl-hero-stat{padding:13px 9px}#wd-paid-launch-hero strong{font-size:14px;line-height:1.15}#wd-paid-launch-hero span{font-size:9.5px;line-height:1.25}}';
+@media(max-width:768px){#wd-paid-launch-banner .wdpl-inner{min-height:54px;padding:7px 48px 7px 14px;justify-content:flex-start;gap:9px}#wd-paid-launch-banner .wdpl-copy{display:block;font-size:.75rem}#wd-paid-launch-banner .wdpl-pill{display:none}#wd-paid-launch-banner .wdpl-cta{margin-left:auto;padding:8px 10px;font-size:.75rem;white-space:nowrap}#wd-paid-launch-hero{right:14px;bottom:14px;width:min(480px,calc(100% - 28px))}#wd-paid-launch-hero .wdpl-hero-stat{padding:8px 9px}#wd-paid-launch-hero strong{font-size:11px}#wd-paid-launch-hero span{font-size:8.5px;margin-top:3px}#wd-paid-launch-hero .wdpl-get-started{font-size:9px;margin-top:4px}}\
+@media(max-width:480px){#wd-paid-launch-hero{right:10px;bottom:10px;width:calc(100% - 20px)}#wd-paid-launch-hero .wdpl-hero-grid{border-radius:10px}#wd-paid-launch-hero .wdpl-hero-stat{padding:7px 7px}#wd-paid-launch-hero strong{font-size:10px;line-height:1.15}#wd-paid-launch-hero span{font-size:7.5px;line-height:1.2}#wd-paid-launch-hero .wdpl-get-started{font-size:8px}}';
     document.head.appendChild(style);
   }
 
@@ -94,10 +95,10 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
     node.setAttribute('role','region');
     node.setAttribute('aria-label','Professional plan launch details');
     node.innerHTML='<div class="wdpl-hero-grid">'+
-      '<div class="wdpl-hero-stat"><strong>Professional plans</strong><span>Watchdog tools for real-estate professionals</span></div>'+
-      '<div class="wdpl-hero-stat"><strong>'+LAUNCH_LABEL+'</strong><span>Scheduled enrollment launch</span></div>'+
-      '<div class="wdpl-hero-stat"><strong>Less than $2/day</strong><span>To get started with annual billing</span></div>'+
-      '</div><a class="wdpl-hero-link" href="'+CTA_HREF+'" data-paid-launch-cta>Join the launch list <i class="fas fa-arrow-right"></i></a>';
+      '<div class="wdpl-hero-stat"><strong>Professional plans</strong><span>For real-estate professionals</span></div>'+
+      '<div class="wdpl-hero-stat"><strong>'+LAUNCH_LABEL+'</strong><span>Scheduled launch</span></div>'+
+      '<div class="wdpl-hero-stat"><strong>Less than $2/day</strong><span>With annual billing</span><a class="wdpl-get-started" href="'+CTA_HREF+'" data-paid-launch-cta>Get started <i class="fas fa-arrow-right"></i></a></div>'+
+      '</div>';
     node.querySelector('[data-paid-launch-cta]').addEventListener('click',function(){track('paid_launch_banner_click',{launch_date:'2026-09-16',destination:'launch-list',surface:'hero_facts'});});
     return node;
   }
