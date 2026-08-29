@@ -9,6 +9,9 @@ const growthUi = await read('scripts/apply-web-signals-growth-ui.mjs');
 const growthReport = await read('supabase/functions/seo-growth-report/index.ts');
 const migration = await read('supabase/migrations/20260828203000_search_growth_measurement.sql');
 const signals = await read('property/analytics/web-signals/index.html');
+const publicNav = await read('property/js/public-nav.js');
+const paidLaunch = await read('property/js/paid-launch-banner.js');
+const countyIntel = await read('property/js/landing-county-intel.js');
 const pkg = JSON.parse(await read('package.json'));
 
 // Evidence-led opportunity queue stays transparent and advisory.
@@ -43,6 +46,17 @@ assert.match(cohort, /product-analytics\.js/);
 assert.match(cohort, /official assessor, collector and county offices remain the source/);
 assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
 assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
+
+// Landing discovery uses the proven county cohort and keeps search interactions above the hero launch overlay.
+assert.match(publicNav, /landing-county-intel\.js/);
+for (const county of ['bergen', 'burlington', 'camden']) {
+  assert.match(countyIntel, new RegExp(`href:'\\/towns\\/${county}\\/'`));
+}
+assert.match(countyIntel, /data-search-growth','landing-county-intel/);
+assert.match(countyIntel, /placeAfterRecents/);
+assert.match(countyIntel, /Explore New Jersey property-tax records by county/);
+assert.match(paidLaunch, /wdpl-hero-overlay\{position:absolute;left:0;right:0;bottom:0;z-index:8/);
+assert.match(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
 assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
