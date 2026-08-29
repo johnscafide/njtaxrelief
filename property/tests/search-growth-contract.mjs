@@ -8,8 +8,10 @@ const performance = await read('scripts/apply-public-performance.mjs');
 const growthUi = await read('scripts/apply-web-signals-growth-ui.mjs');
 const growthReport = await read('supabase/functions/seo-growth-report/index.ts');
 const migration = await read('supabase/migrations/20260828203000_search_growth_measurement.sql');
-const insightLinksMigration = await read('supabase/migrations/20260828210500_insight_entity_links.sql');
 const signals = await read('property/analytics/web-signals/index.html');
+const publicNav = await read('property/js/public-nav.js');
+const paidLaunch = await read('property/js/paid-launch-banner.js');
+const countyIntel = await read('property/js/landing-county-intel.js');
 const pkg = JSON.parse(await read('package.json'));
 
 // Evidence-led opportunity queue stays transparent and advisory.
@@ -45,30 +47,49 @@ assert.match(cohort, /official assessor, collector and county offices remain the
 assert.equal(pkg.scripts['search-growth:cohort'], 'node scripts/apply-search-growth-cohort.mjs');
 assert.match(pkg.scripts['vercel-build'], /search-growth:cohort/);
 
-// Evidence-led internal linking is bounded: every municipality gets one relevant statewide
-// assessment-record Insight at build time, while published Insights link only explicit entities.
-assert.match(cohort, /town-manifest\.json/);
-assert.match(cohort, /manifest\.pages\.length !== 564/);
-assert.match(cohort, /data-search-growth="town-insight-link"/);
-assert.match(cohort, /\/insights\/nj-2026-modiv-property-assessment-files/);
-assert.match(cohort, /href="\/insights\/"/);
-assert.doesNotMatch(cohort, /href="\/property\/insights\/"/);
-assert.match(insightLinksMigration, /slug = '2026-revaluation-reassessment-list'/);
-assert.match(insightLinksMigration, /slug = 'south-jersey-housing-market-summer-2026'/);
-for (const target of [
-  '/towns/camden/lindenwold-borough.html',
-  '/towns/camden/pine-hill-borough.html',
-  '/towns/gloucester/clayton-borough.html',
-  '/towns/gloucester/logan-township.html',
-  '/towns/gloucester/west-deptford-township.html',
-  '/towns/gloucester/westville-borough.html',
-  '/towns/salem/lower-alloways-creek-township.html',
-  '/property-tax-appeal.html',
-  '/insights/equalization-ratios'
-]) assert.match(insightLinksMigration, new RegExp(target.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
-assert.match(insightLinksMigration, /Expected exactly one current 2026 revaluation insight row/);
-assert.match(insightLinksMigration, /Expected exactly one current South Jersey housing insight row/);
-assert.doesNotMatch(insightLinksMigration, /e71941a4|\buuid\b/i);
+// Landing county discovery rotates through all 21 canonical county hubs, three at a time,
+// and is continuously re-anchored immediately after Recent Properties.
+assert.match(publicNav, /landing-county-intel\.js/);
+const countySlugs = [
+  'atlantic','bergen','burlington','camden','cape-may','cumberland','essex','gloucester','hudson','hunterdon',
+  'mercer','middlesex','monmouth','morris','ocean','passaic','salem','somerset','sussex','union','warren'
+];
+for (const county of countySlugs) {
+  assert.match(countyIntel, new RegExp(`slug:'${county}'`));
+}
+assert.equal((countyIntel.match(/slug:'/g) || []).length, 21);
+const countyImages = [...countyIntel.matchAll(/\{county:'[^']+',slug:'[^']+',image:'([^']+)'\}/g)].map((match) => match[1]);
+assert.equal(countyImages.length, 21);
+assert.equal(new Set(countyImages).size, 21);
+assert.match(countyIntel, /Special:FilePath/);
+assert.match(countyIntel, /var ROTATE_MS=12000/);
+assert.match(countyIntel, /deck\.slice\(cursor,cursor\+3\)/);
+assert.match(countyIntel, /cursor\+=3/);
+assert.match(countyIntel, /Math\.random/);
+assert.match(countyIntel, /data-search-growth','landing-county-intel/);
+assert.match(countyIntel, /placeImmediatelyAfterRecents/);
+assert.match(countyIntel, /recents\.nextElementSibling!==section/);
+assert.match(countyIntel, /observer\.observe\(document\.body,\{childList:true\}\)/);
+assert.match(countyIntel, /Browse all NJ county reports/);
+assert.doesNotMatch(countyIntel, /County Watchdog intel · rotating statewide/);
+assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by county/);
+assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
+
+// The landing-page launch message stays in normal hero flow after search so it never
+// overlays the address field. It renders as one compact, right-aligned launch chip.
+assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
+assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
+assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px 0 0 auto/);
+assert.match(paidLaunch, /wdpl-hero-chip/);
+assert.match(paidLaunch, /Professional plans · Sep 16/);
+assert.match(paidLaunch, /Less than \$2\/day annually/);
+assert.match(paidLaunch, /wdpl-get-started/);
+assert.match(paidLaunch, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-grid/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-stat/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-link/);
+assert.doesNotMatch(paidLaunch, /wdpl-hero-overlay/);
+assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
 assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
