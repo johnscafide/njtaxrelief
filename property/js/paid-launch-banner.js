@@ -9,6 +9,13 @@
     try{if(typeof window.gtag==='function')window.gtag('event',name,params||{});}catch(_){}
   }
 
+  function isLanding(){
+    var path=(location.pathname||'').replace(/\/+$/,'');
+    var host=String(location.hostname||'').toLowerCase();
+    var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
+    return path==='/property'||path==='/property/index.html'||root;
+  }
+
   function addStyles(){
     if(document.getElementById('wd-paid-launch-styles'))return;
     var style=document.createElement('style');
@@ -18,27 +25,26 @@
 #wd-paid-launch-banner *{box-sizing:border-box}\
 #wd-paid-launch-banner .wdpl-inner{min-height:46px;max-width:var(--container-wide,1500px);margin:0 auto;padding:var(--space-2,8px) 28px;display:flex;align-items:center;justify-content:center;gap:var(--space-3,12px)}\
 #wd-paid-launch-banner .wdpl-copy{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;font-size:var(--type-sm,.875rem);line-height:1.35}\
-#wd-paid-launch-banner .wdpl-pill{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;border:1px solid rgba(255,255,255,.18);border-radius:var(--radius-pill,999px);padding:var(--space-1,4px) var(--space-2,8px);color:#dbe7ff;font-size:var(--type-xs,.75rem);font-weight:800;letter-spacing:.07em;text-transform:uppercase}\
-#wd-paid-launch-banner .wdpl-pill i{color:#dbe7ff}\
-#wd-paid-launch-banner strong{font-weight:800;color:var(--surface,#fff)}\
-#wd-paid-launch-banner .wdpl-plans{color:#aebbd0;white-space:nowrap}\
-#wd-paid-launch-banner .wdpl-cta{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;background:var(--wd-navy-700,#1456a0);color:var(--surface,#fff)!important;border-radius:var(--radius-md,.75rem);padding:var(--space-2,8px) var(--space-3,12px);text-decoration:none;font-size:var(--type-xs,.75rem);font-weight:800;line-height:1;transition:filter .15s ease,transform .15s ease}\
+#wd-paid-launch-banner .wdpl-pill{display:inline-flex;align-items:center;gap:6px;flex:0 0 auto;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:4px 8px;color:#dbe7ff;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase}\
+#wd-paid-launch-banner strong{font-weight:800;color:#fff}\
+#wd-paid-launch-banner .wdpl-cta{display:inline-flex;align-items:center;gap:7px;flex:0 0 auto;background:#1456a0;color:#fff!important;border-radius:.75rem;padding:8px 12px;text-decoration:none;font-size:.75rem;font-weight:800;line-height:1;transition:filter .15s ease,transform .15s ease}\
 #wd-paid-launch-banner .wdpl-cta:hover,#wd-paid-launch-banner .wdpl-cta:focus-visible{filter:brightness(.9);transform:translateY(-1px);outline:none}\
-#wd-paid-launch-banner .wdpl-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:var(--radius-sm,.5rem);background:transparent;color:#aebbd0;cursor:pointer;display:grid;place-items:center}\
-#wd-paid-launch-banner .wdpl-close:hover,#wd-paid-launch-banner .wdpl-close:focus-visible{background:rgba(255,255,255,.09);color:var(--surface,#fff);outline:none}\
-#wd-paid-launch-banner.wdpl-hero-overlay{position:absolute;left:0;right:0;bottom:0;z-index:8;background:rgba(14,34,72,.10);border-top:1px solid rgba(255,255,255,.14);border-bottom:0;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}\
-body.wd-consumer-mode .pl-search-card{position:relative;z-index:12}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-inner{min-height:44px;padding:6px 52px 6px 20px}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-copy{text-shadow:0 1px 8px rgba(0,0,0,.52)}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-pill{background:rgba(14,34,72,.16);border-color:rgba(255,255,255,.22);color:#eef4ff}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-pill i{color:#eef4ff}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-cta{background:rgba(20,86,160,.76);box-shadow:0 2px 10px rgba(0,0,0,.12)}\
-#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-close{color:rgba(255,255,255,.68)}\
+#wd-paid-launch-banner .wdpl-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:.5rem;background:transparent;color:#aebbd0;cursor:pointer;display:grid;place-items:center}\
+#wd-paid-launch-banner .wdpl-close:hover,#wd-paid-launch-banner .wdpl-close:focus-visible{background:rgba(255,255,255,.09);color:#fff;outline:none}\
+#wd-paid-launch-hero{box-sizing:border-box;width:min(980px,calc(100vw - 48px));margin:34px auto 0;color:#fff;font-family:var(--font-ui,"Plus Jakarta Sans",Arial,sans-serif);position:relative;z-index:4}\
+#wd-paid-launch-hero *{box-sizing:border-box}\
+#wd-paid-launch-hero .wdpl-hero-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;border-radius:20px;background:rgba(4,20,39,.22);border:1px solid rgba(255,255,255,.16);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);overflow:hidden;box-shadow:0 12px 34px rgba(3,14,29,.10)}\
+#wd-paid-launch-hero .wdpl-hero-stat{min-width:0;padding:18px 28px;text-align:left;position:relative;text-shadow:0 2px 12px rgba(0,0,0,.42)}\
+#wd-paid-launch-hero .wdpl-hero-stat+.wdpl-hero-stat:before{content:"";position:absolute;left:0;top:18%;bottom:18%;width:1px;background:rgba(255,255,255,.42)}\
+#wd-paid-launch-hero strong{display:block;color:#fff;font-size:clamp(18px,2vw,25px);font-weight:800;line-height:1.08;letter-spacing:-.035em}\
+#wd-paid-launch-hero span{display:block;margin-top:7px;color:rgba(255,255,255,.88);font-size:14px;font-weight:600;line-height:1.3}\
+#wd-paid-launch-hero .wdpl-hero-link{display:inline-flex;align-items:center;gap:8px;margin-top:12px;color:#fff!important;text-decoration:none;font-size:13px;font-weight:800;text-shadow:0 1px 8px rgba(0,0,0,.5)}\
+#wd-paid-launch-hero .wdpl-hero-link:hover,#wd-paid-launch-hero .wdpl-hero-link:focus-visible{text-decoration:underline;text-underline-offset:4px;outline:none}\
 body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,46px)}\
-@media(min-width:769px){html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid){position:absolute!important;top:var(--wd-paid-launch-height,46px)!important;right:0!important;bottom:auto!important;left:0!important;height:78px!important;min-height:78px!important;margin:0!important;transform:none!important}html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid) .wd-nav-in{height:78px!important;min-height:78px!important;box-sizing:border-box!important;padding:7px 26px!important;margin:0 auto!important;align-items:center!important;transform:none!important}html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid) .wd-logo{align-self:center!important;margin:0!important;transform:none!important}html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid) .wd-public-trigger{align-self:center!important;margin-top:0!important;margin-bottom:0!important;transform:none!important}}\
+@media(min-width:769px){html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid){position:absolute!important;top:var(--wd-paid-launch-height,46px)!important;right:0!important;bottom:auto!important;left:0!important;height:78px!important;min-height:78px!important;margin:0!important;transform:none!important}html.wd-index-lean-runtime body.wd-paid-launch-visible #wd-nav:not(.solid) .wd-nav-in{height:78px!important;min-height:78px!important;box-sizing:border-box!important;padding:7px 26px!important;margin:0 auto!important;align-items:center!important;transform:none!important}}\
 #launch-list{display:block;position:relative;top:-18px;visibility:hidden}\
-@media(max-width:768px){#wd-paid-launch-banner .wdpl-inner{min-height:54px;padding:7px 48px 7px 14px;justify-content:flex-start;gap:9px}#wd-paid-launch-banner .wdpl-copy{display:block;font-size:var(--type-xs,.75rem)}#wd-paid-launch-banner .wdpl-pill,#wd-paid-launch-banner .wdpl-plans{display:none}#wd-paid-launch-banner .wdpl-cta{margin-left:auto;padding:var(--space-2,8px) 10px;font-size:var(--type-xs,.75rem);white-space:nowrap}#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-inner{min-height:48px;padding:6px 46px 6px 14px}#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-cta{background:rgba(20,86,160,.72)}}\
-@media(max-width:480px){#wd-paid-launch-banner .wdpl-inner{align-items:center}.wdpl-copy strong{display:block}#wd-paid-launch-banner .wdpl-copy .wdpl-date-copy{display:none}#wd-paid-launch-banner.wdpl-hero-overlay .wdpl-copy strong{font-size:11.5px;line-height:1.3}}';
+@media(max-width:768px){#wd-paid-launch-banner .wdpl-inner{min-height:54px;padding:7px 48px 7px 14px;justify-content:flex-start;gap:9px}#wd-paid-launch-banner .wdpl-copy{display:block;font-size:.75rem}#wd-paid-launch-banner .wdpl-pill{display:none}#wd-paid-launch-banner .wdpl-cta{margin-left:auto;padding:8px 10px;font-size:.75rem;white-space:nowrap}#wd-paid-launch-hero{width:min(100% - 28px,980px);margin-top:26px}#wd-paid-launch-hero .wdpl-hero-stat{padding:15px 13px}#wd-paid-launch-hero strong{font-size:16px;letter-spacing:-.02em}#wd-paid-launch-hero span{font-size:11px;margin-top:5px}#wd-paid-launch-hero .wdpl-hero-link{font-size:12px;margin-top:10px}}\
+@media(max-width:480px){#wd-paid-launch-hero .wdpl-hero-grid{border-radius:16px}#wd-paid-launch-hero .wdpl-hero-stat{padding:13px 9px}#wd-paid-launch-hero strong{font-size:14px;line-height:1.15}#wd-paid-launch-hero span{font-size:9.5px;line-height:1.25}}';
     document.head.appendChild(style);
   }
 
@@ -54,7 +60,7 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
 
   function syncNavOffset(){
     var banner=document.getElementById('wd-paid-launch-banner');
-    if(!banner||!document.body||banner.classList.contains('wdpl-hero-overlay')){clearNavOffset();return;}
+    if(!banner||!document.body){clearNavOffset();return;}
     document.body.classList.add('wd-paid-launch-visible');
     document.body.style.setProperty('--wd-paid-launch-height',Math.ceil(banner.getBoundingClientRect().height)+'px');
   }
@@ -74,7 +80,7 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
     node.setAttribute('aria-label','Watchdog paid plans launch announcement');
     node.innerHTML='<div class="wdpl-inner">'+
       '<span class="wdpl-pill"><i class="fas fa-bolt"></i> Paid plans</span>'+
-      '<div class="wdpl-copy"><strong>Professional plans are scheduled to open '+LAUNCH_LABEL+'.</strong> <span class="wdpl-date-copy">Get started for less than $2/day with annual billing.</span></div>'+
+      '<div class="wdpl-copy"><strong>Professional plans are scheduled to open '+LAUNCH_LABEL+'.</strong> Get started for less than $2/day with annual billing.</div>'+
       '<a class="wdpl-cta" href="'+CTA_HREF+'" data-paid-launch-cta>Join the launch list <i class="fas fa-arrow-right"></i></a>'+
       '</div><button class="wdpl-close" type="button" aria-label="Dismiss launch announcement"><i class="fas fa-xmark"></i></button>';
     node.querySelector('.wdpl-close').addEventListener('click',dismiss);
@@ -82,26 +88,45 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
     return node;
   }
 
+  function heroRailMarkup(){
+    var node=document.createElement('aside');
+    node.id='wd-paid-launch-hero';
+    node.setAttribute('role','region');
+    node.setAttribute('aria-label','Professional plan launch details');
+    node.innerHTML='<div class="wdpl-hero-grid">'+
+      '<div class="wdpl-hero-stat"><strong>Professional plans</strong><span>Watchdog tools for real-estate professionals</span></div>'+
+      '<div class="wdpl-hero-stat"><strong>'+LAUNCH_LABEL+'</strong><span>Scheduled enrollment launch</span></div>'+
+      '<div class="wdpl-hero-stat"><strong>Less than $2/day</strong><span>To get started with annual billing</span></div>'+
+      '</div><a class="wdpl-hero-link" href="'+CTA_HREF+'" data-paid-launch-cta>Join the launch list <i class="fas fa-arrow-right"></i></a>';
+    node.querySelector('[data-paid-launch-cta]').addEventListener('click',function(){track('paid_launch_banner_click',{launch_date:'2026-09-16',destination:'launch-list',surface:'hero_facts'});});
+    return node;
+  }
+
+  function placeHeroRail(){
+    var existing=document.getElementById('wd-paid-launch-hero');
+    if(existing){clearNavOffset();return true;}
+    var hero=document.querySelector('.pl-hero');
+    var inner=hero&&hero.querySelector('.pl-hero-inner');
+    var search=inner&&inner.querySelector('.pl-search-card');
+    if(!hero||!inner||!search)return false;
+    var stale=document.getElementById('wd-paid-launch-banner');
+    if(stale&&hero.contains(stale))stale.remove();
+    search.insertAdjacentElement('afterend',heroRailMarkup());
+    clearNavOffset();
+    return true;
+  }
+
   function placeBanner(){
+    if(isLanding())return placeHeroRail();
     if(dismissed()){clearNavOffset();return true;}
     var existing=document.getElementById('wd-paid-launch-banner');
     if(existing){syncNavOffset();return true;}
-
-    var hero=document.querySelector('.pl-hero');
-    if(hero){
-      var heroBanner=bannerMarkup();
-      heroBanner.classList.add('wdpl-hero-overlay');
-      hero.appendChild(heroBanner);
-      clearNavOffset();
-      return true;
-    }
-
     var nav=document.getElementById('wd-property-nav')||document.getElementById('wd-nav');
     if(nav&&nav.parentNode){nav.insertAdjacentElement('afterend',bannerMarkup());requestAnimationFrame(syncNavOffset);return true;}
     return false;
   }
 
-  function ensureBanner(){
+  function ensureLaunchSurface(){
     addStyles();
     if(placeBanner())return;
     var attempts=0;
@@ -167,6 +192,6 @@ body.wd-paid-launch-visible .wd-nav:not(.solid){top:var(--wd-paid-launch-height,
     if(location.hash==='#launch-list')setTimeout(function(){var a=document.getElementById('launch-list');if(a)a.scrollIntoView({behavior:'smooth',block:'start'});},120);
   }
 
-  function init(){ensureBanner();adaptProPage();window.addEventListener('resize',syncNavOffset,{passive:true});}
+  function init(){ensureLaunchSurface();adaptProPage();window.addEventListener('resize',syncNavOffset,{passive:true});}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
