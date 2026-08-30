@@ -89,7 +89,7 @@ assert.match(paidLaunch, /cloneTemplate\('wd-paid-launch-hero-template'\)/);
 assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',node\)/);
 assert.match(paidLaunchPartial, /id="wd-paid-launch-hero"/);
 assert.match(paidLaunchPartial, /wdpl-hero-chip/);
-assert.match(paidLaunchPartial, /Professional plans · Sep 16/);
+assert.match(paidLaunchPartial, /Professional plans begin Sep 16/);
 assert.match(paidLaunchPartial, /Less than \$2\/day annually/);
 assert.match(paidLaunchPartial, /wdpl-get-started/);
 assert.match(paidLaunchPartial, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
