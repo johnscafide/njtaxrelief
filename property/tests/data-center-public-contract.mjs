@@ -24,6 +24,11 @@ assert.match(html, /Saved Views &amp; Monitoring/);
 assert.match(html, /Live governed fields/);
 assert.match(html, /Bulk-ready fields/);
 assert.match(html, /Latest provider verification/);
+assert.match(html, /Connected coverage health/);
+assert.match(html, /Verification recency across live fields/);
+assert.match(html, /Configured refresh policy reflects each field’s expected source cadence/);
+assert.match(html, /id="dc-category-coverage-template"/);
+assert.match(html, /id="dc-source-freshness-template"/);
 assert.doesNotMatch(html, /data-access-require="pro_plus"/);
 assert.doesNotMatch(html, /1,000-marker catalog goal/i);
 assert.doesNotMatch(html, /Plan preview/i);
@@ -38,11 +43,16 @@ assert.match(publicDataCenterLink, /watchdog:universal-menu-ready/);
 
 // Public browsing and trust visuals use a bounded public RPC; no account property data is requested there.
 assert.match(publicRuntime, /get_public_data_center_overview_v1/);
-assert.match(publicRuntime, /Coverage by intelligence family|renderCoverage/);
-assert.match(publicRuntime, /Source freshness|renderFreshness/);
+assert.match(publicRuntime, /renderCoverage/);
+assert.match(publicRuntime, /renderFreshness/);
+assert.match(publicRuntime, /dc-coverage-recent-pct/);
+assert.match(publicRuntime, /dc-recency-bar-recent/);
+assert.match(publicRuntime, /dc-source-freshness-template/);
+assert.match(publicRuntime, /cloneNode\(true\)/);
 assert.match(publicRuntime, /data-marker-detail/);
 assert.doesNotMatch(publicRuntime, /from\(['"]saved_properties['"]\)/);
 assert.doesNotMatch(publicRuntime, /data_center_delivery_jobs/);
+assert.doesNotMatch(publicRuntime, /host\.innerHTML\s*=\s*rows\.map/);
 
 // Provider state no longer requires a public browser read of the protected provider-coverage table.
 assert.match(providerFilter, /get_public_data_center_overview_v1/);
