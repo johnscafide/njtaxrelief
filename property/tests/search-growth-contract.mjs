@@ -11,6 +11,8 @@ const migration = await read('supabase/migrations/20260828203000_search_growth_m
 const signals = await read('property/analytics/web-signals/index.html');
 const publicNav = await read('property/js/public-nav.js');
 const paidLaunch = await read('property/js/paid-launch-banner.js');
+const paidLaunchPartial = await read('property/partials/paid-launch.html');
+const paidLaunchCss = await read('property/css/paid-launch.css');
 const countyIntel = await read('property/js/landing-county-intel.js');
 const pkg = JSON.parse(await read('package.json'));
 const vercelBuild = String(pkg.scripts?.['vercel-build'] || '');
@@ -79,21 +81,25 @@ assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by cou
 assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 
 // The landing-page launch message stays in normal hero flow after search so it never
-// overlays the address field. It renders as one compact, centered launch chip.
-assert.match(paidLaunch, /id='wd-paid-launch-hero'/);
-assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',heroRailMarkup\(\)\)/);
-assert.match(paidLaunch, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px auto 0/);
-assert.match(paidLaunch, /@media\(max-width:768px\).*#wd-paid-launch-hero\{width:min\(430px,100%\);margin:12px auto 0/);
-assert.match(paidLaunch, /wdpl-hero-chip/);
-assert.match(paidLaunch, /Professional plans · Sep 16/);
-assert.match(paidLaunch, /Less than \$2\/day annually/);
-assert.match(paidLaunch, /wdpl-get-started/);
-assert.match(paidLaunch, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
-assert.doesNotMatch(paidLaunch, /wdpl-hero-grid/);
-assert.doesNotMatch(paidLaunch, /wdpl-hero-stat/);
-assert.doesNotMatch(paidLaunch, /wdpl-hero-link/);
-assert.doesNotMatch(paidLaunch, /wdpl-hero-overlay/);
-assert.doesNotMatch(paidLaunch, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
+// overlays the address field. Static markup/copy lives in HTML, presentation in CSS,
+// and JavaScript owns only loading, placement, state, and analytics.
+assert.match(paidLaunch, /PARTIAL_URL='\/property\/partials\/paid-launch\.html'/);
+assert.match(paidLaunch, /CSS_URL='\/property\/css\/paid-launch\.css'/);
+assert.match(paidLaunch, /cloneTemplate\('wd-paid-launch-hero-template'\)/);
+assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',node\)/);
+assert.match(paidLaunchPartial, /id="wd-paid-launch-hero"/);
+assert.match(paidLaunchPartial, /wdpl-hero-chip/);
+assert.match(paidLaunchPartial, /Professional plans · Sep 16/);
+assert.match(paidLaunchPartial, /Less than \$2\/day annually/);
+assert.match(paidLaunchPartial, /wdpl-get-started/);
+assert.match(paidLaunchPartial, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
+assert.match(paidLaunchCss, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px auto 0/);
+assert.match(paidLaunchCss, /@media\(max-width:768px\)[\s\S]*#wd-paid-launch-hero\{width:min\(430px,100%\);margin:12px auto 0/);
+assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-grid/);
+assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-stat/);
+assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-link/);
+assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-overlay/);
+assert.doesNotMatch(paidLaunchCss, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
 assert.equal(pkg.scripts['public-performance:prepare'], 'node scripts/apply-public-performance.mjs');
