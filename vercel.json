@@ -250,8 +250,6 @@
     {"source":"/property/insights/admin.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
     {"source":"/property/data-workbench.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
     {"source":"/property/data-workbench","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/data-center","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/data-center.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
     {"source":"/property/growth/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]}
   ]
 }
