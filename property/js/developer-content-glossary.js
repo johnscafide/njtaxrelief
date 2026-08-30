@@ -7,7 +7,7 @@
   var filters=document.getElementById('cg-filters');
   var GH='https://github.com/johnscafide/njtaxrelief/blob/main/';
 
-  function esc(value){return String(value||'').replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[ch];});}
+  function esc(value){return String(value||'').replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
   function highlight(value,query){var text=esc(value);if(!query)return text;var safe=query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return text.replace(new RegExp('('+safe+')','ig'),'<mark>$1</mark>');}
   function matches(entry){if(state.owner!=='all'&&entry.owner!==state.owner)return false;if(!state.query)return true;var hay=[entry.text,entry.file,entry.owner,entry.contentClass,entry.guidance].join(' ').toLowerCase();return hay.includes(state.query.toLowerCase());}
   function render(){
