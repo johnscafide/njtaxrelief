@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" class="access-pending" data-access-require="developer" data-developer-only="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#10294b">
+  <title>Content Glossary · Watchdog Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/developer-content-glossary.css">
+</head>
+<body>
+  <main class="cg-shell">
+    <header class="cg-topbar">
+      <a class="cg-brand" href="/developer"><span class="cg-mark"><i class="fas fa-dog"></i></span><span><strong>Watchdog</strong><small>Developer · Content Glossary</small></span></a>
+      <a class="cg-back" href="/developer"><i class="fas fa-arrow-left"></i> Command Center</a>
+    </header>
+
+    <section class="cg-hero">
+      <div>
+        <div class="cg-kicker"><i class="fas fa-book-open"></i> Auto-generated source map</div>
+        <h1>Find any Watchdog text.</h1>
+        <p>Search copy, labels, placeholders and runtime strings to see exactly which file owns them, where they appear, and whether they are safe to edit directly.</p>
+      </div>
+      <aside class="cg-rule"><strong>Ownership rule</strong><span>Static copy → HTML</span><span>Presentation → CSS</span><span>Behavior/state/data → JavaScript</span><span>Governed editorial → CMS</span></aside>
+    </section>
+
+    <section class="cg-stats" aria-label="Glossary summary">
+      <div><span id="cg-entry-count">—</span><small>Indexed strings</small></div>
+      <div><span id="cg-file-count">—</span><small>Source files</small></div>
+      <div><span id="cg-html-count">—</span><small>HTML entries</small></div>
+      <div><span id="cg-js-count">—</span><small>JS entries</small></div>
+    </section>
+
+    <section class="cg-controls" aria-label="Content glossary controls">
+      <label class="cg-search"><i class="fas fa-magnifying-glass"></i><input id="cg-search" type="search" autocomplete="off" placeholder="Search exact wording, file name, HTML, JS, CMS…"></label>
+      <div class="cg-filters" id="cg-filters">
+        <button class="active" type="button" data-owner="all">All</button>
+        <button type="button" data-owner="HTML">HTML</button>
+        <button type="button" data-owner="JS">JavaScript</button>
+        <button type="button" data-owner="CMS">CMS</button>
+      </div>
+    </section>
+
+    <div class="cg-status" id="cg-status">Loading generated glossary…</div>
+    <section class="cg-results" id="cg-results" aria-live="polite"></section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/js/developer-content-glossary.js"></script>
+</body>
+</html>
