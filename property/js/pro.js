@@ -7,6 +7,7 @@
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
   var INTELLIGENCE_CATALOG_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/billing-price-catalog';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var INTELLIGENCE_STYLES='/property/css/pro-intelligence-offer.css';
 
   function trackEvent(name,params){
     if(typeof window.gtag==='function')window.gtag('event',name,params||{});
@@ -19,22 +20,9 @@
     }).catch(function(e){console.error('Fragment load failed',e);});
   }
 
-  function sourceProof(){
-    var origin=document.getElementById('pro-origin');
-    if(!origin||document.getElementById('pro-source-proof'))return;
-    var section=document.createElement('section');
-    section.className='pro-section pro-source-proof pro-reveal';
-    section.id='pro-source-proof';
-    section.setAttribute('aria-labelledby','pro-source-proof-title');
-    section.innerHTML='<div class="pro-wrap">'+
-      '<div class="pro-section-head"><h2 id="pro-source-proof-title">Source transparency before the sale.</h2><p>Watchdog shows the public-record basis behind professional signals and says when the evidence is too thin to support a reliable read.</p></div>'+
-      '<div class="pro-mini-proof"><span><b>564</b> New Jersey municipalities</span><span><b>131,244</b> SR1A verified sales on file</span><span><b>55.2%</b> statewide median assessment-to-market ratio</span></div>'+
-      '<div class="pro-origin-grid">'+
-        '<div class="pro-origin-stamp"><span>Verified sourcing</span><strong>Evidence beside the answer.</strong><small>Watchdog uses New Jersey Division of Taxation SR1A verified sales and equalization context from the Table of Equalized Valuations where the governed model calls for it.</small></div>'+
-        '<div class="pro-origin-copy"><h2>Know what supports the result.</h2><p>Watchdog distinguishes source facts, normalized fields, derived markers and screening signals. When the evidence is too thin, the product should decline to manufacture a number.</p><div class="pro-origin-points"><span><i class="fas fa-file-signature"></i> SR1A verified sales</span><span><i class="fas fa-scale-balanced"></i> Equalization context</span><span><i class="fas fa-circle-check"></i> Confidence + missingness</span><span><i class="fas fa-link"></i> Source lineage</span></div><p>Public-record screening is decision support. It is not a formal appraisal, legal opinion, title determination or tax-appeal conclusion.</p><a class="pro-btn pro-btn-quiet" href="/property/data-methodology">Read the data methodology <i class="fas fa-arrow-right"></i></a></div>'+
-      '</div>'+
-    '</div>';
-    origin.insertAdjacentElement('afterend',section);
+  function ensureStylesheet(href){
+    if(document.querySelector('link[href="'+href+'"]'))return;
+    var link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);
   }
 
   function reveal(){
@@ -97,15 +85,7 @@
     buttons.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.cadence,true);});});set('yearly',false);
   }
 
-  function intelligenceStyles(){
-    if(document.getElementById('pro-intelligence-offer-styles'))return;
-    var style=document.createElement('style');
-    style.id='pro-intelligence-offer-styles';
-    style.textContent='\
-.pro-intelligence-promo{position:relative;overflow:hidden;margin:26px 0 8px;padding:1px;border-radius:18px;background:linear-gradient(115deg,#087f80,#6c5ce7,#d760b5,#087f80);background-size:300% 300%;animation:wdIntelBorder 8s linear infinite}.pro-intelligence-promo:before{content:"";position:absolute;inset:1px;border-radius:17px;background:#fff}.pro-intelligence-promo-inner{position:relative;z-index:1;display:grid;grid-template-columns:minmax(180px,.65fr) minmax(0,1.8fr) auto;gap:20px;align-items:center;padding:19px 21px}.pro-intelligence-promo-label{font:500 10px/1.3 "DM Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#087f80}.pro-intelligence-promo strong{display:block;font:800 19px/1.2 "Plus Jakarta Sans",sans-serif;color:#10213a}.pro-intelligence-promo p{margin:4px 0 0;color:#59677a;font-size:13px;line-height:1.5}.pro-intelligence-promo-price{text-align:right;white-space:nowrap}.pro-intelligence-promo-price b{display:block;color:#087f80;font:800 15px/1.2 "Plus Jakarta Sans",sans-serif}.pro-intelligence-promo-price small{color:#7b8797;font-size:11px}.pro-intel-plan{margin:14px 0 4px;padding:11px 12px;border:1px solid rgba(8,127,128,.25);border-radius:11px;background:rgba(8,127,128,.06);color:#20334b;font-size:12px;line-height:1.45}.pro-price-band.plus .pro-intel-plan{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.08);color:inherit}.pro-intel-plan b{display:block;margin-bottom:2px;color:#087f80;font:700 10px/1.25 "DM Mono",monospace;letter-spacing:.05em;text-transform:uppercase}.pro-price-band.plus .pro-intel-plan b{color:#72d2cc}.pro-intelligence-row>div:first-child{font-weight:700}.pro-intelligence-row .yes{font-size:12px}.pro-platform-note.pro-intelligence-live{color:#33445d}.pro-platform-side.watchdog .pro-coming-badge.pro-intelligence-live-badge{background:rgba(8,127,128,.1);color:#087f80}.pro-faq-card[data-intelligence-faq] i{color:#087f80}@keyframes wdIntelBorder{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}@media(max-width:760px){.pro-intelligence-promo-inner{grid-template-columns:1fr;gap:8px}.pro-intelligence-promo-price{text-align:left}.pro-intelligence-promo strong{font-size:17px}}@media(prefers-reduced-motion:reduce){.pro-intelligence-promo{animation:none}}';
-    document.head.appendChild(style);
-  }
-
+  /* content-architecture: dynamic — this wording reflects the live billing catalog/promotion state. */
   function renderIntelligenceOffer(catalog){
     var intelligence=catalog&&catalog.intelligence||{};
     var promo=intelligence.promotion||{};
@@ -115,7 +95,7 @@
     var included=Array.isArray(intelligence.included_plans)?intelligence.included_plans:['pro_plus','teams'];
     var promoActive=promo.active===true;
     var promoLabel=String(promo.label||'Limited time');
-    intelligenceStyles();
+    ensureStylesheet(INTELLIGENCE_STYLES);
 
     var priceHead=document.querySelector('.pro-price-head');
     if(priceHead){
@@ -255,6 +235,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');sourceProof();reveal();story();roleTabs();pricing();intelligencePricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-nav','/property/partials/nav.html');loadFragment('main-footer','/property/partials/footer.html');reveal();story();roleTabs();pricing();intelligencePricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

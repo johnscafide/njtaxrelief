@@ -1,0 +1,48 @@
+name: Content architecture contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/js/**'
+      - 'property/partials/**'
+      - 'property/**/*.html'
+      - 'property/css/**'
+      - 'scripts/check-content-architecture.mjs'
+      - 'docs/CONTENT_ARCHITECTURE.md'
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/**'
+      - 'property/partials/**'
+      - 'property/**/*.html'
+      - 'property/css/**'
+      - 'scripts/check-content-architecture.mjs'
+      - 'docs/CONTENT_ARCHITECTURE.md'
+
+permissions:
+  contents: read
+
+jobs:
+  content-architecture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Use Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Check new JavaScript copy ownership
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PUSH_BASE_SHA: ${{ github.event.before }}
+        run: |
+          BASE_SHA="${PR_BASE_SHA:-$PUSH_BASE_SHA}"
+          if [ -z "$BASE_SHA" ] || [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            BASE_SHA="HEAD^"
+          fi
+          node scripts/check-content-architecture.mjs --base "$BASE_SHA"
