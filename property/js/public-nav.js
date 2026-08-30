@@ -5,13 +5,6 @@
 (function(){
   'use strict';
 
-  if(!window.NJPTRSupabaseRuntime&&document.readyState==='loading'){
-    document.write('<script src="/property/js/supabase-runtime.js"><\/script>');
-  }
-  if(!window.WatchdogUniversalMenu&&document.readyState==='loading'){
-    document.write('<script src="/property/js/watchdog-universal-menu.js"><\/script>');
-  }
-
   /* Keep third-party/resource failures from escalating into the lookup page's
      customer-facing fatal banner. This is an error-boundary contract only; it
      does not own or mutate any navigation/profile markup. */
@@ -114,7 +107,7 @@
     document.dispatchEvent(new CustomEvent('watchdog:public-menu-open',{detail:{menu:profile?'profile':'main'}}));
   }
 
-  function close(restoreFocus){
+    function close(restoreFocus){
     ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
       var e=q(id);if(!e)return;e.classList.remove('open');e.setAttribute('aria-hidden','true');
     });
@@ -122,6 +115,11 @@
     if(document.body){document.body.classList.remove('wd-public-menu-open','wd-profile-menu-open');}
     if(restoreFocus!==false&&lastFocus&&lastFocus.focus)lastFocus.focus();
     lastFocus=null;
+    /* The universal menu skips rendering while a sheet is open, so apply any
+       auth/plan changes that landed during that window now that it is closed. */
+    if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.refresh==='function'){
+      window.WatchdogUniversalMenu.refresh();
+    }
   }
 
   function setUser(user){
