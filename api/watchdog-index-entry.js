@@ -11,6 +11,8 @@ const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c
 const CONSENT_TAG = '  <script src="/property/js/watchdog-consent.js"></script>\n';
 const OWNERSHIP_TAG = '<script src="/property/js/ownership-verification.js"></script>';
 const FREE_GRID_TAG = '<script src="/property/js/free-imagery-grid-runtime.js"></script>\n';
+const SUPABASE_TAG = '<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>\n';
+const SUPABASE_SINGLETON_TAG = '<script src="/property/js/supabase-client-singleton-guard.js"></script>\n';
 const PAID_LAUNCH_META = '  <meta name="watchdog-paid-launch" content="2026-09-16">\n';
 const PAID_LAUNCH_TAG = '  <script defer src="/property/js/paid-launch-banner.js"></script>\n';
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
@@ -78,6 +80,15 @@ function installFreeGridImagery(source) {
   return source.replace(OWNERSHIP_TAG, FREE_GRID_TAG + OWNERSHIP_TAG);
 }
 
+function installSupabaseSingletonGuard(source) {
+  if (source.includes('/property/js/supabase-client-singleton-guard.js')) return source;
+  if (!source.includes(SUPABASE_TAG)) {
+    console.warn('WATCHDOG_SUPABASE_SINGLETON_MARKER_MISSING');
+    return source;
+  }
+  return source.replace(SUPABASE_TAG, SUPABASE_TAG + SUPABASE_SINGLETON_TAG);
+}
+
 function installPaidLaunch(source) {
   if (source.includes('name="watchdog-paid-launch"') && source.includes('/property/js/paid-launch-banner.js')) return source;
   if (source.includes('</head>')) {
@@ -110,6 +121,10 @@ function canonicalizeWatchdogHtml(source) {
     .replace(
       '<meta property="og:url" content="https://www.watchdogindex.com/property/">',
       `<meta property="og:url" content="${CANONICAL_ORIGIN}">`
+    )
+    .replace(
+      '<link rel="manifest" href="/site.webmanifest">',
+      '<link rel="manifest" href="/property/site.webmanifest">'
     )
     .replace(
       '"@id": "https://www.watchdogindex.com/property/#app"',
@@ -154,7 +169,8 @@ export default async function handler(req, res) {
     ]);
     const consentFirst = installConsentFirstAnalytics(source);
     const freeImagery = installFreeGridImagery(consentFirst);
-    const canonical = canonicalizeWatchdogHtml(useSharedFooter(freeImagery, sharedFooter));
+    const singletonAuth = installSupabaseSingletonGuard(freeImagery);
+    const canonical = canonicalizeWatchdogHtml(useSharedFooter(singletonAuth, sharedFooter));
     const html = installPaidLaunch(canonical);
 
     res.statusCode = 200;
