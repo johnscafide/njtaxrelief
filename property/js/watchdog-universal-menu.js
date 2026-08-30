@@ -167,10 +167,15 @@
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
       '<nav class="wd-universal-nav-links" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
-  function patchPublicDrawer(){
+    function patchPublicDrawer(){
     var sheet = document.getElementById('wd-main-sheet');
     if(!sheet) return;
     sheet.classList.add('wd-universal-public-nav');
+    /* Never rewrite the drawer while it is open. Replacing innerHTML mid-tap
+       destroys the anchor before the browser finishes the activation event,
+       which silently swallows the navigation (always on WebKit/iOS,
+       intermittently on Chromium). public-nav.js re-runs refresh() on close. */
+    if(sheet.classList.contains('open')) return;
     var html = publicDrawerHtml();
     if(sheet.innerHTML !== html){ sheet.innerHTML = html; sheet.dataset.wdUniversal = VERSION; }
   }
@@ -200,8 +205,9 @@
   function patchProfiles(){
     var publicSheet = document.getElementById('wd-profile-sheet');
     var publicHost = document.getElementById('wd-profile-content');
-    if(publicSheet && publicHost){
+      if(publicSheet && publicHost){
       publicSheet.classList.add('wd-universal-public-profile');
+      if(publicSheet.classList.contains('open')) return;
       var oldHead = publicSheet.querySelector(':scope > .wd-public-sheet-head');
       if(oldHead) oldHead.setAttribute('aria-hidden','true');
       publicHost.classList.add('wd-universal-profile');
@@ -307,8 +313,8 @@
     if(observed) observed.add(node);
     new MutationObserver(queue).observe(node,{childList:true,subtree:true});
   }
-  function attachTargetObservers(){
-    ['wd-main-sheet','wd-profile-content','wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });
+    function attachTargetObservers(){
+    ['wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });
     document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(watchTarget);
   }
   function refresh(){
