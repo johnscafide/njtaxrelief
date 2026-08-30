@@ -61,6 +61,18 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visu
   right:24px!important;
   bottom:18px!important;
 }
+
+/* Mapless property-photo CTA is stable presentation, not runtime behavior. */
+html.wd-index-lean-runtime #plm-photos .wd-mapless-copy{display:none!important}
+html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-note{margin-top:8px!important}
+html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-link{color:#9eece4!important;font-weight:850;text-decoration:underline;text-underline-offset:3px}
+html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-link:hover,
+html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-link:focus-visible{color:#fff!important}
+
+@media(min-width:701px){
+  html.wd-index-lean-runtime #plm-photos{grid-template-columns:minmax(0,1fr)!important;gap:0!important}
+  html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero{grid-column:1/-1!important;width:100%!important}
+}
 @media(max-width:640px){
   html.wd-index-lean-runtime #wd-consumer-recents .wd-property-photo.wd-score-visual .wd-recent-score{
     top:14px!important;

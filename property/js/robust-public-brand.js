@@ -48,6 +48,9 @@
     loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260825-mapless1');
   }
 
+  /* Transitional shared/legacy bridge. The universal menu is the canonical
+     source; this only keeps the original static landing drawer aligned until
+     that component has patched the page. */
   function syncPublicMenu(){
     var sheet=document.getElementById('wd-main-sheet');
     if(!sheet)return;
@@ -69,6 +72,10 @@
     }
   }
 
+  /* NJW-296 follow-up: landing-showcase.js still owns the original static
+     showcase markup. Keep this compatibility normalization bounded until that
+     whole showcase scaffold is extracted to HTML rather than creating a second
+     competing partial just for replacement strings. */
   function syncLandingShowcase(){
     var root=document.getElementById('wd-showcase');
     if(!root)return;
@@ -96,17 +103,8 @@
     }
   }
 
-  function ensureLookupPhotoCtaStyle(){
-    if(!isPropertyLanding()||document.getElementById('wd-mapless-photo-cta-style'))return;
-    var s=document.createElement('style');
-    s.id='wd-mapless-photo-cta-style';
-    s.textContent='#plm-photos .wd-mapless-copy{display:none!important}#plm-photos .wd-mapless-photo-note{margin-top:8px!important}#plm-photos .wd-mapless-photo-link{color:#9eece4!important;font-weight:850;text-decoration:underline;text-underline-offset:3px}#plm-photos .wd-mapless-photo-link:hover,#plm-photos .wd-mapless-photo-link:focus-visible{color:#fff!important}@media(min-width:701px){#plm-photos{grid-template-columns:minmax(0,1fr)!important;gap:0!important}#plm-photos .wd-mapless-property-hero{grid-column:1/-1!important;width:100%!important}}';
-    document.head.appendChild(s);
-  }
-
   function syncLookupPhotoCta(){
     if(!isPropertyLanding())return;
-    ensureLookupPhotoCtaStyle();
     var hero=document.querySelector('#plm-photos .wd-mapless-property-hero');
     if(!hero)return;
     var copy=hero.querySelector('.wd-mapless-copy');
@@ -125,7 +123,6 @@
   var scheduled=false;
   function schedule(){if(scheduled)return;scheduled=true;requestAnimationFrame(function(){scheduled=false;sync();});}
 
-  ensureLookupPhotoCtaStyle();
   loadAddressQualityGuard();
   loadCanonicalScore();
   loadLandingRecentIntelligence();
