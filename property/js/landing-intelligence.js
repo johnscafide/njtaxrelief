@@ -61,9 +61,9 @@
     sec.innerHTML =
       '<div class="wdi-shell">' +
         '<div class="wdi-head">' +
-          '<div><div class="wdi-kicker"><span class="wdi-live-dot"></span> Watchdog Intelligence · live sample</div>' +
-          '<h2 id="wdi-title">What Watchdog is <em>seeing right now.</em></h2>' +
-          '<p class="wdi-lead">A free look at the same evidence-first scoring system used inside paid Watchdog Intelligence. These numbers are read from the current production scoring cohort, not typed into this page.</p></div>' +
+          '<div><div class="wdi-kicker">Watchdog Intelligence</div>' +
+          '<h2 id="wdi-title">Watchdog <em>right now.</em></h2>' +
+          '<p class="wdi-lead">Evidence first backed sources.</p></div>' +
           '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, defensible evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See data methodology <i class="fas fa-arrow-right"></i></a></div>' +
         '</div>' +
         '<div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the latest Watchdog scoring and source-monitoring run…</div></div>' +
@@ -119,11 +119,11 @@
         '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div><p>A six-part property-intelligence score combining tax burden, Chapter 123 fairness, uniformity, revaluation stability, trajectory and appeal recourse.</p></article>' +
         '<article class="wdi-primary"><span class="wdi-label">Source monitor · latest run</span><div class="wdi-number"><strong>' + esc(num(sourceFacts)) + '</strong><small>source facts checked</small></div><p>' + esc(sourceCopy) + '</p><div class="wdi-mini"><span>Checked ' + esc(timeLabel(w.completed_at) || 'recently') + '</span><span>' + esc(num(e.runs_24h)) + ' downstream analyses / 24h</span></div></article>' +
       '</div>' +
-      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Three signals inside the score.</h3><p>These are medians across the current cohort. The direction of a score is context, not a stand-alone recommendation.</p></div>' +
+      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Three signals inside the score.</h3></div>' +
         '<div class="wdi-signal-grid">' +
-          signalCard('Municipal tax pressure', tax.median_score, 'Published tax-rate direction translated into a normalized pressure signal.', tax.evidence_coverage) +
-          signalCard('Revaluation pressure', rev.median_score, 'Published ratio level, verified SR-1A ratio decay and coefficient of deviation.', rev.evidence_coverage) +
-          signalCard('Assessment uniformity', uni.median_score, 'How consistently the current evidence indicates properties are being assessed relative to one another.', uni.evidence_coverage) +
+          signalCard('Municipal tax pressure', tax.median_score, 'Tax rate changes measured as stress.', tax.evidence_coverage) +
+          signalCard('Revaluation pressure', rev.median_score, 'Tax fairness lost over time.', rev.evidence_coverage) +
+          signalCard('Assessment uniformity', uni.median_score, 'How consistent is the assessment among properties over time.', uni.evidence_coverage) +
         '</div>' +
       '</div>' +
       '<div class="wdi-read">' +
@@ -135,8 +135,8 @@
           '<div><i class="fas fa-shield-halved"></i><span><b>4 · Confidence gates</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
         '</div></article>' +
       '</div>' +
-      '<div class="wdi-weights"><div class="wdi-weights-copy"><span class="wdi-label">The score, opened up</span><h3>Exactly what the current Watchdog Score weighs.</h3><p>The live public sample reads these component weights from the governed scoring contract returned by Watchdog, rather than duplicating them as marketing copy.</p><span class="wdi-model">Model: ' + esc(m.score_model || 'current governed model') + '</span></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
-      '<div class="wdi-cta"><div><h3>This is the sample. Paid Watchdog Intelligence goes property by property.</h3><p>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
+      '<div class="wdi-weights"><div class="wdi-weights-copy"><span class="wdi-label">The score, opened up</span><h3>Exactly what the current Watchdog Score weighs.</h3><span class="wdi-model">Model: ' + esc(m.score_model || 'current governed model') + '</span></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
+      '<div class="wdi-cta"><div><h3>Sample readings. Paid Watchdog Intelligence plans get their information property by property.</h3><p>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
 
     var plans = document.getElementById('wdi-plans');
     if (plans) plans.addEventListener('click', function () {
