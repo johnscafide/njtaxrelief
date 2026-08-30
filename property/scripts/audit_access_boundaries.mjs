@@ -19,7 +19,6 @@ const protectedPages = [
   ['property/verification-diagnostics/index.html', 'developer'],
   ['property/branding/index.html', 'developer'],
   ['property/scan/index.html', 'pro_plus'],
-  ['property/data-center/index.html', 'pro_plus'],
   ['property/data-workbench/index.html', 'agent'],
   ['property/marketing-studio/index.html', 'agent'],
   ['property/marketing-studio/admin/index.html', 'agent'],
@@ -47,6 +46,20 @@ for (const [file, level] of protectedPages) {
   check(`${file} declares ${level}`, new RegExp(`data-access-require=["']${level}["']`).test(body), 'HTML route contract');
   check(`${file} loads server access guard`, body.includes('/property/js/access-guard.js'), 'Browser gate redirects before page reveal');
 }
+
+// NJW-98 intentionally makes the Data Center catalog/overview public while
+// keeping account-owned dataset execution, saved views, exports and schedules
+// behind the server-owned Pro+ entitlement and RLS contracts.
+const dataCenterPage = read('property/data-center/index.html');
+const dataCenterPublic = read('property/js/data-center-public-v2.js');
+const dataCenterRuntime = read('property/js/data-center-runtime-v2.js');
+const dataCenterOverview = read('supabase/migrations/20260829152600_public_data_center_overview_v1.sql');
+const dataCenterPrivate = read('supabase/migrations/20260829170100_data_center_private_workspace_rls.sql');
+check('property/data-center/index.html remains public', !/data-access-require=/.test(dataCenterPage) && !dataCenterPage.includes('/property/js/access-guard.js'), 'Public transparency route is intentionally browseable without an account');
+check('Data Center public runtime uses bounded overview RPC', dataCenterPublic.includes('get_public_data_center_overview_v1') && !dataCenterPublic.includes("from('saved_properties')") && !dataCenterPublic.includes('data_center_delivery_jobs'), 'Public browser receives provider/coverage metadata only');
+check('Data Center private runtime requires Pro+', dataCenterRuntime.includes("required_plan: 'pro_plus'") && dataCenterRuntime.includes("from('saved_properties')") && dataCenterRuntime.includes("from('saved_data_center_views')") && dataCenterRuntime.includes("from('data_center_delivery_jobs')"), 'Private workspace actions remain entitlement checked');
+check('Data Center public RPC is bounded and direct source tables stay revoked', /grant execute on function public\.get_public_data_center_overview_v1\(\) to anon, authenticated/i.test(dataCenterOverview) && /revoke all on table public\.data_center_provider_coverage from anon, authenticated/i.test(dataCenterOverview), 'Public surface exposes the aggregate contract rather than direct provider tables');
+check('Data Center saved views and delivery jobs require Pro+ RLS', dataCenterPrivate.includes("public.has_watchdog_plan('pro_plus')") && dataCenterPrivate.includes('saved_data_center_views') && dataCenterPrivate.includes('data_center_delivery_jobs'), 'Private portfolio workflow remains user-owned and Pro+ gated');
 
 const guard = read('property/js/access-guard.js');
 check('developer guard uses server RPC', guard.includes("rpc('is_watchdog_developer')"), 'No email or browser role heuristic');
@@ -113,14 +126,14 @@ check('no service credentials in browser property files', clientSecrets.length =
 
 const mobileCss = read('property/css/mobile-app.css');
 const mobileMenuCss = read('property/css/mobile-menu.css');
-const dashboardCss = read('property/css/dashboard/dashboard.css');
+const dashboardCss = read('property/css/dashboard/watchdog-dashboard.css');
 const dashboardPage = read('property/dashboard/index.html');
 const homePage = read('property/home/index.html');
 
 check('property/dashboard/index.html uses responsive viewport', /name=["']viewport["']/.test(dashboardPage), 'Mobile reflow contract');
 check(
   'property/dashboard/index.html loads responsive dashboard styling',
-  dashboardPage.includes('/property/css/dashboard/dashboard.css') && /@media\(max-width:(?:720|760)px\)/.test(dashboardCss),
+  dashboardPage.includes('/property/css/dashboard/watchdog-dashboard.css') && /@media\(max-width:(?:720|760)px\)/.test(dashboardCss),
   'The 2027 Dashboard owns its mobile chrome inside the consolidated responsive dashboard stylesheet'
 );
 check('property/home/index.html uses responsive viewport', /name=["']viewport["']/.test(homePage), 'Mobile reflow contract');
