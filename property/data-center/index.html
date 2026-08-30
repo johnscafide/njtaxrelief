@@ -59,12 +59,50 @@
             <div class="dcv2-grid">
               <article class="dcv2-card">
                 <div class="dcv2-card-head"><div><h2>Coverage by intelligence family</h2><p>See where the catalog is bulk-ready, live for bounded checks, or structurally unavailable. Select a family to jump directly into the builder.</p></div></div>
-                <div id="dc-category-coverage" class="dcv2-coverage"><div class="dc-monitor-empty">Loading governed coverage…</div></div>
+                <div class="dcv2-fresh-row" id="dc-coverage-health">
+                  <div class="dcv2-fresh-top"><b>Connected coverage health</b><span class="dcv2-fresh-badge"><span id="dc-coverage-live-pct">—</span>% live</span></div>
+                  <p><span id="dc-coverage-bulk-pct">—</span>% of live fields are bulk ready · <span id="dc-coverage-recent-pct">—</span>% were verified within the last 7 days.</p>
+                  <div class="dcv2-bar" id="dc-coverage-health-bar" aria-label="Connected field coverage">
+                    <span class="dcv2-bar-bulk" id="dc-coverage-bar-bulk" style="width:0%"></span>
+                    <span class="dcv2-bar-live" id="dc-coverage-bar-live" style="width:0%"></span>
+                    <span class="dcv2-bar-unavailable" id="dc-coverage-bar-not-live" style="width:0%"></span>
+                  </div>
+                </div>
+                <div id="dc-category-coverage" class="dcv2-coverage"><div id="dc-category-coverage-empty" class="dc-monitor-empty">Loading governed coverage…</div></div>
                 <div class="dcv2-legend"><span><i></i> Live · bounded use</span><span><i></i> Bulk ready</span><span><i></i> Structurally unavailable</span></div>
+                <template id="dc-category-coverage-template">
+                  <div class="dcv2-coverage-row">
+                    <button type="button" data-dc-category-label></button>
+                    <div class="dcv2-bar" data-dc-category-bar>
+                      <span class="dcv2-bar-bulk" data-dc-category-bulk></span>
+                      <span class="dcv2-bar-live" data-dc-category-live></span>
+                      <span class="dcv2-bar-unavailable" data-dc-category-unavailable></span>
+                    </div>
+                    <div class="dcv2-coverage-count" data-dc-category-count></div>
+                  </div>
+                </template>
               </article>
               <article class="dcv2-card">
                 <div class="dcv2-card-head"><div><h2>Source freshness</h2><p>Verification dates are shown separately from data values. A live provider does not imply every parcel has a value.</p></div></div>
-                <div id="dc-source-freshness" class="dcv2-freshness"><div class="dc-monitor-empty">Loading source freshness…</div></div>
+                <div id="dc-source-freshness" class="dcv2-freshness">
+                  <div class="dcv2-fresh-row" id="dc-verification-recency">
+                    <div class="dcv2-fresh-top"><b>Verification recency across live fields</b><span class="dcv2-fresh-badge"><span id="dc-recency-recent-pct">—</span>% ≤ 7 days</span></div>
+                    <p><span id="dc-recency-recent">—</span> verified within 7 days · <span id="dc-recency-review">—</span> verified 8–30 days ago · <span id="dc-recency-older">—</span> older than 30 days · <span id="dc-recency-unverified">—</span> without a verification timestamp.</p>
+                    <div class="dcv2-bar" id="dc-recency-bar" aria-label="Verification recency across live fields">
+                      <span class="dcv2-bar-live" id="dc-recency-bar-recent" style="width:0%"></span>
+                      <span class="dcv2-bar-bulk" id="dc-recency-bar-review" style="width:0%"></span>
+                      <span class="dcv2-bar-unavailable" id="dc-recency-bar-older" style="width:0%"></span>
+                    </div>
+                  </div>
+                  <div id="dc-source-freshness-rows" class="dcv2-freshness"><div id="dc-source-freshness-empty" class="dc-monitor-empty">Loading source freshness…</div></div>
+                  <div class="dc-footnote">Configured refresh policy reflects each field’s expected source cadence; it is separate from provider availability. Missing or out-of-window evidence remains explicit rather than being treated as current.</div>
+                </div>
+                <template id="dc-source-freshness-template">
+                  <div class="dcv2-fresh-row">
+                    <div class="dcv2-fresh-top"><b data-dc-source-name></b><span class="dcv2-fresh-badge" data-dc-source-badge></span></div>
+                    <p>Most recent governed verification: <span data-dc-source-date>—</span>. Configured refresh policy currently met by <span data-dc-source-compliant>—</span> of <span data-dc-source-total>—</span> fields.</p>
+                  </div>
+                </template>
               </article>
             </div>
 
@@ -168,7 +206,7 @@
   <script src="/property/js/city-address-runtime.js?v=20260823a"></script>
   <script>document.addEventListener('watchdog:data-center-ready',function(){document.documentElement.dataset.dataCenterReady='true';},{once:true});</script>
   <script src="/property/js/data-center-runtime-v2.js?v=20260829b"></script>
-  <script src="/property/js/data-center-public-v2.js?v=20260829b"></script>
+  <script src="/property/js/data-center-public-v2.js?v=20260830a"></script>
   <script src="/property/js/data-center-provider-filter.js?v=20260829b"></script>
   <script src="/property/js/data-center-mobile-results.js?v=20260822a"></script>
   <script src="/property/js/data-center-mobile-recovery.js?v=20260822a"></script>
