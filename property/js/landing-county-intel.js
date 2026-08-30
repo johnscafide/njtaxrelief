@@ -38,7 +38,23 @@
     'assessments & tax records',
     'property records & tax assessments'
   ];
-  var deck=[],cursor=0,current=[],rotationTimer=0,paused=false;
+    var deck=[],cursor=0,current=[],rotationTimer=0,paused=false;
+  var COPY=null;
+
+  /* County copy is loaded once, async. Cards render with the generic fallback
+     until it lands, then repaint. A failed fetch is not fatal: the fallback
+     copy stays and the carousel keeps working. */
+  function loadCopy(section){
+    if(COPY)return;
+    fetch('/property/data/county-copy.json',{cache:'default'})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(data){
+        if(!data)return;
+        COPY=data;
+        if(section)paint(section,true);
+      })
+      .catch(function(){/* keep the fallback copy */});
+  }
 
   function isLanding(){
     var path=(location.pathname||'').replace(/\/+$/,'');
@@ -106,7 +122,8 @@
       '.wd-county-intel-copy{display:block;padding:20px 20px 22px}',
       '.wd-county-intel-county{display:block;margin-bottom:7px;color:#087f82;font:800 11px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}',
       '.wd-county-intel-card h3{margin:0;color:#10294b;font:800 21px/1.22 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}',
-      '.wd-county-intel-card p{margin:10px 0 0;color:#61717a;font-size:15.5px;line-height:1.5}',
+      '.wd-county-intel-hook{display:block;margin:11px 0 0;color:#10294b;font:750 15.5px/1.35 "Plus Jakarta Sans",sans-serif}',
+      '.wd-county-intel-card p{margin:7px 0 0;color:#61717a;font-size:15.5px;line-height:1.5}',
       '.wd-county-intel-open{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:#087f82;font-size:14.5px;font-weight:800}',
       '@media(max-width:900px){.wd-county-intel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wd-county-intel-card:last-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr)}.wd-county-intel-card:last-child .wd-county-intel-image{height:100%;min-height:220px}}',
       '@media(max-width:680px){.wd-county-intel{padding:18px 0 46px}.wd-county-intel .wd-county-intel-wrap{width:min(100% - 28px,1240px)}.wd-county-intel-toolbar{margin-bottom:12px}.wd-county-intel-all{font-size:13px}.wd-county-intel-grid{grid-template-columns:1fr;gap:14px}.wd-county-intel-card:last-child{display:block;grid-column:auto}.wd-county-intel-image,.wd-county-intel-card:last-child .wd-county-intel-image{height:170px;min-height:0}.wd-county-intel-copy{padding:18px}.wd-county-intel-card h3{font-size:20px}}',
@@ -115,13 +132,19 @@
     document.head.appendChild(style);
   }
 
-  function cardMarkup(item){
+   function cardMarkup(item){
     var index=COUNTIES.indexOf(item);
     var title=item.county+' County '+TITLES[index%TITLES.length];
-    var copy='Explore '+item.county+' County assessment context, property tax records and Watchdog research with real evidence.';
+    var entry=(COPY&&COPY[item.slug])||null;
+    var hook=entry&&entry.hook?entry.hook:'';
+    var copy=entry&&entry.note
+      ? entry.note
+      : 'Explore '+item.county+' County assessment context, property tax records and Watchdog research with real evidence.';
+    var cta=entry&&entry.cta?entry.cta:'Explore '+item.county+' County';
+    var hookHtml=hook?'<span class="wd-county-intel-hook">'+esc(hook)+'</span>':'';
     return '<a class="wd-county-intel-card" href="/towns/'+esc(item.slug)+'/" data-county-intel="'+esc(item.slug)+'">'+
       '<span class="wd-county-intel-image"><img src="'+esc(commonsImage(item.image))+'" alt="'+esc(item.county)+' County, New Jersey" loading="lazy" width="1200" height="700" data-county-photo="'+esc(item.slug)+'"></span>'+
-      '<span class="wd-county-intel-copy"><span class="wd-county-intel-county">'+esc(item.county)+' County, New Jersey</span><h3>'+esc(title)+'</h3><p>'+esc(copy)+'</p><span class="wd-county-intel-open">Explore '+esc(item.county)+' County <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>'+
+            '<span class="wd-county-intel-copy"><span class="wd-county-intel-county">'+esc(item.county)+' County, New Jersey</span><h3>'+esc(title)+'</h3>'+hookHtml+'<p>'+esc(copy)+'</p><span class="wd-county-intel-open">'+esc(cta)+' <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>'+
     '</a>';
   }
 
@@ -204,6 +227,7 @@
     ensureStyles();
     var section=document.getElementById('wd-county-intel')||build();
     paint(section,true);
+    loadCopy(section);
 
     if(!placeImmediatelyAfterRecents(section)){
       var hero=document.querySelector('.pl-hero');
