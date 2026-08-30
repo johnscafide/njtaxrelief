@@ -118,7 +118,7 @@
   function cardMarkup(item){
     var index=COUNTIES.indexOf(item);
     var title=item.county+' County '+TITLES[index%TITLES.length];
-    var copy='Explore municipality-level assessment context, property-tax records and Watchdog research across '+item.county+' County.';
+    var copy='Explore '+item.county+' County"'"s assessment context, property tax records and Watchdog research with real evidence.';
     return '<a class="wd-county-intel-card" href="/towns/'+esc(item.slug)+'/" data-county-intel="'+esc(item.slug)+'">'+
       '<span class="wd-county-intel-image"><img src="'+esc(commonsImage(item.image))+'" alt="'+esc(item.county)+' County, New Jersey" loading="lazy" width="1200" height="700" data-county-photo="'+esc(item.slug)+'"></span>'+
       '<span class="wd-county-intel-copy"><span class="wd-county-intel-county">'+esc(item.county)+' County, New Jersey</span><h3>'+esc(title)+'</h3><p>'+esc(copy)+'</p><span class="wd-county-intel-open">Explore '+esc(item.county)+' County <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>'+
