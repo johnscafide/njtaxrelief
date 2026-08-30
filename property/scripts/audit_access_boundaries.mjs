@@ -57,7 +57,13 @@ const dataCenterOverview = read('supabase/migrations/20260829152600_public_data_
 check('property/data-center/index.html remains public', !/data-access-require=/.test(dataCenterPage) && !dataCenterPage.includes('/property/js/access-guard.js'), 'Public transparency route is intentionally browseable without an account');
 check('Data Center public runtime uses bounded overview RPC', dataCenterPublic.includes('get_public_data_center_overview_v1') && !dataCenterPublic.includes("from('saved_properties')") && !dataCenterPublic.includes('data_center_delivery_jobs'), 'Public browser receives provider/coverage metadata only');
 check('Data Center private runtime requires Pro+', dataCenterRuntime.includes("required_plan: 'pro_plus'") && dataCenterRuntime.includes("from('saved_properties')") && dataCenterRuntime.includes("from('saved_data_center_views')") && dataCenterRuntime.includes("from('data_center_delivery_jobs')"), 'Private workspace actions remain entitlement checked; production RLS is verified separately');
-check('Data Center public RPC is bounded and direct source tables stay revoked', /grant execute on function public\.get_public_data_center_overview_v1\(\) to anon, authenticated/i.test(dataCenterOverview) && /revoke all on table public\.data_center_provider_coverage from anon, authenticated/i.test(dataCenterOverview), 'Public surface exposes the aggregate contract rather than direct provider tables');
+check(
+  'Data Center public RPC is bounded',
+  /grant execute on function public\.get_public_data_center_overview_v1\(\) to anon, authenticated/i.test(dataCenterOverview)
+    && /revoke all on function public\.get_public_data_center_overview_v1\(\) from public/i.test(dataCenterOverview)
+    && !/provider_key|source_fields|calculation_key|customer|saved_properties|data_center_delivery_jobs/i.test(dataCenterOverview.replace(/comment on function[\s\S]*$/i, '')),
+  'Retained migration exposes only bounded provider/coverage metadata; production table privileges are verified separately'
+);
 
 const guard = read('property/js/access-guard.js');
 check('developer guard uses server RPC', guard.includes("rpc('is_watchdog_developer')"), 'No email or browser role heuristic');
