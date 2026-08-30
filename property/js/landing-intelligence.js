@@ -127,12 +127,12 @@
         '</div>' +
       '</div>' +
       '<div class="wdi-read">' +
-        '<article class="wdi-read-card"><span class="wdi-label">The Watchdog read</span><h3>Evidence first. Interpretation second.</h3><p>' + interpretation(data) + '</p><div class="wdi-note">Live cohort metrics can change as new properties are scored, new official files arrive or Watchdog rejects weak evidence.</div></article>' +
-        '<article class="wdi-read-card"><span class="wdi-label">How Watchdog gets there</span><div class="wdi-method">' +
-          '<div><i class="fas fa-building-columns"></i><span><b>1 · Public facts</b>Parcel, assessment, tax-rate, equalization and verified sales records.</span></div>' +
-          '<div><i class="fas fa-filter"></i><span><b>2 · Evidence checks</b>Non-arm’s-length or unusable records are separated instead of silently treated as normal sales.</span></div>' +
-          '<div><i class="fas fa-calculator"></i><span><b>3 · Governed scoring</b>Six weighted components are calculated; missing inputs are dropped and remaining weights are renormalized.</span></div>' +
-          '<div><i class="fas fa-shield-halved"></i><span><b>4 · Confidence gates</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
+        '<article class="wdi-read-card"><h3>What the score actually means</h3><p>' + interpretation(data) + '</p><div class="wdi-note">Live cohort metrics can change as new properties are scored, new official files arrive or Watchdog rejects weak evidence.</div></article>' +
+        '<article class="wdi-read-card"><span class="wdi-label">How do we get there?</span><div class="wdi-method">' +
+          '<div><i class="fas fa-building-columns"></i><span><b>1 · We start with what is public.</b>Parcel, assessment, tax-rate, equalization and verified sales records.</span></div>' +
+          '<div><i class="fas fa-filter"></i><span><b>2 · We throw out certain sales</b>Non arm’s length or unusable records are separated instead of silently treated as normal sales.</span></div>' +
+          '<div><i class="fas fa-calculator"></i><span><b>3 · We score six things and weight them</b>Six weighted components are calculated; missing inputs are dropped and remaining weights are renormalized.</span></div>' +
+          '<div><i class="fas fa-shield-halved"></i><span><b>4 · Thin data lowers the score, but not our certainty.</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
         '</div></article>' +
       '</div>' +
       '<div class="wdi-weights"><div class="wdi-weights-copy"><span class="wdi-label">The score, opened up</span><h3>Exactly what the current Watchdog Score weighs.</h3><span class="wdi-model">Model: ' + esc(m.score_model || 'current governed model') + '</span></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
