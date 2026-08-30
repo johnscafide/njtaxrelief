@@ -123,7 +123,7 @@
       sec.id = 'wd-consumer-recents';
       sec.className = 'wd-consumer-recents';
       sec.setAttribute('aria-labelledby', 'wd-recent-title');
-      sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-section-head"><div><span class="wd-section-kicker">Property records</span><h2 id="wd-recent-title">Recently explored</h2></div><a href="/property/dashboard" class="wd-section-link">My properties <i class="fas fa-arrow-right"></i></a></div><div class="wd-property-grid" id="wd-property-grid"><div class="wd-card-loading"></div><div class="wd-card-loading"></div><div class="wd-card-loading"></div></div></div>';
+      sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-section-head"><div><h2 id="wd-recent-title">Recently explored</h2></div><a href="/property/dashboard" class="wd-section-link">My properties <i class="fas fa-arrow-right"></i></a></div><div class="wd-property-grid" id="wd-property-grid"><div class="wd-card-loading"></div><div class="wd-card-loading"></div><div class="wd-card-loading"></div></div></div>';
       hero.insertAdjacentElement('afterend', sec);
     }
     return sec;
