@@ -1,0 +1,39 @@
+<!--
+  NJW-297: Static paid-launch copy lives here so it can be edited without touching JavaScript.
+  JavaScript should only choose/place the appropriate template and attach behavior/analytics.
+-->
+<template id="wd-paid-launch-banner-template">
+  <aside id="wd-paid-launch-banner" role="region" aria-label="Watchdog paid plans launch announcement">
+    <div class="wdpl-inner">
+      <span class="wdpl-pill"><i class="fas fa-bolt"></i> Paid plans</span>
+      <div class="wdpl-copy"><strong>Professional plans are scheduled to open September 16.</strong> Get started for less than $2/day with annual billing.</div>
+      <a class="wdpl-cta" href="/pro#launch-list" data-paid-launch-cta>Join the launch list <i class="fas fa-arrow-right"></i></a>
+    </div>
+    <button class="wdpl-close" type="button" aria-label="Dismiss launch announcement"><i class="fas fa-xmark"></i></button>
+  </aside>
+</template>
+
+<template id="wd-paid-launch-hero-template">
+  <aside id="wd-paid-launch-hero" role="region" aria-label="Professional plan launch details">
+    <div class="wdpl-hero-chip">
+      <span class="wdpl-hero-dot" aria-hidden="true"></span>
+      <span class="wdpl-hero-copy"><strong>Professional plans · Sep 16</strong><span class="wdpl-hero-meta">Less than $2/day annually</span></span>
+      <a class="wdpl-get-started" href="/pro#launch-list" data-paid-launch-cta>Get started <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </aside>
+</template>
+
+<!-- Temporary compatibility fragment for the Pro launch-list state. The long-term target is direct static ownership in property/pro/index.html. -->
+<template id="wd-pro-launch-copy-template">
+  <div class="pro-demo-copy pro-reveal">
+    <span class="pro-kicker">September 16 launch list</span>
+    <h2>Be first in line.<br><em>We’ll let you know when enrollment opens.</em></h2>
+    <p>Tell us your role, expected property volume and plan interest. We’ll send the launch notice when paid enrollment is cleared to open.</p>
+    <div class="pro-demo-proof">
+      <span><i class="fas fa-lock"></i> No payment required</span>
+      <span><i class="fas fa-layer-group"></i> Agent · Pro · Pro+</span>
+      <span><i class="fas fa-envelope"></i> Launch notice by email</span>
+    </div>
+    <a href="/property/">Run a property first <i class="fas fa-arrow-right"></i></a>
+  </div>
+</template>
