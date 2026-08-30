@@ -1,6 +1,6 @@
 /* ============================================================
    PROPERTY LOOKUP
-   njpropertytaxrelief.com/property
+   watchdogindex.com
    ============================================================ */
 (function () {
   'use strict';
@@ -2755,8 +2755,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   // ══════════════════════════════════════════════
   window.plCloseModal = function () {
     var sn = el('secnav'); if (sn) sn.classList.remove('on');
-    // The neighborhood view stays behind the panel. Closing returns you to the
-    // map you were already looking at instead of an empty search box.
+    // Closing returns to the homepage search. The neighborhood view only exists
+    // if the user explicitly opened it, in which case keep its map sized correctly.
     setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 260);
     el('plm-backdrop').classList.remove('open');
     el('plm').classList.remove('open');
@@ -3092,7 +3092,10 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       paintHood(h, assessed, tax);
     });
 
-    // Build the map view behind the panel so closing it lands somewhere useful.
+    // Neighborhood view is opt-in. It costs an ArcGIS query, a Supabase call and
+    // a second Leaflet map, none of which the user can see while the modal is up.
+    // Stashed here and run only when plOpenHood() is called.
+    window.plOpenHood = function () {
     hoodParcels(geo.lat, geo.lon, 420).then(function (list) {
       if (!list.length) return;
       // make sure the searched property is in the list even if the envelope missed it
@@ -3114,6 +3117,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         }
       });
     });
+    };
 
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
   }
