@@ -35,6 +35,14 @@
     if (days <= 30) return 'Review window';
     return 'Older verification';
   }
+  function percentage(value, total) {
+    var denominator = Number(total || 0);
+    return denominator > 0 ? Math.round((Number(value || 0) / denominator) * 100) : 0;
+  }
+  function setWidth(id, value) {
+    var node = $(id);
+    if (node) node.style.width = Math.max(0, Math.min(100, Number(value || 0))) + '%';
+  }
   function analytics(name, properties) {
     try {
       if (window.WatchdogAnalytics && typeof window.WatchdogAnalytics.track === 'function') {
@@ -80,7 +88,7 @@
     var groups = {};
     catalog.markers.forEach(function (marker) {
       var key = String(marker.category || 'other');
-      if (!groups[key]) groups[key] = { total: 0, live: 0, bulk: 0, unavailable: 0 };
+      if (!groups[key]) groups[key] = { total: 0, live: 0, bulk: 0, unavailable: 0, recent: 0 };
       var item = groups[key];
       item.total += 1;
       var c = coverageFor(marker.id);
@@ -88,43 +96,102 @@
       if (status === 'live') {
         item.live += 1;
         if (c && c.bulk_capable) item.bulk += 1;
+        if (c && c.last_verified_at && daysSince(c.last_verified_at) <= 7) item.recent += 1;
       } else if (status === 'unavailable') {
         item.unavailable += 1;
       }
     });
 
-    var rows = Object.keys(groups).map(function (key) { return { key: key, data: groups[key] }; })
-      .sort(function (a, b) { return b.data.live - a.data.live || a.key.localeCompare(b.key); })
-      .slice(0, 14);
+    var connected = Array.from(coverage.values());
+    var live = connected.filter(function (item) { return item && item.value_status === 'live'; });
+    var bulk = live.filter(function (item) { return item.bulk_capable; }).length;
+    var recent = live.filter(function (item) { return item.last_verified_at && daysSince(item.last_verified_at) <= 7; }).length;
+    var livePct = percentage(live.length, connected.length);
+    var bulkPct = percentage(bulk, live.length);
+    var recentPct = percentage(recent, live.length);
+    setText('dc-coverage-live-pct', livePct);
+    setText('dc-coverage-bulk-pct', bulkPct);
+    setText('dc-coverage-recent-pct', recentPct);
+    setWidth('dc-coverage-bar-bulk', percentage(bulk, connected.length));
+    setWidth('dc-coverage-bar-live', percentage(Math.max(0, live.length - bulk), connected.length));
+    setWidth('dc-coverage-bar-not-live', percentage(Math.max(0, connected.length - live.length), connected.length));
+    var healthBar = $('dc-coverage-health-bar');
+    if (healthBar) healthBar.setAttribute('aria-label', live.length + ' of ' + connected.length + ' connected fields live; ' + bulk + ' bulk ready');
 
-    host.innerHTML = rows.map(function (row) {
+    var rows = Object.keys(groups).map(function (key) { return { key: key, data: groups[key] }; })
+      .sort(function (a, b) { return b.data.live - a.data.live || a.key.localeCompare(b.key); });
+    var empty = $('dc-category-coverage-empty');
+    Array.from(host.children).forEach(function (child) { if (child !== empty) child.remove(); });
+    if (empty) empty.hidden = rows.length > 0;
+    var template = $('dc-category-coverage-template');
+    if (!rows.length || !template || !template.content) return;
+
+    rows.forEach(function (row) {
       var d = row.data;
       var total = Math.max(1, d.total);
-      var bulkPct = (d.bulk / total) * 100;
-      var liveOnlyPct = (Math.max(0, d.live - d.bulk) / total) * 100;
-      var unavailablePct = (d.unavailable / total) * 100;
-      return '<div class="dcv2-coverage-row">' +
-        '<button type="button" data-dc-category="' + esc(row.key) + '">' + esc(title(row.key)) + '</button>' +
-        '<div class="dcv2-bar" aria-label="' + esc(d.live + ' of ' + d.total + ' live') + '">' +
-          '<span class="dcv2-bar-bulk" style="width:' + bulkPct.toFixed(2) + '%"></span>' +
-          '<span class="dcv2-bar-live" style="width:' + liveOnlyPct.toFixed(2) + '%"></span>' +
-          '<span class="dcv2-bar-unavailable" style="width:' + unavailablePct.toFixed(2) + '%"></span>' +
-        '</div><div class="dcv2-coverage-count">' + d.live + '/' + d.total + ' live</div></div>';
-    }).join('') || '<div class="dc-monitor-empty">Coverage is loading.</div>';
+      var fragment = template.content.cloneNode(true);
+      var button = fragment.querySelector('[data-dc-category-label]');
+      var bar = fragment.querySelector('[data-dc-category-bar]');
+      var bulkBar = fragment.querySelector('[data-dc-category-bulk]');
+      var liveBar = fragment.querySelector('[data-dc-category-live]');
+      var unavailableBar = fragment.querySelector('[data-dc-category-unavailable]');
+      var count = fragment.querySelector('[data-dc-category-count]');
+      if (button) { button.dataset.dcCategory = row.key; button.textContent = title(row.key); }
+      if (bulkBar) bulkBar.style.width = ((d.bulk / total) * 100).toFixed(2) + '%';
+      if (liveBar) liveBar.style.width = ((Math.max(0, d.live - d.bulk) / total) * 100).toFixed(2) + '%';
+      if (unavailableBar) unavailableBar.style.width = ((d.unavailable / total) * 100).toFixed(2) + '%';
+      if (bar) bar.setAttribute('aria-label', d.live + ' of ' + d.total + ' live; ' + d.bulk + ' bulk ready; ' + d.recent + ' verified within 7 days');
+      if (count) count.textContent = d.live + '/' + d.total + ' · ' + percentage(d.bulk, d.live) + '% bulk';
+      host.appendChild(fragment);
+    });
   }
 
   function renderFreshness() {
-    var host = $('dc-source-freshness');
+    var host = $('dc-source-freshness-rows');
     if (!host) return;
+    var live = Array.from(coverage.values()).filter(function (item) { return item && item.value_status === 'live'; });
+    var recent = 0;
+    var review = 0;
+    var older = 0;
+    var unverified = 0;
+    live.forEach(function (item) {
+      if (!item.last_verified_at) { unverified += 1; return; }
+      var age = daysSince(item.last_verified_at);
+      if (age <= 7) recent += 1;
+      else if (age <= 30) review += 1;
+      else older += 1;
+    });
+    setText('dc-recency-recent-pct', percentage(recent, live.length));
+    setText('dc-recency-recent', recent.toLocaleString());
+    setText('dc-recency-review', review.toLocaleString());
+    setText('dc-recency-older', older.toLocaleString());
+    setText('dc-recency-unverified', unverified.toLocaleString());
+    setWidth('dc-recency-bar-recent', percentage(recent, live.length));
+    setWidth('dc-recency-bar-review', percentage(review, live.length));
+    setWidth('dc-recency-bar-older', percentage(older + unverified, live.length));
+    var recencyBar = $('dc-recency-bar');
+    if (recencyBar) recencyBar.setAttribute('aria-label', recent + ' verified within 7 days; ' + review + ' verified 8 to 30 days ago; ' + older + ' older than 30 days; ' + unverified + ' without a verification timestamp');
+
     var rows = overview && Array.isArray(overview.source_freshness) ? overview.source_freshness : [];
-    host.innerHTML = rows.map(function (row) {
-      var compliant = Number(row.compliant_count || 0);
-      var total = Number(row.total_count || 0);
-      return '<div class="dcv2-fresh-row"><div class="dcv2-fresh-top"><b>' + esc(title(row.group_key)) + '</b>' +
-        '<span class="dcv2-fresh-badge">' + esc(freshnessLabel(row.newest_verified_at)) + '</span></div>' +
-        '<p>Most recent governed verification: ' + esc(formatDate(row.newest_verified_at)) +
-        '. Freshness-policy compliant fields: ' + compliant + ' of ' + total + '.</p></div>';
-    }).join('') || '<div class="dc-monitor-empty">Source freshness is loading.</div>';
+    var empty = $('dc-source-freshness-empty');
+    Array.from(host.children).forEach(function (child) { if (child !== empty) child.remove(); });
+    if (empty) empty.hidden = rows.length > 0;
+    var template = $('dc-source-freshness-template');
+    if (!rows.length || !template || !template.content) return;
+    rows.forEach(function (row) {
+      var fragment = template.content.cloneNode(true);
+      var name = fragment.querySelector('[data-dc-source-name]');
+      var badge = fragment.querySelector('[data-dc-source-badge]');
+      var date = fragment.querySelector('[data-dc-source-date]');
+      var compliant = fragment.querySelector('[data-dc-source-compliant]');
+      var total = fragment.querySelector('[data-dc-source-total]');
+      if (name) name.textContent = title(row.group_key);
+      if (badge) badge.textContent = freshnessLabel(row.newest_verified_at);
+      if (date) date.textContent = formatDate(row.newest_verified_at);
+      if (compliant) compliant.textContent = Number(row.compliant_count || 0).toLocaleString();
+      if (total) total.textContent = Number(row.total_count || 0).toLocaleString();
+      host.appendChild(fragment);
+    });
   }
 
   function updateAccessUi() {
@@ -235,7 +302,7 @@
       return overview;
     }) : Promise.reject(new Error('Data service unavailable'));
 
-    var catalogPromise = fetch('/property/data/marker-registry.json?v=20260829-public-v2', { cache: 'no-store' })
+    var catalogPromise = fetch('/property/data/marker-registry.json?v=20260830-public-v3', { cache: 'no-store' })
       .then(function (response) { if (!response.ok) throw new Error('Marker registry HTTP ' + response.status); return response.json(); })
       .then(function (data) { catalog = data; return data; });
 
