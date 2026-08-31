@@ -72,6 +72,8 @@ module.exports = function handler(req, res) {
     '',
     'User-agent: OAI-SearchBot',
     'User-agent: PerplexityBot',
+    'User-agent: Claude-SearchBot',
+    'User-agent: Claude-User',
     'User-agent: Applebot',
     'User-agent: Bingbot',
     'User-agent: *',
