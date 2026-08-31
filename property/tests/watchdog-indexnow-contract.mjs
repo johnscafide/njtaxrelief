@@ -31,9 +31,10 @@ assert.equal(legacyKeyRes.statusCode, 404, 'IndexNow key must only be served on 
 const robotsRes = responseHarness();
 robotsHandler({ method: 'GET', headers: { host: 'www.watchdogindex.com' } }, robotsRes);
 assert.equal(robotsRes.statusCode, 200);
-for (const agent of ['OAI-SearchBot', 'PerplexityBot', 'Applebot', 'Bingbot']) {
+for (const agent of ['OAI-SearchBot', 'PerplexityBot', 'Claude-SearchBot', 'Claude-User', 'Applebot', 'Bingbot']) {
   assert.match(robotsRes.body, new RegExp(`User-agent: ${agent}`));
 }
+assert.doesNotMatch(robotsRes.body, /User-agent: ClaudeBot/, 'training crawler policy must stay a separate owner decision');
 assert.match(robotsRes.body, /User-agent: \*\nAllow: \//);
 assert.match(robotsRes.body, /Disallow: \/account\$/);
 assert.match(robotsRes.body, /Disallow: \/dashboard\$/);
