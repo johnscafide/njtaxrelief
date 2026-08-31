@@ -115,11 +115,11 @@
 
     host.innerHTML =
       '<div class="wdi-primary-grid">' +
-        '<article class="wdi-primary"><span class="wdi-label">Freshly scored cohort</span><div class="wdi-number"><strong>' + esc(num(c.properties)) + '</strong><small>properties</small></div><p>Current property-level scores with defensible evidence available for this run.</p><div class="wdi-mini"><span>' + esc(num(c.towns)) + ' towns</span><span>' + esc(num(c.counties)) + ' counties</span><span>' + esc(num(c.evidence_coverage,1)) + '% avg. evidence coverage</span></div></article>' +
-        '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div><p>A six-part property-intelligence score combining tax burden, Chapter 123 fairness, uniformity, revaluation stability, trajectory and appeal recourse.</p></article>' +
-        '<article class="wdi-primary"><span class="wdi-label">Source monitor · latest run</span><div class="wdi-number"><strong>' + esc(num(sourceFacts)) + '</strong><small>source facts checked</small></div><p>' + esc(sourceCopy) + '</p><div class="wdi-mini"><span>Checked ' + esc(timeLabel(w.completed_at) || 'recently') + '</span><span>' + esc(num(e.runs_24h)) + ' downstream analyses / 24h</span></div></article>' +
+        '<article class="wdi-primary"><div class="wdi-number"><strong>' + esc(num(c.properties)) + '</strong><small>properties</small></div><div class="wdi-mini"><span>' + esc(num(c.towns)) + ' towns</span><span>' + esc(num(c.counties)) + ' counties</span><span>' + esc(num(c.evidence_coverage,1)) + '% avg. evidence coverage</span></div></article>' +
+        '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div></article>' +
+        '<article class="wdi-primary"><div class="wdi-number"><strong>' + esc(num(sourceFacts)) + '</strong><small>source facts checked</small></div><p>' + esc(sourceCopy) + '</p><div class="wdi-mini"><span>Checked ' + esc(timeLabel(w.completed_at) || 'recently') + '</span><span>' + esc(num(e.runs_24h)) + ' downstream analyses / 24h</span></div></article>' +
       '</div>' +
-      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Three signals inside the score.</h3></div>' +
+      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Signals inside the score.</h3></div>' +
         '<div class="wdi-signal-grid">' +
           signalCard('Municipal tax pressure', tax.median_score, 'Tax rate changes measured as stress.', tax.evidence_coverage) +
           signalCard('Revaluation pressure', rev.median_score, 'Tax fairness lost over time.', rev.evidence_coverage) +
