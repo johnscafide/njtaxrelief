@@ -1,18 +1,18 @@
 {
-  "version": "2026-08-25.1",
+  "version": "2026-08-31.1",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
   "platforms": [
-    {"id":"chatgpt","name":"ChatGPT Search","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"OAI-SearchBot"},
-    {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot"},
-    {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Google Search crawling policies"},
+    {"id":"chatgpt","name":"ChatGPT Search / Atlas","measurement":["ai_referral_analytics","manual_citation_benchmark","agent_accessibility"],"discovery_control":"OAI-SearchBot; public interactive surfaces should also follow WAI-ARIA best practices for Atlas agent compatibility"},
+    {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot; Bing AI Performance is the authoritative first-party citation report when available"},
+    {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Googlebot/Search eligibility; no special AI markup or llms.txt is required for AI Mode or AI Overviews"},
     {"id":"perplexity","name":"Perplexity","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"PerplexityBot"},
-    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot"},
-    {"id":"claude","name":"Claude","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
+    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight / Safari","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot; Applebot-Extended remains a separate model-training control"},
+    {"id":"claude","name":"Claude Search / user-directed web retrieval","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Claude-SearchBot and Claude-User; ClaudeBot remains a separate model-training control"},
     {"id":"grok","name":"Grok","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
     {"id":"meta_ai","name":"Meta AI","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
-    {"id":"future_answer_engine","name":"Future answer engines","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"adopt only documented crawler/indexing contracts"}
+    {"id":"future_answer_engine","name":"Future answer engines / grounding APIs","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"adopt only documented crawler/indexing contracts; track AI-native grounding systems such as Microsoft Web IQ for changes in source/index requirements"}
   ],
   "scorecard_fields": [
     "watchdog_mentioned",
@@ -44,6 +44,7 @@
     "Do not simulate or fabricate proprietary answer-engine results.",
     "Prefer canonical https://www.watchdogindex.com URLs in all benchmark evidence.",
     "Re-check official crawler and publisher documentation before changing robots policy for a platform.",
-    "Treat Bing AI Performance, Search Console, first-party referral telemetry, and direct platform evidence as separate evidence classes."
+    "Treat Bing AI Performance, Search Console, first-party referral telemetry, and direct platform evidence as separate evidence classes.",
+    "Keep search/retrieval crawler permissions separate from model-training crawler permissions whenever a platform documents distinct controls."
   ]
 }
