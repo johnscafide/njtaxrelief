@@ -144,7 +144,7 @@
     var hookHtml=hook?'<span class="wd-county-intel-hook">'+esc(hook)+'</span>':'';
     return '<a class="wd-county-intel-card" href="/towns/'+esc(item.slug)+'/" data-county-intel="'+esc(item.slug)+'">'+
       '<span class="wd-county-intel-image"><img src="'+esc(commonsImage(item.image))+'" alt="'+esc(item.county)+' County, New Jersey" loading="lazy" width="1200" height="700" data-county-photo="'+esc(item.slug)+'"></span>'+
-            '<span class="wd-county-intel-copy"><span class="wd-county-intel-county">'+esc(item.county)+' County, New Jersey</span><h3>'+esc(title)+'</h3>'+hookHtml+'<p>'+esc(copy)+'</p><span class="wd-county-intel-open">'+esc(cta)+' <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>'+
+            '<h3>'+esc(title)+'</h3>'+hookHtml+'<p>'+esc(copy)+'</p><span class="wd-county-intel-open">'+esc(cta)+' <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>'+
     '</a>';
   }
 
