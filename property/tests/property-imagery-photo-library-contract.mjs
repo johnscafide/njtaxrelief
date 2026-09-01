@@ -15,6 +15,8 @@ function assert(condition, message) {
 
 const brand = read('property/js/brand-consistency-runtime.js');
 const runtime = read('property/js/property-imagery-runtime.js');
+const landing = read('property/js/landing-showcase.js');
+const landingIntel = read('property/js/landing-recent-intelligence.js');
 const api = read('api/property-imagery.js');
 const migration = read('supabase/migrations/20260824225500_property_photo_library_v1.sql');
 const governance = read('supabase/migrations/20260824225800_property_photo_library_governance_v1.sql');
@@ -56,6 +58,25 @@ assert(!runtime.includes('maps.googleapis.com/maps/api/streetview'),
 assert(!/watchdog.?score|score_observation|robust/i.test(runtime),
   'Property photo contribution must not affect Watchdog Score or ROBUST');
 
+assert(landing.includes('Orthos_Natural_2020_NJ_WM/MapServer/export'),
+  'Landing property cards must have the NJ Office of GIS aerial baseline');
+assert(landing.includes("'/api/property-imagery?lat='"),
+  'Landing cards must progressively enhance with the free street-level imagery adapter');
+assert(landing.includes("from('property_photos')"),
+  'Signed-in landing cards must prefer the governed first-party property photo library');
+assert(!landing.includes('maps.googleapis.com/maps/api/streetview'),
+  'Landing property cards must never create passive Google Static Street View requests');
+assert(!landing.includes('GMAPS_KEY'),
+  'Landing showcase must not carry a Google Street View key path');
+assert(landingIntel.includes('prepareRenderedPropertyImage'),
+  'Landing intelligence must decorate property imagery instead of removing it');
+assert(!landingIntel.includes('stripRenderedPropertyImage'),
+  'Landing intelligence must not strip real property imagery');
+assert(!landingIntel.includes('querySelectorAll(\'img\').forEach'),
+  'Landing intelligence must not delete card image elements');
+assert(landingIntel.includes('object-fit:cover'),
+  'Landing imagery must fill the score visual while retaining the intelligence overlay');
+
 assert(migration.includes("values ('property-photos', 'property-photos', false"),
   'Property photo bucket must be private');
 assert(migration.includes('property_photos_contribution_consent_chk'),
@@ -73,4 +94,4 @@ assert(provenance.includes("contributor_license_version = 'watchdog-photo-contri
 assert(provenance.includes('property_photos_touch_updated_at'),
   'Property photo provenance must maintain updated_at automatically');
 
-console.log('Property imagery/photo library contract passed: free-first sources, private uploads, verified opt-in contribution, EXIF stripping, consent provenance and moderation boundaries verified.');
+console.log('Property imagery/photo library contract passed: free-first sources, landing imagery hierarchy, private uploads, verified opt-in contribution, EXIF stripping, consent provenance and moderation boundaries verified.');
