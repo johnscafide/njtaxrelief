@@ -7,7 +7,8 @@
   if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   var PARCEL = 'https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
-  var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
+  var NJ_AERIAL = 'https://maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export';
+  var PHOTO_BUCKET = 'property-photos';
   var client = null;
 
   function q(sel, root) { return (root || document).querySelector(sel); }
@@ -33,47 +34,86 @@
   function queryFor(x) {
     return [x.address, x.town, 'NJ', x.zip].filter(Boolean).join(', ');
   }
-  function street(x) {
-    if (!GMAPS_KEY || !x || !x.address) return '';
-    return 'https://maps.googleapis.com/maps/api/streetview?' + new URLSearchParams({
-      size: '640x400',
-      location: queryFor(x),
-      fov: '82',
-      pitch: '4',
-      source: 'outdoor',
-      return_error_code: 'true',
-      key: GMAPS_KEY
-    }).toString();
+  function validCoord(lat, lon) {
+    lat = Number(lat); lon = Number(lon);
+    return Number.isFinite(lat) && Number.isFinite(lon) && lat >= 38.8 && lat <= 41.4 && lon >= -75.7 && lon <= -73.8;
   }
   function aerial(x) {
-    var lat = Number(x.lat), lon = Number(x.lon);
-    if (!Number.isFinite(lat) || !Number.isFinite(lon) || Math.abs(lat) > 90 || Math.abs(lon) > 180) return '';
+    var lat = Number(x && x.lat), lon = Number(x && x.lon);
+    if (!validCoord(lat, lon)) return '';
     var dx = .00145, dy = .001;
-    return 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?' + new URLSearchParams({
+    return NJ_AERIAL + '?' + new URLSearchParams({
       bbox: [lon - dx, lat - dy, lon + dx, lat + dy].join(','),
-      bboxSR: '4326', imageSR: '3857', size: '760,460', format: 'jpg', f: 'image'
+      bboxSR: '4326', imageSR: '3857', size: '760,460', format: 'jpg', transparent: 'false', f: 'image'
     }).toString();
   }
   window.wdLandingPhotoFail = function (img) {
     if (!img) return;
-    var fallback = img.getAttribute('data-fallback');
-    if (fallback && img.getAttribute('data-fallback-used') !== '1') {
-      img.setAttribute('data-fallback-used', '1');
-      img.src = fallback;
-      return;
-    }
     var parent = img.parentNode;
     if (parent) parent.classList.add('no-photo');
     img.remove();
   };
   function propertyPhoto(x) {
-    var primary = street(x), fallback = aerial(x);
+    var src = aerial(x);
     var placeholder = '<div class="wd-property-placeholder" aria-hidden="true"><i class="fas fa-house"></i><span>Property view unavailable</span></div>';
-    if (!primary && !fallback) return placeholder;
-    var src = primary || fallback;
-    return placeholder + '<img src="' + esc(src) + '"' +
-      (primary && fallback ? ' data-fallback="' + esc(fallback) + '"' : '') +
-      ' alt="Street view of ' + esc(x.address) + '" loading="lazy" decoding="async" onerror="wdLandingPhotoFail(this)">';
+    if (!src) return placeholder;
+    return placeholder + '<img src="' + esc(src) + '" alt="Aerial view of ' + esc(x.address) + '" loading="lazy" decoding="async" onerror="wdLandingPhotoFail(this)">';
+  }
+  function freeImagery(x) {
+    if (!x || !validCoord(x.lat, x.lon)) return Promise.resolve(null);
+    var url = '/api/property-imagery?lat=' + encodeURIComponent(x.lat) + '&lon=' + encodeURIComponent(x.lon) + '&street=1';
+    return fetch(url, { headers: { accept: 'application/json' } }).then(function (r) {
+      if (!r.ok) throw new Error('imagery unavailable');
+      return r.json();
+    }).catch(function () { return null; });
+  }
+  function ownPrimaryPhoto(x) {
+    var sb = getClient();
+    if (!sb || !x || !x.pams_pin) return Promise.resolve(null);
+    return sb.from('property_photos')
+      .select('storage_path,is_primary,created_at')
+      .eq('pams_pin', x.pams_pin)
+      .order('is_primary', { ascending: false }).order('created_at', { ascending: false }).limit(1)
+      .then(function (res) {
+        var row = res && res.data && res.data[0];
+        if (!row || !row.storage_path) return null;
+        return sb.storage.from(PHOTO_BUCKET).createSignedUrl(row.storage_path, 3600).then(function (signed) {
+          return signed && signed.data && signed.data.signedUrl ? signed.data.signedUrl : null;
+        });
+      }).catch(function () { return null; });
+  }
+  function hydratePropertyImages(rows, signedIn) {
+    var cards = qa('#wd-property-grid .wd-property-card');
+    (rows || []).forEach(function (x, index) {
+      var card = cards[index];
+      var host = card && q('.wd-property-photo', card);
+      if (!host) return;
+      var image = q('img', host);
+      var baseline = aerial(x);
+      function use(url, source) {
+        if (!url) return;
+        if (!image) {
+          image = document.createElement('img');
+          image.loading = 'lazy'; image.decoding = 'async';
+          image.onerror = function () { window.wdLandingPhotoFail(image); };
+          host.appendChild(image);
+        }
+        image.src = url;
+        image.alt = (source === 'owner' ? 'Property photo of ' : source === 'street' ? 'Street-level view of ' : 'Aerial view of ') + (x.address || 'New Jersey property');
+        host.dataset.imagerySource = source;
+        host.classList.remove('no-photo');
+      }
+      if (baseline) use(baseline, 'aerial');
+      var own = signedIn ? ownPrimaryPhoto(x) : Promise.resolve(null);
+      own.then(function (ownUrl) {
+        if (ownUrl) { use(ownUrl, 'owner'); return null; }
+        return freeImagery(x).then(function (free) {
+          if (free && free.street && free.street.image_url) use(free.street.image_url, 'street');
+          else if (!baseline && free && free.aerial && free.aerial.image_url) use(free.aerial.image_url, 'aerial');
+          return free;
+        });
+      }).catch(function () {});
+    });
   }
   function localRecent(limit) {
     try {
@@ -148,6 +188,7 @@
       html += freeCard();
     }
     grid.innerHTML = html;
+    hydratePropertyImages(rows, signedIn);
   }
 
   function loadPublicExamples() {
@@ -161,7 +202,7 @@
       return (data.features || []).map(function (f) {
         var a = f.attributes || {}, c = f.centroid || {};
         return { pams_pin: a.PAMS_PIN || '', address: a.PROP_LOC || '', town: a.MUN_NAME || '', county: a.COUNTY || '', zip: a.ZIP5 || '', assessed: a.NET_VALUE || '', last_year_tax: a.LAST_YR_TX || '', year_built: a.YR_CONSTR || '', lat: c.y, lon: c.x };
-      }).filter(function (x) { return x.address; });
+      }).filter(function (x) { return x.address && validCoord(x.lat, x.lon); });
     }).catch(function () { return []; });
   }
 
