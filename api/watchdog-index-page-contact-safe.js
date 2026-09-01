@@ -76,6 +76,35 @@ function installEntityGraph(input) {
   return html.replace(/<\/head>/i, `${ENTITY_GRAPH}\n</head>`);
 }
 
+function installRootSocialMetadata(input) {
+  let html = String(input || '');
+  const image = 'https://www.watchdogindex.com/watchdog-social-share.jpg';
+  const title = 'Watchdog | New Jersey Property Intelligence';
+  const description = 'Search New Jersey property data and signals in one place. See Watchdog Score, taxes, assessments, and property intelligence.';
+
+  html = html
+    .replace(/<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${title}">`)
+    .replace(/<meta\s+property=["']og:description["'][^>]*>/i, `<meta property="og:description" content="${description}">`)
+    .replace(/<meta\s+name=["']twitter:title["'][^>]*>/i, `<meta name="twitter:title" content="${title}">`)
+    .replace(/<meta\s+name=["']twitter:description["'][^>]*>/i, `<meta name="twitter:description" content="${description}">`)
+    .replace(/<meta\s+(?:property|name)=["'](?:og:image(?::(?:secure_url|type|width|height|alt))?|twitter:image(?::alt)?)["'][^>]*>\s*/gi, '');
+
+  if (!/<\/head>/i.test(html)) return html;
+
+  const imageTags = [
+    `<meta property="og:image" content="${image}">`,
+    `<meta property="og:image:secure_url" content="${image}">`,
+    '<meta property="og:image:type" content="image/jpeg">',
+    '<meta property="og:image:width" content="600">',
+    '<meta property="og:image:height" content="315">',
+    '<meta property="og:image:alt" content="Watchdog property intelligence for New Jersey">',
+    `<meta name="twitter:image" content="${image}">`,
+    '<meta name="twitter:image:alt" content="Watchdog property intelligence for New Jersey">'
+  ].join('\n  ');
+
+  return html.replace(/<\/head>/i, `  ${imageTags}\n</head>`);
+}
+
 /* Canonical Watchdog pages are already route-normalized by the server adapter.
    Do not add a second browser MutationObserver to re-normalize every injected
    profile/menu node. On the canonical root we also drop the historical global
@@ -215,7 +244,10 @@ module.exports = async function handler(req, res) {
     if (req.method === 'HEAD') return res.end();
     let safeBody = sanitizeContactHtml(body, publicPath);
     safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
-    if (publicPath === '/') safeBody = installEntityGraph(safeBody);
+    if (publicPath === '/') {
+      safeBody = installEntityGraph(safeBody);
+      safeBody = installRootSocialMetadata(safeBody);
+    }
     return res.end(safeBody);
   } catch (error) {
     console.error('[watchdog-contact-route-guard]', publicPath, error && error.message || error);
