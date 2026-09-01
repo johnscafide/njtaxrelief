@@ -34,9 +34,9 @@
     {county:'Warren',slug:'warren',image:'Delaware Water Gap.jpg'}
   ];
   var TITLES=[
-    'property tax records',
-    'assessments & tax records',
-    'property records & tax assessments'
+    ' ',
+    ' ',
+    ' '
   ];
     var deck=[],cursor=0,current=[],rotationTimer=0,paused=false;
   var COPY=null;
