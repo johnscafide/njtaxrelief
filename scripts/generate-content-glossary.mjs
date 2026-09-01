@@ -18,6 +18,11 @@ const EXCLUDED_PATH_PARTS = [
 ];
 const HTML_EXTENSIONS = new Set(['.html', '.htm']);
 const JS_EXTENSIONS = new Set(['.js', '.mjs']);
+const STRUCTURED_COPY_FILES = new Set([
+  'property/data/county-copy.json',
+  'property/data/current-update.json',
+  'property/data/versions.json',
+]);
 
 const normalize = (value) => String(value || '')
   .replace(/&nbsp;/gi, ' ')
@@ -126,6 +131,46 @@ function jsEntries(file, source) {
   return entries;
 }
 
+function jsonEntries(file, source) {
+  const entries = [];
+  const pathName = repoPath(file);
+  let parsed;
+  try {
+    parsed = JSON.parse(source);
+  } catch (error) {
+    throw new Error(`Content glossary could not parse structured copy file ${pathName}: ${error.message}`);
+  }
+
+  const visit = (value, pointer = '$') => {
+    if (typeof value === 'string') {
+      const text = normalize(value);
+      if (!likelyHumanText(text)) return;
+      const encoded = JSON.stringify(value);
+      const index = source.indexOf(encoded);
+      entries.push({
+        text,
+        file: pathName,
+        line: index >= 0 ? lineAt(source, index) : null,
+        owner: 'DATA',
+        contentClass: 'structured-copy',
+        safeToEdit: 'caution',
+        guidance: `Repo-backed structured copy at ${pointer}. Edit the JSON source while preserving its schema, evidence notes and consuming runtime contract.`,
+      });
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => visit(item, `${pointer}[${index}]`));
+      return;
+    }
+    if (value && typeof value === 'object') {
+      Object.entries(value).forEach(([key, item]) => visit(item, `${pointer}.${key}`));
+    }
+  };
+
+  visit(parsed);
+  return entries;
+}
+
 function dedupe(entries) {
   const seen = new Set();
   return entries.filter((entry) => {
@@ -139,20 +184,25 @@ function dedupe(entries) {
 const allFiles = await walk(PROPERTY);
 const sourceFiles = allFiles.filter((file) => {
   const ext = path.extname(file).toLowerCase();
+  const relative = repoPath(file);
   if (HTML_EXTENSIONS.has(ext)) return true;
-  return JS_EXTENSIONS.has(ext) && repoPath(file).startsWith('property/js/');
+  if (JS_EXTENSIONS.has(ext) && relative.startsWith('property/js/')) return true;
+  return STRUCTURED_COPY_FILES.has(relative);
 }).sort();
 
 let entries = [];
 const fingerprint = createHash('sha256');
 for (const file of sourceFiles) {
   const source = await readFile(file, 'utf8');
-  fingerprint.update(repoPath(file));
+  const relative = repoPath(file);
+  fingerprint.update(relative);
   fingerprint.update('\0');
   fingerprint.update(source);
   fingerprint.update('\0');
   const ext = path.extname(file).toLowerCase();
-  entries.push(...(HTML_EXTENSIONS.has(ext) ? htmlEntries(file, source) : jsEntries(file, source)));
+  if (HTML_EXTENSIONS.has(ext)) entries.push(...htmlEntries(file, source));
+  else if (STRUCTURED_COPY_FILES.has(relative)) entries.push(...jsonEntries(file, source));
+  else entries.push(...jsEntries(file, source));
 }
 
 entries.push({
@@ -172,7 +222,7 @@ entries = dedupe(entries).sort((a, b) =>
 );
 
 const payload = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   generatedBy: 'scripts/generate-content-glossary.mjs',
   sourceFingerprint: fingerprint.digest('hex'),
   sourceFileCount: sourceFiles.length,
