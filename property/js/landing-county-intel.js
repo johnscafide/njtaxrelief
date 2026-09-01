@@ -123,7 +123,7 @@
       '.wd-county-intel-county{display:block;color:#087f82;font:800 11px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}',
       '.wd-county-intel-card h3{margin:0;color:#10294b;padding:20px 20px 22px;font:800 21px/1.22 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}',
       '.wd-county-intel-hook{display:block;margin:11px 0 0;color:#10294b;font:750 15.5px/1.35 "Plus Jakarta Sans",sans-serif}',
-      '.wd-county-intel-card p{margin:20px 0 0;color:#61717a;font-size:15.5px;line-height:1.5}',
+      '.wd-county-intel-card p{margin:0 20px 0;color:#61717a;font-size:15.5px;line-height:1.5}',
       '.wd-county-intel-open{display:inline-flex;align-items:center;gap:8px;margin-top:17px;margin: 20px;color:#087f82;font-size:14.5px;font-weight:800}',
       '@media(max-width:900px){.wd-county-intel-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.wd-county-intel-card:last-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(230px,.8fr) minmax(0,1.2fr)}.wd-county-intel-card:last-child .wd-county-intel-image{height:100%;min-height:220px}}',
       '@media(max-width:680px){.wd-county-intel{padding:18px 0 46px}.wd-county-intel .wd-county-intel-wrap{width:min(100% - 28px,1240px)}.wd-county-intel-toolbar{margin-bottom:12px}.wd-county-intel-all{font-size:13px}.wd-county-intel-grid{grid-template-columns:1fr;gap:14px}.wd-county-intel-card:last-child{display:block;grid-column:auto}.wd-county-intel-image,.wd-county-intel-card:last-child .wd-county-intel-image{height:170px;min-height:0}.wd-county-intel-copy{padding:18px}.wd-county-intel-card h3{font-size:20px}}',
