@@ -23,9 +23,9 @@
       <div>
         <div class="cg-kicker"><i class="fas fa-book-open"></i> Auto-generated source map</div>
         <h1>Find any Watchdog text.</h1>
-        <p>Search copy, labels, placeholders and runtime strings to see exactly which file owns them, where they appear, and whether they are safe to edit directly.</p>
+        <p>Search copy, labels, placeholders, structured content and runtime strings to see exactly which source owns them, where they appear, and whether they are safe to edit directly.</p>
       </div>
-      <aside class="cg-rule"><strong>Ownership rule</strong><span>Static copy → HTML</span><span>Presentation → CSS</span><span>Behavior/state/data → JavaScript</span><span>Governed editorial → CMS</span></aside>
+      <aside class="cg-rule"><strong>Ownership rule</strong><span>Static copy → HTML</span><span>Presentation → CSS</span><span>Behavior/state/data → JavaScript</span><span>Repo-backed structured copy → DATA</span><span>Governed editorial → CMS</span></aside>
     </section>
 
     <section class="cg-stats" aria-label="Glossary summary">
@@ -33,14 +33,16 @@
       <div><span id="cg-file-count">—</span><small>Source files</small></div>
       <div><span id="cg-html-count">—</span><small>HTML entries</small></div>
       <div><span id="cg-js-count">—</span><small>JS entries</small></div>
+      <div><span id="cg-data-count">—</span><small>DATA entries</small></div>
     </section>
 
     <section class="cg-controls" aria-label="Content glossary controls">
-      <label class="cg-search"><i class="fas fa-magnifying-glass"></i><input id="cg-search" type="search" autocomplete="off" placeholder="Search exact wording, file name, HTML, JS, CMS…"></label>
+      <label class="cg-search"><i class="fas fa-magnifying-glass"></i><input id="cg-search" type="search" autocomplete="off" placeholder="Search exact wording, file name, HTML, JS, DATA, CMS…"></label>
       <div class="cg-filters" id="cg-filters">
         <button class="active" type="button" data-owner="all">All</button>
         <button type="button" data-owner="HTML">HTML</button>
         <button type="button" data-owner="JS">JavaScript</button>
+        <button type="button" data-owner="DATA">Structured data</button>
         <button type="button" data-owner="CMS">CMS</button>
       </div>
     </section>
