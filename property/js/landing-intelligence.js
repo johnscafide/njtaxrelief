@@ -4,7 +4,9 @@
   var path = (window.location.pathname || '').replace(/\/+$/, '');
   var host = String(window.location.hostname || '').toLowerCase();
   var cleanWatchdogRoot = (host === 'www.watchdogindex.com' || host === 'watchdogindex.com') && path === '';
-  if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
+  var isIndex = path === '/property' || path === '/property/index.html' || cleanWatchdogRoot;
+  var isPro = path === '/property/pro' || path === '/pro';
+  if (!isIndex && !isPro) return;
 
   var attempts = 0;
   var client = null;
@@ -39,7 +41,11 @@
   function getClient() {
     if (client) return client;
     try {
-      if (window.NJPTRSupabaseRuntime && typeof window.NJPTRSupabaseRuntime.createClient === 'function') client = window.NJPTRSupabaseRuntime.createClient();
+      if (window.NJPTRSupabaseRuntime && typeof window.NJPTRSupabaseRuntime.createClient === 'function') {
+        client = window.NJPTRSupabaseRuntime.createClient();
+      } else if (window.WatchdogBilling && typeof window.WatchdogBilling.client === 'function') {
+        client = window.WatchdogBilling.client();
+      }
     } catch (_error) {}
     return client;
   }
@@ -50,24 +56,34 @@
   function ensureSection() {
     var existing = document.getElementById('wd-intelligence-glance');
     if (existing) return existing;
+
+    var sec = document.createElement('section');
+    sec.id = 'wd-intelligence-glance';
+
+    if (isPro) {
+      var pricing = document.getElementById('pricing');
+      if (!pricing) return null;
+      sec.setAttribute('aria-labelledby', 'wdi-title');
+      sec.innerHTML =
+        '<div class="wdi-shell">' +
+          '<div class="wdi-head">' +
+            '<div><div class="wdi-kicker">Watchdog Intelligence</div>' +
+            '<h2 id="wdi-title">Watchdog <em>right now.</em></h2>' +
+            '<p class="wdi-lead">Evidence first backed sources.</p></div>' +
+            '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, defensible evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See data methodology <i class="fas fa-arrow-right"></i></a></div>' +
+          '</div>' +
+          '<div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the latest Watchdog scoring and source-monitoring run…</div></div>' +
+        '</div>';
+      pricing.insertAdjacentElement('beforebegin', sec);
+      return sec;
+    }
+
     var recent = document.getElementById('wd-consumer-recents');
     var insightGrid = q('.ins-grid');
     var insights = insightGrid && insightGrid.closest('.section');
     if (!recent || !insights) return null;
-
-    var sec = document.createElement('section');
-    sec.id = 'wd-intelligence-glance';
-    sec.setAttribute('aria-labelledby', 'wdi-title');
-    sec.innerHTML =
-      '<div class="wdi-shell">' +
-        '<div class="wdi-head">' +
-          '<div><div class="wdi-kicker">Watchdog Intelligence</div>' +
-          '<h2 id="wdi-title">Watchdog <em>right now.</em></h2>' +
-          '<p class="wdi-lead">Evidence first backed sources.</p></div>' +
-          '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, defensible evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See data methodology <i class="fas fa-arrow-right"></i></a></div>' +
-        '</div>' +
-        '<div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the latest Watchdog scoring and source-monitoring run…</div></div>' +
-      '</div>';
+    sec.setAttribute('aria-label', 'Watchdog Score methodology');
+    sec.innerHTML = '<div class="wdi-shell"><div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the current Watchdog Score methodology…</div></div></div>';
     recent.insertAdjacentElement('afterend', sec);
     if (sec.nextElementSibling !== insights) sec.insertAdjacentElement('afterend', insights);
     return sec;
@@ -101,10 +117,10 @@
     }).join('');
   }
 
-  function render(data) {
+  function renderPro(data) {
     var host = document.getElementById('wdi-live');
     if (!host || !data) return;
-    var c = data.cohort || {}, e = data.engine || {}, w = data.source_watch || {}, s = data.signals || {}, m = data.methodology || {};
+    var c = data.cohort || {}, e = data.engine || {}, w = data.source_watch || {}, s = data.signals || {};
     var tax = s.tax_pressure || {}, rev = s.revaluation_risk || {}, uni = s.uniformity || {};
     var sourceFacts = (Number(w.unchanged_observations) || 0) + (Number(w.changed_observations) || 0);
     var sourceCopy = num(w.eligible_properties) + ' eligible properties · ' + num(w.provider_records) + ' provider records · ' + num(w.changed_observations) + ' changes detected · ' + num(w.candidates_created) + ' candidates escalated.';
@@ -134,20 +150,36 @@
           '<div><i class="fas fa-calculator"></i><span><b>3 · We score six things and weight them</b>Six weighted components are calculated; missing inputs are dropped and remaining weights are renormalized.</span></div>' +
           '<div><i class="fas fa-shield-halved"></i><span><b>4 · Thin data lowers the score, but not our certainty.</b>Coverage is carried with the result. Weak evidence lowers confidence instead of becoming a made-up number.</span></div>' +
         '</div></article>' +
-      '</div>' +
+      '</div>';
+  }
+
+  function renderIndex(data) {
+    var host = document.getElementById('wdi-live');
+    if (!host || !data) return;
+    var c = data.cohort || {}, m = data.methodology || {};
+    host.innerHTML =
       '<div class="wdi-weights"><div class="wdi-weights-copy"><h3>Exactly what the current Watchdog Score weighs.</h3></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
       '<div class="wdi-cta"><div><h3>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
 
     var plans = document.getElementById('wdi-plans');
     if (plans) plans.addEventListener('click', function () {
-      track('landing_intelligence_plan_click', { placement:'live_intelligence_glance', cohort_as_of:data.as_of || '', properties:Number(c.properties)||0, model:m.score_model || '' });
+      track('landing_intelligence_plan_click', { placement:'score_methodology', cohort_as_of:data.as_of || '', properties:Number(c.properties)||0, model:m.score_model || '' });
     });
+  }
+
+  function render(data) {
+    if (isPro) renderPro(data);
+    else renderIndex(data);
   }
 
   function renderUnavailable() {
     var host = document.getElementById('wdi-live');
     if (!host) return;
-    host.innerHTML = '<div class="wdi-read"><article class="wdi-read-card"><span class="wdi-label">Live metrics refreshing</span><h3>Watchdog will not substitute stale numbers.</h3><p>The current scoring snapshot could not be verified in this browser session, so the numeric sample is withheld. The paid product follows the same rule: unavailable evidence does not quietly become zero, safe or favorable.</p></article><article class="wdi-read-card"><span class="wdi-label">Still available</span><div class="wdi-method"><div><i class="fas fa-book-open"></i><span><b>Methodology</b>See the governed score components and public-data sources.</span></div><div><i class="fas fa-arrow-up-right-dots"></i><span><b>Plans</b>See which Intelligence capabilities are included in paid tiers.</span></div></div></article></div><div class="wdi-cta"><div><h3>Explore Watchdog Intelligence.</h3><p>Property-level intelligence with evidence and confidence attached.</p></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">Methodology</a><a class="wdi-btn primary" href="/property/pro#plans">See plans <i class="fas fa-arrow-right"></i></a></div></div>';
+    if (isPro) {
+      host.innerHTML = '<div class="wdi-read"><article class="wdi-read-card"><span class="wdi-label">Live metrics refreshing</span><h3>Watchdog will not substitute stale numbers.</h3><p>The current scoring snapshot could not be verified in this browser session, so the numeric sample is withheld. The paid product follows the same rule: unavailable evidence does not quietly become zero, safe or favorable.</p></article><article class="wdi-read-card"><span class="wdi-label">Still available</span><div class="wdi-method"><div><i class="fas fa-book-open"></i><span><b>Methodology</b>See the governed score components and public-data sources.</span></div><div><i class="fas fa-arrow-up-right-dots"></i><span><b>Plans</b>Pricing remains available directly below this sample.</span></div></div></article></div>';
+      return;
+    }
+    host.innerHTML = '<div class="wdi-weights"><div class="wdi-weights-copy"><h3>Exactly what the current Watchdog Score weighs.</h3></div><div class="wdi-weight-grid"><div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Current methodology refreshing</b>The live score components could not be verified in this browser session.</span></div></div></div><div class="wdi-cta"><div><h3>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
   }
 
   var HOMEOWNER_RESOURCES = [
@@ -158,7 +190,45 @@
     ['Block, lot & qualifier explained','/property/block-lot-qualifier/']
   ];
 
+  function simplifyLandingCopy() {
+    if (!isIndex) return true;
+    var directory = document.getElementById('wd-seo-directory');
+    if (!directory) return false;
+
+    var townHead = q('.wd-directory-head', directory);
+    if (townHead) {
+      var townKicker = q('.wd-section-kicker', townHead);
+      var townTitle = q('h2', townHead);
+      var townSub = q('p', townHead);
+      if (townKicker) townKicker.remove();
+      if (townTitle) townTitle.textContent = 'Town by Town';
+      if (townSub) townSub.remove();
+      townHead.style.maxWidth = 'none';
+      townHead.style.textAlign = 'center';
+    }
+
+    var guideHead = q('.wd-guide-band > div:first-child', directory);
+    if (guideHead) {
+      var guideKicker = q('.wd-section-kicker', guideHead);
+      var guideTitle = q('h2', guideHead);
+      var guideSub = q('p', guideHead);
+      if (guideKicker) guideKicker.remove();
+      if (guideTitle) guideTitle.textContent = 'Property Guides';
+      if (guideSub) guideSub.remove();
+    }
+
+    var homeownerHead = q('.wd-homeowner-links > div:first-child', directory);
+    if (homeownerHead) {
+      var homeownerKicker = q('.wd-section-kicker', homeownerHead);
+      var homeownerTitle = q('h2', homeownerHead);
+      if (homeownerKicker) homeownerKicker.remove();
+      if (homeownerTitle) homeownerTitle.textContent = 'Homeowner Topics';
+    }
+    return true;
+  }
+
   function addResources() {
+    if (!isIndex) return true;
     if (resourcesAdded) return true;
     var host = q('.wd-homeowner-links .wd-guide-links');
     if (!host) return false;
@@ -182,8 +252,9 @@
   function boot() {
     attempts += 1;
     var sec = ensureSection();
+    var copyReady = simplifyLandingCopy();
     var resourcesReady = addResources();
-    if (!sec || !resourcesReady) {
+    if (!sec || !copyReady || !resourcesReady) {
       if (attempts < 80) window.setTimeout(boot, 80);
       return;
     }
