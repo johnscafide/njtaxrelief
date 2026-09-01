@@ -49,7 +49,7 @@
       'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
       '#wd-consumer-recents .wd-property-photo{position:relative!important;overflow:hidden!important}',
       '#wd-consumer-recents .wd-property-photo.wd-score-visual{background:radial-gradient(circle at 82% 16%,rgba(85,151,255,.42),transparent 34%),linear-gradient(145deg,#081d3b 0%,#123f86 54%,#2467d7 100%)!important}',
-      '#wd-consumer-recents .wd-property-photo.wd-score-visual:before{content:"WATCHDOG PROPERTY INTELLIGENCE";position:absolute;z-index:3;left:18px;top:58px;color:rgba(255,255,255,.62);font:850 9px/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:.13em}',
+      '#wd-consumer-recents .wd-property-photo.wd-score-visual:before{content:"";position:absolute;z-index:3;left:18px;top:58px;color:rgba(255,255,255,.62);font:850 9px/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:.13em}',
       '#wd-consumer-recents .wd-property-photo.wd-score-visual:after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,8,24,.22))}',
       '#wd-consumer-recents .wd-property-photo.wd-score-visual>img,#wd-consumer-recents .wd-property-photo.wd-score-visual>.wd-property-placeholder{display:none!important}',
       '#wd-consumer-recents .wd-property-label{z-index:6!important}',
