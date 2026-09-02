@@ -1,0 +1,59 @@
+name: NJW-258 production release pulse
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release-once:
+    if: ${{ github.event.head_commit.message == 'NJW-258 stage production release pulse' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Enable exactly one Git production deployment
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('vercel.json')
+          s = p.read_text()
+          old = '"deploymentEnabled": false'
+          if s.count(old) != 1:
+              raise SystemExit('expected deploymentEnabled false exactly once')
+          p.write_text(s.replace(old, '"deploymentEnabled": true', 1))
+          PY
+          git add vercel.json
+          git commit -m "Temporarily enable one Git deployment for NJW-258"
+          git push origin HEAD:main
+      - name: Restore paused Git deployments without dropping concurrent work
+        shell: bash
+        run: |
+          sleep 12
+          git fetch origin main
+          git reset --hard origin/main
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('vercel.json')
+          s = p.read_text()
+          if '"deploymentEnabled": true' in s:
+              s = s.replace('"deploymentEnabled": true', '"deploymentEnabled": false', 1)
+          elif '"deploymentEnabled": false' not in s:
+              raise SystemExit('deploymentEnabled state missing')
+          p.write_text(s)
+          PY
+          git rm -f .github/workflows/njw258-production-release-pulse.yml
+          git add vercel.json
+          if git diff --cached --quiet; then
+            echo "Release controls already restored."
+            exit 0
+          fi
+          git commit -m "Restore paused Git deployments after NJW-258 release pulse"
+          git push origin HEAD:main
