@@ -144,6 +144,7 @@
       var head=document.createElement('div'); head.className='wd-library-card-head';
       var text=document.createElement('div'); var h=document.createElement('h3'); h.textContent=applicantName(payload); var addr=document.createElement('p'); addr.className='wd-library-card-address'; addr.textContent=homeAddress(payload); text.appendChild(h);text.appendChild(addr);
       var badge=document.createElement('span');badge.className='wd-library-badge';badge.textContent=formLabel(payload);head.appendChild(text);head.appendChild(badge);card.appendChild(head);
+      // content-architecture: dynamic — save date and generated/draft state are rendered from the decrypted account record.
       var meta=document.createElement('div');meta.className='wd-library-meta';var saved=document.createElement('span');saved.textContent='Last saved ' + formatDate(row.updated_at);var stateEl=document.createElement('span');stateEl.textContent=row.status === 'generated' ? 'Official PDF prepared' : 'Draft';meta.appendChild(saved);meta.appendChild(stateEl);card.appendChild(meta);
       var actions=document.createElement('div');actions.className='wd-library-actions';actions.appendChild(button('Continue application','secondary','resume',row.id));if(row.status==='generated'){actions.appendChild(button('Download saved PDF','primary','download',row.id));actions.appendChild(button('Print saved PDF','secondary','print',row.id));}actions.appendChild(button('Delete','wd-library-delete','delete',row.id));card.appendChild(actions);list.appendChild(card);
     });
