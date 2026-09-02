@@ -23,7 +23,6 @@ jobs:
           cat > /tmp/njw258_display_address_patch.py <<'PY'
           from pathlib import Path
           import re
-          import textwrap
 
           path = Path('property/js/lookup.js')
           s = path.read_text()
@@ -32,23 +31,33 @@ jobs:
               anchor = '  var PARCEL_ADDR_NOISE = {'
               if anchor not in s:
                   raise SystemExit('display helper insertion anchor not found')
-              helper = textwrap.dedent('''
-                function displayStreetAddress(typed, matched, assessor) {
-                  // Keep the address the visitor searched as the primary label. NJ's
-                  // assessor may use a different street alias for the same tax parcel.
-                  var source = String(matched || typed || assessor || '').trim();
-                  var street = source.split(',')[0].trim();
-                  return street || String(assessor || typed || '').trim();
-                }
+              helper = """  function displayStreetAddress(typed, matched, assessor) {
+            // Keep the address the visitor searched as the primary label. NJ's
+            // assessor may use a different street alias for the same tax parcel.
+            var source = String(matched || typed || assessor || '').trim();
+            var street = source.split(',')[0].trim();
+            return street || String(assessor || typed || '').trim();
+          }
 
-                function assessorAddressAlias(display, assessor) {
-                  var parcelAddress = String(assessor || '').trim();
-                  if (!parcelAddress || !display) return '';
-                  return normAddr(parcelAddress) === normAddr(display) ? '' : parcelAddress;
-                }
+          function assessorAddressAlias(display, assessor) {
+            var parcelAddress = String(assessor || '').trim();
+            if (!parcelAddress || !display) return '';
+            return normAddr(parcelAddress) === normAddr(display) ? '' : parcelAddress;
+          }
 
-              ''')
-              helper = ''.join('  ' + line if line.strip() else line for line in helper.splitlines(True))
+          """
+              # Triple-quoted text above inherits Python source indentation on
+              # continuation lines. Normalize it explicitly before insertion.
+              lines = helper.splitlines()
+              normalized = []
+              for i, line in enumerate(lines):
+                  if i == 0:
+                      normalized.append(line)
+                  elif line.startswith('        '):
+                      normalized.append(line[8:])
+                  else:
+                      normalized.append(line)
+              helper = '\n'.join(normalized) + '\n'
               s = s.replace(anchor, helper + anchor, 1)
 
           if 'var displayAddress = displayStreetAddress(typed, geo && geo.matched, p.PROP_LOC);' not in s:
@@ -85,28 +94,48 @@ jobs:
 
           path.write_text(s)
 
-          test = textwrap.dedent(r'''\
-          import fs from 'node:fs';
+          Path('property/tests/property-display-address-contract.mjs').write_text("""import fs from 'node:fs';
           import assert from 'node:assert/strict';
 
           const src = fs.readFileSync(new URL('../js/lookup.js', import.meta.url), 'utf8');
 
-          assert.match(src, /function displayStreetAddress\(typed, matched, assessor\)/, 'searched/geocoded address display helper must exist');
-          assert.match(src, /var displayAddress = displayStreetAddress\(typed, geo && geo\.matched, p\.PROP_LOC\)/, 'render must derive the user-facing address from search evidence');
+          assert.match(src, /function displayStreetAddress\\(typed, matched, assessor\\)/, 'searched/geocoded address display helper must exist');
+          assert.match(src, /var displayAddress = displayStreetAddress\\(typed, geo && geo\\.matched, p\\.PROP_LOC\\)/, 'render must derive the user-facing address from search evidence');
           assert.match(src, /address: displayAddress, assessorAddress: assessorAddress, assessorAlias: assessorAlias/, 'display and assessor addresses must be kept separately');
-          assert.doesNotMatch(src, /address: p\.PROP_LOC \|\| typed, town:/, 'assessor PROP_LOC must not replace the searched address');
+          assert.doesNotMatch(src, /address: p\\.PROP_LOC \\|\\| typed, town:/, 'assessor PROP_LOC must not replace the searched address');
           assert.match(src, /NJ tax records list this parcel as/, 'assessor alias must be disclosed as secondary context');
-          assert.match(src, /normAddr\(parcelAddress\) === normAddr\(display\)/, 'equivalent spellings must not create a false alias note');
+          assert.match(src, /normAddr\\(parcelAddress\\) === normAddr\\(display\\)/, 'equivalent spellings must not create a false alias note');
 
           console.log('property display address contract: ok');
-          ''')
-          Path('property/tests/property-display-address-contract.mjs').write_text(test)
+          """)
           PY
-      - name: Sync, patch, and verify current main
+      - name: Sync current main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+      - name: Apply display patch
+        run: python /tmp/njw258_display_address_patch.py
+      - name: Syntax check
+        run: node --check property/js/lookup.js
+      - name: Lookup performance contract
+        run: node property/tests/property-lookup-performance-contract.mjs
+      - name: Parcel fallback contract
+        run: node property/tests/property-parcel-fallback-contract.mjs
+      - name: Address alias contract
+        run: node property/tests/property-address-alias-contract.mjs
+      - name: Mailing ZIP contract
+        run: node property/tests/property-mailing-zip-contract.mjs
+      - name: Display address contract
+        run: node property/tests/property-display-address-contract.mjs
+      - name: Diff check
+        run: git diff --check
+      - name: Reconcile concurrent main before write
         shell: bash
         run: |
           set -euo pipefail
-          verify() {
+          git fetch origin main
+          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
+            git reset --hard origin/main
             python /tmp/njw258_display_address_patch.py
             node --check property/js/lookup.js
             node property/tests/property-lookup-performance-contract.mjs
@@ -115,14 +144,6 @@ jobs:
             node property/tests/property-mailing-zip-contract.mjs
             node property/tests/property-display-address-contract.mjs
             git diff --check
-          }
-          git fetch origin main
-          git reset --hard origin/main
-          verify
-          git fetch origin main
-          if [ "$(git rev-parse HEAD)" != "$(git rev-parse origin/main)" ]; then
-            git reset --hard origin/main
-            verify
           fi
       - name: Commit verified product change and self-clean
         shell: bash
