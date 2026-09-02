@@ -78,130 +78,14 @@ jobs:
           print('Public navigation hooks and WebKit-safe runtime/CSS tap interaction contracts are current.')
 
   njw258-qualified-alias-patch:
-    if: github.event_name == 'push' && github.actor != 'github-actions[bot]'
+    if: ${{ github.event_name == 'push' && github.actor != 'github-actions[bot]' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Apply qualified alias fix
-        shell: bash
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-
-          lookup_path = Path('property/js/lookup.js')
-          s = lookup_path.read_text()
-
-          old = """  function parcelAliasCandidateMatches(feature, targets) {
-    var a = feature && feature.attributes;
-    if (!a || String(a.PCLQCODE || '').trim()) return false;
-    var candidate = parcelAddressParts(a.PROP_LOC);
-    var candidateZip = String(a.ZIP5 || '').trim();
-    if (!candidate || !candidate.house || !candidateZip) return false;
-    return targets.some(function (target) {
-      return !!(target.house && target.house === candidate.house && target.zip && target.zip === candidateZip);
-    });
-  }
-"""
-          new = """  function parcelAliasIdentityMatches(feature, targets) {
-    var a = feature && feature.attributes;
-    if (!a) return false;
-    var candidate = parcelAddressParts(a.PROP_LOC);
-    var candidateZip = String(a.ZIP5 || '').trim();
-    if (!candidate || !candidate.house || !candidateZip) return false;
-    return targets.some(function (target) {
-      return !!(target.house && target.house === candidate.house && target.zip && target.zip === candidateZip);
-    });
-  }
-
-  function parcelAliasCandidateMatches(feature, targets) {
-    var a = feature && feature.attributes;
-    if (!a || String(a.PCLQCODE || '').trim()) return false;
-    return parcelAliasIdentityMatches(feature, targets);
-  }
-"""
-          if old not in s:
-              raise SystemExit('alias candidate block not found')
-          s = s.replace(old, new, 1)
-
-          old = """        var matches = (d.features || []).filter(function (feature) {
-          return parcelAliasCandidateMatches(feature, targets);
-        });
-        if (matches.length !== 1) return null;
-        var dist = parcelDistanceMeters(matches[0], lat, lon);
-"""
-          new = """        var matches = (d.features || []).filter(function (feature) {
-          return parcelAliasIdentityMatches(feature, targets);
-        });
-        // A qualifier is not itself ambiguity. Some ordinary NJ single-family
-        // parcels carry a qualifier (for example lot 3.01). What matters is
-        // whether this bounded address search resolves to one unique tax parcel.
-        // Condos/multi-parcel addresses still produce multiple PAMS_PIN values
-        // here and therefore continue to fail closed.
-        var seenPins = Object.create(null);
-        matches = matches.filter(function (feature) {
-          var a = feature && feature.attributes || {};
-          var key = String(a.PAMS_PIN || '').trim() || [
-            a.PROP_LOC || '', a.PCLBLOCK || '', a.PCLLOT || '', a.PCLQCODE || ''
-          ].join('|');
-          if (seenPins[key]) return false;
-          seenPins[key] = true;
-          return true;
-        });
-        if (matches.length !== 1) return null;
-        var dist = parcelDistanceMeters(matches[0], lat, lon);
-"""
-          if old not in s:
-              raise SystemExit('nearby alias match block not found')
-          s = s.replace(old, new, 1)
-
-          old = """      if (!exact) {
-        return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
-          if (!nearAlias) return null;
-          var a = nearAlias.attributes || {};
-          console.info('[watchdog] nearby assessor alias confirmed from high-confidence NJ geocode', {
-            searched: targets[0] && targets[0].key,
-            parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
-          });
-          return nearAlias;
-        });
-      }
-"""
-          new = """      // Even when the NJ point intersects a parcel, a qualified assessor
-      // alias must still go through the bounded uniqueness check rather than be
-      // accepted from an arbitrary resultRecordCount=1 feature.
-      return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
-        if (!nearAlias) return null;
-        var a = nearAlias.attributes || {};
-        console.info('[watchdog] nearby assessor alias confirmed from high-confidence NJ geocode', {
-          searched: targets[0] && targets[0].key,
-          parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || '', qualifier: a.PCLQCODE || ''
-        });
-        return nearAlias;
-      });
-"""
-          if old not in s:
-              raise SystemExit('manual alias condition block not found')
-          s = s.replace(old, new, 1)
-          lookup_path.write_text(s)
-
-          test_path = Path('property/tests/property-address-alias-contract.mjs')
-          t = test_path.read_text()
-          t = t.replace(
-              "assert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should have a strict alias candidate gate');\n",
-              "assert.match(lookup, /function parcelAliasIdentityMatches/, 'lookup should separate address identity from qualifier ambiguity');\nassert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should keep a strict direct alias candidate gate');\n"
-          )
-          t = t.replace(
-              "assert.match(lookup, /String\\(a\\.PCLQCODE \\|\\| ''\\)\\.trim\\(\\)/, 'qualified parcels must fail closed in alias mode');\n",
-              "assert.match(lookup, /String\\(a\\.PCLQCODE \\|\\| ''\\)\\.trim\\(\\)/, 'direct alias acceptance must still reject qualifiers until bounded uniqueness is established');\n"
-          )
-          t = t.replace(
-              "assert.match(lookup, /if \\(!exact\\) \\{[\\s\\S]*parcelNearbyAliasCandidate\\(geoMeta\\.lat, geoMeta\\.lon, targets\\)/, 'manual high-confidence NJ lookup should recover a unique nearby assessor alias when the point misses the polygon');\n",
-              "assert.match(lookup, /return parcelNearbyAliasCandidate\\(geoMeta\\.lat, geoMeta\\.lon, targets\\)/, 'manual high-confidence NJ lookup should always use bounded uniqueness for unresolved assessor aliases');\nassert.match(lookup, /return parcelAliasIdentityMatches\\(feature, targets\\)/, 'bounded alias search should include qualified parcels in the identity candidate set');\nassert.match(lookup, /var seenPins = Object\\.create\\(null\\)/, 'bounded alias search should deduplicate by parcel identity before deciding uniqueness');\nassert.match(lookup, /String\\(a\\.PAMS_PIN \\|\\| ''\\)\\.trim\\(\\)/, 'bounded alias uniqueness should prefer statewide parcel ID');\n"
-          )
-          test_path.write_text(t)
-          PY
+        run: echo "ZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgpsb29rdXBfcGF0aCA9IFBhdGgoInByb3BlcnR5L2pzL2xvb2t1cC5qcyIpCnMgPSBsb29rdXBfcGF0aC5yZWFkX3RleHQoKQoKb2xkID0gIiIiICBmdW5jdGlvbiBwYXJjZWxBbGlhc0NhbmRpZGF0ZU1hdGNoZXMoZmVhdHVyZSwgdGFyZ2V0cykgewogICAgdmFyIGEgPSBmZWF0dXJlICYmIGZlYXR1cmUuYXR0cmlidXRlczsKICAgIGlmICghYSB8fCBTdHJpbmcoYS5QQ0xRQ09ERSB8fCAnJykudHJpbSgpKSByZXR1cm4gZmFsc2U7CiAgICB2YXIgY2FuZGlkYXRlID0gcGFyY2VsQWRkcmVzc1BhcnRzKGEuUFJPUF9MT0MpOwogICAgdmFyIGNhbmRpZGF0ZVppcCA9IFN0cmluZyhhLlpJUDUgfHwgJycpLnRyaW0oKTsKICAgIGlmICghY2FuZGlkYXRlIHx8ICFjYW5kaWRhdGUuaG91c2UgfHwgIWNhbmRpZGF0ZVppcCkgcmV0dXJuIGZhbHNlOwogICAgcmV0dXJuIHRhcmdldHMuc29tZShmdW5jdGlvbiAodGFyZ2V0KSB7CiAgICAgIHJldHVybiAhISh0YXJnZXQuaG91c2UgJiYgdGFyZ2V0LmhvdXNlID09PSBjYW5kaWRhdGUuaG91c2UgJiYgdGFyZ2V0LnppcCAmJiB0YXJnZXQuemlwID09PSBjYW5kaWRhdGVaaXApOwogICAgfSk7CiAgfQoiIiIKbmV3ID0gIiIiICBmdW5jdGlvbiBwYXJjZWxBbGlhc0lkZW50aXR5TWF0Y2hlcyhmZWF0dXJlLCB0YXJnZXRzKSB7CiAgICB2YXIgYSA9IGZlYXR1cmUgJiYgZmVhdHVyZS5hdHRyaWJ1dGVzOwogICAgaWYgKCFhKSByZXR1cm4gZmFsc2U7CiAgICB2YXIgY2FuZGlkYXRlID0gcGFyY2VsQWRkcmVzc1BhcnRzKGEuUFJPUF9MT0MpOwogICAgdmFyIGNhbmRpZGF0ZVppcCA9IFN0cmluZyhhLlpJUDUgfHwgJycpLnRyaW0oKTsKICAgIGlmICghY2FuZGlkYXRlIHx8ICFjYW5kaWRhdGUuaG91c2UgfHwgIWNhbmRpZGF0ZVppcCkgcmV0dXJuIGZhbHNlOwogICAgcmV0dXJuIHRhcmdldHMuc29tZShmdW5jdGlvbiAodGFyZ2V0KSB7CiAgICAgIHJldHVybiAhISh0YXJnZXQuaG91c2UgJiYgdGFyZ2V0LmhvdXNlID09PSBjYW5kaWRhdGUuaG91c2UgJiYgdGFyZ2V0LnppcCAmJiB0YXJnZXQuemlwID09PSBjYW5kaWRhdGVaaXApOwogICAgfSk7CiAgfQoKICBmdW5jdGlvbiBwYXJjZWxBbGlhc0NhbmRpZGF0ZU1hdGNoZXMoZmVhdHVyZSwgdGFyZ2V0cykgewogICAgdmFyIGEgPSBmZWF0dXJlICYmIGZlYXR1cmUuYXR0cmlidXRlczsKICAgIGlmICghYSB8fCBTdHJpbmcoYS5QQ0xRQ09ERSB8fCAnJykudHJpbSgpKSByZXR1cm4gZmFsc2U7CiAgICByZXR1cm4gcGFyY2VsQWxpYXNJZGVudGl0eU1hdGNoZXMoZmVhdHVyZSwgdGFyZ2V0cyk7CiAgfQoiIiIKaWYgb2xkIG5vdCBpbiBzOgogICAgcmFpc2UgU3lzdGVtRXhpdCgiYWxpYXMgY2FuZGlkYXRlIGJsb2NrIG5vdCBmb3VuZCIpCnMgPSBzLnJlcGxhY2Uob2xkLCBuZXcsIDEpCgpvbGQgPSAiIiIgICAgICAgIHZhciBtYXRjaGVzID0gKGQuZmVhdHVyZXMgfHwgW10pLmZpbHRlcihmdW5jdGlvbiAoZmVhdHVyZSkgewogICAgICAgICAgcmV0dXJuIHBhcmNlbEFsaWFzQ2FuZGlkYXRlTWF0Y2hlcyhmZWF0dXJlLCB0YXJnZXRzKTsKICAgICAgICB9KTsKICAgICAgICBpZiAobWF0Y2hlcy5sZW5ndGggIT09IDEpIHJldHVybiBudWxsOwogICAgICAgIHZhciBkaXN0ID0gcGFyY2VsRGlzdGFuY2VNZXRlcnMobWF0Y2hlc1swXSwgbGF0LCBsb24pOwoiIiIKbmV3ID0gIiIiICAgICAgICB2YXIgbWF0Y2hlcyA9IChkLmZlYXR1cmVzIHx8IFtdKS5maWx0ZXIoZnVuY3Rpb24gKGZlYXR1cmUpIHsKICAgICAgICAgIHJldHVybiBwYXJjZWxBbGlhc0lkZW50aXR5TWF0Y2hlcyhmZWF0dXJlLCB0YXJnZXRzKTsKICAgICAgICB9KTsKICAgICAgICAvLyBBIHF1YWxpZmllciBpcyBub3QgaXRzZWxmIGFtYmlndWl0eS4gU29tZSBvcmRpbmFyeSBOSiBzaW5nbGUtZmFtaWx5CiAgICAgICAgLy8gcGFyY2VscyBjYXJyeSBhIHF1YWxpZmllciAoZm9yIGV4YW1wbGUgbG90IDMuMDEpLiBXaGF0IG1hdHRlcnMgaXMKICAgICAgICAvLyB3aGV0aGVyIHRoaXMgYm91bmRlZCBhZGRyZXNzIHNlYXJjaCByZXNvbHZlcyB0byBvbmUgdW5pcXVlIHRheCBwYXJjZWwuCiAgICAgICAgLy8gQ29uZG9zL211bHRpLXBhcmNlbCBhZGRyZXNzZXMgc3RpbGwgcHJvZHVjZSBtdWx0aXBsZSBQQU1TX1BJTiB2YWx1ZXMKICAgICAgICAvLyBoZXJlIGFuZCB0aGVyZWZvcmUgY29udGludWUgdG8gZmFpbCBjbG9zZWQuCiAgICAgICAgdmFyIHNlZW5QaW5zID0gT2JqZWN0LmNyZWF0ZShudWxsKTsKICAgICAgICBtYXRjaGVzID0gbWF0Y2hlcy5maWx0ZXIoZnVuY3Rpb24gKGZlYXR1cmUpIHsKICAgICAgICAgIHZhciBhID0gZmVhdHVyZSAmJiBmZWF0dXJlLmF0dHJpYnV0ZXMgfHwge307CiAgICAgICAgICB2YXIga2V5ID0gU3RyaW5nKGEuUEFNU19QSU4gfHwgJycpLnRyaW0oKSB8fCBbCiAgICAgICAgICAgIGEuUFJPUF9MT0MgfHwgJycsIGEuUENMQkxPQ0sgfHwgJycsIGEuUENMTE9UIHx8ICcnLCBhLlBDTFFDT0RFIHx8ICcnCiAgICAgICAgICBdLmpvaW4oJ3wnKTsKICAgICAgICAgIGlmIChzZWVuUGluc1trZXldKSByZXR1cm4gZmFsc2U7CiAgICAgICAgICBzZWVuUGluc1trZXldID0gdHJ1ZTsKICAgICAgICAgIHJldHVybiB0cnVlOwogICAgICAgIH0pOwogICAgICAgIGlmIChtYXRjaGVzLmxlbmd0aCAhPT0gMSkgcmV0dXJuIG51bGw7CiAgICAgICAgdmFyIGRpc3QgPSBwYXJjZWxEaXN0YW5jZU1ldGVycyhtYXRjaGVzWzBdLCBsYXQsIGxvbik7CiIiIgppZiBvbGQgbm90IGluIHM6CiAgICByYWlzZSBTeXN0ZW1FeGl0KCJuZWFyYnkgYWxpYXMgbWF0Y2ggYmxvY2sgbm90IGZvdW5kIikKcyA9IHMucmVwbGFjZShvbGQsIG5ldywgMSkKCm9sZCA9ICIiIiAgICAgIGlmICghZXhhY3QpIHsKICAgICAgICByZXR1cm4gcGFyY2VsTmVhcmJ5QWxpYXNDYW5kaWRhdGUoZ2VvTWV0YS5sYXQsIGdlb01ldGEubG9uLCB0YXJnZXRzKS50aGVuKGZ1bmN0aW9uIChuZWFyQWxpYXMpIHsKICAgICAgICAgIGlmICghbmVhckFsaWFzKSByZXR1cm4gbnVsbDsKICAgICAgICAgIHZhciBhID0gbmVhckFsaWFzLmF0dHJpYnV0ZXMgfHwge307CiAgICAgICAgICBjb25zb2xlLmluZm8oJ1t3YXRjaGRvZ10gbmVhcmJ5IGFzc2Vzc29yIGFsaWFzIGNvbmZpcm1lZCBmcm9tIGhpZ2gtY29uZmlkZW5jZSBOSiBnZW9jb2RlJywgewogICAgICAgICAgICBzZWFyY2hlZDogdGFyZ2V0c1swXSAmJiB0YXJnZXRzWzBdLmtleSwKICAgICAgICAgICAgcGFyY2VsOiBhLlBST1BfTE9DIHx8ICcnLCBwaW46IGEuUEFNU19QSU4gfHwgJycKICAgICAgICAgIH0pOwogICAgICAgICAgcmV0dXJuIG5lYXJBbGlhczsKICAgICAgICB9KTsKICAgICAgfQoiIiIKbmV3ID0gIiIiICAgICAgLy8gRXZlbiB3aGVuIHRoZSBOSiBwb2ludCBpbnRlcnNlY3RzIGEgcGFyY2VsLCBhIHF1YWxpZmllZCBhc3Nlc3NvcgogICAgICAvLyBhbGlhcyBtdXN0IHN0aWxsIGdvIHRocm91Z2ggdGhlIGJvdW5kZWQgdW5pcXVlbmVzcyBjaGVjayByYXRoZXIgdGhhbiBiZQogICAgICAvLyBhY2NlcHRlZCBmcm9tIGFuIGFyYml0cmFyeSByZXN1bHRSZWNvcmRDb3VudD0xIGZlYXR1cmUuCiAgICAgIHJldHVybiBwYXJjZWxOZWFyYnlBbGlhc0NhbmRpZGF0ZShnZW9NZXRhLmxhdCwgZ2VvTWV0YS5sb24sIHRhcmdldHMpLnRoZW4oZnVuY3Rpb24gKG5lYXJBbGlhcykgewogICAgICAgIGlmICghbmVhckFsaWFzKSByZXR1cm4gbnVsbDsKICAgICAgICB2YXIgYSA9IG5lYXJBbGlhcy5hdHRyaWJ1dGVzIHx8IHt9OwogICAgICAgIGNvbnNvbGUuaW5mbygnW3dhdGNoZG9nXSBuZWFyYnkgYXNzZXNzb3IgYWxpYXMgY29uZmlybWVkIGZyb20gaGlnaC1jb25maWRlbmNlIE5KIGdlb2NvZGUnLCB7CiAgICAgICAgICBzZWFyY2hlZDogdGFyZ2V0c1swXSAmJiB0YXJnZXRzWzBdLmtleSwKICAgICAgICAgIHBhcmNlbDogYS5QUk9QX0xPQyB8fCAnJywgcGluOiBhLlBBTVNfUElOIHx8ICcnLCBxdWFsaWZpZXI6IGEuUENMUUNPREUgfHwgJycKICAgICAgICB9KTsKICAgICAgICByZXR1cm4gbmVhckFsaWFzOwogICAgICB9KTsKIiIiCmlmIG9sZCBub3QgaW4gczoKICAgIHJhaXNlIFN5c3RlbUV4aXQoIm1hbnVhbCBhbGlhcyBjb25kaXRpb24gYmxvY2sgbm90IGZvdW5kIikKcyA9IHMucmVwbGFjZShvbGQsIG5ldywgMSkKbG9va3VwX3BhdGgud3JpdGVfdGV4dChzKQoKdGVzdF9wYXRoID0gUGF0aCgicHJvcGVydHkvdGVzdHMvcHJvcGVydHktYWRkcmVzcy1hbGlhcy1jb250cmFjdC5tanMiKQp0ID0gdGVzdF9wYXRoLnJlYWRfdGV4dCgpCnQgPSB0LnJlcGxhY2UoCiAgICAiYXNzZXJ0Lm1hdGNoKGxvb2t1cCwgL2Z1bmN0aW9uIHBhcmNlbEFsaWFzQ2FuZGlkYXRlTWF0Y2hlcy8sICdsb29rdXAgc2hvdWxkIGhhdmUgYSBzdHJpY3QgYWxpYXMgY2FuZGlkYXRlIGdhdGUnKTtcbiIsCiAgICAiYXNzZXJ0Lm1hdGNoKGxvb2t1cCwgL2Z1bmN0aW9uIHBhcmNlbEFsaWFzSWRlbnRpdHlNYXRjaGVzLywgJ2xvb2t1cCBzaG91bGQgc2VwYXJhdGUgYWRkcmVzcyBpZGVudGl0eSBmcm9tIHF1YWxpZmllciBhbWJpZ3VpdHknKTtcbiIKICAgICJhc3NlcnQubWF0Y2gobG9va3VwLCAvZnVuY3Rpb24gcGFyY2VsQWxpYXNDYW5kaWRhdGVNYXRjaGVzLywgJ2xvb2t1cCBzaG91bGQga2VlcCBhIHN0cmljdCBkaXJlY3QgYWxpYXMgY2FuZGlkYXRlIGdhdGUnKTtcbiIKKQp0ID0gdC5yZXBsYWNlKAogICAgImFzc2VydC5tYXRjaChsb29rdXAsIC9TdHJpbmdcXChhXFwuUENMUUNPREUgXFx8XFx8ICcnXFwpXFwudHJpbVxcKFxcKS8sICdxdWFsaWZpZWQgcGFyY2VscyBtdXN0IGZhaWwgY2xvc2VkIGluIGFsaWFzIG1vZGUnKTtcbiIsCiAgICAiYXNzZXJ0Lm1hdGNoKGxvb2t1cCwgL1N0cmluZ1xcKGFcXC5QQ0xRQ09ERSBcXHxcXHwgJydcXClcXC50cmltXFwoXFwpLywgJ2RpcmVjdCBhbGlhcyBhY2NlcHRhbmNlIG11c3Qgc3RpbGwgcmVqZWN0IHF1YWxpZmllcnMgdW50aWwgYm91bmRlZCB1bmlxdWVuZXNzIGlzIGVzdGFibGlzaGVkJyk7XG4iCikKdCA9IHQucmVwbGFjZSgKICAgICJhc3NlcnQubWF0Y2gobG9va3VwLCAvaWYgXFwoIWV4YWN0XFwpIFxce1tcXHNcXFNdKnBhcmNlbE5lYXJieUFsaWFzQ2FuZGlkYXRlXFwoZ2VvTWV0YVxcLmxhdCwgZ2VvTWV0YVxcLmxvbiwgdGFyZ2V0c1xcKS8sICdtYW51YWwgaGlnaC1jb25maWRlbmNlIE5KIGxvb2t1cCBzaG91bGQgcmVjb3ZlciBhIHVuaXF1ZSBuZWFyYnkgYXNzZXNzb3IgYWxpYXMgd2hlbiB0aGUgcG9pbnQgbWlzc2VzIHRoZSBwb2x5Z29uJyk7XG4iLAogICAgImFzc2VydC5tYXRjaChsb29rdXAsIC9yZXR1cm4gcGFyY2VsTmVhcmJ5QWxpYXNDYW5kaWRhdGVcXChnZW9NZXRhXFwubGF0LCBnZW9NZXRhXFwubG9uLCB0YXJnZXRzXFwpLywgJ21hbnVhbCBoaWdoLWNvbmZpZGVuY2UgTkogbG9va3VwIHNob3VsZCBhbHdheXMgdXNlIGJvdW5kZWQgdW5pcXVlbmVzcyBmb3IgdW5yZXNvbHZlZCBhc3Nlc3NvciBhbGlhc2VzJyk7XG4iCiAgICAiYXNzZXJ0Lm1hdGNoKGxvb2t1cCwgL3JldHVybiBwYXJjZWxBbGlhc0lkZW50aXR5TWF0Y2hlc1xcKGZlYXR1cmUsIHRhcmdldHNcXCkvLCAnYm91bmRlZCBhbGlhcyBzZWFyY2ggc2hvdWxkIGluY2x1ZGUgcXVhbGlmaWVkIHBhcmNlbHMgaW4gdGhlIGlkZW50aXR5IGNhbmRpZGF0ZSBzZXQnKTtcbiIKICAgICJhc3NlcnQubWF0Y2gobG9va3VwLCAvdmFyIHNlZW5QaW5zID0gT2JqZWN0XFwuY3JlYXRlXFwobnVsbFxcKS8sICdib3VuZGVkIGFsaWFzIHNlYXJjaCBzaG91bGQgZGVkdXBsaWNhdGUgYnkgcGFyY2VsIGlkZW50aXR5IGJlZm9yZSBkZWNpZGluZyB1bmlxdWVuZXNzJyk7XG4iCiAgICAiYXNzZXJ0Lm1hdGNoKGxvb2t1cCwgL1N0cmluZ1xcKGFcXC5QQU1TX1BJTiBcXHxcXHwgJydcXClcXC50cmltXFwoXFwpLywgJ2JvdW5kZWQgYWxpYXMgdW5pcXVlbmVzcyBzaG91bGQgcHJlZmVyIHN0YXRld2lkZSBwYXJjZWwgSUQnKTtcbiIKKQp0ZXN0X3BhdGgud3JpdGVfdGV4dCh0KQo=" | base64 -d | python
       - name: Verify lookup contracts
         run: |
           node --check property/js/lookup.js
@@ -210,7 +94,6 @@ jobs:
           node property/tests/property-address-alias-contract.mjs
           git diff --check
       - name: Restore workflow and commit fix
-        shell: bash
         run: |
           git show 72f5bcae2d80b8e6e084fd7d67f7b7b2e159280d:.github/workflows/repair-property-nav.yml > .github/workflows/repair-property-nav.yml
           rm -f .github/workflows/njw258-qualified-alias-main-patch.yml
