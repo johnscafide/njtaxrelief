@@ -1,4 +1,5 @@
 name: NJW-258 searched address display verifier
+# rerun after parcel fallback contract synchronization
 
 on:
   push:
@@ -46,8 +47,6 @@ jobs:
           }
 
           """
-              # Triple-quoted text above inherits Python source indentation on
-              # continuation lines. Normalize it explicitly before insertion.
               lines = helper.splitlines()
               normalized = []
               for i, line in enumerate(lines):
