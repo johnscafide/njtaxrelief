@@ -1,0 +1,20 @@
+import fs from 'node:fs';
+import assert from 'node:assert/strict';
+
+const source = fs.readFileSync(new URL('../js/lookup.js', import.meta.url), 'utf8');
+const lookupStart = source.indexOf('window.plLookup = function ()');
+const lookupEnd = source.indexOf('function readyState()', lookupStart);
+assert.ok(lookupStart > -1 && lookupEnd > lookupStart, 'main lookup function should exist');
+const lookup = source.slice(lookupStart, lookupEnd);
+assert.ok(!lookup.includes('Promise.race'), 'property identity must not wait on the old preload race');
+assert.ok(!lookup.includes('loadRates().catch'), 'static enrichment files must not sit on the lookup critical path');
+assert.ok(lookup.includes('warmReferenceData();'), 'lookup should warm enrichment without awaiting it');
+assert.ok(lookup.includes('geocode(addr)'), 'geocode remains the first awaited identity request');
+assert.ok(lookup.includes('render(res.f, res.g, addr, lookupId)'), 'render should carry a lookup id');
+assert.ok(source.includes('activeLookupPending && activeLookupKey === key'), 'same-property duplicate submissions should be suppressed');
+assert.ok(source.includes('current.lookupId !== renderId'), 'late enrichment must not repaint a newer property');
+assert.ok(source.includes("sectionLoading('Loading verified sales'"), 'verified sales should expose loading state');
+assert.ok(source.includes("sectionLoading('Comparing nearby assessments'"), 'neighborhood context should expose loading state');
+assert.ok(source.includes("if (!plUser || !sb || typeof sb.rpc !== 'function') return;"), 'anonymous lookup must not call record_lookup');
+assert.ok(source.includes('scheduleReferenceWarmup();'), 'reference datasets should warm before first search');
+console.log('property lookup performance contract: ok');
