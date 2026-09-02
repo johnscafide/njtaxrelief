@@ -30,7 +30,13 @@ jobs:
       - name: Install isolated PDF test dependency
         run: npm install --no-save --no-package-lock pdf-lib@1.17.1
       - name: Generate synthetic official-form PDFs
-        run: node property/tests/anchor-application-2025-pdf-cert.mjs
+        run: |
+          mkdir -p artifacts/njw303-pdf-cert
+          set +e
+          node property/tests/anchor-application-2025-pdf-cert.mjs > artifacts/njw303-pdf-cert/certification.log 2>&1
+          code=$?
+          cat artifacts/njw303-pdf-cert/certification.log
+          exit $code
       - name: Best-effort hosted Poppler render
         continue-on-error: true
         run: |
