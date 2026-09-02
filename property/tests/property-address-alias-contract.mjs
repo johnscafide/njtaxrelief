@@ -21,6 +21,10 @@ assert.match(lookup, /if \(!second \|\| !parcelAliasCandidateMatches\(second, ta
 assert.match(lookup, /return second;/, 'selected Google parcel can recover when the NJ point lands on roadway or no polygon');
 assert.match(lookup, /Number\(geoMeta\.score\) >= 95/, 'selected-address alias recovery still requires strong NJ geocoder corroboration');
 assert.match(lookup, /Number\(geoMeta\.score\) >= 99/, 'manual alias resolution requires an essentially exact NJ geocode');
+assert.match(lookup, /function parcelNearbyAliasCandidate/, 'manual submissions should have a bounded alias recovery helper');
+assert.match(lookup, /var meters = 250;/, 'manual alias recovery must stay block-scale');
+assert.match(lookup, /if \(matches\.length !== 1\) return null;/, 'manual alias recovery must fail closed on ambiguity');
+assert.match(lookup, /if \(!exact\) \{[\s\S]*parcelNearbyAliasCandidate\(geoMeta\.lat, geoMeta\.lon, targets\)/, 'manual high-confidence NJ lookup should recover a unique nearby assessor alias when the point misses the polygon');
 assert.match(lookup, /parcelAt\(g\.lat, g\.lon, addr, g\.matched, g, googleGeo\)/, 'main lookup should pass coordinate evidence into parcel resolution');
 
 const flow = lookup.slice(lookup.indexOf('function parcelAt(lat, lon'), lookup.indexOf('function parcelAtRaw(lat, lon'));
