@@ -1,0 +1,67 @@
+name: NJW-258 Paulsboro parcel diagnostic
+on:
+  push:
+    branches:
+      - diag/njw-258-paulsboro-live-data
+    paths:
+      - .github/workflows/njw258-paulsboro-diagnostic.yml
+permissions:
+  contents: write
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: diag/njw-258-paulsboro-live-data
+      - name: Query NJ geocoder and parcel layer
+        run: |
+          python - <<'PY'
+          import json, math, urllib.parse, urllib.request
+          GEO='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates'
+          PARCEL='https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query'
+          addr='15 Railroad Ave, Paulsboro, NJ 08066'
+          fields='PAMS_PIN,PROP_LOC,PCLBLOCK,PCLLOT,PCLQCODE,MUN_NAME,COUNTY,ZIP5,PROP_CLASS,ST_ADDRESS,CITY_STATE'
+          def get(url, params):
+              qs=urllib.parse.urlencode(params)
+              req=urllib.request.Request(url+'?'+qs, headers={'User-Agent':'Watchdog-NJW-258-diagnostic/1.0'})
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  return json.load(r)
+          out={'address':addr}
+          geo=get(GEO, {'SingleLine':addr,'outSR':'4326','maxLocations':'5','f':'json'})
+          out['geocoder']=geo
+          c=(geo.get('candidates') or [None])[0]
+          if c:
+              lat=float(c['location']['y']); lon=float(c['location']['x'])
+              out['primary']={'lat':lat,'lon':lon,'matched':c.get('address'),'score':c.get('score')}
+              point=json.dumps({'x':lon,'y':lat,'spatialReference':{'wkid':4326}})
+              out['point_intersection']=get(PARCEL, {
+                  'geometry':point,'geometryType':'esriGeometryPoint','inSR':'4326','outSR':'4326',
+                  'spatialRel':'esriSpatialRelIntersects','outFields':fields,'returnGeometry':'true',
+                  'returnCentroid':'true','resultRecordCount':'20','f':'json'})
+              meters=350
+              dlat=meters/111320
+              dlon=meters/(111320*math.cos(math.radians(lat)))
+              env=json.dumps({'xmin':lon-dlon,'ymin':lat-dlat,'xmax':lon+dlon,'ymax':lat+dlat,'spatialReference':{'wkid':4326}})
+              out['nearby_350m']=get(PARCEL, {
+                  'geometry':env,'geometryType':'esriGeometryEnvelope','inSR':'4326','outSR':'4326',
+                  'spatialRel':'esriSpatialRelIntersects','outFields':fields,'returnGeometry':'false',
+                  'returnCentroid':'true','resultRecordCount':'300','f':'json'})
+          out['house_zip_candidates']=get(PARCEL, {
+              'where':"PROP_LOC LIKE '15 %' AND ZIP5 = '08066'",
+              'outFields':fields,'returnGeometry':'false','returnCentroid':'true','outSR':'4326',
+              'resultRecordCount':'300','f':'json'})
+          out['known_pin_candidates']=get(PARCEL, {
+              'where':"PAMS_PIN LIKE '0814_40_3%'",
+              'outFields':fields,'returnGeometry':'false','returnCentroid':'true','outSR':'4326',
+              'resultRecordCount':'100','f':'json'})
+          with open('tmp/njw258-paulsboro-diagnostic.json','w') as f:
+              json.dump(out,f,indent=2,sort_keys=True)
+          PY
+      - name: Commit diagnostic payload to branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tmp/njw258-paulsboro-diagnostic.json
+          git commit -m 'Capture live NJ parcel diagnostic for Railroad Ave'
+          git push origin HEAD:diag/njw-258-paulsboro-live-data
