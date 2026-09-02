@@ -13,6 +13,7 @@ assert.ok(source.includes('parcelAt(g.lat, g.lon, addr, g.matched, g, googleGeo)
 assert.ok(source.includes('if (!targets.length) return null;'), 'coordinate-only locate must not guess a nearby parcel without address evidence');
 assert.ok(source.includes('function parcelByAddressRecord(lat, lon, typed, matched)'), 'parcel resolver should have an assessor-address fallback independent of the geocoder point');
 assert.ok(source.includes("where = \"PROP_LOC LIKE '\" + safeHouse + \" %'\""), 'address-record fallback should query the assessor address index by house number');
-assert.ok(source.includes('dist == null || dist <= 600'), 'address-record fallback should stay spatially bounded');
+assert.ok(source.includes('var meters = 600;'), 'address-record fallback radius should remain bounded to 600 meters');
+assert.ok(source.includes('dist == null || dist <= meters'), 'address-record fallback should apply its declared spatial bound');
 assert.ok(source.includes('if (exact && (!targets.length || parcelCandidateMatches(exact, targets))) return exact;'), 'typed lookups should validate exact point hits against parcel address identity');
 console.log('property parcel fallback contract: ok');
