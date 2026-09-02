@@ -392,31 +392,40 @@
   }
 
   function confirmParcelAlias(exact, targets, geoMeta, selectedGeo) {
-    if (!exact || !parcelAliasCandidateMatches(exact, targets)) return Promise.resolve(null);
-    var a = exact.attributes || {};
+    if (!targets || !targets.length) return Promise.resolve(null);
+    var exactAttrs = exact && exact.attributes || {};
 
     // A selected Google address gives us a second, independent coordinate.
-    // Only accept a street-name alias when both geocoders land on the SAME tax
-    // parcel. This safely resolves market-facing aliases while still rejecting
-    // neighboring-house misses such as 185 -> 189.
-    if (selectedGeo && lookupPointDistanceMeters(geoMeta, selectedGeo) <= 120) {
+    // The NJ address point is allowed to fall on roadway/no parcel: that is the
+    // failure mode this safeguard exists to recover. The selected Google point
+    // must still be tightly corroborated by the NJ geocoder, land on one
+    // unqualified tax parcel, and that parcel must share house number + ZIP.
+    if (selectedGeo && geoMeta && Number(geoMeta.score) >= 95 &&
+        lookupPointDistanceMeters(geoMeta, selectedGeo) <= 120) {
       return parcelAtRaw(selectedGeo.lat, selectedGeo.lon).then(function (second) {
-        if (!sameParcel(exact, second)) return null;
+        if (!second || !parcelAliasCandidateMatches(second, targets)) return null;
+        // If NJ's coordinate did hit a parcel, both coordinate checks must agree.
+        // If it hit roadway/no polygon, the independently selected Google parcel
+        // is still safe because address identity + ZIP + proximity are all gated.
+        if (exact && !sameParcel(exact, second)) return null;
+        var a = second.attributes || {};
         console.info('[watchdog] parcel street alias confirmed', {
           searched: targets[0] && targets[0].key,
-          parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
+          parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || '',
+          njPointHadParcel: !!exact
         });
-        return exact;
+        return second;
       });
     }
 
-    // Manual searches do not have a second Google coordinate. In that case the
-    // NJ geocoder must be essentially exact, and the parcel must share both the
-    // house number and ZIP. Qualified/condo parcels are excluded above.
-    if (geoMeta && Number(geoMeta.score) >= 99) {
+    // Manual searches do not have a second Google coordinate. Keep the stricter
+    // legacy rule: NJ must itself hit an unqualified parcel with the same house
+    // number + ZIP, at essentially exact geocoder confidence.
+    if (exact && parcelAliasCandidateMatches(exact, targets) &&
+        geoMeta && Number(geoMeta.score) >= 99) {
       console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
         searched: targets[0] && targets[0].key,
-        parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
+        parcel: exactAttrs.PROP_LOC || '', pin: exactAttrs.PAMS_PIN || ''
       });
       return Promise.resolve(exact);
     }
