@@ -308,6 +308,63 @@
     return first ? normAddr(first) : '';
   }
 
+  function parcelZip(value) {
+    var m = String(value || '').match(/\b(\d{5})(?:-\d{4})?\b/);
+    return m ? m[1] : '';
+  }
+
+  var PARCEL_ADDR_NOISE = {
+    N:1, S:1, E:1, W:1, NE:1, NW:1, SE:1, SW:1,
+    AVE:1, ST:1, RD:1, DR:1, CT:1, LN:1, PL:1, BLVD:1, CIR:1, TER:1,
+    PKWY:1, HWY:1, TRL:1, SQ:1, WAY:1, LOOP:1, RUN:1, PATH:1, ROW:1,
+    XING:1, PT:1, HTS:1, EXT:1, TPKE:1, PIKE:1, BRG:1, MNR:1, CMNS:1,
+    ROUTE:1, RT:1, US:1, NJ:1, STATE:1
+  };
+
+  function parcelAddressParts(value) {
+    var key = parcelStreetKey(value);
+    if (!key) return null;
+    var tokens = key.split(/\s+/).filter(Boolean);
+    if (!tokens.length) return null;
+    var house = tokens.shift().replace(/^0+/, '') || '0';
+    var streetTokens = tokens.slice();
+    var coreTokens = streetTokens.filter(function (token) { return !PARCEL_ADDR_NOISE[token]; });
+    // A real street can be mostly directional/suffix words (for example North
+    // Avenue). If stripping the noise leaves nothing, keep the normalized
+    // street instead of inventing an empty equivalence class.
+    if (!coreTokens.length) coreTokens = streetTokens;
+    return {
+      key: key,
+      house: house,
+      core: coreTokens.join(' '),
+      zip: parcelZip(value)
+    };
+  }
+
+  function parcelTargets(typed, matched) {
+    var raw = [matched, typed], out = [];
+    raw.forEach(function (value) {
+      var p = parcelAddressParts(value);
+      if (!p) return;
+      if (!out.some(function (x) { return x.key === p.key && x.zip === p.zip; })) out.push(p);
+    });
+    return out;
+  }
+
+  function parcelCandidateMatches(feature, targets) {
+    var a = feature && feature.attributes;
+    if (!a) return false;
+    var candidate = parcelAddressParts(a.PROP_LOC);
+    if (!candidate) return false;
+    var candidateZip = String(a.ZIP5 || '').trim();
+    return targets.some(function (target) {
+      if (target.house !== candidate.house) return false;
+      if (target.zip && candidateZip && target.zip !== candidateZip) return false;
+      if (target.key === candidate.key) return true;
+      return !!(target.core && candidate.core && target.core === candidate.core);
+    });
+  }
+
   function parcelCacheKey(lat, lon, typed, matched) {
     // Property identity must never share the coarse neighborhood cache key.
     // Six decimal places is roughly decimeter precision in New Jersey, and the
@@ -318,14 +375,31 @@
 
   function parcelAt(lat, lon, typed, matched) {
     return cached(parcelCacheKey(lat, lon, typed, matched), 6e5, function () {
+      var targets = parcelTargets(typed, matched);
       return parcelAtRaw(lat, lon).then(function (exact) {
-        if (exact) return exact;
+        // Coordinate-only Locate Me can safely use the exact polygon under the
+        // device point. Typed address lookups also confirm the parcel address;
+        // this prevents a curb/road-center geocode from silently opening the
+        // neighboring parcel.
+        if (exact && (!targets.length || parcelCandidateMatches(exact, targets))) return exact;
+        if (!targets.length) return null;
+
         // NJ address points can sit on a curb, driveway, building point or road
-        // centerline instead of inside the tax polygon. Search a very small
-        // envelope only when the exact point misses, then require the parcel's
-        // recorded address to agree before accepting it.
-        if (!typed && !matched) return null;
-        return parcelNearbyByAddress(lat, lon, typed, matched);
+        // centerline instead of inside the tax polygon. First search the nearby
+        // parcel geometry, then fall back to the assessor address index itself.
+        return parcelNearbyByAddress(lat, lon, typed, matched).then(function (nearby) {
+          if (nearby) return nearby;
+          return parcelByAddressRecord(lat, lon, typed, matched);
+        });
+      }).then(function (feature) {
+        if (feature) return feature;
+        var target = targets[0];
+        console.warn('[watchdog] parcel resolution miss', {
+          street: target ? target.key : parcelStreetKey(matched || typed),
+          zip: target ? target.zip : '',
+          lat: +lat.toFixed(5), lon: +lon.toFixed(5)
+        });
+        return null;
       });
     });
   }
@@ -345,11 +419,13 @@
   }
 
   function parcelNearbyByAddress(lat, lon, typed, matched) {
-    var keys = [parcelStreetKey(matched), parcelStreetKey(typed)].filter(Boolean);
-    keys = keys.filter(function (key, i) { return keys.indexOf(key) === i; });
-    if (!keys.length) return Promise.resolve(null);
+    var targets = parcelTargets(typed, matched);
+    if (!targets.length) return Promise.resolve(null);
 
-    var meters = 100;
+    // 180m is still a neighborhood-scale bound, but it covers the common NJ
+    // cases where the official address point is on a road centerline or a long
+    // driveway rather than inside the tax polygon.
+    var meters = 180;
     var dLat = meters / 111320;
     var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = {
@@ -359,20 +435,74 @@
     var p = new URLSearchParams({
       geometry: JSON.stringify(env), geometryType: 'esriGeometryEnvelope',
       inSR: '4326', outSR: '4326', spatialRel: 'esriSpatialRelIntersects',
-      outFields: FIELDS, returnGeometry: 'true', resultRecordCount: '60', f: 'json'
+      outFields: FIELDS, returnGeometry: 'true', resultRecordCount: '100', f: 'json'
     });
 
     return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
       .then(function (d) {
         if (d.error) throw new Error(d.error.message || 'parcel nearby');
         var matches = (d.features || []).filter(function (feature) {
-          var a = feature && feature.attributes;
-          var key = a ? parcelStreetKey(a.PROP_LOC) : '';
-          return !!key && keys.indexOf(key) !== -1;
+          return parcelCandidateMatches(feature, targets);
         });
         // Never guess among multiple tax parcels sharing one street address
         // (common with condos/qualifiers). A safe miss is better than opening
         // the wrong property.
+        if (matches.length !== 1) return null;
+        return matches[0];
+      });
+  }
+
+  function parcelFeaturePoint(feature) {
+    if (!feature) return null;
+    if (feature.centroid && feature.centroid.x != null && feature.centroid.y != null) {
+      return { lon: +feature.centroid.x, lat: +feature.centroid.y };
+    }
+    var rings = feature.geometry && feature.geometry.rings;
+    if (!rings || !rings.length || !rings[0].length) return null;
+    var sx = 0, sy = 0, n = 0;
+    rings[0].forEach(function (pt) {
+      if (!pt || pt[0] == null || pt[1] == null) return;
+      sx += +pt[0]; sy += +pt[1]; n++;
+    });
+    return n ? { lon: sx / n, lat: sy / n } : null;
+  }
+
+  function parcelDistanceMeters(feature, lat, lon) {
+    var pt = parcelFeaturePoint(feature);
+    if (!pt) return null;
+    var dx = (pt.lon - lon) * 111320 * Math.cos(lat * Math.PI / 180);
+    var dy = (pt.lat - lat) * 111320;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function parcelByAddressRecord(lat, lon, typed, matched) {
+    var targets = parcelTargets(typed, matched);
+    if (!targets.length) return Promise.resolve(null);
+    var target = targets.find(function (x) { return x.zip; }) || targets[0];
+    if (!target.house) return Promise.resolve(null);
+
+    // This query asks the parcel layer by its own address attributes rather than
+    // relying on the geocoder point. House number + ZIP keeps the candidate set
+    // bounded; the normalized street-core matcher and distance check below do
+    // the actual identity verification.
+    var safeHouse = target.house.replace(/'/g, "''");
+    var where = "PROP_LOC LIKE '" + safeHouse + " %'";
+    if (target.zip) where += " AND ZIP5 = '" + target.zip.replace(/'/g, "''") + "'";
+    var p = new URLSearchParams({
+      where: where,
+      outFields: FIELDS,
+      returnGeometry: 'true', returnCentroid: 'true', outSR: '4326',
+      resultRecordCount: '100', f: 'json'
+    });
+
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error) throw new Error(d.error.message || 'parcel address');
+        var matches = (d.features || []).filter(function (feature) {
+          if (!parcelCandidateMatches(feature, targets)) return false;
+          var dist = parcelDistanceMeters(feature, lat, lon);
+          return dist == null || dist <= 600;
+        });
         if (matches.length !== 1) return null;
         return matches[0];
       });
@@ -3929,7 +4059,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   }
 
   function paintHeroAuth() {
-    var host = el('pl-heroauth');
+    var host = elReal('pl-heroauth');
     if (!host) return;
     if (plUser) {
       var avatar = userAvatar();

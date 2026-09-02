@@ -33,6 +33,24 @@
 .pl-type { color: #eeda98; border-right: 3px solid var(--gold); padding-right: 3px; }
 /* ---------- SEARCH ---------- */
 .pl-search-card { max-width: 720px; margin: 0 auto; }
+.pl-inline-status { max-width: 680px; margin: 12px auto 0; }
+.pl-inline-status:empty { display: none; }
+.pl-inline-status .pl-state {
+  display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
+  padding: 9px 14px; border-radius: 14px; background: rgba(255,255,255,.95);
+  box-shadow: 0 6px 22px rgba(14,34,72,.16); color: var(--navy-dark);
+}
+.pl-inline-status .pl-spin {
+  width: 16px; height: 16px; flex: 0 0 16px; border-radius: 50%;
+  border: 2px solid #d6deea; border-top-color: var(--navy); animation: plspin .8s linear infinite;
+}
+.pl-inline-status .pl-state-title { font-size: 13px; font-weight: 800; }
+.pl-inline-status .pl-state-sub { font-size: 12px; color: #5a6070; }
+@media (max-width: 560px) {
+  .pl-inline-status { margin-top: 9px; }
+  .pl-inline-status .pl-state { padding: 9px 11px; }
+  .pl-inline-status .pl-state-sub { flex-basis: 100%; text-align: center; }
+}
 .pl-search-row { display: block; }
 /* One pill. Geo icon left, input in the middle, search button right, all on
    the same white surface with nothing boxed inside it. */

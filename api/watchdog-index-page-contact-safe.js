@@ -8,6 +8,7 @@ const VERCEL_AUTH_MARKERS = [
   /vercel\.com\/(?:login|sso)/i
 ];
 const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
+const SUPABASE_GUARD_SCRIPT = '<script src="/property/js/supabase-client-singleton-guard.js" data-watchdog-supabase-singleton-guard="1"></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent-control','/agent-desk','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
@@ -67,6 +68,21 @@ function privateRouteRevision() {
 function looksLikeVercelAuth(body) {
   const sample = String(body || '').slice(0, 240000);
   return VERCEL_AUTH_MARKERS.some((pattern) => pattern.test(sample));
+}
+
+function installCanonicalManifestPath(input) {
+  return String(input || '').replace(
+    /href=(["'])\/site\.webmanifest\1/gi,
+    'href="/property/site.webmanifest"'
+  );
+}
+
+function installSupabaseSingletonGuard(input) {
+  let html = String(input || '');
+  if (/supabase-client-singleton-guard\.js/i.test(html)) return html;
+  const supabaseTag = /(<script\b[^>]*\bsrc=["']https:\/\/cdn\.jsdelivr\.net\/npm\/@supabase\/supabase-js@2[^"']*["'][^>]*>\s*<\/script>)/i;
+  if (!supabaseTag.test(html)) return html;
+  return html.replace(supabaseTag, `$1\n${SUPABASE_GUARD_SCRIPT}`);
 }
 
 function installEntityGraph(input) {
@@ -243,6 +259,8 @@ module.exports = async function handler(req, res) {
     copySafeHeaders(upstream, res, publicPath);
     if (req.method === 'HEAD') return res.end();
     let safeBody = sanitizeContactHtml(body, publicPath);
+    safeBody = installCanonicalManifestPath(safeBody);
+    safeBody = installSupabaseSingletonGuard(safeBody);
     safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
     if (publicPath === '/') {
       safeBody = installEntityGraph(safeBody);
