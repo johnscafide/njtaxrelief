@@ -16,21 +16,51 @@ jobs:
           ref: fix/njw-258-mailing-zip-identity
       - name: Apply patch
         run: python scripts/njw258_mail_zip_patch.py
-      - name: Verify
+      - name: Verify and capture output
+        id: verify
+        continue-on-error: true
         run: |
-          node --check property/js/lookup.js
-          node --check property/js/nj-address-autocomplete.js
-          node property/tests/property-lookup-performance-contract.mjs
-          node property/tests/property-parcel-fallback-contract.mjs
-          node property/tests/property-address-alias-contract.mjs
-          node property/tests/property-mailing-zip-contract.mjs
-          git diff --check
+          mkdir -p tmp
+          set +e
+          {
+            echo '## node --check lookup.js'
+            node --check property/js/lookup.js
+            echo '## node --check autocomplete.js'
+            node --check property/js/nj-address-autocomplete.js
+            echo '## performance contract'
+            node property/tests/property-lookup-performance-contract.mjs
+            echo '## parcel fallback contract'
+            node property/tests/property-parcel-fallback-contract.mjs
+            echo '## address alias contract'
+            node property/tests/property-address-alias-contract.mjs
+            echo '## mailing ZIP contract'
+            node property/tests/property-mailing-zip-contract.mjs
+            echo '## diff check'
+            git diff --check
+          } > tmp/njw258-mailing-zip-verify.log 2>&1
+          status=$?
+          cat tmp/njw258-mailing-zip-verify.log
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
       - name: Commit verified fix
+        if: steps.verify.outputs.status == '0'
         run: |
           rm .github/workflows/njw258-mailing-zip-fix.yml
           rm scripts/njw258_mail_zip_patch.py
+          rm -f tmp/njw258-mailing-zip-verify.log
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add property/js/lookup.js property/js/nj-address-autocomplete.js property/tests/property-address-alias-contract.mjs property/tests/property-mailing-zip-contract.mjs .github/workflows/njw258-mailing-zip-fix.yml scripts/njw258_mail_zip_patch.py
+          git add -A property/js/lookup.js property/js/nj-address-autocomplete.js property/tests/property-address-alias-contract.mjs property/tests/property-mailing-zip-contract.mjs .github/workflows/njw258-mailing-zip-fix.yml scripts/njw258_mail_zip_patch.py tmp/njw258-mailing-zip-verify.log
           git commit -m 'NJW-258 separate property location from owner mailing ZIP'
           git push origin HEAD:fix/njw-258-mailing-zip-identity
+      - name: Persist verification failure
+        if: steps.verify.outputs.status != '0'
+        run: |
+          git restore property/js/lookup.js property/js/nj-address-autocomplete.js property/tests/property-address-alias-contract.mjs
+          rm -f property/tests/property-mailing-zip-contract.mjs
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tmp/njw258-mailing-zip-verify.log
+          git commit -m 'Capture NJW-258 mailing ZIP verification failure'
+          git push origin HEAD:fix/njw-258-mailing-zip-identity
+          exit 1
