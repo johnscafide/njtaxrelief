@@ -1,0 +1,49 @@
+name: NJW-303 ANCHOR 2025 contract
+
+on:
+  push:
+    branches:
+      - johnvscafide/njw-303-public-launch-v2
+    paths:
+      - property/anchor/application/2025/**
+      - property/anchor/applications/**
+      - property/js/anchor-application-2025.js
+      - property/js/anchor-application-2025-fields.js
+      - property/js/anchor-application-pdf-2025.js
+      - property/js/anchor-application-vault.js
+      - property/js/anchor-applications.js
+      - property/tests/anchor-application-2025-contract.mjs
+      - api/anchor-form-template.js
+      - .github/workflows/njw303-anchor-application-ci.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - property/anchor/application/2025/**
+      - property/anchor/applications/**
+      - property/js/anchor-application-2025.js
+      - property/js/anchor-application-2025-fields.js
+      - property/js/anchor-application-pdf-2025.js
+      - property/js/anchor-application-vault.js
+      - property/js/anchor-applications.js
+      - property/tests/anchor-application-2025-contract.mjs
+      - api/anchor-form-template.js
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check property/js/anchor-application-2025.js
+          node --check property/js/anchor-application-pdf-2025.js
+          node --check property/js/anchor-application-vault.js
+          node --check property/js/anchor-applications.js
+      - name: Run privacy and routing contract
+        run: node property/tests/anchor-application-2025-contract.mjs
