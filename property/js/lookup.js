@@ -391,6 +391,39 @@
     return Math.sqrt(dx * dx + dy * dy);
   }
 
+  function parcelNearbyAliasCandidate(lat, lon, targets) {
+    if (!targets || !targets.length || !Number.isFinite(lat) || !Number.isFinite(lon)) return Promise.resolve(null);
+
+    // Manual submissions do not always carry a Google-selected coordinate. For
+    // assessor street aliases, search only the immediate block around NJ's own
+    // high-confidence address point and accept exactly one unqualified parcel
+    // sharing the house number + ZIP. Any ambiguity still fails closed.
+    var meters = 250;
+    var dLat = meters / 111320;
+    var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
+    var env = {
+      xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
+      spatialReference: { wkid: 4326 }
+    };
+    var p = new URLSearchParams({
+      geometry: JSON.stringify(env), geometryType: 'esriGeometryEnvelope',
+      inSR: '4326', outSR: '4326', spatialRel: 'esriSpatialRelIntersects',
+      outFields: FIELDS, returnGeometry: 'true', returnCentroid: 'true',
+      resultRecordCount: '120', f: 'json'
+    });
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (d.error) throw new Error(d.error.message || 'parcel alias nearby');
+        var matches = (d.features || []).filter(function (feature) {
+          return parcelAliasCandidateMatches(feature, targets);
+        });
+        if (matches.length !== 1) return null;
+        var dist = parcelDistanceMeters(matches[0], lat, lon);
+        if (dist != null && dist > meters) return null;
+        return matches[0];
+      });
+  }
+
   function confirmParcelAlias(exact, targets, geoMeta, selectedGeo) {
     if (!targets || !targets.length) return Promise.resolve(null);
     var exactAttrs = exact && exact.attributes || {};
@@ -418,16 +451,29 @@
       });
     }
 
-    // Manual searches do not have a second Google coordinate. Keep the stricter
-    // legacy rule: NJ must itself hit an unqualified parcel with the same house
-    // number + ZIP, at essentially exact geocoder confidence.
-    if (exact && parcelAliasCandidateMatches(exact, targets) &&
-        geoMeta && Number(geoMeta.score) >= 99) {
-      console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
-        searched: targets[0] && targets[0].key,
-        parcel: exactAttrs.PROP_LOC || '', pin: exactAttrs.PAMS_PIN || ''
-      });
-      return Promise.resolve(exact);
+    // Manual searches do not have a second Google coordinate. Keep the strictest
+    // evidence threshold. If NJ itself hits the alias parcel, accept it. If NJ
+    // lands on roadway/no polygon, search only the immediate block and require
+    // one unique unqualified parcel with the same house number + ZIP.
+    if (geoMeta && Number(geoMeta.score) >= 99) {
+      if (exact && parcelAliasCandidateMatches(exact, targets)) {
+        console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
+          searched: targets[0] && targets[0].key,
+          parcel: exactAttrs.PROP_LOC || '', pin: exactAttrs.PAMS_PIN || ''
+        });
+        return Promise.resolve(exact);
+      }
+      if (!exact) {
+        return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
+          if (!nearAlias) return null;
+          var a = nearAlias.attributes || {};
+          console.info('[watchdog] nearby assessor alias confirmed from high-confidence NJ geocode', {
+            searched: targets[0] && targets[0].key,
+            parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
+          });
+          return nearAlias;
+        });
+      }
     }
     return Promise.resolve(null);
   }
