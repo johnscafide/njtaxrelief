@@ -1,10 +1,36 @@
 name: NJW-258 manual alias radius patch
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/njw-258-manual-alias-radius
+
+permissions:
+  contents: write
 
 jobs:
-  parked:
+  patch-and-test:
+    if: github.event.head_commit.message == 'NJW-258 run manual alias radius patch'
     runs-on: ubuntu-latest
     steps:
-      - run: echo parked
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/njw-258-manual-alias-radius
+          fetch-depth: 0
+      - name: Patch
+        run: python scripts/njw258_manual_alias_patch.py
+      - name: Verify
+        run: |
+          node --check property/js/lookup.js
+          node property/tests/property-lookup-performance-contract.mjs
+          node property/tests/property-parcel-fallback-contract.mjs
+          node property/tests/property-address-alias-contract.mjs
+          git diff --check
+      - name: Commit
+        run: |
+          rm scripts/njw258_manual_alias_patch.py .github/workflows/njw258-manual-alias-radius.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add property/js/lookup.js property/tests/property-address-alias-contract.mjs scripts/njw258_manual_alias_patch.py .github/workflows/njw258-manual-alias-radius.yml
+          git commit -m 'NJW-258 recover unique nearby aliases for manual searches'
+          git push origin HEAD:fix/njw-258-manual-alias-radius
