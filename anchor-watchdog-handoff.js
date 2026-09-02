@@ -5,6 +5,7 @@
 
   var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
   var KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var LOGO='/property/branding/watchdog-logo-horizontal.svg';
   var staging=false;
   var finished=false;
 
@@ -14,10 +15,12 @@
     Array.prototype.slice.call(document.querySelectorAll('.est-choice.selected[data-key][data-val]')).forEach(function(btn){out[btn.getAttribute('data-key')]=btn.getAttribute('data-val');});
     return out;
   }
-  function track(name,params){try{if(window.AnchorFunnel&&typeof window.AnchorFunnel.track==='function')window.AnchorFunnel.track(name,params||{});else if(typeof window.gtag==='function')window.gtag('event',name,params||{});}catch(_){}}
+  function track(name,params){try{if(window.AnchorFunnel&&typeof window.AnchorFunnel.track==='function')window.AnchorFunnel.track(name,params||{});else if(typeof window.gtag==='function')window.gtag('event',name,params||{});}catch(_){} }
   function overlay(){
     var old=document.getElementById('wdx-handoff-overlay');if(old)return old;
-    var el=document.createElement('div');el.id='wdx-handoff-overlay';el.className='wdx-handoff-overlay';el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-logo">W</div><h2>Opening your result in Watchdog</h2><p>Your ANCHOR estimate is ready. We are securely carrying the result over and matching the residence to Watchdog property intelligence.</p><div class="wdx-handoff-bar"><span></span></div></div>';document.body.appendChild(el);return el;
+    var el=document.createElement('div');el.id='wdx-handoff-overlay';el.className='wdx-handoff-overlay';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
+    el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-brand"><img src="'+LOGO+'" alt="Watchdog Property Intelligence"></div><div class="wdx-handoff-kicker">Secure ANCHOR result handoff</div><h2>Opening your result in Watchdog</h2><p>Your ANCHOR estimate is ready. We are securely carrying the verified result over and matching the residence to Watchdog property intelligence.</p><div class="wdx-handoff-steps" aria-hidden="true"><div class="wdx-handoff-step"><strong>01</strong>Verified estimate</div><div class="wdx-handoff-step"><strong>02</strong>Secure transfer</div><div class="wdx-handoff-step"><strong>03</strong>Property context</div></div><div class="wdx-handoff-bar"><span></span></div></div>';
+    document.body.appendChild(el);return el;
   }
   function fail(message){
     var el=document.getElementById('wdx-handoff-overlay');if(el&&el.parentNode)el.parentNode.removeChild(el);
