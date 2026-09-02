@@ -1,0 +1,40 @@
+name: NJW-258 safe parcel fallback
+
+on:
+  push:
+    branches:
+      - fix/njw-258-safe-parcel-fallback
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    if: ${{ !contains(github.event.head_commit.message, '[njw258-parcel-patched]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/njw-258-safe-parcel-fallback
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Apply safe parcel fallback
+        run: python3 .github/scripts/njw258_safe_parcel_fallback.py
+      - name: Verify lookup contracts
+        run: |
+          node --check property/js/lookup.js
+          node property/tests/property-lookup-performance-contract.mjs
+          node property/tests/property-parcel-fallback-contract.mjs
+          git diff --check
+      - name: Commit verified source only
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/scripts/njw258_safe_parcel_fallback.py .github/workflows/njw258-safe-parcel-fallback.yml
+          git add property/js/lookup.js property/tests/property-parcel-fallback-contract.mjs
+          git diff --cached --check
+          git commit -m "NJW-258 add safe nearby parcel fallback [njw258-parcel-patched]"
+          git push origin HEAD:fix/njw-258-safe-parcel-fallback
