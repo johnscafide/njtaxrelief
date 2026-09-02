@@ -20,6 +20,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
+      - name: Relax escaped-copy matcher
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('.github/scripts/njw258_patch.py')
+          s = p.read_text()
+          old = "r\"      '<div class=\\\"plm-sec\\\">' \\+ gate\\('tradeup',\\n        'Compare tax across 168 towns',\\n        'Pick where you are looking and see that town’s real effective rate, measured from its own parcels, against what you pay now\\.',\\n        buildTradeUp\\(\\)\\) \\+ '</div>' \\+\""
+          new = "r\"      '<div class=\\\"plm-sec\\\">' \\+ gate\\('tradeup',.*?buildTradeUp\\(\\)\\) \\+ '</div>' \\+\""
+          if old not in s:
+              raise SystemExit('trade-up matcher source not found')
+          p.write_text(s.replace(old, new, 1))
+          PY
       - name: Apply performance refactor or capture mismatch
         shell: bash
         run: |
