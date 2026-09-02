@@ -365,15 +365,21 @@
     });
   }
 
-  function parcelAliasCandidateMatches(feature, targets) {
+  function parcelAliasIdentityMatches(feature, targets) {
     var a = feature && feature.attributes;
-    if (!a || String(a.PCLQCODE || '').trim()) return false;
+    if (!a) return false;
     var candidate = parcelAddressParts(a.PROP_LOC);
     var candidateZip = String(a.ZIP5 || '').trim();
     if (!candidate || !candidate.house || !candidateZip) return false;
     return targets.some(function (target) {
       return !!(target.house && target.house === candidate.house && target.zip && target.zip === candidateZip);
     });
+  }
+
+  function parcelAliasCandidateMatches(feature, targets) {
+    var a = feature && feature.attributes;
+    if (!a || String(a.PCLQCODE || '').trim()) return false;
+    return parcelAliasIdentityMatches(feature, targets);
   }
 
   function sameParcel(a, b) {
@@ -415,7 +421,22 @@
       .then(function (d) {
         if (d.error) throw new Error(d.error.message || 'parcel alias nearby');
         var matches = (d.features || []).filter(function (feature) {
-          return parcelAliasCandidateMatches(feature, targets);
+          return parcelAliasIdentityMatches(feature, targets);
+        });
+        // A qualifier is not itself ambiguity. Some ordinary NJ single-family
+        // parcels carry a qualifier (for example lot 3.01). What matters is
+        // whether this bounded address search resolves to one unique tax parcel.
+        // Condos/multi-parcel addresses still produce multiple PAMS_PIN values
+        // here and therefore continue to fail closed.
+        var seenPins = Object.create(null);
+        matches = matches.filter(function (feature) {
+          var a = feature && feature.attributes || {};
+          var key = String(a.PAMS_PIN || '').trim() || [
+            a.PROP_LOC || '', a.PCLBLOCK || '', a.PCLLOT || '', a.PCLQCODE || ''
+          ].join('|');
+          if (seenPins[key]) return false;
+          seenPins[key] = true;
+          return true;
         });
         if (matches.length !== 1) return null;
         var dist = parcelDistanceMeters(matches[0], lat, lon);
@@ -463,17 +484,18 @@
         });
         return Promise.resolve(exact);
       }
-      if (!exact) {
-        return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
-          if (!nearAlias) return null;
-          var a = nearAlias.attributes || {};
-          console.info('[watchdog] nearby assessor alias confirmed from high-confidence NJ geocode', {
-            searched: targets[0] && targets[0].key,
-            parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
-          });
-          return nearAlias;
+      // Even when the NJ point intersects a parcel, a qualified assessor
+      // alias must still go through the bounded uniqueness check rather than be
+      // accepted from an arbitrary resultRecordCount=1 feature.
+      return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
+        if (!nearAlias) return null;
+        var a = nearAlias.attributes || {};
+        console.info('[watchdog] nearby assessor alias confirmed from high-confidence NJ geocode', {
+          searched: targets[0] && targets[0].key,
+          parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || '', qualifier: a.PCLQCODE || ''
         });
-      }
+        return nearAlias;
+      });
     }
     return Promise.resolve(null);
   }

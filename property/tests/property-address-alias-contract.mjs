@@ -11,10 +11,11 @@ assert.match(autocomplete, /dataset\.googleLon/, 'selected Google longitude shou
 assert.match(autocomplete, /clearGoogleSelection/, 'manual input should clear stale Google coordinates');
 
 assert.match(lookup, /matched: c\.address, score: Number\(c\.score\) \|\| 0/, 'NJ geocoder confidence should be preserved');
-assert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should have a strict alias candidate gate');
+assert.match(lookup, /function parcelAliasIdentityMatches/, 'lookup should separate address identity from qualifier ambiguity');
+assert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should keep a strict direct alias candidate gate');
 assert.match(lookup, /target\.house === candidate\.house/, 'alias candidate must keep the same house number');
 assert.match(lookup, /target\.zip === candidateZip/, 'alias candidate must keep the same ZIP');
-assert.match(lookup, /String\(a\.PCLQCODE \|\| ''\)\.trim\(\)/, 'qualified parcels must fail closed in alias mode');
+assert.match(lookup, /String\(a\.PCLQCODE \|\| ''\)\.trim\(\)/, 'direct alias acceptance must still reject qualifiers until bounded uniqueness is established');
 assert.match(lookup, /lookupPointDistanceMeters\(geoMeta, selectedGeo\) <= 120/, 'Google and NJ coordinates must stay tightly corroborated');
 assert.match(lookup, /if \(exact && !sameParcel\(exact, second\)\) return null;/, 'when NJ point has a parcel, independent coordinate checks must still agree');
 assert.match(lookup, /if \(!second \|\| !parcelAliasCandidateMatches\(second, targets\)\) return null;/, 'selected Google coordinate must itself resolve to an address-compatible parcel');
@@ -24,7 +25,10 @@ assert.match(lookup, /Number\(geoMeta\.score\) >= 99/, 'manual alias resolution 
 assert.match(lookup, /function parcelNearbyAliasCandidate/, 'manual submissions should have a bounded alias recovery helper');
 assert.match(lookup, /var meters = 250;/, 'manual alias recovery must stay block-scale');
 assert.match(lookup, /if \(matches\.length !== 1\) return null;/, 'manual alias recovery must fail closed on ambiguity');
-assert.match(lookup, /if \(!exact\) \{[\s\S]*parcelNearbyAliasCandidate\(geoMeta\.lat, geoMeta\.lon, targets\)/, 'manual high-confidence NJ lookup should recover a unique nearby assessor alias when the point misses the polygon');
+assert.match(lookup, /return parcelNearbyAliasCandidate\(geoMeta\.lat, geoMeta\.lon, targets\)/, 'manual high-confidence NJ lookup should always use bounded uniqueness for unresolved assessor aliases');
+assert.match(lookup, /return parcelAliasIdentityMatches\(feature, targets\)/, 'bounded alias search should include qualified parcels in the identity candidate set');
+assert.match(lookup, /var seenPins = Object\.create\(null\)/, 'bounded alias search should deduplicate by parcel identity before deciding uniqueness');
+assert.match(lookup, /String\(a\.PAMS_PIN \|\| ''\)\.trim\(\)/, 'bounded alias uniqueness should prefer statewide parcel ID');
 assert.match(lookup, /parcelAt\(g\.lat, g\.lon, addr, g\.matched, g, googleGeo\)/, 'main lookup should pass coordinate evidence into parcel resolution');
 
 const flow = lookup.slice(lookup.indexOf('function parcelAt(lat, lon'), lookup.indexOf('function parcelAtRaw(lat, lon'));
