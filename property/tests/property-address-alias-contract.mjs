@@ -16,7 +16,10 @@ assert.match(lookup, /target\.house === candidate\.house/, 'alias candidate must
 assert.match(lookup, /target\.zip === candidateZip/, 'alias candidate must keep the same ZIP');
 assert.match(lookup, /String\(a\.PCLQCODE \|\| ''\)\.trim\(\)/, 'qualified parcels must fail closed in alias mode');
 assert.match(lookup, /lookupPointDistanceMeters\(geoMeta, selectedGeo\) <= 120/, 'Google and NJ coordinates must stay tightly corroborated');
-assert.match(lookup, /sameParcel\(exact, second\)/, 'independent coordinate checks must land on the same PAMS parcel');
+assert.match(lookup, /if \(exact && !sameParcel\(exact, second\)\) return null;/, 'when NJ point has a parcel, independent coordinate checks must still agree');
+assert.match(lookup, /if \(!second \|\| !parcelAliasCandidateMatches\(second, targets\)\) return null;/, 'selected Google coordinate must itself resolve to an address-compatible parcel');
+assert.match(lookup, /return second;/, 'selected Google parcel can recover when the NJ point lands on roadway or no polygon');
+assert.match(lookup, /Number\(geoMeta\.score\) >= 95/, 'selected-address alias recovery still requires strong NJ geocoder corroboration');
 assert.match(lookup, /Number\(geoMeta\.score\) >= 99/, 'manual alias resolution requires an essentially exact NJ geocode');
 assert.match(lookup, /parcelAt\(g\.lat, g\.lon, addr, g\.matched, g, googleGeo\)/, 'main lookup should pass coordinate evidence into parcel resolution');
 
