@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   patch:
-    if: ${{ !contains(github.event.head_commit.message, '[njw258-patched]') }}
+    if: ${{ !contains(github.event.head_commit.message, '[njw258-patched]') && !contains(github.event.head_commit.message, '[njw258-diag]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,16 +20,25 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - name: Apply performance refactor
-        run: python3 .github/scripts/njw258_patch.py
-      - name: Verify JavaScript and regression contract
+      - name: Apply performance refactor or capture mismatch
+        shell: bash
         run: |
+          set +e
+          python3 .github/scripts/njw258_patch.py > /tmp/njw258.out 2>&1
+          status=$?
+          cat /tmp/njw258.out
+          if [ "$status" -ne 0 ]; then
+            cp /tmp/njw258.out .github/njw258-patch-diagnostic.txt
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .github/njw258-patch-diagnostic.txt
+            git commit -m "NJW-258 capture patch mismatch [njw258-diag]"
+            git push origin HEAD:fix/njw-258-fast-property-lookup
+            exit 0
+          fi
           node --check property/js/lookup.js
           node property/tests/property-lookup-performance-contract.mjs
           git diff --check
-      - name: Commit source changes
-        shell: bash
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add property/js/lookup.js property/tests/property-lookup-performance-contract.mjs
