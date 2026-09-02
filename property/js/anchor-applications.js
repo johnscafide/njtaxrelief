@@ -145,20 +145,42 @@
       var text=document.createElement('div'); var h=document.createElement('h3'); h.textContent=applicantName(payload); var addr=document.createElement('p'); addr.className='wd-library-card-address'; addr.textContent=homeAddress(payload); text.appendChild(h);text.appendChild(addr);
       var badge=document.createElement('span');badge.className='wd-library-badge';badge.textContent=formLabel(payload);head.appendChild(text);head.appendChild(badge);card.appendChild(head);
       var meta=document.createElement('div');meta.className='wd-library-meta';var saved=document.createElement('span');saved.textContent='Last saved ' + formatDate(row.updated_at);var stateEl=document.createElement('span');stateEl.textContent=row.status === 'generated' ? 'Official PDF prepared' : 'Draft';meta.appendChild(saved);meta.appendChild(stateEl);card.appendChild(meta);
-      var actions=document.createElement('div');actions.className='wd-library-actions';actions.appendChild(button('Continue application','secondary','resume',row.id));if(row.status==='generated')actions.appendChild(button('Download saved PDF','primary','download',row.id));actions.appendChild(button('Delete','wd-library-delete','delete',row.id));card.appendChild(actions);list.appendChild(card);
+      var actions=document.createElement('div');actions.className='wd-library-actions';actions.appendChild(button('Continue application','secondary','resume',row.id));if(row.status==='generated'){actions.appendChild(button('Download saved PDF','primary','download',row.id));actions.appendChild(button('Print saved PDF','secondary','print',row.id));}actions.appendChild(button('Delete','wd-library-delete','delete',row.id));card.appendChild(actions);list.appendChild(card);
     });
+  }
+
+  async function loadLatestPdf(id) {
+    var row = rows.find(function (r) { return r.id === id; });
+    var docs = await vault.listDocuments(id);
+    if (!row || !docs.length) throw new Error('missing');
+    var bytes = await vault.loadPdf({ document: docs[0], rawKey: rawKey, userId: user.id, applicationId:id, taxYear:row.tax_year });
+    return { row: row, bytes: bytes };
   }
 
   async function downloadLatest(id) {
     status('Decrypting your saved PDF on this device...');
     try {
-      var row = rows.find(function (r) { return r.id === id; });
-      var docs = await vault.listDocuments(id);
-      if (!row || !docs.length) throw new Error('missing');
-      var bytes = await vault.loadPdf({ document: docs[0], rawKey: rawKey, userId: user.id, applicationId:id, taxYear:row.tax_year });
-      var blob = new Blob([bytes], {type:'application/pdf'}), url=URL.createObjectURL(blob), a=document.createElement('a');
+      var loaded = await loadLatestPdf(id);
+      var blob = new Blob([loaded.bytes], {type:'application/pdf'}), url=URL.createObjectURL(blob), a=document.createElement('a');
       a.href=url; a.download=formLabel(decoded.get(id)).replace(/\s+/g,'-') + '-Watchdog.pdf'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(url);},1500); status('');
     } catch (_) { status('Watchdog could not decrypt the saved PDF. Confirm that you unlocked the correct Private Vault.', true); }
+  }
+
+  async function printLatest(id) {
+    var preview = window.open('', '_blank');
+    if (!preview) return status('Allow pop-ups for Watchdog so the print-ready PDF can open.', true);
+    status('Decrypting your saved PDF for printing on this device...');
+    try {
+      var loaded = await loadLatestPdf(id);
+      var blob = new Blob([loaded.bytes], {type:'application/pdf'}), url=URL.createObjectURL(blob);
+      preview.location.replace(url);
+      setTimeout(function(){ try { preview.focus(); preview.print(); } catch (_) {} }, 900);
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 60000);
+      status('Your print-ready PDF opened in a new tab. Use the browser print control if the print dialog does not open automatically.');
+    } catch (_) {
+      try { preview.close(); } catch (_) {}
+      status('Watchdog could not decrypt the saved PDF. Confirm that you unlocked the correct Private Vault.', true);
+    }
   }
 
   async function removeApplication(id) {
@@ -177,10 +199,13 @@
     q('#wd-library-verify').addEventListener('click', verifyCode);
     q('#wd-library-unlock').addEventListener('click', unlock);
     q('#wd-library-new').addEventListener('click', startNew);
+    var topNew = q('.wd-library-new-top');
+    if (topNew) topNew.addEventListener('click', function (event) { event.preventDefault(); startNew(); });
     q('#wd-library-list').addEventListener('click', function (event) {
       var target=event.target.closest('[data-action]'); if(!target)return; var id=target.dataset.id;
       if(target.dataset.action==='resume'){rememberApp(id);window.location.href='/anchor/application/2025/';}
       else if(target.dataset.action==='download') downloadLatest(id);
+      else if(target.dataset.action==='print') printLatest(id);
       else if(target.dataset.action==='delete') removeApplication(id);
     });
   }
