@@ -1,10 +1,35 @@
 name: NJW-258 Google alias null-exact patch
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'fix/njw-258-google-alias-null-exact'
+
+permissions:
+  contents: write
 
 jobs:
-  parked:
+  patch-and-test:
     runs-on: ubuntu-latest
     steps:
-      - run: echo parked
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/njw-258-google-alias-null-exact
+          fetch-depth: 0
+      - name: Patch
+        run: python scripts/njw258-google-alias-null-exact.py
+      - name: Verify
+        run: |
+          node --check property/js/lookup.js
+          node property/tests/property-lookup-performance-contract.mjs
+          node property/tests/property-parcel-fallback-contract.mjs
+          node property/tests/property-address-alias-contract.mjs
+          git diff --check
+      - name: Commit
+        run: |
+          rm .github/workflows/njw258-google-alias-null-exact.yml scripts/njw258-google-alias-null-exact.py
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'NJW-258 recover selected aliases when NJ point misses parcel'
+          git push origin HEAD:fix/njw-258-google-alias-null-exact
