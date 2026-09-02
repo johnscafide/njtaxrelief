@@ -30,6 +30,7 @@ for (const [key, source] of Object.entries(SOURCES)) {
 const window = {};
 const sandbox = {
   window,
+  document: { getElementById: () => null },
   PDFLib: { PDFDocument, StandardFonts, PDFName },
   Uint8Array,
   Array,
@@ -55,6 +56,7 @@ const sandbox = {
 };
 sandbox.window.PDFLib = sandbox.PDFLib;
 vm.createContext(sandbox);
+vm.runInContext(fs.readFileSync('property/js/anchor-application-2025-guard.js', 'utf8'), sandbox);
 vm.runInContext(fs.readFileSync('property/js/anchor-application-2025-fields.js', 'utf8'), sandbox);
 vm.runInContext(fs.readFileSync('property/js/anchor-application-pdf-2025.js', 'utf8'), sandbox);
 
@@ -115,7 +117,10 @@ for (const [name, state] of [['anc', anc], ['pas', pas]]) {
   const doc = await PDFDocument.load(out);
   assert.equal(doc.getPageCount(), SOURCES[expectedType].pages, `${name} page count changed`);
   assert.equal(doc.getForm().getFields().length, 0, `${name} output did not flatten AcroForm fields`);
+  for (const [index, page] of doc.getPages().entries()) {
+    assert.equal(page.node.has(PDFName.of('Annots')), false, `${name} page ${index + 1} retained flattened Widget annotations`);
+  }
   fs.writeFileSync(`artifacts/njw303-pdf-cert/${name}-2025-filled.pdf`, out);
 }
 
-console.log('ANC-1 and PAS-1 pdf-lib generation, flattening, hashes, and page counts passed');
+console.log('ANC-1 and PAS-1 pdf-lib generation, flattening, annotation cleanup, hashes, and page counts passed');
