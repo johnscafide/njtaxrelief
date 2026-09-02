@@ -6,6 +6,7 @@ const read = (p) => fs.readFileSync(p, 'utf8');
 const appHtml = read('property/anchor/application/2025/index.html');
 const libraryHtml = read('property/anchor/applications/index.html');
 const appJs = read('property/js/anchor-application-2025.js');
+const guardJs = read('property/js/anchor-application-2025-guard.js');
 const vaultJs = read('property/js/anchor-application-vault.js');
 const pdfJs = read('property/js/anchor-application-pdf-2025.js');
 const fieldsJs = read('property/js/anchor-application-2025-fields.js');
@@ -23,16 +24,17 @@ assert.match(appHtml, /\/property\/js\/anchor-application-vault\.js/);
 assert.match(appHtml, /\/property\/js\/anchor-application-2025-fields\.js/);
 assert.match(appHtml, /\/property\/js\/anchor-application-pdf-2025\.js/);
 assert.match(appHtml, /\/property\/js\/anchor-application-2025\.js/);
+assert.match(appHtml, /\/property\/js\/anchor-application-2025-guard\.js/);
 assert.match(appHtml, /id="wd-recovery-key"/);
 assert.match(appHtml, /id="wd-review-confirm"/);
 assert.match(appHtml, /review, sign, and date/i);
 assert.match(appHtml, /Support Watchdog/);
 assert.match(appHtml, /disabled>Support Watchdog/);
 
-assert.doesNotMatch(appJs, /localStorage/);
-assert.doesNotMatch(vaultJs, /localStorage/);
-assert.doesNotMatch(appJs, /console\.(?:log|info|debug)\s*\(/);
-assert.doesNotMatch(vaultJs, /console\.(?:log|info|debug)\s*\(/);
+for (const js of [appJs, guardJs, vaultJs]) {
+  assert.doesNotMatch(js, /localStorage/);
+  assert.doesNotMatch(js, /console\.(?:log|info|debug)\s*\(/);
+}
 assert.match(vaultJs, /AES-GCM/);
 assert.match(vaultJs, /crypto\.subtle\.encrypt/);
 assert.match(vaultJs, /crypto\.subtle\.decrypt/);
@@ -44,6 +46,14 @@ assert.match(appJs, /WatchdogAnchorPdf2025/);
 assert.match(appJs, /resident_oct1/);
 assert.match(appJs, /pas\.born_1960_or_earlier/);
 assert.match(appJs, /1960/);
+assert.match(guardJs, /validateAddress/);
+assert.match(guardJs, /validateAnc/);
+assert.match(guardJs, /validatePasHistory/);
+assert.match(guardJs, /validateProperty/);
+assert.match(guardJs, /validateIncome/);
+assert.match(guardJs, /validateSchedule/);
+assert.match(guardJs, /validateFinish/);
+assert.match(guardJs, /stopImmediatePropagation/);
 
 assert.match(pdfJs, /EXPECTED_FIELD_COUNTS/);
 assert.match(pdfJs, /'anc-1': 120/);
