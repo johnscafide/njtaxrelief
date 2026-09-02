@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
-import { PDFDocument, StandardFonts } from 'pdf-lib';
+import { PDFDocument, StandardFonts, PDFName } from 'pdf-lib';
 
 const SOURCES = {
   'anc-1': {
@@ -30,7 +30,7 @@ for (const [key, source] of Object.entries(SOURCES)) {
 const window = {};
 const sandbox = {
   window,
-  PDFLib: { PDFDocument, StandardFonts },
+  PDFLib: { PDFDocument, StandardFonts, PDFName },
   Uint8Array,
   Array,
   Object,
