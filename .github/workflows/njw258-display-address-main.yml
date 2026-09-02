@@ -17,75 +17,76 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
-      - name: Prepare patcher
+      - name: Prepare structural patcher
         shell: bash
         run: |
           cat > /tmp/njw258_display_address_patch.py <<'PY'
           from pathlib import Path
+          import re
+          import textwrap
+
           path = Path('property/js/lookup.js')
           s = path.read_text()
 
-          old = """  function propertyLocationZip(typed, matched) {
-            // The property ZIP comes from the address evidence, never the parcel
-            // layer's owner-mailing ZIP fields.
-            return parcelZip(matched) || parcelZip(typed);
-          }
-          """
-          new = old + """
-            function displayStreetAddress(typed, matched, assessor) {
-              // Keep the address the visitor searched as the primary label. NJ's
-              // assessor may use a different street alias for the same tax parcel.
-              var source = String(matched || typed || assessor || '').trim();
-              var street = source.split(',')[0].trim();
-              return street || String(assessor || typed || '').trim();
-            }
+          if 'function displayStreetAddress(typed, matched, assessor)' not in s:
+              anchor = '  var PARCEL_ADDR_NOISE = {'
+              if anchor not in s:
+                  raise SystemExit('display helper insertion anchor not found')
+              helper = textwrap.dedent('''
+                function displayStreetAddress(typed, matched, assessor) {
+                  // Keep the address the visitor searched as the primary label. NJ's
+                  // assessor may use a different street alias for the same tax parcel.
+                  var source = String(matched || typed || assessor || '').trim();
+                  var street = source.split(',')[0].trim();
+                  return street || String(assessor || typed || '').trim();
+                }
 
-            function assessorAddressAlias(display, assessor) {
-              var parcelAddress = String(assessor || '').trim();
-              if (!parcelAddress || !display) return '';
-              return normAddr(parcelAddress) === normAddr(display) ? '' : parcelAddress;
-            }
-          """
-          if old not in s:
-              raise SystemExit('propertyLocationZip anchor not found')
-          s = s.replace(old, new, 1)
+                function assessorAddressAlias(display, assessor) {
+                  var parcelAddress = String(assessor || '').trim();
+                  if (!parcelAddress || !display) return '';
+                  return normAddr(parcelAddress) === normAddr(display) ? '' : parcelAddress;
+                }
 
-          old = """    var propertyZip = propertyLocationZip(typed, geo && geo.matched);
-              var status = resolveStatus(p, dy);
+              ''')
+              helper = ''.join('  ' + line if line.strip() else line for line in helper.splitlines(True))
+              s = s.replace(anchor, helper + anchor, 1)
 
-              current = {
-                address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,
-          """
-          new = """    var propertyZip = propertyLocationZip(typed, geo && geo.matched);
-              var displayAddress = displayStreetAddress(typed, geo && geo.matched, p.PROP_LOC);
-              var assessorAddress = String(p.PROP_LOC || '').trim();
-              var assessorAlias = assessorAddressAlias(displayAddress, assessorAddress);
-              var status = resolveStatus(p, dy);
+          if 'var displayAddress = displayStreetAddress(typed, geo && geo.matched, p.PROP_LOC);' not in s:
+              pattern = r"(    var propertyZip = propertyLocationZip\(typed, geo && geo\.matched\);\n)(    var status = resolveStatus\(p, dy\);)"
+              replacement = (r"\1"
+                  "    var displayAddress = displayStreetAddress(typed, geo && geo.matched, p.PROP_LOC);\n"
+                  "    var assessorAddress = String(p.PROP_LOC || '').trim();\n"
+                  "    var assessorAlias = assessorAddressAlias(displayAddress, assessorAddress);\n"
+                  r"\2")
+              s, n = re.subn(pattern, replacement, s, count=1)
+              if n != 1:
+                  raise SystemExit('render address variables anchor not found')
 
-              current = {
-                address: displayAddress, assessorAddress: assessorAddress, assessorAlias: assessorAlias,
-                town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,
-          """
-          if old not in s:
-              raise SystemExit('current address anchor not found')
-          s = s.replace(old, new, 1)
+          old_current = "      address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,"
+          if old_current in s:
+              s = s.replace(old_current,
+                  "      address: displayAddress, assessorAddress: assessorAddress, assessorAlias: assessorAlias,\n"
+                  "      town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,", 1)
 
-          old = """      '<div class=\"plm-addr\">' + esc(current.address) + '<span>' + esc(current.town) +
-                  (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span></div>' +
-          """
-          new = """      '<div class=\"plm-addr\">' + esc(current.address) + '<span>' + esc(current.town) +
-                  (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span>' +
-                  (current.assessorAlias
-                    ? '<span class=\"plm-assessor-alias\" style=\"font-size:12px;opacity:.72;margin-top:4px;\">NJ tax records list this parcel as ' + esc(current.assessorAlias) + '.</span>'
-                    : '') + '</div>' +
-          """
-          if old not in s:
-              raise SystemExit('headline address anchor not found')
-          s = s.replace(old, new, 1)
+          if 'NJ tax records list this parcel as ' not in s:
+              old_head = ("      '<div class=\"plm-addr\">' + esc(current.address) + '<span>' + esc(current.town) +\n"
+                  "        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span></div>' +")
+              new_head = ("      '<div class=\"plm-addr\">' + esc(current.address) + '<span>' + esc(current.town) +\n"
+                  "        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span>' +\n"
+                  "        (current.assessorAlias\n"
+                  "          ? '<span class=\"plm-assessor-alias\" style=\"font-size:12px;opacity:.72;margin-top:4px;\">NJ tax records list this parcel as ' + esc(current.assessorAlias) + '.</span>'\n"
+                  "          : '') + '</div>' +")
+              if old_head not in s:
+                  raise SystemExit('headline address anchor not found')
+              s = s.replace(old_head, new_head, 1)
+
+          if 'address: p.PROP_LOC || typed, town:' in s:
+              raise SystemExit('legacy assessor-first current address remains')
 
           path.write_text(s)
 
-          Path('property/tests/property-display-address-contract.mjs').write_text(r"""import fs from 'node:fs';
+          test = textwrap.dedent(r'''\
+          import fs from 'node:fs';
           import assert from 'node:assert/strict';
 
           const src = fs.readFileSync(new URL('../js/lookup.js', import.meta.url), 'utf8');
@@ -98,7 +99,8 @@ jobs:
           assert.match(src, /normAddr\(parcelAddress\) === normAddr\(display\)/, 'equivalent spellings must not create a false alias note');
 
           console.log('property display address contract: ok');
-          """)
+          ''')
+          Path('property/tests/property-display-address-contract.mjs').write_text(test)
           PY
       - name: Sync, patch, and verify current main
         shell: bash
