@@ -20,7 +20,7 @@
   function fillParcelChars(form,names,value){fillCharacters(form,names,value);}
   function fillMoney(form,names,value){fillCharacters(form,names,moneyDigits(value),{digitsOnly:true,rightAlign:true});}
   function fillPercent(form,names,value){fillCharacters(form,names,digits(value),{digitsOnly:true,rightAlign:true,takeRight:true});}
-  function setRadio(form,descriptor,option){if(!descriptor||!option)return;field(form,descriptor.field||descriptor,'radio').select(String(option));}
+  function setRadio(form,descriptor,option){if(!descriptor||!option)return;var group=field(form,descriptor.field||descriptor,'radio'),target=PDFLib.PDFName.of(String(option)),off=PDFLib.PDFName.of('Off'),widgets=group.acroField.getWidgets();group.acroField.setValue(target);widgets.forEach(function(widget){var on=widget.getOnValue();widget.setAppearanceState(on&&on.toString()===target.toString()?on:off);});}
   function setYesNo(form,descriptor,value){if(value===undefined||value===null||value==='')return;setRadio(form,descriptor,yes(value)?descriptor.yes:descriptor.no);}
   function setChoice(form,descriptor,key){if(!key||!descriptor||!descriptor.choices)return;var option=descriptor.choices[key];if(!option)throw new Error('An application choice does not map to the certified State form.');setRadio(form,descriptor,option);}
   function setCheck(form,name,value){var checkbox=field(form,name,'check');if(yes(value))checkbox.check();else checkbox.uncheck();}
