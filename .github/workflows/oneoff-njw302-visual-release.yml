@@ -1,0 +1,60 @@
+name: One-off NJW-302 visual release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/oneoff-njw302-visual-release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.event.head_commit.message == 'Trigger NJW-302 visual production release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Temporarily enable Vercel Git deployment
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('vercel.json')
+          s = p.read_text()
+          old = '"deploymentEnabled": false'
+          new = '"deploymentEnabled": true'
+          if old not in s:
+              raise SystemExit('Expected paused deployment flag was not found; refusing to mutate.')
+          p.write_text(s.replace(old, new, 1))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vercel.json
+          git commit -m "Temporarily enable one Git deployment for NJW-302 visual release"
+          git push origin HEAD:main
+
+      - name: Allow production deployment to start
+        run: sleep 60
+
+      - name: Restore paused deployment state and remove one-off workflow
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git reset --hard origin/main
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('vercel.json')
+          s = p.read_text()
+          old = '"deploymentEnabled": true'
+          new = '"deploymentEnabled": false'
+          if old in s:
+              p.write_text(s.replace(old, new, 1))
+          PY
+          git rm .github/workflows/oneoff-njw302-visual-release.yml
+          git add vercel.json
+          git commit -m "Restore paused Git deployments after NJW-302 visual release"
+          git push origin HEAD:main
