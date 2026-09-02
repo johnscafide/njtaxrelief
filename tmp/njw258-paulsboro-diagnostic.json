@@ -1,0 +1,6409 @@
+{
+  "address": "15 Railroad Ave, Paulsboro, NJ 08066",
+  "geocoder_request": {
+    "body": {
+      "candidates": [
+        {
+          "address": "15 Railroad Avenue, Paulsboro, New Jersey, 08066",
+          "attributes": {},
+          "extent": {
+            "xmax": -75.242434604535,
+            "xmin": -75.244477453706,
+            "ymax": 39.835756000003,
+            "ymin": 39.833756000003
+          },
+          "location": {
+            "x": -75.243456000001,
+            "y": 39.834756000003
+          },
+          "score": 100
+        }
+      ],
+      "spatialReference": {
+        "latestWkid": 4326,
+        "wkid": 4326
+      }
+    },
+    "ok": true,
+    "status": 200,
+    "url": "https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates?SingleLine=15+Railroad+Ave%2C+Paulsboro%2C+NJ+08066&outSR=4326&maxLocations=5&f=json"
+  },
+  "house_zip_candidates": {
+    "body": {
+      "features": [
+        {
+          "attributes": {
+            "CITY_STATE": "WEST DEPTFORD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "WEST DEPTFORD TWP",
+            "PAMS_PIN": "0820_351_8.04_C0015",
+            "PCLBLOCK": "351",
+            "PCLLOT": "8.04",
+            "PCLQCODE": "C0015",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 MAPLEWOOD CT",
+            "ST_ADDRESS": "15 MAPLEWOOD CT",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.18446686613643,
+            "y": 39.82466084502403
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WEST DEPTFORD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "WEST DEPTFORD TWP",
+            "PAMS_PIN": "0820_356.11_25",
+            "PCLBLOCK": "356.11",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15A",
+            "PROP_LOC": "15 HILL LN",
+            "ST_ADDRESS": "675 GROVE RD",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.17067889794413,
+            "y": 39.81579305282795
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_79_13",
+            "PCLBLOCK": "79",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 W WASHINGTON ST",
+            "ST_ADDRESS": "15 W WASHINGTON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24222526972943,
+            "y": 39.8318169731084
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_72_10",
+            "PCLBLOCK": "72",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 W ADAMS ST",
+            "ST_ADDRESS": "15 W ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24248351081954,
+            "y": 39.83238846072217
+          }
+        }
+      ],
+      "fields": [
+        {
+          "alias": "PAMS_PIN",
+          "defaultValue": null,
+          "domain": null,
+          "length": 38,
+          "name": "PAMS_PIN",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_LOC",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "PROP_LOC",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLBLOCK",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLBLOCK",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLLOT",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLLOT",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLQCODE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 11,
+          "name": "PCLQCODE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "MUN_NAME",
+          "defaultValue": null,
+          "domain": null,
+          "length": 40,
+          "name": "MUN_NAME",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "COUNTY",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "COUNTY",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ZIP5",
+          "defaultValue": null,
+          "domain": null,
+          "length": 5,
+          "name": "ZIP5",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_CLASS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 3,
+          "name": "PROP_CLASS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ST_ADDRESS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "ST_ADDRESS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "CITY_STATE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "CITY_STATE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "geometryType": "esriGeometryPolygon",
+      "globalIdFieldName": "",
+      "objectIdFieldName": "OBJECTID",
+      "spatialReference": {
+        "latestWkid": 4326,
+        "wkid": 4326
+      },
+      "uniqueIdField": {
+        "isSystemMaintained": true,
+        "name": "OBJECTID"
+      }
+    },
+    "ok": true,
+    "status": 200,
+    "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query?where=PROP_LOC+LIKE+%2715+%25%27+AND+ZIP5+%3D+%2708066%27&outFields=PAMS_PIN%2CPROP_LOC%2CPCLBLOCK%2CPCLLOT%2CPCLQCODE%2CMUN_NAME%2CCOUNTY%2CZIP5%2CPROP_CLASS%2CST_ADDRESS%2CCITY_STATE&returnGeometry=false&returnCentroid=true&outSR=4326&resultRecordCount=300&f=json"
+  },
+  "known_pin_candidates": {
+    "body": {
+      "features": [
+        {
+          "attributes": {
+            "CITY_STATE": "PILESGROVE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3.02",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 QUINCY ST",
+            "ST_ADDRESS": "36A AVIS MILL RD",
+            "ZIP5": "08090"
+          },
+          "centroid": {
+            "x": -75.24364056637721,
+            "y": 39.8347262879362
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 QUINCY ST",
+            "ST_ADDRESS": "89 CUCINOTTA AVE",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24347123255419,
+            "y": 39.83474866850066
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "14 ROOSEVELT ST",
+            "ST_ADDRESS": "225 W BROAD ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24358689841533,
+            "y": 39.83505759250148
+          }
+        }
+      ],
+      "fields": [
+        {
+          "alias": "PAMS_PIN",
+          "defaultValue": null,
+          "domain": null,
+          "length": 38,
+          "name": "PAMS_PIN",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_LOC",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "PROP_LOC",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLBLOCK",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLBLOCK",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLLOT",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLLOT",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLQCODE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 11,
+          "name": "PCLQCODE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "MUN_NAME",
+          "defaultValue": null,
+          "domain": null,
+          "length": 40,
+          "name": "MUN_NAME",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "COUNTY",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "COUNTY",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ZIP5",
+          "defaultValue": null,
+          "domain": null,
+          "length": 5,
+          "name": "ZIP5",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_CLASS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 3,
+          "name": "PROP_CLASS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ST_ADDRESS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "ST_ADDRESS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "CITY_STATE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "CITY_STATE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "geometryType": "esriGeometryPolygon",
+      "globalIdFieldName": "",
+      "objectIdFieldName": "OBJECTID",
+      "spatialReference": {
+        "latestWkid": 4326,
+        "wkid": 4326
+      },
+      "uniqueIdField": {
+        "isSystemMaintained": true,
+        "name": "OBJECTID"
+      }
+    },
+    "ok": true,
+    "status": 200,
+    "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query?where=PAMS_PIN+LIKE+%270814_40_3%25%27&outFields=PAMS_PIN%2CPROP_LOC%2CPCLBLOCK%2CPCLLOT%2CPCLQCODE%2CMUN_NAME%2CCOUNTY%2CZIP5%2CPROP_CLASS%2CST_ADDRESS%2CCITY_STATE&returnGeometry=false&returnCentroid=true&outSR=4326&resultRecordCount=100&f=json"
+  },
+  "nearby_350m": {
+    "body": {
+      "exceededTransferLimit": true,
+      "features": [
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0807_37_12",
+            "PCLBLOCK": "37",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24704269927366,
+            "y": 39.83410763404287
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_135_9",
+            "PCLBLOCK": "135",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24019146790118,
+            "y": 39.83498127332524
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_133_2",
+            "PCLBLOCK": "133",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24094215984229,
+            "y": 39.83456484856634
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_10_1",
+            "PCLBLOCK": "10",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "MANTUA AVE",
+            "ST_ADDRESS": "705 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23987438929898,
+            "y": 39.8348380631924
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_135_19",
+            "PCLBLOCK": "135",
+            "PCLLOT": "19",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.23919217719248,
+            "y": 39.83662715656642
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_97",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "97",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "705 MANTUA AVE",
+            "ST_ADDRESS": "705 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23958392177663,
+            "y": 39.83600372722168
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_22",
+            "PCLBLOCK": "40",
+            "PCLLOT": "22",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "35 QUINCY ST",
+            "ST_ADDRESS": "37 RAILROAD AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24467771614967,
+            "y": 39.83471757427599
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_8",
+            "PCLBLOCK": "40",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "34 ROOSEVELT ST",
+            "ST_ADDRESS": "34 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24446561375098,
+            "y": 39.8348938924271
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_9",
+            "PCLBLOCK": "40",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "38 ROOSEVELT ST",
+            "ST_ADDRESS": "38 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24463511631255,
+            "y": 39.83498309528696
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PILESGROVE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3.02",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 QUINCY ST",
+            "ST_ADDRESS": "36A AVIS MILL RD",
+            "ZIP5": "08090"
+          },
+          "centroid": {
+            "x": -75.24364056637721,
+            "y": 39.8347262879362
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_5",
+            "PCLBLOCK": "40",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "22 ROOSEVELT ST",
+            "ST_ADDRESS": "22 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24389269079381,
+            "y": 39.834970371971686
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_40_23",
+            "PCLBLOCK": "40",
+            "PCLLOT": "23",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24485599177684,
+            "y": 39.834710202822976
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_10",
+            "PCLBLOCK": "40",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15F",
+            "PROP_LOC": "42 ROOSEVELT ST",
+            "ST_ADDRESS": "42 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24481314214323,
+            "y": 39.834985269789485
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_24",
+            "PCLBLOCK": "40",
+            "PCLLOT": "24",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "45 QUINCY ST",
+            "ST_ADDRESS": "1211 DELAWARE ST",
+            "ZIP5": "08011"
+          },
+          "centroid": {
+            "x": -75.24503425980107,
+            "y": 39.83470150551547
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_11",
+            "PCLBLOCK": "40",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "46 ROOSEVELT ST",
+            "ST_ADDRESS": "46 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24499116856146,
+            "y": 39.834987443597846
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_25",
+            "PCLBLOCK": "40",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "QUINCY ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24521253496516,
+            "y": 39.834691503217414
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_12",
+            "PCLBLOCK": "40",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "48 ROOSEVELT ST",
+            "ST_ADDRESS": "318 SALERNO CT",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.24512468848481,
+            "y": 39.83498907353313
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_12.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "12.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "50 ROOSEVELT ST",
+            "ST_ADDRESS": "318 SALARNO CT",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.24521370166141,
+            "y": 39.83499015998647
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_26",
+            "PCLBLOCK": "40",
+            "PCLLOT": "26",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "QUINCY ST",
+            "ST_ADDRESS": "392 MEGAN DR",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24537210417446,
+            "y": 39.834683128657964
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT ROYAL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_13",
+            "PCLBLOCK": "40",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "52-54 ROOSEVELT ST",
+            "ST_ADDRESS": "180 COUNTY HOUSE RD",
+            "ZIP5": "08061"
+          },
+          "centroid": {
+            "x": -75.2453472216665,
+            "y": 39.83499179047273
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_40_27",
+            "PCLBLOCK": "40",
+            "PCLLOT": "27",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24551464565964,
+            "y": 39.834676886215256
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_14",
+            "PCLBLOCK": "40",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "56 ROOSEVELT ST",
+            "ST_ADDRESS": "56 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2455252479534,
+            "y": 39.83499396374923
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_28",
+            "PCLBLOCK": "40",
+            "PCLLOT": "28",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "QUINCY ST",
+            "ST_ADDRESS": "392 MEGAN DR",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24589233808167,
+            "y": 39.83465677530784
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_15",
+            "PCLBLOCK": "40",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "60 ROOSEVELT ST",
+            "ST_ADDRESS": "60 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2457032739951,
+            "y": 39.834996136793414
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SICKLERVILLE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_16",
+            "PCLBLOCK": "40",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "64 ROOSEVELT ST",
+            "ST_ADDRESS": "110 LILLIAN AVE",
+            "ZIP5": "08081"
+          },
+          "centroid": {
+            "x": -75.24588130038215,
+            "y": 39.834998309228915
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT LAUREL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_4",
+            "PCLBLOCK": "40",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "18 ROOSEVELT ST",
+            "ST_ADDRESS": "103 CHATHAM RD",
+            "ZIP5": "08054"
+          },
+          "centroid": {
+            "x": -75.24370542539232,
+            "y": 39.83501266769343
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 QUINCY ST",
+            "ST_ADDRESS": "89 CUCINOTTA AVE",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24347123255419,
+            "y": 39.83474866850066
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "14 ROOSEVELT ST",
+            "ST_ADDRESS": "225 W BROAD ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24358689841533,
+            "y": 39.83505759250148
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_2",
+            "PCLBLOCK": "40",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "742 DELAWARE ST",
+            "ST_ADDRESS": "742 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24313714695472,
+            "y": 39.83484474447545
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_17",
+            "PCLBLOCK": "40",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "PENN LINE RD",
+            "ST_ADDRESS": "392 MEGAN DR",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24607632723514,
+            "y": 39.834896514388944
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_17.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "17.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "68 ROOSEVELT ST",
+            "ST_ADDRESS": "68 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24605532901617,
+            "y": 39.835074406553034
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_1",
+            "PCLBLOCK": "40",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "732 DELAWARE ST",
+            "ST_ADDRESS": "732 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24325636457964,
+            "y": 39.83509588287819
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_10",
+            "PCLBLOCK": "17",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15D",
+            "PROP_LOC": "736 BEACON AVE",
+            "ST_ADDRESS": "736 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24165318426296,
+            "y": 39.835086147321284
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MANTUA, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_20",
+            "PCLBLOCK": "17",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "737 BILLINGS AVE",
+            "ST_ADDRESS": "397 BRIDGETON PK",
+            "ZIP5": "08051"
+          },
+          "centroid": {
+            "x": -75.24213075257839,
+            "y": 39.835128591149626
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_9",
+            "PCLBLOCK": "17",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "732 BEACON AVE",
+            "ST_ADDRESS": "732 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24163279320611,
+            "y": 39.8352225099041
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_19",
+            "PCLBLOCK": "17",
+            "PCLLOT": "19",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "733 BILLINGS AVE",
+            "ST_ADDRESS": "733 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24211036386052,
+            "y": 39.835264954094534
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_1.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "1.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "724 DELAWARE ST",
+            "ST_ADDRESS": "724 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24332665830825,
+            "y": 39.835251431861934
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_18",
+            "PCLBLOCK": "17",
+            "PCLLOT": "18",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "729 BILLINGS AVE",
+            "ST_ADDRESS": "35 W BROAD ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24208997350364,
+            "y": 39.83540131681961
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_7",
+            "PCLBLOCK": "17",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "726 BEACON AVE",
+            "ST_ADDRESS": "726 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24160220658165,
+            "y": 39.83542705406771
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_4",
+            "PCLBLOCK": "39",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "712 DELAWARE ST",
+            "ST_ADDRESS": "712 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24350825189008,
+            "y": 39.835653266031436
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_5",
+            "PCLBLOCK": "39",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "11 ROOSEVELT AVE",
+            "ST_ADDRESS": "PO BOX 144",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24360940436269,
+            "y": 39.83548073960775
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_17",
+            "PCLBLOCK": "17",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "725 BILLINGS AVE",
+            "ST_ADDRESS": "725 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24206958359554,
+            "y": 39.83553767927809
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_22",
+            "PCLBLOCK": "39",
+            "PCLLOT": "22",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "13 ROOSEVELT ST",
+            "ST_ADDRESS": "13 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24382107027365,
+            "y": 39.835525637582556
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_6.01",
+            "PCLBLOCK": "39",
+            "PCLLOT": "6.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "14 CAPITOL ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24396774026663,
+            "y": 39.8358148292557
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_24",
+            "PCLBLOCK": "39",
+            "PCLLOT": "24",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "21 ROOSEVELT ST",
+            "ST_ADDRESS": "21 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24409618554793,
+            "y": 39.83544714571415
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "HAWORTH, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_6",
+            "PCLBLOCK": "39",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "16 CAPITOL ST",
+            "ST_ADDRESS": "45 PLEASANT ST",
+            "ZIP5": "07641"
+          },
+          "centroid": {
+            "x": -75.2441114881649,
+            "y": 39.83582446897066
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "THOROFARE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_5.01",
+            "PCLBLOCK": "39",
+            "PCLLOT": "5.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "718 DELAWARE ST",
+            "ST_ADDRESS": "305 DELAWARE ST",
+            "ZIP5": "08086"
+          },
+          "centroid": {
+            "x": -75.24334626861426,
+            "y": 39.83555141615536
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_7",
+            "PCLBLOCK": "39",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "22 CAPITOL ST",
+            "ST_ADDRESS": "22 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24422941063754,
+            "y": 39.83583092529614
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MANTUA, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_25",
+            "PCLBLOCK": "39",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "25 ROOSEVELT ST",
+            "ST_ADDRESS": "905 DANTE CT",
+            "ZIP5": "08051"
+          },
+          "centroid": {
+            "x": -75.24426879081359,
+            "y": 39.83547447483316
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WESTVILLE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_8",
+            "PCLBLOCK": "39",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 CAPITOL ST",
+            "ST_ADDRESS": "35 HILLSIDE DR",
+            "ZIP5": "08093"
+          },
+          "centroid": {
+            "x": -75.24433865084275,
+            "y": 39.83585387493853
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT ROYAL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_26",
+            "PCLBLOCK": "39",
+            "PCLLOT": "26",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "29 ROOSEVELT ST",
+            "ST_ADDRESS": "180 COUNTY HOUSE RD",
+            "ZIP5": "08061"
+          },
+          "centroid": {
+            "x": -75.24444681809474,
+            "y": 39.835476650031154
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WESTVILLE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_9",
+            "PCLBLOCK": "39",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "34 CAPITOL ST",
+            "ST_ADDRESS": "35 HILLSIDE AVE",
+            "ZIP5": "08093"
+          },
+          "centroid": {
+            "x": -75.24459110007622,
+            "y": 39.8358302213477
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_23",
+            "PCLBLOCK": "39",
+            "PCLLOT": "23",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 ROOSEVELT ST",
+            "ST_ADDRESS": "17 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24395558056585,
+            "y": 39.835489508082865
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_27",
+            "PCLBLOCK": "39",
+            "PCLLOT": "27",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "33 ROOSEVELT ST",
+            "ST_ADDRESS": "PO BOX 228",
+            "ZIP5": "08098"
+          },
+          "centroid": {
+            "x": -75.24462484591172,
+            "y": 39.83547882482633
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHOENIXVILLE, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_28",
+            "PCLBLOCK": "39",
+            "PCLLOT": "28",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "37 ROOSEVELT ST",
+            "ST_ADDRESS": "150 BLACK ROCK ROAD",
+            "ZIP5": "19460"
+          },
+          "centroid": {
+            "x": -75.24480287358567,
+            "y": 39.83548099908253
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT ROYAL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_29",
+            "PCLBLOCK": "39",
+            "PCLLOT": "29",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "41 ROOSEVELT ST",
+            "ST_ADDRESS": "180 COUNTY HOUSE RD",
+            "ZIP5": "08061"
+          },
+          "centroid": {
+            "x": -75.24498090122353,
+            "y": 39.835483173486026
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CLOSTER, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_12",
+            "PCLBLOCK": "39",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "44-46 CAPITOL ST",
+            "ST_ADDRESS": "56 LINDEMANN AVE",
+            "ZIP5": "07624"
+          },
+          "centroid": {
+            "x": -75.24488455604559,
+            "y": 39.835838927086904
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_14",
+            "PCLBLOCK": "39",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "50 CAPITOL ST",
+            "ST_ADDRESS": "50 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2450269785126,
+            "y": 39.835840666695105
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_30",
+            "PCLBLOCK": "39",
+            "PCLLOT": "30",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "45 ROOSEVELT ST",
+            "ST_ADDRESS": "45 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24515892893565,
+            "y": 39.83548534691258
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_31",
+            "PCLBLOCK": "39",
+            "PCLLOT": "31",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "51 ROOSEVELT ST",
+            "ST_ADDRESS": "PO BOX 144",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24533695654756,
+            "y": 39.83548752002664
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_15",
+            "PCLBLOCK": "39",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "54 CAPITOL ST",
+            "ST_ADDRESS": "PO BOX 406",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24519788562846,
+            "y": 39.835842753124915
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "BAY HEAD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_17",
+            "PCLBLOCK": "39",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "62 CAPITOL ST",
+            "ST_ADDRESS": "PO BOX 312",
+            "ZIP5": "08742"
+          },
+          "centroid": {
+            "x": -75.24536523266188,
+            "y": 39.83584479593402
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_32",
+            "PCLBLOCK": "39",
+            "PCLLOT": "32",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "53-55 ROOSEVELT ST",
+            "ST_ADDRESS": "53-55  ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24551498431045,
+            "y": 39.83548969328655
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_18",
+            "PCLBLOCK": "39",
+            "PCLLOT": "18",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "66 CAPITOL ST",
+            "ST_ADDRESS": "318 SALERNO CT",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.24547204973774,
+            "y": 39.835846100421044
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_33",
+            "PCLBLOCK": "39",
+            "PCLLOT": "33",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "57 ROOSEVELT ST",
+            "ST_ADDRESS": "57 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24564850490681,
+            "y": 39.83549132320267
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "YEADON, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_20",
+            "PCLBLOCK": "39",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "74 CAPITOL ST",
+            "ST_ADDRESS": "838 YEADON AVE",
+            "ZIP5": "19050"
+          },
+          "centroid": {
+            "x": -75.24565007844988,
+            "y": 39.83584827371966
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_33.01",
+            "PCLBLOCK": "39",
+            "PCLLOT": "33.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "59 ROOSEVELT ST",
+            "ST_ADDRESS": "59 ROOSEVELT AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24573751872165,
+            "y": 39.83549240933493
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_34",
+            "PCLBLOCK": "39",
+            "PCLLOT": "34",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "61 ROOSEVELT ST",
+            "ST_ADDRESS": "61 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24585064548936,
+            "y": 39.83548649538383
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_35",
+            "PCLBLOCK": "39",
+            "PCLLOT": "35",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "65 ROOSEVELT ST",
+            "ST_ADDRESS": "65 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2459876364548,
+            "y": 39.83548816354275
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "NORTH BRUNSWICK, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_21",
+            "PCLBLOCK": "39",
+            "PCLLOT": "21",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "78 CAPITOL ST",
+            "ST_ADDRESS": "764 LIVINGSTON AVE",
+            "ZIP5": "08902"
+          },
+          "centroid": {
+            "x": -75.24587860747792,
+            "y": 39.835841370947946
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_3",
+            "PCLBLOCK": "39",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "708 N DELAWARE ST",
+            "ST_ADDRESS": "708 N DELAWARE AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24356390331052,
+            "y": 39.83577640832064
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_6",
+            "PCLBLOCK": "17",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "720 BEACON AVE",
+            "ST_ADDRESS": "720 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2415716206301,
+            "y": 39.83563159764457
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_16",
+            "PCLBLOCK": "17",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "721 BILLINGS AVE",
+            "ST_ADDRESS": "721 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24204919338435,
+            "y": 39.83567404186789
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CLARKSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_5",
+            "PCLBLOCK": "17",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "716 BEACON AVE",
+            "ST_ADDRESS": "PO BOX 27",
+            "ZIP5": "08020"
+          },
+          "centroid": {
+            "x": -75.24155122932231,
+            "y": 39.83576795985537
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_15",
+            "PCLBLOCK": "17",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "717 BILLINGS AVE",
+            "ST_ADDRESS": "717 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24202880227533,
+            "y": 39.83581040418282
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_4",
+            "PCLBLOCK": "17",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "712 BEACON AVE",
+            "ST_ADDRESS": "712 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24153083652124,
+            "y": 39.83590432259742
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHILADELPHIA, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_2",
+            "PCLBLOCK": "39",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "704 DELAWARE ST",
+            "ST_ADDRESS": "3129 N 9TH ST",
+            "ZIP5": "19140"
+          },
+          "centroid": {
+            "x": -75.24361662495917,
+            "y": 39.835893069552505
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_14",
+            "PCLBLOCK": "17",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "713 BILLINGS AVE",
+            "ST_ADDRESS": "713 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24200841226228,
+            "y": 39.835946766770604
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT LAUREL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_15",
+            "PCLBLOCK": "25",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "723 DELAWARE ST",
+            "ST_ADDRESS": "PO BOX 95",
+            "ZIP5": "08054"
+          },
+          "centroid": {
+            "x": -75.24295384984117,
+            "y": 39.835854947778664
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "JAMAICA, NY",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_5",
+            "PCLBLOCK": "25",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "722 BILLINGS AVE",
+            "ST_ADDRESS": "PO BOX 301206",
+            "ZIP5": "11430"
+          },
+          "centroid": {
+            "x": -75.24264198701695,
+            "y": 39.835804004913165
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_4",
+            "PCLBLOCK": "25",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "712 BILLINGS AVE",
+            "ST_ADDRESS": "712 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24264491028417,
+            "y": 39.83600461617871
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_39_1",
+            "PCLBLOCK": "39",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "700 N DELAWARE ST",
+            "ST_ADDRESS": "700 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24367227660439,
+            "y": 39.83601621180724
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT LAUREL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_14",
+            "PCLBLOCK": "25",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "717-719 DELAWARE ST",
+            "ST_ADDRESS": "PO BOX 95",
+            "ZIP5": "08054"
+          },
+          "centroid": {
+            "x": -75.24299081216503,
+            "y": 39.83597708281589
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_3",
+            "PCLBLOCK": "17",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "708 BEACON AVE",
+            "ST_ADDRESS": "708 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24151044535925,
+            "y": 39.83604068518921
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_13",
+            "PCLBLOCK": "17",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "709 BILLINGS AVE",
+            "ST_ADDRESS": "709 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.241988021007,
+            "y": 39.83608312935018
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_9_2",
+            "PCLBLOCK": "9",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "707 BEACON AVE",
+            "ST_ADDRESS": "707 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24080022137666,
+            "y": 39.83611573525939
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_9_4",
+            "PCLBLOCK": "9",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15B",
+            "PROP_LOC": "717 BEACON AVE",
+            "ST_ADDRESS": "313 MEMORIAL AVE",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24054184380655,
+            "y": 39.83544461344421
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_9_1",
+            "PCLBLOCK": "9",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "701 BEACON AVE",
+            "ST_ADDRESS": "701 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.240779827625,
+            "y": 39.83625209734905
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_1.12_96",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "96",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.23955001868686,
+            "y": 39.83628118547072
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_13",
+            "PCLBLOCK": "25",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "715 DELAWARE ST",
+            "ST_ADDRESS": "PO BOX 144",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24303135539566,
+            "y": 39.8361122378369
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_3",
+            "PCLBLOCK": "25",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "708 BILLINGS AVE",
+            "ST_ADDRESS": "708 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2426458755087,
+            "y": 39.83614279238182
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_2",
+            "PCLBLOCK": "17",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "704 BEACON AVE",
+            "ST_ADDRESS": "422 BIRCH AVE",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24149005360228,
+            "y": 39.83617704727759
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_12",
+            "PCLBLOCK": "17",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "705 BILLINGS AVE",
+            "ST_ADDRESS": "PO BOX 196",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2419676303469,
+            "y": 39.83621949154476
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_1",
+            "PCLBLOCK": "17",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "700 BEACON AVE",
+            "ST_ADDRESS": "347 W BROAD ST",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24146966184534,
+            "y": 39.83631340944012
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_12",
+            "PCLBLOCK": "25",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "711 DELAWARE ST",
+            "ST_ADDRESS": "711 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24309438199533,
+            "y": 39.83622823614764
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_2",
+            "PCLBLOCK": "25",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "704 BILLINGS AVE",
+            "ST_ADDRESS": "704 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24264678210471,
+            "y": 39.836280942118655
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_14",
+            "PCLBLOCK": "38",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "694 DELAWARE ST",
+            "ST_ADDRESS": "443 BILLINGSPORT RD",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2438347453801,
+            "y": 39.836327414032
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHILADELPHIA, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_15",
+            "PCLBLOCK": "38",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 CAPITOL ST",
+            "ST_ADDRESS": "2349 N 6TH ST",
+            "ZIP5": "19133"
+          },
+          "centroid": {
+            "x": -75.24417619330278,
+            "y": 39.83628939563339
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_17_11",
+            "PCLBLOCK": "17",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "701 BILLINGS AVE",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24194724018783,
+            "y": 39.8363558541244
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "ELIZABETH, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_16",
+            "PCLBLOCK": "38",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "27 CAPITOL ST",
+            "ST_ADDRESS": "134 BURNET ST",
+            "ZIP5": "07202"
+          },
+          "centroid": {
+            "x": -75.24447968983203,
+            "y": 39.83624560225273
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_16.01",
+            "PCLBLOCK": "38",
+            "PCLLOT": "16.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "29 CAPITOL ST",
+            "ST_ADDRESS": "29 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24457153944176,
+            "y": 39.83630990163698
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_15.02",
+            "PCLBLOCK": "38",
+            "PCLLOT": "15.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "23 CAPITOL ST",
+            "ST_ADDRESS": "23 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24442004366666,
+            "y": 39.83632788428543
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_11",
+            "PCLBLOCK": "25",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "707 DELAWARE ST",
+            "ST_ADDRESS": "707 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24313415536231,
+            "y": 39.83633897670679
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_1",
+            "PCLBLOCK": "25",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "700 BILLINGS AVE",
+            "ST_ADDRESS": "700 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24263707491032,
+            "y": 39.836417158835715
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODBURY, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_10",
+            "PCLBLOCK": "25",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "703 DELAWARE ST",
+            "ST_ADDRESS": "807A N BROAD ST",
+            "ZIP5": "08096"
+          },
+          "centroid": {
+            "x": -75.24311465494458,
+            "y": 39.83645959836067
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_13",
+            "PCLBLOCK": "38",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "690 DELAWARE ST",
+            "ST_ADDRESS": "690 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24386715340812,
+            "y": 39.836447441333426
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_8",
+            "PCLBLOCK": "38",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15A",
+            "PROP_LOC": "DELAWARE ST",
+            "ST_ADDRESS": "670 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24491439726863,
+            "y": 39.83702170437349
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "BELLMAWR, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_15.01",
+            "PCLBLOCK": "38",
+            "PCLLOT": "15.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "21 CAPITOL ST",
+            "ST_ADDRESS": "PO BOX 212",
+            "ZIP5": "08099"
+          },
+          "centroid": {
+            "x": -75.2443108998185,
+            "y": 39.83629773267155
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_17",
+            "PCLBLOCK": "38",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "33 CAPITOL ST",
+            "ST_ADDRESS": "33 CAPITAL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24468547832994,
+            "y": 39.836311293102526
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_18",
+            "PCLBLOCK": "38",
+            "PCLLOT": "18",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "37 CAPITOL ST",
+            "ST_ADDRESS": "37 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24479941730833,
+            "y": 39.83631268463754
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_19",
+            "PCLBLOCK": "38",
+            "PCLLOT": "19",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "41 CAPITOL ST",
+            "ST_ADDRESS": "41 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24491335645435,
+            "y": 39.83631407578059
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_20",
+            "PCLBLOCK": "38",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "45 CAPITOL ST",
+            "ST_ADDRESS": "45 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24502729516043,
+            "y": 39.83631546685076
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_21",
+            "PCLBLOCK": "38",
+            "PCLLOT": "21",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "49 CAPITOL ST",
+            "ST_ADDRESS": "49 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2451412338891,
+            "y": 39.836316858763496
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_22",
+            "PCLBLOCK": "38",
+            "PCLLOT": "22",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "53 CAPITOL ST",
+            "ST_ADDRESS": "53 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24525161264044,
+            "y": 39.8363182061331
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_23",
+            "PCLBLOCK": "38",
+            "PCLLOT": "23",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "57 CAPITOL ST",
+            "ST_ADDRESS": "57 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24535843052662,
+            "y": 39.836319509602646
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "DEPTFORD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_24",
+            "PCLBLOCK": "38",
+            "PCLLOT": "24",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "61 CAPITOL ST",
+            "ST_ADDRESS": "311 HANCOCK COURT",
+            "ZIP5": "08096"
+          },
+          "centroid": {
+            "x": -75.2454652483659,
+            "y": 39.83632081412291
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_25",
+            "PCLBLOCK": "38",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "65 CAPITOL ST",
+            "ST_ADDRESS": "65 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2455756268509,
+            "y": 39.83632216064015
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_26",
+            "PCLBLOCK": "38",
+            "PCLLOT": "26",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "69 CAPITOL ST",
+            "ST_ADDRESS": "69 CAPITOL ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24568956598769,
+            "y": 39.83632355151096
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_93",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "93",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "651 MANTUA AVE",
+            "ST_ADDRESS": "651 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23949069683802,
+            "y": 39.83666257430588
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_14",
+            "PCLBLOCK": "16",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "652 BEACON AVE",
+            "ST_ADDRESS": "652 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24142887813314,
+            "y": 39.8365861348298
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHILADELPHIA, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_13",
+            "PCLBLOCK": "16",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "648 BEACON AVE",
+            "ST_ADDRESS": "3101 S LAWRENCE ST #101",
+            "ZIP5": "19148"
+          },
+          "centroid": {
+            "x": -75.24140848637629,
+            "y": 39.83672249669642
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_28",
+            "PCLBLOCK": "16",
+            "PCLLOT": "28",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "653 BILLINGS AVE",
+            "ST_ADDRESS": "653 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24190645802162,
+            "y": 39.83662857919111
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_26",
+            "PCLBLOCK": "16",
+            "PCLLOT": "26",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "645 BILLINGS AVE",
+            "ST_ADDRESS": "645 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24187587221866,
+            "y": 39.83683312298263
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_14",
+            "PCLBLOCK": "24",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "654 BILLINGS AVE",
+            "ST_ADDRESS": "912 BLACKBERRY DR",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.2425962969845,
+            "y": 39.836689884371935
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_13",
+            "PCLBLOCK": "24",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "650 BILLINGS AVE",
+            "ST_ADDRESS": "912 BLACKBERRY DR",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.24258139263883,
+            "y": 39.83678956496327
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_27",
+            "PCLBLOCK": "24",
+            "PCLLOT": "27",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15D",
+            "PROP_LOC": "649 GREENWICH AVE",
+            "ST_ADDRESS": "649-647 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24306368379122,
+            "y": 39.83680050582277
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODBURY, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_13.01",
+            "PCLBLOCK": "24",
+            "PCLLOT": "13.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "648 BILLINGS AVE",
+            "ST_ADDRESS": "180 LEEDS PL",
+            "ZIP5": "08096"
+          },
+          "centroid": {
+            "x": -75.24257119710067,
+            "y": 39.836857746616744
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_12",
+            "PCLBLOCK": "16",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "644 BEACON AVE",
+            "ST_ADDRESS": "644 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24138809506827,
+            "y": 39.83685885915761
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_10",
+            "PCLBLOCK": "8",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "640 MANTUA AVE",
+            "ST_ADDRESS": "640 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2402002816601,
+            "y": 39.83689145872104
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_9",
+            "PCLBLOCK": "8",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "636 MANTUA AVE",
+            "ST_ADDRESS": "636 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24017988666564,
+            "y": 39.83702782109021
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHILADELPHIA, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_21",
+            "PCLBLOCK": "8",
+            "PCLLOT": "21",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "637 BEACON AVE",
+            "ST_ADDRESS": "4244 J ST",
+            "ZIP5": "19124"
+          },
+          "centroid": {
+            "x": -75.24065746829847,
+            "y": 39.83707027107986
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_91",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "91",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "643 MANTUA AVE",
+            "ST_ADDRESS": "643 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23944582671358,
+            "y": 39.836962570519944
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_90",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "90",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "641 MANTUA AVE",
+            "ST_ADDRESS": "641 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23942543112821,
+            "y": 39.83709893299678
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PENNSAUKEN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_12",
+            "PCLBLOCK": "24",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "644-646 BILLINGS AVE",
+            "ST_ADDRESS": "7175 HIGHLAND AVE",
+            "ZIP5": "08110"
+          },
+          "centroid": {
+            "x": -75.24255551886039,
+            "y": 39.83696260966732
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_26",
+            "PCLBLOCK": "24",
+            "PCLLOT": "26",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "645 GREENWICH AVE",
+            "ST_ADDRESS": "645 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24303310079642,
+            "y": 39.83700504963611
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_11",
+            "PCLBLOCK": "24",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "642 BILLINGS AVE",
+            "ST_ADDRESS": "422 BIRCH DR",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.2425351282528,
+            "y": 39.837098972144915
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_11",
+            "PCLBLOCK": "16",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "640 BEACON AVE",
+            "ST_ADDRESS": "640 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24136770306069,
+            "y": 39.83699522188134
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_25",
+            "PCLBLOCK": "16",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "641 BILLINGS AVE",
+            "ST_ADDRESS": "641 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24184528529972,
+            "y": 39.83703766642995
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_25",
+            "PCLBLOCK": "24",
+            "PCLLOT": "25",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "641 GREENWICH AVE",
+            "ST_ADDRESS": "641 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24301271193289,
+            "y": 39.83714141224308
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_24",
+            "PCLBLOCK": "16",
+            "PCLLOT": "24",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "637 BILLINGS AVE",
+            "ST_ADDRESS": "637 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.241824895182,
+            "y": 39.837174029071505
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_10",
+            "PCLBLOCK": "16",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "636 BEACON AVE",
+            "ST_ADDRESS": "636 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24134731130377,
+            "y": 39.83713158414387
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_8",
+            "PCLBLOCK": "8",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "632 MANTUA AVE",
+            "ST_ADDRESS": "628 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24015949300711,
+            "y": 39.83716418388464
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_20",
+            "PCLBLOCK": "8",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "633 BEACON AVE",
+            "ST_ADDRESS": "633 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24063707519394,
+            "y": 39.837206633711745
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_7",
+            "PCLBLOCK": "8",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "628 MANTUA AVE",
+            "ST_ADDRESS": "628 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2401390981587,
+            "y": 39.83730054559805
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_10",
+            "PCLBLOCK": "24",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "636 BILLINGS AVE",
+            "ST_ADDRESS": "636 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24251473854298,
+            "y": 39.83723533487423
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CHERRY HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_24",
+            "PCLBLOCK": "24",
+            "PCLLOT": "24",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "637 GREENWICH AVE",
+            "ST_ADDRESS": "100 SPRINGDALE RD A3-506",
+            "ZIP5": "08003"
+          },
+          "centroid": {
+            "x": -75.2429923230692,
+            "y": 39.837277775097654
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_9",
+            "PCLBLOCK": "24",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "632 BILLINGS AVE",
+            "ST_ADDRESS": "632 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24249434897955,
+            "y": 39.837371697043004
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_9",
+            "PCLBLOCK": "16",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "632 BEACON AVE",
+            "ST_ADDRESS": "545 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24132691959899,
+            "y": 39.83726794627102
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_23",
+            "PCLBLOCK": "16",
+            "PCLLOT": "23",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "633 BILLINGS AVE",
+            "ST_ADDRESS": "633 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24180450308108,
+            "y": 39.837310391414995
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_8",
+            "PCLBLOCK": "16",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "628 BEACON AVE",
+            "ST_ADDRESS": "628 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24130652689155,
+            "y": 39.837404308891344
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_18",
+            "PCLBLOCK": "8",
+            "PCLLOT": "18",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "627 BEACON AVE",
+            "ST_ADDRESS": "627 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24060648511835,
+            "y": 39.83741117737101
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_6",
+            "PCLBLOCK": "8",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "624 MANTUA AVE",
+            "ST_ADDRESS": "628 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24011870350827,
+            "y": 39.837436907753656
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_22",
+            "PCLBLOCK": "16",
+            "PCLLOT": "22",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "629 BILLINGS AVE",
+            "ST_ADDRESS": "629 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24178411216982,
+            "y": 39.83744675395516
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_4",
+            "PCLBLOCK": "32",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "649 DELAWARE ST",
+            "ST_ADDRESS": "307 E BROAD ST",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24359726969008,
+            "y": 39.837322154404674
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_3",
+            "PCLBLOCK": "32",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "647 N DELAWARE ST",
+            "ST_ADDRESS": "647 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24361330257356,
+            "y": 39.83744837587104
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_23",
+            "PCLBLOCK": "24",
+            "PCLLOT": "23",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "635 GREENWICH AVE",
+            "ST_ADDRESS": "635 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24297193425791,
+            "y": 39.8374141378148
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_8",
+            "PCLBLOCK": "24",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "630 BILLINGS AVE",
+            "ST_ADDRESS": "630 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24247395837196,
+            "y": 39.83750805974302
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SAINT GEORGES, DE",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_21",
+            "PCLBLOCK": "16",
+            "PCLLOT": "21",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "627 BILLINGS AVE",
+            "ST_ADDRESS": "PO BOX 72",
+            "ZIP5": "19733"
+          },
+          "centroid": {
+            "x": -75.2417688902234,
+            "y": 39.837548548534734
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_7",
+            "PCLBLOCK": "16",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "626 BEACON AVE",
+            "ST_ADDRESS": "626 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2412861345682,
+            "y": 39.83754067136603
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_22",
+            "PCLBLOCK": "24",
+            "PCLLOT": "22",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "631 GREENWICH AVE",
+            "ST_ADDRESS": "631 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24295154524843,
+            "y": 39.83755050024007
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_21.01",
+            "PCLBLOCK": "16",
+            "PCLLOT": "21.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "625 BILLINGS AVE",
+            "ST_ADDRESS": "625 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24175869399957,
+            "y": 39.83761672942235
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_5",
+            "PCLBLOCK": "8",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "620 MANTUA AVE",
+            "ST_ADDRESS": "620 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24009830830406,
+            "y": 39.83757327040451
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_17",
+            "PCLBLOCK": "8",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "621 BEACON AVE",
+            "ST_ADDRESS": "621 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2405758936873,
+            "y": 39.83761572028555
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_4",
+            "PCLBLOCK": "8",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "616 MANTUA AVE",
+            "ST_ADDRESS": "616 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24007791345532,
+            "y": 39.837709632170984
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_20",
+            "PCLBLOCK": "16",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "623 BILLINGS AVE",
+            "ST_ADDRESS": "623 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24174332935604,
+            "y": 39.837719478464656
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_16",
+            "PCLBLOCK": "8",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "617 BEACON AVE",
+            "ST_ADDRESS": "617 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24055550042551,
+            "y": 39.837752082814035
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_7",
+            "PCLBLOCK": "24",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "624-626 BILLINGS AVE",
+            "ST_ADDRESS": "148 RTE 73 STE 3 PMB 308",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.2424535690588,
+            "y": 39.83764442273491
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_21",
+            "PCLBLOCK": "24",
+            "PCLLOT": "21",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "627 GREENWICH AVE",
+            "ST_ADDRESS": "627 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24293115618642,
+            "y": 39.83768686277964
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_6",
+            "PCLBLOCK": "24",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "622 BILLINGS AVE",
+            "ST_ADDRESS": "622 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24243317870183,
+            "y": 39.83778078470293
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_6",
+            "PCLBLOCK": "16",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "624 BEACON AVE",
+            "ST_ADDRESS": "624 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24126574247921,
+            "y": 39.837677033419084
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_5",
+            "PCLBLOCK": "16",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "618 BEACON AVE",
+            "ST_ADDRESS": "618 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24124534903046,
+            "y": 39.83781339597403
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_20",
+            "PCLBLOCK": "24",
+            "PCLLOT": "20",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "621 GREENWICH AVE",
+            "ST_ADDRESS": "621 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24291076727033,
+            "y": 39.83782322510765
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_3",
+            "PCLBLOCK": "8",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "612 MANTUA AVE",
+            "ST_ADDRESS": "612 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24005751790702,
+            "y": 39.8378459942
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MARLBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_19",
+            "PCLBLOCK": "16",
+            "PCLLOT": "19",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "617-619 BILLINGS AVE",
+            "ST_ADDRESS": "26 RUTLEDGE RD",
+            "ZIP5": "07746"
+          },
+          "centroid": {
+            "x": -75.24172293774487,
+            "y": 39.837855841246274
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_5",
+            "PCLBLOCK": "24",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "616 BILLINGS AVE",
+            "ST_ADDRESS": "616 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24241278804175,
+            "y": 39.83791714732062
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_24_19",
+            "PCLBLOCK": "24",
+            "PCLLOT": "19",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "617 GREENWICH AVE",
+            "ST_ADDRESS": "617 GREENWICH AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24289037781148,
+            "y": 39.83795958775739
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_15",
+            "PCLBLOCK": "8",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "613 BEACON AVE",
+            "ST_ADDRESS": "613 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24053510607865,
+            "y": 39.83788844487301
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_6",
+            "PCLBLOCK": "38",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "638 DELAWARE ST",
+            "ST_ADDRESS": "751 RATTLING RUN RD",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24454669535022,
+            "y": 39.83795108488165
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MT ROYAL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_2",
+            "PCLBLOCK": "8",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "610 MANTUA AVE",
+            "ST_ADDRESS": "128 BELL AVE",
+            "ZIP5": "08061"
+          },
+          "centroid": {
+            "x": -75.2400320250039,
+            "y": 39.83801644682311
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_31_12",
+            "PCLBLOCK": "31",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "627 DELAWARE ST",
+            "ST_ADDRESS": "627 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24379378049319,
+            "y": 39.83798280868303
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_16_3",
+            "PCLBLOCK": "16",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "610 BEACON AVE",
+            "ST_ADDRESS": "610 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24121476005814,
+            "y": 39.83801793972375
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_10",
+            "PCLBLOCK": "38",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15A",
+            "PROP_LOC": "DELAWARE ST",
+            "ST_ADDRESS": "DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24427721839024,
+            "y": 39.837354807268206
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_14.01",
+            "PCLBLOCK": "38",
+            "PCLLOT": "14.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "696-98 N DELAWARE ST",
+            "ST_ADDRESS": "443 BILLINGSPORT RD",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2437614000115,
+            "y": 39.83625994290371
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_5",
+            "PCLBLOCK": "38",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "630 DELAWARE ST",
+            "ST_ADDRESS": "630 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24498882254089,
+            "y": 39.83801320287643
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WILLIAMSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_38_7",
+            "PCLBLOCK": "38",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "644 DELAWARE ST",
+            "ST_ADDRESS": "2011 RIDINGS DR",
+            "ZIP5": "08094"
+          },
+          "centroid": {
+            "x": -75.24447639525724,
+            "y": 39.83779553739774
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "THOROFARE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_18_1",
+            "PCLBLOCK": "18",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "743 BILLINGS AVE",
+            "ST_ADDRESS": "376 JESSUP RD",
+            "ZIP5": "08086"
+          },
+          "centroid": {
+            "x": -75.24196236088025,
+            "y": 39.83479955288156
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_9_3",
+            "PCLBLOCK": "9",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "709 BEACON AVE",
+            "ST_ADDRESS": "709 BEACON AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24082061318624,
+            "y": 39.83597937318054
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_92",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "92",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15F",
+            "PROP_LOC": "645 MANTUA AVE",
+            "ST_ADDRESS": "645 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23946622208312,
+            "y": 39.836826209090624
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_89",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "89",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "639 MANTUA AVE",
+            "ST_ADDRESS": "639 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23940503528831,
+            "y": 39.83723529521823
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_87",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "87",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "635 MANTUA AVE",
+            "ST_ADDRESS": "635 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23937444173893,
+            "y": 39.83743983821591
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_85",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "85",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "611 MANTUA AVE",
+            "ST_ADDRESS": "611 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23933345487806,
+            "y": 39.83771255869517
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.12_84.01",
+            "PCLBLOCK": "1.12",
+            "PCLLOT": "84.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "609 MANTUA AVE",
+            "ST_ADDRESS": "609 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23930810197429,
+            "y": 39.83788335548233
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_133_3",
+            "PCLBLOCK": "133",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.2445384511812,
+            "y": 39.83446469451509
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_7",
+            "PCLBLOCK": "40",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "30 ROOSEVELT ST",
+            "ST_ADDRESS": "30 ROOSEVELT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24427564434527,
+            "y": 39.83490032502228
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_7",
+            "PCLBLOCK": "25",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "726 BILLINGS AVE",
+            "ST_ADDRESS": "726 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24275142811297,
+            "y": 39.83558170710428
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_16",
+            "PCLBLOCK": "25",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "727 DELAWARE ST",
+            "ST_ADDRESS": "727 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24290965226204,
+            "y": 39.83571895194102
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_8_11",
+            "PCLBLOCK": "8",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "644 MANTUA AVE",
+            "ST_ADDRESS": "644 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2402206744728,
+            "y": 39.83675509672451
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_25_8",
+            "PCLBLOCK": "25",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "735 DELAWARE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2427063564206,
+            "y": 39.83527570373703
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SWEDESBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_6",
+            "PCLBLOCK": "32",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "655 DELAWARE ST",
+            "ST_ADDRESS": "16 GABRIELLE CIRCLE",
+            "ZIP5": "08085"
+          },
+          "centroid": {
+            "x": -75.24355599106029,
+            "y": 39.83699568687628
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_5",
+            "PCLBLOCK": "32",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "651 DELAWARE ST",
+            "ST_ADDRESS": "36 W BROAD ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24357996801842,
+            "y": 39.83718746875785
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PHILADELPHIA, PA",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_2",
+            "PCLBLOCK": "32",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "645 DELAWARE ST",
+            "ST_ADDRESS": "651 SANGER ST",
+            "ZIP5": "19120"
+          },
+          "centroid": {
+            "x": -75.24362827345088,
+            "y": 39.837566227823174
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_32_1",
+            "PCLBLOCK": "32",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "637 DELAWARE ST",
+            "ST_ADDRESS": "637 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24365825370216,
+            "y": 39.8377030341531
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_1.06_18",
+            "PCLBLOCK": "1.06",
+            "PCLLOT": "18",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4B",
+            "PROP_LOC": "701 MANTUA AVE",
+            "ST_ADDRESS": "705 MANTUA AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23805109012753,
+            "y": 39.836170153241305
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_6",
+            "PCLBLOCK": "40",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 ROOSEVELT ST",
+            "ST_ADDRESS": "PO BOX 144",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24403583989887,
+            "y": 39.83486928871053
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CHERRY HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_94_7",
+            "PCLBLOCK": "94",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "35-45 E BROAD ST",
+            "ST_ADDRESS": "53 DELLWOOD RD",
+            "ZIP5": "08002"
+          },
+          "centroid": {
+            "x": -75.23945260810412,
+            "y": 39.83109697369382
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_94_7.01",
+            "PCLBLOCK": "94",
+            "PCLLOT": "7.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "40 E BUCK ST",
+            "ST_ADDRESS": "40 E BUCK ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23954390178999,
+            "y": 39.831555116342855
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PILESGROVE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_7",
+            "PCLBLOCK": "87",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 E BUCK ST",
+            "ST_ADDRESS": "36 A AVIS MILL RD",
+            "ZIP5": "08098"
+          },
+          "centroid": {
+            "x": -75.24046413136215,
+            "y": 39.83163778232737
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PINE HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_2",
+            "PCLBLOCK": "87",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "16-18 E WASHINGTON ST",
+            "ST_ADDRESS": "205 BROMLEY ESTATES",
+            "ZIP5": "08021"
+          },
+          "centroid": {
+            "x": -75.2405744484776,
+            "y": 39.83188060026934
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_7.01",
+            "PCLBLOCK": "87",
+            "PCLLOT": "7.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "19-21 E BUCK ST",
+            "ST_ADDRESS": "19-21 BUCK ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24030255112875,
+            "y": 39.831692541029184
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_9",
+            "PCLBLOCK": "87",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1212 CHESTNUT  ST",
+            "ST_ADDRESS": "1212 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23972027260702,
+            "y": 39.83178081276514
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_8",
+            "PCLBLOCK": "87",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "29 E BUCK ST",
+            "ST_ADDRESS": "29 E BUCK ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23996965153366,
+            "y": 39.83178195066251
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "BEESLEYS POINT, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_3",
+            "PCLBLOCK": "87",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "22 E WASHINGTON ST",
+            "ST_ADDRESS": "22 VENTNOR AVE",
+            "ZIP5": "08223"
+          },
+          "centroid": {
+            "x": -75.24041233469909,
+            "y": 39.83193551164643
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_7.02",
+            "PCLBLOCK": "87",
+            "PCLLOT": "7.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "23 E BUCK ST",
+            "ST_ADDRESS": "23 E BUCK ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24013610148113,
+            "y": 39.83173724593431
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_4",
+            "PCLBLOCK": "87",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 E WASHINGTON ST",
+            "ST_ADDRESS": "26 E WASHINGTON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24024588451904,
+            "y": 39.831980215589724
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_5",
+            "PCLBLOCK": "87",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "28 E WASHINGTON ST",
+            "ST_ADDRESS": "35 W BROAD ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24007943420031,
+            "y": 39.83202492035742
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_9.01",
+            "PCLBLOCK": "87",
+            "PCLLOT": "9.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1208 CHESTNUT ST",
+            "ST_ADDRESS": "1208 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2397751636016,
+            "y": 39.83190229798077
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_1",
+            "PCLBLOCK": "87",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "1211 DELAWARE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24091227320312,
+            "y": 39.83166500961048
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_6.01",
+            "PCLBLOCK": "87",
+            "PCLLOT": "6.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1204 CHESTNUT ST",
+            "ST_ADDRESS": "1204 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23983005448291,
+            "y": 39.83202378336194
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "W DEPTFORD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_88_5",
+            "PCLBLOCK": "88",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1205 CHESTNUT ST",
+            "ST_ADDRESS": "725 CARTER HILL DR",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23938568942118,
+            "y": 39.83200419590884
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_87_6",
+            "PCLBLOCK": "87",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1200 CHESTNUT ST",
+            "ST_ADDRESS": "1200 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23988494569748,
+            "y": 39.83214526882649
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_88_2",
+            "PCLBLOCK": "88",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "106 E WASHINGTON ST",
+            "ST_ADDRESS": "106 E WASHINGTON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2392471802497,
+            "y": 39.83224843970337
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_1",
+            "PCLBLOCK": "80",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "1101-1105-1109 DELAWARE",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24138526278423,
+            "y": 39.83229870986013
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_8",
+            "PCLBLOCK": "80",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "1115 DELAWARE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24127547527014,
+            "y": 39.83205574084561
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_80_9",
+            "PCLBLOCK": "80",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24106012614578,
+            "y": 39.832129918396426
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_2",
+            "PCLBLOCK": "80",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "12 E ADAMS ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24116991304486,
+            "y": 39.83237288793162
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_3",
+            "PCLBLOCK": "80",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "E WASHINGTON ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24089367606148,
+            "y": 39.83217462394075
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODBURY, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_3.01",
+            "PCLBLOCK": "80",
+            "PCLLOT": "3.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "16 E ADAMS ST",
+            "ST_ADDRESS": "COURT HOUSE",
+            "ZIP5": "08096"
+          },
+          "centroid": {
+            "x": -75.24100346250455,
+            "y": 39.83241759304876
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_88_1",
+            "PCLBLOCK": "88",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1201 CHESTNUT ST",
+            "ST_ADDRESS": "1201 CHESNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23946911525064,
+            "y": 39.83218883553058
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_80_4.01",
+            "PCLBLOCK": "80",
+            "PCLLOT": "4.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.2406440002157,
+            "y": 39.83224168203837
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_4",
+            "PCLBLOCK": "80",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "20 E ADAMS ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24083701222276,
+            "y": 39.832462298874695
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_5",
+            "PCLBLOCK": "80",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "24 E ADAMS ST",
+            "ST_ADDRESS": "PO BOX 22",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.24062793946501,
+            "y": 39.832518451241896
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_4.02",
+            "PCLBLOCK": "80",
+            "PCLLOT": "4.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "25 E WASHINGTON ST",
+            "ST_ADDRESS": "25 E WASHINGTON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24039432444587,
+            "y": 39.83230873943659
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "SEWELL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_5.02",
+            "PCLBLOCK": "80",
+            "PCLLOT": "5.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 E ADAMS ST",
+            "ST_ADDRESS": "28 DOROTHY DR",
+            "ZIP5": "08080"
+          },
+          "centroid": {
+            "x": -75.24046148773765,
+            "y": 39.83256315610566
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_10",
+            "PCLBLOCK": "80",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "29 E WASHINGTON ST",
+            "ST_ADDRESS": "PO BOX 22",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.24022787351896,
+            "y": 39.83235344415714
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_6",
+            "PCLBLOCK": "80",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "28 E ADAMS ST",
+            "ST_ADDRESS": "28 E ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24033765808994,
+            "y": 39.83259641416552
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "NATIONAL PARK, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_81_2.01",
+            "PCLBLOCK": "81",
+            "PCLLOT": "2.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "109 E WASHINGTON ST",
+            "ST_ADDRESS": "PO BOX 92",
+            "ZIP5": "08063"
+          },
+          "centroid": {
+            "x": -75.23942433603919,
+            "y": 39.832565298673906
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "LAWRENCE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_81_9",
+            "PCLBLOCK": "81",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1105 CHESTNUT ST",
+            "ST_ADDRESS": "1526 BRUNSWICK AVE",
+            "ZIP5": "08648"
+          },
+          "centroid": {
+            "x": -75.23969587148825,
+            "y": 39.83269069489474
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_81_6",
+            "PCLBLOCK": "81",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "117 E WASHINGTON ST",
+            "ST_ADDRESS": "117 E WASHINGTON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23922916398402,
+            "y": 39.83262166729171
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_81_2",
+            "PCLBLOCK": "81",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "106 E ADAMS ST",
+            "ST_ADDRESS": "1013 N CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23950321923286,
+            "y": 39.83281511257161
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODBURY HEIGHTS, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_80_7",
+            "PCLBLOCK": "80",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "32-38 E ADAMS ST",
+            "ST_ADDRESS": "416 OAK AVE",
+            "ZIP5": "08097"
+          },
+          "centroid": {
+            "x": -75.24011572257733,
+            "y": 39.83265602021232
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_81_3",
+            "PCLBLOCK": "81",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "110 E ADAMS ST",
+            "ST_ADDRESS": "110 E ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23933894529303,
+            "y": 39.83286463852948
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "LAKEWOOD, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_7",
+            "PCLBLOCK": "73",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "21 E ADAMS ST",
+            "ST_ADDRESS": "128 GUDZ ROAD",
+            "ZIP5": "08701"
+          },
+          "centroid": {
+            "x": -75.24081900407248,
+            "y": 39.83283552691089
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CAMDEN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_2",
+            "PCLBLOCK": "73",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "18 E JEFFERSON ST",
+            "ST_ADDRESS": "2737 CONCORD AVE",
+            "ZIP5": "08105"
+          },
+          "centroid": {
+            "x": -75.24104035034568,
+            "y": 39.832912307061164
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GLASSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_1",
+            "PCLBLOCK": "73",
+            "PCLLOT": "1",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "12-14 E JEFFERSON ST",
+            "ST_ADDRESS": "1222 CEDAR AVE",
+            "ZIP5": "08028"
+          },
+          "centroid": {
+            "x": -75.24129988969203,
+            "y": 39.83300685117916
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_6",
+            "PCLBLOCK": "73",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "1015 N DELAWARE",
+            "ST_ADDRESS": "1015 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24138513487912,
+            "y": 39.83271149899366
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_3",
+            "PCLBLOCK": "73",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "22 E JEFFERSON ST",
+            "ST_ADDRESS": "22 JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24092879135435,
+            "y": 39.83307849674266
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_8",
+            "PCLBLOCK": "73",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "25 E ADAMS ST",
+            "ST_ADDRESS": "25 E ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24065255231075,
+            "y": 39.832880232147296
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_4",
+            "PCLBLOCK": "73",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 E JEFFERSON ST",
+            "ST_ADDRESS": "26 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24076233931562,
+            "y": 39.83312320239686
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_9",
+            "PCLBLOCK": "73",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "27-29 E ADAMS ST",
+            "ST_ADDRESS": "PO BOX 22",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.24048610068816,
+            "y": 39.83292493662351
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_5.04",
+            "PCLBLOCK": "73",
+            "PCLLOT": "5.04",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "E JEFFERSON ST",
+            "ST_ADDRESS": "1211 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2406051343191,
+            "y": 39.83316542393591
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_5.03",
+            "PCLBLOCK": "73",
+            "PCLLOT": "5.03",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "E JEFFERSON ST",
+            "ST_ADDRESS": "1211 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24045717616251,
+            "y": 39.83320516166514
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOODBRIDGE, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_5",
+            "PCLBLOCK": "73",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "33 E ADAMS ST",
+            "ST_ADDRESS": "832 TERRACE AVE",
+            "ZIP5": "07095"
+          },
+          "centroid": {
+            "x": -75.24033141799647,
+            "y": 39.832966481213276
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_1.01",
+            "PCLBLOCK": "73",
+            "PCLLOT": "1.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "1001-1003 DELAWARE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2416050507648,
+            "y": 39.83292489010421
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "ELMER, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_73_5.02",
+            "PCLBLOCK": "73",
+            "PCLLOT": "5.02",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "36 E JEFFERSON ST",
+            "ST_ADDRESS": "852 BUCK RD",
+            "ZIP5": "08318"
+          },
+          "centroid": {
+            "x": -75.24030921802648,
+            "y": 39.83324489941976
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_8.01",
+            "PCLBLOCK": "74",
+            "PCLLOT": "8.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1013 CHESTNUT ST",
+            "ST_ADDRESS": "1013 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23974561479984,
+            "y": 39.83309371875399
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_7",
+            "PCLBLOCK": "74",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1009 CHESTNUT ST",
+            "ST_ADDRESS": "1009 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23990476709916,
+            "y": 39.83315301801988
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_2",
+            "PCLBLOCK": "74",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "108 E JEFFERSON ST",
+            "ST_ADDRESS": "108 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2397636208977,
+            "y": 39.83339142955862
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_9",
+            "PCLBLOCK": "74",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "111 E ADAMS ST",
+            "ST_ADDRESS": "111 E ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23948738386454,
+            "y": 39.8331931625239
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CHERRY HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_10",
+            "PCLBLOCK": "67",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "911 DELAWARE ST",
+            "ST_ADDRESS": "315 MONMOUTH DR",
+            "ZIP5": "08002"
+          },
+          "centroid": {
+            "x": -75.24180949659853,
+            "y": 39.833237557039936
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CARTERET, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_7",
+            "PCLBLOCK": "67",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "905 DELAWARE ST",
+            "ST_ADDRESS": "46 HOLLY ST",
+            "ZIP5": "07008"
+          },
+          "centroid": {
+            "x": -75.24186139319896,
+            "y": 39.8333524041847
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CHERRY HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_12",
+            "PCLBLOCK": "67",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "7 E JEFFERSON ST",
+            "ST_ADDRESS": "315 MONMOUTH DR",
+            "ZIP5": "08002"
+          },
+          "centroid": {
+            "x": -75.24157659535997,
+            "y": 39.83327290038391
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_3",
+            "PCLBLOCK": "74",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "112 E JEFFERSON ST",
+            "ST_ADDRESS": "PO BOX 22",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.23959716725629,
+            "y": 39.83343613360678
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WOOLWICH, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_6",
+            "PCLBLOCK": "74",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1005 CHESTNUT ST",
+            "ST_ADDRESS": "102 JUNIPER LN",
+            "ZIP5": "08085"
+          },
+          "centroid": {
+            "x": -75.23995656646291,
+            "y": 39.83326765934384
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_9.01",
+            "PCLBLOCK": "74",
+            "PCLLOT": "9.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "115 E ADAMS ST",
+            "ST_ADDRESS": "115 E ADAMS ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23932093031006,
+            "y": 39.83323786681796
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_4",
+            "PCLBLOCK": "74",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "116 E JEFFERSON ST",
+            "ST_ADDRESS": "459 CLEMS RUN",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.23943071320132,
+            "y": 39.83348083712099
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_13",
+            "PCLBLOCK": "67",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 E JEFFERSON ST",
+            "ST_ADDRESS": "17 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24124369087613,
+            "y": 39.833362312653655
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "CAMDEN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_3",
+            "PCLBLOCK": "67",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "16 E MADISON ST",
+            "ST_ADDRESS": "743 SYLVAN ST",
+            "ZIP5": "08104"
+          },
+          "centroid": {
+            "x": -75.24135348051642,
+            "y": 39.83360528184504
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "OCEAN CITY, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_14",
+            "PCLBLOCK": "67",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "21 E JEFFERSON ST",
+            "ST_ADDRESS": "17 KINGSTON LN",
+            "ZIP5": "08226"
+          },
+          "centroid": {
+            "x": -75.24107723820015,
+            "y": 39.8334070187779
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "HAWORTH, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_4",
+            "PCLBLOCK": "67",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "22 E MADISON ST",
+            "ST_ADDRESS": "45 PLEASANT ST",
+            "ZIP5": "07641"
+          },
+          "centroid": {
+            "x": -75.24110380049352,
+            "y": 39.83367234026518
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_74_5.01",
+            "PCLBLOCK": "74",
+            "PCLLOT": "5.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "1000 COMMERCE ST",
+            "ST_ADDRESS": "1000 N COMMERCE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2391489736355,
+            "y": 39.83361464298012
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "ELMER, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_15",
+            "PCLBLOCK": "67",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "25-25 1/2 E JEFFERSON ST",
+            "ST_ADDRESS": "852 BUCK RD",
+            "ZIP5": "08318"
+          },
+          "centroid": {
+            "x": -75.24091078462448,
+            "y": 39.833451724119854
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_16",
+            "PCLBLOCK": "67",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "27 E JEFFERSON ST",
+            "ST_ADDRESS": "27 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24074433142638,
+            "y": 39.833496429566196
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_5",
+            "PCLBLOCK": "67",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "26 E MADISON ST",
+            "ST_ADDRESS": "26 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24085411971919,
+            "y": 39.833739398972995
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_67_17",
+            "PCLBLOCK": "67",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "910 CHESTNUT ST",
+            "ST_ADDRESS": "910 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24052239349477,
+            "y": 39.833556036483735
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_9",
+            "PCLBLOCK": "68",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "913 CHESTNUT ST",
+            "ST_ADDRESS": "913 CHESTNUT ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24010655384782,
+            "y": 39.83359960482842
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_8",
+            "PCLBLOCK": "68",
+            "PCLLOT": "8",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "909 CHESTNUT ST",
+            "ST_ADDRESS": "725 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2401614472586,
+            "y": 39.833721089568364
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "VOORHEES, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_10",
+            "PCLBLOCK": "68",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "107 E JEFFERSON ST",
+            "ST_ADDRESS": "PO BOX 22",
+            "ZIP5": "08043"
+          },
+          "centroid": {
+            "x": -75.23993980410202,
+            "y": 39.833712502719166
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_10",
+            "PCLBLOCK": "64",
+            "PCLLOT": "10",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "815 DELAWARE ST",
+            "ST_ADDRESS": "PO BOX 383",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.24202748701713,
+            "y": 39.833719968060514
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "BRIDGETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_9",
+            "PCLBLOCK": "64",
+            "PCLLOT": "9",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "809 DELAWARE ST",
+            "ST_ADDRESS": "110 COHANSEY ST",
+            "ZIP5": "08302"
+          },
+          "centroid": {
+            "x": -75.24208238309495,
+            "y": 39.833841452071304
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MULLICA HILL, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_17",
+            "PCLBLOCK": "68",
+            "PCLLOT": "17",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "108 E MADISON ST",
+            "ST_ADDRESS": "318 SALERNO CT",
+            "ZIP5": "08062"
+          },
+          "centroid": {
+            "x": -75.24004958939157,
+            "y": 39.83395547260774
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_11",
+            "PCLBLOCK": "68",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "109 E JEFFERSON ST",
+            "ST_ADDRESS": "109 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23982883438491,
+            "y": 39.83374230489015
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_16",
+            "PCLBLOCK": "68",
+            "PCLLOT": "16",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "110 E MADISON ST",
+            "ST_ADDRESS": "110 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2399386197392,
+            "y": 39.83398527563247
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_12",
+            "PCLBLOCK": "68",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "111 E JEFFERSON ST",
+            "ST_ADDRESS": "111 E JEFFERSON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23971786489788,
+            "y": 39.8337721076402
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "WENONAH, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_15",
+            "PCLBLOCK": "68",
+            "PCLLOT": "15",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "112 E MADISON ST",
+            "ST_ADDRESS": "659 MONTCLAIR AVE",
+            "ZIP5": "08090"
+          },
+          "centroid": {
+            "x": -75.23982764980488,
+            "y": 39.8340150778452
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_4",
+            "PCLBLOCK": "68",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "117 E JEFFERSON ST",
+            "ST_ADDRESS": "1211 DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.239579152538,
+            "y": 39.83380936116785
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_7",
+            "PCLBLOCK": "68",
+            "PCLLOT": "7",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "905 CHESTNUT ST",
+            "ST_ADDRESS": "725 BILLINGS AVE",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24021634021527,
+            "y": 39.83384257520013
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "GLASSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_14",
+            "PCLBLOCK": "68",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "114-116 E MADISON ST",
+            "ST_ADDRESS": "1222 CEDAR AVE",
+            "ZIP5": "08028"
+          },
+          "centroid": {
+            "x": -75.23968893689994,
+            "y": 39.834052331298814
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO,, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_5",
+            "PCLBLOCK": "68",
+            "PCLLOT": "5",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "910 COMMERCE ST",
+            "ST_ADDRESS": "910 COMMERCE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23930707671741,
+            "y": 39.83396455555002
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "MICKLETON, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_11",
+            "PCLBLOCK": "64",
+            "PCLLOT": "11",
+            "PCLQCODE": "",
+            "PROP_CLASS": "4A",
+            "PROP_LOC": "9 E MADISON ST",
+            "ST_ADDRESS": "PO BOX 383",
+            "ZIP5": "08056"
+          },
+          "centroid": {
+            "x": -75.2418348368222,
+            "y": 39.83384439010171
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_6",
+            "PCLBLOCK": "68",
+            "PCLLOT": "6",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "912 COMMERCE ST",
+            "ST_ADDRESS": "912 COMMERCE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23925218484844,
+            "y": 39.83384307035066
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_68_2",
+            "PCLBLOCK": "68",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "120 E MADISON ST",
+            "ST_ADDRESS": "120 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.23952248156479,
+            "y": 39.83409703552757
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_2.01",
+            "PCLBLOCK": "64",
+            "PCLLOT": "2.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "E MONROE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.2419446292973,
+            "y": 39.83408735784728
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_2",
+            "PCLBLOCK": "64",
+            "PCLLOT": "2",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "12 E MONROE ST",
+            "ST_ADDRESS": "12 E MONROE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24177817521684,
+            "y": 39.834132064753405
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": null,
+            "COUNTY": null,
+            "MUN_NAME": null,
+            "PAMS_PIN": "0814_64_11.01",
+            "PCLBLOCK": "64",
+            "PCLLOT": "11.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": null,
+            "PROP_LOC": null,
+            "ST_ADDRESS": null,
+            "ZIP5": null
+          },
+          "centroid": {
+            "x": -75.24166838316249,
+            "y": 39.833889096829786
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_12",
+            "PCLBLOCK": "64",
+            "PCLLOT": "12",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "17 E MADISON ST",
+            "ST_ADDRESS": "17 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24150192932323,
+            "y": 39.83393380335579
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_3",
+            "PCLBLOCK": "64",
+            "PCLLOT": "3",
+            "PCLQCODE": "",
+            "PROP_CLASS": "15C",
+            "PROP_LOC": "18 E MONROE ST",
+            "ST_ADDRESS": "1211 N DELAWARE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24161172114026,
+            "y": 39.83417677195561
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_13",
+            "PCLBLOCK": "64",
+            "PCLLOT": "13",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "21 E MADISON ST",
+            "ST_ADDRESS": "21 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24138378104549,
+            "y": 39.83396553603881
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_4",
+            "PCLBLOCK": "64",
+            "PCLLOT": "4",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "22 E MONROE ST",
+            "ST_ADDRESS": "22 E MONROE ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24144526635278,
+            "y": 39.83422147876546
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "PAULSBORO, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_13.01",
+            "PCLBLOCK": "64",
+            "PCLLOT": "13.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "23 E MADISON ST",
+            "ST_ADDRESS": "21 E MADISON ST",
+            "ZIP5": "08066"
+          },
+          "centroid": {
+            "x": -75.24130055359637,
+            "y": 39.83398788907107
+          }
+        },
+        {
+          "attributes": {
+            "CITY_STATE": "ROSELLE PARK, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_64_14",
+            "PCLBLOCK": "64",
+            "PCLLOT": "14",
+            "PCLQCODE": "",
+            "PROP_CLASS": "1",
+            "PROP_LOC": "25 E MADISON ST",
+            "ST_ADDRESS": "109 WALNUT ST",
+            "ZIP5": "07204"
+          },
+          "centroid": {
+            "x": -75.24108579335137,
+            "y": 39.834045568442534
+          }
+        }
+      ],
+      "fields": [
+        {
+          "alias": "PAMS_PIN",
+          "defaultValue": null,
+          "domain": null,
+          "length": 38,
+          "name": "PAMS_PIN",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_LOC",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "PROP_LOC",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLBLOCK",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLBLOCK",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLLOT",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLLOT",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLQCODE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 11,
+          "name": "PCLQCODE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "MUN_NAME",
+          "defaultValue": null,
+          "domain": null,
+          "length": 40,
+          "name": "MUN_NAME",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "COUNTY",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "COUNTY",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ZIP5",
+          "defaultValue": null,
+          "domain": null,
+          "length": 5,
+          "name": "ZIP5",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_CLASS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 3,
+          "name": "PROP_CLASS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ST_ADDRESS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "ST_ADDRESS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "CITY_STATE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "CITY_STATE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "geometryType": "esriGeometryPolygon",
+      "globalIdFieldName": "",
+      "objectIdFieldName": "OBJECTID",
+      "spatialReference": {
+        "latestWkid": 4326,
+        "wkid": 4326
+      },
+      "uniqueIdField": {
+        "isSystemMaintained": true,
+        "name": "OBJECTID"
+      }
+    },
+    "ok": true,
+    "status": 200,
+    "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query?geometry=%7B%22xmin%22%3A+-75.24755042535124%2C+%22ymin%22%3A+39.83161191089053%2C+%22xmax%22%3A+-75.23936157465077%2C+%22ymax%22%3A+39.837900089115465%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryEnvelope&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PAMS_PIN%2CPROP_LOC%2CPCLBLOCK%2CPCLLOT%2CPCLQCODE%2CMUN_NAME%2CCOUNTY%2CZIP5%2CPROP_CLASS%2CST_ADDRESS%2CCITY_STATE&returnGeometry=false&returnCentroid=true&resultRecordCount=300&f=json"
+  },
+  "point_intersection": {
+    "body": {
+      "features": [
+        {
+          "attributes": {
+            "CITY_STATE": "GIBBSTOWN, NJ",
+            "COUNTY": "GLOUCESTER",
+            "MUN_NAME": "PAULSBORO BORO",
+            "PAMS_PIN": "0814_40_3.01",
+            "PCLBLOCK": "40",
+            "PCLLOT": "3.01",
+            "PCLQCODE": "",
+            "PROP_CLASS": "2",
+            "PROP_LOC": "15 QUINCY ST",
+            "ST_ADDRESS": "89 CUCINOTTA AVE",
+            "ZIP5": "08027"
+          },
+          "centroid": {
+            "x": -75.24347123255419,
+            "y": 39.83474866850066
+          },
+          "geometry": {
+            "rings": [
+              [
+                [
+                  -75.2435838657835,
+                  39.8348484377801
+                ],
+                [
+                  -75.2435491827287,
+                  39.834857252184
+                ],
+                [
+                  -75.2434544742466,
+                  39.8348813210609
+                ],
+                [
+                  -75.2433450495636,
+                  39.8346391812356
+                ],
+                [
+                  -75.2435144349952,
+                  39.834638109266
+                ],
+                [
+                  -75.2435838657835,
+                  39.8348484377801
+                ]
+              ]
+            ]
+          }
+        }
+      ],
+      "fields": [
+        {
+          "alias": "PAMS_PIN",
+          "defaultValue": null,
+          "domain": null,
+          "length": 38,
+          "name": "PAMS_PIN",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_LOC",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "PROP_LOC",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLBLOCK",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLBLOCK",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLLOT",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "PCLLOT",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PCLQCODE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 11,
+          "name": "PCLQCODE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "MUN_NAME",
+          "defaultValue": null,
+          "domain": null,
+          "length": 40,
+          "name": "MUN_NAME",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "COUNTY",
+          "defaultValue": null,
+          "domain": null,
+          "length": 10,
+          "name": "COUNTY",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ZIP5",
+          "defaultValue": null,
+          "domain": null,
+          "length": 5,
+          "name": "ZIP5",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "PROP_CLASS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 3,
+          "name": "PROP_CLASS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "ST_ADDRESS",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "ST_ADDRESS",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        },
+        {
+          "alias": "CITY_STATE",
+          "defaultValue": null,
+          "domain": null,
+          "length": 25,
+          "name": "CITY_STATE",
+          "sqlType": "sqlTypeOther",
+          "type": "esriFieldTypeString"
+        }
+      ],
+      "geometryProperties": {
+        "shapeAreaFieldName": "Shape__Area",
+        "shapeLengthFieldName": "Shape__Length",
+        "units": "esriMeters"
+      },
+      "geometryType": "esriGeometryPolygon",
+      "globalIdFieldName": "",
+      "objectIdFieldName": "OBJECTID",
+      "spatialReference": {
+        "latestWkid": 4326,
+        "wkid": 4326
+      },
+      "uniqueIdField": {
+        "isSystemMaintained": true,
+        "name": "OBJECTID"
+      }
+    },
+    "ok": true,
+    "status": 200,
+    "url": "https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query?geometry=%7B%22x%22%3A+-75.243456000001%2C+%22y%22%3A+39.834756000003%2C+%22spatialReference%22%3A+%7B%22wkid%22%3A+4326%7D%7D&geometryType=esriGeometryPoint&inSR=4326&outSR=4326&spatialRel=esriSpatialRelIntersects&outFields=PAMS_PIN%2CPROP_LOC%2CPCLBLOCK%2CPCLLOT%2CPCLQCODE%2CMUN_NAME%2CCOUNTY%2CZIP5%2CPROP_CLASS%2CST_ADDRESS%2CCITY_STATE&returnGeometry=true&returnCentroid=true&resultRecordCount=20&f=json"
+  },
+  "primary": {
+    "lat": 39.834756000003,
+    "lon": -75.243456000001,
+    "matched": "15 Railroad Avenue, Paulsboro, New Jersey, 08066",
+    "score": 100
+  }
+}
