@@ -7,7 +7,7 @@
   var NJ_BOUNDS={west:-75.62,north:41.38,east:-73.85,south:38.88};
   var NJ_GEOCODE='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
   var NJ_PARCEL='https://services2.arcgis.com/XVOqAjTOJ5P6ngMu/ArcGIS/rest/services/Parcels_Composite_NJ_WM/FeatureServer/0/query';
-  var PARCEL_FIELDS='PAMS_PIN,COUNTY,MUN_NAME,PROP_LOC,PROP_CLASS,BLDG_DESC,NET_VALUE,LAST_YR_TX,ZIP5,YR_CONSTR';
+  var PARCEL_FIELDS='PAMS_PIN,COUNTY,MUN_NAME,PROP_LOC,PROP_CLASS,BLDG_DESC,NET_VALUE,LAST_YR_TX,YR_CONSTR';
   var countyMapPromise=null;
   var savedPromise=null;
   var supabaseClient=null;
@@ -25,6 +25,7 @@
   function money(v){var n=Number(v);return Number.isFinite(n)&&n>0?'$'+Math.round(n).toLocaleString():'';}
   function normalizedAddress(v){return String(v||'').toUpperCase().replace(/\bNEW JERSEY\b/g,'NJ').replace(/[^A-Z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
   function streetNumber(v){var m=String(v||'').trim().match(/^(\d+[A-Z-]?)/i);return m?m[1].toUpperCase():'';}
+  function zipFromAddress(v){var m=String(v||'').match(/\b(\d{5})(?:-\d{4})?\b/);return m?m[1]:'';}
   function formatTownZip(row){return [row.town||'',row.zip||''].filter(Boolean).join(' ').trim();}
   function queryFor(row){return [row.address,row.town,'NJ',row.zip].filter(Boolean).join(', ');}
 
@@ -426,7 +427,7 @@
       var wanted=streetNumber(address),found=streetNumber(a.PROP_LOC);
       if(wanted&&found&&wanted!==found)return null;
       return {
-        pams_pin:a.PAMS_PIN||'',address:a.PROP_LOC||address,town:a.MUN_NAME||'',county:a.COUNTY||'',zip:a.ZIP5||'',
+        pams_pin:a.PAMS_PIN||'',address:a.PROP_LOC||address,town:a.MUN_NAME||'',county:a.COUNTY||'',zip:zipFromAddress(address),
         assessed:a.NET_VALUE||'',last_year_tax:a.LAST_YR_TX||'',prop_class:a.PROP_CLASS||'',building_desc:a.BLDG_DESC||'',year_built:a.YR_CONSTR||''
       };
     }).catch(function(){return null;});

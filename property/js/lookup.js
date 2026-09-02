@@ -53,10 +53,14 @@
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
 
+  // ZIP5, ST_ADDRESS and CITY_STATE on this statewide parcel layer are owner
+  // MAILING fields, not property-location fields. They must never participate in
+  // parcel identity, be presented as the searched property's ZIP, or be pulled
+  // into the public browser payload.
   var FIELDS = ['PAMS_PIN','COUNTY','MUN_NAME','PROP_LOC','PCLBLOCK','PCLLOT','PCLQCODE',
     'PROP_CLASS','BLDG_DESC','LAND_DESC','CALC_ACRE','YR_CONSTR','DWELL','COMM_DWELL',
     'LAND_VAL','IMPRVT_VAL','NET_VALUE','LAST_YR_TX','SALE_PRICE','DEED_DATE','DEED_BOOK','DEED_PAGE',
-    'ZIP5','ST_ADDRESS','CITY_STATE','ADD_LOTS1'].join(',');
+    'ADD_LOTS1'].join(',');
 
   var CLASSES = {
     '1':'Vacant Land','2':'Single Family / 1 to 4 Units','3A':'Farm, Regular','3B':'Farm, Qualified',
@@ -313,6 +317,12 @@
     return m ? m[1] : '';
   }
 
+  function propertyLocationZip(typed, matched) {
+    // The property ZIP comes from the address evidence, never the parcel
+    // layer's owner-mailing ZIP fields.
+    return parcelZip(matched) || parcelZip(typed);
+  }
+
   var PARCEL_ADDR_NOISE = {
     N:1, S:1, E:1, W:1, NE:1, NW:1, SE:1, SW:1,
     AVE:1, ST:1, RD:1, DR:1, CT:1, LN:1, PL:1, BLVD:1, CIR:1, TER:1,
@@ -356,10 +366,8 @@
     if (!a) return false;
     var candidate = parcelAddressParts(a.PROP_LOC);
     if (!candidate) return false;
-    var candidateZip = String(a.ZIP5 || '').trim();
     return targets.some(function (target) {
       if (target.house !== candidate.house) return false;
-      if (target.zip && candidateZip && target.zip !== candidateZip) return false;
       if (target.key === candidate.key) return true;
       return !!(target.core && candidate.core && target.core === candidate.core);
     });
@@ -369,10 +377,12 @@
     var a = feature && feature.attributes;
     if (!a) return false;
     var candidate = parcelAddressParts(a.PROP_LOC);
-    var candidateZip = String(a.ZIP5 || '').trim();
-    if (!candidate || !candidate.house || !candidateZip) return false;
+    if (!candidate || !candidate.house) return false;
+    // Alias recovery is already constrained by a high-confidence geocode,
+    // block-scale geometry and unique PAMS identity. Do not compare ZIP5 here:
+    // that field belongs to the owner's mailing address, not PROP_LOC.
     return targets.some(function (target) {
-      return !!(target.house && target.house === candidate.house && target.zip && target.zip === candidateZip);
+      return !!(target.house && target.house === candidate.house);
     });
   }
 
@@ -403,7 +413,7 @@
     // Manual submissions do not always carry a Google-selected coordinate. For
     // assessor street aliases, search only the immediate block around NJ's own
     // high-confidence address point and accept exactly one unqualified parcel
-    // sharing the house number + ZIP. Any ambiguity still fails closed.
+    // sharing the house number at that location. Any ambiguity still fails closed.
     var meters = 250;
     var dLat = meters / 111320;
     var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
@@ -453,7 +463,7 @@
     // The NJ address point is allowed to fall on roadway/no parcel: that is the
     // failure mode this safeguard exists to recover. The selected Google point
     // must still be tightly corroborated by the NJ geocoder, land on one
-    // unqualified tax parcel, and that parcel must share house number + ZIP.
+    // unqualified tax parcel, and that parcel must share the searched house number.
     if (selectedGeo && geoMeta && Number(geoMeta.score) >= 95 &&
         lookupPointDistanceMeters(geoMeta, selectedGeo) <= 120) {
       return parcelAtRaw(selectedGeo.lat, selectedGeo.lon).then(function (second) {
@@ -475,7 +485,7 @@
     // Manual searches do not have a second Google coordinate. Keep the strictest
     // evidence threshold. If NJ itself hits the alias parcel, accept it. If NJ
     // lands on roadway/no polygon, search only the immediate block and require
-    // one unique unqualified parcel with the same house number + ZIP.
+    // one unique parcel with the same house number at that location.
     if (geoMeta && Number(geoMeta.score) >= 99) {
       if (exact && parcelAliasCandidateMatches(exact, targets)) {
         console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
@@ -611,20 +621,27 @@
   function parcelByAddressRecord(lat, lon, typed, matched) {
     var targets = parcelTargets(typed, matched);
     if (!targets.length) return Promise.resolve(null);
-    var target = targets.find(function (x) { return x.zip; }) || targets[0];
+    var target = targets[0];
     if (!target.house) return Promise.resolve(null);
 
-    // This query asks the parcel layer by its own address attributes rather than
-    // relying on the geocoder point. House number + ZIP keeps the candidate set
-    // bounded; the normalized street-core matcher and distance check below do
-    // the actual identity verification.
+    // Ask the parcel layer by PROP_LOC, but keep the query spatially local.
+    // ZIP5 cannot be used here because NJ's statewide parcel layer defines it
+    // as the OWNER MAILING ZIP, which can legitimately differ from the property.
+    var meters = 600;
+    var dLat = meters / 111320;
+    var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
+    var env = {
+      xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
+      spatialReference: { wkid: 4326 }
+    };
     var safeHouse = target.house.replace(/'/g, "''");
     var where = "PROP_LOC LIKE '" + safeHouse + " %'";
-    if (target.zip) where += " AND ZIP5 = '" + target.zip.replace(/'/g, "''") + "'";
     var p = new URLSearchParams({
       where: where,
+      geometry: JSON.stringify(env), geometryType: 'esriGeometryEnvelope',
+      inSR: '4326', outSR: '4326', spatialRel: 'esriSpatialRelIntersects',
       outFields: FIELDS,
-      returnGeometry: 'true', returnCentroid: 'true', outSR: '4326',
+      returnGeometry: 'true', returnCentroid: 'true',
       resultRecordCount: '100', f: 'json'
     });
 
@@ -634,7 +651,7 @@
         var matches = (d.features || []).filter(function (feature) {
           if (!parcelCandidateMatches(feature, targets)) return false;
           var dist = parcelDistanceMeters(feature, lat, lon);
-          return dist == null || dist <= 600;
+          return dist == null || dist <= meters;
         });
         if (matches.length !== 1) return null;
         return matches[0];
@@ -955,11 +972,11 @@
   // The old key below belongs to a DIFFERENT project and will be rejected.
   var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
-  function recordLookup(p, geo, rate, dy) {
+  function recordLookup(p, geo, rate, dy, propertyZip) {
     try {
       var payload = {
         pams_pin: p.PAMS_PIN || '', address: p.PROP_LOC || '', town: p.MUN_NAME || '',
-        county: p.COUNTY || '', zip: p.ZIP5 || '', block: p.PCLBLOCK || '',
+        county: p.COUNTY || '', zip: propertyZip || '', block: p.PCLBLOCK || '',
         lot: p.PCLLOT || '', qualifier: p.PCLQCODE || '',
         prop_class: (p.PROP_CLASS || '').trim(), year_built: +p.YR_CONSTR || null,
         acres: +p.CALC_ACRE || null, dwelling_units: +p.DWELL || null,
@@ -2752,7 +2769,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       geometryType: 'esriGeometryEnvelope', inSR: '4326', outSR: '4326',
       spatialRel: 'esriSpatialRelIntersects',
       where: "PROP_CLASS = '2' AND NET_VALUE > 10000",
-      outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,ZIP5,PCLBLOCK,PCLLOT,NET_VALUE,LAST_YR_TX,' +
+      outFields: 'PAMS_PIN,PROP_LOC,MUN_NAME,COUNTY,PCLBLOCK,PCLLOT,NET_VALUE,LAST_YR_TX,' +
                  'YR_CONSTR,CALC_ACRE,SALE_PRICE,DEED_DATE',
       returnGeometry: 'false', returnCentroid: 'true', resultRecordCount: '80', f: 'json'
     });
@@ -2770,7 +2787,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
           var av = +a.NET_VALUE || 0, tax = +a.LAST_YR_TX || 0;
           return {
             pin: a.PAMS_PIN, addr: a.PROP_LOC || '', town: a.MUN_NAME || '',
-            county: a.COUNTY || '', zip: a.ZIP5 || '',
+            county: a.COUNTY || '', zip: '',
             block: a.PCLBLOCK, lot: a.PCLLOT,
             assessed: av, tax: tax, built: +a.YR_CONSTR || null,
             acres: +a.CALC_ACRE || null, sale: +a.SALE_PRICE || 0,
@@ -3155,13 +3172,11 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var tenure = dy ? (new Date().getFullYear() - dy) : null;
     var acres = +p.CALC_ACRE || 0;
     var sqft = acres ? Math.round(acres * 43560) : 0;
-    var mail = (p.ST_ADDRESS || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-    var loc = (p.PROP_LOC || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-    var absentee = !!(mail && loc && mail !== loc);
+    var propertyZip = propertyLocationZip(typed, geo && geo.matched);
     var status = resolveStatus(p, dy);
 
     current = {
-      address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: p.ZIP5 || '',
+      address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,
       assessed: assessed, land: land, imprv: imprv, tax: tax, rate: rate,
       block: p.PCLBLOCK || '', lot: p.PCLLOT || '', qual: p.PCLQCODE || '', pin: p.PAMS_PIN || '',
       lat: geo.lat, lon: geo.lon, rings: rings, sale: sale, deedYear: dy, cls: cls,
@@ -3172,7 +3187,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       window.WatchdogPublicNav.remember(current);
     }
 
-    recordLookup(p, geo, rate, dy);
+    recordLookup(p, geo, rate, dy, propertyZip);
     var seen = timesSeen(p.PAMS_PIN || '');
 
     // ---------- photo strip ----------
@@ -3312,7 +3327,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
             frow('Years since transfer', tenure !== null ? tenure : '') +
             frow('Deed book / page', [p.DEED_BOOK, p.DEED_PAGE].filter(Boolean).join(' / ')) +
             frow('Assessed vs last sale', (sale > 1000 && assessed) ? (assessed >= sale ? '+' : '') + money(assessed - sale) : '') +
-            frow('Owner mailing', absentee ? [p.ST_ADDRESS, p.CITY_STATE].filter(Boolean).join(', ') : 'Same as property') +
             frow('Times checked here', seen > 1 ? seen : '') +
           '</div>' +
         '</div>' +
