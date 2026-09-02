@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b203d">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <link rel="canonical" href="https://www.watchdogindex.com/anchor/applications/">
+  <title>My NJ Property Tax Relief Applications | Watchdog</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/css/anchor-application.css">
+  <link rel="stylesheet" href="/property/css/anchor-applications.css">
+</head>
+<body>
+  <!-- Sensitive-flow privacy guard: watchdog-consent.js, ai-referral-analytics.js, and contact-routing-policy.js are intentionally not loaded on this page. -->
+  <div class="wd-app-shell wd-library-shell">
+    <header class="wd-app-topbar">
+      <a class="wd-app-brand" href="/" aria-label="Watchdog home"><span class="wd-app-mark" aria-hidden="true">W</span><span>Watchdog</span></a>
+      <a href="/anchor/application/2025/" class="wd-btn primary wd-library-new-top">New 2025 application</a>
+    </header>
+
+    <main class="wd-library-main">
+      <section class="wd-library-hero">
+        <p class="wd-step-kicker">PRIVATE VAULT</p>
+        <h1>My property tax relief applications</h1>
+        <p>Your saved applications and PDFs are encrypted. Watchdog can list the encrypted records, but the names, addresses, answers and PDFs are decrypted only in your browser after you unlock your Private Vault.</p>
+      </section>
+
+      <div id="wd-library-status" class="wd-app-status" role="status" aria-live="polite"></div>
+
+      <section id="wd-library-auth" class="wd-library-panel">
+        <div class="wd-library-panel-copy">
+          <span class="wd-library-icon">@</span>
+          <div><h2>Sign in to your free Watchdog account</h2><p>We’ll email a six-digit code. No password is required.</p></div>
+        </div>
+        <div class="wd-library-auth-form">
+          <label class="wd-field-label" for="wd-library-email">Email address</label>
+          <input id="wd-library-email" class="wd-input" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+          <button id="wd-library-send" type="button" class="wd-btn primary full">Email me a 6-digit code</button>
+          <div id="wd-library-code-box" hidden>
+            <label class="wd-field-label" for="wd-library-code">6-digit code</label>
+            <input id="wd-library-code" class="wd-input code" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000">
+            <button id="wd-library-verify" type="button" class="wd-btn primary full">Verify &amp; open my applications</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="wd-library-vault" class="wd-library-panel" hidden>
+        <div class="wd-library-panel-copy">
+          <span class="wd-library-icon">⌁</span>
+          <div><h2>Unlock your Private Vault</h2><p>Enter the recovery key you saved when you created your application. If this device remembers the right key, Watchdog will unlock it automatically.</p></div>
+        </div>
+        <div class="wd-library-auth-form">
+          <label class="wd-field-label" for="wd-library-recovery">Recovery key</label>
+          <input id="wd-library-recovery" class="wd-input mono" type="password" autocomplete="off" placeholder="WDV1-...">
+          <label class="wd-check-row compact"><input id="wd-library-remember" type="checkbox" checked><span>Remember this Private Vault on this device</span></label>
+          <button id="wd-library-unlock" type="button" class="wd-btn primary full">Unlock Private Vault</button>
+          <p class="wd-field-note">Watchdog cannot recover a lost recovery key because the key is not stored on our servers.</p>
+        </div>
+      </section>
+
+      <section id="wd-library-content" hidden>
+        <div class="wd-library-toolbar">
+          <div><p class="wd-step-kicker">SAVED TO YOUR ACCOUNT</p><h2 id="wd-library-heading">Applications</h2></div>
+          <button id="wd-library-new" type="button" class="wd-btn primary">Start a new 2025 application</button>
+        </div>
+        <div id="wd-library-empty" class="wd-library-empty" hidden>
+          <span>2025</span><h3>No saved applications yet.</h3><p>Start the free guided application and Watchdog will save encrypted drafts as you work.</p><a href="/anchor/application/2025/" class="wd-btn primary">Start my application</a>
+        </div>
+        <div id="wd-library-list" class="wd-library-list"></div>
+      </section>
+    </main>
+
+    <footer class="wd-app-footer">Private Vault data is decrypted locally in your browser. Watchdog is not the State of New Jersey and does not determine eligibility.</footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/anchor-application-vault.js"></script>
+  <script src="/property/js/anchor-applications.js"></script>
+</body>
+</html>
