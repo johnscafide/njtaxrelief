@@ -2,6 +2,15 @@ import { next, rewrite } from '@vercel/functions';
 
 const WATCHDOG_HOST = 'www.watchdogindex.com';
 const LEGACY_NJPTR_HOSTS = new Set(['njpropertytaxrelief.com', 'www.njpropertytaxrelief.com']);
+const LEGACY_WATCHDOG_PROMO_PATHS = new Set([
+  '/',
+  '/index.html',
+  '/anchor-estimator.html',
+  '/anchor-program.html',
+  '/senior-programs.html',
+  '/resources.html',
+  '/anchor-auto-file-letters-2026.html'
+]);
 const INDEXNOW_KEY_PATH = '/c04eb5246cd74475b86188f12c31e21b.txt';
 const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
@@ -92,6 +101,12 @@ function redirectLegacyWatchdogHost(request, url) {
   }
 
   return Response.redirect(destination, 308);
+}
+
+function rewriteLegacyAcquisitionPage(request, pathname) {
+  const destination = new URL('/api/njptr-watchdog-acquisition-page', request.url);
+  destination.searchParams.set('path', pathname);
+  return rewrite(destination);
 }
 
 function rewriteCleanPage(request, publicPath) {
@@ -185,6 +200,13 @@ export default async function middleware(request) {
     (url.pathname === '/property' || url.pathname === '/property/' || url.pathname.startsWith('/property/'))
   ) {
     return redirectLegacyWatchdogHost(request, url);
+  }
+
+  // High-intent legacy tax-relief pages retain their canonical content and URL,
+  // but pass through a bounded injector that adds Watchdog acquisition surfaces.
+  // The estimator gets the secure post-verification result handoff runtime too.
+  if (LEGACY_NJPTR_HOSTS.has(host) && LEGACY_WATCHDOG_PROMO_PATHS.has(url.pathname)) {
+    return rewriteLegacyAcquisitionPage(request, url.pathname);
   }
 
   // Bulk county sales files remain server-readable for the municipality-scoped
