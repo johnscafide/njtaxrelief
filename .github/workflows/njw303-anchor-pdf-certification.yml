@@ -1,0 +1,47 @@
+name: NJW-303 ANC PAS PDF certification
+
+on:
+  push:
+    branches:
+      - johnvscafide/njw-303-public-launch-v2
+    paths:
+      - property/js/anchor-application-2025-fields.js
+      - property/js/anchor-application-pdf-2025.js
+      - property/tests/anchor-application-2025-pdf-cert.mjs
+      - .github/workflows/njw303-anchor-pdf-certification.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - property/js/anchor-application-2025-fields.js
+      - property/js/anchor-application-pdf-2025.js
+      - property/tests/anchor-application-2025-pdf-cert.mjs
+
+permissions:
+  contents: read
+
+jobs:
+  certify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install isolated PDF test dependency
+        run: npm install --no-save --no-package-lock pdf-lib@1.17.1
+      - name: Generate synthetic official-form PDFs
+        run: node property/tests/anchor-application-2025-pdf-cert.mjs
+      - name: Render every generated page with Poppler
+        run: |
+          mkdir -p artifacts/njw303-pdf-cert/poppler
+          for pdf in artifacts/njw303-pdf-cert/*-filled.pdf; do
+            base=$(basename "$pdf" .pdf)
+            pdftoppm -png -r 120 "$pdf" "artifacts/njw303-pdf-cert/poppler/$base" >/dev/null
+          done
+          test "$(find artifacts/njw303-pdf-cert/poppler -name '*.png' -size +10k | wc -l)" -eq 6
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: njw303-certified-pdf-renders
+          path: artifacts/njw303-pdf-cert
+          if-no-files-found: error
