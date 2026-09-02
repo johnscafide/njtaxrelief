@@ -323,6 +323,20 @@
     return parcelZip(matched) || parcelZip(typed);
   }
 
+  function displayStreetAddress(typed, matched, assessor) {
+  // Keep the address the visitor searched as the primary label. NJ's
+  // assessor may use a different street alias for the same tax parcel.
+  var source = String(matched || typed || assessor || '').trim();
+  var street = source.split(',')[0].trim();
+  return street || String(assessor || typed || '').trim();
+}
+
+function assessorAddressAlias(display, assessor) {
+  var parcelAddress = String(assessor || '').trim();
+  if (!parcelAddress || !display) return '';
+  return normAddr(parcelAddress) === normAddr(display) ? '' : parcelAddress;
+}
+
   var PARCEL_ADDR_NOISE = {
     N:1, S:1, E:1, W:1, NE:1, NW:1, SE:1, SW:1,
     AVE:1, ST:1, RD:1, DR:1, CT:1, LN:1, PL:1, BLVD:1, CIR:1, TER:1,
@@ -3173,10 +3187,14 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var acres = +p.CALC_ACRE || 0;
     var sqft = acres ? Math.round(acres * 43560) : 0;
     var propertyZip = propertyLocationZip(typed, geo && geo.matched);
+    var displayAddress = displayStreetAddress(typed, geo && geo.matched, p.PROP_LOC);
+    var assessorAddress = String(p.PROP_LOC || '').trim();
+    var assessorAlias = assessorAddressAlias(displayAddress, assessorAddress);
     var status = resolveStatus(p, dy);
 
     current = {
-      address: p.PROP_LOC || typed, town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,
+      address: displayAddress, assessorAddress: assessorAddress, assessorAlias: assessorAlias,
+      town: p.MUN_NAME || '', county: p.COUNTY || '', zip: propertyZip,
       assessed: assessed, land: land, imprv: imprv, tax: tax, rate: rate,
       block: p.PCLBLOCK || '', lot: p.PCLLOT || '', qual: p.PCLQCODE || '', pin: p.PAMS_PIN || '',
       lat: geo.lat, lon: geo.lon, rings: rings, sale: sale, deedYear: dy, cls: cls,
@@ -3258,7 +3276,10 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         '</div>' +
       '</div>' +
       '<div class="plm-addr">' + esc(current.address) + '<span>' + esc(current.town) +
-        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span></div>' +
+        (current.county ? ', ' + esc(current.county) + ' County' : '') + (current.zip ? '  ' + esc(current.zip) : '') + '</span>' +
+        (current.assessorAlias
+          ? '<span class="plm-assessor-alias" style="font-size:12px;opacity:.72;margin-top:4px;">NJ tax records list this parcel as ' + esc(current.assessorAlias) + '.</span>'
+          : '') + '</div>' +
       '<div class="plm-chips">' + chips.join('') + '</div>' + alert;
 
     // ---------- body ----------
