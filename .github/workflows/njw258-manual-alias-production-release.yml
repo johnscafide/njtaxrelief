@@ -1,0 +1,56 @@
+name: NJW-258 manual alias production release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release-once:
+    if: github.event.head_commit.message == 'NJW-258 stage manual alias production release'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Sync current main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+      - name: Enable exactly one Git production deployment
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('vercel.json')
+          s=p.read_text()
+          old='"deploymentEnabled": false'
+          if old not in s:
+              raise SystemExit('deploymentEnabled false not found')
+          p.write_text(s.replace(old,'"deploymentEnabled": true',1))
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vercel.json
+          git commit -m 'Temporarily enable one Git deployment for NJW-258 manual alias'
+          git push origin HEAD:main
+          sleep 20
+      - name: Restore paused Git deployments
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('vercel.json')
+          s=p.read_text()
+          old='"deploymentEnabled": true'
+          if old in s:
+              p.write_text(s.replace(old,'"deploymentEnabled": false',1))
+          PY
+          rm -f .github/workflows/njw258-manual-alias-production-release.yml
+          git add vercel.json .github/workflows/njw258-manual-alias-production-release.yml
+          git commit -m 'Restore paused Git deployments after NJW-258 manual alias release'
+          git push origin HEAD:main
