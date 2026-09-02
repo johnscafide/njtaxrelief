@@ -1,0 +1,52 @@
+name: NJW-258 production release v2
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release-once:
+    if: github.event.head_commit.message == 'NJW-258 stage production release v2'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Sync current main
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main
+      - name: Enable exactly one Git production deployment
+        run: |
+          python - <<'PY'
+          import json
+          p='vercel.json'
+          with open(p, encoding='utf-8') as f: data=json.load(f)
+          data.setdefault('git', {})['deploymentEnabled']=True
+          with open(p,'w',encoding='utf-8') as f:
+              json.dump(data,f,indent=2,ensure_ascii=False)
+              f.write('\n')
+          PY
+          git add vercel.json
+          git commit -m "Temporarily enable one Git deployment for NJW-258 v2"
+          git push origin HEAD:main
+      - name: Restore paused Git deployments
+        run: |
+          git pull --rebase origin main
+          python - <<'PY'
+          import json
+          p='vercel.json'
+          with open(p, encoding='utf-8') as f: data=json.load(f)
+          data.setdefault('git', {})['deploymentEnabled']=False
+          with open(p,'w',encoding='utf-8') as f:
+              json.dump(data,f,indent=2,ensure_ascii=False)
+              f.write('\n')
+          PY
+          git add vercel.json
+          git commit -m "Restore paused Git deployments after NJW-258 v2 release"
+          git push origin HEAD:main
