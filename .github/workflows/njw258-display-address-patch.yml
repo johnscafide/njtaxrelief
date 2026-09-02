@@ -1,0 +1,44 @@
+name: NJW-258 searched address display patch
+
+on:
+  push:
+    branches:
+      - fix/njw-258-display-search-address
+    paths:
+      - .github/workflows/njw258-display-address-patch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/njw-258-display-search-address
+          fetch-depth: 0
+      - name: Sync branch
+        run: |
+          git fetch origin fix/njw-258-display-search-address
+          git reset --hard origin/fix/njw-258-display-search-address
+      - name: Apply display-address patch
+        run: python scripts/njw258_display_address_patch.py
+      - name: Verify lookup contracts
+        run: |
+          node --check property/js/lookup.js
+          node property/tests/property-lookup-performance-contract.mjs
+          node property/tests/property-parcel-fallback-contract.mjs
+          node property/tests/property-address-alias-contract.mjs
+          node property/tests/property-mailing-zip-contract.mjs
+          node property/tests/property-display-address-contract.mjs
+          git diff --check
+      - name: Commit verified product changes
+        run: |
+          rm scripts/njw258_display_address_patch.py
+          rm .github/workflows/njw258-display-address-patch.yml
+          git add property/js/lookup.js property/tests/property-display-address-contract.mjs scripts/njw258_display_address_patch.py .github/workflows/njw258-display-address-patch.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "NJW-258 keep searched address primary in property report"
+          git push origin HEAD:fix/njw-258-display-search-address
