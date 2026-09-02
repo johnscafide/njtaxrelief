@@ -14,7 +14,7 @@ assert.match(lookup, /matched: c\.address, score: Number\(c\.score\) \|\| 0/, 'N
 assert.match(lookup, /function parcelAliasIdentityMatches/, 'lookup should separate address identity from qualifier ambiguity');
 assert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should keep a strict direct alias candidate gate');
 assert.match(lookup, /target\.house === candidate\.house/, 'alias candidate must keep the same house number');
-assert.match(lookup, /target\.zip === candidateZip/, 'alias candidate must keep the same ZIP');
+assert.doesNotMatch(lookup, /candidateZip = String\(a\.ZIP5/, 'owner mailing ZIP must never participate in parcel alias identity');
 assert.match(lookup, /String\(a\.PCLQCODE \|\| ''\)\.trim\(\)/, 'direct alias acceptance must still reject qualifiers until bounded uniqueness is established');
 assert.match(lookup, /lookupPointDistanceMeters\(geoMeta, selectedGeo\) <= 120/, 'Google and NJ coordinates must stay tightly corroborated');
 assert.match(lookup, /if \(exact && !sameParcel\(exact, second\)\) return null;/, 'when NJ point has a parcel, independent coordinate checks must still agree');
