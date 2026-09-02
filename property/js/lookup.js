@@ -290,7 +290,7 @@
         if (d && d.error) throw new Error('geo service: ' + (d.error.message || 'error'));
         var c = d.candidates && d.candidates[0];
         if (!c) return null;                      // genuinely no match, not a failure
-        return { lat: c.location.y, lon: c.location.x, matched: c.address };
+        return { lat: c.location.y, lon: c.location.x, matched: c.address, score: Number(c.score) || 0 };
       });
   }
   function geocodeCensus(address) {
@@ -365,31 +365,87 @@
     });
   }
 
-  function parcelCacheKey(lat, lon, typed, matched) {
-    // Property identity must never share the coarse neighborhood cache key.
-    // Six decimal places is roughly decimeter precision in New Jersey, and the
-    // address component keeps two unit/address attempts at the same point apart.
-    return 'parcel|' + lat.toFixed(6) + ',' + lon.toFixed(6) + '|' +
-      parcelStreetKey(matched || typed);
+  function parcelAliasCandidateMatches(feature, targets) {
+    var a = feature && feature.attributes;
+    if (!a || String(a.PCLQCODE || '').trim()) return false;
+    var candidate = parcelAddressParts(a.PROP_LOC);
+    var candidateZip = String(a.ZIP5 || '').trim();
+    if (!candidate || !candidate.house || !candidateZip) return false;
+    return targets.some(function (target) {
+      return !!(target.house && target.house === candidate.house && target.zip && target.zip === candidateZip);
+    });
   }
 
-  function parcelAt(lat, lon, typed, matched) {
-    return cached(parcelCacheKey(lat, lon, typed, matched), 6e5, function () {
+  function sameParcel(a, b) {
+    var ap = a && a.attributes && String(a.attributes.PAMS_PIN || '').trim();
+    var bp = b && b.attributes && String(b.attributes.PAMS_PIN || '').trim();
+    return !!(ap && bp && ap === bp);
+  }
+
+  function lookupPointDistanceMeters(a, b) {
+    if (!a || !b || !Number.isFinite(a.lat) || !Number.isFinite(a.lon) ||
+        !Number.isFinite(b.lat) || !Number.isFinite(b.lon)) return Infinity;
+    var lat = (a.lat + b.lat) / 2;
+    var dx = (a.lon - b.lon) * 111320 * Math.cos(lat * Math.PI / 180);
+    var dy = (a.lat - b.lat) * 111320;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  function confirmParcelAlias(exact, targets, geoMeta, selectedGeo) {
+    if (!exact || !parcelAliasCandidateMatches(exact, targets)) return Promise.resolve(null);
+    var a = exact.attributes || {};
+
+    // A selected Google address gives us a second, independent coordinate.
+    // Only accept a street-name alias when both geocoders land on the SAME tax
+    // parcel. This safely resolves market-facing aliases while still rejecting
+    // neighboring-house misses such as 185 -> 189.
+    if (selectedGeo && lookupPointDistanceMeters(geoMeta, selectedGeo) <= 120) {
+      return parcelAtRaw(selectedGeo.lat, selectedGeo.lon).then(function (second) {
+        if (!sameParcel(exact, second)) return null;
+        console.info('[watchdog] parcel street alias confirmed', {
+          searched: targets[0] && targets[0].key,
+          parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
+        });
+        return exact;
+      });
+    }
+
+    // Manual searches do not have a second Google coordinate. In that case the
+    // NJ geocoder must be essentially exact, and the parcel must share both the
+    // house number and ZIP. Qualified/condo parcels are excluded above.
+    if (geoMeta && Number(geoMeta.score) >= 99) {
+      console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
+        searched: targets[0] && targets[0].key,
+        parcel: a.PROP_LOC || '', pin: a.PAMS_PIN || ''
+      });
+      return Promise.resolve(exact);
+    }
+    return Promise.resolve(null);
+  }
+
+  function parcelCacheKey(lat, lon, typed, matched, selectedGeo) {
+    var googlePart = selectedGeo && Number.isFinite(selectedGeo.lat) && Number.isFinite(selectedGeo.lon)
+      ? '|g' + selectedGeo.lat.toFixed(6) + ',' + selectedGeo.lon.toFixed(6)
+      : '|g-';
+    return 'parcel|' + lat.toFixed(6) + ',' + lon.toFixed(6) + '|' +
+      parcelStreetKey(matched || typed) + googlePart;
+  }
+
+  function parcelAt(lat, lon, typed, matched, geoMeta, selectedGeo) {
+    return cached(parcelCacheKey(lat, lon, typed, matched, selectedGeo), 6e5, function () {
       var targets = parcelTargets(typed, matched);
       return parcelAtRaw(lat, lon).then(function (exact) {
-        // Coordinate-only Locate Me can safely use the exact polygon under the
-        // device point. Typed address lookups also confirm the parcel address;
-        // this prevents a curb/road-center geocode from silently opening the
-        // neighboring parcel.
         if (exact && (!targets.length || parcelCandidateMatches(exact, targets))) return exact;
         if (!targets.length) return null;
 
-        // NJ address points can sit on a curb, driveway, building point or road
-        // centerline instead of inside the tax polygon. First search the nearby
-        // parcel geometry, then fall back to the assessor address index itself.
+        // Exhaust the normal street-address paths before treating a different
+        // assessor street name as an alias.
         return parcelNearbyByAddress(lat, lon, typed, matched).then(function (nearby) {
           if (nearby) return nearby;
           return parcelByAddressRecord(lat, lon, typed, matched);
+        }).then(function (byAddress) {
+          if (byAddress) return byAddress;
+          return confirmParcelAlias(exact, targets, geoMeta || { lat: lat, lon: lon }, selectedGeo);
         });
       }).then(function (feature) {
         if (feature) return feature;
@@ -598,12 +654,21 @@
     b.innerHTML = '<i class="fas fa-paper-plane"></i>';
   }
 
+  function selectedGoogleGeo(input, address) {
+    if (!input || input.dataset.googleAddress !== '1') return null;
+    if (lookupKey(input.value) !== lookupKey(address)) return null;
+    var lat = Number(input.dataset.googleLat), lon = Number(input.dataset.googleLon);
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+    return { lat: lat, lon: lon };
+  }
+
   // ══════════════════════════════════════════════
   // MAIN LOOKUP
   // ══════════════════════════════════════════════
   window.plLookup = function () {
     var addr = (el('pl-addr').value || '').trim();
     if (!addr) { el('pl-addr').focus(); return; }
+    var googleGeo = selectedGoogleGeo(elReal('pl-addr'), addr);
 
     var key = lookupKey(addr);
     if (activeLookupPending && activeLookupKey === key) return;
@@ -635,7 +700,7 @@
           '<div class="pl-state"><div class="pl-spin"></div>' +
           '<div class="pl-state-title">Address matched</div>' +
           '<div class="pl-state-sub">Opening the parcel record now. Intelligence sections will keep updating after it opens.</div></div>';
-        return parcelAt(g.lat, g.lon, addr, g.matched).then(function (f) { return { g: g, f: f }; });
+        return parcelAt(g.lat, g.lon, addr, g.matched, g, googleGeo).then(function (f) { return { g: g, f: f }; });
       })
       .then(function (res) {
         if (lookupId !== lookupSeq) throw new Error('stale');

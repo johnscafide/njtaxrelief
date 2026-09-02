@@ -28,6 +28,22 @@
   function formatTownZip(row){return [row.town||'',row.zip||''].filter(Boolean).join(' ').trim();}
   function queryFor(row){return [row.address,row.town,'NJ',row.zip].filter(Boolean).join(', ');}
 
+  function coordsFromPlace(place,legacy){
+    var loc=legacy?(place&&place.geometry&&place.geometry.location):(place&&place.location);
+    if(!loc)return null;
+    var lat=typeof loc.lat==='function'?Number(loc.lat()):Number(loc.lat);
+    var lon=typeof loc.lng==='function'?Number(loc.lng()):Number(loc.lng);
+    return Number.isFinite(lat)&&Number.isFinite(lon)?{lat:lat,lon:lon}:null;
+  }
+
+  function clearGoogleSelection(input){
+    if(!input)return;
+    input.dataset.googleAddress='0';
+    delete input.dataset.googlePlaceId;
+    delete input.dataset.googleLat;
+    delete input.dataset.googleLon;
+  }
+
   function getClient(){
     if(supabaseClient)return supabaseClient;
     try{
@@ -246,18 +262,25 @@
     input.__wdPredictionIndex=-1;
   }
 
-  function syncAddress(input,formatted,placeId){
-    input.value=formatted;
-    input.setCustomValidity('');
-    input.dataset.googleAddress='1';
-    input.dataset.googlePlaceId=placeId||'';
-    var other=input.id==='pl-addr'?q('ss-addr'):q('pl-addr');
-    if(other){
-      other.value=formatted;
-      other.setCustomValidity('');
-      other.dataset.googleAddress='1';
-      other.dataset.googlePlaceId=placeId||'';
+  function syncAddress(input,formatted,placeId,coords){
+    function stamp(target){
+      target.value=formatted;
+      target.setCustomValidity('');
+      target.dataset.googlePlaceId=placeId||'';
+      if(coords&&Number.isFinite(coords.lat)&&Number.isFinite(coords.lon)){
+        target.dataset.googleLat=coords.lat.toFixed(7);
+        target.dataset.googleLon=coords.lon.toFixed(7);
+      }else{
+        delete target.dataset.googleLat;
+        delete target.dataset.googleLon;
+      }
+      // Set this last. The auto-submit MutationObserver then sees the place id
+      // and the coordinates from the same selected Google result together.
+      target.dataset.googleAddress='1';
     }
+    stamp(input);
+    var other=input.id==='pl-addr'?q('ss-addr'):q('pl-addr');
+    if(other)stamp(other);
   }
 
   function openProperty(input,row){
@@ -311,7 +334,7 @@
     closeBox(input);
     var place;
     try{place=prediction.toPlace();}catch(_){return;}
-    Promise.resolve(place.fetchFields({fields:['formattedAddress','addressComponents']})).then(function(){
+    Promise.resolve(place.fetchFields({fields:['formattedAddress','addressComponents','location']})).then(function(){
       var formatted=String(place.formattedAddress||text(prediction.text)||input.value||'').trim();
       var state=stateFromPlace(place);
       if(state!=='NJ'){
@@ -321,7 +344,7 @@
         input.reportValidity();
         return;
       }
-      if(formatted)syncAddress(input,formatted,String(prediction.placeId||''));
+      if(formatted)syncAddress(input,formatted,String(prediction.placeId||''),coordsFromPlace(place,false));
       if(typeof input.__wdResetSession==='function')input.__wdResetSession();
       input.focus();
     }).catch(function(){
@@ -529,8 +552,7 @@
 
     input.addEventListener('input',function(){
       input.setCustomValidity('');
-      input.dataset.googleAddress='0';
-      delete input.dataset.googlePlaceId;
+      clearGoogleSelection(input);
       clearTimeout(timer);
       timer=setTimeout(request,190);
     });
@@ -566,7 +588,7 @@
     if(!input||input.dataset.wdGoogleAutocomplete||!window.google||!google.maps||!google.maps.places||!google.maps.places.Autocomplete)return;
     input.dataset.wdGoogleAutocomplete='1';
     input.setAttribute('autocomplete','off');
-    var ac=new google.maps.places.Autocomplete(input,{componentRestrictions:{country:'us'},types:['address'],fields:['formatted_address','place_id','address_components']});
+    var ac=new google.maps.places.Autocomplete(input,{componentRestrictions:{country:'us'},types:['address'],fields:['formatted_address','place_id','address_components','geometry']});
     try{
       var bounds=new google.maps.LatLngBounds(new google.maps.LatLng(NJ_BOUNDS.south,NJ_BOUNDS.west),new google.maps.LatLng(NJ_BOUNDS.north,NJ_BOUNDS.east));
       ac.setBounds(bounds);
@@ -583,9 +605,9 @@
         input.reportValidity();
         return;
       }
-      syncAddress(input,formatted,String(place.place_id||''));
+      syncAddress(input,formatted,String(place.place_id||''),coordsFromPlace(place,true));
     });
-    input.addEventListener('input',function(){input.setCustomValidity('');input.dataset.googleAddress='0';delete input.dataset.googlePlaceId;});
+    input.addEventListener('input',function(){input.setCustomValidity('');clearGoogleSelection(input);});
   }
 
   function initPlaces(){
